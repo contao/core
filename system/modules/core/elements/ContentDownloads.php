@@ -263,8 +263,8 @@ class ContentDownloads extends \ContentElement
 				if ($this->orderSRC != '')
 				{
 					// Turn the order string into an array and remove all values
-					$arrOrder = array_flip(explode(',', $this->orderSRC));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$arrOrder = explode(',', $this->orderSRC);
+					$arrOrder = array_map(function(){}, array_flip($arrOrder));
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($files as $k=>$v)
@@ -283,7 +283,7 @@ class ContentDownloads extends \ContentElement
 					}
 
 					// Remove empty (unreplaced) entries
-					$files = array_filter($arrOrder);
+					$files = array_values(array_filter($arrOrder));
 					unset($arrOrder);
 				}
 				break;

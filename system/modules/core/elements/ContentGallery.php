@@ -213,8 +213,8 @@ class ContentGallery extends \ContentElement
 				if ($this->orderSRC != '')
 				{
 					// Turn the order string into an array and remove all values
-					$arrOrder = array_flip(explode(',', $this->orderSRC));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$arrOrder = explode(',', $this->orderSRC);
+					$arrOrder = array_map(function(){}, array_flip($arrOrder));
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($images as $k=>$v)
@@ -233,7 +233,7 @@ class ContentGallery extends \ContentElement
 					}
 
 					// Remove empty (unreplaced) entries
-					$images = array_filter($arrOrder);
+					$images = array_values(array_filter($arrOrder));
 					unset($arrOrder);
 				}
 				break;

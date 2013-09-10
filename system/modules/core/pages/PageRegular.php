@@ -548,8 +548,7 @@ class PageRegular extends \Frontend
 			{
 				// Turn the order string into an array and remove all values
 				$arrOrder = explode(',', $objLayout->orderExt);
-				$arrOrder = array_flip(array_map('intval', $arrOrder));
-				$arrOrder = array_map(function(){}, $arrOrder);
+				$arrOrder = array_map(function(){}, array_flip($arrOrder));
 
 				// Move the matching elements to their position in $arrOrder
 				foreach ($arrExternal as $k=>$v)
@@ -565,7 +564,7 @@ class PageRegular extends \Frontend
 				}
 
 				// Remove empty (unreplaced) entries
-				$arrExternal = array_filter($arrOrder);
+				$arrExternal = array_values(array_filter($arrOrder));
 				unset($arrOrder);
 			}
 
