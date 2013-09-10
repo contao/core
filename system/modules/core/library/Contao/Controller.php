@@ -2623,6 +2623,11 @@ abstract class Controller extends \System
 				{
 					continue;
 				}
+				
+				if (!file_exists(TL_ROOT . '/' . $objFiles->path))
+				{
+					continue;
+				}
 
 				$objFile = new \File($objFiles->path, true);
 				$strHref = \Environment::get('request');
