@@ -2246,6 +2246,9 @@ abstract class Controller extends \System
 			return;
 		}
 
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadDataContainer'][$strName] = true;
+
 		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
 		// Try to load from cache
@@ -2281,9 +2284,6 @@ abstract class Controller extends \System
 		{
 			include TL_ROOT . '/system/config/dcaconfig.php';
 		}
-
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadDataContainer'][$strName] = true;
 	}
 
 
