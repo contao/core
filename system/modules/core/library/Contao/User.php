@@ -156,6 +156,16 @@ abstract class User extends \System
 
 
 	/**
+	 * Return the current record as associative array
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->arrData;
+	}
+
+
+	/**
 	 * Authenticate a user
 	 *
 	 * @return boolean True if the user could be authenticated
