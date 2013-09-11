@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.3 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Return an empty model collection instead of `null` (see #6147).
+
 ### Changed
 Drop the database query cache (see #6070). This renders `executeUncached()` and
 `executeCached()` deprecated. Use `execute()` instead.
