@@ -298,6 +298,6 @@ class Mysqli extends \Database
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database\Mysqli\Statement($resConnection, $blnDisableAutocommit);
+		return new \Database\Mysqli\Statement($this, $resConnection, $blnDisableAutocommit);
 	}
 }

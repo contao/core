@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection
+class Collection implements \Countable, \Iterator
 {
 
 	/**
@@ -329,6 +329,23 @@ class Collection
 		return $this;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function key()
+	{
+		return $this->intIndex;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function valid()
+	{
+		return $this->intIndex >= 0 && $this->intIndex < $this->objResult->numRows;
+	}
+
 
 	/**
 	 * Reset the model
@@ -340,6 +357,15 @@ class Collection
 		$this->intIndex = -1;
 		$this->blnDone = false;
 		return $this;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rewind()
+	{
+		$this->reset();
 	}
 
 
@@ -386,7 +412,19 @@ class Collection
 		}
 
 		$strClass = \Model::getClassFromTable($this->strTable);
-		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
+		$strPkName = $strClass::getPk();
+		$varPk = $this->objResult->$strPkName;
+		$objModel = $this->objResult->getDatabase()->getModelRegistry()->fetch($this->strTable, $varPk);
+
+		if ($objModel)
+		{
+			$objModel->safeMerge($this->objResult->row());
+			$this->arrModels[$this->intIndex + 1] = $objModel;
+		}
+		else
+		{
+			$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
+		}
 
 		return true;
 	}

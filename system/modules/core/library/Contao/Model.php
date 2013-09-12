@@ -71,6 +71,12 @@ abstract class Model
 	protected $arrData = array();
 
 	/**
+	 * List of modified keys
+	 * @var array
+	 */
+	protected $arrModified = array();
+
+	/**
 	 * Relations
 	 * @var array
 	 */
@@ -90,6 +96,7 @@ abstract class Model
 	 */
 	public function __construct(\Database\Result $objResult=null)
 	{
+		$this->arrModified = array();
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
@@ -132,6 +139,8 @@ abstract class Model
 					$this->arrRelated[$key]->setRow($row);
 				}
 			}
+
+			$objResult->getDatabase()->getModelRegistry()->register($this);
 		}
 
 		$this->objResult = $objResult;
@@ -155,7 +164,13 @@ abstract class Model
 	 */
 	public function __set($strKey, $varValue)
 	{
+		if ($this->$strKey === $varValue)
+		{
+			return;
+		}
+
 		$this->arrData[$strKey] = $varValue;
+		$this->arrModified[] = $strKey;
 	}
 
 
@@ -249,6 +264,26 @@ abstract class Model
 
 
 	/**
+	 * Safe merge with the given array, but preserve modified unsaved fields.
+	 *
+	 * @param array $arrData The data record
+	 *
+	 * @return \Model The model object
+	 */
+	public function safeMerge(array $arrData)
+	{
+		foreach ($arrData as $key => $value)
+		{
+			if (!in_array($key, $this->arrModified) && $this->arrData[$key] != $value)
+			{
+				$this->arrData[$key] = $value;
+			}
+		}
+		return $this;
+	}
+
+
+	/**
 	 * Return the object instance
 	 *
 	 * @return \Model The model object
@@ -268,26 +303,38 @@ abstract class Model
 	 */
 	public function save($blnForceInsert=false)
 	{
-		$arrSet = $this->preSave($this->row());
-
 		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
-			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-									->set($arrSet)
-									->execute($this->{static::$strPk});
+			$arrRow = $this->row();
+			$arrSet = array();
+			foreach ($this->arrModified as $strField)
+			{
+				$arrSet[$strField] = $arrRow[$strField];
+			}
+			$arrSet = $this->preSave($arrSet);
+
+			$this->objResult->getDatabase()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+										   ->set($arrSet)
+										   ->execute($this->{static::$strPk});
+
+			$this->arrModified = array();
 
 			$this->postSave(self::UPDATE);
 		}
 		else
 		{
-			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
-											->set($arrSet)
-											->execute();
+			$arrSet = $this->preSave($this->row());
+
+			$stmt = $this->objResult->getDatabase()->prepare("INSERT INTO " . static::$strTable . " %s")
+												   ->set($arrSet)
+												   ->execute();
 
 			if (static::$strPk == 'id')
 			{
 				$this->id = $stmt->insertId;
 			}
+
+			$this->arrModified = array();
 
 			$this->postSave(self::INSERT);
 		}
@@ -319,8 +366,8 @@ abstract class Model
 		if ($intType == self::INSERT)
 		{
 			// Reload the model data (might have been modified by default values or triggers)
-			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->execute($this->{static::$strPk});
+			$res = $this->objResult->getDatabase()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+												  ->execute($this->{static::$strPk});
 
 			$this->setRow($res->row());
 		}
@@ -334,9 +381,20 @@ abstract class Model
 	 */
 	public function delete()
 	{
-		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->execute($this->{static::$strPk})
-									   ->affectedRows;
+		$intAffectedRows = $this->objResult->getDatabase()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+														  ->execute($this->{static::$strPk})
+														  ->affectedRows;
+
+		if ($intAffectedRows)
+		{
+			// unregister this model from the registry
+			$this->objResult->getDatabase()->getModelRegistry()->unregister($this);
+
+			// remove the primary key, it is invalid now
+			$this->{static::$strPk} = null;
+		}
+
+		return $intAffectedRows;
 	}
 
 
@@ -382,7 +440,7 @@ abstract class Model
 			(
 				array
 				(
-					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
+					'order' => $this->objResult->getDatabase()->findInSet($strField, $arrValues)
 				),
 
 				$arrOptions
@@ -406,6 +464,22 @@ abstract class Model
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varValue);
+
+		if ($objModel)
+		{
+			return $objModel;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
@@ -583,7 +657,16 @@ abstract class Model
 		$arrOptions['table'] = static::$strTable;
 		$strQuery = \Model\QueryBuilder::find($arrOptions);
 
-		$objStatement = \Database::getInstance()->prepare($strQuery);
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		$objStatement = $objDatabase->prepare($strQuery);
 
 		// Defaults for limit and offset
 		if (!isset($arrOptions['limit']))
@@ -613,6 +696,17 @@ abstract class Model
 
 		if ($arrOptions['return'] == 'Model')
 		{
+			$strPkName = static::getPk();
+			$varPk = $objResult->$strPkName;
+
+			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varPk);
+
+			if ($objModel)
+			{
+				$objModel->safeMerge($objResult->row());
+				return $objModel;
+			}
+
 			return new static($objResult);
 		}
 		else
@@ -670,7 +764,16 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
+
+		return (int) $objDatabase->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

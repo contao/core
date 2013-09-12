@@ -131,6 +131,7 @@ ClassLoader::addClasses(array
 	'Contao\Message'                   => 'system/modules/core/library/Contao/Message.php',
 	'Contao\Model\Collection'          => 'system/modules/core/library/Contao/Model/Collection.php',
 	'Contao\Model\QueryBuilder'        => 'system/modules/core/library/Contao/Model/QueryBuilder.php',
+	'Contao\Model\Registry'            => 'system/modules/core/library/Contao/Model/Registry.php',
 	'Contao\Model'                     => 'system/modules/core/library/Contao/Model.php',
 	'Contao\ModuleLoader'              => 'system/modules/core/library/Contao/ModuleLoader.php',
 	'Contao\Pagination'                => 'system/modules/core/library/Contao/Pagination.php',
