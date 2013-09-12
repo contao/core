@@ -600,11 +600,18 @@ abstract class Model
 		}
 
 		$objStatement = static::preFind($objStatement);
-		$objResult = static::postFind($objStatement->execute($arrOptions['value']));
+		$objResult = $objStatement->execute($arrOptions['value']);
+
+		if ($objResult->numRows < 1)
+		{
+			return null;
+		}
+
+		$objResult = static::postFind($objResult);
 
 		if ($arrOptions['return'] == 'Model')
 		{
-			return $objResult->numRows ? new static($objResult) : null;
+			return new static($objResult);
 		}
 		else
 		{
@@ -627,7 +634,7 @@ abstract class Model
 
 
 	/**
-	 * Modify the database result after the statement has been executed
+	 * Modify the database result before the model is created
 	 *
 	 * @param \Database\Result $objResult The database result object
 	 *
