@@ -536,7 +536,9 @@ abstract class Model
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 *
-	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
+	 * @return \Model|\Model\Collection A model or model collection
+	 *
+	 * @throws \Exception If the method name is invalid
 	 */
 	public static function __callStatic($name, $args)
 	{
@@ -551,7 +553,7 @@ abstract class Model
 			return call_user_func_array('static::findOneBy', $args);
 		}
 
-		return null;
+		throw new \Exception("Unknown method $name");
 	}
 
 
