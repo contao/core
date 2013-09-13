@@ -10,11 +10,11 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao\Database\Mysql;
+namespace Contao\Database\Pdo_Mysql;
 
 
 /**
- * MySQL-specific database statement class
+ * MySQLi-specific database statement class
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
@@ -45,7 +45,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function string_escape($strString)
 	{
-		return "'" . mysql_real_escape_string($strString, $this->resConnection) . "'";
+		return $this->resConnection->quote($strString);
 	}
 
 
@@ -75,7 +75,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function execute_query()
 	{
-		return @mysql_query($this->strQuery, $this->resConnection);
+		return $this->resConnection->query($this->strQuery);
 	}
 
 
@@ -86,7 +86,8 @@ class Statement extends \Database\Statement
 	 */
 	protected function get_error()
 	{
-		return mysql_error($this->resConnection);
+		$err = $this->resConnection->errorInfo();
+		return array_pop($err);
 	}
 
 
@@ -97,7 +98,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function affected_rows()
 	{
-		return @mysql_affected_rows($this->resConnection);
+		return $this->resConnection->rowCount();
 	}
 
 
@@ -108,7 +109,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function insert_id()
 	{
-		return @mysql_insert_id($this->resConnection);
+		return $this->resConnection->lastInsertId();
 	}
 
 
@@ -119,7 +120,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function explain_query()
 	{
-		return @mysql_fetch_assoc(@mysql_query('EXPLAIN ' . $this->strQuery, $this->resConnection));
+		return $this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch(\PDO::FETCH_ASSOC);
 	}
 
 
@@ -129,13 +130,13 @@ class Statement extends \Database\Statement
 	 * @param resource $resResult The database result
 	 * @param string   $strQuery  The query string
 	 *
-	 * @return \Database\Mysql\Result The result object
+	 * @return \Database\Pdo\Result The result object
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
-		return new \Database\Mysql\Result($resResult, $strQuery);
+		return new \Database\Pdo_Mysql\Result($resResult, $strQuery);
 	}
 }
 
 // Backwards compatibility
-class_alias('Contao\\Database\\Mysql\\Statement', 'Database_Statement');
+class_alias('Contao\\Database\\Pdo_Mysql\\Statement', 'Database_Statement');

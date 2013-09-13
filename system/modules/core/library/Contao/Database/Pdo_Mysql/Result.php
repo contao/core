@@ -10,11 +10,11 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao\Database\Mysql;
+namespace Contao\Database\Pdo_Mysql;
 
 
 /**
- * MySQL-specific database result class
+ * MySQLi-specific database result class
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
@@ -30,7 +30,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_row()
 	{
-		return @mysql_fetch_row($this->resResult);
+		return $this->resResult->fetch(\PDO::FETCH_NUM);
 	}
 
 
@@ -41,7 +41,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_assoc()
 	{
-		return @mysql_fetch_assoc($this->resResult);
+		return $this->resResult->fetch(\PDO::FETCH_ASSOC);
 	}
 
 
@@ -52,7 +52,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_rows()
 	{
-		return @mysql_num_rows($this->resResult);
+		return $this->resResult->rowCount();
 	}
 
 
@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @mysql_num_fields($this->resResult);
+		return $this->resResult->columnCount();
 	}
 
 
@@ -76,7 +76,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return @mysql_fetch_field($this->resResult, $intOffset);
+		return $this->resResult->fetchColumn($intOffset);
 	}
 
 
@@ -85,12 +85,9 @@ class Result extends \Database\Result
 	 */
 	public function free()
 	{
-		if (is_resource($this->resResult))
-		{
-			@mysql_free_result($this->resResult);
-		}
+		$this->resResult = null;
 	}
 }
 
 // Backwards compatibility
-class_alias('Contao\\Database\\Mysql\\Result', 'Database_Result');
+class_alias('Contao\\Database\\Pdo_Mysql\\Result', 'Database_Result');

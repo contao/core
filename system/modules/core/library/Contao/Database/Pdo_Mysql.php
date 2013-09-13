@@ -14,13 +14,13 @@ namespace Contao\Database;
 
 
 /**
- * MySQL-specific database class
+ * PDO_MySQL-specific database class
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Mysql extends \Database
+class Pdo_Mysql extends \Database
 {
 
 	/**
@@ -39,39 +39,22 @@ class Mysql extends \Database
 	/**
 	 * Connect to the database server and select the database
 	 *
-	 * @throws \Exception If the connection cannot be established
+	 * @throws \PDOException If the connection cannot be established
 	 */
 	protected function connect()
 	{
-		$strHost = $this->arrConfig['dbHost'];
-
-		if ($this->arrConfig['dbPort'])
-		{
-			$strHost .= ':' . $this->arrConfig['dbPort'];
-		}
+		$dns = 'mysql:dbname=' . $this->arrConfig['dbDatabase'];
 
 		if ($this->arrConfig['dbSocket'])
 		{
-			$strHost .= ':' . $this->arrConfig['dbSocket'];
-		}
-
-		if ($this->arrConfig['dbPconnect'])
-		{
-			$this->resConnection = @mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+			$dns .= ';unix_socket=' . $this->arrConfig['dbSocket'];
 		}
 		else
 		{
-			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+			$dns .= ';host=' . $this->arrConfig['dbHost'] . ';port=' . $this->arrConfig['dbPort'];
 		}
 
-		if (mysql_error())
-		{
-			throw new \Exception(mysql_error());
-		}
-
-		@mysql_query("SET sql_mode=''", $this->resConnection);
-		@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
-		@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
+		$this->resConnection = new \PDO($dns, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"'));
 	}
 
 
@@ -80,7 +63,7 @@ class Mysql extends \Database
 	 */
 	protected function disconnect()
 	{
-		@mysql_close($this->resConnection);
+		$this->resConnection = null;
 	}
 
 
@@ -91,12 +74,8 @@ class Mysql extends \Database
 	 */
 	protected function get_error()
 	{
-		if (is_resource($this->resConnection))
-		{
-			return mysql_error($this->resConnection);
-		}
-
-		return mysql_error();
+		$err = $this->resConnection->errorInfo();
+		return array_pop($err);
 	}
 
 
@@ -117,7 +96,7 @@ class Mysql extends \Database
 		}
 		else
 		{
-			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($varSet, $this->resConnection) . "')";
+			return "FIND_IN_SET(" . $strKey . ", " . $this->resConnection->quote($varSet) . ")";
 		}
 	}
 
@@ -153,25 +132,25 @@ class Mysql extends \Database
 			$arrReturn[$k]['name'] = $v['Field'];
 			$arrReturn[$k]['type'] = $arrChunks[0];
 
-			if (strlen($arrChunks[1]))
+			if (!empty($arrChunks[1]))
 			{
 				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
 				$arrSubChunks = explode(',', $arrChunks[1]);
 
 				$arrReturn[$k]['length'] = trim($arrSubChunks[0]);
 
-				if (strlen($arrSubChunks[1]))
+				if (!empty($arrSubChunks[1]))
 				{
 					$arrReturn[$k]['precision'] = trim($arrSubChunks[1]);
 				}
 			}
 
-			if (strlen($arrChunks[2]))
+			if (!empty($arrChunks[2]))
 			{
 				$arrReturn[$k]['attributes'] = trim($arrChunks[2]);
 			}
 
-			if (strlen($v['Key']))
+			if (!empty($v['Key']))
 			{
 				switch ($v['Key'])
 				{
@@ -221,7 +200,7 @@ class Mysql extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		return @mysql_select_db($strDatabase, $this->resConnection);
+		$this->resConnection->exec("USE $strDatabase");
 	}
 
 
@@ -230,8 +209,7 @@ class Mysql extends \Database
 	 */
 	protected function begin_transaction()
 	{
-		@mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
-		@mysql_query("BEGIN", $this->resConnection);
+		$this->resConnection->beginTransaction();
 	}
 
 
@@ -240,8 +218,7 @@ class Mysql extends \Database
 	 */
 	protected function commit_transaction()
 	{
-		@mysql_query("COMMIT", $this->resConnection);
-		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
+		$this->resConnection->commit();
 	}
 
 
@@ -250,8 +227,7 @@ class Mysql extends \Database
 	 */
 	protected function rollback_transaction()
 	{
-		@mysql_query("ROLLBACK", $this->resConnection);
-		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
+		$this->resConnection->rollBack();
 	}
 
 
@@ -269,7 +245,7 @@ class Mysql extends \Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
+		$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -278,7 +254,7 @@ class Mysql extends \Database
 	 */
 	protected function unlock_tables()
 	{
-		@mysql_query("UNLOCK TABLES");
+		$this->resConnection->query("UNLOCK TABLES");
 	}
 
 
@@ -291,8 +267,8 @@ class Mysql extends \Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
-		$objStatus = @mysql_fetch_object($objStatus);
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetchObject();
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -307,8 +283,8 @@ class Mysql extends \Database
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
-		$objStatus = @mysql_fetch_object($objStatus);
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetchObject();
 
 		return $objStatus->Auto_increment;
 	}
@@ -321,8 +297,8 @@ class Mysql extends \Database
 	 */
 	protected function get_uuid()
 	{
-		$objUuid = @mysql_query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid");
-		$objUuid = @mysql_fetch_object($objUuid);
+		$objUuid = $this->resConnection->query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")
+									   ->fetchObject();
 
 		return $objUuid->uuid;
 	}
@@ -334,10 +310,10 @@ class Mysql extends \Database
 	 * @param resource $resConnection        The connection ID
 	 * @param boolean  $blnDisableAutocommit If true, autocommitting will be disabled
 	 *
-	 * @return \Database\Mysql\Statement The Database\Statement object
+	 * @return \Database\Pdo\Statement The Database\Statement object
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database\Mysql\Statement($resConnection, $blnDisableAutocommit);
+		return new \Database\Pdo_Mysql\Statement($resConnection, $blnDisableAutocommit);
 	}
 }
