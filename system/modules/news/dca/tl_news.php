@@ -263,7 +263,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
-			'sql'                     => "char(36) NULL"
+			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
 		(

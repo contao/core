@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "char(36) NULL"
+			'sql'                     => "binary(16) NULL"
 		),
 		'tstamp' => array
 		(
@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'uuid' => array
 		(
-			'sql'                     => "char(36) NULL"
+			'sql'                     => "binary(16) NULL"
 		),
 		'type' => array
 		(
@@ -140,7 +140,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "text NULL"
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'extension' => array
 		(
@@ -163,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				array('tl_files', 'checkFilename')
 			),
-			'sql'                     => "varbinary(255) NOT NULL default ''"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'protected' => array
 		(
