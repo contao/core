@@ -100,7 +100,7 @@ class FileTree extends \Widget
 									 ->limit(1)
 									 ->execute($this->activeRecord->id);
 
-			$this->{$this->strOrderField} = explode(',', $objRow->{$this->strOrderField});
+			$this->{$this->strOrderField} = array_filter(explode(',', $objRow->{$this->strOrderField}));
 		}
 
 		$this->blnIsGallery = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']));

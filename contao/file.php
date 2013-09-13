@@ -93,7 +93,7 @@ class FilePicker extends Backend
 			'strTable' => $strTable,
 			'strField' => $strField,
 			'strName'  => $strField,
-			'varValue' => explode(',', Input::get('value'))
+			'varValue' => array_map('String::uuidToBin', array_filter(explode(',', Input::get('value'))))
 		), $objDca);
 
 		$this->Template->main = $objFileTree->generate();
