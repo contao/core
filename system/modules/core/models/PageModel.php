@@ -40,7 +40,18 @@ class PageModel extends \Model
 	protected $blnDetailsLoaded = false;
 
 
-	/**
+    /**
+     * Gets the front end URL for this page
+     * @param string Optional params to add to the URL
+     * @return string
+     */
+    public function getFrontendUrl($strParams='')
+    {
+        return \Controller::generateFrontendUrl($this->row(), $strParams);
+    }
+
+
+    /**
 	 * Find multiple pages by their IDs
 	 *
 	 * @param array $arrIds     An array of pages IDs
