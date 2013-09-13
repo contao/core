@@ -43,14 +43,14 @@ class Mysqli extends \Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
 
 		if ($this->resConnection->connect_error)
 		{
 			throw new \Exception($this->resConnection->connect_error);
 		}
 
-		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
+		$this->resConnection->set_charset($this->arrConfig['dbCharset']);
 	}
 
 
@@ -59,7 +59,7 @@ class Mysqli extends \Database
 	 */
 	protected function disconnect()
 	{
-		@$this->resConnection->close();
+		$this->resConnection->close();
 	}
 
 
@@ -70,7 +70,7 @@ class Mysqli extends \Database
 	 */
 	protected function get_error()
 	{
-		return @$this->resConnection->error;
+		return $this->resConnection->error;
 	}
 
 
@@ -195,7 +195,7 @@ class Mysqli extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$this->resConnection->query("USE $strDatabase");
 	}
 
 
@@ -204,8 +204,8 @@ class Mysqli extends \Database
 	 */
 	protected function begin_transaction()
 	{
-		@$this->resConnection->query("SET AUTOCOMMIT=0");
-		@$this->resConnection->query("BEGIN");
+		$this->resConnection->query("SET AUTOCOMMIT=0");
+		$this->resConnection->query("BEGIN");
 	}
 
 
@@ -214,8 +214,8 @@ class Mysqli extends \Database
 	 */
 	protected function commit_transaction()
 	{
-		@$this->resConnection->query("COMMIT");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		$this->resConnection->query("COMMIT");
+		$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 
 
@@ -224,8 +224,8 @@ class Mysqli extends \Database
 	 */
 	protected function rollback_transaction()
 	{
-		@$this->resConnection->query("ROLLBACK");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		$this->resConnection->query("ROLLBACK");
+		$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 
 
@@ -243,7 +243,7 @@ class Mysqli extends \Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
+		$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -252,7 +252,7 @@ class Mysqli extends \Database
 	 */
 	protected function unlock_tables()
 	{
-		@$this->resConnection->query("UNLOCK TABLES");
+		$this->resConnection->query("UNLOCK TABLES");
 	}
 
 
@@ -265,8 +265,8 @@ class Mysqli extends \Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetch_object();
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -281,8 +281,8 @@ class Mysqli extends \Database
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetch_object();
 
 		return $objStatus->Auto_increment;
 	}
@@ -295,8 +295,8 @@ class Mysqli extends \Database
 	 */
 	protected function get_uuid()
 	{
-		$objUuid = @$this->resConnection->query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")
-										->fetch_object();
+		$objUuid = $this->resConnection->query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")
+									   ->fetch_object();
 
 		return $objUuid->uuid;
 	}
