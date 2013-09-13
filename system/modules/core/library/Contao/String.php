@@ -527,6 +527,34 @@ class String
 
 
 	/**
+	 * Convert a UUID string to binary data
+	 *
+	 * @param string $uuid The UUID string
+	 *
+	 * @return string The binary data
+	 */
+	public static function uuidToBin($uuid)
+	{
+		list($time_low, $time_mid, $time_high, $clock_seq, $node) = explode('-', $uuid);
+		return pack('H12H4H4H4H8', $node, $clock_seq, $time_high, $time_mid, $time_low);
+	}
+
+
+	/**
+	 * Get a UUID string from binary data
+	 *
+	 * @param string $data The binary data
+	 *
+	 * @return string The UUID string
+	 */
+	public static function binToUuid($data)
+	{
+		$h = unpack('H12node/H4clock_seq/H4time_high/H4time_mid/H8time_low', $data);
+		return $h['time_low'] . '-' . $h['time_mid'] . '-' . $h['time_high'] . '-' . $h['clock_seq'] . '-' . $h['node'];
+	}
+
+
+	/**
 	 * Prevent direct instantiation (Singleton)
 	 *
 	 * @deprecated String is now a static class

@@ -260,7 +260,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'orderExt' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['orderExt'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'newsfeeds' => array
 		(

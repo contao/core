@@ -97,10 +97,10 @@ class FileTree extends \Widget
 
 			// Retrieve the order value
 			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
-						   ->limit(1)
-						   ->execute($this->activeRecord->id);
+									 ->limit(1)
+									 ->execute($this->activeRecord->id);
 
-			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
+			$this->{$this->strOrderField} = explode(',', $objRow->{$this->strOrderField});
 		}
 
 		$this->blnIsGallery = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']));
@@ -119,7 +119,7 @@ class FileTree extends \Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
+						   ->execute(implode(',', array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)))), \Input::get('id'));
 		}
 
 		// Return the value as usual
@@ -136,12 +136,13 @@ class FileTree extends \Widget
 		}
 		elseif (strpos($varInput, ',') === false)
 		{
+			$varInput = \String::uuidToBin($varInput);
 			return $this->blnIsMultiple ? array($varInput) : $varInput;
 		}
 		else
 		{
 			$arrValue = array_filter(explode(',', $varInput));
-			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
+			return $this->blnIsMultiple ? array_map('String::uuidToBin', $arrValue) : \String::uuidToBin($arrValue[0]);
 		}
 	}
 
@@ -154,6 +155,7 @@ class FileTree extends \Widget
 	{
 		$arrSet = array();
 		$arrValues = array();
+		$blnHasOrder = ($this->strOrderField != '' && is_array($this->{$this->strOrderField}));
 
 		if (!empty($this->varValue)) // Can be an array
 		{
@@ -263,12 +265,11 @@ class FileTree extends \Widget
 			}
 
 			// Apply a custom sort order
-			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
+			if ($blnHasOrder)
 			{
 				$arrNew = array();
-				$arrOrder = explode(',', $this->{$this->strOrderField});
 
-				foreach ($arrOrder as $i)
+				foreach ($this->{$this->strOrderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{
@@ -293,19 +294,23 @@ class FileTree extends \Widget
 		// Load the fonts for the drag hint (see #4838)
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . (($this->strOrderField != '') ? '
-  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
-  <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
+		// Convert the binary UUIDs
+		$strSet = implode(',', array_map('String::binToUuid', $arrSet));
+		$strOrder = $blnHasOrder ? implode(',', array_map('String::binToUuid', $this->{$this->strOrderField})) : '';
+
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strSet.'">' . ($blnHasOrder ? '
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$strOrder.'">' : '') . '
+  <div class="selector_container">' . (($blnHasOrder && count($arrValues)) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
-    <ul id="sort_'.$this->strId.'" class="'.trim((($this->strOrderField != '') ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
+    <ul id="sort_'.$this->strId.'" class="'.trim(($blnHasOrder ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
 
 		foreach ($arrValues as $k=>$v)
 		{
-			$return .= '<li data-id="'.$k.'">'.$v.'</li>';
+			$return .= '<li data-id="'.\String::binToUuid($k).'">'.$v.'</li>';
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.$strSet.'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . ($blnHasOrder ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'")</script>' : '') . '
   </div>';
 

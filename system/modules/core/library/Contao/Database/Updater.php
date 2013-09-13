@@ -671,6 +671,15 @@ class Updater extends \Controller
 						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
 						$arrFields[$key][] = $strTable . '.' . $strField;
 					}
+
+					// Convert the order fields as well
+					if (isset($arrField['eval']['orderField']) && isset($GLOBALS['TL_DCA'][$strTable]['fields'][$arrField['eval']['orderField']]))
+					{
+						if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable))
+						{
+							$arrFields['order'][] = $strTable . '.' . $arrField['eval']['orderField'];
+						}
+					}
 				}
 			}
 		}
@@ -720,11 +729,13 @@ class Updater extends \Controller
 			list($table, $field) = explode('.', $val);
 			$backup = $field . '_backup';
 
-			// Backup the original column (no type change required since already blob)
+			// Backup the original column and then change the column type
 			if (!$this->Database->fieldExists($backup, $table, true))
 			{
 				$this->Database->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
 				$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
+				$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+				$this->Database->query("UPDATE `$table` SET `$field`=NULL");
 			}
 
 			$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
@@ -757,6 +768,52 @@ class Updater extends \Controller
 
 				$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
 							   ->execute(serialize($arrPaths), $objRow->id);
+			}
+		}
+
+		// Update the existing orderField entries
+		if (isset($arrFields['order']))
+		{
+			foreach ($arrFields['order'] as $val)
+			{
+				list($table, $field) = explode('.', $val);
+				$backup = $field . '_backup';
+
+				// Backup the original column and then change the column type
+				if (!$this->Database->fieldExists($backup, $table, true))
+				{
+					$this->Database->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+					$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
+					$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+					$this->Database->query("UPDATE `$table` SET `$field`=NULL");
+				}
+
+				$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+
+				while ($objRow->next())
+				{
+					$arrPaths = explode(',', $objRow->$backup);
+
+					foreach ($arrPaths as $k=>$v)
+					{
+						// Numeric ID to UUID
+						if (is_numeric($v))
+						{
+							$objFile = \FilesModel::findByPk($v);
+							$arrPaths[$k] = $objFile->uuid;
+						}
+
+						// Path to UUID
+						else
+						{
+							$objFile = \FilesModel::findByPath($v);
+							$arrPaths[$k] = $objFile->uuid;
+						}
+					}
+
+					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+								   ->execute(implode(',', $arrPaths), $objRow->id);
+				}
 			}
 		}
 	}
