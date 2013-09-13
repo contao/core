@@ -86,8 +86,10 @@ class FileTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
-		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
-		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
+		$arrFieldEval = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval'];
+
+		$this->strOrderField = $arrFieldEval['orderField'];
+		$this->blnIsMultiple = $arrFieldEval['multiple'];
 
 		// Prepare the order field
 		if ($this->strOrderField != '')
@@ -103,8 +105,9 @@ class FileTree extends \Widget
 			$this->{$this->strOrderField} = array_filter(explode(',', $objRow->{$this->strOrderField}));
 		}
 
-		$this->blnIsGallery = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['gallery_types']));
-		$this->blnIsDownloads = (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']) && in_array($this->activeRecord->type, $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval']['downloads_types']));
+		$arrTypeEval = $GLOBALS['TL_DCA'][$this->strTable]['fields']['type']['eval'];
+		$this->blnIsGallery = ((isset($arrTypeEval['gallery_types']) && in_array($this->activeRecord->type, $arrTypeEval['gallery_types'])) || (isset($arrFieldEval['gallery']) && $arrFieldEval['gallery']));
+		$this->blnIsDownloads = (isset($arrTypeEval['downloads_types']) && in_array($this->activeRecord->type, $arrTypeEval['downloads_types'])  || (isset($arrFieldEval['download']) && $arrFieldEval['download']));
 	}
 
 
