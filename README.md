@@ -22,7 +22,7 @@ System requirements
 
  * Webserver (Apache, IIS, etc.)
  * PHP version 5.3.2 or greater
- * MySQL version 4.1 or greater
+ * MySQL version 5.0.3 or greater
  * PHP extension GDLib
  * PHP extension mcrypt (optional)
 

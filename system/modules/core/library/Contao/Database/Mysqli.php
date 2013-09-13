@@ -295,7 +295,7 @@ class Mysqli extends \Database
 	 */
 	protected function get_uuid()
 	{
-		$objUuid = @$this->resConnection->query("SELECT UUID() AS uuid")
+		$objUuid = @$this->resConnection->query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")
 										->fetch_object();
 
 		return $objUuid->uuid;

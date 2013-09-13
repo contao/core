@@ -215,7 +215,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "char(36) NULL",
+			'sql'                     => "binary(16) NULL",
 			'save_callback' => array
 			(
 				array('tl_content', 'storeFileMetaInformation')
@@ -609,7 +609,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio'),
-			'sql'                     => "char(36) NULL"
+			'sql'                     => "binary(16) NULL"
 		),
 		'playerSize' => array
 		(

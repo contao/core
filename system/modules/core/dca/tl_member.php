@@ -345,7 +345,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "char(36) NULL"
+			'sql'                     => "binary(16) NULL"
 		),
 		'disable' => array
 		(

@@ -234,15 +234,15 @@ class Updater extends \Controller
 		$this->Database->query(
 			"CREATE TABLE `tl_files` (
 			  `id` int(10) unsigned NOT NULL auto_increment,
-			  `pid` char(36) NULL,
+			  `pid` binary(16) NULL,
 			  `tstamp` int(10) unsigned NOT NULL default '0',
-			  `uuid` char(36) NULL,
+			  `uuid` binary(16) NULL,
 			  `type` varchar(16) NOT NULL default '',
-			  `path` blob NULL,
+			  `path` varchar(1022) NOT NULL default '',
 			  `extension` varchar(16) NOT NULL default '',
 			  `hash` varchar(32) NOT NULL default '',
 			  `found` char(1) NOT NULL default '1',
-			  `name` varbinary(255) NOT NULL default '',
+			  `name` varchar(255) NOT NULL default '',
 			  `meta` blob NULL,
 			  PRIMARY KEY  (`id`),
 			  KEY `pid` (`pid`),
@@ -482,9 +482,15 @@ class Updater extends \Controller
 	public function run32Update()
 	{
 		// Adjust the DB structure
-		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` char(36) NULL");
+		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` binary(16) NULL");
 		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` char(36) NULL");
+
+		// Backup the pid column and change the column type
+		$this->Database->query("ALTER TABLE `tl_files` ADD `pid_backup` int(10) unsigned NOT NULL default '0'");
+		$this->Database->query("UPDATE `tl_files` SET `pid_backup`=`pid`");
+		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` binary(16) NULL");
+		$this->Database->query("UPDATE `tl_files` SET `pid`=NULL");
+		$this->Database->query("UPDATE `tl_files` SET `pid`=0 WHERE `pid_backup`=0");
 
 		$objFiles = $this->Database->query("SELECT id FROM tl_files");
 
@@ -495,51 +501,25 @@ class Updater extends \Controller
 						   ->execute($this->Database->getUuid(), $objFiles->id);
 		}
 
-		$objFiles = $this->Database->query("SELECT pid FROM tl_files WHERE pid>0 GROUP BY pid");
+		$objFiles = $this->Database->query("SELECT pid_backup FROM tl_files WHERE pid_backup>0 GROUP BY pid_backup");
 
 		// Adjust the parent IDs
 		while ($objFiles->next())
 		{
 			$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
-										->execute($objFiles->pid);
+										->execute($objFiles->pid_backup);
 
 			if ($objParent->numRows < 1)
 			{
-				throw new \Exception('Invalid parent ID ' . $objFiles->pid);
+				throw new \Exception('Invalid parent ID ' . $objFiles->pid_backup);
 			}
 
-			$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid=?")
-						   ->execute($objParent->uuid, $objFiles->pid);
+			$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid_backup=?")
+						   ->execute($objParent->uuid, $objFiles->pid_backup);
 		}
 
 		// Update the fields
 		$this->updateFileTreeFields();
-
-		// Change the singleSRC fields
-		$this->Database->query("ALTER TABLE `tl_content` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_content` CHANGE `posterSRC` `posterSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `uploadFolder` `uploadFolder` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_form_field` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_member` CHANGE `homeDir` `homeDir` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_module` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_module` CHANGE `reg_homeDir` `reg_homeDir` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_theme` CHANGE `screenshot` `screenshot` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_faq` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-		$this->Database->query("ALTER TABLE `tl_news` CHANGE `singleSRC` `singleSRC` char(36) NULL");
-
-		// Replace the empty string with null
-		$this->Database->query("UPDATE `tl_content` SET `singleSRC`=NULL WHERE `singleSRC`=''");
-		$this->Database->query("UPDATE `tl_content` SET `posterSRC`=NULL WHERE `posterSRC`=''");
-		$this->Database->query("UPDATE `tl_form_field` SET `uploadFolder`=NULL WHERE `uploadFolder`=''");
-		$this->Database->query("UPDATE `tl_form_field` SET `singleSRC`=NULL WHERE `singleSRC`=''");
-		$this->Database->query("UPDATE `tl_member` SET `homeDir`=NULL WHERE `homeDir`=''");
-		$this->Database->query("UPDATE `tl_module` SET `singleSRC`=NULL WHERE `singleSRC`=''");
-		$this->Database->query("UPDATE `tl_module` SET `reg_homeDir`=NULL WHERE `reg_homeDir`=''");
-		$this->Database->query("UPDATE `tl_theme` SET `screenshot`=NULL WHERE `screenshot`=''");
-		$this->Database->query("UPDATE `tl_calendar_events` SET `singleSRC`=NULL WHERE `singleSRC`=''");
-		$this->Database->query("UPDATE `tl_faq` SET `singleSRC`=NULL WHERE `singleSRC`=''");
-		$this->Database->query("UPDATE `tl_news` SET `singleSRC`=NULL WHERE `singleSRC`=''");
 	}
 
 
@@ -699,23 +679,34 @@ class Updater extends \Controller
 		foreach ($arrFields['single'] as $val)
 		{
 			list($table, $field) = explode('.', $val);
-			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
+			$backup = $field . '_backup';
+
+			// Backup the original column and then change the column type
+			if (!$this->Database->fieldExists($backup, $table, true))
+			{
+				$this->Database->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
+				$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
+				$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
+				$this->Database->query("UPDATE `$table` SET `$field`=NULL");
+			}
+
+			$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
 			while ($objRow->next())
 			{
 				// Numeric ID to UUID
-				if (is_numeric($objRow->$field))
+				if (is_numeric($objRow->$backup))
 				{
-					$objFile = \FilesModel::findByPk($objRow->$field);
+					$objFile = \FilesModel::findByPk($objRow->$backup);
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute($objFile->uuid, $objRow->id);
 				}
 
 				// Path to UUID
-				elseif (!\Validator::isUuid($objRow->$field))
+				else
 				{
-					$objFile = \FilesModel::findByPath($objRow->$field);
+					$objFile = \FilesModel::findByPath($objRow->$backup);
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute($objFile->uuid, $objRow->id);
@@ -727,11 +718,20 @@ class Updater extends \Controller
 		foreach ($arrFields['multiple'] as $val)
 		{
 			list($table, $field) = explode('.', $val);
-			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
+			$backup = $field . '_backup';
+
+			// Backup the original column (no type change required since already blob)
+			if (!$this->Database->fieldExists($backup, $table, true))
+			{
+				$this->Database->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+				$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
+			}
+
+			$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
 			while ($objRow->next())
 			{
-				$arrPaths = deserialize($objRow->$field, true);
+				$arrPaths = deserialize($objRow->$backup, true);
 
 				if (empty($arrPaths))
 				{
@@ -748,7 +748,7 @@ class Updater extends \Controller
 					}
 
 					// Path to UUID
-					elseif (!\Validator::isUuid($v))
+					else
 					{
 						$objFile = \FilesModel::findByPath($v);
 						$arrPaths[$k] = $objFile->uuid;
