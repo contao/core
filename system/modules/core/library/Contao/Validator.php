@@ -262,6 +262,11 @@ class Validator
 	 */
 	public static function isUuid($varValue)
 	{
+		if (strlen($varValue) == 16)
+		{
+			$varValue = \String::binToUuid($varValue);
+		}
+
 		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
 	}
 }
