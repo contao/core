@@ -424,6 +424,10 @@ class InstallTool extends Backend
 		{
 			$arrDrivers[] = 'PDO_MySQL';
 		}
+		if (function_exists('mysql_connect'))
+		{
+			$arrDrivers[] = 'MySQL';
+		}
 
 		// If there is another driver defined, add it here as well
 		if ($GLOBALS['TL_CONFIG']['dbDriver'] != '' && !in_array($GLOBALS['TL_CONFIG']['dbDriver'], $arrDrivers))
