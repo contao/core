@@ -130,6 +130,10 @@ class Idna
 			{
 				unset($arrUrl['scheme']);
 			}
+			elseif ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
+			{
+				$arrUrl['scheme'] .= ':'; // see #6148
+			}
 			else
 			{
 				$arrUrl['scheme'] .= '://';

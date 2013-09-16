@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support `tel:` and `sms:` upon IDNA conversion (see #6148).
+
+### Fixed
 Apply the width and height to the audio player as well (see #6114).
 
 ### Fixed
