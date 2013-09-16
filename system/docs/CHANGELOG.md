@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Apply the width and height to the audio player as well (see #6114).
+
+### Fixed
 Do not exit after a template has been output (see #5570).
 
 ### Changed
