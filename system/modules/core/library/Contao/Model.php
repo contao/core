@@ -363,10 +363,16 @@ abstract class Model
 			return $this->arrRelated[$strKey];
 		}
 
-		// The field or relation does not exist
-		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
+		// The relation does not exist
+		if (!isset($this->arrRelations[$strKey]))
 		{
 			throw new \Exception("Field $strKey does not seem to be related");
+		}
+
+		// The relation exists but there is no reference yet (see #6161)
+		if (!isset($this->$strKey))
+		{
+			return null;
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
