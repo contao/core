@@ -43,7 +43,14 @@ class Mysqli extends \Database
 	 */
 	protected function connect()
 	{
-		$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$host = $this->arrConfig['dbHost'];
+
+		if ($this->arrConfig['dbPconnect'])
+		{
+			$host = 'p:' . $host;
+		}
+
+		$this->resConnection = new \mysqli($host, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
 
 		if ($this->resConnection->connect_error)
 		{

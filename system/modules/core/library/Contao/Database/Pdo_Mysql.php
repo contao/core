@@ -54,7 +54,11 @@ class Pdo_Mysql extends \Database
 			$dns .= ';host=' . $this->arrConfig['dbHost'] . ';port=' . $this->arrConfig['dbPort'];
 		}
 
-		$this->resConnection = new \PDO($dns, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"'));
+		$this->resConnection = new \PDO($dns, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], array
+		(
+			\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"',
+			\PDO::ATTR_PERSISTENT => $this->arrConfig['dbPconnect']
+		));
 	}
 
 
