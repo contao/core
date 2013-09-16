@@ -334,9 +334,12 @@ abstract class Model
 	 */
 	public function delete()
 	{
-		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->execute($this->{static::$strPk})
-									   ->affectedRows;
+		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+											   ->execute($this->{static::$strPk})
+											   ->affectedRows;
+
+		$this->arrData[static::$strPk] = null; // see #6162
+		return $intAffected;
 	}
 
 

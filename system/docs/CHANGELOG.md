@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Unset the primary key if a model is deleted (see #6162).
+
+### Fixed
 Support `tel:` and `sms:` upon IDNA conversion (see #6148).
 
 ### Fixed
