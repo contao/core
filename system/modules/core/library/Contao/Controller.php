@@ -1254,7 +1254,13 @@ abstract class Controller extends \System
 
 				// Last update
 				case 'last_update':
-					$objUpdate = \Database::getInstance()->execute("SELECT MAX(tstamp) AS tc, (SELECT MAX(tstamp) FROM tl_news) AS tn, (SELECT MAX(tstamp) FROM tl_calendar_events) AS te FROM tl_content");
+					$query = "SELECT MAX(tstamp) AS tc";
+					if (in_array("news", \ModuleLoader::getActive()))
+						$query .= ", (SELECT MAX(tstamp) FROM tl_news) AS tn";
+					if (in_array("calendar", \ModuleLoader::getActive()))
+						$query .= ", (SELECT MAX(tstamp) FROM tl_calendar_events) AS te";
+					$query .= " FROM tl_content";
+					$objUpdate = \Database::getInstance()->execute($query);
 
 					if ($objUpdate->numRows)
 					{
