@@ -365,6 +365,7 @@ a.tl_submit:hover {
 /* Floats */
 .clr {
 	clear:both;
+	display:table; /* see #6093 */
 }
 .w50 {
 	width:50%;
