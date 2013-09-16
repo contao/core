@@ -156,7 +156,7 @@ abstract class Database
 
 		if (!isset(static::$arrInstances[$strKey]))
 		{
-			$strClass = 'Database\\' . ucfirst(strtolower($arrConfig['dbDriver']));
+			$strClass = 'Database\\' . str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($arrConfig['dbDriver']))));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 

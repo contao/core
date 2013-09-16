@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+Added a PDO MySQL database driver (see #5635).
+
 ### Changed
 Use unique IDs in the database assisted file system (see #5757).
 

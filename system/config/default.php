@@ -120,7 +120,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  * DATABASE SETTINGS
  * -------------------------------------------------------------------------
  * Database drivers start with an uppercase character. Currently supported
- * databases: MySQL, MySQLi, MSSQL, Oracle, PostgreSQL, Sybase.
+ * databases: MySQLi, PDO_Mysql, MySQL (deprecated).
  *
  *   dbUser     = database user name
  *   dbPass     = database password
