@@ -259,37 +259,12 @@ class Ajax extends \Backend
 					$strField = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $strField);
 				}
 
-				// Validate the request data
-				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
+				// The field does not exist
+				if (!isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]))
 				{
-					// The field does not exist
-					if (!array_key_exists($strField, $GLOBALS['TL_CONFIG']))
-					{
-						$this->log('Field "' . $strField . '" does not exist in the global configuration', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
-				}
-				elseif ($this->Database->tableExists($dc->table))
-				{
-					// The field does not exist
-					if (!$this->Database->fieldExists($strField, $dc->table))
-					{
-						$this->log('Field "' . $strField . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
-
-					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
-											 ->execute($intId);
-
-					// The record does not exist
-					if ($objRow->numRows < 1)
-					{
-						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
+					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
 				}
 
 				$varValue = \Input::post('value', true);
@@ -318,8 +293,19 @@ class Ajax extends \Backend
 					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
 					$arrAttribs['activeRecord'] = null;
 				}
-				elseif ($this->Database->tableExists($dc->table))
+				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
+					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+											 ->execute($intId);
+
+					// The record does not exist
+					if ($objRow->numRows < 1)
+					{
+						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+						header('HTTP/1.1 400 Bad Request');
+						die('Bad Request');
+					}
+
 					$objRow->$strField = $varValue;
 					$arrAttribs['activeRecord'] = $objRow;
 				}
