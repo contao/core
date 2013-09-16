@@ -425,6 +425,10 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_settings', 'getModules'),
 			'eval'                    => array('multiple'=>true),
+			'load_callback' => array
+			(
+				array('tl_settings', 'loadInactiveModules')
+			),
 			'save_callback' => array
 			(
 				array('tl_settings', 'updateInactiveModules')
@@ -533,7 +537,7 @@ class tl_settings extends Backend
 				continue;
 			}
 
-			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules))
+			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules) || file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
 			{
 				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']));
 
@@ -547,6 +551,31 @@ class tl_settings extends Backend
 		}
 
 		natcasesort($arrReturn);
+		return $arrReturn;
+	}
+
+
+	/**
+	 * Load the inactive modules
+	 * @param mixed
+	 * @return array
+	 */
+	public function loadInactiveModules($varValue, $dc)
+	{
+		$arrReturn = array();
+		$arrModules = scan(TL_ROOT . '/system/modules');
+
+		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
+		$blnCheckInactiveModules = is_array($arrInactiveModules);
+
+		foreach ($arrModules as $strModule)
+		{
+			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules) || file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+			{
+				$arrReturn[] = $strModule;
+			}
+		}
+
 		return $arrReturn;
 	}
 
