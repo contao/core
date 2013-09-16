@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not cache the "toggle_view" insert tag (see #6172).
+
+### Fixed
 Unset the primary key if a model is deleted (see #6162).
 
 ### Fixed
