@@ -96,10 +96,10 @@ abstract class Model
 		if ($objResult !== null)
 		{
 			$arrRelated = array();
-			$this->setRow($objResult->row()); // see #5439
+			$arrData = $objResult->row();
 
 			// Look for joined fields
-			foreach ($this->arrData as $k=>$v)
+			foreach ($arrData as $k=>$v)
 			{
 				if (strpos($k, '__') !== false)
 				{
@@ -111,7 +111,7 @@ abstract class Model
 					}
 
 					$arrRelated[$key][$field] = $v;
-					unset($this->arrData[$k]);
+					unset($arrData[$k]);
 				}
 			}
 
@@ -132,6 +132,8 @@ abstract class Model
 					$this->arrRelated[$key]->setRow($row);
 				}
 			}
+
+			$this->setRow($arrData); // see #5439
 		}
 
 		$this->objResult = $objResult;
