@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Make the CSS ID available in the custom navigation module (see #6129).
+
+### Fixed
 Do not cache the "toggle_view" insert tag (see #6172).
 
 ### Fixed
