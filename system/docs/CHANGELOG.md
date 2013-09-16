@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly link to news and calendar feeds via insert tag (see #6164).
+
+### Fixed
 Make the CSS ID available in the custom navigation module (see #6129).
 
 ### Fixed

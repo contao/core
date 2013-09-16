@@ -1238,7 +1238,7 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
@@ -1248,7 +1248,7 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
