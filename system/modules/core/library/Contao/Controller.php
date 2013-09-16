@@ -2314,6 +2314,10 @@ abstract class Controller extends \System
 		{
 			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
 		}
+		else
+		{
+			$strUrl = \Environment::get('base') . $strUrl; // see #4332
+		}
 
 		if (!$blnReturn)
 		{
