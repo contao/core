@@ -347,6 +347,7 @@ class ModuleListing extends \Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->list_info = deserialize($this->list_info);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
 									->limit(1)
