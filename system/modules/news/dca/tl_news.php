@@ -733,18 +733,19 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
+	 * @param \DataContainer
 	 */
-	public function scheduleUpdate()
+	public function scheduleUpdate(DataContainer $dc)
 	{
 		// Return if there is no ID
-		if (!CURRENT_ID || Input::get('act') == 'copy')
+		if (!$dc->activeRecord || !$dc->activeRecord->pid || Input::get('act') == 'copy')
 		{
 			return;
 		}
 
 		// Store the ID in the session
 		$session = $this->Session->get('news_feed_updater');
-		$session[] = CURRENT_ID;
+		$session[] = $dc->activeRecord->pid;
 		$this->Session->set('news_feed_updater', array_unique($session));
 	}
 

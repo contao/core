@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly update the RSS feeds if a news item or event changes (see #6102).
+
+### Fixed
 Correctly link to news and calendar feeds via insert tag (see #6164).
 
 ### Fixed
