@@ -434,6 +434,19 @@ class ZipReader
 	 */
 	protected function readCentralDirectory()
 	{
+		$strMbCharset = null;
+
+		// Set the mbstring encoding to ASCII (see #5842)
+		if (ini_get('mbstring.func_overload') > 0)
+		{
+			$strMbCharset = mb_internal_encoding();
+
+			if (mb_internal_encoding('ASCII') === false)
+			{
+				$strMbCharset = null;
+			}
+		}
+
 		$intOffset = 0;
 		$intInterval = min(filesize(TL_ROOT . '/' . $this->strFile), 1024);
 		$strBuffer = '';
@@ -533,6 +546,8 @@ class ZipReader
 
 		$this->intLast = (count($this->arrFiles) - 1);
 
+		// Restore the mbstring encoding (see #5842)
+		$strMbCharset && mb_internal_encoding($strMbCharset);
 	}
 
 

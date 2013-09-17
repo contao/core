@@ -1107,7 +1107,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$newPID = $pid;
 
 					$objSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE pid=?")
-												 ->executeUncached($pid);
+												 ->execute($pid);
 
 					// Select sorting value of the first record
 					if ($objSorting->numRows)
@@ -1118,7 +1118,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						if (($curSorting % 2) != 0 || $curSorting < 1)
 						{
 							$objNewSorting = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
-															->executeUncached($pid);
+															->execute($pid);
 
 							$count = 2;
 							$newSorting = 128;
@@ -1144,7 +1144,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$objSorting = $this->Database->prepare("SELECT pid, sorting FROM " . $this->strTable . " WHERE id=?")
 												 ->limit(1)
-												 ->executeUncached($pid);
+												 ->execute($pid);
 
 					// Set parent ID of the current record as new parent ID
 					if ($objSorting->numRows)
@@ -1156,7 +1156,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						if (is_numeric($newPID))
 						{
 							$objNextSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE pid=? AND sorting>?")
-											  				 ->executeUncached($newPID, $curSorting);
+											  				 ->execute($newPID, $curSorting);
 
 							// Select sorting value of the next record
 							if ($objNextSorting->sorting !== null)
@@ -1169,7 +1169,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 									$count = 1;
 
 									$objNewSorting = $this->Database->prepare("SELECT id, sorting FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting")
-																	->executeUncached($newPID);
+																	->execute($newPID);
 
 									while ($objNewSorting->next())
 									{
@@ -1229,7 +1229,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$objParentRecord = $this->Database->prepare("SELECT pid FROM " . $this->strTable . " WHERE id=?")
 													  ->limit(1)
-													  ->executeUncached($pid);
+													  ->execute($pid);
 
 					if ($objParentRecord->numRows)
 					{
@@ -1247,7 +1247,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$objCurrentRecord = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 												   ->limit(1)
-											 	   ->executeUncached($this->intId);
+											 	   ->execute($this->intId);
 
 				// Select current record
 				if ($objCurrentRecord->numRows)
@@ -1256,7 +1256,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$curSorting = $objCurrentRecord->sorting;
 
 					$objNextSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE sorting>?")
-													 ->executeUncached($curSorting);
+													 ->execute($curSorting);
 
 					// Select sorting value of the next record
 					if ($objNextSorting->numRows)
@@ -1268,7 +1268,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						{
 							$count = 1;
 
-							$objNewSorting = $this->Database->executeUncached("SELECT id, sorting FROM " . $this->strTable . " ORDER BY sorting");
+							$objNewSorting = $this->Database->execute("SELECT id, sorting FROM " . $this->strTable . " ORDER BY sorting");
 
 							while ($objNewSorting->next())
 							{
@@ -1296,7 +1296,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// ID is not set (insert at the end)
 				else
 				{
-					$objNextSorting = $this->Database->executeUncached("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
+					$objNextSorting = $this->Database->execute("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
 
 					if ($objNextSorting->numRows)
 					{
@@ -1646,7 +1646,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Get the current record
 		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 								 ->limit(1)
-								 ->executeUncached($this->intId);
+								 ->execute($this->intId);
 
 		// Redirect if there is no record with the given ID
 		if ($objRow->numRows < 1)
@@ -2060,7 +2060,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Get the field values
 				$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 										 ->limit(1)
-										 ->executeUncached($this->intId);
+										 ->execute($this->intId);
 
 				// Store the active record
 				$this->objActiveRecord = $objRow;
@@ -2370,7 +2370,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Get the field values
 					$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 											 ->limit(1)
-											 ->executeUncached($this->intId);
+											 ->execute($this->intId);
 
 					// Store the active record
 					$this->objActiveRecord = $objRow;
@@ -2740,7 +2740,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$objFields = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 										->limit(1)
-										->executeUncached($this->intId);
+										->execute($this->intId);
 
 			// Get selector values from DB
 			if ($objFields->numRows > 0)

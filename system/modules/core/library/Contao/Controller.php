@@ -677,7 +677,7 @@ abstract class Controller extends \System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || $elements[0] == 'toggle_view' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1238,7 +1238,7 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
@@ -1248,7 +1248,7 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
@@ -2259,6 +2259,7 @@ abstract class Controller extends \System
 			return;
 		}
 
+		$GLOBALS['loadDataContainer'][$strName] = true; // see #6145
 		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
 
 		// Try to load from cache
@@ -2294,9 +2295,6 @@ abstract class Controller extends \System
 		{
 			include TL_ROOT . '/system/config/dcaconfig.php';
 		}
-
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadDataContainer'][$strName] = true;
 	}
 
 
@@ -2328,6 +2326,10 @@ abstract class Controller extends \System
 		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
 		{
 			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
+		}
+		else
+		{
+			$strUrl = \Environment::get('base') . $strUrl; // see #4332
 		}
 
 		if (!$blnReturn)
@@ -2629,7 +2631,7 @@ abstract class Controller extends \System
 		{
 			if ($objFiles->type == 'file')
 			{
-				if (!in_array($objFiles->extension, $allowedDownload))
+				if (!in_array($objFiles->extension, $allowedDownload) || !is_file(TL_ROOT . '/' . $objFiles->path))
 				{
 					continue;
 				}

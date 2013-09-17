@@ -246,11 +246,7 @@ abstract class Result
 	public function fetchEach($strKey)
 	{
 		$arrReturn = array();
-
-		if ($this->intIndex < 0)
-		{
-			$this->fetchAllAssoc();
-		}
+		$this->fetchAllAssoc();
 
 		foreach ($this->arrCache as $arrRow)
 		{
@@ -329,7 +325,7 @@ abstract class Result
 	 */
 	public function prev()
 	{
-		if ($this->intIndex == 0)
+		if ($this->intIndex < 1)
 		{
 			return false;
 		}

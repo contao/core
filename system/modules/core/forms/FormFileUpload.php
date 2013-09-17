@@ -107,16 +107,20 @@ class FormFileUpload extends \Widget implements \uploadable
 		// File was not uploaded
 		if (!is_uploaded_file($file['tmp_name']))
 		{
-			if (in_array($file['error'], array(1, 2)))
+			if ($file['error'] == 1 || $file['error'] == 2)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
 				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
 			}
-
-			if ($file['error'] == 3)
+			elseif ($file['error'] == 3)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 				$this->log('File "'.$file['name'].'" was only partially uploaded', 'FormFileUpload validate()', TL_ERROR);
+			}
+			elseif ($file['error'] > 0)
+			{
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileerror'], $file['error'], $file['name']));
+				$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , 'FormFileUpload validate()', TL_ERROR);
 			}
 
 			unset($_FILES[$this->strName]);

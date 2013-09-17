@@ -77,7 +77,7 @@ class Dbafs
 		unset($arrChunks);
 
 		$objModel  = null;
-		$objModels = \FilesModel::findMultipleByPaths($arrPaths, array('cached'=>true));
+		$objModels = \FilesModel::findMultipleByPaths($arrPaths);
 
 		// Unset the entries in $arrPaths if the DB entry exists
 		if ($objModels !== null)
@@ -213,7 +213,7 @@ class Dbafs
 	 */
 	public static function moveResource($strSource, $strDestination)
 	{
-		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+		$objFile = \FilesModel::findByPath($strSource);
 
 		// If there is no entry, directly add the destination
 		if ($objFile === null)
@@ -230,7 +230,7 @@ class Dbafs
 		}
 		else
 		{
-			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+			$objFolder = \FilesModel::findByPath($strFolder);
 
 			if ($objFolder === null)
 			{
@@ -248,7 +248,7 @@ class Dbafs
 		// Update all child records
 		if ($objFile->type == 'folder')
 		{
-			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/');
 
 			if ($objFiles !== null)
 			{
@@ -284,7 +284,7 @@ class Dbafs
 	 */
 	public static function copyResource($strSource, $strDestination)
 	{
-		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+		$objFile = \FilesModel::findByPath($strSource);
 
 		// Add the source entry
 		if ($objFile === null)
@@ -302,7 +302,7 @@ class Dbafs
 		}
 		else
 		{
-			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+			$objFolder = \FilesModel::findByPath($strFolder);
 
 			if ($objFolder === null)
 			{
@@ -321,7 +321,7 @@ class Dbafs
 		// Update all child records
 		if ($objFile->type == 'folder')
 		{
-			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/');
 
 			if ($objFiles !== null)
 			{
@@ -358,7 +358,7 @@ class Dbafs
 	 */
 	public static function deleteResource($strResource)
 	{
-		$objModel = \FilesModel::findByPath($strResource, array('uncached'=>true));
+		$objModel = \FilesModel::findByPath($strResource);
 
 		// Remove the resource
 		if ($objModel !== null)
@@ -423,7 +423,7 @@ class Dbafs
 		foreach (array_reverse($arrPaths) as $strPath)
 		{
 			$objFolder = new \Folder($strPath);
-			$objModel  = \FilesModel::findByPath($strPath, array('cached'=>true));
+			$objModel  = \FilesModel::findByPath($strPath);
 
 			// The DB entry does not yet exist
 			if ($objModel === null)
@@ -516,7 +516,7 @@ class Dbafs
 				}
 				else
 				{
-					$objParent = \FilesModel::findByPath($strParent, array('cached'=>true));
+					$objParent = \FilesModel::findByPath($strParent);
 
 					if ($objParent === null)
 					{
@@ -584,7 +584,7 @@ class Dbafs
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash, array('uncached'=>true));
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
 
 				if ($objFound !== null)
 				{
