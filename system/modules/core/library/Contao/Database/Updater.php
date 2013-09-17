@@ -622,7 +622,7 @@ class Updater extends \Controller
 		$arrFiles = array();
 
 		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -648,7 +648,15 @@ class Updater extends \Controller
 		// Find all fileTree fields
 		foreach ($arrFiles as $strTable)
 		{
-			$this->loadDataContainer($strTable);
+			try
+			{
+				$this->loadDataContainer($strTable);
+			}
+			catch (\Exception $e)
+			{
+				continue;
+			}
+
 			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
 
 			// Skip non-database DCAs

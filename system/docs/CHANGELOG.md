@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Fixed
+Consider all extensions when scanning for `fileTree` fields (see #6058).
+
 ### New
 Added a PDO MySQL database driver (see #5635).
 
