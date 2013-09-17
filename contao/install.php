@@ -733,9 +733,14 @@ class InstallTool extends Backend
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
 
+					$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
+
 					// Scan the upload folder
-					$this->import('Database\\Updater', 'Updater');
-					$this->Updater->scanUploadFolder();
+					if ($objRow->count < 1)
+					{
+						$this->import('Database\\Updater', 'Updater');
+						$this->Updater->scanUploadFolder();
+					}
 
 					$this->reload();
 				}
