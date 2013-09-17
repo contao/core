@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Prevent article aliases from using reserved names (see #6066).
+
+### Fixed
 Correctly update the RSS feeds if a news item or event changes (see #6102).
 
 ### Fixed

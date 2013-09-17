@@ -593,6 +593,12 @@ class tl_article extends Backend
 			$varValue .= '-' . $dc->id;
 		}
 
+		// Add a prefix to reserved names (see #6066)
+		if (in_array($varValue, array('top', 'wrapper', 'header', 'container', 'main', 'left', 'right', 'footer')))
+		{
+			$varValue = 'article-' . $varValue;
+		}
+
 		return $varValue;
 	}
 
