@@ -139,7 +139,7 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
-		$this->resResult = NULL;
+		$this->resResult = null;
 		$this->strQuery = $this->prepare_query($strQuery);
 
 		// Auto-generate the SET/VALUES subpart
