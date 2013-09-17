@@ -24,6 +24,61 @@ class Statement extends \Database\Statement
 {
 
 	/**
+	 * Parameters
+	 * @var array
+	 */
+	protected $arrParams = array();
+
+
+	/**
+	 * Prepare a query string so the following functions can handle it
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Statement The statement object
+	 *
+	 * @throws \Exception If $strQuery is empty
+	 */
+	public function prepare($strQuery)
+	{
+		if ($strQuery == '')
+		{
+			throw new \Exception('Empty query string');
+		}
+
+		$this->resResult = null;
+		$this->strQuery = $this->prepare_query($strQuery);
+
+		// Auto-generate the SET/VALUES subpart
+		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0 || strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
+		{
+			$this->strQuery = str_replace('%s', '%p', $this->strQuery);
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Execute the query and return the result object
+	 *
+	 * @return \Database\Result The result object
+	 */
+	public function execute()
+	{
+		$arrParams = func_get_args();
+
+		if (is_array($arrParams[0]))
+		{
+			$arrParams = array_values($arrParams[0]);
+		}
+
+		$this->arrParams = $arrParams;
+		return $this->query();
+	}
+
+
+	/**
 	 * Prepare a query string and return it
 	 *
 	 * @param string $strQuery The query string
@@ -75,7 +130,13 @@ class Statement extends \Database\Statement
 	 */
 	protected function execute_query()
 	{
-		return $this->resConnection->query($this->strQuery);
+		$objStmt = $this->resConnection->prepare($this->strQuery, array
+		(
+			\PDO::ATTR_CURSOR => \PDO::CURSOR_SCROLL
+		));
+
+		$objStmt->execute($this->arrParams);
+		return $objStmt;
 	}
 
 
