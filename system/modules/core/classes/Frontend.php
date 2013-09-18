@@ -49,8 +49,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Load the database object
+	 *
+	 * Make the constructor public, so pages can be instantiated (see #6182)
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->import('Database');
