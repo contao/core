@@ -81,6 +81,17 @@ class Result extends \Database\Result
 
 
 	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 */
+	protected function data_seek($intIndex)
+	{
+		$this->resResult->fetch(\PDO::FETCH_ASSOC, \PDO::FETCH_ORI_ABS, $intIndex);
+	}
+
+
+	/**
 	 * Free the result
 	 */
 	public function free()
