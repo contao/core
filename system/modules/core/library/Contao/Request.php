@@ -85,6 +85,17 @@ class Request
 	 */
 	protected $arrResponseHeaders = array();
 
+	/**
+	 * Request username (defaults to '')
+	 * @var string
+	 */
+	protected $strUsername;
+
+	/**
+	 * Request password
+	 * @var string
+	 */
+	protected $strPassword;
 
 	/**
 	 * Set the default values
@@ -119,6 +130,14 @@ class Request
 
 			case 'method':
 				$this->strMethod = $varValue;
+				break;
+
+			case 'username':
+				$this->strUsername = $varValue;
+				break;
+
+			case 'password':
+				$this->strPassword = $varValue;
 				break;
 
 			default:
@@ -165,6 +184,10 @@ class Request
 
 			case 'headers':
 				return $this->arrResponseHeaders;
+				break;
+
+			case 'username':
+				return $this->strUsername;
 				break;
 		}
 
@@ -259,6 +282,12 @@ class Request
 			'Connection' => 'Connection: close'
 		);
 
+                if (isset($uri['user'])) {
+                    $default['Authorization'] = 'Authorization: Basic ' . base64_encode($uri['user'] . ':' . $uri['pass']);
+                } elseif ($this->strUsername != '') {
+                    $default['Authorization'] = 'Authorization: Basic ' . base64_encode($this->strUsername . ':' . $this->strPassword);
+                }
+                
 		foreach ($this->arrHeaders as $header=>$value)
 		{
 			$default[$header] = $header . ': ' . $value;
