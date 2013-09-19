@@ -422,13 +422,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'inactiveModules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'],
-			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_settings', 'getModules'),
-			'eval'                    => array('multiple'=>true),
-			'save_callback' => array
-			(
-				array('tl_settings', 'updateInactiveModules')
-			)
+			'input_field_callback'    => array('tl_settings', 'disableModules')
 		),
 		'customSections' => array
 		(
@@ -510,94 +504,113 @@ class tl_settings extends Backend
 {
 
 	/**
-	 * Return all modules except back end and front end as array
-	 * @return array
+	 * Disable modules
+	 * @param \DataContainer
+	 * @return string
 	 */
-	public function getModules()
+	public function disableModules(DataContainer $dc)
 	{
-		$arrReturn = array();
-		$arrModules = scan(TL_ROOT . '/system/modules');
+		$arrModules = array();
+		$arrFolders = scan(TL_ROOT . '/system/modules');
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
-		$blnCheckInactiveModules = is_array($arrInactiveModules);
-
-		foreach ($arrModules as $strModule)
+		// Store all extensions with their status (based on the .skip file)
+		foreach ($arrFolders as $strFolder)
 		{
-			if (substr($strModule, 0, 1) == '.')
+			if (substr($strFolder, 0, 1) == '.')
 			{
 				continue;
 			}
 
-			if ($strModule == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
+			if ($strFolder == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strFolder))
 			{
 				continue;
 			}
 
-			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules))
-			{
-				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']));
+			$arrModules[$strFolder] = !file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/.skip');
+		}
 
-				if (file_exists($strFile))
+		// Enable or disable the modules as requested
+		if (Input::post('FORM_SUBMIT') == 'tl_settings')
+		{
+			$blnPurgeCache = false;
+			$arrDisabled = Input::post('inactiveModules');
+
+			if (!is_array($arrDisabled))
+			{
+				$arrDisabled = array();
+			}
+
+			// Check whether a module status has changed
+			foreach ($arrModules as $strModule=>$blnActive)
+			{
+				if (in_array($strModule, $arrDisabled))
 				{
-					include $strFile;
+					if ($blnActive)
+					{
+						$blnPurgeCache = System::disableModule($strModule);
+					}
+				}
+				else
+				{
+					if (!$blnActive)
+					{
+						$blnPurgeCache = System::enableModule($strModule);
+					}
 				}
 			}
 
-			$arrReturn[$strModule] = '<span style="color:#b3b3b3">['. $strModule .']</span> ' . (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
-		}
-
-		natcasesort($arrReturn);
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Update the inactive modules
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function updateInactiveModules($varValue)
-	{
-		// The field value has not changed
-		if ($varValue == $GLOBALS['TL_CONFIG']['inactiveModules'])
-		{
-			return $varValue;
-		}
-
-		$blnPurgeCache = false;
-		$arrModules = deserialize($varValue);
-
-		if (!is_array($arrModules))
-		{
-			$arrModules = array();
-		}
-
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
-		{
-			if (strncmp($strModule, '.', 1) === 0)
+			// Purge the internal cache (see #5016)
+			if ($blnPurgeCache)
 			{
-				continue;
-			}
-
-			// Disable the module
-			if (in_array($strModule, $arrModules))
-			{
-				$blnPurgeCache = System::disableModule($strModule);
-			}
-			else
-			{
-				$blnPurgeCache = System::enableModule($strModule);
+				$this->import('Automator');
+				$this->Automator->purgeInternalCache();
 			}
 		}
 
-		// Purge the internal cache (see #5016)
-		if ($blnPurgeCache)
+		// Return the form field
+		$return = '
+<div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . '">
+  <fieldset id="ctrl_' . $dc->field . '" class="tl_checkbox_container">
+    <legend>Inactive extensions</legend>
+    <input type="hidden" name="' . $dc->inputName . '" value="">
+    <input type="checkbox" id="check_all_' . $dc->inputName . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $dc->inputName . '\')">
+    <label for="check_all_' . $dc->inputName . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>';
+
+		$i = 0;
+		$lng = str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
+
+		// Render the checkbox and label
+		foreach ($arrModules as $strModule=>$blnActive)
 		{
-			$this->import('Automator');
-			$this->Automator->purgeInternalCache();
+			if (!$blnActive)
+			{
+				$strFile = 'system/modules/' . $strModule . '/languages/' . $lng . '/modules';
+
+				// Load the modules language file of disabled extensions
+				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
+				{
+					eval(static::convertXlfToPhp($strFile . '.xlf', $lng));
+				}
+				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
+				{
+					include TL_ROOT . '/' . $strFile . '.php';
+				}
+			}
+
+			$strTitle = (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
+
+			$return .= '
+    <input type="checkbox" name="' . $dc->inputName . '[]" id="opt_' . $dc->inputName . '_' . $i . '" class="tl_checkbox" value="' . $strModule . '" onfocus="Backend.getScrollOffset()"' . ($blnActive ?: ' checked') . '>
+    <label for="opt_' . $dc->inputName . '_' . $i++ . '"><span style="color:#b3b3b3">[' . $strModule . ']</span> ' . $strTitle . '</label><br>';
 		}
 
-		return $varValue;
+		// Add the help text
+		$return .= '
+  </fieldset>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][1] . '</p>' : '') . '
+</div>';
+
+		return $return;
 	}
 
 

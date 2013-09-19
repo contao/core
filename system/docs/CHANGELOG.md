@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### Fixed
+Remove the left-over uses of `inactiveModules` (see #6142).
+
+### Fixed
 Consider all extensions when scanning for `fileTree` fields (see #6058).
 
 ### New
