@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the additional arguments in `Frontend::jumpToOrReload()` (see #5734).
+
+### Fixed
 Prevent article aliases from using reserved names (see #6066).
 
 ### Fixed
