@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+Templates now support adding callables (see #6176).
+
 ### Fixed
 Remove the left-over uses of `inactiveModules` (see #6142).
 
