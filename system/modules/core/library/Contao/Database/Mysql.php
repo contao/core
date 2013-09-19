@@ -321,10 +321,19 @@ class Mysql extends \Database
 	 */
 	protected function get_uuid()
 	{
-		$objUuid = mysql_query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid");
-		$objUuid = mysql_fetch_object($objUuid);
+		static $ids;
 
-		return $objUuid->uuid;
+		if (empty($ids))
+		{
+			$res = mysql_query(implode(' UNION ALL ', array_fill(0, 10, "SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")));
+
+			while (($row = mysql_fetch_object($res)) != false)
+			{
+				$ids[] = $row->uuid;
+			}
+		}
+
+		return array_pop($ids);
 	}
 
 

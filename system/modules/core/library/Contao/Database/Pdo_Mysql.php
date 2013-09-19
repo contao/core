@@ -301,10 +301,19 @@ class Pdo_Mysql extends \Database
 	 */
 	protected function get_uuid()
 	{
-		$objUuid = $this->resConnection->query("SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")
-									   ->fetchObject();
+		static $ids;
 
-		return $objUuid->uuid;
+		if (empty($ids))
+		{
+			$res = $this->resConnection->query(implode(' UNION ALL ', array_fill(0, 10, "SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")));
+
+			while (($row = $res->fetchObject()) != false)
+			{
+				$ids[] = $row->uuid;
+			}
+		}
+
+		return array_pop($ids);
 	}
 
 
