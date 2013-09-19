@@ -54,6 +54,9 @@ del {
 ins {
 	text-decoration:none;
 }
+header,footer,nav,section,aside,article,figure,figcaption {
+	display:block;
+}
 
 /**
  * Default font settings
