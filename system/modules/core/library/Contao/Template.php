@@ -116,6 +116,27 @@ abstract class Template extends \Controller
 
 
 	/**
+	 * Execute a callable and return the result
+	 *
+	 * @param string $strKey    The name of the key
+	 * @param array  $arrParams The parameters array
+	 *
+	 * @return mixed The callable return value
+	 *
+	 * @throws \InvalidArgumentException If the callable does not exist
+	 */
+	public function __call($strKey, $arrParams)
+	{
+		if (!isset($this->arrData[$strKey]) || !is_callable($this->arrData[$strKey]))
+		{
+			throw new \InvalidArgumentException("$strKey is not set or not a callable");
+		}
+
+		return call_user_func_array($this->arrData[$strKey], $arrParams);
+	}
+
+
+	/**
 	 * Check whether a property is set
 	 *
 	 * @param string $strKey The property name
