@@ -116,6 +116,20 @@ abstract class Template extends \Controller
 
 
 	/**
+	 * Add support for callable variables (usually closures)
+	 *
+	 * @param string
+	 * @param array
+	 *
+	 * @return mixed
+	 */
+	public function __call($strName, $arrArguments)
+	{
+		return call_user_func_array($this->$strName, $arrArguments);
+	}
+
+
+	/**
 	 * Check whether a property is set
 	 *
 	 * @param string $strKey The property name
