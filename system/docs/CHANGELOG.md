@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### Improved
+Pass additional parameters to the "insertTagFlags" hooks (see #5806).
+
+### Improved
 Added a generic `Model::findMultipleByIds()` method (see #5805).
 
 ### Updated
