@@ -2566,7 +2566,7 @@ abstract class Controller extends \System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']));
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
