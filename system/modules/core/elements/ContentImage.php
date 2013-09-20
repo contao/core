@@ -57,7 +57,8 @@ class ContentImage extends \ContentElement
 
 			return '';
 		}
-		elseif (!is_file(TL_ROOT . '/' . $objFile->path))
+
+		if (!is_file(TL_ROOT . '/' . $objFile->path))
 		{
 			return '';
 		}

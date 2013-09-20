@@ -63,7 +63,7 @@ class Dbafs
 		$arrPaths    = array();
 		$arrChunks   = explode('/', $strResource);
 		$strPath     = array_shift($arrChunks);
-		$arrPids     = array($strPath=>0);
+		$arrPids     = array($strPath => null);
 		$arrUpdate   = array($strResource);
 		$objDatabase = \Database::getInstance();
 
@@ -141,7 +141,8 @@ class Dbafs
 			$strParent = dirname($strPath);
 
 			// The parent ID should be in $arrPids
-			if (isset($arrPids[$strParent]))
+			// Do not use isset() here, because the PID can be null
+			if (array_key_exists($strParent, $arrPids))
 			{
 				$strPid = $arrPids[$strParent];
 			}
@@ -226,7 +227,7 @@ class Dbafs
 		// Set the new parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 		{
-			$objFile->pid = 0;
+			$objFile->pid = null;
 		}
 		else
 		{
@@ -298,7 +299,7 @@ class Dbafs
 		// Set the new parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 		{
-			$objNewFile->pid = 0;
+			$objNewFile->pid = null;
 		}
 		else
 		{
@@ -512,7 +513,7 @@ class Dbafs
 				// Get the parent ID
 				if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
-					$strPid = 0;
+					$strPid = null;
 				}
 				else
 				{

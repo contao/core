@@ -490,7 +490,7 @@ class Updater extends \Controller
 		$this->Database->query("UPDATE `tl_files` SET `pid_backup`=`pid`");
 		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` binary(16) NULL");
 		$this->Database->query("UPDATE `tl_files` SET `pid`=NULL");
-		$this->Database->query("UPDATE `tl_files` SET `pid`=0 WHERE `pid_backup`=0");
+		$this->Database->query("UPDATE `tl_files` SET `pid`=NULL WHERE `pid_backup`=0");
 
 		$objFiles = $this->Database->query("SELECT id FROM tl_files");
 
