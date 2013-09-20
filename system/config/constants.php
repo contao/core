@@ -39,7 +39,7 @@ define('COLORPICKER', '1.3');
 define('DATEPICKER', '2.0.0');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');
-define('SLIMBOX', '1.71');
+define('SLIMBOX', '1.8');
 define('SWIPE', '2.0');
 
 

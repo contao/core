@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Updated
+Updated slimbox to version 1.8 (see #5747).
+
 ### Improved
 Show error messages if a user is logged into the install tool (see #5001).
 
