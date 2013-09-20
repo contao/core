@@ -615,18 +615,18 @@ class Theme extends \Backend
 						// Replace the file paths in singleSRC fields with their tl_files ID
 						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
 						{
-							if ($value === null)
+							if (!$value)
 							{
-								$value = ''; // the field cannot be NULL
+								$value = null; // Contao >= 3.2
 							}
-							elseif ($value != '')
+							else
 							{
 								// Do not use the FilesModel here – tables are locked!
-								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
 														  ->execute($value);
 
-								$value = $objFile->id;
+								$value = $objFile->uuid;
 							}
 						}
 
@@ -646,11 +646,11 @@ class Theme extends \Backend
 									}
 
 									// Do not use the FilesModel here – tables are locked!
-									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
 															  ->execute($vv);
 
-									$tmp[$kk] = $objFile->id;
+									$tmp[$kk] = $objFile->uuid;
 								}
 
 								$value = ($name == 'orderSRC' || $name == 'orderExt') ? implode(',', $tmp) : serialize($tmp);
