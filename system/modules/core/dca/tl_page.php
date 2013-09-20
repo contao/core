@@ -36,6 +36,10 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			array('tl_page', 'updateSitemap'),
 			array('tl_page', 'generateArticle')
 		),
+		'ondelete_callback' => array
+		(
+			array('tl_page', 'purgeSearchIndex')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -1080,6 +1084,25 @@ class tl_page extends Backend
 		$arrSet['published'] = $dc->activeRecord->published;
 
 		$this->Database->prepare("INSERT INTO tl_article %s")->set($arrSet)->execute();
+	}
+
+
+	/**
+	 * Purge the search index if a page is being deleted
+	 * @param \DataContainer
+	 */
+	public function purgeSearchIndex(DataContainer $dc)
+	{
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		$this->Database->prepare("DELETE FROM tl_search_index WHERE pid IN(SELECT id FROM tl_search WHERE pid=?)")
+					   ->execute($dc->id);
+
+		$this->Database->prepare("DELETE FROM tl_search WHERE pid=?")
+					   ->execute($dc->id);
 	}
 
 

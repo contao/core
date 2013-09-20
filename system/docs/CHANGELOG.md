@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### Improved
+Purge the search index if a page is deleted (see #5897).
+
+### Improved
 Pass additional parameters to the "insertTagFlags" hooks (see #5806).
 
 ### Improved
