@@ -5,6 +5,25 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### New
+Support using closures as DCA callbacks (see #5772).
+
+```
+$GLOBALS['TL_DCA']['tl_content'] = array
+(
+  'config' => array
+  (
+    'onload_callback' => array
+    (
+      function($dc) {
+        // Your custom code
+      },
+      array('tl_content', 'showJsLibraryHint')
+    )
+  )
+);
+```
+
+### New
 Templates now support adding callables (see #6176).
 
 ### Fixed

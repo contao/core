@@ -207,6 +207,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 
@@ -654,8 +658,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncreate_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strTable, $insertID, $this->set, $this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this->strTable, $insertID, $this->set, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($this->strTable, $insertID, $this->set, $this);
+						}
 					}
 				}
 
@@ -734,8 +745,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncut_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 
@@ -913,8 +931,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($insertID, $this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($insertID, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($insertID, $this);
+						}
 					}
 				}
 
@@ -1402,6 +1427,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						$this->import($callback[0]);
 						$this->$callback[0]->$callback[1]($this);
 					}
+					elseif (is_callable($callback))
+					{
+						$callback($this);
+					}
 				}
 			}
 
@@ -1781,6 +1810,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								$this->import($callback[0]);
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 
 						$this->objActiveRecord->{$this->strField} = $this->varValue;
@@ -1855,8 +1888,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this);
+					}
 				}
 			}
 
@@ -1870,8 +1910,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($this->strTable, $this->intId, $this);
+						}
 					}
 				}
 
@@ -2128,8 +2175,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -2148,13 +2202,20 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Save record
 				if (\Input::post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 				{
-					// Call onsubmit_callback
+					// Call the onsubmit_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this);
+							}
+							elseif (is_callable($callback))
+							{
+								$callback($this);
+							}
 						}
 					}
 
@@ -2168,8 +2229,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						{
 							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+								if (is_array($callback))
+								{
+									$this->import($callback[0]);
+									$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+								}
+								elseif (is_callable($callback))
+								{
+									$callback($this->strTable, $this->intId, $this);
+								}
 							}
 						}
 
@@ -2401,13 +2469,20 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Post processing
 					if (!$this->noReload)
 					{
-						// Call onsubmit_callback
+						// Call the onsubmit_callback
 						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
 						{
 							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this);
+								if (is_array($callback))
+								{
+									$this->import($callback[0]);
+									$this->$callback[0]->$callback[1]($this);
+								}
+								elseif (is_callable($callback))
+								{
+									$callback($this);
+								}
 							}
 						}
 
@@ -2421,8 +2496,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							{
 								foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 								{
-									$this->import($callback[0]);
-									$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+									if (is_array($callback))
+									{
+										$this->import($callback[0]);
+										$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+									}
+									elseif (is_callable($callback))
+									{
+										$callback($this->strTable, $this->intId, $this);
+									}
 								}
 							}
 
@@ -2685,8 +2767,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrData['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$varValue = $callback($varValue, $this);
+				}
 			}
 		}
 
@@ -2847,8 +2936,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
 			{
-				$this->import($callback[0]);
-				$status = $this->$callback[0]->$callback[1]($this->strTable, $new_records[$this->strTable], $ptable, $ctable);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$status = $this->$callback[0]->$callback[1]($this->strTable, $new_records[$this->strTable], $ptable, $ctable);
+				}
+				elseif (is_callable($callback))
+				{
+					$status = $callback($this->strTable, $new_records[$this->strTable], $ptable, $ctable);
+				}
 
 				if ($status === true)
 				{
@@ -3106,6 +3202,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->import($strClass);
 				$_buttons = $this->$strClass->$strMethod($this, array('id'=>0), $table, false, $arrClipboard);
 			}
+			elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['paste_button_callback']))
+			{
+				$_buttons = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['paste_button_callback']($this, array('id'=>0), $table, false, $arrClipboard);
+			}
 			else
 			{
 				$imagePasteInto = \Image::getHtml('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]);
@@ -3129,8 +3229,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$callbacks .= $this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$callbacks .= $this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callbacks .= $callback($this);
+					}
 				}
 			}
 
@@ -3366,6 +3473,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->import($strClass);
 			$return .= $this->$strClass->$strMethod($objRow->row(), $label, $this, '', false, $blnProtected);
 		}
+		elseif (is_callable($GLOBALS['TL_DCA'][$table]['list']['label']['label_callback']))
+		{
+			$return .= $GLOBALS['TL_DCA'][$table]['list']['label']['label_callback']($objRow->row(), $label, $this, '', false, $blnProtected);
+		}
 		else
 		{
 			$return .= \Image::getHtml('iconPLAIN.gif', '') . ' ' . $label;
@@ -3395,6 +3506,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				$this->import($strClass);
 				$_buttons .= $this->$strClass->$strMethod($this, $objRow->row(), $table, $blnCircularReference, $arrClipboard, $childs, $previous, $next);
+			}
+			elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['paste_button_callback']))
+			{
+				$_buttons .= $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['paste_button_callback']($this, $objRow->row(), $table, $blnCircularReference, $arrClipboard, $childs, $previous, $next);
 			}
 			else
 			{
@@ -3628,6 +3743,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->import($strClass);
 				$add = $this->$strClass->$strMethod($add, $this);
 			}
+			elseif (is_callable($GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']))
+			{
+				$add = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']($add, $this);
+			}
 
 			// Output the header data
 			$return .= '
@@ -3719,15 +3838,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 </div>';
 			}
 
-			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']))
+			// Call the child_record_callback
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']) || is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']))
 			{
-				$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback'][0];
-				$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback'][1];
-
-				$this->import($strClass);
-				$row = $objOrderBy->fetchAllAssoc();
 				$strGroup = '';
 				$blnIndent = false;
+				$row = $objOrderBy->fetchAllAssoc();
 
 				// Make items sortable
 				if ($blnHasSorting)
@@ -3837,7 +3953,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						}
 					}
 
-					$return .= '</div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']))
+					{
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback'][1];
+
+						$this->import($strClass);
+						$return .= '</div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
+					}
+					elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']))
+					{
+						$return .= '</div>'.$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_callback']($row[$i]).'</div>';
+					}
 
 					// Make items sortable
 					if ($blnHasSorting)
@@ -3875,8 +4002,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$callbacks .= $this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$callbacks .= $this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callbacks .= $callback($this);
+					}
 				}
 			}
 
@@ -3945,6 +4079,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 						$this->import($strClass);
 						$keys = $this->$strClass->$strMethod($this);
+					}
+					elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback']))
+					{
+						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$key]['options_callback']($this);
 					}
 					else
 					{
@@ -4210,14 +4348,21 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				$colspan = 1;
 
-				// Call the label callback ($row, $label, $this)
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
+				// Call the label_callback ($row, $label, $this)
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']) || is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
 				{
-					$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][0];
-					$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][1];
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
+					{
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][1];
 
-					$this->import($strClass);
-					$args = $this->$strClass->$strMethod($row, $label, $this, $args);
+						$this->import($strClass);
+						$args = $this->$strClass->$strMethod($row, $label, $this, $args);
+					}
+					elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
+					{
+						$args = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']($row, $label, $this, $args);
+					}
 
 					// Handle strings and arrays (backwards compatibility)
 					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'])
@@ -4267,8 +4412,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$callbacks .= $this->$callback[0]->$callback[1]($this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$callbacks .= $this->$callback[0]->$callback[1]($this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callbacks .= $callback($this);
+						}
 					}
 				}
 
@@ -4336,6 +4488,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					{
 						$this->import($arrCallback[0]);
 						$panel = $this->$arrCallback[0]->$arrCallback[1]($this);
+					}
+					elseif (is_callable($arrCallback))
+					{
+						$panel = $arrCallback($this);
 					}
 				}
 
@@ -4962,14 +5118,21 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$options = array_unique($options);
 				$options_callback = array();
 
-				// Load options callback
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']) && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'])
+				// Call the options_callback
+				if ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']) || is_callable($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'])) && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'])
 				{
-					$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][0];
-					$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][1];
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']))
+					{
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][1];
 
-					$this->import($strClass);
-					$options_callback = $this->$strClass->$strMethod($this);
+						$this->import($strClass);
+						$options_callback = $this->$strClass->$strMethod($this);
+					}
+					elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']))
+					{
+						$options_callback = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']($this);
+					}
 
 					// Sort options according to the keys of the callback array
 					$options = array_intersect(array_keys($options_callback), $options);
@@ -5237,6 +5400,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$this->import($strClass);
 			$group = $this->$strClass->$strMethod($group, $mode, $field, $row, $this);
+		}
+		elseif (is_callable($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback']))
+		{
+			$group = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback']($group, $mode, $field, $row, $this);
 		}
 
 		return $group;

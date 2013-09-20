@@ -1241,6 +1241,10 @@ abstract class Widget extends \Controller
 			$arrCallback = $arrData['options_callback'];
 			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]($objDca);
 		}
+		elseif (is_callable($arrData['options_callback']))
+		{
+			$arrData['options'] = $arrData['options_callback']($objDca);
+		}
 
 		// Foreign key
 		elseif (isset($arrData['foreignKey']))

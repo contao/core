@@ -57,6 +57,10 @@ class DC_File extends \DataContainer implements \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 	}
@@ -249,6 +253,10 @@ class DC_File extends \DataContainer implements \editable
 								$this->import($callback[0]);
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -314,8 +322,15 @@ class DC_File extends \DataContainer implements \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callack($this);
+					}
 				}
 			}
 
@@ -397,8 +412,15 @@ class DC_File extends \DataContainer implements \editable
 		{
 			foreach ($arrData['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$varValue = $callback($varValue, $this);
+				}
 			}
 		}
 

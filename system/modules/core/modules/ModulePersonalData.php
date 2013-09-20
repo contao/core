@@ -89,6 +89,10 @@ class ModulePersonalData extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -165,6 +169,10 @@ class ModulePersonalData extends \Module
 						$this->import($callback[0]);
 						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this->User, $this);
+					}
 				}
 			}
 
@@ -213,11 +221,17 @@ class ModulePersonalData extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, $this->User, $this);
+							}
 						}
 						catch (\Exception $e)
 						{
@@ -286,6 +300,10 @@ class ModulePersonalData extends \Module
 					{
 						$this->import($callback[0]);
 						$this->$callback[0]->$callback[1]($this->User, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this->User, $this);
 					}
 				}
 			}

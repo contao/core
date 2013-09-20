@@ -177,6 +177,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 
@@ -352,8 +356,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$callbacks .= $this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$callbacks .= $this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callbacks .= $callback($this);
+					}
 				}
 			}
 
@@ -670,6 +681,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($source, $this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($source, $this);
+				}
 			}
 		}
 
@@ -823,8 +838,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_HOOKS']['postUpload'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($arrUploaded);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($arrUploaded);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($arrUploaded);
+					}
 				}
 			}
 
@@ -1019,6 +1041,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 								$this->import($callback[0]);
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -1103,8 +1129,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this);
+					}
 				}
 			}
 
@@ -1118,8 +1151,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($this->strTable, $objFile->id, $this);
+						}
 					}
 				}
 
@@ -1271,8 +1311,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -1293,8 +1340,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this);
+							}
+							elseif (is_callable($callback))
+							{
+								$callback($this);
+							}
 						}
 					}
 
@@ -1308,8 +1362,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						{
 							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+								if (is_array($callback))
+								{
+									$this->import($callback[0]);
+									$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+								}
+								elseif (is_callable($callback))
+								{
+									$callback($this->strTable, $objFile->id, $this);
+								}
 							}
 						}
 
@@ -1625,8 +1686,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($arrData['save_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this);
+					}
 				}
 			}
 
@@ -1733,8 +1801,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($arrData['save_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this);
+					}
 				}
 			}
 

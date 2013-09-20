@@ -88,6 +88,10 @@ class ModuleRegistration extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -220,11 +224,17 @@ class ModuleRegistration extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, null);
+							}
 						}
 						catch (\Exception $e)
 						{
