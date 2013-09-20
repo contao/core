@@ -1923,15 +1923,15 @@ abstract class Controller extends \System
 			{
 				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ';';
 			}
-			elseif ($top == $bottom && $right == $left && ($top > 0 && $right > 0 || $top < 0 && $right < 0))
+			elseif ($top == $bottom && $right == $left && ($strType == 'margin' || $top > 0 && $right > 0 || $top < 0 && $right < 0))
 			{
 				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
 			}
-			elseif ($top != $bottom && $right == $left && ($top > 0 && $right > 0 && $bottom > 0 || $top < 0 && $right < 0 && $bottom < 0))
+			elseif ($top != $bottom && $right == $left && ($strType == 'margin' || $top > 0 && $right > 0 && $bottom > 0 || $top < 0 && $right < 0 && $bottom < 0))
 			{
 				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ';';
 			}
-			else if ($top > 0 && $right > 0 && $bottom > 0 && $left > 0 || $top < 0 && $right < 0 && $bottom < 0 && $left < 0)
+			else if ($strType == 'margin' || $top > 0 && $right > 0 && $bottom > 0 && $left > 0 || $top < 0 && $right < 0 && $bottom < 0 && $left < 0)
 			{
 				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
 			}
