@@ -26,6 +26,14 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 ### New
 Templates now support adding callables (see #6176).
 
+```
+$this->Template->sum = function($a, $b) {
+  return $a + $b;
+}
+
+<?php echo $this->sum(3, 4); ?>
+```
+
 ### Fixed
 Remove the left-over uses of `inactiveModules` (see #6142).
 
