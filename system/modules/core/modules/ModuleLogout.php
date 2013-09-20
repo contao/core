@@ -66,7 +66,10 @@ class ModuleLogout extends \Module
 		// Redirect to last page visited
 		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))
 		{
-			$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
+			// Redirect home if the last page visited is protected
+			$objLastPageVisited = \PageModel::findByIdOrAlias($this->getPageIdFromUrl($_SESSION['LAST_PAGE_VISITED']));
+
+			$strRedirect = ($objLastPageVisited->protected) ? \Environment::get('base') : $_SESSION['LAST_PAGE_VISITED'];
 		}
 
 		// Redirect to jumpTo page
