@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Improved
+Show error messages if a user is logged into the install tool (see #5001).
+
 ### New
 Support using closures as DCA callbacks (see #5772).
 

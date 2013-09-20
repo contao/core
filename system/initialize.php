@@ -184,10 +184,18 @@ if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.p
 
 
 /**
- * Set error_reporting
+ * Set error_reporting (see #5001)
  */
-@ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
+if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && Input::cookie('TL_INSTALL_AUTH') == $_SESSION['TL_INSTALL_AUTH'] && $_SESSION['TL_INSTALL_EXPIRE'] > time())
+{
+	@ini_set('display_errors', 1);
+	@error_reporting(E_ALL|E_STRICT);
+}
+else
+{
+	@ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
+	error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
+}
 
 
 /**
