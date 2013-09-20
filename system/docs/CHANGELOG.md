@@ -13,9 +13,6 @@ Remove the left-over uses of `inactiveModules` (see #6142).
 ### Fixed
 Consider all extensions when scanning for `fileTree` fields (see #6058).
 
-### New
-Added a PDO MySQL database driver (see #5635).
-
 ### Changed
 Use unique IDs in the database assisted file system (see #5757).
 

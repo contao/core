@@ -47,16 +47,10 @@ abstract class Result
 	protected $strQuery;
 
 	/**
-	 * Current index
-	 * @var integer
-	 */
-	private $intIndex = -1;
-
-	/**
 	 * Current row index
 	 * @var integer
 	 */
-	private $intRowIndex = -1;
+	private $intIndex = -1;
 
 	/**
 	 * End indicator
@@ -114,13 +108,13 @@ abstract class Result
 	 */
 	public function __set($strKey, $varValue)
 	{
-		if ($this->intIndex < 0)
+		if (empty($this->arrCache))
 		{
-			$this->first();
+			$this->next();
 		}
 
 		$this->blnModified = true;
-		$this->arrCache[$this->intIndex][$strKey] = $varValue;
+		$this->arrCache[$strKey] = $varValue;
 	}
 
 
@@ -133,12 +127,12 @@ abstract class Result
 	 */
 	public function __isset($strKey)
 	{
-		if ($this->intIndex < 0)
+		if (empty($this->arrCache))
 		{
-			$this->first();
+			$this->next();
 		}
 
-		return isset($this->arrCache[$this->intIndex][$strKey]);
+		return isset($this->arrCache[$strKey]);
 	}
 
 
@@ -177,13 +171,13 @@ abstract class Result
 				break;
 
 			default:
-				if ($this->intIndex < 0)
+				if (empty($this->arrCache))
 				{
-					$this->first();
+					$this->next();
 				}
-				if (isset($this->arrCache[$this->intIndex][$strKey]))
+				if (isset($this->arrCache[$strKey]))
 				{
-					return $this->arrCache[$this->intIndex][$strKey];
+					return $this->arrCache[$strKey];
 				}
 				break;
 		}
@@ -195,44 +189,38 @@ abstract class Result
 	/**
 	 * Fetch the current row as enumerated array
 	 *
-	 * @return array The row as array
+	 * @return array|false The row as enumerated array or false if there is no row
 	 */
 	public function fetchRow()
 	{
-		if (!isset($this->arrCache[++$this->intIndex]))
+		if (($arrRow = $this->fetch_row()) == false)
 		{
-			if (($arrRow = $this->fetch_row()) == false)
-			{
-				--$this->intIndex;
-				return false;
-			}
-
-			$this->arrCache[$this->intIndex] = $arrRow;
+			return false;
 		}
 
-		return array_values($this->arrCache[$this->intIndex]);
+		++$this->intIndex;
+		$this->arrCache = $arrRow;
+
+		return $arrRow;
 	}
 
 
 	/**
 	 * Fetch the current row as associative array
 	 *
-	 * @return array The row as associative array
+	 * @return array|false The row as associative array or false if there is no row
 	 */
 	public function fetchAssoc()
 	{
-		if (!isset($this->arrCache[++$this->intIndex]))
+		if (($arrRow = $this->fetch_assoc()) == false)
 		{
-			if (($arrRow = $this->fetch_assoc()) == false)
-			{
-				--$this->intIndex;
-				return false;
-			}
-
-			$this->arrCache[$this->intIndex] = $arrRow;
+			return false;
 		}
 
-		return $this->arrCache[$this->intIndex];
+		++$this->intIndex;
+		$this->arrCache = $arrRow;
+
+		return $arrRow;
 	}
 
 
@@ -245,10 +233,10 @@ abstract class Result
 	 */
 	public function fetchEach($strKey)
 	{
+		$this->reset();
 		$arrReturn = array();
-		$this->fetchAllAssoc();
 
-		foreach ($this->arrCache as $arrRow)
+		while (($arrRow = $this->fetchAssoc()) !== false)
 		{
 			if ($strKey != 'id' && isset($arrRow['id']))
 			{
@@ -271,13 +259,14 @@ abstract class Result
 	 */
 	public function fetchAllAssoc()
 	{
-		do
-		{
-			$blnHasNext = $this->fetchAssoc();
-		}
-		while ($blnHasNext);
+		$this->reset();
 
-		return $this->arrCache;
+		while (($arrRow = $this->fetchAssoc()) !== false)
+		{
+			$arrReturn[] = $arrRow;
+		}
+
+		return $arrReturn;
 	}
 
 
@@ -304,16 +293,21 @@ abstract class Result
 	/**
 	 * Go to the first row of the current result
 	 *
-	 * @return \Database\Result The result object
+	 * @return \Database\Result|boolean The result object or false if there is no first row
 	 */
 	public function first()
 	{
-		if (!$this->arrCache)
+		$this->intIndex = 0;
+		$this->data_seek($this->intIndex);
+
+		if (($arrRow = $this->fetch_assoc()) == false)
 		{
-			$this->arrCache[++$this->intRowIndex] = $this->fetchAssoc();
+			return false;
 		}
 
-		$this->intIndex = 0;
+		$this->blnDone = false;
+		$this->arrCache = $arrRow;
+
 		return $this;
 	}
 
@@ -331,6 +325,16 @@ abstract class Result
 		}
 
 		--$this->intIndex;
+		$this->data_seek($this->intIndex);
+
+		if (($arrRow = $this->fetch_assoc()) == false)
+		{
+			return false;
+		}
+
+		$this->blnDone = false;
+		$this->arrCache = $arrRow;
+
 		return $this;
 	}
 
@@ -347,21 +351,14 @@ abstract class Result
 			return false;
 		}
 
-		if (!isset($this->arrCache[++$this->intIndex]))
+		if (($arrRow = $this->fetch_assoc()) == false)
 		{
-			--$this->intIndex; // see #3762
-
-			if (($arrRow = $this->fetchAssoc()) == false)
-			{
-				$this->blnDone = true;
-				return false;
-			}
-
-			$this->arrCache[$this->intIndex] = $arrRow;
-			++$this->intRowIndex;
-
-			return $this;
+			$this->blnDone = true;
+			return false;
 		}
+
+		++$this->intIndex;
+		$this->arrCache = $arrRow;
 
 		return $this;
 	}
@@ -370,17 +367,20 @@ abstract class Result
 	/**
 	 * Go to the last row of the current result
 	 *
-	 * @return \Database\Result The result object
+	 * @return \Database\Result|boolean The result object or false if there is no last row
 	 */
 	public function last()
 	{
-		if (!$this->blnDone)
+		$this->intIndex = $this->count() - 1;
+		$this->data_seek($this->intIndex);
+
+		if (($arrRow = $this->fetch_assoc()) == false)
 		{
-			$this->arrCache = $this->fetchAllAssoc();
+			return false;
 		}
 
 		$this->blnDone = true;
-		$this->intIndex = $this->intRowIndex = count($this->arrCache) - 1;
+		$this->arrCache = $arrRow;
 
 		return $this;
 	}
@@ -406,12 +406,12 @@ abstract class Result
 	 */
 	public function row($blnEnumerated=false)
 	{
-		if ($this->intIndex < 0)
+		if (empty($this->arrCache))
 		{
-			$this->first();
+			$this->next();
 		}
 
-		return $blnEnumerated ? array_values($this->arrCache[$this->intIndex]) : $this->arrCache[$this->intIndex];
+		return $blnEnumerated ? array_values($this->arrCache) : $this->arrCache;
 	}
 
 
@@ -424,6 +424,9 @@ abstract class Result
 	{
 		$this->intIndex = -1;
 		$this->blnDone = false;
+		$this->data_seek(0);
+		$this->arrCache = array();
+
 		return $this;
 	}
 
@@ -468,6 +471,14 @@ abstract class Result
 	 * @return array An array with the column information
 	 */
 	abstract protected function fetch_field($intOffset);
+
+
+	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 */
+	abstract protected function data_seek($intIndex);
 
 
 	/**

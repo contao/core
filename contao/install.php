@@ -420,10 +420,6 @@ class InstallTool extends Backend
 		{
 			$arrDrivers[] = 'MySQLi';
 		}
-		if (class_exists('PDO', false))
-		{
-			$arrDrivers[] = 'PDO_MySQL';
-		}
 		if (function_exists('mysql_connect'))
 		{
 			$arrDrivers[] = 'MySQL';

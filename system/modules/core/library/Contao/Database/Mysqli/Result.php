@@ -81,6 +81,17 @@ class Result extends \Database\Result
 
 
 	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 */
+	protected function data_seek($intIndex)
+	{
+		$this->resResult->data_seek($intIndex);
+	}
+
+
+	/**
 	 * Free the result
 	 */
 	public function free()
