@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Improved
+Added a generic `Model::findMultipleByIds()` method (see #5805).
+
 ### Updated
 Updated slimbox to version 1.8 (see #5747).
 

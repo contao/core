@@ -464,6 +464,40 @@ abstract class Model
 
 
 	/**
+	 * Find multiple records by their IDs
+	 *
+	 * @param array $arrIds     An array of IDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no records
+	 */
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	{
+		if (empty($arrIds) || !is_array($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		$arrOptions = array_merge
+		(
+			array
+			(
+				'column' => array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"),
+				'value'  => null,
+				'order'  => \Database::getInstance()->findInSet("$t.id", $arrIds),
+				'return' => 'Collection'
+			),
+
+			$arrOptions
+		);
+
+		return static::find($arrOptions);
+	}
+
+
+	/**
 	 * Find a single record by various criteria
 	 *
 	 * @param mixed $strColumn  The property name
