@@ -42,9 +42,9 @@ How to access the back end
 Open your web browser and add `/contao` to the URL of your website. Here are a
 few examples:
 
- * `http://www.yourdomain.com/contao`
- * `http://www.yourdomain.com/contao/contao`
- * `http://www.yourdomain.com/contao-3.1.0/contao`
+ * `http://www.example.com/contao`
+ * `http://www.example.com/contao/contao`
+ * `http://www.example.com/contao-3.1.0/contao`
 
 
 Troubleshooting

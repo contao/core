@@ -152,7 +152,7 @@ $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
  *
  * Here you can enable FTP for managing files and folders ("Safe Mode Hack").
  *
- *   ftpHost = host name (e.g. domain.com or domain.com:21)
+ *   ftpHost = host name (e.g. example.com or example.com:21)
  *   ftpPath = path to installation (e.g. html/)
  *   ftpUser = FTP username
  *   ftpPass = FTP password
