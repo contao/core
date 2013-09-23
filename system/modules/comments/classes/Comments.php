@@ -431,7 +431,7 @@ class Comments extends \Frontend
 	 * - [url][/url]
 	 * - [url=http://][/url]
 	 * - [email][/email]
-	 * - [email=name@domain.com][/email]
+	 * - [email=name@example.com][/email]
 	 * @param string
 	 * @return string
 	 */
