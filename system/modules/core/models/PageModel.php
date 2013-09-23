@@ -105,7 +105,7 @@ class PageModel extends \Model
 		}
 		else
 		{
-			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND ($t.language=? OR $t.fallback=1)");
 			$arrValues = array($strHost, $varLanguage);
 
 			if (!isset($arrOptions['order']))

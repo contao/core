@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Fixed
+Show the 404 page of the language fallback website if the requested language
+does not exist (see #5709).
+
 ### New
 Added the "nullIfEmpty" flag to the "eval" section of the DCA (see #6186).
 
