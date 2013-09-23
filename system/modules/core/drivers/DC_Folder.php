@@ -1163,7 +1163,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 				}
 
-				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Table edit()', TL_GENERAL);
+				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Folder edit()', TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -1374,7 +1374,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Table editAll()', TL_GENERAL);
+						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Folder editAll()', TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)

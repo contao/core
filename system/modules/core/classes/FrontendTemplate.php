@@ -167,7 +167,7 @@ class FrontendTemplate extends \Template
 		// Not all $_GET parameters have been used (see #4277)
 		if ($blnCheckRequest && \Input::hasUnusedGet())
 		{
-			return;
+			throw new \UnusedArgumentsException();
 		}
 
 		// Index page if searching is allowed and there is no back end user

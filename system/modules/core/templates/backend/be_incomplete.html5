@@ -35,7 +35,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
 
       <h3><?php echo $lang->howToFix; ?></h3>
       <p><?php echo $lang->incompleteFixOne; ?></p>
-      <pre>http://www.domain.com/<?php echo $lang->installPath; ?><b>/contao/install.php</b></pre>
+      <pre>http://www.example.com/<?php echo $lang->installPath; ?><b>/contao/install.php</b></pre>
       <p><?php echo $lang->incompleteFixTwo; ?></p>
 
       <h3><?php echo $lang->more; ?></h3>

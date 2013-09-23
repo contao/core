@@ -49,8 +49,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Load the database object
+	 *
+	 * Make the constructor public, so pages can be instantiated (see #6182)
 	 */
-	protected function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->import('Database');
@@ -453,28 +455,24 @@ abstract class Frontend extends \Controller
 	{
 		global $objPage;
 
+		// Always redirect if there are additional arguments (see #5734)
+		$blnForceRedirect = ($strParams !== null || $strForceLang !== null);
+
 		if (is_array($intId))
 		{
-			if ($intId['id'] == '' || $intId['id'] == $objPage->id)
+			if ($intId['id'] != '')
 			{
-				$this->reload();
-			}
-			else
-			{
-				$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
+				if ($intId['id'] != $objPage->id  || $blnForceRedirect)
+				{
+					$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
+				}
 			}
 		}
 		elseif ($intId > 0)
 		{
-			if ($intId == $objPage->id)
+			if ($intId != $objPage->id || $blnForceRedirect)
 			{
-				$this->reload();
-			}
-			else
-			{
-				$objNextPage = \PageModel::findPublishedById($intId);
-
-				if ($objNextPage !== null)
+				if (($objNextPage = \PageModel::findPublishedById($intId)) !== null)
 				{
 					$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
 				}

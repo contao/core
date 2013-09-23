@@ -221,25 +221,31 @@ class Index extends Frontend
 		// Load the page object depending on its type
 		$objHandler = new $GLOBALS['TL_PTY'][$objPage->type]();
 
-		switch ($objPage->type)
+		try
 		{
-			case 'root':
-			case 'error_404':
-				$objHandler->generate($pageId);
-				break;
+			// Generate the page
+			switch ($objPage->type)
+			{
+				case 'root':
+				case 'error_404':
+					$objHandler->generate($pageId);
+					break;
 
-			case 'error_403':
-				$objHandler->generate($pageId, $objRootPage);
-				break;
+				case 'error_403':
+					$objHandler->generate($pageId, $objRootPage);
+					break;
 
-			default:
-				$objHandler->generate($objPage, true);
-				break;
+				default:
+					$objHandler->generate($objPage, true);
+					break;
+			}
 		}
-
-		// If we get here, something went wrong (see #4277)
-		$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-		$objHandler->generate($pageId);
+		catch (UnusedArgumentsException $e)
+		{
+			// Render the error page (see #5570)
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
 
 		// Stop the script (see #4565)
 		exit;

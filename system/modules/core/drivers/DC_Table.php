@@ -5146,8 +5146,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$value = $blnDate ? $kk : $vv;
 
+					// Options callback
+					if (!empty($options_callback) && is_array($options_callback))
+					{
+						$vv = $options_callback[$vv];
+					}
+
 					// Replace the ID with the foreign key
-					if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
+					elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
 					{
 						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'], 2);
 
@@ -5165,12 +5171,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isBoolean'] || ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple']))
 					{
 						$vv = ($vv != '') ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
-					}
-
-					// Options callback
-					elseif (!empty($options_callback) && is_array($options_callback))
-					{
-						$vv = $options_callback[$vv];
 					}
 
 					// Get the name of the parent record (see #2703)
