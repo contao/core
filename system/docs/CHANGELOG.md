@@ -4,6 +4,15 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+The "file" insert tag now also handles UUIDs (see #5512).
+
+```
+<img src="{{file::bb643d42-0026-ba97-11e3-ccd6e14e1c8a}}" alt="">
+```
+
+The insert tag can also be used in the internal style sheet editor.
+
 ### Improved
 Purge the search index if a page is deleted (see #5897).
 

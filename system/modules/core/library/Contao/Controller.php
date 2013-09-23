@@ -1567,43 +1567,55 @@ abstract class Controller extends \System
 					}
 					break;
 
-				// Files from the templates directory
+				// Files (UUID or template path)
 				case 'file':
-					$arrGet = $_GET;
-					\Input::resetCache();
-					$strFile = $elements[1];
-
-					// Take arguments and add them to the $_GET array
-					if (strpos($elements[1], '?') !== false)
+					if (\Validator::isUuid($elements[1]))
 					{
-						$arrChunks = explode('?', urldecode($elements[1]));
-						$strSource = \String::decodeEntities($arrChunks[1]);
-						$strSource = str_replace('[&]', '&', $strSource);
-						$arrParams = explode('&', $strSource);
+						$objFile = \FilesModel::findByUuid(\String::uuidToBin($elements[1]));
 
-						foreach ($arrParams as $strParam)
+						if ($objFile !== null)
 						{
-							$arrParam = explode('=', $strParam);
-							$_GET[$arrParam[0]] = $arrParam[1];
+							$arrCache[$strTag] = $objFile->path;
+						}
+					}
+					else
+					{
+						$arrGet = $_GET;
+						\Input::resetCache();
+						$strFile = $elements[1];
+
+						// Take arguments and add them to the $_GET array
+						if (strpos($elements[1], '?') !== false)
+						{
+							$arrChunks = explode('?', urldecode($elements[1]));
+							$strSource = \String::decodeEntities($arrChunks[1]);
+							$strSource = str_replace('[&]', '&', $strSource);
+							$arrParams = explode('&', $strSource);
+
+							foreach ($arrParams as $strParam)
+							{
+								$arrParam = explode('=', $strParam);
+								$_GET[$arrParam[0]] = $arrParam[1];
+							}
+
+							$strFile = $arrChunks[0];
 						}
 
-						$strFile = $arrChunks[0];
+						// Sanitize path
+						$strFile = str_replace('../', '', $strFile);
+
+						// Include .php, .tpl, .xhtml and .html5 files
+						if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
+						{
+							ob_start();
+							include TL_ROOT . '/templates/' . $strFile;
+							$arrCache[$strTag] = ob_get_contents();
+							ob_end_clean();
+						}
+
+						$_GET = $arrGet;
+						\Input::resetCache();
 					}
-
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
-
-					// Include .php, .tpl, .xhtml and .html5 files
-					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
-					{
-						ob_start();
-						include TL_ROOT . '/templates/' . $strFile;
-						$arrCache[$strTag] = ob_get_contents();
-						ob_end_clean();
-					}
-
-					$_GET = $arrGet;
-					\Input::resetCache();
 					break;
 
 				// HOOK: pass unknown tags to callback functions
