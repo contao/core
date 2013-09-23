@@ -174,7 +174,7 @@ class Index extends Frontend
 		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found'); # FIXME: add an error screen
+			die_nicely('be_no_page', 'Page not found');
 		}
 
 		// Check wether the language matches the root page language
