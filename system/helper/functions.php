@@ -127,18 +127,28 @@ function show_help_message()
 	}
 
 	header('HTTP/1.1 500 Internal Server Error');
+	die_nicely('be_error', 'An error occurred while executing this script!');
+}
 
-	if (file_exists(TL_ROOT . '/templates/be_error.html5'))
+
+/**
+ * Try to die with a template instead of just a message
+ * @param string
+ * @param string
+ */
+function die_nicely($strTemplate, $strFallback)
+{
+	if (file_exists(TL_ROOT . "/templates/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/templates/be_error.html5';
+		include TL_ROOT . "/templates/$strTemplate.html5";
 	}
-	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_error.html5'))
+	elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/system/modules/core/templates/backend/be_error.html5';
+		include TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5";
 	}
 	else
 	{
-		echo 'An error occurred while executing this script!';
+		echo $strFallback;
 	}
 
 	exit;
