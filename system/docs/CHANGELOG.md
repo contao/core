@@ -5,6 +5,9 @@ Version 3.1.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not redirect to protected pages after logout (see #6210).
+
+### Fixed
 Consider the additional arguments in `Frontend::jumpToOrReload()` (see #5734).
 
 ### Fixed
