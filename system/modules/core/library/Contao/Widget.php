@@ -319,6 +319,7 @@ abstract class Widget extends \Controller
 			case 'storeValues':
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
+			case 'nullIfEmpty':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -372,6 +373,10 @@ abstract class Widget extends \Controller
 				if ($this->arrConfiguration['encrypt'])
 				{
 					return \Encryption::encrypt($this->varValue);
+				}
+				elseif ($this->arrConfiguration['nullIfEmpty'] && $this->varValue == '')
+				{
+					return null;
 				}
 				return $this->varValue;
 				break;

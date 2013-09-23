@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+Added the "nullIfEmpty" flag to the "eval" section of the DCA (see #6186).
+
 ### Improved
 Only cache the languages which are in use (see #6013).
 

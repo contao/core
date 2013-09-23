@@ -2743,7 +2743,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if (!is_array($varValue) || empty($varValue))
 				{
-					$varValue = '';
+					$varValue = $arrData['eval']['nullIfEmpty'] ? null : '';
 				}
 				elseif (isset($arrData['eval']['csv']))
 				{
