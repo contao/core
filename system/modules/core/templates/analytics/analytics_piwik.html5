@@ -4,13 +4,13 @@
  * To use this script, please fill in your Piwik site ID and Piwik URL below
  */
 $PiwikSite = 0;
-$PiwikPath = 'www.domain.tld/piwik/';
+$PiwikPath = 'www.example.com/piwik/';
 
 
 /**
  * DO NOT EDIT ANYTHING BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING!
  */
-if ($PiwikSite > 0 && $PiwikPath != 'www.domain.tld/piwik/' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'BE_USER_AUTH') != Input::cookie('BE_USER_AUTH')): ?>
+if ($PiwikSite > 0 && $PiwikPath != 'www.example.com/piwik/' && !BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'BE_USER_AUTH') != Input::cookie('BE_USER_AUTH')): ?>
 
 <script>
   var _paq = _paq || [];
