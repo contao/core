@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Improved
+Use translatable error screens wherever the application dies.
+
 ### Fixed
 Show the 404 page of the language fallback website if the requested language
 does not exist (see #5709).

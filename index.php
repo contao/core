@@ -169,12 +169,12 @@ class Index extends Frontend
 			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
-		// Exit if the root page has not been published (see #2425) and
-		// do not try to load the 404 page! It can cause an infinite loop.
+		// Exit if the root page has not been published (see #2425)
+		// Do not try to load the 404 page, it can cause an infinite loop!
 		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found');
+			die_nicely('be_no_page', 'Page not found');
 		}
 
 		// Check wether the language matches the root page language

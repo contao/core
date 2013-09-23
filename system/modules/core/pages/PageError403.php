@@ -55,7 +55,7 @@ class PageError403 extends \Frontend
 		if ($obj403 === null)
 		{
 			header('HTTP/1.1 403 Forbidden');
-			die('Forbidden');
+			die_nicely('be_forbidden', 'Forbidden');
 		}
 
 		// Generate the error page
@@ -79,7 +79,7 @@ class PageError403 extends \Frontend
 		{
 			header('HTTP/1.1 403 Forbidden');
 			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);
-			die('Forward page not found');
+			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
