@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Changed
+Render the file tree view based on the eval flags "isGallery" and "isDownloads"
+instead of making it depend on the "type" column (see #5884).
+
 ### Improved
 Add tooltips to the preview height togglers (see #6213).
 

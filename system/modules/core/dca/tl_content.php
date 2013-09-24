@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getContentElements'),
 			'reference'               => &$GLOBALS['TL_LANG']['CTE'],
-			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true, 'gallery_types'=>array('gallery'), 'downloads_types'=>array('downloads')),
+			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'headline' => array
@@ -528,7 +528,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'mandatory'=>true),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'load_callback' => array
+			(
+				array('tl_content', 'setFileTreeFlags')
+			)
 		),
 		'orderSRC' => array
 		(
@@ -1518,6 +1522,30 @@ class tl_content extends Backend
 									 ->execute($row['id']);
 
 		return $objElement->numRows ? Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ' : '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Dynamically set the "isGallery" or "isDownloads" flag depending on the type
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function setFileTreeFlags($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+			if ($dc->activeRecord->type == 'gallery')
+			{
+				$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isGallery'] = true;
+			}
+			elseif ($dc->activeRecord->type == 'downloads')
+			{
+				$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isDownloads'] = true;
+			}
+		}
+
+		return $varValue;
 	}
 
 
