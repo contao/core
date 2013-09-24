@@ -1815,9 +1815,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								$this->varValue = $callback($this->varValue, $this);
 							}
 						}
-
-						$this->objActiveRecord->{$this->strField} = $this->varValue;
 					}
+
+					// Re-set the current value
+					$this->objActiveRecord->{$this->strField} = $this->varValue;
 
 					// Build the row and pass the current palette string (thanks to Tristan Lins)
 					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
