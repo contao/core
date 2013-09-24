@@ -12,6 +12,9 @@
 	color:#444;
 	line-height:1;
 }
+#debug > * {
+	z-index:998; /* see #6205 */
+}
 #debug p {
 	margin:0;
 	padding:12px 10px;

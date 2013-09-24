@@ -66,7 +66,7 @@ class Versions extends \Backend
 
 		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE fromTable=? AND pid=?")
 									 ->limit(1)
-									 ->executeUncached($this->strTable, $this->intPid);
+									 ->execute($this->strTable, $this->intPid);
 
 		if ($objVersion->count < 1)
 		{
@@ -92,7 +92,7 @@ class Versions extends \Backend
 		// Get the new record
 		$objRecord = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 									->limit(1)
-									->executeUncached($this->intPid);
+									->execute($this->intPid);
 
 		if ($objRecord->numRows < 1 || $objRecord->tstamp < 1)
 		{
@@ -103,7 +103,7 @@ class Versions extends \Backend
 		$this->import('BackendUser', 'User');
 
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-									 ->executeUncached($this->intPid, $this->strTable);
+									 ->execute($this->intPid, $this->strTable);
 
 		if ($objVersion->version !== null)
 		{

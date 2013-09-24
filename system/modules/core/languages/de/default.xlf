@@ -117,6 +117,10 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>Die Datei %s übersteigt die maximale Bildhöhe von %d Pixel!</target>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>Fehler %s beim Hochladen der Datei %s!</target>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
         <target>%s kann nicht nach %s verschoben werden, da das Ziel existiert!</target>

@@ -13,7 +13,7 @@
       <?php endforeach; ?>
     </video>
   <?php else: ?>
-    <audio preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
+    <audio<?php echo $this->size; ?> preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
       <?php foreach ($this->files as $file): ?>
         <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" title="<?php echo $file->title; ?>" />
       <?php endforeach; ?>

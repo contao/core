@@ -96,10 +96,10 @@ abstract class Model
 		if ($objResult !== null)
 		{
 			$arrRelated = array();
-			$this->setRow($objResult->row()); // see #5439
+			$arrData = $objResult->row();
 
 			// Look for joined fields
-			foreach ($this->arrData as $k=>$v)
+			foreach ($arrData as $k=>$v)
 			{
 				if (strpos($k, '__') !== false)
 				{
@@ -111,7 +111,7 @@ abstract class Model
 					}
 
 					$arrRelated[$key][$field] = $v;
-					unset($this->arrData[$k]);
+					unset($arrData[$k]);
 				}
 			}
 
@@ -132,6 +132,8 @@ abstract class Model
 					$this->arrRelated[$key]->setRow($row);
 				}
 			}
+
+			$this->setRow($arrData); // see #5439
 		}
 
 		$this->objResult = $objResult;
@@ -320,7 +322,7 @@ abstract class Model
 		{
 			// Reload the model data (might have been modified by default values or triggers)
 			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->executeUncached($this->{static::$strPk});
+										   ->execute($this->{static::$strPk});
 
 			$this->setRow($res->row());
 		}
@@ -334,9 +336,12 @@ abstract class Model
 	 */
 	public function delete()
 	{
-		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									   ->execute($this->{static::$strPk})
-									   ->affectedRows;
+		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+											   ->execute($this->{static::$strPk})
+											   ->affectedRows;
+
+		$this->arrData[static::$strPk] = null; // see #6162
+		return $intAffected;
 	}
 
 
@@ -358,10 +363,16 @@ abstract class Model
 			return $this->arrRelated[$strKey];
 		}
 
-		// The field or relation does not exist
-		if (!isset($this->$strKey) || !isset($this->arrRelations[$strKey]))
+		// The relation does not exist
+		if (!isset($this->arrRelations[$strKey]))
 		{
 			throw new \Exception("Field $strKey does not seem to be related");
+		}
+
+		// The relation exists but there is no reference yet (see #6161)
+		if (!isset($this->$strKey))
+		{
+			return null;
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
@@ -536,7 +547,9 @@ abstract class Model
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 *
-	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
+	 * @return \Model|\Model\Collection A model or model collection
+	 *
+	 * @throws \Exception If the method name is invalid
 	 */
 	public static function __callStatic($name, $args)
 	{
@@ -551,7 +564,7 @@ abstract class Model
 			return call_user_func_array('static::findOneBy', $args);
 		}
 
-		return null;
+		throw new \Exception("Unknown method $name");
 	}
 
 
@@ -600,20 +613,7 @@ abstract class Model
 		}
 
 		$objStatement = static::preFind($objStatement);
-
-		// Optionally execute (un)cached (see #5102)
-		if (isset($arrOptions['cached']) && $arrOptions['cached'])
-		{
-			$objResult = $objStatement->executeCached($arrOptions['value']);
-		}
-		elseif (isset($arrOptions['uncached']) && $arrOptions['uncached'])
-		{
-			$objResult = $objStatement->executeUncached($arrOptions['value']);
-		}
-		else
-		{
-			$objResult = $objStatement->execute($arrOptions['value']);
-		}
+		$objResult = $objStatement->execute($arrOptions['value']);
 
 		if ($objResult->numRows < 1)
 		{
@@ -681,7 +681,7 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		return (int) \Database::getInstance()->prepare($strQuery)->executeUncached($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

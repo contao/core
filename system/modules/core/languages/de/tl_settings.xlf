@@ -174,8 +174,8 @@
         <target>Die Sprache zur URL hinzufügen</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>Die Sprache als ersten Parameter zur URL hinzufügen (z.B. &lt;em&gt;http://domain.tld/de/&lt;/em&gt;).</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Die Sprache als ersten Parameter zur URL hinzufügen (z.B. &lt;em&gt;http://example.com/de/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>

@@ -174,8 +174,7 @@
         <target>ယူအာအယ်သို့ဘာသာစကားထည့်</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>ပထမယူအာအယ်ကန့်သတ်ချက်ဘောင်ကဲ့သို့ဘာသာစကားအက္ခရာအတွဲထည့်သွင်း (ဥပမာ &lt;em&gt;http://domain.tld/en/&lt;/em&gt;)။</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>

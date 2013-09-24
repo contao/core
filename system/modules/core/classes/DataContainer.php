@@ -304,7 +304,6 @@ class DataContainer extends \Backend
 					{
 						$this->noReload = true;
 						$objWidget->addError($e->getMessage());
-						$this->blnCreateNewRecord = false;
 					}
 				}
 			}

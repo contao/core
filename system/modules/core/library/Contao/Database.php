@@ -191,32 +191,6 @@ abstract class Database
 
 
 	/**
-	 * Execute a query and do not cache the result
-	 *
-	 * @param string $strQuery The query string
-	 *
-	 * @return \Database\Result The Database\Result object
-	 */
-	public function executeUncached($strQuery)
-	{
-		return $this->prepare($strQuery)->executeUncached();
-	}
-
-
-	/**
-	 * Always execute the query and add or replace an existing cache entry
-	 *
-	 * @param string $strQuery The query string
-	 *
-	 * @return \Database\Result The Database\Result object
-	 */
-	public function executeCached($strQuery)
-	{
-		return $this->prepare($strQuery)->executeCached();
-	}
-
-
-	/**
 	 * Execute a raw query and return a Database\Result object
 	 *
 	 * @param string $strQuery The query string
@@ -723,4 +697,34 @@ abstract class Database
 	 * @return \Database\Statement The Database\Statement object
 	 */
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
+
+
+	/**
+	 * Execute a query and do not cache the result
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Result The Database\Result object
+	 *
+	 * @deprecated Use \Database::execute() instead
+	 */
+	public function executeUncached($strQuery)
+	{
+		return $this->execute($strQuery);
+	}
+
+
+	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Result The Database\Result object
+	 *
+	 * @deprecated Use \Database::execute() instead
+	 */
+	public function executeCached($strQuery)
+	{
+		return $this->execute($strQuery);
+	}
 }

@@ -406,8 +406,8 @@
         <target>Taille du lecteur</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>Largeur et hauteur du lecteur multimédia en pixels (ex. : 640x480). Ne concerne que les vidéos.</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>Largeur et hauteur du lecteur multimédia en pixels (ex : 640x480).</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

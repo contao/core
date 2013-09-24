@@ -171,8 +171,7 @@
         <target>اضافه کردن زبان به نشانی وب</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>رشته زبان را به صورت پارامتر اول نشانی وب اضافه می‌کند (مانند &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>

@@ -236,7 +236,7 @@ abstract class Statement
 
 
 	/**
-	 * Load from cache or execute the query and cache the result
+	 * Execute the query and return the result object
 	 *
 	 * @return \Database\Result The result object
 	 */
@@ -250,71 +250,7 @@ abstract class Statement
 		}
 
 		$this->replaceWildcards($arrParams);
-		$strKey = md5($this->strQuery);
-
-		// Try to load the result from cache
-		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
-		{
-			return self::$arrCache[$strKey]->reset();
-		}
-
-		$objResult = $this->query();
-
-		// Cache the result object
-		if ($objResult instanceof \Database\Result)
-		{
-			self::$arrCache[$strKey] = $objResult;
-		}
-
-		return $objResult;
-	}
-
-
-	/**
-	 * Bypass the cache and always execute the query
-	 *
-	 * @return \Database\Result The result object
-	 */
-	public function executeUncached()
-	{
-		$arrParams = func_get_args();
-
-		if (is_array($arrParams[0]))
-		{
-			$arrParams = array_values($arrParams[0]);
-		}
-
-		$this->replaceWildcards($arrParams);
 		return $this->query();
-	}
-
-
-	/**
-	 * Always execute the query and add or replace an existing cache entry
-	 *
-	 * @return \Database\Result The result object
-	 */
-	public function executeCached()
-	{
-		$arrParams = func_get_args();
-
-		if (is_array($arrParams[0]))
-		{
-			$arrParams = array_values($arrParams[0]);
-		}
-
-		$this->replaceWildcards($arrParams);
-
-		$objResult = $this->query();
-		$strKey = md5($this->strQuery);
-
-		// Cache the result object
-		if ($objResult instanceof \Database\Result)
-		{
-			self::$arrCache[$strKey] = $objResult;
-		}
-
-		return $objResult;
 	}
 
 
@@ -552,4 +488,29 @@ abstract class Statement
 	 */
 	abstract protected function createResult($resResult, $strQuery);
 
+
+	/**
+	 * Bypass the cache and always execute the query
+	 *
+	 * @return \Database\Result The result object
+	 *
+	 * @deprecated Use Database\Statement::execute() instead
+	 */
+	public function executeUncached()
+	{
+		return call_user_func_array(array($this, 'execute'), func_get_args());
+	}
+
+
+	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @return \Database\Result The result object
+	 *
+	 * @deprecated Use Database\Statement::execute() instead
+	 */
+	public function executeCached()
+	{
+		return call_user_func_array(array($this, 'execute'), func_get_args());
+	}
 }

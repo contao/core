@@ -1008,9 +1008,9 @@ class tl_content extends Backend
 
 	/**
 	 * Show a hint if a JavaScript library needs to be included in the page layout
-	 * @param \DataContainer
+	 * @param object
 	 */
-	public function showJsLibraryHint(DataContainer $dc)
+	public function showJsLibraryHint($dc)
 	{
 		if ($_POST || Input::get('act') != 'edit')
 		{

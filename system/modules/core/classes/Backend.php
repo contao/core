@@ -279,7 +279,7 @@ abstract class Backend extends \Controller
 				{
 					$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
 											 ->limit(1)
-											 ->executeUncached(CURRENT_ID);
+											 ->execute(CURRENT_ID);
 
 					if ($objRow->title != '')
 					{
@@ -341,7 +341,7 @@ abstract class Backend extends \Controller
 				{
 					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
 											 ->limit(1)
-											 ->executeUncached(\Input::get('id'));
+											 ->execute(\Input::get('id'));
 
 					$this->Template->headline .= ' » ' . $objRow->name;
 					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
@@ -350,7 +350,7 @@ abstract class Backend extends \Controller
 					{
 						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
 												 ->limit(1)
-												 ->executeUncached(CURRENT_ID);
+												 ->execute(CURRENT_ID);
 
 						$this->Template->headline .= ' » ' . $objRow->name;
 					}
@@ -359,14 +359,14 @@ abstract class Backend extends \Controller
 				{
 					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
 											 ->limit(1)
-											 ->executeUncached(\Input::get('id'));
+											 ->execute(\Input::get('id'));
 
 					$this->Template->headline .= ' » ' . $objRow->name;
 					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
 
 					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
 											 ->limit(1)
-											 ->executeUncached(CURRENT_ID);
+											 ->execute(CURRENT_ID);
 
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
@@ -380,7 +380,7 @@ abstract class Backend extends \Controller
 					{
 						$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
 												 ->limit(1)
-												 ->executeUncached(CURRENT_ID);
+												 ->execute(CURRENT_ID);
 
 						if ($objRow->title != '')
 						{

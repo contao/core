@@ -240,7 +240,10 @@ class Main extends Backend
 		$this->Template->isPopup = Input::get('popup');
 
 		// Hide the cache message in the repository manager (see #5966)
-		$this->Template->needsCacheBuild = (!$GLOBALS['TL_CONFIG']['bypassCache'] && (Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && $this->User->isAdmin)
+		{
+			$this->Template->needsCacheBuild = ((Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
+		}
 
 		// Front end preview links
 		if (defined('CURRENT_ID') && CURRENT_ID != '')

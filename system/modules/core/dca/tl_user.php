@@ -415,7 +415,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'lastLogin' => array
 		(
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotShow'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'currentLogin' => array

@@ -118,6 +118,7 @@ class ModuleCustomnav extends \Module
 		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
+		$objTemplate->cssID = $this->cssID; // see #4897 and 6129
 		$objTemplate->level = 'level_1';
 
 		foreach ($arrPages as $arrPage)
