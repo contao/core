@@ -172,8 +172,7 @@
         <target>Dodaj jezik k URL naslovom</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>Dodaj jezikovno oznako kot prvi parameter v URL naslovu (npr. &lt;em&gt;http://domain.tld/sl/&lt;/em&gt;).</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>

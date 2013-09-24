@@ -404,8 +404,7 @@
         <target>Atskaņotāja izmērs</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>Mediju atskaņotāja platums un augstums pikseļos (piem. 640x480). Attiecas tikai uz video.</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

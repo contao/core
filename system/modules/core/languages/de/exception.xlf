@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
-        <target>Weitere Informationen finden Sie im &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao-Installationshandbuch&lt;/a&gt;.</target>
+        <target>Weitere Informationen finden Sie im &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao-Handbuch&lt;/a&gt;.</target>
       </trans-unit>
     </body>
   </file>

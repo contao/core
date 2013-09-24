@@ -406,8 +406,8 @@
         <target>播放器大小</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>以像素值表示的播放器的宽度和高度(仅适用于视频)。</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>媒体播放器的宽和高（以像素为单位） (如：640x480).</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

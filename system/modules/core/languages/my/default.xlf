@@ -117,6 +117,9 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target> %s ဖိုင်သည် %d အစက်အပြောက်များအများဆံုးပံုအမြင့်ထက်ကျော်လွန်!</target>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
         <target>ရည်မှန်းချက်တည်ရှိနေ၍ %s မှ %s သို့မရွေ့နိုင်!</target>

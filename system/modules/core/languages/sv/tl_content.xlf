@@ -406,8 +406,7 @@
         <target>Spelarstorlek</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>Bredd och höjd på mediaspelaren angivet i pixlar (t.ex. 640x480). Gäller enbart för videofilmer.</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

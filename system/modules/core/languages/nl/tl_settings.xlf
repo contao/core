@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandsynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
+        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandssynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -174,8 +174,8 @@
         <target>Voeg taal toe aan de URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>Voeg taal reeks als eerste URL-parameter (bv. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Voeg taal reeks als eerste URL-parameter (bv. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>

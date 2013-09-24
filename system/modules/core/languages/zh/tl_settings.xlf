@@ -174,8 +174,8 @@
         <target>在URL中添加语言</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
-        <target>添加语言字符串作为URL第一个参数 (如：&lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</target>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>添加语言代码字符串作为URL第一个参数 (如：&lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
