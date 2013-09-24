@@ -117,6 +117,10 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>Súbor %s presahuje maximálnu výšku %d bodov!</target>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>Vyskytla sa chyba %s počas nahrávania súboru %s!</target>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
         <target>Nemôžte premiestniť %s do %s pretože cieľ existuje!</target>
@@ -2149,7 +2153,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="DP.use_mouse_wheel">
         <source>Use the mouse wheel to quickly change value</source>
-        <target>Použite &quot;koliesko&quot; myši na rýchlejšie určenie času</target>
+        <target>Použite koliesko myši na rýchlejšie určenie času</target>
       </trans-unit>
       <trans-unit id="DP.time_confirm_button">
         <source>OK</source>

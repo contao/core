@@ -406,8 +406,7 @@
         <target>ဖွင့်စက်အရွယ်အစား</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>အစက်အပြောက်များတွင်ဖွင့်စက်၏အနံနှင့်အမြင့် (ဥပမာ ၆၄၀x၄၈၀)။ ဗီဒီယိုများအတွက်သာ။</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

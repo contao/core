@@ -115,6 +115,9 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>Datne %s pārsniedz maksimālo attēla augstumu - %d pikseļu!</target>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
         <target>Nevar pārvietot %s uz %s, jo mērķis eksistē!</target>

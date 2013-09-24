@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
-        <target>Veuillez saisir une locale valide comme &quot;en&quot; ou &quot;en_US&quot;.</target>
+        <target>Veuillez saisir une langue valide comme &quot;en&quot; ou &quot;en_US&quot;.</target>
       </trans-unit>
       <trans-unit id="ERR.language">
         <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
@@ -116,6 +116,10 @@
       <trans-unit id="ERR.fileheight">
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>L'image %s dépasse la hauteur maximale qui est de %d pixels.</target>
+      </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>Erreur %s rencontrée lors de l'envoi du fichier %s !</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>

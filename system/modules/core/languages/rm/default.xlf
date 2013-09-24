@@ -117,6 +117,10 @@
         <source>File %s exceeds the maximum image height of %d pixels!</source>
         <target>La datoteca %s surpassa l'autezza maximala (%d pixels) per maletgs!</target>
       </trans-unit>
+      <trans-unit id="ERR.fileerror">
+        <source>Error %s occurred when uploading file %s!</source>
+        <target>Errur %s cun transferir la datoteca %s!</target>
+      </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
         <target>Impussibel da spustar %s a %s perquai che questa destinaziun exista gia!</target>

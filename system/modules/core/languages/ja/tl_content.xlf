@@ -406,7 +406,7 @@
         <target>プレーヤーの大きさ</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
         <target>ピクセル単位のメディアプレーヤーの幅と高さです。(例: 640x480)</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">

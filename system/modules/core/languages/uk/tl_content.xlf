@@ -406,8 +406,7 @@
         <target>Розмір плеєру</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
-        <source>Width and height of the media player in pixels (e.g. 640x480). Applies to videos only.</source>
-        <target>Ширина та висота медіа-плеєру в пікселях (напр. 640x480). Тільки для відео.</target>
+        <source>Width and height of the media player in pixels (e.g. 640x480).</source>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
