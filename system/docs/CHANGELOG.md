@@ -1,7 +1,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.1.3 (2013-XX-XX)
+Version 3.1.3 (2013-09-24)
 --------------------------
 
 ### Fixed
@@ -40,10 +40,6 @@ Do not exit after a template has been output (see #5570).
 ### Changed
 Drop the database query cache (see #6070). This renders `executeUncached()` and
 `executeCached()` deprecated. Use `execute()` instead.
-
-### Fixed
-Update the `Database_Result` object when updating a model (see #6070). This
-will invalidate the query cache and prevent data inconsistencies.
 
 ### Fixed
 Handle all possible errors when uploading files (see #5934).
