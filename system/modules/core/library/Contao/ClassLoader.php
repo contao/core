@@ -23,7 +23,7 @@ namespace Contao;
  * Usage:
  *
  *     ClassLoader::addNamespace('Custom');
- *     ClassLoader::addClass('Custom\\Calendar', 'calendar/Calendar.php');
+ *     ClassLoader::addClass('Custom\\Calendar', 'calendar/Calendar.php');i
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
@@ -149,7 +149,7 @@ class ClassLoader
 				$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 			}
 
-			include TL_ROOT . '/' . self::$classes[$class];
+			include_once TL_ROOT . '/' . self::$classes[$class];
 		}
 
 		// Find the class in the registered namespaces
@@ -160,7 +160,7 @@ class ClassLoader
 				$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
 			}
 
-			include TL_ROOT . '/' . self::$classes[$namespaced];
+			include_once TL_ROOT . '/' . self::$classes[$namespaced];
 			class_alias($namespaced, $class);
 		}
 
@@ -209,7 +209,7 @@ class ClassLoader
 		// Try to load from cache
 		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
-			include TL_ROOT . '/' . $strCacheFile;
+			include_once TL_ROOT . '/' . $strCacheFile;
 		}
 		else
 		{
@@ -219,7 +219,7 @@ class ClassLoader
 
 				if (file_exists(TL_ROOT . '/' . $file))
 				{
-					include TL_ROOT . '/' . $file;
+					include_once TL_ROOT . '/' . $file;
 				}
 			}
 		}
