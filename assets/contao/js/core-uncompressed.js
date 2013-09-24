@@ -903,8 +903,13 @@ var Backend =
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
+				'title': Contao.lang.expand,
 				'width': 20,
 				'height': 24
+			});
+
+			new Tips.Contao(toggler, {
+				offset: {x:0, y:30}
 			});
 
 			// Disable the function if the preview height is below the max-height
@@ -920,7 +925,14 @@ var Backend =
 			toggler.addEvent('click', function() {
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
-				this.src = (this.src.indexOf('expand.gif') != -1) ? path + 'collapse.gif' : path + 'expand.gif';
+
+				if (this.src.indexOf('expand.gif') != -1) {
+					this.src = path + 'collapse.gif';
+					this.store('tip:title', Contao.lang.collapse);
+				} else {
+					this.src = path + 'expand.gif';
+					this.store('tip:title', Contao.lang.expand);
+				}
 			});
 
 			toggler.inject(div, 'after');

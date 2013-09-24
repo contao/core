@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### Improved
+Add tooltips to the preview height togglers (see #6213).
+
+### Improved
 Use translatable error screens wherever the application dies.
 
 ### Fixed
