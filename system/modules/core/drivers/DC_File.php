@@ -277,15 +277,36 @@ class DC_File extends \DataContainer implements \editable
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
 		}
 
-		// Add some buttons and end the form
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+		$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
+			}
+		}
+
+		// Add the buttons and end the form
 		$return .= '
 </div>
 
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>

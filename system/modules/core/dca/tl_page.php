@@ -1473,10 +1473,17 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically generate the folder URL aliases
-	 * @return string
+	 * @param array
+	 * @return array
 	 */
-	public function addAliasButton()
+	public function addAliasButton($arrButtons)
 	{
+		if (Input::get('act') != 'select')
+		{
+			return $arrButtons;
+		}
+
+		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
@@ -1521,7 +1528,10 @@ class tl_page extends Backend
 			$this->redirect($this->getReferer());
 		}
 
-		return '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+		// Add the button
+		$arrButtons['alias'] = '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+
+		return $arrButtons;
 	}
 
 

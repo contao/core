@@ -4,6 +4,14 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Changed
+Allow to alter any button set via the "buttons_callback" (see #4691). This
+includes any edit, edit multiple, select or upload form and also includes the
+option to unset or replace the default buttons.
+
+[BC-BREAK] If you have been using the "buttons_callback" in version 3.0 or 3.1,
+you will have to adjust your code to reflect the changes!
+
 ### Improved
 Show the release notes when installing or upgrading an extension (see #5058).
 

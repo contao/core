@@ -1839,18 +1839,54 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$version = '';
 		}
 
-		// Add some buttons and end the form
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+
+		if (!\Input::get('nb'))
+		{
+			$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+		}
+
+		if (!\Input::get('popup') && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'])
+		{
+			$arrButtons['saveNcreate'] = '<input type="submit" name="saveNcreate" id="saveNcreate" class="tl_submit" accesskey="n" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNcreate']).'">';
+		}
+
+		if (\Input::get('s2e'))
+		{
+			$arrButtons['saveNedit'] = '<input type="submit" name="saveNedit" id="saveNedit" class="tl_submit" accesskey="e" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNedit']).'">';
+		}
+		elseif (!\Input::get('popup') && ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4 || strlen($this->ptable) || $GLOBALS['TL_DCA'][$this->strTable]['config']['switchToEdit']))
+		{
+			$arrButtons['saveNback'] = '<input type="submit" name="saveNback" id="saveNback" class="tl_submit" accesskey="g" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNback']).'">';
+		}
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
+			}
+		}
+
+		// Add the buttons and end the form
 		$return .= '
 </div>
 
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">' . (\Input::get('nb') ? '' : '
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'"> ') . (!\Input::get('popup') && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
-<input type="submit" name="saveNcreate" id="saveNcreate" class="tl_submit" accesskey="n" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNcreate']).'"> ' : '') . (\Input::get('s2e') ? '
-<input type="submit" name="saveNedit" id="saveNedit" class="tl_submit" accesskey="e" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNedit']).'"> ' : (!\Input::get('popup') && ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4 || strlen($this->ptable) || $GLOBALS['TL_DCA'][$this->strTable]['config']['switchToEdit']) ? '
-<input type="submit" name="saveNback" id="saveNback" class="tl_submit" accesskey="g" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNback']).'"> ' : '')) .'
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -2259,6 +2295,28 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 			}
 
+			// Submit buttons
+			$arrButtons = array();
+			$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+			$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+			// Call the buttons_callback (see #4691)
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$arrButtons = $callback($arrButtons, $this);
+					}
+				}
+			}
+
 			// Add the form
 			$return = '
 
@@ -2276,8 +2334,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -2375,7 +2432,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
 </div>
 
 </div>
@@ -2567,6 +2624,28 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars(implode(',', $formFields)).'">
 </div>';
 
+			// Submit buttons
+			$arrButtons = array();
+			$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+			$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+			// Call the buttons_callback (see #4691)
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$arrButtons = $callback($arrButtons, $this);
+					}
+				}
+			}
+
 			// Add the form
 			$return = '
 
@@ -2584,8 +2663,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -2677,7 +2755,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
 </div>
 
 </div>
@@ -3223,9 +3301,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Close the form
 		if (\Input::get('act') == 'select')
 		{
-			$callbacks = '';
+			// Submit buttons
+			$arrButtons = array();
 
-			// Call the buttons_callback
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
+			{
+				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+			}
+
+			$arrButtons['cut'] = '<input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">';
+			$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
+			{
+				$arrButtons['override'] = '<input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">';
+				$arrButtons['edit'] = '<input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'">';
+			}
+
+			// Call the buttons_callback (see #4691)
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
@@ -3233,11 +3326,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$callbacks .= $this->$callback[0]->$callback[1]($this);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
 					}
 					elseif (is_callable($callback))
 					{
-						$callbacks .= $callback($this);
+						$arrButtons = $callback($arrButtons, $this);
 					}
 				}
 			}
@@ -3246,12 +3339,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <div class="tl_formbody_submit" style="text-align:right">
 
-<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
-  <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">
-  <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
-  <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
+<div class="tl_submit_container">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -3996,9 +4085,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Close form
 		if (\Input::get('act') == 'select')
 		{
-			$callbacks = '';
+			// Submit buttons
+			$arrButtons = array();
 
-			// Call the buttons_callback
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
+			{
+				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+			}
+
+			$arrButtons['cut'] = '<input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">';
+			$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
+			{
+				$arrButtons['override'] = '<input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">';
+				$arrButtons['edit'] = '<input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'">';
+			}
+
+			// Call the buttons_callback (see #4691)
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
@@ -4006,11 +4110,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$callbacks .= $this->$callback[0]->$callback[1]($this);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
 					}
 					elseif (is_callable($callback))
 					{
-						$callbacks .= $callback($this);
+						$arrButtons = $callback($arrButtons, $this);
 					}
 				}
 			}
@@ -4019,12 +4123,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <div class="tl_formbody_submit" style="text-align:right">
 
-<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
-  <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">
-  <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
-  <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
+<div class="tl_submit_container">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -4406,9 +4506,21 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Close the form
 			if (\Input::get('act') == 'select')
 			{
-				$callbacks = '';
+				// Submit buttons
+				$arrButtons = array();
 
-				// Call the buttons_callback
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
+				{
+					$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+				}
+
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
+				{
+					$arrButtons['override'] = '<input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">';
+					$arrButtons['edit'] = '<input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'">';
+				}
+
+				// Call the buttons_callback (see #4691)
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
@@ -4416,11 +4528,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						if (is_array($callback))
 						{
 							$this->import($callback[0]);
-							$callbacks .= $this->$callback[0]->$callback[1]($this);
+							$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
 						}
 						elseif (is_callable($callback))
 						{
-							$callbacks .= $callback($this);
+							$arrButtons = $callback($arrButtons, $this);
 						}
 					}
 				}
@@ -4429,10 +4541,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <div class="tl_formbody_submit" style="text-align:right">
 
-<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
-  <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'">
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
+<div class="tl_submit_container">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
