@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### New
+Add an `arc_[archive-id]` CSS class to all news list items (see #4998).
+
+### New
 You can now define a list of trusted proxy server IPs in the back end settings
 to improve identifying the user's remote address (see #5830).
 
