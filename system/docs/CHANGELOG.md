@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+If you are running Contao via an SSL proxy server, you can now set the proxy
+server domain in the back end settings (see #4615).
+
 ### Changed
 Allow to alter any button set via the "buttons_callback" (see #4691). This
 includes any edit, edit multiple, select or upload form and also includes the

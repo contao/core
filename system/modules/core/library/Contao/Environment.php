@@ -307,10 +307,23 @@ class Environment
 	 */
 	protected static function url()
 	{
-		$xhost = static::get('httpXForwardedHost');
-		$protocol = static::get('ssl') ? 'https://' : 'http://';
+		$host = static::get('httpHost');
 
-		return $protocol . (($xhost != '') ? $xhost . '/' : '') . static::get('httpHost');
+		// HTTP request
+		if (!static::get('ssl'))
+		{
+			return 'http://' . $host;
+		}
+
+		$xhost = static::get('httpXForwardedHost');
+
+		// SSL proxy
+		if ($xhost != '' && $host == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
+		{
+			$host = $host . '/' . $xhost;
+		}
+
+		return 'https://' . $host;
 	}
 
 
@@ -453,7 +466,10 @@ class Environment
 	 */
 	protected static function host()
 	{
-		return static::get('httpXForwardedHost') ?: static::get('httpHost');
+		$host = static::get('httpHost');
+		$xhost = static::get('httpXForwardedHost');
+
+		return ($xhost != '' && $host == $GLOBALS['TL_CONFIG']['sslProxyDomain']) ? $xhost : $host;
 	}
 
 

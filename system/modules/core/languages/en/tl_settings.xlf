@@ -116,6 +116,12 @@
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
       </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
       </trans-unit>
