@@ -244,11 +244,11 @@ abstract class Database
 		}
 
 		$arrReturn = array();
-		$arrTables = $this->query(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
+		$objTables = $this->query(sprintf($this->strListTables, $strDatabase));
 
-		foreach ($arrTables as $arrTable)
+		while ($objTables->next())
 		{
-			$arrReturn[] = current($arrTable);
+			$arrReturn[] = current($objTables->row());
 		}
 
 		$this->arrCache[$strDatabase] = $arrReturn;
