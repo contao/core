@@ -85,6 +85,9 @@ abstract class Frontend extends \Controller
 			list($strRequest) = explode('?', str_replace('index.php/', '', \Environment::get('request')), 2);
 		}
 
+		// URL decode here (see #6232)
+		$strRequest = rawurldecode($strRequest);
+
 		// The request string must not contain "auto_item" (see #4012)
 		if (strpos($strRequest, '/auto_item/') !== false)
 		{
@@ -249,8 +252,6 @@ abstract class Frontend extends \Controller
 		{
 			return false;
 		}
-
-		$arrFragments = array_map('urldecode', $arrFragments);
 
 		// Add the fragments to the $_GET array
 		for ($i=1, $c=count($arrFragments); $i<$c; $i+=2)
