@@ -86,6 +86,12 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		)
 	),
 
+	// Select
+	'select' => array
+	(
+		'buttons_callback' => array()
+	),
+
 	// Edit
 	'edit' => array
 	(

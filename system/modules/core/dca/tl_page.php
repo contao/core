@@ -148,8 +148,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		)
 	),
 
-	// Edit
-	'edit' => array
+	// Select
+	'select' => array
 	(
 		'buttons_callback' => array
 		(
@@ -1478,11 +1478,6 @@ class tl_page extends Backend
 	 */
 	public function addAliasButton($arrButtons)
 	{
-		if (Input::get('act') != 'select')
-		{
-			return $arrButtons;
-		}
-
 		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{

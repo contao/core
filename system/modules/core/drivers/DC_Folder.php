@@ -366,9 +366,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Call the buttons_callback (see #4691)
-			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['select']['buttons_callback']))
 			{
-				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['select']['buttons_callback'] as $callback)
 				{
 					if (is_array($callback))
 					{
