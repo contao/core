@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Changed
+Use `COLLATE utf8_bin` instead of `varbinary` to preserve case-sensitivity.
+
 ### New
 Back end users can now store their Google+ profile ID, which will then be used
 to add a `rel="author"` link in FAQs and news items (see #4914).

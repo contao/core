@@ -403,7 +403,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of tables and fields
 	 */
-	public function getFromDB()
+	public function getFromDb()
 	{
 		$this->import('Database');
 		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));
@@ -429,12 +429,22 @@ class Installer extends \Controller
 					unset($field['index']);
 
 					// Field type
-					if (strlen($field['length']))
+					if ($field['length'] != '')
 					{
 						$field['type'] .= '(' . $field['length'] . (($field['precision'] != '') ? ',' . $field['precision'] : '') . ')';
 
 						unset($field['length']);
 						unset($field['precision']);
+					}
+
+					// Variant collation
+					if ($field['collation'] != '' && $field['collation'] != $GLOBALS['TL_CONFIG']['dbCollation'])
+					{
+						$field['collation'] = 'COLLATE ' . $field['collation'];
+					}
+					else
+					{
+						unset($field['collation']);
 					}
 
 					// Default values
@@ -457,7 +467,7 @@ class Installer extends \Controller
 				}
 
 				// Indices
-				if (strlen($field['index']) && $field['index_fields'])
+				if (isset($field['index']) && $field['index_fields'])
 				{
 					$index_fields = implode('`, `', $field['index_fields']);
 

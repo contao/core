@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			(
 				array('tl_faq', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'author' => array
 		(
