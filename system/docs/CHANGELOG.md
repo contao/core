@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.4 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Correctly handle special characters in page aliases (see #6232).
+
+
 Version 3.1.3 (2013-09-24)
 --------------------------
 
