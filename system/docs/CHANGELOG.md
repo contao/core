@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Improved
+Show the release notes when installing or upgrading an extension (see #5058).
+
 ### New
 Add an `arc_[archive-id]` CSS class to all news list items (see #4998).
 
