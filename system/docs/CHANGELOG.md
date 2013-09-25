@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### New
+The form generator now supports defining a minimum input length (see #4394).
+
+### New
 If you are running Contao via an SSL proxy server, you can now set the proxy
 server domain in the back end settings (see #4615).
 
