@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+You can now define a list of trusted proxy server IPs in the back end settings
+to improve identifying the user's remote address (see #5830).
+
 ### Changed
 Use `COLLATE utf8_bin` instead of `varbinary` to preserve case-sensitivity.
 

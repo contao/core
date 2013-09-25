@@ -348,3 +348,4 @@ $GLOBALS['TL_CONFIG']['loadGoogleFonts']      = false;
 $GLOBALS['TL_CONFIG']['defaultFileChmod']     = 0644;
 $GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
 $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
+$GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
