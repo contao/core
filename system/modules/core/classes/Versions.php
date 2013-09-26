@@ -369,6 +369,8 @@ class Versions extends \Backend
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$objTemplate->output();
+
+		exit;
 	}
 
 
