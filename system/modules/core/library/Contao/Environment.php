@@ -308,29 +308,15 @@ class Environment
 	protected static function url()
 	{
 		$host = static::get('httpHost');
-
-		// HTTP request
-		if (!static::get('ssl'))
-		{
-			return 'http://' . $host;
-		}
-
 		$xhost = static::get('httpXForwardedHost');
 
 		// SSL proxy
-		if ($xhost != '' && $GLOBALS['TL_CONFIG']['sslProxyDomain'] != '')
+		if ($xhost != '' && $xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
 		{
-			if ($host == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
-			{
-				$host = $host . '/' . $xhost;
-			}
-			elseif ($xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
-			{
-				$host = $xhost . '/' . $host;
-			}
+			return 'https://' .  $xhost . '/' . $host;
 		}
 
-		return 'https://' . $host;
+		return (static::get('ssl') ? 'https://' : 'http://') . $host;
 	}
 
 
@@ -473,19 +459,7 @@ class Environment
 	 */
 	protected static function host()
 	{
-		$host = static::get('httpHost');
-		$xhost = static::get('httpXForwardedHost');
-
-		// SSL proxy
-		if ($xhost != '' && $GLOBALS['TL_CONFIG']['sslProxyDomain'] != '')
-		{
-			if ($host == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
-			{
-				$host = $xhost;
-			}
-		}
-
-		return $host;
+		return static::get('httpHost');
 	}
 
 
