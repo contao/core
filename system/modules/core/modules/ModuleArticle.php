@@ -179,9 +179,34 @@ class ModuleArticle extends \Module
 
 		if ($objCte !== null)
 		{
+			$intCount = 0;
+			$intLast = $objCte->count() - 1;
+
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte->current(), $this->strColumn);
+				$objRow = $objCte->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					$arrCss = deserialize($objRow->cssID);
+
+					if ($intCount == 0)
+					{
+						$arrCss[1] .= ' first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[1] .= ' last';
+					}
+
+					$arrCss[1] = trim($arrCss[1]);
+					$objRow->cssID = serialize($arrCss);
+				}
+
+				$arrElements[] = $this->getContentElement($objRow, $this->strColumn);
+				++$intCount;
 			}
 		}
 

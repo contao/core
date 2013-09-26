@@ -190,10 +190,10 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					$strBuffer = $this->getArticle($strArticle);
+					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
 
 					// Send a 404 header if the article does not exist
-					if ($strBuffer === false)
+					if ($objArticle === null)
 					{
 						// Do not index the page
 						$objPage->noSearch = 1;
@@ -203,7 +203,18 @@ abstract class Controller extends \System
 						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
-					return $strBuffer;
+					// Add the "first" and "last" classes (see #2583)
+					$arrCss = deserialize($objArticle->cssID);
+
+					if (!is_array($arrCss))
+					{
+						$arrCss = array('', '');
+					}
+
+					$arrCss[1] .= 'first last';
+					$objArticle->cssID = serialize($arrCss);
+
+					return $this->getArticle($objArticle);
 				}
 			}
 
@@ -222,11 +233,51 @@ abstract class Controller extends \System
 			}
 
 			$return = '';
+			$intCount = 0;
 			$blnMultiMode = ($objArticles->count() > 1);
+			$intLast = $objArticles->count() - 1;
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->current(), $blnMultiMode, false, $strColumn);
+				$objRow = $objArticles->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					$arrCss = deserialize($objRow->cssID);
+					$arrTeaserCss = deserialize($objRow->teaserCssID);
+
+					if (!is_array($arrCss))
+					{
+						$arrCss = array('', '');
+					}
+
+					if (!is_array($arrTeaserCss))
+					{
+						$arrTeaserCss = array('', '');
+					}
+
+					if ($intCount == 0)
+					{
+						$arrCss[1] .= ' first';
+						$arrTeaserCss[1] .= ' first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[1] .= ' last';
+						$arrTeaserCss[1] .= ' last';
+					}
+
+					$arrCss[1] = trim($arrCss[1]);
+					$objRow->cssID = serialize($arrCss);
+
+					$arrTeaserCss[1] = trim($arrTeaserCss[1]);
+					$objRow->teaserCssID = serialize($arrTeaserCss);
+				}
+
+				$return .= $this->getArticle($objRow, $blnMultiMode, false, $strColumn);
+				++$intCount;
 			}
 
 			return $return;

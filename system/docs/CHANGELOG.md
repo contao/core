@@ -5,6 +5,9 @@ Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
 ### New
+Add the CSS classes "first" and "last" to articles/content elements (see #2583).
+
+### New
 The form generator now supports defining a minimum input length (see #4394).
 
 ### New
