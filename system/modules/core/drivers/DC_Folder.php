@@ -322,7 +322,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$return = '
 <div id="tl_buttons">'.((\Input::get('act') == 'select') ? '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
-<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
+<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . ((!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
 </div>' . \Message::generate(true) . ((\Input::get('act') == 'select') ? '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
@@ -357,8 +357,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
 			}
 
-			$arrButtons['cut'] = '<input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">';
-			$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+			{
+				$arrButtons['cut'] = '<input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">';
+			}
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+			{
+				$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
+			}
 
 			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 			{
@@ -414,6 +421,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function create()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not creatable', 'DC_Folder create()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$this->import('Files');
 		$strFolder = \Input::get('pid', true);
 
@@ -439,6 +452,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function cut($source=null)
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cut()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$strFolder = \Input::get('pid', true);
 		$blnDoNotRedirect = ($source !== null);
 
@@ -510,6 +529,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function cutAll()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cutAll()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		// PID is mandatory
 		if (!strlen(\Input::get('pid', true)))
 		{
@@ -537,6 +562,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function copy($source=null, $destination=null)
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copy()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$strFolder = \Input::get('pid', true);
 		$blnDoNotRedirect = ($source !== null);
 
@@ -634,6 +665,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function copyAll()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copyAll()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		// PID is mandatory
 		if (!strlen(\Input::get('pid', true)))
 		{
@@ -2206,7 +2243,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 
 				// Upload button
-				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && \Input::get('act') != 'select')
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'] && \Input::get('act') != 'select')
 				{
 					$return .= ' <a href="'.$this->addToUrl('&amp;act=move&amp;mode=2&amp;pid='.$currentEncoded).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], $currentEncoded)).'">'.\Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['move'][0]).'</a>';
 				}

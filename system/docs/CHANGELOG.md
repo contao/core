@@ -4,6 +4,18 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### New
+Added new DCA table config flags (see #5254):
+
+ * `closed`: no new rows can be added at all
+ * `notEditable`: the rows cannot be edited
+ * `notDeletable`: the rows cannot be deleted
+ * `notSortable`: the order of the rows cannot be altered (new)
+ * `notCopyable`: existing rows cannot be duplicated (new)
+ * `notCreatable`: prevents to create rows but allows to duplicate rows (new)
+
+The `closed` flag hence is a combination of `notCreatable` and `notCopyable`.
+
 ### Improved
 Always show the save buttons in the modal windows (see #5985).
 
