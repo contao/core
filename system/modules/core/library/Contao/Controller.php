@@ -2078,21 +2078,25 @@ abstract class Controller extends \System
 	 */
 	public static function reload()
 	{
-		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		header('Location: ' . $strLocation);
+		$strLocation = \Environment::get('uri');
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
+		}
+		else
+		{
+			header('HTTP/1.1 303 See Other');
+			header('Location: ' . $strLocation);
+		}
+
 		exit;
 	}
 
@@ -2105,48 +2109,48 @@ abstract class Controller extends \System
 	 */
 	public static function redirect($strLocation, $intStatus=303)
 	{
-		$strLocation = str_replace('&amp;', '&', $strLocation);
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		// Header
-		switch ($intStatus)
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
+		// Make the location an absolute URL
+		if (!preg_match('@^https?://@i', $strLocation))
 		{
-			case 301:
-				header('HTTP/1.1 301 Moved Permanently');
-				break;
-
-			case 302:
-				header('HTTP/1.1 302 Found');
-				break;
-
-			case 303:
-				header('HTTP/1.1 303 See Other');
-				break;
-
-			case 307:
-				header('HTTP/1.1 307 Temporary Redirect');
-				break;
+			$strLocation = \Environment::get('base') . $strLocation;
 		}
 
-		// Check the target address
-		if (preg_match('@^https?://@i', $strLocation))
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
 		{
-			header('Location: ' . $strLocation);
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
 		}
 		else
 		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
+			// Add the HTTP header
+			switch ($intStatus)
+			{
+				case 301:
+					header('HTTP/1.1 301 Moved Permanently');
+					break;
+
+				case 302:
+					header('HTTP/1.1 302 Found');
+					break;
+
+				case 303:
+					header('HTTP/1.1 303 See Other');
+					break;
+
+				case 307:
+					header('HTTP/1.1 307 Temporary Redirect');
+					break;
+			}
+
+			header('Location: ' . $strLocation);
 		}
 
 		exit;

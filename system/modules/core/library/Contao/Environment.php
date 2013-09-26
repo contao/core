@@ -321,6 +321,17 @@ class Environment
 
 
 	/**
+	 * Return the current URL with path or query string
+	 *
+	 * @return string The URL
+	 */
+	protected static function uri()
+	{
+		return static::get('url') . static::get('requestUri');
+	}
+
+
+	/**
 	 * Return the real REMOTE_ADDR even if a proxy server is used
 	 *
 	 * @return string The IP address of the client

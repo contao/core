@@ -512,10 +512,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href}).get({'tid':id, 'state':1});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href}).get({'tid':id, 'state':0});
 		}
 
 		return false;
@@ -1184,13 +1184,13 @@ var Backend =
     				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req}).get();
     		} else if (el.getParent('ul')) {
     			var id = el.get('id').replace(/li_/, ''),
     				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req}).get();
     		}
     	});
 	},

@@ -190,13 +190,6 @@ class BackendUser extends \User
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
 		}
 
-		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>';
-			exit;
-		}
-
 		\Controller::redirect($strRedirect);
 	}
 

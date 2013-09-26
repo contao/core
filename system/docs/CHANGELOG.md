@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Changed
+Send an "X-Ajax-Location" header to redirect upon Ajax requests (see #5647).
+
 ### New
 Added new DCA table config flags (see #5254):
 
