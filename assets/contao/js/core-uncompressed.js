@@ -718,7 +718,7 @@ var Backend =
 	openModalWindow: function(width, title, content) {
 		new SimpleModal({
 			'width': width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -737,7 +737,7 @@ var Backend =
 		var opt = options || {};
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -759,7 +759,7 @@ var Backend =
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },

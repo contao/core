@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Improved
+Always show the save buttons in the modal windows (see #5985).
+
 ### New
 Add the CSS classes "first" and "last" to articles/content elements (see #2583).
 
