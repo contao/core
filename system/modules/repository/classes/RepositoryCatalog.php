@@ -49,8 +49,13 @@ class RepositoryCatalog extends RepositoryBackendModule
 		$rep = &$this->Template->rep;
 		$rep->f_page = 0;
 
+		// reset all filters
+		if ($this->filterPost('repository_action') == $rep->f_action && $this->filterPost('reset_filters')) {
+			$this->Session->remove('repository_catalog_settings');
+		}
+
 		// returning from submit?
-		if ($this->filterPost('repository_action') == $rep->f_action) {
+		if ($this->filterPost('repository_action') == $rep->f_action && $this->filterPost('apply_filters')) {
 			// get url parameters
 			$rep->f_tag 	= trim(Input::post('repository_tag'));
 			$rep->f_type 	= trim(Input::post('repository_type'));

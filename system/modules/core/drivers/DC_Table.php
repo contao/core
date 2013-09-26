@@ -190,6 +190,17 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 		}
 
+		// Reset all settings from the filter panel
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters' && \Input::post('reset_filters'))
+		{
+			$session = $this->Session->getData();
+			unset($session['search'][$strTable]);
+			unset($session['filter'][$strTable]);
+			unset($session['sorting'][$strTable]);
+			$this->Session->setData($session);
+			$this->reload();
+		}
+
 		$this->strTable = $strTable;
 		$this->ptable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'];
 		$this->ctable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ctable'];
@@ -357,6 +368,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Add another panel at the end of the page
 			if (strpos($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'], 'limit') !== false && ($strLimit = $this->limitMenu(true)) != false)
 			{
+				// @todo where is this shown and why is FORM_SUBMIT tl_filters_limit instead of tl_filter?
+				// @todo add reset filters here too?
 				$return .= '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" class="tl_form" method="post">
@@ -367,7 +380,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_panel_bottom">
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="btfilter" id="btfilter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
+<input type="image" name="btfilter" id="btfilter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/apply_filters.png" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
 </div>' . $strLimit . '
 
 <div class="clear"></div>
@@ -4690,7 +4703,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$submit = '
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="filter" id="filter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
+<input type="image" name="apply_filters" value="1" id="apply_filters" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/apply_filters.png" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
+<input type="image" name="reset_filters" value="1" id="reset_filters" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reset_filters.png" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['resetFilters']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['resetFilters']) . '">
 </div>';
 			}
 
@@ -4741,7 +4755,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Store search value in the current session
-		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters' && \Input::post('apply_filters'))
 		{
 			$session['search'][$this->strTable]['value'] = '';
 			$session['search'][$this->strTable]['field'] = \Input::post('tl_field', true);
@@ -4843,7 +4857,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Set sorting from user input
-		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters' && \Input::post('apply_filters'))
 		{
 			$strSort = \Input::post('tl_sort');
 
@@ -4908,7 +4922,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$fields = '';
 
 		// Set limit from user input
-		if (\Input::post('FORM_SUBMIT') == 'tl_filters' || \Input::post('FORM_SUBMIT') == 'tl_filters_limit')
+		if ((\Input::post('FORM_SUBMIT') == 'tl_filters') || \Input::post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
 			$strLimit = \Input::post('tl_limit');
 
@@ -5052,7 +5066,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Set filter from user input
-		if (\Input::post('FORM_SUBMIT') == 'tl_filters')
+		if (\Input::post('FORM_SUBMIT') == 'tl_filters' && \Input::post('apply_filters'))
 		{
 			foreach ($sortingFields as $field)
 			{
