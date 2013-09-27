@@ -1,8 +1,11 @@
-Contao Open Source CMS Changelog
+Contao Open Source CMS changelog
 ================================
 
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
+
+### New
+Added a `system/docs/UPGRADE.md` file to document API changes (see #6236).
 
 ### Changed
 Send an "X-Ajax-Location" header to redirect upon Ajax requests (see #5647).
