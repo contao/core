@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.beta1 (2013-XX-XX)
 ------------------------------
 
+### Fixed
+Make usernames case-sensitive.
+
 ### New
 Added a `system/docs/UPGRADE.md` file to document API changes (see #6236).
 
