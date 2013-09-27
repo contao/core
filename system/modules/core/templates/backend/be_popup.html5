@@ -36,12 +36,6 @@
       <h1>File preview</h1>
       <h2><?php echo $this->headline; ?></h2>
       <table class="tl_help_table">
-        <?php if ($this->id): ?>
-          <tr>
-            <td class="tl_label"><?php echo $this->label_id; ?>:</td>
-            <td><?php echo $this->id; ?></td>
-          </tr>
-        <?php endif; ?>
         <tr>
           <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
           <td><?php echo $this->ctime; ?></td>
@@ -62,6 +56,12 @@
           <td class="tl_label"><?php echo $this->label_path; ?>:</td>
           <td><?php echo $this->path; ?></td>
         </tr>
+        <?php if ($this->uuid): ?>
+          <tr>
+            <td class="tl_label"><?php echo $this->label_uuid; ?>:</td>
+            <td><?php echo $this->uuid; ?></td>
+          </tr>
+        <?php endif; ?>
         <?php if ($this->src): ?>
           <tr>
             <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>

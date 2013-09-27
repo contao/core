@@ -112,12 +112,12 @@ class Popup extends Backend
 		}
 
 		$this->Template = new BackendTemplate('be_popup');
-		$this->Template->id = null;
+		$this->Template->uuid = null;
 
-		// Also show the database ID of the file (see #5211)
+		// Also show the UUID of the file (see #5211)
 		if (($objModel = FilesModel::findByPath($this->strFile)) !== null)
 		{
-			$this->Template->id = $objModel->id;
+			$this->Template->uuid = String::binToUuid($objModel->uuid);
 		}
 
 		$objFile = new File($this->strFile, true);
@@ -156,7 +156,7 @@ class Popup extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
-		$this->Template->label_id = $GLOBALS['TL_LANG']['MSC']['fileDatabaseId'];
+		$this->Template->label_uuid = $GLOBALS['TL_LANG']['MSC']['fileUuid'];
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
 		$this->Template->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];
