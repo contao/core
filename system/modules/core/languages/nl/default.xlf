@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="ERR.general">
         <source>An error occurred!</source>
-        <target>Er is een fout opgetreden!</target>
+        <target>Er is een fout is opgetreden!</target>
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>

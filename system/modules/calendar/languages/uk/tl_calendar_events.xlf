@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.1">
         <source>Here you can enter the event location.</source>
-        <target>Тут ви можете ввести місце проведення події.</target>
+        <target>Тут Ви можете ввести місце проведення події.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>

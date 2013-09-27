@@ -1755,7 +1755,7 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
-        <target>Contao është duke ecur në mënyrë &lt;strong&gt;të sigurtë apo safe mode&lt;/ strong&gt;, kështu që vetëm modulet kryesorë janë të ngarkuar, për të parandaluar papajtueshmëritë e mundshme me shtesa të treta apo third part extensions (p.sh. pas një live update). Pasi të keni kontrolluar shtesat e instaluara, ju mund të çaktivizoni përsëri menyrën e sigurtë apo safe mode.</target>
+        <target>Contao është aktualisht duke ecur në mënyrë &lt;strong&gt;të sigurt apo safe mode&lt;/ strong&gt;, kështu që vetëm modulet kryesore janë të ngarkuara, për të parandaluar papajtueshmëritë e mundshme me shtes të treta (p.sh. pas një live update). Pasi të keni kontrolluar shtesat e instaluara, ju mund të çaktivizoni mnyrën e sigurtë apo safe mode përsëri.</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
@@ -1763,7 +1763,7 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
-        <target>&lt;strong&gt;Cache i brendshëm &lt;/strong&gt; ende nuk është ndërtuar. Ndërtimi i cache përmirësonë shpejtësinë e programit dhe është shumë i rekomanduar. Nëse ju nuk dëshironi të përdorni cache, ju mund të çaktivizoni atë përgjithmonë në parametrat e back end.</target>
+        <target>&lt;strong&gt; Cache i brendshëm &lt;/ strong&gt; ende nuk është ndërtuar. Ndërtimi i cache përmirësonë shpejtësinë e programit dhe është shumë i rekomanduar. Nëse ju nuk dëshironi të përdorni cache, ju mund të çaktivizoni përgjithmonë atë në parametrat e back end.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>

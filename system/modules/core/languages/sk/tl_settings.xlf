@@ -145,6 +145,12 @@
         <source>Here you can select the cache mode.</source>
         <target>Tu môžete nastaviť mód cachovania.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
         <target>Anonymizovať IP adresy</target>
@@ -555,6 +561,9 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
         <target>Nastavenia frontendu</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>

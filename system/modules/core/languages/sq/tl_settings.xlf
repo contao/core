@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin i skedarëve (p.sh. &lt;em&gt;shtojcat, music_academy &lt;/ em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoren p.sh. si fotografi apo si elemente shkarkuese!</target>
+        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin fotografi (p.sh. &lt;em&gt; të bashkëngjitni skedarë, music_academy &lt;/ em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoret p.sh. në imazh apo elemente shkarko!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -144,6 +144,12 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Zgjedhoni mënyrën e dopossë fshehur apo cache mode.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -182,7 +188,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
-        <target>Për një URL të zbrazët trego faqen kryesore në vend të përcjelljes tek faqja rrënjësore e gjuheve (nuk rekomandohet).</target>
+        <target>Për një URL të zbrazët trego faqen kryesore në vend të përcjelljes tek faqja rrënjësore e gjuhës (nuk rekomandohet).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
@@ -552,6 +558,9 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
         <target>Konfigurimet Front end</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>

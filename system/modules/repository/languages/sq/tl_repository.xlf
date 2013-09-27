@@ -507,7 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
-        <target>Ju jeni duke shfletuar vetëm shtesat në përputhshmeri me versionin e tanishëm të Contao-së. Ndryshoni konfigurimet në back end  për të smadhuar rezultatet e kërkimit duke treguar të gjitha shtesat.</target>
+        <target>Ju jeni duke shfletuar shtesat në përputhshmeri me versionin e tanishëm të Contao-së. Ndryshoni konfigurimet në back end për të smadhuar rezultatet e kërkimit duke gjetur të gjitha shtesat.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

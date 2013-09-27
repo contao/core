@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
-        <target>Këtu mund të epeni një &lt;em&gt;onload&lt;/em&gt; atribut të body-të.</target>
+        <target>Këtu mund të epeni një &lt;em&gt;onload&lt;/on&gt; atribut të body-të.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
         <source>Additional &amp;lt;head&amp;gt; tags</source>
@@ -287,7 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
         <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
-        <target>Këtu mund të epeni tags individual për sektorin &amp;lt;kryesues&amp;gt; të faqes.</target>
+        <target>Këtu mund të futen klasa individuale sektorin &amp;lt;kryesues&amp;gt; të faqes.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>

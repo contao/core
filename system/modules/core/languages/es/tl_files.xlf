@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>impedir el acceso a la carpeta a través de HTTP. Los archivos todavía pueden estar disponibles, por ejemplo, con el elemento de descargas.</target>
+        <target>Impedir el acceso a la carpeta mediante HTTP. Los archivos pueden ser puestos a disposición mediante el elemento de downloads.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
-        <target>La Protección de carpetas se logra mediante la adición de un archivo. Htaccess que deniega el acceso a la carpeta. Parece que no está utilizando un servidor Apache, por lo tanto, la característica no funciona en absoluto o requieren ajustar la configuración del servidor. Por favor, compruebe antes de cargar recursos no públicos!</target>
+        <target>Protección de carpetas se logra mediante la adición de un archivo llamado .htaccess que niega el acceso a la carpeta. Parece que no está utilizando un servidor Apache, por lo tanto, ésta propiedad no funcionará ó se requiere el ajuste de la configuración del servidor. Por favor, verifíque antes de subir los archivos no públicos!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -99,11 +99,11 @@
       </trans-unit>
       <trans-unit id="tl_files.syncComplete">
         <source>The synchronization has been completed</source>
-        <target>La sincronización ha completado</target>
+        <target>La sincronización ha sido completa</target>
       </trans-unit>
       <trans-unit id="tl_files.syncResult">
         <source>&lt;strong&gt;Result:&lt;/strong&gt; %s added | %s modified | %s unchanged | %s moved | %s deleted</source>
-        <target>&lt;strong&gt;Resultados:&lt;/strong&gt; %s añadidos| %s modificados | %s inalterados| %s movidos| %s borrados</target>
+        <target>&lt;strong&gt;Resultado:&lt;/strong&gt; %s añadidos| %s modificados| %s sin cambiar| %s movido| %s borrados</target>
       </trans-unit>
       <trans-unit id="tl_files.syncShowUnchanged">
         <source>Show unchanged</source>

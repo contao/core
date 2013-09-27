@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandssynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
+        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandsynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -144,6 +144,14 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Hier kunt de cache mode selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Vertrouwde proxy servers</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Hier kunt u een komma gescheiden lijst van vertrouwde proxy-server IP-adressen invoeren.</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -231,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
-        <target>Maak geen gebruik van de interne cache (b.v. nuttig bij het ontwikkelen van extensies).</target>
+        <target>Maak geen gebruik van de interne cache (bv. nuttig bij het ontwikkelen van extensies).</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
@@ -556,6 +564,10 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
         <target>Front-end configuratie</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Proxy configuratie</target>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>

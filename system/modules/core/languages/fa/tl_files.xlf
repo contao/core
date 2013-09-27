@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
-        <target>پسوند پرونده توسط کانتائو به صورت خودکار اضافه می‌شود.</target>
+        <target>کانتائو پسوند پرونده را به صورت خودکار اضافه می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>

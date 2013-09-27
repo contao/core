@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>De uitvoering van het script is gestopt, omdat er iets niet correct werkt. De eigenlijke foutmelding is verborgen door deze mededeling om veiligheidsredenen en kan worden gevonden in het &lt;code&gt; systeem / logs / error.log &lt;/ code&gt;-bestand (zie hierboven). Als u de de foutmelding niet begrijpt of hoe het probleem op te lossen, bezoek dan &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; Contao FAQs &lt;/ a&gt; of &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; Contao support pagina &lt;/ a&gt;.</target>
+        <target>De uitvoering van het script is gestopt, omdat er iets niet correct werkt. De eigenlijke foutmelding is verborgen door deze mededeling, dit om veiligheidsredenen en kan worden gevonden in het &lt;code&gt; systeem / logs / error.log &lt;/ code&gt;-bestand (zie hierboven). Als u de de foutmelding niet begrijpt of hoe het probleem op te lossen, bezoek dan &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; Contao FAQs &lt;/ a&gt; of &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; Contao support pagina &lt;/ a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
@@ -78,8 +78,84 @@
         <target>Dit opent het Contao installatie tool, welke u door het installatieproces zal begeleiden.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
-        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;.</source>
-        <target>Voor meer informatie verwijzen wij u naar de &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installatiehandleiding&lt;/a&gt;.</target>
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Voor meer informatie, verwijzen wij u naar &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFound">
+        <source>Page not found</source>
+        <target>Pagina niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="XPT.pageNotFound">
+        <source>The page you have requested does not exist under this domain.</source>
+        <target>De pagina die u heeft opgevraagd bestaat niet in dit domein.</target>
+      </trans-unit>
+      <trans-unit id="XPT.notFoundFix">
+        <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Probeer om &lt;a href=&quot;%s&quot;&gt;naar het top level te gaan&lt;/a&gt; en maak gebruik van de zoekfunctie (indien aanwezig) om de pagina te vinden waar u naar op zoek was. U kunt ook &lt;a href=&quot;%s&quot;&gt;contact opnemen met de webmaster&lt;/a&gt; en hem laten weten dat er iets niet in orde is.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForward">
+        <source>Forward page not found</source>
+        <target>Forward pagina werd niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardPage">
+        <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>De applicatie is geconfigureerd om het verzoek door te sturen naar een andere pagina, echter de doelpagina bestaat niet of is niet gepubliceerd.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noForwardFix">
+        <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Dit is iets dat door de beheerder van de website dient te worden bevestigd. Als bezoeker is er niets wat u kunt doen, behalve dan &lt;a href=&quot;%s&quot;&gt; contact opnemen met de webmaster &lt;/ a&gt; om hem te laten weten dat er iets niet in orde is.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRoot">
+        <source>No root page found</source>
+        <target>Geen root pagina gevonden</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootPage">
+        <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Er is geen website root pagina welke overeenkomt met de gevraagde taal en/of domeinnaam.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noRootFix">
+        <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Als u expliciet een taal heeft ingesteld, probeer dan &lt;a href=&quot;%s&quot;&gt; naar het top level te gaan&lt;/ a&gt; en kijk of u wordt doorgestuurd. Neem anders &lt;a href=&quot;%s&quot;&gt; contact op met de webmaster&lt;/ a&gt; en laat hem weten dat er iets niet in orde is.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayout">
+        <source>No layout specified</source>
+        <target>Geen lay-out gespecificeerd</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutSpecified">
+        <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>De pagina die u heeft opgevraagd is nog niet gekoppeld aan een pagina lay-out.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutFix">
+        <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Zorg ervoor dat u een pagina lay-out hebt toegewezen aan elke website root pagina in de sitestructuur.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noLayoutExplain">
+        <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Voor meer informatie, verwijzen wij u naar &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActive">
+        <source>No active pages found</source>
+        <target>Geen actieve pagina's gevonden</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActivePages">
+        <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Uw aanvraag is toegewezen aan een website welke nog geen gepubliceerde pagina's bevat.</target>
+      </trans-unit>
+      <trans-unit id="XPT.noActiveFix">
+        <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Waarschijnlijk is de website nog in ontwikkeling en zal binnenkort online zijn. Als u denkt dat er iets mis is, &lt;a href=&quot;%s&quot;&gt; neem dan contact op met de webmaster &lt;/a&gt; en laat hem dit weten.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbidden">
+        <source>Forbidden</source>
+        <target>Niet toegestaan</target>
+      </trans-unit>
+      <trans-unit id="XPT.notAuthenticated">
+        <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Of u bent niet geverifieerd of u heeft geen toestemming ​​om toegang te verkrijgen tot de gevraagde pagina.</target>
+      </trans-unit>
+      <trans-unit id="XPT.forbiddenFix">
+        <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Als u niet ingelogd bent, probeer dan &lt;a href=&quot;%s&quot;&gt;naar het top level te gaan&lt;/a&gt; en ga op zoek naar een inlogformulier. Indien er geen inlogformulier aanwezig is of u bent reeds ingelogd, &lt;a href=&quot;%s&quot;&gt; neem dan contact op met de webmaster&lt;/a&gt; en laat hem weten dat er iets niet in orde is.</target>
       </trans-unit>
     </body>
   </file>

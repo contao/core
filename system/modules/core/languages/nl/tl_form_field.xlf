@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="FFL.submit.0">
         <source>Submit field</source>
-        <target>Verzendknop</target>
+        <target>Verzendveld</target>
       </trans-unit>
       <trans-unit id="FFL.submit.1">
         <source>A button to submit the form.</source>

@@ -300,7 +300,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStart.0">
         <source>Wrapper start</source>
-        <target>Ietinuma sākums</target>
+        <target>Wrapper uzsākšana</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStart.1">
         <source>Generates the opening part of the accordion wrapper.</source>
@@ -308,7 +308,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStop.0">
         <source>Wrapper stop</source>
-        <target>Ietinuma beigas</target>
+        <target>Wrapper apstādināšna</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStop.1">
         <source>Generates the closing part of the accordion wrapper.</source>
@@ -336,7 +336,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStart.0">
         <source>Wrapper start</source>
-        <target>Ietinuma sākums</target>
+        <target>Wrapper uzsākšana</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStart.1">
         <source>Generates the opening part of the slider wrapper.</source>
@@ -344,7 +344,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.0">
         <source>Wrapper stop</source>
-        <target>Ietinuma beigas</target>
+        <target>Wrapper apstādināšna</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>

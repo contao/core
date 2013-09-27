@@ -145,6 +145,14 @@
         <source>Here you can select the cache mode.</source>
         <target>Вы можете выбрать режим кэширования.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Доверенные прокси-серверы</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Введите через запятую список IP-адресов доверенных прокси-серверов.</target>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
         <target>Анонимизировать IP-адреса</target>
@@ -175,6 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Добавить язык в строку URL (напр. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -555,6 +564,10 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
         <target>Конфигурация внешнего интерфейса</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Конфигурация прокси</target>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>

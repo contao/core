@@ -145,6 +145,14 @@
         <source>Here you can select the cache mode.</source>
         <target>Selezionare la modalità cache</target>
       </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Server Proxy attendibili</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Qui è possibile inserire un elenco separato da virgole di indirizzi IP del server proxy attendibili.</target>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
         <target>Rendi anonimi gli indirizzi IP</target>
@@ -556,6 +564,10 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
         <target>Configurazione frontend</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Configurazione proxy</target>
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>

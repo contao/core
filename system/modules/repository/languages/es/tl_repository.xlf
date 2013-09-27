@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>El nombre de la extensión debe comenzar con letras de la a-z, A-Z o 0-9, donde es preferible el uso de nombres con minúsculas. Adicionalmente, los caracteres _ y _ estan permitidos dentro del nombre.</target>
+        <target>El nombre de la extensión debe comenzar aon letras de la a-z, A-Z o 0-9, donde es preferible el uso de nombres con minúsculas. Adicionalmente, los caracteres _ y _ estan permitidos dentro del nombre.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -507,7 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
-        <target>Actualmente solamente ves las extensiones compatible con la versión actual de Contao. Modifica las configuraciones en el Backend para expandir los resultados de la búsqueda mostrando todas las extensiones.</target>
+        <target>Actualmente estás viendo extensiones compatibles sólo con la versión actual de Contao. Modifica la configuración del back-end para ampliar los resultados de búsqueda mostrando todas las extensiones.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

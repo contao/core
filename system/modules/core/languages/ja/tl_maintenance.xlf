@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.1">
         <source>Removes the cached versions of the front end pages.</source>
-        <target>フロントエンドのページのキャッシュ版を削除します。</target>
+        <target>フロントエンドのページをキャッシュ版を削除します。</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>

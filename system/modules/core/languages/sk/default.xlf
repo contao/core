@@ -2153,7 +2153,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="DP.use_mouse_wheel">
         <source>Use the mouse wheel to quickly change value</source>
-        <target>Použite koliesko myši na rýchlejšie určenie času</target>
+        <target>Použite &quot;koliesko&quot; myši na rýchlejšie určenie času</target>
       </trans-unit>
       <trans-unit id="DP.time_confirm_button">
         <source>OK</source>

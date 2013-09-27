@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_member.firstname.0">
         <source>First name</source>
-        <target>نام کوچک</target>
+        <target>نام</target>
       </trans-unit>
       <trans-unit id="tl_member.firstname.1">
         <source>Please enter the first name.</source>
-        <target>لطفاً نام کوچک خود را وارد نمائید.</target>
+        <target>لطفا نام خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.lastname.0">
         <source>Last name</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_member.lastname.1">
         <source>Please enter the last name.</source>
-        <target>لطفاً نام خانوادگی خود را وارد نمائید.</target>
+        <target>لطفا نام خانوادگی خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.dateOfBirth.0">
         <source>Date of birth</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_member.dateOfBirth.1">
         <source>Please enter the date of birth.</source>
-        <target>لطفاً تاریخ تولد خود را انتخاب نمائید.</target>
+        <target>لطفا تاریخ تولد خود را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.gender.0">
         <source>Gender</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_member.gender.1">
         <source>Please choose the gender.</source>
-        <target>لطفاً جنسیت خود را انتخاب نمائید.</target>
+        <target>لطفا جنسیت خود را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.company.0">
         <source>Company</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_member.street.1">
         <source>Please enter the street name and number.</source>
-        <target>لطفاً در این بخش نام و شماره خیابان خود را وارد نمائید.</target>
+        <target>لطفا در این بخش نام و شماره خیابان خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.postal.0">
         <source>Postal code</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_member.postal.1">
         <source>Please enter the postal code.</source>
-        <target>لطفاً کدپستی خود را وارد نمائید.</target>
+        <target>لطفا کدپستی خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.city.0">
         <source>City</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_member.city.1">
         <source>Plase enter the name of the city.</source>
-        <target>لطفاً شهر خود را وارد نمائید.</target>
+        <target>لطفا شهر خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.state.0">
         <source>State</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_member.state.1">
         <source>Plase enter the name of the state.</source>
-        <target>لطفاً نام استان خود را وارد نمائید.</target>
+        <target>لطفا نام استان خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.country.0">
         <source>Country</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_member.country.1">
         <source>Please select the country.</source>
-        <target>لطفاً کشور خود را انتخاب نمائید.</target>
+        <target>لطفا کشور خود را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.phone.0">
         <source>Phone number</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_member.phone.1">
         <source>Please enter the phone number.</source>
-        <target>لطفاً شماره تلفن خود را وارد نمائید.</target>
+        <target>لطفا شماره تلفن خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.mobile.0">
         <source>Cell phone number</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_member.mobile.1">
         <source>Please enter the cell phone number.</source>
-        <target>لطفاً شماره موبایل خود را وارد نمائید.</target>
+        <target>لطفا شماره موبایل خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.fax.0">
         <source>Fax number</source>
@@ -103,15 +103,15 @@
       </trans-unit>
       <trans-unit id="tl_member.fax.1">
         <source>Please enter the fax number.</source>
-        <target>لطفاً شماره فاکس خود را وارد نمائید.</target>
+        <target>لطفا شماره فاکس خود را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.email.0">
         <source>E-mail address</source>
-        <target>پست الکترونیک</target>
+        <target>نشانی پست الکترونیک</target>
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
-        <target>لطفاُ آدرس پست الکترونیک معتبر وارد نمائید.</target>
+        <target>لطفا نشانی پست الکترونیک معتبر وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
@@ -127,11 +127,11 @@
       </trans-unit>
       <trans-unit id="tl_member.language.1">
         <source>Please select the language.</source>
-        <target>لطفاً زبان خود را انتخاب نمائید.</target>
+        <target>لطفا زبان خود را انتخاب نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.0">
         <source>Member groups</source>
-        <target>گروه‌های اعضاء</target>
+        <target>عضو گروه‌های</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the member to one or more groups.</source>
@@ -149,11 +149,11 @@
       </trans-unit>
       <trans-unit id="tl_member.username.1">
         <source>Please enter a unique username.</source>
-        <target>لطفاً یک نام کاربری یکتا وارد نمائید.</target>
+        <target>لطفا نام کاربری یکتایی وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.0">
         <source>Set home directory</source>
-        <target>اختصاص دایرکتوری شخصی</target>
+        <target>اختصاص فهرست خانه</target>
       </trans-unit>
       <trans-unit id="tl_member.assignDir.1">
         <source>Define a home directory for the member.</source>
@@ -161,19 +161,19 @@
       </trans-unit>
       <trans-unit id="tl_member.homeDir.0">
         <source>Home directory</source>
-        <target>دایرکتوری شخصی</target>
+        <target>فهرست خانه</target>
       </trans-unit>
       <trans-unit id="tl_member.homeDir.1">
         <source>Please select a folder from the files directory.</source>
-        <target>لطفاً یک پوشه از دایرکتوری فایل‌ها را مشخص نمائید.</target>
+        <target>لطفا یک پوشه از فهرست پرونده‌ها را مشخص نمائید.</target>
       </trans-unit>
       <trans-unit id="tl_member.disable.0">
         <source>Deactivate</source>
-        <target>غیرفعال</target>
+        <target>غیرفعال کردن</target>
       </trans-unit>
       <trans-unit id="tl_member.disable.1">
         <source>Temporarily disable the account.</source>
-        <target>غیرفعال کردن موقت حساب کاربری.</target>
+        <target>غیرفعال کردن موقتی حساب کاربری.</target>
       </trans-unit>
       <trans-unit id="tl_member.start.0">
         <source>Activate on</source>
@@ -197,7 +197,7 @@
       </trans-unit>
       <trans-unit id="tl_member.address_legend">
         <source>Address details</source>
-        <target>جزئیات آدرس</target>
+        <target>جزئیات نشانی</target>
       </trans-unit>
       <trans-unit id="tl_member.contact_legend">
         <source>Contact details</source>
@@ -213,7 +213,7 @@
       </trans-unit>
       <trans-unit id="tl_member.homedir_legend">
         <source>Home directory</source>
-        <target>دایرکتوری شخصی</target>
+        <target>فهرست خانه</target>
       </trans-unit>
       <trans-unit id="tl_member.account_legend">
         <source>Account settings</source>
@@ -225,15 +225,15 @@
       </trans-unit>
       <trans-unit id="tl_member.addressDetails">
         <source>Address details</source>
-        <target>اطلاعات پستی</target>
+        <target>جژئیات نشانی</target>
       </trans-unit>
       <trans-unit id="tl_member.contactDetails">
         <source>Contact details</source>
-        <target>اطلاعات تماس</target>
+        <target>جزئیات تماس</target>
       </trans-unit>
       <trans-unit id="tl_member.loginDetails">
         <source>Login details</source>
-        <target>اطلاعات ورود به سیستم</target>
+        <target>جزئیات ورود</target>
       </trans-unit>
       <trans-unit id="tl_member.new.0">
         <source>New member</source>
@@ -241,7 +241,7 @@
       </trans-unit>
       <trans-unit id="tl_member.new.1">
         <source>Create a new member</source>
-        <target>تعریف یک عضو جدید</target>
+        <target>ایجاد یک عضو جدید</target>
       </trans-unit>
       <trans-unit id="tl_member.show.0">
         <source>Member details</source>
@@ -257,7 +257,7 @@
       </trans-unit>
       <trans-unit id="tl_member.edit.1">
         <source>Edit member ID %s</source>
-        <target>ویرایش عضو شماره %s</target>
+        <target>ویرایش عضو شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_member.copy.0">
         <source>Duplicate member</source>
