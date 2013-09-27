@@ -535,8 +535,7 @@ class String
 	 */
 	public static function uuidToBin($uuid)
 	{
-		list($time_low, $time_mid, $time_high, $clock_seq, $node) = explode('-', $uuid);
-		return pack('H12H4H4H4H8', $node, $clock_seq, $time_high, $time_mid, $time_low);
+		return pack('H*', str_replace('-', '', $uuid));
 	}
 
 
@@ -549,8 +548,7 @@ class String
 	 */
 	public static function binToUuid($data)
 	{
-		$h = unpack('H12node/H4clock_seq/H4time_high/H4time_mid/H8time_low', $data);
-		return $h['time_low'] . '-' . $h['time_mid'] . '-' . $h['time_high'] . '-' . $h['clock_seq'] . '-' . $h['node'];
+		return implode('-', unpack('H8time_low/H4time_mid/H4time_high/H4clock_seq/H12node', $data));
 	}
 
 
