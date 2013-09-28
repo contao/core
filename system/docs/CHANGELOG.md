@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
 ### New
+Pass the ID of the `tl_undo` record to the "ondelete_callback" (see #6234).
+
+### New
 Added the "br" insert tag to insert line breaks (see #6143).
 
 ### Fixed
