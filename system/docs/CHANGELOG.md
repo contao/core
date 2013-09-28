@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Fixed
+Correctly handle "toggle visibility" requests via Ajax.
+
 ### New
 Pass the ID of the `tl_undo` record to the "ondelete_callback" (see #6234).
 
