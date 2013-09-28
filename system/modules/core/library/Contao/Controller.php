@@ -761,6 +761,11 @@ abstract class Controller extends \System
 					}
 					break;
 
+				// Line break
+				case 'br':
+					$arrCache[$strTag] = '<br' . ($objPage->outputFormat == 'xhtml' ? ' />' : '>');
+					break;
+
 				// E-mail addresses
 				case 'email':
 				case 'email_open':

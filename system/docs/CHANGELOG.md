@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### New
+Added the "br" insert tag to insert line breaks (see #6143).
+
 ### Fixed
 Do not alter the order of the UUID chunks (no optimized order).
 
