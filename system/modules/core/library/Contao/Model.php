@@ -513,6 +513,16 @@ abstract class Model
 
 
 	/**
+	 * Free the model from the registry and release references.
+	 * Freeing the model may useful as alternative to clone the model in mass imports.
+	 */
+	public function free()
+	{
+		$this->objDatabase->getModelRegistry()->unregister($this);
+	}
+
+
+	/**
 	 * Find a single record by its primary key
 	 *
 	 * @param mixed $varValue   The property value
