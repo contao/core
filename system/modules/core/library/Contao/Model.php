@@ -59,10 +59,10 @@ abstract class Model
 	protected static $strPk = 'id';
 
 	/**
-	 * Database result
-	 * @var \Database\Result
+	 * Database connection
+	 * @var \Database
 	 */
-	protected $objResult;
+	protected $objDatabase;
 
 	/**
 	 * Data
@@ -145,7 +145,7 @@ abstract class Model
 			$objResult->getDatabase()->getModelRegistry()->register($this);
 		}
 
-		$this->objResult = $objResult;
+		$this->objDatabase = $objResult->getDatabase();
 	}
 
 
@@ -230,17 +230,6 @@ abstract class Model
 
 
 	/**
-	 * Return the database result
-	 *
-	 * @return \Database\Result|null The database result object or null
-	 */
-	public function getResult()
-	{
-		return $this->objResult;
-	}
-
-
-	/**
 	 * Return the current record as associative array
 	 *
 	 * @return array The data record
@@ -319,9 +308,9 @@ abstract class Model
 			}
 			$arrSet = $this->preSave($arrSet);
 
-			$this->objResult->getDatabase()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-										   ->set($arrSet)
-										   ->execute($this->{static::$strPk});
+			$this->objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+							  ->set($arrSet)
+							  ->execute($this->{static::$strPk});
 
 			$this->arrModified = array();
 
@@ -331,9 +320,9 @@ abstract class Model
 		{
 			$arrSet = $this->preSave($this->row());
 
-			$stmt = $this->objResult->getDatabase()->prepare("INSERT INTO " . static::$strTable . " %s")
-												   ->set($arrSet)
-												   ->execute();
+			$stmt = $this->objDatabase->prepare("INSERT INTO " . static::$strTable . " %s")
+									  ->set($arrSet)
+									  ->execute();
 
 			if (static::$strPk == 'id')
 			{
@@ -372,8 +361,8 @@ abstract class Model
 		if ($intType == self::INSERT)
 		{
 			// Reload the model data (might have been modified by default values or triggers)
-			$res = $this->objResult->getDatabase()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-												  ->execute($this->{static::$strPk});
+			$res = $this->objDatabase->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									 ->execute($this->{static::$strPk});
 
 			$this->setRow($res->row());
 		}
@@ -394,7 +383,7 @@ abstract class Model
 		if ($intAffected)
 		{
 			// unregister this model from the registry
-			$this->objResult->getDatabase()->getModelRegistry()->unregister($this);
+			$this->objDatabase->getModelRegistry()->unregister($this);
 
 			// remove the primary key, it is invalid now
 			$this->arrData[static::$strPk] = null; // see #6162
@@ -452,7 +441,7 @@ abstract class Model
 			(
 				array
 				(
-					'order' => $this->objResult->getDatabase()->findInSet($strField, $arrValues)
+					'order' => $this->objDatabase->findInSet($strField, $arrValues)
 				),
 
 				$arrOptions
