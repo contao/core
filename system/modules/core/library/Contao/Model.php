@@ -603,6 +603,24 @@ abstract class Model
 	 */
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
+		if (is_numeric($varId)) {
+			if (isset($arrOptions['connection']))
+			{
+				$objDatabase = $arrOptions['connection'];
+			}
+			else
+			{
+				$objDatabase = \Database::getInstance();
+			}
+
+			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+
+			if ($objModel)
+			{
+				return $objModel;
+			}
+		}
+
 		$t = static::$strTable;
 
 		$arrOptions = array_merge
@@ -637,22 +655,57 @@ abstract class Model
 			return null;
 		}
 
-		$t = static::$strTable;
+		if (isset($arrOptions['connection']))
+		{
+			$objDatabase = $arrOptions['connection'];
+		}
+		else
+		{
+			$objDatabase = \Database::getInstance();
+		}
 
-		$arrOptions = array_merge
-		(
-			array
+		$arrRegisteredModels = array();
+		$arrMissingModelIds  = array();
+
+		// search for already registered models
+		foreach ($arrIds as $varId)
+		{
+			$arrRegisteredModels[$varId] = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+
+			if (!$arrRegisteredModels[$varId])
+			{
+				$arrMissingModelIds[] = $varId;
+			}
+		}
+
+		// fetch only missing models from database
+		if (count($arrMissingModelIds))
+		{
+			$t = static::$strTable;
+
+			$arrOptions = array_merge
 			(
-				'column' => array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"),
-				'value'  => null,
-				'order'  => \Database::getInstance()->findInSet("$t.id", $arrIds),
-				'return' => 'Collection'
-			),
+				array
+				(
+					'column' => array("$t.id IN(" . implode(',', array_map('intval', $arrMissingModelIds)) . ")"),
+					'value'  => null,
+					'order'  => \Database::getInstance()->findInSet("$t.id", $arrIds),
+					'return' => 'Collection'
+				),
 
-			$arrOptions
-		);
+				$arrOptions
+			);
 
-		return static::find($arrOptions);
+			$arrMissingModels = static::find($arrOptions);
+
+			foreach ($arrMissingModels as $objMissingModel)
+			{
+				$varId = $objMissingModel->{static::$strPk};
+				$arrRegisteredModels[$varId] = $objMissingModel;
+			}
+		}
+
+		return new \Model\Collection(array_filter(array_values($arrRegisteredModels)), static::$strTable);
 	}
 
 
@@ -667,6 +720,27 @@ abstract class Model
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
+		if ($strColumn == static::$strPk || is_array($strColumn) && count($strColumn) == 1 && $strColumn[0] == static::$strPk)
+		{
+			$varId = is_array($varValue) ? $varValue[0] : $varValue;
+
+			if (isset($arrOptions['connection']))
+			{
+				$objDatabase = $arrOptions['connection'];
+			}
+			else
+			{
+				$objDatabase = \Database::getInstance();
+			}
+
+			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+
+			if ($objModel)
+			{
+				return $objModel;
+			}
+		}
+
 		$arrOptions = array_merge
 		(
 			array
