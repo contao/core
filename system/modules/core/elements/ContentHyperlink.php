@@ -59,7 +59,7 @@ class ContentHyperlink extends \ContentElement
 		}
 
 		// Use an image instead of the title
-		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
+		if ($this->useImage && $this->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($this->singleSRC);
 
