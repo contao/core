@@ -419,10 +419,7 @@ abstract class Model
 		if ($intType == self::INSERT)
 		{
 			// Reload the model data (might have been modified by default values or triggers)
-			$res = $this->objDatabase->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-									 ->execute($this->{static::$strPk});
-
-			$this->setRow($res->row());
+			$this->refresh();
 		}
 	}
 
@@ -510,6 +507,28 @@ abstract class Model
 		}
 
 		return $this->arrRelated[$strKey];
+	}
+
+
+	/**
+	 * Reload all data from the database, this will discard all modifications.
+	 */
+	public function refresh()
+	{
+		// Note: do not check $this->arrModified here to make possible to refresh after low level updated!
+
+		if (isset($this->arrModified[static::$strPk]))
+		{
+			$strPk = $this->arrModified[static::$strPk];
+		}
+		else {
+			$strPk = $this->{static::$strPk};
+		}
+
+		$res = $this->objDatabase->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+								 ->execute($strPk);
+
+		$this->setRow($res->row());
 	}
 
 
