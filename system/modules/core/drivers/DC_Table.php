@@ -3634,6 +3634,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 <table class="tl_header_table">';
 
+			if (array_key_exists(':header', $add)){
+				$return .= '
+	<tr>
+		<td colspan="2"><span class="tl_label">'.$add[':header'].'</span> </td>
+	</tr>';
+				unset($add[':header']);
+			}
+
 			foreach ($add as $k=>$v)
 			{
 				if (is_array($v))
