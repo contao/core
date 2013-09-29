@@ -33,12 +33,6 @@ class Collection implements \Countable, \Iterator
 	protected $strTable;
 
 	/**
-	 * Database result
-	 * @var \Database\Result
-	 */
-	protected $objResult;
-
-	/**
 	 * Current index
 	 * @var integer
 	 */
@@ -58,14 +52,46 @@ class Collection implements \Countable, \Iterator
 
 
 	/**
-	 * Store the database result and table name
+	 * Create a new collection from a database result.
 	 *
 	 * @param \Database\Result $objResult The database result object
 	 * @param string           $strTable  The table name
 	 */
-	public function __construct(\Database\Result $objResult, $strTable)
+	static public function createFromResult(\Database\Result $objResult, $strTable)
 	{
-		$this->objResult = $objResult;
+		$arrModels = array();
+
+		while ($objResult->next())
+		{
+			$strClass = \Model::getClassFromTable($strTable);
+			$strPkName = $strClass::getPk();
+			$varPk = $objResult->$strPkName;
+			$objModel = $objResult->getDatabase()->getModelRegistry()->fetch($strTable, $varPk);
+
+			if ($objModel)
+			{
+				$objModel->safeMerge($objResult->row());
+				$arrModels[] = $objModel;
+			}
+			else
+			{
+				$arrModels[] = new $strClass($objResult);
+			}
+		}
+
+		return new static($arrModels, $strTable);
+	}
+
+
+	/**
+	 * Create a new collection.
+	 *
+	 * @param array $arrModels The models list
+	 * @param string $strTable The table name
+	 */
+	public function __construct(array $arrModels, $strTable)
+	{
+		$this->arrModels = $arrModels;
 		$this->strTable = $strTable;
 	}
 
@@ -125,17 +151,6 @@ class Collection implements \Countable, \Iterator
 		}
 
 		return isset($this->arrModels[$this->intIndex]->$strKey);
-	}
-
-
-	/**
-	 * Return the database result
-	 *
-	 * @return \Database\Result|null The database result object or null
-	 */
-	public function getResult()
-	{
-		return $this->objResult;
 	}
 
 
@@ -232,7 +247,7 @@ class Collection implements \Countable, \Iterator
 	 */
 	public function count()
 	{
-		return $this->objResult->numRows;
+		return count($this->arrModels);
 	}
 
 
@@ -243,11 +258,6 @@ class Collection implements \Countable, \Iterator
 	 */
 	public function first()
 	{
-		if (empty($this->arrModels))
-		{
-			$this->fetchNext();
-		}
-
 		$this->intIndex = 0;
 		return $this;
 	}
@@ -293,18 +303,9 @@ class Collection implements \Countable, \Iterator
 	 */
 	public function next()
 	{
-		if ($this->blnDone)
-		{
-			return false;
-		}
-
 		if (!isset($this->arrModels[$this->intIndex + 1]))
 		{
-			if ($this->fetchNext() == false)
-			{
-				$this->blnDone = true;
-				return false;
-			}
+			return false;
 		}
 
 		++$this->intIndex;
@@ -319,12 +320,6 @@ class Collection implements \Countable, \Iterator
 	 */
 	public function last()
 	{
-		if (!$this->blnDone)
-		{
-			while ($this->next());
-		}
-
-		$this->blnDone = true;
 		$this->intIndex = count($this->arrModels) - 1;
 		return $this;
 	}
@@ -343,7 +338,7 @@ class Collection implements \Countable, \Iterator
 	 */
 	public function valid()
 	{
-		return $this->intIndex >= 0 && $this->intIndex < $this->objResult->numRows;
+		return $this->intIndex >= 0 && $this->intIndex < $this->count();
 	}
 
 
@@ -355,7 +350,6 @@ class Collection implements \Countable, \Iterator
 	public function reset()
 	{
 		$this->intIndex = -1;
-		$this->blnDone = false;
 		return $this;
 	}
 
@@ -396,37 +390,6 @@ class Collection implements \Countable, \Iterator
 		}
 
 		return $return;
-	}
-
-
-	/**
-	 * Fetch the next result row and create the model
-	 *
-	 * @return boolean True if there was another row
-	 */
-	protected function fetchNext()
-	{
-		if ($this->objResult->next() == false)
-		{
-			return false;
-		}
-
-		$strClass = \Model::getClassFromTable($this->strTable);
-		$strPkName = $strClass::getPk();
-		$varPk = $this->objResult->$strPkName;
-		$objModel = $this->objResult->getDatabase()->getModelRegistry()->fetch($this->strTable, $varPk);
-
-		if ($objModel)
-		{
-			$objModel->safeMerge($this->objResult->row());
-			$this->arrModels[$this->intIndex + 1] = $objModel;
-		}
-		else
-		{
-			$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
-		}
-
-		return true;
 	}
 
 

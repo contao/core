@@ -791,7 +791,7 @@ abstract class Model
 		}
 		else
 		{
-			return new \Model\Collection($objResult, static::$strTable);
+			return \Model\Collection::createFromResult($objResult, static::$strTable);
 		}
 	}
 
