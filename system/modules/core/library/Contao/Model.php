@@ -358,9 +358,18 @@ abstract class Model
 			}
 			$arrSet = $this->preSave($arrSet);
 
+			// track primary key changes
+			if (isset($this->arrModified[static::$strPk]))
+			{
+				$strPk = $this->arrModified[static::$strPk];
+			}
+			else {
+				$strPk = $this->{static::$strPk};
+			}
+
 			$this->objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
 							  ->set($arrSet)
-							  ->execute($this->{static::$strPk});
+							  ->execute($strPk);
 
 			$this->arrModified = array();
 
