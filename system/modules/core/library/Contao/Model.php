@@ -175,6 +175,11 @@ abstract class Model
 				)
 			);
 		}
+
+		else
+		{
+			$this->objDatabase = \Database::getInstance();
+		}
 	}
 
 
