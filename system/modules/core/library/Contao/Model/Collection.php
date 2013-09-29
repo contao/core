@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection implements \Countable, \Iterator
+class Collection implements \Countable, \IteratorAggregate
 {
 
 	/**
@@ -324,23 +324,6 @@ class Collection implements \Countable, \Iterator
 		return $this;
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function key()
-	{
-		return $this->intIndex;
-	}
-
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function valid()
-	{
-		return $this->intIndex >= 0 && $this->intIndex < $this->count();
-	}
-
 
 	/**
 	 * Reset the model
@@ -357,9 +340,9 @@ class Collection implements \Countable, \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function rewind()
+	public function getIterator()
 	{
-		$this->reset();
+		return new \ArrayIterator($this->arrModels);
 	}
 
 
