@@ -132,4 +132,17 @@ class Registry implements \Countable
 		unset($this->arrIdentities[$intObjectId]);
 		unset($this->arrRegistry[$strTable][$varPk]);
 	}
+
+	/**
+	 * Check if a model is registered.
+	 *
+	 * @param \Model $objModel
+	 * @return bool
+	 */
+	public function isRegistered(\Model $objModel)
+	{
+		$intObjectId = spl_object_hash($objModel);
+
+		return isset($this->arrIdentities[$intObjectId]);
+	}
 }

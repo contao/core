@@ -342,13 +342,11 @@ abstract class Model
 	/**
 	 * Save the current record
 	 *
-	 * @param boolean $blnForceInsert Force creating a new record
-	 *
 	 * @return \Model The model object
 	 */
-	public function save($blnForceInsert=false)
+	public function save()
 	{
-		if (isset($this->{static::$strPk}) && !$blnForceInsert)
+		if ($this->objDatabase->getModelRegistry()->isRegistered($this))
 		{
 			$arrRow = $this->row();
 			$arrSet = array();
