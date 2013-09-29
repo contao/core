@@ -205,8 +205,13 @@ abstract class Model
 			return;
 		}
 
+		// store original value
+		if (!isset($this->arrModified[$strKey]))
+		{
+			$this->arrModified[$strKey] = $this->arrData[$strKey];
+		}
+
 		$this->arrData[$strKey] = $varValue;
-		$this->arrModified[] = $strKey;
 	}
 
 
@@ -312,11 +317,11 @@ abstract class Model
 	 */
 	public function safeMerge(array $arrData)
 	{
-		foreach ($arrData as $key => $value)
+		foreach ($arrData as $field => $value)
 		{
-			if (!in_array($key, $this->arrModified) && $this->arrData[$key] != $value)
+			if (!isset($this->arrModified[$field]) && $this->arrData[$field] != $value)
 			{
-				$this->arrData[$key] = $value;
+				$this->$field = $value;
 			}
 		}
 		return $this;
@@ -347,7 +352,7 @@ abstract class Model
 		{
 			$arrRow = $this->row();
 			$arrSet = array();
-			foreach ($this->arrModified as $strField)
+			foreach ($this->arrModified as $strField => $varValue)
 			{
 				$arrSet[$strField] = $arrRow[$strField];
 			}
