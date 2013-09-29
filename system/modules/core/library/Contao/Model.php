@@ -92,9 +92,10 @@ abstract class Model
 	/**
 	 * Load the relations and optionally process a result set
 	 *
-	 * @param \Database\Result|\Database $objResult An optional database result or connection
+	 * @param \Database\Result|array|\Database $objResult An optional database result or connection
+	 * @param \Database $objResult An optional database connection, if $objResult is an array
 	 */
-	public function __construct($objResult=null)
+	public function __construct($objResult=null, $objConnection = null)
 	{
 		$this->arrModified = array();
 		$objRelations = new \DcaExtractor(static::$strTable);
@@ -102,10 +103,15 @@ abstract class Model
 
 		if ($objResult instanceof \Database\Result)
 		{
-			$this->objDatabase = $objResult->getDatabase();
+			$objConnection = $objResult->getDatabase();
+			$objResult = $objResult->row();
+		}
+
+		if (is_array($objResult) && $objConnection instanceof \Database) {
+			$this->objDatabase = $objConnection;
 
 			$arrRelated = array();
-			$arrData = $objResult->row();
+			$arrData = $objResult;
 
 			// Look for joined fields
 			foreach ($arrData as $k=>$v)
@@ -137,8 +143,14 @@ abstract class Model
 				}
 				else
 				{
-					$this->arrRelated[$key] = new $strClass($this->objDatabase);
-					$this->arrRelated[$key]->setRow($row);
+					$objRelated = $this->objDatabase->getModelRegistry()->fetch($table, $row[$strClass::getPk()]);
+
+					if (!$objRelated)
+					{
+						$objRelated = new $strClass($row, $this->objDatabase);
+					}
+
+					$this->arrRelated[$key] = $objRelated;
 				}
 			}
 
@@ -150,6 +162,11 @@ abstract class Model
 		else if ($objResult instanceof \Database)
 		{
 			$this->objDatabase = $objResult;
+		}
+
+		else if ($objConnection instanceof \Database)
+		{
+			$this->objDatabase = $objConnection;
 		}
 
 		else if ($objResult)
@@ -169,7 +186,31 @@ abstract class Model
 
 			throw new \InvalidArgumentException(
 				sprintf(
-					'$objResult must be an instance of Database\Result or Database, [%s] %s given!',
+					'$objResult must be an instance of Database\Result, Database or an array, [%s] %s given!',
+					$type,
+					$value
+				)
+			);
+		}
+
+		else if ($objConnection)
+		{
+			$type = gettype($objConnection);
+			if (is_object($objConnection))
+			{
+				$value = get_class($objConnection);
+			}
+			else if (is_array($objConnection))
+			{
+				$value = sprintf('array(%d)', count($objConnection));
+			}
+			else {
+				$value = $objConnection;
+			}
+
+			throw new \InvalidArgumentException(
+				sprintf(
+					'$objConnection must be an instance of Database, [%s] %s given!',
 					$type,
 					$value
 				)
