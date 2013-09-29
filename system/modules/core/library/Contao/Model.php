@@ -260,7 +260,11 @@ abstract class Model
 	 */
 	public function setRow(array $arrData)
 	{
-		$this->arrData = $arrData;
+		foreach ($arrData as $field => $value)
+		{
+			$this->$field = $value;
+		}
+
 		return $this;
 	}
 
