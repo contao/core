@@ -92,16 +92,18 @@ abstract class Model
 	/**
 	 * Load the relations and optionally process a result set
 	 *
-	 * @param \Database\Result $objResult An optional database result
+	 * @param \Database\Result|\Database $objResult An optional database result or connection
 	 */
-	public function __construct(\Database\Result $objResult=null)
+	public function __construct($objResult=null)
 	{
 		$this->arrModified = array();
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
-		if ($objResult !== null)
+		if ($objResult instanceof \Database\Result)
 		{
+			$this->objDatabase = $objResult->getDatabase();
+
 			$arrRelated = array();
 			$arrData = $objResult->row();
 
@@ -135,17 +137,44 @@ abstract class Model
 				}
 				else
 				{
-					$this->arrRelated[$key] = new $strClass();
+					$this->arrRelated[$key] = new $strClass($this->objDatabase);
 					$this->arrRelated[$key]->setRow($row);
 				}
 			}
 
 			$this->setRow($arrData); // see #5439
-			
-			$objResult->getDatabase()->getModelRegistry()->register($this);
+
+			$this->objDatabase->getModelRegistry()->register($this);
 		}
 
-		$this->objDatabase = $objResult->getDatabase();
+		else if ($objResult instanceof \Database)
+		{
+			$this->objDatabase = $objResult;
+		}
+
+		else if ($objResult)
+		{
+			$type = gettype($objResult);
+			if (is_object($objResult))
+			{
+				$value = get_class($objResult);
+			}
+			else if (is_array($objResult))
+			{
+				$value = sprintf('array(%d)', count($objResult));
+			}
+			else {
+				$value = $objResult;
+			}
+
+			throw new \InvalidArgumentException(
+				sprintf(
+					'$objResult must be an instance of Database\Result or Database, [%s] %s given!',
+					$type,
+					$value
+				)
+			);
+		}
 	}
 
 
