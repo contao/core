@@ -189,6 +189,7 @@ abstract class Model
 	public function __clone()
 	{
 		unset($this->arrData[static::$strPk]);
+		$this->arrModified = array();
 	}
 
 
