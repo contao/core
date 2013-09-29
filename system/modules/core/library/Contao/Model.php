@@ -431,8 +431,16 @@ abstract class Model
 	 */
 	public function delete()
 	{
+		if (isset($this->arrModified[static::$strPk]))
+		{
+			$strPk = $this->arrModified[static::$strPk];
+		}
+		else {
+			$strPk = $this->{static::$strPk};
+		}
+
 		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-											   ->execute($this->{static::$strPk})
+											   ->execute($strPk)
 											   ->affectedRows;
 
 		if ($intAffected)
