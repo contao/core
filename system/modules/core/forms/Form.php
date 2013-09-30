@@ -95,6 +95,16 @@ class Form extends \Hybrid
 		// Get all form fields
 		$objFields = \FormFieldModel::findPublishedByPid($this->id);
 
+		// HOOK: compile form hook
+		if (isset($GLOBALS['TL_HOOKS']['compileForm']) && is_array($GLOBALS['TL_HOOKS']['compileForm']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileForm'] as $callback)
+			{
+				$this->import($callback[0]);
+				$objFields = $this->$callback[0]->$callback[1]($objFields, $formId, $this);
+			}
+		}
+
 		if ($objFields !== null)
 		{
 			$row = 0;
