@@ -205,6 +205,13 @@ class Ajax extends \Backend
 	{
 		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
+		// Bypass any core logic for non-core drivers (see #5957)
+		if (!$dc instanceof \DC_File && !$dc instanceof \DC_Folder && !$dc instanceof \DC_Table)
+		{
+			$this->executePostActionsHook($dc);
+			exit;
+		}
+
 		switch ($this->strAction)
 		{
 			// Load nodes of the page structure tree
@@ -402,15 +409,25 @@ class Ajax extends \Backend
 
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strAction, $dc);
-					}
-				}
+				$this->executePostActionsHook($dc);
 				exit; break;
+		}
+	}
+
+
+	/**
+	 * Execute the post actions hook
+	 * @param \DataContainer
+	 */
+	protected function executePostActionsHook(\DataContainer $dc)
+	{
+		if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strAction, $dc);
+			}
 		}
 	}
 }

@@ -77,7 +77,8 @@ class PagePicker extends Backend
 		define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
 
 		$this->loadDataContainer($strTable);
-		$objDca = new DC_Table($strTable);
+		$strDriver = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+		$objDca = new $strDriver($strTable);
 
 		// AJAX request
 		if ($_POST && Environment::get('isAjaxRequest'))
