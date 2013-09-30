@@ -266,11 +266,15 @@ class PageRegular extends \Frontend
 		$this->Template->viewport = '';
 		$this->Template->framework = '';
 
+		// Add the viewport
+		if ($objLayout->viewport != '')
+		{
+			$this->Template->viewport = '<meta name="viewport" content="' . $objLayout->viewport . '"' . ($blnXhtml ? ' />' : '>') . "\n";
+		}
+
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
-			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
-
 			// Wrapper
 			if ($objLayout->static)
 			{

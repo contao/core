@@ -484,6 +484,10 @@ class Updater extends \Controller
 		// Adjust the DB structure
 		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` binary(16) NULL");
 		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
+		$this->Database->query("ALTER TABLE `tl_layout` ADD `viewport` varchar(255) NOT NULL default ''");
+
+		// Set the default viewport
+		$this->Database->query("UPDATE `tl_layout` SET `viewport`='width=device-width,initial-scale=1.0'");
 
 		// Backup the pid column and change the column type
 		$this->Database->query("ALTER TABLE `tl_files` ADD `pid_backup` int(10) unsigned NOT NULL default '0'");
