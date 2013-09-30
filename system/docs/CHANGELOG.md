@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Improved
+Hide the script hint if a user cannot access to the layout module (see #6190).
+
 ### Fixed
 Correctly generate image links (see #6249).
 
