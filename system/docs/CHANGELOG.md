@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Improved
+The viewport tag is now customisable in the page layout settings.
+
 ### Removed
 Removed the TinyMCE spell checker (see #6247).
 
