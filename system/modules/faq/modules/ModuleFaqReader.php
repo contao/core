@@ -161,7 +161,7 @@ class ModuleFaqReader extends \Module
 		{
 			if ($objAuthor->google != '')
 			{
-				$strAuthor = '<a href="https://plus.google.com/' . $objAuthor->google . '" rel="author">' . $objAuthor->name . '</a>';
+				$strAuthor = '<a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
 			}
 			else
 			{

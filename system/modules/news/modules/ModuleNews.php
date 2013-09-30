@@ -261,7 +261,7 @@ abstract class ModuleNews extends \Module
 					{
 						if ($objAuthor->google != '')
 						{
-							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' <a href="https://plus.google.com/' . $objAuthor->google . '" rel="author">' . $objAuthor->name . '</a>';
+							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' <a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
 						}
 						else
 						{
