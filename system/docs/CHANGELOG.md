@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### New
+Added the convenience method `PageModel::getFrontendUrl()` (see #6184).
+
 ### Removed
 Removed the TinyMCE spell checker (see #6247).
 

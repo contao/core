@@ -609,4 +609,18 @@ class PageModel extends \Model
 		$this->blnDetailsLoaded = true;
 		return $this;
 	}
+
+
+	/**
+	 * Generate an URL depending on the current rewriteURL setting
+	 *
+	 * @param string $strParams    An optional string of URL parameters
+	 * @param string $strForceLang Force a certain language
+	 *
+	 * @return string An URL that can be used in the front end
+	 */
+	public function getFrontendUrl($strParams=null, $strForceLang=null)
+	{
+		return \Controller::generateFrontendUrl($this->row(), $strParams, $strForceLang);
+	}
 }
