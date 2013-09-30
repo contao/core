@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Fixed
+Correctly generate image links (see #6249).
+
 ### New
 Added the convenience method `PageModel::getFrontendUrl()` (see #6184).
 

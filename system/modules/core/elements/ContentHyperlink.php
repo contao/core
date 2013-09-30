@@ -59,11 +59,18 @@ class ContentHyperlink extends \ContentElement
 		}
 
 		// Use an image instead of the title
-		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
+		if ($this->useImage && $this->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($this->singleSRC);
 
-			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($this->singleSRC))
+				{
+					$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
 				$this->Template->setData($this->arrData);
