@@ -206,7 +206,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				break;
 
 			default;
-				$this->$strKey = $varValue; // backwards compatibility
+				parent::__set($strKey, $varValue);
 				break;
 		}
 	}

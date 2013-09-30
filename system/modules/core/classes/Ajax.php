@@ -250,7 +250,7 @@ class Ajax extends \Backend
 			case 'reloadPagetree':
 			case 'reloadFiletree':
 				$intId = \Input::get('id');
-				$strField = $strFieldName = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 
 				// Handle the keys in "edit multiple" mode
 				if (\Input::get('act') == 'editAll')
@@ -291,7 +291,7 @@ class Ajax extends \Backend
 				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
 				{
 					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
-					$arrAttribs['activeRecord'] = null;
+					$dc->activeRecord = null;
 				}
 				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
@@ -307,11 +307,31 @@ class Ajax extends \Backend
 					}
 
 					$objRow->$strField = $varValue;
-					$arrAttribs['activeRecord'] = $objRow;
+					$dc->activeRecord = $objRow;
 				}
 
-				$arrAttribs['id'] = $strFieldName;
-				$arrAttribs['name'] = $strFieldName;
+				// Call the load_callback to set the file tree flags
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
+
+				// Build the attributes based on the "eval" array
+				$arrAttribs = $GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['eval'];
+
+				$arrAttribs['id'] = $dc->field;
+				$arrAttribs['name'] = $dc->field;
 				$arrAttribs['value'] = $varValue;
 				$arrAttribs['strTable'] = $dc->table;
 				$arrAttribs['strField'] = $strField;

@@ -268,7 +268,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				break;
 
 			default;
-				$this->$strKey = $varValue; // backwards compatibility
+				parent::__set($strKey, $varValue);
 				break;
 		}
 	}

@@ -615,7 +615,7 @@ class Dbafs
 					// Store the PID change
 					if ($objFiles->type == 'folder')
 					{
-						$arrPidUpdate[$objFound->id] = $objFiles->uuid;
+						$arrPidUpdate[$objFound->uuid] = $objFiles->uuid;
 					}
 
 					// Add a log entry BEFORE changing the object
@@ -627,7 +627,6 @@ class Dbafs
 					$objFiles->name   = $objFound->name;
 					$objFiles->type   = $objFound->type;
 					$objFiles->path   = $objFound->path;
-					$objFiles->uuid   = $objFound->uuid;
 					$objFiles->found  = 1;
 
 					// Delete the newer (duplicate) entry

@@ -96,6 +96,26 @@ class DataContainer extends \Backend
 
 
 	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'activeRecord':
+				$this->objActiveRecord = $varValue;
+				break;
+
+			default;
+				$this->$strKey = $varValue; // backwards compatibility
+				break;
+		}
+	}
+
+
+	/**
 	 * Return an object property
 	 * @param string
 	 * @return mixed
