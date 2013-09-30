@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.4 (2013-XX-XX)
 --------------------------
 
+### Removed
+Removed the TinyMCE spell checker (see #6247).
+
 ### Updated
 Updated TCPDF to version 3.0.38 (see #6268).
 
