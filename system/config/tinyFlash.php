@@ -19,7 +19,7 @@ if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
 <script src="<?php echo $this->base; ?>assets/tinymce/tiny_mce_gzip.js"></script>
 <script>
 tinyMCE_GZ.init({
-  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
+  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,tabfocus,template,typolinks",
   themes : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
@@ -47,8 +47,7 @@ tinyMCE.init({
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
   init_instance_callback : "TinyCallback.getScrollOffset",
-  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
-  spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
+  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,tabfocus,template,typolinks",
   extended_valid_elements : "b/strong,i/em",
   content_css : "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css",
   tabfocus_elements : ":prev,:next",
@@ -60,7 +59,7 @@ tinyMCE.init({
   theme_advanced_statusbar_location : "bottom",
   theme_advanced_source_editor_width : "700",
   theme_advanced_blockformats : "div,p,address,pre,h1,h2,h3,h4,h5,h6",
-  theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,typolinks,unlink,separator,charmap,separator,search,replace,separator,undo,redo,separator,removeformat,cleanup,separator,code,help",
+  theme_advanced_buttons1 : "newdocument,save,separator,separator,typolinks,unlink,separator,charmap,separator,search,replace,separator,undo,redo,separator,removeformat,cleanup,separator,code,help",
   theme_advanced_buttons2 : "fontsizeselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,separator,forecolor",
   theme_advanced_buttons3 : ""
 });

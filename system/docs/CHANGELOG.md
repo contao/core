@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Removed
+Removed the TinyMCE spell checker (see #6247).
+
 ### Improved
 Do not show dates in the past if a recurring event has not expired (see #923).
 
