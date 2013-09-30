@@ -124,6 +124,18 @@ class ModuleEventReader extends \Events
 
 		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
+		// Do not show dates in the past if the event is recurring (see #923)
+		if ($objEvent->recurring)
+		{
+			$arrRange = deserialize($objEvent->repeatEach);
+
+			while ($objEvent->startTime < time() && $objEvent->endTime < $objEvent->repeatEnd)
+			{
+				$objEvent->startTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $objEvent->startTime);
+				$objEvent->endTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $objEvent->endTime);
+			}
+		}
+
 		if ($objPage->outputFormat == 'xhtml')
 		{
 			$strTimeStart = '';

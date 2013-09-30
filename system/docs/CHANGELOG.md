@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Improved
+Do not show dates in the past if a recurring event has not expired (see #923).
+
 ### Fixed
 Correctly handle "toggle visibility" requests via Ajax.
 
