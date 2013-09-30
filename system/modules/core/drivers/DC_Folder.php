@@ -193,6 +193,26 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 
 	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'createNewVersion':
+				$this->blnCreateNewVersion = (bool) $varValue;
+				break;
+
+			default;
+				$this->$strKey = $varValue; // backwards compatibility
+				break;
+		}
+	}
+
+
+	/**
 	 * Return an object property
 	 * @param string
 	 * @return mixed
