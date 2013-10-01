@@ -430,6 +430,8 @@ abstract class Model
 
 			$this->arrModified = array();
 
+			$this->objDatabase->getModelRegistry()->register($this);
+
 			$this->postSave(self::INSERT);
 		}
 
