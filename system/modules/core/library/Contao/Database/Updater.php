@@ -820,7 +820,7 @@ class Updater extends \Controller
 					}
 
 					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute(implode(',', $arrPaths), $objRow->id);
+								   ->execute(serialize($arrPaths), $objRow->id);
 				}
 			}
 		}

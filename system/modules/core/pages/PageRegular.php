@@ -546,26 +546,33 @@ class PageRegular extends \Frontend
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
 			{
-				// Turn the order string into an array and remove all values
-				$arrOrder = explode(',', $objLayout->orderExt);
-				$arrOrder = array_map(function(){}, array_flip($arrOrder));
+				$tmp = deserialize($objLayout->orderExt);
 
-				// Move the matching elements to their position in $arrOrder
-				foreach ($arrExternal as $k=>$v)
+				if (!empty($tmp) && is_array($tmp))
 				{
-					$arrOrder[$v] = $v;
-					unset($arrExternal[$k]);
-				}
+					// Remove all values
+					$arrOrder = array_map(function(){}, array_flip($tmp));
 
-				// Append the left-over style sheets at the end
-				if (!empty($arrExternal))
-				{
-					$arrOrder = array_merge($arrOrder, array_values($arrExternal));
-				}
+					// Move the matching elements to their position in $arrOrder
+					foreach ($arrExternal as $k=>$v)
+					{
+						if (array_key_exists($v, $arrOrder))
+						{
+							$arrOrder[$v] = $v;
+							unset($arrExternal[$k]);
+						}
+					}
 
-				// Remove empty (unreplaced) entries
-				$arrExternal = array_values(array_filter($arrOrder));
-				unset($arrOrder);
+					// Append the left-over style sheets at the end
+					if (!empty($arrExternal))
+					{
+						$arrOrder = array_merge($arrOrder, array_values($arrExternal));
+					}
+
+					// Remove empty (unreplaced) entries
+					$arrExternal = array_values(array_filter($arrOrder));
+					unset($arrOrder);
+				}
 			}
 
 			// Get the file entries from the database

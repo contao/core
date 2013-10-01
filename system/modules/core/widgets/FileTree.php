@@ -100,7 +100,8 @@ class FileTree extends \Widget
 									 ->limit(1)
 									 ->execute($this->activeRecord->id);
 
-			$this->{$this->strOrderField} = array_filter(explode(',', $objRow->{$this->strOrderField}));
+			$tmp = deserialize($objRow->{$this->strOrderField});
+			$this->{$this->strOrderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
 		}
 
 		$this->blnIsGallery = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'];
@@ -119,7 +120,7 @@ class FileTree extends \Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(implode(',', array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)))), \Input::get('id'));
+						   ->execute(serialize(array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)))), \Input::get('id'));
 		}
 
 		// Return the value as usual

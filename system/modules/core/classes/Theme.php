@@ -653,7 +653,7 @@ class Theme extends \Backend
 									$tmp[$kk] = $objFile->uuid;
 								}
 
-								$value = ($name == 'orderSRC' || $name == 'orderExt') ? implode(',', $tmp) : serialize($tmp);
+								$value = serialize($tmp);
 							}
 						}
 
@@ -950,7 +950,7 @@ class Theme extends \Backend
 			// Replace the IDs of multiSRC fields with their paths (see #4952)
 			elseif (($t == 'tl_theme' && $k == 'folders') || ($t == 'tl_module' && $k == 'multiSRC') || ($t == 'tl_module' && $k == 'orderSRC') || ($t == 'tl_layout' && $k == 'external') || ($t == 'tl_layout' && $k == 'orderExt'))
 			{
-				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
+				$arrFiles = deserialize($v);
 
 				if (!empty($arrFiles) && is_array($arrFiles))
 				{

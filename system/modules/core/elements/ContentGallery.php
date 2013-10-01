@@ -212,29 +212,33 @@ class ContentGallery extends \ContentElement
 			case 'custom':
 				if ($this->orderSRC != '')
 				{
-					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_map(function(){}, array_flip($arrOrder));
+					$tmp = deserialize($this->orderSRC);
 
-					// Move the matching elements to their position in $arrOrder
-					foreach ($images as $k=>$v)
+					if (!empty($tmp) && is_array($tmp))
 					{
-						if (array_key_exists($v['uuid'], $arrOrder))
+						// Remove all values
+						$arrOrder = array_map(function(){}, array_flip($tmp));
+
+						// Move the matching elements to their position in $arrOrder
+						foreach ($images as $k=>$v)
 						{
-							$arrOrder[$v['uuid']] = $v;
-							unset($images[$k]);
+							if (array_key_exists($v['uuid'], $arrOrder))
+							{
+								$arrOrder[$v['uuid']] = $v;
+								unset($images[$k]);
+							}
 						}
-					}
 
-					// Append the left-over images at the end
-					if (!empty($images))
-					{
-						$arrOrder = array_merge($arrOrder, array_values($images));
-					}
+						// Append the left-over images at the end
+						if (!empty($images))
+						{
+							$arrOrder = array_merge($arrOrder, array_values($images));
+						}
 
-					// Remove empty (unreplaced) entries
-					$images = array_values(array_filter($arrOrder));
-					unset($arrOrder);
+						// Remove empty (unreplaced) entries
+						$images = array_values(array_filter($arrOrder));
+						unset($arrOrder);
+					}
 				}
 				break;
 

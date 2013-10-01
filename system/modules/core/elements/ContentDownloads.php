@@ -262,29 +262,33 @@ class ContentDownloads extends \ContentElement
 			case 'custom':
 				if ($this->orderSRC != '')
 				{
-					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_map(function(){}, array_flip($arrOrder));
+					$tmp = deserialize($this->orderSRC);
 
-					// Move the matching elements to their position in $arrOrder
-					foreach ($files as $k=>$v)
+					if (!empty($tmp) && is_array($tmp))
 					{
-						if (array_key_exists($v['uuid'], $arrOrder))
+						// Remove all values
+						$arrOrder = array_map(function(){}, array_flip($tmp));
+
+						// Move the matching elements to their position in $arrOrder
+						foreach ($files as $k=>$v)
 						{
-							$arrOrder[$v['uuid']] = $v;
-							unset($files[$k]);
+							if (array_key_exists($v['uuid'], $arrOrder))
+							{
+								$arrOrder[$v['uuid']] = $v;
+								unset($files[$k]);
+							}
 						}
-					}
 
-					// Append the left-over files at the end
-					if (!empty($files))
-					{
-						$arrOrder = array_merge($arrOrder, array_values($files));
-					}
+						// Append the left-over files at the end
+						if (!empty($files))
+						{
+							$arrOrder = array_merge($arrOrder, array_values($files));
+						}
 
-					// Remove empty (unreplaced) entries
-					$files = array_values(array_filter($arrOrder));
-					unset($arrOrder);
+						// Remove empty (unreplaced) entries
+						$files = array_values(array_filter($arrOrder));
+						unset($arrOrder);
+					}
 				}
 				break;
 

@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
 ### Fixed
+Use serialized arrays to store order field data (see #6255).
+
+### Fixed
 Do not strip leading numbers from file names (see #6189).
 
 ### Improved
