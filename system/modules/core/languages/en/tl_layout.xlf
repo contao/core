@@ -102,7 +102,7 @@
         <source>Custom layout sections</source>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
