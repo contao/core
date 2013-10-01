@@ -260,7 +260,6 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		$strFramework = '';
 		$arrFramework = deserialize($objLayout->framework);
 
 		$this->Template->viewport = '';
@@ -269,6 +268,7 @@ class PageRegular extends \Frontend
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
+			$strFramework = '';
 			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
 
 			// Wrapper
