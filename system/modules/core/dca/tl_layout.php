@@ -218,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('before', 'main', 'after'),
+			'options'                 => array('top', 'before', 'main', 'after', 'bottom'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
