@@ -207,10 +207,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['sections'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'checkbox',
-			'options'                 => trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']),
-			'eval'                    => array('multiple'=>true),
-			'sql'                     => "blob NULL"
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'sPosition' => array
 		(
@@ -218,7 +217,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('before', 'main', 'after'),
+			'options'                 => array('top', 'before', 'main', 'after', 'bottom'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),

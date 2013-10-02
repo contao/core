@@ -21,6 +21,8 @@
 </head>
 <body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 
+  <?php echo $this->getCustomSections('top'); ?>
+
   <div id="wrapper">
 
     <?php if ($this->header): ?>
@@ -69,6 +71,8 @@
     <?php endif; ?>
 
   </div>
+
+  <?php echo $this->getCustomSections('bottom'); ?>
 
   <?php echo $this->mootools; ?>
 

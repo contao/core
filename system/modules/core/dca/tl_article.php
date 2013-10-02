@@ -211,7 +211,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'default'                 => 'main',
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_article', 'getActivePageSections'),
+			'options_callback'        => array('tl_article', 'getActiveLayoutSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -604,11 +604,11 @@ class tl_article extends Backend
 
 
 	/**
-	 * Return all active page sections as array
+	 * Return all active layout sections as array
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getActivePageSections(DataContainer $dc)
+	public function getActiveLayoutSections(DataContainer $dc)
 	{
 		$arrCustom = array();
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
@@ -616,54 +616,70 @@ class tl_article extends Backend
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
-			// Load the page
 			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
-			// Get the layout settings
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			// No layout specified
-			if ($objLayout === null)
+			// Get the layout sections
+			foreach (array('layout', 'mobileLayout') as $key)
 			{
-				return array('main');
+				if (!$objPage->$key)
+				{
+					continue;
+				}
+
+				$objLayout = LayoutModel::findByPk($objPage->$key);
+
+				// No layout specified
+				if ($objLayout === null)
+				{
+					continue;
+				}
+
+				$arrSections = array();
+
+				// Header
+				if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
+				{
+					$arrSections[] = 'header';
+				}
+
+				// Left column
+				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+				{
+					$arrSections[] = 'left';
+				}
+
+				// Right column
+				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+				{
+					$arrSections[] = 'right';
+				}
+
+				// Main column
+				$arrSections[] = 'main';
+
+				// Footer
+				if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
+				{
+					$arrSections[] = 'footer';
+				}
+
+				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
 			}
 
-			$arrSections = array();
-
-			// Header
-			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'header';
-			}
-
-			// Left column
-			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'left';
-			}
-
-			// Right column
-			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'right';
-			}
-
-			// Main column
-			$arrSections[] = 'main';
-
-			// Footer
-			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'footer';
-			}
-
-			$arrCustom = deserialize($objLayout->sections);
+			$arrCustom = array_unique($arrCustom);
 		}
 
-		// Always add the custom layout sections in "override all" mode
+		// Show all custom layout sections in "override all" mode
 		if (Input::get('act') == 'overrideAll')
 		{
-			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
+			$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+			while ($objLayout->next())
+			{
+				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+			}
+
+			$arrCustom = array_unique($arrCustom);
 		}
 
 		// Add the custom layout sections

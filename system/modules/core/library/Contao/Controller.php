@@ -3132,7 +3132,7 @@ abstract class Controller extends \System
 	 */
 	public static function getPageSections()
 	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+		return array('header', 'left', 'right', 'main', 'footer');
 	}
 
 

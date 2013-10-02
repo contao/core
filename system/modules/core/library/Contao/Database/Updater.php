@@ -520,6 +520,24 @@ class Updater extends \Controller
 
 		// Update the fields
 		$this->updateFileTreeFields();
+
+		// Adjust the custom layout sections (see #2885)
+		$this->Database->query("ALTER TABLE `tl_layout` CHANGE `sections` `sections` varchar(1022) NOT NULL default ''");
+		$objLayout = $this->Database->query("SELECT id, sections FROM tl_layout WHERE sections!=''");
+
+		while ($objLayout->next())
+		{
+			$strSections = '';
+			$tmp = deserialize($objLayout->sections);
+
+			if (!empty($tmp) && is_array($tmp))
+			{
+				$strSections = implode(', ', $tmp);
+			}
+
+			$this->Database->prepare("UPDATE tl_layout SET sections=? WHERE id=?")
+						   ->execute($strSections, $objLayout->id);
+		}
 	}
 
 

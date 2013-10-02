@@ -4,6 +4,12 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### New
+Allow to define custom layout sections in the page layout (see #2885).
+
+### New
+Added the custom layout sections positions "top" and "bottom" (see #2885).
+
 ### Fixed
 Use serialized arrays to store order field data (see #6255).
 
