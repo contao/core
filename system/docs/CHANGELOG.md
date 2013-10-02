@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Fixed
+Convert binary data to UUIDs in `DC_Table::show()` (see #6257).
+
 ### New
 Allow to define custom layout sections in the page layout (see #2885).
 
