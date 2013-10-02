@@ -420,7 +420,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections'])),
+			'options'                 => Controller::getPageSections(),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"

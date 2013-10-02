@@ -195,7 +195,6 @@ class Theme extends \Backend
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
 
-			$tl_layout = null;
 			$blnHasError = false;
 
 			// Loop through the tables
@@ -211,12 +210,6 @@ class Theme extends \Backend
 				}
 
 				$fields = $rows->item(0)->childNodes;
-
-				// Store the tl_layout element
-				if ($table == 'tl_layout')
-				{
-					$tl_layout = $tables->item($i)->childNodes;
-				}
 
 				// Loop through the fields
 				for ($j=0; $j<$fields->length; $j++)
@@ -236,63 +229,6 @@ class Theme extends \Backend
 			if (!$blnHasError)
 			{
 				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
-			}
-
-			$return .= '
-  <h4>'.$GLOBALS['TL_LANG']['tl_theme']['custom_sections'].'</h4>';
-
-			$blnHasLayout = false;
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-			$arrProcessed = array();
-
-			// Loop through tl_layout
-			for ($i=0; $i<$tl_layout->length; $i++)
-			{
-				$fields = $tl_layout->item($i)->childNodes;
-
-				// Loop through the fields
-				for ($j=0; $j<$fields->length; $j++)
-				{
-					if ($fields->item($j)->getAttribute('name') != 'modules')
-					{
-						continue;
-					}
-
-					$modules = deserialize($fields->item($j)->nodeValue);
-
-					// Continue if there are no modules
-					if (!is_array($modules) || empty($modules))
-					{
-						continue;
-					}
-
-					// Check all columns
-					foreach ($modules as $mod)
-					{
-						// Default columns
-						if ($mod['col'] == 'header' || $mod['col'] == 'left' || $mod['col'] == 'main' || $mod['col'] == 'right' || $mod['col'] == 'footer')
-						{
-							continue;
-						}
-
-						// Do not show multiple warnings
-						if (in_array($mod['col'], $arrProcessed) || in_array($mod['col'], $arrSections))
-						{
-							continue;
-						}
-
-						$blnHasLayout = true;
-						$arrProcessed[] = $mod['col'];
-
-						$return .= "\n  " . '<p style="margin:0;color:#5c9ac9">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
-					}
-				}
-			}
-
-			// Confirmation
-			if (!$blnHasLayout)
-			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
 			}
 
 			// Check the custom templates
@@ -453,9 +389,6 @@ class Theme extends \Backend
 				}
 			}
 
-			$arrMissing = array();
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-
 			// Lock the tables
 			$arrLocks = array
 			(
@@ -567,11 +500,6 @@ class Theme extends \Backend
 									if ($mod['mod'] > 0)
 									{
 										$modules[$key]['mod'] = $arrMapper['tl_module'][$mod['mod']];
-									}
-
-									if (!in_array($mod['col'], array('header', 'left', 'right', 'main', 'footer')) && !in_array($mod['col'], $arrSections) && !in_array($mod['col'], $arrMissing))
-									{
-										$arrMissing[] = $mod['col'];
 									}
 								}
 
@@ -686,13 +614,6 @@ class Theme extends \Backend
 			// Update the style sheets
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
-
-			// Add missing sections to the local configuration
-			if (count($arrMissing))
-			{
-				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrSections, $arrMissing));
-				$this->Config->add("\$GLOBALS['TL_CONFIG']['customSections']", $GLOBALS['TL_CONFIG']['customSections']);
-			}
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));

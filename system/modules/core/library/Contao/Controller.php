@@ -676,6 +676,38 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Return all layout sections as array
+	 *
+	 * @return array An array of layout sections
+	 */
+	public static function getPageSections()
+	{
+		$objDatabase = \Database::getInstance();
+
+		$arrCustom = array();
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
+
+		// Check for custom layout sections
+		$objLayout = $objDatabase->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+		while ($objLayout->next())
+		{
+			$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+		}
+
+		$arrCustom = array_unique($arrCustom);
+
+		// Add the custom layout sections
+		if (!empty($arrCustom) && is_array($arrCustom))
+		{
+			$arrSections = array_merge($arrSections, $arrCustom);
+		}
+
+		return $arrSections;
+	}
+
+
+	/**
 	 * Replace insert tags with their values
 	 *
 	 * @param string  $strBuffer The text with the tags to be replaced
@@ -3120,19 +3152,6 @@ abstract class Controller extends \System
 	{
 		$objArticle = new \ModuleArticle($objArticle);
 		$objArticle->generatePdf();
-	}
-
-
-	/**
-	 * Return all page sections as array
-	 *
-	 * @return array An array of active page sections
-	 *
-	 * @deprecated See #4693
-	 */
-	public static function getPageSections()
-	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
 	}
 
 
