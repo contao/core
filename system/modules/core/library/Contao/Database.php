@@ -165,6 +165,30 @@ abstract class Database
 
 
 	/**
+	 * Generate a WHERE clause by using ORs to use as "column IN (comma seperates values)"
+	 *
+	 * @param string  $strColumnname The name of the column
+	 * @param integer $intCount count of desired values
+	 *
+	 * @return string the generated string (example "(id = (?) OR id = (?))")
+	 */
+	public static function generateORClauseToSimulateINClause($strColumnname, $intCount)
+	{
+		if ($intCount <= 0) return '(false)';
+
+		$ret = "($strColumnname = ?";
+
+		while  ( --$intCount)
+		{
+			$ret .= " OR $strColumnname = ?";
+		}
+
+		$ret .= ')';
+		return $ret;
+	}
+
+
+	/**
 	 * Prepare a query and return a Database\Statement object
 	 *
 	 * @param string $strQuery The query string
