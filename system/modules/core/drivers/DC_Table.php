@@ -498,7 +498,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					foreach ($value as $kk=>$vv)
 					{
-						$value[$kk] = \String::binToUuid($vv);
+						$value[$kk] = $vv ? \String::binToUuid($vv) : '';
 					}
 
 					$row[$i] = implode(', ', $value);
