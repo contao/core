@@ -578,7 +578,7 @@ class tl_settings extends Backend
 		$return = '
 <div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . '">
   <fieldset id="ctrl_' . $dc->field . '" class="tl_checkbox_container">
-    <legend>Inactive extensions</legend>
+    <legend>' . $GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] . '</legend>
     <input type="hidden" name="' . $dc->inputName . '" value="">
     <input type="checkbox" id="check_all_' . $dc->inputName . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $dc->inputName . '\')">
     <label for="check_all_' . $dc->inputName . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>';
