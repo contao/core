@@ -149,12 +149,12 @@ img {
  * Custom layout sections
  */
 .custom {
-	display:block;
+    display:block;
+}
+#container:before,.custom:before,#container:after,.custom:after {
+    content:" ";
+    display:table;
 }
 #container:after,.custom:after {
-	content:".";
-	display:block;
-	height:0;
-	clear:both;
-	visibility:hidden;
+    clear:both;
 }

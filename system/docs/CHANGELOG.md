@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Changed
+Use the micro clearfix hack in the CSS framework (see #6203).
+
 ### Fixed
 Convert binary UUIDs to hex when using it in SQL statements (see #6265).
 
