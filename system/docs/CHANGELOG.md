@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
 ### Fixed
+Convert binary UUIDs to hex when using it in SQL statements (see #6265).
+
+### Fixed
 Convert binary data to UUIDs in `DC_Table::show()` (see #6257).
 
 ### New

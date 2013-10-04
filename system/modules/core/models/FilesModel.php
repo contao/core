@@ -38,6 +38,21 @@ class FilesModel extends \Model
 
 
 	/**
+	 * Find a file by its UUID
+	 *
+	 * @param array $strUuid    The UUID string
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByUuid($strUuid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		return static::findOneBy(array("HEX($t.uuid)=?"), bin2hex($strUuid), $arrOptions);
+	}
+
+
+	/**
 	 * Find multiple files by their UUIDs
 	 *
 	 * @param array $arrUuids   An array of file UUIDs
@@ -53,13 +68,14 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
+		$arrUuids = array_map('bin2hex', $arrUuids);
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.uuid", $arrUuids);
+			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
 		}
 
-		return static::findBy(array("$t.uuid IN('" . implode("','", $arrUuids) . "')"), null, $arrOptions);
+		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "')"), null, $arrOptions);
 	}
 
 
@@ -129,13 +145,14 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
+		$arrUuids = array_map('bin2hex', $arrUuids);
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.uuid", $arrUuids);
+			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
 		}
 
-		return static::findBy(array("$t.uuid IN('" . implode("','", $arrUuids) . "') AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
+		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "') AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 
 
