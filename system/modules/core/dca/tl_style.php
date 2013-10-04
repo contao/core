@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'panelLayout'             => 'filter,search,limit',
+			'panelLayout'             => 'filter;search,limit',
 			'headerFields'            => array('name', 'tstamp', 'media'),
 			'child_record_callback'   => array('StyleSheets', 'compileDefinition')
 		),
@@ -168,6 +168,8 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'invisible' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible'],
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'selector' => array
