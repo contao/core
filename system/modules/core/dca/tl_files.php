@@ -99,6 +99,13 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'deleteFile')
 			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.gif',
+				'button_callback'     => array('tl_files', 'showFile')
+			),
 			'source' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
@@ -505,6 +512,29 @@ class tl_files extends Backend
 		}
 
 		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Return the show file button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function showFile($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (Input::get('popup'))
+		{
+			return '';
+		}
+		else
+		{
+			return '<a href="contao/popup.php?src=' . base64_encode($row['id']) . '" title="'.specialchars($title).'"'.$attributes.' onclick="Backend.openModalIframe({\'width\':'.$row['popupWidth'].',\'title\':\''.str_replace("'", "\\'", $row['fileNameEncoded']).'\',\'url\':this.href,\'height\':'.$row['popupHeight'].'});return false">'.Image::getHtml($icon, $label).'</a> ';
+		}
 	}
 
 

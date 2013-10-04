@@ -120,24 +120,39 @@ class Popup extends Backend
 			$this->Template->uuid = String::binToUuid($objModel->uuid);
 		}
 
-		$objFile = new File($this->strFile, true);
-
 		// Add the file info
-		$this->Template->icon = $objFile->icon;
-		$this->Template->mime = $objFile->mime;
-		$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
-		$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
-		$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
-		$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
-		$this->Template->path = $this->strFile;
-
-		// Image
-		if ($objFile->isGdImage)
+		if (is_dir(TL_ROOT . '/' . $this->strFile))
 		{
-			$this->Template->isImage = true;
-			$this->Template->width = $objFile->width;
-			$this->Template->height = $objFile->height;
-			$this->Template->src = $this->urlEncode($this->strFile);
+			$objFolder = new Folder($this->strFile, true);
+
+			$this->Template->icon = $objFolder->icon;
+			$this->Template->mime = $objFolder->mime;
+			$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->ctime);
+			$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->mtime);
+			$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->atime);
+			$this->Template->path = $this->strFile;
+		}
+		else
+		{
+			$objFile = new File($this->strFile, true);
+
+			$this->Template->icon = $objFile->icon;
+			$this->Template->mime = $objFile->mime;
+			$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
+			$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
+			$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
+			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
+			$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
+			$this->Template->path = $this->strFile;
+
+			// Image
+			if ($objFile->isGdImage)
+			{
+				$this->Template->isImage = true;
+				$this->Template->width = $objFile->width;
+				$this->Template->height = $objFile->height;
+				$this->Template->src = $this->urlEncode($this->strFile);
+			}
 		}
 
 		$this->output();
@@ -154,7 +169,6 @@ class Popup extends Backend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($this->strFile);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
 		$this->Template->label_uuid = $GLOBALS['TL_LANG']['MSC']['fileUuid'];
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];

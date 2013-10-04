@@ -2245,7 +2245,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= \Image::getHtml($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
+			$strFolderNameEncoded = utf8_convert_encoding(specialchars(basename($currentFolder)), $GLOBALS['TL_CONFIG']['characterSet']);
+			$return .= \Image::getHtml($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.$strFolderNameEncoded.'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && \Input::get('act') != 'select')
@@ -2259,7 +2260,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Do not display buttons for mounted folders
 				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
 				{
-					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>178, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
 				}
 
 				// Upload button
@@ -2285,7 +2286,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
-			$popupHeight = 260;
+			$popupHeight = 216;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
 			$objFile = new \File($currentFile, true);
@@ -2321,13 +2322,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFileNameEncoded = utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']);
 
 			// No popup links for templates and in the popup file manager
-			if ($this->strTable == 'tl_templates' || basename(\Environment::get('scriptName')) == 'files.php')
+			if ($this->strTable == 'tl_templates' || \Input::get('popup'))
 			{
 				$return .= \Image::getHtml($objFile->icon).' '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 			else
 			{
-				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.str_replace("'", "\\'", $strFileNameEncoded).'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . \Image::getHtml($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="'. $currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">' . \Image::getHtml($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons
@@ -2337,7 +2338,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$_buttons = (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				$_buttons = (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>$popupWidth, 'popupHeight'=>$popupHeight, 'fileNameEncoded'=>$strFileNameEncoded), $this->strTable);
 			}
 
 			$return .= $_buttons . '</div><div style="clear:both"></div></li>';

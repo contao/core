@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Improved
+Use a "show details" button in the file manager (see #6262).
+
 ### Changed
 Use the micro clearfix hack in the CSS framework (see #6203).
 
