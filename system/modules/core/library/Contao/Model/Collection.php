@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection implements \Countable, \IteratorAggregate
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
 
 	/**
@@ -91,7 +91,7 @@ class Collection implements \Countable, \IteratorAggregate
 	 */
 	public function __construct(array $arrModels, $strTable)
 	{
-		$this->arrModels = $arrModels;
+		$this->arrModels = array_values($arrModels);
 		$this->strTable = $strTable;
 	}
 
@@ -334,6 +334,39 @@ class Collection implements \Countable, \IteratorAggregate
 	{
 		$this->intIndex = -1;
 		return $this;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetExists($offset)
+	{
+		return isset($this->arrModels[$offset]);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetGet($offset)
+	{
+		return $this->arrModels[$offset];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetSet($offset, $value)
+	{
+		throw new \RuntimeException('This collection is immutable!');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetUnset($offset)
+	{
+		throw new \RuntimeException('This collection is immutable!');
 	}
 
 
