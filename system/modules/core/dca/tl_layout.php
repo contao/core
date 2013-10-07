@@ -344,6 +344,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'viewport' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['viewport'],
+			'default'                 => 'width=device-width,initial-scale=1.0',
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
