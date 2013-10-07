@@ -103,6 +103,7 @@ class PagePicker extends Backend
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']);
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'];
 		$this->Template->options = $this->createPageList();
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
@@ -113,7 +114,6 @@ class PagePicker extends Backend
 		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['pageManager'];
 		$this->Template->managerHref = 'contao/main.php?do=page&amp;popup=1';
 		$this->Template->addSearch = true;
-		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'];
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
