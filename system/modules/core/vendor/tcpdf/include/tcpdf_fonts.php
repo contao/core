@@ -1,10 +1,10 @@
 <?php
 //============================================================+
 // File name   : tcpdf_fonts.php
-// Version     : 1.0.005
+// Version     : 1.0.009
 // Begin       : 2008-01-01
-// Last Update : 2013-04-01
-// Author      : Nicola Asuni - Tecnick.com LTD - Manor Coach House, Church Hill, Aldershot, Hants, GU12 4RQ, UK - www.tecnick.com - info@tecnick.com
+// Last Update : 2013-09-04
+// Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
 // -------------------------------------------------------------------
 // Copyright (C) 2008-2013 Nicola Asuni - Tecnick.com LTD
@@ -42,7 +42,7 @@
  * @class TCPDF_FONTS
  * Font methods for TCPDF library.
  * @package com.tecnick.tcpdf
- * @version 1.0.005
+ * @version 1.0.009
  * @author Nicola Asuni - info@tecnick.com
  */
 class TCPDF_FONTS {
@@ -57,12 +57,13 @@ class TCPDF_FONTS {
 	 * @param $platid (int) Platform ID for CMAP table to extract (when building a Unicode font for Windows this value should be 3, for Macintosh should be 1).
 	 * @param $encid (int) Encoding ID for CMAP table to extract (when building a Unicode font for Windows this value should be 1, for Macintosh should be 0). When Platform ID is 3, legal values for Encoding ID are: 0=Symbol, 1=Unicode, 2=ShiftJIS, 3=PRC, 4=Big5, 5=Wansung, 6=Johab, 7=Reserved, 8=Reserved, 9=Reserved, 10=UCS-4.
 	 * @param $addcbbox (boolean) If true includes the character bounding box information on the php font file.
-	 * @return (string) TCPDF font name.
+	 * @param $link (boolean) If true link to system font instead of copying the font data (not transportable) - Note: do not work with Type1 fonts.
+	 * @return (string) TCPDF font name or boolean false in case of error.
 	 * @author Nicola Asuni
 	 * @since 5.9.123 (2010-09-30)
 	 * @public static
 	 */
-	public static function addTTFfont($fontfile, $fonttype='', $enc='', $flags=32, $outpath='', $platid=3, $encid=1, $addcbbox=false) {
+	public static function addTTFfont($fontfile, $fonttype='', $enc='', $flags=32, $outpath='', $platid=3, $encid=1, $addcbbox=false, $link=false) {
 		if (!file_exists($fontfile)) {
 			// Could not find file
 			return false;
@@ -88,11 +89,11 @@ class TCPDF_FONTS {
 			$outpath = self::_getfontpath();
 		}
 		// check if this font already exist
-		if (file_exists($outpath.$font_name.'.php')) {
+		if (@file_exists($outpath.$font_name.'.php')) {
 			// this font already exist (delete it from fonts folder to rebuild it)
 			return $font_name;
 		}
-		$fmetric['file'] = $font_name.'.z';
+		$fmetric['file'] = $font_name;
 		$fmetric['ctg'] = $font_name.'.ctg.z';
 		// get font data
 		$font = file_get_contents($fontfile);
@@ -178,6 +179,7 @@ class TCPDF_FONTS {
 			$encrypted = substr($font, (12 + $fmetric['size1']), $fmetric['size2']);
 			$data .= $encrypted;
 			// store compressed font
+			$fmetric['file'] .= '.z';
 			$fp = fopen($outpath.$fmetric['file'], 'wb');
 			fwrite($fp, gzcompress($data));
 			fclose($fp);
@@ -347,10 +349,16 @@ class TCPDF_FONTS {
 		} else {
 			// ---------- TRUE TYPE ----------
 			if ($fmetric['type'] != 'cidfont0') {
-				// store compressed font
-				$fp = fopen($outpath.$fmetric['file'], 'wb');
-				fwrite($fp, gzcompress($font));
-				fclose($fp);
+				if ($link) {
+					// creates a symbolic link to the existing font
+					symlink($fontfile, $outpath.$fmetric['file']);
+				} else {
+					// store compressed font
+					$fmetric['file'] .= '.z';
+					$fp = fopen($outpath.$fmetric['file'], 'wb');
+					fwrite($fp, gzcompress($font));
+					fclose($fp);
+				}
 			}
 			$offset = 0; // offset position of the font data
 			if (TCPDF_STATIC::_getULONG($font, $offset) != 0x10000) {
@@ -418,14 +426,14 @@ class TCPDF_FONTS {
 			$offset = $table['loca']['offset'];
 			if ($short_offset) {
 				// short version
-				$tot_num_glyphs = ($table['loca']['length'] / 2); // numGlyphs + 1
+				$tot_num_glyphs = floor($table['loca']['length'] / 2); // numGlyphs + 1
 				for ($i = 0; $i < $tot_num_glyphs; ++$i) {
 					$indexToLoc[$i] = TCPDF_STATIC::_getUSHORT($font, $offset) * 2;
 					$offset += 2;
 				}
 			} else {
 				// long version
-				$tot_num_glyphs = ($table['loca']['length'] / 4); // numGlyphs + 1
+				$tot_num_glyphs = floor($table['loca']['length'] / 4); // numGlyphs + 1
 				for ($i = 0; $i < $tot_num_glyphs; ++$i) {
 					$indexToLoc[$i] = TCPDF_STATIC::_getULONG($font, $offset);
 					$offset += 4;
@@ -613,7 +621,7 @@ class TCPDF_FONTS {
 							$length = TCPDF_STATIC::_getUSHORT($font, $offset);
 							$offset += 2;
 							$offset += 2; // skip version/language
-							$segCount = (TCPDF_STATIC::_getUSHORT($font, $offset) / 2);
+							$segCount = floor(TCPDF_STATIC::_getUSHORT($font, $offset) / 2);
 							$offset += 2;
 							$offset += 6; // skip searchRange, entrySelector, rangeShift
 							$endCount = array(); // array of end character codes for each segment
@@ -637,7 +645,7 @@ class TCPDF_FONTS {
 								$idRangeOffset[$k] = TCPDF_STATIC::_getUSHORT($font, $offset);
 								$offset += 2;
 							}
-							$gidlen = ($length / 2) - 8 - (4 * $segCount);
+							$gidlen = (floor($length / 2) - 8 - (4 * $segCount));
 							$glyphIdArray = array(); // glyph index array
 							for ($k = 0; $k < $gidlen; ++$k) {
 								$glyphIdArray[$k] = TCPDF_STATIC::_getUSHORT($font, $offset);
@@ -648,7 +656,7 @@ class TCPDF_FONTS {
 									if ($idRangeOffset[$k] == 0) {
 										$g = ($idDelta[$k] + $c) % 65536;
 									} else {
-										$gid = (($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
+										$gid = (floor($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
 										$g = ($glyphIdArray[$gid] + $idDelta[$k]) % 65536;
 									}
 									if ($g < 0) {
@@ -970,7 +978,7 @@ class TCPDF_FONTS {
 		$offset = $table['loca']['offset'];
 		if ($short_offset) {
 			// short version
-			$tot_num_glyphs = ($table['loca']['length'] / 2); // numGlyphs + 1
+			$tot_num_glyphs = floor($table['loca']['length'] / 2); // numGlyphs + 1
 			for ($i = 0; $i < $tot_num_glyphs; ++$i) {
 				$indexToLoc[$i] = TCPDF_STATIC::_getUSHORT($font, $offset) * 2;
 				$offset += 2;
@@ -1081,7 +1089,7 @@ class TCPDF_FONTS {
 					$length = TCPDF_STATIC::_getUSHORT($font, $offset);
 					$offset += 2;
 					$offset += 2; // skip version/language
-					$segCount = (TCPDF_STATIC::_getUSHORT($font, $offset) / 2);
+					$segCount = floor(TCPDF_STATIC::_getUSHORT($font, $offset) / 2);
 					$offset += 2;
 					$offset += 6; // skip searchRange, entrySelector, rangeShift
 					$endCount = array(); // array of end character codes for each segment
@@ -1105,7 +1113,7 @@ class TCPDF_FONTS {
 						$idRangeOffset[$k] = TCPDF_STATIC::_getUSHORT($font, $offset);
 						$offset += 2;
 					}
-					$gidlen = ($length / 2) - 8 - (4 * $segCount);
+					$gidlen = (floor($length / 2) - 8 - (4 * $segCount));
 					$glyphIdArray = array(); // glyph index array
 					for ($k = 0; $k < $gidlen; ++$k) {
 						$glyphIdArray[$k] = TCPDF_STATIC::_getUSHORT($font, $offset);
@@ -1117,7 +1125,7 @@ class TCPDF_FONTS {
 								if ($idRangeOffset[$k] == 0) {
 									$g = ($idDelta[$k] + $c) % 65536;
 								} else {
-									$gid = (($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
+									$gid = (floor($idRangeOffset[$k] / 2) + ($c - $startCount[$k]) - ($segCount - $k));
 									$g = ($glyphIdArray[$gid] + $idDelta[$k]) % 65536;
 								}
 								if ($g < 0) {
@@ -1280,7 +1288,7 @@ class TCPDF_FONTS {
 				$length = 0;
 			}
 			if ($short_offset) {
-				$loca .= pack('n', ($offset / 2));
+				$loca .= pack('n', floor($offset / 2));
 			} else {
 				$loca .= pack('N', $offset);
 			}
@@ -1677,6 +1685,28 @@ class TCPDF_FONTS {
 	}
 
 	/**
+	 * Return font full path
+	 * @param $file (string) Font file name.
+	 * @param $fontdir (string) Font directory (set to false fto search on default directories)
+	 * @return string Font full path or empty string
+	 * @author Nicola Asuni
+	 * @since 6.0.025
+	 * @public static
+	 */
+	public static function getFontFullPath($file, $fontdir=false) {
+		$fontfile = '';
+		// search files on various directories
+		if (($fontdir !== false) AND @file_exists($fontdir.$file)) {
+			$fontfile = $fontdir.$file;
+		} elseif (@file_exists(self::_getfontpath().$file)) {
+			$fontfile = self::_getfontpath().$file;
+		} elseif (@file_exists($file)) {
+			$fontfile = $file;
+		}
+		return $fontfile;
+	}
+
+	/**
 	 * Converts UTF-8 characters array to array of Latin1 characters array<br>
 	 * @param $unicode (array) array containing UTF-8 unicode values
 	 * @return array
@@ -1807,7 +1837,7 @@ class TCPDF_FONTS {
 						// characters.
 						return 0xFFFD; // use replacement character
 					} else {
-						return $char; // add char to array
+						return $char;
 					}
 				}
 			} else {
@@ -1831,7 +1861,7 @@ class TCPDF_FONTS {
 	public static function UTF8StringToArray($str, $isunicode=true, &$currentfont) {
 		if ($isunicode) {
 			// requires PCRE unicode support turned on
-			$chars = preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY);
+			$chars = TCPDF_STATIC::pregSplit('//','u', $str, -1, PREG_SPLIT_NO_EMPTY);
 			$carr = array_map(array('self', 'uniord'), $chars);
 		} else {
 			$chars = str_split($str);
@@ -2525,7 +2555,7 @@ class TCPDF_FONTS {
 		return $size;
 	}
 
-} // --- END OF CLASS ---
+} // END OF TCPDF_FONTS CLASS
 
 //============================================================+
 // END OF FILE

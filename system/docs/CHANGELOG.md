@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Updated
+Updated TCPDF to version 3.0.38 (see #6268).
+
 ### Fixed
 Correctly show the "toggle page status" icon (see #6282).
 
