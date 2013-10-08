@@ -427,5 +427,5 @@ class Collection
 		}
 
 		return $return;
-    }
+	}
 }
