@@ -44,7 +44,7 @@
   <?php echo $this->rteConfig; ?>
 
 </head>
-<body id="top" class="__ua__<?php if ($this->isPopup) echo ' popup'; ?>">
+<body id="top" class="<?php echo $this->ua; ?><?php if ($this->isPopup) echo ' popup'; ?>">
 
   <?php if (!$this->isPopup): ?>
     <div id="header">

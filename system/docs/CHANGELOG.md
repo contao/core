@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### Fixed
+Use a PHP variable for the user agent in the back end (see #6277 and #3074).
+
 ### Updated
 Updated TCPDF to version 3.0.38 (see #6268).
 

@@ -18,7 +18,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
   ?></style>
 
 </head>
-<body class="__ua__">
+<body class="<?php echo $this->ua; ?>">
 
   <div id="header">
     <h1>Contao Open Source CMS</h1>
