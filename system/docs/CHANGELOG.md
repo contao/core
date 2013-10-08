@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.4 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Correctly show the "toggle page status" icon (see #6282).
+
 ### Removed
 Removed the TinyMCE spell checker (see #6247).
 
