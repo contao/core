@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.1.4 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated TCPDF to version 3.0.38 (see #6268).
+
 ### Fixed
 Correctly render the pages breadcrumb menu for non-admin users (see #6067).
 
