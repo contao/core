@@ -73,7 +73,7 @@
       </table>
       <?php if ($this->href): ?>
         <div id="download">
-          <a href="<?php echo $this->href; ?>" title="<?php echo $this->downloadTitle; ?>"><img src="<?php echo TL_ASSETS_URL; ?>assets/contao/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
+          <a href="<?php echo $this->href; ?>"><img src="<?php echo TL_ASSETS_URL; ?>assets/contao/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
         </div>
       <?php endif; ?>
       <?php if ($this->isImage): ?>
