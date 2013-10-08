@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
+### New
+Added the "compileFormFields" hook (see #6253).
+
 ### Fixed
 Append the article ID to the CSS ID if there is no alias (see #6267).
 
