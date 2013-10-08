@@ -93,7 +93,13 @@ class Form extends \Hybrid
 		$arrLabels = array();
 
 		// Get all form fields
+		$arrFields = array();
 		$objFields = \FormFieldModel::findPublishedByPid($this->id);
+
+		if ($objFields !== null)
+		{
+			$arrFields = $objFields->fetchAllModels();
+		}
 
 		// HOOK: compile form hook
 		if (isset($GLOBALS['TL_HOOKS']['compileForm']) && is_array($GLOBALS['TL_HOOKS']['compileForm']))
@@ -101,18 +107,18 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['compileForm'] as $callback)
 			{
 				$this->import($callback[0]);
-				$objFields = $this->$callback[0]->$callback[1]($objFields, $formId, $this);
+				$arrFields = $this->$callback[0]->$callback[1]($arrFields, $formId, $this);
 			}
 		}
 
-		if ($objFields !== null)
+		if (!empty($arrFields) && is_array($arrFields))
 		{
 			$row = 0;
-			$max_row = $objFields->count();
+			$max_row = count($arrFields);
 
-			while ($objFields->next())
+			foreach ($arrFields as $objField)
 			{
-				$strClass = $GLOBALS['TL_FFL'][$objFields->type];
+				$strClass = $GLOBALS['TL_FFL'][$objField->type];
 
 				// Continue if the class is not defined
 				if (!class_exists($strClass))
@@ -120,7 +126,7 @@ class Form extends \Hybrid
 					continue;
 				}
 
-				$arrData = $objFields->row();
+				$arrData = $objField->row();
 
 				$arrData['decodeEntities'] = true;
 				$arrData['allowHtml'] = $this->allowTags;
@@ -128,7 +134,7 @@ class Form extends \Hybrid
 				$arrData['tableless'] = $this->tableless;
 
 				// Increase the row count if its a password field
-				if ($objFields->type == 'password')
+				if ($objField->type == 'password')
 				{
 					++$row;
 					++$max_row;
@@ -137,7 +143,7 @@ class Form extends \Hybrid
 				}
 
 				// Submit buttons do not use the name attribute
-				if ($objFields->type == 'submit')
+				if ($objField->type == 'submit')
 				{
 					$arrData['name'] = '';
 				}
@@ -145,14 +151,14 @@ class Form extends \Hybrid
 				// Unset the default value depending on the field type (see #4722)
 				if (!empty($arrData['value']))
 				{
-					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objFields->type])))
+					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objField->type])))
 					{
 						$arrData['value'] = '';
 					}
 				}
 
 				$objWidget = new $strClass($arrData);
-				$objWidget->required = $objFields->mandatory ? true : false;
+				$objWidget->required = $objField->mandatory ? true : false;
 
 				// HOOK: load form field callback
 				if (isset($GLOBALS['TL_HOOKS']['loadFormField']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
@@ -187,9 +193,9 @@ class Form extends \Hybrid
 					// Store current value in the session
 					elseif ($objWidget->submitInput())
 					{
-						$arrSubmitted[$objFields->name] = $objWidget->value;
-						$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
-						unset($_POST[$objFields->name]); // see #5474
+						$arrSubmitted[$objField->name] = $objWidget->value;
+						$_SESSION['FORM_DATA'][$objField->name] = $objWidget->value;
+						unset($_POST[$objField->name]); // see #5474
 					}
 				}
 
