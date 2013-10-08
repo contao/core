@@ -393,7 +393,7 @@ class Collection
 
 
 	/**
-	 * Fetch all column of each row
+	 * Fetch all columns of every row
 	 *
 	 * @return array An array with all rows and columns
 	 */
@@ -405,6 +405,25 @@ class Collection
 		while ($this->next())
 		{
 			$return[] = $this->row();
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Fetch model of every row
+	 *
+	 * @return array An array with all rows and their respective model
+	 */
+	public function fetchAllModels()
+	{
+		$this->reset();
+		$return = array();
+
+		while ($this->next())
+		{
+			$return[] = $this->current();
 		}
 
 		return $return;
