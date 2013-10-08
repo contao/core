@@ -102,9 +102,9 @@ class Form extends \Hybrid
 		}
 
 		// HOOK: compile form hook
-		if (isset($GLOBALS['TL_HOOKS']['compileForm']) && is_array($GLOBALS['TL_HOOKS']['compileForm']))
+		if (isset($GLOBALS['TL_HOOKS']['compileFormFields']) && is_array($GLOBALS['TL_HOOKS']['compileFormFields']))
 		{
-			foreach ($GLOBALS['TL_HOOKS']['compileForm'] as $callback)
+			foreach ($GLOBALS['TL_HOOKS']['compileFormFields'] as $callback)
 			{
 				$this->import($callback[0]);
 				$arrFields = $this->$callback[0]->$callback[1]($arrFields, $formId, $this);
