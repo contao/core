@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-10-XX)
 ----------------------------
 
 ### Fixed
+Append the article ID to the CSS ID if there is no alias (see #6267).
+
+### Fixed
 Use a PHP variable for the user agent in the back end (see #6277 and #3074).
 
 ### Updated

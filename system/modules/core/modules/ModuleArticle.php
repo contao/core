@@ -73,9 +73,9 @@ class ModuleArticle extends \Module
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = $this->alias ?: $this->title;
+		$alias = $this->alias ?: 'article';
 
-		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
+		if (in_array($alias, array('article', 'top', 'wrapper', 'header', 'container', 'left', 'main', 'right', 'footer')))
 		{
 			$alias .= '-' . $this->id;
 		}
