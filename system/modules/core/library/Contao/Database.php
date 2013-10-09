@@ -81,12 +81,13 @@ abstract class Database
 	{
 		$this->arrConfig = $arrConfig;
 		$this->connect();
-		$this->objModelRegistry = new \Model\Registry($this);
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
 		{
 			throw new \Exception(sprintf('Could not connect to database (%s)', $this->error));
 		}
+
+		$this->objModelRegistry = new \Model\Registry($this);
 	}
 
 
