@@ -12,6 +12,8 @@
 
 namespace Contao;
 
+use Database\Result;
+
 
 /**
  * Reads objects from and writes them to to the database
@@ -57,12 +59,6 @@ abstract class Model
 	 * @var string
 	 */
 	protected static $strPk = 'id';
-
-	/**
-	 * Database connection
-	 * @var \Database
-	 */
-	protected $objDatabase;
 
 	/**
 	 * Data
@@ -135,7 +131,7 @@ abstract class Model
 				}
 				else
 				{
-					$objRelated = $this->objDatabase->getModelRegistry()->fetch($table, $row[$strClass::getPk()]);
+					$objRelated = \Database::getInstance()->getModelRegistry()->fetch($table, $row[$strClass::getPk()]);
 
 					if (!$objRelated)
 					{
@@ -149,7 +145,7 @@ abstract class Model
 
 			$this->setRow($arrData); // see #5439
 
-			$objResult->getDatabase()->getModelRegistry()->register($this);
+			\Database::getInstance()->getModelRegistry()->register($this);
 		}
 	}
 
@@ -313,7 +309,7 @@ abstract class Model
 			throw new \InvalidArgumentException('Model::save() does not accept an argument anymore.');
 		}
 
-		if ($this->objDatabase->getModelRegistry()->isRegistered($this))
+		if (\Database::getInstance()->getModelRegistry()->isRegistered($this))
 		{
 			$arrRow = $this->row();
 			$arrSet = array();
@@ -332,9 +328,9 @@ abstract class Model
 				$strPk = $this->{static::$strPk};
 			}
 
-			$this->objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-							  ->set($arrSet)
-							  ->execute($strPk);
+			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+									->set($arrSet)
+									->execute($strPk);
 
 			$this->arrModified = array();
 
@@ -344,9 +340,9 @@ abstract class Model
 		{
 			$arrSet = $this->preSave($this->row());
 
-			$stmt = $this->objDatabase->prepare("INSERT INTO " . static::$strTable . " %s")
-									  ->set($arrSet)
-									  ->execute();
+			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
+											->set($arrSet)
+											->execute();
 
 			if (static::$strPk == 'id')
 			{
@@ -355,7 +351,7 @@ abstract class Model
 
 			$this->arrModified = array();
 
-			$this->objDatabase->getModelRegistry()->register($this);
+			\Database::getInstance()->getModelRegistry()->register($this);
 
 			$this->postSave(self::INSERT);
 		}
@@ -414,7 +410,7 @@ abstract class Model
 		if ($intAffected)
 		{
 			// unregister this model from the registry
-			$this->objDatabase->getModelRegistry()->unregister($this);
+			\Database::getInstance()->getModelRegistry()->unregister($this);
 
 			// remove the primary key, it is invalid now
 			$this->arrData[static::$strPk] = null; // see #6162
@@ -472,7 +468,7 @@ abstract class Model
 			(
 				array
 				(
-					'order' => $this->objDatabase->findInSet($strField, $arrValues)
+					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
 				),
 
 				$arrOptions
@@ -501,8 +497,8 @@ abstract class Model
 			$strPk = $this->{static::$strPk};
 		}
 
-		$res = $this->objDatabase->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-								 ->execute($strPk);
+		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									   ->execute($strPk);
 
 		$this->setRow($res->row());
 	}
@@ -514,7 +510,7 @@ abstract class Model
 	 */
 	public function free()
 	{
-		$this->objDatabase->getModelRegistry()->unregister($this);
+		\Database::getInstance()->getModelRegistry()->unregister($this);
 	}
 
 
@@ -528,16 +524,7 @@ abstract class Model
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
-		if (isset($arrOptions['connection']))
-		{
-			$objDatabase = $arrOptions['connection'];
-		}
-		else
-		{
-			$objDatabase = \Database::getInstance();
-		}
-
-		$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varValue);
+		$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varValue);
 
 		if ($objModel)
 		{
@@ -572,16 +559,7 @@ abstract class Model
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
 		if (is_numeric($varId)) {
-			if (isset($arrOptions['connection']))
-			{
-				$objDatabase = $arrOptions['connection'];
-			}
-			else
-			{
-				$objDatabase = \Database::getInstance();
-			}
-
-			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
 
 			if ($objModel)
 			{
@@ -623,22 +601,13 @@ abstract class Model
 			return null;
 		}
 
-		if (isset($arrOptions['connection']))
-		{
-			$objDatabase = $arrOptions['connection'];
-		}
-		else
-		{
-			$objDatabase = \Database::getInstance();
-		}
-
 		$arrRegisteredModels = array();
 		$arrMissingModelIds  = array();
 
 		// search for already registered models
 		foreach ($arrIds as $varId)
 		{
-			$arrRegisteredModels[$varId] = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+			$arrRegisteredModels[$varId] = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
 
 			if (!$arrRegisteredModels[$varId])
 			{
@@ -692,16 +661,7 @@ abstract class Model
 		{
 			$varId = is_array($varValue) ? $varValue[0] : $varValue;
 
-			if (isset($arrOptions['connection']))
-			{
-				$objDatabase = $arrOptions['connection'];
-			}
-			else
-			{
-				$objDatabase = \Database::getInstance();
-			}
-
-			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varId);
+			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
 
 			if ($objModel)
 			{
@@ -829,16 +789,7 @@ abstract class Model
 		$arrOptions['table'] = static::$strTable;
 		$strQuery = \Model\QueryBuilder::find($arrOptions);
 
-		if (isset($arrOptions['connection']))
-		{
-			$objDatabase = $arrOptions['connection'];
-		}
-		else
-		{
-			$objDatabase = \Database::getInstance();
-		}
-
-		$objStatement = $objDatabase->prepare($strQuery);
+		$objStatement = \Database::getInstance()->prepare($strQuery);
 
 		// Defaults for limit and offset
 		if (!isset($arrOptions['limit']))
@@ -871,7 +822,7 @@ abstract class Model
 			$strPkName = static::getPk();
 			$varPk = $objResult->$strPkName;
 
-			$objModel = $objDatabase->getModelRegistry()->fetch(static::$strTable, $varPk);
+			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varPk);
 
 			if ($objModel)
 			{
@@ -936,16 +887,7 @@ abstract class Model
 			'value'  => $varValue
 		));
 
-		if (isset($arrOptions['connection']))
-		{
-			$objDatabase = $arrOptions['connection'];
-		}
-		else
-		{
-			$objDatabase = \Database::getInstance();
-		}
-
-		return (int) $objDatabase->prepare($strQuery)->execute($varValue)->count;
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
 	}
 
 

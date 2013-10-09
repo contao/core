@@ -346,6 +346,6 @@ class Mysql extends \Database
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new \Database\Mysql\Statement($this, $resConnection, $blnDisableAutocommit);
+		return new \Database\Mysql\Statement($resConnection, $blnDisableAutocommit);
 	}
 }

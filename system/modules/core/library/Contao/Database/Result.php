@@ -70,31 +70,22 @@ abstract class Result
 	 */
 	protected $arrCache = array();
 
-	/**
-	 * The database this result belongs to.
-	 *
-	 * @var \Database
-	 */
-	protected $objDatabase;
-
 
 	/**
 	 * Validate the connection resource and store the query string
 	 *
-	 * @param \Database $objDatabase The database connection
-	 * @param resource  $resResult   The database result
-	 * @param string    $strQuery    The query string
+	 * @param resource $resResult The database result
+	 * @param string   $strQuery  The query string
 	 *
 	 * @throws \Exception If $resResult is not a valid resource
 	 */
-	public function __construct(\Database $objDatabase, $resResult, $strQuery)
+	public function __construct($resResult, $strQuery)
 	{
 		if (!is_resource($resResult) && !is_object($resResult))
 		{
 			throw new \Exception('Invalid result resource');
 		}
 
-		$this->objDatabase = $objDatabase;
 		$this->resResult = $resResult;
 		$this->strQuery = $strQuery;
 	}
@@ -194,15 +185,6 @@ abstract class Result
 		return null;
 	}
 
-	/**
-	 * Return the database this result belongs to.
-	 *
-	 * @return \Database
-	 */
-	public function getDatabase()
-	{
-		return $this->objDatabase;
-	}
 
 	/**
 	 * Fetch the current row as enumerated array

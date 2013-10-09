@@ -131,9 +131,9 @@ class Statement extends \Database\Statement
 	 *
 	 * @return \Database\Mysql\Result The result object
 	 */
-	protected function createResult(\Database $objDatabase, $resResult, $strQuery)
+	protected function createResult($resResult, $strQuery)
 	{
-		return new \Database\Mysql\Result($objDatabase, $resResult, $strQuery);
+		return new \Database\Mysql\Result($resResult, $strQuery);
 	}
 }
 
