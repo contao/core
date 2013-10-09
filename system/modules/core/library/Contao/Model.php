@@ -131,6 +131,7 @@ abstract class Model
 				}
 				else
 				{
+					/** @var \Model $objRelated */
 					$objRelated = \Model\Registry::getInstance()->fetch($table, $row[$strClass::getPk()]);
 
 					if (!$objRelated)
