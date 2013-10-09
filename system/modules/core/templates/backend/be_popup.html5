@@ -78,7 +78,9 @@
       <?php endif; ?>
       <?php if ($this->isImage): ?>
         <div id="preview">
-          <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          <div class="checkerbox" style="width:<?php echo $this->width; ?>px;height:<?php echo $this->height; ?>px">
+            <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          </div>
         </div>
       <?php endif; ?>
     </div>
