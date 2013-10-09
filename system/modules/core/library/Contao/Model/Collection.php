@@ -52,10 +52,12 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * Create a new collection from a database result.
+	 * Create a new collection from a database result
 	 *
 	 * @param \Database\Result $objResult The database result object
 	 * @param string           $strTable  The table name
+	 *
+	 * @return \Model\Collection The model collection object
 	 */
 	static public function createFromResult(\Database\Result $objResult, $strTable)
 	{
@@ -338,48 +340,6 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * {@inheritdoc}
-	 */
-	public function offsetExists($offset)
-	{
-		return isset($this->arrModels[$offset]);
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function offsetGet($offset)
-	{
-		return $this->arrModels[$offset];
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function offsetSet($offset, $value)
-	{
-		throw new \RuntimeException('This collection is immutable!');
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function offsetUnset($offset)
-	{
-		throw new \RuntimeException('This collection is immutable!');
-	}
-
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getIterator()
-	{
-		return new \ArrayIterator($this->arrModels);
-	}
-
-
-	/**
 	 * Fetch a column of each row
 	 *
 	 * @param string $strKey The property name
@@ -425,5 +385,47 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetExists($offset)
+	{
+		return isset($this->arrModels[$offset]);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetGet($offset)
+	{
+		return $this->arrModels[$offset];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetSet($offset, $value)
+	{
+		throw new \RuntimeException('This collection is immutable!');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetUnset($offset)
+	{
+		throw new \RuntimeException('This collection is immutable!');
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getIterator()
+	{
+		return new \ArrayIterator($this->arrModels);
 	}
 }

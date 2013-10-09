@@ -93,7 +93,9 @@ abstract class Model
 	 * Load the relations and optionally process a result set
 	 *
 	 * @param \Database\Result|array|\Database $objResult An optional database result or connection
-	 * @param \Database $objResult An optional database connection, if $objResult is an array
+	 * @param \Database                        $objResult An optional database connection, if $objResult is an array
+	 *
+	 * @throws \InvalidArgumentException If $objResult has an unknown type
 	 */
 	public function __construct($objResult=null, $objConnection = null)
 	{
