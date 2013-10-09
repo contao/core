@@ -138,6 +138,10 @@ abstract class Model
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
 					}
+					else
+					{
+						$objRelated->safeMerge($row);
+					}
 
 					$this->arrRelated[$key] = $objRelated;
 				}
