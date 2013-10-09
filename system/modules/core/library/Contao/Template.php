@@ -331,15 +331,17 @@ abstract class Template extends \Controller
 			}
 
 			$strDebug = sprintf(
-				'<div id="debug" class="%s">' . "\n"
-				. '<p><span class="info">Contao debug information</span>'
-				. '<span class="time">Execution time: %s %s</span>'
-				. '<span class="memory">Memory usage: %s</span>'
-				. '<span class="db">Database queries: %d</span>'
-				. '<span class="models">Model registry: %d</span>'
-				. '<span class="rows">Rows: %d returned, %s affected</span>'
-				. '<span id="tog">&nbsp;</span></p>' . "\n"
-				. '<div><pre>' . "\n",
+				'<div id="debug" class="%s">'
+				. '<p>'
+					. '<span class="info">Debug information</span>'
+					. '<span class="time">Execution time: %s %s</span>'
+					. '<span class="memory">Memory usage: %s</span>'
+					. '<span class="db">Database queries: %d</span>'
+					. '<span class="models">Registered models: %d</span>'
+					. '<span class="rows">Rows: %d returned, %s affected</span>'
+					. '<span id="tog">&nbsp;</span>'
+				. '</p>'
+				. '<div><pre>',
 				\Input::cookie('CONTAO_CONSOLE'),
 				$this->getFormattedNumber($intTime, 0),
 				$strUnit,
