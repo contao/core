@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('rows', 'cols', 'addJQuery', 'addMooTools', 'static'),
-		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
+		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static;{usage_legend},layoutUsage,mobileLayoutUsage'
 	),
 
 	// Subpalettes
@@ -454,6 +454,43 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'layoutUsage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['layoutUsage'],
+			'inputType'               => 'usageWizard',
+			'exclude'                 => true,
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('tl_class'=>'clr', 'pickerTitle'=>$GLOBALS['TL_LANG']['tl_layout']['layoutUsage'][0],
+				'model' => array(array(
+					'table'=>'tl_page',
+					'label'=>'%s (%s' . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')',
+					'labelValue'=>array('title','alias'),
+					'column'=>array('layout=? AND includeLayout=1'),
+					'value'=>array(\Input::get('id'))
+				))
+
+			),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+		),
+		'mobileLayoutUsage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mobileLayoutUsage'],
+			'inputType'               => 'usageWizard',
+			'exclude'                 => true,
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('tl_class'=>'clr', 'pickerTitle'=>$GLOBALS['TL_LANG']['tl_layout']['mobileLayoutUsage'][0],
+				'model' => array(array(
+					'table'=>'tl_page',
+					'label'=>'%s (%s' . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')',
+					'labelValue'=>array('title','alias'),
+					'column'=>array('mobileLayout=? AND includeLayout=1'),
+					'value'=>array(\Input::get('id'))
+				))
+			),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		)
 	)
 );

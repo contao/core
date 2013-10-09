@@ -284,6 +284,18 @@
       <trans-unit id="tl_layout.align.1">
         <source>Please select the alignment of the page.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.layoutUsage.0">
+        <source>Layout usage</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.layoutUsage.1">
+        <source>You can see an overview of the layout usage on each page.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.mobileLayoutUsage.0">
+        <source>Mobile layout usage</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.mobileLayoutUsage.1">
+        <source>You can see an overview of the mobile layout usage on each page.</source>
+      </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
       </trans-unit>

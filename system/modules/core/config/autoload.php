@@ -225,6 +225,7 @@ ClassLoader::addClasses(array
 	'Contao\TextStore'                 => 'system/modules/core/widgets/TextStore.php',
 	'Contao\TimePeriod'                => 'system/modules/core/widgets/TimePeriod.php',
 	'Contao\TrblField'                 => 'system/modules/core/widgets/TrblField.php',
+	'Contao\UsageWizard'               => 'system/modules/core/widgets/UsageWizard.php',
 	'Contao\Upload'                    => 'system/modules/core/widgets/Upload.php',
 ));
 
@@ -263,6 +264,7 @@ TemplateLoader::addFiles(array
 	'be_rebuild_index'    => 'system/modules/core/templates/backend',
 	'be_referer'          => 'system/modules/core/templates/backend',
 	'be_switch'           => 'system/modules/core/templates/backend',
+	'be_usage_wizard'     => 'system/modules/core/templates/backend',
 	'be_welcome'          => 'system/modules/core/templates/backend',
 	'be_widget'           => 'system/modules/core/templates/backend',
 	'be_widget_chk'       => 'system/modules/core/templates/backend',

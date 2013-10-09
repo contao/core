@@ -1,0 +1,21 @@
+<?php if(!$objTemplate->isAjaxRequest): ?>
+  <div>
+<?php endif; ?>
+
+    <input type="hidden" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" value="<?php echo $this->set; ?>">
+
+    <div class="selector_container">
+
+    <ul id="sort_<?php echo $this->id; ?>" class="<?php echo $this->class; ?>">
+
+      <?php foreach ($this->arrValues as $k=>$v): ?>
+        <li data-id="<?php echo $k; ?>"><?php echo $v->icon; ?> <?php echo $v->label; ?></li>
+      <?php endforeach; ?>
+
+      </ul>
+      <p><a href="<?php echo $this->href; ?>" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalUsageWizard({'width':765,'title':'<?php echo $this->pickerTitle; ?>','url':this.href,'id':'<?php echo $this->id; ?>','type':'<?php echo $this->type; ?>'});return false"><?php echo $this->changeSelection; ?></a></p>
+    </div>
+
+<?php if(!$objTemplate->isAjaxRequest): ?>
+  </div>
+<?php endif; ?>

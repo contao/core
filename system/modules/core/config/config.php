@@ -223,7 +223,8 @@ $GLOBALS['BE_FFL'] = array
 	'keyValueWizard' => 'KeyValueWizard',
 	'imageSize'      => 'ImageSize',
 	'timePeriod'     => 'TimePeriod',
-	'metaWizard'     => 'MetaWizard'
+	'metaWizard'     => 'MetaWizard',
+	'usageWizard'	 => 'UsageWizard'
 );
 
 
