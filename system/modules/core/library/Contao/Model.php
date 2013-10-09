@@ -92,28 +92,18 @@ abstract class Model
 	/**
 	 * Load the relations and optionally process a result set
 	 *
-	 * @param \Database\Result|array|\Database $objResult An optional database result or connection
-	 * @param \Database                        $objResult An optional database connection, if $objResult is an array
-	 *
-	 * @throws \InvalidArgumentException If $objResult has an unknown type
+	 * @param \Database\Result $objResult An optional database result
 	 */
-	public function __construct($objResult=null, $objConnection = null)
+	public function __construct(\Database\Result $objResult=null)
 	{
 		$this->arrModified = array();
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
-		if ($objResult instanceof \Database\Result)
+		if ($objResult !== null)
 		{
-			$objConnection = $objResult->getDatabase();
-			$objResult = $objResult->row();
-		}
-
-		if (is_array($objResult) && $objConnection instanceof \Database) {
-			$this->objDatabase = $objConnection;
-
 			$arrRelated = array();
-			$arrData = $objResult;
+			$arrData = $objResult->row();
 
 			// Look for joined fields
 			foreach ($arrData as $k=>$v)
@@ -149,7 +139,8 @@ abstract class Model
 
 					if (!$objRelated)
 					{
-						$objRelated = new $strClass($row, $this->objDatabase);
+						$objRelated = new $strClass();
+						$objRelated->setRow($row);
 					}
 
 					$this->arrRelated[$key] = $objRelated;
@@ -158,70 +149,7 @@ abstract class Model
 
 			$this->setRow($arrData); // see #5439
 
-			$this->objDatabase->getModelRegistry()->register($this);
-		}
-
-		else if ($objResult instanceof \Database)
-		{
-			$this->objDatabase = $objResult;
-		}
-
-		else if ($objConnection instanceof \Database)
-		{
-			$this->objDatabase = $objConnection;
-		}
-
-		else if ($objResult)
-		{
-			$type = gettype($objResult);
-			if (is_object($objResult))
-			{
-				$value = get_class($objResult);
-			}
-			else if (is_array($objResult))
-			{
-				$value = sprintf('array(%d)', count($objResult));
-			}
-			else {
-				$value = $objResult;
-			}
-
-			throw new \InvalidArgumentException(
-				sprintf(
-					'$objResult must be an instance of Database\Result, Database or an array, [%s] %s given!',
-					$type,
-					$value
-				)
-			);
-		}
-
-		else if ($objConnection)
-		{
-			$type = gettype($objConnection);
-			if (is_object($objConnection))
-			{
-				$value = get_class($objConnection);
-			}
-			else if (is_array($objConnection))
-			{
-				$value = sprintf('array(%d)', count($objConnection));
-			}
-			else {
-				$value = $objConnection;
-			}
-
-			throw new \InvalidArgumentException(
-				sprintf(
-					'$objConnection must be an instance of Database, [%s] %s given!',
-					$type,
-					$value
-				)
-			);
-		}
-
-		else
-		{
-			$this->objDatabase = \Database::getInstance();
+			$objResult->getDatabase()->getModelRegistry()->register($this);
 		}
 	}
 
