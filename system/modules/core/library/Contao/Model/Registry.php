@@ -27,10 +27,10 @@ class Registry implements \Countable
 {
 
 	/**
-	 * The database connection
-	 * @var \Database
+	 * Object instance (Singleton)
+	 * @var \Registry
 	 */
-	protected $objDatabase;
+	protected static $objInstance;
 
 	/**
 	 * Registered models by type and PK
@@ -46,13 +46,30 @@ class Registry implements \Countable
 
 
 	/**
-	 * Initialize the object
-	 *
-	 * @param \Database $objDatabase The database object
+	 * Prevent direct instantiation (Singleton)
 	 */
-	function __construct(\Database $objDatabase)
+	protected function __construct() {}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 */
+	final public function __clone() {}
+
+
+	/**
+	 * Return the current object instance (Singleton)
+	 *
+	 * @return \Config The object instance
+	 */
+	public static function getInstance()
 	{
-		$this->objDatabase = $objDatabase;
+		if (static::$objInstance === null)
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
 	}
 
 

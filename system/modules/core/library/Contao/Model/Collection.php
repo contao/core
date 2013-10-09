@@ -68,7 +68,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 			$strClass = \Model::getClassFromTable($strTable);
 			$strPkName = $strClass::getPk();
 			$varPk = $objResult->$strPkName;
-			$objModel = $objResult->getDatabase()->getModelRegistry()->fetch($strTable, $varPk);
+			$objModel = \Model\Registry::getInstance()->fetch($strTable, $varPk);
 
 			if ($objModel)
 			{

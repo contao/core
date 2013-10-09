@@ -345,7 +345,7 @@ abstract class Template extends \Controller
 				$strUnit,
 				$this->getReadableSize(memory_get_peak_usage()),
 				count($GLOBALS['TL_DEBUG']['database_queries']),
-				\Database::getInstance()->getModelRegistry()->count(),
+				\Model\Registry::getInstance()->count(),
 				$intReturned,
 				$intAffected
 			);

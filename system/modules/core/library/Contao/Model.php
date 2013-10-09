@@ -131,7 +131,7 @@ abstract class Model
 				}
 				else
 				{
-					$objRelated = \Database::getInstance()->getModelRegistry()->fetch($table, $row[$strClass::getPk()]);
+					$objRelated = \Model\Registry::getInstance()->fetch($table, $row[$strClass::getPk()]);
 
 					if (!$objRelated)
 					{
@@ -145,7 +145,7 @@ abstract class Model
 
 			$this->setRow($arrData); // see #5439
 
-			\Database::getInstance()->getModelRegistry()->register($this);
+			\Model\Registry::getInstance()->register($this);
 		}
 	}
 
@@ -309,7 +309,7 @@ abstract class Model
 			throw new \InvalidArgumentException('Model::save() does not accept an argument anymore.');
 		}
 
-		if (\Database::getInstance()->getModelRegistry()->isRegistered($this))
+		if (\Model\Registry::getInstance()->isRegistered($this))
 		{
 			$arrRow = $this->row();
 			$arrSet = array();
@@ -351,7 +351,7 @@ abstract class Model
 
 			$this->arrModified = array();
 
-			\Database::getInstance()->getModelRegistry()->register($this);
+			\Model\Registry::getInstance()->register($this);
 
 			$this->postSave(self::INSERT);
 		}
@@ -410,7 +410,7 @@ abstract class Model
 		if ($intAffected)
 		{
 			// unregister this model from the registry
-			\Database::getInstance()->getModelRegistry()->unregister($this);
+			\Model\Registry::getInstance()->unregister($this);
 
 			// remove the primary key, it is invalid now
 			$this->arrData[static::$strPk] = null; // see #6162
@@ -510,7 +510,7 @@ abstract class Model
 	 */
 	public function free()
 	{
-		\Database::getInstance()->getModelRegistry()->unregister($this);
+		\Model\Registry::getInstance()->unregister($this);
 	}
 
 
@@ -524,7 +524,7 @@ abstract class Model
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
-		$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varValue);
+		$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varValue);
 
 		if ($objModel)
 		{
@@ -559,7 +559,7 @@ abstract class Model
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
 		if (is_numeric($varId)) {
-			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varId);
 
 			if ($objModel)
 			{
@@ -607,7 +607,7 @@ abstract class Model
 		// search for already registered models
 		foreach ($arrIds as $varId)
 		{
-			$arrRegisteredModels[$varId] = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
+			$arrRegisteredModels[$varId] = \Model\Registry::getInstance()->fetch(static::$strTable, $varId);
 
 			if (!$arrRegisteredModels[$varId])
 			{
@@ -661,7 +661,7 @@ abstract class Model
 		{
 			$varId = is_array($varValue) ? $varValue[0] : $varValue;
 
-			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varId);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varId);
 
 			if ($objModel)
 			{
@@ -822,7 +822,7 @@ abstract class Model
 			$strPkName = static::getPk();
 			$varPk = $objResult->$strPkName;
 
-			$objModel = \Database::getInstance()->getModelRegistry()->fetch(static::$strTable, $varPk);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varPk);
 
 			if ($objModel)
 			{
