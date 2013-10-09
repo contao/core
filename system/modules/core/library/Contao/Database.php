@@ -63,12 +63,6 @@ abstract class Database
 	 */
 	protected $arrCache = array();
 
-	/**
-	 * Model registry
-	 * @var \Model\Registry
-	 */
-	protected $objModelRegistry;
-
 
 	/**
 	 * Establish the database connection
@@ -81,7 +75,6 @@ abstract class Database
 	{
 		$this->arrConfig = $arrConfig;
 		$this->connect();
-		$this->objModelRegistry = new \Model\Registry($this);
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
 		{
@@ -168,17 +161,6 @@ abstract class Database
 		}
 
 		return static::$arrInstances[$strKey];
-	}
-
-
-	/**
-	 * Return the model registry bound to this connection.
-	 *
-	 * @return \Model\Registry The model registry.
-	 */
-	public function getModelRegistry()
-	{
-		return $this->objModelRegistry;
 	}
 
 
