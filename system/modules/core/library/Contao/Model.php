@@ -390,6 +390,12 @@ abstract class Model
 	 */
 	public function save()
 	{
+		if (count(func_get_args()))
+		{
+			trigger_error('Model::save($blnForceInsert) is impossible since Contao 3.2, see the upgrade notice in system/docs/UPGRADE.md for details.', E_USER_DEPRECATED);
+			throw new \InvalidArgumentException('Model::save() does not accept an argument anymore.');
+		}
+
 		if ($this->objDatabase->getModelRegistry()->isRegistered($this))
 		{
 			$arrRow = $this->row();
