@@ -313,17 +313,6 @@ abstract class Model
 
 
 	/**
-	 * Return the database connection.
-	 *
-	 * @return \Database
-	 */
-	public function getDatabase()
-	{
-		return $this->objDatabase;
-	}
-
-
-	/**
 	 * Return the current record as associative array
 	 *
 	 * @return array The data record
