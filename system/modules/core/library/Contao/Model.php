@@ -839,7 +839,7 @@ abstract class Model
 		}
 		else
 		{
-			return \Model\Collection::createFromResult($objResult, static::$strTable);
+			return \Model\Collection::createFromDbResult($objResult, static::$strTable);
 		}
 	}
 

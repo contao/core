@@ -326,7 +326,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return \Model\Collection::createFromResult($objSubpages, 'tl_page');
+		return \Model\Collection::createFromDbResult($objSubpages, 'tl_page');
 	}
 
 
@@ -418,7 +418,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return \Model\Collection::createFromResult($objPages, 'tl_page');
+		return \Model\Collection::createFromDbResult($objPages, 'tl_page');
 	}
 
 

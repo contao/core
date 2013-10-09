@@ -59,7 +59,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 *
 	 * @return \Model\Collection The model collection object
 	 */
-	static public function createFromResult(\Database\Result $objResult, $strTable)
+	static public function createFromDbResult(\Database\Result $objResult, $strTable)
 	{
 		$arrModels = array();
 
