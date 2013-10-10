@@ -97,18 +97,6 @@
         <source>The tables have been successfully checked.</source>
         <target>جدول‌ها با موفقیت بررسی شدند</target>
       </trans-unit>
-      <trans-unit id="tl_theme.custom_sections">
-        <source>Custom layout sections</source>
-        <target>بخش‌های چیدمان اختصاصی</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
-        <target>بخش چیدمان &lt;strong&gt;%s&lt;/strong&gt; به تنظیمات محلی اضافه خواهد شد.</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.sections_ok">
-        <source>The layout sections have been successfully checked.</source>
-        <target>بخش‌های چیدمان با موفقیت بررسی شدند.</target>
-      </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
         <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
         <target>پوسته &quot;%s&quot; خاراب است و نمی‌تواند وارد شود.</target>

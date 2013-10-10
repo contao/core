@@ -112,9 +112,9 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'explanation'                 => '{type_legend},type;{text_legend},text',
 		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
 		'html'                        => '{type_legend},type;{text_legend},html',
-		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,maxlength,accesskey,tabindex,value;{submit_legend},addSubmit',
-		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
-		'textarea'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,maxlength,accesskey,tabindex,value,size;{submit_legend},addSubmit',
+		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,value,minlength,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
+		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,value,minlength,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
+		'textarea'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{size_legend},size;{expert_legend:hide},class,value,minlength,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
 		'select'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,multiple;{options_legend},options;{expert_legend:hide},class,accesskey,tabindex;{submit_legend},addSubmit',
 		'radio'                       => '{type_legend},type,name,label;{fconfig_legend},mandatory;{options_legend},options;{expert_legend:hide},class;{submit_legend},addSubmit',
 		'checkbox'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory;{options_legend},options;{expert_legend:hide},class;{submit_legend},addSubmit',
@@ -242,6 +242,14 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'minlength' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['minlength'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'maxlength' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
@@ -298,7 +306,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'useHomeDir' => array
 		(
@@ -401,7 +409,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		)
 	)
 );
@@ -644,6 +652,12 @@ class tl_form_field extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -678,8 +692,15 @@ class tl_form_field extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_form_field']['fields']['invisible']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

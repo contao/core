@@ -30,7 +30,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_row()
 	{
-		return @$this->resResult->fetch_row();
+		return $this->resResult->fetch_row();
 	}
 
 
@@ -41,7 +41,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_assoc()
 	{
-		return @$this->resResult->fetch_assoc();
+		return $this->resResult->fetch_assoc();
 	}
 
 
@@ -52,7 +52,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_rows()
 	{
-		return @$this->resResult->num_rows;
+		return $this->resResult->num_rows;
 	}
 
 
@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @$this->resResult->field_count;
+		return $this->resResult->field_count;
 	}
 
 
@@ -76,7 +76,18 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return @$this->resResult->fetch_field_direct($intOffset);
+		return $this->resResult->fetch_field_direct($intOffset);
+	}
+
+
+	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 */
+	protected function data_seek($intIndex)
+	{
+		$this->resResult->data_seek($intIndex);
 	}
 
 
@@ -87,7 +98,7 @@ class Result extends \Database\Result
 	{
 		if (is_object($this->resResult))
 		{
-			@$this->resResult->free();
+			$this->resResult->free();
 		}
 	}
 }

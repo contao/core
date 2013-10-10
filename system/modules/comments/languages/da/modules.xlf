@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="CTE.comments.1">
         <source>Adds a comment form to the page</source>
-        <target>Dette modul giver dine besøgende mulighed for at tilføje kommentarer.</target>
+        <target>Tilføjer en kommentar formular på siden</target>
       </trans-unit>
       <trans-unit id="FMD.comments.0">
         <source>Comments</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="FMD.comments.1">
         <source>Manage comments or guestbook entries</source>
-        <target>Administrer kommentarer eller indlæg i gæstebog.</target>
+        <target>Håndter kommentarer eller indlæg i gæstebog</target>
       </trans-unit>
       <trans-unit id="MOD.comments.0">
         <source>Comments</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="MOD.comments.1">
         <source>Manage comments or guestbook entries</source>
-        <target>Dette modul giver dig mulighed for at håndtere besøgendes kommentarer.</target>
+        <target>Håndter kommentarer eller indlæg i gæstebog</target>
       </trans-unit>
     </body>
   </file>

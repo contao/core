@@ -23,7 +23,7 @@ namespace Contao\Model;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2013
  */
-class Collection
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
 
 	/**
@@ -33,22 +33,10 @@ class Collection
 	protected $strTable;
 
 	/**
-	 * Database result
-	 * @var \Database\Result
-	 */
-	protected $objResult;
-
-	/**
 	 * Current index
 	 * @var integer
 	 */
 	protected $intIndex = -1;
-
-	/**
-	 * End indicator
-	 * @var boolean
-	 */
-	protected $blnDone = false;
 
 	/**
 	 * Models
@@ -58,15 +46,27 @@ class Collection
 
 
 	/**
-	 * Store the database result and table name
+	 * Create a new collection
 	 *
-	 * @param \Database\Result $objResult The database result object
-	 * @param string           $strTable  The table name
+	 * @param array  $arrModels An array of models
+	 * @param string $strTable  The table name
+	 *
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct(\Database\Result $objResult, $strTable)
+	public function __construct(array $arrModels, $strTable)
 	{
-		$this->objResult = $objResult;
-		$this->strTable = $strTable;
+		$arrModels = array_values($arrModels);
+
+		foreach ($arrModels as $objModel)
+		{
+			if (!$objModel instanceof \Model)
+			{
+				throw new \InvalidArgumentException('Invalid type: ' . gettype($objModel));
+			}
+		}
+
+		$this->arrModels = $arrModels;
+		$this->strTable  = $strTable;
 	}
 
 
@@ -129,13 +129,36 @@ class Collection
 
 
 	/**
-	 * Return the database result
+	 * Create a new collection from a database result
 	 *
-	 * @return \Database\Result|null The database result object or null
+	 * @param \Database\Result $objResult The database result object
+	 * @param string           $strTable  The table name
+	 *
+	 * @return \Model\Collection The model collection
 	 */
-	public function getResult()
+	static public function createFromDbResult(\Database\Result $objResult, $strTable)
 	{
-		return $this->objResult;
+		$arrModels = array();
+
+		while ($objResult->next())
+		{
+			$strClass = \Model::getClassFromTable($strTable);
+			$strPk    = $strClass::getPk();
+			$intPk    = $objResult->$strPk;
+			$objModel = \Model\Registry::getInstance()->fetch($strTable, $intPk);
+
+			if ($objModel !== null)
+			{
+				$objModel->mergeRow($objResult->row());
+				$arrModels[] = $objModel;
+			}
+			else
+			{
+				$arrModels[] = new $strClass($objResult);
+			}
+		}
+
+		return new static($arrModels, $strTable);
 	}
 
 
@@ -232,7 +255,7 @@ class Collection
 	 */
 	public function count()
 	{
-		return $this->objResult->numRows;
+		return count($this->arrModels);
 	}
 
 
@@ -243,11 +266,6 @@ class Collection
 	 */
 	public function first()
 	{
-		if (empty($this->arrModels))
-		{
-			$this->fetchNext();
-		}
-
 		$this->intIndex = 0;
 		return $this;
 	}
@@ -293,18 +311,9 @@ class Collection
 	 */
 	public function next()
 	{
-		if ($this->blnDone)
-		{
-			return false;
-		}
-
 		if (!isset($this->arrModels[$this->intIndex + 1]))
 		{
-			if ($this->fetchNext() == false)
-			{
-				$this->blnDone = true;
-				return false;
-			}
+			return false;
 		}
 
 		++$this->intIndex;
@@ -319,12 +328,6 @@ class Collection
 	 */
 	public function last()
 	{
-		if (!$this->blnDone)
-		{
-			while ($this->next());
-		}
-
-		$this->blnDone = true;
 		$this->intIndex = count($this->arrModels) - 1;
 		return $this;
 	}
@@ -338,7 +341,6 @@ class Collection
 	public function reset()
 	{
 		$this->intIndex = -1;
-		$this->blnDone = false;
 		return $this;
 	}
 
@@ -374,26 +376,7 @@ class Collection
 
 
 	/**
-	 * Fetch the next result row and create the model
-	 *
-	 * @return boolean True if there was another row
-	 */
-	protected function fetchNext()
-	{
-		if ($this->objResult->next() == false)
-		{
-			return false;
-		}
-
-		$strClass = \Model::getClassFromTable($this->strTable);
-		$this->arrModels[$this->intIndex + 1] = new $strClass($this->objResult);
-
-		return true;
-	}
-
-
-	/**
-	 * Fetch all column of each row
+	 * Fetch all columns of every row
 	 *
 	 * @return array An array with all rows and columns
 	 */
@@ -408,5 +391,47 @@ class Collection
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetExists($offset)
+	{
+		return isset($this->arrModels[$offset]);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetGet($offset)
+	{
+		return $this->arrModels[$offset];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetSet($offset, $value)
+	{
+		throw new \RuntimeException('This collection is immutable');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function offsetUnset($offset)
+	{
+		throw new \RuntimeException('This collection is immutable');
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getIterator()
+	{
+		return new \ArrayIterator($this->arrModels);
 	}
 }

@@ -188,7 +188,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			(
 				array('tl_calendar_events', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -291,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
 		(
@@ -947,6 +947,12 @@ class tl_calendar_events extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -994,8 +1000,15 @@ class tl_calendar_events extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_calendar_events']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

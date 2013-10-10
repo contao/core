@@ -512,10 +512,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href}).get({'tid':id, 'state':1});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href}).get({'tid':id, 'state':0});
 		}
 
 		return false;
@@ -718,7 +718,7 @@ var Backend =
 	openModalWindow: function(width, title, content) {
 		new SimpleModal({
 			'width': width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -737,7 +737,7 @@ var Backend =
 		var opt = options || {};
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -759,7 +759,7 @@ var Backend =
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -903,8 +903,13 @@ var Backend =
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
+				'title': Contao.lang.expand,
 				'width': 20,
 				'height': 24
+			});
+
+			new Tips.Contao(toggler, {
+				offset: {x:0, y:30}
 			});
 
 			// Disable the function if the preview height is below the max-height
@@ -920,7 +925,14 @@ var Backend =
 			toggler.addEvent('click', function() {
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
-				this.src = (this.src.indexOf('expand.gif') != -1) ? path + 'collapse.gif' : path + 'expand.gif';
+
+				if (this.src.indexOf('expand.gif') != -1) {
+					this.src = path + 'collapse.gif';
+					this.store('tip:title', Contao.lang.collapse);
+				} else {
+					this.src = path + 'expand.gif';
+					this.store('tip:title', Contao.lang.expand);
+				}
 			});
 
 			toggler.inject(div, 'after');
@@ -1172,13 +1184,13 @@ var Backend =
     				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req}).get();
     		} else if (el.getParent('ul')) {
     			var id = el.get('id').replace(/li_/, ''),
     				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req}).get();
     		}
     	});
 	},

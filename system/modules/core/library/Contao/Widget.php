@@ -319,6 +319,7 @@ abstract class Widget extends \Controller
 			case 'storeValues':
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
+			case 'nullIfEmpty':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -372,6 +373,10 @@ abstract class Widget extends \Controller
 				if ($this->arrConfiguration['encrypt'])
 				{
 					return \Encryption::encrypt($this->varValue);
+				}
+				elseif ($this->arrConfiguration['nullIfEmpty'] && $this->varValue == '')
+				{
+					return null;
 				}
 				return $this->varValue;
 				break;
@@ -1240,6 +1245,10 @@ abstract class Widget extends \Controller
 		{
 			$arrCallback = $arrData['options_callback'];
 			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]($objDca);
+		}
+		elseif (is_callable($arrData['options_callback']))
+		{
+			$arrData['options'] = $arrData['options_callback']($objDca);
 		}
 
 		// Foreign key

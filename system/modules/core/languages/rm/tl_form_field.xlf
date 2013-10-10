@@ -265,6 +265,14 @@
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>Mussar quest text sche il champ è vid (vegn be mussà en navigaturs che sustegnan HTML5).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Lunghezza minimala</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Pretenda che la valita dal champ è almain in tschert dumber da caracters lunga.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>Lunghezza maximala</target>
@@ -456,6 +464,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>Opziuns per experts</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Lingias e colonnas</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

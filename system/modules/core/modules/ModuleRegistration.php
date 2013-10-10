@@ -88,6 +88,10 @@ class ModuleRegistration extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -220,11 +224,17 @@ class ModuleRegistration extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, null);
+							}
 						}
 						catch (\Exception $e)
 						{
@@ -428,7 +438,7 @@ class ModuleRegistration extends \Module
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
-			$objHomeDir = \FilesModel::findByPk($this->reg_homeDir);
+			$objHomeDir = \FilesModel::findByUuid($this->reg_homeDir);
 
 			if ($objHomeDir !== null)
 			{
@@ -447,7 +457,7 @@ class ModuleRegistration extends \Module
 
 				// Save the folder ID
 				$objNewUser->assignDir = 1;
-				$objNewUser->homeDir = $objUserDir->id;
+				$objNewUser->homeDir = $objUserDir->uuid;
 				$objNewUser->save();
 
 				// Update the hash of the target folder

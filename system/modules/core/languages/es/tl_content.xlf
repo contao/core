@@ -430,7 +430,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
-        <target>La velocidad de transicíón en milisegundos  (1000 = 1s). Por defecto 300.</target>
+        <target>La velocidad de transición en milisegundos (1000 = 1s). Por defecto 300.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
@@ -438,7 +438,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
-        <target>Aqui puedes definir que el Slider empieza con un slide en particular (empiza a contar desde 0).</target>
+        <target>aquí puedes definir un Slide de inicio en particular (empieza a contar desde 0),</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>

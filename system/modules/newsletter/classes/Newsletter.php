@@ -73,24 +73,23 @@ class Newsletter extends \Backend
 
 			if (!empty($files) && is_array($files))
 			{
-				// Check for version 3 format
-				if (!is_numeric($files[0]))
+				$objFiles = \FilesModel::findMultipleByUuids($files);
+
+				if ($objFiles === null)
 				{
-					$blnAttachmentsFormatError = true;
-					\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					if (!\Validator::isUuid($files[0]))
+					{
+						$blnAttachmentsFormatError = true;
+						\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					}
 				}
 				else
 				{
-					$objFiles = \FilesModel::findMultipleByIds($files);
-
-					if ($objFiles !== null)
+					while ($objFiles->next())
 					{
-						while ($objFiles->next())
+						if (is_file(TL_ROOT . '/' . $objFiles->path))
 						{
-							if (is_file(TL_ROOT . '/' . $objFiles->path))
-							{
-								$arrAttachments[] = $objFiles->path;
-							}
+							$arrAttachments[] = $objFiles->path;
 						}
 					}
 				}

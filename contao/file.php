@@ -77,7 +77,8 @@ class FilePicker extends Backend
 		define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
 
 		$this->loadDataContainer($strTable);
-		$objDca = new DC_Table($strTable);
+		$strDriver = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+		$objDca = new $strDriver($strTable);
 
 		// AJAX request
 		if ($_POST && Environment::get('isAjaxRequest'))
@@ -86,6 +87,17 @@ class FilePicker extends Backend
 		}
 
 		$this->Session->set('filePickerRef', \Environment::get('request'));
+		$arrValues = array_filter(explode(',', Input::get('value')));
+
+		// Convert UUIDs to binary
+		foreach ($arrValues as $k=>$v)
+		{
+			// Can be a UUID or a path
+			if (\Validator::isUuid($v))
+			{
+				$arrValues[$k] = String::uuidToBin($v);
+			}
+		}
 
 		// Prepare the widget
 		$objFileTree = new $GLOBALS['BE_FFL']['fileSelector'](array(
@@ -93,7 +105,7 @@ class FilePicker extends Backend
 			'strTable' => $strTable,
 			'strField' => $strField,
 			'strName'  => $strField,
-			'varValue' => explode(',', Input::get('value'))
+			'varValue' => $arrValues
 		), $objDca);
 
 		$this->Template->main = $objFileTree->generate();

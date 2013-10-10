@@ -73,6 +73,12 @@ $tabindex = 1;
           </div>
         <?php endif; ?>
         <?php if ($rep->f_stage>=$rep->inst_actions): ?>
+          <?php if ($rep->f_changelog): ?>
+            <div class="mod_repository_view">
+              <h3><label><?php printf($text['releasenotesfor'], $rep->f_extension); ?></label></h3>
+              <div class="releasenotes"><?php echo $rep->f_changelog; ?></div>
+            </div>
+          <?php endif; ?>
           <div>
             <h3><label><?php echo $text['actionsummary']; ?></label></h3>
             <table class="installs">

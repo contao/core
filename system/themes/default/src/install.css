@@ -105,6 +105,13 @@ li {
 }
 
 /* Form tables */
+#sql_wrapper {
+	max-height:300px;
+	overflow:auto;
+	border:1px solid #ddd;
+	background:#fcfcfc;
+	padding:9px;
+}
 #sql_table {
 	margin:-3px 0;
 }

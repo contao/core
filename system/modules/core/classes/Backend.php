@@ -152,7 +152,7 @@ abstract class Backend extends \Controller
 			}
 		}
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
+		$arrInactiveModules = \ModuleLoader::getDisabled();
 
 		// Check whether the module is active
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))

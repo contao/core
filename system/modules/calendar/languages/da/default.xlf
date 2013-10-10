@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
         <source>&amp;lt;</source>
-        <target>&lt;</target>
+        <target>&amp;lt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
         <source>&amp;gt;</source>
-        <target>&gt;</target>
+        <target>&amp;gt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>
@@ -31,23 +31,23 @@
       </trans-unit>
       <trans-unit id="MSC.cal_empty">
         <source>Currently there are no events.</source>
-        <target>Der er ingen kommende begivenheder.</target>
+        <target>På nuværende tidspunkt, er der ingen begivenheder.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_days">
         <source>This event is repeated every %s. day</source>
-        <target>Den begivenhed gentages hver %s. dag</target>
+        <target>Denne begivenhed gentages hver %s. dag</target>
       </trans-unit>
       <trans-unit id="MSC.cal_weeks">
         <source>This event is repeated every %s. week</source>
-        <target>Den begivenhed gentages hver %s. uge</target>
+        <target>Denne begivenhed gentages hver %s. uge</target>
       </trans-unit>
       <trans-unit id="MSC.cal_months">
         <source>This event is repeated every %s. month</source>
-        <target>Den begivenhed gentages hver %s. måned</target>
+        <target>Denne begivenhed gentages hver %s. måned</target>
       </trans-unit>
       <trans-unit id="MSC.cal_years">
         <source>This event is repeated every %s. year</source>
-        <target>Den begivenhed gentages hver %s. år</target>
+        <target>Denne begivenhed gentages hvert %s. år</target>
       </trans-unit>
       <trans-unit id="MSC.cal_until">
         <source>until %s</source>

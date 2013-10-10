@@ -149,8 +149,7 @@
         <target>Ditt konto har låsts! Du kan prova att logga in igen om %d minuter.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Inloggningen misslyckades!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1543,16 +1542,10 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <target>Senaste användning</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Ladda ner</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Ladda hem denna fil</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Databas-ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

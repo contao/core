@@ -190,10 +190,10 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					$strBuffer = $this->getArticle($strArticle);
+					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
 
 					// Send a 404 header if the article does not exist
-					if ($strBuffer === false)
+					if ($objArticle === null)
 					{
 						// Do not index the page
 						$objPage->noSearch = 1;
@@ -203,7 +203,18 @@ abstract class Controller extends \System
 						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
-					return $strBuffer;
+					// Add the "first" and "last" classes (see #2583)
+					$arrCss = deserialize($objArticle->cssID);
+
+					if (!is_array($arrCss))
+					{
+						$arrCss = array('', '');
+					}
+
+					$arrCss[1] .= 'first last';
+					$objArticle->cssID = serialize($arrCss);
+
+					return $this->getArticle($objArticle);
 				}
 			}
 
@@ -222,11 +233,51 @@ abstract class Controller extends \System
 			}
 
 			$return = '';
+			$intCount = 0;
 			$blnMultiMode = ($objArticles->count() > 1);
+			$intLast = $objArticles->count() - 1;
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->current(), $blnMultiMode, false, $strColumn);
+				$objRow = $objArticles->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					$arrCss = deserialize($objRow->cssID);
+					$arrTeaserCss = deserialize($objRow->teaserCssID);
+
+					if (!is_array($arrCss))
+					{
+						$arrCss = array('', '');
+					}
+
+					if (!is_array($arrTeaserCss))
+					{
+						$arrTeaserCss = array('', '');
+					}
+
+					if ($intCount == 0)
+					{
+						$arrCss[1] .= ' first';
+						$arrTeaserCss[1] .= ' first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[1] .= ' last';
+						$arrTeaserCss[1] .= ' last';
+					}
+
+					$arrCss[1] = trim($arrCss[1]);
+					$objRow->cssID = serialize($arrCss);
+
+					$arrTeaserCss[1] = trim($arrTeaserCss[1]);
+					$objRow->teaserCssID = serialize($arrTeaserCss);
+				}
+
+				$return .= $this->getArticle($objRow, $blnMultiMode, false, $strColumn);
+				++$intCount;
 			}
 
 			return $return;
@@ -708,6 +759,11 @@ abstract class Controller extends \System
 					{
 						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . $elements[1] . '">';
 					}
+					break;
+
+				// Line break
+				case 'br':
+					$arrCache[$strTag] = '<br' . ($objPage->outputFormat == 'xhtml' ? ' />' : '>');
 					break;
 
 				// E-mail addresses
@@ -1504,9 +1560,22 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Handle numeric IDs (see #4805)
-					if (is_numeric($strFile))
+					if (\Validator::isUuid($strFile))
 					{
+						// Handle UUIDs
+						$objFile = \FilesModel::findByUuid($strFile);
+
+						if ($objFile === null)
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$strFile = $objFile->path;
+					}
+					elseif (is_numeric($strFile))
+					{
+						// Handle numeric IDs (see #4805)
 						$objFile = \FilesModel::findByPk($strFile);
 
 						if ($objFile === null)
@@ -1567,43 +1636,55 @@ abstract class Controller extends \System
 					}
 					break;
 
-				// Files from the templates directory
+				// Files (UUID or template path)
 				case 'file':
-					$arrGet = $_GET;
-					\Input::resetCache();
-					$strFile = $elements[1];
-
-					// Take arguments and add them to the $_GET array
-					if (strpos($elements[1], '?') !== false)
+					if (\Validator::isUuid($elements[1]))
 					{
-						$arrChunks = explode('?', urldecode($elements[1]));
-						$strSource = \String::decodeEntities($arrChunks[1]);
-						$strSource = str_replace('[&]', '&', $strSource);
-						$arrParams = explode('&', $strSource);
+						$objFile = \FilesModel::findByUuid(\String::uuidToBin($elements[1]));
 
-						foreach ($arrParams as $strParam)
+						if ($objFile !== null)
 						{
-							$arrParam = explode('=', $strParam);
-							$_GET[$arrParam[0]] = $arrParam[1];
+							$arrCache[$strTag] = $objFile->path;
+						}
+					}
+					else
+					{
+						$arrGet = $_GET;
+						\Input::resetCache();
+						$strFile = $elements[1];
+
+						// Take arguments and add them to the $_GET array
+						if (strpos($elements[1], '?') !== false)
+						{
+							$arrChunks = explode('?', urldecode($elements[1]));
+							$strSource = \String::decodeEntities($arrChunks[1]);
+							$strSource = str_replace('[&]', '&', $strSource);
+							$arrParams = explode('&', $strSource);
+
+							foreach ($arrParams as $strParam)
+							{
+								$arrParam = explode('=', $strParam);
+								$_GET[$arrParam[0]] = $arrParam[1];
+							}
+
+							$strFile = $arrChunks[0];
 						}
 
-						$strFile = $arrChunks[0];
+						// Sanitize path
+						$strFile = str_replace('../', '', $strFile);
+
+						// Include .php, .tpl, .xhtml and .html5 files
+						if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
+						{
+							ob_start();
+							include TL_ROOT . '/templates/' . $strFile;
+							$arrCache[$strTag] = ob_get_contents();
+							ob_end_clean();
+						}
+
+						$_GET = $arrGet;
+						\Input::resetCache();
 					}
-
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
-
-					// Include .php, .tpl, .xhtml and .html5 files
-					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
-					{
-						ob_start();
-						include TL_ROOT . '/templates/' . $strFile;
-						$arrCache[$strTag] = ob_get_contents();
-						ob_end_clean();
-					}
-
-					$_GET = $arrGet;
-					\Input::resetCache();
 					break;
 
 				// HOOK: pass unknown tags to callback functions
@@ -1685,7 +1766,7 @@ abstract class Controller extends \System
 								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
 								{
 									$this->import($callback[0]);
-									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache);
+									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
 
 									// Replace the tag and stop the loop
 									if ($varValue !== false)
@@ -2002,21 +2083,25 @@ abstract class Controller extends \System
 	 */
 	public static function reload()
 	{
-		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		header('Location: ' . $strLocation);
+		$strLocation = \Environment::get('uri');
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
+		}
+		else
+		{
+			header('HTTP/1.1 303 See Other');
+			header('Location: ' . $strLocation);
+		}
+
 		exit;
 	}
 
@@ -2029,48 +2114,48 @@ abstract class Controller extends \System
 	 */
 	public static function redirect($strLocation, $intStatus=303)
 	{
-		$strLocation = str_replace('&amp;', '&', $strLocation);
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		// Header
-		switch ($intStatus)
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
+		// Make the location an absolute URL
+		if (!preg_match('@^https?://@i', $strLocation))
 		{
-			case 301:
-				header('HTTP/1.1 301 Moved Permanently');
-				break;
-
-			case 302:
-				header('HTTP/1.1 302 Found');
-				break;
-
-			case 303:
-				header('HTTP/1.1 303 See Other');
-				break;
-
-			case 307:
-				header('HTTP/1.1 307 Temporary Redirect');
-				break;
+			$strLocation = \Environment::get('base') . $strLocation;
 		}
 
-		// Check the target address
-		if (preg_match('@^https?://@i', $strLocation))
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
 		{
-			header('Location: ' . $strLocation);
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
 		}
 		else
 		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
+			// Add the HTTP header
+			switch ($intStatus)
+			{
+				case 301:
+					header('HTTP/1.1 301 Moved Permanently');
+					break;
+
+				case 302:
+					header('HTTP/1.1 302 Found');
+					break;
+
+				case 303:
+					header('HTTP/1.1 303 See Other');
+					break;
+
+				case 307:
+					header('HTTP/1.1 307 Temporary Redirect');
+					break;
+			}
+
+			header('Location: ' . $strLocation);
 		}
 
 		exit;
@@ -2566,7 +2651,7 @@ abstract class Controller extends \System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']));
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
@@ -2589,24 +2674,21 @@ abstract class Controller extends \System
 			return;
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($arrEnclosures[0]))
-		{
-			foreach (array('details', 'answer', 'text') as $key)
-			{
-				if (isset($objTemplate->$key))
-				{
-					$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-
-			return;
-		}
-
-		$objFiles = \FilesModel::findMultipleByIds($arrEnclosures);
+		$objFiles = \FilesModel::findMultipleByUuids($arrEnclosures);
 
 		if ($objFiles === null)
 		{
+			if (!\Validator::isUuid($arrEnclosures[0]))
+			{
+				foreach (array('details', 'answer', 'text') as $key)
+				{
+					if (isset($objTemplate->$key))
+					{
+						$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+					}
+				}
+			}
+
 			return;
 		}
 
@@ -3050,7 +3132,7 @@ abstract class Controller extends \System
 	 */
 	public static function getPageSections()
 	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+		return array('header', 'left', 'right', 'main', 'footer');
 	}
 
 

@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getContentElements'),
 			'reference'               => &$GLOBALS['TL_LANG']['CTE'],
-			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true, 'gallery_types'=>array('gallery'), 'downloads_types'=>array('downloads')),
+			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'headline' => array
@@ -215,7 +215,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''",
+			'sql'                     => "binary(16) NULL",
 			'save_callback' => array
 			(
 				array('tl_content', 'storeFileMetaInformation')
@@ -528,12 +528,16 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'orderField'=>'orderSRC', 'files'=>true, 'mandatory'=>true),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'load_callback' => array
+			(
+				array('tl_content', 'setFileTreeFlags')
+			)
 		),
 		'orderSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['orderSRC'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'useHomeDir' => array
 		(
@@ -609,7 +613,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'playerSize' => array
 		(
@@ -1013,6 +1017,12 @@ class tl_content extends Backend
 	public function showJsLibraryHint($dc)
 	{
 		if ($_POST || Input::get('act') != 'edit')
+		{
+			return;
+		}
+
+		// Return if the user cannot access the layout module (see #6190)
+		if (!$this->User->hasAccess('themes', 'modules') || !$this->User->hasAccess('layout', 'themes'))
 		{
 			return;
 		}
@@ -1522,6 +1532,30 @@ class tl_content extends Backend
 
 
 	/**
+	 * Dynamically set the "isGallery" or "isDownloads" flag depending on the type
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function setFileTreeFlags($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord)
+		{
+			if ($dc->activeRecord->type == 'gallery')
+			{
+				$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isGallery'] = true;
+			}
+			elseif ($dc->activeRecord->type == 'downloads')
+			{
+				$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['isDownloads'] = true;
+			}
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Pre-fill the "alt" and "caption" fields with the file meta data
 	 * @param mixed
 	 * @param \DataContainer
@@ -1534,7 +1568,7 @@ class tl_content extends Backend
 			return $varValue;
 		}
 
-		$objFile = \FilesModel::findByPk($varValue);
+		$objFile = \FilesModel::findByUuid($varValue);
 
 		if ($objFile !== null)
 		{
@@ -1582,6 +1616,12 @@ class tl_content extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -1623,6 +1663,10 @@ class tl_content extends Backend
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 
@@ -1641,8 +1685,15 @@ class tl_content extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_content']['fields']['invisible']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

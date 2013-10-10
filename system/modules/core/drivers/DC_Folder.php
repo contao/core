@@ -177,6 +177,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
 				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
+				}
 			}
 		}
 
@@ -184,6 +188,26 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		if (is_array($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))
 		{
 			$this->arrFilemounts = $this->eliminateNestedPaths($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']);
+		}
+	}
+
+
+	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'createNewVersion':
+				$this->blnCreateNewVersion = (bool) $varValue;
+				break;
+
+			default;
+				parent::__set($strKey, $varValue);
+				break;
 		}
 	}
 
@@ -318,7 +342,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$return = '
 <div id="tl_buttons">'.((\Input::get('act') == 'select') ? '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a> ' : '') . ((\Input::get('act') != 'select' && !$blnClipboard) ? '
-<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
+<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . ((!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
 </div>' . \Message::generate(true) . ((\Input::get('act') == 'select') ? '
 
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
@@ -345,15 +369,43 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Close the form
 		if (\Input::get('act') == 'select')
 		{
-			$callbacks = '';
+			// Submit buttons
+			$arrButtons = array();
 
-			// Call the buttons_callback
-			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 			{
-				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+			}
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+			{
+				$arrButtons['cut'] = '<input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">';
+			}
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+			{
+				$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
+			}
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
+			{
+				$arrButtons['edit'] = '<input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'">';
+			}
+
+			// Call the buttons_callback (see #4691)
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['select']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['select']['buttons_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$callbacks .= $this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$arrButtons = $callback($arrButtons, $this);
+					}
 				}
 			}
 
@@ -361,11 +413,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 <div class="tl_formbody_submit" style="text-align:right">
 
-<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
-  <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'">
-  <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
-  <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . $callbacks . '
+<div class="tl_submit_container">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -392,6 +441,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function create()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not creatable', 'DC_Folder create()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$this->import('Files');
 		$strFolder = \Input::get('pid', true);
 
@@ -417,6 +472,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function cut($source=null)
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cut()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$strFolder = \Input::get('pid', true);
 		$blnDoNotRedirect = ($source !== null);
 
@@ -488,6 +549,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function cutAll()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cutAll()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		// PID is mandatory
 		if (!strlen(\Input::get('pid', true)))
 		{
@@ -515,6 +582,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function copy($source=null, $destination=null)
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copy()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$strFolder = \Input::get('pid', true);
 		$blnDoNotRedirect = ($source !== null);
 
@@ -612,6 +685,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function copyAll()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+		{
+			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copyAll()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		// PID is mandatory
 		if (!strlen(\Input::get('pid', true)))
 		{
@@ -669,6 +748,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				{
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($source, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($source, $this);
 				}
 			}
 		}
@@ -823,8 +906,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_HOOKS']['postUpload'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($arrUploaded);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($arrUploaded);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($arrUploaded);
+					}
 				}
 			}
 
@@ -845,6 +935,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 
 				$this->reload();
+			}
+		}
+
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['upload'] = '<input type="submit" name="upload" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'">';
+		$arrButtons['uploadNback'] = '<input type="submit" name="uploadNback" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'">';
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
 			}
 		}
 
@@ -872,8 +984,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="upload" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'">
-<input type="submit" name="uploadNback" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -1019,6 +1130,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 								$this->import($callback[0]);
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -1061,15 +1176,36 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 		}
 
-		// Add some buttons and end the form
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+		$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
+			}
+		}
+
+		// Add the buttons and end the form
 		$return .= '
 </div>
 
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -1103,8 +1239,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this);
+					}
 				}
 			}
 
@@ -1118,8 +1261,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				{
 					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($this->strTable, $objFile->id, $this);
+						}
 					}
 				}
 
@@ -1271,8 +1421,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -1293,8 +1450,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this);
+							}
+							elseif (is_callable($callback))
+							{
+								$callback($this);
+							}
 						}
 					}
 
@@ -1308,8 +1472,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						{
 							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
 							{
-								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+								if (is_array($callback))
+								{
+									$this->import($callback[0]);
+									$this->$callback[0]->$callback[1]($this->strTable, $objFile->id, $this);
+								}
+								elseif (is_callable($callback))
+								{
+									$callback($this->strTable, $objFile->id, $this);
+								}
 							}
 						}
 
@@ -1321,6 +1492,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
 									   ->execute(time(), $objFile->id);
+					}
+				}
+			}
+
+			// Submit buttons
+			$arrButtons = array();
+			$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+			$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+			// Call the buttons_callback (see #4691)
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$arrButtons = $callback($arrButtons, $this);
 					}
 				}
 			}
@@ -1342,8 +1535,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -1427,7 +1619,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'">
 </div>
 
 </div>
@@ -1535,6 +1727,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			ob_end_clean();
 		}
 
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+		$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
+			}
+		}
+
+		// Add the form
 		return'
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
@@ -1556,8 +1771,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -1625,8 +1839,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($arrData['save_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this);
+					}
 				}
 			}
 
@@ -1733,8 +1954,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach ($arrData['save_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this);
+					}
 				}
 			}
 
@@ -2017,7 +2245,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= \Image::getHtml($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
+			$strFolderNameEncoded = utf8_convert_encoding(specialchars(basename($currentFolder)), $GLOBALS['TL_CONFIG']['characterSet']);
+			$return .= \Image::getHtml($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.$strFolderNameEncoded.'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && \Input::get('act') != 'select')
@@ -2031,11 +2260,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Do not display buttons for mounted folders
 				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
 				{
-					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>178, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
 				}
 
 				// Upload button
-				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && \Input::get('act') != 'select')
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'] && \Input::get('act') != 'select')
 				{
 					$return .= ' <a href="'.$this->addToUrl('&amp;act=move&amp;mode=2&amp;pid='.$currentEncoded).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], $currentEncoded)).'">'.\Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['move'][0]).'</a>';
 				}
@@ -2057,7 +2286,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
-			$popupHeight = 260;
+			$popupHeight = 216;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
 			$objFile = new \File($currentFile, true);
@@ -2093,13 +2322,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFileNameEncoded = utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']);
 
 			// No popup links for templates and in the popup file manager
-			if ($this->strTable == 'tl_templates' || basename(\Environment::get('scriptName')) == 'files.php')
+			if ($this->strTable == 'tl_templates' || \Input::get('popup'))
 			{
 				$return .= \Image::getHtml($objFile->icon).' '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 			else
 			{
-				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openModalIframe({\'width\':'.$popupWidth.',\'title\':\''.str_replace("'", "\\'", $strFileNameEncoded).'\',\'url\':this.href,\'height\':'.$popupHeight.'});return false">' . \Image::getHtml($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="'. $currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">' . \Image::getHtml($objFile->icon, $objFile->mime).'</a> '.$strFileNameEncoded.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons
@@ -2109,7 +2338,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$_buttons = (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
+				$_buttons = (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>$popupWidth, 'popupHeight'=>$popupHeight, 'fileNameEncoded'=>$strFileNameEncoded), $this->strTable);
 			}
 
 			$return .= $_buttons . '</div><div style="clear:both"></div></li>';

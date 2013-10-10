@@ -150,8 +150,8 @@
         <target>Questo account è stato bloccato! Potrai ricollegarti solo fra %d minuti.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Login non valido!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Login fallito (attenzione il nome utente e password sono case-sensitive!)</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1544,16 +1544,12 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <target>Ultimo accesso</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Download</target>
+        <source>Download the file</source>
+        <target>Scarica il file</target>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Scarica questo file</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Database ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>ID Unico</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

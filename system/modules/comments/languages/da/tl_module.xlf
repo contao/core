@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_module.comment_legend">
         <source>Comment settings</source>
-        <target>Kommentar opsætninger</target>
+        <target>Kommentar indstillinger</target>
       </trans-unit>
     </body>
   </file>

@@ -77,7 +77,8 @@ class PagePicker extends Backend
 		define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
 
 		$this->loadDataContainer($strTable);
-		$objDca = new DC_Table($strTable);
+		$strDriver = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+		$objDca = new $strDriver($strTable);
 
 		// AJAX request
 		if ($_POST && Environment::get('isAjaxRequest'))
@@ -93,7 +94,7 @@ class PagePicker extends Backend
 			'strTable' => $strTable,
 			'strField' => $strField,
 			'strName'  => $strField,
-			'varValue' => explode(',', Input::get('value'))
+			'varValue' => array_filter(explode(',', Input::get('value')))
 		), $objDca);
 
 		$this->Template->main = $objPageTree->generate();

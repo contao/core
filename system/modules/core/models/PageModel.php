@@ -41,32 +41,6 @@ class PageModel extends \Model
 
 
 	/**
-	 * Find multiple pages by their IDs
-	 *
-	 * @param array $arrIds     An array of pages IDs
-	 * @param array $arrOptions An optional options array
-	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no pages
-	 */
-	public static function findMultipleByIds($arrIds, array $arrOptions=array())
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-
-		if (!isset($arrOptions['order']))
-		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
-		}
-
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
-	}
-
-
-	/**
 	 * Find a published page by its ID
 	 *
 	 * @param integer $intId      The page ID
@@ -131,7 +105,7 @@ class PageModel extends \Model
 		}
 		else
 		{
-			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND ($t.language=? OR $t.fallback=1)");
 			$arrValues = array($strHost, $varLanguage);
 
 			if (!isset($arrOptions['order']))
@@ -279,7 +253,7 @@ class PageModel extends \Model
 
 		// Remove everything that is not an alias
 		$arrAliases = array_filter(array_map(function($v) {
-			return preg_match('/^[\pN\pL\/\._-]+$/', $v) ? $v : null;
+			return preg_match('/^[\pN\pL\/\._-]+$/u', $v) ? $v : null;
 		}, $arrAliases));
 
 		// Return if nothing is left
@@ -352,7 +326,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model\Collection($objSubpages, 'tl_page');
+		return \Model\Collection::createFromDbResult($objSubpages, 'tl_page');
 	}
 
 
@@ -444,7 +418,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model\Collection($objPages, 'tl_page');
+		return \Model\Collection::createFromDbResult($objPages, 'tl_page');
 	}
 
 
@@ -598,7 +572,7 @@ class PageModel extends \Model
 		{
 			header('HTTP/1.1 404 Not Found');
 			\System::log('Page ID "'. $this->id .'" does not belong to a root page', 'PageModel loadDetails()', TL_ERROR);
-			die('No root page found');
+			die_nicely('be_no_root', 'No root page found');
 		}
 
 		$this->trail = array_reverse($trail);
@@ -634,5 +608,19 @@ class PageModel extends \Model
 
 		$this->blnDetailsLoaded = true;
 		return $this;
+	}
+
+
+	/**
+	 * Generate an URL depending on the current rewriteURL setting
+	 *
+	 * @param string $strParams    An optional string of URL parameters
+	 * @param string $strForceLang Force a certain language
+	 *
+	 * @return string An URL that can be used in the front end
+	 */
+	public function getFrontendUrl($strParams=null, $strForceLang=null)
+	{
+		return \Controller::generateFrontendUrl($this->row(), $strParams, $strForceLang);
 	}
 }

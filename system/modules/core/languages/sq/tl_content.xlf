@@ -442,11 +442,11 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
-        <target>Pandërprerje</target>
+        <target>Pandërprjerje</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
-        <target>Bëje rrëshqitjen pa ndërpre (fillon sërishtë pas arritjes në fund).</target>
+        <target>Bëje rrëshqitësin të pandrepshëm  (të fillojnë sërisht, kur të arrij në fund).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>

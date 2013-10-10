@@ -958,7 +958,8 @@ class StyleSheets extends \Backend
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
 
-		return $return;
+		// Replace insert tags (see #5512)
+		return $this->replaceInsertTags($return, false);
 	}
 
 

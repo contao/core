@@ -365,6 +365,12 @@ class tl_newsletter_recipients extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -412,8 +418,15 @@ class tl_newsletter_recipients extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['active']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

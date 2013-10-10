@@ -36,6 +36,10 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			array('tl_page', 'updateSitemap'),
 			array('tl_page', 'generateArticle')
 		),
+		'ondelete_callback' => array
+		(
+			array('tl_page', 'purgeSearchIndex')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -144,8 +148,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		)
 	),
 
-	// Edit
-	'edit' => array
+	// Select
+	'select' => array
 	(
 		'buttons_callback' => array
 		(
@@ -218,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			(
 				array('tl_page', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'type' => array
 		(
@@ -1084,6 +1088,25 @@ class tl_page extends Backend
 
 
 	/**
+	 * Purge the search index if a page is being deleted
+	 * @param \DataContainer
+	 */
+	public function purgeSearchIndex(DataContainer $dc)
+	{
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		$this->Database->prepare("DELETE FROM tl_search_index WHERE pid IN(SELECT id FROM tl_search WHERE pid=?)")
+					   ->execute($dc->id);
+
+		$this->Database->prepare("DELETE FROM tl_search WHERE pid=?")
+					   ->execute($dc->id);
+	}
+
+
+	/**
 	 * Check the sitemap alias
 	 * @param mixed
 	 * @param \DataContainer
@@ -1450,10 +1473,12 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically generate the folder URL aliases
-	 * @return string
+	 * @param array
+	 * @return array
 	 */
-	public function addAliasButton()
+	public function addAliasButton($arrButtons)
 	{
+		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
@@ -1498,7 +1523,10 @@ class tl_page extends Backend
 			$this->redirect($this->getReferer());
 		}
 
-		return '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+		// Add the button
+		$arrButtons['alias'] = '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+
+		return $arrButtons;
 	}
 
 
@@ -1528,6 +1556,12 @@ class tl_page extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -1548,7 +1582,7 @@ class tl_page extends Backend
 								  ->limit(1)
 								  ->execute($row['id']);
 
-		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
+		if (!$this->User->isAdmin && !$this->User->isAllowed(1, $objPage->row()))
 		{
 			return Image::getHtml($icon) . ' ';
 		}
@@ -1584,8 +1618,15 @@ class tl_page extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

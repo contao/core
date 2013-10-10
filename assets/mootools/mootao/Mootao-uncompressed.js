@@ -44,7 +44,13 @@ Request.Contao = new Class(
 	},
 
 	success: function(text) {
-		var json;
+		var url = this.getHeader('X-Ajax-Location'),
+			json;
+
+		if (url) {
+			location.replace(url);
+			return;
+		}
 
 		// Support both plain text and JSON responses
 		try	{

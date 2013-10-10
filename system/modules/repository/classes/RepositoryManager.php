@@ -157,10 +157,13 @@ class RepositoryManager extends RepositoryBackendModule
 						'languages' => $this->languages,
 						'match'		=> 'ignorecase',
 						'names'		=> $rep->f_extension,
-						'sets'		=> 'history'
+						'sets'		=> 'history,details'
 					));
 					// replace the case-insensitive user input with the real name (see #4689)
-					if (count($exts)>0) $rep->f_extension = $exts[0]->name;
+					if (count($exts)>0) {
+						$rep->f_extension = $exts[0]->name;
+						$rep->f_changelog = $exts[0]->releasenotes;
+					}
 				} else
 					$exts = array();
 				$ok = count($exts)>0;
@@ -300,9 +303,10 @@ class RepositoryManager extends RepositoryBackendModule
 					'languages' => $this->languages,
 					'match'		=> 'exact',
 					'names'		=> $rep->f_extension,
-					'sets'		=> 'history'
+					'sets'		=> 'history,details'
 				);
 				$exts = $this->getExtensionList($options);
+				$rep->f_changelog = $exts[0]->releasenotes;
 				if (count($exts)>0) {
 					foreach ($exts[0]->allversions as $ver)
 						array_unshift($rep->f_allversions, $ver->version);

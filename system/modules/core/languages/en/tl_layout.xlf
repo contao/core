@@ -102,7 +102,7 @@
         <source>Custom layout sections</source>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -347,6 +347,9 @@
       <trans-unit id="tl_layout.xhtml_trans">
         <source>XHTML Transitional</source>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
       </trans-unit>
@@ -355,6 +358,9 @@
       </trans-unit>
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

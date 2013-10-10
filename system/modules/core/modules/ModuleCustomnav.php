@@ -98,15 +98,18 @@ class ModuleCustomnav extends \Module
 		// Sort the array keys according to the given order
 		if ($this->orderPages != '')
 		{
-			$arrPages = array_flip(trimsplit(',', $this->orderPages));
-		}
+			$tmp = deserialize($this->orderPages);
 
-		$i = 0;
+			if (!empty($tmp) && is_array($tmp))
+			{
+				$arrPages = array_map(function(){}, array_flip($tmp));
+			}
+		}
 
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
+			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template

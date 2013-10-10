@@ -30,7 +30,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_row()
 	{
-		return @mysql_fetch_row($this->resResult);
+		return mysql_fetch_row($this->resResult);
 	}
 
 
@@ -41,7 +41,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_assoc()
 	{
-		return @mysql_fetch_assoc($this->resResult);
+		return mysql_fetch_assoc($this->resResult);
 	}
 
 
@@ -52,7 +52,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_rows()
 	{
-		return @mysql_num_rows($this->resResult);
+		return mysql_num_rows($this->resResult);
 	}
 
 
@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @mysql_num_fields($this->resResult);
+		return mysql_num_fields($this->resResult);
 	}
 
 
@@ -76,7 +76,18 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return @mysql_fetch_field($this->resResult, $intOffset);
+		return mysql_fetch_field($this->resResult, $intOffset);
+	}
+
+
+	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 */
+	protected function data_seek($intIndex)
+	{
+		mysql_data_seek($this->resResult, $intIndex);
 	}
 
 
@@ -87,7 +98,7 @@ class Result extends \Database\Result
 	{
 		if (is_resource($this->resResult))
 		{
-			@mysql_free_result($this->resResult);
+			mysql_free_result($this->resResult);
 		}
 	}
 }

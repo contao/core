@@ -38,28 +38,44 @@ class FilesModel extends \Model
 
 
 	/**
-	 * Find multiple files by their IDs
+	 * Find a file by its UUID
 	 *
-	 * @param array $arrIds     An array of file IDs
+	 * @param array $strUuid    The UUID string
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByUuid($strUuid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		return static::findOneBy(array("HEX($t.uuid)=?"), bin2hex($strUuid), $arrOptions);
+	}
+
+
+	/**
+	 * Find multiple files by their UUIDs
+	 *
+	 * @param array $arrUuids   An array of file UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no files
 	 */
-	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	public static function findMultipleByUuids($arrUuids, array $arrOptions=array())
 	{
-		if (!is_array($arrIds) || empty($arrIds))
+		if (!is_array($arrUuids) || empty($arrUuids))
 		{
 			return null;
 		}
 
 		$t = static::$strTable;
+		$arrUuids = array_map('bin2hex', $arrUuids);
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
 		}
 
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
+		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "')"), null, $arrOptions);
 	}
 
 
@@ -105,17 +121,17 @@ class FilesModel extends \Model
 
 
 	/**
-	 * Find multiple files by ID and a list of extensions
+	 * Find multiple files by UUID and a list of extensions
 	 *
-	 * @param array $arrIds        An array of file IDs
+	 * @param array $arrUuids      An array of file UUIDs
 	 * @param array $arrExtensions An array of file extensions
 	 * @param array $arrOptions    An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null of there are no matching files
 	 */
-	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions, array $arrOptions=array())
+	public static function findMultipleByUuidsAndExtensions($arrUuids, $arrExtensions, array $arrOptions=array())
 	{
-		if (!is_array($arrIds) || empty($arrIds) || !is_array($arrExtensions) || empty($arrExtensions))
+		if (!is_array($arrUuids) || empty($arrUuids) || !is_array($arrExtensions) || empty($arrExtensions))
 		{
 			return null;
 		}
@@ -129,13 +145,14 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
+		$arrUuids = array_map('bin2hex', $arrUuids);
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
 		}
 
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
+		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "') AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 
 

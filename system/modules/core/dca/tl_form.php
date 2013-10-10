@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			(
 				array('tl_form', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
@@ -173,8 +173,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'emails', 'tl_class'=>'w50'),
-			'sql'                     => "text NULL"
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>1022, 'rgxp'=>'emails', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'subject' => array
 		(

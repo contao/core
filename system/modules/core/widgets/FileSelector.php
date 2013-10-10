@@ -388,7 +388,7 @@ class FileSelector extends \Widget
 			$this->varValue = array();
 		}
 
-		$objFiles = \FilesModel::findMultipleByIds($this->varValue);
+		$objFiles = \FilesModel::findMultipleByUuids($this->varValue);
 
 		if ($objFiles !== null)
 		{

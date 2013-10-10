@@ -204,6 +204,10 @@ class Versions extends \Backend
 							$this->import($callback[0]);
 							$this->$callback[0]->$callback[1]($this->intPid, $this->strTable, $data, $intVersion);
 						}
+						elseif (is_callable($callback))
+						{
+							$callback($this->intPid, $this->strTable, $data, $intVersion);
+						}
 					}
 				}
 			}
@@ -365,6 +369,8 @@ class Versions extends \Backend
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$objTemplate->output();
+
+		exit;
 	}
 
 

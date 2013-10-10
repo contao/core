@@ -29,19 +29,13 @@
   <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
-<body class="__ua__ popup">
+<body class="<?php echo $this->ua; ?> popup">
 
   <div id="container">
     <div id="main">
       <h1>File preview</h1>
       <h2><?php echo $this->headline; ?></h2>
       <table class="tl_help_table">
-        <?php if ($this->id): ?>
-          <tr>
-            <td class="tl_label"><?php echo $this->label_id; ?>:</td>
-            <td><?php echo $this->id; ?></td>
-          </tr>
-        <?php endif; ?>
         <tr>
           <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
           <td><?php echo $this->ctime; ?></td>
@@ -55,13 +49,21 @@
           <td><?php echo $this->atime; ?></td>
         </tr>
         <tr>
-          <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
-          <td><?php echo $this->filesize; ?></td>
-        </tr>
-        <tr>
           <td class="tl_label"><?php echo $this->label_path; ?>:</td>
           <td><?php echo $this->path; ?></td>
         </tr>
+        <?php if ($this->uuid): ?>
+          <tr>
+            <td class="tl_label"><?php echo $this->label_uuid; ?>:</td>
+            <td><?php echo $this->uuid; ?></td>
+          </tr>
+        <?php endif; ?>
+        <?php if ($this->filesize): ?>
+          <tr>
+            <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
+            <td><?php echo $this->filesize; ?></td>
+          </tr>
+        <?php endif; ?>
         <?php if ($this->src): ?>
           <tr>
             <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>
@@ -69,12 +71,16 @@
           </tr>
         <?php endif; ?>
       </table>
-      <div id="download">
-        <a href="<?php echo $this->href; ?>" title="<?php echo $this->downloadTitle; ?>"><img src="<?php echo TL_ASSETS_URL; ?>assets/contao/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
-      </div>
+      <?php if ($this->href): ?>
+        <div id="download">
+          <a href="<?php echo $this->href; ?>"><img src="<?php echo TL_ASSETS_URL; ?>assets/contao/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
+        </div>
+      <?php endif; ?>
       <?php if ($this->isImage): ?>
         <div id="preview">
-          <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          <div class="checkerbox" style="width:<?php echo $this->width; ?>px;height:<?php echo $this->height; ?>px">
+            <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          </div>
         </div>
       <?php endif; ?>
     </div>

@@ -205,6 +205,13 @@ class Ajax extends \Backend
 	{
 		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
+		// Bypass any core logic for non-core drivers (see #5957)
+		if (!$dc instanceof \DC_File && !$dc instanceof \DC_Folder && !$dc instanceof \DC_Table)
+		{
+			$this->executePostActionsHook($dc);
+			exit;
+		}
+
 		switch ($this->strAction)
 		{
 			// Load nodes of the page structure tree
@@ -250,7 +257,7 @@ class Ajax extends \Backend
 			case 'reloadPagetree':
 			case 'reloadFiletree':
 				$intId = \Input::get('id');
-				$strField = $strFieldName = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 
 				// Handle the keys in "edit multiple" mode
 				if (\Input::get('act') == 'editAll')
@@ -280,7 +287,7 @@ class Ajax extends \Backend
 					{
 						foreach ($varValue as $k=>$v)
 						{
-							$varValue[$k] = \Dbafs::addResource($v)->id;
+							$varValue[$k] = \Dbafs::addResource($v)->uuid;
 						}
 					}
 
@@ -291,7 +298,7 @@ class Ajax extends \Backend
 				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
 				{
 					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
-					$arrAttribs['activeRecord'] = null;
+					$dc->activeRecord = null;
 				}
 				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
@@ -307,11 +314,31 @@ class Ajax extends \Backend
 					}
 
 					$objRow->$strField = $varValue;
-					$arrAttribs['activeRecord'] = $objRow;
+					$dc->activeRecord = $objRow;
 				}
 
-				$arrAttribs['id'] = $strFieldName;
-				$arrAttribs['name'] = $strFieldName;
+				// Call the load_callback to set the file tree flags
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
+
+				// Build the attributes based on the "eval" array
+				$arrAttribs = $GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['eval'];
+
+				$arrAttribs['id'] = $dc->field;
+				$arrAttribs['name'] = $dc->field;
 				$arrAttribs['value'] = $varValue;
 				$arrAttribs['strTable'] = $dc->table;
 				$arrAttribs['strField'] = $strField;
@@ -382,15 +409,25 @@ class Ajax extends \Backend
 
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strAction, $dc);
-					}
-				}
+				$this->executePostActionsHook($dc);
 				exit; break;
+		}
+	}
+
+
+	/**
+	 * Execute the post actions hook
+	 * @param \DataContainer
+	 */
+	protected function executePostActionsHook(\DataContainer $dc)
+	{
+		if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strAction, $dc);
+			}
 		}
 	}
 }

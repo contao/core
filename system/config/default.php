@@ -120,7 +120,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  * DATABASE SETTINGS
  * -------------------------------------------------------------------------
  * Database drivers start with an uppercase character. Currently supported
- * databases: MySQL, MySQLi, MSSQL, Oracle, PostgreSQL, Sybase.
+ * databases: MySQLi, MySQL (deprecated).
  *
  *   dbUser     = database user name
  *   dbPass     = database password
@@ -282,9 +282,6 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  * The number of resultsPerPage is used to limit query results in the back
  * end. It does not apply to the search engine.
  *
- * If you need custom page sections (in addition to "header", "left", "main",
- * "right" and "footer", you can define a comma separated list here.
- *
  * If you enter a maximum image width, images and media files cannot be wider
  * than this value and will not break your page layout.
  *
@@ -303,7 +300,6 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
 $GLOBALS['TL_CONFIG']['loginCount']           = 3;
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
 $GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
-$GLOBALS['TL_CONFIG']['customSections']       = '';
 $GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
 $GLOBALS['TL_CONFIG']['defaultUser']          = 0;
 $GLOBALS['TL_CONFIG']['defaultGroup']         = 0;
@@ -348,3 +344,5 @@ $GLOBALS['TL_CONFIG']['loadGoogleFonts']      = false;
 $GLOBALS['TL_CONFIG']['defaultFileChmod']     = 0644;
 $GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
 $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
+$GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
+$GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';

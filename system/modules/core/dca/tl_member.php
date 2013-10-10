@@ -317,7 +317,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'password' => array
 		(
@@ -345,7 +345,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'disable' => array
 		(
@@ -581,6 +581,12 @@ class tl_member extends Backend
 		if (strlen(Input::get('tid')))
 		{
 			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+
+			if (Environment::get('isAjaxRequest'))
+			{
+				exit;
+			}
+
 			$this->redirect($this->getReferer());
 		}
 
@@ -623,8 +629,15 @@ class tl_member extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 

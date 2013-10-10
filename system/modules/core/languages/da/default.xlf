@@ -150,8 +150,8 @@
         <target>Denne konto er af sikkerhedhensyn blevet låst. Du kan forsøge at logge ind igen om %d minutter.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Log ind mislykkedes.</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Fejl ved log ind (bemærk at der skelnes mellem store og små bogstaver i brugernavn og kodeord).</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1544,16 +1544,11 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <target>Sidst tilgået</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Download</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Download denne fil</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Database ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>Unikt ID</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

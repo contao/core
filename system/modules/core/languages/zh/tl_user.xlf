@@ -25,6 +25,12 @@
         <source>Please enter a valid e-mail address.</source>
         <target>请输入有效E-mail地址</target>
       </trans-unit>
+      <trans-unit id="tl_user.google.0">
+        <source>Google+ profile ID</source>
+      </trans-unit>
+      <trans-unit id="tl_user.google.1">
+        <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
         <target>后台语言</target>
@@ -228,6 +234,9 @@
       <trans-unit id="tl_user.name_legend">
         <source>Name and e-mail</source>
         <target>姓名和电子邮件</target>
+      </trans-unit>
+      <trans-unit id="tl_user.google_legend">
+        <source>Google+ settings</source>
       </trans-unit>
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>

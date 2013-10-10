@@ -88,7 +88,8 @@ class PageTree extends \Widget
 						   ->limit(1)
 						   ->execute($this->activeRecord->id);
 
-			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
+			$tmp = deserialize($objRow->{$this->strOrderField});
+			$this->{$this->strOrderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
 		}
 	}
 
@@ -104,7 +105,7 @@ class PageTree extends \Widget
 		if ($this->strOrderField != '')
 		{
 			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
+						   ->execute(serialize(explode(',', \Input::post($this->strOrderName))), \Input::get('id'));
 		}
 
 		// Return the value as usual
@@ -139,6 +140,7 @@ class PageTree extends \Widget
 	{
 		$arrSet = array();
 		$arrValues = array();
+		$blnHasOrder = ($this->strOrderField != '' && is_array($this->{$this->strOrderField}));
 
 		if (!empty($this->varValue)) // Can be an array
 		{
@@ -149,17 +151,16 @@ class PageTree extends \Widget
 				while ($objPages->next())
 				{
 					$arrSet[] = $objPages->id;
-					$arrValues[] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
 				}
 			}
 
 			// Apply a custom sort order
-			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
+			if ($blnHasOrder)
 			{
 				$arrNew = array();
-				$arrOrder = array_map('intval', explode(',', $this->{$this->strOrderField}));
 
-				foreach ($arrOrder as $i)
+				foreach ($this->{$this->strOrderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{
@@ -184,11 +185,11 @@ class PageTree extends \Widget
 		// Load the fonts for the drag hint (see #4838)
 		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . (($this->strOrderField != '') ? '
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . ($blnHasOrder ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
-  <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
+  <div class="selector_container">' . (($blnHasOrder && count($arrValues)) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
-    <ul id="sort_'.$this->strId.'" class="'.(($this->strOrderField != '') ? 'sortable' : '').'">';
+    <ul id="sort_'.$this->strId.'" class="'.($blnHasOrder ? 'sortable' : '').'">';
 
 		foreach ($arrValues as $k=>$v)
 		{
@@ -196,7 +197,7 @@ class PageTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . ($blnHasOrder ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'")</script>' : '') . '
   </div>';
 

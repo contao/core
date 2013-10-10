@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="MOD.calendar.1">
         <source>Manage events and display them in a calendar or event list</source>
-        <target>Håndter begivenheder og fremvis dem i en kalender eller en begivenhedsliste</target>
+        <target>Håndter begivenheder og vis dem i en kalender eller en begivenhedsliste</target>
       </trans-unit>
       <trans-unit id="MOD.tl_calendar_feed">
         <source>Calendar feeds</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventreader.1">
         <source>Shows the details of an event</source>
-        <target>Dette modul viser oplysninger om en enkelt begivenhed.</target>
+        <target>Viser oplysningerne for en begivenhed</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.0">
         <source>Event list menu</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventmenu.1">
         <source>Generates a navigation menu to browse the event list</source>
-        <target>Genererer en menu til at navigere i begivenhedslisten.</target>
+        <target>Genererer en menu til at navigere i begivenhedslisten</target>
       </trans-unit>
     </body>
   </file>

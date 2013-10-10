@@ -97,18 +97,6 @@
         <source>The tables have been successfully checked.</source>
         <target>数据表已成功通过检查。</target>
       </trans-unit>
-      <trans-unit id="tl_theme.custom_sections">
-        <source>Custom layout sections</source>
-        <target>自定义布局部分</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
-        <target>该布局区域 &lt;strong&gt;%s&lt;/strong&gt; 将会被增加至本地配置中。</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.sections_ok">
-        <source>The layout sections have been successfully checked.</source>
-        <target>布局部分检查成功。</target>
-      </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
         <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
         <target>主题&quot;%s&quot;损坏，无法导出。</target>

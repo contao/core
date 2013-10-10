@@ -609,7 +609,22 @@ class Automator extends \System
 	 */
 	public function generateLanguageCache()
 	{
-		$arrLanguages = scan(TL_ROOT . '/system/modules/core/languages');
+		$arrLanguages = array();
+		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page");
+
+		// Only cache the languages which are in use (see #6013)
+		while ($objLanguages->next())
+		{
+			$arrLanguages[] = $objLanguages->language;
+
+			// Also cache "de" if "de-CH" is requested
+			if (strlen($objLanguages->language) > 2)
+			{
+				$arrLanguages[] = substr($objLanguages->language, 0, 2);
+			}
+		}
+
+		$arrLanguages = array_unique($arrLanguages);
 
 		foreach ($arrLanguages as $strLanguage)
 		{
