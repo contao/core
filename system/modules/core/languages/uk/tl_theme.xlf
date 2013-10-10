@@ -97,18 +97,6 @@
         <source>The tables have been successfully checked.</source>
         <target>Таблиці були успішно перевірені.</target>
       </trans-unit>
-      <trans-unit id="tl_theme.custom_sections">
-        <source>Custom layout sections</source>
-        <target>Секції макета користувача</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
-        <target>Секція макету &lt;strong&gt;%s&lt;/strong&gt; буде додана до файлу налаштувань системи (localconfig.php).</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.sections_ok">
-        <source>The layout sections have been successfully checked.</source>
-        <target>Тема не містить секцій макету користувача.</target>
-      </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
         <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
         <target>Тема «%s» пошкоджена і не може бути імпортованою.</target>

@@ -149,8 +149,7 @@
         <target>Ez a felhasználói fiók le van tiltva! Próbálja meg a bejelentkezést %d perc múlva.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Nem sikerült bejelentkezni!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1536,16 +1535,10 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
         <target>Utolsó hozzáférés</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Letöltés</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Fájl letöltése</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Adatbázis azonosító</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

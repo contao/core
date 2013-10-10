@@ -265,6 +265,12 @@
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>当该域为空时显示该文本（需要HTML5支持）。</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>最大长度</target>
@@ -456,6 +462,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>高级选项</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>行数和列数</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

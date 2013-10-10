@@ -87,9 +87,11 @@
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
+        <target>La page que vous avez demandée n'existe pas sur ce domaine.</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Essayez &lt;a href=&quot;%s&quot;&gt;de vous diriger vers la page d’accueil&lt;/a&gt; et utilisez la fonction de recherche (si existant) pour trouver la page que vous recherchez. Vous pouvez également &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; et lui faire savoir que quelque chose ne fonctionne pas correctement.</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
@@ -117,12 +119,15 @@
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Assurez-vous d'avoir attribué une présentation de page à chaque page racine d'un nouveau site dans la structure de site.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pour plus d'information, veuillez s'il vous plaît vous référer au &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;manuel de Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
+        <target>Aucune page active trouvée</target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
@@ -132,12 +137,15 @@
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
+        <target>Accès interdit</target>
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Vous n'êtes pas authentifié, ou vous n'êtes pas autorisé à accéder à la page demandée.</target>
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Si vous n'êtes pas connecté, essayez &lt;a href=&quot;%s&quot;&gt;de vous diriger vers la page d’accueil&lt;/a&gt; et cherchez un formulaire de connexion. S'il n'y en a pas ou si vous êtes déjà connecté, &lt;a href=&quot;%s&quot;&gt;contactez le webmaster&lt;/a&gt; afin de l'informer que quelque chose ne fonctionne pas correctement.</target>
       </trans-unit>
     </body>
   </file>

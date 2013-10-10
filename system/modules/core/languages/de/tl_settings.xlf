@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Eigene Layoutbereiche</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Den Command Scheduler deaktivieren</target>
@@ -576,10 +568,6 @@
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
         <target>Proxy-Konfiguration</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Layoutbereiche</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

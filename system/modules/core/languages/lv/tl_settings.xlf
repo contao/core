@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Lūdzu ievadiet rakstzīmju kopu. Rekomendēts lietot UTF-8, lai nodrošinātu ka speciālas rakstzīmes tiek attēlotas pareizi. Nemainiet rakstzīmju kopu, izņemot gadījumus ja ir attēlošanas problēmas.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Pielāgotās izklājuma sadaļas</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Šeit jūs varat ievadīt ar komatu atdalītu sarakstu ar pielāgotām izklājuma sadaļām.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Atslēgt komandu plānotāju</target>
@@ -150,6 +142,12 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -564,10 +562,6 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Salikuma daļas</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

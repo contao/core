@@ -134,8 +134,8 @@
         <target>Dodatkowe sekcje układu</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
-        <target>To jest lista dodatkowych sekcji twojego układu strony, sekcje te możesz zdefiniować w dziale &quot;Ustawienia&quot;. Zaznacz te sekcje, które chcesz użyć w twoim układzie strony.</target>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Tutaj możesz wprowadzić dodatkowe sekcje układu strony, nazwy sekcji muszą być rozdzielone przecinkami. Możesz ich używać w module &lt;em&gt;Układ strony&lt;/em&gt; jako dodatkowe sekcje przy &lt;em&gt;header&lt;/em&gt;, &lt;em&gt;left&lt;/em&gt;, &lt;em&gt;main&lt;/em&gt;, &lt;em&gt;right&lt;/em&gt; and &lt;em&gt;footer&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -461,6 +461,9 @@
         <source>XHTML Transitional</source>
         <target>XHTML Transitional</target>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
         <target>Po sekcji Header</target>
@@ -472,6 +475,9 @@
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
         <target>Przed sekcją Footer</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

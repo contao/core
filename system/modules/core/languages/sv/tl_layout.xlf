@@ -134,8 +134,8 @@
         <target>Egna layoutsektioner</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
-        <target>Detta är en lista över alla ev, egna layoutsektioner som har definierats i systeminställningarna.&lt;br /&gt;Välj vilka sektioner som du vill använda i denna layout.</target>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Här kan du skriva in en kommaseparerad lista med egna layoutsektioner. Du kan använda dessa sektioner i modulen &lt;em&gt;Sidlayout&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -461,6 +461,9 @@
         <source>XHTML Transitional</source>
         <target>XHTML Transitional</target>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
         <target>Efter sidhuvudsektionen</target>
@@ -472,6 +475,9 @@
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
         <target>Före sidfotsektionen</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

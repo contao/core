@@ -149,8 +149,7 @@
         <target>¡La cuenta ha sido bloqueada. Prueba a acceder pasados %d minutos!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>¡Datos de acceso erróneos!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1543,16 +1542,10 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
         <target>Último acceso</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Descargar</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Descargar este archivo</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>ID de base de datos</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

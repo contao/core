@@ -265,6 +265,14 @@
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>入力欄が空の状態の間はこのテキストを表示します。(HTML5が必要)</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>最小長</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>入力が必要な文字数の下限を指定します。</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>最大長</target>
@@ -456,6 +464,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>専門的な設定</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>行と列</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

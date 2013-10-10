@@ -79,63 +79,83 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Per ulteriuras infurmaziuns pos ti leger il &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Manual da Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
+        <target>Betg chattà la pagina</target>
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
+        <target>La pagina che ti has dumandà n'exista betg u na pudeva betg vegnir chattada sin questa domain.</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Emprova da &lt;a href=&quot;%s&quot;&gt;visitar l'emprim livel&lt;/a&gt; ed dad utilisar (sche disponibel) la funcziun da tschertgar per chattar la pagina che ti tschertgar. Ti pos era &lt;a href=&quot;%s&quot;&gt;contactar il webmaster&lt;/a&gt; ed infurmar el ch'insatge na funcziunescha betg correctamain.</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
+        <target>Betg chattà la pagina da renviar</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>L'applicaziun è vegnida configurada da renviar questa dumonda sin in'autra pagina. La destinaziun n'exista dentant betg u n'è betg publitgada.</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Quai è in problem che sto vegnir schlià da l'administratur da la pagina d'internet. Sche ti ès in visitader na pos ti far nagut auter che &lt;a href=&quot;%s&quot;&gt;contactar il webmaster&lt;/a&gt; ed infurmar el ch'insatge n'è betg correct.</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>Chattà nagina ragisch da pagina</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>I n'exista nagina ragisch da pagina che correspunda a la lingua e/u domain.</target>
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Sche ti has tschernì explicitamain ina lingua, pos ti &lt;a href=&quot;%s&quot;&gt;visitar l'emprim livel&lt;/a&gt; e guardar sche ti vegns renvià. Uschiglio pos ti &lt;a href=&quot;%s&quot;&gt;contactar il webmaster&lt;/a&gt; ed infurmar el ch'insatge na funcziunescha betg correctamain.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>Specifitgà nagin layout.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>La pagina che ti has dumandà n'è betg vegnida associada cun in layout da pagina.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Controllescha che ti has assignà in layout da pagina a mintga ragisch da pagina en la structura da pagina</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Per ulteriuras infurmaziuns pos ti leger il &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Manual da Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
+        <target>Chattà naginas paginas activas</target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Tia dumonda pertutga ina pagina d'internet che na cuntegnan naginas paginas publitgadas.</target>
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Probablamain è la pagina d'internet anc adina en svilup è vegn per ad esser online en in per dis. Sche ti pensas che quai è ina errur, lura a href=&quot;%s&quot;&gt;contactescha il webmaster&lt;/a&gt; ed infurmescha el.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
+        <target>Scumandà</target>
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Ti n'es betg s'annunzià u betg autorisà dad acceder la pagina dumandada.</target>
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Sche ti n'ès betg annunzià, turna a &lt;a href=&quot;%s&quot;&gt;l'emprim livel&lt;/a&gt; e tschertga in formular da s'annunziar. Schi na dat nagin formular da s'annunziar u sche ti es gia annunzià, &lt;a href=&quot;%s&quot;&gt;contactescha il webmaster&lt;/a&gt; ed infurmescha el ch'insatge n'è betg correct.</target>
       </trans-unit>
     </body>
   </file>

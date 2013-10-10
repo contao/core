@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="FFL.headline.0">
         <source>Headline</source>
-        <target>Kop</target>
+        <target>Koptekst</target>
       </trans-unit>
       <trans-unit id="FFL.headline.1">
         <source>A custom field to insert a section headline.</source>
-        <target>Een aangepast veld om een kop in te voegen.</target>
+        <target>Een aangepast veld om een koptekst in te voegen.</target>
       </trans-unit>
       <trans-unit id="FFL.explanation.0">
         <source>Explanation</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="FFL.html.1">
         <source>A custom field to insert HTML code.</source>
-        <target>Gebruik dit veld om HTML code in het formulier in te voegen</target>
+        <target>Aangepast veld om HTML code in te voegen.</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.0">
         <source>Fieldset</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="FFL.text.1">
         <source>A single-line input field for a short or medium text.</source>
-        <target>Veld van één regel voor een korte of medium tekst.</target>
+        <target>Veld van één regel voor een korte of middellange tekst.</target>
       </trans-unit>
       <trans-unit id="FFL.password.0">
         <source>Password field</source>
@@ -47,15 +47,15 @@
       </trans-unit>
       <trans-unit id="FFL.password.1">
         <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
-        <target>Een veld van één regel voor een wachtwoord. Contao voegt automatisch een bevestiging toe.</target>
+        <target>Een veld van één regel voor een wachtwoord. Contao voegt automatisch een bevestigingsveld toe.</target>
       </trans-unit>
       <trans-unit id="FFL.textarea.0">
         <source>Textarea</source>
-        <target>Tekstgebied</target>
+        <target>Tekstveld</target>
       </trans-unit>
       <trans-unit id="FFL.textarea.1">
         <source>A multi-line input field for a medium or long text.</source>
-        <target>Een tekstgebied is een veld van meerdere regels voor een medium of langere tekst.</target>
+        <target>Een invoerveld met meerdere regels voor een middellange of lange tekst.</target>
       </trans-unit>
       <trans-unit id="FFL.select.0">
         <source>Select menu</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="FFL.select.1">
         <source>A single- or multi-line drop-down menu.</source>
-        <target>Een enkel- of multi-regel drop-down menu.</target>
+        <target>Een enkel- of uit meerdere regels bestaand drop-down menu.</target>
       </trans-unit>
       <trans-unit id="FFL.radio.0">
         <source>Radio button menu</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="FFL.checkbox.1">
         <source>A list of multiple options from which any can be selected.</source>
-        <target>Een lijst van meerdere opties waaruit meerdere geselecteerd kunnen worden.</target>
+        <target>Een lijst van meerdere opties waaruit gekozen kan worden.</target>
       </trans-unit>
       <trans-unit id="FFL.upload.0">
         <source>File upload</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="FFL.upload.1">
         <source>A single-line input field to upload a local file to the server.</source>
-        <target>Eenregelig invoerveld om een lokaal bestand naar de server te laden.</target>
+        <target> Invoerveld van één regel om een lokaal bestand naar de server te laden.</target>
       </trans-unit>
       <trans-unit id="FFL.hidden.0">
         <source>Hidden field</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="FFL.hidden.1">
         <source>A single-line input field that is not visible in the form.</source>
-        <target>Een verborgen veld bestaat uit een invoerregel welke niet zichtbaar is in het formulier.</target>
+        <target>Eenregelig invoerveld dat niet zichtbaar is in het formulier.</target>
       </trans-unit>
       <trans-unit id="FFL.captcha.0">
         <source>Security question</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="FFL.captcha.1">
         <source>A simple math question to verify that the form is being submitted by a human (CAPTCHA).</source>
-        <target>Dit veld stelt een simpele wiskundige vraag die beantwoord moet worden vooraleer het formulier verwerkt kan worden (CAPTCHA).</target>
+        <target>Een eenvoudige wiskundige vraag om te verifiëren dat het formulier door een mens wordt ingediend (CAPTCHA).</target>
       </trans-unit>
       <trans-unit id="FFL.submit.0">
         <source>Submit field</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.name.1">
         <source>The field name is a unique name to identify the field.</source>
-        <target>Geef een veldnaam op. De veldnaam wordt niet getoond aan de bezoekers van uw website.</target>
+        <target>De veldnaam is een unieke naam om het veld te identificeren.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.label.0">
         <source>Field label</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.label.1">
         <source>The field label will be visible on the website, typically in front of or above the field.</source>
-        <target>Dit label zal getoond worden aan de bezoekers van uw website. Als u een meertalige website maakt moet dit label vertaald worden in betreffende taal.</target>
+        <target>Het veld label zal zichtbaar zijn op de website, gewoonlijk voor of boven het veld.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.text.0">
         <source>Text</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>U kunt gebruik maken van HTML-tags om de tekst op te maken.</target>
+        <target>U mag gebruik maken van HTML-tags om de tekst op te maken.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.html.0">
         <source>HTML</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.options.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
-        <target>Indien u werkt zonder Javascript ondersteuning moet u uw wijzigingen opslaan vooraleer de volgorde te veranderen!</target>
+        <target>Indien Javascript is uitgeschakeld dient u wijzigingen op te slaan vooraleer de volgorde aan te passen!</target>
       </trans-unit>
       <trans-unit id="tl_form_field.mandatory.0">
         <source>Mandatory field</source>
@@ -264,6 +264,14 @@
       <trans-unit id="tl_form_field.placeholder.1">
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>Toon deze tekst zolang het veld leeg is (vereist HTML5)</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Minimale lengte</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Vereist dat de veldwaarde een bepaald aantal tekens lang is.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
@@ -456,6 +464,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>Expert instellingen</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Rijen en kolommen</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

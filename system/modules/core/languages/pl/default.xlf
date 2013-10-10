@@ -149,8 +149,7 @@
         <target>Konto zostało zablokowane! Możesz się ponownie zalogować za %d minut.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Nieprawidłowy login!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1543,16 +1542,10 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
         <target>Ostatnio dostępny</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Pobieranie</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Pobierz ten plik</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>ID bazy danych</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

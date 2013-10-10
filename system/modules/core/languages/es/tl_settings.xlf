@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Por favor introduce el juego de caracteres. El juego recomendado es UTF-8 para asegurar que los caracteres especiales aparezcan correctamente. No cambiar esta configuración a menos que experimente errores al mostrar algunos caracteres.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Diseño de secciones personalizado</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Aquí puedes introducir una lista de diseño de secciones (separada por comas). Después podrás utilizar estas secciones en el módulo &lt;em&gt;page layout&lt;/em&gt; además de &lt;em&gt;header&lt;/em&gt;, &lt;em&gt;left&lt;/em&gt;, &lt;em&gt;main&lt;/em&gt;, &lt;em&gt;right&lt;/em&gt; y &lt;em&gt;footer&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Deshabilitar la programación de comandos</target>
@@ -150,6 +142,12 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -564,10 +562,6 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Sección de diseños</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

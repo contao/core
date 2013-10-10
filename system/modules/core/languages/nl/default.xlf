@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
-        <target>Voer alleen alfanumerieke tekens in en de volgende speciale tekens: -. / _</target>
+        <target>Voer alleen alfanumerieke tekens in en de volgende speciale tekens: .-/_</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>Een wachtwoord moet tenminste %d karakters lang zijn!</target>
+        <target>Een wachtwoord moet minstens %d karakters lang zijn!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
@@ -150,8 +150,8 @@
         <target>Dit account is geblokkeerd! U kunt opnieuw proberen aan te melden na %d minuten.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Aanmelden mislukt!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Inloggen is mislukt (bedenk dat gebruikersnamen en wachtwoorden hoofdlettergevoelig zijn)!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -395,7 +395,7 @@
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
-        <target>Voegt een afbeeldingsgalerij toe: verschillende kleine thumbnail afbeeldingen die groot worden weergegeven in een lightbox door ze aan te klikken.</target>
+        <target>Voegt een lightbox afbeeldingsgalerij toe.</target>
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
@@ -855,7 +855,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_shrink">
         <source>Decrease the input field size</source>
-        <target>Verklein formaat van het invoerveld</target>
+        <target>Verkleint formaat van het invoerveld</target>
       </trans-unit>
       <trans-unit id="MSC.tw_rcopy">
         <source>Duplicate the row</source>
@@ -1115,7 +1115,7 @@
       </trans-unit>
       <trans-unit id="MSC.all_fields.1">
         <source>Please select the fields you want to edit.</source>
-        <target>Selecteer alle velden die u wenst te bewerken.</target>
+        <target>Selecteer alle velden die u wilt te bewerken.</target>
       </trans-unit>
       <trans-unit id="MSC.password.0">
         <source>Password</source>
@@ -1544,16 +1544,12 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <target>Laatst geopend</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Download</target>
+        <source>Download the file</source>
+        <target>Download het bestand</target>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Download dit bestand</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Database ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>Unieke ID</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

@@ -149,8 +149,7 @@
         <target>Kjo llogari u bllokua përkohësisht! Provoni përsëri pas %d minutash.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Identifikimi dështoi!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1546,16 +1545,10 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
         <target>Konsultimi i fundit</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Shkarko</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Shkarko këtë skedar</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>ID e bazës së të dhënave</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

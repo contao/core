@@ -27,9 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_user.google.0">
         <source>Google+ profile ID</source>
+        <target>Google+ profil ID</target>
       </trans-unit>
       <trans-unit id="tl_user.google.1">
         <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
+        <target>Her kan indtaste dit Google+ profil ID (f.eks. &lt;em&gt; 114740384471581504722 &lt;/em&gt;)</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
@@ -237,6 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_user.google_legend">
         <source>Google+ settings</source>
+        <target>Google+ indstillinger</target>
       </trans-unit>
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>

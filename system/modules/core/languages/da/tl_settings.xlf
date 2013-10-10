@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Angiv tegnsæt. Det anbefales at bruge UTF-8 for at sikre at specielle tegn vises korrekt. Hvis du ikke oplever visningsfejl, skal du ikke ændre på tegnsættet.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Tilpassede layoutsektioner</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Her kan du angive en kommasepareret liste over tilpassede layoutsektioner. Du kan så bruge disse sektioner modulet &lt;em&gt;sidelayout&lt;/em&gt; ud over &lt;em&gt;sidehoved&lt;/em&gt;, &lt;em&gt;venstre&lt;/em&gt;, &lt;em&gt;hoved&lt;/em&gt;, &lt;em&gt;højre&lt;/em&gt; and &lt;em&gt;sidefod&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Slå command scheduler fra</target>
@@ -147,9 +139,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
+        <target>Betroede proxyservere</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Her kan du indtaste en komma separeret liste over IP adresser på proxyservere du har tillid til.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>SSL proxy domæne</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Hvis dit website er tilgængeligt via en SSL proxy server, venligst indtast dets domæne her (f.eks. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -181,6 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Tilføjer det aktive sprog til URL'en (f.eks. &lt;em&gt;http://domæne.com/da/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -564,10 +567,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Layout sektioner</target>
+        <target>Proxy konfiguration</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

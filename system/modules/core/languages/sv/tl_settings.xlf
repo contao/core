@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Ange teckenavkodning (character set). UTF-8 rekommenderas för att vara säker på att specialtecken visas korrekt.&lt;br /&gt;Ändra inte teckenavkodningen såvida du inte har en god anledning att göra så.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Egna layoutsektioner</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Här kan du skriva in en kommaseparerad lista med egna layoutsektioner. Du kan använda dessa sektioner i modulen &lt;em&gt;Sidlayout&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Avaktivera kommandoplaneraren</target>
@@ -151,6 +143,12 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -565,10 +563,6 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Layout-sektioner</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

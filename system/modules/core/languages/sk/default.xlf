@@ -150,8 +150,8 @@
         <target>Tento účet je zablokovaný! Opäť sa môžete prihlásiť o %d minút.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Prihlásenie neúspešné!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Prihlásenie neúspešné (pri mene užívateľa a hesle sa rozlišujú malé a veľké písmená)! </target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1544,16 +1544,12 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
         <target>Posledný prístup</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Stiahnuť</target>
+        <source>Download the file</source>
+        <target>Stiahnúť súbor</target>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Stiahnúť tento súbor</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>ID databázy</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>Unikátne ID</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>

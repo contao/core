@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Epeni kompletin e shenjave. Përdorni mundësisht UTF-8 për ta mundësuar paraqitjen shenjave të veçanta. Ndërroni kompletin e shenjave vetëm në rast se ekzistojnë probleme.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Layout-seksionet e përshtatshme</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Epeni listën e Layout-seksioneve duke i ndarë me presje. Këto seksione do të ju ofrohen në modul &lt;em&gt;Struktura faqes&lt;/em&gt; si shtes i seksioneve &lt;em&gt;koka&lt;/em&gt;, &lt;em&gt;majtë&lt;/em&gt;, &lt;em&gt;barku&lt;/em&gt;, &lt;em&gt;djathtë&lt;/em&gt; dhe &lt;em&gt;fundi&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Ç'aktivizo orarin e komandë</target>
@@ -150,6 +142,12 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -561,10 +559,6 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Pjesët e struktures</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

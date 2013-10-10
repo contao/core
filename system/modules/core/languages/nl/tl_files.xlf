@@ -149,6 +149,14 @@
         <source>Delete file or folder &quot;%s&quot;</source>
         <target>Verwijder bestand of map &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>Details van bestand of map</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>Toon de details van bestand of map &quot;%s&quot;</target>
+      </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
         <target>Bewerk bestand</target>

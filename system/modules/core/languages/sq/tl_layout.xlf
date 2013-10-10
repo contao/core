@@ -134,8 +134,8 @@
         <target>Seksione individuale të strukturës</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
-        <target>Kjo është një list me seksione individuale të strukturave, të cilat janë definuar në modulin &lt;em&gt;Ambient&lt;/em&gt;. Zgjidhni seksionet që doni t'i përdorni në këtë strukturë.</target>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Epeni listën e Layout-seksioneve duke i ndarë me presje. Këto seksione do të ju ofrohen në modul &lt;em&gt;Struktura faqes&lt;/em&gt; si shtes i seksioneve &lt;em&gt;koka&lt;/em&gt;, &lt;em&gt;majtë&lt;/em&gt;, &lt;em&gt;barku&lt;/em&gt;, &lt;em&gt;djathtë&lt;/em&gt; dhe &lt;em&gt;fundi&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -461,6 +461,9 @@
         <source>XHTML Transitional</source>
         <target>XHTML tranzicioni</target>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
         <target>Pas rreshtit të epërm</target>
@@ -472,6 +475,9 @@
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
         <target>Në rreshtin e poshtëm</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

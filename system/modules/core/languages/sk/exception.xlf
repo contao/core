@@ -79,9 +79,11 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Viac informácií nájdete v &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Návode Contaa&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
+        <target>Stránka nebola nájdená</target>
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
@@ -121,6 +123,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
+        <target>Žiadne aktívne stránky neboli nájdené</target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>

@@ -265,6 +265,14 @@
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>Zobraziť tento text, pokiaľ bude pole prázdné (vyžaduje HTML5)</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Minimálna dĺžka</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Limituje dĺžku poľa stanoveným počtom znakov.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>Maximálna dĺžka</target>
@@ -456,6 +464,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>Rozšírené nastavenia</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Riadky a stĺpce</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>
