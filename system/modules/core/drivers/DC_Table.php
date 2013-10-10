@@ -3637,7 +3637,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			if (array_key_exists(':header', $add)){
 				$return .= '
 	<tr>
-		<td colspan="2"><span class="tl_label">'.$add[':header'].'</span> </td>
+		<td colspan="2" style="padding-bottom: 5px;">'.$add[':header'].'</td>
 	</tr>';
 				unset($add[':header']);
 			}
@@ -3651,7 +3651,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				$return .= '
   <tr>
-    <td><span class="tl_label">'.$k.':</span> </td>
+    <td style="width: 1px;"><span class="tl_label">'.$k.':</span> </td>
     <td>'.$v.'</td>
   </tr>';
 			}
