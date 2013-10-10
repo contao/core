@@ -22,7 +22,7 @@ if (in_array('-h', $argv)) {
 
 // Include the helper functions
 define('TL_ROOT', dirname(__DIR__));
-include 'system/helper/functions.php';
+include TL_ROOT . '/system/helper/functions.php';
 
 // Initialize the counter
 $counter = array();
