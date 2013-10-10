@@ -491,21 +491,18 @@ abstract class Model
 
 
 	/**
-	 * Reload all data from the database, this will discard all modifications.
+	 * Reload the data from the database discarding all modifications
 	 */
 	public function refresh()
 	{
-		// Note: do not check $this->arrModified here to make possible to refresh after low level updated!
+		$intPk = $this->{static::$strPk};
 
 		if (isset($this->arrModified[static::$strPk]))
 		{
 			$intPk = $this->arrModified[static::$strPk];
 		}
-		else
-		{
-			$intPk = $this->{static::$strPk};
-		}
 
+		// Reload the database record
 		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
 									   ->execute($intPk);
 
@@ -514,10 +511,9 @@ abstract class Model
 
 
 	/**
-	 * Free the model from the registry and release references.
-	 * Freeing the model may useful as alternative to clone the model in mass imports.
+	 * Detach the model from the registry
 	 */
-	public function free()
+	public function detach()
 	{
 		\Model\Registry::getInstance()->unregister($this);
 	}
@@ -669,11 +665,11 @@ abstract class Model
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-			$intId = is_array($varValue) ? $varValue[0] : $varValue;
+		$intId = is_array($varValue) ? $varValue[0] : $varValue;
 
 		// Try to load from the registry
 		if (is_array($strColumn))
-			{
+		{
 			if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
 			{
 				return static::findByPk($intId, $arrOptions);
