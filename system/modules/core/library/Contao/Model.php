@@ -329,6 +329,11 @@ abstract class Model
 			$arrSet = $this->preSave($arrSet);
 			$intPk  = $this->{static::$strPk};
 
+			if (count($arrSet) == 0)
+			{
+				return $this;
+			}
+
 			// Track primary key changes
 			if (isset($this->arrModified[static::$strPk]))
 			{
