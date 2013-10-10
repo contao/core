@@ -29,12 +29,6 @@
       <trans-unit id="tl_autoload.autoloadConfirm">
         <source>The autoload.php file of module "%s" has been written.</source>
       </trans-unit>
-      <trans-unit id="tl_autoload.ideCompat">
-        <source>Update the IDE compatibility file</source>
-      </trans-unit>
-      <trans-unit id="tl_autoload.ideCompatConfirm">
-        <source>The IDE compatibility file has been written.</source>
-      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.RC1 (2013-11-XX)
+----------------------------
+
+### Changed
+Move the "create IDE compat file" logic to a command line script (see #6270).
+
+
 Version 3.2.beta2 (2013-10-10)
 ------------------------------
 
