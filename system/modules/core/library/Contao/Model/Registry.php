@@ -33,13 +33,13 @@ class Registry implements \Countable
 	protected static $objInstance;
 
 	/**
-	 * Registered models by type and PK
+	 * Models by table and PK
 	 * @var array
 	 */
 	protected $arrRegistry;
 
 	/**
-	 * Collection of managed models
+	 * Models by object hash
 	 * @var array
 	 */
 	protected $arrIdentities;
@@ -60,7 +60,7 @@ class Registry implements \Countable
 	/**
 	 * Return the current object instance (Singleton)
 	 *
-	 * @return \Config The object instance
+	 * @return \Registry The object instance
 	 */
 	public static function getInstance()
 	{
@@ -83,18 +83,18 @@ class Registry implements \Countable
 
 
 	/**
-	 * Fetch a registered model by its class name and primary key
+	 * Fetch a model by table name and primary key
 	 *
-	 * @param $strTable      The table name
-	 * @param $varPrimaryKey The primary key
+	 * @param string  $strTable The table name
+	 * @param integer $intPk    The primary key
 	 *
-	 * @return \Model|null The registered model or null
+	 * @return \Model|null The model or null
 	 */
-	public function fetch($strTable, $varPrimaryKey)
+	public function fetch($strTable, $intPk)
 	{
-		if (isset($this->arrRegistry[$strTable][$varPrimaryKey]))
+		if (isset($this->arrRegistry[$strTable][$intPk]))
 		{
-			return $this->arrRegistry[$strTable][$varPrimaryKey];
+			return $this->arrRegistry[$strTable][$intPk];
 		}
 
 		return null;
@@ -112,7 +112,7 @@ class Registry implements \Countable
 	{
 		$intObjectId = spl_object_hash($objModel);
 
-		// The model is registered already
+		// The model has been registered already
 		if (isset($this->arrIdentities[$intObjectId]))
 		{
 			return;
@@ -125,16 +125,17 @@ class Registry implements \Countable
 			$this->arrRegistry[$strTable] = array();
 		}
 
-		$strPkName = $objModel->getPk();
-		$varPk = $objModel->$strPkName;
+		$strPk = $objModel->getPk();
+		$intPk = $objModel->$strPk;
 
-		if (isset($this->arrRegistry[$strTable][$varPk]))
+		// Another model object is pointing to the DB record already
+		if (isset($this->arrRegistry[$strTable][$intPk]))
 		{
-			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPkName($varPk)");
+			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($intPk)");
 		}
 
 		$this->arrIdentities[$intObjectId] = $objModel;
-		$this->arrRegistry[$strTable][$varPk] = $objModel;
+		$this->arrRegistry[$strTable][$intPk] = $objModel;
 	}
 
 
@@ -154,11 +155,11 @@ class Registry implements \Countable
 		}
 
 		$strTable = $objModel->getTable();
-		$strPkName = $objModel->getPk();
-		$varPk = $objModel->$strPkName;
+		$strPk    = $objModel->getPk();
+		$intPk    = $objModel->$strPk;
 
 		unset($this->arrIdentities[$intObjectId]);
-		unset($this->arrRegistry[$strTable][$varPk]);
+		unset($this->arrRegistry[$strTable][$intPk]);
 	}
 
 
@@ -172,7 +173,6 @@ class Registry implements \Countable
 	public function isRegistered(\Model $objModel)
 	{
 		$intObjectId = spl_object_hash($objModel);
-
 		return isset($this->arrIdentities[$intObjectId]);
 	}
 }

@@ -79,21 +79,22 @@ public function addAliasButton($arrButtons)
 In case you have been using the "buttons_callback", please make sure to adjust
 your extension accordingly.
 
-### Model registry
 
-In Contao 3.0 and 3.1 it was possible to create two models for one database
-record. In rare cases, it was possible that this data could be lost. We have
-decided to drop the database cache (see #6070) and introduce a model registry.
-The model registry ensures that there is only one model for one database.
+### `Model::save()`
 
-But with the registry, we loose the `$blnForceInsert` flag of `Model::save()`,
-that make duplicating a model really simple. From now on, you need to clone the
-model that you want to duplicate first.
+In Contao 3.0 and 3.1 it was possible to create two models for the same database
+record by passing `true` to the `Model::save()` method. However, this could lead
+to a loss of data in certain edge-cases, so we have decided to implement a model
+registry to ensure that there is only one model per database record.
+
+The registry, however, requires to use the `clone` command to duplicate models,
+therefore the `$blnForceInsert` argment had to be removed. If you have used it
+in your custom extension, be sure to adjust the code accordingly.
 
 Usage in Contao 3.0 and 3.1:
 
 ```php
-$objPage = \PageModel::findByPK(1);
+$objPage = PageModel::findByPK(1);
 $objPage->title = 'New page title';
 $objPage->save(true);
 ```
@@ -101,8 +102,8 @@ $objPage->save(true);
 New usage as of Contao 3.2:
 
 ```php
-$objPage = \PageModel::findByPK(1);
-$objDuplicatedPage = clone $objPage;
-$objDuplicatedPage->title = 'New page title';
-$objDuplicatedPage->save();
+$objPage = PageModel::findByPK(1);
+$objCopy = clone $objPage;
+$objCopy->title = 'New page title';
+$objCopy->save();
 ```
