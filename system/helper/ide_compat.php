@@ -237,6 +237,7 @@ namespace Files {
 namespace Model {
 	class Collection extends \Contao\Model\Collection {}
 	class QueryBuilder extends \Contao\Model\QueryBuilder {}
+	class Registry extends \Contao\Model\Registry {}
 }
 
 // devtools
