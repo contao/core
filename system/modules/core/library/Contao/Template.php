@@ -330,9 +330,26 @@ abstract class Template extends \Controller
 				$strUnit = 'ms';
 			}
 
-			$strDebug = '<div id="debug" class="' . \Input::cookie('CONTAO_CONSOLE') . '">' . "\n"
-				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber($intTime, 0) . ' ' . $strUnit . '</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span class="rows">Rows: ' . $intReturned . ' returned, ' . $intAffected . ' affected</span> <span id="tog">&nbsp;</span></p>' . "\n"
-				. '<div><pre>' . "\n";
+			$strDebug = sprintf(
+				'<div id="debug" class="%s">'
+				. '<p>'
+					. '<span class="time">Execution time: %s %s</span>'
+					. '<span class="memory">Memory usage: %s</span>'
+					. '<span class="db">Database queries: %d</span>'
+					. '<span class="rows">Rows: %d returned, %s affected</span>'
+					. '<span class="models">Registered models: %d</span>'
+					. '<span id="tog">&nbsp;</span>'
+				. '</p>'
+				. '<div><pre>',
+				\Input::cookie('CONTAO_CONSOLE'),
+				$this->getFormattedNumber($intTime, 0),
+				$strUnit,
+				$this->getReadableSize(memory_get_peak_usage()),
+				count($GLOBALS['TL_DEBUG']['database_queries']),
+				$intReturned,
+				$intAffected,
+				\Model\Registry::getInstance()->count()
+			);
 
 			ksort($GLOBALS['TL_DEBUG']);
 

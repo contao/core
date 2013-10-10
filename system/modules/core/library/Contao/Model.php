@@ -59,16 +59,16 @@ abstract class Model
 	protected static $strPk = 'id';
 
 	/**
-	 * Database result
-	 * @var \Database\Result
-	 */
-	protected $objResult;
-
-	/**
 	 * Data
 	 * @var array
 	 */
 	protected $arrData = array();
+
+	/**
+	 * Modified keys
+	 * @var array
+	 */
+	protected $arrModified = array();
 
 	/**
 	 * Relations
@@ -90,6 +90,8 @@ abstract class Model
 	 */
 	public function __construct(\Database\Result $objResult=null)
 	{
+		$this->arrModified = array();
+
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
@@ -120,23 +122,34 @@ abstract class Model
 			{
 				$table = $this->arrRelations[$key]['table'];
 				$strClass = static::getClassFromTable($table);
+				$intPk = $strClass::getPk();
 
 				// If the primary key is empty, set null (see #5356)
-				if (!isset($row[$strClass::getPk()]))
+				if (!isset($row[$intPk]))
 				{
 					$this->arrRelated[$key] = null;
 				}
 				else
 				{
-					$this->arrRelated[$key] = new $strClass();
-					$this->arrRelated[$key]->setRow($row);
+					$objRelated = \Model\Registry::getInstance()->fetch($table, $row[$intPk]);
+
+					if ($objRelated !== null)
+					{
+						$objRelated->mergeRow($row);
+					}
+					else
+					{
+						$objRelated = new $strClass();
+						$objRelated->setRow($row);
+					}
+
+					$this->arrRelated[$key] = $objRelated;
 				}
 			}
 
 			$this->setRow($arrData); // see #5439
+			\Model\Registry::getInstance()->register($this);
 		}
-
-		$this->objResult = $objResult;
 	}
 
 
@@ -145,6 +158,7 @@ abstract class Model
 	 */
 	public function __clone()
 	{
+		$this->arrModified = array();
 		unset($this->arrData[static::$strPk]);
 	}
 
@@ -157,6 +171,17 @@ abstract class Model
 	 */
 	public function __set($strKey, $varValue)
 	{
+		if ($this->$strKey === $varValue)
+		{
+			return;
+		}
+
+		// Store the original value
+		if (!isset($this->arrModified[$strKey]))
+		{
+			$this->arrModified[$strKey] = $this->arrData[$strKey];
+		}
+
 		$this->arrData[$strKey] = $varValue;
 	}
 
@@ -215,17 +240,6 @@ abstract class Model
 
 
 	/**
-	 * Return the database result
-	 *
-	 * @return \Database\Result|null The database result object or null
-	 */
-	public function getResult()
-	{
-		return $this->objResult;
-	}
-
-
-	/**
 	 * Return the current record as associative array
 	 *
 	 * @return array The data record
@@ -245,7 +259,32 @@ abstract class Model
 	 */
 	public function setRow(array $arrData)
 	{
-		$this->arrData = $arrData;
+		foreach ($arrData as $k=>$v)
+		{
+			$this->$k = $v;
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Set the current record from an array preserving modified but unsaved fields
+	 *
+	 * @param array $arrData The data record
+	 *
+	 * @return \Model The model object
+	 */
+	public function mergeRow(array $arrData)
+	{
+		foreach ($arrData as $k=>$v)
+		{
+			if (!isset($this->arrModified[$k]) && $this->arrData[$k] !== $v)
+			{
+				$this->$k = $v;
+			}
+		}
+
 		return $this;
 	}
 
@@ -264,24 +303,53 @@ abstract class Model
 	/**
 	 * Save the current record
 	 *
-	 * @param boolean $blnForceInsert Force creating a new record
-	 *
 	 * @return \Model The model object
+	 *
+	 * @throws \InvalidArgumentException If an argument is passed
 	 */
-	public function save($blnForceInsert=false)
+	public function save()
 	{
-		$arrSet = $this->preSave($this->row());
-
-		if (isset($this->{static::$strPk}) && !$blnForceInsert)
+		if (count(func_get_args()))
 		{
+			throw new \InvalidArgumentException('The $blnForceInsert argument has been removed (see system/docs/UPGRADE.md)');
+		}
+
+		// The model is in the registry
+		if (\Model\Registry::getInstance()->isRegistered($this))
+		{
+			$arrRow = $this->row();
+			$arrSet = array();
+
+			// Only update modified fields
+			foreach ($this->arrModified as $k=>$v)
+			{
+				$arrSet[$k] = $arrRow[$k];
+			}
+
+			$arrSet = $this->preSave($arrSet);
+			$intPk  = $this->{static::$strPk};
+
+			// Track primary key changes
+			if (isset($this->arrModified[static::$strPk]))
+			{
+				$intPk = $this->arrModified[static::$strPk];
+			}
+
+			// Update the row
 			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
 									->set($arrSet)
-									->execute($this->{static::$strPk});
+									->execute($intPk);
 
 			$this->postSave(self::UPDATE);
+			$this->arrModified = array(); // reset after postSave()
 		}
+
+		// The model is not yet in the registry
 		else
 		{
+			$arrSet = $this->preSave($this->row());
+
+			// Insert a new row
 			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
 											->set($arrSet)
 											->execute();
@@ -292,6 +360,9 @@ abstract class Model
 			}
 
 			$this->postSave(self::INSERT);
+			$this->arrModified = array(); // reset after postSave()
+
+			\Model\Registry::getInstance()->register($this);
 		}
 
 		return $this;
@@ -320,11 +391,7 @@ abstract class Model
 	{
 		if ($intType == self::INSERT)
 		{
-			// Reload the model data (might have been modified by default values or triggers)
-			$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-										   ->execute($this->{static::$strPk});
-
-			$this->setRow($res->row());
+			$this->refresh(); // might have been modified by default values or triggers
 		}
 	}
 
@@ -336,11 +403,27 @@ abstract class Model
 	 */
 	public function delete()
 	{
+		$intPk = $this->{static::$strPk};
+
+		if (isset($this->arrModified[static::$strPk]))
+		{
+			$intPk = $this->arrModified[static::$strPk];
+		}
+
+		// Delete the row
 		$intAffected = \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-											   ->execute($this->{static::$strPk})
+											   ->execute($intPk)
 											   ->affectedRows;
 
-		$this->arrData[static::$strPk] = null; // see #6162
+		if ($intAffected)
+		{
+			// Unregister the model
+			\Model\Registry::getInstance()->unregister($this);
+
+			// Remove the primary key (see #6162)
+			$this->arrData[static::$strPk] = null;
+		}
+
 		return $intAffected;
 	}
 
@@ -408,6 +491,35 @@ abstract class Model
 
 
 	/**
+	 * Reload the data from the database discarding all modifications
+	 */
+	public function refresh()
+	{
+		$intPk = $this->{static::$strPk};
+
+		if (isset($this->arrModified[static::$strPk]))
+		{
+			$intPk = $this->arrModified[static::$strPk];
+		}
+
+		// Reload the database record
+		$res = \Database::getInstance()->prepare("SELECT * FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+									   ->execute($intPk);
+
+		$this->setRow($res->row());
+	}
+
+
+	/**
+	 * Detach the model from the registry
+	 */
+	public function detach()
+	{
+		\Model\Registry::getInstance()->unregister($this);
+	}
+
+
+	/**
 	 * Find a single record by its primary key
 	 *
 	 * @param mixed $varValue   The property value
@@ -417,6 +529,14 @@ abstract class Model
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
+		// Try to load from the registry
+		$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varValue);
+
+		if ($objModel !== null)
+		{
+			return $objModel;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
@@ -444,6 +564,17 @@ abstract class Model
 	 */
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
+		// Try to load from the registry
+		if (is_numeric($varId))
+		{
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varId);
+
+			if ($objModel !== null)
+			{
+				return $objModel;
+			}
+		}
+
 		$t = static::$strTable;
 
 		$arrOptions = array_merge
@@ -478,22 +609,48 @@ abstract class Model
 			return null;
 		}
 
-		$t = static::$strTable;
+		$arrRegistered = array();
+		$arrUnregistered = array();
 
-		$arrOptions = array_merge
-		(
-			array
+		// Search for registered models
+		foreach ($arrIds as $intId)
+		{
+			$arrRegistered[$intId] = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
+
+			if ($arrRegistered[$intId] === null)
+			{
+				$arrUnregistered[] = $intId;
+			}
+		}
+
+		// Fetch only the missing models from the database
+		if (!empty($arrUnregistered))
+		{
+			$t = static::$strTable;
+
+			$arrOptions = array_merge
 			(
-				'column' => array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"),
-				'value'  => null,
-				'order'  => \Database::getInstance()->findInSet("$t.id", $arrIds),
-				'return' => 'Collection'
-			),
+				array
+				(
+					'column' => array("$t.id IN(" . implode(',', array_map('intval', $arrUnregistered)) . ")"),
+					'value'  => null,
+					'order'  => \Database::getInstance()->findInSet("$t.id", $arrIds),
+					'return' => 'Collection'
+				),
 
-			$arrOptions
-		);
+				$arrOptions
+			);
 
-		return static::find($arrOptions);
+			$arrMissing = static::find($arrOptions);
+
+			foreach ($arrMissing as $objModel)
+			{
+				$intId = $objModel->{static::$strPk};
+				$arrRegistered[$intId] = $objModel;
+			}
+		}
+
+		return new \Model\Collection(array_filter(array_values($arrRegistered)), static::$strTable);
 	}
 
 
@@ -508,6 +665,24 @@ abstract class Model
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
+		$intId = is_array($varValue) ? $varValue[0] : $varValue;
+
+		// Try to load from the registry
+		if (is_array($strColumn))
+		{
+			if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
+			{
+				return static::findByPk($intId, $arrOptions);
+			}
+		}
+		else
+		{
+			if ($strColumn == static::$strPk)
+			{
+				return static::findByPk($intId, $arrOptions);
+			}
+		}
+
 		$arrOptions = array_merge
 		(
 			array
@@ -658,11 +833,22 @@ abstract class Model
 
 		if ($arrOptions['return'] == 'Model')
 		{
+			$strPk = static::$strPk;
+			$intPk = $objResult->$strPk;
+
+			// Try to load from the registry
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intPk);
+
+			if ($objModel !== null)
+			{
+				return $objModel->mergeRow($objResult->row());
+			}
+
 			return new static($objResult);
 		}
 		else
 		{
-			return new \Model\Collection($objResult, static::$strTable);
+			return \Model\Collection::createFromDbResult($objResult, static::$strTable);
 		}
 	}
 
