@@ -370,7 +370,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * Fetch all column of each row
+	 * Fetch all columns of every row
 	 *
 	 * @return array An array with all rows and columns
 	 */
@@ -409,7 +409,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 */
 	public function offsetSet($offset, $value)
 	{
-		throw new \RuntimeException('This collection is immutable!');
+		throw new \RuntimeException('This collection is immutable');
 	}
 
 	/**
@@ -417,7 +417,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 */
 	public function offsetUnset($offset)
 	{
-		throw new \RuntimeException('This collection is immutable!');
+		throw new \RuntimeException('This collection is immutable');
 	}
 
 

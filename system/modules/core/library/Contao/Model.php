@@ -12,8 +12,6 @@
 
 namespace Contao;
 
-use Database\Result;
-
 
 /**
  * Reads objects from and writes them to to the database
@@ -67,7 +65,7 @@ abstract class Model
 	protected $arrData = array();
 
 	/**
-	 * List of modified keys
+	 * Modified keys
 	 * @var array
 	 */
 	protected $arrModified = array();
@@ -93,6 +91,7 @@ abstract class Model
 	public function __construct(\Database\Result $objResult=null)
 	{
 		$this->arrModified = array();
+
 		$objRelations = new \DcaExtractor(static::$strTable);
 		$this->arrRelations = $objRelations->getRelations();
 
@@ -149,7 +148,6 @@ abstract class Model
 			}
 
 			$this->setRow($arrData); // see #5439
-
 			\Model\Registry::getInstance()->register($this);
 		}
 	}
@@ -178,7 +176,7 @@ abstract class Model
 			return;
 		}
 
-		// store original value
+		// Store the original value
 		if (!isset($this->arrModified[$strKey]))
 		{
 			$this->arrModified[$strKey] = $this->arrData[$strKey];
@@ -271,7 +269,7 @@ abstract class Model
 
 
 	/**
-	 * Safe merge with the given array, but preserve modified unsaved fields.
+	 * Set the current record from an array preserving modified but unsaved fields
 	 *
 	 * @param array $arrData The data record
 	 *
@@ -305,6 +303,8 @@ abstract class Model
 	 * Save the current record
 	 *
 	 * @return \Model The model object
+	 *
+	 * @throws \InvalidArgumentException If an argument is passed
 	 */
 	public function save()
 	{
