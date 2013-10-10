@@ -1,8 +1,11 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.2.RC1 (2013-10-XX)
-----------------------------
+Version 3.2.beta2 (2013-10-10)
+------------------------------
+
+### New
+Added a model registry (thanks to Tristan Lins) (see #6248).
 
 ### New
 Added the "compileFormFields" hook (see #6253).
