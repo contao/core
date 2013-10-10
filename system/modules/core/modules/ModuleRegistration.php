@@ -457,7 +457,7 @@ class ModuleRegistration extends \Module
 
 				// Save the folder ID
 				$objNewUser->assignDir = 1;
-				$objNewUser->homeDir = $objUserDir->id;
+				$objNewUser->homeDir = $objUserDir->uuid;
 				$objNewUser->save();
 
 				// Update the hash of the target folder
