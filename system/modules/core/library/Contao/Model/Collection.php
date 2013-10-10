@@ -39,12 +39,6 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	protected $intIndex = -1;
 
 	/**
-	 * End indicator
-	 * @var boolean
-	 */
-	protected $blnDone = false;
-
-	/**
 	 * Models
 	 * @var array
 	 */
@@ -52,49 +46,27 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * Create a new collection from a database result
+	 * Create a new collection
 	 *
-	 * @param \Database\Result $objResult The database result object
-	 * @param string           $strTable  The table name
+	 * @param array  $arrModels An array of models
+	 * @param string $strTable  The table name
 	 *
-	 * @return \Model\Collection The model collection object
-	 */
-	static public function createFromDbResult(\Database\Result $objResult, $strTable)
-	{
-		$arrModels = array();
-
-		while ($objResult->next())
-		{
-			$strClass = \Model::getClassFromTable($strTable);
-			$strPkName = $strClass::getPk();
-			$varPk = $objResult->$strPkName;
-			$objModel = \Model\Registry::getInstance()->fetch($strTable, $varPk);
-
-			if ($objModel)
-			{
-				$objModel->safeMerge($objResult->row());
-				$arrModels[] = $objModel;
-			}
-			else
-			{
-				$arrModels[] = new $strClass($objResult);
-			}
-		}
-
-		return new static($arrModels, $strTable);
-	}
-
-
-	/**
-	 * Create a new collection.
-	 *
-	 * @param array $arrModels The models list
-	 * @param string $strTable The table name
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct(array $arrModels, $strTable)
 	{
-		$this->arrModels = array_values($arrModels);
-		$this->strTable = $strTable;
+		$arrModels = array_values($arrModels);
+
+		foreach ($arrModels as $objModel)
+		{
+			if (!$objModel instanceof \Model)
+			{
+				throw new \InvalidArgumentException('Invalid type: ' . gettype($objModel));
+			}
+		}
+
+		$this->arrModels = $arrModels;
+		$this->strTable  = $strTable;
 	}
 
 
@@ -153,6 +125,40 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		return isset($this->arrModels[$this->intIndex]->$strKey);
+	}
+
+
+	/**
+	 * Create a new collection from a database result
+	 *
+	 * @param \Database\Result $objResult The database result object
+	 * @param string           $strTable  The table name
+	 *
+	 * @return \Model\Collection The model collection
+	 */
+	static public function createFromDbResult(\Database\Result $objResult, $strTable)
+	{
+		$arrModels = array();
+
+		while ($objResult->next())
+		{
+			$strClass = \Model::getClassFromTable($strTable);
+			$strPk    = $strClass::getPk();
+			$intPk    = $objResult->$strPk;
+			$objModel = \Model\Registry::getInstance()->fetch($strTable, $intPk);
+
+			if ($objModel !== null)
+			{
+				$objModel->mergeRow($objResult->row());
+				$arrModels[] = $objModel;
+			}
+			else
+			{
+				$arrModels[] = new $strClass($objResult);
+			}
+		}
+
+		return new static($arrModels, $strTable);
 	}
 
 

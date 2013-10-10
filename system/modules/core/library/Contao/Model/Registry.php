@@ -85,16 +85,16 @@ class Registry implements \Countable
 	/**
 	 * Fetch a model by table name and primary key
 	 *
-	 * @param $strTable      The table name
-	 * @param $varPrimaryKey The primary key
+	 * @param string  $strTable The table name
+	 * @param integer $intPk    The primary key
 	 *
 	 * @return \Model|null The model or null
 	 */
-	public function fetch($strTable, $varPrimaryKey)
+	public function fetch($strTable, $intPk)
 	{
-		if (isset($this->arrRegistry[$strTable][$varPrimaryKey]))
+		if (isset($this->arrRegistry[$strTable][$intPk]))
 		{
-			return $this->arrRegistry[$strTable][$varPrimaryKey];
+			return $this->arrRegistry[$strTable][$intPk];
 		}
 
 		return null;
@@ -125,16 +125,17 @@ class Registry implements \Countable
 			$this->arrRegistry[$strTable] = array();
 		}
 
-		$strPkName = $objModel->getPk();
-		$varPk = $objModel->$strPkName;
+		$strPk = $objModel->getPk();
+		$intPk = $objModel->$strPk;
 
-		if (isset($this->arrRegistry[$strTable][$varPk]))
+		// Another model object is pointing to the DB record already
+		if (isset($this->arrRegistry[$strTable][$intPk]))
 		{
-			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPkName($varPk)");
+			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($intPk)");
 		}
 
 		$this->arrIdentities[$intObjectId] = $objModel;
-		$this->arrRegistry[$strTable][$varPk] = $objModel;
+		$this->arrRegistry[$strTable][$intPk] = $objModel;
 	}
 
 
@@ -154,11 +155,11 @@ class Registry implements \Countable
 		}
 
 		$strTable = $objModel->getTable();
-		$strPkName = $objModel->getPk();
-		$varPk = $objModel->$strPkName;
+		$strPk    = $objModel->getPk();
+		$intPk    = $objModel->$strPk;
 
 		unset($this->arrIdentities[$intObjectId]);
-		unset($this->arrRegistry[$strTable][$varPk]);
+		unset($this->arrRegistry[$strTable][$intPk]);
 	}
 
 
