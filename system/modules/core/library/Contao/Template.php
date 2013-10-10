@@ -333,12 +333,11 @@ abstract class Template extends \Controller
 			$strDebug = sprintf(
 				'<div id="debug" class="%s">'
 				. '<p>'
-					. '<span class="info">Debug information</span>'
 					. '<span class="time">Execution time: %s %s</span>'
 					. '<span class="memory">Memory usage: %s</span>'
 					. '<span class="db">Database queries: %d</span>'
-					. '<span class="models">Registered models: %d</span>'
 					. '<span class="rows">Rows: %d returned, %s affected</span>'
+					. '<span class="models">Registered models: %d</span>'
 					. '<span id="tog">&nbsp;</span>'
 				. '</p>'
 				. '<div><pre>',
@@ -347,9 +346,9 @@ abstract class Template extends \Controller
 				$strUnit,
 				$this->getReadableSize(memory_get_peak_usage()),
 				count($GLOBALS['TL_DEBUG']['database_queries']),
-				\Model\Registry::getInstance()->count(),
 				$intReturned,
-				$intAffected
+				$intAffected,
+				\Model\Registry::getInstance()->count()
 			);
 
 			ksort($GLOBALS['TL_DEBUG']);
