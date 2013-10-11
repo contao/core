@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Correctly assign the user's home directory (see #6297).
+
 ### Changed
 Move the "create IDE compat file" logic to a command line script (see #6270).
 
