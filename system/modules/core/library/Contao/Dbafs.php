@@ -286,6 +286,7 @@ class Dbafs
 	public static function copyResource($strSource, $strDestination)
 	{
 		$objFile = \FilesModel::findByPath($strSource);
+		$objDatabase = \Database::getInstance();
 
 		// Add the source entry
 		if ($objFile === null)
@@ -317,6 +318,7 @@ class Dbafs
 		$objNewFile->tstamp = time();
 		$objNewFile->path   = $strDestination;
 		$objNewFile->name   = basename($strDestination);
+		$objNewFile->uuid   = $objDatabase->getUuid();
 		$objNewFile->save();
 
 		// Update all child records
