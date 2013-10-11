@@ -81,8 +81,13 @@ class Idna
 			return '';
 		}
 
+		if (strpos($strEmail, '@') === false)
+		{
+			return $strEmail; // see #6241
+		}
+
 		list($strLocal, $strHost) = explode('@', $strEmail);
-		return $strLocal .'@'. static::encode($strHost);
+		return $strLocal . '@' . static::encode($strHost);
 	}
 
 
