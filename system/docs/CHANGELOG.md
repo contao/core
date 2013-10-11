@@ -5,6 +5,9 @@ Version 3.1.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Ignore the "maxlength" setting in certain form fields (see #6283).
+
+### Fixed
 Correctly show the "toggle page status" icon (see #6282).
 
 ### Removed
