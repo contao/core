@@ -5,6 +5,9 @@ Version 3.1.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly render the pages breadcrumb menu for non-admin users (see #6067).
+
+### Fixed
 Correctly handle the accordion fields during the version 3.1 update (see #6229).
 
 ### Fixed
