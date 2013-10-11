@@ -317,6 +317,12 @@ abstract class Model
 		// The model is in the registry
 		if (\Model\Registry::getInstance()->isRegistered($this))
 		{
+			// No modified fields
+			if (empty($this->arrModified))
+			{
+				return $this;
+			}
+
 			$arrRow = $this->row();
 			$arrSet = array();
 
