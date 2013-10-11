@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Correctly handle booleans, null and empty strings in the Validator (see #6287).
+
+### Fixed
 Correctly assign the user's home directory (see #6297).
 
 ### Changed

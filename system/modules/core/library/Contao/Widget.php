@@ -801,7 +801,7 @@ abstract class Widget extends \Controller
 					}
 					// DO NOT ADD A break; STATEMENT HERE
 
-				// Numeric characters (including full stop [.] minus [-] and space [ ])
+				// Numeric characters (including full stop [.] and minus [-])
 				case 'digit':
 					// Support decimal commas and convert them automatically (see #3488)
 					if (substr_count($varInput, ',') == 1 && strpos($varInput, '.') === false)
