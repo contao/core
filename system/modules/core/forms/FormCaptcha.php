@@ -77,6 +77,7 @@ class FormCaptcha extends \Widget
 
 			case 'required':
 			case 'mandatory':
+			case 'minlength':
 			case 'maxlength':
 				// Ignore
 				break;

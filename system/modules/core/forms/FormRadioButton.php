@@ -73,6 +73,7 @@ class FormRadioButton extends \Widget
 				break;
 
 			case 'rgxp':
+			case 'minlength':
 			case 'maxlength':
 				// Ignore
 				break;
