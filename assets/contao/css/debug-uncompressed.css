@@ -72,10 +72,20 @@
 	position:absolute;
 	top:2px;
 	height:28px;
-	right:28px;
+	right:40px;
 	background:url("../../../system/themes/default/images/expand.gif") right 5px no-repeat;
 	cursor:pointer;
+	width: 20px;
 }
 #debug.closed #tog {
 	background-image:url("../../../system/themes/default/images/collapse.gif");
+}
+#debug #close_debug {
+	position:absolute;
+	top:6px;
+	height:28px;
+	right:22px;
+	background:url("../../../system/themes/default/images/delete.gif") right 5px no-repeat;
+	cursor:pointer;
+	width: 20px;
 }
