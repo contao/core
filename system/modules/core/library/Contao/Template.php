@@ -338,6 +338,7 @@ abstract class Template extends \Controller
 					. '<span class="db">Database queries: %d</span>'
 					. '<span class="rows">Rows: %d returned, %s affected</span>'
 					. '<span class="models">Registered models: %d</span>'
+					. '<span id="close_debug">&nbsp;</span>'
 					. '<span id="tog">&nbsp;</span>'
 				. '</p>'
 				. '<div><pre>',
@@ -378,6 +379,9 @@ abstract class Template extends \Controller
 							. "$('debug').toggleClass('closed');"
 							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:Contao.path});"
 							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
+						. "});"
+						. "$('close_debug').addEvent('click',function(e) {"
+							. "$('debug').setStyle('display', 'none');"
 						. "});"
 						. "window.addEvent('resize',function() {"
 							. "$$('#debug>*').setStyle('width',window.getSize().x);"
