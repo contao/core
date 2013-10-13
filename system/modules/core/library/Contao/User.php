@@ -218,6 +218,27 @@ abstract class User extends \System
 
 
 	/**
+	 *
+	 * Checks "crypt" passwords only
+	 *
+	 * @param string $strCrypted The crypted password
+	 * @param string $strPlain   The plain password
+	 *
+	 * @return boolean true, if the passwords "match", else false
+	 *
+	 */
+	public static function checkCryptPassword($strCrypted, $strPlain)
+	{
+		if (\Encryption::test($strCrypted))
+		{
+			return  (crypt($strPlain, $strCrypted) == $strCrypted);
+		}
+
+		return false;
+	}
+
+
+	/**
 	 * Try to login the current user
 	 *
 	 * @return boolean True if the user could be logged in
@@ -303,7 +324,7 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
+			$blnAuthenticated = \User::checkCryptPassword($this->password, \Input::post('password', true));
 		}
 		else
 		{
