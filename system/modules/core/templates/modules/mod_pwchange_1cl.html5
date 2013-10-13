@@ -1,0 +1,35 @@
+
+<!-- indexer::stop -->
+<div class="<?php echo $this->class; ?> one_column tableless login block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php endif; ?>
+
+  <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="tl_login" method="post">
+    <div class="formbody">
+      <?php if ($this->info): ?>
+        <p class=""><?php echo $this->info; ?></p>
+        <p>&nbsp;</p>
+      <?php endif; ?>
+      <p class="login_info"><?php echo $this->loggedInAs; ?><br><?php echo $this->lastLogin; ?></p>
+      <?php if ($this->message): ?>
+        <p class="error"><?php echo $this->message; ?></p>
+      <?php endif; ?>
+      <input type="hidden" name="FORM_SUBMIT" value="tl_pwchange">
+      <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
+      <div>
+      <?php echo $this->formPassword; ?>
+      </div>
+      <!-- label for="password"><?php echo $this->password; ?></label>
+      <input type="password" name="password" id="password" class="text password" value=""><br>
+      <label for="password_confirm"><?php echo $this->password_confirm; ?></label>
+      <input type="password" name="password_confirm" id="password_confirm" class="text password" value="" -->
+      <div class="submit_container">
+        <input type="submit" class="submit" name="tl_pwchange" value="<?php echo $this->pwclabel; ?>">
+        <input type="submit" class="submit" name="tl_logout" value="<?php echo $this->llabel; ?>">
+      </div>
+    </div>
+  </form>
+</div>
+<!-- indexer::continue -->

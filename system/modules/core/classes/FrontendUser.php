@@ -157,6 +157,18 @@ class FrontendUser extends \User
 		// Default authentication
 		if (parent::authenticate())
 		{
+			// Check if the user has to change the password
+			if ($this->pwChange)
+			{
+				// we are here because of the login module, do not logout
+				if (\Session::getInstance()->get('PASSWORD_CHANGE_REQUIRED'))
+				{
+					\Session::getInstance()->remove('PASSWORD_CHANGE_REQUIRED');
+					return false;
+				}
+				$this->logout();
+				$this->reload();
+			}
 			return true;
 		}
 
@@ -184,6 +196,7 @@ class FrontendUser extends \User
 			return false;
 		}
 
+		/* was called by parent */
 		$this->setUserFromDb();
 
 		// Last login date

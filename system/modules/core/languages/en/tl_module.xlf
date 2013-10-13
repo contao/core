@@ -581,6 +581,12 @@ Please click ##link## to set the new password. If you did not request this e-mai
       <trans-unit id="tl_module.pasteafter.1">
         <source>Paste after module ID %s</source>
       </trans-unit>
+      <trans-unit id="tl_module.password_change_info">
+        <source>The administrator wants you to change your password.</source>
+      </trans-unit>
+      <trans-unit id="tl_module.old_password_forbidden">
+        <source>This password has already been used.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

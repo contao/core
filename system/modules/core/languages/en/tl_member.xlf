@@ -215,6 +215,12 @@
       <trans-unit id="tl_member.toggle.1">
         <source>Activate/deactivate member ID %s</source>
       </trans-unit>
+      <trans-unit id="tl_member.pwChange.0">
+        <source>Password change required</source>
+      </trans-unit>
+      <trans-unit id="tl_member.pwChange.1">
+        <source>Make the member change his password upon the next login.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

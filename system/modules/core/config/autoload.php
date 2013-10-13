@@ -324,6 +324,7 @@ TemplateLoader::addFiles(array
 	'mod_html'            => 'system/modules/core/templates/modules',
 	'mod_login_1cl'       => 'system/modules/core/templates/modules',
 	'mod_login_2cl'       => 'system/modules/core/templates/modules',
+	'mod_pwchange_1cl'    => 'system/modules/core/templates/modules',
 	'mod_logout_1cl'      => 'system/modules/core/templates/modules',
 	'mod_logout_2cl'      => 'system/modules/core/templates/modules',
 	'mod_message'         => 'system/modules/core/templates/modules',

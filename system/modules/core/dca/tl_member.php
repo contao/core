@@ -117,7 +117,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'login'                       => 'username,password',
+		'login'                       => 'pwChange,username,password',
 		'assignDir'                   => 'homeDir'
 	),
 
@@ -305,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'username' => array
@@ -316,7 +316,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login', 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'password' => array
@@ -330,6 +330,23 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 				array('tl_member', 'setNewPassword')
 			),
 			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'pwChange' => array
+		(
+				'label'                   => &$GLOBALS['TL_LANG']['tl_member']['pwChange'],
+				'exclude'                 => true,
+				'inputType'               => 'checkbox',
+				'filter'                  => true,
+				'sql'                     => "char(1) NOT NULL default ''",
+				'eval'                    => array('tl_class'=>'w50')
+		),
+		'oldPasswords' => array
+		(
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['oldpasswords'],
+				'exclude'                 => true,
+				'inputType'               => 'none',
+				'eval'                    => array('preserveTags'=>true, 'beEditable' => false, 'feEditable'=>false, 'feGroup'=>'login'),
+				'sql'                     => "blob NULL"
 		),
 		'assignDir' => array
 		(
