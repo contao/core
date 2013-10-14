@@ -407,6 +407,19 @@ class Ajax extends \Backend
 				}
 				exit; break;
 
+			case 'reloadWidget':
+				// Build the attributes based on the "eval" array
+				$arrAttribs = $GLOBALS['TL_DCA'][$dc->table]['fields'][\Input::post('name')]['eval'];
+
+				$arrAttribs['id'] = \Input::post('name');
+				$arrAttribs['name'] = \Input::post('name');
+				$arrAttribs['value'] = \Input::post('value');
+				$arrAttribs['strTable'] = $dc->table;
+				$arrAttribs['strField'] = \Input::post('name');
+
+				$objWidget = new $GLOBALS['BE_FFL'][\Input::post('widget')]($arrAttribs);
+				echo $objWidget->generate();
+				exit; break;
 			// HOOK: pass unknown actions to callback functions
 			default:
 				$this->executePostActionsHook($dc);
