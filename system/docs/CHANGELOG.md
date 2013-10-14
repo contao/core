@@ -5,6 +5,9 @@ Version 3.1.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not show the debug bar in the modal dialog (see #6302).
+
+### Fixed
 Ignore the "maxlength" setting in certain form fields (see #6283).
 
 ### Fixed
