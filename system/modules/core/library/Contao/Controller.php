@@ -1377,6 +1377,11 @@ abstract class Controller extends \System
 							{
 								break;
 							}
+							elseif (strncmp($tags[$_rit+1], 'iflng::', 7) === 0)
+							{
+								$_rit += 3;
+								break;
+							}
 						}
 					}
 					unset($arrCache[$strTag]);
@@ -1394,6 +1399,11 @@ abstract class Controller extends \System
 							{
 								if ($tags[$_rit+1] == 'ifnlng')
 								{
+									break;
+								}
+								elseif (strncmp($tags[$_rit+1], 'ifnlng::', 8) === 0)
+								{
+									$_rit += 3;
 									break;
 								}
 							}

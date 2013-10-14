@@ -4,6 +4,14 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Improved
+Simplified the "iflng" and "ifnlng" insert tags (see #6291). You can now omit
+every closing `{{iflng}}` tag but the last one, e.g.:
+
+```
+{{iflng::de}}Hallo Welt{{iflng::en}}Hello world{{iflng}}
+```
+
 ### Updated
 Updated Colorbox to version 1.4.31 (see #6309).
 
