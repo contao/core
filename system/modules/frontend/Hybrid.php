@@ -107,6 +107,30 @@ abstract class Hybrid extends Frontend
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
 	}
 
+	/**
+	 * Import a library and make it accessible by its name or an optional key.
+	 *
+	 * This has been overridden in Hybrid class to prevent polluting of the $arrData property with object instances.
+	 *
+	 * @param string  $strClass The name of the class to instantiate/import.
+	 *
+	 * @param string  $strKey   The key to use to store the instance (optional, defaults to the objects class name).
+	 *
+	 * @param boolean $blnForce Force the re-importing (optional, defaults to false).
+	 */
+	protected function import($strClass, $strKey=null, $blnForce=false)
+	{
+		$strKey = ($strKey != '') ? $strKey : $strClass;
+		if (property_exists($this, $strKey))
+		{
+			parent::import($strClass, $strKey, $blnForce);
+		}
+
+		if ($blnForce || !is_object($this->arrInstances[$strKey]))
+		{
+			$this->arrInstances[$strKey] = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
+		}
+	}
 
 	/**
 	 * Set an object property
@@ -126,6 +150,12 @@ abstract class Hybrid extends Frontend
 	 */
 	public function __get($strKey)
 	{
+		// First check if it is an imported object, if so, return it. See documentation at import() method.
+		if (is_object($this->arrInstances[$strKey]))
+		{
+			return $this->arrInstances[$strKey];
+		}
+
 		return $this->arrData[$strKey];
 	}
 
