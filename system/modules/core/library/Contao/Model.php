@@ -277,13 +277,7 @@ abstract class Model
 	 */
 	public function mergeRow(array $arrData)
 	{
-		foreach ($arrData as $k=>$v)
-		{
-			if (!isset($this->arrModified[$k]) && $this->arrData[$k] !== $v)
-			{
-				$this->$k = $v;
-			}
-		}
+	    $this->setRow(array_diff_key($arrData, $this->arrModified));
 
 		return $this;
 	}
