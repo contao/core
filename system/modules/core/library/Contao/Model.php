@@ -183,7 +183,6 @@ abstract class Model
 		}
 
 		$this->arrData[$strKey] = $varValue;
-
 		unset($this->arrRelated[$key]);
 	}
 
@@ -280,7 +279,6 @@ abstract class Model
 	public function mergeRow(array $arrData)
 	{
 		$this->setRow(array_diff_key($arrData, $this->arrModified));
-
 		return $this;
 	}
 
