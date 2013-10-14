@@ -277,7 +277,7 @@ abstract class Model
 	 */
 	public function mergeRow(array $arrData)
 	{
-	    $this->setRow(array_diff_key($arrData, $this->arrModified));
+		$this->setRow(array_diff_key($arrData, $this->arrModified));
 
 		return $this;
 	}
