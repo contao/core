@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Updated
+Updated Colorbox to version 1.4.31 (see #6309).
+
 ### Fixed
 Create new UUIDs when duplicating files or folders (see #6301).
 
