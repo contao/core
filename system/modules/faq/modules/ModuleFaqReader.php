@@ -143,8 +143,11 @@ class ModuleFaqReader extends \Module
 			}
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$objFaq->singleSRC = $objModel->path;
-				$this->addImageToTemplate($this->Template, $objFaq->row());
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrFaq = $objFaq->row();
+				$arrFaq['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($this->Template, $arrFaq);
 			}
 		}
 

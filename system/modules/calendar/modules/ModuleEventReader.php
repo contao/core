@@ -228,8 +228,11 @@ class ModuleEventReader extends \Events
 			}
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$objEvent->singleSRC = $objModel->path;
-				$this->addImageToTemplate($objTemplate, $objEvent->row());
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrEvent = $objEvent->row();
+				$arrEvent['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($objTemplate, $arrEvent);
 			}
 		}
 

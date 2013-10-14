@@ -177,8 +177,11 @@ abstract class ModuleNews extends \Module
 					}
 				}
 
-				$objArticle->singleSRC = $objModel->path;
-				$this->addImageToTemplate($objTemplate, $objArticle->row());
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrArticle = $objArticle->row();
+				$arrArticle['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($objTemplate, $arrArticle);
 			}
 		}
 

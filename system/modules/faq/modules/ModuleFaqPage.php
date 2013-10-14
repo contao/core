@@ -113,9 +113,12 @@ class ModuleFaqPage extends \Module
 				}
 				elseif (is_file(TL_ROOT . '/' . $objModel->path))
 				{
-					$objFaq->singleSRC = $objModel->path;
+					// Do not override the field now that we have a model registry (see #6303)
+					$arrFaq = $objFaq->row();
+					$arrFaq['singleSRC'] = $objModel->path;
+
 					$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
-					$this->addImageToTemplate($objTemp, $objFaq->row(), null, $strLightboxId);
+					$this->addImageToTemplate($objTemp, $arrFaq, null, $strLightboxId);
 				}
 			}
 
