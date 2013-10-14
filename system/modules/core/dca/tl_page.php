@@ -1548,7 +1548,7 @@ class tl_page extends Backend
 								  ->limit(1)
 								  ->execute($row['id']);
 
-		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
+		if (!$this->User->isAdmin && !$this->User->isAllowed(1, $objPage->row()))
 		{
 			return Image::getHtml($icon) . ' ';
 		}

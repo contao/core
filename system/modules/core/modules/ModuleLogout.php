@@ -61,25 +61,16 @@ class ModuleLogout extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-
-		$blnUseJumpTo = ($this->jumpTo > 0);
 		$strRedirect = \Environment::get('base');
 
 		// Redirect to last page visited
 		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))
 		{
-			$objLastPage = \PageModel::findByIdOrAlias($this->getPageIdFromUrl($_SESSION['LAST_PAGE_VISITED']));
-
-			// Check whether the page is protected (see #6210)
-			if ($objLastPage !== null && !$objLastPage->protected)
-			{
-				$blnUseJumpTo = false;
-				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
-			}
+			$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 		}
 
-		// Redirect to the jumpTo page
-		if ($blnUseJumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
+		// Redirect to jumpTo page
+		elseif ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
 			$strRedirect = $this->generateFrontendUrl($objTarget->row());
 		}

@@ -112,7 +112,7 @@ class PageTree extends \Widget
 		{
 			if (!$this->mandatory)
 			{
-				return '';
+				return $this->blnIsMultiple ? '' : 0;
 			}
 			else
 			{

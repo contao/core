@@ -1,11 +1,36 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 3.1.3 (2013-09-24)
+Version 3.1.4 (2013-10-14)
 --------------------------
 
 ### Fixed
-Do not redirect to protected pages after logout (see #6210).
+Do not show the debug bar in the modal dialog (see #6302).
+
+### Fixed
+Ignore the "maxlength" setting in certain form fields (see #6283).
+
+### Fixed
+Correctly show the "toggle page status" icon (see #6282).
+
+### Removed
+Removed the TinyMCE spell checker (see #6247).
+
+### Updated
+Updated TCPDF to version 3.0.38 (see #6268).
+
+### Fixed
+Correctly render the pages breadcrumb menu for non-admin users (see #6067).
+
+### Fixed
+Correctly handle the accordion fields during the version 3.1 update (see #6229).
+
+### Fixed
+Correctly handle special characters in page aliases (see #6232).
+
+
+Version 3.1.3 (2013-09-24)
+--------------------------
 
 ### Fixed
 Consider the additional arguments in `Frontend::jumpToOrReload()` (see #5734).

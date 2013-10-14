@@ -103,16 +103,12 @@ class FilePicker extends Backend
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->options = $this->createPageList();
-		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
-		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
-		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
+		$this->Template->addSearch = false;
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->value = $this->Session->get('file_selector_search');
 		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['fileManager'];
 		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
-		$this->Template->addSearch = false;
 		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
 
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;

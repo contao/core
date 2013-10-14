@@ -71,13 +71,14 @@ class FormCaptcha extends \Widget
 	{
 		switch ($strKey)
 		{
-			case 'required':
-			case 'mandatory':
-				// Is set by default
-				break;
-
 			case 'placeholder':
 				$this->arrAttributes['placeholder'] = $varValue;
+				break;
+
+			case 'required':
+			case 'mandatory':
+			case 'maxlength':
+				// Ignore
 				break;
 
 			default:

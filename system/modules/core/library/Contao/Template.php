@@ -278,7 +278,7 @@ abstract class Template extends \Controller
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Debug information
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if ($GLOBALS['TL_CONFIG']['debugMode'] && !\Input::get('popup'))
 		{
 			$intReturned = 0;
 			$intAffected = 0;

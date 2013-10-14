@@ -516,19 +516,6 @@ class ModuleRegistration extends \Module
 			}
 		}
 
-		$arrData = array();
-
-		// Get the editable fields
-		foreach ($this->editable as $key)
-		{
-			$arrData[$key] = $objMember->$key;
-		}
-
-		// Add the login details
-		$arrData['login'] = $objMember->login;
-		$arrData['groups'] = $objMember->groups;
-		$arrData['disable'] = '';
-
 		// Log activity
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', 'ModuleRegistration activateAccount()', TL_ACCESS);
 

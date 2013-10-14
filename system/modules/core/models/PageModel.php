@@ -279,7 +279,7 @@ class PageModel extends \Model
 
 		// Remove everything that is not an alias
 		$arrAliases = array_filter(array_map(function($v) {
-			return preg_match('/^[\pN\pL\/\._-]+$/', $v) ? $v : null;
+			return preg_match('/^[\pN\pL\/\._-]+$/u', $v) ? $v : null;
 		}, $arrAliases));
 
 		// Return if nothing is left

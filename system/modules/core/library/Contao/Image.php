@@ -147,7 +147,7 @@ class Image
 		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
 		// Check whether the image exists already
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'])
+		if (!$GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			// Custom target (thanks to Tristan Lins) (see #4166)
 			if ($target && !$force)

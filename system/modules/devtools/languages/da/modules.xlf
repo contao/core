@@ -3,15 +3,15 @@
     <body>
       <trans-unit id="MOD.devtools">
         <source>Developer tools</source>
-        <target>Udviklingsværktøjer</target>
+        <target>Udviklerværktøjer</target>
       </trans-unit>
       <trans-unit id="MOD.extension.0">
         <source>Extension creator</source>
-        <target>Udvidelses Skaber</target>
+        <target>Udvidelses værktøj</target>
       </trans-unit>
       <trans-unit id="MOD.extension.1">
         <source>Create custom Contao extensions</source>
-        <target>Opret en Contao udvidelse</target>
+        <target>Opret specielle Contao udvidelser</target>
       </trans-unit>
       <trans-unit id="MOD.labels.0">
         <source>Missing labels</source>
@@ -23,11 +23,11 @@
       </trans-unit>
       <trans-unit id="MOD.autoload.0">
         <source>Autoload creator</source>
-        <target>Autoload Skaber</target>
+        <target>Autoload værktøj</target>
       </trans-unit>
       <trans-unit id="MOD.autoload.1">
         <source>Automatically create the &quot;config/autoload.php&quot; files</source>
-        <target>Opret automatisk &quot;config/autoload.php&quot; filer</target>
+        <target>Opret automatisk &quot;config/autoload.php&quot; filerne</target>
       </trans-unit>
     </body>
   </file>

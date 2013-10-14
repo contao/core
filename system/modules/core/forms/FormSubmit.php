@@ -44,11 +44,6 @@ class FormSubmit extends \Widget
 	{
 		switch ($strKey)
 		{
-			case 'required':
-			case 'mandatory':
-				// Ignore
-				break;
-
 			case 'singleSRC':
 				$this->arrConfiguration['singleSRC'] = $varValue;
 				break;
@@ -63,6 +58,12 @@ class FormSubmit extends \Widget
 
 			case 'label':
 				$this->slabel = $varValue;
+				break;
+
+			case 'required':
+			case 'mandatory':
+			case 'maxlength':
+				// Ignore
 				break;
 
 			default:
