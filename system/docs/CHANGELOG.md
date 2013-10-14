@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Create new UUIDs when duplicating files or folders (see #6301).
+
+### Fixed
 Correctly handle booleans, null and empty strings in the Validator (see #6287).
 
 ### Fixed
