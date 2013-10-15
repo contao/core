@@ -250,9 +250,30 @@ abstract class Controller extends \System
 			}
 
 			// Apply the access restrictions in the front end only (see #5603)
-			if(!$this->applyAccessRestrictions($objRow, 'module'))
+			if (TL_MODE == 'FE')
 			{
-				return '';
+				// Show to guests only
+				if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+				{
+					return '';
+				}
+
+				// Protected element
+				if (!BE_USER_LOGGED_IN && $objRow->protected)
+				{
+					if (!FE_USER_LOGGED_IN)
+					{
+						return '';
+					}
+
+					$this->import('FrontendUser', 'User');
+					$groups = deserialize($objRow->groups);
+
+					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
+					{
+						return '';
+					}
+				}
 			}
 
 			$strClass = \Module::findClass($objRow->type);
@@ -323,10 +344,27 @@ abstract class Controller extends \System
 			return false;
 		}
 
-		// Apply restrictions
-		if(!$this->applyAccessRestrictions($objRow, 'article', false))
+		// Show to guests only
+		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 		{
 			return '';
+		}
+
+		// Protected the element
+		if ($objRow->protected && !BE_USER_LOGGED_IN)
+		{
+			if (!FE_USER_LOGGED_IN)
+			{
+				return '';
+			}
+
+			$this->import('FrontendUser', 'User');
+			$groups = deserialize($objRow->groups);
+
+			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+			{
+				return '';
+			}
 		}
 
 		// Print the article as PDF
@@ -406,9 +444,30 @@ abstract class Controller extends \System
 		}
 
 		// Apply the access restrictions in the front end only (see #5603)
-		if(!$this->applyAccessRestrictions($objRow, 'ce'))
+		if (TL_MODE == 'FE')
 		{
-			return '';
+			// Show to guests only
+			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+			{
+				return '';
+			}
+
+			// Protected the element
+			if ($objRow->protected && !BE_USER_LOGGED_IN)
+			{
+				if (!FE_USER_LOGGED_IN)
+				{
+					return '';
+				}
+
+				$this->import('FrontendUser', 'User');
+				$groups = deserialize($objRow->groups);
+
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				{
+					return '';
+				}
+			}
 		}
 
 		// Remove the spacing in the back end preview
@@ -495,62 +554,6 @@ abstract class Controller extends \System
 		}
 
 		return $strBuffer;
-	}
-
-
-	/**
-	 * Apply access restriction
-	 *
-	 * @param Model $objRow
-	 * @param string $strType
-	 * @param bool $blnFrontendOnly
-	 *
-	 * @return string
-	 */
-	protected function applyAccessRestrictions(Model $objRow, $strType, $blnFrontendOnly=true)
-	{
-		$blnAccess = true;
-
-		// Apply the access restrictions in the front end only (see #5603)
-		if (TL_MODE == 'FE' || !$blnFrontendOnly)
-		{
-			// Show to guests only
-			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
-			{
-				$blnAccess = false;
-			}
-
-			// Protected the element
-			elseif ($objRow->protected && !BE_USER_LOGGED_IN)
-			{
-				if (!FE_USER_LOGGED_IN)
-				{
-					$blnAccess = false;
-				}
-
-				else
-				{
-					$this->import('FrontendUser', 'User');
-					$groups = deserialize($objRow->groups);
-
-					if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-					{
-						$blnAccess = false;
-					}
-				}
-			}
-
-			if(isset($GLOBALS['TL_HOOKS']['applyAccessRestrictions']) && is_array($GLOBALS['TL_HOOKS']['applyAccessRestrictions'))
-			{
-				foreach($GLOBALS['TL_HOOKS']['applyAccessRestrictions'] as $arrCallback)
-				{
-					$this->import($arrCallback[0]);
-					$blnAccess = $this->$arrCallback[0]->$arrCallback[1]($objRow, $strType, $blnFrontendOnly, $blnAccess);
-				}
-			}
-		}
-
-		return $blnAccess;
 	}
 
 
@@ -910,7 +913,7 @@ abstract class Controller extends \System
 									}
 									break;
 								}
-							// DO NOT ADD A break; STATEMENT
+								// DO NOT ADD A break; STATEMENT
 
 							default:
 								$strForceLang = null;
@@ -1434,7 +1437,7 @@ abstract class Controller extends \System
 						}
 						break;
 					}
-				// NO break;
+					// NO break;
 
 				// Abbreviations
 				case 'abbr':
@@ -2361,8 +2364,8 @@ abstract class Controller extends \System
 		{
 			// Get the pid
 			$objParent = $this->Database->prepare("SELECT pid FROM " . $strTable . " WHERE id=?")
-				->limit(1)
-				->execute($intId);
+										->limit(1)
+										->execute($intId);
 
 			if ($objParent->numRows < 1)
 			{
