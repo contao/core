@@ -2361,8 +2361,8 @@ abstract class Controller extends \System
 		{
 			// Get the pid
 			$objParent = $this->Database->prepare("SELECT pid FROM " . $strTable . " WHERE id=?")
-						->limit(1)
-						->execute($intId);
+					->limit(1)
+					->execute($intId);
 
 			if ($objParent->numRows < 1)
 			{
