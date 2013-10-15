@@ -183,7 +183,7 @@ abstract class Model
 		}
 
 		$this->arrData[$strKey] = $varValue;
-		unset($this->arrRelated[$key]);
+		unset($this->arrRelated[$strKey]);
 	}
 
 
