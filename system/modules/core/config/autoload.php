@@ -139,6 +139,7 @@ ClassLoader::addClasses(array
 	'Contao\RequestToken'              => 'system/modules/core/library/Contao/RequestToken.php',
 	'Contao\Search'                    => 'system/modules/core/library/Contao/Search.php',
 	'Contao\Session'                   => 'system/modules/core/library/Contao/Session.php',
+	'Contao\SortedIterator'            => 'system/modules/core/library/Contao/SortedIterator.php',
 	'Contao\String'                    => 'system/modules/core/library/Contao/String.php',
 	'Contao\System'                    => 'system/modules/core/library/Contao/System.php',
 	'Contao\Template'                  => 'system/modules/core/library/Contao/Template.php',

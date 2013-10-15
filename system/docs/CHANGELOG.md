@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Order the template list alphabetically (see #6276).
+
 ### Improved
 Simplified the "iflng" and "ifnlng" insert tags (see #6291). You can now omit
 every closing `{{iflng}}` tag but the last one, e.g.:
