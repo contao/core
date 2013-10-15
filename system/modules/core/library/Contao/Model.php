@@ -92,8 +92,8 @@ abstract class Model
 	{
 		$this->arrModified = array();
 
-		$objRelations = new \DcaExtractor(static::$strTable);
-		$this->arrRelations = $objRelations->getRelations();
+		$objDca = new \DcaExtractor(static::$strTable);
+		$this->arrRelations = $objDca->getRelations();
 
 		if ($objResult !== null)
 		{
@@ -260,11 +260,7 @@ abstract class Model
 	 */
 	public function setRow(array $arrData)
 	{
-		foreach ($arrData as $k=>$v)
-		{
-			$this->$k = $v;
-		}
-
+		$this->arrData = $arrData;
 		return $this;
 	}
 
@@ -278,8 +274,29 @@ abstract class Model
 	 */
 	public function mergeRow(array $arrData)
 	{
-		$this->setRow(array_diff_key($arrData, $this->arrModified));
+		foreach ($arrData as $k=>$v)
+		{
+			if (!isset($this->arrModified[$k]))
+			{
+				$this->arrData[$k] = $v;
+			}
+		}
+
 		return $this;
+	}
+
+
+	/**
+	 * Mark a field as modified
+	 *
+	 * @param $strKey The field key
+	 */
+	protected function markModified($strKey)
+	{
+		if (!isset($this->arrModified[$strKey]))
+		{
+			$this->arrModified[$strKey] = $this->arrData[$strKey];
+		}
 	}
 
 
@@ -308,6 +325,9 @@ abstract class Model
 			throw new \InvalidArgumentException('The $blnForceInsert argument has been removed (see system/docs/UPGRADE.md)');
 		}
 
+		$objDatabase = \Database::getInstance();
+		$arrFields = $objDatabase->getFieldNames(static::$strTable);
+
 		// The model is in the registry
 		if (\Model\Registry::getInstance()->isRegistered($this))
 		{
@@ -317,13 +337,17 @@ abstract class Model
 				return $this;
 			}
 
-			$arrRow = $this->row();
 			$arrSet = array();
+			$arrRow = $this->row();
 
 			// Only update modified fields
 			foreach ($this->arrModified as $k=>$v)
 			{
-				$arrSet[$k] = $arrRow[$k];
+				// Only set fields that exist in the DB
+				if (in_array($k, $arrFields))
+				{
+					$arrSet[$k] = $arrRow[$k];
+				}
 			}
 
 			$arrSet = $this->preSave($arrSet);
@@ -336,9 +360,9 @@ abstract class Model
 			}
 
 			// Update the row
-			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-									->set($arrSet)
-									->execute($intPk);
+			$objDatabase->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+						->set($arrSet)
+						->execute($intPk);
 
 			$this->postSave(self::UPDATE);
 			$this->arrModified = array(); // reset after postSave()
@@ -347,12 +371,23 @@ abstract class Model
 		// The model is not yet in the registry
 		else
 		{
-			$arrSet = $this->preSave($this->row());
+			$arrSet = $this->row();
+
+			// Remove fields that do not exist in the DB
+			foreach ($arrSet as $k=>$v)
+			{
+				if (!in_array($k, $arrFields))
+				{
+					unset($arrSet[$k]);
+				}
+			}
+
+			$arrSet = $this->preSave($arrSet);
 
 			// Insert a new row
-			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
-											->set($arrSet)
-											->execute();
+			$stmt = $objDatabase->prepare("INSERT INTO " . static::$strTable . " %s")
+								->set($arrSet)
+								->execute();
 
 			if (static::$strPk == 'id')
 			{
