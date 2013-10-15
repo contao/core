@@ -176,13 +176,9 @@ abstract class Model
 			return;
 		}
 
-		// Store the original value
-		if (!isset($this->arrModified[$strKey]))
-		{
-			$this->arrModified[$strKey] = $this->arrData[$strKey];
-		}
-
+		$this->markModified($strKey);
 		$this->arrData[$strKey] = $varValue;
+
 		unset($this->arrRelated[$strKey]);
 	}
 
@@ -252,6 +248,17 @@ abstract class Model
 
 
 	/**
+	 * Return true if the model has been modified
+	 *
+	 * @return boolean True if the model has been modified
+	 */
+	public function isModified()
+	{
+		return !empty($this->arrModified);
+	}
+
+
+	/**
 	 * Set the current record from an array
 	 *
 	 * @param array $arrData The data record
@@ -289,7 +296,7 @@ abstract class Model
 	/**
 	 * Mark a field as modified
 	 *
-	 * @param $strKey The field key
+	 * @param string $strKey The field key
 	 */
 	protected function markModified($strKey)
 	{
