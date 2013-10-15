@@ -910,7 +910,7 @@ abstract class Controller extends \System
 									}
 									break;
 								}
-								// DO NOT ADD A break; STATEMENT
+							// DO NOT ADD A break; STATEMENT
 
 							default:
 								$strForceLang = null;
@@ -1434,7 +1434,7 @@ abstract class Controller extends \System
 						}
 						break;
 					}
-					// NO break;
+				// NO break;
 
 				// Abbreviations
 				case 'abbr':
@@ -2361,8 +2361,8 @@ abstract class Controller extends \System
 		{
 			// Get the pid
 			$objParent = $this->Database->prepare("SELECT pid FROM " . $strTable . " WHERE id=?")
-					->limit(1)
-					->execute($intId);
+				->limit(1)
+				->execute($intId);
 
 			if ($objParent->numRows < 1)
 			{
