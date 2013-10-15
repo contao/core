@@ -502,12 +502,12 @@ abstract class Controller extends \System
 	 * Apply access restriction
 	 *
 	 * @param Model $objRow
-	 * @param string $strType
-	 * @param bool $blnFrontendOnly
+	 * @param string $strType possible values are ce, article, module
+	 * @param bool $blnFrontendOnly only apply access restrictions in frotend mode
 	 *
 	 * @return string
 	 */
-	protected function applyAccessRestrictions(Model $objRow, $strType, $blnFrontendOnly=true)
+	public static function applyAccessRestrictions(Model $objRow, $strType, $blnFrontendOnly=true)
 	{
 		$blnAccess = true;
 
@@ -530,22 +530,22 @@ abstract class Controller extends \System
 
 				else
 				{
-					$this->import('FrontendUser', 'User');
+					$objUser = \FrontendUser::getInstance();
 					$groups = deserialize($objRow->groups);
 
-					if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+					if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $objUser->groups)) < 1)
 					{
 						$blnAccess = false;
 					}
 				}
 			}
 
-			if(isset($GLOBALS['TL_HOOKS']['applyAccessRestrictions']) && is_array($GLOBALS['TL_HOOKS']['applyAccessRestrictions'))
+			if(isset($GLOBALS['TL_HOOKS']['applyAccessRestrictions']) && is_array($GLOBALS['TL_HOOKS']['applyAccessRestrictions']))
 			{
 				foreach($GLOBALS['TL_HOOKS']['applyAccessRestrictions'] as $arrCallback)
 				{
-					$this->import($arrCallback[0]);
-					$blnAccess = $this->$arrCallback[0]->$arrCallback[1]($objRow, $strType, $blnFrontendOnly, $blnAccess);
+					$objCallback = static::importStatic($arrCallback[0]);
+					$blnAccess = $objCallback->$arrCallback[1]($objRow, $strType, $blnFrontendOnly, $blnAccess);
 				}
 			}
 		}
