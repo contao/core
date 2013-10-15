@@ -338,12 +338,6 @@ abstract class Model
 		// The model is in the registry
 		if (\Model\Registry::getInstance()->isRegistered($this))
 		{
-			// No modified fields
-			if (empty($this->arrModified))
-			{
-				return $this;
-			}
-
 			$arrSet = array();
 			$arrRow = $this->row();
 
@@ -358,6 +352,13 @@ abstract class Model
 			}
 
 			$arrSet = $this->preSave($arrSet);
+
+			// No modified fiels
+			if (empty($arrSet))
+			{
+				return $this;
+			}
+
 			$intPk  = $this->{static::$strPk};
 
 			// Track primary key changes
@@ -390,6 +391,12 @@ abstract class Model
 			}
 
 			$arrSet = $this->preSave($arrSet);
+
+			// No modified fiels
+			if (empty($arrSet))
+			{
+				return $this;
+			}
 
 			// Insert a new row
 			$stmt = $objDatabase->prepare("INSERT INTO " . static::$strTable . " %s")
