@@ -1633,7 +1633,16 @@ abstract class Controller extends \System
 								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
 							}
 
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
+							$href = $strFile;
+							if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0)
+							{
+								$size = @getimagesize(TL_ROOT .'/'. rawurldecode($href));
+								$size[0] = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+								$ratio = $size[1] / $size[0];
+								$size[1] = floor($size[0] * $ratio);
+								$href = \Image::get($strFile, $size[0], $size[1], '');
+							}
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $href . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
@@ -2650,7 +2659,15 @@ abstract class Controller extends \System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
+			$href = $arrItem['singleSRC'];
+			if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0)
+			{
+				$ratio = floor($objTemplate->height / $objTemplate->width);
+				$size[0] = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+				$size[1] = floor($size[0] * $ratio);
+				$href = \Image::get($arrItem['singleSRC'], $size[0], $size[1], '');
+			}
+			$objTemplate->href = TL_FILES_URL . \System::urlEncode($href);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
