@@ -118,6 +118,10 @@ var LinkDialog = {
 		if (f.href.value == ed.settings.document_base_url) {
 			e.setAttribute('mce_href', f.href.value);
 		}
+		// Convert / and empty strings to ./
+		if (f.href.value == '/' || f.href.value == '') {
+			ed.dom.setAttrib(e, 'href', './');
+		}
 	},
 	// PATCH EOF
 

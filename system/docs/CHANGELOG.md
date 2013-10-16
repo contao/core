@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Correctly handle slashes and empty strings in the TinyMCE link tab.
+
+### Fixed
 Order the template list alphabetically (see #6276).
 
 ### Improved
