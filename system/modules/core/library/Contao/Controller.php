@@ -250,7 +250,7 @@ abstract class Controller extends \System
 			}
 
 			// Apply the access restrictions in the front end only (see #5603)
-			if(!$this->applyAccessRestrictions($objRow, 'module'))
+			if(!static::applyAccessRestrictions($objRow))
 			{
 				return '';
 			}
@@ -324,7 +324,7 @@ abstract class Controller extends \System
 		}
 
 		// Apply restrictions
-		if(!$this->applyAccessRestrictions($objRow, 'article', false))
+		if(!static::applyAccessRestrictions($objRow, false))
 		{
 			return '';
 		}
@@ -406,7 +406,7 @@ abstract class Controller extends \System
 		}
 
 		// Apply the access restrictions in the front end only (see #5603)
-		if(!$this->applyAccessRestrictions($objRow, 'ce'))
+		if(!static::applyAccessRestrictions($objRow))
 		{
 			return '';
 		}
@@ -502,12 +502,11 @@ abstract class Controller extends \System
 	 * Apply access restriction
 	 *
 	 * @param Model $objRow
-	 * @param string $strType possible values are ce, article, module
 	 * @param bool $blnFrontendOnly only apply access restrictions in frotend mode
 	 *
 	 * @return string
 	 */
-	public static function applyAccessRestrictions(Model $objRow, $strType, $blnFrontendOnly=true)
+	public static function applyAccessRestrictions(Model $objRow, $blnFrontendOnly=true)
 	{
 		$blnAccess = true;
 
@@ -545,7 +544,7 @@ abstract class Controller extends \System
 				foreach($GLOBALS['TL_HOOKS']['applyAccessRestrictions'] as $arrCallback)
 				{
 					$objCallback = static::importStatic($arrCallback[0]);
-					$blnAccess = $objCallback->$arrCallback[1]($objRow, $strType, $blnFrontendOnly, $blnAccess);
+					$blnAccess = $objCallback->$arrCallback[1]($objRow, $blnFrontendOnly, $blnAccess);
 				}
 			}
 		}
