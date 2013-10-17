@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Show the teaser text of redirect events in the event list (see #6315).
+
 ### Improved
 Support the "autocomplete", "autocorrect", "autocapitalize" and "spellcheck"
 attributes in the Widget class, so they can be set in the DCA (see #6316).
