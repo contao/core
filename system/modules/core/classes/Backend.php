@@ -143,7 +143,7 @@ abstract class Backend extends \Controller
 	{
 		$arrModule = array();
 
-		foreach ($GLOBALS['BE_MOD'] as $arrGroup)
+		foreach ($GLOBALS['BE_MOD'] as &$arrGroup)
 		{
 			if (isset($arrGroup[$module]))
 			{
