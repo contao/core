@@ -290,26 +290,38 @@ class Versions extends \Backend
 			require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff.php';
 			require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff/Renderer/Html/Contao.php';
 
+			$arrOrder = array();
 			$arrFields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
+
+			// Get the order fields
+			foreach ($arrFields as $arrField)
+			{
+				if (isset($arrField['eval']['orderField']))
+				{
+					$arrOrder[] = $arrField['eval']['orderField'];
+				}
+			}
 
 			// Find the changed fields and highlight the changes
 			foreach ($to as $k=>$v)
 			{
 				if ($from[$k] != $to[$k])
 				{
-					if (!isset($arrFields[$k]['inputType']) || $arrFields[$k]['inputType'] == 'password' || $arrFields[$k]['eval']['doNotShow'] || $arrFields[$k]['eval']['hideInput'])
+					if ($arrFields[$k]['inputType'] == 'password' || $arrFields[$k]['eval']['doNotShow'] || $arrFields[$k]['eval']['hideInput'])
 					{
 						continue;
 					}
 
+					$blnIsBinary = ($arrFields[$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
+
 					// Convert serialized arrays into strings
 					if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
 					{
-						$to[$k] = $this->implodeRecursive($tmp);
+						$to[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
 					}
 					if (is_array(($tmp = deserialize($from[$k]))) && !is_array($from[$k]))
 					{
-						$from[$k] = $this->implodeRecursive($tmp);
+						$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
 					}
 					unset($tmp);
 
@@ -324,7 +336,7 @@ class Versions extends \Backend
 						$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
 						$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
 					}
-					elseif ($arrFields[$k]['eval']['rgxp'] == 'datim')
+					elseif ($arrFields[$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
 					{
 						$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
 						$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
@@ -341,7 +353,7 @@ class Versions extends \Backend
 					}
 
 					$objDiff = new \Diff($from[$k], $to[$k]);
-					$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: $k))));
+					$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: ($GLOBALS['TL_LANG']['MSC'][$k] ?: $k)))));
 				}
 			}
 		}
@@ -499,17 +511,18 @@ class Versions extends \Backend
 	/**
 	 * Implode a multi-dimensional array recursively
 	 * @param mixed
+	 * @param boolean
 	 * @return string
 	 */
-	protected function implodeRecursive($var)
+	protected function implodeRecursive($var, $binary=false)
 	{
 		if (!is_array($var))
 		{
-			return $var;
+			return $binary ? \String::binToUuid($var) : $var;
 		}
 		elseif (!is_array(current($var)))
 		{
-			return implode(', ', $var);
+			return implode(', ', ($binary ? array_map('String::binToUuid', $var) : $var));
 		}
 		else
 		{

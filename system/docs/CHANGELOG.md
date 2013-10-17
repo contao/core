@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Create a new version of a record if a sorting field changes (see #6285).
+
+### Fixed
 Show the teaser text of redirect events in the event list (see #6315).
 
 ### Improved

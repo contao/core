@@ -119,8 +119,19 @@ class FileTree extends \Widget
 		// Store the order value
 		if ($this->strOrderField != '')
 		{
-			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(serialize(array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)))), \Input::get('id'));
+			$arrNew = array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)));
+
+			// Only proceed if the value has changed
+			if ($arrNew !== $this->{$this->strOrderField})
+			{
+				$objVersions = new Versions($this->strTable, \Input::get('id'));
+				$objVersions->initialize();
+
+				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->strOrderField}=? WHERE id=?")
+							   ->execute(time(), serialize($arrNew), \Input::get('id'));
+
+				$objVersions->create(); // see #6285
+			}
 		}
 
 		// Return the value as usual
