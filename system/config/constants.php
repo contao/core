@@ -32,7 +32,7 @@ define('HTML5SHIV', '3.6.2');
 define('JQUERY', '1.9.1');
 define('JQUERY_UI', '1.10.2');
 define('COLORBOX', '1.4.31');
-define('MEDIAELEMENT', '2.11.3');
+define('MEDIAELEMENT', '2.13.1');
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.4.5');
 define('COLORPICKER', '1.3');

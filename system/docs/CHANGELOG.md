@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Updated
+Updated mediaelement.js to version 2.13.1 (see #6318).
+
 ### Fixed
 Correctly handle slashes and empty strings in the TinyMCE link tab.
 
