@@ -4,6 +4,17 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Improved
+`Model::__callStatic()` now also supports "countBy" (see #5984).
+
+```php
+// new magic method
+$count = PageModel::countByPid(3);
+
+// will be mapped to
+$count = PageModel::countBy('pid', 3);
+```
+
 ### Updated
 Updated mediaelement.js to version 2.13.1 (see #6318).
 

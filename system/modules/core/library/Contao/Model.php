@@ -821,6 +821,11 @@ abstract class Model
 			array_unshift($args, lcfirst(substr($name, 9)));
 			return call_user_func_array('static::findOneBy', $args);
 		}
+		elseif (strncmp($name, 'countBy', 7) === 0)
+		{
+			array_unshift($args, lcfirst(substr($name, 7)));
+			return call_user_func_array('static::countBy', $args);
+		}
 
 		throw new \Exception("Unknown method $name");
 	}
