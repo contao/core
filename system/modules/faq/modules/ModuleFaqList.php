@@ -131,10 +131,17 @@ class ModuleFaqList extends \Module
 	 * Create links and remember pages that have been processed
 	 * @param object
 	 * @return string
+	 * @throws \Exception
 	 */
 	protected function generateFaqLink($objFaq)
 	{
 		$jumpTo = intval($objFaq->getRelated('pid')->jumpTo);
+
+		// A jumpTo page is not mandatory for FAQ categories (see #6226) but required for the FAQ list module
+		if ($jumpTo < 1)
+		{
+			throw new \Exception("FAQ categories without redirect page cannot be used in an FAQ list");
+		}
 
 		// Get the URL from the jumpTo page of the category
 		if (!isset($this->arrTargets[$jumpTo]))

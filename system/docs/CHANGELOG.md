@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Allow FAQ categories without a redirect page (see #6226).
+
+### Fixed
 Create a new version of a record if a sorting field changes (see #6285).
 
 ### Fixed

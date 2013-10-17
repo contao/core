@@ -149,7 +149,7 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'clr'),
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
