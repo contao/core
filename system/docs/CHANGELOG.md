@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.5 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Correctly export pages as PDF (see #6317).
+
+
 Version 3.1.4 (2013-10-14)
 --------------------------
 
