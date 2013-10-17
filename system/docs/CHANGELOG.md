@@ -5,6 +5,9 @@ Version 3.1.5 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly sort by date in the listing module (see #5609).
+
+### Fixed
 Correctly handle the autologin key if a member is duplicated (see #5945).
 
 ### Fixed

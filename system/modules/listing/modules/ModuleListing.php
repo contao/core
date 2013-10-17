@@ -182,14 +182,31 @@ class ModuleListing extends \Module
 
 		$strQuery .=  $strWhere;
 
+		// Cast date fields to int (see #5609)
+		$blnCastInt = ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'datim');
+
 		// Order by
 		if (\Input::get('order_by'))
 		{
-			$strQuery .= " ORDER BY " . \Input::get('order_by') . ' ' . \Input::get('sort');
+			if ($blnCastInt)
+			{
+				$strQuery .= " ORDER BY CAST(" . \Input::get('order_by') . " AS SIGNED) " . \Input::get('sort');
+			}
+			else
+			{
+				$strQuery .= " ORDER BY " . \Input::get('order_by') . ' ' . \Input::get('sort');
+			}
 		}
 		elseif ($this->list_sort)
 		{
-			$strQuery .= " ORDER BY " . $this->list_sort;
+			if ($blnCastInt)
+			{
+				$strQuery .= " ORDER BY CAST(" . $this->list_sort . " AS SIGNED)";
+			}
+			else
+			{
+				$strQuery .= " ORDER BY " . $this->list_sort;
+			}
 		}
 
 		$objDataStmt = $this->Database->prepare($strQuery);
