@@ -84,9 +84,28 @@ class Result extends \Database\Result
 	 * Navigate to a certain row in the result set
 	 *
 	 * @param integer $intIndex The row index
+	 *
+	 * @throws \OutOfBoundsException If $intIndex is out of bounds
 	 */
 	protected function data_seek($intIndex)
 	{
+		if ($intIndex < 0)
+		{
+			throw new \OutOfBoundsException("Invalid index $intIndex (must be >= 0)");
+		}
+
+		$intTotal = $this->num_rows();
+
+		if ($intTotal <= 0)
+		{
+			return; // see #6319
+		}
+
+		if ($intIndex >= $intTotal)
+		{
+			throw new \OutOfBoundsException("Invalid index $intIndex (only $intTotal rows in the result set)");
+		}
+
 		$this->resResult->data_seek($intIndex);
 	}
 

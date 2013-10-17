@@ -477,6 +477,8 @@ abstract class Result
 	 * Navigate to a certain row in the result set
 	 *
 	 * @param integer $intIndex The row index
+	 *
+	 * @throws \OutOfBoundsException If $intIndex is out of bounds
 	 */
 	abstract protected function data_seek($intIndex);
 

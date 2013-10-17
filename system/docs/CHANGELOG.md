@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Added some validation logic to the `Result::data_seek()` methods (see #6319).
+
 ### Improved
 `Model::__callStatic()` now also supports "countBy" (see #5984).
 
