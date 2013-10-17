@@ -253,6 +253,16 @@ abstract class Widget extends \Controller
 				$this->strWizard = $varValue;
 				break;
 
+			case 'autocomplete':
+			case 'autocorrect':
+			case 'autocapitalize':
+			case 'spellcheck':
+				if (is_bool($varValue))
+				{
+					$varValue = $varValue ? 'on' : 'off';
+				}
+				// Do not add a break; statement here
+
 			case 'alt':
 			case 'style':
 			case 'accesskey':

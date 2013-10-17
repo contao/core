@@ -4,6 +4,10 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Improved
+Support the "autocomplete", "autocorrect", "autocapitalize" and "spellcheck"
+attributes in the Widget class, so they can be set in the DCA (see #6316).
+
 ### Fixed
 Added some validation logic to the `Result::data_seek()` methods (see #6319).
 
