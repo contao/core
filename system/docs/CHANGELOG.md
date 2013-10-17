@@ -5,6 +5,9 @@ Version 3.1.5 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle the autologin key if a member is duplicated (see #5945).
+
+### Fixed
 Correctly export pages as PDF (see #6317).
 
 
