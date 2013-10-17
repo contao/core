@@ -298,7 +298,7 @@ abstract class Model
 	 *
 	 * @param string $strKey The field key
 	 */
-	protected function markModified($strKey)
+	public function markModified($strKey)
 	{
 		if (!isset($this->arrModified[$strKey]))
 		{
