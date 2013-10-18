@@ -145,7 +145,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
-			$this->log('Could not load the data container configuration for "' . $strTable . '"', 'DC_Table __construct()', TL_ERROR);
+			$this->log('Could not load the data container configuration for "' . $strTable . '"', __METHOD__, TL_ERROR);
 			trigger_error('Could not load the data container configuration', E_USER_ERROR);
 		}
 
@@ -646,7 +646,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not creatable', 'DC_Table create()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not creatable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -723,7 +723,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created'.$this->getParentEntries($this->strTable, $insertID), 'DC_Table create()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created'.$this->getParentEntries($this->strTable, $insertID), __METHOD__, TL_GENERAL);
 				$this->redirect($this->switchToEdit($insertID).$s2e);
 			}
 		}
@@ -740,7 +740,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Table cut()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not sortable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -770,7 +770,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Update the record
 		if (in_array($this->set['pid'], $cr))
 		{
-			$this->log('Attempt to relate record '.$this->intId.' of table "'.$this->strTable.'" to its child record '.\Input::get('pid').' (circular reference)', 'DC_Table cut()', TL_ERROR);
+			$this->log('Attempt to relate record '.$this->intId.' of table "'.$this->strTable.'" to its child record '.\Input::get('pid').' (circular reference)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -829,7 +829,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Table cutAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not sortable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -865,7 +865,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Table copy()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not copyable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1014,7 +1014,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created by duplicating record "'.$this->strTable.'.id='.$this->intId.'"'.$this->getParentEntries($this->strTable, $insertID), 'DC_Table copy()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created by duplicating record "'.$this->strTable.'.id='.$this->intId.'"'.$this->getParentEntries($this->strTable, $insertID), __METHOD__, TL_GENERAL);
 
 				// Switch to edit mode
 				if (!$blnDoNotRedirect)
@@ -1152,7 +1152,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Table copyAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not copyable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1417,7 +1417,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not deletable', 'DC_Table delete()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not deletable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1524,7 +1524,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Add a log entry unless we are deleting from tl_log itself
 			if ($this->strTable != 'tl_log')
 			{
-				$this->log('DELETE FROM '.$this->strTable.' WHERE id='.$data[$this->strTable][0]['id'], 'DC_Table delete()', TL_GENERAL);
+				$this->log('DELETE FROM '.$this->strTable.' WHERE id='.$data[$this->strTable][0]['id'], __METHOD__, TL_GENERAL);
 			}
 		}
 
@@ -1542,7 +1542,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not deletable', 'DC_Table deleteAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not deletable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1671,7 +1671,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Add log entry and delete record from tl_undo if there was no error
 		if (!$error)
 		{
-			$this->log('Undone '. $query, 'DC_Table undo()', TL_GENERAL);
+			$this->log('Undone '. $query, __METHOD__, TL_GENERAL);
 
 			$this->Database->prepare("DELETE FROM " . $this->strTable . " WHERE id=?")
 						   ->limit(1)
@@ -1720,7 +1720,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not editable', 'DC_Table edit()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not editable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1756,7 +1756,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Redirect if there is no record with the given ID
 		if ($objRow->numRows < 1)
 		{
-			$this->log('Could not load record "'.$this->strTable.'.id='.$this->intId.'"', 'DC_Table edit()', TL_ERROR);
+			$this->log('Could not load record "'.$this->strTable.'.id='.$this->intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2035,7 +2035,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 				}
 
-				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
+				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -2148,7 +2148,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not editable', 'DC_Table editAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not editable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2354,7 +2354,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
+						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2532,7 +2532,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not editable', 'DC_Table overrideAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not editable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2642,7 +2642,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 								}
 							}
 
-							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
+							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)

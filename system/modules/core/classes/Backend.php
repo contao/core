@@ -128,7 +128,7 @@ abstract class Backend extends \Controller
 					throw new \Exception("The $strFile file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
 				}
 
-				$this->log("File $strFile ran once and has then been removed successfully", 'Backend handleRunOnce()', TL_GENERAL);
+				$this->log("File $strFile ran once and has then been removed successfully", __METHOD__, TL_GENERAL);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ abstract class Backend extends \Controller
 		// Check whether the module is active
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))
 		{
-			$this->log('Attempt to access the inactive back end module "' . $module . '"', 'Backend getBackendModule()', TL_ACCESS);
+			$this->log('Attempt to access the inactive back end module "' . $module . '"', __METHOD__, TL_ACCESS);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -172,7 +172,7 @@ abstract class Backend extends \Controller
 		// Check whether the current user has access to the current module
 		elseif ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
 		{
-			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
+			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -214,7 +214,7 @@ abstract class Backend extends \Controller
 		{
 			if (!in_array($strTable, (array)$arrModule['tables']))
 			{
-				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', 'Backend getBackendModule()', TL_ERROR);
+				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
 			}
 
@@ -245,7 +245,7 @@ abstract class Backend extends \Controller
 			// Fabricate a new data container object
 			if ($GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'] == '')
 			{
-				$this->log('Missing data container for table "' . $strTable . '"', 'Backend getBackendModule()', TL_ERROR);
+				$this->log('Missing data container for table "' . $strTable . '"', __METHOD__, TL_ERROR);
 				trigger_error('Could not create a data container object', E_USER_ERROR);
 			}
 
@@ -314,7 +314,7 @@ abstract class Backend extends \Controller
 				case 'undo':
 					if (!$dc instanceof \listable)
 					{
-						$this->log('Data container ' . $strTable . ' is not listable', 'Backend getBackendModule()', TL_ERROR);
+						$this->log('Data container ' . $strTable . ' is not listable', __METHOD__, TL_ERROR);
 						trigger_error('The current data container is not listable', E_USER_ERROR);
 					}
 					break;
@@ -328,7 +328,7 @@ abstract class Backend extends \Controller
 				case 'edit':
 					if (!$dc instanceof \editable)
 					{
-						$this->log('Data container ' . $strTable . ' is not editable', 'Backend getBackendModule()', TL_ERROR);
+						$this->log('Data container ' . $strTable . ' is not editable', __METHOD__, TL_ERROR);
 						trigger_error('The current data container is not editable', E_USER_ERROR);
 					}
 					break;
@@ -589,7 +589,7 @@ abstract class Backend extends \Controller
 		{
 			$objSession->set($strKey, 0);
 
-			\System::log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
+			\System::log('Page ID '.$intNode.' was not mounted', __METHOD__, TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');
 		}
 
@@ -713,7 +713,7 @@ abstract class Backend extends \Controller
 		{
 			$objSession->set($strKey, '');
 
-			\System::log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
+			\System::log('Folder ID '.$strNode.' was not mounted', __METHOD__, TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');
 		}
 

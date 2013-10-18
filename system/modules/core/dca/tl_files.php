@@ -310,7 +310,7 @@ class tl_files extends Backend
 				case 'move':
 					if (!$f1)
 					{
-						$this->log('No permission to upload files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to upload files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -323,7 +323,7 @@ class tl_files extends Backend
 				case 'cutAll':
 					if (!$f2)
 					{
-						$this->log('No permission to create, edit, copy or move files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to create, edit, copy or move files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -335,18 +335,18 @@ class tl_files extends Backend
 						$files = scan(TL_ROOT . '/' . $strFile);
 						if (!empty($files) && !$f4)
 						{
-							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
+							$this->log('No permission to delete folder "'.$strFile.'" recursively', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
 						elseif (!$f3)
 						{
-							$this->log('No permission to delete folder "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+							$this->log('No permission to delete folder "'.$strFile.'"', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
 					}
 					elseif (!$f3)
 					{
-						$this->log('No permission to delete file "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to delete file "'.$strFile.'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -354,7 +354,7 @@ class tl_files extends Backend
 				default:
 					if (empty($this->User->fop))
 					{
-						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to manipulate files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;

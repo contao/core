@@ -192,7 +192,7 @@ class Versions extends \Backend
 				$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
 							   ->execute($this->intPid, $intVersion);
 
-				$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been restored'.$this->getParentEntries($this->strTable, $this->intPid), 'Versions activate()', TL_GENERAL);
+				$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been restored'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
 
 				// Trigger the onrestore_callback
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))

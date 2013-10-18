@@ -325,7 +325,7 @@ class tl_calendar_feed extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarfeedp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendar feed ID "'.Input::get('id').'"', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendar feed ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -348,7 +348,7 @@ class tl_calendar_feed extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendar feeds', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendar feeds', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

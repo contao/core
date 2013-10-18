@@ -469,7 +469,7 @@ class tl_form_field extends Backend
 			case 'select':
 				if (!strlen(Input::get('id')) || !in_array(Input::get('id'), $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.Input::get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access form ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -487,7 +487,7 @@ class tl_form_field extends Backend
 
 					if ($objField->numRows < 1)
 					{
-						$this->log('Invalid form field ID "'.Input::get('pid').'"', 'tl_form_field checkPermission', TL_ERROR);
+						$this->log('Invalid form field ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 
@@ -496,7 +496,7 @@ class tl_form_field extends Backend
 
 				if (!in_array($pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -511,13 +511,13 @@ class tl_form_field extends Backend
 
 				if ($objField->numRows < 1)
 				{
-					$this->log('Invalid form field ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Invalid form field ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objField->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -529,7 +529,7 @@ class tl_form_field extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access form ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -538,7 +538,7 @@ class tl_form_field extends Backend
 
 				if ($objForm->numRows < 1)
 				{
-					$this->log('Invalid form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Invalid form ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -550,12 +550,12 @@ class tl_form_field extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access form ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -703,6 +703,6 @@ class tl_form_field extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_form_field.id='.$intId.'" has been created'.$this->getParentEntries('tl_form_field', $intId), 'tl_form_field toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_form_field.id='.$intId.'" has been created'.$this->getParentEntries('tl_form_field', $intId), __METHOD__, TL_GENERAL);
 	}
 }

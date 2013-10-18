@@ -278,13 +278,13 @@ class tl_comments extends Backend
 
 				if ($objComment->numRows < 1)
 				{
-					$this->log('Comment ID ' . Input::get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Comment ID ' . Input::get('id') . ' does not exist', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
 				{
-					$this->log('Not enough permissions to ' . Input::get('act') . ' comment ID ' . Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Not enough permissions to ' . Input::get('act') . ' comment ID ' . Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -316,7 +316,7 @@ class tl_comments extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_comments checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -619,7 +619,7 @@ class tl_comments extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -648,6 +648,6 @@ class tl_comments extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), 'tl_comments toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), __METHOD__, TL_GENERAL);
 	}
 }

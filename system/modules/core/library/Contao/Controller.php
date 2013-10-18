@@ -311,7 +311,7 @@ abstract class Controller extends \System
 			// Return if the class does not exist
 			if (!class_exists($strClass))
 			{
-				$this->log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
+				$this->log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 				return '';
 			}
 
@@ -472,7 +472,7 @@ abstract class Controller extends \System
 		// Return if the class does not exist
 		if (!class_exists($strClass))
 		{
-			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
+			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 			return '';
 		}
 

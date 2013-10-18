@@ -63,7 +63,7 @@ define('LINK_NEW_WINDOW_BLUR', ' onclick="this.blur();return !window.open(this.h
  * These constants can be used with method $this->log() to add log entries.
  *
  * Usage example:
- *   $this->log('An error occured', 'FormGenerator execute()', TL_ERROR);
+ *   $this->log('An error occured', __METHOD__, TL_ERROR);
  */
 define('TL_ERROR', 'ERROR');
 define('TL_ACCESS', 'ACCESS');

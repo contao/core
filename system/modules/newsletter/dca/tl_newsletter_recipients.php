@@ -240,7 +240,7 @@ class tl_newsletter_recipients extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.Input::get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -256,13 +256,13 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objRecipient->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -273,7 +273,7 @@ class tl_newsletter_recipients extends Backend
 			case 'overrideAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -282,7 +282,7 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -294,12 +294,12 @@ class tl_newsletter_recipients extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -400,7 +400,7 @@ class tl_newsletter_recipients extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', 'tl_newsletter_recipients toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -429,6 +429,6 @@ class tl_newsletter_recipients extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), 'tl_newsletter_recipients toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), __METHOD__, TL_GENERAL);
 	}
 }

@@ -39,11 +39,11 @@ class PageError404 extends \Frontend
 		// Add a log entry
 		if ($strDomain !== null || $strHost !== null)
 		{
-			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', 'PageError404 generate()', TL_ERROR);
+			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', __METHOD__, TL_ERROR);
 		}
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
-			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', 'PageError404 generate()', TL_ERROR);
+			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
 		}
 
 		// Check the search index (see #3761)
@@ -102,7 +102,7 @@ class PageError404 extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
+			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 

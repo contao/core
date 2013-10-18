@@ -816,7 +816,7 @@ class tl_page extends Backend
 				// Do not allow to paste after pages on the root level (pagemounts)
 				if ((Input::get('act') == 'cut' || Input::get('act') == 'cutAll') && Input::get('mode') == 1 && in_array(Input::get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. Input::get('id') .' after mounted page ID '. Input::get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. Input::get('id') .' after mounted page ID '. Input::get('pid') .' (root level)', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -825,7 +825,7 @@ class tl_page extends Backend
 				{
 					if (!in_array($id, $pagemounts))
 					{
-						$this->log('Page ID '. $id .' was not mounted', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Page ID '. $id .' was not mounted', __METHOD__, TL_ERROR);
 
 						$error = true;
 						break;
@@ -852,7 +852,7 @@ class tl_page extends Backend
 					// In "edit multiple" mode, $ids contains only the parent ID, therefore check $id != $_GET['pid'] (see #5620)
 					if ($i == 0 && $id != Input::get('pid') && Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
-						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', __METHOD__, TL_ERROR);
 
 						$error = true;
 						break;
@@ -862,7 +862,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to '. Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. Input::get('pid'), 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '. Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. Input::get('pid'), __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 			}
@@ -1600,7 +1600,7 @@ class tl_page extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1629,6 +1629,6 @@ class tl_page extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), 'tl_page toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), __METHOD__, TL_GENERAL);
 	}
 }

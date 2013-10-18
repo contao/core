@@ -62,7 +62,7 @@ class Calendar extends \Frontend
 		else
 		{
 			$this->generateFiles($objCalendar->row());
-			$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeed()', TL_CRON);
+			$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -83,7 +83,7 @@ class Calendar extends \Frontend
 			{
 				$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
-				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
+				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
 			}
 		}
 	}

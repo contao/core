@@ -143,14 +143,14 @@ class tl_content_news extends Backend
 		// Invalid ID
 		if ($objArchive->numRows < 1)
 		{
-			$this->log('Invalid news content element ID ' . $id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid news content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The news archive is not mounted
 		if (!in_array($objArchive->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 

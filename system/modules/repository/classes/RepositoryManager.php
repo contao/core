@@ -684,7 +684,7 @@ class RepositoryManager extends RepositoryBackendModule
 			if ($sum_ok>0) $rep->log .= '<div>'.sprintf($text['filesunchanged'],$sum_ok)."</div>\n";
 			if ($sum_del>0) $rep->log .= '<div>'.sprintf($text['filesdeleted'],$sum_del)."</div>\n";
 			$rep->log .= '<div class="color_green">'.$text['actionsuccess']."</div>\n";
-			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', 'RepositoryManager::updateExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
@@ -822,7 +822,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$this->Files->delete($zipname);
 				throw $exc;
 			} // catch
-			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', 'RepositoryManager::installExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
@@ -911,7 +911,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$db->prepare("delete from `tl_repository_installs` where `id`=?")->execute($instId);
 				$rep->log .= '<div class="color_green">'.$text['actionsuccess'].'</div>';
 			} // if
-			$this->log('Extension "'. $aName .'" has been uninstalled', 'RepositoryManager::uninstallExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been uninstalled', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=

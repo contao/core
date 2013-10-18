@@ -48,7 +48,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
+		$this->log('Checked for Contao updates', __METHOD__, TL_CRON);
 	}
 
 
@@ -68,7 +68,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the search tables', 'Automator purgeSearchTables()', TL_CRON);
+		$this->log('Purged the search tables', __METHOD__, TL_CRON);
 	}
 
 
@@ -83,7 +83,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_undo");
 
 		// Add a log entry
-		$this->log('Purged the undo table', 'Automator purgeUndoTable()', TL_CRON);
+		$this->log('Purged the undo table', __METHOD__, TL_CRON);
 	}
 
 
@@ -98,7 +98,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_version");
 
 		// Add a log entry
-		$this->log('Purged the undo table', 'Automator purgeVersionTable()', TL_CRON);
+		$this->log('Purged the undo table', __METHOD__, TL_CRON);
 	}
 
 
@@ -113,7 +113,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_log");
 
 		// Add a log entry
-		$this->log('Purged the system log', 'Automator purgeSystemLog()', TL_CRON);
+		$this->log('Purged the system log', __METHOD__, TL_CRON);
 	}
 
 
@@ -141,7 +141,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Purged the image cache', 'Automator purgeImageCache()', TL_CRON);
+		$this->log('Purged the image cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -170,7 +170,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Purged the script cache', 'Automator purgeScriptCache()', TL_CRON);
+		$this->log('Purged the script cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -184,7 +184,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the page cache', 'Automator purgePageCache()', TL_CRON);
+		$this->log('Purged the page cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -198,7 +198,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the search cache', 'Automator purgePageCache()', TL_CRON);
+		$this->log('Purged the search cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -219,7 +219,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Purged the internal cache', 'Automator purgeInternalCache()', TL_CRON);
+		$this->log('Purged the internal cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -237,7 +237,7 @@ class Automator extends \System
 		$objFile->copyTo('system/tmp/.gitignore');
 
 		// Add a log entry
-		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
+		$this->log('Purged the temp folder', __METHOD__, TL_CRON);
 	}
 
 
@@ -263,7 +263,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Regenerated the XML files', 'Automator generateXmlFiles()', TL_CRON);
+		$this->log('Regenerated the XML files', __METHOD__, TL_CRON);
 	}
 
 
@@ -417,7 +417,7 @@ class Automator extends \System
 			$objFile->close();
 
 			// Add a log entry
-			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', 'Automator generateSitemap()', TL_CRON);
+			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -544,7 +544,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Add a log entry
-		$this->log('Generated the autoload cache', 'Automator generateDcaCache()', TL_CRON);
+		$this->log('Generated the autoload cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -600,7 +600,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the DCA cache', 'Automator generateDcaCache()', TL_CRON);
+		$this->log('Generated the DCA cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -697,7 +697,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the language cache', 'Automator generateLanguageCache()', TL_CRON);
+		$this->log('Generated the language cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -802,6 +802,6 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the DCA extracts', 'Automator generateDcaExtracts()', TL_CRON);
+		$this->log('Generated the DCA extracts', __METHOD__, TL_CRON);
 	}
 }

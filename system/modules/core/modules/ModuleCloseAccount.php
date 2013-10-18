@@ -128,14 +128,14 @@ class ModuleCloseAccount extends \Module
 				if ($this->reg_close == 'close_delete')
 				{
 					$objMember->delete();
-					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deleted', 'ModuleCloseAccount compile()', TL_ACCESS);
+					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deleted', __METHOD__, TL_ACCESS);
 				}
 				// Deactivate the account
 				else
 				{
 					$objMember->disable = 1;
 					$objMember->save();
-					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deactivated', 'ModuleCloseAccount compile()', TL_ACCESS);
+					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deactivated', __METHOD__, TL_ACCESS);
 				}
 
 				$this->User->logout();

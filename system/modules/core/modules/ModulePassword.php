@@ -302,7 +302,7 @@ class ModulePassword extends \Module
 					catch (\Exception $e)
 					{
 						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
-						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', 'ModulePassword sendPasswordLink()', TL_GENERAL, $e->getMessage());
+						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', __METHOD__, TL_GENERAL, $e->getMessage());
 					}
 					break;
 			}
@@ -317,7 +317,7 @@ class ModulePassword extends \Module
 		$objEmail->text = $strConfirmation;
 		$objEmail->sendTo($objMember->email);
 
-		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', 'ModulePassword sendPasswordLink()', TL_ACCESS);
+		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', __METHOD__, TL_ACCESS);
 
 		// Check whether there is a jumpTo page
 		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)

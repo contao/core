@@ -143,14 +143,14 @@ class tl_content_calendar extends Backend
 		// Invalid ID
 		if ($objCalendar->numRows < 1)
 		{
-			$this->log('Invalid event content element ID ' . $id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid event content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The calendar is not mounted
 		if (!in_array($objCalendar->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 

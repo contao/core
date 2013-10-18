@@ -463,7 +463,7 @@ class tl_faq extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', 'tl_faq toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -492,6 +492,6 @@ class tl_faq extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_faq.id='.$intId.'" has been created'.$this->getParentEntries('tl_faq', $intId), 'tl_faq toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_faq.id='.$intId.'" has been created'.$this->getParentEntries('tl_faq', $intId), __METHOD__, TL_GENERAL);
 	}
 }

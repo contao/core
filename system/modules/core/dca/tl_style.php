@@ -642,7 +642,7 @@ class tl_style extends Backend
 
 		if (!$this->User->hasAccess('css', 'themes'))
 		{
-			$this->log('Not enough permissions to access the style sheets module', 'tl_style checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the style sheets module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -814,7 +814,7 @@ class tl_style extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), 'tl_style toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), __METHOD__, TL_GENERAL);
 
 		// Recreate the style sheet
 		$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")

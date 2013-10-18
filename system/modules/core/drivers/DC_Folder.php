@@ -107,14 +107,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
-			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_Folder __construct()', TL_ERROR);
+			$this->log('Could not load data container configuration for "' . $strTable . '"', __METHOD__, TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
 		}
 
 		// Check permission to create new folders
 		if (\Input::get('act') == 'paste' && \Input::get('mode') == 'create' && isset($GLOBALS['TL_DCA'][$strTable]['list']['new']))
 		{
-			$this->log('Attempt to create a new folder although the method has been overwritten in the data container', 'DC_Folder __construct()', TL_ERROR);
+			$this->log('Attempt to create a new folder although the method has been overwritten in the data container', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -443,7 +443,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not creatable', 'DC_Folder create()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not creatable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -452,7 +452,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if ($strFolder == '' || !file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder create()', TL_ERROR);
+			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -474,7 +474,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not sortable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -490,20 +490,20 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
-			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Avoid a circular reference
 		if (preg_match('/^' . preg_quote($source, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to move the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Attempt to move the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -533,7 +533,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Add a log entry
-			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
+			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', __METHOD__, TL_FILES);
 		}
 
 		// Redirect
@@ -551,7 +551,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not sortable', 'DC_Folder cutAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not sortable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -584,7 +584,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copy()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not copyable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -606,20 +606,20 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
-			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder copy()', TL_ERROR);
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder copy()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Avoid a circular reference
 		if (preg_match('/^' . preg_quote($source, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to copy the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder copy()', TL_ERROR);
+			$this->log('Attempt to copy the folder "'.$source.'" to "'.$strFolder.'" (circular reference)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -670,7 +670,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
+		$this->log('File or folder "'.$source.'" has been duplicated', __METHOD__, TL_FILES);
 
 		// Redirect
 		if (!$blnDoNotRedirect)
@@ -687,7 +687,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not copyable', 'DC_Folder copyAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not copyable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -719,7 +719,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not deletable', 'DC_Folder deleteAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not deletable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -735,7 +735,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Delete the file or folder
 		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
-			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -775,7 +775,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', 'DC_Folder delete()', TL_FILES);
+		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', __METHOD__, TL_FILES);
 
 		// Redirect
 		if (!$blnDoNotRedirect)
@@ -792,7 +792,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not deletable', 'DC_Folder deleteAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not deletable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -832,13 +832,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder move()', TL_ERROR);
+			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFolder))
 		{
-			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', 'DC_Folder move()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1005,7 +1005,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
 		{
-			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder edit()', TL_ERROR);
+			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1273,7 +1273,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 				}
 
-				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Folder edit()', TL_GENERAL);
+				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', __METHOD__, TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -1328,7 +1328,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
-			$this->log('Table "'.$this->strTable.'" is not editable', 'DC_Folder editAll()', TL_ERROR);
+			$this->log('Table "'.$this->strTable.'" is not editable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1484,7 +1484,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', 'DC_Folder editAll()', TL_GENERAL);
+						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', __METHOD__, TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -1644,12 +1644,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		if (is_dir(TL_ROOT .'/'. $this->intId))
 		{
-			$this->log('Folder "'.$this->intId.'" cannot be edited', 'DC_Folder source()', TL_ERROR);
+			$this->log('Folder "'.$this->intId.'" cannot be edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 		elseif (!file_exists(TL_ROOT .'/'. $this->intId))
 		{
-			$this->log('File "'.$this->intId.'" does not exist', 'DC_Folder source()', TL_ERROR);
+			$this->log('File "'.$this->intId.'" does not exist', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1658,7 +1658,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check user permission
 		if (!$this->User->isAdmin && !$this->User->hasAccess('f5', 'fop'))
 		{
-			$this->log('Not enough permissions to edit the file source of file "'.$this->intId.'"', 'DC_Folder source()', TL_ERROR);
+			$this->log('Not enough permissions to edit the file source of file "'.$this->intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1667,7 +1667,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check whether file type is editable
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
 		{
-			$this->log('File type "'.$objFile->extension.'" ('.$this->intId.') is not allowed to be edited', 'DC_Folder source()', TL_ERROR);
+			$this->log('File type "'.$objFile->extension.'" ('.$this->intId.') is not allowed to be edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1786,7 +1786,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	{
 		if (!is_dir(TL_ROOT . '/' . $this->intId))
 		{
-			$this->log('Resource "'.$this->intId.'" is not a directory', 'DC_Folder protect()', TL_ERROR);
+			$this->log('Resource "'.$this->intId.'" is not a directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1795,7 +1795,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$objFolder = new \Folder($this->intId);
 			$objFolder->unprotect();
-			$this->log('The protection from folder "'.$this->intId.'" has been removed', 'DC_Folder protect()', TL_FILES);
+			$this->log('The protection from folder "'.$this->intId.'" has been removed', __METHOD__, TL_FILES);
 			$this->redirect($this->getReferer());
 		}
 		// Protect the folder
@@ -1803,7 +1803,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$objFolder = new \Folder($this->intId);
 			$objFolder->protect();
-			$this->log('Folder "'.$this->intId.'" has been protected', 'DC_Folder protect()', TL_FILES);
+			$this->log('Folder "'.$this->intId.'" has been protected', __METHOD__, TL_FILES);
 			$this->redirect($this->getReferer());
 		}
 	}
@@ -1867,12 +1867,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if (stristr($this->intId, '__new__') !== false)
 				{
 					$this->objActiveRecord = \Dbafs::addResource($this->strPath . '/' . $varValue . $this->strExtension);
-					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
+					$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', __METHOD__, TL_FILES);
 				}
 				else
 				{
 					$this->objActiveRecord = \Dbafs::moveResource($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-					$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
+					$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', __METHOD__, TL_FILES);
 				}
 			}
 
@@ -2006,7 +2006,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check the permission to synchronize
 		if (!$this->User->isAdmin && !$this->User->hasAccess('f6', 'fop'))
 		{
-			$this->log('Not enough permissions to synchronize the file system', 'DC_Folder sync()', TL_ERROR);
+			$this->log('Not enough permissions to synchronize the file system', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2393,12 +2393,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check the path
 		if (strpos($strFile, '../') !== false)
 		{
-			$this->log('Invalid file name "'.$strFile.'" (hacking attempt)', 'DC_Folder isValid()', TL_ERROR);
+			$this->log('Invalid file name "'.$strFile.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 		elseif (strpos($strFolder, '../') !== false)
 		{
-			$this->log('Invalid folder name "'.$strFolder.'" (hacking attempt)', 'DC_Folder isValid()', TL_ERROR);
+			$this->log('Invalid folder name "'.$strFolder.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2409,7 +2409,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if (!in_array(strtolower($fileinfo), $this->arrValidFileTypes))
 			{
-				$this->log('File "'.$strFile.'" is not an allowed file type', 'DC_Folder isValid()', TL_ERROR);
+				$this->log('File "'.$strFile.'" is not an allowed file type', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
 			}
 		}
@@ -2417,14 +2417,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check whether the file is within the files directory
 		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFile))
 		{
-			$this->log('File or folder "'.$strFile.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
+			$this->log('File or folder "'.$strFile.'" is not within the files directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Check whether the parent folder is within the files directory
 		if ($strFolder && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFolder))
 		{
-			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -2435,7 +2435,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if (!$this->User->isAdmin && in_array($strFile, $this->User->filemounts))
 			{
-				$this->log('Attempt to edit, copy, move or delete the root folder "'.$strFile.'"', 'DC_Folder isValid()', TL_ERROR);
+				$this->log('Attempt to edit, copy, move or delete the root folder "'.$strFile.'"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
 			}
 		}

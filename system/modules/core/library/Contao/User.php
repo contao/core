@@ -184,7 +184,7 @@ abstract class User extends \System
 		// Try to find the session in the database
 		if ($objSession->numRows < 1)
 		{
-			$this->log('Could not find the session record', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not find the session record', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -193,7 +193,7 @@ abstract class User extends \System
 		// Validate the session
 		if ($objSession->sessionID != session_id() || (!$GLOBALS['TL_CONFIG']['disableIpCheck'] && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) < $time)
 		{
-			$this->log('Could not verify the session', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not verify the session', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -202,7 +202,7 @@ abstract class User extends \System
 		// Load the user object
 		if ($this->findBy('id', $this->intId) == false)
 		{
-			$this->log('Could not find the session user', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not find the session user', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -257,7 +257,7 @@ abstract class User extends \System
 			if (!$blnLoaded || $this->findBy('username', \Input::post('username', true)) == false)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('Could not find user "' . \Input::post('username', true) . '"', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('Could not find user "' . \Input::post('username', true) . '"', __METHOD__, TL_ACCESS);
 
 				return false;
 			}
@@ -279,7 +279,7 @@ abstract class User extends \System
 			$this->save();
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
-			$this->log('The account has been locked for security reasons', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('The account has been locked for security reasons', __METHOD__, TL_ACCESS);
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
 
 			// Send admin notification
@@ -340,7 +340,7 @@ abstract class User extends \System
 			$this->save();
 
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('Invalid password submitted for username "' . $this->username . '"', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('Invalid password submitted for username "' . $this->username . '"', __METHOD__, TL_ACCESS);
 
 			return false;
 		}
@@ -355,7 +355,7 @@ abstract class User extends \System
 
 		// Generate the session
 		$this->generateSession();
-		$this->log('User "' . $this->username . '" has logged in', get_class($this) . ' login()', TL_ACCESS);
+		$this->log('User "' . $this->username . '" has logged in', __METHOD__, TL_ACCESS);
 
 		// HOOK: post login callback
 		if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
@@ -391,7 +391,7 @@ abstract class User extends \System
 		elseif ($this->disable)
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('The account has been disabled', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('The account has been disabled', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -399,7 +399,7 @@ abstract class User extends \System
 		elseif ($this instanceof \FrontendUser && !$this->login)
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('User "' . $this->username . '" is not allowed to log in', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('User "' . $this->username . '" is not allowed to log in', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -409,14 +409,14 @@ abstract class User extends \System
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active yet (activation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active yet (activation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 		}
@@ -534,7 +534,7 @@ abstract class User extends \System
 		if ($this->findBy('id', $intUserid) != false)
 		{
 			$GLOBALS['TL_USERNAME'] = $this->username;
-			$this->log('User "' . $this->username . '" has logged out', $this->strTable . ' logout()', TL_ACCESS);
+			$this->log('User "' . $this->username . '" has logged out', __METHOD__, TL_ACCESS);
 		}
 
 		// HOOK: post logout callback

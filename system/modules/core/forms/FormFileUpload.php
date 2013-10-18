@@ -110,17 +110,17 @@ class FormFileUpload extends \Widget implements \uploadable
 			if ($file['error'] == 1 || $file['error'] == 2)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, __METHOD__, TL_ERROR);
 			}
 			elseif ($file['error'] == 3)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
-				$this->log('File "'.$file['name'].'" was only partially uploaded', 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" was only partially uploaded', __METHOD__, TL_ERROR);
 			}
 			elseif ($file['error'] > 0)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileerror'], $file['error'], $file['name']));
-				$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , __METHOD__, TL_ERROR);
 			}
 
 			unset($_FILES[$this->strName]);
@@ -131,7 +131,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		if ($this->maxlength > 0 && $file['size'] > $this->maxlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
+			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, __METHOD__, TL_ERROR);
 
 			unset($_FILES[$this->strName]);
 			return;
@@ -144,7 +144,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		if (!in_array(strtolower($strExtension), $uploadTypes))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $strExtension));
-			$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', 'FormFileUpload validate()', TL_ERROR);
+			$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', __METHOD__, TL_ERROR);
 
 			unset($_FILES[$this->strName]);
 			return;
@@ -156,7 +156,7 @@ class FormFileUpload extends \Widget implements \uploadable
 			if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], $GLOBALS['TL_CONFIG']['imageWidth']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.$GLOBALS['TL_CONFIG']['imageWidth'].' pixels', 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.$GLOBALS['TL_CONFIG']['imageWidth'].' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
@@ -166,7 +166,7 @@ class FormFileUpload extends \Widget implements \uploadable
 			if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], $GLOBALS['TL_CONFIG']['imageHeight']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.$GLOBALS['TL_CONFIG']['imageHeight'].' pixels', 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.$GLOBALS['TL_CONFIG']['imageHeight'].' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
@@ -177,7 +177,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		if (!$this->hasErrors())
 		{
 			$_SESSION['FILES'][$this->strName] = $_FILES[$this->strName];
-			$this->log('File "'.$file['name'].'" uploaded successfully', 'FormFileUpload validate()', TL_FILES);
+			$this->log('File "'.$file['name'].'" uploaded successfully', __METHOD__, TL_FILES);
 
 			if ($this->storeFile)
 			{
@@ -267,7 +267,7 @@ class FormFileUpload extends \Widget implements \uploadable
 					\Dbafs::updateFolderHashes($strUploadFolder);
 
 					// Add a log entry
-					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', 'FormFileUpload validate()', TL_FILES);
+					$this->log('File "'.$file['name'].'" has been moved to "'.$strUploadFolder.'"', __METHOD__, TL_FILES);
 				}
 			}
 		}

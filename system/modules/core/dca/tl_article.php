@@ -488,7 +488,7 @@ class tl_article extends Backend
 
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
-						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -517,7 +517,7 @@ class tl_article extends Backend
 				{
 					if (!$error && !in_array($id, $pagemounts))
 					{
-						$this->log('Page ID ' . $id . ' was not mounted', 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Page ID ' . $id . ' was not mounted', __METHOD__, TL_ERROR);
 						$error = true;
 					}
 
@@ -530,7 +530,7 @@ class tl_article extends Backend
 					{
 						if (!$this->User->isAllowed($permission, $objPage->row()))
 						{
-							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, __METHOD__, TL_ERROR);
 							$error = true;
 						}
 					}
@@ -889,7 +889,7 @@ class tl_article extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -918,6 +918,6 @@ class tl_article extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), 'tl_article toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), __METHOD__, TL_GENERAL);
 	}
 }

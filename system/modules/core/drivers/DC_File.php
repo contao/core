@@ -40,7 +40,7 @@ class DC_File extends \DataContainer implements \editable
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
-			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_File __construct()', TL_ERROR);
+			$this->log('Could not load data container configuration for "' . $strTable . '"', __METHOD__, TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
 		}
 
@@ -471,11 +471,11 @@ class DC_File extends \DataContainer implements \editable
 			{
 				if ($arrData['inputType'] == 'password' || $arrData['inputType'] == 'textStore')
 				{
-					$this->log('The global configuration variable "'.$this->strField.'" has been changed', 'DC_File save()', TL_CONFIGURATION);
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed', __METHOD__, TL_CONFIGURATION);
 				}
 				else
 				{
-					$this->log('The global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', 'DC_File save()', TL_CONFIGURATION);
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', __METHOD__, TL_CONFIGURATION);
 				}
 			}
 

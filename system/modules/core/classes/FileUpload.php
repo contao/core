@@ -117,19 +117,19 @@ class FileUpload extends \Backend
 				if ($file['error'] == 1 || $file['error'] == 2)
 				{
 					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
-					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, 'Uploader uploadTo()', TL_ERROR);
+					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, __METHOD__, TL_ERROR);
 					$this->blnHasError = true;
 				}
 				elseif ($file['error'] == 3)
 				{
 					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
-					$this->log('File "'.$file['name'].'" was only partially uploaded' , 'Uploader uploadTo()', TL_ERROR);
+					$this->log('File "'.$file['name'].'" was only partially uploaded' , __METHOD__, TL_ERROR);
 					$this->blnHasError = true;
 				}
 				elseif ($file['error'] > 0)
 				{
 					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileerror'], $file['error'], $file['name']));
-					$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , 'Uploader uploadTo()', TL_ERROR);
+					$this->log('File "'.$file['name'].'" could not be uploaded (error '.$file['error'].')' , __METHOD__, TL_ERROR);
 					$this->blnHasError = true;
 				}
 			}
@@ -138,7 +138,7 @@ class FileUpload extends \Backend
 			elseif ($file['size'] > $maxlength_kb)
 			{
 				\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb_readable));
-				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, 'Uploader uploadTo()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb_readable, __METHOD__, TL_ERROR);
 				$this->blnHasError = true;
 			}
 
@@ -152,7 +152,7 @@ class FileUpload extends \Backend
 				if (!in_array(strtolower($strExtension), $arrAllowedTypes))
 				{
 					\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $strExtension));
-					$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', 'Uploader uploadTo()', TL_ERROR);
+					$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', __METHOD__, TL_ERROR);
 					$this->blnHasError = true;
 				}
 				else
@@ -170,7 +170,7 @@ class FileUpload extends \Backend
 						if (!$blnResized)
 						{
 							\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
-							$this->log('File "'.$file['name'].'" uploaded successfully', 'Uploader uploadTo()', TL_FILES);
+							$this->log('File "'.$file['name'].'" uploaded successfully', __METHOD__, TL_FILES);
 						}
 
 						$arrUploaded[] = $strNewFile;
@@ -296,7 +296,7 @@ class FileUpload extends \Backend
 		if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $arrImageSize[1] > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
 		{
 			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully but was too big to be resized automatically', 'Uploader resizeUploadedImage()', TL_FILES);
+			$this->log('File "'.$strName.'" uploaded successfully but was too big to be resized automatically', __METHOD__, TL_FILES);
 			return false;
 		}
 
@@ -325,7 +325,7 @@ class FileUpload extends \Backend
 		{
 			\Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
 			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', 'Uploader resizeUploadedImage()', TL_FILES);
+			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
 			$this->blnHasResized = true;
 			return true;
 		}

@@ -325,7 +325,7 @@ class tl_news_feed extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsfeedp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news feed ID "'.Input::get('id').'"', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news feed ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -348,7 +348,7 @@ class tl_news_feed extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news feeds', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news feeds', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

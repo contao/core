@@ -491,7 +491,7 @@ class tl_user extends Backend
 			case 'delete':
 				if (Input::get('id') == $this->User->id)
 				{
-					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// no break;
@@ -506,7 +506,7 @@ class tl_user extends Backend
 
 				if ($objUser->admin && Input::get('act') != '')
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -854,7 +854,7 @@ class tl_user extends Backend
 		// Check permissions
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -883,7 +883,7 @@ class tl_user extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_user.id='.$intId.'" has been created'.$this->getParentEntries('tl_user', $intId), 'tl_user toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_user.id='.$intId.'" has been created'.$this->getParentEntries('tl_user', $intId), __METHOD__, TL_GENERAL);
 
 		// Remove the session if the user is disabled (see #5353)
 		if (!$blnVisible)

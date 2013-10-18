@@ -269,7 +269,7 @@ class Ajax extends \Backend
 				// The field does not exist
 				if (!isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]))
 				{
-					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}
@@ -308,7 +308,7 @@ class Ajax extends \Backend
 					// The record does not exist
 					if ($objRow->numRows < 1)
 					{
-						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', __METHOD__, TL_ERROR);
 						header('HTTP/1.1 400 Bad Request');
 						die('Bad Request');
 					}
@@ -367,7 +367,7 @@ class Ajax extends \Backend
 				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
 				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
 				{
-					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', 'Ajax executePostActions()', TL_ERROR);
+					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}

@@ -568,7 +568,7 @@ class tl_calendar_events extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create events in calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create events in calendar ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -577,7 +577,7 @@ class tl_calendar_events extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" to calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" to calendar ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -592,13 +592,13 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid event ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid event ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objCalendar->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -611,7 +611,7 @@ class tl_calendar_events extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -620,7 +620,7 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -632,12 +632,12 @@ class tl_calendar_events extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -985,7 +985,7 @@ class tl_calendar_events extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1014,7 +1014,7 @@ class tl_calendar_events extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_calendar_events.id='.$intId.'" has been created'.$this->getParentEntries('tl_calendar_events', $intId), 'tl_calendar_events toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_calendar_events.id='.$intId.'" has been created'.$this->getParentEntries('tl_calendar_events', $intId), __METHOD__, TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

@@ -512,7 +512,7 @@ class tl_news extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -521,7 +521,7 @@ class tl_news extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -537,13 +537,13 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news item ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid news item ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -556,7 +556,7 @@ class tl_news extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -565,7 +565,7 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid news archive ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -577,12 +577,12 @@ class tl_news extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID ' . $id, 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID ' . $id, __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -815,7 +815,7 @@ class tl_news extends Backend
 		// Check permissions to feature
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
 		{
-			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', 'tl_news toggleFeatured', TL_ERROR);
+			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -844,7 +844,7 @@ class tl_news extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleFeatured()', TL_GENERAL);
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
 	}
 
 
@@ -898,7 +898,7 @@ class tl_news extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -927,7 +927,7 @@ class tl_news extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

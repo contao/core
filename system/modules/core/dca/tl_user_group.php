@@ -400,7 +400,7 @@ class tl_user_group extends Backend
 		// Check permissions
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -429,6 +429,6 @@ class tl_user_group extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_user_group.id='.$intId.'" has been created'.$this->getParentEntries('tl_user_group', $intId), 'tl_user_group toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_user_group.id='.$intId.'" has been created'.$this->getParentEntries('tl_user_group', $intId), __METHOD__, TL_GENERAL);
 	}
 }

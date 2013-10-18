@@ -348,7 +348,7 @@ class tl_faq_category extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'faqp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' FAQ category ID "'.Input::get('id').'"', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ category ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -371,7 +371,7 @@ class tl_faq_category extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' FAQ categories', 'tl_faq_category checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' FAQ categories', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

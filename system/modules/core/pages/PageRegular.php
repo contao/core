@@ -225,7 +225,7 @@ class PageRegular extends \Frontend
 		if ($objLayout === null)
 		{
 			header('HTTP/1.1 501 Not Implemented');
-			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
+			$this->log('Could not find layout ID "' . $intId . '"', __METHOD__, TL_ERROR);
 			die_nicely('be_no_layout', 'No layout specified');
 		}
 

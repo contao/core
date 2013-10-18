@@ -193,7 +193,7 @@ class FrontendUser extends \User
 
 		// Generate the session
 		$this->generateSession();
-		$this->log('User "' . $this->username . '" was logged in automatically', get_class($this) . ' authenticate()', TL_ACCESS);
+		$this->log('User "' . $this->username . '" was logged in automatically', __METHOD__, TL_ACCESS);
 
 		// Reload the page
 		\Controller::reload();

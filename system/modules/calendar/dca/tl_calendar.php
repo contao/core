@@ -372,7 +372,7 @@ class tl_calendar extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendar ID "'.Input::get('id').'"', 'tl_calendar checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendar ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -395,7 +395,7 @@ class tl_calendar extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendars', 'tl_calendar checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendars', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

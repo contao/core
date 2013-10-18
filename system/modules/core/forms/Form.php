@@ -490,11 +490,11 @@ class Form extends \Hybrid
 		if (FE_USER_LOGGED_IN)
 		{
 			$this->import('FrontendUser', 'User');
-			$this->log('Form "' . $this->title . '" has been submitted by "' . $this->User->username . '".', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by "' . $this->User->username . '".', __METHOD__, TL_FORMS);
 		}
 		else
 		{
-			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', __METHOD__, TL_FORMS);
 		}
 
 		// Check whether there is a jumpTo page

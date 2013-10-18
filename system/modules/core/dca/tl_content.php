@@ -946,21 +946,21 @@ class tl_content extends Backend
 		// Invalid ID
 		if ($objPage->numRows < 1)
 		{
-			$this->log('Invalid content element ID ' . $id, 'tl_article checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The page is not mounted
 		if (!in_array($objPage->id, $pagemounts))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, 'tl_article checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// Not enough permissions to modify the article
 		if (!$this->User->isAllowed(4, $objPage->row()))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, 'tl_article checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, __METHOD__, TL_ERROR);
 			return false;
 		}
 
@@ -1667,7 +1667,7 @@ class tl_content extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_content::invisible', 'alexf'))
 		{
-			$this->log('Not enough permissions to show/hide content element ID "'.$intId.'"', 'tl_content toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to show/hide content element ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1696,6 +1696,6 @@ class tl_content extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_content.id='.$intId.'" has been created'.$this->getParentEntries('tl_content', $intId), 'tl_content toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_content.id='.$intId.'" has been created'.$this->getParentEntries('tl_content', $intId), __METHOD__, TL_GENERAL);
 	}
 }

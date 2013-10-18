@@ -788,7 +788,7 @@ class tl_module extends Backend
 
 		if (!$this->User->hasAccess('modules', 'themes'))
 		{
-			$this->log('Not enough permissions to access the modules module', 'tl_module checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the modules module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
