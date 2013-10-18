@@ -372,6 +372,9 @@ a.tl_submit:hover {
 	float:left;
 	height:72px;
 }
+.long {
+	width:100%; /* see #6320 */
+}
 .w50 .tl_help {
 	margin-right:24px;
 }

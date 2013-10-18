@@ -422,6 +422,9 @@ class tl_news_archive extends Backend
 			$this->News->generateFeed($id);
 		}
 
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
 		$this->Session->set('news_feed_updater', null);
 	}
 
