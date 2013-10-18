@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Improved
+Correctly display nested wrapper elements (see #5976).
+
 ### New
 Added the "isVisibleElement" hook to determine whether an element is visible in
 the front end (see #6311).

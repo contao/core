@@ -4016,6 +4016,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$strGroup = '';
 				$blnIndent = false;
+				$intWrapLevel = 0;
 				$row = $objOrderBy->fetchAllAssoc();
 
 				// Make items sortable
@@ -4069,7 +4070,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Closing wrappers
 					if ($blnWrapperStop)
 					{
-						$blnIndent = false;
+						if (--$intWrapLevel < 1)
+						{
+							$blnIndent = false;
+						}
 					}
 
 					$return .= '
@@ -4080,7 +4084,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Opening wrappers
 					if ($blnWrapperStart)
 					{
-						$blnIndent = true;
+						if (++$intWrapLevel > 0)
+						{
+							$blnIndent = true;
+						}
 					}
 
 					// Edit multiple
