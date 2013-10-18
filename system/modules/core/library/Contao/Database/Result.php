@@ -260,6 +260,7 @@ abstract class Result
 	public function fetchAllAssoc()
 	{
 		$this->reset();
+		$arrReturn = array();
 
 		while (($arrRow = $this->fetchAssoc()) !== false)
 		{
