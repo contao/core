@@ -690,7 +690,6 @@ class RepositoryManager extends RepositoryBackendModule
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -829,7 +828,6 @@ class RepositoryManager extends RepositoryBackendModule
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -919,7 +917,6 @@ class RepositoryManager extends RepositoryBackendModule
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				$exc->getMessage() . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
