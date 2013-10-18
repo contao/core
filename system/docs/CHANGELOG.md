@@ -4,6 +4,10 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### New
+Added the "isVisibleElement" hook to determine whether an element is visible in
+the front end (see #6311).
+
 ### Fixed
 Handle tables without keys in `Database::listFields()` (see #6310).
 

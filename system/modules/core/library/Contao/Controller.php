@@ -293,38 +293,17 @@ abstract class Controller extends \System
 			else
 			{
 				$objRow = \ModuleModel::findByPk($intId);
-			}
 
-			if ($objRow === null)
-			{
-				return '';
-			}
-
-			// Apply the access restrictions in the front end only (see #5603)
-			if (TL_MODE == 'FE')
-			{
-				// Show to guests only
-				if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+				if ($objRow === null)
 				{
 					return '';
 				}
+			}
 
-				// Protected element
-				if (!BE_USER_LOGGED_IN && $objRow->protected)
-				{
-					if (!FE_USER_LOGGED_IN)
-					{
-						return '';
-					}
-
-					$this->import('FrontendUser', 'User');
-					$groups = deserialize($objRow->groups);
-
-					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
-					{
-						return '';
-					}
-				}
+			// Check the visibility (see #6311)
+			if (!static::isVisibleElement($objRow))
+			{
+				return '';
 			}
 
 			$strClass = \Module::findClass($objRow->type);
@@ -387,35 +366,17 @@ abstract class Controller extends \System
 			}
 
 			$objRow = \ArticleModel::findByIdOrAliasAndPid($varId, (!$blnIsInsertTag ? $objPage->id : null));
+
+			if ($objRow === null)
+			{
+				return false;
+			}
 		}
 
-		// Return if the article does not exist
-		if ($objRow === null)
-		{
-			return false;
-		}
-
-		// Show to guests only
-		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+		// Check the visibility (see #6311)
+		if (!static::isVisibleElement($objRow))
 		{
 			return '';
-		}
-
-		// Protected the element
-		if ($objRow->protected && !BE_USER_LOGGED_IN)
-		{
-			if (!FE_USER_LOGGED_IN)
-			{
-				return '';
-			}
-
-			$this->import('FrontendUser', 'User');
-			$groups = deserialize($objRow->groups);
-
-			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-			{
-				return '';
-			}
 		}
 
 		// Print the article as PDF
@@ -494,31 +455,10 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Apply the access restrictions in the front end only (see #5603)
-		if (TL_MODE == 'FE')
+		// Check the visibility (see #6311)
+		if (!static::isVisibleElement($objRow))
 		{
-			// Show to guests only
-			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
-			{
-				return '';
-			}
-
-			// Protected the element
-			if ($objRow->protected && !BE_USER_LOGGED_IN)
-			{
-				if (!FE_USER_LOGGED_IN)
-				{
-					return '';
-				}
-
-				$this->import('FrontendUser', 'User');
-				$groups = deserialize($objRow->groups);
-
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-				{
-					return '';
-				}
-			}
+			return '';
 		}
 
 		// Remove the spacing in the back end preview
@@ -672,6 +612,60 @@ abstract class Controller extends \System
 		}
 
 		return $image;
+	}
+
+
+	/**
+	 * Check whether an element is visible in the front end
+	 *
+	 * @param \Model $objElement The element model
+	 *
+	 * @return boolean True if the element is visible
+	 */
+	public static function isVisibleElement(\Model $objElement)
+	{
+		// Only apply the restrictions in the front end
+		if (TL_MODE != 'FE' || BE_USER_LOGGED_IN)
+		{
+			return true;
+		}
+
+		$blnReturn = true;
+
+		// Protected element
+		if ($objElement->protected)
+		{
+			if (!FE_USER_LOGGED_IN)
+			{
+				$blnReturn = false;
+			}
+			else
+			{
+				$groups = deserialize($objElement->groups);
+
+				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
+				{
+					$blnReturn = false;
+				}
+			}
+		}
+
+		// Show to guests only
+		elseif ($objElement->guests && FE_USER_LOGGED_IN)
+		{
+			$blnReturn = false;
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['isVisibleElement']) && is_array($GLOBALS['TL_HOOKS']['isVisibleElement']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['isVisibleElement'] as $callback)
+			{
+				$blnReturn = static::importStatic($callback[0])->$callback[1]($objElement, $objReturn);
+			}
+		}
+
+		return $blnReturn;
 	}
 
 
