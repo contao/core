@@ -539,7 +539,7 @@ abstract class Frontend extends \Controller
 	 * @param string
 	 * @return array
 	 */
-	protected function getMetaData($strData, $strLanguage)
+	public static function getMetaData($strData, $strLanguage)
 	{
 		$arrData = deserialize($strData);
 
