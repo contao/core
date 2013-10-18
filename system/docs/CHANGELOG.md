@@ -5,6 +5,9 @@ Version 3.1.5 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Also update the sitemap if a news/event feed is updated (see #5727).
+
+### Fixed
 Correctly sort by date in the listing module (see #5609).
 
 ### Fixed
