@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Correctly handle "toggle visibility" and drag and drop requests via Ajax.
+
 ### Improved
 Correctly display nested wrapper elements (see #5976).
 
@@ -133,9 +136,6 @@ Removed the TinyMCE spell checker (see #6247).
 
 ### Improved
 Do not show dates in the past if a recurring event has not expired (see #923).
-
-### Fixed
-Correctly handle "toggle visibility" requests via Ajax.
 
 ### New
 Pass the ID of the `tl_undo` record to the "ondelete_callback" (see #6234).

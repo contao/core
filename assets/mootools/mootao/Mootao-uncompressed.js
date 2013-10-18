@@ -30,7 +30,8 @@ Request.Contao = new Class(
 	Extends: Request.JSON,
 
 	options: {
-		'url': window.location.href
+		followRedirects: true,
+		url: window.location.href
 	},
 
 	initialize: function(options) {
@@ -47,7 +48,7 @@ Request.Contao = new Class(
 		var url = this.getHeader('X-Ajax-Location'),
 			json;
 
-		if (url) {
+		if (url && this.options.followRedirects) {
 			location.replace(url);
 			return;
 		}
