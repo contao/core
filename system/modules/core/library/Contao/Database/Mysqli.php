@@ -178,14 +178,14 @@ class Mysqli extends \Database
 			$arrReturn[] = $arrTmp;
 		}
 
-		$arrIndexes = $this->query("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+		$objIndex = $this->query("SHOW INDEXES FROM `$strTable`");
 
-		foreach ($arrIndexes as $arrIndex)
+		while ($objIndex->next())
 		{
-			$arrReturn[$arrIndex['Key_name']]['name'] = $arrIndex['Key_name'];
-			$arrReturn[$arrIndex['Key_name']]['type'] = 'index';
-			$arrReturn[$arrIndex['Key_name']]['index_fields'][] = $arrIndex['Column_name'];
-			$arrReturn[$arrIndex['Key_name']]['index'] = (($arrIndex['Non_unique'] == 0) ? 'UNIQUE' : 'KEY');
+			$arrReturn[$objIndex->Key_name]['name'] = $objIndex->Key_name;
+			$arrReturn[$objIndex->Key_name]['type'] = 'index';
+			$arrReturn[$objIndex->Key_name]['index_fields'][] = $objIndex->Column_name;
+			$arrReturn[$objIndex->Key_name]['index'] = (($objIndex->Non_unique == 0) ? 'UNIQUE' : 'KEY');
 		}
 
 		return $arrReturn;

@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Handle tables without keys in `Database::listFields()` (see #6310).
+
+### Fixed
 Allow FAQ categories without a redirect page (see #6226).
 
 ### Fixed
