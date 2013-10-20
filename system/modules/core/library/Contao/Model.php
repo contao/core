@@ -690,7 +690,7 @@ abstract class Model
 				$arrOptions
 			);
 
-			$arrMissing = static::find($arrOptions);
+			$arrMissing = static::find($arrOptions)?:array();
 
 			foreach ($arrMissing as $objModel)
 			{
