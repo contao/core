@@ -18,13 +18,16 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       background:#e3e3e3;
     }
     #container {
-      width:640px;
+      max-width:640px;
       margin:10% auto 2em;
       text-align:center;
       background:#fff;
       border:1px solid #ccc;
       border-radius:6px;
       padding:4em 6px 6px;
+    }
+    #container h1 {
+      color:#6d2000;
     }
     #container p {
       background:#f6f6f6;
@@ -33,7 +36,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       padding:3em 1em;
       margin:4em 0 0;
       font-size:14px;
-      color:#444;
+      color:#666;
       line-height:1.5;
     }
     .hint {
