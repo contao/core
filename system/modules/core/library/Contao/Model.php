@@ -690,12 +690,15 @@ abstract class Model
 				$arrOptions
 			);
 
-			$arrMissing = static::find($arrOptions);
+			$objMissing = static::find($arrOptions);
 
-			foreach ($arrMissing as $objModel)
+			if ($objMissing !== null)
 			{
-				$intId = $objModel->{static::$strPk};
-				$arrRegistered[$intId] = $objModel;
+				while ($objMissing->next())
+				{
+					$intId = $objMissing->{static::$strPk};
+					$arrRegistered[$intId] = $objMissing->current();
+				}
 			}
 		}
 
