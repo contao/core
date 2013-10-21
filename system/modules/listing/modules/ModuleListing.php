@@ -80,6 +80,7 @@ class ModuleListing extends \Module
 
 		$this->strTemplate = $this->list_layout;
 		$this->list_where = $this->replaceInsertTags($this->list_where);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
 
 		return parent::generate();
 	}
@@ -105,8 +106,15 @@ class ModuleListing extends \Module
 		 * Add the search menu
 		 */
 		$strWhere = '';
+		$strOuterWhere = '';
 		$varKeyword = '';
 		$strOptions = '';
+
+		// moved in front of search args, added () to protect OR, see #6337
+		if ($this->list_where)
+		{
+			$strWhere .= " WHERE (" . $this->list_where . ")";
+		}
 
 		$this->Template->searchable = false;
 		$arrSearchFields = trimsplit(',', $this->list_search);
@@ -117,8 +125,31 @@ class ModuleListing extends \Module
 
 			if (\Input::get('search') && \Input::get('for'))
 			{
+				$searchCol = \Input::get('search');
 				$varKeyword = '%' . \Input::get('for') . '%';
-				$strWhere = (!$this->list_where ? " WHERE " : " AND ") . \Input::get('search') . " LIKE ?";
+
+				// try to determine if search column is virtual, see #6337
+				// algorithm is a bit daring but worked for many test cases
+				$strCols =  ',' . $this->list_fields . ',';
+				// eliminate (...), instead of a risky loop do 3x:
+					$strCols = preg_replace('/[a-zA-Z0-9_]*\([^()]*\)/', 'X', $strCols);
+					$strCols = preg_replace('/[a-zA-Z0-9_]*\([^()]*\)/', 'X', $strCols);
+					$strCols = preg_replace('/[a-zA-Z0-9_]*\([^()]*\)/', 'X', $strCols);
+				$strCols = preg_replace('/,\s*/', ',', strrev($strCols));
+				$strCols = preg_replace('/,"?([a-z0-9_]+)"? +/i', ',!\1!', $strCols);
+				$strCols = utf8_strtolower(strrev($strCols));
+				$searchCol = utf8_strtolower($searchCol);
+				if (preg_match_all('/!([^!]+)!,/', $strCols, $arrVcols) > 0)
+				{
+					if (in_array($searchCol, $arrVcols[1]))
+					{
+						$strOuterWhere = " WHERE "  . \Input::get('search') . " LIKE ?";
+					}
+				}
+				if (!$strOuterWhere)
+				{
+					$strWhere .= (!$strWhere ? " WHERE " : " AND ") . \Input::get('search') . " LIKE ?";
+				}
 			}
 
 			foreach ($arrSearchFields as $field)
@@ -133,14 +164,15 @@ class ModuleListing extends \Module
 		/**
 		 * Get the total number of records
 		 */
-		$strQuery = "SELECT COUNT(*) AS count FROM " . $this->list_table;
-
-		if ($this->list_where)
+		$strQuery = "SELECT COUNT(*) AS count FROM ";
+		if ($strOuterWhere)
 		{
-			$strQuery .= " WHERE " . $this->list_where;
+			$strQuery .= "(SELECT " . $this->list_fields . " FROM " . $this->list_table . $strWhere . ") t " . $strOuterWhere;
 		}
-
-		$strQuery .=  $strWhere;
+		else
+		{
+			$strQuery .= $this->list_table . $strWhere;
+		}
 		$objTotal = $this->Database->prepare($strQuery)->execute($varKeyword);
 
 
@@ -173,14 +205,24 @@ class ModuleListing extends \Module
 		/**
 		 * Get the selected records
 		 */
-		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields . " FROM " . $this->list_table;
+		// help detect PK in column list - may fail if PK is used in function argument
+		// in simple SELECT, double ID col is tolerated, not so if subselect is used
+		$tmpFields = trimsplit(',', $this->list_fields);
+		$blnPkInList = in_array($this->strPk, $tmpFields) && $strOuterWhere;
 
-		if ($this->list_where)
+		$strDetailHint = '';
+
+		if ($this->list_info_where && $this->list_info)
 		{
-			$strQuery .= " WHERE " . $this->list_where;
+			// add virtual column to tell if detail link needed
+			$strDetailHint = ",(SELECT 1 FROM " . $this->list_table . " b WHERE b.id = a.id AND " . $this->list_info_where . ") as _detail_hint";
 		}
-
-		$strQuery .=  $strWhere;
+		$strQuery = "SELECT " . ($blnPkInList ? "" : $this->strPk . ",") . $this->list_fields . $strDetailHint . " FROM " . $this->list_table ." a" . $strWhere;
+		// take care of search for virtual column (see #6337)
+		if ($strOuterWhere)
+		{
+			$strQuery = "SELECT * FROM (" . $strQuery .") t " . $strOuterWhere;
+		}
 
 		// Order by
 		if (\Input::get('order_by'))
@@ -231,20 +273,66 @@ class ModuleListing extends \Module
 		 */
 		$arrTh = array();
 		$arrTd = array();
-		$arrFields = trimsplit(',', $this->list_fields);
+		$arrFields = array();			// will collect the column names/aliases, see #6337
+
+		$j = 0;
+		$arrRows = $objData->fetchAllAssoc();
+
+		// TBODY.
+		for ($i=0, $c=count($arrRows); $i<$c; $i++)
+		{
+			$j = 0;
+			$class = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i + 1) == count($arrRows)) ? ' row_last' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
+
+			$blnDetailHint = empty($strDetailHint) || !empty($arrRows[$i]['_detail_hint']);
+
+			foreach ($arrRows[$i] as $k=>$v)
+			{
+				// Skip the primary key
+				if ($k == $this->strPk && !in_array($this->strPk, $tmpFields))
+				{
+					continue;
+				}
+
+				// Never show passwords
+				if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
+				{
+					continue;
+				}
+
+				// skip the detail hint (see #6332)
+				if ($k == '_detail_hint')
+				{
+					continue;
+				}
+
+				// collect column names for header (see #6337)
+				if ($i == 0)
+				{
+					$arrFields[] =$k;
+				}
+
+				$value = $this->formatValue($k, $v);
+
+				$arrTd[$class][$k] = array
+				(
+					'raw' => $v,
+					'content' => ($value ? $value : '&nbsp;'),
+					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')) . (is_numeric($v)? ' numeric' : ''),
+					'id' => $arrRows[$i][$this->strPk],
+					'field' => $k,
+					'url' => $blnDetailHint ? $strUrl . $strVarConnector . 'show=' . $arrRows[$i][$this->strPk] : ''
+				);
+			}
+		}
 
 		// THEAD
+		// uses collected column names from TBODY
 		for ($i=0, $c=count($arrFields); $i<$c; $i++)
 		{
-			// Never show passwords
-			if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['inputType'] == 'password')
-			{
-				continue;
-			}
-
 			$class = '';
 			$sort = 'asc';
-			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : $arrFields[$i];
+			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : ucfirst($arrFields[$i]);
 
 			// Add a CSS class to the order_by column
 			if (\Input::get('order_by') == $arrFields[$i])
@@ -262,46 +350,8 @@ class ModuleListing extends \Module
 			);
 		}
 
-		$j = 0;
-		$arrRows = $objData->fetchAllAssoc();
-
-		// TBODY
-		for ($i=0, $c=count($arrRows); $i<$c; $i++)
-		{
-			$j = 0;
-			$class = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i + 1) == count($arrRows)) ? ' row_last' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
-
-			foreach ($arrRows[$i] as $k=>$v)
-			{
-				// Skip the primary key
-				if ($k == $this->strPk && !in_array($this->strPk, $arrFields))
-				{
-					continue;
-				}
-
-				// Never show passwords
-				if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
-				{
-					continue;
-				}
-
-				$value = $this->formatValue($k, $v);
-
-				$arrTd[$class][$k] = array
-				(
-					'raw' => $v,
-					'content' => ($value ? $value : '&nbsp;'),
-					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
-					'id' => $arrRows[$i][$this->strPk],
-					'field' => $k,
-					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i][$this->strPk]
-				);
-			}
-		}
-
 		$this->Template->thead = $arrTh;
 		$this->Template->tbody = $arrTd;
-
 
 		/**
 		 * Pagination
@@ -347,9 +397,13 @@ class ModuleListing extends \Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->list_info = deserialize($this->list_info);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+		##$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
+		$objRecord = $this->Database->prepare("  SELECT " . $this->list_info
+			. " FROM " . $this->list_table
+			. " WHERE " . (($this->list_info_where != '')
+					? "(" . $this->list_info_where . ") AND "
+					: "") . $this->strPk . "=?")
 									->limit(1)
 									->execute($id);
 
