@@ -1347,6 +1347,15 @@ abstract class Widget extends \Controller
 			}
 		}
 
+		if (is_array($GLOBALS['TL_HOOKS']['getAttributesFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAttributesFromDca'] as $callback)
+			{
+				$this->import($callback[0]);
+				$arrAttributes = $this->$callback[0]->$callback[1]($arrAttributes, $objDca);
+			}
+		}
+
 		return $arrAttributes;
 	}
 }
