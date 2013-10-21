@@ -94,7 +94,7 @@ in your custom extension, be sure to adjust the code accordingly.
 Usage in Contao 3.0 and 3.1:
 
 ```php
-$objPage = PageModel::findByPK(1);
+$objPage = PageModel::findByPk(1);
 $objPage->title = 'New page title';
 $objPage->save(true);
 ```
@@ -102,7 +102,7 @@ $objPage->save(true);
 New usage as of Contao 3.2:
 
 ```php
-$objPage = PageModel::findByPK(1);
+$objPage = PageModel::findByPk(1);
 $objCopy = clone $objPage;
 $objCopy->title = 'New page title';
 $objCopy->save();
