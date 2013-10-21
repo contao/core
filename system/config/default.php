@@ -263,13 +263,11 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *
  *   showHelp    = show a help text after each input field
  *   thumbnails  = show image thumbnails in the file manager
- *   debugMode   = debug the system and print results to the screen
  *   useRTE      = use the rich text editor (TinyMCE)
  *   useCE       = use the code editor (ACE)
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;
-$GLOBALS['TL_CONFIG']['debugMode']  = false;
 $GLOBALS['TL_CONFIG']['useRTE']     = true;
 $GLOBALS['TL_CONFIG']['useCE']      = true;
 
@@ -346,3 +344,5 @@ $GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
 $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
 $GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
 $GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';
+$GLOBALS['TL_CONFIG']['debugMode']            = false;
+$GLOBALS['TL_CONFIG']['maintenanceMode']      = false;

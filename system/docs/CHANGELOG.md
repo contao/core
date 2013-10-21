@@ -4,6 +4,10 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### New
+Add the "maintenance mode" and automatically enable it when an extension is
+installed, upgraded or removed (see #4561).
+
 ### Fixed
 Correctly handle "toggle visibility" and drag and drop requests via Ajax.
 

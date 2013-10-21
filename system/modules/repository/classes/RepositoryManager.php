@@ -47,6 +47,11 @@ class RepositoryManager extends RepositoryBackendModule
 			array('update',			'repository_mgrupdt',		'update'	),
 			array('uninstall',		'repository_mgruist',		'uninstall'	)
 		);
+		// Switch to maintenance mode (see #4561)
+		if (Input::post('repository_action') == 'install' || Input::post('repository_action') == 'uninstall') {
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+			$this->Config->save();
+		}
 		return parent::generate();
 	} // generate
 

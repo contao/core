@@ -58,6 +58,9 @@
       <?php if ($this->isCoreOnlyMode): ?>
         <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->coreOnlyHref; ?>" class="tl_submit"><?php echo $this->coreOnlyOff; ?></a><?php endif; ?><?php echo $this->coreOnlyMode; ?></p>
       <?php endif; ?>
+      <?php if ($this->isMaintenanceMode): ?>
+        <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->maintenanceHref; ?>" class="tl_submit"><?php echo $this->maintenanceOff; ?></a><?php endif; ?><?php echo $this->maintenanceMode; ?></p>
+      <?php endif; ?>
       <?php if ($this->needsCacheBuild): ?>
         <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->buildCacheHref; ?>" class="tl_submit"><?php echo $this->buildCacheLink; ?></a><?php endif; ?><?php echo $this->buildCacheText; ?></p>
       <?php endif; ?>

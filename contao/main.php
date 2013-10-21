@@ -82,6 +82,13 @@ class Main extends Backend
 				$this->redirect($this->getReferer());
 			}
 
+			// Maintenance mode off
+			if (Input::get('mmo'))
+			{
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", false);
+				$this->redirect($this->getReferer());
+			}
+
 			// Build internal cache
 			if (Input::get('bic'))
 			{
@@ -234,9 +241,13 @@ class Main extends Backend
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
-		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
+		$this->Template->isMaintenanceMode = $GLOBALS['TL_CONFIG']['maintenanceMode'];
+		$this->Template->maintenanceMode = $GLOBALS['TL_LANG']['MSC']['maintenanceMode'];
+		$this->Template->maintenanceOff = specialchars($GLOBALS['TL_LANG']['MSC']['maintenanceOff']);
+		$this->Template->maintenanceHref = $this->addToUrl('mmo=1');
 		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
 		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
+		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
 		$this->Template->isPopup = Input::get('popup');
 
 		// Hide the cache message in the repository manager (see #5966)

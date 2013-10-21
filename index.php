@@ -52,6 +52,13 @@ class Index extends Frontend
 	 */
 	public function run()
 	{
+		// Maintenance mode (see #4561)
+		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !BE_USER_LOGGED_IN)
+		{
+			header('HTTP/1.1 503 Service Unavailable');
+			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+		}
+
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
