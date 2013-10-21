@@ -7,7 +7,7 @@ Version 3.1 to 3.2
 ### buttons_callback
 
 The "buttons_callback" was introduced in Contao 3.0 to add custom buttons when
-selecting multiple records for editing. In Contao 3.2, this behavior has been
+selecting multiple records for editing. In Contao 3.2 this behavior has been
 enhanced in a way that not only the selection buttons but any button set can be
 altered as well as existing buttons can be removed.
 
