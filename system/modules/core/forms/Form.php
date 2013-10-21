@@ -46,12 +46,6 @@ class Form extends \Hybrid
 	 */
 	protected $strTemplate = 'form';
 
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
-
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
