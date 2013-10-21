@@ -5,6 +5,9 @@ Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
 ### New
+Added the "getAttributesFromDca" hook (see #6340).
+
+### New
 Add the "maintenance mode" and automatically enable it when an extension is
 installed, upgraded or removed (see #4561).
 

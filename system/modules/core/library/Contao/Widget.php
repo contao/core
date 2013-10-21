@@ -1330,6 +1330,15 @@ abstract class Widget extends \Controller
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getAttributesFromDca']) && is_array($GLOBALS['TL_HOOKS']['getAttributesFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAttributesFromDca'] as $callback)
+			{
+				$arrAttributes = static::importStatic($callback[0])->$callback[1]($arrAttributes, $objDca);
+			}
+		}
+
 		return $arrAttributes;
 	}
 }
