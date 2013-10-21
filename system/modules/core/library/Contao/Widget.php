@@ -1330,6 +1330,32 @@ abstract class Widget extends \Controller
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
+		// Call the field_callback to set custom attributes
+		if (is_array($arrData['attributes_callback']))
+		{
+			foreach ($arrData['attributes_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrAttributes = $this->$callback[0]->$callback[1]($arrAttributes, $objDca);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrAttributes = $callback($arrAttributes, $objDca);
+				}
+			}
+		}
+
+		if (is_array($GLOBALS['TL_HOOKS']['getAttributesFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAttributesFromDca'] as $callback)
+			{
+				$this->import($callback[0]);
+				$arrAttributes = $this->$callback[0]->$callback[1]($arrAttributes, $objDca);
+			}
+		}
+
 		return $arrAttributes;
 	}
 }
