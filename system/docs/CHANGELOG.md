@@ -5,6 +5,9 @@ Version 3.1.5 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle shorthand byte values (see #6345).
+
+### Fixed
 Also update the sitemap if a news/event feed is updated (see #5727).
 
 ### Fixed
