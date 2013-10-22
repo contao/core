@@ -254,15 +254,15 @@ class FileUpload extends \Backend
 		$upload_max_filesize = ini_get('upload_max_filesize');
 
 		// Convert the value to bytes
-		if (strpos($upload_max_filesize, 'K') !== false)
+		if (stripos($upload_max_filesize, 'K') !== false)
 		{
 			$upload_max_filesize = round($upload_max_filesize * 1024);
 		}
-		elseif (strpos($upload_max_filesize, 'M') !== false)
+		elseif (stripos($upload_max_filesize, 'M') !== false)
 		{
 			$upload_max_filesize = round($upload_max_filesize * 1024 * 1024);
 		}
-		elseif (strpos($upload_max_filesize, 'G') !== false)
+		elseif (stripos($upload_max_filesize, 'G') !== false)
 		{
 			$upload_max_filesize = round($upload_max_filesize * 1024 * 1024 * 1024);
 		}
