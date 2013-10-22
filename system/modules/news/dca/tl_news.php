@@ -356,7 +356,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
-			'options'                 => array('default', 'internal', 'article', 'external'),
+			'options_callback'        => array('tl_news', 'getSourceOptions'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news'],
 			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true),
 			'sql'                     => "varchar(12) NOT NULL default ''"
@@ -681,6 +681,49 @@ class tl_news extends Backend
 		}
 
 		return $arrAlias;
+	}
+
+
+	/**
+	 * Add the source options depending on the allowed fields (see #5498)
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getSourceOptions(DataContainer $dc)
+	{
+		if ($this->User->isAdmin)
+		{
+			return array('default', 'internal', 'article', 'external');
+		}
+
+		$arrOptions = array('default');
+
+		// Add the "internal" option
+		if ($this->User->hasAccess('tl_news::jumpTo', 'alexf'))
+		{
+			$arrOptions[] = 'internal';
+		}
+
+		// Add the "article" option
+		if ($this->User->hasAccess('tl_news::articleId', 'alexf'))
+		{
+			$arrOptions[] = 'article';
+		}
+
+		// Add the "external" option
+		if ($this->User->hasAccess('tl_news::url', 'alexf') && $this->User->hasAccess('tl_news::target', 'alexf'))
+		{
+			$arrOptions[] = 'external';
+		}
+
+		// Add the option currently set
+		if ($dc->activeRecord && $dc->activeRecord->source != '')
+		{
+			$arrOptions[] = $dc->activeRecord->source;
+			$arrOptions = array_unique($arrOptions);
+		}
+
+		return $arrOptions;
 	}
 
 

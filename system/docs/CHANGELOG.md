@@ -4,6 +4,10 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Improved
+Only show the news/event source options if the user is allowed to access the
+fields required to configure those options (see #5498).
+
 ### New
 Added the "getAttributesFromDca" hook (see #6340).
 
