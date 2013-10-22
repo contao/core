@@ -79,7 +79,7 @@ class ModuleLoader
 	/**
 	 * Scan the modules and resolve their dependencies
 	 *
-	 * @throws \Exception If the dependencies cannot be resolved
+	 * @throws \UnresolvableDependenciesException If the dependencies cannot be resolved
 	 */
 	protected static function scanAndResolve()
 	{
@@ -177,7 +177,7 @@ class ModuleLoader
 					$buffer = ob_get_contents();
 					ob_end_clean();
 
-					throw new \Exception('The module dependencies could not be resolved: </strong>' . $buffer . '<strong>');
+					throw new \UnresolvableDependenciesException("The module dependencies could not be resolved.\n$buffer");
 				}
 			}
 		}

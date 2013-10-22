@@ -80,7 +80,19 @@ require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
 Config::preload(); // see #5872
-ClassLoader::scanAndRegister(); // config/autoload.php
+
+
+/**
+ * Try to load the modules
+ */
+try
+{
+	ClassLoader::scanAndRegister();
+}
+catch (UnresolvableDependenciesException $e)
+{
+	die($e->getMessage()); // see #6343
+}
 
 
 /**
