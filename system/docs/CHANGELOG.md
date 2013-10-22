@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.RC1 (2013-11-XX)
 ----------------------------
 
+### Fixed
+Add the "onclick" event to the "select all" checkbox (see #6314).
+
 ### Improved
 Only show the news/event source options if the user is allowed to access the
 fields required to configure those options (see #5498).
