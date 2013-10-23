@@ -129,6 +129,7 @@ namespace  {
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
 	class Session extends \Contao\Session {}
+	class SortedIterator extends \Contao\SortedIterator {}
 	class String extends \Contao\String {}
 	abstract class System extends \Contao\System {}
 	abstract class Template extends \Contao\Template {}
