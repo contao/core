@@ -233,6 +233,14 @@
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>データベースの問い合わせのような、特定の実行時の情報を画面に表示します。</target>
       </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>保守モード</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>フロントエンドで503のHTTPヘッダーを送り、保守中のページを表示します。</target>
+      </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
         <target>内部のキャッシュを無視</target>
@@ -600,6 +608,10 @@
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
         <target>機能拡張の停止</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>コマンドスケジューラー</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

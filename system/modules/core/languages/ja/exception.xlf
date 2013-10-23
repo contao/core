@@ -161,6 +161,14 @@ system/logs/error.log&lt;/code&gt;というファイルに記録しています�
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
         <target>ログインしていない場合は、&lt;a href=&quot;%s&quot;&gt;最上位に移動&lt;/a&gt;して、ログインフォームを探してください。ログインフォームがないか、既にログインしている場合は、&lt;a href=&quot;%s&quot;&gt;ウェブマスターに連絡&lt;/a&gt;して、何が問題があると知らせてください。</target>
       </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>しばらくお待ちください</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>ウェブサイトは保守のために停止中です。後ほどお出でください。</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

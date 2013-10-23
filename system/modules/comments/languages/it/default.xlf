@@ -58,7 +58,15 @@ View: %s
 Edit: %s
 
 If you are moderating comments, you have to log in to the back end to publish it.</source>
-        <target>%s ha creato un nuovo commento sul tuo sito web.⏎ ⏎ ---⏎ ⏎ %s⏎ ⏎ ---⏎ ⏎ Vedi: %s⏎ Modifica: %s⏎ ⏎ Se stai moderando i commenti, devi fare login nel back end per pubblicarlo.</target>
+        <target>%s ha creato un nuovo commento sul tuo sito web.
+---
+%s
+---
+
+Vedi: %s
+Modifica: %s
+
+Se stai moderando i commenti, devi fare login nel back end per pubblicarlo.</target>
       </trans-unit>
       <trans-unit id="MSC.com_confirm">
         <source>Your comment has been added and is now pending for approval.</source>

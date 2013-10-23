@@ -1755,6 +1755,14 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
         <source>Disable</source>
         <target>Deaktivieren</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao läuft momentan im &lt;strong&gt;Wartungsmodus&lt;/strong&gt;, in dem die Webseite (Frontend) nicht verfügbar ist. Deaktivieren Sie den Wartungsmodus nicht, wenn Sie gerade Erweiterungen installieren oder aktualisieren! Die Webseite würde unter Umständen nicht richtig funktionieren.</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Deaktivieren</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>Der &lt;strong&gt;interne Cache&lt;/strong&gt; wurde noch nicht aufgebaut, was sich nachteilig auf die Performance der Applikation auswirkt. Wenn Sie den internen Cache nicht nutzen möchten, können Sie ihn in den Backend-Einstellungen dauerhaft deaktivieren.</target>
@@ -1850,6 +1858,10 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabelle</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>Elterntabelle</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

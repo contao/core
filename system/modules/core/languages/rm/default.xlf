@@ -1545,6 +1545,7 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Telechargiar la datoteca</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
@@ -1754,6 +1755,14 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
         <source>Disable</source>
         <target>Deactivar</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao è actualmain en il &lt;strong&gt;modus da mantegniment&lt;/strong&gt;, en il qual la pagina d'internet (front-end) n'è betg disponibla. Na betg deactivar sche ti installeschas u actualiseschas gest extensiuns da terz! La pagina d'internet na funcziunescha forsa betg correctamain.</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Deactivar</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>Il &lt;strong&gt;cache intern&lt;/strong&gt; n'è anc betg vegnì creà. Crear il cache vegn a meglierar la prestaziun da l'applicaziun e vegn recumandà fermamain. Sche ti na vuls betg utilisar il cache pos ti deactivar el permanentamain en las opziuns dal back-end.</target>
@@ -1849,6 +1858,10 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabella</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>Tabella da genitur</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

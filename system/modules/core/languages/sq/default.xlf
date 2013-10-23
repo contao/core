@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
+        <target>Gabimi %s u shkaktua gjatë ngarikimit të skedës %s!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -150,6 +151,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Identifikmi dështoi (vëni re që emrat e përdoruesve dhe fjalëkalimet janë karaktere të ndjeshme)</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1546,9 +1548,11 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Shkarko sedarin</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
+        <target>ID unike</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1754,6 +1758,13 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
         <source>Disable</source>
         <target>Çaktivizo</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Çaktivizo</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>&lt;strong&gt; Cache i brendshëm &lt;/ strong&gt; ende nuk është ndërtuar. Ndërtimi i cache përmirësonë shpejtësinë e programit dhe është shumë i rekomanduar. Nëse ju nuk dëshironi të përdorni cache, ju mund të çaktivizoni përgjithmonë atë në parametrat e back end.</target>
@@ -1849,6 +1860,10 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabela</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>Tabelë prind</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

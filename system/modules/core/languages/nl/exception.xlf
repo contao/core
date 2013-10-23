@@ -157,6 +157,14 @@
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
         <target>Als u niet ingelogd bent, probeer dan &lt;a href=&quot;%s&quot;&gt;naar het top level te gaan&lt;/a&gt; en ga op zoek naar een inlogformulier. Indien er geen inlogformulier aanwezig is of u bent reeds ingelogd, &lt;a href=&quot;%s&quot;&gt; neem dan contact op met de webmaster&lt;/a&gt; en laat hem weten dat er iets niet in orde is.</target>
       </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>We zijn zo terug</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>De website is momenteel niet beschikbaar vanwege onderhoud. Kom later nog een keer terug.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

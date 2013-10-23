@@ -157,6 +157,14 @@
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
         <target>Sche ti n'ès betg annunzià, turna a &lt;a href=&quot;%s&quot;&gt;l'emprim livel&lt;/a&gt; e tschertga in formular da s'annunziar. Schi na dat nagin formular da s'annunziar u sche ti es gia annunzià, &lt;a href=&quot;%s&quot;&gt;contactescha il webmaster&lt;/a&gt; ed infurmescha el ch'insatge n'è betg correct.</target>
       </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Nus essan bainprest puspè online</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Questa pagina d'internet è actualmain deactivada per far lavurs da mantegniment. Ans visita en in per muments puspè.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -463,6 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.top">
         <source>Before the wrapper</source>
+        <target>Avant l'élément wrapper</target>
       </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
@@ -478,6 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.bottom">
         <source>After the wrapper</source>
+        <target>Après l'élément wrapper</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

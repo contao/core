@@ -339,7 +339,7 @@
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
-        <target>Contenu du slider</target>
+        <target>Slider de contenu</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStart.0">
         <source>Wrapper start</source>
@@ -395,7 +395,7 @@
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
-        <target>Génère une galerie d'image avec effet &quot;lightbox&quot;.</target>
+        <target>Génère une galerie d'images avec effet &quot;lightbox&quot;.</target>
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
@@ -1545,6 +1545,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Télécharger le fichier</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
@@ -1754,6 +1755,14 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Disable</source>
         <target>Désactivé</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao est actuellement en &lt;strong&gt;mode maintenance&lt;/strong&gt;, ce qui signifie que le site internet (front office) n'est pas disponible. Ne le désactiver pas si vous êtes en train d'installer ou mettre à niveau des extensions tierces ! Le site internet pourrait ne pas fonctionner correctement.</target>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Désactivé</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>Le &lt;strong&gt;cache interne&lt;/strong&gt; n'a pas encore été construit. Le cache améliore les performances de l'application et est fortement recommandé. Si vous ne voulez pas utiliser le cache, vous pouvez le désactiver de façon permanente dans la configuration du back office.</target>
@@ -1849,6 +1858,10 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Table</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
+        <target>Table parente</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

@@ -101,21 +101,26 @@
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Il s'agit de quelque chose qui doit être fixé par l'administrateur du site internet. Si vous êtes un visiteur, il n'y a rien que vous puissiez faire, à l'exception de &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; afin de lui faire savoir que quelque chose ne fonctionne pas correctement.</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>Aucune page racine trouvée</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Il n'existe aucune page racine d'un nouveau site qui correspond à la langue demandée et/ou à un nom de domaine.</target>
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>Aucune présentation de page spécifiée</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>La page que vous avez demandée n'a pas encore été associée à une présentation de page.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
@@ -134,6 +139,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Il est probable que le site internet est encore en cours de développement et sera en ligne dans quelques jours. Si vous pensez toujours que quelque chose ne fonctionne pas correctement, &lt;a href=&quot;%s&quot;&gt;contacter le webmaster&lt;/a&gt; et faites-le lui savoir.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
@@ -146,6 +152,14 @@
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
         <target>Si vous n'êtes pas connecté, essayez &lt;a href=&quot;%s&quot;&gt;de vous diriger vers la page d’accueil&lt;/a&gt; et cherchez un formulaire de connexion. S'il n'y en a pas ou si vous êtes déjà connecté, &lt;a href=&quot;%s&quot;&gt;contactez le webmaster&lt;/a&gt; afin de l'informer que quelque chose ne fonctionne pas correctement.</target>
+      </trans-unit>
+      <trans-unit id="XPT.unavailable">
+        <source>We'll be right back</source>
+        <target>Nous revenons tout de suite</target>
+      </trans-unit>
+      <trans-unit id="XPT.maintenance">
+        <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Le site est actuellement en maintenance. Veuillez s'il vous plaît y revenir plus tard.</target>
       </trans-unit>
     </body>
   </file>

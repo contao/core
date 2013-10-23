@@ -1751,6 +1751,13 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
         <source>Disable</source>
         <target>Desactivado</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Desactivado</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>La &lt;strong&gt; caché interna &lt;/strong&gt; no se ha construido todavía. La construcción de la memoria caché mejora el rendimiento de la aplicación y es muy recomendable. Si no desea utilizar la caché, la puedes desactivar permanentemente en la configuración del back-end.</target>
@@ -1846,6 +1853,9 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabla</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
