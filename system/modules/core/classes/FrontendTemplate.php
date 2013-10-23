@@ -53,6 +53,7 @@ class FrontendTemplate extends \Template
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
 	 * @param boolean
+	 * @throws \UnusedArgumentsException
 	 */
 	public function output($blnCheckRequest=false)
 	{

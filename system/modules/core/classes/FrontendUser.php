@@ -259,7 +259,7 @@ class FrontendUser extends \User
 	/**
 	 * Save the original group membership
 	 * @param string
-	 * @param integer
+	 * @param mixed
 	 * @return boolean
 	 */
 	public function findBy($strColumn, $varValue)

@@ -613,7 +613,7 @@ abstract class Backend extends \Controller
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param \DataContainer
+	 * @param DataContainer
 	 * @param string
 	 * @param boolean
 	 * @param boolean

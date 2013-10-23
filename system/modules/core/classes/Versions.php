@@ -429,7 +429,7 @@ class Versions extends \Backend
 
 	/**
 	 * Add a list of versions to a template
-	 * @param object
+	 * @param \BackendTemplate
 	 */
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
