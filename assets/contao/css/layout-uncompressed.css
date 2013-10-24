@@ -151,10 +151,8 @@ img {
 .custom {
     display:block;
 }
-#container:before,.custom:before,#container:after,.custom:after {
-    content:" ";
-    display:table;
-}
 #container:after,.custom:after {
+    content:"";
+    display:table;
     clear:both;
 }
