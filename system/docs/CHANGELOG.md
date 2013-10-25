@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.0 (2013-11-XX)
+--------------------------
+
+### Fixed
+Correctly mark checkboxes and radio buttons as mandatory (see #6352).
+
+
 Version 3.2.RC1 (2013-10-24)
 ----------------------------
 
