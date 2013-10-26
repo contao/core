@@ -161,6 +161,9 @@
       <trans-unit id="ERR.topLevelRoot">
         <source>Top-level pages must be website root pages!</source>
       </trans-unit>
+      <trans-unit id="ERR.noNestedRoot">
+        <source>Only top-level pages can be website root pages!</source>
+      </trans-unit>
       <trans-unit id="ERR.topLevelRegular">
         <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
       </trans-unit>
