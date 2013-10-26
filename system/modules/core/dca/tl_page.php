@@ -231,7 +231,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
 			'save_callback' => array
 			(
-				array('tl_page', 'checkRootType')
+				array('tl_page', 'checkRootType'),
+				array('tl_page', 'checkNonRootType')
 			),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -924,6 +925,24 @@ class tl_page extends Backend
 
 
 	/**
+	 * Make sure that only top-level pages are root pages, see #6360
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
+	*/
+	public function checkNonRootType($varValue, DataContainer $dc)
+	{
+		if ($varValue == 'root' && $dc->activeRecord->pid != 0)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['noNestedRoot']);
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Show a warning if there is no language fallback page
 	 */
 	public function showFallbackWarning()
@@ -1363,6 +1382,24 @@ class tl_page extends Backend
 				}
 			}
 		}
+                    
+		// Prevent adding root pages below root pages
+		if (Input::get('mode') != 'create')
+		{
+			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
+									    ->limit(1)
+									    ->execute(Input::get('id'));
+
+			if ($objPage->type == 'root' && $row['id'] != 0)
+			{
+				$disablePI = true;
+
+				if ($row['pid'] != 0)
+				{
+					$disablePA = true;
+				}
+			}
+		} 
 
 		// Check permissions if the user is not an administrator
 		if (!$this->User->isAdmin)
