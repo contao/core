@@ -174,6 +174,16 @@ class InstallTool extends Backend
 			$this->outputAndExit();
 		}
 
+		// Purge the internal cache (see #6357)
+		if (is_dir(TL_ROOT . '/system/cache/dca'))
+		{
+			foreach (array('config', 'dca', 'language', 'sql') as $dir)
+			{
+				$objFolder = new \Folder('system/cache/' . $dir);
+				$objFolder->delete();
+			}
+		}
+
 		// Set up the database connection
 		$this->setUpDatabaseConnection();
 

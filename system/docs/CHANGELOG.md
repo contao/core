@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Purge the internal cache in the install tool (see #6357).
+
+### Fixed
 Add all resize modes to the TinyMCE thumbnail image screen (see #6362).
 
 ### Fixed
