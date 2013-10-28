@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.0 (2013-11-XX)
 --------------------------
 
+### Updated
+Updated jQuery to version 1.10.1 and jQuery UI to version 1.10.3 (see #6367).
+
 ### Fixed
 Correctly link to FAQs using the "faq" insert tag.
 
