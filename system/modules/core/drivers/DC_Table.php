@@ -3325,7 +3325,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -3805,7 +3805,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -4367,7 +4367,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$result = $objRow->fetchAllAssoc();
 			$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').'

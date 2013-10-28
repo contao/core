@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Disable HTML5 form validation in "select multiple" mode (see #6354).
+
+### Fixed
 Convert binary UUIDs to their hex equivalents in the diff view (see #6365).
 
 ### Fixed
