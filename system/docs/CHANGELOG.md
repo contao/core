@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly link to FAQs using the "faq" insert tag.
+
+### Fixed
 Correctly mark checkboxes and radio buttons as mandatory (see #6352).
 
 
