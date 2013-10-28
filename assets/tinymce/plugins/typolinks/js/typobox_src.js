@@ -130,9 +130,11 @@ var Typobox = {
 		}
 		if (f.mode_list) {
 			tag += glue + 'mode=' + getSelectValue(f, "mode_list");
+			glue = '&amp;';
 		}
 		if (f.rel_list) {
 			tag += glue + 'rel=' + getSelectValue(f, "rel_list");
+			glue = '&amp;';
 		}
 
 		tag = '{{image::' + tag + '}}';

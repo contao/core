@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly add the parameters to the TinyMCE thumbnail image (see #6361).
+
+### Fixed
 Disable HTML5 form validation in "select multiple" mode (see #6354).
 
 ### Fixed
