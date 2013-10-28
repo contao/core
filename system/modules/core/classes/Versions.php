@@ -325,6 +325,16 @@ class Versions extends \Backend
 					}
 					unset($tmp);
 
+					// Convert binary UUIDs to their hex equivalents (see #6365)
+					if ($blnIsBinary && \Validator::isUuid($to[$k]))
+					{
+						$to[$k] = \String::binToUuid($to[$k]);
+					}
+					if ($blnIsBinary && \Validator::isUuid($from[$k]))
+					{
+						$to[$k] = \String::binToUuid($from[$k]);
+					}
+
 					// Convert date fields
 					if ($arrFields[$k]['eval']['rgxp'] == 'date')
 					{

@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Convert binary UUIDs to their hex equivalents in the diff view (see #6365).
+
+### Fixed
 Do not allow to create website root pages outside the root level (see #6360).
 
 ### Updated
