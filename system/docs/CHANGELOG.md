@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Set the blank option value of `tl_page.mobileLayout` to `0` (see #6373).
+
+### Fixed
 Purge the internal cache in the install tool (see #6357).
 
 ### Fixed
