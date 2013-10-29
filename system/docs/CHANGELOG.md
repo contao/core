@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Create a new version if an element type changes (see #6363).
+
+### Fixed
 Set the blank option value of `tl_page.mobileLayout` to `0` (see #6373).
 
 ### Fixed

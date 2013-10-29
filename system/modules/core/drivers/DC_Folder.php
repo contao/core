@@ -1252,7 +1252,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			// Save the current version
-			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+			if ($this->blnCreateNewVersion)
 			{
 				$objVersions->create();
 
@@ -1463,7 +1463,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 
 					// Create a new version
-					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+					if ($this->blnCreateNewVersion)
 					{
 						$objVersions->create();
 
@@ -1978,11 +1978,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$this->objActiveRecord->{$this->strField} = $varValue;
 				$this->objActiveRecord->save();
 
-				if (!$arrData['eval']['submitOnChange'])
-				{
-					$this->blnCreateNewVersion = true;
-				}
-
+				$this->blnCreateNewVersion = true;
 				$this->varValue = deserialize($varValue);
 			}
 		}

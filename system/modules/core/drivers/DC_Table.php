@@ -2013,7 +2013,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			// Save the current version
-			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+			if ($this->blnCreateNewVersion)
 			{
 				$objVersions->create();
 
@@ -2332,7 +2332,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 
 					// Create a new version
-					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+					if ($this->blnCreateNewVersion)
 					{
 						$objVersions->create();
 
@@ -2950,11 +2950,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			if ($objUpdateStmt->affectedRows)
 			{
-				if (!$arrData['eval']['submitOnChange'])
-				{
-					$this->blnCreateNewVersion = true;
-				}
-
+				$this->blnCreateNewVersion = true;
 				$this->varValue = deserialize($varValue);
 
 				if (is_object($this->objActiveRecord))
