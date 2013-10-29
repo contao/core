@@ -29,7 +29,7 @@ Convert binary UUIDs to their hex equivalents in the diff view (see #6365).
 Do not allow to create website root pages outside the root level (see #6360).
 
 ### Updated
-Updated jQuery to version 1.10.1 and jQuery UI to version 1.10.3 (see #6367).
+Updated jQuery to version 1.10.2 and jQuery UI to version 1.10.3 (see #6367).
 
 ### Fixed
 Correctly link to FAQs using the "faq" insert tag.
