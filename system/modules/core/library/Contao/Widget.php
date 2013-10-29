@@ -133,6 +133,12 @@ abstract class Widget extends \Controller
 	 */
 	protected $blnForAttribute = false;
 
+	/**
+	 * Data container
+	 * @var object
+	 */
+	protected $objDca;
+
 
 	/**
 	 * Initialize the object
@@ -1222,6 +1228,7 @@ abstract class Widget extends \Controller
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
 		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
+		$arrAttributes['objDca'] = $objDca;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
