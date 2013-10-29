@@ -1762,8 +1762,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$this->objActiveRecord = $objRow;
 		$this->checkForTinyMce();
-
-		$objVersions = new Versions($this->strTable, $this->intId);
+		$objVersions = new \Versions($this->strTable, $this->intId);
 		$objVersions->initialize();
 
 		// Build an array from boxes and rows
@@ -2188,7 +2187,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->blnCreateNewVersion = false;
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
 
-				$objVersions = new Versions($this->strTable, $this->intId);
+				$objVersions = new \Versions($this->strTable, $this->intId);
 				$objVersions->initialize();
 
 				// Add meta fields if the current user is an administrator
@@ -2577,7 +2576,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Store the active record
 					$this->objActiveRecord = $objRow;
 
-					$objVersions = new Versions($this->strTable, $this->intId);
+					$objVersions = new \Versions($this->strTable, $this->intId);
 					$objVersions->initialize();
 
 					// Store all fields

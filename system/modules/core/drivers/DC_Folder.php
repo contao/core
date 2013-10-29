@@ -1370,7 +1370,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->objActiveRecord = $objFile;
 				}
 
-				$objVersions = new Versions($this->strTable, $objFile->id);
+				$objVersions = new \Versions($this->strTable, $objFile->id);
 				$objVersions->initialize();
 
 				$return .= '

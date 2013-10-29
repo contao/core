@@ -109,7 +109,7 @@ class PageTree extends \Widget
 			// Only proceed if the value has changed
 			if ($arrNew !== $this->{$this->strOrderField})
 			{
-				$objVersions = new Versions($this->strTable, \Input::get('id'));
+				$objVersions = new \Versions($this->strTable, \Input::get('id'));
 				$objVersions->initialize();
 
 				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->strOrderField}=? WHERE id=?")
