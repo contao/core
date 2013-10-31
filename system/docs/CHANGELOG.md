@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Disable the maintenance mode if a back end user is logged in (see #6353).
+
+### Fixed
 Correctly detect Android tablets in the `Environment` class (see #5869).
 
 ### Fixed
