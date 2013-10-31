@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly detect Android tablets in the `Environment` class (see #5869).
+
+### Fixed
 Create a new version if an element type changes (see #6363).
 
 ### Fixed
