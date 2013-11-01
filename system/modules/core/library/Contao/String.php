@@ -463,6 +463,28 @@ class String
 
 
 	/**
+	 * Convert a string to the current output format (xhtml/html5)
+	 *
+	 * @param string $strString The string
+	 *
+	 * @return string The string
+	 */
+	public static function toOutputFormat($strString)
+	{
+		global $objPage;
+
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			return static::toXhtml($strString);
+		}
+		else
+		{
+			return static::toHtml5($strString);
+		}
+	}
+
+
+	/**
 	 * Parse simple tokens that can be used to personalize newsletters
 	 *
 	 * @param string $strString The string to be parsed
