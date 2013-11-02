@@ -576,7 +576,7 @@ h2.sub_headline_index {
 .tl_content pre {
 	margin-top:3px;
 	margin-bottom:3px;
-	word-break:break-word;
+	word-break:break-all;
 	white-space:pre-wrap;
 }
 .tl_content pre.disabled {
