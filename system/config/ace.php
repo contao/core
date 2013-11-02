@@ -28,10 +28,12 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 			case 'css':
 			case 'diff':
 			case 'html':
+			case 'ini':
 			case 'java':
 			case 'json':
 			case 'php':
 			case 'sql':
+			case 'mysql':
 			case 'xml':
 			case 'yaml':
 				// nothing to do

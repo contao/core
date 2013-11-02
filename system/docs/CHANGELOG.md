@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Fixed the ACE version number and added an inverted theme (see #6101).
+
+### Fixed
 Correctly handle "includeBlankOption" and numeric columns (see #6373).
 
 ### Fixed
