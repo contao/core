@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly handle "includeBlankOption" and numeric columns (see #6373).
+
+### Fixed
 Correctly detect IE11 in the `Environment::agent()` method (see #6378).
 
 ### Fixed
@@ -15,9 +18,6 @@ Correctly detect Android tablets in the `Environment` class (see #5869).
 
 ### Fixed
 Create a new version if an element type changes (see #6363).
-
-### Fixed
-Set the blank option value of `tl_page.mobileLayout` to `0` (see #6373).
 
 ### Fixed
 Purge the internal cache in the install tool (see #6357).

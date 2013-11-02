@@ -477,7 +477,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_layout.name',
 			'options_callback'        => array('tl_page', 'getPageLayouts'),
-			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
@@ -1237,18 +1237,18 @@ class tl_page extends Backend
 
 	/**
 	 * Return all page layouts grouped by theme
-	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getPageLayouts(DataContainer $dc)
+	public function getPageLayouts()
 	{
-		$return = ($dc->field == 'mobileLayout') ? array(0 => '-') : array(); // see #6373
 		$objLayout = $this->Database->execute("SELECT l.id, l.name, t.name AS theme FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id ORDER BY t.name, l.name");
 
 		if ($objLayout->numRows < 1)
 		{
-			return $return;
+			return array();
 		}
+
+		$return = array();
 
 		while ($objLayout->next())
 		{

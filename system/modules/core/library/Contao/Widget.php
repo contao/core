@@ -1306,8 +1306,22 @@ abstract class Widget extends \Controller
 
 			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
 			{
+				$value = '';
+
+				// Set to 0 for numeric columns (see #6373)
+				if (isset($arrData['sql']))
+				{
+					$type = substr($arrData['sql'], 0, strpos($arrData['sql'], '('));
+					$numeric = array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal');
+
+					if (in_array(strtolower($type), $numeric))
+					{
+						$value = 0;
+					}
+				}
+
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrAttributes['options'][] = array('value'=>'', 'label'=>$strLabel);
+				$arrAttributes['options'][] = array('value'=>$value, 'label'=>$strLabel);
 			}
 
 			foreach ($arrData['options'] as $k=>$v)
