@@ -52,22 +52,22 @@ th,td {
 	font-size:9px;
 }
 .tl_small,.tl_gray {
-	color:#a3a3a3;
+	color:#999;
 }
 .tl_green {
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_red {
-	color:#c55;
+	color:#c33;
 }
 .tl_blue {
-	color:#5c9ac9;
+	color:#4b85ba;
 }
 .tl_orange {
 	color:#f90;
 }
 span.mandatory {
-	color:#c55;
+	color:#c33;
 }
 
 /* Basic elements */
@@ -76,7 +76,7 @@ a {
 	text-decoration:none;
 }
 a:hover,a:focus,a:active {
-	color:#8ab858;
+	color:#77ac45;
 }
 hr {
 	height:1px;
@@ -169,7 +169,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 	width:150px;
 }
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:2px 3px;
 	border-radius:3px;
 }
@@ -211,7 +211,7 @@ pre,.tl_textarea.monospace {
 	width:156px;
 }
 .tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:1px;
 	border-radius:3px;
 }
@@ -320,7 +320,7 @@ pre,.tl_textarea.monospace {
 /* Submit buttons */
 .tl_submit {
 	padding:5px 12px 5px 13px;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	border-radius:3px;
 	color:#555;
 	cursor:pointer;

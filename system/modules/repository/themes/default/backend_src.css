@@ -10,9 +10,9 @@
 .mod_repository .middle, .mod_repository .middle * { vertical-align:middle; }
 .mod_repository table.nested { width:100%; margin:0; border:0; }
 .mod_repository table td.nopadding { vertical-align:top; padding:0px !important;}
-.color_green { color:#8ab858; }
-.color_red { color:#c55; }
-.color_blue { color:#5c9ac9; }
+.color_green { color:#77ac45; }
+.color_red { color:#c33; }
+.color_blue { color:#4b85ba; }
 .color_darkorange { color:#f90; }
 
 /* Extension list */
@@ -44,7 +44,7 @@
 	display:block;
 	float:left;
 }
-.mod_repository table tr.title span.leftblock a { color:#8ab858 !important; }
+.mod_repository table tr.title span.leftblock a { color:#77ac45 !important; }
 .mod_repository table tr.title span.rightblock { display:block; float:right; }
 .mod_repository table tr.description td { padding-top:8px; padding-bottom:10px; line-height:1.3; }
 .mod_repository table tr.info th, .mod_repository table tr.info td { border-top:1px solid #fff; font-size:10px; }

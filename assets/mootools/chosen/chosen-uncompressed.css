@@ -62,7 +62,7 @@ select.chzn-select {
   -moz-background-clip   : padding;
   -webkit-background-clip: padding-box;
   background-clip        : padding-box;
-  border: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border: 1px solid #aaa;
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -111,7 +111,7 @@ select.chzn-select {
   background-image: -ms-linear-gradient(top, #cccccc 0%,#eeeeee 60%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#eeeeee', GradientType=0);
   background-image: linear-gradient(top, #cccccc 0%,#eeeeee 60%);
-  border-left: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border-left: 1px solid #aaa;
   position: absolute;
   right: 0;
   top: 0;
@@ -141,7 +141,7 @@ select.chzn-select {
   margin: 1px 0;
   padding: 4px 20px 4px 5px;
   outline: 0;
-  border: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border: 1px solid #aaa;
   /* PATCH
   font-family: sans-serif;
   font-size: 1em;
@@ -175,7 +175,7 @@ select.chzn-select {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
   background-image: linear-gradient(top, #ffffff 85%,#eeeeee 99%);
   */
-  border: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border: 1px solid #aaa;
   margin: 0;
   padding: 0;
   cursor: text;
@@ -324,7 +324,7 @@ select.chzn-select {
   border: 1px solid #5897fb;
 } */
 .chzn-container-active .chzn-single-with-drop {
-  border: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border: 1px solid #aaa;
   -webkit-box-shadow: 0 1px 0 #fff inset;
   -moz-box-shadow   : 0 1px 0 #fff inset;
   -o-box-shadow     : 0 1px 0 #fff inset;
@@ -378,7 +378,7 @@ select.chzn-select {
 .chzn-rtl .chzn-single div {
   left: 0; right: auto;
   border-left: none;
-  border-right: 1px solid #b8b8b8; /* PATCH: #b8b8b8 instead of #aaa */
+  border-right: 1px solid #aaa;
   /* PATCH: 3px instead of 4px */
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius   : 3px 0 0 3px;

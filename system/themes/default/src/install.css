@@ -63,7 +63,7 @@ body {
 	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
 	font-weight:bold;
-	color:#c55;
+	color:#c33;
 }
 #container h3 {
 	margin:0;
@@ -127,7 +127,7 @@ li {
 .tl_col_0 {
 	padding:6px 0 2px;
 	font-weight:bold;
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_col_1 {
 	vertical-align:top;
@@ -142,16 +142,16 @@ li {
 	padding:2px 0 3px 20px;
 }
 .tl_error {
-	color:#c55;
-	background:url("images/error.gif") no-repeat left center;
+	color:#c33;
+	background:url("images/error.gif") no-repeat left 1px;
 }
 .tl_confirm {
-	color:#8ab858;
-	background:url("images/ok.gif") no-repeat left center;
+	color:#77ac45;
+	background:url("images/ok.gif") no-repeat left 1px;
 }
 .tl_info {
-	color:#5c9ac9;
-	background:url("images/show.gif") no-repeat 1px center;
+	color:#4b85ba;
+	background:url("images/show.gif") no-repeat 1px 1px;
 }
 .tl_formbody .tl_error {
 	margin:0;
@@ -159,14 +159,14 @@ li {
 
 /* Go to back end */
 #go_to_login {
-	margin:12px 18px 14px 0;
+	margin:0 18px 14px 0;
 	padding:0;
 	text-align:right;
 }
 #go_to_login a {
 	padding:2px 0 3px 20px;
 	background:url("images/login.gif") no-repeat left center;
-	color:#bbb;
+	color:#aaa;
 }
 
 /* License */
@@ -175,7 +175,7 @@ li {
 	overflow:auto;
 	margin:0;
 	background:#f9f9f9;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:10px;
 }
 
@@ -206,7 +206,7 @@ fieldset.tl_tbox,fieldset.tl_box {
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	margin-top:-1px;
-	color:#8ab858;
+	color:#77ac45;
 	padding-left:18px;
 	padding-right:3px;
 	background:url("images/palOpen.gif") left center no-repeat;
