@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.0 (2013-11-XX)
 --------------------------
 
+### Changed
+Change the default back end font color from `#666966` to `#555`.
+
 ### Fixed
 Fixed the ACE version number and added an inverted theme (see #6101).
 

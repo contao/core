@@ -38,7 +38,7 @@ body.popup {
 	margin:0;
 	padding:6px 11px 8px;
 	text-align:right;
-	color:#666966;
+	color:#555;
 }
 
 /* Container */
@@ -228,7 +228,7 @@ h2.sub_headline_index {
 .tl_permalert a {
 	float:right;
 	margin:1px 3px 0 24px;
-	color:#666966;
+	color:#555;
 }
 
 /* Filter */
@@ -465,7 +465,7 @@ h2.sub_headline_index {
 	white-space:nowrap;
 }
 .tl_file a:hover,.tl_file a:focus,.tl_file a:active {
-	color:#666966;
+	color:#555;
 }
 .tl_listing_container .tl_content ul li > * {
 	vertical-align:middle;

@@ -31,14 +31,14 @@ fieldset,form,input,optgroup,select,textarea {
 /* Font size and color */
 a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 	font-size:11px;
-	color:#666966;
+	color:#555;
 }
 fieldset,form,input,optgroup,select,textarea {
 	font-size:12px;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
-	color:#666966;
+	color:#555;
 }
 table {
 	border-spacing:0;
@@ -72,7 +72,7 @@ span.mandatory {
 
 /* Basic elements */
 a {
-	color:#666966;
+	color:#555;
 	text-decoration:none;
 }
 a:hover,a:focus,a:active {
@@ -322,7 +322,7 @@ pre,.tl_textarea.monospace {
 	padding:5px 12px 5px 13px;
 	border:1px solid #b8b8b8;
 	border-radius:3px;
-	color:#666966;
+	color:#555;
 	cursor:pointer;
 	line-height:1;
 	text-shadow:1px 1px 0 #eee;
@@ -339,7 +339,7 @@ a.tl_submit {
 	font-size:12px;
 }
 a.tl_submit:hover {
-	color:#666966;
+	color:#555;
 }
 .firefox input.tl_submit {
 	padding:2px 12px 2px 13px;
