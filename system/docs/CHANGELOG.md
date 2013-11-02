@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly detect IE11 in the `Environment::agent()` method (see #6378).
+
+### Fixed
 Disable the maintenance mode if a back end user is logged in (see #6353).
 
 ### Fixed
