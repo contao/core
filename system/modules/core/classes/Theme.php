@@ -185,7 +185,7 @@ class Theme extends \Backend
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
+				$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
 				continue;
 			}
 
@@ -220,7 +220,7 @@ class Theme extends \Backend
 					if (!in_array($name, $arrDbFields[$table]))
 					{
 						$blnHasError = true;
-						$return .= "\n  " . '<p style="margin:0; color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
+						$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
 					}
 				}
 			}
@@ -228,7 +228,7 @@ class Theme extends \Backend
 			// Confirmation
 			if (!$blnHasError)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
 			}
 
 			// Check the custom templates
@@ -249,14 +249,14 @@ class Theme extends \Backend
 				if (file_exists(TL_ROOT .'/'. $objArchive->file_name))
 				{
 					$blnTplExists = true;
-					$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
+					$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
 				}
 			}
 
 			// Confirmation
 			if (!$blnTplExists)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
 			}
 
 			$return .= '
