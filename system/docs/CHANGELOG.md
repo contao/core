@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.0 (2013-11-XX)
 --------------------------
 
+### Fixed
+Skip empty locale strings when building the language cache.
+
 ### Improved
 Slightly increased the contrast in the back end.
 

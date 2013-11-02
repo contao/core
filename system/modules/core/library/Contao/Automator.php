@@ -610,11 +610,16 @@ class Automator extends \System
 	public function generateLanguageCache()
 	{
 		$arrLanguages = array();
-		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page");
+		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page WHERE type='root'");
 
 		// Only cache the languages which are in use (see #6013)
 		while ($objLanguages->next())
 		{
+			if ($objLanguages->language == '')
+			{
+				continue;
+			}
+
 			$arrLanguages[] = $objLanguages->language;
 
 			// Also cache "de" if "de-CH" is requested
