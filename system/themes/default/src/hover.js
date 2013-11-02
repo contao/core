@@ -3,7 +3,8 @@ var Theme = {
 
 	/**
 	 * Autofocus the first text field or textarea
-	 * @param object
+	 *
+	 * @param {string} id The ID of the parent element
 	 */
 	focusInput: function(id) {
 		if (id == '') return;
@@ -13,8 +14,9 @@ var Theme = {
 
 	/**
 	 * Colorize a table row when hovering over it
-	 * @param object
-	 * @param integer
+	 *
+	 * @param {object}  el    The DOM element
+	 * @param {integer} state The current state
 	 */
 	hoverRow: function(el, state) {
 		var items = $(el).getChildren();
@@ -27,8 +29,9 @@ var Theme = {
 
 	/**
 	 * Colorize a layer when hovering over it
-	 * @param object
-	 * @param integer
+	 *
+	 * @param {object}  el    The DOM element
+	 * @param {integer} state The current state
 	 */
 	hoverDiv: function(el, state) {
 		if (!state) {
@@ -39,7 +42,8 @@ var Theme = {
 
 	/**
 	 * Toggle a group of checkboxes
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	toggleSelect: function(el) {
 		var input = $(el).getElement('input');
@@ -91,8 +95,6 @@ var Theme = {
 
 	/**
 	 * Set up the [Ctrl] + click to edit functionality
-	 * @param object
-	 * @param integer
 	 */
 	setupCtrlClick: function() {
 		$$('.click2edit').each(function(el) {
