@@ -481,7 +481,7 @@ abstract class User extends \System
 		// Set the authentication cookie
 		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
 
-		// Save the login status
+		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
 	}
 
@@ -527,7 +527,7 @@ abstract class User extends \System
 		// Reset the session cookie
 		$this->setCookie(session_name(), session_id(), ($time - 86400), '/');
 
-		// Remove the login status
+		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = false;
 
 		// Add a log entry
