@@ -175,7 +175,14 @@ class Environment
 	{
 		if (!empty($_SERVER['REQUEST_URI']))
 		{
-			return $_SERVER['REQUEST_URI'];
+			if(strpos($_SERVER['REQUEST_URI'], 'http://') === 0 || strpos($_SERVER['REQUEST_URI'], 'https://') === 0)
+			{
+				return str_replace(array('http://'.$_SERVER['HTTP_HOST'], 'https://'.$_SERVER['HTTP_HOST']), '', $_SERVER['REQUEST_URI']);
+			}
+			else
+			{
+				return $_SERVER['REQUEST_URI'];
+			}
 		}
 		else
 		{
