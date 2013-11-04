@@ -1136,7 +1136,7 @@ var Backend =
 			new Tips.Contao($$(el).filter(function(i) {
 				return i.title != '';
 			}), {
-				offset: {x:0, y:26}
+				offset: {x:1, y:26}
 			});
 		});
 
