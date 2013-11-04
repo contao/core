@@ -510,13 +510,11 @@ abstract class Frontend extends \Controller
 					// Always return false if we are not in preview mode (show hidden elements)
 					if (!\Input::cookie('FE_PREVIEW'))
 					{
-						$_SESSION['TL_USER_LOGGED_IN'] = false;
 						return false;
 					}
 				}
 
 				// The session could be verified
-				$_SESSION['TL_USER_LOGGED_IN'] = true;
 				return true;
 			}
 		}
@@ -527,8 +525,10 @@ abstract class Frontend extends \Controller
 			$_SESSION['DISABLE_CACHE'] = false;
 		}
 
+		// Remove the cookie if it is invalid to enable loading cached pages
+		$this->setCookie($strCookie, $hash, (time() - 86400), null, null, false, true);
+
 		// The session could not be verified
-		$_SESSION['TL_USER_LOGGED_IN'] = false;
 		return false;
 	}
 
