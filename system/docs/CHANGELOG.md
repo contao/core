@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly handle "enum" fields in the database installer (see #6387).
+
+### Fixed
 Do not load a page from cache if a user is (potentially) logged in.
 
 ### Fixed
