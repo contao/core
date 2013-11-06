@@ -231,6 +231,17 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
+	 * Return the models as array
+	 *
+	 * @return array An array of models
+	 */
+	public function getModels()
+	{
+		return $this->arrModels;
+	}
+
+
+	/**
 	 * Lazy load related records
 	 *
 	 * @param string $strKey The property name
