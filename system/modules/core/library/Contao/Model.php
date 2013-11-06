@@ -579,11 +579,14 @@ abstract class Model
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
 		// Try to load from the registry
-		$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varValue);
-
-		if ($objModel !== null)
+		if (empty($arrOptions))
 		{
-			return $objModel;
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varValue);
+
+			if ($objModel !== null)
+			{
+				return $objModel;
+			}
 		}
 
 		$arrOptions = array_merge
@@ -614,7 +617,7 @@ abstract class Model
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
 		// Try to load from the registry
-		if (is_numeric($varId))
+		if (is_numeric($varId) && empty($arrOptions))
 		{
 			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varId);
 
@@ -664,7 +667,12 @@ abstract class Model
 		// Search for registered models
 		foreach ($arrIds as $intId)
 		{
-			$arrRegistered[$intId] = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
+			$arrRegistered[$intId] = null;
+
+			if (empty($arrOptions))
+			{
+				$arrRegistered[$intId] = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
+			}
 
 			if ($arrRegistered[$intId] === null)
 			{
@@ -720,18 +728,21 @@ abstract class Model
 		$intId = is_array($varValue) ? $varValue[0] : $varValue;
 
 		// Try to load from the registry
-		if (is_array($strColumn))
+		if (empty($arrOptions))
 		{
-			if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
+			if (is_array($strColumn))
 			{
-				return static::findByPk($intId, $arrOptions);
+				if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
+				{
+					return static::findByPk($intId, $arrOptions);
+				}
 			}
-		}
-		else
-		{
-			if ($strColumn == static::$strPk)
+			else
 			{
-				return static::findByPk($intId, $arrOptions);
+				if ($strColumn == static::$strPk)
+				{
+					return static::findByPk($intId, $arrOptions);
+				}
 			}
 		}
 
