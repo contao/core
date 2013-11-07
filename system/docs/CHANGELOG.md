@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Sort the list of available modules (see #6391).
+
+### Fixed
 Standardize the user home directoy name upon registration (see #6394).
 
 ### Fixed
