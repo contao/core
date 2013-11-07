@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Standardize the user home directoy name upon registration (see #6394).
+
+### Fixed
 Correctly handle "enum" fields in the database installer (see #6387).
 
 ### Fixed

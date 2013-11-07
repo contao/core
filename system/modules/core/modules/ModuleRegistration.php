@@ -443,10 +443,10 @@ class ModuleRegistration extends \Module
 			if ($objHomeDir !== null)
 			{
 				$this->import('Files');
-				$strUserDir = $arrData['username'] ?: 'user_' . $insertId;
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $insertId;
 
 				// Add the user ID if the directory exists
-				if (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
+				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
 				{
 					$strUserDir .= '_' . $insertId;
 				}
