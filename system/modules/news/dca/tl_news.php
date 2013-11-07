@@ -326,6 +326,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'default'                 => 'above',
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
