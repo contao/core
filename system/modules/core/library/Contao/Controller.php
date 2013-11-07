@@ -2033,7 +2033,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		return implode(' ', $return);
+		return implode($return);
 	}
 
 
@@ -2611,7 +2611,7 @@ abstract class Controller extends \System
 			// Only float:left and float:right are supported (see #4758)
 			if ($arrItem['floating'] == 'left' || $arrItem['floating'] == 'right')
 			{
-				$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+				$objTemplate->float = 'float:' . $arrItem['floating'] . ';';
 			}
 		}
 
