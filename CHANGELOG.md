@@ -5,6 +5,9 @@ Version 2.11.13 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Sort the list of available modules (see #6391).
+
+### Fixed
 Decode entities in passwords (see #6252).
 
 ### Fixed
