@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>
+        <target>Wyczyść cache wyszukiwarki</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.1">
         <source>Removes the cached versions of the search results.</source>
+        <target>Usuwa cacheowane wersje wyników wyszukiwania.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>

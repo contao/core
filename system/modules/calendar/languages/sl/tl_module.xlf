@@ -143,15 +143,19 @@
       </trans-unit>
       <trans-unit id="tl_module.next_cur_month">
         <source>of the current month</source>
+        <target>v trenutnem mesecu</target>
       </trans-unit>
       <trans-unit id="tl_module.next_cur_year">
         <source>of the current year</source>
+        <target>v letošnjem letu</target>
       </trans-unit>
       <trans-unit id="tl_module.next_next_month">
         <source>of the next month</source>
+        <target>v naslednjem mesecu</target>
       </trans-unit>
       <trans-unit id="tl_module.next_next_year">
         <source>of the next year</source>
+        <target>v naslednjem letu</target>
       </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
@@ -191,15 +195,19 @@
       </trans-unit>
       <trans-unit id="tl_module.past_cur_month">
         <source>of the current month</source>
+        <target>v trenutnem mesecu</target>
       </trans-unit>
       <trans-unit id="tl_module.past_cur_year">
         <source>of the current year</source>
+        <target>v letošnjem letu</target>
       </trans-unit>
       <trans-unit id="tl_module.past_prev_month">
         <source>of the previous month</source>
+        <target>v prejšnjem mesecu</target>
       </trans-unit>
       <trans-unit id="tl_module.past_prev_year">
         <source>of the previous year</source>
+        <target>v lanskem letu</target>
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>
