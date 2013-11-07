@@ -5,6 +5,9 @@ Version 2.11.13 (2013-11-XX)
 ----------------------------
 
 ### Fixed
+Decode entities in passwords (see #6252).
+
+### Fixed
 Replace insert tags in the details view of the listing module (see #6120).
 
 
