@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.13 (2013-11-XX)
+----------------------------
+
+### Fixed
+Replace insert tags in the details view of the listing module (see #6120).
+
+
 Version 2.11.12 (2013-08-22)
 ----------------------------
 
