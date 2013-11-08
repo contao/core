@@ -74,7 +74,9 @@ class Registry implements \Countable
 
 
 	/**
-	 * {@inheritdoc}
+	 * Count the elements
+	 *
+	 * @return integer The number of models
 	 */
 	public function count()
 	{
