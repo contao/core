@@ -46,7 +46,8 @@ var Theme = {
 	 * @param {object} el The DOM element
 	 */
 	toggleSelect: function(el) {
-		var input = $(el).getElement('input');
+		var input = $(el).getElement('input'),
+			onclick = input.get('onclick');
 		if (input) {
 			if (input.checked) {
 				if (input.get('type') != 'radio') {
@@ -54,6 +55,9 @@ var Theme = {
 				}
 			} else {
 				input.checked = 'checked';
+			}
+			if (onclick == 'Backend.toggleCheckboxes(this)') {
+				Backend.toggleCheckboxes(input); // see #6399
 			}
 		}
 	},
