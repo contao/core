@@ -1255,14 +1255,14 @@ class RepositoryManager extends RepositoryBackendModule
 				} // if
 				break;
 			} // foreach version
-		} // while
+		} // foreach
 
 		// find display status for each extension
 		foreach ($exts as &$ext) {
 			$ext->status = array();
 
 			// code red
-			if ((int)$e->error>0)
+			if ((int)$ext->error>0)
 				$ext->status[] = (object)array(
 					'color'	=> 'red',
 					'text'	=> 'errorinstall'

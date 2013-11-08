@@ -408,6 +408,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'autologin' => array
 		(
+			'default'                 => null,
 			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NULL"
 		),

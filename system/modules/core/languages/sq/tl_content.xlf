@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_content.type.1">
         <source>Please choose the type of content element.</source>
-        <target>Zgjedhoni llojin e elementit përmbajtës.</target>
+        <target>Zgjidhni llojin e elementit të përmbajtës.</target>
       </trans-unit>
       <trans-unit id="tl_content.headline.0">
         <source>Headline</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_content.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>Epeni tekstin (taget HTML janë të lejueshme)</target>
+        <target>Ju mund të përdorni HTML tags për të formatizuar tekstin.</target>
       </trans-unit>
       <trans-unit id="tl_content.addImage.0">
         <source>Add an image</source>
-        <target>Shto një imazhit</target>
+        <target>Shto një imazh</target>
       </trans-unit>
       <trans-unit id="tl_content.addImage.1">
         <source>Add an image to the content element.</source>
-        <target>Në qoftë se zgjedhoni këtë opsion ju mund t'i shtoni përmbajtjes një imazhit.</target>
+        <target>Shto një imazh elemtenit të përmbajtjes.</target>
       </trans-unit>
       <trans-unit id="tl_content.singleSRC.0">
         <source>Source file</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_content.singleSRC.1">
         <source>Please select a file or folder from the files directory.</source>
-        <target>Zgjedhoni një skedar në strukturen e skedarëve.</target>
+        <target>Ju lutemi zgjedhni një skedë ose skedar nga direktoria e skedarëve.</target>
       </trans-unit>
       <trans-unit id="tl_content.alt.0">
         <source>Alternate text</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_content.title.1">
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
-        <target>Këtu mund të epeni titullin e grafikës (&lt;em&gt;Titull&lt;/em&gt; veti)</target>
+        <target>Këtu ju mund të jepni titullin e imazhit (&lt;em&gt;titulli&lt;/em&gt; veti)</target>
       </trans-unit>
       <trans-unit id="tl_content.size.0">
         <source>Image width and height</source>
@@ -407,6 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>Gjerësia dhe lartësia e media player në piksel (p.sh. 640x480)</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

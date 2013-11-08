@@ -893,6 +893,9 @@ class tl_calendar_events extends Backend
 			$this->Calendar->generateFeed($id);
 		}
 
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
 		$this->Session->set('calendar_feed_updater', null);
 	}
 

@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.affectedRows.1">
         <source>Number of records included in the undo step</source>
-        <target>取り消しの項目に含まれるレコードの数</target>
+        <target>復元の項目に含まれるレコードの数</target>
       </trans-unit>
       <trans-unit id="tl_undo.query.0">
         <source>Details</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.query.1">
         <source>Details of the undo step</source>
-        <target>取り消しの項目の詳細</target>
+        <target>復元の項目の詳細</target>
       </trans-unit>
       <trans-unit id="tl_undo.data.0">
         <source>Data</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_undo.data.1">
         <source>Raw data of the undo step</source>
-        <target>取り消しの項目の生データ</target>
+        <target>復元の項目の生データ</target>
       </trans-unit>
       <trans-unit id="tl_undo.show.0">
         <source>Show details</source>

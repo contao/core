@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_page.noSearch.1">
         <source>Exclude the page from the search index.</source>
-        <target>ページを検索のインデックス作成から除外します。</target>
+        <target>ページを検索インデックス作成から除外します。</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.0">
         <source>CSS class</source>

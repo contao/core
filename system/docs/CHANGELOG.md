@@ -1,6 +1,25 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 3.1.5 (2013-11-08)
+--------------------------
+
+### Fixed
+Correctly handle shorthand byte values (see #6345).
+
+### Fixed
+Also update the sitemap if a news/event feed is updated (see #5727).
+
+### Fixed
+Correctly sort by date in the listing module (see #5609).
+
+### Fixed
+Correctly handle the autologin key if a member is duplicated (see #5945).
+
+### Fixed
+Correctly export pages as PDF (see #6317).
+
+
 Version 3.1.4 (2013-10-14)
 --------------------------
 

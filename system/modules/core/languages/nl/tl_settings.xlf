@@ -559,7 +559,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sections_legend">
         <source>Layout sections</source>
-        <target>lay-out secties</target>
+        <target>Lay-out secties</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

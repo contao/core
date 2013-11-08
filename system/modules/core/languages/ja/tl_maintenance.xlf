@@ -111,11 +111,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.0">
         <source>Purge the search index</source>
-        <target>検索のインデックスを消去</target>
+        <target>検索インデックスを消去</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.1">
         <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
-        <target>&lt;em&gt;tl_seach&lt;/em&gt; と &lt;em&gt;tl_search_index&lt;/em&gt; のテーブルを切り捨てます。その後、検索のインデックスを再構築しなければなりません(上を参照)。</target>
+        <target>&lt;em&gt;tl_seach&lt;/em&gt; と &lt;em&gt;tl_search_index&lt;/em&gt; のテーブルを切り捨てます。その後、検索インデックスを再構築しなければなりません(上を参照)。</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.0">
         <source>Purge the undo table</source>
