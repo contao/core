@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Allow special characters in `Validator::isUrl()` (see #6402).
+
+### Fixed
 Sort the list of available modules (see #6391).
 
 ### Fixed
