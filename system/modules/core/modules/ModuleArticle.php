@@ -292,6 +292,11 @@ class ModuleArticle extends \Module
 			}
 		}
 
+		// URL decode image paths (see #6411)
+		$strArticle = preg_replace_callback('@(src="[^"]+")@', function($arg) {
+			return rawurldecode($arg[0]);
+		}, $strArticle);
+
 		// Handle line breaks in preformatted text
 		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
 

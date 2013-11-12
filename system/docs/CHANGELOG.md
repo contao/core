@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+URL decode image paths when exporting to PDF (see #6411).
+
+### Fixed
 Do not add news and event URLs to the sitemap if the target page is exempt from
 the sitemap (see #6418).
 
