@@ -143,7 +143,7 @@ abstract class Widget extends \Controller
 	/**
 	 * Initialize the object
 	 *
-	 * @param array An optional attributes array
+	 * @param array $arrAttributes An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{

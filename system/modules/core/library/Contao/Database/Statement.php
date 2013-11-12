@@ -177,7 +177,7 @@ abstract class Statement
 	 *     );
 	 *     $stmt->prepare("UPDATE tl_member %s")->set($set);
 	 *
-	 * @param array The associative array
+	 * @param array $arrParams The associative array
 	 *
 	 * @return \Database\Statement The statement object
 	 */

@@ -53,7 +53,7 @@ class TemplateLoader
 	/**
 	 * Add multiple new templates with their file paths
 	 *
-	 * @param array An array of files
+	 * @param array $files An array of files
 	 */
 	public static function addFiles($files)
 	{

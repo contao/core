@@ -317,7 +317,8 @@ class Automator extends \System
 
 	/**
 	 * Generate the Google XML sitemaps
-	 * @param integer
+	 *
+	 * @param integer $intId The root page ID
 	 */
 	public function generateSitemap($intId=0)
 	{

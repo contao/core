@@ -578,7 +578,7 @@ abstract class Controller extends \System
 	/**
 	 * Calculate the page status icon name based on the page parameters
 	 *
-	 * @param object A page object
+	 * @param object $objPage The page object
 	 *
 	 * @return string The status icon name
 	 */

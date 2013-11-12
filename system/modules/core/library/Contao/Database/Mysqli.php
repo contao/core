@@ -289,7 +289,7 @@ class Mysqli extends \Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */

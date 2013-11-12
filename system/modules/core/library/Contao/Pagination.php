@@ -127,11 +127,12 @@ class Pagination
 
 	/**
 	 * Set the number of rows, the number of results per pages and the number of links
-	 * @param integer
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param \Template
+	 *
+	 * @param integer   $intRows          The number of rows
+	 * @param integer   $intPerPage       The number of items per page
+	 * @param integer   $intNumberOfLinks The number of links to generate
+	 * @param string    $strParameter     The parameter name
+	 * @param \Template $objTemplate      The template object
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null)
 	{
@@ -166,7 +167,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "<< first" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "<< first" link
 	 */
 	public function hasFirst()
 	{
@@ -176,7 +178,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "< previous" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "< previous" link
 	 */
 	public function hasPrevious()
 	{
@@ -186,7 +189,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "next >" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "next >" link
 	 */
 	public function hasNext()
 	{
@@ -196,7 +200,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "last >>" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "last >>" link
 	 */
 	public function hasLast()
 	{
@@ -206,8 +211,10 @@ class Pagination
 
 	/**
 	 * Generate the pagination menu and return it as HTML string
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strSeparator The separator string
+	 *
+	 * @return string The pagination menu as HTML string
 	 */
 	public function generate($strSeparator=' ')
 	{
@@ -290,8 +297,10 @@ class Pagination
 
 	/**
 	 * Generate all page links separated with the given argument and return them as string
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strSeparator The separator string
+	 *
+	 * @return string The page links as HTML string
 	 */
 	public function getItemsAsString($strSeparator=' ')
 	{
@@ -346,8 +355,10 @@ class Pagination
 
 	/**
 	 * Generate a link and return the URL
-	 * @param integer
-	 * @return string
+	 *
+	 * @param integer $intPage The page ID
+	 *
+	 * @return string The URL string
 	 */
 	protected function linkToPage($intPage)
 	{
