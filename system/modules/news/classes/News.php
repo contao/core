@@ -279,6 +279,12 @@ class News extends \Frontend
 						continue;
 					}
 
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
+					{
+						continue;
+					}
+
 					if ($objParent->domain != '')
 					{
 						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';

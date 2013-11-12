@@ -257,9 +257,10 @@ class Calendar extends \Frontend
 	 * Add events to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -305,6 +306,12 @@ class Calendar extends \Frontend
 
 					// The target page has not been published (see #5520)
 					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
+					{
+						continue;
+					}
+
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
 						continue;
 					}

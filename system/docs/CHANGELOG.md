@@ -5,6 +5,10 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Do not add news and event URLs to the sitemap if the target page is exempt from
+the sitemap (see #6418).
+
+### Fixed
 Allow special characters in `Validator::isUrl()` (see #6402).
 
 ### Fixed
