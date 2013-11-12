@@ -409,17 +409,6 @@ function nl2br_pre($str, $xhtml=false)
 
 
 /**
- * Replace line breaks with <br> tags (to be used with preg_replace_callback)
- * @param array
- * @return string
- */
-function nl2br_callback($matches)
-{
-	return str_replace("\n", '<br>', $matches[0]);
-}
-
-
-/**
  * Dump variables depending on their type either with var_dump() or print_r()
  */
 function dump()
@@ -730,4 +719,16 @@ if (!USE_MBSTRING)
 
 		return substr_count($haystack, $needle, $offset);
 	}
+}
+
+
+/**
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ * @deprecated
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", '<br>', $matches[0]);
 }

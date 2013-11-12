@@ -298,7 +298,9 @@ class ModuleArticle extends \Module
 		}, $strArticle);
 
 		// Handle line breaks in preformatted text
-		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', function ($arg) {
+			return str_replace("\n", '<br>', $arg[0]);
+		}, $strArticle);
 
 		// Default PDF export using TCPDF
 		$arrSearch = array
