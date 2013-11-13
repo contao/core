@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Set the correct empty value depending on the database field type (see #6424).
+
+### Fixed
 URL decode image paths when exporting to PDF (see #6411).
 
 ### Fixed

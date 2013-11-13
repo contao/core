@@ -1311,13 +1311,7 @@ abstract class Widget extends \Controller
 				// Set to 0 for numeric columns (see #6373)
 				if (isset($arrData['sql']))
 				{
-					$type = substr($arrData['sql'], 0, strpos($arrData['sql'], '('));
-					$numeric = array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal');
-
-					if (in_array(strtolower($type), $numeric))
-					{
-						$value = 0;
-					}
+					$value = static::getEmptyValueByFieldType($arrData['sql']);
 				}
 
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
@@ -1361,5 +1355,36 @@ abstract class Widget extends \Controller
 		}
 
 		return $arrAttributes;
+	}
+
+
+	/**
+	 * Check for numeric fields based on the SQL string
+	 *
+	 * @param string $sql The SQL string
+	 *
+	 * @return boolean True if the field is numeric
+	 */
+	public static function getEmptyValueByFieldType($sql)
+	{
+		if ($sql == '')
+		{
+			return '';
+		}
+
+		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
+
+		if (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
+		{
+			return null;
+		}
+		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
+		{
+			return 0;
+		}
+		else
+		{
+			return '';
+		}
 	}
 }
