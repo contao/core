@@ -375,11 +375,10 @@ class tl_files extends Backend
 	/**
 	 * Check a file name and romanize it
 	 * @param mixed
-	 * @param \DataContainer
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkFilename($varValue, DataContainer $dc)
+	public function checkFilename($varValue)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
