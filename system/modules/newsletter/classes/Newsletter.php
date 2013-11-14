@@ -927,6 +927,12 @@ class Newsletter extends \Backend
 						continue;
 					}
 
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
+					{
+						continue;
+					}
+
 					// Set the domain (see #6421)
 					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
