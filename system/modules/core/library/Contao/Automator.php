@@ -384,14 +384,10 @@ class Automator extends \System
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
 			$objFile->append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">');
 
-			$strDomain = '';
+			// Set the domain (see #6421)
+			$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . ($objRoot->dns ?: \Environment::get('host')) . TL_PATH . '/';
 
-			// Overwrite the domain
-			if ($objRoot->dns != '')
-			{
-				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
-			}
-
+			// Find the searchable pages
 			$arrPages = \Backend::findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages

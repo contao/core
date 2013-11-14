@@ -70,7 +70,6 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
 
 					// The target page does not exist
@@ -85,11 +84,10 @@ class ModuleFaq extends \Frontend
 						continue;
 					}
 
-					if ($objParent->domain != '')
-					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
-					}
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
+					// Generate the URL
 					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 

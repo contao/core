@@ -913,7 +913,6 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
@@ -928,11 +927,10 @@ class Newsletter extends \Backend
 						continue;
 					}
 
-					if ($objParent->domain != '')
-					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
-					}
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
+					// Generate the URL
 					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 

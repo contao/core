@@ -565,6 +565,7 @@ class PageModel extends \Model
 			$time = time();
 			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
 			$this->rootIsFallback = ($objParentPage->fallback != '');
+			$this->rootUseSSL = $objParentPage->useSSL;
 		}
 
 		// No root page found

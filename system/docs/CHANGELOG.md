@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly generate HTTPS URLs in the sitemap (see #6421).
+
+### Fixed
 Added the missing "sqlGetFromDca" hook (see #6425).
 
 ### Fixed
