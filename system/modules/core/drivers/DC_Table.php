@@ -1392,19 +1392,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					// Set new sorting
 					$this->set['sorting'] = intval($newSorting);
-				}
-
-				// ID is not set (insert at the end)
-				else
-				{
-					$objNextSorting = $this->Database->execute("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
-
-					if ($objNextSorting->numRows)
-					{
-						$this->set['sorting'] = intval($objNextSorting->sorting + 128);
-					}
+					return;
 				}
 			}
+
+			// ID is not set or not found (insert at the end)
+			$objNextSorting = $this->Database->execute("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
+			$this->set['sorting'] = (intval($objNextSorting->sorting) + 128);
 		}
 	}
 
