@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Support CSS selectors up to 1022 charachters long (see #6412).
+
+### Fixed
 Support UUIDs in `FilesModel::findByPk()`, `FilesModel::findById()` and
 `FilesModel::findByMultipleById()` to be backwards compatible.
 
