@@ -1228,7 +1228,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							{
 								$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
 											   ->limit(1)
-											   ->execute(($count++*128), $objNewSorting->id);
+											   ->execute(($count++ * 128), $objNewSorting->id);
 							}
 						}
 
@@ -1275,11 +1275,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 									while ($objNewSorting->next())
 									{
 										$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
-													   ->execute(($count++*128), $objNewSorting->id);
+													   ->execute(($count++ * 128), $objNewSorting->id);
 
 										if ($objNewSorting->sorting == $curSorting)
 										{
-											$newSorting = ($count++*128);
+											$newSorting = ($count++ * 128);
 										}
 									}
 								}
@@ -1374,11 +1374,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							while ($objNewSorting->next())
 							{
 								$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
-											   ->execute(($count++*128), $objNewSorting->id);
+											   ->execute(($count++ * 128), $objNewSorting->id);
 
 								if ($objNewSorting->sorting == $curSorting)
 								{
-									$newSorting = ($count++*128);
+									$newSorting = ($count++ * 128);
 								}
 							}
 						}
