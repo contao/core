@@ -38,6 +38,68 @@ class FilesModel extends \Model
 
 
 	/**
+	 * Find a file by its primary key (backwards compatibility)
+	 *
+	 * @param mixed $varValue   The value
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByPk($varValue, array $arrOptions=array())
+	{
+		if (static::$strPk == 'id')
+		{
+			return static::findById($varValue, $arrOptions);
+		}
+
+		return parent::findByPk($varValue, $arrOptions);
+	}
+
+
+	/**
+	 * Find a file by its ID or UUID (backwards compatibility)
+	 *
+	 * @param mixed $intId      The ID or UUID
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findById($intId, array $arrOptions=array())
+	{
+		if (\Validator::isUuid($intId))
+		{
+			return static::findByUuid($intId, $arrOptions);
+		}
+
+		return static::findBy('id', $intId, $arrOptions);
+	}
+
+
+	/**
+	 * Find multiple files by their IDs or UUIDs (backwards compatibility)
+	 *
+	 * @param array $arrIds     An array of IDs or UUIDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no files
+	 */
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		if (\Validator::isUuid(current($arrIds)))
+		{
+			return static::findMultipleByUuids($arrIds, $arrOptions);
+		}
+
+		return parent::findMultipleByIds($arrIds, $arrOptions);
+	}
+
+
+	/**
 	 * Find a file by its UUID
 	 *
 	 * @param array $strUuid    The UUID string

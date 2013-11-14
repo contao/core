@@ -5,6 +5,10 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Support UUIDs in `FilesModel::findByPk()`, `FilesModel::findById()` and
+`FilesModel::findByMultipleById()` to be backwards compatible.
+
+### Fixed
 Set the correct empty value depending on the database field type (see #6424).
 
 ### Fixed
