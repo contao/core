@@ -265,8 +265,8 @@ class Installer extends \Controller
 	 */
 	public function getFromDca()
 	{
+		$return = array();
 		$included = array();
-		$arrReturn = array();
 
 		// Ignore the internal cache
 		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
@@ -295,7 +295,7 @@ class Installer extends \Controller
 
 				if ($objExtract->isDbTable())
 				{
-					$arrReturn[$strTable] = $objExtract->getDbInstallerArray();
+					$return[$strTable] = $objExtract->getDbInstallerArray();
 				}
 
 				$included[] = $strFile;
@@ -305,7 +305,17 @@ class Installer extends \Controller
 		// Restore the cache settings
 		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
 
-		return $arrReturn;
+		// HOOK: allow third-party developers to modify the array (see #6425)
+		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromDca']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlGetFromDca'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
+			}
+		}
+
+		return $return;
 	}
 
 

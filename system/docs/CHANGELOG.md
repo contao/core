@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Added the missing "sqlGetFromDca" hook (see #6425).
+
+### Fixed
 Support CSS selectors up to 1022 charachters long (see #6412).
 
 ### Fixed
