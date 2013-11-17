@@ -231,7 +231,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 
 
 /**
- * Standardize a parameter (strip special characters and convert spaces to underscores)
+ * Standardize a parameter (strip special characters and convert spaces)
  * @param string
  * @param boolean
  * @return string
