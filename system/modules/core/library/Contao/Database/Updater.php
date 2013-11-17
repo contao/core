@@ -639,7 +639,7 @@ class Updater extends \Controller
 	{
 		$arrFiles = array();
 
-		// Parse all active modules
+		// Parse all modules (see #6058)
 		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
