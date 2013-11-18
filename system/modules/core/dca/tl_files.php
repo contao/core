@@ -544,13 +544,22 @@ class tl_files extends Backend
 	 */
 	public function protectFolder(DataContainer $dc)
 	{
+		$count = 0;
+		$strPath = $dc->id;
+
+		// Check whether the temporary name has been replaced already (see #6432)
+		if (Input::post('name') && ($strNewPath = str_replace('__new__', Input::post('name'), $strPath, $count)) && $count > 0 && is_dir(TL_ROOT . '/' . $strNewPath))
+		{
+			$strPath = $strNewPath;
+		}
+
 		// Only show for folders (see #5660)
-		if (!is_dir(TL_ROOT . '/' . $dc->id))
+		if (!is_dir(TL_ROOT . '/' . $strPath))
 		{
 			return '';
 		}
 
-		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
+		$blnProtected = file_exists(TL_ROOT . '/' . $strPath . '/.htaccess');
 
 		// Protect or unprotect the folder
 		if (Input::post('FORM_SUBMIT') == 'tl_files')
@@ -560,7 +569,7 @@ class tl_files extends Backend
 				if (!$blnProtected)
 				{
 					$blnProtected = true;
-					$objFolder = new Folder($dc->id);
+					$objFolder = new Folder($strPath);
 					$objFolder->protect();
 				}
 			}
@@ -569,7 +578,7 @@ class tl_files extends Backend
 				if ($blnProtected)
 				{
 					$blnProtected = false;
-					$objFolder = new Folder($dc->id);
+					$objFolder = new Folder($strPath);
 					$objFolder->unprotect();
 				}
 			}
