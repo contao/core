@@ -177,9 +177,10 @@ class FileSelector extends \Widget
 	 * @param string
 	 * @param integer
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function renderFiletree($path, $intMargin, $mount=false)
+	protected function renderFiletree($path, $intMargin, $mount=false, $blnProtected=false)
 	{
 		// Invalid path
 		if (!is_dir($path))
@@ -250,12 +251,13 @@ class FileSelector extends \Widget
 		for ($f=0, $c=count($folders); $f<$c; $f++)
 		{
 			$countFiles = 0;
+			$content = scan($folders[$f]);
 			$return .= "\n    " . '<li class="'.$folderClass.'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
 
 			// Check whether there are subfolders or files
-			foreach (scan($folders[$f]) as $v)
+			foreach ($content as $v)
 			{
-				if (is_dir($folders[$f].'/'.$v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+				if (is_dir($folders[$f] . '/' . $v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 				{
 					$countFiles++;
 				}
@@ -276,7 +278,8 @@ class FileSelector extends \Widget
 				$return .= '<a href="'.$this->addToUrl($flag.'tg='.$tid).'" title="'.specialchars($alt).'" onclick="return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$tid.'\',\''.$currentFolder.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.\Image::getHtml($img, '', 'style="margin-right:2px"').'</a>';
 			}
 
-			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
+			$protected = ($blnProtected === true || array_search('.htaccess', $content) !== false) ? true : false;
+			$folderImg = ($blnIsOpen && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 			$folderLabel = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
 			// Add the current folder
@@ -303,7 +306,7 @@ class FileSelector extends \Widget
 			if ($countFiles > 0 && $blnIsOpen)
 			{
 				$return .= '<li class="parent" id="'.$xtnode.'_'.$tid.'"><ul class="level_'.$level.'">';
-				$return .= $this->renderFiletree($folders[$f], ($intMargin + $intSpacing));
+				$return .= $this->renderFiletree($folders[$f], ($intMargin + $intSpacing), false, $protected);
 				$return .= '</ul></li>';
 			}
 		}

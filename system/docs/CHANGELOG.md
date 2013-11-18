@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Correctly show the folder protection status in the file picker (see #6433).
+
+### Fixed
 Correctly protect newly created folders (see #6432).
 
 ### Fixed
