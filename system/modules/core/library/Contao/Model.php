@@ -43,7 +43,16 @@ namespace Contao;
 abstract class Model
 {
 
+	/**
+	 * Insert flag
+	 * @var integer
+	 */
 	const INSERT = 1;
+
+	/**
+	 * Update flag
+	 * @var integer
+	 */
 	const UPDATE = 2;
 
 	/**

@@ -34,16 +34,19 @@ class ZipReader
 
 	/**
 	 * File signatur
+	 * @var string
 	 */
 	const FILE_SIGNATURE = "\x50\x4b\x03\x04";
 
 	/**
 	 * Central directory begin marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
 
 	/**
 	 * Central directory end marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_END = "\x50\x4b\x05\x06";
 
