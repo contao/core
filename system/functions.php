@@ -398,7 +398,7 @@ function deserialize($varValue, $blnForceArray=false)
  * Split a string into fragments, remove whitespace and return fragments as array
  * @param string
  * @param string
- * @return string
+ * @return array
  */
 function trimsplit($strPattern, $strString)
 {
