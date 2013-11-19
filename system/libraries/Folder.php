@@ -50,7 +50,7 @@ class Folder extends System
 	/**
 	 * Check whether a folder exists
 	 * @param string
-	 * @throws Expcetion
+	 * @throws Exception
 	 */
 	public function __construct($strFolder)
 	{

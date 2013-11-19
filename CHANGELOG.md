@@ -1,6 +1,19 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.13 (2013-11-19)
+----------------------------
+
+### Fixed
+Sort the list of available modules (see #6391).
+
+### Fixed
+Decode entities in passwords (see #6252).
+
+### Fixed
+Replace insert tags in the details view of the listing module (see #6120).
+
+
 Version 2.11.12 (2013-08-22)
 ----------------------------
 

@@ -189,7 +189,7 @@ class Config
 				$strMode = 'bottom';
 				continue;
 			}
-			
+
 			if ($strMode == 'top')
 			{
 				$this->strTop .= $strLine;
@@ -286,6 +286,7 @@ class Config
 		else
 		{
 			$arrAllModules = scan(TL_ROOT . '/system/modules');
+			sort($arrAllModules); // see #6391
 		}
 
 		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);

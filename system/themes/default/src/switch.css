@@ -30,7 +30,7 @@
 html,body {
 	background:#333633;
 }
-a,body,div,form,input,selectlabel,p {
+a,body,div,form,input,select,label,p {
 	color:#333633;
 }
 p {

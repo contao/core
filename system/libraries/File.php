@@ -68,7 +68,7 @@ class File extends System
 	/**
 	 * Check whether a file exists
 	 * @param string
-	 * @throws Expcetion
+	 * @throws Exception
 	 */
 	public function __construct($strFile)
 	{

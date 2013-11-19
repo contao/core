@@ -700,7 +700,7 @@ var AjaxRequest =
 				'display': 'block',
 				'top': scroll.y + 'px'
 			}
-		})
+		});
 
 		if (box == null) {
 			box = new Element('div', {
@@ -1428,7 +1428,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
-					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
+					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 					if (input.type == 'checkbox') {
 						input.id = input.name.replace(/\[[0-9]+\]/g, '').replace(/\[/g, '_').replace(/\]/g, '') + '_' + i;
 						input.getNext('label').set('for', input.id);
@@ -1616,7 +1616,7 @@ var ContextMenu =
 			});
 		});
 
-		// Hide the context menu 
+		// Hide the context menu
 		$(document.body).addEvent('click', function() {
 			ContextMenu.hide();
 		});

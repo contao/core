@@ -87,7 +87,7 @@ class FileUpload extends Backend
 	 * @param string
 	 * @param string
 	 * @return array
-	 * @throws Expcetion
+	 * @throws Exception
 	 */
 	public function uploadTo($strTarget, $strKey)
 	{
