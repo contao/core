@@ -193,8 +193,8 @@ class InstallTool extends Backend
 		// Store the collation
 		$this->storeCollation();
 
-		// Update the database tables
-		$this->updateDatabaseTables();
+		// Adjust the database tables
+		$this->adjustDatabaseTables();
 
 		// Import the example website
 		try
@@ -596,9 +596,9 @@ class InstallTool extends Backend
 
 
 	/**
-	 * Update the database tables
+	 * Adjust the database tables
 	 */
-	protected function updateDatabaseTables()
+	protected function adjustDatabaseTables()
 	{
 		if (Input::post('FORM_SUBMIT') == 'tl_tables')
 		{
