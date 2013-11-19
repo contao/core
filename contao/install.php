@@ -899,13 +899,14 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_calendar_events'))
 		{
-			$this->enableSafeMode();
 			$arrFields = $this->Database->listFields('tl_calendar_events');
 
 			foreach ($arrFields as $arrField)
 			{
 				if ($arrField['name'] == 'startDate' && $arrField['type'] != 'int')
 				{
+					$this->enableSafeMode();
+
 					if (Input::post('FORM_SUBMIT') == 'tl_292update')
 					{
 						$this->import('Database\\Updater', 'Updater');
