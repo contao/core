@@ -687,6 +687,9 @@ class Updater extends \Controller
 				continue;
 			}
 
+			// Make sure there are fields (see #6437)
+			if (is_array($GLOBALS['TL_DCA'][$strTable]['fields']))
+			{
 			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
 			{
 				// FIXME: support other field types
@@ -709,23 +712,61 @@ class Updater extends \Controller
 				}
 			}
 		}
+		}
 
 		// Update the existing singleSRC entries
+		if (isset($arrFields['single']))
+		{
 		foreach ($arrFields['single'] as $val)
 		{
 			list($table, $field) = explode('.', $val);
+				static::convertSingleField($table, $field);
+			}
+		}
+
+		// Update the existing multiSRC entries
+		if (isset($arrFields['multiple']))
+		{
+			foreach ($arrFields['multiple'] as $val)
+			{
+				list($table, $field) = explode('.', $val);
+				static::convertMultiField($table, $field);
+			}
+		}
+
+		// Update the existing orderField entries
+		if (isset($arrFields['order']))
+		{
+			foreach ($arrFields['order'] as $val)
+			{
+				list($table, $field) = explode('.', $val);
+				static::convertOrderField($table, $field);
+			}
+		}
+	}
+
+
+	/**
+	 * Convert a single source field to UUIDs
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertSingleField($table, $field)
+	{
 			$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
 
 			// Backup the original column and then change the column type
-			if (!$this->Database->fieldExists($backup, $table, true))
+		if (!$objDatabase->fieldExists($backup, $table, true))
 			{
-				$this->Database->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
-				$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
-				$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
-				$this->Database->query("UPDATE `$table` SET `$field`=NULL");
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
 			}
 
-			$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
 			while ($objRow->next())
 			{
@@ -734,7 +775,7 @@ class Updater extends \Controller
 				{
 					$objFile = \FilesModel::findByPk($objRow->$backup);
 
-					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute($objFile->uuid, $objRow->id);
 				}
 
@@ -743,28 +784,34 @@ class Updater extends \Controller
 				{
 					$objFile = \FilesModel::findByPath($objRow->$backup);
 
-					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute($objFile->uuid, $objRow->id);
 				}
 			}
 		}
 
-		// Update the existing multiSRC entries
-		foreach ($arrFields['multiple'] as $val)
+
+	/**
+	 * Convert a multi source field to UUIDs
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertMultiField($table, $field)
 		{
-			list($table, $field) = explode('.', $val);
 			$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
 
 			// Backup the original column and then change the column type
-			if (!$this->Database->fieldExists($backup, $table, true))
+		if (!$objDatabase->fieldExists($backup, $table, true))
 			{
-				$this->Database->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
-				$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
-				$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
-				$this->Database->query("UPDATE `$table` SET `$field`=NULL");
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
 			}
 
-			$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
 			while ($objRow->next())
 			{
@@ -792,29 +839,33 @@ class Updater extends \Controller
 					}
 				}
 
-				$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 							   ->execute(serialize($arrPaths), $objRow->id);
 			}
 		}
 
-		// Update the existing orderField entries
-		if (isset($arrFields['order']))
-		{
-			foreach ($arrFields['order'] as $val)
+
+	/**
+	 * Convert an order source field to UUID
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertOrderField($table, $field)
 			{
-				list($table, $field) = explode('.', $val);
 				$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
 
 				// Backup the original column and then change the column type
-				if (!$this->Database->fieldExists($backup, $table, true))
+		if (!$objDatabase->fieldExists($backup, $table, true))
 				{
-					$this->Database->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
-					$this->Database->query("UPDATE `$table` SET `$backup`=`$field`");
-					$this->Database->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
-					$this->Database->query("UPDATE `$table` SET `$field`=NULL");
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
 				}
 
-				$objRow = $this->Database->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
 				while ($objRow->next())
 				{
@@ -837,12 +888,10 @@ class Updater extends \Controller
 						}
 					}
 
-					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 								   ->execute(serialize($arrPaths), $objRow->id);
 				}
 			}
-		}
-	}
 
 
 	/**
