@@ -846,7 +846,7 @@ class Updater extends \Controller
 
 
 	/**
-	 * Convert an order source field to UUID
+	 * Convert an order source field to UUIDs
 	 *
 	 * @param string $table The table name
 	 * @param string $field The field name
