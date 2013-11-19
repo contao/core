@@ -547,7 +547,7 @@ class Updater extends \Controller
 	 * @param string  $strPath The target folder
 	 * @param integer $pid     The parent ID
 	 */
-	public function scanUploadFolder($strPath=null, $pid=0)
+	public function scanUploadFolder($strPath=null, $pid=null)
 	{
 		if ($strPath === null)
 		{
@@ -690,36 +690,36 @@ class Updater extends \Controller
 			// Make sure there are fields (see #6437)
 			if (is_array($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
-			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
-			{
-				// FIXME: support other field types
-				if ($arrField['inputType'] == 'fileTree')
+				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
 				{
-					if ($this->Database->fieldExists($strField, $strTable))
+					// FIXME: support other field types
+					if ($arrField['inputType'] == 'fileTree')
 					{
-						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
-						$arrFields[$key][] = $strTable . '.' . $strField;
-					}
-
-					// Convert the order fields as well
-					if (isset($arrField['eval']['orderField']) && isset($GLOBALS['TL_DCA'][$strTable]['fields'][$arrField['eval']['orderField']]))
-					{
-						if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable))
+						if ($this->Database->fieldExists($strField, $strTable))
 						{
-							$arrFields['order'][] = $strTable . '.' . $arrField['eval']['orderField'];
+							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+							$arrFields[$key][] = $strTable . '.' . $strField;
+						}
+
+						// Convert the order fields as well
+						if (isset($arrField['eval']['orderField']) && isset($GLOBALS['TL_DCA'][$strTable]['fields'][$arrField['eval']['orderField']]))
+						{
+							if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable))
+							{
+								$arrFields['order'][] = $strTable . '.' . $arrField['eval']['orderField'];
+							}
 						}
 					}
 				}
 			}
 		}
-		}
 
 		// Update the existing singleSRC entries
 		if (isset($arrFields['single']))
 		{
-		foreach ($arrFields['single'] as $val)
-		{
-			list($table, $field) = explode('.', $val);
+			foreach ($arrFields['single'] as $val)
+			{
+				list($table, $field) = explode('.', $val);
 				static::convertSingleField($table, $field);
 			}
 		}
@@ -754,41 +754,41 @@ class Updater extends \Controller
 	 */
 	public static function convertSingleField($table, $field)
 	{
-			$backup = $field . '_backup';
+		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-			// Backup the original column and then change the column type
+		// Backup the original column and then change the column type
 		if (!$objDatabase->fieldExists($backup, $table, true))
-			{
+		{
 			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
 			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
 			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
 			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
-			}
+		}
 
 		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
-			while ($objRow->next())
+		while ($objRow->next())
+		{
+			// Numeric ID to UUID
+			if (is_numeric($objRow->$backup))
 			{
-				// Numeric ID to UUID
-				if (is_numeric($objRow->$backup))
-				{
-					$objFile = \FilesModel::findByPk($objRow->$backup);
+				$objFile = \FilesModel::findByPk($objRow->$backup);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute($objFile->uuid, $objRow->id);
-				}
+							->execute($objFile->uuid, $objRow->id);
+			}
 
-				// Path to UUID
-				else
-				{
-					$objFile = \FilesModel::findByPath($objRow->$backup);
+			// Path to UUID
+			else
+			{
+				$objFile = \FilesModel::findByPath($objRow->$backup);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute($objFile->uuid, $objRow->id);
-				}
+							->execute($objFile->uuid, $objRow->id);
 			}
 		}
+	}
 
 
 	/**
@@ -798,51 +798,51 @@ class Updater extends \Controller
 	 * @param string $field The field name
 	 */
 	public static function convertMultiField($table, $field)
-		{
-			$backup = $field . '_backup';
+	{
+		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-			// Backup the original column and then change the column type
+		// Backup the original column and then change the column type
 		if (!$objDatabase->fieldExists($backup, $table, true))
-			{
+		{
 			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
 			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
 			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
 			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
-			}
+		}
 
 		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
-			while ($objRow->next())
+		while ($objRow->next())
+		{
+			$arrPaths = deserialize($objRow->$backup, true);
+
+			if (empty($arrPaths))
 			{
-				$arrPaths = deserialize($objRow->$backup, true);
+				continue;
+			}
 
-				if (empty($arrPaths))
+			foreach ($arrPaths as $k=>$v)
+			{
+				// Numeric ID to UUID
+				if (is_numeric($v))
 				{
-					continue;
+					$objFile = \FilesModel::findByPk($v);
+					$arrPaths[$k] = $objFile->uuid;
 				}
 
-				foreach ($arrPaths as $k=>$v)
+				// Path to UUID
+				else
 				{
-					// Numeric ID to UUID
-					if (is_numeric($v))
-					{
-						$objFile = \FilesModel::findByPk($v);
-						$arrPaths[$k] = $objFile->uuid;
-					}
-
-					// Path to UUID
-					else
-					{
-						$objFile = \FilesModel::findByPath($v);
-						$arrPaths[$k] = $objFile->uuid;
-					}
+					$objFile = \FilesModel::findByPath($v);
+					$arrPaths[$k] = $objFile->uuid;
 				}
+			}
 
 			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-							   ->execute(serialize($arrPaths), $objRow->id);
-			}
+						->execute(serialize($arrPaths), $objRow->id);
 		}
+	}
 
 
 	/**
@@ -852,46 +852,46 @@ class Updater extends \Controller
 	 * @param string $field The field name
 	 */
 	public static function convertOrderField($table, $field)
-			{
-				$backup = $field . '_backup';
+	{
+		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-				// Backup the original column and then change the column type
+		// Backup the original column and then change the column type
 		if (!$objDatabase->fieldExists($backup, $table, true))
-				{
+		{
 			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
 			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
 			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
 			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
-				}
+		}
 
 		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
 
-				while ($objRow->next())
+		while ($objRow->next())
+		{
+			$arrPaths = explode(',', $objRow->$backup);
+
+			foreach ($arrPaths as $k=>$v)
+			{
+				// Numeric ID to UUID
+				if (is_numeric($v))
 				{
-					$arrPaths = explode(',', $objRow->$backup);
+					$objFile = \FilesModel::findByPk($v);
+					$arrPaths[$k] = $objFile->uuid;
+				}
 
-					foreach ($arrPaths as $k=>$v)
-					{
-						// Numeric ID to UUID
-						if (is_numeric($v))
-						{
-							$objFile = \FilesModel::findByPk($v);
-							$arrPaths[$k] = $objFile->uuid;
-						}
-
-						// Path to UUID
-						else
-						{
-							$objFile = \FilesModel::findByPath($v);
-							$arrPaths[$k] = $objFile->uuid;
-						}
-					}
-
-			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute(serialize($arrPaths), $objRow->id);
+				// Path to UUID
+				else
+				{
+					$objFile = \FilesModel::findByPath($v);
+					$arrPaths[$k] = $objFile->uuid;
 				}
 			}
+
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+						->execute(serialize($arrPaths), $objRow->id);
+		}
+	}
 
 
 	/**
