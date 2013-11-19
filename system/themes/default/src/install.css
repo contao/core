@@ -123,6 +123,15 @@ li {
 #sql_table pre {
 	white-space:pre-wrap;
 }
+#sql_table .tl_checkbox {
+	margin-top:3px;
+}
+.webkit #sql_table .tl_checkbox {
+	margin-top:4px;
+}
+.ie #sql_table .tl_checkbox {
+	margin-top:-1px;
+}
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
 }
@@ -139,6 +148,9 @@ li {
 }
 .tl_col_2 {
 	padding:2px 0 3px 4px;
+}
+.backup label {
+	color:#999;
 }
 
 /* Error and confirmation messages */

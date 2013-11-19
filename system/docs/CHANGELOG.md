@@ -4,6 +4,13 @@ Contao Open Source CMS changelog
 Version 3.2.0 (2013-11-XX)
 --------------------------
 
+### Improved
+Split the routines to convert database fields to UUIDs into separate methods:
+
+ * `Database\Updater::convertSingleField($table, $field)`
+ * `Database\Updater::convertMultiField($table, $field)`
+ * `Database\Updater::convertOrderField($table, $field)`
+
 ### Fixed
 Correctly show the folder protection status in the file picker (see #6433).
 

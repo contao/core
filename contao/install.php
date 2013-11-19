@@ -193,8 +193,8 @@ class InstallTool extends Backend
 		// Store the collation
 		$this->storeCollation();
 
-		// Update the database tables
-		$this->updateDatabaseTables();
+		// Adjust the database tables
+		$this->adjustDatabaseTables();
 
 		// Import the example website
 		try
@@ -596,9 +596,9 @@ class InstallTool extends Backend
 
 
 	/**
-	 * Update the database tables
+	 * Adjust the database tables
 	 */
-	protected function updateDatabaseTables()
+	protected function adjustDatabaseTables()
 	{
 		if (Input::post('FORM_SUBMIT') == 'tl_tables')
 		{
@@ -830,12 +830,33 @@ class InstallTool extends Backend
 
 
 	/**
+	 * Enable the safe mode and switch to maintenance mode
+	 */
+	protected function enableSafeMode()
+	{
+		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		{
+			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
+		}
+
+		if (!$GLOBALS['TL_CONFIG']['maintenanceMode'])
+		{
+			$GLOBALS['TL_CONFIG']['maintenanceMode'] = true;
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+		}
+	}
+
+
+	/**
 	 * Version 2.8.0 update
 	 */
 	protected function update28()
 	{
 		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('script', 'tl_layout'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_28update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -856,6 +877,8 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_layout') && !$this->Database->tableExists('tl_theme'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_29update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -876,6 +899,7 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_calendar_events'))
 		{
+			$this->enableSafeMode();
 			$arrFields = $this->Database->listFields('tl_calendar_events');
 
 			foreach ($arrFields as $arrField)
@@ -904,6 +928,8 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_style') && !$this->Database->fieldExists('positioning', 'tl_style'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_210update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -925,6 +951,8 @@ class InstallTool extends Backend
 		// Step 1: database structure
 		if (!$this->Database->tableExists('tl_files'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -961,6 +989,8 @@ class InstallTool extends Backend
 		// Step 2: scan the upload folder if it is not empty (see #6061)
 		if ($objRow->count < 1 && count(scan(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'])) > 0)
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -977,6 +1007,8 @@ class InstallTool extends Backend
 		// Step 3: update the database fields
 		elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_30update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -999,6 +1031,8 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_content') && $this->Database->fieldExists('mooType', 'tl_content'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_31update')
 			{
 				$this->import('Database\\Updater', 'Updater');
@@ -1019,6 +1053,8 @@ class InstallTool extends Backend
 	{
 		if ($this->Database->tableExists('tl_files') && !$this->Database->fieldExists('uuid', 'tl_files'))
 		{
+			$this->enableSafeMode();
+
 			if (Input::post('FORM_SUBMIT') == 'tl_32update')
 			{
 				$this->import('Database\\Updater', 'Updater');
