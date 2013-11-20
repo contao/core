@@ -1052,19 +1052,35 @@ class InstallTool extends Backend
 	 */
 	protected function update32()
 	{
-		if ($this->Database->tableExists('tl_files') && !$this->Database->fieldExists('uuid', 'tl_files'))
+		if ($this->Database->tableExists('tl_files'))
 		{
-			$this->enableSafeMode();
+			$blnDone = false;
 
-			if (Input::post('FORM_SUBMIT') == 'tl_32update')
+			// Check whether the field has been changed already
+			foreach ($this->Database->listFields('tl_layout') as $arrField)
 			{
-				$this->import('Database\\Updater', 'Updater');
-				$this->Updater->run32Update();
-				$this->reload();
+				if ($arrField['name'] == 'sections' && $arrField['length'] == 1022)
+				{
+					$blnDone = true;
+					break;
+				}
 			}
 
-			$this->Template->is32Update = true;
-			$this->outputAndExit();
+			// Run the version 3.2.0 update
+			if (!$blnDone)
+			{
+				$this->enableSafeMode();
+
+				if (Input::post('FORM_SUBMIT') == 'tl_32update')
+				{
+					$this->import('Database\\Updater', 'Updater');
+					$this->Updater->run32Update();
+					$this->reload();
+				}
+
+				$this->Template->is32Update = true;
+				$this->outputAndExit();
+			}
 		}
 	}
 }

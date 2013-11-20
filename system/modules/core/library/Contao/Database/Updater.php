@@ -481,46 +481,6 @@ class Updater extends \Controller
 	 */
 	public function run32Update()
 	{
-		// Adjust the DB structure
-		$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` binary(16) NULL");
-		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
-
-		// Backup the pid column and change the column type
-		$this->Database->query("ALTER TABLE `tl_files` ADD `pid_backup` int(10) unsigned NOT NULL default '0'");
-		$this->Database->query("UPDATE `tl_files` SET `pid_backup`=`pid`");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` binary(16) NULL");
-		$this->Database->query("UPDATE `tl_files` SET `pid`=NULL");
-		$this->Database->query("UPDATE `tl_files` SET `pid`=NULL WHERE `pid_backup`=0");
-
-		$objFiles = $this->Database->query("SELECT id FROM tl_files");
-
-		// Generate the UUIDs
-		while ($objFiles->next())
-		{
-			$this->Database->prepare("UPDATE tl_files SET uuid=? WHERE id=?")
-						   ->execute($this->Database->getUuid(), $objFiles->id);
-		}
-
-		$objFiles = $this->Database->query("SELECT pid_backup FROM tl_files WHERE pid_backup>0 GROUP BY pid_backup");
-
-		// Adjust the parent IDs
-		while ($objFiles->next())
-		{
-			$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
-										->execute($objFiles->pid_backup);
-
-			if ($objParent->numRows < 1)
-			{
-				throw new \Exception('Invalid parent ID ' . $objFiles->pid_backup);
-			}
-
-			$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid_backup=?")
-						   ->execute($objParent->uuid, $objFiles->pid_backup);
-		}
-
-		// Update the fields
-		$this->updateFileTreeFields();
-
 		// Adjust the custom layout sections (see #2885)
 		$this->Database->query("ALTER TABLE `tl_layout` CHANGE `sections` `sections` varchar(1022) NOT NULL default ''");
 		$objLayout = $this->Database->query("SELECT id, sections FROM tl_layout WHERE sections!=''");
@@ -537,6 +497,50 @@ class Updater extends \Controller
 
 			$this->Database->prepare("UPDATE tl_layout SET sections=? WHERE id=?")
 						   ->execute($strSections, $objLayout->id);
+		}
+
+		// Check whether there are UUIDs
+		if (!$this->Database->fieldExists('uuid', 'tl_files'))
+		{
+			// Adjust the DB structure
+			$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` binary(16) NULL");
+			$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
+
+			// Backup the pid column and change the column type
+			$this->Database->query("ALTER TABLE `tl_files` ADD `pid_backup` int(10) unsigned NOT NULL default '0'");
+			$this->Database->query("UPDATE `tl_files` SET `pid_backup`=`pid`");
+			$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` binary(16) NULL");
+			$this->Database->query("UPDATE `tl_files` SET `pid`=NULL");
+			$this->Database->query("UPDATE `tl_files` SET `pid`=NULL WHERE `pid_backup`=0");
+
+			$objFiles = $this->Database->query("SELECT id FROM tl_files");
+
+			// Generate the UUIDs
+			while ($objFiles->next())
+			{
+				$this->Database->prepare("UPDATE tl_files SET uuid=? WHERE id=?")
+							   ->execute($this->Database->getUuid(), $objFiles->id);
+			}
+
+			$objFiles = $this->Database->query("SELECT pid_backup FROM tl_files WHERE pid_backup>0 GROUP BY pid_backup");
+
+			// Adjust the parent IDs
+			while ($objFiles->next())
+			{
+				$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
+											->execute($objFiles->pid_backup);
+
+				if ($objParent->numRows < 1)
+				{
+					throw new \Exception('Invalid parent ID ' . $objFiles->pid_backup);
+				}
+
+				$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid_backup=?")
+							   ->execute($objParent->uuid, $objFiles->pid_backup);
+			}
+
+			// Update the fields
+			$this->updateFileTreeFields();
 		}
 	}
 
