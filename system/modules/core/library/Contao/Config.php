@@ -136,7 +136,7 @@ class Config
 		else
 		{
 			// Get the module configuration files
-			foreach ($this->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
 

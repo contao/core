@@ -553,7 +553,7 @@ class Automator extends \System
 		$arrFiles = array();
 
 		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -582,7 +582,7 @@ class Automator extends \System
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
@@ -633,7 +633,7 @@ class Automator extends \System
 			$arrFiles = array();
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strDir = 'system/modules/' . $strModule . '/languages/' . $strLanguage;
 
@@ -679,7 +679,7 @@ class Automator extends \System
 				$objCacheFile->write(sprintf($strHeader, $strLanguage));
 
 				// Parse all active modules and append to the cache file
-				foreach ($this->Config->getActiveModules() as $strModule)
+				foreach (\ModuleLoader::getActive() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
 
@@ -712,7 +712,7 @@ class Automator extends \System
 		$arrExtracts = array();
 
 		// Only check the active modules (see #4541)
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 

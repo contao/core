@@ -219,7 +219,7 @@ abstract class Controller extends \System
 			}
 
 			// HOOK: trigger the article_raster_designer extension
-			if (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			if (in_array('article_raster_designer', \ModuleLoader::getActive()))
 			{
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
@@ -2358,7 +2358,7 @@ abstract class Controller extends \System
 		}
 		else
 		{
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 

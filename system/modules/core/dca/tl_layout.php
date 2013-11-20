@@ -537,7 +537,7 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		if (!in_array('news', $this->Config->getActiveModules()))
+		if (!in_array('news', ModuleLoader::getActive()))
 		{
 			return array();
 		}
@@ -566,7 +566,7 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		if (!in_array('calendar', $this->Config->getActiveModules()))
+		if (!in_array('calendar', ModuleLoader::getActive()))
 		{
 			return array();
 		}

@@ -306,21 +306,21 @@ class ModuleRegistration extends \Module
 		$this->Template->action = \Environment::get('indexFreeRequest');
 
 		// HOOK: add memberlist fields
-		if (in_array('memberlist', $this->Config->getActiveModules()))
+		if (in_array('memberlist', \ModuleLoader::getActive()))
 		{
 			$this->Template->profile = $arrFields['profile'];
 			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
 		}
 
 		// HOOK: add newsletter fields
-		if (in_array('newsletter', $this->Config->getActiveModules()))
+		if (in_array('newsletter', \ModuleLoader::getActive()))
 		{
 			$this->Template->newsletter = $arrFields['newsletter'];
 			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
 		}
 
 		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', $this->Config->getActiveModules()))
+		if (in_array('helpdesk', \ModuleLoader::getActive()))
 		{
 			$this->Template->helpdesk = $arrFields['helpdesk'];
 			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
@@ -373,7 +373,7 @@ class ModuleRegistration extends \Module
 					// HOOK: support newsletter subscriptions
 					case 'channel':
 					case 'channels':
-						if (!in_array('newsletter', $this->Config->getActiveModules()))
+						if (!in_array('newsletter', \ModuleLoader::getActive()))
 						{
 							break;
 						}

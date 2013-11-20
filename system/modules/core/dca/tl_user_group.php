@@ -308,7 +308,7 @@ class tl_user_group extends Backend
 	{
 		$included = array();
 
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 

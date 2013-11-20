@@ -285,7 +285,7 @@ abstract class System
 			}
 			else
 			{
-				foreach (\Config::getInstance()->getActiveModules() as $strModule)
+				foreach (\ModuleLoader::getActive() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strCreateLang . '/' . $strName;
 
