@@ -329,10 +329,16 @@ class Installer extends \Controller
 		$table = '';
 		$return = array();
 
-		// Get all SQL files
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		// Only check the active modules (see #4541)
+		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			if (strncmp($strModule, '.', 1) === 0 || strncmp($strModule, '__', 2) === 0)
+			{
+				continue;
+			}
+
+			// Ignore the database.sql of the not renamed core modules
+			if (in_array($strModule, array('calendar', 'comments', 'faq', 'listing', 'news', 'newsletter')))
 			{
 				continue;
 			}
@@ -458,7 +464,7 @@ class Installer extends \Controller
 					}
 
 					// Default values
-					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['default']) == 'null')
+					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['null']) == 'null')
 					{
 						unset($field['default']);
 					}

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.0 (2013-11-XX)
 --------------------------
 
+### Fixed
+Applied some minor fixes to the database installer.
+
 ### Improved
 Split the routines to convert database fields to UUIDs into separate methods:
 
