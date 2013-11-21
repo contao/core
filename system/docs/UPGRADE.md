@@ -4,29 +4,32 @@ Contao Open Source CMS API changes
 Version 3.1 to 3.2
 ------------------
 
-### `FilesModel::findByPk()`
+### `Model::save()`
 
-Before Contao 3.2, fields like `$this->singleSRC` and `$this->multiSRC` were
-used to store integers or arrays of integers referencing rows in the `tl_files`
-table. However, now that Contao uses UUIDs for files, the field values have been
-converted to UUIDs or arrays of UUIDs automatically.
+In Contao 3.0 and 3.1 it was possible to create two models for the same database
+record by passing `true` to the `Model::save()` method. However, this could lead
+to a loss of data in certain edge-cases, so we have decided to implement a model
+registry to ensure that there is only one model per database record.
 
-Therefore, any call to `findByPk()` or `findMultipleByIds()` using one of these
-UUID fields as argument will now fail (it still works with IDs though), so make
-sure to adjust your custom code as described below.
+The registry, however, requires to use the `clone` command to duplicate models,
+therefore the `$blnForceInsert` argment had to be removed. If you have used it
+in your custom extension, be sure to adjust the code accordingly.
 
 Usage in Contao 3.0 and 3.1:
 
 ```php
-$objFile = FilesModel::findByPk($this->singleSRC);
-$objFiles = FilesModel::findMultipleByIds($this->multiSRC);
+$objPage = PageModel::findByPk(1);
+$objPage->title = 'New page title';
+$objPage->save(true);
 ```
 
 New usage as of Contao 3.2:
 
 ```php
-$objFile = FilesModel::findByUuid($this->singleSRC);
-$objFiles = FilesModel::findMultipleByUuids($this->multiSRC);
+$objPage = PageModel::findByPk(1);
+$objCopy = clone $objPage;
+$objCopy->title = 'New page title';
+$objCopy->save();
 ```
 
 
@@ -104,32 +107,3 @@ public function addAliasButton($arrButtons)
 
 In case you have been using the "buttons_callback", please make sure to adjust
 your extension accordingly.
-
-
-### `Model::save()`
-
-In Contao 3.0 and 3.1 it was possible to create two models for the same database
-record by passing `true` to the `Model::save()` method. However, this could lead
-to a loss of data in certain edge-cases, so we have decided to implement a model
-registry to ensure that there is only one model per database record.
-
-The registry, however, requires to use the `clone` command to duplicate models,
-therefore the `$blnForceInsert` argment had to be removed. If you have used it
-in your custom extension, be sure to adjust the code accordingly.
-
-Usage in Contao 3.0 and 3.1:
-
-```php
-$objPage = PageModel::findByPk(1);
-$objPage->title = 'New page title';
-$objPage->save(true);
-```
-
-New usage as of Contao 3.2:
-
-```php
-$objPage = PageModel::findByPk(1);
-$objCopy = clone $objPage;
-$objCopy->title = 'New page title';
-$objCopy->save();
-```
