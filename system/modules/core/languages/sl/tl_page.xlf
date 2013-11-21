@@ -255,6 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
         <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>CSS razredi (&lt;em&gt;class&lt;/em&gt;) bodo uporabljeni v navigacijskem meniju in oznaki &amp;lt;body&amp;gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

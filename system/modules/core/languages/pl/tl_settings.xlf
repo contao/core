@@ -139,15 +139,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
+        <target>Zaufane serwery proxy</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Tutaj możesz wprowadzić oddzieloną przecinkami listę zaufanych serwerów proxy.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
+        <target>Domena proxy SSL</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Jeśli twoja strona jest dostępna przez serwer proxy SSL, wprowadź jego domenę (np. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -231,9 +235,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>Tryb konserwacji</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Wyślij nagłówek 503 HTTP i pokaż stronę konserwacji.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -569,6 +575,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
+        <target>Konfiguracja proxy</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -604,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cron_legend">
         <source>Command scheduler</source>
+        <target>Automatyczne zadania</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

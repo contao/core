@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
+        <target>Wystąpił błąd %s podczas wgrywania pliku %s!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -150,6 +151,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Logowanie nieudane (wielkość liter nazw użytkowników i haseł ma znaczenie)!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1543,9 +1545,11 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Pobierz plik</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
+        <target>Unikalne ID</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1753,6 +1757,7 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao aktualnie działa w trybie &lt;strong&gt;konserwacji&lt;/strong&gt;, w którym strona (front end) nie jest dostępna. Nie wyłączaj go, jeśli aktualnie instalujesz lub aktualizujesz rozszerzenia! Strona może nie funkcjonować poprawnie.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1856,6 +1861,7 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       </trans-unit>
       <trans-unit id="MSC.ptable">
         <source>Parent table</source>
+        <target>Tabela rodzica</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

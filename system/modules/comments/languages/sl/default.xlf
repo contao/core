@@ -58,6 +58,18 @@ View: %s
 Edit: %s
 
 If you are moderating comments, you have to log in to the back end to publish it.</source>
+        <target>%s je dodal nov komentar na vašem spletnem mestu.⏎
+⏎
+---⏎
+⏎
+%s⏎
+⏎
+---⏎
+⏎
+Preglej: %s⏎
+Uredi: %s⏎
+⏎
+Če komentarje moderirate, se morate prijaviti v administracijo in ga potrditi.</target>
       </trans-unit>
       <trans-unit id="MSC.com_confirm">
         <source>Your comment has been added and is now pending for approval.</source>
@@ -87,6 +99,17 @@ please confirm that you want to be notified of new comments by e-mail on this pa
 Confirm: %s
 Cancel: %s
 </source>
+        <target>Zdravo %s,⏎
+⏎
+prosimo potrdite, da želite biti o novih komentarjih na tem spletnem mestu obveščeni preko e-pošte:⏎
+⏎
+%s⏎
+⏎
+---⏎
+⏎
+Potrditev: %s⏎
+Preklic: %s⏎
+</target>
       </trans-unit>
       <trans-unit id="MSC.com_notifySubject">
         <source>A new comment has been added on %s</source>

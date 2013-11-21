@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field &quot;%s&quot; must not be empty!</source>
-        <target>Töltse ki a &quot;%s&quot; mezőt!</target>
+        <target>A &quot;%s&quot; mező nem lehet üres!</target>
       </trans-unit>
       <trans-unit id="ERR.mdtryNoLabel">
         <source>This field must not be empty!</source>
@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
+        <target>%s hiba történt a következő fájl feltöltésekor: %s!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -150,6 +151,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Sikertelen bejelentkezés (a felhasználó név és jelszó megkülönbözteti a kis és nagy betűket)!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -161,6 +163,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
+        <target>Válasszon ki legalább egy fájlt!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -948,6 +951,7 @@
       </trans-unit>
       <trans-unit id="MSC.mw_enable">
         <source>Enable/disable the module</source>
+        <target>Modul bekapcsolás/kikapcsolás</target>
       </trans-unit>
       <trans-unit id="MSC.aw_title">
         <source>Title</source>
@@ -1147,15 +1151,19 @@
       </trans-unit>
       <trans-unit id="MSC.currentLogin.0">
         <source>Current login</source>
+        <target>Jelenlegi belépés</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
         <source>Current login: %s</source>
+        <target>Jelenleg bejelentkezve: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
+        <target>Bejelentkezési kísérletek</target>
       </trans-unit>
       <trans-unit id="MSC.locked">
         <source>Locked</source>
+        <target>Zárolva</target>
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
@@ -1199,6 +1207,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>Tudjon meg többet, hogyan gyorsíthatja fel a munkafolyamatot a &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;gyorsbillentyűk&lt;/a&gt; használatával.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1536,9 +1545,11 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Fájl letöltése</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
+        <target>Egyedi azonosító</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1634,12 +1645,15 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.filePickerHome">
         <source>Back to the file picker</source>
+        <target>Vissza a fájl választóhoz</target>
       </trans-unit>
       <trans-unit id="MSC.pagePickerHome">
         <source>Back to the page picker</source>
+        <target>Vissza az oldal választóhoz</target>
       </trans-unit>
       <trans-unit id="MSC.pickerNoSelection">
         <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>Kérjük térjen vissza az oldal vagy fájl választóhoz és végezze el a kiválasztást mielőtt bezárja a párbeszédablakot.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1743,6 +1757,7 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao jelenleg &lt;strong&gt;karbantartási módban&lt;/strong&gt; fut, honlapja (felhasználói felület) jelenleg nem elérhető. Ezt ne kapcsolja ki ha jelenleg kiterjesztéseket telepít vagy frissít! Lehetséges, hogy a weboldal nem működik megfelelően.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1846,6 +1861,7 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.ptable">
         <source>Parent table</source>
+        <target>Szülő tábla</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
@@ -2057,9 +2073,11 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="MSC.createdOn">
         <source>Created on</source>
+        <target>Létrehozva</target>
       </trans-unit>
       <trans-unit id="MSC.activation">
         <source>Activated on</source>
+        <target>Aktiválva</target>
       </trans-unit>
       <trans-unit id="MSC.relevance">
         <source>%s relevance</source>

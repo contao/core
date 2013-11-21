@@ -267,9 +267,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.minlength.0">
         <source>Minimum length</source>
+        <target>Minimum hosszúság</target>
       </trans-unit>
       <trans-unit id="tl_form_field.minlength.1">
         <source>Require the field value to be a certain number of characters long.</source>
+        <target>A mező értéke szükséges, hogy egy bizonyos karakter hosszúságú lehessen.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>

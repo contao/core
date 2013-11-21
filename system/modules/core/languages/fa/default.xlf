@@ -221,7 +221,7 @@
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
-        <target>این المان همچنان از فرمت قدیمی Contao 2 SRC استفاده می‌کند. آیا شما پایگاه داده را ارتقاء داده‌اید؟</target>
+        <target>این المان همچنان از قالب قدیمی کانتائو۲ استفاده می‌کند. آیا پایگاه داده را ارتقاء داده‌اید؟</target>
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>

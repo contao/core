@@ -239,6 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Envoyer un en-tête HTTP 503 et afficher une page de maintenance en front office.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -610,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cron_legend">
         <source>Command scheduler</source>
+        <target>Planificateur de commandes</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

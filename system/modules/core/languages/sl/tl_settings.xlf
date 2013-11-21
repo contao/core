@@ -223,6 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>Vzdrževalni način</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
