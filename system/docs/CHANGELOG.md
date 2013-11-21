@@ -5,6 +5,9 @@ Version 3.2.0 (2013-11-XX)
 --------------------------
 
 ### Fixed
+Handle UUID strings in the UUID related `FilesModel` methods (see #6445).
+
+### Fixed
 Applied some minor fixes to the database installer.
 
 ### Improved

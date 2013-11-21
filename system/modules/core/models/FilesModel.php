@@ -110,6 +110,13 @@ class FilesModel extends \Model
 	public static function findByUuid($strUuid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
+
+		// Convert UUIDs to binary
+		if (strlen($strUuid) == 36)
+		{
+			$strUuid = \String::uuidToBin($strUuid);
+		}
+
 		return static::findOneBy(array("HEX($t.uuid)=?"), bin2hex($strUuid), $arrOptions);
 	}
 
@@ -117,7 +124,7 @@ class FilesModel extends \Model
 	/**
 	 * Find multiple files by their UUIDs
 	 *
-	 * @param array $arrUuids   An array of file UUIDs
+	 * @param array $arrUuids   An array of UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no files
@@ -130,7 +137,17 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrUuids = array_map('bin2hex', $arrUuids);
+
+		foreach ($arrUuids as $k=>$v)
+		{
+			// Convert UUIDs to binary
+			if (strlen($v) == 36)
+			{
+				$v = \String::uuidToBin($v);
+			}
+
+			$arrUuids[$k] = bin2hex($v);
+		}
 
 		if (!isset($arrOptions['order']))
 		{
