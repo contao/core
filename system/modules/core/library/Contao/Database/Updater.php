@@ -699,7 +699,7 @@ class Updater extends \Controller
 					// FIXME: support other field types
 					if ($arrField['inputType'] == 'fileTree')
 					{
-						if ($this->Database->fieldExists($strField, $strTable))
+						if ($this->Database->fieldExists($strField, $strTable, true))
 						{
 							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
 							$arrFields[$key][] = $strTable . '.' . $strField;
@@ -708,7 +708,7 @@ class Updater extends \Controller
 						// Convert the order fields as well
 						if (isset($arrField['eval']['orderField']) && isset($GLOBALS['TL_DCA'][$strTable]['fields'][$arrField['eval']['orderField']]))
 						{
-							if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable))
+							if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable, true))
 							{
 								$arrFields['order'][] = $strTable . '.' . $arrField['eval']['orderField'];
 							}
