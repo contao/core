@@ -156,7 +156,7 @@ abstract class Database
 
 		if (!isset(static::$arrInstances[$strKey]))
 		{
-			$strClass = 'Database\\' . ucfirst(strtolower($arrConfig['dbDriver']));
+			$strClass = 'Database\\' . str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($arrConfig['dbDriver']))));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 
@@ -244,11 +244,11 @@ abstract class Database
 		}
 
 		$arrReturn = array();
-		$arrTables = $this->query(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
+		$objTables = $this->query(sprintf($this->strListTables, $strDatabase));
 
-		foreach ($arrTables as $arrTable)
+		while ($objTables->next())
 		{
-			$arrReturn[] = current($arrTable);
+			$arrReturn[] = current($objTables->row());
 		}
 
 		$this->arrCache[$strDatabase] = $arrReturn;
@@ -573,6 +573,17 @@ abstract class Database
 
 
 	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	public function getUuid()
+	{
+		return $this->get_uuid();
+	}
+
+
+	/**
 	 * Connect to the database server and select the database
 	 */
 	abstract protected function connect();
@@ -681,11 +692,19 @@ abstract class Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */
 	abstract protected function get_next_id($strTable);
+
+
+	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	abstract protected function get_uuid();
 
 
 	/**

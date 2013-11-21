@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_install.passError">
         <source>Please enter a password to prevent unauthorized access!</source>
-        <target>Ret venligst standard password for at forhindre uautoriseret adgang.</target>
+        <target>Ret venligst standard password for at hindre uautoriseret adgang.</target>
       </trans-unit>
       <trans-unit id="tl_install.passConfirm">
         <source>A custom password has been set.</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbCharset">
         <source>Character set</source>
-        <target>Tegnsæt</target>
+        <target>Karektersæt</target>
       </trans-unit>
       <trans-unit id="tl_install.dbCollation">
         <source>Collation</source>

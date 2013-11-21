@@ -188,7 +188,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			(
 				array('tl_calendar_events', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -291,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
 		(
@@ -354,6 +354,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'default'                 => 'above',
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
@@ -420,7 +421,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
-			'options'                 => array('default', 'internal', 'article', 'external'),
+			'options_callback'        => array('tl_calendar_events', 'getSourceOptions'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_events'],
 			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -535,7 +536,7 @@ class tl_calendar_events extends Backend
 	public function checkPermission()
 	{
 		// HOOK: comments extension required
-		if (!in_array('comments', $this->Config->getActiveModules()))
+		if (!in_array('comments', ModuleLoader::getActive()))
 		{
 			$key = array_search('allowComments', $GLOBALS['TL_DCA']['tl_calendar_events']['list']['sorting']['headerFields']);
 			unset($GLOBALS['TL_DCA']['tl_calendar_events']['list']['sorting']['headerFields'][$key]);
@@ -568,7 +569,7 @@ class tl_calendar_events extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create events in calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create events in calendar ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -577,7 +578,7 @@ class tl_calendar_events extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" to calendar ID "'.Input::get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" to calendar ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -592,13 +593,13 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid event ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid event ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objCalendar->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -611,7 +612,7 @@ class tl_calendar_events extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -620,7 +621,7 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -632,12 +633,12 @@ class tl_calendar_events extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -802,6 +803,49 @@ class tl_calendar_events extends Backend
 		}
 
 		return $arrAlias;
+	}
+
+
+	/**
+	 * Add the source options depending on the allowed fields (see #5498)
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getSourceOptions(DataContainer $dc)
+	{
+		if ($this->User->isAdmin)
+		{
+			return array('default', 'internal', 'article', 'external');
+		}
+
+		$arrOptions = array('default');
+
+		// Add the "internal" option
+		if ($this->User->hasAccess('tl_calendar_events::jumpTo', 'alexf'))
+		{
+			$arrOptions[] = 'internal';
+		}
+
+		// Add the "article" option
+		if ($this->User->hasAccess('tl_calendar_events::articleId', 'alexf'))
+		{
+			$arrOptions[] = 'article';
+		}
+
+		// Add the "external" option
+		if ($this->User->hasAccess('tl_calendar_events::url', 'alexf') && $this->User->hasAccess('tl_calendar_events::target', 'alexf'))
+		{
+			$arrOptions[] = 'external';
+		}
+
+		// Add the option currently set
+		if ($dc->activeRecord && $dc->activeRecord->source != '')
+		{
+			$arrOptions[] = $dc->activeRecord->source;
+			$arrOptions = array_unique($arrOptions);
+		}
+
+		return $arrOptions;
 	}
 
 
@@ -985,7 +1029,7 @@ class tl_calendar_events extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -997,8 +1041,15 @@ class tl_calendar_events extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_calendar_events']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -1007,7 +1058,7 @@ class tl_calendar_events extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_calendar_events.id='.$intId.'" has been created'.$this->getParentEntries('tl_calendar_events', $intId), 'tl_calendar_events toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_calendar_events.id='.$intId.'" has been created'.$this->getParentEntries('tl_calendar_events', $intId), __METHOD__, TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

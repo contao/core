@@ -59,7 +59,7 @@
 .tl_folder_list,.tl_folder_tlist {
 	padding:0 0 2px 0;
 }
-.ie7 tl_folder_list,.ie7 .tl_folder_tlist {
+.ie7 .tl_folder_list,.ie7 .tl_folder_tlist {
 	padding:0;
 }
 .tl_file_list {

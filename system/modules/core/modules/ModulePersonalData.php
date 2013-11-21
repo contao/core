@@ -89,6 +89,10 @@ class ModulePersonalData extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -165,6 +169,10 @@ class ModulePersonalData extends \Module
 						$this->import($callback[0]);
 						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this->User, $this);
+					}
 				}
 			}
 
@@ -213,11 +221,17 @@ class ModulePersonalData extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, $this->User, $this);
+							}
 						}
 						catch (\Exception $e)
 						{
@@ -287,6 +301,10 @@ class ModulePersonalData extends \Module
 						$this->import($callback[0]);
 						$this->$callback[0]->$callback[1]($this->User, $this);
 					}
+					elseif (is_callable($callback))
+					{
+						$callback($this->User, $this);
+					}
 				}
 			}
 
@@ -317,21 +335,21 @@ class ModulePersonalData extends \Module
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
 
 		// HOOK: add memberlist fields
-		if (in_array('memberlist', $this->Config->getActiveModules()))
+		if (in_array('memberlist', \ModuleLoader::getActive()))
 		{
 			$this->Template->profile = $arrFields['profile'];
 			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
 		}
 
 		// HOOK: add newsletter fields
-		if (in_array('newsletter', $this->Config->getActiveModules()))
+		if (in_array('newsletter', \ModuleLoader::getActive()))
 		{
 			$this->Template->newsletter = $arrFields['newsletter'];
 			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
 		}
 
 		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', $this->Config->getActiveModules()))
+		if (in_array('helpdesk', \ModuleLoader::getActive()))
 		{
 			$this->Template->helpdesk = $arrFields['helpdesk'];
 			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];

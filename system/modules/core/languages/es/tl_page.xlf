@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
-        <target>Por favor introduce el idioma de las páginas de acuerdo a la norma ISO-639-1 (por ejemplo, &quot;en&quot; para Inglés o &quot;en-US&quot; para Inglés americano).</target>
+        <target>Por favor introduzca el idioma de la página acorde al estándar ISO-639-1(por ejemplo &quot;en&quot; para inglés o &quot;en-US&quot; para el inglés americano).</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_page.createSitemap.1">
         <source>Create a Google XML sitemap in the &lt;em&gt;share/&lt;/em&gt; directory.</source>
-        <target>Crea un mapa de sitio Google XML en el directorio &lt;em&gt;compratido/&lt;/em&gt;.</target>
+        <target>Crear un mapa de sitio Google XML en el directorio &lt;em&gt;compartido/&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemapName.0">
         <source>Sitemap file name</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
         <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
-        <target>La/s clase(s) se usarán en el menú de navegación y en la etiqueta &amp;lt;body&amp;gt;.</target>
+        <target>El/La clase(s) serán usados en el menú de navegación y en la etiqueta &amp;lt;body&amp;gt;.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

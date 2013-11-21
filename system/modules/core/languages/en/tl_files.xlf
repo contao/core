@@ -113,6 +113,12 @@
       <trans-unit id="tl_files.delete.1">
         <source>Delete file or folder "%s"</source>
       </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder "%s"</source>
+      </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
       </trans-unit>

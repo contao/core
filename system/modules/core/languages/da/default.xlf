@@ -150,8 +150,8 @@
         <target>Denne konto er af sikkerhedhensyn blevet låst. Du kan forsøge at logge ind igen om %d minutter.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Log ind mislykkedes.</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Fejl ved log ind (bemærk at der skelnes mellem store og små bogstaver i brugernavn og kodeord).</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1544,16 +1544,11 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <target>Sidst tilgået</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Download</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Download denne fil</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Database ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
+        <target>Unikt ID</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1759,6 +1754,13 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
         <source>Disable</source>
         <target>Deaktiver</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Deaktiver</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>Den &lt;strong&gt;interne cache&lt;/strong&gt; er endnu ikke blevet genereret. At generere cachen vil øge hastigheden på applikationen og er højst anbefalet. Hvis du ikke ønsker at benytte cache, kan du permanent deaktivere det i indstillingerne for back enden.</target>
@@ -1854,6 +1856,9 @@ Denne e-mail er blevet genereret af systemet og kan ikke besvares direkte.
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabel</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

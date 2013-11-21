@@ -73,9 +73,9 @@ class ModuleArticle extends \Module
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = $this->alias ?: $this->title;
+		$alias = $this->alias ?: 'article';
 
-		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
+		if (in_array($alias, array('article', 'top', 'wrapper', 'header', 'container', 'left', 'main', 'right', 'footer')))
 		{
 			$alias .= '-' . $this->id;
 		}
@@ -179,9 +179,34 @@ class ModuleArticle extends \Module
 
 		if ($objCte !== null)
 		{
+			$intCount = 0;
+			$intLast = $objCte->count() - 1;
+
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte->current(), $this->strColumn);
+				$objRow = $objCte->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					$arrCss = deserialize($objRow->cssID);
+
+					if ($intCount == 0)
+					{
+						$arrCss[1] .= ' first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[1] .= ' last';
+					}
+
+					$arrCss[1] = trim($arrCss[1]);
+					$objRow->cssID = serialize($arrCss);
+				}
+
+				$arrElements[] = $this->getContentElement($objRow, $this->strColumn);
+				++$intCount;
 			}
 		}
 
@@ -267,8 +292,15 @@ class ModuleArticle extends \Module
 			}
 		}
 
+		// URL decode image paths (see #6411)
+		$strArticle = preg_replace_callback('@(src="[^"]+")@', function($arg) {
+			return rawurldecode($arg[0]);
+		}, $strArticle);
+
 		// Handle line breaks in preformatted text
-		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', function ($arg) {
+			return str_replace("\n", '<br>', $arg[0]);
+		}, $strArticle);
 
 		// Default PDF export using TCPDF
 		$arrSearch = array

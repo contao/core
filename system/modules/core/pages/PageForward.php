@@ -48,8 +48,8 @@ class PageForward extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
-			die('Forward page not found');
+			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
+			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
 		$strForceLang = null;

@@ -30,13 +30,15 @@
   <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
-<body class="__ua__ popup">
+<body class="<?php echo $this->ua; ?> popup">
 
   <div id="container">
     <div id="main">
-      <div id="manager">
-        <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
-      </div>
+      <?php if ($this->managerHref): ?>
+        <div id="manager">
+          <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
+        </div>
+      <?php endif; ?>
       <?php if ($this->addSearch): ?>
         <form action="<?php echo $this->action; ?>" method="post">
           <div id="search">

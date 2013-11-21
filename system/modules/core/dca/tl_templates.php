@@ -128,7 +128,6 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 );
 
 
-
 /**
  * Class tl_templates
  *
@@ -250,7 +249,7 @@ class tl_templates extends Backend
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 
 		// Get all templates
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (ModuleLoader::getActive() as $strModule)
 		{
 			// Continue if there is no templates folder
 			if ($strModule == 'repository' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
@@ -259,10 +258,12 @@ class tl_templates extends Backend
 			}
 
 			// Find all templates
-			$objFiles = new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator(
-					TL_ROOT . '/system/modules/' . $strModule . '/templates',
-					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+			$objFiles = new SortedIterator(
+				new RecursiveIteratorIterator(
+					new RecursiveDirectoryIterator(
+						TL_ROOT . '/system/modules/' . $strModule . '/templates',
+						FilesystemIterator::UNIX_PATHS|FilesystemIterator::FOLLOW_SYMLINKS|FilesystemIterator::SKIP_DOTS
+					)
 				)
 			);
 

@@ -73,24 +73,23 @@ class Newsletter extends \Backend
 
 			if (!empty($files) && is_array($files))
 			{
-				// Check for version 3 format
-				if (!is_numeric($files[0]))
+				$objFiles = \FilesModel::findMultipleByUuids($files);
+
+				if ($objFiles === null)
 				{
-					$blnAttachmentsFormatError = true;
-					\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					if (!\Validator::isUuid($files[0]))
+					{
+						$blnAttachmentsFormatError = true;
+						\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					}
 				}
 				else
 				{
-					$objFiles = \FilesModel::findMultipleByIds($files);
-
-					if ($objFiles !== null)
+					while ($objFiles->next())
 					{
-						while ($objFiles->next())
+						if (is_file(TL_ROOT . '/' . $objFiles->path))
 						{
-							if (is_file(TL_ROOT . '/' . $objFiles->path))
-							{
-								$arrAttachments[] = $objFiles->path;
-							}
+							$arrAttachments[] = $objFiles->path;
 						}
 					}
 				}
@@ -199,7 +198,7 @@ class Newsletter extends \Backend
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
 									   ->execute($strRecipient);
 
-						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_ERROR);
+						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', __METHOD__, TL_ERROR);
 					}
 				}
 
@@ -488,7 +487,7 @@ class Newsletter extends \Backend
 					// Skip invalid entries
 					if (!\Validator::isEmail($strRecipient))
 					{
-						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
+						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', __METHOD__, TL_ERROR);
 
 						++$intInvalid;
 						continue;
@@ -914,7 +913,6 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
@@ -929,11 +927,16 @@ class Newsletter extends \Backend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
 					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 

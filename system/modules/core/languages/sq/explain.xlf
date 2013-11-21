@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.2.1">
         <source>MM/DD/YYYY, English format, e.g. 01/28/2005</source>
-        <target>MM/DD/YYYY, formati anglez, p.sh. 11/28/2012</target>
+        <target>MM/DD/YYYY, formati anglez, p.sh. 01/28/2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.0">
         <source>d.m.Y</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.3.1">
         <source>DD.MM.YYYY, German format, e.g. 28.01.2005</source>
-        <target>DD.MM.YYYY, formati gjerman p.sh. 28.11.2012</target>
+        <target>DD.MM.YYYY, formati gjerman p.sh. 28.01.2005</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.4.0">
         <source>y-n-j</source>

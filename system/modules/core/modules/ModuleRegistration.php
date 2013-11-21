@@ -88,6 +88,10 @@ class ModuleRegistration extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -220,11 +224,17 @@ class ModuleRegistration extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, null);
+							}
 						}
 						catch (\Exception $e)
 						{
@@ -296,21 +306,21 @@ class ModuleRegistration extends \Module
 		$this->Template->action = \Environment::get('indexFreeRequest');
 
 		// HOOK: add memberlist fields
-		if (in_array('memberlist', $this->Config->getActiveModules()))
+		if (in_array('memberlist', \ModuleLoader::getActive()))
 		{
 			$this->Template->profile = $arrFields['profile'];
 			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
 		}
 
 		// HOOK: add newsletter fields
-		if (in_array('newsletter', $this->Config->getActiveModules()))
+		if (in_array('newsletter', \ModuleLoader::getActive()))
 		{
 			$this->Template->newsletter = $arrFields['newsletter'];
 			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
 		}
 
 		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', $this->Config->getActiveModules()))
+		if (in_array('helpdesk', \ModuleLoader::getActive()))
 		{
 			$this->Template->helpdesk = $arrFields['helpdesk'];
 			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
@@ -363,7 +373,7 @@ class ModuleRegistration extends \Module
 					// HOOK: support newsletter subscriptions
 					case 'channel':
 					case 'channels':
-						if (!in_array('newsletter', $this->Config->getActiveModules()))
+						if (!in_array('newsletter', \ModuleLoader::getActive()))
 						{
 							break;
 						}
@@ -428,15 +438,15 @@ class ModuleRegistration extends \Module
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
-			$objHomeDir = \FilesModel::findByPk($this->reg_homeDir);
+			$objHomeDir = \FilesModel::findByUuid($this->reg_homeDir);
 
 			if ($objHomeDir !== null)
 			{
 				$this->import('Files');
-				$strUserDir = $arrData['username'] ?: 'user_' . $insertId;
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $insertId;
 
 				// Add the user ID if the directory exists
-				if (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
+				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
 				{
 					$strUserDir .= '_' . $insertId;
 				}
@@ -447,13 +457,8 @@ class ModuleRegistration extends \Module
 
 				// Save the folder ID
 				$objNewUser->assignDir = 1;
-				$objNewUser->homeDir = $objUserDir->id;
+				$objNewUser->homeDir = $objUserDir->uuid;
 				$objNewUser->save();
-
-				// Update the hash of the target folder
-				$objFolder = new \Folder($objHomeDir->path);
-				$objHomeDir->hash = $objFolder->hash;
-				$objHomeDir->save();
 			}
 		}
 
@@ -517,7 +522,7 @@ class ModuleRegistration extends \Module
 		}
 
 		// Log activity
-		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', 'ModuleRegistration activateAccount()', TL_ACCESS);
+		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', __METHOD__, TL_ACCESS);
 
 		// Redirect to the jumpTo page
 		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
@@ -567,6 +572,6 @@ class ModuleRegistration extends \Module
 		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['adminText'], $intId, $strData . "\n") . "\n";
 		$objEmail->sendTo($GLOBALS['TL_ADMIN_EMAIL']);
 
-		$this->log('A new user (ID ' . $intId . ') has registered on the website', 'ModuleRegistration sendAdminNotification()', TL_ACCESS);
+		$this->log('A new user (ID ' . $intId . ') has registered on the website', __METHOD__, TL_ACCESS);
 	}
 }

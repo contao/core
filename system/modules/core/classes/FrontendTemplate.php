@@ -53,6 +53,7 @@ class FrontendTemplate extends \Template
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
 	 * @param boolean
+	 * @throws \UnusedArgumentsException
 	 */
 	public function output($blnCheckRequest=false)
 	{
@@ -217,7 +218,7 @@ class FrontendTemplate extends \Template
 	 */
 	public function getCustomSection($strKey)
 	{
-		return sprintf("\n<div id=\"%s\">\n%s\n</div>\n", $strKey, $this->sections[$strKey] ?: '&nbsp;');
+		return '<div id="' . $strKey . '">' . $this->sections[$strKey] . '</div>' . "\n";
 	}
 
 
@@ -259,6 +260,6 @@ class FrontendTemplate extends \Template
 			return '';
 		}
 
-		return "\n" . '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
+		return '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
 }

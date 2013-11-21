@@ -35,11 +35,13 @@ class Combiner extends \System
 
 	/**
 	 * The .css file extension
+	 * @var string
 	 */
 	const CSS = '.css';
 
 	/**
 	 * The .js file extension
+	 * @var string
 	 */
 	const JS = '.js';
 

@@ -207,10 +207,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['sections'],
 			'exclude'                 => true,
 			'search'                  => true,
-			'inputType'               => 'checkbox',
-			'options'                 => trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']),
-			'eval'                    => array('multiple'=>true),
-			'sql'                     => "blob NULL"
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'sPosition' => array
 		(
@@ -218,7 +217,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('before', 'main', 'after'),
+			'options'                 => array('top', 'before', 'main', 'after', 'bottom'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -260,7 +260,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'orderExt' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['orderExt'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'newsfeeds' => array
 		(
@@ -492,7 +492,7 @@ class tl_layout extends Backend
 
 		if (!$this->User->hasAccess('layout', 'themes'))
 		{
-			$this->log('Not enough permissions to access the page layout module', 'tl_layout checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the page layout module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -537,7 +537,7 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		if (!in_array('news', $this->Config->getActiveModules()))
+		if (!in_array('news', ModuleLoader::getActive()))
 		{
 			return array();
 		}
@@ -566,7 +566,7 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		if (!in_array('calendar', $this->Config->getActiveModules()))
+		if (!in_array('calendar', ModuleLoader::getActive()))
 		{
 			return array();
 		}
@@ -647,6 +647,6 @@ class tl_layout extends Backend
 	 */
 	public function styleSheetLink(DataContainer $dc)
 	{
-		return ' <a href="contao/main.php?do=themes&amp;table=tl_style_sheet&amp;id=' . $dc->activeRecord->pid . '&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . Backend::getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
+		return ' <a href="contao/main.php?do=themes&amp;table=tl_style_sheet&amp;id=' . $dc->activeRecord->pid . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_styles'])).'\',\'url\':this.href});return false"><img width="12" height="16" alt="" src="system/themes/' . Backend::getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}
 }

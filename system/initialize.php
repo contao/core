@@ -80,7 +80,19 @@ require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
 Config::preload(); // see #5872
-ClassLoader::scanAndRegister(); // config/autoload.php
+
+
+/**
+ * Try to load the modules
+ */
+try
+{
+	ClassLoader::scanAndRegister();
+}
+catch (UnresolvableDependenciesException $e)
+{
+	die($e->getMessage()); // see #6343
+}
 
 
 /**
@@ -167,28 +179,23 @@ else
  */
 if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
 {
-	if (file_exists(TL_ROOT . '/templates/be_incomplete.html5'))
-	{
-		include TL_ROOT . '/templates/be_incomplete.html5';
-	}
-	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5'))
-	{
-		include TL_ROOT . '/system/modules/core/templates/backend/be_incomplete.html5';
-	}
-	else
-	{
-		echo 'The installation has not been completed. Open the Contao install tool to continue.';
-	}
-
-	exit;
+	die_nicely('be_incomplete', 'The installation has not been completed. Open the Contao install tool to continue.');
 }
 
 
 /**
- * Set error_reporting
+ * Set error_reporting (see #5001)
  */
-@ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
+if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && Input::cookie('TL_INSTALL_AUTH') == $_SESSION['TL_INSTALL_AUTH'] && $_SESSION['TL_INSTALL_EXPIRE'] > time())
+{
+	@ini_set('display_errors', 1);
+	@error_reporting(E_ALL|E_STRICT);
+}
+else
+{
+	@ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
+	error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
+}
 
 
 /**
@@ -258,28 +265,16 @@ if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
  */
 if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
 {
-	// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
+	// Force a JavaScript redirect upon Ajax requests (IE requires absolute link)
 	if (Environment::get('isAjaxRequest'))
 	{
-		echo '<script>location.replace("' . Environment::get('base') . 'contao/")</script>';
+		header('HTTP/1.1 204 No Content');
+		header('X-Ajax-Location: ' . Environment::get('base') . 'contao/');
 	}
 	else
 	{
-		// Send an error 400 header if it is not an Ajax request
 		header('HTTP/1.1 400 Bad Request');
-
-		if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
-		{
-			include TL_ROOT . '/templates/be_referer.html5';
-		}
-		elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5'))
-		{
-			include TL_ROOT . '/system/modules/core/templates/backend/be_referer.html5';
-		}
-		else
-		{
-			echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
-		}
+		die_nicely('be_referer', 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.');
 	}
 
 	exit;

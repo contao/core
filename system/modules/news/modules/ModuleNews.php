@@ -155,30 +155,33 @@ abstract class ModuleNews extends \Module
 		// Add an image
 		if ($objArticle->addImage && $objArticle->singleSRC != '')
 		{
-			if (!is_numeric($objArticle->singleSRC))
-			{
-				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objArticle->singleSRC);
+			$objModel = \FilesModel::findByUuid($objArticle->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objArticle->singleSRC))
 				{
-					// Override the default image size
-					if ($this->imgSize != '')
-					{
-						$size = deserialize($this->imgSize);
-
-						if ($size[0] > 0 || $size[1] > 0)
-						{
-							$objArticle->size = $this->imgSize;
-						}
-					}
-
-					$objArticle->singleSRC = $objModel->path;
-					$this->addImageToTemplate($objTemplate, $objArticle->row());
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = deserialize($this->imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0)
+					{
+						$objArticle->size = $this->imgSize;
+					}
+				}
+
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrArticle = $objArticle->row();
+				$arrArticle['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($objTemplate, $arrArticle);
 			}
 		}
 
@@ -259,7 +262,14 @@ abstract class ModuleNews extends \Module
 				case 'author':
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
-						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
+						if ($objAuthor->google != '')
+						{
+							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' <a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
+						}
+						else
+						{
+							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
+						}
 					}
 					break;
 

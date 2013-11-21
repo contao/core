@@ -75,7 +75,7 @@ abstract class Files
 			}
 
 			// HOOK: use the smhextended module
-			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', \Config::getInstance()->getActiveModules()))
+			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', \ModuleLoader::getActive()))
 			{
 				self::$objInstance = new \SMHExtended();
 			}

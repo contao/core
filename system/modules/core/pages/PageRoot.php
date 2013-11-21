@@ -43,8 +43,8 @@ class PageRoot extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('No active page found under root page "' . $pageId . '")', 'PageRoot generate()', TL_ERROR);
-			die('No active pages found');
+			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
+			die_nicely('be_no_active', 'No active pages found');
 		}
 
 		if (!$blnReturn)

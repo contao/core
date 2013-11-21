@@ -31,14 +31,14 @@ fieldset,form,input,optgroup,select,textarea {
 /* Font size and color */
 a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 	font-size:11px;
-	color:#666966;
+	color:#555;
 }
 fieldset,form,input,optgroup,select,textarea {
 	font-size:12px;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
-	color:#666966;
+	color:#555;
 }
 table {
 	border-spacing:0;
@@ -52,31 +52,31 @@ th,td {
 	font-size:9px;
 }
 .tl_small,.tl_gray {
-	color:#a3a3a3;
+	color:#999;
 }
 .tl_green {
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_red {
-	color:#c55;
+	color:#c33;
 }
 .tl_blue {
-	color:#5c9ac9;
+	color:#4b85ba;
 }
 .tl_orange {
 	color:#f90;
 }
 span.mandatory {
-	color:#c55;
+	color:#c33;
 }
 
 /* Basic elements */
 a {
-	color:#666966;
+	color:#555;
 	text-decoration:none;
 }
 a:hover,a:focus,a:active {
-	color:#8ab858;
+	color:#77ac45;
 }
 hr {
 	height:1px;
@@ -169,7 +169,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 	width:150px;
 }
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:2px 3px;
 	border-radius:3px;
 }
@@ -211,7 +211,7 @@ pre,.tl_textarea.monospace {
 	width:156px;
 }
 .tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:1px;
 	border-radius:3px;
 }
@@ -320,9 +320,9 @@ pre,.tl_textarea.monospace {
 /* Submit buttons */
 .tl_submit {
 	padding:5px 12px 5px 13px;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	border-radius:3px;
-	color:#666966;
+	color:#555;
 	cursor:pointer;
 	line-height:1;
 	text-shadow:1px 1px 0 #eee;
@@ -331,7 +331,7 @@ pre,.tl_textarea.monospace {
 	background-image:-webkit-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-o-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-ms-linear-gradient(bottom, #ccc 0%, #eee 60%);
-	background-image:linear-gradient(bottom, #ccc 0%, #eee 60%);
+	background-image:linear-gradient(to top, #ccc 0%, #eee 60%);
 }
 a.tl_submit {
 	padding:4px 12px 4px 13px;
@@ -339,7 +339,7 @@ a.tl_submit {
 	font-size:12px;
 }
 a.tl_submit:hover {
-	color:#666966;
+	color:#555;
 }
 .firefox input.tl_submit {
 	padding:2px 12px 2px 13px;
@@ -425,7 +425,7 @@ a.tl_submit:hover {
 	background-image:-webkit-linear-gradient(bottom, #333 0%, #666 80%);
 	background-image:-o-linear-gradient(bottom, #333 0%, #666 80%);
 	background-image:-ms-linear-gradient(bottom, #333 0%, #666 80%);
-	background-image:linear-gradient(bottom, #333 0%, #666 80%);
+	background-image:linear-gradient(to top, #333 0%, #666 80%);
 }
 .tip div {
 	line-height:1.3;

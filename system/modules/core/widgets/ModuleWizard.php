@@ -102,7 +102,7 @@ class ModuleWizard extends \Widget
 
 		// Show all columns and filter in PageRegular (see #3273)
 		$cols = array('header', 'left', 'right', 'main', 'footer');
-		$arrSections = deserialize($objRow->sections);
+		$arrSections = trimsplit(',', $objRow->sections);
 
 		// Add custom page sections
 		if (!empty($arrSections) && is_array($arrSections))

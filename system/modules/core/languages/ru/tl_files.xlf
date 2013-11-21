@@ -149,6 +149,14 @@
         <source>Delete file or folder &quot;%s&quot;</source>
         <target>Удалить файл или каталог &quot;%s&quot;</target>
       </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>Детали файла или каталога</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>Показать детали файла или каталога &quot;%s&quot;</target>
+      </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
         <target>Редактировать файл</target>

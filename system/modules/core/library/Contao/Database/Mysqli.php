@@ -29,12 +29,6 @@ class Mysqli extends \Database
 	 */
 	protected $strListTables = "SHOW TABLES FROM `%s`";
 
-	/**
-	 * List fields query
-	 * @var string
-	 */
-	protected $strListFields = "SHOW COLUMNS FROM `%s`";
-
 
 	/**
 	 * Connect to the database server and select the database
@@ -43,14 +37,21 @@ class Mysqli extends \Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$host = $this->arrConfig['dbHost'];
+
+		if ($this->arrConfig['dbPconnect'])
+		{
+			$host = 'p:' . $host;
+		}
+
+		$this->resConnection = new \mysqli($host, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
 
 		if ($this->resConnection->connect_error)
 		{
 			throw new \Exception($this->resConnection->connect_error);
 		}
 
-		@$this->resConnection->set_charset($this->arrConfig['dbCharset']);
+		$this->resConnection->set_charset($this->arrConfig['dbCharset']);
 	}
 
 
@@ -59,7 +60,7 @@ class Mysqli extends \Database
 	 */
 	protected function disconnect()
 	{
-		@$this->resConnection->close();
+		$this->resConnection->close();
 	}
 
 
@@ -70,7 +71,7 @@ class Mysqli extends \Database
 	 */
 	protected function get_error()
 	{
-		return @$this->resConnection->error;
+		return $this->resConnection->error;
 	}
 
 
@@ -118,43 +119,52 @@ class Mysqli extends \Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$arrFields = $this->query(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
+		$objFields = $this->query("SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` LIKE '{$this->arrConfig['dbDatabase']}' AND `TABLE_NAME` LIKE '%$strTable'");
 
-		foreach ($arrFields as $k=>$v)
+		while ($objFields->next())
 		{
-			$arrChunks = preg_split('/(\([^\)]+\))/', $v['Type'], -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$arrTmp = array();
+			$arrChunks = preg_split('/(\([^\)]+\))/', $objFields->COLUMN_TYPE, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-			$arrReturn[$k]['name'] = $v['Field'];
-			$arrReturn[$k]['type'] = $arrChunks[0];
+			$arrTmp['name'] = $objFields->COLUMN_NAME;
+			$arrTmp['type'] = $arrChunks[0];
 
 			if (!empty($arrChunks[1]))
 			{
-				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
-				$arrSubChunks = explode(',', $arrChunks[1]);
+				$arrChunks[1] = str_replace(array('(', ')'), '', $arrChunks[1]);
 
-				$arrReturn[$k]['length'] = trim($arrSubChunks[0]);
-
-				if (!empty($arrSubChunks[1]))
+				// Handle enum fields (see #6387)
+				if ($arrChunks[0] == 'enum')
 				{
-					$arrReturn[$k]['precision'] = trim($arrSubChunks[1]);
+					$arrTmp['length'] = $arrChunks[1];
+				}
+				else
+				{
+					$arrSubChunks = explode(',', $arrChunks[1]);
+					$arrTmp['length'] = trim($arrSubChunks[0]);
+
+					if (!empty($arrSubChunks[1]))
+					{
+						$arrTmp['precision'] = trim($arrSubChunks[1]);
+					}
 				}
 			}
 
 			if (!empty($arrChunks[2]))
 			{
-				$arrReturn[$k]['attributes'] = trim($arrChunks[2]);
+				$arrTmp['attributes'] = trim($arrChunks[2]);
 			}
 
-			if (!empty($v['Key']))
+			if ($objFields->COLUMN_KEY != '')
 			{
-				switch ($v['Key'])
+				switch ($objFields->COLUMN_KEY)
 				{
 					case 'PRI':
-						$arrReturn[$k]['index'] = 'PRIMARY';
+						$arrTmp['index'] = 'PRIMARY';
 						break;
 
 					case 'UNI':
-						$arrReturn[$k]['index'] = 'UNIQUE';
+						$arrTmp['index'] = 'UNIQUE';
 						break;
 
 					case 'MUL':
@@ -162,24 +172,28 @@ class Mysqli extends \Database
 						break;
 
 					default:
-						$arrReturn[$k]['index'] = 'KEY';
+						$arrTmp['index'] = 'KEY';
 						break;
 				}
 			}
 
-			$arrReturn[$k]['null'] = ($v['Null'] == 'YES') ? 'NULL' : 'NOT NULL';
-			$arrReturn[$k]['default'] = $v['Default'];
-			$arrReturn[$k]['extra'] = $v['Extra'];
+			// Do not modify the order!
+			$arrTmp['collation'] = $objFields->COLLATION_NAME;
+			$arrTmp['null'] = ($objFields->IS_NULLABLE == 'YES') ? 'NULL' : 'NOT NULL';
+			$arrTmp['default'] = $objFields->COLUMN_DEFAULT;
+			$arrTmp['extra'] = $objFields->EXTRA;
+
+			$arrReturn[] = $arrTmp;
 		}
 
-		$arrIndexes = $this->query("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+		$objIndex = $this->query("SHOW INDEXES FROM `$strTable`");
 
-		foreach ($arrIndexes as $arrIndex)
+		while ($objIndex->next())
 		{
-			$arrReturn[$arrIndex['Key_name']]['name'] = $arrIndex['Key_name'];
-			$arrReturn[$arrIndex['Key_name']]['type'] = 'index';
-			$arrReturn[$arrIndex['Key_name']]['index_fields'][] = $arrIndex['Column_name'];
-			$arrReturn[$arrIndex['Key_name']]['index'] = (($arrIndex['Non_unique'] == 0) ? 'UNIQUE' : 'KEY');
+			$arrReturn[$objIndex->Key_name]['name'] = $objIndex->Key_name;
+			$arrReturn[$objIndex->Key_name]['type'] = 'index';
+			$arrReturn[$objIndex->Key_name]['index_fields'][] = $objIndex->Column_name;
+			$arrReturn[$objIndex->Key_name]['index'] = (($objIndex->Non_unique == 0) ? 'UNIQUE' : 'KEY');
 		}
 
 		return $arrReturn;
@@ -195,7 +209,7 @@ class Mysqli extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new \mysqli($this->arrConfig['dbHost'], $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $strDatabase, $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$this->resConnection->query("USE $strDatabase");
 	}
 
 
@@ -204,8 +218,8 @@ class Mysqli extends \Database
 	 */
 	protected function begin_transaction()
 	{
-		@$this->resConnection->query("SET AUTOCOMMIT=0");
-		@$this->resConnection->query("BEGIN");
+		$this->resConnection->query("SET AUTOCOMMIT=0");
+		$this->resConnection->query("BEGIN");
 	}
 
 
@@ -214,8 +228,8 @@ class Mysqli extends \Database
 	 */
 	protected function commit_transaction()
 	{
-		@$this->resConnection->query("COMMIT");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		$this->resConnection->query("COMMIT");
+		$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 
 
@@ -224,8 +238,8 @@ class Mysqli extends \Database
 	 */
 	protected function rollback_transaction()
 	{
-		@$this->resConnection->query("ROLLBACK");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		$this->resConnection->query("ROLLBACK");
+		$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 
 
@@ -243,7 +257,7 @@ class Mysqli extends \Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
+		$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -252,7 +266,7 @@ class Mysqli extends \Database
 	 */
 	protected function unlock_tables()
 	{
-		@$this->resConnection->query("UNLOCK TABLES");
+		$this->resConnection->query("UNLOCK TABLES");
 	}
 
 
@@ -265,8 +279,8 @@ class Mysqli extends \Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetch_object();
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -275,16 +289,39 @@ class Mysqli extends \Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = $this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										 ->fetch_object();
 
 		return $objStatus->Auto_increment;
+	}
+
+
+	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	protected function get_uuid()
+	{
+		static $ids;
+
+		if (empty($ids))
+		{
+			$res = $this->resConnection->query(implode(' UNION ALL ', array_fill(0, 10, "SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")));
+
+			while (($row = $res->fetch_object()) != false)
+			{
+				$ids[] = $row->uuid;
+			}
+		}
+
+		return array_pop($ids);
 	}
 
 

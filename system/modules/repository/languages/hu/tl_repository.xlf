@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>A kiterjesztés nevének betűvel kell kezdődnie mint a-z, A-Z és 0-9, ahol kisbetűs nevek az előnyösebbek. Továbbá, a _ és - karakterek is megengedettek a névben.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>A kiterjesztés megfelel a Contao használhatósági és elérhetőségi szabványainak?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -505,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>A most látható kiterjesztések csak a jelenlegi Contao verzióval kompatibilisek. Módosítsa az adminisztrációs felület beállításait, hogy a keresési találatok tartalmazzák az összes kiterjesztést.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

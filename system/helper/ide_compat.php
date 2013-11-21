@@ -11,10 +11,9 @@
  */
 
 /**
- * This file is not used in Contao. Its only purpose is to make
- * PHP IDEs like Eclipse, Zend Studio or PHPStorm realize the
- * class origins, since the dynamic class aliasing we are using
- * is a bit too complex for them to understand.
+ * This file is not used in Contao. Its only purpose is to make PHP IDEs like
+ * Eclipse, Zend Studio or PHPStorm realize the class origins, since the dynamic
+ * class aliasing we are using is a bit too complex for them to understand.
  */
 
 // calendar
@@ -130,6 +129,7 @@ namespace  {
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
 	class Session extends \Contao\Session {}
+	class SortedIterator extends \Contao\SortedIterator {}
 	class String extends \Contao\String {}
 	abstract class System extends \Contao\System {}
 	abstract class Template extends \Contao\Template {}
@@ -237,6 +237,7 @@ namespace Files {
 namespace Model {
 	class Collection extends \Contao\Model\Collection {}
 	class QueryBuilder extends \Contao\Model\QueryBuilder {}
+	class Registry extends \Contao\Model\Registry {}
 }
 
 // devtools

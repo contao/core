@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MSC.com_notify">
         <source>Notify me of new comments by e-mail</source>
-        <target>Upozornit e-mailem na nový komentář.</target>
+        <target>Zaslat upozornění, když kdokoli přidat nový komentář</target>
       </trans-unit>
       <trans-unit id="MSC.com_submit">
         <source>Submit comment</source>

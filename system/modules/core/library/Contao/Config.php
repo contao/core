@@ -136,7 +136,7 @@ class Config
 		else
 		{
 			// Get the module configuration files
-			foreach ($this->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
 
@@ -255,17 +255,17 @@ class Config
 		// Make sure the file has been written (see #4483)
 		if (!filesize(TL_ROOT . '/system/tmp/' . $strTemp))
 		{
-			$this->log('The local configuration file could not be written. Have your reached your quota limit?');
+			\System::log('The local configuration file could not be written. Have your reached your quota limit?', __METHOD__, TL_ERROR);
 			return;
 		}
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
-		// Reset the Zend OPcache (unfortunately no API to delete just a single file)
-		if (function_exists('opcache_reset'))
+		// Reset the Zend OPcache
+		if (function_exists('opcache_invalidate'))
 		{
-			opcache_reset();
+			opcache_invalidate(TL_ROOT . '/system/config/localconfig.php', true);
 		}
 
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
@@ -277,7 +277,7 @@ class Config
 		// Recompile the APC file (thanks to Trenker)
 		if (function_exists('apc_compile_file') && !ini_get('apc.stat'))
 		{
-			apc_compile_file('system/config/localconfig.php');
+			apc_compile_file(TL_ROOT . '/system/config/localconfig.php');
 		}
 
 		// Purge the eAccelerator cache (thanks to Trenker)

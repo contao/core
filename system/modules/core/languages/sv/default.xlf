@@ -149,8 +149,7 @@
         <target>Ditt konto har låsts! Du kan prova att logga in igen om %d minuter.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
-        <source>Login failed!</source>
-        <target>Inloggningen misslyckades!</target>
+        <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -1543,16 +1542,10 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <target>Senaste användning</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
-        <source>Download</source>
-        <target>Ladda ner</target>
+        <source>Download the file</source>
       </trans-unit>
-      <trans-unit id="MSC.fileDownloadTitle">
-        <source>Download this file</source>
-        <target>Ladda hem denna fil</target>
-      </trans-unit>
-      <trans-unit id="MSC.fileDatabaseId">
-        <source>Database ID</source>
-        <target>Databas-ID</target>
+      <trans-unit id="MSC.fileUuid">
+        <source>Unique ID</source>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1758,6 +1751,13 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <source>Disable</source>
         <target>Inaktivera</target>
       </trans-unit>
+      <trans-unit id="MSC.maintenanceMode">
+        <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+      </trans-unit>
+      <trans-unit id="MSC.maintenanceOff">
+        <source>Disable</source>
+        <target>Inaktivera</target>
+      </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
         <target>Den &lt;strong&gt;interna cachen&lt;/strong&gt; har inte skapats ännu. Genom att skapa cachen ökas prestandan i applikationen vilket är starkt rekommenderat. Om du inte vill använda cache så kan den stängas av permanent i backend-inställningarna.</target>
@@ -1853,6 +1853,9 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
       <trans-unit id="MSC.table">
         <source>Table</source>
         <target>Tabell</target>
+      </trans-unit>
+      <trans-unit id="MSC.ptable">
+        <source>Parent table</source>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

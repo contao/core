@@ -144,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_showQuantity'] = array
 /**
  * Add the comments template drop-down menu
  */
-if (in_array('comments', Config::getInstance()->getActiveModules()))
+if (in_array('comments', ModuleLoader::getActive()))
 {
 	$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']);
 }

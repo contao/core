@@ -185,7 +185,7 @@ class Theme extends \Backend
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
+				$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
 				continue;
 			}
 
@@ -195,7 +195,6 @@ class Theme extends \Backend
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
 
-			$tl_layout = null;
 			$blnHasError = false;
 
 			// Loop through the tables
@@ -212,12 +211,6 @@ class Theme extends \Backend
 
 				$fields = $rows->item(0)->childNodes;
 
-				// Store the tl_layout element
-				if ($table == 'tl_layout')
-				{
-					$tl_layout = $tables->item($i)->childNodes;
-				}
-
 				// Loop through the fields
 				for ($j=0; $j<$fields->length; $j++)
 				{
@@ -227,7 +220,7 @@ class Theme extends \Backend
 					if (!in_array($name, $arrDbFields[$table]))
 					{
 						$blnHasError = true;
-						$return .= "\n  " . '<p style="margin:0; color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
+						$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
 					}
 				}
 			}
@@ -235,64 +228,7 @@ class Theme extends \Backend
 			// Confirmation
 			if (!$blnHasError)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
-			}
-
-			$return .= '
-  <h4>'.$GLOBALS['TL_LANG']['tl_theme']['custom_sections'].'</h4>';
-
-			$blnHasLayout = false;
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-			$arrProcessed = array();
-
-			// Loop through tl_layout
-			for ($i=0; $i<$tl_layout->length; $i++)
-			{
-				$fields = $tl_layout->item($i)->childNodes;
-
-				// Loop through the fields
-				for ($j=0; $j<$fields->length; $j++)
-				{
-					if ($fields->item($j)->getAttribute('name') != 'modules')
-					{
-						continue;
-					}
-
-					$modules = deserialize($fields->item($j)->nodeValue);
-
-					// Continue if there are no modules
-					if (!is_array($modules) || empty($modules))
-					{
-						continue;
-					}
-
-					// Check all columns
-					foreach ($modules as $mod)
-					{
-						// Default columns
-						if ($mod['col'] == 'header' || $mod['col'] == 'left' || $mod['col'] == 'main' || $mod['col'] == 'right' || $mod['col'] == 'footer')
-						{
-							continue;
-						}
-
-						// Do not show multiple warnings
-						if (in_array($mod['col'], $arrProcessed) || in_array($mod['col'], $arrSections))
-						{
-							continue;
-						}
-
-						$blnHasLayout = true;
-						$arrProcessed[] = $mod['col'];
-
-						$return .= "\n  " . '<p style="margin:0;color:#5c9ac9">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
-					}
-				}
-			}
-
-			// Confirmation
-			if (!$blnHasLayout)
-			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
 			}
 
 			// Check the custom templates
@@ -313,14 +249,14 @@ class Theme extends \Backend
 				if (file_exists(TL_ROOT .'/'. $objArchive->file_name))
 				{
 					$blnTplExists = true;
-					$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
+					$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
 				}
 			}
 
 			// Confirmation
 			if (!$blnTplExists)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
 			}
 
 			$return .= '
@@ -453,9 +389,6 @@ class Theme extends \Backend
 				}
 			}
 
-			$arrMissing = array();
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-
 			// Lock the tables
 			$arrLocks = array
 			(
@@ -568,11 +501,6 @@ class Theme extends \Backend
 									{
 										$modules[$key]['mod'] = $arrMapper['tl_module'][$mod['mod']];
 									}
-
-									if (!in_array($mod['col'], array('header', 'left', 'right', 'main', 'footer')) && !in_array($mod['col'], $arrSections) && !in_array($mod['col'], $arrMissing))
-									{
-										$arrMissing[] = $mod['col'];
-									}
 								}
 
 								$value = serialize($modules);
@@ -615,18 +543,18 @@ class Theme extends \Backend
 						// Replace the file paths in singleSRC fields with their tl_files ID
 						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
 						{
-							if ($value === null)
+							if (!$value)
 							{
-								$value = ''; // the field cannot be NULL
+								$value = null; // Contao >= 3.2
 							}
-							elseif ($value != '')
+							else
 							{
 								// Do not use the FilesModel here – tables are locked!
-								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
 														  ->execute($value);
 
-								$value = $objFile->id;
+								$value = $objFile->uuid;
 							}
 						}
 
@@ -646,14 +574,14 @@ class Theme extends \Backend
 									}
 
 									// Do not use the FilesModel here – tables are locked!
-									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
 															  ->execute($vv);
 
-									$tmp[$kk] = $objFile->id;
+									$tmp[$kk] = $objFile->uuid;
 								}
 
-								$value = ($name == 'orderSRC' || $name == 'orderExt') ? implode(',', $tmp) : serialize($tmp);
+								$value = serialize($tmp);
 							}
 						}
 
@@ -686,13 +614,6 @@ class Theme extends \Backend
 			// Update the style sheets
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
-
-			// Add missing sections to the local configuration
-			if (count($arrMissing))
-			{
-				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrSections, $arrMissing));
-				$this->Config->add("\$GLOBALS['TL_CONFIG']['customSections']", $GLOBALS['TL_CONFIG']['customSections']);
-			}
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
@@ -754,7 +675,7 @@ class Theme extends \Backend
 
 		if (!empty($arrFolders) && is_array($arrFolders))
 		{
-			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
+			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
 
 			if ($objFolders !== null)
 			{
@@ -931,7 +852,7 @@ class Theme extends \Backend
 			// Replace the IDs of singleSRC fields with their path (see #4952)
 			elseif (($t == 'tl_theme' && $k == 'screenshot') || ($t == 'tl_module' && $k == 'singleSRC') || ($t == 'tl_module' && $k == 'reg_homeDir'))
 			{
-				$objFile = \FilesModel::findByPk($v);
+				$objFile = \FilesModel::findByUuid($v);
 
 				if ($objFile !== null)
 				{
@@ -950,11 +871,11 @@ class Theme extends \Backend
 			// Replace the IDs of multiSRC fields with their paths (see #4952)
 			elseif (($t == 'tl_theme' && $k == 'folders') || ($t == 'tl_module' && $k == 'multiSRC') || ($t == 'tl_module' && $k == 'orderSRC') || ($t == 'tl_layout' && $k == 'external') || ($t == 'tl_layout' && $k == 'orderExt'))
 			{
-				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
+				$arrFiles = deserialize($v);
 
 				if (!empty($arrFiles) && is_array($arrFiles))
 				{
-					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
+					$objFiles = \FilesModel::findMultipleByUuids($arrFiles);
 
 					if ($objFiles !== null)
 					{

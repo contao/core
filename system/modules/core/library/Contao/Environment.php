@@ -307,10 +307,27 @@ class Environment
 	 */
 	protected static function url()
 	{
+		$host = static::get('httpHost');
 		$xhost = static::get('httpXForwardedHost');
-		$protocol = static::get('ssl') ? 'https://' : 'http://';
 
-		return $protocol . (($xhost != '') ? $xhost . '/' : '') . static::get('httpHost');
+		// SSL proxy
+		if ($xhost != '' && $xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
+		{
+			return 'https://' .  $xhost . '/' . $host;
+		}
+
+		return (static::get('ssl') ? 'https://' : 'http://') . $host;
+	}
+
+
+	/**
+	 * Return the current URL with path or query string
+	 *
+	 * @return string The URL
+	 */
+	protected static function uri()
+	{
+		return static::get('url') . static::get('requestUri');
 	}
 
 
@@ -321,19 +338,37 @@ class Environment
 	 */
 	protected static function ip()
 	{
-		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
+		// No X-Forwarded-For IP
+		if (empty($_SERVER['HTTP_X_FORWARDED_FOR']) || !preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
 		{
-			$strIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-
-			// Only show the first IP (see #5830)
-			if (strpos($strIp, ',') !== false)
-			{
-				list($strIp,) = trimsplit(',', $strIp);
-			}
-
-			return substr($strIp, 0, 64);
+			return substr($_SERVER['REMOTE_ADDR'], 0, 64);
 		}
 
+		$strXip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		$arrTrusted = trimsplit(',', $GLOBALS['TL_CONFIG']['proxyServerIps']);
+
+		// Generate an array of X-Forwarded-For IPs
+		if (strpos($strXip, ',') !== false)
+		{
+			$arrIps = trimsplit(',', $strXip);
+		}
+		else
+		{
+			$arrIps = array($strXip);
+		}
+
+		$arrIps = array_reverse($arrIps);
+
+		// Return the first untrusted IP address (see #5830)
+		foreach ($arrIps as $strIp)
+		{
+			if (!in_array($strIp, $arrTrusted))
+			{
+				return substr($strIp, 0, 64);
+			}
+		}
+
+		// If all X-Forward-For IPs are trusted, return the remote address
 		return substr($_SERVER['REMOTE_ADDR'], 0, 64);
 	}
 
@@ -435,7 +470,7 @@ class Environment
 	 */
 	protected static function host()
 	{
-		return static::get('httpXForwardedHost') ?: static::get('httpHost');
+		return static::get('httpHost');
 	}
 
 
@@ -513,7 +548,7 @@ class Environment
 		}
 
 		// Android tablets are not mobile (see #4150)
-		if ($os == 'Android' && stripos('mobile', $ua) === false)
+		if ($os == 'android' && stripos($ua, 'mobile') === false)
 		{
 			$mobile = false;
 		}

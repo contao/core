@@ -134,8 +134,8 @@
         <target>Egyedi elrendezésű részek</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
-        <target>Egyedi elrendezésű részeket lehet meghatározni a back end beállításoknál.</target>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Itt megadhatja a vesszővel elválasztott listáját az egyéni elrendezésű szakaszoknak.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -271,6 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>Itt lehet megadni a &lt;body&gt; tag osztályait.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -278,6 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>Itt lehet megadni a body &lt;em&gt;onload&lt;/em&gt; attribútumot.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
         <source>Additional &amp;lt;head&amp;gt; tags</source>
@@ -285,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
         <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>Itt tud hozzáadni egyedi parancsokat az oldal &lt;head&gt; részéhez.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
@@ -458,6 +461,10 @@
         <source>XHTML Transitional</source>
         <target>XHTML Transitional</target>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>A csoport előtt</target>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
         <target>Fejléc után</target>
@@ -469,6 +476,10 @@
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
         <target>A Lábléc előtt</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>A csoport után</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="LNG.am_ET">
         <source>Amharic (Ethiopia)</source>
-        <target>Etiopia</target>
+        <target>Amharic (Ethiopia)</target>
       </trans-unit>
       <trans-unit id="LNG.ar">
         <source>Arabic</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="LNG.ar_AA">
         <source>Arabic (Unitag)</source>
-        <target>Arabic (Unitag)</target>
+        <target>Arabski (Unitag)</target>
       </trans-unit>
       <trans-unit id="LNG.ar_SA">
         <source>Arabic (Saudi Arabia)</source>

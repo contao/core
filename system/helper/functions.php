@@ -127,18 +127,28 @@ function show_help_message()
 	}
 
 	header('HTTP/1.1 500 Internal Server Error');
+	die_nicely('be_error', 'An error occurred while executing this script!');
+}
 
-	if (file_exists(TL_ROOT . '/templates/be_error.html5'))
+
+/**
+ * Try to die with a template instead of just a message
+ * @param string
+ * @param string
+ */
+function die_nicely($strTemplate, $strFallback)
+{
+	if (file_exists(TL_ROOT . "/templates/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/templates/be_error.html5';
+		include TL_ROOT . "/templates/$strTemplate.html5";
 	}
-	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_error.html5'))
+	elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/system/modules/core/templates/backend/be_error.html5';
+		include TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5";
 	}
 	else
 	{
-		echo 'An error occurred while executing this script!';
+		echo $strFallback;
 	}
 
 	exit;
@@ -221,7 +231,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 
 
 /**
- * Standardize a parameter (strip special characters and convert spaces to underscores)
+ * Standardize a parameter (strip special characters and convert spaces)
  * @param string
  * @param boolean
  * @return string
@@ -395,17 +405,6 @@ function nl2br_pre($str, $xhtml=false)
 	}
 
 	return $str;
-}
-
-
-/**
- * Replace line breaks with <br> tags (to be used with preg_replace_callback)
- * @param array
- * @return string
- */
-function nl2br_callback($matches)
-{
-	return str_replace("\n", '<br>', $matches[0]);
 }
 
 
@@ -720,4 +719,16 @@ if (!USE_MBSTRING)
 
 		return substr_count($haystack, $needle, $offset);
 	}
+}
+
+
+/**
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ * @deprecated
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", '<br>', $matches[0]);
 }

@@ -36,7 +36,7 @@ class PageError403 extends \Frontend
 	public function generate($pageId, $objRootPage=null)
 	{
 		// Add a log entry
-		$this->log('Access to page ID "' . $pageId . '" denied', 'PageError403 generate()', TL_ERROR);
+		$this->log('Access to page ID "' . $pageId . '" denied', __METHOD__, TL_ERROR);
 
 		// Use the given root page object if available (thanks to Andreas Schempp)
 		if ($objRootPage === null)
@@ -55,7 +55,7 @@ class PageError403 extends \Frontend
 		if ($obj403 === null)
 		{
 			header('HTTP/1.1 403 Forbidden');
-			die('Forbidden');
+			die_nicely('be_forbidden', 'Forbidden');
 		}
 
 		// Generate the error page
@@ -78,8 +78,8 @@ class PageError403 extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 403 Forbidden');
-			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);
-			die('Forward page not found');
+			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
+			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));

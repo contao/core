@@ -96,6 +96,26 @@ class DataContainer extends \Backend
 
 
 	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'activeRecord':
+				$this->objActiveRecord = $varValue;
+				break;
+
+			default;
+				$this->$strKey = $varValue; // backwards compatibility
+				break;
+		}
+	}
+
+
+	/**
 	 * Return an object property
 	 * @param string
 	 * @return mixed
@@ -150,7 +170,7 @@ class DataContainer extends \Backend
 		// Redirect if the field is excluded
 		if ($arrData['exclude'])
 		{
-			$this->log('Field "'.$this->strField.'" of table "'.$this->strTable.'" was excluded from being edited', 'DataContainer row()', TL_ERROR);
+			$this->log('Field "'.$this->strField.'" of table "'.$this->strTable.'" was excluded from being edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -173,20 +193,27 @@ class DataContainer extends \Backend
 		{
 			foreach ($arrData['xlabel'] as $callback)
 			{
-				$this->import($callback[0]);
-				$xlabel .= $this->$callback[0]->$callback[1]($this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$xlabel .= $this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$xlabel .= $callback($this);
+				}
 			}
 		}
 
 		// Input field callback
 		if (is_array($arrData['input_field_callback']))
 		{
-			if (!is_object($this->$arrData['input_field_callback'][0]))
-			{
-				$this->import($arrData['input_field_callback'][0]);
-			}
-
+			$this->import($arrData['input_field_callback'][0]);
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
+		}
+		elseif (is_callable($arrData['input_field_callback']))
+		{
+			return $arrData['input_field_callback']($this, $xlabel);
 		}
 
 		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
@@ -376,8 +403,15 @@ class DataContainer extends \Backend
 		{
 			foreach ($arrData['wizard'] as $callback)
 			{
-				$this->import($callback[0]);
-				$wizard .= $this->$callback[0]->$callback[1]($this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$wizard .= $this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$wizard .= $callback($this);
+				}
 			}
 		}
 
@@ -550,6 +584,11 @@ class DataContainer extends \Backend
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
 				continue;
 			}
+			elseif (is_callable($v['button_callback']))
+			{
+				$return .= $v['button_callback']($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
+				continue;
+			}
 
 			// Generate all buttons except "move up" and "move down" buttons
 			if ($k != 'move' && $v != 'move')
@@ -639,6 +678,11 @@ class DataContainer extends \Backend
 			{
 				$this->import($v['button_callback'][0]);
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
+				continue;
+			}
+			elseif (is_callable($v['button_callback']))
+			{
+				$return .= $v['button_callback']($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
 				continue;
 			}
 

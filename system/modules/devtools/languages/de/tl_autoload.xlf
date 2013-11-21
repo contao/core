@@ -37,14 +37,6 @@
         <source>The autoload.php file of module &quot;%s&quot; has been written.</source>
         <target>Die autoload.php-Datei des Moduls &quot;%s&quot; wurde erstellt.</target>
       </trans-unit>
-      <trans-unit id="tl_autoload.ideCompat">
-        <source>Update the IDE compatibility file</source>
-        <target>IDE-Kompatibilitätsdatei aktualisieren</target>
-      </trans-unit>
-      <trans-unit id="tl_autoload.ideCompatConfirm">
-        <source>The IDE compatibility file has been written.</source>
-        <target>Die IDE-Kompatibilitätsdatei wurde erstellt.</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

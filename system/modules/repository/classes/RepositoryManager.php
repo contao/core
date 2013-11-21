@@ -47,6 +47,11 @@ class RepositoryManager extends RepositoryBackendModule
 			array('update',			'repository_mgrupdt',		'update'	),
 			array('uninstall',		'repository_mgruist',		'uninstall'	)
 		);
+		// Switch to maintenance mode (see #4561)
+		if (Input::post('repository_action') == 'install' || Input::post('repository_action') == 'uninstall') {
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+			$this->Config->save();
+		}
 		return parent::generate();
 	} // generate
 
@@ -157,10 +162,13 @@ class RepositoryManager extends RepositoryBackendModule
 						'languages' => $this->languages,
 						'match'		=> 'ignorecase',
 						'names'		=> $rep->f_extension,
-						'sets'		=> 'history'
+						'sets'		=> 'history,details'
 					));
 					// replace the case-insensitive user input with the real name (see #4689)
-					if (count($exts)>0) $rep->f_extension = $exts[0]->name;
+					if (count($exts)>0) {
+						$rep->f_extension = $exts[0]->name;
+						$rep->f_changelog = $exts[0]->releasenotes;
+					}
 				} else
 					$exts = array();
 				$ok = count($exts)>0;
@@ -300,9 +308,10 @@ class RepositoryManager extends RepositoryBackendModule
 					'languages' => $this->languages,
 					'match'		=> 'exact',
 					'names'		=> $rep->f_extension,
-					'sets'		=> 'history'
+					'sets'		=> 'history,details'
 				);
 				$exts = $this->getExtensionList($options);
+				$rep->f_changelog = $exts[0]->releasenotes;
 				if (count($exts)>0) {
 					foreach ($exts[0]->allversions as $ver)
 						array_unshift($rep->f_allversions, $ver->version);
@@ -680,13 +689,12 @@ class RepositoryManager extends RepositoryBackendModule
 			if ($sum_ok>0) $rep->log .= '<div>'.sprintf($text['filesunchanged'],$sum_ok)."</div>\n";
 			if ($sum_del>0) $rep->log .= '<div>'.sprintf($text['filesdeleted'],$sum_del)."</div>\n";
 			$rep->log .= '<div class="color_green">'.$text['actionsuccess']."</div>\n";
-			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', 'RepositoryManager::updateExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -819,13 +827,12 @@ class RepositoryManager extends RepositoryBackendModule
 				$this->Files->delete($zipname);
 				throw $exc;
 			} // catch
-			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', 'RepositoryManager::installExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -909,13 +916,12 @@ class RepositoryManager extends RepositoryBackendModule
 				$db->prepare("delete from `tl_repository_installs` where `id`=?")->execute($instId);
 				$rep->log .= '<div class="color_green">'.$text['actionsuccess'].'</div>';
 			} // if
-			$this->log('Extension "'. $aName .'" has been uninstalled', 'RepositoryManager::uninstallExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been uninstalled', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				$exc->getMessage() . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;

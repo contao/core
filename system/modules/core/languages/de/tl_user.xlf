@@ -25,6 +25,14 @@
         <source>Please enter a valid e-mail address.</source>
         <target>Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
       </trans-unit>
+      <trans-unit id="tl_user.google.0">
+        <source>Google+ profile ID</source>
+        <target>Google+ Profil-ID</target>
+      </trans-unit>
+      <trans-unit id="tl_user.google.1">
+        <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
+        <target>Hier können Sie Ihre Google+ Profil-ID eingeben (z.B. &lt;em&gt;114740384471581504722&lt;/em&gt;).</target>
+      </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
         <target>Backend-Sprache</target>
@@ -228,6 +236,10 @@
       <trans-unit id="tl_user.name_legend">
         <source>Name and e-mail</source>
         <target>Name und E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tl_user.google_legend">
+        <source>Google+ settings</source>
+        <target>Google+-Einstellungen</target>
       </trans-unit>
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>

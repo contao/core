@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEnd">
         <source>End of recurring event</source>
-        <target>Koniec powtarzającego się wydarzenia</target>
+        <target>Koniec powtarzanego wydarzenia</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.0">
         <source>Add enclosures</source>

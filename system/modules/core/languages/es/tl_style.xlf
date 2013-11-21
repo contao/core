@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
         <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
-        <target>Margin, padding, align, vertical-align, text-align y espacio en blanco.</target>
+        <target>Margen, relleno, alineación, alineación vertical, alineación del texto y espacios en blanco.</target>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>

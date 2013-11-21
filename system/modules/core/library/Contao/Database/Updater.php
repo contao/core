@@ -234,18 +234,19 @@ class Updater extends \Controller
 		$this->Database->query(
 			"CREATE TABLE `tl_files` (
 			  `id` int(10) unsigned NOT NULL auto_increment,
-			  `pid` int(10) unsigned NOT NULL default '0',
+			  `pid` binary(16) NULL,
 			  `tstamp` int(10) unsigned NOT NULL default '0',
+			  `uuid` binary(16) NULL,
 			  `type` varchar(16) NOT NULL default '',
-			  `path` varchar(255) NOT NULL default '',
+			  `path` varchar(1022) NOT NULL default '',
 			  `extension` varchar(16) NOT NULL default '',
 			  `hash` varchar(32) NOT NULL default '',
 			  `found` char(1) NOT NULL default '1',
-			  `name` varchar(64) NOT NULL default '',
+			  `name` varchar(255) NOT NULL default '',
 			  `meta` blob NULL,
 			  PRIMARY KEY  (`id`),
 			  KEY `pid` (`pid`),
-			  UNIQUE KEY `path` (`path`),
+			  UNIQUE KEY `uuid` (`uuid`),
 			  KEY `extension` (`extension`)
 			) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 		);
@@ -464,13 +465,83 @@ class Updater extends \Controller
 		$this->Database->query("ALTER TABLE `tl_style` CHANGE `whitespace` `whitespace` varchar(8) NOT NULL default ''");
 		$this->Database->query("UPDATE `tl_style` SET `whitespace`='nowrap' WHERE `whitespace`!=''");
 
-		// Update the tl_files table (see #5598)
-		$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
-		$this->Database->query("ALTER TABLE `tl_files` CHANGE `path` `path` blob NULL");
-		$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `pid_name` (`pid`, `name`)");
+		// Drop the tl_files.path index (see #5598)
+		if ($this->Database->indexExists('path', 'tl_files'))
+		{
+			$this->Database->query("ALTER TABLE `tl_files` DROP INDEX `path`");
+		}
 
 		// Remove the "mooType" field (triggers the version 3.1 update)
 		$this->Database->query("ALTER TABLE `tl_content` DROP `mooType`");
+	}
+
+
+	/**
+	 * Version 3.2.0 update
+	 */
+	public function run32Update()
+	{
+		// Adjust the custom layout sections (see #2885)
+		$this->Database->query("ALTER TABLE `tl_layout` CHANGE `sections` `sections` varchar(1022) NOT NULL default ''");
+		$objLayout = $this->Database->query("SELECT id, sections FROM tl_layout WHERE sections!=''");
+
+		while ($objLayout->next())
+		{
+			$strSections = '';
+			$tmp = deserialize($objLayout->sections);
+
+			if (!empty($tmp) && is_array($tmp))
+			{
+				$strSections = implode(', ', $tmp);
+			}
+
+			$this->Database->prepare("UPDATE tl_layout SET sections=? WHERE id=?")
+						   ->execute($strSections, $objLayout->id);
+		}
+
+		// Check whether there are UUIDs
+		if (!$this->Database->fieldExists('uuid', 'tl_files'))
+		{
+			// Adjust the DB structure
+			$this->Database->query("ALTER TABLE `tl_files` ADD `uuid` binary(16) NULL");
+			$this->Database->query("ALTER TABLE `tl_files` ADD UNIQUE KEY `uuid` (`uuid`)");
+
+			// Backup the pid column and change the column type
+			$this->Database->query("ALTER TABLE `tl_files` ADD `pid_backup` int(10) unsigned NOT NULL default '0'");
+			$this->Database->query("UPDATE `tl_files` SET `pid_backup`=`pid`");
+			$this->Database->query("ALTER TABLE `tl_files` CHANGE `pid` `pid` binary(16) NULL");
+			$this->Database->query("UPDATE `tl_files` SET `pid`=NULL");
+			$this->Database->query("UPDATE `tl_files` SET `pid`=NULL WHERE `pid_backup`=0");
+
+			$objFiles = $this->Database->query("SELECT id FROM tl_files");
+
+			// Generate the UUIDs
+			while ($objFiles->next())
+			{
+				$this->Database->prepare("UPDATE tl_files SET uuid=? WHERE id=?")
+							   ->execute($this->Database->getUuid(), $objFiles->id);
+			}
+
+			$objFiles = $this->Database->query("SELECT pid_backup FROM tl_files WHERE pid_backup>0 GROUP BY pid_backup");
+
+			// Adjust the parent IDs
+			while ($objFiles->next())
+			{
+				$objParent = $this->Database->prepare("SELECT uuid FROM tl_files WHERE id=?")
+											->execute($objFiles->pid_backup);
+
+				if ($objParent->numRows < 1)
+				{
+					throw new \Exception('Invalid parent ID ' . $objFiles->pid_backup);
+				}
+
+				$this->Database->prepare("UPDATE tl_files SET pid=? WHERE pid_backup=?")
+							   ->execute($objParent->uuid, $objFiles->pid_backup);
+			}
+
+			// Update the fields
+			$this->updateFileTreeFields();
+		}
 	}
 
 
@@ -480,7 +551,7 @@ class Updater extends \Controller
 	 * @param string  $strPath The target folder
 	 * @param integer $pid     The parent ID
 	 */
-	public function scanUploadFolder($strPath=null, $pid=0)
+	public function scanUploadFolder($strPath=null, $pid=null)
 	{
 		if ($strPath === null)
 		{
@@ -514,12 +585,12 @@ class Updater extends \Controller
 		foreach ($arrFolders as $strFolder)
 		{
 			$objFolder = new \Folder($strFolder);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
-								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFolder), $strFolder, $objFolder->hash);
 
-			$this->scanUploadFolder($strFolder, $id);
+			$this->scanUploadFolder($strFolder, $strUuid);
 		}
 
 		// Files
@@ -542,12 +613,12 @@ class Updater extends \Controller
 			}
 
 			$objFile = new \File($strFile, true);
+			$strUuid = $this->Database->getUuid();
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
-								 ->insertId;
+			$this->Database->prepare("INSERT INTO tl_files (pid, tstamp, uuid, name, type, path, extension, hash) VALUES (?, ?, ?, ?, 'file', ?, ?, ?)")
+						   ->execute($pid, time(), $strUuid, basename($strFile), $strFile, $objFile->extension, $objFile->hash);
 
-			$arrMapper[basename($strFile)] = $id;
+			$arrMapper[basename($strFile)] = $strUuid;
 		}
 
 		// Insert the meta data AFTER the file entries have been created
@@ -557,7 +628,7 @@ class Updater extends \Controller
 			{
 				if (isset($arrMapper[$file]))
 				{
-					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE uuid=?")
 								   ->execute(serialize($meta), $arrMapper[$file]);
 				}
 			}
@@ -572,8 +643,8 @@ class Updater extends \Controller
 	{
 		$arrFiles = array();
 
-		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		// Parse all modules (see #6058)
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -599,7 +670,15 @@ class Updater extends \Controller
 		// Find all fileTree fields
 		foreach ($arrFiles as $strTable)
 		{
-			$this->loadDataContainer($strTable);
+			try
+			{
+				$this->loadDataContainer($strTable);
+			}
+			catch (\Exception $e)
+			{
+				continue;
+			}
+
 			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
 
 			// Skip non-database DCAs
@@ -612,65 +691,209 @@ class Updater extends \Controller
 				continue;
 			}
 
-			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
+			// Make sure there are fields (see #6437)
+			if (is_array($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
-				// FIXME: support other field types
-				if ($arrField['inputType'] == 'fileTree')
+				foreach ($GLOBALS['TL_DCA'][$strTable]['fields'] as $strField=>$arrField)
 				{
-					if ($this->Database->fieldExists($strField, $strTable))
+					// FIXME: support other field types
+					if ($arrField['inputType'] == 'fileTree')
 					{
-						$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
-						$arrFields[$key][] = $strTable . '.' . $strField;
+						if ($this->Database->fieldExists($strField, $strTable, true))
+						{
+							$key = $arrField['eval']['multiple'] ? 'multiple' : 'single';
+							$arrFields[$key][] = $strTable . '.' . $strField;
+						}
+
+						// Convert the order fields as well
+						if (isset($arrField['eval']['orderField']) && isset($GLOBALS['TL_DCA'][$strTable]['fields'][$arrField['eval']['orderField']]))
+						{
+							if ($this->Database->fieldExists($arrField['eval']['orderField'], $strTable, true))
+							{
+								$arrFields['order'][] = $strTable . '.' . $arrField['eval']['orderField'];
+							}
+						}
 					}
 				}
 			}
 		}
 
 		// Update the existing singleSRC entries
-		foreach ($arrFields['single'] as $val)
+		if (isset($arrFields['single']))
 		{
-			list($table, $field) = explode('.', $val);
-			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
-
-			while ($objRow->next())
+			foreach ($arrFields['single'] as $val)
 			{
-				if (!is_numeric($objRow->$field))
-				{
-					$objFile = \FilesModel::findByPath($objRow->$field);
-
-					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-								   ->execute($objFile->id, $objRow->id);
-				}
+				list($table, $field) = explode('.', $val);
+				static::convertSingleField($table, $field);
 			}
 		}
 
 		// Update the existing multiSRC entries
-		foreach ($arrFields['multiple'] as $val)
+		if (isset($arrFields['multiple']))
 		{
-			list($table, $field) = explode('.', $val);
-			$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
-
-			while ($objRow->next())
+			foreach ($arrFields['multiple'] as $val)
 			{
-				$arrPaths = deserialize($objRow->$field, true);
-
-				if (empty($arrPaths))
-				{
-					continue;
-				}
-
-				foreach ($arrPaths as $k=>$v)
-				{
-					if (!is_numeric($v))
-					{
-						$objFile = \FilesModel::findByPath($v);
-						$arrPaths[$k] = $objFile->id;
-					}
-				}
-
-				$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-							   ->execute(serialize($arrPaths), $objRow->id);
+				list($table, $field) = explode('.', $val);
+				static::convertMultiField($table, $field);
 			}
+		}
+
+		// Update the existing orderField entries
+		if (isset($arrFields['order']))
+		{
+			foreach ($arrFields['order'] as $val)
+			{
+				list($table, $field) = explode('.', $val);
+				static::convertOrderField($table, $field);
+			}
+		}
+	}
+
+
+	/**
+	 * Convert a single source field to UUIDs
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertSingleField($table, $field)
+	{
+		$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
+
+		// Backup the original column and then change the column type
+		if (!$objDatabase->fieldExists($backup, $table, true))
+		{
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+		}
+
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+
+		while ($objRow->next())
+		{
+			// Numeric ID to UUID
+			if (is_numeric($objRow->$backup))
+			{
+				$objFile = \FilesModel::findByPk($objRow->$backup);
+
+				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+							->execute($objFile->uuid, $objRow->id);
+			}
+
+			// Path to UUID
+			else
+			{
+				$objFile = \FilesModel::findByPath($objRow->$backup);
+
+				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+							->execute($objFile->uuid, $objRow->id);
+			}
+		}
+	}
+
+
+	/**
+	 * Convert a multi source field to UUIDs
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertMultiField($table, $field)
+	{
+		$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
+
+		// Backup the original column and then change the column type
+		if (!$objDatabase->fieldExists($backup, $table, true))
+		{
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+		}
+
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+
+		while ($objRow->next())
+		{
+			$arrPaths = deserialize($objRow->$backup, true);
+
+			if (empty($arrPaths))
+			{
+				continue;
+			}
+
+			foreach ($arrPaths as $k=>$v)
+			{
+				// Numeric ID to UUID
+				if (is_numeric($v))
+				{
+					$objFile = \FilesModel::findByPk($v);
+					$arrPaths[$k] = $objFile->uuid;
+				}
+
+				// Path to UUID
+				else
+				{
+					$objFile = \FilesModel::findByPath($v);
+					$arrPaths[$k] = $objFile->uuid;
+				}
+			}
+
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+						->execute(serialize($arrPaths), $objRow->id);
+		}
+	}
+
+
+	/**
+	 * Convert an order source field to UUIDs
+	 *
+	 * @param string $table The table name
+	 * @param string $field The field name
+	 */
+	public static function convertOrderField($table, $field)
+	{
+		$backup = $field . '_backup';
+		$objDatabase = \Database::getInstance();
+
+		// Backup the original column and then change the column type
+		if (!$objDatabase->fieldExists($backup, $table, true))
+		{
+			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+		}
+
+		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+
+		while ($objRow->next())
+		{
+			$arrPaths = explode(',', $objRow->$backup);
+
+			foreach ($arrPaths as $k=>$v)
+			{
+				// Numeric ID to UUID
+				if (is_numeric($v))
+				{
+					$objFile = \FilesModel::findByPk($v);
+					$arrPaths[$k] = $objFile->uuid;
+				}
+
+				// Path to UUID
+				else
+				{
+					$objFile = \FilesModel::findByPath($v);
+					$arrPaths[$k] = $objFile->uuid;
+				}
+			}
+
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+						->execute(serialize($arrPaths), $objRow->id);
 		}
 	}
 

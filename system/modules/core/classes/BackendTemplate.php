@@ -97,6 +97,9 @@ class BackendTemplate extends \Template
 			}
 		}
 
+		// User agent class (see #3074 and #6277)
+		$this->ua = \Environment::get('agent')->class;
+
 		// Style sheets
 		if (!empty($GLOBALS['TL_CSS']) && is_array($GLOBALS['TL_CSS']))
 		{
@@ -154,10 +157,6 @@ class BackendTemplate extends \Template
 				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
 			}
 		}
-
-		// Add the browser and OS classes (see #3074)
-		$ua = \Environment::get('agent');
-		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;
 		parent::output();

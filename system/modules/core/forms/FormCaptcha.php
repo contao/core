@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Class FormCaptcha
  *
- * File upload field.
+ * Captcha field.
  * @copyright  Leo Feyer 2005-2013
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -77,6 +77,7 @@ class FormCaptcha extends \Widget
 
 			case 'required':
 			case 'mandatory':
+			case 'minlength':
 			case 'maxlength':
 				// Ignore
 				break;

@@ -52,6 +52,13 @@ class Index extends Frontend
 	 */
 	public function run()
 	{
+		// Maintenance mode (see #4561 and #6353)
+		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
+		{
+			header('HTTP/1.1 503 Service Unavailable');
+			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+		}
+
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
@@ -169,12 +176,12 @@ class Index extends Frontend
 			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
-		// Exit if the root page has not been published (see #2425) and
-		// do not try to load the 404 page! It can cause an infinite loop.
+		// Exit if the root page has not been published (see #2425)
+		// Do not try to load the 404 page, it can cause an infinite loop!
 		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found');
+			die_nicely('be_no_page', 'Page not found');
 		}
 
 		// Check wether the language matches the root page language
@@ -211,7 +218,7 @@ class Index extends Frontend
 
 			if (!is_array($arrGroups) || empty($arrGroups) || !count(array_intersect($arrGroups, $this->User->groups)))
 			{
-				$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
+				$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', __METHOD__, TL_ERROR);
 
 				$objHandler = new $GLOBALS['TL_PTY']['error_403']();
 				$objHandler->generate($pageId, $objRootPage);
@@ -257,8 +264,8 @@ class Index extends Frontend
 	 */
 	protected function outputFromCache()
 	{
-		// Build the page if a user is logged in or there is POST data
-		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
+		// Build the page if a user is (potentially) logged in or there is POST data
+		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			return;
 		}

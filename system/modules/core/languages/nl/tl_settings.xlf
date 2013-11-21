@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Het wordt aangeraden om UTF-8 te gebruiken om er zeker van te zijn dat alle speciale karakters correct worden weergegeven.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Eigen lay-out secties</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Hier kunt u een door komma's gescheiden lijst van eigen lay-out secties opgeven.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Uitschakelen van de commando scheduler</target>
@@ -119,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandssynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
+        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandsynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -144,6 +136,22 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Hier kunt de cache mode selecteren.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Vertrouwde proxy servers</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Voer hier een komma gescheiden lijst van vertrouwde proxy-server IP-adressen in.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>SSL proxy domein</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Indien uw website beschikbaar is via een SSL proxy server, geef dan hier het domein op (bijv.&lt;em&gt;sslsites.de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -175,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
-        <target>Voeg taal reeks als eerste URL-parameter (bv. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
+        <target>Voeg taal reeks als eerste URL-parameter (bijv. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -225,13 +233,21 @@
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>Als u deze optie kiest wordt bepaalde runtime informatie (bv. database queries) afgedrukt op het scherm.</target>
       </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>Onderhoud modus</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Verzend een 503 HTTP-header en toont een onderhoudspagina in het front-end.</target>
+      </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
         <target>Interne cache omzeilen</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.1">
         <source>Do not use the internal cache files (e.g. useful when developing extensions).</source>
-        <target>Maak geen gebruik van de interne cache (b.v. nuttig bij het ontwikkelen van extensies).</target>
+        <target>Maak geen gebruik van de interne cache (bv. nuttig bij het ontwikkelen van extensies).</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.0">
         <source>Disable request tokens</source>
@@ -557,9 +573,9 @@
         <source>Front end configuration</source>
         <target>Front-end configuratie</target>
       </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Lay-out secties</target>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Proxy configuratie</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -592,6 +608,10 @@
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
         <target>Inactieve extensies</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>Opdrachtplanner</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

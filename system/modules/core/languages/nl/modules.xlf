@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="FMD.quicknav.0">
         <source>Quick navigation</source>
-        <target>Snelmenu</target>
+        <target>Snelle navigatie</target>
       </trans-unit>
       <trans-unit id="FMD.quicknav.1">
         <source>Generates a drop-down menu from the site structure</source>

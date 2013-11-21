@@ -97,18 +97,6 @@
         <source>The tables have been successfully checked.</source>
         <target>Las tabellas èn vegnidas controlladas cun success.</target>
       </trans-unit>
-      <trans-unit id="tl_theme.custom_sections">
-        <source>Custom layout sections</source>
-        <target>Secziuns persunalisadas dal layout</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.missing_section">
-        <source>The layout section &lt;strong&gt;%s&lt;/strong&gt; will be added to the local configuration.</source>
-        <target>La secziun dal layout &lt;strong&gt;%s&lt;/strong&gt; vegn agiuntada a la configuraziun locala.</target>
-      </trans-unit>
-      <trans-unit id="tl_theme.sections_ok">
-        <source>The layout sections have been successfully checked.</source>
-        <target>Las secziuns dal layout èn vegnidas controlladas cun success.</target>
-      </trans-unit>
       <trans-unit id="tl_theme.missing_xml">
         <source>Theme &quot;%s&quot; is corrupt and cannot be imported.</source>
         <target>Il theme &quot;%s&quot; è donnegià e na po betg vegnir importà.</target>

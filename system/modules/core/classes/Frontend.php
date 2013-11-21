@@ -320,8 +320,8 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				\System::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
-				die('No root page found');
+				\System::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', __METHOD__, TL_ERROR);
+				die_nicely('be_no_root', 'No root page found');
 			}
 		}
 
@@ -337,8 +337,8 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				\System::log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
-				die('No root page found');
+				\System::log('No root page found (host "' . \Environment::get('host') . '", languages "'.implode(', ', \Environment::get('httpAcceptLanguage')).'")', __METHOD__, TL_ERROR);
+				die_nicely('be_no_root', 'No root page found');
 			}
 
 			// Redirect to the language root (e.g. en/)
@@ -510,13 +510,13 @@ abstract class Frontend extends \Controller
 					// Always return false if we are not in preview mode (show hidden elements)
 					if (!\Input::cookie('FE_PREVIEW'))
 					{
-						$_SESSION['TL_USER_LOGGED_IN'] = false;
+						$_SESSION['TL_USER_LOGGED_IN'] = false; // backwards compatibility
 						return false;
 					}
 				}
 
 				// The session could be verified
-				$_SESSION['TL_USER_LOGGED_IN'] = true;
+				$_SESSION['TL_USER_LOGGED_IN'] = true; // backwards compatibility
 				return true;
 			}
 		}
@@ -528,7 +528,11 @@ abstract class Frontend extends \Controller
 		}
 
 		// The session could not be verified
-		$_SESSION['TL_USER_LOGGED_IN'] = false;
+		$_SESSION['TL_USER_LOGGED_IN'] = false; // backwards compatibility
+
+		// Remove the cookie if it is invalid to enable loading cached pages
+		$this->setCookie($strCookie, $hash, (time() - 86400), null, null, false, true);
+
 		return false;
 	}
 
@@ -539,7 +543,7 @@ abstract class Frontend extends \Controller
 	 * @param string
 	 * @return array
 	 */
-	protected function getMetaData($strData, $strLanguage)
+	public static function getMetaData($strData, $strLanguage)
 	{
 		$arrData = deserialize($strData);
 

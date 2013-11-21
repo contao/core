@@ -20,9 +20,11 @@ var AjaxRequest =
 {
 	/**
 	 * Toggle the navigation menu
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the menu item
+	 *
+	 * @returns {boolean}
 	 */
 	toggleNavigation: function(el, id) {
 		el.blur();
@@ -77,11 +79,13 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the site structure tree
-	 * @param object
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object}  el    The DOM lement
+	 * @param {string}  id    The ID of the target element
+	 * @param {integer} level The indentation level
+	 * @param {integer} mode  The insert mode
+	 *
+	 * @returns {boolean}
 	 */
 	toggleStructure: function (el, id, level, mode) {
 		el.blur();
@@ -163,11 +167,13 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the file manager tree
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object}  el     The DOM element
+	 * @param {string}  id     The ID of the target element
+	 * @param {string}  folder The folder's path
+	 * @param {integer} level  The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFileManager: function (el, id, folder, level) {
 		el.blur();
@@ -233,12 +239,14 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the page tree input field
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object}  el    The DOM element
+	 * @param {string}  id    The ID of the target element
+	 * @param {string}  field The field name
+	 * @param {string}  name  The Ajax field name
+	 * @param {integer} level The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	togglePagetree: function (el, id, field, name, level) {
 		el.blur();
@@ -301,13 +309,15 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the file tree input field
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object}  el     The DOM element
+	 * @param {string}  id     The ID of the target element
+	 * @param {string}  folder The folder name
+	 * @param {string}  field  The field name
+	 * @param {string}  name   The Ajax field name
+	 * @param {integer} level  The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFiletree: function (el, id, folder, field, name, level) {
 		el.blur();
@@ -370,9 +380,10 @@ var AjaxRequest =
 
 	/**
 	 * Toggle subpalettes in edit mode
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} field The field name
 	 */
 	toggleSubpalette: function (el, id, field) {
 		el.blur();
@@ -429,10 +440,12 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the visibility of an element
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} table The table name
+	 *
+	 * @returns {boolean}
 	 */
 	toggleVisibility: function(el, id, table) {
 		el.blur();
@@ -512,10 +525,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0});
 		}
 
 		return false;
@@ -523,9 +536,11 @@ var AjaxRequest =
 
 	/**
 	 * Feature/unfeature an element
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFeatured: function(el, id) {
 		el.blur();
@@ -547,10 +562,12 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the visibility of a fieldset
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} table The table name
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFieldset: function(el, id, table) {
 		el.blur();
@@ -569,9 +586,11 @@ var AjaxRequest =
 
 	/**
 	 * Toggle a group of a multi-checkbox field
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
+	 *
+	 * @returns {boolean}
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
@@ -597,7 +616,9 @@ var AjaxRequest =
 
 	/**
 	 * Store the Live Update ID
-	 * @param string
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the input field
 	 */
 	liveUpdate: function(el, id) {
 		var uid = $(id);
@@ -617,7 +638,8 @@ var AjaxRequest =
 
 	/**
 	 * Display the "loading data" message
-	 * @param string
+	 *
+	 * @param {string} message The message text
 	 */
 	displayBox: function(message) {
 		var box = $('tl_ajaxBox'),
@@ -679,9 +701,6 @@ var AjaxRequest =
  */
 var Backend =
 {
-	/**
-	 * Properties
-	 */
 	currentId: null,
 	xMousePosition: 0,
 	yMousePosition: 0,
@@ -689,7 +708,8 @@ var Backend =
 
 	/**
 	 * Get the current mouse position
-	 * @param object
+	 *
+	 * @param {object} event The event object
 	 */
 	getMousePosition: function(event) {
 		Backend.xMousePosition = event.client.x;
@@ -697,10 +717,13 @@ var Backend =
 	},
 
 	/**
-	 * Open a new window (backwards compatibility)
-	 * @param object
-	 * @param integer
-	 * @param integer
+	 * Open a new window
+	 *
+	 * @param {object}  el     The DOM element
+	 * @param {integer} width  The width in pixels
+	 * @param {integer} height The height in pixels
+	 *
+	 * @deprecated Use Backend.openModalWindow() instead
 	 */
 	openWindow: function(el, width, height) {
 		el.blur();
@@ -711,14 +734,15 @@ var Backend =
 
 	/**
 	 * Open a modal window
-	 * @param integer
-	 * @param string
-	 * @param string
+	 *
+	 * @param {integer} width   The width in pixels
+	 * @param {string}  title   The window's title
+	 * @param {string}  content The window's content
 	 */
 	openModalWindow: function(width, title, content) {
 		new SimpleModal({
 			'width': width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -731,13 +755,14 @@ var Backend =
 
 	/**
 	 * Open an image in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalImage: function(options) {
 		var opt = options || {};
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -751,7 +776,8 @@ var Backend =
 
 	/**
 	 * Open an iframe in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalIframe: function(options) {
 		var opt = options || {};
@@ -759,7 +785,7 @@ var Backend =
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -773,7 +799,8 @@ var Backend =
 
 	/**
 	 * Open a selector page in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalSelector: function(options) {
 		var opt = options || {};
@@ -852,7 +879,8 @@ var Backend =
 
 	/**
 	 * Automatically submit a form
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	autoSubmit: function(el) {
 		Backend.getScrollOffset();
@@ -870,7 +898,8 @@ var Backend =
 
 	/**
 	 * Scroll the window to a certain vertical position
-	 * @param integer
+	 *
+	 * @param {integer} offset The offset to scroll to
 	 */
 	vScrollTo: function(offset) {
 		window.addEvent('load', function() {
@@ -903,8 +932,13 @@ var Backend =
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
+				'title': Contao.lang.expand,
 				'width': 20,
 				'height': 24
+			});
+
+			new Tips.Contao(toggler, {
+				offset: {x:0, y:30}
 			});
 
 			// Disable the function if the preview height is below the max-height
@@ -920,7 +954,14 @@ var Backend =
 			toggler.addEvent('click', function() {
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
-				this.src = (this.src.indexOf('expand.gif') != -1) ? path + 'collapse.gif' : path + 'expand.gif';
+
+				if (this.src.indexOf('expand.gif') != -1) {
+					this.src = path + 'collapse.gif';
+					this.store('tip:title', Contao.lang.collapse);
+				} else {
+					this.src = path + 'expand.gif';
+					this.store('tip:title', Contao.lang.expand);
+				}
 			});
 
 			toggler.inject(div, 'after');
@@ -929,12 +970,13 @@ var Backend =
 
 	/**
 	 * Toggle checkboxes
-	 * @param object
-	 * @param string
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
 	 */
-	toggleCheckboxes: function(trigger, id) {
+	toggleCheckboxes: function(el, id) {
 		var items = $$('input'),
-			status = trigger.checked ? 'checked' : '';
+			status = $(el).checked ? 'checked' : '';
 
 		for (var i=0; i<items.length; i++) {
 			if (items[i].type.toLowerCase() != 'checkbox') {
@@ -948,9 +990,10 @@ var Backend =
 	},
 
 	/**
-	 * Toggle checkbox group
-	 * @param object
-	 * @param string
+	 * Toggle a checkbox group
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		var cls = $(el).className,
@@ -972,8 +1015,9 @@ var Backend =
 
 	/**
 	 * Toggle checkbox elements
-	 * @param string
-	 * @param string
+	 *
+	 * @param {string} el  The DOM element
+	 * @param {string} cls The CSS class name
 	 */
 	toggleCheckboxElements: function(el, cls) {
 		var status = $(el).checked ? 'checked' : '';
@@ -988,8 +1032,9 @@ var Backend =
 	},
 
 	/**
-	 * Toggle textarea line wrap
-	 * @param string
+	 * Toggle the line wrapping mode of a textarea
+	 *
+	 * @param {string} id The ID of the target element
 	 */
 	toggleWrap: function(id) {
 		var textarea = $(id),
@@ -1007,16 +1052,18 @@ var Backend =
 	},
 
 	/**
-	 * Toggle opacity
-	 * @deprecated
+	 * Toggle the opacity of the paste buttons
+	 *
+	 * @deprecated Not required anymore
 	 */
-	blink: function() {
-		// Keep for backwards compatibility
-	},
+	blink: function() {},
 
 	/**
-	 * Initialize the mootools color picker (backwards compatibility)
-	 * @deprecated
+	 * Initialize the mootools color picker
+	 *
+	 * @returns {boolean}
+	 *
+	 * @deprecated Not required anymore
 	 */
 	addColorPicker: function() {
 		return true;
@@ -1024,7 +1071,9 @@ var Backend =
 
 	/**
 	 * Open the page picker wizard in a modal window
-	 * @param string
+	 *
+	 * @param {string} id The ID of the target element
+	 *
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickPage: function(id) {
@@ -1040,8 +1089,10 @@ var Backend =
 
 	/**
 	 * Open the file picker wizard in a modal window
-	 * @param string
-	 * @param string
+	 *
+	 * @param {string} id     The ID of the target element
+	 * @param {string} filter The filter value
+	 *
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickFile: function(id, filter) {
@@ -1056,10 +1107,9 @@ var Backend =
 	},
 
 	/**
-	 * Collapse palettes
-	 * @param string
+	 * Collapse all palettes
 	 */
-	collapsePalettes: function(id) {
+	collapsePalettes: function() {
 		$$('fieldset.hide').each(function(el) {
 			el.addClass('collapsed');
 		});
@@ -1102,7 +1152,9 @@ var Backend =
 
 	/**
 	 * Make parent view items sortable
-	 * @param object
+	 *
+	 * @param {object} ul The DOM element
+	 *
 	 * @author Joe Ray Gregory
 	 */
 	makeParentViewSortable: function(ul) {
@@ -1172,21 +1224,22 @@ var Backend =
     				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req, 'followRedirects':false}).get();
     		} else if (el.getParent('ul')) {
     			var id = el.get('id').replace(/li_/, ''),
     				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
     				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
     				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
+    			new Request.Contao({'url':href+req, 'followRedirects':false}).get();
     		}
     	});
 	},
 
     /**
      * Make multiSRC items sortable
-     * @param string
-     * @param string
+	 *
+     * @param {string} id  The ID of the target element
+     * @param {string} oid The DOM element
      */
     makeMultiSrcSortable: function(id, oid) {
         var list = new Sortables($(id), {
@@ -1205,9 +1258,8 @@ var Backend =
 
 	/**
 	 * Make the wizards sortable
-	 * @param string
 	 */
-	makeWizardsSortable: function(id) {
+	makeWizardsSortable: function() {
 		$$('.tl_listwizard').each(function(el) {
 			new Sortables(el, {
 				contstrain: true,
@@ -1260,9 +1312,10 @@ var Backend =
 
     /**
 	 * List wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	listWizard: function(el, command, id) {
 		var list = $(id),
@@ -1320,9 +1373,10 @@ var Backend =
 
 	/**
 	 * Table wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	tableWizard: function(el, command, id) {
 		var table = $(id),
@@ -1442,7 +1496,8 @@ var Backend =
 
 	/**
 	 * Resort the table wizard fields
-	 * @param object
+	 *
+	 * @param {object} tbody The DOM element
 	 */
 	tableWizardResort: function(tbody) {
 		var rows = tbody.getChildren(),
@@ -1462,7 +1517,8 @@ var Backend =
 
 	/**
 	 * Resize the table wizard fields on focus
-	 * @param float
+	 *
+	 * @param {float} factor The resize factor
 	 */
 	tableWizardResize: function(factor) {
 		var size = Cookie.read('BE_CELL_SIZE');
@@ -1489,9 +1545,10 @@ var Backend =
 
 	/**
 	 * Module wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	moduleWizard: function(el, command, id) {
 		var table = $(id),
@@ -1566,9 +1623,10 @@ var Backend =
 
 	/**
 	 * Options wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	optionsWizard: function(el, command, id) {
 		var table = $(id),
@@ -1641,9 +1699,10 @@ var Backend =
 
 	/**
 	 * Key/value wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	keyValueWizard: function(el, command, id) {
 		var table = $(id),
@@ -1709,9 +1768,10 @@ var Backend =
 
 	/**
 	 * Checkbox wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	checkboxWizard: function(el, command, id) {
 		var container = $(id).getElement('.sortable'),
@@ -1739,8 +1799,9 @@ var Backend =
 
 	/**
 	 * Meta wizard
-	 * @param object
-	 * @param string
+	 *
+	 * @param {object} el The select element
+	 * @param {string} ul The DOM element
 	 */
 	metaWizard: function(el, ul) {
 		var opt = el.getParent('div').getElement('select');
@@ -1785,7 +1846,8 @@ var Backend =
 
 	/**
 	 * Remove a meta entry
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	metaDelete: function(el) {
 		var li = el.getParent('li'),
@@ -1809,7 +1871,8 @@ var Backend =
 
 	/**
 	 * Toggle the "add language" button
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	toggleAddLanguageButton: function(el) {
 		var inp = el.getParent('div').getElement('input[type="button"]');
@@ -1822,7 +1885,8 @@ var Backend =
 
 	/**
 	 * Update the "edit module" links in the module wizard
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	updateModuleLink: function(el) {
 		var td = el.getParent('tr').getLast('td'),
@@ -1930,10 +1994,6 @@ if (Browser.Features.Touch) (function() {
  */
 var TinyCallback =
 {
-	/**
-	 * Get the scroll offset of the editor
-	 * @param object
-	 */
 	getScrollOffset: function(ed) {
 		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();

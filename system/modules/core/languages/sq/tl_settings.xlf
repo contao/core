@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Epeni kompletin e shenjave. Përdorni mundësisht UTF-8 për ta mundësuar paraqitjen shenjave të veçanta. Ndërroni kompletin e shenjave vetëm në rast se ekzistojnë probleme.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Layout-seksionet e përshtatshme</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Epeni listën e Layout-seksioneve duke i ndarë me presje. Këto seksione do të ju ofrohen në modul &lt;em&gt;Struktura faqes&lt;/em&gt; si shtes i seksioneve &lt;em&gt;koka&lt;/em&gt;, &lt;em&gt;majtë&lt;/em&gt;, &lt;em&gt;barku&lt;/em&gt;, &lt;em&gt;djathtë&lt;/em&gt; dhe &lt;em&gt;fundi&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Ç'aktivizo orarin e komandë</target>
@@ -119,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin i skedarëve (p.sh. &lt;em&gt;shtojcat, music_academy &lt;/ em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoren p.sh. si fotografi apo si elemente shkarkuese!</target>
+        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin fotografi (p.sh. &lt;em&gt; të bashkëngjitni skedarë, music_academy &lt;/ em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoret p.sh. në imazh apo elemente shkarko!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -144,6 +136,18 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Zgjedhoni mënyrën e dopossë fshehur apo cache mode.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -182,7 +186,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
-        <target>Për një URL të zbrazët trego faqen kryesore në vend të përcjelljes tek faqja rrënjësore e gjuheve (nuk rekomandohet).</target>
+        <target>Për një URL të zbrazët trego faqen kryesore në vend të përcjelljes tek faqja rrënjësore e gjuhës (nuk rekomandohet).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
@@ -221,6 +225,12 @@
       <trans-unit id="tl_settings.debugMode.1">
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>Gjatë kohës ekzekutuese Debug mode (gjendja korrigjuese) tregon informata në ekran (p.sh. pyetësorët e bazës e të dhënave). Ky opsion është parapa vetëm për mirëmbajtje dhe rekomandohet që të çaktivizohet në punën e zakonshme!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -553,9 +563,8 @@
         <source>Front end configuration</source>
         <target>Konfigurimet Front end</target>
       </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Pjesët e struktures</target>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -588,6 +597,9 @@
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
         <target>Modulet Backend të çaktivizuar</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

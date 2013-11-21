@@ -265,6 +265,12 @@ class ModuleEventlist extends \Events
 				++$dayCount;
 			}
 
+			// Show the teaser text of redirect events (see #6315)
+			if (is_bool($event['details']))
+			{
+				$objTemplate->details = $event['teaser'];
+			}
+
 			// Add template variables
 			$objTemplate->classList = $event['class'] . ((($headerCount % 2) == 0) ? ' even' : ' odd') . (($headerCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->classUpcoming = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($offset + $eventCount + 1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];
@@ -290,24 +296,24 @@ class ModuleEventlist extends \Events
 			// Add an image
 			if ($event['addImage'] && $event['singleSRC'] != '')
 			{
-				if (!is_numeric($event['singleSRC']))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($event['singleSRC']);
+				$objModel = \FilesModel::findByUuid($event['singleSRC']);
 
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($event['singleSRC']))
 					{
-						if ($imgSize)
-						{
-							$event['size'] = $imgSize;
-						}
-
-						$event['singleSRC'] = $objModel->path;
-						$this->addImageToTemplate($objTemplate, $event);
+						$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 					}
+				}
+				elseif (is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					if ($imgSize)
+					{
+						$event['size'] = $imgSize;
+					}
+
+					$event['singleSRC'] = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $event);
 				}
 			}
 

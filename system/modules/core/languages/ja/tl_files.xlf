@@ -149,6 +149,14 @@
         <source>Delete file or folder &quot;%s&quot;</source>
         <target>&quot;%s&quot;というファイルまたはフォルダーを削除</target>
       </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+        <target>ファイルやフォルダーの詳細</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>&quot;%s&quot;というファイルまたはフォルダーの詳細</target>
+      </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
         <target>ファイルを編集</target>

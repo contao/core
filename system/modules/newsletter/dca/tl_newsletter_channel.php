@@ -319,7 +319,7 @@ class tl_newsletter_channel extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsletterp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' newsletter channel ID "'.Input::get('id').'"', 'tl_newsletter_channel checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter channel ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -342,7 +342,7 @@ class tl_newsletter_channel extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' newsletter channels', 'tl_newsletter_channel checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter channels', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;

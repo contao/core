@@ -68,17 +68,16 @@ class ContentDownloads extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -111,7 +110,6 @@ class ContentDownloads extends \ContentElement
 
 		$files = array();
 		$auxDate = array();
-		$auxId = array();
 
 		$objFiles = $this->objFiles;
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
@@ -140,7 +138,7 @@ class ContentDownloads extends \ContentElement
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
 				}
 
 				$strHref = \Environment::get('request');
@@ -157,6 +155,7 @@ class ContentDownloads extends \ContentElement
 				$files[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'title'     => $arrMeta['title'],
 					'link'      => $arrMeta['title'],
@@ -171,13 +170,12 @@ class ContentDownloads extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 				if ($objSubfiles === null)
 				{
@@ -204,7 +202,7 @@ class ContentDownloads extends \ContentElement
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
 					}
 
 					$strHref = \Environment::get('request');
@@ -221,6 +219,7 @@ class ContentDownloads extends \ContentElement
 					$files[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'title'     => $arrMeta['title'],
 						'link'      => $arrMeta['title'],
@@ -235,7 +234,6 @@ class ContentDownloads extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -264,30 +262,33 @@ class ContentDownloads extends \ContentElement
 			case 'custom':
 				if ($this->orderSRC != '')
 				{
-					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$tmp = deserialize($this->orderSRC);
 
-					// Move the matching elements to their position in $arrOrder
-					foreach ($files as $k=>$v)
+					if (!empty($tmp) && is_array($tmp))
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						// Remove all values
+						$arrOrder = array_map(function(){}, array_flip($tmp));
+
+						// Move the matching elements to their position in $arrOrder
+						foreach ($files as $k=>$v)
 						{
-							$arrOrder[$v['id']] = $v;
-							unset($files[$k]);
+							if (array_key_exists($v['uuid'], $arrOrder))
+							{
+								$arrOrder[$v['uuid']] = $v;
+								unset($files[$k]);
+							}
 						}
-					}
 
-					// Append the left-over files at the end
-					if (!empty($files))
-					{
-						$arrOrder = array_merge($arrOrder, array_values($files));
-					}
+						// Append the left-over files at the end
+						if (!empty($files))
+						{
+							$arrOrder = array_merge($arrOrder, array_values($files));
+						}
 
-					// Remove empty (unreplaced) entries
-					$files = array_filter($arrOrder);
-					unset($arrOrder);
+						// Remove empty (unreplaced) entries
+						$files = array_values(array_filter($arrOrder));
+						unset($arrOrder);
+					}
 				}
 				break;
 

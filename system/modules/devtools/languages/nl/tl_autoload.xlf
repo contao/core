@@ -37,14 +37,6 @@
         <source>The autoload.php file of module &quot;%s&quot; has been written.</source>
         <target>Het autoload.php bestand van module &quot;%s&quot; is weggeschreven.</target>
       </trans-unit>
-      <trans-unit id="tl_autoload.ideCompat">
-        <source>Update the IDE compatibility file</source>
-        <target>Update het IDE compatibiliteit bestand</target>
-      </trans-unit>
-      <trans-unit id="tl_autoload.ideCompatConfirm">
-        <source>The IDE compatibility file has been written.</source>
-        <target>Het IDE compatibiliteit bestand is weggeschreven.</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

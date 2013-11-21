@@ -265,6 +265,14 @@
         <source>Show this text as long as the field is empty (requires HTML5).</source>
         <target>Afficher ce texte tant que le champ est vide (HTML5 requis).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+        <target>Longueur minimale</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+        <target>Exiger que la valeur du champ ait un certain nombre de caractères.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
         <target>Longueur maximale</target>
@@ -456,6 +464,10 @@
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
         <target>Paramètres avancés</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+        <target>Lignes et colonnes</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

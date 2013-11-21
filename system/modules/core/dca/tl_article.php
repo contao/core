@@ -191,7 +191,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			(
 				array('tl_article', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 
 		),
 		'author' => array
@@ -211,7 +211,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'default'                 => 'main',
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_article', 'getActivePageSections'),
+			'options_callback'        => array('tl_article', 'getActiveLayoutSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -488,7 +488,7 @@ class tl_article extends Backend
 
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
-						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -517,7 +517,7 @@ class tl_article extends Backend
 				{
 					if (!$error && !in_array($id, $pagemounts))
 					{
-						$this->log('Page ID ' . $id . ' was not mounted', 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Page ID ' . $id . ' was not mounted', __METHOD__, TL_ERROR);
 						$error = true;
 					}
 
@@ -530,7 +530,7 @@ class tl_article extends Backend
 					{
 						if (!$this->User->isAllowed($permission, $objPage->row()))
 						{
-							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, __METHOD__, TL_ERROR);
 							$error = true;
 						}
 					}
@@ -604,11 +604,11 @@ class tl_article extends Backend
 
 
 	/**
-	 * Return all active page sections as array
+	 * Return all active layout sections as array
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getActivePageSections(DataContainer $dc)
+	public function getActiveLayoutSections(DataContainer $dc)
 	{
 		$arrCustom = array();
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
@@ -616,54 +616,70 @@ class tl_article extends Backend
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
-			// Load the page
 			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
-			// Get the layout settings
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			// No layout specified
-			if ($objLayout === null)
+			// Get the layout sections
+			foreach (array('layout', 'mobileLayout') as $key)
 			{
-				return array('main');
+				if (!$objPage->$key)
+				{
+					continue;
+				}
+
+				$objLayout = LayoutModel::findByPk($objPage->$key);
+
+				// No layout specified
+				if ($objLayout === null)
+				{
+					continue;
+				}
+
+				$arrSections = array();
+
+				// Header
+				if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
+				{
+					$arrSections[] = 'header';
+				}
+
+				// Left column
+				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+				{
+					$arrSections[] = 'left';
+				}
+
+				// Right column
+				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+				{
+					$arrSections[] = 'right';
+				}
+
+				// Main column
+				$arrSections[] = 'main';
+
+				// Footer
+				if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
+				{
+					$arrSections[] = 'footer';
+				}
+
+				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
 			}
 
-			$arrSections = array();
-
-			// Header
-			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'header';
-			}
-
-			// Left column
-			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'left';
-			}
-
-			// Right column
-			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'right';
-			}
-
-			// Main column
-			$arrSections[] = 'main';
-
-			// Footer
-			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'footer';
-			}
-
-			$arrCustom = deserialize($objLayout->sections);
+			$arrCustom = array_unique($arrCustom);
 		}
 
-		// Always add the custom layout sections in "override all" mode
+		// Show all custom layout sections in "override all" mode
 		if (Input::get('act') == 'overrideAll')
 		{
-			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
+			$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+			while ($objLayout->next())
+			{
+				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+			}
+
+			$arrCustom = array_unique($arrCustom);
 		}
 
 		// Add the custom layout sections
@@ -873,7 +889,7 @@ class tl_article extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -885,8 +901,15 @@ class tl_article extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -895,6 +918,6 @@ class tl_article extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), 'tl_article toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), __METHOD__, TL_GENERAL);
 	}
 }

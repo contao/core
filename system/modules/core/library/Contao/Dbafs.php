@@ -60,11 +60,12 @@ class Dbafs
 			throw new \InvalidArgumentException("Invalid resource $strResource");
 		}
 
-		$arrPaths  = array();
-		$arrChunks = explode('/', $strResource);
-		$strPath   = array_shift($arrChunks);
-		$arrPids   = array($strPath=>0);
-		$arrUpdate = array($strResource);
+		$arrPaths    = array();
+		$arrChunks   = explode('/', $strResource);
+		$strPath     = array_shift($arrChunks);
+		$arrPids     = array($strPath => null);
+		$arrUpdate   = array($strResource);
+		$objDatabase = \Database::getInstance();
 
 		// Build the paths
 		while (count($arrChunks))
@@ -86,7 +87,7 @@ class Dbafs
 				if (($i = array_search($objModels->path, $arrPaths)) !== false)
 				{
 					unset($arrPaths[$i]);
-					$arrPids[$objModels->path] = $objModels->id;
+					$arrPids[$objModels->path] = $objModels->uuid;
 				}
 			}
 
@@ -140,9 +141,10 @@ class Dbafs
 			$strParent = dirname($strPath);
 
 			// The parent ID should be in $arrPids
-			if (isset($arrPids[$strParent]))
+			// Do not use isset() here, because the PID can be null
+			if (array_key_exists($strParent, $arrPids))
 			{
-				$intPid = $arrPids[$strParent];
+				$strPid = $arrPids[$strParent];
 			}
 			else
 			{
@@ -155,13 +157,14 @@ class Dbafs
 				$objFile = new \File($strPath, true);
 
 				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
+				$objModel->pid       = $strPid;
 				$objModel->tstamp    = time();
 				$objModel->name      = $objFile->name;
 				$objModel->type      = 'file';
 				$objModel->path      = $objFile->path;
 				$objModel->extension = $objFile->extension;
 				$objModel->hash      = $objFile->hash;
+				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
 				$arrPids[$objFile->path] = $objModel->id;
@@ -171,13 +174,14 @@ class Dbafs
 				$objFolder = new \Folder($strPath);
 
 				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
+				$objModel->pid       = $strPid;
 				$objModel->tstamp    = time();
 				$objModel->name      = $objFolder->name;
 				$objModel->type      = 'folder';
 				$objModel->path      = $objFolder->path;
 				$objModel->extension = '';
 				$objModel->hash      = $objFolder->hash;
+				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
 				$arrPids[$objFolder->path] = $objModel->id;
@@ -223,7 +227,7 @@ class Dbafs
 		// Set the new parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 		{
-			$objFile->pid = 0;
+			$objFile->pid = null;
 		}
 		else
 		{
@@ -234,7 +238,7 @@ class Dbafs
 				$objFolder = static::addResource($strFolder);
 			}
 
-			$objFile->pid = $objFolder->id;
+			$objFile->pid = $objFolder->uuid;
 		}
 
 		// Save the resource
@@ -281,6 +285,7 @@ class Dbafs
 	 */
 	public static function copyResource($strSource, $strDestination)
 	{
+		$objDatabase = \Database::getInstance();
 		$objFile = \FilesModel::findByPath($strSource);
 
 		// Add the source entry
@@ -295,7 +300,7 @@ class Dbafs
 		// Set the new parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
 		{
-			$objNewFile->pid = 0;
+			$objNewFile->pid = null;
 		}
 		else
 		{
@@ -306,11 +311,12 @@ class Dbafs
 				$objFolder = static::addResource($strFolder);
 			}
 
-			$objNewFile->pid = $objFolder->id;
+			$objNewFile->pid = $objFolder->uuid;
 		}
 
 		// Save the resource
 		$objNewFile->tstamp = time();
+		$objNewFile->uuid   = $objDatabase->getUuid();
 		$objNewFile->path   = $strDestination;
 		$objNewFile->name   = basename($strDestination);
 		$objNewFile->save();
@@ -326,8 +332,9 @@ class Dbafs
 				{
 					$objNew = clone $objFiles->current();
 
-					$objNew->pid    = $objNewFile->id;
+					$objNew->pid    = $objNewFile->uuid;
 					$objNew->tstamp = time();
+					$objNew->uuid   = $objDatabase->getUuid();
 					$objNew->path   = str_replace($strSource . '/', $strDestination . '/', $objFiles->path);
 					$objNew->save();
 				}
@@ -509,7 +516,7 @@ class Dbafs
 				// Get the parent ID
 				if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
 				{
-					$intPid = 0;
+					$strPid = null;
 				}
 				else
 				{
@@ -520,7 +527,7 @@ class Dbafs
 						throw new \Exception("No parent entry for $strParent");
 					}
 
-					$intPid = $objParent->id;
+					$strPid = $objParent->uuid;
 				}
 
 				// Create the file or folder
@@ -529,13 +536,14 @@ class Dbafs
 					$objFile = new \File($strRelpath, true);
 
 					$objModel = new \FilesModel();
-					$objModel->pid       = $intPid;
+					$objModel->pid       = $strPid;
 					$objModel->tstamp    = time();
 					$objModel->name      = $objFile->name;
 					$objModel->type      = 'file';
 					$objModel->path      = $objFile->path;
 					$objModel->extension = $objFile->extension;
 					$objModel->hash      = $objFile->hash;
+					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
 				}
 				else
@@ -543,13 +551,14 @@ class Dbafs
 					$objFolder = new \Folder($strRelpath);
 
 					$objModel = new \FilesModel();
-					$objModel->pid       = $intPid;
+					$objModel->pid       = $strPid;
 					$objModel->tstamp    = time();
 					$objModel->name      = $objFolder->name;
 					$objModel->type      = 'folder';
 					$objModel->path      = $objFolder->path;
 					$objModel->extension = '';
 					$objModel->hash      = $objFolder->hash;
+					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
 				}
 			}
@@ -609,7 +618,7 @@ class Dbafs
 					// Store the PID change
 					if ($objFiles->type == 'folder')
 					{
-						$arrPidUpdate[$objFound->id] = $objFiles->id;
+						$arrPidUpdate[$objFound->uuid] = $objFiles->uuid;
 					}
 
 					// Add a log entry BEFORE changing the object

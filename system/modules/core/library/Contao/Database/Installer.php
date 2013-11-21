@@ -88,15 +88,17 @@ class Installer extends \Controller
 					$return .= '
     <tr>
       <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').'></td>
-      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
+      <td class="tl_col_2'.((stristr($vv, '_backup') !== false) ? ' backup' : '').'"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
     </tr>';
 				}
 			}
 		}
 
 		return '
-  <table id="sql_table" style="margin-top:9px">'.$return.'
-  </table>' . "\n";
+<div id="sql_wrapper">
+  <table id="sql_table">'.$return.'
+  </table>
+</div>';
 	}
 
 
@@ -263,15 +265,15 @@ class Installer extends \Controller
 	 */
 	public function getFromDca()
 	{
+		$return = array();
 		$included = array();
-		$arrReturn = array();
 
 		// Ignore the internal cache
 		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
 		$GLOBALS['TL_CONFIG']['bypassCache'] = true;
 
 		// Only check the active modules (see #4541)
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -293,7 +295,7 @@ class Installer extends \Controller
 
 				if ($objExtract->isDbTable())
 				{
-					$arrReturn[$strTable] = $objExtract->getDbInstallerArray();
+					$return[$strTable] = $objExtract->getDbInstallerArray();
 				}
 
 				$included[] = $strFile;
@@ -303,7 +305,17 @@ class Installer extends \Controller
 		// Restore the cache settings
 		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
 
-		return $arrReturn;
+		// HOOK: allow third-party developers to modify the array (see #6425)
+		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromDca']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlGetFromDca'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
+			}
+		}
+
+		return $return;
 	}
 
 
@@ -317,10 +329,16 @@ class Installer extends \Controller
 		$table = '';
 		$return = array();
 
-		// Get all SQL files
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		// Only check the active modules (see #4541)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			if (strncmp($strModule, '.', 1) === 0 || strncmp($strModule, '__', 2) === 0)
+			{
+				continue;
+			}
+
+			// Ignore the database.sql of the not renamed core modules
+			if (in_array($strModule, array('calendar', 'comments', 'faq', 'listing', 'news', 'newsletter')))
 			{
 				continue;
 			}
@@ -401,7 +419,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of tables and fields
 	 */
-	public function getFromDB()
+	public function getFromDb()
 	{
 		$this->import('Database');
 		$tables = preg_grep('/^tl_/', $this->Database->listTables(null, true));
@@ -427,7 +445,7 @@ class Installer extends \Controller
 					unset($field['index']);
 
 					// Field type
-					if (strlen($field['length']))
+					if ($field['length'] != '')
 					{
 						$field['type'] .= '(' . $field['length'] . (($field['precision'] != '') ? ',' . $field['precision'] : '') . ')';
 
@@ -435,8 +453,18 @@ class Installer extends \Controller
 						unset($field['precision']);
 					}
 
+					// Variant collation
+					if ($field['collation'] != '' && $field['collation'] != $GLOBALS['TL_CONFIG']['dbCollation'])
+					{
+						$field['collation'] = 'COLLATE ' . $field['collation'];
+					}
+					else
+					{
+						unset($field['collation']);
+					}
+
 					// Default values
-					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['default']) == 'null')
+					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['null']) == 'null')
 					{
 						unset($field['default']);
 					}
@@ -455,7 +483,7 @@ class Installer extends \Controller
 				}
 
 				// Indices
-				if (strlen($field['index']) && $field['index_fields'])
+				if (isset($field['index']) && $field['index_fields'])
 				{
 					$index_fields = implode('`, `', $field['index_fields']);
 

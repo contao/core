@@ -550,18 +550,11 @@ class Search
 	{
 		$objDatabase = \Database::getInstance();
 
-		$objSearch = $objDatabase->prepare("SELECT * FROM tl_search WHERE url=?")
-								 ->limit(1)
-								 ->execute($strUrl);
+		$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid IN(SELECT id FROM tl_search WHERE url=?)")
+					->execute($strUrl);
 
-		if ($objSearch->numRows)
-		{
-			$objDatabase->prepare("DELETE FROM tl_search WHERE id=?")
-						->execute($objSearch->id);
-
-			$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
-						->execute($objSearch->id);
-		}
+		$objDatabase->prepare("DELETE FROM tl_search WHERE url=?")
+					->execute($strUrl);
 	}
 
 

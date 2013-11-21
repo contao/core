@@ -225,8 +225,8 @@ class PageRegular extends \Frontend
 		if ($objLayout === null)
 		{
 			header('HTTP/1.1 501 Not Implemented');
-			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
-			die('No layout specified');
+			$this->log('Could not find layout ID "' . $intId . '"', __METHOD__, TL_ERROR);
+			die_nicely('be_no_layout', 'No layout specified');
 		}
 
 		$objPage->hasJQuery = $objLayout->addJQuery;
@@ -260,7 +260,6 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		$strFramework = '';
 		$arrFramework = deserialize($objLayout->framework);
 
 		$this->Template->viewport = '';
@@ -269,6 +268,7 @@ class PageRegular extends \Frontend
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
+			$strFramework = '';
 			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
 
 			// Wrapper
@@ -546,31 +546,37 @@ class PageRegular extends \Frontend
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
 			{
-				// Turn the order string into an array and remove all values
-				$arrOrder = explode(',', $objLayout->orderExt);
-				$arrOrder = array_flip(array_map('intval', $arrOrder));
-				$arrOrder = array_map(function(){}, $arrOrder);
+				$tmp = deserialize($objLayout->orderExt);
 
-				// Move the matching elements to their position in $arrOrder
-				foreach ($arrExternal as $k=>$v)
+				if (!empty($tmp) && is_array($tmp))
 				{
-					$arrOrder[$v] = $v;
-					unset($arrExternal[$k]);
-				}
+					// Remove all values
+					$arrOrder = array_map(function(){}, array_flip($tmp));
 
-				// Append the left-over style sheets at the end
-				if (!empty($arrExternal))
-				{
-					$arrOrder = array_merge($arrOrder, array_values($arrExternal));
-				}
+					// Move the matching elements to their position in $arrOrder
+					foreach ($arrExternal as $k=>$v)
+					{
+						if (array_key_exists($v, $arrOrder))
+						{
+							$arrOrder[$v] = $v;
+							unset($arrExternal[$k]);
+						}
+					}
 
-				// Remove empty (unreplaced) entries
-				$arrExternal = array_filter($arrOrder);
-				unset($arrOrder);
+					// Append the left-over style sheets at the end
+					if (!empty($arrExternal))
+					{
+						$arrOrder = array_merge($arrOrder, array_values($arrExternal));
+					}
+
+					// Remove empty (unreplaced) entries
+					$arrExternal = array_values(array_filter($arrOrder));
+					unset($arrOrder);
+				}
 			}
 
 			// Get the file entries from the database
-			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
+			$objFiles = \FilesModel::findMultipleByUuids($arrExternal);
 
 			if ($objFiles !== null)
 			{

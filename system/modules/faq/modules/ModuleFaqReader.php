@@ -132,19 +132,22 @@ class ModuleFaqReader extends \Module
 		// Add image
 		if ($objFaq->addImage && $objFaq->singleSRC != '')
 		{
-			if (!is_numeric($objFaq->singleSRC))
-			{
-				$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+			$objModel = \FilesModel::findByUuid($objFaq->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objFaq->singleSRC))
 				{
-					$objFaq->singleSRC = $objModel->path;
-					$this->addImageToTemplate($this->Template, $objFaq->row());
+					$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrFaq = $objFaq->row();
+				$arrFaq['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($this->Template, $arrFaq);
 			}
 		}
 
@@ -156,10 +159,23 @@ class ModuleFaqReader extends \Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
+		// Add the author
+		if (($objAuthor = $objFaq->getRelated('author')) !== null)
+		{
+			if ($objAuthor->google != '')
+			{
+				$strAuthor = '<a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
+			}
+			else
+			{
+				$strAuthor = $objAuthor->name;
+			}
+		}
+
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $strAuthor);
 
 		// HOOK: comments extension required
-		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))
+		if ($objFaq->noComments || !in_array('comments', ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
 			return;

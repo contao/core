@@ -190,13 +190,6 @@ class BackendUser extends \User
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
 		}
 
-		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>';
-			exit;
-		}
-
 		\Controller::redirect($strRedirect);
 	}
 
@@ -430,7 +423,7 @@ class BackendUser extends \User
 		// Convert the file mounts into paths (backwards compatibility)
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
-			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);
+			$objFiles = \FilesModel::findMultipleByUuids($this->filemounts);
 
 			if ($objFiles !== null)
 			{
@@ -458,7 +451,7 @@ class BackendUser extends \User
 			\Controller::redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
+		$arrInactiveModules = \ModuleLoader::getDisabled();
 		$blnCheckInactiveModules = is_array($arrInactiveModules);
 
 		foreach ($GLOBALS['BE_MOD'] as $strGroupName=>$arrGroupModules)

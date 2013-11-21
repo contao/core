@@ -64,7 +64,7 @@ class StyleSheets extends \Backend
 		else
 		{
 			$this->writeStyleSheet($objStyleSheet->row());
-			$this->log('Generated style sheet "' . $objStyleSheet->name . '.css"', 'StyleSheets updateStyleSheet()', TL_CRON);
+			$this->log('Generated style sheet "' . $objStyleSheet->name . '.css"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -116,7 +116,7 @@ class StyleSheets extends \Backend
 		while ($objStyleSheets->next())
 		{
 			$this->writeStyleSheet($objStyleSheets->row());
-			$this->log('Generated style sheet "' . $objStyleSheets->name . '.css"', 'StyleSheets updateStyleSheets()', TL_CRON);
+			$this->log('Generated style sheet "' . $objStyleSheets->name . '.css"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -958,7 +958,8 @@ class StyleSheets extends \Backend
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
 
-		return $return;
+		// Replace insert tags (see #5512)
+		return $this->replaceInsertTags($return, false);
 	}
 
 

@@ -205,6 +205,13 @@ class Ajax extends \Backend
 	{
 		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
+		// Bypass any core logic for non-core drivers (see #5957)
+		if (!$dc instanceof \DC_File && !$dc instanceof \DC_Folder && !$dc instanceof \DC_Table)
+		{
+			$this->executePostActionsHook($dc);
+			exit;
+		}
+
 		switch ($this->strAction)
 		{
 			// Load nodes of the page structure tree
@@ -250,7 +257,7 @@ class Ajax extends \Backend
 			case 'reloadPagetree':
 			case 'reloadFiletree':
 				$intId = \Input::get('id');
-				$strField = $strFieldName = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 
 				// Handle the keys in "edit multiple" mode
 				if (\Input::get('act') == 'editAll')
@@ -262,11 +269,54 @@ class Ajax extends \Backend
 				// The field does not exist
 				if (!isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]))
 				{
-					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}
 
+				$objRow = null;
+				$varValue = null;
+
+				// Load the value
+				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
+				{
+					$varValue = $GLOBALS['TL_CONFIG'][$strField];
+				}
+				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
+				{
+					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+											 ->execute($intId);
+
+					// The record does not exist
+					if ($objRow->numRows < 1)
+					{
+						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', __METHOD__, TL_ERROR);
+						header('HTTP/1.1 400 Bad Request');
+						die('Bad Request');
+					}
+
+					$varValue = $objRow->$strField;
+					$dc->activeRecord = $objRow;
+				}
+
+				// Call the load_callback
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
+
+				// Set the new value
 				$varValue = \Input::post('value', true);
 				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
 
@@ -280,41 +330,22 @@ class Ajax extends \Backend
 					{
 						foreach ($varValue as $k=>$v)
 						{
-							$varValue[$k] = \Dbafs::addResource($v)->id;
+							$varValue[$k] = \Dbafs::addResource($v)->uuid;
 						}
 					}
 
 					$varValue = serialize($varValue);
 				}
 
-				// Set the new value
-				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
-				{
-					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
-					$arrAttribs['activeRecord'] = null;
-				}
-				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
-				{
-					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
-											 ->execute($intId);
+				// Build the attributes based on the "eval" array
+				$arrAttribs = $GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['eval'];
 
-					// The record does not exist
-					if ($objRow->numRows < 1)
-					{
-						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
-
-					$objRow->$strField = $varValue;
-					$arrAttribs['activeRecord'] = $objRow;
-				}
-
-				$arrAttribs['id'] = $strFieldName;
-				$arrAttribs['name'] = $strFieldName;
+				$arrAttribs['id'] = $dc->field;
+				$arrAttribs['name'] = $dc->field;
 				$arrAttribs['value'] = $varValue;
 				$arrAttribs['strTable'] = $dc->table;
 				$arrAttribs['strField'] = $strField;
+				$arrAttribs['activeRecord'] = $dc->activeRecord;
 
 				$objWidget = new $GLOBALS['BE_FFL'][$strKey]($arrAttribs);
 				echo $objWidget->generate();
@@ -340,7 +371,7 @@ class Ajax extends \Backend
 				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
 				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
 				{
-					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', 'Ajax executePostActions()', TL_ERROR);
+					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}
@@ -382,15 +413,25 @@ class Ajax extends \Backend
 
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strAction, $dc);
-					}
-				}
+				$this->executePostActionsHook($dc);
 				exit; break;
+		}
+	}
+
+
+	/**
+	 * Execute the post actions hook
+	 * @param \DataContainer
+	 */
+	protected function executePostActionsHook(\DataContainer $dc)
+	{
+		if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strAction, $dc);
+			}
 		}
 	}
 }

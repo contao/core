@@ -26,7 +26,12 @@ body {
 #header h1 {
 	margin:0;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
+	background:#9a9c9a;
+	background-image:-moz-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-webkit-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-o-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-ms-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:linear-gradient(to bottom, #9a9c9a, #b3b6b3);
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
@@ -63,7 +68,7 @@ body {
 	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
 	font-weight:bold;
-	color:#c55;
+	color:#c33;
 }
 #container h3 {
 	margin:0;
@@ -105,11 +110,27 @@ li {
 }
 
 /* Form tables */
+#sql_wrapper {
+	max-height:300px;
+	overflow:auto;
+	border:1px solid #ddd;
+	background:#fcfcfc;
+	padding:9px;
+}
 #sql_table {
 	margin:-3px 0;
 }
 #sql_table pre {
 	white-space:pre-wrap;
+}
+#sql_table .tl_checkbox {
+	margin-top:3px;
+}
+.webkit #sql_table .tl_checkbox {
+	margin-top:4px;
+}
+.ie #sql_table .tl_checkbox {
+	margin-top:-1px;
 }
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
@@ -120,13 +141,16 @@ li {
 .tl_col_0 {
 	padding:6px 0 2px;
 	font-weight:bold;
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_col_1 {
 	vertical-align:top;
 }
 .tl_col_2 {
 	padding:2px 0 3px 4px;
+}
+.backup label {
+	color:#999;
 }
 
 /* Error and confirmation messages */
@@ -135,16 +159,16 @@ li {
 	padding:2px 0 3px 20px;
 }
 .tl_error {
-	color:#c55;
-	background:url("images/error.gif") no-repeat left center;
+	color:#c33;
+	background:url("images/error.gif") no-repeat left 1px;
 }
 .tl_confirm {
-	color:#8ab858;
-	background:url("images/ok.gif") no-repeat left center;
+	color:#77ac45;
+	background:url("images/ok.gif") no-repeat left 1px;
 }
 .tl_info {
-	color:#5c9ac9;
-	background:url("images/show.gif") no-repeat 1px center;
+	color:#4b85ba;
+	background:url("images/show.gif") no-repeat 1px 1px;
 }
 .tl_formbody .tl_error {
 	margin:0;
@@ -152,14 +176,14 @@ li {
 
 /* Go to back end */
 #go_to_login {
-	margin:12px 18px 14px 0;
+	margin:0 18px 14px 0;
 	padding:0;
 	text-align:right;
 }
 #go_to_login a {
 	padding:2px 0 3px 20px;
 	background:url("images/login.gif") no-repeat left center;
-	color:#bbb;
+	color:#aaa;
 }
 
 /* License */
@@ -168,7 +192,7 @@ li {
 	overflow:auto;
 	margin:0;
 	background:#f9f9f9;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:10px;
 }
 
@@ -199,7 +223,7 @@ fieldset.tl_tbox,fieldset.tl_box {
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	margin-top:-1px;
-	color:#8ab858;
+	color:#77ac45;
 	padding-left:18px;
 	padding-right:3px;
 	background:url("images/palOpen.gif") left center no-repeat;

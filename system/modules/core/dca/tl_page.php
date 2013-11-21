@@ -36,6 +36,10 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			array('tl_page', 'updateSitemap'),
 			array('tl_page', 'generateArticle')
 		),
+		'ondelete_callback' => array
+		(
+			array('tl_page', 'purgeSearchIndex')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -144,8 +148,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		)
 	),
 
-	// Edit
-	'edit' => array
+	// Select
+	'select' => array
 	(
 		'buttons_callback' => array
 		(
@@ -218,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			(
 				array('tl_page', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'type' => array
 		(
@@ -812,7 +816,7 @@ class tl_page extends Backend
 				// Do not allow to paste after pages on the root level (pagemounts)
 				if ((Input::get('act') == 'cut' || Input::get('act') == 'cutAll') && Input::get('mode') == 1 && in_array(Input::get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. Input::get('id') .' after mounted page ID '. Input::get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. Input::get('id') .' after mounted page ID '. Input::get('pid') .' (root level)', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -821,7 +825,7 @@ class tl_page extends Backend
 				{
 					if (!in_array($id, $pagemounts))
 					{
-						$this->log('Page ID '. $id .' was not mounted', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Page ID '. $id .' was not mounted', __METHOD__, TL_ERROR);
 
 						$error = true;
 						break;
@@ -848,7 +852,7 @@ class tl_page extends Backend
 					// In "edit multiple" mode, $ids contains only the parent ID, therefore check $id != $_GET['pid'] (see #5620)
 					if ($i == 0 && $id != Input::get('pid') && Input::get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
-						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Not enough permissions to  '. Input::get('act') .' '. $objPage->type .' pages', __METHOD__, TL_ERROR);
 
 						$error = true;
 						break;
@@ -858,7 +862,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to '. Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. Input::get('pid'), 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '. Input::get('act') .' page ID '. $cid .' or paste after/into page ID '. Input::get('pid'), __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 			}
@@ -1084,6 +1088,25 @@ class tl_page extends Backend
 
 
 	/**
+	 * Purge the search index if a page is being deleted
+	 * @param \DataContainer
+	 */
+	public function purgeSearchIndex(DataContainer $dc)
+	{
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		$this->Database->prepare("DELETE FROM tl_search_index WHERE pid IN(SELECT id FROM tl_search WHERE pid=?)")
+					   ->execute($dc->id);
+
+		$this->Database->prepare("DELETE FROM tl_search WHERE pid=?")
+					   ->execute($dc->id);
+	}
+
+
+	/**
 	 * Check the sitemap alias
 	 * @param mixed
 	 * @param \DataContainer
@@ -1195,6 +1218,13 @@ class tl_page extends Backend
 
 		foreach (array_keys($GLOBALS['TL_PTY']) as $pty)
 		{
+			// Root pages are allowed on the first level only (see #6360)
+			if ($pty == 'root' && $dc->activeRecord && $dc->activeRecord->pid > 0)
+			{
+				continue;
+			}
+
+			// Allow the currently selected option and anything the user has access to
 			if ($pty == $dc->value || $this->User->hasAccess($pty, 'alpty'))
 			{
 				$arrOptions[] = $pty;
@@ -1450,10 +1480,12 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically generate the folder URL aliases
-	 * @return string
+	 * @param array
+	 * @return array
 	 */
-	public function addAliasButton()
+	public function addAliasButton($arrButtons)
 	{
+		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
 		{
 			$session = $this->Session->getData();
@@ -1498,7 +1530,10 @@ class tl_page extends Backend
 			$this->redirect($this->getReferer());
 		}
 
-		return '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+		// Add the button
+		$arrButtons['alias'] = '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+
+		return $arrButtons;
 	}
 
 
@@ -1572,7 +1607,7 @@ class tl_page extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1584,8 +1619,15 @@ class tl_page extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_page']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -1594,6 +1636,6 @@ class tl_page extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), 'tl_page toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), __METHOD__, TL_GENERAL);
 	}
 }

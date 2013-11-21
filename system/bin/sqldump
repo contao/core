@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Clean the database
+mysql <<EOF
+  USE music_academy;
+  TRUNCATE tl_cron;
+  TRUNCATE tl_log;
+  TRUNCATE tl_session;
+  TRUNCATE tl_undo;
+  UPDATE tl_member SET session='', language='en';
+  UPDATE tl_user SET session='', language='en';
+EOF
+
+# Create the SQL dump
+mysqldump \
+  --compact \
+  --no-create-info \
+  --hex-blob \
+  --complete-insert \
+  --skip-opt \
+  music_academy > templates/music_academy.sql

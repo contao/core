@@ -134,8 +134,8 @@
         <target>Eigene Layoutbereiche</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
-        <source>Custom layout sections can be defined in the back end settings.</source>
-        <target>Eigene Layoutbereiche können in den Backend-Einstellungen definiert werden.</target>
+        <source>Here you can enter a comma separated list of custom layout sections.</source>
+        <target>Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -461,6 +461,10 @@
         <source>XHTML Transitional</source>
         <target>XHTML Transitional</target>
       </trans-unit>
+      <trans-unit id="tl_layout.top">
+        <source>Before the wrapper</source>
+        <target>Vor dem umschließenden Element</target>
+      </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
         <target>Unterhalb der Kopfzeile</target>
@@ -472,6 +476,10 @@
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
         <target>Oberhalb der Fußzeile</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.bottom">
+        <source>After the wrapper</source>
+        <target>Nach dem umschließenden Element</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

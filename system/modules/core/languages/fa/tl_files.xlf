@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
-        <target>پسوند پرونده توسط کانتائو به صورت خودکار اضافه می‌شود.</target>
+        <target>کانتائو پسوند پرونده را به صورت خودکار اضافه می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
@@ -141,6 +141,12 @@
       <trans-unit id="tl_files.delete.1">
         <source>Delete file or folder &quot;%s&quot;</source>
         <target>حذف پرونده یا پوشه &quot;%s&quot;</target>
+      </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder &quot;%s&quot;</source>
       </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>

@@ -79,7 +79,7 @@ class ModuleLoader
 	/**
 	 * Scan the modules and resolve their dependencies
 	 *
-	 * @throws \Exception If the dependencies cannot be resolved
+	 * @throws \UnresolvableDependenciesException If the dependencies cannot be resolved
 	 */
 	protected static function scanAndResolve()
 	{
@@ -97,13 +97,20 @@ class ModuleLoader
 			static::$active = array();
 			static::$disabled = array();
 
-			// Load the core modules first (see #5261)
-			$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-
 			// Ignore non-core modules if the system runs in safe mode
-			if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
+			if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
 			{
-				$modules = array_unique(array_merge($modules, scan(TL_ROOT . '/system/modules')));
+				$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+			}
+			else
+			{
+				// Sort the modules (see #6391)
+				$modules = scan(TL_ROOT . '/system/modules');
+				sort($modules);
+
+				// Load the "core" module first
+				array_unshift($modules, 'core');
+				$modules = array_unique($modules);
 			}
 
 			// Walk through the modules
@@ -177,7 +184,7 @@ class ModuleLoader
 					$buffer = ob_get_contents();
 					ob_end_clean();
 
-					throw new \Exception('The module dependencies could not be resolved: </strong>' . $buffer . '<strong>');
+					throw new \UnresolvableDependenciesException("The module dependencies could not be resolved.\n$buffer");
 				}
 			}
 		}

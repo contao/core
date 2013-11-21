@@ -561,7 +561,7 @@ function utf8_str_split($str)
 	{
 		$split = 1;
 		$value = ord($str[$i]);
-		$key = NULL;
+		$key = null;
 
 		if($value >= 192 && $value <= 223)
 			$split=2;

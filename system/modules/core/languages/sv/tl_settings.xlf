@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Ange teckenavkodning (character set). UTF-8 rekommenderas för att vara säker på att specialtecken visas korrekt.&lt;br /&gt;Ändra inte teckenavkodningen såvida du inte har en god anledning att göra så.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Egna layoutsektioner</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Här kan du skriva in en kommaseparerad lista med egna layoutsektioner. Du kan använda dessa sektioner i modulen &lt;em&gt;Sidlayout&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Avaktivera kommandoplaneraren</target>
@@ -145,6 +137,18 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Här kan du välja cache-läge.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -224,6 +228,12 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       <trans-unit id="tl_settings.debugMode.1">
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>Om du väljer detta val kommer viss körningsinformation (t.ex. databasfrågor) att skrivas ut på skärmen. &lt;br /&gt;Detta val är därför bara att rekommendera för systemmodifieringar/felsökning!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -557,9 +567,8 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
         <source>Front end configuration</source>
         <target>Frontend-konfiguration</target>
       </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Layout-sektioner</target>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -592,6 +601,9 @@ Notera att exkluderade resurser inte kan användas i innehållselement som t.ex.
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
         <target>Inaktiva backendmoduler</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

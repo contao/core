@@ -65,14 +65,6 @@
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
         <target>Inserisci il charset. Si raccomanda di utilizzare UTF-8 per assicurarsi che i caratteri particolari siano visualizzati correttamente. Non modificare il charset a meno che non riscontri errori di visualizzazione.</target>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-        <target>Sezioni personalizzate di layout</target>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>Qui è possibile inserire una lista separata da virgole delle sezioni personalizzate di layout. E' possibile utilizzare queste sezioni nel modulo &lt;em&gt;layout di pagina&lt;/em&gt; in aggiunta a &lt;em&gt;header&lt;/em&gt;, &lt;em&gt;left&lt;/em&gt;, &lt;em&gt;main&lt;/em&gt;, &lt;em&gt;right&lt;/em&gt; e &lt;em&gt;footer&lt;/em&gt;.</target>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
         <target>Disabilita il comando di scheduler</target>
@@ -144,6 +136,22 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
         <target>Selezionare la modalità cache</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+        <target>Server Proxy attendibili</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Qui è possibile inserire un elenco separato da virgole di indirizzi IP del server proxy attendibili.</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+        <target>Dominio SSL proxy</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Se il tuo sito è disponibile attraverso un server proxy SSL, puoi indicare il dominio qui, es. &lt;em&gt;sslsites.it&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -224,6 +232,14 @@
       <trans-unit id="tl_settings.debugMode.1">
         <source>Print certain runtime information like database queries to the screen.</source>
         <target>Se selezioni questa opzione alcune informazioni di runtime (es: database queries) verranno visualizzate sullo schermo. Questa opzione è raccomandata solo per modifiche al sistema!</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+        <target>Modalità manutenzione</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Invia il codice HTTP 503 e mostrare una pagina di manutenzione nel front-end.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -557,9 +573,9 @@
         <source>Front end configuration</source>
         <target>Configurazione frontend</target>
       </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
-        <target>Sezioni layout</target>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
+        <target>Configurazione proxy</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -592,6 +608,10 @@
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
         <target>Moduli disattivati</target>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
+        <target>Comando di scheduler</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

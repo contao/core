@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_install.installTool.0">
         <source>Installation</source>
-        <target>ابزار نصب</target>
+        <target>ابزار نصب کانتائو</target>
       </trans-unit>
       <trans-unit id="tl_install.installTool.1">
         <source>Install tool login</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_install.update.1">
         <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
-        <target>توجه داشته باشید که دستیار ارتقاء فقط با درایورهای MySQL و MySQLi امتحان شده است. اگر شما از پایگاه‌داده‌های متفاوتی (مانند Oracle) استفاده می‌کنید شما شاید نصب و ارتقاء پایگاه داده را به صو.رت دستی انجام دهید. در این حالت، لطفاً به &lt;strong&gt;system/modules&lt;/strong&gt; رفته و همه زیرپوشه‌ها را برای فایل‌های &lt;strong&gt;config/database.sql&lt;/strong&gt; جستجو کنید.</target>
+        <target>توجه داشته باشید که دستیار ارتقاء فقط با درایورهای MySQL و MuSQLi امتحان شده است. اگر شما از پایگاه‌داده‌های متفاوتی (مانند Oracle) استفاده می‌کنید شما شاید نصب و ارتقاء پایگاه داده را به صو.رت دستی انجام دهید. در این حالت، لطفاً به &lt;strong&gt;system/modules&lt;/strong&gt; رفته و همه زیرپوشه‌ها را برای فایل‌های &lt;strong&gt;config/database.sql&lt;/strong&gt; جستجو کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.template.0">
         <source>Import a template</source>
@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
-        <target>دستکاری فایل‌ها از طریق اف‌تی‌پی</target>
+        <target>دستکاری فایل‌ها از طریق FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.1">
         <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
@@ -107,15 +107,15 @@
       </trans-unit>
       <trans-unit id="tl_install.passError">
         <source>Please enter a password to prevent unauthorized access!</source>
-        <target>لطفا گذرواژه پیش فرض را برای جلوگیری از دسترسی تایید نشده تغییر دهید!</target>
+        <target>لطفا رمزعبور پیش فرض را برای جلوگیری از دسترسی تایید نشده تغییر دهید!</target>
       </trans-unit>
       <trans-unit id="tl_install.passConfirm">
         <source>A custom password has been set.</source>
-        <target>گذرواژه سفارشی تنظیم شده است.</target>
+        <target>رمزعبور پیش‌فرض تغییر داده شد.</target>
       </trans-unit>
       <trans-unit id="tl_install.passSave">
         <source>Save password</source>
-        <target>ذخیره گذرواژه</target>
+        <target>ذخیره رمزعبور</target>
       </trans-unit>
       <trans-unit id="tl_install.keyError">
         <source>Please create an encryption key!</source>
@@ -267,7 +267,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpHost">
         <source>FTP hostname</source>
-        <target>نام میزبان اف‌تی‌پی</target>
+        <target>نام میزبان FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPath">
         <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
@@ -275,11 +275,11 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpUser">
         <source>FTP username</source>
-        <target>نام کاربری اف‌تی‌پی</target>
+        <target>نام کاربری FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPass">
         <source>FTP password</source>
-        <target>گذرواژه اف‌تی‌پی</target>
+        <target>رمزعبور FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSLh4">
         <source>Secure connection</source>
@@ -291,11 +291,11 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpPort">
         <source>FTP port</source>
-        <target>گذرگاه اف‌تی‌پی</target>
+        <target>گذرگاه FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSave">
         <source>Save FTP settings</source>
-        <target>ذخیره تنظیمات اف‌تی‌پی</target>
+        <target>ذخیره تنظیمات FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpHostError">
         <source>Could not connect to FTP server %s</source>

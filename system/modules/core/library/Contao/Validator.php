@@ -31,7 +31,7 @@ class Validator
 {
 
 	/**
-	 * Numeric characters (including full stop [.] minus [-] and space [ ])
+	 * Numeric characters (including full stop [.] and minus [-])
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -39,7 +39,7 @@ class Validator
 	 */
 	public static function isNumeric($varValue)
 	{
-		return preg_match('/^[\d \.-]*$/', $varValue);
+		return preg_match('/^-?\d+(\.\d+)?$/', $varValue);
 	}
 
 
@@ -54,11 +54,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alpha:] \.-]*$', $varValue);
+			return mb_eregi('^[[:alpha:] \.-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pL \.-]*$/u', $varValue);
+			return preg_match('/^[\pL \.-]+$/u', $varValue);
 		}
 	}
 
@@ -74,11 +74,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:] \._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:] \._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL \._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL \._-]+$/u', $varValue);
 		}
 	}
 
@@ -149,7 +149,7 @@ class Validator
 
 
 	/**
-	 * Valid URL
+	 * Valid URL with special characters allowed (see #6402)
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -157,7 +157,14 @@ class Validator
 	 */
 	public static function isUrl($varValue)
 	{
-		return preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', \Idna::encodeUrl($varValue));
+		if (function_exists('mb_eregi'))
+		{
+			return mb_eregi('^[[:alnum:]\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$', \Idna::encodeUrl($varValue));
+		}
+		else
+		{
+			return preg_match('/^[\pN\pL\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/u', \Idna::encodeUrl($varValue));
+		}
 	}
 
 
@@ -172,11 +179,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:]\._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL\._-]+$/u', $varValue);
 		}
 	}
 
@@ -192,11 +199,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\/\._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:]\/\._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\/\._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL\/\._-]+$/u', $varValue);
 		}
 	}
 
@@ -250,5 +257,23 @@ class Validator
 	public static function isLanguage($varValue)
 	{
 		return preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $varValue);
+	}
+
+
+	/**
+	 * Valid an UUID
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is an UUID
+	 */
+	public static function isUuid($varValue)
+	{
+		if (strlen($varValue) == 16)
+		{
+			$varValue = \String::binToUuid($varValue);
+		}
+
+		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
 	}
 }

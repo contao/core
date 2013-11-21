@@ -139,7 +139,7 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
-		$this->resResult = NULL;
+		$this->resResult = null;
 		$this->strQuery = $this->prepare_query($strQuery);
 
 		// Auto-generate the SET/VALUES subpart
@@ -177,7 +177,7 @@ abstract class Statement
 	 *     );
 	 *     $stmt->prepare("UPDATE tl_member %s")->set($set);
 	 *
-	 * @param array The associative array
+	 * @param array $arrParams The associative array
 	 *
 	 * @return \Database\Statement The statement object
 	 */

@@ -94,8 +94,15 @@ class ChangePassword extends Backend
 					{
 						foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['password']['save_callback'] as $callback)
 						{
-							$this->import($callback[0]);
-							$pw = $this->$callback[0]->$callback[1]($pw);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$pw = $this->$callback[0]->$callback[1]($pw);
+							}
+							elseif (is_callable($callback))
+							{
+								$pw = $callback($pw);
+							}
 						}
 					}
 

@@ -34,6 +34,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
+				'uuid' => 'unique',
 				'extension' => 'index'
 			)
 		)
@@ -98,6 +99,13 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'deleteFile')
 			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.gif',
+				'button_callback'     => array('tl_files', 'showFile')
+			),
 			'source' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['source'],
@@ -123,11 +131,15 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "binary(16) NULL"
 		),
 		'tstamp' => array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'uuid' => array
+		(
+			'sql'                     => "binary(16) NULL"
 		),
 		'type' => array
 		(
@@ -135,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "blob NULL"
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'extension' => array
 		(
@@ -158,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				array('tl_files', 'checkFilename')
 			),
-			'sql'                     => "varbinary(255) NOT NULL default ''"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'protected' => array
 		(
@@ -298,7 +310,7 @@ class tl_files extends Backend
 				case 'move':
 					if (!$f1)
 					{
-						$this->log('No permission to upload files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to upload files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -311,7 +323,7 @@ class tl_files extends Backend
 				case 'cutAll':
 					if (!$f2)
 					{
-						$this->log('No permission to create, edit, copy or move files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to create, edit, copy or move files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -323,18 +335,18 @@ class tl_files extends Backend
 						$files = scan(TL_ROOT . '/' . $strFile);
 						if (!empty($files) && !$f4)
 						{
-							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
+							$this->log('No permission to delete folder "'.$strFile.'" recursively', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
 						elseif (!$f3)
 						{
-							$this->log('No permission to delete folder "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+							$this->log('No permission to delete folder "'.$strFile.'"', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
 					}
 					elseif (!$f3)
 					{
-						$this->log('No permission to delete file "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to delete file "'.$strFile.'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -342,7 +354,7 @@ class tl_files extends Backend
 				default:
 					if (empty($this->User->fop))
 					{
-						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to manipulate files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
@@ -363,11 +375,10 @@ class tl_files extends Backend
 	/**
 	 * Check a file name and romanize it
 	 * @param mixed
-	 * @param \DataContainer
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkFilename($varValue, DataContainer $dc)
+	public function checkFilename($varValue)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
@@ -504,19 +515,51 @@ class tl_files extends Backend
 
 
 	/**
+	 * Return the show file button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function showFile($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (Input::get('popup'))
+		{
+			return '';
+		}
+		else
+		{
+			return '<a href="contao/popup.php?src=' . base64_encode($row['id']) . '" title="'.specialchars($title).'"'.$attributes.' onclick="Backend.openModalIframe({\'width\':'.$row['popupWidth'].',\'title\':\''.str_replace("'", "\\'", $row['fileNameEncoded']).'\',\'url\':this.href,\'height\':'.$row['popupHeight'].'});return false">'.Image::getHtml($icon, $label).'</a> ';
+		}
+	}
+
+
+	/**
 	 * Return a checkbox to delete session data
 	 * @param \DataContainer
 	 * @return string
 	 */
 	public function protectFolder(DataContainer $dc)
 	{
+		$count = 0;
+		$strPath = $dc->id;
+
+		// Check whether the temporary name has been replaced already (see #6432)
+		if (Input::post('name') && ($strNewPath = str_replace('__new__', Input::post('name'), $strPath, $count)) && $count > 0 && is_dir(TL_ROOT . '/' . $strNewPath))
+		{
+			$strPath = $strNewPath;
+		}
+
 		// Only show for folders (see #5660)
-		if (!is_dir(TL_ROOT . '/' . $dc->id))
+		if (!is_dir(TL_ROOT . '/' . $strPath))
 		{
 			return '';
 		}
 
-		$blnProtected = file_exists(TL_ROOT . '/' . $dc->id . '/.htaccess');
+		$blnProtected = file_exists(TL_ROOT . '/' . $strPath . '/.htaccess');
 
 		// Protect or unprotect the folder
 		if (Input::post('FORM_SUBMIT') == 'tl_files')
@@ -526,7 +569,7 @@ class tl_files extends Backend
 				if (!$blnProtected)
 				{
 					$blnProtected = true;
-					$objFolder = new Folder($dc->id);
+					$objFolder = new Folder($strPath);
 					$objFolder->protect();
 				}
 			}
@@ -535,7 +578,7 @@ class tl_files extends Backend
 				if ($blnProtected)
 				{
 					$blnProtected = false;
-					$objFolder = new Folder($dc->id);
+					$objFolder = new Folder($strPath);
 					$objFolder->unprotect();
 				}
 			}

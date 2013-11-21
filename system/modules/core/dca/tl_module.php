@@ -253,14 +253,14 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'orderField'=>'orderPages', 'mandatory'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'orderField'=>'orderPages', 'mandatory'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'orderPages' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'showHidden' => array
 		(
@@ -420,7 +420,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections'])),
+			'options_callback'        => array('tl_module', 'getLayoutSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -490,7 +490,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'url' => array
 		(
@@ -561,7 +561,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'orderSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'html' => array
 		(
@@ -664,7 +664,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'reg_activate' => array
 		(
@@ -788,7 +788,7 @@ class tl_module extends Backend
 
 		if (!$this->User->hasAccess('modules', 'themes'))
 		{
-			$this->log('Not enough permissions to access the modules module', 'tl_module checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the modules module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -860,6 +860,35 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * Return all layout sections as array
+	 * @return array
+	 */
+	public function getLayoutSections()
+	{
+		$arrCustom = array();
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
+
+		// Check for custom layout sections
+		$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+		while ($objLayout->next())
+		{
+			$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+		}
+
+		$arrCustom = array_unique($arrCustom);
+
+		// Add the custom layout sections
+		if (!empty($arrCustom) && is_array($arrCustom))
+		{
+			$arrSections = array_merge($arrSections, $arrCustom);
+		}
+
+		return $arrSections;
 	}
 
 
