@@ -189,7 +189,7 @@ if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.p
 if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && Input::cookie('TL_INSTALL_AUTH') == $_SESSION['TL_INSTALL_AUTH'] && $_SESSION['TL_INSTALL_EXPIRE'] > time())
 {
 	@ini_set('display_errors', 1);
-	@error_reporting(E_ALL|E_STRICT);
+	error_reporting(E_ALL|E_STRICT);
 }
 else
 {
