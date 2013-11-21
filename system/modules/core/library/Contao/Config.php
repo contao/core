@@ -262,10 +262,10 @@ class Config
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
-		// Reset the Zend OPcache (unfortunately no API to delete just a single file)
-		if (function_exists('opcache_reset'))
+		// Reset the Zend OPcache
+		if (function_exists('opcache_invalidate'))
 		{
-			opcache_reset();
+			opcache_invalidate(TL_ROOT . '/system/config/localconfig.php', true);
 		}
 
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
@@ -277,7 +277,7 @@ class Config
 		// Recompile the APC file (thanks to Trenker)
 		if (function_exists('apc_compile_file') && !ini_get('apc.stat'))
 		{
-			apc_compile_file('system/config/localconfig.php');
+			apc_compile_file(TL_ROOT . '/system/config/localconfig.php');
 		}
 
 		// Purge the eAccelerator cache (thanks to Trenker)
