@@ -483,12 +483,12 @@ else
 		js="uglifyjs -nc --max-line-len 0"
 		echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
 	else
-		js="java -jar $folder/system/bin/yuicompressor-2.4.6.jar --charset UTF-8"
+		js="java -jar $folder/system/bin/yuicompressor-2.4.8.jar --charset UTF-8"
 		echo -e "  \033[0;33mWill be using yuicompressor to minify .js files\033[0m"
 	fi
 
 	# CSS minifier
-	css="java -jar $folder/system/bin/yuicompressor-2.4.6.jar --charset UTF-8"
+	css="java -jar $folder/system/bin/yuicompressor-2.4.8.jar --charset UTF-8"
 
 	# Execute all functions
 	if [ "$1" == "all" ]; then

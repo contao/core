@@ -254,7 +254,7 @@ class tl_faq_category extends Backend
 	public function checkPermission()
 	{
 		// HOOK: comments extension required
-		if (!in_array('comments', $this->Config->getActiveModules()))
+		if (!in_array('comments', ModuleLoader::getActive()))
 		{
 			unset($GLOBALS['TL_DCA']['tl_faq_category']['fields']['allowComments']);
 		}

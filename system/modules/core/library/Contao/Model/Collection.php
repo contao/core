@@ -231,6 +231,17 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
+	 * Return the models as array
+	 *
+	 * @return array An array of models
+	 */
+	public function getModels()
+	{
+		return $this->arrModels;
+	}
+
+
+	/**
 	 * Lazy load related records
 	 *
 	 * @param string $strKey The property name
@@ -395,31 +406,51 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * {@inheritdoc}
+	 * Check whether an offset exists
+	 *
+	 * @param integer $offset The offset
+	 *
+	 * @return boolean True if the offset exists
 	 */
 	public function offsetExists($offset)
 	{
 		return isset($this->arrModels[$offset]);
 	}
 
+
 	/**
-	 * {@inheritdoc}
+	 * Retrieve a particular offset
+	 *
+	 * @param integer $offset The offset
+	 *
+	 * @return \Model|null The model or null
 	 */
 	public function offsetGet($offset)
 	{
 		return $this->arrModels[$offset];
 	}
 
+
 	/**
-	 * {@inheritdoc}
+	 * Set a particular offset
+	 *
+	 * @param integer $offset The offset
+	 * @param mixed   $value  The value to set
+	 *
+	 * @throws \RuntimeException The collection is immutable
 	 */
 	public function offsetSet($offset, $value)
 	{
 		throw new \RuntimeException('This collection is immutable');
 	}
 
+
 	/**
-	 * {@inheritdoc}
+	 * Unset a particular offset
+	 *
+	 * @param integer $offset The offset
+	 *
+	 * @throws \RuntimeException The collection is immutable
 	 */
 	public function offsetUnset($offset)
 	{
@@ -428,7 +459,9 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
 	/**
-	 * {@inheritdoc}
+	 * Retrieve the iterator object
+	 *
+	 * @return \ArrayIterator The iterator object
 	 */
 	public function getIterator()
 	{

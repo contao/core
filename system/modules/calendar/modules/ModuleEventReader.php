@@ -247,7 +247,7 @@ class ModuleEventReader extends \Events
 		$this->Template->event = $objTemplate->parse();
 
 		// HOOK: comments extension required
-		if ($objEvent->noComments || !in_array('comments', $this->Config->getActiveModules()))
+		if ($objEvent->noComments || !in_array('comments', \ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
 			return;

@@ -48,7 +48,7 @@ class FeedItem
 	/**
 	 * Set the data from an array
 	 *
-	 * @param array An optional data array
+	 * @param array $arrData An optional data array
 	 */
 	public function __construct($arrData=null)
 	{

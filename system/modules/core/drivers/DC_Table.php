@@ -1228,7 +1228,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							{
 								$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
 											   ->limit(1)
-											   ->execute(($count++*128), $objNewSorting->id);
+											   ->execute(($count++ * 128), $objNewSorting->id);
 							}
 						}
 
@@ -1275,11 +1275,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 									while ($objNewSorting->next())
 									{
 										$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
-													   ->execute(($count++*128), $objNewSorting->id);
+													   ->execute(($count++ * 128), $objNewSorting->id);
 
 										if ($objNewSorting->sorting == $curSorting)
 										{
-											$newSorting = ($count++*128);
+											$newSorting = ($count++ * 128);
 										}
 									}
 								}
@@ -1374,11 +1374,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							while ($objNewSorting->next())
 							{
 								$this->Database->prepare("UPDATE " . $this->strTable . " SET sorting=? WHERE id=?")
-											   ->execute(($count++*128), $objNewSorting->id);
+											   ->execute(($count++ * 128), $objNewSorting->id);
 
 								if ($objNewSorting->sorting == $curSorting)
 								{
-									$newSorting = ($count++*128);
+									$newSorting = ($count++ * 128);
 								}
 							}
 						}
@@ -1392,19 +1392,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					// Set new sorting
 					$this->set['sorting'] = intval($newSorting);
-				}
-
-				// ID is not set (insert at the end)
-				else
-				{
-					$objNextSorting = $this->Database->execute("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
-
-					if ($objNextSorting->numRows)
-					{
-						$this->set['sorting'] = intval($objNextSorting->sorting + 128);
-					}
+					return;
 				}
 			}
+
+			// ID is not set or not found (insert at the end)
+			$objNextSorting = $this->Database->execute("SELECT MAX(sorting) AS sorting FROM " . $this->strTable);
+			$this->set['sorting'] = (intval($objNextSorting->sorting) + 128);
 		}
 	}
 
@@ -1762,8 +1756,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$this->objActiveRecord = $objRow;
 		$this->checkForTinyMce();
-
-		$objVersions = new Versions($this->strTable, $this->intId);
+		$objVersions = new \Versions($this->strTable, $this->intId);
 		$objVersions->initialize();
 
 		// Build an array from boxes and rows
@@ -2014,7 +2007,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			// Save the current version
-			if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+			if ($this->blnCreateNewVersion)
 			{
 				$objVersions->create();
 
@@ -2188,7 +2181,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->blnCreateNewVersion = false;
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
 
-				$objVersions = new Versions($this->strTable, $this->intId);
+				$objVersions = new \Versions($this->strTable, $this->intId);
 				$objVersions->initialize();
 
 				// Add meta fields if the current user is an administrator
@@ -2333,7 +2326,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 
 					// Create a new version
-					if ($this->blnCreateNewVersion && \Input::post('SUBMIT_TYPE') != 'auto')
+					if ($this->blnCreateNewVersion)
 					{
 						$objVersions->create();
 
@@ -2577,7 +2570,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Store the active record
 					$this->objActiveRecord = $objRow;
 
-					$objVersions = new Versions($this->strTable, $this->intId);
+					$objVersions = new \Versions($this->strTable, $this->intId);
 					$objVersions->initialize();
 
 					// Store all fields
@@ -2951,11 +2944,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			if ($objUpdateStmt->affectedRows)
 			{
-				if (!$arrData['eval']['submitOnChange'])
-				{
-					$this->blnCreateNewVersion = true;
-				}
-
+				$this->blnCreateNewVersion = true;
 				$this->varValue = deserialize($varValue);
 
 				if (is_object($this->objActiveRecord))
@@ -3325,7 +3314,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -3805,7 +3794,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -4367,7 +4356,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$result = $objRow->fetchAllAssoc();
 			$return .= ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post">
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').'

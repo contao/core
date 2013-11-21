@@ -86,9 +86,17 @@ var Typobox = {
 	fillModeList : function(id) {
 		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
 
-		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_crop'), 'crop');
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_proportional'), 'proportional');
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_box'), 'box');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_left_top'), 'left_top');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_center_top'), 'center_top');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_right_top'), 'right_top');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_left_center'), 'left_center');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_center_center'), 'center_center');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_right_center'), 'right_center');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_left_bottom'), 'left_bottom');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_center_bottom'), 'center_bottom');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_right_bottom'), 'right_bottom');
 	},
 
 	fillRelList : function(id) {
@@ -130,9 +138,11 @@ var Typobox = {
 		}
 		if (f.mode_list) {
 			tag += glue + 'mode=' + getSelectValue(f, "mode_list");
+			glue = '&amp;';
 		}
 		if (f.rel_list) {
 			tag += glue + 'rel=' + getSelectValue(f, "rel_list");
+			glue = '&amp;';
 		}
 
 		tag = '{{image::' + tag + '}}';

@@ -264,7 +264,6 @@ class News extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objArchive->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objArchive->jumpTo);
 
 					// The target page does not exist
@@ -279,11 +278,16 @@ class News extends \Frontend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
 					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 

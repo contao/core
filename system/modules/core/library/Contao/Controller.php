@@ -219,7 +219,7 @@ abstract class Controller extends \System
 			}
 
 			// HOOK: trigger the article_raster_designer extension
-			if (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			if (in_array('article_raster_designer', \ModuleLoader::getActive()))
 			{
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
@@ -578,7 +578,7 @@ abstract class Controller extends \System
 	/**
 	 * Calculate the page status icon name based on the page parameters
 	 *
-	 * @param object A page object
+	 * @param object $objPage The page object
 	 *
 	 * @return string The status icon name
 	 */
@@ -1086,12 +1086,12 @@ abstract class Controller extends \System
 				case 'faq_open':
 				case 'faq_url':
 				case 'faq_title':
-					if (($objFaq = \FaqModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objFaq->getRelated('pid')) === null)
+					if (($objFaq = \FaqModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objFaq->getRelated('pid')) === null || ($objJumpTo = $objPid->getRelated('jumpTo')) === null)
 					{
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objPid->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -2033,7 +2033,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		return implode(' ', $return);
+		return implode($return);
 	}
 
 
@@ -2358,7 +2358,7 @@ abstract class Controller extends \System
 		}
 		else
 		{
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
@@ -2611,7 +2611,7 @@ abstract class Controller extends \System
 			// Only float:left and float:right are supported (see #4758)
 			if ($arrItem['floating'] == 'left' || $arrItem['floating'] == 'right')
 			{
-				$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+				$objTemplate->float = 'float:' . $arrItem['floating'] . ';';
 			}
 		}
 

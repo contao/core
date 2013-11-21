@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
+        <target>چگونه می‌توانم موضوع را حل کنم؟</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
+        <target>لطفا، به من بیشتر بگو</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>

@@ -149,7 +149,7 @@ class Validator
 
 
 	/**
-	 * Valid URL
+	 * Valid URL with special characters allowed (see #6402)
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -157,7 +157,14 @@ class Validator
 	 */
 	public static function isUrl($varValue)
 	{
-		return preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/', \Idna::encodeUrl($varValue));
+		if (function_exists('mb_eregi'))
+		{
+			return mb_eregi('^[[:alnum:]\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$', \Idna::encodeUrl($varValue));
+		}
+		else
+		{
+			return preg_match('/^[\pN\pL\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/u', \Idna::encodeUrl($varValue));
+		}
 	}
 
 

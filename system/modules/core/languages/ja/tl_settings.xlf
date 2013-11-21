@@ -483,11 +483,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
-        <target>取り消しの項目の保管期間</target>
+        <target>復元の項目の保管期間</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.1">
         <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
-        <target>取り消しの項目の保管期間を秒数で入力します。(初期設定: 24時間 = 86400秒)</target>
+        <target>復元の項目の保管期間を秒数で入力します。(初期設定: 24時間 = 86400秒)</target>
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.0">
         <source>Storage time for versions</source>
@@ -575,7 +575,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
-        <target>プロキシ構成</target>
+        <target>プロキシの構成</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

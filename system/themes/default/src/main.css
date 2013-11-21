@@ -30,7 +30,6 @@ body.popup {
 #header h1 {
 	margin:1px;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
@@ -38,7 +37,7 @@ body.popup {
 	margin:0;
 	padding:6px 11px 8px;
 	text-align:right;
-	color:#666966;
+	color:#555;
 }
 
 /* Container */
@@ -99,7 +98,6 @@ body.popup {
 #tl_navigation h1 {
 	margin:1px 1px 0;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
@@ -124,7 +122,7 @@ body.popup {
 	line-height:19px;
 }
 #tl_navigation .active {
-	color:#8ab858;
+	color:#77ac45;
 }
 
 /* Buttons */
@@ -146,7 +144,6 @@ body.popup {
 h1.main_headline {
 	margin:0;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
@@ -197,13 +194,13 @@ h2.sub_headline_index {
 	background:#fff3e0 url("images/featured.gif") no-repeat 5px center;
 }
 .tl_gerror,.tl_gerror a,.tl_error,.tl_error a {
-	color:#c55;
+	color:#c33;
 }
 .tl_confirm,.tl_confirm a {
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_info,.tl_info a {
-	color:#5c9ac9;
+	color:#4b85ba;
 }
 .tl_new,.tl_new a {
 	color:#d68c23;
@@ -228,7 +225,7 @@ h2.sub_headline_index {
 .tl_permalert a {
 	float:right;
 	margin:1px 3px 0 24px;
-	color:#666966;
+	color:#555;
 }
 
 /* Filter */
@@ -349,7 +346,7 @@ h2.sub_headline_index {
 	padding:1px 0;
 	line-height:normal;
 	font-size:10px;
-	color:#a3a3a3;
+	color:#999;
 }
 .tl_help a:hover,.tl_help a:focus,.tl_help a:active {
 	text-decoration:underline;
@@ -422,7 +419,7 @@ h2.sub_headline_index {
 	background:url("images/loading.gif") no-repeat 2px center;
 	line-height:1;
 	font-size:16px;
-	color:#5c9ac9;
+	color:#4b85ba;
 }
 #index_complete {
 	margin:0 0 12px;
@@ -430,7 +427,7 @@ h2.sub_headline_index {
 	background:url("images/help.gif") no-repeat left center;
 	line-height:1;
 	font-size:16px;
-	color:#8ab858;
+	color:#77ac45;
 }
 
 /* Listing */
@@ -465,7 +462,7 @@ h2.sub_headline_index {
 	white-space:nowrap;
 }
 .tl_file a:hover,.tl_file a:focus,.tl_file a:active {
-	color:#666966;
+	color:#555;
 }
 .tl_listing_container .tl_content ul li > * {
 	vertical-align:middle;
@@ -520,7 +517,7 @@ h2.sub_headline_index {
 .tl_select_label {
 	position:relative;
 	top:-2px;
-	color:#a3a3a3;
+	color:#999;
 	font-size:10px;
 }
 
@@ -576,14 +573,14 @@ h2.sub_headline_index {
 .tl_content pre {
 	margin-top:3px;
 	margin-bottom:3px;
-	word-break:break-word;
+	word-break:break-all;
 	white-space:pre-wrap;
 }
 .tl_content pre.disabled {
 	color:#a6a6a6;
 }
 .tl_content span.comment {
-	color:#5c9ac9;
+	color:#4b85ba;
 	display:inline-block;
 	margin-bottom:3px;
 }
@@ -616,11 +613,11 @@ h2.sub_headline_index {
 	background:url("images/unpublished.gif") no-repeat left center;
 }
 .cte_type.published,.cte_type.published a {
-	color:#8ab858;
+	color:#77ac45;
 	font-size:10px;
 }
 .cte_type.unpublished,.cte_type.unpublished a {
-	color:#c55;
+	color:#c33;
 	font-size:10px;
 }
 .limit_height {
@@ -753,7 +750,7 @@ ul.level_9 .tl_left {
 	vertical-align:-5px;
 }
 label.tl_change_selected {
-	color:#a3a3a3;
+	color:#999;
 	font-style:italic;
 	vertical-align:top;
 }
@@ -1118,6 +1115,7 @@ ul.sortable li {
 .ace_editor * {
 	font-family:Courier,monospace;
 	font-size:12px;
+	color:inherit;
 }
 .ace_editor.fullsize {
 	position:absolute;
@@ -1326,7 +1324,7 @@ a.navigation {
 
 /* Error messages */
 label.error,legend.error {
-	color:#c55;
+	color:#c33;
 }
 .tl_tbox .tl_error,.tl_box .tl_error {
 	background:none;
@@ -1347,7 +1345,7 @@ fieldset.nolegend {
 	padding-top:12px;
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
-	color:#8ab858;
+	color:#77ac45;
 	padding-left:18px;
 	padding-right:3px;
 	background:url("images/palOpen.gif") left center no-repeat;
@@ -1443,4 +1441,14 @@ fieldset.collapsed > legend {
 }
 #sync-results .tl_checkbox {
 	top:0;
+}
+
+/* Headline gradient */
+#header h1,#tl_navigation h1,h1.main_headline {
+	background:#9a9c9a;
+	background-image:-moz-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-webkit-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-o-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:-ms-linear-gradient(top, #9a9c9a, #b3b6b3);
+	background-image:linear-gradient(to bottom, #9a9c9a, #b3b6b3);
 }

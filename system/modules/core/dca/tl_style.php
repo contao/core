@@ -170,8 +170,8 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['selector'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>1022, 'decodeEntities'=>true, 'tl_class'=>'long'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'category' => array
 		(

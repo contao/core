@@ -175,7 +175,7 @@ class ModuleFaqReader extends \Module
 		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $strAuthor);
 
 		// HOOK: comments extension required
-		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))
+		if ($objFaq->noComments || !in_array('comments', ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
 			return;

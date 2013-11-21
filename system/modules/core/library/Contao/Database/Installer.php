@@ -88,7 +88,7 @@ class Installer extends \Controller
 					$return .= '
     <tr>
       <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').'></td>
-      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
+      <td class="tl_col_2'.((stristr($vv, '_backup') !== false) ? ' backup' : '').'"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
     </tr>';
 				}
 			}
@@ -265,15 +265,15 @@ class Installer extends \Controller
 	 */
 	public function getFromDca()
 	{
+		$return = array();
 		$included = array();
-		$arrReturn = array();
 
 		// Ignore the internal cache
 		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
 		$GLOBALS['TL_CONFIG']['bypassCache'] = true;
 
 		// Only check the active modules (see #4541)
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -295,7 +295,7 @@ class Installer extends \Controller
 
 				if ($objExtract->isDbTable())
 				{
-					$arrReturn[$strTable] = $objExtract->getDbInstallerArray();
+					$return[$strTable] = $objExtract->getDbInstallerArray();
 				}
 
 				$included[] = $strFile;
@@ -305,7 +305,17 @@ class Installer extends \Controller
 		// Restore the cache settings
 		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
 
-		return $arrReturn;
+		// HOOK: allow third-party developers to modify the array (see #6425)
+		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromDca']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlGetFromDca'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
+			}
+		}
+
+		return $return;
 	}
 
 
@@ -319,10 +329,16 @@ class Installer extends \Controller
 		$table = '';
 		$return = array();
 
-		// Get all SQL files
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		// Only check the active modules (see #4541)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			if (strncmp($strModule, '.', 1) === 0 || strncmp($strModule, '__', 2) === 0)
+			{
+				continue;
+			}
+
+			// Ignore the database.sql of the not renamed core modules
+			if (in_array($strModule, array('calendar', 'comments', 'faq', 'listing', 'news', 'newsletter')))
 			{
 				continue;
 			}
@@ -448,7 +464,7 @@ class Installer extends \Controller
 					}
 
 					// Default values
-					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['default']) == 'null')
+					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['null']) == 'null')
 					{
 						unset($field['default']);
 					}

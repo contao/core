@@ -109,13 +109,10 @@ class PageTree extends \Widget
 			// Only proceed if the value has changed
 			if ($arrNew !== $this->{$this->strOrderField})
 			{
-				$objVersions = new Versions($this->strTable, \Input::get('id'));
-				$objVersions->initialize();
-
 				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->strOrderField}=? WHERE id=?")
 							   ->execute(time(), serialize($arrNew), \Input::get('id'));
 
-				$objVersions->create(); // see #6285
+				$this->objDca->createNewVersion = true; // see #6285
 			}
 		}
 
@@ -127,7 +124,7 @@ class PageTree extends \Widget
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
 			}
 
-			return $this->blnIsMultiple ? '' : 0;
+			return static::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
 		}
 		elseif (strpos($varInput, ',') === false)
 		{

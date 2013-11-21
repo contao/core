@@ -317,7 +317,8 @@ class Automator extends \System
 
 	/**
 	 * Generate the Google XML sitemaps
-	 * @param integer
+	 *
+	 * @param integer $intId The root page ID
 	 */
 	public function generateSitemap($intId=0)
 	{
@@ -383,14 +384,10 @@ class Automator extends \System
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
 			$objFile->append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">');
 
-			$strDomain = '';
+			// Set the domain (see #6421)
+			$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . ($objRoot->dns ?: \Environment::get('host')) . TL_PATH . '/';
 
-			// Overwrite the domain
-			if ($objRoot->dns != '')
-			{
-				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
-			}
-
+			// Find the searchable pages
 			$arrPages = \Backend::findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages
@@ -556,7 +553,7 @@ class Automator extends \System
 		$arrFiles = array();
 
 		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -585,7 +582,7 @@ class Automator extends \System
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
@@ -610,11 +607,16 @@ class Automator extends \System
 	public function generateLanguageCache()
 	{
 		$arrLanguages = array();
-		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page");
+		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page WHERE type='root'");
 
 		// Only cache the languages which are in use (see #6013)
 		while ($objLanguages->next())
 		{
+			if ($objLanguages->language == '')
+			{
+				continue;
+			}
+
 			$arrLanguages[] = $objLanguages->language;
 
 			// Also cache "de" if "de-CH" is requested
@@ -631,7 +633,7 @@ class Automator extends \System
 			$arrFiles = array();
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strDir = 'system/modules/' . $strModule . '/languages/' . $strLanguage;
 
@@ -677,7 +679,7 @@ class Automator extends \System
 				$objCacheFile->write(sprintf($strHeader, $strLanguage));
 
 				// Parse all active modules and append to the cache file
-				foreach ($this->Config->getActiveModules() as $strModule)
+				foreach (\ModuleLoader::getActive() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
 
@@ -710,7 +712,7 @@ class Automator extends \System
 		$arrExtracts = array();
 
 		// Only check the active modules (see #4541)
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 

@@ -249,7 +249,7 @@ class tl_templates extends Backend
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 
 		// Get all templates
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (ModuleLoader::getActive() as $strModule)
 		{
 			// Continue if there is no templates folder
 			if ($strModule == 'repository' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))

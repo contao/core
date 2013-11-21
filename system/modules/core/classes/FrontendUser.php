@@ -160,44 +160,41 @@ class FrontendUser extends \User
 			return true;
 		}
 
-		// Check whether auto login is active
-		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || \Input::cookie('FE_AUTO_LOGIN') == '')
+		// Check whether auto login is enabled
+		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && ($strCookie = \Input::cookie('FE_AUTO_LOGIN')) != '')
 		{
-			return false;
+			// Try to find the user by his auto login cookie
+			if ($this->findBy('autologin', $strCookie) !== false)
+			{
+				// Check the auto login period
+				if ($this->createdOn >= (time() - $GLOBALS['TL_CONFIG']['autologin']))
+				{
+					// Validate the account status
+					if ($this->checkAccountStatus() !== false)
+					{
+						$this->setUserFromDb();
+
+						// Last login date
+						$this->lastLogin = $this->currentLogin;
+						$this->currentLogin = time();
+						$this->save();
+
+						// Generate the session
+						$this->generateSession();
+						$this->log('User "' . $this->username . '" was logged in automatically', __METHOD__, TL_ACCESS);
+
+						// Reload the page
+						\Controller::reload();
+						return true;
+					}
+				}
+			}
+
+			// Remove the cookie if it is invalid to enable loading cached pages
+			$this->setCookie('FE_AUTO_LOGIN', $strCookie, (time() - 86400), null, null, false, true);
 		}
 
-		// Try to find the user by his auto login cookie
-		if ($this->findBy('autologin', \Input::cookie('FE_AUTO_LOGIN')) == false)
-		{
-			return false;
-		}
-
-		// Check the auto login period
-		if ($this->createdOn < (time() - $GLOBALS['TL_CONFIG']['autologin']))
-		{
-			return false;
-		}
-
-		// Validate the account status
-		if ($this->checkAccountStatus() == false)
-		{
-			return false;
-		}
-
-		$this->setUserFromDb();
-
-		// Last login date
-		$this->lastLogin = $this->currentLogin;
-		$this->currentLogin = time();
-		$this->save();
-
-		// Generate the session
-		$this->generateSession();
-		$this->log('User "' . $this->username . '" was logged in automatically', __METHOD__, TL_ACCESS);
-
-		// Reload the page
-		\Controller::reload();
-		return true;
+		return false;
 	}
 
 

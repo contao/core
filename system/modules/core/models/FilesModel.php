@@ -38,6 +38,68 @@ class FilesModel extends \Model
 
 
 	/**
+	 * Find a file by its primary key (backwards compatibility)
+	 *
+	 * @param mixed $varValue   The value
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByPk($varValue, array $arrOptions=array())
+	{
+		if (static::$strPk == 'id')
+		{
+			return static::findById($varValue, $arrOptions);
+		}
+
+		return parent::findByPk($varValue, $arrOptions);
+	}
+
+
+	/**
+	 * Find a file by its ID or UUID (backwards compatibility)
+	 *
+	 * @param mixed $intId      The ID or UUID
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findById($intId, array $arrOptions=array())
+	{
+		if (\Validator::isUuid($intId))
+		{
+			return static::findByUuid($intId, $arrOptions);
+		}
+
+		return static::findBy('id', $intId, $arrOptions);
+	}
+
+
+	/**
+	 * Find multiple files by their IDs or UUIDs (backwards compatibility)
+	 *
+	 * @param array $arrIds     An array of IDs or UUIDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no files
+	 */
+	public static function findMultipleByIds($arrIds, array $arrOptions=array())
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		if (\Validator::isUuid(current($arrIds)))
+		{
+			return static::findMultipleByUuids($arrIds, $arrOptions);
+		}
+
+		return parent::findMultipleByIds($arrIds, $arrOptions);
+	}
+
+
+	/**
 	 * Find a file by its UUID
 	 *
 	 * @param array $strUuid    The UUID string
@@ -48,6 +110,13 @@ class FilesModel extends \Model
 	public static function findByUuid($strUuid, array $arrOptions=array())
 	{
 		$t = static::$strTable;
+
+		// Convert UUIDs to binary
+		if (strlen($strUuid) == 36)
+		{
+			$strUuid = \String::uuidToBin($strUuid);
+		}
+
 		return static::findOneBy(array("HEX($t.uuid)=?"), bin2hex($strUuid), $arrOptions);
 	}
 
@@ -55,7 +124,7 @@ class FilesModel extends \Model
 	/**
 	 * Find multiple files by their UUIDs
 	 *
-	 * @param array $arrUuids   An array of file UUIDs
+	 * @param array $arrUuids   An array of UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no files
@@ -68,7 +137,17 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrUuids = array_map('bin2hex', $arrUuids);
+
+		foreach ($arrUuids as $k=>$v)
+		{
+			// Convert UUIDs to binary
+			if (strlen($v) == 36)
+			{
+				$v = \String::uuidToBin($v);
+			}
+
+			$arrUuids[$k] = bin2hex($v);
+		}
 
 		if (!isset($arrOptions['order']))
 		{

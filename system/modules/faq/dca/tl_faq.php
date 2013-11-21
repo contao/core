@@ -271,6 +271,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'default'                 => 'above',
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
@@ -344,7 +345,7 @@ class tl_faq extends Backend
 	public function checkPermission()
 	{
 		// HOOK: comments extension required
-		if (!in_array('comments', $this->Config->getActiveModules()))
+		if (!in_array('comments', ModuleLoader::getActive()))
 		{
 			$key = array_search('allowComments', $GLOBALS['TL_DCA']['tl_faq']['list']['sorting']['headerFields']);
 			unset($GLOBALS['TL_DCA']['tl_faq']['list']['sorting']['headerFields'][$key]);

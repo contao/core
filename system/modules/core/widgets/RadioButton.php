@@ -118,9 +118,9 @@ class RadioButton extends \Widget
 		return sprintf('<fieldset id="ctrl_%s" class="tl_radio_container%s"><legend>%s%s%s%s</legend>%s</fieldset>%s',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 						$this->strLabel,
-						($this->required ? '<span class="mandatory">*</span>' : ''),
+						($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 						$this->xlabel,
 						implode('<br>', $arrOptions),
 						$this->wizard);

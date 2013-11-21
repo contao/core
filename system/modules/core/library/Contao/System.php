@@ -285,7 +285,7 @@ abstract class System
 			}
 			else
 			{
-				foreach (\Config::getInstance()->getActiveModules() as $strModule)
+				foreach (\ModuleLoader::getActive() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strCreateLang . '/' . $strName;
 
@@ -682,8 +682,10 @@ abstract class System
 
 	/**
 	 * Enable a back end module
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param string $strName The module name
+	 *
+	 * @return boolean True if the module was enabled
 	 */
 	public static function enableModule($strName)
 	{
@@ -701,8 +703,10 @@ abstract class System
 
 	/**
 	 * Disable a back end module
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param string $strName The module name
+	 *
+	 * @return boolean True if the module was disabled
 	 */
 	public static function disableModule($strName)
 	{

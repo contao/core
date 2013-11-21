@@ -255,6 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cssClass.1">
         <source>The class(es) will be used in the navigation menu and the &amp;lt;body&amp;gt; tag.</source>
+        <target>Ezen osztály(oka)t fogja használni a navigációs menü és a &lt;body&gt; tag.</target>
       </trans-unit>
       <trans-unit id="tl_page.sitemap.0">
         <source>Show in sitemap</source>

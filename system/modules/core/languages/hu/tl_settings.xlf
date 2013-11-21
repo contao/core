@@ -139,12 +139,15 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
+        <target>Megbízható proxy szerver</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Itt megadhat egy vesszővel elválasztott listát a megbízható proxy szerverek IP címeivel.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
+        <target>SSL proxy domain</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
@@ -179,6 +182,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Adja hozzá a nyelvet első paraméterként az URL-hez. (pl. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -544,6 +548,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
+        <target>Itt lehet megadni a Online Frissítés URL-jét.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
@@ -567,6 +572,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
+        <target>Proxy beállítások</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>

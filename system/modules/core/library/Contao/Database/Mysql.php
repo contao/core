@@ -150,14 +150,23 @@ class Mysql extends \Database
 
 			if (!empty($arrChunks[1]))
 			{
-				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
-				$arrSubChunks = explode(',', $arrChunks[1]);
+				$arrChunks[1] = str_replace(array('(', ')'), '', $arrChunks[1]);
 
-				$arrTmp['length'] = trim($arrSubChunks[0]);
-
-				if (!empty($arrSubChunks[1]))
+				// Handle enum fields (see #6387)
+				if ($arrChunks[0] == 'enum')
 				{
-					$arrTmp['precision'] = trim($arrSubChunks[1]);
+					$arrTmp['length'] = $arrChunks[1];
+				}
+				else
+				{
+					$arrSubChunks = explode(',', $arrChunks[1]);
+
+					$arrTmp['length'] = trim($arrSubChunks[0]);
+
+					if (!empty($arrSubChunks[1]))
+					{
+						$arrTmp['precision'] = trim($arrSubChunks[1]);
+					}
 				}
 			}
 
@@ -300,7 +309,7 @@ class Mysql extends \Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */

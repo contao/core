@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
-        <target>この通知をカスタマイズするには、&lt;em&gt;%s&lt;/em&gt;という名前のカスタマイズしたテンプレートを作成してください。</target>
+        <target>この案内をカスタマイズするには、&lt;em&gt;%s&lt;/em&gt;という名前のカスタマイズしたテンプレートを作成してください。</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>

@@ -228,9 +228,9 @@ class Versions extends \Backend
 		$objVersions = $this->Database->prepare("SELECT * FROM tl_version WHERE pid=? AND fromTable=? ORDER BY version DESC")
 									  ->execute($this->intPid, $this->strTable);
 
-		if ($objVersions->numRows < 1)
+		if ($objVersions->numRows < 2)
 		{
-			$strBuffer = 'There are no versions of ' . $this->strTable . '.id=' . $this->intPid;
+			$strBuffer = '<p>There are no versions of ' . $this->strTable . '.id=' . $this->intPid . '</p>';
 		}
 		else
 		{
@@ -283,77 +283,91 @@ class Versions extends \Backend
 				$from = deserialize($arrVersions[$intFrom]['data']);
 			}
 
-			\System::loadLanguageFile($this->strTable);
-			$this->loadDataContainer($this->strTable);
-
-			// Include the PhpDiff library
-			require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff.php';
-			require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff/Renderer/Html/Contao.php';
-
-			$arrOrder = array();
-			$arrFields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
-
-			// Get the order fields
-			foreach ($arrFields as $arrField)
+			// Only continue if both version numbers are set
+			if ($intTo > 0 && $intFrom > 0)
 			{
-				if (isset($arrField['eval']['orderField']))
+				\System::loadLanguageFile($this->strTable);
+				$this->loadDataContainer($this->strTable);
+
+				// Include the PhpDiff library
+				require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff.php';
+				require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff/Renderer/Html/Contao.php';
+
+				$arrOrder = array();
+				$arrFields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
+
+				// Get the order fields
+				foreach ($arrFields as $arrField)
 				{
-					$arrOrder[] = $arrField['eval']['orderField'];
+					if (isset($arrField['eval']['orderField']))
+					{
+						$arrOrder[] = $arrField['eval']['orderField'];
+					}
 				}
-			}
 
-			// Find the changed fields and highlight the changes
-			foreach ($to as $k=>$v)
-			{
-				if ($from[$k] != $to[$k])
+				// Find the changed fields and highlight the changes
+				foreach ($to as $k=>$v)
 				{
-					if ($arrFields[$k]['inputType'] == 'password' || $arrFields[$k]['eval']['doNotShow'] || $arrFields[$k]['eval']['hideInput'])
+					if ($from[$k] != $to[$k])
 					{
-						continue;
-					}
+						if ($arrFields[$k]['inputType'] == 'password' || $arrFields[$k]['eval']['doNotShow'] || $arrFields[$k]['eval']['hideInput'])
+						{
+							continue;
+						}
 
-					$blnIsBinary = ($arrFields[$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
+						$blnIsBinary = ($arrFields[$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
 
-					// Convert serialized arrays into strings
-					if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
-					{
-						$to[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
-					}
-					if (is_array(($tmp = deserialize($from[$k]))) && !is_array($from[$k]))
-					{
-						$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
-					}
-					unset($tmp);
+						// Convert serialized arrays into strings
+						if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
+						{
+							$to[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
+						}
+						if (is_array(($tmp = deserialize($from[$k]))) && !is_array($from[$k]))
+						{
+							$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
+						}
+						unset($tmp);
 
-					// Convert date fields
-					if ($arrFields[$k]['eval']['rgxp'] == 'date')
-					{
-						$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
-						$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
-					}
-					elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
-					{
-						$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
-						$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
-					}
-					elseif ($arrFields[$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
-					{
-						$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
-						$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
-					}
+						// Convert binary UUIDs to their hex equivalents (see #6365)
+						if ($blnIsBinary && \Validator::isUuid($to[$k]))
+						{
+							$to[$k] = \String::binToUuid($to[$k]);
+						}
+						if ($blnIsBinary && \Validator::isUuid($from[$k]))
+						{
+							$to[$k] = \String::binToUuid($from[$k]);
+						}
 
-					// Convert strings into arrays
-					if (!is_array($to[$k]))
-					{
-						$to[$k] = explode("\n", $to[$k]);
-					}
-					if (!is_array($from[$k]))
-					{
-						$from[$k] = explode("\n", $from[$k]);
-					}
+						// Convert date fields
+						if ($arrFields[$k]['eval']['rgxp'] == 'date')
+						{
+							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
+							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
+						}
+						elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
+						{
+							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
+							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
+						}
+						elseif ($arrFields[$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
+						{
+							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
+							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
+						}
 
-					$objDiff = new \Diff($from[$k], $to[$k]);
-					$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: ($GLOBALS['TL_LANG']['MSC'][$k] ?: $k)))));
+						// Convert strings into arrays
+						if (!is_array($to[$k]))
+						{
+							$to[$k] = explode("\n", $to[$k]);
+						}
+						if (!is_array($from[$k]))
+						{
+							$from[$k] = explode("\n", $from[$k]);
+						}
+
+						$objDiff = new \Diff($from[$k], $to[$k]);
+						$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
+					}
 				}
 			}
 		}
@@ -393,9 +407,9 @@ class Versions extends \Backend
 	public function renderDropdown()
 	{
 		$objVersion = $this->Database->prepare("SELECT tstamp, version, username, active FROM tl_version WHERE fromTable=? AND pid=? ORDER BY version DESC")
-									     ->execute($this->strTable, $this->intPid);
+								     ->execute($this->strTable, $this->intPid);
 
-		if ($objVersion->numRows < 1)
+		if ($objVersion->numRows < 2)
 		{
 			return '';
 		}

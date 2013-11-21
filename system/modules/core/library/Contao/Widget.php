@@ -133,11 +133,17 @@ abstract class Widget extends \Controller
 	 */
 	protected $blnForAttribute = false;
 
+	/**
+	 * Data container
+	 * @var object
+	 */
+	protected $objDca;
+
 
 	/**
 	 * Initialize the object
 	 *
-	 * @param array An optional attributes array
+	 * @param array $arrAttributes An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -1222,6 +1228,7 @@ abstract class Widget extends \Controller
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
 		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
+		$arrAttributes['objDca'] = $objDca;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
@@ -1299,8 +1306,16 @@ abstract class Widget extends \Controller
 
 			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
 			{
+				$value = '';
+
+				// Set to 0 for numeric columns (see #6373)
+				if (isset($arrData['sql']))
+				{
+					$value = static::getEmptyValueByFieldType($arrData['sql']);
+				}
+
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrAttributes['options'][] = array('value'=>'', 'label'=>$strLabel);
+				$arrAttributes['options'][] = array('value'=>$value, 'label'=>$strLabel);
 			}
 
 			foreach ($arrData['options'] as $k=>$v)
@@ -1340,5 +1355,36 @@ abstract class Widget extends \Controller
 		}
 
 		return $arrAttributes;
+	}
+
+
+	/**
+	 * Check for numeric fields based on the SQL string
+	 *
+	 * @param string $sql The SQL string
+	 *
+	 * @return boolean True if the field is numeric
+	 */
+	public static function getEmptyValueByFieldType($sql)
+	{
+		if ($sql == '')
+		{
+			return '';
+		}
+
+		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
+
+		if (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
+		{
+			return null;
+		}
+		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
+		{
+			return 0;
+		}
+		else
+		{
+			return '';
+		}
 	}
 }

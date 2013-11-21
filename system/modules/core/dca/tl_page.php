@@ -1218,6 +1218,13 @@ class tl_page extends Backend
 
 		foreach (array_keys($GLOBALS['TL_PTY']) as $pty)
 		{
+			// Root pages are allowed on the first level only (see #6360)
+			if ($pty == 'root' && $dc->activeRecord && $dc->activeRecord->pid > 0)
+			{
+				continue;
+			}
+
+			// Allow the currently selected option and anything the user has access to
 			if ($pty == $dc->value || $this->User->hasAccess($pty, 'alpty'))
 			{
 				$arrOptions[] = $pty;

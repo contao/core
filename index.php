@@ -52,8 +52,8 @@ class Index extends Frontend
 	 */
 	public function run()
 	{
-		// Maintenance mode (see #4561)
-		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !BE_USER_LOGGED_IN)
+		// Maintenance mode (see #4561 and #6353)
+		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
 		{
 			header('HTTP/1.1 503 Service Unavailable');
 			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
@@ -264,8 +264,8 @@ class Index extends Frontend
 	 */
 	protected function outputFromCache()
 	{
-		// Build the page if a user is logged in or there is POST data
-		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
+		// Build the page if a user is (potentially) logged in or there is POST data
+		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			return;
 		}

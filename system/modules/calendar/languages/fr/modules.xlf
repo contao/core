@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventreader.0">
         <source>Event reader</source>
-        <target>Lecteur d'événement</target>
+        <target>Lecteur d'événements</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.1">
         <source>Shows the details of an event</source>

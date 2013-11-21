@@ -231,7 +231,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 
 
 /**
- * Standardize a parameter (strip special characters and convert spaces to underscores)
+ * Standardize a parameter (strip special characters and convert spaces)
  * @param string
  * @param boolean
  * @return string
@@ -405,17 +405,6 @@ function nl2br_pre($str, $xhtml=false)
 	}
 
 	return $str;
-}
-
-
-/**
- * Replace line breaks with <br> tags (to be used with preg_replace_callback)
- * @param array
- * @return string
- */
-function nl2br_callback($matches)
-{
-	return str_replace("\n", '<br>', $matches[0]);
 }
 
 
@@ -730,4 +719,16 @@ if (!USE_MBSTRING)
 
 		return substr_count($haystack, $needle, $offset);
 	}
+}
+
+
+/**
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ * @deprecated
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", '<br>', $matches[0]);
 }

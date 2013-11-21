@@ -1,7 +1,7 @@
-/*! jQuery UI - v1.10.2 - 2013-04-09
+/*! jQuery UI - v1.10.3 - 2013-10-28
 * http://jqueryui.com
 * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.accordion.js
-* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
+* Copyright 2013 jQuery Foundation and other contributors; Licensed MIT */
 
 (function( $, undefined ) {
 
@@ -12,7 +12,7 @@ var uuid = 0,
 $.ui = $.ui || {};
 
 $.extend( $.ui, {
-	version: "1.10.2",
+	version: "1.10.3",
 
 	keyCode: {
 		BACKSPACE: 8,
@@ -262,7 +262,7 @@ $.fn.extend({
 });
 
 $.extend( $.ui, {
-	// $.ui.plugin is deprecated.  Use the proxy pattern instead.
+	// $.ui.plugin is deprecated. Use $.widget() extensions instead.
 	plugin: {
 		add: function( module, option, set ) {
 			var i,
@@ -836,7 +836,7 @@ showProps.height = showProps.paddingTop = showProps.paddingBottom =
 	showProps.borderTopWidth = showProps.borderBottomWidth = "show";
 
 $.widget( "ui.accordion", {
-	version: "1.10.2",
+	version: "1.10.3",
 	options: {
 		active: 0,
 		animate: {},
@@ -1033,7 +1033,7 @@ $.widget( "ui.accordion", {
 			options.active = false;
 			this.active = $();
 		// active false only when collapsible is true
-		} if ( options.active === false ) {
+		} else if ( options.active === false ) {
 			this._activate( 0 );
 		// was active, but active panel is gone
 		} else if ( this.active.length && !$.contains( this.element[ 0 ], this.active[ 0 ] ) ) {
