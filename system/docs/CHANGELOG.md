@@ -5,6 +5,9 @@ Version 3.2.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Improved the speed and memory footprint of the news archive menu (see #6463).
+
+### Fixed
 Removed `CalendarEventsModel::findBoundaries()` (see #6467).
 
 
