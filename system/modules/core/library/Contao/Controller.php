@@ -1564,7 +1564,7 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					if (\Validator::isUuid($strFile))
+					if (\Validator::isTextUuid($strFile))
 					{
 						// Handle UUIDs
 						$objFile = \FilesModel::findByUuid($strFile);
@@ -1642,7 +1642,7 @@ abstract class Controller extends \System
 
 				// Files (UUID or template path)
 				case 'file':
-					if (\Validator::isUuid($elements[1]))
+					if (\Validator::isTextUuid($elements[1]))
 					{
 						$objFile = \FilesModel::findByUuid(\String::uuidToBin($elements[1]));
 
