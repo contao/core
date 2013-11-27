@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.1 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Removed `CalendarEventsModel::findBoundaries()` (see #6467).
+
+
 Version 3.2.0 (2013-11-21)
 --------------------------
 
