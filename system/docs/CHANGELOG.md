@@ -5,6 +5,9 @@ Version 3.2.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly detect UUIDs in the "file" insert tag (see #6472).
+
+### Fixed
 Correctly assign images to FAQs (see #6465).
 
 ### Fixed
