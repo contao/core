@@ -793,7 +793,7 @@ class Updater extends \Controller
 			// Numeric ID to UUID
 			if ($objHelper->isNumeric)
 			{
-				$objFile = \FilesModel::findByPk($objHelper->numeric);
+				$objFile = \FilesModel::findByPk($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 							->execute($objFile->uuid, $objRow->id);
@@ -802,7 +802,7 @@ class Updater extends \Controller
 			// Path to UUID
 			else
 			{
-				$objFile = \FilesModel::findByPath($objHelper->textual);
+				$objFile = \FilesModel::findByPath($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 							->execute($objFile->uuid, $objRow->id);
@@ -860,14 +860,14 @@ class Updater extends \Controller
 				// Numeric ID to UUID
 				if ($objHelper->isNumeric)
 				{
-					$objFile = \FilesModel::findByPk($objHelper->numeric[$k]);
+					$objFile = \FilesModel::findByPk($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}
 
 				// Path to UUID
 				else
 				{
-					$objFile = \FilesModel::findByPath($objHelper->textual[$k]);
+					$objFile = \FilesModel::findByPath($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}
 			}
@@ -917,17 +917,15 @@ class Updater extends \Controller
 
 		if (!is_array($value))
 		{
-			$return->numeric = (int) $value;
-			$return->textual = rtrim($value, "\x00");
-			$return->isUuid = (strlen($value) == 16 && $return->numeric == 0 && strncmp($return->textual, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
-			$return->isNumeric = (is_numeric($return->numeric) && $return->numeric > 0);
+			$return->value = rtrim($value, "\x00");
+			$return->isUuid = (strlen($value) == 16 && !is_numeric($return->value) && strncmp($return->value, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isNumeric = (is_numeric($return->value) && $return->value > 0);
 		}
 		else
 		{
-			$return->numeric = array_map(function($var) { return (int) $var; }, $value);
-			$return->textual = array_map(function($var) { return rtrim($var, "\x00"); }, $value);
-			$return->isUuid = (strlen($value[0]) == 16 && $return->numeric[0] == 0 && strncmp($return->textual[0], $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
-			$return->isNumeric = (is_numeric($return->numeric[0]) && $return->numeric[0] > 0);
+			$return->value = array_map(function($var) { return rtrim($var, "\x00"); }, $value);
+			$return->isUuid = (strlen($value[0]) == 16 && !is_numeric($return->value[0]) && strncmp($return->value[0], $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isNumeric = (is_numeric($return->value[0]) && $return->value[0] > 0);
 		}
 
 		return $return;
