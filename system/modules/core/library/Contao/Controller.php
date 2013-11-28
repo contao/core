@@ -1340,18 +1340,12 @@ abstract class Controller extends \System
 					$arrCache[$strTag] = \Input::post($elements[1]);
 					break;
 
-				// Mobile/desktop toggle (hide if there is no mobile layout)
+				// Mobile/desktop toggle (see #6469)
 				case 'toggle_view':
-					if (!$objPage->mobileLayout)
-					{
-						$arrCache[$strTag] = '';
-						break;
-					}
-
 					$strUrl = ampersand(\Environment::get('request'));
 					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
 
-					if ($objPage->isMobile)
+					if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 					{
 						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" class="toggle_desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
 					}

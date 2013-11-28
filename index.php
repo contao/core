@@ -305,7 +305,7 @@ class Index extends Frontend
 		$blnFound = false;
 
 		// Check for a mobile layout
-		if (Environment::get('agent')->mobile)
+		if (Input::cookie('TL_VIEW') == 'mobile' || (Environment::get('agent')->mobile && Input::cookie('TL_VIEW') != 'desktop'))
 		{
 			$strCacheKey = md5($strCacheKey . '.mobile');
 			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';

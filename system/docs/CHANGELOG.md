@@ -5,6 +5,9 @@ Version 3.2.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly toggle the mobile/desktop view (see #6227).
+
+### Fixed
 Correctly detect UUIDs in the "file" insert tag (see #6472).
 
 ### Fixed
