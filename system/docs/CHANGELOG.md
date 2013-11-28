@@ -5,6 +5,9 @@ Version 3.2.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Optionally override the repository tables when importing a template (see #6470).
+
+### Fixed
 Only do the UUID conversion once even if the `Database\Updater` helper methods
 are called multiple times (see #6481).
 

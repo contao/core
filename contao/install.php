@@ -668,7 +668,7 @@ class InstallTool extends Backend
 					foreach ($tables as $table)
 					{
 						// Preserve the repository tables (see #6037)
-						if ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles')
+						if (isset($_POST['override']) || ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles'))
 						{
 							$this->Database->execute("TRUNCATE TABLE " . $table);
 						}
@@ -682,7 +682,7 @@ class InstallTool extends Backend
 				foreach ($sql as $query)
 				{
 					// Skip the repository tables (see #6037)
-					if (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false)
+					if (isset($_POST['override']) || (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false))
 					{
 						$this->Database->execute($query);
 					}
