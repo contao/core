@@ -541,6 +541,9 @@ class Updater extends \Controller
 
 			// Update the fields
 			$this->updateFileTreeFields();
+
+			// Drop the pid_backup column
+			$this->Database->query("ALTER TABLE `tl_files` DROP `pid_backup`");
 		}
 	}
 
