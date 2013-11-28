@@ -5,6 +5,10 @@ Version 3.2.1 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Only do the UUID conversion once even if the `Database\Updater` helper methods
+are called multiple times (see #6481).
+
+### Fixed
 Correctly toggle the mobile/desktop view (see #6227).
 
 ### Fixed
