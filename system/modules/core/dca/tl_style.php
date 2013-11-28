@@ -53,8 +53,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
-				'selector' => 'index'
+				'pid' => 'index'
 			)
 		)
 	),
