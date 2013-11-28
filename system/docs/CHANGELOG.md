@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.1 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated TinyMCE to version 3.5.10 to fix the IE11 issues (see #6479).
+
 ### Fixed
 Optionally override the repository tables when importing a template (see #6470).
 
