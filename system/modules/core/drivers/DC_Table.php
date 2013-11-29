@@ -2933,7 +2933,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// If the field is a fallback field, empty all other columns
 			if ($arrData['eval']['fallback'] && $varValue != '')
 			{
-				$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4)
+				{
+					$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "='' WHERE pid=?")
+								   ->execute($this->activeRecord->pid);
+				}
+				else
+				{
+					$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				}
 			}
 
 			$arrValues = $this->values;
