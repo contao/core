@@ -79,7 +79,7 @@ class ModuleFaqPage extends \Module
 		}
 
 		global $objPage;
-		$arrFaq = array_fill_keys($this->faq_categories, array());
+		$arrFaqs = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs
 		while ($objFaq->next())
@@ -116,8 +116,8 @@ class ModuleFaqPage extends \Module
 					// Do not override the field now that we have a model registry (see #6303)
 					$arrFaq = $objFaq->row();
 					$arrFaq['singleSRC'] = $objModel->path;
-
 					$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
+
 					$this->addImageToTemplate($objTemp, $arrFaq, null, $strLightboxId);
 				}
 			}
@@ -133,28 +133,28 @@ class ModuleFaqPage extends \Module
 			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
 			// Order by PID
-			$arrFaq[$objFaq->pid]['items'][] = $objTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaqs[$objFaq->pid]['items'][] = $objTemp;
+			$arrFaqs[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
 		}
 
-		$arrFaq = array_values(array_filter($arrFaq));
-		$limit_i = count($arrFaq) - 1;
+		$arrFaqs = array_values(array_filter($arrFaqs));
+		$limit_i = count($arrFaqs) - 1;
 
 		// Add classes first, last, even and odd
 		for ($i=0; $i<=$limit_i; $i++)
 		{
 			$class = (($i == 0) ? 'first ' : '') . (($i == $limit_i) ? 'last ' : '') . (($i%2 == 0) ? 'even' : 'odd');
-			$arrFaq[$i]['class'] = trim($class);
-			$limit_j = count($arrFaq[$i]['items']) - 1;
+			$arrFaqs[$i]['class'] = trim($class);
+			$limit_j = count($arrFaqs[$i]['items']) - 1;
 
 			for ($j=0; $j<=$limit_j; $j++)
 			{
 				$class = (($j == 0) ? 'first ' : '') . (($j == $limit_j) ? 'last ' : '') . (($j%2 == 0) ? 'even' : 'odd');
-				$arrFaq[$i]['items'][$j]->class = trim($class);
+				$arrFaqs[$i]['items'][$j]->class = trim($class);
 			}
 		}
 
-		$this->Template->faq = $arrFaq;
+		$this->Template->faq = $arrFaqs;
 		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->topLink = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 	}

@@ -1,6 +1,35 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.1 (2013-11-29)
+--------------------------
+
+### Updated
+Updated TinyMCE to version 3.5.10 to fix the IE11 issues (see #6479).
+
+### Fixed
+Optionally override the repository tables when importing a template (see #6470).
+
+### Fixed
+Only do the UUID conversion once even if the `Database\Updater` helper methods
+are called multiple times (see #6481).
+
+### Fixed
+Correctly toggle the mobile/desktop view (see #6227).
+
+### Fixed
+Correctly detect UUIDs in the "file" insert tag (see #6472).
+
+### Fixed
+Correctly assign images to FAQs (see #6465).
+
+### Fixed
+Improved the speed and memory footprint of the news archive menu (see #6463).
+
+### Fixed
+Removed `CalendarEventsModel::findBoundaries()` (see #6467).
+
+
 Version 3.2.0 (2013-11-21)
 --------------------------
 

@@ -78,7 +78,7 @@
         <target>Minimalizovať markup</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
         <target>Minimalizuje HTML markup pred odoslaním do prehliadača (vyžaduje rozšírenie »PHP tidy«).</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
@@ -235,9 +235,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>Mód údržby</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Odošle HTTP hlavičku s kódom 503 a zobrazí mód údržby na web stránke.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -609,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cron_legend">
         <source>Command scheduler</source>
+        <target>Plánovač príkazov</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

@@ -149,9 +149,6 @@ li {
 .tl_col_2 {
 	padding:2px 0 3px 4px;
 }
-.backup label {
-	color:#999;
-}
 
 /* Error and confirmation messages */
 .tl_error,.tl_confirm,.tl_info {

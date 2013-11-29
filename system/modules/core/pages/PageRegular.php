@@ -209,7 +209,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Override the autodetected value
-		if (\Input::cookie('TL_VIEW') == 'mobile' && $objPage->mobileLayout)
+		if (\Input::cookie('TL_VIEW') == 'mobile')
 		{
 			$blnMobile = true;
 		}
@@ -218,7 +218,7 @@ class PageRegular extends \Frontend
 			$blnMobile = false;
 		}
 
-		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
+		$intId = ($blnMobile && $objPage->mobileLayout) ? $objPage->mobileLayout : $objPage->layout;
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout

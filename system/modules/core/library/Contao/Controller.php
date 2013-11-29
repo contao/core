@@ -1340,18 +1340,12 @@ abstract class Controller extends \System
 					$arrCache[$strTag] = \Input::post($elements[1]);
 					break;
 
-				// Mobile/desktop toggle (hide if there is no mobile layout)
+				// Mobile/desktop toggle (see #6469)
 				case 'toggle_view':
-					if (!$objPage->mobileLayout)
-					{
-						$arrCache[$strTag] = '';
-						break;
-					}
-
 					$strUrl = ampersand(\Environment::get('request'));
 					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
 
-					if ($objPage->isMobile)
+					if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 					{
 						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" class="toggle_desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
 					}
@@ -1644,51 +1638,50 @@ abstract class Controller extends \System
 				case 'file':
 					if (\Validator::isUuid($elements[1]))
 					{
-						$objFile = \FilesModel::findByUuid(\String::uuidToBin($elements[1]));
+						$objFile = \FilesModel::findByUuid($elements[1]);
 
 						if ($objFile !== null)
 						{
 							$arrCache[$strTag] = $objFile->path;
+							break;
 						}
 					}
-					else
+
+					$arrGet = $_GET;
+					\Input::resetCache();
+					$strFile = $elements[1];
+
+					// Take arguments and add them to the $_GET array
+					if (strpos($elements[1], '?') !== false)
 					{
-						$arrGet = $_GET;
-						\Input::resetCache();
-						$strFile = $elements[1];
+						$arrChunks = explode('?', urldecode($elements[1]));
+						$strSource = \String::decodeEntities($arrChunks[1]);
+						$strSource = str_replace('[&]', '&', $strSource);
+						$arrParams = explode('&', $strSource);
 
-						// Take arguments and add them to the $_GET array
-						if (strpos($elements[1], '?') !== false)
+						foreach ($arrParams as $strParam)
 						{
-							$arrChunks = explode('?', urldecode($elements[1]));
-							$strSource = \String::decodeEntities($arrChunks[1]);
-							$strSource = str_replace('[&]', '&', $strSource);
-							$arrParams = explode('&', $strSource);
-
-							foreach ($arrParams as $strParam)
-							{
-								$arrParam = explode('=', $strParam);
-								$_GET[$arrParam[0]] = $arrParam[1];
-							}
-
-							$strFile = $arrChunks[0];
+							$arrParam = explode('=', $strParam);
+							$_GET[$arrParam[0]] = $arrParam[1];
 						}
 
-						// Sanitize path
-						$strFile = str_replace('../', '', $strFile);
-
-						// Include .php, .tpl, .xhtml and .html5 files
-						if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
-						{
-							ob_start();
-							include TL_ROOT . '/templates/' . $strFile;
-							$arrCache[$strTag] = ob_get_contents();
-							ob_end_clean();
-						}
-
-						$_GET = $arrGet;
-						\Input::resetCache();
+						$strFile = $arrChunks[0];
 					}
+
+					// Sanitize path
+					$strFile = str_replace('../', '', $strFile);
+
+					// Include .php, .tpl, .xhtml and .html5 files
+					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
+					{
+						ob_start();
+						include TL_ROOT . '/templates/' . $strFile;
+						$arrCache[$strTag] = ob_get_contents();
+						ob_end_clean();
+					}
+
+					$_GET = $arrGet;
+					\Input::resetCache();
 					break;
 
 				// HOOK: pass unknown tags to callback functions

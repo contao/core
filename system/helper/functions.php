@@ -627,7 +627,13 @@ require TL_ROOT . '/system/helper/mbstring.php';
  */
 if (!USE_MBSTRING)
 {
-	// mb_convert_encoding
+	/**
+	 * Convert character encoding
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_convert_encoding($str, $to, $from=null)
 	{
 		if ($from === null)
@@ -636,13 +642,23 @@ if (!USE_MBSTRING)
 		return utf8_convert_encoding($str, $to, $from);
 	}
 
-	// mb_detect_encoding
+	/**
+	 * Detect the encoding of a string
+	 * @param string
+	 * @return string
+	 */
 	function mb_detect_encoding($str)
 	{
 		return utf8_detect_encoding($str);
 	}
 
-	// mb_stripos
+	/**
+	 * Find the last occurrence of a character in a string (case-insensitive)
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_stripos($haystack, $needle, $offset=null)
 	{
 		if ($offset === null)
@@ -651,19 +667,35 @@ if (!USE_MBSTRING)
 		return stripos($haystack, $needle, $offset);
 	}
 
-	// mb_stristr
+	/**
+	 * Find the first occurrence of a character in a string (case-insensitive)
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_stristr($haystack, $needle)
 	{
 		return stristr($haystack, $needle);
 	}
 
-	// mb_strlen
+	/**
+	 * Determine the number of characters of a string
+	 * @param string
+	 * @return integer
+	 */
 	function mb_strlen($str)
 	{
 		return utf8_strlen($str);
 	}
 
-	// mb_strpos
+	/**
+	 * Find the first occurrence of a character in a string
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_strpos($haystack, $needle, $offset=0)
 	{
 		if ($offset === 0)
@@ -672,37 +704,66 @@ if (!USE_MBSTRING)
 		return utf8_strpos($haystack, $needle, $offset);
 	}
 
-	// mb_strrchr
+	/**
+	 * Find the last occurrence of a character in a string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_strrchr($haystack, $needle)
 	{
 		return utf8_strrchr($haystack, $needle);
 	}
 
-	// mb_strrpos
+	/**
+	 * Find the position of the last occurrence of a string in another string
+	 * @param string
+	 * @param string
+	 * @return mixed
+	 */
 	function mb_strrpos($haystack, $needle)
 	{
 		return utf8_strrpos($haystack, $needle);
 	}
 
-	// mb_strstr
+	/**
+	 * Find the first occurrence of a string in another string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_strstr($haystack, $needle)
 	{
 		return utf8_strstr($haystack, $needle);
 	}
 
-	// mb_strtolower
+	/**
+	 * Make a string lowercase
+	 * @param string
+	 * @return string
+	 */
 	function mb_strtolower($str)
 	{
 		return utf8_strtolower($str);
 	}
 
-	// mb_strtoupper
+	/**
+	 * Make a string uppercase
+	 * @param string
+	 * @return string
+	 */
 	function mb_strtoupper($str)
 	{
 		return utf8_strtoupper($str);
 	}
 
-	// mb_substr
+	/**
+	 * Return a substring of a string
+	 * @param string
+	 * @param integer
+	 * @param integer
+	 * @return string
+	 */
 	function mb_substr($str, $start, $length=null)
 	{
 		if ($length === null)
@@ -711,7 +772,13 @@ if (!USE_MBSTRING)
 		return utf8_substr($str, $start, $length);
 	}
 
-	// mb_substr_count
+	/**
+	 * Count the number of substring occurrences
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_substr_count($haystack, $needle, $offset=null)
 	{
 		if ($offset === null)

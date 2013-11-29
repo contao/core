@@ -60,7 +60,7 @@
         <source>Minify the markup</source>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

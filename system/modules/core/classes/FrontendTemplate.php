@@ -114,7 +114,7 @@ class FrontendTemplate extends \Template
 			}
 
 			// Store mobile pages separately
-			if ($objPage->mobileLayout && \Environment::get('agent')->mobile)
+			if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 			{
 				$strCacheKey .= '.mobile';
 			}

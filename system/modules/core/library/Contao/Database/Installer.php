@@ -88,7 +88,7 @@ class Installer extends \Controller
 					$return .= '
     <tr>
       <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').'></td>
-      <td class="tl_col_2'.((stristr($vv, '_backup') !== false) ? ' backup' : '').'"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
+      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
     </tr>';
 				}
 			}

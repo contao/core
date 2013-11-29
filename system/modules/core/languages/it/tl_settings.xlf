@@ -78,8 +78,8 @@
         <target>Minimizza il codice html</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>Minimizza il codice HTML prima che la pagina venga inviata al browser (richiede la presenza dell'estensione tidy di PHP).</target>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Minimizza il codice HTML prima che la pagina venga inviata al browser.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

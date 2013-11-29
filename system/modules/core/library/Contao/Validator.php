@@ -261,7 +261,7 @@ class Validator
 
 
 	/**
-	 * Valid an UUID
+	 * Valid UUID
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *

@@ -78,8 +78,8 @@
         <target>Opmaak comprimeren</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>Comprimeer de HTML-opmaak voordat deze verstuurd wordt naar de browser (vereist PHP tidy extensie).</target>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Verklein de HTML-opmaak voordat deze verstuurd wordt naar de browser.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

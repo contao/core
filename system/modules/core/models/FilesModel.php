@@ -117,7 +117,7 @@ class FilesModel extends \Model
 			$strUuid = \String::uuidToBin($strUuid);
 		}
 
-		return static::findOneBy(array("HEX($t.uuid)=?"), bin2hex($strUuid), $arrOptions);
+		return static::findOneBy(array("$t.uuid=UNHEX(?)"), bin2hex($strUuid), $arrOptions);
 	}
 
 
@@ -146,15 +146,15 @@ class FilesModel extends \Model
 				$v = \String::uuidToBin($v);
 			}
 
-			$arrUuids[$k] = bin2hex($v);
+			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
 		}
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
+			$arrOptions['order'] = "$t.uuid!=" . implode(", $t.uuid!=", $arrUuids);
 		}
 
-		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "')"), null, $arrOptions);
+		return static::findBy(array("$t.uuid IN(" . implode(",", $arrUuids) . ")"), null, $arrOptions);
 	}
 
 
@@ -224,14 +224,24 @@ class FilesModel extends \Model
 		}
 
 		$t = static::$strTable;
-		$arrUuids = array_map('bin2hex', $arrUuids);
+
+		foreach ($arrUuids as $k=>$v)
+		{
+			// Convert UUIDs to binary
+			if (strlen($v) == 36)
+			{
+				$v = \String::uuidToBin($v);
+			}
+
+			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
+		}
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("HEX($t.uuid)", $arrUuids);
+			$arrOptions['order'] = "$t.uuid!=" . implode(", $t.uuid!=", $arrUuids);
 		}
 
-		return static::findBy(array("HEX($t.uuid) IN('" . implode("','", $arrUuids) . "') AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
+		return static::findBy(array("$t.uuid IN(" . implode(",", $arrUuids) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 
 

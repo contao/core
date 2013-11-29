@@ -1235,6 +1235,9 @@ Library.
                       <div class="tl_checkbox_container" style="margin-top:3px">
                         <input type="checkbox" name="preserve" id="ctrl_preserve" class="tl_checkbox" value="1"> <label for="ctrl_preserve"><?php echo $GLOBALS['TL_LANG']['tl_install']['doNotTruncate']; ?></label>
                       </div>
+                      <div class="tl_checkbox_container" style="margin-top:3px">
+                        <input type="checkbox" name="override" id="ctrl_override" class="tl_checkbox" value="1"> <label for="ctrl_override"><?php echo $GLOBALS['TL_LANG']['tl_install']['repOverride']; ?></label>
+                      </div>
                     </div>
                     <div class="tl_formbody_submit">
                       <div class="tl_submit_container">
