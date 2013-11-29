@@ -78,8 +78,7 @@
         <target>Markup sűrítése</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>Sűrítse a HTML markup-ot mielőtt a böngészönek elküldi (ehez a PHP tidy bővítés szükséges).</target>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

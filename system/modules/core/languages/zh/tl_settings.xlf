@@ -78,8 +78,7 @@
         <target>精简标记</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>在HTML标记发送至浏览器前将其精简(需要PHP tidy扩展)</target>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

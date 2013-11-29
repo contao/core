@@ -1757,6 +1757,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao beží momentálne v &lt;strong&gt;móde údržby&lt;/strong&gt;. Webstránka (front end) nie je pre používateľov dostupná. Nevypínajte mód údržby ak práve inštalujete alebo aktualizujete rozšírenia! Webstránka by sa nemusela zobrazovať správne.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1860,6 +1861,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.ptable">
         <source>Parent table</source>
+        <target>Rodičovská tabuľka</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

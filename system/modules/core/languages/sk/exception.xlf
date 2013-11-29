@@ -87,39 +87,51 @@
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
+        <target>Požadovaná stránka neexistuje pod touto doménou.</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Skúste &lt;a href=&quot;%s&quot;&gt;prejsť na najvyššiu úroveň stránky&lt;/a&gt; a použite funkciu vyhľadávania (ak existuje) aby ste našli požadovanú stránku. Alebo &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu stránky&lt;/a&gt; a oznámte mu nefunkčnosť stránky.</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
+        <target>Nenašla sa stránka kam ste boli presmerovaný</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>Aplikácia bola nakonfigurovaná tak aby presmerovala žiadosť na ďalšiu stránku. Napriek tomu cieľová stránka neexistuje alebo zatiaľ nebola publikovaná.</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>Tento problém môže opraviť iba správca stránky. Ak ste návštevník, nemôžete s týmto problémom nič spraviť okrem &lt;a href=&quot;%s&quot;&gt;kontaktovania správcu&lt;/a&gt; stránky a oznámením problému.</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>Nebola nájdená žiadna hlavná stránka</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>Neexistuje žiadna hlavná stránka, ktorá by sa zhodovala s požadovanou jazykovou verziu alebo doménou stránky.</target>
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Ak ste špecifikovali jazyk, skúste &lt;a href=&quot;%s&quot;&gt;prejsť na najvyššiu úroveň web stránky&lt;/a&gt; a overte, či ste správne presmerovaný. V opačnom prípade &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt; a zašlite mu odkaz o chybe.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>Nie je špecifikované rozloženie stránky</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>K požadovanej stránke nebolo priradené žiadne rozloženie stránky.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Uistite sa, že ste priradili rozloženie stránky (layout) každej hlavnej stránke (root page) v štruktúre stránok.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Pre viac informácii použite &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;manuál Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
@@ -127,24 +139,31 @@
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>Požadovaná web stránka zatiaľ neobsahuje žiadne publikované stránky.</target>
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>Web stránka je pravdepodobne stále vo výstavbe a bude dostupná o niekoľko dní. Ak máte pocit, že sa jedná o chybu &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
+        <target>Odmietnutý prístup</target>
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Nemáte povolenie na prístup k požadovanej stránke.</target>
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>Ak nie ste prihlásený, skúste prejsť na &lt;a href=&quot;%s&quot;&gt;najvyššiu úroveň web stránky&lt;/a&gt; a prihláste sa. Ak nenájdete možnosť prihlásenia alebo ste už prihlásený &lt;a href=&quot;%s&quot;&gt;kontaktujte správcu web stránky&lt;/a&gt; a zanechajte mu správu o chybe.</target>
       </trans-unit>
       <trans-unit id="XPT.unavailable">
         <source>We'll be right back</source>
+        <target>Stránka bude k dispozícii o niekoľko minút</target>
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Web stránka je momentálne v procese údržby. Navštívte ju prosím za krátky okamih opäť.</target>
       </trans-unit>
     </body>
   </file>

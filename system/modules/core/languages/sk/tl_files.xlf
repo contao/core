@@ -151,9 +151,11 @@
       </trans-unit>
       <trans-unit id="tl_files.show.0">
         <source>File or folder details</source>
+        <target>Detaily súboru alebo priečinku</target>
       </trans-unit>
       <trans-unit id="tl_files.show.1">
         <source>Show the details of file or folder &quot;%s&quot;</source>
+        <target>Zobrazí detaily súboru alebo priečinku &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
