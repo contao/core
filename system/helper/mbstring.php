@@ -418,7 +418,7 @@ function utf8_strtoupper($str)
 
 
 /**
- * Return part of a string
+ * Return substring of a string
  *
  * Use mb_substr() if available since it is about three times faster than
  * our workaround. Otherwise, use PCRE regular expressions with 'u' flag.
