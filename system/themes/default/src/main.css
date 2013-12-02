@@ -355,6 +355,7 @@ h2.sub_headline_index {
 	border-top:1px solid #bbb;
 }
 .popup .tl_formbody_submit {
+	z-index:5;
 	position:fixed;
 	left:0;
 	bottom:0;

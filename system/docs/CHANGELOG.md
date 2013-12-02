@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Prevent the ACE editor from overlapping the modal window (see #6497).
+
+### Fixed
 Use the default back end theme when running in safe mode (see #6505).
 
 
