@@ -104,22 +104,22 @@ window.addEvent('domready', function() {
     }
   });
 
+  editor.getSession().on('change', function() {
+    ta.value = editor.getValue();
+  });
+
   // Disable command conflicts with AltGr (see #5792)
   editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null)
-
-  var updateTextarea = function() {
-    ta.value = editor.getValue();
-  };
-
-  editor.getSession().on('change', updateTextarea);
 
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
       * editor.renderer.lineHeight
+      - editor.renderer.$padding - 2
       + editor.renderer.scrollBar.getWidth();
-    var setHeight = Math.max(newHeight, editor.container.getStyle('height'));
-    editor.container.setStyle('height', setHeight.toString() + 'px');
+    var minHeight = editor.renderer.lineHeight - editor.renderer.$padding - 2;
+    if (newHeight < minHeight) newHeight = minHeight;
+    editor.container.setStyle('height', newHeight + 'px');
     editor.resize();
   };
 
