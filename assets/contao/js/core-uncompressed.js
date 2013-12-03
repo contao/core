@@ -701,9 +701,28 @@ var AjaxRequest =
  */
 var Backend =
 {
+	/**
+	 * The current ID
+	 * @member {string}
+	 */
 	currentId: null,
+
+	/**
+	 * The x mouse position
+	 * @member {integer}
+	 */
 	xMousePosition: 0,
+
+	/**
+	 * The Y mouse position
+	 * @member {integer}
+	 */
 	yMousePosition: 0,
+
+	/**
+	 * The popup window
+	 * @member {object}
+	 */
 	popupWindow: null,
 
 	/**
@@ -1994,12 +2013,25 @@ if (Browser.Features.Touch) (function() {
  */
 var TinyCallback =
 {
+	/**
+	 * Set the scroll offset upon focus
+	 *
+	 * @param {object} el The DOM element
+	 */
 	getScrollOffset: function(ed) {
 		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();
 	    });
 	},
 
+	/**
+	 * Add a custom file browser
+	 *
+	 * @param {string} field_name The field name
+	 * @param {object} url        An URI object
+	 * @param {string} type       The picker type
+	 * @param {object} win        The window object
+	 */
 	fileBrowser: function(field_name, url, type, win) {
 		var M = new SimpleModal({
 			'width': 765,

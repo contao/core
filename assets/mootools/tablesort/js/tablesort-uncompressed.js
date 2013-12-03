@@ -10,10 +10,23 @@
 
 
 /**
- * Current index
+ * The current sort index
+ * @var {integer}
  */
 var SORT_INDEX;
+
+
+/**
+ * The default thousands separator
+ * @var {string}
+ */
 var THOUSANDS_SEPARATOR = ',';
+
+
+/**
+ * The default decimal separator
+ * @var {string}
+ */
 var DECIMAL_SEPARATOR = '.';
 
 
@@ -28,9 +41,10 @@ var TableSort = new Class(
 {
 	/**
 	 * Initialize the object
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} table              The DOM element
+	 * @param {string} thousandsSeparator The thousands separator
+	 * @param {string} decimalSeparator   The decimal separator
 	 */
 	initialize: function(table, thousandsSeparator, decimalSeparator) {
 		if (thousandsSeparator) {
@@ -83,8 +97,9 @@ var TableSort = new Class(
 
 	/**
 	 * Resort the table
-	 * @param integer
-	 * @param object
+	 *
+	 * @param {integer} index The current index
+	 * @param {object}  el    The DOM element
 	 */
 	resort: function(index, el) {
 		var col = $(el);
@@ -209,9 +224,11 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two dates
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first date
+	 * @param {string} b The second date
+	 *
+	 * @returns {integer}
 	 */
 	sortDate: function(a, b) {
 		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
@@ -243,9 +260,11 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two numbers
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first number
+	 * @param {string} b The second number
+	 *
+	 * @returns {integer}
 	 */
 	sortNumeric: function(a, b) {
 		var rgxp = new RegExp('\\' + THOUSANDS_SEPARATOR, 'g');
@@ -278,9 +297,11 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two strings
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first string
+	 * @param {string} b The second string
+	 *
+	 * @returns {integer}
 	 */
 	sortCaseInsensitive: function(a, b) {
 		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();

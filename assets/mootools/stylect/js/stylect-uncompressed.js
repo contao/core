@@ -21,40 +21,52 @@ var Stylect =
 {
 	/**
 	 * Check for WebKit
-	 */
+	 * @member {boolean}
+ 	 */
 	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
 
 	/**
 	 * Create the div template
-	 */
+	 * @member {string}
+ 	 */
 	template: new Element('div', {
 		'class': 'styled_select',
 		'html': '<span></span><b><i></i></b>'
 	}),
 
 	/**
-	 * Change event
+	 * Respond to the change event
+	 *
+	 * @param {object} div The DOM element
+	 * @param {object} el  The DOM element
 	 */
 	change: function(div, el) {
 		div.getElement('span').set('text', el.getElement('option[value=' + el.value + ']').get('text'));
 	},
 
 	/**
-	 * Keydown event
+	 * Respond to the keydown event
+	 *
+	 * @param {object} div The DOM element
+	 * @param {object} el  The DOM element
 	 */
 	keydown: function(div, el) {
 		setTimeout(function() { Stylect.change(div, el); }, 100);
 	},
 
 	/**
-	 * Focus event
+	 * Respond to the focus event
+	 *
+	 * @param {object} div The DOM element
 	 */
 	focus: function(div) {
 		div.addClass('focused');
 	},
 
 	/**
-	 * Blur event
+	 * Respond to the blur event
+	 *
+	 * @param {object} div The DOM element
 	 */
 	blur: function(div) {
 		div.removeClass('focused');
@@ -128,9 +140,13 @@ var Stylect =
 	}
 };
 
+
+// Convert selects upon domready
 window.addEvent('domready', function() {
 	Stylect.convertSelects();
 });
+
+// Convert selects upon Ajax changes
 window.addEvent('ajax_change', function() {
 	Stylect.convertSelects();
 });
