@@ -240,12 +240,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'tokenWhitelist' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['tokenWhitelist'],
-			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:60px'),
-		),
 		'allowedTags' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedTags'],
