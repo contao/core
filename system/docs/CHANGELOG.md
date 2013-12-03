@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.2 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Use an auto-resizing textarea to store CSS selectors.
+
 ### Updated
 Updated the ACE editor to version 1.1.2.
 
