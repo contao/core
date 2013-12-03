@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Hide records with only one version from the "changed elements" overview.
+
+### Fixed
 Use an auto-resizing textarea to store CSS selectors.
 
 ### Updated
