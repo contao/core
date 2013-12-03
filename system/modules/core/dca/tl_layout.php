@@ -347,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px', 'preserveTags'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:60px', 'preserveTags'=>true, 'rte'=>'ace|html', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'addJQuery' => array
@@ -424,7 +424,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:120px', 'preserveTags'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('style'=>'height:120px', 'preserveTags'=>true, 'rte'=>'ace|html', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'static' => array

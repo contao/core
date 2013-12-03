@@ -521,7 +521,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['flashJS'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('class'=>'monospace'),
+			'eval'                    => array('class'=>'monospace', 'rte'=>'ace|js'),
 			'sql'                     => "text NULL"
 		),
 		'imgSize' => array
