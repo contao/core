@@ -91,6 +91,8 @@ window.addEvent('domready', function() {
 
   var editor = ace.edit('<?php echo $arrField['id']; ?>_div');
   editor.setTheme("ace/theme/clouds");
+  editor.renderer.setScrollMargin(3, 3, 0, 0);
+  editor.renderer.scrollBy(0, -6);
   editor.getSession().setValue(ta.value);
   editor.getSession().setMode("ace/mode/<?php echo $arrField['type']; ?>");
   editor.getSession().setUseSoftTabs(false);
@@ -104,6 +106,10 @@ window.addEvent('domready', function() {
     }
   });
 
+  editor.on('focus', function() {
+    Backend.getScrollOffset();
+  });
+
   editor.getSession().on('change', function() {
     ta.value = editor.getValue();
   });
@@ -115,11 +121,8 @@ window.addEvent('domready', function() {
     var newHeight
       = editor.getSession().getScreenLength()
       * editor.renderer.lineHeight
-      - editor.renderer.$padding - 2
       + editor.renderer.scrollBar.getWidth();
-    var minHeight = editor.renderer.lineHeight - editor.renderer.$padding - 2;
-    if (newHeight < minHeight) newHeight = minHeight;
-    editor.container.setStyle('height', newHeight + 'px');
+    editor.container.setStyle('height', Math.max(newHeight, editor.renderer.lineHeight) + 'px');
     editor.resize();
   };
 

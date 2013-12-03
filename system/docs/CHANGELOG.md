@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.2 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated the ACE editor to version 1.1.2.
+
 ### Fixed
 Prevent the ACE editor from overlapping the modal window (see #6497).
 
