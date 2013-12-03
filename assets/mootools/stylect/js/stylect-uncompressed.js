@@ -41,7 +41,8 @@ var Stylect =
 	 * @param {object} el  The DOM element
 	 */
 	change: function(div, el) {
-		div.getElement('span').set('text', el.getElement('option[value=' + el.value + ']').get('text'));
+		var opt = el.getElement('option[value=' + el.value + ']');
+		opt && div.getElement('span').set('text', opt.get('text'));
 	},
 
 	/**
