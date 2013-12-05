@@ -204,7 +204,7 @@ $GLOBALS['TL_CONFIG']['uploadTypes']
 	= 'jpg,jpeg,gif,png,ico,'
 	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,csv,'
 	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
-	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,'
+	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,fla,flv,swf,'
 	. 'css,js,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
@@ -309,7 +309,7 @@ $GLOBALS['TL_CONFIG']['allowedDownload']
 	= 'jpg,jpeg,gif,png,'
 	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,'
 	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
-	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,'
+	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,'
 	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
