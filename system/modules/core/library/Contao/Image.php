@@ -363,6 +363,12 @@ class Image
 			return null;
 		}
 
+		// Check if we should return a progressive JPEG
+		if($GLOBALS['TL_CONFIG']['useProgressiveJpegs'])
+		{
+			imageinterlace($strNewImage, true);
+		}
+
 		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
 
 		// Fallback to PNG if GIF ist not supported
