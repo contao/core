@@ -145,7 +145,7 @@ class Calendar extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/events/%s'), $objParent->language);
 					}
 				}
 
@@ -319,7 +319,7 @@ class Calendar extends \Frontend
 					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
 
 					// Generate the URL
-					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/events/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objCalendar->jumpTo];

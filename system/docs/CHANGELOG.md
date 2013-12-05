@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle URLs if page aliases are disabled (see #6502).
+
+### Fixed
 Handle UUIDs in `Model::getRelated()` (see #6525).
 
 ### Fixed

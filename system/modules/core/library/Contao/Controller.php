@@ -1091,7 +1091,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1147,7 +1147,7 @@ abstract class Controller extends \System
 					{
 						if (($objArchive = $objNews->getRelated('pid')) !== null && ($objJumpTo = $objArchive->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 						}
 					}
 
@@ -1205,7 +1205,7 @@ abstract class Controller extends \System
 					{
 						if (($objCalendar = $objEvent->getRelated('pid')) !== null && ($objJumpTo = $objCalendar->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 						}
 					}
 
