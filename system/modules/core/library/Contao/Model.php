@@ -368,7 +368,7 @@ abstract class Model
 				return $this;
 			}
 
-			$intPk  = $this->{static::$strPk};
+			$intPk = $this->{static::$strPk};
 
 			// Track primary key changes
 			if (isset($this->arrModified[static::$strPk]))
