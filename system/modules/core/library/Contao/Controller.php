@@ -2608,10 +2608,13 @@ abstract class Controller extends \System
 			}
 		}
 
+		// Do not override the "href" key (see #6468)
+		$strHrefKey = ($objTemplate->href != '') ? 'imageHref' : 'href';
+
 		// Image link
 		if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $arrItem['imageUrl'];
+			$objTemplate->$strHrefKey = $arrItem['imageUrl'];
 			$objTemplate->attributes = '';
 
 			if ($arrItem['fullsize'])
@@ -2622,7 +2625,7 @@ abstract class Controller extends \System
 					// Do not add the TL_FILES_URL to external URLs (see #4923)
 					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
 					{
-						$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
+						$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
 					}
 
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
@@ -2637,7 +2640,7 @@ abstract class Controller extends \System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
+			$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 

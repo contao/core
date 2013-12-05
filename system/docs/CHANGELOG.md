@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not override the "href" property in `addImageToTemplate()` (see #6468).
+
+### Fixed
 Correctly handle URLs if page aliases are disabled (see #6502).
 
 ### Fixed
