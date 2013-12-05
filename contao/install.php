@@ -834,16 +834,16 @@ class InstallTool extends Backend
 	 */
 	protected function enableSafeMode()
 	{
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
-		{
-			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
-		}
-
 		if (!$GLOBALS['TL_CONFIG']['maintenanceMode'])
 		{
 			$GLOBALS['TL_CONFIG']['maintenanceMode'] = true;
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+		}
+
+		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'] && count(array_diff(scan(TL_ROOT . '/system/modules'), array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'))) > 0)
+		{
+			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
 		}
 	}
 
