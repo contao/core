@@ -20,6 +20,10 @@
 .styled_select.focused {
 	background-color:#ebfdd7;
 }
+.webkit .styled_select.focused {
+	outline-offset:-2px;
+	outline:auto 5px -webkit-focus-ring-color;
+}
 .styled_select.disabled {
 	color:#bbb;
 	background-color:#f9f9f9;
