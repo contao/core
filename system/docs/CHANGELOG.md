@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Handle UUIDs in `Model::getRelated()` (see #6525).
+
+### Fixed
 Hide records with only one version from the "changed elements" overview.
 
 ### Fixed
