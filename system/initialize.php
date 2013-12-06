@@ -160,7 +160,10 @@ elseif (isset($_SESSION['TL_LANGUAGE']))
 }
 else
 {
-	foreach (Environment::get('httpAcceptLanguage') as $v)
+	// set fallback language if httpAcceptLanguage is empty
+	$languages = Environment::get('httpAcceptLanguage') ?: array('en'):
+	
+	foreach ($languages as $v)
 	{
 		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
 		{
@@ -170,6 +173,7 @@ else
 		}
 	}
 
+	unset($languages);
 	unset($v);
 }
 
