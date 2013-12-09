@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not require a foreign key to define a relation in the DCA (see #6524).
+
+### Fixed
 Use UUIDs as parent IDs in `Dbafs::addResource()` (see #6532).
 
 ### Fixed
