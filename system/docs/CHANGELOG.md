@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the default language (see #6533).
+
+### Fixed
 Correctly update the order fields in the database updater (see #6534).
 
 ### Fixed

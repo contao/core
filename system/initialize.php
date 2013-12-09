@@ -160,6 +160,7 @@ elseif (isset($_SESSION['TL_LANGUAGE']))
 }
 else
 {
+	// Check the user languages
 	foreach (Environment::get('httpAcceptLanguage') as $v)
 	{
 		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
@@ -168,6 +169,13 @@ else
 			$_SESSION['TL_LANGUAGE'] = $v;
 			break;
 		}
+	}
+
+	// Fallback to English (see #6533)
+	if (!$_SESSION['TL_LANGUAGE'])
+	{
+		$GLOBALS['TL_LANGUAGE'] = 'en';
+		$_SESSION['TL_LANGUAGE'] = 'en';
 	}
 
 	unset($v);
