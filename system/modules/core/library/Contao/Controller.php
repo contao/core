@@ -1361,13 +1361,8 @@ abstract class Controller extends \System
 					{
 						for (; $_rit<$_cnt; $_rit+=3)
 						{
-							if ($tags[$_rit+1] == 'iflng')
+							if ($tags[$_rit+1] == 'iflng' || $tags[$_rit+1] == 'iflng::' . $objPage->language)
 							{
-								break;
-							}
-							elseif (strncmp($tags[$_rit+1], 'iflng::', 7) === 0)
-							{
-								$_rit += 3;
 								break;
 							}
 						}
@@ -1387,11 +1382,6 @@ abstract class Controller extends \System
 							{
 								if ($tags[$_rit+1] == 'ifnlng')
 								{
-									break;
-								}
-								elseif (strncmp($tags[$_rit+1], 'ifnlng::', 8) === 0)
-								{
-									$_rit += 3;
 									break;
 								}
 							}

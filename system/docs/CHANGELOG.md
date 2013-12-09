@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly support insert tags nested in shortened "iflng" tags (see #6509).
+
+### Fixed
 Do not require a foreign key to define a relation in the DCA (see #6524).
 
 ### Fixed
@@ -249,8 +252,8 @@ Correctly handle slashes and empty strings in the TinyMCE link tab.
 Order the template list alphabetically (see #6276).
 
 ### Improved
-Simplified the "iflng" and "ifnlng" insert tags (see #6291). You can now omit
-every closing `{{iflng}}` tag but the last one, e.g.:
+Simplified the "iflng" insert tags (see #6291). You can now omit every closing
+`{{iflng}}` tag but the last one, e.g.:
 
 ```
 {{iflng::de}}Hallo Welt{{iflng::en}}Hello world{{iflng}}
