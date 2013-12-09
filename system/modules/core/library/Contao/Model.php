@@ -368,7 +368,7 @@ abstract class Model
 				return $this;
 			}
 
-			$intPk  = $this->{static::$strPk};
+			$intPk = $this->{static::$strPk};
 
 			// Track primary key changes
 			if (isset($this->arrModified[static::$strPk]))
@@ -530,17 +530,26 @@ abstract class Model
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
 
-			$arrOptions = array_merge
-			(
-				array
+			// Handle UUIDs (see #6525)
+			if ($strField == 'tl_files.uuid')
+			{
+				$objModel = $strClass::findMultipleByUuids($arrValues, $arrOptions);
+			}
+			else
+			{
+				$arrOptions = array_merge
 				(
-					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
-				),
+					array
+					(
+						'order' => \Database::getInstance()->findInSet($strField, $arrValues)
+					),
 
-				$arrOptions
-			);
+					$arrOptions
+				);
 
-			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, $arrOptions);
+				$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, $arrOptions);
+			}
+
 			$this->arrRelated[$strKey] = $objModel;
 		}
 

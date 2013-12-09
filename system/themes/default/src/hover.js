@@ -147,6 +147,43 @@ var Theme = {
 				});
 			}
 		});
+	},
+
+	/**
+	 * Set up the textarea resizing
+	 */
+	setupTextareaResizing: function() {
+		$$('.tl_textarea').each(function(el) {
+			if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+			if (el.hasClass('noresize') || el.retrieve('autogrow')) return;
+
+			// Set up the dummy element
+			var dummy = new Element('div', {
+				html: 'X',
+				styles: {
+					'position':'absolute',
+					'top':0,
+					'left':'-999em',
+					'overflow-x':'hidden'
+				}
+			}).setStyles(
+				el.getStyles('font-size', 'font-family', 'width', 'line-height')
+			).inject(document.body);
+
+			// Single line height
+			var line = dummy.clientHeight;
+
+			// Respond to the "input" event
+			el.addEvent('input', function() {
+				dummy.set('html', this.get('value').replace(/\n|\r\n/g, '<br>X'));
+				var height = Math.max(line, dummy.getSize().y);
+				if (this.clientHeight != height) this.tween('height', height);
+			}).set('tween', { 'duration':100 }).setStyle('height', line + 'px');
+
+			// Fire the event
+			el.fireEvent('input');
+			el.store('autogrow', true);
+		});
 	}
 };
 
@@ -155,10 +192,12 @@ window.addEvent('domready', function() {
 	Theme.fixLabelLastChild();
 	Theme.stopClickPropagation();
 	Theme.setupCtrlClick();
+	Theme.setupTextareaResizing();
 });
 
 // Respond to Ajax changes
 window.addEvent('ajax_change', function() {
 	Theme.stopClickPropagation();
 	Theme.setupCtrlClick();
+	Theme.setupTextareaResizing();
 });

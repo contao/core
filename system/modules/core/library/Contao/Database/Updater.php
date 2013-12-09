@@ -897,8 +897,11 @@ class Updater extends \Controller
 		}
 
 		// Convert the comma separated lists into serialized arrays
-		$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-					->execute(serialize(explode(',', $objRow->$field)), $objRow->id);
+		while ($objRow->next())
+		{
+			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
+						->execute(serialize(explode(',', $objRow->$field)), $objRow->id);
+		}
 
 		static::convertMultiField($table, $field);
 	}

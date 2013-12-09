@@ -209,7 +209,7 @@ class Form extends \Hybrid
 					continue;
 				}
 
-				if ($objWidget->name != '')
+				if ($objWidget->name != '' && $objWidget->label != '')
 				{
 					$arrLabels[$objWidget->name] = $this->replaceInsertTags($objWidget->label); // see #4268
 				}

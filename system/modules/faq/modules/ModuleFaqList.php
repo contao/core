@@ -154,7 +154,7 @@ class ModuleFaqList extends \Module
 
 				if ($objTarget !== null)
 				{
-					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s')));
+					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/items/%s')));
 				}
 			}
 		}

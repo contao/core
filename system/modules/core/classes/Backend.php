@@ -46,6 +46,11 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTheme()
 	{
+		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		{
+			return 'default'; // see #6505
+		}
+
 		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
 
 		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))

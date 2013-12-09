@@ -1,6 +1,49 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.2 (2013-12-09)
+--------------------------
+
+### Fixed
+Correctly support insert tags nested in shortened "iflng" tags (see #6509).
+
+### Fixed
+Do not require a foreign key to define a relation in the DCA (see #6524).
+
+### Fixed
+Use UUIDs as parent IDs in `Dbafs::addResource()` (see #6532).
+
+### Fixed
+Correctly set the default language (see #6533).
+
+### Fixed
+Correctly update the order fields in the database updater (see #6534).
+
+### Fixed
+Do not override the "href" property in `addImageToTemplate()` (see #6468).
+
+### Fixed
+Correctly handle URLs if page aliases are disabled (see #6502).
+
+### Fixed
+Handle UUIDs in `Model::getRelated()` (see #6525).
+
+### Fixed
+Hide records with only one version from the "changed elements" overview.
+
+### Fixed
+Use an auto-resizing textarea to store CSS selectors.
+
+### Updated
+Updated the ACE editor to version 1.1.2.
+
+### Fixed
+Prevent the ACE editor from overlapping the modal window (see #6497).
+
+### Fixed
+Use the default back end theme when running in safe mode (see #6505).
+
+
 Version 3.2.1 (2013-11-29)
 --------------------------
 
@@ -209,8 +252,8 @@ Correctly handle slashes and empty strings in the TinyMCE link tab.
 Order the template list alphabetically (see #6276).
 
 ### Improved
-Simplified the "iflng" and "ifnlng" insert tags (see #6291). You can now omit
-every closing `{{iflng}}` tag but the last one, e.g.:
+Simplified the "iflng" insert tags (see #6291). You can now omit every closing
+`{{iflng}}` tag but the last one, e.g.:
 
 ```
 {{iflng::de}}Hallo Welt{{iflng::en}}Hello world{{iflng}}

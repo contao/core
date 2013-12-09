@@ -167,7 +167,7 @@ class Dbafs
 				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFile->path] = $objModel->id;
+				$arrPids[$objFile->path] = $objModel->uuid;
 			}
 			else
 			{
@@ -184,7 +184,7 @@ class Dbafs
 				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFolder->path] = $objModel->id;
+				$arrPids[$objFolder->path] = $objModel->uuid;
 			}
 
 			// Store the model to be returned (see #5979)

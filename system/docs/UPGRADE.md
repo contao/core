@@ -4,6 +4,33 @@ Contao Open Source CMS API changes
 Version 3.1 to 3.2
 ------------------
 
+### `Controller::addImageToTemplate()`
+
+Before Contao 3.2.2, the `addImageToTemplate()` method would override the "href"
+property with the image URL or link target even if the property was set already.
+This was causing issues in the event templates, which use the "href" property to
+store the event details URL.
+
+Therefore, if the "href" property is set, the `addImageToTemplate()` method will
+store the image URL or link target in the "imageHref" property instead. However,
+this requires to adjust custom `event_*` templates which render the event image.
+Note that this does not affect the core templates.
+
+Usage before version 3.2.2:
+
+```php
+<h2><a href="<?php echo $this->href; ?>Event title</a></h2>
+<p><a href="<?php echo $this->href; ?>"><img src="..."></a></p>
+```
+
+New usage as of version 3.2.2:
+
+```php
+<h2><a href="<?php echo $this->href; ?>Event title</a></h2>
+<p><a href="<?php echo $this->imageHref; ?>"><img src="..."></a></p>
+```
+
+
 ### `FilesModel::findByPk()`
 
 Before Contao 3.2, fields like `$this->singleSRC` and `$this->multiSRC` were

@@ -174,7 +174,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true),
+			'eval'                    => array('decodeEntities'=>true, 'class'=>'noresize'),
 			'sql'                     => "mediumtext NULL"
 		),
 		'addFile' => array
