@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly update the order fields in the database updater (see #6534).
+
+### Fixed
 Do not override the "href" property in `addImageToTemplate()` (see #6468).
 
 ### Fixed
