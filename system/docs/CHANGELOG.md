@@ -5,6 +5,9 @@ Version 3.2.2 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Use UUIDs as parent IDs in `Dbafs::addResource()` (see #6532).
+
+### Fixed
 Correctly set the default language (see #6533).
 
 ### Fixed
