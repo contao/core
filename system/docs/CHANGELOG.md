@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle multiple `RadioTable` widgets on the same page (see #6389).
+
+### Fixed
 Fixed two issues with the SQL cache (see #6507).
 
 ### Fixed
