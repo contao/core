@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.3 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Use the related field instead of `id` in the model query builder (see #6540).
+
+
 Version 3.2.2 (2013-12-09)
 --------------------------
 
