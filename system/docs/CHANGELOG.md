@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Do not require a redirect page for newsletter channels (see #6521).
+
+### Fixed
 Use the related field instead of `id` in the model query builder (see #6540).
 
 

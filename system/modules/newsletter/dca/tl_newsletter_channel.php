@@ -146,9 +146,9 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio'),
+			'eval'                    => array('fieldType'=>'radio'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'useSMTP' => array
 		(
