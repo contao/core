@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed two issues with the SQL cache (see #6507).
+
+### Fixed
 Do not require a redirect page for newsletter channels (see #6521).
 
 ### Fixed
