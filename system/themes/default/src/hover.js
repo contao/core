@@ -164,6 +164,7 @@ var Theme = {
 					'position':'absolute',
 					'top':0,
 					'left':'-999em',
+					'white-space':'pre-line',
 					'overflow-x':'hidden'
 				}
 			}).setStyles(
@@ -175,7 +176,7 @@ var Theme = {
 
 			// Respond to the "input" event
 			el.addEvent('input', function() {
-				dummy.set('html', this.get('value').replace(/\n|\r\n/g, '<br>X'));
+				dummy.set('text', this.get('value').replace(/\n|\r\n/g, '\nX'));
 				var height = Math.max(line, dummy.getSize().y);
 				if (this.clientHeight != height) this.tween('height', height);
 			}).set('tween', { 'duration':100 }).setStyle('height', line + 'px');
