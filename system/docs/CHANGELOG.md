@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Support browsers with both mouse and touch support in the back end (see #6520).
+
+### Fixed
 Always throw an exception if a language is not available (see #6542).
 
 ### Fixed

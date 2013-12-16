@@ -1993,18 +1993,6 @@ window.addEvent('ajax_change', function() {
 	}
 });
 
-// Map the touch events to mouse events on mobile devices
-if (Browser.Features.Touch) (function() {
-	delete Element.NativeEvents['mousedown'];
-	Element.defineCustomEvent('mousedown', { base:'touchstart' });
-
-	delete Element.NativeEvents['mousemove'];
-	Element.defineCustomEvent('mousemove', { base:'touchmove' });
-
-	delete Element.NativeEvents['mouseup'];
-	Element.defineCustomEvent('mouseup', { base:'touchend' });
-})();
-
 
 /**
  * Class TinyCallback
