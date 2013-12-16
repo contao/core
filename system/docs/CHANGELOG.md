@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Always throw an exception if a language is not available (see #6542).
+
+### Fixed
 Correctly handle multiple `RadioTable` widgets on the same page (see #6389).
 
 ### Fixed

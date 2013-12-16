@@ -257,17 +257,19 @@ abstract class System
 		{
 			$strShortLang = substr($strLanguage, 0, 2);
 
-			// Fall back to "de" if "de_DE" does not exist
-			if ($strShortLang != $strLanguage)
+			if ($strShortLang == $strLanguage)
 			{
-				if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
-				{
-					throw new \Exception("Language $strLanguage does not exist");
-				}
-				else
-				{
-					$strLanguage = $strShortLang;
-				}
+				throw new \Exception("Language $strLanguage does not exist");
+			}
+
+			// Fall back to "de" if "de_DE" does not exist
+			if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
+			{
+				$strLanguage = $strShortLang;
+			}
+			else
+			{
+				throw new \Exception("Language $strLanguage does not exist");
 			}
 		}
 
