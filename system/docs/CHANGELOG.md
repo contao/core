@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.3 (2013-XX-XX)
 --------------------------
 
+### Fixed
+Correctly show the "read more" link in the news list modules (see #6439).
+
 ### Updated
 Updated html5shiv to version 3.7.0 (see #6543).
 
