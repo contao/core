@@ -1402,6 +1402,7 @@ fieldset.collapsed > legend {
 .pagination {
 	overflow:hidden;
 	background:#f6f6f6;
+	margin-top:6px;
 	border:1px solid #e9e9e9;
 	border-width:1px 0;
 	padding:2px 0 4px;

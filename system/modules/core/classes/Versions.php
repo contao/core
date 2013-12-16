@@ -453,7 +453,7 @@ class Versions extends \Backend
 		$objDatabase = \Database::getInstance();
 
 		// Get the total number of versions
-		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version" . (!$objUser->isAdmin ? " WHERE userid=?" : ""))
+		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
 							    ->execute($objUser->id);
 
 		$intPage   = \Input::get('vp') ?: 1;
