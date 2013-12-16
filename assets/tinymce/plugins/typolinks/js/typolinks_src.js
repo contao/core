@@ -4,7 +4,7 @@
  * Copyright (c) 2005-2013 Leo Feyer
  *
  * @package Typolinks
- * @link    https://contao.org
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -19,7 +19,7 @@ var LinkDialog = {
 	},
 
 	init : function() {
-		var f = document.forms[0], ed = tinyMCEPopup.editor;
+		var f = document.forms[0], ed = tinyMCEPopup.editor, e;
 
 		// Setup browse button
 		document.getElementById('hrefbrowsercontainer').innerHTML = this.getBrowserHTML('hrefbrowser', 'href', 'page', 'theme_advanced_link');
@@ -137,7 +137,7 @@ var LinkDialog = {
 	},
 
 	fillFileList : function(id, l) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
+		var dom = tinyMCEPopup.dom, lst = dom.get(id);
 
 		l = window[l];
 
@@ -152,7 +152,7 @@ var LinkDialog = {
 	},
 
 	fillRelList : function(id) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+		var dom = tinyMCEPopup.dom, lst = dom.get(id);
 
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_single'), 'lightbox');

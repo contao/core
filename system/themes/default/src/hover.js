@@ -15,8 +15,8 @@ var Theme = {
 	/**
 	 * Colorize a table row when hovering over it
 	 *
-	 * @param {object}  el    The DOM element
-	 * @param {integer} state The current state
+	 * @param {object} el    The DOM element
+	 * @param {int}    state The current state
 	 */
 	hoverRow: function(el, state) {
 		var items = $(el).getChildren();
@@ -30,8 +30,8 @@ var Theme = {
 	/**
 	 * Colorize a layer when hovering over it
 	 *
-	 * @param {object}  el    The DOM element
-	 * @param {integer} state The current state
+	 * @param {object} el    The DOM element
+	 * @param {int}    state The current state
 	 */
 	hoverDiv: function(el, state) {
 		if (!state) {
@@ -46,8 +46,7 @@ var Theme = {
 	 * @param {object} el The DOM element
 	 */
 	toggleSelect: function(el) {
-		var input = $(el).getElement('input'),
-			onclick = input.get('onclick');
+		var input = $(el).getElement('input');
 		if (input) {
 			if (input.checked) {
 				if (input.get('type') != 'radio') {
@@ -56,7 +55,7 @@ var Theme = {
 			} else {
 				input.checked = 'checked';
 			}
-			if (onclick == 'Backend.toggleCheckboxes(this)') {
+			if (input.get('onclick') == 'Backend.toggleCheckboxes(this)') {
 				Backend.toggleCheckboxes(input); // see #6399
 			}
 		}
@@ -112,14 +111,13 @@ var Theme = {
 
 			// Set up regular click events on touch devices
 			if (Browser.Features.Touch) {
-				el.addEvent('click', function(e) {
+				el.addEvent('click', function() {
 					if (!el.getAttribute('data-visited')) {
 						el.setAttribute('data-visited', 1);
 					} else {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('edit')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 						el.removeAttribute('data-visited');
@@ -133,14 +131,12 @@ var Theme = {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('editheader')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 					} else if (key) {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('edit')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 					}
