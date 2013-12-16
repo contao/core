@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.3 (2013-XX-XX)
 --------------------------
 
+### Updated
+Updated html5shiv to version 3.7.0 (see #6543).
+
 ### Fixed
 Support browsers with both mouse and touch support in the back end (see #6520).
 
