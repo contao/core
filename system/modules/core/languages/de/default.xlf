@@ -1399,6 +1399,10 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
         <source>Close</source>
         <target>Schließen</target>
       </trans-unit>
+       <trans-unit id="MSC.imageOf">
+         <source>image %s of %s</source>
+         <target>Bild %s von %s</target>
+       </trans-unit>
       <trans-unit id="MSC.skipNavigation">
         <source>Skip navigation</source>
         <target>Navigation überspringen</target>

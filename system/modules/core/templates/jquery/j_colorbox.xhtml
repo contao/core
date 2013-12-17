@@ -12,6 +12,10 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. COLORBOX .'/css/colorbox.min.c
     $(document).ready(function() {
       $('a[rel^=lightbox]').colorbox({
         // Put custom options here
+        previous: '<?php echo $GLOBALS['TL_LANG']['MSC']['previous'] ?>',
+        next: '<?php echo $GLOBALS['TL_LANG']['MSC']['next'] ?>',
+        close: 'close',
+        current: '<?php printf($GLOBALS['TL_LANG']['MSC']['imageOf'],'{current}','{total}') ?>',
         loop: false,
         maxWidth: '95%',
         maxHeight: '95%'
