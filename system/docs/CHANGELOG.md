@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly show the available layout columns in the article module (see #6548).
+
+### Fixed
 Correctly show the "read more" link in the news list modules (see #6439).
 
 ### Updated

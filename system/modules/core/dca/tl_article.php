@@ -616,6 +616,7 @@ class tl_article extends Backend
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
+			$arrSections = array();
 			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
 			// Get the layout sections
@@ -633,8 +634,6 @@ class tl_article extends Backend
 				{
 					continue;
 				}
-
-				$arrSections = array();
 
 				// Header
 				if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
@@ -688,7 +687,7 @@ class tl_article extends Backend
 			$arrSections = array_merge($arrSections, $arrCustom);
 		}
 
-		return $arrSections;
+		return array_unique($arrSections);
 	}
 
 
