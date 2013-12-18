@@ -204,15 +204,7 @@ abstract class Controller extends \System
 					}
 
 					// Add the "first" and "last" classes (see #2583)
-					$arrCss = deserialize($objArticle->cssID);
-
-					if (!is_array($arrCss))
-					{
-						$arrCss = array('', '');
-					}
-
-					$arrCss[1] .= 'first last';
-					$objArticle->cssID = serialize($arrCss);
+					$objArticle->classes = array('first', 'last');
 
 					return $this->getArticle($objArticle);
 				}
@@ -244,36 +236,19 @@ abstract class Controller extends \System
 				// Add the "first" and "last" classes (see #2583)
 				if ($intCount == 0 || $intCount == $intLast)
 				{
-					$arrCss = deserialize($objRow->cssID);
-					$arrTeaserCss = deserialize($objRow->teaserCssID);
-
-					if (!is_array($arrCss))
-					{
-						$arrCss = array('', '');
-					}
-
-					if (!is_array($arrTeaserCss))
-					{
-						$arrTeaserCss = array('', '');
-					}
+					$arrCss = array();
 
 					if ($intCount == 0)
 					{
-						$arrCss[1] .= ' first';
-						$arrTeaserCss[1] .= ' first';
+						$arrCss[] = 'first';
 					}
 
 					if ($intCount == $intLast)
 					{
-						$arrCss[1] .= ' last';
-						$arrTeaserCss[1] .= ' last';
+						$arrCss[] = 'last';
 					}
 
-					$arrCss[1] = trim($arrCss[1]);
-					$objRow->cssID = serialize($arrCss);
-
-					$arrTeaserCss[1] = trim($arrTeaserCss[1]);
-					$objRow->teaserCssID = serialize($arrTeaserCss);
+					$objRow->classes = $arrCss;
 				}
 
 				$return .= $this->getArticle($objRow, $blnMultiMode, false, $strColumn);
