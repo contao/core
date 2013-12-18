@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Always fall back to English if a language does not exist (see #6581).
+
+### Fixed
 Correctly display repeated events in the event list (see #6555).
 
 ### Fixed
@@ -18,9 +21,6 @@ Updated html5shiv to version 3.7.0 (see #6543).
 
 ### Fixed
 Support browsers with both mouse and touch support in the back end (see #6520).
-
-### Fixed
-Always throw an exception if a language is not available (see #6542).
 
 ### Fixed
 Correctly handle multiple `RadioTable` widgets on the same page (see #6389).

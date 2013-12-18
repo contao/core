@@ -228,8 +228,6 @@ abstract class System
 	 * @param string  $strName     The table name
 	 * @param boolean $strLanguage An optional language code
 	 * @param boolean $blnNoCache  If true, the cache will be bypassed
-	 *
-	 * @throws \Exception In case a language does not exist
 	 */
 	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false)
 	{
@@ -257,19 +255,16 @@ abstract class System
 		{
 			$strShortLang = substr($strLanguage, 0, 2);
 
-			if ($strShortLang == $strLanguage)
-			{
-				throw new \Exception("Language $strLanguage does not exist");
-			}
-
 			// Fall back to "de" if "de_DE" does not exist
-			if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
+			if ($strShortLang != $strLanguage && is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
 			{
 				$strLanguage = $strShortLang;
 			}
+
+			// Fall back to English (see #6581)
 			else
 			{
-				throw new \Exception("Language $strLanguage does not exist");
+				$strLanguage = 'en';
 			}
 		}
 
