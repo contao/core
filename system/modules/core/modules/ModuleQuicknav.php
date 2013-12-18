@@ -154,9 +154,6 @@ class ModuleQuicknav extends \Module
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
-					$objSubpages->title = strip_insert_tags($objSubpages->title);
-					$objSubpages->pageTitle = strip_insert_tags($objSubpages->pageTitle);
-
 					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
 
 					// Add the domain if it differs from the current one (see #3765)
@@ -168,9 +165,9 @@ class ModuleQuicknav extends \Module
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),
-						'title' => specialchars($objSubpages->pageTitle ?: $objSubpages->title),
+						'title' => specialchars(strip_insert_tags($objSubpages->pageTitle ?: $objSubpages->title)),
 						'href' => $href,
-						'link' => $objSubpages->title
+						'link' => strip_insert_tags($objSubpages->title)
 					);
 
 					// Subpages

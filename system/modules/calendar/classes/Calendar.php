@@ -416,22 +416,22 @@ class Calendar extends \Frontend
 			$link = $strBase . sprintf($strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
 		}
 
-		// Clean the RTE output
-		if ($objPage->outputFormat == 'xhtml')
-		{
-			$objEvent->teaser = \String::toXhtml($objEvent->teaser);
-		}
-		else
-		{
-			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
-		}
-
 		// Store the whole row (see #5085)
 		$arrEvent = $objEvent->row();
 
 		// Override link and title
 		$arrEvent['link'] = $link;
 		$arrEvent['title'] = $title;
+
+		// Clean the RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$arrEvent['teaser'] = \String::toXhtml($objEvent->teaser);
+		}
+		else
+		{
+			$arrEvent['teaser'] = \String::toHtml5($objEvent->teaser);
+		}
 
 		// Reset the enclosures (see #5685)
 		$arrEvent['enclosure'] = array();

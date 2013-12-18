@@ -119,14 +119,14 @@ class Comments extends \Frontend
 				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objComments->comment = \String::toXhtml($objComments->comment);
+					$objPartial->comment = \String::toXhtml($objComments->comment);
 				}
 				else
 				{
-					$objComments->comment = \String::toHtml5($objComments->comment);
+					$objPartial->comment = \String::toHtml5($objComments->comment);
 				}
 
-				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
+				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objPartial->comment));
 
 				$objPartial->datim = \Date::parse($objPage->datimFormat, $objComments->date);
 				$objPartial->date = \Date::parse($objPage->dateFormat, $objComments->date);
