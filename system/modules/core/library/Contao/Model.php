@@ -91,6 +91,12 @@ abstract class Model
 	 */
 	protected $arrRelated = array();
 
+	/**
+	 * Detached
+	 * @var boolean
+	 */
+	protected $blnDetached = false;
+
 
 	/**
 	 * Load the relations and optionally process a result set
@@ -333,12 +339,20 @@ abstract class Model
 	 * @return \Model The model object
 	 *
 	 * @throws \InvalidArgumentException If an argument is passed
+	 * @throws \LogicException           If the model has been detached
 	 */
 	public function save()
 	{
+		// Deprecated call
 		if (count(func_get_args()))
 		{
 			throw new \InvalidArgumentException('The $blnForceInsert argument has been removed (see system/docs/UPGRADE.md)');
+		}
+
+		// The instance has been detached
+		if ($this->blnDetached)
+		{
+			throw new \LogicException('The model instance has been detached and cannot be saved');
 		}
 
 		$objDatabase = \Database::getInstance();
@@ -463,6 +477,7 @@ abstract class Model
 	{
 		$intPk = $this->{static::$strPk};
 
+		// Track primary key changes
 		if (isset($this->arrModified[static::$strPk]))
 		{
 			$intPk = $this->arrModified[static::$strPk];
@@ -564,6 +579,7 @@ abstract class Model
 	{
 		$intPk = $this->{static::$strPk};
 
+		// Track primary key changes
 		if (isset($this->arrModified[static::$strPk]))
 		{
 			$intPk = $this->arrModified[static::$strPk];
@@ -582,6 +598,7 @@ abstract class Model
 	 */
 	public function detach()
 	{
+		$this->blnDetached = true;
 		\Model\Registry::getInstance()->unregister($this);
 	}
 

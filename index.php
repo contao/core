@@ -118,7 +118,7 @@ class Index extends Frontend
 			}
 			else
 			{
-				$arrLangs = $arrPages['*']; // Empty domain
+				$arrLangs = $arrPages['*']; // empty domain
 			}
 
 			// Use the first result (see #4872)
@@ -159,6 +159,9 @@ class Index extends Frontend
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$objHandler->generate($objPage->id);
 		}
+
+		// Prevent the instance from being saved (see #6506)
+		$objPage->detach();
 
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))

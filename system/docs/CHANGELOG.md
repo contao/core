@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Prevent saving of detached models (see #6506).
+
+### Fixed
 Correctly determine the ACE editor's height (see #6578).
 
 ### Fixed
