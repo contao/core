@@ -161,8 +161,17 @@ class Calendar extends \Frontend
 				// Recurring events
 				if ($objArticle->recurring)
 				{
-					$count = 0;
 					$arrRepeat = deserialize($objArticle->repeatEach);
+
+					if ($arrRepeat['value'] < 1)
+					{
+						continue;
+					}
+
+					$count = 0;
+					$intStartTime = $objArticle->startTime;
+					$intEndTime = $objArticle->endTime;
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
 
 					// Do not include more than 20 recurrences
 					while ($count++ < 20)
@@ -172,17 +181,12 @@ class Calendar extends \Frontend
 							break;
 						}
 
-						$arg = $arrRepeat['value'];
-						$unit = $arrRepeat['unit'];
+						$intStartTime = strtotime($strtotime, $intStartTime);
+						$intEndTime = strtotime($strtotime, $intEndTime);
 
-						$strtotime = '+ ' . $arg . ' ' . $unit;
-
-						$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
-						$objArticle->endTime = strtotime($strtotime, $objArticle->endTime);
-
-						if ($objArticle->startTime >= $time)
+						if ($intStartTime >= $time)
 						{
-							$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+							$this->addEvent($objArticle, $intStartTime, $intEndTime, $strUrl, $strLink);
 						}
 					}
 				}

@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly display repeated events in the event list (see #6555).
+
+### Fixed
 Correctly show the available layout columns in the article module (see #6548).
 
 ### Fixed
