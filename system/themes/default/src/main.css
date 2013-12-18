@@ -1113,6 +1113,9 @@ ul.sortable li {
 	padding:2px 0 3px 20px;
 	background:url("images/back.gif") left center no-repeat;
 }
+.ace_editor {
+	padding:3px;
+}
 .ace_editor * {
 	font-family:Courier,monospace;
 	font-size:12px;

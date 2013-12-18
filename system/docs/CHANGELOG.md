@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly determine the ACE editor's height (see #6578).
+
+### Fixed
 Always fall back to English if a language does not exist (see #6581).
 
 ### Fixed
