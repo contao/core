@@ -636,7 +636,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['isVisibleElement'] as $callback)
 			{
-				$blnReturn = static::importStatic($callback[0])->$callback[1]($objElement, $objReturn);
+				$blnReturn = static::importStatic($callback[0])->$callback[1]($objElement, $blnReturn);
 			}
 		}
 
