@@ -7,7 +7,7 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
 
 <script src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
 <script>
-  (function($) {
+  (function() {
     window.addEvent('domready', function() {
       $$('.ce_sliderStart').each(function(cte) {
         var s = cte.getElement('.content-slider'),
@@ -22,5 +22,5 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
         });
       });
     });
-  })(document.id);
+  })();
 </script>

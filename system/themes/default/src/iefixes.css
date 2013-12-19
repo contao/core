@@ -86,7 +86,7 @@ label.tl_change_selected {
 	margin-top:1px;
 }
 .ie7 .tl_listwizard_img {
-	top:0px;
+	top:0;
 }
 .tl_optionwizard label {
 	position:relative;

@@ -9,7 +9,7 @@
 .mod_repository .nowrap { white-space:nowrap; }
 .mod_repository .middle, .mod_repository .middle * { vertical-align:middle; }
 .mod_repository table.nested { width:100%; margin:0; border:0; }
-.mod_repository table td.nopadding { vertical-align:top; padding:0px !important;}
+.mod_repository table td.nopadding { vertical-align:top; padding:0 !important;}
 .color_green { color:#77ac45; }
 .color_red { color:#c33; }
 .color_blue { color:#4b85ba; }

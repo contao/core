@@ -75,7 +75,7 @@
           new Request.JSON({
             onSuccess: function(txt, json) {
               l.empty() && JSON.decode(json).each(function(v) {
-                var o = new Element('option', {'value':v}).inject(l);
+                new Element('option', {'value':v}).inject(l);
               });
             }
           }).post({'value':u.value,'REQUEST_TOKEN':Contao.request_token});

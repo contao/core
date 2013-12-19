@@ -107,7 +107,7 @@ window.addEvent('domready', function() {
   });
 
   // Disable command conflicts with AltGr (see #5792)
-  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null)
+  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null);
 
   var updateHeight = function() {
     var newHeight
