@@ -1306,16 +1306,8 @@ abstract class Widget extends \Controller
 
 			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
 			{
-				$value = '';
-
-				// Set to 0 for numeric columns (see #6373)
-				if (isset($arrData['sql']))
-				{
-					$value = static::getEmptyValueByFieldType($arrData['sql']);
-				}
-
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrAttributes['options'][] = array('value'=>$value, 'label'=>$strLabel);
+				$arrAttributes['options'][] = array('value'=>'', 'label'=>$strLabel);
 			}
 
 			foreach ($arrData['options'] as $k=>$v)
@@ -1359,11 +1351,27 @@ abstract class Widget extends \Controller
 
 
 	/**
-	 * Check for numeric fields based on the SQL string
+	 * Return the empty value based on the SQL string
+	 *
+	 * @return string|integer|null The empty value
+	 */
+	public function getEmptyValue()
+	{
+		if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']))
+		{
+			return '';
+		}
+
+		return static::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
+	}
+
+
+	/**
+	 * Return the empty value based on the SQL string
 	 *
 	 * @param string $sql The SQL string
 	 *
-	 * @return boolean True if the field is numeric
+	 * @return string|integer|null The empty value
 	 */
 	public static function getEmptyValueByFieldType($sql)
 	{

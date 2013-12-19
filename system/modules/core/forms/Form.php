@@ -453,6 +453,15 @@ class Form extends \Hybrid
 				}
 			}
 
+			// Set the correct empty value (see #6284, #6373)
+			foreach ($arrSet as $k=>$v)
+			{
+				if ($v === '')
+				{
+					$arrSet[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->targetTable]['fields'][$k]['sql']);
+				}
+			}
+
 			// Do not use Models here (backwards compatibility)
 			$this->Database->prepare("INSERT INTO " . $this->targetTable . " %s")->set($arrSet)->execute();
 		}

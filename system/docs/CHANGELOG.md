@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the empty value depending on the DB field (fixes #6550, #6544).
+
+### Fixed
 Prevent saving of detached models (see #6506).
 
 ### Fixed

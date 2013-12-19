@@ -251,6 +251,12 @@ class ModuleRegistration extends \Module
 				}
 				elseif ($objWidget->submitInput())
 				{
+					// Set the correct empty value (see #6284, #6373)
+					if ($varValue === '')
+					{
+						$varValue = $objWidget->getEmptyValue();
+					}
+
 					$arrUser[$field] = $varValue;
 				}
 			}

@@ -248,9 +248,17 @@ class ModulePersonalData extends \Module
 				}
 				elseif ($objWidget->submitInput())
 				{
+					// Store the form data
+					$_SESSION['FORM_DATA'][$field] = $varValue;
+
+					// Set the correct empty value (see #6284, #6373)
+					if ($varValue === '')
+					{
+						$varValue = $objWidget->getEmptyValue();
+					}
+
 					// Set the new value
 					$this->User->$field = $varValue;
-					$_SESSION['FORM_DATA'][$field] = $varValue;
 
 					// Set the new field in the member model
 					$blnModified = true;

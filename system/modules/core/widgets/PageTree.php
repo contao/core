@@ -124,7 +124,7 @@ class PageTree extends \Widget
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
 			}
 
-			return static::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
+			return '';
 		}
 		elseif (strpos($varInput, ',') === false)
 		{
