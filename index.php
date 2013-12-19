@@ -339,6 +339,7 @@ class Index extends Frontend
 
 		$expire = null;
 		$content = null;
+		$type = null;
 
 		// Include the file
 		ob_start();
@@ -382,6 +383,20 @@ class Index extends Frontend
 		if (!$content)
 		{
 			$content = 'text/html';
+		}
+
+		// Send the status header (see #6585)
+		if ($type == 'error_403')
+		{
+			header('HTTP/1.1 403 Forbidden');
+		}
+		elseif ($type == 'error_404')
+		{
+			header('HTTP/1.1 404 Not Found');
+		}
+		else
+		{
+			header('HTTP/1.1 200 Ok');
 		}
 
 		header('Vary: User-Agent', false);

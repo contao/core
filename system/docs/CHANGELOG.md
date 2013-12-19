@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Set the correct status header for cached files (see #6585).
+
+### Fixed
 Correctly set the empty value depending on the DB field (fixes #6550, #6544).
 
 ### Fixed
