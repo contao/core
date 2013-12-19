@@ -92,10 +92,10 @@ abstract class Model
 	protected $arrRelated = array();
 
 	/**
-	 * Detached
+	 * Prevent saving
 	 * @var boolean
 	 */
-	protected $blnDetached = false;
+	protected $blnPreventSaving = false;
 
 
 	/**
@@ -339,7 +339,7 @@ abstract class Model
 	 * @return \Model The model object
 	 *
 	 * @throws \InvalidArgumentException If an argument is passed
-	 * @throws \LogicException           If the model has been detached
+	 * @throws \LogicException           If the model cannot be saved
 	 */
 	public function save()
 	{
@@ -349,8 +349,8 @@ abstract class Model
 			throw new \InvalidArgumentException('The $blnForceInsert argument has been removed (see system/docs/UPGRADE.md)');
 		}
 
-		// The instance has been detached
-		if ($this->blnDetached)
+		// The instance cannot be saved
+		if ($this->blnPreventSaving)
 		{
 			throw new \LogicException('The model instance has been detached and cannot be saved');
 		}
@@ -598,8 +598,17 @@ abstract class Model
 	 */
 	public function detach()
 	{
-		$this->blnDetached = true;
 		\Model\Registry::getInstance()->unregister($this);
+	}
+
+
+	/**
+	 * Prevent saving the model
+	 */
+	public function preventSaving()
+	{
+		$this->detach();
+		$this->blnPreventSaving = true;
 	}
 
 
