@@ -5,6 +5,9 @@ Version 3.2.3 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly resize the mediaboxAdvanced in IE11 (see #6504).
+
+### Fixed
 Set the correct status header for cached files (see #6585).
 
 ### Fixed
