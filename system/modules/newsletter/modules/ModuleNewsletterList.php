@@ -87,28 +87,31 @@ class ModuleNewsletterList extends \Module
 					continue;
 				}
 
-				// Show the module even if there is no jumpTo page (see #5233)
-				$strUrl = $strRequest;
+				$jumpTo = intval($objTarget->jumpTo);
 
-				if ($objTarget->jumpTo > 0)
+				// A jumpTo page is not mandatory for newsletter channels (see #6521) but required for the list module
+				if ($jumpTo < 1)
 				{
-					if (!isset($arrJumpTo[$objTarget->jumpTo]))
-					{
-						$objJumpTo = \PageModel::findPublishedById($objTarget->jumpTo);
-
-						if ($objJumpTo !== null)
-						{
-							$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/items/%s'));
-						}
-						else
-						{
-							$arrJumpTo[$objTarget->jumpTo] = $strUrl;
-						}
-					}
-
-					$strUrl = $arrJumpTo[$objTarget->jumpTo];
+					throw new \Exception("Newsletter channels without redirect page cannot be used in a newsletter list");
 				}
 
+				$strUrl = $strRequest;
+
+				if (!isset($arrJumpTo[$objTarget->jumpTo]))
+				{
+					$objJumpTo = $objTarget->getRelated('jumpTo')->loadDetails();
+
+					if ($objJumpTo !== null)
+					{
+						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/items/%s'));
+					}
+					else
+					{
+						$arrJumpTo[$objTarget->jumpTo] = $strUrl;
+					}
+				}
+
+				$strUrl = $arrJumpTo[$objTarget->jumpTo];
 				$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
 
 				$arrNewsletter[] = array

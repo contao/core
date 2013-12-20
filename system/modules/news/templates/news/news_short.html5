@@ -11,7 +11,7 @@
     <?php echo $this->teaser; ?>
   </div>
 
-  <?php if ($this->text): ?>
+  <?php if ($this->text || $this->teaser): ?>
     <p class="more"><?php echo $this->more; ?></p>
   <?php endif; ?>
 

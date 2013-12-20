@@ -762,6 +762,7 @@ class Automator extends \System
 
 			foreach ($arrFields as $field=>$sql)
 			{
+				$sql = str_replace('"', '\"', $sql);
 				$objFile->append("\t'$field' => \"$sql\",");
 			}
 

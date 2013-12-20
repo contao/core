@@ -17,7 +17,7 @@
         tgs.next('div.accordion').attr('aria-hidden', 'true');
         tog.next('div.accordion').attr('aria-hidden', 'false');
       };
-      $('div.toggler').focus(function(e) {
+      $('div.toggler').focus(function() {
         $('div.toggler').attr('tabindex', 0);
         $(this).attr('tabindex', -1);
       }).blur(function() {

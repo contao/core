@@ -138,33 +138,35 @@ abstract class Events extends \Module
 				// Recurring events
 				if ($objEvents->recurring)
 				{
-					$count = 0;
-
 					$arrRepeat = deserialize($objEvents->repeatEach);
-					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
 
 					if ($arrRepeat['value'] < 1)
 					{
 						continue;
 					}
 
-					while ($objEvents->endTime < $intEnd)
+					$count = 0;
+					$intStartTime = $objEvents->startTime;
+					$intEndTime = $objEvents->endTime;
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
+
+					while ($intEndTime < $intEnd)
 					{
 						if ($objEvents->recurrences > 0 && $count++ >= $objEvents->recurrences)
 						{
 							break;
 						}
 
-						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
-						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
+						$intStartTime = strtotime($strtotime, $intStartTime);
+						$intEndTime = strtotime($strtotime, $intEndTime);
 
 						// Skip events outside the scope
-						if ($objEvents->endTime < $intStart || $objEvents->startTime > $intEnd)
+						if ($intEndTime < $intStart || $intStartTime > $intEnd)
 						{
 							continue;
 						}
 
-						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
+						$this->addEvent($objEvents, $intStartTime, $intEndTime, $strUrl, $intStart, $intEnd, $id);
 					}
 				}
 			}

@@ -27,9 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_user.google.0">
         <source>Google+ profile ID</source>
+        <target>Profilové identifikační údaje Google+</target>
       </trans-unit>
       <trans-unit id="tl_user.google.1">
         <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
+        <target>Sem můžete zadat profilové identifikační údaje pro Google+ (např. &lt;em&gt;114740384471581504722&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
@@ -237,6 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_user.google_legend">
         <source>Google+ settings</source>
+        <target>Nastavení Google+</target>
       </trans-unit>
       <trans-unit id="tl_user.backend_legend">
         <source>Back end settings</source>

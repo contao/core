@@ -149,37 +149,25 @@ RequestToken::initialize();
 /**
  * Set the default language
  */
-if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
-{
-	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
-	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
-}
-elseif (isset($_SESSION['TL_LANGUAGE']))
-{
-	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
-}
-else
+if (!isset($_SESSION['TL_LANGUAGE']))
 {
 	// Check the user languages
-	foreach (Environment::get('httpAcceptLanguage') as $v)
+	$langs = Environment::get('httpAcceptLanguage');
+	array_push($langs, 'en'); // see #6533
+
+	foreach ($langs as $lang)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $lang)))
 		{
-			$GLOBALS['TL_LANGUAGE'] = $v;
-			$_SESSION['TL_LANGUAGE'] = $v;
+			$_SESSION['TL_LANGUAGE'] = $lang;
 			break;
 		}
 	}
 
-	// Fallback to English (see #6533)
-	if (!$_SESSION['TL_LANGUAGE'])
-	{
-		$GLOBALS['TL_LANGUAGE'] = 'en';
-		$_SESSION['TL_LANGUAGE'] = 'en';
-	}
-
-	unset($v);
+	unset($langs, $lang);
 }
+
+$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
 
 
 /**

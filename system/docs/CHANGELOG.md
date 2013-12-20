@@ -1,6 +1,55 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.3 (2013-12-20)
+--------------------------
+
+### Fixed
+Correctly resize the mediaboxAdvanced in IE11 (see #6504).
+
+### Fixed
+Set the correct status header for cached files (see #6585).
+
+### Fixed
+Correctly set the empty value depending on the DB field (fixes #6550, #6544).
+
+### Fixed
+Prevent saving of detached models (see #6506).
+
+### Fixed
+Correctly determine the ACE editor's height (see #6578).
+
+### Fixed
+Always fall back to English if a language does not exist (see #6581).
+
+### Fixed
+Correctly display repeated events in the event list (see #6555).
+
+### Fixed
+Correctly show the available layout columns in the article module (see #6548).
+
+### Fixed
+Correctly show the "read more" link in the news list modules (see #6439).
+
+### Updated
+Updated html5shiv to version 3.7.0 (see #6543).
+
+### Fixed
+Support browsers with both mouse and touch support in the back end (see #6520).
+
+### Fixed
+Correctly handle multiple `RadioTable` widgets on the same page (see #6389).
+
+### Fixed
+Fixed two issues with the SQL cache (see #6507).
+
+### Fixed
+Do not require a redirect page for newsletter channels (see #6521).
+
+### Fixed
+Use the related field instead of `id` in the model query builder (see #6540).
+
+
 Version 3.2.2 (2013-12-09)
 --------------------------
 

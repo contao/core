@@ -157,7 +157,8 @@ var Mediabox;
 			nextLink.set('html', options.buttonText[1]);
 			closeLink.set('html', options.buttonText[2]);
 
-			margin = center.getStyle('padding-left').toInt()+image.getStyle('margin-left').toInt()+image.getStyle('padding-left').toInt();
+			// PATCH: handle NaN (see #6504)
+			margin = (center.getStyle('padding-left').toInt() || 0) + (image.getStyle('margin-left').toInt() || 0) + (image.getStyle('padding-left').toInt() || 0);
 
 			if (Browser.firefox2) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
 				options.overlayOpacity = 1;

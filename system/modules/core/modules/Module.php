@@ -164,6 +164,11 @@ abstract class Module extends \Frontend
 			$this->Template->hl = $this->hl;
 		}
 
+		if (!empty($this->objModel->classes) && is_array($this->objModel->classes))
+		{
+			$this->Template->class .= ' ' . implode(' ', $this->objModel->classes);
+		}
+
 		return $this->Template->parse();
 	}
 

@@ -122,17 +122,19 @@ class ModuleEventReader extends \Events
 			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
-		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
+		$intStartTime = $objEvent->startTime;
+		$intEndTime = $objEvent->endTime;
+		$span = \Calendar::calculateSpan($intStartTime, $intEndTime);
 
 		// Do not show dates in the past if the event is recurring (see #923)
 		if ($objEvent->recurring)
 		{
 			$arrRange = deserialize($objEvent->repeatEach);
 
-			while ($objEvent->startTime < time() && $objEvent->endTime < $objEvent->repeatEnd)
+			while ($intStartTime < time() && $intEndTime < $objEvent->repeatEnd)
 			{
-				$objEvent->startTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $objEvent->startTime);
-				$objEvent->endTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $objEvent->endTime);
+				$intStartTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $intStartTime);
+				$intEndTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $intEndTime);
 			}
 		}
 
@@ -144,23 +146,23 @@ class ModuleEventReader extends \Events
 		}
 		else
 		{
-			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->startTime) . '">';
-			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->endTime) . '">';
+			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $intStartTime) . '">';
+			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $intEndTime) . '">';
 			$strTimeClose = '</time>';
 		}
 
 		// Get date
 		if ($span > 0)
 		{
-			$date = $strTimeStart . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->endTime) . $strTimeClose;
+			$date = $strTimeStart . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $intStartTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $intEndTime) . $strTimeClose;
 		}
-		elseif ($objEvent->startTime == $objEvent->endTime)
+		elseif ($intStartTime == $intEndTime)
 		{
-			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $objEvent->startTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $intStartTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStartTime) . ')' : '') . $strTimeClose;
 		}
 		else
 		{
-			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse($objPage->timeFormat, $objEvent->endTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $intStartTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStartTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse($objPage->timeFormat, $intEndTime) . ')' : '') . $strTimeClose;
 		}
 
 		$until = '';
@@ -194,8 +196,8 @@ class ModuleEventReader extends \Events
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
-		$objTemplate->start = $objEvent->startTime;
-		$objTemplate->end = $objEvent->endTime;
+		$objTemplate->start = $intStartTime;
+		$objTemplate->end = $intEndTime;
 		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;

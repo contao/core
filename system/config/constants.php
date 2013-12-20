@@ -15,7 +15,7 @@
  * Core version
  */
 define('VERSION', '3.2');
-define('BUILD', '2');
+define('BUILD', '3');
 define('LONG_TERM_SUPPORT', true);
 
 
@@ -28,7 +28,7 @@ define('LONG_TERM_SUPPORT', true);
 define('ACE', '1.1.2');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
-define('HTML5SHIV', '3.6.2');
+define('HTML5SHIV', '3.7.0');
 define('JQUERY', '1.10.2');
 define('JQUERY_UI', '1.10.3');
 define('COLORBOX', '1.4.31');

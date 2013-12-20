@@ -291,6 +291,12 @@ class DcaExtractor extends \Controller
 			$this->loadDataContainer($this->strTable);
 		}
 
+		// Return if the DC type is "File"
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'] == 'File')
+		{
+			return;
+		}
+
 		$blnFromFile = false;
 		$arrRelations = array();
 

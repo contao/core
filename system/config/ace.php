@@ -106,28 +106,29 @@ window.addEvent('domready', function() {
     }
   });
 
-  editor.on('focus', function() {
-    Backend.getScrollOffset();
-  });
-
-  editor.getSession().on('change', function() {
-    ta.value = editor.getValue();
-  });
-
   // Disable command conflicts with AltGr (see #5792)
-  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null)
+  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null);
 
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
-      * editor.renderer.lineHeight
+      * (editor.renderer.lineHeight || 14)
       + editor.renderer.scrollBar.getWidth();
     editor.container.setStyle('height', Math.max(newHeight, editor.renderer.lineHeight) + 'px');
     editor.resize();
   };
 
+  editor.on('focus', function() {
+    Backend.getScrollOffset();
+    updateHeight();
+  });
+
+  editor.getSession().on('change', function() {
+    ta.value = editor.getValue();
+    updateHeight();
+  });
+
   updateHeight();
-  editor.getSession().on('change', updateHeight);
 });
 </script>
 <?php endforeach; ?>

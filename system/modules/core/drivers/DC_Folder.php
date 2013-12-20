@@ -1975,6 +1975,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
 				}
 
+				// Set the correct empty value (see #6284, #6373)
+				if ($varValue === '')
+				{
+					$varValue = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
+				}
+
 				$this->objActiveRecord->{$this->strField} = $varValue;
 				$this->objActiveRecord->save();
 
