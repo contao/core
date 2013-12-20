@@ -378,6 +378,7 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.1">
         <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
+        <target>Tu lahko dodate video/avdio datoteko ali več datotek, če uporabljate različne kodeke.</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.0">
         <source>YouTube ID</source>
@@ -385,6 +386,7 @@
       </trans-unit>
       <trans-unit id="tl_content.youtube.1">
         <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
+        <target>Vnesite YouTube video ID (npr. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.0">
         <source>Preview image</source>
@@ -406,6 +408,7 @@
       </trans-unit>
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
+        <target>Samodejno predvajaj video, ko se stran naloži.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>

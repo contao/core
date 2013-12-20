@@ -79,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
         <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Zkomprimovat kód HTML, než se pošle do prohlížeče.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
@@ -138,15 +139,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
+        <target>Důvěryhodné proxy servery</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>Sem můžete zadat seznam podporovaných důvěryhodných proxy serveru pro IP adresy - oddělte je vždy čárkou.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
+        <target>Doména SSL proxy (zabezpečené)</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>Pokud lze Vaši stránku zobrazit přes kryptovaný server (SSL proxy), zadejte sem prosím jeho doménu (např. &lt;em&gt;sslsites.de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -178,6 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Přidejte zkratku pro jazyk (např. &lt;em&gt;http://www.priklad.com/cs&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -229,9 +235,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>Bezpečnostní režim</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>Vyšle stránku 503 a ukáže návštěvníkům, že se stránka právě udržuje. </target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -567,6 +575,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
+        <target>Nastavení proxy</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -602,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cron_legend">
         <source>Command scheduler</source>
+        <target>Načasování rozvrhu</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

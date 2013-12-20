@@ -31,6 +31,7 @@
       </trans-unit>
       <trans-unit id="FFL.fieldset.1">
         <source>A container for form fields with an optional legend (only available for tableless forms).</source>
+        <target>Prostor za polja obrazca z opcijsko legendo (na voljo samo pri obrazcih brez tabele)</target>
       </trans-unit>
       <trans-unit id="FFL.text.0">
         <source>Text field</source>
@@ -404,6 +405,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.fSize.1">
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
+        <target>Tukaj lahko nastavite velikost za polje Naloži (&lt;em&gt;velikost&lt;/em&gt; atribut).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
