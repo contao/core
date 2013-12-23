@@ -53,6 +53,13 @@ class Form extends \Hybrid
 	 */
 	public function generate()
 	{
+
+		if (TL_MODE == 'BE')
+		{
+			System::loadLanguageFile('tl_form');
+			$this->additional = '<div class="tl_gray"><a href="contao/main.php?do=form&table=tl_form_field&id=' . $this->id . '&rt=' . RequestToken::get() . '&amp;ref=' . TL_REFERER_ID . '">' . $GLOBALS['TL_LANG']['tl_form']['edit'][0] . ' (ID: ' . $this->id . ')</a></div><div class="tl_gray">&nbsp;</div>';
+		}
+
 		$str = parent::generate();
 
 		if (TL_MODE == 'BE')
