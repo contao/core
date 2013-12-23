@@ -5,6 +5,9 @@ Version 3.2.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the XHTML variant of the comments form (see #5675).
+
+### Fixed
 Correctly assign articles to columns (see #6595).
 
 ### Fixed
