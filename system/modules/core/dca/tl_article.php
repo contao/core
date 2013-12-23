@@ -687,7 +687,7 @@ class tl_article extends Backend
 			$arrSections = array_merge($arrSections, $arrCustom);
 		}
 
-		return array_unique($arrSections);
+		return array_values(array_unique($arrSections));
 	}
 
 

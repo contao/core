@@ -5,6 +5,9 @@ Version 3.2.4 (2013-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly assign articles to columns (see #6595).
+
+### Fixed
 Correctly merge the CSS classes in the `Hybrid` class (see #6601).
 
 
