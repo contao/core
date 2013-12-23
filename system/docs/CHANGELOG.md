@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.4 (2013-XX-XX)
+--------------------------
+
+### Fixed
+Correctly merge the CSS classes in the `Hybrid` class (see #6601).
+
+
 Version 3.2.3 (2013-12-20)
 --------------------------
 
