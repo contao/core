@@ -109,7 +109,7 @@ class TextArea extends \Widget
 	public function generate()
 	{
 		// Register the field name for rich text editor usage
-		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
+		if ($this->rte)
 		{
 			list ($file, $type) = explode('|', $this->rte);
 			$key = 'ctrl_' . $this->strId;
@@ -120,6 +120,8 @@ class TextArea extends \Widget
 				'file' => $file,
 				'type' => $type
 			);
+
+			$this->strClass = trim($this->strClass . ' noresize');
 		}
 
 		return sprintf('<textarea name="%s" id="ctrl_%s" class="tl_textarea%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset()">%s</textarea>%s',
