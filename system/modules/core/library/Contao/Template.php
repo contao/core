@@ -318,22 +318,10 @@ abstract class Template extends \Controller
 
 			$intElapsed = (microtime(true) - TL_START);
 
-			// Switch to milliseconds if less than one second
-			if ($intElapsed > 1)
-			{
-				$intTime = $intElapsed;
-				$strUnit = 's';
-			}
-			else
-			{
-				$intTime = $intElapsed * 1000;
-				$strUnit = 'ms';
-			}
-
 			$strDebug = sprintf(
 				'<div id="debug" class="%s">'
 				. '<p>'
-					. '<span class="time">Execution time: %s %s</span>'
+					. '<span class="time">Execution time: %s ms</span>'
 					. '<span class="memory">Memory usage: %s</span>'
 					. '<span class="db">Database queries: %d</span>'
 					. '<span class="rows">Rows: %d returned, %s affected</span>'
@@ -342,8 +330,7 @@ abstract class Template extends \Controller
 				. '</p>'
 				. '<div><pre>',
 				\Input::cookie('CONTAO_CONSOLE'),
-				$this->getFormattedNumber($intTime, 0),
-				$strUnit,
+				$this->getFormattedNumber(($intElapsed * 1000), 0),
 				$this->getReadableSize(memory_get_peak_usage()),
 				count($GLOBALS['TL_DEBUG']['database_queries']),
 				$intReturned,
