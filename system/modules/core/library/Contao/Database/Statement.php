@@ -140,7 +140,7 @@ abstract class Statement
 		}
 
 		$this->resResult = null;
-		$this->strQuery = $this->prepare_query($strQuery);
+		$this->strQuery = trim($this->prepare_query($strQuery));
 
 		// Auto-generate the SET/VALUES subpart
 		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0 || strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
