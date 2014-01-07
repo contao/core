@@ -525,7 +525,8 @@ abstract class User extends \System
 		session_write_close();
 
 		// Reset the session cookie
-		$this->setCookie(session_name(), session_id(), ($time - 86400), '/');
+		$params = session_get_cookie_params();
+		$this->setCookie(session_name(), session_id(), ($time - 86400), $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 
 		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = false;

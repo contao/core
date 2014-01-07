@@ -1,8 +1,11 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.2.4 (2013-XX-XX)
+Version 3.2.4 (2014-XX-XX)
 --------------------------
+
+### Fixed
+Correctly unset the PHP session cookie depending on its parameters.
 
 ### Fixed
 Fixed the XHTML variant of the comments form (see #5675).
