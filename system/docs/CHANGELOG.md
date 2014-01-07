@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly detect Android tablets in the `Environment` class (see #5869).
+
+### Fixed
 Correctly resolve the module dependencies (see #6606).
 
 ### Fixed
