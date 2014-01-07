@@ -156,10 +156,12 @@ class ModuleLoader
 			// Resolve the dependencies
 			while (!empty($load))
 			{
-				$matched = false;
+				$resolved = false;
 
 				foreach ($load as $name=>$requires)
 				{
+					$matched = false;
+
 					if (empty($requires))
 					{
 						$matched = true;
@@ -173,11 +175,12 @@ class ModuleLoader
 					{
 						unset($load[$name]);
 						static::$active[] = $name;
+						$resolved = true;
 					}
 				}
 
 				// The dependencies cannot be resolved
-				if ($matched === false)
+				if ($resolved === false)
 				{
 					ob_start();
 					dump($load);
