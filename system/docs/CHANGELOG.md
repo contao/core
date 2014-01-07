@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly resolve the module dependencies (see #6606).
+
+### Fixed
 Correctly unset the PHP session cookie depending on its parameters.
 
 ### Fixed

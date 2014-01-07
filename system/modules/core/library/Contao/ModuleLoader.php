@@ -156,28 +156,29 @@ class ModuleLoader
 			// Resolve the dependencies
 			while (!empty($load))
 			{
-				$matched = false;
+				$failed = true;
 
 				foreach ($load as $name=>$requires)
 				{
 					if (empty($requires))
 					{
-						$matched = true;
+						$resolved = true;
 					}
 					else
 					{
-						$matched = count(array_diff($requires, static::$active)) === 0;
+						$resolved = count(array_diff($requires, static::$active)) === 0;
 					}
 
-					if ($matched === true)
+					if ($resolved === true)
 					{
 						unset($load[$name]);
 						static::$active[] = $name;
+						$failed = false;
 					}
 				}
 
 				// The dependencies cannot be resolved
-				if ($matched === false)
+				if ($failed === true)
 				{
 					ob_start();
 					dump($load);
