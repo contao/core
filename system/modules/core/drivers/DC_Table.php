@@ -41,12 +41,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	protected $ctable;
 
 	/**
-	 * ID of the current record
-	 * @param integer
-	 */
-	protected $id;
-
-	/**
 	 * IDs of all root records
 	 * @param array
 	 */
