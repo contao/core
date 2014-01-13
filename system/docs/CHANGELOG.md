@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Prevent the back end tool tips from exceeding the screen width (see #6639).
+
+### Fixed
 Support the Google+ vanity name in addition to the numeric ID (see #6454).
 
 ### Fixed
