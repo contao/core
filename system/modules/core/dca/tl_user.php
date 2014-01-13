@@ -179,8 +179,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>21, 'rgxp'=>'digit'),
-			'sql'                     => "varchar(21) NOT NULL default ''"
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'google+'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'language' => array
 		(

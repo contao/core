@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Support the Google+ vanity name in addition to the numeric ID (see #6454).
+
+### Fixed
 Correctly detect Android tablets in the `Environment` class (see #5869).
 
 ### Fixed

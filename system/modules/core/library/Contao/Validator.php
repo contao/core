@@ -276,4 +276,17 @@ class Validator
 
 		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
 	}
+
+
+	/**
+	 * Valid Google+ ID or vanity name
+	 *
+	 * @param mixed $varValue The numeric ID or vanity name
+	 *
+	 * @return boolean True if the value is a Google+ ID
+	 */
+	public static function isGooglePlusId($varValue)
+	{
+		return preg_match('/^([0-9]{21}|\+[\pN\pL-]+)$/', $varValue);
+	}
 }

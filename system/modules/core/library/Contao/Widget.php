@@ -991,6 +991,14 @@ abstract class Widget extends \Controller
 					}
 					break;
 
+				// Check whether the current value is a Google+ ID or vanity name
+				case 'google+':
+					if (!\Validator::isGooglePlusId($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidGoogleId'], $this->strLabel));
+					}
+					break;
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
