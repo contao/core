@@ -127,5 +127,12 @@ class ContentHyperlink extends \ContentElement
 		{
 			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 		}
+
+		// Unset the title attributes in the back end (see #6258)
+		if (TL_MODE == 'BE')
+		{
+			$this->Template->title = '';
+			$this->Template->linkTitle = '';
+		}
 	}
 }
