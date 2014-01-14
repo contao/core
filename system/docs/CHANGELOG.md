@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Fix some broken back end icons (see #6214).
+
+### Fixed
 Show a hint in the news archive menu if there are no items (see #5888).
 
 ### Fixed
