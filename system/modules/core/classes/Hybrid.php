@@ -235,7 +235,7 @@ abstract class Hybrid extends \Frontend
 
 		if (!empty($this->objParent->classes) && is_array($this->objParent->classes))
 		{
-			$this->Template->class .= ' ' . implode(' ', $this->objModel->classes);
+			$this->Template->class .= ' ' . implode(' ', $this->objParent->classes);
 		}
 
 		return $this->Template->parse();
