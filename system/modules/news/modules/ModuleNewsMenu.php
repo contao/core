@@ -91,6 +91,8 @@ class ModuleNewsMenu extends \ModuleNews
 				$this->compileDailyMenu();
 				break;
 		}
+
+		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 
 
