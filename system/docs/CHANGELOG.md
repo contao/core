@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Some DCAs were missing the "rem" unit (see #6634).
+
+### Fixed
 Correctly trim the SQL statements in the `Database` class (see #6623).
 
 ### Fixed
