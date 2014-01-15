@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not create multiple stylect layers upon Ajax changes.
+
+### Fixed
 Some DCAs were missing the "rem" unit (see #6634).
 
 ### Fixed
