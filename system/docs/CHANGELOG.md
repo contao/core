@@ -5,6 +5,9 @@ Version 3.2.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Updated the Russian translation of the TinyMCE "typolinks" plugins (see #6224).
+
+### Fixed
 Do not create multiple stylect layers upon Ajax changes.
 
 ### Fixed
