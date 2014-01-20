@@ -113,7 +113,7 @@ typolinks()
 	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	files=('editor_plugin' 'js/typolinks' 'js/typobox')
-	for file in ${files[@]}; do
+	for file in "${files[@]}"; do
 		echo "$copyright" > $version/$file.js
 		$js $version/${file}_src.js >> $version/$file.js
 		echo "  Created $version/$file.js"
@@ -269,7 +269,7 @@ datepicker()
 		# JavaScript
 		files=('Picker.js' 'Picker.Attach.js' 'Picker.Date.js')
 		echo "$copyright" > $version/datepicker.js
-		for file in ${files[@]}; do
+		for file in "${files[@]}"; do
 			$js $version/src/$file >> $version/datepicker.js
 		done
 		echo "  Created $version/datepicker.js"

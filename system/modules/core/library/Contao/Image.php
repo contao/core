@@ -225,6 +225,9 @@ class Image
 			}
 		}
 
+		$strNewImage = null;
+		$strSourceImage = null;
+
 		// Resize width and height and crop the image if necessary
 		if ($intWidth && $intHeight)
 		{

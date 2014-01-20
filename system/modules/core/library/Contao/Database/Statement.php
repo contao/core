@@ -183,6 +183,7 @@ abstract class Statement
 	 */
 	public function set($arrParams)
 	{
+		$strQuery = '';
 		$arrParams = $this->escapeParams($arrParams);
 
 		// INSERT

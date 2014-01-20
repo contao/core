@@ -3080,6 +3080,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
 			{
+				$status = null;
+
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);

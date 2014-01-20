@@ -499,6 +499,9 @@ abstract class User extends \System
 			return false;
 		}
 
+		$intUserid = null;
+
+		// Find the session
 		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
 									 ->limit(1)
 									 ->execute($this->strHash, $this->strCookie);

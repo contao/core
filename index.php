@@ -306,6 +306,7 @@ class Index extends Frontend
 		}
 
 		$blnFound = false;
+		$strCacheFile = null;
 
 		// Check for a mobile layout
 		if (Input::cookie('TL_VIEW') == 'mobile' || (Environment::get('agent')->mobile && Input::cookie('TL_VIEW') != 'desktop'))

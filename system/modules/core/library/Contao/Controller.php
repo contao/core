@@ -851,6 +851,8 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+					$strTarget = null;
+
 					// Back link
 					if ($elements[1] == 'back')
 					{
@@ -1100,6 +1102,8 @@ abstract class Controller extends \System
 						break;
 					}
 
+					$strUrl = '';
+
 					if ($objNews->source == 'external')
 					{
 						$strUrl = $objNews->url;
@@ -1157,6 +1161,8 @@ abstract class Controller extends \System
 					{
 						break;
 					}
+
+					$strUrl = '';
 
 					if ($objEvent->source == 'external')
 					{

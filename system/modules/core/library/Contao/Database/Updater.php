@@ -325,6 +325,8 @@ class Updater extends \Controller
 
 			while ($objStyle->next())
 			{
+				$angle = '';
+
 				if (strpos($objStyle->gradientAngle, 'deg') !== false)
 				{
 					$angle = (abs(450 - intval($objStyle->gradientAngle)) % 360) . 'deg';

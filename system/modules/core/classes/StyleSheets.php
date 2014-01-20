@@ -549,6 +549,8 @@ class StyleSheets extends \Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
+					$angle = '';
+
 					// Convert the angle for the legacy commands (see #4569)
 					if (strpos($row['gradientAngle'], 'deg') !== false)
 					{

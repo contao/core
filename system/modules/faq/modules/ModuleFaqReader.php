@@ -159,6 +159,8 @@ class ModuleFaqReader extends \Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
+		$strAuthor = '';
+
 		// Add the author
 		if (($objAuthor = $objFaq->getRelated('author')) !== null)
 		{

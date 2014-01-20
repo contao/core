@@ -84,6 +84,7 @@ class MetaWizard extends \Widget
 
 		$count = 0;
 		$languages = $this->getLanguages();
+		$return = '';
 		$taken = array();
 
 		// Add the existing entries

@@ -98,7 +98,7 @@ class ModuleCloseAccount extends \Module
 				}
 				else
 				{
-					list(, $strSalt) = explode(':', $this->User->password);
+					list($strPassword, $strSalt) = explode(':', $this->User->password);
 					$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($objWidget->value)) : ($strPassword == sha1($strSalt . $objWidget->value));
 				}
 
