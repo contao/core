@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Automator
  *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
@@ -668,7 +668,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2014 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"

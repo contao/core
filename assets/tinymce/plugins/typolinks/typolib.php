@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Typolinks
  * @link    https://contao.org
@@ -15,7 +15,7 @@
  * Class typolib
  *
  * Provide methods to render TinyMCE page and file drop down menus.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 class typolib extends Backend
