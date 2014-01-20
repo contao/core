@@ -30,8 +30,8 @@
         <target>Google+ Profil-ID</target>
       </trans-unit>
       <trans-unit id="tl_user.google.1">
-        <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
-        <target>Hier können Sie Ihre Google+ Profil-ID eingeben (z.B. &lt;em&gt;114740384471581504722&lt;/em&gt;).</target>
+        <source>Here you can enter your Google+ profile ID or vanity name.</source>
+        <target>Hier können Sie Ihre Google+ Profil-ID oder Ihren Vanity-Namen eingeben.</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>

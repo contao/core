@@ -98,6 +98,7 @@
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>Ne najdem začetne strani.</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>

@@ -35,11 +35,11 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.website.0">
         <source>Website</source>
-        <target>Hjemmeside</target>
+        <target>Website</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>Skriv venligst en hjemmeside adresse (valgfrit)</target>
+        <target>Her kan du indtaste en webadresse.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.comment.0">
         <source>Comment</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>Kun kommentarer der er udgivet, bliver vist på hjemmesiden.</target>
+        <target>Kun kommentarer der er udgivet, bliver vist på websitet.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.author_legend">
         <source>Author</source>

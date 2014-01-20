@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/devtools/languages/en/tl_autoload.php" source-language="en">
+    <body>
+      <trans-unit id="tl_autoload.headline">
+        <source>Automatically create the autoload.php files</source>
+        <target>Creează automat fişierele autoload.php</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.emptySelection">
+        <source>Please select at least one module!</source>
+        <target>Selectaţi cel puţin un modul!</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadExists">
+        <source>Module &quot;%s&quot; has an autoload.php file already. Do you want to override?</source>
+        <target>Modulul &quot;%s&quot; are un fişier autoload.php deja. Doriţi să îl rescrieţi?</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.available">
+        <source>Available modules</source>
+        <target>Available modules</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplAvailable">
+        <source>Please select the modules you want to modify.</source>
+        <target>Selectaţi modulele pe care doriţi să le modificaţi.</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.override">
+        <source>Override existing files</source>
+        <target>Rescrie fişierele existente</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.xplOverride">
+        <source>Override existing autoload.php files (use with care).</source>
+        <target>Rescrie fişierele existente autoload.php (folosiţi cu grijă).</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoload">
+        <source>Create the autoload files</source>
+        <target>Creează fişierele autoload</target>
+      </trans-unit>
+      <trans-unit id="tl_autoload.autoloadConfirm">
+        <source>The autoload.php file of module &quot;%s&quot; has been written.</source>
+        <target>Fişierul autoload.php din modulul &quot;%s&quot; a fost scris.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

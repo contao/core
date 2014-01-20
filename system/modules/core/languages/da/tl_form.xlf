@@ -86,8 +86,8 @@
         <target>E-postformat</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Dette format forventer felterne &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; og &lt;em&gt;cc&lt;/em&gt; (send en copy af e-posten til afsenderen.) Andre felter vil blive ignoreret. Fil-uploads er tilladte.</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Ignorerer alle felter undtagen &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; samt &lt;em&gt;cc&lt;/em&gt; (carbon copy) og sender formular dataen som var det afsendt fra en mail klient. Upload af filer er tilladt.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

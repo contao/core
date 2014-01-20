@@ -86,8 +86,7 @@
         <target>Format i postës elektronike</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Ky format kërkon fushat &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; dhe &lt;em&gt;cc&lt;/em&gt; (dërgo një kopje të E-Mail-it dërguesit). Fusha të emëruara ndryshe injorohen. Ngarkimi skedarëve lejohet.</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

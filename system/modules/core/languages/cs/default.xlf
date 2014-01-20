@@ -245,6 +245,9 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Nenalezen žádný záznam pro %s. Prosím synchronizujte systém souborů.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Prosím sečtěte %d a %d.</target>

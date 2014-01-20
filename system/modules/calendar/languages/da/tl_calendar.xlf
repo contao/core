@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>Godkend kommentarer inden de udgives på hjemmesiden.</target>
+        <target>Godkend kommentarer inden de udgives på websitet.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.0">
         <source>Allow BBCode</source>

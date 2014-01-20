@@ -86,8 +86,7 @@
         <target>E-pasta formāts</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Ignorē visus laukus, izņemot &lt;em&gt;e-pasts&lt;/em&gt;, &lt;em&gt;tēma&lt;/em&gt;, &lt;em&gt;ziņa&lt;/em&gt; un &lt;em&gt;cc&lt;/em&gt; (kopija) un nosūta formas datus tā, kā tika nosūtīts no pasta klientu. Failu augšupielāde ir atļauta.</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>
