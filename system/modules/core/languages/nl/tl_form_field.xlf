@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="FFL.textarea.0">
         <source>Textarea</source>
-        <target>Tekstveld</target>
+        <target>Tekstgebied</target>
       </trans-unit>
       <trans-unit id="FFL.textarea.1">
         <source>A multi-line input field for a medium or long text.</source>

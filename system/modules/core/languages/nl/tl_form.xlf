@@ -86,8 +86,8 @@
         <target>E-mail</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Negeert alle velden behalve &lt;em&gt; email &lt;/ em&gt;, &lt;em&gt; onderwerp &lt;/ em&gt;, &lt;em&gt; bericht &lt;/ em&gt; en &lt;em&gt; cc &lt;/ em&gt; (carbon copy) en stuurt formulier gegevens alsof verzonden vanaf een e-mailclient. Bestanden uploaden is toegestaan.</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Negeert alle velden behalve &lt;em&gt; naam &lt;/ em&gt;, &lt;em&gt; e-mail &lt;/ em&gt;, &lt;em&gt; onderwerp &lt;/ em&gt;, &lt;em&gt; bericht &lt;/ em&gt; en &lt;em&gt; cc &lt;/ em&gt; (carbon copy) en stuurt formulier gegevens alsof deze zijn verzonden vanaf een e-mail cliënt. Het uploaden van bestanden is toegestaan.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

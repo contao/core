@@ -241,6 +241,10 @@
         <source>Do not truncate tables</source>
         <target>Не обрезать таблицы в базе данных</target>
       </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>Переопределить таблицы хранилища</target>
+      </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>
         <target>Импорт примера веб-сайта</target>

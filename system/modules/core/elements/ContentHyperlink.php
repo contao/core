@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentHyperlink
  *
  * Front end content element "hyperlink".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -126,6 +126,13 @@ class ContentHyperlink extends \ContentElement
 		if ($this->target)
 		{
 			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+		}
+
+		// Unset the title attributes in the back end (see #6258)
+		if (TL_MODE == 'BE')
+		{
+			$this->Template->title = '';
+			$this->Template->linkTitle = '';
 		}
 	}
 }

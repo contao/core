@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentTeaser
  *
  * Front end content element "teaser".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -96,15 +96,14 @@ class ContentTeaser extends \ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objArticle->teaser = \String::toXhtml($objArticle->teaser);
+			$this->Template->text = \String::toXhtml($objArticle->teaser);
 		}
 		else
 		{
-			$objArticle->teaser = \String::toHtml5($objArticle->teaser);
+			$this->Template->text = \String::toHtml5($objArticle->teaser);
 		}
 
 		$this->Template->headline = $objArticle->title;
-		$this->Template->text = $objArticle->teaser;
 		$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->title));
 		$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 	}

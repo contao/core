@@ -242,6 +242,9 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Za %s ne obstaja vnos v podatkovni bazi. Prosim, sinhronizirajte datotečni sistem.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Seštejte %d in %d.</target>

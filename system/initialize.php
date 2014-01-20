@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -149,29 +149,25 @@ RequestToken::initialize();
 /**
  * Set the default language
  */
-if (Input::post('language') && Input::post('FORM_SUBMIT') != 'tl_filters')
+if (!isset($_SESSION['TL_LANGUAGE']))
 {
-	$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', Input::post('language'));
-	$_SESSION['TL_LANGUAGE'] = $GLOBALS['TL_LANGUAGE'];
-}
-elseif (isset($_SESSION['TL_LANGUAGE']))
-{
-	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
-}
-else
-{
-	foreach (Environment::get('httpAcceptLanguage') as $v)
+	// Check the user languages
+	$langs = Environment::get('httpAcceptLanguage');
+	array_push($langs, 'en'); // see #6533
+
+	foreach ($langs as $lang)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $v)))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $lang)))
 		{
-			$GLOBALS['TL_LANGUAGE'] = $v;
-			$_SESSION['TL_LANGUAGE'] = $v;
+			$_SESSION['TL_LANGUAGE'] = $lang;
 			break;
 		}
 	}
 
-	unset($v);
+	unset($langs, $lang);
 }
+
+$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
 
 
 /**

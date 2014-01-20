@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -521,7 +521,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['flashJS'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('class'=>'monospace'),
+			'eval'                    => array('class'=>'monospace', 'rte'=>'ace|js'),
 			'sql'                     => "text NULL"
 		),
 		'imgSize' => array
@@ -759,7 +759,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
  * Class tl_module
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */

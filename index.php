@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -22,7 +22,7 @@ require 'system/initialize.php';
  * Class Index
  *
  * Main front end controller.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -118,7 +118,7 @@ class Index extends Frontend
 			}
 			else
 			{
-				$arrLangs = $arrPages['*']; // Empty domain
+				$arrLangs = $arrPages['*']; // empty domain
 			}
 
 			// Use the first result (see #4872)
@@ -159,6 +159,9 @@ class Index extends Frontend
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$objHandler->generate($objPage->id);
 		}
+
+		// Prevent the instance from being saved (see #6506)
+		$objPage->preventSaving();
 
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
@@ -303,9 +306,10 @@ class Index extends Frontend
 		}
 
 		$blnFound = false;
+		$strCacheFile = null;
 
 		// Check for a mobile layout
-		if (Environment::get('agent')->mobile)
+		if (Input::cookie('TL_VIEW') == 'mobile' || (Environment::get('agent')->mobile && Input::cookie('TL_VIEW') != 'desktop'))
 		{
 			$strCacheKey = md5($strCacheKey . '.mobile');
 			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
@@ -336,6 +340,7 @@ class Index extends Frontend
 
 		$expire = null;
 		$content = null;
+		$type = null;
 
 		// Include the file
 		ob_start();
@@ -379,6 +384,20 @@ class Index extends Frontend
 		if (!$content)
 		{
 			$content = 'text/html';
+		}
+
+		// Send the status header (see #6585)
+		if ($type == 'error_403')
+		{
+			header('HTTP/1.1 403 Forbidden');
+		}
+		elseif ($type == 'error_404')
+		{
+			header('HTTP/1.1 404 Not Found');
+		}
+		else
+		{
+			header('HTTP/1.1 200 Ok');
 		}
 
 		header('Vary: User-Agent', false);

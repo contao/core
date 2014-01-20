@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Automator
  *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
@@ -302,6 +302,11 @@ class Automator extends \System
 		{
 			foreach (scan(TL_ROOT . '/share') as $file)
 			{
+				if (is_dir(TL_ROOT . '/share/' . $file))
+				{
+					continue; // see #6652
+				}
+
 				$objFile = new \File('share/' . $file, true);
 
 				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds))
@@ -663,7 +668,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2014 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
@@ -762,6 +767,7 @@ class Automator extends \System
 
 			foreach ($arrFields as $field=>$sql)
 			{
+				$sql = str_replace('"', '\"', $sql);
 				$objFile->append("\t'$field' => \"$sql\",");
 			}
 

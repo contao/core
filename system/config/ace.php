@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -91,6 +91,8 @@ window.addEvent('domready', function() {
 
   var editor = ace.edit('<?php echo $arrField['id']; ?>_div');
   editor.setTheme("ace/theme/clouds");
+  editor.renderer.setScrollMargin(3, 3, 0, 0);
+  editor.renderer.scrollBy(0, -6);
   editor.getSession().setValue(ta.value);
   editor.getSession().setMode("ace/mode/<?php echo $arrField['type']; ?>");
   editor.getSession().setUseSoftTabs(false);
@@ -105,26 +107,28 @@ window.addEvent('domready', function() {
   });
 
   // Disable command conflicts with AltGr (see #5792)
-  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null)
-
-  var updateTextarea = function() {
-    ta.value = editor.getValue();
-  };
-
-  editor.getSession().on('change', updateTextarea);
+  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null);
 
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
-      * editor.renderer.lineHeight
+      * (editor.renderer.lineHeight || 14)
       + editor.renderer.scrollBar.getWidth();
-    var setHeight = Math.max(newHeight, editor.container.getStyle('height'));
-    editor.container.setStyle('height', setHeight.toString() + 'px');
+    editor.container.setStyle('height', Math.max(newHeight, editor.renderer.lineHeight) + 'px');
     editor.resize();
   };
 
+  editor.on('focus', function() {
+    Backend.getScrollOffset();
+    updateHeight();
+  });
+
+  editor.getSession().on('change', function() {
+    ta.value = editor.getValue();
+    updateHeight();
+  });
+
   updateHeight();
-  editor.getSession().on('change', updateHeight);
 });
 </script>
 <?php endforeach; ?>

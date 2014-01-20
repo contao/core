@@ -245,6 +245,10 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Nel database non è stata trovata nessuna informazione per %s. È necessario risincronizzare il file system.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Indicare l'ID numerico del profilo Google+ o il nome vanity!</target>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Somma %d a %d.</target>

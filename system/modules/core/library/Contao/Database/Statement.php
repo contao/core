@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -28,7 +28,7 @@ namespace Contao\Database;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Statement
 {
@@ -140,7 +140,7 @@ abstract class Statement
 		}
 
 		$this->resResult = null;
-		$this->strQuery = $this->prepare_query($strQuery);
+		$this->strQuery = $this->prepare_query(trim($strQuery));
 
 		// Auto-generate the SET/VALUES subpart
 		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0 || strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
@@ -161,7 +161,7 @@ abstract class Statement
 			$arrChunks[$k] = str_replace('?', '%s', $v);
 		}
 
-		$this->strQuery = trim(implode('', $arrChunks));
+		$this->strQuery = implode('', $arrChunks);
 		return $this;
 	}
 
@@ -183,6 +183,7 @@ abstract class Statement
 	 */
 	public function set($arrParams)
 	{
+		$strQuery = '';
 		$arrParams = $this->escapeParams($arrParams);
 
 		// INSERT
@@ -267,7 +268,7 @@ abstract class Statement
 	{
 		if (!empty($strQuery))
 		{
-			$this->strQuery = $strQuery;
+			$this->strQuery = trim($strQuery);
 		}
 
 		// Make sure there is a query string

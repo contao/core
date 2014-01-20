@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Events
  *
  * Provide methods to get all events of a certain period from the database.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -120,7 +120,7 @@ abstract class Events extends \Module
 			// Get the current "jumpTo" page
 			if ($objCalendar !== null && $objCalendar->jumpTo && ($objTarget = $objCalendar->getRelated('jumpTo')) !== null)
 			{
-				$strUrl = $this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+				$strUrl = $this->generateFrontendUrl($objTarget->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/events/%s'));
 			}
 
 			// Get the events of the current period
@@ -138,33 +138,35 @@ abstract class Events extends \Module
 				// Recurring events
 				if ($objEvents->recurring)
 				{
-					$count = 0;
-
 					$arrRepeat = deserialize($objEvents->repeatEach);
-					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
 
 					if ($arrRepeat['value'] < 1)
 					{
 						continue;
 					}
 
-					while ($objEvents->endTime < $intEnd)
+					$count = 0;
+					$intStartTime = $objEvents->startTime;
+					$intEndTime = $objEvents->endTime;
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
+
+					while ($intEndTime < $intEnd)
 					{
 						if ($objEvents->recurrences > 0 && $count++ >= $objEvents->recurrences)
 						{
 							break;
 						}
 
-						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
-						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
+						$intStartTime = strtotime($strtotime, $intStartTime);
+						$intEndTime = strtotime($strtotime, $intEndTime);
 
 						// Skip events outside the scope
-						if ($objEvents->endTime < $intStart || $objEvents->startTime > $intEnd)
+						if ($intEndTime < $intStart || $intStartTime > $intEnd)
 						{
 							continue;
 						}
 
-						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
+						$this->addEvent($objEvents, $intStartTime, $intEndTime, $strUrl, $intStart, $intEnd, $id);
 					}
 				}
 			}

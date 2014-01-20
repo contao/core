@@ -1,10 +1,10 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Typolinks
- * @link    https://contao.org
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -31,7 +31,7 @@ var Typobox = {
 		this.fillRelList('rel_list');
 		TinyMCE_EditableSelects.init();
 
-		c = ed.selection.getContent();
+		var c = ed.selection.getContent();
 		if (!c || c.indexOf("image::") == -1) {
 			return;
 		}
@@ -40,7 +40,7 @@ var Typobox = {
 		c = c.replace(/\}\}.*$/i, '');
 		c = c.replace(/\[&amp;\]|\[&\]|&amp;|&/gi, '?');
 
-		var split = c.split('?');
+		var split = c.split('?'), sub, i;
 		f.src.value = split[0];
 
 		for (i=1; i<split.length; i++) {
@@ -69,7 +69,7 @@ var Typobox = {
 	},
 
 	fillFileList : function(id, l) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
+		var dom = tinyMCEPopup.dom, lst = dom.get(id);
 
 		l = window[l];
 
@@ -84,7 +84,7 @@ var Typobox = {
 	},
 
 	fillModeList : function(id) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+		var dom = tinyMCEPopup.dom, lst = dom.get(id);
 
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_proportional'), 'proportional');
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_box'), 'box');
@@ -100,7 +100,7 @@ var Typobox = {
 	},
 
 	fillRelList : function(id) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+		var dom = tinyMCEPopup.dom, lst = dom.get(id);
 
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
 		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_single'), 'lightbox');
@@ -108,7 +108,7 @@ var Typobox = {
 	},
 
 	update : function() {
-		var f = document.forms[0], nl = f.elements, ed = tinyMCEPopup.editor, args = {}, el;
+		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
 		tinyMCEPopup.restoreSelection();
 
@@ -142,12 +142,11 @@ var Typobox = {
 		}
 		if (f.rel_list) {
 			tag += glue + 'rel=' + getSelectValue(f, "rel_list");
-			glue = '&amp;';
 		}
 
 		tag = '{{image::' + tag + '}}';
 
-		el = ed.selection.getNode();
+		ed.selection.getNode();
 		ed.execCommand("mceInsertRawHTML", false, tag);
 		ed.undoManager.add();
 

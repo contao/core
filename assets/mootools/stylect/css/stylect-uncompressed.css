@@ -1,4 +1,4 @@
-/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */
+/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */
 .styled_select {
 	display:inline;
 	margin-top:1px;
@@ -19,6 +19,10 @@
 }
 .styled_select.focused {
 	background-color:#ebfdd7;
+}
+.webkit .styled_select.focused {
+	outline-offset:-2px;
+	outline:auto 5px -webkit-focus-ring-color;
 }
 .styled_select.disabled {
 	color:#bbb;

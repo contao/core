@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -28,7 +28,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Template extends \Controller
 {
@@ -318,22 +318,10 @@ abstract class Template extends \Controller
 
 			$intElapsed = (microtime(true) - TL_START);
 
-			// Switch to milliseconds if less than one second
-			if ($intElapsed > 1)
-			{
-				$intTime = $intElapsed;
-				$strUnit = 's';
-			}
-			else
-			{
-				$intTime = $intElapsed * 1000;
-				$strUnit = 'ms';
-			}
-
 			$strDebug = sprintf(
 				'<div id="debug" class="%s">'
 				. '<p>'
-					. '<span class="time">Execution time: %s %s</span>'
+					. '<span class="time">Execution time: %s ms</span>'
 					. '<span class="memory">Memory usage: %s</span>'
 					. '<span class="db">Database queries: %d</span>'
 					. '<span class="rows">Rows: %d returned, %s affected</span>'
@@ -342,8 +330,7 @@ abstract class Template extends \Controller
 				. '</p>'
 				. '<div><pre>',
 				\Input::cookie('CONTAO_CONSOLE'),
-				$this->getFormattedNumber($intTime, 0),
-				$strUnit,
+				$this->getFormattedNumber(($intElapsed * 1000), 0),
 				$this->getReadableSize(memory_get_peak_usage()),
 				count($GLOBALS['TL_DEBUG']['database_queries']),
 				$intReturned,

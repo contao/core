@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleRegistration
  *
  * Front end module "registration".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -251,6 +251,12 @@ class ModuleRegistration extends \Module
 				}
 				elseif ($objWidget->submitInput())
 				{
+					// Set the correct empty value (see #6284, #6373)
+					if ($varValue === '')
+					{
+						$varValue = $objWidget->getEmptyValue();
+					}
+
 					$arrUser[$field] = $varValue;
 				}
 			}

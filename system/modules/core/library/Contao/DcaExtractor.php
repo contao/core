@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -31,7 +31,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class DcaExtractor extends \Controller
 {
@@ -291,6 +291,12 @@ class DcaExtractor extends \Controller
 			$this->loadDataContainer($this->strTable);
 		}
 
+		// Return if the DC type is "File"
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'] == 'File')
+		{
+			return;
+		}
+
 		$blnFromFile = false;
 		$arrRelations = array();
 
@@ -305,11 +311,17 @@ class DcaExtractor extends \Controller
 					$blnFromFile = true;
 				}
 
-				// Check whether there is a relation
-				if (isset($config['foreignKey']) && isset($config['relation']))
+				// Check whether there is a relation (see #6524)
+				if (isset($config['relation']))
 				{
 					$table = substr($config['foreignKey'], 0, strrpos($config['foreignKey'], '.'));
 					$arrRelations[$field] = array_merge(array('table'=>$table, 'field'=>'id'), $config['relation']);
+
+					// Table name and field name are mandatory
+					if (empty($arrRelations[$field]['table']) || empty($arrRelations[$field]['field']))
+					{
+						throw new \Exception('Incomplete relation defined for ' . $this->strTable . '.' . $field);
+					}
 				}
 			}
 		}

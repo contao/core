@@ -1,4 +1,4 @@
-/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */
+/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */
 var Theme = {
 
 	/**
@@ -15,8 +15,8 @@ var Theme = {
 	/**
 	 * Colorize a table row when hovering over it
 	 *
-	 * @param {object}  el    The DOM element
-	 * @param {integer} state The current state
+	 * @param {object} el    The DOM element
+	 * @param {int}    state The current state
 	 */
 	hoverRow: function(el, state) {
 		var items = $(el).getChildren();
@@ -30,8 +30,8 @@ var Theme = {
 	/**
 	 * Colorize a layer when hovering over it
 	 *
-	 * @param {object}  el    The DOM element
-	 * @param {integer} state The current state
+	 * @param {object} el    The DOM element
+	 * @param {int}    state The current state
 	 */
 	hoverDiv: function(el, state) {
 		if (!state) {
@@ -46,8 +46,7 @@ var Theme = {
 	 * @param {object} el The DOM element
 	 */
 	toggleSelect: function(el) {
-		var input = $(el).getElement('input'),
-			onclick = input.get('onclick');
+		var input = $(el).getElement('input');
 		if (input) {
 			if (input.checked) {
 				if (input.get('type') != 'radio') {
@@ -56,7 +55,7 @@ var Theme = {
 			} else {
 				input.checked = 'checked';
 			}
-			if (onclick == 'Backend.toggleCheckboxes(this)') {
+			if (input.get('onclick') == 'Backend.toggleCheckboxes(this)') {
 				Backend.toggleCheckboxes(input); // see #6399
 			}
 		}
@@ -112,14 +111,13 @@ var Theme = {
 
 			// Set up regular click events on touch devices
 			if (Browser.Features.Touch) {
-				el.addEvent('click', function(e) {
+				el.addEvent('click', function() {
 					if (!el.getAttribute('data-visited')) {
 						el.setAttribute('data-visited', 1);
 					} else {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('edit')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 						el.removeAttribute('data-visited');
@@ -133,19 +131,57 @@ var Theme = {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('editheader')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 					} else if (key) {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('edit')) {
 								document.location.href = a.href;
-								return;
 							}
 						});
 					}
 				});
 			}
+		});
+	},
+
+	/**
+	 * Set up the textarea resizing
+	 */
+	setupTextareaResizing: function() {
+		$$('.tl_textarea').each(function(el) {
+			if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+			if (el.hasClass('noresize') || el.retrieve('autogrow')) return;
+
+			// Set up the dummy element
+			var dummy = new Element('div', {
+				html: 'X',
+				styles: {
+					'position':'absolute',
+					'top':0,
+					'left':'-999em',
+					'overflow-x':'hidden'
+				}
+			}).setStyles(
+				el.getStyles('font-size', 'font-family', 'width', 'line-height')
+			).inject(document.body);
+
+			// Single line height
+			var line = dummy.clientHeight;
+
+			// Respond to the "input" event
+			el.addEvent('input', function() {
+				dummy.set('html', this.get('value')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;')
+					.replace(/\n|\r\n/g, '<br>X'));
+				var height = Math.max(line, dummy.getSize().y);
+				if (this.clientHeight != height) this.tween('height', height);
+			}).set('tween', { 'duration':100 }).setStyle('height', line + 'px');
+
+			// Fire the event
+			el.fireEvent('input');
+			el.store('autogrow', true);
 		});
 	}
 };
@@ -155,10 +191,12 @@ window.addEvent('domready', function() {
 	Theme.fixLabelLastChild();
 	Theme.stopClickPropagation();
 	Theme.setupCtrlClick();
+	Theme.setupTextareaResizing();
 });
 
 // Respond to Ajax changes
 window.addEvent('ajax_change', function() {
 	Theme.stopClickPropagation();
 	Theme.setupCtrlClick();
+	Theme.setupTextareaResizing();
 });

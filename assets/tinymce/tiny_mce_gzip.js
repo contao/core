@@ -148,9 +148,9 @@ var tinyMCE_GZ = {
 
 /**
  * Allow to run multiple TinyMCE instances with different
- * configurations on the same page 
+ * configurations on the same page
  *
- * @copyright Andreas Schempp, 2013
+ * @copyright Andreas Schempp 2013-2014
  */
 if (Object.create) {
 	var tinyMCE_GZ_shim = tinyMCE_GZ_shim || (function() {

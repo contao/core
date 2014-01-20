@@ -86,8 +86,8 @@
         <target>Formato e-mail</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>Questo formato mostra i campi &lt;em&gt;e-mail&lt;/em&gt;, &lt;em&gt;oggetto&lt;/em&gt;, &lt;em&gt;messaggio&lt;/em&gt; e &lt;em&gt;cc&lt;/em&gt; (invia una copia dell'e-mail al mittente). Gli altri campi verranno ignorati. È permesso il caricamento di file.</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Questo formato mostra i campi &lt;em&gt;nome&lt;/em&gt;, &lt;em&gt;e-mail&lt;/em&gt;, &lt;em&gt;oggetto&lt;/em&gt;, &lt;em&gt;messaggio&lt;/em&gt; e &lt;em&gt;cc&lt;/em&gt; (invia una copia dell'e-mail al mittente). Gli altri campi verranno ignorati. È permesso il caricamento di file.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

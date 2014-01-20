@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentElement
  *
  * Parent class for content elements.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -173,6 +173,11 @@ abstract class ContentElement extends \Frontend
 		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
+		}
+
+		if (!empty($this->objModel->classes) && is_array($this->objModel->classes))
+		{
+			$this->Template->class .= ' ' . implode(' ', $this->objModel->classes);
 		}
 
 		return $this->Template->parse();

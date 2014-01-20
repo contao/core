@@ -245,6 +245,9 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Aucun enregistrement de la base de données trouvé pour %s. Veuillez synchroniser le système de fichiers.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Veuillez additionner %d et %d.</target>

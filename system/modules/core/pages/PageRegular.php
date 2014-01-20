@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -209,7 +209,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Override the autodetected value
-		if (\Input::cookie('TL_VIEW') == 'mobile' && $objPage->mobileLayout)
+		if (\Input::cookie('TL_VIEW') == 'mobile')
 		{
 			$blnMobile = true;
 		}
@@ -218,7 +218,7 @@ class PageRegular extends \Frontend
 			$blnMobile = false;
 		}
 
-		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
+		$intId = ($blnMobile && $objPage->mobileLayout) ? $objPage->mobileLayout : $objPage->layout;
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout

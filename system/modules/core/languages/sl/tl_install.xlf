@@ -179,6 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbSocket">
         <source>Socket file</source>
+        <target>Vtičnica (socket file)</target>
       </trans-unit>
       <trans-unit id="tl_install.dbSave">
         <source>Save database settings</source>
@@ -239,6 +240,9 @@
       <trans-unit id="tl_install.doNotTruncate">
         <source>Do not truncate tables</source>
         <target>Ne prazni (truncate) tabel</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
       </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>

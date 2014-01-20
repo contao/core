@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -25,7 +25,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Dbafs
 {
@@ -167,7 +167,7 @@ class Dbafs
 				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFile->path] = $objModel->id;
+				$arrPids[$objFile->path] = $objModel->uuid;
 			}
 			else
 			{
@@ -184,7 +184,7 @@ class Dbafs
 				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFolder->path] = $objModel->id;
+				$arrPids[$objFolder->path] = $objModel->uuid;
 			}
 
 			// Store the model to be returned (see #5979)

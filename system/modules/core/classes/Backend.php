@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Backend
  *
  * Provide methods to manage back end controllers.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -46,6 +46,11 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTheme()
 	{
+		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		{
+			return 'default'; // see #6505
+		}
+
 		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
 
 		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))

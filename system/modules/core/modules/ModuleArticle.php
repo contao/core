@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleArticle
  *
  * Provides methodes to handle articles.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -184,27 +184,24 @@ class ModuleArticle extends \Module
 
 			while ($objCte->next())
 			{
+				$arrCss = array();
 				$objRow = $objCte->current();
 
 				// Add the "first" and "last" classes (see #2583)
 				if ($intCount == 0 || $intCount == $intLast)
 				{
-					$arrCss = deserialize($objRow->cssID);
-
 					if ($intCount == 0)
 					{
-						$arrCss[1] .= ' first';
+						$arrCss[] = 'first';
 					}
 
 					if ($intCount == $intLast)
 					{
-						$arrCss[1] .= ' last';
+						$arrCss[] = 'last';
 					}
-
-					$arrCss[1] = trim($arrCss[1]);
-					$objRow->cssID = serialize($arrCss);
 				}
 
+				$objRow->classes = $arrCss;
 				$arrElements[] = $this->getContentElement($objRow, $this->strColumn);
 				++$intCount;
 			}

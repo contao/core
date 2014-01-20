@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
-        <target>Det ser ud til at du opdaterer fra en ældre version end %s. Er dette tilfældet, &lt;strong&gt;påkræves det at køre version %s opdateringen&lt;/strong&gt; for at sikre integriteten af dine data!</target>
+        <target>Det ser ud til at du opdaterer fra en ældre version end %s. Er dette tilfældet, &lt;strong&gt;påkræves det at køre version %s opdateringen&lt;/strong&gt; for at sikre dine data!</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrun">
         <source>Run version %s update</source>
@@ -240,6 +240,10 @@
       <trans-unit id="tl_install.doNotTruncate">
         <source>Do not truncate tables</source>
         <target>Afkort ikke tabeller</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>Overskriv repository tabellerne</target>
       </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>

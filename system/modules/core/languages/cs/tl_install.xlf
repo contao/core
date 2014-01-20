@@ -241,6 +241,10 @@
         <source>Do not truncate tables</source>
         <target>Nevymazat tabulky</target>
       </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>Přepsat tabulky katalogu</target>
+      </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>
         <target>Importovat předlohu</target>

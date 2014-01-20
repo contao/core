@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class System
 {
@@ -228,8 +228,6 @@ abstract class System
 	 * @param string  $strName     The table name
 	 * @param boolean $strLanguage An optional language code
 	 * @param boolean $blnNoCache  If true, the cache will be bypassed
-	 *
-	 * @throws \Exception In case a language does not exist
 	 */
 	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false)
 	{
@@ -258,16 +256,15 @@ abstract class System
 			$strShortLang = substr($strLanguage, 0, 2);
 
 			// Fall back to "de" if "de_DE" does not exist
-			if ($strShortLang != $strLanguage)
+			if ($strShortLang != $strLanguage && is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
 			{
-				if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
-				{
-					throw new \Exception("Language $strLanguage does not exist");
-				}
-				else
-				{
-					$strLanguage = $strShortLang;
-				}
+				$strLanguage = $strShortLang;
+			}
+
+			// Fall back to English (see #6581)
+			else
+			{
+				$strLanguage = 'en';
 			}
 		}
 

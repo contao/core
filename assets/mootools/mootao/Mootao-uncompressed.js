@@ -1,10 +1,10 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Mootao
- * @link    https://contao.org
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -17,6 +17,9 @@ name: Request.Contao
 description: Extends the MooTools Request.JSON class with Contao-specific routines.
 
 license: LGPLv3
+
+authors:
+ - Leo Feyer
 
 requires: [Request, JSON]
 
@@ -92,6 +95,9 @@ description: Extends the MooTools Tips class with Contao-specific routines.
 
 license: LGPLv3
 
+authors:
+ - Leo Feyer
+
 requires: [Tips]
 
 provides: Tips.Contao
@@ -132,10 +138,10 @@ Tips.Contao = new Class(
 			bounds = {y: false, x2: false, y2: false, x: false},
 			obj = {};
 
-		for (var z in props){
+		for (var z in props) {
 			obj[props[z]] = event.page[z] + this.options.offset[z];
 			if (obj[props[z]] < 0) bounds[z] = true;
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]){
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]) {
 				if (z == 'x') // Ignore vertical boundaries
 					obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 				bounds[z+'2'] = true;
@@ -146,10 +152,10 @@ Tips.Contao = new Class(
 
 		// Adjust the arrow on left/right aligned tips
 		if (bounds.x2) {
-			obj['margin-left'] = '24px';
+			obj.left += 24;
 			top.setStyles({'left': 'auto', 'right': '9px'});
 		} else {
-			obj['margin-left'] = '-9px';
+			obj.left -= 9;
 			top.setStyles({'left': '9px', 'right': 'auto'});
 		}
 
@@ -160,5 +166,143 @@ Tips.Contao = new Class(
 	hide: function(element) {
 		if (!this.tip) document.id(this);
 		this.fireEvent('hide', [this.tip, element]);
+	}
+});
+
+
+/*
+---
+
+name: Drag
+
+description: Extends the base Drag class with touch support.
+
+license: LGPLv3
+
+authors:
+ - Andreas Schempp
+
+requires: [Drag]
+
+provides: Drag
+
+...
+*/
+
+Class.refactor(Drag,
+{
+	attach: function() {
+		this.handles.addEvent('touchstart', this.bound.start);
+		return this.previous.apply(this, arguments);
+	},
+
+	detach: function() {
+		this.handles.removeEvent('touchstart', this.bound.start);
+		return this.previous.apply(this, arguments);
+	},
+
+	start: function(event) {
+		document.addEvents({
+			touchmove: this.bound.check,
+			touchend: this.bound.cancel
+		});
+		this.previous.apply(this, arguments);
+	},
+
+	check: function(event) {
+		if (this.options.preventDefault) event.preventDefault();
+		var distance = Math.round(Math.sqrt(Math.pow(event.page.x - this.mouse.start.x, 2) + Math.pow(event.page.y - this.mouse.start.y, 2)));
+		if (distance > this.options.snap) {
+			this.cancel();
+			this.document.addEvents({
+				mousemove: this.bound.drag,
+				mouseup: this.bound.stop
+			});
+			document.addEvents({
+				touchmove: this.bound.drag,
+				touchend: this.bound.stop
+			});
+			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
+		}
+	},
+
+	cancel: function(event) {
+		document.removeEvents({
+			touchmove: this.bound.check,
+			touchend: this.bound.cancel
+		});
+		return this.previous.apply(this, arguments);
+	},
+
+	stop: function(event) {
+		document.removeEvents({
+			touchmove: this.bound.drag,
+			touchend: this.bound.stop
+		});
+		return this.previous.apply(this, arguments);
+	}
+});
+
+
+/*
+---
+
+name: Sortables
+
+description: Extends the base Sortables class with touch support.
+
+license: LGPLv3
+
+authors:
+ - Andreas Schempp
+
+requires: [Sortables]
+
+provides: Sortables
+
+...
+*/
+
+Class.refactor(Sortables,
+{
+	initialize: function(lists, options) {
+		options.dragOptions = Object.merge(options.dragOptions || {}, { preventDefault: (options.dragOptions && options.dragOptions.preventDefault) || Browser.Features.Touch });
+		return this.previous.apply(this, arguments);
+	},
+
+	addItems: function() {
+		Array.flatten(arguments).each(function(element) {
+			this.elements.push(element);
+			var start = element.retrieve('sortables:start', function(event) {
+				this.start.call(this, event, element);
+			}.bind(this));
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvents({
+				mousedown: start,
+				touchstart: start
+			});
+		}, this);
+		return this;
+	},
+
+	removeItems: function() {
+		return $$(Array.flatten(arguments).map(function(element) {
+			this.elements.erase(element);
+			var start = element.retrieve('sortables:start');
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvents({
+				mousedown: start,
+				touchend: start
+			});
+			return element;
+		}, this));
+	},
+
+	getClone: function(event, element) {
+		if (!this.options.clone) return new Element(element.tagName).inject(document.body);
+		if (typeOf(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		var clone = this.previous.apply(this, arguments);
+		clone.addEvent('touchstart', function(event) {
+			element.fireEvent('touchstart', event);
+		});
+		return clone;
 	}
 });

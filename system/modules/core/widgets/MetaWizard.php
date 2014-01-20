@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class MetaWizard
  *
  * Provide methods to handle file meta information.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -84,6 +84,7 @@ class MetaWizard extends \Widget
 
 		$count = 0;
 		$languages = $this->getLanguages();
+		$return = '';
 		$taken = array();
 
 		// Add the existing entries

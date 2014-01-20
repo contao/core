@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModulePersonalData
  *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -248,9 +248,17 @@ class ModulePersonalData extends \Module
 				}
 				elseif ($objWidget->submitInput())
 				{
+					// Store the form data
+					$_SESSION['FORM_DATA'][$field] = $varValue;
+
+					// Set the correct empty value (see #6284, #6373)
+					if ($varValue === '')
+					{
+						$varValue = $objWidget->getEmptyValue();
+					}
+
 					// Set the new value
 					$this->User->$field = $varValue;
-					$_SESSION['FORM_DATA'][$field] = $varValue;
 
 					// Set the new field in the member model
 					$blnModified = true;

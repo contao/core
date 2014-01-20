@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DC_File
  *
  * Provide methods to edit the local configuration file.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -350,7 +350,7 @@ class DC_File extends \DataContainer implements \editable
 					}
 					elseif (is_callable($callback))
 					{
-						$callack($this);
+						$callback($this);
 					}
 				}
 			}

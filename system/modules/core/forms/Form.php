@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Form
  *
  * Provide methods to handle front end forms.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -209,7 +209,7 @@ class Form extends \Hybrid
 					continue;
 				}
 
-				if ($objWidget->name != '')
+				if ($objWidget->name != '' && $objWidget->label != '')
 				{
 					$arrLabels[$objWidget->name] = $this->replaceInsertTags($objWidget->label); // see #4268
 				}
@@ -450,6 +450,15 @@ class Form extends \Hybrid
 				{
 					$this->import($callback[0]);
 					$arrSet = $this->$callback[0]->$callback[1]($arrSet, $this);
+				}
+			}
+
+			// Set the correct empty value (see #6284, #6373)
+			foreach ($arrSet as $k=>$v)
+			{
+				if ($v === '')
+				{
+					$arrSet[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->targetTable]['fields'][$k]['sql']);
 				}
 			}
 

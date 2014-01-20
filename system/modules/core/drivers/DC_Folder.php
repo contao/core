@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DC_Folder
  *
  * Provide methods to modify the file system.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -1973,6 +1973,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				if ($arrData['eval']['fallback'] && $varValue != '')
 				{
 					$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				}
+
+				// Set the correct empty value (see #6284, #6373)
+				if ($varValue === '')
+				{
+					$varValue = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
 				}
 
 				$this->objActiveRecord->{$this->strField} = $varValue;

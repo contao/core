@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -38,7 +38,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Model
 {
@@ -90,6 +90,12 @@ abstract class Model
 	 * @var array
 	 */
 	protected $arrRelated = array();
+
+	/**
+	 * Prevent saving
+	 * @var boolean
+	 */
+	protected $blnPreventSaving = false;
 
 
 	/**
@@ -333,12 +339,20 @@ abstract class Model
 	 * @return \Model The model object
 	 *
 	 * @throws \InvalidArgumentException If an argument is passed
+	 * @throws \LogicException           If the model cannot be saved
 	 */
 	public function save()
 	{
+		// Deprecated call
 		if (count(func_get_args()))
 		{
 			throw new \InvalidArgumentException('The $blnForceInsert argument has been removed (see system/docs/UPGRADE.md)');
+		}
+
+		// The instance cannot be saved
+		if ($this->blnPreventSaving)
+		{
+			throw new \LogicException('The model instance has been detached and cannot be saved');
 		}
 
 		$objDatabase = \Database::getInstance();
@@ -368,7 +382,7 @@ abstract class Model
 				return $this;
 			}
 
-			$intPk  = $this->{static::$strPk};
+			$intPk = $this->{static::$strPk};
 
 			// Track primary key changes
 			if (isset($this->arrModified[static::$strPk]))
@@ -463,6 +477,7 @@ abstract class Model
 	{
 		$intPk = $this->{static::$strPk};
 
+		// Track primary key changes
 		if (isset($this->arrModified[static::$strPk]))
 		{
 			$intPk = $this->arrModified[static::$strPk];
@@ -530,17 +545,26 @@ abstract class Model
 			$arrValues = deserialize($this->$strKey, true);
 			$strField = $arrRelation['table'] . '.' . $arrRelation['field'];
 
-			$arrOptions = array_merge
-			(
-				array
+			// Handle UUIDs (see #6525)
+			if ($strField == 'tl_files.uuid')
+			{
+				$objModel = $strClass::findMultipleByUuids($arrValues, $arrOptions);
+			}
+			else
+			{
+				$arrOptions = array_merge
 				(
-					'order' => \Database::getInstance()->findInSet($strField, $arrValues)
-				),
+					array
+					(
+						'order' => \Database::getInstance()->findInSet($strField, $arrValues)
+					),
 
-				$arrOptions
-			);
+					$arrOptions
+				);
 
-			$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, $arrOptions);
+				$objModel = $strClass::findBy(array($strField . " IN('" . implode("','", $arrValues) . "')"), null, $arrOptions);
+			}
+
 			$this->arrRelated[$strKey] = $objModel;
 		}
 
@@ -555,6 +579,7 @@ abstract class Model
 	{
 		$intPk = $this->{static::$strPk};
 
+		// Track primary key changes
 		if (isset($this->arrModified[static::$strPk]))
 		{
 			$intPk = $this->arrModified[static::$strPk];
@@ -574,6 +599,16 @@ abstract class Model
 	public function detach()
 	{
 		\Model\Registry::getInstance()->unregister($this);
+	}
+
+
+	/**
+	 * Prevent saving the model
+	 */
+	public function preventSaving()
+	{
+		$this->detach();
+		$this->blnPreventSaving = true;
 	}
 
 

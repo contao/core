@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -26,7 +26,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class ModuleLoader
 {
@@ -156,28 +156,29 @@ class ModuleLoader
 			// Resolve the dependencies
 			while (!empty($load))
 			{
-				$matched = false;
+				$failed = true;
 
 				foreach ($load as $name=>$requires)
 				{
 					if (empty($requires))
 					{
-						$matched = true;
+						$resolved = true;
 					}
 					else
 					{
-						$matched = count(array_diff($requires, static::$active)) === 0;
+						$resolved = count(array_diff($requires, static::$active)) === 0;
 					}
 
-					if ($matched === true)
+					if ($resolved === true)
 					{
 						unset($load[$name]);
 						static::$active[] = $name;
+						$failed = false;
 					}
 				}
 
 				// The dependencies cannot be resolved
-				if ($matched === false)
+				if ($failed === true)
 				{
 					ob_start();
 					dump($load);

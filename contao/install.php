@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -29,7 +29,7 @@ require_once '../system/initialize.php';
  * Class InstallTool
  *
  * Back end install tool.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -668,7 +668,7 @@ class InstallTool extends Backend
 					foreach ($tables as $table)
 					{
 						// Preserve the repository tables (see #6037)
-						if ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles')
+						if (isset($_POST['override']) || ($table != 'tl_repository_installs' && $table != 'tl_repository_instfiles'))
 						{
 							$this->Database->execute("TRUNCATE TABLE " . $table);
 						}
@@ -682,7 +682,7 @@ class InstallTool extends Backend
 				foreach ($sql as $query)
 				{
 					// Skip the repository tables (see #6037)
-					if (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false)
+					if (isset($_POST['override']) || (strpos($query, '`tl_repository_installs`') === false && strpos($query, '`tl_repository_instfiles`') === false))
 					{
 						$this->Database->execute($query);
 					}
@@ -834,16 +834,16 @@ class InstallTool extends Backend
 	 */
 	protected function enableSafeMode()
 	{
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
-		{
-			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
-		}
-
 		if (!$GLOBALS['TL_CONFIG']['maintenanceMode'])
 		{
 			$GLOBALS['TL_CONFIG']['maintenanceMode'] = true;
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+		}
+
+		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'] && count(array_diff(scan(TL_ROOT . '/system/modules'), array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'))) > 0)
+		{
+			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
 		}
 	}
 

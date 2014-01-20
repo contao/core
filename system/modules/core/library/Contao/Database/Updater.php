@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -18,7 +18,7 @@ namespace Contao\Database;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Updater extends \Controller
 {
@@ -325,6 +325,8 @@ class Updater extends \Controller
 
 			while ($objStyle->next())
 			{
+				$angle = '';
+
 				if (strpos($objStyle->gradientAngle, 'deg') !== false)
 				{
 					$angle = (abs(450 - intval($objStyle->gradientAngle)) % 360) . 'deg';
@@ -541,6 +543,9 @@ class Updater extends \Controller
 
 			// Update the fields
 			$this->updateFileTreeFields();
+
+			// Drop the pid_backup column
+			$this->Database->query("ALTER TABLE `tl_files` DROP `pid_backup`");
 		}
 	}
 
@@ -758,26 +763,39 @@ class Updater extends \Controller
 	 */
 	public static function convertSingleField($table, $field)
 	{
-		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-		// Backup the original column and then change the column type
-		if (!$objDatabase->fieldExists($backup, $table, true))
+		// Get the non-empty rows
+		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field!=''");
+
+		if ($objRow->numRows < 1)
 		{
-			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` varchar(255) NOT NULL default ''");
-			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
-			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
-			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+			return;
 		}
 
-		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+		$objDesc = $objDatabase->query("DESC $table $field");
+
+		// Change the column type
+		if ($objDesc->Type != 'binary(16)')
+		{
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` binary(16) NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL WHERE `$field`='' OR `$field`=0");
+		}
 
 		while ($objRow->next())
 		{
-			// Numeric ID to UUID
-			if (is_numeric($objRow->$backup))
+			$objHelper = static::generateHelperObject($objRow->$field);
+
+			// UUID already
+			if ($objHelper->isUuid)
 			{
-				$objFile = \FilesModel::findByPk($objRow->$backup);
+				continue;
+			}
+
+			// Numeric ID to UUID
+			if ($objHelper->isNumeric)
+			{
+				$objFile = \FilesModel::findByPk($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 							->execute($objFile->uuid, $objRow->id);
@@ -786,7 +804,7 @@ class Updater extends \Controller
 			// Path to UUID
 			else
 			{
-				$objFile = \FilesModel::findByPath($objRow->$backup);
+				$objFile = \FilesModel::findByPath($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
 							->execute($objFile->uuid, $objRow->id);
@@ -803,48 +821,61 @@ class Updater extends \Controller
 	 */
 	public static function convertMultiField($table, $field)
 	{
-		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-		// Backup the original column and then change the column type
-		if (!$objDatabase->fieldExists($backup, $table, true))
+		// Get the non-empty rows
+		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field!=''");
+
+		if ($objRow->numRows < 1)
 		{
-			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
-			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
-			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
-			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+			return;
 		}
 
-		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
+		$objDesc = $objDatabase->query("DESC $table $field");
+
+		// Change the column type
+		if ($objDesc->Type != 'blob')
+		{
+			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
+			$objDatabase->query("UPDATE `$table` SET `$field`=NULL WHERE `$field`=''");
+		}
 
 		while ($objRow->next())
 		{
-			$arrPaths = deserialize($objRow->$backup, true);
+			$arrValues = deserialize($objRow->$field, true);
 
-			if (empty($arrPaths))
+			if (empty($arrValues))
 			{
 				continue;
 			}
 
-			foreach ($arrPaths as $k=>$v)
+			$objHelper = static::generateHelperObject($arrValues);
+
+			// UUID already
+			if ($objHelper->isUuid)
+			{
+				continue;
+			}
+
+			foreach ($arrValues as $k=>$v)
 			{
 				// Numeric ID to UUID
-				if (is_numeric($v))
+				if ($objHelper->isNumeric)
 				{
-					$objFile = \FilesModel::findByPk($v);
-					$arrPaths[$k] = $objFile->uuid;
+					$objFile = \FilesModel::findByPk($objHelper->value[$k]);
+					$arrValues[$k] = $objFile->uuid;
 				}
 
 				// Path to UUID
 				else
 				{
-					$objFile = \FilesModel::findByPath($v);
-					$arrPaths[$k] = $objFile->uuid;
+					$objFile = \FilesModel::findByPath($objHelper->value[$k]);
+					$arrValues[$k] = $objFile->uuid;
 				}
 			}
 
 			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-						->execute(serialize($arrPaths), $objRow->id);
+						->execute(serialize($arrValues), $objRow->id);
 		}
 	}
 
@@ -857,44 +888,52 @@ class Updater extends \Controller
 	 */
 	public static function convertOrderField($table, $field)
 	{
-		$backup = $field . '_backup';
 		$objDatabase = \Database::getInstance();
 
-		// Backup the original column and then change the column type
-		if (!$objDatabase->fieldExists($backup, $table, true))
+		// Get the non-empty rows
+		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field LIKE '%,%'");
+
+		if ($objRow->numRows < 1)
 		{
-			$objDatabase->query("ALTER TABLE `$table` ADD `$backup` blob NULL");
-			$objDatabase->query("UPDATE `$table` SET `$backup`=`$field`");
-			$objDatabase->query("ALTER TABLE `$table` CHANGE `$field` `$field` blob NULL");
-			$objDatabase->query("UPDATE `$table` SET `$field`=NULL");
+			return;
 		}
 
-		$objRow = $objDatabase->query("SELECT id, $backup FROM $table WHERE $backup!=''");
-
+		// Convert the comma separated lists into serialized arrays
 		while ($objRow->next())
 		{
-			$arrPaths = explode(',', $objRow->$backup);
-
-			foreach ($arrPaths as $k=>$v)
-			{
-				// Numeric ID to UUID
-				if (is_numeric($v))
-				{
-					$objFile = \FilesModel::findByPk($v);
-					$arrPaths[$k] = $objFile->uuid;
-				}
-
-				// Path to UUID
-				else
-				{
-					$objFile = \FilesModel::findByPath($v);
-					$arrPaths[$k] = $objFile->uuid;
-				}
-			}
-
 			$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
-						->execute(serialize($arrPaths), $objRow->id);
+						->execute(serialize(explode(',', $objRow->$field)), $objRow->id);
 		}
+
+		static::convertMultiField($table, $field);
+	}
+
+
+	/**
+	 * Generate a helper object based on a field value
+	 *
+	 * @param mixed $value The field value
+	 *
+	 * @return \stdClass The helper object
+	 */
+	protected static function generateHelperObject($value)
+	{
+		$return = new \stdClass();
+
+		if (!is_array($value))
+		{
+			$return->value = rtrim($value, "\x00");
+			$return->isUuid = (strlen($value) == 16 && !is_numeric($return->value) && strncmp($return->value, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isNumeric = (is_numeric($return->value) && $return->value > 0);
+		}
+		else
+		{
+			$return->value = array_map(function($var) { return rtrim($var, "\x00"); }, $value);
+			$return->isUuid = (strlen($value[0]) == 16 && !is_numeric($return->value[0]) && strncmp($return->value[0], $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isNumeric = (is_numeric($return->value[0]) && $return->value[0] > 0);
+		}
+
+		return $return;
 	}
 
 

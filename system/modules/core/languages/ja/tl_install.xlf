@@ -241,6 +241,10 @@
         <source>Do not truncate tables</source>
         <target>テーブルを切り捨てない</target>
       </trans-unit>
+      <trans-unit id="tl_install.repOverride">
+        <source>Override the repository tables</source>
+        <target>リポジトリのテーブルを上書き</target>
+      </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>
         <target>テンプレートをインポート</target>

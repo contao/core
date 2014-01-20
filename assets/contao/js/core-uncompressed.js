@@ -1,10 +1,10 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
+ * @package Typolinks
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -13,7 +13,7 @@
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 var AjaxRequest =
@@ -50,7 +50,7 @@ var AjaxRequest =
 		new Request.Contao({
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'tl_parent',
@@ -80,10 +80,10 @@ var AjaxRequest =
 	/**
 	 * Toggle the site structure tree
 	 *
-	 * @param {object}  el    The DOM lement
-	 * @param {string}  id    The ID of the target element
-	 * @param {integer} level The indentation level
-	 * @param {integer} mode  The insert mode
+	 * @param {object} el    The DOM lement
+	 * @param {string} id    The ID of the target element
+	 * @param {int}    level The indentation level
+	 * @param {int}    mode  The insert mode
 	 *
 	 * @returns {boolean}
 	 */
@@ -112,7 +112,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -130,7 +130,8 @@ var AjaxRequest =
 					li.inject($(el).getParent('li'), 'after');
 				} else {
 					var folder = false,
-						parent = $(el).getParent('li');
+						parent = $(el).getParent('li'),
+						next;
 
 					while (typeOf(parent) == 'element' && (next = parent.getNext('li'))) {
 						parent = next;
@@ -168,10 +169,10 @@ var AjaxRequest =
 	/**
 	 * Toggle the file manager tree
 	 *
-	 * @param {object}  el     The DOM element
-	 * @param {string}  id     The ID of the target element
-	 * @param {string}  folder The folder's path
-	 * @param {integer} level  The indentation level
+	 * @param {object} el     The DOM element
+	 * @param {string} id     The ID of the target element
+	 * @param {string} folder The folder's path
+	 * @param {int}    level  The indentation level
 	 *
 	 * @returns {boolean}
 	 */
@@ -203,7 +204,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -240,11 +241,11 @@ var AjaxRequest =
 	/**
 	 * Toggle the page tree input field
 	 *
-	 * @param {object}  el    The DOM element
-	 * @param {string}  id    The ID of the target element
-	 * @param {string}  field The field name
-	 * @param {string}  name  The Ajax field name
-	 * @param {integer} level The indentation level
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} field The field name
+	 * @param {string} name  The Ajax field name
+	 * @param {int}    level The indentation level
 	 *
 	 * @returns {boolean}
 	 */
@@ -274,7 +275,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -310,12 +311,12 @@ var AjaxRequest =
 	/**
 	 * Toggle the file tree input field
 	 *
-	 * @param {object}  el     The DOM element
-	 * @param {string}  id     The ID of the target element
-	 * @param {string}  folder The folder name
-	 * @param {string}  field  The field name
-	 * @param {string}  name   The Ajax field name
-	 * @param {integer} level  The indentation level
+	 * @param {object} el     The DOM element
+	 * @param {string} id     The ID of the target element
+	 * @param {string} folder The folder name
+	 * @param {string} field  The field name
+	 * @param {string} name   The Ajax field name
+	 * @param {int}    level  The indentation level
 	 *
 	 * @returns {boolean}
 	 */
@@ -345,7 +346,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -429,7 +430,6 @@ var AjaxRequest =
 				});
 
 				AjaxRequest.hideBox();
-				Backend.addColorPicker();
 
 				// HOOK
 				window.fireEvent('subpalette'); // Backwards compatibility
@@ -453,7 +453,8 @@ var AjaxRequest =
 		var img = null,
 			image = $(el).getFirst('img'),
 			publish = (image.src.indexOf('invisible') != -1),
-			div = el.getParent('div');
+			div = el.getParent('div'),
+			next;
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
@@ -488,11 +489,12 @@ var AjaxRequest =
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
+					var index;
 					if (publish) {
-						var index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
 					} else {
-						var index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2');
 					}
 				}
@@ -696,14 +698,33 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 var Backend =
 {
+	/**
+	 * The current ID
+	 * @member {string}
+	 */
 	currentId: null,
+
+	/**
+	 * The x mouse position
+	 * @member {int}
+	 */
 	xMousePosition: 0,
+
+	/**
+	 * The Y mouse position
+	 * @member {int}
+	 */
 	yMousePosition: 0,
+
+	/**
+	 * The popup window
+	 * @member {object}
+	 */
 	popupWindow: null,
 
 	/**
@@ -719,9 +740,9 @@ var Backend =
 	/**
 	 * Open a new window
 	 *
-	 * @param {object}  el     The DOM element
-	 * @param {integer} width  The width in pixels
-	 * @param {integer} height The height in pixels
+	 * @param {object} el     The DOM element
+	 * @param {int}    width  The width in pixels
+	 * @param {int}    height The height in pixels
 	 *
 	 * @deprecated Use Backend.openModalWindow() instead
 	 */
@@ -735,9 +756,9 @@ var Backend =
 	/**
 	 * Open a modal window
 	 *
-	 * @param {integer} width   The width in pixels
-	 * @param {string}  title   The window's title
-	 * @param {string}  content The window's content
+	 * @param {int}    width   The width in pixels
+	 * @param {string} title   The window's title
+	 * @param {string} content The window's content
 	 */
 	openModalWindow: function(width, title, content) {
 		new SimpleModal({
@@ -803,8 +824,8 @@ var Backend =
 	 * @param {object} options An optional options object
 	 */
 	openModalSelector: function(options) {
-		var opt = options || {};
-		var max = (window.getSize().y-180).toInt();
+		var opt = options || {},
+			max = (window.getSize().y-180).toInt();
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
@@ -821,7 +842,7 @@ var Backend =
 			var val = [],
 				frm = null,
 				frms = window.frames;
-			for (var i=0; i<frms.length; i++) {
+			for (i=0; i<frms.length; i++) {
 				if (frms[i].name == 'simple-modal-iframe') {
 					frm = frms[i];
 					break;
@@ -899,7 +920,7 @@ var Backend =
 	/**
 	 * Scroll the window to a certain vertical position
 	 *
-	 * @param {integer} offset The offset to scroll to
+	 * @param {int} offset The offset to scroll to
 	 */
 	vScrollTo: function(offset) {
 		window.addEvent('load', function() {
@@ -1114,9 +1135,8 @@ var Backend =
 			el.addClass('collapsed');
 		});
 		$$('label.error, label.mandatory').each(function(el) {
-			if (fs = el.getParent('fieldset')) {
-				fs.removeClass('collapsed');
-			}
+			var fs = el.getParent('fieldset');
+			fs && fs.removeClass('collapsed');
 		});
 	},
 
@@ -1172,7 +1192,7 @@ var Backend =
 			},
 			onComplete: function() {
 				ds.stop();
-    		},
+			},
 			onSort: function(el) {
 				var div = el.getFirst('div'),
 					prev, next, first;
@@ -1217,43 +1237,45 @@ var Backend =
 		});
 
 		list.addEvent('complete', function(el) {
-	    	if (!list.active) return;
+			if (!list.active) return;
+			var id, pid, req, href;
 
-    		if (el.getPrevious('li')) {
-    			var id = el.get('id').replace(/li_/, ''),
-    				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
-    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
-    				href = window.location.href.replace(/\?.*$/, '');
-    			new Request.Contao({'url':href+req, 'followRedirects':false}).get();
-    		} else if (el.getParent('ul')) {
-    			var id = el.get('id').replace(/li_/, ''),
-    				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
-    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
-    				href = window.location.href.replace(/\?.*$/, '');
-    			new Request.Contao({'url':href+req, 'followRedirects':false}).get();
-    		}
-    	});
+			if (el.getPrevious('li')) {
+				id = el.get('id').replace(/li_/, '');
+				pid = el.getPrevious('li').get('id').replace(/li_/, '');
+				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
+				href = window.location.href.replace(/\?.*$/, '');
+				new Request.Contao({'url':href+req, 'followRedirects':false}).get();
+			} else if (el.getParent('ul')) {
+				id = el.get('id').replace(/li_/, '');
+				pid = el.getParent('ul').get('id').replace(/ul_/, '');
+				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
+				href = window.location.href.replace(/\?.*$/, '');
+				new Request.Contao({'url':href+req, 'followRedirects':false}).get();
+			}
+		});
 	},
 
-    /**
-     * Make multiSRC items sortable
+	/**
+	 * Make multiSRC items sortable
 	 *
-     * @param {string} id  The ID of the target element
-     * @param {string} oid The DOM element
-     */
-    makeMultiSrcSortable: function(id, oid) {
-        var list = new Sortables($(id), {
-            contstrain: true,
-            opacity: 0.6
-        }).addEvent('complete', function() {
-            var els = [],
-            	lis = $(id).getChildren('li');
-            for (i=0; i<lis.length; i++) {
-                els.push(lis[i].get('data-id'));
-            }
-            $(oid).value = els.join(',');
-        });
-        list.fireEvent("complete"); // Initial sorting
+	 * @param {string} id  The ID of the target element
+	 * @param {string} oid The DOM element
+	 */
+	makeMultiSrcSortable: function(id, oid) {
+		var list = new Sortables($(id), {
+			contstrain: true,
+			opacity: 0.6
+		}).addEvent('complete', function() {
+			var els = [],
+				lis = $(id).getChildren('li'),
+				i;
+			for (i=0; i<lis.length; i++) {
+				els.push(lis[i].get('data-id'));
+			}
+			$(oid).value = els.join(',');
+		});
+		list.fireEvent("complete"); // Initial sorting
 	},
 
 	/**
@@ -1310,7 +1332,7 @@ var Backend =
 		});
 	},
 
-    /**
+	/**
 	 * List wizard
 	 *
 	 * @param {object} el      The DOM element
@@ -1387,7 +1409,7 @@ var Backend =
 			headTr = table.getElement('thead').getFirst('tr'),
 			cols = parentTr.getChildren(),
 			index = 0,
-			textarea, previous, next, i;
+			textarea, previous, next, current, i;
 
 		for (i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
@@ -1402,7 +1424,7 @@ var Backend =
 			case 'rcopy':
 				var tr = new Element('tr');
 				for (i=0; i<cols.length; i++) {
-					var next = cols[i].clone(true).inject(tr, 'bottom');
+					next = cols[i].clone(true).inject(tr, 'bottom');
 					if (textarea = cols[i].getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
@@ -1432,8 +1454,8 @@ var Backend =
 				break;
 			case 'ccopy':
 				for (i=0; i<rows.length; i++) {
-					var current = rows[i].getChildren()[index],
-						next = current.clone(true).inject(current, 'after');
+					current = rows[i].getChildren()[index];
+					next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
@@ -1443,12 +1465,12 @@ var Backend =
 			case 'cmovel':
 				if (index > 0) {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(current.getPrevious(), 'before');
 					}
 				} else {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(rows[i].getLast(), 'before');
 					}
 				}
@@ -1456,12 +1478,12 @@ var Backend =
 			case 'cmover':
 				if (index < (cols.length - 2)) {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(current.getNext(), 'after');
 					}
 				} else {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(rows[i].getFirst(), 'before');
 					}
 				}
@@ -1562,8 +1584,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
@@ -1640,8 +1662,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1716,8 +1738,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1752,7 +1774,7 @@ var Backend =
 		for (i=0; i<rows.length; i++) {
 			childs = rows[i].getChildren();
 			for (j=0; j<childs.length; j++) {
-				if (input = first = childs[j].getFirst('input')) {
+				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
 				}
@@ -1939,7 +1961,6 @@ window.addEvent('domready', function() {
 
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
-	Backend.addColorPicker();
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
 
@@ -1972,34 +1993,35 @@ window.addEvent('ajax_change', function() {
 	}
 });
 
-// Map the touch events to mouse events on mobile devices
-if (Browser.Features.Touch) (function() {
-	delete Element.NativeEvents['mousedown'];
-	Element.defineCustomEvent('mousedown', { base:'touchstart' });
-
-	delete Element.NativeEvents['mousemove'];
-	Element.defineCustomEvent('mousemove', { base:'touchmove' });
-
-	delete Element.NativeEvents['mouseup'];
-	Element.defineCustomEvent('mouseup', { base:'touchend' });
-})();
-
 
 /**
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 var TinyCallback =
 {
+	/**
+	 * Set the scroll offset upon focus
+	 *
+	 * @param {object} ed The editor object
+	 */
 	getScrollOffset: function(ed) {
 		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();
-	    });
+		});
 	},
 
+	/**
+	 * Add a custom file browser
+	 *
+	 * @param {string} field_name The field name
+	 * @param {object} url        An URI object
+	 * @param {string} type       The picker type
+	 * @param {object} win        The window object
+	 */
 	fileBrowser: function(field_name, url, type, win) {
 		var M = new SimpleModal({
 			'width': 765,
@@ -2013,8 +2035,9 @@ var TinyCallback =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var frms = window.frames, frm, val, prev;
-			for (var i=0; i<frms.length; i++) {
+			var frms = window.frames,
+				frm, val, prev, i;
+			for (i=0; i<frms.length; i++) {
 				if (frms[i].name == 'simple-modal-iframe') {
 					frm = frms[i];
 					break;
@@ -2025,7 +2048,7 @@ var TinyCallback =
 				return;
 			}
 			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (var i=0; i<inp.length; i++) {
+			for (i=0; i<inp.length; i++) {
 				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
 					val = inp[i].get('value');
 					break;

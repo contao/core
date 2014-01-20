@@ -78,8 +78,8 @@
         <target>マークアップを削減</target>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
-        <target>ブラウザーに送る前にHTMLのマークアップを少なくします。(PHPのtidy拡張が必要です。)</target>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>ブラウザーに送る前にHTMLのマークアップを少なくします。</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>

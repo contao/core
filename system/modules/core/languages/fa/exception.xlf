@@ -19,12 +19,15 @@
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>برای اختصاصی کردن این یادداشت، یک پرونده قالب اختصاصی با نام &lt;em&gt;%s&lt;/em&gt; ایجاد نمایید.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
+        <target>خطائی در هنگام اجاری این اسکریپت رخ داد. بعضی چیزها به درستی کار نمی‌کنند.</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
+        <target>پرونده &lt;code&gt;system/logs/error.log&lt;/code&gt; را باز نمایید و پیغام خطای مرتبط (معمولا آخرین سطر) را جستجو نمایید. همچنین شما می‌توانید کد زیر را آخرین سطر پرونده تنظیمات محلی اضافه نموده و این صفحه را دوباره بارگذاری نمایید:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
@@ -38,6 +41,7 @@
       </trans-unit>
       <trans-unit id="XPT.invalidToken">
         <source>The request token could not be verified.</source>
+        <target>توکن درخواستی نمی‌تواند تایید شود.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
@@ -70,6 +74,7 @@
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
+        <target>صفحه یافت نشد</target>
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
@@ -79,6 +84,7 @@
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
+        <target>صفحه به بعد یافت نشد</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
@@ -88,6 +94,7 @@
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>صفحه‌ی ریشه یافت نشد</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>
@@ -97,6 +104,7 @@
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>هیچ چیدمانی مشخص نشده است</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
@@ -109,6 +117,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
+        <target>صفحه‌ی فعالی یافت نشد </target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
@@ -118,6 +127,7 @@
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
+        <target>ممنوع</target>
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
@@ -127,9 +137,11 @@
       </trans-unit>
       <trans-unit id="XPT.unavailable">
         <source>We'll be right back</source>
+        <target>ما به زودی باز خواهیم گشت</target>
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>این وب‌سایت در حال حاضر برای بروزرسانی غیرفعال می‌باشد. لطفا بعدا مراجعه نمایید.</target>
       </trans-unit>
     </body>
   </file>

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -99,52 +99,54 @@ class RepositoryBackendModule extends BackendModule
 		$rep->backLink	= $this->getReferer(true);
 		$rep->homeLink	= $this->createUrl();
 
-		// load soap client in case wsdl file is defined
-		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
-		if ($wsdl != '') {
-			try {
-				if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
-				// Buggy gzencode call in PHP 5.4.0-5.4.3 (thanks to borrible13th) (see #4087)
-				if (version_compare(PHP_VERSION, '5.4.0', '>=') && version_compare(PHP_VERSION, '5.4.4', '<')) {
-					define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_DEFLATE);
-				} else {
-					define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_GZIP);
+		// load soap client in case wsdl file is defined (see #6561)
+		if (extension_loaded('soap')) {
+			$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
+			if ($wsdl != '') {
+				try {
+					if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
+					// Buggy gzencode call in PHP 5.4.0-5.4.3 (thanks to borrible13th) (see #4087)
+					if (version_compare(PHP_VERSION, '5.4.0', '>=') && version_compare(PHP_VERSION, '5.4.4', '<')) {
+						define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_DEFLATE);
+					} else {
+						define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_GZIP);
+					}
+					// HOOK: proxy module
+					if ($GLOBALS['TL_CONFIG']['useProxy']) {
+						$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
+						$this->client = new SoapClient($wsdl, array(
+							'soap_version' => SOAP_1_2,
+							'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1,
+							'proxy_host' => $proxy_uri['host'],
+							'proxy_port' => $proxy_uri['port'],
+							'proxy_login' => $proxy_uri['user'],
+							'proxy_password' => $proxy_uri['pass']
+						));
+					}
+					// Default client
+					else {
+						$this->client = new SoapClient($wsdl, array(
+							'soap_version' => SOAP_1_2,
+							'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1
+						));
+					}
+					$this->mode = 'soap';
+				} catch (Exception $e) {
+					$rep->installLink = $this->createUrl(array());
+					$rep->updateLink = $this->createUrl(array('update'=>'database'));
+					$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">Could not connect to the repository server</p>';
+					if ($compiler == 'update') $this->$compiler($this->parameter);
+					return;
 				}
-				// HOOK: proxy module
-				if ($GLOBALS['TL_CONFIG']['useProxy']) {
-					$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
-					$this->client = new SoapClient($wsdl, array(
-						'soap_version' => SOAP_1_2,
-						'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1,
-						'proxy_host' => $proxy_uri['host'],
-						'proxy_port' => $proxy_uri['port'],
-						'proxy_login' => $proxy_uri['user'],
-						'proxy_password' => $proxy_uri['pass']
-					));
-				}
-				// Default client
-				else {
-					$this->client = new SoapClient($wsdl, array(
-						'soap_version' => SOAP_1_2,
-						'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1
-					));
-				}
-				$this->mode = 'soap';
-			} catch (Exception $e) {
-				$rep->installLink = $this->createUrl(array());
-				$rep->updateLink = $this->createUrl(array('update'=>'database'));
-				$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">Could not connect to the repository server</p>';
-				if ($compiler == 'update') $this->$compiler($this->parameter);
-				return;
-			}
-		} else {
-			// fallback to load RepositoryServer class if on central server
-			if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
-				$this->import('RepositoryServer');
-				$this->RepositoryServer->enableLocal();
-				$this->mode = 'local';
+			} else {
+				// fallback to load RepositoryServer class if on central server
+				if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
+					$this->import('RepositoryServer');
+					$this->RepositoryServer->enableLocal();
+					$this->mode = 'local';
+				} // if
 			} // if
-		}
+		} // if
 
 		// execute compiler
 		$this->$compiler($this->parameter);

@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
-        <target>ファイルのソースを編集します。(F11を押すして全画面モードとの間を切り替え)</target>
+        <target>ファイルのソースを編集します。(F11を押すと全画面モードと切り替え)</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>

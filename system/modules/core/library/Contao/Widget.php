@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -38,7 +38,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Widget extends \Controller
 {
@@ -991,6 +991,14 @@ abstract class Widget extends \Controller
 					}
 					break;
 
+				// Check whether the current value is a Google+ ID or vanity name
+				case 'google+':
+					if (!\Validator::isGooglePlusId($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidGoogleId'], $this->strLabel));
+					}
+					break;
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
@@ -1306,16 +1314,8 @@ abstract class Widget extends \Controller
 
 			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
 			{
-				$value = '';
-
-				// Set to 0 for numeric columns (see #6373)
-				if (isset($arrData['sql']))
-				{
-					$value = static::getEmptyValueByFieldType($arrData['sql']);
-				}
-
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
-				$arrAttributes['options'][] = array('value'=>$value, 'label'=>$strLabel);
+				$arrAttributes['options'][] = array('value'=>'', 'label'=>$strLabel);
 			}
 
 			foreach ($arrData['options'] as $k=>$v)
@@ -1359,11 +1359,27 @@ abstract class Widget extends \Controller
 
 
 	/**
-	 * Check for numeric fields based on the SQL string
+	 * Return the empty value based on the SQL string
+	 *
+	 * @return string|integer|null The empty value
+	 */
+	public function getEmptyValue()
+	{
+		if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']))
+		{
+			return '';
+		}
+
+		return static::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
+	}
+
+
+	/**
+	 * Return the empty value based on the SQL string
 	 *
 	 * @param string $sql The SQL string
 	 *
-	 * @return boolean True if the field is numeric
+	 * @return string|integer|null The empty value
 	 */
 	public static function getEmptyValueByFieldType($sql)
 	{

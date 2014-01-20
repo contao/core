@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -25,7 +25,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Validator
 {
@@ -261,7 +261,7 @@ class Validator
 
 
 	/**
-	 * Valid an UUID
+	 * Valid UUID
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -275,5 +275,18 @@ class Validator
 		}
 
 		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
+	}
+
+
+	/**
+	 * Valid Google+ ID or vanity name
+	 *
+	 * @param mixed $varValue The numeric ID or vanity name
+	 *
+	 * @return boolean True if the value is a Google+ ID
+	 */
+	public static function isGooglePlusId($varValue)
+	{
+		return preg_match('/^([0-9]{21}|\+[\pN\pL-]+)$/', $varValue);
 	}
 }

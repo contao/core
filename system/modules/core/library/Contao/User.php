@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class User extends \System
 {
@@ -499,6 +499,9 @@ abstract class User extends \System
 			return false;
 		}
 
+		$intUserid = null;
+
+		// Find the session
 		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
 									 ->limit(1)
 									 ->execute($this->strHash, $this->strCookie);
@@ -525,7 +528,8 @@ abstract class User extends \System
 		session_write_close();
 
 		// Reset the session cookie
-		$this->setCookie(session_name(), session_id(), ($time - 86400), '/');
+		$params = session_get_cookie_params();
+		$this->setCookie(session_name(), session_id(), ($time - 86400), $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 
 		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = false;

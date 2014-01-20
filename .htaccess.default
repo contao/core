@@ -1,7 +1,7 @@
 ##
 # Contao Open Source CMS
 #
-# Copyright (c) 2005-2013 Leo Feyer
+# Copyright (c) 2005-2014 Leo Feyer
 #
 # @package Core
 # @link    https://contao.org
@@ -175,7 +175,7 @@ FileETag None
   # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
   # have to change the <FilesMatch> directive as follows:
   #
-  # <FilesMatch "\.(?i:js|css|xml|gz)$">
+  # <FilesMatch "\.(?i:js|css|xml|gz|svgz)$">
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
@@ -246,7 +246,11 @@ FileETag None
   # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
   # have to change the <FilesMatch> directive as follows:
   #
-  # <FilesMatch "\.(?i:htm|php|js|css| … |gz)$">
+  # <FilesMatch "\.(?i:htm|php|js|css|…|gz)$">
+  #
+  # Note: The directive will disable mod_rewrite entirely for the configured
+  # file types, so if you want to apply custom rules such as domain redirects,
+  # make sure to comment the lines (see #6588).
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
@@ -281,7 +285,7 @@ FileETag None
 
   ##
   # The following rules are required if you want to pass the language as first
-  # URL parameter (added in Contao 2.11). The first rule rewrites an empty URL
+  # URL parameter (added in Contao 2.11). The first rule rewrites the empty URL
   # to the front end controller, the second one adds a missing trailing slash.
   ##
   RewriteRule ^[a-z]{2}(\-[A-Z]{2})?/$ index.php [L]

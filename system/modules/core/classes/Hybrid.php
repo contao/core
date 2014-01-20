@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Hybrid
  *
  * Parent class for objects that can be modules or content elements.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -231,6 +231,11 @@ abstract class Hybrid extends \Frontend
 		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
+		}
+
+		if (!empty($this->objParent->classes) && is_array($this->objParent->classes))
+		{
+			$this->Template->class .= ' ' . implode(' ', $this->objParent->classes);
 		}
 
 		return $this->Template->parse();

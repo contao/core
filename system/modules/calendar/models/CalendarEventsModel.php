@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class CalendarEventsModel extends \Model
 {
@@ -60,33 +60,6 @@ class CalendarEventsModel extends \Model
 		}
 
 		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
-	}
-
-
-	/**
-	 * Find the first and last event in one or more calendars
-	 *
-	 * @param array $arrPids An array of calendar IDs
-	 *
-	 * @return \Model The model
-	 */
-	public static function findBoundaries($arrPids)
-	{
-		if (!is_array($arrPids) || empty($arrPids))
-		{
-			return null;
-		}
-
-		$strQuery = "SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $arrPids)) .")";
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$strQuery .= " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
-		}
-
-		$objMinMax = \Database::getInstance()->query($strQuery);
-		return new static($objMinMax);
 	}
 
 

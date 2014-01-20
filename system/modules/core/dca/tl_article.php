@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -335,7 +335,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
  * Class tl_article
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -616,6 +616,7 @@ class tl_article extends Backend
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
+			$arrSections = array();
 			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
 			// Get the layout sections
@@ -633,8 +634,6 @@ class tl_article extends Backend
 				{
 					continue;
 				}
-
-				$arrSections = array();
 
 				// Header
 				if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
@@ -688,7 +687,7 @@ class tl_article extends Backend
 			$arrSections = array_merge($arrSections, $arrCustom);
 		}
 
-		return $arrSections;
+		return array_values(array_unique($arrSections));
 	}
 
 
