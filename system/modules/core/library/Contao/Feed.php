@@ -145,7 +145,7 @@ class Feed
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '<item>';
-			$xml .= '<title>' . specialchars($objItem->title) . '</title>';
+			$xml .= '<title>' . specialchars(strip_tags($objItem->title)) . '</title>';
 			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
 			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
 			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';
