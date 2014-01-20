@@ -243,6 +243,9 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>%s အတွက်အချက်အလက်အစုထည့်သွင်းမှုမရှိ။ ဖိုင်စက်စနစ်ကိုထပ်တူကျရန်လုပ်။</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>%d နှင့် %d ထည့်။</target>

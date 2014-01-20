@@ -31,32 +31,6 @@ New usage as of version 3.2.2:
 ```
 
 
-### `FilesModel::findByPk()`
-
-Before Contao 3.2, fields like `$this->singleSRC` and `$this->multiSRC` were
-used to store integers or arrays of integers referencing rows in the `tl_files`
-table. However, now that Contao uses UUIDs for files, the field values have been
-converted to UUIDs or arrays of UUIDs automatically.
-
-Therefore, any call to `findByPk()` or `findMultipleByIds()` using one of these
-UUID fields as argument will now fail (it still works with IDs though), so make
-sure to adjust your custom code as described below.
-
-Usage in Contao 3.0 and 3.1:
-
-```php
-$objFile = FilesModel::findByPk($this->singleSRC);
-$objFiles = FilesModel::findMultipleByIds($this->multiSRC);
-```
-
-New usage as of Contao 3.2:
-
-```php
-$objFile = FilesModel::findByUuid($this->singleSRC);
-$objFiles = FilesModel::findMultipleByUuids($this->multiSRC);
-```
-
-
 ### buttons_callback
 
 The "buttons_callback" was introduced in Contao 3.0 to add custom buttons when

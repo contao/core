@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleSitemap
  *
  * Front end module "sitemap".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -63,13 +63,14 @@ class ModuleSitemap extends \Module
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$lang = null;
 		$host = null;
 
 		// Start from the website root if there is no reference page
 		if (!$this->rootPage)
 		{
-			global $objPage;
 			$this->rootPage = $objPage->rootId;
 		}
 

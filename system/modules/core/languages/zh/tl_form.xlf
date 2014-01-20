@@ -86,8 +86,8 @@
         <target>电子邮件格式</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>将忽略除&lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; 和 &lt;em&gt;cc&lt;/em&gt; (抄送)外的所有字段，并且表单数据将类似于从一个邮件处理客户端所发出。允许文件上载。</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>忽略除&lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; 和 &lt;em&gt;cc&lt;/em&gt; 之外的所有字段，(副本) 像从邮件客户端发送表单数据. 允许文件上传.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

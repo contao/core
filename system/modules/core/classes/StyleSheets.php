@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class StyleSheets
  *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -549,6 +549,8 @@ class StyleSheets extends \Backend
 						$row['gradientColors'][$k] = '#' . $v;
 					}
 
+					$angle = '';
+
 					// Convert the angle for the legacy commands (see #4569)
 					if (strpos($row['gradientAngle'], 'deg') !== false)
 					{
@@ -957,6 +959,9 @@ class StyleSheets extends \Backend
 		{
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
+
+		// Optimize floating-point numbers (see #6634)
+		$return = preg_replace('/(?<!\-)0\.([0-9]+)/', '.$1', $return);
 
 		// Replace insert tags (see #5512)
 		return $this->replaceInsertTags($return, false);

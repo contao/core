@@ -1,6 +1,52 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.4 (2014-01-20)
+--------------------------
+
+### Fixed
+Updated the Russian translation of the TinyMCE "typolinks" plugins (see #6224).
+
+### Fixed
+Do not create multiple stylect layers upon Ajax changes.
+
+### Fixed
+Some DCAs were missing the "rem" unit (see #6634).
+
+### Fixed
+Correctly trim the SQL statements in the `Database` class (see #6623).
+
+### Fixed
+Fix some broken back end icons (see #6214).
+
+### Fixed
+Show a hint in the news archive menu if there are no items (see #5888).
+
+### Fixed
+Prevent the back end tool tips from exceeding the screen width (see #6639).
+
+### Fixed
+Support the Google+ vanity name in addition to the numeric ID (see #6454).
+
+### Fixed
+Correctly detect Android tablets in the `Environment` class (see #5869).
+
+### Fixed
+Correctly resolve the module dependencies (see #6606).
+
+### Fixed
+Correctly unset the PHP session cookie depending on its parameters.
+
+### Fixed
+Fixed the XHTML variant of the comments form (see #5675).
+
+### Fixed
+Correctly assign articles to columns (see #6595).
+
+### Fixed
+Correctly merge the CSS classes in the `Hybrid` class (see #6601).
+
+
 Version 3.2.3 (2013-12-20)
 --------------------------
 

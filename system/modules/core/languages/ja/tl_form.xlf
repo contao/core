@@ -86,8 +86,8 @@
         <target>電子メール</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
-        <source>Ignores all fields except &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
-        <target>&lt;em&gt;email&lt;/em&gt;、&lt;em&gt;subject&lt;/em&gt;、&lt;em&gt;message&lt;/em&gt;、&lt;em&gt;cc&lt;/em&gt;(carbon copy)、&lt;em&gt;name&lt;/em&gt;(注: 原文に追加)以外の項目の名前の入力項目を無視して、メールのクライアントから送信されたようにフォームのデータを送信します。ファイルのアップロードも可能です。</target>
+        <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>&lt;em&gt;name&lt;/em&gt;、&lt;em&gt;email&lt;/em&gt;、&lt;em&gt;subject&lt;/em&gt;、&lt;em&gt;message&lt;/em&gt;、&lt;em&gt;cc&lt;/em&gt;(carbon copy)以外の項目の名前の入力項目を無視して、メールのクライアントから送信されたようにフォームのデータを送信します。ファイルのアップロードも可能です。</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

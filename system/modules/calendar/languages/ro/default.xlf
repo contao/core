@@ -1,0 +1,58 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/calendar/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="MSC.cal_events">
+        <source>%d event(s)</source>
+        <target>%d eveniment(e)</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_previous">
+        <source>&amp;lt;</source>
+        <target>&lt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_next">
+        <source>&amp;gt;</source>
+        <target>&gt;</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyDay">
+        <source>There are no events on this day.</source>
+        <target>Nu sunt evenimente în această zi.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyWeek">
+        <source>There are no events for this week.</source>
+        <target>Nu sunt evenimente în această săptamână.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyMonth">
+        <source>There are no events for this month.</source>
+        <target>Nu sunt evenimente în această lună.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_emptyYear">
+        <source>There are no events for this year.</source>
+        <target>Nu sunt evenimente pentru acest an.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_empty">
+        <source>Currently there are no events.</source>
+        <target>Nu mai urmează alte evenimente.</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_days">
+        <source>This event is repeated every %s. day</source>
+        <target>Acest eveniment se repetă la fiecare %s. zile</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_weeks">
+        <source>This event is repeated every %s. week</source>
+        <target>Acest eveniment se repetă la fiecare %s. săptămâni</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_months">
+        <source>This event is repeated every %s. month</source>
+        <target>Acest eveniment se repetă la fiecare %s. luni</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_years">
+        <source>This event is repeated every %s. year</source>
+        <target>Acest eveniment se repetă la fiecare %s. ani</target>
+      </trans-unit>
+      <trans-unit id="MSC.cal_until">
+        <source>until %s</source>
+        <target>până la %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

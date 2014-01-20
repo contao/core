@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -38,7 +38,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Widget extends \Controller
 {
@@ -988,6 +988,14 @@ abstract class Widget extends \Controller
 					if (!\Validator::isLanguage($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['language'], $this->strLabel));
+					}
+					break;
+
+				// Check whether the current value is a Google+ ID or vanity name
+				case 'google+':
+					if (!\Validator::isGooglePlusId($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidGoogleId'], $this->strLabel));
 					}
 					break;
 

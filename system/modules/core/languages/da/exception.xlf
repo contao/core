@@ -159,9 +159,11 @@
       </trans-unit>
       <trans-unit id="XPT.unavailable">
         <source>We'll be right back</source>
+        <target>Vi er straks tilbage</target>
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>Websitet er midlertidigt nede for vedligeholdelse. Kom venligst igen senere.</target>
       </trans-unit>
     </body>
   </file>

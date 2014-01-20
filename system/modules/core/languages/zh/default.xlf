@@ -245,6 +245,10 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>没有为%s 发现数据库实体。请同步文件系统。</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>请输入一个Google+的数字ID 或者昵称!</target>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>请把%d和%d加起来</target>

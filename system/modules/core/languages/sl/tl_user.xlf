@@ -29,7 +29,7 @@
         <source>Google+ profile ID</source>
       </trans-unit>
       <trans-unit id="tl_user.google.1">
-        <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
+        <source>Here you can enter your Google+ profile ID or vanity name.</source>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
@@ -53,6 +53,7 @@
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
         <source>Here you can choose a file uploader.</source>
+        <target>Tu lahko izberete orodje za nalaganje datotek.</target>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>

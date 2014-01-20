@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -416,7 +416,7 @@ a.tl_submit:hover {
 	z-index:99;
 }
 .tip {
-	max-width:690px;
+	max-width:320px;
 	padding:3px 6px 4px;
 	border-radius:3px;
 	box-shadow:1px 1px 3px #666;

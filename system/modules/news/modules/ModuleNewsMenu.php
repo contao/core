@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleNewsMenu
  *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -91,6 +91,8 @@ class ModuleNewsMenu extends \ModuleNews
 				$this->compileDailyMenu();
 				break;
 		}
+
+		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 
 

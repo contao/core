@@ -115,11 +115,11 @@
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
-        <target>Hjemmeside</target>
+        <target>Website</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>
-        <target>Her kan du skrive URLen på en hjemmeside.</target>
+        <target>Her kan du indtaste en webadresse.</target>
       </trans-unit>
       <trans-unit id="tl_member.language.0">
         <source>Language</source>

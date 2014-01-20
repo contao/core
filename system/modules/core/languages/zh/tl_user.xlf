@@ -30,8 +30,8 @@
         <target>Google+ 描述文件ID</target>
       </trans-unit>
       <trans-unit id="tl_user.google.1">
-        <source>Here you can enter your Google+ profile ID (e.g. &lt;em&gt;114740384471581504722&lt;/em&gt;).</source>
-        <target>此处您可以输入Google+描述文件ID(例如，&lt;em&gt;114740384471581504722&lt;/em&gt;)</target>
+        <source>Here you can enter your Google+ profile ID or vanity name.</source>
+        <target>在这里输入您的Google+ 个人ID或者昵称. </target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>

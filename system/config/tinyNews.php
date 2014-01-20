@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -48,9 +48,6 @@ tinyMCE.init({
   init_instance_callback : "TinyCallback.getScrollOffset",
   template_external_list_url : "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
   plugins : "advimage,directionality,emotions,inlinepopups,paste,save,searchreplace,style,tabfocus,table,template,typolinks,xhtmlxtras",
-<?php if (file_exists(TL_ROOT . '/newsletter.css')): ?>
-  content_css : "<?php echo TL_PATH; ?>/newsletter.css",
-<?php endif; ?>
   event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
   extended_valid_elements : "b/strong,i/em",
   tabfocus_elements : ":prev,:next",

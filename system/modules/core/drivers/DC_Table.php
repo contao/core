@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DC_Table
  *
  * Provide methods to modify the database.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -39,12 +39,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 * @param array
 	 */
 	protected $ctable;
-
-	/**
-	 * ID of the current record
-	 * @param integer
-	 */
-	protected $id;
 
 	/**
 	 * IDs of all root records
@@ -3086,6 +3080,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
 			{
+				$status = null;
+
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
@@ -3221,14 +3217,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && (!$this->Database->fieldExists('id', $table) || !$this->Database->fieldExists('pid', $table) || !$this->Database->fieldExists('sorting', $table)))
 		{
 			return '
-<p class="tl_empty">strTable "'.$table.'" can not be shown as tree!</p>';
+<p class="tl_empty">Table "'.$table.'" can not be shown as tree, because the "id", "pid" or "sorting" field is missing!</p>';
 		}
 
 		// Return if there is no parent table
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6 && !strlen($this->ptable))
 		{
 			return '
-<p class="tl_empty">Table "'.$table.'" can not be shown as extended tree!</p>';
+<p class="tl_empty">Table "'.$table.'" can not be shown as extended tree, because there is no parent table!</p>';
 		}
 
 		$blnClipboard = false;

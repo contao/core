@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Controller extends \System
 {
@@ -851,6 +851,8 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+					$strTarget = null;
+
 					// Back link
 					if ($elements[1] == 'back')
 					{
@@ -1100,6 +1102,8 @@ abstract class Controller extends \System
 						break;
 					}
 
+					$strUrl = '';
+
 					if ($objNews->source == 'external')
 					{
 						$strUrl = $objNews->url;
@@ -1157,6 +1161,8 @@ abstract class Controller extends \System
 					{
 						break;
 					}
+
+					$strUrl = '';
 
 					if ($objEvent->source == 'external')
 					{

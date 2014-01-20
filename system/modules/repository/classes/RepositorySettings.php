@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -17,6 +17,7 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
+		'30020049,30020049;'.	// 3.2.4 stable
 		'30020039,30020039;'.	// 3.2.3 stable
 		'30020029,30020029;'.	// 3.2.2 stable
 		'30020019,30020019;'.	// 3.2.1 stable

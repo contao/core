@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -22,7 +22,7 @@ require 'system/initialize.php';
  * Class Index
  *
  * Main front end controller.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -306,6 +306,7 @@ class Index extends Frontend
 		}
 
 		$blnFound = false;
+		$strCacheFile = null;
 
 		// Check for a mobile layout
 		if (Input::cookie('TL_VIEW') == 'mobile' || (Environment::get('agent')->mobile && Input::cookie('TL_VIEW') != 'desktop'))

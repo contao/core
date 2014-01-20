@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Mootao
  * @see     https://contao.org
@@ -138,10 +138,10 @@ Tips.Contao = new Class(
 			bounds = {y: false, x2: false, y2: false, x: false},
 			obj = {};
 
-		for (var z in props){
+		for (var z in props) {
 			obj[props[z]] = event.page[z] + this.options.offset[z];
 			if (obj[props[z]] < 0) bounds[z] = true;
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]){
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]) {
 				if (z == 'x') // Ignore vertical boundaries
 					obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 				bounds[z+'2'] = true;
@@ -152,10 +152,10 @@ Tips.Contao = new Class(
 
 		// Adjust the arrow on left/right aligned tips
 		if (bounds.x2) {
-			obj['margin-left'] = '24px';
+			obj.left += 24;
 			top.setStyles({'left': 'auto', 'right': '9px'});
 		} else {
-			obj['margin-left'] = '-9px';
+			obj.left -= 9;
 			top.setStyles({'left': '9px', 'right': 'auto'});
 		}
 

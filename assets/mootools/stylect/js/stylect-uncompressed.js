@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Stylect
  * @see     https://contao.org
@@ -13,7 +13,7 @@
  * Class Stylect
  *
  * Replace select menus with a nicer, JavaScript based solution.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <http://contao.org>
  * @author     Joe Ray Gregory <https://github.com/may17>
  */
@@ -37,22 +37,24 @@ var Stylect =
 	/**
 	 * Respond to the change event
 	 *
-	 * @param {object} div The DOM element
-	 * @param {object} el  The DOM element
+	 * @param {object} el The DOM element
 	 */
-	change: function(div, el) {
-		var opt = el.getElement('option[value=' + el.value + ']');
-		opt && div.getElement('span').set('text', opt.get('text'));
+	update: function(el) {
+		var div = el.retrieve('div'),
+			opt = el.getElement('option[value=' + el.value + ']');
+
+		if (div && opt) {
+			div.getElement('span').set('text', opt.get('text'));
+		}
 	},
 
 	/**
 	 * Respond to the keydown event
 	 *
-	 * @param {object} div The DOM element
-	 * @param {object} el  The DOM element
+	 * @param {object} el The DOM element
 	 */
-	keydown: function(div, el) {
-		setTimeout(function() { Stylect.change(div, el); }, 100);
+	keydown: function(el) {
+		setTimeout(function() { Stylect.update(el); }, 100);
 	},
 
 	/**
@@ -89,9 +91,16 @@ var Stylect =
 			// Handled by chosen
 			if (el.hasClass('tl_chosen')) return;
 
+			// Initialize the variables
+			var cls = el.get('class'),
+				div = el.retrieve('div'),
+				style = el.get('style');
+
 			// Clone the template
-			var div = Stylect.template.clone(),
-				cls = el.get('class'), s;
+			if (!div) {
+				div = Stylect.template.clone();
+				div.addClass(cls).inject(el, 'before');
+			}
 
 			// Hide the original select menu
 			el.setStyle('opacity', 0);
@@ -103,18 +112,10 @@ var Stylect =
 
 			// Update the div onchange
 			el.addEvents({
-				'change': function() {
-					Stylect.change(div, el)
-				},
-				'keydown': function() {
-					Stylect.keydown(div, el)
-				},
-				'focus': function() {
-					Stylect.focus(div)
-				},
-				'blur': function() {
-					Stylect.blur(div)
-				}
+				'change':  function() { Stylect.update(el) },
+				'keydown': function() { Stylect.keydown(el) },
+				'focus':   function() { Stylect.focus(div) },
+				'blur':    function() { Stylect.blur(div) }
 			});
 
 			// Mark disabled elements
@@ -128,19 +129,18 @@ var Stylect =
 			}
 
 			// Apply the inline width if any (see #5487)
-			if ((s = el.get('style')) && s.test('(^width|[^-]width)')) {
+			if (style && style.test('(^width|[^-]width)')) {
 				div.setStyle('width', el.getStyle('width'));
 			}
 
-			// Add the CSS class and inject
-			div.addClass(cls).inject(el, 'before');
+			// Store the reference
+			el.store('div', div);
 
 			// Activate
-			Stylect.change(div, el);
+			Stylect.update(el);
 		});
 	}
 };
-
 
 // Convert selects upon domready
 window.addEvent('domready', function() {

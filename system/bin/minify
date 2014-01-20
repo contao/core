@@ -55,7 +55,7 @@ contao()
 	fi
 
 	version=$folder/assets/contao
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
 	for file in `ls $version/css | grep "$cssgrep\-uncompressed"`; do
@@ -87,7 +87,7 @@ theme()
 	fi
 
 	version=$folder/system/themes/default
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
 	for file in `ls $version/src | grep "$cssgrep"`; do
@@ -110,10 +110,10 @@ theme()
 typolinks()
 {
 	version=$folder/assets/tinymce/plugins/typolinks
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	files=('editor_plugin' 'js/typolinks' 'js/typobox')
-	for file in ${files[@]}; do
+	for file in "${files[@]}"; do
 		echo "$copyright" > $version/$file.js
 		$js $version/${file}_src.js >> $version/$file.js
 		echo "  Created $version/$file.js"
@@ -176,7 +176,7 @@ tablesorter()
 	for version in `ls -d $folder/assets/jquery/tablesorter/*`; do
 
   	# CSS
-  	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+  	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 	  echo "$copyright" > $version/css/tablesorter.min.css
 	  $css $version/css/tablesorter.css >> $version/css/tablesorter.min.css
 	  echo "  Created $version/css/tablesorter.min.css"
@@ -269,7 +269,7 @@ datepicker()
 		# JavaScript
 		files=('Picker.js' 'Picker.Attach.js' 'Picker.Date.js')
 		echo "$copyright" > $version/datepicker.js
-		for file in ${files[@]}; do
+		for file in "${files[@]}"; do
 			$js $version/src/$file >> $version/datepicker.js
 		done
 		echo "  Created $version/datepicker.js"
@@ -304,7 +304,7 @@ mediabox()
 mootao()
 {
 	version=$folder/assets/mootools/mootao
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 	echo "$copyright" > $version/Mootao.js
 	$js $version/Mootao-uncompressed.js >> $version/Mootao.js
 	echo "  Created $version/Mootao.js"
@@ -356,7 +356,7 @@ slimbox()
 stylect()
 {
 	version=$folder/assets/mootools/stylect
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
 	echo "$copyright" > $version/css/stylect.css
@@ -375,7 +375,7 @@ stylect()
 tablesort()
 {
 	version=$folder/assets/mootools/tablesort
-	copyright="/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */"
+	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
 	echo "$copyright" > $version/css/tablesort.css

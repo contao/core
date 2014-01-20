@@ -82,6 +82,7 @@
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
+        <target>حفاظت از پرونده</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.1">
         <source>Show the article to certain member groups only.</source>

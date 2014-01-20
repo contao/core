@@ -246,6 +246,9 @@ Krijimi faqeve të uebit pa një faqe rrënjë nuk është më e mbështetur, k�
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Nuk ka shënime për %s në bazën e së të dhënave. Ju lutem sinkronizoni sistemin e skedarëve.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Ju lutem shtoni %d me %d.</target>

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -33,7 +33,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Feed
 {
@@ -145,7 +145,7 @@ class Feed
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '<item>';
-			$xml .= '<title>' . specialchars($objItem->title) . '</title>';
+			$xml .= '<title>' . specialchars(strip_tags($objItem->title)) . '</title>';
 			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
 			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
 			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';

@@ -245,6 +245,10 @@
         <source>No database entry found for %s. Please synchronize the file system.</source>
         <target>Geen database toegang gevonden voor %s. Gelieve  het bestandssysteem te synchroniseren.</target>
       </trans-unit>
+      <trans-unit id="ERR.invalidGoogleId">
+        <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Voer een numeriek Google+ ID of vanity naam in!</target>
+      </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
         <target>Tel %d en %d bij elkaar op.</target>

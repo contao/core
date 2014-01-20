@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DataContainer
  *
  * Provide methods to handle data container arrays.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -177,7 +177,7 @@ class DataContainer extends \Backend
 		$xlabel = '';
 
 		// Toggle line wrap (textarea)
-		if ($arrData['inputType'] == 'textarea' && $arrData['eval']['rte'] == '')
+		if ($arrData['inputType'] == 'textarea' && isset($arrData['eval']['rte']))
 		{
 			$xlabel .= ' ' . \Image::getHtml('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
 		}

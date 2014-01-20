@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>Godkend kommentarer før de vises på hjemmesiden.</target>
+        <target>Godkend kommentarer før de vises på websitet.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.bbcode.0">
         <source>Allow BBCode</source>

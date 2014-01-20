@@ -6,7 +6,7 @@
     <?php if ($this->confirm): ?>
       <p class="confirm"><?php echo $this->confirm; ?></p>
     <?php elseif ($this->allowComments): ?>
-      <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="<?php echo $this->formId; ?>" method="post">
+      <form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post">
         <div class="formbody">
           <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
           <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
