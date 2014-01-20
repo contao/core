@@ -302,6 +302,11 @@ class Automator extends \System
 		{
 			foreach (scan(TL_ROOT . '/share') as $file)
 			{
+				if (is_dir(TL_ROOT . '/share/' . $file))
+				{
+					continue; // see #6652
+				}
+
 				$objFile = new \File('share/' . $file, true);
 
 				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds))
