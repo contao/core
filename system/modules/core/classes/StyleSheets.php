@@ -202,18 +202,17 @@ class StyleSheets extends \Backend
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
 	{
 		$blnDebug = $GLOBALS['TL_CONFIG']['debugMode'];
+		$return = '';
 
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
 			$lb = ($blnDebug ? "\n    " : '');
-			$return = '';
 		}
 		else
 		{
 			$strGlue = '';
 			$lb = "\n    ";
-			$return = "\n" . '<pre'. ($row['invisible'] ? ' class="disabled"' : '') .'>';
 		}
 
 		$blnNeedsPie = false;
@@ -951,7 +950,7 @@ class StyleSheets extends \Backend
 		}
 		else
 		{
-			$return .= "\n}</pre>\n";
+			$return = "\n" . '<pre'. ($row['invisible'] ? ' class="disabled"' : '') .'>' . htmlspecialchars($return) . "\n}</pre>\n";
 		}
 
 		// Replace global variables
