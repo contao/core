@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Purge the image cache if a file is being renamed (see #6641).
+
+### Fixed
 Preserve tags in custom CSS definitions (see #6667).
 
 ### Fixed
