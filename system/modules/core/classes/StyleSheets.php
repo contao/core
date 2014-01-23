@@ -919,7 +919,8 @@ class StyleSheets extends \Backend
 			$own = trim(\String::decodeEntities($row['own']));
 			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/', $own);
-			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
+			$own = implode(($blnWriteToFile ? '' : $lb), $own);
+			$return .= $lb . (!$blnWriteToFile ? specialchars($own) : $own);
 		}
 
 		// Allow custom definitions

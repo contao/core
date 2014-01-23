@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve tags in custom CSS definitions (see #6667).
+
+### Fixed
 Make the swipe CSS selectors more specific (see #6666).
 
 ### Fixed
