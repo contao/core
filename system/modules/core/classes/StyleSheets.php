@@ -961,7 +961,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Optimize floating-point numbers (see #6634)
-		$return = preg_replace('/(?<!\-)0\.([0-9]+)/', '.$1', $return);
+		$return = preg_replace('/([^0-9\.\-])0\.([0-9]+)/', '$1.$2', $return);
 
 		// Replace insert tags (see #5512)
 		return $this->replaceInsertTags($return, false);

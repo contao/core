@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.5 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Correctly optimize floating-point numbers in style sheets (see #6674).
+
+
 Version 3.2.4 (2014-01-20)
 --------------------------
 
