@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Allow any character in passwords, especially the less-than symbol (see #6447).
+
+### Fixed
 Purge the image cache if a file is being renamed (see #6641).
 
 ### Fixed

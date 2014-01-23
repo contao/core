@@ -58,7 +58,7 @@ class Index extends Backend
 		}
 
 		// Reload the page if authentication fails
-		elseif (Input::post('username') && Input::post('password'))
+		elseif (!empty($_POST['username']) && !empty($_POST['password']))
 		{
 			$this->reload();
 		}
@@ -101,8 +101,8 @@ class Index extends Backend
 		$this->Template->headline = $strHeadline;
 		$this->Template->curLanguage = Input::post('language') ?: str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		$this->Template->curUsername = Input::post('username') ?: '';
-		$this->Template->uClass = ($_POST && !Input::post('username')) ? ' class="login_error"' : '';
-		$this->Template->pClass = ($_POST && !Input::post('password')) ? ' class="login_error"' : '';
+		$this->Template->uClass = ($_POST && empty($_POST['username'])) ? ' class="login_error"' : '';
+		$this->Template->pClass = ($_POST && empty($_POST['password'])) ? ' class="login_error"' : '';
 		$this->Template->loginButton = specialchars($GLOBALS['TL_LANG']['MSC']['loginBT']);
 		$this->Template->username = $GLOBALS['TL_LANG']['tl_user']['username'][0];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
