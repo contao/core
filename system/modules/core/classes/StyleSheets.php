@@ -908,7 +908,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Optimize floating-point numbers (see #6634)
-		$return = preg_replace('/([^0-9\.\-])0\.([0-9]+)/', '$1.$2', $return);
+		$return = preg_replace('/([^0-9\.\+\-])0\.([0-9]+)/', '$1.$2', $return);
 
 		// CSS3PIE
 		if ($blnNeedsPie && !$parent['disablePie'])
