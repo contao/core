@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Make the swipe CSS selectors more specific (see #6666).
+
+### Fixed
 Correctly optimize floating-point numbers in style sheets (see #6674).
 
 
