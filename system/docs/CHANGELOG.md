@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly load the parent pages in the navigation modules (see #6696).
+
+### Fixed
 Correctly encode URLs with GET parameters in the syndication links (see #6683).
 
 ### Fixed
