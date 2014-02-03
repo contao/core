@@ -81,7 +81,7 @@ class PurgeData extends Backend implements executable
 		// Purge the resources
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_purge')
 		{
-			$tables = deserialize($this->Input->post('tables'));
+			$tables = $this->Input->post('tables');
 
 			if (!is_array($tables))
 			{

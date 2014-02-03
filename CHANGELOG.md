@@ -1,6 +1,14 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.14 (2014-02-03)
+----------------------------
+
+### Fixed
+Do not pass POST data to the `deserialize()` function, so it is not vulnerable
+to PHP object injection. Thanks to Pedro Ribeiro for his input (see #6695).
+
+
 Version 2.11.13 (2013-11-19)
 ----------------------------
 
