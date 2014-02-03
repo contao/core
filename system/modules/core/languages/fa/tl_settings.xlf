@@ -79,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
         <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>نشانه‌گذاری اچ‌تی‌ام‌ال را قبل از ارسال به مرورگر کوچک می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
@@ -106,9 +107,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.0">
         <source>Exclude folders from synchronization</source>
+        <target>استثناء کردن پوشه‌ها از هماهنگ‌سازی</target>
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از پوشه‌هایی از هماهنگ‌سازی پرونده‌ها باید معاف شوند (مثلا، &lt;em&gt;attachments,music_academy&lt;/em&gt;) را وارد نمایید. توجه کنید منابع مستثنی شده نمی‌توانند مثلا در المان‌های تصویر یا بارگیری استفاده شوند.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -136,15 +139,19 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
+        <target>سرورهای پروکسی قابل اعتماد</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از آدرس‌های IP سرور پروکسی قابل اعتماد را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
+        <target>دامنه پروکسی اس‌اس‌ال</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+        <target>اگر وب‌سایت شما از طریق سرور پروکسی SSL قابل دسترسی است، لطفا دامنه (مثلا &lt;em&gt;sslsites.de&lt;/em&gt;) آن را اینجا وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -168,6 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.1">
         <source>Make Contao generate static URLs without the index.php fragment. This feature requires &quot;mod_rewrite&quot;, renaming the &quot;.htaccess.default&quot; file to &quot;.htaccess&quot; and adjusting the RewriteBase as necessary.</source>
+        <target>کانتائو را وادار می‌کند تا نشانی‌های وب بودن قطعه index.php ایجاد نماید. این ویژگی &quot;mod_rewrite&quot; را لازم دارد، پرونده &quot;.htaccess.default&quot; را به &quot;.htaccess&quot; تغییر نام دهید و RewriteBase را در صورت لزوم تنظیم نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.0">
         <source>Add the language to the URL</source>
@@ -175,6 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>رشته زبانی را به عنوان پارامتر اول نشانی وب (مثلا &lt;em&gt;http://example.com/en/&lt;/em&gt;) اضافه می‌نماید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -182,6 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
+        <target>برای نشانی وب خالی، وب‌سایت را به جای بازگردانی به صفحه ریشه زبانی، نمایش می‌دهد (توصیه نمی‌شود).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
@@ -189,6 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
+        <target>قطعه &lt;em&gt;items/&lt;/em&gt; یا &lt;em&gt;events/&lt;/em&gt; در نشانی وب در نظر نمی‌گیرد و المان را به صورت خودکار از پارامتر &lt;em&gt;auto_item&lt;/em&gt; تشخیص می‌دهد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>
@@ -204,6 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
+        <target>در اینجا می‌توانید نام مستعار صفحه شبیه-پوشه مانند &lt;em&gt;docs/install/download.html&lt;/em&gt; را به جای &lt;em&gt;docs-install-download.html&lt;/em&gt; فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -223,9 +235,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>وضعیت نگهداشت</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
+        <target>سربرگ اچ‌تی‌پی 503 را ارسال می‌کند و یک صفحه نگهداشت را در وب‌سایت نمایش می‌دهد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -241,6 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.disableRefererCheck.1">
         <source>Do not check the request token when a form is submitted. Attention: potential security risk!</source>
+        <target>توکن درخواستی که وقتی فرمی ارسال می‌شود را بررسی نمی‌کند. توجه: خطر امنیتی بالقوه!</target>
       </trans-unit>
       <trans-unit id="tl_settings.lockPeriod.0">
         <source>Account locking time</source>
@@ -296,6 +311,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.1">
         <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط کلاس تصویر به کار گرفته شود را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.0">
         <source>Editable file types</source>
@@ -303,6 +319,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.1">
         <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط ویرایشگر منبع ویرایش شوند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.0">
         <source>Template file types</source>
@@ -310,6 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.1">
         <source>Here you can enter a comma separated list of supported template file types.</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی قالبی پشتیبانی شده را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
@@ -317,6 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.1">
         <source>If the width of an image or movie exceeds this value, it will be adjusted automatically.</source>
+        <target>اگر عرض تصویر یا ویدیو از این مقدار بیشتر باشد، به صورت خودکار تنظیم خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.jpgQuality.0">
         <source>JPG thumbnail quality</source>
@@ -324,6 +343,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.jpgQuality.1">
         <source>Here you can enter the JPG thumbnail quality in percent.</source>
+        <target>اینجا می‌توانید کیفیت تصویر بندانگشتی JPG را به صورت درصد وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.0">
         <source>Maximum GD image width</source>
@@ -331,6 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgWidth.1">
         <source>Here you can enter the maximum image width that the GD library shall try to handle.</source>
+        <target>اینجا می‌توانیدبیشترین عرض تصویر که کتابخانه GD بایستی سعی به کارگیری کند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.0">
         <source>Maximum GD image height</source>
@@ -338,6 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.gdMaxImgHeight.1">
         <source>Here you can enter the maximum image height that the GD library shall try to handle.</source>
+        <target>اینجا می‌توانیدبیشترین ارتفاع تصویر که کتابخانه GD بایستی سعی به کارگیری کند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.0">
         <source>Files directory</source>
@@ -345,6 +367,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.uploadPath.1">
         <source>Here you can set the relative path to the Contao files directory.</source>
+        <target>اینجا می‌توانید مسیر نسبی فهرست پرونده‌های کانتائو را تنظیم کنید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.0">
         <source>Upload file types</source>
@@ -352,6 +375,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.1">
         <source>Here you can enter a comma separated list of uploadable file types.</source>
+        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌های قابل بارگذاری را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadFields.0">
         <source>Simultaneous file uploads</source>
@@ -359,6 +383,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.uploadFields.1">
         <source>Here you can enter the maximum number of simultaneous file uploads.</source>
+        <target>اینجا می‌توانید بیشترین تعداد بارگذاری پرونده همزمان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.0">
         <source>Maximum upload file size</source>
@@ -366,6 +391,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.1">
         <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
+        <target>اینجا می‌توانید بیشترین اندازه پرونده بارگذاری در واحد بایت (1 MB = 1000 kB = 1000000 byte) وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageWidth.0">
         <source>Maximum image width</source>
@@ -373,6 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.imageWidth.1">
         <source>Here you can enter the maximum width for image uploads in pixels.</source>
+        <target>اینجا می‌توانید بیشترین عرض برای بارگذاری تصویر در واحد پیکسل وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.imageHeight.0">
         <source>Maximum image height</source>
@@ -380,6 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.imageHeight.1">
         <source>Here you can enter the maximum height for image uploads in pixels.</source>
+        <target>اینجا می‌توانید بیشترین ارتفاع برای بارگذاری تصویر در واحد پیکسل وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.0">
         <source>Enable searching</source>
@@ -387,6 +415,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.1">
         <source>Index pages so they can be searched.</source>
+        <target>صفحه‌ها را فهرست می‌کند تا بتوانند جستجو شوند.</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.0">
         <source>Index protected pages</source>
@@ -394,6 +423,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.1">
         <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
+        <target>این گزینه را با احتیاط استفاده کنید و همیشه صفحه‌های شخصی از فهرست شدن مستثنی کنید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.0">
         <source>Send e-mails via SMTP</source>
@@ -401,6 +431,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.1">
         <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
+        <target>از یک سرویس دهنده SMTP به جای تابع mail() پی‌اچ‌پی برای ارسال ایمیل استفاده می‌نماید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.0">
         <source>SMTP hostname</source>
@@ -520,6 +551,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
+        <target>اینجا می‌توانید نشانی وب بروزرسانی لایو را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
@@ -543,6 +575,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxy_legend">
         <source>Proxy configuration</source>
+        <target>پیکربندی پروکسی</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -578,6 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.cron_legend">
         <source>Command scheduler</source>
+        <target>زمان‌بندی دستور</target>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

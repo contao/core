@@ -571,7 +571,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_jumpTo.0">
         <source>Confirmation page</source>
-        <target>Bevestiging pagina</target>
+        <target>Bevestigingspagina</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_jumpTo.1">
         <source>Please choose the page to which users will be redirected after the request has been completed.</source>

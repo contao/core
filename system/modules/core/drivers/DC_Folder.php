@@ -121,9 +121,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Set IDs and redirect
 		if (\Input::post('FORM_SUBMIT') == 'tl_select')
 		{
-			$ids = deserialize(\Input::post('IDS'));
+			$ids = \Input::post('IDS');
 
-			if (!is_array($ids) || empty($ids))
+			if (empty($ids) || !is_array($ids))
 			{
 				$this->reload();
 			}
@@ -1339,7 +1339,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Save field selection in session
 		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && \Input::get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
+			$session['CURRENT'][$this->strTable] = \Input::post('all_fields');
 			$this->Session->setData($session);
 		}
 
@@ -1855,6 +1855,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if (strcasecmp($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension) !== 0 && file_exists(TL_ROOT . '/' . $this->strPath . '/' . $varValue . $this->strExtension))
 			{
 				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $varValue));
+			}
+
+			$arrImageTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
+
+			// Remove potentially existing thumbnails (see #6641)
+			if (in_array(substr($this->strExtension, 1), $arrImageTypes))
+			{
+				foreach (glob(TL_ROOT . '/assets/images/*/' . $this->varValue . '-*' . $this->strExtension) as $strThumbnail)
+				{
+					$this->Files->delete(str_replace(TL_ROOT, '', $strThumbnail));
+				}
 			}
 
 			// Rename the file

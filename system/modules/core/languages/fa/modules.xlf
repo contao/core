@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.article.1">
         <source>Manage articles and content elements</source>
-        <target>این بخش شامل مدیریت محتوا و نوشته‌ها می‌باشد.</target>
+        <target>مدیریت المان‌های نوشته‌ها و محتوا</target>
       </trans-unit>
       <trans-unit id="MOD.form.0">
         <source>Form generator</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="MOD.page.0">
         <source>Site structure</source>
-        <target>ساختار وب‌سایت</target>
+        <target>ساختار سایت</target>
       </trans-unit>
       <trans-unit id="MOD.page.1">
         <source>Set up the site structure of your website(s)</source>

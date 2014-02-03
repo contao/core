@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_template.1">
         <source>Here you can select the news template.</source>
-        <target>Vælg venligst et nyhedslayout. Du kan tilføje brugerdefinerede nyhedslayouts til mappen &lt;em&gt;templates&lt;/em&gt;. Nyhedsskabelonfiler starter med &lt;em&gt;news_&lt;/em&gt; og kræver filendelsen &lt;em&gt;.tpl&lt;/em&gt;.</target>
+        <target>Her kan du vælge en skabelon for nyheder.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_format.0">
         <source>Archive format</source>

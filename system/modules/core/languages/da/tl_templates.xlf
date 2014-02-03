@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_templates.new.0">
         <source>New folder</source>
-        <target>Ny skabelon</target>
+        <target>Ny mappe</target>
       </trans-unit>
       <trans-unit id="tl_templates.new.1">
         <source>Create a new folder</source>
-        <target>Opret ny skabelon</target>
+        <target>Opret en ny mappe</target>
       </trans-unit>
       <trans-unit id="tl_templates.pasteinto.0">
         <source>Paste into</source>

@@ -907,6 +907,9 @@ class StyleSheets extends \Backend
 			}
 		}
 
+		// Optimize floating-point numbers (see #6634)
+		$return = preg_replace('/([^0-9\.\+\-])0\.([0-9]+)/', '$1.$2', $return);
+
 		// CSS3PIE
 		if ($blnNeedsPie && !$parent['disablePie'])
 		{
@@ -919,7 +922,8 @@ class StyleSheets extends \Backend
 			$own = trim(\String::decodeEntities($row['own']));
 			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/', $own);
-			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
+			$own = implode(($blnWriteToFile ? '' : $lb), $own);
+			$return .= $lb . (!$blnWriteToFile ? specialchars($own) : $own);
 		}
 
 		// Allow custom definitions
@@ -959,9 +963,6 @@ class StyleSheets extends \Backend
 		{
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
-
-		// Optimize floating-point numbers (see #6634)
-		$return = preg_replace('/(?<!\-)0\.([0-9]+)/', '.$1', $return);
 
 		// Replace insert tags (see #5512)
 		return $this->replaceInsertTags($return, false);

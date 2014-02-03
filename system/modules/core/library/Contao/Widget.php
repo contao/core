@@ -701,7 +701,7 @@ abstract class Widget extends \Controller
 	 */
 	public function validate()
 	{
-		$varValue = $this->validator(deserialize($this->getPost($this->strName)));
+		$varValue = $this->validator($this->getPost($this->strName));
 
 		if ($this->hasErrors())
 		{

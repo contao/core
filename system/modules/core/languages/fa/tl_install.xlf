@@ -243,6 +243,7 @@
       </trans-unit>
       <trans-unit id="tl_install.repOverride">
         <source>Override the repository tables</source>
+        <target>رونویسی جدول‌های مخزن</target>
       </trans-unit>
       <trans-unit id="tl_install.importSave">
         <source>Import template</source>

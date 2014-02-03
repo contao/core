@@ -593,8 +593,9 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'own' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
+			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px'),
+			'eval'                    => array('preserveTags'=>true, 'style'=>'height:120px'),
 			'sql'                     => "text NULL"
 		),
 		'invisible' => array

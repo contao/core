@@ -23,8 +23,8 @@ require '../system/initialize.php';
  */
 if (Input::get('p') == 'facebook')
 {
-	$query  = '?u=' . rawurlencode(Input::get('u'));
-	$query .= '&t=' . rawurlencode(Input::get('t'));
+	$query  = '?u=' . rawurlencode(Input::get('u', true));
+	$query .= '&t=' . rawurlencode(Input::get('t', true));
 	$query .= '&display=popup';
 	$query .= '&redirect_uri=http%3A%2F%2Fwww.facebook.com';
 	header('Location: http://www.facebook.com/sharer/sharer.php' . $query);
@@ -37,8 +37,8 @@ if (Input::get('p') == 'facebook')
  */
 elseif (Input::get('p') == 'twitter')
 {
-	$query  = '?url=' . rawurlencode(Input::get('u'));
-	$query .= '&text=' . rawurlencode(Input::get('t'));
+	$query  = '?url=' . rawurlencode(Input::get('u', true));
+	$query .= '&text=' . rawurlencode(Input::get('t', true));
 	header('Location: http://twitter.com/share' . $query);
 	exit;
 }
@@ -49,7 +49,7 @@ elseif (Input::get('p') == 'twitter')
  */
 elseif (Input::get('p') == 'gplus')
 {
-	$query  = '?url=' . rawurlencode(Input::get('u'));
+	$query  = '?url=' . rawurlencode(Input::get('u', true));
 	header('Location: https://plus.google.com/share' . $query);
 	exit;
 }

@@ -79,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_article.guests.1">
         <source>Hide the article if a member is logged in.</source>
+        <target>مخفی کردن مقاله اگر یک عضو وارد شده باشد.</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
@@ -86,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_article.protected.1">
         <source>Show the article to certain member groups only.</source>
+        <target>نمایش مقاله تنها برای گروه‌های خاصی از اعضاء.</target>
       </trans-unit>
       <trans-unit id="tl_article.groups.0">
         <source>Allowed member groups</source>
@@ -93,6 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_article.groups.1">
         <source>These groups will be able to see the article.</source>
+        <target>این گروه‌ها قادر به دیدن این مقاله خواهند بود.</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>

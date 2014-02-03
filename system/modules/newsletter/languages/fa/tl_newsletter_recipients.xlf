@@ -43,9 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.0">
         <source>Confirmation date</source>
+        <target>تاریخ تایید</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.1">
         <source>The date of confirmation (double opt-in).</source>
+        <target>تاریخ تایید (double opt-in).</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>

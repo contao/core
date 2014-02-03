@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_module.newsletters.0">
         <source>Subscribable newsletters</source>
-        <target>Op abonnementen gebaseerde nieuwsbrief</target>
+        <target>Kiesbare nieuwsbrief abonnementen</target>
       </trans-unit>
       <trans-unit id="tl_module.newsletters.1">
         <source>Show these channels in the front end form.</source>

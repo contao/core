@@ -167,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <target>چیدمان سی‌اس‌اس واکنش‌گرا براساس تنظیمات چیدمان صفحه را ایجاد می‌کند. این مولفه برای کارکرد تولیدکننده چیدمان صفحه لازم است.</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
+        <target>شبکه 12-ستونی</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
@@ -269,6 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
+        <target>اینجا می‌توانید کلاس‌های اختصاصی را به برچسب &amp;lt;body&amp;gt; اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -276,6 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.onload.1">
         <source>Here you can add a body &lt;em&gt;onload&lt;/em&gt; attribute.</source>
+        <target>اینجا می‌توانید خصوصیت &lt;em&gt;onload&lt;/em&gt; body را اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.head.0">
         <source>Additional &amp;lt;head&amp;gt; tags</source>
@@ -283,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
         <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
+        <target>اینجا شما می‌توانید برچسب‌های منحصربفرد را به بخش &amp;lt;head&amp;gt; اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
@@ -458,6 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.top">
         <source>Before the wrapper</source>
+        <target>قبل از wrapper</target>
       </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
@@ -473,6 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.bottom">
         <source>After the wrapper</source>
+        <target>بعد از wrapper</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

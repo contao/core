@@ -1215,7 +1215,7 @@
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
-        <target>Alles inschakelen</target>
+        <target>Alles openen/sluiten</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.1">
         <source>Expand or collapse all nodes</source>

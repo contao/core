@@ -287,6 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
+        <target>عنوان پیوند به صورت خصوصیت &lt;em&gt;title&lt;/em&gt; در نشانه‌گذاری اچ‌تی‌ام‌ال اضافه می‌شود.</target>
       </trans-unit>
       <trans-unit id="tl_content.embed.0">
         <source>Embed the link</source>
@@ -302,6 +303,7 @@
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
         <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <target>برای نمایش در لایت‌باکس، خصوصیت &lt;em&gt;rel&lt;/em&gt; را اینجا وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
@@ -397,6 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.1">
         <source>Show this image instead of the first frame of the video before playback.</source>
+        <target>نمایش این تصویر به جای فریم ابتدایی ویدیو قبل از اجرای آن.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSize.0">
         <source>Player size</source>
@@ -404,6 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>عرض و ارتفاع پخش‌کننده رسانه برحسب پیکسل (مثلا 640x480).</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>
@@ -415,27 +419,35 @@
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>
+        <target>مدت زمان اسلاید</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.1">
         <source>The time in milliseconds between slides (1000 = 1s). Set to 0 to disable auto sliding.</source>
+        <target>زمان بین اسلایدها در واحد میلی ثانیه (1000 = 1s). برای غیرفعال کردن اسلاید خودکار روی 0 تنظیم کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.0">
         <source>Transition speed</source>
+        <target>سرعت انتقال</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderSpeed.1">
         <source>The transition speed in milliseconds (1000 = 1s). Defaults to 300.</source>
+        <target>سرعت انتقال برحسب میلی‌ثانیه (1000 = 1s). مقدار پیش‌فرض 300.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.0">
         <source>Slide offset</source>
+        <target>نقشه شروع اسلاید</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderStartSlide.1">
         <source>Here you can make the slider start with a particular slide (counting starts at 0).</source>
+        <target>اینجا می‌توانید اسلایدر را برای شروع از یک اسلاید خاص تنظیم نمایید (شمارش از 0 شروع می‌شود).</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.0">
         <source>Continuous</source>
+        <target>پیوسته</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderContinuous.1">
         <source>Make the slider continuous (start all over when reaching the end).</source>
+        <target>پیوسته کردن اسلایدر (شروه دوباره هنگام رسیدن به آخر).</target>
       </trans-unit>
       <trans-unit id="tl_content.cteAlias.0">
         <source>Referenced element</source>
@@ -555,6 +567,7 @@
       </trans-unit>
       <trans-unit id="tl_content.slider_legend">
         <source>Slider settings</source>
+        <target>تنظیمات اسلایدر</target>
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
@@ -654,9 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>نیاز است که قالب &lt;em&gt;%s&lt;/em&gt; در چیدمان صفحه قرار داده شود.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
+        <target>قالب &lt;em&gt;%s&lt;/em&gt; یا &lt;em&gt;%s&lt;/em&gt; باید در چیدمان صفحه قرار داده شود.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>
