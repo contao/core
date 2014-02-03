@@ -17,7 +17,7 @@
 	height:30px;
 	position:relative;
 }
-.slider-control a,.slider-control span {
+.slider-control a,.slider-control .slider-menu {
 	position:absolute;
 	top:9px;
 	display:inline-block;

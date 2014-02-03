@@ -146,15 +146,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Set IDs and redirect
 		if (\Input::post('FORM_SUBMIT') == 'tl_select')
 		{
-			$ids = deserialize(\Input::post('IDS'));
+			$ids = \Input::post('IDS');
 
-			if (!is_array($ids) || empty($ids))
+			if (empty($ids) || !is_array($ids))
 			{
 				$this->reload();
 			}
 
 			$session = $this->Session->getData();
-			$session['CURRENT']['IDS'] = deserialize(\Input::post('IDS'));
+			$session['CURRENT']['IDS'] = $ids;
 			$this->Session->setData($session);
 
 			if (isset($_POST['edit']))
@@ -2154,7 +2154,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Save field selection in session
 		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && \Input::get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
+			$session['CURRENT'][$this->strTable] = \Input::post('all_fields');
 			$this->Session->setData($session);
 		}
 
@@ -2533,7 +2533,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Save field selection in session
 		if (\Input::post('FORM_SUBMIT') == $this->strTable.'_all' && \Input::get('fields'))
 		{
-			$session['CURRENT'][$this->strTable] = deserialize(\Input::post('all_fields'));
+			$session['CURRENT'][$this->strTable] = \Input::post('all_fields');
 			$this->Session->setData($session);
 		}
 

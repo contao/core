@@ -59,8 +59,8 @@ class ChangePassword extends Backend
 
 		if (Input::post('FORM_SUBMIT') == 'tl_password')
 		{
-			$pw = Input::post('password', true);
-			$cnf = Input::post('confirm', true);
+			$pw = Input::postRaw('password');
+			$cnf = Input::postRaw('confirm');
 
 			// The passwords do not match
 			if ($pw != $cnf)

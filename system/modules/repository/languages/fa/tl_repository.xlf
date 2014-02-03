@@ -507,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>شما در حال حاضر افزونه های سازگار با این نسخه کانتائو را مشاهده می‌کنید. تنظیمات قسمت مدیریت را برای گسترش نتایج جستجو با نمایش همه افزونه‌ها را تغییر دهید.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

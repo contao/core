@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="CNT.bl">
         <source>Saint Barthélemy</source>
-        <target>Saint Barthélemy</target>
+        <target>سنت بارتلیمی</target>
       </trans-unit>
       <trans-unit id="CNT.bm">
         <source>Bermuda</source>
@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="CNT.bo">
         <source>Bolivia</source>
-        <target>بلوی</target>
+        <target>بولیوی</target>
       </trans-unit>
       <trans-unit id="CNT.br">
         <source>Brazil</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="CNT.bv">
         <source>Bouvet Island</source>
-        <target>جزیره بووه</target>
+        <target>جزیره بووت</target>
       </trans-unit>
       <trans-unit id="CNT.bw">
         <source>Botswana</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="CNT.by">
         <source>Belarus</source>
-        <target>بلاروش</target>
+        <target>بلاروس</target>
       </trans-unit>
       <trans-unit id="CNT.bz">
         <source>Belize</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="CNT.cc">
         <source>Cocos (Keeling) Islands</source>
-        <target>کوکوس (Keeling) جزایر</target>
+        <target>جزایر کوکوس (کلینگ)</target>
       </trans-unit>
       <trans-unit id="CNT.cd">
         <source>Congo, The Democratic Republic of the</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="CNT.ch">
         <source>Switzerland</source>
-        <target>سویس</target>
+        <target>سوئیس</target>
       </trans-unit>
       <trans-unit id="CNT.ci">
         <source>Cote d'Ivoire</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="CNT.cw">
         <source>Curaçao</source>
-        <target>Curaçao</target>
+        <target>كوراساو</target>
       </trans-unit>
       <trans-unit id="CNT.cx">
         <source>Christmas Island</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="CNT.ec">
         <source>Ecuador</source>
-        <target>اکوادر</target>
+        <target>اکوادور</target>
       </trans-unit>
       <trans-unit id="CNT.ee">
         <source>Estonia</source>
@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="CNT.fk">
         <source>Falkland Islands (Malvinas)</source>
-        <target>جزایر فالکلند (Malvinas)</target>
+        <target>جزایر فالکلند (مالویناس)</target>
       </trans-unit>
       <trans-unit id="CNT.fm">
         <source>Micronesia</source>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="CNT.ge">
         <source>Georgia</source>
-        <target>گرجستاتن</target>
+        <target>گرجستان</target>
       </trans-unit>
       <trans-unit id="CNT.gf">
         <source>French Guiana</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="CNT.gg">
         <source>Guernsey</source>
-        <target>Guernsey</target>
+        <target>گرنزی</target>
       </trans-unit>
       <trans-unit id="CNT.gh">
         <source>Ghana</source>
@@ -343,7 +343,7 @@
       </trans-unit>
       <trans-unit id="CNT.gp">
         <source>Guadeloupe</source>
-        <target>جزیره گوادلوپ</target>
+        <target>گوادلوپ</target>
       </trans-unit>
       <trans-unit id="CNT.gq">
         <source>Equatorial Guinea</source>
@@ -411,7 +411,7 @@
       </trans-unit>
       <trans-unit id="CNT.im">
         <source>Isle of Man</source>
-        <target>Isle of Man</target>
+        <target>جزیره من</target>
       </trans-unit>
       <trans-unit id="CNT.in">
         <source>India</source>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="CNT.ly">
         <source>Libyan Arab Jamahiriya</source>
-        <target>Libyan Arab Jamahiriya</target>
+        <target>جمهوری عربی لیبی</target>
       </trans-unit>
       <trans-unit id="CNT.ma">
         <source>Morocco</source>

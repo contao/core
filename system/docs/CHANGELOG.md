@@ -1,6 +1,35 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.5 (2014-02-03)
+--------------------------
+
+### Fixed
+Correctly load the parent pages in the navigation modules (see #6696).
+
+### Fixed
+Correctly encode URLs with GET parameters in the syndication links (see #6683).
+
+### Fixed
+Do not pass POST data to the `deserialize()` function, so it is not vulnerable
+to PHP object injection. Thanks to Pedro Ribeiro for his input (see #6695).
+
+### Fixed
+Allow any character in passwords, especially the less-than symbol (see #6447).
+
+### Fixed
+Purge the image cache if a file is being renamed (see #6641).
+
+### Fixed
+Preserve tags in custom CSS definitions (see #6667).
+
+### Fixed
+Make the swipe CSS selectors more specific (see #6666).
+
+### Fixed
+Correctly optimize floating-point numbers in style sheets (see #6674).
+
+
 Version 3.2.4 (2014-01-20)
 --------------------------
 

@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>تمامی فیلدها به غیر از &lt;em&gt;name&lt;/em&gt;، &lt;em&gt;email&lt;/em&gt;، &lt;em&gt;subject&lt;/em&gt;، &lt;em&gt;message&lt;/em&gt; و &lt;em&gt;cc&lt;/em&gt; (رونوشت کاربنی) را نادیده گرفته و داده‌های فرم را مانند شبیه به سرویس گیرنده نامه ارسال می‌کند. بارگذاری پرونده مجاز است.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>
@@ -122,9 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_form.novalidate.0">
         <source>Disable HTML5 validation</source>
+        <target>غیرفعال کردن تایید اعتبار اچ‌تی‌ام‌ال5</target>
       </trans-unit>
       <trans-unit id="tl_form.novalidate.1">
         <source>Add the &lt;em&gt;novalidate&lt;/em&gt; attribute to the form tag.</source>
+        <target>افزودن خصوصیت &lt;em&gt;novalidate&lt;/em&gt; به برچسب فرم.</target>
       </trans-unit>
       <trans-unit id="tl_form.attributes.0">
         <source>CSS ID/class</source>

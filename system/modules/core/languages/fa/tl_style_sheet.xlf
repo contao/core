@@ -11,9 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.disablePie.0">
         <source>Disable CSS3PIE</source>
+        <target>غیرفعال کردن CSS3PIE</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.disablePie.1">
         <source>Do not include the PIE.htc behavior file (adds CSS3 support to older IE versions).</source>
+        <target>پرونده رفتار PIE.htc (اضافه کردن پشتیبانی CSS3 در نسخه‌های قدیمی‌تر IE) را قرار نمی‌دهد.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.0">
         <source>Embed images up to</source>

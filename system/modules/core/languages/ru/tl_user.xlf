@@ -31,6 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_user.google.1">
         <source>Here you can enter your Google+ profile ID or vanity name.</source>
+        <target>Вы можете ввести ID своего профиля Google+ или его короткое имя.</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>
