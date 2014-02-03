@@ -70,7 +70,7 @@ class KeyValueWizard extends \Widget
 	public function validate()
 	{
 		$mandatory = $this->mandatory;
-		$options = deserialize($this->getPost($this->strName));
+		$options = $this->getPost($this->strName);
 
 		// Check keys only (values can be empty)
 		if (is_array($options))

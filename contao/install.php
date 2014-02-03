@@ -602,9 +602,9 @@ class InstallTool extends Backend
 	{
 		if (Input::post('FORM_SUBMIT') == 'tl_tables')
 		{
-			$sql = deserialize(Input::post('sql'));
+			$sql = Input::post('sql');
 
-			if (is_array($sql))
+			if (!empty($sql) && is_array($sql))
 			{
 				foreach ($sql as $key)
 				{

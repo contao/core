@@ -471,8 +471,8 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$sql = deserialize(Input::post('sql'));
-			if (is_array($sql)) {
+			$sql = Input::post('sql');
+			if (!empty($sql) && is_array($sql)) {
 				foreach ($sql as $key) {
 					if (isset($_SESSION['sql_commands'][$key])) {
 						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));

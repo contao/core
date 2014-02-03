@@ -95,7 +95,7 @@ class FormCheckBox extends \Widget
 	public function validate()
 	{
 		$mandatory = $this->mandatory;
-		$options = deserialize($this->getPost($this->strName));
+		$options = $this->getPost($this->strName);
 
 		// Check if there is at least one value
 		if ($mandatory && is_array($options))
