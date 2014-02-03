@@ -5,6 +5,9 @@ Version 3.2.5 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly encode URLs with GET parameters in the syndication links (see #6683).
+
+### Fixed
 Do not pass POST data to the `deserialize()` function, so it is not vulnerable
 to PHP object injection. Thanks to Pedro Ribeiro for his input (see #6695).
 
