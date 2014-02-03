@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="MOD.calendar.1">
         <source>Manage events and display them in a calendar or event list</source>
-        <target>این ماژول به شما این امکان را می دهد که تمام رویدادها و اتفاقات را در تقویم سایت ثبت نمائید تا کاربران آنها را مشاهده نمایند.</target>
+        <target>مدیریت رویدادها و نمایش آنها در لیست تقویم یا رویداد</target>
       </trans-unit>
       <trans-unit id="MOD.tl_calendar_feed">
         <source>Calendar feeds</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="FMD.calendar.1">
         <source>Adds a calendar to the page</source>
-        <target>این ماژول به شما این امکان را می دهد که به سایت خود یک تقویم اضافه نمائید .</target>
+        <target>یک تقویم به صفحه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.eventlist.0">
         <source>Event list</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventlist.1">
         <source>Adds a list of events to the page</source>
-        <target>لیستی از رویدادها به صفحه اضافه می کند.</target>
+        <target>لیست رویدادها را به صفحه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.0">
         <source>Event reader</source>
@@ -39,15 +39,15 @@
       </trans-unit>
       <trans-unit id="FMD.eventreader.1">
         <source>Shows the details of an event</source>
-        <target>جزئیات یک رویداد را نشان می دهد.</target>
+        <target>جزئیات یک رویداد را نشان می‌دهد.</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.0">
         <source>Event list menu</source>
-        <target>منولیست رویداد</target>
+        <target>منو لیست رویداد</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.1">
         <source>Generates a navigation menu to browse the event list</source>
-        <target>منوی ناوبری برای مرور لیست رویداد ایجاد می کند.</target>
+        <target>منوی ناوبری برای مرور لیست رویداد ایجاد می‌کند</target>
       </trans-unit>
     </body>
   </file>

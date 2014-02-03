@@ -31,6 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_templates.invalid">
         <source>Invalid source or target directory &quot;%s&quot;!</source>
+        <target>منبع با پوشه مقصد نادرست &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="tl_templates.new_tpl.0">
         <source>New template</source>

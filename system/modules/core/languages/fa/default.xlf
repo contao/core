@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>
-        <target>مقدار فیلد %s تکراری است!</target>
+        <target>ورودی فیلد %s تکراری است!</target>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field &quot;%s&quot; must not be empty!</source>
-        <target>لطفا فیلد &quot;%s&quot; را تکمیل نمائید.</target>
+        <target>فیلد &quot;%s&quot; نباید خالی باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.mdtryNoLabel">
         <source>This field must not be empty!</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="ERR.prcnt">
         <source>Please enter a percentage between 0 and 100!</source>
-        <target>لطفا یک درصد بین 0 تا 100 وارد نمائید.</target>
+        <target>لطفا درصدی بین 0 تا 100 وارد نمائید!</target>
       </trans-unit>
       <trans-unit id="ERR.alpha">
         <source>Please enter alphabetic characters only!</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="ERR.alnum">
         <source>Please enter alphanumeric characters only!</source>
-        <target>لطفا فقط حروف عددی وارد نمائید!</target>
+        <target>لطفا فقط کاراکترهای حرفی-عددی وارد نمائید!</target>
       </trans-unit>
       <trans-unit id="ERR.phone">
         <source>Please enter a valid phone number!</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>به دلیل مسائل امنیتی شما نمی‌توانید از کاراکترهای (=&lt;&gt;&amp;/()#) استفاده نمائید!</target>
+        <target>به دلیل مسائل امنیتی شما نمی‌توانید از این کاراکترها استفاده نمائید: =&lt;&gt;&amp;/()#</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
+        <target>خطای %s هنگام بارگیری فابل %s رخ داد!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -130,19 +131,19 @@
       </trans-unit>
       <trans-unit id="ERR.invalidPass">
         <source>Invalid password!</source>
-        <target>رمزعبور اشتباه است!</target>
+        <target>گذرواژه اشتباه است!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>طول رمزعبور می‌بایست حداقل %s حرف باشد!</target>
+        <target>طول گذرواژه می‌بایست حداقل %d حرف باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
-        <target>نام کاربری و رمزعبورتان نباید یکسان باشند!</target>
+        <target>نام کاربری و گذرواژه‌تان نباید یکسان باشند!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordMatch">
         <source>The passwords did not match!</source>
-        <target>رمزعبور و تکرار آن یکسان نیستند!</target>
+        <target>گذرواژه و تکرار آن یکسان نیستند!</target>
       </trans-unit>
       <trans-unit id="ERR.accountLocked">
         <source>This account has been locked! You can log in again in %d minutes.</source>
@@ -150,6 +151,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>ورود ناموفق (توجه کنید که نام‌های کاربری و گذرواژه‌ها به حروف کوچک و بزرگ حساس هستند)!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -245,6 +247,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidGoogleId">
         <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>لطفا یک شناسه یا نام مستعار گوگل+ وارد نمایید!</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -312,6 +315,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStart.1">
         <source>Generates the opening part of the accordion wrapper.</source>
+        <target>قسمت ابتدایی لفاف آکاردیون را ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStop.0">
         <source>Wrapper stop</source>
@@ -319,6 +323,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStop.1">
         <source>Generates the closing part of the accordion wrapper.</source>
+        <target>قسمت انتهایی لفاف آکاردیون را ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.0">
         <source>Single element</source>
@@ -326,6 +331,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.1">
         <source>Generates a single accordion element.</source>
+        <target>یک المان آکوردئون تکی ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -345,6 +351,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStart.1">
         <source>Generates the opening part of the slider wrapper.</source>
+        <target>قسمت ابتدایی لفاف اسلایدر را ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStop.0">
         <source>Wrapper stop</source>
@@ -352,6 +359,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>
+        <target>قسمت انتهایی لفاف اسلایدر را ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -551,6 +559,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
+        <target>هماهنگ‌سازی سیستم پرونده با پایگاه داده</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -1114,11 +1123,11 @@
       </trans-unit>
       <trans-unit id="MSC.password.0">
         <source>Password</source>
-        <target>رمزعبور</target>
+        <target>گذرواژه</target>
       </trans-unit>
       <trans-unit id="MSC.password.1">
         <source>Please enter a password.</source>
-        <target>لطفا رمزعبور را وارد نمائید.</target>
+        <target>لطفا گذرواژه را وارد نمائید.</target>
       </trans-unit>
       <trans-unit id="MSC.confirm.0">
         <source>Confirmation</source>
@@ -1126,7 +1135,7 @@
       </trans-unit>
       <trans-unit id="MSC.confirm.1">
         <source>Please confirm the password.</source>
-        <target>لطفا رمزعبور را تایید کنید.</target>
+        <target>لطفا گذرواژه را تایید کنید.</target>
       </trans-unit>
       <trans-unit id="MSC.dateAdded.0">
         <source>Date added</source>
@@ -1150,6 +1159,7 @@
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
         <source>Current login: %s</source>
+        <target>ورودی جاری: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
@@ -1161,6 +1171,7 @@
       </trans-unit>
       <trans-unit id="MSC.move">
         <source>Move the item via drag and drop</source>
+        <target>جابجایی آیتم از طریق کشیدن و رها کردن</target>
       </trans-unit>
       <trans-unit id="MSC.move_up.0">
         <source>Move up</source>
@@ -1200,6 +1211,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
+        <target>افزایش سرعت انجام کارهایتان را با استفاده از &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;کلیدهای میان‌بر&lt;/a&gt; یاد بگیرید</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
@@ -1401,15 +1413,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pw_new">
         <source>Change password</source>
-        <target>تغییر رمزعبور</target>
+        <target>تغییر گذرواژه</target>
       </trans-unit>
       <trans-unit id="MSC.pw_change">
         <source>Please enter a new password</source>
-        <target>لطفا رمزعبور جدیدی وارد نمایید</target>
+        <target>لطفا گذرواژه جدیدی وارد نمایید</target>
       </trans-unit>
       <trans-unit id="MSC.pw_changed">
         <source>The password has been updated.</source>
-        <target>رمزعبور بروزرسانی گردید.</target>
+        <target>گذرواژه بروزرسانی گردید.</target>
       </trans-unit>
       <trans-unit id="MSC.fallback">
         <source>default</source>
@@ -1645,6 +1657,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pickerNoSelection">
         <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
+        <target>لطفا به انتخابگر پرونده یا صفحه باز گردید قبل از این دیالوگ را ببندید.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1748,6 +1761,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>کانتائو در &lt;strong&gt;وضعیت نگهداشت&lt;/strong&gt; کار می‌کند، که وب‌سایت (نمای بیرونی) در دسترس نیست. اگر در حال نصب یا ارتقاء افزونه‌ها هستید این حالت را غیرفعال نکنید! وب‌سایت ممکن است به درستی کار نکند.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1755,6 +1769,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
+        <target>&lt;strong&gt;نهانگاه داخلی&lt;/strong&gt; هنوز ساخته نشده است. ساختن نهانگاه بازدهی برنامه را بهبود خواهد بخشید و به شدت توصیه می شود. اگر شما نمی‌خواهید از نهانگاه استفاده نمایید، می‌توانید آن را برای همیشه در تنظیمات مدیریت غیرفعال نمایید.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
@@ -1794,19 +1809,19 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.requestPassword">
         <source>Request password</source>
-        <target>درخواست رمز عبور</target>
+        <target>درخواست گذرواژه</target>
       </trans-unit>
       <trans-unit id="MSC.setNewPassword">
         <source>Set new password</source>
-        <target>تعیین رمز عبور جدید</target>
+        <target>تعیین گذرواژه جدید</target>
       </trans-unit>
       <trans-unit id="MSC.newPasswordSet">
         <source>Your password has been updated.</source>
-        <target>رمز عبور شما به روز شد.</target>
+        <target>گذرواژه شما روزآمد شد.</target>
       </trans-unit>
       <trans-unit id="MSC.passwordSubject">
         <source>Your password request for %s</source>
-        <target>درخواست رمز عبور برای %s</target>
+        <target>درخواست گذرواژه برای %s</target>
       </trans-unit>
       <trans-unit id="MSC.accountNotFound">
         <source>No matching account found</source>
@@ -1902,7 +1917,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.emptyField">
         <source>Please enter your username and password!</source>
-        <target>لطفا نام کاربری و رمزعبور خود را وارد نمائید!</target>
+        <target>لطفا نام کاربری و گذرواژه خود را وارد نمائید!</target>
       </trans-unit>
       <trans-unit id="MSC.confirmation">
         <source>Confirmation</source>

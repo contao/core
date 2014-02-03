@@ -135,9 +135,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
+        <target>پاک‌سازی گزارشات سیستم</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
+        <target>جدول که همه ورودی‌های وقایع سیستم را ذخیره می‌کند را حذف می‌کند. این کار به صورت همیشگی این رکوردها را پاک می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
@@ -165,9 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>
+        <target>پاک‌سازی نهانگاه جستجو</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.1">
         <source>Removes the cached versions of the search results.</source>
+        <target>نسخه‌های ذخیره شده نتایج جستجو را حذف می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>

@@ -247,6 +247,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidGoogleId">
         <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Veuillez saisir un ID numérique Google+ ou un nom personnalisé (vanity name).</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
