@@ -1279,13 +1279,12 @@ abstract class Widget extends \Controller
 		// Foreign key
 		elseif (isset($arrData['foreignKey']))
 		{
+			$arrData['options'] = array();
 			$arrKey = explode('.', $arrData['foreignKey'], 2);
 			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
 
 			if ($objOptions->numRows)
 			{
-				$arrData['options'] = array();
-
 				while($objOptions->next())
 				{
 					$arrData['options'][$objOptions->id] = $objOptions->value;
