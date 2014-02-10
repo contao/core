@@ -284,6 +284,11 @@ function deserialize($varValue, $blnForceArray=false)
 		return $varValue;
 	}
 
+	if (preg_match('/O:[0-9]+:"/is', $varValue))
+	{
+		trigger_error('Cannot unserialize objects with deserialize() for security reasons.', E_USER_ERROR);
+	}
+
 	if ($varValue === null)
 	{
 		return $blnForceArray ? array() : null;
