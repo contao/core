@@ -64,13 +64,18 @@ class Session
 				$this->arrSession = $_SESSION;
 				break;
 		}
+
+		register_shutdown_function(array($this, 'saveToSession'));
 	}
 
 
 	/**
 	 * Save the session data
+	 *
+	 * Do not use __destruct to prevent PHP Object Insertion
+	 * See https://www.owasp.org/index.php/PHP_Object_Injection
 	 */
-	public function __destruct()
+	public function saveToSession()
 	{
 		switch (TL_MODE)
 		{

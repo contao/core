@@ -82,18 +82,6 @@ class Config
 
 
 	/**
-	 * Automatically save the local configuration
-	 */
-	public function __destruct()
-	{
-		if ($this->blnIsModified)
-		{
-			$this->save();
-		}
-	}
-
-
-	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
 	final public function __clone() {}
@@ -110,6 +98,9 @@ class Config
 		{
 			static::$objInstance = new static();
 			static::$objInstance->initialize();
+
+			// Automatically save the local configuration
+			register_shutdown_function(array($this, 'saveIfModified'));
 		}
 
 		return static::$objInstance;
@@ -215,6 +206,21 @@ class Config
 			}
 
 			fclose($resFile);
+		}
+	}
+
+
+	/**
+	 * Save the local configuration if it has been modified
+	 *
+	 * Do not use __destruct to prevent PHP Object Insertion
+	 * See https://www.owasp.org/index.php/PHP_Object_Injection
+	 */
+	public function saveIfModified()
+	{
+		if ($this->blnIsModified)
+		{
+			$this->save();
 		}
 	}
 

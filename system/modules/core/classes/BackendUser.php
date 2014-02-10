@@ -68,13 +68,18 @@ class BackendUser extends \User
 
 		$this->strIp = \Environment::get('ip');
 		$this->strHash = \Input::cookie($this->strCookie);
+
+		register_shutdown_function(array($this, 'saveSession'));
 	}
 
 
 	/**
 	 * Set the current referer and save the session
+	 *
+	 * Do not use __destruct to prevent PHP Object Insertion
+	 * See https://www.owasp.org/index.php/PHP_Object_Injection
 	 */
-	public function __destruct()
+	public function saveSession()
 	{
 		$session = $this->Session->getData();
 
