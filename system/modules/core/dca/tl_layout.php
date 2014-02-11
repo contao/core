@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'cols_2cll'                   => 'widthLeft',
 		'cols_2clr'                   => 'widthRight',
 		'cols_3cl'                    => 'widthLeft,widthRight',
-		'addJQuery'                   => 'jSource,jquery',
+		'addJQuery'                   => 'jSource,jquery,jNoConflict,jNoConflictGlobalVariable',
 		'addMooTools'                 => 'mooSource,mootools',
 		'static'                      => 'width,align'
 	),
@@ -357,6 +357,21 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'jNoConflict' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jNoConflict'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'jNoConflictGlobalVariable' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jNoConflictGlobalVariable'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'jSource' => array
 		(

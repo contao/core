@@ -385,6 +385,11 @@ class PageRegular extends \Frontend
 						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
 					}
 				}
+				
+				// Add jQuery.noConflict() when checked
+				if ($objLayout->jNoConflict) {
+					$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . ($objLayout->jNoConflictGlobalVariable ? ('var ' . $objLayout->jNoConflictGlobalVariable . ' = ') : '') . 'jQuery.noConflict(); ' . "\n/* ]]> */\n" . '</script>' . "\n";
+				}
 			}
 			else
 			{

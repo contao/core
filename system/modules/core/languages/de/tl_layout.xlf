@@ -305,6 +305,22 @@
         <source>Here you can select from where to load the jQuery script.</source>
         <target>Hier können Sie auswählen, von wo das jQuery-Skript geladen wird.</target>
       </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.0">
+        <source>jQuery noConflict()</source>
+        <target>jQuery noConflict()</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.1">
+        <source>Call jQuery.noConflict() after loading the jQuery library</source>
+        <target>Aufrufen jQuery.noConflict() nach der Ladung der jQuery-Bibliothek</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.0">
+        <source>jQuery global variable</source>
+        <target>jQuery globale Variable</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.1">
+        <source>Here you can set up a global variable instead of the $ (dollar) when using jQuery.noConflict()</source>
+        <target>Bei Verwendung jQuery.noConflict(), können Sie eine globale Variable anstelle des Dollar($)-Zeichens erstellen</target>
+      </trans-unit>
       <trans-unit id="tl_layout.jquery.0">
         <source>jQuery templates</source>
         <target>jQuery-Templates</target>

@@ -230,6 +230,18 @@
       <trans-unit id="tl_layout.jSource.1">
         <source>Here you can select from where to load the jQuery script.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.0">
+        <source>jQuery noConflict()</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.1">
+        <source>Call jQuery.noConflict() after loading the jQuery library</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.0">
+        <source>jQuery global variable</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.1">
+        <source>Here you can set up a global variable instead of the $ (dollar) when using jQuery.noConflict()</source>
+      </trans-unit>
       <trans-unit id="tl_layout.jquery.0">
         <source>jQuery templates</source>
       </trans-unit>
