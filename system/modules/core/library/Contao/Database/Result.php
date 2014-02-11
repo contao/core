@@ -101,6 +101,20 @@ abstract class Result
 
 
 	/**
+	 * Prevent unserializing see #6695
+	 */
+	public function __wakeup()
+	{
+		foreach(get_object_vars($this) as $k => $v)
+		{
+			$this->$k = null;
+		}
+
+		throw new \Exception(__CLASS__ . ' is not serializable.');
+	}
+
+
+	/**
 	 * Set a particular field of the current row
 	 *
 	 * @param mixed  $strKey   The field name

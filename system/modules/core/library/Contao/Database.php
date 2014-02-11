@@ -88,7 +88,7 @@ abstract class Database
 	 */
 	public function __destruct()
 	{
-		if (!$this->arrConfig['dbPconnect'])
+		if (is_array($this->arrConfig) && (!$this->arrConfig['dbPconnect']))
 		{
 			$this->disconnect();
 
@@ -96,6 +96,20 @@ abstract class Database
 			$strKey = md5(implode('', $this->arrConfig));
 			unset(static::$arrInstances[$strKey]);
 		}
+	}
+
+
+	/**
+	 * Prevent unserializing see #6695
+	 */
+	public function __wakeup()
+	{
+		foreach(get_object_vars($this) as $k => $v)
+		{
+			$this->$k = null;
+		}
+
+		throw new \Exception(__CLASS__ . ' is not serializable.');
 	}
 
 
