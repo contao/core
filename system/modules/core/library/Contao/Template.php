@@ -363,7 +363,7 @@ abstract class Template extends \Controller
 						. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
 						. "$('tog').addEvent('click',function(e) {"
 							. "$('debug').toggleClass('closed');"
-							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:'/'});"
+							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:(typeof Contao === 'undefined' ? '/' : Contao.path)});"
 							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
 						. "});"
 						. "window.addEvent('resize',function() {"
