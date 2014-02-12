@@ -1749,7 +1749,7 @@ Denne e-mail er automatisk genereret, og kan derfor ikke besvares direkte.
       </trans-unit>
       <trans-unit id="MSC.copyOf">
         <source>%s (copy)</source>
-        <target>%s (kopiér)</target>
+        <target>%s (kopi)</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>

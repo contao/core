@@ -159,6 +159,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
+        <target>Lūdzu izvēlieties vismaz vienu datni!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
