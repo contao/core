@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -465,7 +465,7 @@ class Input
 			return $varValue;
 		}
 
-		// Return if var is not a string
+		// Return if the value is not a string
 		if (is_bool($varValue) || $varValue === null || is_numeric($varValue))
 		{
 			return $varValue;
@@ -481,10 +481,16 @@ class Input
       	// Replace unicode entities
 		$varValue = utf8_decode_entities($varValue);
 
-		// Remove NULL characters
-		$varValue = preg_replace('/\0+/', '', $varValue);
-		$varValue = preg_replace('/(\\\\0)+/', '', $varValue);
+		// Remove null bytes
+		$varValue = str_replace(chr(0), '', $varValue);
 
+		// Remove encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
+		// Define a list of keywords
 		$arrKeywords = array
 		(
 			'/\bj\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\b/is', // javascript
@@ -547,7 +553,15 @@ class Input
 			$arrRegexp[] = '/<[^>]*[^a-z]onresize\s*=[^>]*>/is';
 		}
 
-		return preg_replace($arrRegexp, '', $varValue);
+		$varValue = preg_replace($arrRegexp, '', $varValue);
+
+		// Recheck for encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
+		return $varValue;
 	}
 
 

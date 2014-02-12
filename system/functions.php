@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -365,18 +365,47 @@ function strip_insert_tags($strString)
  */
 function deserialize($varValue, $blnForceArray=false)
 {
+	// Already an array
 	if (is_array($varValue))
 	{
 		return $varValue;
 	}
 
+	// Null
+	if ($varValue === null)
+	{
+		return $blnForceArray ? array() : null;
+	}
+
+	// Not a string
 	if (!is_string($varValue))
 	{
-		return $blnForceArray ? (($varValue === null) ? array() : array($varValue)) : $varValue;
+		return $blnForceArray ? array($varValue) : $varValue;
 	}
-	elseif (trim($varValue) == '')
+
+	// Empty string
+	if (trim($varValue) == '')
 	{
 		return $blnForceArray ? array() : '';
+	}
+
+	// Potentially including an object (see #6724)
+	if (strpos($varValue, 'O:') !== false)
+	{
+		$arrMatches = array();
+
+		// Check each match if it is an object (see #6732)
+		if (preg_match_all('/(^|;)O:[0-9]+:"([^"]+)"/', $varValue, $arrMatches))
+		{
+			foreach ($arrMatches[2] as $strMatch)
+			{
+				if ($strMatch != 'stdClass' && class_exists($strMatch))
+				{
+					trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
+					return $blnForceArray ? array($varValue) : $varValue;
+				}
+			}
+		}
 	}
 
 	$varUnserialized = @unserialize($varValue);
