@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MSC.faqCreatedBy">
         <source>Last update on %s by %s.</source>
-        <target>آخرین به روز رسانی در %s توسط %s</target>
+        <target>آخرین بروزرسانی در %s توسط %s</target>
       </trans-unit>
     </body>
   </file>

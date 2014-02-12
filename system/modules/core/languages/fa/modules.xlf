@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="MOD.article.1">
         <source>Manage articles and content elements</source>
-        <target>مدیریت المان‌های نوشته‌ها و محتوا</target>
+        <target>مدیریت نوشته‌ها و المان‌های محتوا</target>
       </trans-unit>
       <trans-unit id="MOD.form.0">
         <source>Form generator</source>
@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MOD.form.1">
         <source>Create custom forms and store or send the submitted data</source>
-        <target>مدیریت فرم‌های مخصوص و ذخبره و ارسال اطلاعات دریافت شده.</target>
+        <target>ایجاد فرم‌های مخصوص و ذخیره یا ارسال اطلاعات دریافت شده</target>
       </trans-unit>
       <trans-unit id="MOD.design">
         <source>Layout</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="MOD.themes.1">
         <source>Manage front end modules, style sheets, page layouts and templates</source>
-        <target>مدیریت ماژول‌ها، شیوه‌نامه‌ها، چیدمان صفحات و قالب‌های وب‌سایت.</target>
+        <target>مدیریت ماژول‌های، شیوه‌نامه‌ها، چیدمان صفحات و قالب‌های وب‌سایت</target>
       </trans-unit>
       <trans-unit id="MOD.page.0">
         <source>Site structure</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="MOD.page.1">
         <source>Set up the site structure of your website(s)</source>
-        <target>بر پا کردن ساختار وب‌سایت(های) شما.</target>
+        <target>بر پا کردن ساختار وب‌سایت(های) شما</target>
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.0">
         <source>Templates</source>
@@ -47,11 +47,11 @@
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.1">
         <source>Edit templates in the back end</source>
-        <target>ویرایش قالب‌ها در بخش مدیریت.</target>
+        <target>ویرایش قالب‌ها در بخش مدیریت</target>
       </trans-unit>
       <trans-unit id="MOD.accounts">
         <source>Account manager</source>
-        <target>مدیریت حساب‌های کاربری</target>
+        <target>مدیریت حساب</target>
       </trans-unit>
       <trans-unit id="MOD.member.0">
         <source>Members</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="MOD.member.1">
         <source>Manage member accounts (front end users)</source>
-        <target>مدیریت حساب‌های اعضاء (کاربران وب‌سایت).</target>
+        <target>مدیریت حساب‌های اعضاء (کاربران وب‌سایت)</target>
       </trans-unit>
       <trans-unit id="MOD.mgroup.0">
         <source>Member groups</source>
@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="MOD.files.0">
         <source>File manager</source>
-        <target>مدیریت فایل‌ها</target>
+        <target>مدیریت پرونده</target>
       </trans-unit>
       <trans-unit id="MOD.files.1">
         <source>Manage files and folders or upload new files to the server</source>
-        <target>مدیریت فایل‌ها و پوشه‌ها یا بارگذاری فایل‌های جدید در سرور.</target>
+        <target>مدیریت پرونده‌ها و پوشه‌ها یا بارگذاری پرونده‌های جدید به سرور</target>
       </trans-unit>
       <trans-unit id="MOD.log.0">
         <source>System log</source>
@@ -115,19 +115,19 @@
       </trans-unit>
       <trans-unit id="MOD.maintenance.0">
         <source>Maintenance</source>
-        <target>نگهداری و به‌روز رسانی</target>
+        <target>نگهداشت</target>
       </trans-unit>
       <trans-unit id="MOD.maintenance.1">
         <source>Maintain or update Contao</source>
-        <target>نگهداری یا به‌روز رسانی کانتائو.</target>
+        <target>نگهداشت یا بروزرسانی کانتائو</target>
       </trans-unit>
       <trans-unit id="MOD.undo.0">
         <source>Restore</source>
-        <target>برگرداندن اطلاعات</target>
+        <target>بازگردانی</target>
       </trans-unit>
       <trans-unit id="MOD.undo.1">
         <source>Restore deleted records</source>
-        <target>بازگرداندن رکوردهای حذف شده.</target>
+        <target>بازگرداندن رکوردهای حذف شده</target>
       </trans-unit>
       <trans-unit id="MOD.login.0">
         <source>Personal data</source>
@@ -135,15 +135,15 @@
       </trans-unit>
       <trans-unit id="MOD.login.1">
         <source>Change your personal data or set a new password</source>
-        <target>تغییر اطلاعات شخصی و انتخاب رمزعبور جدید.</target>
+        <target>تغییر اطلاعات شخصی و انتخاب گذرواژه جدید</target>
       </trans-unit>
       <trans-unit id="MOD.tl_style">
         <source>Style sheets</source>
-        <target>برگه‌های سبک</target>
+        <target>شیوه‌نامه‌ها</target>
       </trans-unit>
       <trans-unit id="MOD.tl_style_sheet">
         <source>Style sheets</source>
-        <target>برگه‌های سبک</target>
+        <target>شیوه‌نامه‌ها</target>
       </trans-unit>
       <trans-unit id="MOD.tl_module">
         <source>Front end modules</source>
@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
-        <target>برگه‌های سبک</target>
+        <target>شیوه‌نامه‌ها</target>
       </trans-unit>
       <trans-unit id="MOD.modules">
         <source>Front end modules</source>
@@ -171,19 +171,19 @@
       </trans-unit>
       <trans-unit id="FMD.navigation.0">
         <source>Navigation menu</source>
-        <target>منو ناوبری</target>
+        <target>منوی ناوبری</target>
       </trans-unit>
       <trans-unit id="FMD.navigation.1">
         <source>Generates a navigation menu from the site structure</source>
-        <target>منوی اصلی را از ساختار سایت ایجاد می کند.</target>
+        <target>منوی ناوبری را از ساختار سایت ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.customnav.0">
         <source>Custom navigation</source>
-        <target>منو سفارشی</target>
+        <target>ناوبری سفارشی</target>
       </trans-unit>
       <trans-unit id="FMD.customnav.1">
         <source>Generates a custom navigation menu</source>
-        <target>این ماژول به شما امکان ساخت یک منو سفارشی با آیتم های مورد نیازتان را می دهد .</target>
+        <target>منوی ناوبری سفارشی را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.breadcrumb.0">
         <source>Breadcrumb navigation</source>
@@ -191,15 +191,15 @@
       </trans-unit>
       <trans-unit id="FMD.breadcrumb.1">
         <source>Generates a breadcrumb navigation menu</source>
-        <target>منوی ناوبری مسیر پیموده شده را ایجاد می کند.</target>
+        <target>منوی ناوبری مسیر پیموده شده را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.quicknav.0">
         <source>Quick navigation</source>
-        <target>منو سریع</target>
+        <target>ناوبری سریع</target>
       </trans-unit>
       <trans-unit id="FMD.quicknav.1">
         <source>Generates a drop-down menu from the site structure</source>
-        <target>منوی افتادنی از ساختار سایت ایجاد می کند.</target>
+        <target>منوی افتادنی از ساختار سایت ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.quicklink.0">
         <source>Quick link</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="FMD.quicklink.1">
         <source>Generates a custom drop-down menu</source>
-        <target>این ماژول به شما امکان ساخت یک منو بازشو حاوی صفحات انتخابیتان را می دهد.</target>
+        <target>منوی افتادنی اختصاصی ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.booknav.0">
         <source>Book navigation</source>
@@ -215,15 +215,15 @@
       </trans-unit>
       <trans-unit id="FMD.booknav.1">
         <source>Generates a book navigation menu</source>
-        <target>یک منوی ناوبری کتاب ایجاد می کند.</target>
+        <target>یک منوی ناوبری کتاب ایجاد می کند</target>
       </trans-unit>
       <trans-unit id="FMD.articlenav.0">
         <source>Article navigation</source>
-        <target>ناوبری مقاله ها</target>
+        <target>ناوبری مقاله</target>
       </trans-unit>
       <trans-unit id="FMD.articlenav.1">
         <source>Generates a pagination menu to navigate articles</source>
-        <target>یک منوی صفحه ای برای مقاله ها ایجاد می کند.</target>
+        <target>یک منوی صفحه‌بندی برای ناوبری مقاله‌ها ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.sitemap.0">
         <source>Sitemap</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="FMD.sitemap.1">
         <source>Generates a list of all pages in the site structure</source>
-        <target>این ماژول امکان نمایش لینک تمامی صفحات فعال سایت را در یک صفحه به شما می دهد .</target>
+        <target>لیستی از تمامی صفحات در ساختار سایت را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.user">
         <source>User</source>
@@ -243,15 +243,15 @@
       </trans-unit>
       <trans-unit id="FMD.login.1">
         <source>Generates a login form</source>
-        <target>این ماژول به شما امکان ساخت یک فرم ورود به سیستم را در بخش کاربری می دهد . تنها کاربرانی که به آنها نام کاربری و رمزعبور اختصاص داده شده می توانند از این بخش استفاده نمایند.</target>
+        <target>فرم ورود را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.logout.0">
         <source>Automatic logout</source>
-        <target>خروج اتوماتیک</target>
+        <target>خروج خودکار</target>
       </trans-unit>
       <trans-unit id="FMD.logout.1">
         <source>Automatically logs out a user</source>
-        <target>این ماژول به شما امکان ساخت یک بخش برای خروج اتوماتیک یک کاربر را می دهد .</target>
+        <target>کار را به صورت خودکار خارج می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.personalData.0">
         <source>Personal data</source>
@@ -259,23 +259,23 @@
       </trans-unit>
       <trans-unit id="FMD.personalData.1">
         <source>Generates a form to edit a user's personal data</source>
-        <target>این ماژول به شما امکان ساخت یک فرم ویرایش اطلاعات شخصی برای کاربران سایت را در بخش کاربری سایت می دهد.</target>
+        <target>یک فرم ویرایش اطلاعات شخصی کاربران را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.registration.0">
         <source>Registration</source>
-        <target>عضویت</target>
+        <target>ثبت‌نام</target>
       </trans-unit>
       <trans-unit id="FMD.registration.1">
         <source>Generates a user registration form</source>
-        <target>ایجاد فرم عضویت کاربران.</target>
+        <target>یک فرم ثبت‌نام کاربر ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.lostPassword.0">
         <source>Lost password</source>
-        <target>فراموشی رمزعبور</target>
+        <target>فراموشی گذرواژه</target>
       </trans-unit>
       <trans-unit id="FMD.lostPassword.1">
         <source>Generates a form to request a new password</source>
-        <target>ایجاد یک فرم برای درخواست رمزعبور جدید.</target>
+        <target>فرم درخواست گذرواژه جدید ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.closeAccount.0">
         <source>Close account</source>
@@ -283,11 +283,11 @@
       </trans-unit>
       <trans-unit id="FMD.closeAccount.1">
         <source>Generates a form to delete a member account</source>
-        <target>ایجاد یک فرم برای حذف حساب کاربری عضو.</target>
+        <target>فرم حذف حساب کاربری عضو را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.application">
         <source>Applications</source>
-        <target>موارد کاربردی</target>
+        <target>برنامه‌های کاربردی</target>
       </trans-unit>
       <trans-unit id="FMD.form.0">
         <source>Form</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="FMD.form.1">
         <source>Adds a form to the page</source>
-        <target>این ماژول به شما امکان افزودن یک فرم را به سایتتان می دهد . اطلاعات فرم می توانند به یک پست الکترونیک ارسال شوند و یا توسط بخش های دیگر سایت مورد استفاده قرار بگیرند.</target>
+        <target>یک فرم به صفحه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.search.0">
         <source>Search engine</source>
@@ -303,15 +303,15 @@
       </trans-unit>
       <trans-unit id="FMD.search.1">
         <source>Adds a search form to the page</source>
-        <target>این ماژول به شما امکان جستجوی محلی در محتوای سایت را می دهد.</target>
+        <target>یک فرم  جستجو به صفحه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.articleList.0">
         <source>Article list</source>
-        <target>لیست مطالب و محتوا</target>
+        <target>لیست نوشته</target>
       </trans-unit>
       <trans-unit id="FMD.articleList.1">
         <source>Generates a list of articles of a column</source>
-        <target>این ماژول به شما امکان نمایش لیست کاملی از تمامی مطالب و محتوای سایت را می دهد.</target>
+        <target>لیستی از نوشته‌های یک ستون ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.miscellaneous">
         <source>Miscellaneous</source>
@@ -323,31 +323,31 @@
       </trans-unit>
       <trans-unit id="FMD.flash.1">
         <source>Embeds a Flash movie into the page</source>
-        <target>این ماژول به شما امکان افزودن فایل فلش به صفحات سایت را می دهد.</target>
+        <target>یک فیلم فلش در صفحه درج می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.randomImage.0">
         <source>Random image</source>
-        <target>تصویر اتفاقی</target>
+        <target>تصویر تصادفی</target>
       </trans-unit>
       <trans-unit id="FMD.randomImage.1">
         <source>Adds a random image to the page</source>
-        <target>این ماژول به شما امکان نمایش تصاویر اتقافی و تصادفی را در بخش کاربری سایت می دهد.</target>
+        <target>تصویر تصادفی به صفحه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.html.0">
         <source>Custom HTML</source>
-        <target>کد HTML</target>
+        <target>اچ‌تی‌ام‌ال اختصاصی</target>
       </trans-unit>
       <trans-unit id="FMD.html.1">
         <source>Allows you to add custom HTML code</source>
-        <target>این ماژول امکان افزودن برخی از کدهای HTML را به شما می دهد.</target>
+        <target>امکان افزودن کد اچ‌تی‌ام‌ال اختصاصی را به شما می‌دهد</target>
       </trans-unit>
       <trans-unit id="FMD.rss_reader.0">
         <source>RSS reader</source>
-        <target>RSS خوان</target>
+        <target>آراس‌اس خوان</target>
       </trans-unit>
       <trans-unit id="FMD.rss_reader.1">
         <source>Adds an RSS feed to the page</source>
-        <target>توسط این ماژول می‌توانید RSS Feed ها را به سایت وارد نمائید .</target>
+        <target>یک خوراک آراس‌اس به صفحه اضافه می‌کند</target>
       </trans-unit>
     </body>
   </file>

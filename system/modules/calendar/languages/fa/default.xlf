@@ -31,27 +31,27 @@
       </trans-unit>
       <trans-unit id="MSC.cal_empty">
         <source>Currently there are no events.</source>
-        <target>رویداد نزدیکی وجود ندارد.</target>
+        <target>در حال حاضر رویداد وجود ندارد.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_days">
         <source>This event is repeated every %s. day</source>
-        <target>این رویداد هر %s روز یکبار تکرار خواهد شد.</target>
+        <target>این رویداد هر %s روز یکبار تکرار خواهد شد</target>
       </trans-unit>
       <trans-unit id="MSC.cal_weeks">
         <source>This event is repeated every %s. week</source>
-        <target>این رویداد هر %s هفته یکبار تکرار خواهد شد.</target>
+        <target>این رویداد هر %s هفته یکبار تکرار خواهد شد</target>
       </trans-unit>
       <trans-unit id="MSC.cal_months">
         <source>This event is repeated every %s. month</source>
-        <target>این رویداد هر %s ماه یکبار تکرار خواهد شد.</target>
+        <target>این رویداد هر %s ماه یکبار تکرار خواهد شد</target>
       </trans-unit>
       <trans-unit id="MSC.cal_years">
         <source>This event is repeated every %s. year</source>
-        <target>این رویداد هر %s سال یکبار تکرار خواهد شد.</target>
+        <target>این رویداد هر %s سال یکبار تکرار خواهد شد</target>
       </trans-unit>
       <trans-unit id="MSC.cal_until">
         <source>until %s</source>
-        <target>تا زمان %s</target>
+        <target>تا %s</target>
       </trans-unit>
     </body>
   </file>
