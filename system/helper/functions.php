@@ -270,14 +270,14 @@ function strip_insert_tags($strString)
 	return preg_replace('/\{\{[^\}]+\}\}/U', '', $strString);
 }
 
-
 /**
  * Return an unserialized array or the argument
  * @param mixed
  * @param boolean
+ * @param boolean
  * @return mixed
  */
-function deserialize($varValue, $blnForceArray=false)
+function deserialize($varValue, $blnForceArray=false, $blnAllowObjects = false)
 {
 	if (is_array($varValue))
 	{
@@ -297,7 +297,22 @@ function deserialize($varValue, $blnForceArray=false)
 		return $blnForceArray ? array() : '';
 	}
 
-	$varUnserialized = @unserialize($varValue);
+	// Harden against object injection.
+	if (!$blnAllowObjects)
+	{
+		if (preg_match_all('/O:[0-9]+:"([^"]+)"/is', $varValue, $matches) !== 0)
+		{
+			foreach ($matches[1] as $match)
+			{
+				if (class_exists($match))
+				{
+					throw new \InvalidArgumentException('Cannot unserialize objects with deserialize() for security reasons.');
+				}
+			}
+		}
+	}
+
+	$varUnserialized = unserialize($varValue);
 
 	if (is_array($varUnserialized))
 	{
