@@ -297,6 +297,22 @@
         <source>Include the jQuery library in the layout.</source>
         <target>Включать библиотеку jQuery в макет.</target>
       </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.0">
+        <source>jQuery noConflict()</source>
+        <target>jQuery noConflict()</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.1">
+        <source>Call jQuery.noConflict() after loading the jQuery library</source>
+        <target>Вызвать jQuery.noConflict() после загрузки библиотеки jQuery</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.0">
+        <source>jQuery global variable</source>
+        <target>Глобальная переменная jQuery</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.1">
+        <source>Here you can set up a global variable instead of the $ (dollar) when using jQuery.noConflict()</source>
+        <target>Здесь вы можете инициализировать глобальную переменную вместо знака доллара $ при использовании jQuery.noConflict()</target >
+      </trans-unit>
       <trans-unit id="tl_layout.jSource.0">
         <source>jQuery source</source>
         <target>Источник jQuery</target>

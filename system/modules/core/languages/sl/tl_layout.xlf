@@ -284,6 +284,22 @@
         <source>Include the jQuery library in the layout.</source>
         <target>Dodaj knjižnico jQuery v postavitev strani.</target>
       </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.0">
+        <source>jQuery noConflict()</source>
+        <target>Funkcija jQuery.noConflict()</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflict.1">
+        <source>Call jQuery.noConflict() after loading the jQuery library</source>
+        <target>Pokličite funkcijo jQuery.noConflict () po tem, ko se je naložila Query knjižnica</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.0">
+        <source>jQuery global variable</source>
+        <target>jQuery globalna spremenljivka</target >
+      </trans-unit>
+      <trans-unit id="tl_layout.jNoConflictGlobalVariable.1">
+        <source>Here you can set up a global variable instead of the $ (dollar) when using jQuery.noConflict()</source>
+        <target>Ko uporabljate funkcijo jQuery.noConflict(), lahko tukaj nastavite globalno spremenljivko, namesto simbola $ (dolar).</target >
+      </trans-unit>
       <trans-unit id="tl_layout.jSource.0">
         <source>jQuery source</source>
         <target>Vir knjižnice jQuery</target>
