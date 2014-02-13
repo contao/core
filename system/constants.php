@@ -57,7 +57,7 @@ define('SWITCH_ORDER', true);
  * the web browser reload those resources after a Contao update.
  */
 define('VERSION', '2.11');
-define('BUILD', '15');
+define('BUILD', '16');
 define('LONG_TERM_SUPPORT', true);
 define('CODEMIRROR', '2.2');
 define('DATEPICKER', '2.1.1');

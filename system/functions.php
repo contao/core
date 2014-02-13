@@ -390,22 +390,10 @@ function deserialize($varValue, $blnForceArray=false)
 	}
 
 	// Potentially including an object (see #6724)
-	if (strpos($varValue, 'O:') !== false)
+	if (preg_match('/[OoC]:\+?[0-9]+:"/', $varValue))
 	{
-		$arrMatches = array();
-
-		// Check each match if it is an object (see #6732)
-		if (preg_match_all('/(^|;)O:[0-9]+:"([^"]+)"/', $varValue, $arrMatches))
-		{
-			foreach ($arrMatches[2] as $strMatch)
-			{
-				if ($strMatch != 'stdClass' && class_exists($strMatch))
-				{
-					trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
-					return $blnForceArray ? array($varValue) : $varValue;
-				}
-			}
-		}
+		trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
+		return $blnForceArray ? array($varValue) : $varValue;
 	}
 
 	$varUnserialized = @unserialize($varValue);

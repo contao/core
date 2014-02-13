@@ -437,6 +437,12 @@ class Input
 		$varValue = strip_tags($varValue, $strAllowedTags);
 		$varValue = str_replace(array('&lt;!--', '&lt;![', '--&gt;'), array('<!--', '<![', '-->'), $varValue);
 
+		// Recheck for encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
 		return $varValue;
 	}
 
