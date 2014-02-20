@@ -93,10 +93,11 @@ class FrontendTemplate extends \Template
 		// Server-side cache
 		if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server'))
 		{
-			// If the request string is empty, use a special cache tag which considers the page language
+			// If the request string is empty, use a special cache tag which considers the browser language array
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
+				$arrLanguage = Environment::get('httpAcceptLanguage');
+				$strCacheKey = \Environment::get('base') . 'empty.' . serialize($arrLanguage);
 			}
 			else
 			{
