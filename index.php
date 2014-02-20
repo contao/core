@@ -275,9 +275,7 @@ class Index extends Frontend
 
 		/**
 		 * If the request string is empty, look for a cached page matching the
-		 * primary browser language. This is a compromise between not caching
-		 * empty requests at all and considering all browser languages, which
-		 * is not possible for various reasons.
+		 * browser language array.
 		 */
 		if (Environment::get('request') == '' || Environment::get('request') == 'index.php')
 		{
@@ -288,7 +286,7 @@ class Index extends Frontend
 			}
 
 			$arrLanguage = Environment::get('httpAcceptLanguage');
-			$strCacheKey = Environment::get('base') .'empty.'. $arrLanguage[0];
+			$strCacheKey = Environment::get('base') .'empty.'. serialize($arrLanguage);
 		}
 		else
 		{
