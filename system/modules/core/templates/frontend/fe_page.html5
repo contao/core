@@ -80,8 +80,10 @@
     <script>
       <?php if ($this->layout->addJQuery): ?>
         setTimeout(function(){jQuery.ajax("system/cron/cron.txt",{complete:function(e){var t=e.responseText||0;parseInt(t)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&jQuery.ajax("system/cron/cron.php")}})},5e3)
-      <?php else: ?>
+      <?php elseif ($this->layout->addMooTools): ?>
         setTimeout(function(){(new Request({url:"system/cron/cron.txt",onComplete:function(e){e||(e=0),parseInt(e)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&(new Request({url:"system/cron/cron.php"})).get()}})).get()},5e3)
+      <?php else: ?>
+        setTimeout(function(){var b=function(a,b){this.x=new XMLHttpRequest;this.x.open("GET",a,!0);this.x.onreadystatechange=function(){4===this.readyState&&200===this.status&&"function"===typeof b&&b(this.responseText)};this.x.send()};new b("system/cron/cron.txt",function(a){a||(a=0);parseInt(a)<Math.round(+new Date/1E3)-<?php echo $this->cronTimeout; ?>&&new b("system/cron/cron.php")})},5E3);
       <?php endif; ?>
     </script>
   <?php endif; ?>
