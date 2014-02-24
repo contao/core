@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Point to `Frontend::addToUrl()` in front end templates (see #6736).
+
+### Fixed
 Do not stop the cron job execution after the first interval.
 
 
