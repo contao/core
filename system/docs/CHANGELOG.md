@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.8 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Do not stop the cron job execution after the first interval.
+
+
 Version 3.2.7 (2014-02-13)
 --------------------------
 
