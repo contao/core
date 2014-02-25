@@ -78,7 +78,7 @@
 
   <?php if (!$this->disableCron): ?>
     <script>
-      setTimeout(function(){var b=function(a,b){this.x=new XMLHttpRequest;this.x.open("GET",a,!0);this.x.onreadystatechange=function(){4===this.readyState&&200===this.status&&"function"===typeof b&&b(this.responseText)};this.x.send()};new b("system/cron/cron.txt",function(a){a||(a=0);parseInt(a)<Math.round(+new Date/1E3)-<?php echo $this->cronTimeout; ?>&&new b("system/cron/cron.php")})},5E3);
+      setTimeout(function(){var b=function(a,b){try{this.x=new XMLHttpRequest}catch(c){return}this.x.open("GET",a,!0);this.x.onreadystatechange=function(){4===this.readyState&&200===this.status&&"function"===typeof b&&b(this.responseText)};this.x.send()};new b("system/cron/cron.txt",function(a){a||(a=0);parseInt(a)<Math.round(+new Date/1E3)-<?php echo $this->cronTimeout; ?>&&new b("system/cron/cron.php")})},5E3);
     </script>
   <?php endif; ?>
 
