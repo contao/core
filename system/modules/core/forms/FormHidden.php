@@ -49,7 +49,7 @@ class FormHidden extends \Widget
 	{
 		return sprintf('<input type="hidden" name="%s" value="%s"%s',
 						$this->strName,
-						specialchars($this->varValue),
+						specialchars((string) $this->varValue),
 						$this->strTagEnding);
 	}
 }
