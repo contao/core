@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the arguments of two `CalendarEventsModel` methods (see #6781).
+
+### Fixed
 Pass the "tableless" flag to the "form_message" template (see #6772).
 
 ### Fixed
