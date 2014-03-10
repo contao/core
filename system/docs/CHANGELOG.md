@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Update the `swipe.js` script so the "continuous" option works (see #6762).
+
+### Fixed
 Improve the `Search::removeEntry()` method (see #6785).
 
 ### Fixed
