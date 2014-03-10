@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the event time in the event list module (see #6719).
+
+### Fixed
 Make the newsletter recipient address available in the template (see #5782).
 
 ### Fixed
