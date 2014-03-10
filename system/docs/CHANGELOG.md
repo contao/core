@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly shorten the CSS `background` property (see #6709).
+
+### Fixed
 Do not use `UNION SELECT` when searching for parent pages (see #6704).
 
 ### Fixed

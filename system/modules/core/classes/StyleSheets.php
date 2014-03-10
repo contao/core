@@ -467,16 +467,16 @@ class StyleSheets extends \Backend
 			$bgColor = deserialize($row['bgcolor'], true);
 
 			// Try to shorten the definition
-			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
+			if ($bgColor[0] != '' && $row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
 				if (($strImage = $this->generateBase64Image($row['bgimage'], $parent)) !== false)
 				{
-					$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $strImage . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+					$return .= $lb . 'background:' . $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' url("' . $strImage . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 				}
 				else
 				{
 					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
-					$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+					$return .= $lb . 'background:' . $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 				}
 			}
 			else
