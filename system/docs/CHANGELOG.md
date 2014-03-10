@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Make the newsletter recipient address available in the template (see #5782).
+
+### Fixed
 Correctly handle Unicode characters in `Validator::isGooglePlusId` (see #6707).
 
 ### Fixed

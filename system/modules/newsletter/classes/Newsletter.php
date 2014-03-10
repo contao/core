@@ -381,6 +381,7 @@ class Newsletter extends \Backend
 			$objTemplate->body = \String::parseSimpleTokens($html, $arrRecipient);
 			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 			$objTemplate->css = $css; // Backwards compatibility
+			$objTemplate->recipient = $arrRecipient['email'];
 
 			// Parse template
 			$objEmail->html = $objTemplate->parse();
