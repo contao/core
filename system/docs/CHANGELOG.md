@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Improve the `Search::removeEntry()` method (see #6785).
+
+### Fixed
 Correctly set the cookie path in the front mode in debug mode (see #6723).
 
 ### Fixed
