@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle Unicode characters in `Validator::isGooglePlusId` (see #6707).
+
+### Fixed
 Fixed the arguments of two `CalendarEventsModel` methods (see #6781).
 
 ### Fixed
