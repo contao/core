@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the cookie path in the front mode in debug mode (see #6723).
+
+### Fixed
 Point to `Frontend::addToUrl()` in front end templates (see #6736).
 
 ### Fixed
