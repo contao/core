@@ -410,15 +410,20 @@ class PageModel extends \Model
 	 */
 	public static function findParentsById($intId)
 	{
-		$objPages = \Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
-											->execute($intId);
+		$arrModels = array();
 
-		if ($objPages->numRows < 1)
+		while ($intId > 0 && ($objPage = static::findByPk($intId)) !== null)
+		{
+			$intId = $objPage->pid;
+			$arrModels[] = $objPage;
+		}
+
+		if (empty($arrModels))
 		{
 			return null;
 		}
 
-		return \Model\Collection::createFromDbResult($objPages, 'tl_page');
+		return new \Model\Collection($arrModels, 'tl_page');
 	}
 
 

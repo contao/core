@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not use `UNION SELECT` when searching for parent pages (see #6704).
+
+### Fixed
 Disable `zlib.output_compression` when sending files to the browser (see #6717).
 
 ### Fixed
