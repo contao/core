@@ -60,6 +60,12 @@ class Newsletter extends \Backend
 		// Add default sender address
 		if ($objNewsletter->sender == '')
 		{
+			$this->import('BackendUser', 'User');
+			$objNewsletter->senderName = $this->User->name;
+			$objNewsletter->sender = $this->User->email;
+		}
+		if ($objNewsletter->sender == '')
+		{
 			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
