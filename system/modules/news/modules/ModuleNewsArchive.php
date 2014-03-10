@@ -90,53 +90,60 @@ class ModuleNewsArchive extends \ModuleNews
 		$intBegin = 0;
 		$intEnd = 0;
 
+		$intYear = \Input::get('year');
+		$intMonth = \Input::get('month');
+		$intDay = \Input::get('day');
+
 		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']) && $this->news_jumpToCurrent != 'all_items')
 		{
 			switch ($this->news_format)
 			{
 				case 'news_year':
-					\Input::setGet('year', date('Y'));
+					$intYear = date('Y');
 					break;
 
 				default:
 				case 'news_month':
-					\Input::setGet('month', date('Ym'));
+					$intMonth = date('Ym');
 					break;
 
 				case 'news_day':
-					\Input::setGet('day', date('Ymd'));
+					$intDay = date('Ymd');
 					break;
 			}
 		}
 
 		// Display year
-		if (\Input::get('year'))
+		if ($intYear)
 		{
-			$strDate = \Input::get('year');
+			$strDate = $intYear;
 			$objDate = new \Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
 		}
+
 		// Display month
-		elseif (\Input::get('month'))
+		elseif ($intMonth)
 		{
-			$strDate = \Input::get('month');
+			$strDate = $intMonth;
 			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
 		}
+
 		// Display day
-		elseif (\Input::get('day'))
+		elseif ($intDay)
 		{
-			$strDate = \Input::get('day');
+			$strDate = $intDay;
 			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
 			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
 		}
+
 		// Show all items
 		elseif ($this->news_jumpToCurrent == 'all_items')
 		{

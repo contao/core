@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not use `Input::setGet()` in the event modules (see #6733).
+
+### Fixed
 Correctly shorten the CSS `background` property (see #6709).
 
 ### Fixed
