@@ -694,20 +694,7 @@ class Theme extends \Backend
 
 		// Open the "save as …" dialogue
 		$objFile = new \File('system/tmp/'. $strTmp, true);
-
-		header('Content-Type: application/octet-stream');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $strName . '.cto"');
-		header('Content-Length: ' . $objFile->filesize);
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Expires: 0');
-
-		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strTmp, 'rb');
-		fpassthru($resFile);
-		fclose($resFile);
-
-		exit;
+		$objFile->sendToBrowser($strName . '.cto');
 	}
 
 

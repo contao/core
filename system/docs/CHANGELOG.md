@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Disable `zlib.output_compression` when sending files to the browser (see #6717).
+
+### Fixed
 Consider the event time in the event list module (see #6719).
 
 ### Fixed
