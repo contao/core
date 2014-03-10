@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly initialize the `Session` class (see #6747).
+
+### Fixed
 Do not use `Input::setGet()` in the event modules (see #6733).
 
 ### Fixed
