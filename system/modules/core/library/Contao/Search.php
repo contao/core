@@ -346,6 +346,20 @@ class Search
 			throw new \Exception('Empty keyword string');
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['searchFor']) && is_array($GLOBALS['TL_HOOKS']['searchFor']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['searchFor'] as $callback)
+			{
+				$varResult = \System::importStatic($callback[0])->$callback[1]($strKeywords, $blnOrSearch, $arrPid, $intRows, $intOffset, $blnFuzzy);
+
+				if ($varResult instanceof \Database\Result)
+				{
+					return $varResult;
+				}
+			}
+		}
+
 		// Split keywords
 		$arrChunks = array();
 		preg_match_all('/"[^"]+"|[\+\-]?[^ ]+\*?/', $strKeywords, $arrChunks);
