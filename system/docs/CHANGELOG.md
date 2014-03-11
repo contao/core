@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Use a placeholder image if no thumbnail can be created (see #6754).
+
+### Fixed
 Pass additional arguments to the "replaceInsertTags" hook (see #6672).
 
 ### Fixed

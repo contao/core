@@ -195,7 +195,14 @@ class FileTree extends \Widget
 
 							if ($objFile->isGdImage)
 							{
-								$arrValues[$objFiles->uuid] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+								$image = 'placeholder.png';
+
+								if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+								{
+									$image = \Image::get($objFiles->path, 80, 60, 'center_center');
+								}
+
+								$arrValues[$objFiles->uuid] = \Image::getHtml($image, '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 							}
 							else
 							{
@@ -232,7 +239,14 @@ class FileTree extends \Widget
 									// Only show images
 									if ($objFile->isGdImage)
 									{
-										$arrValues[$objSubfiles->uuid] = \Image::getHtml(\Image::get($objSubfiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+										$image = 'placeholder.png';
+
+										if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+										{
+											$image = \Image::get($objSubfiles->path, 80, 60, 'center_center');
+										}
+
+										$arrValues[$objSubfiles->uuid] = \Image::getHtml($image, '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 									}
 								}
 								else
@@ -255,7 +269,14 @@ class FileTree extends \Widget
 								// Only show images
 								if ($objFile->isGdImage)
 								{
-									$arrValues[$objFiles->uuid] = \Image::getHtml(\Image::get($objFiles->path, 80, 60, 'center_center'), '', 'class="gimage" title="' . specialchars($strInfo) . '"');
+									$image = 'placeholder.png';
+
+									if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+									{
+										$image = \Image::get($objFiles->path, 80, 60, 'center_center');
+									}
+
+									$arrValues[$objFiles->uuid] = \Image::getHtml($image, '', 'class="gimage" title="' . specialchars($strInfo) . '"');
 								}
 							}
 							else
