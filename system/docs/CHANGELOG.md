@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Pass additional arguments to the "replaceInsertTags" hook (see #6672).
+
+### Fixed
 Correctly initialize the `Session` class (see #6747).
 
 ### Fixed
