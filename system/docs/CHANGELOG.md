@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Encode e-mail addresses in the "explanation" form field (see #6771).
+
+### Fixed
 Use a placeholder image if no thumbnail can be created (see #6754).
 
 ### Fixed
