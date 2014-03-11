@@ -2004,15 +2004,16 @@ abstract class Controller extends \System
 	/**
 	 * Add a request string to the current URL
 	 *
-	 * @param string $strRequest The string to be added
+	 * @param string  $strRequest The string to be added
+	 * @param boolean $blnAddRef  Add the referer ID
 	 *
 	 * @return string The new URL
 	 */
-	public static function addToUrl($strRequest)
+	public static function addToUrl($strRequest, $blnAddRef=true)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
 
-		if ($strRequest != '')
+		if ($strRequest != '' && $blnAddRef)
 		{
 			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
 		}

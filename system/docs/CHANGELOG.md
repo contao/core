@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve the referer ID when clicking the "switch to edit" button (see #6127).
+
+### Fixed
 Encode e-mail addresses in the "explanation" form field (see #6771).
 
 ### Fixed
