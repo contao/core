@@ -44,6 +44,9 @@ Make the swipe CSS selectors more specific (see #6666).
 ### Fixed
 Correctly optimize floating-point numbers in style sheets (see #6674).
 
+### Fixed
+Display blank option label if foreignKey query does not return any values.
+
 
 Version 3.2.4 (2014-01-20)
 --------------------------
