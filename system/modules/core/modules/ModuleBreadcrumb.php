@@ -194,6 +194,7 @@ class ModuleBreadcrumb extends \Module
 			(
 				'isRoot'   => false,
 				'isActive' => true,
+				'href'     => $this->generateFrontendUrl($pages[0]),
 				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
 				'link'     => $pages[0]['title'],
 				'data'     => $pages[0],
