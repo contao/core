@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+The file/page tree widget did not work properly in "edit multiple" mode (#6788).
+
+### Fixed
 Preserve the referer ID when clicking the "switch to edit" button (see #6127).
 
 ### Fixed
