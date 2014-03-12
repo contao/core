@@ -5,6 +5,9 @@ Version 3.2.8 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Add the "href" values for active breadcrumb menus to the template (see #6796).
+
+### Fixed
 The file/page tree widget did not work properly in "edit multiple" mode (#6788).
 
 ### Fixed
