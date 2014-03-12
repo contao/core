@@ -573,7 +573,7 @@ abstract class User extends \System
 		$groups = deserialize($this->arrData['groups']);
 
 		// No groups assigned
-		if (!is_array($groups) || empty($groups))
+		if (empty($groups) || !is_array($groups))
 		{
 			return false;
 		}

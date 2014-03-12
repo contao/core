@@ -1761,7 +1761,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
-        <target>Contao è attualmente in esecuzione in  &lt;strong&gt;modalità di manutenzione&lt;/ strong&gt;, in cui il sito web (front-end) non è disponibile. Non disattivare questa modalità se si sta installando o aggiornamento estensioni di terze parti! Il sito potrebbe non funzionare correttamente.</target>
+        <target>Contao è attualmente in esecuzione in  &lt;strong&gt;modalità di manutenzione&lt;/strong&gt;, in cui il sito web (front-end) non è disponibile. Non disattivare questa modalità se si sta installando o aggiornamento estensioni di terze parti! Il sito potrebbe non funzionare correttamente.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>

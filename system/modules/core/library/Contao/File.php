@@ -636,8 +636,10 @@ class File extends \System
 
 	/**
 	 * Send the file to the browser
+	 *
+	 * @param string $filename An optional filename
 	 */
-	public function sendToBrowser()
+	public function sendToBrowser($filename=null)
 	{
 		// Make sure no output buffer is active
 		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
@@ -646,10 +648,13 @@ class File extends \System
 		// Prevent session locking (see #2804)
 		session_write_close();
 
+		// Disable zlib.output_compression (see #6717)
+		ini_set('zlib.output_compression', 'Off');
+
 		// Open the "save as …" dialogue
 		header('Content-Type: ' . $this->mime);
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $this->basename . '"');
+		header('Content-Disposition: attachment; filename="' . ($filename ?: $this->basename) . '"');
 		header('Content-Length: ' . $this->filesize);
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');

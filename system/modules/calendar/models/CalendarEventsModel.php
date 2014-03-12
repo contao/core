@@ -87,7 +87,12 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime"), $arrOptions);
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = "$t.startTime";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 
 
@@ -110,7 +115,12 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, array('order'=>"$t.startTime DESC"), $arrOptions);
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order']  = "$t.startTime DESC";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 
 

@@ -262,4 +262,18 @@ class FrontendTemplate extends \Template
 
 		return '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
+
+
+	/**
+	 * Point to `Frontend::addToUrl()` in front end templates (see #6736)
+	 *
+	 * @param string
+	 * @param boolean
+	 *
+	 * @return string
+	 */
+	public static function addToUrl($strRequest, $blnIgnoreParams=false)
+	{
+		return \Frontend::addToUrl($strRequest, $blnIgnoreParams);
+	}
 }

@@ -106,7 +106,6 @@ class CronJob extends Frontend
 			}
 
 			$this->log(ucfirst($strInterval) . ' cron jobs complete', __METHOD__, TL_CRON);
-			break;
 		}
 	}
 

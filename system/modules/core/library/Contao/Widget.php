@@ -1281,15 +1281,11 @@ abstract class Widget extends \Controller
 		{
 			$arrKey = explode('.', $arrData['foreignKey'], 2);
 			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
+			$arrData['options'] = array();
 
-			if ($objOptions->numRows)
+			while($objOptions->next())
 			{
-				$arrData['options'] = array();
-
-				while($objOptions->next())
-				{
-					$arrData['options'][$objOptions->id] = $objOptions->value;
-				}
+				$arrData['options'][$objOptions->id] = $objOptions->value;
 			}
 		}
 

@@ -89,11 +89,12 @@ abstract class Backend extends \Controller
 	/**
 	 * Add the request token to the URL
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	public static function addToUrl($strRequest)
+	public static function addToUrl($strRequest, $blnAddRef=true)
 	{
-		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN);
+		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef);
 	}
 
 

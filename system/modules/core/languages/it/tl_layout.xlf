@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
-        <target>Include il foglio di stile &lt;em&gt;tinymce.css&lt;/ em&gt; dalla directory di upload.</target>
+        <target>Include il foglio di stile &lt;em&gt;tinymce.css&lt;/em&gt; dalla directory di upload.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>

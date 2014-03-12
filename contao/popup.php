@@ -94,21 +94,7 @@ class Popup extends Backend
 		if (Input::get('download') && $this->strFile)
 		{
 			$objFile = new File($this->strFile, true);
-
-			header('Content-Type: ' . $objFile->mime);
-			header('Content-Transfer-Encoding: binary');
-			header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
-			header('Content-Length: ' . $objFile->filesize);
-			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-			header('Pragma: public');
-			header('Expires: 0');
-
-			$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
-			fpassthru($resFile);
-			fclose($resFile);
-			ob_flush(); // see #3595
-
-			$this->redirect(str_replace('&download=1', '', Environment::get('request')));
+			$objFile->sendToBrowser();
 		}
 
 		$this->Template = new BackendTemplate('be_popup');

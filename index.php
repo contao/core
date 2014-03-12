@@ -118,7 +118,7 @@ class Index extends Frontend
 			}
 			else
 			{
-				$arrLangs = $arrPages['*']; // empty domain
+				$arrLangs = $arrPages['*'] ?: array(); // empty domain
 			}
 
 			// Use the first result (see #4872)
@@ -126,6 +126,7 @@ class Index extends Frontend
 			{
 				$objNewPage = current($arrLangs);
 			}
+
 			// Try to find a page matching the language parameter
 			elseif (($lang = Input::get('language')) != '' && isset($arrLangs[$lang]))
 			{

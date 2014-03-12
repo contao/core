@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Qui puoi inserire un elenco separato da virgole di cartelle che saranno escluse dalla sincronizzazione dei file (ad esempio &lt;em&gt;allegati, music_academy &lt;/ em&gt;). Le risorse che verranno escluse non potranno essere utilizzate ad esempio negli elementi immagine o negli elementi download!</target>
+        <target>Qui puoi inserire un elenco separato da virgole di cartelle che saranno escluse dalla sincronizzazione dei file (ad esempio &lt;em&gt;allegati, music_academy&lt;/em&gt;). Le risorse che verranno escluse non potranno essere utilizzate ad esempio negli elementi immagine o negli elementi download!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

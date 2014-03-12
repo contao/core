@@ -1,6 +1,73 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.8 (2014-03-12)
+--------------------------
+
+### Fixed
+Add the "href" values for active breadcrumb menus to the template (see #6796).
+
+### Fixed
+The file/page tree widget did not work properly in "edit multiple" mode (#6788).
+
+### Fixed
+Preserve the referer ID when clicking the "switch to edit" button (see #6127).
+
+### Fixed
+Encode e-mail addresses in the "explanation" form field (see #6771).
+
+### Fixed
+Use a placeholder image if no thumbnail can be created (see #6754).
+
+### Fixed
+Pass additional arguments to the "replaceInsertTags" hook (see #6672).
+
+### Fixed
+Correctly initialize the `Session` class (see #6747).
+
+### Fixed
+Do not use `Input::setGet()` in the event modules (see #6733).
+
+### Fixed
+Correctly shorten the CSS `background` property (see #6709).
+
+### Fixed
+Do not use `UNION SELECT` when searching for parent pages (see #6704).
+
+### Fixed
+Disable `zlib.output_compression` when sending files to the browser (see #6717).
+
+### Fixed
+Consider the event time in the event list module (see #6719).
+
+### Fixed
+Make the newsletter recipient address available in the template (see #5782).
+
+### Fixed
+Correctly handle Unicode characters in `Validator::isGooglePlusId` (see #6707).
+
+### Fixed
+Fixed the arguments of two `CalendarEventsModel` methods (see #6781).
+
+### Fixed
+Pass the "tableless" flag to the "form_message" template (see #6772).
+
+### Fixed
+Update the `swipe.js` script so the "continuous" option works (see #6762).
+
+### Fixed
+Improve the `Search::removeEntry()` method (see #6785).
+
+### Fixed
+Correctly set the cookie path in the front mode in debug mode (see #6723).
+
+### Fixed
+Point to `Frontend::addToUrl()` in front end templates (see #6736).
+
+### Fixed
+Do not stop the cron job execution after the first interval.
+
+
 Version 3.2.7 (2014-02-13)
 --------------------------
 

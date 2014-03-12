@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>Prova a &lt;a href=&quot;%s&quot;&gt; passare al livello superiore &lt;/ a&gt; e ad utilizzare la funzione di ricerca (se presente) per trovare la pagina che stavi cercando. Eventualmente puoi &lt;a href=&quot;%s&quot;&gt;contattare il webmaster &lt;/ a&gt; e cominicargli l'errore.</target>
+        <target>Prova a &lt;a href=&quot;%s&quot;&gt;passare al livello superiore&lt;/a&gt; e ad utilizzare la funzione di ricerca (se presente) per trovare la pagina che stavi cercando. Eventualmente puoi &lt;a href=&quot;%s&quot;&gt;contattare il webmaster&lt;/a&gt; e cominicargli l'errore.</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
-        <target>Questo problema deve essere risolto da parte dell'amministratore del sito. Se sei un visitatore, segnala il problema al  &lt;a href=&quot;%s&quot;&gt;webmaster &lt;/ a&gt; per comunicarli che vi è qualcosa che non funziona.</target>
+        <target>Questo problema deve essere risolto da parte dell'amministratore del sito. Se sei un visitatore, segnala il problema al  &lt;a href=&quot;%s&quot;&gt;webmaster&lt;/a&gt; per comunicarli che vi è qualcosa che non funziona.</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>Se è stata impostata in modo esplicito una lingua, provare a &lt;a href=&quot;%s&quot;&gt; passare al livello superiore &lt;/ a&gt;. In caso contrario è possibile &lt;a href=&quot;%s&quot;&gt;contattare il webmaster &lt;/ a&gt; e comunicargli il problema.</target>
+        <target>Se è stata impostata in modo esplicito una lingua, provare a &lt;a href=&quot;%s&quot;&gt;passare al livello superiore&lt;/a&gt;. In caso contrario è possibile &lt;a href=&quot;%s&quot;&gt;contattare il webmaster&lt;/a&gt; e comunicargli il problema.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
-        <target>Molto probabilmente il sito è ancora in fase di sviluppo e sarà online tra pochi giorni. Se si vuole comunicare il problema, è possibile &lt;a href=&quot;%s&quot;&gt;contattare il webmaster &lt;/ a&gt; e segnalare l'anomalia.</target>
+        <target>Molto probabilmente il sito è ancora in fase di sviluppo e sarà online tra pochi giorni. Se si vuole comunicare il problema, è possibile &lt;a href=&quot;%s&quot;&gt;contattare il webmaster&lt;/a&gt; e segnalare l'anomalia.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>Se non sei collegato, prova a &lt;a href=&quot;%s&quot;&gt; passare al livello superiore &lt;/ a&gt; e cercare il form di login. Se non vi è alcun form di login o se si è già connessi, è possibile  &lt;a href=&quot;%s&quot;&gt; contattare il webmaster &lt;/ a&gt; e segnalargli il problema.</target>
+        <target>Se non sei collegato, prova a &lt;a href=&quot;%s&quot;&gt;passare al livello superiore&lt;/a&gt; e cercare il form di login. Se non vi è alcun form di login o se si è già connessi, è possibile &lt;a href=&quot;%s&quot;&gt;contattare il webmaster&lt;/a&gt; e segnalargli il problema.</target>
       </trans-unit>
       <trans-unit id="XPT.unavailable">
         <source>We'll be right back</source>
