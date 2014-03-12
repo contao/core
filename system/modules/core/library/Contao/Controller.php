@@ -1662,7 +1662,7 @@ abstract class Controller extends \System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache);
+							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
@@ -2004,15 +2004,16 @@ abstract class Controller extends \System
 	/**
 	 * Add a request string to the current URL
 	 *
-	 * @param string $strRequest The string to be added
+	 * @param string  $strRequest The string to be added
+	 * @param boolean $blnAddRef  Add the referer ID
 	 *
 	 * @return string The new URL
 	 */
-	public static function addToUrl($strRequest)
+	public static function addToUrl($strRequest, $blnAddRef=true)
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
 
-		if ($strRequest != '')
+		if ($strRequest != '' && $blnAddRef)
 		{
 			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
 		}

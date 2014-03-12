@@ -287,6 +287,6 @@ class Validator
 	 */
 	public static function isGooglePlusId($varValue)
 	{
-		return preg_match('/^([0-9]{21}|\+[\pN\pL-]+)$/', $varValue);
+		return preg_match('/^([0-9]{21}|\+[\pN\pL-]+)$/u', $varValue);
 	}
 }

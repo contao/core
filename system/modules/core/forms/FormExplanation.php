@@ -55,11 +55,20 @@ class FormExplanation extends \Widget
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			return \String::toXhtml($this->text);
+			$this->text = \String::toXhtml($this->text);
 		}
 		else
 		{
-			return \String::toHtml5($this->text);
+			$this->text = \String::toHtml5($this->text);
 		}
+
+		// Add the static files URL to images
+		if (TL_FILES_URL != '')
+		{
+			$path = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
+			$this->text = str_replace(' src="' . $path, ' src="' . TL_FILES_URL . $path, $this->text);
+		}
+
+		return \String::encodeEmail($this->text);
 	}
 }

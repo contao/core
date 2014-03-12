@@ -170,8 +170,13 @@ class ModuleBreadcrumb extends \Module
 				$strArticle = $strSection;
 			}
 
-			// Get the article title
 			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
+			$strAlias = ($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id;
+
+			if ($objArticle->inColumn != 'main')
+			{
+				$strAlias = $objArticle->inColumn . ':' . $strAlias;
+			}
 
 			if ($objArticle !== null)
 			{
@@ -179,6 +184,7 @@ class ModuleBreadcrumb extends \Module
 				(
 					'isRoot'   => false,
 					'isActive' => true,
+					'href'     => $this->generateFrontendUrl($pages[0], '/articles/' . $strAlias),
 					'title'    => specialchars($objArticle->title, true),
 					'link'     => $objArticle->title,
 					'data'     => $objArticle->row(),
@@ -194,6 +200,7 @@ class ModuleBreadcrumb extends \Module
 			(
 				'isRoot'   => false,
 				'isActive' => true,
+				'href'     => $this->generateFrontendUrl($pages[0]),
 				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
 				'link'     => $pages[0]['title'],
 				'data'     => $pages[0],

@@ -546,6 +546,7 @@ class Form extends \Hybrid
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);
+					$objTemplate->tableless = $this->tableless ? true : false;
 
 					$this->Template->fields .= $objTemplate->parse() . "\n";
 				}

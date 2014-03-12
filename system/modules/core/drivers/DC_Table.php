@@ -2042,16 +2042,16 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				\Message::reset();
 				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				\Message::reset();
 				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
-				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
-				$strUrl = preg_replace('/(&amp;)?s2e=[^&]*/i', '', $strUrl);
-				$strUrl = preg_replace('/(&amp;)?act=[^&]*/i', '', $strUrl);
+				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href'], false);
+				$strUrl = preg_replace('/(&amp;)?(s2e|act)=[^&]*/i', '', $strUrl);
 
 				$this->redirect($strUrl);
 			}
@@ -2078,6 +2078,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				\Message::reset();
 				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+
 				$strUrl = \Environment::get('script') . '?do=' . \Input::get('do');
 
 				if (isset($_GET['table']))

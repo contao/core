@@ -53,15 +53,15 @@ class Session
 		switch (TL_MODE)
 		{
 			case 'BE':
-				$this->arrSession = $_SESSION['BE_DATA'];
+				$this->arrSession = (array) $_SESSION['BE_DATA'];
 				break;
 
 			case 'FE':
-				$this->arrSession = $_SESSION['FE_DATA'];
+				$this->arrSession = (array) $_SESSION['FE_DATA'];
 				break;
 
 			default:
-				$this->arrSession = $_SESSION;
+				$this->arrSession = (array) $_SESSION;
 				break;
 		}
 	}

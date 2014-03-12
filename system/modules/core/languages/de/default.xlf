@@ -1873,7 +1873,7 @@ Diese E-Mail wurde von Contao generiert. Sie können nicht darauf antworten.
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
-        <target>Zur Zeit sind keine Versionen vorhanden.</target>
+        <target>Zurzeit sind keine Versionen vorhanden.</target>
       </trans-unit>
       <trans-unit id="MSC.latestChanges">
         <source>Latest changes</source>

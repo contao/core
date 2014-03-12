@@ -541,12 +541,12 @@ class Updater extends \Controller
 							   ->execute($objParent->uuid, $objFiles->pid_backup);
 			}
 
-			// Update the fields
-			$this->updateFileTreeFields();
-
 			// Drop the pid_backup column
 			$this->Database->query("ALTER TABLE `tl_files` DROP `pid_backup`");
 		}
+
+		// Update the fields
+		$this->updateFileTreeFields();
 	}
 
 
@@ -768,11 +768,7 @@ class Updater extends \Controller
 		// Get the non-empty rows
 		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field!=''");
 
-		if ($objRow->numRows < 1)
-		{
-			return;
-		}
-
+		// Check the column type
 		$objDesc = $objDatabase->query("DESC $table $field");
 
 		// Change the column type
@@ -826,11 +822,7 @@ class Updater extends \Controller
 		// Get the non-empty rows
 		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field!=''");
 
-		if ($objRow->numRows < 1)
-		{
-			return;
-		}
-
+		// Check the column type
 		$objDesc = $objDatabase->query("DESC $table $field");
 
 		// Change the column type
@@ -892,11 +884,6 @@ class Updater extends \Controller
 
 		// Get the non-empty rows
 		$objRow = $objDatabase->query("SELECT id, $field FROM $table WHERE $field LIKE '%,%'");
-
-		if ($objRow->numRows < 1)
-		{
-			return;
-		}
 
 		// Convert the comma separated lists into serialized arrays
 		while ($objRow->next())
