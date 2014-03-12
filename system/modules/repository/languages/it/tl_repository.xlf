@@ -323,7 +323,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.actionsummary">
         <source>Action summary</source>
-        <target>Somario Azioni</target>
+        <target>Riepilogo Azioni</target>
       </trans-unit>
       <trans-unit id="tl_repository.actionsuccess">
         <source>Actions successful.</source>
