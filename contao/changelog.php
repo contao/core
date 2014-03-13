@@ -52,12 +52,14 @@ class Changelog extends Backend
 	 */
 	public function run()
 	{
-		// Load the vendor library
-		include_once TL_ROOT . '/system/modules/core/vendor/markdown/markdown.php';
-
 		// Parse the changelog file
 		$strBuffer = file_get_contents(TL_ROOT . '/system/docs/CHANGELOG.md');
-		$strBuffer = \Markdown(str_replace("\r", '', $strBuffer)); // see #4190
+
+		// Remove carriage returns (see #4190)
+		$strBuffer = str_replace("\r", '', $strBuffer);
+
+		// Convert to HTML
+		$strBuffer = \Michelf\MarkdownExtra::defaultTransform($strBuffer);
 
 		// Add the template
 		$this->Template = new BackendTemplate('be_changelog');
