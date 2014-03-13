@@ -96,15 +96,14 @@ catch (UnresolvableDependenciesException $e)
 
 
 /**
- * Register the SwiftMailer and SimplePie autoloaders
+ * Register the SwiftMailer and vendor autoloaders
  */
-require_once TL_ROOT . '/system/modules/core/vendor/swiftmailer/classes/Swift.php';
+function _swiftmailer_init()
+{
+	require TL_ROOT . '/system/config/swiftmailer.php';
+}
 
-Swift::registerAutoload(function() {
-	require TL_ROOT . '/system/modules/core/vendor/swiftmailer/swift_init.php';
-});
-
-require_once TL_ROOT . '/system/modules/core/vendor/simplepie/autoloader.php';
+require_once TL_ROOT . '/vendor/autoload.php';
 
 
 /**
