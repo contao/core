@@ -428,12 +428,6 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
 		}
 
-		// Load MooTools request for the command scheduler (see #5195)
-		if (!$GLOBALS['TL_CONFIG']['disableCron'] && !$objLayout->addJQuery && !$objLayout->addMooTools)
-		{
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
-		}
-
 		// Check whether TL_APPEND_JS exists (see #4890)
 		if (!empty($arrAppendJs))
 		{
