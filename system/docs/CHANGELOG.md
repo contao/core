@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Use a monospaced font for the plain text newsletter preview (see #6790).
+
+### Fixed
 Adjust the `vScrollTo()` offset if the paste hint is visible (see #6478).
 
 
