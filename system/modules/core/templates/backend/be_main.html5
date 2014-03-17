@@ -119,7 +119,7 @@
     </div>
 
     <?php if ($this->pageOffset): ?>
-      <script>Backend.vScrollTo(<?php echo $this->pageOffset; ?>)</script>
+      <script>Backend.vScrollTo($('paste_hint') ? <?php echo $this->pageOffset + 20; ?> : <?php echo $this->pageOffset; ?>)</script>
       <?php System::setCookie('BE_PAGE_OFFSET', 0, 0); ?>
     <?php endif; ?>
   <?php endif; ?>

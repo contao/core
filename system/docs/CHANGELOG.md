@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.9 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Adjust the `vScrollTo()` offset if the paste hint is visible (see #6478).
+
+
 Version 3.2.8 (2014-03-12)
 --------------------------
 
