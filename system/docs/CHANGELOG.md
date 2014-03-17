@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle OR queries in the listing module (see #6344).
+
+### Fixed
 Use a monospaced font for the plain text newsletter preview (see #6790).
 
 ### Fixed
