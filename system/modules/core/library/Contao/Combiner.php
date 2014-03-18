@@ -191,8 +191,28 @@ class Combiner extends \System
 		$strTarget = substr($this->strMode, 1);
 		$strKey = substr(md5($this->strKey), 0, 12);
 
+		// Do not combine the files in debug mode (see #6450)
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$return = array();
+
+			foreach ($this->arrFiles as $arrFile)
+			{
+				$return[] = $arrFile['name'];
+			}
+
+			if ($this->strMode == self::JS)
+			{
+				return implode('"></script><script src="', $return);
+			}
+			else
+			{
+				return implode('"><link rel="stylesheet" href="', $return);
+			}
+		}
+
 		// Load the existing file
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
+		if (file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
 		{
 			return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 		}

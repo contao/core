@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Improved
+Do not combine .js and .css files when running in debug mode (see #6450).
+
 ### New
 Added a `DcaLoader` class to decouple the DCA loading process (see #5441). DCAs
 can now be loaded anywhere using `DataContainer::load()`.
