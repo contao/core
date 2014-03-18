@@ -73,7 +73,6 @@ class ModuleNewsList extends \ModuleNews
 	{
 		$offset = intval($this->skipFirst);
 		$limit = null;
-		$this->Template->articles = array();
 
 		// Maximum number of items
 		if ($this->numberOfItems > 0)
@@ -95,13 +94,14 @@ class ModuleNewsList extends \ModuleNews
 			$blnFeatured = null;
 		}
 
+		$this->Template->articles = array();
+		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
+
 		// Get the total number of items
 		$intTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
 
 		if ($intTotal < 1)
 		{
-			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
-			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 			return;
 		}
 
@@ -158,13 +158,8 @@ class ModuleNewsList extends \ModuleNews
 			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, 0, $offset);
 		}
 
-		// No items found
-		if ($objArticles === null)
-		{
-			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
-			$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
-		}
-		else
+		// Add the articles
+		if ($objArticles !== null)
 		{
 			$this->Template->articles = $this->parseArticles($objArticles);
 		}
