@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Changed
+Convert slashes to hyphens in the `standardize()` function (see #6396).
+
 ### Improved
 Add a `getModel()` method to modules, elements and hybrids (see #6492).
 

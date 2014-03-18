@@ -238,8 +238,8 @@ function specialchars($strString, $blnStripInsertTags=false)
  */
 function standardize($strString, $blnPreserveUppercase=false)
 {
-	$arrSearch = array('/[^a-zA-Z0-9 _-]+/', '/ +/', '/\-+/');
-	$arrReplace = array('', '-', '-');
+	$arrSearch = array('/[^a-zA-Z0-9 \/_-]+/', '/ +/', '/\-+/', '/\/+/');
+	$arrReplace = array('', '-', '-', '-');
 
 	$strString = html_entity_decode($strString, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 	$strString = strip_insert_tags($strString);
