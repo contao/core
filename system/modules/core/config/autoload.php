@@ -115,6 +115,7 @@ ClassLoader::addClasses(array
 	'Contao\Dbafs\Filter'              => 'system/modules/core/library/Contao/Dbafs/Filter.php',
 	'Contao\Dbafs'                     => 'system/modules/core/library/Contao/Dbafs.php',
 	'Contao\DcaExtractor'              => 'system/modules/core/library/Contao/DcaExtractor.php',
+	'Contao\DcaLoader'                 => 'system/modules/core/library/Contao/DcaLoader.php',
 	'Contao\Email'                     => 'system/modules/core/library/Contao/Email.php',
 	'Contao\Encryption'                => 'system/modules/core/library/Contao/Encryption.php',
 	'Contao\Environment'               => 'system/modules/core/library/Contao/Environment.php',

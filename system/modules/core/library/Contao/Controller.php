@@ -2300,59 +2300,6 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Load a set of DCA files
-	 *
-	 * @param string  $strName    The table name
-	 * @param boolean $blnNoCache If true, the cache will be bypassed
-	 */
-	public function loadDataContainer($strName, $blnNoCache=false)
-	{
-		// Return if the data has been loaded already
-		if (isset($GLOBALS['loadDataContainer'][$strName]) && !$blnNoCache)
-		{
-			return;
-		}
-
-		$GLOBALS['loadDataContainer'][$strName] = true; // see #6145
-		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
-
-		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
-		{
-			include TL_ROOT . '/' . $strCacheFile;
-		}
-		else
-		{
-			foreach (\ModuleLoader::getActive() as $strModule)
-			{
-				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
-
-				if (file_exists(TL_ROOT . '/' . $strFile))
-				{
-					include TL_ROOT . '/' . $strFile;
-				}
-			}
-		}
-
-		// HOOK: allow to load custom settings
-		if (isset($GLOBALS['TL_HOOKS']['loadDataContainer']) && is_array($GLOBALS['TL_HOOKS']['loadDataContainer']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['loadDataContainer'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strName);
-			}
-		}
-
-		// Local configuration file
-		if (file_exists(TL_ROOT . '/system/config/dcaconfig.php'))
-		{
-			include TL_ROOT . '/system/config/dcaconfig.php';
-		}
-	}
-
-
-	/**
 	 * Redirect to a front end page
 	 *
 	 * @param integer $intPage    The page ID
@@ -2910,6 +2857,20 @@ abstract class Controller extends \System
 	protected function classFileExists($strClass)
 	{
 		return class_exists($strClass);
+	}
+
+
+	/**
+	 * Load a set of DCA files
+	 *
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 *
+	 * @deprecated Use DataContainer::load() instead
+	 */
+	public function loadDataContainer($strTable, $blnNoCache=false)
+	{
+		\DataContainer::load($strTable, $blnNoCache);
 	}
 
 
