@@ -314,31 +314,15 @@ abstract class Module extends \Frontend
 						break;
 				}
 
+				$row = $objSubpages->row();
+
 				// Active page
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && !\Input::get('articles'))
 				{
 					// Mark active forward pages (see #4822)
 					$strClass = (($objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) ? 'forward' . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
-					$row = $objSubpages->row();
 
 					$row['isActive'] = true;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
 				}
 
 				// Regular page
@@ -352,27 +336,26 @@ abstract class Module extends \Frontend
 						$strClass .= ' sibling';
 					}
 
-					$row = $objSubpages->row();
-
 					$row['isActive'] = false;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
 				}
+
+				$row['subitems'] = $subitems;
+				$row['class'] = trim($strClass);
+				$row['title'] = specialchars($objSubpages->title, true);
+				$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
+				$row['link'] = $objSubpages->title;
+				$row['href'] = $href;
+				$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+				$row['target'] = '';
+				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+
+				// Override the link target
+				if ($objSubpages->type == 'redirect' && $objSubpages->target)
+				{
+					$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+				}
+
+				$items[] = $row;
 			}
 		}
 
