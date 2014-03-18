@@ -1594,6 +1594,7 @@ var Backend =
 				}
 				tr.inject(parent, 'after');
 				tr.getElement('.chzn-container').destroy();
+				tr.getElement('div.tl_select_column').destroy();
 				new Chosen(tr.getElement('select.tl_select'));
 				Stylect.convertSelects();
 				break;
