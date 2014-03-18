@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Changed
+Merged the "newsarchive" and "newsarchive_empty" templates (see #6647).
+
+### Changed
 Make the following functions public static (see #6351):
 
  - `Controller::getArticle`
