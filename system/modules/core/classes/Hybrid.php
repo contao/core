@@ -182,6 +182,16 @@ abstract class Hybrid extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Return the parent object
 	 * @return object
 	 */

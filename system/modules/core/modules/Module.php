@@ -127,6 +127,16 @@ abstract class Module extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Parse the template
 	 * @return string
 	 */
