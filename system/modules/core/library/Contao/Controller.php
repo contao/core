@@ -165,7 +165,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The module HTML markup
 	 */
-	protected function getFrontendModule($intId, $strColumn='main')
+	public static function getFrontendModule($intId, $strColumn='main')
 	{
 		if (!is_object($intId) && !strlen($intId))
 		{
@@ -206,7 +206,7 @@ abstract class Controller extends \System
 					// Add the "first" and "last" classes (see #2583)
 					$objArticle->classes = array('first', 'last');
 
-					return $this->getArticle($objArticle);
+					return static::getArticle($objArticle);
 				}
 			}
 
@@ -251,7 +251,7 @@ abstract class Controller extends \System
 					$objRow->classes = $arrCss;
 				}
 
-				$return .= $this->getArticle($objRow, $blnMultiMode, false, $strColumn);
+				$return .= static::getArticle($objRow, $blnMultiMode, false, $strColumn);
 				++$intCount;
 			}
 
@@ -286,7 +286,7 @@ abstract class Controller extends \System
 			// Return if the class does not exist
 			if (!class_exists($strClass))
 			{
-				$this->log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+				static::log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 				return '';
 			}
 
@@ -299,8 +299,7 @@ abstract class Controller extends \System
 			{
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
-					$this->import($callback[0]);
-					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objModule);
+					static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objModule);
 				}
 			}
 
@@ -325,7 +324,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string|boolean The article HTML markup or false
 	 */
-	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
+	public static function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
 		global $objPage;
 
@@ -383,8 +382,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objRow);
+				static::importStatic($callback[0])->$callback[1]($objRow);
 			}
 		}
 
@@ -409,7 +407,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The content element HTML markup
 	 */
-	protected function getContentElement($intId, $strColumn='main')
+	public static function getContentElement($intId, $strColumn='main')
 	{
 		if (is_object($intId))
 		{
@@ -447,7 +445,7 @@ abstract class Controller extends \System
 		// Return if the class does not exist
 		if (!class_exists($strClass))
 		{
-			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+			static::log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 			return '';
 		}
 
@@ -460,8 +458,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -483,7 +480,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The form HTML markup
 	 */
-	protected function getForm($varId, $strColumn='main')
+	public static function getForm($varId, $strColumn='main')
 	{
 		if (is_object($varId))
 		{
@@ -514,8 +511,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 

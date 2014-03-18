@@ -4,6 +4,14 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Changed
+Make the following functions public static (see #6351):
+
+ - `Controller::getArticle`
+ - `Controller::getContentElement`
+ - `Controller::getForm`
+ - `Controller::getFrontendModule`
+
 ### New
 Support editing the front end preview page via the "url" parameter (see #6471).
 
