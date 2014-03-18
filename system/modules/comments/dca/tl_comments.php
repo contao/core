@@ -356,7 +356,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Do not check whether the page is mounted (see #5174)
-				if ($objPage->numRows > 0 && $this->User->isAllowed(4, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
@@ -368,7 +368,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Do not check whether the page is mounted (see #5174)
-				if ($objPage->numRows > 0 && $this->User->isAllowed(1, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->isAllowed(BackendUser::CAN_EDIT_PAGE, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}

@@ -96,15 +96,14 @@ catch (UnresolvableDependenciesException $e)
 
 
 /**
- * Register the SwiftMailer and SimplePie autoloaders
+ * Register the SwiftMailer and vendor autoloaders
  */
-require_once TL_ROOT . '/system/modules/core/vendor/swiftmailer/classes/Swift.php';
+function _swiftmailer_init()
+{
+	require TL_ROOT . '/system/config/swiftmailer.php';
+}
 
-Swift::registerAutoload(function() {
-	require TL_ROOT . '/system/modules/core/vendor/swiftmailer/swift_init.php';
-});
-
-require_once TL_ROOT . '/system/modules/core/vendor/simplepie/autoloader.php';
+require_once TL_ROOT . '/vendor/autoload.php';
 
 
 /**
@@ -185,7 +184,7 @@ if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.p
 if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && Input::cookie('TL_INSTALL_AUTH') == $_SESSION['TL_INSTALL_AUTH'] && $_SESSION['TL_INSTALL_EXPIRE'] > time())
 {
 	@ini_set('display_errors', 1);
-	@error_reporting(E_ALL|E_STRICT);
+	error_reporting(E_ALL|E_STRICT);
 }
 else
 {

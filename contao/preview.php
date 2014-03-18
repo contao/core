@@ -61,7 +61,11 @@ class Preview extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->site = Input::get('site', true);
 
-		if (Input::get('page'))
+		if (Input::get('url'))
+		{
+			$this->Template->url = Environment::get('base') . Input::get('url');
+		}
+		elseif (Input::get('page'))
 		{
 			$this->Template->url = $this->redirectToFrontendPage(Input::get('page'), Input::get('article'), true);
 		}

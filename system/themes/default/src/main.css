@@ -305,6 +305,11 @@ h2.sub_headline_index {
 }
 .tl_search .tl_text {
 	width:66px;
+	-webkit-appearance:textfield;
+	box-sizing:content-box;
+}
+input[type=search]::-webkit-search-decoration {
+	-webkit-appearance:none;
 }
 .mac .tl_panel .tl_select,.mac .tl_panel .tl_text {
 	font-size:11px;

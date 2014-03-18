@@ -4843,7 +4843,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 '.implode("\n", $options_sorter).'
 </select>
 <span> = </span>
-<input type="text" name="tl_value" class="tl_text' . ($active ? ' active' : '') . '" value="'.specialchars($session['search'][$this->strTable]['value']).'">
+<input type="search" name="tl_value" class="tl_text' . ($active ? ' active' : '') . '" value="'.specialchars($session['search'][$this->strTable]['value']).'">
 </div>';
 	}
 

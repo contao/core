@@ -158,6 +158,19 @@ class DataContainer extends \Backend
 
 
 	/**
+	 * Load a set of DCA files
+	 *
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 */
+	public static function load($strTable, $blnNoCache=false)
+	{
+		$loader = new \DcaLoader($strTable);
+		$loader->load($blnNoCache);
+	}
+
+
+	/**
 	 * Render a row of a box and return it as HTML string
 	 * @param string
 	 * @return string

@@ -6,9 +6,12 @@
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
   <?php endif; ?>
 
-  <?php foreach ($this->articles as $article) echo $article; ?>
-
-  <?php echo $this->pagination; ?>
+  <?php if (empty($this->articles)): ?>
+    <p class="empty"><?php echo $this->empty; ?></p>
+  <?php else: ?>
+    <?php foreach ($this->articles as $article) echo $article; ?>
+    <?php echo $this->pagination; ?>
+  <?php endif; ?>
 
 </div>
 <!-- indexer::continue -->
