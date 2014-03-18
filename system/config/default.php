@@ -63,19 +63,17 @@ $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
  * DATE AND TIME SETTINGS
  * -------------------------------------------------------------------------
  *
- * Set 'timeZone' to your local timezone. If you leave it blank GMT will be
- * used as the default time zone.
- *
  *   datimFormat = show date and time
  *   dateFormat  = show date only
  *   timeFormat  = show time only
+ *   timeZone    = the server's default time zone
  *
  * See PHP function date() for more information.
  */
-$GLOBALS['TL_CONFIG']['timeZone']    = 'GMT';
 $GLOBALS['TL_CONFIG']['datimFormat'] = 'Y-m-d H:i';
 $GLOBALS['TL_CONFIG']['dateFormat']  = 'Y-m-d';
 $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
+$GLOBALS['TL_CONFIG']['timeZone']    = date_default_timezone_get();
 
 
 /**
