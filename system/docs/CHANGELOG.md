@@ -23,7 +23,7 @@ Do not combine .js and .css files when running in debug mode (see #6450).
 
 ### New
 Added a `DcaLoader` class to decouple the DCA loading process (see #5441). DCAs
-can now be loaded anywhere using `DataContainer::load()`.
+can now be loaded anywhere using `Controller::loadDataContainer()`.
 
 ### Changed
 Convert slashes to hyphens in the `standardize()` function (see #6396).

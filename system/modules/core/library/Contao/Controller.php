@@ -2296,6 +2296,19 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Load a set of DCA files
+	 *
+	 * @param string  $strTable   The table name
+	 * @param boolean $blnNoCache If true, the cache will be bypassed
+	 */
+	public static function loadDataContainer($strTable, $blnNoCache=false)
+	{
+		$loader = new \DcaLoader($strTable);
+		$loader->load($blnNoCache);
+	}
+
+
+	/**
 	 * Redirect to a front end page
 	 *
 	 * @param integer $intPage    The page ID
@@ -2853,20 +2866,6 @@ abstract class Controller extends \System
 	protected function classFileExists($strClass)
 	{
 		return class_exists($strClass);
-	}
-
-
-	/**
-	 * Load a set of DCA files
-	 *
-	 * @param string  $strTable   The table name
-	 * @param boolean $blnNoCache If true, the cache will be bypassed
-	 *
-	 * @deprecated Use DataContainer::load() instead
-	 */
-	public function loadDataContainer($strTable, $blnNoCache=false)
-	{
-		\DataContainer::load($strTable, $blnNoCache);
 	}
 
 
