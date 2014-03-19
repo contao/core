@@ -86,7 +86,6 @@ function Swipe(container, options) {
 
   }
 
-  // PATCH
   function onclick(el, fn) {
 
     if (browser.addEventListener) el.addEventListener('click', fn, false);
@@ -164,7 +163,6 @@ function Swipe(container, options) {
     }
 
   }
-  // PATCH EOF
 
   function prev() {
 
@@ -228,7 +226,8 @@ function Swipe(container, options) {
 
     index = to;
 
-    if (options.menu) updateMenu(); // PATCH
+    // update the menu
+    if (options.menu) updateMenu();
 
     offloadFn(options.callback && options.callback(index, slides[index]));
 
@@ -479,7 +478,8 @@ function Swipe(container, options) {
 
           }
 
-          if (options.menu) updateMenu(); // PATCH
+          // update the menu
+          if (options.menu) updateMenu();
 
           options.callback && options.callback(index, slides[index]);
 
@@ -524,7 +524,7 @@ function Swipe(container, options) {
   // trigger setup
   setup();
 
-  // PATCH: also set up the menu
+  // set up the menu
   if (options.menu) menu();
 
   // start auto slideshow if applicable
