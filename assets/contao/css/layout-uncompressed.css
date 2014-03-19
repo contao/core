@@ -11,7 +11,7 @@
 /**
  * Standardize some basic elements
  */
-body,form {
+body,form,figure {
 	margin:0;
 	padding:0;
 }
