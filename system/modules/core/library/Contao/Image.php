@@ -165,6 +165,7 @@ class Image
 				if ($target)
 				{
 					\Files::getInstance()->copy($strCacheName, $target);
+					return \System::urlEncode($target);
 				}
 
 				return \System::urlEncode($strCacheName);
