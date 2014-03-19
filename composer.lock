@@ -3,20 +3,48 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4b3994ab043a1cc458c01c6926017574",
+    "hash": "3f074b3e1b83f5197ad2e57152833ac9",
     "packages": [
         {
-            "name": "contao/php-diff",
-            "version": "dev-master",
+            "name": "contao/idna",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/contao/php-diff.git",
-                "reference": "e314e21808b5e67f595fdebdc4b3e8d5647bcd6f"
+                "url": "https://github.com/contao/idna.git",
+                "reference": "29b2abe01947794882842a0eef5a0a0b514e6fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/php-diff/zipball/e314e21808b5e67f595fdebdc4b3e8d5647bcd6f",
-                "reference": "e314e21808b5e67f595fdebdc4b3e8d5647bcd6f",
+                "url": "https://api.github.com/repos/contao/idna/zipball/29b2abe01947794882842a0eef5a0a0b514e6fc3",
+                "reference": "29b2abe01947794882842a0eef5a0a0b514e6fc3",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "idna_convert.class.php",
+                    "uctc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1+"
+            ],
+            "description": "A library for encoding and decoding internationalized domain names.",
+            "time": "2014-03-19 16:08:19"
+        },
+        {
+            "name": "contao/php-diff",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contao/php-diff.git",
+                "reference": "b7ed0df0b307a5a0e8565055b40022839aac0d5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contao/php-diff/zipball/b7ed0df0b307a5a0e8565055b40022839aac0d5d",
+                "reference": "b7ed0df0b307a5a0e8565055b40022839aac0d5d",
                 "shasum": ""
             },
             "type": "library",
@@ -30,11 +58,11 @@
                 "BSD-3-Clause"
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2014-03-19 15:09:05"
+            "time": "2014-03-19 16:06:20"
         },
         {
             "name": "contao/tcpdf",
-            "version": "dev-master",
+            "version": "6.0.062.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/tcpdf.git",
@@ -242,10 +270,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "contao/php-diff": 20,
-        "contao/tcpdf": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.2"
     },
