@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3f074b3e1b83f5197ad2e57152833ac9",
+    "hash": "3e8e60c283f470ad7db76390d1a9bb5c",
     "packages": [
         {
             "name": "contao/idna",
-            "version": "0.8.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/idna.git",
@@ -35,7 +35,7 @@
         },
         {
             "name": "contao/php-diff",
-            "version": "1.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/php-diff.git",
@@ -62,7 +62,7 @@
         },
         {
             "name": "contao/tcpdf",
-            "version": "6.0.062.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/tcpdf.git",
@@ -270,9 +270,11 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "contao/idna": 20,
+        "contao/php-diff": 20,
+        "contao/tcpdf": 20
+    },
     "platform": {
         "php": ">=5.3.2"
     },
