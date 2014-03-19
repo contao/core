@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Changed
+Enable the maintanance mode by default (see #6758).
+
 ### New
 Added a markdown content element (see #6052).
 

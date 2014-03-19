@@ -343,4 +343,4 @@ $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
 $GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
 $GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';
 $GLOBALS['TL_CONFIG']['debugMode']            = false;
-$GLOBALS['TL_CONFIG']['maintenanceMode']      = false;
+$GLOBALS['TL_CONFIG']['maintenanceMode']      = true;

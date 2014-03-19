@@ -34,6 +34,13 @@ class Index extends Frontend
 	 */
 	public function __construct()
 	{
+		// Maintenance mode (see #4561 and #6353)
+		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
+		{
+			header('HTTP/1.1 503 Service Unavailable');
+			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+		}
+
 		// Try to read from cache
 		$this->outputFromCache();
 
@@ -52,13 +59,6 @@ class Index extends Frontend
 	 */
 	public function run()
 	{
-		// Maintenance mode (see #4561 and #6353)
-		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
-		{
-			header('HTTP/1.1 503 Service Unavailable');
-			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
-		}
-
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
