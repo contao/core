@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "39de72cb708a8e9bbed6f919cc6b4b40",
+    "hash": "4b3994ab043a1cc458c01c6926017574",
     "packages": [
         {
             "name": "contao/php-diff",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/php-diff.git",
-                "reference": "85bfc6576d2d8ced858d8c7ae52221939af21906"
+                "reference": "e314e21808b5e67f595fdebdc4b3e8d5647bcd6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/php-diff/zipball/85bfc6576d2d8ced858d8c7ae52221939af21906",
-                "reference": "85bfc6576d2d8ced858d8c7ae52221939af21906",
+                "url": "https://api.github.com/repos/contao/php-diff/zipball/e314e21808b5e67f595fdebdc4b3e8d5647bcd6f",
+                "reference": "e314e21808b5e67f595fdebdc4b3e8d5647bcd6f",
                 "shasum": ""
             },
             "type": "library",
@@ -30,7 +30,53 @@
                 "BSD-3-Clause"
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2014-03-19 14:47:56"
+            "time": "2014-03-19 15:09:05"
+        },
+        {
+            "name": "contao/tcpdf",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contao/tcpdf.git",
+                "reference": "5b4e8f79e222df49f2e86e671f94e3597df733a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contao/tcpdf/zipball/5b4e8f79e222df49f2e86e671f94e3597df733a2",
+                "reference": "5b4e8f79e222df49f2e86e671f94e3597df733a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fonts",
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents.",
+            "time": "2014-03-19 15:29:08"
         },
         {
             "name": "michelf/php-markdown",
@@ -197,7 +243,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "contao/php-diff": 20
+        "contao/php-diff": 20,
+        "contao/tcpdf": 20
     },
     "platform": {
         "php": ">=5.3.2"

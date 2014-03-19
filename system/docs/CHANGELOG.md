@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Update
+Update TCPDF to version 6.0.062.
+
 ### Changed
 Enable the maintanance mode by default (see #6758).
 
