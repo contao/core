@@ -122,6 +122,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'sliderStart'                 => '{type_legend},type,headline;{slider_legend},sliderDelay,sliderSpeed,sliderStartSlide,sliderContinuous;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'sliderStop'                  => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
+		'markdown'                    => '{type_legend},type,headline;{text_legend},code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,embed,titleText,rel;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
 		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,title,size,imagemargin,imageUrl,fullsize,caption;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
@@ -434,10 +435,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'select',
 			'options'                 => array('ApacheConf', 'AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'HTML', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'load_callback' => array
-			(
-				array('tl_content', 'setRteSyntax')
-			),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'shClass' => array
@@ -457,6 +454,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'ace', 'helpwizard'=>true, 'tl_class'=>'clr'),
 			'explanation'             => 'insertTags',
+			'load_callback' => array
+			(
+				array('tl_content', 'setRteSyntax')
+			),
 			'sql'                     => "text NULL"
 		),
 		'url' => array
@@ -1474,6 +1475,11 @@ class tl_content extends Backend
 			default:
 				$syntax = 'text';
 				break;
+		}
+
+		if ($dc->activeRecord->type == 'markdown')
+		{
+			$syntax = 'markdown';
 		}
 
 		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'ace|' . $syntax;

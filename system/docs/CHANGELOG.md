@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### New
+Added a markdown content element (see #6052).
+
 ### Changed
 Merged the "newsarchive" and "newsarchive_empty" templates (see #6647).
 

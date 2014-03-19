@@ -153,7 +153,8 @@ $GLOBALS['TL_CTE'] = array
 		'html'            => 'ContentHtml',
 		'list'            => 'ContentList',
 		'table'           => 'ContentTable',
-		'code'            => 'ContentCode'
+		'code'            => 'ContentCode',
+		'markdown'        => 'ContentMarkdown'
 	),
 	'accordion' => array
 	(
