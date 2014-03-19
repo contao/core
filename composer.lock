@@ -3,8 +3,35 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "28cc1900e067fd7ad10f428ce36b3d5e",
+    "hash": "39de72cb708a8e9bbed6f919cc6b4b40",
     "packages": [
+        {
+            "name": "contao/php-diff",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/contao/php-diff.git",
+                "reference": "85bfc6576d2d8ced858d8c7ae52221939af21906"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/contao/php-diff/zipball/85bfc6576d2d8ced858d8c7ae52221939af21906",
+                "reference": "85bfc6576d2d8ced858d8c7ae52221939af21906",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Diff": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "time": "2014-03-19 14:47:56"
+        },
         {
             "name": "michelf/php-markdown",
             "version": "1.4.0",
@@ -169,9 +196,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "contao/php-diff": 20
+    },
     "platform": {
         "php": ">=5.3.2"
     },

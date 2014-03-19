@@ -289,10 +289,6 @@ class Versions extends \Backend
 				\System::loadLanguageFile($this->strTable);
 				$this->loadDataContainer($this->strTable);
 
-				// Include the PhpDiff library
-				require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff.php';
-				require_once TL_ROOT . '/system/modules/core/vendor/phpdiff/Diff/Renderer/Html/Contao.php';
-
 				$arrOrder = array();
 				$arrFields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
 
