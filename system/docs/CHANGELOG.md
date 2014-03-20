@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Changed
+Do not require MooTools or jQuery for the command scheduler (see #6755).
+
+### Changed
 Use the new Google Universal Analytics code snippet (see #6103).
 
 ### Improved

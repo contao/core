@@ -78,11 +78,7 @@
 
   <?php if (!$this->disableCron): ?>
     <script>
-      <?php if ($this->layout->addJQuery): ?>
-        setTimeout(function(){jQuery.ajax("system/cron/cron.txt",{complete:function(e){var t=e.responseText||0;parseInt(t)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&jQuery.ajax("system/cron/cron.php")}})},5e3)
-      <?php else: ?>
-        setTimeout(function(){(new Request({url:"system/cron/cron.txt",onComplete:function(e){e||(e=0),parseInt(e)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&(new Request({url:"system/cron/cron.php"})).get()}})).get()},5e3)
-      <?php endif; ?>
+      setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-<?php echo $this->cronTimeout; ?>&&e(t+"php")})},5e3);
     </script>
   <?php endif; ?>
 
