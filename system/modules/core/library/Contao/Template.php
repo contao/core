@@ -319,14 +319,14 @@ abstract class Template extends \Controller
 			$intElapsed = (microtime(true) - TL_START);
 
 			$strDebug = sprintf(
-				'<div id="debug" class="%s">'
+				'<div id="contao-debug" class="%s">'
 				. '<p>'
-					. '<span class="time">Execution time: %s ms</span>'
-					. '<span class="memory">Memory usage: %s</span>'
-					. '<span class="db">Database queries: %d</span>'
-					. '<span class="rows">Rows: %d returned, %s affected</span>'
-					. '<span class="models">Registered models: %d</span>'
-					. '<span id="tog">&nbsp;</span>'
+					. '<span class="debug-time">Execution time: %s ms</span>'
+					. '<span class="debug-memory">Memory usage: %s</span>'
+					. '<span class="debug-db">Database queries: %d</span>'
+					. '<span class="debug-rows">Rows: %d returned, %s affected</span>'
+					. '<span class="debug-models">Registered models: %d</span>'
+					. '<span id="debug-tog">&nbsp;</span>'
 				. '</p>'
 				. '<div><pre>',
 				\Input::cookie('CONTAO_CONSOLE'),
@@ -359,15 +359,15 @@ abstract class Template extends \Controller
 			$strDebug .= '</pre></div></div>'
 				. $strScriptOpen
 					. "(function($) {"
-						. "$$('#debug>*').setStyle('width',window.getSize().x);"
-						. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
-						. "$('tog').addEvent('click',function(e) {"
-							. "$('debug').toggleClass('closed');"
-							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
+						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+						. "$('debug-tog').addEvent('click',function(e) {"
+							. "$('contao-debug').toggleClass('closed');"
+							. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
+							. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
 						. "});"
 						. "window.addEvent('resize',function() {"
-							. "$$('#debug>*').setStyle('width',window.getSize().x);"
+							. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
 						. "});"
 					. "})(document.id);"
 				. $strScriptClose . "\n\n";
