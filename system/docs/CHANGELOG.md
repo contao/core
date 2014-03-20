@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Improved
+Add `$parent` as fourth parameter to the "compileDefinition" hook (see #6697).
+
 ### Update
 Update TCPDF to version 6.0.062.
 
