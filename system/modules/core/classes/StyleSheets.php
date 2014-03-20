@@ -201,12 +201,10 @@ class StyleSheets extends \Backend
 	 */
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
 	{
-		$blnDebug = $GLOBALS['TL_CONFIG']['debugMode'];
-
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
-			$lb = ($blnDebug ? "\n    " : '');
+			$lb = '';
 			$return = '';
 		}
 		else
@@ -229,7 +227,7 @@ class StyleSheets extends \Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? '' : ' ') . '{';
 
 		// Size
 		if ($row['size'])
@@ -950,8 +948,7 @@ class StyleSheets extends \Backend
 				$return = substr($return, 0, -1);
 			}
 
-			$nl = $blnDebug ? "\n" : '';
-			$return .= $nl . '}' . $nl;
+			$return .= '}';
 		}
 		else
 		{

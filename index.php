@@ -34,11 +34,18 @@ class Index extends Frontend
 	 */
 	public function __construct()
 	{
-		// Maintenance mode (see #4561 and #6353)
-		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
+		// No BE user logged in
+		if (!$_SESSION['DISABLE_CACHE'])
 		{
-			header('HTTP/1.1 503 Service Unavailable');
-			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+			// Maintenance mode (see #4561 and #6353)
+			if ($GLOBALS['TL_CONFIG']['maintenanceMode'])
+			{
+				header('HTTP/1.1 503 Service Unavailable');
+				die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+			}
+
+			// Disable the debug mode (see #6450)
+			$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		}
 
 		// Try to read from cache

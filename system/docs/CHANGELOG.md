@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Changed
+Only enable the debug mode in the FE if there is a BE user (see #6450).
+
+### Changed
 Do not require MooTools or jQuery for the command scheduler (see #6755).
 
 ### Changed

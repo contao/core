@@ -250,11 +250,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['debugMode'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'regenerateScripts')
-			)
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'maintenanceMode' => array
 		(
@@ -664,25 +660,6 @@ class tl_settings extends Backend
 		if ($varValue < 1)
 		{
 			$varValue = 30;
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Regenerate the CSS scripts when the debug mode changes
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function regenerateScripts($varValue)
-	{
-		if ($varValue != $GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
-
-			$this->import('Automator');
-			$this->Automator->purgeScriptCache();
 		}
 
 		return $varValue;
