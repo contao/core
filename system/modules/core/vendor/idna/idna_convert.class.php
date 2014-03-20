@@ -83,7 +83,7 @@ class idna_convert
     protected $_api_encoding = 'utf8';   // Default input charset is UTF-8
     protected $_allow_overlong = false;  // Overlong UTF-8 encodings are forbidden
     protected $_strict_mode = false;     // Behave strict or not
-    protected $_idn_version = 2003;      // Can be either 2003 (old, default) or 2008
+    protected $_idn_version = 2008;      // Can be either 2003 (old, default) or 2008
 
     /**
      * the constructor
