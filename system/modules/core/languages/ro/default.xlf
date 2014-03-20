@@ -340,6 +340,12 @@
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>element ce conţine cod sursă formatat într-un anume mod (codul va fi doar afişat pe ecran şi nu executat).</target>
       </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+      </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
         <target>Element glisor</target>

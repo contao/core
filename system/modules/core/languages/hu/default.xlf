@@ -340,6 +340,12 @@
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Kijelöli a kód részleteket és kirakja őket a képernyőre.</target>
       </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+      </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
         <target>Tartalom váltó</target>
