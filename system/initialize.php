@@ -123,8 +123,6 @@ else
 	define('TL_PATH', null); // cannot be reliably determined
 }
 
-$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
-
 
 /**
  * Start the session
@@ -137,6 +135,12 @@ $GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
  * Get the Config instance
  */
 $objConfig = Config::getInstance();
+
+
+/**
+ * Set the website path (backwards compatibility)
+ */
+$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH;
 
 
 /**
