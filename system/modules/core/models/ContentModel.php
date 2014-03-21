@@ -59,7 +59,8 @@ class ContentModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.invisible=''";
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.invisible=''";
 		}
 
 		if (!isset($arrOptions['order']))
