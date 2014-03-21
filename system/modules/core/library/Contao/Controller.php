@@ -614,7 +614,7 @@ abstract class Controller extends \System
 			{
 				$groups = deserialize($objElement->groups);
 
-				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
+				if (empty($groups) || !is_array($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
 				{
 					$blnReturn = false;
 				}
