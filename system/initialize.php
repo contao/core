@@ -96,14 +96,25 @@ catch (UnresolvableDependenciesException $e)
 
 
 /**
- * Register the SwiftMailer and vendor autoloaders
+ * Include the Composer autoloader
  */
-function _swiftmailer_init()
-{
-	require TL_ROOT . '/system/config/swiftmailer.php';
-}
-
 require_once TL_ROOT . '/vendor/autoload.php';
+
+
+/**
+ * Override some SwiftMailer defaults
+ */
+Swift::init(function()
+{
+	$preferences = Swift_Preferences::getInstance();
+
+	if (!$GLOBALS['TL_CONFIG']['useFTP'])
+	{
+		$preferences->setTempDir(TL_ROOT . '/system/tmp')->setCacheType('disk');
+	}
+
+	$preferences->setCharset($GLOBALS['TL_CONFIG']['characterSet']);
+});
 
 
 /**
