@@ -205,10 +205,16 @@ abstract class Events extends \Module
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
 		global $objPage;
+		$span = \Calendar::calculateSpan($intStart, $intEnd);
+
+		// Adjust the start time of a multi-day event (see #6802)
+		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin)
+		{
+			$intStart = $intBegin;
+		}
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
-		$span = \Calendar::calculateSpan($intStart, $intEnd);
 		$strDate = \Date::parse($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];

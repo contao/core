@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the start time of a multi-day event (see #6802).
+
+### Fixed
 Correctly handle OR queries in the listing module (see #6344).
 
 ### Fixed
