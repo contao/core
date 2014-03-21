@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### New
+Make the `Automator` methods available on the command line (see #6815).
+
 ### Changed
 Moved the asset version constants to `$GLOBALS['TL_ASSETS']` (see #5759).
 

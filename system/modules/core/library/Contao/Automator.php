@@ -29,6 +29,15 @@ class Automator extends \System
 {
 
 	/**
+	 * Make the constuctor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Check for new \Contao versions
 	 */
 	public function checkForUpdates()
