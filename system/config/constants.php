@@ -20,7 +20,7 @@ define('LONG_TERM_SUPPORT', false);
 
 
 /**
- * Plugin versions
+ * Plugin versions (backwards compatibility)
  *
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
@@ -29,6 +29,7 @@ define('ACE', '1.1.2');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
+define('SWIPE', '2.0');
 define('JQUERY', '1.10.2');
 define('JQUERY_UI', '1.10.3');
 define('COLORBOX', '1.4.31');
@@ -40,7 +41,6 @@ define('DATEPICKER', '2.0.0');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');
 define('SLIMBOX', '1.8');
-define('SWIPE', '2.0');
 
 
 /**

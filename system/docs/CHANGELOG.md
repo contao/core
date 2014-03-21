@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Changed
+Moved the asset version constants to `$GLOBALS['TL_ASSETS']` (see #5759).
+
 ### New
 Added a "preview front end as member" button (see #6546).
 

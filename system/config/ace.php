@@ -18,7 +18,7 @@
 if ($GLOBALS['TL_CONFIG']['useCE']):
 
 	// Include the ACE script
-	$GLOBALS['TL_JAVASCRIPT'][] = 'assets/ace/'.ACE.'/ace.js" charset="utf-8';
+	$GLOBALS['TL_JAVASCRIPT'][] = 'assets/ace/' . $GLOBALS['TL_ASSETS']['ACE'] . '/ace.js" charset="utf-8';
 
 	foreach ($this->ceFields as $arrField):
 

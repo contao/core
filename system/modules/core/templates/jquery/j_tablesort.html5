@@ -1,11 +1,11 @@
 <?php
 
 // Add the swipe style sheet
-$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . TABLESORTER . '/css/tablesorter.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . $GLOBALS['TL_ASSETS']['TABLESORTER'] . '/css/tablesorter.css||static';
 
 ?>
 
-<script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/tablesorter/<?php echo TABLESORTER; ?>/js/tablesorter.js"></script>
+<script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/tablesorter/<?php echo $GLOBALS['TL_ASSETS']['TABLESORTER']; ?>/js/tablesorter.js"></script>
 <script>
   (function($) {
     $(document).ready(function() {

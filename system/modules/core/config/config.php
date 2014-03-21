@@ -441,6 +441,30 @@ $GLOBALS['TL_WRAPPERS'] = array
 
 
 /**
+ * Asset versions
+ */
+$GLOBALS['TL_ASSETS'] = array
+(
+	'ACE'          => '1.1.2',
+	'CSS3PIE'      => '1.0.0',
+	'HIGHLIGHTER'  => '3.0.83',
+	'HTML5SHIV'    => '3.7.0',
+	'SWIPE'        => '2.0',
+	'JQUERY'       => '1.10.2',
+	'JQUERY_UI'    => '1.10.3',
+	'COLORBOX'     => '1.4.31',
+	'MEDIAELEMENT' => '2.13.1',
+	'TABLESORTER'  => '2.0.5',
+	'MOOTOOLS'     => '1.4.5',
+	'COLORPICKER'  => '1.3',
+	'DATEPICKER'   => '2.0.0',
+	'MEDIABOX'     => '1.4.6',
+	'SIMPLEMODAL'  => '1.2',
+	'SLIMBOX'      => '1.8'
+);
+
+
+/**
  * Other global arrays
  */
 $GLOBALS['TL_MIME'] = array();
