@@ -78,7 +78,7 @@ class PageRegular extends \Frontend
 		// Filter the disabled modules
 		foreach ($arrModules as $module)
 		{
-			if (!$module['disable'])
+			if ($module['enable'])
 			{
 				$arrModuleIds[] = $module['mod'];
 			}
