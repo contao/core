@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### New
+Added a "preview front end as member" button (see #6546).
+
 ### Changed
 Hide forward pages if they point to unpublished target pages (see #6376).
 

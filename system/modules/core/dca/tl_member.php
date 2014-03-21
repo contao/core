@@ -103,6 +103,13 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_member']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'su' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_member']['su'],
+				'href'                => 'key=su',
+				'icon'                => 'su.gif',
+				'button_callback'     => array('tl_member', 'switchUser')
 			)
 		)
 	),
@@ -466,6 +473,26 @@ class tl_member extends Backend
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
 		return $args;
+	}
+
+
+	/**
+	 * Generate a "switch account" button and return it as string
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function switchUser($row, $href, $label, $title, $icon)
+	{
+		if (!$this->User->isAdmin)
+		{
+			return '';
+		}
+
+		return '<a href="contao/preview.php?user='.$row['username'].'" target="_blank" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 

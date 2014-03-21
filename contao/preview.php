@@ -74,6 +74,29 @@ class Preview extends Backend
 			$this->Template->url = Environment::get('base');
 		}
 
+		// Switch to a particular member (see #6546)
+		if (Input::get('user') && $this->User->isAdmin)
+		{
+			$objUser = MemberModel::findByUsername(Input::get('user'));
+
+			if ($objUser !== null)
+			{
+				$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
+
+				// Remove old sessions
+				$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
+							   ->execute((time() - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
+
+				// Insert the new session
+				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
+							   ->execute($objUser->id, time(), 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
+
+				// Set the cookie
+				$this->setCookie('FE_USER_AUTH', $strHash, (time() + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+				$this->Template->user = Input::post('user');
+			}
+		}
+
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->output();
 	}

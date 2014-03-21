@@ -14,7 +14,7 @@
 /**
  * Initialize the system
  */
-define('TL_MODE', 'BE');
+define('TL_MODE', 'FE');
 require_once '../system/initialize.php';
 
 
@@ -80,11 +80,11 @@ class PreviewSwitch extends Backend
 		$this->Template->show = Input::cookie('FE_PREVIEW');
 		$this->Template->update = false;
 
-		$time = time();
-
 		// Switch
 		if (Input::post('FORM_SUBMIT') == 'tl_switch')
 		{
+			$time = time();
+
 			// Hide unpublished elements
 			if (Input::post('unpublished') == 'hide')
 			{
@@ -107,7 +107,7 @@ class PreviewSwitch extends Backend
 							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
 			   // Log in the front end user
-				if (Input::post('user') != '')
+				if (Input::post('user'))
 				{
 					$objUser = MemberModel::findByUsername(Input::post('user'));
 
