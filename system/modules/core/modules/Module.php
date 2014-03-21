@@ -283,6 +283,12 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
+							// Hide the link if the target page is invisible
+							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
+							{
+								continue(2);
+							}
+
 							$strForceLang = null;
 							$objNext->loadDetails();
 

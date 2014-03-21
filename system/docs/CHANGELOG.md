@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Changed
+Hide forward pages if they point to unpublished target pages (see #6376).
+
+### Changed
 Only enable the debug mode in the FE if there is a BE user (see #6450).
 
 ### Changed
