@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
+Make the file system synchronization available on the command line (see #6815).
+
+### New
 Make the `Automator` methods available on the command line (see #6815).
 
 ### Changed
