@@ -55,6 +55,12 @@ abstract class System
 	 */
 	protected static $arrStaticObjects = array();
 
+	/**
+	 * Available languages
+	 * @var array
+	 */
+	protected static $arrLanguages = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -251,12 +257,12 @@ abstract class System
 		$strCacheKey = $strLanguage;
 
 		// Make sure the language exists
-		if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strLanguage))
+		if (!static::isInstalledLanguage($strLanguage))
 		{
 			$strShortLang = substr($strLanguage, 0, 2);
 
 			// Fall back to "de" if "de_DE" does not exist
-			if ($strShortLang != $strLanguage && is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
+			if ($strShortLang != $strLanguage && static::isInstalledLanguage($strShortLang))
 			{
 				$strLanguage = $strShortLang;
 			}
@@ -321,6 +327,24 @@ abstract class System
 
 		// Use a global cache variable to support nested calls
 		$GLOBALS['loadLanguageFile'][$strName][$strCacheKey] = true;
+	}
+
+
+	/**
+	 * Check whether a language is installed
+	 *
+	 * @param boolean $strLanguage The language code
+	 *
+	 * @return boolean True if the language is installed
+	 */
+	public static function isInstalledLanguage($strLanguage)
+	{
+		if (!isset(static::$arrLanguages[$strLanguage]))
+		{
+			static::$arrLanguages[$strLanguage] = (is_dir(TL_ROOT . '/system/modules/core/languages/' . $strLanguage) || is_dir(TL_ROOT . '/system/cache/language/' . $strLanguage) || in_array($strLanguage, array_unique(array_map('basename', glob(TL_ROOT . '/system/modules/*/languages/*')))));
+		}
+
+		return static::$arrLanguages[$strLanguage];
 	}
 
 
