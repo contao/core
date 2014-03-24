@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not allow template names to be longer than the DB fields (see #6819).
+
+### Fixed
 Correctly set the start time of a multi-day event (see #6802).
 
 ### Fixed
