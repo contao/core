@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the Swipe "continuous" option if there are exactly two slides (see #6812).
+
+### Fixed
 Apply `addslashes()` to strings in the `Config` class (see #6808).
 
 ### Fixed
