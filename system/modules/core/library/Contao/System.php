@@ -61,6 +61,12 @@ abstract class System
 	 */
 	protected static $arrLanguages = array();
 
+	/**
+	 * Loaded language files
+	 * @var array
+	 */
+	protected static $arrLanguageFiles = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -249,7 +255,7 @@ abstract class System
 		}
 
 		// Return if the language file has been loaded already
-		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
+		if (isset(static::$arrLanguageFiles[$strName][$strLanguage]) && !$blnNoCache)
 		{
 			return;
 		}
@@ -274,6 +280,10 @@ abstract class System
 			}
 		}
 
+		// Use a global cache variable to support nested calls
+		static::$arrLanguageFiles[$strName][$strCacheKey] = $strLanguage;
+
+		// Fall back to English
 		$arrCreateLangs = ($strLanguage == 'en') ? array('en') : array('en', $strLanguage);
 
 		// Load the language(s)
@@ -324,9 +334,6 @@ abstract class System
 		{
 			include TL_ROOT . '/system/config/langconfig.php';
 		}
-
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadLanguageFile'][$strName][$strCacheKey] = true;
 	}
 
 
