@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not empty all fallback fields in sorting mode 4 (see #6498).
+
+### Fixed
 Do not allow template names to be longer than the DB fields (see #6819).
 
 ### Fixed
