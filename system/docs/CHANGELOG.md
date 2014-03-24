@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Apply `addslashes()` to strings in the `Config` class (see #6808).
+
+### Fixed
 Do not empty all fallback fields in sorting mode 4 (see #6498).
 
 ### Fixed
