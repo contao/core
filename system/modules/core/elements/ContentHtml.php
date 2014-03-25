@@ -40,6 +40,6 @@ class ContentHtml extends \ContentElement
 	 */
 	protected function compile()
 	{
-		$this->Template->html = (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
+		$this->Template->html = (TL_MODE == 'FE') ? $this->html : '<pre style="overflow-x:auto;white-space:pre">'.htmlspecialchars($this->html).'</pre>';
 	}
 }
