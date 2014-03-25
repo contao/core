@@ -1000,7 +1000,7 @@ Library.
                     <input type="hidden" name="FORM_SUBMIT" value="tl_database_login">
                     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
                     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbDriver']; ?></h4>
-                    <select name="dbDriver" id="dbDriver" class="tl_select"><?php echo $this->drivers; ?></select>
+                    <select name="dbDriver" id="dbDriver" class="tl_select" required><?php echo $this->drivers; ?></select>
                     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbHost']; ?></h4>
                     <input type="text" name="dbHost" id="dbHost" class="tl_text" value="<?php echo $this->host; ?>">
                     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbUsername']; ?></h4>

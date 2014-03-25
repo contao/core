@@ -31,6 +31,8 @@ function Swipe(container, options) {
   var slides, slidePos, width, length;
   options = options || {};
   var index = parseInt(options.startSlide, 10) || 0;
+  var position = index;
+  var clonedSlides = false;
   var speed = options.speed || 300;
   options.continuous = options.continuous !== undefined ? options.continuous : true;
 
@@ -48,6 +50,7 @@ function Swipe(container, options) {
       element.appendChild(slides[0].cloneNode(true));
       element.appendChild(element.children[1].cloneNode(true));
       slides = element.children;
+      clonedSlides = true;
     }
 
     // create an array to store current positions of each slide
@@ -130,13 +133,13 @@ function Swipe(container, options) {
         // set the new menu reference, so we have it in updateMenu()
         options.menu = childs[h];
 
-        for (var i=0; i<slides.length; i++) {
+        for (var i=0; i<length; i++) {
 
           var b = document.createElement('b');
           b.innerHTML = '•';
           b.setAttribute('data-index', i);
 
-          if (i == index) b.className = 'active';
+          if (i == position) b.className = 'active';
 
           onclick(b, (function(b) {
             return (function(e) {
@@ -155,10 +158,10 @@ function Swipe(container, options) {
 
   function updateMenu() {
 
-    for (var i=0; i<slides.length; i++) {
+    for (var i=0; i<length; i++) {
 
       var child = options.menu.children[i];
-      child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == index) ? 'active' : '';
+      child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == position) ? 'active' : '';
 
     }
 
@@ -225,11 +228,12 @@ function Swipe(container, options) {
     }
 
     index = to;
+    position = clonedSlides ? (index % 2) : index;
 
     // update the menu
     if (options.menu) updateMenu();
 
-    offloadFn(options.callback && options.callback(index, slides[index]));
+    offloadFn(options.callback && options.callback(position, slides[index]));
 
   }
 
@@ -282,7 +286,7 @@ function Swipe(container, options) {
 
         if (delay) begin();
 
-        options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
+        options.transitionEnd && options.transitionEnd.call(event, position, slides[index]);
 
         clearInterval(timer);
         return;
@@ -478,10 +482,12 @@ function Swipe(container, options) {
 
           }
 
+          position = clonedSlides ? (index % 2) : index;
+
           // update the menu
           if (options.menu) updateMenu();
 
-          options.callback && options.callback(index, slides[index]);
+          options.callback && options.callback(position, slides[index]);
 
         } else {
 
@@ -513,7 +519,7 @@ function Swipe(container, options) {
 
         if (delay) begin();
 
-        options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
+        options.transitionEnd && options.transitionEnd.call(event, position, slides[index]);
 
       }
 
@@ -594,7 +600,7 @@ function Swipe(container, options) {
     getPos: function() {
 
       // return current index position
-      return index;
+      return position;
 
     },
     getNumSlides: function() {

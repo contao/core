@@ -2925,10 +2925,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Save the value if there was no error
 		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue !== $varValue || $arrData['eval']['alwaysSave']))
 		{
-			// If the field is a fallback field, empty all other columns
+			// If the field is a fallback field, empty all other columns (see #6498)
 			if ($arrData['eval']['fallback'] && $varValue != '')
 			{
-				$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4)
+				{
+					$this->Database->prepare("UPDATE " . $this->strTable . " SET " . $this->strField . "='' WHERE pid=?")
+								   ->execute($this->activeRecord->pid);
+				}
+				else
+				{
+					$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				}
 			}
 
 			// Set the correct empty value (see #6284, #6373)

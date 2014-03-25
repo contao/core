@@ -434,6 +434,15 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 
 
 /**
+ * Filter disabled groups in the front end (see #6757)
+ */
+if (TL_MODE == 'FE')
+{
+	$GLOBALS['TL_DCA']['tl_member']['fields']['groups']['options_callback'] = array('tl_member', 'getActiveGroups');
+}
+
+
+/**
  * Class tl_member
  *
  * Provide miscellaneous methods that are used by the data configuration array.
@@ -451,6 +460,27 @@ class tl_member extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Filter disabled groups
+	 * @return array
+	 */
+	public function getActiveGroups()
+	{
+		$arrGroups = array();
+		$objGroup = \MemberGroupModel::findAllActive();
+
+		if ($objGroup !== null)
+		{
+			while ($objGroup->next())
+			{
+				$arrGroups[$objGroup->id] = $objGroup->name;
+			}
+		}
+
+		return $arrGroups;
 	}
 
 

@@ -110,7 +110,8 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type;{text_legend},text',
 		'explanation'                 => '{type_legend},type;{text_legend},text',
-		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
+		'fieldsetfsStart'             => '{type_legend},type;{fconfig_legend},fsType,label;{expert_legend:hide},class',
+		'fieldsetfsStop'              => '{type_legend},type;{fconfig_legend},fsType',
 		'html'                        => '{type_legend},type;{text_legend},html',
 		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,value,minlength,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
 		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,value,minlength,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
@@ -127,7 +128,6 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'fsType_fsStart'              => 'label',
 		'multiple'                    => 'mSize',
 		'storeFile'                   => 'uploadFolder,useHomeDir,doNotOverwrite',
 		'addSubmit'                   => 'slabel',

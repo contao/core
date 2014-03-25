@@ -125,8 +125,8 @@ class ModuleRssReader extends \Module
 			$this->Template->width = $this->objFeed->get_image_width();
 		}
 
-		// Get items
-		$arrItems = $this->objFeed->get_items(intval($this->skipFirst), intval($this->numberOfItems));
+		// Get the items (see #6107)
+		$arrItems = array_slice($this->objFeed->get_items(0, intval($this->numberOfItems) + intval($this->skipFirst)), intval($this->skipFirst), (intval($this->numberOfItems) ?: null));
 
 		$limit = count($arrItems);
 		$offset = 0;

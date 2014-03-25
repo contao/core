@@ -282,6 +282,14 @@ abstract class Model
 	 */
 	public function setRow(array $arrData)
 	{
+		foreach ($arrData as $k=>$v)
+		{
+			if (strpos($k, '__') !== false)
+			{
+				unset($arrData[$k]);
+			}
+		}
+
 		$this->arrData = $arrData;
 		return $this;
 	}
@@ -298,6 +306,11 @@ abstract class Model
 	{
 		foreach ($arrData as $k=>$v)
 		{
+			if (strpos($k, '__') !== false)
+			{
+				continue;
+			}
+
 			if (!isset($this->arrModified[$k]))
 			{
 				$this->arrData[$k] = $v;

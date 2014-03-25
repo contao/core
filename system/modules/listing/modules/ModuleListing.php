@@ -80,6 +80,7 @@ class ModuleListing extends \Module
 
 		$this->strTemplate = $this->list_layout;
 		$this->list_where = $this->replaceInsertTags($this->list_where);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
 
 		return parent::generate();
 	}
@@ -137,7 +138,7 @@ class ModuleListing extends \Module
 
 		if ($this->list_where)
 		{
-			$strQuery .= " WHERE " . $this->list_where;
+			$strQuery .= " WHERE (" . $this->list_where . ")";
 		}
 
 		$strQuery .=  $strWhere;
@@ -177,7 +178,7 @@ class ModuleListing extends \Module
 
 		if ($this->list_where)
 		{
-			$strQuery .= " WHERE " . $this->list_where;
+			$strQuery .= " WHERE (" . $this->list_where . ")";
 		}
 
 		$strQuery .=  $strWhere;
@@ -366,7 +367,7 @@ class ModuleListing extends \Module
 		$this->list_info = deserialize($this->list_info);
 		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
+		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . $this->strPk . "=?")
 									->limit(1)
 									->execute($id);
 

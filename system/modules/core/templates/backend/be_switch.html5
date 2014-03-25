@@ -46,7 +46,9 @@
           <?php if ($this->isAdmin): ?>
             <label for="ctrl_user"><?php echo $this->feUser; ?>:</label>
             <input type="text" name="user" id="ctrl_user" list="userlist" class="tl_text user" placeholder="<?php echo $this->username; ?>" value="<?php echo $this->user; ?>" autocomplete="off">
-            <datalist id="userlist"></datalist>
+            <datalist id="userlist">
+              <option value="-"></option>
+            </datalist>
           <?php endif; ?>
           <label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label>
           <select name="unpublished" id="ctrl_unpublished" class="tl_select">
