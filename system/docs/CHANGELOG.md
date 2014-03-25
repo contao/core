@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Work around a bug in SimplePie with the "skip items" option (see #6107).
+
+### Fixed
 Fix the Swipe "continuous" option if there are exactly two slides (see #6812).
 
 ### Fixed
