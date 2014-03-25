@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Filter disabled groups in the registration module in the front end (see #6757).
+
+### Fixed
 Work around a bug in SimplePie with the "skip items" option (see #6107).
 
 ### Fixed
