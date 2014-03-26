@@ -1104,6 +1104,12 @@ ul.sgallery li {
 ul.sortable li {
 	cursor:move;
 }
+ul.sortable li .dirname {
+	display:none;
+}
+ul.sortable li:hover .dirname {
+	display:inline;
+}
 #manager {
 	margin-top:9px;
 	background:#f3f3f3;

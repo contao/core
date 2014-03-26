@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Improved
+Shorten the file paths in the `FileTree` widget (see #6488).
+
+### Improved
 Hide the details page link in the listing module if the details page condition
 is not met (see #6332).
 
