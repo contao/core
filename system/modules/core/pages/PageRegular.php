@@ -371,7 +371,7 @@ class PageRegular extends \Frontend
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
 				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
