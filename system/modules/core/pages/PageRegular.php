@@ -515,7 +515,20 @@ class PageRegular extends \Frontend
 					// Style sheets with a CC or a combination of font-face and media-type != all cannot be aggregated (see #5216)
 					if ($objStylesheets->cc || ($objStylesheets->hasFontFace && $media != 'all'))
 					{
-						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+						// External style sheet
+						if ($objStylesheets->type == 'external')
+						{
+							$objFile = \FilesModel::findByPk($objStylesheets->singleSRC);
+
+							if ($objFile !== null)
+							{
+								$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . $objFile->path . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+							}
+						}
+						else
+						{
+							$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+						}
 
 						if ($objStylesheets->cc)
 						{
@@ -526,7 +539,20 @@ class PageRegular extends \Frontend
 					}
 					else
 					{
-						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
+						// External style sheet
+						if ($objStylesheets->type == 'external')
+						{
+							$objFile = \FilesModel::findByPk($objStylesheets->singleSRC);
+
+							if ($objFile !== null)
+							{
+								$GLOBALS['TL_USER_CSS'][] = $objFile->path . '|' . $media . '|static|' . filemtime(TL_ROOT . '/' . $objFile->path);
+							}
+						}
+						else
+						{
+							$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
+						}
 					}
 				}
 			}

@@ -83,7 +83,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['edit'],
 				'href'                => 'table=tl_style',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.gif',
+				'button_callback'     => array('tl_style_sheet', 'editStyleSheet')
 			),
 			'editheader' => array
 			(
@@ -124,7 +125,12 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{config_legend},disablePie,embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'__selector__'                => array('type'),
+		'default'                     => '{title_legend},type,name',
+		'internal'                    => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{vars_legend},vars;{config_legend},embedImages,disablePie',
+		'scss'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{code_legend},code',
+		'less'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{code_legend},code',
+		'external'                    => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{source_legend},singleSRC'
 	),
 
 	// Fields
@@ -144,6 +150,18 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
+		'type' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['type'],
+			'default'                 => 'text',
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'select',
+			'options'                 => array('internal', 'scss', 'less', 'external'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_style_sheet'],
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['name'],
@@ -151,7 +169,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'disablePie' => array
@@ -159,6 +177,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['disablePie'],
 			'inputType'               => 'checkbox',
 			'exclude'                 => true,
+			'eval'                    => array('tl_class'=>'w50 m12'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'embedImages' => array
@@ -208,6 +227,27 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'keyValueWizard',
 			'exclude'                 => true,
 			'sql'                     => "text NULL"
+		),
+		'code' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['code'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'ace'),
+			'load_callback' => array
+			(
+				array('tl_style_sheet', 'setRteSyntax')
+			),
+			'sql'                     => "mediumtext NULL"
+		),
+		'singleSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['singleSRC'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr', 'extensions'=>'css'),
+			'sql'                     => "binary(16) NULL"
 		)
 	)
 );
@@ -346,6 +386,43 @@ class tl_style_sheet extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Dynamically set the ace syntax
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return string
+	 */
+	public function setRteSyntax($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord->type == 'scss')
+		{
+			$GLOBALS['TL_DCA']['tl_style_sheet']['fields']['code']['eval']['rte'] = 'ace|scss';
+		}
+		elseif ($dc->activeRecord->type == 'less')
+		{
+			$GLOBALS['TL_DCA']['tl_style_sheet']['fields']['code']['eval']['rte'] = 'ace|less';
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Return the edit button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editStyleSheet($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($row['type'] == '' || $row['type'] == 'internal') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 

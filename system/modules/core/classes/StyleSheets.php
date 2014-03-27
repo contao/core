@@ -124,6 +124,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Write a style sheet to a file
 	 * @param array
+	 * @throws \Exception
 	 */
 	protected function writeStyleSheet($row)
 	{
@@ -141,53 +142,113 @@ class StyleSheets extends \Backend
 			return;
 		}
 
-		$vars = array();
-
-		// Get the global theme variables
-		$objTheme = $this->Database->prepare("SELECT vars FROM tl_theme WHERE id=?")
-								   ->limit(1)
-								   ->execute($row['pid']);
-
-		if ($objTheme->vars != '')
+		// Backwards compatibility
+		if ($row['type'] == '')
 		{
-			if (is_array(($tmp = deserialize($objTheme->vars))))
+			$row['type'] == 'internal';
+		}
+
+		// Internal editor
+		if ($row['type'] == 'internal')
+		{
+			$vars = array();
+
+			// Get the global theme variables
+			$objTheme = $this->Database->prepare("SELECT vars FROM tl_theme WHERE id=?")
+									   ->limit(1)
+									   ->execute($row['pid']);
+
+			if ($objTheme->vars != '')
 			{
-				foreach ($tmp as $v)
+				if (is_array(($tmp = deserialize($objTheme->vars))))
 				{
-					$vars[$v['key']] = $v['value'];
+					foreach ($tmp as $v)
+					{
+						$vars[$v['key']] = $v['value'];
+					}
 				}
 			}
-		}
 
-		// Merge the global style sheet variables
-		if ($row['vars'] != '')
-		{
-			if (is_array(($tmp = deserialize($row['vars']))))
+			// Merge the global style sheet variables
+			if ($row['vars'] != '')
 			{
-				foreach ($tmp as $v)
+				if (is_array(($tmp = deserialize($row['vars']))))
 				{
-					$vars[$v['key']] = $v['value'];
+					foreach ($tmp as $v)
+					{
+						$vars[$v['key']] = $v['value'];
+					}
 				}
 			}
+
+			// Sort by key length (see #3316)
+			uksort($vars, 'length_sort_desc');
+
+			// Create the file
+			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
+			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+
+			$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
+											 ->execute($row['id']);
+
+			// Append the definition
+			while ($objDefinitions->next())
+			{
+				$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars, $row), '');
+			}
+
+			$objFile->close();
 		}
 
-		// Sort by key length (see #3316)
-		uksort($vars, 'length_sort_desc');
-
-		// Create the file
-		$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
-
-		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
-										 ->execute($row['id']);
-
-		// Append the definition
-		while ($objDefinitions->next())
+		// SCSS
+		elseif ($row['type'] == 'scss')
 		{
-			$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars, $row), '');
+			$scss = new \scssc();
+			$scss->setImportPaths('assets/css/');
+			$scss->setFormatter('scss_formatter_compressed');
+
+			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
+			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+
+			try
+			{
+				$objFile->append($scss->compile($row['code']));
+			}
+			catch(\Exception $e)
+			{
+				$objFile->append('/* ' . $e->getMessage() . '*/');
+			}
+
+			$objFile->close();
 		}
 
-		$objFile->close();
+		// LESS
+		elseif ($row['type'] == 'less')
+		{
+			$less = new \lessc();
+			$less->setImportDir('assets/css/');
+			$less->setFormatter('compressed');
+
+			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
+			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+
+			try
+			{
+				$objFile->append($less->compile($row['code']));
+			}
+			catch(\Exception $e)
+			{
+				$objFile->append('/* ' . $e->getMessage() . '*/');
+			}
+
+			$objFile->close();
+		}
+
+		// Invalid type
+		elseif ($row['type'] != 'external')
+		{
+			throw new \Exception('Invalid style sheet type ' . $row['type']);
+		}
 	}
 
 

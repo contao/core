@@ -31,7 +31,9 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 			case 'ini':
 			case 'java':
 			case 'json':
+			case 'less':
 			case 'php':
+			case 'scss':
 			case 'sql':
 			case 'mysql':
 			case 'xml':

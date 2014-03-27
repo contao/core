@@ -4,6 +4,14 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### new
+Added additional style sheet types:
+
+ - Internal editor: use the internal editor
+ - SCSS: compile the style sheet from SCSS code
+ - LESS: compile the style sheet from LESS code
+ - External file: include an external file
+
 ### New
 Allow to override the default module or content element template (see #4547).
 
