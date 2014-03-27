@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### Improved
+Create a new version if a member changes their data in the front end.
+
+### Improved
 Shorten the file paths in the `FileTree` widget (see #6488).
 
 ### Improved

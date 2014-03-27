@@ -120,6 +120,10 @@ class Versions extends \Backend
 		{
 			$strDescription = $objRecord->name;
 		}
+		elseif (isset($objRecord->firstname))
+		{
+			$strDescription = $objRecord->firstname . ' ' . $objRecord->lastname;
+		}
 		elseif (isset($objRecord->headline))
 		{
 			$strDescription = $objRecord->headline;
