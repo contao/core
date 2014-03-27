@@ -5,7 +5,7 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
-Allow to override the default module template (see #4547).
+Allow to override the default module or content element template (see #4547).
 
 ### Improved
 Create a new version if a member changes their data in the front end.
