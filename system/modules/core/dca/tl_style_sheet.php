@@ -153,13 +153,17 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'type' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['type'],
-			'default'                 => 'text',
+			'default'                 => 'internal',
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => array('internal', 'scss', 'less', 'external'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style_sheet'],
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
+			'load_callback' => array
+			(
+				array('tl_style_sheet', 'fixStyleSheetType')
+			),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'name' => array
@@ -370,6 +374,26 @@ class tl_style_sheet extends Backend
 		{
 			return '<div style="float:left">'. $row['name'] . $cc ."</div>\n";
 		}
+	}
+
+
+	/**
+	 * Fix the style sheet type (backwards compatibility)
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function fixStyleSheetType($varValue, DataContainer $dc)
+	{
+		if ($varValue != '')
+		{
+			return $varValue;
+		}
+
+		$this->Database->prepare("UPDATE tl_style_sheet SET type='internal' WHERE id=?")
+					   ->execute($dc->id);
+
+		$this->reload();
 	}
 
 

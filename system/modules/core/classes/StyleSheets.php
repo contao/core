@@ -145,7 +145,7 @@ class StyleSheets extends \Backend
 		// Backwards compatibility
 		if ($row['type'] == '')
 		{
-			$row['type'] == 'internal';
+			$row['type'] = 'internal';
 		}
 
 		// Internal editor
@@ -204,7 +204,7 @@ class StyleSheets extends \Backend
 		elseif ($row['type'] == 'scss')
 		{
 			$scss = new \scssc();
-			$scss->setImportPaths('assets/css/');
+			$scss->setImportPaths(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']);
 			$scss->setFormatter('scss_formatter_compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
@@ -216,7 +216,7 @@ class StyleSheets extends \Backend
 			}
 			catch(\Exception $e)
 			{
-				$objFile->append('/* ' . $e->getMessage() . '*/');
+				\Message::addError($e->getMessage());
 			}
 
 			$objFile->close();
@@ -226,7 +226,7 @@ class StyleSheets extends \Backend
 		elseif ($row['type'] == 'less')
 		{
 			$less = new \lessc();
-			$less->setImportDir('assets/css/');
+			$less->setImportDir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']);
 			$less->setFormatter('compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
@@ -238,7 +238,7 @@ class StyleSheets extends \Backend
 			}
 			catch(\Exception $e)
 			{
-				$objFile->append('/* ' . $e->getMessage() . '*/');
+				\Message::addError($e->getMessage());
 			}
 
 			$objFile->close();
