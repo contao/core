@@ -356,20 +356,20 @@ class Environment
 		{
 			$arrIps = array($strXip);
 		}
+		// Append IP of last proxy 
+		$arrIps[] = $_SERVER['REMOTE_ADDR'];
 
 		$arrIps = array_reverse($arrIps);
 
-		// Return the first untrusted IP address (see #5830)
+		// Return the nearest untrusted or (if all are trusted) the most distant IP address (see #5830)
 		foreach ($arrIps as $strIp)
 		{
 			if (!in_array($strIp, $arrTrusted))
 			{
-				return substr($strIp, 0, 64);
+				break;
 			}
 		}
-
-		// If all X-Forward-For IPs are trusted, return the remote address
-		return substr($_SERVER['REMOTE_ADDR'], 0, 64);
+		return substr($strIp, 0, 64);
 	}
 
 
