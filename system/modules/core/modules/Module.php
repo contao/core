@@ -81,6 +81,11 @@ abstract class Module extends \Frontend
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
 
+		if ($this->customTpl != '')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$arrHeadline = deserialize($objModule->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
@@ -152,7 +157,7 @@ abstract class Module extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->customTpl ?: $this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();

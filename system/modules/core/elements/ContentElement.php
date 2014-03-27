@@ -87,6 +87,11 @@ abstract class ContentElement extends \Frontend
 		$this->space = deserialize($objElement->space);
 		$this->cssID = deserialize($objElement->cssID, true);
 
+		if ($this->customTpl != '')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$arrHeadline = deserialize($objElement->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
@@ -163,7 +168,7 @@ abstract class ContentElement extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->customTpl ?: $this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();
