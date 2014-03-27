@@ -40,13 +40,7 @@ class ContentAccordionStop extends \ContentElement
 	 */
 	protected function compile()
 	{
-		if (TL_MODE == 'FE')
-		{
-			$this->strTemplate = 'ce_accordion_stop';
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-		}
-		else
+		if (TL_MODE == 'BE')
 		{
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
