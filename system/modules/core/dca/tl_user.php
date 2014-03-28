@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64),
-			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'name' => array
 		(

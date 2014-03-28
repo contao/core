@@ -39,7 +39,7 @@ $GLOBALS['TL_DCA']['tl_cron'] = array
 		),
 		'name' => array
 		(
-			'sql'                     => "varchar(32) NOT NULL default ''"
+			'sql'                     => "varchar(32) NULL"
 		),
 		'value' => array
 		(

@@ -56,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_session'] = array
 		),
 		'hash' => array
 		(
-			'sql'                     => "varchar(40) NOT NULL default ''"
+			'sql'                     => "varchar(40) NULL"
 		),
 		'ip' => array
 		(
