@@ -21,6 +21,7 @@ if ($GLOBALS['TL_CONFIG']['useRTE']):
 <script>window.tinymce || document.write('<script src="<?php echo TL_ASSETS_URL; ?>assets/tinymce/tinymce.gzip.js">\x3C/script>')</script>
 <script>
 tinymce.init({
+  skin: "contao",
   selector: "#ctrl_<?php echo $this->strInputName; ?>",
   language: "<?php echo Backend::getTinyMceLanguage(); ?>",
   element_format: "html",
@@ -39,7 +40,7 @@ tinymce.init({
   content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH . "/" . Config::get('uploadPath'); ?>/tinymce.css",
   extended_valid_elements: "q[cite|class|title],article,section,hgroup,figure,figcaption",
   menubar: "file edit insert view format table",
-  toolbar: "link image | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"
+  toolbar: "link image | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"
 });
 </script>
 <?php endif; ?>
