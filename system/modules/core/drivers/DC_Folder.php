@@ -1712,13 +1712,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Prepare the code editor
 		if ($GLOBALS['TL_CONFIG']['useCE'])
 		{
-			$this->ceFields = array(array
-			(
-				'id' => 'ctrl_source',
-				'type' => $objFile->extension
-			));
-
-			$this->language = $GLOBALS['TL_LANGUAGE'];
+			$selector = 'ctrl_source';
+			$type = $objFile->extension;
 
 			// Load the code editor configuration
 			ob_start();

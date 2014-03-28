@@ -451,6 +451,8 @@ class DataContainer extends \Backend
 				throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
 			}
 
+			$selector = 'ctrl_' . $this->strInputName;
+
 			ob_start();
 			include TL_ROOT . '/system/config/' . $file . '.php';
 			$updateMode = ob_get_contents();

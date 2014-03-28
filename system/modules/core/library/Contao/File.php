@@ -817,6 +817,8 @@ class File extends \System
 			// Text files
 			'asp'   => array('text/asp', 'iconPLAIN.gif'),
 			'css'   => array('text/css', 'iconCSS.gif'),
+			'scss'  => array('text/x-scss', 'iconCSS.gif'),
+			'less'  => array('text/x-less', 'iconCSS.gif'),
 			'html'  => array('text/html', 'iconHTML.gif'),
 			'htm'   => array('text/html', 'iconHTML.gif'),
 			'shtml' => array('text/html', 'iconHTML.gif'),

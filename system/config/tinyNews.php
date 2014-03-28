@@ -22,7 +22,7 @@ if ($GLOBALS['TL_CONFIG']['useRTE']):
 <script>
 tinymce.init({
   skin: "contao",
-  selector: "#ctrl_<?php echo $this->strInputName; ?>",
+  selector: "#<?php echo $selector; ?>",
   language: "<?php echo Backend::getTinyMceLanguage(); ?>",
   element_format: "html",
   document_base_url: "<?php echo Environment::get('base'); ?>",

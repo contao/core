@@ -21,16 +21,16 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 <script>window.ace || document.write('<script src="<?php echo TL_ASSETS_URL; ?>assets/ace/<?php echo $GLOBALS['TL_ASSETS']['ACE']; ?>/ace.js" charset="utf-8">\x3C/script>')</script>
 <script>
 window.addEvent('domready', function() {
-  var ta = $('ctrl_<?php echo $this->strInputName; ?>');
+  var ta = $('<?php echo $selector; ?>');
 
   var div = new Element('div', {
-    'id':'ctrl_<?php echo $this->strInputName; ?>_div',
+    'id':'<?php echo $selector; ?>_div',
     'class':ta.get('class')
   }).inject(ta, 'after');
 
   ta.setStyle('display', 'none');
 
-  var editor = ace.edit('ctrl_<?php echo $this->strInputName; ?>_div');
+  var editor = ace.edit('<?php echo $selector; ?>_div');
   editor.setTheme("ace/theme/clouds");
   editor.renderer.setScrollMargin(3, 3, 0, 0);
   editor.renderer.scrollBy(0, -6);
