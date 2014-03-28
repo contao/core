@@ -162,7 +162,7 @@ class typolib extends Backend
 		{
 			if (strncmp('.', $strFile, 1) !== 0 && is_file($dir . '/' . $strFile))
 			{
-				$strFiles .= sprintf('["%s", "' . TL_PATH . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates/%s", "' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates/%s"]', $strFile, $strFile, $strFile) . ',';
+				$strFiles .= '{"title":"' . $strFile . '","url":"' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates/' . $strFile . '"},';
 			}
 		}
 

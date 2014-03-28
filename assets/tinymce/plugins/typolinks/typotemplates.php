@@ -29,4 +29,4 @@ $objLib = new typolib();
  * Create the image list
  */
 header('Content-Type: text/javascript'); ?>
-var tinyMCETemplateList = [<?php echo substr($objLib->createTemplateList(), 0, -1); ?>];
+[<?php echo substr($objLib->createTemplateList(), 0, -1); ?>]
