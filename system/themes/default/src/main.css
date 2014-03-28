@@ -1144,6 +1144,9 @@ ul.sortable li:hover .dirname {
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
 }
+.mce-path {
+	padding:2px 8px 3px !important;
+}
 
 /* Navigation icons */
 a.navigation.article {
