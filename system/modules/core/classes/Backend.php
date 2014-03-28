@@ -185,6 +185,34 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Return a list of TinyMCE templates as JSON string
+	 * @return string
+	 */
+	public static function getTinyTemplates()
+	{
+		$strDir = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates';
+
+		if (!is_dir(TL_ROOT . '/' . $strDir))
+		{
+			return '';
+		}
+
+		$arrFiles = array();
+		$arrTemplates = scan(TL_ROOT . '/' . $strDir);
+
+		foreach ($arrTemplates as $strFile)
+		{
+			if (strncmp('.', $strFile, 1) !== 0 && is_file(TL_ROOT . '/' . $strDir . '/' . $strFile))
+			{
+				$arrFiles[] = '{ title: "' . $strFile . '", url: "' . $strDir . '/' . $strFile . '" }';
+			}
+		}
+
+		return implode(",\n", $arrFiles) . "\n";
+	}
+
+
+	/**
 	 * Add the request token to the URL
 	 * @param string
 	 * @param boolean

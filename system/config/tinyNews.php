@@ -33,8 +33,10 @@ tinymce.init({
   file_browser_callback: function(field_name, url, type, win) {
     Backend.openModalBrowser(field_name, url, type, win);
   },
+  templates: [
+    <?php echo Backend::getTinyTemplates(); ?>
+  ],
   doctype: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">",
-  templates: "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
   plugins: "autosave,charmap,code,fullscreen,image,link,paste,searchreplace,tabfocus,table,template,visualblocks",
   browser_spellcheck: true,
   tabfocus_elements: ":prev,:next",

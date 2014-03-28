@@ -34,7 +34,9 @@ tinymce.init({
   file_browser_callback: function(field_name, url, type, win) {
     Backend.openModalBrowser(field_name, url, type, win);
   },
-  templates: "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
+  templates: [
+    <?php echo Backend::getTinyTemplates(); ?>
+  ],
   plugins: "autosave,charmap,code,fullscreen,image,legacyoutput,link,paste,searchreplace,tabfocus,template,visualblocks",
   browser_spellcheck: true,
   tabfocus_elements: ":prev,:next",
