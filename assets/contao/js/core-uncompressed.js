@@ -892,6 +892,59 @@ var Backend =
 	},
 
 	/**
+	 * Open a TinyMCE file browser in a modal window
+	 *
+	 * @param {string} field_name The field name
+	 * @param {object} url        An URI object
+	 * @param {string} type       The picker type
+	 * @param {object} win        The window object
+	 */
+	openModalBrowser: function(field_name, url, type, win) {
+		var M = new SimpleModal({
+			'width': 765,
+			'btn_ok': Contao.lang.close,
+			'draggable': false,
+			'overlayOpacity': .5,
+			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
+		});
+		M.addButton(Contao.lang.close, 'btn', function() {
+			this.hide();
+		});
+		M.addButton(Contao.lang.apply, 'btn primary', function() {
+			var frms = window.frames,
+				frm, val, prev, i;
+			for (i=0; i<frms.length; i++) {
+				if (frms[i].name == 'simple-modal-iframe') {
+					frm = frms[i];
+					break;
+				}
+			}
+			if (frm === null) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (i=0; i<inp.length; i++) {
+				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
+					val = inp[i].get('value');
+					break;
+				}
+			}
+			if (type == 'file') {
+				val = '{{link_url::' + val + '}}';
+			}
+			win.document.getElementById(field_name).value = val;
+			this.hide();
+		});
+		M.show({
+			'title': win.document.getElement('div.mce-title').get('text'),
+			'contents': '<iframe src="contao/' + ((type == 'file') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'file') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'model': 'modal'
+		});
+	},
+
+	/**
 	 * Get the current scroll offset and store it in a cookie
 	 */
 	getScrollOffset: function() {
@@ -1993,89 +2046,3 @@ window.addEvent('ajax_change', function() {
 		}).chosen();
 	}
 });
-
-
-/**
- * Class TinyCallback
- *
- * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- */
-var TinyCallback =
-{
-	/**
-	 * Set the scroll offset upon focus
-	 *
-	 * @param {object} ed The editor object
-	 */
-	getScrollOffset: function(ed) {
-		ed.on('focus', function() {
-			Backend.getScrollOffset();
-		});
-	},
-
-	/**
-	 * Add a custom file browser
-	 *
-	 * @param {string} field_name The field name
-	 * @param {object} url        An URI object
-	 * @param {string} type       The picker type
-	 * @param {object} win        The window object
-	 */
-	fileBrowser: function(field_name, url, type, win) {
-		var M = new SimpleModal({
-			'width': 765,
-			'btn_ok': Contao.lang.close,
-			'draggable': false,
-			'overlayOpacity': .5,
-			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
-		});
-		M.addButton(Contao.lang.close, 'btn', function() {
-			this.hide();
-		});
-		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var frms = window.frames,
-				frm, val, prev, i;
-			for (i=0; i<frms.length; i++) {
-				if (frms[i].name == 'simple-modal-iframe') {
-					frm = frms[i];
-					break;
-				}
-			}
-			if (frm === null) {
-				alert('Could not find the SimpleModal frame');
-				return;
-			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (i=0; i<inp.length; i++) {
-				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
-					val = inp[i].get('value');
-					break;
-				}
-			}
-			if (type == 'page') {
-				win.document.forms[0].elements[field_name].value = '{{link_url::' + val + '}}';
-				if (win.document.forms[0].elements['linktitle']) {
-					win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
-				}
-			} else {
-				win.document.forms[0].elements[field_name].value = val;
-				if (win.document.forms[0].elements['linktitle']) {
-					win.document.forms[0].elements['linktitle'].value = '';
-				}
-				if (prev = win.document.getElementById('prev')) {
-					var u = new URI(val);
-					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" onload="ImageDialog.updateImageData(this)" border="0">';
-				}
-			}
-			this.hide();
-		});
-		M.show({
-			'title': win.document.title,
-			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'page') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
-			'model': 'modal'
-		});
-	}
-};

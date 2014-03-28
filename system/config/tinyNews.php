@@ -28,18 +28,18 @@ tinymce.init({
   document_base_url: "<?php echo Environment::get('base'); ?>",
   entities: "160,nbsp,60,lt,62,gt,173,shy",
   init_instance_callback: function(editor) {
-    TinyCallback.getScrollOffset(editor);
+    editor.on('focus', function(){ Backend.getScrollOffset(); });
   },
   file_browser_callback: function(field_name, url, type, win) {
-    TinyCallback.fileBrowser(field_name, url, type, win);
+    Backend.openModalBrowser(field_name, url, type, win);
   },
   doctype: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">",
   templates: "<?php echo TL_PATH; ?>/assets/tinymce/plugins/typolinks/typotemplates.php",
-  plugins: "autosave,charmap,code,fullscreen,image,importcss,link,paste,searchreplace,tabfocus,table,template,visualblocks",
+  plugins: "autosave,charmap,code,fullscreen,image,link,paste,searchreplace,tabfocus,table,template,visualblocks",
   browser_spellcheck: true,
   tabfocus_elements: ":prev,:next",
   extended_valid_elements: "b/strong,i/em",
-  content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH . "/" . Config::get('uploadPath'); ?>/tinymce.css",
+  content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css",
   extended_valid_elements: "q[cite|class|title],article,section,hgroup,figure,figcaption",
   menubar: "file edit insert view format table",
   toolbar: "link image | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"
