@@ -348,6 +348,18 @@ class Config
 
 
 	/**
+	 * Remove a configuration variable
+	 *
+	 * @param string $strKey The full variable name
+	 */
+	public function delete($strKey)
+	{
+		$this->markModified();
+		unset($this->arrData[$strKey]);
+	}
+
+
+	/**
 	 * Return a configuration value
 	 *
 	 * @param string $strKey The short key (e.g. "displayErrors")
@@ -362,6 +374,55 @@ class Config
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * Temporarily set a configuration value
+	 *
+	 * @param string $strKey   The short key (e.g. "displayErrors")
+	 * @param string $varValue The configuration value
+	 */
+	public static function set($strKey, $varValue)
+	{
+		$GLOBALS['TL_CONFIG'][$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Permanently set a configuration value
+	 *
+	 * @param string $strKey   The short key or full variable name
+	 * @param mixed  $varValue The configuration value
+	 */
+	public static function persist($strKey, $varValue)
+	{
+		$objConfig = static::getInstance();
+
+		if (strncmp($strKey, '$GLOBALS', 8) !== 0)
+		{
+			$strKey = "\$GLOBALS['TL_CONFIG']['$strKey']";
+		}
+
+		$objConfig->add($strKey, $varValue);
+	}
+
+
+	/**
+	 * Permanently remove a configuration value
+	 *
+	 * @param string $strKey The short key or full variable name
+	 */
+	public static function remove($strKey)
+	{
+		$objConfig = static::getInstance();
+
+		if (strncmp($strKey, '$GLOBALS', 8) !== 0)
+		{
+			$strKey = "\$GLOBALS['TL_CONFIG']['$strKey']";
+		}
+
+		$objConfig->delete($strKey);
 	}
 
 
@@ -381,18 +442,6 @@ class Config
 		}
 
 		static::$blnHasLcf = $blnHasLcf;
-	}
-
-
-	/**
-	 * Remove a configuration variable
-	 *
-	 * @param string $strKey The full variable name
-	 */
-	public function delete($strKey)
-	{
-		$this->markModified();
-		unset($this->arrData[$strKey]);
 	}
 
 
