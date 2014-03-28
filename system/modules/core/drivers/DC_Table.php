@@ -1749,7 +1749,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$this->objActiveRecord = $objRow;
-		$this->checkForTinyMce();
 		$objVersions = new \Versions($this->strTable, $this->intId);
 		$objVersions->initialize();
 
@@ -2165,7 +2164,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if (!empty($fields) && is_array($fields) && \Input::get('fields'))
 		{
 			$class = 'tl_tbox';
-			$this->checkForTinyMce();
 
 			// Walk through each record
 			foreach ($ids as $id)
@@ -2545,7 +2543,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			$class = 'tl_tbox';
 			$formFields = array();
-			$this->checkForTinyMce();
 
 			// Save record
 			if (\Input::post('FORM_SUBMIT') == $this->strTable)
@@ -5618,47 +5615,5 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		return $group;
-	}
-
-
-	/**
-	 * Check if we need to preload TinyMCE
-	 */
-	protected function checkForTinyMce()
-	{
-		if (!isset($GLOBALS['TL_DCA'][$this->strTable]['subpalettes']))
-		{
-			return;
-		}
-
-		foreach ($GLOBALS['TL_DCA'][$this->strTable]['subpalettes'] as $palette)
-		{
-			$fields = trimsplit(',', $palette);
-
-			foreach ($fields as $field)
-			{
-				if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['rte']))
-				{
-					continue;
-				}
-
-				$rte = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['rte'];
-
-				if (strncmp($rte, 'tiny', 4) !== 0)
-				{
-					continue;
-				}
-
-				list ($file, $type) = explode('|', $rte);
-				$key = 'ctrl_' . $field;
-
-				$GLOBALS['TL_RTE'][$file][$key] = array
-				(
-					'id'   => $key,
-					'file' => $file,
-					'type' => $type
-				);
-			}
-		}
 	}
 }

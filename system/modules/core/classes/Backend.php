@@ -87,6 +87,132 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Return the TinyMCE language
+	 * @return string
+	 */
+	public static function getTinyMceLanguage()
+	{
+		$lang = $GLOBALS['TL_LANGUAGE'];
+
+		if ($lang == '')
+		{
+			return 'en';
+		}
+
+		// The translation exists
+		if (file_exists(TL_ROOT . '/assets/tinymce/langs/' . $lang . '.js'))
+		{
+			return $lang;
+		}
+
+		// Fallback to the short tag (e.g. "de" instead of "de_CH")
+		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
+		{
+			if (file_exists(TL_ROOT . '/assets/tinymce/langs/' . $short . '.js'))
+			{
+				return $short;
+			}
+		}
+
+		// Fallback to English
+		return 'en';
+	}
+
+
+	/**
+	 * Validate an ACE type
+	 * @param string
+	 * @return string
+	 */
+	public static function getAceType($type)
+	{
+		switch ($type)
+		{
+			case 'css':
+			case 'diff':
+			case 'html':
+			case 'ini':
+			case 'java':
+			case 'json':
+			case 'less':
+			case 'php':
+			case 'scss':
+			case 'mysql':
+			case 'sql':
+			case 'xml':
+			case 'yaml':
+				return $type;
+				break;
+
+			case 'js':
+			case 'javascript':
+				return 'javascript';
+				break;
+
+			case 'md':
+			case 'markdown':
+				return 'markdown';
+				break;
+
+			case 'cgi':
+			case 'pl':
+				return 'perl';
+				break;
+
+			case 'py':
+				return 'python';
+				break;
+
+			case 'txt':
+				return 'text';
+				break;
+
+			case 'c': case 'cc': case 'cpp': case 'c++':
+			case 'h': case 'hh': case 'hpp': case 'h++':
+				return 'c_cpp';
+				break;
+
+			case 'html5':
+			case 'xhtml':
+				return 'php';
+				break;
+
+			default:
+				return 'text';
+				break;
+		}
+	}
+
+
+	/**
+	 * Return a list of TinyMCE templates as JSON string
+	 * @return string
+	 */
+	public static function getTinyTemplates()
+	{
+		$strDir = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates';
+
+		if (!is_dir(TL_ROOT . '/' . $strDir))
+		{
+			return '';
+		}
+
+		$arrFiles = array();
+		$arrTemplates = scan(TL_ROOT . '/' . $strDir);
+
+		foreach ($arrTemplates as $strFile)
+		{
+			if (strncmp('.', $strFile, 1) !== 0 && is_file(TL_ROOT . '/' . $strDir . '/' . $strFile))
+			{
+				$arrFiles[] = '{ title: "' . $strFile . '", url: "' . $strDir . '/' . $strFile . '" }';
+			}
+		}
+
+		return implode(",\n", $arrFiles) . "\n";
+	}
+
+
+	/**
 	 * Add the request token to the URL
 	 * @param string
 	 * @param boolean

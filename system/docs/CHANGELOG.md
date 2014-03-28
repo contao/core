@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### Update
+Update TinyMCE to version 4.0.20 (see #1495).
+
 ### new
 Added additional style sheet types:
 

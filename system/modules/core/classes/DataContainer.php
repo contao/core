@@ -442,9 +442,19 @@ class DataContainer extends \Backend
 		$updateMode = '';
 
 		// Replace the textarea with an RTE instance
-		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		if (isset($arrData['eval']['rte']))
 		{
-			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_".$this->strInputName."');$('ctrl_".$this->strInputName."').erase('required')</script>";
+			list ($file, $type) = explode('|', $arrData['eval']['rte'], 2);
+
+			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
+			{
+				throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+			}
+
+			ob_start();
+			include TL_ROOT . '/system/config/' . $file . '.php';
+			$updateMode = ob_get_contents();
+			ob_end_clean();
 		}
 
 		// Handle multi-select fields in "override all" mode
