@@ -108,19 +108,8 @@ class TextArea extends \Widget
 	 */
 	public function generate()
 	{
-		// Register the field name for rich text editor usage
 		if ($this->rte)
 		{
-			list ($file, $type) = explode('|', $this->rte);
-			$key = 'ctrl_' . $this->strId;
-
-			$GLOBALS['TL_RTE'][$file][$key] = array
-			(
-				'id'   => $key,
-				'file' => $file,
-				'type' => $type
-			);
-
 			$this->strClass = trim($this->strClass . ' noresize');
 		}
 

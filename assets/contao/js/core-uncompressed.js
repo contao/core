@@ -2010,7 +2010,7 @@ var TinyCallback =
 	 * @param {object} ed The editor object
 	 */
 	getScrollOffset: function(ed) {
-		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
+		ed.on('focus', function() {
 			Backend.getScrollOffset();
 		});
 	},
