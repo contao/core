@@ -441,3 +441,13 @@ a.tl_submit,a.tl_submit:hover {
 	border-right:7px solid transparent;
 	border-bottom:7px solid #666;
 }
+
+/* Headline gradient */
+#header h1,#tl_navigation h1,h1.main_headline {
+	background:#909390;
+	background-image:-moz-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-webkit-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-o-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-ms-linear-gradient(top, #909390, #b3b6b3);
+	background-image:linear-gradient(to bottom, #909390, #b3b6b3);
+}

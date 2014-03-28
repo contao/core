@@ -1458,13 +1458,3 @@ fieldset.collapsed > legend {
 #sync-results .tl_checkbox {
 	top:0;
 }
-
-/* Headline gradient */
-#header h1,#tl_navigation h1,h1.main_headline {
-	background:#9a9c9a;
-	background-image:-moz-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-webkit-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-o-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-ms-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:linear-gradient(to bottom, #9a9c9a, #b3b6b3);
-}
