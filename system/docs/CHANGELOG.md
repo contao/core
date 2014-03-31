@@ -4,10 +4,19 @@ Contao Open Source CMS changelog
 Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
+### New
+Added more static convenience methods to the `Config` class:
+
+ - `set()`: temporarily set a configuration value
+ - `presist()`: permanently store a configuration value
+ - `remove()`: permanently remove a configuration value
+
+A static `get()` method has been available already.
+
 ### Update
 Update TinyMCE to version 4.0.20 (see #1495).
 
-### new
+### New
 Added additional style sheet types:
 
  - Internal editor: use the internal editor
