@@ -276,7 +276,7 @@ class ModuleSubscribe extends \Module
 		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
 		$strText = str_replace('##domain##', \Idna::decode(\Environment::get('host')), $strText);
-		$strText = str_replace('##link##', \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
+		$strText = str_replace('##link##', \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
 
 		// Activation e-mail
