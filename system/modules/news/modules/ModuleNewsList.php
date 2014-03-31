@@ -144,7 +144,7 @@ class ModuleNewsList extends \ModuleNews
 			}
 
 			// Add the pagination menu
-			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+			$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
