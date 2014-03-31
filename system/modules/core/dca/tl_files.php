@@ -505,7 +505,7 @@ class tl_files extends Backend
 
 		$objFile = new File($strDecoded, true);
 
-		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
+		if (!in_array($objFile->extension, trimsplit(',', Config::get('editableFiles'))))
 		{
 			return Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -594,7 +594,7 @@ class tl_files extends Backend
 <div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . ' cbx">
   <div id="ctrl_' . $dc->field . '" class="tl_checkbox_single_container">
     <input type="hidden" name="' . $dc->inputName . '" value=""><input type="checkbox" name="' . $dc->inputName . '" id="opt_' . $dc->field . '_0" class="tl_checkbox" value="1"' . ($blnProtected ? ' checked="checked"' : '') . ' onfocus="Backend.getScrollOffset()"> <label for="opt_' . $dc->field . '_0">' . $GLOBALS['TL_LANG']['tl_files']['protected'][0] . '</label>
-  </div>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
+  </div>' . (Config::get('showHelp') ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_files']['protected'][1] . '</p>' : '') . '
 </div>';
 	}

@@ -1135,7 +1135,7 @@ class tl_content extends Backend
 		}
 
 		// Limit the element's height
-		if (!$GLOBALS['TL_CONFIG']['doNotCollapse'])
+		if (!Config::get('doNotCollapse'))
 		{
 			$class .=  ' h64';
 		}

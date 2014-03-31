@@ -126,7 +126,7 @@ class Theme extends \Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
   <h3>'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
@@ -324,9 +324,9 @@ class Theme extends \Backend
 					}
 
 					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($strFileName, 'files/', 6) === 0)
+					if (\Config::get('uploadPath') != 'files' && strncmp($strFileName, 'files/', 6) === 0)
 					{
-						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
+						$strFileName = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFileName);
 					}
 
 					\File::putContent($strFileName, $objArchive->unzip());
@@ -380,9 +380,9 @@ class Theme extends \Backend
 					}
 
 					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					if (\Config::get('uploadPath') != 'files')
 					{
-						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
+						$strFolder = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFolder);
 					}
 
 					\Dbafs::addResource($strFolder);
@@ -521,7 +521,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets
-						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
+						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -529,14 +529,14 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
+									$tmp[$kk] = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+								$value = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $value);
 							}
 						}
 
@@ -844,9 +844,9 @@ class Theme extends \Backend
 				if ($objFile !== null)
 				{
 					// Standardize the upload path if it is not "files"
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					if (\Config::get('uploadPath') != 'files')
 					{
-						$v = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFile->path);
+						$v = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFile->path);
 					}
 					else
 					{
@@ -867,13 +867,13 @@ class Theme extends \Backend
 					if ($objFiles !== null)
 					{
 						// Standardize the upload path if it is not "files"
-						if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+						if (\Config::get('uploadPath') != 'files')
 						{
 							$arrTmp = array();
 
 							while ($objFiles->next())
 							{
-								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFiles->path);
+								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFiles->path);
 							}
 
 							$v = serialize($arrTmp);
@@ -901,17 +901,17 @@ class Theme extends \Backend
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);
-		$strFolder = preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $strFolder);
+		$strFolder = preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strFolder);
 
 		if ($strFolder == '')
 		{
 			$strTarget = 'files';
-			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'];
+			$strFolder = \Config::get('uploadPath');
 		}
 		else
 		{
 			$strTarget = 'files/' . $strFolder;
-			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'] .'/'. $strFolder;
+			$strFolder = \Config::get('uploadPath') .'/'. $strFolder;
 		}
 
 		// Return if the folder does not exist
@@ -968,7 +968,7 @@ class Theme extends \Backend
 			return;
 		}
 
-		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
 
 		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)

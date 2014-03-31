@@ -65,7 +65,7 @@ class FormExplanation extends \Widget
 		// Add the static files URL to images
 		if (TL_FILES_URL != '')
 		{
-			$path = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
+			$path = \Config::get('uploadPath') . '/';
 			$this->text = str_replace(' src="' . $path, ' src="' . TL_FILES_URL . $path, $this->text);
 		}
 

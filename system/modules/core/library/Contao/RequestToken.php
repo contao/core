@@ -98,7 +98,7 @@ class RequestToken
 	public static function validate($strToken)
 	{
 		// The feature has been disabled
-		if ($GLOBALS['TL_CONFIG']['disableRefererCheck'] || defined('BYPASS_TOKEN_CHECK'))
+		if (\Config::get('disableRefererCheck') || defined('BYPASS_TOKEN_CHECK'))
 		{
 			return true;
 		}
@@ -110,11 +110,11 @@ class RequestToken
 		}
 
 		// Check against the whitelist (thanks to Tristan Lins) (see #3164)
-		if (!empty($GLOBALS['TL_CONFIG']['requestTokenWhitelist']))
+		if (\Config::get('requestTokenWhitelist'))
 		{
 			$strHostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 
-			foreach ($GLOBALS['TL_CONFIG']['requestTokenWhitelist'] as $strDomain)
+			foreach (\Config::get('requestTokenWhitelist') as $strDomain)
 			{
 				if ($strDomain == $strHostname || preg_match('/\.' . preg_quote($strDomain, '/') . '$/', $strHostname))
 				{

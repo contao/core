@@ -87,7 +87,7 @@ class ModuleNavigation extends \Module
 			$objRootPage = \PageModel::findWithDetails($this->rootPage);
 
 			// Set the language
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			if (\Config::get('addLanguageToUrl') && $objRootPage->rootLanguage != $objPage->rootLanguage)
 			{
 				$lang = $objRootPage->rootLanguage;
 			}

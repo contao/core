@@ -52,10 +52,10 @@ class LiveUpdate extends \Backend implements \executable
 		$strMessage = ' <a href="contao/changelog.php" onclick="Backend.openModalIframe({\'width\':860,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="' . specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']) . '"><img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/changelog.gif" width="14" height="14" alt="" style="vertical-align:text-bottom;padding-left:3px"></a>';
 
 		// Newer version available
-		if (isset($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
+		if (\Config::get('latestVersion') && version_compare(VERSION . '.' . BUILD, \Config::get('latestVersion'), '<'))
 		{
 			$objTemplate->updateClass = 'tl_info';
-			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']) . $strMessage;
+			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], \Config::get('latestVersion')) . $strMessage;
 		}
 		// Current version up to date
 		else
@@ -67,15 +67,15 @@ class LiveUpdate extends \Backend implements \executable
 		// Automatically switch to SSL
 		if (\Environment::get('ssl'))
 		{
-			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('http://', 'https://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+			\Config::set('liveUpdateBase', str_replace('http://', 'https://', \Config::get('liveUpdateBase')));
 		}
 		else
 		{
-			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('https://', 'http://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+			\Config::set('liveUpdateBase', str_replace('https://', 'http://', \Config::get('liveUpdateBase')));
 		}
 
-		$objTemplate->uid = $GLOBALS['TL_CONFIG']['liveUpdateId'];
-		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
+		$objTemplate->uid = \Config::get('liveUpdateId');
+		$objTemplate->updateServer = \Config::get('liveUpdateBase') . 'index.php';
 
 		// Run the update
 		if (\Input::get('token') != '')
@@ -107,7 +107,7 @@ class LiveUpdate extends \Backend implements \executable
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
 			$objRequest = new \Request();
-			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . \Input::get('token'));
+			$objRequest->send(\Config::get('liveUpdateBase') . 'request.php?token=' . \Input::get('token'));
 
 			if ($objRequest->hasError())
 			{

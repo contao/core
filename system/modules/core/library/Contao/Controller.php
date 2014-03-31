@@ -49,7 +49,7 @@ abstract class Controller extends \System
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
 		array_push($arrAllowed, 'html5'); // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))
@@ -653,7 +653,7 @@ abstract class Controller extends \System
 		global $objPage;
 
 		// Preserve insert tags
-		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
+		if (\Config::get('disableInsertTags'))
 		{
 			return \String::restoreBasicEntities($strBuffer);
 		}
@@ -707,7 +707,7 @@ abstract class Controller extends \System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
+					$arrCache[$strTag] = \Date::parse($elements[1] ?: \Config::get('dateFormat'));
 					break;
 
 				// Accessibility tags
@@ -810,15 +810,15 @@ abstract class Controller extends \System
 
 						if ($rgxp == 'date')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('dateFormat'), $value);
 						}
 						elseif ($rgxp == 'time')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('timeFormat'), $value);
 						}
 						elseif ($rgxp == 'datim')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('datimFormat'), $value);
 						}
 						elseif (is_array($value))
 						{
@@ -922,7 +922,7 @@ abstract class Controller extends \System
 									$objNext->loadDetails();
 
 									// Check the target page language (see #4706)
-									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+									if (\Config::get('addLanguageToUrl'))
 									{
 										$strForceLang = $objNext->language;
 									}
@@ -943,7 +943,7 @@ abstract class Controller extends \System
 								$objNextPage->loadDetails();
 
 								// Check the target page language (see #4706, #5465)
-								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+								if (\Config::get('addLanguageToUrl'))
 								{
 									$strForceLang = $objNextPage->language;
 								}
@@ -1030,7 +1030,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
+					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1064,7 +1064,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1115,14 +1115,14 @@ abstract class Controller extends \System
 					{
 						if (($objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
 						if (($objArchive = $objNews->getRelated('pid')) !== null && ($objJumpTo = $objArchive->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 						}
 					}
 
@@ -1175,14 +1175,14 @@ abstract class Controller extends \System
 					{
 						if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
 						if (($objCalendar = $objEvent->getRelated('pid')) !== null && ($objJumpTo = $objCalendar->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/events/') . ((!\Config::get('disableAlias') && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 						}
 					}
 
@@ -1298,7 +1298,7 @@ abstract class Controller extends \System
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = \Date::parse($elements[1] ?: \Config::get('datimFormat'), max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 
@@ -1558,9 +1558,9 @@ abstract class Controller extends \System
 					}
 
 					// Check the maximum image width
-					if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0 && $width > $GLOBALS['TL_CONFIG']['maxImageWidth'])
+					if (\Config::get('maxImageWidth') > 0 && $width > \Config::get('maxImageWidth'))
 					{
-						$width = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+						$width = \Config::get('maxImageWidth');
 						$height = null;
 					}
 
@@ -1668,7 +1668,7 @@ abstract class Controller extends \System
 							}
 						}
 					}
-					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					if (\Config::get('debugMode'))
 					{
 						$GLOBALS['TL_DEBUG']['unknown_insert_tags'][] = $strTag;
 					}
@@ -1740,7 +1740,7 @@ abstract class Controller extends \System
 									}
 								}
 							}
-							if ($GLOBALS['TL_CONFIG']['debugMode'])
+							if (\Config::get('debugMode'))
 							{
 								$GLOBALS['TL_DEBUG']['unknown_insert_tag_flags'][] = $flag;
 							}
@@ -2138,11 +2138,11 @@ abstract class Controller extends \System
 	 */
 	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
 	{
-		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
+		if (!\Config::get('disableAlias'))
 		{
 			$strLanguage = '';
 
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			if (\Config::get('addLanguageToUrl'))
 			{
 				if ($strForceLang != '')
 				{
@@ -2162,11 +2162,11 @@ abstract class Controller extends \System
 			// Correctly handle the "index" alias (see #3961)
 			if ($arrRow['alias'] == 'index' && $strParams == '')
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage;
+				$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage;
 			}
 			else
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . ($arrRow['alias'] ?: $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage . ($arrRow['alias'] ?: $arrRow['id']) . $strParams . \Config::get('urlSuffix');
 			}
 		}
 		else
@@ -2258,7 +2258,7 @@ abstract class Controller extends \System
 		}
 
 		// Limit downloads to the files directory
-		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $strFile))
+		if (!preg_match('@^' . preg_quote(\Config::get('uploadPath'), '@') . '@i', $strFile))
 		{
 			header('HTTP/1.1 404 Not Found');
 			die('Invalid path');
@@ -2272,7 +2272,7 @@ abstract class Controller extends \System
 		}
 
 		$objFile = new \File($strFile, true);
-		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Check whether the file type is allowed to be downloaded
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -2474,7 +2474,7 @@ abstract class Controller extends \System
 
 		if ($intMaxWidth === null)
 		{
-			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
 
 		// Provide an ID for single lightbox images in HTML5 (see #3742)
@@ -2637,7 +2637,7 @@ abstract class Controller extends \System
 		}
 
 		$arrEnclosures = array();
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Add download links
 		while ($objFiles->next())
@@ -2658,7 +2658,7 @@ abstract class Controller extends \System
 					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 				}
 
-				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
 				$arrEnclosures[] = array
 				(
@@ -2703,9 +2703,9 @@ abstract class Controller extends \System
 
 		foreach ($arrConstants as $strKey=>$strConstant)
 		{
-			$url = ($objPage !== null) ? $objPage->$strKey : $GLOBALS['TL_CONFIG'][$strKey];
+			$url = ($objPage !== null) ? $objPage->$strKey : \Config::get($strKey);
 
-			if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
+			if ($url == '' || \Config::get('debugMode'))
 			{
 				define($strConstant, '');
 			}

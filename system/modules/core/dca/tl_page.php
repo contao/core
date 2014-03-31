@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	// Config
 	'config' => array
 	(
-		'label'                       => $GLOBALS['TL_CONFIG']['websiteTitle'],
+		'label'                       => Config::get('websiteTitle'),
 		'dataContainer'               => 'Table',
 		'ctable'                      => array('tl_article'),
 		'enableVersioning'            => true,
@@ -510,7 +510,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'cuser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cuser'],
-			'default'                 => intval($GLOBALS['TL_CONFIG']['defaultUser']),
+			'default'                 => intval(Config::get('defaultUser')),
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
@@ -521,7 +521,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'cgroup' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cgroup'],
-			'default'                 => intval($GLOBALS['TL_CONFIG']['defaultGroup']),
+			'default'                 => intval(Config::get('defaultGroup')),
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
@@ -532,7 +532,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'chmod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['chmod'],
-			'default'                 => $GLOBALS['TL_CONFIG']['defaultChmod'],
+			'default'                 => Config::get('defaultChmod'),
 			'exclude'                 => true,
 			'inputType'               => 'chmod',
 			'eval'                    => array('tl_class'=>'clr'),
@@ -665,8 +665,8 @@ class tl_page extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval($GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id);
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval($GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0]);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval(Config::get('defaultUser') ?: $this->User->id);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval(Config::get('defaultGroup') ?: $this->User->groups[0]);
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
@@ -961,7 +961,7 @@ class tl_page extends Backend
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 
 			// Generate folder URL aliases (see #4933)
-			if ($GLOBALS['TL_CONFIG']['folderUrl'])
+			if (Config::get('folderUrl'))
 			{
 				$objPage = PageModel::findWithDetails($dc->activeRecord->id);
 
@@ -1006,7 +1006,7 @@ class tl_page extends Backend
 				else
 				{
 					// Check the domain and language or the domain only
-					if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+					if (Config::get('addLanguageToUrl'))
 					{
 						$arrPages[$domain][$language][] = $objAlias->id;
 					}
@@ -1017,7 +1017,7 @@ class tl_page extends Backend
 				}
 			}
 
-			$arrCheck = $GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $arrPages[$strDomain][$strLanguage] : $arrPages[$strDomain];
+			$arrCheck = Config::get('addLanguageToUrl') ? $arrPages[$strDomain][$strLanguage] : $arrPages[$strDomain];
 
 			// Check if there are multiple results for the current domain
 			if (!empty($arrCheck))
@@ -1503,7 +1503,7 @@ class tl_page extends Backend
 				$strAlias = standardize(String::restoreBasicEntities($objPage->title));
 
 				// Prepend the folder URL
-				if ($GLOBALS['TL_CONFIG']['folderUrl'])
+				if (Config::get('folderUrl'))
 				{
 					$strAlias = $objPage->folderUrl . $strAlias;
 				}

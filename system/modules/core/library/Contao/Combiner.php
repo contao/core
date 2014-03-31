@@ -192,7 +192,7 @@ class Combiner extends \System
 		$strKey = substr(md5($this->strKey), 0, 12);
 
 		// Do not combine the files in debug mode (see #6450)
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if (\Config::get('debugMode'))
 		{
 			$return = array();
 
@@ -300,7 +300,7 @@ class Combiner extends \System
 		$objFile->close();
 
 		// Create a gzipped version
-		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
+		if (\Config::get('gzipScripts') && function_exists('gzencode'))
 		{
 			\File::putContent('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 		}

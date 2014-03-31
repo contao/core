@@ -146,8 +146,8 @@ class Ajax extends \Backend
 
 			// Check whether the temporary directory is writeable
 			case 'liveUpdate':
-				$GLOBALS['TL_CONFIG']['liveUpdateId'] = \Input::post('id');
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['liveUpdateId']", \Input::post('id'));
+				\Config::set('liveUpdateId', \Input::post('id'));
+				\Config::persist('liveUpdateId', \Input::post('id'));
 
 				// Check whether the temp directory is writeable
 				try
@@ -203,7 +203,7 @@ class Ajax extends \Backend
 	 */
 	public function executePostActions(\DataContainer $dc)
 	{
-		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: text/html; charset=' . \Config::get('characterSet'));
 
 		// Bypass any core logic for non-core drivers (see #5957)
 		if (!$dc instanceof \DC_File && !$dc instanceof \DC_Folder && !$dc instanceof \DC_Table)
@@ -280,7 +280,7 @@ class Ajax extends \Backend
 				// Load the value
 				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
 				{
-					$varValue = $GLOBALS['TL_CONFIG'][$strField];
+					$varValue = \Config::get($strField);
 				}
 				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
@@ -401,11 +401,11 @@ class Ajax extends \Backend
 				elseif ($dc instanceof \DC_File)
 				{
 					$val = (intval(\Input::post('state') == 1) ? true : false);
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['".\Input::post('field')."']", $val);
+					\Config::persist(\Input::post('field'), $val);
 
 					if (\Input::post('load'))
 					{
-						$GLOBALS['TL_CONFIG'][\Input::post('field')] = $val;
+						\Config::set(\Input::post('field'), $val);
 						echo $dc->edit(false, \Input::post('id'));
 					}
 				}

@@ -50,11 +50,11 @@
         <fieldset class="tl_tbox nolegend">
           <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['ftp'][0]; ?></h3>
           <?php if ($this->ftpHostError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpHostError'], $GLOBALS['TL_CONFIG']['ftpHost']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpHostError'], Config::get('ftpHost')); ?></p>
           <?php elseif ($this->ftpUserError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpUserError'], $GLOBALS['TL_CONFIG']['ftpUser']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpUserError'], Config::get('ftpUser')); ?></p>
           <?php elseif ($this->ftpPathError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpPathError'], $GLOBALS['TL_CONFIG']['ftpPath']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpPathError'], Config::get('ftpPath')); ?></p>
           <?php endif; ?>
           <p><?php echo $GLOBALS['TL_LANG']['tl_install']['ftp'][1]; ?></p>
           <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">

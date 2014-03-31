@@ -124,7 +124,7 @@ class ModuleArticle extends \Module
 				$this->cssID = $arrCss;
 			}
 
-			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->alias != '') ? $this->alias : $this->id;
+			$article = (!\Config::get('disableAlias') && $this->alias != '') ? $this->alias : $this->id;
 			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
@@ -164,13 +164,13 @@ class ModuleArticle extends \Module
 			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
 
 			// Remove the "/articles/…" part from the URL
-			if ($GLOBALS['TL_CONFIG']['disableAlias'])
+			if (\Config::get('disableAlias'))
 			{
 				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', \Environment::get('request'));
 			}
 			else
 			{
-				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . \Config::get('urlSuffix');
 			}
 		}
 
@@ -267,7 +267,7 @@ class ModuleArticle extends \Module
 
 		// Generate article
 		$strArticle = $this->replaceInsertTags($this->generate(), false);
-		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, \Config::get('characterSet'));
 		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
 
 		// Remove form elements and JavaScript links
@@ -324,7 +324,7 @@ class ModuleArticle extends \Module
 
 		// TCPDF configuration
 		$l['a_meta_dir'] = 'ltr';
-		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
+		$l['a_meta_charset'] = \Config::get('characterSet');
 		$l['a_meta_language'] = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
 		$l['w_page'] = 'page';
 

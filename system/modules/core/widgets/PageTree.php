@@ -157,7 +157,7 @@ class PageTree extends \Widget
 				while ($objPages->next())
 				{
 					$arrSet[] = $objPages->id;
-					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . \Config::get('urlSuffix') . ')';
 				}
 			}
 
@@ -189,7 +189,7 @@ class PageTree extends \Widget
 		}
 
 		// Load the fonts for the drag hint (see #4838)
-		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
+		\Config::set('loadGoogleFonts', true);
 
 		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . ($blnHasOrder ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '

@@ -373,7 +373,7 @@ class ModuleRegistration extends \Module
 						break;
 
 					case 'link':
-						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
+						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
 						break;
 
 					// HOOK: support newsletter subscriptions
@@ -569,7 +569,7 @@ class ModuleRegistration extends \Module
 
 			if ($k == 'dateOfBirth' && strlen($v))
 			{
-				$v = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+				$v = \Date::parse(\Config::get('dateFormat'), $v);
 			}
 
 			$strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";

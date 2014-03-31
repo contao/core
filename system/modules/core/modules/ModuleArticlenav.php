@@ -77,7 +77,7 @@ class ModuleArticlenav extends \Module
 				return '';
 			}
 
-			$strAlias = ($this->objArticles->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $this->objArticles->alias : $this->objArticles->id;
+			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
 			$this->redirect($this->addToUrl('articles=' . $strAlias));
 		}
 
@@ -96,7 +96,7 @@ class ModuleArticlenav extends \Module
 
 		while ($this->objArticles->next())
 		{
-			$strAlias = ($this->objArticles->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $this->objArticles->alias : $this->objArticles->id;
+			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
 
 			// Active article
 			if (\Input::get('articles') == $strAlias)

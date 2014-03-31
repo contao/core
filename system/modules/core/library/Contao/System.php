@@ -292,7 +292,7 @@ abstract class System
 			$strCacheFile = 'system/cache/language/' . $strCreateLang . '/' . $strName . '.php';
 
 			// Try to load from cache
-			if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+			if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
 				include TL_ROOT . '/' . $strCacheFile;
 			}
@@ -490,7 +490,7 @@ abstract class System
 	{
 		if ($strPath == '')
 		{
-			$strPath = $GLOBALS['TL_CONFIG']['websitePath'] ?: '/'; // see #4390
+			$strPath = \Config::get('websitePath') ?: '/'; // see #4390
 		}
 
 		$objCookie = new \stdClass();
@@ -559,7 +559,7 @@ abstract class System
 	public static function anonymizeIp($strIp)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
+		if (!\Config::get('privacyAnonymizeIp'))
 		{
 			return $strIp;
 		}
