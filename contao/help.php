@@ -174,11 +174,11 @@ class Help extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['helpWizardTitle']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->headline = $arrData['label'][0] ?: $field;
 		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

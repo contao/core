@@ -108,12 +108,12 @@ Swift::init(function()
 {
 	$preferences = Swift_Preferences::getInstance();
 
-	if (!$GLOBALS['TL_CONFIG']['useFTP'])
+	if (!Config::get('useFTP'))
 	{
 		$preferences->setTempDir(TL_ROOT . '/system/tmp')->setCacheType('disk');
 	}
 
-	$preferences->setCharset($GLOBALS['TL_CONFIG']['characterSet']);
+	$preferences->setCharset(Config::get('characterSet'));
 });
 
 
@@ -150,7 +150,7 @@ $objConfig = Config::getInstance();
 /**
  * Set the website path (backwards compatibility)
  */
-$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH;
+Config::set('websitePath', TL_PATH);
 
 
 /**
@@ -203,16 +203,16 @@ if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && 
 }
 else
 {
-	@ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-	error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors']) ? E_ALL|E_STRICT : 0);
+	@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
+	error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? E_ALL|E_STRICT : 0);
 }
 
 
 /**
  * Set the timezone
  */
-@ini_set('date.timezone', $GLOBALS['TL_CONFIG']['timeZone']);
-@date_default_timezone_set($GLOBALS['TL_CONFIG']['timeZone']);
+@ini_set('date.timezone', Config::get('timeZone'));
+@date_default_timezone_set(Config::get('timeZone'));
 
 
 /**
@@ -245,7 +245,7 @@ if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
  */
 if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 {
-	mb_regex_encoding($GLOBALS['TL_CONFIG']['characterSet']);
+	mb_regex_encoding(Config::get('characterSet'));
 }
 
 

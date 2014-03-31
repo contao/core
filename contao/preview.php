@@ -58,7 +58,7 @@ class Preview extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['fePreview']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->site = Input::get('site', true);
 
 		if (Input::get('url'))
@@ -81,23 +81,23 @@ class Preview extends Backend
 
 			if ($objUser !== null)
 			{
-				$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
+				$strHash = sha1(session_id() . (!Config::get('disableIpCheck') ? Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 				// Remove old sessions
 				$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-							   ->execute((time() - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
+							   ->execute((time() - Config::get('sessionTimeout')), $strHash);
 
 				// Insert the new session
 				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
 							   ->execute($objUser->id, time(), 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
 
 				// Set the cookie
-				$this->setCookie('FE_USER_AUTH', $strHash, (time() + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+				$this->setCookie('FE_USER_AUTH', $strHash, (time() + Config::get('sessionTimeout')), null, null, false, true);
 				$this->Template->user = Input::post('user');
 			}
 		}
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

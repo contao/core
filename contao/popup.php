@@ -73,7 +73,7 @@ class Popup extends Backend
 		}
 
 		// Limit preview to the files directory
-		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $this->strFile))
+		if (!preg_match('@^' . preg_quote(Config::get('uploadPath'), '@') . '@i', $this->strFile))
 		{
 			die('Invalid path');
 		}
@@ -113,9 +113,9 @@ class Popup extends Backend
 
 			$this->Template->icon = $objFolder->icon;
 			$this->Template->mime = $objFolder->mime;
-			$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->ctime);
-			$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->mtime);
-			$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFolder->atime);
+			$this->Template->ctime = Date::parse(Config::get('datimFormat'), $objFolder->ctime);
+			$this->Template->mtime = Date::parse(Config::get('datimFormat'), $objFolder->mtime);
+			$this->Template->atime = Date::parse(Config::get('datimFormat'), $objFolder->atime);
 			$this->Template->path = $this->strFile;
 		}
 		else
@@ -124,9 +124,9 @@ class Popup extends Backend
 
 			$this->Template->icon = $objFile->icon;
 			$this->Template->mime = $objFile->mime;
-			$this->Template->ctime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
-			$this->Template->mtime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
-			$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
+			$this->Template->ctime = Date::parse(Config::get('datimFormat'), $objFile->ctime);
+			$this->Template->mtime = Date::parse(Config::get('datimFormat'), $objFile->mtime);
+			$this->Template->atime = Date::parse(Config::get('datimFormat'), $objFile->atime);
 			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 			$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
 			$this->Template->path = $this->strFile;
@@ -154,8 +154,8 @@ class Popup extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($this->strFile);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
+		$this->Template->charset = Config::get('characterSet');
+		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, Config::get('characterSet')));
 		$this->Template->label_uuid = $GLOBALS['TL_LANG']['MSC']['fileUuid'];
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
@@ -166,7 +166,7 @@ class Popup extends Backend
 		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
 		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

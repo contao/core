@@ -152,7 +152,7 @@ class Confirm extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 
 		$this->Template->output();
 	}
