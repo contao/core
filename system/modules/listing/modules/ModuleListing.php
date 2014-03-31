@@ -242,13 +242,13 @@ class ModuleListing extends \Module
 		{
 			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, $id, strlen($id)) !== 0)
 			{
-				$strUrl .= ((!$blnQuery && !$GLOBALS['TL_CONFIG']['disableAlias']) ? '?' : '&amp;') . $fragment;
+				$strUrl .= ((!$blnQuery && !\Config::get('disableAlias')) ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
 			}
 		}
 
 		$this->Template->url = $strUrl;
-		$strVarConnector = ($blnQuery || $GLOBALS['TL_CONFIG']['disableAlias']) ? '&amp;' : '?';
+		$strVarConnector = ($blnQuery || \Config::get('disableAlias')) ? '&amp;' : '?';
 
 
 		/**
@@ -337,7 +337,7 @@ class ModuleListing extends \Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new \Pagination($objTotal->count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+		$objPagination = new \Pagination($objTotal->count, $per_page, \Config::get('maxPaginationLinks'), $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 		$this->Template->total = $objTotal->count;
