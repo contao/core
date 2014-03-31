@@ -112,7 +112,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <div class="extension_container">
     <?php if (count($rep->extensions) < 1): ?>
       <p><?php echo $text['noextensionsfound']; ?></p>
-      <?php if (!$GLOBALS['TL_CONFIG']['repository_unsafe_catalog']): ?>
+      <?php if (!Config::get('repository_unsafe_catalog')): ?>
         <p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_repository']['showIncompatible']; ?></p>
       <?php endif; ?>
     <?php else: ?>
@@ -134,7 +134,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
           </tr>
           <tr class="info">
             <th><?php echo $text['releasedate'][0]; ?></th>
-            <td><?php echo Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
+            <td><?php echo Date::parse(Config::get('dateFormat'), $ext->releasedate); ?></td>
             <th><?php echo $text['approvedForLabel']; ?></th>
             <td><?php printf($text['approvedForText'], Repository::formatShortCoreVersion($ext->coreminversion), Repository::formatShortCoreVersion($ext->coremaxversion)); ?></td>
           </tr>
