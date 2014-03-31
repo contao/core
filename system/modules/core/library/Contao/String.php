@@ -118,7 +118,7 @@ class String
 		$arrEmptyTags = array('area', 'base', 'br', 'col', 'hr', 'img', 'input', 'frame', 'link', 'meta', 'param');
 
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$strString = preg_replace('/ +/', ' ', $strString);
 
 		// Seperate tags and text
@@ -233,7 +233,7 @@ class String
 
 		if ($strCharset === null)
 		{
-			$strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$strCharset = \Config::get('characterSet');
 		}
 
 		$strString = preg_replace('/(&#*\w+)[\x00-\x20]+;/i', '$1;', $strString);
@@ -477,7 +477,7 @@ class String
 		$strReturn = '';
 
 		// Remove any unwanted tags (especially PHP tags)
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags

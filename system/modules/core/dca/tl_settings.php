@@ -609,7 +609,7 @@ class tl_settings extends Backend
 
 		// Add the help text
 		$return .= '
-  </fieldset>' . ($GLOBALS['TL_CONFIG']['showHelp'] ? '
+  </fieldset>' . (Config::get('showHelp') ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][1] . '</p>' : '') . '
 </div>';
 
@@ -624,7 +624,7 @@ class tl_settings extends Backend
 	 */
 	public function changeCoreOnlyMode($varValue)
 	{
-		if ($varValue != $GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		if ($varValue != Config::get('coreOnlyMode'))
 		{
 			$this->import('Automator');
 			$this->Automator->purgeInternalCache();

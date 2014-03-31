@@ -34,7 +34,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?php echo $lang->noRootPage; ?></p>
 
       <h3><?php echo $lang->howToFix; ?></h3>
-      <p><?php printf($lang->noRootFix, Environment::get('base'), String::encodeEmail('mailto:' . $GLOBALS['TL_CONFIG']['adminEmail'])); ?></p>
+      <p><?php printf($lang->noRootFix, Environment::get('base'), String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
     </div>
 

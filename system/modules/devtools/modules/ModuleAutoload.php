@@ -266,7 +266,7 @@ class ModuleAutoload extends \BackendModule
 						continue;
 					}
 
-					$arrTplExts = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+					$arrTplExts = trimsplit(',', \Config::get('templateFiles'));
 					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
 
 					// Add all known template types (see #5857)

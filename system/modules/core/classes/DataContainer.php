@@ -343,7 +343,7 @@ class DataContainer extends \Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = \Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+			$format = \Date::formatToJs(\Config::get($rgxp.'Format'));
 
 			switch ($rgxp)
 			{
@@ -488,7 +488,7 @@ class DataContainer extends \Backend
 	{
 		$return = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['label'][1];
 
-		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
+		if (!\Config::get('showHelp') || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
 		{
 			return '';
 		}

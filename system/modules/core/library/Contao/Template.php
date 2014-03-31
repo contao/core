@@ -296,10 +296,10 @@ abstract class Template extends \Controller
 
 		// Send some headers
 		header('Vary: User-Agent', false);
-		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
 		// Debug information
-		if ($GLOBALS['TL_CONFIG']['debugMode'] && !isset($_GET['popup']))
+		if (\Config::get('debugMode') && !isset($_GET['popup']))
 		{
 			$intReturned = 0;
 			$intAffected = 0;
@@ -389,7 +389,7 @@ abstract class Template extends \Controller
 	public function minifyHtml($strHtml)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'] || $GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('minifyMarkup') || \Config::get('debugMode'))
 		{
 			return $strHtml;
 		}

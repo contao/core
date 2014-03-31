@@ -306,15 +306,15 @@ class BackendUser extends \User
 			// Set default values
 			if (!$row['chmod'])
 			{
-				$row['chmod'] = $GLOBALS['TL_CONFIG']['defaultChmod'];
+				$row['chmod'] = \Config::get('defaultChmod');
 			}
 			if (!$row['cuser'])
 			{
-				$row['cuser'] = intval($GLOBALS['TL_CONFIG']['defaultUser']);
+				$row['cuser'] = intval(\Config::get('defaultUser'));
 			}
 			if (!$row['cgroup'])
 			{
-				$row['cgroup'] = intval($GLOBALS['TL_CONFIG']['defaultGroup']);
+				$row['cgroup'] = intval(\Config::get('defaultGroup'));
 			}
 		}
 
@@ -373,11 +373,11 @@ class BackendUser extends \User
 		$GLOBALS['TL_USERNAME'] = $this->username;
 		$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 
-		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
-		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
-		$GLOBALS['TL_CONFIG']['useCE'] = $this->useCE;
-		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
-		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
+		\Config::set('showHelp', $this->showHelp);
+		\Config::set('useRTE', $this->useRTE);
+		\Config::set('useCE', $this->useCE);
+		\Config::set('thumbnails', $this->thumbnails);
+		\Config::set('backendTheme', $this->backendTheme);
 
 		// Inherit permissions
 		$always = array('alexf');

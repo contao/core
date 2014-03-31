@@ -86,7 +86,7 @@ class ModuleLoader
 		$strCacheFile = 'system/cache/config/modules.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}
@@ -98,7 +98,7 @@ class ModuleLoader
 			static::$disabled = array();
 
 			// Ignore non-core modules if the system runs in safe mode
-			if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+			if (\Config::get('coreOnlyMode'))
 			{
 				$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
 			}

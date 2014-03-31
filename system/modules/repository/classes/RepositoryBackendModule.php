@@ -83,11 +83,11 @@ class RepositoryBackendModule extends BackendModule
 
 		// load other helpers
 		$this->tl_root = str_replace("\\",'/',TL_ROOT).'/';
-		$this->tl_files = str_replace("\\",'/',$GLOBALS['TL_CONFIG']['uploadPath']).'/';
+		$this->tl_files = str_replace("\\",'/',Config::get('uploadPath')).'/';
 		System::loadLanguageFile('tl_repository');
 		System::loadLanguageFile('languages');
 		$this->Template->rep = $this->rep;
-		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
+		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim(Config::get('repository_languages')),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));
 
 		// complete rep initialization
@@ -101,7 +101,7 @@ class RepositoryBackendModule extends BackendModule
 
 		// load soap client in case wsdl file is defined (see #6561)
 		if (extension_loaded('soap')) {
-			$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
+			$wsdl = trim(Config::get('repository_wsdl'));
 			if ($wsdl != '') {
 				try {
 					if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
@@ -112,8 +112,8 @@ class RepositoryBackendModule extends BackendModule
 						define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_GZIP);
 					}
 					// HOOK: proxy module
-					if ($GLOBALS['TL_CONFIG']['useProxy']) {
-						$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
+					if (Config::get('useProxy')) {
+						$proxy_uri = parse_url(Config::get('proxy_url'));
 						$this->client = new SoapClient($wsdl, array(
 							'soap_version' => SOAP_1_2,
 							'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1,

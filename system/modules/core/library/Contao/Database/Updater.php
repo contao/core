@@ -137,7 +137,7 @@ class Updater extends \Controller
 
 		// Create a theme from the present resources
 		$this->Database->prepare("INSERT INTO tl_theme SET tstamp=?, name=?")
-					   ->execute(time(), $GLOBALS['TL_CONFIG']['websiteTitle']);
+					   ->execute(time(), \Config::get('websiteTitle'));
 
 		// Adjust the back end user permissions
 		$this->Database->query("ALTER TABLE `tl_user` ADD `themes` blob NULL");
@@ -560,7 +560,7 @@ class Updater extends \Controller
 	{
 		if ($strPath === null)
 		{
-			$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
+			$strPath = \Config::get('uploadPath');
 		}
 
 		$arrMeta = array();
@@ -910,13 +910,13 @@ class Updater extends \Controller
 		if (!is_array($value))
 		{
 			$return->value = rtrim($value, "\x00");
-			$return->isUuid = (strlen($value) == 16 && !is_numeric($return->value) && strncmp($return->value, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isUuid = (strlen($value) == 16 && !is_numeric($return->value) && strncmp($return->value, \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) !== 0);
 			$return->isNumeric = (is_numeric($return->value) && $return->value > 0);
 		}
 		else
 		{
 			$return->value = array_map(function($var) { return rtrim($var, "\x00"); }, $value);
-			$return->isUuid = (strlen($value[0]) == 16 && !is_numeric($return->value[0]) && strncmp($return->value[0], $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0);
+			$return->isUuid = (strlen($value[0]) == 16 && !is_numeric($return->value[0]) && strncmp($return->value[0], \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) !== 0);
 			$return->isNumeric = (is_numeric($return->value[0]) && $return->value[0] > 0);
 		}
 

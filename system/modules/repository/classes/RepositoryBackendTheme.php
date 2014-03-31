@@ -30,7 +30,7 @@ class RepositoryBackendTheme
 	 */
 	public static function file($file)
 	{
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+		$theme = Config::get('backendTheme');
 		if (strlen($theme) && $theme!='default') {
 			$f = self::themepath.$theme.'/'.$file;
 			if (is_file(TL_ROOT.'/'.$f)) return $f;
@@ -45,7 +45,7 @@ class RepositoryBackendTheme
 	 */
 	public static function image($file)
 	{
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+		$theme = Config::get('backendTheme');
 		if (strlen($theme) && $theme!='default') {
 			$url = self::themepath.$theme.'/images/';
 			if (is_file(TL_ROOT.'/'.$url.$file.'.png')) return $url.$file.'.png';

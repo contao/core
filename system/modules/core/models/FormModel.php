@@ -50,7 +50,7 @@ class FormModel extends \Model
 		}
 		else
 		{
-			return $GLOBALS['TL_CONFIG']['maxFileSize'];
+			return \Config::get('maxFileSize');
 		}
 	}
 }

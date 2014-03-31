@@ -68,9 +68,9 @@ class ChangePassword extends Backend
 				Message::addError($GLOBALS['TL_LANG']['ERR']['passwordMatch']);
 			}
 			// Password too short
-			elseif (utf8_strlen($pw) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+			elseif (utf8_strlen($pw) < Config::get('minPasswordLength'))
 			{
-				Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']));
+				Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], Config::get('minPasswordLength')));
 			}
 			// Password and username are the same
 			elseif ($pw == $this->User->username)
@@ -124,7 +124,7 @@ class ChangePassword extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['pw_new']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['pw_change'];
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);

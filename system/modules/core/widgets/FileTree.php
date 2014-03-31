@@ -167,7 +167,7 @@ class FileTree extends \Widget
 		if (!empty($this->varValue)) // Can be an array
 		{
 			$objFiles = \FilesModel::findMultipleByUuids((array)$this->varValue);
-			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+			$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 			if ($objFiles !== null)
 			{
@@ -197,7 +197,7 @@ class FileTree extends \Widget
 							{
 								$image = 'placeholder.png';
 
-								if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+								if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 								{
 									$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 								}
@@ -241,7 +241,7 @@ class FileTree extends \Widget
 									{
 										$image = 'placeholder.png';
 
-										if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+										if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 										{
 											$image = \Image::get($objSubfiles->path, 80, 60, 'center_center');
 										}
@@ -271,7 +271,7 @@ class FileTree extends \Widget
 								{
 									$image = 'placeholder.png';
 
-									if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+									if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 									{
 										$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 									}
@@ -320,7 +320,7 @@ class FileTree extends \Widget
 		}
 
 		// Load the fonts for the drag hint (see #4838)
-		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
+		\Config::set('loadGoogleFonts', true);
 
 		// Convert the binary UUIDs
 		$strSet = implode(',', array_map('String::binToUuid', $arrSet));

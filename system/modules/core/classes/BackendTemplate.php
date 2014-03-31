@@ -74,7 +74,7 @@ class BackendTemplate extends \Template
 		}
 
 		// Add the debug style sheet
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if (\Config::get('debugMode'))
 		{
 			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '">' . "\n";
 		}

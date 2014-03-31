@@ -86,7 +86,7 @@ class Versions extends \Backend
 		}
 
 		// Delete old versions from the database
-		$tstamp = time() - intval($GLOBALS['TL_CONFIG']['versionPeriod']);
+		$tstamp = time() - intval(\Config::get('versionPeriod'));
 		$this->Database->query("DELETE FROM tl_version WHERE tstamp<$tstamp");
 
 		// Get the new record
@@ -250,7 +250,7 @@ class Versions extends \Backend
 				}
 
 				$arrVersions[$objVersions->version] = $objVersions->row();
-				$arrVersions[$objVersions->version]['info'] = $GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersions->version.' ('.\Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp).') '.$objVersions->username;
+				$arrVersions[$objVersions->version]['info'] = $GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersions->version.' ('.\Date::parse(\Config::get('datimFormat'), $objVersions->tstamp).') '.$objVersions->username;
 			}
 
 			// To
@@ -341,18 +341,18 @@ class Versions extends \Backend
 						// Convert date fields
 						if ($arrFields[$k]['eval']['rgxp'] == 'date')
 						{
-							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $to[$k] ?: '');
-							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $from[$k] ?: '');
+							$to[$k] = \Date::parse(\Config::get('dateFormat'), $to[$k] ?: '');
+							$from[$k] = \Date::parse(\Config::get('dateFormat'), $from[$k] ?: '');
 						}
 						elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
 						{
-							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $to[$k] ?: '');
-							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $from[$k] ?: '');
+							$to[$k] = \Date::parse(\Config::get('timeFormat'), $to[$k] ?: '');
+							$from[$k] = \Date::parse(\Config::get('timeFormat'), $from[$k] ?: '');
 						}
 						elseif ($arrFields[$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
 						{
-							$to[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $to[$k] ?: '');
-							$from[$k] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $from[$k] ?: '');
+							$to[$k] = \Date::parse(\Config::get('datimFormat'), $to[$k] ?: '');
+							$from[$k] = \Date::parse(\Config::get('datimFormat'), $from[$k] ?: '');
 						}
 
 						// Convert strings into arrays
@@ -390,10 +390,10 @@ class Versions extends \Backend
 		$objTemplate->base = \Environment::get('base');
 		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
 		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
-		$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$objTemplate->charset = \Config::get('characterSet');
 		$objTemplate->action = ampersand(\Environment::get('request'));
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		\Config::set('debugMode', false);
 		$objTemplate->output();
 
 		exit;
@@ -419,7 +419,7 @@ class Versions extends \Backend
 		while ($objVersion->next())
 		{
 			$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.\Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
+  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.\Date::parse(\Config::get('datimFormat'), $objVersion->tstamp).') '.$objVersion->username.'</option>';
 		}
 
 		return '
@@ -482,7 +482,7 @@ class Versions extends \Backend
 			// Add some parameters
 			$arrRow['from'] = max(($objVersions->version - 1), 1); // see #4828
 			$arrRow['to'] = $objVersions->version;
-			$arrRow['date'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersions->tstamp);
+			$arrRow['date'] = date(\Config::get('datimFormat'), $objVersions->tstamp);
 			$arrRow['description'] = \String::substr($arrRow['description'], 32);
 			$arrRow['fromTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
 

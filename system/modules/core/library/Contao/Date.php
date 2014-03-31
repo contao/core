@@ -514,7 +514,7 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['dateFormat'];
+		return \Config::get('dateFormat');
 	}
 
 
@@ -535,7 +535,7 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['timeFormat'];
+		return \Config::get('timeFormat');
 	}
 
 
@@ -556,7 +556,7 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['datimFormat'];
+		return \Config::get('datimFormat');
 	}
 
 

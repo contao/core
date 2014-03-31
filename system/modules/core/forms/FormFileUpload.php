@@ -153,20 +153,20 @@ class FormFileUpload extends \Widget implements \uploadable
 		if (($arrImageSize = @getimagesize($file['tmp_name'])) != false)
 		{
 			// Image exceeds maximum image width
-			if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
+			if ($arrImageSize[0] > \Config::get('imageWidth'))
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], $GLOBALS['TL_CONFIG']['imageWidth']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.$GLOBALS['TL_CONFIG']['imageWidth'].' pixels', __METHOD__, TL_ERROR);
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], \Config::get('imageWidth')));
+				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.\Config::get('imageWidth').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
 			}
 
 			// Image exceeds maximum image height
-			if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
+			if ($arrImageSize[1] > \Config::get('imageHeight'))
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], $GLOBALS['TL_CONFIG']['imageHeight']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.$GLOBALS['TL_CONFIG']['imageHeight'].' pixels', __METHOD__, TL_ERROR);
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], \Config::get('imageHeight')));
+				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.\Config::get('imageHeight').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
@@ -234,7 +234,7 @@ class FormFileUpload extends \Widget implements \uploadable
 					}
 
 					$this->Files->move_uploaded_file($file['tmp_name'], $strUploadFolder . '/' . $file['name']);
-					$this->Files->chmod($strUploadFolder . '/' . $file['name'], $GLOBALS['TL_CONFIG']['defaultFileChmod']);
+					$this->Files->chmod($strUploadFolder . '/' . $file['name'], \Config::get('defaultFileChmod'));
 
 					$_SESSION['FILES'][$this->strName] = array
 					(

@@ -90,7 +90,7 @@ class StyleSheets extends \Backend
 			}
 
 			// Preserve root files (is this still required now that scripts are in assets/css/scripts?)
-			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
+			if (is_array(\Config::get('rootFiles')) && in_array($file, \Config::get('rootFiles')))
 			{
 				continue;
 			}
@@ -204,7 +204,7 @@ class StyleSheets extends \Backend
 		elseif ($row['type'] == 'scss')
 		{
 			$scss = new \scssc();
-			$scss->setImportPaths(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']);
+			$scss->setImportPaths(TL_ROOT . '/' . \Config::get('uploadPath'));
 			$scss->setFormatter('scss_formatter_compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
@@ -226,7 +226,7 @@ class StyleSheets extends \Backend
 		elseif ($row['type'] == 'less')
 		{
 			$less = new \lessc();
-			$less->setImportDir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']);
+			$less->setImportDir(TL_ROOT . '/' . \Config::get('uploadPath'));
 			$less->setFormatter('compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
@@ -1376,7 +1376,7 @@ class StyleSheets extends \Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
   <h3>'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '

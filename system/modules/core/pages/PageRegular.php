@@ -423,7 +423,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Load MooTools core for the debug bar (see #5195)
-		if ($GLOBALS['TL_CONFIG']['debugMode'] && !$objLayout->addMooTools)
+		if (\Config::get('debugMode') && !$objLayout->addMooTools)
 		{
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
 		}
@@ -448,9 +448,9 @@ class PageRegular extends \Frontend
 		// Default settings
 		$this->Template->layout = $objLayout;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = \Config::get('characterSet');
 		$this->Template->base = \Environment::get('base');
-		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
 	}
 
@@ -490,9 +490,9 @@ class PageRegular extends \Frontend
 		}
 
 		// Add the TinyMCE style sheet
-		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . \Config::get('uploadPath') . '/tinymce.css'))
 		{
-			$GLOBALS['TL_FRAMEWORK_CSS'][] = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css';
+			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
 		}
 
 		// User style sheets
@@ -614,7 +614,7 @@ class PageRegular extends \Frontend
 		$strStyleSheets .= '[[TL_CSS]]';
 
 		// Add the debug style sheet
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if (\Config::get('debugMode'))
 		{
 			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
 		}

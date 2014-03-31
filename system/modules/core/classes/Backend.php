@@ -46,12 +46,12 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTheme()
 	{
-		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		if (\Config::get('coreOnlyMode'))
 		{
 			return 'default'; // see #6505
 		}
 
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+		$theme = \Config::get('backendTheme');
 
 		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
 		{
@@ -190,7 +190,7 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTinyTemplates()
 	{
-		$strDir = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tiny_templates';
+		$strDir = \Config::get('uploadPath') . '/tiny_templates';
 
 		if (!is_dir(TL_ROOT . '/' . $strDir))
 		{
@@ -612,7 +612,7 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
@@ -625,14 +625,14 @@ abstract class Backend extends \Controller
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPages->protected || \Config::get('indexProtected')) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}
@@ -811,8 +811,8 @@ abstract class Backend extends \Controller
 		}
 
 		$objUser  = \BackendUser::getInstance();
-		$strPath  = $GLOBALS['TL_CONFIG']['uploadPath'];
-		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
+		$strPath  = \Config::get('uploadPath');
+		$arrNodes = explode('/', preg_replace('/^' . preg_quote(\Config::get('uploadPath'), '/') . '\//', '', $strNode));
 		$arrLinks = array();
 
 		// Add root link
@@ -977,7 +977,7 @@ abstract class Backend extends \Controller
 
 		if ($this->User->isAdmin)
 		{
-			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $strFilter);
+			return $this->doCreateFileList(\Config::get('uploadPath'), -1, $strFilter);
 		}
 
 		$return = '';
