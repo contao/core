@@ -207,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio', 'mandatory'=>true),
 			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
@@ -398,11 +398,11 @@ class tl_faq extends Backend
 	public function listQuestions($arrRow)
 	{
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
-		$date = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['tstamp']);
+		$date = Date::parse(Config::get('datimFormat'), $arrRow['tstamp']);
 
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
+<div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
 '.$arrRow['answer'].'
 </div>' . "\n";
 	}
