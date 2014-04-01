@@ -275,7 +275,8 @@ abstract class Template extends \Controller
 		$strTemplatePath = \Controller::getTemplate($this->strTemplate, $this->strFormat);
 		$strBuffer = '';
 
-		if (\Config::get('debugMode')) {
+		if (\Config::get('debugMode'))
+		{
 			$strBuffer .= "\n" . '<!-- TEMPLATE START: ' . str_replace(TL_ROOT . '/', '', $strTemplatePath) . ' -->' . "\n";
 		}
 
@@ -284,7 +285,8 @@ abstract class Template extends \Controller
 		$strBuffer .= ob_get_contents();
 		ob_end_clean();
 
-		if (\Config::get('debugMode')) {
+		if (\Config::get('debugMode'))
+		{
 			$strBuffer .= "\n" . '<!-- TEMPLATE END: ' . str_replace(TL_ROOT . '/', '', $strTemplatePath) . ' -->' . "\n";
 		}
 
