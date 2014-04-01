@@ -18,13 +18,13 @@
 $GLOBALS['BE_MOD']['system']['repository_catalog'] = array
 (
 	'callback'   => 'RepositoryCatalog',
-	'icon'       => RepositoryBackendTheme::image('catalog16'),
-	'stylesheet' => RepositoryBackendTheme::file('backend.css')
+	'icon'       => 'system/modules/repository/themes/default/images/catalog16.png',
+	'stylesheet' => 'system/modules/repository/themes/default/backend.css'
 );
 
 $GLOBALS['BE_MOD']['system']['repository_manager'] = array
 (
 	'callback'   => 'RepositoryManager',
-	'icon'       => RepositoryBackendTheme::image('install16'),
-	'stylesheet' => RepositoryBackendTheme::file('backend.css')
+	'icon'       => 'system/modules/repository/themes/default/images/install16.png',
+	'stylesheet' => 'system/modules/repository/themes/default/backend.css'
 );

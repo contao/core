@@ -155,12 +155,16 @@ class ClassLoader
 		// Find the class in the registered namespaces
 		elseif (($namespaced = self::findClass($class)) != false)
 		{
-			if (\Config::get('debugMode'))
+			if (!class_exists($namespaced, false))
 			{
-				$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
+				if (\Config::get('debugMode'))
+				{
+					$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
+				}
+
+				include TL_ROOT . '/' . self::$classes[$namespaced];
 			}
 
-			include TL_ROOT . '/' . self::$classes[$namespaced];
 			class_alias($namespaced, $class);
 		}
 
