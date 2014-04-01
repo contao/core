@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
+Display the used template path in the source code when in debug mode.
+
+### New
 Added more static convenience methods to the `Config` class:
 
  - `set()`: temporarily set a configuration value
