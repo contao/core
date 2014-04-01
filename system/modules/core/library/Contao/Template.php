@@ -272,10 +272,23 @@ abstract class Template extends \Controller
 			}
 		}
 
+		$strTemplatePath = \Controller::getTemplate($this->strTemplate, $this->strFormat);
+		$strBuffer = '';
+
+		if (\Config::get('debugMode'))
+		{
+			$strBuffer .= "\n" . '<!-- TEMPLATE START: ' . str_replace(TL_ROOT . '/', '', $strTemplatePath) . ' -->' . "\n";
+		}
+
 		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
-		$strBuffer = ob_get_contents();
+		include $strTemplatePath;
+		$strBuffer .= ob_get_contents();
 		ob_end_clean();
+
+		if (\Config::get('debugMode'))
+		{
+			$strBuffer .= "\n" . '<!-- TEMPLATE END: ' . str_replace(TL_ROOT . '/', '', $strTemplatePath) . ' -->' . "\n";
+		}
 
 		return $strBuffer;
 	}
