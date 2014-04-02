@@ -186,7 +186,7 @@ class StyleSheets extends \Backend
 
 			// Create the file
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+			$objFile->write('/* ' . $row['name'] . ".css */\n");
 
 			$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 											 ->execute($row['id']);
@@ -208,11 +208,11 @@ class StyleSheets extends \Backend
 			$scss->setFormatter('scss_formatter_compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+			$objFile->write('/* ' . $row['name'] . ".css */\n");
 
 			try
 			{
-				$objFile->append($scss->compile($row['code']));
+				$objFile->append($scss->compile($row['code']), '');
 			}
 			catch(\Exception $e)
 			{
@@ -230,11 +230,11 @@ class StyleSheets extends \Backend
 			$less->setFormatter('compressed');
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-			$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+			$objFile->write('/* ' . $row['name'] . ".css */\n");
 
 			try
 			{
-				$objFile->append($less->compile($row['code']));
+				$objFile->append($less->compile($row['code']), '');
 			}
 			catch(\Exception $e)
 			{
