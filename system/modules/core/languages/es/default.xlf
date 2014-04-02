@@ -193,7 +193,7 @@
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>%s&lt;strong&gt;¡Atención!&lt;/strong&gt; Su navegador esta %sobsoleto%s y &lt;strong&gt;no puede utilizar todas las características de este sitio web&lt;/strong&gt;.%s</target>
+        <target>&lt;strong&gt;¡Atención!&lt;/strong&gt; Su navegador esta %sobsoleto%s y &lt;strong&gt;no puede utilizar todas las características de este sitio web&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
