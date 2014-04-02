@@ -40,8 +40,7 @@ select,input,textarea {
 }
 
 /**
- * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
- * otherwise display all columns underneath each other
+ * Holy grail CSS layout
  *
  * @see http://www.alistapart.com/articles/holygrail
  */
@@ -61,46 +60,8 @@ select,input,textarea {
 #footer {
 	clear:both;
 }
-@media (max-width:767px)
-{
-	#wrapper {
-		margin:0;
-		width:auto;
-	}
-	#container {
-		padding-left:0;
-		padding-right:0;
-	}
-	#main,#left,#right {
-		float:none;
-		width:auto;
-	}
-	#left {
-		right:0;
-		margin-left:0;
-	}
-	#right {
-		margin-right:0;
-	}
-}
 #main .inside {
 	min-height:1px; /* see #4893 */
-}
-
-/**
- * Flexible images (videos see #4896)
- *
- * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
- */
-img {
-	max-width:100%;
-	height:auto;
-}
-.ie7 img {
-	-ms-interpolation-mode:bicubic;
-}
-.ie8 img {
-	width:auto; /* see #5789 */
 }
 
 /**

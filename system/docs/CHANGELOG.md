@@ -5,6 +5,10 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
+Split the layout builder CSS code into a static and a responsive style sheet,
+so the responsive behaviour can be disabled (see #6251).
+
+### New
 Added more static convenience methods to the `Config` class:
 
  - `set()`: temporarily set a configuration value

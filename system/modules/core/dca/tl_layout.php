@@ -225,10 +225,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'framework' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['framework'],
-			'default'                 => array('layout.css'),
+			'default'                 => array('layout.css', 'responsive.css'),
 			'exclude'                 => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => array('layout.css', 'grid.css', 'reset.css', 'form.css', 'tinymce.css'),
+			'options'                 => array('layout.css', 'responsive.css', 'grid.css', 'reset.css', 'form.css', 'tinymce.css'),
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'sql'                     => "varchar(255) NOT NULL default ''"

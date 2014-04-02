@@ -269,7 +269,11 @@ class PageRegular extends \Frontend
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
 			$strFramework = '';
-			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
+
+			if (in_array('responsive.css', $arrFramework))
+			{
+				$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
+			}
 
 			// Wrapper
 			if ($objLayout->static)
