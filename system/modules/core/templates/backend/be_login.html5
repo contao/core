@@ -38,7 +38,7 @@
   <![endif]-->
 
   <div id="header">
-    <h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
+    <h1>Contao Open Source CMS</h1>
   </div>
 
   <div id="container">
