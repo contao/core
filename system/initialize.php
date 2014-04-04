@@ -108,9 +108,9 @@ require_once TL_ROOT . '/system/modules/core/vendor/simplepie/autoloader.php';
 
 
 /**
- * Define the relative path to the installation (see #5339)
+ * Define the relative path to the installation if not in install tool (see #5339).
  */
-if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php') && !preg_match('/\/contao\/install\.php$/i', Environment::get('scriptName')))
 {
 	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
 }
