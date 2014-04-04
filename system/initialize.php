@@ -116,7 +116,7 @@ if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 }
 elseif (TL_MODE == 'BE')
 {
-	define('TL_PATH', preg_replace('/\/contao\/[^\/]*$/i', '', Environment::get('requestUri')));
+	define('TL_PATH', preg_replace('/\/contao\/[a-z]+\.php$/i', '', Environment::get('scriptName')));
 }
 else
 {
@@ -203,31 +203,6 @@ else
  */
 @ini_set('date.timezone', $GLOBALS['TL_CONFIG']['timeZone']);
 @date_default_timezone_set($GLOBALS['TL_CONFIG']['timeZone']);
-
-
-/**
- * Store the relative path
- *
- * Only store this value if the temp directory is writable and the local
- * configuration file exists, otherwise it will initialize a Files object and
- * prevent the install tool from loading the Safe Mode Hack (see #3215).
- */
-if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
-{
-	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
-	{
-		try
-		{
-			$objFile = new File('system/config/pathconfig.php', true);
-			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
-			$objFile->close();
-		}
-		catch (Exception $e)
-		{
-			log_message($e->getMessage());
-		}
-	}
-}
 
 
 /**

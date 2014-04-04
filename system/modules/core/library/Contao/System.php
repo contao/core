@@ -459,7 +459,7 @@ abstract class System
 	{
 		if ($strPath == '')
 		{
-			$strPath = $GLOBALS['TL_CONFIG']['websitePath'] ?: '/'; // see #4390
+			$strPath = TL_PATH ?: '/'; // see #4390
 		}
 
 		$objCookie = new \stdClass();
