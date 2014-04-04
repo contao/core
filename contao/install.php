@@ -804,6 +804,15 @@ class InstallTool extends Backend
 			return;
 		}
 
+		if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+		{
+			$strOldPath = include TL_ROOT . '/system/config/pathconfig.php';
+			if ($strOldPath === TL_PATH)
+			{
+				return;
+			}
+		}
+
 		try
 		{
 			File::putContent('system/config/pathconfig.php', '<?php' . "\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
