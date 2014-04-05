@@ -12,6 +12,12 @@
 
 
 /**
+ * Set the script name
+ */
+define('__SCRIPT__', 'index.php');
+
+
+/**
  * Initialize the system
  */
 define('TL_MODE', 'FE');

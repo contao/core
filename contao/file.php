@@ -12,6 +12,12 @@
 
 
 /**
+ * Set the script name
+ */
+define('__SCRIPT__', 'contao/file.php');
+
+
+/**
  * Initialize the system
  */
 define('TL_MODE', 'BE');

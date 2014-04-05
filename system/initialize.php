@@ -36,6 +36,15 @@ define('TL_REFERER_ID', substr(md5(TL_START), 0, 8));
 
 
 /**
+ * Define the __SCRIPT__ constant (backwards compatibility)
+ */
+if (!defined('__SCRIPT__'))
+{
+	define('__SCRIPT__', null);
+}
+
+
+/**
  * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
@@ -110,7 +119,7 @@ require_once TL_ROOT . '/system/modules/core/vendor/simplepie/autoloader.php';
 /**
  * Define the relative path to the installation (see #5339)
  */
-if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php') && __SCRIPT__ != 'contao/install.php')
 {
 	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
 }
@@ -177,7 +186,7 @@ $GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
 /**
  * Show the "incomplete installation" message
  */
-if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
+if (!$objConfig->isComplete() && __SCRIPT__ != 'contao/install.php')
 {
 	die_nicely('be_incomplete', 'The installation has not been completed. Open the Contao install tool to continue.');
 }
