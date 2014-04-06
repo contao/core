@@ -14,7 +14,7 @@
 /**
  * Set the script name
  */
-define('__SCRIPT__', 'index.php');
+define('TL_SCRIPT', 'index.php');
 
 
 /**

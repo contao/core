@@ -14,7 +14,7 @@
 /**
  * Set the script name
  */
-define('__SCRIPT__', 'contao/main.php');
+define('TL_SCRIPT', 'contao/main.php');
 
 
 /**

@@ -14,7 +14,7 @@
 /**
  * Set the script name
  */
-define('__SCRIPT__', 'share/index.php');
+define('TL_SCRIPT', 'share/index.php');
 
 
 /**

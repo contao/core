@@ -14,7 +14,7 @@
 /**
  * Set the script name
  */
-define('__SCRIPT__', 'contao/switch.php');
+define('TL_SCRIPT', 'contao/switch.php');
 
 
 /**

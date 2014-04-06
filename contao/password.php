@@ -14,7 +14,7 @@
 /**
  * Set the script name
  */
-define('__SCRIPT__', 'contao/password.php');
+define('TL_SCRIPT', 'contao/password.php');
 
 
 /**
