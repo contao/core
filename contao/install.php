@@ -822,7 +822,7 @@ class InstallTool extends Backend
 
 		try
 		{
-			File::putContent('system/config/pathconfig.php', '<?php' . "\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
+			File::putContent('system/config/pathconfig.php', '<?php' . "\n\n// Relative path to the installation\nreturn " . var_export(TL_PATH, true) . ";\n");
 		}
 		catch (Exception $e)
 		{
