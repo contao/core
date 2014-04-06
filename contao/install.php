@@ -810,11 +810,14 @@ class InstallTool extends Backend
 			return;
 		}
 
-		$strPath = include TL_ROOT . '/system/config/pathconfig.php';
-
-		if (TL_PATH == $strPath)
+		if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
 		{
-			return;
+			$strPath = include TL_ROOT . '/system/config/pathconfig.php';
+
+			if (TL_PATH == $strPath)
+			{
+				return;
+			}
 		}
 
 		try
