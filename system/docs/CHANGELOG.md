@@ -5,6 +5,9 @@ Version 3.2.9 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed a critical vulnerability of the install tool (see #6855).
+
+### Fixed
 Filter disabled groups in the registration module in the front end (see #6757).
 
 ### Fixed
