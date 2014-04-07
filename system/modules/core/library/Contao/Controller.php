@@ -2039,7 +2039,7 @@ abstract class Controller extends \System
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
 
-		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
+		return TL_SCRIPT . $href . str_replace(' ', '%20', $strRequest); # FIXME
 	}
 
 

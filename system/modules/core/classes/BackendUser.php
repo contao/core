@@ -118,7 +118,7 @@ class BackendUser extends \User
 		{
 			$key = null;
 
-			if (\Environment::get('script') == 'contao/main.php')
+			if (TL_SCRIPT == 'contao/main.php')
 			{
 				$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 			}
@@ -213,7 +213,7 @@ class BackendUser extends \User
 	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
-		if (parent::authenticate() || \Environment::get('script') == 'contao/index.php')
+		if (parent::authenticate() || TL_SCRIPT == 'contao/index.php')
 		{
 			return;
 		}
@@ -221,7 +221,7 @@ class BackendUser extends \User
 		$strRedirect = 'contao/';
 
 		// Redirect to the last page visited upon login
-		if (\Environment::get('script') == 'contao/main.php' || \Environment::get('script') == 'contao/preview.php')
+		if (TL_SCRIPT == 'contao/main.php' || TL_SCRIPT == 'contao/preview.php')
 		{
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
 		}
@@ -524,7 +524,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = !empty($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href'] = TL_SCRIPT . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID; # FIXME
 
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)

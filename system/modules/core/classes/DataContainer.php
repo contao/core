@@ -543,7 +543,7 @@ class DataContainer extends \Backend
 			}
 		}
 
-		$strUrl = \Environment::get('script') . '?' . implode('&', $arrKeys);
+		$strUrl = TL_SCRIPT . '?' . implode('&', $arrKeys);
 		return $strUrl . (!empty($arrKeys) ? '&' : '') . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 

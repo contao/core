@@ -239,7 +239,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Store the current referer
-		if (!empty($this->ctable) && !\Input::get('act') && !\Input::get('key') && !\Input::get('token') && \Environment::get('script') == 'contao/main.php' && !\Environment::get('isAjaxRequest'))
+		if (!empty($this->ctable) && !\Input::get('act') && !\Input::get('key') && !\Input::get('token') && TL_SCRIPT == 'contao/main.php' && !\Environment::get('isAjaxRequest'))
 		{
 			$session = $this->Session->get('referer');
 			$session[TL_REFERER_ID][$this->strTable] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
@@ -2061,7 +2061,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if ($this->ptable == '')
 				{
-					$this->redirect(\Environment::get('script') . '?do=' . \Input::get('do'));
+					$this->redirect(TL_SCRIPT . '?do=' . \Input::get('do'));
 				}
 				// TODO: try to abstract this
 				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article'))
@@ -2078,7 +2078,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				\Message::reset();
 				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 
-				$strUrl = \Environment::get('script') . '?do=' . \Input::get('do');
+				$strUrl = TL_SCRIPT . '?do=' . \Input::get('do');
 
 				if (isset($_GET['table']))
 				{
