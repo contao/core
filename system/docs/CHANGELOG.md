@@ -1,6 +1,43 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.9 (2014-04-07)
+--------------------------
+
+### Fixed
+Fixed a critical vulnerability of the install tool (see #6855).
+
+### Fixed
+Filter disabled groups in the registration module in the front end (see #6757).
+
+### Fixed
+Work around a bug in SimplePie with the "skip items" option (see #6107).
+
+### Fixed
+Fix the Swipe "continuous" option if there are exactly two slides (see #6812).
+
+### Fixed
+Apply `addslashes()` to strings in the `Config` class (see #6808).
+
+### Fixed
+Do not empty all fallback fields in sorting mode 4 (see #6498).
+
+### Fixed
+Do not allow template names to be longer than the DB fields (see #6819).
+
+### Fixed
+Correctly set the start time of a multi-day event (see #6802).
+
+### Fixed
+Correctly handle OR queries in the listing module (see #6344).
+
+### Fixed
+Use a monospaced font for the plain text newsletter preview (see #6790).
+
+### Fixed
+Adjust the `vScrollTo()` offset if the paste hint is visible (see #6478).
+
+
 Version 3.2.8 (2014-03-12)
 --------------------------
 

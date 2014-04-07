@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
-        <target>Qual è il problema?</target>
+        <target>Qual'è il problema?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>

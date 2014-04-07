@@ -48,13 +48,13 @@ class ModuleArticle extends \Module
 	 */
 	public function generate($blnNoMarkup=false)
 	{
-		$this->type = 'article';
-		$this->blnNoMarkup = $blnNoMarkup;
-
-		if (!BE_USER_LOGGED_IN && (!$this->published || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && (!$this->published || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
 		{
 			return '';
 		}
+
+		$this->type = 'article';
+		$this->blnNoMarkup = $blnNoMarkup;
 
 		return parent::generate();
 	}

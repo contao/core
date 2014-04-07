@@ -263,7 +263,7 @@ class Newsletter extends \Backend
 ' . $html . '
 </div>' : '') . '
 <div class="preview_text">
-' . nl2br_html5($text) . '
+<pre style="white-space:pre-wrap">' . $text . '</pre>
 </div>
 
 <div class="tl_tbox">

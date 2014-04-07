@@ -12,6 +12,12 @@
 
 
 /**
+ * Set the script name
+ */
+define('TL_SCRIPT', 'contao/popup.php');
+
+
+/**
  * Initialize the system
  */
 define('TL_MODE', 'BE');

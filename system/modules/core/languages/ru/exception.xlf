@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
-        <target>Как я могу устранить проблему?</target>
+        <target>Как можно устранить проблему?</target>
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
-        <target>Для настройки данного уведомления, создайте файл шаблона с именем &lt;em&gt;%s&lt;/em&gt;.</target>
+        <target>Для настройки этого уведомления создайте файл шаблона с именем &lt;em&gt;%s&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
-        <target>Откройте файл &lt;code&gt;system/logs/error.log&lt;/code&gt; и найдите соответствующее сообщение об ошибке (как правило последняя запись). Вы также можете добавить следующую строку в локальный файл конфигурации и перезагрузить эту страницу:</target>
+        <target>Откройте файл &lt;code&gt;system/logs/error.log&lt;/code&gt; и найдите соответствующее сообщение об ошибке (как правило, последняя запись). Или добавьте следующую строку в локальный файл конфигурации и перезагрузите эту страницу:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
-        <target>Однако, имейте в виду, что &lt;strong&gt;все&lt;/strong&gt; смогут увидеть сообщения об ошибках на вашем сайте!</target>
+        <target>Однако, имейте в виду, что &lt;strong&gt;все&lt;/strong&gt; посетители смогут увидеть сообщения об ошибках на вашем сайте!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
-        <target>Это откроет мастер установки Contao, который проведет вас через процесс установки.</target>
+        <target>Откроется мастер установки Contao, который поможет вам провести установку.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
