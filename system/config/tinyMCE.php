@@ -18,7 +18,7 @@
 if ($GLOBALS['TL_CONFIG']['useRTE']):
 
 ?>
-<script>window.tinymce || document.write('<script src="<?php echo TL_ASSETS_URL; ?>assets/tinymce/tinymce.gzip.js">\x3C/script>')</script>
+<script>window.tinymce || document.write('<script src="<?php echo TL_ASSETS_URL; ?>assets/tinymce4/tinymce.gzip.js">\x3C/script>')</script>
 <script>
 tinymce.init({
   skin: "contao",

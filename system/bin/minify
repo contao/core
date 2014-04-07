@@ -15,7 +15,6 @@ usage()
 	echo -e "  Contao"
 	echo -e "  \033[0;36mcontao\033[0m        Minify the Contao assets (assets/contao)"
 	echo -e "  \033[0;36mtheme\033[0m         Minify the default back end theme (system/themes/default)"
-	echo -e "  \033[0;36mtypolinks\033[0m     Minify the TYPOlinks plugin (assets/tinymce/plugins/typolinks)"
 	echo ""
 	echo -e "  jQuery"
 	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (assets/jquery/colorbox)"
@@ -101,22 +100,6 @@ theme()
 		echo "$copyright" > $version/$file
 		$js $version/src/$file >> $version/$file
 		echo "  Created $version/$file"
-	done
-}
-
-##
-# assets/tinymce/plugins/typolinks
-##
-typolinks()
-{
-	version=$folder/assets/tinymce/plugins/typolinks
-	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
-
-	files=('editor_plugin' 'js/typolinks' 'js/typobox')
-	for file in "${files[@]}"; do
-		echo "$copyright" > $version/$file.js
-		$js $version/${file}_src.js >> $version/$file.js
-		echo "  Created $version/$file.js"
 	done
 }
 

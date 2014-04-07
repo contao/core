@@ -100,7 +100,7 @@ abstract class Backend extends \Controller
 		}
 
 		// The translation exists
-		if (file_exists(TL_ROOT . '/assets/tinymce/langs/' . $lang . '.js'))
+		if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $lang . '.js'))
 		{
 			return $lang;
 		}
@@ -108,7 +108,7 @@ abstract class Backend extends \Controller
 		// Fallback to the short tag (e.g. "de" instead of "de_CH")
 		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
 		{
-			if (file_exists(TL_ROOT . '/assets/tinymce/langs/' . $short . '.js'))
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $short . '.js'))
 			{
 				return $short;
 			}
