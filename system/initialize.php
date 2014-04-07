@@ -36,6 +36,15 @@ define('TL_REFERER_ID', substr(md5(TL_START), 0, 8));
 
 
 /**
+ * Define the TL_SCRIPT constant (backwards compatibility)
+ */
+if (!defined('TL_SCRIPT'))
+{
+	define('TL_SCRIPT', null);
+}
+
+
+/**
  * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
@@ -120,13 +129,13 @@ Swift::init(function()
 /**
  * Define the relative path to the installation (see #5339)
  */
-if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php') && TL_SCRIPT != 'contao/install.php')
 {
 	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
 }
 elseif (TL_MODE == 'BE')
 {
-	define('TL_PATH', preg_replace('/\/contao\/[^\/]*$/i', '', Environment::get('requestUri')));
+	define('TL_PATH', preg_replace('/\/contao\/[a-z]+\.php$/i', '', Environment::get('scriptName')));
 }
 else
 {
@@ -187,7 +196,7 @@ $GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
 /**
  * Show the "incomplete installation" message
  */
-if (!$objConfig->isComplete() && Environment::get('script') != 'contao/install.php')
+if (!$objConfig->isComplete() && TL_SCRIPT != 'contao/install.php')
 {
 	die_nicely('be_incomplete', 'The installation has not been completed. Open the Contao install tool to continue.');
 }
@@ -213,31 +222,6 @@ else
  */
 @ini_set('date.timezone', Config::get('timeZone'));
 @date_default_timezone_set(Config::get('timeZone'));
-
-
-/**
- * Store the relative path
- *
- * Only store this value if the temp directory is writable and the local
- * configuration file exists, otherwise it will initialize a Files object and
- * prevent the install tool from loading the Safe Mode Hack (see #3215).
- */
-if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
-{
-	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
-	{
-		try
-		{
-			$objFile = new File('system/config/pathconfig.php', true);
-			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
-			$objFile->close();
-		}
-		catch (Exception $e)
-		{
-			log_message($e->getMessage());
-		}
-	}
-}
 
 
 /**

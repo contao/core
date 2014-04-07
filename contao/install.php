@@ -12,6 +12,12 @@
 
 
 /**
+ * Set the script name
+ */
+define('TL_SCRIPT', 'contao/install.php');
+
+
+/**
  * Initialize the system
  */
 define('TL_MODE', 'BE');
@@ -46,15 +52,6 @@ class InstallTool extends Backend
 
 		Config::set('showHelp', false);
 		Config::set('displayErrors', false);
-
-		// Remove the pathconfig.php file if TL_PATH is wrong (see #5428)
-		if (TL_PATH != preg_replace('/\/contao\/[^\/]*$/i', '', Environment::get('requestUri')))
-		{
-			$objFile = new File('system/config/pathconfig.php');
-			$objFile->delete();
-
-			$this->reload();
-		}
 
 		$this->setStaticUrls();
 
@@ -100,13 +97,6 @@ class InstallTool extends Backend
 			$this->createLocalConfigurationFiles();
 		}
 
-		// Set the website path
-		if (Config::get('websitePath') !== null && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', Environment::get('requestUri')))
-		{
-			Config::remove('websitePath');
-			$this->reload();
-		}
-
 		// Show the license text
 		if (!Config::get('licenseAccepted'))
 		{
@@ -137,6 +127,9 @@ class InstallTool extends Backend
 		{
 			$this->setAuthCookie();
 		}
+
+		// Store the relative path
+		$this->storeRelativePath();
 
 		// Store the install tool password
 		if (Input::post('FORM_SUBMIT') == 'tl_install')
@@ -809,6 +802,37 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
 		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!Config::get('disableIpCheck') ? Environment::get('ip') : '') . session_id());
 		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], null, null, false, true);
+	}
+
+
+	/**
+	 * Store the relative path
+	 */
+	protected function storeRelativePath()
+	{
+		if (TL_PATH === null)
+		{
+			return;
+		}
+
+		if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+		{
+			$strPath = include TL_ROOT . '/system/config/pathconfig.php';
+
+			if (TL_PATH == $strPath)
+			{
+				return;
+			}
+		}
+
+		try
+		{
+			File::putContent('system/config/pathconfig.php', '<?php' . "\n\n// Relative path to the installation\nreturn " . var_export(TL_PATH, true) . ";\n");
+		}
+		catch (Exception $e)
+		{
+			log_message($e->getMessage());
+		}
 	}
 
 

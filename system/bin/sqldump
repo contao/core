@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# Database name
+if [[ $1 != "" ]]; then
+  tpl=$1
+else
+  tpl="music_academy"
+fi
+
 # Clean the database
 mysql <<EOF
-  USE music_academy;
+  USE $tpl;
   TRUNCATE tl_cron;
   TRUNCATE tl_log;
   TRUNCATE tl_session;
@@ -18,4 +25,4 @@ mysqldump \
   --hex-blob \
   --complete-insert \
   --skip-opt \
-  music_academy > templates/music_academy.sql
+  $tpl > templates/$tpl.sql
