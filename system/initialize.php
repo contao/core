@@ -67,20 +67,18 @@ require(TL_ROOT . '/system/interface.php');
  */
 $objEnvironment = Environment::getInstance();
 
-if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+if (file_exists(TL_ROOT . '/system/config/pathconfig.php') && !defined('TL_INSTALL'))
 {
 	define('TL_PATH', include TL_ROOT . '/system/config/pathconfig.php');
 }
 elseif (TL_MODE == 'BE')
 {
-	define('TL_PATH', preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri));
+	define('TL_PATH', preg_replace('/\/contao\/[a-z]+\.php$/i', '', $objEnvironment->scriptName));
 }
 else
 {
 	define('TL_PATH', null); // cannot be reliably determined
 }
-
-$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH; // backwards compatibility
 
 
 /**
@@ -99,6 +97,12 @@ $objToken = RequestToken::getInstance();
 
 
 /**
+ * Set the website path (backwards compatibility)
+ */
+$GLOBALS['TL_CONFIG']['websitePath'] = TL_PATH;
+
+
+/**
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
@@ -110,31 +114,6 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']
  */
 @ini_set('date.timezone', $GLOBALS['TL_CONFIG']['timeZone']);
 @date_default_timezone_set($GLOBALS['TL_CONFIG']['timeZone']);
-
-
-/**
- * Store the relative path
- *
- * Only store this value if the temp directory is writable and the local
- * configuration file exists, otherwise it will initialize a Files object and
- * prevent the install tool from loading the Safe Mode Hack (see #3215).
- */
-if (TL_PATH !== null && !file_exists(TL_ROOT . '/system/config/pathconfig.php'))
-{
-	if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
-	{
-		try
-		{
-			$objFile = new File('system/config/pathconfig.php');
-			$objFile->write("<?php\n\n// Relative path to the installation\nreturn '" . TL_PATH . "';\n");
-			$objFile->close();
-		}
-		catch (Exception $e)
-		{
-			log_message($e->getMessage());
-		}
-	}
-}
 
 
 /**

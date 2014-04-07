@@ -33,6 +33,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
+define('TL_INSTALL', true);
 require_once('../system/initialize.php');
 
 
@@ -67,14 +68,6 @@ class InstallTool extends Backend
 
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
-
-		// Remove the pathconfig.php file if TL_PATH is wrong (see #5428)
-		if (($strPath = preg_replace('/\/contao\/[^\/]*$/i', '', $this->Environment->requestUri)) != TL_PATH)
-		{
-			$objFile = new File('system/config/pathconfig.php');
-			$objFile->delete();
-			$this->reload();
-		}
 
 		// Static URLs
 		$this->setStaticUrl('TL_FILES_URL', $GLOBALS['TL_CONFIG']['staticFiles']);
@@ -215,16 +208,6 @@ class InstallTool extends Backend
 
 
 		/**
-		 * Check the websitePath
-		 */
-		if ($GLOBALS['TL_CONFIG']['websitePath'] !== null && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
-		{
-			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
-			$this->reload();
-		}
-
-
-		/**
 		 * Make the user accept the LGPL license
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_license')
@@ -289,6 +272,12 @@ class InstallTool extends Backend
 		{
 			$this->setAuthCookie();
 		}
+
+
+		/**
+		 * Store the relative path
+		 */
+		$this->storeRelativePath();
 
 
 		/**
@@ -940,6 +929,39 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
 		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
 		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+	}
+
+
+	/**
+	 * Store the relative path
+	 */
+	protected function storeRelativePath()
+	{
+		if (TL_PATH === null)
+		{
+			return;
+		}
+
+		if (file_exists(TL_ROOT . '/system/config/pathconfig.php'))
+		{
+			$strPath = include TL_ROOT . '/system/config/pathconfig.php';
+
+			if (TL_PATH == $strPath)
+			{
+				return;
+			}
+		}
+
+		try
+		{
+			$objFile = new File('system/config/pathconfig.php');
+			$objFile->write("<?php\n\n// Relative path to the installation\nreturn " . var_export(TL_PATH, true) . ";\n");
+			$objFile->close();
+		}
+		catch (Exception $e)
+		{
+			log_message($e->getMessage());
+		}
 	}
 
 

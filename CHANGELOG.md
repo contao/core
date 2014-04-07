@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.17 (2014-04-07)
+----------------------------
+
+### Fixed
+Fixed a critical vulnerability of the install tool (see #6855).
+
+
 Version 2.11.16 (2014-02-13)
 ----------------------------
 
