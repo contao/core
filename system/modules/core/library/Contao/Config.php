@@ -147,7 +147,7 @@ class Config
 			}
 		}
 
-		// // Include the local configuration file again
+		// Include the local configuration file again
 		if (static::$blnHasLcf)
 		{
 			include TL_ROOT . '/system/config/localconfig.php';
