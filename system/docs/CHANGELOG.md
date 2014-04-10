@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
+Add version control for editable files.
+
+### New
 Add a configurable "viewport" field to the page layout (see #6251).
 
 ### New

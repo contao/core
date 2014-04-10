@@ -40,6 +40,12 @@ class Versions extends \Backend
 	 */
 	protected $intPid;
 
+	/**
+	 * File path
+	 * @var string
+	 */
+	protected $strPath;
+
 
 	/**
 	 * Initialize the object
@@ -51,6 +57,17 @@ class Versions extends \Backend
 		parent::__construct();
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
+
+		// Store the path if it is an editable file
+		if ($strTable == 'tl_files')
+		{
+			$objFile = \FilesModel::findByPk($intPid);
+
+			if ($objFile !== null && in_array($objFile->extension, trimsplit(',', \Config::get('editableFiles'))))
+			{
+				$this->strPath = $objFile->path;
+			}
+		}
 	}
 
 
@@ -97,6 +114,11 @@ class Versions extends \Backend
 		if ($objRecord->numRows < 1 || $objRecord->tstamp < 1)
 		{
 			return;
+		}
+
+		if ($this->strPath !== null)
+		{
+			$objRecord->content = file_get_contents(TL_ROOT . '/' . $this->strPath);
 		}
 
 		$intVersion = 1;
@@ -174,6 +196,14 @@ class Versions extends \Backend
 
 			if (is_array($data))
 			{
+				// Restore the content
+				if ($this->strPath !== null)
+				{
+					$objFile = new \File($this->strPath, true);
+					$objFile->write($data['content']);
+					$objFile->close();
+				}
+
 				// Get the currently available fields
 				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
 

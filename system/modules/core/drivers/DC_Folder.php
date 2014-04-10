@@ -1038,6 +1038,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->reload();
 		}
 
+		$objVersions->initialize();
+
 		// Build an array from boxes and rows (do not show excluded fields)
 		$this->strPalette = $this->getPalette();
 		$boxes = trimsplit(';', $this->strPalette);
@@ -1671,6 +1673,34 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
+		// Add the versioning routines
+		if ($this->blnIsDbAssisted)
+		{
+			$objMeta = \FilesModel::findByPath($objFile->value);
+
+			if ($objMeta === null)
+			{
+				$objMeta = \Dbafs::addResource($objFile->value);
+			}
+
+			$objVersions = new \Versions($this->strTable, $objMeta->id);
+
+			// Compare versions
+			if (\Input::get('versions'))
+			{
+				$objVersions->compare();
+			}
+
+			// Restore a version
+			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+			{
+				$objVersions->restore(\Input::post('version'));
+				$this->reload();
+			}
+
+			$objVersions->initialize();
+		}
+
 		$strContent = $objFile->getContent();
 
 		// Process the request
@@ -1686,15 +1716,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				if ($this->blnIsDbAssisted)
 				{
-					$objMeta = \FilesModel::findByPath($objFile->value);
-
-					if ($objMeta === null)
-					{
-						$objMeta = \Dbafs::addResource($objFile->value);
-					}
-
 					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
+
+					$objVersions->create();
 				}
 			}
 
@@ -1722,6 +1747,16 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			ob_end_clean();
 		}
 
+		// Versions overview
+		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		{
+			$version = $objVersions->renderDropdown();
+		}
+		else
+		{
+			$version = '';
+		}
+
 		// Submit buttons
 		$arrButtons = array();
 		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
@@ -1745,7 +1780,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add the form
-		return'
+		return $version . '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>

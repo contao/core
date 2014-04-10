@@ -1717,9 +1717,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->intId = $intID;
 		}
 
+		// Get the current record
+		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+								 ->limit(1)
+								 ->execute($this->intId);
+
+		// Redirect if there is no record with the given ID
+		if ($objRow->numRows < 1)
+		{
+			$this->log('Could not load record "'.$this->strTable.'.id='.$this->intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
+		$this->objActiveRecord = $objRow;
+
 		$return = '';
 		$this->values[] = $this->intId;
 		$this->procedure[] = 'id=?';
+
 		$this->blnCreateNewVersion = false;
 		$objVersions = new \Versions($this->strTable, $this->intId);
 
@@ -1736,19 +1751,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->reload();
 		}
 
-		// Get the current record
-		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
-								 ->limit(1)
-								 ->execute($this->intId);
-
-		// Redirect if there is no record with the given ID
-		if ($objRow->numRows < 1)
-		{
-			$this->log('Could not load record "'.$this->strTable.'.id='.$this->intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
-		$this->objActiveRecord = $objRow;
 		$objVersions->initialize();
 
 		// Build an array from boxes and rows
