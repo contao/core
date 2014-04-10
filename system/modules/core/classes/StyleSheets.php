@@ -208,7 +208,7 @@ class StyleSheets extends \Backend
 
 			if ($objCode->numRows != 1)
 			{
-				throw new \Exception("Could not load the child record of the style sheet ID {$row['id']}");
+				return;
 			}
 
 			if ($row['type'] == 'scss')
