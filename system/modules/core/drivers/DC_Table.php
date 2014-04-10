@@ -1749,7 +1749,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$this->objActiveRecord = $objRow;
-		$objVersions = new \Versions($this->strTable, $this->intId);
 		$objVersions->initialize();
 
 		// Build an array from boxes and rows
