@@ -2,12 +2,6 @@
 <xliff version="1.1">
   <file datatype="php" original="system/modules/core/languages/en/tl_style_sheet.php" source-language="en">
     <body>
-      <trans-unit id="tl_style_sheet.type.0">
-        <source>Style sheet type</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.type.1">
-        <source>Please choose the type of style sheet.</source>
-      </trans-unit>
       <trans-unit id="tl_style_sheet.name.0">
         <source>Name</source>
       </trans-unit>
@@ -50,12 +44,6 @@
       <trans-unit id="tl_style_sheet.vars.1">
         <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.singleSRC.0">
-        <source>Source file</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.singleSRC.1">
-        <source>Please select a style sheet from the files directory.</source>
-      </trans-unit>
       <trans-unit id="tl_style_sheet.source.0">
         <source>Source files</source>
       </trans-unit>
@@ -68,41 +56,17 @@
       <trans-unit id="tl_style_sheet.tstamp.1">
         <source>Date and time of the latest revision</source>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.internal.0">
-        <source>Internal editor</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.internal.1">
-        <source>Generates the style sheet with the internal editor.</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.scss.0">
-        <source>SCSS</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.scss.1">
-        <source>Generates the style sheet by compiling SCSS code.</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.less.0">
-        <source>LESS</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.less.1">
-        <source>Generates the style sheet by compiling LESS code.</source>
-      </trans-unit>
       <trans-unit id="tl_style_sheet.title_legend">
         <source>Name</source>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.config_legend">
-        <source>Configuration</source>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars_legend">
         <source>Global variables</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.code_legend">
-        <source>CSS code</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.source_legend">
-        <source>Source file</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.css_imported">
         <source>Style sheet "%s" has been imported.</source>

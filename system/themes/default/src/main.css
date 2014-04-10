@@ -1377,11 +1377,6 @@ fieldset.collapsed div {
 fieldset.collapsed > legend {
 	background:url("images/palCollapsed.gif") left center no-repeat;
 }
-#tl_style_scss fieldset.tl_tbox {
-	border:0;
-	margin-top:6px;
-	padding-top:0;
-}
 
 /* Maintenance */
 #tl_maintenance_cache th {
