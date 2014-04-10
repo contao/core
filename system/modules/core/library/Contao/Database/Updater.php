@@ -551,6 +551,37 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.3.0 update
+	 */
+	public function run33Update()
+	{
+		$objLayout = $this->Database->query("SELECT id, framework FROM tl_layout WHERE framework!=''");
+
+		while ($objLayout->next())
+		{
+			$strFramework = '';
+			$tmp = deserialize($objLayout->framework);
+
+			if (!empty($tmp) && is_array($tmp))
+			{
+				if (($key = array_search('layout.css', $tmp)) !== false)
+				{
+					array_insert($tmp, $key + 1, 'responsive.css');
+				}
+
+				$strFramework = serialize(array_values(array_unique($tmp)));
+			}
+
+			$this->Database->prepare("UPDATE tl_layout SET framework=? WHERE id=?")
+						   ->execute($strFramework, $objLayout->id);
+		}
+
+		// Add the "viewport" field (triggers the version 3.3 update)
+		$this->Database->query("ALTER TABLE `tl_layout` ADD `viewport` varchar(64) NOT NULL default ''");
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
 	 *
 	 * @param string  $strPath The target folder

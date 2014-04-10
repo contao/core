@@ -1115,6 +1115,28 @@ class InstallTool extends Backend
 			}
 		}
 	}
+
+
+	/**
+	 * Version 3.3.0 update
+	 */
+	protected function update33()
+	{
+		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('viewport', 'tl_layout'))
+		{
+			$this->enableSafeMode();
+
+			if (Input::post('FORM_SUBMIT') == 'tl_33update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run33Update();
+				$this->reload();
+			}
+
+			$this->Template->is33Update = true;
+			$this->outputAndExit();
+		}
+	}
 }
 
 
