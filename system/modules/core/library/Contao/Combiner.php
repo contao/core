@@ -21,8 +21,8 @@ namespace Contao;
  *     $combiner = new Combiner();
  *
  *     $combiner->add('css/style.css');
- *     $combiner->add('css/fonts.css');
- *     $combiner->add('css/print.css');
+ *     $combiner->add('css/fonts.scss');
+ *     $combiner->add('css/print.less');
  *
  *     echo $combiner->getCombinedFile();
  *
@@ -44,6 +44,18 @@ class Combiner extends \System
 	 * @var string
 	 */
 	const JS = '.js';
+
+	/**
+	 * The .scss file extension
+	 * @var string
+	 */
+	const SCSS = '.scss';
+
+	/**
+	 * The .less file extension
+	 * @var string
+	 */
+	const LESS = '.less';
 
 	/**
 	 * Unique file key
@@ -87,17 +99,19 @@ class Combiner extends \System
 		$strType = strrchr($strFile, '.');
 
 		// Check the file type
-		if ($strType != self::CSS && $strType != self::JS)
+		if ($strType != self::CSS && $strType != self::JS && $strType != self::SCSS && $strType != self::LESS)
 		{
 			throw new \Exception("Invalid file $strFile");
 		}
 
+		$strMode = ($strType == self::JS) ? self::JS : self::CSS;
+
 		// Set the operation mode
-		if (!$this->strMode)
+		if ($this->strMode === null)
 		{
-			$this->strMode = $strType;
+			$this->strMode = $strMode;
 		}
-		elseif ($this->strMode != $strType)
+		elseif ($this->strMode != $strMode)
 		{
 			throw new \Exception('You cannot mix different file types. Create another Combiner object instead.');
 		}
@@ -111,21 +125,22 @@ class Combiner extends \System
 		// Check the source file
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			if ($this->strMode == self::JS)
-			{
-				throw new \Exception("File $strFile does not exist");
-			}
-			else
+			// Create the style sheets and retry
+			if ($strType == self::CSS)
 			{
 				$this->import('StyleSheets');
 				$this->StyleSheets->updateStyleSheets();
 
-				// Retry
 				if (!file_exists(TL_ROOT . '/' . $strFile))
 				{
 					throw new \Exception("File $strFile does not exist");
 				}
 			}
+			else
+			{
+				throw new \Exception("File $strFile does not exist");
+			}
+
 		}
 
 		// Default version
@@ -139,7 +154,8 @@ class Combiner extends \System
 		(
 			'name' => $strFile,
 			'version' => $strVersion,
-			'media' => $strMedia
+			'media' => $strMedia,
+			'extension' => $strType
 		);
 
 		$this->arrFiles[$strFile] = $arrFile;
@@ -198,7 +214,24 @@ class Combiner extends \System
 
 			foreach ($this->arrFiles as $arrFile)
 			{
-				$return[] = $arrFile['name'];
+				// Compile SCSS/LESS files into temporary files
+				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
+				{
+					$strPath = 'assets/' . $strTarget . '/' . substr(md5($arrFile['name']), 0, 12) . $this->strMode;
+
+					if (!file_exists(TL_ROOT . '/' . $strPath))
+					{
+						$objFile = new \File($strPath, true);
+						$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
+						$objFile->close();
+					}
+
+					$return[] = $strPath;
+				}
+				else
+				{
+					$return[] = $arrFile['name'];
+				}
 			}
 
 			if ($this->strMode == self::JS)
@@ -235,62 +268,13 @@ class Combiner extends \System
 				}
 			}
 
-			// Handle style sheets
-			if ($this->strMode == self::CSS)
+			if ($arrFile['extension'] == self::CSS)
 			{
-				// Adjust the file paths
-				$strDirname = dirname($arrFile['name']);
-				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
-
-				$strBuffer = '';
-				$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-				// Check the URLs
-				for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
-				{
-					$strBuffer .= $chunks[$i];
-
-					if (!isset($chunks[$i+1]))
-					{
-						break;
-					}
-
-					$strData = $chunks[$i+1];
-
-					// Skip absolute links and embedded images (see #5082)
-					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0 && strncmp($strData, 'assets/css3pie/', 15) !== 0)
-					{
-						// Make the paths relative to the root (see #4161)
-						if (strncmp($strData, '../', 3) !== 0)
-						{
-							$strData = '../../' . $strGlue . $strData;
-						}
-						else
-						{
-							$dir = $strDirname;
-
-							// Remove relative paths
-							while (strncmp($strData, '../', 3) === 0)
-							{
-								$dir = dirname($dir);
-								$strData = substr($strData, 3);
-							}
-
-							$glue = ($dir != '.') ? $dir . '/' : '';
-							$strData = '../../' . $glue . $strData;
-						}
-					}
-
-					$strBuffer .= 'url("' . $strData . '")';
-				}
-
-				$content = $strBuffer;
-
-				// Add the media type if there is no @media command in the code
-				if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
-				{
-					$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
-				}
+				$content = $this->handleCss($content, $arrFile);
+			}
+			elseif ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
+			{
+				$content = $this->handleScssLess($content, $arrFile);
 			}
 
 			$objFile->append($content);
@@ -306,5 +290,100 @@ class Combiner extends \System
 		}
 
 		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
+	}
+
+
+	/**
+	 * Handle CSS files
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function handleCss($content, $arrFile)
+	{
+		// Adjust the file paths
+		$strDirname = dirname($arrFile['name']);
+		$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
+
+		$strBuffer = '';
+		$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		// Check the URLs
+		for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
+		{
+			$strBuffer .= $chunks[$i];
+
+			if (!isset($chunks[$i+1]))
+			{
+				break;
+			}
+
+			$strData = $chunks[$i+1];
+
+			// Skip absolute links and embedded images (see #5082)
+			if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0 && strncmp($strData, 'assets/css3pie/', 15) !== 0)
+			{
+				// Make the paths relative to the root (see #4161)
+				if (strncmp($strData, '../', 3) !== 0)
+				{
+					$strData = '../../' . $strGlue . $strData;
+				}
+				else
+				{
+					$dir = $strDirname;
+
+					// Remove relative paths
+					while (strncmp($strData, '../', 3) === 0)
+					{
+						$dir = dirname($dir);
+						$strData = substr($strData, 3);
+					}
+
+					$glue = ($dir != '.') ? $dir . '/' : '';
+					$strData = '../../' . $glue . $strData;
+				}
+			}
+
+			$strBuffer .= 'url("' . $strData . '")';
+		}
+
+		$content = $strBuffer;
+
+		// Add the media type if there is no @media command in the code
+		if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+		{
+			$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
+		}
+
+		return $content;
+	}
+
+
+	/**
+	 * Handle SCSS/LESS files
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function handleScssLess($content, $arrFile)
+	{
+		if ($arrFile['extension'] == self::SCSS)
+		{
+			$objCompiler = new \scssc();
+			$objCompiler->setImportPaths(TL_ROOT . '/' . \Config::get('uploadPath'));
+			$objCompiler->setFormatter('scss_formatter_compressed');
+		}
+		else
+		{
+			$objCompiler = new \lessc();
+			$objCompiler->setImportDir(TL_ROOT . '/' . \Config::get('uploadPath'));
+			$objCompiler->setFormatter('compressed');
+		}
+
+		return $objCompiler->compile($content);
 	}
 }

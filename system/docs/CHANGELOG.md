@@ -27,11 +27,8 @@ A static `get()` method has been available already.
 Update TinyMCE to version 4.0.20 (see #1495).
 
 ### New
-Added additional style sheet types:
-
- - Internal editor: use the internal editor
- - SCSS: compile the style sheet from SCSS code
- - LESS: compile the style sheet from LESS code
+Handle `.scss` and `.less` files in the `Combiner`. This also allows to add SCSS
+or LESS files as external style sheets to the page layout.
 
 ### New
 Allow to override the default module or content element template (see #4547).

@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_theme',
-		'ctable'                      => array('tl_style', 'tl_style_scss'),
+		'ctable'                      => array('tl_style'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
@@ -83,8 +83,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['edit'],
 				'href'                => 'table=tl_style',
-				'icon'                => 'edit.gif',
-				'button_callback'     => array('tl_style_sheet', 'editStyleSheet')
+				'icon'                => 'edit.gif'
 			),
 			'editheader' => array
 			(
@@ -125,11 +124,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type'),
-		'default'                     => '{title_legend},type,name',
-		'internal'                    => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{vars_legend},vars;{config_legend},embedImages,disablePie',
-		'scss'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery',
-		'less'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery'
+		'default'                     => '{title_legend},name;{media_legend},media,mediaQuery;{vars_legend},vars;{expert_legend:hide},disablePie,embedImages,cc'
 	),
 
 	// Fields
@@ -149,22 +144,6 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'type' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['type'],
-			'default'                 => 'internal',
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'select',
-			'options'                 => array('internal', 'scss', 'less'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_style_sheet'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
-			'load_callback' => array
-			(
-				array('tl_style_sheet', 'fixStyleSheetType')
-			),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['name'],
@@ -172,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
 			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
@@ -180,7 +159,6 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['disablePie'],
 			'inputType'               => 'checkbox',
 			'exclude'                 => true,
-			'eval'                    => array('tl_class'=>'w50 m12'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'embedImages' => array
@@ -356,26 +334,6 @@ class tl_style_sheet extends Backend
 
 
 	/**
-	 * Fix the style sheet type (backwards compatibility)
-	 * @param mixed
-	 * @param \DataContainer
-	 * @return mixed
-	 */
-	public function fixStyleSheetType($varValue, DataContainer $dc)
-	{
-		if ($varValue != '')
-		{
-			return $varValue;
-		}
-
-		$this->Database->prepare("UPDATE tl_style_sheet SET type='internal' WHERE id=?")
-					   ->execute($dc->id);
-
-		$this->reload();
-	}
-
-
-	/**
 	 * Sanitize the conditional comments field
 	 * @param mixed
 	 * @return mixed
@@ -388,31 +346,6 @@ class tl_style_sheet extends Backend
 		}
 
 		return $varValue;
-	}
-
-
-	/**
-	 * Return the edit button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function editStyleSheet($row, $href, $label, $title, $icon, $attributes)
-	{
-		if ($row['type'] == '' || $row['type'] == 'internal')
-		{
-			$url = $this->addToUrl('table=tl_style&amp;id=' . $row['id']);
-		}
-		else
-		{
-			$url = $this->addToUrl('key=scss&amp;id=' . $row['id']);
-		}
-
-		return '<a href="'.$url.'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
