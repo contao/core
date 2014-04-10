@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ptable'                      => 'tl_theme',
-		'ctable'                      => array('tl_style'),
+		'ctable'                      => array('tl_style', 'tl_style_scss'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
@@ -128,9 +128,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'__selector__'                => array('type'),
 		'default'                     => '{title_legend},type,name',
 		'internal'                    => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{vars_legend},vars;{config_legend},embedImages,disablePie',
-		'scss'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{code_legend},code',
-		'less'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{code_legend},code',
-		'external'                    => '{title_legend},type,name,cc;{media_legend},media,mediaQuery;{source_legend},singleSRC'
+		'scss'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery',
+		'less'                        => '{title_legend},type,name,cc;{media_legend},media,mediaQuery'
 	),
 
 	// Fields
@@ -157,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => array('internal', 'scss', 'less', 'external'),
+			'options'                 => array('internal', 'scss', 'less'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style_sheet'],
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
 			'load_callback' => array
@@ -231,27 +230,6 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'keyValueWizard',
 			'exclude'                 => true,
 			'sql'                     => "text NULL"
-		),
-		'code' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['code'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'ace'),
-			'load_callback' => array
-			(
-				array('tl_style_sheet', 'setRteSyntax')
-			),
-			'sql'                     => "mediumtext NULL"
-		),
-		'singleSRC' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['singleSRC'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr', 'extensions'=>'css'),
-			'sql'                     => "binary(16) NULL"
 		)
 	)
 );
@@ -414,27 +392,6 @@ class tl_style_sheet extends Backend
 
 
 	/**
-	 * Dynamically set the ace syntax
-	 * @param mixed
-	 * @param \DataContainer
-	 * @return string
-	 */
-	public function setRteSyntax($varValue, DataContainer $dc)
-	{
-		if ($dc->activeRecord->type == 'scss')
-		{
-			$GLOBALS['TL_DCA']['tl_style_sheet']['fields']['code']['eval']['rte'] = 'ace|scss';
-		}
-		elseif ($dc->activeRecord->type == 'less')
-		{
-			$GLOBALS['TL_DCA']['tl_style_sheet']['fields']['code']['eval']['rte'] = 'ace|less';
-		}
-
-		return $varValue;
-	}
-
-
-	/**
 	 * Return the edit button
 	 * @param array
 	 * @param string
@@ -446,7 +403,16 @@ class tl_style_sheet extends Backend
 	 */
 	public function editStyleSheet($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($row['type'] == '' || $row['type'] == 'internal') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		if ($row['type'] == '' || $row['type'] == 'internal')
+		{
+			$url = $this->addToUrl('table=tl_style&amp;id=' . $row['id']);
+		}
+		else
+		{
+			$url = $this->addToUrl('key=scss&amp;id=' . $row['id']);
+		}
+
+		return '<a href="'.$url.'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 

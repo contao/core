@@ -50,12 +50,6 @@
       <trans-unit id="tl_style_sheet.vars.1">
         <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.code.0">
-        <source>SCSS/LESS code</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.code.1">
-        <source>Here you can enter the SCSS/LESS code.</source>
-      </trans-unit>
       <trans-unit id="tl_style_sheet.singleSRC.0">
         <source>Source file</source>
       </trans-unit>
@@ -91,12 +85,6 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.less.1">
         <source>Generates the style sheet by compiling LESS code.</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.external.0">
-        <source>External file</source>
-      </trans-unit>
-      <trans-unit id="tl_style_sheet.external.1">
-        <source>Includes an external style sheet from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.title_legend">
         <source>Name</source>

@@ -200,41 +200,36 @@ class StyleSheets extends \Backend
 			$objFile->close();
 		}
 
-		// SCSS
-		elseif ($row['type'] == 'scss')
+		// SCSS/LESS
+		elseif ($row['type'] == 'scss' || $row['type'] == 'less')
 		{
-			$scss = new \scssc();
-			$scss->setImportPaths(TL_ROOT . '/' . \Config::get('uploadPath'));
-			$scss->setFormatter('scss_formatter_compressed');
+			$objCode = $this->Database->prepare("SELECT * FROM tl_style_scss WHERE pid=?")
+									  ->execute($row['id']);
+
+			if ($objCode->numRows != 1)
+			{
+				throw new \Exception("Could not load the child record of the style sheet ID {$row['id']}");
+			}
+
+			if ($row['type'] == 'scss')
+			{
+				$objCompiler = new \scssc();
+				$objCompiler->setImportPaths(TL_ROOT . '/' . \Config::get('uploadPath'));
+				$objCompiler->setFormatter('scss_formatter_compressed');
+			}
+			else
+			{
+				$objCompiler = new \lessc();
+				$objCompiler->setImportDir(TL_ROOT . '/' . \Config::get('uploadPath'));
+				$objCompiler->setFormatter('compressed');
+			}
 
 			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
 			$objFile->write('/* ' . $row['name'] . ".css */\n");
 
 			try
 			{
-				$objFile->append($scss->compile($row['code']), '');
-			}
-			catch(\Exception $e)
-			{
-				\Message::addError($e->getMessage());
-			}
-
-			$objFile->close();
-		}
-
-		// LESS
-		elseif ($row['type'] == 'less')
-		{
-			$less = new \lessc();
-			$less->setImportDir(TL_ROOT . '/' . \Config::get('uploadPath'));
-			$less->setFormatter('compressed');
-
-			$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-			$objFile->write('/* ' . $row['name'] . ".css */\n");
-
-			try
-			{
-				$objFile->append($less->compile($row['code']), '');
+				$objFile->append($objCompiler->compile($objCode->code), '');
 			}
 			catch(\Exception $e)
 			{
@@ -245,7 +240,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Invalid type
-		elseif ($row['type'] != 'external')
+		else
 		{
 			throw new \Exception('Invalid style sheet type ' . $row['type']);
 		}
@@ -1393,6 +1388,76 @@ class StyleSheets extends \Backend
 
 </div>
 </form>';
+	}
+
+
+	/**
+	 * Edit a SCSS/LESS style sheet
+	 * @param object
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function editScssLess($dc)
+	{
+		if (\Input::get('key') != 'scss')
+		{
+			return '';
+		}
+
+		$this->import('BackendUser', 'User');
+
+		\System::loadLanguageFile('tl_style_scss');
+		\Controller::loadDataContainer('tl_style_scss');
+
+		$objScss = $this->Database->prepare("SELECT * FROM tl_style_scss WHERE pid=?")
+								  ->execute($dc->id);
+
+		// Validate or create the child record
+		if ($objScss->numRows == 1)
+		{
+			$id = $objScss->id;
+		}
+		elseif ($objScss->numRows == 0)
+		{
+			$id = $this->Database->prepare("INSERT INTO tl_style_scss SET pid=?, tstamp=?")
+								 ->execute($dc->id, time())
+								 ->insertId;
+		}
+		else
+		{
+			throw new \Exception("The style sheet ID {$dc->id} has multiple child records");
+		}
+
+		// Activate the excluded fields
+		foreach ($GLOBALS['TL_DCA']['tl_style_scss']['fields'] as $k=>$v)
+		{
+			if ($v['exclude'])
+			{
+				if ($this->User->hasAccess('tl_style_scss::'.$k, 'alexf'))
+				{
+					$GLOBALS['TL_DCA']['tl_style_scss']['fields'][$k]['exclude'] = false;
+				}
+			}
+		}
+
+		$objStyleSheet = $this->Database->prepare("SELECT s.type, s.name, t.name AS title FROM tl_style_sheet s LEFT JOIN tl_theme t ON s.pid=t.id WHERE s.id=?")
+										->execute($dc->id);
+
+		// Set the code editor type
+		if ($objStyleSheet->type == 'scss')
+		{
+			$GLOBALS['TL_DCA']['tl_style_scss']['fields']['code']['eval']['rte'] = 'ace|scss';
+		}
+		elseif ($objStyleSheet->type == 'less')
+		{
+			$GLOBALS['TL_DCA']['tl_style_scss']['fields']['code']['eval']['rte'] = 'ace|less';
+		}
+
+		// Override the main headline
+		$GLOBALS['TL_LANG']['tl_style_sheet']['scss'][1] = $objStyleSheet->title . ' » ' . $GLOBALS['TL_LANG']['MOD']['css'] . ' » ' . $objStyleSheet->name;
+
+		$objDc = new \DC_Table('tl_style_scss');
+		return $objDc->edit($id);
 	}
 
 
