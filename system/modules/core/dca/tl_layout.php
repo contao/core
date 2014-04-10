@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('rows', 'cols', 'addJQuery', 'addMooTools', 'static'),
-		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
+		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,webfonts,viewport,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend},analytics,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -323,6 +323,15 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'viewport' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['viewport'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>64, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cssClass'],
@@ -338,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr'),
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'head' => array

@@ -5,6 +5,9 @@ Version 3.3.beta1 (2014-XX-XX)
 ------------------------------
 
 ### New
+Add a configurable "viewport" field to the page layout (see #6251).
+
+### New
 Split the layout builder CSS code into a static and a responsive style sheet,
 so the responsive behaviour can be disabled (see #6251).
 

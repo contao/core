@@ -355,6 +355,12 @@ class PageRegular extends \Frontend
 			}
 		}
 
+		// Overwrite the viewport tag (see #6251)
+		if ($objLayout->viewport != '')
+		{
+			$this->Template->viewport = '<meta name="viewport" content="' . $objLayout->viewport . '"' . ($blnXhtml ? ' />' : '>') . "\n";
+		}
+
 		$this->Template->mooScripts = '';
 
 		// Make sure TL_JAVASCRIPT exists (see #4890)

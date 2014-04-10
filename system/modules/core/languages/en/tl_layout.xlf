@@ -212,6 +212,12 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
       </trans-unit>
