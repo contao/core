@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>Biztonsági megfontolásból a következő karaktereket nem használhatja itt: =&amp;/()#</target>
+        <target>Biztonsági megfontolásból a következő karaktereket nem használhatja itt: =&lt;&gt;&amp;/()#</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
@@ -63,35 +63,35 @@
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
-        <target>Adjon meg egy érvényes lokalizációt, például &quot;en&quot; vagy &quot;en_US&quot;!</target>
+        <target>Adjon meg egy érvényes lokalizációt, mint &quot;hu&quot; vagy &quot;en_US&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.language">
         <source>Please enter a valid language code such as &quot;en&quot; or &quot;en-US&quot;!</source>
-        <target>Adjon meg egy érvényes nyelv kódot, például &quot;en&quot; vagy &quot;en-US&quot;!</target>
+        <target>Adjon meg egy érvényes nyelv kódot, mint &quot;hu&quot; vagy &quot;en-US&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
-        <target>Bevitelnél csak az alfanumerikus karaktereket és a következő speciális karaktereket használja: .-_</target>
+        <target>Csak alfanumerikus karaktereket és a következő speciális karaktereket használja: .-_</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
-        <target>Bevitelnél csak az alfanumerikus karaktereket és a következő speciális karaktereket használja: .-/_</target>
+        <target>Csak alfanumerikus karaktereket és a következő speciális karaktereket használja: .-/_</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
-        <target>A dátumot a következő formában adja meg: &quot;%s&quot;!</target>
+        <target> Adja meg a dátumot a következő formában: &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.time">
         <source>Please enter the time as &quot;%s&quot;!</source>
-        <target>Az időt a következő formában adja meg: &quot;%s&quot;!</target>
+        <target>Adja meg az időt a következő formában: &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.dateTime">
         <source>Please enter date and time as &quot;%s&quot;!</source>
-        <target>A dátumot és időt a következő formában adja meg: &quot;%s&quot;!</target>
+        <target>Adja meg a dátumot és időt a következő formában: &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidDate">
         <source>Invalid date &quot;%s&quot;!</source>
-        <target>Érvénytelen dátum: &quot;%s&quot;.</target>
+        <target>Érvénytelen dátum: &quot;%s&quot;!</target>
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
@@ -99,15 +99,15 @@
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
-        <target>A feltölhető legnagyobb fájlméret %s KB  (Contao vagy php.ini beállítás)!</target>
+        <target>A feltölthető legnagyobb fájlméret %s (Contao vagy php.ini beállítás)!</target>
       </trans-unit>
       <trans-unit id="ERR.filetype">
         <source>File type &quot;%s&quot; is not allowed to be uploaded!</source>
-        <target>A &quot;%s&quot; típusú fájlok feltöltése nem megendegett!</target>
+        <target>A &quot;%s&quot; típusú fájlok feltöltése nem engedélyezett!</target>
       </trans-unit>
       <trans-unit id="ERR.filepartial">
         <source>File %s was only partially uploaded!</source>
-        <target>A %s nevű fájlt nem sikerült teljesen feltölteni!</target>
+        <target>A %s fájl csak részben lett feltöltve!</target>
       </trans-unit>
       <trans-unit id="ERR.filewidth">
         <source>File %s exceeds the maximum image width of %d pixels!</source>
@@ -119,11 +119,11 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
-        <target>%s hiba történt a következő fájl feltöltésekor: %s!</target>
+        <target>%s hiba történt a fájl feltöltésekor: %s!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
-        <target>Nem lehet áthelyezni: %s -t %s helyre, mert a cél már létezik!</target>
+        <target>%s nem helyezhető át %s helyre, mert a cél már létezik!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidReferer">
         <source>Access denied! The current host address (%s) does not match the referer host address (%s)!</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>A jelszónak legalább %d karaktert kell tartalmaznia!</target>
+        <target>A jelszónak legalább %d karakter hosszúnak kell lenni!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
@@ -143,15 +143,15 @@
       </trans-unit>
       <trans-unit id="ERR.passwordMatch">
         <source>The passwords did not match!</source>
-        <target>A megadott jelszavak nem egyeznek!</target>
+        <target>A jelszavak nem egyeznek!</target>
       </trans-unit>
       <trans-unit id="ERR.accountLocked">
         <source>This account has been locked! You can log in again in %d minutes.</source>
-        <target>Ez a felhasználói fiók le van tiltva! Próbálja meg a bejelentkezést %d perc múlva.</target>
+        <target>Ez a felhasználói fiók zárolva van! Próbálja meg a bejelentkezést %d perc múlva.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
-        <target>Sikertelen bejelentkezés (a felhasználó név és jelszó megkülönbözteti a kis és nagy betűket)!</target>
+        <target>Sikertelen bejelentkezés (a felhasználói név és jelszó megkülönbözteti a kis és nagy betűket)!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
-        <target>Válasszon ki legalább egy fájlt!</target>
+        <target>Legalább egy fájlt ki kell választani!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="ERR.notWriteable">
         <source>The file &quot;%s&quot; is not writeable and can therefore not be updated!</source>
-        <target>A &quot;%s&quot; fájl nem írható, így a változások nem lépnek életbe!</target>
+        <target>A &quot;%s&quot; fájl nem írható, ezért nem lehet frissíteni!</target>
       </trans-unit>
       <trans-unit id="ERR.invalidName">
         <source>This file or folder name is invalid!</source>
@@ -183,11 +183,11 @@
       </trans-unit>
       <trans-unit id="ERR.invalidFile">
         <source>The file or folder &quot;%s&quot; is invalid!</source>
-        <target>A %s fájl vagy mappa érvénytelen!</target>
+        <target>A(z) %s fájl vagy mappa érvénytelen!</target>
       </trans-unit>
       <trans-unit id="ERR.fileExists">
         <source>The file &quot;%s&quot; already exists!</source>
-        <target>A &quot;%s&quot; fájl már létezik!</target>
+        <target>A(z) &quot;%s&quot; fájl már létezik!</target>
       </trans-unit>
       <trans-unit id="ERR.circularReference">
         <source>Invalid redirect target (circular reference)!</source>
@@ -195,43 +195,43 @@
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>&lt;strong&gt;Figyelem!&lt;/strong&gt; Webböngészője %selavult%s és &lt;strong&gt;nem képes a weboldal minden funkcióját kihasználni&lt;/strong&gt;.</target>
+        <target>&lt;strong&gt;Figyelem!&lt;/strong&gt; A böngészöje %selavult%s és &lt;strong&gt;nem tudja a weboldal minden funkcióját használni&lt;/strong&gt;.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
-        <target>A DNS beállítások nélküli kezdőoldalhoz nincs tartalék nyelv beállítva, ez azt jelenti, hogy ez a honlap csak azon az egy nyelven lesz elérhető amit az oldalbeállításoknál megadott. A látogatók és keresőmotorok akik nem beszélik ezt a nyelvet nem tudják böngészni ezt a honlapot.</target>
+        <target>Semelyik határozott DNS beállítások nélküli aktív weboldal gyökér oldalon sincs a tartalék nyelv opció bekapcsolva, ez azt jelenti, hogy ez a weboldal csak azon az egy nyelven lesz elérhető amit az oldalbeállításoknál megadott! A látogatók és keresőmotorok, akik nem beszélik ezt a nyelvet nem tudják böngészni a weboldalát.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackDns">
         <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
-        <target>A %s nevű kezdőoldalhoz nincs tartalék nyelv beállítva, ez azt jelenti, hogy ez a honlap csak azon az egy nyelven lesz elérhető amit az oldalbeállításoknál megadott. A látogatók és keresőmotorok akik nem beszélik ezt a nyelvet nem tudják böngészni ezt a honlapot.</target>
+        <target>Egyik aktív weboldal gyökér oldalhoz,  &lt;strong&gt;%s&lt;/strong&gt;, nincs tartalék nyelv opció beállítva, ez azt jelenti, hogy ez a weboldal csak azon az egy nyelven lesz elérhető amit az oldalbeállításoknál megadott! A látogatók és keresőmotorok, akik nem beszélik ezt a nyelvet nem tudják böngészni a weboldalát.</target>
       </trans-unit>
       <trans-unit id="ERR.multipleFallback">
         <source>You can only define one website root page per domain as language fallback.</source>
-        <target>Csak egy kezdőoldalt adhat meg minden domainhez nyelvenként.</target>
+        <target>Domainenként csak egy weboldal gyökér oldal állítható be tartalék nyelvnek. </target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRoot">
         <source>Top-level pages must be website root pages!</source>
-        <target>A legfelső szint csak egy weblap gyökér lehet!</target>
+        <target>A legfelső szinten csak weboldal gyökér oldal lehet!</target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRegular">
         <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
-        <target>Olyan oldalak vannak a legfelső szinten, amelyek nem weblap gyökerek. A rendszer már nem támogat olyan weboldalakat, amelyek nem tartalmaznak weblap gyökér elemet. Helyezze tehát az oldalait egy weblap gyökér elem alá.</target>
+        <target>Olyan oldalak vannak a legfelső szinten, amelyek nem weblap gyökér oldalak. A rendszer már nem támogatja a weboldal gyökér oldal nélküli weboldal készítését, tehát minden oldalt csoportosítson egy weboldal gyökér oldal alá.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
-        <target>A megnyitni kívánt linket nem lehet ellenőrizni. Ha ön kattintott a linkre vagy megbízható személytől kapta, akkor megerősítheti a folyamat alatt.</target>
+        <target>A megnyitni kívánt linket nem lehet ellenőrizni. Ha ön kattintott a linkre vagy megbízható személytől kapta, akkor erősítse meg a folyamatot lentebb .</target>
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
-        <target>Ez az elem továbbra is a régi Contao 2 SRC formátumú. Kívánja frissíteni az adatbázist?</target>
+        <target>Ez az elem továbbra is a régi Contao 2 SRC formátumot használja. Kívánja frissíteni az adatbázist?</target>
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
-        <target>A rendszer nem tudja elküldeni az űrlapot</target>
+        <target>Az űrlapot nem lehetett elküldeni</target>
       </trans-unit>
       <trans-unit id="ERR.captcha">
         <source>Please answer the security question!</source>
-        <target>Válaszoljon a biztonsági kérdésre!</target>
+        <target>A biztonsági kérdésre válaszolni kell!</target>
       </trans-unit>
       <trans-unit id="ERR.download">
         <source>File &quot;%s&quot; is not available for download!</source>
@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
-        <target>Adja össze a számokat: %d és %d</target>
+        <target>Adja össze: %d és %d</target>
       </trans-unit>
       <trans-unit id="SEC.question2">
         <source>What is the sum of %d and %d?</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="CTE.list.1">
         <source>Generates an ordered or unordered list.</source>
-        <target>Létrehoz egy számozott vagy egy számozatlan listát.</target>
+        <target>Létrehoz egy rendezett vagy rendezetlen listát.</target>
       </trans-unit>
       <trans-unit id="CTE.table.0">
         <source>Table</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="CTE.table.1">
         <source>Generates an optionally sortable table.</source>
-        <target>Létrehoz egy opcionálisan rendezhető táblázatot.</target>
+        <target>Létrehoz egy adott esetben rendezhető táblázatot.</target>
       </trans-unit>
       <trans-unit id="CTE.accordion">
         <source>Accordion</source>
@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStart.1">
         <source>Generates the opening part of the accordion wrapper.</source>
-        <target>Létrehozza a nyitó elemét a harmonika mezőcsoportnak.</target>
+        <target>Létrehozza a nyitó elemét a harmonika csoportnak.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionStop.0">
         <source>Wrapper stop</source>
@@ -323,7 +323,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionStop.1">
         <source>Generates the closing part of the accordion wrapper.</source>
-        <target>Létrehozza a záró elemét a harmonika mezőcsoportnak.</target>
+        <target>Létrehozza a záró elemét a harmonika csoportnak.</target>
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.0">
         <source>Single element</source>
@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="CTE.accordionSingle.1">
         <source>Generates a single accordion element.</source>
-        <target>Létrehoz egy harmonika elemet.</target>
+        <target>Létrehoz egy egyedülálló harmonika elemet.</target>
       </trans-unit>
       <trans-unit id="CTE.code.0">
         <source>Code</source>
@@ -339,13 +339,15 @@
       </trans-unit>
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
-        <target>Kijelöli a kód részleteket és kirakja őket a képernyőre.</target>
+        <target>Kiemeli a kódrészleteket és kiírja azokat a képernyőre.</target>
       </trans-unit>
       <trans-unit id="CTE.markdown.0">
         <source>Markdown</source>
+        <target>Markdown</target>
       </trans-unit>
       <trans-unit id="CTE.markdown.1">
         <source>Generates HTML code from a markdown text.</source>
+        <target>HTML kód generálása a markdown szövegből.</target>
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
@@ -357,7 +359,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStart.1">
         <source>Generates the opening part of the slider wrapper.</source>
-        <target>Létrehozza a nyitó elemét egy tartalom váltó mezőcsoportnak.</target>
+        <target>Létrehozza a nyitó elemét egy tartalom váltó csoportnak.</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStop.0">
         <source>Wrapper stop</source>
@@ -365,7 +367,7 @@
       </trans-unit>
       <trans-unit id="CTE.sliderStop.1">
         <source>Generates the closing part of the slider wrapper.</source>
-        <target>Létrehozza a záró elemét egy tartalom váltó mezőcsoportnak.</target>
+        <target>Létrehozza a záró elemét egy tartalom váltó csoportnak.</target>
       </trans-unit>
       <trans-unit id="CTE.links">
         <source>Link elements</source>
@@ -377,7 +379,7 @@
       </trans-unit>
       <trans-unit id="CTE.hyperlink.1">
         <source>Generates a link to another website.</source>
-        <target>Létrehoz egy hivatkozást egy másik weboldalra.</target>
+        <target>Létrehoz egy linket egy másik weboldalra.</target>
       </trans-unit>
       <trans-unit id="CTE.toplink.0">
         <source>Top link</source>
@@ -385,7 +387,7 @@
       </trans-unit>
       <trans-unit id="CTE.toplink.1">
         <source>Generates a link to jump to the top of the page.</source>
-        <target>Létrehoz egy linket, mely segítségével az oldal tetejére ugorhat.</target>
+        <target>Létrehoz egy linket az oldal tetejére ugráshoz.</target>
       </trans-unit>
       <trans-unit id="CTE.media">
         <source>Media elements</source>
@@ -397,11 +399,11 @@
       </trans-unit>
       <trans-unit id="CTE.image.1">
         <source>Generates a stand-alone image.</source>
-        <target>Ez az elem egy darab képet tartalmaz.</target>
+        <target>Létrehoz egy önálló képet.</target>
       </trans-unit>
       <trans-unit id="CTE.gallery.0">
         <source>Gallery</source>
-        <target>Kép galéria</target>
+        <target>Galéria</target>
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
@@ -413,7 +415,7 @@
       </trans-unit>
       <trans-unit id="CTE.player.1">
         <source>Generates a video or audio player.</source>
-        <target>Videó vagy audio lejátszó készítése.</target>
+        <target>Létrehoz egy videó vagy audio lejátszót.</target>
       </trans-unit>
       <trans-unit id="CTE.youtube.0">
         <source>YouTube</source>
@@ -421,7 +423,7 @@
       </trans-unit>
       <trans-unit id="CTE.youtube.1">
         <source>Adds a YouTube video.</source>
-        <target>YouTube videó hozzáadása.</target>
+        <target>Hozzáad egy YouTube videót.</target>
       </trans-unit>
       <trans-unit id="CTE.files">
         <source>File elements</source>
@@ -433,7 +435,7 @@
       </trans-unit>
       <trans-unit id="CTE.download.1">
         <source>Generates a link to download a file.</source>
-        <target>Létrehoz egy linket állomány letöltéshez.</target>
+        <target>Létrehoz egy linket fájl letöltéshez.</target>
       </trans-unit>
       <trans-unit id="CTE.downloads.0">
         <source>Downloads</source>
@@ -441,7 +443,7 @@
       </trans-unit>
       <trans-unit id="CTE.downloads.1">
         <source>Generates multiple links to download files.</source>
-        <target>Létrehoz több linket állományok letöltéséhez.</target>
+        <target>Létrehoz több linket fájlok letöltéséhez.</target>
       </trans-unit>
       <trans-unit id="CTE.includes">
         <source>Include elements</source>
@@ -453,7 +455,7 @@
       </trans-unit>
       <trans-unit id="CTE.article.1">
         <source>Includes another article.</source>
-        <target>Beszúr egy másik cikket.</target>
+        <target>Beilleszt egy másik cikket.</target>
       </trans-unit>
       <trans-unit id="CTE.alias.0">
         <source>Content element</source>
@@ -461,7 +463,7 @@
       </trans-unit>
       <trans-unit id="CTE.alias.1">
         <source>Includes another content element.</source>
-        <target>Beszúr egy másik tartalmi elemet.</target>
+        <target>Beilleszt egy másik tartalmi elemet.</target>
       </trans-unit>
       <trans-unit id="CTE.form.0">
         <source>Form</source>
@@ -469,7 +471,7 @@
       </trans-unit>
       <trans-unit id="CTE.form.1">
         <source>Includes a form.</source>
-        <target>Beszúr egy űrlapot.</target>
+        <target>Beilleszt egy űrlapot.</target>
       </trans-unit>
       <trans-unit id="CTE.module.0">
         <source>Module</source>
@@ -481,19 +483,19 @@
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
-        <target>Cikk ismertető</target>
+        <target>Cikk előzetes</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.1">
         <source>Displays the teaser text of an article.</source>
-        <target>Beszúrja egy cikk ismertetőjét.</target>
+        <target>Megjeleníti egy cikk előzetes szövegét.</target>
       </trans-unit>
       <trans-unit id="PTY.regular.0">
         <source>Regular page</source>
-        <target>Szokványos oldal</target>
+        <target>Normál oldal</target>
       </trans-unit>
       <trans-unit id="PTY.regular.1">
         <source>A regular page contains articles and content elements. It is the default page type.</source>
-        <target>A szokványos oldal cikkeket és tartalmi elemeket tartalmaz. Ez az alapértelmezett oldal típus.</target>
+        <target>A normál oldal cikkeket és tartalmi elemeket tartalmaz. Ez az alapértelmezett oldal típus.</target>
       </trans-unit>
       <trans-unit id="PTY.redirect.0">
         <source>External redirect</source>
@@ -501,7 +503,7 @@
       </trans-unit>
       <trans-unit id="PTY.redirect.1">
         <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
-        <target>Ez az oldal automatikusan átirányít egy külső URL-re. Úgy működik mint egy hiperlink.</target>
+        <target>Ez az oldal típus automatikusan átirányítja a látogatókat egy külső weboldalra. Úgy működik mint egy hiperhivatkozás.</target>
       </trans-unit>
       <trans-unit id="PTY.forward.0">
         <source>Internal redirect</source>
@@ -509,15 +511,15 @@
       </trans-unit>
       <trans-unit id="PTY.forward.1">
         <source>This type of page automatically forwards visitors to another page within the site structure.</source>
-        <target>Ez az oldal automatikusan továbbküldi a látogatót a honlap egy masik oldalára.</target>
+        <target>Ez az oldal típus automatikusan átirányítja a látogatókat egy másik oldalra az oldalszerkezeten belül.</target>
       </trans-unit>
       <trans-unit id="PTY.root.0">
         <source>Website root</source>
-        <target>Új honlap gyökere</target>
+        <target>Weboldal gyökér</target>
       </trans-unit>
       <trans-unit id="PTY.root.1">
         <source>This type of page marks the starting point of a new website within the site structure.</source>
-        <target>Ez a lap jelzi a kiindulópontját egy új honlapnak az oldal struktúrájában.</target>
+        <target>Ez az oldal típus a kiindulópontja egy új weboldalnak az oldalszerkezetben.</target>
       </trans-unit>
       <trans-unit id="PTY.error_403.0">
         <source>403 Access denied</source>
@@ -533,7 +535,7 @@
       </trans-unit>
       <trans-unit id="PTY.error_404.1">
         <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
-        <target>Ha egy felhasználó egy nem létező oldalt szeretne megtekinteni, a 404-es hiba oldal fog betöltődni helyette.</target>
+        <target>Ha egy felhasználó egy nem létező oldalt kér, a 404-es hiba oldal fog betöltődni helyette.</target>
       </trans-unit>
       <trans-unit id="FOP.fop.0">
         <source>File operation permissions</source>
@@ -541,7 +543,7 @@
       </trans-unit>
       <trans-unit id="FOP.fop.1">
         <source>Here you can select the file operations you want to allow.</source>
-        <target>Itt választhatja ki az engedélyezni kívánt fájl műveleteket.</target>
+        <target>Itt választhatóak ki az engedélyezni kívánt fájl műveletek.</target>
       </trans-unit>
       <trans-unit id="FOP.f1">
         <source>Upload files to the server</source>
@@ -549,19 +551,19 @@
       </trans-unit>
       <trans-unit id="FOP.f2">
         <source>Edit, copy or move files and folders</source>
-        <target>Fájlok és mappák módosítása, másolása vagy mozgatása</target>
+        <target>Fájlok és mappák szerkesztése, másolása vagy mozgatása</target>
       </trans-unit>
       <trans-unit id="FOP.f3">
         <source>Delete single files and empty folders</source>
-        <target>Egyetlen fájl vagy üres mappa törlése</target>
+        <target>Egyes fájlok vagy üres mappák törlése</target>
       </trans-unit>
       <trans-unit id="FOP.f4">
         <source>Delete folders including all files and subfolders (!)</source>
-        <target>Mappa törlése teljes tartalommal és alkönyvtárakkal együtt (!)</target>
+        <target>Mappák törlése a benük lévő fájlokkal és almappákkal együtt (!)</target>
       </trans-unit>
       <trans-unit id="FOP.f5">
         <source>Edit files in the source editor</source>
-        <target>Fájl módosítása a forrásszerkesztőben</target>
+        <target>Fájl szerkesztése a forrás szerkesztőben</target>
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
@@ -569,11 +571,11 @@
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
-        <target>Oldal módosítása</target>
+        <target>Oldal szerkesztése</target>
       </trans-unit>
       <trans-unit id="CHMOD.editnavigation">
         <source>Edit page hierarchy</source>
-        <target>Oldalstruktúra módosítása</target>
+        <target>Oldal hierarchia szerkesztése</target>
       </trans-unit>
       <trans-unit id="CHMOD.deletepage">
         <source>Delete page</source>
@@ -581,11 +583,11 @@
       </trans-unit>
       <trans-unit id="CHMOD.editarticles">
         <source>Edit articles</source>
-        <target>Cikkek módosítása</target>
+        <target>Cikkek szerkesztése</target>
       </trans-unit>
       <trans-unit id="CHMOD.movearticles">
         <source>Edit article hierarchy</source>
-        <target>Cikkstruktúra módosítása</target>
+        <target>Cikk hierarchia szerkesztése</target>
       </trans-unit>
       <trans-unit id="CHMOD.deletearticles">
         <source>Delete articles</source>
@@ -645,7 +647,7 @@
       </trans-unit>
       <trans-unit id="DAYS_SHORT.3">
         <source>Wed</source>
-        <target>Sz</target>
+        <target>Sze</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.4">
         <source>Thu</source>
@@ -773,19 +775,19 @@
       </trans-unit>
       <trans-unit id="MSC.url.0">
         <source>Link target</source>
-        <target>Cél URL</target>
+        <target>Link cél</target>
       </trans-unit>
       <trans-unit id="MSC.url.1">
         <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
-        <target>Adja meg a teljes cél URL-t a hálózati protokoll megjelölésével együtt (pl. &lt;em&gt;http://www.domain.com&lt;/em&gt;). Egy email-címre való hivatkozáshoz a &lt;em&gt;mailto:name@domain.com&lt;/em&gt; formátumot használja. Használhat behelyettesítési címkéket is (pl. &lt;em&gt;link_url&lt;/em&gt;).</target>
+        <target>Adjon megy egy web címet (http://…), egy e-mail címet (mailto:…) vagy egy insert tag-et.</target>
       </trans-unit>
       <trans-unit id="MSC.target.0">
         <source>Open in new window</source>
-        <target>Megnyitás új böngészőablakban</target>
+        <target>Megnyitás új ablakban</target>
       </trans-unit>
       <trans-unit id="MSC.target.1">
         <source>Open the link in a new browser window.</source>
-        <target>Ha kiválasztja ezt az opciót, a cél URL új böngészőablakban nyílik meg.</target>
+        <target>A link új böngészőablakban nyílik meg.</target>
       </trans-unit>
       <trans-unit id="MSC.decimalSeparator">
         <source>.</source>
@@ -801,15 +803,15 @@
       </trans-unit>
       <trans-unit id="MSC.separator.1">
         <source>Please choose a field delimiter.</source>
-        <target>Válassza ki az értékeket elválasztó karaktert!</target>
+        <target>Mező határoló választása.</target>
       </trans-unit>
       <trans-unit id="MSC.source.0">
         <source>Source files</source>
-        <target>Forrás fájl</target>
+        <target>Forrásfájlok</target>
       </trans-unit>
       <trans-unit id="MSC.source.1">
         <source>Please upload the CSV files to be imported.</source>
-        <target>Töltse fel az importálni kívánt CSV fájlokat.</target>
+        <target>Az importálni kívánt CSV fájlok feltöltése.</target>
       </trans-unit>
       <trans-unit id="MSC.comma">
         <source>Comma</source>
@@ -837,15 +839,15 @@
       </trans-unit>
       <trans-unit id="MSC.lw_copy">
         <source>Duplicate the element</source>
-        <target>Elem duplázása</target>
+        <target>Elem másolása</target>
       </trans-unit>
       <trans-unit id="MSC.lw_up">
         <source>Move the element one position up</source>
-        <target>Elem mozgatása eggyel feljebb</target>
+        <target>Elem mozgatása egy pozícióval feljebb</target>
       </trans-unit>
       <trans-unit id="MSC.lw_down">
         <source>Move the element one position down</source>
-        <target>Elem mozgatása eggyel lejjebb</target>
+        <target>Elem mozgatása egy pozícióval lejjebb</target>
       </trans-unit>
       <trans-unit id="MSC.lw_delete">
         <source>Delete the element</source>
@@ -857,7 +859,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_import.1">
         <source>Import table items from a CSV file</source>
-        <target>Tábla elem importálása CSV fájlból</target>
+        <target>Tábla elemek importálása CSV fájlból</target>
       </trans-unit>
       <trans-unit id="MSC.tw_expand">
         <source>Increase the input field size</source>
@@ -869,15 +871,15 @@
       </trans-unit>
       <trans-unit id="MSC.tw_rcopy">
         <source>Duplicate the row</source>
-        <target>Sor kettőzése</target>
+        <target>Sor másolása</target>
       </trans-unit>
       <trans-unit id="MSC.tw_rup">
         <source>Move the row one position up</source>
-        <target>Sor mozgatása eggyel feljebb</target>
+        <target>Sor mozgatása egy pozícióval feljebb</target>
       </trans-unit>
       <trans-unit id="MSC.tw_rdown">
         <source>Move the row one position down</source>
-        <target>Sor mozgatása eggyel lejjebb</target>
+        <target>Sor mozgatása egy pozícióval lejjebb</target>
       </trans-unit>
       <trans-unit id="MSC.tw_rdelete">
         <source>Delete the row</source>
@@ -885,15 +887,15 @@
       </trans-unit>
       <trans-unit id="MSC.tw_ccopy">
         <source>Duplicate the column</source>
-        <target>Oszlop kettőzése</target>
+        <target>Oszlop másolása</target>
       </trans-unit>
       <trans-unit id="MSC.tw_cmovel">
         <source>Move the column one position left</source>
-        <target>Oszlop mozgatása eggyel balra</target>
+        <target>Oszlop mozgatása egy pozícióval balra</target>
       </trans-unit>
       <trans-unit id="MSC.tw_cmover">
         <source>Move the column one position right</source>
-        <target>Oszlop mozgatása eggyel jobbra</target>
+        <target>Oszlop mozgatása egy pozícióval jobbra</target>
       </trans-unit>
       <trans-unit id="MSC.tw_cdelete">
         <source>Delete the column</source>
@@ -901,15 +903,15 @@
       </trans-unit>
       <trans-unit id="MSC.ow_copy">
         <source>Duplicate the row</source>
-        <target>Sor kettőzése</target>
+        <target>Sor másolása</target>
       </trans-unit>
       <trans-unit id="MSC.ow_up">
         <source>Move the row one position up</source>
-        <target>Sor mozgatása eggyel feljebb</target>
+        <target>Sor mozgatása egy pozícióval feljebb</target>
       </trans-unit>
       <trans-unit id="MSC.ow_down">
         <source>Move the row one position down</source>
-        <target>Sor mozgatása eggyel lejjebb</target>
+        <target>Sor mozgatása egy pozícióval lejjebb</target>
       </trans-unit>
       <trans-unit id="MSC.ow_delete">
         <source>Delete the row</source>
@@ -937,15 +939,15 @@
       </trans-unit>
       <trans-unit id="MSC.mw_copy">
         <source>Duplicate the row</source>
-        <target>Sor kettőzése</target>
+        <target>Sor másolása</target>
       </trans-unit>
       <trans-unit id="MSC.mw_up">
         <source>Move the row one position up</source>
-        <target>Sor mozgatása eggyel feljebb</target>
+        <target>Sor mozgatása egy pozícióval feljebb</target>
       </trans-unit>
       <trans-unit id="MSC.mw_down">
         <source>Move the row one position down</source>
-        <target>Sor mozgatása eggyel lejjebb</target>
+        <target>Sor mozgatása egy pozícióval lejjebb</target>
       </trans-unit>
       <trans-unit id="MSC.mw_delete">
         <source>Delete the row</source>
@@ -989,11 +991,11 @@
       </trans-unit>
       <trans-unit id="MSC.proportional.0">
         <source>Proportional</source>
-        <target>Aránytag</target>
+        <target>Arányos</target>
       </trans-unit>
       <trans-unit id="MSC.proportional.1">
         <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
-        <target>A kép hosszabbik oldalát igazítja az adott mérethez és aránylag méretezi a képet.</target>
+        <target>A kép hosszabbik oldala igazodik a beállítással megadott méretekhez és a kép arányosan átméreteződik.</target>
       </trans-unit>
       <trans-unit id="MSC.box.0">
         <source>Fit the box</source>
@@ -1001,87 +1003,87 @@
       </trans-unit>
       <trans-unit id="MSC.box.1">
         <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
-        <target>A kép rövidebb oldalát igazítja az adott mérethez és aránylag méretezi a képet.</target>
+        <target>A kép rövidebbik oldala igazodik a beállítással megadott méretekhez és a kép arányosan átméreteződik.</target>
       </trans-unit>
       <trans-unit id="MSC.crop">
         <source>Exact dimensions</source>
-        <target>Pontos méret</target>
+        <target>Pontos méretek</target>
       </trans-unit>
       <trans-unit id="MSC.left_top.0">
         <source>Left | Top</source>
-        <target>Bal felső</target>
+        <target>Bal | Fent</target>
       </trans-unit>
       <trans-unit id="MSC.left_top.1">
         <source>Preserves the left part of a landscape image and the top part of a portrait image.</source>
-        <target>A fekvő kép bal oldalát vagy az álló kép felső részét tartja meg.</target>
+        <target>Megőrzi a fekvő kép bal oldalát és az álló kép felső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.center_top.0">
         <source>Center | Top</source>
-        <target>Közép felső</target>
+        <target>Közép | Fent</target>
       </trans-unit>
       <trans-unit id="MSC.center_top.1">
         <source>Preserves the center part of a landscape image and the top part of a portrait image.</source>
-        <target>A fekvő kép közepét vagy az álló kép felső részét tartja meg.</target>
+        <target>Megőrzi a fekvő kép közepét és az álló kép felső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.right_top.0">
         <source>Right | Top</source>
-        <target>Jobb felső</target>
+        <target>Jobb | Fent</target>
       </trans-unit>
       <trans-unit id="MSC.right_top.1">
         <source>Preserves the right part of a landscape image and the top part of a portrait image.</source>
-        <target>A fekvő kép jobb oldalát vagy az álló kép felső részét tartja meg.</target>
+        <target>Megőrzi a fekvő kép jobb oldalát és az álló kép felső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.left_center.0">
         <source>Left | Center</source>
-        <target>Bal közép</target>
+        <target>Bal | Közép</target>
       </trans-unit>
       <trans-unit id="MSC.left_center.1">
         <source>Preserves the left part of a landscape image and the center part of a portrait image.</source>
-        <target>A fekvő kép bal oldalát vagy az álló kép közepét tartja meg.</target>
+        <target>Megőrzi a fekvő kép bal oldalát és az álló kép középső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.center_center.0">
         <source>Center | Center</source>
-        <target>Közép közép</target>
+        <target>Közép | Közép</target>
       </trans-unit>
       <trans-unit id="MSC.center_center.1">
         <source>Preserves the center part of a landscape image and the center part of a portrait image.</source>
-        <target>A fekvő vagy álló kép közepét tartja meg.</target>
+        <target>Megőrzi a fekvő kép középső részét és az álló kép középső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.right_center.0">
         <source>Right | Center</source>
-        <target>Jobb közép</target>
+        <target>Jobb | Közép</target>
       </trans-unit>
       <trans-unit id="MSC.right_center.1">
         <source>Preserves the right part of a landscape image and the center part of a portrait image.</source>
-        <target>A fekvő kép jobb oldalát vagy az álló kép közepét tartja meg.</target>
+        <target>Megőrzi a fekvő kép jobb oldalát és az álló kép középső részét.</target>
       </trans-unit>
       <trans-unit id="MSC.left_bottom.0">
         <source>Left | Bottom</source>
-        <target>Bal alsó</target>
+        <target>Bal | Lent</target>
       </trans-unit>
       <trans-unit id="MSC.left_bottom.1">
         <source>Preserves the left part of a landscape image and the bottom part of a portrait image.</source>
-        <target>A fekvő kép bal oldalát vagy az álló kép alját tartja meg.</target>
+        <target>Megőrzi a fekvő kép bal oldalát és az álló kép lenti részét.</target>
       </trans-unit>
       <trans-unit id="MSC.center_bottom.0">
         <source>Center | Bottom</source>
-        <target>Közép alsó</target>
+        <target>Közép | Lent</target>
       </trans-unit>
       <trans-unit id="MSC.center_bottom.1">
         <source>Preserves the center part of a landscape image and the bottom part of a portrait image.</source>
-        <target>A fekvő kép közepét vagy az álló kép alját tartja meg.</target>
+        <target>Megőrzi a fekvő kép középső részét és az álló kép lenti részét.</target>
       </trans-unit>
       <trans-unit id="MSC.right_bottom.0">
         <source>Right | Bottom</source>
-        <target>Jobb alsó</target>
+        <target>Jobb | Alsó</target>
       </trans-unit>
       <trans-unit id="MSC.right_bottom.1">
         <source>Preserves the right part of a landscape image and the bottom part of a portrait image.</source>
-        <target>A fekvő kép jobb oldalát vagy az álló kép alját tartja meg.</target>
+        <target>Megőrzi a fekvő kép jobb oldalát és az álló kép alsó részét.</target>
       </trans-unit>
       <trans-unit id="MSC.id.0">
         <source>ID</source>
-        <target>Azonosító</target>
+        <target>Azonosító (ID)</target>
       </trans-unit>
       <trans-unit id="MSC.id.1">
         <source>Note that changing the ID can break data integrity!</source>
@@ -1089,11 +1091,11 @@
       </trans-unit>
       <trans-unit id="MSC.pid.0">
         <source>Parent ID</source>
-        <target>Szülő azonosító</target>
+        <target>Szülő azonosító (ID)</target>
       </trans-unit>
       <trans-unit id="MSC.pid.1">
         <source>Note that changing the parent ID can break data integrity!</source>
-        <target>Ne feledje, a szülő azonosító módosítása adatvesztéssel járhat!</target>
+        <target>Ne feledje, a szülő azonosító (ID) módosítása adatvesztéssel járhat!</target>
       </trans-unit>
       <trans-unit id="MSC.sorting.0">
         <source>Sorting value</source>
@@ -1101,23 +1103,23 @@
       </trans-unit>
       <trans-unit id="MSC.sorting.1">
         <source>The sorting value is usually assigned automatically.</source>
-        <target>A rendezési értékeket általában automatikusan rendeli hozzá a rendszer.</target>
+        <target>A rendezési érték általában automatikusan kijelölésre kerül.</target>
       </trans-unit>
       <trans-unit id="MSC.all.0">
         <source>Edit multiple</source>
-        <target>Egyszerre módosít</target>
+        <target>Több szerkesztése</target>
       </trans-unit>
       <trans-unit id="MSC.all.1">
         <source>Edit multiple records at once</source>
-        <target>Több bejegyzés egyidejű módosítása</target>
+        <target>Több elem egyidejű szerkesztése</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.0">
         <source>Override multiple</source>
-        <target>Több módosítása</target>
+        <target>Több felülbírálása</target>
       </trans-unit>
       <trans-unit id="MSC.all_override.1">
         <source>Override multiple records at once</source>
-        <target>Több rekord egyidejű módosítása</target>
+        <target>Több elem egyidejű felülbírálása</target>
       </trans-unit>
       <trans-unit id="MSC.all_fields.0">
         <source>Available fields</source>
@@ -2171,7 +2173,7 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
       </trans-unit>
       <trans-unit id="DP.use_mouse_wheel">
         <source>Use the mouse wheel to quickly change value</source>
-        <target>Használja az egér görgőjét az értekek gyors kiválasztásához</target>
+        <target>Használja az egér görgőjét az értekek gyors módosításához</target>
       </trans-unit>
       <trans-unit id="DP.time_confirm_button">
         <source>OK</source>

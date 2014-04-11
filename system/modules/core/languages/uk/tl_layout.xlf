@@ -421,33 +421,27 @@
         <source>jQuery</source>
         <target>jQuery</target>
       </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+      </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
         <target>MooTools</target>
       </trans-unit>
-      <trans-unit id="tl_layout.j_local">
-        <source>jQuery - local file</source>
-        <target>jQuery - локальний файл</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_googleapis">
-        <source>jQuery - googleapis.com</source>
-        <target>jQuery - googleapis.com</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_fallback">
-        <source>jQuery - googleapis.com with local fallback</source>
-        <target>jQuery - googleapis.com з локальною копією</target>
-      </trans-unit>
       <trans-unit id="tl_layout.moo_local">
-        <source>MooTools - local file</source>
-        <target>Використати локальний файл</target>
+        <source>Local file</source>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
-        <source>MooTools - googleapis.com</source>
-        <target>Завантажити із googleapis.com</target>
+        <source>CDN (googleapis.com)</source>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
-        <source>MooTools - googleapis.com with local fallback</source>
-        <target>Завантажити із googleapis.com з можливістю заватаження локально</target>
+        <source>CDN with local fallback</source>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

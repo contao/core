@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.alias.0">
         <source>Event alias</source>
-        <target>Esemény álnév</target>
+        <target>Esemény álneve</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.alias.1">
         <source>The event alias is a unique reference to the event which can be called instead of its numeric ID.</source>
-        <target>Az esemény álneve egy egyedi hivatkozás az eseményre, amit a numerikus azonosítója (ID) helyett lehet használni</target>
+        <target>Egyedi hivatkozás az eseményre, amit a numerikus azonosítója (ID) helyett lehet használni</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.author.1">
         <source>Here you can change the author of the event.</source>
-        <target>Itt ki tudja választani az esemény szerzőjét.</target>
+        <target>Itt választható ki az esemény szerzőjét.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addTime.0">
         <source>Add time</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.startTime.1">
         <source>Please enter the start time according to the global time format.</source>
-        <target>Itt adhatja meg a kezdő időpontot a globális idő formátum szerint.</target>
+        <target>Adja meg a kezdő időpontot a globális idő formátum szerint.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.endTime.0">
         <source>End time</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.startDate.1">
         <source>Please enter the start date according to the global date format.</source>
-        <target>Itt adhatja meg a kezdő dátumot globális dátum formátum szerint.</target>
+        <target>Adja meg a kezdő dátumot globális dátum formátum szerint.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.endDate.0">
         <source>End date</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.1">
         <source>Here you can enter the event location.</source>
-        <target>Itt tudja megadni az esemény helyét.</target>
+        <target>Itt adható meg az esemény helye.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.0">
         <source>Event teaser</source>
@@ -83,11 +83,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.details.0">
         <source>Event text</source>
-        <target>Esemény szöveg</target>
+        <target>Esemény szövege</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.details.1">
         <source>Here you can enter the event text.</source>
-        <target>Itt tudja megadni az esemény szövegét.</target>
+        <target>Itt adható meg az esemény szövege.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addImage.0">
         <source>Add an image</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.addImage.1">
         <source>Add an image to the event.</source>
-        <target>Egy képet adhat az eseményhez.</target>
+        <target>Kép hozzáadása az eseményhez.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.recurring.0">
         <source>Repeat event</source>
@@ -103,15 +103,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.recurring.1">
         <source>Create a recurring event.</source>
-        <target>Ismétlődő eseményt hozhat létre</target>
+        <target>Ismétlődő esemény létrehozása.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEach.0">
         <source>Interval</source>
-        <target>Intervallum</target>
+        <target>Időköz</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEach.1">
         <source>Here you can set the recurrence interval.</source>
-        <target>Itt adhatja meg az ismétlődés intervallumát</target>
+        <target>Itt állítható be az ismétlődés időköze.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.recurrences.0">
         <source>Recurrences</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.1">
         <source>Add one or more downloadable files to the event.</source>
-        <target>Hozzáadhat egy vagy több letölthető fájlt az eseményhez.</target>
+        <target>Egy vagy több letölthető fájl hozzáadása az eseményhez.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.0">
         <source>Enclosures</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.1">
         <source>Please choose the files you want to attach.</source>
-        <target>Válassza ki a csatolni kívánt fájlokat.</target>
+        <target>A csatolni kívánt fájlok kiválasztása.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.source.0">
         <source>Redirect target</source>
@@ -147,11 +147,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.source.1">
         <source>Here you can override the default redirect target.</source>
-        <target>Itt tudja felülírni az alap átirányítási célt.</target>
+        <target>Itt lehet felülírni az alap átirányítási célt.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.default.0">
         <source>Use default</source>
-        <target>Alapértelmezett</target>
+        <target>Alapértelmezett használata</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.default.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the calendar.</source>
@@ -167,15 +167,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.0">
         <source>Article</source>
-        <target>Tartalom</target>
+        <target>Cikk</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.article.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
-        <target>Az &quot;olvasson tovább...&quot; gombra kattintva a látogatók át lesznek irányítva egy tartalmi oldalra.</target>
+        <target>Az &quot;olvasson tovább...&quot; gombra kattintva a látogatók át lesznek irányítva egy cikkhez.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.external.0">
         <source>External URL</source>
-        <target>Külső weboldal</target>
+        <target>Külső URL</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.external.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.0">
         <source>Redirect page</source>
-        <target>Átirányítás</target>
+        <target>Átirányítási oldal</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
@@ -203,7 +203,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.1">
         <source>Here you can enter one or more classes.</source>
-        <target>Itt megadhat egy vagy több osztályt</target>
+        <target>Megadható egy vagy több osztály.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.noComments.0">
         <source>Disable comments</source>
@@ -259,7 +259,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.text_legend">
         <source>Event text</source>
-        <target>Esemény szöveg</target>
+        <target>Esemény szövege</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.image_legend">
         <source>Image settings</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure_legend">
         <source>Enclosures</source>
-        <target>Csatolmány</target>
+        <target>Csatolmányok</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.source_legend">
         <source>Redirect target</source>
@@ -279,11 +279,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.expert_legend">
         <source>Expert settings</source>
-        <target>Speciális beállítások</target>
+        <target>Haladó beállítások</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.publish_legend">
         <source>Publish settings</source>
-        <target>Publikáció beállításai</target>
+        <target>Megjelenítés beállítások</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.days">
         <source>day(s)</source>
@@ -327,11 +327,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.copy.0">
         <source>Duplicate event</source>
-        <target>Esemény duplázása</target>
+        <target>Esemény másolása</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.copy.1">
         <source>Duplicate event ID %s</source>
-        <target>Az ID %s esemény duplázása</target>
+        <target>Az ID %s esemény másolása</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cut.0">
         <source>Move event</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.editmeta.1">
         <source>Edit the event settings</source>
-        <target>Az esemény beállításainak szerkesztése</target>
+        <target>Esemény beállításainak szerkesztése</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.pasteafter.0">
         <source>Paste into this calendar</source>

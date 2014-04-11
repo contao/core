@@ -421,33 +421,33 @@
         <source>jQuery</source>
         <target>جی‌کوئری</target>
       </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>پرونده محلی</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>سی‌دی‌ان (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>سی‌دی‌ان با فال‌بک محلی</target>
+      </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
         <target>موتولز</target>
       </trans-unit>
-      <trans-unit id="tl_layout.j_local">
-        <source>jQuery - local file</source>
-        <target>جی‌کوئری - پرونده محلی</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_googleapis">
-        <source>jQuery - googleapis.com</source>
-        <target>جی‌کوئری - googleapis.com</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_fallback">
-        <source>jQuery - googleapis.com with local fallback</source>
-        <target>جی‌کوئری - googleapis.com با جایگزین محلی</target>
-      </trans-unit>
       <trans-unit id="tl_layout.moo_local">
-        <source>MooTools - local file</source>
-        <target>استفاده از فایل‌های محلی</target>
+        <source>Local file</source>
+        <target>پرونده محلی</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
-        <source>MooTools - googleapis.com</source>
-        <target>بارگذاری از googleapis.com</target>
+        <source>CDN (googleapis.com)</source>
+        <target>سی‌دی‌ان (googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
-        <source>MooTools - googleapis.com with local fallback</source>
-        <target>بارگذاری از googleapis.com با جایگزین محلی</target>
+        <source>CDN with local fallback</source>
+        <target>سی‌دی‌ان با فال‌بک محلی</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

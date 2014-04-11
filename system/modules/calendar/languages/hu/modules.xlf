@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="FMD.eventlist.0">
         <source>Event list</source>
-        <target>Esemény lista</target>
+        <target>Eseménylista</target>
       </trans-unit>
       <trans-unit id="FMD.eventlist.1">
         <source>Adds a list of events to the page</source>
-        <target>Esemény lista hozzáadása az oldalhoz.</target>
+        <target>Eseménylista hozzáadása az oldalhoz</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.0">
         <source>Event reader</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventmenu.0">
         <source>Event list menu</source>
-        <target>Esemény lista menü</target>
+        <target>Eseménylista menü</target>
       </trans-unit>
       <trans-unit id="FMD.eventmenu.1">
         <source>Generates a navigation menu to browse the event list</source>

@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
-        <target>Figyelem, ne feledje, hogy ezt követően &lt;strong&gt;mindenki&lt;/strong&gt; láthatja a hibaüzenetet a weboldalán!</target>
+        <target>Ne feledje, hogy ezt követően &lt;strong&gt;mindenki&lt;/strong&gt; láthatja a hibaüzenetet a weboldalán!</target>
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
@@ -90,7 +90,7 @@
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>Próbáljon a &lt;a href=&quot;%s&quot;&gt; nyitóoldalra menni&lt;/ a&gt; és használja a keresés funkciót (ha van ilyen), hogy megtalálja az oldalt amit keresett. Megteheti, hogy &lt;a href=&quot;%s&quot;&gt;ír a webmesternek&lt;/ a&gt; , és tudatja vele, hogy valami nincs rendben.</target>
+        <target>Próbáljon a &lt;a href=&quot;%s&quot;&gt;nyitóoldalra menni&lt;/a&gt; és használja a keresés funkciót (ha van ilyen), hogy megtalálja az oldalt amit keresett. Megteheti, hogy &lt;a href=&quot;%s&quot;&gt;ír a webmesternek&lt;/ a&gt;, és tudatja vele a problémát.</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
@@ -98,11 +98,11 @@
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
-        <target>Az alkalmazás úgy lett beállítva, hogy továbbítja a kérést egy másik oldalra, de a cél oldal nem létezik, vagy nem tették közzé.</target>
+        <target>Az alkalmazás úgy lett beállítva, hogy továbbítsa a kérést egy másik oldalra, de a cél oldal nem létezik, vagy nem tették közzé.</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
-        <target>Ezt ki kell javítsa a rendszergazda a honlapon. Ha ön látogató, akkor nem tehet semmit, kivéve, hogy &lt;a href=&quot;%s&quot;&gt;ír a webmesternek&lt;/a&gt;, hogy valami nincs rendben.</target>
+        <target>Ezt ki kell javítsa a rendszergazda a honlapon. Ha ön látogató, akkor nem tehet semmit, kivéve, hogy &lt;a href=&quot;%s&quot;&gt;ír a webmesternek&lt;/a&gt; és tudatja vele a problémát.</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
@@ -142,7 +142,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
-        <target>Valószínűleg a honlap még fejlesztés alatt áll, és néhány napon belül elérhető lesz. Ha még mindig úgy gondolja, hogy valami nincs rendben, akkor&lt;a href=&quot;%s&quot;&gt; lépjen kapcsolatba a webmesterrel &lt;/ a&gt; és tudassa vele a problémát.</target>
+        <target>Valószínűleg a honlap még fejlesztés alatt áll, és néhány napon belül elérhető lesz. Ha még mindig úgy gondolja, hogy valami nincs rendben, akkor &lt;a href=&quot;%s&quot;&gt;lépjen kapcsolatba a webmesterrel&lt;/ a&gt; és tudassa vele a problémát.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
