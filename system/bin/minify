@@ -45,7 +45,7 @@ usage()
 contao()
 {
 	# Single file only
-	if [ "$1" != "" ]; then
+	if [[ $1 != "" ]]; then
 		jsgrep="$1"
 		cssgrep="$1"
 	else
@@ -57,14 +57,14 @@ contao()
 	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
-	for file in `ls $version/css | grep "$cssgrep\-uncompressed"`; do
+	for file in $(ls $version/css | grep "$cssgrep\-uncompressed"); do
 		echo "$copyright" > $version/css/${file/-uncompressed/}
 		$css $version/css/$file >> $version/css/${file/-uncompressed/}
 		echo "  Created $version/css/${file/-uncompressed/}"
 	done
 
 	# JavaScript
-	for file in `ls $version/js | grep "$jsgrep\-uncompressed"`; do
+	for file in $(ls $version/js | grep "$jsgrep\-uncompressed"); do
 		echo "$copyright" > $version/js/${file/-uncompressed/}
 		$js $version/js/$file >> $version/js/${file/-uncompressed/}
 		echo "  Created $version/js/${file/-uncompressed/}"
@@ -77,7 +77,7 @@ contao()
 theme()
 {
 	# Single file only
-	if [ "$1" != "" ]; then
+	if [[ $1 != "" ]]; then
 		jsgrep="$1.js"
 		cssgrep="$1.css"
 	else
@@ -89,14 +89,14 @@ theme()
 	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
 
 	# CSS
-	for file in `ls $version/src | grep "$cssgrep"`; do
+	for file in $(ls $version/src | grep "$cssgrep"); do
 		echo "$copyright" > $version/$file
 		$css $version/src/$file >> $version/$file
 		echo "  Created $version/$file"
 	done
 
 	# JS
-	for file in `ls $version/src | grep "$jsgrep"`; do
+	for file in $(ls $version/src | grep "$jsgrep"); do
 		echo "$copyright" > $version/$file
 		$js $version/src/$file >> $version/$file
 		echo "  Created $version/$file"
@@ -108,7 +108,7 @@ theme()
 ##
 colorbox()
 {
-	for version in `ls -d $folder/assets/jquery/colorbox/*`; do
+	for version in $(ls -d $folder/assets/jquery/colorbox/*); do
 		copyright="/* ColorBox v$(basename $version), (c) 2011 Jack Moore - jacklmoore.com, MIT license */"
 
 		# CSS
@@ -128,18 +128,18 @@ colorbox()
 ##
 mediaelement()
 {
-	for version in `ls -d $folder/assets/jquery/mediaelement/*`; do
+	for version in $(ls -d $folder/assets/jquery/mediaelement/*); do
 		copyright="/* MediaElement.js $(basename $version), (c) 2010-2013 John Dyer <http://j.hn>, MIT license */"
 
 		# CSS
-		for file in `ls $version/css | grep -v ".min"`; do
+		for file in $(ls $version/css | grep -v ".min"); do
 			echo "$copyright" > $version/css/${file/.css/.min.css}
 			$css $version/css/$file >> $version/css/${file/.css/.min.css}
 			echo "  Created $version/css/${file/.css/.min.css}"
 		done
 
 		# JavaScript
-		for file in `ls $version/js | grep -v ".min"`; do
+		for file in $(ls $version/js | grep -v ".min"); do
 			echo "$copyright" > $version/js/${file/.js/.min.js}
 			$js $version/js/$file >> $version/js/${file/.js/.min.js}
 			echo "  Created $version/js/${file/.js/.min.js}"
@@ -156,7 +156,7 @@ mediaelement()
 ##
 tablesorter()
 {
-	for version in `ls -d $folder/assets/jquery/tablesorter/*`; do
+	for version in $(ls -d $folder/assets/jquery/tablesorter/*); do
 
   	# CSS
   	copyright="/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */"
@@ -178,11 +178,12 @@ tablesorter()
 mootools()
 {
 	# Minify
-	for version in `ls -d $folder/assets/mootools/core/*`; do
+	for version in $(ls -d $folder/assets/mootools/core/*); do
 		mobile="/* MooTools mobile, (c) Christoph Pojer (@cpojer), MIT-style license */"
 		copyright="/* MooTools $(basename $version), <http://mootools.net>, MIT-style license */"
-		for file in `ls $version | grep "\-uncompressed"`; do
-			if [ $file == "mootools-mobile-uncompressed.js" ]; then
+
+		for file in $(ls $version | grep "\-uncompressed"); do
+			if [[ $file == "mootools-mobile-uncompressed.js" ]]; then
 				echo "$mobile" > $version/${file/-uncompressed/}
 			else
 				echo "$copyright" > $version/${file/-uncompressed/}
@@ -221,7 +222,7 @@ chosen()
 ##
 colorpicker()
 {
-	for version in `ls -d $folder/assets/mootools/colorpicker/*`; do
+	for version in $(ls -d $folder/assets/mootools/colorpicker/*); do
 		copyright="/* MooRainbow $(basename $version) by Djamil Legato (w00fz) and Christopher Beloch, MIT-style license */"
 
 		# CSS
@@ -241,7 +242,7 @@ colorpicker()
 ##
 datepicker()
 {
-	for version in `ls -d $folder/assets/mootools/datepicker/*`; do
+	for version in $(ls -d $folder/assets/mootools/datepicker/*); do
 		copyright="/* DatePicker $(basename $version) by Arian Stolwijk, <http://mootools.net/forge/p/mootools_datepicker>, MIT license */"
 
 		# CSS
@@ -264,11 +265,11 @@ datepicker()
 ##
 mediabox()
 {
-	for version in `ls -d $folder/assets/mootools/mediabox/*`; do
+	for version in $(ls -d $folder/assets/mootools/mediabox/*); do
 		copyright="/* mediaboxAdvanced v$(basename $version), (c) 2007-2010 John Einselen <http://iaian7.com>, MIT-style license */"
 
 		# CSS
-		for file in `ls $version/css | grep "\-uncompressed.css"`; do
+		for file in $(ls $version/css | grep "\-uncompressed.css"); do
 			echo "$copyright" > $version/css/${file/-uncompressed/}
 			$css $version/css/$file >> $version/css/${file/-uncompressed/}
 			echo "  Created $version/css/${file/-uncompressed/}"
@@ -298,7 +299,7 @@ mootao()
 ##
 simplemodal()
 {
-	for version in `ls -d $folder/assets/mootools/simplemodal/*`; do
+	for version in $(ls -d $folder/assets/mootools/simplemodal/*); do
 		copyright="/* Simple Modal $(basename $version), (c) 2011 Marco Dell’Anna <http://www.plasm.it>, MIT-style license */"
 
 		# CSS
@@ -318,7 +319,7 @@ simplemodal()
 ##
 slimbox()
 {
-	for version in `ls -d $folder/assets/mootools/slimbox/*`; do
+	for version in $(ls -d $folder/assets/mootools/slimbox/*); do
 		copyright="/* Slimbox v$(basename $version), (c) 2007-2009 Christophe Beyls <http://www.digitalia.be>, MIT-style license */"
 
 		# CSS
@@ -376,7 +377,7 @@ tablesort()
 ##
 highlighter()
 {
-	for version in `ls -d $folder/assets/highlighter/*`; do
+	for version in $(ls -d $folder/assets/highlighter/*); do
 		xregexp="/* XRegExp 1.5.0, (c) 2007-2010 Steven Levithan, http://xregexp.com */"
 		apacheconf="/* ApacheConf for SyntaxHighlighter, (c) 2010-2011 Sandro Bilbeisi */"
 		copyright="/* SyntaxHighlighter $(basename $version), (c) 2004-2010 Alex Gorbatchev, http://alexgorbatchev.com/SyntaxHighlighter */"
@@ -387,10 +388,10 @@ highlighter()
 		echo "  Created $version/shCore.css"
 
 		# JavaScript
-		for file in `ls $version/src | grep ".js"`; do
-			if [ $file == "XRegExp.js" ]; then
+		for file in $(ls $version/src | grep ".js"); do
+			if [[ $file == "XRegExp.js" ]]; then
 				echo "$xregexp" > $version/$file
-			elif [ $file == "shBrushApacheConf.js" ]; then
+			elif [[ $file == "shBrushApacheConf.js" ]]; then
 				echo "$apacheconf" > $version/$file
 			else
 				echo "$copyright" > $version/$file
@@ -406,7 +407,7 @@ highlighter()
 ##
 swipe()
 {
-	for version in `ls -d $folder/assets/swipe/*`; do
+	for version in $(ls -d $folder/assets/swipe/*); do
 		copyright="/* Swipe $(basename $version), (C) Brad Birdsall 2012, MIT license */"
 
 		# CSS
@@ -424,7 +425,7 @@ swipe()
 ##
 # Dispatch
 ##
-if [ "$1" == "" ]; then
+if [[ $1 == "" ]]; then
 	usage
 else
 
@@ -433,13 +434,13 @@ else
 	folder=${folder/\/system\/bin/}
 
 	# Check whether java is available
-	if [ $(which java) == "" ]; then
+	if [[ $(which java) == "" ]]; then
 		echo -e "  \033[0;31mJava is required to run this script\033[0m"
 		exit 1
 	fi
 
 	# Check whether uglifyjs is available
-	if [ $(which uglifyjs) != "" ]; then
+	if [[ $(which uglifyjs) != "" ]]; then
 		js="uglifyjs -nc --max-line-len 0"
 		echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
 	else
@@ -451,10 +452,10 @@ else
 	css="java -jar $folder/system/bin/yuicompressor-2.4.8.jar --charset UTF-8"
 
 	# Execute all functions
-	if [ "$1" == "all" ]; then
+	if [[ $1 == "all" ]]; then
 		typeset -F | while read line; do
 			func=${line/declare -f/}
-			if [ $func != "usage" ]; then
+			if [[ $func != "usage" ]]; then
 				$func
 			fi
 		done
@@ -463,18 +464,18 @@ else
 	fi
 
 	# Purge the assets/js folder
-	if [ -d "$folder/assets/js" ]; then
-		for i in `ls $folder/assets/js`; do
-			if [ "$i" != "index.html" ]; then
+	if [[ -d "$folder/assets/js" ]]; then
+		for i in $(ls $folder/assets/js); do
+			if [[ $i != "index.html" ]]; then
 				unlink $folder/assets/js/$i
 			fi
 		done
 	fi
 
 	# Purge the assets/css folder
-	if [ -d "$folder/assets/css" ]; then
-		for i in `ls $folder/assets/css`; do
-			if [ "$i" != "index.html" ]; then
+	if [[ -d "$folder/assets/css" ]]; then
+		for i in $(ls $folder/assets/css); do
+			if [[ $i != "index.html" ]]; then
 				unlink $folder/assets/css/$i
 			fi
 		done
