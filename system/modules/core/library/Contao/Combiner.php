@@ -217,7 +217,7 @@ class Combiner extends \System
 				// Compile SCSS/LESS files into temporary files
 				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
 				{
-					$strPath = 'assets/' . $strTarget . '/' . substr(md5($arrFile['name']), 0, 12) . $this->strMode;
+					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
 					if (!file_exists(TL_ROOT . '/' . $strPath))
 					{

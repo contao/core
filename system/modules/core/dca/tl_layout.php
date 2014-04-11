@@ -254,7 +254,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['external'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'orderField'=>'orderExt', 'fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'css'),
+			'eval'                    => array('multiple'=>true, 'orderField'=>'orderExt', 'fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'css,scss,less'),
 			'sql'                     => "blob NULL"
 		),
 		'orderExt' => array
