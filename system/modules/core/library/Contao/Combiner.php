@@ -374,13 +374,13 @@ class Combiner extends \System
 		if ($arrFile['extension'] == self::SCSS)
 		{
 			$objCompiler = new \scssc();
-			$objCompiler->setImportPaths(TL_ROOT . '/' . \Config::get('uploadPath'));
+			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
 			$objCompiler->setFormatter('scss_formatter_compressed');
 		}
 		else
 		{
 			$objCompiler = new \lessc();
-			$objCompiler->setImportDir(TL_ROOT . '/' . \Config::get('uploadPath'));
+			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
 			$objCompiler->setFormatter('compressed');
 		}
 
