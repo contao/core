@@ -1,0 +1,33 @@
+// Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license
+
+$border:     #ccc;
+$background: #ece4d9;
+$info:       #999;
+$error:      #f00;
+$captcha:    #666;
+$colored:    #c6ad8d;
+$black:      #000;
+$white:      #fff;
+$links:      #a84204;
+$headerbg:   #e6e6e6;
+$recurring:  #090;
+$today:      #ffc;
+$header:     #e0e0e0;
+$label:      #bbb;
+$minihead:   #f9f9f9;
+$minilabel:  #c3c3c3;
+$weekend:    #f6f6f6;
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Ubuntu"), url("../fonts/Ubuntu-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Ubuntu-Medium"), url("../fonts/Ubuntu-Medium.woff") format("woff");
+}
