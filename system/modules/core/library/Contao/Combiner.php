@@ -303,7 +303,55 @@ class Combiner extends \System
 	 */
 	protected function handleCss($content, $arrFile)
 	{
-		// Adjust the file paths
+		$content = $this->fixPaths($content, $arrFile);
+
+		// Add the media type if there is no @media command in the code
+		if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+		{
+			$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
+		}
+
+		return $content;
+	}
+
+
+	/**
+	 * Handle SCSS/LESS files
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function handleScssLess($content, $arrFile)
+	{
+		if ($arrFile['extension'] == self::SCSS)
+		{
+			$objCompiler = new \scssc();
+			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
+			$objCompiler->setFormatter('scss_formatter_compressed');
+		}
+		else
+		{
+			$objCompiler = new \lessc();
+			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
+			$objCompiler->setFormatter('compressed');
+		}
+
+		return $this->fixPaths($objCompiler->compile($content), $arrFile);
+	}
+
+
+	/**
+	 * Fix the paths
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function fixPaths($content, $arrFile)
+	{
 		$strDirname = dirname($arrFile['name']);
 		$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 
@@ -349,41 +397,6 @@ class Combiner extends \System
 			$strBuffer .= 'url("' . $strData . '")';
 		}
 
-		$content = $strBuffer;
-
-		// Add the media type if there is no @media command in the code
-		if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
-		{
-			$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
-		}
-
-		return $content;
-	}
-
-
-	/**
-	 * Handle SCSS/LESS files
-	 *
-	 * @param string $content The file content
-	 * @param array  $arrFile The file array
-	 *
-	 * @return string The modified file content
-	 */
-	protected function handleScssLess($content, $arrFile)
-	{
-		if ($arrFile['extension'] == self::SCSS)
-		{
-			$objCompiler = new \scssc();
-			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter('scss_formatter_compressed');
-		}
-		else
-		{
-			$objCompiler = new \lessc();
-			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter('compressed');
-		}
-
-		return $objCompiler->compile($content);
+		return $strBuffer;
 	}
 }
