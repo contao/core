@@ -169,6 +169,14 @@
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
         <target>Generescha in layout CSS adaptiv che sa basa sin la configuraziun dal layout. Questa cumponenta è necessaria per ch'il generatur da layouts funcziuneschia!</target>
       </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Design adaptiv</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Agiunta in meta-tag viewport al chau da la pagina e scalescha il layout da CSS a basa da la ladezza da l'apparat.</target>
+      </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
         <target>Griglia da 12 colonnas</target>
@@ -206,8 +214,8 @@
         <target>Style-sheets supplementars</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Qua pos ti agiuntar style-sheets supplementars dal sistem da datotecas (p. ex. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <source>Here you can add additional style sheets from the file system.</source>
+        <target>Qua pos ti agiuntari ulteriurs stylesheets da tes sistem da datotecas.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -272,6 +280,14 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
         <target>Qua pos ti agiuntar classas persunalisadas al tag &amp;lt;body&amp;gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+        <target>Viewport</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Qua pos ti surscriver il cuntegn da standard dal vievport (p.ex. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -423,12 +439,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>Local file</source>
+        <target>Datoteca Locala</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN cun alternativa locala</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
@@ -436,12 +455,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>Local file</source>
+        <target>Datoteca locala</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN cun alternativa locala</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

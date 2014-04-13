@@ -377,6 +377,14 @@
         <source>Here you can select the gallery template.</source>
         <target>Вы можете выбрать галерею шаблонов.</target>
       </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Пользовательский шаблон элемента</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Вы можете переписать шаблон элемента по умолчанию.</target>
+      </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
         <target>Аудио/видео файлы</target>

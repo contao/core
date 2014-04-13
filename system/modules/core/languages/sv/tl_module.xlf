@@ -81,6 +81,12 @@
         <source>Here you can select the navigation template.</source>
         <target>Välj egen navigeringsmall om sådan finns (navigeringsmallar börjar med &lt;em&gt;nav_&lt;/em&gt;). Standardmallen heter &lt;em&gt;nav_default&lt;/em&gt;.</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>Målsidor</target>
@@ -612,6 +618,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>Mallinställningar</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Bildinställningar</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

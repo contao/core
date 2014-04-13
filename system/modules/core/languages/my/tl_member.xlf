@@ -285,6 +285,13 @@
         <source>Activate/deactivate member ID %s</source>
         <target>အဖွဲ့ဝင်အိုင်ဒီ %s အသက်သွင်း/မသွင်း</target>
       </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>အပြင်ပိုင်းကြိုတင်ကြည့်ရှုခြင်း</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

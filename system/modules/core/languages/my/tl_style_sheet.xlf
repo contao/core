@@ -77,9 +77,9 @@
         <source>Name</source>
         <target>နာမည်</target>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.config_legend">
-        <source>Configuration</source>
-        <target>ပံုစံပြင်ခြင်း</target>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>ကျွမ်းကျင်သူချိန်ညှိချက်</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

@@ -77,9 +77,9 @@
         <source>Name</source>
         <target>Nume şi tip media</target>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.config_legend">
-        <source>Configuration</source>
-        <target>Configuraţie</target>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>Setări de</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

@@ -81,6 +81,14 @@
         <source>Here you can select the navigation template.</source>
         <target>Seleziona un modello per la navigazione. (i modelli di navigazione cominciano con &lt;em&gt;nav_&lt;/em&gt;)</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Template personalizzato</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>In questo punto è possibile sovrascrivere il template di default del template.</target>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>Pagine</target>
@@ -612,6 +620,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>Impostazioni template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Immagine articolo</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

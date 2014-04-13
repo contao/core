@@ -285,6 +285,13 @@
         <source>Activate/deactivate member ID %s</source>
         <target>Az ID %s tag aktiválása/deaktiválása</target>
       </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>Felhasználói felület előnézete</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

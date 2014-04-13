@@ -81,6 +81,14 @@
         <source>Here you can select the navigation template.</source>
         <target>Выберите шаблон навигации.</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Пользовательский шаблон модуля</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>Вы можете переписать шаблон модуля по умолчанию.</target>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>Страницы</target>
@@ -612,6 +620,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>Настройки шаблона</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Настройки изображения</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

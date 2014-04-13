@@ -285,6 +285,14 @@
         <source>Activate/deactivate member ID %s</source>
         <target>ID %sのメンバーの使用の開始と停止を切り替え</target>
       </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>フロントエンドのプレビュー</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+        <target>ID %sのメンバーとしてフロントエンドをプレビュー</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

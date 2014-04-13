@@ -169,6 +169,12 @@
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
         <target>Génère une présentation CSS de type &quot;responsive&quot; basée sur le paramétrage de la présentation de page. Ce composant est indispensable au fonctionnement du générateur de présentation de page.</target>
       </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+      </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
         <target>Grille sur 12 colonnes</target>
@@ -206,8 +212,7 @@
         <target>Feuilles de style additionnelles</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Ajouter des feuilles de style à partir de l'explorateur de fichiers (ex. : &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <source>Here you can add additional style sheets from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -272,6 +277,12 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
         <target>Ajouter des classes personnalisées qui seront insérées dans la balise &lt;em&gt;body&lt;/em&gt;.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>

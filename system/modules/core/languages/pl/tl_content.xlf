@@ -377,6 +377,12 @@
         <source>Here you can select the gallery template.</source>
         <target>Tu możesz wybrać szablon galerii.</target>
       </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+      </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
         <target>Pliki video/audio</target>

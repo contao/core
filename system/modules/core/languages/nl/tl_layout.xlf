@@ -169,6 +169,14 @@
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
         <target>Genereert een responsieve CSS layout gebaseerd op de pagina indeling instellingen. Deze component is vereist om de pagina layout generator te laten werken!</target>
       </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Responsive layout</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Voegt een meta viewport tag toe aan de pagina header en schaalt de CSS-layout op basis van de breedte van het uitvoerapparaat.</target>
+      </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
         <target>12-koloms grid</target>
@@ -206,8 +214,8 @@
         <target>Aanvullende style sheets</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Hier kunt u style sheets van het bestandssysteem toevoegen (b.v.&lt;em&gt; files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <source>Here you can add additional style sheets from the file system.</source>
+        <target>Hier kunt u extra style sheets vanuit het bestandssysteem toevoegen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -272,6 +280,14 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
         <target>Voeg hier hier custom classes toe aan de &amp;lt;body&amp;gt; tag.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+        <target>Viewport</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Hier kunt de Standaard-Viewport-Inhoud overschrijven (b.v. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
