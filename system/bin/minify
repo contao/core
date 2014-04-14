@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ##
 # Usage
@@ -6,36 +6,36 @@
 usage()
 {
 	echo ""
-	echo "  \033[1;33mMinify scripts using YUI compressor or UglifyJS (requires node.js)\033[0m"
-	echo "  Usage: system/bin/minify <command> [<file>]"
+	echo -e "  \033[1;33mMinify scripts using YUI compressor or UglifyJS (requires node.js)\033[0m"
+	echo -e "  Usage: system/bin/minify <command> [<file>]"
 	echo ""
-	echo "  \033[1;33m<command>\033[0m"
-	echo "  \033[0;36mall\033[0m           Execute all the functions"
+	echo -e "  \033[1;33m<command>\033[0m"
+	echo -e "  \033[0;36mall\033[0m           Execute all the functions"
 	echo ""
-	echo "  Contao"
-	echo "  \033[0;36mcontao\033[0m        Minify the Contao assets (assets/contao)"
-	echo "  \033[0;36mtheme\033[0m         Minify the default back end theme (system/themes/default)"
+	echo -e "  Contao"
+	echo -e "  \033[0;36mcontao\033[0m        Minify the Contao assets (assets/contao)"
+	echo -e "  \033[0;36mtheme\033[0m         Minify the default back end theme (system/themes/default)"
 	echo ""
-	echo "  jQuery"
-	echo "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (assets/jquery/colorbox)"
-	echo "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery/mediaelement)"
-	echo "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (assets/jquery/tablesorter)"
+	echo -e "  jQuery"
+	echo -e "  \033[0;36mcolorbox\033[0m      Minify the colorbox plugin (assets/jquery/colorbox)"
+	echo -e "  \033[0;36mmediaelement\033[0m  Minify the mediaelement plugin (assets/jquery/mediaelement)"
+	echo -e "  \033[0;36mtablesorter\033[0m   Minify the tablesorter plugin (assets/jquery/tablesorter)"
 	echo ""
-	echo "  MooTools"
-	echo "  \033[0;36mmootools\033[0m      Minify the MooTools core (assets/mootools/core)"
-	echo "  \033[0;36mchosen\033[0m        Minify the chosen plugin (assets/mootools/chosen)"
-	echo "  \033[0;36mcolorpicker\033[0m   Minify the colorpicker plugin (assets/mootools/colorpicker)"
-	echo "  \033[0;36mdatepicker\033[0m    Minify the datepicker plugin (assets/mootools/datepicker)"
-	echo "  \033[0;36mmediabox\033[0m      Minify the mediabox plugin (assets/mootools/mediabox)"
-	echo "  \033[0;36mmootao\033[0m        Minify the Contao MooTools enhancements (assets/mootools/mootao)"
-	echo "  \033[0;36msimplemodal\033[0m   Minify the SimpleModal plugin (assets/mootools/simplemodal)"
-	echo "  \033[0;36mslimbox\033[0m       Minify the slimbox plugin (assets/mootools/slimbox)"
-	echo "  \033[0;36mstylect\033[0m       Minify the stylect plugin (assets/mootools/stylect)"
-	echo "  \033[0;36mtablesort\033[0m     Minify the tablesort plugin (assets/mootools/tablesort)"
+	echo -e "  MooTools"
+	echo -e "  \033[0;36mmootools\033[0m      Minify the MooTools core (assets/mootools/core)"
+	echo -e "  \033[0;36mchosen\033[0m        Minify the chosen plugin (assets/mootools/chosen)"
+	echo -e "  \033[0;36mcolorpicker\033[0m   Minify the colorpicker plugin (assets/mootools/colorpicker)"
+	echo -e "  \033[0;36mdatepicker\033[0m    Minify the datepicker plugin (assets/mootools/datepicker)"
+	echo -e "  \033[0;36mmediabox\033[0m      Minify the mediabox plugin (assets/mootools/mediabox)"
+	echo -e "  \033[0;36mmootao\033[0m        Minify the Contao MooTools enhancements (assets/mootools/mootao)"
+	echo -e "  \033[0;36msimplemodal\033[0m   Minify the SimpleModal plugin (assets/mootools/simplemodal)"
+	echo -e "  \033[0;36mslimbox\033[0m       Minify the slimbox plugin (assets/mootools/slimbox)"
+	echo -e "  \033[0;36mstylect\033[0m       Minify the stylect plugin (assets/mootools/stylect)"
+	echo -e "  \033[0;36mtablesort\033[0m     Minify the tablesort plugin (assets/mootools/tablesort)"
 	echo ""
-	echo "  Other"
-	echo "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (assets/highlighter)"
-	echo "  \033[0;36mswipe\033[0m         Minify the swipe.js plugin (assets/swipe)"
+	echo -e "  Other"
+	echo -e "  \033[0;36mhighlighter\033[0m   Minify the SyntaxHighlighter plugin (assets/highlighter)"
+	echo -e "  \033[0;36mswipe\033[0m         Minify the swipe.js plugin (assets/swipe)"
 	echo ""
 }
 
@@ -45,7 +45,7 @@ usage()
 contao()
 {
 	# Single file only
-	if [ "$1" != "" ]; then
+	if [[ $1 != "" ]]; then
 		jsgrep="$1"
 		cssgrep="$1"
 	else
@@ -77,12 +77,12 @@ contao()
 theme()
 {
 	# Single file only
-	if [ "$1" != "" ]; then
-		jsgrep="$1.js"
-		cssgrep="$1.css"
+	if [[ $1 != "" ]]; then
+		jsgrep="$1\.js"
+		cssgrep="$1\.css"
 	else
-		jsgrep=".js"
-		cssgrep=".css"
+		jsgrep="\.js"
+		cssgrep="\.css"
 	fi
 
 	version=$folder/system/themes/default
@@ -182,7 +182,7 @@ mootools()
 		mobile="/* MooTools mobile, (c) Christoph Pojer (@cpojer), MIT-style license */"
 		copyright="/* MooTools $(basename $version), <http://mootools.net>, MIT-style license */"
 		for file in $(ls $version | grep "\-uncompressed"); do
-			if [ "$file" = "mootools-mobile-uncompressed.js" ]; then
+			if [[ $file == "mootools-mobile-uncompressed.js" ]]; then
 				echo "$mobile" > $version/${file/-uncompressed/}
 			else
 				echo "$copyright" > $version/${file/-uncompressed/}
@@ -268,7 +268,7 @@ mediabox()
 		copyright="/* mediaboxAdvanced v$(basename $version), (c) 2007-2010 John Einselen <http://iaian7.com>, MIT-style license */"
 
 		# CSS
-		for file in $(ls $version/css | grep "\-uncompressed.css"); do
+		for file in $(ls $version/css | grep "\-uncompressed\.css"); do
 			echo "$copyright" > $version/css/${file/-uncompressed/}
 			$css $version/css/$file >> $version/css/${file/-uncompressed/}
 			echo "  Created $version/css/${file/-uncompressed/}"
@@ -387,10 +387,10 @@ highlighter()
 		echo "  Created $version/shCore.css"
 
 		# JavaScript
-		for file in $(ls $version/src | grep ".js"); do
-			if [ "$file" = "XRegExp.js" ]; then
+		for file in $(ls $version/src | grep "\.js"); do
+			if [[ $file == "XRegExp.js" ]]; then
 				echo "$xregexp" > $version/$file
-			elif [ "$file" = "shBrushApacheConf.js" ]; then
+			elif [[ $file == "shBrushApacheConf.js" ]]; then
 				echo "$apacheconf" > $version/$file
 			else
 				echo "$copyright" > $version/$file
@@ -424,7 +424,7 @@ swipe()
 ##
 # Dispatch
 ##
-if [ "$1" = "" ]; then
+if [[ $1 == "" ]]; then
 	usage
 else
 
@@ -433,28 +433,28 @@ else
 	folder=${folder/\/system\/bin/}
 
 	# Check whether java is available
-	if [ "$(which java)" = "" ]; then
-		echo "  \033[0;31mJava is required to run this script\033[0m"
+	if [[ $(which java) == "" ]]; then
+		echo -e "  \033[0;31mJava is required to run this script\033[0m"
 		exit 1
 	fi
 
 	# Check whether uglifyjs is available
-	if [ "$(which uglifyjs)" != "" ]; then
+	if [[ $(which uglifyjs) != "" ]]; then
 		js="uglifyjs -nc --max-line-len 0"
-		echo "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
+		echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
 	else
 		js="java -jar $folder/system/bin/yuicompressor-2.4.8.jar --charset UTF-8"
-		echo "  \033[0;33mWill be using yuicompressor to minify .js files\033[0m"
+		echo -e "  \033[0;33mWill be using yuicompressor to minify .js files\033[0m"
 	fi
 
 	# CSS minifier
 	css="java -jar $folder/system/bin/yuicompressor-2.4.8.jar --charset UTF-8"
 
 	# Execute all functions
-	if [ "$1" = "all" ]; then
+	if [[ $1 == "all" ]]; then
 		typeset -F | while read line; do
-			func=${line/declare -f/}
-			if [ $func != "usage" ]; then
+			func=${line##* }
+			if [[ $func != "usage" ]]; then
 				$func
 			fi
 		done
@@ -463,18 +463,18 @@ else
 	fi
 
 	# Purge the assets/js folder
-	if [ -d "$folder/assets/js" ]; then
+	if [[ -d $folder/assets/js ]]; then
 		for i in $(ls $folder/assets/js); do
-			if [ "$i" != "index.html" ]; then
+			if [[ $i != "index.html" ]]; then
 				unlink $folder/assets/js/$i
 			fi
 		done
 	fi
 
 	# Purge the assets/css folder
-	if [ -d "$folder/assets/css" ]; then
+	if [[ -d $folder/assets/css ]]; then
 		for i in $(ls $folder/assets/css); do
-			if [ "$i" != "index.html" ]; then
+			if [[ $i != "index.html" ]]; then
 				unlink $folder/assets/css/$i
 			fi
 		done
