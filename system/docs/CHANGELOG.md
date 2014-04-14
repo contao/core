@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Also convert paths without delimiter in `Combiner::fixPaths()` (see #6417).
+
 ### New
 Add the "colorizeLogEntries" hook (see #5803).
 
