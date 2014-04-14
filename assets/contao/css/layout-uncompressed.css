@@ -67,16 +67,16 @@ select,input,textarea {
 /**
  * Format the Contao image galleries (now rendered as unordered lists)
  */
-.ce_gallery ul {
+.ce_gallery > ul {
 	margin:0;
 	padding:0;
 	overflow:hidden;
 	list-style:none;
 }
-.ce_gallery li {
+.ce_gallery > ul li {
 	float:left;
 }
-.ce_gallery li.col_first {
+.ce_gallery > ul li.col_first {
 	clear:left;
 }
 
