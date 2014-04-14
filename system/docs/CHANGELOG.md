@@ -5,6 +5,9 @@ Version 3.3.RC (2014-XX-XX)
 ---------------------------
 
 ### New
+Mark the beginning and end of each template in debug mode (see #6841).
+
+### New
 Added the insert tag flags "urlencode" and "rawurlencode" (see #6859).
 
 ### Improved
