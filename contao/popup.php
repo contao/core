@@ -72,6 +72,11 @@ class Popup extends Backend
 	 */
 	public function run()
 	{
+		if ($this->strFile == '')
+		{
+			die('No file given');
+		}
+
 		// Make sure there are no attempts to hack the file system
 		if (preg_match('@^\.+@i', $this->strFile) || preg_match('@\.+/@i', $this->strFile) || preg_match('@(://)+@i', $this->strFile))
 		{
@@ -97,45 +102,29 @@ class Popup extends Backend
 		}
 
 		// Open the download dialogue
-		if (Input::get('download') && $this->strFile)
+		if (Input::get('download'))
 		{
 			$objFile = new File($this->strFile, true);
 			$objFile->sendToBrowser();
 		}
 
-		$this->Template = new BackendTemplate('be_popup');
-		$this->Template->uuid = null;
-
-		// Also show the UUID of the file (see #5211)
-		if (($objModel = FilesModel::findByPath($this->strFile)) !== null)
+		// Add the resource (see #6880)
+		if (($objModel = FilesModel::findByPath($this->strFile)) === null)
 		{
-			$this->Template->uuid = String::binToUuid($objModel->uuid);
+			$objModel = Dbafs::addResource($this->strFile);
 		}
+
+		$this->Template = new BackendTemplate('be_popup');
+		$this->Template->uuid = String::binToUuid($objModel->uuid); // see #5211
 
 		// Add the file info
 		if (is_dir(TL_ROOT . '/' . $this->strFile))
 		{
-			$objFolder = new Folder($this->strFile, true);
-
-			$this->Template->icon = $objFolder->icon;
-			$this->Template->mime = $objFolder->mime;
-			$this->Template->ctime = Date::parse(Config::get('datimFormat'), $objFolder->ctime);
-			$this->Template->mtime = Date::parse(Config::get('datimFormat'), $objFolder->mtime);
-			$this->Template->atime = Date::parse(Config::get('datimFormat'), $objFolder->atime);
-			$this->Template->path = $this->strFile;
+			$objFile = new Folder($this->strFile, true);
 		}
 		else
 		{
 			$objFile = new File($this->strFile, true);
-
-			$this->Template->icon = $objFile->icon;
-			$this->Template->mime = $objFile->mime;
-			$this->Template->ctime = Date::parse(Config::get('datimFormat'), $objFile->ctime);
-			$this->Template->mtime = Date::parse(Config::get('datimFormat'), $objFile->mtime);
-			$this->Template->atime = Date::parse(Config::get('datimFormat'), $objFile->atime);
-			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
-			$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
-			$this->Template->path = $this->strFile;
 
 			// Image
 			if ($objFile->isGdImage)
@@ -145,7 +134,17 @@ class Popup extends Backend
 				$this->Template->height = $objFile->height;
 				$this->Template->src = $this->urlEncode($this->strFile);
 			}
+
+			$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
+			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 		}
+
+		$this->Template->icon = $objFile->icon;
+		$this->Template->mime = $objFile->mime;
+		$this->Template->ctime = Date::parse(Config::get('datimFormat'), $objFile->ctime);
+		$this->Template->mtime = Date::parse(Config::get('datimFormat'), $objFile->mtime);
+		$this->Template->atime = Date::parse(Config::get('datimFormat'), $objFile->atime);
+		$this->Template->path = $this->strFile;
 
 		$this->output();
 	}
@@ -167,7 +166,6 @@ class Popup extends Backend
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
 		$this->Template->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];
 		$this->Template->label_mtime = $GLOBALS['TL_LANG']['MSC']['fileModified'];
-		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
 		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);

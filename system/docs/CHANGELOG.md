@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.RC (2014-XX-XX)
+---------------------------
+
+### Improved
+Add files and folders to the database in details view (see #6880).
+
+
 Version 3.3.beta1 (2014-04-11)
 ------------------------------
 
