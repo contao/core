@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Added the "getLanguages" hook (see #6545).
+
 ### Changed
 Render the table summary as `<caption>` in HTML5 (see #6295).
 
