@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC (2014-XX-XX)
 ---------------------------
 
+### New
+Added an "oncut_callback" and "oncopy_callback" to `DC_Folder` (see #6814).
+
 ### Improved
 Support optional dependencies in the module loader (see #6835).
 

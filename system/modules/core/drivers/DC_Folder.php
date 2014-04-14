@@ -532,6 +532,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				\Dbafs::moveResource($source, $destination);
 			}
 
+			// Call the oncut_callback
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncut_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncut_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($source, $destination, $this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($source, $destination, $this);
+					}
+				}
+			}
+
 			// Add a log entry
 			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', __METHOD__, TL_FILES);
 		}
@@ -667,6 +684,23 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		if ($this->blnIsDbAssisted)
 		{
 			\Dbafs::copyResource($source, $destination);
+		}
+
+		// Call the oncopy_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($source, $destination, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($source, $destination, $this);
+				}
+			}
 		}
 
 		// Add a log entry
