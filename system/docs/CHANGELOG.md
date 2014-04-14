@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Use the `html5shiv-printshiv.js` script in the front end (see #6293).
+
 ### New
 Added the "getLanguages" hook (see #6545).
 
