@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC (2014-XX-XX)
 ---------------------------
 
+### New
+Added the insert tag flags "urlencode" and "rawurlencode" (see #6859).
+
 ### Improved
 Add files and folders to the database in details view (see #6880).
 

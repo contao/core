@@ -1703,6 +1703,8 @@ abstract class Controller extends \System
 						case 'strrev':
 						case 'base64_encode':
 						case 'base64_decode':
+						case 'urlencode':
+						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
 							break;
 
