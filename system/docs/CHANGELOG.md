@@ -1,8 +1,11 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.3.RC (2014-XX-XX)
----------------------------
+Version 3.3.RC1 (2014-XX-XX)
+----------------------------
+
+### New
+Add the "colorizeLogEntries" hook (see #5803).
 
 ### New
 Added an "oncut_callback" and "oncopy_callback" to `DC_Folder` (see #6814).
