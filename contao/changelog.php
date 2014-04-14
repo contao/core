@@ -58,12 +58,14 @@ class Changelog extends Backend
 	 */
 	public function run()
 	{
-		// Load the vendor library
-		include_once TL_ROOT . '/system/modules/core/vendor/markdown/markdown.php';
-
 		// Parse the changelog file
 		$strBuffer = file_get_contents(TL_ROOT . '/system/docs/CHANGELOG.md');
-		$strBuffer = \Markdown(str_replace("\r", '', $strBuffer)); // see #4190
+
+		// Remove carriage returns (see #4190)
+		$strBuffer = str_replace("\r", '', $strBuffer);
+
+		// Convert to HTML
+		$strBuffer = \Michelf\MarkdownExtra::defaultTransform($strBuffer);
 
 		// Add the template
 		$this->Template = new BackendTemplate('be_changelog');
@@ -74,9 +76,9 @@ class Changelog extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

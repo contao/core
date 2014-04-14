@@ -50,8 +50,8 @@ class InstallTool extends Backend
 		$this->import('Config');
 		$this->import('Session');
 
-		$GLOBALS['TL_CONFIG']['showHelp'] = false;
-		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
+		Config::set('showHelp', false);
+		Config::set('displayErrors', false);
 
 		$this->setStaticUrls();
 
@@ -68,7 +68,7 @@ class InstallTool extends Backend
 		$this->Template = new BackendTemplate('be_install');
 
 		// Lock the tool if there are too many login attempts
-		if ($GLOBALS['TL_CONFIG']['installCount'] >= 3)
+		if (Config::get('installCount') >= 3)
 		{
 			$this->Template->locked = true;
 			$this->outputAndExit();
@@ -92,13 +92,13 @@ class InstallTool extends Backend
 		$this->Template->lcfWriteable = true;
 
 		// Create the local configuration files if not done yet
-		if (!$GLOBALS['TL_CONFIG']['useFTP'])
+		if (!Config::get('useFTP'))
 		{
 			$this->createLocalConfigurationFiles();
 		}
 
 		// Show the license text
-		if (!$GLOBALS['TL_CONFIG']['licenseAccepted'])
+		if (!Config::get('licenseAccepted'))
 		{
 			$this->acceptLicense();
 		}
@@ -110,7 +110,7 @@ class InstallTool extends Backend
 		}
 
 		// Auto-login on fresh installations
-		if ($GLOBALS['TL_CONFIG']['installPassword'] == '')
+		if (Config::get('installPassword') == '')
 		{
 			$this->setAuthCookie();
 		}
@@ -138,7 +138,7 @@ class InstallTool extends Backend
 		}
 
 		// Require a password
-		if ($GLOBALS['TL_CONFIG']['installPassword'] == '')
+		if (Config::get('installPassword') == '')
 		{
 			$this->Template->setPassword = true;
 			$this->outputAndExit();
@@ -147,22 +147,23 @@ class InstallTool extends Backend
 		// Save the encryption key
 		if (Input::post('FORM_SUBMIT') == 'tl_encryption')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", Input::post('key'));
+			Config::persist('encryptionKey', Input::post('key'));
 			$this->reload();
 		}
 
 		// Autogenerate an encryption key
-		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
+		if (Config::get('encryptionKey') == '')
 		{
 			$strKey = md5(uniqid(mt_rand(), true));
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $strKey);
-			$GLOBALS['TL_CONFIG']['encryptionKey'] = $strKey;
+
+			Config::set('encryptionKey', $strKey);
+			Config::persist('encryptionKey', $strKey);
 		}
 
-		$this->Template->encryptionKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
+		$this->Template->encryptionKey = Config::get('encryptionKey');
 
 		// Check the minimum length of the encryption key
-		if (utf8_strlen($GLOBALS['TL_CONFIG']['encryptionKey']) < 12)
+		if (utf8_strlen(Config::get('encryptionKey')) < 12)
 		{
 			$this->Template->encryptionLength = true;
 			$this->outputAndExit();
@@ -197,8 +198,8 @@ class InstallTool extends Backend
 		}
 		catch (Exception $e)
 		{
+			Config::remove('exampleWebsite');
 			$this->Template->importException = true;
-			$this->Config->delete("\$GLOBALS['TL_CONFIG']['exampleWebsite']");
 			error_log("\nPHP Fatal error: {$e->getMessage()} in {$e->getFile()} on line {$e->getLine()}\n{$e->getTraceAsString()}\n");
 			$this->outputAndExit();
 		}
@@ -207,9 +208,9 @@ class InstallTool extends Backend
 		$this->createAdminUser();
 
 		// Clear the cron timestamps so the jobs are run
-		$this->Config->delete("\$GLOBALS['TL_CONFIG']['cron_hourly']");
-		$this->Config->delete("\$GLOBALS['TL_CONFIG']['cron_daily']");
-		$this->Config->delete("\$GLOBALS['TL_CONFIG']['cron_weekly']");
+		Config::remove('cron_hourly');
+		Config::remove('cron_daily');
+		Config::remove('cron_weekly');
 
 		$this->outputAndExit();
 	}
@@ -220,52 +221,52 @@ class InstallTool extends Backend
 	 */
 	protected function storeFtpCredentials()
 	{
-		if ($GLOBALS['TL_CONFIG']['installPassword'] != '')
+		if (Config::get('installPassword') != '')
 		{
 			return;
 		}
 
-		$GLOBALS['TL_CONFIG']['useFTP']  = true;
-		$GLOBALS['TL_CONFIG']['ftpHost'] = Input::post('host');
-		$GLOBALS['TL_CONFIG']['ftpPath'] = Input::post('path');
-		$GLOBALS['TL_CONFIG']['ftpUser'] = Input::post('username', true);
+		Config::set('useFTP', true);
+		Config::set('ftpHost', Input::post('host'));
+		Config::set('ftpPath', Input::post('path'));
+		Config::set('ftpUser', Input::post('username', true));
 
 		if (Input::postRaw('password') != '*****')
 		{
-			$GLOBALS['TL_CONFIG']['ftpPass'] = Input::postRaw('password');
+			Config::set('ftpPass', Input::postRaw('password'));
 		}
 
-		$GLOBALS['TL_CONFIG']['ftpSSL']  = Input::post('ssl');
-		$GLOBALS['TL_CONFIG']['ftpPort'] = (int) Input::post('port');
+		Config::set('ftpSSL', Input::post('ssl'));
+		Config::set('ftpPort', (int) Input::post('port'));
 
 		// Add a trailing slash
-		if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
+		if (Config::get('ftpPath') != '' && substr(Config::get('ftpPath'), -1) != '/')
 		{
-			$GLOBALS['TL_CONFIG']['ftpPath'] .= '/';
+			Config::set('ftpPath', Config::get('ftpPath') . '/');
 		}
 
 		// Re-insert the data into the form
-		$this->Template->ftpHost = $GLOBALS['TL_CONFIG']['ftpHost'];
-		$this->Template->ftpPath = $GLOBALS['TL_CONFIG']['ftpPath'];
-		$this->Template->ftpUser = $GLOBALS['TL_CONFIG']['ftpUser'];
-		$this->Template->ftpPass = ($GLOBALS['TL_CONFIG']['ftpPass'] != '') ? '*****' : '';
-		$this->Template->ftpSSL  = $GLOBALS['TL_CONFIG']['ftpSSL'];
-		$this->Template->ftpPort = $GLOBALS['TL_CONFIG']['ftpPort'];
+		$this->Template->ftpHost = Config::get('ftpHost');
+		$this->Template->ftpPath = Config::get('ftpPath');
+		$this->Template->ftpUser = Config::get('ftpUser');
+		$this->Template->ftpPass = (Config::get('ftpPass') != '') ? '*****' : '';
+		$this->Template->ftpSSL  = Config::get('ftpSSL');
+		$this->Template->ftpPort = Config::get('ftpPort');
 
-		$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
+		$ftp_connect = (Config::get('ftpSSL') && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
 
 		// Try to connect and locate the Contao directory
-		if (($resFtp = $ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'], $GLOBALS['TL_CONFIG']['ftpPort'], 5)) == false)
+		if (($resFtp = $ftp_connect(Config::get('ftpHost'), Config::get('ftpPort'), 5)) == false)
 		{
 			$this->Template->ftpHostError = true;
 			$this->outputAndExit();
 		}
-		elseif (!ftp_login($resFtp, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
+		elseif (!ftp_login($resFtp, Config::get('ftpUser'), Config::get('ftpPass')))
 		{
 			$this->Template->ftpUserError = true;
 			$this->outputAndExit();
 		}
-		elseif (ftp_size($resFtp, $GLOBALS['TL_CONFIG']['ftpPath'] . 'assets/contao/css/debug.css') == -1)
+		elseif (ftp_size($resFtp, Config::get('ftpPath') . 'assets/contao/css/debug.css') == -1)
 		{
 			$this->Template->ftpPathError = true;
 			$this->outputAndExit();
@@ -308,18 +309,18 @@ class InstallTool extends Backend
 			$this->createLocalConfigurationFiles();
 
 			// Save the FTP credentials
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['useFTP']", true);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpHost']", $GLOBALS['TL_CONFIG']['ftpHost']);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
+			Config::persist('useFTP', true);
+			Config::persist('ftpHost', Config::get('ftpHost'));
+			Config::persist('ftpPath', Config::get('ftpPath'));
+			Config::persist('ftpUser', Config::get('ftpUser'));
 
 			if (Input::postRaw('password') != '*****')
 			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+				Config::persist('ftpPass', Config::get('ftpPass'));
 			}
 
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
+			Config::persist('ftpSSL', Config::get('ftpSSL'));
+			Config::persist('ftpPort', Config::get('ftpPort'));
 
 			$this->reload();
 		}
@@ -333,7 +334,7 @@ class InstallTool extends Backend
 	{
 		if (Input::post('FORM_SUBMIT') == 'tl_license')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
+			Config::persist('licenseAccepted', true);
 			$this->reload();
 		}
 
@@ -351,34 +352,37 @@ class InstallTool extends Backend
 		$_SESSION['TL_INSTALL_EXPIRE'] = 0;
 
 		// The password has been generated with crypt()
-		if (Encryption::test($GLOBALS['TL_CONFIG']['installPassword']))
+		if (Encryption::test(Config::get('installPassword')))
 		{
-			if (crypt(Input::postRaw('password'), $GLOBALS['TL_CONFIG']['installPassword']) == $GLOBALS['TL_CONFIG']['installPassword'])
+			if (crypt(Input::postRaw('password'), Config::get('installPassword')) == Config::get('installPassword'))
 			{
 				$this->setAuthCookie();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+				Config::persist('installCount', 0);
+
 				$this->reload();
 			}
 		}
 		else
 		{
-			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
+			list($strPassword, $strSalt) = explode(':', Config::get('installPassword'));
 			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(Input::postRaw('password'))) : ($strPassword == sha1($strSalt . Input::postRaw('password')));
 
 			if ($blnAuthenticated)
 			{
 				// Store a crypt() version of the password
 				$strPassword = Encryption::hash(Input::postRaw('password'));
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
+				Config::persist('installPassword', $strPassword);
 
 				$this->setAuthCookie();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+				Config::persist('installCount', 0);
+
 				$this->reload();
 			}
 		}
 
 		// Increase the login count if we get here
-		$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
+		Config::persist('installCount', Config::get('installCount') + 1);
+
 		$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['invalidPass'];
 	}
 
@@ -397,16 +401,17 @@ class InstallTool extends Backend
 		}
 
 		// The password is too short
-		elseif (utf8_strlen($strPassword) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+		elseif (utf8_strlen($strPassword) < Config::get('minPasswordLength'))
 		{
-			$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
+			$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], Config::get('minPasswordLength'));
 		}
 
 		// Save the password
 		else
 		{
 			$strPassword = Encryption::hash($strPassword);
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword);
+			Config::persist('installPassword', $strPassword);
+
 			$this->reload();
 		}
 	}
@@ -430,29 +435,29 @@ class InstallTool extends Backend
 		}
 
 		// If there is another driver defined, add it here as well
-		if ($GLOBALS['TL_CONFIG']['dbDriver'] != '' && !in_array($GLOBALS['TL_CONFIG']['dbDriver'], $arrDrivers))
+		if (Config::get('dbDriver') != '' && !in_array(Config::get('dbDriver'), $arrDrivers))
 		{
-			$arrDrivers[] = $GLOBALS['TL_CONFIG']['dbDriver'];
+			$arrDrivers[] = Config::get('dbDriver');
 		}
 
 		foreach ($arrDrivers as $strDriver)
 		{
 			$strDrivers .= sprintf('<option value="%s"%s>%s</option>',
 									$strDriver,
-									(($strDriver == $GLOBALS['TL_CONFIG']['dbDriver']) ? ' selected="selected"' : ''),
+									(($strDriver == Config::get('dbDriver')) ? ' selected="selected"' : ''),
 									($strDriver ?: '-'));
 		}
 
 		$this->Template->drivers = $strDrivers;
-		$this->Template->driver = $GLOBALS['TL_CONFIG']['dbDriver'];
-		$this->Template->host = $GLOBALS['TL_CONFIG']['dbHost'];
-		$this->Template->user = $GLOBALS['TL_CONFIG']['dbUser'];
-		$this->Template->pass = ($GLOBALS['TL_CONFIG']['dbPass'] != '') ? '*****' : '';
-		$this->Template->port = $GLOBALS['TL_CONFIG']['dbPort'];
-		$this->Template->socket = $GLOBALS['TL_CONFIG']['dbSocket'];
-		$this->Template->pconnect = $GLOBALS['TL_CONFIG']['dbPconnect'];
-		$this->Template->dbcharset = $GLOBALS['TL_CONFIG']['dbCharset'];
-		$this->Template->database = $GLOBALS['TL_CONFIG']['dbDatabase'];
+		$this->Template->driver = Config::get('dbDriver');
+		$this->Template->host = Config::get('dbHost');
+		$this->Template->user = Config::get('dbUser');
+		$this->Template->pass = (Config::get('dbPass') != '') ? '*****' : '';
+		$this->Template->port = Config::get('dbPort');
+		$this->Template->socket = Config::get('dbSocket');
+		$this->Template->pconnect = Config::get('dbPconnect');
+		$this->Template->dbcharset = Config::get('dbCharset');
+		$this->Template->database = Config::get('dbDatabase');
 
 		// Store the database connection parameters
 		if (Input::post('FORM_SUBMIT') == 'tl_database_login')
@@ -464,14 +469,14 @@ class InstallTool extends Backend
 					continue;
 				}
 
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['$strKey']", Input::post($strKey, true));
+				Config::persist($strKey, Input::post($strKey, true));
 			}
 
 			$this->reload();
 		}
 
 		// No driver selected (see #6088)
-		if ($GLOBALS['TL_CONFIG']['dbDriver'] == '')
+		if (Config::get('dbDriver') == '')
 		{
 			$this->Template->dbConnection = false;
 			$this->outputAndExit();
@@ -531,17 +536,17 @@ class InstallTool extends Backend
 		if (Input::post('FORM_SUBMIT') == 'tl_collation')
 		{
 			$arrTables = array();
-			$strCharset = strtolower($GLOBALS['TL_CONFIG']['dbCharset']);
+			$strCharset = strtolower(Config::get('dbCharset'));
 			$strCollation = Input::post('dbCollation');
 
 			try
 			{
-				$this->Database->query("ALTER DATABASE {$GLOBALS['TL_CONFIG']['dbDatabase']} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+				$this->Database->query("ALTER DATABASE " . Config::get('dbDatabase') . " DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
 			}
 			catch (Exception $e) {}
 
 			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
-									   ->execute($GLOBALS['TL_CONFIG']['dbDatabase']);
+									   ->execute(Config::get('dbDatabase'));
 
 			while ($objField->next())
 			{
@@ -565,14 +570,14 @@ class InstallTool extends Backend
 				$this->Database->query($strQuery);
 			}
 
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['dbCollation']", $strCollation);
+			Config::persist('dbCollation', $strCollation);
 			$this->reload();
 		}
 
 		$arrOptions = array();
 
 		$objCollation = $this->Database->prepare("SHOW COLLATION LIKE ?")
-									   ->execute($GLOBALS['TL_CONFIG']['dbCharset'] .'%');
+									   ->execute(Config::get('dbCharset') .'%');
 
 		while ($objCollation->next())
 		{
@@ -580,7 +585,7 @@ class InstallTool extends Backend
 
 			$arrOptions[$key] = sprintf('<option value="%s"%s>%s</option>',
 										$key,
-										(($key == $GLOBALS['TL_CONFIG']['dbCollation']) ? ' selected="selected"' : ''),
+										(($key == Config::get('dbCollation')) ? ' selected="selected"' : ''),
 										$key);
 		}
 
@@ -604,7 +609,7 @@ class InstallTool extends Backend
 				{
 					if (isset($_SESSION['sql_commands'][$key]))
 					{
-						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . Config::get('dbCollation') . ';', $_SESSION['sql_commands'][$key]));
 					}
 				}
 			}
@@ -653,7 +658,7 @@ class InstallTool extends Backend
 			// Template selected
 			if ($strTemplate != '' && file_exists(TL_ROOT . '/templates/' . $strTemplate))
 			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['exampleWebsite']", time());
+				Config::persist('exampleWebsite', time());
 				$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
 				// Truncate tables
@@ -686,7 +691,7 @@ class InstallTool extends Backend
 			}
 		}
 
-		$this->Template->dateImported = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
+		$this->Template->dateImported = Date::parse(Config::get('datimFormat'), Config::get('exampleWebsite'));
 	}
 
 
@@ -726,9 +731,9 @@ class InstallTool extends Backend
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
 				// The password is too short
-				elseif (utf8_strlen(Input::post('pass', true)) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+				elseif (utf8_strlen(Input::post('pass', true)) < Config::get('minPasswordLength'))
 				{
-					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
+					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], Config::get('minPasswordLength'));
 				}
 				// Password and username are the same
 				elseif (Input::post('pass', true) == Input::post('username', true))
@@ -744,7 +749,7 @@ class InstallTool extends Backend
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
 
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", Input::post('email', true));
+					Config::persist('adminEmail', Input::post('email', true));
 
 					// Scan the upload folder (see #6134)
 					if ($this->Database->tableExists('tl_files') && $this->Database->query("SELECT COUNT(*) AS count FROM tl_files")->count < 1)
@@ -773,7 +778,7 @@ class InstallTool extends Backend
 	 */
 	protected function createLocalConfigurationFiles()
 	{
-		if ($GLOBALS['TL_CONFIG']['installPassword'] != '')
+		if (Config::get('installPassword') != '')
 		{
 			return;
 		}
@@ -795,7 +800,7 @@ class InstallTool extends Backend
 	protected function setAuthCookie()
 	{
 		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . session_id());
+		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!Config::get('disableIpCheck') ? Environment::get('ip') : '') . session_id());
 		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], null, null, false, true);
 	}
 
@@ -839,7 +844,7 @@ class InstallTool extends Backend
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->pageOffset = Input::cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
@@ -859,16 +864,16 @@ class InstallTool extends Backend
 	 */
 	protected function enableSafeMode()
 	{
-		if (!$GLOBALS['TL_CONFIG']['maintenanceMode'])
+		if (!Config::get('maintenanceMode'))
 		{
-			$GLOBALS['TL_CONFIG']['maintenanceMode'] = true;
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
+			Config::set('maintenanceMode', true);
+			Config::persist('maintenanceMode', true);
 		}
 
-		if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'] && count(array_diff(scan(TL_ROOT . '/system/modules'), array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'))) > 0)
+		if (!Config::get('coreOnlyMode') && count(array_diff(scan(TL_ROOT . '/system/modules'), array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository'))) > 0)
 		{
-			$GLOBALS['TL_CONFIG']['coreOnlyMode'] = true;
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
+			Config::set('coreOnlyMode', true);
+			Config::persist('coreOnlyMode', true);
 		}
 	}
 
@@ -993,14 +998,14 @@ class InstallTool extends Backend
 			}
 
 			// Reset the upload path if it has been changed already (see #5560 and #5870)
-			if ($GLOBALS['TL_CONFIG']['uploadPath'] == 'files' && is_dir(TL_ROOT . '/tl_files'))
+			if (Config::get('uploadPath') == 'files' && is_dir(TL_ROOT . '/tl_files'))
 			{
-				$GLOBALS['TL_CONFIG']['uploadPath'] = 'tl_files';
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['uploadPath']", 'tl_files');
+				Config::set('uploadPath', 'tl_files');
+				Config::persist('uploadPath', 'tl_files');
 			}
 
 			// Show a warning if the upload folder does not exist (see #4626)
-			if (!is_dir(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath']))
+			if (!is_dir(TL_ROOT . '/' . Config::get('uploadPath')))
 			{
 				$this->Template->filesWarning = sprintf($GLOBALS['TL_LANG']['tl_install']['filesWarning'], '<a href="https://gist.github.com/3304014" target="_blank">https://gist.github.com/3304014</a>');
 			}
@@ -1013,7 +1018,7 @@ class InstallTool extends Backend
 		$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
 
 		// Step 2: scan the upload folder if it is not empty (see #6061)
-		if ($objRow->count < 1 && count(scan(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'])) > 0)
+		if ($objRow->count < 1 && count(scan(TL_ROOT . '/' . Config::get('uploadPath'))) > 0)
 		{
 			$this->enableSafeMode();
 
@@ -1021,7 +1026,8 @@ class InstallTool extends Backend
 			{
 				$this->import('Database\\Updater', 'Updater');
 				$this->Updater->scanUploadFolder();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", true);
+
+				Config::persist('checkFileTree', true);
 				$this->reload();
 			}
 
@@ -1031,7 +1037,7 @@ class InstallTool extends Backend
 		}
 
 		// Step 3: update the database fields
-		elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
+		elseif (Config::get('checkFileTree'))
 		{
 			$this->enableSafeMode();
 
@@ -1039,7 +1045,8 @@ class InstallTool extends Backend
 			{
 				$this->import('Database\\Updater', 'Updater');
 				$this->Updater->updateFileTreeFields();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", false);
+
+				Config::persist('checkFileTree', false);
 				$this->reload();
 			}
 
@@ -1106,6 +1113,28 @@ class InstallTool extends Backend
 				$this->Template->is32Update = true;
 				$this->outputAndExit();
 			}
+		}
+	}
+
+
+	/**
+	 * Version 3.3.0 update
+	 */
+	protected function update33()
+	{
+		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('viewport', 'tl_layout'))
+		{
+			$this->enableSafeMode();
+
+			if (Input::post('FORM_SUBMIT') == 'tl_33update')
+			{
+				$this->import('Database\\Updater', 'Updater');
+				$this->Updater->run33Update();
+				$this->reload();
+			}
+
+			$this->Template->is33Update = true;
+			$this->outputAndExit();
 		}
 	}
 }

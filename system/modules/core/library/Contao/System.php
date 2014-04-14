@@ -55,6 +55,18 @@ abstract class System
 	 */
 	protected static $arrStaticObjects = array();
 
+	/**
+	 * Available languages
+	 * @var array
+	 */
+	protected static $arrLanguages = array();
+
+	/**
+	 * Loaded language files
+	 * @var array
+	 */
+	protected static $arrLanguageFiles = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -243,7 +255,7 @@ abstract class System
 		}
 
 		// Return if the language file has been loaded already
-		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
+		if (isset(static::$arrLanguageFiles[$strName][$strLanguage]) && !$blnNoCache)
 		{
 			return;
 		}
@@ -251,12 +263,12 @@ abstract class System
 		$strCacheKey = $strLanguage;
 
 		// Make sure the language exists
-		if (!is_dir(TL_ROOT . '/system/modules/core/languages/' . $strLanguage))
+		if (!static::isInstalledLanguage($strLanguage))
 		{
 			$strShortLang = substr($strLanguage, 0, 2);
 
 			// Fall back to "de" if "de_DE" does not exist
-			if ($strShortLang != $strLanguage && is_dir(TL_ROOT . '/system/modules/core/languages/' . $strShortLang))
+			if ($strShortLang != $strLanguage && static::isInstalledLanguage($strShortLang))
 			{
 				$strLanguage = $strShortLang;
 			}
@@ -268,6 +280,10 @@ abstract class System
 			}
 		}
 
+		// Use a global cache variable to support nested calls
+		static::$arrLanguageFiles[$strName][$strCacheKey] = $strLanguage;
+
+		// Fall back to English
 		$arrCreateLangs = ($strLanguage == 'en') ? array('en') : array('en', $strLanguage);
 
 		// Load the language(s)
@@ -276,7 +292,7 @@ abstract class System
 			$strCacheFile = 'system/cache/language/' . $strCreateLang . '/' . $strName . '.php';
 
 			// Try to load from cache
-			if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+			if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
 				include TL_ROOT . '/' . $strCacheFile;
 			}
@@ -318,9 +334,24 @@ abstract class System
 		{
 			include TL_ROOT . '/system/config/langconfig.php';
 		}
+	}
 
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadLanguageFile'][$strName][$strCacheKey] = true;
+
+	/**
+	 * Check whether a language is installed
+	 *
+	 * @param boolean $strLanguage The language code
+	 *
+	 * @return boolean True if the language is installed
+	 */
+	public static function isInstalledLanguage($strLanguage)
+	{
+		if (!isset(static::$arrLanguages[$strLanguage]))
+		{
+			static::$arrLanguages[$strLanguage] = (is_dir(TL_ROOT . '/system/modules/core/languages/' . $strLanguage) || is_dir(TL_ROOT . '/system/cache/language/' . $strLanguage) || in_array($strLanguage, array_unique(array_map('basename', glob(TL_ROOT . '/system/modules/*/languages/*')))));
+		}
+
+		return static::$arrLanguages[$strLanguage];
 	}
 
 
@@ -528,7 +559,7 @@ abstract class System
 	public static function anonymizeIp($strIp)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
+		if (!\Config::get('privacyAnonymizeIp'))
 		{
 			return $strIp;
 		}

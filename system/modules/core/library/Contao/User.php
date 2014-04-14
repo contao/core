@@ -173,7 +173,7 @@ abstract class User extends \System
 	public function authenticate()
 	{
 		// Check the cookie hash
-		if ($this->strHash != sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie))
+		if ($this->strHash != sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie))
 		{
 			return false;
 		}
@@ -191,7 +191,7 @@ abstract class User extends \System
 		$time = time();
 
 		// Validate the session
-		if ($objSession->sessionID != session_id() || (!$GLOBALS['TL_CONFIG']['disableIpCheck'] && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) < $time)
+		if ($objSession->sessionID != session_id() || (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
 		{
 			$this->log('Could not verify the session', __METHOD__, TL_ACCESS);
 			return false;
@@ -212,7 +212,7 @@ abstract class User extends \System
 		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
 					   ->execute(session_id());
 
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 		return true;
 	}
 
@@ -275,20 +275,20 @@ abstract class User extends \System
 		if ($this->loginCount < 1)
 		{
 			$this->locked = $time;
-			$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
+			$this->loginCount = \Config::get('loginCount');
 			$this->save();
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
 			$this->log('The account has been locked for security reasons', __METHOD__, TL_ACCESS);
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 
 			// Send admin notification
-			if ($GLOBALS['TL_CONFIG']['adminEmail'] != '')
+			if (\Config::get('adminEmail') != '')
 			{
 				$objEmail = new \Email();
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
-				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Idna::decode(\Environment::get('base')), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
-				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
+				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Idna::decode(\Environment::get('base')), ceil(\Config::get('lockPeriod') / 60));
+				$objEmail->sendTo(\Config::get('adminEmail'));
 			}
 
 			return false;
@@ -350,7 +350,7 @@ abstract class User extends \System
 		// Update the record
 		$this->lastLogin = $this->currentLogin;
 		$this->currentLogin = $time;
-		$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
+		$this->loginCount = \Config::get('loginCount');
 		$this->save();
 
 		// Generate the session
@@ -381,9 +381,9 @@ abstract class User extends \System
 		$time = time();
 
 		// Check whether the account is locked
-		if (($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) > $time)
+		if (($this->locked + \Config::get('lockPeriod')) > $time)
 		{
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 			return false;
 		}
 
@@ -409,14 +409,14 @@ abstract class User extends \System
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active yet (activation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', __METHOD__, TL_ACCESS);
+				$this->log('The account was not active yet (activation date: ' . \Date::parse(\Config::get('dateFormat'), $this->start) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', __METHOD__, TL_ACCESS);
+				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse(\Config::get('dateFormat'), $this->stop) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 		}
@@ -468,18 +468,18 @@ abstract class User extends \System
 		$time = time();
 
 		// Generate the cookie hash
-		$this->strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie);
+		$this->strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie);
 
 		// Clean up old sessions
 		$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-					   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $this->strHash);
+					   ->execute(($time - \Config::get('sessionTimeout')), $this->strHash);
 
 		// Save the session in the database
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
 					   ->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
 
 		// Set the authentication cookie
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 
 		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = true;

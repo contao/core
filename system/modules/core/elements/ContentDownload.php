@@ -59,7 +59,7 @@ class ContentDownload extends \ContentElement
 			return '';
 		}
 
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Return if the file type is not allowed
 		if (!in_array($objFile->extension, $allowedDownload))
@@ -100,7 +100,7 @@ class ContentDownload extends \ContentElement
 			$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 		}
 
-		$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
+		$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->titleText ?: $this->linkTitle);

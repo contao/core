@@ -1,0 +1,30 @@
+// Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license
+
+#wrapper {
+  margin-bottom: 5px;
+}
+
+#top_image {
+  margin-left: 0;
+}
+
+.mod_navigation {
+  top: 0;
+  margin-top: 3em;
+  width: inherit;
+  position: inherit;
+}
+
+.mod_article, .mod_eventlist, .mod_newsarchive, .mod_newsreader {
+  margin-left: 5px;
+}
+
+textarea {
+  margin-top: 2px;
+  margin-left: 2px;
+  width: 96% !important;
+}
+
+fieldset {
+  width: 90% !important;
+}

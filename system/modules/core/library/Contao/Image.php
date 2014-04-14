@@ -96,7 +96,7 @@ class Image
 		}
 
 		$objFile = new \File($image, true);
-		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
+		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('validImageTypes')));
 
 		// Check the file type
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -147,7 +147,7 @@ class Image
 		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
 		// Check whether the image exists already
-		if (!$GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('debugMode'))
 		{
 			// Custom target (thanks to Tristan Lins) (see #4166)
 			if ($target && !$force)
@@ -186,7 +186,7 @@ class Image
 		}
 
 		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
+		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight'))
 		{
 			return \System::urlEncode($image);
 		}
@@ -383,7 +383,7 @@ class Image
 
 			case 'jpg':
 			case 'jpeg':
-				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (!$GLOBALS['TL_CONFIG']['jpgQuality'] ? 80 : $GLOBALS['TL_CONFIG']['jpgQuality']));
+				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
 				break;
 
 			case 'png':
@@ -426,9 +426,9 @@ class Image
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
-		if ($GLOBALS['TL_CONFIG']['useFTP'])
+		if (\Config::get('useFTP'))
 		{
-			\Files::getInstance()->chmod($strCacheName, $GLOBALS['TL_CONFIG']['defaultFileChmod']);
+			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
 		}
 
 		// Return the path to new image

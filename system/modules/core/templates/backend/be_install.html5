@@ -14,14 +14,14 @@
   <?php echo $this->stylesheets; ?>
 
   <script><?php echo $this->getLocaleString(); ?></script>
-  <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/core/<?php echo MOOTOOLS; ?>/mootools.js"></script>
+  <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/core/<?php echo $GLOBALS['TL_ASSETS']['MOOTOOLS']; ?>/mootools.js"></script>
   <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/stylect/js/stylect.js"></script>
   <script src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mootao/Mootao.js"></script>
   <script src="<?php echo TL_ASSETS_URL; ?>assets/contao/js/core.js"></script>
   <script src="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/hover.js"></script>
   <script><?php echo $this->getDateString(); ?></script>
   <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
 <body class="<?php echo $this->ua; ?>">
@@ -50,11 +50,11 @@
         <fieldset class="tl_tbox nolegend">
           <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['ftp'][0]; ?></h3>
           <?php if ($this->ftpHostError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpHostError'], $GLOBALS['TL_CONFIG']['ftpHost']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpHostError'], Config::get('ftpHost')); ?></p>
           <?php elseif ($this->ftpUserError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpUserError'], $GLOBALS['TL_CONFIG']['ftpUser']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpUserError'], Config::get('ftpUser')); ?></p>
           <?php elseif ($this->ftpPathError): ?>
-            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpPathError'], $GLOBALS['TL_CONFIG']['ftpPath']); ?></p>
+            <p class="tl_error"><?php printf($GLOBALS['TL_LANG']['tl_install']['ftpPathError'], Config::get('ftpPath')); ?></p>
           <?php endif; ?>
           <p><?php echo $GLOBALS['TL_LANG']['tl_install']['ftp'][1]; ?></p>
           <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
@@ -1159,6 +1159,25 @@ Library.
                       <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
                       <div class="tl_submit_container">
                         <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '3.2'); ?>" onclick="Backend.getScrollOffset()">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </fieldset>
+
+            <?php elseif ($this->is33Update): ?>
+              <fieldset class="tl_box<?php if (!$this->is33Update): ?> collapsed<?php endif; ?>">
+                <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+                <div>
+                  <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+                  <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+                  <p><?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateX'], '3.3', '3.3'); ?></p>
+                  <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+                    <div class="tl_formbody_submit">
+                      <input type="hidden" name="FORM_SUBMIT" value="tl_33update">
+                      <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+                      <div class="tl_submit_container">
+                        <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '3.3'); ?>" onclick="Backend.getScrollOffset()">
                       </div>
                     </div>
                   </form>

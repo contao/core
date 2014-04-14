@@ -34,7 +34,7 @@ class RebuildIndex extends \Backend implements \executable
 	 */
 	public function isActive()
 	{
-		return ($GLOBALS['TL_CONFIG']['enableSearch'] && \Input::get('act') == 'index');
+		return (\Config::get('enableSearch') && \Input::get('act') == 'index');
 	}
 
 
@@ -44,7 +44,7 @@ class RebuildIndex extends \Backend implements \executable
 	 */
 	public function run()
 	{
-		if (!$GLOBALS['TL_CONFIG']['enableSearch'])
+		if (!\Config::get('enableSearch'))
 		{
 			return '';
 		}
@@ -99,11 +99,11 @@ class RebuildIndex extends \Backend implements \executable
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400));
 
 			// Calculate the hash
-			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
+			$strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 			// Remove old sessions
 			$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-						   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
+						   ->execute(($time - \Config::get('sessionTimeout')), $strHash);
 
 			// Log in the front end user
 			if (is_numeric(\Input::get('user')) && \Input::get('user') > 0)
@@ -113,7 +113,7 @@ class RebuildIndex extends \Backend implements \executable
 							   ->execute(\Input::get('user'), $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
-				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+				$this->setCookie('FE_USER_AUTH', $strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 			}
 
 			// Log out the front end user
@@ -158,7 +158,7 @@ class RebuildIndex extends \Backend implements \executable
 		// Default variables
 		$objTemplate->user = $arrUser;
 		$objTemplate->indexLabel = $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][0];
-		$objTemplate->indexHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1] : '';
+		$objTemplate->indexHelp = (\Config::get('showHelp') && strlen($GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1] : '';
 		$objTemplate->indexSubmit = $GLOBALS['TL_LANG']['tl_maintenance']['indexSubmit'];
 
 		return $objTemplate->parse();

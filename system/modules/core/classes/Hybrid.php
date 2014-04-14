@@ -182,6 +182,16 @@ abstract class Hybrid extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Return the parent object
 	 * @return object
 	 */
@@ -197,7 +207,7 @@ abstract class Hybrid extends \Frontend
 	 */
 	public function generate()
 	{
-		if ($this->objParent instanceof \ContentModel && TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start > 0 && $this->objParent->start > time()) || ($this->objParent->stop > 0 && $this->objParent->stop < time())))
+		if ($this->objParent instanceof \ContentModel && TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start != '' && $this->objParent->start > time()) || ($this->objParent->stop != '' && $this->objParent->stop < time())))
 		{
 			return '';
 		}

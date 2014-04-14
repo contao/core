@@ -11,35 +11,35 @@
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.0">
         <source>Redirect page</source>
-        <target>Ugrás az oldalra</target>
+        <target>Átirányítás</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
-        <target>Adja meg azt az oldalt, ahová a látogatók irányítva lesznek amennyiben az eseményre kattintanak.</target>
+        <target>Válassza ki az esemény olvasó oldalt, ahová a látogatók irányítva lesznek ha az eseményre kattintanak.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.0">
         <source>Enable comments</source>
-        <target>Hozzászólás engedélyezése</target>
+        <target>Hozzászólások engedélyezése</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.1">
         <source>Allow visitors to comment events.</source>
-        <target>Itt megengedheti, hogy a látogatók hozzászólásokat írhassanak az egyes eseményekhez.</target>
+        <target>A látogatók hozzászólhatnak az eseményhez.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify.0">
         <source>Notify</source>
-        <target>Emlékeztető</target>
+        <target>Értesítés</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify.1">
         <source>Please choose who to notify when comments are added.</source>
-        <target>Itt kiválaszthatja, hogy kit emlékeztessen a rendszer ha egy látogató egy új megjegyzést ír.</target>
+        <target>Válassza ki, hogy ki legyen értesítve ha új hozzászólás érkezik.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.0">
         <source>Sort order</source>
-        <target>Rendezés</target>
+        <target>Rendezési sorrend</target>
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
-        <target>Alapértelmezés szerint a hozzászólások növekvő sorrendbe vannak rendezve, kezdve a legrégebbivel.</target>
+        <target>Alapértelmezés szerint a hozzászólások növekvő sorrendben vannak, kezdve a legrégebbivel.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.0">
         <source>Comments per page</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>Hozzászólások száma oldalanként. A 0 kikapcsolja a lapszámozást.</target>
+        <target>Hozzászólások száma oldalanként. A 0 kikapcsolja a lapozást.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.0">
         <source>Moderate comments</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>Engedélyezze a hozzászólásokat mielőtt azok a honlapon megjelennek.</target>
+        <target>Hozzászólások ellenőrzése mielőtt azok a honlapon megjelennek.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.0">
         <source>Allow BBCode</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
-        <target>Itt megengedheti, hogy a látogatók BBCode-ot használhassanak a hozzászólásokban.</target>
+        <target>A látogatók formázhatják a hozzászólásaikat BBCode használatával.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.0">
         <source>Require login to comment</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
-        <target>Csak bejelentkezett felhasználónak engedélyezze új hozzászólás létrehozását.</target>
+        <target>Csak bejelentkezett felhasználóknak engedélyezze a hozzászólást.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.0">
         <source>Disable the security question</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
-        <target>Csak akkor használja ezt a beállítást, ha új hozzászólás írásához be kell jelentkezni.</target>
+        <target>Csak akkor használja, ha hozzászólás írásához be kell jelentkezni.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.protected.0">
         <source>Protect calendar</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.protected.1">
         <source>Show events to certain member groups only.</source>
-        <target>A naptár tartalmát csak egy bizonyos csoport tagjai láthatják.</target>
+        <target>Az eseményeket csak egyes tagok csoportjai láthatják.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.groups.0">
         <source>Allowed member groups</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.groups.1">
         <source>These groups will be able to see the events in this calendar.</source>
-        <target>Válassza ki azokat a csoportokat, melyeknek lehetőségük lesz megtekinteni a naptár tartalmát</target>
+        <target>Ezek a csoportok láthatják az eseményeket ebben a naptárban.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title_legend">
         <source>Title and redirect page</source>
-        <target>Megnevezés és átirányítás</target>
+        <target>Megnevezés és átirányítási oldal</target>
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>
@@ -127,11 +127,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.notify_author">
         <source>Author of the event</source>
-        <target>A hírek szerzője</target>
+        <target>Az esemény szerzője</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify_both">
         <source>Author and system administrator</source>
-        <target>Szerző és rendszergazda</target>
+        <target>Szerző és Rendszergazda</target>
       </trans-unit>
       <trans-unit id="tl_calendar.source_teaser">
         <source>Event teasers</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.0">
         <source>Edit calendar settings</source>
-        <target>A naptár beállításainak szerkesztése</target>
+        <target>Naptár beállításainak szerkesztése</target>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.1">
         <source>Edit the settings of calendar ID %s</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.copy.0">
         <source>Duplicate calendar</source>
-        <target>Naptár duplázása</target>
+        <target>Naptár másolása</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.1">
         <source>Duplicate calendar ID %s</source>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.1">
         <source>Manage RSS feeds</source>
-        <target>RSS hírfolyam kezelése.</target>
+        <target>RSS hírfolyam kezelése</target>
       </trans-unit>
     </body>
   </file>

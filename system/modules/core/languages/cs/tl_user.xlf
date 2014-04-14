@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_user.google.1">
         <source>Here you can enter your Google+ profile ID or vanity name.</source>
-        <target>Sem můžete zadat Vaše identifikační číslo Google+ nebo platné jméno.</target>
+        <target>Sem můžete zadat identifikační číslo Google+ nebo platné jméno.</target>
       </trans-unit>
       <trans-unit id="tl_user.language.0">
         <source>Back end language</source>

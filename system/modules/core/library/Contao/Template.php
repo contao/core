@@ -272,10 +272,18 @@ abstract class Template extends \Controller
 			}
 		}
 
+		$strPath = $this->getTemplate($this->strTemplate, $this->strFormat);
+		$strRelPath = str_replace(TL_ROOT . '/', '', $strPath);
+
 		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
+		include $strPath;
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
+
+		if (\Config::get('debugMode'))
+		{
+			$strBuffer = "\n<!-- TEMPLATE START: $strRelPath -->\n$strBuffer\n<!-- TEMPLATE END: $strRelPath -->\n";
+		}
 
 		return $strBuffer;
 	}
@@ -296,10 +304,10 @@ abstract class Template extends \Controller
 
 		// Send some headers
 		header('Vary: User-Agent', false);
-		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
 		// Debug information
-		if ($GLOBALS['TL_CONFIG']['debugMode'] && !\Input::get('popup'))
+		if (\Config::get('debugMode') && !isset($_GET['popup']))
 		{
 			$intReturned = 0;
 			$intAffected = 0;
@@ -319,14 +327,14 @@ abstract class Template extends \Controller
 			$intElapsed = (microtime(true) - TL_START);
 
 			$strDebug = sprintf(
-				'<div id="debug" class="%s">'
+				'<div id="contao-debug" class="%s">'
 				. '<p>'
-					. '<span class="time">Execution time: %s ms</span>'
-					. '<span class="memory">Memory usage: %s</span>'
-					. '<span class="db">Database queries: %d</span>'
-					. '<span class="rows">Rows: %d returned, %s affected</span>'
-					. '<span class="models">Registered models: %d</span>'
-					. '<span id="tog">&nbsp;</span>'
+					. '<span class="debug-time">Execution time: %s ms</span>'
+					. '<span class="debug-memory">Memory usage: %s</span>'
+					. '<span class="debug-db">Database queries: %d</span>'
+					. '<span class="debug-rows">Rows: %d returned, %s affected</span>'
+					. '<span class="debug-models">Registered models: %d</span>'
+					. '<span id="debug-tog">&nbsp;</span>'
 				. '</p>'
 				. '<div><pre>',
 				\Input::cookie('CONTAO_CONSOLE'),
@@ -359,15 +367,15 @@ abstract class Template extends \Controller
 			$strDebug .= '</pre></div></div>'
 				. $strScriptOpen
 					. "(function($) {"
-						. "$$('#debug>*').setStyle('width',window.getSize().x);"
-						. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
-						. "$('tog').addEvent('click',function(e) {"
-							. "$('debug').toggleClass('closed');"
-							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
+						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+						. "$('debug-tog').addEvent('click',function(e) {"
+							. "$('contao-debug').toggleClass('closed');"
+							. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
+							. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
 						. "});"
 						. "window.addEvent('resize',function() {"
-							. "$$('#debug>*').setStyle('width',window.getSize().x);"
+							. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
 						. "});"
 					. "})(document.id);"
 				. $strScriptClose . "\n\n";
@@ -389,7 +397,7 @@ abstract class Template extends \Controller
 	public function minifyHtml($strHtml)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'] || $GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('minifyMarkup') || \Config::get('debugMode'))
 		{
 			return $strHtml;
 		}

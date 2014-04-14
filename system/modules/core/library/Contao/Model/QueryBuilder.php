@@ -83,6 +83,12 @@ class QueryBuilder
 			$strQuery .= " GROUP BY " . $arrOptions['group'];
 		}
 
+		// Having (see #6446)
+		if ($arrOptions['having'] !== null)
+		{
+			$strQuery .= " HAVING " . $arrOptions['having'];
+		}
+
 		// Order by
 		if ($arrOptions['order'] !== null)
 		{

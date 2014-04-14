@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_files.name.1">
         <source>Contao automatically adds the file extension.</source>
-        <target>A Contao automatikusan hozzáfűzi az állomány kiterjesztést.</target>
+        <target>A Contao automatikusan hozzáfűzi a fájl kiterjesztést.</target>
       </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
@@ -15,27 +15,27 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>A könyvtár HTTP-n keresztüli elérésének megakadályozása. A fájlok továbbra is elérhetőek maradnak, pl. a letölthető elemek.</target>
+        <target>A mappa HTTP-n keresztüli hozzáférhetőségének megakadályozása. A fájlokat a továbbiakban elérhetővé kell tenni, pl. letölthető elemként.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
-        <target>Meta információk</target>
+        <target>Meta információ</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.1">
         <source>Here you can enter the file meta information.</source>
-        <target>Megadhatja a fájl meta információit.</target>
+        <target>Megadhatóak a fájl meta információi.</target>
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
-        <target>Könyvtár védelmének megvalósítása .htaccess fájl hozzáadásával, amely megtagadja a hozzáférést a mappához. Amennyiben nem Apache szervert használ, előfordulhat hogy ez a módszer esetleg nem működik egyáltalán, vagy a szerver beállításainak módosítása szükséges. Kérjük duplán ellenőrizze, mielőtt feltölti a nem publikus anyagait!</target>
+        <target>Könyvtár védelmének megvalósítása .htaccess fájl hozzáadásával, amely megtagadja a hozzáférést a mappához. Amennyiben nem Apache szervert használ, előfordulhat, hogy ez a módszer esetleg nem működik, vagy a szerver beállításainak módosítása szükséges. Kérjük duplán ellenőrizze, mielőtt feltölti a nem publikus anyagait!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
-        <target>Fájl feltöltése</target>
+        <target>Fájl feltöltés</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
-        <target>Válassza ki a gépéről a szerverre feltöltendő fájl(oka)t.</target>
+        <target>Tallózzon a gépén és válassza ki a fájlokat amiket fel akar tölteni.</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_files.editor.1">
         <source>Here you can edit the file source (press F11 to toggle full screen mode).</source>
-        <target>Itt tudja szerkeszteni a forrás fájlt (nyomja  meg az F11 gombot a teljes képernyős módba váltáshoz).</target>
+        <target>Itt lehet szerkeszteni a forrás fájlt (az F11 gombbal teljes képernyős módba válthat).</target>
       </trans-unit>
       <trans-unit id="tl_files.upload">
         <source>Upload files</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_files.uploadNback">
         <source>Upload files and go back</source>
-        <target>Fájlok feltöltése és vissza</target>
+        <target>Fájlok feltöltése és visszalépés</target>
       </trans-unit>
       <trans-unit id="tl_files.editFF">
         <source>Edit a file or folder</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="tl_files.uploadFF">
         <source>Upload files to folder &quot;%s&quot;</source>
-        <target>Töltse fel a fájlt a &quot;%s&quot; mappába</target>
+        <target>Fájlok feltöltése a &quot;%s&quot; mappába</target>
       </trans-unit>
       <trans-unit id="tl_files.editFile">
         <source>Edit file &quot;%s&quot;</source>
@@ -127,11 +127,11 @@
       </trans-unit>
       <trans-unit id="tl_files.copy.0">
         <source>Duplicate file or folder</source>
-        <target>Fájl vagy mappa duplázása</target>
+        <target>Fájl vagy mappa másolása</target>
       </trans-unit>
       <trans-unit id="tl_files.copy.1">
         <source>Duplicate file or folder &quot;%s&quot;</source>
-        <target>&quot;%s&quot; fájl vagy mappa duplázása</target>
+        <target>&quot;%s&quot; fájl vagy mappa másolása</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
         <source>Edit file or folder</source>
@@ -151,11 +151,11 @@
       </trans-unit>
       <trans-unit id="tl_files.show.0">
         <source>File or folder details</source>
-        <target>Fájl vagy könyvtár részletei</target>
+        <target>Fájl vagy mappa részletei</target>
       </trans-unit>
       <trans-unit id="tl_files.show.1">
         <source>Show the details of file or folder &quot;%s&quot;</source>
-        <target>A &quot;%s&quot; fájl vagy könyvtár részletek megtekintése</target>
+        <target>A &quot;%s&quot; fájl vagy mappa részletek megtekintése</target>
       </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_files.pasteinto.1">
         <source>Paste into this folder</source>
-        <target>Beillesztés ebbe a könyvtárba</target>
+        <target>Beillesztés ebbe a mappába</target>
       </trans-unit>
       <trans-unit id="tl_files.sync.0">
         <source>Synchronize</source>

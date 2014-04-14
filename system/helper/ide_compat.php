@@ -76,6 +76,7 @@ namespace  {
 	class ContentHyperlink extends \Contao\ContentHyperlink {}
 	class ContentImage extends \Contao\ContentImage {}
 	class ContentList extends \Contao\ContentList {}
+	class ContentMarkdown extends \Contao\ContentMarkdown {}
 	class ContentMedia extends \Contao\ContentMedia {}
 	class ContentModule extends \Contao\ContentModule {}
 	class ContentSliderStart extends \Contao\ContentSliderStart {}
@@ -110,6 +111,7 @@ namespace  {
 	class Date extends \Contao\Date {}
 	class Dbafs extends \Contao\Dbafs {}
 	class DcaExtractor extends \Contao\DcaExtractor {}
+	class DcaLoader extends \Contao\DcaLoader {}
 	class Email extends \Contao\Email {}
 	class Encryption extends \Contao\Encryption {}
 	class Environment extends \Contao\Environment {}

@@ -1,11 +1,11 @@
 <?php
 
 // Add the mediabox style sheet
-$GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvBlack21.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. $GLOBALS['TL_ASSETS']['MEDIABOX'] .'/css/mediaboxAdvBlack21.css||static';
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/mediabox/<?php echo $GLOBALS['TL_ASSETS']['MEDIABOX']; ?>/js/mediabox.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
   (function($) {

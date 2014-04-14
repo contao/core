@@ -181,7 +181,7 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::decodeEntities($varValue);
 			$varValue = static::xssClean($varValue);
-			$varValue = static::stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
+			$varValue = static::stripTags($varValue, \Config::get('allowedTags'));
 
 			if (!$blnDecodeEntities)
 			{
@@ -625,7 +625,7 @@ class Input
 
 		// Preserve basic entities
 		$varValue = static::preserveBasicEntities($varValue);
-		$varValue = html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$varValue = html_entity_decode($varValue, ENT_QUOTES, \Config::get('characterSet'));
 
 		return $varValue;
 	}

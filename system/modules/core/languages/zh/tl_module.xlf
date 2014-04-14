@@ -81,6 +81,12 @@
         <source>Here you can select the navigation template.</source>
         <target>此处可选择导航菜单模板</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>页面</target>
@@ -612,6 +618,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>模板设置</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>图片设置</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

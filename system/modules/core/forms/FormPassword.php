@@ -105,9 +105,9 @@ class FormPassword extends \Widget
 			return '';
 		}
 
-		if (utf8_strlen($varInput) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+		if (utf8_strlen($varInput) < \Config::get('minPasswordLength'))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']));
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], \Config::get('minPasswordLength')));
 		}
 
 		if ($varInput != $this->getPost($this->strName . '_confirm'))

@@ -77,7 +77,7 @@ class Encryption
 
 		if (!$strKey)
 		{
-			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
+			$strKey = \Config::get('encryptionKey');
 		}
 
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size(static::$resTd), MCRYPT_RAND);
@@ -133,7 +133,7 @@ class Encryption
 
 		if (!$strKey)
 		{
-			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
+			$strKey = \Config::get('encryptionKey');
 		}
 
 		mcrypt_generic_init(static::$resTd, md5($strKey), $iv);
@@ -156,12 +156,12 @@ class Encryption
 			throw new \Exception('The PHP mcrypt extension is not installed');
 		}
 
-		if ((self::$resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
+		if ((self::$resTd = mcrypt_module_open(\Config::get('encryptionCipher'), '', \Config::get('encryptionMode'), '')) == false)
 		{
 			throw new \Exception('Error initializing encryption module');
 		}
 
-		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
+		if (\Config::get('encryptionKey') == '')
 		{
 			throw new \Exception('Encryption key not set');
 		}

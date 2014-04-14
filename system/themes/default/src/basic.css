@@ -31,14 +31,14 @@ fieldset,form,input,optgroup,select,textarea {
 /* Font size and color */
 a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 	font-size:11px;
-	color:#555;
+	color:#444;
 }
 fieldset,form,input,optgroup,select,textarea {
 	font-size:12px;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
-	color:#555;
+	color:#444;
 }
 table {
 	border-spacing:0;
@@ -72,7 +72,7 @@ span.mandatory {
 
 /* Basic elements */
 a {
-	color:#555;
+	color:#444;
 	text-decoration:none;
 }
 a:hover,a:focus,a:active {
@@ -338,7 +338,7 @@ a.tl_submit {
 	font-family:"Trebuchet MS",Verdana,sans-serif;
 	font-size:12px;
 }
-a.tl_submit:hover {
+a.tl_submit,a.tl_submit:hover {
 	color:#555;
 }
 .firefox input.tl_submit {
@@ -440,4 +440,14 @@ a.tl_submit:hover {
 	border-left:7px solid transparent;
 	border-right:7px solid transparent;
 	border-bottom:7px solid #666;
+}
+
+/* Headline gradient */
+#header h1,#tl_navigation h1,h1.main_headline {
+	background:#909390;
+	background-image:-moz-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-webkit-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-o-linear-gradient(top, #909390, #b3b6b3);
+	background-image:-ms-linear-gradient(top, #909390, #b3b6b3);
+	background-image:linear-gradient(to bottom, #909390, #b3b6b3);
 }

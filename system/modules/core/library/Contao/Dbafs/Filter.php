@@ -46,11 +46,11 @@ class Filter extends \RecursiveFilterIterator
 	 */
 	public function __construct(\RecursiveIterator $iterator)
 	{
-		if ($GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		if (\Config::get('fileSyncExclude') != '')
 		{
 			$this->arrExempt = array_map(function($e) {
-				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
-			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+				return \Config::get('uploadPath') . '/' . $e;
+			}, trimsplit(',', \Config::get('fileSyncExclude')));
 		}
 
 		parent::__construct($iterator);

@@ -80,7 +80,7 @@ class ContentHyperlink extends \ContentElement
 				if ($objFile->isGdImage)
 				{
 					$size = deserialize($this->size);
-					$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+					$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 
 					// Adjust the image size
 					if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))

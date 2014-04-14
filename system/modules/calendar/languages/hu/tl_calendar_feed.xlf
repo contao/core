@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.title.1">
         <source>Please enter a feed title.</source>
-        <target>Adja meg a hírfolyam nevét.</target>
+        <target>Adja meg a hírfolyam megnevezését.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.0">
         <source>Feed alias</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
-        <target>Adja meg a hírfolyam nyelvét az ISO-639 szabvány szerint (pl.: &lt;em&gt;en&lt;/em&gt; vagy &lt;em&gt;en-us&lt;/em&gt;).</target>
+        <target>Adja meg a hírfolyam nyelvét az ISO-639 szabvány szerint (pl.: &lt;em&gt;hu&lt;/em&gt; vagy &lt;em&gt;en-us&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.calendars.0">
         <source>Calendars</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.calendars.1">
         <source>Here you can choose the calendars to be included in the feed.</source>
-        <target>Itt választhatja ki a naptárakat amelyeket tartalmazni fog a hírfolyam.</target>
+        <target>Naptárak kiválasztása amelyeket tartalmazni fog a hírfolyam.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.format.0">
         <source>Feed format</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.format.1">
         <source>Please choose a feed format.</source>
-        <target>Válassza ki a hírfolyam formátumát.</target>
+        <target>Hírfolyam formátumának kiválasztása.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source.0">
         <source>Export settings</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source.1">
         <source>Here you can choose what will be exported.</source>
-        <target>Válassza ki mi kerüljön exportálásra.</target>
+        <target>Itt választható ki mi kerüljön exportálásra.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.maxItems.0">
         <source>Maximum number of items</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.maxItems.1">
         <source>Here you can limit the number of feed items. Set to 0 to export all.</source>
-        <target>Itt állíthatja be a hírfolyam elemeinek számát. 0-ra állítva minden exportálva lesz.</target>
+        <target>Beállítható a hírfolyam elemeinek száma. 0-ra állítva minden exportálva lesz.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.feedBase.0">
         <source>Base URL</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.description.1">
         <source>Here you can enter a short description of the calendar feed.</source>
-        <target>Adja meg a naptár hírfolyam rövid leírását.</target>
+        <target>A naptár hírfolyam rövid leírása.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.title_legend">
         <source>Title and language</source>
@@ -119,11 +119,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.copy.0">
         <source>Duplicate feed</source>
-        <target>Hírfolyam duplázása</target>
+        <target>Hírfolyam másolása</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.copy.1">
         <source>Duplicate feed ID %s</source>
-        <target>Az ID %s hírfolyam duplázása</target>
+        <target>Az ID %s hírfolyam másolása</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.delete.0">
         <source>Delete feed</source>

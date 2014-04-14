@@ -126,7 +126,7 @@ class ModuleQuicklink extends \Module
 						$objNext->loadDetails();
 
 						// Check the target page language (see #4706)
-						if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+						if (\Config::get('addLanguageToUrl'))
 						{
 							$strForceLang = $objNext->language;
 						}

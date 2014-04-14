@@ -364,7 +364,7 @@ abstract class Statement
 	 */
 	protected function debugQuery($objResult=null)
 	{
-		if (!$GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('debugMode'))
 		{
 			return;
 		}

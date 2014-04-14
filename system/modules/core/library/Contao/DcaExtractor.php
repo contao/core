@@ -105,7 +105,7 @@ class DcaExtractor extends \Controller
 		$this->strFile = 'system/cache/sql/' . $strTable . '.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $this->strFile))
+		if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $this->strFile))
 		{
 			include TL_ROOT . '/' . $this->strFile;
 		}

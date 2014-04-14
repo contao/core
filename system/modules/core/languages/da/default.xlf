@@ -341,6 +341,12 @@
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Dette element indeholder kodestumper, som bliver formateret på en speciel måde. Koden vil kun blive vist på skærmen og ikke blive kørt.</target>
       </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+      </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
         <target>Indholds slider</target>

@@ -98,7 +98,7 @@ class ModuleSearch extends \Module
 		$objFormTemplate->search = specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']);
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
-		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
+		$objFormTemplate->id = (\Config::get('disableAlias') && \Input::get('id')) ? \Input::get('id') : false;
 		$objFormTemplate->action = ampersand(\Environment::get('indexFreeRequest'));
 
 		// Redirect page
@@ -176,7 +176,7 @@ class ModuleSearch extends \Module
 			$query_endtime = microtime(true);
 
 			// Sort out protected pages
-			if ($GLOBALS['TL_CONFIG']['indexProtected'] && !BE_USER_LOGGED_IN)
+			if (\Config::get('indexProtected') && !BE_USER_LOGGED_IN)
 			{
 				$this->import('FrontendUser', 'User');
 
@@ -241,7 +241,7 @@ class ModuleSearch extends \Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new \Pagination($count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+					$objPagination = new \Pagination($count, $per_page, \Config::get('maxPaginationLinks'), $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}

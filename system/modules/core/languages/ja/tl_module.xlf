@@ -81,6 +81,14 @@
         <source>Here you can select the navigation template.</source>
         <target>ナビゲーションのテンプレートを選択します。</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>独自のモジュールのテンプレート</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>初期設定のテンプレートを置き換えできます。</target>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>ページ</target>
@@ -612,6 +620,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>テンプレートの設定</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>画像の設定</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

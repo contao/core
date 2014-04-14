@@ -375,7 +375,7 @@ class Form extends \Hybrid
 				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
-				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+				$objTemplate->charset = \Config::get('characterSet');
 
 				$email->attachFileFromString($objTemplate->parse(), 'form.xml', 'application/xml');
 			}

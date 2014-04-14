@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidGoogleId">
         <source>Please enter a numeric Google+ ID or vanity name!</source>
-        <target>Zadejte prosím identifikační číslo Google+ nebo platné jméno</target>
+        <target>Zadejte prosím identifikační číslo Google+ nebo platné jméno!</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -340,6 +340,14 @@
       <trans-unit id="CTE.code.1">
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Formátovaný text, který se vytiskne tak jak jej zde napíšete. Čili nepodléhá dalšímu zpracování.</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+        <target>Markdown</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+        <target>Vytvořený HTML kód z markdownového textu</target>
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>

@@ -377,6 +377,14 @@
         <source>Here you can select the gallery template.</source>
         <target>Qua pos ti tscherner il template per la galaria.</target>
       </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Template d'element persunalisà</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Qua pos ti surscriver il template da standard da l'element.</target>
+      </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
         <target>Datotecas da video/audio</target>

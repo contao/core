@@ -1,0 +1,54 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/**
+ * Apply the holy grail CSS layout if the screen is at least 768 pixel wide,
+ * otherwise display all columns underneath each other
+ *
+ * @see http://www.alistapart.com/articles/holygrail
+ */
+@media (max-width:767px)
+{
+	#wrapper {
+		margin:0;
+		width:auto;
+	}
+	#container {
+		padding-left:0;
+		padding-right:0;
+	}
+	#main,#left,#right {
+		float:none;
+		width:auto;
+	}
+	#left {
+		right:0;
+		margin-left:0;
+	}
+	#right {
+		margin-right:0;
+	}
+}
+
+/**
+ * Flexible images (videos see #4896)
+ *
+ * @see http://webdesignerwall.com/tutorials/responsive-design-with-css3-media-queries
+ */
+img {
+	max-width:100%;
+	height:auto;
+}
+.ie7 img {
+	-ms-interpolation-mode:bicubic;
+}
+.ie8 img {
+	width:auto; /* see #5789 */
+}

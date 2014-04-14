@@ -20,14 +20,14 @@
   <script><?php echo $this->getLocaleString(); ?></script>
   <script src="<?php
     $objCombiner = new Combiner();
-    $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+    $objCombiner->add('assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js', $GLOBALS['TL_ASSETS']['MOOTOOLS']);
     $objCombiner->add('assets/mootools/stylect/js/stylect.js');
     $objCombiner->add('assets/mootools/mootao/Mootao.js');
     echo $objCombiner->getCombinedFile();
   ?>"></script>
   <script><?php echo $this->getDateString(); ?></script>
   <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
 <body class="<?php echo $this->ua; ?>">

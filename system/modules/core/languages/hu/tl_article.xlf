@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_article.title.1">
         <source>Please enter the article title.</source>
-        <target>Adja meg a cikk nevét.</target>
+        <target>Adja meg a cikk megnevezését.</target>
       </trans-unit>
       <trans-unit id="tl_article.alias.0">
         <source>Article alias</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_article.author.1">
         <source>Here you can change the author of the article.</source>
-        <target>Itt tudja megváltoztatni a cikk szerzőjét.</target>
+        <target>Itt változtatható meg a cikk szerzője.</target>
       </trans-unit>
       <trans-unit id="tl_article.inColumn.0">
         <source>Display in</source>
-        <target>Megjelenítés</target>
+        <target>Megjelenítés helye</target>
       </trans-unit>
       <trans-unit id="tl_article.inColumn.1">
         <source>Please choose the layout section you want the article to be displayed in.</source>
-        <target>Válassza ki az elrendezés azon részét ahol a cikk meg fog jelenni.</target>
+        <target>Válassza ki az elrendezés azon szakaszát ahol a cikk meg fog jelenni.</target>
       </trans-unit>
       <trans-unit id="tl_article.keywords.0">
         <source>Meta keywords</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_article.keywords.1">
         <source>Here you can enter a list of comma separated keywords. Keywords, however, are no longer relevant to most search engines (including Google).</source>
-        <target>Itt tudja megadni a kulcsszavakat vesszővel elválasztva. A kulcsszavak, melyek mennyisége nem haladja meg a releváns keresők irányelveit (mint például a Google).</target>
+        <target>Itt adhatja meg a kulcsszavakat vesszővel elválasztva. Azonban a kulcsszavak már nem relevánsak a legtöbb kereső számára (beleértve a Google-t).</target>
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.0">
         <source>Teaser CSS ID/class</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.1">
         <source>Here you can set an ID and one or more classes for the teaser element.</source>
-        <target>Itt adhat meg egy CSS ID-t és egy vagy több osztályt az előzeteshez.</target>
+        <target>Itt adható meg egy ID és egy vagy több osztály az előzetes elemhez.</target>
       </trans-unit>
       <trans-unit id="tl_article.showTeaser.0">
         <source>Show teaser</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser.0">
         <source>Article teaser</source>
-        <target>Cikk előzetes</target>
+        <target>Cikk előzetese</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
         <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
-        <target>Itt lehet kiválasztani, hogy mely opciók legyenek elérhetőek.</target>
+        <target>Itt lehet kiválasztani mely lehetőségek legyenek elérhetőek.</target>
       </trans-unit>
       <trans-unit id="tl_article.guests.0">
         <source>Show to guests only</source>
@@ -87,15 +87,15 @@
       </trans-unit>
       <trans-unit id="tl_article.protected.1">
         <source>Show the article to certain member groups only.</source>
-        <target>A cikket csak bizonyos csoport/csoportok tagjainak mutatja.</target>
+        <target>A cikk megjelenítése csak bizonyos tag csoportoknak.</target>
       </trans-unit>
       <trans-unit id="tl_article.groups.0">
         <source>Allowed member groups</source>
-        <target>Engedélyezett csoportok</target>
+        <target>Engedélyezett tag csoportok</target>
       </trans-unit>
       <trans-unit id="tl_article.groups.1">
         <source>These groups will be able to see the article.</source>
-        <target>Ezen csoport/csoportok tagjai láthatják a cikket.</target>
+        <target>Ezek a csoportok tagjai láthatják a cikket.</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_article.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>Itt adhat meg egy CSS ID-t és egy vagy több osztályt.</target>
+        <target>Itt adható meg egy ID és egy vagy több osztály.</target>
       </trans-unit>
       <trans-unit id="tl_article.space.0">
         <source>Space in front and after</source>
@@ -111,11 +111,11 @@
       </trans-unit>
       <trans-unit id="tl_article.space.1">
         <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>Itt adhatja meg egy tartalmi elem előtt és után megjelenő üres hely méretét pixelben. Javasolt a beágyazott stílus formázás helyett a stíluslap használata.</target>
+        <target>Itt adható meg egy tartalmi elem előtt és után megjelenő üres hely méretét pixelben. Javasolt a beágyazott stílus elkerülése és helyett a stíluslap használata.</target>
       </trans-unit>
       <trans-unit id="tl_article.published.0">
         <source>Publish article</source>
-        <target>Megjelenítés</target>
+        <target>Cikk megjelentetése</target>
       </trans-unit>
       <trans-unit id="tl_article.published.1">
         <source>Make the article publicly visible on the website.</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_article.start.1">
         <source>Do not show the article on the website before this day.</source>
-        <target>A cikk a megadott dátum előtt nem jelenik meg.</target>
+        <target>A cikk a megadott dátum előtt nem jelenik meg a weboldalon.</target>
       </trans-unit>
       <trans-unit id="tl_article.stop.0">
         <source>Show until</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_article.stop.1">
         <source>Do not show the article on the website on and after this day.</source>
-        <target>A cikk a megadott dátum után nem jelenik meg.</target>
+        <target>A cikk a megadott dátum után nem jelenik meg a weboldalon.</target>
       </trans-unit>
       <trans-unit id="tl_article.tstamp.0">
         <source>Revision date</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_article.tstamp.1">
         <source>Date and time of the latest revision</source>
-        <target>A legutóbbi módosítás dátuma és ideje.</target>
+        <target>A legutóbbi módosítás dátuma és ideje</target>
       </trans-unit>
       <trans-unit id="tl_article.title_legend">
         <source>Title and author</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_article.layout_legend">
         <source>Section and keywords</source>
-        <target>Fejezet és kulcsszavak</target>
+        <target>Szakasz és kulcsszavak</target>
       </trans-unit>
       <trans-unit id="tl_article.syndication_legend">
         <source>Syndication</source>
@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="tl_article.publish_legend">
         <source>Publish settings</source>
-        <target>Publikáció beállításai</target>
+        <target>Megjelentetés beállításai</target>
       </trans-unit>
       <trans-unit id="tl_article.print">
         <source>Print the page</source>
@@ -223,11 +223,11 @@
       </trans-unit>
       <trans-unit id="tl_article.show.0">
         <source>Article details</source>
-        <target>Cikk adatai</target>
+        <target>Cikk részletek</target>
       </trans-unit>
       <trans-unit id="tl_article.show.1">
         <source>Show the details of article ID %s</source>
-        <target>Az ID %s cikk adatainak mutatása</target>
+        <target>Az ID %s cikk részletek mutatása</target>
       </trans-unit>
       <trans-unit id="tl_article.edit.0">
         <source>Edit article</source>
@@ -247,11 +247,11 @@
       </trans-unit>
       <trans-unit id="tl_article.copy.0">
         <source>Duplicate article</source>
-        <target>Cikk duplázása</target>
+        <target>Cikk másolása</target>
       </trans-unit>
       <trans-unit id="tl_article.copy.1">
         <source>Duplicate article ID %s</source>
-        <target>Az ID %s cikk duplázása</target>
+        <target>Az ID %s cikk másolása</target>
       </trans-unit>
       <trans-unit id="tl_article.cut.0">
         <source>Move article</source>

@@ -55,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'panelLayout'             => 'filter,search,limit',
+			'panelLayout'             => 'filter;search,limit',
 			'headerFields'            => array('name', 'author', 'tstamp'),
 			'child_record_callback'   => array('tl_style_sheet', 'listStyleSheet'),
 			'child_record_class'      => 'no_padding'
@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{config_legend},disablePie,embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'default'                     => '{title_legend},name;{media_legend},media,mediaQuery;{vars_legend},vars;{expert_legend:hide},disablePie,embedImages,cc'
 	),
 
 	// Fields
@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'search'                  => true,
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
 		(

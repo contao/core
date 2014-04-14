@@ -1,11 +1,11 @@
 <?php
 
 // Add the swipe style sheet
-$GLOBALS['TL_CSS'][] = 'assets/swipe/'. SWIPE .'/css/swipe.min.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/swipe/'. $GLOBALS['TL_ASSETS']['SWIPE'] .'/css/swipe.min.css||static';
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo SWIPE; ?>/js/swipe.min.js"></script>
+<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo $GLOBALS['TL_ASSETS']['SWIPE']; ?>/js/swipe.min.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
   (function() {

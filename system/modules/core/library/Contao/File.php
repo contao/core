@@ -105,14 +105,14 @@ class File extends \System
 		$strFolder = dirname($strFile);
 
 		// Check whether we need to sync the database
-		$this->blnSyncDb = ($GLOBALS['TL_CONFIG']['uploadPath'] != 'templates' && strncmp($strFolder . '/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) === 0);
+		$this->blnSyncDb = (\Config::get('uploadPath') != 'templates' && strncmp($strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0);
 
 		// Check the excluded folders
-		if ($this->blnSyncDb && $GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		if ($this->blnSyncDb && \Config::get('fileSyncExclude') != '')
 		{
 			$arrExempt = array_map(function($e) {
-				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
-			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+				return \Config::get('uploadPath') . '/' . $e;
+			}, trimsplit(',', \Config::get('fileSyncExclude')));
 
 			foreach ($arrExempt as $strExempt)
 			{
@@ -817,6 +817,8 @@ class File extends \System
 			// Text files
 			'asp'   => array('text/asp', 'iconPLAIN.gif'),
 			'css'   => array('text/css', 'iconCSS.gif'),
+			'scss'  => array('text/x-scss', 'iconCSS.gif'),
+			'less'  => array('text/x-less', 'iconCSS.gif'),
 			'html'  => array('text/html', 'iconHTML.gif'),
 			'htm'   => array('text/html', 'iconHTML.gif'),
 			'shtml' => array('text/html', 'iconHTML.gif'),

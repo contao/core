@@ -46,6 +46,19 @@ Getting support
 Visit the [support page][8] to learn about the available support options.
 
 
+Installing from Git
+-------------------
+
+We are using [Composer][9] to manage third-party scripts, so after you have
+cloned the repository, make sure to install the vendor libraries:
+
+```
+git clone https://github.com/contao/core.git
+cd core
+php composer.phar install --prefer-dist
+```
+
+
 [1]: https://contao.org
 [2]: https://contao.org/manual/installation.html
 [3]: https://contao.org/manual.html
@@ -54,3 +67,4 @@ Visit the [support page][8] to learn about the available support options.
 [6]: http://contaowiki.org
 [7]: system/docs
 [8]: https://contao.org/support.html
+[9]: https://getcomposer.org

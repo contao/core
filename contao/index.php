@@ -93,7 +93,7 @@ class Index extends Backend
 			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		}
 
-		$strHeadline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
+		$strHeadline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], Config::get('websiteTitle'));
 
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->messages = Message::generate();
@@ -101,7 +101,7 @@ class Index extends Backend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->languages = System::getLanguages(true);
 		$this->Template->title = specialchars($strHeadline);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
 		$this->Template->headline = $strHeadline;
@@ -114,7 +114,7 @@ class Index extends Backend
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
 		$this->Template->frontendFile = Environment::get('base');
-		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->disableCron = Config::get('disableCron');
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 		$this->Template->default = $GLOBALS['TL_LANG']['MSC']['default'];
 

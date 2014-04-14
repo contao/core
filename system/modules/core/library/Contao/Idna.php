@@ -13,13 +13,6 @@
 namespace Contao;
 
 
-// Import the inda_convert class
-if (!class_exists('idna_convert', false))
-{
-	require_once TL_ROOT . '/system/modules/core/vendor/idna/idna_convert.class.php';
-}
-
-
 /**
  * An idna_encode adapter class
  *
