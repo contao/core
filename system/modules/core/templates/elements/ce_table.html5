@@ -7,6 +7,10 @@
 
   <table id="<?php echo $this->id; ?>"<?php if ($this->sortable): ?> class="sortable"<?php endif; ?>>
 
+    <?php if ($this->summary != ''): ?>
+      <caption><?php echo $this->summary; ?></caption>
+    <?php endif; ?>
+
     <?php if ($this->useHeader): ?>
       <thead>
         <tr>

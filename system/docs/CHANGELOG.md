@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Changed
+Render the table summary as `<caption>` in HTML5 (see #6295).
+
+### Changed
 Also convert paths without delimiter in `Combiner::fixPaths()` (see #6417).
 
 ### New
