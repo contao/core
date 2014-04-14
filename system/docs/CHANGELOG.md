@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC (2014-XX-XX)
 ---------------------------
 
+### Improved
+Support optional dependencies in the module loader (see #6835).
+
 ### New
 Mark the beginning and end of each template in debug mode (see #6841).
 

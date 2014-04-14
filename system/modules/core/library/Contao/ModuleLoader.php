@@ -149,7 +149,25 @@ class ModuleLoader
 				if (file_exists($path . '/config/autoload.ini'))
 				{
 					$config = parse_ini_file($path . '/config/autoload.ini', true);
-					$load[$file] = $config['requires'];
+					$load[$file] = $config['requires'] ?: array();
+
+					foreach ($load[$file] as $k=>$v)
+					{
+						// Optional requirements (see #6835)
+						if (strncmp($v, '*', 1) === 0)
+						{
+							$key = substr($v, 1);
+
+							if (!in_array($key, $modules))
+							{
+								unset($load[$file][$k]);
+							}
+							else
+							{
+								$load[$file][$k] = $key;
+							}
+						}
+					}
 				}
 			}
 
