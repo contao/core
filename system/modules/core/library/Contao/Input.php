@@ -288,7 +288,7 @@ class Input
 
 			if ($blnAddUnused)
 			{
-				static::$arrUnusedGet[$strKey] = $varValue; // see #4277
+				static::setUnusedGet($strKey, $varValue); // see #4277
 			}
 		}
 	}
@@ -362,6 +362,29 @@ class Input
 	public static function hasUnusedGet()
 	{
 		return count(static::$arrUnusedGet) > 0;
+	}
+
+
+	/**
+	 * Return the unused GET parameters as array
+	 *
+	 * @return array The unused GET parameter array
+	 */
+	public static function getUnusedGet()
+	{
+		return static::$arrUnusedGet;
+	}
+
+
+	/**
+	 * Set an unused GET parameter
+	 *
+	 * @param string $strKey   The array key
+	 * @param mixed  $varValue The array value
+	 */
+	public static function setUnusedGet($strKey, $varValue)
+	{
+		static::$arrUnusedGet[$strKey] = $varValue;
 	}
 
 
