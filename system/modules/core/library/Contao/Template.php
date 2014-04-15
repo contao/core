@@ -249,19 +249,6 @@ abstract class Template extends \Controller
 			return '';
 		}
 
-		// Override the output format in the front end
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat != '')
-			{
-				$this->strFormat = $objPage->outputFormat;
-			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
-		}
-
 		// HOOK: add custom parse filters
 		if (isset($GLOBALS['TL_HOOKS']['parseTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseTemplate']))
 		{

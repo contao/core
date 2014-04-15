@@ -157,9 +157,8 @@ abstract class Widget extends \Controller
 			if ($objPage->outputFormat != '')
 			{
 				$this->strFormat = $objPage->outputFormat;
+				$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 		}
 
 		$this->addAttributes($arrAttributes);

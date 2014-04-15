@@ -34,6 +34,15 @@ class FrontendTemplate extends \Template
 	 */
 	public function parse()
 	{
+		global $objPage;
+
+		// Adjust the output format
+		if ($objPage->outputFormat != '')
+		{
+			$this->strFormat = $objPage->outputFormat;
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters
