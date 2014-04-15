@@ -779,7 +779,7 @@ label.tl_change_selected {
 
 /* Picker */
 .selector_container ul {
-	margin:0 0 9px;
+	margin:0 0 3px;
 	padding:0;
 	list-style-type:none;
 	overflow:hidden;
@@ -790,6 +790,9 @@ label.tl_change_selected {
 }
 .selector_container img {
 	vertical-align:top;
+}
+.selector_container p {
+	margin-bottom:2px;
 }
 ul.sgallery {
 	overflow:hidden;
