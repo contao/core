@@ -767,7 +767,7 @@ abstract class Model
 			}
 		}
 
-		return new \Model\Collection(array_filter(array_values($arrRegistered)), static::$strTable);
+		return static::createCollection(array_filter(array_values($arrRegistered)), static::$strTable);
 	}
 
 
@@ -926,7 +926,7 @@ abstract class Model
 		}
 
 		$arrOptions['table'] = static::$strTable;
-		$strQuery = \Model\QueryBuilder::find($arrOptions);
+		$strQuery = static::buildFindQuery($arrOptions);
 
 		$objStatement = \Database::getInstance()->prepare($strQuery);
 
@@ -969,11 +969,11 @@ abstract class Model
 				return $objModel->mergeRow($objResult->row());
 			}
 
-			return new static($objResult);
+			return static::createModelFromDbResult($objResult);
 		}
 		else
 		{
-			return \Model\Collection::createFromDbResult($objResult, static::$strTable);
+			return static::createCollectionFromDbResult($objResult, static::$strTable);
 		}
 	}
 
@@ -1019,7 +1019,7 @@ abstract class Model
 			return 0;
 		}
 
-		$strQuery = \Model\QueryBuilder::count(array
+		$strQuery = static::buildCountQuery(array
 		(
 			'table'  => static::$strTable,
 			'column' => $strColumn,
@@ -1065,5 +1065,72 @@ abstract class Model
 
 			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
 		}
+	}
+
+
+	/**
+	 * Build a query based on the given options
+	 *
+	 * @param array $arrOptions The options array
+	 *
+	 * @return string The query string
+	 */
+	protected static function buildFindQuery(array $arrOptions)
+	{
+		return \Model\QueryBuilder::find($arrOptions);
+	}
+
+
+	/**
+	 * Build a query based on the given options to count the number of records
+	 *
+	 * @param array $arrOptions The options array
+	 *
+	 * @return string The query string
+	 */
+	protected static function buildCountQuery(array $arrOptions)
+	{
+		return \Model\QueryBuilder::count($arrOptions);
+	}
+
+
+	/**
+	 * Create a model from a database result
+	 *
+	 * @param \Database\Result $objResult The database result object
+	 *
+	 * @return \Model The model
+	 */
+	protected static function createModelFromDbResult(\Database\Result $objResult)
+	{
+		return new static($objResult);
+	}
+
+
+	/**
+	 * Create a Model\Collection object
+	 *
+	 * @param array  $arrModels An array of models
+	 * @param string $strTable  The table name
+	 *
+	 * @return \Model\Collection The Model\Collection object
+	 */
+	protected static function createCollection(array $arrModels, $strTable)
+	{
+		return new \Model\Collection($arrModels, $strTable);
+	}
+
+
+	/**
+	 * Create a new collection from a database result
+	 *
+	 * @param \Database\Result $objResult The database result object
+	 * @param string           $strTable  The table name
+	 *
+	 * @return \Model\Collection The model collection
+	 */
+	protected static function createCollectionFromDbResult(\Database\Result $objResult, $strTable)
+	{
+		return \Model\Collection::createFromDbResult($objResult, $strTable);
 	}
 }
