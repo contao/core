@@ -135,6 +135,15 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		)
 	),
 
+	// Select
+	'select' => array
+	(
+		'buttons_callback' => array
+		(
+			array('tl_article', 'addAliasButton')
+		)
+	),
+
 	// Palettes
 	'palettes' => array
 	(
@@ -826,6 +835,59 @@ class tl_article extends Backend
 								  ->execute($row['pid']);
 
 		return ($this->User->isAdmin || $this->User->isAllowed(BackendUser::CAN_DELETE_ARTICLES, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Automatically generate the folder URL aliases
+	 * @param array
+	 * @return array
+	 */
+	public function addAliasButton($arrButtons)
+	{
+		// Generate the aliases
+		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
+		{
+			$session = $this->Session->getData();
+			$ids = $session['CURRENT']['IDS'];
+
+			foreach ($ids as $id)
+			{
+				$objArticle = ArticleModel::findByPk($id);
+
+				if ($objArticle === null)
+				{
+					continue;
+				}
+
+				// Set the new alias
+				$strAlias = standardize(String::restoreBasicEntities($objArticle->title));
+
+				// The alias has not changed
+				if ($strAlias == $objArticle->alias)
+				{
+					continue;
+				}
+
+				// Initialize the version manager
+				$objVersions = new Versions('tl_article', $id);
+				$objVersions->initialize();
+
+				// Store the new alias
+				$this->Database->prepare("UPDATE tl_article SET alias=? WHERE id=?")
+							   ->execute($strAlias, $id);
+
+				// Create a new version
+				$objVersions->create();
+			}
+
+			$this->redirect($this->getReferer());
+		}
+
+		// Add the button
+		$arrButtons['alias'] = '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+
+		return $arrButtons;
 	}
 
 

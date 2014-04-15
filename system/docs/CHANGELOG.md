@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### New
+Add a button to generate article aliases via "edit multiple" (see #6628).
+
+### New
 Add a pagination menu at the listing bottom (see #6377).
 
 ### Fixed
