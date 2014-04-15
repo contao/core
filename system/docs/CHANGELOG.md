@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Add a pagination menu at the listing bottom (see #6377).
+
 ### Fixed
 Only override element and module templates in the front end (see #6878).
 

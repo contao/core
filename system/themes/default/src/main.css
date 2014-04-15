@@ -1439,6 +1439,11 @@ fieldset.collapsed > legend {
 .pagination .current {
 	color:#999;
 }
+.pagination-lp {
+	border:0;
+	border-top:1px solid #ccc;
+	padding:3px 0 4px 6px;
+}
 
 /* File synchronization */
 #sync-results {

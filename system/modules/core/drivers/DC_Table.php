@@ -59,6 +59,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	protected $limit;
 
 	/**
+	 * Total (database query)
+	 * @param string
+	 */
+	protected $total;
+
+	/**
 	 * First sorting field
 	 * @param string
 	 */
@@ -369,28 +375,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$return .= ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->parentView() : $this->listView();
 
 			// Add another panel at the end of the page
-			if (strpos($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'], 'limit') !== false && ($strLimit = $this->limitMenu(true)) != false)
+			if (strpos($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'], 'limit') !== false)
 			{
-				$return .= '
-
-<form action="'.ampersand(\Environment::get('request'), true).'" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_filters_limit">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-
-<div class="tl_panel_bottom">
-
-<div class="tl_submit_panel tl_subpanel">
-<input type="image" name="btfilter" id="btfilter" src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['applyTitle']) . '" alt="' . specialchars($GLOBALS['TL_LANG']['MSC']['apply']) . '">
-</div>' . $strLimit . '
-
-<div class="clear"></div>
-
-</div>
-
-</div>
-</form>
-';
+				$return .= $this->paginationMenu();
 			}
 		}
 
@@ -5001,12 +4988,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			$objTotal = $this->Database->prepare($query)->execute($this->values);
-			$total = $objTotal->count;
+			$this->total = $objTotal->count;
 			$options_total = 0;
 			$blnIsMaxResultsPerPage = false;
 
 			// Overall limit
-			if ($total > \Config::get('maxResultsPerPage') && ($this->limit === null || preg_replace('/^.*,/', '', $this->limit) == \Config::get('maxResultsPerPage')))
+			if ($this->total > \Config::get('maxResultsPerPage') && ($this->limit === null || preg_replace('/^.*,/', '', $this->limit) == \Config::get('maxResultsPerPage')))
 			{
 				if ($this->limit === null)
 				{
@@ -5021,13 +5008,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$options = '';
 
 			// Build options
-			if ($total > 0)
+			if ($this->total > 0)
 			{
 				$options = '';
-				$options_total = ceil($total / \Config::get('resultsPerPage'));
+				$options_total = ceil($this->total / \Config::get('resultsPerPage'));
 
 				// Reset limit if other parameters have decreased the number of results
-				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/', '', $this->limit) > $total))
+				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/', '', $this->limit) > $this->total))
 				{
 					$this->limit = '0,'.\Config::get('resultsPerPage');
 				}
@@ -5038,9 +5025,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$this_limit = ($i*\Config::get('resultsPerPage')).','.\Config::get('resultsPerPage');
 					$upper_limit = ($i*\Config::get('resultsPerPage')+\Config::get('resultsPerPage'));
 
-					if ($upper_limit > $total)
+					if ($upper_limit > $this->total)
 					{
-						$upper_limit = $total;
+						$upper_limit = $this->total;
 					}
 
 					$options .= '
@@ -5055,13 +5042,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			// Return if there is only one page
-			if ($blnOptional && ($total < 1 || $options_total < 2))
+			if ($blnOptional && ($this->total < 1 || $options_total < 2))
 			{
 				return '';
 			}
 
 			$fields = '
-<select name="tl_limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $total > \Config::get('resultsPerPage')) ? ' active' : '') . '" onchange="this.form.submit()">
+<select name="tl_limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $this->total > \Config::get('resultsPerPage')) ? ' active' : '') . '" onchange="this.form.submit()">
   <option value="tl_limit">'.$GLOBALS['TL_LANG']['MSC']['filterRecords'].'</option>'.$options.'
 </select> ';
 		}
@@ -5456,6 +5443,38 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div class="tl_filter tl_subpanel">
 <strong>' . $GLOBALS['TL_LANG']['MSC']['filter'] . ':</strong> ' . $fields . '
 </div>';
+	}
+
+
+	/**
+	 * Return a pagination menu to browse results
+	 * @return string
+	 */
+	protected function paginationMenu()
+	{
+		$session = $this->Session->getData();
+		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
+
+		list($offset, $limit) = explode(',', $this->limit);
+
+		// Set the limit filter based on the page number
+		if (isset($_GET['lp']))
+		{
+			$lp = intval(\Input::get('lp')) - 1;
+
+			if ($lp >= 0 && $lp < ceil($this->total / $limit))
+			{
+				$session['filter'][$filter]['limit'] = ($lp * $limit) . ',' . $limit;
+				$this->Session->setData($session);
+			}
+
+			$this->redirect(preg_replace('/&(amp;)?lp=[^&]+/i', '', \Environment::get('request')));
+		}
+
+		\Input::setGet('lp', $offset / $limit + 1);
+
+		$objPagination = new \Pagination($this->total, $limit, 7, 'lp', new \BackendTemplate('be_pagination'), true);
+		return $objPagination->generate();
 	}
 
 

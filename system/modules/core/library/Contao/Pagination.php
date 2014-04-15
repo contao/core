@@ -124,6 +124,12 @@ class Pagination
 	 */
 	protected $arrData = array();
 
+	/**
+	 * Data array
+	 * @var array
+	 */
+	protected $blnForceParam = false;
+
 
 	/**
 	 * Set the number of rows, the number of results per pages and the number of links
@@ -133,8 +139,9 @@ class Pagination
 	 * @param integer   $intNumberOfLinks The number of links to generate
 	 * @param string    $strParameter     The parameter name
 	 * @param \Template $objTemplate      The template object
+	 * @param boolean   $blnForceParam    Force the URL parameter
 	 */
-	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null)
+	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null, $blnForceParam=false)
 	{
 		$this->intPage = 1;
 		$this->intRows = (int) $intRows;
@@ -148,7 +155,7 @@ class Pagination
 		$this->lblLast = $GLOBALS['TL_LANG']['MSC']['last'];
 		$this->lblTotal = $GLOBALS['TL_LANG']['MSC']['totalPages'];
 
-		if (\Input::get($strParameter) != '' && \Input::get($strParameter) > 0)
+		if (\Input::get($strParameter) > 0)
 		{
 			$this->intPage = \Input::get($strParameter);
 		}
@@ -162,6 +169,7 @@ class Pagination
 		}
 
 		$this->objTemplate = $objTemplate;
+		$this->blnForceParam = $blnForceParam;
 	}
 
 
@@ -288,6 +296,8 @@ class Pagination
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
 
+		$objTemplate->class = 'pagination-' . $this->strParameter;
+
 		// Adding rel="prev" and rel="next" links is not possible
 		// anymore with unique variable names (see #3515 and #4141)
 
@@ -362,7 +372,7 @@ class Pagination
 	 */
 	protected function linkToPage($intPage)
 	{
-		if ($intPage <= 1)
+		if ($intPage <= 1 && !$this->blnForceParam)
 		{
 			return ampersand($this->strUrl);
 		}
