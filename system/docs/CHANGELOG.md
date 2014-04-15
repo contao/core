@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### New
+Add the "customizeSearch" hook (see #5223).
+
+### New
 Add a button to generate article aliases via "edit multiple" (see #6628).
 
 ### New

@@ -78,20 +78,17 @@ class ModuleSearch extends \Module
 			$_GET['per_page'] = \Input::post('per_page');
 		}
 
+		$blnFuzzy = $this->fuzzy;
+		$strQueryType = \Input::get('query_type') ?: $this->queryType;
+
 		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
-		// Overwrite the default query_type
-		if (\Input::get('query_type'))
-		{
-			$this->queryType = \Input::get('query_type');
-		}
-
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
-		$objFormTemplate->queryType = $this->queryType;
+		$objFormTemplate->queryType = $strQueryType;
 		$objFormTemplate->keyword = specialchars($strKeywords);
 		$objFormTemplate->keywordLabel = $GLOBALS['TL_LANG']['MSC']['keywords'];
 		$objFormTemplate->optionsLabel = $GLOBALS['TL_LANG']['MSC']['options'];
@@ -129,6 +126,16 @@ class ModuleSearch extends \Module
 				$arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			}
 
+			// HOOK: add custom logic (see #5223)
+			if (isset($GLOBALS['TL_HOOKS']['customizeSearch']) && is_array($GLOBALS['TL_HOOKS']['customizeSearch']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['customizeSearch'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($arrPages, $strKeywords, $strQueryType, $blnFuzzy);
+				}
+			}
+
 			// Return if there are no pages
 			if (!is_array($arrPages) || empty($arrPages))
 			{
@@ -137,7 +144,7 @@ class ModuleSearch extends \Module
 			}
 
 			$arrResult = null;
-			$strChecksum = md5($strKeywords.\Input::get('query_type').$intRootId.$this->fuzzy);
+			$strChecksum = md5($strKeywords . $strQueryType . $intRootId . $blnFuzzy);
 			$query_starttime = microtime(true);
 			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
@@ -161,7 +168,7 @@ class ModuleSearch extends \Module
 			{
 				try
 				{
-					$objSearch = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
+					$objSearch = \Search::searchFor($strKeywords, ($strQueryType == 'or'), $arrPages, 0, 0, $blnFuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (\Exception $e)
