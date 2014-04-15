@@ -162,7 +162,7 @@
         <source>Additional style sheets</source>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional style sheets from the file system.</source>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
