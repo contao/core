@@ -329,13 +329,13 @@ class Combiner extends \System
 		{
 			$objCompiler = new \scssc();
 			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter('scss_formatter_compressed');
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));
 		}
 		else
 		{
 			$objCompiler = new \lessc();
 			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter('compressed');
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'lessjs' : 'compressed'));
 		}
 
 		return $this->fixPaths($objCompiler->compile($content), $arrFile);
