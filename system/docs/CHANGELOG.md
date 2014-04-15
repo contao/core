@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Fixed
+Only override element and module templates in the front end (see #6878).
+
 ### Changed
 Use the `html5shiv-printshiv.js` script in the front end (see #6293).
 

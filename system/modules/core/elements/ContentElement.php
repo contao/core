@@ -87,7 +87,7 @@ abstract class ContentElement extends \Frontend
 		$this->space = deserialize($objElement->space);
 		$this->cssID = deserialize($objElement->cssID, true);
 
-		if ($this->customTpl != '')
+		if ($this->customTpl != '' && TL_MODE == 'FE')
 		{
 			$this->strTemplate = $this->customTpl;
 		}

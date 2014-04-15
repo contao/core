@@ -81,7 +81,7 @@ abstract class Module extends \Frontend
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
 
-		if ($this->customTpl != '')
+		if ($this->customTpl != '' && TL_MODE == 'FE')
 		{
 			$this->strTemplate = $this->customTpl;
 		}
