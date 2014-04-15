@@ -337,6 +337,7 @@ a.tl_submit {
 	padding:4px 12px 4px 13px;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
 	font-size:12px;
+	display:inline-block;
 }
 a.tl_submit:hover {
 	color:#555;
