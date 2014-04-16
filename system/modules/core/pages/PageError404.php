@@ -33,13 +33,18 @@ class PageError404 extends \Frontend
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 */
-	public function generate($pageId, $strDomain=null, $strHost=null)
+	public function generate($pageId, $strDomain=null, $strHost=null, $blnUnusedGet=false)
 	{
 		// Add a log entry
-		if ($strDomain !== null || $strHost !== null)
+		if ($blnUnusedGet)
 		{
-			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', __METHOD__, TL_ERROR);
+			$this->log('The request for page ID "' . $pageId . '" contained unused GET parameters: "' . implode('", "', Input::getUnusedGet()) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
+		}
+		elseif ($strDomain !== null || $strHost !== null)
+		{
+			$this->log('Page ID "' . $pageId . '" was requested via "' . $strHost . '" but can only be accessed via "' . $strDomain . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
 		}
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{

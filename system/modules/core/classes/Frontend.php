@@ -320,7 +320,7 @@ abstract class Frontend extends \Controller
 			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
-				\System::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'"', __METHOD__, TL_ERROR);
+				\System::log('No root page found (host "' . $host . '", language "'. \Input::get('language') .'")', __METHOD__, TL_ERROR);
 				die_nicely('be_no_root', 'No root page found');
 			}
 		}

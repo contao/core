@@ -268,7 +268,7 @@ class Index extends Frontend
 		{
 			// Render the error page (see #5570)
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-			$objHandler->generate($pageId);
+			$objHandler->generate($pageId, null, null, true);
 		}
 
 		// Stop the script (see #4565)

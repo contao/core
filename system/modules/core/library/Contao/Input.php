@@ -372,7 +372,7 @@ class Input
 	 */
 	public static function getUnusedGet()
 	{
-		return static::$arrUnusedGet;
+		return array_keys(static::$arrUnusedGet);
 	}
 
 
