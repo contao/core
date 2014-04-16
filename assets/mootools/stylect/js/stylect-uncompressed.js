@@ -41,7 +41,7 @@ var Stylect =
 	 */
 	update: function(el) {
 		var div = el.retrieve('div'),
-			opt = el.getElement('option[value=' + el.value + ']');
+			opt = el.getElement('option[value="' + Slick.escapeRegExp(el.value) + '"]');
 
 		if (div && opt) {
 			div.getElement('span').set('text', opt.get('text'));
