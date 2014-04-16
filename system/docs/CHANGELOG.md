@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Improved
+Assign articles to layout sections with an article module only (see #6094).
+
 ### New
 Add the "parseDate" hook (see #4260).
 

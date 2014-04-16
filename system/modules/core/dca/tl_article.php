@@ -619,9 +619,6 @@ class tl_article extends Backend
 	 */
 	public function getActiveLayoutSections(DataContainer $dc)
 	{
-		$arrCustom = array();
-		$arrSections = array('header', 'left', 'right', 'main', 'footer');
-
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
@@ -638,62 +635,45 @@ class tl_article extends Backend
 
 				$objLayout = LayoutModel::findByPk($objPage->$key);
 
-				// No layout specified
 				if ($objLayout === null)
 				{
 					continue;
 				}
 
-				// Header
-				if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
+				$arrModules = deserialize($objLayout->modules);
+
+				if (empty($arrModules) || !is_array($arrModules))
 				{
-					$arrSections[] = 'header';
+					continue;
 				}
 
-				// Left column
-				if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+				// Find all sections with an article module (see #6094)
+				foreach ($arrModules as $arrModule)
 				{
-					$arrSections[] = 'left';
+					if ($arrModule['mod'] == 0 && $arrModule['enable'])
+					{
+						$arrSections[] = $arrModule['col'];
+					}
 				}
-
-				// Right column
-				if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-				{
-					$arrSections[] = 'right';
-				}
-
-				// Main column
-				$arrSections[] = 'main';
-
-				// Footer
-				if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
-				{
-					$arrSections[] = 'footer';
-				}
-
-				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
 			}
-
-			$arrCustom = array_unique($arrCustom);
 		}
 
-		// Show all custom layout sections in "override all" mode
-		if (Input::get('act') == 'overrideAll')
+		// Show all sections (e.g. "override all" mode)
+		else
 		{
+			$arrSections = array('header', 'left', 'right', 'main', 'footer');
 			$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
 
 			while ($objLayout->next())
 			{
-				$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+				$arrCustom = trimsplit(',', $objLayout->sections);
+
+				// Add the custom layout sections
+				if (!empty($arrCustom) && is_array($arrCustom))
+				{
+					$arrSections = array_merge($arrSections, $arrCustom);
+				}
 			}
-
-			$arrCustom = array_unique($arrCustom);
-		}
-
-		// Add the custom layout sections
-		if (!empty($arrCustom) && is_array($arrCustom))
-		{
-			$arrSections = array_merge($arrSections, $arrCustom);
 		}
 
 		return array_values(array_unique($arrSections));
