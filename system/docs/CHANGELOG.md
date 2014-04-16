@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### New
+Make the title tag configurable in the page layout (see #6783).
+
+### New
 Add helper methods to generate markup depending on the output type:
 
  - `Template::generateStyleTag()`
