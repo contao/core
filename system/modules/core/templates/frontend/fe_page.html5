@@ -76,11 +76,5 @@
 
   <?php echo $this->mootools; ?>
 
-  <?php if ($this->jsBottom): ?>
-    <script>
-      <?php echo $this->jsBottom; ?>
-    </script>
-  <?php endif; ?>
-
 </body>
 </html>

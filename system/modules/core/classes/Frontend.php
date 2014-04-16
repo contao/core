@@ -623,7 +623,7 @@ abstract class Frontend extends \Controller
 	 * Return the cron timeout in seconds
 	 * @return integer
 	 */
-	protected function getCronTimeout()
+	public static function getCronTimeout()
 	{
 		if (!empty($GLOBALS['TL_CRON']['minutely']))
 		{

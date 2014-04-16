@@ -444,22 +444,6 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'] = array_merge($GLOBALS['TL_JAVASCRIPT'], $arrAppendJs);
 		}
 
-		$strJsBottom = '';
-
-		// Add to search index
-		if (\Config::get('enableSearch'))
-		{
-			$strJsBottom .= 'setTimeout(function(){try{var e=new XMLHttpRequest}catch(t){return}e.open("GET",window.location.href,!0),e.setRequestHeader("Index-Page",!0),e.setRequestHeader("X-Requested-With","XMLHttpRequest"),e.send()},1e4);';
-		}
-
-		$intTimeout = $this->getCronTimeout();
-
-		// Command scheduler
-		if (!\Config::get('disableCron'))
-		{
-			$strJsBottom .= 'setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . $intTimeout . '&&e(t+"php")})},5e3);';
-		}
-
 		// Initialize the sections
 		$this->Template->header = '';
 		$this->Template->left = '';
@@ -477,8 +461,7 @@ class PageRegular extends \Frontend
 		$this->Template->charset = \Config::get('characterSet');
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = \Config::get('disableCron');
-		$this->Template->cronTimeout = $intTimeout;
-		$this->Template->jsBottom = $strJsBottom;
+		$this->Template->cronTimeout = $this->getCronTimeout();
 	}
 
 
