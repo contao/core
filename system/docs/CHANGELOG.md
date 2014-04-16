@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Use a deferred Ajax request to add a page to the search index (see #6566).
+
 ### New
 Add the "customizeSearch" hook (see #5223).
 

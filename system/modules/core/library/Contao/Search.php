@@ -290,22 +290,13 @@ class Search
 		$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
 					->execute($intInsertId);
 
-		// Create new index
-		$arrKeys = array();
-		$arrValues = array();
 
+		// Create new index
 		foreach ($arrIndex as $k=>$v)
 		{
-			$arrKeys[] = "(?, ?, ?, ?)";
-			$arrValues[] = $intInsertId;
-			$arrValues[] = $k;
-			$arrValues[] = $v;
-			$arrValues[] = $arrData['language'];
+			$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES (?, ?, ?, ?)")
+						->execute($intInsertId, $k, $v, $arrData['language']);
 		}
-
-		// Insert values
-		$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES " . implode(", ", $arrKeys))
-					->execute($arrValues);
 
 		return true;
 	}

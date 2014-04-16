@@ -30,7 +30,7 @@
                 $('index_complete').setStyle('display', 'block');
               }
             }
-          }).get();
+          }).setHeader('Index-Page', true).get();
         });
       });
     </script>
