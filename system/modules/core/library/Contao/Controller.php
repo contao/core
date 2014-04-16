@@ -1780,7 +1780,6 @@ abstract class Controller extends \System
 
 		$arrReplace = array();
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$strScripts = '';
 
 		// Add the internal jQuery scripts
@@ -1826,16 +1825,8 @@ abstract class Controller extends \System
 				$objCombiner->add($script);
 			}
 
-			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>';
-
-			if ($blnXhtml)
-			{
-				$strScripts .= "\n" . '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()' . "\n/* ]]> */\n" . '</script>' . "\n";
-			}
-			else
-			{
-				$strScripts .= "\n" . '<script>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
-			}
+			$strScripts .= "\n" . \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml);
+			$strScripts .= "\n" . \Template::generateInlineScript('SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()', $blnXhtml) . "\n";
 		}
 
 		$strSearchCron = '';
@@ -1854,14 +1845,7 @@ abstract class Controller extends \System
 
 		if ($strSearchCron != '')
 		{
-			if ($blnXhtml)
-			{
-				$strScripts .= "\n" . '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . $strSearchCron . "\n/* ]]> */\n" . '</script>' . "\n";
-			}
-			else
-			{
-				$strScripts .= "\n" . '<script>' . $strSearchCron . '</script>' . "\n";
-			}
+			$strScripts .= "\n" . \Template::generateInlineScript($strSearchCron, $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_BODY]]'] = $strScripts;
@@ -1891,7 +1875,7 @@ abstract class Controller extends \System
 				}
 				else
 				{
-					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1914,7 +1898,7 @@ abstract class Controller extends \System
 				}
 				else
 				{
-					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1922,7 +1906,7 @@ abstract class Controller extends \System
 		// Create the aggregated style sheet
 		if ($objCombiner->hasEntries())
 		{
-			$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
+			$strScripts .= \Template::generateStyleTag($objCombiner->getCombinedFile(), 'all', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_CSS]]'] = $strScripts;
@@ -1943,14 +1927,14 @@ abstract class Controller extends \System
 				}
 				else
 				{
-					$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
 				}
 			}
 
 			// Create the aggregated script and add it before the non-static scripts (see #4890)
 			if ($objCombiner->hasEntries())
 			{
-				$strScripts = '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n" . $strScripts;
+				$strScripts .= \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
 			}
 		}
 

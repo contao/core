@@ -344,14 +344,7 @@ class PageRegular extends \Frontend
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
-				if ($blnXhtml)
-				{
-					$this->Template->framework = '<style type="text/css">' . "\n/* <![CDATA[ */\n" . $strFramework . "\n/* ]]> */\n</style>\n";
-				}
-				else
-				{
-					$this->Template->framework = '<style>' . $strFramework . "</style>\n";
-				}
+				$this->Template->framework = \Template::generateInlineStyle($strFramework, $blnXhtml) . "\n";
 			}
 		}
 
@@ -380,20 +373,12 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					if ($blnXhtml)
-					{
-						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
-					}
-					else
-					{
-						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
-					}
+					$this->Template->mooScripts .= \Template::generateInlineScript('window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js">\x3C/script>\')', $blnXhtml) . "\n";
 				}
 			}
 			else
@@ -407,20 +392,12 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js"></script>' . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
 				{
-					if ($blnXhtml)
-					{
-						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
-					}
-					else
-					{
-						$this->Template->mooScripts .= '<script>window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
-					}
+					$this->Template->mooScripts .= \Template::generateInlineScript('window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js">\x3C/script>\')', $blnXhtml) . "\n";
 				}
 
 				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-more.js|static';
@@ -477,14 +454,12 @@ class PageRegular extends \Frontend
 		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$arrFramework = deserialize($objLayout->framework);
 
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= \Template::generateStyleTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts, 'all', $blnXhtml) . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets
@@ -532,12 +507,12 @@ class PageRegular extends \Frontend
 
 							if ($objFile !== null)
 							{
-								$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . $objFile->path . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+								$strStyleSheet = \Template::generateStyleTag(TL_ASSETS_URL . $objFile->path, $media, $blnXhtml);
 							}
 						}
 						else
 						{
-							$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+							$strStyleSheet = \Template::generateStyleTag(TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css', $media, $blnXhtml);
 						}
 
 						if ($objStylesheets->cc)
@@ -626,7 +601,7 @@ class PageRegular extends \Frontend
 		// Add the debug style sheet
 		if (\Config::get('debugMode'))
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo('assets/contao/css/debug.css'), 'all', $blnXhtml) . "\n";
 		}
 
 		// Always add conditional style sheets at the end
@@ -644,8 +619,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -659,8 +633,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}
 		}

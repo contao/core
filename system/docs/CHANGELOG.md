@@ -4,6 +4,15 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Add helper methods to generate markup depending on the output type:
+
+ - `Template::generateStyleTag()`
+ - `Template::generateInlineStyle()`
+ - `Template::generateScriptTag()`
+ - `Template::generateInlineScript()`
+ - `Template::generateFeedTag()`
+
 ### Changed
 Use a deferred Ajax request to add a page to the search index (see #6566).
 
