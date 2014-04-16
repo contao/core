@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Enable the interlace bit when creating image thumbnails (see #6529).
+
+### Improved
 Assign articles to layout sections with an article module only (see #6094).
 
 ### New

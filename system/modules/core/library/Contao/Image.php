@@ -366,6 +366,7 @@ class Image
 			return null;
 		}
 
+		imageinterlace($strNewImage, 1); // see #6529
 		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
 
 		// Fallback to PNG if GIF ist not supported
