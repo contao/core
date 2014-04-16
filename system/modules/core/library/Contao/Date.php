@@ -641,7 +641,7 @@ class Date
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
 			{
-		        $strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
+				$strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
 			}
 		}
 
