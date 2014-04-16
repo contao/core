@@ -367,6 +367,7 @@ a.tl_submit,a.tl_submit:hover {
 .clr {
 	clear:both;
 	display:table; /* see #6093 */
+	width:100%; /* see #1495 */
 }
 .w50 {
 	width:50%;
