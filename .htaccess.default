@@ -240,25 +240,6 @@ FileETag None
   #RewriteRule ^(.*)$ $1.gz [QSA,L]
 
   ##
-  # Do not rewrite requests for static files or folders such as style sheets,
-  # images, movies or text documents. Do not add the URL suffix here!
-  #
-  # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
-  # have to change the <FilesMatch> directive as follows:
-  #
-  # <FilesMatch "\.(?i:htm|php|js|css|…|gz)$">
-  #
-  # Note: The directive will disable mod_rewrite entirely for the configured
-  # file types, so if you want to apply custom rules such as domain redirects,
-  # make sure to comment the lines (see #6588).
-  #
-  # For more information see: https://github.com/contao/core/issues/4364
-  ##
-  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|svgz|ttf|pdf|gz)$">
-    RewriteEngine Off
-  </FilesMatch>
-
-  ##
   # By default, Contao adds ".html" to the generated URLs to simulate static
   # HTML documents. If you change the URL suffix in the back end settings, make
   # sure to change it here accordingly!
@@ -280,6 +261,7 @@ FileETag None
   #
   # Note that not all environments support mod_rewrite and mod_cache.
   ##
+  RewriteCond %{REQUEST_FILENAME} !\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|svgz|ttf|pdf|gz)$
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule .*\.html$ index.php [L]
 
