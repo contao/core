@@ -81,7 +81,7 @@
         </div>
       </form>
       <div id="tl_license">
-        <p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are copyright of their respective owners :: Visit <a href="https://contao.org" target="_blank">contao.org</a> for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
+        <p>Contao Open Source CMS :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are copyright of their respective owners :: Visit <a href="https://contao.org" target="_blank">contao.org</a> for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 	    <p>Contao is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details. Contao is free software. You can redistribute it and/or modify it under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
 	  </div>
       <p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>
