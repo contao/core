@@ -636,6 +636,15 @@ class Date
 			}
 		}
 
+		// HOOK: add custom logic (see #4260)
+		if (isset($GLOBALS['TL_HOOKS']['parseDate']) && is_array($GLOBALS['TL_HOOKS']['parseDate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
+			{
+		        $strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
+			}
+		}
+
 		return $strReturn;
 	}
 }
