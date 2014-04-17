@@ -25,7 +25,7 @@ define('LONG_TERM_SUPPORT', true);
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('ACE', '1.1.2');
+define('ACE', '1.1.3');
 define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');

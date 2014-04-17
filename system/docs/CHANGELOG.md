@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.10 (2014-05-XX)
 ---------------------------
 
+### Update
+Update ACE to version 1.1.3.
+
 ### Fixed
 Check for reserved article aliases before validating the alias name (see #6978).
 
