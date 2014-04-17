@@ -227,7 +227,7 @@ class Calendar extends \Frontend
 						{
 							while ($objElement->next())
 							{
-								$strDescription .= $this->getContentElement($objElement->id);
+								$strDescription .= $this->getContentElement($objElement->current());
 							}
 						}
 					}

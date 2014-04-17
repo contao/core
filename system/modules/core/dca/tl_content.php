@@ -1140,10 +1140,13 @@ class tl_content extends Backend
 			$class .=  ' h64';
 		}
 
+		$objModel = new ContentModel();
+		$objModel->setRow($arrRow);
+
 		return '
 <div class="cte_type ' . $key . '">' . $type . '</div>
 <div class="' . trim($class) . '">
-' . $this->getContentElement($arrRow['id']) . '
+' . $this->getContentElement($objModel) . '
 </div>' . "\n";
 	}
 

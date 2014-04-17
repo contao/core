@@ -210,7 +210,7 @@ class ModuleEventReader extends \Events
 		{
 			while ($objElement->next())
 			{
-				$objTemplate->details .= $this->getContentElement($objElement->id);
+				$objTemplate->details .= $this->getContentElement($objElement->current());
 			}
 		}
 

@@ -295,7 +295,7 @@ abstract class Events extends \Module
 			{
 				while ($objElement->next())
 				{
-					$arrEvent['details'] .= $this->getContentElement($objElement->id);
+					$arrEvent['details'] .= $this->getContentElement($objElement->current());
 				}
 			}
 		}

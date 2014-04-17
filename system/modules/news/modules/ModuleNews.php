@@ -134,7 +134,7 @@ abstract class ModuleNews extends \Module
 			{
 				while ($objElement->next())
 				{
-					$objTemplate->text .= $this->getContentElement($objElement->id);
+					$objTemplate->text .= $this->getContentElement($objElement->current());
 				}
 			}
 		}
