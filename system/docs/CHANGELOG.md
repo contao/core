@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Update
+Update the color picker to version 1.4.
+
 ### Changed
 Use the "bootstrap" theme for the date picker (see #6692).
 

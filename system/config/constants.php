@@ -30,13 +30,13 @@ define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
 define('SWIPE', '2.0');
-define('JQUERY', '1.10.2');
-define('JQUERY_UI', '1.10.3');
-define('COLORBOX', '1.4.31');
-define('MEDIAELEMENT', '2.13.1');
+define('JQUERY', '1.10.2'); # FIXME
+define('JQUERY_UI', '1.10.3'); # FIXME
+define('COLORBOX', '1.4.31'); # FIXME
+define('MEDIAELEMENT', '2.13.1'); # FIXME
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.4.5');
-define('COLORPICKER', '1.3');
+define('COLORPICKER', '1.4');
 define('DATEPICKER', '2.2.0');
 define('MEDIABOX', '1.4.6');
 define('SIMPLEMODAL', '1.2');

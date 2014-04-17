@@ -482,7 +482,7 @@ var MooRainbow = new Class({
 		var B = R.clone().inject(box).addClass(prefix + 'bLabel').appendText('B: ');
 		R.appendText('R: ').addClass(prefix + 'rLabel');
 		
-		var inputR = new Element('input').set('disabled', true);
+		var inputR = new Element('input').set('disabled', true); // PATCH
 		var inputG = inputR.clone().inject(G).addClass(prefix + 'gInput');
 		var inputB = inputR.clone().inject(B).addClass(prefix + 'bInput');
 		inputR.inject(R).addClass(prefix + 'rInput');
@@ -492,7 +492,7 @@ var MooRainbow = new Class({
 		var BR = HU.clone().inject(box).addClass(prefix + 'BrighLabel').appendText('B: ');
 		HU.appendText('H: ').addClass(prefix + 'HueLabel');
 
-		var inputHU = new Element('input').set('disabled', true);
+		var inputHU = new Element('input').set('disabled', true); // PATCH
 		var inputSA = inputHU.clone().inject(SA).addClass(prefix + 'SatuInput');
 		var inputBR = inputHU.clone().inject(BR).addClass(prefix + 'BrighInput');
 		inputHU.inject(HU).addClass(prefix + 'HueInput');
@@ -537,7 +537,7 @@ var MooRainbow = new Class({
 		var coords = this.element.getCoordinates();
 		this.layout.setStyles({
 			'left': coords.left - 325, // PATCH: - 325
-			'top': coords.top + coords.height + 8
+			'top': coords.top + coords.height + 8 // PATCH: + 8
 		});
 	},
 	
