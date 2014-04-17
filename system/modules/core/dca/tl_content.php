@@ -1139,6 +1139,9 @@ class tl_content extends Backend
 		{
 			$class .=  ' h64';
 		}
+		
+		$objModel = new \ContentModel();
+		$objModel->setRow($arrRow);
 
 		$objModel = new ContentModel();
 		$objModel->setRow($arrRow);
