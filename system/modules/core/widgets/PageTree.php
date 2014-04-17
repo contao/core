@@ -52,18 +52,6 @@ class PageTree extends \Widget
 	 */
 	protected $strOrderName;
 
-	/**
-	 * Order field
-	 * @var string
-	 */
-	protected $strOrderField;
-
-	/**
-	 * Multiple flag
-	 * @var boolean
-	 */
-	protected $blnIsMultiple = false;
-
 
 	/**
 	 * Load the database object
@@ -74,22 +62,19 @@ class PageTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
-		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
-		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
-
 		// Prepare the order field
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
-			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
-			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
+			$this->strOrderId = $this->orderField . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = $this->orderField . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the order value
-			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
+			$objRow = $this->Database->prepare("SELECT {$this->orderField} FROM {$this->strTable} WHERE id=?")
 						   ->limit(1)
 						   ->execute($this->activeRecord->id);
 
-			$tmp = deserialize($objRow->{$this->strOrderField});
-			$this->{$this->strOrderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
+			$tmp = deserialize($objRow->{$this->orderField});
+			$this->{$this->orderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
 		}
 	}
 
@@ -102,14 +87,14 @@ class PageTree extends \Widget
 	protected function validator($varInput)
 	{
 		// Store the order value
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
 			$arrNew = explode(',', \Input::post($this->strOrderName));
 
 			// Only proceed if the value has changed
-			if ($arrNew !== $this->{$this->strOrderField})
+			if ($arrNew !== $this->{$this->orderField})
 			{
-				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->strOrderField}=? WHERE id=?")
+				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->orderField}=? WHERE id=?")
 							   ->execute(time(), serialize($arrNew), $this->activeRecord->id);
 
 				$this->objDca->createNewVersion = true; // see #6285
@@ -128,12 +113,12 @@ class PageTree extends \Widget
 		}
 		elseif (strpos($varInput, ',') === false)
 		{
-			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
+			return $this->multiple ? array(intval($varInput)) : intval($varInput);
 		}
 		else
 		{
 			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
-			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
+			return $this->multiple ? $arrValue : $arrValue[0];
 		}
 	}
 
@@ -146,7 +131,7 @@ class PageTree extends \Widget
 	{
 		$arrSet = array();
 		$arrValues = array();
-		$blnHasOrder = ($this->strOrderField != '' && is_array($this->{$this->strOrderField}));
+		$blnHasOrder = ($this->orderField != '' && is_array($this->{$this->orderField}));
 
 		if (!empty($this->varValue)) // Can be an array
 		{
@@ -166,7 +151,7 @@ class PageTree extends \Widget
 			{
 				$arrNew = array();
 
-				foreach ($this->{$this->strOrderField} as $i)
+				foreach ($this->{$this->orderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{
@@ -192,7 +177,7 @@ class PageTree extends \Widget
 		\Config::set('loadGoogleFonts', true);
 
 		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . ($blnHasOrder ? '
-  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->orderField}.'">' : '') . '
   <div class="selector_container">' . (($blnHasOrder && count($arrValues)) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
     <ul id="sort_'.$this->strId.'" class="'.($blnHasOrder ? 'sortable' : '').'">';

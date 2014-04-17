@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Use the widget attributes instead of the DCA in the picker widgets (see #6881).
+
+### Improved
 Enable the interlace bit when creating image thumbnails (see #6529).
 
 ### Improved

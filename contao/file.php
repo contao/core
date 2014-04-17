@@ -106,13 +106,8 @@ class FilePicker extends Backend
 		}
 
 		// Prepare the widget
-		$objFileTree = new $GLOBALS['BE_FFL']['fileSelector'](array(
-			'strId'    => $strField,
-			'strTable' => $strTable,
-			'strField' => $strField,
-			'strName'  => $strField,
-			'varValue' => $arrValues
-		), $objDca);
+		$class = $GLOBALS['BE_FFL']['fileSelector'];
+		$objFileTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 
 		$this->Template->main = $objFileTree->generate();
 		$this->Template->theme = Backend::getTheme();

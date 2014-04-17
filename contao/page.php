@@ -95,13 +95,8 @@ class PagePicker extends Backend
 		$this->Session->set('filePickerRef', \Environment::get('request'));
 
 		// Prepare the widget
-		$objPageTree = new $GLOBALS['BE_FFL']['pageSelector'](array(
-			'strId'    => $strField,
-			'strTable' => $strTable,
-			'strField' => $strField,
-			'strName'  => $strField,
-			'varValue' => array_filter(explode(',', Input::get('value')))
-		), $objDca);
+		$class = $GLOBALS['BE_FFL']['pageSelector'];
+		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, array_filter(explode(',', Input::get('value'))), $strField, $strTable, $objDca));
 
 		$this->Template->main = $objPageTree->generate();
 		$this->Template->theme = Backend::getTheme();
