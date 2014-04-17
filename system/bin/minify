@@ -245,9 +245,9 @@ datepicker()
 		copyright="/* DatePicker $(basename $version) by Arian Stolwijk, <http://mootools.net/forge/p/mootools_datepicker>, MIT license */"
 
 		# CSS
-		echo "$copyright" > $version/dashboard.css
-		$css $version/src/dashboard.css >> $version/dashboard.css
-		echo "  Created $version/dashboard.css"
+		echo "$copyright" > $version/datepicker.css
+		$css $version/src/datepicker_bootstrap/datepicker_bootstrap.css >> $version/datepicker.css
+		echo "  Created $version/datepicker.css"
 
 		# JavaScript
 		files=('Picker.js' 'Picker.Attach.js' 'Picker.Date.js')

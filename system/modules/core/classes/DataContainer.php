@@ -367,8 +367,8 @@ class DataContainer extends \Backend
         draggable: false,
         toggle: $("toggle_' . $objWidget->id . '"),
         format: "' . $format . '",
-        positionOffset: {x:-197,y:-182}' . $time . ',
-        pickerClass: "datepicker_dashboard",
+        positionOffset: {x:-211,y:-209}' . $time . ',
+        pickerClass: "datepicker_bootstrap",
         useFadeInOut: !Browser.ie,
         startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
         titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Use the "bootstrap" theme for the date picker (see #6692).
+
 ### Update
 Update the back end date picker to version 2.2.0.
 
