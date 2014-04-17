@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Update
+Update mediaelement.js to version 2.14.2.
+
+### Update
 Update jQuery to version 1.11.0 and jQuery UI to version 1.10.4.
 
 ### Update
