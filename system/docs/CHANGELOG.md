@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Update
+Update colorbox to version 1.5.8.
+
+### Update
 Update mediaelement.js to version 2.14.2.
 
 ### Update
