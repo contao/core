@@ -445,7 +445,7 @@ $GLOBALS['TL_WRAPPERS'] = array
  */
 $GLOBALS['TL_ASSETS'] = array
 (
-	'ACE'          => '1.1.2',
+	'ACE'          => '1.1.3',
 	'CSS3PIE'      => '1.0.0',
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',

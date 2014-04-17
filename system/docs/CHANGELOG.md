@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Update
+Update ACE to version 1.1.3.
+
 ### Improved
 Use the widget attributes instead of the DCA in the picker widgets (see #6881).
 
