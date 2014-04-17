@@ -132,9 +132,13 @@ class ModuleFaqPage extends \Module
 
 			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
+			// Get the FAQ category
+			$objPid = $objFaq->getRelated('pid');
+
 			// Order by PID
 			$arrFaqs[$objFaq->pid]['items'][] = $objTemp;
-			$arrFaqs[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaqs[$objFaq->pid]['headline'] = $objPid->headline;
+			$arrFaqs[$objFaq->pid]['title'] = $objPid->title;
 		}
 
 		$arrFaqs = array_values(array_filter($arrFaqs));

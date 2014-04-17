@@ -96,12 +96,15 @@ class ModuleFaqList extends \Module
 		while ($objFaq->next())
 		{
 			$arrTemp = $objFaq->row();
-
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
+			// Get the FAQ category
+			$objPid = $objFaq->getRelated('pid');
+
 			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaq[$objFaq->pid]['headline'] = $objPid->headline;
+			$arrFaq[$objFaq->pid]['title'] = $objPid->title;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));
