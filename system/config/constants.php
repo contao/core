@@ -30,8 +30,8 @@ define('CSS3PIE', '1.0.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
 define('SWIPE', '2.0');
-define('JQUERY', '1.10.2'); # FIXME
-define('JQUERY_UI', '1.10.3'); # FIXME
+define('JQUERY', '1.11.0');
+define('JQUERY_UI', '1.10.4');
 define('COLORBOX', '1.4.31'); # FIXME
 define('MEDIAELEMENT', '2.13.1'); # FIXME
 define('TABLESORTER', '2.0.5');

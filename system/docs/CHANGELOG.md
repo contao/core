@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Update
+Update jQuery to version 1.11.0 and jQuery UI to version 1.10.4.
+
+### Update
 Update the color picker to version 1.4.
 
 ### Changed
