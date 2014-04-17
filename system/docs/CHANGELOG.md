@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Update
+Update the back end date picker to version 2.2.0.
+
+### Update
 Update ACE to version 1.1.3.
 
 ### Fixed

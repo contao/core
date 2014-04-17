@@ -22,6 +22,15 @@
 	color: #ccc;
 	font-size:9px; /* see #4864 */
 }
+
+.datepicker_dashboard .header .title * {
+	color: #ccc;
+}
+
+.datepicker_dashboard .years .year {
+	width: 41px !important;
+	height: 15px !important;
+}
 /* PATCH EOF */
 
 /* header
