@@ -15,7 +15,7 @@ body {
 
 /* Header */
 #header {
-	width:756px;
+	width:741px;
 	margin:18px auto 0;
 	padding:1px;
 	background:#fff;
@@ -32,14 +32,14 @@ body {
 
 /* Container */
 #container {
-	width:760px;
+	width:745px;
 	margin:0 auto;
 	padding:0 0 18px;
 }
 
 /* Main */
 #main {
-	width:756px;
+	width:741px;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -234,8 +234,8 @@ fieldset.collapsed > legend {
 
 /* Form fields */
 .tl_text {
-	width:232px !important;
+	width:250px !important;
 }
 .tl_select {
-	width:238px !important;
+	width:258px !important;
 }

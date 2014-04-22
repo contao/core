@@ -166,7 +166,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 }
 .tl_text_interval {
 	margin:1px 0;
-	width:150px;
+	width:154px;
 }
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
 	border:1px solid #aaa;
@@ -208,7 +208,7 @@ pre,.tl_textarea.monospace {
 }
 .tl_select_interval {
 	margin:1px 0;
-	width:156px;
+	width:154px;
 }
 .tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
 	border:1px solid #aaa;

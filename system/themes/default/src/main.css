@@ -876,6 +876,7 @@ ul.sgallery li {
 	background:#f9f9f9;
 }
 .tl_chmod th,.tl_chmod td {
+	padding:2px 0;
 	border:1px solid #fff;
 }
 
