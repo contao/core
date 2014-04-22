@@ -502,3 +502,17 @@ a.tl_submit,a.tl_submit:hover {
 		max-width:410px;
 	}
 }
+
+/* Tablet */
+@media (min-width:768px) and (max-width:991px) {
+}
+
+/* Handheld */
+@media (max-width:767px) {
+	.w50 {
+		float:none;
+	}
+	.cbx {
+		height:32px;
+	}
+}

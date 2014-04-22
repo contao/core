@@ -183,6 +183,16 @@ var Theme = {
 			el.fireEvent('input');
 			el.store('autogrow', true);
 		});
+	},
+
+	/**
+	 * Set up the menu toggle
+	 */
+	setupMenuToggle: function() {
+		var nav = $('tl_navigation');
+		nav.getElement('h1').addEvent('click', function() {
+			nav.toggleClass('xpnd');
+		});
 	}
 };
 
@@ -192,6 +202,7 @@ window.addEvent('domready', function() {
 	Theme.stopClickPropagation();
 	Theme.setupCtrlClick();
 	Theme.setupTextareaResizing();
+	Theme.setupMenuToggle();
 });
 
 // Respond to Ajax changes
