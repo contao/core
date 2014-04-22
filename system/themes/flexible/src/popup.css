@@ -1,0 +1,58 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/* Body */
+body {
+	background:#fff;
+	padding:6px 0;
+}
+
+/* Headline */
+h1 {
+	display:none;
+}
+h2 {
+	margin:18px 18px 12px;
+	padding:7px 0 7px 36px;
+	background:url("images/help.gif") left center no-repeat;
+	font-size:14px;
+	color:#8ab858;
+}
+
+/* Preview table */
+.tl_help_table {
+	margin:0 18px;
+}
+.tl_help_table td {
+	padding:0 12px 3px 0;
+}
+.tl_label {
+	font-weight:bold;
+	padding-right:6px;
+}
+#preview {
+	margin:3px 18px 18px;
+}
+#preview .checkerbox {
+	background-color:#fff;
+	background-image:linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+	background-size:30px 30px;
+	background-position:0 0,15px 15px;
+}
+#download {
+	margin:9px 18px 15px;
+}
+#download img {
+	position:relative;
+	top:-1px;
+}
+img.mime_icon {
+	vertical-align:middle;
+}
