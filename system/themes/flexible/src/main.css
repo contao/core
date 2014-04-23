@@ -462,6 +462,12 @@ input[type=search]::-webkit-search-decoration {
 .tl_file_list {
 	padding:2px 0 3px;
 }
+.tl_file_list .ellipsis {
+	width:570px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
 .tl_right_nowrap {
 	padding:2px 0;
 	text-align:right;
@@ -592,9 +598,11 @@ input[type=search]::-webkit-search-decoration {
 }
 .tl_content_left {
 	float:left;
+	width:570px;
 }
 .webkit .tl_content_left {
 	margin-top:1px;
+	margin-bottom:1px;
 }
 .tl_content_right {
 	float:right;
@@ -1487,6 +1495,9 @@ fieldset.collapsed > legend {
 	}
 	.tl_content.indent {
 		width:853px;
+	}
+	.tl_content_left,.tl_file_list .ellipsis {
+		width:750px;
 	}
 	.cte_type {
 		width:700px;

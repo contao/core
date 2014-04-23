@@ -49,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		(
 			'fields'                  => array('tstamp', 'query'),
 			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span>%s',
-			'maxCharacters'           => 120
+			'label_callback'          => array('tl_undo', 'ellipsis')
 		),
 		'operations' => array
 		(
@@ -159,5 +159,17 @@ class tl_undo extends Backend
 			$this->log('Not enough permissions to '. Input::get('act') .' undo step ID '. Input::get('id'), __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
+	}
+
+
+	/**
+	 * Add the surrounding ellipsis layer
+	 * @param array
+	 * @param string
+	 * @return string
+	 */
+	public function ellipsis($row, $label)
+	{
+		return '<div class="ellipsis">' . $label . '</div>';
 	}
 }

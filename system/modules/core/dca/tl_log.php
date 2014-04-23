@@ -45,7 +45,6 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		(
 			'fields'                  => array('tstamp', 'text'),
 			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span> %s',
-			'maxCharacters'           => 96,
 			'label_callback'          => array('tl_log', 'colorize')
 		),
 		'global_operations' => array
@@ -193,6 +192,6 @@ class tl_log extends Backend
 				break;
 		}
 
-		return $label;
+		return '<div class="ellipsis">' . $label . '</div>';
 	}
 }

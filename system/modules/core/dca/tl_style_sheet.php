@@ -320,15 +320,15 @@ class tl_style_sheet extends Backend
 
 		if ($row['mediaQuery'] != '')
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. String::substr($row['mediaQuery'], 64) . $cc .'</span>' . "</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. $row['mediaQuery'] . $cc .'</span>' . "</div>\n";
 		}
 		elseif (!empty($media) && is_array($media))
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
 		}
 		else
 		{
-			return '<div style="float:left">'. $row['name'] . $cc ."</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] . $cc ."</div>\n";
 		}
 	}
 
