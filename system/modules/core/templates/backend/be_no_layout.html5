@@ -1,5 +1,7 @@
 <?php
 
+$theme = Backend::getTheme();
+
 System::loadLanguageFile('exception');
 $lang = (object) $GLOBALS['TL_LANG']['XPT'];
 
@@ -14,8 +16,8 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <style><?php
-    include TL_ROOT . '/system/themes/default/basic.css';
-    include TL_ROOT . '/system/themes/default/error.css';
+    include TL_ROOT . '/system/themes/' . $theme . '/basic.css';
+    include TL_ROOT . '/system/themes/' . $theme . '/error.css';
   ?></style>
 
 </head>
