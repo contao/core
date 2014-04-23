@@ -208,7 +208,7 @@ fieldset.tl_tbox {
 fieldset.tl_tbox,fieldset.tl_box {
 	margin-left:18px;
 	margin-right:18px;
-	padding-top:6px;
+	padding:6px;
 	border:1px solid #ddd;
 	border-width:1px 0 0;
 }
@@ -238,4 +238,30 @@ fieldset.collapsed > legend {
 }
 .tl_select {
 	width:238px !important;
+}
+
+/* Handheld */
+@media (max-width:767px) {
+	#header,#container {
+		width:auto;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	#main {
+		width:auto;
+	}
+	#container h4 {
+		margin-top:6px;
+	}
+	fieldset.tl_tbox,fieldset.tl_box {
+		margin-left:12px;
+		margin-right:12px;
+	}
+	.tl_text,.tl_select {
+		width:100% !important;
+		box-sizing:border-box;
+	}
+	.tl_formbody,.tl_formbody_submit {
+		position:relative;
+	}
 }

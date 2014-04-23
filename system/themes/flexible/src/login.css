@@ -34,7 +34,7 @@ body {
 #container {
 	width:520px;
 	margin:0 auto;
-	padding:0;
+	padding:0 0 18px;
 }
 
 /* Main */
@@ -136,4 +136,48 @@ body {
 }
 .tl_select {
 	width:180px;
+}
+
+/* Handheld */
+@media (max-width:767px) {
+	#header,#container {
+		width:auto;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	#main {
+		width:auto;
+	}
+	.tl_login_form {
+		width:auto;
+		margin:-6px 18px 24px;
+	}
+	.tl_login_table {
+		width:90%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.tl_login_table td {
+		position:relative;
+		width:auto !important;
+		text-align:left !important;
+	}
+	.tl_login_table th,.tl_login_table td {
+		display:block;
+	}
+	.tl_login_table label {
+		display:block;
+		margin-top:3px;
+	}
+	.tl_text,.tl_select {
+		width:100%;
+		box-sizing:border-box;
+	}
+	.tl_login_submit_container {
+		text-align:left;
+		margin-left:5%;
+	}
+	.tl_login_submit_container input {
+		margin-left:0;
+	}
 }
