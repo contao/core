@@ -6,6 +6,7 @@
   <title>Contao Open Source CMS <?php echo VERSION; ?></title>
   <base href="<?php echo $this->base; ?>">
   <meta name="generator" content="Contao Open Source CMS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <link rel="stylesheet" href="<?php
     $objCombiner = new Combiner();

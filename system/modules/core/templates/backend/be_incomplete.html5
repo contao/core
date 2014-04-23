@@ -11,6 +11,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
   <meta charset="utf-8">
   <title><?php echo $lang->incomplete; ?></title>
   <meta name="generator" content="Contao Open Source CMS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <style><?php
     include TL_ROOT . '/system/themes/default/basic.css';
