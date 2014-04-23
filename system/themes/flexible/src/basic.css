@@ -8,6 +8,11 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+/* Prevent font scaling */
+html {
+	-webkit-text-size-adjust:100%;
+}
+
 /* Body */
 html,body,form,pre,figure,ul,li {
 	margin:0;
@@ -477,14 +482,11 @@ a.tl_submit,a.tl_submit:hover {
 	.tl_text_trbl {
 		width:76px;
 	}
-	.tl_text_interval {
+	.tl_text_interval,.tl_select_interval {
 		width:200px;
 	}
 	.tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect {
 		width:412px;
-	}
-	.tl_select_interval {
-		width:200px;
 	}
 	.wizard .tl_text {
 		width:380px;
@@ -503,16 +505,72 @@ a.tl_submit,a.tl_submit:hover {
 	}
 }
 
-/* Tablet */
-@media (min-width:768px) and (max-width:991px) {
-}
-
 /* Handheld */
 @media (max-width:767px) {
 	.w50 {
 		float:none;
+		width:auto;
 	}
 	.cbx {
 		height:32px;
+	}
+	img {
+		max-width:100%;
+		height:auto;
+	}
+	.ie8 img {
+		width:auto; /* see #5789 */
+	}
+	a img {
+		max-width:none;
+	}
+	.tl_text,.long .tl_text,.tl_textarea,.tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect,.long .tl_select {
+		width:100%;
+	}
+	.tl_text_2 {
+		width:-webkit-calc(50% - 2px);
+		width:calc(50% - 2px);
+	}
+	.tl_text_3 {
+		width:-webkit-calc(33% - 2px);
+		width:calc(33% - 2px);
+	}
+	.tl_text_4 {
+		width:-webkit-calc(25% - 3px);
+		width:calc(25% - 3px);
+	}
+	.tl_text_unit {
+		width:-webkit-calc(100% - 64px);
+		width:calc(100% - 64px);
+	}
+	.tl_text_trbl {
+		width:-webkit-calc(25% - 19px);
+		width:calc(25% - 19px);
+	}
+	.tl_text_interval,.tl_select_interval {
+		width:-webkit-calc(50% - 2px);
+		width:calc(50% - 2px);
+	}
+	.wizard .tl_text {
+		width:-webkit-calc(100% - 24px);
+		width:calc(100% - 24px);
+	}
+	.wizard .tl_text_2 {
+		width:-webkit-calc(50% - 14px);
+		width:calc(50% - 14px);
+	}
+	.tip {
+		max-width:220px;
+	}
+	.tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval,.tl_select,.tl_mselect,.tl_select_interval {
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		box-sizing:border-box;
+	}
+	.tl_version_panel .tl_select {
+		width:44%;
+	}
+	.tl_select_column {
+		width:66px;
 	}
 }

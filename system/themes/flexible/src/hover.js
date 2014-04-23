@@ -2,6 +2,12 @@
 var Theme = {
 
 	/**
+	 * Check for WebKit
+	 * @member {boolean}
+ 	 */
+	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
+
+	/**
 	 * Autofocus the first text field or textarea
 	 *
 	 * @param {string} id The ID of the parent element
@@ -166,6 +172,14 @@ var Theme = {
 				el.getStyles('font-size', 'font-family', 'width', 'line-height')
 			).inject(document.body);
 
+			// Also consider the box-sizing
+			if (el.getStyle('-moz-box-sizing') == 'border-box' || el.getStyle('-webkit-box-sizing') == 'border-box' || el.getStyle('box-sizing') == 'border-box') {
+				dummy.setStyles({
+					'padding': el.getStyle('padding'),
+					'border': el.getStyle('border-left')
+				});
+			}
+
 			// Single line height
 			var line = dummy.clientHeight;
 
@@ -190,9 +204,11 @@ var Theme = {
 	 */
 	setupMenuToggle: function() {
 		var nav = $('tl_navigation');
-		nav.getElement('h1').addEvent('click', function() {
-			nav.toggleClass('xpnd');
-		});
+		if (nav) {
+			nav.getElement('h1').addEvent('click', function() {
+				nav.toggleClass('xpnd');
+			});
+		}
 	}
 };
 

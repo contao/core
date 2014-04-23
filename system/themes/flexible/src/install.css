@@ -259,9 +259,14 @@ fieldset.collapsed > legend {
 	}
 	.tl_text,.tl_select {
 		width:100% !important;
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
 		box-sizing:border-box;
 	}
 	.tl_formbody,.tl_formbody_submit {
 		position:relative;
+	}
+	.tl_error,.tl_confirm,.tl_info {
+		background-position:1px center;
 	}
 }

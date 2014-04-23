@@ -92,3 +92,15 @@ a {
 	text-align:center;
 	color:#bbb;
 }
+
+/* Handheld */
+@media (max-width:767px) {
+	#header,#container {
+		width:auto;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	#main {
+		width:auto;
+	}
+}

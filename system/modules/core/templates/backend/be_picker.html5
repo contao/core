@@ -57,5 +57,11 @@
     </div>
   </div>
 
+  <script>
+    if (window.outerWidth && window.outerWidth < 768) {
+      document.body.setStyle('width', window.outerWidth - 20);
+    }
+  </script>
+
 </body>
 </html>
