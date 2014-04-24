@@ -68,7 +68,7 @@
   border-radius: 6px;
 }
 .ios .simple-modal {
-  /* see 6028 */
+  /* see #6028 */
   overflow: auto;
   bottom: 40px;
   -webkit-overflow-scrolling: touch;
