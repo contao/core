@@ -1,0 +1,184 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/* Body */
+body {
+	background:#f5f5f5 url("images/hbg.jpg") repeat-x;
+}
+
+/* Header */
+#header {
+	width:516px;
+	margin:18px auto 0;
+	padding:1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-bottom:0;
+	border-radius:3px 3px 0 0;
+}
+#header h1 {
+	margin:0;
+	padding:4px 8px 6px;
+	color:#fff;
+	border-radius:3px 3px 0 0;
+}
+
+/* Container */
+#container {
+	width:520px;
+	margin:0 auto;
+	padding:0 0 18px;
+}
+
+/* Main */
+#main {
+	width:516px;
+	padding:1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-top:0;
+	border-radius:0 0 3px 3px;
+	box-shadow:0 3px 6px #ccc;
+}
+
+/* Headlines */
+#container h2 {
+	margin:18px;
+	padding:6px 0 8px 40px;
+	background:url("images/logo.gif") no-repeat left center;
+	font-size:14px;
+	color:#8ab858;
+}
+
+/* Front end link */
+#go_to_frontend {
+	margin:0 18px 12px 0;
+	padding:0;
+	text-align:right;
+}
+#go_to_frontend a {
+	padding:2px 0 3px 20px;
+	background:url("images/login.gif") no-repeat left center;
+	color:#aaa;
+}
+
+/* License (do not remove) */
+#tl_license {
+	margin:18px 18px 0;
+}
+#tl_license p {
+	line-height:15px;
+	text-align:justify;
+}
+#tl_license p,#tl_license a {
+	color:#777;
+}
+#tl_license a:hover,#tl_license a:focus,#tl_license a:active {
+	color:#77ac45;
+}
+
+/* Error messages */
+.login_error {
+	margin:1px 0 0;
+	padding:2px 0 3px 20px;
+	background:url("images/error.gif") no-repeat left center;
+}
+.login_error label {
+	color:#c33;
+}
+.tl_error,.tl_info,.tl_confirm {
+	margin:0 0 12px;
+	padding:2px 0 3px 20px;
+}
+.tl_error {
+	color:#c33;
+	background:url("images/error.gif") no-repeat left center;
+}
+.tl_info {
+	color:#4b85ba;
+	background:url("images/show.gif") no-repeat 1px center;
+}
+.tl_confirm {
+	color:#77ac45;
+	background:url("images/ok.gif") no-repeat left center;
+}
+
+/* Login form */
+.tl_login_form {
+	width:350px;
+	margin:18px auto 24px;
+}
+.tl_login_form .formbody {
+	padding-top:6px;
+}
+.tl_login_table {
+	width:100%;
+	margin:0 0 6px;
+}
+.tl_login_table td:nth-child(2n) {
+	width:180px;
+}
+.tl_login_submit_container {
+	padding-top:0;
+	text-align:right;
+}
+
+/* Form fields */
+.tl_text {
+	width:172px;
+}
+.tl_select {
+	width:180px;
+}
+
+/* Handheld */
+@media (max-width:767px) {
+	#header,#container {
+		width:auto;
+		margin-left:10px;
+		margin-right:10px;
+	}
+	#main {
+		width:auto;
+	}
+	.tl_login_form {
+		width:auto;
+		margin:-6px 18px 24px;
+	}
+	.tl_login_table {
+		width:90%;
+		margin:0 auto 9px;
+	}
+	.tl_login_table td {
+		position:relative;
+		width:auto !important;
+		text-align:left !important;
+	}
+	.tl_login_table th,.tl_login_table td {
+		display:block;
+	}
+	.tl_login_table label {
+		display:block;
+		margin-top:3px;
+	}
+	.tl_text,.tl_select {
+		width:100%;
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		box-sizing:border-box;
+	}
+	.tl_login_submit_container {
+		text-align:left;
+		margin-left:5%;
+	}
+	.tl_login_submit_container input {
+		margin-left:0;
+	}
+}

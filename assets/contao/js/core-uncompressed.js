@@ -901,7 +901,7 @@ var Backend =
 	 */
 	openModalBrowser: function(field_name, url, type, win) {
 		var M = new SimpleModal({
-			'width': 765,
+			'width': 768,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,

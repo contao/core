@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Add a flexible back end theme.
+
 ### Update
 Update colorbox to version 1.5.8.
 
