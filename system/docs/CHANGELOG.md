@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### New
+Add template inheritance and template insertion (see #6508).
+
+### New
 Add a flexible back end theme.
 
 ### Update
