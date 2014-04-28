@@ -2540,12 +2540,6 @@ abstract class Controller extends \System
 		if ($arrItem['floating'] != '')
 		{
 			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
-
-			// Only float:left and float:right are supported (see #4758)
-			if ($arrItem['floating'] == 'left' || $arrItem['floating'] == 'right')
-			{
-				$objTemplate->float = 'float:' . $arrItem['floating'] . ';';
-			}
 		}
 
 		// Do not override the "href" key (see #6468)

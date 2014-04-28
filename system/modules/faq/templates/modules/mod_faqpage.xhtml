@@ -20,7 +20,7 @@
             <?php endif; ?>
 
             <?php if ($faq->addImage): ?>
-              <div class="image_container<?php echo $faq->floatClass; ?>"<?php if ($faq->margin || $faq->float): ?> style="<?php echo trim($faq->margin . $faq->float); ?>"<?php endif; ?>>
+              <div class="image_container<?php echo $faq->floatClass; ?>"<?php if ($faq->margin): ?> style="<?php echo $faq->margin; ?>"<?php endif; ?>>
 
                 <?php if ($faq->href): ?>
                   <a href="<?php echo $faq->href; ?>"<?php echo $faq->attributes; ?> title="<?php echo $faq->alt; ?>">

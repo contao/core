@@ -81,6 +81,16 @@ select,input,textarea {
 }
 
 /**
+ * Float classes (see #6851)
+ */
+.float_left {
+	float:left;
+}
+.float_right {
+	float:right;
+}
+
+/**
  * Clear floats
  */
 .block {
