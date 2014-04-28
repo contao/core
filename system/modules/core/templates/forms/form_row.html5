@@ -1,0 +1,9 @@
+
+<tr class="<?php echo $this->rowClass; ?>">
+  <td class="col_0 col_first">&nbsp;</td>
+  <td class="col_1 col_last">
+    <?php $this->block('content'); ?>
+      &nbsp;
+    <?php $this->endblock(); ?>
+  </td>
+</tr>

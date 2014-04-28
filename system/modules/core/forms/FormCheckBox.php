@@ -143,6 +143,42 @@ class FormCheckBox extends \Widget
 
 
 	/**
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
+	 */
+	public function parse($arrAttributes=null)
+	{
+		// The "required" attribute only makes sense for single checkboxes
+		if (count($this->arrOptions) == 1 && $this->mandatory)
+		{
+			$this->arrAttributes['required'] = 'required';
+		}
+
+		// Generate the options
+		foreach ($this->arrOptions as $i=>$arrOption)
+		{
+			$arrOptions[] = array
+			(
+				'name'       => $this->strName . ((count($this->arrOptions) > 1) ? '[]' : ''),
+				'id'         => $this->strId . '_' . $i,
+				'value'      => $arrOption['value'],
+				'checked'    => $this->isChecked($arrOption),
+				'attributes' => $this->getAttributes(),
+				'label'      => $arrOption['label'],
+				'label_id'   => $this->strId . '_' . $i
+			);
+		}
+
+		$this->options = $arrOptions;
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
 	 * Override the parent method and inject the error message inside the fieldset (see #3392)
 	 * @param boolean
 	 * @return string
@@ -160,12 +196,6 @@ class FormCheckBox extends \Widget
 	 */
 	public function generate()
 	{
-		// The "required" attribute only makes sense for single checkboxes
-		if (count($this->arrOptions) == 1 && $this->mandatory)
-		{
-			$this->arrAttributes['required'] = 'required';
-		}
-
 		$strOptions = '';
 
 		foreach ($this->arrOptions as $i=>$arrOption)
