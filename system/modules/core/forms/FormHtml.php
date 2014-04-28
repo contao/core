@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormHtml
  *
- * Form field "HTML".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,6 +29,7 @@ class FormHtml extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_html';
@@ -45,8 +45,29 @@ class FormHtml extends \Widget
 
 
 	/**
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
+	 */
+	public function parse($arrAttributes=null)
+	{
+		if (TL_MODE == 'BE')
+		{
+			$this->html = htmlspecialchars($this->html);
+		}
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
