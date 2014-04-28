@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormTextField
  *
- * Form field "text".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,27 +29,31 @@ class FormTextField extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Add a for attribute
+	 *
 	 * @var boolean
 	 */
 	protected $blnForAttribute = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_textfield';
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute key
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -87,9 +90,11 @@ class FormTextField extends \Widget
 
 
 	/**
-	 * Trim values
-	 * @param mixed
-	 * @return mixed
+	 * Trim the values
+	 *
+	 * @param mixed $varInput The user input
+	 *
+	 * @return mixed The validated user input
 	 */
 	protected function validator($varInput)
 	{
@@ -113,10 +118,13 @@ class FormTextField extends \Widget
 
 
 	/**
-	 * Generate the widget and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generate()
+	public function parse($arrAttributes=null)
 	{
 		// Hide the Punycode format (see #2750)
 		if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
@@ -124,44 +132,54 @@ class FormTextField extends \Widget
 			$this->varValue = \Idna::decode($this->varValue);
 		}
 
+		// Use the HTML5 types (see #4138) but not the date, time and datetime types (see #5918)
 		if ($this->hideInput)
 		{
-			$strType = 'password';
+			$this->type = 'password';
 		}
 		elseif ($this->strFormat != 'xhtml')
 		{
-			// Use the HTML5 types (see #4138)
-			// but not the date, time and datetime types (see #5918)
 			switch ($this->rgxp)
 			{
 				case 'digit':
-					$strType = 'number';
+					$this->type = 'number';
 					break;
 
 				case 'phone':
-					$strType = 'tel';
+					$this->type = 'tel';
 					break;
 
 				case 'email':
-					$strType = 'email';
+					$this->type = 'email';
 					break;
 
 				case 'url':
-					$strType = 'url';
+					$this->type = 'url';
 					break;
 
 				default:
-					$strType = 'text';
+					$this->type = 'text';
 					break;
 			}
 		}
 		else
 		{
-			$strType = 'text';
+			$this->type = 'text';
 		}
 
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 */
+	public function generate()
+	{
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',
-						$strType,
+						$this->type,
 						$this->strName,
 						$this->strId,
 						($this->hideInput ? ' password' : ''),

@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormCheckBox
  *
- * Form field "check box".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,18 +29,21 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_checkbox';
 
 	/**
 	 * Error message
+	 *
 	 * @var string
 	 */
 	protected $strError = '';
@@ -49,8 +51,9 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -75,8 +78,10 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Return a parameter
-	 * @param string
-	 * @return mixed
+	 *
+	 * @param string $strKey The parameter key
+	 *
+	 * @return mixed The parameter value
 	 */
 	public function __get($strKey)
 	{
@@ -167,12 +172,11 @@ class FormCheckBox extends \Widget
 				'value'      => $arrOption['value'],
 				'checked'    => $this->isChecked($arrOption),
 				'attributes' => $this->getAttributes(),
-				'label'      => $arrOption['label'],
-				'label_id'   => $this->strId . '_' . $i
+				'label'      => $arrOption['label']
 			);
 		}
 
-		$this->options = $arrOptions;
+		$this->arrOptions = $arrOptions;
 
 		return parent::parse($arrAttributes);
 	}
@@ -180,8 +184,10 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Override the parent method and inject the error message inside the fieldset (see #3392)
-	 * @param boolean
-	 * @return string
+	 *
+	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
+	 *
+	 * @return string The form field markup
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
@@ -192,7 +198,8 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{

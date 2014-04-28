@@ -1,6 +1,6 @@
 <?php $this->tableless || $this->extend('form_row'); ?>
 
-<?php $this->block('content'); ?>
+<?php $this->block('field'); ?>
   <fieldset id="ctrl_<?php echo $this->id; ?>" class="checkbox_container <?php echo $this->class; ?>">
 
     <?php if ($this->label): ?>
@@ -20,7 +20,7 @@
     <input type="hidden" name="<?php echo $this->name; ?>" value="">
 
     <?php foreach ($this->options as $option): ?>
-      <span><input type="checkbox" name="<?php echo $option['name']; ?>" id="opt_<?php echo $option['id']; ?>" class="checkbox" value="<?php echo $option['value']; ?>"<?php echo $option['checked']; ?><?php echo $option['attributes']; ?>> <label id="lbl_<?php echo $option['label_id']; ?>" for="opt_<?php echo $option['label_id']; ?>"><?php echo $option['label']; ?></label></span>
+      <span><input type="checkbox" name="<?php echo $option['name']; ?>" id="opt_<?php echo $option['id']; ?>" class="checkbox" value="<?php echo $option['value']; ?>"<?php echo $option['checked']; ?><?php echo $option['attributes']; ?>> <label id="lbl_<?php echo $option['id']; ?>" for="opt_<?php echo $option['id']; ?>"><?php echo $option['label']; ?></label></span>
     <?php endforeach; ?>
 
   </fieldset>

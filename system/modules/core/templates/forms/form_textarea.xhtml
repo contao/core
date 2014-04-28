@@ -1,0 +1,23 @@
+<?php $this->tableless || $this->extend('form_row'); ?>
+
+<?php $this->block('label'); ?>
+  <label for="ctrl_<?php echo $this->id; ?>" class="<?php echo $this->class; ?>">
+    <?php if ($this->mandatory): ?>
+      <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
+    <?php else: ?>
+      <?php echo $this->label; ?>
+    <?php endif; ?>
+  </label>
+<?php $this->endblock(); ?>
+
+<?php $this->block('field'); ?>
+  <?php if ($this->hasErrors()): ?>
+    <p class="error"><?php echo $this->getErrorAsString(); ?></p>
+  <?php endif; ?>
+
+  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea <?php echo $this->class; ?>" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->fieldAttributes; ?>><?php echo $this->fieldValues; ?></textarea>
+
+  <?php if ($this->addSubmit): ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
+  <?php endif; ?>
+<?php $this->endblock(); ?>
