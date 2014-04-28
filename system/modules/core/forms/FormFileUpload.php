@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormFileUpload
  *
- * File upload field.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,15 +29,17 @@ class FormFileUpload extends \Widget implements \uploadable
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_upload';
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -278,7 +279,10 @@ class FormFileUpload extends \Widget implements \uploadable
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

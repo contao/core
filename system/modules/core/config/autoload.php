@@ -312,6 +312,7 @@ TemplateLoader::addFiles(array
 	'form_submit'         => 'system/modules/core/templates/forms',
 	'form_textarea'       => 'system/modules/core/templates/forms',
 	'form_textfield'      => 'system/modules/core/templates/forms',
+	'form_upload'         => 'system/modules/core/templates/forms',
 	'form_widget'         => 'system/modules/core/templates/forms',
 	'form_xml'            => 'system/modules/core/templates/forms',
 	'fe_page'             => 'system/modules/core/templates/frontend',
