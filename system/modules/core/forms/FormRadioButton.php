@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormRadioButton
  *
- * Form field "radio button".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,18 +29,21 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_radio';
 
 	/**
 	 * Error message
+	 *
 	 * @var string
 	 */
 	protected $strError = '';
@@ -49,8 +51,9 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute key
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -87,8 +90,10 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Return a parameter
-	 * @param string
-	 * @return mixed
+	 *
+	 * @param string $strKey The parameter name
+	 *
+	 * @return mixed The parameter value
 	 */
 	public function __get($strKey)
 	{
@@ -118,9 +123,41 @@ class FormRadioButton extends \Widget
 
 
 	/**
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
+	 */
+	public function parse($arrAttributes=null)
+	{
+		foreach ($this->arrOptions as $i=>$arrOption)
+		{
+			$arrOptions[] = array
+			(
+				'name'       => $this->strName . ((count($this->arrOptions) > 1) ? '[]' : ''),
+				'id'         => $this->strId . '_' . $i,
+				'value'      => $arrOption['value'],
+				'checked'    => $this->isChecked($arrOption),
+				'attributes' => $this->getAttributes(),
+				'label'      => $arrOption['label']
+			);
+		}
+
+		$this->arrOptions = $arrOptions;
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
 	 * Override the parent method and inject the error message inside the fieldset (see #3392)
-	 * @param boolean
-	 * @return string
+	 *
+	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
+	 *
+	 * @return string The form field markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
@@ -131,7 +168,10 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

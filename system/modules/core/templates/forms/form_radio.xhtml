@@ -1,8 +1,29 @@
-<?php if (!$this->tableless): ?>
-  <tr class="<?php echo $this->rowClass; ?>">
-    <td class="col_0 col_first">&nbsp;</td>
-    <td class="col_1 col_last"><?php echo $this->generateWithError(); ?></td>
-  </tr>
-<?php else: ?>
-  <?php echo $this->generateWithError(); ?><br />
-<?php endif; ?>
+<?php $this->tableless || $this->extend('form_row'); ?>
+
+<?php $this->block('field'); ?>
+  <fieldset id="ctrl_<?php echo $this->id; ?>" class="radio_container<?php if ($this->class) echo ' ' . $this->class; ?>">
+
+    <?php if ($this->label): ?>
+      <legend>
+        <?php if ($this->mandatory): ?>
+          <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
+        <?php else: ?>
+          <?php echo $this->label; ?>
+        <?php endif; ?>
+      </legend>
+    <?php endif; ?>
+
+    <?php if ($this->hasErrors()): ?>
+      <p class="error"><?php echo $this->getErrorAsString(); ?></p>
+    <?php endif; ?>
+
+    <?php foreach ($this->options as $option): ?>
+      <span><input type="radio" name="<?php echo $option['name']; ?>" id="opt_<?php echo $option['id']; ?>" class="radio" value="<?php echo $option['value']; ?>"<?php echo $option['checked']; ?><?php echo $option['attributes']; ?> /> <label id="lbl_<?php echo $option['id']; ?>" for="opt_<?php echo $option['id']; ?>"><?php echo $option['label']; ?></label></span>
+    <?php endforeach; ?>
+
+  </fieldset>
+
+  <?php if ($this->addSubmit): ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
+  <?php endif; ?>
+<?php $this->endblock(); ?>
