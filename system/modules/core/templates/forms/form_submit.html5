@@ -1,10 +1,9 @@
-<?php if (!$this->tableless): ?>
-  <tr class="<?php echo $this->rowClass; ?>">
-    <td class="col_0 col_first">&nbsp;</td>
-    <td class="col_1 col_last"><div class="submit_container"><?php echo $this->generate(); ?></div></td>
-  </tr>
-<?php else: ?>
-  <div class="submit_container">
-    <?php echo $this->generate(); ?>
-  </div>
-<?php endif; ?>
+<?php $this->tableless || $this->extend('form_row'); ?>
+
+<?php $this->block('field'); ?>
+  <?php if ($this->src): ?>
+    <input type="image" src="<?php echo $this->src; ?>" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?php echo specialchars($this->slabel); ?>" alt="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+  <?php else: ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+  <?php endif; ?>
+<?php $this->endblock(); ?>

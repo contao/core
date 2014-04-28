@@ -188,6 +188,8 @@ class FormCheckBox extends \Widget
 	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
 	 *
 	 * @return string The form field markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
@@ -200,6 +202,8 @@ class FormCheckBox extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

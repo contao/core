@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormSubmit
  *
- * Form submit button.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,6 +29,7 @@ class FormSubmit extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_submit';
@@ -37,8 +37,9 @@ class FormSubmit extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -84,10 +85,13 @@ class FormSubmit extends \Widget
 
 
 	/**
-	 * Generate the widget and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generate()
+	public function parse($arrAttributes=null)
 	{
 		if ($this->imageSubmit && $this->singleSRC != '')
 		{
@@ -102,15 +106,33 @@ class FormSubmit extends \Widget
 			}
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				return sprintf('<input type="image" src="%s" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s%s',
-								$objModel->path,
-								$this->strId,
-								(($this->strClass != '') ? ' ' . $this->strClass : ''),
-								specialchars($this->slabel),
-								specialchars($this->slabel),
-								$this->getAttributes(),
-								$this->strTagEnding);
+				$this->src = $objModel->path;
 			}
+		}
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generate()
+	{
+		if ($this->src)
+		{
+			return sprintf('<input type="image" src="%s" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s%s',
+							$this->src,
+							$this->strId,
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							specialchars($this->slabel),
+							specialchars($this->slabel),
+							$this->getAttributes(),
+							$this->strTagEnding);
 		}
 
 		// Return the regular button
