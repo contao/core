@@ -101,18 +101,43 @@ function __exception($e)
 	// Display the exception
 	if (ini_get('display_errors'))
 	{
-		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
-							get_class($e),
-							$e->getMessage(),
-							str_replace(TL_ROOT . '/', '', $e->getFile()),
-							$e->getLine());
-
-		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
-		echo '<br>' . $strMessage;
+		trace_nicely($e);
 	}
 
 	show_help_message();
 	exit;
+}
+
+
+/**
+ * Show a nicely trace message based on a template instead of just a message
+ *
+ * @param \Exception $exception The exception to trace.
+ */
+function trace_nicely(\Exception $exception)
+{
+	if (function_exists('debug_backtrace') && !in_array('debug_backtrace', explode(',', ini_get('disable_functions '))))
+	{
+		if (file_exists(TL_ROOT . "/templates/be_trace.html5"))
+		{
+			include TL_ROOT . "/templates/be_trace.html5";
+			exit;
+		}
+		elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5"))
+		{
+			include TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5";
+			exit;
+		}
+	}
+
+	$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
+						get_class($exception),
+						$exception->getMessage(),
+						str_replace(TL_ROOT . '/', '', $exception->getFile()),
+						$exception->getLine());
+
+	$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $exception->getTraceAsString()) . "\n" . '</pre>';
+	echo '<br>' . $strMessage;
 }
 
 

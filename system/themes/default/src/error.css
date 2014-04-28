@@ -87,6 +87,49 @@ code {
 a {
 	text-decoration:underline;
 }
+.trace {
+	font-family:Courier,monospace;
+	font-size:13px;
+	padding:4px 0;
+	border-top:1px solid #ddd;
+	white-space:pre-wrap;
+}
+.trace .index {
+	color:#333;
+}
+.trace .call {
+	color:#c33;
+}
+.trace .type {
+	color:#3a3;
+}
+.trace .value {
+	color:#000;
+}
+.trace .file {
+	color: #33c;
+}
+#mbImage .source {
+	display: block;
+	overflow: auto;
+	height: 100%;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ie-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #000 !important;
+}
+#mbImage .source a {
+	display: inline-block;
+	width: 30px;
+	padding-right: 12px;
+	text-align: right;
+}
+#mbImage .source .highlight {
+	background-color: #ff9;
+}
 .hint {
 	margin-top:18px;
 	text-align:center;
