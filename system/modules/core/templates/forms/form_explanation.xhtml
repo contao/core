@@ -1,9 +1,10 @@
+
 <?php if (!$this->tableless): ?>
   <tr class="<?php echo $this->rowClass; ?>">
-    <td colspan="2" class="colspan explanation"><?php echo $this->generate(); ?></td>
+    <td colspan="2" class="colspan explanation"><?php echo $this->text; ?></td>
   </tr>
 <?php else: ?>
   <div class="explanation">
-    <?php echo $this->generate(); ?>
+    <?php echo $this->text; ?>
   </div>
 <?php endif; ?>

@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormExplanation
  *
- * Form field "explanation".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,6 +29,7 @@ class FormExplanation extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_explanation';
@@ -45,10 +45,13 @@ class FormExplanation extends \Widget
 
 
 	/**
-	 * Generate the widget and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generate()
+	public function parse($arrAttributes=null)
 	{
 		global $objPage;
 
@@ -69,6 +72,21 @@ class FormExplanation extends \Widget
 			$this->text = str_replace(' src="' . $path, ' src="' . TL_FILES_URL . $path, $this->text);
 		}
 
-		return \String::encodeEmail($this->text);
+		$this->text = \String::encodeEmail($this->text);
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generate()
+	{
+		return $this->text;
 	}
 }
