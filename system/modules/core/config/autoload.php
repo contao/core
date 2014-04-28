@@ -307,6 +307,7 @@ TemplateLoader::addFiles(array
 	'form_password'       => 'system/modules/core/templates/forms',
 	'form_radio'          => 'system/modules/core/templates/forms',
 	'form_row'            => 'system/modules/core/templates/forms',
+	'form_select'         => 'system/modules/core/templates/forms',
 	'form_submit'         => 'system/modules/core/templates/forms',
 	'form_textarea'       => 'system/modules/core/templates/forms',
 	'form_textfield'      => 'system/modules/core/templates/forms',

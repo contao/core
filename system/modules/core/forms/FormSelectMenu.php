@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormSelectMenu
  *
- * Form field "select menu".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,27 +29,31 @@ class FormSelectMenu extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Add a for attribute
+	 *
 	 * @var boolean
 	 */
 	protected $blnForAttribute = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_select';
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -148,8 +151,10 @@ class FormSelectMenu extends \Widget
 
 	/**
 	 * Return a parameter
-	 * @param string
-	 * @return mixed
+	 *
+	 * @param string $strKey The parameter name
+	 *
+	 * @return mixed The parameter value
 	 */
 	public function __get($strKey)
 	{
@@ -163,12 +168,15 @@ class FormSelectMenu extends \Widget
 
 
 	/**
-	 * Generate the widget and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generate()
+	public function parse($arrAttributes=null)
 	{
-		$strOptions = '';
+		$arrOptions = array();
 		$strClass = 'select';
 		$blnHasGroups = false;
 
@@ -176,6 +184,96 @@ class FormSelectMenu extends \Widget
 		{
 			$this->strName .= '[]';
 			$strClass = 'multiselect';
+		}
+
+		// Make sure there are no multiple options in single mode
+		elseif (is_array($this->varValue))
+		{
+			$this->varValue = $this->varValue[0];
+		}
+
+		// Add empty option (XHTML) if there are none
+		if (empty($this->arrOptions))
+		{
+			$this->arrOptions = array(array('value' => '', 'label' => '-'));
+		}
+
+		// Chosen
+		if ($this->chosen)
+		{
+			$strClass .= ' tl_chosen';
+		}
+
+		// Custom class
+		if ($this->strClass != '')
+		{
+			$strClass .= ' ' . $this->strClass;
+		}
+
+		$this->class = $strClass;
+
+		// Generate options
+		foreach ($this->arrOptions as $arrOption)
+		{
+			if ($arrOption['group'])
+			{
+				if ($blnHasGroups)
+				{
+					$arrOptions[] = array
+					(
+						'type' => 'group_end'
+					);
+				}
+
+				$arrOptions[] = array
+				(
+					'type'  => 'group_start',
+					'label' => specialchars($arrOption['label'])
+				);
+
+				$blnHasGroups = true;
+			}
+			else
+			{
+				$arrOptions[] = array
+				(
+					'type'     => 'option',
+					'value'    => $arrOption['value'],
+					'selected' => $this->isSelected($arrOption),
+					'label'    => $arrOption['label'],
+				);
+			}
+		}
+
+		if ($blnHasGroups)
+		{
+			$arrOptions[] = array
+			(
+				'type' => 'group_end'
+			);
+		}
+
+		$this->arrOptions = $arrOptions;
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generate()
+	{
+		$strOptions = '';
+		$blnHasGroups = false;
+
+		if ($this->multiple)
+		{
+			$this->strName .= '[]';
 		}
 
 		// Make sure there are no multiple options in single mode
@@ -217,17 +315,10 @@ class FormSelectMenu extends \Widget
 			$strOptions .= '</optgroup>';
 		}
 
-		// Chosen
-		if ($this->chosen)
-		{
-			$strClass .= ' tl_chosen';
-		}
-
-		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s>%s</select>',
+		return sprintf('<select name="%s" id="ctrl_%s" class="%s"%s>%s</select>',
 						$this->strName,
 						$this->strId,
-						$strClass,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->class,
 						$this->getAttributes(),
 						$strOptions) . $this->addSubmit();
 	}
