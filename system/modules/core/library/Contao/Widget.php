@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Controller
+abstract class Widget extends \Template\Base
 {
 
 	/**
@@ -74,28 +74,10 @@ abstract class Widget extends \Controller
 	protected $strClass;
 
 	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate;
-
-	/**
 	 * Wizard
 	 * @var string
 	 */
 	protected $strWizard;
-
-	/**
-	 * Output format
-	 * @var string
-	 */
-	protected $strFormat = 'html5';
-
-	/**
-	 * Tag ending
-	 * @var string
-	 */
-	protected $strTagEnding = '>';
 
 	/**
 	 * Errors
@@ -549,10 +531,7 @@ abstract class Widget extends \Controller
 
 		$this->addAttributes($arrAttributes);
 
-		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
-		$strBuffer = ob_get_contents();
-		ob_end_clean();
+		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters (see #5553)
 		if (isset($GLOBALS['TL_HOOKS']['parseWidget']) && is_array($GLOBALS['TL_HOOKS']['parseWidget']))

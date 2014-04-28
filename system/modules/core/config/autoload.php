@@ -144,6 +144,7 @@ ClassLoader::addClasses(array
 	'Contao\SortedIterator'            => 'system/modules/core/library/Contao/SortedIterator.php',
 	'Contao\String'                    => 'system/modules/core/library/Contao/String.php',
 	'Contao\System'                    => 'system/modules/core/library/Contao/System.php',
+	'Contao\Template\Base'             => 'system/modules/core/library/Contao/Template/Base.php',
 	'Contao\Template'                  => 'system/modules/core/library/Contao/Template.php',
 	'Contao\TemplateLoader'            => 'system/modules/core/library/Contao/TemplateLoader.php',
 	'Contao\User'                      => 'system/modules/core/library/Contao/User.php',
