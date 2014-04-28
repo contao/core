@@ -441,7 +441,7 @@ else
 	fi
 
 	# Check whether uglifyjs is available
-	if [[ $(which uglifyjs) != "" ]]; then
+	if [[ "$(which uglifyjs)" != "" ]]; then
 		js="uglifyjs -nc --max-line-len 0"
 		echo -e "  \033[0;33mWill be using uglifyjs to minify .js files\033[0m"
 	else
