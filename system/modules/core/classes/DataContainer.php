@@ -225,7 +225,6 @@ class DataContainer extends \Backend
 		}
 
 		$arrData['eval']['required'] = false;
-		$arrData['activeRecord'] = $this->activeRecord;
 
 		// Use strlen() here (see #3277)
 		if ($arrData['eval']['mandatory'])

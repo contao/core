@@ -226,21 +226,20 @@ class Ajax extends \Backend
 
 			// Load nodes of the page tree
 			case 'loadPagetree':
-				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = \Input::post('name');
+				$strField = \Input::post('name');
+				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
-				$objWidget = new $GLOBALS['BE_FFL']['pageSelector']($arrData, $dc);
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, null, $strField, $dc->table, $dc));
+
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
-				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = \Input::post('name');
+				$strField = \Input::post('name');
+				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
-				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
 				if (\Input::post('folder', true) != '')
@@ -337,17 +336,9 @@ class Ajax extends \Backend
 					$varValue = serialize($varValue);
 				}
 
-				// Build the attributes based on the "eval" array
-				$arrAttribs = $GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['eval'];
+				$strClass = $GLOBALS['BE_FFL'][$strKey];
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, $varValue, $strField, $dc->table, $dc));
 
-				$arrAttribs['id'] = $dc->field;
-				$arrAttribs['name'] = $dc->field;
-				$arrAttribs['value'] = $varValue;
-				$arrAttribs['strTable'] = $dc->table;
-				$arrAttribs['strField'] = $strField;
-				$arrAttribs['activeRecord'] = $dc->activeRecord;
-
-				$objWidget = new $GLOBALS['BE_FFL'][$strKey]($arrAttribs);
 				echo $objWidget->generate();
 				exit; break;
 

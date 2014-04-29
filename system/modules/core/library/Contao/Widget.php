@@ -1215,8 +1215,8 @@ abstract class Widget extends \Template\Base
 		$arrAttributes['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
-		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
 		$arrAttributes['objDca'] = $objDca;
+		$arrAttributes['activeRecord'] = $objDca->activeRecord;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
