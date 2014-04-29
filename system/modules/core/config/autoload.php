@@ -275,6 +275,8 @@ TemplateLoader::addFiles(array
 	'be_widget_pw'        => 'system/modules/core/templates/backend',
 	'be_widget_rdo'       => 'system/modules/core/templates/backend',
 	'be_wildcard'         => 'system/modules/core/templates/backend',
+	'block_searchable'    => 'system/modules/core/templates/block',
+	'block_unsearchable'  => 'system/modules/core/templates/block',
 	'ce_accordion'        => 'system/modules/core/templates/elements',
 	'ce_accordion_start'  => 'system/modules/core/templates/elements',
 	'ce_accordion_stop'   => 'system/modules/core/templates/elements',

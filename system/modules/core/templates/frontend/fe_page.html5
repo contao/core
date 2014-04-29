@@ -19,60 +19,64 @@
   <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.js"></script><![endif]-->
 
 </head>
-<body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+<body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 
-  <?php echo $this->getCustomSections('top'); ?>
+  <?php $this->block('body'); ?>
 
-  <div id="wrapper">
+    <?php echo $this->getCustomSections('top'); ?>
 
-    <?php if ($this->header): ?>
-      <header id="header">
-        <div class="inside">
-          <?php echo $this->header; ?>
+    <div id="wrapper">
+
+      <?php if ($this->header): ?>
+        <header id="header">
+          <div class="inside">
+            <?php echo $this->header; ?>
+          </div>
+        </header>
+      <?php endif; ?>
+
+      <?php echo $this->getCustomSections('before'); ?>
+
+      <div id="container">
+        <div id="main">
+          <div class="inside">
+            <?php echo $this->main; ?>
+          </div>
+          <?php echo $this->getCustomSections('main'); ?>
         </div>
-      </header>
-    <?php endif; ?>
 
-    <?php echo $this->getCustomSections('before'); ?>
+        <?php if ($this->left): ?>
+          <aside id="left">
+            <div class="inside">
+              <?php echo $this->left; ?>
+            </div>
+          </aside>
+        <?php endif; ?>
 
-    <div id="container">
-      <div id="main">
-        <div class="inside">
-          <?php echo $this->main; ?>
-        </div>
-        <?php echo $this->getCustomSections('main'); ?>
+        <?php if ($this->right): ?>
+          <aside id="right">
+            <div class="inside">
+              <?php echo $this->right; ?>
+            </div>
+          </aside>
+        <?php endif; ?>
       </div>
 
-      <?php if ($this->left): ?>
-        <aside id="left">
+      <?php echo $this->getCustomSections('after'); ?>
+
+      <?php if ($this->footer): ?>
+        <footer id="footer">
           <div class="inside">
-            <?php echo $this->left; ?>
+            <?php echo $this->footer; ?>
           </div>
-        </aside>
+        </footer>
       <?php endif; ?>
 
-      <?php if ($this->right): ?>
-        <aside id="right">
-          <div class="inside">
-            <?php echo $this->right; ?>
-          </div>
-        </aside>
-      <?php endif; ?>
     </div>
 
-    <?php echo $this->getCustomSections('after'); ?>
+    <?php echo $this->getCustomSections('bottom'); ?>
 
-    <?php if ($this->footer): ?>
-      <footer id="footer">
-        <div class="inside">
-          <?php echo $this->footer; ?>
-        </div>
-      </footer>
-    <?php endif; ?>
-
-  </div>
-
-  <?php echo $this->getCustomSections('bottom'); ?>
+  <?php $this->endblock(); ?>
 
   <?php echo $this->mootools; ?>
 
