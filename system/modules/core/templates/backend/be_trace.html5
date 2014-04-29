@@ -1,15 +1,7 @@
 <?php
 
-try {
-	System::loadLanguageFile('exception');
-	$lang = (object) $GLOBALS['TL_LANG']['XPT'];
-} catch (\Exception $e) {
-	// native fallback
-	$lang = (object) array(
-		'error' => 'An error occurred',
-		'hint'  => 'To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.',
-	);
-}
+System::loadLanguageFile('exception', null, false, true);
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
 
 ?>
 <!DOCTYPE html>
