@@ -5481,7 +5481,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect(preg_replace('/&(amp;)?lp=[^&]+/i', '', \Environment::get('request')));
 		}
 
-		\Input::setGet('lp', $offset / $limit + 1);
+		if ($limit) // see #6923
+		{
+			\Input::setGet('lp', $offset / $limit + 1);
+		}
 
 		$objPagination = new \Pagination($this->total, $limit, 7, 'lp', new \BackendTemplate('be_pagination'), true);
 		return $objPagination->generate();
