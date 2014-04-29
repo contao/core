@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Make the fields of the meta wizard configurable in the DCA (see #4327).
+
+### Improved
 Also show the preview image when editing multiple files (see #6643).
 
 ### Improved
