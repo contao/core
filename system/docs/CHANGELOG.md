@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Add some basic WAI-ARIA attributes to the navigation menu (see #6217).
+
+### Improved
 Automatically convert file paths in TinyMCE into insert tags (see #5965).
 
 ### Changed
