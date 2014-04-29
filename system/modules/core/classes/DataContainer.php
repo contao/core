@@ -461,7 +461,24 @@ class DataContainer extends \Backend
   </fieldset>';
 		}
 
-		return '
+		$strPreview = '';
+
+		// Show a preview image (see #4948)
+		if ($this->strTable == 'tl_files' && $this->strField == 'name' && $this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
+		{
+			$objFile = new \File($this->objActiveRecord->path);
+
+			if ($objFile->isGdImage)
+			{
+				$strPreview = '
+
+<div class="tl_edit_preview">
+' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
+</div>';
+			}
+		}
+
+		return $strPreview . '
 <div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
