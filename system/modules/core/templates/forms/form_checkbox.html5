@@ -1,4 +1,4 @@
-<?php $this->tableless || $this->extend('form_row'); ?>
+<?php $this->extend('form_row'); ?>
 
 <?php $this->block('field'); ?>
   <fieldset id="ctrl_<?php echo $this->id; ?>" class="checkbox_container<?php if ($this->class) echo ' ' . $this->class; ?>">

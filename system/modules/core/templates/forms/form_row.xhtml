@@ -1,13 +1,27 @@
 
-<tr class="<?php echo $this->rowClass; ?>">
-  <td class="col_0 col_first">
+<?php if ($this->tableless): ?>
+
+  <div<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
     <?php $this->block('label'); ?>
-      &nbsp;
     <?php $this->endblock(); ?>
-  </td>
-  <td class="col_1 col_last">
+
     <?php $this->block('field'); ?>
-      &nbsp;
     <?php $this->endblock(); ?>
-  </td>
-</tr>
+  </div>
+
+<?php else: ?>
+
+  <tr class="<?php echo $this->rowClass; ?>">
+    <td class="col_0 col_first">
+      <?php $this->block('label'); ?>
+        &nbsp;
+      <?php $this->endblock(); ?>
+    </td>
+    <td class="col_1 col_last">
+      <?php $this->block('field'); ?>
+        &nbsp;
+      <?php $this->endblock(); ?>
+    </td>
+  </tr>
+
+<?php endif; ?>

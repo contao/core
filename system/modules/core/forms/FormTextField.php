@@ -185,7 +185,7 @@ class FormTextField extends \Widget
 						$this->strName,
 						$this->strId,
 						($this->hideInput ? ' password' : ''),
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						specialchars($this->varValue),
 						$this->getAttributes(),
 						$this->strTagEnding) . $this->addSubmit();
