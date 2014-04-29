@@ -240,8 +240,9 @@ abstract class System
 	 * @param string  $strName     The table name
 	 * @param boolean $strLanguage An optional language code
 	 * @param boolean $blnNoCache  If true, the cache will be bypassed
+	 * @param boolean $blnNoHooks  Bypass calling hooks.
 	 */
-	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false)
+	public static function loadLanguageFile($strName, $strLanguage=null, $blnNoCache=false, $blnNoHooks=false)
 	{
 		if ($strLanguage === null)
 		{
@@ -315,11 +316,14 @@ abstract class System
 		}
 
 		// HOOK: allow to load custom labels
-		if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
+		if (!$blnNoHooks)
 		{
-			foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
+			if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
 			{
-				static::importStatic($callback[0])->$callback[1]($strName, $strLanguage, $strCacheKey);
+				foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
+				{
+					static::importStatic($callback[0])->$callback[1]($strName, $strLanguage, $strCacheKey);
+				}
 			}
 		}
 
