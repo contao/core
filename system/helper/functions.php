@@ -192,6 +192,64 @@ function log_message($strMessage, $strLog='error.log')
 
 
 /**
+ * Describe a variable, very similar to var_dump.
+ *
+ * @param $var
+ * @param $indent
+ */
+function describe_var($var, $indent = '')
+{
+	if (is_null($var))
+	{
+		echo 'null';
+	}
+	elseif (is_object($var))
+	{
+		printf('<span class="type">object</span> %s', get_class($var));
+	}
+	elseif (is_array($var))
+	{
+		echo '<span class="type">array</span> (';
+
+		if (count($var)) {
+			echo PHP_EOL;
+
+			$keyWidth = 0;
+			foreach ($var as $key => $value)
+			{
+				$keyWidth = max($keyWidth, mb_strlen($key));
+			}
+
+			foreach ($var as $key => $value)
+			{
+				printf('%s  %s => ', $indent, str_pad($key, $keyWidth, ' '));
+				describe_var($value, $indent . '  ');
+				echo ',' . PHP_EOL;
+			}
+		}
+
+		echo $indent . ')';
+	}
+	elseif (is_int($var) || is_double($var))
+	{
+		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), $var);
+	}
+	elseif (is_string($var))
+	{
+		printf('<span class="type">%s</span> "<span class="value">%s</span>" (raw_length=%d)', gettype($var), $var, strlen($var));
+	}
+	elseif (is_bool($var))
+	{
+		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), $var ? 'true' : 'false');
+	}
+	else
+	{
+		printf('<span class="type">%s</span> "<span class="value">%s</span>"', gettype($var), $var);
+	}
+}
+
+
+/**
  * Scan a directory and return its files and folders as array
  * @param string
  * @param boolean
