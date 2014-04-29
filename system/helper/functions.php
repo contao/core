@@ -192,6 +192,44 @@ function log_message($strMessage, $strLog='error.log')
 
 
 /**
+ * Filter sensitive information from a variable for public output.
+ *
+ * @param string $var
+ *
+ * @return string
+ */
+function filter_value($var)
+{
+	static $search;
+	static $replace;
+
+	if (!$search) {
+		$search  = array(TL_ROOT . '/');
+		$replace = array('&hellip;/');
+
+		foreach ($GLOBALS['TL_CONFIG'] as $key => $value) {
+			if (
+				!empty($value) &&
+				!is_bool($value) &&
+				!is_int($value) &&
+				!is_double($value) && (
+					strpos($key, 'User') !== false ||
+					strpos($key, 'Pass') !== false ||
+					strpos($key, 'secret') !== false
+				)
+			)
+			{
+				$search[]  = $value;
+				$replace[] = '&block;&block;&block;';
+			}
+		}
+	}
+
+	return str_replace($search, $replace, $var);
+}
+
+
+/**
  * Describe a variable, very similar to var_dump.
  *
  * @param $var
@@ -222,7 +260,7 @@ function describe_var($var, $indent = '')
 
 			foreach ($var as $key => $value)
 			{
-				printf('%s  %s => ', $indent, str_pad($key, $keyWidth, ' '));
+				printf('%s  %s => ', $indent, str_pad(filter_value($key), $keyWidth, ' '));
 				describe_var($value, $indent . '  ');
 				echo ',' . PHP_EOL;
 			}
@@ -232,11 +270,11 @@ function describe_var($var, $indent = '')
 	}
 	elseif (is_int($var) || is_double($var))
 	{
-		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), $var);
+		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), filter_value($var));
 	}
 	elseif (is_string($var))
 	{
-		printf('<span class="type">%s</span> "<span class="value">%s</span>" (raw_length=%d)', gettype($var), $var, strlen($var));
+		printf('<span class="type">%s</span> "<span class="value">%s</span>" (raw_length=%d)', gettype($var), filter_value($var), strlen($var));
 	}
 	elseif (is_bool($var))
 	{
@@ -244,7 +282,7 @@ function describe_var($var, $indent = '')
 	}
 	else
 	{
-		printf('<span class="type">%s</span> "<span class="value">%s</span>"', gettype($var), $var);
+		printf('<span class="type">%s</span> "<span class="value">%s</span>"', gettype($var), filter_value($var));
 	}
 }
 

@@ -67,7 +67,7 @@ try {
       /** @var \Exception $exception */
       while ($exception) {
         ?>
-        <h3><?php echo $exception->getMessage() ?></h3>
+        <h3><?php echo filter_value($exception->getMessage()) ?></h3>
         <?php
         foreach ($exception->getTrace() as $index => $row):
           echo '<div class="trace">';
