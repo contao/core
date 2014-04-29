@@ -23,7 +23,7 @@
 
   <?php $this->block('body'); ?>
 
-    <?php echo $this->section('top'); ?>
+    <?php echo $this->sections('top'); ?>
 
     <div id="wrapper">
 
