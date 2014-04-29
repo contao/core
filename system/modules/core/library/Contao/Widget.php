@@ -324,6 +324,10 @@ abstract class Widget extends \Template\Base
 				$this->blnForAttribute = $varValue;
 				break;
 
+			case 'dataContainer':
+				$this->objDca = $varValue;
+				break;
+
 			default:
 				$this->arrConfiguration[$strKey] = $varValue;
 				break;
@@ -396,6 +400,14 @@ abstract class Widget extends \Template\Base
 
 			case 'forAttribute':
 				return $this->blnForAttribute;
+				break;
+
+			case 'dataContainer':
+				return $this->objDca;
+				break;
+
+			case 'activeRecord':
+				return $this->objDca->activeRecord;
 				break;
 
 			default:
@@ -1215,8 +1227,7 @@ abstract class Widget extends \Template\Base
 		$arrAttributes['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
-		$arrAttributes['objDca'] = $objDca;
-		$arrAttributes['activeRecord'] = $objDca->activeRecord;
+		$arrAttributes['dataContainer'] = $objDca;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
