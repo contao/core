@@ -300,6 +300,7 @@ TemplateLoader::addFiles(array
 	'form_captcha'        => 'system/modules/core/templates/forms',
 	'form_checkbox'       => 'system/modules/core/templates/forms',
 	'form_explanation'    => 'system/modules/core/templates/forms',
+	'form_fieldset'       => 'system/modules/core/templates/forms',
 	'form_headline'       => 'system/modules/core/templates/forms',
 	'form_hidden'         => 'system/modules/core/templates/forms',
 	'form_html'           => 'system/modules/core/templates/forms',

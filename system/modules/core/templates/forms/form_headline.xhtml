@@ -1,10 +1,14 @@
 
 <?php if (!$this->tableless): ?>
+
   <tr class="<?php echo $this->rowClass; ?>">
     <td colspan="2" class="colspan headline"><?php echo $this->text; ?></td>
   </tr>
+
 <?php else: ?>
+
   <div class="headline">
     <?php echo $this->text; ?>
   </div>
+
 <?php endif; ?>

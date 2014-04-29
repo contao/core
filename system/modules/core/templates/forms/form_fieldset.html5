@@ -1,0 +1,13 @@
+
+<?php if ($this->fsType == 'fsStart'): ?>
+
+  <fieldset class="<?php echo $this->strClass; ?>">
+  <?php if ($this->label): ?>
+    <legend><?php echo $this->label; ?></legend>
+  <?php endif; ?>
+
+<?php else: ?>
+
+  </fieldset>
+
+<?php endif; ?>
