@@ -1,10 +1,6 @@
+<?php $this->extend('block_unsearchable'); ?>
 
-<!-- indexer::stop -->
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+<?php $this->block('content'); ?>
 
   <div class="rss_default_header">
     <h1><a href="<?php echo $this->link; ?>"<?php echo LINK_NEW_WINDOW; ?>><?php echo $this->title; ?></a></h1>
@@ -25,5 +21,4 @@
 
   <?php echo $this->pagination; ?>
 
-</div>
-<!-- indexer::continue -->
+<?php $this->endblock(); ?>
