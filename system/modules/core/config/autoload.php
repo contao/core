@@ -278,6 +278,7 @@ TemplateLoader::addFiles(array
 	'ce_accordion'        => 'system/modules/core/templates/elements',
 	'ce_accordion_start'  => 'system/modules/core/templates/elements',
 	'ce_accordion_stop'   => 'system/modules/core/templates/elements',
+	'ce_base'             => 'system/modules/core/templates/elements',
 	'ce_code'             => 'system/modules/core/templates/elements',
 	'ce_download'         => 'system/modules/core/templates/elements',
 	'ce_downloads'        => 'system/modules/core/templates/elements',

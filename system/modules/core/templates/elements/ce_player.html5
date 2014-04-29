@@ -1,9 +1,6 @@
+<?php $this->extend('ce_base'); ?>
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+<?php $this->block('content'); ?>
 
   <!-- indexer::stop -->
   <?php if ($this->isVideo): ?>
@@ -21,4 +18,4 @@
   <?php endif; ?>
   <!-- indexer::continue -->
 
-</div>
+<?php $this->endblock(); ?>
