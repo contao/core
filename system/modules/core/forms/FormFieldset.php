@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormFieldset
  *
- * Form field "fieldset".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,9 +29,10 @@ class FormFieldset extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_html';
+	protected $strTemplate = 'form_fieldset';
 
 
 	/**
@@ -45,10 +45,13 @@ class FormFieldset extends \Widget
 
 
 	/**
-	 * Generate the widget and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generate()
+	public function parse($arrAttributes=null)
 	{
 		// Return a wildcard in the back end
 		if (TL_MODE == 'BE')
@@ -73,7 +76,19 @@ class FormFieldset extends \Widget
 			return '';
 		}
 
-		// Return the HTML code in the front end
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generate()
+	{
 		if ($this->fsType == 'fsStart')
 		{
 			return "  <fieldset" . ($this->strClass ? ' class="' . $this->strClass . '"' : '') . ">\n" . (($this->label != '') ? "  <legend>" . $this->label . "</legend>\n" : '');

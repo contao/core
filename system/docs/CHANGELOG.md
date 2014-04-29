@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Improved
+Move the form field markup into the template files (see #6834).
+
 ### New
 Add template inheritance and template insertion (see #6508).
 

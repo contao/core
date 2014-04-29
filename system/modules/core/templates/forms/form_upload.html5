@@ -15,10 +15,9 @@
     <p class="error"><?php echo $this->getErrorAsString(); ?></p>
   <?php endif; ?>
 
-  <input type="text" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="captcha mandatory<?php if ($this->class) echo ' ' . $this->class; ?>" value=""<?php echo $this->getAttributes(); ?> />
-  <span class="captcha_text<?php if ($this->class) echo ' ' . $this->class; ?>"><?php echo $this->question; ?></span>
+  <input type="file" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="upload<?php if ($this->class) echo ' ' . $this->class; ?>"<?php echo $this->getAttributes(); ?>>
 
   <?php if ($this->addSubmit): ?>
-    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
   <?php endif; ?>
 <?php $this->endblock(); ?>

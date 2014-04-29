@@ -531,6 +531,8 @@ abstract class Widget extends \Template\Base
 
 		$this->addAttributes($arrAttributes);
 
+		$this->mandatoryField = $GLOBALS['TL_LANG']['MSC']['mandatory'];
+
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters (see #5553)
