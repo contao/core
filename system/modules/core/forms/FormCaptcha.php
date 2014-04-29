@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormCaptcha
  *
- * Captcha field.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,18 +29,21 @@ class FormCaptcha extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_captcha';
 
 	/**
 	 * Captcha key
+	 *
 	 * @var string
 	 */
 	protected $strCaptchaKey;
 
 	/**
 	 * Security questions
+	 *
 	 * @var string
 	 */
 	protected $strQuestion;
@@ -49,7 +51,8 @@ class FormCaptcha extends \Widget
 
 	/**
 	 * Initialize the object
-	 * @param array
+	 *
+	 * @param array $arrAttributes An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -64,8 +67,9 @@ class FormCaptcha extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -90,6 +94,32 @@ class FormCaptcha extends \Widget
 
 
 	/**
+	 * Return a parameter
+	 *
+	 * @param string $strKey The parameter key
+	 *
+	 * @return mixed The parameter value
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'name':
+				return $this->strCaptchaKey;
+				break;
+
+			case 'question':
+				return $this->strQuestion;
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
+		}
+	}
+
+
+	/**
 	 * Validate the input and set the value
 	 */
 	public function validate()
@@ -107,66 +137,27 @@ class FormCaptcha extends \Widget
 
 
 	/**
-	 * Generate the label and return it as string
-	 * @return string
+	 * Parse the template file and return it as string
+	 *
+	 * @param array $arrAttributes An optional attributes array
+	 *
+	 * @return string The template markup
 	 */
-	public function generateLabel()
-	{
-		if ($this->strLabel == '')
-		{
-			return '';
-		}
-
-		if ($this->strQuestion == '')
-		{
-			$this->setQuestion();
-		}
-
-		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
-						$this->strLabel,
-						'<span class="mandatory">*</span>',
-						$this->strQuestion);
-	}
-
-
-	/**
-	 * Generate the widget and return it as string
-	 * @return string
-	 */
-	public function generate()
-	{
-		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s%s',
-						$this->strCaptchaKey,
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->getAttributes(),
-						$this->strTagEnding) . $this->addSubmit();
-	}
-
-
-	/**
-	 * Return the captcha question as string
-	 * @return string
-	 */
-	public function generateQuestion()
+	public function parse($arrAttributes=null)
 	{
 		if ($this->strQuestion == '')
 		{
 			$this->setQuestion();
 		}
 
-		return sprintf('<span class="captcha_text%s">%s</span>',
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->strQuestion);
+		return parent::parse($arrAttributes);
 	}
 
 
 	/**
 	 * Generate the captcha question
-	 * @return string
+	 *
+	 * @return string The question string
 	 */
 	protected function setQuestion()
 	{
@@ -192,5 +183,62 @@ class FormCaptcha extends \Widget
 		}
 
 		$this->strQuestion = $strEncoded;
+	}
+
+
+	/**
+	 * Generate the label and return it as string
+	 *
+	 * @return string The label markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generateLabel()
+	{
+		if ($this->strLabel == '')
+		{
+			return '';
+		}
+
+		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
+						$this->strId,
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
+						$this->strLabel,
+						'<span class="mandatory">*</span>',
+						$this->strQuestion);
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generate()
+	{
+		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s%s',
+						$this->strCaptchaKey,
+						$this->strId,
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->getAttributes(),
+						$this->strTagEnding) . $this->addSubmit();
+	}
+
+
+	/**
+	 * Return the captcha question as string
+	 *
+	 * @return string The question markup
+	 *
+	 * @deprecated The logic has been moved into the template (see #6834)
+	 */
+	public function generateQuestion()
+	{
+		return sprintf('<span class="captcha_text%s">%s</span>',
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->strQuestion);
 	}
 }
