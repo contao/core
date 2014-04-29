@@ -115,6 +115,7 @@ endif;
       foreach ($files as $file) {
         $hash = md5($file);
         $lines = file_get_contents($file);
+        $lines = filter_value($lines);
         $lines = highlight_string($lines, true);
         $lines = str_replace(array("\n", "\r", '<code>', '</code>'), array('', '', '', ''), $lines);
         $lines = explode('<br />', $lines);
