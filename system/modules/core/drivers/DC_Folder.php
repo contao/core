@@ -1195,23 +1195,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$version = '';
 		}
 
-		$strPreview = '';
-
-		// Show a preview image (see #4948)
-		if ($this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
-		{
-			$objFile = new \File($this->objActiveRecord->path);
-
-			if ($objFile->isGdImage)
-			{
-				$strPreview = '
-
-<div class="tl_edit_preview">
-' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
-</div>';
-			}
-		}
-
 		// Submit buttons
 		$arrButtons = array();
 		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
@@ -1260,7 +1243,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
-'.\Message::generate().$strPreview.'
+'.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">

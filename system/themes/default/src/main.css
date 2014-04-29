@@ -397,7 +397,7 @@ input[type=search]::-webkit-search-decoration {
 	padding:4px 2px;
 }
 .tl_edit_preview {
-	margin:18px 18px 6px;
+	margin-top:18px;
 }
 .tl_edit_preview img {
 	padding:2px;

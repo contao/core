@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Also show the preview image when editing multiple files (see #6643).
+
+### Improved
 Show the file location below the "name" field in the file manager (see #6503).
 
 ### Improved
