@@ -126,28 +126,24 @@ function __exception($e)
  */
 function trace_nicely(\Exception $exception)
 {
-	if (function_exists('debug_backtrace') && !in_array('debug_backtrace', explode(',', ini_get('disable_functions '))))
+	if (file_exists(TL_ROOT . "/templates/be_trace.html5"))
 	{
-		if (file_exists(TL_ROOT . "/templates/be_trace.html5"))
-		{
-			include TL_ROOT . "/templates/be_trace.html5";
-			exit;
-		}
-		elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5"))
-		{
-			include TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5";
-			exit;
-		}
+		include TL_ROOT . "/templates/be_trace.html5";
 	}
+	elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5"))
+	{
+		include TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5";
+	}
+	else {
+		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
+							get_class($exception),
+							$exception->getMessage(),
+							str_replace(TL_ROOT . '/', '', $exception->getFile()),
+							$exception->getLine());
 
-	$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
-						get_class($exception),
-						$exception->getMessage(),
-						str_replace(TL_ROOT . '/', '', $exception->getFile()),
-						$exception->getLine());
-
-	$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $exception->getTraceAsString()) . "\n" . '</pre>';
-	echo '<br>' . $strMessage;
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $exception->getTraceAsString()) . "\n" . '</pre>';
+		echo '<br>' . $strMessage;
+	}
 }
 
 
