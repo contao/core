@@ -45,6 +45,11 @@ function __error($intType, $strMessage, $strFile, $intLine)
 	// Ignore functions with an error control operator (@function_name)
 	if (ini_get('error_reporting') > 0)
 	{
+		if (function_exists('xdebug_disable'))
+		{
+			xdebug_disable();
+		}
+
 		if ($intType != E_NOTICE)
 		{
 			$e = new Exception();
@@ -76,6 +81,11 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		{
 			show_help_message();
 			exit;
+		}
+
+		if (function_exists('xdebug_enable'))
+		{
+			xdebug_enable();
 		}
 	}
 }
