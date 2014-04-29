@@ -553,6 +553,80 @@ class String
 
 
 	/**
+	 * Convert file paths inside "src" attributes to insert tags
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with file paths converted to insert tags
+	 */
+	public static function srcToInsertTag($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByPath($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="{{file::' . static::binToUuid($file->uuid) . '}}"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Convert insert tags inside "src" attributes to file paths
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with insert tags converted to file paths
+	 */
+	public static function insertTagToSrc($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByUuid($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="' . $file->path . '"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Prevent direct instantiation (Singleton)
 	 *
 	 * @deprecated String is now a static class

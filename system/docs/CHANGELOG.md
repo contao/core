@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Improved
+Automatically convert file paths in TinyMCE into insert tags (see #5965).
+
 ### Changed
 Move the custom layout section markup into template files (see #6531).
 

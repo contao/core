@@ -245,6 +245,12 @@ class DataContainer extends \Backend
 			}
 		}
 
+		// Convert insert tags in src attributes (see #5965)
+		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		{
+			$this->varValue = \String::insertTagToSrc($this->varValue);
+		}
+
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
@@ -319,6 +325,12 @@ class DataContainer extends \Backend
 					{
 						ksort($varValue);
 						$varValue = serialize($varValue);
+					}
+
+					// Convert file paths in src attributes (see #5965)
+					if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+					{
+						$varValue = \String::srcToInsertTag($varValue);
 					}
 
 					// Save the current value
