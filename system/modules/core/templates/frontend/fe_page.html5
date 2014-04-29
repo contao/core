@@ -23,7 +23,7 @@
 
   <?php $this->block('body'); ?>
 
-    <?php echo $this->getCustomSections('top'); ?>
+    <?php echo $this->section('top'); ?>
 
     <div id="wrapper">
 
@@ -35,14 +35,14 @@
         </header>
       <?php endif; ?>
 
-      <?php echo $this->getCustomSections('before'); ?>
+      <?php echo $this->sections('before'); ?>
 
       <div id="container">
         <div id="main">
           <div class="inside">
             <?php echo $this->main; ?>
           </div>
-          <?php echo $this->getCustomSections('main'); ?>
+          <?php echo $this->sections('main'); ?>
         </div>
 
         <?php if ($this->left): ?>
@@ -62,7 +62,7 @@
         <?php endif; ?>
       </div>
 
-      <?php echo $this->getCustomSections('after'); ?>
+      <?php echo $this->sections('after'); ?>
 
       <?php if ($this->footer): ?>
         <footer id="footer">
@@ -74,7 +74,7 @@
 
     </div>
 
-    <?php echo $this->getCustomSections('bottom'); ?>
+    <?php echo $this->sections('bottom'); ?>
 
   <?php $this->endblock(); ?>
 

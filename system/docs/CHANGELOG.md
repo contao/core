@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Move the custom layout section markup into template files (see #6531).
+
 ### Improved
 Move the form field markup into the template files (see #6834).
 

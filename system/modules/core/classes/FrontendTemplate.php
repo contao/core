@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FrontendTemplate
  *
- * Provide methods to handle front end templates.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,7 +29,8 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Add a hook to modify the template output
-	 * @return string
+	 *
+	 * @return string The template markup
 	 */
 	public function parse()
 	{
@@ -61,8 +61,10 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
-	 * @param boolean
-	 * @throws \UnusedArgumentsException
+	 *
+	 * @param boolean $blnCheckRequest If true, check for unsued $_GET parameters
+	 *
+	 * @throws \UnusedArgumentsException If there are unused $_GET parameters
 	 */
 	public function output($blnCheckRequest=false)
 	{
@@ -222,8 +224,81 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Return a custom layout section
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $key      The section name
+	 * @param string $template An optional template name
+	 *
+	 * @return string The section markup
+	 */
+	public function section($key, $template=null)
+	{
+		$this->id = $key;
+		$this->content = $this->sections[$key];
+
+		if ($template === null)
+		{
+			$template = 'block_section';
+		}
+
+		include $this->getTemplate($template, $this->strFormat);
+	}
+
+
+	/**
+	 * Return the custom layout sections
+	 *
+	 * @param string $key      An optional section name
+	 * @param string $template An optional template name
+	 *
+	 * @return string The section markup
+	 */
+	public function sections($key=null, $template=null)
+	{
+		if (empty($this->sections))
+		{
+			return '';
+		}
+
+		// The key does not match
+		if ($key && $this->sPosition != $key)
+		{
+			return '';
+		}
+
+		// Use the section tag in HTML5
+		$this->tag = ($key == 'main' && $this->strFormat != 'xhtml') ? 'section' : 'div';
+
+		if ($template === null)
+		{
+			$template = 'block_sections';
+		}
+
+		include $this->getTemplate($template, $this->strFormat);
+	}
+
+
+	/**
+	 * Point to `Frontend::addToUrl()` in front end templates (see #6736)
+	 *
+	 * @param string  $strRequest      The request string to be added
+	 * @param boolean $blnIgnoreParams If true, the $_GET parameters will be ignored
+	 *
+	 * @return string The new URI string
+	 */
+	public static function addToUrl($strRequest, $blnIgnoreParams=false)
+	{
+		return \Frontend::addToUrl($strRequest, $blnIgnoreParams);
+	}
+
+
+	/**
+	 * Return a custom layout section
+	 *
+	 * @param string $strKey The section name
+	 *
+	 * @return string The section markup
+	 *
+	 * @deprecated Use FrontendTemplate::section() instead
 	 */
 	public function getCustomSection($strKey)
 	{
@@ -233,8 +308,12 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Return all custom layout sections
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strKey An optional section name
+	 *
+	 * @return string The section markup
+	 *
+	 * @deprecated Use FrontendTemplate::sections() instead
 	 */
 	public function getCustomSections($strKey=null)
 	{
@@ -270,19 +349,5 @@ class FrontendTemplate extends \Template
 		}
 
 		return '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
-	}
-
-
-	/**
-	 * Point to `Frontend::addToUrl()` in front end templates (see #6736)
-	 *
-	 * @param string
-	 * @param boolean
-	 *
-	 * @return string
-	 */
-	public static function addToUrl($strRequest, $blnIgnoreParams=false)
-	{
-		return \Frontend::addToUrl($strRequest, $blnIgnoreParams);
 	}
 }
