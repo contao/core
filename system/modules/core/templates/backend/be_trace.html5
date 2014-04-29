@@ -3,46 +3,50 @@
 System::loadLanguageFile('exception', null, false, true);
 $lang = (object) $GLOBALS['TL_LANG']['XPT'];
 
+if (!defined('TRACE_SCRIPT_INCLUDED')):
+	ob_start();
+	include TL_ROOT . '/system/themes/default/basic.css';
+	include TL_ROOT . '/system/themes/default/error.css';
+	include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvBlack21.css';
+	$styles = ob_get_clean();
+
+	ob_start();
+	include TL_ROOT . '/assets/mootools/core/' . MOOTOOLS . '/mootools.js';
+	include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js';
+	$scripts = ob_get_clean();
+
+	?>
+	<script>
+		var style = document.createElement('style');
+		style.textContent = <?php echo json_encode($styles); ?>;
+		document.head.appendChild(style);
+
+		var script = document.createElement('script');
+		script.textContent = <?php echo json_encode($scripts); ?>;
+		document.head.appendChild(script);
+
+		function scrollToLine(line)
+		{
+			var source = document.getElementById('mbImage').children[0];
+			// highlight the current line
+			$$(source.children).removeClass('highlight');
+			var element = source.getElementsByClassName('L' + line)[0];
+			element.addClass('highlight');
+			// calculate offset by summarize all previous line heights
+			var offset = 0;
+			while (element.previousSibling) {
+				element = element.previousSibling;
+				offset += element.clientHeight;
+			}
+			// move line to the center
+			offset -= .8 * window.innerHeight / 2;
+			source.scrollTop = offset;
+		}
+	</script>
+	<?php
+	define('TRACE_SCRIPT_INCLUDED', true);
+endif;
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-
-  <meta charset="utf-8">
-  <title><?php echo $lang->error; ?></title>
-  <meta name="generator" content="Contao Open Source CMS">
-
-  <style><?php
-    include TL_ROOT . '/system/themes/default/basic.css';
-    include TL_ROOT . '/system/themes/default/error.css';
-    include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvBlack21.css';
-  ?></style>
-  <script><?php
-    include TL_ROOT . '/assets/mootools/core/' . MOOTOOLS . '/mootools.js';
-    include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js';
-  ?>
-
-    function scrollToLine(line)
-    {
-      var source = document.getElementById('mbImage').children[0];
-      // highlight the current line
-      $$(source.children).removeClass('highlight');
-      var element = source.getElementsByClassName('L' + line)[0];
-      element.addClass('highlight');
-      // calculate offset by summarize all previous line heights
-      var offset = 0;
-      while (element.previousSibling) {
-        element = element.previousSibling;
-        offset += element.clientHeight;
-      }
-      // move line to the center
-      offset -= .8 * window.innerHeight / 2;
-      source.scrollTop = offset;
-    }
-  </script>
-</head>
-<body>
-
   <div id="header">
     <h1>Contao Open Source CMS</h1>
   </div>
@@ -133,6 +137,3 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
     <p class="hint"><?php printf($lang->hint, 'templates/be_trace.html5'); ?></p>
 
   </div>
-
-</body>
-</html>
