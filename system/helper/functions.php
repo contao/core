@@ -70,9 +70,9 @@ function __error($intType, $strMessage, $strFile, $intLine)
 									$strMessage,
 									str_replace(TL_ROOT . '/', '', $strFile), // see #4971
 									$intLine);
+				$e = new ErrorException($strMessage, $intType, 1, $strFile, $intLine);
 
-				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
-				echo '<br>' . $strMessage;
+				trace_nicely($e);
 			}
 		}
 
