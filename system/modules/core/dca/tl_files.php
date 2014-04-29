@@ -166,6 +166,10 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'wizard' => array
+			(
+				array('tl_files', 'addFileLocation')
+			),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
@@ -369,6 +373,25 @@ class tl_files extends Backend
 	public function addBreadcrumb()
 	{
 		Backend::addFilesBreadcrumb();
+	}
+
+
+	/**
+	 * Add the file location instead of the help text (see #6503)
+	 * @param DataContainer
+	 * @return string
+	 */
+	public function addFileLocation(DataContainer $dc)
+	{
+		if ($dc->activeRecord === null)
+		{
+			return '';
+		}
+
+		// Unset the default help text
+		unset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['label'][1]);
+
+		return '<p class="tl_help tl_tip">' . sprintf($GLOBALS['TL_LANG']['tl_files']['fileLocation'], $dc->activeRecord->path) . '</p>';
 	}
 
 

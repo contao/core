@@ -59,6 +59,9 @@
       <trans-unit id="tl_files.startUpload">
         <source>Start upload</source>
       </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder "%s"</source>
       </trans-unit>

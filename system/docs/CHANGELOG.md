@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### Improved
+Show the file location below the "name" field in the file manager (see #6503).
+
+### Improved
 Add some basic WAI-ARIA attributes to the navigation menu (see #6217).
 
 ### Improved
