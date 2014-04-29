@@ -1,10 +1,6 @@
+<?php $this->extend('mod_base'); ?>
 
-<!-- indexer::stop -->
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+<?php $this->block('content'); ?>
 
   <form action="<?php echo $this->request; ?>" method="post">
     <div class="formbody">
@@ -20,5 +16,4 @@
     </div>
   </form>
 
-</div>
-<!-- indexer::continue -->
+<?php $this->endblock(); ?>

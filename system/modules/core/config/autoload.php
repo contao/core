@@ -332,6 +332,7 @@ TemplateLoader::addFiles(array
 	'mod_article_nav'     => 'system/modules/core/templates/modules',
 	'mod_article_plain'   => 'system/modules/core/templates/modules',
 	'mod_article_teaser'  => 'system/modules/core/templates/modules',
+	'mod_base'            => 'system/modules/core/templates/modules',
 	'mod_booknav'         => 'system/modules/core/templates/modules',
 	'mod_breadcrumb'      => 'system/modules/core/templates/modules',
 	'mod_flash'           => 'system/modules/core/templates/modules',
