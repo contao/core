@@ -1675,7 +1675,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->import('BackendUser', 'User');
 
 		// Check user permission
-		if (!$this->User->isAdmin && !$this->User->hasAccess('f5', 'fop'))
+		if (!$this->User->hasAccess('f5', 'fop'))
 		{
 			$this->log('Not enough permissions to edit the file source of file "'.$this->intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -2064,7 +2064,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->loadLanguageFile('tl_files');
 
 		// Check the permission to synchronize
-		if (!$this->User->isAdmin && !$this->User->hasAccess('f6', 'fop'))
+		if (!$this->User->hasAccess('f6', 'fop'))
 		{
 			$this->log('Not enough permissions to synchronize the file system', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

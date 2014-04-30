@@ -277,6 +277,11 @@ class BackendUser extends \User
 	 */
 	public function isAllowed($int, $row)
 	{
+		if ($this->isAdmin)
+		{
+			return true;
+		}
+
 		// Inherit CHMOD settings
 		if (!$row['includeChmod'])
 		{
@@ -334,6 +339,22 @@ class BackendUser extends \User
 		}
 
 		return (count(array_intersect($permission, $chmod)) > 0);
+	}
+
+
+	/**
+	 * Return true if there is at least one allowed excluded field
+	 * @param string
+	 * @return boolean
+	 */
+	public function canEditFieldsOf($table)
+	{
+		if ($this->isAdmin)
+		{
+			return true;
+		}
+
+		return (count(preg_grep('/^' . preg_quote($table, '/') . '::/', $this->alexf)) > 0);
 	}
 
 

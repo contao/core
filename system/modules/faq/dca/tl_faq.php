@@ -438,7 +438,7 @@ class tl_faq extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_faq::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
 			return '';
 		}
@@ -462,7 +462,7 @@ class tl_faq extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_faq::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

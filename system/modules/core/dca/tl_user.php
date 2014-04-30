@@ -811,7 +811,7 @@ class tl_user extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -852,7 +852,7 @@ class tl_user extends Backend
 		}
 
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

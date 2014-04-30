@@ -865,7 +865,7 @@ class tl_module extends Backend
 
 		while ($objForms->next())
 		{
-			if ($this->User->isAdmin || $this->User->hasAccess($objForms->id, 'forms'))
+			if ($this->User->hasAccess($objForms->id, 'forms'))
 			{
 				$arrForms[$objForms->id] = $objForms->title;
 			}

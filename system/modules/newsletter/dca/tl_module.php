@@ -159,7 +159,7 @@ class tl_module_newsletter extends Backend
 
 		while ($objChannels->next())
 		{
-			if ($this->User->isAdmin || $this->User->hasAccess($objChannels->id, 'newsletters'))
+			if ($this->User->hasAccess($objChannels->id, 'newsletters'))
 			{
 				$arrChannels[$objChannels->id] = $objChannels->title;
 			}

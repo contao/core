@@ -374,7 +374,7 @@ class tl_user_group extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -398,7 +398,7 @@ class tl_user_group extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

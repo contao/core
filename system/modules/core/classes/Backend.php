@@ -302,7 +302,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the current user has access to the current module
-		elseif ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		elseif ($module != 'undo' && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -717,7 +717,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($arrIds, 'pagemounts'))
+		if (!$objUser->hasAccess($arrIds, 'pagemounts'))
 		{
 			$objSession->set($strKey, 0);
 
@@ -824,7 +824,7 @@ abstract class Backend extends \Controller
 			$strPath .= '/' . $strFolder;
 
 			// Do not show pages which are not mounted
-			if (!$objUser->isAdmin && !$objUser->hasAccess($strPath, 'filemounts'))
+			if (!$objUser->hasAccess($strPath, 'filemounts'))
 			{
 				continue;
 			}
@@ -841,7 +841,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($strNode, 'filemounts'))
+		if (!$objUser->hasAccess($strNode, 'filemounts'))
 		{
 			$objSession->set($strKey, '');
 

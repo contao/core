@@ -998,7 +998,7 @@ class tl_calendar_events extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
 			return '';
 		}
@@ -1027,7 +1027,7 @@ class tl_calendar_events extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

@@ -827,7 +827,7 @@ class tl_news extends Backend
 		}
 
 		// Check permissions AFTER checking the fid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		{
 			return '';
 		}
@@ -857,7 +857,7 @@ class tl_news extends Backend
 		$this->checkPermission();
 
 		// Check permissions to feature
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		{
 			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -911,7 +911,7 @@ class tl_news extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
 			return '';
 		}
@@ -940,7 +940,7 @@ class tl_news extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

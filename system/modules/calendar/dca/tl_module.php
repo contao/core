@@ -187,7 +187,7 @@ class tl_module_calendar extends Backend
 
 		while ($objCalendars->next())
 		{
-			if ($this->User->isAdmin || $this->User->hasAccess($objCalendars->id, 'calendars'))
+			if ($this->User->hasAccess($objCalendars->id, 'calendars'))
 			{
 				$arrCalendars[$objCalendars->id] = $objCalendars->title;
 			}

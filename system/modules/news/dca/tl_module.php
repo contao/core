@@ -185,7 +185,7 @@ class tl_module_news extends Backend
 
 		while ($objArchives->next())
 		{
-			if ($this->User->isAdmin || $this->User->hasAccess($objArchives->id, 'news'))
+			if ($this->User->hasAccess($objArchives->id, 'news'))
 			{
 				$arrArchives[$objArchives->id] = $objArchives->title;
 			}
