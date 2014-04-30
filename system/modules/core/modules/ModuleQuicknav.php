@@ -157,12 +157,6 @@ class ModuleQuicknav extends \Module
 				{
 					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
 
-					// Add the domain if it differs from the current one (see #3765)
-					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-					{
-						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
-					}
-
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),

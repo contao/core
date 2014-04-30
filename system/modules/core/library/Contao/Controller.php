@@ -928,12 +928,6 @@ abstract class Controller extends \System
 									}
 
 									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-									// Add the domain if it differs from the current one (see #3765)
-									if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-									{
-										$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
-									}
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -949,12 +943,6 @@ abstract class Controller extends \System
 								}
 
 								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
-
-								// Add the domain if it differs from the current one (see #3765)
-								if ($objNextPage->domain != '' && $objNextPage->domain != \Environment::get('host'))
-								{
-									$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
-								}
 								break;
 						}
 
@@ -2138,13 +2126,14 @@ abstract class Controller extends \System
 	/**
 	 * Generate an URL depending on the current rewriteURL setting
 	 *
-	 * @param array  $arrRow       An array of page parameters
-	 * @param string $strParams    An optional string of URL parameters
-	 * @param string $strForceLang Force a certain language
+	 * @param array   $arrRow       An array of page parameters
+	 * @param string  $strParams    An optional string of URL parameters
+	 * @param string  $strForceLang Force a certain language
+	 * @param boolean $blnAbsolute  If true, the return value is always an absolute URL
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnAbsolute=false)
 	{
 		if (!\Config::get('disableAlias'))
 		{
@@ -2192,6 +2181,16 @@ abstract class Controller extends \System
 			}
 
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
+		}
+
+		// Add the domain if it differs from the current one (see #3765 and #6927)
+		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		{
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . $strUrl;
+		}
+		elseif ($blnAbsolute)
+		{
+			$strUrl = \Environment::get('base') . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2339,16 +2338,7 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
-
-		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
-		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
-		}
-		else
-		{
-			$strUrl = \Environment::get('base') . $strUrl; // see #4332
-		}
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true); // see #4332
 
 		if (!$blnReturn)
 		{
