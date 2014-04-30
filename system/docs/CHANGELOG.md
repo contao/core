@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Add permissions to import and export themes (see #5835).
+
 ### Improved
 Make the fields of the meta wizard configurable in the DCA (see #4327).
 
