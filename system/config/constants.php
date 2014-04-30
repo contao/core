@@ -27,6 +27,7 @@ define('LONG_TERM_SUPPORT', false);
  */
 define('ACE', '1.1.3');
 define('CSS3PIE', '1.0.0');
+define('DROPZONE', '3.8.5');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
 define('SWIPE', '2.0');

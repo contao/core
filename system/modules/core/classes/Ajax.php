@@ -402,6 +402,11 @@ class Ajax extends \Backend
 				}
 				exit; break;
 
+			// DropZone file upload
+			case 'fileupload':
+				$dc->move();
+				exit; break;
+
 			// HOOK: pass unknown actions to callback functions
 			default:
 				$this->executePostActionsHook($dc);

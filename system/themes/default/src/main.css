@@ -1467,3 +1467,20 @@ fieldset.collapsed > legend {
 #sync-results .tl_checkbox {
 	top:0;
 }
+
+/* DropZone */
+.dz-container {
+	padding:6px;
+	border:3px dashed #ddd;
+}
+.dz-message {
+	padding:36px 18px;
+	-moz-transition:all .15s linear;
+	-webkit-transition:all .15s linear;
+	-o-transition:all .15s linear;
+	transition:all .15s linear;
+}
+.dz-message span {
+	font-size:21px;
+	color:#ccc;
+}

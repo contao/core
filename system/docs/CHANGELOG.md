@@ -5,6 +5,9 @@ Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
 ### New
+Add a DropZone-based file uploader (see #6064).
+
+### New
 Add permissions to import and export themes (see #5835).
 
 ### Improved

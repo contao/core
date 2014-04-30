@@ -32,6 +32,7 @@ ClassLoader::addClasses(array
 	'Contao\BackendTemplate'           => 'system/modules/core/classes/BackendTemplate.php',
 	'Contao\BackendUser'               => 'system/modules/core/classes/BackendUser.php',
 	'Contao\DataContainer'             => 'system/modules/core/classes/DataContainer.php',
+	'Contao\DropZone'                  => 'system/modules/core/classes/DropZone.php',
 	'Contao\FileUpload'                => 'system/modules/core/classes/FileUpload.php',
 	'Contao\Frontend'                  => 'system/modules/core/classes/Frontend.php',
 	'Contao\FrontendTemplate'          => 'system/modules/core/classes/FrontendTemplate.php',

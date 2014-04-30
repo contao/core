@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['uploader'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('FileUpload'),
+			'options'                 => array('DropZone', 'FileUpload'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
