@@ -291,6 +291,7 @@
       </trans-unit>
       <trans-unit id="tl_member.su.1">
         <source>Preview the front end as member ID %s</source>
+        <target>Aperçu du front office en tant que membre ID %s</target>
       </trans-unit>
     </body>
   </file>

@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_content.youtube.1">
         <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
-        <target>Vul YouTube-video ID in (b.v. &lt;em&gt; nsqh9jHkHlM &lt;/ em&gt;).</target>
+        <target>Vul YouTube-video ID in (b.v. &lt;em&gt; nsqh9jHkHlM &lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.0">
         <source>Preview image</source>

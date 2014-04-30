@@ -197,7 +197,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>
-        <target>Kihagyja az &lt;em&gt;items/&lt;/em&gt; vagy &lt;em&gt;események/&lt;/ em&gt; jelöléseket az URL címből, és automatikusan beállítja az elem alapján az &lt;em&gt;auto_item&lt;/em&gt; paramétert.</target>
+        <target>Kihagyja az &lt;em&gt;items/&lt;/em&gt; vagy &lt;em&gt;események/&lt;/em&gt; jelöléseket az URL címből, és automatikusan beállítja az elem alapján az &lt;em&gt;auto_item&lt;/em&gt; paramétert.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.0">
         <source>Disable page alias usage</source>

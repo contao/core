@@ -291,6 +291,7 @@
       </trans-unit>
       <trans-unit id="tl_member.su.1">
         <source>Preview the front end as member ID %s</source>
+        <target>以会员ID%s预览网站前台</target>
       </trans-unit>
     </body>
   </file>

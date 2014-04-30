@@ -165,6 +165,14 @@
         <source>Page layouts</source>
         <target>Layout pagina</target>
       </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Importa tema</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+        <target>Export tema</target>
+      </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
         <target>Navigazione</target>

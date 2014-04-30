@@ -214,8 +214,8 @@
         <target>Fogli di stile aggiuntivi</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional style sheets from the file system.</source>
-        <target>Qui è possibile aggiungere un foglio di stile direttamente dal file system.</target>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>Qui è possibile aggiungere un file  CSS, SCSS o LESS aggiuntivo dal file system.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -286,8 +286,16 @@
         <target>Viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
-        <target>E' possibile sovrascrivere il metatag viewport di default  (e.s. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Qui è possibile sovrascrivere l'elemento viewport (di default &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>Tag titolo</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
+        <target>Qui è possibile sovrascrivere il tag titolo (di default &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -408,6 +416,10 @@
       <trans-unit id="tl_layout.sections_legend">
         <source>Custom sections</source>
         <target>Sezioni personalizzate</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Web fonts</target>
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>

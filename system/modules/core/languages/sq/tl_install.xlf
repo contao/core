@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_install.locked.1">
         <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
-        <target>Për arsye sigurie, vegla e instalimit është bllokuar pasi që fjalëkalimi ishte dhënë gabimisht më shumë se tri herë rreshtazi. Për të zhbllokuar atë, duhet hapur dosja e konfigurimit lokal dhe të vendoset për &lt;em&gt; installCount &lt;/ em&gt; vlera &lt;em&gt; 0 &lt;/ em&gt;.</target>
+        <target>Për arsye sigurie, vegla e instalimit është bllokuar pasi që fjalëkalimi ishte dhënë gabimisht më shumë se tri herë rreshtazi. Për të zhbllokuar atë, duhet hapur dosja e konfigurimit lokal dhe të vendoset për &lt;em&gt; installCount &lt;/em&gt; vlera &lt;em&gt; 0 &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.password.0">
         <source>Password</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_install.changePass.1">
         <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
-        <target>Për të siguruarPërveç kësaj për të siguruar mjet install Contao, ju mund ta riemërtoj apo hequr tërësisht contao &lt;strong&gt; / install.php &lt;/ strong&gt; file.
+        <target>Për të siguruarPërveç kësaj për të siguruar mjet install Contao, ju mund ta riemërtoj apo hequr tërësisht &lt;strong&gt;contao/install.php &lt;/strong&gt; file.
 </target>
       </trans-unit>
       <trans-unit id="tl_install.encryption.0">
@@ -72,7 +72,7 @@
       </trans-unit>
       <trans-unit id="tl_install.template.1">
         <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
-        <target>Këtu ju mund të importoni një &lt;em&gt;. sql &lt;/ em&gt; skedar nga dosja &lt;em&gt; templates&lt;/ em&gt; me një shembull të një faqe interneti të para-konfiguruar . Të dhënat ekzistuese do të fshihen! Nëse ju dëshironi vetëm të importojë një motiv, ju lutem, përdorni menaxherin e motiveve në back end të Contao-së.</target>
+        <target>Këtu ju mund të importoni një &lt;em&gt;. sql &lt;/em&gt; skedar nga dosja &lt;em&gt; templates&lt;/em&gt; me një shembull të një faqe interneti të para-konfiguruar . Të dhënat ekzistuese do të fshihen! Nëse ju dëshironi vetëm të importojë një motiv, ju lutem, përdorni menaxherin e motiveve në back end të Contao-së.</target>
       </trans-unit>
       <trans-unit id="tl_install.admin.0">
         <source>Create an admin user</source>
@@ -80,7 +80,7 @@
       </trans-unit>
       <trans-unit id="tl_install.admin.1">
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
-        <target>Nëse ju keni importuar shembullin e ueb faqes, përdoruesi i admin është &lt;strong&gt; k.jones &lt;/ strong&gt; dhe fjalëkalimi është &lt;strong&gt; kevinjones &lt;/ strong&gt;. Shih shembullin e ueb faqes (front end) për më shumë informacion.</target>
+        <target>Nëse ju keni importuar shembullin e ueb faqes, përdoruesi i admin është &lt;strong&gt; k.jones &lt;/strong&gt; dhe fjalëkalimi është &lt;strong&gt; kevinjones &lt;/strong&gt;. Shih shembullin e ueb faqes (front end) për më shumë informacion.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -88,7 +88,7 @@
       </trans-unit>
       <trans-unit id="tl_install.completed.1">
         <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
-        <target>Tani ju lutem hyni në &lt;a href=&quot;contao/&quot;&gt; Contao back end&lt;/ a&gt; dhe kontrolloni parametrat e sistemit. Pastaj vizitoni faqen tuaj te internetit për të siguruar që Contao po punon si duhet.</target>
+        <target>Tani ju lutem hyni në &lt;a href=&quot;contao/&quot;&gt; Contao back end&lt;/a&gt; dhe kontrolloni parametrat e sistemit. Pastaj vizitoni faqen tuaj te internetit për të siguruar që Contao po punon si duhet.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
@@ -188,7 +188,7 @@
       </trans-unit>
       <trans-unit id="tl_install.collationInfo">
         <source>Changing the collation will affect all tables with a &lt;em&gt;tl_&lt;/em&gt; prefix.</source>
-        <target>Ndryshimi i sistemimit do të ndikojë në të gjitha tabelat me një prapashtesë &lt;em&gt; tl_ &lt;/ em&gt;.</target>
+        <target>Ndryshimi i sistemimit do të ndikojë në të gjitha tabelat me një prapashtesë &lt;em&gt; tl_ &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_install.updateError">
         <source>The database is not up to date!</source>
@@ -208,7 +208,7 @@
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
-        <target>Duket që ju jeni duke përmirësuar nga një verzion i Contao-së para se verzionit %s. Në qoftë se kështu është rasti, &lt;strong&gt; është e nevojshme të ecët me update verzionin %s &lt;/ strong&gt; për të siguruar integritetin e të dhënave tuaja!</target>
+        <target>Duket që ju jeni duke përmirësuar nga një verzion i Contao-së para se verzionit %s. Në qoftë se kështu është rasti, &lt;strong&gt; është e nevojshme të ecët me update verzionin %s &lt;/strong&gt; për të siguruar integritetin e të dhënave tuaja!</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrun">
         <source>Run version %s update</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="tl_install.filesWarning">
         <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
-        <target>A keni riemërtuar  dosjen &lt;strong&gt; tl_files&lt;/ strong&gt; në  &lt;strong&gt;files &lt;/ strong&gt;? Ju nuk mund të riemërtoni dosje, sepse të gjitha referencat në bazën e të dhënave tuaja dhe style sheets do të vazhdojë të tregojnë në vendin e vjetër. Nëse ju doni të riemërtoni dosjen, ju lutem bëni kështu pas versionit 3 të përditësimit dhe siguroni që të dhënat tuaja në bazën e së të dhënave janë përshtatur me scriptin në vijim:% s.</target>
+        <target>A keni riemërtuar  dosjen &lt;strong&gt; tl_files&lt;/strong&gt; në  &lt;strong&gt;files &lt;/strong&gt;? Ju nuk mund të riemërtoni dosje, sepse të gjitha referencat në bazën e të dhënave tuaja dhe style sheets do të vazhdojë të tregojnë në vendin e vjetër. Nëse ju doni të riemërtoni dosjen, ju lutem bëni kështu pas versionit 3 të përditësimit dhe siguroni që të dhënat tuaja në bazën e së të dhënave janë përshtatur me scriptin në vijim: %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

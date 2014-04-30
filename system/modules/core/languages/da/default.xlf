@@ -343,9 +343,11 @@
       </trans-unit>
       <trans-unit id="CTE.markdown.0">
         <source>Markdown</source>
+        <target>Markdown</target>
       </trans-unit>
       <trans-unit id="CTE.markdown.1">
         <source>Generates HTML code from a markdown text.</source>
+        <target>Genererer HTML kode fra tekst skrevet i markdown.</target>
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>

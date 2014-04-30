@@ -214,8 +214,8 @@
         <target>追加のスタイルシート</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional style sheets from the file system.</source>
-        <target>外部のスタイルシートをファイルシステムから追加できます。</target>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>ファイルシステムから追加のCSS、SCSS、LESSファイルを追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -286,8 +286,16 @@
         <target>Viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
-        <target>viewportの初期設定の値(例えば、&lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;)を置き換えできます。</target>
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>viewportの内容(初期値は&lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;)を置き換えできます。</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>titleタグ</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
+        <target>titleタグの内容(初期値は&lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;)を置き換えできます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -408,6 +416,10 @@
       <trans-unit id="tl_layout.sections_legend">
         <source>Custom sections</source>
         <target>カスタムセクション</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Webフォント</target>
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>

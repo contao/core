@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_style.gradientAngle.1">
         <source>Here you can enter the gradient angle (e.g. &lt;em&gt;0deg&lt;/em&gt;) or the direction (e.g. &lt;em&gt;to bottom&lt;/em&gt; or &lt;em&gt;to top right&lt;/em&gt;).</source>
-        <target>Aquí puede introducir el ángulo de inclinación (por ejemplo &lt;em&gt;0deg&lt;/ em&gt;) o la dirección (por ejemplo &lt;em&gt;to bottom &lt;/ em&gt; o &lt;em&gt;to top right&lt;/ em&gt;).</target>
+        <target>Aquí puede introducir el ángulo de inclinación (por ejemplo &lt;em&gt;0deg&lt;/em&gt;) o la dirección (por ejemplo &lt;em&gt;to bottom &lt;/em&gt; o &lt;em&gt;to top right&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_style.gradientColors.0">
         <source>Gradient colors</source>

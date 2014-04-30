@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
-        <target>Për të rregulluar këtë porosi, krijo një skedar shabllon me emrin &lt;em&gt;% s &lt;/ em&gt;.</target>
+        <target>Për të rregulluar këtë porosi, krijo një skedar shabllon me emrin &lt;em&gt;% s &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorFixOne">
         <source>Open the &lt;code&gt;system/logs/error.log&lt;/code&gt; file and find the associated error message (usually the last one). You can also add the following line to the local configuration file and reload this page:</source>
-        <target>Hapni skedarin &lt;code&gt;system/logs/error.log&lt;/ code&gt; dhe gjeni gabimin e referuar (zakonisht i fundit). Ju gjithashtu mund të shtoni rreshtin e mëposhtëm në skedarin lokal të konfigurimit  dhe të rifreskoni këtë faqe:</target>
+        <target>Hapni skedarin &lt;code&gt;system/logs/error.log&lt;/code&gt; dhe gjeni gabimin e referuar (zakonisht i fundit). Ju gjithashtu mund të shtoni rreshtin e mëposhtëm në skedarin lokal të konfigurimit  dhe të rifreskoni këtë faqe:</target>
       </trans-unit>
       <trans-unit id="XPT.errorFixTwo">
         <source>However, please be aware that &lt;strong&gt;anyone&lt;/strong&gt; will be able to see error messages on your website then!</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Ekzekutimi i scriptit është ndal, për shkak se diçka nuk funksionon si duhet. Gabimi i tanishëm është fshehur nga ky njoftim për arsye të sigurisë dhe mund të gjendet në skedarin &lt;code&gt;system/logs/error.log&lt;/ code&gt; (shih më lart). Nëse ju nuk e kuptoni gabimin e referuar ose nuk e dini se si për të zgjidhur problemin, kërko &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; Contao FAQs &lt;/ a&gt; ose vizitoni &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; Faqen për mbështetje të Contao-së &lt;/ a&gt;.</target>
+        <target>Ekzekutimi i scriptit është ndal, për shkak se diçka nuk funksionon si duhet. Gabimi i tanishëm është fshehur nga ky njoftim për arsye të sigurisë dhe mund të gjendet në skedarin &lt;code&gt;system/logs/error.log&lt;/code&gt; (shih më lart). Nëse ju nuk e kuptoni gabimin e referuar ose nuk e dini se si për të zgjidhur problemin, kërko &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt; Contao FAQs &lt;/a&gt; ose vizitoni &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt; Faqen për mbështetje të Contao-së &lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>

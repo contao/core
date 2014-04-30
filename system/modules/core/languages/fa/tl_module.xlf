@@ -83,6 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_module.customTpl.0">
         <source>Custom module template</source>
+        <target>قالب ماژول اختصاصی</target>
       </trans-unit>
       <trans-unit id="tl_module.customTpl.1">
         <source>Here you can overwrite the default module template.</source>

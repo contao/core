@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_where.1">
         <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
-        <target>Itt megadhat egy feltételt, hogy szűrje az eredményeket (pl. &lt;em&gt;published=1&lt;/ em&gt; vagy &lt;em&gt;type!=&quot;Admin&quot;&lt;/ em&gt;).</target>
+        <target>Itt megadhat egy feltételt, hogy szűrje az eredményeket (pl. &lt;em&gt;published=1&lt;/em&gt; vagy &lt;em&gt;type!=&quot;Admin&quot;&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.list_search.0">
         <source>Searchable fields</source>

@@ -165,6 +165,13 @@
         <source>Page layouts</source>
         <target>စာမျက်နှာအခင်းအကျင်းများ</target>
       </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>အသွင်အပြင်တင်သွင်း</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+      </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
         <target>သွားလာခြင်း</target>

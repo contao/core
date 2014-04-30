@@ -79,11 +79,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.cols.1">
         <source>Please choose the number of columns.</source>
-        <target>Vælg venligst antallet af spalter.</target>
+        <target>Vælg venligst antal spalter.</target>
       </trans-unit>
       <trans-unit id="tl_layout.1cl.0">
         <source>Main column only</source>
-        <target>En spalte</target>
+        <target>Kun grundspalte</target>
       </trans-unit>
       <trans-unit id="tl_layout.1cl.1">
         <source>Show only one column.</source>
@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.2cll.0">
         <source>Left and main column</source>
-        <target>To spalter med hovedspalten på højre side</target>
+        <target>To spalter med grundspalten på højre side</target>
       </trans-unit>
       <trans-unit id="tl_layout.2cll.1">
         <source>Show two columns with the main column on the right side.</source>
@@ -171,9 +171,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive layout</source>
+        <target>Responsive layout</target>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+        <target>Tilføjer et meta viewport tag til sidens header og skalerer CSS layoutet baseret på enhedens bredte.</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
@@ -212,7 +214,8 @@
         <target>Yderligere style sheets</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional style sheets from the file system.</source>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>Her kan du tilføje yderligere CSS, SCSS eller LESS filer fra fil arkivet.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -280,9 +283,19 @@
       </trans-unit>
       <trans-unit id="tl_layout.viewport.0">
         <source>Viewport</source>
+        <target>Viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the default viewport content (e.g. &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Her kan du overskrive viewport content (standard &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+        <target>Title tag</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
+        <target>Her kan du overskrive title tag (standard &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -404,6 +417,10 @@
         <source>Custom sections</source>
         <target>Brugertilpassede sektioner</target>
       </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Web fonts</target>
+      </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
         <target>Stilark</target>
@@ -434,12 +451,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>Local file</source>
+        <target>Lokal fil</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN med lokalt fallback</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
@@ -447,12 +467,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>Local file</source>
+        <target>Lokal fil</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN med lokalt fallback</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

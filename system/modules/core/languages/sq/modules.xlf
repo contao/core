@@ -165,6 +165,13 @@
         <source>Page layouts</source>
         <target>Struktura faqes</target>
       </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Importo paraqitje</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+      </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
         <target>Lundrim</target>

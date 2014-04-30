@@ -379,9 +379,11 @@
       </trans-unit>
       <trans-unit id="tl_content.customTpl.0">
         <source>Custom element template</source>
+        <target>Vlastná šablóna elementu</target>
       </trans-unit>
       <trans-unit id="tl_content.customTpl.1">
         <source>Here you can overwrite the default element template.</source>
+        <target>Tu možete prepísať prednastavenú šablónu elementu.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>

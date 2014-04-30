@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MOD.form.1">
         <source>Create custom forms and store or send the submitted data</source>
-        <target>Webformulieren aanmaken en ingediende data opslaan of laten versturen.</target>
+        <target>Webformulieren aanmaken en data opslaan of versturen.</target>
       </trans-unit>
       <trans-unit id="MOD.design">
         <source>Layout</source>
@@ -165,6 +165,14 @@
         <source>Page layouts</source>
         <target>Pagina layouts</target>
       </trans-unit>
+      <trans-unit id="MOD.theme_import">
+        <source>Theme import</source>
+        <target>Thema import</target>
+      </trans-unit>
+      <trans-unit id="MOD.theme_export">
+        <source>Theme export</source>
+        <target>Thema export</target>
+      </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
         <target>Navigatie</target>
@@ -259,7 +267,7 @@
       </trans-unit>
       <trans-unit id="FMD.personalData.1">
         <source>Generates a form to edit a user's personal data</source>
-        <target>Genereert een frontend formulier, dat een gebruiker toelaat om zijn persoonlijke gegevens te veranderen.</target>
+        <target>Genereert een frontend formulier, dat een gebruiker toelaat om zijn persoonlijke gegevens te wijzigen.</target>
       </trans-unit>
       <trans-unit id="FMD.registration.0">
         <source>Registration</source>

@@ -1207,7 +1207,7 @@
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
-        <target>URL плагінів застосовується до всіх ресурсів каталогу &lt;em&gt;plugins&lt;/ em&gt; (оптимізація швидкості завантаження сторінок).</target>
+        <target>URL плагінів застосовується до всіх ресурсів каталогу &lt;em&gt;plugins&lt;/em&gt; (оптимізація швидкості завантаження сторінок).</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
@@ -1215,7 +1215,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>Дізнайтеся більше про прискорення робочого процесу за допомогою &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Комбінації клавіш на сайті contao.org&quot; target=&quot;_blank&quot;&gt;комбінацій клавіш&lt;/ a&gt;.</target>
+        <target>Дізнайтеся більше про прискорення робочого процесу за допомогою &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Комбінації клавіш на сайті contao.org&quot; target=&quot;_blank&quot;&gt;комбінацій клавіш&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>

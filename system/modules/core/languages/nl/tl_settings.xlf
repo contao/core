@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandsynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/ em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
+        <target>Hier kunt u een door komma's gescheiden lijst met mappen opgeven welke zijn vrijgesteld van bestandsynchronisatie (bijv. &lt;em&gt; attachments, music_academy &lt;/em&gt;). Bedenk dat uitgesloten bronnen niet kunnen worden gebruikt in bv. beeld of download elementen!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
-        <target>Hier kunt u de map-stijl pagina aliassen mogelijk maken zoals &lt;em&gt; docs / install / download.html &lt;/ em&gt; in plaats van &lt;em&gt; docs-install-download.xhtml &lt;/ em&gt;.</target>
+        <target>Hier kunt u de map-stijl pagina aliassen mogelijk maken zoals &lt;em&gt; docs / install / download.html &lt;/em&gt; in plaats van &lt;em&gt; docs-install-download.xhtml &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>

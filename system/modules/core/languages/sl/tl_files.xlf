@@ -74,6 +74,12 @@
         <source>Start upload</source>
         <target>Prični z nalaganjem</target>
       </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+      </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
         <target>Dodana datoteka ali mapa &quot;%s&quot;</target>

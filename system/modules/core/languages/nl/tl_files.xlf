@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
-        <target>Bescherming van mappen wordt tot stand gebracht door toevoegen van een .htaccess bestand welke toegang tot de map ontzegt. Het lijkt erop dat u geen gebruik maakt van een Apache server, om deze reden zou deze functie mogelijk niet kunnen werken of vereist een andere server configuratie. Gelieve nogmaals controleren voor het uploaden van alle niet-publieke bronnen!</target>
+        <target>Bescherming van mappen wordt tot stand gebracht door toevoegen van een .htaccess bestand welke de toegang tot de map ontzegt. Het lijkt erop dat u geen gebruik maakt van een Apache server, om deze reden zou deze functie mogelijk niet kunnen werken of vereist een andere server configuratie. Gelieve nogmaals te controleren voor het uploaden van alle niet-publieke bronnen!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -76,6 +76,14 @@
       <trans-unit id="tl_files.startUpload">
         <source>Start upload</source>
         <target>Begin met uploaden</target>
+      </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+        <target>Hier klikken of bestanden neerzetten om te uploaden</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+        <target>Bestandslocatie: %s</target>
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>

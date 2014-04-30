@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
-        <target>Si votre site est disponible via un serveur proxy SSL, veuillez saisir son domaine (ex : &lt;em&gt;sslsites.fr&lt;/ em&gt;).</target>
+        <target>Si votre site est disponible via un serveur proxy SSL, veuillez saisir son domaine (ex : &lt;em&gt;sslsites.fr&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
