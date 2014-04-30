@@ -33,7 +33,7 @@ body.popup {
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
-#header div {
+#tmenu {
 	margin:0;
 	padding:6px 11px 8px;
 	text-align:right;
@@ -1678,29 +1678,28 @@ fieldset.collapsed > legend {
 	#footer {
 		width:745px;
 	}
-	#tl_navigation h1 {
-		border-radius:3px;
+	.collapsible h1 {
+		margin:1px 1px 0 !important;
+		border-radius:3px !important;
 		border-bottom:1px solid #fff;
-	}
-	#tl_navigation h1 {
 		position:relative;
 		cursor:pointer;
 	}
-	#tl_navigation ul.tl_level_1 {
+	.collapsible_area {
 		display:none;
+	}
+	.collapsible.xpnd h1 {
+		border-radius:3px 3px 0 0 !important;
+		border-bottom:0;
+	}
+	.collapsible.xpnd .collapsible_area {
+		display:block;
 	}
 	#tl_navigation .tl_level_2 a {
 		display:block;
 		line-height:inherit;
 		padding-top:3px;
 		padding-bottom:4px;
-	}
-	#tl_navigation.xpnd h1 {
-		border-radius:3px 3px 0 0;
-		border-bottom:0;
-	}
-	#tl_navigation.xpnd ul.tl_level_1 {
-		display:block;
 	}
 }
 
@@ -1717,7 +1716,7 @@ fieldset.collapsed > legend {
 	#footer {
 		padding-bottom:18px;
 	}
-	#header div {
+	#tmenu {
 		line-height:2;
 		text-align:left;
 	}

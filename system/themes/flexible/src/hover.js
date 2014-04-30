@@ -203,12 +203,11 @@ var Theme = {
 	 * Set up the menu toggle
 	 */
 	setupMenuToggle: function() {
-		var nav = $('tl_navigation');
-		if (nav) {
-			nav.getElement('h1').addEvent('click', function() {
-				nav.toggleClass('xpnd');
+		$$('.collapsible').each(function(el) {
+			el.getElement('h1').addEvent('click', function() {
+				el.toggleClass('xpnd');
 			});
-		}
+		});
 	}
 };
 

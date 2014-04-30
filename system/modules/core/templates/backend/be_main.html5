@@ -47,23 +47,25 @@
 <body id="top" class="<?php echo $this->ua; ?><?php if ($this->isPopup) echo ' popup'; ?>">
 
   <?php if (!$this->isPopup): ?>
-    <div id="header">
+    <div id="header" class="collapsible">
       <h1>Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?></h1>
-      <div>
-        <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login&amp;ref=<?php echo TL_REFERER_ID; ?>" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
-        <span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a></span>
-        <span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a></span>
-        <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/" class="header_logout" title="<?php echo $this->logoutTitle; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
+      <div class="collapsible_area">
+        <div id="tmenu">
+          <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login&amp;ref=<?php echo TL_REFERER_ID; ?>" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
+          <span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a></span>
+          <span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a></span>
+          <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/" class="header_logout" title="<?php echo $this->logoutTitle; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
+        </div>
+        <?php if ($this->isCoreOnlyMode): ?>
+          <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->coreOnlyHref; ?>" class="tl_submit"><?php echo $this->coreOnlyOff; ?></a><?php endif; ?><?php echo $this->coreOnlyMode; ?></p>
+        <?php endif; ?>
+        <?php if ($this->isMaintenanceMode): ?>
+          <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->maintenanceHref; ?>" class="tl_submit"><?php echo $this->maintenanceOff; ?></a><?php endif; ?><?php echo $this->maintenanceMode; ?></p>
+        <?php endif; ?>
+        <?php if ($this->needsCacheBuild): ?>
+          <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->buildCacheHref; ?>" class="tl_submit"><?php echo $this->buildCacheLink; ?></a><?php endif; ?><?php echo $this->buildCacheText; ?></p>
+        <?php endif; ?>
       </div>
-      <?php if ($this->isCoreOnlyMode): ?>
-        <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->coreOnlyHref; ?>" class="tl_submit"><?php echo $this->coreOnlyOff; ?></a><?php endif; ?><?php echo $this->coreOnlyMode; ?></p>
-      <?php endif; ?>
-      <?php if ($this->isMaintenanceMode): ?>
-        <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->maintenanceHref; ?>" class="tl_submit"><?php echo $this->maintenanceOff; ?></a><?php endif; ?><?php echo $this->maintenanceMode; ?></p>
-      <?php endif; ?>
-      <?php if ($this->needsCacheBuild): ?>
-        <p class="tl_error tl_permalert"><?php if ($this->isAdmin): ?><a href="<?php echo $this->buildCacheHref; ?>" class="tl_submit"><?php echo $this->buildCacheLink; ?></a><?php endif; ?><?php echo $this->buildCacheText; ?></p>
-      <?php endif; ?>
     </div>
   <?php endif; ?>
 
@@ -71,10 +73,10 @@
 
     <?php if (!$this->isPopup): ?>
       <div id="left">
-        <div id="tl_navigation">
+        <div id="tl_navigation" class="collapsible">
           <h1><?php echo $this->backendModules; ?></h1>
           <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
-          <ul class="tl_level_1">
+          <ul class="tl_level_1 collapsible_area">
             <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
               <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
               <?php if ($arrModules['modules']): ?>
