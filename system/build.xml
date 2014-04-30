@@ -59,4 +59,11 @@
       <arg value="--template=responsive-twig" />
     </exec>
   </target>
+
+	<target name="vendor">
+    <exec executable="composer" dir=".">
+      <arg value="update" />
+      <arg value="--prefer-dist" />
+    </exec>
+  </target>
 </project>
