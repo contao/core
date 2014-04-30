@@ -1,6 +1,34 @@
 Contao Open Source CMS API changes
 ==================================
 
+Version 3.2 to 3.3
+------------------
+
+### "processFormData" hook
+
+The "processFormData" hook now passes `$arrSubmitted` as first argument instead
+of `$_SESSION['FORM_DATA']`. This is actually a bug fix, because so far the hook
+passed everything that was stored in the session instead of just the fields of
+the current form.
+
+However, the change implies a backwards compatibility break, because the former
+implementation allowed to add form fields by modifying `$arrData`:
+
+```php
+public function myProcessFormData(&$arrData, …) {
+    $arrData['new_field'] = 'new_value';
+}
+```
+
+In version 3.3, you have to add to `$_SESSION['FORM_DATA']` instead:
+
+```php
+public function myProcessFormData($arrData, …) {
+    $_SESSION['FORM_DATA']['new_field'] = 'new_value';
+}
+```
+
+
 Version 3.1 to 3.2
 ------------------
 

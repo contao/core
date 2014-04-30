@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### Changed
+Only pass the current form data to the "processFormData" hook (see #6705).
+
 ### New
 Add a DropZone-based file uploader (see #6064).
 

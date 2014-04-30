@@ -478,7 +478,6 @@ class Form extends \Hybrid
 		}
 
 		$arrFiles = $_SESSION['FILES'];
-		$arrData = $_SESSION['FORM_DATA'];
 
 		// HOOK: process form data callback
 		if (isset($GLOBALS['TL_HOOKS']['processFormData']) && is_array($GLOBALS['TL_HOOKS']['processFormData']))
@@ -486,12 +485,10 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrData, $this->arrData, $arrFiles, $arrLabels, $this);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 
-		// Reset form data in case it has been modified in a callback function
-		$_SESSION['FORM_DATA'] = $arrData;
 		$_SESSION['FILES'] = array(); // DO NOT CHANGE
 
 		// Add a log entry
