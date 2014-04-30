@@ -1,6 +1,6 @@
 <?php
 
-// Add the swipe style sheet
+// Add the tablesorter style sheet
 $GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css||static';
 
 ?>
