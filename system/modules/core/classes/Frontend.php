@@ -356,9 +356,10 @@ abstract class Frontend extends \Controller
 	 * Overwrite the parent method as front end URLs are handled differently
 	 * @param string
 	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
-	public static function addToUrl($strRequest, $blnIgnoreParams=false)
+	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
 	{
 		$arrGet = $blnIgnoreParams ? array() : $_GET;
 

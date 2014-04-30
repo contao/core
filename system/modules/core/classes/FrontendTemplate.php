@@ -282,12 +282,13 @@ class FrontendTemplate extends \Template
 	 *
 	 * @param string  $strRequest      The request string to be added
 	 * @param boolean $blnIgnoreParams If true, the $_GET parameters will be ignored
+	 * @param array   $arrUnset        An optional array of keys to unset
 	 *
 	 * @return string The new URI string
 	 */
-	public static function addToUrl($strRequest, $blnIgnoreParams=false)
+	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
 	{
-		return \Frontend::addToUrl($strRequest, $blnIgnoreParams);
+		return \Frontend::addToUrl($strRequest, $blnIgnoreParams, $arrUnset);
 	}
 
 

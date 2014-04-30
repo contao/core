@@ -216,11 +216,15 @@ abstract class Backend extends \Controller
 	 * Add the request token to the URL
 	 * @param string
 	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
-	public static function addToUrl($strRequest, $blnAddRef=true)
+	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
 	{
-		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef);
+		// Unset the "no back button" flag
+		$arrUnset[] = 'nb';
+
+		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef, $arrUnset);
 	}
 
 

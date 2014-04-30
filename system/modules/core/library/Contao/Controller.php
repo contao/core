@@ -2014,10 +2014,11 @@ abstract class Controller extends \System
 	 *
 	 * @param string  $strRequest The string to be added
 	 * @param boolean $blnAddRef  Add the referer ID
+	 * @param array   $arrUnset   An optional array of keys to unset
 	 *
 	 * @return string The new URL
 	 */
-	public static function addToUrl($strRequest, $blnAddRef=true)
+	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
 
@@ -2031,14 +2032,9 @@ abstract class Controller extends \System
 		// Overwrite existing parameters
 		foreach ($queries as $k=>$v)
 		{
-			if ($v == 'nb=1')
-			{
-				unset($queries[$k]);
-			}
+			list($key) = explode('=', $v);
 
-			$explode = explode('=', $v);
-
-			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
+			if (in_array($key, $arrUnset) || preg_match('/(^|&(amp;)?)' . preg_quote($key, '/') . '=/i', $strRequest))
 			{
 				unset($queries[$k]);
 			}
