@@ -93,14 +93,14 @@ class PageSelector extends \Widget
 			if ($objRoot->numRows > 0)
 			{
 				// Respect existing limitations
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+				if (is_array($this->rootNodes))
 				{
 					$arrRoot = array();
 
 					while ($objRoot->next())
 					{
 						// Predefined node set (see #3563)
-						if (count(array_intersect($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						if (count(array_intersect($this->rootNodes, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -141,9 +141,9 @@ class PageSelector extends \Widget
 			$strNode = $this->Session->get('tl_page_picker');
 
 			// Unset the node if it is not within the predefined node set (see #5899)
-			if ($strNode > 0 && is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+			if ($strNode > 0 && is_array($this->rootNodes))
 			{
-				if (!in_array($strNode, $this->Database->getChildRecords($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes'], 'tl_page')))
+				if (!in_array($strNode, $this->Database->getChildRecords($this->rootNodes, 'tl_page')))
 				{
 					$this->Session->remove('tl_page_picker');
 				}
@@ -162,9 +162,9 @@ class PageSelector extends \Widget
 			}
 
 			// Predefined node set (see #3563)
-			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
+			elseif (is_array($this->rootNodes))
 			{
-				foreach ($this->eliminateNestedPages($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']) as $node)
+				foreach ($this->eliminateNestedPages($this->rootNodes) as $node)
 				{
 					$tree .= $this->renderPagetree($node, -20);
 				}

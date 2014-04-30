@@ -1332,6 +1332,12 @@ abstract class Widget extends \Template\Base
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
+		// Add the "rootNodes" array as attribute (see #3563)
+		if (isset($arrData['rootNodes']) && !isset($arrData['eval']['rootNodes']))
+		{
+			$arrAttributes['rootNodes'] = $arrData['rootNodes'];
+		}
+
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getAttributesFromDca']) && is_array($GLOBALS['TL_HOOKS']['getAttributesFromDca']))
 		{
