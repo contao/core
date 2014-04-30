@@ -2051,7 +2051,7 @@ abstract class Controller extends \System
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
 
-		return TL_SCRIPT . $href . str_replace(' ', '%20', $strRequest); # FIXME
+		return TL_SCRIPT . $href . str_replace(' ', '%20', $strRequest);
 	}
 
 

@@ -545,7 +545,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = !empty($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href'] = TL_SCRIPT . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID; # FIXME
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href'] = TL_SCRIPT . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
 
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)
