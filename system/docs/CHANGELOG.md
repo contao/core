@@ -38,7 +38,7 @@ Move the custom layout section markup into template files (see #6531).
 Move the form field markup into the template files (see #6834).
 
 ### New
-Add template inheritance and template insertion (see #6508).
+Add template inheritance and template insertion (see #6508 and #6934).
 
 ### New
 Add a flexible back end theme.
