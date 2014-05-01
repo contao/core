@@ -2,22 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-  <title><?php echo $this->title; ?></title>
-  <base href="<?php echo $this->base; ?>" />
+  <?php $this->block('head'); ?>
 
-  <meta name="robots" content="<?php echo $this->robots; ?>" />
-  <meta name="description" content="<?php echo $this->description; ?>" />
-  <meta name="keywords" content="<?php echo $this->keywords; ?>" />
-  <meta name="generator" content="Contao Open Source CMS" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <?php $this->block('charset'); ?>
+      <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
+    <?php $this->endblock(); ?>
 
-  <?php echo $this->viewport; ?>
-  <?php echo $this->framework; ?>
-  <?php echo $this->stylesheets; ?>
-  <?php echo $this->mooScripts; ?>
-  <?php echo $this->head; ?>
+    <?php $this->block('title'); ?>
+      <title><?php echo $this->title; ?></title>
+    <?php $this->endblock(); ?>
+
+    <?php $this->block('base'); ?>
+      <base href="<?php echo $this->base; ?>" />
+    <?php $this->endblock(); ?>
+
+    <?php $this->block('meta'); ?>
+      <meta name="robots" content="<?php echo $this->robots; ?>" />
+      <meta name="description" content="<?php echo $this->description; ?>" />
+      <meta name="keywords" content="<?php echo $this->keywords; ?>" />
+      <meta name="generator" content="Contao Open Source CMS" />
+      <meta http-equiv="Content-Style-Type" content="text/css" />
+      <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <?php $this->endblock(); ?>
+
+    <?php echo $this->viewport; ?>
+    <?php echo $this->framework; ?>
+    <?php echo $this->stylesheets; ?>
+    <?php echo $this->mooScripts; ?>
+    <?php echo $this->head; ?>
+
+  <?php $this->endblock(); ?>
 
 </head>
 <body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
@@ -28,50 +42,66 @@
 
     <div id="wrapper">
 
-      <?php if ($this->header): ?>
-        <div id="header">
-          <div class="inside">
-            <?php echo $this->header; ?>
-          </div>
-        </div>
-      <?php endif; ?>
+      <?php $this->block('wrapper'); ?>
 
-      <?php echo $this->sections('before'); ?>
-
-      <div id="container">
-        <div id="main">
-          <div class="inside">
-            <?php echo $this->main; ?>
-          </div>
-          <?php echo $this->sections('main'); ?>
-        </div>
-
-        <?php if ($this->left): ?>
-          <div id="left">
+        <?php if ($this->header): ?>
+          <div id="header">
             <div class="inside">
-              <?php echo $this->left; ?>
+              <?php echo $this->header; ?>
             </div>
           </div>
         <?php endif; ?>
 
-        <?php if ($this->right): ?>
-          <div id="right">
+        <?php echo $this->sections('before'); ?>
+
+        <div id="container">
+
+          <?php $this->block('container'); ?>
+
+            <div id="main">
+
+              <?php $this->block('main'); ?>
+
+                <div class="inside">
+                  <?php echo $this->main; ?>
+                </div>
+                <?php echo $this->sections('main'); ?>
+
+              <?php $this->endblock(); ?>
+
+            </div>
+
+            <?php if ($this->left): ?>
+              <div id="left">
+                <div class="inside">
+                  <?php echo $this->left; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+
+            <?php if ($this->right): ?>
+              <div id="right">
+                <div class="inside">
+                  <?php echo $this->right; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+
+          <?php $this->endblock(); ?>
+
+        </div>
+
+        <?php echo $this->sections('after'); ?>
+
+        <?php if ($this->footer): ?>
+          <div id="footer">
             <div class="inside">
-              <?php echo $this->right; ?>
+              <?php echo $this->footer; ?>
             </div>
           </div>
         <?php endif; ?>
-      </div>
 
-      <?php echo $this->sections('after'); ?>
-
-      <?php if ($this->footer): ?>
-        <div id="footer">
-          <div class="inside">
-            <?php echo $this->footer; ?>
-          </div>
-        </div>
-      <?php endif; ?>
+      <?php $this->endblock(); ?>
 
     </div>
 
@@ -79,7 +109,9 @@
 
   <?php $this->endblock(); ?>
 
-  <?php echo $this->mootools; ?>
+  <?php $this->block('mootools'); ?>
+    <?php echo $this->mootools; ?>
+  <?php $this->endblock(); ?>
 
 </body>
 </html>
