@@ -545,6 +545,11 @@ abstract class Widget extends \Template\Base
 
 		$this->mandatoryField = $GLOBALS['TL_LANG']['MSC']['mandatory'];
 
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters (see #5553)

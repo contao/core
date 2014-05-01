@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.RC1 (2014-XX-XX)
 ----------------------------
 
+### New
+Allow to override the default form field template (see #4547).
+
 ### Changed
 Only pass the current form data to the "processFormData" hook (see #6705).
 
