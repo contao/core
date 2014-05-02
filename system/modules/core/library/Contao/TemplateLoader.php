@@ -93,7 +93,8 @@ class TemplateLoader
 	 *
 	 * @param string $template The template name
 	 * @param string $format   The output format (e.g. "html5")
-	 * @param string $custom   The custom templates folder (defaults to "templates")
+	 * @param mixed  $custom   The custom templates folder (defaults to "templates")
+	 *                         or false to ignore custom templates
 	 *
 	 * @return string The path to the template file
 	 *
@@ -104,13 +105,13 @@ class TemplateLoader
 		$file = $template .  '.' . $format;
 
 		// Check the theme folder first
-		if (file_exists(TL_ROOT . '/' . $custom . '/' . $file))
+		if ($custom && file_exists(TL_ROOT . '/' . $custom . '/' . $file))
 		{
 			return TL_ROOT . '/' . $custom . '/' . $file;
 		}
 
 		// Then check the global templates directory (see #5547)
-		if ($custom != 'templates')
+		if ($custom && $custom != 'templates')
 		{
 			if (file_exists(TL_ROOT . '/templates/' . $file))
 			{
