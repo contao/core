@@ -478,13 +478,28 @@ class Versions extends \Backend
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
 		$arrVersions = array();
+		$arrUserIds = array();
 
 		$objUser = \BackendUser::getInstance();
 		$objDatabase = \Database::getInstance();
 
+		// default if no group is set for the current logged in user
+		$arrUserIds[] = $objUser->id;
+		$userIdQuery = '?';
+
+		// get all user Ids
+		if (!$objUser->isAdmin && count($objUser->groups) > 0 && !empty($objUser->groups))
+		{
+			$arrUserIds = self::getUserIds($objUser->groups);
+			for ($i=1; $i<count($arrUserIds); $i++)
+			{
+				$userIdQuery .= ',?';
+			}
+		}
+
 		// Get the total number of versions
-		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
-							    ->execute($objUser->id);
+		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid in ($userIdQuery)" : ""))
+							    ->execute($arrUserIds);
 
 		$intPage   = \Input::get('vp') ?: 1;
 		$intOffset = ($intPage - 1) * 30;
@@ -501,9 +516,9 @@ class Versions extends \Backend
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions
-		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
+		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid in ($userIdQuery)" : "") . " ORDER BY tstamp DESC, pid, version DESC")
 								   ->limit(30, $intOffset)
-								   ->execute($objUser->id);
+								   ->execute($arrUserIds);
 
 		while ($objVersions->next())
 		{
@@ -579,5 +594,33 @@ class Versions extends \Backend
 
 			return trim($buffer);
 		}
+	}
+
+	/**
+	 * Get all user Ids by groups
+	 *
+	 * @param type $arrGroups
+	 *
+	 * @return array
+	 */
+	static protected function getUserIds($arrGroups)
+	{
+		$result = array();
+		$objAllUser = \UserModel::findAll();
+		while ($objAllUser->next())
+		{
+			$current = $objAllUser->current();
+			$groups = deserialize($current->groups, true);
+			foreach ($arrGroups as $group)
+			{
+				// Check if the current logged in User has the same group
+				if (in_array($group, $groups))
+				{
+					$result[] = $current->id;
+					break;
+				}
+			}
+		}
+		return $result;
 	}
 }
