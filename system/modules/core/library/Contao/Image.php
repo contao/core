@@ -146,6 +146,20 @@ class Image
 		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
 		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getImageCacheName']) && is_array($GLOBALS['TL_HOOKS']['getImageCacheName']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getImageCacheName'] as $callback)
+			{
+				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheKey, $objFile);
+
+				if (is_string($return))
+				{
+					$strCacheName = $return;
+				}
+			}
+		}
+
 		// Check whether the image exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'])
 		{
