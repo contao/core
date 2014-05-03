@@ -40,14 +40,15 @@ abstract class Controller extends \System
 	/**
 	 * Find a particular template file and return its path
 	 *
-	 * @param string $strTemplate The name of the template
-	 * @param string $strFormat   The file extension
+	 * @param string  $strTemplate The name of the template
+	 * @param string  $strFormat   The file extension
+	 * @param boolean $blnCustom   If false, custom templates are ignored
 	 *
 	 * @return string The path to the template file
 	 *
 	 * @throws \Exception If $strFormat is unknown
 	 */
-	public static function getTemplate($strTemplate, $strFormat='html5')
+	public static function getTemplate($strTemplate, $strFormat='html5', $blnCustom=true)
 	{
 		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
 		array_push($arrAllowed, 'html5'); // see #3398
@@ -60,7 +61,7 @@ abstract class Controller extends \System
 		$strTemplate = basename($strTemplate);
 
 		// Check for a theme folder
-		if (TL_MODE == 'FE')
+		if (TL_MODE == 'FE' && $blnCustom)
 		{
 			global $objPage;
 			$strCustom = str_replace('../', '', $objPage->templateGroup);
@@ -71,7 +72,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		return \TemplateLoader::getPath($strTemplate, $strFormat);
+		return \TemplateLoader::getPath($strTemplate, $strFormat, $blnCustom ? 'templates' : false);
 	}
 
 

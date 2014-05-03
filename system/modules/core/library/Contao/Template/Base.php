@@ -64,6 +64,8 @@ abstract class Base extends \Controller
 	 * Parse the template file and return it as string
 	 *
 	 * @return string The template markup
+	 *
+	 * @throws \Exception If a template extends itself
 	 */
 	public function parse()
 	{
@@ -71,15 +73,31 @@ abstract class Base extends \Controller
 
 		// Start with the template itself
 		$this->strParent = $this->strTemplate;
+		$strParent = null;
 
 		// Include the parent templates
 		while ($this->strParent !== null)
 		{
-			$strParent = $this->getTemplate($this->strParent, $this->strFormat);
+			if ($strParent == $this->strParent)
+			{
+				// Try to load the base template
+				$strPathBase = $this->getTemplate($this->strParent, $this->strFormat, false);
+				if ($strPath == $strPathBase)
+				{
+					throw new \Exception('A template cannot extend itself');
+				}
+				$strPath = $strPathBase;
+			}
+			else
+			{
+				$strPath = $this->getTemplate($this->strParent, $this->strFormat);
+			}
+
+			$strParent = $this->strParent;
 			$this->strParent = null;
 
 			ob_start();
-			include $strParent;
+			include $strPath;
 
 			// Capture the output of the root template
 			if ($this->strParent === null)
