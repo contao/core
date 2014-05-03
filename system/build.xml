@@ -52,11 +52,11 @@
   </target>
 
   <target name="phpdoc">
-    <exec executable="phpdoc" dir=".">
+    <exec executable="phpdoc.php" dir=".">
       <arg value="--title=Contao Open Source CMS" />
       <arg value="--target=../api" />
       <arg value="--directory=system/modules/core/library,system/modules/*/models" />
-      <arg value="--template=responsive-twig" />
+      <arg value="--template=responsive-contao" />
     </exec>
   </target>
 </project>
