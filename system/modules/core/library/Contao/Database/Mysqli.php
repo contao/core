@@ -209,7 +209,7 @@ class Mysqli extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		$this->resConnection->query("USE $strDatabase");
+		return $this->resConnection->query("USE $strDatabase");
 	}
 
 
