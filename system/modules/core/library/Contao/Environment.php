@@ -310,10 +310,19 @@ class Environment
 		$host = static::get('httpHost');
 		$xhost = static::get('httpXForwardedHost');
 
-		// SSL proxy
-		if ($xhost != '' && $xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
+		if ($xhost != '')
 		{
-			return 'https://' .  $xhost . '/' . $host;
+			// SSL proxy
+			if ($xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
+			{
+				return 'https://' .  $xhost . '/' . $host;
+			}
+
+			// Regular proxy (e.g. load balancing proxy)
+			else if ($xhost != '' && $xhost == $GLOBALS['TL_CONFIG']['proxyDomain'])
+			{
+				return ($GLOBALS['TL_CONFIG']['proxySSL'] ? 'https://' : 'http://') . $xhost;
+			}
 		}
 
 		return (static::get('ssl') ? 'https://' : 'http://') . $host;
