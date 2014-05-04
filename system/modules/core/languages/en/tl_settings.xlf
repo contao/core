@@ -116,6 +116,18 @@
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
       </trans-unit>
+      <trans-unit id="tl_settings.proxyDomain.0">
+        <source>Generic proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyDomain.1">
+        <source>If your website is available via a generic proxy server, please enter its domain here (e.g. &lt;em&gt;sites.de&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxySSL.0">
+        <source>Proxy domain use SSL</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxySSL.1">
+        <source>If your proxy domain use SSL, but your delivering server not, check this option.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
       </trans-unit>
