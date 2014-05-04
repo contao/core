@@ -36,6 +36,12 @@ abstract class Base extends \Controller
 	protected $strParent;
 
 	/**
+	 * Default template
+	 * @var string
+	 */
+	protected $strDefault;
+
+	/**
 	 * Output format
 	 * @var string
 	 */
@@ -75,8 +81,12 @@ abstract class Base extends \Controller
 		// Include the parent templates
 		while ($this->strParent !== null)
 		{
-			$strParent = $this->getTemplate($this->strParent, $this->strFormat);
+			$strCurrent = $this->strParent;
+			$strParent = $this->strDefault ?: $this->getTemplate($this->strParent, $this->strFormat);
+
+			// Reset the flags
 			$this->strParent = null;
+			$this->strDefault = null;
 
 			ob_start();
 			include $strParent;
@@ -85,6 +95,10 @@ abstract class Base extends \Controller
 			if ($this->strParent === null)
 			{
 				$strBuffer = ob_get_contents();
+			}
+			elseif ($this->strParent == $strCurrent)
+			{
+				$this->strDefault = \TemplateLoader::getDefaultPath($this->strParent, $this->strFormat);
 			}
 
 			ob_end_clean();
