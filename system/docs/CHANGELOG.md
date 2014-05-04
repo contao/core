@@ -1,6 +1,14 @@
 Contao Open Source CMS changelog
 ================================
 
+
+Version 3.3.0 (2014-05-XX)
+--------------------------
+
+### Fixed
+Correctly add the WAI-ARIA attributes (see #6217).
+
+
 Version 3.3.RC1 (2014-05-02)
 ----------------------------
 
