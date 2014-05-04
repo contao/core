@@ -6,6 +6,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly wrap long labels in the tree view (see #6954).
+
+### Fixed
 Correctly add the WAI-ARIA attributes (see #6217).
 
 
