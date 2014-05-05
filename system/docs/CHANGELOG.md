@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Try all locale variations when loading TinyMCE (see #6952).
+
+### Fixed
 Correctly overwrite the article template (see #6938).
 
 ### Fixed
