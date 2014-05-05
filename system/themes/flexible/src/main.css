@@ -1685,12 +1685,25 @@ fieldset.collapsed > legend {
 		position:relative;
 		cursor:pointer;
 	}
+	.collapsible h1:after {
+		content:"";
+		display:block;
+		width:16px;
+		height:16px;
+		position:absolute;
+		top:4px;
+		right:6px;
+		background:url("images/arrows.png") left top no-repeat;
+	}
 	.collapsible_area {
 		display:none;
 	}
 	.collapsible.xpnd h1 {
 		border-radius:3px 3px 0 0 !important;
 		border-bottom:0;
+	}
+	.collapsible.xpnd h1:after {
+		background-position:left bottom;
 	}
 	.collapsible.xpnd .collapsible_area {
 		display:block;
