@@ -1,9 +1,11 @@
 Contao Open Source CMS changelog
 ================================
 
-
 Version 3.3.0 (2014-05-XX)
 --------------------------
+
+### Fixed
+Correctly overwrite the article template (see #6938).
 
 ### Fixed
 Correctly wrap long labels in the tree view (see #6954).
