@@ -153,6 +153,9 @@ abstract class Controller extends \System
 			}
 		}
 
+		// Sort the template names
+		ksort($arrTemplates);
+
 		return $arrTemplates;
 	}
 
