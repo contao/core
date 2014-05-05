@@ -401,30 +401,43 @@ class DC_File extends \DataContainer implements \editable
 			$varValue = $varValue ? true : false;
 		}
 
-		// Convert date formats into timestamps
-		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '')
 		{
-			$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
-			$varValue = $objDate->tstamp;
-		}
-
-		// Handle entities
-		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
-		{
-			$varValue = deserialize($varValue);
-
-			if (!is_array($varValue))
+			// Convert binary UUIDs (see #6893)
+			if ($arrData['inputType'] == 'fileTree')
 			{
-				$varValue = \String::restoreBasicEntities($varValue);
-			}
-			else
-			{
-				foreach ($varValue as $k=>$v)
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
 				{
-					$varValue[$k] = \String::restoreBasicEntities($v);
+					$varValue = \String::binToUuid($varValue);
 				}
+				else
+				{
+					$varValue = serialize(array_map('String::binToUuid', $varValue));
+				}
+			}
 
-				$varValue = serialize($varValue);
+			// Convert date formats into timestamps
+			if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+			{
+				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$varValue = $objDate->tstamp;
+			}
+
+			// Handle entities
+			if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
+			{
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
+				{
+					$varValue = \String::restoreBasicEntities($varValue);
+				}
+				else
+				{
+					$varValue = serialize(array_map('String::restoreBasicEntities', $varValue));
+				}
 			}
 		}
 
