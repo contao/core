@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.10 (2014-05-XX)
 ---------------------------
 
+### Fixed
+Catch Swift exceptions when sending form data via e-mail (see #6941).
+
 ### Update
 Update the back end date picker to version 2.2.0.
 
