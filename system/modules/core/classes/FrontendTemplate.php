@@ -182,42 +182,6 @@ class FrontendTemplate extends \Template
 			throw new \UnusedArgumentsException();
 		}
 
-		// Index page if searching is allowed and there is no back end user
-		if (\Config::get('enableSearch') && \Environment::get('isAjaxRequest') && \Environment::get('httpIndexPage') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
-		{
-			// Index protected pages if enabled
-			if (\Config::get('indexProtected') || (!FE_USER_LOGGED_IN && !$objPage->protected))
-			{
-				$blnIndex = true;
-
-				// Do not index the page if certain parameters are set
-				foreach (array_keys($_GET) as $key)
-				{
-					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
-					{
-						$blnIndex = false;
-						break;
-					}
-				}
-
-				if ($blnIndex)
-				{
-					$arrData = array
-					(
-						'url' => $strUrl,
-						'content' => $this->strBuffer,
-						'title' => $objPage->pageTitle ?: $objPage->title,
-						'protected' => ($objPage->protected ? '1' : ''),
-						'groups' => $objPage->groups,
-						'pid' => $objPage->id,
-						'language' => $objPage->language
-					);
-
-					\Search::indexPage($arrData);
-				}
-			}
-		}
-
 		parent::output();
 	}
 

@@ -821,4 +821,51 @@ class Automator extends \System
 		// Add a log entry
 		$this->log('Generated the DCA extracts', __METHOD__, TL_CRON);
 	}
+
+
+	/**
+	 * Callback to index a page
+	 * @todo this is displaced in Automator
+	 * @param object Template
+	 */
+	public function indexCurrentPageContent($objTemplate)
+	{
+		global $objPage;
+
+		// Index page if searching is allowed and there is no back end user
+		if (\Config::get('enableSearch') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
+		{
+			// Index protected pages if enabled
+			if (\Config::get('indexProtected') || (!FE_USER_LOGGED_IN && !$objPage->protected))
+			{
+				$blnIndex = true;
+
+				// Do not index the page if certain parameters are set
+				foreach (array_keys($_GET) as $key)
+				{
+					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
+					{
+						$blnIndex = false;
+						break;
+					}
+				}
+
+				if ($blnIndex)
+				{
+					$arrData = array
+					(
+						'url'		=> \Environment::get('request'),
+						'content'	=> $objTemplate->getBuffer(),
+						'title'		=> $objPage->pageTitle ?: $objPage->title,
+						'protected'	=> ($objPage->protected ? '1' : ''),
+						'groups'	=> $objPage->groups,
+						'pid'		=> $objPage->id,
+						'language'	=> $objPage->language
+					);
+
+					\Search::indexPage($arrData);
+				}
+			}
+		}
+	}
 }
