@@ -5,6 +5,9 @@ Version 3.2.9 (2014-04-07)
 --------------------------
 
 ### Fixed
+Consider the protocol when embedding YouTube videos (see #6900).
+
+### Fixed
 Fixed a critical vulnerability of the install tool (see #6855).
 
 ### Fixed
