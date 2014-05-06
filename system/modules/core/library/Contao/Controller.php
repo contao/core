@@ -1819,12 +1819,6 @@ abstract class Controller extends \System
 
 		$strSearchCron = '';
 
-		// Add to search index
-		if (\Config::get('enableSearch'))
-		{
-			$strSearchCron .= 'setTimeout(function(){try{var e=new XMLHttpRequest}catch(t){return}e.open("GET",window.location.href,!0),e.setRequestHeader("Index-Page",!0),e.setRequestHeader("X-Requested-With","XMLHttpRequest"),e.send()},1e4);';
-		}
-
 		// Command scheduler
 		if (!\Config::get('disableCron'))
 		{
