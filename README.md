@@ -55,6 +55,8 @@ cloned the repository, make sure to install the vendor libraries:
 ```
 git clone https://github.com/contao/core.git
 cd core
+// copy composer by site or add composer by curl
+// curl -sS https://getcomposer.org/installer | php
 php composer.phar install --prefer-dist
 ```
 
