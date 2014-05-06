@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Catch Swift exceptions when sending form data via e-mail (see #6941).
+
+### Fixed
 Try all locale variations when loading TinyMCE (see #6952).
 
 ### Fixed
