@@ -330,6 +330,21 @@ abstract class Template extends \Template\Base
 		}
 
 		echo $this->strBuffer;
+
+		if (function_exists('fastcgi_finish_request'))
+		{
+			fastcgi_finish_request();
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['terminate']) && is_array($GLOBALS['TL_HOOKS']['terminate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['terminate'] as $callback)
+			{
+				$objCallback = \System::importStatic($callback[0]);
+				$objCallback->$callback[1]($this);
+			}
+		}
 	}
 
 
