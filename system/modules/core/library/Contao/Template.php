@@ -198,6 +198,17 @@ abstract class Template extends \Template\Base
 
 
 	/**
+	 * Return the current buffer
+	 *
+	 * @return string The output buffer
+	 */
+	public function getBuffer()
+	{
+		return $this->strBuffer;
+	}
+
+
+	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
