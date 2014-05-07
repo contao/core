@@ -295,7 +295,7 @@ class Search
 		$objDatabase->query("ALTER TABLE tl_search_index DISABLE KEYS");
 		foreach ($arrIndex as $k=>$v)
 		{
-			$objDatabase->prepare("INSERT DELAYED INTO tl_search_index (pid, word, relevance, language) VALUES (?, ?, ?, ?)")
+			$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES (?, ?, ?, ?)")
 						->execute($intInsertId, $k, $v, $arrData['language']);
 		}
 		$objDatabase->query("ALTER TABLE tl_search_index ENABLE KEYS");
