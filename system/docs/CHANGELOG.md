@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Correctly strip the file extension in the `File` class (see #6968).
+
+### Fixed
 Remove the menu when `Swipe.kill()` is executed (see #6861).
 
 ### Fixed
