@@ -1,11 +1,18 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.2.9 (2014-04-07)
---------------------------
+Version 3.2.10 (2014-05-XX)
+---------------------------
+
+### Fixed
+Remove the menu when `Swipe.kill()` is executed (see #6861).
 
 ### Fixed
 Consider the protocol when embedding YouTube videos (see #6900).
+
+
+Version 3.2.9 (2014-04-07)
+--------------------------
 
 ### Fixed
 Fixed a critical vulnerability of the install tool (see #6855).
