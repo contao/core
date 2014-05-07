@@ -401,6 +401,10 @@ $GLOBALS['TL_HOOKS'] = array
 		array('Messages', 'lastLogin'),
 		array('Messages', 'topLevelRoot'),
 		array('Messages', 'languageFallback')
+	),
+	'terminate' => array
+	(
+		array('Automator', 'indexCurrentPageContent')
 	)
 );
 

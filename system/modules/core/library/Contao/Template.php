@@ -198,6 +198,17 @@ abstract class Template extends \Template\Base
 
 
 	/**
+	 * Return the current buffer
+	 *
+	 * @return string The output buffer
+	 */
+	public function getBuffer()
+	{
+		return $this->strBuffer;
+	}
+
+
+	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
@@ -283,7 +294,8 @@ abstract class Template extends \Template\Base
 			$intElapsed = (microtime(true) - TL_START);
 
 			$strDebug = sprintf(
-				'<div id="contao-debug" class="%s">'
+				'<!-- indexer::stop -->
+				<div id="contao-debug" class="%s">'
 				. '<p>'
 					. '<span class="debug-time">Execution time: %s ms</span>'
 					. '<span class="debug-memory">Memory usage: %s</span>'
@@ -323,12 +335,49 @@ abstract class Template extends \Template\Base
 							. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
 						. "});"
 					. "})(document.id);"
-				, ($this->strFormat == 'xhtml')) . "\n\n";
+				, ($this->strFormat == 'xhtml')) . "\n\n<!-- indexer::continue -->";
 
 			$this->strBuffer = str_replace('</body>', $strDebug . '</body>', $this->strBuffer);
 		}
 
 		echo $this->strBuffer;
+
+		if (function_exists('fastcgi_finish_request'))
+		{
+			fastcgi_finish_request();
+		}
+		elseif ('cli' !== PHP_SAPI)
+		{
+			// ob_get_level() never returns 0 on some Windows configurations, so if
+			// the level is the same two times in a row, the loop should be stopped.
+			$previous = null;
+			$obStatus = ob_get_status(1);
+			while (($level = ob_get_level()) > 0 && $level !== $previous) {
+				$previous = $level;
+				if ($obStatus[$level - 1]) {
+					if (version_compare(PHP_VERSION, '5.4', '>=')) {
+						if (isset($obStatus[$level - 1]['flags']) && ($obStatus[$level - 1]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE)) {
+							ob_end_flush();
+						}
+					} else {
+						if (isset($obStatus[$level - 1]['del']) && $obStatus[$level - 1]['del']) {
+							ob_end_flush();
+						}
+					}
+				}
+			}
+			flush();
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['terminate']) && is_array($GLOBALS['TL_HOOKS']['terminate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['terminate'] as $callback)
+			{
+				$objCallback = \System::importStatic($callback[0]);
+				$objCallback->$callback[1]($this);
+			}
+		}
 	}
 
 
