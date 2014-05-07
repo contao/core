@@ -292,13 +292,11 @@ class Search
 
 
 		// Create new index
-		$objDatabase->query("ALTER TABLE tl_search_index DISABLE KEYS");
 		foreach ($arrIndex as $k=>$v)
 		{
 			$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES (?, ?, ?, ?)")
 						->execute($intInsertId, $k, $v, $arrData['language']);
 		}
-		$objDatabase->query("ALTER TABLE tl_search_index ENABLE KEYS");
 
 		return true;
 	}
