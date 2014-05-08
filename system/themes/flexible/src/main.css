@@ -1709,11 +1709,9 @@ fieldset.collapsed > legend {
 	.collapsible.xpnd .collapsible_area {
 		display:block;
 	}
-	#tl_navigation .tl_level_2 a {
-		display:block;
-		line-height:inherit;
-		padding-top:3px;
-		padding-bottom:4px;
+	#tl_navigation .tl_level_2 li {
+		margin:1px 18px 6px 0;
+		display:inline-block;
 	}
 }
 
