@@ -36,10 +36,12 @@ tinymce.init({
   templates: [
     <?php echo Backend::getTinyTemplates(); ?>
   ],
-  plugins: "autosave charmap code fullscreen image link paste searchreplace tabfocus table template visualblocks",
+  plugins: "autosave charmap code fullscreen image importcss link paste searchreplace tabfocus table template visualblocks",
   browser_spellcheck: true,
   tabfocus_elements: ":prev,:next",
-  content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css",
+  importcss_append: true,
+  importcss_groups: [{title: "<?php echo Config::get('uploadPath'); ?>/tinymce.css"}],
+  content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH . '/' . Config::get('uploadPath'); ?>/tinymce.css",
   extended_valid_elements: "q[cite|class|title],article,section,hgroup,figure,figcaption",
   menubar: "file edit insert view format table",
   toolbar: "link image | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"

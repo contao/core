@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Import the `tinymce.css` style sheet in TinyMCE (see #6970).
+
+### Fixed
 Catch Swift exceptions when sending form data via e-mail (see #6941).
 
 ### Fixed
