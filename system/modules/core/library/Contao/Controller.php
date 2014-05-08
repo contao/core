@@ -1820,23 +1820,10 @@ abstract class Controller extends \System
 			$strScripts .= "\n" . \Template::generateInlineScript('SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()', $blnXhtml) . "\n";
 		}
 
-		$strSearchCron = '';
-
-		// Add to search index
-		if (\Config::get('enableSearch'))
-		{
-			$strSearchCron .= 'setTimeout(function(){try{var e=new XMLHttpRequest}catch(t){return}e.open("GET",window.location.href,!0),e.setRequestHeader("Index-Page",!0),e.setRequestHeader("X-Requested-With","XMLHttpRequest"),e.send()},1e4);';
-		}
-
 		// Command scheduler
 		if (!\Config::get('disableCron'))
 		{
-			$strSearchCron .= 'setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);';
-		}
-
-		if ($strSearchCron != '')
-		{
-			$strScripts .= "\n" . \Template::generateInlineScript($strSearchCron, $blnXhtml) . "\n";
+			$strScripts .= "\n" . \Template::generateInlineScript('setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_BODY]]'] = $strScripts;
