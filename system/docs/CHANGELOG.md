@@ -110,9 +110,6 @@ Add helper methods to generate markup depending on the output type:
  - `Template::generateInlineScript()`
  - `Template::generateFeedTag()`
 
-### Changed
-Use a deferred Ajax request to add a page to the search index (see #6566).
-
 ### New
 Add the "customizeSearch" hook (see #5223).
 
