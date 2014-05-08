@@ -290,7 +290,6 @@ class Search
 		$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
 					->execute($intInsertId);
 
-
 		// Create new index
 		foreach ($arrIndex as $k=>$v)
 		{

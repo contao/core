@@ -68,8 +68,6 @@ class FrontendTemplate extends \Template
 	 */
 	public function output($blnCheckRequest=false)
 	{
-		global $objPage;
-
 		$this->keywords = '';
 		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
 
@@ -80,7 +78,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Parse the template
-		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
+		$this->strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
 
 		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
@@ -88,81 +86,15 @@ class FrontendTemplate extends \Template
 			foreach ($GLOBALS['TL_HOOKS']['outputFrontendTemplate'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
+				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
 			}
 		}
 
-		$intCache = 0;
-		$strUrl = \Environment::get('request');
-
-		// Decide whether the page shall be cached
-		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && intval($objPage->cache) > 0 && !$objPage->protected)
-		{
-			$intCache = time() + intval($objPage->cache);
-		}
-
-		// Server-side cache
-		if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'server'))
-		{
-			// If the request string is empty, use a special cache tag which considers the page language
-			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
-			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
-			}
-			else
-			{
-				$strCacheKey = \Environment::get('base') . $strUrl;
-			}
-
-			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
-			{
-				foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
-				{
-					$this->import($callback[0]);
-					$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
-				}
-			}
-
-			// Store mobile pages separately
-			if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
-			{
-				$strCacheKey .= '.mobile';
-			}
-
-			// Replace insert tags for caching
-			$strBuffer = $this->replaceInsertTags($strBuffer);
-			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
-
-			// Create the cache file
-			$strMd5CacheKey = md5($strCacheKey);
-			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html', true);
-			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; \$type = '{$objPage->type}'; ?>\n");
-			$objFile->append($this->minifyHtml($strBuffer), '');
-			$objFile->close();
-		}
-
-		// Client-side cache
-		if (!headers_sent())
-		{
-			if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'browser'))
-			{
-				header('Cache-Control: public, max-age=' . ($intCache - time()));
-				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
-				header('Pragma: public');
-			}
-			else
-			{
-				header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-				header('Pragma: no-cache');
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-				header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
-			}
-		}
+		// Add the output to the cache
+		$this->addToCache();
 
 		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
-		$this->strBuffer = $this->replaceInsertTags($strBuffer, false);
+		$this->strBuffer = $this->replaceInsertTags($this->strBuffer, false);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
@@ -176,49 +108,17 @@ class FrontendTemplate extends \Template
 			}
 		}
 
-		// Not all $_GET parameters have been used (see #4277)
+		// Check whether all $_GET parameters have been used (see #4277)
 		if ($blnCheckRequest && \Input::hasUnusedGet())
 		{
 			throw new \UnusedArgumentsException();
 		}
 
-		// Index page if searching is allowed and there is no back end user
-		if (\Config::get('enableSearch') && \Environment::get('isAjaxRequest') && \Environment::get('httpIndexPage') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
-		{
-			// Index protected pages if enabled
-			if (\Config::get('indexProtected') || (!FE_USER_LOGGED_IN && !$objPage->protected))
-			{
-				$blnIndex = true;
-
-				// Do not index the page if certain parameters are set
-				foreach (array_keys($_GET) as $key)
-				{
-					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
-					{
-						$blnIndex = false;
-						break;
-					}
-				}
-
-				if ($blnIndex)
-				{
-					$arrData = array
-					(
-						'url' => $strUrl,
-						'content' => $this->strBuffer,
-						'title' => $objPage->pageTitle ?: $objPage->title,
-						'protected' => ($objPage->protected ? '1' : ''),
-						'groups' => $objPage->groups,
-						'pid' => $objPage->id,
-						'language' => $objPage->language
-					);
-
-					\Search::indexPage($arrData);
-				}
-			}
-		}
-
+		// Send the response to the client
 		parent::output();
+
+		// Add the output to the search index
+		$this->addToSearchIndex();
 	}
 
 
@@ -289,6 +189,128 @@ class FrontendTemplate extends \Template
 	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
 	{
 		return \Frontend::addToUrl($strRequest, $blnIgnoreParams, $arrUnset);
+	}
+
+
+	/**
+	 * Add the template output to the cache and add the cache headers
+	 */
+	protected function addToCache()
+	{
+		global $objPage;
+
+		$intCache = 0;
+
+		// Decide whether the page shall be cached
+		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && intval($objPage->cache) > 0 && !$objPage->protected)
+		{
+			$intCache = time() + intval($objPage->cache);
+		}
+
+		// Server-side cache
+		if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'server'))
+		{
+			// If the request string is empty, use a special cache tag which considers the page language
+			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
+			{
+				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
+			}
+			else
+			{
+				$strCacheKey = \Environment::get('base') . \Environment::get('request');
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
+				{
+					$this->import($callback[0]);
+					$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+				}
+			}
+
+			// Store mobile pages separately
+			if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
+			{
+				$strCacheKey .= '.mobile';
+			}
+
+			// Replace insert tags for caching
+			$strBuffer = $this->replaceInsertTags($this->strBuffer);
+			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
+
+			// Create the cache file
+			$strMd5CacheKey = md5($strCacheKey);
+			$objFile = new \File('system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html', true);
+			$objFile->write('<?php' . " /* $strCacheKey */ \$expire = $intCache; \$content = '{$this->strContentType}'; \$type = '{$objPage->type}'; ?>\n");
+			$objFile->append($this->minifyHtml($strBuffer), '');
+			$objFile->close();
+		}
+
+		// Client-side cache
+		if (!headers_sent())
+		{
+			if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'browser'))
+			{
+				header('Cache-Control: public, max-age=' . ($intCache - time()));
+				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+				header('Pragma: public');
+			}
+			else
+			{
+				header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+				header('Pragma: no-cache');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+				header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
+			}
+		}
+	}
+
+
+	/**
+	 * Add the template output to the search index
+	 */
+	protected function addToSearchIndex()
+	{
+		global $objPage;
+
+		// Index page if searching is allowed and there is no back end user
+		if (\Config::get('enableSearch') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
+		{
+			// Index protected pages if enabled
+			if (\Config::get('indexProtected') || (!FE_USER_LOGGED_IN && !$objPage->protected))
+			{
+				$blnIndex = true;
+
+				// Do not index the page if certain parameters are set
+				foreach (array_keys($_GET) as $key)
+				{
+					if (in_array($key, $GLOBALS['TL_NOINDEX_KEYS']) || strncmp($key, 'page_', 5) === 0)
+					{
+						$blnIndex = false;
+						break;
+					}
+				}
+
+				if ($blnIndex)
+				{
+					$arrData = array
+					(
+						'url' => \Environment::get('request'),
+						'content' => $this->strBuffer,
+						'title' => $objPage->pageTitle ?: $objPage->title,
+						'protected' => ($objPage->protected ? '1' : ''),
+						'groups' => $objPage->groups,
+						'pid' => $objPage->id,
+						'language' => $objPage->language
+					);
+
+					\Search::indexPage($arrData);
+				}
+			}
+		}
 	}
 
 
