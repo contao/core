@@ -255,80 +255,93 @@ abstract class Template extends \Template\Base
 			$this->strBuffer = $this->parse();
 		}
 
-		// Minify the markup if activated
+		// Minify the markup
 		$this->strBuffer = $this->minifyHtml($this->strBuffer);
 
-		// Send some headers
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
-		// Debug information
+		// Add the debug bar
 		if (\Config::get('debugMode') && !isset($_GET['popup']))
 		{
-			$intReturned = 0;
-			$intAffected = 0;
-
-			// Count the totals (see #3884)
-			if (is_array($GLOBALS['TL_DEBUG']['database_queries']))
-			{
-				foreach ($GLOBALS['TL_DEBUG']['database_queries'] as $k=>$v)
-				{
-					$intReturned += $v['return_count'];
-					$intAffected += $v['affected_count'];
-					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['return_count']);
-					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['affected_count']);
-				}
-			}
-
-			$intElapsed = (microtime(true) - TL_START);
-
-			$strDebug = sprintf(
-				'<div id="contao-debug" class="%s">'
-				. '<p>'
-					. '<span class="debug-time">Execution time: %s ms</span>'
-					. '<span class="debug-memory">Memory usage: %s</span>'
-					. '<span class="debug-db">Database queries: %d</span>'
-					. '<span class="debug-rows">Rows: %d returned, %s affected</span>'
-					. '<span class="debug-models">Registered models: %d</span>'
-					. '<span id="debug-tog">&nbsp;</span>'
-				. '</p>'
-				. '<div><pre>',
-				\Input::cookie('CONTAO_CONSOLE'),
-				$this->getFormattedNumber(($intElapsed * 1000), 0),
-				$this->getReadableSize(memory_get_peak_usage()),
-				count($GLOBALS['TL_DEBUG']['database_queries']),
-				$intReturned,
-				$intAffected,
-				\Model\Registry::getInstance()->count()
-			);
-
-			ksort($GLOBALS['TL_DEBUG']);
-
-			ob_start();
-			print_r($GLOBALS['TL_DEBUG']);
-			$strDebug .= ob_get_contents();
-			ob_end_clean();
-
-			$strDebug .= '</pre></div></div>'
-				. $this->generateInlineScript(
-					  "(function($) {"
-						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
-						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
-						. "$('debug-tog').addEvent('click',function(e) {"
-							. "$('contao-debug').toggleClass('closed');"
-							. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-							. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
-						. "});"
-						. "window.addEvent('resize',function() {"
-							. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
-						. "});"
-					. "})(document.id);"
-				, ($this->strFormat == 'xhtml')) . "\n\n";
-
-			$this->strBuffer = str_replace('</body>', $strDebug . '</body>', $this->strBuffer);
+			$this->strBuffer = str_replace('</body>', $this->getDebugBar() . '</body>', $this->strBuffer);
 		}
 
 		echo $this->strBuffer;
+	}
+
+
+	/**
+	 * Return the debug bar string
+	 *
+	 * @return string The debug bar markup
+	 */
+	protected function getDebugBar()
+	{
+		$intReturned = 0;
+		$intAffected = 0;
+
+		// Count the totals (see #3884)
+		if (is_array($GLOBALS['TL_DEBUG']['database_queries']))
+		{
+			foreach ($GLOBALS['TL_DEBUG']['database_queries'] as $k=>$v)
+			{
+				$intReturned += $v['return_count'];
+				$intAffected += $v['affected_count'];
+				unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['return_count']);
+				unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['affected_count']);
+			}
+		}
+
+		$intElapsed = (microtime(true) - TL_START);
+
+		$strDebug = sprintf(
+			'<div id="contao-debug" class="%s">'
+			. '<p>'
+				. '<span class="debug-time">Execution time: %s ms</span>'
+				. '<span class="debug-memory">Memory usage: %s</span>'
+				. '<span class="debug-db">Database queries: %d</span>'
+				. '<span class="debug-rows">Rows: %d returned, %s affected</span>'
+				. '<span class="debug-models">Registered models: %d</span>'
+				. '<span id="debug-tog">&nbsp;</span>'
+			. '</p>'
+			. '<div><pre>',
+			\Input::cookie('CONTAO_CONSOLE'),
+			$this->getFormattedNumber(($intElapsed * 1000), 0),
+			$this->getReadableSize(memory_get_peak_usage()),
+			count($GLOBALS['TL_DEBUG']['database_queries']),
+			$intReturned,
+			$intAffected,
+			\Model\Registry::getInstance()->count()
+		);
+
+		ksort($GLOBALS['TL_DEBUG']);
+
+		ob_start();
+		print_r($GLOBALS['TL_DEBUG']);
+		$strDebug .= ob_get_contents();
+		ob_end_clean();
+
+		unset($GLOBALS['TL_DEBUG']);
+
+		$strDebug .= '</pre></div></div>'
+			. $this->generateInlineScript(
+				  "(function($) {"
+					. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+					. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+					. "$('debug-tog').addEvent('click',function(e) {"
+						. "$('contao-debug').toggleClass('closed');"
+						. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
+						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+					. "});"
+					. "window.addEvent('resize',function() {"
+						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+					. "});"
+				. "})(document.id);"
+			, ($this->strFormat == 'xhtml')) . "\n\n"
+		;
+
+		return $strDebug;
 	}
 
 
