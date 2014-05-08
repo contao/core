@@ -258,10 +258,12 @@ abstract class Base extends \Controller
 	/**
 	 * Insert a template
 	 *
-	 * @param string $name The template name
-	 * @param array  $data An optional data array
+	 * @param  string $name The template name
+	 * @param  array  $data An optional data array
+	 * @param  bool   $returnOnly Optional only return as value 
+	 * @return string Output of the template
 	 */
-	public function insert($name, array $data=null)
+	public function insert($name, array $data=null, $returnOnly=false)
 	{
 		$tpl = new static($name);
 
@@ -269,7 +271,14 @@ abstract class Base extends \Controller
 		{
 			$tpl->setData($data);
 		}
+		
+		$buffer = $tpl->parse();
 
-		echo $tpl->parse();
+		if(!$returnOnly) 
+		{
+			echo $buffer;
+		}
+		
+		return $buffer;
 	}
 }
