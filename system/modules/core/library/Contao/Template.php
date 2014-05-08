@@ -309,7 +309,8 @@ abstract class Template extends \Template\Base
 		$intElapsed = (microtime(true) - TL_START);
 
 		$strDebug = sprintf(
-			'<div id="contao-debug" class="%s">'
+			"<!-- indexer::stop -->\n"
+			. '<div id="contao-debug" class="%s">'
 			. '<p>'
 				. '<span class="debug-time">Execution time: %s ms</span>'
 				. '<span class="debug-memory">Memory usage: %s</span>'
@@ -339,7 +340,7 @@ abstract class Template extends \Template\Base
 
 		$strDebug .= '</pre></div></div>'
 			. $this->generateInlineScript(
-				  "(function($) {"
+				"(function($) {"
 					. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
 					. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
 					. "$('debug-tog').addEvent('click',function(e) {"
@@ -350,8 +351,10 @@ abstract class Template extends \Template\Base
 					. "window.addEvent('resize',function() {"
 						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
 					. "});"
-				. "})(document.id);"
-			, ($this->strFormat == 'xhtml')) . "\n\n"
+				. "})(document.id);",
+				($this->strFormat == 'xhtml')
+			)
+			. "\n<!-- indexer::continue -->\n\n"
 		;
 
 		return $strDebug;
