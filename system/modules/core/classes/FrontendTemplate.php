@@ -182,6 +182,8 @@ class FrontendTemplate extends \Template
 			throw new \UnusedArgumentsException();
 		}
 
+		parent::output();
+
 		// Index page if searching is allowed and there is no back end user
 		if (\Config::get('enableSearch') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
 		{
@@ -217,8 +219,6 @@ class FrontendTemplate extends \Template
 				}
 			}
 		}
-
-		parent::output();
 	}
 
 

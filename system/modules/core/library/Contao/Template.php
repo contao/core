@@ -268,6 +268,19 @@ abstract class Template extends \Template\Base
 		}
 
 		echo $this->strBuffer;
+
+		// Flush the output buffers (see #6962)
+		$this->flushAllData();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['postFlushData']) && is_array($GLOBALS['TL_HOOKS']['postFlushData']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postFlushData'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strBuffer, $this);
+			}
+		}
 	}
 
 
@@ -500,6 +513,32 @@ abstract class Template extends \Template\Base
 	public static function generateFeedTag($href, $format, $title, $xhtml=false)
 	{
 		return '<link type="application/' . $format . '+xml" rel="alternate" href="' . $href . '" title="' . specialchars($title) . '"' . ($xhtml ? ' />' : '>');
+	}
+
+
+	/**
+	 * Flush the output buffers
+	 *
+	 * @see Symfony\Component\HttpFoundation\Response
+	 */
+	public function flushAllData()
+	{
+		if (function_exists('fastcgi_finish_request'))
+		{
+			fastcgi_finish_request();
+		}
+		elseif (PHP_SAPI !== 'cli')
+		{
+			$status = ob_get_status(true);
+			$level = count($status);
+
+			while ($level-- > 0 && (!empty($status[$level]['del']) || (isset($status[$level]['flags']) && ($status[$level]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE) && ($status[$level]['flags'] & PHP_OUTPUT_HANDLER_FLUSHABLE))))
+			{
+				ob_end_flush();
+			}
+
+			flush();
+		}
 	}
 
 
