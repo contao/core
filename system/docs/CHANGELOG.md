@@ -1,8 +1,8 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.3.0 (2014-05-XX)
---------------------------
+Version 3.3.RC2 (2014-05-09)
+----------------------------
 
 ### Update
 Update TinyMCE to version 4.0.26.

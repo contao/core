@@ -15,7 +15,7 @@
  * Core version
  */
 define('VERSION', '3.3');
-define('BUILD', 'RC1');
+define('BUILD', 'RC2');
 define('LONG_TERM_SUPPORT', false);
 
 
