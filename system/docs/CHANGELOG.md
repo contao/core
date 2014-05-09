@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly set and explain the page title field (see #6953).
+
+### Fixed
 Correctly show the template sources (see #6875).
 
 ### Fixed

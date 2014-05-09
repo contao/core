@@ -168,7 +168,7 @@ class PageRegular extends \Frontend
 		$this->Template->pageTitle = str_replace('[-]', '', $this->Template->pageTitle);
 
 		// Assign the title and description
-		$this->Template->title = $objLayout->titleTag ?: '{{page::pageTitle}} - {{page::mainTitle}}';
+		$this->Template->title = $objLayout->titleTag ?: '{{page::pageTitle}} - {{page::rootTitle}}';
 		$this->Template->description = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), $objPage->description);
 
 		// Body onload and body classes
