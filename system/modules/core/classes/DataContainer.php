@@ -462,6 +462,14 @@ class DataContainer extends \Backend
 				throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
 			}
 
+			// Backwards compatibility
+			$language = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+
+			if (!file_exists(TL_ROOT . '/assets/tinymce/langs/' . $language . '.js'))
+			{
+				$language = 'en';
+			}
+
 			$selector = 'ctrl_' . $this->strInputName;
 
 			ob_start();
