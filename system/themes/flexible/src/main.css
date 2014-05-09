@@ -1710,6 +1710,7 @@ fieldset.collapsed > legend {
 		display:block;
 	}
 	#tl_navigation .tl_level_2 li {
+		min-width:150px;
 		margin:1px 18px 6px 0;
 		display:inline-block;
 	}
@@ -1860,6 +1861,9 @@ fieldset.collapsed > legend {
 	}
 	.tl_file_list .ellipsis {
 		padding-right:10px;
+	}
+	#tl_navigation .tl_level_2 li {
+		min-width:110px;
 	}
 }
 
