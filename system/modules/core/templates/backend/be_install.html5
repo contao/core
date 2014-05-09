@@ -1294,7 +1294,7 @@ Library.
                         <?php if ($this->emailError): ?>
                           <p class="tl_error"><?php echo $this->emailError; ?></p>
                         <?php endif; ?>
-                        <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
+                        <input type="email" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
                         <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
                         <?php if ($this->passwordError): ?>
                           <p class="tl_error"><?php echo $this->passwordError; ?></p>
