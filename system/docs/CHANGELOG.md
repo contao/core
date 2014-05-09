@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.0 (2014-05-XX)
 --------------------------
 
+### Update
+Update TinyMCE to version 4.0.26.
+
 ### Fixed
 Correctly set and explain the page title field (see #6953).
 
