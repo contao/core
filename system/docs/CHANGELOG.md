@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Support input tags without a "type" attribute in the CSS framwork (see #6902).
+
+### Fixed
 Import the `tinymce.css` style sheet in TinyMCE (see #6970).
 
 ### Fixed
