@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
-<project name="Contao Open Source CMS" default="build" basedir="../">
-  <property name="version" value="3.3.RC1" />
+<project name="Contao Open Source CMS" default="build" basedir=".">
+  <exec executable="system/bin/version" outputProperty="version" />
 
   <target name="build" depends="clone, update, purge, archive, cleanup">
     <echo message="Contao ${version} build complete" />
   </target>
 
   <target name="clone">
-    <exec executable="git" dir=".">
+    <exec executable="git">
       <arg value="clone" />
       <arg value="." />
       <arg value="contao-${version}" />
     </exec>
-    <exec executable="git" dir="contao-${version}">
+    <exec executable="git" dir="contao-${version}" failonerror="true">
       <arg value="checkout" />
       <arg value="${version}" />
       <arg value="--quiet" />
@@ -24,7 +24,7 @@
   </target>
 
 	<target name="update">
-    <exec executable="composer" dir="contao-${version}">
+    <exec executable="composer" dir="contao-${version}" failonerror="true">
       <arg value="install" />
       <arg value="--prefer-dist" />
     </exec>
@@ -52,7 +52,7 @@
   </target>
 
   <target name="phpdoc">
-    <exec executable="phpdoc.php" dir=".">
+    <exec executable="phpdoc.php">
       <arg value="--title=Contao Open Source CMS" />
       <arg value="--target=../api" />
       <arg value="--directory=system/modules/core/library,system/modules/*/models" />
