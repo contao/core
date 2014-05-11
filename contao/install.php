@@ -853,6 +853,7 @@ class InstallTool extends Backend
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
+		$this->Template->hasComposer = is_dir(TL_ROOT . '/system/modules/!composer');
 
 		$this->Template->output();
 		exit;

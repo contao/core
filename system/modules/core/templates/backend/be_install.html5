@@ -1314,6 +1314,21 @@ Library.
               </fieldset>
 
               <?php if ($this->adminCreated): ?>
+                <fieldset class="tl_box<?php if ($this->hasComposer): ?> collapsed<?php endif; ?>">
+                  <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][0]; ?></legend>
+                  <div>
+                    <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][0]; ?></h3>
+                    <?php if (!$this->hasComposer): ?>
+                      <p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryDefault']; ?></p>
+                    <?php else: ?>
+                      <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryComposer']; ?></p>
+                    <?php endif; ?>
+                    <p><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][1]; ?></p>
+                    <div class="tl_submit_container">
+                      <a href="contao/main.php?do=repository_catalog&amp;view=composer" class="tl_submit"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryInstall']; ?></a>
+                    </div>
+                  </div>
+                </fieldset>
                 <fieldset class="tl_box last">
                   <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></legend>
                   <div>
