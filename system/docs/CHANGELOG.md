@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.0 (2014-05-XX)
+--------------------------
+
+### Fixed
+Fix the link button padding (`a.tl_submit`).
+
+
 Version 3.3.RC2 (2014-05-09)
 ----------------------------
 
