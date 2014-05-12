@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Store the UUID of uploaded files in the session (see #6986).
+
+### Fixed
 Only assume a moved file or folder for new resources (see #6907).
 
 ### Fixed
