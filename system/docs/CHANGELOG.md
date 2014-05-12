@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Do not use `date_default_timezone_get()` in the configuration file (see #6989).
+
+### Fixed
 Correctly generate absolute URIs in `Controller::generateFrontendUrl()`.
 
 ### Fixed
