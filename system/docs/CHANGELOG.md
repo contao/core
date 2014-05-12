@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Fix the mediabox "imgBackground" option (see #6866).
+
+### Fixed
 Strip double quotes in the options wizard (see #6919).
 
 ### Fixed
