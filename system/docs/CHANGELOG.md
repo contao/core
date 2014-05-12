@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Make sure the security questions gets always generated (see #6990).
+
+### Fixed
 Do not use `date_default_timezone_get()` in the configuration file (see #6989).
 
 ### Fixed

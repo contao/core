@@ -237,6 +237,11 @@ class FormCaptcha extends \Widget
 	 */
 	public function generateQuestion()
 	{
+		if ($this->strQuestion == '')
+		{
+			$this->setQuestion();
+		}
+
 		return sprintf('<span class="captcha_text%s">%s</span>',
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->strQuestion);
