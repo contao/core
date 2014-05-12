@@ -5,6 +5,9 @@ Disallow: /system/
 Disallow: /templates/
 Disallow: /vendor/
 Disallow: /share/index.php
+Disallow: /build.xml
+Disallow: /composer.json
+Disallow: /composer.lock
 Disallow: /contao-check.php
 Disallow: /flash.php
 Disallow: /README.md
