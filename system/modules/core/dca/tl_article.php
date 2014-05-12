@@ -597,6 +597,12 @@ class tl_article extends Backend
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 		}
 
+		// Add a prefix to reserved names (see #6066)
+		if (in_array($varValue, array('top', 'wrapper', 'header', 'container', 'main', 'left', 'right', 'footer')))
+		{
+			$varValue = 'article-' . $varValue;
+		}
+
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_article WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
@@ -609,12 +615,6 @@ class tl_article extends Backend
 			}
 
 			$varValue .= '-' . $dc->id;
-		}
-
-		// Add a prefix to reserved names (see #6066)
-		if (in_array($varValue, array('top', 'wrapper', 'header', 'container', 'main', 'left', 'right', 'footer')))
-		{
-			$varValue = 'article-' . $varValue;
 		}
 
 		return $varValue;

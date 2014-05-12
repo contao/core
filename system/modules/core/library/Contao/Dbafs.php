@@ -542,6 +542,7 @@ class Dbafs
 					$objModel->type      = 'file';
 					$objModel->path      = $objFile->path;
 					$objModel->extension = $objFile->extension;
+					$objModel->found     = 2;
 					$objModel->hash      = $objFile->hash;
 					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
@@ -557,6 +558,7 @@ class Dbafs
 					$objModel->type      = 'folder';
 					$objModel->path      = $objFolder->path;
 					$objModel->extension = '';
+					$objModel->found     = 2;
 					$objModel->hash      = $objFolder->hash;
 					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
@@ -588,7 +590,7 @@ class Dbafs
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);
 
 				if ($objFound !== null)
 				{
@@ -669,6 +671,9 @@ class Dbafs
 
 		// Close the log file
 		$objLog->close();
+
+		// Reset the found flag
+		$objDatabase->query("UPDATE tl_files SET found=1 WHERE found=2");
 
 		// Unlock the tables
 		$objDatabase->unlockTables();

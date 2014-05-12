@@ -149,10 +149,10 @@ class File extends \System
 	 * Supported keys:
 	 *
 	 * * size:        the file size
-	 * * name:        the file name without extension
+	 * * name:        the file name and extension
 	 * * dirname:     the path of the parent folder
 	 * * extension:   the file extension
-	 * * filename:    the file name and extension
+	 * * filename:    the file name without extension
 	 * * mime:        the file's mime type
 	 * * hash:        the file's MD5 checksum
 	 * * ctime:       the file's ctime
@@ -208,7 +208,11 @@ class File extends \System
 				break;
 
 			case 'filename':
-				return basename($this->basename, '.' . $this->extension);
+				if (!isset($this->arrPathinfo[$strKey]))
+				{
+					$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrPathinfo['filename'];
 				break;
 
 			case 'tmpname':

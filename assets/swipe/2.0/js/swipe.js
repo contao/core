@@ -35,6 +35,7 @@ function Swipe(container, options) {
   var clonedSlides = false;
   var speed = options.speed || 300;
   options.continuous = options.continuous !== undefined ? options.continuous : true;
+  var nodes = {}, listeners = {};
 
   function setup() {
 
@@ -89,10 +90,10 @@ function Swipe(container, options) {
 
   }
 
-  function onclick(el, fn) {
+  function addEvent(el, type, fn) {
 
-    if (browser.addEventListener) el.addEventListener('click', fn, false);
-    else if (window.attachEvent) el.attachEvent('onclick', fn);
+    if (browser.addEventListener) el.addEventListener(type, fn, false);
+    else if (window.attachEvent) el.attachEvent('on' + type, fn);
 
   }
 
@@ -100,6 +101,13 @@ function Swipe(container, options) {
 
     e.returnValue = false; // IE < 9
     e.preventDefault && e.preventDefault();
+
+  }
+
+  function removeEvent(el, type, fn) {
+
+    if (browser.addEventListener) el.removeEventListener(type, fn, false);
+    else if (window.detachEvent) el.detachEvent('on' + type, fn);
 
   }
 
@@ -111,27 +119,34 @@ function Swipe(container, options) {
 
       // previous button
       if (childs[h].className && childs[h].className.indexOf('slider-prev') != -1) {
-        onclick(childs[h], function(e) {
+
+        listeners.prev = function(e) {
           stopEvent(e);
           stop();
           prev();
-        });
+        };
+
+        nodes.prev = childs[h];
+        addEvent(nodes.prev, 'click', listeners.prev);
+
       }
 
       // next button
       else if (childs[h].className && childs[h].className.indexOf('slider-next') != -1) {
-        onclick(childs[h], function(e) {
+
+        listeners.next = function(e) {
           stopEvent(e);
           stop();
           next();
-        });
+        };
+
+        nodes.next = childs[h];
+        addEvent(nodes.next, 'click', listeners.next);
+
       }
 
       // dot navigation
       else if (childs[h].className && childs[h].className.indexOf('slider-menu') != -1) {
-
-        // set the new menu reference, so we have it in updateMenu()
-        options.menu = childs[h];
 
         for (var i=0; i<length; i++) {
 
@@ -141,7 +156,7 @@ function Swipe(container, options) {
 
           if (i == position) b.className = 'active';
 
-          onclick(b, (function(b) {
+          addEvent(b, 'click', (function(b) {
             return (function(e) {
               stopEvent(e);
               stop();
@@ -149,21 +164,39 @@ function Swipe(container, options) {
             });
           })(b));
 
-          options.menu.appendChild(b);
+          childs[h].appendChild(b);
 
         }
+
+        nodes.dots = childs[h];
+
       }
+
     }
+
   }
 
   function updateMenu() {
 
     for (var i=0; i<length; i++) {
 
-      var child = options.menu.children[i];
+      var child = nodes.dots.children[i];
       child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == position) ? 'active' : '';
 
     }
+
+  }
+
+  function killMenu() {
+
+    var childs = nodes.dots.childNodes;
+
+    while (childs.length > 0) {
+	    nodes.dots.removeChild(childs[0]);
+    }
+
+    removeEvent(nodes.prev, 'click', listeners.prev);
+    removeEvent(nodes.next, 'click', listeners.next);
 
   }
 
@@ -316,7 +349,6 @@ function Swipe(container, options) {
 
   }
 
-
   // setup initial vars
   var start = {};
   var delta = {};
@@ -372,7 +404,7 @@ function Swipe(container, options) {
     move: function(event) {
 
       // ensure swiping with one touch and not pinching
-      if ( event.touches.length > 1 || event.scale && event.scale !== 1) return
+      if (event.touches.length > 1 || event.scale && event.scale !== 1) return
 
       if (options.disableScroll) event.preventDefault();
 
@@ -385,7 +417,7 @@ function Swipe(container, options) {
       }
 
       // determine if scrolling test has run - one time test
-      if ( typeof isScrolling == 'undefined') {
+      if (typeof isScrolling == 'undefined') {
         isScrolling = !!( isScrolling || Math.abs(delta.x) < Math.abs(delta.y) );
       }
 
@@ -536,7 +568,6 @@ function Swipe(container, options) {
   // start auto slideshow if applicable
   if (delay) begin();
 
-
   // add event listeners
   if (browser.addEventListener) {
 
@@ -607,6 +638,7 @@ function Swipe(container, options) {
 
       // return total number of slides
       return length;
+
     },
     kill: function() {
 
@@ -641,12 +673,14 @@ function Swipe(container, options) {
         element.removeEventListener('transitionend', events, false);
         window.removeEventListener('resize', events, false);
 
-      }
-      else {
+      } else {
 
         window.onresize = null;
 
       }
+
+      // kill the menu
+      killMenu();
 
     }
   }
