@@ -407,6 +407,12 @@
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
         <target>Aquí puedes introducir el tamaño del campo a subir (&lt;em&gt;tamaño&lt;/em&gt; atributo).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
         <target>Añadir botón enviar</target>
@@ -466,6 +472,10 @@
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>
         <target>Filas y columnas</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Ajustes plantilla</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

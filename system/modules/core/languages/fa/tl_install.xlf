@@ -81,6 +81,13 @@
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
         <target>اگر شما وب‌سایت نمونه را وارد کرده باشید.، نام کاربری مدیر &lt;strong&gt;k.jones&lt;/strong&gt; و رمز عبور &lt;strong&gt;kevinjones&lt;/strong&gt; هستند. وب‌سایت نمونه را برای اطلاعات بیشتر ببینید.</target>
       </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>مخزن افزونه‌ها</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
+      </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
         <target>تبریک!</target>
@@ -264,6 +271,15 @@
       <trans-unit id="tl_install.adminSave">
         <source>Create admin account</source>
         <target>ایجاد حساب کاربری مدیر</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

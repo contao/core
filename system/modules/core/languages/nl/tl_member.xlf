@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_member.firstname.1">
         <source>Please enter the first name.</source>
-        <target>Geef voornaam op.</target>
+        <target>Geef de voornaam op.</target>
       </trans-unit>
       <trans-unit id="tl_member.lastname.0">
         <source>Last name</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_member.language.1">
         <source>Please select the language.</source>
-        <target>Selecteer taal van het lid.</target>
+        <target>Selecteer een taal.</target>
       </trans-unit>
       <trans-unit id="tl_member.groups.0">
         <source>Member groups</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_member.start.1">
         <source>Automatically activate the account on this day.</source>
-        <target>Als u hier een datum specificeert, zal dit account geactiveerd worden op deze dag.</target>
+        <target>Activeer automatisch het account op deze dag.</target>
       </trans-unit>
       <trans-unit id="tl_member.stop.0">
         <source>Deactivate on</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_member.stop.1">
         <source>Automatically deactivate the account on this day.</source>
-        <target>Als u hier een datum specificeert, zal dit account gedeactiveerd worden op deze dag.</target>
+        <target>Automatisch deactiveren van account op deze dag.</target>
       </trans-unit>
       <trans-unit id="tl_member.personal_legend">
         <source>Personal data</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_member.show.0">
         <source>Member details</source>
-        <target>Lid details</target>
+        <target>Details van het lid</target>
       </trans-unit>
       <trans-unit id="tl_member.show.1">
         <source>Show the details of member ID %s</source>

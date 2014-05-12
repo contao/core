@@ -294,8 +294,8 @@
         <target>Tag title</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
-        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
-        <target>Qua pos ti surscriver il tag title (standard è &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</target>
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>Qua pos ti surscriver il tag title (standard è &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -451,7 +451,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>Local file</source>
-        <target>Datoteca Locala</target>
+        <target>Datoteca locala</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>

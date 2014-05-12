@@ -410,6 +410,14 @@
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
         <target>Вы можете ввести размер поля загрузки (атрибут &lt;em&gt;size&lt;/em&gt;).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Пользовательский шаблон поля формы</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Вы можете переписать шаблон поля формы по умолчанию.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
         <target>Добавить кнопку 'Отправить'</target>
@@ -469,6 +477,10 @@
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>
         <target>Строки и колонки</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Настройки шаблона</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

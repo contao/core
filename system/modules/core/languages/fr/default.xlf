@@ -1979,6 +1979,10 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
         <source>Page %s of %s</source>
         <target>Page %s de %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>global</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Le fichier %s a été transféré avec succès</target>

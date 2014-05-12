@@ -1979,6 +1979,10 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Page %s of %s</source>
         <target>Pagina %s di %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>globale</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>File %s caricato con successo</target>

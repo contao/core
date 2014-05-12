@@ -409,6 +409,14 @@
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
         <target>Adja meg a feltöltési mező méretét (&lt;em&gt;méret&lt;/em&gt; attribótum).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Egyedi űrlap mező sablon</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Itt felülírható az alapértelmezett űrlap mező sablon.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
         <target>Küldés gomb hozzáadása</target>
@@ -468,6 +476,10 @@
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>
         <target>Sorok és oszlopok</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Sablon beállítások</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

@@ -383,7 +383,7 @@
       </trans-unit>
       <trans-unit id="tl_content.customTpl.1">
         <source>Here you can overwrite the default element template.</source>
-        <target>初期設定のテンプレートを置き換えできます。</target>
+        <target>初期設定のコンテンツ要素のテンプレートを上書きできます。</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>

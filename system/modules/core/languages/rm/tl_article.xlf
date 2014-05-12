@@ -81,6 +81,14 @@
         <source>Hide the article if a member is logged in.</source>
         <target>Zuppentar l'artitgel sch'in commember è s'annunzià.</target>
       </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>Template persunalisà per artitgels</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>Qua pos ti surscriver il template da standard per artitgels.</target>
+      </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
         <target>Proteger l'artitgel</target>
@@ -160,6 +168,10 @@
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>Teaser da l'artitgel</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>Opziuns dal template</target>
       </trans-unit>
       <trans-unit id="tl_article.protected_legend">
         <source>Access protection</source>

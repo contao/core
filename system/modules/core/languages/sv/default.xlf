@@ -1970,6 +1970,9 @@ Detta e-postmeddelande har genererats av Contao. Du kan inte svara på det direk
         <source>Page %s of %s</source>
         <target>Sidan %s av %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Filen %s laddades upp</target>

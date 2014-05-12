@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
-        <target>Geef de URL van de extensie repository in van WSDL bestand.</target>
+        <target>Geef de URL van de extensie repository op van WSDL bestand.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>
-        <target>Talen om op terug te vallen</target>
+        <target>Fallback talen</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.1">
         <source>Here you can enter a comma separated list of ISO language codes to be used if an extension description is not available in the current back end language.</source>

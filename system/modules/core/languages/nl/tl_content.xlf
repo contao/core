@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_content.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>Geef de tekst op (u kunt gebruik maken van HTML tags).</target>
+        <target>U kunt HTML tags gebruiken om de tekst op te maken.</target>
       </trans-unit>
       <trans-unit id="tl_content.addImage.0">
         <source>Add an image</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_content.addImage.1">
         <source>Add an image to the content element.</source>
-        <target>Een afbeelding zal aan het inhoudselement toegevoegd worden.</target>
+        <target>Voeg een afbeelding toe aan het inhoudselement.</target>
       </trans-unit>
       <trans-unit id="tl_content.singleSRC.0">
         <source>Source file</source>
@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="tl_content.floating.0">
         <source>Image alignment</source>
-        <target>Afbeelding uitlijning</target>
+        <target>Uitlijning afbeelding</target>
       </trans-unit>
       <trans-unit id="tl_content.floating.1">
         <source>Please specify how to align the image.</source>
-        <target>Kies de uitlijning van de afbeelding. Een afbeelding kan boven of onder de tekst of bovenaan links of bovenaan rechts van de tekst weergegeven worden.</target>
+        <target>Kies de uitlijning van de afbeelding.</target>
       </trans-unit>
       <trans-unit id="tl_content.caption.0">
         <source>Image caption</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortIndex.1">
         <source>The number of the default sort column.</source>
-        <target>Geef het nummer van de standaard kolom op die u als eerste wilt sorteren (eerste kolom=0!).</target>
+        <target>Geef het nummer van de standaard kolom op die u als eerste wilt sorteren.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.0">
         <source>Sort order</source>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooType.0">
         <source>Operation mode</source>
-        <target>Variant</target>
+        <target>Bedrijfsmodus</target>
       </trans-unit>
       <trans-unit id="tl_content.mooType.1">
         <source>Please select the operation mode of the accordion element.</source>
@@ -259,7 +259,7 @@
       </trans-unit>
       <trans-unit id="tl_content.highlight.0">
         <source>Syntax highlighting</source>
-        <target>Syntax herkenning</target>
+        <target>Syntax markering</target>
       </trans-unit>
       <trans-unit id="tl_content.highlight.1">
         <source>Please choose a scripting language.</source>

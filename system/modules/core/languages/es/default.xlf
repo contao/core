@@ -1970,6 +1970,9 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
         <source>Page %s of %s</source>
         <target>Página %s de %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Archivo %s transferido con éxito</target>

@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
-        <target>Расскажите мне больше, пожалуйста</target>
+        <target>Пожалуйста, расскажите мне больше</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Инструкция Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;инструкции Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
-        <target>Ваш запрос был отображен на сайте, который не содержит опубликованных страниц.</target>
+        <target>Ваш запрос был отображен на сайте у которого еще нет  опубликованных страниц.</target>
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
-        <target>В настоящее время веб-сайт закрыт на техническое обслуживание. Пожалуйста, зайдите позже.</target>
+        <target>В настоящее время веб-сайт закрыт на техническое обслуживание. Пожалуйста, зайдите через некоторое время.</target>
       </trans-unit>
     </body>
   </file>
