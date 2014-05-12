@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Strip double quotes in the options wizard (see #6919).
+
+### Fixed
 Strip the insert tag flags before passing the tag name to the hooks (see #6860).
 
 ### Fixed
