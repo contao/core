@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly generate absolute URIs in `Controller::generateFrontendUrl()`.
+
+### Fixed
 Fix the link button padding (`a.tl_submit`).
 
 

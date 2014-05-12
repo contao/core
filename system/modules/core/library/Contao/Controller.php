@@ -2187,7 +2187,7 @@ abstract class Controller extends \System
 		// Add the domain if it differs from the current one (see #3765 and #6927)
 		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . $strUrl;
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 		elseif ($blnAbsolute)
 		{
