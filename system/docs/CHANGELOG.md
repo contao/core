@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Strip the insert tag flags before passing the tag name to the hooks (see #6860).
+
+### Fixed
 Catch Swift exceptions when sending form data via e-mail (see #6941).
 
 ### Update
