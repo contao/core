@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Check for reserved article aliases before validating the alias name (see #6978).
+
+### Fixed
 Store the UUID of uploaded files in the session (see #6986).
 
 ### Fixed
