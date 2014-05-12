@@ -555,7 +555,9 @@ class PageModel extends \Model
 		if ($objParentPage !== null && $objParentPage->type == 'root')
 		{
 			$this->rootId = $objParentPage->id;
-			$this->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
+			$this->rootAlias = $objParentPage->alias;
+			$this->rootTitle = $objParentPage->title;
+			$this->rootPageTitle = $objParentPage->pageTitle ?: $objParentPage->title;
 			$this->domain = $objParentPage->dns;
 			$this->rootLanguage = $objParentPage->language;
 			$this->language = $objParentPage->language;
