@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Correctly hide duplicated elements in the module wizard (see #6826).
+
+### Fixed
 Fix the mediabox "imgBackground" option (see #6866).
 
 ### Fixed
