@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Standardize the fallback behavior of the downloads/gallery element (see #6662).
+
+### Fixed
 Correctly hide duplicated elements in the module wizard (see #6826).
 
 ### Fixed
