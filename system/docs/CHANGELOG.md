@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly set the textarea value in the template (see #6995).
+
+### Fixed
 Make sure the security questions gets always generated (see #6990).
 
 ### Fixed

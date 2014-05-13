@@ -15,7 +15,7 @@
     <p class="error"><?php echo $this->getErrorAsString(); ?></p>
   <?php endif; ?>
 
-  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea<?php if ($this->class) echo ' ' . $this->class; ?>" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->fieldAttributes; ?>><?php echo $this->fieldValues; ?></textarea>
+  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea<?php if ($this->class) echo ' ' . $this->class; ?>" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->fieldAttributes; ?>><?php echo $this->fieldValue; ?></textarea>
 
   <?php if ($this->addSubmit): ?>
     <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
