@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Do not urldecode twice in `DC_Folder` (see #6840).
+
+### Fixed
 Standardize the fallback behavior of the downloads/gallery element (see #6662).
 
 ### Fixed
