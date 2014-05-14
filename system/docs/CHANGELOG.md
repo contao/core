@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Correctly detect binary fields during theme import (see #6852).
+
+### Fixed
 Do not urldecode twice in `DC_Folder` (see #6840).
 
 ### Fixed
