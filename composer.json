@@ -1,8 +1,14 @@
 {
 	"name": "contao/core",
-	"description": "Contao Open Source CMS",
 	"type": "project",
+	"description": "Contao Open Source CMS",
 	"license": "LGPL-3.0+",
+	"authors": [
+		{
+			"name": "Leo Feyer",
+			"homepage": "https://github.com/leofeyer"
+		}
+	],
 	"require": {
 		"php": ">=5.3.2",
 		"contao/idna": "dev-master",
