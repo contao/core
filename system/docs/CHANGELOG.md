@@ -20,8 +20,8 @@ Correctly generate absolute URIs in `Controller::generateFrontendUrl()`.
 Fix the link button padding (`a.tl_submit`).
 
 
-Version 3.3.RC2 (2014-05-09)
-----------------------------
+Version 3.3.0-RC2 (2014-05-09)
+------------------------------
 
 ### Update
 Update TinyMCE to version 4.0.26.
@@ -54,8 +54,8 @@ Correctly wrap long labels in the tree view (see #6954).
 Correctly add the WAI-ARIA attributes (see #6217).
 
 
-Version 3.3.RC1 (2014-05-02)
-----------------------------
+Version 3.3.0-RC1 (2014-05-02)
+------------------------------
 
 ### New
 Allow to override the default form field template (see #4547).
@@ -184,8 +184,8 @@ Added the insert tag flags "urlencode" and "rawurlencode" (see #6859).
 Add files and folders to the database in details view (see #6880).
 
 
-Version 3.3.beta1 (2014-04-11)
-------------------------------
+Version 3.3.0-beta1 (2014-04-11)
+--------------------------------
 
 ### New
 Add version control for editable files.
