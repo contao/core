@@ -1830,6 +1830,9 @@ fieldset.collapsed > legend {
 	#tl_versions {
 		display:none;
 	}
+	.mac .tl_panel select {
+		max-width:none;
+	}
 	.tl_version_panel .tl_select {
 		width:136px;
 	}
