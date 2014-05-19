@@ -1071,7 +1071,7 @@ abstract class Widget extends \Controller
 	 */
 	protected function isChecked($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionChecked(1, 1);
 		}
@@ -1089,7 +1089,7 @@ abstract class Widget extends \Controller
 	 */
 	protected function isSelected($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionSelected(1, 1);
 		}

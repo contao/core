@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Only fall back to the default option if there is no POST data (see #6899).
+
+### Fixed
 Do not override the event start time in `Events::addEvent()` (see #6701).
 
 ### Fixed
