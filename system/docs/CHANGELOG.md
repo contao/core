@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Do not override the event start time in `Events::addEvent()` (see #6701).
+
+### Fixed
 Correctly detect binary fields during theme import (see #6852).
 
 ### Fixed
