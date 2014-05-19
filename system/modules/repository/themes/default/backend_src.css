@@ -48,8 +48,8 @@
 .mod_repository table tr.title span.rightblock { display:block; float:right; }
 .mod_repository table tr.description td { padding-top:8px; padding-bottom:10px; line-height:1.3; }
 .mod_repository table tr.info th, .mod_repository table tr.info td { border-top:1px solid #fff; font-size:10px; }
-.mod_repository table .listcol1, .mod_repository table .listcol3, .mod_repository table .viewcol1, .mod_repository table .viewcol3 { width:23%; }
-.mod_repository table .listcol2, .mod_repository table .viewcol2 { width:27%; }
+.mod_repository table .listcol1, .mod_repository table .listcol3, .mod_repository table .viewcol1, .mod_repository table .viewcol3 { width:21%; }
+.mod_repository table .listcol2, .mod_repository table .viewcol2 { width:29%; }
 .mod_repository .col_functions { text-align:right; }
 
 /* Details view */
