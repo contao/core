@@ -40,7 +40,18 @@ class Index extends Frontend
 	 */
 	public function __construct()
 	{
-		// No BE user logged in
+		// Try to read from cache
+		$this->outputFromCache();
+
+		// Load the user object before calling the parent constructor
+		$this->import('FrontendUser', 'User');
+		parent::__construct();
+
+		// Check whether a user is logged in
+		define('BE_USER_LOGGED_IN', $this->getLoginStatus('BE_USER_AUTH'));
+		define('FE_USER_LOGGED_IN', $this->getLoginStatus('FE_USER_AUTH'));
+
+		// No back end user logged in
 		if (!$_SESSION['DISABLE_CACHE'])
 		{
 			// Maintenance mode (see #4561 and #6353)
@@ -53,17 +64,6 @@ class Index extends Frontend
 			// Disable the debug mode (see #6450)
 			Config::set('debugMode', false);
 		}
-
-		// Try to read from cache
-		$this->outputFromCache();
-
-		// Load the user object before calling the parent constructor
-		$this->import('FrontendUser', 'User');
-		parent::__construct();
-
-		// Check whether a user is logged in
-		define('BE_USER_LOGGED_IN', $this->getLoginStatus('BE_USER_AUTH'));
-		define('FE_USER_LOGGED_IN', $this->getLoginStatus('FE_USER_AUTH'));
 	}
 
 
@@ -282,7 +282,7 @@ class Index extends Frontend
 	protected function outputFromCache()
 	{
 		// Build the page if a user is (potentially) logged in or there is POST data
-		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || Config::get('debugMode'))
+		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || Config::get('debugMode') || Config::get('maintenanceMode'))
 		{
 			return;
 		}

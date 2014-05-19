@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Disable the maintenance screen if a back end user is logged in (see #7009).
+
+### Fixed
 Correctly set the textarea value in the template (see #6995).
 
 ### Fixed
