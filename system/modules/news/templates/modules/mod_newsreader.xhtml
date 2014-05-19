@@ -11,7 +11,7 @@
   <?php if ($this->allowComments && ($this->comments || !$this->requireLogin)): ?>
     <div class="ce_comments block">
       <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
-      <?php foreach ($this->comments as $comment) echo $comment; ?>
+      <?php echo implode('', $this->comments); ?>
       <?php echo $this->pagination; ?>
       <?php include $this->getTemplate('mod_comment_form', 'xhtml'); ?>
     </div>
