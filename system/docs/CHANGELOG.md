@@ -5,6 +5,9 @@ Version 3.2.10 (2014-05-XX)
 ---------------------------
 
 ### Fixed
+Allow for up to 13 characters in `Validator::isEmail()` (see #6950).
+
+### Fixed
 Only fall back to the default option if there is no POST data (see #6899).
 
 ### Fixed
