@@ -1712,6 +1712,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
 			{
 				$objVersions->restore(\Input::post('version'));
+
+				// Purge the script cache (see #7005)
+				if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+				{
+					$this->import('Automator');
+					$this->Automator->purgeScriptCache();
+				}
+
 				$this->reload();
 			}
 
@@ -1737,6 +1745,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$objMeta->save();
 
 					$objVersions->create();
+				}
+
+				// Purge the script cache (see #7005)
+				if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+				{
+					$this->import('Automator');
+					$this->Automator->purgeScriptCache();
 				}
 			}
 

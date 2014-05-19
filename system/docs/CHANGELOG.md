@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Purge the script cache if a style sheet is edited (see #7005).
+
+### Fixed
 Disable the maintenance screen if a back end user is logged in (see #7009).
 
 ### Fixed
