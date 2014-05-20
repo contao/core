@@ -942,7 +942,7 @@ abstract class Controller extends \System
 										$strForceLang = $objNext->language;
 									}
 
-									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -957,7 +957,7 @@ abstract class Controller extends \System
 									$strForceLang = $objNextPage->language;
 								}
 
-								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
+								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang, true);
 								break;
 						}
 
@@ -2131,11 +2131,11 @@ abstract class Controller extends \System
 	 * @param array   $arrRow       An array of page parameters
 	 * @param string  $strParams    An optional string of URL parameters
 	 * @param string  $strForceLang Force a certain language
-	 * @param boolean $blnAbsolute  If true, the return value is always an absolute URL
+	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnAbsolute=false)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
 		if (!\Config::get('disableAlias'))
 		{
@@ -2186,13 +2186,9 @@ abstract class Controller extends \System
 		}
 
 		// Add the domain if it differs from the current one (see #3765 and #6927)
-		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
 			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
-		}
-		elseif ($blnAbsolute)
-		{
-			$strUrl = \Environment::get('base') . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2340,7 +2336,13 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true); // see #4332
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
+
+		// Make sure the URL is absolute (see #4332)
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		{
+			$strUrl = \Environment::get('base') . $strUrl;
+		}
 
 		if (!$blnReturn)
 		{

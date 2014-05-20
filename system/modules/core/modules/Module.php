@@ -303,13 +303,13 @@ abstract class Module extends \Frontend
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
+						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 						break;
 				}
 
