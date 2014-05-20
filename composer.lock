@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "aa12ea6e52081e629e49421c5d23da93",
+    "hash": "6d4cdcb2f7758d6d10e800f237c5b093",
     "packages": [
         {
             "name": "contao/idna",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/idna.git",
-                "reference": "c43309b9f0b859263a1c9fdb0a8420281b1a1f4b"
+                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/idna/zipball/c43309b9f0b859263a1c9fdb0a8420281b1a1f4b",
-                "reference": "c43309b9f0b859263a1c9fdb0a8420281b1a1f4b",
+                "url": "https://api.github.com/repos/contao/idna/zipball/176e7549aeac534f3be8dfbf8a543fd9c54b431c",
+                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c",
                 "shasum": ""
             },
             "type": "library",
@@ -30,8 +30,14 @@
             "license": [
                 "LGPL-2.1+"
             ],
+            "authors": [
+                {
+                    "name": "Leo Feyer",
+                    "homepage": "https://github.com/leofeyer"
+                }
+            ],
             "description": "A library for encoding and decoding internationalized domain names.",
-            "time": "2014-03-20 10:23:25"
+            "time": "2014-05-17 19:04:55"
         },
         {
             "name": "contao/php-diff",
@@ -39,12 +45,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/php-diff.git",
-                "reference": "b7ed0df0b307a5a0e8565055b40022839aac0d5d"
+                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/php-diff/zipball/b7ed0df0b307a5a0e8565055b40022839aac0d5d",
-                "reference": "b7ed0df0b307a5a0e8565055b40022839aac0d5d",
+                "url": "https://api.github.com/repos/contao/php-diff/zipball/9928f73548f26c4b8627d78a3722e52f63efadbd",
+                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd",
                 "shasum": ""
             },
             "type": "library",
@@ -57,8 +63,14 @@
             "license": [
                 "BSD-3-Clause"
             ],
+            "authors": [
+                {
+                    "name": "Leo Feyer",
+                    "homepage": "https://github.com/leofeyer"
+                }
+            ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2014-03-19 16:06:20"
+            "time": "2014-05-17 19:04:01"
         },
         {
             "name": "contao/tcpdf",
@@ -66,12 +78,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/tcpdf.git",
-                "reference": "5b4e8f79e222df49f2e86e671f94e3597df733a2"
+                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/tcpdf/zipball/5b4e8f79e222df49f2e86e671f94e3597df733a2",
-                "reference": "5b4e8f79e222df49f2e86e671f94e3597df733a2",
+                "url": "https://api.github.com/repos/contao/tcpdf/zipball/2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
+                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
                 "shasum": ""
             },
             "require": {
@@ -103,8 +115,14 @@
             "license": [
                 "LGPLv3"
             ],
+            "authors": [
+                {
+                    "name": "Leo Feyer",
+                    "homepage": "https://github.com/leofeyer"
+                }
+            ],
             "description": "TCPDF is a PHP class for generating PDF documents.",
-            "time": "2014-03-19 15:29:08"
+            "time": "2014-05-17 19:04:30"
         },
         {
             "name": "leafo/lessphp",
@@ -350,12 +368,8 @@
             "time": "2013-04-11 10:22:09"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "contao/idna": 20,
@@ -365,7 +379,5 @@
     "platform": {
         "php": ">=5.3.2"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
