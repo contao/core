@@ -63,8 +63,9 @@ class Mysql extends \Database
 			throw new \Exception(mysql_error());
 		}
 
-		mysql_query("SET sql_mode=''", $this->resConnection);
 		mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+		mysql_query("SET sql_mode='" . $this->arrConfig['dbSqlMode'] . "'", $this->resConnection);
+
 		mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 	}
 

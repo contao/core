@@ -141,6 +141,7 @@ $GLOBALS['TL_CONFIG']['dbSocket']    = '';
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
+$GLOBALS['TL_CONFIG']['dbSqlMode']   = '';
 
 
 /**

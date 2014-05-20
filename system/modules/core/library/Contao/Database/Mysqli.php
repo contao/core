@@ -44,7 +44,10 @@ class Mysqli extends \Database
 			$host = 'p:' . $host;
 		}
 
-		$this->resConnection = new \mysqli($host, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
+		$this->resConnection = mysqli_init();
+
+		$this->resConnection->options(MYSQLI_INIT_COMMAND, "SET sql_mode='" . $this->arrConfig['dbSqlMode'] . "'");
+		$this->resConnection->real_connect($host, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbDatabase'], $this->arrConfig['dbPort'], $this->arrConfig['dbSocket']);
 
 		if ($this->resConnection->connect_error)
 		{

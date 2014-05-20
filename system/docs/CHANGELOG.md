@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Also set the `sql_mode` in the MySQLi driver (see #6996).
+
+### Fixed
 Purge the script cache if a style sheet is edited (see #7005).
 
 ### Fixed
