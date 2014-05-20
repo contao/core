@@ -282,7 +282,7 @@ class Index extends Frontend
 	protected function outputFromCache()
 	{
 		// Build the page if a user is (potentially) logged in or there is POST data
-		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || Config::get('debugMode') || Config::get('maintenanceMode'))
+		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || Config::get('debugMode'))
 		{
 			return;
 		}
