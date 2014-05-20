@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.10 (2014-05-XX)
 ---------------------------
 
+### Update
+Update MooTools to version 1.5.0 (see #6924).
+
 ### Fixed
 Allow for up to 13 characters in `Validator::isEmail()` (see #6950).
 
