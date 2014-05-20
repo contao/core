@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.10 (2014-05-XX)
 ---------------------------
 
+### Fixed
+Correctly urlencode folder names in the file manager (see #6925).
+
 ### Update
 Update MooTools to version 1.5.0 (see #6924).
 
