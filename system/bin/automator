@@ -11,6 +11,15 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$file = fopen(__FILE__, 'r');
+
+// Lock the file
+if (!flock($file, LOCK_EX|LOCK_NB)) {
+	echo "  The script is running already.\n";
+	fclose($file);
+	exit;
+}
+
 // No method name given
 if (count($argv) == 1) {
 	echo "  Please pass the method name as argument (see -h).\n";
@@ -54,3 +63,7 @@ if (!in_array($argv[1], $commands)) {
 // Run
 $automator = new Automator();
 $automator->$argv[1]();
+
+// Release the lock
+flock($file, LOCK_UN);
+fclose($file);

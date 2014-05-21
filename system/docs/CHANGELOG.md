@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Prevent parallel execution of the new command line scripts.
+
+### Fixed
 Also set the `sql_mode` in the MySQLi driver (see #6996).
 
 ### Fixed

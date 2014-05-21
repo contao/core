@@ -11,6 +11,15 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+$file = fopen(__FILE__, 'r');
+
+// Lock the file
+if (!flock($file, LOCK_EX|LOCK_NB)) {
+	echo "  The script is running already.\n";
+	fclose($file);
+	exit;
+}
+
 // Help
 if (in_array('-h', $argv)) {
 	echo "  Usage: {$argv[0]} [-h]\n";
@@ -29,3 +38,7 @@ $strLog = Dbafs::syncFiles();
 
 // Confirm
 echo "  Synchronization complete (see $strLog).\n";
+
+// Release the lock
+flock($file, LOCK_UN);
+fclose($file);
