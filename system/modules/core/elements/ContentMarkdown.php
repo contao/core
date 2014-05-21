@@ -63,5 +63,6 @@ class ContentMarkdown extends \ContentElement
 	protected function compile()
 	{
 		$this->Template->content = \Michelf\MarkdownExtra::defaultTransform($this->code);
+		$this->Template->content = \Input::stripTags($this->Template->content, \Config::get('allowedTags'));
 	}
 }
