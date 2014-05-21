@@ -503,7 +503,7 @@
       </trans-unit>
       <trans-unit id="PTY.forward.1">
         <source>This type of page automatically forwards visitors to another page within the site structure.</source>
-        <target>Deze pagina verwijst u automatisch door naar een andere pagina van de website gebruik makende van een pagina ID of een pagina alias.</target>
+        <target>Deze pagina verwijst u automatisch door naar een andere pagina van de website gebruik makend van een pagina ID of een pagina alias.</target>
       </trans-unit>
       <trans-unit id="PTY.root.0">
         <source>Website root</source>
@@ -1805,7 +1805,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.adminText">
         <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
-        <target>Een nieuw lid (ID %s) registreerde op uw website. In het geval dat u geen gebruik maakt van activatie via e-mail, moet u dit account handmatig activeren in het backend van de site.</target>
+        <target>Een nieuw lid (ID %s) heeft zich geregistreerd op uw website.%s In het geval dat u geen gebruik maakt van activatie via e-mail, moet u dit account handmatig activeren in het backend van de site.</target>
       </trans-unit>
       <trans-unit id="MSC.requestPassword">
         <source>Request password</source>
@@ -2041,7 +2041,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.readMore">
         <source>Read the article: %s</source>
-        <target>Lees het volledig artikel %s</target>
+        <target>Lees het artikel: %s</target>
       </trans-unit>
       <trans-unit id="MSC.targetPage">
         <source>Target page</source>

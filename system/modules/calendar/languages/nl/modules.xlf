@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MOD.calendar.0">
         <source>Events</source>
-        <target>Kalender/Evenementen</target>
+        <target>Evenementen</target>
       </trans-unit>
       <trans-unit id="MOD.calendar.1">
         <source>Manage events and display them in a calendar or event list</source>

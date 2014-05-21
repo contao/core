@@ -102,6 +102,9 @@ img {
 .ie8 img {
 	width:auto; /* see #5789 */
 }
+.caption {
+	max-width:100%; /* see #6889 */
+}
 
 /**
  * Format the Contao image galleries (now rendered as unordered lists)

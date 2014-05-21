@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MOD.faq.0">
         <source>FAQ</source>
-        <target>FAQ</target>
+        <target>Вопросы и ответы</target>
       </trans-unit>
       <trans-unit id="MOD.faq.1">
         <source>Manage frequently asked questions</source>
@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="FMD.faq">
         <source>FAQ</source>
-        <target>FAQ</target>
+        <target>Вопросы и ответы</target>
       </trans-unit>
       <trans-unit id="FMD.faqlist.0">
         <source>FAQ list</source>
-        <target>Список FAQ</target>
+        <target>Список вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="FMD.faqlist.1">
         <source>Adds a list of frequently asked questions to the page</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqreader.0">
         <source>FAQ reader</source>
-        <target>Просмотрщик FAQ</target>
+        <target>Просмотрщик вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="FMD.faqreader.1">
         <source>Shows the answer to a frequently asked question</source>
@@ -31,11 +31,11 @@
       </trans-unit>
       <trans-unit id="FMD.faqpage.0">
         <source>FAQ page</source>
-        <target>Страница FAQ</target>
+        <target>Страница вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="FMD.faqpage.1">
         <source>Shows the FAQ list and FAQ reader on the same page</source>
-        <target>Показывает список FAQ и просмотрщик FAQ на одной странице</target>
+        <target>Показывает список и просмотрщик вопросов и ответов на одной странице</target>
       </trans-unit>
     </body>
   </file>

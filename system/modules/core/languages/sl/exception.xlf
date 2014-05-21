@@ -19,6 +19,7 @@
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
+        <target>Če želite spremeniti to sporočilo, ustvarite predlogo z imenom &lt;em&gt;%s&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.errorOccurred">
         <source>An error occurred while executing this script. Something does not work properly.</source>
@@ -72,9 +73,11 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteFixTwo">
         <source>This will open the Contao install tool, which will guide you through the installation process.</source>
+        <target>S tem se bo odprlo namestitveno orodje za Contao, ki vas bo vodilo skozi celoten proces namestitve.</target>
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>Za več informacij obiščite &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao priročnik&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
@@ -89,6 +92,7 @@
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
+        <target>Preusmeritvene strani ni mogoče najti</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
@@ -108,12 +112,14 @@
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>Postavitev strani ni določena</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>Preverite, ali ste določili postavitev strani vsem vrhnjim stranem v strukturi spletnega mesta.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
@@ -132,6 +138,7 @@
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>Bodisi niste prijavljeni ali pa nimate odobrenega dostopa do zahtevane strani.</target>
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>

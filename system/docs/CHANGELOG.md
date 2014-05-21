@@ -1,6 +1,73 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.10 (2014-05-21)
+---------------------------
+
+### Fixed
+Correctly urlencode folder names in the file manager (see #6925).
+
+### Update
+Update MooTools to version 1.5.0 (see #6924).
+
+### Fixed
+Allow for up to 13 characters in `Validator::isEmail()` (see #6950).
+
+### Fixed
+Only fall back to the default option if there is no POST data (see #6899).
+
+### Fixed
+Do not override the event start time in `Events::addEvent()` (see #6701).
+
+### Fixed
+Correctly detect binary fields during theme import (see #6852).
+
+### Fixed
+Do not urldecode twice in `DC_Folder` (see #6840).
+
+### Fixed
+Standardize the fallback behavior of the downloads/gallery element (see #6662).
+
+### Fixed
+Correctly hide duplicated elements in the module wizard (see #6826).
+
+### Fixed
+Fix the mediabox "imgBackground" option (see #6866).
+
+### Fixed
+Strip double quotes in the options wizard (see #6919).
+
+### Fixed
+Strip the insert tag flags before passing the tag name to the hooks (see #6860).
+
+### Fixed
+Catch Swift exceptions when sending form data via e-mail (see #6941).
+
+### Update
+Update the back end date picker to version 2.2.0.
+
+### Update
+Update ACE to version 1.1.3.
+
+### Fixed
+Check for reserved article aliases before validating the alias name (see #6978).
+
+### Fixed
+Store the UUID of uploaded files in the session (see #6986).
+
+### Fixed
+Only assume a moved file or folder for new resources (see #6907).
+
+### Fixed
+Correctly strip the file extension in the `File` class (see #6968).
+
+### Fixed
+Remove the menu when `Swipe.kill()` is executed (see #6861).
+
+### Fixed
+Consider the protocol when embedding YouTube videos (see #6900).
+
+
 Version 3.2.9 (2014-04-07)
 --------------------------
 

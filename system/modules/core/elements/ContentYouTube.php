@@ -84,9 +84,12 @@ class ContentYouTube extends \ContentElement
 			}
 		}
 
+		// Check for SSL (see #6900)
+		$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+
 		$objFile = new \stdClass();
 		$objFile->mime = 'video/x-youtube';
-		$objFile->path = 'http://www.youtube.com/watch?v=' . $this->youtube;
+		$objFile->path = $protocol . 'www.youtube.com/watch?v=' . $this->youtube;
 
 		$this->Template->isVideo = true;
 		$this->Template->files = array($objFile);

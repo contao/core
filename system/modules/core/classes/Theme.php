@@ -421,6 +421,21 @@ class Theme extends \Backend
 					continue;
 				}
 
+				// Load the DCA
+				$this->loadDataContainer($table);
+
+				$arrOrder = array();
+				$arrFields = $GLOBALS['TL_DCA'][$table]['fields'];
+
+				// Get the order fields
+				foreach ($arrFields as $arrField)
+				{
+					if (isset($arrField['eval']['orderField']))
+					{
+						$arrOrder[] = $arrField['eval']['orderField'];
+					}
+				}
+
 				// Loop through the rows
 				for ($j=0; $j<$rows->length; $j++)
 				{
@@ -541,7 +556,7 @@ class Theme extends \Backend
 						}
 
 						// Replace the file paths in singleSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'fileTree' && !$GLOBALS['TL_DCA'][$table]['fields'][$name]['eval']['multiple'])
 						{
 							if (!$value)
 							{
@@ -559,7 +574,7 @@ class Theme extends \Backend
 						}
 
 						// Replace the file paths in multiSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_module' && $name == 'orderSRC') || ($table == 'tl_layout' && $name == 'external') || ($table == 'tl_layout' && $name == 'orderExt'))
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'fileTree' || in_array($name, $arrOrder))
 						{
 							$tmp = deserialize($value);
 

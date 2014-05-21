@@ -50,7 +50,7 @@
     <div id="header">
       <h1>Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?></h1>
       <div>
-        <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
+        <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login&amp;ref=<?php echo TL_REFERER_ID; ?>" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
         <span class="header_preview_container"><a href="contao/preview.php<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->previewTitle; ?>" accesskey="f"><?php echo $this->preview; ?></a></span>
         <span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->homeTitle; ?>" accesskey="h"><?php echo $this->home; ?></a></span>
         <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/" class="header_logout" title="<?php echo $this->logoutTitle; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>

@@ -206,8 +206,8 @@
         <target>Zusätzliche Stylesheets</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Hier können Sie Stylesheets aus dem Dateisystem hinzufügen (z.B. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <source>Here you can add additional CSS files from the file system.</source>
+        <target>Hier können Sie zusätzliche CSS-Dateien aus dem Dateisystem hinzufügen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>

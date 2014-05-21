@@ -206,8 +206,7 @@
         <target>နောက်ထပ်စတိုင်အလွှာများ</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>ဖိုင်စနစ်မှစတိုင်အလွှာများထည့်နိုင် (ဥပမာ &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;)။</target>
+        <source>Here you can add additional CSS files from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>

@@ -1869,7 +1869,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
-        <target>Descrione</target>
+        <target>Descrizione</target>
       </trans-unit>
       <trans-unit id="MSC.noVersions">
         <source>Currently there are no versions.</source>
@@ -2121,7 +2121,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
-        <target>GiB</target>
+        <target>GB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
@@ -2129,15 +2129,15 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>
-        <target>PiB</target>
+        <target>PB</target>
       </trans-unit>
       <trans-unit id="UNITS.6">
         <source>EiB</source>
-        <target>EiB</target>
+        <target>EB</target>
       </trans-unit>
       <trans-unit id="UNITS.7">
         <source>ZiB</source>
-        <target>ZiB</target>
+        <target>ZB</target>
       </trans-unit>
       <trans-unit id="UNITS.8">
         <source>YiB</source>

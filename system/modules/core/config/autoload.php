@@ -265,6 +265,7 @@ TemplateLoader::addFiles(array
 	'be_rebuild_index'    => 'system/modules/core/templates/backend',
 	'be_referer'          => 'system/modules/core/templates/backend',
 	'be_switch'           => 'system/modules/core/templates/backend',
+	'be_unavailable'      => 'system/modules/core/templates/backend',
 	'be_welcome'          => 'system/modules/core/templates/backend',
 	'be_widget'           => 'system/modules/core/templates/backend',
 	'be_widget_chk'       => 'system/modules/core/templates/backend',

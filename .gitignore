@@ -28,4 +28,5 @@ nbproject/
 /system/cron/cron.txt
 /system/logs/*
 /system/tmp/*
+/templates/*
 /vendor/

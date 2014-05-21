@@ -360,7 +360,7 @@ h2.sub_headline_index {
 	left:0;
 	bottom:0;
 	width:100%;
-	height:52px;
+	max-height:52px;
 }
 .tl_submit_container {
 	padding:12px 18px;
@@ -392,7 +392,7 @@ h2.sub_headline_index {
 	padding:4px 2px;
 }
 .tl_edit_preview {
-	margin:18px 18px 6px;
+	margin-top:18px;
 }
 .tl_edit_preview img {
 	padding:2px;
@@ -774,7 +774,7 @@ label.tl_change_selected {
 
 /* Picker */
 .selector_container ul {
-	margin:0 0 9px;
+	margin:0 0 3px;
 	padding:0;
 	list-style-type:none;
 	overflow:hidden;
@@ -785,6 +785,9 @@ label.tl_change_selected {
 }
 .selector_container img {
 	vertical-align:top;
+}
+.selector_container p {
+	margin-bottom:2px;
 }
 ul.sgallery {
 	overflow:hidden;

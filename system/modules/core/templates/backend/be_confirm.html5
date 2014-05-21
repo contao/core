@@ -38,7 +38,7 @@
   <div id="container">
 
     <div id="main">
-      <p><img class="pngfix" src="system/modules/repository/themes/default/images/stop128.png" width="128" height="128" alt=""></p>
+      <p><img src="system/themes/<?php echo $this->theme; ?>/images/stop.png" width="128" height="128" alt=""></p>
       <form action="contao/confirm.php" class="tl_form" method="post">
         <div class="tl_formbody_edit">
           <input type="hidden" name="FORM_SUBMIT" value="invalid_token_url">

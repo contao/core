@@ -97,7 +97,12 @@ class CronJob extends Frontend
 
 			// Update the database before the jobs are executed, in case one of them fails
 			$this->Database->query("UPDATE tl_cron SET value=$intCurrent WHERE name='$strInterval'");
-			$this->log('Running the ' . $strInterval . ' cron jobs', __METHOD__, TL_CRON);
+
+			// Add a log entry if in debug mode (see #4729)
+			if (Config::get('debugMode'))
+			{
+				$this->log('Running the ' . $strInterval . ' cron jobs', __METHOD__, TL_CRON);
+			}
 
 			foreach ($GLOBALS['TL_CRON'][$strInterval] as $callback)
 			{
@@ -105,7 +110,11 @@ class CronJob extends Frontend
 				$this->$callback[0]->$callback[1]();
 			}
 
-			$this->log(ucfirst($strInterval) . ' cron jobs complete', __METHOD__, TL_CRON);
+			// Add a log entry if in debug mode (see #4729)
+			if (Config::get('debugMode'))
+			{
+				$this->log(ucfirst($strInterval) . ' cron jobs complete', __METHOD__, TL_CRON);
+			}
 		}
 	}
 

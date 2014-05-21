@@ -3,19 +3,19 @@
     <body>
       <trans-unit id="tl_module.faq_categories.0">
         <source>FAQ categories</source>
-        <target>Категории FAQ</target>
+        <target>Категории вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_categories.1">
         <source>Please select one or more FAQ categories.</source>
-        <target>Выберите одну или несколько категорий FAQ.</target>
+        <target>Выберите одну или несколько категорий вопросов и ответов.</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.0">
         <source>FAQ reader module</source>
-        <target>Модуль просмотрщика FAQ</target>
+        <target>Модуль просмотрщика вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.1">
         <source>Automatically switch to the FAQ reader if an item has been selected.</source>
-        <target>Автоматически переключить на просмотрщик FAQ если выбран элемент.</target>
+        <target>Автоматически переключить на просмотрщик вопросов и ответов если выбран элемент.</target>
       </trans-unit>
     </body>
   </file>

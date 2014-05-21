@@ -462,7 +462,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->Session->set('CLIPBOARD', $arrClipboard);
 
 		$this->Files->mkdir($strFolder . '/__new__');
-		$this->redirect(html_entity_decode($this->switchToEdit($strFolder . '/__new__')));
+		$this->redirect(html_entity_decode($this->switchToEdit($this->urlEncode($strFolder) . '/__new__')));
 	}
 
 
@@ -567,7 +567,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->cut(urldecode($id));
+				$this->cut($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -703,7 +703,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->copy(urldecode($id));
+				$this->copy($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -803,7 +803,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($ids as $id)
 			{
-				$this->delete(urldecode($id));
+				$this->delete($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -1159,23 +1159,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$version = '';
 		}
 
-		$strPreview = '';
-
-		// Show a preview image (see #4948)
-		if ($this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
-		{
-			$objFile = new \File($this->objActiveRecord->path);
-
-			if ($objFile->isGdImage)
-			{
-				$strPreview = '
-
-<div class="tl_edit_preview">
-' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
-</div>';
-			}
-		}
-
 		// Submit buttons
 		$arrButtons = array();
 		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
@@ -1224,7 +1207,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
-'.\Message::generate().$strPreview.'
+'.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -1273,7 +1256,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 				}
 
-				$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', __METHOD__, TL_GENERAL);
+				$this->log('A new version of file "'.$objFile->path.'" has been created', __METHOD__, TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -1399,7 +1382,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					// Load the current value
 					if ($v == 'name')
 					{
-						$pathinfo = pathinfo(urldecode($id));
+						$pathinfo = pathinfo($id); // do not urldecode() here (see #6840)
 
 						$this->strPath = $pathinfo['dirname'];
 						$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
@@ -1484,7 +1467,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$this->log('A new version of record "'.$this->strTable.'.id='.$objFile->id.'" has been created', __METHOD__, TL_GENERAL);
+						$this->log('A new version of file "'.$objFile->path.'" has been created', __METHOD__, TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)

@@ -206,8 +206,8 @@
         <target>Feuilles de style additionnelles</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>Ajouter des feuilles de style à partir de l'explorateur de fichiers (ex. : &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</target>
+        <source>Here you can add additional CSS files from the file system.</source>
+        <target>Ici, vous pouvez ajouter des fichiers CSS supplémentaires à partir du système de fichiers.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>

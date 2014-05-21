@@ -35,7 +35,7 @@ class Repository
 		array(
 			'alpha1', 'alpha2', 'alpha3',
 			'beta1', 'beta2', 'beta3',
-			'rc1', 'rc2', 'rc3',
+			'RC1', 'RC2', 'RC3',
 			'stable'
 		);
 
@@ -53,7 +53,7 @@ class Repository
 	 * Example:
 	 * <code>
 	 * echo Repository::formatVersion(10030042);
-	 * // will output: 1.3.4 alpha3
+	 * // will output: 1.3.4-alpha3
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
@@ -68,7 +68,7 @@ class Repository
 		$aVersion	= (int)($aVersion / 1000);
 		$minor		= $aVersion % 1000;
 		$major		= (int)($aVersion / 1000);
-		return "$major.$minor.$micro ".self::$mStatusName[$status];
+		return $status < 9 ? "$major.$minor.$micro-".self::$mStatusName[$status] : "$major.$minor.$micro";
 	} // formatVersion
 
 	/**
@@ -178,14 +178,14 @@ class Repository
 	public static function encodeVersion($aVersion)
 	{
 		$matches = array();
-		if (preg_match('/(\d{1,3})\.?(\d{1,3})\.?(\d{1,3})\s*(\w*)/', $aVersion, $matches)) {
-			$stat = mb_strtolower($matches[4]);
-			$v = array_search($stat, self::$mStatusName);
+		if (preg_match('/(\d{1,3})\.(\d{1,3})\.(\d{1,3})([ \-](\w+))?/', $aVersion, $matches)) {
+			$stat = strtolower($matches[5]);
+			$v = array_search($stat, array_map('strtolower', self::$mStatusName));
 			if ($v === false) $v = 9; // assume stable
 			return (($matches[1] * 1000 + $matches[2]) * 1000 + $matches[3]) * 10 + $v;
-		} elseif (preg_match('/(\d{1,3})\.?(\d{1,3})\.?(\w*)/', $aVersion, $matches)) {
-			$stat = mb_strtolower($matches[3]);
-			$v = array_search($stat, self::$mStatusName);
+		} elseif (preg_match('/(\d{1,3})\.(\d{1,3})\.(\w*)/', $aVersion, $matches)) {
+			$stat = strtolower($matches[3]);
+			$v = array_search($stat, array_map('strtolower', self::$mStatusName));
 			if ($v === false) $v = 9; // assume stable
 			return (($matches[1] * 1000 + $matches[2]) * 1000) * 10 + $v;
 		} // if
