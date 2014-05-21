@@ -627,7 +627,7 @@
       </trans-unit>
       <trans-unit id="tl_content.template_legend">
         <source>Template settings</source>
-        <target>Настройки шаблонов</target>
+        <target>Настройки шаблона</target>
       </trans-unit>
       <trans-unit id="tl_content.player_legend">
         <source>Player settings</source>

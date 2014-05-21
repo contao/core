@@ -1,6 +1,16 @@
-// MooTools: the javascript framework.
-// Load this file's selection again by visiting: http://mootools.net/more/dffb9509b678b654fc3c46646d99cf07 
-// Or build this file again with packager using: packager build More/More More/Class.Refactor More/Class.Binds More/Class.Occlude More/Chain.Wait More/Array.Extras More/Date More/Date.Extras More/String.Extras More/String.QueryString More/URI More/URI.Relative More/Hash.Extras More/Elements.From More/Element.Measure More/Element.Position More/Element.Shortcuts More/Form.Request More/Form.Request.Append More/OverText More/Fx.Elements More/Fx.Accordion More/Fx.Scroll More/Fx.Slide More/Fx.SmoothScroll More/Fx.Sort More/Drag More/Drag.Move More/Sortables More/Assets More/Color More/Hash.Cookie More/Keyboard More/Keyboard.Extras More/Scroller More/Tips More/Locale
+/*
+---
+MooTools: the javascript framework
+
+web build:
+ - http://mootools.net/more/c619d3650feb28db08dc541badaf43d5
+
+packager build:
+ - packager build More/More More/Class.Refactor More/Class.Binds More/Class.Occlude More/Chain.Wait More/Array.Extras More/Date More/Date.Extras More/String.Extras More/String.QueryString More/URI More/URI.Relative More/Hash.Extras More/Elements.From More/Element.Measure More/Element.Position More/Element.Shortcuts More/Form.Request More/Form.Request.Append More/OverText More/Fx.Elements More/Fx.Accordion More/Fx.Scroll More/Fx.Slide More/Fx.SmoothScroll More/Fx.Sort More/Drag More/Drag.Move More/Sortables More/Assets More/Color More/Hash.Cookie More/Swiff More/Keyboard More/Keyboard.Extras More/Scroller More/Tips More/Locale
+
+...
+*/
+
 /*
 ---
 
@@ -31,8 +41,8 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	'version': '1.4.0.1',
-	'build': 'a4244edf2aa97ac8a196fc96082dd35af1abab87'
+	version: '1.5.0',
+	build: '73db5e24e6e9c5c87b3a27aebef2248053f7db37'
 };
 
 
@@ -52,7 +62,7 @@ authors:
 
 requires:
   - Core/Class
-  - /MooTools.More
+  - MooTools.More
 
 # Some modules declare themselves dependent on Class.Refactor
 provides: [Class.refactor, Class.Refactor]
@@ -95,7 +105,7 @@ authors:
 
 requires:
   - Core/Class
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Class.Binds]
 
@@ -135,7 +145,7 @@ authors:
 requires:
   - Core/Class
   - Core/Element
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Class.Occlude]
 
@@ -176,7 +186,7 @@ requires:
   - Core/Chain
   - Core/Element
   - Core/Fx
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Chain.Wait]
 
@@ -266,7 +276,9 @@ Array.implement({
 	sum: function(){
 		var result = 0, l = this.length;
 		if (l){
-			while (l--) result += this[l];
+			while (l--){
+				if (this[l] != null) result += parseFloat(this[l]);
+			}
 		}
 		return result;
 	},
@@ -297,6 +309,12 @@ Array.implement({
 			if (i in this) value = value === nil ? this[i] : fn.call(null, value, this[i], i, this);
 		}
 		return value;
+	},
+
+	pluck: function(prop){
+		return this.map(function(item){
+			return item[prop];
+		});
 	}
 
 });
@@ -320,7 +338,7 @@ authors:
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Object.Extras]
 
@@ -389,8 +407,8 @@ authors:
 
 requires:
   - Core/Events
-  - /Object.Extras
-  - /MooTools.More
+  - Object.Extras
+  - MooTools.More
 
 provides: [Locale, Lang]
 
@@ -553,7 +571,7 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Locale
+  - Locale
 
 provides: [Locale.en-US.Date]
 
@@ -1197,7 +1215,7 @@ authors:
   - Scott Kyle
 
 requires:
-  - /Date
+  - Date
 
 provides: [Date.Extras]
 
@@ -1353,10 +1371,8 @@ var special = {
 	'S': /[ŠŞŚ]/g,
 	't': /[ťţ]/g,
 	'T': /[ŤŢ]/g,
-	'ue': /[ü]/g,
-	'UE': /[Ü]/g,
-	'u': /[ùúûůµ]/g,
-	'U': /[ÙÚÛŮ]/g,
+	'u': /[ùúûůüµ]/g,
+	'U': /[ÙÚÛŮÜ]/g,
 	'y': /[ÿý]/g,
 	'Y': /[ŸÝ]/g,
 	'z': /[žźż]/g,
@@ -1381,7 +1397,16 @@ tidy = {
 	'-': /[\u2013]/g,
 //	'--': /[\u2014]/g,
 	'&raquo;': /[\uFFFD]/g
-};
+},
+
+conversions = {
+	ms: 1,
+	s: 1000,
+	m: 6e4,
+	h: 36e5
+},
+
+findUnits = /(\d*.?\d+)([msh]+)/;
 
 var walk = function(string, replacements){
 	var result = string, key;
@@ -1443,6 +1468,13 @@ String.implement({
 			if (trail) string += trail;
 		}
 		return string;
+	},
+
+	ms: function(){
+	  // "Borrowed" from https://gist.github.com/1503944
+		var units = findUnits.exec(this);
+		if (units == null) return Number(this);
+		return Number(units[1]) * conversions[units[2]];
 	}
 
 });
@@ -1470,7 +1502,7 @@ authors:
 requires:
   - Core/Array
   - Core/String
-  - /MooTools.More
+  - MooTools.More
 
 provides: [String.QueryString]
 
@@ -1540,7 +1572,7 @@ requires:
   - Core/Class
   - Core/Class.Extras
   - Core/Element
-  - /String.QueryString
+  - String.QueryString
 
 provides: [URI]
 
@@ -1658,7 +1690,7 @@ var URI = this.URI = new Class({
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge){
-			values = Object.merge(this.getData(), values);
+			values = Object.merge(this.getData(null, part), values);
 		}
 		return this.set(part || 'query', Object.toQueryString(values));
 	},
@@ -1707,8 +1739,8 @@ authors:
 
 
 requires:
-  - /Class.refactor
-  - /URI
+  - Class.refactor
+  - URI
 
 provides: [URI.Relative]
 
@@ -1761,7 +1793,7 @@ license: MIT-style license.
 
 requires:
   - Core/Object
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Hash]
 
@@ -1912,8 +1944,8 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Hash
-  - /Object.Extras
+  - Hash
+  - Object.Extras
 
 provides: [Hash.Extras]
 
@@ -1954,7 +1986,7 @@ authors:
 requires:
   - Core/String
   - Core/Element
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Elements.from, Elements.From]
 
@@ -1964,7 +1996,7 @@ provides: [Elements.from, Elements.From]
 Elements.from = function(text, excludeScripts){
 	if (excludeScripts || excludeScripts == null) text = text.stripScripts();
 
-	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
+	var container, match = text.match(/^\s*(?:<!--.*?-->\s*)*<(t[dhr]|tbody|tfoot|thead)/i);
 
 	if (match){
 		container = new Element('table');
@@ -1998,7 +2030,7 @@ authors:
 requires:
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Measure]
 
@@ -2215,13 +2247,15 @@ var local = Element.Position = {
 	},
 
 	setOffsetOption: function(element, options){
-		var parentOffset = {x: 0, y: 0},
-			offsetParent = element.measure(function(){
-				return document.id(this.getOffsetParent());
-			}),
-			parentScroll = offsetParent.getScroll();
+		var parentOffset = {x: 0, y: 0};
+		var parentScroll = {x: 0, y: 0};
+		var offsetParent = element.measure(function(){
+			return document.id(this.getOffsetParent());
+		});
 
 		if (!offsetParent || offsetParent == element.getDocument().body) return;
+
+		parentScroll = offsetParent.getScroll();
 		parentOffset = offsetParent.measure(function(){
 			var position = this.getPosition();
 			if (this.getStyle('position') == 'fixed'){
@@ -2401,7 +2435,7 @@ authors:
 
 requires:
   - Core/Element.Style
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Element.Shortcuts]
 
@@ -2482,15 +2516,22 @@ requires:
   - Core/Element.Style
   - Core/Options
   - Core/Events
-  - /Element.Position
-  - /Class.Occlude
+  - Element.Position
+  - Class.Occlude
 
 provides: [IframeShim]
 
 ...
 */
 
-var IframeShim = new Class({
+(function(){
+
+var browsers = false;
+//<1.4compat>
+browsers = Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac);
+//</1.4compat>
+
+this.IframeShim = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -2501,7 +2542,7 @@ var IframeShim = new Class({
 		zIndex: null,
 		margin: 0,
 		offset: {x: 0, y: 0},
-		browsers: (Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac))
+		browsers: browsers
 	},
 
 	property: 'IframeShim',
@@ -2590,6 +2631,8 @@ var IframeShim = new Class({
 
 });
 
+})();
+
 window.addEvent('load', function(){
 	IframeShim.ready = true;
 });
@@ -2613,9 +2656,9 @@ requires:
   - Core/Options
   - Core/Events
   - Core/Element.Event
-  - /Class.Binds
-  - /Element.Position
-  - /IframeShim
+  - Class.Binds
+  - Element.Position
+  - IframeShim
 
 provides: [Mask]
 
@@ -2678,7 +2721,7 @@ var Mask = new Class({
 	},
 
 	inject: function(target, where){
-		where = where || (this.options.inject ? this.options.inject.where : '') || this.target == document.body ? 'inside' : 'after';
+		where = where || (this.options.inject ? this.options.inject.where : '') || (this.target == document.body ? 'inside' : 'after');
 		target = target || (this.options.inject && this.options.inject.target) || this.target;
 
 		this.element.inject(target, where);
@@ -2825,8 +2868,8 @@ authors:
 requires:
   - Core/Fx.Tween
   - Core/Request
-  - /Class.refactor
-  - /Mask
+  - Class.refactor
+  - Mask
 
 provides: [Spinner]
 
@@ -2900,6 +2943,7 @@ var Spinner = new Class({
 			return this;
 		}
 
+		this.target.set('aria-busy', 'true');
 		this.active = true;
 
 		return this.parent(noFx);
@@ -2934,7 +2978,10 @@ var Spinner = new Class({
 			this.callChain.delay(20, this);
 			return this;
 		}
+
+		this.target.set('aria-busy', 'false');
 		this.active = true;
+
 		return this.parent(noFx);
 	},
 
@@ -3038,7 +3085,7 @@ license: MIT-style license
 authors:
   - Arian Stolwijk
 
-requires: [Core/Class.Extras, Core/Slick.Parser, More/MooTools.More]
+requires: [Core/Class.Extras, Core/Slick.Parser, MooTools.More]
 
 provides: [Events.Pseudos]
 
@@ -3199,7 +3246,7 @@ authors:
 
 requires: [Core/Element.Event, Core/Element.Delegation, Events.Pseudos]
 
-provides: [Element.Event.Pseudos, Element.Delegation]
+provides: [Element.Event.Pseudos, Element.Delegation.Pseudo]
 
 ...
 */
@@ -3239,11 +3286,11 @@ authors:
 
 requires:
   - Core/Request.HTML
-  - /Class.Binds
-  - /Class.Occlude
-  - /Spinner
-  - /String.QueryString
-  - /Element.Delegation
+  - Class.Binds
+  - Class.Occlude
+  - Spinner
+  - String.QueryString
+  - Element.Delegation.Pseudo
 
 provides: [Form.Request]
 
@@ -3376,7 +3423,7 @@ if (!window.Form) window.Form = {};
 				//form validator was created after Form.Request
 				this.element.removeEvent('submit', this.onSubmit);
 				fv.addEvent('onFormValidate', this.onFormValidate);
-				this.element.validate();
+				fv.validate(event);
 				return;
 			}
 			if (event) event.stop();
@@ -3444,8 +3491,8 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Element.Shortcuts
-  - /Element.Measure
+  - Element.Shortcuts
+  - Element.Measure
 
 provides: [Fx.Reveal]
 
@@ -3480,13 +3527,13 @@ Fx.Reveal = new Class({
 		widthOverride: null,*/
 		link: 'cancel',
 		styles: ['padding', 'border', 'margin'],
-		transitionOpacity: !Browser.ie6,
+		transitionOpacity: 'opacity' in document.documentElement,
 		mode: 'vertical',
 		display: function(){
 			return this.element.get('tag') != 'tr' ? 'block' : 'table-row';
 		},
 		opacity: 1,
-		hideInputs: Browser.ie ? 'select, input, textarea, object, embed' : null
+		hideInputs: !('opacity' in document.documentElement) ? 'select, input, textarea, object, embed' : null
 	},
 
 	dissolve: function(){
@@ -3691,9 +3738,9 @@ authors:
   - Aaron Newton
 
 requires:
-  - /Form.Request
-  - /Fx.Reveal
-  - /Elements.from
+  - Form.Request
+  - Fx.Reveal
+  - Elements.from
 
 provides: [Form.Request.Append]
 
@@ -3948,7 +3995,7 @@ var OverText = new Class({
 	},
 
 	show: function(){
-		if (this.text && !this.text.isDisplayed()){
+		if (document.id(this.text) && !this.text.isDisplayed()){
 			this.text.show();
 			this.reposition();
 			this.fireEvent('textShow', [this.text, this.element]);
@@ -4030,7 +4077,7 @@ authors:
 
 requires:
   - Core/Fx.CSS
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Elements]
 
@@ -4106,7 +4153,7 @@ authors:
 
 requires:
   - Core/Element.Event
-  - /Fx.Elements
+  - Fx.Elements
 
 provides: [Fx.Accordion]
 
@@ -4256,18 +4303,19 @@ Fx.Accordion = new Class({
 
 		if (useFx == null) useFx = true;
 		if (typeOf(index) == 'element') index = elements.indexOf(index);
-		if (index == this.previous && !options.alwaysHide) return this;
+		if (index == this.current && !options.alwaysHide) return this;
 
 		if (options.resetHeight){
-			var prev = elements[this.previous];
+			var prev = elements[this.current];
 			if (prev && !this.selfHidden){
 				for (var fx in effects) prev.setStyle(fx, prev[effects[fx]]);
 			}
 		}
 
-		if ((this.timer && options.link == 'chain') || (index === this.previous && !options.alwaysHide)) return this;
+		if ((this.timer && options.link == 'chain') || (index === this.current && !options.alwaysHide)) return this;
 
-		this.previous = index;
+		if (this.current != null) this.previous = this.current;
+		this.current = index;
 		this.selfHidden = false;
 
 		elements.each(function(el, i){
@@ -4318,7 +4366,7 @@ requires:
   - Core/Fx
   - Core/Element.Event
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Scroll]
 
@@ -4356,7 +4404,6 @@ Fx.Scroll = new Class({
 
 	set: function(){
 		var now = Array.flatten(arguments);
-		if (Browser.firefox) now = [Math.round(now[0]), Math.round(now[1])]; // not needed anymore in newer firefox versions
 		this.element.scrollTo(now[0], now[1]);
 		return this;
 	},
@@ -4490,7 +4537,7 @@ authors:
 requires:
   - Core/Fx
   - Core/Element.Style
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Fx.Slide]
 
@@ -4661,7 +4708,7 @@ authors:
 
 requires:
   - Core/Slick.Finder
-  - /Fx.Scroll
+  - Fx.Scroll
 
 provides: [Fx.SmoothScroll]
 
@@ -4733,8 +4780,8 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Fx.Elements
-  - /Element.Measure
+  - Fx.Elements
+  - Element.Measure
 
 provides: [Fx.Sort]
 
@@ -4913,7 +4960,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Drag]
 ...
@@ -4959,10 +5006,10 @@ var Drag = new Class({
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
 
-		this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
+		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
 
-		if (Browser.ie && !Drag.ondragstartFixed){
+		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
 			Drag.ondragstartFixed = true;
 		}
@@ -5147,7 +5194,7 @@ authors:
 
 requires:
   - Core/Element.Dimensions
-  - /Drag
+  - Drag
 
 provides: [Drag.Move]
 
@@ -5174,10 +5221,7 @@ Drag.Move = new Class({
 		element = this.element;
 
 		this.droppables = $$(this.options.droppables);
-		this.container = document.id(this.options.container);
-
-		if (this.container && typeOf(this.container) != 'element')
-			this.container = document.id(this.container.getDocument().body);
+		this.setContainer(this.options.container);
 
 		if (this.options.style){
 			if (this.options.modifiers.x == 'left' && this.options.modifiers.y == 'top'){
@@ -5193,6 +5237,13 @@ Drag.Move = new Class({
 
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
+	},
+	
+	setContainer: function(container) {
+		this.container = document.id(container);
+		if (this.container && typeOf(this.container) != 'element'){
+			this.container = document.id(this.container.getDocument().body);
+		}
 	},
 
 	start: function(event){
@@ -5258,7 +5309,9 @@ Drag.Move = new Class({
 
 			if (container != offsetParent){
 				left += containerMargin.left + offsetParentPadding.left;
-				top += ((Browser.ie6 || Browser.ie7) ? 0 : containerMargin.top) + offsetParentPadding.top;
+				if (!offsetParentPadding.left && left < 0) left = 0;
+				top += offsetParent == document.body ? 0 : containerMargin.top + offsetParentPadding.top;
+				if (!offsetParentPadding.top && top < 0) top = 0;
 			}
 		} else {
 			left -= elementMargin.left;
@@ -5342,7 +5395,7 @@ authors:
 
 requires:
   - Core/Fx.Morph
-  - /Drag.Move
+  - Drag.Move
 
 provides: [Sortables]
 
@@ -5361,7 +5414,8 @@ var Sortables = new Class({
 		clone: false,
 		revert: false,
 		handle: false,
-		dragOptions: {}
+		dragOptions: {},
+		unDraggableTags: ['button', 'input', 'a', 'textarea', 'select', 'option']
 	},
 
 	initialize: function(lists, options){
@@ -5427,6 +5481,24 @@ var Sortables = new Class({
 			return list;
 		}, this));
 	},
+    
+	getDroppableCoordinates: function (element){
+		var offsetParent = element.getOffsetParent();
+		var position = element.getPosition(offsetParent);
+		var scroll = {
+			w: window.getScroll(),
+			offsetParent: offsetParent.getScroll()
+		};
+		position.x += scroll.offsetParent.x;
+		position.y += scroll.offsetParent.y;
+
+		if (offsetParent.getStyle('position') == 'fixed'){
+			position.x -= scroll.w.x;
+			position.y -= scroll.w.y;
+		}
+
+        return position;
+	},
 
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element(element.tagName).inject(document.body);
@@ -5447,7 +5519,7 @@ var Sortables = new Class({
 			});
 		}
 
-		return clone.inject(this.list).setPosition(element.getPosition(element.getOffsetParent()));
+		return clone.inject(this.list).setPosition(this.getDroppableCoordinates(this.element));
 	},
 
 	getDroppables: function(){
@@ -5472,7 +5544,7 @@ var Sortables = new Class({
 		if (
 			!this.idle ||
 			event.rightClick ||
-			['button', 'input', 'a', 'textarea'].contains(event.target.get('tag'))
+			(!this.options.handle && this.options.unDraggableTags.contains(event.target.get('tag')))
 		) return;
 
 		this.idle = false;
@@ -5503,14 +5575,16 @@ var Sortables = new Class({
 	end: function(){
 		this.drag.detach();
 		this.element.setStyle('opacity', this.opacity);
+		var self = this;
 		if (this.effect){
 			var dim = this.element.getStyles('width', 'height'),
 				clone = this.clone,
-				pos = clone.computePosition(this.element.getPosition(this.clone.getOffsetParent()));
+				pos = clone.computePosition(this.getDroppableCoordinates(clone));
 
 			var destroy = function(){
 				this.removeEvent('cancel', destroy);
 				clone.destroy();
+				self.reset();
 			};
 
 			this.effect.element = clone;
@@ -5523,8 +5597,9 @@ var Sortables = new Class({
 			}).addEvent('cancel', destroy).chain(destroy);
 		} else {
 			this.clone.destroy();
+			self.reset();
 		}
-		this.reset();
+		
 	},
 
 	reset: function(){
@@ -5569,7 +5644,7 @@ authors:
 
 requires:
   - Core/Element.Event
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Assets]
 
@@ -5590,7 +5665,7 @@ var Asset = {
 		delete properties.document;
 
 		if (load){
-			if (typeof script.onreadystatechange != 'undefined'){
+			if (!script.addEventListener){
 				script.addEvent('readystatechange', function(){
 					if (['loaded', 'complete'].contains(this.readyState)) load.call(this);
 				});
@@ -5868,8 +5943,8 @@ authors:
 requires:
   - Core/Cookie
   - Core/JSON
-  - /MooTools.More
-  - /Hash
+  - MooTools.More
+  - Hash
 
 provides: [Hash.Cookie]
 
@@ -5916,6 +5991,121 @@ Hash.each(Hash.prototype, function(method, name){
 /*
 ---
 
+name: Swiff
+
+description: Wrapper for embedding SWF movies. Supports External Interface Communication.
+
+license: MIT-style license.
+
+credits:
+  - Flash detection & Internet Explorer + Flash Player 9 fix inspired by SWFObject.
+
+requires: [Core/Options, Core/Object, Core/Element]
+
+provides: Swiff
+
+...
+*/
+
+(function(){
+
+var Swiff = this.Swiff = new Class({
+
+	Implements: Options,
+
+	options: {
+		id: null,
+		height: 1,
+		width: 1,
+		container: null,
+		properties: {},
+		params: {
+			quality: 'high',
+			allowScriptAccess: 'always',
+			wMode: 'window',
+			swLiveConnect: true
+		},
+		callBacks: {},
+		vars: {}
+	},
+
+	toElement: function(){
+		return this.object;
+	},
+
+	initialize: function(path, options){
+		this.instance = 'Swiff_' + String.uniqueID();
+
+		this.setOptions(options);
+		options = this.options;
+		var id = this.id = options.id || this.instance;
+		var container = document.id(options.container);
+
+		Swiff.CallBacks[this.instance] = {};
+
+		var params = options.params, vars = options.vars, callBacks = options.callBacks;
+		var properties = Object.append({height: options.height, width: options.width}, options.properties);
+
+		var self = this;
+
+		for (var callBack in callBacks){
+			Swiff.CallBacks[this.instance][callBack] = (function(option){
+				return function(){
+					return option.apply(self.object, arguments);
+				};
+			})(callBacks[callBack]);
+			vars[callBack] = 'Swiff.CallBacks.' + this.instance + '.' + callBack;
+		}
+
+		params.flashVars = Object.toQueryString(vars);
+		if ('ActiveXObject' in window){
+			properties.classid = 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000';
+			params.movie = path;
+		} else {
+			properties.type = 'application/x-shockwave-flash';
+		}
+		properties.data = path;
+
+		var build = '<object id="' + id + '"';
+		for (var property in properties) build += ' ' + property + '="' + properties[property] + '"';
+		build += '>';
+		for (var param in params){
+			if (params[param]) build += '<param name="' + param + '" value="' + params[param] + '" />';
+		}
+		build += '</object>';
+		this.object = ((container) ? container.empty() : new Element('div')).set('html', build).firstChild;
+	},
+
+	replaces: function(element){
+		element = document.id(element, true);
+		element.parentNode.replaceChild(this.toElement(), element);
+		return this;
+	},
+
+	inject: function(element){
+		document.id(element, true).appendChild(this.toElement());
+		return this;
+	},
+
+	remote: function(){
+		return Swiff.remote.apply(Swiff, [this.toElement()].append(arguments));
+	}
+
+});
+
+Swiff.CallBacks = {};
+
+Swiff.remote = function(obj, fn){
+	var rs = obj.CallFunction('<invoke name="' + fn + '" returntype="javascript">' + __flash__argumentsToXML(arguments, 2) + '</invoke>');
+	return eval(rs);
+};
+
+})();
+
+
+/*
+---
+
 name: Element.Event.Pseudos.Keys
 
 description: Adds functionality fire events if certain keycombinations are pressed
@@ -5942,12 +6132,14 @@ DOMEvent.definePseudo('keys', function(split, fn, args){
 
 	var event = args[0],
 		keys = [],
-		pressed = this.retrieve(keysStoreKey, []);
+		pressed = this.retrieve(keysStoreKey, []),
+		value = split.value;
 
-	keys.append(split.value.replace('++', function(){
+	if (value != '+') keys.append(value.replace('++', function(){
 		keys.push('+'); // shift++ and shift+++a
 		return '';
 	}).split('+'));
+	else keys = ['+'];
 
 	pressed.include(event.key);
 
@@ -5990,8 +6182,10 @@ DOMEvent.defineKeys({
 	'220': '\\',
 	'221': ']',
 	'222': "'",
-	'107': '+'
-}).defineKey(Browser.firefox ? 109 : 189, '-');
+	'107': '+',
+	'109': '-', // subtract
+	'189': '-'  // dash
+})
 
 })();
 
@@ -6177,21 +6371,25 @@ provides: [Keyboard]
 		});
 
 		if (!parsed[type]){
-			var key, mods = {};
-			type.split('+').each(function(part){
-				if (regex.test(part)) mods[part] = true;
-				else key = part;
-			});
+		    if (type != '+'){
+				var key, mods = {};
+				type.split('+').each(function(part){
+					if (regex.test(part)) mods[part] = true;
+					else key = part;
+				});
 
-			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+				mods.control = mods.control || mods.ctrl; // allow both control and ctrl
 
-			var keys = [];
-			modifiers.each(function(mod){
-				if (mods[mod]) keys.push(mod);
-			});
+				var keys = [];
+				modifiers.each(function(mod){
+					if (mods[mod]) keys.push(mod);
+				});
 
-			if (key) keys.push(key);
-			parsed[type] = keys.join('+');
+				if (key) keys.push(key);
+				parsed[type] = keys.join('+');
+			} else {
+			    parsed[type] = type;
+			}
 		}
 
 		return eventType + ':keys(' + parsed[type] + ')';
@@ -6200,7 +6398,7 @@ provides: [Keyboard]
 	Keyboard.each = function(keyboard, fn){
 		var current = keyboard || Keyboard.manager;
 		while (current){
-			fn.run(current);
+			fn(current);
 			current = current._activeKB;
 		}
 	};
@@ -6255,8 +6453,8 @@ authors:
   - Perrin Westrich
 
 requires:
-  - /Keyboard
-  - /MooTools.More
+  - Keyboard
+  - MooTools.More
 
 provides: [Keyboard.Extras]
 
@@ -6479,7 +6677,7 @@ requires:
   - Core/Element.Event
   - Core/Element.Style
   - Core/Element.Dimensions
-  - /MooTools.More
+  - MooTools.More
 
 provides: [Tips]
 

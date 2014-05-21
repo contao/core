@@ -36,7 +36,7 @@ define('JQUERY_UI', '1.10.4');
 define('COLORBOX', '1.5.8');
 define('MEDIAELEMENT', '2.14.2');
 define('TABLESORTER', '2.0.5');
-define('MOOTOOLS', '1.4.5');
+define('MOOTOOLS', '1.5.0');
 define('COLORPICKER', '1.4');
 define('DATEPICKER', '2.2.0');
 define('MEDIABOX', '1.4.6');

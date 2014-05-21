@@ -1650,6 +1650,7 @@ var Backend =
 				tr.getElement('.tl_select_column').destroy();
 				new Chosen(tr.getElement('select.tl_select'));
 				Stylect.convertSelects();
+				Backend.convertEnableModules();
 				break;
 			case 'up':
 				if (tr = parent.getPrevious('tr')) {
@@ -1983,7 +1984,9 @@ var Backend =
 	 * Convert the "enable module" checkboxes
 	 */
 	convertEnableModules: function() {
-		$$('img.mw_enable').each(function(el) {
+		$$('img.mw_enable').filter(function(el) {
+			return !el.hasEvent('click');
+		}).each(function(el) {
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
 				var cbx = el.getNext('input');

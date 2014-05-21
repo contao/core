@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.published.0">
         <source>Publish the FAQ</source>
-        <target>Опубликовать в FAQ</target>
+        <target>Опубликовать в вопросах и ответах</target>
       </trans-unit>
       <trans-unit id="tl_faq.published.1">
         <source>Make the FAQ publicly visible on the website.</source>

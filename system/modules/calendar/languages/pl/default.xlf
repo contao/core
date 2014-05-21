@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="MSC.cal_previous">
         <source>&amp;lt;</source>
-        <target>&gt;</target>
+        <target>&amp;lt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_next">
         <source>&amp;gt;</source>
-        <target>&gt;</target>
+        <target>&amp;gt;</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>

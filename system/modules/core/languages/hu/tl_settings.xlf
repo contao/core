@@ -79,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
         <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Tömörítse a HTML kódot mielőtt elküldi a böngészőnek.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
@@ -233,6 +234,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.0">
         <source>Maintenance mode</source>
+        <target>Karbantartási mód</target>
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
