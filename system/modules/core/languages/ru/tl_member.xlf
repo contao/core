@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="tl_member.disable.0">
         <source>Deactivate</source>
-        <target>Деактивация</target>
+        <target>Деактивировать</target>
       </trans-unit>
       <trans-unit id="tl_member.disable.1">
         <source>Temporarily disable the account.</source>

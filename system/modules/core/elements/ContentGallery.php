@@ -120,7 +120,7 @@ class ContentGallery extends \ContentElement
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+					$arrMeta['title'] = specialchars($objFile->basename);
 				}
 
 				// Add the image
@@ -168,7 +168,7 @@ class ContentGallery extends \ContentElement
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+						$arrMeta['title'] = specialchars($objFile->basename);
 					}
 
 					// Add the image

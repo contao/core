@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source_teaser">
         <source>Event teasers</source>
-        <target>Event teasers</target>
+        <target>Evenementen teasers</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source_text">
         <source>Full articles</source>

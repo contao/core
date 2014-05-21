@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.0">
         <source>Require login to comment</source>
-        <target>Inloggen verplicht om te reageren</target>
+        <target>Inloggen is verplicht om te reageren</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.protected.1">
         <source>Show events to certain member groups only.</source>
-        <target>Toon events alleen aan bepaalde ledengroepen.</target>
+        <target>Toon evenementen alleen aan bepaalde ledengroepen.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.groups.0">
         <source>Allowed member groups</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.groups.1">
         <source>These groups will be able to see the events in this calendar.</source>
-        <target>Deze groepen kunnen de events in deze kalender zien.</target>
+        <target>Deze groepen kunnen de evenementen in deze kalender zien.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.notify_author">
         <source>Author of the event</source>
-        <target>Auteur van het event</target>
+        <target>Auteur van het evenement</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify_both">
         <source>Author and system administrator</source>

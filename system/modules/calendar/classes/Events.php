@@ -257,7 +257,7 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
-		$arrEvent['start'] = $intStart;
+		$arrEvent['begin'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 		$arrEvent['details'] = '';
 

@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_noSpan.1">
         <source>Show events only once even if they span multiple days.</source>
-        <target>Toont events slechts eenmaal, ook als ze meerdere dagen overbruggen.</target>
+        <target>Toont evenementen slechts eenmaal, ook als ze meerdere dagen overbruggen.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_startDay.0">
         <source>Week start day</source>
@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_format.0">
         <source>Event list format</source>
-        <target>Format eventlijst</target>
+        <target>Indeling evenementenlijst</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_format.1">
         <source>Here you can choose the event list format.</source>
-        <target>Kies een format voor de eventlijst.</target>
+        <target>Kies een indeling voor de evenementenlijst.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.0">
         <source>Ignore URL parameters</source>
@@ -55,23 +55,23 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.1">
         <source>Automatically switch to the event reader if an event has been selected.</source>
-        <target>Schakelt automatisch over naar de event lezer als een event is geselecteerd.</target>
+        <target>Schakelt automatisch over naar de evenementen lezer als een gebeurtenis is geselecteerd.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.0">
         <source>Number of events</source>
-        <target>Aantal events</target>
+        <target>Aantal evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.1">
         <source>Here you can limit the number of events. Enter 0 to show all.</source>
-        <target>Voer het maximaal aantal events in. Vul 0 in om alles te tonen.</target>
+        <target>Voer het maximaal aantal evenementen in. Vul 0 in om alles te tonen.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.0">
         <source>Event template</source>
-        <target>Event template</target>
+        <target>Evenement template</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
-        <target>Selecteer hier een event template.</target>
+        <target>Selecteer hier een evenement template.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.0">
         <source>Calendar template</source>
@@ -83,15 +83,15 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.0">
         <source>Show number of events</source>
-        <target>Toon aantal events</target>
+        <target>Toon aantal evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.1">
         <source>Show the number of events of each month in the menu.</source>
-        <target>Toon het aantal events van elke maand in het menu.</target>
+        <target>Toon aantal evenementen van elke maand in het menu.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>
-        <target>Eventlijst</target>
+        <target>Evenementenlijst</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_day">
         <source>Day</source>
@@ -107,11 +107,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_all">
         <source>All events</source>
-        <target>Alle events</target>
+        <target>Alle evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_upcoming">
         <source>Upcoming events</source>
-        <target>Aankomende events</target>
+        <target>Aankomende evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.next_7">
         <source>+ 1 week</source>
@@ -159,11 +159,11 @@
       </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
-        <target>Alle aankomende events</target>
+        <target>Alle aankomende evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_past">
         <source>Past events</source>
-        <target>Afgelopen events</target>
+        <target>Afgelopen evenementen</target>
       </trans-unit>
       <trans-unit id="tl_module.past_7">
         <source>- 1 week</source>
@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_module.past_all">
         <source>All past events</source>
-        <target>Alle afgelopen events</target>
+        <target>Alle afgelopen evenementen</target>
       </trans-unit>
     </body>
   </file>

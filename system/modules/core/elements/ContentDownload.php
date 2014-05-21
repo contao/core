@@ -89,7 +89,7 @@ class ContentDownload extends \ContentElement
 
 		if ($this->linkTitle == '')
 		{
-			$this->linkTitle = $objFile->basename;
+			$this->linkTitle = specialchars($objFile->basename);
 		}
 
 		$strHref = \Environment::get('request');

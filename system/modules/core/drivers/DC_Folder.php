@@ -462,7 +462,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->Session->set('CLIPBOARD', $arrClipboard);
 
 		$this->Files->mkdir($strFolder . '/__new__');
-		$this->redirect(html_entity_decode($this->switchToEdit($strFolder . '/__new__')));
+		$this->redirect(html_entity_decode($this->switchToEdit($this->urlEncode($strFolder) . '/__new__')));
 	}
 
 
@@ -584,7 +584,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->cut(urldecode($id));
+				$this->cut($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -737,7 +737,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->copy(urldecode($id));
+				$this->copy($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -837,7 +837,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach ($ids as $id)
 			{
-				$this->delete(urldecode($id));
+				$this->delete($id); // do not urldecode() here (see #6840)
 			}
 		}
 
@@ -1418,7 +1418,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					// Load the current value
 					if ($v == 'name')
 					{
-						$pathinfo = pathinfo(urldecode($id));
+						$pathinfo = pathinfo($id); // do not urldecode() here (see #6840)
 
 						$this->strPath = $pathinfo['dirname'];
 						$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
