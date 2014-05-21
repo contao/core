@@ -195,23 +195,23 @@
       </trans-unit>
       <trans-unit id="tl_article.header">
         <source>Header</source>
-        <target>Верхнем колонтитуле</target>
+        <target>Верхний колонтитул</target>
       </trans-unit>
       <trans-unit id="tl_article.left">
         <source>Left column</source>
-        <target>Левой колонке</target>
+        <target>Левая колонка</target>
       </trans-unit>
       <trans-unit id="tl_article.main">
         <source>Main column</source>
-        <target>Основной колонке</target>
+        <target>Основная колонка</target>
       </trans-unit>
       <trans-unit id="tl_article.right">
         <source>Right column</source>
-        <target>Правой колонке</target>
+        <target>Правая колонка</target>
       </trans-unit>
       <trans-unit id="tl_article.footer">
         <source>Footer</source>
-        <target>Нижнем колонтитуле</target>
+        <target>Нижний колонтитул</target>
       </trans-unit>
       <trans-unit id="tl_article.new.0">
         <source>New article</source>

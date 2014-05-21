@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>Предотвращение доступа к папке через HTTP. Файлы можно сделать доступными например, с помощью элемента 'Загрузка с сайта'.</target>
+        <target>Запретить доступ к каталогу через HTTP. Файлы можно сделать доступными с помощью элемента 'Загрузка с сайта'.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_files.htaccessInfo">
         <source>Folder protection is accomplished by adding a .htaccess file which denies access to the folder. It seems that you are not using an Apache server, therefore the feature might not work at all or require to adjust your server configuration. Please double-check before uploading any non-public resources!</source>
-        <target>Защита папок осуществляется путем добавления файла .htaccess, который запрещает доступ к папке. Вероятно, вы не используете сервер Apache, поэтому эта функция может не работать или необходимо настроить сервер. Проверьте конфигурацию перед загрузкой любых не публичных ресурсов!</target>
+        <target>Защита каталогов осуществляется путем добавления файла .htaccess, который запрещает доступ. Вероятно, вы не используете сервер Apache, поэтому эта функция может не работать или необходимо настроить сервер. Проверьте конфигурацию перед загрузкой любых не публичных ресурсов!</target>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.0">
         <source>File upload</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
-        <target>Выберите в компьютере один или несколько файлов для загрузки на сервер.</target>
+        <target>Выберите один или несколько файлов для загрузки на сервер.</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>

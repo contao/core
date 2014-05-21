@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.store.1">
         <source>Find more themes in the Contao theme store</source>
-        <target>Meer thema's in de Contao theme store vinden</target>
+        <target>Vindt meer thema's in de Contao theme store</target>
       </trans-unit>
       <trans-unit id="tl_theme.new.0">
         <source>New theme</source>

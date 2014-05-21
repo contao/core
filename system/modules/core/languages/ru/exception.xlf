@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="XPT.more">
         <source>Tell me more, please</source>
-        <target>Расскажите мне больше, пожалуйста</target>
+        <target>Пожалуйста, расскажите мне больше</target>
       </trans-unit>
       <trans-unit id="XPT.hint">
         <source>To customize this notice, create a custom template file named &lt;em&gt;%s&lt;/em&gt;.</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+        <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQ&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Инструкция Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;инструкции Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>Если вы явно установили язык, попробуйте перейти на &lt;a href=&quot;%s&quot;&gt;уровень выше&lt;/a&gt; и посмотрите будете ли вы перенаправлены. В противном случае свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
+        <target>Если вы явно установили язык в адресной строке, попробуйте перейти на &lt;a href=&quot;%s&quot;&gt;уровень выше&lt;/a&gt; и посмотрите будете ли вы перенаправлены. В противном случае, свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
@@ -127,23 +127,23 @@
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
-        <target>Убедитесь, что вы назначили макет страницы, каждой корневой странице в структуре сайта.</target>
+        <target>Убедитесь, что вы назначили макет страницы для каждой корневой страницы в структуре сайта.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Инструкция Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Инструкции Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
-        <target>Активных страниц не найдено</target>
+        <target>Активные страницы не найдены</target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
-        <target>Ваш запрос был отображен на сайте, который не содержит опубликованных страниц.</target>
+        <target>Ваш запрос был отображен на сайте у которого пока еще нет  опубликованных страниц.</target>
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
-        <target>Вероятно, сайт находится в стадии разработки и будет доступен через несколько дней. Если вы думаете, что что-то не в порядке, свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
+        <target>Вероятно, сайт находится в стадии разработки и будет доступен через несколько дней. Однако, если вы думаете, что что-то не в порядке, свяжитесь с &lt;a href=&quot;%s&quot;&gt;вебмастером&lt;/a&gt; и сообщите о неполадках.</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
-        <target>В настоящее время веб-сайт закрыт на техническое обслуживание. Пожалуйста, зайдите позже.</target>
+        <target>Сейчас веб-сайт закрыт на техническое обслуживание. Пожалуйста, зайдите позже.</target>
       </trans-unit>
     </body>
   </file>

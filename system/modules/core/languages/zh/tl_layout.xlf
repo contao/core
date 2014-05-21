@@ -206,8 +206,8 @@
         <target>额外样式表</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add style sheets from the file system (e.g. &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;).</source>
-        <target>您可以在这里添加来自文件系统的样式表 (如： &lt;em&gt;files/css/style.css|screen|static&lt;/em&gt;)。</target>
+        <source>Here you can add additional CSS files from the file system.</source>
+        <target>在这里，您可以从文件系统中添加额外的CSS文件。</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
