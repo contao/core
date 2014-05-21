@@ -17,13 +17,13 @@ $file = fopen(__FILE__, 'r');
 if (!flock($file, LOCK_EX|LOCK_NB)) {
 	echo "  The script is running already.\n";
 	fclose($file);
-	exit;
+	exit(1);
 }
 
 // No method name given
 if (count($argv) == 1) {
 	echo "  Please pass the method name as argument (see -h).\n";
-	exit;
+	exit(1);
 }
 
 // Initialize the system
@@ -57,7 +57,7 @@ if (in_array('-h', $argv)) {
 // Invalid command
 if (!in_array($argv[1], $commands)) {
 	echo "  Invalid command '{$argv[1]}' (see -h).\n";
-	exit;
+	exit(1);
 }
 
 // Run

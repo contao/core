@@ -17,7 +17,7 @@ $file = fopen(__FILE__, 'r');
 if (!flock($file, LOCK_EX|LOCK_NB)) {
 	echo "  The script is running already.\n";
 	fclose($file);
-	exit;
+	exit(1);
 }
 
 // Help
