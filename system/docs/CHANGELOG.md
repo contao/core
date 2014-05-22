@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly sort by date in the listing module (see #5609).
+
+### Fixed
 Fix the back link in the "single article" view (see #6955).
 
 ### Fixed
