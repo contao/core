@@ -219,12 +219,9 @@ class Combiner extends \System
 				{
 					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
-					if (!file_exists(TL_ROOT . '/' . $strPath))
-					{
-						$objFile = new \File($strPath, true);
-						$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
-						$objFile->close();
-					}
+					$objFile = new \File($strPath, true);
+					$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
+					$objFile->close();
 
 					$return[] = $strPath;
 				}
