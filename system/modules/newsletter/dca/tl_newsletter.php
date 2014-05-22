@@ -420,7 +420,7 @@ class tl_newsletter extends Backend
 		return '
 <div class="cte_type ' . (($arrRow['sent'] && $arrRow['date']) ? 'published' : 'unpublished') . '"><strong>' . $arrRow['subject'] . '</strong> - ' . (($arrRow['sent'] && $arrRow['date']) ? sprintf($GLOBALS['TL_LANG']['tl_newsletter']['sentOn'], Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date'])) : $GLOBALS['TL_LANG']['tl_newsletter']['notSent']) . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h128' : '') . '">' . (!$arrRow['sendText'] ? '
-' . $arrRow['content'] . '<hr>' : '' ) . '
+' . $this->replaceInsertTags($arrRow['content'], false) . '<hr>' : '' ) . '
 <pre style="white-space:pre-wrap">' . $arrRow['text'] . '</pre>
 </div>' . "\n";
 	}
