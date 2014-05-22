@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.0 (2014-05-XX)
 --------------------------
 
+### Fixed
+Correctly store the file selection in "edit multiple" mode (see #7028).
+
 ### Update
 Update Compass to version 0.12.6.
 

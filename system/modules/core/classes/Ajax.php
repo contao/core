@@ -226,20 +226,20 @@ class Ajax extends \Backend
 
 			// Load nodes of the page tree
 			case 'loadPagetree':
-				$strField = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
-				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, null, $strField, $dc->table, $dc));
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
-				$strField = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
-				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, null, $strField, $dc->table, $dc));
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
 				if (\Input::post('folder', true) != '')
@@ -337,7 +337,7 @@ class Ajax extends \Backend
 				}
 
 				$strClass = $GLOBALS['BE_FFL'][$strKey];
-				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $strField, $varValue, $strField, $dc->table, $dc));
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
 				echo $objWidget->generate();
 				exit; break;
