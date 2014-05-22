@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.0 (2014-05-XX)
 --------------------------
 
+### Update
+Update Compass to version 0.12.6.
+
 ### Fixed
 Improve the UUID validation to prevent false positives (see #7010).
 
