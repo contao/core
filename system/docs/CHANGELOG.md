@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Improve the UUID validation to prevent false positives (see #7010).
+
+### Fixed
 Correctly sort by date in the listing module (see #5609).
 
 ### Fixed
