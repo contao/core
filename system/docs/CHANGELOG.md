@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Never cache insert tags if the output is not used on the website (see #7018).
+
+### Fixed
 Strip forbidden HTML tags in the markdown content element (see #7021).
 
 ### Fixed

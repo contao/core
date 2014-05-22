@@ -79,8 +79,9 @@ class ModuleListing extends \Module
 		}
 
 		$this->strTemplate = $this->list_layout;
-		$this->list_where = $this->replaceInsertTags($this->list_where);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+
+		$this->list_where = $this->replaceInsertTags($this->list_where, false);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		return parent::generate();
 	}
@@ -377,8 +378,9 @@ class ModuleListing extends \Module
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+
 		$this->list_info = deserialize($this->list_info);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . $this->strPk . "=?")
 									->limit(1)
