@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Strip forbidden HTML tags in the markdown content element (see #7021).
+
+### Fixed
 Prevent parallel execution of the new command line scripts.
 
 ### Fixed

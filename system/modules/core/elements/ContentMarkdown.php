@@ -62,6 +62,7 @@ class ContentMarkdown extends \ContentElement
 	 */
 	protected function compile()
 	{
-		$this->Template->content = \Michelf\MarkdownExtra::defaultTransform($this->code);
+		$this->code = \Michelf\MarkdownExtra::defaultTransform($this->code);
+		$this->Template->content = strip_tags($this->code, \Config::get('allowedTags'));
 	}
 }
