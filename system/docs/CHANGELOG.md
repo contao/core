@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Fix the back link in the "single article" view (see #6955).
+
+### Fixed
 Never cache insert tags if the output is not used on the website (see #7018).
 
 ### Fixed
