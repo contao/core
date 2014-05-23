@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/popup.php');
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**

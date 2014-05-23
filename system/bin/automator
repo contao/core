@@ -28,7 +28,7 @@ if (count($argv) == 1) {
 
 // Initialize the system
 define('TL_MODE', 'BE');
-include dirname(__DIR__) . '/initialize.php';
+require dirname(__DIR__) . '/initialize.php';
 
 $commands = array();
 
