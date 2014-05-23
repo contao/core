@@ -83,7 +83,12 @@ class BackendTemplate extends \Template
 					$file = 'ace';
 				}
 
-				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
+				if(strpos($file, 'tinyPath::')  !== false ) {
+					$file_path = explode('::', $file);
+					$strFile = TL_ROOT . $file_path[1];
+				} else {
+					$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
+				}
 
 				if (!file_exists($strFile))
 				{
