@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6d4cdcb2f7758d6d10e800f237c5b093",
+    "hash": "d2d182f737aa4fc5d834c0ef6019cc3b",
     "packages": [
         {
             "name": "contao/idna",
