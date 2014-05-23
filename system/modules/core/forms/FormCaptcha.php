@@ -137,29 +137,11 @@ class FormCaptcha extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
-	 *
-	 * @param array $arrAttributes An optional attributes array
-	 *
-	 * @return string The template markup
-	 */
-	public function parse($arrAttributes=null)
-	{
-		if ($this->strQuestion == '')
-		{
-			$this->setQuestion();
-		}
-
-		return parent::parse($arrAttributes);
-	}
-
-
-	/**
 	 * Generate the captcha question
 	 *
 	 * @return string The question string
 	 */
-	protected function setQuestion()
+	protected function getQuestion()
 	{
 		$int1 = rand(1, 9);
 		$int2 = rand(1, 9);
@@ -182,7 +164,7 @@ class FormCaptcha extends \Widget
 			$strEncoded .= sprintf('&#%s;', utf8_ord($strCharacter));
 		}
 
-		$this->strQuestion = $strEncoded;
+		return $strEncoded;
 	}
 
 
@@ -190,8 +172,6 @@ class FormCaptcha extends \Widget
 	 * Generate the label and return it as string
 	 *
 	 * @return string The label markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateLabel()
 	{
@@ -206,7 +186,7 @@ class FormCaptcha extends \Widget
 						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
 						$this->strLabel,
 						'<span class="mandatory">*</span>',
-						$this->strQuestion);
+						$this->getQuestion());
 	}
 
 
@@ -214,8 +194,6 @@ class FormCaptcha extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -232,18 +210,11 @@ class FormCaptcha extends \Widget
 	 * Return the captcha question as string
 	 *
 	 * @return string The question markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateQuestion()
 	{
-		if ($this->strQuestion == '')
-		{
-			$this->setQuestion();
-		}
-
 		return sprintf('<span class="captcha_text%s">%s</span>',
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						$this->strQuestion);
+						$this->getQuestion());
 	}
 }

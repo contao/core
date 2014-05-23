@@ -17,7 +17,7 @@
       <p class="error"><?php echo $this->getErrorAsString(); ?></p>
     <?php endif; ?>
 
-    <?php foreach ($this->options as $option): ?>
+    <?php foreach ($this->getOptions() as $option): ?>
       <span><input type="radio" name="<?php echo $option['name']; ?>" id="opt_<?php echo $option['id']; ?>" class="radio" value="<?php echo $option['value']; ?>"<?php echo $option['checked']; ?><?php echo $option['attributes']; ?>> <label id="lbl_<?php echo $option['id']; ?>" for="opt_<?php echo $option['id']; ?>"><?php echo $option['label']; ?></label></span>
     <?php endforeach; ?>
 

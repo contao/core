@@ -168,13 +168,11 @@ class FormSelectMenu extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Generate the options
 	 *
-	 * @param array $arrAttributes An optional attributes array
-	 *
-	 * @return string The template markup
+	 * @return array The options array
 	 */
-	public function parse($arrAttributes=null)
+	protected function getOptions()
 	{
 		$arrOptions = array();
 		$strClass = 'select';
@@ -253,9 +251,7 @@ class FormSelectMenu extends \Widget
 			);
 		}
 
-		$this->arrOptions = $arrOptions;
-
-		return parent::parse($arrAttributes);
+		return $arrOptions;
 	}
 
 
@@ -263,8 +259,6 @@ class FormSelectMenu extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

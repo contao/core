@@ -136,6 +136,10 @@ class FormTextArea extends \Widget
 				return $this->intRows;
 				break;
 
+			case 'value':
+				return specialchars(str_replace('\n', "\n", $this->varValue));
+				break;
+
 			default:
 				return parent::__get($strKey);
 				break;
@@ -144,13 +148,13 @@ class FormTextArea extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Return all attributes as string
 	 *
-	 * @param array $arrAttributes An optional attributes array
+	 * @param array $arrStrip An optional array with attributes to strip
 	 *
-	 * @return string The template markup
+	 * @return string The attributes string
 	 */
-	public function parse($arrAttributes=null)
+	public function getAttributes($arrStrip=array())
 	{
 		global $objPage;
 		$arrStrip = array();
@@ -161,10 +165,7 @@ class FormTextArea extends \Widget
 			$arrStrip[] = 'maxlength';
 		}
 
-		$this->fieldAttributes = $this->getAttributes($arrStrip);
-		$this->fieldValue = specialchars(str_replace('\n', "\n", $this->varValue));
-
-		return parent::parse($arrAttributes);
+		return parent::getAttributes($arrStrip);
 	}
 
 
@@ -172,8 +173,6 @@ class FormTextArea extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -183,7 +182,7 @@ class FormTextArea extends \Widget
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->intRows,
 						$this->intCols,
-						$this->fieldAttributes,
-						$this->fieldValue) . $this->addSubmit();
+						$this->getAttributes(),
+						$this->value) . $this->addSubmit();
 	}
 }
