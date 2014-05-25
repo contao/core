@@ -208,7 +208,7 @@ class FormSelectMenu extends \Widget
 			$strClass .= ' ' . $this->strClass;
 		}
 
-		$this->class = $strClass;
+		$this->strClass = $strClass;
 
 		// Generate options
 		foreach ($this->arrOptions as $arrOption)
