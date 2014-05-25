@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao\Template;
+namespace Contao;
 
 
 /**
@@ -20,7 +20,7 @@ namespace Contao\Template;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Base extends \Controller
+abstract class BaseTemplate extends \Controller
 {
 
 	/**

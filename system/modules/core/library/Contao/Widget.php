@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Template\Base
+abstract class Widget extends \BaseTemplate
 {
 
 	/**
