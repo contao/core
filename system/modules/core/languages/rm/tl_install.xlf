@@ -86,8 +86,8 @@
         <target>Repository d'extensiuns</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
-        <target>Nus faschain actualmain tests cun ina nova versiun dal repository d'extensiun, che utilisescha Composer per administrar pachets. Clicca sin il buttun sutvart sche ti vuls far part dal test da beta.</target>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>Nus faschain actualmain tests cun ina nova versiun dal repository d'extensiun, che utilisescha Composer per administrar pachets. Installescha il client da Coposer per far part dal test da beta.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>

@@ -86,8 +86,8 @@
         <target>Erweiterungsverwaltung</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
-        <target>Wir testen momentan eine neue Version der Erweiterungsverwaltung, die Composer für das Paketmanagement verwendet. Bitte klicken Sie auf die nachstehende Schaltfläche, um am Beta-Test teilzunehmen.</target>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>Wir testen momentan eine neue Version der Erweiterungsverwaltung, die Composer für das Paketmanagement verwendet. Bitte installieren Sie den Composer-Client, um am Beta-Test teilzunehmen.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>

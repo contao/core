@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
-        <target>Выберите страницу просмотрщика вопросов и ответов, к которой будут перенаправлены посетители при нажатии на вопросы.</target>
+        <target>Выберите страницу просмотрщика вопросов и ответов, к которой будут перенаправлены посетители при нажатии на вопрос.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.allowComments.0">
         <source>Enable comments</source>

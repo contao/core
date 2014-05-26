@@ -2133,7 +2133,7 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
-        <target>GB</target>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>

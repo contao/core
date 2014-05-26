@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_form.formID.1">
         <source>The form ID is required to trigger a Contao module.</source>
-        <target>U kunt hier een speciaal formulier ID opgeven (sommige Contao modules zijn in staat om van een speciaal formulier ID gebruik te maken).</target>
+        <target>Het formulier-ID is vereist om een ​​Contao module te activeren.</target>
       </trans-unit>
       <trans-unit id="tl_form.tableless.0">
         <source>Tableless layout</source>

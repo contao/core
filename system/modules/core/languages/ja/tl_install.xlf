@@ -86,7 +86,9 @@
         <target>機能拡張リポジトリ</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>現在、パッケージの管理にComposerを使用している、機能拡張リポジ
+トリの新しいバージョンのベータテストを行っています。ベータテストに参加したい場合はComposerクライアントをインストールしてください。</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -274,12 +276,15 @@
       </trans-unit>
       <trans-unit id="tl_install.repositoryDefault">
         <source>You are using the default extension repository.</source>
+        <target>既定の機能拡張リポジトリを使用しています。</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryComposer">
         <source>You are using the Composer based extension repository.</source>
+        <target>Composerに基づいた機能拡張リポジトリを使用しています。</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryInstall">
         <source>Install the Composer client</source>
+        <target>Composerクライアントをインストール</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

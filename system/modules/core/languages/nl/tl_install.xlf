@@ -86,8 +86,8 @@
         <target>Extensie catalogus</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
-        <target>We zijn momenteel een nieuwe versie van extensie beheer, aan het beta-testen deze maakt gebruik maakt van Composer om pakketten te beheren. Klik op onderstaande knop als u wilt deelnemen aan de beta-test.</target>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>We zijn momenteel een nieuwe versie van extensie beheer, aan het bèta testen deze maakt gebruik maakt van Composer om pakketten te beheren. Installeer de Composer cliënt om deel te nemen aan de bèta test.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="tl_install.repositoryInstall">
         <source>Install the Composer client</source>
-        <target>Installeer de Composer client</target>
+        <target>Installeer de Composer cliënt</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

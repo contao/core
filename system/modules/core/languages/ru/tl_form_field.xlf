@@ -564,7 +564,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.toggle.0">
         <source>Toggle visibility</source>
-        <target>Переключение видимости</target>
+        <target>Переключить видимость</target>
       </trans-unit>
       <trans-unit id="tl_form_field.toggle.1">
         <source>Toggle the visibility of field ID %s</source>

@@ -86,7 +86,7 @@
         <target>扩展仓库</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -274,12 +274,15 @@
       </trans-unit>
       <trans-unit id="tl_install.repositoryDefault">
         <source>You are using the default extension repository.</source>
+        <target>您正在使用默认的扩展仓库</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryComposer">
         <source>You are using the Composer based extension repository.</source>
+        <target>您正在使用基于扩展仓库的Composer.</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryInstall">
         <source>Install the Composer client</source>
+        <target>安装Composer客户端</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

@@ -86,8 +86,8 @@
         <target>Хранилище расширений</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
-        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please click the button below if you want to participate in the beta test.</source>
-        <target>В настоящее время мы проводим бета-тестирование новой версии хранилища расширений на основе Composer, который используется для управления пакетами. Нажмите на кнопку ниже, если хотите принять участие в бета-тестировании.</target>
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>Мы проводим бета-тестирование новой версии хранилища расширений, которое использует Composer для управления пакетами. Пожалуйста, установите клиент Composer и примите участие в бета-тестировании.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>

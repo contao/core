@@ -411,9 +411,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.customTpl.0">
         <source>Custom form field template</source>
+        <target>自定义表单字段模板</target>
       </trans-unit>
       <trans-unit id="tl_form_field.customTpl.1">
         <source>Here you can overwrite the default form field template.</source>
+        <target>在这里覆盖默认的表单字段模板。</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

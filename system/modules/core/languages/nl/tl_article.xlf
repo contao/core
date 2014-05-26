@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_article.alias.1">
         <source>The article alias is a unique reference to the article which can be called instead of its numeric ID.</source>
-        <target>Een artikel alias is een unieke referentie naar een artikel die opgeroepen kan worden i.p.v. het artikel ID.</target>
+        <target>Een artikel alias is een unieke referentie naar een artikel welke opgeroepen kan worden i.p.v. het artikel ID.</target>
       </trans-unit>
       <trans-unit id="tl_article.author.0">
         <source>Author</source>
@@ -67,11 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
-        <target>Printbaar</target>
+        <target>Syndication</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
-        <target>Toon een &quot;print naar PDF&quot; link boven het artikel. Style sheets met media type &quot;print&quot; of &quot;all&quot; worden herkend.</target>
+        <target>Kies hier de beschikbare opties.</target>
       </trans-unit>
       <trans-unit id="tl_article.guests.0">
         <source>Show to guests only</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_article.customTpl.1">
         <source>Here you can overwrite the default article template.</source>
-        <target>Hier kunt u het standaard artikeltemplate overschrijven.</target>
+        <target>Hier kunt u de standaard artikeltemplate overschrijven.</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_article.cssID.0">
         <source>CSS ID/class</source>
-        <target>CSS ID en class</target>
+        <target>CSS ID/class</target>
       </trans-unit>
       <trans-unit id="tl_article.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_article.syndication_legend">
         <source>Syndication</source>
-        <target>Printbaar</target>
+        <target>Syndication</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
@@ -283,11 +283,11 @@
       </trans-unit>
       <trans-unit id="tl_article.toggle.0">
         <source>Publish/unpublish article</source>
-        <target>Publiceer/verwijder artikel</target>
+        <target>Publiceer/depubliceer artikel</target>
       </trans-unit>
       <trans-unit id="tl_article.toggle.1">
         <source>Publish/unpublish article ID %s</source>
-        <target>Publiceer/verwijder artikel ID %s</target>
+        <target>Publiceer/depubliceer artikel ID %s</target>
       </trans-unit>
       <trans-unit id="tl_article.pasteafter.0">
         <source>Paste after</source>

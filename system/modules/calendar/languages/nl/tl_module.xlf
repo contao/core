@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.0">
         <source>Event reader module</source>
-        <target>Event lezer module</target>
+        <target>Evenementen lezer module</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.1">
         <source>Automatically switch to the event reader if an event has been selected.</source>
@@ -67,11 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_template.0">
         <source>Event template</source>
-        <target>Evenement template</target>
+        <target>Evenementen template</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
-        <target>Selecteer hier een evenement template.</target>
+        <target>Selecteer hier een evenementen template.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.0">
         <source>Calendar template</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.1">
         <source>Show the number of events of each month in the menu.</source>
-        <target>Toon aantal evenementen van elke maand in het menu.</target>
+        <target>Toon het aantal evenementen van elke maand in het menu.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>

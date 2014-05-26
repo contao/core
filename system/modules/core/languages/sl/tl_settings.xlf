@@ -79,6 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
         <source>Minify the HTML markup before it is sent to the browser.</source>
+        <target>Skrči HTML označevanje preden je poslano brskalniku.</target>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
@@ -177,6 +178,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
         <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
+        <target>Dodaj jezikovno oznako kot prvi parameter v URL naslovu (npr. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -187,6 +189,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
+        <target>Omogoči auto_item</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.1">
         <source>Skip the &lt;em&gt;items/&lt;/em&gt; or &lt;em&gt;events/&lt;/em&gt; fragment in the URL and automatically discover the item based on the &lt;em&gt;auto_item&lt;/em&gt; parameter.</source>

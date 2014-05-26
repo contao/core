@@ -83,9 +83,11 @@
       </trans-unit>
       <trans-unit id="tl_article.customTpl.0">
         <source>Custom article template</source>
+        <target>自定义文章模板</target>
       </trans-unit>
       <trans-unit id="tl_article.customTpl.1">
         <source>Here you can overwrite the default article template.</source>
+        <target>在这里可以覆盖默认的文章模板。</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>

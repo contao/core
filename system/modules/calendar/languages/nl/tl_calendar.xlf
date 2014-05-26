@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.0">
         <source>Require login to comment</source>
-        <target>Inloggen is verplicht om te reageren</target>
+        <target>Inloggen verplicht om te reageren</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>

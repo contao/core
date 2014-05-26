@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.copyright.1">
         <source>Here you can enter a copyright notice (e.g. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</source>
-        <target>Hier kunt u een auteursrecht kennisgeving invoegen (bv. © 2009, 2012 Acme Webservices BV).</target>
+        <target>Hier kunt u een auteursrecht kennisgeving invoegen (bv. &amp;amp;copy; 2007,2008 Jerry Miller Webservices Inc).</target>
       </trans-unit>
       <trans-unit id="tl_repository.description.0">
         <source>Description</source>
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.dbuptodate">
         <source>Database is up to date</source>
-        <target>Database is bijgewerkt</target>
+        <target>Database is up to date</target>
       </trans-unit>
       <trans-unit id="tl_repository.deletingdirs">
         <source>Deleting directories</source>
@@ -395,7 +395,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.ftsearch">
         <source>Fulltext search</source>
-        <target>Fulltext zoeken</target>
+        <target>Volledige tekst zoeken</target>
       </trans-unit>
       <trans-unit id="tl_repository.goback">
         <source>Go back</source>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="tl_repository_statext.notapproved">
         <source>Not approved for %s %s</source>
-        <target>Niet toegestaan voor %s %s.</target>
+        <target>Niet toegestaan voor %s %s</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.notapprovedwith">
         <source>Not approved with %s %s</source>
@@ -627,7 +627,7 @@
       </trans-unit>
       <trans-unit id="tl_repository_state_options.beta">
         <source>Beta</source>
-        <target>Beta</target>
+        <target>Bèta</target>
       </trans-unit>
       <trans-unit id="tl_repository_state_options.rc">
         <source>RC</source>

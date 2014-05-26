@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.alias.1">
         <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
-        <target>De FAQ alias is een unieke referentie naar de vraag die kan worden opgeroepen i.p.v. de pagina ID.</target>
+        <target>De FAQ alias is een unieke referentie naar de FAQ die kan worden opgeroepen i.p.v. de pagina ID.</target>
       </trans-unit>
       <trans-unit id="tl_faq.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.author.1">
         <source>Here you can change the author of the FAQ.</source>
-        <target>Kies een auteur van de FAQ.</target>
+        <target>Auteur van de FAQ.wijzigen.</target>
       </trans-unit>
       <trans-unit id="tl_faq.answer.0">
         <source>Answer</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.0">
         <source>Enclosures</source>
-        <target>Bijlage</target>
+        <target>Bijlagen</target>
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.1">
         <source>Please choose the files you want to attach.</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.show.0">
         <source>Show question details</source>
-        <target>Toon vraag</target>
+        <target>Details van de vraag</target>
       </trans-unit>
       <trans-unit id="tl_faq.show.1">
         <source>Show the details of question ID %s</source>

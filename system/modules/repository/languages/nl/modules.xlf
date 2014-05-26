@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="MOD.repository_manager.1">
         <source>Maintain or remove installed extensions</source>
-        <target>Onderhoud of verwijder geïnstalleerde extensies.</target>
+        <target>Geïnstalleerde extensies bijwerken of verwijderen.</target>
       </trans-unit>
     </body>
   </file>

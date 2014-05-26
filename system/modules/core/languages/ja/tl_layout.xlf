@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
-        <target>ファイルシステムからCSS、SCSS、LESSのファイルを追加できます。</target>
+        <target>ファイルシステムからCSS、SCSS、LESSのファイルをさらに追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
