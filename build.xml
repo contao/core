@@ -38,6 +38,7 @@
     <delete dir="contao-${version}/vendor/leafo/scssphp/site" />
     <delete dir="contao-${version}/vendor/simplepie/simplepie/demo" />
     <delete dir="contao-${version}/vendor/simplepie/simplepie/tests" />
+    <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
     <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/test-suite" />
     <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/tests" />
   </target>
