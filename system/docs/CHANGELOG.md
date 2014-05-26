@@ -5,6 +5,9 @@ Version 3.3.0 (2014-05-XX)
 --------------------------
 
 ### Fixed
+Correctly show the comments in the "comments" element (see #7040).
+
+### Fixed
 Correctly store the file selection in "edit multiple" mode (see #7028).
 
 ### Update
