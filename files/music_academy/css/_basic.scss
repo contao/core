@@ -1,0 +1,61 @@
+// Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license
+
+@import "vars";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a, body, div, em, input, label, legend, li, ol, p, select, span, strong, td, th, textarea, u, ul {
+  font-family: Ubuntu, sans-serif;
+}
+
+a, body, div, input, label, li, legend, ol, p, select, td, th, textarea, u, ul {
+  font-size: 12px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+h2 {
+  margin: 0 0 6px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: $links;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  vertical-align: middle;
+  border: 0;
+}
+
+p, pre, form, figure {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+b, strong {
+  font-weight: 500;
+}

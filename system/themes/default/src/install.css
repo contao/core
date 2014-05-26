@@ -15,7 +15,7 @@ body {
 
 /* Header */
 #header {
-	width:756px;
+	width:741px;
 	margin:18px auto 0;
 	padding:1px;
 	background:#fff;
@@ -26,26 +26,20 @@ body {
 #header h1 {
 	margin:0;
 	padding:4px 8px 6px;
-	background:#9a9c9a;
-	background-image:-moz-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-webkit-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-o-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:-ms-linear-gradient(top, #9a9c9a, #b3b6b3);
-	background-image:linear-gradient(to bottom, #9a9c9a, #b3b6b3);
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
 
 /* Container */
 #container {
-	width:760px;
+	width:745px;
 	margin:0 auto;
 	padding:0 0 18px;
 }
 
 /* Main */
 #main {
-	width:756px;
+	width:741px;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -214,7 +208,7 @@ fieldset.tl_tbox {
 fieldset.tl_tbox,fieldset.tl_box {
 	margin-left:18px;
 	margin-right:18px;
-	padding-top:6px;
+	padding:6px;
 	border:1px solid #ddd;
 	border-width:1px 0 0;
 }
@@ -240,8 +234,8 @@ fieldset.collapsed > legend {
 
 /* Form fields */
 .tl_text {
-	width:232px !important;
+	width:250px !important;
 }
 .tl_select {
-	width:238px !important;
+	width:258px !important;
 }

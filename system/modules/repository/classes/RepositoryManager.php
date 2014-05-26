@@ -51,8 +51,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 		// Switch to maintenance mode (see #4561)
 		if (Input::post('repository_action') == 'install' || Input::post('repository_action') == 'uninstall') {
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", true);
-			$this->Config->save();
+			Config::persist('maintenanceMode', true);
 		}
 
 		return parent::generate();
@@ -475,7 +474,7 @@ class RepositoryManager extends RepositoryBackendModule
 			if (!empty($sql) && is_array($sql)) {
 				foreach ($sql as $key) {
 					if (isset($_SESSION['sql_commands'][$key])) {
-						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . Config::get('dbCollation') . ';', $_SESSION['sql_commands'][$key]));
 					} // if
 				} // foreach
 			} // if
@@ -646,7 +645,7 @@ class RepositoryManager extends RepositoryBackendModule
 					// save new or changed file - by Request
 					if ($save) {
 						// HOOK: proxy module
-						if ($GLOBALS['TL_CONFIG']['useProxy']) {
+						if (Config::get('useProxy')) {
 							$req = new ProxyRequest();
 						} else {
 							$req = new Request();
@@ -733,7 +732,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 			// fetch package - using Request class
 			// HOOK: proxy module
-			if ($GLOBALS['TL_CONFIG']['useProxy']) {
+			if (Config::get('useProxy')) {
 				$req = new ProxyRequest();
 			} else {
 				$req = new Request();

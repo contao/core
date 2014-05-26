@@ -1,0 +1,640 @@
+// Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license
+
+@import "basic";
+
+body {
+  background: $background url("../images/background.gif") center top repeat-y;
+}
+
+#wrapper {
+  max-width: 100%;
+}
+
+#main .inside {
+  margin-bottom: 20px;
+}
+
+#left {
+  margin-top: 52px;
+}
+
+#top_image {
+  margin-left: 200px;
+
+  img {
+    width: 100%;
+    float: right;
+    margin: 0;
+    padding: 0;
+  }
+
+  &:after {
+    height: 0;
+    clear: both;
+    display: block;
+    line-height: 0;
+    content: ".";
+    visibility: hidden;
+  }
+}
+
+.ce_text, .teaser {
+  line-height: 1.5;
+}
+
+div.error, p.error {
+  margin: 0;
+  padding: 2px 0 0;
+  font-size: 10px;
+  color: $error;
+}
+
+.mod_article {
+  margin-right: 5px;
+
+  .back {
+    margin-top: 18px;
+  }
+
+  .more {
+    display: inline;
+  }
+
+  .pdf_link {
+    margin-bottom: -16px;
+    text-align: right;
+
+    a {
+      padding-right: 1px;
+      padding-left: 1px;
+    }
+  }
+}
+
+.mod_breadcrumb {
+  margin-bottom: 24px;
+  padding: 5px 3px 7px;
+  background-color: $background;
+
+  ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li {
+    float: left;
+
+    &:after {
+      margin-right: 3px;
+      padding-left: 1px;
+      content: " > ";
+    }
+
+    &.active:after {
+      display: none;
+    }
+  }
+}
+
+.ce_gallery .caption {
+  color: $info;
+}
+
+.mod_lostPassword {
+  margin: 24px;
+
+  td {
+    padding-right: 6px;
+    padding-bottom: 3px;
+  }
+
+  .text, .password {
+    width: 210px;
+  }
+
+  .captcha {
+    width: 40px;
+  }
+
+  .captcha_text {
+    color: $captcha;
+  }
+}
+
+.ce_list {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0 0 0 22px;
+    padding: 0;
+    line-height: 16px;
+  }
+}
+
+.mod_navigation {
+  width: 200px;
+  top: 43px;
+  position: absolute;
+  z-index: 999;
+
+  ul {
+    margin: 0 5px;
+    padding: 0;
+    border-bottom: 1px solid $colored;
+    list-style-type: none;
+  }
+
+  li {
+    margin: 0;
+    padding: 5px 0;
+    border-top: 1px solid $colored;
+    list-style-type: none;
+  }
+
+  a, li, span {
+    font-size: 14px;
+    color: $black;
+    font-weight: 500;
+  }
+
+  .level_2 {
+    padding: 3px 0 0 9px;
+    border-bottom: 0;
+
+    li {
+      padding: 0 0 3px;
+      border-top: 0;
+    }
+
+    a, li, span {
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
+}
+
+.mod_login {
+  margin: 0 5px;
+  padding: 5px;
+  background-color: $background;
+
+  label {
+    display: block;
+    margin: 4px 0 1px;
+  }
+
+  .checkbox_container {
+    margin-top: 3px;
+
+    label {
+      display: inline;
+    }
+  }
+
+  .submit_container {
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+}
+
+#request_password {
+  margin: 0 5px;
+  padding: 0 5px 10px 6px;
+  background-color: $background;
+
+  a {
+    font-size: 11px;
+    color: $info;
+  }
+}
+
+.mod_newsmenu, .mod_eventmenu {
+  margin: 0 5px 20px;
+  padding: 5px;
+  background-color: $background;
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .year {
+    margin-bottom: 2px;
+    font-weight: 500;
+
+    > a {
+      color: $black;
+    }
+  }
+}
+
+#breaking_news {
+  margin: 20px 5px;
+  padding: 5px;
+  background-color: $background;
+}
+
+.mod_newslist, .mod_newsreader {
+  .info {
+    margin-bottom: 6px;
+    font-size: 11px;
+    color: $info;
+  }
+}
+
+.mod_newslist {
+  p {
+    margin: 0 0 4px;
+  }
+
+  .layout_short {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid $colored;
+  }
+}
+
+.mod_newsreader {
+  margin-right: 5px;
+
+  .ce_text {
+    margin-top: 16px;
+  }
+
+  h2 {
+    margin-bottom: 12px;
+  }
+
+  .comment_default {
+    margin-bottom: 12px;
+  }
+
+  .comment {
+    line-height: 1.5;
+  }
+
+  .reply {
+    margin-top: 12px;
+    padding-left: 18px;
+  }
+
+  .form {
+    margin-top: 24px;
+  }
+
+  .widget {
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+
+  .textarea {
+    width: 360px;
+    height: 120px;
+  }
+
+  .back {
+    margin-bottom: 24px;
+    padding-top: 12px;
+  }
+}
+
+.mod_search {
+  margin-top: 3px;
+
+  .text {
+    width: 240px;
+    -webkit-appearance: none;
+  }
+
+  .radio_container {
+    margin: 3px 0 0;
+    padding: 0;
+    border: 0;
+
+    label {
+      left: -2px;
+      top: -2px;
+      position: relative;
+      padding-right: 3px;
+    }
+  }
+
+  .header {
+    margin-top: 18px;
+    margin-right: 5px;
+    margin-bottom: 24px;
+    padding-bottom: 4px;
+    text-align: right;
+    border-bottom: 1px solid $background;
+  }
+
+  h3 {
+    margin: 0 0 2px;
+    padding: 0;
+  }
+
+  .context {
+    margin: 0 5px 3px 0;
+  }
+
+  .url {
+    margin-bottom: 12px;
+    color: $colored;
+  }
+
+  .relevance {
+    font-size: 12px;
+    font-weight: normal;
+    color: $colored;
+  }
+
+  .highlight {
+    font-weight: 500;
+  }
+}
+
+table.calendar {
+  width: 100%;
+  border-top: 1px solid $border;
+  border-left: 1px solid $border;
+
+  .head {
+    padding-top: 4px;
+    padding-bottom: 5px;
+    text-align: center;
+    background-color: $weekend;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+  }
+
+  .current {
+    background-color: $today;
+  }
+
+  .label {
+    padding-top: 3px;
+    padding-bottom: 4px;
+    text-align: center;
+    background-color: $label;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+    font-size: 11px;
+    color: $white;
+    font-weight: 500;
+  }
+
+  .empty, .empty .header {
+    background-color: $weekend;
+  }
+
+  td {
+    width: 14%;
+    height: 72px;
+    padding: 1px;
+    vertical-align: top;
+    background-color: $white;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+
+    &.weekend {
+      background-color: $weekend;
+    }
+
+    &.today {
+      background-color: $today;
+    }
+
+    .header {
+      padding-bottom: 2px;
+      background-color: $header;
+      font-size: 11px;
+    }
+
+    .event a {
+      font-size: 11px;
+    }
+  }
+}
+
+#minicalendar {
+  margin: 0 5px 20px;
+  padding: 5px 5px 10px;
+  background-color: $background;
+}
+
+table.minicalendar {
+  width: 100%;
+  border-top: 1px solid $border;
+  border-left: 1px solid $border;
+
+  td {
+    width: 14%;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    text-align: center;
+    background-color: $white;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+
+    &.weekend {
+      background-color: $weekend;
+    }
+
+    &.today {
+      background-color: $today;
+    }
+  }
+
+  td, .active a {
+    font-size: 11px;
+  }
+
+  .label {
+    padding-top: 2px;
+    padding-bottom: 3px;
+    text-align: center;
+    background-color: $minilabel;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+    font-size: 11px;
+    color: $white;
+  }
+
+  .head {
+    padding-top: 3px;
+    padding-bottom: 4px;
+    text-align: center;
+    background-color: $minihead;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+  }
+
+  .current {
+    background-color: $today;
+  }
+}
+
+.mod_eventlist {
+  margin-right: 6px;
+
+  .header {
+    padding: 3px 6px 4px;
+    background-color: $headerbg;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+    border-left: 1px solid $border;
+    font-weight: 500;
+
+    &.first {
+      border-top: 1px solid $border;
+    }
+  }
+
+  .event {
+    padding: 10px 6px 12px;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+    border-left: 1px solid $border;
+  }
+
+  .time {
+    margin-top: -6px;
+    margin-bottom: 6px;
+    font-weight: normal;
+    color: $info;
+  }
+}
+
+.mod_eventreader {
+  .info {
+    margin-top: -12px;
+    font-size: 11px;
+    color: $info;
+  }
+
+  .recurring {
+    margin-top: 2px;
+    font-size: 11px;
+    color: $recurring;
+  }
+
+  .ce_text {
+    margin-top: 15px;
+  }
+
+  .back {
+    margin-top: 18px;
+  }
+}
+
+.mod_personalData {
+  margin-bottom: 36px;
+
+  fieldset {
+    width: 400px;
+    display: block;
+    margin: 12px 0 24px;
+    padding: 12px;
+  }
+
+  legend {
+    color: $colored;
+  }
+
+  .submit_container {
+    width: 428px;
+    text-align: right;
+  }
+
+  td {
+    width: 160px;
+    padding: 2px 6px 2px 0;
+  }
+
+  .text, .password {
+    width: 200px;
+  }
+
+  select {
+    width: 204px;
+  }
+}
+
+fieldset.radio_container, fieldset.checkbox_container {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ce_table {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-left: 1px solid $border;
+
+  th {
+    padding: 2px 8px;
+    background-color: $headerbg;
+    border-top: 1px solid $border;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+
+    a {
+      color: $black;
+    }
+  }
+
+  td {
+    padding: 2px 8px;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+  }
+}
+
+#tps {
+  td {
+    padding: 2px 4px;
+  }
+
+  .col_0 {
+    width: 80px;
+  }
+
+  .explanation {
+    padding-bottom: 24px;
+  }
+}
+
+.pagination {
+  margin-top: 22px;
+  padding-top: 4px;
+  border-top: 1px solid $background;
+
+  ul {
+    width: 240px;
+    float: right;
+    margin: 0;
+    padding: 0 3px;
+    text-align: right;
+  }
+
+  li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  p {
+    width: 160px;
+    float: left;
+    padding-right: 3px;
+    padding-left: 3px;
+    text-align: left;
+  }
+}

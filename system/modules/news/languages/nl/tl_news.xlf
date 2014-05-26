@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_news.alias.1">
         <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
-        <target>Een nieuws alias is een unieke referentie naar een nieuwsbericht dat kan gebruikt worden i.p.v. het nieuwsbericht ID.</target>
+        <target>Een nieuws alias is een unieke referentie naar een nieuwsbericht dat kan gebruikt worden i.p.v. het ID.</target>
       </trans-unit>
       <trans-unit id="tl_news.author.0">
         <source>Author</source>

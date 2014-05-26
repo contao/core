@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.author.1">
         <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>
-        <target>Geef de naam van de auteur en een optioneel e-mailadres (b.v. &lt;em&gt; Naam [e-mail@address.com] &lt;/ em&gt;).</target>
+        <target>Geef de naam van de auteur en een optioneel e-mailadres (b.v. &lt;em&gt; Naam [e-mail@address.com] &lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.copyright.0">
         <source>Copyright</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.copyright.1">
         <source>Please enter the copyright notice (e.g. &lt;em&gt;Name 2012&lt;/em&gt;).</source>
-        <target>Geef de copyright-vermelding in (b.v. &lt;em&gt; Naam 2012 &lt;/ em&gt;).</target>
+        <target>Geef de copyright-vermelding in (b.v. &lt;em&gt; Naam 2012 &lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.package.0">
         <source>Package</source>
@@ -219,7 +219,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.make.1">
         <source>Click the &quot;Create files&quot; button to generate a new folder in the &lt;em&gt;system/modules&lt;/em&gt; directory (note that existing files will be overwritten). The folder will contain all files and subfolders that are required to set up the extension. It is recommended to download these files to your development environment.</source>
-        <target>Klik op de &quot;maak bestanden&quot; knop om een ​​nieuwe map in de &lt;em&gt; systeem/modules &lt;/ em&gt; directory aan te maken (bedenk dat bestaande bestanden zullen worden overschreven). De map bevat alle bestanden en submappen die nodig zijn om de extensie op te zetten. Het wordt aanbevolen om deze bestanden te downloaden naar uw ontwikkelomgeving.</target>
+        <target>Klik op de &quot;maak bestanden&quot; knop om een ​​nieuwe map in de &lt;em&gt; systeem/modules &lt;/em&gt; directory aan te maken (bedenk dat bestaande bestanden zullen worden overschreven). De map bevat alle bestanden en submappen die nodig zijn om de extensie op te zetten. Het wordt aanbevolen om deze bestanden te downloaden naar uw ontwikkelomgeving.</target>
       </trans-unit>
     </body>
   </file>

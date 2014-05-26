@@ -110,7 +110,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin fotografi (p.sh. &lt;em&gt; të bashkëngjitni skedarë, music_academy &lt;/ em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoret p.sh. në imazh apo elemente shkarko!</target>
+        <target>Epeni një listë të ndarë me presje të dosjeve që do të përjashtohen nga sinkronizimin fotografi (p.sh. &lt;em&gt; të bashkëngjitni skedarë, music_academy &lt;/em&gt;). Vini re se burimet e përjashtuara nuk mund të përdoret p.sh. në imazh apo elemente shkarko!</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>

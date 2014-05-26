@@ -134,15 +134,16 @@ abstract class Database
 	{
 		$arrConfig = array
 		(
-			'dbDriver'   => $GLOBALS['TL_CONFIG']['dbDriver'],
-			'dbHost'     => $GLOBALS['TL_CONFIG']['dbHost'],
-			'dbUser'     => $GLOBALS['TL_CONFIG']['dbUser'],
-			'dbPass'     => $GLOBALS['TL_CONFIG']['dbPass'],
-			'dbDatabase' => $GLOBALS['TL_CONFIG']['dbDatabase'],
-			'dbPconnect' => $GLOBALS['TL_CONFIG']['dbPconnect'],
-			'dbCharset'  => $GLOBALS['TL_CONFIG']['dbCharset'],
-			'dbPort'     => $GLOBALS['TL_CONFIG']['dbPort'],
-			'dbSocket'   => $GLOBALS['TL_CONFIG']['dbSocket']
+			'dbDriver'   => \Config::get('dbDriver'),
+			'dbHost'     => \Config::get('dbHost'),
+			'dbUser'     => \Config::get('dbUser'),
+			'dbPass'     => \Config::get('dbPass'),
+			'dbDatabase' => \Config::get('dbDatabase'),
+			'dbPconnect' => \Config::get('dbPconnect'),
+			'dbCharset'  => \Config::get('dbCharset'),
+			'dbPort'     => \Config::get('dbPort'),
+			'dbSocket'   => \Config::get('dbSocket'),
+			'dbSqlMode'  => \Config::get('dbSqlMode')
 		);
 
 		if (is_array($arrCustom))

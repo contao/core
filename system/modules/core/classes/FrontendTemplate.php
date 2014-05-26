@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FrontendTemplate
  *
- * Provide methods to handle front end templates.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,10 +29,20 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Add a hook to modify the template output
-	 * @return string
+	 *
+	 * @return string The template markup
 	 */
 	public function parse()
 	{
+		global $objPage;
+
+		// Adjust the output format
+		if ($objPage->outputFormat != '')
+		{
+			$this->strFormat = $objPage->outputFormat;
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters
@@ -52,13 +61,13 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
-	 * @param boolean
-	 * @throws \UnusedArgumentsException
+	 *
+	 * @param boolean $blnCheckRequest If true, check for unsued $_GET parameters
+	 *
+	 * @throws \UnusedArgumentsException If there are unused $_GET parameters
 	 */
 	public function output($blnCheckRequest=false)
 	{
-		global $objPage;
-
 		$this->keywords = '';
 		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
 
@@ -69,7 +78,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Parse the template
-		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
+		$this->strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
 
 		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
@@ -77,12 +86,120 @@ class FrontendTemplate extends \Template
 			foreach ($GLOBALS['TL_HOOKS']['outputFrontendTemplate'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
+				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
 			}
 		}
 
+		// Add the output to the cache
+		$this->addToCache();
+
+		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
+		$this->strBuffer = $this->replaceInsertTags($this->strBuffer, false);
+		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
+		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
+
+		// HOOK: allow to modify the compiled markup (see #4291)
+		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
+			}
+		}
+
+		// Check whether all $_GET parameters have been used (see #4277)
+		if ($blnCheckRequest && \Input::hasUnusedGet())
+		{
+			throw new \UnusedArgumentsException();
+		}
+
+		// Send the response to the client
+		parent::output();
+
+		// Add the output to the search index
+		$this->addToSearchIndex();
+	}
+
+
+	/**
+	 * Return a custom layout section
+	 *
+	 * @param string $key      The section name
+	 * @param string $template An optional template name
+	 *
+	 * @return string The section markup
+	 */
+	public function section($key, $template=null)
+	{
+		$this->id = $key;
+		$this->content = $this->sections[$key];
+
+		if ($template === null)
+		{
+			$template = 'block_section';
+		}
+
+		include $this->getTemplate($template, $this->strFormat);
+	}
+
+
+	/**
+	 * Return the custom layout sections
+	 *
+	 * @param string $key      An optional section name
+	 * @param string $template An optional template name
+	 *
+	 * @return string The section markup
+	 */
+	public function sections($key=null, $template=null)
+	{
+		if (empty($this->sections))
+		{
+			return '';
+		}
+
+		// The key does not match
+		if ($key && $this->sPosition != $key)
+		{
+			return '';
+		}
+
+		// Use the section tag in HTML5
+		$this->tag = ($key == 'main' && $this->strFormat != 'xhtml') ? 'section' : 'div';
+
+		if ($template === null)
+		{
+			$template = 'block_sections';
+		}
+
+		include $this->getTemplate($template, $this->strFormat);
+	}
+
+
+	/**
+	 * Point to `Frontend::addToUrl()` in front end templates (see #6736)
+	 *
+	 * @param string  $strRequest      The request string to be added
+	 * @param boolean $blnIgnoreParams If true, the $_GET parameters will be ignored
+	 * @param array   $arrUnset        An optional array of keys to unset
+	 *
+	 * @return string The new URI string
+	 */
+	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
+	{
+		return \Frontend::addToUrl($strRequest, $blnIgnoreParams, $arrUnset);
+	}
+
+
+	/**
+	 * Add the template output to the cache and add the cache headers
+	 */
+	protected function addToCache()
+	{
+		global $objPage;
+
 		$intCache = 0;
-		$strUrl = \Environment::get('request');
 
 		// Decide whether the page shall be cached
 		if (!isset($_GET['file']) && !isset($_GET['token']) && empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && !$_SESSION['DISABLE_CACHE'] && !isset($_SESSION['LOGIN_ERROR']) && intval($objPage->cache) > 0 && !$objPage->protected)
@@ -91,7 +208,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Server-side cache
-		if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server'))
+		if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'server'))
 		{
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
@@ -100,7 +217,7 @@ class FrontendTemplate extends \Template
 			}
 			else
 			{
-				$strCacheKey = \Environment::get('base') . $strUrl;
+				$strCacheKey = \Environment::get('base') . \Environment::get('request');
 			}
 
 			// HOOK: add custom logic
@@ -120,7 +237,7 @@ class FrontendTemplate extends \Template
 			}
 
 			// Replace insert tags for caching
-			$strBuffer = $this->replaceInsertTags($strBuffer);
+			$strBuffer = $this->replaceInsertTags($this->strBuffer);
 			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
 			// Create the cache file
@@ -134,7 +251,7 @@ class FrontendTemplate extends \Template
 		// Client-side cache
 		if (!headers_sent())
 		{
-			if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+			if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache - time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
@@ -149,33 +266,21 @@ class FrontendTemplate extends \Template
 				header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
 			}
 		}
+	}
 
-		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
-		$this->strBuffer = $this->replaceInsertTags($strBuffer, false);
-		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
-		$this->strBuffer = $this->replaceDynamicScriptTags($this->strBuffer); // see #4203
 
-		// HOOK: allow to modify the compiled markup (see #4291)
-		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->strBuffer = $this->$callback[0]->$callback[1]($this->strBuffer, $this->strTemplate);
-			}
-		}
-
-		// Not all $_GET parameters have been used (see #4277)
-		if ($blnCheckRequest && \Input::hasUnusedGet())
-		{
-			throw new \UnusedArgumentsException();
-		}
+	/**
+	 * Add the template output to the search index
+	 */
+	protected function addToSearchIndex()
+	{
+		global $objPage;
 
 		// Index page if searching is allowed and there is no back end user
-		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
+		if (\Config::get('enableSearch') && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)
 		{
 			// Index protected pages if enabled
-			if ($GLOBALS['TL_CONFIG']['indexProtected'] || (!FE_USER_LOGGED_IN && !$objPage->protected))
+			if (\Config::get('indexProtected') || (!FE_USER_LOGGED_IN && !$objPage->protected))
 			{
 				$blnIndex = true;
 
@@ -193,7 +298,7 @@ class FrontendTemplate extends \Template
 				{
 					$arrData = array
 					(
-						'url' => $strUrl,
+						'url' => \Environment::get('request'),
 						'content' => $this->strBuffer,
 						'title' => $objPage->pageTitle ?: $objPage->title,
 						'protected' => ($objPage->protected ? '1' : ''),
@@ -206,15 +311,17 @@ class FrontendTemplate extends \Template
 				}
 			}
 		}
-
-		parent::output();
 	}
 
 
 	/**
 	 * Return a custom layout section
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strKey The section name
+	 *
+	 * @return string The section markup
+	 *
+	 * @deprecated Use FrontendTemplate::section() instead
 	 */
 	public function getCustomSection($strKey)
 	{
@@ -224,8 +331,12 @@ class FrontendTemplate extends \Template
 
 	/**
 	 * Return all custom layout sections
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strKey An optional section name
+	 *
+	 * @return string The section markup
+	 *
+	 * @deprecated Use FrontendTemplate::sections() instead
 	 */
 	public function getCustomSections($strKey=null)
 	{
@@ -261,19 +372,5 @@ class FrontendTemplate extends \Template
 		}
 
 		return '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
-	}
-
-
-	/**
-	 * Point to `Frontend::addToUrl()` in front end templates (see #6736)
-	 *
-	 * @param string
-	 * @param boolean
-	 *
-	 * @return string
-	 */
-	public static function addToUrl($strRequest, $blnIgnoreParams=false)
-	{
-		return \Frontend::addToUrl($strRequest, $blnIgnoreParams);
 	}
 }

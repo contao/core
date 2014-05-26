@@ -68,7 +68,7 @@ class ModuleFaqList extends \Module
 		}
 
 		// Show the FAQ reader if an item has been selected
-		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || (\Config::get('useAutoItem') && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->faq_readerModule, $this->strColumn);
 		}
@@ -96,12 +96,15 @@ class ModuleFaqList extends \Module
 		while ($objFaq->next())
 		{
 			$arrTemp = $objFaq->row();
-
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
+			// Get the FAQ category
+			$objPid = $objFaq->getRelated('pid');
+
 			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaq[$objFaq->pid]['headline'] = $objPid->headline;
+			$arrFaq[$objFaq->pid]['title'] = $objPid->title;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));
@@ -154,11 +157,11 @@ class ModuleFaqList extends \Module
 
 				if ($objTarget !== null)
 				{
-					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/items/%s')));
+					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s')));
 				}
 			}
 		}
 
-		return sprintf($this->arrTargets[$jumpTo], ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+		return sprintf($this->arrTargets[$jumpTo], ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 	}
 }

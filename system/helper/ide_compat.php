@@ -46,6 +46,7 @@ namespace  {
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
 	class DataContainer extends \Contao\DataContainer {}
+	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}
 	class FrontendTemplate extends \Contao\FrontendTemplate {}
@@ -76,6 +77,7 @@ namespace  {
 	class ContentHyperlink extends \Contao\ContentHyperlink {}
 	class ContentImage extends \Contao\ContentImage {}
 	class ContentList extends \Contao\ContentList {}
+	class ContentMarkdown extends \Contao\ContentMarkdown {}
 	class ContentMedia extends \Contao\ContentMedia {}
 	class ContentModule extends \Contao\ContentModule {}
 	class ContentSliderStart extends \Contao\ContentSliderStart {}
@@ -101,6 +103,7 @@ namespace  {
 	class FormTextArea extends \Contao\FormTextArea {}
 	class FormTextField extends \Contao\FormTextField {}
 	class Automator extends \Contao\Automator {}
+	abstract class BaseTemplate extends \Contao\BaseTemplate {}
 	class Cache extends \Contao\Cache {}
 	class ClassLoader extends \Contao\ClassLoader {}
 	class Combiner extends \Contao\Combiner {}
@@ -110,6 +113,7 @@ namespace  {
 	class Date extends \Contao\Date {}
 	class Dbafs extends \Contao\Dbafs {}
 	class DcaExtractor extends \Contao\DcaExtractor {}
+	class DcaLoader extends \Contao\DcaLoader {}
 	class Email extends \Contao\Email {}
 	class Encryption extends \Contao\Encryption {}
 	class Environment extends \Contao\Environment {}

@@ -118,7 +118,7 @@ class String
 		$arrEmptyTags = array('area', 'base', 'br', 'col', 'hr', 'img', 'input', 'frame', 'link', 'meta', 'param');
 
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$strString = preg_replace('/ +/', ' ', $strString);
 
 		// Seperate tags and text
@@ -233,7 +233,7 @@ class String
 
 		if ($strCharset === null)
 		{
-			$strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$strCharset = \Config::get('characterSet');
 		}
 
 		$strString = preg_replace('/(&#*\w+)[\x00-\x20]+;/i', '$1;', $strString);
@@ -477,7 +477,7 @@ class String
 		$strReturn = '';
 
 		// Remove any unwanted tags (especially PHP tags)
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags
@@ -549,6 +549,80 @@ class String
 	public static function binToUuid($data)
 	{
 		return implode('-', unpack('H8time_low/H4time_mid/H4time_high/H4clock_seq/H12node', $data));
+	}
+
+
+	/**
+	 * Convert file paths inside "src" attributes to insert tags
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with file paths converted to insert tags
+	 */
+	public static function srcToInsertTag($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByPath($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="{{file::' . static::binToUuid($file->uuid) . '}}"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Convert insert tags inside "src" attributes to file paths
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with insert tags converted to file paths
+	 */
+	public static function insertTagToSrc($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByUuid($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="' . $file->path . '"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
 	}
 
 

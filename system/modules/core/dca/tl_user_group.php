@@ -141,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('css', 'modules', 'layout'),
+			'options'                 => array('css', 'modules', 'layout', 'theme_import', 'theme_export'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -374,7 +374,7 @@ class tl_user_group extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -398,7 +398,7 @@ class tl_user_group extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

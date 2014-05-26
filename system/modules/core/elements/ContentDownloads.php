@@ -112,7 +112,7 @@ class ContentDownloads extends \ContentElement
 		$auxDate = array();
 
 		$objFiles = $this->objFiles;
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Get all files
 		while ($objFiles->next())
@@ -149,7 +149,7 @@ class ContentDownloads extends \ContentElement
 					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 				}
 
-				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
 				// Add the image
 				$files[$objFiles->path] = array
@@ -213,7 +213,7 @@ class ContentDownloads extends \ContentElement
 						$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 					}
 
-					$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objSubfiles->path);
+					$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objSubfiles->path);
 
 					// Add the image
 					$files[$objSubfiles->path] = array

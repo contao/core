@@ -341,6 +341,12 @@ Krijimi faqeve të uebit pa një faqe rrënjë nuk është më e mbështetur, k�
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Ky element përmban copa kodi që formatohen në një mënyrë të veçantë. Kodi nuk ekzkutohet por thjesht do të shfaqet në ekran ashtu siç është shkruajtur.</target>
       </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+      </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
         <target>Përmbajtje rrëshqitëse</target>
@@ -1755,7 +1761,7 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
-        <target>Contao është aktualisht duke ecur në mënyrë &lt;strong&gt;të sigurt apo safe mode&lt;/ strong&gt;, kështu që vetëm modulet kryesore janë të ngarkuara, për të parandaluar papajtueshmëritë e mundshme me shtes të treta (p.sh. pas një live update). Pasi të keni kontrolluar shtesat e instaluara, ju mund të çaktivizoni mnyrën e sigurtë apo safe mode përsëri.</target>
+        <target>Contao është aktualisht duke ecur në mënyrë &lt;strong&gt;të sigurt apo safe mode&lt;/strong&gt;, kështu që vetëm modulet kryesore janë të ngarkuara, për të parandaluar papajtueshmëritë e mundshme me shtes të treta (p.sh. pas një live update). Pasi të keni kontrolluar shtesat e instaluara, ju mund të çaktivizoni mnyrën e sigurtë apo safe mode përsëri.</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
@@ -1770,7 +1776,7 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
-        <target>&lt;strong&gt; Cache i brendshëm &lt;/ strong&gt; ende nuk është ndërtuar. Ndërtimi i cache përmirësonë shpejtësinë e programit dhe është shumë i rekomanduar. Nëse ju nuk dëshironi të përdorni cache, ju mund të çaktivizoni përgjithmonë atë në parametrat e back end.</target>
+        <target>&lt;strong&gt; Cache i brendshëm &lt;/strong&gt; ende nuk është ndërtuar. Ndërtimi i cache përmirësonë shpejtësinë e programit dhe është shumë i rekomanduar. Nëse ju nuk dëshironi të përdorni cache, ju mund të çaktivizoni përgjithmonë atë në parametrat e back end.</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheLink">
         <source>Build the cache</source>
@@ -1971,6 +1977,9 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
       <trans-unit id="MSC.totalPages">
         <source>Page %s of %s</source>
         <target>Faqja %s nga %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
       </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>

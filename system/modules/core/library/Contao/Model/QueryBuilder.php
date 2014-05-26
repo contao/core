@@ -33,7 +33,7 @@ class QueryBuilder
 	 *
 	 * @return string The query string
 	 */
-	public static function find($arrOptions)
+	public static function find(array $arrOptions)
 	{
 		$objBase = new \DcaExtractor($arrOptions['table']);
 
@@ -83,6 +83,12 @@ class QueryBuilder
 			$strQuery .= " GROUP BY " . $arrOptions['group'];
 		}
 
+		// Having (see #6446)
+		if ($arrOptions['having'] !== null)
+		{
+			$strQuery .= " HAVING " . $arrOptions['having'];
+		}
+
 		// Order by
 		if ($arrOptions['order'] !== null)
 		{
@@ -100,7 +106,7 @@ class QueryBuilder
 	 *
 	 * @return string The query string
 	 */
-	public static function count($arrOptions)
+	public static function count(array $arrOptions)
 	{
 		$strQuery = "SELECT COUNT(*) AS count FROM " . $arrOptions['table'];
 

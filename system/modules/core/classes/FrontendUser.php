@@ -161,13 +161,13 @@ class FrontendUser extends \User
 		}
 
 		// Check whether auto login is enabled
-		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && ($strCookie = \Input::cookie('FE_AUTO_LOGIN')) != '')
+		if (\Config::get('autologin') > 0 && ($strCookie = \Input::cookie('FE_AUTO_LOGIN')) != '')
 		{
 			// Try to find the user by his auto login cookie
 			if ($this->findBy('autologin', $strCookie) !== false)
 			{
 				// Check the auto login period
-				if ($this->createdOn >= (time() - $GLOBALS['TL_CONFIG']['autologin']))
+				if ($this->createdOn >= (time() - \Config::get('autologin')))
 				{
 					// Validate the account status
 					if ($this->checkAccountStatus() !== false)
@@ -211,7 +211,7 @@ class FrontendUser extends \User
 		}
 
 		// Set the auto login data
-		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && \Input::post('autologin'))
+		if (\Config::get('autologin') > 0 && \Input::post('autologin'))
 		{
 			$time = time();
 			$strToken = md5(uniqid(mt_rand(), true));
@@ -220,7 +220,7 @@ class FrontendUser extends \User
 			$this->autologin = $strToken;
 			$this->save();
 
-			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + $GLOBALS['TL_CONFIG']['autologin']), null, null, false, true);
+			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + \Config::get('autologin')), null, null, false, true);
 		}
 
 		return true;

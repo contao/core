@@ -126,4 +126,27 @@ class TemplateLoader
 
 		throw new \Exception('Could not find template "' . $template . '"');
 	}
+
+
+	/**
+	 * Return the path to the default template
+	 *
+	 * @param string $template The template name
+	 * @param string $format   The output format (e.g. "html5")
+	 *
+	 * @return string The path to the default template file
+	 *
+	 * @throws \Exception If $template does not exist
+	 */
+	public static function getDefaultPath($template, $format)
+	{
+		$file = $template .  '.' . $format;
+
+		if (isset(self::$files[$template]))
+		{
+			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;
+		}
+
+		throw new \Exception('Could not find template "' . $template . '"');
+	}
 }

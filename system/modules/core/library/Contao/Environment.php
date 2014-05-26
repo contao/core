@@ -311,7 +311,7 @@ class Environment
 		$xhost = static::get('httpXForwardedHost');
 
 		// SSL proxy
-		if ($xhost != '' && $xhost == $GLOBALS['TL_CONFIG']['sslProxyDomain'])
+		if ($xhost != '' && $xhost == \Config::get('sslProxyDomain'))
 		{
 			return 'https://' .  $xhost . '/' . $host;
 		}
@@ -345,7 +345,7 @@ class Environment
 		}
 
 		$strXip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		$arrTrusted = trimsplit(',', $GLOBALS['TL_CONFIG']['proxyServerIps']);
+		$arrTrusted = trimsplit(',', \Config::get('proxyServerIps'));
 
 		// Generate an array of X-Forwarded-For IPs
 		if (strpos($strXip, ',') !== false)
@@ -505,7 +505,7 @@ class Environment
 		$engine = '';
 
 		// Operating system
-		foreach ($GLOBALS['TL_CONFIG']['os'] as $k=>$v)
+		foreach (\Config::get('os') as $k=>$v)
 		{
 			if (stripos($ua, $k) !== false)
 			{
@@ -524,7 +524,7 @@ class Environment
 		$return->os = $os;
 
 		// Browser and version
-		foreach ($GLOBALS['TL_CONFIG']['browser'] as $k=>$v)
+		foreach (\Config::get('browser') as $k=>$v)
 		{
 			if (stripos($ua, $k) !== false)
 			{

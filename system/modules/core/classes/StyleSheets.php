@@ -90,7 +90,7 @@ class StyleSheets extends \Backend
 			}
 
 			// Preserve root files (is this still required now that scripts are in assets/css/scripts?)
-			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
+			if (is_array(\Config::get('rootFiles')) && in_array($file, \Config::get('rootFiles')))
 			{
 				continue;
 			}
@@ -176,7 +176,7 @@ class StyleSheets extends \Backend
 
 		// Create the file
 		$objFile = new \File('assets/css/' . $row['name'] . '.css', true);
-		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
+		$objFile->write('/* ' . $row['name'] . ".css */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($row['id']);
@@ -201,12 +201,10 @@ class StyleSheets extends \Backend
 	 */
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
 	{
-		$blnDebug = $GLOBALS['TL_CONFIG']['debugMode'];
-
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
-			$lb = ($blnDebug ? "\n    " : '');
+			$lb = '';
 			$return = '';
 		}
 		else
@@ -229,7 +227,7 @@ class StyleSheets extends \Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . (($blnWriteToFile && !$blnDebug) ? '' : ' ') . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? '' : ' ') . '{';
 
 		// Size
 		if ($row['size'])
@@ -913,7 +911,7 @@ class StyleSheets extends \Backend
 		// CSS3PIE
 		if ($blnNeedsPie && !$parent['disablePie'])
 		{
-			$return .= $lb . 'behavior:url(\'assets/css3pie/'.CSS3PIE.'/PIE.htc\');';
+			$return .= $lb . 'behavior:url(\'assets/css3pie/' . $GLOBALS['TL_ASSETS']['CSS3PIE'] . '/PIE.htc\');';
 		}
 
 		// Custom code
@@ -932,7 +930,7 @@ class StyleSheets extends \Backend
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
             {
 				$this->import($callback[0]);
-				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
+				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars, $parent);
 
 				if ($strTemp != '')
 				{
@@ -950,8 +948,7 @@ class StyleSheets extends \Backend
 				$return = substr($return, 0, -1);
 			}
 
-			$nl = $blnDebug ? "\n" : '';
-			$return .= $nl . '}' . $nl;
+			$return .= '}';
 		}
 		else
 		{
@@ -1318,7 +1315,7 @@ class StyleSheets extends \Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
   <h3>'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
@@ -2110,7 +2107,7 @@ class StyleSheets extends \Backend
 					break;
 
 				case 'behavior':
-					if ($arrChunks[1] != 'url(\'assets/'.CSS3PIE.'/css3pie/PIE.htc\')')
+					if ($arrChunks[1] != 'url(\'assets/' . $GLOBALS['TL_ASSETS']['CSS3PIE'] . '/css3pie/PIE.htc\')')
 					{
 						$arrSet['own'][] = $strDefinition;
 					}

@@ -55,7 +55,7 @@ class PageForward extends \Frontend
 		$strForceLang = null;
 
 		// Check the target page language (see #4706)
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		if (\Config::get('addLanguageToUrl'))
 		{
 			$objNextPage->loadDetails(); // see #3983
 			$strForceLang = $objNextPage->language;
@@ -82,12 +82,12 @@ class PageForward extends \Frontend
 		{
 			foreach (array_keys($_GET) as $key)
 			{
-				if ($GLOBALS['TL_CONFIG']['disableAlias'] && $key == 'id')
+				if (\Config::get('disableAlias') && $key == 'id')
 				{
 					continue;
 				}
 
-				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $key == 'language')
+				if (\Config::get('addLanguageToUrl') && $key == 'language')
 				{
 					continue;
 				}

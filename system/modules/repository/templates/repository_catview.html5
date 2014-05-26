@@ -52,7 +52,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
         </tr>
         <tr>
           <th><?php echo $text['releasedate'][0]; ?></th>
-          <td><?php echo Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
+          <td><?php echo Date::parse(Config::get('dateFormat'), $ext->releasedate); ?></td>
           <th>&nbsp;</th>
           <td>&nbsp;</td>
         </tr>

@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.template_exists">
         <source>The template &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; exists and will be overwritten.</source>
-        <target>A sablon &lt;strong&gt;&quot;%s&quot;&lt;/ strong&gt; létezik és felül lesz írva.</target>
+        <target>A sablon &lt;strong&gt;&quot;%s&quot;&lt;/strong&gt; létezik és felül lesz írva.</target>
       </trans-unit>
       <trans-unit id="tl_theme.templates_ok">
         <source>No conflicts detected.</source>

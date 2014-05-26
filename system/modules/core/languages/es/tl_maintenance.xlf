@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.index.1">
         <source>Truncates the tables &lt;em&gt;tl_search&lt;/em&gt; and &lt;em&gt;tl_search_index&lt;/em&gt;. Afterwards, you have to rebuild the search index (see above).</source>
-        <target>Trunca las tablas &lt;em&gt;tl_search&lt;/ em&gt; y &lt;em&gt;tl_search_index&lt;/ em&gt;. Después, hay que reconstruir el índice de búsqueda (ver arriba).</target>
+        <target>Trunca las tablas &lt;em&gt;tl_search&lt;/em&gt; y &lt;em&gt;tl_search_index&lt;/em&gt;. Después, hay que reconstruir el índice de búsqueda (ver arriba).</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.0">
         <source>Purge the undo table</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.1">
         <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
-        <target>Trunca el &lt;em&gt;tl_undo&lt;/ em&gt; tabla que almacena los registros eliminados. Este trabajo elimina permanentemente estos registros.</target>
+        <target>Trunca el &lt;em&gt;tl_undo&lt;/em&gt; tabla que almacena los registros eliminados. Este trabajo elimina permanentemente estos registros.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.0">
         <source>Purge the version table</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
-        <target>Trunca el &lt;em&gt;tl_version&lt;/ em&gt; tabla que almacena las versiones anteriores de un registro. Este trabajo elimina permanentemente estos registros.</target>
+        <target>Trunca el &lt;em&gt;tl_version&lt;/em&gt; tabla que almacena las versiones anteriores de un registro. Este trabajo elimina permanentemente estos registros.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
-        <target>Trunca el &lt;em&gt;tl_log&lt;/ em&gt; tabla que almacena todas las entradas del registro de sistema eliminados. Este trabajo elimina permanentemente estos registros.</target>
+        <target>Trunca el &lt;em&gt;tl_log&lt;/em&gt; tabla que almacena todas las entradas del registro de sistema eliminados. Este trabajo elimina permanentemente estos registros.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>

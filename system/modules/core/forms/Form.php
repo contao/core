@@ -53,14 +53,19 @@ class Form extends \Hybrid
 	 */
 	public function generate()
 	{
-		$str = parent::generate();
-
 		if (TL_MODE == 'BE')
 		{
-			$str = preg_replace('/name="[^"]+" ?/i', '', $str);
+			$objTemplate = new \BackendTemplate('be_wildcard');
+
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->title;
+			$objTemplate->href = 'contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $this->id;
+
+			return $objTemplate->parse();
 		}
 
-		return $str;
+		return parent::generate();
 	}
 
 
@@ -359,7 +364,7 @@ class Form extends \Hybrid
 			// Fallback to default subject
 			if (!strlen($email->subject))
 			{
-				$email->subject = $this->replaceInsertTags($this->subject);
+				$email->subject = $this->replaceInsertTags($this->subject, false);
 			}
 
 			// Send copy to sender
@@ -375,7 +380,7 @@ class Form extends \Hybrid
 				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
-				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+				$objTemplate->charset = \Config::get('characterSet');
 
 				$email->attachFileFromString($objTemplate->parse(), 'form.xml', 'application/xml');
 			}
@@ -480,7 +485,6 @@ class Form extends \Hybrid
 		}
 
 		$arrFiles = $_SESSION['FILES'];
-		$arrData = $_SESSION['FORM_DATA'];
 
 		// HOOK: process form data callback
 		if (isset($GLOBALS['TL_HOOKS']['processFormData']) && is_array($GLOBALS['TL_HOOKS']['processFormData']))
@@ -488,12 +492,10 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrData, $this->arrData, $arrFiles, $arrLabels, $this);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 
-		// Reset form data in case it has been modified in a callback function
-		$_SESSION['FORM_DATA'] = $arrData;
 		$_SESSION['FILES'] = array(); // DO NOT CHANGE
 
 		// Add a log entry

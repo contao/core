@@ -63,7 +63,7 @@ var SimpleModal = new Class({
         keyEsc:        true,
         overlayClick:  true,
         closeButton:   true, // X close button
-        hideHeader:    false, 
+        hideHeader:    false,
         hideFooter:    false,
         lightboxExcessWidth:40,  // Only for Modal Image (excess pixels created from skin)
         lightboxExcessHeight:120, // Only for Modal Image (excess pixels created from skin)
@@ -79,7 +79,7 @@ var SimpleModal = new Class({
         //set options
         this.setOptions(options);
     },
-    
+
     /**
     * public method show
     * Open Modal
@@ -133,18 +133,18 @@ var SimpleModal = new Class({
 					this._addEscBehaviour();
         break;
       }
-			   
+
       // Custom size Modal
       // PATCH: do not exceed the display width (see #5750)
-      node.setStyles({width:Math.min(this.options.width, window.getCoordinates().width - 40)});
-      
+      node.setStyles({width:Math.min(this.options.width, window.getCoordinates().width - 20)});
+
       // Hide Header &&/|| Footer
       if( this.options.hideHeader ) node.addClass("hide-header");
       if( this.options.hideFooter ) node.addClass("hide-footer");
 
       // Add Button X
       if( this.options.closeButton ) this._addCloseButton();
-      
+
       // Enabled Drag Window
       if( this.options.draggable ){
         var headDrag = node.getElement(".simple-modal-header");
@@ -156,7 +156,7 @@ var SimpleModal = new Class({
       // Resize Stage
       this._display();
     },
-    
+
     /**
     * public method hide
     * Close model window
@@ -169,7 +169,7 @@ var SimpleModal = new Class({
 		 this._overlay('hide');
      return;
     },
-    
+
     /**
     * private method _drawWindow
     * Rendering window
@@ -207,7 +207,7 @@ var SimpleModal = new Class({
          this.buttons.push(bt);
  		     return bt;
      },
-     
+
     /**
     * private method _injectAllButtons
     * Inject all buttons in simple-modal-footer
@@ -271,7 +271,7 @@ var SimpleModal = new Class({
                if(this.options.keyEsc){
                  window.removeEvent("keydown", this._removeSM);
                }
-               
+
                // Remove Overlay
                try{
                  $('simple-modal-overlay').destroy();
@@ -325,9 +325,9 @@ var SimpleModal = new Class({
 									var height  = immagine.get("height").toInt();
 									// Porportional scale
                   var ns = this._scaleImage(width, height);
-                  width   = ns.width					
+                  width   = ns.width
 									height  = ns.height
-									
+
 									// Width
 									var myFx1 = new Fx.Tween($("simple-modal"), {
 									    duration: 'normal',
@@ -358,7 +358,7 @@ var SimpleModal = new Class({
 								}catch(err){}
 							}.bind(this)
 						});
-						
+
 			}else{
 				// Request HTML
 	      this.request = new Request.HTML({
@@ -385,7 +385,7 @@ var SimpleModal = new Class({
 	      }).send();
 			}
     },
-    
+
     /**
     * private method _scaleImage
     * Calculate scale image proportional
@@ -406,7 +406,7 @@ var SimpleModal = new Class({
 			h = parseInt(height / ratio);
 			return {"width":w, "height":h}
     },
-    
+
     /**
     * private method _display
     * Move interface
@@ -419,7 +419,7 @@ var SimpleModal = new Class({
           height: window.getCoordinates().height //$$("body")[0].getScrollSize().y
         });
       } catch(err){}
-         
+
       // Update position popup
       try{
         var offsetTop = this.options.offsetTop || 40; //this.options.offsetTop != null ? this.options.offsetTop : window.getScroll().y + 40;
@@ -430,7 +430,7 @@ var SimpleModal = new Class({
       } catch(err){}
  		  return;
      },
-     
+
      /**
      * private method _addEscBehaviour
      * add Event ESC
@@ -455,7 +455,7 @@ var SimpleModal = new Class({
          }
        }
      },
-      
+
     /**
     * private method _template
     * simple template by Thomas Fuchs

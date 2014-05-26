@@ -85,7 +85,7 @@ class ModuleQuicknav extends \Module
 			$objRootPage = \PageModel::findWithDetails($this->rootPage);
 
 			// Set the language
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			if (\Config::get('addLanguageToUrl') && $objRootPage->rootLanguage != $objPage->rootLanguage)
 			{
 				$lang = $objRootPage->rootLanguage;
 			}
@@ -155,13 +155,7 @@ class ModuleQuicknav extends \Module
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
-					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
-
-					// Add the domain if it differs from the current one (see #3765)
-					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-					{
-						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
-					}
+					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 
 					$arrPages[] = array
 					(

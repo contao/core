@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_content.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>Geef de tekst op (u kunt gebruik maken van HTML tags).</target>
+        <target>U kunt HTML tags gebruiken om de tekst op te maken.</target>
       </trans-unit>
       <trans-unit id="tl_content.addImage.0">
         <source>Add an image</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_content.addImage.1">
         <source>Add an image to the content element.</source>
-        <target>Een afbeelding zal aan het inhoudselement toegevoegd worden.</target>
+        <target>Voeg een afbeelding toe aan het inhoudselement.</target>
       </trans-unit>
       <trans-unit id="tl_content.singleSRC.0">
         <source>Source file</source>
@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="tl_content.floating.0">
         <source>Image alignment</source>
-        <target>Afbeelding uitlijning</target>
+        <target>Uitlijning afbeelding</target>
       </trans-unit>
       <trans-unit id="tl_content.floating.1">
         <source>Please specify how to align the image.</source>
-        <target>Kies de uitlijning van de afbeelding. Een afbeelding kan boven of onder de tekst of bovenaan links of bovenaan rechts van de tekst weergegeven worden.</target>
+        <target>Kies de uitlijning van de afbeelding.</target>
       </trans-unit>
       <trans-unit id="tl_content.caption.0">
         <source>Image caption</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortIndex.1">
         <source>The number of the default sort column.</source>
-        <target>Geef het nummer van de standaard kolom op die u als eerste wilt sorteren (eerste kolom=0!).</target>
+        <target>Geef het nummer van de standaard kolom op die u als eerste wilt sorteren.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.0">
         <source>Sort order</source>
@@ -195,7 +195,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooType.0">
         <source>Operation mode</source>
-        <target>Variant</target>
+        <target>Bedrijfsmodus</target>
       </trans-unit>
       <trans-unit id="tl_content.mooType.1">
         <source>Please select the operation mode of the accordion element.</source>
@@ -259,7 +259,7 @@
       </trans-unit>
       <trans-unit id="tl_content.highlight.0">
         <source>Syntax highlighting</source>
-        <target>Syntax herkenning</target>
+        <target>Syntax markering</target>
       </trans-unit>
       <trans-unit id="tl_content.highlight.1">
         <source>Please choose a scripting language.</source>
@@ -377,6 +377,14 @@
         <source>Here you can select the gallery template.</source>
         <target>Hier kunt u een galerij template selecteren.</target>
       </trans-unit>
+      <trans-unit id="tl_content.customTpl.0">
+        <source>Custom element template</source>
+        <target>Aangepaste template</target>
+      </trans-unit>
+      <trans-unit id="tl_content.customTpl.1">
+        <source>Here you can overwrite the default element template.</source>
+        <target>Hier kunt u de standaard template overschrijven.</target>
+      </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
         <target>Video/audio bestanden</target>
@@ -391,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_content.youtube.1">
         <source>Please enter the YouTube video ID (e.g. &lt;em&gt;nsqh9jHkHlM&lt;/em&gt;).</source>
-        <target>Vul YouTube-video ID in (b.v. &lt;em&gt; nsqh9jHkHlM &lt;/ em&gt;).</target>
+        <target>Vul YouTube-video ID in (b.v. &lt;em&gt; nsqh9jHkHlM &lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.posterSRC.0">
         <source>Preview image</source>

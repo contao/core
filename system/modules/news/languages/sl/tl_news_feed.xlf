@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
-        <target>Tukaj lahko vpišete edinstveno ime datoteke (brez podaljška). Datoteka XML izvleček bo samodejno ustvarjena v &lt;em&gt;share&lt;/em&gt; mapi vaše Contao namestitve, npr. kot &lt;em&gt;share/ime.xml&lt;/ em&gt;.</target>
+        <target>Tukaj lahko vpišete edinstveno ime datoteke (brez podaljška). Datoteka XML izvleček bo samodejno ustvarjena v &lt;em&gt;share&lt;/em&gt; mapi vaše Contao namestitve, npr. kot &lt;em&gt;share/ime.xml&lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.language.0">
         <source>Feed language</source>

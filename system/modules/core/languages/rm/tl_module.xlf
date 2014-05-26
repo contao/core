@@ -81,6 +81,14 @@
         <source>Here you can select the navigation template.</source>
         <target>Qua pos ti tscherner il template da navigaziun.</target>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+        <target>Template da modul persunalisads</target>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+        <target>Qua pos ti midar il template da standard dal modul.</target>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
         <target>Paginas</target>
@@ -612,6 +620,10 @@
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
         <target>Opziuns dal template</target>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
+        <target>Parameters dal maletg</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

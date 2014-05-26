@@ -31,23 +31,23 @@
       </trans-unit>
       <trans-unit id="MSC.cal_empty">
         <source>Currently there are no events.</source>
-        <target>Nincs közelgő esemény.</target>
+        <target>Jelenleg nincs esemény.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_days">
         <source>This event is repeated every %s. day</source>
-        <target>Ez az esemény ismétlődik minden %s. napon.</target>
+        <target>Ez az esemény ismétlődik minden %s. napon</target>
       </trans-unit>
       <trans-unit id="MSC.cal_weeks">
         <source>This event is repeated every %s. week</source>
-        <target>Ez az esemény ismétlődik minden %s. héten.</target>
+        <target>Ez az esemény ismétlődik minden %s. héten</target>
       </trans-unit>
       <trans-unit id="MSC.cal_months">
         <source>This event is repeated every %s. month</source>
-        <target>Ez az esemény ismétlődik minden %s. hónapban.</target>
+        <target>Ez az esemény ismétlődik minden %s. hónapban</target>
       </trans-unit>
       <trans-unit id="MSC.cal_years">
         <source>This event is repeated every %s. year</source>
-        <target>Ez az esemény ismétlődik minden %s. évben.</target>
+        <target>Ez az esemény ismétlődik minden %s. évben</target>
       </trans-unit>
       <trans-unit id="MSC.cal_until">
         <source>until %s</source>

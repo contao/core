@@ -79,8 +79,9 @@ class ModuleListing extends \Module
 		}
 
 		$this->strTemplate = $this->list_layout;
-		$this->list_where = $this->replaceInsertTags($this->list_where);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+
+		$this->list_where = $this->replaceInsertTags($this->list_where, false);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		return parent::generate();
 	}
@@ -174,22 +175,31 @@ class ModuleListing extends \Module
 		/**
 		 * Get the selected records
 		 */
-		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields . " FROM " . $this->list_table;
+		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields;
+
+		if ($this->list_info_where)
+		{
+			$strQuery .= ", (SELECT COUNT(*) FROM " . $this->list_table . " t2 WHERE t2." . $this->strPk . "=t1." . $this->strPk . " AND " . $this->list_info_where . ") AS _details";
+		}
+
+		$strQuery .= " FROM " . $this->list_table . " t1";
 
 		if ($this->list_where)
 		{
 			$strQuery .= " WHERE (" . $this->list_where . ")";
 		}
 
-		$strQuery .=  $strWhere;
+		$strQuery .= $strWhere;
 
 		// Cast date fields to int (see #5609)
-		$blnCastInt = ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'datim');
+		$isInt = function($field) {
+			return $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'datim';
+		};
 
 		// Order by
 		if (\Input::get('order_by'))
 		{
-			if ($blnCastInt)
+			if ($isInt(\Input::get('order_by')))
 			{
 				$strQuery .= " ORDER BY CAST(" . \Input::get('order_by') . " AS SIGNED) " . \Input::get('sort');
 			}
@@ -200,7 +210,7 @@ class ModuleListing extends \Module
 		}
 		elseif ($this->list_sort)
 		{
-			if ($blnCastInt)
+			if ($isInt($this->list_sort))
 			{
 				$strQuery .= " ORDER BY CAST(" . $this->list_sort . " AS SIGNED)";
 			}
@@ -235,13 +245,13 @@ class ModuleListing extends \Module
 		{
 			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, $id, strlen($id)) !== 0)
 			{
-				$strUrl .= ((!$blnQuery && !$GLOBALS['TL_CONFIG']['disableAlias']) ? '?' : '&amp;') . $fragment;
+				$strUrl .= ((!$blnQuery && !\Config::get('disableAlias')) ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
 			}
 		}
 
 		$this->Template->url = $strUrl;
-		$strVarConnector = ($blnQuery || $GLOBALS['TL_CONFIG']['disableAlias']) ? '&amp;' : '?';
+		$strVarConnector = ($blnQuery || \Config::get('disableAlias')) ? '&amp;' : '?';
 
 
 		/**
@@ -297,6 +307,11 @@ class ModuleListing extends \Module
 					continue;
 				}
 
+				if ($k == '_details')
+				{
+					continue;
+				}
+
 				// Never show passwords
 				if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
 				{
@@ -312,7 +327,8 @@ class ModuleListing extends \Module
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
 					'id' => $arrRows[$i][$this->strPk],
 					'field' => $k,
-					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i][$this->strPk]
+					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i][$this->strPk],
+					'details' => (isset($arrRows[$i]['_details']) ? $arrRows[$i]['_details'] : 1)
 				);
 			}
 		}
@@ -324,7 +340,7 @@ class ModuleListing extends \Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new \Pagination($objTotal->count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+		$objPagination = new \Pagination($objTotal->count, $per_page, \Config::get('maxPaginationLinks'), $id);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 		$this->Template->total = $objTotal->count;
@@ -364,8 +380,9 @@ class ModuleListing extends \Module
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+
 		$this->list_info = deserialize($this->list_info);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . $this->strPk . "=?")
 									->limit(1)

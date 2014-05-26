@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="XPT.errorExplain">
         <source>The script execution stopped, because something does not work properly. The actual error message is hidden by this notice for security reasons and can be found in in the &lt;code&gt;system/logs/error.log&lt;/code&gt; file (see above). If you do not understand the error message or do not know how to fix the problem, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;страницу поддержки Contao&lt;/a&gt;.</target>
+        <target>Выполнение скрипта остановлено, потому, что что-то не работает должным образом. Фактическое сообщение об ошибке скрыто этим уведомлением по соображениям безопасности и может быть найдено в файле &lt;code&gt;system/logs/error.log&lt;/code&gt; (см. выше). Если вы не понимаете сообщение об ошибке или не знаете, как решить проблему, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.requestToken">
         <source>Invalid request token</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Страницу поддержки Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, воспользуйтесь поиском в &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Вопросы и ответы Contao&lt;/a&gt; или посетите &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;страницу поддержки Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.incomplete">
         <source>Incomplete installation</source>
@@ -127,11 +127,11 @@
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
-        <target>Убедитесь, что вы назначили макет страницы для каждой корневой страницы в структуре сайта.</target>
+        <target>Убедитесь, что вы назначили макет страницы, каждой корневой странице в структуре сайта.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
-        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Инструкции Contao&lt;/a&gt;.</target>
+        <target>Для получения дополнительной информации, обратитесь к &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Инструкция Contao&lt;/a&gt;.</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>

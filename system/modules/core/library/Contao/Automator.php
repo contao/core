@@ -29,6 +29,15 @@ class Automator extends \System
 {
 
 	/**
+	 * Make the constuctor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
+	/**
 	 * Check for new \Contao versions
 	 */
 	public function checkForUpdates()
@@ -39,12 +48,12 @@ class Automator extends \System
 		}
 
 		$objRequest = new \Request();
-		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
+		$objRequest->send(\Config::get('liveUpdateBase') . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
-			$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
+			\Config::set('latestVersion', $objRequest->response);
+			\Config::persist('latestVersion', $objRequest->response);
 		}
 
 		// Add a log entry

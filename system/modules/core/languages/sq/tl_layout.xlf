@@ -169,6 +169,12 @@
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
         <target>Gjeneron CSS strukturn përgjegjëse bazuar në parametrat strukturës së faqes. Ky komponent është e nevojshme për të punuar gjeneratori i strukturës së faqes!</target>
       </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+      </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
         <target>Rrjet 12-kolonëshe</target>
@@ -206,7 +212,7 @@
         <target>Style sheets shtesë.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional CSS files from the file system.</source>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -271,6 +277,18 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
         <target>Këtu mund të futen klasa individuale në body tag.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -392,6 +410,9 @@
         <source>Custom sections</source>
         <target>Sektor individual</target>
       </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+      </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
         <target>Style sheets</target>
@@ -420,33 +441,27 @@
         <source>jQuery</source>
         <target>jQuery</target>
       </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+      </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
         <target>MooTools</target>
       </trans-unit>
-      <trans-unit id="tl_layout.j_local">
-        <source>jQuery - local file</source>
-        <target>jQuery - skedari vendor</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_googleapis">
-        <source>jQuery - googleapis.com</source>
-        <target>jQuery - googleapis.com</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_fallback">
-        <source>jQuery - googleapis.com with local fallback</source>
-        <target>jQuery - googleapis.com me fallback vendor</target>
-      </trans-unit>
       <trans-unit id="tl_layout.moo_local">
-        <source>MooTools - local file</source>
-        <target>MooTools - skedar vendor</target>
+        <source>Local file</source>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
-        <source>MooTools - googleapis.com</source>
-        <target>MooTools - googleapis.com</target>
+        <source>CDN (googleapis.com)</source>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
-        <source>MooTools - googleapis.com with local fallback</source>
-        <target>MooTools - googleapis.com me fallback vendor</target>
+        <source>CDN with local fallback</source>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

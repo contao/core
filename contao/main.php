@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/main.php');
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**
@@ -84,14 +84,14 @@ class Main extends Backend
 			{
 				$this->import('Automator');
 				$this->Automator->purgeInternalCache();
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", false);
+				Config::persist('coreOnlyMode', false);
 				$this->redirect($this->getReferer());
 			}
 
 			// Maintenance mode off
 			if (Input::get('mmo'))
 			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['maintenanceMode']", false);
+				Config::persist('maintenanceMode', false);
 				$this->redirect($this->getReferer());
 			}
 
@@ -183,7 +183,7 @@ class Main extends Backend
 		// Add the versions overview
 		Versions::addToTemplate($objTemplate);
 
-		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
+		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], Config::get('websiteTitle'));
 		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
@@ -202,7 +202,7 @@ class Main extends Backend
 		// Default headline
 		if ($this->Template->headline == '')
 		{
-			$this->Template->headline = $GLOBALS['TL_CONFIG']['websiteTitle'];
+			$this->Template->headline = Config::get('websiteTitle');
 		}
 
 		// Default title
@@ -222,7 +222,7 @@ class Main extends Backend
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($this->Template->title);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
 		$this->Template->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->previewTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fePreviewTitle']);
@@ -241,13 +241,13 @@ class Main extends Backend
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
-		$this->Template->loadFonts = $GLOBALS['TL_CONFIG']['loadGoogleFonts'];
+		$this->Template->loadFonts = Config::get('loadGoogleFonts');
 		$this->Template->isAdmin = $this->User->isAdmin;
-		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
+		$this->Template->isCoreOnlyMode = Config::get('coreOnlyMode');
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
 		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
-		$this->Template->isMaintenanceMode = $GLOBALS['TL_CONFIG']['maintenanceMode'];
+		$this->Template->isMaintenanceMode = Config::get('maintenanceMode');
 		$this->Template->maintenanceMode = $GLOBALS['TL_LANG']['MSC']['maintenanceMode'];
 		$this->Template->maintenanceOff = specialchars($GLOBALS['TL_LANG']['MSC']['maintenanceOff']);
 		$this->Template->maintenanceHref = $this->addToUrl('mmo=1');
@@ -257,7 +257,7 @@ class Main extends Backend
 		$this->Template->isPopup = Input::get('popup');
 
 		// Hide the cache message in the repository manager (see #5966)
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && $this->User->isAdmin)
+		if (!Config::get('bypassCache') && $this->User->isAdmin)
 		{
 			$this->Template->needsCacheBuild = ((Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
 		}

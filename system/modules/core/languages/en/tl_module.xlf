@@ -62,6 +62,12 @@
       <trans-unit id="tl_module.navigationTpl.1">
         <source>Here you can select the navigation template.</source>
       </trans-unit>
+      <trans-unit id="tl_module.customTpl.0">
+        <source>Custom module template</source>
+      </trans-unit>
+      <trans-unit id="tl_module.customTpl.1">
+        <source>Here you can overwrite the default module template.</source>
+      </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
       </trans-unit>
@@ -460,6 +466,9 @@
       </trans-unit>
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
+      </trans-unit>
+      <trans-unit id="tl_module.image_legend">
+        <source>Image settings</source>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>

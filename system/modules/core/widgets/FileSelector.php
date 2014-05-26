@@ -59,9 +59,9 @@ class FileSelector extends \Widget
 		$strNode = $this->Session->get('tl_files_picker');
 
 		// Unset the node if it is not within the path (see #5899)
-		if ($strNode != '' && isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
+		if ($strNode != '' && $this->path != '')
 		{
-			if (strncmp($strNode . '/', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'] . '/', strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']) + 1) !== 0)
+			if (strncmp($strNode . '/', $this->path . '/', strlen($this->path) + 1) !== 0)
 			{
 				$this->Session->remove('tl_files_picker');
 			}
@@ -80,15 +80,15 @@ class FileSelector extends \Widget
 		}
 
 		// Show a custom path (see #4926)
-		elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
+		elseif ($this->path != '')
 		{
-			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], 0);
+			$tree = $this->renderFiletree(TL_ROOT . '/' . $this->path, 0);
 		}
 
 		// Start from root
 		elseif ($this->User->isAdmin)
 		{
-			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], 0);
+			$tree = $this->renderFiletree(TL_ROOT . '/' . \Config::get('uploadPath'), 0);
 		}
 
 		// Show mounted files to regular users
@@ -103,7 +103,7 @@ class FileSelector extends \Widget
 		}
 
 		// Select all checkboxes
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'] == 'checkbox')
+		if ($this->fieldType == 'checkbox')
 		{
 			$strReset = "\n" . '    <li class="tl_folder"><div class="tl_left">&nbsp;</div> <div class="tl_right"><label for="check_all_' . $this->strId . '" class="tl_change_selected">' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</label> <input type="checkbox" id="check_all_' . $this->strId . '" class="tl_tree_checkbox" value="" onclick="Backend.toggleCheckboxGroup(this,\'' . $this->strName . '\')"></div><div style="clear:both"></div></li>';
 		}
@@ -115,7 +115,7 @@ class FileSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view picker_selector'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] != '') ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'filemounts.gif')).' '.($GLOBALS['TL_CONFIG']['websiteTitle'] ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'filemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
@@ -142,9 +142,9 @@ class FileSelector extends \Widget
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'])
 		{
 			case 'File':
-				if ($GLOBALS['TL_CONFIG'][$this->strField] != '')
+				if (\Config::get($this->strField) != '')
 				{
-					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+					$this->varValue = \Config::get($this->strField);
 				}
 				break;
 
@@ -245,7 +245,7 @@ class FileSelector extends \Widget
 		natcasesort($files);
 		$files = array_values($files);
 
-		$folderClass = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? 'tl_folder' : 'tl_file';
+		$folderClass = ($this->files || $this->filesOnly) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
 		for ($f=0, $c=count($folders); $f<$c; $f++)
@@ -257,7 +257,7 @@ class FileSelector extends \Widget
 			// Check whether there are subfolders or files
 			foreach ($content as $v)
 			{
-				if (is_dir($folders[$f] . '/' . $v) || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+				if (is_dir($folders[$f] . '/' . $v) || $this->files || $this->filesOnly)
 				{
 					$countFiles++;
 				}
@@ -280,15 +280,15 @@ class FileSelector extends \Widget
 
 			$protected = ($blnProtected === true || array_search('.htaccess', $content) !== false) ? true : false;
 			$folderImg = ($blnIsOpen && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
-			$folderLabel = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
+			$folderLabel = ($this->files || $this->filesOnly) ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
 			// Add the current folder
 			$return .= \Image::getHtml($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$this->urlEncode($currentFolder)) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">'.$folderLabel.'</a></div> <div class="tl_right">';
 
 			// Add a checkbox or radio button
-			if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+			if (!$this->filesOnly)
 			{
-				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+				switch ($this->fieldType)
 				{
 					case 'checkbox':
 						$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.md5($currentFolder).'" class="tl_tree_checkbox" value="'.specialchars($currentFolder).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFolder, $this->varValue).'>';
@@ -312,13 +312,13 @@ class FileSelector extends \Widget
 		}
 
 		// Process files
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
+		if ($this->files || $this->filesOnly)
 		{
 			$allowedExtensions = null;
 
-			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions']))
+			if ($this->extensions != '')
 			{
-				$allowedExtensions = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions']);
+				$allowedExtensions = trimsplit(',', $this->extensions);
 			}
 
 			for ($h=0, $c=count($files); $h<$c; $h++)
@@ -342,18 +342,18 @@ class FileSelector extends \Widget
 				{
 					$thumbnail .= ' <span class="tl_gray">(' . $objFile->width . 'x' . $objFile->height . ')</span>';
 
-					if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+					if (\Config::get('thumbnails') && $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 					{
 						$_height = ($objFile->height < 70) ? $objFile->height : 70;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
-						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px">';
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px -19px">';
 					}
 				}
 
-				$return .= \Image::getHtml($objFile->icon, $objFile->mime).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).$thumbnail.'</div> <div class="tl_right">';
+				$return .= \Image::getHtml($objFile->icon, $objFile->mime).' '.utf8_convert_encoding(specialchars(basename($currentFile)), \Config::get('characterSet')).$thumbnail.'</div> <div class="tl_right">';
 
 				// Add checkbox or radio button
-				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+				switch ($this->fieldType)
 				{
 					case 'checkbox':
 						$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.md5($currentFile).'" class="tl_tree_checkbox" value="'.specialchars($currentFile).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($currentFile, $this->varValue).'>';

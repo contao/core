@@ -52,30 +52,6 @@ class FileTree extends \Widget
 	 */
 	protected $strOrderName;
 
-	/**
-	 * Order field
-	 * @var string
-	 */
-	protected $strOrderField;
-
-	/**
-	 * Show files
-	 * @var boolean
-	 */
-	protected $blnIsDownloads = false;
-
-	/**
-	 * Gallery flag
-	 * @var boolean
-	 */
-	protected $blnIsGallery = false;
-
-	/**
-	 * Multiple flag
-	 * @var boolean
-	 */
-	protected $blnIsMultiple = false;
-
 
 	/**
 	 * Load the database object
@@ -86,26 +62,20 @@ class FileTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
-		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
-		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
-
 		// Prepare the order field
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
-			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
-			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
+			$this->strOrderId = $this->orderField . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = $this->orderField . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the order value
-			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
+			$objRow = $this->Database->prepare("SELECT {$this->orderField} FROM {$this->strTable} WHERE id=?")
 									 ->limit(1)
 									 ->execute($this->activeRecord->id);
 
-			$tmp = deserialize($objRow->{$this->strOrderField});
-			$this->{$this->strOrderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
+			$tmp = deserialize($objRow->{$this->orderField});
+			$this->{$this->orderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
 		}
-
-		$this->blnIsGallery = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'];
-		$this->blnIsDownloads = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isDownloads'];
 	}
 
 
@@ -117,14 +87,14 @@ class FileTree extends \Widget
 	protected function validator($varInput)
 	{
 		// Store the order value
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
 			$arrNew = array_map('String::uuidToBin', explode(',', \Input::post($this->strOrderName)));
 
 			// Only proceed if the value has changed
-			if ($arrNew !== $this->{$this->strOrderField})
+			if ($arrNew !== $this->{$this->orderField})
 			{
-				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->strOrderField}=? WHERE id=?")
+				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->orderField}=? WHERE id=?")
 							   ->execute(time(), serialize($arrNew), $this->activeRecord->id);
 
 				$this->objDca->createNewVersion = true; // see #6285
@@ -144,12 +114,12 @@ class FileTree extends \Widget
 		elseif (strpos($varInput, ',') === false)
 		{
 			$varInput = \String::uuidToBin($varInput);
-			return $this->blnIsMultiple ? array($varInput) : $varInput;
+			return $this->multiple ? array($varInput) : $varInput;
 		}
 		else
 		{
 			$arrValue = array_filter(explode(',', $varInput));
-			return $this->blnIsMultiple ? array_map('String::uuidToBin', $arrValue) : \String::uuidToBin($arrValue[0]);
+			return $this->multiple ? array_map('String::uuidToBin', $arrValue) : \String::uuidToBin($arrValue[0]);
 		}
 	}
 
@@ -162,12 +132,12 @@ class FileTree extends \Widget
 	{
 		$arrSet = array();
 		$arrValues = array();
-		$blnHasOrder = ($this->strOrderField != '' && is_array($this->{$this->strOrderField}));
+		$blnHasOrder = ($this->orderField != '' && is_array($this->{$this->orderField}));
 
 		if (!empty($this->varValue)) // Can be an array
 		{
 			$objFiles = \FilesModel::findMultipleByUuids((array)$this->varValue);
-			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+			$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 			if ($objFiles !== null)
 			{
@@ -182,7 +152,7 @@ class FileTree extends \Widget
 					$arrSet[] = $objFiles->uuid;
 
 					// Show files and folders
-					if (!$this->blnIsGallery && !$this->blnIsDownloads)
+					if (!$this->isGallery && !$this->isDownloads)
 					{
 						if ($objFiles->type == 'folder')
 						{
@@ -197,7 +167,7 @@ class FileTree extends \Widget
 							{
 								$image = 'placeholder.png';
 
-								if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+								if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 								{
 									$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 								}
@@ -232,16 +202,16 @@ class FileTree extends \Widget
 								}
 
 								$objFile = new \File($objSubfiles->path, true);
-								$strInfo = $objSubfiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+								$strInfo = '<span class="dirname">' . dirname($objSubfiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
-								if ($this->blnIsGallery)
+								if ($this->isGallery)
 								{
 									// Only show images
 									if ($objFile->isGdImage)
 									{
 										$image = 'placeholder.png';
 
-										if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+										if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 										{
 											$image = \Image::get($objSubfiles->path, 80, 60, 'center_center');
 										}
@@ -262,16 +232,16 @@ class FileTree extends \Widget
 						else
 						{
 							$objFile = new \File($objFiles->path, true);
-							$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+							$strInfo = '<span class="dirname">' . dirname($objFiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
-							if ($this->blnIsGallery)
+							if ($this->isGallery)
 							{
 								// Only show images
 								if ($objFile->isGdImage)
 								{
 									$image = 'placeholder.png';
 
-									if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+									if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 									{
 										$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 									}
@@ -284,7 +254,7 @@ class FileTree extends \Widget
 								// Only show allowed download types
 								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 								{
-									$arrValues[$objFiles->uuid] = \Image::getHtml($objFile->icon) . ' ' . $objFiles->path;
+									$arrValues[$objFiles->uuid] = \Image::getHtml($objFile->icon) . ' ' . $strInfo;
 								}
 							}
 						}
@@ -297,7 +267,7 @@ class FileTree extends \Widget
 			{
 				$arrNew = array();
 
-				foreach ($this->{$this->strOrderField} as $i)
+				foreach ($this->{$this->orderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{
@@ -320,17 +290,17 @@ class FileTree extends \Widget
 		}
 
 		// Load the fonts for the drag hint (see #4838)
-		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
+		\Config::set('loadGoogleFonts', true);
 
 		// Convert the binary UUIDs
 		$strSet = implode(',', array_map('String::binToUuid', $arrSet));
-		$strOrder = $blnHasOrder ? implode(',', array_map('String::binToUuid', $this->{$this->strOrderField})) : '';
+		$strOrder = $blnHasOrder ? implode(',', array_map('String::binToUuid', $this->{$this->orderField})) : '';
 
 		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strSet.'">' . ($blnHasOrder ? '
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$strOrder.'">' : '') . '
   <div class="selector_container">' . (($blnHasOrder && count($arrValues)) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
-    <ul id="sort_'.$this->strId.'" class="'.trim(($blnHasOrder ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
+    <ul id="sort_'.$this->strId.'" class="'.trim(($blnHasOrder ? 'sortable ' : '').($this->isGallery ? 'sgallery' : '')).'">';
 
 		foreach ($arrValues as $k=>$v)
 		{
@@ -338,7 +308,7 @@ class FileTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.$this->activeRecord->id.'&amp;value='.$strSet.'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . ($blnHasOrder ? '
+    <p><a href="contao/file.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.$this->activeRecord->id.'&amp;value='.$strSet.'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . ($blnHasOrder ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'")</script>' : '') . '
   </div>';
 

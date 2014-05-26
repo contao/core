@@ -63,19 +63,17 @@ $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
  * DATE AND TIME SETTINGS
  * -------------------------------------------------------------------------
  *
- * Set 'timeZone' to your local timezone. If you leave it blank GMT will be
- * used as the default time zone.
- *
  *   datimFormat = show date and time
  *   dateFormat  = show date only
  *   timeFormat  = show time only
+ *   timeZone    = the server's default time zone
  *
  * See PHP function date() for more information.
  */
-$GLOBALS['TL_CONFIG']['timeZone']    = 'GMT';
 $GLOBALS['TL_CONFIG']['datimFormat'] = 'Y-m-d H:i';
 $GLOBALS['TL_CONFIG']['dateFormat']  = 'Y-m-d';
 $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
+$GLOBALS['TL_CONFIG']['timeZone']    = ini_get('date.timezone') ?: 'GMT';
 
 
 /**
@@ -143,6 +141,7 @@ $GLOBALS['TL_CONFIG']['dbSocket']    = '';
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
+$GLOBALS['TL_CONFIG']['dbSqlMode']   = '';
 
 
 /**
@@ -205,7 +204,7 @@ $GLOBALS['TL_CONFIG']['uploadTypes']
 	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,csv,'
 	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
 	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,fla,flv,swf,'
-	. 'css,js,html,htm,txt,zip,rar,7z,cto';
+	. 'css,scss,less,js,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']     = 800;
@@ -303,7 +302,7 @@ $GLOBALS['TL_CONFIG']['defaultUser']          = 0;
 $GLOBALS['TL_CONFIG']['defaultGroup']         = 0;
 $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'g4', 'g5', 'g6');
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
-$GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
+$GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,scss,less,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']
 	= 'jpg,jpeg,gif,png,'
@@ -316,7 +315,7 @@ $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveu
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
-$GLOBALS['TL_CONFIG']['backendTheme']         = 'default';
+$GLOBALS['TL_CONFIG']['backendTheme']         = 'flexible';
 $GLOBALS['TL_CONFIG']['inactiveModules']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateId']         = '';
 $GLOBALS['TL_CONFIG']['disableInsertTags']    = false;
@@ -345,4 +344,5 @@ $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
 $GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
 $GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';
 $GLOBALS['TL_CONFIG']['debugMode']            = false;
-$GLOBALS['TL_CONFIG']['maintenanceMode']      = false;
+$GLOBALS['TL_CONFIG']['maintenanceMode']      = true;
+$GLOBALS['TL_CONFIG']['errorReporting']       = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED;

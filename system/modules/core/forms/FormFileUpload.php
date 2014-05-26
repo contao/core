@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormFileUpload
  *
- * File upload field.
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -30,15 +29,17 @@ class FormFileUpload extends \Widget implements \uploadable
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_upload';
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -153,20 +154,20 @@ class FormFileUpload extends \Widget implements \uploadable
 		if (($arrImageSize = @getimagesize($file['tmp_name'])) != false)
 		{
 			// Image exceeds maximum image width
-			if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
+			if ($arrImageSize[0] > \Config::get('imageWidth'))
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], $GLOBALS['TL_CONFIG']['imageWidth']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.$GLOBALS['TL_CONFIG']['imageWidth'].' pixels', __METHOD__, TL_ERROR);
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], \Config::get('imageWidth')));
+				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.\Config::get('imageWidth').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
 			}
 
 			// Image exceeds maximum image height
-			if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
+			if ($arrImageSize[1] > \Config::get('imageHeight'))
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], $GLOBALS['TL_CONFIG']['imageHeight']));
-				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.$GLOBALS['TL_CONFIG']['imageHeight'].' pixels', __METHOD__, TL_ERROR);
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], \Config::get('imageHeight')));
+				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.\Config::get('imageHeight').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
 				return;
@@ -234,7 +235,7 @@ class FormFileUpload extends \Widget implements \uploadable
 					}
 
 					$this->Files->move_uploaded_file($file['tmp_name'], $strUploadFolder . '/' . $file['name']);
-					$this->Files->chmod($strUploadFolder . '/' . $file['name'], $GLOBALS['TL_CONFIG']['defaultFileChmod']);
+					$this->Files->chmod($strUploadFolder . '/' . $file['name'], \Config::get('defaultFileChmod'));
 
 					// Generate the DB entries
 					$strFile = $strUploadFolder . '/' . $file['name'];
@@ -280,14 +281,15 @@ class FormFileUpload extends \Widget implements \uploadable
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{
 		return sprintf('<input type="file" name="%s" id="ctrl_%s" class="upload%s"%s%s',
 						$this->strName,
 						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
 						$this->strTagEnding) . $this->addSubmit();
 	}

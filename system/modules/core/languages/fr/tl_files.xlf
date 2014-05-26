@@ -77,6 +77,14 @@
         <source>Start upload</source>
         <target>Lancer le transfert</target>
       </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+        <target>Cliquez ou déposer des fichiers ici pour téléverser</target>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
+        <target>Emplacement du fichier : %s</target>
+      </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>
         <target>Fichier ou répertoire &quot;%s&quot; ajouté</target>

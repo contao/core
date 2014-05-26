@@ -1,11 +1,7 @@
 #!/bin/bash
 
 # Database name
-if [[ $1 != "" ]]; then
-  tpl=$1
-else
-  tpl="music_academy"
-fi
+tpl=${1:-music_academy}
 
 # Clean the database
 mysql <<EOF

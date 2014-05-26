@@ -77,9 +77,9 @@
         <source>Name</source>
         <target>Emri dhe llojet e mediave</target>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.config_legend">
-        <source>Configuration</source>
-        <target>Konfigurim</target>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
+        <target>Konfigurimi ekspert</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

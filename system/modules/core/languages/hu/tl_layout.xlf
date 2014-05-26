@@ -169,6 +169,13 @@
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
         <target>Létrehozza egy reagáló CSS elrendezésen alapuló oldal elrendezés beállításokat. Ez az összetevő szükséges az oldal elrendezés szerkesztő működéséhez!</target>
       </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.0">
+        <source>Responsive layout</source>
+        <target>Reszponzív elrendezés</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.responsive.css.1">
+        <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
+      </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
         <target>12 oszlopos rács</target>
@@ -199,14 +206,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
-        <target>Tartalmazza a &lt;em&gt;tinymce.css&lt;/ em&gt; stíluslapot a saját upload könyvtára.</target>
+        <target>Tartalmazza a &lt;em&gt;tinymce.css&lt;/em&gt; stíluslapot a saját upload könyvtára.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>
         <target>További stíluslapok</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional CSS files from the file system.</source>
+        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>Itt lehet hozzáadni kiegészítő CSS, SCSS vagy LESS fájlokat a helyi fájlrendszerből.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -271,6 +279,18 @@
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
         <target>Itt lehet megadni a &lt;body&gt; tag osztályait.</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.0">
+        <source>Viewport</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.viewport.1">
+        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.0">
+        <source>Title tag</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.titleTag.1">
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -392,6 +412,10 @@
         <source>Custom sections</source>
         <target>Egyedi részek</target>
       </trans-unit>
+      <trans-unit id="tl_layout.webfonts_legend">
+        <source>Web fonts</source>
+        <target>Web betűk</target>
+      </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
         <target>Stíluslapok</target>
@@ -420,33 +444,33 @@
         <source>jQuery</source>
         <target>jQuery</target>
       </trans-unit>
+      <trans-unit id="tl_layout.j_local">
+        <source>Local file</source>
+        <target>Helyi fájl</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_googleapis">
+        <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
+      </trans-unit>
+      <trans-unit id="tl_layout.j_fallback">
+        <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
+      </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
         <target>MooTools</target>
       </trans-unit>
-      <trans-unit id="tl_layout.j_local">
-        <source>jQuery - local file</source>
-        <target>jQuery - helyi fájl</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_googleapis">
-        <source>jQuery - googleapis.com</source>
-        <target>jQuery - googleapis.com</target>
-      </trans-unit>
-      <trans-unit id="tl_layout.j_fallback">
-        <source>jQuery - googleapis.com with local fallback</source>
-        <target>jQuery - googleapis.com helyi másolattal</target>
-      </trans-unit>
       <trans-unit id="tl_layout.moo_local">
-        <source>MooTools - local file</source>
-        <target>MooTools - helyi fájl</target>
+        <source>Local file</source>
+        <target>Helyi fájl</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
-        <source>MooTools - googleapis.com</source>
-        <target>MooTools - googleapis.com</target>
+        <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
-        <source>MooTools - googleapis.com with local fallback</source>
-        <target>MooTools - googleapis.com helyi másolattal</target>
+        <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

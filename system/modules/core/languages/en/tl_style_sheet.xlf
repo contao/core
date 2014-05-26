@@ -59,8 +59,8 @@
       <trans-unit id="tl_style_sheet.title_legend">
         <source>Name</source>
       </trans-unit>
-      <trans-unit id="tl_style_sheet.config_legend">
-        <source>Configuration</source>
+      <trans-unit id="tl_style_sheet.expert_legend">
+        <source>Expert settings</source>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media_legend">
         <source>Media settings</source>

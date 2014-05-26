@@ -43,7 +43,7 @@ class Dbafs
 	 */
 	public static function addResource($strResource, $blnUpdateFolders=true)
 	{
-		$strUploadPath = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
+		$strUploadPath = \Config::get('uploadPath') . '/';
 
 		// Remove trailing slashes (see #5707)
 		if (substr($strResource, -1) == '/')
@@ -225,7 +225,7 @@ class Dbafs
 		$strFolder = dirname($strDestination);
 
 		// Set the new parent ID
-		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($strFolder == \Config::get('uploadPath'))
 		{
 			$objFile->pid = null;
 		}
@@ -262,11 +262,11 @@ class Dbafs
 		}
 
 		// Update the MD5 hash of the parent folders
-		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strSource)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
-		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strDestination)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
@@ -298,7 +298,7 @@ class Dbafs
 		$objNewFile = clone $objFile->current();
 
 		// Set the new parent ID
-		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($strFolder == \Config::get('uploadPath'))
 		{
 			$objNewFile->pid = null;
 		}
@@ -342,11 +342,11 @@ class Dbafs
 		}
 
 		// Update the MD5 hash of the parent folders
-		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strSource)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
-		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strDestination)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
@@ -462,7 +462,7 @@ class Dbafs
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Dbafs\Filter(
 				new \RecursiveDirectoryIterator(
-					TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'],
+					TL_ROOT . '/' . \Config::get('uploadPath'),
 					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 				)
 			), \RecursiveIteratorIterator::SELF_FIRST
@@ -514,7 +514,7 @@ class Dbafs
 				$strParent = dirname($strRelpath);
 
 				// Get the parent ID
-				if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
+				if ($strParent == \Config::get('uploadPath'))
 				{
 					$strPid = null;
 				}

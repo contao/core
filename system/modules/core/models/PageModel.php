@@ -326,7 +326,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return \Model\Collection::createFromDbResult($objSubpages, 'tl_page');
+		return static::createCollectionFromDbResult($objSubpages, 'tl_page');
 	}
 
 
@@ -423,7 +423,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model\Collection($arrModels, 'tl_page');
+		return static::createCollection($arrModels, 'tl_page');
 	}
 
 
@@ -603,15 +603,15 @@ class PageModel extends \Model
 		// Use the global date format if none is set (see #6104)
 		if ($this->dateFormat == '')
 		{
-			$this->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$this->dateFormat = \Config::get('dateFormat');
 		}
 		if ($this->timeFormat == '')
 		{
-			$this->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+			$this->timeFormat = \Config::get('timeFormat');
 		}
 		if ($this->datimFormat == '')
 		{
-			$this->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+			$this->datimFormat = \Config::get('datimFormat');
 		}
 
 		$this->blnDetailsLoaded = true;

@@ -46,12 +46,12 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTheme()
 	{
-		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		if (\Config::get('coreOnlyMode'))
 		{
 			return 'default'; // see #6505
 		}
 
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+		$theme = \Config::get('backendTheme');
 
 		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
 		{
@@ -87,14 +87,152 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Return the TinyMCE language
+	 * @return string
+	 */
+	public static function getTinyMceLanguage()
+	{
+		$lang = $GLOBALS['TL_LANGUAGE'];
+
+		if ($lang == '')
+		{
+			return 'en';
+		}
+
+		// The translation exists
+		if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $lang . '.js'))
+		{
+			return $lang;
+		}
+
+		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
+		{
+			// Try the short tag, e.g. "de" instead of "de_CH"
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $short . '.js'))
+			{
+				return $short;
+			}
+		}
+		elseif (($long = $short . '_' . strtoupper($short)) != $lang)
+		{
+			// Try the long tag, e.g. "fr_FR" instead of "fr" (see #6952)
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $long . '.js'))
+			{
+				return $long;
+			}
+		}
+
+		// Fallback to English
+		return 'en';
+	}
+
+
+	/**
+	 * Validate an ACE type
+	 * @param string
+	 * @return string
+	 */
+	public static function getAceType($type)
+	{
+		switch ($type)
+		{
+			case 'css':
+			case 'diff':
+			case 'html':
+			case 'ini':
+			case 'java':
+			case 'json':
+			case 'less':
+			case 'php':
+			case 'scss':
+			case 'mysql':
+			case 'sql':
+			case 'xml':
+			case 'yaml':
+				return $type;
+				break;
+
+			case 'js':
+			case 'javascript':
+				return 'javascript';
+				break;
+
+			case 'md':
+			case 'markdown':
+				return 'markdown';
+				break;
+
+			case 'cgi':
+			case 'pl':
+				return 'perl';
+				break;
+
+			case 'py':
+				return 'python';
+				break;
+
+			case 'txt':
+				return 'text';
+				break;
+
+			case 'c': case 'cc': case 'cpp': case 'c++':
+			case 'h': case 'hh': case 'hpp': case 'h++':
+				return 'c_cpp';
+				break;
+
+			case 'html5':
+			case 'xhtml':
+				return 'php';
+				break;
+
+			default:
+				return 'text';
+				break;
+		}
+	}
+
+
+	/**
+	 * Return a list of TinyMCE templates as JSON string
+	 * @return string
+	 */
+	public static function getTinyTemplates()
+	{
+		$strDir = \Config::get('uploadPath') . '/tiny_templates';
+
+		if (!is_dir(TL_ROOT . '/' . $strDir))
+		{
+			return '';
+		}
+
+		$arrFiles = array();
+		$arrTemplates = scan(TL_ROOT . '/' . $strDir);
+
+		foreach ($arrTemplates as $strFile)
+		{
+			if (strncmp('.', $strFile, 1) !== 0 && is_file(TL_ROOT . '/' . $strDir . '/' . $strFile))
+			{
+				$arrFiles[] = '{ title: "' . $strFile . '", url: "' . $strDir . '/' . $strFile . '" }';
+			}
+		}
+
+		return implode(",\n", $arrFiles) . "\n";
+	}
+
+
+	/**
 	 * Add the request token to the URL
 	 * @param string
 	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
-	public static function addToUrl($strRequest, $blnAddRef=true)
+	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
 	{
-		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef);
+		// Unset the "no back button" flag
+		$arrUnset[] = 'nb';
+
+		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef, $arrUnset);
 	}
 
 
@@ -176,7 +314,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the current user has access to the current module
-		elseif ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		elseif ($module != 'undo' && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -486,7 +624,7 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
@@ -499,14 +637,14 @@ abstract class Backend extends \Controller
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPages->protected || \Config::get('indexProtected')) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}
@@ -591,7 +729,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($arrIds, 'pagemounts'))
+		if (!$objUser->hasAccess($arrIds, 'pagemounts'))
 		{
 			$objSession->set($strKey, 0);
 
@@ -685,8 +823,8 @@ abstract class Backend extends \Controller
 		}
 
 		$objUser  = \BackendUser::getInstance();
-		$strPath  = $GLOBALS['TL_CONFIG']['uploadPath'];
-		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
+		$strPath  = \Config::get('uploadPath');
+		$arrNodes = explode('/', preg_replace('/^' . preg_quote(\Config::get('uploadPath'), '/') . '\//', '', $strNode));
 		$arrLinks = array();
 
 		// Add root link
@@ -698,7 +836,7 @@ abstract class Backend extends \Controller
 			$strPath .= '/' . $strFolder;
 
 			// Do not show pages which are not mounted
-			if (!$objUser->isAdmin && !$objUser->hasAccess($strPath, 'filemounts'))
+			if (!$objUser->hasAccess($strPath, 'filemounts'))
 			{
 				continue;
 			}
@@ -715,7 +853,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($strNode, 'filemounts'))
+		if (!$objUser->hasAccess($strNode, 'filemounts'))
 		{
 			$objSession->set($strKey, '');
 
@@ -851,7 +989,7 @@ abstract class Backend extends \Controller
 
 		if ($this->User->isAdmin)
 		{
-			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $strFilter);
+			return $this->doCreateFileList(\Config::get('uploadPath'), -1, $strFilter);
 		}
 
 		$return = '';

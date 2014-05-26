@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
-        <target>Introducir un nombre de archivo único (sin extensión). El archivo XML del flujo se auto-genera en el directorio &lt;em&gt;share&lt;/ em&gt; de la instalación de Contao, por ejemplo, como &lt;em&gt;share/nombre.xml &lt;/ em&gt;.</target>
+        <target>Introducir un nombre de archivo único (sin extensión). El archivo XML del flujo se auto-genera en el directorio &lt;em&gt;share&lt;/em&gt; de la instalación de Contao, por ejemplo, como &lt;em&gt;share/nombre.xml &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.0">
         <source>Feed language</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
-        <target>Introducir el idioma del flujo de acuerdo con la norma ISO-639 (por ejemplo &lt;em&gt;en&lt;/ em&gt; o &lt;em&gt;en-us&lt;/ em&gt;).</target>
+        <target>Introducir el idioma del flujo de acuerdo con la norma ISO-639 (por ejemplo &lt;em&gt;en&lt;/em&gt; o &lt;em&gt;en-us&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.calendars.0">
         <source>Calendars</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.feedBase.1">
         <source>Please enter the base URL with protocol (e.g. &lt;em&gt;http://&lt;/em&gt;).</source>
-        <target>Por favor, introduzca la dirección URL base con el protocolo (por ejemplo &lt;em&gt;http://&lt;/ em&gt;).</target>
+        <target>Por favor, introduzca la dirección URL base con el protocolo (por ejemplo &lt;em&gt;http://&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.description.0">
         <source>Feed description</source>

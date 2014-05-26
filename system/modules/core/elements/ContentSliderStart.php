@@ -46,12 +46,8 @@ class ContentSliderStart extends \ContentElement
 			$this->Template = new \BackendTemplate($this->strTemplate);
 			$this->Template->title = $this->headline;
 		}
-		else
-		{
-			$this->strTemplate = 'ce_slider_start';
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-			$this->Template->config = $this->sliderDelay . ',' . $this->sliderSpeed . ',' . $this->sliderStartSlide . ',' . $this->sliderContinuous;
-		}
+
+		// Slider configuration
+		$this->Template->config = $this->sliderDelay . ',' . $this->sliderSpeed . ',' . $this->sliderStartSlide . ',' . $this->sliderContinuous;
 	}
 }

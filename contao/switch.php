@@ -20,8 +20,8 @@ define('TL_SCRIPT', 'contao/switch.php');
 /**
  * Initialize the system
  */
-define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+define('TL_MODE', 'FE');
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**
@@ -65,7 +65,7 @@ class PreviewSwitch extends Backend
 		}
 
 		$strUser = '';
-		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? Environment::get('ip') : '') . 'FE_USER_AUTH');
+		$strHash = sha1(session_id() . (!Config::get('disableIpCheck') ? Environment::get('ip') : '') . 'FE_USER_AUTH');
 
 		// Get the front end user
 		if (FE_USER_LOGGED_IN)
@@ -86,11 +86,11 @@ class PreviewSwitch extends Backend
 		$this->Template->show = Input::cookie('FE_PREVIEW');
 		$this->Template->update = false;
 
-		$time = time();
-
 		// Switch
 		if (Input::post('FORM_SUBMIT') == 'tl_switch')
 		{
+			$time = time();
+
 			// Hide unpublished elements
 			if (Input::post('unpublished') == 'hide')
 			{
@@ -101,7 +101,7 @@ class PreviewSwitch extends Backend
 			// Show unpublished elements
 			else
 			{
-				$this->setCookie('FE_PREVIEW', 1, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']));
+				$this->setCookie('FE_PREVIEW', 1, ($time + Config::get('sessionTimeout')));
 				$this->Template->show = 1;
 			}
 
@@ -110,10 +110,10 @@ class PreviewSwitch extends Backend
 			{
 				// Remove old sessions
 				$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
+							   ->execute(($time - Config::get('sessionTimeout')), $strHash);
 
 			   // Log in the front end user
-				if (Input::post('user') != '')
+				if (Input::post('user'))
 				{
 					$objUser = MemberModel::findByUsername(Input::post('user'));
 
@@ -124,7 +124,7 @@ class PreviewSwitch extends Backend
 									   ->execute($objUser->id, $time, 'FE_USER_AUTH', session_id(), Environment::get('ip'), $strHash);
 
 						// Set the cookie
-						$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+						$this->setCookie('FE_USER_AUTH', $strHash, ($time + Config::get('sessionTimeout')), null, null, false, true);
 						$this->Template->user = Input::post('user');
 					}
 				}
@@ -149,7 +149,7 @@ class PreviewSwitch extends Backend
 		$this->Template->reload = $GLOBALS['TL_LANG']['MSC']['reload'];
 		$this->Template->feUser = $GLOBALS['TL_LANG']['MSC']['feUser'];
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->lblHide = $GLOBALS['TL_LANG']['MSC']['hiddenHide'];
 		$this->Template->lblShow = $GLOBALS['TL_LANG']['MSC']['hiddenShow'];
 		$this->Template->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
@@ -158,7 +158,7 @@ class PreviewSwitch extends Backend
 		$this->Template->action = ampersand(Environment::get('request'));
 		$this->Template->isAdmin = $this->User->isAdmin;
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 

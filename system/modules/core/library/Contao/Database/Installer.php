@@ -269,8 +269,8 @@ class Installer extends \Controller
 		$included = array();
 
 		// Ignore the internal cache
-		$blnBypassCache = $GLOBALS['TL_CONFIG']['bypassCache'];
-		$GLOBALS['TL_CONFIG']['bypassCache'] = true;
+		$blnBypassCache = \Config::get('bypassCache');
+		\Config::set('bypassCache', true);
 
 		// Only check the active modules (see #4541)
 		foreach (\ModuleLoader::getActive() as $strModule)
@@ -303,7 +303,7 @@ class Installer extends \Controller
 		}
 
 		// Restore the cache settings
-		$GLOBALS['TL_CONFIG']['bypassCache'] = $blnBypassCache;
+		\Config::set('bypassCache', $blnBypassCache);
 
 		// HOOK: allow third-party developers to modify the array (see #6425)
 		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromDca']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromDca']))
@@ -454,7 +454,7 @@ class Installer extends \Controller
 					}
 
 					// Variant collation
-					if ($field['collation'] != '' && $field['collation'] != $GLOBALS['TL_CONFIG']['dbCollation'])
+					if ($field['collation'] != '' && $field['collation'] != \Config::get('dbCollation'))
 					{
 						$field['collation'] = 'COLLATE ' . $field['collation'];
 					}

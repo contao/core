@@ -55,7 +55,7 @@ class ModuleEventReader extends \Events
 		}
 
 		// Set the item from the auto_item parameter
-		if (!isset($_GET['events']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		if (!isset($_GET['events']) && \Config::get('useAutoItem') && isset($_GET['auto_item']))
 		{
 			\Input::setGet('events', \Input::get('auto_item'));
 		}
@@ -210,7 +210,7 @@ class ModuleEventReader extends \Events
 		{
 			while ($objElement->next())
 			{
-				$objTemplate->details .= $this->getContentElement($objElement->id);
+				$objTemplate->details .= $this->getContentElement($objElement->current());
 			}
 		}
 

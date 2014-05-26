@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_calendar.1">
         <source>Please select one or more calendars.</source>
-        <target>Válasszon egy vagy több naptárat.</target>
+        <target>Egy vagy több naptár választható.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_noSpan.0">
         <source>Shortened view</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_noSpan.1">
         <source>Show events only once even if they span multiple days.</source>
-        <target>Az eseményeket egyszer jelzi, akkor is ha több napon keresztül tartanak.</target>
+        <target>Az eseményeket csak egyszer jelzi, akkor is ha több napig tartanak.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_startDay.0">
         <source>Week start day</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_startDay.1">
         <source>Here you can choose the week start day.</source>
-        <target>Itt tudja kiválasztani a hét első napját</target>
+        <target>Itt választható ki a hét első napja</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_format.0">
         <source>Event list format</source>
-        <target>Eseménylista forma</target>
+        <target>Eseménylista formátuma</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_format.1">
         <source>Here you can choose the event list format.</source>
-        <target>Itt tudja kiválasztani az eseménylista formátumát.</target>
+        <target>Itt választható ki az eseménylista formátuma.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.0">
         <source>Ignore URL parameters</source>
@@ -39,15 +39,15 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.1">
         <source>Do not switch the time period based on the date/month/year URL parameters.</source>
-        <target>Hagya figyelmen kívül a nap/honap/év URL által meghatározott paramétereket.</target>
+        <target>Hagyja figyelmen kívül a nap/hónap/év URL által meghatározott paramétereket.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_order.0">
         <source>Sort order</source>
-        <target>Rendezés</target>
+        <target>Rendezési sorrend</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_order.1">
         <source>Here you can choose the sort order.</source>
-        <target>Itt tudja kiválasztani a sorba rendezés elvét.</target>
+        <target>Itt választható ki a sorba rendezés elve.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.0">
         <source>Event reader module</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.1">
         <source>Here you can limit the number of events. Enter 0 to show all.</source>
-        <target>Itt tudja szabályozni az események számát. Hagyja üresen az összes esemény megjelenítéséhez.</target>
+        <target>Itt állítható az események száma. 0 beírásával az összes esemény látható.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.0">
         <source>Event template</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
-        <target>Itt tudja kiválasztani az esemény sablont.</target>
+        <target>Itt választó ki az esemény sablon.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.0">
         <source>Calendar template</source>
@@ -79,15 +79,15 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.1">
         <source>Here you can select the calendar template.</source>
-        <target>Itt tudja kiválasztani az naptár sablont.</target>
+        <target>Itt választható ki a naptár sablon.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.0">
         <source>Show number of events</source>
-        <target>Események darabszámának mutatása</target>
+        <target>Események számának mutatása</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.1">
         <source>Show the number of events of each month in the menu.</source>
-        <target>Események darabszámának mutatása a menüben minden hónapnál.</target>
+        <target>Események számának mutatása a menüben minden hónapnál.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_upcoming">
         <source>Upcoming events</source>
-        <target>Közeledő események</target>
+        <target>Közelgő események</target>
       </trans-unit>
       <trans-unit id="tl_module.next_7">
         <source>+ 1 week</source>
@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_module.next_all">
         <source>All upcoming events</source>
-        <target>Összes közeledő esemény</target>
+        <target>Összes közelgő esemény</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_past">
         <source>Past events</source>

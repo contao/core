@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.dependentsdel">
         <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
-        <target>A következő kiterjesztések állnak függőségben &lt;em&gt;% s &lt;/ em&gt;, és tönkre is tehetik::</target>
+        <target>A következő kiterjesztések állnak függőségben &lt;em&gt;%s&lt;/em&gt;, és tönkre is tehetik::</target>
       </trans-unit>
       <trans-unit id="tl_repository.donate">
         <source>Donate</source>

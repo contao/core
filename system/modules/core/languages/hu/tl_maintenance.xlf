@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
-        <target>Levágja a &lt;em&gt;tl_version&lt;/ em&gt; táblát, amely tárolja a korábbi verziók rekordjait. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
+        <target>Levágja a &lt;em&gt;tl_version&lt;/em&gt; táblát, amely tárolja a korábbi verziók rekordjait. Ezzel véglegesen törli ezeket a bejegyzéseket.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>

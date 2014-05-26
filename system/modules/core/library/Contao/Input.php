@@ -181,7 +181,7 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::decodeEntities($varValue);
 			$varValue = static::xssClean($varValue);
-			$varValue = static::stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
+			$varValue = static::stripTags($varValue, \Config::get('allowedTags'));
 
 			if (!$blnDecodeEntities)
 			{
@@ -288,7 +288,7 @@ class Input
 
 			if ($blnAddUnused)
 			{
-				static::$arrUnusedGet[$strKey] = $varValue; // see #4277
+				static::setUnusedGet($strKey, $varValue); // see #4277
 			}
 		}
 	}
@@ -362,6 +362,29 @@ class Input
 	public static function hasUnusedGet()
 	{
 		return count(static::$arrUnusedGet) > 0;
+	}
+
+
+	/**
+	 * Return the unused GET parameters as array
+	 *
+	 * @return array The unused GET parameter array
+	 */
+	public static function getUnusedGet()
+	{
+		return array_keys(static::$arrUnusedGet);
+	}
+
+
+	/**
+	 * Set an unused GET parameter
+	 *
+	 * @param string $strKey   The array key
+	 * @param mixed  $varValue The array value
+	 */
+	public static function setUnusedGet($strKey, $varValue)
+	{
+		static::$arrUnusedGet[$strKey] = $varValue;
 	}
 
 
@@ -625,7 +648,7 @@ class Input
 
 		// Preserve basic entities
 		$varValue = static::preserveBasicEntities($varValue);
-		$varValue = html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$varValue = html_entity_decode($varValue, ENT_QUOTES, \Config::get('characterSet'));
 
 		return $varValue;
 	}

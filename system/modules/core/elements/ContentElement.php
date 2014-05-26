@@ -87,6 +87,11 @@ abstract class ContentElement extends \Frontend
 		$this->space = deserialize($objElement->space);
 		$this->cssID = deserialize($objElement->cssID, true);
 
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$arrHeadline = deserialize($objElement->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
@@ -133,12 +138,22 @@ abstract class ContentElement extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Parse the template
 	 * @return string
 	 */
 	public function generate()
 	{
-		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start != '' && $this->start > time()) || ($this->stop != '' && $this->stop < time())))
 		{
 			return '';
 		}

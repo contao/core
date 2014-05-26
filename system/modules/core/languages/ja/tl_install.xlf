@@ -81,6 +81,15 @@
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
         <target>ウェブサイトの例をインポートした場合は、管理者のユーザー名は&lt;strong&gt;k.jones&lt;/strong&gt;、パスワードは&lt;strong&gt;kevinjones&lt;/strong&gt;となります。より詳しい情報はインポートしたウェブサイト(のフロントエンド)を参照してください。</target>
       </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>機能拡張リポジトリ</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>現在、パッケージの管理にComposerを使用している、機能拡張リポジ
+トリの新しいバージョンのベータテストを行っています。ベータテストに参加したい場合はComposerクライアントをインストールしてください。</target>
+      </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
         <target>おめでとうございます!</target>
@@ -264,6 +273,18 @@
       <trans-unit id="tl_install.adminSave">
         <source>Create admin account</source>
         <target>管理者アカウントを作成</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>既定の機能拡張リポジトリを使用しています。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>Composerに基づいた機能拡張リポジトリを使用しています。</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>Composerクライアントをインストール</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

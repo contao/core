@@ -81,6 +81,11 @@ abstract class Module extends \Frontend
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
 
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$arrHeadline = deserialize($objModule->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
@@ -123,6 +128,16 @@ abstract class Module extends \Frontend
 	public function __isset($strKey)
 	{
 		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
 	}
 
 
@@ -273,62 +288,40 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
+							// Hide the link if the target page is invisible
+							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
+							{
+								continue(2);
+							}
+
 							$strForceLang = null;
 							$objNext->loadDetails();
 
 							// Check the target page language (see #4706)
-							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							if (\Config::get('addLanguageToUrl'))
 							{
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-							// Add the domain if it differs from the current one (see #3765)
-							if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-							{
-								$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
-							}
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 						break;
 				}
+
+				$row = $objSubpages->row();
 
 				// Active page
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && !\Input::get('articles'))
 				{
 					// Mark active forward pages (see #4822)
 					$strClass = (($objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) ? 'forward' . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
-					$row = $objSubpages->row();
 
 					$row['isActive'] = true;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
 				}
 
 				// Regular page
@@ -342,27 +335,26 @@ abstract class Module extends \Frontend
 						$strClass .= ' sibling';
 					}
 
-					$row = $objSubpages->row();
-
 					$row['isActive'] = false;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
 				}
+
+				$row['subitems'] = $subitems;
+				$row['class'] = trim($strClass);
+				$row['title'] = specialchars($objSubpages->title, true);
+				$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
+				$row['link'] = $objSubpages->title;
+				$row['href'] = $href;
+				$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+				$row['target'] = '';
+				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+
+				// Override the link target
+				if ($objSubpages->type == 'redirect' && $objSubpages->target)
+				{
+					$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+				}
+
+				$items[] = $row;
 			}
 		}
 

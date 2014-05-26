@@ -30,14 +30,8 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Template extends \Controller
+abstract class Template extends \BaseTemplate
 {
-
-	/**
-	 * Template file
-	 * @var string
-	 */
-	protected $strTemplate;
 
 	/**
 	 * Output buffer
@@ -50,18 +44,6 @@ abstract class Template extends \Controller
 	 * @var string
 	 */
 	protected $strContentType;
-
-	/**
-	 * Output format
-	 * @var string
-	 */
-	protected $strFormat = 'html5';
-
-	/**
-	 * Tag ending
-	 * @var string
-	 */
-	protected $strTagEnding = '>';
 
 	/**
 	 * Template data
@@ -249,19 +231,6 @@ abstract class Template extends \Controller
 			return '';
 		}
 
-		// Override the output format in the front end
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat != '')
-			{
-				$this->strFormat = $objPage->outputFormat;
-			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
-		}
-
 		// HOOK: add custom parse filters
 		if (isset($GLOBALS['TL_HOOKS']['parseTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseTemplate']))
 		{
@@ -272,12 +241,7 @@ abstract class Template extends \Controller
 			}
 		}
 
-		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
-		$strBuffer = ob_get_contents();
-		ob_end_clean();
-
-		return $strBuffer;
+		return parent::parse();
 	}
 
 
@@ -291,91 +255,109 @@ abstract class Template extends \Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		// Minify the markup if activated
+		// Minify the markup
 		$this->strBuffer = $this->minifyHtml($this->strBuffer);
 
-		// Send some headers
 		header('Vary: User-Agent', false);
-		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
-		// Debug information
-		if ($GLOBALS['TL_CONFIG']['debugMode'] && !\Input::get('popup'))
+		// Add the debug bar
+		if (\Config::get('debugMode') && !isset($_GET['popup']))
 		{
-			$intReturned = 0;
-			$intAffected = 0;
-
-			// Count the totals (see #3884)
-			if (is_array($GLOBALS['TL_DEBUG']['database_queries']))
-			{
-				foreach ($GLOBALS['TL_DEBUG']['database_queries'] as $k=>$v)
-				{
-					$intReturned += $v['return_count'];
-					$intAffected += $v['affected_count'];
-					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['return_count']);
-					unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['affected_count']);
-				}
-			}
-
-			$intElapsed = (microtime(true) - TL_START);
-
-			$strDebug = sprintf(
-				'<div id="debug" class="%s">'
-				. '<p>'
-					. '<span class="time">Execution time: %s ms</span>'
-					. '<span class="memory">Memory usage: %s</span>'
-					. '<span class="db">Database queries: %d</span>'
-					. '<span class="rows">Rows: %d returned, %s affected</span>'
-					. '<span class="models">Registered models: %d</span>'
-					. '<span id="tog">&nbsp;</span>'
-				. '</p>'
-				. '<div><pre>',
-				\Input::cookie('CONTAO_CONSOLE'),
-				$this->getFormattedNumber(($intElapsed * 1000), 0),
-				$this->getReadableSize(memory_get_peak_usage()),
-				count($GLOBALS['TL_DEBUG']['database_queries']),
-				$intReturned,
-				$intAffected,
-				\Model\Registry::getInstance()->count()
-			);
-
-			ksort($GLOBALS['TL_DEBUG']);
-
-			ob_start();
-			print_r($GLOBALS['TL_DEBUG']);
-			$strDebug .= ob_get_contents();
-			ob_end_clean();
-
-			if ($this->strFormat == 'xhtml')
-			{
-				$strScriptOpen = '<script type="text/javascript">' . "\n/* <![CDATA[ */\n";
-				$strScriptClose = "\n/* ]]> */\n" . '</script>';
-			}
-			else
-			{
-				$strScriptOpen = '<script>';
-				$strScriptClose = '</script>';
-			}
-
-			$strDebug .= '</pre></div></div>'
-				. $strScriptOpen
-					. "(function($) {"
-						. "$$('#debug>*').setStyle('width',window.getSize().x);"
-						. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
-						. "$('tog').addEvent('click',function(e) {"
-							. "$('debug').toggleClass('closed');"
-							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-							. "$(document.body).setStyle('margin-bottom',$('debug').hasClass('closed')?'60px':'320px');"
-						. "});"
-						. "window.addEvent('resize',function() {"
-							. "$$('#debug>*').setStyle('width',window.getSize().x);"
-						. "});"
-					. "})(document.id);"
-				. $strScriptClose . "\n\n";
-
-			$this->strBuffer = str_replace('</body>', $strDebug . '</body>', $this->strBuffer);
+			$this->strBuffer = str_replace('</body>', $this->getDebugBar() . '</body>', $this->strBuffer);
 		}
 
 		echo $this->strBuffer;
+
+		// Flush the output buffers (see #6962)
+		$this->flushAllData();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['postFlushData']) && is_array($GLOBALS['TL_HOOKS']['postFlushData']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postFlushData'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strBuffer, $this);
+			}
+		}
+	}
+
+
+	/**
+	 * Return the debug bar string
+	 *
+	 * @return string The debug bar markup
+	 */
+	protected function getDebugBar()
+	{
+		$intReturned = 0;
+		$intAffected = 0;
+
+		// Count the totals (see #3884)
+		if (is_array($GLOBALS['TL_DEBUG']['database_queries']))
+		{
+			foreach ($GLOBALS['TL_DEBUG']['database_queries'] as $k=>$v)
+			{
+				$intReturned += $v['return_count'];
+				$intAffected += $v['affected_count'];
+				unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['return_count']);
+				unset($GLOBALS['TL_DEBUG']['database_queries'][$k]['affected_count']);
+			}
+		}
+
+		$intElapsed = (microtime(true) - TL_START);
+
+		$strDebug = sprintf(
+			"<!-- indexer::stop -->\n"
+			. '<div id="contao-debug" class="%s">'
+			. '<p>'
+				. '<span class="debug-time">Execution time: %s ms</span>'
+				. '<span class="debug-memory">Memory usage: %s</span>'
+				. '<span class="debug-db">Database queries: %d</span>'
+				. '<span class="debug-rows">Rows: %d returned, %s affected</span>'
+				. '<span class="debug-models">Registered models: %d</span>'
+				. '<span id="debug-tog">&nbsp;</span>'
+			. '</p>'
+			. '<div><pre>',
+			\Input::cookie('CONTAO_CONSOLE'),
+			$this->getFormattedNumber(($intElapsed * 1000), 0),
+			$this->getReadableSize(memory_get_peak_usage()),
+			count($GLOBALS['TL_DEBUG']['database_queries']),
+			$intReturned,
+			$intAffected,
+			\Model\Registry::getInstance()->count()
+		);
+
+		ksort($GLOBALS['TL_DEBUG']);
+
+		ob_start();
+		print_r($GLOBALS['TL_DEBUG']);
+		$strDebug .= ob_get_contents();
+		ob_end_clean();
+
+		unset($GLOBALS['TL_DEBUG']);
+
+		$strDebug .= '</pre></div></div>'
+			. $this->generateInlineScript(
+				"(function($) {"
+					. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+					. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+					. "$('debug-tog').addEvent('click',function(e) {"
+						. "$('contao-debug').toggleClass('closed');"
+						. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
+						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+					. "});"
+					. "window.addEvent('resize',function() {"
+						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+					. "});"
+				. "})(document.id);",
+				($this->strFormat == 'xhtml')
+			)
+			. "\n<!-- indexer::continue -->\n\n"
+		;
+
+		return $strDebug;
 	}
 
 
@@ -389,7 +371,7 @@ abstract class Template extends \Controller
 	public function minifyHtml($strHtml)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'] || $GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('minifyMarkup') || \Config::get('debugMode'))
 		{
 			return $strHtml;
 		}
@@ -447,6 +429,119 @@ abstract class Template extends \Controller
 		}
 
 		return $strHtml;
+	}
+
+
+	/**
+	 * Generate the markup for a style sheet tag
+	 *
+	 * @param string  $href  The script path
+	 * @param string  $media The media type string
+	 * @param boolean $xhtml True if the output shall be XHTML compliant
+	 *
+	 * @return string The markup string
+	 */
+	public static function generateStyleTag($href, $media, $xhtml=false)
+	{
+		return '<link' . ($xhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $href . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . ($xhtml ? ' />' : '>');
+	}
+
+
+	/**
+	 * Generate the markup for inline CSS code
+	 *
+	 * @param string  $script The CSS code
+	 * @param boolean $xhtml  True if the output shall be XHTML compliant
+	 *
+	 * @return string The markup string
+	 */
+	public static function generateInlineStyle($script, $xhtml=false)
+	{
+		if ($xhtml)
+		{
+			return '<style type="text/css">' . "\n/* <![CDATA[ */\n" . $script . "\n/* ]]> */\n" . '</style>';
+		}
+		else
+		{
+			return '<style>' . $script . '</style>';
+		}
+	}
+
+
+	/**
+	 * Generate the markup for a JavaScript tag
+	 *
+	 * @param string  $src   The script path
+	 * @param boolean $xhtml True if the output shall be XHTML compliant
+	 *
+	 * @return string The markup string
+	 */
+	public static function generateScriptTag($src, $xhtml=false)
+	{
+		return '<script' . ($xhtml ? ' type="text/javascript"' : '') . ' src="' . $src . '"></script>';
+	}
+
+
+	/**
+	 * Generate the markup for an inline JavaScript
+	 *
+	 * @param string  $script The JavaScript code
+	 * @param boolean $xhtml  True if the output shall be XHTML compliant
+	 *
+	 * @return string The markup string
+	 */
+	public static function generateInlineScript($script, $xhtml=false)
+	{
+		if ($xhtml)
+		{
+			return '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . $script . "\n/* ]]> */\n" . '</script>';
+		}
+		else
+		{
+			return '<script>' . $script . '</script>';
+		}
+	}
+
+
+	/**
+	 * Generate the markup for an RSS feed tag
+	 *
+	 * @param string  $href   The script path
+	 * @param string  $format The feed format
+	 * @param string  $title  The feed title
+	 * @param boolean $xhtml  True if the output shall be XHTML compliant
+	 *
+	 * @return string The markup string
+	 */
+	public static function generateFeedTag($href, $format, $title, $xhtml=false)
+	{
+		return '<link type="application/' . $format . '+xml" rel="alternate" href="' . $href . '" title="' . specialchars($title) . '"' . ($xhtml ? ' />' : '>');
+	}
+
+
+	/**
+	 * Flush the output buffers
+	 *
+	 * @see Symfony\Component\HttpFoundation\Response
+	 */
+	public function flushAllData()
+	{
+		if (function_exists('fastcgi_finish_request'))
+		{
+			fastcgi_finish_request();
+		}
+		elseif (PHP_SAPI !== 'cli')
+		{
+			$status = ob_get_status(true);
+			$level = count($status);
+
+			while ($level-- > 0 && (!empty($status[$level]['del']) || (isset($status[$level]['flags']) && ($status[$level]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE) && ($status[$level]['flags'] & PHP_OUTPUT_HANDLER_FLUSHABLE))))
+			{
+				ob_end_flush();
+			}
+
+			flush();
+		}
 	}
 
 

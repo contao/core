@@ -103,6 +103,13 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_member']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'su' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_member']['su'],
+				'href'                => 'key=su',
+				'icon'                => 'su.gif',
+				'button_callback'     => array('tl_member', 'switchUser')
 			)
 		)
 	),
@@ -324,7 +331,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'], 'feEditable'=>true, 'feGroup'=>'login'),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>Config::get('minPasswordLength'), 'feEditable'=>true, 'feGroup'=>'login'),
 			'save_callback' => array
 			(
 				array('tl_member', 'setNewPassword')
@@ -500,6 +507,26 @@ class tl_member extends Backend
 
 
 	/**
+	 * Generate a "switch account" button and return it as string
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function switchUser($row, $href, $label, $title, $icon)
+	{
+		if (!$this->User->isAdmin)
+		{
+			return '';
+		}
+
+		return '<a href="contao/preview.php?user='.$row['username'].'" target="_blank" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	/**
 	 * Call the "setNewPassword" callback
 	 * @param string
 	 * @param object
@@ -575,7 +602,7 @@ class tl_member extends Backend
 	{
 		if ($dc instanceof \DataContainer && $dc->activeRecord)
 		{
-			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
 				$this->removeSession($dc);
 			}
@@ -616,7 +643,7 @@ class tl_member extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -640,7 +667,7 @@ class tl_member extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

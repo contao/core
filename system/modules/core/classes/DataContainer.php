@@ -177,7 +177,7 @@ class DataContainer extends \Backend
 		$xlabel = '';
 
 		// Toggle line wrap (textarea)
-		if ($arrData['inputType'] == 'textarea' && isset($arrData['eval']['rte']))
+		if ($arrData['inputType'] == 'textarea' && !isset($arrData['eval']['rte']))
 		{
 			$xlabel .= ' ' . \Image::getHtml('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
 		}
@@ -225,7 +225,6 @@ class DataContainer extends \Backend
 		}
 
 		$arrData['eval']['required'] = false;
-		$arrData['activeRecord'] = $this->activeRecord;
 
 		// Use strlen() here (see #3277)
 		if ($arrData['eval']['mandatory'])
@@ -244,6 +243,12 @@ class DataContainer extends \Backend
 					$arrData['eval']['required'] = true;
 				}
 			}
+		}
+
+		// Convert insert tags in src attributes (see #5965)
+		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		{
+			$this->varValue = \String::insertTagToSrc($this->varValue);
 		}
 
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
@@ -322,6 +327,12 @@ class DataContainer extends \Backend
 						$varValue = serialize($varValue);
 					}
 
+					// Convert file paths in src attributes (see #5965)
+					if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+					{
+						$varValue = \String::srcToInsertTag($varValue);
+					}
+
 					// Save the current value
 					try
 					{
@@ -343,7 +354,7 @@ class DataContainer extends \Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = \Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+			$format = \Date::formatToJs(\Config::get($rgxp.'Format'));
 
 			switch ($rgxp)
 			{
@@ -360,15 +371,15 @@ class DataContainer extends \Backend
 					break;
 			}
 
-			$wizard .= ' <img src="assets/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
+			$wizard .= ' <img src="assets/mootools/datepicker/' . $GLOBALS['TL_ASSETS']['DATEPICKER'] . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
   <script>
     window.addEvent("domready", function() {
       new Picker.Date($("ctrl_' . $objWidget->id . '"), {
         draggable: false,
         toggle: $("toggle_' . $objWidget->id . '"),
         format: "' . $format . '",
-        positionOffset: {x:-197,y:-182}' . $time . ',
-        pickerClass: "datepicker_dashboard",
+        positionOffset: {x:-211,y:-209}' . $time . ',
+        pickerClass: "datepicker_bootstrap",
         useFadeInOut: !Browser.ie,
         startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
         titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
@@ -389,7 +400,7 @@ class DataContainer extends \Backend
       new MooRainbow("moo_' . $this->strField . '", {
         id: "ctrl_' . $strKey . '",
         startColor: ((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-        imgPath: "assets/mootools/colorpicker/'.COLORPICKER.'/images/",
+        imgPath: "assets/mootools/colorpicker/' . $GLOBALS['TL_ASSETS']['COLORPICKER'] . '/images/",
         onComplete: function(color) {
           $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
         }
@@ -442,9 +453,29 @@ class DataContainer extends \Backend
 		$updateMode = '';
 
 		// Replace the textarea with an RTE instance
-		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		if (isset($arrData['eval']['rte']))
 		{
-			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_".$this->strInputName."');$('ctrl_".$this->strInputName."').erase('required')</script>";
+			list ($file, $type) = explode('|', $arrData['eval']['rte'], 2);
+
+			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
+			{
+				throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+			}
+
+			// Backwards compatibility
+			$language = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+
+			if (!file_exists(TL_ROOT . '/assets/tinymce/langs/' . $language . '.js'))
+			{
+				$language = 'en';
+			}
+
+			$selector = 'ctrl_' . $this->strInputName;
+
+			ob_start();
+			include TL_ROOT . '/system/config/' . $file . '.php';
+			$updateMode = ob_get_contents();
+			ob_end_clean();
 		}
 
 		// Handle multi-select fields in "override all" mode
@@ -493,7 +524,7 @@ class DataContainer extends \Backend
 	{
 		$return = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['label'][1];
 
-		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
+		if (!\Config::get('showHelp') || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
 		{
 			return '';
 		}
@@ -548,7 +579,7 @@ class DataContainer extends \Backend
 			}
 		}
 
-		$strUrl = \Environment::get('script') . '?' . implode('&', $arrKeys);
+		$strUrl = TL_SCRIPT . '?' . implode('&', $arrKeys);
 		return $strUrl . (!empty($arrKeys) ? '&' : '') . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 
@@ -610,7 +641,7 @@ class DataContainer extends \Backend
 			{
 				if ($k == 'show')
 				{
-					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']))).'\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']))).'\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
 				}
 				else
 				{

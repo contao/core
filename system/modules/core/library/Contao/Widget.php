@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Controller
+abstract class Widget extends \BaseTemplate
 {
 
 	/**
@@ -74,28 +74,10 @@ abstract class Widget extends \Controller
 	protected $strClass;
 
 	/**
-	 * Template
-	 * @var string
-	 */
-	protected $strTemplate;
-
-	/**
 	 * Wizard
 	 * @var string
 	 */
 	protected $strWizard;
-
-	/**
-	 * Output format
-	 * @var string
-	 */
-	protected $strFormat = 'html5';
-
-	/**
-	 * Tag ending
-	 * @var string
-	 */
-	protected $strTagEnding = '>';
 
 	/**
 	 * Errors
@@ -157,9 +139,8 @@ abstract class Widget extends \Controller
 			if ($objPage->outputFormat != '')
 			{
 				$this->strFormat = $objPage->outputFormat;
+				$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 		}
 
 		$this->addAttributes($arrAttributes);
@@ -343,6 +324,10 @@ abstract class Widget extends \Controller
 				$this->blnForAttribute = $varValue;
 				break;
 
+			case 'dataContainer':
+				$this->objDca = $varValue;
+				break;
+
 			default:
 				$this->arrConfiguration[$strKey] = $varValue;
 				break;
@@ -415,6 +400,14 @@ abstract class Widget extends \Controller
 
 			case 'forAttribute':
 				return $this->blnForAttribute;
+				break;
+
+			case 'dataContainer':
+				return $this->objDca;
+				break;
+
+			case 'activeRecord':
+				return $this->objDca->activeRecord;
 				break;
 
 			default:
@@ -550,10 +543,14 @@ abstract class Widget extends \Controller
 
 		$this->addAttributes($arrAttributes);
 
-		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
-		$strBuffer = ob_get_contents();
-		ob_end_clean();
+		$this->mandatoryField = $GLOBALS['TL_LANG']['MSC']['mandatory'];
+
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
+		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters (see #5553)
 		if (isset($GLOBALS['TL_HOOKS']['parseWidget']) && is_array($GLOBALS['TL_HOOKS']['parseWidget']))
@@ -1235,8 +1232,7 @@ abstract class Widget extends \Controller
 		$arrAttributes['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
-		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
-		$arrAttributes['objDca'] = $objDca;
+		$arrAttributes['dataContainer'] = $objDca;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
@@ -1283,7 +1279,7 @@ abstract class Widget extends \Controller
 			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
 			$arrData['options'] = array();
 
-			while($objOptions->next())
+			while ($objOptions->next())
 			{
 				$arrData['options'][$objOptions->id] = $objOptions->value;
 			}
@@ -1339,6 +1335,12 @@ abstract class Widget extends \Controller
 		{
 			$objDate = new \Date($varValue);
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
+		}
+
+		// Add the "rootNodes" array as attribute (see #3563)
+		if (isset($arrData['rootNodes']) && !isset($arrData['eval']['rootNodes']))
+		{
+			$arrAttributes['rootNodes'] = $arrData['rootNodes'];
 		}
 
 		// HOOK: add custom logic

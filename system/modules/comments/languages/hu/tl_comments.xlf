@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.name.0">
         <source>Author</source>
-        <target>Név</target>
+        <target>Szerző</target>
       </trans-unit>
       <trans-unit id="tl_comments.name.1">
         <source>Please enter the author's name.</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.email.0">
         <source>E-mail address</source>
-        <target>E-mail cím</target>
+        <target>E-mail címek</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>Itt adhat meg egy weboldal címet.</target>
+        <target>Itt megadhat egy weboldal címet.</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.notified.1">
         <source>The notification of this comment has been sent.</source>
-        <target>Az értesítés a hozzászólásról el lett küldve.</target>
+        <target>Az értesítés a hozzászólásról elküldve.</target>
       </trans-unit>
       <trans-unit id="tl_comments.author_legend">
         <source>Author</source>

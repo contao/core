@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64),
-			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'name' => array
 		(
@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['uploader'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('FileUpload'),
+			'options'                 => array('DropZone', 'FileUpload'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -252,7 +252,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>Config::get('minPasswordLength')),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'pwChange' => array
@@ -314,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('css', 'modules', 'layout'),
+			'options'                 => array('css', 'modules', 'layout', 'theme_import', 'theme_export'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -765,7 +765,7 @@ class tl_user extends Backend
 	{
 		if ($dc->activeRecord)
 		{
-			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
 				$this->removeSession($dc);
 			}
@@ -811,7 +811,7 @@ class tl_user extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -852,7 +852,7 @@ class tl_user extends Backend
 		}
 
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

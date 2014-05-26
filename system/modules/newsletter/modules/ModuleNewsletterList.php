@@ -103,7 +103,7 @@ class ModuleNewsletterList extends \Module
 
 					if ($objJumpTo !== null)
 					{
-						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), (($GLOBALS['TL_CONFIG']['useAutoItem'] && !$GLOBALS['TL_CONFIG']['disableAlias']) ?  '/%s' : '/items/%s'));
+						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'));
 					}
 					else
 					{
@@ -112,7 +112,7 @@ class ModuleNewsletterList extends \Module
 				}
 
 				$strUrl = $arrJumpTo[$objTarget->jumpTo];
-				$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
+				$strAlias = ($objNewsletter->alias != '' && !\Config::get('disableAlias')) ? $objNewsletter->alias : $objNewsletter->id;
 
 				$arrNewsletter[] = array
 				(

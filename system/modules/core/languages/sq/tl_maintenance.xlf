@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.1">
         <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
-        <target>Fshij tabelen  &lt;em&gt; tl_undo &lt;/ em&gt;  e cila ruan të dhënat e fshirë. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+        <target>Fshij tabelen  &lt;em&gt; tl_undo &lt;/em&gt;  e cila ruan të dhënat e fshirë. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.0">
         <source>Purge the version table</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
-        <target>Fshij tabelen  &lt;em&gt; tl_verion &lt;/ em&gt;  e cila ruan verzionet e më hershëm të të dhënave. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+        <target>Fshij tabelen  &lt;em&gt; tl_version &lt;/em&gt;  e cila ruan verzionet e më hershëm të të dhënave. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
-        <target>Fshij tabelen &lt;em&gt; tl_log &lt;/ em&gt; e cila ruan shkrimet e sistemit. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
+        <target>Fshij tabelen &lt;em&gt; tl_log &lt;/em&gt; e cila ruan shkrimet e sistemit. Kjo gjë përgjithmonë fshin këto të dhëna.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>

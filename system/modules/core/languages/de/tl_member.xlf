@@ -285,6 +285,14 @@
         <source>Activate/deactivate member ID %s</source>
         <target>Mitglied ID %s aktivieren/deaktivieren</target>
       </trans-unit>
+      <trans-unit id="tl_member.su.0">
+        <source>Front end preview</source>
+        <target>Frontend-Vorschau</target>
+      </trans-unit>
+      <trans-unit id="tl_member.su.1">
+        <source>Preview the front end as member ID %s</source>
+        <target>Frontend-Vorschau als Mitglied ID %s</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

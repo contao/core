@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'index.php');
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require 'system/initialize.php';
+require __DIR__ . '/system/initialize.php';
 
 
 /**
@@ -50,6 +50,20 @@ class Index extends Frontend
 		// Check whether a user is logged in
 		define('BE_USER_LOGGED_IN', $this->getLoginStatus('BE_USER_AUTH'));
 		define('FE_USER_LOGGED_IN', $this->getLoginStatus('FE_USER_AUTH'));
+
+		// No back end user logged in
+		if (!$_SESSION['DISABLE_CACHE'])
+		{
+			// Maintenance mode (see #4561 and #6353)
+			if (Config::get('maintenanceMode'))
+			{
+				header('HTTP/1.1 503 Service Unavailable');
+				die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
+			}
+
+			// Disable the debug mode (see #6450)
+			Config::set('debugMode', false);
+		}
 	}
 
 
@@ -58,13 +72,6 @@ class Index extends Frontend
 	 */
 	public function run()
 	{
-		// Maintenance mode (see #4561 and #6353)
-		if ($GLOBALS['TL_CONFIG']['maintenanceMode'] && !$_SESSION['DISABLE_CACHE'])
-		{
-			header('HTTP/1.1 503 Service Unavailable');
-			die_nicely('be_unavailable', 'This site is currently down for maintenance. Please come back later.');
-		}
-
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
@@ -84,7 +91,7 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
-		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp(Environment::get('request'), 'index.php/', 10) === 0)
+		elseif (Config::get('rewriteURL') && strncmp(Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -128,7 +135,7 @@ class Index extends Frontend
 			}
 
 			// Use the first result (see #4872)
-			if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			if (!Config::get('addLanguageToUrl'))
 			{
 				$objNewPage = current($arrLangs);
 			}
@@ -183,7 +190,7 @@ class Index extends Frontend
 		}
 		else
 		{
-			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = String::splitFriendlyEmail(Config::get('adminEmail'));
 		}
 
 		// Exit if the root page has not been published (see #2425)
@@ -195,7 +202,7 @@ class Index extends Frontend
 		}
 
 		// Check wether the language matches the root page language
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && Input::get('language') != $objPage->rootLanguage)
+		if (Config::get('addLanguageToUrl') && Input::get('language') != $objPage->rootLanguage)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -261,7 +268,7 @@ class Index extends Frontend
 		{
 			// Render the error page (see #5570)
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-			$objHandler->generate($pageId);
+			$objHandler->generate($pageId, null, null, true);
 		}
 
 		// Stop the script (see #4565)
@@ -275,7 +282,7 @@ class Index extends Frontend
 	protected function outputFromCache()
 	{
 		// Build the page if a user is (potentially) logged in or there is POST data
-		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['debugMode'])
+		if (!empty($_POST) || Input::cookie('FE_USER_AUTH') || Input::cookie('FE_AUTO_LOGIN') || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || Config::get('debugMode'))
 		{
 			return;
 		}
@@ -289,7 +296,7 @@ class Index extends Frontend
 		if (Environment::get('request') == '' || Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'])
+			if (Config::get('addLanguageToUrl') && !Config::get('doNotRedirectEmpty'))
 			{
 				return;
 			}
@@ -408,10 +415,10 @@ class Index extends Frontend
 		}
 
 		header('Vary: User-Agent', false);
-		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: ' . $content . '; charset=' . Config::get('characterSet'));
 
 		// Send the cache headers
-		if ($expire !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+		if ($expire !== null && (Config::get('cacheMode') == 'both' || Config::get('cacheMode') == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
 			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');

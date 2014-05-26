@@ -409,6 +409,14 @@
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
         <target>Geef hier de afmeting van het upload veld in (&lt;em&gt;afmeting&lt;/em&gt; attribuut).</target>
       </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+        <target>Aangepaste template</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+        <target>Hier kunt u de standaard template overschrijven.</target>
+      </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
         <target>Verzendknop toevoegen</target>
@@ -468,6 +476,10 @@
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>
         <target>Rijen en kolommen</target>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
+        <target>Template instellingen</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

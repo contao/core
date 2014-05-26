@@ -20,7 +20,6 @@ namespace Contao;
 /**
  * Class FormHeadline
  *
- * Form field "headline".
  * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -46,7 +45,8 @@ class FormHeadline extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{
@@ -55,11 +55,13 @@ class FormHeadline extends \Widget
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			return \String::toXhtml($this->text);
+			$this->text = \String::toXhtml($this->text);
 		}
 		else
 		{
-			return \String::toHtml5($this->text);
+			$this->text = \String::toHtml5($this->text);
 		}
+
+		return $this->text;
 	}
 }

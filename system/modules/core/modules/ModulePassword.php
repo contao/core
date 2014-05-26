@@ -291,7 +291,7 @@ class ModulePassword extends \Module
 					break;
 
 				case 'link':
-					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
+					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
 					break;
 
 				default:

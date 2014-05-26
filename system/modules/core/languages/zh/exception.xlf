@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
-        <target>请到&lt;a href=&quot;%s&quot;&gt;顶层&lt;/ a&gt;，并使用搜索功能找到你要找的 (任何)页面。您也可以与&lt;a href=&quot;%s&quot;&gt;网站管理员&lt;/ a&gt;联系，并让他获悉问题所在。</target>
+        <target>请到&lt;a href=&quot;%s&quot;&gt;顶层&lt;/a&gt;，并使用搜索功能找到你要找的 (任何)页面。您也可以与&lt;a href=&quot;%s&quot;&gt;网站管理员&lt;/a&gt;联系，并让他获悉问题所在。</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>

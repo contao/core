@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/page.php');
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**
@@ -95,20 +95,15 @@ class PagePicker extends Backend
 		$this->Session->set('filePickerRef', \Environment::get('request'));
 
 		// Prepare the widget
-		$objPageTree = new $GLOBALS['BE_FFL']['pageSelector'](array(
-			'strId'    => $strField,
-			'strTable' => $strTable,
-			'strField' => $strField,
-			'strName'  => $strField,
-			'varValue' => array_filter(explode(',', Input::get('value')))
-		), $objDca);
+		$class = $GLOBALS['BE_FFL']['pageSelector'];
+		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, array_filter(explode(',', Input::get('value'))), $strField, $strTable, $objDca));
 
 		$this->Template->main = $objPageTree->generate();
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->addSearch = true;
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
 		$this->Template->action = ampersand(Environment::get('request'));
@@ -117,7 +112,7 @@ class PagePicker extends Backend
 		$this->Template->managerHref = 'contao/main.php?do=page&amp;popup=1';
 		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'];
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

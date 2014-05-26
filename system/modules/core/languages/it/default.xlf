@@ -341,6 +341,14 @@
         <source>Highlights code snippets and prints them to the screen.</source>
         <target>Evidenzia pezzi di codice e li fa vedere sullo schermo.</target>
       </trans-unit>
+      <trans-unit id="CTE.markdown.0">
+        <source>Markdown</source>
+        <target>Markdown</target>
+      </trans-unit>
+      <trans-unit id="CTE.markdown.1">
+        <source>Generates HTML code from a markdown text.</source>
+        <target>Genera il codice HTML da un testo Markdown.</target>
+      </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
         <target>Contenuto slider</target>
@@ -1971,6 +1979,10 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
         <source>Page %s of %s</source>
         <target>Pagina %s di %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>globale</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>File %s caricato con successo</target>
@@ -2113,19 +2125,19 @@ Questa e-mail è stata generata dal sistema in modo automatico. Non rispondere a
       </trans-unit>
       <trans-unit id="UNITS.1">
         <source>KiB</source>
-        <target>KiB</target>
+        <target>KB</target>
       </trans-unit>
       <trans-unit id="UNITS.2">
         <source>MiB</source>
-        <target>MiB</target>
+        <target>MB</target>
       </trans-unit>
       <trans-unit id="UNITS.3">
         <source>GiB</source>
-        <target>GB</target>
+        <target>GiB</target>
       </trans-unit>
       <trans-unit id="UNITS.4">
         <source>TiB</source>
-        <target>TiB</target>
+        <target>TB</target>
       </trans-unit>
       <trans-unit id="UNITS.5">
         <source>PiB</source>

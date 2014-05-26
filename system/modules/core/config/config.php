@@ -153,7 +153,8 @@ $GLOBALS['TL_CTE'] = array
 		'html'            => 'ContentHtml',
 		'list'            => 'ContentList',
 		'table'           => 'ContentTable',
-		'code'            => 'ContentCode'
+		'code'            => 'ContentCode',
+		'markdown'        => 'ContentMarkdown'
 	),
 	'accordion' => array
 	(
@@ -436,6 +437,32 @@ $GLOBALS['TL_WRAPPERS'] = array
 		'accordionSingle'
 	),
 	'separator' => array()
+);
+
+
+/**
+ * Asset versions
+ */
+$GLOBALS['TL_ASSETS'] = array
+(
+	'ACE'          => '1.1.3',
+	'COMPASS'      => '0.12.6',
+	'CSS3PIE'      => '1.0.0',
+	'DROPZONE'     => '3.8.5',
+	'HIGHLIGHTER'  => '3.0.83',
+	'HTML5SHIV'    => '3.7.0',
+	'SWIPE'        => '2.0',
+	'JQUERY'       => '1.11.0',
+	'JQUERY_UI'    => '1.10.4',
+	'COLORBOX'     => '1.5.8',
+	'MEDIAELEMENT' => '2.14.2',
+	'TABLESORTER'  => '2.0.5',
+	'MOOTOOLS'     => '1.5.0',
+	'COLORPICKER'  => '1.4',
+	'DATEPICKER'   => '2.2.0',
+	'MEDIABOX'     => '1.4.6',
+	'SIMPLEMODAL'  => '1.2',
+	'SLIMBOX'      => '1.8'
 );
 
 

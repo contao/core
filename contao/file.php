@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/file.php');
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**
@@ -106,20 +106,15 @@ class FilePicker extends Backend
 		}
 
 		// Prepare the widget
-		$objFileTree = new $GLOBALS['BE_FFL']['fileSelector'](array(
-			'strId'    => $strField,
-			'strTable' => $strTable,
-			'strField' => $strField,
-			'strName'  => $strField,
-			'varValue' => $arrValues
-		), $objDca);
+		$class = $GLOBALS['BE_FFL']['fileSelector'];
+		$objFileTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 
 		$this->Template->main = $objFileTree->generate();
 		$this->Template->theme = Backend::getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = Config::get('characterSet');
 		$this->Template->addSearch = false;
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
 		$this->Template->action = ampersand(Environment::get('request'));
@@ -128,7 +123,7 @@ class FilePicker extends Backend
 		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
 		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
 
-		$GLOBALS['TL_CONFIG']['debugMode'] = false;
+		Config::set('debugMode', false);
 		$this->Template->output();
 	}
 }

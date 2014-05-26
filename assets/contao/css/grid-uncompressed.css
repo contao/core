@@ -43,7 +43,7 @@
 	margin-left:0;
 	margin-right:0;
 }
-.mod_article *[class*="layout_"]>*,.mod_article *[class*="event_"]>* {
+.mod_article *[class*="layout_"] > *,.mod_article *[class*="event_"] > * {
 	margin-left:10px;
 	margin-right:10px;
 }

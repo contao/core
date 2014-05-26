@@ -95,7 +95,7 @@ class ModuleFlash extends \Module
 		$this->Template->width = $size[0];
 		$this->Template->height = $size[1];
 
-		$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+		$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 
 		// Adjust movie size
 		if ($intMaxWidth > 0 && $size[0] > $intMaxWidth)

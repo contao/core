@@ -171,7 +171,7 @@ class ModuleBreadcrumb extends \Module
 			}
 
 			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
-			$strAlias = ($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id;
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
 
 			if ($objArticle->inColumn != 'main')
 			{

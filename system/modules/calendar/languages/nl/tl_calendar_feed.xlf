@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.1">
         <source>Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the &lt;em&gt;share&lt;/em&gt; directory of your Contao installation, e.g. as &lt;em&gt;share/name.xml&lt;/em&gt;.</source>
-        <target>Hier kunt u een unieke bestandsnaam (zonder extensie) invoeren. Het XML-feed bestand wordt automatisch aangemaakt in de &lt;em&gt; share &lt;/ em&gt; directory van uw Contao installatie, b.v. als &lt;em&gt; share / name.xml &lt;/ em&gt;.</target>
+        <target>Hier kunt u een unieke bestandsnaam (zonder extensie) invoeren. Het XML-feed bestand wordt automatisch aangemaakt in de &lt;em&gt; share &lt;/em&gt; directory van uw Contao installatie, b.v. als &lt;em&gt; share / name.xml &lt;/em&gt;.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.0">
         <source>Feed language</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
-        <target>Geef de feed taal op volgens de ISO-639 norm (b.v. &lt;em&gt; en &lt;/ em&gt; of &lt;em&gt; en-us &lt;/ em&gt;).</target>
+        <target>Geef de feed taal op volgens de ISO-639 norm (b.v. &lt;em&gt; en &lt;/em&gt; of &lt;em&gt; en-us &lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.calendars.0">
         <source>Calendars</source>
