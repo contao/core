@@ -81,6 +81,14 @@
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
         <target>Als u de voorbeeld website hebt geïmporteerd is de admin gebruikersnaam &lt;strong&gt;k.jones&lt;/strong&gt; en het wachtwoord &lt;strong&gt;kevinjones&lt;/strong&gt;. Zie de voorbeeld website (frontend) voor meer informatie.</target>
       </trans-unit>
+      <trans-unit id="tl_install.repository.0">
+        <source>Extension repository</source>
+        <target>Extensie catalogus</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repository.1">
+        <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>We zijn momenteel een nieuwe versie van extensie beheer, aan het bèta testen deze maakt gebruik maakt van Composer om pakketten te beheren. Installeer de Composer cliënt om deel te nemen aan de bèta test.</target>
+      </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
         <target>Gefeliciteerd!</target>
@@ -123,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_install.keyLength">
         <source>An encryption key has to be at least 12 characters long!</source>
-        <target>Een codesleutel dient minstens 12 karakters lang te zijn!</target>
+        <target>Een codesleutel dient minimaal 12 karakters lang te zijn!</target>
       </trans-unit>
       <trans-unit id="tl_install.keyConfirm">
         <source>An encryption key has been created.</source>
@@ -264,6 +272,18 @@
       <trans-unit id="tl_install.adminSave">
         <source>Create admin account</source>
         <target>Maak een admin account</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryDefault">
+        <source>You are using the default extension repository.</source>
+        <target>U maakt gebruik van het standaard extensie-beheer.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryComposer">
+        <source>You are using the Composer based extension repository.</source>
+        <target>U maakt gebruik van het op Composer gebaseerde extensie-beheer.</target>
+      </trans-unit>
+      <trans-unit id="tl_install.repositoryInstall">
+        <source>Install the Composer client</source>
+        <target>Installeer de Composer cliënt</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

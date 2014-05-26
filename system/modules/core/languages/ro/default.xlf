@@ -1976,6 +1976,9 @@ Acest mesaj a fost generat de Contao. Nu puteţi face reply direct la acest emai
         <source>Page %s of %s</source>
         <target>Pagina %s din %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Fişierul %s încărcat cu succes.</target>

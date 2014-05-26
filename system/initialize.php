@@ -203,18 +203,19 @@ if (!$objConfig->isComplete() && TL_SCRIPT != 'contao/install.php')
 
 
 /**
- * Set error_reporting (see #5001)
+ * Always show error messages if logged into the install tool (see #5001)
  */
 if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && Input::cookie('TL_INSTALL_AUTH') == $_SESSION['TL_INSTALL_AUTH'] && $_SESSION['TL_INSTALL_EXPIRE'] > time())
 {
-	@ini_set('display_errors', 1);
-	error_reporting(E_ALL|E_STRICT);
+	Config::set('displayErrors', 1);
 }
-else
-{
-	@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
-	error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? E_ALL|E_STRICT : 0);
-}
+
+
+/**
+ * Configure the error handling
+ */
+@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
+error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? Config::get('errorReporting') : 0);
 
 
 /**

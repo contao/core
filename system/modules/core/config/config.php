@@ -446,6 +446,7 @@ $GLOBALS['TL_WRAPPERS'] = array
 $GLOBALS['TL_ASSETS'] = array
 (
 	'ACE'          => '1.1.3',
+	'COMPASS'      => '0.12.6',
 	'CSS3PIE'      => '1.0.0',
 	'DROPZONE'     => '3.8.5',
 	'HIGHLIGHTER'  => '3.0.83',
@@ -456,7 +457,7 @@ $GLOBALS['TL_ASSETS'] = array
 	'COLORBOX'     => '1.5.8',
 	'MEDIAELEMENT' => '2.14.2',
 	'TABLESORTER'  => '2.0.5',
-	'MOOTOOLS'     => '1.4.5',
+	'MOOTOOLS'     => '1.5.0',
 	'COLORPICKER'  => '1.4',
 	'DATEPICKER'   => '2.2.0',
 	'MEDIABOX'     => '1.4.6',

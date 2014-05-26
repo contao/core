@@ -511,7 +511,7 @@
       </trans-unit>
       <trans-unit id="PTY.forward.1">
         <source>This type of page automatically forwards visitors to another page within the site structure.</source>
-        <target>Deze pagina verwijst u automatisch door naar een andere pagina van de website gebruik makend van een pagina ID of een pagina alias.</target>
+        <target>Deze pagina verwijst u automatisch door naar een andere pagina van de website gebruik makende van een pagina ID of een pagina alias.</target>
       </trans-unit>
       <trans-unit id="PTY.root.0">
         <source>Website root</source>
@@ -1252,7 +1252,7 @@ Website: %s
 
 Het account is geblokkeerd voor %d minuten, omdat de gebruiker drie keer op rij een ongeldig wachtwoord heeft ingevoerd. Na verloop van deze tijd zal het account automatisch worden ontgrendeld.
 
-Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorden. ?
+Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorden.
 </target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.0">
@@ -1761,7 +1761,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.coreOnlyMode">
         <source>Contao is currently running in &lt;strong&gt;safe mode&lt;/strong&gt;, in which only core modules are loaded, to prevent possible incompatibilities with third-party extensions (e.g. after a Live Update). After you have checked the installed extensions, you can disable the safe mode again.</source>
-        <target>Contao draait momenteel in de &lt;strong&gt;veilige modus&lt;/strong&gt;, waarin alleen core modules worden geladen. Deze instelling is bijvoorbeeld geactiveerd na een Live Update om mogelijke incompatibiliteit te voorkomen met third-party extensies. U kunt dit deactiveren in de back-end instellingen na controle van de geïnstalleerde third-party extensies.</target>
+        <target>Contao draait momenteel in de &lt;strong&gt;veilige modus&lt;/strong&gt;, waarin alleen core modules worden geladen om mogelijke incompatibiliteit te voorkomen met third-party extensies (b.v. na een Live Update). Na controle van de geïnstalleerde extensies kunt u de veilige modus uitschakelen.</target>
       </trans-unit>
       <trans-unit id="MSC.coreOnlyOff">
         <source>Disable</source>
@@ -1813,7 +1813,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.adminText">
         <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
-        <target>Een nieuw lid (ID %s) heeft zich geregistreerd op uw website.%s In het geval dat u geen gebruik maakt van activatie via e-mail, moet u dit account handmatig activeren in het backend van de site.</target>
+        <target>Een nieuw lid (ID %s) registreerde op uw website. In het geval dat u geen gebruik maakt van activatie via e-mail, moet u dit account handmatig activeren in het backend van de site.</target>
       </trans-unit>
       <trans-unit id="MSC.requestPassword">
         <source>Request password</source>
@@ -1979,6 +1979,10 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
         <source>Page %s of %s</source>
         <target>Pagina %s van %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>globaal</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Bestand %s succesvol geüpload</target>
@@ -2049,7 +2053,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.readMore">
         <source>Read the article: %s</source>
-        <target>Lees het artikel: %s</target>
+        <target>Lees het volledig artikel %s</target>
       </trans-unit>
       <trans-unit id="MSC.targetPage">
         <source>Target page</source>

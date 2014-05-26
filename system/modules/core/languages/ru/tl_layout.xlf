@@ -294,8 +294,8 @@
         <target>Тэг title (название)</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
-        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
-        <target>Вы можете переписать тэг title (название) (по умолчанию {{page::pageTitle}} - {{page::mainTitle}}).</target>
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>Вы можете переписать тэг title (название) (по умолчанию &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>

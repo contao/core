@@ -1218,17 +1218,19 @@ Library.
                     <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateConfirm']; ?></p>
                   <?php endif; ?>
                   <p><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][1]; ?></p>
-                  <form action="<?php echo $this->action; ?>" id="sql_form" class="tl_install_form" method="post">
-                    <div class="tl_formbody">
-                      <input type="hidden" name="FORM_SUBMIT" value="tl_tables">
-                      <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>"><?php echo $this->dbUpdate; ?>
-                    </div>
-                    <div class="tl_formbody_submit">
-                      <div class="tl_submit_container">
-                        <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset()">
+                  <?php if (!$this->dbUpToDate): ?>
+                    <form action="<?php echo $this->action; ?>" id="sql_form" class="tl_install_form" method="post">
+                      <div class="tl_formbody">
+                        <input type="hidden" name="FORM_SUBMIT" value="tl_tables">
+                        <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>"><?php echo $this->dbUpdate; ?>
                       </div>
-                    </div>
-                  </form>
+                      <div class="tl_formbody_submit">
+                        <div class="tl_submit_container">
+                          <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset()">
+                        </div>
+                      </div>
+                    </form>
+                  <?php endif; ?>
                 </div>
               </fieldset>
 
@@ -1294,7 +1296,7 @@ Library.
                         <?php if ($this->emailError): ?>
                           <p class="tl_error"><?php echo $this->emailError; ?></p>
                         <?php endif; ?>
-                        <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
+                        <input type="email" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
                         <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
                         <?php if ($this->passwordError): ?>
                           <p class="tl_error"><?php echo $this->passwordError; ?></p>
@@ -1314,6 +1316,23 @@ Library.
               </fieldset>
 
               <?php if ($this->adminCreated): ?>
+                <fieldset class="tl_box<?php if ($this->hasComposer): ?> collapsed<?php endif; ?>">
+                  <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][0]; ?></legend>
+                  <div>
+                    <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][0]; ?></h3>
+                    <?php if (!$this->hasComposer): ?>
+                      <p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryDefault']; ?></p>
+                    <?php else: ?>
+                      <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryComposer']; ?></p>
+                    <?php endif; ?>
+                    <p><?php echo $GLOBALS['TL_LANG']['tl_install']['repository'][1]; ?></p>
+                    <?php if (!$this->hasComposer): ?>
+                      <div class="tl_submit_container">
+                        <a href="contao/main.php?do=repository_catalog&amp;view=composer" class="tl_submit"><?php echo $GLOBALS['TL_LANG']['tl_install']['repositoryInstall']; ?></a>
+                      </div>
+                    <?php endif; ?>
+                  </div>
+                </fieldset>
                 <fieldset class="tl_box last">
                   <legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></legend>
                   <div>

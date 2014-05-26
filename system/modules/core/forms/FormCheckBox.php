@@ -148,13 +148,13 @@ class FormCheckBox extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Return all attributes as string
 	 *
-	 * @param array $arrAttributes An optional attributes array
+	 * @param array $arrStrip An optional array with attributes to strip
 	 *
-	 * @return string The template markup
+	 * @return string The attributes string
 	 */
-	public function parse($arrAttributes=null)
+	public function getAttributes($arrStrip=array())
 	{
 		// The "required" attribute only makes sense for single checkboxes
 		if (count($this->arrOptions) == 1 && $this->mandatory)
@@ -162,7 +162,19 @@ class FormCheckBox extends \Widget
 			$this->arrAttributes['required'] = 'required';
 		}
 
-		// Generate the options
+		return parent::getAttributes($arrStrip);
+	}
+
+
+	/**
+	 * Generate the options
+	 *
+	 * @return array The options array
+	 */
+	protected function getOptions()
+	{
+		$arrOptions = array();
+
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
 			$arrOptions[] = array
@@ -176,9 +188,7 @@ class FormCheckBox extends \Widget
 			);
 		}
 
-		$this->arrOptions = $arrOptions;
-
-		return parent::parse($arrAttributes);
+		return $arrOptions;
 	}
 
 
@@ -188,12 +198,11 @@ class FormCheckBox extends \Widget
 	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
 	 *
 	 * @return string The form field markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$this->strError = $this->getErrorAsHTML();
+
 		return $this->generate();
 	}
 
@@ -202,8 +211,6 @@ class FormCheckBox extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

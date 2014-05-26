@@ -15,7 +15,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require '../initialize.php';
+require dirname(__DIR__) . '/initialize.php';
 
 
 /**

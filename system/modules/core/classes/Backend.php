@@ -105,12 +105,20 @@ abstract class Backend extends \Controller
 			return $lang;
 		}
 
-		// Fallback to the short tag (e.g. "de" instead of "de_CH")
 		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
 		{
+			// Try the short tag, e.g. "de" instead of "de_CH"
 			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $short . '.js'))
 			{
 				return $short;
+			}
+		}
+		elseif (($long = $short . '_' . strtoupper($short)) != $lang)
+		{
+			// Try the long tag, e.g. "fr_FR" instead of "fr" (see #6952)
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $long . '.js'))
+			{
+				return $long;
 			}
 		}
 

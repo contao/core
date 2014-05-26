@@ -1979,6 +1979,10 @@ Denne e-mail er automatisk genereret, og kan derfor ikke besvares direkte.
         <source>Page %s of %s</source>
         <target>Side %s af %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>globalt</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Filen %s blev uploadet med succes</target>

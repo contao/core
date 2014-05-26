@@ -294,8 +294,8 @@
         <target>Balise title</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
-        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
-        <target>Ici, vous pouvez remplacer la balise title (par défaut &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</target>
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>Ici, vous pouvez remplacer la balise title (par défaut &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>

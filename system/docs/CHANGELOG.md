@@ -1,8 +1,97 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.3.RC1 (2014-05-02)
-----------------------------
+Version 3.3.0 (2014-05-26)
+--------------------------
+
+### Fixed
+Correctly show the comments in the "comments" element (see #7040).
+
+### Fixed
+Correctly store the file selection in "edit multiple" mode (see #7028).
+
+### Update
+Update Compass to version 0.12.6.
+
+### Fixed
+Improve the UUID validation to prevent false positives (see #7010).
+
+### Fixed
+Correctly sort by date in the listing module (see #5609).
+
+### Fixed
+Fix the back link in the "single article" view (see #6955).
+
+### Fixed
+Never cache insert tags if the output is not used on the website (see #7018).
+
+### Fixed
+Strip forbidden HTML tags in the markdown content element (see #7021).
+
+### Fixed
+Prevent parallel execution of the new command line scripts.
+
+### Fixed
+Also set the `sql_mode` in the MySQLi driver (see #6996).
+
+### Fixed
+Purge the script cache if a style sheet is edited (see #7005).
+
+### Fixed
+Disable the maintenance screen if a back end user is logged in (see #7009).
+
+### Fixed
+Correctly set the textarea value in the template (see #6995).
+
+### Fixed
+Make sure the security questions gets always generated (see #6990).
+
+### Fixed
+Do not use `date_default_timezone_get()` in the configuration file (see #6989).
+
+### Fixed
+Correctly generate absolute URIs in `Controller::generateFrontendUrl()`.
+
+### Fixed
+Fix the link button padding (`a.tl_submit`).
+
+
+Version 3.3.0-RC2 (2014-05-09)
+------------------------------
+
+### Update
+Update TinyMCE to version 4.0.26.
+
+### Fixed
+Correctly set and explain the page title field (see #6953).
+
+### Fixed
+Correctly show the template sources (see #6875).
+
+### Fixed
+Support input tags without a "type" attribute in the CSS framwork (see #6902).
+
+### Fixed
+Import the `tinymce.css` style sheet in TinyMCE (see #6970).
+
+### Fixed
+Catch Swift exceptions when sending form data via e-mail (see #6941).
+
+### Fixed
+Try all locale variations when loading TinyMCE (see #6952).
+
+### Fixed
+Correctly overwrite the article template (see #6938).
+
+### Fixed
+Correctly wrap long labels in the tree view (see #6954).
+
+### Fixed
+Correctly add the WAI-ARIA attributes (see #6217).
+
+
+Version 3.3.0-RC1 (2014-05-02)
+------------------------------
 
 ### New
 Allow to override the default form field template (see #4547).
@@ -88,9 +177,6 @@ Add helper methods to generate markup depending on the output type:
  - `Template::generateInlineScript()`
  - `Template::generateFeedTag()`
 
-### Changed
-Use a deferred Ajax request to add a page to the search index (see #6566).
-
 ### New
 Add the "customizeSearch" hook (see #5223).
 
@@ -134,8 +220,8 @@ Added the insert tag flags "urlencode" and "rawurlencode" (see #6859).
 Add files and folders to the database in details view (see #6880).
 
 
-Version 3.3.beta1 (2014-04-11)
-------------------------------
+Version 3.3.0-beta1 (2014-04-11)
+--------------------------------
 
 ### New
 Add version control for editable files.

@@ -89,7 +89,7 @@ abstract class Controller extends \System
 		// Get the default templates
 		foreach (\TemplateLoader::getPrefixedFiles($strPrefix) as $strTemplate)
 		{
-			$arrTemplates[$strTemplate] = $strTemplate;
+			$arrTemplates[$strTemplate][] = 'root';
 		}
 
 		$arrCustomized = glob(TL_ROOT . '/templates/' . $strPrefix . '*');
@@ -100,58 +100,72 @@ abstract class Controller extends \System
 			foreach ($arrCustomized as $strFile)
 			{
 				$strTemplate = basename($strFile, strrchr($strFile, '.'));
-
-				if (!isset($arrTemplates[$strTemplate]))
-				{
-					$arrTemplates[$strTemplate] = $strTemplate;
-				}
+				$arrTemplates[$strTemplate][] = $GLOBALS['TL_LANG']['MSC']['global'];
 			}
 		}
 
 		// Do not look for back end templates in theme folders (see #5379)
-		if ($strPrefix == 'be_' || $strPrefix == 'mail_')
+		if ($strPrefix != 'be_' && $strPrefix != 'mail_')
 		{
-			return $arrTemplates;
-		}
-
-		// Try to select the themes (see #5210)
-		try
-		{
-			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
-		}
-		catch (\Exception $e)
-		{
-			$objTheme = null;
-		}
-
-		// Add the theme templates
-		if ($objTheme !== null)
-		{
-			while ($objTheme->next())
+			// Try to select the themes (see #5210)
+			try
 			{
-				if ($objTheme->templates != '')
+				$objTheme = \ThemeModel::findAll(array('order'=>'name'));
+			}
+			catch (\Exception $e)
+			{
+				$objTheme = null;
+			}
+
+			// Add the theme templates
+			if ($objTheme !== null)
+			{
+				while ($objTheme->next())
 				{
-					$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
-
-					if (is_array($arrThemeTemplates))
+					if ($objTheme->templates != '')
 					{
-						foreach ($arrThemeTemplates as $strFile)
-						{
-							$strTemplate = basename($strFile, strrchr($strFile, '.'));
+						$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
 
-							if (!isset($arrTemplates[$strTemplate]))
+						if (is_array($arrThemeTemplates))
+						{
+							foreach ($arrThemeTemplates as $strFile)
 							{
-								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
-							}
-							else
-							{
-								$arrTemplates[$strTemplate] .= ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+								$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+								if (!isset($arrTemplates[$strTemplate]))
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
+								else
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
+
+		// Show the template sources (see #6875)
+		foreach ($arrTemplates as $k=>$v)
+		{
+			$v = array_filter($v, function($a) {
+				return $a != 'root';
+			});
+
+			if (empty($v))
+			{
+				$arrTemplates[$k] = $k;
+			}
+			else
+			{
+				$arrTemplates[$k] = $k . ' (' . implode(', ', $v) . ')';
+			}
+		}
+
+		// Sort the template names
+		ksort($arrTemplates);
 
 		return $arrTemplates;
 	}
@@ -928,7 +942,7 @@ abstract class Controller extends \System
 										$strForceLang = $objNext->language;
 									}
 
-									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -943,7 +957,7 @@ abstract class Controller extends \System
 									$strForceLang = $objNextPage->language;
 								}
 
-								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
+								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang, true);
 								break;
 						}
 
@@ -1818,23 +1832,10 @@ abstract class Controller extends \System
 			$strScripts .= "\n" . \Template::generateInlineScript('SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()', $blnXhtml) . "\n";
 		}
 
-		$strSearchCron = '';
-
-		// Add to search index
-		if (\Config::get('enableSearch'))
-		{
-			$strSearchCron .= 'setTimeout(function(){try{var e=new XMLHttpRequest}catch(t){return}e.open("GET",window.location.href,!0),e.setRequestHeader("Index-Page",!0),e.setRequestHeader("X-Requested-With","XMLHttpRequest"),e.send()},1e4);';
-		}
-
 		// Command scheduler
 		if (!\Config::get('disableCron'))
 		{
-			$strSearchCron .= 'setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);';
-		}
-
-		if ($strSearchCron != '')
-		{
-			$strScripts .= "\n" . \Template::generateInlineScript($strSearchCron, $blnXhtml) . "\n";
+			$strScripts .= "\n" . \Template::generateInlineScript('setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_BODY]]'] = $strScripts;
@@ -2130,11 +2131,11 @@ abstract class Controller extends \System
 	 * @param array   $arrRow       An array of page parameters
 	 * @param string  $strParams    An optional string of URL parameters
 	 * @param string  $strForceLang Force a certain language
-	 * @param boolean $blnAbsolute  If true, the return value is always an absolute URL
+	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnAbsolute=false)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
 		if (!\Config::get('disableAlias'))
 		{
@@ -2185,13 +2186,9 @@ abstract class Controller extends \System
 		}
 
 		// Add the domain if it differs from the current one (see #3765 and #6927)
-		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . $strUrl;
-		}
-		elseif ($blnAbsolute)
-		{
-			$strUrl = \Environment::get('base') . $strUrl;
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2339,7 +2336,13 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true); // see #4332
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
+
+		// Make sure the URL is absolute (see #4332)
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		{
+			$strUrl = \Environment::get('base') . $strUrl;
+		}
 
 		if (!$blnReturn)
 		{

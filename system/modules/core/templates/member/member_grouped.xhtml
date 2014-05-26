@@ -17,7 +17,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->personal as $field) echo $field; ?>
+          <?php echo implode('', $this->personal); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -30,7 +30,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->address as $field) echo $field; ?>
+          <?php echo implode('', $this->address); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -43,7 +43,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->contact as $field) echo $field; ?>
+          <?php echo implode('', $this->contact); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -56,7 +56,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->login as $field) echo $field; ?>
+          <?php echo implode('', $this->login); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -69,7 +69,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->profile as $field) echo $field; ?>
+          <?php echo implode('', $this->profile); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -82,7 +82,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->newsletter as $field) echo $field; ?>
+          <?php echo implode('', $this->newsletter); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>
@@ -95,7 +95,7 @@
           <?php if (!$this->tableless): ?>
             <table>
           <?php endif; ?>
-          <?php foreach ($this->helpdesk as $field) echo $field; ?>
+          <?php echo implode('', $this->helpdesk); ?>
           <?php if (!$this->tableless): ?>
             </table>
           <?php endif; ?>

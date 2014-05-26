@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_module.customTpl.1">
         <source>Here you can overwrite the default module template.</source>
-        <target>初期設定のテンプレートを置き換えできます。</target>
+        <target>初期設定のモジュールのテンプレートを上書きできます。</target>
       </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>

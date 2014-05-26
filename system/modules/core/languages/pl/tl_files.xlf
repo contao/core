@@ -79,9 +79,11 @@
       </trans-unit>
       <trans-unit id="tl_files.dropzone">
         <source>Click or drop files here to upload</source>
+        <target>Kliknij lub upuść pliki tutaj aby je wysłać</target>
       </trans-unit>
       <trans-unit id="tl_files.fileLocation">
         <source>File location: %s</source>
+        <target>Lokacja pliku: %s</target>
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder &quot;%s&quot;</source>

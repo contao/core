@@ -73,7 +73,7 @@ $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
 $GLOBALS['TL_CONFIG']['datimFormat'] = 'Y-m-d H:i';
 $GLOBALS['TL_CONFIG']['dateFormat']  = 'Y-m-d';
 $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
-$GLOBALS['TL_CONFIG']['timeZone']    = date_default_timezone_get();
+$GLOBALS['TL_CONFIG']['timeZone']    = ini_get('date.timezone') ?: 'GMT';
 
 
 /**
@@ -141,6 +141,7 @@ $GLOBALS['TL_CONFIG']['dbSocket']    = '';
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
+$GLOBALS['TL_CONFIG']['dbSqlMode']   = '';
 
 
 /**
@@ -344,3 +345,4 @@ $GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
 $GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';
 $GLOBALS['TL_CONFIG']['debugMode']            = false;
 $GLOBALS['TL_CONFIG']['maintenanceMode']      = true;
+$GLOBALS['TL_CONFIG']['errorReporting']       = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED;

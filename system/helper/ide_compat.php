@@ -46,6 +46,7 @@ namespace  {
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
 	class DataContainer extends \Contao\DataContainer {}
+	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}
 	class FrontendTemplate extends \Contao\FrontendTemplate {}
@@ -102,6 +103,7 @@ namespace  {
 	class FormTextArea extends \Contao\FormTextArea {}
 	class FormTextField extends \Contao\FormTextField {}
 	class Automator extends \Contao\Automator {}
+	abstract class BaseTemplate extends \Contao\BaseTemplate {}
 	class Cache extends \Contao\Cache {}
 	class ClassLoader extends \Contao\ClassLoader {}
 	class Combiner extends \Contao\Combiner {}

@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MSC.emptyList">
         <source>Currently there are no news items.</source>
-        <target>В настоящее время новостей нет.</target>
+        <target>На данный момент новостей нет.</target>
       </trans-unit>
       <trans-unit id="MSC.comments">
         <source>Comments</source>

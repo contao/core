@@ -1978,6 +1978,9 @@ Ky e-mail është gjeneruar nga Contao. Ju nuk mund ti përgjigjeni drejtpërsë
         <source>Page %s of %s</source>
         <target>Faqja %s nga %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Skedari %s u ngarkua me sukses</target>

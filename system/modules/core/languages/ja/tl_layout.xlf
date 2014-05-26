@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
-        <target>メタタグのviewportをページヘッダーに追加して、機器の幅を元にCSSレイアウトを拡大縮小します。</target>
+        <target>viewportのmetaタグをページヘッダーに追加して、機器の表示幅を基にCSSの配置を拡大縮小します。</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
-        <target>ファイルシステムから追加のCSS、SCSS、LESSファイルを追加できます。</target>
+        <target>ファイルシステムからCSS、SCSS、LESSのファイルをさらに追加できます。</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -283,19 +283,19 @@
       </trans-unit>
       <trans-unit id="tl_layout.viewport.0">
         <source>Viewport</source>
-        <target>Viewport</target>
+        <target>viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
         <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
-        <target>viewportの内容(初期値は&lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;)を置き換えできます。</target>
+        <target>viewportの内容を上書きできます。(初期値: &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;)</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.0">
         <source>Title tag</source>
         <target>titleタグ</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
-        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
-        <target>titleタグの内容(初期値は&lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;)を置き換えできます。</target>
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>titleタグを上書きできます。(初期値: &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;)</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -455,11 +455,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>
-        <target>CDN (code.jquery.com)</target>
+        <target>コンテンツ配信網(code.jquery.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>CDN with local fallback</source>
-        <target>ローカルのファイルを代替にしたCDN</target>
+        <target>コンテンツ配信網、ローカルのファイルを代替</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
@@ -471,11 +471,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>CDN (googleapis.com)</source>
-        <target>CDN (googleapis.com)</target>
+        <target>コンテンツ配信網(googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>CDN with local fallback</source>
-        <target>ローカルのファイルを代替にしたCDN</target>
+        <target>コンテンツ配信網、ローカルのファイルを代替</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

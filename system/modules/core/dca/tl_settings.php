@@ -262,7 +262,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['bypassCache'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'purgeInternalCache')
+			)
 		),
 		'displayErrors' => array
 		(
@@ -716,6 +720,23 @@ class tl_settings extends Backend
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
 			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Purge the internal caches
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function purgeInternalCache($varValue)
+	{
+		if ($varValue && $varValue !== Config::get('bypassCache'))
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
 		}
 
 		return $varValue;

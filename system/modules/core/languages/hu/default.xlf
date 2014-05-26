@@ -1979,6 +1979,9 @@ Ezt az e-mail a Contao rendszer generálta. Nem tud rá közvetlenül válaszoln
         <source>Page %s of %s</source>
         <target>%s/%s lap.</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>A %s fájl sikeresen feltöltve.</target>

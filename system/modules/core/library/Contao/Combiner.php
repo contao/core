@@ -219,12 +219,9 @@ class Combiner extends \System
 				{
 					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
-					if (!file_exists(TL_ROOT . '/' . $strPath))
-					{
-						$objFile = new \File($strPath, true);
-						$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
-						$objFile->close();
-					}
+					$objFile = new \File($strPath, true);
+					$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
+					$objFile->close();
 
 					$return[] = $strPath;
 				}
@@ -328,13 +325,24 @@ class Combiner extends \System
 		if ($arrFile['extension'] == self::SCSS)
 		{
 			$objCompiler = new \scssc();
-			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
+
+			$objCompiler->setImportPaths(array
+			(
+				TL_ROOT . '/' . dirname($arrFile['name']),
+				TL_ROOT . '/assets/compass/' . $GLOBALS['TL_ASSETS']['COMPASS']
+			));
+
 			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));
 		}
 		else
 		{
 			$objCompiler = new \lessc();
-			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
+
+			$objCompiler->setImportDir(array
+			(
+				TL_ROOT . '/' . dirname($arrFile['name'])
+			));
+
 			$objCompiler->setFormatter((\Config::get('debugMode') ? 'lessjs' : 'compressed'));
 		}
 

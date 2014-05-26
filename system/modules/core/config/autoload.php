@@ -97,6 +97,7 @@ ClassLoader::addClasses(array
 
 	// Library
 	'Contao\Automator'                 => 'system/modules/core/library/Contao/Automator.php',
+	'Contao\BaseTemplate'              => 'system/modules/core/library/Contao/BaseTemplate.php',
 	'Contao\Cache'                     => 'system/modules/core/library/Contao/Cache.php',
 	'Contao\ClassLoader'               => 'system/modules/core/library/Contao/ClassLoader.php',
 	'Contao\Combiner'                  => 'system/modules/core/library/Contao/Combiner.php',
@@ -145,7 +146,6 @@ ClassLoader::addClasses(array
 	'Contao\SortedIterator'            => 'system/modules/core/library/Contao/SortedIterator.php',
 	'Contao\String'                    => 'system/modules/core/library/Contao/String.php',
 	'Contao\System'                    => 'system/modules/core/library/Contao/System.php',
-	'Contao\Template\Base'             => 'system/modules/core/library/Contao/Template/Base.php',
 	'Contao\Template'                  => 'system/modules/core/library/Contao/Template.php',
 	'Contao\TemplateLoader'            => 'system/modules/core/library/Contao/TemplateLoader.php',
 	'Contao\User'                      => 'system/modules/core/library/Contao/User.php',

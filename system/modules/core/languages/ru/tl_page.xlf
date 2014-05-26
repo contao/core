@@ -75,11 +75,11 @@
       </trans-unit>
       <trans-unit id="tl_page.fallback.0">
         <source>Language fallback</source>
-        <target>Язык обратной связи</target>
+        <target>Резервный язык</target>
       </trans-unit>
       <trans-unit id="tl_page.fallback.1">
         <source>Show this page if there is none that matches the visitor's language.</source>
-        <target>Показать эту страницу, если нет страницы, соответствующий языку посетителя.</target>
+        <target>Показать эту страницу, если нет страницы, которая соответствует языку посетителя.</target>
       </trans-unit>
       <trans-unit id="tl_page.dns.0">
         <source>Domain name</source>

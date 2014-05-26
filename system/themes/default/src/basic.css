@@ -334,7 +334,6 @@ pre,.tl_textarea.monospace {
 	background-image:linear-gradient(to top, #ccc 0%, #eee 60%);
 }
 a.tl_submit {
-	padding:4px 12px 4px 13px;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
 	font-size:12px;
 	display:inline-block;

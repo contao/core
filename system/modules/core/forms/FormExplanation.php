@@ -45,13 +45,11 @@ class FormExplanation extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Generate the widget and return it as string
 	 *
-	 * @param array $arrAttributes An optional attributes array
-	 *
-	 * @return string The template markup
+	 * @return string The widget markup
 	 */
-	public function parse($arrAttributes=null)
+	public function generate()
 	{
 		global $objPage;
 
@@ -72,21 +70,6 @@ class FormExplanation extends \Widget
 			$this->text = str_replace(' src="' . $path, ' src="' . TL_FILES_URL . $path, $this->text);
 		}
 
-		$this->text = \String::encodeEmail($this->text);
-
-		return parent::parse($arrAttributes);
-	}
-
-
-	/**
-	 * Generate the widget and return it as string
-	 *
-	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
-	 */
-	public function generate()
-	{
-		return $this->text;
+		return \String::encodeEmail($this->text);
 	}
 }

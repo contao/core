@@ -1979,6 +1979,10 @@ Quest e-mail è vegnì generà da Contao. Ti na pos betg respunder directamain s
         <source>Page %s of %s</source>
         <target>Pagina %s da %s</target>
       </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>global</target>
+      </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
         <target>Chargia cun success la datoteca %s.</target>

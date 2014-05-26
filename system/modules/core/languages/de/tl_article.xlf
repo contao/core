@@ -81,6 +81,14 @@
         <source>Hide the article if a member is logged in.</source>
         <target>Den Artikel verstecken, sobald ein Mitglied angemeldet ist.</target>
       </trans-unit>
+      <trans-unit id="tl_article.customTpl.0">
+        <source>Custom article template</source>
+        <target>Individuelles Template</target>
+      </trans-unit>
+      <trans-unit id="tl_article.customTpl.1">
+        <source>Here you can overwrite the default article template.</source>
+        <target>Hier können Sie das Standard-Template überschreiben.</target>
+      </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
         <target>Artikel schützen</target>
@@ -160,6 +168,10 @@
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
         <target>Teasertext</target>
+      </trans-unit>
+      <trans-unit id="tl_article.template_legend">
+        <source>Template settings</source>
+        <target>Template-Einstellungen</target>
       </trans-unit>
       <trans-unit id="tl_article.protected_legend">
         <source>Access protection</source>

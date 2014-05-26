@@ -153,8 +153,6 @@ class FormPassword extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -171,8 +169,6 @@ class FormPassword extends \Widget
 	 * Generate the label of the confirmation field and return it as string
 	 *
 	 * @return string The confirmation label markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateConfirmationLabel()
 	{
@@ -189,8 +185,6 @@ class FormPassword extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The confirmation field markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateConfirmation()
 	{

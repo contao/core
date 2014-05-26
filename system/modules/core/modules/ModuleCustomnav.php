@@ -156,19 +156,13 @@ class ModuleCustomnav extends \Module
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
 						break;
 				}
 

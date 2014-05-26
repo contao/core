@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao\Template;
+namespace Contao;
 
 
 /**
@@ -20,7 +20,7 @@ namespace Contao\Template;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Base extends \Controller
+abstract class BaseTemplate extends \Controller
 {
 
 	/**
@@ -34,6 +34,12 @@ abstract class Base extends \Controller
 	 * @var string
 	 */
 	protected $strParent;
+
+	/**
+	 * Default template
+	 * @var string
+	 */
+	protected $strDefault;
 
 	/**
 	 * Output format
@@ -75,8 +81,12 @@ abstract class Base extends \Controller
 		// Include the parent templates
 		while ($this->strParent !== null)
 		{
-			$strParent = $this->getTemplate($this->strParent, $this->strFormat);
+			$strCurrent = $this->strParent;
+			$strParent = $this->strDefault ?: $this->getTemplate($this->strParent, $this->strFormat);
+
+			// Reset the flags
 			$this->strParent = null;
+			$this->strDefault = null;
 
 			ob_start();
 			include $strParent;
@@ -85,6 +95,10 @@ abstract class Base extends \Controller
 			if ($this->strParent === null)
 			{
 				$strBuffer = ob_get_contents();
+			}
+			elseif ($this->strParent == $strCurrent)
+			{
+				$this->strDefault = \TemplateLoader::getDefaultPath($this->strParent, $this->strFormat);
 			}
 
 			ob_end_clean();

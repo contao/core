@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/install.php');
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**
@@ -746,8 +746,8 @@ class InstallTool extends Backend
 					$time = time();
 					$strPassword = Encryption::hash(Input::post('pass', true));
 
-					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE']);
+					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, backendTheme, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
+								   ->execute(Input::post('name'), Input::post('email', true), Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE'], Config::get('backendTheme'));
 
 					Config::persist('adminEmail', Input::post('email', true));
 
@@ -853,6 +853,7 @@ class InstallTool extends Backend
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
+		$this->Template->hasComposer = is_dir(TL_ROOT . '/system/modules/!composer');
 
 		$this->Template->output();
 		exit;

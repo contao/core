@@ -34,6 +34,6 @@ class PageRedirect extends \Frontend
 	 */
 	public function generate($objPage)
 	{
-		$this->redirect($this->replaceInsertTags($objPage->url), (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->replaceInsertTags($objPage->url, false), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }

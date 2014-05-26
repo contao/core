@@ -66,8 +66,6 @@ class FormHtml extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

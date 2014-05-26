@@ -37,12 +37,11 @@ tinymce.init({
     <?php echo Backend::getTinyTemplates(); ?>
   ],
   doctype: "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">",
-  plugins: "autosave,charmap,code,fullscreen,image,link,paste,searchreplace,tabfocus,table,template,visualblocks",
+  plugins: "autosave charmap code fullscreen image link paste searchreplace tabfocus table template visualblocks",
   browser_spellcheck: true,
   tabfocus_elements: ":prev,:next",
-  extended_valid_elements: "b/strong,i/em",
   content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css",
-  extended_valid_elements: "q[cite|class|title],article,section,hgroup,figure,figcaption",
+  extended_valid_elements: "b/strong,i/em",
   menubar: "file edit insert view format table",
   toolbar: "link image | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"
 });

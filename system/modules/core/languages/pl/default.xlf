@@ -343,9 +343,11 @@
       </trans-unit>
       <trans-unit id="CTE.markdown.0">
         <source>Markdown</source>
+        <target>Markdown</target>
       </trans-unit>
       <trans-unit id="CTE.markdown.1">
         <source>Generates HTML code from a markdown text.</source>
+        <target>Generuje kod HTML z tekstu markdown.</target>
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
@@ -1976,6 +1978,10 @@ Ten e-mail został wygenerowane przez Contao. Nie odpowiadaj na niego.
       <trans-unit id="MSC.totalPages">
         <source>Page %s of %s</source>
         <target>Stron %s z %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.global">
+        <source>global</source>
+        <target>globalnie</target>
       </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>

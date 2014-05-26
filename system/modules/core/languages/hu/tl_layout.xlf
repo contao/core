@@ -171,6 +171,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive layout</source>
+        <target>Reszponzív elrendezés</target>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.1">
         <source>Adds a meta viewport tag to the page header and scales the CSS layout based on the device width.</source>
@@ -213,6 +214,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>Itt lehet hozzáadni kiegészítő CSS, SCSS vagy LESS fájlokat a helyi fájlrendszerből.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -288,7 +290,7 @@
         <source>Title tag</source>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
-        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::mainTitle}}&lt;/em&gt;).</source>
+        <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>
@@ -412,6 +414,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.webfonts_legend">
         <source>Web fonts</source>
+        <target>Web betűk</target>
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
@@ -443,12 +446,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.j_local">
         <source>Local file</source>
+        <target>Helyi fájl</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_googleapis">
         <source>CDN (code.jquery.com)</source>
+        <target>CDN (code.jquery.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.j_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools_legend">
         <source>MooTools</source>
@@ -456,12 +462,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>Local file</source>
+        <target>Helyi fájl</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>CDN (googleapis.com)</source>
+        <target>CDN (googleapis.com)</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_fallback">
         <source>CDN with local fallback</source>
+        <target>CDN helyi másolattal</target>
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>

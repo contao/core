@@ -21,7 +21,7 @@ define('TL_SCRIPT', 'contao/switch.php');
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require_once '../system/initialize.php';
+require dirname(__DIR__) . '/system/initialize.php';
 
 
 /**

@@ -1474,6 +1474,7 @@ fieldset.collapsed > legend {
 	border:3px dashed #ddd;
 }
 .dz-message {
+	cursor:pointer;
 	padding:36px 18px;
 	-moz-transition:all .15s linear;
 	-webkit-transition:all .15s linear;

@@ -2,25 +2,27 @@
 <html lang="<?php echo $this->language; ?>">
 <head>
 
-  <meta charset="<?php echo $this->charset; ?>">
-  <title><?php echo $this->title; ?></title>
-  <base href="<?php echo $this->base; ?>">
+  <?php $this->block('head'); ?>
+    <meta charset="<?php echo $this->charset; ?>">
+    <title><?php echo $this->title; ?></title>
+    <base href="<?php echo $this->base; ?>">
 
-  <?php $this->block('meta'); ?>
-    <meta name="robots" content="<?php echo $this->robots; ?>">
-    <meta name="description" content="<?php echo $this->description; ?>">
-    <meta name="keywords" content="<?php echo $this->keywords; ?>">
-    <meta name="generator" content="Contao Open Source CMS">
-  <?php $this->endblock(); ?>
+    <?php $this->block('meta'); ?>
+      <meta name="robots" content="<?php echo $this->robots; ?>">
+      <meta name="description" content="<?php echo $this->description; ?>">
+      <meta name="keywords" content="<?php echo $this->keywords; ?>">
+      <meta name="generator" content="Contao Open Source CMS">
+    <?php $this->endblock(); ?>
 
-  <?php echo $this->viewport; ?>
-  <?php echo $this->framework; ?>
-  <?php echo $this->stylesheets; ?>
-  <?php echo $this->mooScripts; ?>
-  <?php echo $this->head; ?>
+    <?php echo $this->viewport; ?>
+    <?php echo $this->framework; ?>
+    <?php echo $this->stylesheets; ?>
+    <?php echo $this->mooScripts; ?>
+    <?php echo $this->head; ?>
 
-  <?php $this->block('html5shiv'); ?>
-    <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.js"></script><![endif]-->
+    <?php $this->block('html5shiv'); ?>
+      <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.js"></script><![endif]-->
+    <?php $this->endblock(); ?>
   <?php $this->endblock(); ?>
 
 </head>
@@ -31,50 +33,64 @@
 
     <div id="wrapper">
 
-      <?php if ($this->header): ?>
-        <header id="header">
-          <div class="inside">
-            <?php echo $this->header; ?>
-          </div>
-        </header>
-      <?php endif; ?>
+      <?php $this->block('header'); ?>
+        <?php if ($this->header): ?>
+          <header id="header">
+            <div class="inside">
+              <?php echo $this->header; ?>
+            </div>
+          </header>
+        <?php endif; ?>
+      <?php $this->endblock(); ?>
 
       <?php echo $this->sections('before'); ?>
 
-      <div id="container">
-        <div id="main">
-          <div class="inside">
-            <?php echo $this->main; ?>
-          </div>
-          <?php echo $this->sections('main'); ?>
+      <?php $this->block('container'); ?>
+        <div id="container">
+
+          <?php $this->block('main'); ?>
+            <div id="main">
+              <div class="inside">
+                <?php echo $this->main; ?>
+              </div>
+              <?php echo $this->sections('main'); ?>
+            </div>
+          <?php $this->endblock(); ?>
+
+          <?php $this->block('left'); ?>
+            <?php if ($this->left): ?>
+              <aside id="left">
+                <div class="inside">
+                  <?php echo $this->left; ?>
+                </div>
+              </aside>
+            <?php endif; ?>
+          <?php $this->endblock(); ?>
+
+          <?php $this->block('right'); ?>
+            <?php if ($this->right): ?>
+              <aside id="right">
+                <div class="inside">
+                  <?php echo $this->right; ?>
+                </div>
+              </aside>
+            <?php endif; ?>
+          <?php $this->endblock(); ?>
+
         </div>
-
-        <?php if ($this->left): ?>
-          <aside id="left">
-            <div class="inside">
-              <?php echo $this->left; ?>
-            </div>
-          </aside>
-        <?php endif; ?>
-
-        <?php if ($this->right): ?>
-          <aside id="right">
-            <div class="inside">
-              <?php echo $this->right; ?>
-            </div>
-          </aside>
-        <?php endif; ?>
-      </div>
+      <?php $this->endblock(); ?>
 
       <?php echo $this->sections('after'); ?>
 
-      <?php if ($this->footer): ?>
-        <footer id="footer">
-          <div class="inside">
-            <?php echo $this->footer; ?>
-          </div>
-        </footer>
-      <?php endif; ?>
+      <?php $this->block('footer'); ?>
+        <?php if ($this->footer): ?>
+          <footer id="footer">
+            <div class="inside">
+              <?php echo $this->footer; ?>
+            </div>
+          </footer>
+        <?php endif; ?>
+      <?php $this->endblock(); ?>
 
     </div>
 

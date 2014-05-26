@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Template\Base
+abstract class Widget extends \BaseTemplate
 {
 
 	/**
@@ -1279,7 +1279,7 @@ abstract class Widget extends \Template\Base
 			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
 			$arrData['options'] = array();
 
-			while($objOptions->next())
+			while ($objOptions->next())
 			{
 				$arrData['options'][$objOptions->id] = $objOptions->value;
 			}

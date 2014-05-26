@@ -167,11 +167,11 @@
       </trans-unit>
       <trans-unit id="MOD.theme_import">
         <source>Theme import</source>
-        <target>テーマをインポート</target>
+        <target>テーマのインポート</target>
       </trans-unit>
       <trans-unit id="MOD.theme_export">
         <source>Theme export</source>
-        <target>テーマをエクスポート</target>
+        <target>テーマのエクスポート</target>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
