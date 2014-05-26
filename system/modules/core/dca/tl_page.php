@@ -1240,7 +1240,14 @@ class tl_page extends Backend
 	 */
 	public function getPageLayouts()
 	{
-		$objLayout = $this->Database->execute("SELECT l.id, l.name, t.name AS theme FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id ORDER BY t.name, l.name");
+		$this->loadDataContainer('tl_layout');
+		$arrFields = $arrValues = array();
+		foreach($GLOBALS['TL_DCA']['tl_layout']['list']['sorting']['filter'] as $filter) {
+			$arrFields[] = 'l.'.$filter[0];
+			$arrValues[] = $filter[1];
+		}
+
+		$objLayout = $this->Database->prepare("SELECT l.id, l.name, l.swUserId, t.name AS theme FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id".($arrFields ? ' WHERE '.implode('AND',$arrFields) : '')." ORDER BY t.name, l.name")->execute($arrValues);
 
 		if ($objLayout->numRows < 1)
 		{
