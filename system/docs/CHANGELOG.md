@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.1 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Use `pack()` instead of `hex2bin()` to be compatible with PHP 5.3 (see #7010).
+
+
 Version 3.3.0 (2014-05-26)
 --------------------------
 
