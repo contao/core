@@ -14,8 +14,8 @@
     </exec>
     <exec executable="git" dir="contao-${version}" failonerror="true">
       <arg value="checkout" />
-      <arg value="${version}" />
       <arg value="--quiet" />
+      <arg value="${version}" />
     </exec>
     <exec executable="git" dir="contao-${version}">
       <arg value="reset" />
@@ -23,7 +23,7 @@
     </exec>
   </target>
 
-	<target name="update">
+  <target name="update">
     <exec executable="composer" dir="contao-${version}" failonerror="true">
       <arg value="install" />
       <arg value="--prefer-dist" />
@@ -44,8 +44,12 @@
   </target>
 
   <target name="archive">
-    <zip destfile="contao-${version}.zip" basedir="contao-${version}" />
-    <tar destfile="contao-${version}.tar.gz" basedir="contao-${version}" compression="gzip" />
+    <zip destfile="contao-${version}.zip">
+      <zipfileset dir="contao-${version}" prefix="contao-${version}" />
+    </zip>
+    <tar destfile="contao-${version}.tar.gz" compression="gzip">
+      <tarfileset dir="contao-${version}" prefix="contao-${version}" />
+    </tar>
   </target>
 
   <target name="cleanup">
