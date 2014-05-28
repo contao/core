@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Restore the "submit_container" class in the `FormSubmit` widget (see #7055).
+
+### Fixed
 Correctly generate the CSS classes of the `FormSelectMenu` widget (see #7045).
 
 ### Fixed
