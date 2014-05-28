@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Use a more precise UUID detection in the `FilesModel` class (see #7054).
+
+### Fixed
 Use `pack()` instead of `hex2bin()` to be compatible with PHP 5.3 (see #7010).
 
 
