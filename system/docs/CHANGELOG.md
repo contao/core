@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly generate the CSS classes of the `FormSelectMenu` widget (see #7045).
+
+### Fixed
 Use a more precise UUID detection in the `FilesModel` class (see #7054).
 
 ### Fixed
