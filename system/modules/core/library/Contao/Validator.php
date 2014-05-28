@@ -273,10 +273,46 @@ class Validator
 	{
 		if (strlen($varValue) == 16)
 		{
+			return static::isBinaryUuid($varValue);
+		}
+
+		return static::isStringUuid($varValue);
+	}
+
+
+	/**
+	 * Validate binary UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a binary UUID
+	 */
+	public static function isBinaryUuid($varValue)
+	{
+		if (strlen($varValue) == 16)
+		{
 			return ($varValue & hex2bin('000000000000F000C000000000000000')) === hex2bin('00000000000010008000000000000000');
 		}
 
-		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-1[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$/', $varValue);
+		return false;
+	}
+
+
+	/**
+	 * Validate string UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a string UUID
+	 */
+	public static function isStringUuid($varValue)
+	{
+		if (strlen($varValue) == 36)
+		{
+			return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-1[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$/', $varValue);
+		}
+
+		return false;
 	}
 
 
