@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Only use the DropZone uploader where Ajax uploads can be processed (see #7046).
+
+### Fixed
 Make the viewport field 255 characters long (see #7050).
 
 ### Fixed
