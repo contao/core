@@ -452,6 +452,7 @@ $GLOBALS['TL_ASSETS'] = array
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',
 	'SWIPE'        => '2.0',
+	'TINYMCE'      => '4.0.26',
 	'JQUERY'       => '1.11.0',
 	'JQUERY_UI'    => '1.10.4',
 	'COLORBOX'     => '1.5.8',
