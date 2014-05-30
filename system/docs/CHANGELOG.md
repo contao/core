@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.11 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Try to raise the PHP limits upon file synchronization (see #7035).
+
+
 Version 3.2.10 (2014-05-21)
 ---------------------------
 
