@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Do not make the `FormRadioButton` options an array (see #7060).
+
+### Fixed
 Support adding ACE and TinyMCE in subpalettes (see #7056).
 
 ### Fixed
