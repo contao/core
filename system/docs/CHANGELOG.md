@@ -5,6 +5,9 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Grant access to static files inside the `vendor` folder.
+
+### Fixed
 Do not make the `FormRadioButton` options an array (see #7060).
 
 ### Fixed
