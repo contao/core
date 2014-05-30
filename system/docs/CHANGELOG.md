@@ -1,6 +1,37 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.1 (2014-05-30)
+--------------------------
+
+### Fixed
+Grant access to static files inside the `vendor` folder.
+
+### Fixed
+Do not make the `FormRadioButton` options an array (see #7060).
+
+### Fixed
+Support adding ACE and TinyMCE in subpalettes (see #7056).
+
+### Fixed
+Only use the DropZone uploader where Ajax uploads can be processed (see #7046).
+
+### Fixed
+Make the viewport field 255 characters long (see #7050).
+
+### Fixed
+Restore the "submit_container" class in the `FormSubmit` widget (see #7055).
+
+### Fixed
+Correctly generate the CSS classes of the `FormSelectMenu` widget (see #7045).
+
+### Fixed
+Use a more precise UUID detection in the `FilesModel` class (see #7054).
+
+### Fixed
+Use `pack()` instead of `hex2bin()` to be compatible with PHP 5.3 (see #7010).
+
+
 Version 3.3.0 (2014-05-26)
 --------------------------
 

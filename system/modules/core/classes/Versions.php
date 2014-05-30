@@ -359,11 +359,11 @@ class Versions extends \Backend
 						unset($tmp);
 
 						// Convert binary UUIDs to their hex equivalents (see #6365)
-						if ($blnIsBinary && \Validator::isUuid($to[$k]))
+						if ($blnIsBinary && \Validator::isBinaryUuid($to[$k]))
 						{
 							$to[$k] = \String::binToUuid($to[$k]);
 						}
-						if ($blnIsBinary && \Validator::isUuid($from[$k]))
+						if ($blnIsBinary && \Validator::isBinaryUuid($from[$k]))
 						{
 							$to[$k] = \String::binToUuid($from[$k]);
 						}

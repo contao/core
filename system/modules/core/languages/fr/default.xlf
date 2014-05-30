@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="SEC.question2">
         <source>What is the sum of %d and %d?</source>
-        <target>Quelle est la somme de %d et %d?</target>
+        <target>Quelle est la somme de %d et %d ?</target>
       </trans-unit>
       <trans-unit id="SEC.question3">
         <source>Please calculate %d plus %d.</source>
