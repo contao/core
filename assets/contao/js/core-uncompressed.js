@@ -1999,6 +1999,25 @@ var Backend =
 				}
 			});
 		});
+	},
+
+	/**
+	 * Load a JavaScript file depending on the trigger and execute the callback
+	 *
+	 * @param {object}   trigger  The trigger element
+	 * @param {string}   url      The JavaScript URL
+	 * @param {function} callback The callback function
+	 */
+	loadAndExec: function(trigger, url, callback) {
+		if (trigger) {
+			callback();
+		} else {
+			Asset.javascript(url, {
+				onLoad: function() {
+					callback();
+				}
+			});
+		}
 	}
 };
 

@@ -135,7 +135,7 @@ class FormRadioButton extends \Widget
 		{
 			$arrOptions[] = array
 			(
-				'name'       => $this->strName . ((count($this->arrOptions) > 1) ? '[]' : ''),
+				'name'       => $this->strName,
 				'id'         => $this->strId . '_' . $i,
 				'value'      => $arrOption['value'],
 				'checked'    => $this->isChecked($arrOption),
