@@ -21,4 +21,6 @@ mysqldump \
   --hex-blob \
   --complete-insert \
   --skip-opt \
+  --ignore-table $tpl.tl_repository_installs \
+  --ignore-table $tpl.tl_repository_instfiles \
   $tpl > templates/$tpl.sql
