@@ -5,7 +5,7 @@ Version 3.3.1 (2014-XX-XX)
 --------------------------
 
 ### Fixed
-Preload TinyMCE so it can be used in subpalettes (see #7056).
+Support adding ACE and TinyMCE in subpalettes (see #7056).
 
 ### Fixed
 Only use the DropZone uploader where Ajax uploads can be processed (see #7046).

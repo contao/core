@@ -333,7 +333,7 @@ abstract class Backend extends \Controller
 		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
 
-		// Add the module style sheets
+		// Add the module style sheet
 		if (isset($arrModule['stylesheet']))
 		{
 			foreach ((array) $arrModule['stylesheet'] as $stylesheet)
@@ -342,25 +342,12 @@ abstract class Backend extends \Controller
 			}
 		}
 
-		// Add the module JavaScripts
+		// Add module javascript
 		if (isset($arrModule['javascript']))
 		{
 			foreach ((array) $arrModule['javascript'] as $javascript)
 			{
 				$GLOBALS['TL_JAVASCRIPT'][] = $javascript;
-			}
-		}
-
-		// Preload TinyMCE (see #7056)
-		if ($this->User->useRTE)
-		{
-			if (version_compare($GLOBALS['TL_ASSETS']['TINYMCE'], '4.0.0', '>='))
-			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/tinymce4/tinymce.gzip.js';
-			}
-			else
-			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/tinymce/tiny_mce_gzip.js';
 			}
 		}
 
