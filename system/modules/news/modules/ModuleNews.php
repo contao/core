@@ -86,7 +86,7 @@ abstract class ModuleNews extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0, $total)
+	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0, $total=0)
 	{
 		global $objPage;
 
