@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.2 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Support adding multiple TinyMCE instances to the same page (see #7061).
+
+
 Version 3.3.1 (2014-05-30)
 --------------------------
 
