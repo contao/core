@@ -134,7 +134,7 @@ class Automator extends \System
 		// Walk through the subfolders
 		foreach (scan(TL_ROOT . '/assets/images') as $dir)
 		{
-			if ($dir != 'index.html' && strncmp($dir, '.', 1) !== 0)
+			if ($dir != 'index.html' && strncmp($dir, '.', 1) !== 0  && is_dir(TL_ROOT . '/assets/images/' . $dir))
 			{
 				// Purge the folder
 				$objFolder = new \Folder('assets/images/' . $dir);
