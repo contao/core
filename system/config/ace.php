@@ -38,6 +38,12 @@ Backend.loadAndExec(window.ace, 'assets/ace/<?php echo $GLOBALS['TL_ASSETS']['AC
     editor.getSession().setMode("ace/mode/<?php echo Backend::getAceType($type); ?>");
     editor.getSession().setUseSoftTabs(false);
 
+    editor.setOptions({
+        maxLines: 30,     // maximal number of displayed lines 
+        minLines: 10,     // minimal number of displayed lines
+        autoScrollEditorIntoView: true  // this is needed if editor is inside of scrollable page
+    });
+
     editor.commands.addCommand({
       name: 'Fullscreen',
       bindKey: 'F11',
