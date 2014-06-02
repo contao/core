@@ -5,6 +5,9 @@ Version 3.3.2 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Add the "scssphp-compass" library to support Compass functions.
+
+### Fixed
 Support adding multiple TinyMCE instances to the same page (see #7061).
 
 

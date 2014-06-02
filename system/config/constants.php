@@ -26,7 +26,6 @@ define('LONG_TERM_SUPPORT', false);
  * the web browser reload those resources after a Contao update.
  */
 define('ACE', '1.1.3');
-define('COMPASS', '0.12.6');
 define('CSS3PIE', '1.0.0');
 define('DROPZONE', '3.8.5');
 define('HIGHLIGHTER', '3.0.83');
