@@ -214,20 +214,30 @@ class Combiner extends \System
 
 			foreach ($this->arrFiles as $arrFile)
 			{
+				$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
+
 				// Compile SCSS/LESS files into temporary files
 				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
 				{
 					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
 					$objFile = new \File($strPath, true);
-					$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
+					$objFile->write($this->handleScssLess($content, $arrFile));
 					$objFile->close();
 
 					$return[] = $strPath;
 				}
 				else
 				{
-					$return[] = $arrFile['name'];
+					$name = $arrFile['name'];
+
+					// Add the media query (see #7070)
+					if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+					{
+						$name .= '" media="' . $arrFile['media'];
+					}
+
+					$return[] = $name;
 				}
 			}
 

@@ -5,6 +5,9 @@ Version 3.3.2 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Add the media query to the style sheets in debug mode (see #7070).
+
+### Fixed
 Disable the debug mode in the extension creator (see #7068).
 
 ### Fixed
