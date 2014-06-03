@@ -5,6 +5,9 @@ Version 3.3.2 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Disable the debug mode in the extension creator (see #7068).
+
+### Fixed
 Convert image source insert tags in the back end preview (see #7065).
 
 ### Fixed

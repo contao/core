@@ -69,6 +69,9 @@ class ModuleExtension extends \BackendModule
 				return;
 			}
 
+			// Disable the debug mode (see #7068)
+			\Config::set('debugMode', false);
+
 			// config/config.php
 			$tplConfig = $this->newTemplate('dev_config', $objModule);
 			\File::putContent('system/modules/' . $objModule->folder . '/config/config.php', $tplConfig->parse());
