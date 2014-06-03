@@ -453,7 +453,7 @@ class DataContainer extends \Backend
 		$updateMode = '';
 
 		// Replace the textarea with an RTE instance
-		if (isset($arrData['eval']['rte']))
+		if (!empty($arrData['eval']['rte']))
 		{
 			list ($file, $type) = explode('|', $arrData['eval']['rte'], 2);
 
