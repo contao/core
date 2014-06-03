@@ -5,6 +5,9 @@ Version 3.3.2 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Convert image source insert tags in the back end preview (see #7065).
+
+### Fixed
 Render all root nodes in the page and file picker (see #6844).
 
 ### Fixed
