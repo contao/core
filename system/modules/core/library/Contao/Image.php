@@ -106,7 +106,7 @@ class Image
 		}
 
 		// No resizing required
-		if ($objFile->width == $width && $objFile->height == $height)
+		if (($objFile->width == $width || !$width) && ($objFile->height == $height || !$height))
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
 			if ($target)
