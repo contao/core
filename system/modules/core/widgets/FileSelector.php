@@ -73,30 +73,37 @@ class FileSelector extends \Widget
 			\Backend::addFilesBreadcrumb('tl_files_picker');
 		}
 
+		$tree = '';
+
 		// Root nodes (breadcrumb menu)
 		if (!empty($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']))
 		{
-			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'][0], 0, true);
+			$nodes = $this->eliminateNestedPaths($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']);
+
+			foreach ($nodes as $node)
+			{
+				$tree .= $this->renderFiletree(TL_ROOT . '/' . $node, 0, true);
+			}
 		}
 
 		// Show a custom path (see #4926)
 		elseif ($this->path != '')
 		{
-			$tree = $this->renderFiletree(TL_ROOT . '/' . $this->path, 0);
+			$tree .= $this->renderFiletree(TL_ROOT . '/' . $this->path, 0);
 		}
 
 		// Start from root
 		elseif ($this->User->isAdmin)
 		{
-			$tree = $this->renderFiletree(TL_ROOT . '/' . \Config::get('uploadPath'), 0);
+			$tree .= $this->renderFiletree(TL_ROOT . '/' . \Config::get('uploadPath'), 0);
 		}
 
 		// Show mounted files to regular users
 		else
 		{
-			$tree = '';
+			$nodes = $this->eliminateNestedPaths($this->User->filemounts);
 
-			foreach ($this->eliminateNestedPaths($this->User->filemounts) as $node)
+			foreach ($nodes as $node)
 			{
 				$tree .= $this->renderFiletree(TL_ROOT . '/' . $node, 0, true);
 			}
