@@ -5,6 +5,9 @@ Version 3.2.11 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly set the root page title (see #7023).
+
+### Fixed
 Only show the sort hint if there is more than one element (see #6935).
 
 ### Fixed
