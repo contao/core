@@ -5,6 +5,9 @@ Version 3.2.11 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Make `$this->locationLabel` available in the event list (see #7030).
+
+### Fixed
 Correctly set the root page title (see #7023).
 
 ### Fixed
