@@ -450,6 +450,10 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
+		// Try to raise the limits (see #7035)
+		@ini_set('memory_limit', -1);
+		@ini_set('max_execution_time', 0);
+
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
