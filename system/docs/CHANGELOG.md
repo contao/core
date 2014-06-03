@@ -5,6 +5,9 @@ Version 3.2.11 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Only show the sort hint if there is more than one element (see #6935).
+
+### Fixed
 Try to raise the PHP limits upon file synchronization (see #7035).
 
 
