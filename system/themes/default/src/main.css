@@ -580,6 +580,9 @@ h2.sub_headline_index {
 .tl_content pre.disabled {
 	color:#a6a6a6;
 }
+.tl_content .ce_text a {
+	color:#77ac45;
+}
 .tl_content span.comment {
 	color:#4b85ba;
 	display:inline-block;
