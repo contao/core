@@ -499,7 +499,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.approvedForText">
         <source>Contao %s to %s</source>
-        <target>Contao %s to %s</target>
+        <target>Contao %s tot %s</target>
       </trans-unit>
       <trans-unit id="tl_repository.missingSoapModule">
         <source>SOAP extension not loaded (configure PHP with --enable-soap).</source>

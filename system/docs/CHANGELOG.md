@@ -1,6 +1,22 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.11 (2014-06-04)
+---------------------------
+
+### Fixed
+Make `$this->locationLabel` available in the event list (see #7030).
+
+### Fixed
+Correctly set the root page title (see #7023).
+
+### Fixed
+Only show the sort hint if there is more than one element (see #6935).
+
+### Fixed
+Try to raise the PHP limits upon file synchronization (see #7035).
+
+
 Version 3.2.10 (2014-05-21)
 ---------------------------
 

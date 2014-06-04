@@ -3,23 +3,23 @@
     <body>
       <trans-unit id="tl_user.faqs.0">
         <source>Allowed FAQ categories</source>
-        <target>Разрешенные категории FAQ</target>
+        <target>Разрешенные категории вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="tl_user.faqs.1">
         <source>Here you can grant access to one or more FAQ categories.</source>
-        <target>Вы можете предоставить доступ к одной или нескольким категориям FAQ.</target>
+        <target>Вы можете предоставить доступ к одной или нескольким категориям вопросов и ответов.</target>
       </trans-unit>
       <trans-unit id="tl_user.faqp.0">
         <source>FAQ category permissions</source>
-        <target>Разрешения для категорий FAQ</target>
+        <target>Разрешения для категорий вопросов и ответов</target>
       </trans-unit>
       <trans-unit id="tl_user.faqp.1">
         <source>Here you can define the FAQ category permissions.</source>
-        <target>Вы можете задать разрешения для категорий FAQ.</target>
+        <target>Вы можете задать разрешения для категорий вопросов и ответов.</target>
       </trans-unit>
       <trans-unit id="tl_user.faq_legend">
         <source>FAQ permissions</source>
-        <target>Разрешения FAQ</target>
+        <target>Разрешения вопросов и ответов</target>
       </trans-unit>
     </body>
   </file>

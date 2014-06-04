@@ -99,7 +99,7 @@ class FilePicker extends Backend
 		foreach ($arrValues as $k=>$v)
 		{
 			// Can be a UUID or a path
-			if (Validator::isUuid($v))
+			if (Validator::isStringUuid($v))
 			{
 				$arrValues[$k] = String::uuidToBin($v);
 			}

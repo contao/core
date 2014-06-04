@@ -158,13 +158,20 @@ class PageSelector extends \Widget
 			// Root nodes (breadcrumb menu)
 			if (!empty($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']))
 			{
-				$tree = $this->renderPagetree($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'][0], -20);
+				$nodes = $this->eliminateNestedPages($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']);
+
+				foreach ($nodes as $node)
+				{
+					$tree .= $this->renderPagetree($node, -20);
+				}
 			}
 
 			// Predefined node set (see #3563)
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']))
 			{
-				foreach ($this->eliminateNestedPages($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']) as $node)
+				$nodes = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['rootNodes']);
+
+				foreach ($nodes as $node)
 				{
 					$tree .= $this->renderPagetree($node, -20);
 				}
@@ -185,7 +192,9 @@ class PageSelector extends \Widget
 			// Show only mounted pages to regular users
 			else
 			{
-				foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
+				$nodes = $this->eliminateNestedPages($this->User->pagemounts);
+
+				foreach ($nodes as $node)
 				{
 					$tree .= $this->renderPagetree($node, -20);
 				}

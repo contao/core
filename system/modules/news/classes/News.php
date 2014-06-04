@@ -180,7 +180,7 @@ class News extends \Frontend
 					$strDescription = $objArticle->teaser;
 				}
 
-				$strDescription = $this->replaceInsertTags($strDescription);
+				$strDescription = $this->replaceInsertTags($strDescription, false);
 				$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 				// Add the article image as enclosure
@@ -218,7 +218,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType()));
+		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType(), false));
 	}
 
 
