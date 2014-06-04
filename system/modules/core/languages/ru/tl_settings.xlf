@@ -415,7 +415,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.1">
         <source>Index pages so they can be searched.</source>
-        <target>Индексировать страницы таким образом, чтоб они могли быть найдены через поиск.</target>
+        <target>Индексировать страницы так, чтобы они могли быть найдены через поиск.</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.0">
         <source>Index protected pages</source>
