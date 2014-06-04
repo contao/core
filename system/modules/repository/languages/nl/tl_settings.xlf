@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_unsafe_catalog.1">
         <source>Show incompatible extensions in the extension catalog. Note that installing incompatible extensions can break your Contao installation!</source>
-        <target>Toon ook de incompatibele extensies in de catalogus. Bedenk dat het installeren van deze extensies uw Contao installatie kunnen beïnvloeden!</target>
+        <target>Toon ook de incompatibele extensies in de catalogus. Bedenk dat het installeren van deze extensies uw Contao installatie nadelig kunnen beïnvloeden!</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_legend">
         <source>Extension repository</source>
