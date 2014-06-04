@@ -46,6 +46,11 @@ ClassLoader::addClasses(array
 	'Contao\Theme'                     => 'system/modules/core/classes/Theme.php',
 	'Contao\Versions'                  => 'system/modules/core/classes/Versions.php',
 
+	// Controllers
+	'Contao\FrontendCron'              => 'system/modules/core/controllers/FrontendCron.php',
+	'Contao\FrontendIndex'             => 'system/modules/core/controllers/FrontendIndex.php',
+	'Contao\FrontendShare'             => 'system/modules/core/controllers/FrontendShare.php',
+
 	// Drivers
 	'Contao\DC_File'                   => 'system/modules/core/drivers/DC_File.php',
 	'Contao\DC_Folder'                 => 'system/modules/core/drivers/DC_Folder.php',
