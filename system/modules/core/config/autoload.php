@@ -47,6 +47,18 @@ ClassLoader::addClasses(array
 	'Contao\Versions'                  => 'system/modules/core/classes/Versions.php',
 
 	// Controllers
+	'Contao\BackendChangelog'          => 'system/modules/core/controllers/BackendChangelog.php',
+	'Contao\BackendConfirm'            => 'system/modules/core/controllers/BackendConfirm.php',
+	'Contao\BackendFile'               => 'system/modules/core/controllers/BackendFile.php',
+	'Contao\BackendHelp'               => 'system/modules/core/controllers/BackendHelp.php',
+	'Contao\BackendIndex'              => 'system/modules/core/controllers/BackendIndex.php',
+	'Contao\BackendInstall'            => 'system/modules/core/controllers/BackendInstall.php',
+	'Contao\BackendMain'               => 'system/modules/core/controllers/BackendMain.php',
+	'Contao\BackendPage'               => 'system/modules/core/controllers/BackendPage.php',
+	'Contao\BackendPassword'           => 'system/modules/core/controllers/BackendPassword.php',
+	'Contao\BackendPopup'              => 'system/modules/core/controllers/BackendPopup.php',
+	'Contao\BackendPreview'            => 'system/modules/core/controllers/BackendPreview.php',
+	'Contao\BackendSwitch'             => 'system/modules/core/controllers/BackendSwitch.php',
 	'Contao\FrontendCron'              => 'system/modules/core/controllers/FrontendCron.php',
 	'Contao\FrontendIndex'             => 'system/modules/core/controllers/FrontendIndex.php',
 	'Contao\FrontendShare'             => 'system/modules/core/controllers/FrontendShare.php',
