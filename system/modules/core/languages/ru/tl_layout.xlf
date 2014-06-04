@@ -499,7 +499,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.main">
         <source>Inside the main column</source>
-        <target>В основной колонке</target>
+        <target>Основная колонка</target>
       </trans-unit>
       <trans-unit id="tl_layout.after">
         <source>Before the page footer</source>
