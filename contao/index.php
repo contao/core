@@ -10,22 +10,13 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Set the script name
- */
+// Set the script name
 define('TL_SCRIPT', 'contao/index.php');
 
-
-/**
- * Initialize the system
- */
+// Initialize the system
 define('TL_MODE', 'BE');
 require dirname(__DIR__) . '/system/initialize.php';
 
-
-/**
- * Instantiate the controller
- */
-$objIndex = new BackendIndex();
-$objIndex->run();
+// Run the controller
+$controller = new BackendIndex;
+$controller->run();

@@ -10,22 +10,13 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Set the script name
- */
+// Set the script name
 define('TL_SCRIPT', 'index.php');
 
-
-/**
- * Initialize the system
- */
+// Initialize the system
 define('TL_MODE', 'FE');
 require __DIR__ . '/system/initialize.php';
 
-
-/**
- * Instantiate the controller
- */
-$objIndex = new FrontendIndex();
-$objIndex->run();
+// Run the controller
+$controller = new FrontendIndex;
+$controller->run();

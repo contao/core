@@ -10,29 +10,17 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-
-/**
- * Set the script name
- */
+// Set the script name
 define('TL_SCRIPT', 'contao/install.php');
 
-
-/**
- * Initialize the system
- */
+// Initialize the system
 define('TL_MODE', 'BE');
 require dirname(__DIR__) . '/system/initialize.php';
 
-
-/**
- * Show error messages
- */
+// Show error messages
 @ini_set('display_errors', 1);
 @error_reporting(E_ALL|E_STRICT);
 
-
-/**
- * Instantiate the controller
- */
-$objInstallTool = new BackendInstall();
-$objInstallTool->run();
+// Run the controller
+$controller = new BackendInstall;
+$controller->run();
