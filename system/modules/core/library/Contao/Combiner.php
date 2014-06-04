@@ -214,20 +214,30 @@ class Combiner extends \System
 
 			foreach ($this->arrFiles as $arrFile)
 			{
+				$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
+
 				// Compile SCSS/LESS files into temporary files
 				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
 				{
 					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
 					$objFile = new \File($strPath, true);
-					$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
+					$objFile->write($this->handleScssLess($content, $arrFile));
 					$objFile->close();
 
 					$return[] = $strPath;
 				}
 				else
 				{
-					$return[] = $arrFile['name'];
+					$name = $arrFile['name'];
+
+					// Add the media query (see #7070)
+					if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+					{
+						$name .= '" media="' . $arrFile['media'];
+					}
+
+					$return[] = $name;
 				}
 			}
 
@@ -325,11 +335,12 @@ class Combiner extends \System
 		if ($arrFile['extension'] == self::SCSS)
 		{
 			$objCompiler = new \scssc();
+			new \scss_compass($objCompiler);
 
 			$objCompiler->setImportPaths(array
 			(
 				TL_ROOT . '/' . dirname($arrFile['name']),
-				TL_ROOT . '/assets/compass/' . $GLOBALS['TL_ASSETS']['COMPASS']
+				TL_ROOT . '/vendor/leafo/scssphp-compass/stylesheets'
 			));
 
 			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));

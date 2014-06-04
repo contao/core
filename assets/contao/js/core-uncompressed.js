@@ -419,7 +419,24 @@ var AjaxRequest =
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
-				if (json.javascript) Browser.exec(json.javascript);
+				if (json.javascript) {
+
+					// Use Asset.javascript() instead of document.write() to load a
+					// JavaScript file and re-execude the code after it has been loaded
+					document.write = function(str) {
+						var src = '';
+						str.replace(/<script src="([^"]+)"/i, function(all, match){
+							src = match;
+						});
+						src && Asset.javascript(src, {
+							onLoad: function() {
+								Browser.exec(json.javascript);
+							}
+						});
+					};
+
+					Browser.exec(json.javascript);
+				}
 
 				el.value = 1;
 				el.checked = 'checked';
@@ -1999,25 +2016,6 @@ var Backend =
 				}
 			});
 		});
-	},
-
-	/**
-	 * Load a JavaScript file depending on the trigger and execute the callback
-	 *
-	 * @param {object}   trigger  The trigger element
-	 * @param {string}   url      The JavaScript URL
-	 * @param {function} callback The callback function
-	 */
-	loadAndExec: function(trigger, url, callback) {
-		if (trigger) {
-			callback();
-		} else {
-			Asset.javascript(url, {
-				onLoad: function() {
-					callback();
-				}
-			});
-		}
 	}
 };
 

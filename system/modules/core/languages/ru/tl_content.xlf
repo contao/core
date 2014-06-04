@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_content.embed.1">
         <source>Use the wildcard &quot;%s&quot; to embed the link in a phrase (e.g. &lt;em&gt;For more information please visit %s&lt;/em&gt;).</source>
-        <target>Используйте подстановочный знак &quot;%s&quot;, чтобы встроить ссылку в фразу (напр. &lt;em&gt;Для получения дополнительной информации посетите %s&lt;/em&gt;).</target>
+        <target>Используйте подстановочный знак &quot;%s&quot; , чтобы встроить ссылку в фразу (напр. &lt;em&gt;Для получения дополнительной информации посетите %s&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.rel.0">
         <source>Lightbox</source>
