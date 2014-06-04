@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_fields.1">
         <source>Please enter a comma separated list of the fields you want to list.</source>
-        <target>Введите разделенный запятыми список полей, которые нужно отобразить в списке.</target>
+        <target>Введите разделенный запятыми список полей, которые нужно вывести в список.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_where.0">
         <source>Condition</source>

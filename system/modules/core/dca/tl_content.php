@@ -1140,6 +1140,12 @@ class tl_content extends Backend
 			$class .=  ' h64';
 		}
 
+		// Convert the image sources (see #7065)
+		if (!empty($arrRow['text']))
+		{
+			$arrRow['text'] = String::insertTagToSrc($arrRow['text']);
+		}
+
 		$objModel = new ContentModel();
 		$objModel->setRow($arrRow);
 

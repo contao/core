@@ -157,7 +157,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Set the page title and description AFTER the modules have been generated
-		$this->Template->mainTitle = $objPage->rootTitle;
+		$this->Template->mainTitle = $objPage->rootPageTitle;
 		$this->Template->pageTitle = $objPage->pageTitle ?: $objPage->title;
 
 		// Meta robots tag

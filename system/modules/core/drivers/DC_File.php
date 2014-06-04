@@ -471,7 +471,7 @@ class DC_File extends \DataContainer implements \editable
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent !== $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)
 		{
 			\Config::persist($this->strField, $varValue);
 

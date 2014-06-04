@@ -1,6 +1,28 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.2 (2014-06-04)
+--------------------------
+
+### Fixed
+Add the media query to the style sheets in debug mode (see #7070).
+
+### Fixed
+Disable the debug mode in the extension creator (see #7068).
+
+### Fixed
+Convert image source insert tags in the back end preview (see #7065).
+
+### Fixed
+Render all root nodes in the page and file picker (see #6844).
+
+### Fixed
+Add the "scssphp-compass" library to support Compass functions.
+
+### Fixed
+Support adding multiple TinyMCE instances to the same page (see #7061).
+
+
 Version 3.3.1 (2014-05-30)
 --------------------------
 
