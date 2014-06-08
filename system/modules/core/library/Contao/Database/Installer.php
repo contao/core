@@ -254,6 +254,13 @@ class Installer extends \Controller
 			}
 		}
 
+		// Remove all DROP statements if the safe mode is active
+		if (\Config::get('coreOnlyMode'))
+		{
+			unset($return['DROP']);
+			unset($return['ALTER_DROP']);
+		}
+
 		return $return;
 	}
 
