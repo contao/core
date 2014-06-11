@@ -913,7 +913,7 @@ abstract class Controller extends \System
 						switch ($objNextPage->type)
 						{
 							case 'redirect':
-								$strUrl = $objNextPage->url;
+								$strUrl = $this->replaceInsertTags($objNextPage->url);
 
 								if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 								{
