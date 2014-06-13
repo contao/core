@@ -5,6 +5,9 @@ Version 3.2.12 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Preserve whitespace before `<textarea>` tags when minifying code (see #7087).
+
+### Fixed
 Restore the PHP 5.3 compatibility of the listing module (see #7078).
 
 ### Fixed
