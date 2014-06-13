@@ -5,6 +5,9 @@ Version 3.2.12 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Restore the PHP 5.3 compatibility of the listing module (see #7078).
+
+### Fixed
 Do not offer to drop tables or fields if the safe mode is active (see #7085).
 
 ### Fixed
