@@ -5,6 +5,9 @@ Version 3.3.3 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Convert insert tags before assigning the page title to the template (see #7097).
+
+### Fixed
 Correctly render images in TinyMCE in the newsletter module (see #7089).
 
 
