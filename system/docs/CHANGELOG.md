@@ -5,6 +5,9 @@ Version 3.2.12 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not offer to drop tables or fields if the safe mode is active (see #7085).
+
+### Fixed
 Correctly detect binary fields during theme export (see #7079).
 
 
