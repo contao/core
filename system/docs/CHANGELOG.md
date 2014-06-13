@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.3 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Correctly render images in TinyMCE in the newsletter module (see #7089).
+
+
 Version 3.3.2 (2014-06-04)
 --------------------------
 
