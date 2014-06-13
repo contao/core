@@ -426,16 +426,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$count = 1;
 		$return = '';
 		$row = $objRow->row();
-		$arrOrder = array();
 
 		// Get the order fields
-		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $arrField)
-		{
-			if (isset($arrField['eval']['orderField']))
-			{
-				$arrOrder[] = $arrField['eval']['orderField'];
-			}
-		}
+		$objDcaExtractor = new \DcaExtractor($this->strTable);
+		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all fields
 		$fields = array_keys($row);

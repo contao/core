@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.12 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Correctly detect binary fields during theme export (see #7079).
+
+
 Version 3.2.11 (2014-06-04)
 ---------------------------
 
