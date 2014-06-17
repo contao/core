@@ -1,8 +1,12 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.2.12 (2014-XX-XX)
+Version 3.2.12 (2014-06-XX)
 ---------------------------
+
+### Fixed
+Show the placeholder image in the "edit file" dialog if the original image
+exceeds the maximum dimensions supported by the GD library (see #7032).
 
 ### Fixed
 Preserve whitespace before `<textarea>` tags when minifying code (see #7087).
