@@ -61,6 +61,12 @@ class DcaExtractor extends \Controller
 	protected $arrFields = array();
 
 	/**
+	 * Order fields
+	 * @var array
+	 */
+	protected $arrOrderFields = array();
+
+	/**
 	 * Keys
 	 * @var array
 	 */
@@ -157,6 +163,28 @@ class DcaExtractor extends \Controller
 	public function hasFields()
 	{
 		return !empty($this->arrFields);
+	}
+
+
+	/**
+	 * Return the order fields as array
+	 *
+	 * @return array The order fields array
+	 */
+	public function getOrderFields()
+	{
+		return $this->arrOrderFields;
+	}
+
+
+	/**
+	 * Return true if there are order fields
+	 *
+	 * @return boolean True if there are order fields
+	 */
+	public function hasOrderFields()
+	{
+		return !empty($this->arrOrderFields);
 	}
 
 
@@ -398,12 +426,18 @@ class DcaExtractor extends \Controller
 		if (!empty($fields))
 		{
 			$this->arrFields = array();
+			$this->arrOrderFields = array();
 
 			foreach ($fields as $field=>$config)
 			{
 				if (isset($config['sql']))
 				{
 					$this->arrFields[$field] = $config['sql'];
+				}
+
+				if (isset($config['eval']['orderField']))
+				{
+					$this->arrOrderFields[] = $config['eval']['orderField'];
 				}
 			}
 		}

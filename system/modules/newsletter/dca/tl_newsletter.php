@@ -162,6 +162,10 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyNews', 'helpwizard'=>true),
 			'explanation'             => 'insertTags',
+			'load_callback' => array
+			(
+				array('tl_newsletter', 'convertAbsoluteLinks')
+			),
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'convertRelativeLinks')
@@ -423,6 +427,17 @@ class tl_newsletter extends Backend
 ' . $this->replaceInsertTags($arrRow['content'], false) . '<hr>' : '' ) . '
 <pre style="white-space:pre-wrap">' . $arrRow['text'] . '</pre>
 </div>' . "\n";
+	}
+
+
+	/**
+	 * Convert absolute URLs from TinyMCE to relative URLs
+	 * @param string
+	 * @return string
+	 */
+	public function convertAbsoluteLinks($strContent)
+	{
+		return str_replace('src="' .Environment::get('base'), 'src="', $strContent);
 	}
 
 

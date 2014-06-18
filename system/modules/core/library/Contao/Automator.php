@@ -782,6 +782,17 @@ class Automator extends \System
 
 			$objFile->append(');', "\n\n");
 
+			// Order fields
+			$arrFields = $objExtract->getOrderFields();
+			$objFile->append("\$this->arrOrderFields = array\n(");
+
+			foreach ($arrFields as $field)
+			{
+				$objFile->append("\t'$field',");
+			}
+
+			$objFile->append(');', "\n\n");
+
 			// Keys
 			$arrKeys = $objExtract->getKeys();
 			$objFile->append("\$this->arrKeys = array\n(");

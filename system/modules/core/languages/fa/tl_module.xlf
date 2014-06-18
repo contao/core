@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_module.customTpl.1">
         <source>Here you can overwrite the default module template.</source>
+        <target>اینجا می‌توانید قالب ماژول پیش‌فرش را رونویسی کنید.</target>
       </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>

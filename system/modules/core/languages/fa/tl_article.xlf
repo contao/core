@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_article.customTpl.1">
         <source>Here you can overwrite the default article template.</source>
+        <target>شما اینجا می‌توانید قالب نوشته پیش‌فرض را رونویسی کنید.</target>
       </trans-unit>
       <trans-unit id="tl_article.protected.0">
         <source>Protect article</source>
