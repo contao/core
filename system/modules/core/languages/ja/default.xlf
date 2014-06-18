@@ -1211,7 +1211,7 @@
       </trans-unit>
       <trans-unit id="MSC.shortcuts.1">
         <source>Learn more about speeding up your workflow by using &lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;Keyboard shortcuts overview on contao.org&quot; target=&quot;_blank&quot;&gt;keyboard shortcuts&lt;/a&gt;.</source>
-        <target>&lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;contao.orgのキーモードのショートカットの概要&quot; target=&quot;_blank&quot;&gt;キーボードのショートカット&lt;/a&gt;を使って、作業の流れを速くする方法を学びましょう</target>
+        <target>&lt;a href=&quot;https://contao.org/manual/administration-area.html#keyboard-shortcuts&quot; title=&quot;contao.orgのキーモードのショートカットの概要&quot; target=&quot;_blank&quot;&gt;キーボードのショートカット&lt;/a&gt;を使って、作業の流れを速くする方法を学びましょう。</target>
       </trans-unit>
       <trans-unit id="MSC.toggleAll.0">
         <source>Toggle all</source>
