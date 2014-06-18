@@ -1,6 +1,32 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.12 (2014-06-18)
+---------------------------
+
+### Fixed
+Replace insert tags in external redirect targets (see #6765).
+
+### Fixed
+Also apply the font settings to the ACE element (see #7103).
+
+### Fixed
+Show the placeholder image in the "edit file" dialog if the original image
+exceeds the maximum dimensions supported by the GD library (see #7032).
+
+### Fixed
+Preserve whitespace before `<textarea>` tags when minifying code (see #7087).
+
+### Fixed
+Restore the PHP 5.3 compatibility of the listing module (see #7078).
+
+### Fixed
+Do not offer to drop tables or fields if the safe mode is active (see #7085).
+
+### Fixed
+Correctly detect binary fields during theme export (see #7079).
+
+
 Version 3.2.11 (2014-06-04)
 ---------------------------
 

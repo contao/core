@@ -207,6 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS files from the file system.</source>
+        <target>Tu môžete zahrnúť ďalšie CSS súbory.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>

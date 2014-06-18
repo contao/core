@@ -267,9 +267,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.minlength.0">
         <source>Minimum length</source>
+        <target>Najkrajša še dovoljena dolžina</target>
       </trans-unit>
       <trans-unit id="tl_form_field.minlength.1">
         <source>Require the field value to be a certain number of characters long.</source>
+        <target>To vnosno polje zahteva točno določeno število znakov.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>

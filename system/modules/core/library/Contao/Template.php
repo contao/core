@@ -395,7 +395,7 @@ abstract class Template extends \Controller
 		}
 
 		// Split the markup based on the tags that shall be preserved
-		$arrChunks = preg_split('@(</?pre[^>]*>)|(</?script[^>]*>)|(</?style[^>]*>)|(</?textarea[^>]*>)@i', $strHtml, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$arrChunks = preg_split('@(</?pre[^>]*>)|(</?script[^>]*>)|(</?style[^>]*>)|( ?</?textarea[^>]*>)@i', $strHtml, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		$strHtml = '';
 		$blnPreserveNext = false;
@@ -404,7 +404,7 @@ abstract class Template extends \Controller
 		// Recombine the markup
 		foreach ($arrChunks as $strChunk)
 		{
-			if (strncasecmp($strChunk, '<pre', 4) === 0 || strncasecmp($strChunk, '<textarea', 9) === 0)
+			if (strncasecmp($strChunk, '<pre', 4) === 0 || strncasecmp(ltrim($strChunk), '<textarea', 9) === 0)
 			{
 				$blnPreserveNext = true;
 			}
