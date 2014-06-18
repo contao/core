@@ -1134,7 +1134,7 @@ ul.sortable li:hover .dirname {
 .ace_editor {
 	padding:3px;
 }
-.ace_editor * {
+.ace_editor,.ace_editor * {
 	font-family:Courier,monospace;
 	font-size:12px;
 	color:inherit;
