@@ -5,6 +5,9 @@ Version 3.2.12 (2014-06-XX)
 ---------------------------
 
 ### Fixed
+Also apply the font settings to the ACE element (see #7103).
+
+### Fixed
 Show the placeholder image in the "edit file" dialog if the original image
 exceeds the maximum dimensions supported by the GD library (see #7032).
 
