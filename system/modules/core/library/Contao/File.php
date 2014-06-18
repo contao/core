@@ -38,6 +38,7 @@ namespace Contao;
  * @property int      $atime       the file's atime
  * @property string   $icon        the name of the corresponding mime icon
  * @property string   $path        the path to the file
+ * @property array    $imageSize   the image dimensions (images only; see getimagesize)
  * @property int      $width       the file width (images only)
  * @property int      $height      the file height (images only)
  * @property bool     $isGdImage   true if the file can be handled by the GDlib
@@ -180,6 +181,7 @@ class File extends \System
 	 * * atime:       the file's atime
 	 * * icon:        the name of the corresponding mime icon
 	 * * path:        the path to the file
+	 * * imageSize:   the image dimensions (images only; see getimagesize)
 	 * * width:       the file width (images only)
 	 * * height:      the file height (images only)
 	 * * isGdImage:   true if the file can be handled by the GDlib
@@ -268,20 +270,19 @@ class File extends \System
 				return $this->getIcon();
 				break;
 
-			case 'width':
+			case 'imageSize':
 				if (empty($this->arrImageSize))
 				{
 					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 				}
-				return $this->arrImageSize[0];
+				return $this->arrImageSize;
+
+			case 'width':
+				return $this->imageSize[0];
 				break;
 
 			case 'height':
-				if (empty($this->arrImageSize))
-				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-				}
-				return $this->arrImageSize[1];
+				return $this->imageSize[1];
 				break;
 
 			case 'isGdImage':
