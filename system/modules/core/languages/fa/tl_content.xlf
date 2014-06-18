@@ -379,9 +379,11 @@
       </trans-unit>
       <trans-unit id="tl_content.customTpl.0">
         <source>Custom element template</source>
+        <target>قالب المان پیش‌فرض</target>
       </trans-unit>
       <trans-unit id="tl_content.customTpl.1">
         <source>Here you can overwrite the default element template.</source>
+        <target>اینجا می‌توانید قالب پیش‌فرض المان را رونویسی نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
