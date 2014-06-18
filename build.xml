@@ -47,7 +47,7 @@
     <zip destfile="contao-${version}.zip">
       <zipfileset dir="contao-${version}" prefix="contao-${version}" />
     </zip>
-    <tar destfile="contao-${version}.tar.gz" compression="gzip">
+    <tar destfile="contao-${version}.tar.gz" compression="gzip" longfile="gnu">
       <tarfileset dir="contao-${version}" prefix="contao-${version}" />
     </tar>
   </target>
