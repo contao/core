@@ -42,6 +42,7 @@ namespace Contao;
  * @property int      $width       the file width (images only)
  * @property int      $height      the file height (images only)
  * @property bool     $isGdImage   true if the file can be handled by the GDlib
+ * @property bool     $isSvgImage  true if the file is a SVG
  * @property int      $channels    the number of channels (images only)
  * @property int      $bits        the number of bits for each color (images only)
  * @property bool     $isRgbImage  true if the file is an RGB image
@@ -185,6 +186,7 @@ class File extends \System
 	 * * width:       the file width (images only)
 	 * * height:      the file height (images only)
 	 * * isGdImage:   true if the file can be handled by the GDlib
+	 * * isSvgImage:  true if the file is a SVG
 	 * * channels:    the number of channels (images only)
 	 * * bits:        the number of bits for each color (images only)
 	 * * isRgbImage:  true if the file is an RGB image
@@ -287,6 +289,10 @@ class File extends \System
 
 			case 'isGdImage':
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+				break;
+
+			case 'isSvgImage':
+				return in_array($this->extension, array('svg', 'svgz'));
 				break;
 
             case 'channels':
