@@ -5,6 +5,9 @@ Version 3.2.12 (2014-06-XX)
 ---------------------------
 
 ### Fixed
+Replace insert tags in external redirect targets (see #6765).
+
+### Fixed
 Also apply the font settings to the ACE element (see #7103).
 
 ### Fixed
