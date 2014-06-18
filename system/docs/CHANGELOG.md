@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.4 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Update the vendor libraries (fixes various issues).
+
+
 Version 3.3.3 (2014-06-18)
 --------------------------
 
