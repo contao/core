@@ -80,7 +80,7 @@ class BackendPassword extends \Backend
 			else
 			{
 				// Make sure the password has been changed
-				if (crypt($pw, $this->User->password) == $this->User->password)
+				if (\Encryption::verify($pw, $this->User->password))
 				{
 					\Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}

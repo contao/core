@@ -199,6 +199,25 @@ class Encryption
 
 
 	/**
+	 * Verifies a given password against a hash
+	 *
+	 * @param string $strPassword The plaintext password
+	 * @param string $strHash The hash to check against
+	 *
+	 * @return boolean True if the input matches the hash
+	 */
+	public static function verify($strPassword, $strHash)
+	{
+		// Use core function to prevent timing attacks if possible
+		if (function_exists('hash_equals')) {
+			return hash_equals(crypt($strPassword, $strHash), $strHash);
+		}
+
+		return crypt($strPassword, $strHash) === $strHash;
+	}
+
+
+	/**
 	 * Test whether a password hash has been generated with crypt()
 	 *
 	 * @param string $strHash The password hash
