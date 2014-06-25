@@ -45,6 +45,11 @@ function __error($intType, $strMessage, $strFile, $intLine)
 	// Ignore functions with an error control operator (@function_name)
 	if (ini_get('error_reporting') > 0)
 	{
+		if (function_exists('xdebug_disable'))
+		{
+			xdebug_disable();
+		}
+
 		if ($intType != E_NOTICE)
 		{
 			$e = new Exception();
@@ -65,9 +70,9 @@ function __error($intType, $strMessage, $strFile, $intLine)
 									$strMessage,
 									str_replace(TL_ROOT . '/', '', $strFile), // see #4971
 									$intLine);
+				$e = new ErrorException($strMessage, $intType, 1, $strFile, $intLine);
 
-				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
-				echo '<br>' . $strMessage;
+				trace_nicely($e);
 			}
 		}
 
@@ -76,6 +81,11 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		{
 			show_help_message();
 			exit;
+		}
+
+		if (function_exists('xdebug_enable'))
+		{
+			xdebug_enable();
 		}
 	}
 }
@@ -101,18 +111,39 @@ function __exception($e)
 	// Display the exception
 	if (ini_get('display_errors'))
 	{
-		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
-							get_class($e),
-							$e->getMessage(),
-							str_replace(TL_ROOT . '/', '', $e->getFile()),
-							$e->getLine());
-
-		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
-		echo '<br>' . $strMessage;
+		trace_nicely($e);
 	}
 
 	show_help_message();
 	exit;
+}
+
+
+/**
+ * Show a nicely trace message based on a template instead of just a message
+ *
+ * @param \Exception $exception The exception to trace.
+ */
+function trace_nicely(\Exception $exception)
+{
+	if (file_exists(TL_ROOT . "/templates/be_trace.html5"))
+	{
+		include TL_ROOT . "/templates/be_trace.html5";
+	}
+	elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5"))
+	{
+		include TL_ROOT . "/system/modules/core/templates/backend/be_trace.html5";
+	}
+	else {
+		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
+							get_class($exception),
+							$exception->getMessage(),
+							str_replace(TL_ROOT . '/', '', $exception->getFile()),
+							$exception->getLine());
+
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $exception->getTraceAsString()) . "\n" . '</pre>';
+		echo '<br>' . $strMessage;
+	}
 }
 
 
@@ -163,6 +194,102 @@ function die_nicely($strTemplate, $strFallback)
 function log_message($strMessage, $strLog='error.log')
 {
 	@error_log(sprintf("[%s] %s\n", date('d-M-Y H:i:s'), $strMessage), 3, TL_ROOT . '/system/logs/' . $strLog);
+}
+
+
+/**
+ * Filter sensitive information from a variable for public output.
+ *
+ * @param string $var
+ *
+ * @return string
+ */
+function filter_value($var)
+{
+	static $search;
+	static $replace;
+
+	if (!$search) {
+		$search  = array(TL_ROOT . '/');
+		$replace = array('&hellip;/');
+
+		foreach ($GLOBALS['TL_CONFIG'] as $key => $value) {
+			if (
+				!empty($value) &&
+				!is_bool($value) &&
+				!is_int($value) &&
+				!is_double($value) && (
+					strpos($key, 'User') !== false ||
+					strpos($key, 'Pass') !== false ||
+					strpos($key, 'secret') !== false
+				)
+			)
+			{
+				$search[]  = $value;
+				$replace[] = '&block;&block;&block;';
+			}
+		}
+	}
+
+	return str_replace($search, $replace, $var);
+}
+
+
+/**
+ * Describe a variable, very similar to var_dump.
+ *
+ * @param $var
+ * @param $indent
+ */
+function describe_var($var, $indent = '')
+{
+	if (is_null($var))
+	{
+		echo 'null';
+	}
+	elseif (is_object($var))
+	{
+		printf('<span class="type">object</span> %s', get_class($var));
+	}
+	elseif (is_array($var))
+	{
+		echo '<span class="type">array</span> (';
+
+		if (count($var)) {
+			echo PHP_EOL;
+
+			$keyWidth = 0;
+			foreach ($var as $key => $value)
+			{
+				$keyWidth = max($keyWidth, mb_strlen($key));
+			}
+
+			foreach ($var as $key => $value)
+			{
+				printf('%s  %s => ', $indent, str_pad(filter_value($key), $keyWidth, ' '));
+				describe_var($value, $indent . '  ');
+				echo ',' . PHP_EOL;
+			}
+		}
+
+		echo $indent . ')';
+	}
+	elseif (is_int($var) || is_double($var))
+	{
+		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), filter_value($var));
+	}
+	elseif (is_string($var))
+	{
+		printf('<span class="type">%s</span> "<span class="value">%s</span>" (raw_length=%d)', gettype($var), filter_value($var), strlen($var));
+	}
+	elseif (is_bool($var))
+	{
+		printf('<span class="type">%s</span> <span class="value">%s</span>', gettype($var), $var ? 'true' : 'false');
+	}
+	else
+	{
+		printf('<span class="type">%s</span> "<span class="value">%s</span>"', gettype($var), filter_value($var));
+	}
 }
 
 

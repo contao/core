@@ -1,0 +1,154 @@
+<?php
+
+System::loadLanguageFile('exception', null, false, true);
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
+
+if (!defined('TRACE_SCRIPT_INCLUDED')):
+	ob_start();
+	include TL_ROOT . '/system/themes/default/basic.css';
+	include TL_ROOT . '/system/themes/default/error.css';
+	include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvBlack21.css';
+	$styles = ob_get_clean();
+
+	ob_start();
+	include TL_ROOT . '/assets/mootools/core/' . MOOTOOLS . '/mootools.js';
+	include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js';
+	$scripts = ob_get_clean();
+
+	?>
+	<script>
+		var style = document.createElement('style');
+		style.textContent = <?php echo json_encode($styles); ?>;
+		document.head.appendChild(style);
+
+		var script = document.createElement('script');
+		script.textContent = <?php echo json_encode($scripts); ?>;
+		document.head.appendChild(script);
+
+		function scrollToLine(line)
+		{
+			var source = document.getElementById('mbImage').children[0];
+			// highlight the current line
+			$$(source.children).removeClass('highlight');
+			var element = source.getElementsByClassName('L' + line)[0];
+			element.addClass('highlight');
+			// calculate offset by summarize all previous line heights
+			var offset = 0;
+			while (element.previousSibling) {
+				element = element.previousSibling;
+				offset += element.clientHeight;
+			}
+			// move line to the center
+			offset -= .8 * window.innerHeight / 2;
+			source.scrollTop = offset;
+		}
+	</script>
+	<?php
+	define('TRACE_SCRIPT_INCLUDED', true);
+endif;
+?>
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
+  </div>
+
+  <div id="container">
+
+    <div id="main">
+
+      <h2><?php echo $lang->error; ?></h2>
+
+      <?php
+      $files = array();
+
+      /** @var \Exception $exception */
+      while ($exception) {
+        ?>
+        <h3><?php echo filter_value($exception->getMessage()) ?></h3>
+        <?php
+        foreach ($exception->getTrace() as $index => $row):
+          echo '<div class="trace">';
+          echo '<span class="index">#' . $index . '</span> <span class="call">';
+
+          if (isset($row['class'])):
+            echo $row['class'] . $row['type'] . $row['function'];
+          elseif (isset($row['function'])):
+            echo $row['function'];
+          endif;
+
+          echo '(</span>';
+          if (isset($row['args']) && count($row['args'])):
+            echo PHP_EOL;
+            foreach ($row['args'] as $argi => $arg):
+              if ($argi > 0):
+                echo ',' . PHP_EOL;
+              endif;
+
+              echo '  ';
+              describe_var($arg, '  ');
+            endforeach;
+            echo PHP_EOL;
+          endif;
+          echo '<span class="call">)</span>';
+
+          if (isset($row['file'])):
+            $hash = md5($row['file']);
+            echo PHP_EOL;
+            if (true)
+            {
+              printf(
+                '<span class="file">&rdsh; <a href="#mb_F%s" onclick="Mediabox.open(\'#mb_F%s\', \'%s\', \'80%% 80%%\');window.setTimeout(function(){scrollToLine(%d)},1000);return false">%s:%d</a></span>',
+                $hash,
+                $hash,
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line'],
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line']
+              );
+            }
+            else
+            {
+              printf(
+                '<span class="file">&rdsh; %s:%d</span>',
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line']
+              );
+            }
+            echo PHP_EOL;
+
+            $files[] = $row['file'];
+          endif;
+          echo '</div>';
+        endforeach;
+
+        $exception = $exception->getPrevious();
+      }
+
+      if (true)
+      {
+        foreach ($files as $file) {
+          $hash = md5($file);
+          $lines = file_get_contents($file);
+          $lines = filter_value($lines);
+          $lines = highlight_string($lines, true);
+          $lines = str_replace(array("\n", "\r", '<code>', '</code>'), array('', '', '', ''), $lines);
+          $lines = explode('<br />', $lines);
+          foreach ($lines as $no => $line) {
+            $lines[$no] = sprintf('<div class="L%d"><a href="https://github.com/contao/core/blob/%s/%s#L%d" target="_blank">%d</a>%s</div>',
+              $no+1,
+              VERSION . '.' . BUILD,
+              str_replace(TL_ROOT . '/', '', $file),
+              $no+1,
+              $no+1,
+              $line
+            );
+          }
+
+          printf('<div id="mb_F%s" style="display:none"><pre class="source">%s</pre></div>', $hash, implode('', $lines));
+        }
+      }
+      ?>
+    </div>
+
+    <p class="hint"><?php printf($lang->hint, 'templates/be_trace.html5'); ?></p>
+
+  </div>
