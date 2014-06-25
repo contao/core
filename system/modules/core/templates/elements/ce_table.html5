@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-  <table id="<?php echo $this->id; ?>"<?php if ($this->sortable): ?> class="sortable"<?php endif; ?>>
+  <table id="<?php echo $this->id; ?>" class="<?php echo $this->class; ?><?php if ($this->sortable): ?> sortable<?php endif; ?>">
 
     <?php if ($this->summary != ''): ?>
       <caption><?php echo $this->summary; ?></caption>
