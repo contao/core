@@ -93,15 +93,26 @@ endif;
           if (isset($row['file'])):
             $hash = md5($row['file']);
             echo PHP_EOL;
-            printf(
-              '<span class="file">&rdsh; <a href="#mb_F%s" onclick="Mediabox.open(\'#mb_F%s\', \'%s\', \'80%% 80%%\');window.setTimeout(function(){scrollToLine(%d)},1000);return false">%s:%d</a></span>',
-              $hash,
-              $hash,
-              str_replace(TL_ROOT . '/', '', $row['file']),
-              $row['line'],
-              str_replace(TL_ROOT . '/', '', $row['file']),
-              $row['line']
-            );
+            if (true)
+            {
+              printf(
+                '<span class="file">&rdsh; <a href="#mb_F%s" onclick="Mediabox.open(\'#mb_F%s\', \'%s\', \'80%% 80%%\');window.setTimeout(function(){scrollToLine(%d)},1000);return false">%s:%d</a></span>',
+                $hash,
+                $hash,
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line'],
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line']
+              );
+            }
+            else
+            {
+              printf(
+                '<span class="file">&rdsh; %s:%d</span>',
+                str_replace(TL_ROOT . '/', '', $row['file']),
+                $row['line']
+              );
+            }
             echo PHP_EOL;
 
             $files[] = $row['file'];
@@ -112,25 +123,28 @@ endif;
         $exception = $exception->getPrevious();
       }
 
-      foreach ($files as $file) {
-        $hash = md5($file);
-        $lines = file_get_contents($file);
-        $lines = filter_value($lines);
-        $lines = highlight_string($lines, true);
-        $lines = str_replace(array("\n", "\r", '<code>', '</code>'), array('', '', '', ''), $lines);
-        $lines = explode('<br />', $lines);
-        foreach ($lines as $no => $line) {
-          $lines[$no] = sprintf('<div class="L%d"><a href="https://github.com/contao/core/blob/%s/%s#L%d" target="_blank">%d</a>%s</div>',
-            $no+1,
-            VERSION . '.' . BUILD,
-            str_replace(TL_ROOT . '/', '', $file),
-            $no+1,
-            $no+1,
-            $line
-          );
-        }
+      if (true)
+      {
+        foreach ($files as $file) {
+          $hash = md5($file);
+          $lines = file_get_contents($file);
+          $lines = filter_value($lines);
+          $lines = highlight_string($lines, true);
+          $lines = str_replace(array("\n", "\r", '<code>', '</code>'), array('', '', '', ''), $lines);
+          $lines = explode('<br />', $lines);
+          foreach ($lines as $no => $line) {
+            $lines[$no] = sprintf('<div class="L%d"><a href="https://github.com/contao/core/blob/%s/%s#L%d" target="_blank">%d</a>%s</div>',
+              $no+1,
+              VERSION . '.' . BUILD,
+              str_replace(TL_ROOT . '/', '', $file),
+              $no+1,
+              $no+1,
+              $line
+            );
+          }
 
-        printf('<div id="mb_F%s" style="display:none"><pre class="source">%s</pre></div>', $hash, implode('', $lines));
+          printf('<div id="mb_F%s" style="display:none"><pre class="source">%s</pre></div>', $hash, implode('', $lines));
+        }
       }
       ?>
     </div>
