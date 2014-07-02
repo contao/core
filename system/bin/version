@@ -15,4 +15,4 @@
 include dirname(__DIR__) . '/config/constants.php';
 
 // Output the version and build number
-echo VERSION . '.' . BUILD;
+echo VERSION . '.' . BUILD . "\n";
