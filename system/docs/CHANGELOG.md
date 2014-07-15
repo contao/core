@@ -5,6 +5,9 @@ Version 3.3.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Ignore hidden files when building the internal cache (see #7098).
+
+### Fixed
 Correctly pass the insert ID of the undo record (see #6234).
 
 ### Fixed
