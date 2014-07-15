@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle double quotes in the title attribute of the `<link>` element (see #7124).
+
+### Fixed
 Use the `save_callback` when generating multiple aliases (see #7114).
 
 ### Update

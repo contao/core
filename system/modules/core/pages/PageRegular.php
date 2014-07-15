@@ -615,7 +615,7 @@ class PageRegular extends \Frontend
 				while($objFeeds->next())
 				{
 					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . specialchars($objFeeds->title) . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -630,7 +630,7 @@ class PageRegular extends \Frontend
 				while($objFeeds->next())
 				{
 					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . specialchars($objFeeds->title) . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
