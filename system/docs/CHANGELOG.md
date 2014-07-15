@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.13 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Correctly pass the insert ID of the undo record (see #6234).
+
+
 Version 3.2.12 (2014-06-18)
 ---------------------------
 
