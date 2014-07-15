@@ -172,12 +172,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62"
+                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c4374574fbe39615754f6eed7ebb93882282d62",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
+                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
             ],
             "description": "scssphp is a compiler for SCSS written in PHP.",
             "homepage": "http://leafo.net/scssphp/",
-            "time": "2014-05-09 00:07:45"
+            "time": "2014-07-07 23:27:37"
         },
         {
             "name": "leafo/scssphp-compass",
