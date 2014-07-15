@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+URL encode the pipe character in the Google web font URL (see #7120).
+
+### Fixed
 Handle double quotes in the title attribute of the `<link>` element (see #7124).
 
 ### Fixed
