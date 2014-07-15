@@ -1480,9 +1480,10 @@ class tl_page extends Backend
 	/**
 	 * Automatically generate the folder URL aliases
 	 * @param array
+	 * @param DataContainer
 	 * @return array
 	 */
-	public function addAliasButton($arrButtons)
+	public function addAliasButton($arrButtons, DataContainer $dc)
 	{
 		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
@@ -1499,13 +1500,23 @@ class tl_page extends Backend
 					continue;
 				}
 
-				// Set the new alias
-				$strAlias = standardize(String::restoreBasicEntities($objPage->title));
+				$dc->id = $id;
+				$dc->activeRecord = $objPage;
 
-				// Prepend the folder URL
-				if ($GLOBALS['TL_CONFIG']['folderUrl'])
+				$strAlias = '';
+
+				// Generate new alias through save callbacks
+				foreach ($GLOBALS['TL_DCA'][$dc->table]['fields']['alias']['save_callback'] as $callback)
 				{
-					$strAlias = $objPage->folderUrl . $strAlias;
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$strAlias = $this->$callback[0]->$callback[1]($strAlias, $dc);
+					}
+					elseif (is_callable($callback))
+					{
+						$strAlias = $callback($strAlias, $dc);
+					}
 				}
 
 				// The alias has not changed

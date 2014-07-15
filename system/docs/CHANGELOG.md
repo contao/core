@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
+### Fixed
+Use the `save_callback` when generating multiple aliases (see #7114).
+
 ### Update
 Update SwiftMailer to version 5.2 (see #7110).
 
