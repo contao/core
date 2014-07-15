@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle double quotes in comments (see #7102).
+
+### Fixed
 Ignore hidden files when building the internal cache (see #7098).
 
 ### Fixed
