@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not associate the "use SSL" option with sitemaps only (see #7163).
+
+### Fixed
 URL encode the pipe character in the Google web font URL (see #7120).
 
 ### Fixed
