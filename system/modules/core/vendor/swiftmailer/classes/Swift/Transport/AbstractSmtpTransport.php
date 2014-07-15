@@ -130,7 +130,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
     /**
      * Test if an SMTP connection has been established.
      *
-     * @return boolean
+     * @return bool
      */
     public function isStarted()
     {
@@ -400,6 +400,11 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
                 $line = $this->_buffer->readLine($seq);
                 $response .= $line;
             } while (null !== $line && false !== $line && ' ' != $line{3});
+        } catch (Swift_IoException $e) {
+            $this->_throwException(
+                new Swift_TransportException(
+                    $e->getMessage())
+                );
         } catch (Swift_TransportException $e) {
             $this->_throwException($e);
         }
@@ -484,7 +489,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
     /** Determine is the $hostname is a fully-qualified name */
     private function _isFqdn($hostname)
     {
-        //We could do a really thorough check, but there's really no point
+        // We could do a really thorough check, but there's really no point
         if (false !== $dotPos = strpos($hostname, '.')) {
             return ($dotPos > 0) && ($dotPos != strlen($hostname) - 1);
         } else {

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
+### Update
+Update SwiftMailer to version 5.2 (see #7110).
+
 ### Fixed
 Correctly handle double quotes in comments (see #7102).
 

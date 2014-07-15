@@ -77,7 +77,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
      *
      * @param string $bytes
      *
-     * @return integer
+     * @return int
      *
      * @throws Swift_IoException
      */
@@ -132,7 +132,7 @@ abstract class Swift_ByteStream_AbstractFilterableInputStream implements Swift_I
         foreach ($this->_mirrors as $k => $stream) {
             if ($is === $stream) {
                 if ($this->_writeBuffer !== '') {
-                    $stream->write($this->_filter($this->_writeBuffer));
+                    $stream->write($this->_writeBuffer);
                 }
                 unset($this->_mirrors[$k]);
             }

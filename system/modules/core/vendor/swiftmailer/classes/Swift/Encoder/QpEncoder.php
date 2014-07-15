@@ -157,8 +157,8 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
      * $firstLineOffset.
      *
      * @param string  $string to encode
-     * @param integer $firstLineOffset, optional
-     * @param integer $maxLineLength,   optional 0 indicates the default of 76 chars
+     * @param int     $firstLineOffset, optional
+     * @param int     $maxLineLength,   optional 0 indicates the default of 76 chars
      *
      * @return string
      */
@@ -183,11 +183,11 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
         // Conveniently 4 chars is the UTF-8 safe number since UTF-8 has up to 6
         // bytes per char and (6 * 4 * 3 = 72 chars per line) * =NN is 3 bytes
         while (false !== $bytes = $this->_nextSequence()) {
-            //If we're filtering the input
+            // If we're filtering the input
             if (isset($this->_filter)) {
-                //If we can't filter because we need more bytes
+                // If we can't filter because we need more bytes
                 while ($this->_filter->shouldBuffer($bytes)) {
-                    //Then collect bytes into the buffer
+                    // Then collect bytes into the buffer
                     if (false === $moreBytes = $this->_nextSequence(1)) {
                         break;
                     }
@@ -196,7 +196,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
                         $bytes[] = $b;
                     }
                 }
-                //And filter them
+                // And filter them
                 $bytes = $this->_filter->filter($bytes);
             }
 
@@ -230,7 +230,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
      * Encode the given byte array into a verbatim QP form.
      *
      * @param integer[] $bytes
-     * @param integer   $size
+     * @param int       $size
      *
      * @return string
      */
@@ -254,7 +254,7 @@ class Swift_Encoder_QpEncoder implements Swift_Encoder
     /**
      * Get the next sequence of bytes to read from the char stream.
      *
-     * @param integer $size number of bytes to read
+     * @param int     $size number of bytes to read
      *
      * @return integer[]
      */
