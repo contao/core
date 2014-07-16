@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly build the breadcrumb trail in the style sheets module (see #7132).
+
+### Fixed
 Do not associate the "use SSL" option with sitemaps only (see #7163).
 
 ### Fixed
