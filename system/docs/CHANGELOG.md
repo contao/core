@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle other MySQL character sets (see #7140).
+
+### Fixed
 Correctly recognize Opera Mobile in the `Environment` class (see #5869).
 
 ### Fixed
