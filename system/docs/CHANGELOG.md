@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Restore the basic entities in the source editor (see #7170).
+
+### Fixed
 Correctly build the breadcrumb trail in the style sheets module (see #7132).
 
 ### Fixed
