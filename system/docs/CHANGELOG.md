@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Fix the grid offset for articles (see #7166).
+
+### Fixed
 Restore the basic entities in the source editor (see #7170).
 
 ### Fixed
