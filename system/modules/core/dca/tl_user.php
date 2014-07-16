@@ -333,7 +333,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => array('regular', 'redirect', 'forward'),
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('regular', 'redirect', 'forward', 'root', 'error_403', 'error_404'),
+			'options'                 => array_keys($GLOBALS['TL_PTY']),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
 			'sql'                     => "blob NULL"
