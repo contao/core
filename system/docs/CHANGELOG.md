@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly recognize Opera Mobile in the `Environment` class (see #5869).
+
+### Fixed
 Fix the grid offset for articles (see #7166).
 
 ### Fixed
