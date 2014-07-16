@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly check the permission to edit multiple files (see #7157).
+
+### Fixed
 Correctly handle other MySQL character sets (see #7140).
 
 ### Fixed
