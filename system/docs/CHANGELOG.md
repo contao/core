@@ -5,6 +5,9 @@ Version 3.3.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Pass the file IDs instead of their UUIDs to the file picker (see #7139).
+
+### Fixed
 Correctly handle double quotes in comments (see #7102).
 
 ### Fixed
