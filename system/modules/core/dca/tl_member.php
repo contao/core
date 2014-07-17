@@ -36,8 +36,8 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'username' => 'index',
-				'email' => 'index',
+				'username' => 'unique',
+				'email' => 'unique',
 				'autologin' => 'unique',
 				'activation' => 'index'
 			)
@@ -267,7 +267,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'rgxp'=>'email', 'unique'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact', 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "varchar(255) NULL"
 		),
 		'website' => array
 		(
@@ -317,7 +317,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
-			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'password' => array
 		(
