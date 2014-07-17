@@ -303,12 +303,12 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::postRaw('password'), $this->password) == $this->password);
+			$blnAuthenticated = (crypt(\Input::postRaw('password'), $this->password) === $this->password);
 		}
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::postRaw('password'))) : ($strPassword == sha1($strSalt . \Input::postRaw('password')));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postRaw('password')));
 
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
