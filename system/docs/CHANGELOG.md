@@ -5,6 +5,9 @@ Version 3.3.4 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Restore permission to delete root pages for admin users (see #7135).
+
+### Fixed
 Pass the file IDs instead of their UUIDs to the file picker (see #7139).
 
 ### Fixed
