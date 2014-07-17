@@ -35,7 +35,7 @@ Handle double quotes in the title attribute of the `<link>` element (see #7124).
 Use the `save_callback` when generating multiple aliases (see #7114).
 
 ### Update
-Update SwiftMailer to version 5.2 (see #7110).
+Update SwiftMailer to version 5.2.1 (see #7110).
 
 ### Fixed
 Correctly handle double quotes in comments (see #7102).
