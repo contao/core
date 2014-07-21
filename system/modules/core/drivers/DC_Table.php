@@ -1123,9 +1123,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 													->set($vv)
 													->execute();
 
-					if ($objInsertStmt->affectedRows && (!empty($cctable[$k]) || $GLOBALS['TL_DCA'][$k]['list']['sorting']['mode'] == 5) && $kk != $parentId)
+					if ($objInsertStmt->affectedRows)
 					{
-						$this->copyChilds($k, $objInsertStmt->insertId, $kk, $parentId);
+						$insertID = $objInsertStmt->insertId;
+
+						if ((!empty($cctable[$k]) || $GLOBALS['TL_DCA'][$k]['list']['sorting']['mode'] == 5) && $kk != $parentId)
+						{
+							$this->copyChilds($k, $insertID, $kk, $parentId);
+						}
 					}
 				}
 			}
@@ -1475,6 +1480,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Delete the records
 		if ($objUndoStmt->affectedRows)
 		{
+			$insertID = $objUndoStmt->insertId;
+
 			// Call ondelete_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['ondelete_callback']))
 			{
@@ -1483,11 +1490,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this, $objUndoStmt->insertId);
+						$this->$callback[0]->$callback[1]($this, $insertID);
 					}
 					elseif (is_callable($callback))
 					{
-						$callback($this, $objUndoStmt->insertId);
+						$callback($this, $insertID);
 					}
 				}
 			}

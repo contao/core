@@ -570,7 +570,7 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
 				{
 					continue;
 				}
@@ -649,7 +649,7 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if ((substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
+					if (strncmp($strFile, '.', 1) === 0 || (substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
 					{
 						continue;
 					}
@@ -729,7 +729,7 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}

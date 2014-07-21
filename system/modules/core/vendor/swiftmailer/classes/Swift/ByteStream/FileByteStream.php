@@ -42,7 +42,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
      * Create a new FileByteStream for $path.
      *
      * @param string  $path
-     * @param boolean $writable if true
+     * @param bool    $writable if true
      */
     public function __construct($path, $writable = false)
     {
@@ -75,9 +75,9 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
      * remaining bytes are given instead. If no bytes are remaining at all, boolean
      * false is returned.
      *
-     * @param integer $length
+     * @param int     $length
      *
-     * @return string
+     * @return string|bool
      *
      * @throws Swift_IoException
      */
@@ -93,21 +93,29 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
                 ini_set('magic_quotes_runtime', 1);
             }
             $this->_offset = ftell($fp);
+            
+            // If we read one byte after reaching the end of the file
+            // feof() will return false and an empty string is returned
+            if ($bytes === '' && feof($fp)) {
+            	$this->_resetReadHandle();
+            	
+            	return false;
+            }
 
             return $bytes;
-        } else {
-            $this->_resetReadHandle();
-
-            return false;
         }
+
+        $this->_resetReadHandle();
+
+        return false;
     }
 
     /**
      * Move the internal read pointer to $byteOffset in the stream.
      *
-     * @param integer $byteOffset
+     * @param int     $byteOffset
      *
-     * @return boolean
+     * @return bool
      */
     public function setReadPointer($byteOffset)
     {

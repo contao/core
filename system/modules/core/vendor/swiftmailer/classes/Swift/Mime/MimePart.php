@@ -126,7 +126,7 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
     /**
      * Test if delsp is being used for this entity.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDelSp()
     {
@@ -138,7 +138,7 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
     /**
      * Turn delsp on or off for this entity.
      *
-     * @param boolean $delsp
+     * @param bool    $delsp
      *
      * @return Swift_Mime_MimePart
      */
@@ -203,7 +203,7 @@ class Swift_Mime_MimePart extends Swift_Mime_SimpleMimeEntity
         if (!in_array($charset, array('utf-8', 'iso-8859-1', ''))) {
             // mb_convert_encoding must be the first one to check, since iconv cannot convert some words.
             if (function_exists('mb_convert_encoding')) {
-                $string = mb_convert_encoding($string, $charset, 'utf-8');
+                $string = mb_convert_encoding($string, 'utf-8', $charset);
             } elseif (function_exists('iconv')) {
                 $string = iconv($charset, 'utf-8//TRANSLIT//IGNORE', $string);
             } else {
