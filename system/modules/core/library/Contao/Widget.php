@@ -620,9 +620,36 @@ abstract class Widget extends \BaseTemplate
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		$strAttributes = '';
+
+		foreach (array_keys($this->arrAttributes) as $strKey)
+		{
+			if (!in_array($strKey, $arrStrip))
+			{
+				$strAttributes .= $this->getAttribute($strKey);
+			}
+		}
+
+		return $strAttributes;
+	}
+
+
+	/**
+	 * Return a single attribute
+	 *
+	 * @param string $strKey The attribute name
+	 *
+	 * @return string The attribute markup
+	 */
+	public function getAttribute($strKey)
+	{
+		if (!isset($this->arrAttributes[$strKey]))
+		{
+			return '';
+		}
+
 		$blnIsXhtml = false;
 
-		// Remove HTML5 attributes in XHTML code
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
@@ -630,47 +657,39 @@ abstract class Widget extends \BaseTemplate
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$blnIsXhtml = true;
-				unset($this->arrAttributes['autofocus']);
-				unset($this->arrAttributes['placeholder']);
-				unset($this->arrAttributes['required']);
 			}
 		}
 
-		// Optionally strip certain attributes
-		if (is_array($arrStrip))
+		if ($blnIsXhtml)
 		{
-			foreach ($arrStrip as $strAttribute)
+			if ($strKey == 'autofocus' || $strKey == 'placeholder' || $strKey == 'required')
 			{
-				unset($this->arrAttributes[$strAttribute]);
+				return '';
 			}
 		}
 
-		$strAttributes = '';
+		$varValue = $this->arrAttributes[$strKey];
 
-		// Add the remaining attributes
-		foreach ($this->arrAttributes as $k=>$v)
+		if ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'required' || $strKey == 'autofocus' || $strKey == 'multiple')
 		{
-			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus' || $k == 'multiple')
+			if (TL_MODE == 'FE') // see #3878
 			{
-				if (TL_MODE == 'FE') // see #3878
-				{
-					$strAttributes .= $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
-				}
-				elseif ($k == 'disabled' || $k == 'readonly' || $k == 'multiple') // see #4131
-				{
-					$strAttributes .= ' ' . $k;
-				}
+				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
 			}
-			else
+			elseif ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'multiple') // see #4131
 			{
-				if ($v != '')
-				{
-					$strAttributes .= ' ' . $k . '="' . $v . '"';
-				}
+				return ' ' . $strKey;
+			}
+		}
+		else
+		{
+			if ($varValue != '')
+			{
+				return ' ' . $strKey . '="' . $varValue . '"';
 			}
 		}
 
-		return $strAttributes;
+		return '';
 	}
 
 
@@ -729,7 +748,7 @@ abstract class Widget extends \BaseTemplate
 		$arrParts = explode('[', str_replace(']', '', $strKey));
 
 		if (!empty($arrParts))
-    	{
+		{
 			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
 			foreach($arrParts as $part)
@@ -743,7 +762,7 @@ abstract class Widget extends \BaseTemplate
 			}
 
 			return $varValue;
-    	}
+		}
 
 		return \Input::$strMethod($strKey, $this->decodeEntities);
 	}

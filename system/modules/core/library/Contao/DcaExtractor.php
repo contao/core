@@ -412,7 +412,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = 'utf8';
+			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
 		}
 
 		// Meta

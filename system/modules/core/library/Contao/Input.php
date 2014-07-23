@@ -107,12 +107,12 @@ class Input
 			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
 
-			// Mark the parameter as used (see #4277)
-			if (!$blnKeepUnused)
-			{
-				unset(static::$arrUnusedGet[$strKey]);
-			}
+		// Mark the parameter as used (see #4277)
+		if (!$blnKeepUnused)
+		{
+			unset(static::$arrUnusedGet[$strKey]);
 		}
 
 		return static::$arrCache[$strCacheKey][$strKey];
