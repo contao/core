@@ -353,7 +353,7 @@ class InstallTool extends Backend
 		// The password has been generated with crypt()
 		if (Encryption::test($GLOBALS['TL_CONFIG']['installPassword']))
 		{
-			if (crypt(Input::postRaw('password'), $GLOBALS['TL_CONFIG']['installPassword']) == $GLOBALS['TL_CONFIG']['installPassword'])
+			if (crypt(Input::postRaw('password'), $GLOBALS['TL_CONFIG']['installPassword']) === $GLOBALS['TL_CONFIG']['installPassword'])
 			{
 				$this->setAuthCookie();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
@@ -363,7 +363,7 @@ class InstallTool extends Backend
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(Input::postRaw('password'))) : ($strPassword == sha1($strSalt . Input::postRaw('password')));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(Input::postRaw('password'))) : ($strPassword === sha1($strSalt . Input::postRaw('password')));
 
 			if ($blnAuthenticated)
 			{
