@@ -11,7 +11,7 @@
           <?php if ($year == $this->activeYear): ?>
             <span class="active"><?php echo $year; ?></span>
           <?php else: ?>
-            <a href="<?php echo $this->url; ?>year=<?php echo $year; ?>"><?php echo $year; ?></a>
+            <a href="<?php echo $this->url; ?>year=<?php echo $year; ?>" title="<?php echo $year; ?>"><?php echo $year; ?></a>
           <?php endif; ?>
           <ul class="level_2">
             <?php foreach ($months as $month): ?>
