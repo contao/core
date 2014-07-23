@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly mark GET parameters as used (see #7185).
+
+### Fixed
 Correctly apply the "disabled" attribute to input unit fields (see #7147).
 
 ### Fixed
