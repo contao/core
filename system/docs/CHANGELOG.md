@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly apply the "disabled" attribute to input unit fields (see #7147).
+
+### Fixed
 Correctly check the permission to edit multiple files (see #7157).
 
 ### Fixed
