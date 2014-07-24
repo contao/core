@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Always prevent saving if `PageModel::loadDetails()` is executed (see #7199).
+
+### Fixed
 Use `===` to compare password hashes (see #7175).
 
 ### Fixed
