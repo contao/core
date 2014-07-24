@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Preserve new lines when replacing simple tokens (see #7178).
+
+### Fixed
 Always prevent saving if `PageModel::loadDetails()` is executed (see #7199).
 
 ### Fixed

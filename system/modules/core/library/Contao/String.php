@@ -508,6 +508,7 @@ class String
 		// Replace tokens
 		$strReturn = str_replace('?><br />', '?>', $strReturn);
 		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
+		$strReturn = str_replace("]; ?>\n", '] . "\n"; ?>' . "\n", $strReturn); // see #7178
 
 		// Eval the code
 		ob_start();
