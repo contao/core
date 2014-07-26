@@ -3,7 +3,9 @@
 <?php $this->block('content'); ?>
 
   <?php if (!$this->addBefore): ?>
-    <?php echo $this->text; ?>
+    <div class="content">
+      <?php echo $this->text; ?>
+    </div>
   <?php endif; ?>
 
   <?php if ($this->addImage): ?>
@@ -27,7 +29,9 @@
   <?php endif; ?>
 
   <?php if ($this->addBefore): ?>
-    <?php echo $this->text; ?>
+    <div class="content">
+      <?php echo $this->text; ?>
+    </div>
   <?php endif; ?>
 
 <?php $this->endblock(); ?>
