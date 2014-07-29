@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Make sure the default language file is loaded in the DCA extractor (see #7202).
+
+### Fixed
 Do not add unpublished FAQs to the XML sitemap (see #7210).
 
 ### Fixed
