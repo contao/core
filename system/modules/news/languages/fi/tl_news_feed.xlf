@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.show.1">
         <source>Show the details of feed ID %s</source>
-        <target>Näyttää lisätietoja syötteestä ID:llä %s</target>
+        <target>Näyttää lisätietoja syötteestä ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.edit.0">
         <source>Edit feed</source>
@@ -115,15 +115,15 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.edit.1">
         <source>Edit feed ID %s</source>
-        <target>Muokkaa syötettä ID:llä %s</target>
+        <target>Muokkaa syötettä ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.copy.0">
         <source>Duplicate feed</source>
-        <target>Kopioi syöte toisella nimellä</target>
+        <target>Kopioi syöte</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.copy.1">
         <source>Duplicate feed ID %s</source>
-        <target>Kopioi syöte ID:llä %s toisella nimellä</target>
+        <target>Kopioi syöte ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.delete.0">
         <source>Delete feed</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.delete.1">
         <source>Delete feed ID %s</source>
-        <target>Poista syöte ID:llä %s</target>
+        <target>Poista syöte ID %s</target>
       </trans-unit>
     </body>
   </file>

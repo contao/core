@@ -138,12 +138,12 @@
         <target>Endatescha il num da datoteca da la sitemap (senza extensiun da datoteca).</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Utilisar HTTPS en las sitemaps</target>
+        <source>Use HTTPS</source>
+        <target>Utilisar HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Generar las URLs da la sitemap per questa pagina cun &lt;em&gt;https://&lt;/em&gt;.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Generar las URLs da la sitemap per questa pagina cun &lt;em&gt;https://&lt;/em&gt; (p.ex. en las sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

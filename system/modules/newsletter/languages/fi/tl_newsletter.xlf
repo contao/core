@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.template.0">
         <source>E-mail template</source>
-        <target>Viestin sivupohja</target>
+        <target>Viestin mallipohja</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.template.1">
         <source>Here you can choose the e-mail template.</source>
-        <target>Täällä voit valita viestin sivupohjan.</target>
+        <target>Täällä voit valita viestin mallipohjan.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.sendText.0">
         <source>Send as plain text</source>
@@ -215,11 +215,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter.copy.0">
         <source>Duplicate newsletter</source>
-        <target>Kahdenna uutiskirje</target>
+        <target>Kopioi uutiskirje</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.copy.1">
         <source>Duplicate newsletter ID %s</source>
-        <target>Kahdenna uutiskirje ID %s</target>
+        <target>Kopioi uutiskirje ID %s</target>
       </trans-unit>
       <trans-unit id="tl_newsletter.cut.0">
         <source>Move newsletter</source>

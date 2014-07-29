@@ -139,11 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.copy.0">
         <source>Duplicate style sheet</source>
-        <target>Kahdenna tyylisivu</target>
+        <target>Kopioi tyylisivu</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.copy.1">
         <source>Duplicate style sheet ID %s</source>
-        <target>Kahdenna tyylisivu ID %s</target>
+        <target>Kopioi tyylisivu ID %s</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.delete.0">
         <source>Delete style sheet</source>

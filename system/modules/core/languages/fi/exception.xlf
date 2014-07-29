@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
-        <target>Tämä virhe tapahtuu, jos POST-pyyntö on ilman kelvollista todennustunnusta. Contao 2.10 versiossa viittaustarkistus on korvattu todennustunnusjärjestelmällä. Jos ongelmia ilmenee, saatat käyttää epäyhteensopiaa kolmannen osapuolen laajennosta tai Contao-asennus on päivitetty virheellisesti.</target>
+        <target>Tämä virhe tapahtuu, jos POST-pyyntö on ilman kelvollista todennustunnusta. Contao 2.10 versiossa viittaustarkistus on korvattu todennustunnusjärjestelmällä. Jos ongelmia ilmenee, saatat käyttää epäyhteensopiaa kolmannen osapuolen lisäosaa tai Contao-asennus on päivitetty virheellisesti.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainTwo">
         <source>For more information, search the &lt;a href=&quot;https://contao.org/faq.html&quot; target=&quot;_blank&quot;&gt;Contao FAQs&lt;/a&gt; or visit the &lt;a href=&quot;https://contao.org/support.html&quot; target=&quot;_blank&quot;&gt;Contao support page&lt;/a&gt;.</source>

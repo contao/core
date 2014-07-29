@@ -67,11 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_module.list_info_layout.0">
         <source>Details page template</source>
-        <target>Lisätiedot-sivun sivupohja</target>
+        <target>Lisätiedot-sivun mallipohja</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_layout.1">
         <source>Here you can select the details page template.</source>
-        <target>Tästä voit valita lisätiedot-sivun sivupohjan.</target>
+        <target>Tästä voit valita lisätiedot-sivun mallipohjan.</target>
       </trans-unit>
     </body>
   </file>

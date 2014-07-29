@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.show.1">
         <source>Show the details of calendar ID %s</source>
-        <target>Näytä lisätiedot kalenterista ID:llä %s</target>
+        <target>Näytä lisätiedot kalenterista ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.edit.0">
         <source>Edit calendar</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.edit.1">
         <source>Edit calendar ID %s</source>
-        <target>Muokkaa kalenteria ID:llä %s</target>
+        <target>Muokkaa kalenteria ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.0">
         <source>Edit calendar settings</source>
@@ -171,15 +171,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.1">
         <source>Edit the settings of calendar ID %s</source>
-        <target>Muokkaa kalenterin asetuksia ID:llä %s</target>
+        <target>Muokkaa kalenterin asetuksia ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.0">
         <source>Duplicate calendar</source>
-        <target>Kopioi kalenteri toisella nimellä</target>
+        <target>Kopioi kalenteri</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.1">
         <source>Duplicate calendar ID %s</source>
-        <target>Kopioi kalenteri ID:llä %s toisella nimellä</target>
+        <target>Kopioi kalenteri ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.delete.0">
         <source>Delete calendar</source>
@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.delete.1">
         <source>Delete calendar ID %s</source>
-        <target>Poista kalenteri ID:llä %s</target>
+        <target>Poista kalenteri ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.0">
         <source>RSS feeds</source>

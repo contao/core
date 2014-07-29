@@ -523,11 +523,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.copy.0">
         <source>Duplicate field</source>
-        <target>Kahdenna kenttä</target>
+        <target>Kopioi kenttä</target>
       </trans-unit>
       <trans-unit id="tl_form_field.copy.1">
         <source>Duplicate field ID %s</source>
-        <target>Kahdenna kenttä ID %s</target>
+        <target>Kopioi kenttä ID %s</target>
       </trans-unit>
       <trans-unit id="tl_form_field.delete.0">
         <source>Delete field</source>

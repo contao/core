@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.copy.0">
         <source>Duplicate category</source>
-        <target>Kahdenna luokka</target>
+        <target>Kopioi luokka</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.copy.1">
         <source>Duplicate category ID %s</source>
-        <target>Kahdenna luokka ID %s</target>
+        <target>Kopioi luokka ID %s</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.delete.0">
         <source>Delete category</source>

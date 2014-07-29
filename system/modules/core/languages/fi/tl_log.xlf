@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_log.delete.1">
         <source>Delete entry ID %s</source>
-        <target>Poista kohde ID:llä %s</target>
+        <target>Poista kohde ID %s</target>
       </trans-unit>
     </body>
   </file>
