@@ -386,7 +386,7 @@ class Updater extends \Controller
 			$this->Database->query("ALTER TABLE `tl_layout` ADD `jquery` text NULL");
 		}
 
-		// Get all page layouts that use the moo_mediabox template
+		// Get all page layouts that use the moo_mediaelement template
 		$objLayout = $this->Database->query("SELECT `id`, `addJQuery`, `jquery`, `mootools` FROM `tl_layout` WHERE `addMooTools`=1 AND `mootools` LIKE '%\"moo_mediaelement\"%'");
 
 		// Activate the "j_mediaelement" template instead

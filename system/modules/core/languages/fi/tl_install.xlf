@@ -235,7 +235,7 @@
       </trans-unit>
       <trans-unit id="tl_install.templates">
         <source>Templates</source>
-        <target>Mallinteet</target>
+        <target>Mallipohjat</target>
       </trans-unit>
       <trans-unit id="tl_install.doNotTruncate">
         <source>Do not truncate tables</source>

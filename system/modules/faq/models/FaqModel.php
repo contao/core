@@ -63,6 +63,33 @@ class FaqModel extends \Model
 
 
 	/**
+	 * Find all published FAQs by their parent ID
+	 *
+	 * @param int   $intPid     The parent ID
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
+	 */
+	public static function findPublishedByPid($intPid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=?");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.published=1";
+		}
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
+	}
+
+
+	/**
 	 * Find all published FAQs by their parent IDs
 	 *
 	 * @param array $arrPids    An array of FAQ category IDs

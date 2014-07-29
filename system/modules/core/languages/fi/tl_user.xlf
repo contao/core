@@ -339,11 +339,11 @@
       </trans-unit>
       <trans-unit id="tl_user.copy.0">
         <source>Duplicate user</source>
-        <target>Kahdenna käyttäjä</target>
+        <target>Kopioi käyttäjä</target>
       </trans-unit>
       <trans-unit id="tl_user.copy.1">
         <source>Duplicate user ID %s</source>
-        <target>Kahdenna käyttäjä ID %s</target>
+        <target>Kopioi käyttäjä ID %s</target>
       </trans-unit>
       <trans-unit id="tl_user.delete.0">
         <source>Delete user</source>

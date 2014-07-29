@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_settings.repository_wsdl.0">
         <source>Extension repository URL</source>
-        <target>Laajennosvaraston URL</target>
+        <target>Lisäosakirjaston URL</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
-        <target>Tässä voi määritellä laajennosvaraston WSDL-tiedoston URL:in.</target>
+        <target>Tähän voit antaa lisäosakirjaston WSDL-tiedoston URL:in.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>
@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_listsize.0">
         <source>Extensions per page</source>
-        <target>Laajennosta per sivu</target>
+        <target>Lisäosia per sivu</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_listsize.1">
         <source>Here you can define the number of extensions per page.</source>
-        <target>Tässä voit määritellä näytettävien laajennosten lukumäärän per sivu.</target>
+        <target>Tässä voit määritellä yhdellä sivulla näytettävien lisäosien lukumäärän.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_unsafe_catalog.0">
         <source>Show incompatible extensions</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_legend">
         <source>Extension repository</source>
-        <target>Laajennosvarasto</target>
+        <target>Lisäosakirjasto</target>
       </trans-unit>
     </body>
   </file>

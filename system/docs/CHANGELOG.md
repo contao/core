@@ -1,6 +1,79 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.13 (2014-07-29)
+---------------------------
+
+### Fixed
+Use `DOMDocument::loadXML()` instead of `DOMDocument::load()` (see 7192).
+
+### Fixed
+Specify the font size in `rem` for modern browsers (see #7209).
+
+### Fixed
+Make sure the default language file is loaded in the DCA extractor (see #7202).
+
+### Fixed
+Do not add unpublished FAQs to the XML sitemap (see #7210).
+
+### Fixed
+Preserve new lines when replacing simple tokens (see #7178).
+
+### Fixed
+Always prevent saving if `PageModel::loadDetails()` is executed (see #7199).
+
+### Fixed
+Use `===` to compare password hashes (see #7175).
+
+### Fixed
+Correctly mark GET parameters as used (see #7185).
+
+### Fixed
+Correctly apply the "disabled" attribute to input unit fields (see #7147).
+
+### Fixed
+Correctly check the permission to edit multiple files (see #7157).
+
+### Fixed
+Correctly handle other MySQL character sets (see #7140).
+
+### Fixed
+Correctly recognize Opera Mobile in the `Environment` class (see #5869).
+
+### Fixed
+Fix the grid offset for articles (see #7166).
+
+### Fixed
+Restore the basic entities in the source editor (see #7170).
+
+### Fixed
+Correctly build the breadcrumb trail in the style sheets module (see #7132).
+
+### Fixed
+Do not associate the "use SSL" option with sitemaps only (see #7163).
+
+### Fixed
+URL encode the pipe character in the Google web font URL (see #7120).
+
+### Fixed
+Handle double quotes in the title attribute of the `<link>` element (see #7124).
+
+### Fixed
+Use the `save_callback` when generating multiple aliases (see #7114).
+
+### Update
+Update SwiftMailer to version 5.2.1 (see #7110).
+
+### Fixed
+Correctly handle double quotes in comments (see #7102).
+
+### Fixed
+Ignore hidden files when building the internal cache (see #7098).
+
+### Fixed
+Correctly pass the insert ID of the undo record (see #6234).
+
+
 Version 3.2.12 (2014-06-18)
 ---------------------------
 

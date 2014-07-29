@@ -315,7 +315,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.show.1">
         <source>Show the details of event ID %s</source>
-        <target>Näytä tapahtuman ID:llä s% lisätiedot</target>
+        <target>Näytä tapahtuman ID s% lisätiedot</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.edit.0">
         <source>Edit event</source>
@@ -323,15 +323,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.edit.1">
         <source>Edit event ID %s</source>
-        <target>Muokkaa tapahtumaa ID:llä %s</target>
+        <target>Muokkaa tapahtumaa ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.copy.0">
         <source>Duplicate event</source>
-        <target>Kopioi tapahtuma toisella nimellä</target>
+        <target>Kopioi tapahtuma</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.copy.1">
         <source>Duplicate event ID %s</source>
-        <target>Kopioi tapahtuma ID:llä %s toisella nimellä</target>
+        <target>Kopioi tapahtuma ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cut.0">
         <source>Move event</source>
@@ -339,7 +339,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.cut.1">
         <source>Move event ID %s</source>
-        <target>Siirrä tapahtuma ID:llä %s</target>
+        <target>Siirrä tapahtuma ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.delete.0">
         <source>Delete event</source>
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.delete.1">
         <source>Delete event ID %s</source>
-        <target>Poista tapahtuma ID:llä %s</target>
+        <target>Poista tapahtuma ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.toggle.0">
         <source>Publish/unpublish event</source>
@@ -355,7 +355,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.toggle.1">
         <source>Publish/unpublish event ID %s</source>
-        <target>Julkaise/piilota tapahtuma ID:llä %s</target>
+        <target>Julkaise/piilota tapahtuma ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.editheader.0">
         <source>Edit calendar</source>
@@ -379,7 +379,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.pasteafter.1">
         <source>Paste after event ID %s</source>
-        <target>Liitä tämän kalenterin ID:llä %s jälkeen</target>
+        <target>Liitä tämän kalenterin ID %s jälkeen</target>
       </trans-unit>
     </body>
   </file>

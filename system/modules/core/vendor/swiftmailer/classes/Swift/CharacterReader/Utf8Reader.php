@@ -20,23 +20,23 @@ class Swift_CharacterReader_Utf8Reader implements Swift_CharacterReader
 {
     /** Pre-computed for optimization */
     private static $length_map=array(
-        //N=0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x0N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x1N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x2N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x3N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x4N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x5N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x6N
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //0x7N
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, //0x8N
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, //0x9N
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, //0xAN
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, //0xBN
-        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, //0xCN
-        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, //0xDN
-        3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, //0xEN
-        4,4,4,4,4,4,4,4,5,5,5,5,6,6,0,0  //0xFN
+        // N=0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x0N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x1N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x2N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x3N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x4N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x5N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x6N
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, // 0x7N
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, // 0x8N
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, // 0x9N
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, // 0xAN
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, // 0xBN
+        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, // 0xCN
+        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2, // 0xDN
+        3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3, // 0xEN
+        4,4,4,4,4,4,4,4,5,5,5,5,6,6,0,0  // 0xFN
     );
 
     private static $s_length_map=array(
@@ -78,11 +78,11 @@ class Swift_CharacterReader_Utf8Reader implements Swift_CharacterReader
      * Returns the complete character map.
      *
      * @param string  $string
-     * @param integer $startOffset
+     * @param int     $startOffset
      * @param array   $currentMap
      * @param mixed   $ignoredChars
      *
-     * @return integer
+     * @return int
      */
     public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
     {
@@ -136,7 +136,7 @@ class Swift_CharacterReader_Utf8Reader implements Swift_CharacterReader
     /**
      * Returns mapType.
      *
-     * @return integer mapType
+     * @return int     mapType
      */
     public function getMapType()
     {
@@ -152,9 +152,9 @@ class Swift_CharacterReader_Utf8Reader implements Swift_CharacterReader
      * A value of -1 means this cannot possibly be a valid character.
      *
      * @param string  $bytes
-     * @param integer $size
+     * @param int     $size
      *
-     * @return integer
+     * @return int
      */
     public function validateByteSequence($bytes, $size)
     {
@@ -172,7 +172,7 @@ class Swift_CharacterReader_Utf8Reader implements Swift_CharacterReader
     /**
      * Returns the number of bytes which should be read to start each character.
      *
-     * @return integer
+     * @return int
      */
     public function getInitialByteSize()
     {

@@ -61,6 +61,7 @@ p {
 }
 #link {
 	font-size:13px;
+	font-size:.8125rem;
 	word-wrap:break-word;
 }
 .tl_submit {

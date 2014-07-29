@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.show.1">
         <source>Show the details of question ID %s</source>
-        <target>Näytä kysymyksen ID %s lisätiedot</target>
+        <target>Näytä kysymyksen ID %s tiedot</target>
       </trans-unit>
       <trans-unit id="tl_faq.edit.0">
         <source>Edit question</source>
@@ -123,11 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.copy.0">
         <source>Duplicate question</source>
-        <target>Kahdenna kysymys</target>
+        <target>Kopioi kysymys</target>
       </trans-unit>
       <trans-unit id="tl_faq.copy.1">
         <source>Duplicate question ID %s</source>
-        <target>Kahdenna kysymys ID %s</target>
+        <target>Kopioi kysymys ID %s</target>
       </trans-unit>
       <trans-unit id="tl_faq.cut.0">
         <source>Move question</source>

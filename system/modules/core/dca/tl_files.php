@@ -258,9 +258,12 @@ class tl_files extends Backend
 		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))
 		{
-			if (Input::get('act') == 'editAll' && !$f2)
+			if (Input::get('act') == 'editAll')
 			{
-				$session['CURRENT']['IDS'] = array();
+				if (!$f2)
+				{
+					$session['CURRENT']['IDS'] = array();
+				}
 			}
 
 			// Check delete permissions

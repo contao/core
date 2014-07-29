@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_module.news_template.0">
         <source>News template</source>
-        <target>Uutissivupohja</target>
+        <target>Uutismallipohja</target>
       </trans-unit>
       <trans-unit id="tl_module.news_template.1">
         <source>Here you can select the news template.</source>
-        <target>Tästä voit valita uutiselle sivupohjan</target>
+        <target>Tästä voit valita uutiselle mallipohjan</target>
       </trans-unit>
       <trans-unit id="tl_module.news_format.0">
         <source>Archive format</source>

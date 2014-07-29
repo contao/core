@@ -748,11 +748,11 @@ Ole hyvä ja klikkaa tätä linkkiä ##link## vaihtaaksesi salasanasi. Jos et py
       </trans-unit>
       <trans-unit id="tl_module.copy.0">
         <source>Duplicate module</source>
-        <target>Kahdenna moduuli</target>
+        <target>Kopioi moduuli</target>
       </trans-unit>
       <trans-unit id="tl_module.copy.1">
         <source>Duplicate module ID %s</source>
-        <target>Kahdenna moduuli ID %s</target>
+        <target>Kopioi moduuli ID %s</target>
       </trans-unit>
       <trans-unit id="tl_module.delete.0">
         <source>Delete module</source>

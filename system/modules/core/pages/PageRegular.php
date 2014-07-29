@@ -480,7 +480,7 @@ class PageRegular extends \Frontend
 		if ($objLayout->webfonts != '')
 		{
 			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts) . '"' . $strTagEnding . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets
@@ -615,7 +615,7 @@ class PageRegular extends \Frontend
 				while($objFeeds->next())
 				{
 					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . specialchars($objFeeds->title) . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -630,7 +630,7 @@ class PageRegular extends \Frontend
 				while($objFeeds->next())
 				{
 					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . specialchars($objFeeds->title) . '"' . $strTagEnding . "\n";
 				}
 			}
 		}

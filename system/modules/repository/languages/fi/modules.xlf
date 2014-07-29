@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="MOD.repository.0">
         <source>Extension Repository</source>
-        <target>Laajennosvarasto</target>
+        <target>Lisäosakirjasto</target>
       </trans-unit>
       <trans-unit id="MOD.repository.1">
         <source>The back end module of the Extension Repository</source>

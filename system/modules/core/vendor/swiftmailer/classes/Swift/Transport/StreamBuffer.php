@@ -153,7 +153,7 @@ class Swift_Transport_StreamBuffer extends Swift_ByteStream_AbstractFilterableIn
      * The $sequence number comes from any writes and may or may not be used
      * depending upon the implementation.
      *
-     * @param integer $sequence of last write to scan from
+     * @param int     $sequence of last write to scan from
      *
      * @return string
      *
@@ -185,9 +185,9 @@ class Swift_Transport_StreamBuffer extends Swift_ByteStream_AbstractFilterableIn
      * If less bytes exist than are requested the remaining bytes are given instead.
      * If no bytes are remaining at all, boolean false is returned.
      *
-     * @param integer $length
+     * @param int     $length
      *
-     * @return string|boolean
+     * @return string|bool
      *
      * @throws Swift_IoException
      */
@@ -228,10 +228,22 @@ class Swift_Transport_StreamBuffer extends Swift_ByteStream_AbstractFilterableIn
     /** Write this bytes to the stream */
     protected function _commit($bytes)
     {
-        if (isset($this->_in)
-            && fwrite($this->_in, $bytes))
-        {
-            return ++$this->_sequence;
+        if (isset($this->_in)) {
+            $bytesToWrite = strlen($bytes);
+            $totalBytesWritten = 0;
+
+            while ($totalBytesWritten < $bytesToWrite) {
+                $bytesWritten = fwrite($this->_in, substr($bytes, $totalBytesWritten));
+                if (false === $bytesWritten || 0 === $bytesWritten) {
+                    break;
+                }
+
+                $totalBytesWritten += $bytesWritten;
+            }
+
+            if ($totalBytesWritten > 0) {
+                return ++$this->_sequence;
+            }
         }
     }
 

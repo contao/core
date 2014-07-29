@@ -8,6 +8,11 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
+/* HTML */
+html {
+	font-size:100%;
+}
+
 /* Body */
 html,body,form,pre,figure,ul,li {
 	margin:0;
@@ -31,13 +36,16 @@ fieldset,form,input,optgroup,select,textarea {
 /* Font size and color */
 a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 	font-size:11px;
+	font-size:.6875rem;
 	color:#555;
 }
 fieldset,form,input,optgroup,select,textarea {
 	font-size:12px;
+	font-size:.75rem;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
+	font-size:.75rem;
 	color:#555;
 }
 table {
@@ -50,6 +58,7 @@ th,td {
 }
 .tl_small {
 	font-size:9px;
+	font-size:.5625rem;
 }
 .tl_small,.tl_gray {
 	color:#999;
@@ -187,6 +196,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 pre,.tl_textarea.monospace {
 	font-family:Courier,monospace;
 	font-size:12px;
+	font-size:.75rem;
 }
 .tl_textarea.monospace:focus {
 	background:none;
@@ -337,6 +347,7 @@ a.tl_submit {
 	padding:4px 12px 4px 13px;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
 	font-size:12px;
+	font-size:.75rem;
 	display:inline-block;
 }
 a.tl_submit:hover {

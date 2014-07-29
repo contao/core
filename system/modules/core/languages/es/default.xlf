@@ -252,11 +252,11 @@
       </trans-unit>
       <trans-unit id="SEC.question2">
         <source>What is the sum of %d and %d?</source>
-        <target>Cuanto suman %d y %d?</target>
+        <target>¿Cuánto suman %d y %d?</target>
       </trans-unit>
       <trans-unit id="SEC.question3">
         <source>Please calculate %d plus %d.</source>
-        <target>Por favor, calcula %d mas %d.</target>
+        <target>Por favor, calcula %d más %d.</target>
       </trans-unit>
       <trans-unit id="CTE.texts">
         <source>Text elements</source>
