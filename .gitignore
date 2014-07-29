@@ -29,6 +29,7 @@ nbproject/
 /system/cron/cron.txt
 /system/logs/*
 /system/modules/!composer
+/system/modules/*/.skip
 /system/tmp/*
 /templates/*
 /vendor/
