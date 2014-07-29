@@ -1502,5 +1502,6 @@ fieldset.collapsed > legend {
 }
 .dz-message span {
 	font-size:21px;
+	font-size:1.3125rem;
 	color:#ccc;
 }
