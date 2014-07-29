@@ -26,6 +26,28 @@ namespace Contao;
  *
  *     File::putContent('test.txt', 'This is a test');
  *
+ * @property int      $size        the file size
+ * @property string   $name        the file name and extension
+ * @property string   $dirname     the path of the parent folder
+ * @property string   $extension   the file extension
+ * @property string   $filename    the file name without extension
+ * @property string   $mime        the file's mime type
+ * @property string   $hash        the file's MD5 checksum
+ * @property int      $ctime       the file's ctime
+ * @property int      $mtime       the file's mtime
+ * @property int      $atime       the file's atime
+ * @property string   $icon        the name of the corresponding mime icon
+ * @property string   $path        the path to the file
+ * @property array    $imageSize   the image dimensions (images only; see getimagesize)
+ * @property int      $width       the file width (images only)
+ * @property int      $height      the file height (images only)
+ * @property bool     $isGdImage   true if the file can be handled by the GDlib
+ * @property bool     $isSvgImage  true if the file is a SVG
+ * @property int      $channels    the number of channels (images only)
+ * @property int      $bits        the number of bits for each color (images only)
+ * @property bool     $isRgbImage  true if the file is an RGB image
+ * @property bool     $isCmykImage true if the file is a CMYK image
+ * @property resource $handle      the file handle (returned by fopen())
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
@@ -160,9 +182,11 @@ class File extends \System
 	 * * atime:       the file's atime
 	 * * icon:        the name of the corresponding mime icon
 	 * * path:        the path to the file
+	 * * imageSize:   the image dimensions (images only; see getimagesize)
 	 * * width:       the file width (images only)
 	 * * height:      the file height (images only)
 	 * * isGdImage:   true if the file can be handled by the GDlib
+	 * * isSvgImage:  true if the file is a SVG
 	 * * channels:    the number of channels (images only)
 	 * * bits:        the number of bits for each color (images only)
 	 * * isRgbImage:  true if the file is an RGB image
@@ -248,24 +272,27 @@ class File extends \System
 				return $this->getIcon();
 				break;
 
-			case 'width':
+			case 'imageSize':
 				if (empty($this->arrImageSize))
 				{
 					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 				}
-				return $this->arrImageSize[0];
+				return $this->arrImageSize;
+
+			case 'width':
+				return $this->imageSize[0];
 				break;
 
 			case 'height':
-				if (empty($this->arrImageSize))
-				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-				}
-				return $this->arrImageSize[1];
+				return $this->imageSize[1];
 				break;
 
 			case 'isGdImage':
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+				break;
+
+			case 'isSvgImage':
+				return in_array($this->extension, array('svg', 'svgz'));
 				break;
 
             case 'channels':
