@@ -667,11 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>Sivupohja &lt;em&gt;%s&lt;/em&gt; pitää sisällyttää sivun ulkoasuun.</target>
+        <target>Mallipohja &lt;em&gt;%s&lt;/em&gt; pitää sisällyttää sivun ulkoasuun.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>Sivupohja &lt;em&gt;%s&lt;/em&gt; tai &lt;em&gt;%s&lt;/em&gt; pitää sisällyttää sivun ulkoasuun.</target>
+        <target>Mallipohja &lt;em&gt;%s&lt;/em&gt; tai &lt;em&gt;%s&lt;/em&gt; pitää sisällyttää sivun ulkoasuun.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>
@@ -699,11 +699,11 @@
       </trans-unit>
       <trans-unit id="tl_content.copy.0">
         <source>Duplicate element</source>
-        <target>Kahdenna elementti</target>
+        <target>Kopioi elementti</target>
       </trans-unit>
       <trans-unit id="tl_content.copy.1">
         <source>Duplicate content element ID %s</source>
-        <target>Kahdenna sisältöelementti ID %s</target>
+        <target>Kopioi sisältöelementti ID %s</target>
       </trans-unit>
       <trans-unit id="tl_content.delete.0">
         <source>Delete element</source>

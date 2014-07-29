@@ -175,11 +175,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.copy.0">
         <source>Duplicate archive</source>
-        <target>Kahdenna arkisto</target>
+        <target>Kopioi arkisto</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.copy.1">
         <source>Duplicate archive ID %s</source>
-        <target>Kahdenna arkisto ID %s</target>
+        <target>Kopioi arkisto ID %s</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.delete.0">
         <source>Delete archive</source>

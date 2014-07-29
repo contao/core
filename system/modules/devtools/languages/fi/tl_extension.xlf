@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.beTemplates.0">
         <source>Back end templates</source>
-        <target>Hallintaosion sivupohjat</target>
+        <target>Hallintaosion mallipohjat</target>
       </trans-unit>
       <trans-unit id="tl_extension.beTemplates.1">
         <source>Here you can enter a comma separated list of back end templates.</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.feTemplates.0">
         <source>Front end templates</source>
-        <target>Käyttäjäosion sivupohjat</target>
+        <target>Käyttäjäosion mallipohjat</target>
       </trans-unit>
       <trans-unit id="tl_extension.feTemplates.1">
         <source>Here you can enter a comma separated list of front end templates.</source>

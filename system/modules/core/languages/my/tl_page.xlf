@@ -138,12 +138,10 @@
         <target>နောက်ဆက်တွဲမပါဘဲဆိုက်မြေပံုဖိုင်နာမည်ထည့်။</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>ဆိုက်မြေပံုများတွင်အိပ်စ်တီတီပီအက်စ်သံုး</target>
+        <source>Use HTTPS</source>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>&lt;em&gt;https://&lt;/em&gt; ဖြင့်ယခုဝဘ်ဆိုက်ဆိုက်မြေပံုယူအာအယ်များထုတ်လုပ်။</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

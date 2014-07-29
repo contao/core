@@ -1761,7 +1761,7 @@ Deze e-mail is aangemaakt door Contao. U kunt niet rechtstreeks hierop antwoorde
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
-        <target>Contao draait momenteel in &lt;strong&gt; onderhouds modus &lt;/ strong&gt;, waarin de website (front-end) niet beschikbaar is. Schakel dit niet uit indien u momenteel extensies van derden aan het installeren of upgraden bent! De website zal mogelijk niet goed functioneren.</target>
+        <target>Contao draait momenteel in &lt;strong&gt;onderhoudsmodus&lt;/ strong&gt;, waarin de website (front-end) niet beschikbaar is. Schakel dit niet uit indien u momenteel extensies van derden aan het installeren of upgraden bent! De website zal mogelijk niet goed functioneren.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>

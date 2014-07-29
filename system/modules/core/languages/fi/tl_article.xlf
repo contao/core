@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_article.space.1">
         <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>Tähän voit syöttää pikseleinä tilan ennen ja jälkeen. Tätä tulisi kuitenkin välttää ja määritellä ne mieluummiin tyylitiedostoon.</target>
+        <target>Tähän voit syöttää pikseleinä tilan ennen ja jälkeen. Tätä tulisi kuitenkin välttää ja määritellä ne mieluummiin tyylisivuun.</target>
       </trans-unit>
       <trans-unit id="tl_article.published.0">
         <source>Publish article</source>

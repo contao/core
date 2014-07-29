@@ -159,7 +159,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.css.1">
         <source>Edit the style sheets of theme ID %s</source>
-        <target>Muokkaa teeman ID %s tyylitiedostoja</target>
+        <target>Muokkaa teeman ID %s tyylisivuja</target>
       </trans-unit>
       <trans-unit id="tl_theme.modules.0">
         <source>Modules</source>
