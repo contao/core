@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add unpublished FAQs to the XML sitemap (see #7210).
+
+### Fixed
 Preserve new lines when replacing simple tokens (see #7178).
 
 ### Fixed
