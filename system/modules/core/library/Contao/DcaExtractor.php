@@ -313,6 +313,12 @@ class DcaExtractor extends \Controller
 	 */
 	protected function createExtract()
 	{
+		// Load the default language file (see #7202)
+		if (empty($GLOBALS['TL_LANG']['MSC']))
+		{
+			System::loadLanguageFile('default');
+		}
+
 		// Load the data container
 		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
