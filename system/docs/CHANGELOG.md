@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Use `DOMDocument::loadXML()` instead of `DOMDocument::load()` (see 7192).
+
+### Fixed
 Specify the font size in `rem` for modern browsers (see #7209).
 
 ### Fixed
