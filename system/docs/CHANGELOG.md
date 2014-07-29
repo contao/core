@@ -5,6 +5,9 @@ Version 3.2.13 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Specify the font size in `rem` for modern browsers (see #7209).
+
+### Fixed
 Make sure the default language file is loaded in the DCA extractor (see #7202).
 
 ### Fixed
