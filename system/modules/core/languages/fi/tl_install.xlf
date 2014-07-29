@@ -83,7 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_install.repository.0">
         <source>Extension repository</source>
-        <target>Laajennosvarasto</target>
+        <target>Lisäosakirjasto</target>
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
         <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
@@ -243,7 +243,7 @@
       </trans-unit>
       <trans-unit id="tl_install.templates">
         <source>Templates</source>
-        <target>Mallinteet</target>
+        <target>Mallipohjat</target>
       </trans-unit>
       <trans-unit id="tl_install.doNotTruncate">
         <source>Do not truncate tables</source>

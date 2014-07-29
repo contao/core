@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="ERR.unique">
         <source>Duplicate entry in field &quot;%s&quot;!</source>
-        <target>Kopioi merkintä ID:llä %s toisella nimellä</target>
+        <target>Kopioi merkintä ID %s</target>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field &quot;%s&quot; must not be empty!</source>
@@ -839,7 +839,7 @@
       </trans-unit>
       <trans-unit id="MSC.lw_copy">
         <source>Duplicate the element</source>
-        <target>Kahdenna elementti</target>
+        <target>Kopioi elementti</target>
       </trans-unit>
       <trans-unit id="MSC.lw_up">
         <source>Move the element one position up</source>
@@ -871,7 +871,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_rcopy">
         <source>Duplicate the row</source>
-        <target>Kahdenna rivi</target>
+        <target>Kopioi rivi</target>
       </trans-unit>
       <trans-unit id="MSC.tw_rup">
         <source>Move the row one position up</source>
@@ -887,7 +887,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_ccopy">
         <source>Duplicate the column</source>
-        <target>Kahdenna sarake</target>
+        <target>Kopioi sarake</target>
       </trans-unit>
       <trans-unit id="MSC.tw_cmovel">
         <source>Move the column one position left</source>
@@ -903,7 +903,7 @@
       </trans-unit>
       <trans-unit id="MSC.ow_copy">
         <source>Duplicate the row</source>
-        <target>Kahdenna rivi</target>
+        <target>Kopioi rivi</target>
       </trans-unit>
       <trans-unit id="MSC.ow_up">
         <source>Move the row one position up</source>
@@ -1337,7 +1337,7 @@ Tämä viesti on Contaon generoima, eikä siihen voi vastata.
       </trans-unit>
       <trans-unit id="MSC.deleteConfirm">
         <source>Do you really want to delete entry ID %s?</source>
-        <target>Oletko varma, että haluat poistaa merkinnän ID:llä %s?</target>
+        <target>Oletko varma, että haluat poistaa merkinnän ID %s?</target>
       </trans-unit>
       <trans-unit id="MSC.delAllConfirm">
         <source>Do you really want to delete the selected records?</source>
@@ -1769,7 +1769,7 @@ Tämä viesti on Contaon generoima, eikä siihen voi vastata.
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
-        <target>Contao on tällä hetkellä &lt;strong&gt;huoltotilassa&lt;/strong&gt;, jolloin sivusto (julkinen puoli) ei ole käytettävissä. Älä sivustoa pois huoltotilasta jos asennat tai päivität kolmannen osapuolen lisäosia! Sivusto ei välttämättä toimi oikein.</target>
+        <target>Contao on tällä hetkellä &lt;strong&gt;huoltotilassa&lt;/strong&gt;, jolloin sivusto (julkinen puoli) ei ole käytettävissä. Älä ota sivustoa pois huoltotilasta jos asennat tai päivität kolmannen osapuolen lisäosia! Sivusto ei välttämättä toimi oikein.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>

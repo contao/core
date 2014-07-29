@@ -138,12 +138,12 @@
         <target>Saisir un nom pour le fichier (sans extension).</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Utiliser HTTPS dans les plans du site</target>
+        <source>Use HTTPS</source>
+        <target>Utiliser HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Générer les URLs du plan du site de ce site internet avec &lt;em&gt;https://&lt;/em&gt;.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Générer des URL avec &lt;em&gt;https://&lt;/em&gt; (par ex. dans les sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

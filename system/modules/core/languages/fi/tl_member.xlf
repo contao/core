@@ -251,7 +251,7 @@
       </trans-unit>
       <trans-unit id="tl_member.show.1">
         <source>Show the details of member ID %s</source>
-        <target>Näytä jäsenen ID %s lisätiedot</target>
+        <target>Näytä jäsenen ID %s tiedot</target>
       </trans-unit>
       <trans-unit id="tl_member.edit.0">
         <source>Edit member</source>
@@ -263,11 +263,11 @@
       </trans-unit>
       <trans-unit id="tl_member.copy.0">
         <source>Duplicate member</source>
-        <target>Kahdenna jäsen</target>
+        <target>Kopioi jäsen</target>
       </trans-unit>
       <trans-unit id="tl_member.copy.1">
         <source>Duplicate member ID %s</source>
-        <target>Kahdenna jäsen ID %s</target>
+        <target>Kopioi jäsen ID %s</target>
       </trans-unit>
       <trans-unit id="tl_member.delete.0">
         <source>Delete member</source>

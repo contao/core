@@ -559,11 +559,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.copy.0">
         <source>Duplicate layout</source>
-        <target>Kahdenna ulkoasu</target>
+        <target>Kopioi ulkoasu</target>
       </trans-unit>
       <trans-unit id="tl_layout.copy.1">
         <source>Duplicate layout ID %s</source>
-        <target>Kahdenna ulkoasu ID %s</target>
+        <target>Kopioi ulkoasu ID %s</target>
       </trans-unit>
       <trans-unit id="tl_layout.delete.0">
         <source>Delete layout</source>

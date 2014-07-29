@@ -313,6 +313,12 @@ class DcaExtractor extends \Controller
 	 */
 	protected function createExtract()
 	{
+		// Load the default language file (see #7202)
+		if (empty($GLOBALS['TL_LANG']['MSC']))
+		{
+			System::loadLanguageFile('default');
+		}
+
 		// Load the data container
 		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
@@ -412,7 +418,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = 'utf8';
+			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
 		}
 
 		// Meta

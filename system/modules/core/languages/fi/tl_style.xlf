@@ -591,11 +591,11 @@
       </trans-unit>
       <trans-unit id="tl_style.copy.0">
         <source>Duplicate format definition</source>
-        <target>Kahdenna tyylimääritys</target>
+        <target>Kopioi tyylimääritys</target>
       </trans-unit>
       <trans-unit id="tl_style.copy.1">
         <source>Duplicate format definition ID %s</source>
-        <target>Kahdenna tyylimääritys ID %s</target>
+        <target>Kopioi tyylimääritys ID %s</target>
       </trans-unit>
       <trans-unit id="tl_style.delete.0">
         <source>Delete format definition</source>

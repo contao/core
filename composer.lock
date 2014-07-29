@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "733424440580919082cab99725086652",
+    "hash": "2d0f88bcdad24251a718e1be564481fb",
     "packages": [
         {
             "name": "contao/idna",
@@ -79,12 +79,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/tcpdf.git",
-                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37"
+                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/tcpdf/zipball/2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
-                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
+                "url": "https://api.github.com/repos/contao/tcpdf/zipball/d0a2b268fe5b4d826ac09ff58b329547fda61198",
+                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198",
                 "shasum": ""
             },
             "require": {
@@ -93,9 +93,9 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "fonts",
-                    "config",
-                    "include",
+                    "fonts/",
+                    "config/",
+                    "include/",
                     "tcpdf.php",
                     "tcpdf_parser.php",
                     "tcpdf_import.php",
@@ -123,7 +123,7 @@
                 }
             ],
             "description": "TCPDF is a PHP class for generating PDF documents.",
-            "time": "2014-05-17 19:04:30"
+            "time": "2014-06-14 17:40:58"
         },
         {
             "name": "leafo/lessphp",
@@ -172,12 +172,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62"
+                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c4374574fbe39615754f6eed7ebb93882282d62",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
+                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
                 "shasum": ""
             },
             "require": {
@@ -210,7 +210,7 @@
             ],
             "description": "scssphp is a compiler for SCSS written in PHP.",
             "homepage": "http://leafo.net/scssphp/",
-            "time": "2014-05-09 00:07:45"
+            "time": "2014-07-07 23:27:37"
         },
         {
             "name": "leafo/scssphp-compass",
@@ -354,25 +354,28 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v4.3.1",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "ae540bed1079c07aa12e9e62d9d8d4fc49bbdff2"
+                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/ae540bed1079c07aa12e9e62d9d8d4fc49bbdff2",
-                "reference": "ae540bed1079c07aa12e9e62d9d8d4fc49bbdff2",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/2b9af56cc676c338d52fca4c657e5bdff73bb7af",
+                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "5.2-dev"
                 }
             },
             "autoload": {
@@ -382,7 +385,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "MIT"
             ],
             "authors": [
                 {
@@ -401,7 +404,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2013-04-11 10:22:09"
+            "time": "2014-06-13 11:44:54"
         }
     ],
     "packages-dev": [],

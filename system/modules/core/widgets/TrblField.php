@@ -129,9 +129,10 @@ class TrblField extends \Widget
 									$this->getAttributes());
 		}
 
-		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()">%s</select>%s',
+		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()"%s>%s</select>%s',
 						implode(' ', $arrFields),
 						$this->strName,
+						$this->getAttribute('disabled'),
 						implode('', $arrUnits),
 						$this->wizard);
 	}

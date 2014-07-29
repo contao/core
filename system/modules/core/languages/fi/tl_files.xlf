@@ -135,11 +135,11 @@
       </trans-unit>
       <trans-unit id="tl_files.copy.0">
         <source>Duplicate file or folder</source>
-        <target>Kahdenna tiedosto tai hakemisto</target>
+        <target>Kopioi tiedosto tai hakemisto</target>
       </trans-unit>
       <trans-unit id="tl_files.copy.1">
         <source>Duplicate file or folder &quot;%s&quot;</source>
-        <target>Kahdenna tiedosto tai hakemisto &quot;%s&quot;</target>
+        <target>Kopioi tiedosto tai hakemisto &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.edit.0">
         <source>Edit file or folder</source>

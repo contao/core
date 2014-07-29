@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.0">
         <source>Templates</source>
-        <target>Mallinteet</target>
+        <target>Mallipohjat</target>
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.1">
         <source>Edit templates in the back end</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="MOD.member.0">
         <source>Members</source>
-        <target>Jäsene</target>
+        <target>Jäsenet</target>
       </trans-unit>
       <trans-unit id="MOD.member.1">
         <source>Manage member accounts (front end users)</source>

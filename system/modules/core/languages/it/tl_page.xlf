@@ -138,12 +138,12 @@
         <target>Inserisci un nome per il file XML</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Utilizza HTTPS nel sitemap</target>
+        <source>Use HTTPS</source>
+        <target>Usa HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Genera il sitemap del sito con gli url con &lt;em&gt;https://&lt;/em&gt;</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Genera url con &lt;em&gt;https://&lt;/em&gt; (es. nel sitemap).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

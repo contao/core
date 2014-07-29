@@ -138,12 +138,12 @@
         <target>Введите имя файла карты веб-сайта без расширения.</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Использовать HTTPS в карте веб-сайта</target>
+        <source>Use HTTPS</source>
+        <target>Использовать HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Создать карту веб-сайта с &lt;em&gt;https://&lt;/em&gt; ссылками.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Создавать URL-адреса с &lt;em&gt;https://&lt;/em&gt; (напр., в файле sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

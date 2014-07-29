@@ -54,6 +54,7 @@ body {
 	padding:6px 0 8px 40px;
 	background:url("images/logo.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	color:#8ab858;
 }
 

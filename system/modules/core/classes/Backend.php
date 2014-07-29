@@ -479,35 +479,40 @@ abstract class Backend extends \Controller
 			}
 
 			// Correctly add the theme name in the style sheets module
-			if (strncmp(\Input::get('table'), 'tl_style', 8) === 0)
+			if (strncmp($strTable, 'tl_style', 8) === 0)
 			{
-				if (\Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select')
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
-											 ->limit(1)
-											 ->execute(\Input::get('id'));
-
-					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
-
-					if (\Input::get('table') == 'tl_style')
+					if ($strTable == 'tl_style_sheet')
 					{
-						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-												 ->limit(1)
-												 ->execute(CURRENT_ID);
-
-						$this->Template->headline .= ' » ' . $objRow->name;
+						$strQuery = "SELECT name FROM tl_theme WHERE id=?";
+					}
+					else
+					{
+						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
 					}
 				}
-				elseif (\Input::get('table') == 'tl_style')
+				else
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
-											 ->limit(1)
-											 ->execute(\Input::get('id'));
+					if ($strTable == 'tl_style_sheet')
+					{
+						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+					}
+					else
+					{
+						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))";
+					}
+				}
 
-					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+				$objRow = $this->Database->prepare($strQuery)
+										 ->limit(1)
+										 ->execute($dc->id);
 
+				$this->Template->headline .= ' » ' . $objRow->name;
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+
+				if ($strTable == 'tl_style')
+				{
 					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
 											 ->limit(1)
 											 ->execute(CURRENT_ID);
@@ -518,7 +523,7 @@ abstract class Backend extends \Controller
 			else
 			{
 				// Add the name of the parent element
-				if (\Input::get('table') && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrModule['tables']) && $strTable != $arrModule['tables'][0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
@@ -538,9 +543,9 @@ abstract class Backend extends \Controller
 				}
 
 				// Add the name of the submodule
-				if (\Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][\Input::get('table')]))
+				if ($strTable && isset($GLOBALS['TL_LANG']['MOD'][$strTable]))
 				{
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][\Input::get('table')];
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strTable];
 				}
 			}
 

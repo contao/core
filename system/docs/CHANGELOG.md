@@ -1,6 +1,28 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.4 (2014-07-29)
+--------------------------
+
+### Fixed
+Restore permission to delete root pages for admin users (see #7135).
+
+### Fixed
+Pass the file IDs instead of their UUIDs to the file picker (see #7139).
+
+### Fixed
+Correctly handle double quotes in comments (see #7102).
+
+### Fixed
+Ignore hidden files when building the internal cache (see #7098).
+
+### Fixed
+Correctly pass the insert ID of the undo record (see #6234).
+
+### Fixed
+Update the vendor libraries (fixes various issues).
+
+
 Version 3.3.3 (2014-06-18)
 --------------------------
 

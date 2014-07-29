@@ -95,11 +95,11 @@
       </trans-unit>
       <trans-unit id="tl_user_group.copy.0">
         <source>Duplicate group</source>
-        <target>Kahdenna ryhmä</target>
+        <target>Kopioi ryhmä</target>
       </trans-unit>
       <trans-unit id="tl_user_group.copy.1">
         <source>Duplicate group ID %s</source>
-        <target>Kahdenna ryhmä ID %s</target>
+        <target>Kopioi ryhmä ID %s</target>
       </trans-unit>
       <trans-unit id="tl_user_group.delete.0">
         <source>Delete group</source>

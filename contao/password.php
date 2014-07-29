@@ -87,7 +87,7 @@ class ChangePassword extends Backend
 			else
 			{
 				// Make sure the password has been changed
-				if (crypt($pw, $this->User->password) == $this->User->password)
+				if (crypt($pw, $this->User->password) === $this->User->password)
 				{
 					Message::addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
 				}
