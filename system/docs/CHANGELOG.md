@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.14 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Fix two issues with the extension repository theme.
+
+
 Version 3.2.13 (2014-07-29)
 ---------------------------
 
