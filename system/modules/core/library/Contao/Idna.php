@@ -41,7 +41,7 @@ class Idna
 	 */
 	public static function encode($strDomain)
 	{
-		$objIdn = new \idna_convert();
+		$objIdn = new \idna_convert(array('idn_version'=>2008));
 		return $objIdn->encode($strDomain);
 	}
 
@@ -55,7 +55,7 @@ class Idna
 	 */
 	public static function decode($strDomain)
 	{
-		$objIdn = new \idna_convert();
+		$objIdn = new \idna_convert(array('idn_version'=>2008));
 		return $objIdn->decode($strDomain);
 	}
 

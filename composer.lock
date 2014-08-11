@@ -4,42 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "733424440580919082cab99725086652",
+    "hash": "2579befe4507c70400e10f6cfe66a577",
     "packages": [
-        {
-            "name": "contao/idna",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/contao/idna.git",
-                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/contao/idna/zipball/176e7549aeac534f3be8dfbf8a543fd9c54b431c",
-                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "idna_convert.class.php",
-                    "uctc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1+"
-            ],
-            "authors": [
-                {
-                    "name": "Leo Feyer",
-                    "homepage": "https://github.com/leofeyer"
-                }
-            ],
-            "description": "A library for encoding and decoding internationalized domain names.",
-            "time": "2014-05-17 19:04:55"
-        },
         {
             "name": "contao/php-diff",
             "version": "dev-master",
@@ -79,12 +45,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/tcpdf.git",
-                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37"
+                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/tcpdf/zipball/2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
-                "reference": "2c7ed9ab1fc3cf4eab4db77a78abd628e0952e37",
+                "url": "https://api.github.com/repos/contao/tcpdf/zipball/d0a2b268fe5b4d826ac09ff58b329547fda61198",
+                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198",
                 "shasum": ""
             },
             "require": {
@@ -93,9 +59,9 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "fonts",
-                    "config",
-                    "include",
+                    "fonts/",
+                    "config/",
+                    "include/",
                     "tcpdf.php",
                     "tcpdf_parser.php",
                     "tcpdf_import.php",
@@ -123,7 +89,7 @@
                 }
             ],
             "description": "TCPDF is a PHP class for generating PDF documents.",
-            "time": "2014-05-17 19:04:30"
+            "time": "2014-06-14 17:40:58"
         },
         {
             "name": "leafo/lessphp",
@@ -172,29 +138,28 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62"
+                "reference": "10cda4bd3ab76623d18bfbb9731992670df9b00b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c4374574fbe39615754f6eed7ebb93882282d62",
-                "reference": "8c4374574fbe39615754f6eed7ebb93882282d62",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/10cda4bd3ab76623d18bfbb9731992670df9b00b",
+                "reference": "10cda4bd3ab76623d18bfbb9731992670df9b00b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": ">=5.3.0"
             },
             "require-dev": {
-                "php": ">=5.3.0",
                 "phpunit/phpunit": "3.7.*"
             },
             "bin": [
-                "pscss"
+                "bin/pscss"
             ],
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "scss.inc.php"
-                ]
+                "psr-4": {
+                    "Leafo\\ScssPhp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -210,7 +175,14 @@
             ],
             "description": "scssphp is a compiler for SCSS written in PHP.",
             "homepage": "http://leafo.net/scssphp/",
-            "time": "2014-05-09 00:07:45"
+            "keywords": [
+                "css",
+                "less",
+                "sass",
+                "scss",
+                "stylesheet"
+            ],
+            "time": "2014-08-10 03:44:06"
         },
         {
             "name": "leafo/scssphp-compass",
@@ -246,6 +218,52 @@
             "description": "Compass for scssphp",
             "homepage": "http://leafo.net/scssphp/",
             "time": "2012-08-02 02:04:32"
+        },
+        {
+            "name": "mabrahamde/idna-converter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mabrahamde/php-idna-converter.git",
+                "reference": "8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mabrahamde/php-idna-converter/zipball/8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64",
+                "reference": "8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/phlylabs/idna_convert.class.php",
+                    "src/phlylabs/uctc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Abraham",
+                    "email": "dev@mabraham.de",
+                    "homepage": "http://mabraham.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Converts domain names between UTF-8 and ASCII (punycode) notation. This is a fork of phlyLabs' pure PHP IDNA Converter",
+            "keywords": [
+                "domain",
+                "encode",
+                "idn",
+                "idna",
+                "lib"
+            ],
+            "time": "2013-12-05 18:00:20"
         },
         {
             "name": "michelf/php-markdown",
@@ -408,12 +426,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "contao/idna": 20,
         "contao/php-diff": 20,
         "contao/tcpdf": 20,
         "leafo/scssphp": 20,
-        "leafo/scssphp-compass": 20
+        "leafo/scssphp-compass": 20,
+        "mabrahamde/idna-converter": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.2"
     },
