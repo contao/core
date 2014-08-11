@@ -41,6 +41,10 @@
     <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
     <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/test-suite" />
     <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/tests" />
+    <delete dir="contao-${version}/vendor/tecnick.com/tcpdf/examples" />
+    <delete includeemptydirs="true">
+      <fileset dir="contao-${version}/vendor/tecnick.com/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
+    </delete>
   </target>
 
   <target name="archive">
