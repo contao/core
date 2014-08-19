@@ -49,7 +49,7 @@
         <div id="container">
 
           <?php $this->block('main'); ?>
-            <main id="main">
+            <main id="main" role="main">
               <div class="inside">
                 <?php echo $this->main; ?>
               </div>
