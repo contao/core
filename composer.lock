@@ -120,12 +120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "10cda4bd3ab76623d18bfbb9731992670df9b00b"
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/10cda4bd3ab76623d18bfbb9731992670df9b00b",
-                "reference": "10cda4bd3ab76623d18bfbb9731992670df9b00b",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c08da585537e97efd528c7d278463d2b9396371",
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371",
                 "shasum": ""
             },
             "require": {
@@ -139,6 +139,9 @@
             ],
             "type": "library",
             "autoload": {
+                "classmap": [
+                    "classmap.php"
+                ],
                 "psr-4": {
                     "Leafo\\ScssPhp\\": "src/"
                 }
@@ -164,7 +167,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2014-08-10 03:44:06"
+            "time": "2014-08-12 22:41:53"
         },
         {
             "name": "leafo/scssphp-compass",
@@ -362,16 +365,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.090",
+            "version": "6.0.091",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "e89673a4493e5cac837c59540e452f356529c1e3"
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/e89673a4493e5cac837c59540e452f356529c1e3",
-                "reference": "e89673a4493e5cac837c59540e452f356529c1e3",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a",
                 "shasum": ""
             },
             "require": {
@@ -421,7 +424,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-08-08 11:41:02"
+            "time": "2014-08-13 16:57:25"
         }
     ],
     "packages-dev": [],

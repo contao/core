@@ -27,22 +27,20 @@
     <exec executable="composer" dir="contao-${version}" failonerror="true">
       <arg value="install" />
       <arg value="--prefer-dist" />
+      <arg value="--no-dev" />
+      <arg value="--no-scripts" />
     </exec>
   </target>
 
   <target name="purge">
     <delete dir="contao-${version}/.tx" />
     <delete dir="contao-${version}/.git" />
-    <delete dir="contao-${version}/vendor/leafo/lessphp/site" />
-    <delete dir="contao-${version}/vendor/leafo/scssphp/tests" />
-    <delete dir="contao-${version}/vendor/leafo/scssphp/site" />
-    <delete dir="contao-${version}/vendor/simplepie/simplepie/demo" />
-    <delete dir="contao-${version}/vendor/simplepie/simplepie/tests" />
     <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
-    <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/test-suite" />
-    <delete dir="contao-${version}/vendor/swiftmailer/swiftmailer/tests" />
     <delete dir="contao-${version}/vendor/tecnick.com/tcpdf/examples" />
-    <delete includeemptydirs="true">
+    <delete includeemptydirs="true" verbose="true">
+      <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/tests/**" />
+    </delete>
+    <delete includeemptydirs="true" verbose="true">
       <fileset dir="contao-${version}/vendor/tecnick.com/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
     </delete>
   </target>
