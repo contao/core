@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly validate the page number of the versions menu (see #7235).
+
+### Fixed
 Handle underscores in the Google+ vanity name (see #7241).
 
 ### Fixed
