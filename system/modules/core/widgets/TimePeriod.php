@@ -119,6 +119,11 @@ class TimePeriod extends \Widget
 			return parent::optionSelected(1, 1);
 		}
 
+		if (empty($this->varValue) || !is_array($this->varValue))
+		{
+			return '';
+		}
+
 		return parent::optionSelected($arrOption['value'], $this->varValue['unit']);
 	}
 
