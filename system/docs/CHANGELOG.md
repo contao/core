@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle the `rem` unit when importing style sheets (see #7220).
+
+### Fixed
 Fix two issues with the extension repository theme.
 
 
