@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle underscores in the Google+ vanity name (see #7241).
+
+### Fixed
 Correctly handle the `rem` unit when importing style sheets (see #7220).
 
 ### Fixed
