@@ -5,6 +5,9 @@ Version 3.3.4 (2014-07-29)
 --------------------------
 
 ### Fixed
+Do not output an empty `label` tag (see #7249).
+
+### Fixed
 Restore permission to delete root pages for admin users (see #7135).
 
 ### Fixed

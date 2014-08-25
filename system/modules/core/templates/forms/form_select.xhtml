@@ -1,13 +1,15 @@
 <?php $this->extend('form_row'); ?>
 
 <?php $this->block('label'); ?>
-  <label for="ctrl_<?php echo $this->id; ?>"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
-    <?php if ($this->mandatory): ?>
-      <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
-    <?php else: ?>
-      <?php echo $this->label; ?>
-    <?php endif; ?>
-  </label>
+  <?php if ($this->label): ?>
+    <label for="ctrl_<?php echo $this->id; ?>"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
+      <?php if ($this->mandatory): ?>
+        <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
+      <?php else: ?>
+        <?php echo $this->label; ?>
+      <?php endif; ?>
+    </label>
+  <?php endif; ?>
 <?php $this->endblock(); ?>
 
 <?php $this->block('field'); ?>
