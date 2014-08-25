@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not reload after storing `CURRENT_ID` in the session (see #7240).
+
+### Fixed
 Correctly validate the page number of the versions menu (see #7235).
 
 ### Fixed
