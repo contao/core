@@ -483,7 +483,7 @@ class Versions extends \Backend
 		$intLast   = ceil($objTotal->count / 30);
 
 		// Validate the page number
-		if ($intPage < 1 || $intPage > $intLast)
+		if ($intPage < 1 || ($intLast > 0 && $intPage > $intLast))
 		{
 			header('HTTP/1.1 404 Not Found');
 		}

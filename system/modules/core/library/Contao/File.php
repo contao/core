@@ -268,29 +268,29 @@ class File extends \System
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
 				break;
 
-            case 'channels':
-                if (empty($this->arrImageSize))
-                {
-                    $this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-                }
-                return $this->arrImageSize['channels'];
-                break;
+			case 'channels':
+				if (empty($this->arrImageSize))
+				{
+					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrImageSize['channels'];
+				break;
 
-            case 'bits':
-                if (empty($this->arrImageSize))
-                {
-                    $this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-                }
-                return $this->arrImageSize['bits'];
-                break;
+			case 'bits':
+				if (empty($this->arrImageSize))
+				{
+					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+				}
+				return $this->arrImageSize['bits'];
+				break;
 
-            case 'isRgbImage':
-                return ($this->channels == 3);
-                break;
+			case 'isRgbImage':
+				return ($this->channels == 3);
+				break;
 
-            case 'isCmykImage':
-                return ($this->channels == 4);
-                break;
+			case 'isCmykImage':
+				return ($this->channels == 4);
+				break;
 
 			case 'handle':
 				if (!is_resource($this->resFile))
