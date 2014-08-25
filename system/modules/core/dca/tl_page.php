@@ -1097,11 +1097,17 @@ class tl_page extends Backend
 			return;
 		}
 
-		$this->Database->prepare("DELETE FROM tl_search_index WHERE pid IN(SELECT id FROM tl_search WHERE pid=?)")
-					   ->execute($dc->id);
+		$objResult = $this->Database->prepare("SELECT id FROM tl_search WHERE pid=?")
+									->execute($dc->id);
 
-		$this->Database->prepare("DELETE FROM tl_search WHERE pid=?")
-					   ->execute($dc->id);
+		while ($objResult->next())
+		{
+			$this->Database->prepare("DELETE FROM tl_search WHERE id=?")
+						   ->execute($objResult->id);
+
+			$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
+						   ->execute($objResult->id);
+		}
 	}
 
 
