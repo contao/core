@@ -110,6 +110,24 @@ class InputUnit extends \Widget
 
 
 	/**
+	 * Only check against the unit values (see #7246)
+	 *
+	 * @param array $arrOption The options array
+	 *
+	 * @return string The "selected" attribute or an empty string
+	 */
+	protected function isSelected($arrOption)
+	{
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
+		{
+			return parent::optionSelected(1, 1);
+		}
+
+		return parent::optionSelected($arrOption['value'], $this->varValue['unit']);
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
