@@ -775,7 +775,42 @@ abstract class Controller extends \System
 						break;
 					}
 
-					\System::loadLanguageFile($keys[0]);
+					$file = $keys[0];
+
+					// Map the key (see #7217)
+					switch ($file)
+					{
+						case 'CNT':
+							$file = 'countries';
+							break;
+
+						case 'LNG':
+							$file = 'languages';
+							break;
+
+						case 'MOD':
+						case 'FMD':
+							$file = 'modules';
+							break;
+
+						case 'FFL':
+							$file = 'tl_form_field';
+							break;
+
+						case 'CACHE':
+							$file = 'tl_page';
+							break;
+
+						case 'XPL':
+							$file = 'explain';
+							break;
+
+						case 'XPT':
+							$file = 'exception';
+							break;
+					}
+
+					\System::loadLanguageFile($file);
 
 					if (count($keys) == 2)
 					{
