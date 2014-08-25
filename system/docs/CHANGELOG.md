@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add image margins in the back end preview (see #7245).
+
+### Fixed
 Reset `$blnPreventSaving` when a model is cloned (see #7243).
 
 ### Fixed
