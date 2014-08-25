@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Reset `$blnPreventSaving` when a model is cloned (see #7243).
+
+### Fixed
 Do not reload after storing `CURRENT_ID` in the session (see #7240).
 
 ### Fixed
