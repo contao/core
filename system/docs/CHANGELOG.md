@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not adjust the start time of past events (see #7121).
+
+### Fixed
 Do not add image margins in the back end preview (see #7245).
 
 ### Fixed
