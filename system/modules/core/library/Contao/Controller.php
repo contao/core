@@ -2569,7 +2569,18 @@ abstract class Controller extends \System
 			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
+				{
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
+				}
+				else
+				{
+					$intMaxWidth = $intMaxWidth - $intMargin;
+				}
 			}
 
 			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))

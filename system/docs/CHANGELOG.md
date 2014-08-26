@@ -11,7 +11,7 @@ Allow floating point numbers in "number" input fields (see #7257).
 Do not adjust the start time of past events (see #7121).
 
 ### Fixed
-Do not add image margins in the back end preview (see #7245).
+Reset the image margins if it exceeds the maximum image size (see #7245).
 
 ### Fixed
 Reset `$blnPreventSaving` when a model is cloned (see #7243).
