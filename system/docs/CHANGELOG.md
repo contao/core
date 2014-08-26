@@ -5,6 +5,9 @@ Version 3.2.14 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Allow floating point numbers in "number" input fields (see #7257).
+
+### Fixed
 Do not adjust the start time of past events (see #7121).
 
 ### Fixed

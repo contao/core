@@ -136,6 +136,12 @@ class FormTextField extends \Widget
 			{
 				case 'digit':
 					$strType = 'number';
+
+					// Allow floats (see #7257)
+					if (!isset($this->arrAttributes['step']))
+					{
+						$this->addAttribute('step', 'any');
+					}
 					break;
 
 				case 'phone':
