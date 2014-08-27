@@ -208,7 +208,7 @@ abstract class Events extends \Module
 		$span = \Calendar::calculateSpan($intStart, $intEnd);
 
 		// Adjust the start time of a multi-day event (see #6802)
-		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin)
+		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin && $intBegin < $intEnd)
 		{
 			$intStart = $intBegin;
 		}

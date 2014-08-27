@@ -1,6 +1,37 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.14 (2014-08-27)
+---------------------------
+
+### Fixed
+Allow floating point numbers in "number" input fields (see #7257).
+
+### Fixed
+Do not adjust the start time of past events (see #7121).
+
+### Fixed
+Reset the image margins if it exceeds the maximum image size (see #7245).
+
+### Fixed
+Reset `$blnPreventSaving` when a model is cloned (see #7243).
+
+### Fixed
+Do not reload after storing `CURRENT_ID` in the session (see #7240).
+
+### Fixed
+Correctly validate the page number of the versions menu (see #7235).
+
+### Fixed
+Handle underscores in the Google+ vanity name (see #7241).
+
+### Fixed
+Correctly handle the `rem` unit when importing style sheets (see #7220).
+
+### Fixed
+Fix two issues with the extension repository theme.
+
+
 Version 3.2.13 (2014-07-29)
 ---------------------------
 

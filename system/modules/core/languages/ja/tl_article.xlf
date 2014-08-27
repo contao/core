@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaser.1">
         <source>The article teaser can also be displayed with the content element &quot;article teaser&quot;.</source>
-        <target>コンテンツ要素の「アーティクルのティーザー」でもアーティクルのティーザーは表示できます。</target>
+        <target>コンテント要素の「アーティクルのティーザー」でもアーティクルのティーザーは表示できます。</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
