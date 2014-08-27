@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>HTTP経由のフォルダーのアクセスを防止します。引き続き、例えば複数ダウンロードコンテンツ要素等でファイルを利用できます、</target>
+        <target>HTTP経由のフォルダーのアクセスを防止します。引き続き、例えば複数ダウンロードコンテント要素等でファイルを利用できます、</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
