@@ -272,7 +272,7 @@
         <source>Viewport</source>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <source>Here you can add a custom viewport (e.g. &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.0">
         <source>Title tag</source>

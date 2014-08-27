@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>ファイルの同期を適用しないフォルダー(例えば、&lt;em&gt;attachments、music_academy&lt;/em&gt;)をコンマで区切ったリストで指定します。指定したフォルダーに含まれるリソースはコンテンツ要素の画像やダウンロード等で使用できないことに注意してください。</target>
+        <target>ファイルの同期を適用しないフォルダー(例えば、&lt;em&gt;attachments、music_academy&lt;/em&gt;)をコンマで区切ったリストで指定します。指定したフォルダーに含まれるリソースはコンテント要素の画像やダウンロード等で使用できないことに注意してください。</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
