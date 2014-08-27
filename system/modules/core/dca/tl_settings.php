@@ -596,7 +596,7 @@ class tl_settings extends Backend
 				// Load the modules language file of disabled extensions
 				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 				{
-					eval(static::convertXlfToPhp($strFile . '.xlf', $lng));
+					static::convertXlfToPhp($strFile . '.xlf', $lng, true);
 				}
 				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 				{
