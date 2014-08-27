@@ -194,7 +194,7 @@ class ModuleBreadcrumb extends \Module
 		}
 
 		// Active page
-		else
+		elseif((!$pages[$i]['hide'] && $this->showHidden) || ($pages[$i]['published'] && BE_USER_LOGGED_IN))
 		{
 			$items[] = array
 			(
