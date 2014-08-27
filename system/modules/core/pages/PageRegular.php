@@ -167,8 +167,14 @@ class PageRegular extends \Frontend
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
 		$this->Template->pageTitle = str_replace('[-]', '', $this->Template->pageTitle);
 
+		// Fall back to the default title tag
+		if ($objLayout->titleTag == '')
+		{
+			$objLayout->titleTag = '{{page::pageTitle}} - {{page::rootPageTitle}}';
+		}
+
 		// Assign the title and description
-		$this->Template->title = $objLayout->titleTag ?: '{{page::pageTitle}} - {{page::rootPageTitle}}';
+		$this->Template->title = $this->replaceInsertTags($objLayout->titleTag); // see #7097
 		$this->Template->description = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), $objPage->description);
 
 		// Body onload and body classes
@@ -459,7 +465,7 @@ class PageRegular extends \Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$strStyleSheets .= \Template::generateStyleTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts, 'all', $blnXhtml) . "\n";
+			$strStyleSheets .= \Template::generateStyleTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts), 'all', $blnXhtml) . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets

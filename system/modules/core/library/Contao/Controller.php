@@ -785,7 +785,42 @@ abstract class Controller extends \System
 						break;
 					}
 
-					\System::loadLanguageFile($keys[0]);
+					$file = $keys[0];
+
+					// Map the key (see #7217)
+					switch ($file)
+					{
+						case 'CNT':
+							$file = 'countries';
+							break;
+
+						case 'LNG':
+							$file = 'languages';
+							break;
+
+						case 'MOD':
+						case 'FMD':
+							$file = 'modules';
+							break;
+
+						case 'FFL':
+							$file = 'tl_form_field';
+							break;
+
+						case 'CACHE':
+							$file = 'tl_page';
+							break;
+
+						case 'XPL':
+							$file = 'explain';
+							break;
+
+						case 'XPT':
+							$file = 'exception';
+							break;
+					}
+
+					\System::loadLanguageFile($file);
 
 					if (count($keys) == 2)
 					{
@@ -913,7 +948,7 @@ abstract class Controller extends \System
 						switch ($objNextPage->type)
 						{
 							case 'redirect':
-								$strUrl = $objNextPage->url;
+								$strUrl = $this->replaceInsertTags($objNextPage->url); // see #6765
 
 								if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 								{
@@ -2479,18 +2514,7 @@ abstract class Controller extends \System
 			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
 
-		// Provide an ID for single lightbox images in HTML5 (see #3742)
-		if ($strLightboxId === null && $arrItem['fullsize'])
-		{
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$strLightboxId = 'lightbox';
-			}
-			else
-			{
-				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
-			}
-		}
+		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
 
 		// Store the original dimensions
 		$objTemplate->width = $imgSize[0];
@@ -2499,12 +2523,21 @@ abstract class Controller extends \System
 		// Adjust the image size
 		if ($intMaxWidth > 0)
 		{
-			$arrMargin = deserialize($arrItem['imagemargin']);
-
 			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
+				{
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
+				}
+				else
+				{
+					$intMaxWidth = $intMaxWidth - $intMargin;
+				}
 			}
 
 			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
@@ -2524,6 +2557,19 @@ abstract class Controller extends \System
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' ' . $imgSize[3];
+		}
+
+		// Provide an ID for single lightbox images in HTML5 (see #3742)
+		if ($strLightboxId === null && $arrItem['fullsize'])
+		{
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$strLightboxId = 'lightbox';
+			}
+			else
+			{
+				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
+			}
 		}
 
 		// Float image
@@ -2575,7 +2621,7 @@ abstract class Controller extends \System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']));
+		$objTemplate->margin = static::generateMargin($arrMargin);
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;

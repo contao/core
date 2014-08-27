@@ -61,6 +61,12 @@ class DcaExtractor extends \Controller
 	protected $arrFields = array();
 
 	/**
+	 * Order fields
+	 * @var array
+	 */
+	protected $arrOrderFields = array();
+
+	/**
 	 * Keys
 	 * @var array
 	 */
@@ -157,6 +163,28 @@ class DcaExtractor extends \Controller
 	public function hasFields()
 	{
 		return !empty($this->arrFields);
+	}
+
+
+	/**
+	 * Return the order fields as array
+	 *
+	 * @return array The order fields array
+	 */
+	public function getOrderFields()
+	{
+		return $this->arrOrderFields;
+	}
+
+
+	/**
+	 * Return true if there are order fields
+	 *
+	 * @return boolean True if there are order fields
+	 */
+	public function hasOrderFields()
+	{
+		return !empty($this->arrOrderFields);
 	}
 
 
@@ -285,6 +313,12 @@ class DcaExtractor extends \Controller
 	 */
 	protected function createExtract()
 	{
+		// Load the default language file (see #7202)
+		if (empty($GLOBALS['TL_LANG']['MSC']))
+		{
+			System::loadLanguageFile('default');
+		}
+
 		// Load the data container
 		if (!isset($GLOBALS['loadDataContainer'][$this->strTable]))
 		{
@@ -384,7 +418,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = 'utf8';
+			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
 		}
 
 		// Meta
@@ -398,12 +432,18 @@ class DcaExtractor extends \Controller
 		if (!empty($fields))
 		{
 			$this->arrFields = array();
+			$this->arrOrderFields = array();
 
 			foreach ($fields as $field=>$config)
 			{
 				if (isset($config['sql']))
 				{
 					$this->arrFields[$field] = $config['sql'];
+				}
+
+				if (isset($config['eval']['orderField']))
+				{
+					$this->arrOrderFields[] = $config['eval']['orderField'];
 				}
 			}
 		}

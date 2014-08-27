@@ -13,6 +13,7 @@ nbproject/
 # Contao
 /.htaccess
 /*.xml
+/composer
 /contao/update.phar.php
 /files/*
 /assets/css/*
@@ -27,6 +28,8 @@ nbproject/
 /system/config/pathconfig.php
 /system/cron/cron.txt
 /system/logs/*
+/system/modules/!composer
+/system/modules/*/.skip
 /system/tmp/*
 /templates/*
 /vendor/

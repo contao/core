@@ -167,9 +167,6 @@ class FrontendIndex extends \Frontend
 			$objHandler->generate($objPage->id);
 		}
 
-		// Prevent the instance from being saved (see #6506)
-		$objPage->preventSaving();
-
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{

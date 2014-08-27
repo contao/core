@@ -107,12 +107,12 @@ class Input
 			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
 
-			// Mark the parameter as used (see #4277)
-			if (!$blnKeepUnused)
-			{
-				unset(static::$arrUnusedGet[$strKey]);
-			}
+		// Mark the parameter as used (see #4277)
+		if (!$blnKeepUnused)
+		{
+			unset(static::$arrUnusedGet[$strKey]);
 		}
 
 		return static::$arrCache[$strCacheKey][$strKey];
@@ -532,9 +532,9 @@ class Input
 		$varValue = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $varValue);
 
 		// Remove carriage returns
-      	$varValue = preg_replace('/\r+/', '', $varValue);
+		$varValue = preg_replace('/\r+/', '', $varValue);
 
-      	// Replace unicode entities
+		// Replace unicode entities
 		$varValue = utf8_decode_entities($varValue);
 
 		// Remove null bytes

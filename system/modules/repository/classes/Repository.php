@@ -28,7 +28,7 @@ require_once dirname(__FILE__).'/RepositorySettings.php';
 class Repository
 {
 
-    /**
+	/**
 	 * Array with status detail names.
 	 */
 	private static $mStatusName =

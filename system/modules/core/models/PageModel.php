@@ -614,7 +614,10 @@ class PageModel extends \Model
 			$this->datimFormat = \Config::get('datimFormat');
 		}
 
+		// Prevent saving (see #6506 and #7199)
+		$this->preventSaving();
 		$this->blnDetailsLoaded = true;
+
 		return $this;
 	}
 

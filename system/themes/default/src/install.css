@@ -54,6 +54,7 @@ body {
 	padding:8px 0 7px 36px;
 	background:url("images/install.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	color:#8ab858;
 }
 #container h2.important {
@@ -61,6 +62,7 @@ body {
 	padding:7px 0 8px 36px;
 	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	font-weight:bold;
 	color:#c33;
 }
@@ -68,12 +70,14 @@ body {
 	margin:0;
 	padding:18px 0 3px;
 	font-size:12px;
+	font-size:.75rem;
 	font-weight:bold;
 }
 #container h4 {
 	margin:12px 0 1px;
 	padding:0;
 	font-size:11px;
+	font-size:.6875rem;
 	font-weight:normal;
 }
 
@@ -131,6 +135,7 @@ li {
 }
 .mac #sql_table pre label {
 	font-size:12px;
+	font-size:.75rem;
 }
 .tl_col_0 {
 	padding:6px 0 2px;

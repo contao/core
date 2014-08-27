@@ -501,10 +501,17 @@ class DataContainer extends \Backend
 
 			if ($objFile->isGdImage)
 			{
+				$image = 'placeholder.png';
+
+				if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				{
+					$image = \Image::get($objFile->path, 80, 60, 'center_center');
+				}
+
 				$strPreview = '
 
 <div class="tl_edit_preview">
-' . \Image::getHtml(\Image::get($objFile->path, 700, 150, 'box')) . '
+' . \Image::getHtml($image) . '
 </div>';
 			}
 		}

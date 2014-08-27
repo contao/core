@@ -94,12 +94,12 @@ class ModuleCloseAccount extends \Module
 				// The password has been generated with crypt()
 				if (\Encryption::test($this->User->password))
 				{
-					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) == $this->User->password);
+					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) === $this->User->password);
 				}
 				else
 				{
 					list($strPassword, $strSalt) = explode(':', $this->User->password);
-					$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($objWidget->value)) : ($strPassword == sha1($strSalt . $objWidget->value));
+					$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1($objWidget->value)) : ($strPassword === sha1($strSalt . $objWidget->value));
 				}
 
 				if (!$blnAuthenticated)

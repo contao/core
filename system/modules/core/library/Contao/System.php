@@ -639,7 +639,9 @@ abstract class System
 		// Read the .xlf file
 		$xml = new \DOMDocument();
 		$xml->preserveWhiteSpace = false;
-		$xml->load(TL_ROOT . '/' . $strName);
+
+		// Use loadXML() instead of load() (see 7192)
+		$xml->loadXML(file_get_contents(TL_ROOT . '/' . $strName));
 
 		$return = "\n// $strName\n";
 		$units = $xml->getElementsByTagName('trans-unit');
