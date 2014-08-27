@@ -182,7 +182,7 @@ class BackendInstall extends \Backend
 		{
 			$this->importExampleWebsite();
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			\Config::remove('exampleWebsite');
 			$this->Template->importException = true;
@@ -475,7 +475,7 @@ class BackendInstall extends \Backend
 			$this->Database->listTables();
 			$this->Template->dbConnection = true;
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			$this->Template->dbConnection = false;
 			$this->Template->dbError = $e->getMessage();
@@ -529,7 +529,7 @@ class BackendInstall extends \Backend
 			{
 				$this->Database->query("ALTER DATABASE " . \Config::get('dbDatabase') . " DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
 			}
-			catch (Exception $e) {}
+			catch (\Exception $e) {}
 
 			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
 									   ->execute(\Config::get('dbDatabase'));
@@ -752,7 +752,7 @@ class BackendInstall extends \Backend
 				$this->Template->adminUser = \Input::post('username', true);
 			}
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			$this->Template->adminCreated = false;
 		}
@@ -815,7 +815,7 @@ class BackendInstall extends \Backend
 		{
 			\File::putContent('system/config/pathconfig.php', '<?php' . "\n\n// Relative path to the installation\nreturn " . var_export(TL_PATH, true) . ";\n");
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			log_message($e->getMessage());
 		}
