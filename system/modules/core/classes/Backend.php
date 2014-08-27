@@ -327,7 +327,6 @@ abstract class Backend extends \Controller
 		if ($id != $this->Session->get('CURRENT_ID'))
 		{
 			$this->Session->set('CURRENT_ID', $id);
-			$this->reload();
 		}
 
 		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));

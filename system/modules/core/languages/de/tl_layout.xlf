@@ -279,15 +279,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.cssClass.1">
         <source>Here you can add custom classes to the &amp;lt;body&amp;gt; tag.</source>
-        <target>Hier können Sie dem &amp;lt;body&amp;gt;-Tag individuelle Klassen hinzufügen.</target>
+        <target>Hier können Sie dem &amp;lt;body&amp;gt;-Tag eigene Klassen hinzufügen.</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.0">
         <source>Viewport</source>
         <target>Viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
-        <target>Hier können Sie den Viewport-Inhalt überschreiben (Standard: &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+        <source>Here you can add a custom viewport (e.g. &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Hier können Sie einen eigenen Viewport hinzufügen (z.B. &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.0">
         <source>Title tag</source>

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2d0f88bcdad24251a718e1be564481fb",
+    "hash": "f005f71a223747f9ed58bd6e0964fba6",
     "packages": [
         {
             "name": "contao/idna",
@@ -74,58 +74,6 @@
             "time": "2014-05-17 19:04:01"
         },
         {
-            "name": "contao/tcpdf",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/contao/tcpdf.git",
-                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/contao/tcpdf/zipball/d0a2b268fe5b4d826ac09ff58b329547fda61198",
-                "reference": "d0a2b268fe5b4d826ac09ff58b329547fda61198",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "fonts/",
-                    "config/",
-                    "include/",
-                    "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
-                    "tcpdf_barcodes_1d.php",
-                    "tcpdf_barcodes_2d.php",
-                    "include/tcpdf_colors.php",
-                    "include/tcpdf_filters.php",
-                    "include/tcpdf_font_data.php",
-                    "include/tcpdf_fonts.php",
-                    "include/tcpdf_images.php",
-                    "include/tcpdf_static.php",
-                    "include/barcodes/datamatrix.php",
-                    "include/barcodes/pdf417.php",
-                    "include/barcodes/qrcode.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPLv3"
-            ],
-            "authors": [
-                {
-                    "name": "Leo Feyer",
-                    "homepage": "https://github.com/leofeyer"
-                }
-            ],
-            "description": "TCPDF is a PHP class for generating PDF documents.",
-            "time": "2014-06-14 17:40:58"
-        },
-        {
             "name": "leafo/lessphp",
             "version": "v0.4.0",
             "source": {
@@ -172,29 +120,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14"
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
-                "reference": "76797bca1ba849cb9cd1420a9b68a4ef7472bc14",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c08da585537e97efd528c7d278463d2b9396371",
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": ">=5.3.0"
             },
             "require-dev": {
-                "php": ">=5.3.0",
                 "phpunit/phpunit": "3.7.*"
             },
             "bin": [
-                "pscss"
+                "bin/pscss"
             ],
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "scss.inc.php"
-                ]
+                    "classmap.php"
+                ],
+                "psr-4": {
+                    "Leafo\\ScssPhp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -210,7 +160,14 @@
             ],
             "description": "scssphp is a compiler for SCSS written in PHP.",
             "homepage": "http://leafo.net/scssphp/",
-            "time": "2014-07-07 23:27:37"
+            "keywords": [
+                "css",
+                "less",
+                "sass",
+                "scss",
+                "stylesheet"
+            ],
+            "time": "2014-08-12 22:41:53"
         },
         {
             "name": "leafo/scssphp-compass",
@@ -405,6 +362,69 @@
                 "mailer"
             ],
             "time": "2014-06-13 11:44:54"
+        },
+        {
+            "name": "tecnick.com/tcpdf",
+            "version": "6.0.091",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fonts",
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "time": "2014-08-13 16:57:25"
         }
     ],
     "packages-dev": [],
@@ -413,10 +433,10 @@
     "stability-flags": {
         "contao/idna": 20,
         "contao/php-diff": 20,
-        "contao/tcpdf": 20,
         "leafo/scssphp": 20,
         "leafo/scssphp-compass": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.2"
     },

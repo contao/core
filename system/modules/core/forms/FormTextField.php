@@ -124,6 +124,11 @@ class FormTextField extends \Widget
 					switch ($this->rgxp)
 					{
 						case 'digit':
+							// Allow floats (see #7257)
+							if (!isset($this->arrAttributes['step']))
+							{
+								$this->addAttribute('step', 'any');
+							}
 							return 'number';
 							break;
 
