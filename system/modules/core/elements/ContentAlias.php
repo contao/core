@@ -52,6 +52,10 @@ class ContentAlias extends \ContentElement
 		$objElement->typePrefix = 'ce_';
 
 		$objElement = new $strClass($objElement);
+		
+		foreach($objElement->arrData as $key => $value)
+			if(!in_array($key, array('type','pid')) && $this->$key)
+				$objElement->$key = $this->$key;
 
 		// Overwrite spacing and CSS ID
 		$objElement->space = $this->space;
