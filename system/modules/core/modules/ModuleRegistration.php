@@ -113,6 +113,16 @@ class ModuleRegistration extends \Module
 		$objCaptcha = null;
 		$doNotSubmit = false;
 
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
+
 		// Captcha
 		if (!$this->disableCaptcha)
 		{
@@ -281,7 +291,7 @@ class ModuleRegistration extends \Module
 			$strCaptcha = $objCaptcha->parse();
 
 			$this->Template->fields .= $strCaptcha;
-			$arrFields['captcha'] .= $strCaptcha;
+			$arrFields['captcha']['captcha'] .= $strCaptcha;
 		}
 
 		$this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -300,37 +310,20 @@ class ModuleRegistration extends \Module
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 		$this->Template->captchaDetails = $GLOBALS['TL_LANG']['MSC']['securityQuestion'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
-		$this->Template->captcha = $arrFields['captcha'];
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', \ModuleLoader::getActive()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', \ModuleLoader::getActive()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
+		$this->Template->captcha = $arrFields['captcha']['captcha']; // backwards compatibility
 	}
 
 

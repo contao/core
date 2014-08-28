@@ -111,6 +111,16 @@ class ModulePersonalData extends \Module
 		$hasUpload = false;
 		$row = 0;
 
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
+
 		$blnModified = false;
 		$objMember = \MemberModel::findByPk($this->User->id);
 
@@ -356,37 +366,20 @@ class ModulePersonalData extends \Module
 		$this->Template->contactDetails = $GLOBALS['TL_LANG']['tl_member']['contactDetails'];
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', \ModuleLoader::getActive()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', \ModuleLoader::getActive()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
 	}
 }
