@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.6 (2014-XX-XX)
+--------------------------
+
+### Fixed
+Set the correct path to TCPDF in `system/config/tcpdf.php` (see #7264).
+
+
 Version 3.3.5 (2014-08-27)
 --------------------------
 
