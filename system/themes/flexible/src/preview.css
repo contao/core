@@ -1,0 +1,107 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/* some resets */
+.contao_preview_bar div, .contao_preview_bar h1, .contao_preview_bar h2, .contao_preview_bar h3, .contao_preview_bar h4, .contao_preview_bar h5, .contao_preview_bar h6, .contao_preview_bar p, .contao_preview_bar blockquote, .contao_preview_bar pre, .contao_preview_bar code, .contao_preview_bar ol, .contao_preview_bar ul, .contao_preview_bar li, .contao_preview_bar dl, .contao_preview_bar dt, .contao_preview_bar dd, .contao_preview_bar figure, .contao_preview_bar table, .contao_preview_bar th, .contao_preview_bar td, .contao_preview_bar form, .contao_preview_bar fieldset, .contao_preview_bar legend, .contao_preview_bar input, .contao_preview_bar textarea {
+	margin:0;
+	padding:0;
+}
+.contao_preview_bar ul {
+	list-style-type:none;
+}
+.contao_preview_bar ul,
+.contao_preview_bar li {
+	float:left;
+}
+.contao_preview_bar *, .contao_preview_bar *:before, .contao_preview_bar *:after {
+	box-sizing:border-box;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:16px;
+	width:auto;
+}
+.contao_preview_bar input, .contao_preview_bar button, .contao_preview_bar textarea,.contao_preview_bar select {
+	font-family:inherit;
+	font-size:99%;
+	font-weight:inherit;
+}
+
+/* bar position */
+html {
+	margin-top:45px;
+}
+.contao_preview_bar {
+	height:24px;
+	position:absolute;
+	width:100%;
+	display:block;
+	top:0px;
+	padding:10px 0;
+	margin:0;
+	overflow:hidden;
+	background:#eee;
+	background-image:-moz-linear-gradient(top, #eee 15%, #ddd 100%);
+	background-image:-webkit-linear-gradient(top, #eee 15%, #ddd 100%);
+	background-image:-o-linear-gradient(top, #eee 15%, #ddd 100%);
+	background-image:-ms-linear-gradient(top, #eee 15%, #ddd 100%);
+	background-image:linear-gradient(to bottom, #eee 15%, #ddd 100%);
+	border-bottom:1px solid #111;
+}
+div.contao_preview_left {
+	float:left;
+	width:50%;
+	padding:0 2%;
+}
+div.contao_preview_right {
+	float:left;
+	width:50%;
+	padding:0 2%;
+}
+
+/* elements */
+.contao_preview_bar p {
+	margin:0;
+	line-height:20px;
+}
+div.contao_preview_right li {
+	padding:0 5px;
+	height:24px;
+}
+/* form */
+.contao_preview_bar input[type="text"],
+.contao_preview_bar input[type="submit"],
+.contao_preview_bar select {
+    padding: 2px 3px;
+	height:22px;
+	border:1px solid #aaa;
+}
+.contao_preview_bar input[type="submit"],
+.contao_preview_bar select {
+    padding: 1px 1px;
+}
+.contao_preview_bar input[type="submit"] {
+	font-size:90%;
+}
+.contao_preview_title {
+	float:left;
+}
+div.contao_preview_left ul {
+	padding:0 10px 0 30px;
+}
+
+/* Hide the labels on small devices */
+@media (max-width:1023px) {
+	div.contao_preview_left,
+	.contao_preview_bar label{
+		display:none;
+	}
+	div.contao_preview_right {
+		width:100%;
+	}
+}

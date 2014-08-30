@@ -360,6 +360,16 @@ abstract class Template extends \BaseTemplate
 		return $strDebug;
 	}
 
+	/**
+	 * Return the preview bar string
+	 *
+	 * @return string The preview bar markup
+	 */
+	protected function getPreviewBar()
+	{
+		$previewBar = new BackendPreview();
+		return $previewBar->generate();
+	}
 
 	/**
 	 * Minify the HTML markup preserving pre, script, style and textarea tags
