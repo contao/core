@@ -44,7 +44,6 @@ html {
 	top:0px;
 	padding:10px 0;
 	margin:0;
-	overflow:hidden;
 	background:#eee;
 	background-image:-moz-linear-gradient(top, #eee 15%, #ddd 100%);
 	background-image:-webkit-linear-gradient(top, #eee 15%, #ddd 100%);
@@ -52,6 +51,9 @@ html {
 	background-image:-ms-linear-gradient(top, #eee 15%, #ddd 100%);
 	background-image:linear-gradient(to bottom, #eee 15%, #ddd 100%);
 	border-bottom:1px solid #111;
+}
+.contao_preview_bar a {
+	color:#60584d;
 }
 div.contao_preview_left {
 	float:left;
@@ -77,13 +79,13 @@ div.contao_preview_right li {
 .contao_preview_bar input[type="text"],
 .contao_preview_bar input[type="submit"],
 .contao_preview_bar select {
-    padding: 2px 3px;
+	padding: 2px 3px;
 	height:22px;
 	border:1px solid #aaa;
 }
 .contao_preview_bar input[type="submit"],
 .contao_preview_bar select {
-    padding: 1px 1px;
+	padding: 1px 1px;
 }
 .contao_preview_bar input[type="submit"] {
 	font-size:90%;
@@ -91,8 +93,53 @@ div.contao_preview_right li {
 .contao_preview_title {
 	float:left;
 }
-div.contao_preview_left ul {
+div.contao_preview_left > ul {
 	padding:0 10px 0 30px;
+}
+
+/* navigation */
+ul.contao_preview_level_1 > li > ul,
+ul.contao_preview_level_2 > li > ul {
+	display:none;
+	border: 1px solid #eee;
+	position: absolute;
+	width: 170px;
+	z-index: 8888;
+	background: white;
+	top:30px;
+}
+ul.contao_preview_level_2 > li > ul {
+	left:170px;
+}
+ul.contao_preview_level_1 li ul li {
+	display:block;
+	float: none;
+}
+ul.contao_preview_level_1 li a{
+	padding-left:4px;
+	padding-right:4px;
+}
+ul.contao_preview_level_2 li a {
+	border-bottom: 1px solid #e1dad6;
+	border-top: 1px solid #fff;
+	clear: both;
+	display: block;
+	padding: 4px;
+	text-decoration: none;
+
+}
+ul.contao_preview_level_1 > li:hover > ul {
+	display:block;
+}
+ul.contao_preview_level_2 li:hover > ul{
+	display:block;
+}
+ul.contao_preview_level_1 .contao_preview_arrow {
+	display: none;
+}
+ul.contao_preview_level_2 span.contao_preview_arrow {
+	display:block;
+	float: right;
 }
 
 /* Hide the labels on small devices */

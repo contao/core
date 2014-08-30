@@ -288,6 +288,7 @@ TemplateLoader::addFiles(array
 	'be_picker'           => 'system/modules/core/templates/backend',
 	'be_popup'            => 'system/modules/core/templates/backend',
 	'be_preview'          => 'system/modules/core/templates/backend',
+	'be_preview_edit'     => 'system/modules/core/templates/backend',
 	'be_purge_data'       => 'system/modules/core/templates/backend',
 	'be_rebuild_index'    => 'system/modules/core/templates/backend',
 	'be_referer'          => 'system/modules/core/templates/backend',
