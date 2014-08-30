@@ -471,3 +471,55 @@ $GLOBALS['TL_ASSETS'] = array
 $GLOBALS['TL_MIME'] = array();
 $GLOBALS['TL_PERMISSIONS'] = array();
 $GLOBALS['TL_MODELS'] = array();
+
+/**
+ * Preview Bar
+ */
+$GLOBALS['TL_PREVIEW'] = array
+(
+	'page' => array
+	(
+		'edit'	             => 'do=page&act=edit',
+		'table'              => 'tl_page',
+		'subitems' => array
+		(
+			'article' => array
+			(
+				'editheader'         => 'do=article&act=edit',
+				'edit'               => 'do=article&table=tl_content',
+				'table'              => 'tl_article',
+				'subitems' => array
+				(
+					'content' => array
+					(
+						'edit'       => 'do=article&table=tl_content&act=edit',
+						'table'      => 'tl_content'
+					)
+				)
+			)
+		)
+	),
+	'layout' => array
+	(
+		'edit'               => 'do=themes&table=tl_layout&act=edit',
+		'table'              => 'tl_layout',
+		'subitems' => array
+		(
+			'themes' => array
+			(
+				'edit'		 => 'do=themes&act=edit',
+				'table'      => 'tl_theme'
+			),
+			'style_sheet' => array
+			(
+				'edit'       => 'do=themes&table=tl_style_sheet&act=edit',
+				'table'      => 'tl_style_sheet'
+			),
+			'module' => array
+			(
+				'edit'       => 'do=themes&table=tl_module&act=edit',
+				'table'      => 'tl_module'
+			)
+		)
+	)
+);

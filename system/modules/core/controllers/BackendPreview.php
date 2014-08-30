@@ -90,6 +90,14 @@ class BackendPreview extends Controller
 			$this->Template->isAdmin = $objUser->admin;
 		}
 
+		$objCurrentPage = $this->getCurrentPageModel();
+		$this->Template->editBar = false;
+		if ($objCurrentPage !== null)
+		{
+			$objCurrentPage->loadDetails();
+			$this->Template->editBar = $this->renderNavigation($GLOBALS['TL_PREVIEW'], $objCurrentPage);
+		}
+
 		return $this->Template->parse();
 	}
 
@@ -244,6 +252,169 @@ class BackendPreview extends Controller
 			}
 		}
 		$this->reload();
+	}
+
+	/**
+	 * get the current page model
+	 *
+	 * @return \PageModel
+	 */
+	protected function getCurrentPageModel()
+	{
+		$pageId = Frontend::getPageIdFromUrl();
+		$objRootPage = null;
+
+		// Load a website root page object if there is no page ID
+		if ($pageId === null)
+		{
+			$objRootPage = Frontend::getRootPageFromUrl();
+			$objHandler = new $GLOBALS['TL_PTY']['root']();
+			$pageId = $objHandler->generate($objRootPage->id, true);
+		}
+		// Throw a 404 error if the request is not a Contao request (see #2864)
+		else if ($pageId === false)
+		{
+			$objRootPage = Frontend::getRootPageFromUrl();
+			return PageModel::find404ByPid($objRootPage->id);
+		}
+
+		// Get the current page object(s)
+		return PageModel::findByIdOrAlias($pageId);
+	}
+
+	/**
+	 * Render teh navigation template
+	 *
+	 * @param array $arrNavigation
+	 * @param \Model $objCurrentModel
+	 * @param int $level
+	 *
+	 * @return String
+	 */
+	protected function renderNavigation($arrNavigation, $objCurrentModel, $level = 1)
+	{
+		$objTemplate = new BackendTemplate('be_preview_edit');
+		$objTemplate->level = 'contao_preview_level_' . $level++;
+		$arrResult = array();
+		foreach ($arrNavigation as $module => $config)
+		{
+			$this->loadLanguageFile($config['table']);
+
+			switch ($module)
+			{
+				case 'page':
+					$arrTmp = $this->generateLink($objCurrentModel->id, $config, 'edit', '', $objCurrentModel->title);
+					$arrTmp['subitems'] = $this->renderNavigation($config['subitems'], $objCurrentModel, $level);
+					$arrTmp['module'] = $module;
+					$arrResult[] = $arrTmp;
+					break;
+				case 'article':
+					if (($objArticle = ArticleModel::findByPid($objCurrentModel->id)) !== null)
+					{
+						while ($objArticle->next())
+						{
+							$objArticleCurrent = $objArticle->current();
+							$arrTmp = $this->generateLink($objArticleCurrent->id, $config, 'editheader', '', $objArticleCurrent->title);
+							$arrTmp['subitems'] = $this->renderNavigation($config['subitems'], $objArticleCurrent, $level);
+							$arrTmp['module'] = $module;
+							$arrResult[] = $arrTmp;
+						}
+					}
+					break;
+				case 'content':
+					if (($objContent = ContentModel::findByPid($objCurrentModel->id)) !== null)
+					{
+						while ($objContent->next())
+						{
+							$objContentCurrent = $objContent->current();
+							$arrTmp = $this->generateLink($objContentCurrent->id, $config, 'edit', '', $objContentCurrent->headline);
+							$arrTmp['module'] = $module;
+							$arrResult[] = $arrTmp;
+						}
+					}
+					break;
+				case 'themes':
+					if (($objTheme = ThemeModel::findByPk($objCurrentModel->pid)) !== null)
+					{
+						$arrTmp = $this->generateLink($objTheme->id, $config, 'edit', '', $objTheme->name);
+						$arrTmp['module'] = $module;
+						$arrResult[] = $arrTmp;
+					}
+					break;
+				case 'style_sheet':
+					break;
+				case 'module':
+					$arrModuleIds = deserialize($objCurrentModel->modules, true);
+					foreach ($arrModuleIds as $arrModule)
+					{
+
+						$objModule = \ModuleModel::findByPk($arrModule['mod']);
+						if ($objModule !== null)
+						{
+							$arrTmp = $this->generateLink($objModule->id, $config, 'edit', '', $objModule->name);
+							$arrTmp['module'] = $module;
+							$arrResult[] = $arrTmp;
+						}
+					}
+					break;
+				case 'layout':
+					$objLayout = $objCurrentModel->getRelated('layout');
+					if ($objLayout !== null)
+					{
+						$arrTmp = $this->generateLink($objLayout->id, $config, 'edit', '', $objLayout->title);
+						$arrTmp['subitems'] = $this->renderNavigation($config['subitems'], $objLayout, $level);
+						$arrTmp['module'] = $module;
+						$arrResult[] = $arrTmp;
+					}
+					break;
+				default;
+					// not implemented -> User action | Hook
+					break;
+			}
+		}
+		$objTemplate->items = $arrResult;
+		return !empty($arrResult) ? $objTemplate->parse() : '';
+	}
+
+	/**
+	 * generate the link array
+	 *
+	 * @param int $intId
+	 * @param array $arrConfig
+	 * @param String $strAct
+	 * @param String $strClass
+	 * @param String $strLinkText
+	 * @param String $strLinkTitle
+	 *
+	 * @return array
+	 */
+	protected function generateLink($intId, $arrConfig, $strAct, $strClass, $strLinkText = '', $strLinkTitle = '')
+	{
+		if ($strLinkText == '')
+		{
+			$strLinkText = sprintf($GLOBALS['TL_LANG'][$arrConfig['table']][$strAct][1], $intId);
+		}
+		else
+		{
+			$arrLinkText = deserialize($strLinkText);
+			if (!empty($arrLinkText) && isset($arrLinkText['value']) && $arrLinkText['value'] != '')
+			{
+				$strLinkText = $arrLinkText['value'];
+			}
+			elseif (is_array($arrLinkText))
+			{
+				$strLinkText = sprintf($GLOBALS['TL_LANG'][$arrConfig['table']][$strAct][1], $intId);
+			}
+		}
+		$strTitle = $strLinkTitle == '' ? $GLOBALS['TL_LANG'][$arrConfig['table']][$strAct][0] : $strLinkTitle;
+
+		return array(
+			'href' => Environment::get('base') . 'contao/main.php?' . $arrConfig[$strAct] . '&id=' . $intId . '&popup=1&nb=1&nm=1&rt=' . REQUEST_TOKEN,
+			'link' => $strLinkText,
+			'title' => $strTitle,
+			'class' => $strClass,
+			'onclick' => "contaoPreviewModal({'width':765,'title':'" . sprintf($GLOBALS['TL_LANG'][$arrConfig['table']][$strAct][1], $intId) . "','url':this.href});return false"
+		);
 	}
 
 }

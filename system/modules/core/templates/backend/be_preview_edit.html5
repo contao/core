@@ -1,0 +1,6 @@
+
+<ul class="<?php echo $this->level;?>">
+	<?php foreach ($this->items as $item):?>
+	<li<?php if ($item['class']):?> class="<?php echo $item['class'];?>"<?php endif;?>><?php echo $item['subitems'];?><a href="<?php echo $item['href'];?>" title="<?php echo $item['pageTitle'] ? : $item['title'];?>"<?php if ($item['class']):?> class="<?php echo $item['class'];?>"<?php endif;?><?php echo $item['target'];?> role="menuitem"<?php if (!empty($item['subitems'])):?> aria-haspopup="true"<?php endif;?><?php if ($item['onclick']):?> onclick="<?php echo $item['onclick'];?>"<?php endif;?>><?php echo $item['link'];?> (<?php echo $item['module']; ?>)<?php if ($item['subitems']): ?><span class="contao_preview_arrow">></span><?php endif; ?></a></li>
+	<?php endforeach;?>
+</ul>
