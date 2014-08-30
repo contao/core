@@ -398,9 +398,12 @@ class DcaExtractor extends \Controller
 			{
 				foreach ($arrTable['TABLE_CREATE_DEFINITIONS'] as $strKey)
 				{
-					$strKey = preg_replace('/^([A-Z]+ )?KEY .+\(`([^`]+)`\)$/', '$2 $1', $strKey);
-					list($field, $type) = explode(' ', $strKey);
-					$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					if(preg_match('/^([A-Z]+ )?KEY .+\(([^)]+)\)$/', $strKey, $arrMatches) && preg_match_all('/`([^`]+)`/', $arrMatches[2], $arrFields))
+					{
+						$type = trim($arrMatches[1]);
+						$field = implode(',', $arrFields[1]);
+						$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					}
 				}
 			}
 		}
