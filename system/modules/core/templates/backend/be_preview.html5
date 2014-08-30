@@ -21,6 +21,9 @@
             </li>
           <?php endif;?>
           <li>
+			  <label for="contao_preview_unpublished"><?php echo $this->hiddenElements; ?>:</label>
+          </li>
+          <li>
             <select name="preview_unpublished" id="contao_preview_unpublished">
               <option value="hide"><?php echo $this->lblHide;?></option>
               <option value="show"<?php if ($this->show) echo ' selected="selected"';?>><?php echo $this->lblShow;?></option>
