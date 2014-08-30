@@ -258,10 +258,12 @@ class BackendMain extends \Backend
 		// Front end preview links
 		if (defined('CURRENT_ID') && CURRENT_ID != '')
 		{
+			$pageId = 0;
+			$srtUrl = \Environment::get('base');
 			// Pages
 			if (\Input::get('do') == 'page')
 			{
-				$this->Template->frontendFile = '?page=' . CURRENT_ID;
+				$pageId = CURRENT_ID;
 			}
 
 			// Articles
@@ -269,9 +271,15 @@ class BackendMain extends \Backend
 			{
 				if (($objArticle = \ArticleModel::findByPk(CURRENT_ID)) !== null)
 				{
-					$this->Template->frontendFile = '?page=' . $objArticle->pid;
+					$pageId = $objArticle->pid;
 				}
 			}
+
+			if ($pageId > 0 && ($objPage = \PageModel::findWithDetails($pageId)) !== null)
+			{
+				$srtUrl = \Controller::generateFrontendUrl($objPage->row(), '', $objPage->language);
+			}
+			$this->Template->frontendFile = $srtUrl;
 		}
 
 		$this->Template->output();

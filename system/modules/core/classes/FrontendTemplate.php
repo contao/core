@@ -114,6 +114,8 @@ class FrontendTemplate extends \Template
 			throw new \UnusedArgumentsException();
 		}
 
+		$this->strBuffer = str_replace('</body>', $this->getPreviewBar() . '</body>', $this->strBuffer);
+
 		// Send the response to the client
 		parent::output();
 

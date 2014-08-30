@@ -1,11 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-  <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-</head>
-<frameset rows="33,*" frameborder="0" framespacing="0">
-  <frame src="switch.php" name="switch" frameborder="0" scrolling="no" noresize="noresize" />
-  <frame src="<?php echo $this->url; ?>" name="website" frameborder="0" noresize="noresize" />
-</frameset>
-</html>
+<div class="contao_preview_bar">
+  <div class="contao_preview_inside">
+    <div class="contao_preview_left">
+      <p class="contao_preview_title"><?php echo $this->fePreview;?></p>
+      <?php echo $this->editBar;?>
+    </div>
+    <div class="contao_preview_right">
+      <form action="<?php echo $this->action;?>" method="post">
+        <input type="hidden" name="FORM_SUBMIT" value="tl_switch">
+        <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN;?>">
+        <ul>
+          <?php if ($this->isAdmin):?>
+            <li>
+              <label for="ctrl_preview_user"><?php echo $this->feUser; ?>:</label>
+            </li>
+            <li>
+              <input type="text" name="preview_user" id="contao_preview_user" list="userlist" placeholder="<?php echo $this->username;?>" value="<?php echo $this->user;?>" autocomplete="off">
+              <datalist id="userlist">
+                <option value="-"></option>
+              </datalist>
+            </li>
+          <?php endif;?>
+          <li>
+            <select name="preview_unpublished" id="contao_preview_unpublished">
+              <option value="hide"><?php echo $this->lblHide;?></option>
+              <option value="show"<?php if ($this->show) echo ' selected="selected"';?>><?php echo $this->lblShow;?></option>
+            </select>
+          </li>
+          <li>
+            <input type="submit" value="<?php echo $this->apply; ?>">
+          </li>
+        </ul>
+      </form>
+    </div>
+    <link rel="stylesheet" href="<?php
+      $objCombiner = new Combiner();
+      $objCombiner->add('assets/mootools/stylect/css/stylect.css');
+      $objCombiner->add('assets/mootools/simplemodal/' . $GLOBALS['TL_ASSETS']['SIMPLEMODAL'] . '/css/simplemodal.css');
+      $objCombiner->add('system/themes/' . Backend::getTheme() . '/src/preview.css', filemtime(TL_ROOT . '/system/themes/' . Backend::getTheme() . '/src/preview.css'));
+      echo $objCombiner->getCombinedFile();
+    ?>">
+    <script><?php echo $this->getLocaleString();?></script>
+    <script src="<?php
+      $objCombiner = new Combiner();
+      $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+      $objCombiner->add('assets/mootools/simplemodal/' . SIMPLEMODAL . '/js/simplemodal.js', SIMPLEMODAL);
+      $objCombiner->add('assets/contao/js/preview-uncompressed.js', filemtime(TL_ROOT . '/assets/contao/js/preview-uncompressed.js'));
+      echo $objCombiner->getCombinedFile();
+    ?>">
+    </script>
+  </div>
+</div>
