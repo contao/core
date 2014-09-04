@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.6 (2014-XX-XX)
 --------------------------
 
+### Fixed
+Correctly mark CAPTCHA fields as mandatory (see #7283).
+
 ### Updated
 Updated the ACE editor to version 1.1.6 (see #7278).
 
