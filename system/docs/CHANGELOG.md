@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.15 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Correctly assign "col_first" and "col_last" in the image gallery (see #7250).
+
+
 Version 3.2.14 (2014-08-27)
 ---------------------------
 
