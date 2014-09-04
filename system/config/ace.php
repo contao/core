@@ -80,15 +80,19 @@ if ($GLOBALS['TL_CONFIG']['useCE']):
 ?>
 <script>
 window.addEvent('domready', function() {
-  var ta = $('<?php echo $arrField['id']; ?>');
+  var ta = document.getElementById('<?php echo $arrField['id']; ?>'),
+      dom = ace.require("ace/lib/dom");
 
-  var div = new Element('div', {
-    'id':'<?php echo $arrField['id']; ?>_div',
-    'class':ta.get('class')
-  }).inject(ta, 'after');
+  // Create a div to apply the editor to
+  var div = document.createElement('div');
+  div.id = '<?php echo $arrField['id']; ?>_div';
+  div.className = ta.get('class');
+  ta.parentNode.insertBefore(div, ta.nextSibling);
 
-  ta.setStyle('display', 'none');
+  // Hide the textarea
+  ta.style['display'] = 'none';
 
+  // Instantiate the editor
   var editor = ace.edit('<?php echo $arrField['id']; ?>_div');
   editor.setTheme("ace/theme/clouds");
   editor.renderer.setScrollMargin(3, 3, 0, 0);
@@ -96,12 +100,14 @@ window.addEvent('domready', function() {
   editor.getSession().setValue(ta.value);
   editor.getSession().setMode("ace/mode/<?php echo $arrField['type']; ?>");
   editor.getSession().setUseSoftTabs(false);
+  editor.setAutoScrollEditorIntoView(true);
 
+  // Add the fullscreen command
   editor.commands.addCommand({
     name: 'Fullscreen',
     bindKey: 'F11',
     exec: function(editor) {
-      editor.container.toggleClass('fullsize');
+      dom.toggleCssClass(document.body, 'ace-fullsize');
       editor.resize();
     }
   });
@@ -109,12 +115,13 @@ window.addEvent('domready', function() {
   // Disable command conflicts with AltGr (see #5792)
   editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null);
 
+  // Adjust the height of the editor
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
       * (editor.renderer.lineHeight || 14)
       + editor.renderer.scrollBar.getWidth();
-    editor.container.setStyle('height', Math.max(newHeight, editor.renderer.lineHeight) + 'px');
+    editor.container.style['height'] = Math.max(newHeight, editor.renderer.lineHeight) + 'px';
     editor.resize();
   };
 
