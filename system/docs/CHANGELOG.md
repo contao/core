@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Fix the `Database::list_fields()` method (see #7277).
+
+### Fixed
 Correctly assign "col_first" and "col_last" in the image gallery (see #7250).
 
 
