@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
+### Updated
+Updated the ACE editor to version 1.1.6 (see #7278).
+
 ### Fixed
 Fix the `Database::list_fields()` method (see #7277).
 
