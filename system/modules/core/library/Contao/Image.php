@@ -192,172 +192,11 @@ class Image
 			return \System::urlEncode($image);
 		}
 
-		$intPositionX = 0;
-		$intPositionY = 0;
-		$intWidth = $width;
-		$intHeight = $height;
+		$coordinates = static::computeResize($width, $height, $objFile->width, $objFile->height, $mode);
 
-		// Mode-specific changes
-		if ($intWidth && $intHeight)
-		{
-			switch ($mode)
-			{
-				case 'proportional':
-					if ($objFile->width >= $objFile->height)
-					{
-						unset($height, $intHeight);
-					}
-					else
-					{
-						unset($width, $intWidth);
-					}
-					break;
+		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
 
-				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
-					{
-						unset($height, $intHeight);
-					}
-					else
-					{
-						unset($width, $intWidth);
-					}
-					break;
-			}
-		}
-
-		$strNewImage = null;
-		$strSourceImage = null;
-
-		// Resize width and height and crop the image if necessary
-		if ($intWidth && $intHeight)
-		{
-			if (($intWidth * $objFile->height) != ($intHeight * $objFile->width))
-			{
-				$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
-				$intPositionX = -intval(($intWidth - $width) / 2);
-
-				if ($intWidth < $width)
-				{
-					$intWidth = $width;
-					$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
-					$intPositionX = 0;
-					$intPositionY = -intval(($intHeight - $height) / 2);
-				}
-			}
-
-			// Advanced crop modes
-			switch ($mode)
-			{
-				case 'left_top':
-					$intPositionX = 0;
-					$intPositionY = 0;
-					break;
-
-				case 'center_top':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = 0;
-					break;
-
-				case 'right_top':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = 0;
-					break;
-
-				case 'left_center':
-					$intPositionX = 0;
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'center_center':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'right_center':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = -intval(($intHeight - $height) / 2);
-					break;
-
-				case 'left_bottom':
-					$intPositionX = 0;
-					$intPositionY = -intval($intHeight - $height);
-					break;
-
-				case 'center_bottom':
-					$intPositionX = -intval(($intWidth - $width) / 2);
-					$intPositionY = -intval($intHeight - $height);
-					break;
-
-				case 'right_bottom':
-					$intPositionX = -intval($intWidth - $width);
-					$intPositionY = -intval($intHeight - $height);
-					break;
-			}
-
-			$strNewImage = imagecreatetruecolor($width, $height);
-		}
-
-		// Calculate the height if only the width is given
-		elseif ($intWidth)
-		{
-			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-		}
-
-		// Calculate the width if only the height is given
-		elseif ($intHeight)
-		{
-			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-		}
-
-		$arrGdinfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
-
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				if ($arrGdinfo['GIF Read Support'])
-				{
-					$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
-					$intTranspIndex = imagecolortransparent($strSourceImage);
-
-					// Handle transparency
-					if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
-					{
-						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
-						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagecolortransparent($strNewImage, $intTranspIndex);
-					}
-				}
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
-				{
-					$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
-				}
-				break;
-
-			case 'png':
-				if ($arrGdinfo['PNG Support'])
-				{
-					$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
-
-					// Handle transparency (GDlib >= 2.0 required)
-					if (version_compare($strGdVersion, '2.0', '>='))
-					{
-						imagealphablending($strNewImage, false);
-						$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagesavealpha($strNewImage, true);
-					}
-				}
-				break;
-		}
+		$strSourceImage = static::getGdImageFromFile($objFile);
 
 		// The new image could not be created
 		if (!$strSourceImage)
@@ -367,54 +206,20 @@ class Image
 			return null;
 		}
 
-		imageinterlace($strNewImage, 1); // see #6529
-		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
+		imagecopyresampled(
+			$strNewImage,
+			$strSourceImage,
+			$coordinates['target_x'],
+			$coordinates['target_y'],
+			0,
+			0,
+			$coordinates['target_width'],
+			$coordinates['target_height'],
+			$objFile->width,
+			$objFile->height
+		);
 
-		// Fallback to PNG if GIF ist not supported
-		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
-		{
-			$objFile->extension = 'png';
-		}
-
-		// Create the new image
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
-				break;
-
-			case 'png':
-				// Optimize non-truecolor images (see #2426)
-				if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
-				{
-					// TODO: make it work with transparent images, too
-					if (imagecolortransparent($strSourceImage) == -1)
-					{
-						$intColors = imagecolorstotal($strSourceImage);
-
-						// Convert to a palette image
-						// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
-						if ($intColors > 0 && $intColors < 256)
-						{
-							$wi = imagesx($strNewImage);
-							$he = imagesy($strNewImage);
-							$ch = imagecreatetruecolor($wi, $he);
-							imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
-							imagetruecolortopalette($strNewImage, false, $intColors);
-							imagecolormatch($ch, $strNewImage);
-							imagedestroy($ch);
-						}
-					}
-				}
-
-				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
-		}
+		static::saveGdImageToFile($strNewImage, TL_ROOT . '/' . $strCacheName, $objFile->extension);
 
 		// Destroy the temporary images
 		imagedestroy($strSourceImage);
@@ -435,6 +240,213 @@ class Image
 
 		// Return the path to new image
 		return \System::urlEncode($strCacheName);
+	}
+
+	protected static function computeResize($width, $height, $originalWidth, $originalHeight, $mode)
+	{
+		if (!$width && !$height)
+		{
+			$width = $originalWidth;
+		}
+
+		$targetX = 0;
+		$targetY = 0;
+		$targetWidth = $width;
+		$targetHeight = $height;
+
+		if ($mode === 'proportional' && $width && $height)
+		{
+			if ($originalWidth >= $originalHeight)
+			{
+				$targetHeight = null;
+			}
+			else
+			{
+				$targetWidth = null;
+			}
+		}
+
+		elseif ($mode === 'box' && $width && $height)
+		{
+			if ($originalHeight * $width / $originalWidth <= $targetHeight)
+			{
+				$targetHeight = null;
+			}
+			else
+			{
+				$targetWidth = null;
+			}
+		}
+
+		// Resize width and height and crop the image if necessary
+		if ($targetWidth && $targetHeight)
+		{
+			$targetWidth = max($originalWidth * $height / $originalHeight, 1);
+			$targetX = ($targetWidth - $width) / -2;
+
+			if ($targetWidth < $width)
+			{
+				$targetWidth = $width;
+				$targetHeight = max($originalHeight * $width / $originalWidth, 1);
+				$targetX = 0;
+				$targetY = ($targetHeight - $height) / -2;
+			}
+
+			// Advanced crop modes
+			switch ($mode)
+			{
+				case 'left_top':
+					$targetX = 0;
+					$targetY = 0;
+					break;
+
+				case 'center_top':
+					$targetY = 0;
+					break;
+
+				case 'right_top':
+					$targetX = $width - $targetWidth;
+					$targetY = 0;
+					break;
+
+				case 'left_center':
+					$targetX = 0;
+					break;
+
+				case 'right_center':
+					$targetX = $width - $targetWidth;
+					break;
+
+				case 'left_bottom':
+					$targetX = 0;
+					$targetY = $height - $targetHeight;
+					break;
+
+				case 'center_bottom':
+					$targetY = $height - $targetHeight;
+					break;
+
+				case 'right_bottom':
+					$targetX = $width - $targetWidth;
+					$targetY = $height - $targetHeight;
+					break;
+			}
+
+			$coordinates = array(
+				'width' => (int)round($width),
+				'height' => (int)round($height),
+			);
+		}
+
+		else
+		{
+			// Calculate the height if only the width is given
+			if ($targetWidth)
+			{
+				$targetHeight = max($originalHeight * $width / $originalWidth, 1);
+			}
+			// Calculate the width if only the height is given
+			elseif ($targetHeight)
+			{
+				$targetWidth = max($originalWidth * $height / $originalHeight, 1);
+			}
+
+			$coordinates = array(
+				'width' => (int)round($targetWidth),
+				'height' => (int)round($targetHeight),
+			);
+		}
+
+		$coordinates['target_x'] = (int)round($targetX);
+		$coordinates['target_y'] = (int)round($targetY);
+		$coordinates['target_width'] = (int)round($targetWidth);
+		$coordinates['target_height'] = (int)round($targetHeight);
+
+		return $coordinates;
+	}
+
+	protected static function createGdImage($width, $height)
+	{
+		$gdImage = imagecreatetruecolor($width, $height);
+
+		$arrGdinfo = gd_info();
+		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
+
+		// Handle transparency (GDlib >= 2.0 required)
+		if (version_compare($strGdVersion, '2.0', '>='))
+		{
+			imagealphablending($gdImage, false);
+			imagefill($gdImage, 0, 0, imagecolorallocatealpha($gdImage, 0, 0, 0, 127));
+			imagesavealpha($gdImage, true);
+		}
+
+		return $gdImage;
+	}
+
+	protected static function getGdImageFromFile($objFile)
+	{
+		$arrGdinfo = gd_info();
+		$strGdImage = null;
+
+		switch ($objFile->extension)
+		{
+			case 'gif':
+				if ($arrGdinfo['GIF Read Support'])
+				{
+					$strGdImage = imagecreatefromgif(TL_ROOT . '/' . $objFile->path);
+					$intTranspIndex = imagecolortransparent($strGdImage);
+				}
+				break;
+
+			case 'jpg':
+			case 'jpeg':
+				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
+				{
+					$strGdImage = imagecreatefromjpeg(TL_ROOT . '/' . $objFile->path);
+				}
+				break;
+
+			case 'png':
+				if ($arrGdinfo['PNG Support'])
+				{
+					$strGdImage = imagecreatefrompng(TL_ROOT . '/' . $objFile->path);
+				}
+				break;
+		}
+
+		return $strGdImage;
+	}
+
+	protected static function saveGdImageToFile($strGdImage, $path, $extension)
+	{
+		$arrGdinfo = gd_info();
+		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
+
+		// Fallback to PNG if GIF ist not supported
+		if ($extension == 'gif' && !$arrGdinfo['GIF Create Support'])
+		{
+			$extension = 'png';
+		}
+
+		// Create the new image
+		switch ($extension)
+		{
+			case 'gif':
+				// TODO: fix transparent GIFs
+				imagegif($strGdImage, $path);
+				break;
+
+			case 'jpg':
+			case 'jpeg':
+				imageinterlace($strNewImage, 1); // see #6529
+				imagejpeg($strGdImage, $path, (\Config::get('jpgQuality') ?: 80));
+				break;
+
+			case 'png':
+				// TODO: fix issue #2426
+				imagepng($strGdImage, $path);
+				break;
+		}
 	}
 
 
