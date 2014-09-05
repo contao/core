@@ -897,6 +897,7 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_name':
 					$strTarget = null;
 
 					// Back link
@@ -1022,6 +1023,10 @@ abstract class Controller extends \System
 
 						case 'link_target':
 							$arrCache[$strTag] = $strTarget;
+							break;
+
+						case 'link_name':
+							$arrCache[$strTag] = specialchars($strName);
 							break;
 					}
 					break;
