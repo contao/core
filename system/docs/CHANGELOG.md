@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Added the `|async` flag to `$GLOBALS['TL_JAVASCRIPT']` (see #7172).
+
 ### New
 Added the "link_name" insert tag (see #7218).
 

@@ -103,7 +103,7 @@ class ContentCode extends \ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/shCore.css||static';
+			$GLOBALS['TL_CSS'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/shCore.css|static';
 
 			// Add the JavaScripts
 			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/XRegExp.js';

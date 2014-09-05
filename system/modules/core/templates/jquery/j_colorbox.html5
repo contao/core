@@ -1,7 +1,7 @@
 <?php
 
 // Add the colorbox style sheet
-$GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. $GLOBALS['TL_ASSETS']['COLORBOX'] .'/css/colorbox.min.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/jquery/colorbox/'. $GLOBALS['TL_ASSETS']['COLORBOX'] .'/css/colorbox.min.css|static';
 
 ?>
 

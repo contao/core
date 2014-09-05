@@ -628,6 +628,58 @@ class String
 
 
 	/**
+	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
+	 *
+	 * @param string $url The URL
+	 *
+	 * @return \stdClass The options object
+	 */
+	public static function resolveFlaggedUrl(&$url)
+	{
+		$options = new \stdClass();
+
+		// Defaults
+		$options->static = false;
+		$options->media  = null;
+		$options->mtime  = null;
+		$options->async  = false;
+
+		$chunks = explode('|', $url);
+
+		// Remove the flags from the URL
+		$url = $chunks[0];
+
+		for ($i=1; $i<count($chunks); $i++)
+		{
+			switch ($chunks[$i])
+			{
+				case 'static':
+					$options->static = true;
+					break;
+
+				case 'async':
+					$options->async = true;
+					break;
+
+				case empty($chunks[$i]):
+					// Ignore
+					break;
+
+				case is_numeric($chunks[$i]):
+					$options->mtime = $chunks[$i];
+					break;
+
+				default:
+					$options->media = $chunks[$i];
+					break;
+			}
+		}
+
+		return $options;
+	}
+
+
+	/**
 	 * Prevent direct instantiation (Singleton)
 	 *
 	 * @deprecated String is now a static class
