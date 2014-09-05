@@ -166,6 +166,8 @@ class ModuleCustomnav extends \Module
 						break;
 				}
 
+				$trail = in_array($arrPage['id'], $objPage->trail);
+
 				// Active page
 				if ($objPage->id == $arrPage['id'])
 				{
@@ -173,6 +175,7 @@ class ModuleCustomnav extends \Module
 					$row = $arrPage;
 
 					$row['isActive'] = true;
+					$row['isTrail'] = false;
 					$row['class'] = trim('active ' . $strClass);
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
@@ -194,10 +197,11 @@ class ModuleCustomnav extends \Module
 				// Regular page
 				else
 				{
-					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . ($trail ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;
+					$row['isTrail'] = $trail;
 					$row['class'] = $strClass;
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);

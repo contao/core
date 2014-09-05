@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### New
+Added `$item['isTrail']` to the navigation menu templates (see #7096).
+
 ### Improved
 Handle `data-` and `ng-` attributes in `Widget::addAttributes()` (see #7095).
 
