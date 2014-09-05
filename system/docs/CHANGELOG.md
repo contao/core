@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Handle `data-` and `ng-` attributes in `Widget::addAttributes()` (see #7095).
+
 ### Changed
 Add the class "tableless" to the `member_` templates (see #7207).
 
