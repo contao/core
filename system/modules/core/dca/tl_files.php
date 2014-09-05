@@ -231,28 +231,28 @@ class tl_files extends Backend
 			$this->User->fop = array();
 		}
 
-		$f1 = $this->User->hasAccess('f1', 'fop');
-		$f2 = $this->User->hasAccess('f2', 'fop');
-		$f3 = $this->User->hasAccess('f3', 'fop');
-		$f4 = $this->User->hasAccess('f4', 'fop');
+		$canUpload = $this->User->hasAccess('f1', 'fop');
+		$canEdit = $this->User->hasAccess('f2', 'fop');
+		$canDeleteOne = $this->User->hasAccess('f3', 'fop');
+		$canDeleteRecursive = $this->User->hasAccess('f4', 'fop');
 
 		// Set the filemounts
 		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = $this->User->filemounts;
 
 		// Disable the upload button if uploads are not allowed
-		if (!$f1)
+		if (!$canUpload)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['closed'] = true;
 		}
 
 		// Disable the edit_all button
-		if (!$f2)
+		if (!$canEdit)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['notEditable'] = true;
 		}
 
 		// Disable the delete_all button
-		if (!$f3 && !$f4)
+		if (!$canDeleteOne && !$canDeleteRecursive)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['notDeletable'] = true;
 		}
@@ -264,7 +264,7 @@ class tl_files extends Backend
 		{
 			if (Input::get('act') == 'editAll')
 			{
-				if (!$f2)
+				if (!$canEdit)
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -282,14 +282,14 @@ class tl_files extends Backend
 					{
 						$folders[] = $id;
 
-						if ($f4 || ($f3 && count(scan(TL_ROOT . '/' . $id)) < 1))
+						if ($canDeleteRecursive || ($canDeleteOne && count(scan(TL_ROOT . '/' . $id)) < 1))
 						{
 							$delete_all[] = $id;
 						}
 					}
 					else
 					{
-						if (($f3 || $f4) && !in_array(dirname($id), $folders))
+						if (($canDeleteOne || $canDeleteRecursive) && !in_array(dirname($id), $folders))
 						{
 							$delete_all[] = $id;
 						}
@@ -301,7 +301,7 @@ class tl_files extends Backend
 		}
 
 		// Set allowed clipboard IDs
-		if (isset($session['CLIPBOARD']['tl_files']) && !$f2)
+		if (isset($session['CLIPBOARD']['tl_files']) && !$canEdit)
 		{
 			$session['CLIPBOARD']['tl_files'] = array();
 		}
@@ -315,7 +315,7 @@ class tl_files extends Backend
 			switch (Input::get('act'))
 			{
 				case 'move':
-					if (!$f1)
+					if (!$canUpload)
 					{
 						$this->log('No permission to upload files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
@@ -328,7 +328,7 @@ class tl_files extends Backend
 				case 'copyAll':
 				case 'cut':
 				case 'cutAll':
-					if (!$f2)
+					if (!$canEdit)
 					{
 						$this->log('No permission to create, edit, copy or move files', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
@@ -340,18 +340,18 @@ class tl_files extends Backend
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
 						$files = scan(TL_ROOT . '/' . $strFile);
-						if (!empty($files) && !$f4)
+						if (!empty($files) && !$canDeleteRecursive)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'" recursively', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
-						elseif (!$f3)
+						elseif (!$canDeleteOne)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'"', __METHOD__, TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
 						}
 					}
-					elseif (!$f3)
+					elseif (!$canDeleteOne)
 					{
 						$this->log('No permission to delete file "'.$strFile.'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
