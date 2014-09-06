@@ -98,6 +98,17 @@ class Image
 		// Load the image size from the database if $mode is an id
 		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
 		{
+			$fileRecord = \FilesModel::findByPath($image);
+			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+			{
+				$importantPart = array(
+					'x' => (int)$fileRecord->importantPartX,
+					'y' => (int)$fileRecord->importantPartY,
+					'width' => (int)$fileRecord->importantPartWidth,
+					'height' => (int)$fileRecord->importantPartHeight,
+				);
+			}
+
 			return static::get($image, $imageSize->width, $imageSize->height, $imageSize->resizeMode, $target, $force, $imageSize->zoom, $importantPart);
 		}
 

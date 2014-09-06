@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,protected;meta'
+		'default'                     => 'name,importantPartX,importantPartY,importantPartWidth,importantPartHeight,protected;meta'
 	),
 
 	// Fields
@@ -175,6 +175,30 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				array('tl_files', 'checkFilename')
 			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'importantPartX' => array
+		(
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartY' => array
+		(
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartWidth' => array
+		(
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartHeight' => array
+		(
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'protected' => array
 		(
