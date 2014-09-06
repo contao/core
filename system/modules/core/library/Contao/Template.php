@@ -213,9 +213,7 @@ abstract class Template extends \BaseTemplate
 	 */
 	public function dumpTemplateVars()
 	{
-		echo "<pre>\n";
-		var_dump($this->arrData);
-		echo "</pre>\n";
+		dump($this->arrData);
 	}
 
 
