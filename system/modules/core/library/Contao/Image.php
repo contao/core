@@ -79,7 +79,7 @@ class Image
 	 *
 	 * @return string|null The path of the resized image or null
 	 */
-	public static function get($image, $width, $height, $mode='', $target=null, $force=false)
+	public static function get($image, $width, $height, $mode='', $target=null, $force=false, $zoom=0, $importantPart=null)
 	{
 		if ($image == '')
 		{
@@ -106,7 +106,7 @@ class Image
 		}
 
 		// No resizing required
-		if (($objFile->width == $width || !$width) && ($objFile->height == $height || !$height))
+		if (($objFile->width == $width || !$width) && ($objFile->height == $height || !$height) && (!$importantPart || !$zoom))
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
 			if ($target)
@@ -123,27 +123,23 @@ class Image
 			return \System::urlEncode($image);
 		}
 
+		if (!is_array($importantPart))
+		{
+			$importantPart = array(
+				'x' => 0,
+				'y' => 0,
+				'width' => $objFile->width,
+				'height' => $objFile->height,
+			);
+		}
+
 		// No mode given
 		if ($mode == '')
 		{
-			// Backwards compatibility
-			if ($width && $height)
-			{
-				$mode = 'center_top';
-			}
-			else
-			{
-				$mode = 'proportional';
-			}
+			$mode = 'crop';
 		}
 
-		// Backwards compatibility
-		if ($mode == 'crop')
-		{
-			$mode = 'center_center';
-		}
-
-		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
+		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $zoom . '-' . $importantPart['x'] . '-' . $importantPart['y'] . '-' . $importantPart['width'] . '-' . $importantPart['height'] . '-' . $objFile->mtime), 0, 8);
 		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
 		// Check whether the image exists already
@@ -177,7 +173,7 @@ class Image
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
-				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target);
+				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target, $zoom, $importantPart);
 
 				if (is_string($return))
 				{
@@ -192,7 +188,7 @@ class Image
 			return \System::urlEncode($image);
 		}
 
-		$coordinates = static::computeResize($width, $height, $objFile->width, $objFile->height, $mode);
+		$coordinates = static::computeResize($width, $height, $objFile->width, $objFile->height, $mode, $zoom, $importantPart);
 
 		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
 
@@ -242,11 +238,77 @@ class Image
 		return \System::urlEncode($strCacheName);
 	}
 
-	protected static function computeResize($width, $height, $originalWidth, $originalHeight, $mode)
+	protected static function computeResize($width, $height, $originalWidth, $originalHeight, $mode, $zoom, $importantPart)
 	{
+		// Backwards compatibility for old modes:
+		// left_top, center_top, right_top,
+		// left_center, center_center, right_center,
+		// left_bottom, center_bottom, right_bottom
+		if ($mode && substr_count($mode, '_') === 1)
+		{
+			$zoom = 0;
+			$importantPart = array('x' => 0, 'y' => 0, 'width' => $originalWidth, 'height' => $originalHeight);
+
+			$mode = explode('_', $mode);
+
+			if ($mode[0] === 'left')
+			{
+				$importantPart['width'] = 1;
+			}
+			elseif ($mode[0] === 'right')
+			{
+				$importantPart['x'] = $originalWidth - 1;
+				$importantPart['width'] = 1;
+			}
+
+			if ($mode[1] === 'top')
+			{
+				$importantPart['height'] = 1;
+			}
+			elseif ($mode[1] === 'bottom')
+			{
+				$importantPart['y'] = $originalHeight - 1;
+				$importantPart['height'] = 1;
+			}
+		}
+
+		$zoom = max(0, min(1, (int)$zoom / 100));
+
+		$zoomedImportantPart = array(
+			'x' => $importantPart['x'] * $zoom,
+			'y' => $importantPart['y'] * $zoom,
+			'width' => $originalWidth - (($originalWidth - $importantPart['width'] - $importantPart['x']) * $zoom) - ($importantPart['x'] * $zoom),
+			'height' => $originalHeight - (($originalHeight - $importantPart['height'] - $importantPart['y']) * $zoom) - ($importantPart['y'] * $zoom),
+		);
+
+		// If no dimensions are specified, use the zoomed original width
 		if (!$width && !$height)
 		{
-			$width = $originalWidth;
+			$width = $zoomedImportantPart['width'];
+		}
+
+		if ($mode === 'proportional' && $width && $height)
+		{
+			if ($zoomedImportantPart['width'] >= $zoomedImportantPart['height'])
+			{
+				$height = null;
+			}
+			else
+			{
+				$width = null;
+			}
+		}
+
+		elseif ($mode === 'box' && $width && $height)
+		{
+			if ($zoomedImportantPart['height'] * $width / $zoomedImportantPart['width'] <= $height)
+			{
+				$height = null;
+			}
+			else
+			{
+				$width = null;
+			}
 		}
 
 		$targetX = 0;
@@ -254,115 +316,109 @@ class Image
 		$targetWidth = $width;
 		$targetHeight = $height;
 
-		if ($mode === 'proportional' && $width && $height)
+		// Crop mode
+		if ($width && $height)
 		{
-			if ($originalWidth >= $originalHeight)
-			{
-				$targetHeight = null;
-			}
-			else
-			{
-				$targetWidth = null;
-			}
-		}
-
-		elseif ($mode === 'box' && $width && $height)
-		{
-			if ($originalHeight * $width / $originalWidth <= $targetHeight)
-			{
-				$targetHeight = null;
-			}
-			else
-			{
-				$targetWidth = null;
-			}
-		}
-
-		// Resize width and height and crop the image if necessary
-		if ($targetWidth && $targetHeight)
-		{
-			$targetWidth = max($originalWidth * $height / $originalHeight, 1);
-			$targetX = ($targetWidth - $width) / -2;
-
-			if ($targetWidth < $width)
-			{
-				$targetWidth = $width;
-				$targetHeight = max($originalHeight * $width / $originalWidth, 1);
-				$targetX = 0;
-				$targetY = ($targetHeight - $height) / -2;
-			}
-
-			// Advanced crop modes
-			switch ($mode)
-			{
-				case 'left_top':
-					$targetX = 0;
-					$targetY = 0;
-					break;
-
-				case 'center_top':
-					$targetY = 0;
-					break;
-
-				case 'right_top':
-					$targetX = $width - $targetWidth;
-					$targetY = 0;
-					break;
-
-				case 'left_center':
-					$targetX = 0;
-					break;
-
-				case 'right_center':
-					$targetX = $width - $targetWidth;
-					break;
-
-				case 'left_bottom':
-					$targetX = 0;
-					$targetY = $height - $targetHeight;
-					break;
-
-				case 'center_bottom':
-					$targetY = $height - $targetHeight;
-					break;
-
-				case 'right_bottom':
-					$targetX = $width - $targetWidth;
-					$targetY = $height - $targetHeight;
-					break;
-			}
-
-			$coordinates = array(
-				'width' => (int)round($width),
-				'height' => (int)round($height),
+			// Calculate the image part for zoom 0
+			$leastZoomed = array(
+				'x' => 0,
+				'y' => 0,
+				'width' => $originalWidth,
+				'height' => $originalHeight,
 			);
+			if ($originalHeight * $width / $originalWidth <= $height)
+			{
+				$leastZoomed['width'] = $originalHeight * $width / $height;
+				if ($leastZoomed['width'] > $importantPart['width'])
+				{
+					$leastZoomed['x'] = ($originalWidth - $leastZoomed['width'])
+						* $importantPart['x'] / ($originalWidth - $importantPart['width']);
+				}
+				else
+				{
+					$leastZoomed['x'] = $importantPart['x'] + (($importantPart['width'] - $leastZoomed['width']) / 2);
+				}
+			}
+			else
+			{
+				$leastZoomed['height'] = $originalWidth * $height / $width;
+				if ($leastZoomed['height'] > $importantPart['height'])
+				{
+					$leastZoomed['y'] = ($originalHeight - $leastZoomed['height'])
+						* $importantPart['y'] / ($originalHeight - $importantPart['height']);
+				}
+				else
+				{
+					$leastZoomed['y'] = $importantPart['y'] + (($importantPart['height'] - $leastZoomed['height']) / 2);
+				}
+			}
+
+			// Calculate the image part for zoom 100
+			$mostZoomed = $importantPart;
+			if ($importantPart['height'] * $width / $importantPart['width'] <= $height)
+			{
+				$mostZoomed['height'] = $height * $importantPart['width'] / $width;
+				if ($originalHeight > $importantPart['height'])
+				{
+					$mostZoomed['y'] -= ($mostZoomed['height'] - $importantPart['height'])
+						* $importantPart['y'] / ($originalHeight - $importantPart['height']);
+				}
+			}
+			else
+			{
+				$mostZoomed['width'] = $width * $mostZoomed['height'] / $height;
+				if ($originalWidth > $importantPart['width'])
+				{
+					$mostZoomed['x'] -= ($mostZoomed['width'] - $importantPart['width'])
+						* $importantPart['x'] / ($originalWidth - $importantPart['width']);
+				}
+			}
+
+			if ($mostZoomed['width'] > $leastZoomed['width'])
+			{
+				$mostZoomed = $leastZoomed;
+			}
+
+			// Apply zoom
+			foreach (array('x', 'y', 'width', 'height') as $key)
+			{
+				$zoomedImportantPart[$key] = ($mostZoomed[$key] * $zoom) + ($leastZoomed[$key] * (1 - $zoom));
+			}
+
+			$targetX = -$zoomedImportantPart['x'] * $width / $zoomedImportantPart['width'];
+			$targetY = -$zoomedImportantPart['y'] * $height / $zoomedImportantPart['height'];
+			$targetWidth = $originalWidth * $width / $zoomedImportantPart['width'];
+			$targetHeight = $originalHeight * $height / $zoomedImportantPart['height'];
 		}
 
 		else
 		{
 			// Calculate the height if only the width is given
-			if ($targetWidth)
+			if ($width)
 			{
-				$targetHeight = max($originalHeight * $width / $originalWidth, 1);
+				$height = max($zoomedImportantPart['height'] * $width / $zoomedImportantPart['width'], 1);
 			}
 			// Calculate the width if only the height is given
-			elseif ($targetHeight)
+			elseif ($height)
 			{
-				$targetWidth = max($originalWidth * $height / $originalHeight, 1);
+				$width = max($zoomedImportantPart['width'] * $height / $zoomedImportantPart['height'], 1);
 			}
 
-			$coordinates = array(
-				'width' => (int)round($targetWidth),
-				'height' => (int)round($targetHeight),
-			);
+			// Apply zoom
+			$targetWidth = $originalWidth / $zoomedImportantPart['width'] * $width;
+			$targetHeight = $originalHeight / $zoomedImportantPart['height'] * $height;
+			$targetX = -$zoomedImportantPart['x'] * $targetWidth / $originalWidth;
+			$targetY = -$zoomedImportantPart['y'] * $targetHeight / $originalHeight;
 		}
 
-		$coordinates['target_x'] = (int)round($targetX);
-		$coordinates['target_y'] = (int)round($targetY);
-		$coordinates['target_width'] = (int)round($targetWidth);
-		$coordinates['target_height'] = (int)round($targetHeight);
-
-		return $coordinates;
+		return array(
+			'width' => (int)round($width),
+			'height' => (int)round($height),
+			'target_x' => (int)round($targetX),
+			'target_y' => (int)round($targetY),
+			'target_width' => (int)round($targetWidth),
+			'target_height' => (int)round($targetHeight),
+		);
 	}
 
 	protected static function createGdImage($width, $height)
