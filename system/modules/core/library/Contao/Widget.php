@@ -323,7 +323,6 @@ abstract class Widget extends \BaseTemplate
 
 			case strncmp($strKey, 'ng-', 3) === 0:
 			case strncmp($strKey, 'data-', 5) === 0:
-				dump($strKey);
 				$this->arrAttributes[$strKey] = $strKey;
 				break;
 
