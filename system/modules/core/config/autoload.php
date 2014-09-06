@@ -178,6 +178,8 @@ ClassLoader::addClasses(array
 	'Contao\FilesModel'                => 'system/modules/core/models/FilesModel.php',
 	'Contao\FormFieldModel'            => 'system/modules/core/models/FormFieldModel.php',
 	'Contao\FormModel'                 => 'system/modules/core/models/FormModel.php',
+	'Contao\ImageSizeItemModel'        => 'system/modules/core/models/ImageSizeItemModel.php',
+	'Contao\ImageSizeModel'            => 'system/modules/core/models/ImageSizeModel.php',
 	'Contao\LayoutModel'               => 'system/modules/core/models/LayoutModel.php',
 	'Contao\MemberGroupModel'          => 'system/modules/core/models/MemberGroupModel.php',
 	'Contao\MemberModel'               => 'system/modules/core/models/MemberModel.php',

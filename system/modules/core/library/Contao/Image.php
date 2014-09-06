@@ -95,6 +95,12 @@ class Image
 			return null;
 		}
 
+		// Load the image size from the database if $mode is an id
+		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
+		{
+			return static::get($image, $imageSize->width, $imageSize->height, $imageSize->resizeMode, $target, $force, $imageSize->zoom, $importantPart);
+		}
+
 		$objFile = new \File($image, true);
 		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('validImageTypes')));
 

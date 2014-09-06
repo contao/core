@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size_item.php" source-language="en">
+    <body>
+      <trans-unit id="tl_image_size_item.invisible.0">
+        <source>Invisible</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.invisible.1">
+        <source>Do not use the image size definition.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.media.0">
+        <source>Media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.media.1">
+        <source>Define when this image size should be used, e.g. "(max-width: 600px)".</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.width.0">
+        <source>Width</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.width.1">
+        <source>Width in pixels.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.height.0">
+        <source>Height</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.height.1">
+        <source>Height in pixels.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.resizeMode.0">
+        <source>Resize mode</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.zoom.0">
+        <source>Zoom</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.sizes.0">
+        <source>Sizes attribute</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.sizes.1">
+        <source>Displayed image width(s), e.g. "(max-width: 600px) 50vw, 33vw". (&lt;a href=&quot;http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;)</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.densities.0">
+        <source>Pixel densities</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.densities.1">
+        <source>Define the pixel densities, e.g. "1x,2x,5.5x".</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.0">
+        <source>Revision date</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.tstamp.1">
+        <source>Date and time of the latest revision</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.expert_legend">
+        <source>Expert settings</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.visibility_legend">
+        <source>Visibility</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.0">
+        <source>New image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.new.1">
+        <source>Create a new image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.0">
+        <source>Image size media query details</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.show.1">
+        <source>Show the details of image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.0">
+        <source>Edit image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.edit.1">
+        <source>Edit image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.0">
+        <source>Move image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.cut.1">
+        <source>Move image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.0">
+        <source>Duplicate image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.copy.1">
+        <source>Duplicate image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.0">
+        <source>Delete image size media query</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.delete.1">
+        <source>Delete image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.0">
+        <source>Edit image size</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.editheader.1">
+        <source>Edit the image size settings</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.0">
+        <source>Paste at the top</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pasteafter.1">
+        <source>Paste after image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.0">
+        <source>Add new at the top</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.pastenew.1">
+        <source>Add new after image size media query ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.0">
+        <source>Toggle visibility</source>
+      </trans-unit>
+      <trans-unit id="tl_image_size_item.toggle.1">
+        <source>Toggle the visibility of image size media query ID %s</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

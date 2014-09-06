@@ -21,7 +21,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'ctable'                      => array('tl_module', 'tl_style_sheet', 'tl_layout'),
+		'ctable'                      => array('tl_module', 'tl_style_sheet', 'tl_layout', 'tl_image_size'),
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -127,6 +127,13 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 				'href'                => 'table=tl_layout',
 				'icon'                => 'layout.gif',
 				'button_callback'     => array('tl_theme', 'editLayout')
+			),
+			'imageSizes' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['imageSizes'],
+				'href'                => 'table=tl_image_size',
+				'icon'                => 'imageSizes.gif',
+				'button_callback'     => array('tl_theme', 'editImageSizes')
 			),
 			'exportTheme' => array
 			(
@@ -418,6 +425,22 @@ class tl_theme extends Backend
 	public function editLayout($row, $href, $label, $title, $icon, $attributes)
 	{
 		return $this->User->hasAccess('layout', 'themes') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the "edit image sizes" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editImageSizes($row, $href, $label, $title, $icon, $attributes)
+	{
+		return $this->User->hasAccess('image_sizes', 'themes') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
