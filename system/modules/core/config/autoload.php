@@ -296,6 +296,7 @@ TemplateLoader::addFiles(array
 	'be_widget_pw'        => 'system/modules/core/templates/backend',
 	'be_widget_rdo'       => 'system/modules/core/templates/backend',
 	'be_wildcard'         => 'system/modules/core/templates/backend',
+	'block_picture'       => 'system/modules/core/templates/block',
 	'block_searchable'    => 'system/modules/core/templates/block',
 	'block_section'       => 'system/modules/core/templates/block',
 	'block_sections'      => 'system/modules/core/templates/block',
