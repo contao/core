@@ -374,6 +374,9 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'] = array();
 		}
 
+		// Picturefill
+		$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static';
+
 		// jQuery scripts
 		if ($objLayout->addJQuery)
 		{

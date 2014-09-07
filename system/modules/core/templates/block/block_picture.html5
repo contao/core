@@ -1,12 +1,35 @@
-<?php if ($this->sources && count($this->sources)): ?>
+<?php if ($this->sources): ?>
   <picture>
-  <?php foreach ($this->sources as $source): ?>
-    <source srcset="<?php echo $source['srcset'] ?>"<?php if (!empty($source['sizes'])): ?> sizes="<?php echo $source['sizes']; ?>"<?php endif; ?><?php if (!empty($source['media'])): ?> media="<?php echo $source['media']; ?>"<?php endif; ?>>
-  <?php endforeach; ?>
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    <?php foreach ($this->sources as $source): ?>
+      <source
+        srcset="<?php echo $source['srcset'] ?>"
+        <?php if (!empty($source['sizes'])): ?> sizes="<?php echo $source['sizes']; ?>"<?php endif; ?>
+        <?php if (!empty($source['media'])): ?> media="<?php echo $source['media']; ?>"<?php endif; ?>
+      >
+    <?php endforeach; ?>
+    <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
 
-<img src="<?php echo $this->img['src']; ?>" srcset="<?php echo $this->img['srcset']; ?>"<?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php endif; ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>" alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?>>
+<img
+  src="<?php echo $this->img['src']; ?>"
+  srcset="<?php echo $this->img['srcset']; ?>"
+  <?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php endif; ?>
+  <?php if (!$this->sources): ?>
+    width="<?php echo $this->img['width']; ?>"
+    height="<?php echo $this->img['height']; ?>"
+  <?php endif; ?>
+  alt="<?php echo $this->alt; ?>"
+  <?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?>
+>
 
 <?php if ($this->sources && count($this->sources)): ?>
   </picture>
+<?php endif; ?>
+
+<?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
+  <script>
+    // Run the polyfill instantly
+    window.picturefill && window.picturefill();
+  </script>
 <?php endif; ?>

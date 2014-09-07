@@ -450,6 +450,7 @@ $GLOBALS['TL_ASSETS'] = array
 	'DROPZONE'     => '3.8.5',
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',
+	'PICTUREFILL'  => '2.1.0',
 	'SWIPE'        => '2.0',
 	'JQUERY'       => '1.11.0',
 	'JQUERY_UI'    => '1.10.4',
