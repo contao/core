@@ -500,7 +500,6 @@ class Image
 				if ($arrGdinfo['GIF Read Support'])
 				{
 					$strGdImage = imagecreatefromgif(TL_ROOT . '/' . $objFile->path);
-					$intTranspIndex = imagecolortransparent($strGdImage);
 				}
 				break;
 
@@ -548,7 +547,7 @@ class Image
 		switch ($extension)
 		{
 			case 'gif':
-				// TODO: fix transparent GIFs
+				$strGdImage = static::convertGdImageToPaletteImage($strGdImage);
 				imagegif($strGdImage, $path);
 				break;
 
@@ -559,10 +558,155 @@ class Image
 				break;
 
 			case 'png':
-				// TODO: fix issue #2426
+				if (static::countGdImageColors($strGdImage, 256) <= 256 && !static::isGdImageSemitransparent($strGdImage))
+				{
+					$strGdImage = static::convertGdImageToPaletteImage($strGdImage);
+				}
 				imagepng($strGdImage, $path);
 				break;
 		}
+	}
+
+
+	/**
+	 * Convert a true color image to a palette image with 256 colors
+	 * and preserve transparency
+	 *
+	 * @param resource $image GD true color image
+	 *
+	 * @return resource The GD palette image
+	 */
+	protected static function convertGdImageToPaletteImage($image)
+	{
+		$width = imagesx($image);
+		$height = imagesy($image);
+
+		$transparentColor = null;
+
+		if (static::countGdImageColors($image, 256) <= 256)
+		{
+			$paletteImage = imagecreate($width, $height);
+			$colors = array();
+			$isTransparent = false;
+			for ($x = 0; $x < $width; $x++)
+			{
+				for ($y = 0; $y < $height; $y++)
+				{
+					$color = imagecolorat($image, $x, $y);
+					// Check if the pixel is fully transparent
+					if ((($color >> 24) & 0x7F) === 127)
+					{
+						$isTransparent = true;
+					}
+					else
+					{
+						$colors[$color & 0xFFFFFF] = true;
+					}
+				}
+			}
+			$colors = array_keys($colors);
+			foreach ($colors as $index => $color)
+			{
+				imagecolorset($paletteImage, $index, ($color >> 16) & 0xFF, ($color >> 8) & 0xFF, $color & 0xFF);
+			}
+
+			if ($isTransparent)
+			{
+				$transparentColor = imagecolorallocate($paletteImage, 0, 0, 0);
+				imagecolortransparent($paletteImage, $transparentColor);
+			}
+
+			imagecopy($paletteImage, $image, 0, 0, 0, 0, $width, $height);
+		}
+		else
+		{
+			$paletteImage = imagecreatetruecolor($width, $height);
+			imagealphablending($paletteImage, false);
+			imagesavealpha($paletteImage, true);
+			imagecopy($paletteImage, $image, 0, 0, 0, 0, $width, $height);
+
+			// 256 minus 1 for the transparent color
+			imagetruecolortopalette($paletteImage, false, 255);
+			$transparentColor = imagecolorallocate($paletteImage, 0, 0, 0);
+			imagecolortransparent($paletteImage, $transparentColor);
+		}
+
+		if ($transparentColor !== null)
+		{
+			// Fix fully transparent pixels
+			for ($x = 0; $x < $width; $x++)
+			{
+				for ($y = 0; $y < $height; $y++)
+				{
+					// Check if the pixel is fully transparent
+					if (((imagecolorat($image, $x, $y) >> 24) & 0x7F) === 127)
+					{
+						imagefilledrectangle($paletteImage, $x, $y, $x, $y, $transparentColor);
+					}
+				}
+			}
+		}
+
+		return $paletteImage;
+	}
+
+
+	/**
+	 * Count the number of colors in a true color image
+	 *
+	 * @param resource $image
+	 * @param integer  $max   Stop parsing the image if more colors than $max were found
+	 *
+	 * @return integer
+	 */
+	protected static function countGdImageColors($image, $max = null)
+	{
+		$colors = array();
+		$width = imagesx($image);
+		$height = imagesy($image);
+
+		for ($x = 0; $x < $width; $x++)
+		{
+			for ($y = 0; $y < $height; $y++)
+			{
+				$colors[imagecolorat($image, $x, $y)] = true;
+				if ($max !== null && count($colors) > $max)
+				{
+					break 2;
+				}
+			}
+		}
+
+		return count($colors);
+	}
+
+
+	/**
+	 * Detect if the image contains semitransparent pixels
+	 *
+	 * @param resource $image
+	 *
+	 * @return boolean
+	 */
+	protected static function isGdImageSemitransparent($image)
+	{
+		$width = imagesx($image);
+		$height = imagesy($image);
+
+		for ($x = 0; $x < $width; $x++)
+		{
+			for ($y = 0; $y < $height; $y++)
+			{
+				// Check if the pixel is semitransparent
+				$alpha = (imagecolorat($image, $x, $y) >> 24) & 0x7F;
+				if ($alpha > 0 && $alpha < 127)
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 
