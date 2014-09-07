@@ -70,12 +70,14 @@ class Image
 	/**
 	 * Resize an image and store the resized version in the assets/images folder
 	 *
-	 * @param string  $image  The image path
-	 * @param integer $width  The target width
-	 * @param integer $height The target height
-	 * @param string  $mode   The resize mode
-	 * @param string  $target An optional target path
-	 * @param boolean $force  Override existing target images
+	 * @param string  $image         The image path
+	 * @param integer $width         The target width
+	 * @param integer $height        The target height
+	 * @param string  $mode          The resize mode
+	 * @param string  $target        An optional target path
+	 * @param boolean $force         Override existing target images
+	 * @param integer $zoom          Zoom between 0 and 100
+	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
 	 *
 	 * @return string|null The path of the resized image or null
 	 */
@@ -255,6 +257,20 @@ class Image
 		return \System::urlEncode($strCacheName);
 	}
 
+
+	/**
+	 * Calculate the resize coordinates
+	 *
+	 * @param integer $width          The target width
+	 * @param integer $height         The target height
+	 * @param integer $originalWidth  The original width
+	 * @param integer $originalHeight The original height
+	 * @param string  $mode           The resize mode
+	 * @param integer $zoom           Zoom between 0 and 100
+	 * @param array   $importantPart  Important part of the image, keys: x, y, width, height
+	 *
+	 * @return array The resize coordinates: width, height, target_x, target_y, target_width, target_height
+	 */
 	protected static function computeResize($width, $height, $originalWidth, $originalHeight, $mode, $zoom, $importantPart)
 	{
 		// Backwards compatibility for old modes:
@@ -438,6 +454,15 @@ class Image
 		);
 	}
 
+
+	/**
+	 * Create a GD image
+	 *
+	 * @param integer $width
+	 * @param integer $height
+	 *
+	 * @return resource GD image
+	 */
 	protected static function createGdImage($width, $height)
 	{
 		$gdImage = imagecreatetruecolor($width, $height);
@@ -456,6 +481,14 @@ class Image
 		return $gdImage;
 	}
 
+
+	/**
+	 * Get the GD image representation from a file
+	 *
+	 * @param \File $objFile
+	 *
+	 * @return resource GD image
+	 */
 	protected static function getGdImageFromFile($objFile)
 	{
 		$arrGdinfo = gd_info();
@@ -490,6 +523,16 @@ class Image
 		return $strGdImage;
 	}
 
+
+	/**
+	 * Save a GD image resource to a file
+	 *
+	 * @param resource $strGdImage
+	 * @param string   $path
+	 * @param string   $extension  The file extension
+	 *
+	 * @return void
+	 */
 	protected static function saveGdImageToFile($strGdImage, $path, $extension)
 	{
 		$arrGdinfo = gd_info();
