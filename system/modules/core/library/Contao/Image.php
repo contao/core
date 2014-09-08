@@ -384,7 +384,6 @@ class Image
 	 */
 	public function executeResize()
 	{
-		// @todo implement
 		$importantPart = $this->getImportantPart();
 
 		// No resizing required
