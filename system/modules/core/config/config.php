@@ -464,6 +464,10 @@ $GLOBALS['TL_ASSETS'] = array
 	'SLIMBOX'      => '1.8'
 );
 
+/**
+ * JavaScript Polyfills
+ */
+$GLOBALS['TL_JS_POLYFILLS'] = array();
 
 /**
  * Other global arrays
