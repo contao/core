@@ -1180,7 +1180,7 @@ class Image
 	public static function resize($image, $width, $height, $mode='')
 	{
 		try {
-			$imageObj = new Image($image);
+			$imageObj = new static($image);
 			$resizedPath = $imageObj->setTargetWidth($width)
 				->setTargetHeight($height)
 				->setResizeMode($mode)
