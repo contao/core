@@ -545,29 +545,18 @@ class InstallTool extends Backend
 			}
 			catch (Exception $e) {}
 
-			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
-									   ->execute(Config::get('dbDatabase'));
+			$objTable = $this->Database->prepare("SHOW TABLE STATUS WHERE Name LIKE 'tl_%' AND !ISNULL(Collation)")
+									   ->execute();
 
-			while ($objField->next())
+			while ($objTable->next())
 			{
-				if (!in_array($objField->TABLE_NAME, $arrTables))
+
+				if (!in_array($objTable->Name, $arrTables))
 				{
-					$this->Database->query("ALTER TABLE {$objField->TABLE_NAME} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
-					$arrTables[] = $objField->TABLE_NAME;
+					$this->Database->query("ALTER TABLE {$objTable->Name} CONVERT TO CHARACTER SET $strCharset COLLATE $strCollation");
+					$arrTables[] = $objTable->Name;
 				}
 
-				$strQuery = "ALTER TABLE {$objField->TABLE_NAME} CHANGE {$objField->COLUMN_NAME} {$objField->COLUMN_NAME} {$objField->COLUMN_TYPE} CHARACTER SET $strCharset COLLATE $strCollation";
-
-				if ($objField->IS_NULLABLE == 'YES')
-				{
-					$strQuery .= " NULL";
-				}
-				else
-				{
-					$strQuery .= " NOT NULL DEFAULT '{$objField->COLUMN_DEFAULT}'";
-				}
-
-				$this->Database->query($strQuery);
 			}
 
 			Config::persist('dbCollation', $strCollation);
