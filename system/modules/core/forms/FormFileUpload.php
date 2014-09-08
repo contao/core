@@ -34,6 +34,13 @@ class FormFileUpload extends \Widget implements \uploadable
 	 */
 	protected $strTemplate = 'form_upload';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-upload';
+
 
 	/**
 	 * Add specific attributes

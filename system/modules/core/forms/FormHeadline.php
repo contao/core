@@ -33,6 +33,13 @@ class FormHeadline extends \Widget
 	 */
 	protected $strTemplate = 'form_headline';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-headline';
+
 
 	/**
 	 * Do not validate
