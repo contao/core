@@ -52,13 +52,6 @@ namespace Contao;
 class Image
 {
 	/**
-	 * The image path
-	 *
-	 * @var string
-	 */
-	protected $path = '';
-
-	/**
 	 * The File instance of the original image
 	 *
 	 * @var \File
@@ -137,6 +130,8 @@ class Image
 			throw new \InvalidArgumentException('Cannot create image object from empty path!');
 		}
 
+		$path = rawurldecode($path);
+
 		// Check whether the file exists
 		if (!is_file(TL_ROOT . '/' . $path))
 		{
@@ -151,8 +146,6 @@ class Image
 		{
 			throw new \InvalidArgumentException('Image type "' . $this->fileObj->extension . '" was not allowed to be processed');
 		}
-
-		$this->path = rawurldecode($path);
 
 		// Set default important part
 		$this->setImportantPart(array(
@@ -341,7 +334,7 @@ class Image
 	 */
 	public function getOriginalPath()
 	{
-		return $this->path;
+		return $this->fileObj->path;
 	}
 
 	/**
