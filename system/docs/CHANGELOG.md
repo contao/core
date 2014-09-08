@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Removed
+Remove the `rel="author` support (see #7291).
+
 ### New
 Added `$item['isTrail']` to the navigation menu templates (see #7096).
 

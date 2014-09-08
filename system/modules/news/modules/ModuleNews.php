@@ -262,14 +262,7 @@ abstract class ModuleNews extends \Module
 				case 'author':
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
-						if ($objAuthor->google != '')
-						{
-							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' <a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
-						}
-						else
-						{
-							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
-						}
+						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
 					}
 					break;
 
