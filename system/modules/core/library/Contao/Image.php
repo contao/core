@@ -563,7 +563,7 @@ class Image
 
 		$importantPart = null;
 
-		$fileRecord = \FilesModel::findByPath($image);
+        $fileRecord = \FilesModel::findByPath($this->getOriginalPath());
 		if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
 		{
 			$importantPart = array(
