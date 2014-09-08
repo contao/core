@@ -122,6 +122,12 @@
       <trans-unit id="tl_style_sheet.import.1">
         <source>Import existing CSS files</source>
       </trans-unit>
+      <trans-unit id="tl_style_sheet.export.0">
+        <source>Export style sheet</source>
+      </trans-unit>
+      <trans-unit id="tl_style_sheet.export.1">
+        <source>Export style sheet ID %s</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

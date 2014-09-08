@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### New
+Add an option to export style sheets (see #7049).
+
+### New
 Added `widget-*` CSS classes to front end form fields (see #7041).
 
 ### Improved

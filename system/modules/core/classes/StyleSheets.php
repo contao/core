@@ -1336,6 +1336,74 @@ class StyleSheets extends \Backend
 
 
 	/**
+	 * Export a style sheet
+	 * @param \DataContainer
+	 * @throws \Exception
+	 */
+	public function exportStyleSheet(\DataContainer $dc)
+	{
+		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE id=?")
+										->limit(1)
+										->execute($dc->id);
+
+		if ($objStyleSheet->numRows < 1)
+		{
+			throw new \Exception("Invalid style sheet ID {$dc->id}");
+		}
+
+		$vars = array();
+
+		// Get the global theme variables
+		$objTheme = $this->Database->prepare("SELECT vars FROM tl_theme WHERE id=?")
+								   ->limit(1)
+								   ->execute($objStyleSheet->pid);
+
+		if ($objTheme->vars != '')
+		{
+			if (is_array(($tmp = deserialize($objTheme->vars))))
+			{
+				foreach ($tmp as $v)
+				{
+					$vars[$v['key']] = $v['value'];
+				}
+			}
+		}
+
+		// Merge the global style sheet variables
+		if ($objStyleSheet->vars != '')
+		{
+			if (is_array(($tmp = deserialize($objStyleSheet->vars))))
+			{
+				foreach ($tmp as $v)
+				{
+					$vars[$v['key']] = $v['value'];
+				}
+			}
+		}
+
+		// Sort by key length (see #3316)
+		uksort($vars, 'length_sort_desc');
+
+		// Create the file
+		$objFile = new \File('system/tmp/' . md5(uniqid(mt_rand(), true)), true);
+		$objFile->write('/* ' . $objStyleSheet->name . ".css */\n");
+
+		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
+										 ->execute($objStyleSheet->id);
+
+		// Append the definition
+		while ($objDefinitions->next())
+		{
+			$objFile->append(strip_tags($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row())), '');
+		}
+
+		$objFile->close();
+		$objFile->sendToBrowser($objStyleSheet->name . '.css');
+		$objFile->delete();
+	}
+
+
+	/**
 	 * Check the name of an imported file
 	 * @param string
 	 * @return string
