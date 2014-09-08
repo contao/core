@@ -1171,22 +1171,7 @@ class Image
 	 */
 	public static function resize($image, $width, $height, $mode='')
 	{
-		try {
-			$imageObj = new static($image);
-			$resizedPath = $imageObj->setTargetWidth($width)
-				->setTargetHeight($height)
-				->setResizeMode($mode)
-				->setTargetPath($image)
-				->setForceOverride(true)
-				->executeResize()
-				->getResizedPath();
-
-			return (bool) $resizedPath;
-		}
-		catch (\InvalidArgumentException $e)
-		{
-			return false;
-		}
+        return static::get($image, $width, $height, $mode, $image, true) ? true : false;
 	}
 
 
