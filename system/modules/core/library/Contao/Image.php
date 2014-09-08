@@ -344,11 +344,6 @@ class Image
 			}
 		}
 
-		$targetX = 0;
-		$targetY = 0;
-		$targetWidth = $width;
-		$targetHeight = $height;
-
 		// Crop mode
 		if ($width && $height)
 		{
@@ -535,7 +530,6 @@ class Image
 	protected static function saveGdImageToFile($strGdImage, $path, $extension)
 	{
 		$arrGdinfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
 
 		// Fallback to PNG if GIF ist not supported
 		if ($extension == 'gif' && !$arrGdinfo['GIF Create Support'])
