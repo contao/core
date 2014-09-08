@@ -432,7 +432,7 @@ class Image
 			if (file_exists(TL_ROOT . '/' . $this->getCacheName()))
 			{
 				// Copy the cached file if it exists
-				if ($this->getOriginalPath())
+				if ($this->getTargetPath())
 				{
 					\Files::getInstance()->copy(
 						$this->getCacheName(),
