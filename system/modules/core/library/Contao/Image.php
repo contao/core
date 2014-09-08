@@ -553,18 +553,9 @@ class Image
 	 */
 	public function getPicture($imageSizeId)
 	{
-		$image = rawurldecode($this->getOriginalPath());
-
-		// Check whether the file exists
-		if (!is_file(TL_ROOT . '/' . $image))
-		{
-			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
-			return null;
-		}
-
 		$imageSize = \ImageSizeModel::findByPk($imageSizeId);
 
-		if (!$imageSize)
+		if ($imageSize === null)
 		{
 			\System::log('Image size ID "' . $imageSizeId . '" could not be found', __METHOD__, TL_ERROR);
 			return null;
