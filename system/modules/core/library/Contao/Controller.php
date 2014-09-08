@@ -2555,7 +2555,9 @@ abstract class Controller extends \System
 			}
 		}
 
-		$imageObj = new \Image($arrItem['singleSRC']);
+		$file = new \File($arrItem['singleSRC'], true);
+
+		$imageObj = new \Image($file);
 		$src = $imageObj->setTargetWidth($size[0])
 			->setTargetHeight($size[1])
 			->setResizeMode($size[2])
