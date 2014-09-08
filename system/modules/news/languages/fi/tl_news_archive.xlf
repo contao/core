@@ -1,0 +1,210 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/news/languages/en/tl_news_archive.php" source-language="en">
+    <body>
+      <trans-unit id="tl_news_archive.title.0">
+        <source>Title</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title.1">
+        <source>Please enter a news archive title.</source>
+        <target>Ole hyvä ja anna arkistolle otsikko.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Uudelleenohjauksen sivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.jumpTo.1">
+        <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
+        <target>Ole hyvä ja valitse lukijasivu, jolle vierailija ohjataan uutista klikatessa.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.0">
+        <source>Enable comments</source>
+        <target>Kommentointi käytössä</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.allowComments.1">
+        <source>Allow visitors to comment news items.</source>
+        <target>Salli vierailijoiden kommentoida uutisia.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.0">
+        <source>Notify</source>
+        <target>Ilmoitus</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify.1">
+        <source>Please choose who to notify when comments are added.</source>
+        <target>Valitse kenelle ilmoitetaan, kun kommentit on lisätty.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.0">
+        <source>Sort order</source>
+        <target>Lajittelujärjestys</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.sortOrder.1">
+        <source>By default, comments are sorted ascending, starting with the oldest one.</source>
+        <target>Oletuksena kommentit on lajiteltu nousevaan järjestykseen aloittaen vanhimmasta kommentista.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.0">
+        <source>Comments per page</source>
+        <target>Kommentteja per sivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.perPage.1">
+        <source>Number of comments per page. Set to 0 to disable pagination.</source>
+        <target>Kommenttien määrä yhdellä sivulla. Aseta arvo 0, jolloin sivutus on poissa käytöstä.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.0">
+        <source>Moderate comments</source>
+        <target>Hallinnoi kommentteja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.moderate.1">
+        <source>Approve comments before they are published on the website.</source>
+        <target>Hyväksy kommentit ennen kuin ne julkistetaan sivustolla.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.0">
+        <source>Allow BBCode</source>
+        <target>Salli BBCode</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.bbcode.1">
+        <source>Allow visitors to format their comments with BBCode.</source>
+        <target>Salli vierailijoiden muotoilla kommenttejaan BBCode:lla.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.0">
+        <source>Require login to comment</source>
+        <target>Vaadi kirjautuminen kommenttien lisäämiseen</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.requireLogin.1">
+        <source>Allow only authenticated users to create comments.</source>
+        <target>Salli vain todennettujen käyttäjien luoda kommentteja.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.0">
+        <source>Disable the security question</source>
+        <target>Ota turvakysymys poisa käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.disableCaptcha.1">
+        <source>Use this option only if you have limited comments to authenticated users.</source>
+        <target>Käytä tätä vaihtoehtoa jos kommentointi on rajoitettu vain todennetuille käyttäjille.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.0">
+        <source>Protect archive</source>
+        <target>Suojaa arkisto</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected.1">
+        <source>Show news items to certain member groups only.</source>
+        <target>Näytä uutisartikkelit vain tietyille jäsenryhmille.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.0">
+        <source>Allowed member groups</source>
+        <target>Sallitut jäsenryhmät</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.groups.1">
+        <source>These groups will be able to see the news items in this archive.</source>
+        <target>Nämä ryhmät voivat nähdä tämän arkiston uutiset.</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.0">
+        <source>Revision date</source>
+        <target>Revisiopäivämäärä</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Revision päivämäärä ja aika</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.title_legend">
+        <source>Title and redirect page</source>
+        <target>Otsikko ja uudelleenohjauksen sivu</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments_legend">
+        <source>Comments</source>
+        <target>Kommentit</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.protected_legend">
+        <source>Access protection</source>
+        <target>Salli suojaus</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feed_legend">
+        <source>RSS/Atom feed</source>
+        <target>RSS/Atom syöte</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_admin">
+        <source>System administrator</source>
+        <target>Järjestelmän ylläpitäjä</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_author">
+        <source>Author of the news item</source>
+        <target>Artikkelin kirjoittaja</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.notify_both">
+        <source>Author and system administrator</source>
+        <target>Luoja ja järjestelmän ylläpitäjä</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_teaser">
+        <source>News teasers</source>
+        <target>Uutiskatkelmat</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.source_text">
+        <source>Full articles</source>
+        <target>Kokonaiset artikkelit</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.0">
+        <source>New archive</source>
+        <target>Uutisarkisto</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.new.1">
+        <source>Create a new archive</source>
+        <target>Luo uusi arkisto</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.0">
+        <source>Archive details</source>
+        <target>Arkiston tarkemmat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.show.1">
+        <source>Show the details of archive ID %s</source>
+        <target>Näytä arkiston ID %s tarkemmat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.0">
+        <source>Edit archive</source>
+        <target>Muokkaa arkistoa</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.edit.1">
+        <source>Edit archive ID %s</source>
+        <target>Muokkaa arkistoa ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.0">
+        <source>Edit archive settings</source>
+        <target>Muokkaa arkiston asetuksia</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.editheader.1">
+        <source>Edit the settings of archive ID %s</source>
+        <target>Muokkaa arkiston ID %s asetuksia</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.0">
+        <source>Duplicate archive</source>
+        <target>Kopioi arkisto</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.copy.1">
+        <source>Duplicate archive ID %s</source>
+        <target>Kopioi arkisto ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.0">
+        <source>Delete archive</source>
+        <target>Poista arkisto</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.delete.1">
+        <source>Delete archive ID %s</source>
+        <target>Poista arkisto ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.0">
+        <source>Comments</source>
+        <target>Kommentit</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.comments.1">
+        <source>Show comments of archive ID %s</source>
+        <target>Näytä arkiston ID %s kommentit</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.0">
+        <source>RSS feeds</source>
+        <target>RSS syötteet</target>
+      </trans-unit>
+      <trans-unit id="tl_news_archive.feeds.1">
+        <source>Manage RSS feeds</source>
+        <target>Muokkaa RSS syötteitä</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

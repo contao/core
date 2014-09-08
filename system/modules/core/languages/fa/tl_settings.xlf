@@ -387,7 +387,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.0">
         <source>Maximum upload file size</source>
-        <target>بیشینه اندازه فایل بارگذاری</target>
+        <target>بیشینه اندازه پرونده بارگذاری</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.1">
         <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
@@ -587,7 +587,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.files_legend">
         <source>Files and images</source>
-        <target>فایل‌ها و تصاویر</target>
+        <target>پرونده‌ها و تصاویر</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploads_legend">
         <source>Upload settings</source>

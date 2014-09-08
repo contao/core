@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_install.repository.1">
         <source>We are currently beta testing a new version of the extension repository, which uses Composer to manage packages. Please install the Composer client to participate in the beta test.</source>
+        <target>ما در حال حاضر از نسخه جدید مخزن افزونه،که از کمپوزر برای مدیریت بسته‌ها استفاده می‌کند را آزمایش می‌کنیم. لطفا سرویس‌گیرنده کمپوزر را برای آزمایش بتا نصب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -274,12 +275,15 @@
       </trans-unit>
       <trans-unit id="tl_install.repositoryDefault">
         <source>You are using the default extension repository.</source>
+        <target>شما از مخزن افزونه پیش‌فرض استفاده می‌کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryComposer">
         <source>You are using the Composer based extension repository.</source>
+        <target>شما از مخزن افزونه برپایه کمپوزر استفاده می‌کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.repositoryInstall">
         <source>Install the Composer client</source>
+        <target>نصب سروی‌گیرنده کمپوزر</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

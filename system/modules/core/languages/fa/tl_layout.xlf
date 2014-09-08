@@ -215,6 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <target>اینجا می‌توانید پرونده‌های CSS، SCSS یا LESS اضافی را از سیستم پرونده اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -285,7 +286,7 @@
         <target>ویوپورت</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
+        <source>Here you can add a custom viewport (e.g. &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.0">
         <source>Title tag</source>
@@ -293,6 +294,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
         <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>اینجا می‌توانید برچسب عنوان را رونویسی نمایید (به طور پیش‌فرض &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;)</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>

@@ -138,12 +138,12 @@
         <target>Geef naam op voor het sitemap bestand zonder extensie.</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Gebruik HTTPS in sitemaps</target>
+        <source>Use HTTPS</source>
+        <target>Gebruik HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Genereer de sitemap-URL's van deze website met &lt;em&gt;https://&lt;/em&gt;.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Genereer de URL's met &lt;em&gt;https://&lt;/em&gt; (b.v. in sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

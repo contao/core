@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.dependentsdel">
         <source>The following extensions are dependent from &lt;em&gt;%s&lt;/em&gt; and may render broken:</source>
-        <target>Следующие расширения зависят от &lt;em&gt;%s&lt;/em&gt; и могут повредить:</target>
+        <target>Указанные ниже расширения зависят от &lt;em&gt;%s&lt;/em&gt; и могут быть сломаны или неработоспособны:</target>
       </trans-unit>
       <trans-unit id="tl_repository.donate">
         <source>Donate</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.manual">
         <source>Manual</source>
-        <target>Вручную</target>
+        <target>Руководство</target>
       </trans-unit>
       <trans-unit id="tl_repository.no">
         <source>no</source>
@@ -427,7 +427,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.notfound">
         <source>not found</source>
-        <target>не найдено</target>
+        <target>не найден</target>
       </trans-unit>
       <trans-unit id="tl_repository.ok">
         <source>OK</source>
@@ -435,7 +435,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.okuninstextension">
         <source>OK to uninstall &lt;em&gt;%s&lt;/em&gt; now?</source>
-        <target>Деинсталлировать &lt;em&gt;%s&lt;/em&gt;?</target>
+        <target>Деинсталлировать расширение &lt;em&gt;%s&lt;/em&gt;?</target>
       </trans-unit>
       <trans-unit id="tl_repository.showdetails">
         <source>Show details</source>
@@ -455,7 +455,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.uninstallextension">
         <source>Uninstall extension</source>
-        <target>Деинсталлировать расширение</target>
+        <target>Деинсталляция расширения</target>
       </trans-unit>
       <trans-unit id="tl_repository.updatedatabase">
         <source>Update database</source>
@@ -463,7 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.updateextension">
         <source>Update extension</source>
-        <target>Обновление расширений</target>
+        <target>Обновление расширения</target>
       </trans-unit>
       <trans-unit id="tl_repository.updateextensions">
         <source>Update checked extensions</source>

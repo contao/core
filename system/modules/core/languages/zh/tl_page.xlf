@@ -138,12 +138,10 @@
         <target>请输入不含扩展名的站点地图文件名称。</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>在站点地图中使用HTTPS</target>
+        <source>Use HTTPS</source>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>以&lt;em&gt;https://&lt;/em&gt;生成网站的站点地图网址。</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

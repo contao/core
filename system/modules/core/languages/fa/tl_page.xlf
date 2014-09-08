@@ -138,12 +138,12 @@
         <target>لطفا نام فایل نقشه وب‌سایت را بدون پسوند وارد نمتئید.</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>استفاده از HTTPS در نقشه وب‌سایت</target>
+        <source>Use HTTPS</source>
+        <target>استفاده از HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>تولید URL های نقشه سایت وب سایت با &lt;em&gt;https://&lt;/em&gt;.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>نشانی‌های وب با &lt;em&gt;https://&lt;/em&gt; تولید می‌کند (مثلا در نقشه‌سایت‌ها).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

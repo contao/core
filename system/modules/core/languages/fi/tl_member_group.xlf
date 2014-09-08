@@ -1,0 +1,114 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_member_group.php" source-language="en">
+    <body>
+      <trans-unit id="tl_member_group.name.0">
+        <source>Title</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.name.1">
+        <source>Please enter the group title.</source>
+        <target>Ole hyvä ja anna ryhmälle otsikko.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect.0">
+        <source>Redirect on login</source>
+        <target>Ohjaa toiselle sivulle kirjautumisen jälkeen</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect.1">
+        <source>Redirect group members to a custom page when they log in.</source>
+        <target>Ohjaa ryhmän jäsenet toiselle sivulle kirjautumisen jälkeen.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.jumpTo.0">
+        <source>Redirect page</source>
+        <target>Uudelleenohjauksen sivu</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.jumpTo.1">
+        <source>Please choose the page to which the group members will be redirected.</source>
+        <target>Ole hyvä ja valitse sivu jolle ryhmän jäsenet ohjataan.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable.0">
+        <source>Deactivate</source>
+        <target>Poista käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable.1">
+        <source>Temporarily disable the group.</source>
+        <target>Poista ryhmä tilapäisesti käytöstä.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.start.0">
+        <source>Activate on</source>
+        <target>Ota käyttöön ajastetusti</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.start.1">
+        <source>Automatically activate the group on this day.</source>
+        <target>Ota ryhmä ajastetusti käyttöön tänä ajankohtana.</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.stop.0">
+        <source>Deactivate on</source>
+        <target>Poista käytöstä ajastetusti</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.stop.1">
+        <source>Automatically deactivate the group on this day.</source>
+        <target>Poista ryhmä ajastetusti käytöstä tänä ajankohtana</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.title_legend">
+        <source>Title</source>
+        <target>Otsikko</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.redirect_legend">
+        <source>Auto-redirect</source>
+        <target>Automaattinen edelleenohjaus</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.disable_legend">
+        <source>Account settings</source>
+        <target>Tilin asetukset</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.new.0">
+        <source>New group</source>
+        <target>Uusi ryhmä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.new.1">
+        <source>Create a new group</source>
+        <target>Luo uusi ryhmä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.show.0">
+        <source>Group details</source>
+        <target>Ryhmän tarkemmat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.show.1">
+        <source>Show the details of group ID %s</source>
+        <target>Näytä ryhmän ID %s tarkemmat tiedot</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.edit.0">
+        <source>Edit group</source>
+        <target>Muokkaa ryhmää</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.edit.1">
+        <source>Edit group ID %s</source>
+        <target>Muokkaa ryhmää ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.copy.0">
+        <source>Duplicate group</source>
+        <target>Kopioi ryhmä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.copy.1">
+        <source>Duplicate group ID %s</source>
+        <target>Kopioi ryhmä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.delete.0">
+        <source>Delete group</source>
+        <target>Poista ryhmä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.delete.1">
+        <source>Delete group ID %s</source>
+        <target>Poista ryhmä ID %s</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.toggle.0">
+        <source>Activate/deactivate group</source>
+        <target>Ota käyttöön / poista käytöstä</target>
+      </trans-unit>
+      <trans-unit id="tl_member_group.toggle.1">
+        <source>Activate/deactivate group ID %s</source>
+        <target>Ota käyttöön / poista käytöstä ryhmä ID %s</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
