@@ -2555,7 +2555,12 @@ abstract class Controller extends \System
 			}
 		}
 
-		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
+		$imageObj = new \Image($arrItem['singleSRC']);
+		$src = $imageObj->setTargetWidth($size[0])
+			->setTargetHeight($size[1])
+			->setResizeMode($size[2])
+			->executeResize()
+			->getResizedPath();
 
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
@@ -2566,7 +2571,7 @@ abstract class Controller extends \System
 
 		if (is_numeric($size[2]))
 		{
-			$picture = \Image::getPicture($arrItem['singleSRC'], $size[2]);
+			$picture = $imageObj->getPicture($size[2]);
 		}
 		else
 		{

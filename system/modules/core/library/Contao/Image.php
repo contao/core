@@ -545,6 +545,138 @@ class Image
 
 
 	/**
+	 * Resize an image and create a picture element definition
+	 *
+	 * @param integer $imageSizeId
+	 *
+	 * @return array The picture element definition
+	 */
+	public function getPicture($imageSizeId)
+	{
+		$image = rawurldecode($this->getOriginalPath());
+
+		// Check whether the file exists
+		if (!is_file(TL_ROOT . '/' . $image))
+		{
+			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
+			return null;
+		}
+
+		$imageSize = \ImageSizeModel::findByPk($imageSizeId);
+
+		if (!$imageSize)
+		{
+			\System::log('Image size ID "' . $imageSizeId . '" could not be found', __METHOD__, TL_ERROR);
+			return null;
+		}
+
+		$importantPart = null;
+
+		$fileRecord = \FilesModel::findByPath($image);
+		if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+		{
+			$importantPart = array(
+				'x' => (int)$fileRecord->importantPartX,
+				'y' => (int)$fileRecord->importantPartY,
+				'width' => (int)$fileRecord->importantPartWidth,
+				'height' => (int)$fileRecord->importantPartHeight,
+			);
+		}
+
+		$mainSource = $this->getPictureSource($importantPart, $imageSize);
+		$sources = array();
+
+		$imageSizeItems = \ImageSizeItemModel::findByPid($imageSize->id, array('order' => 'sorting ASC'));
+
+		foreach ($imageSizeItems as $imageSizeItem)
+		{
+			$sources[] = $this->getPictureSource($importantPart, $imageSizeItem);
+		}
+
+		return array(
+			'img' => $mainSource,
+			'sources' => $sources,
+		);
+	}
+
+
+	/**
+	 * Get the attributes for one picture source element
+	 *
+	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
+	 * @param \Model  $imageSize     The image size or image size item model
+	 *
+	 * @return array The source element attributes
+	 */
+	public function getPictureSource($importantPart, $imageSize)
+	{
+		$densities = array();
+
+		if (!empty($imageSize->densities) && ($imageSize->width || $imageSize->height))
+		{
+			$densities = array_filter(array_map('floatval', explode(',', $imageSize->densities)));
+		}
+
+		array_unshift($densities, 1);
+		$densities = array_values(array_unique($densities));
+
+		$attributes = array();
+		$srcset = array();
+
+		foreach ($densities as $density)
+		{
+			$imageObj = new static($this->getOriginalPath());
+			$src = $imageObj->setTargetWidth($imageSize->width * $density)
+				->setTargetHeight($imageSize->height * $density)
+				->setResizeMode($imageSize->resizeMode)
+				->setTargetPath('')
+				->setForceOverride(false)
+				->setZoomLevel($imageSize->zoom)
+				->setImportantPart($importantPart)
+				->executeResize()
+				->getResizedPath();
+
+			if (empty($attributes['src']))
+			{
+				$attributes['src'] = htmlspecialchars(TL_FILES_URL . $src, ENT_QUOTES);
+				$size = getimagesize(TL_ROOT .'/'. $src);
+				$attributes['width'] = $size[0];
+				$attributes['height'] = $size[1];
+			}
+
+			if (count($densities) > 1)
+			{
+				if (empty($imageSize->sizes))
+				{
+					$src .= ' ' . $density . 'x';
+				}
+				else
+				{
+					$size = getimagesize(TL_ROOT .'/'. $src);
+					$src .= ' ' . $size[0] . 'w';
+				}
+			}
+
+			$srcset[] = TL_FILES_URL . $src;
+		}
+
+		$attributes['srcset'] = htmlspecialchars(implode(', ', $srcset), ENT_QUOTES);
+
+		if (!empty($imageSize->sizes))
+		{
+			$attributes['sizes'] = htmlspecialchars($imageSize->sizes, ENT_QUOTES);
+		}
+
+		if (!empty($imageSize->media))
+		{
+			$attributes['media'] = htmlspecialchars($imageSize->media, ENT_QUOTES);
+		}
+
+		return $attributes;
+	}
+
+
+	/**
 	 * Calculate the resize coordinates
 	 *
 	 * @param integer $width          The target width
@@ -1033,137 +1165,6 @@ class Image
 		$size = getimagesize(TL_ROOT .'/'. $src);
 		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
-
-
-	/**
-	 * Resize an image and create a picture element definition
-	 *
-	 * @param string  $image       The image path
-	 * @param integer $imageSizeId
-	 *
-	 * @return array The picture element definition
-	 */
-	public static function getPicture($image, $imageSizeId)
-	{
-		if ($image == '')
-		{
-			return null;
-		}
-
-		$image = rawurldecode($image);
-
-		// Check whether the file exists
-		if (!is_file(TL_ROOT . '/' . $image))
-		{
-			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
-			return null;
-		}
-
-		$imageSize = \ImageSizeModel::findByPk($imageSizeId);
-
-		if (!$imageSize)
-		{
-			\System::log('Image size ID "' . $imageSizeId . '" could not be found', __METHOD__, TL_ERROR);
-			return null;
-		}
-
-		$importantPart = null;
-
-		$fileRecord = \FilesModel::findByPath($image);
-		if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
-		{
-			$importantPart = array(
-				'x' => (int)$fileRecord->importantPartX,
-				'y' => (int)$fileRecord->importantPartY,
-				'width' => (int)$fileRecord->importantPartWidth,
-				'height' => (int)$fileRecord->importantPartHeight,
-			);
-		}
-
-		$mainSource = static::getPictureSource($image, $importantPart, $imageSize);
-		$sources = array();
-
-		$imageSizeItems = \ImageSizeItemModel::findByPid($imageSize->id, array('order' => 'sorting ASC'));
-
-		foreach ($imageSizeItems as $imageSizeItem)
-		{
-			$sources[] = static::getPictureSource($image, $importantPart, $imageSizeItem);
-		}
-
-		return array(
-			'img' => $mainSource,
-			'sources' => $sources,
-		);
-	}
-
-
-	/**
-	 * Get the attributes for one picture source element
-	 *
-	 * @param string  $image         The image path
-	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
-	 * @param \Model  $imageSize     The image size or image size item model
-	 *
-	 * @return array The source element attributes
-	 */
-	protected static function getPictureSource($image, $importantPart, $imageSize)
-	{
-		$densities = array();
-
-		if (!empty($imageSize->densities) && ($imageSize->width || $imageSize->height))
-		{
-			$densities = array_filter(array_map('floatval', explode(',', $imageSize->densities)));
-		}
-
-		array_unshift($densities, 1);
-		$densities = array_values(array_unique($densities));
-
-		$attributes = array();
-		$srcset = array();
-
-		foreach ($densities as $density)
-		{
-			$src = static::get($image, $imageSize->width * $density, $imageSize->height * $density, $imageSize->resizeMode, null, false, $imageSize->zoom, $importantPart);
-
-			if (empty($attributes['src']))
-			{
-				$attributes['src'] = htmlspecialchars(TL_FILES_URL . $src, ENT_QUOTES);
-				$size = getimagesize(TL_ROOT .'/'. $src);
-				$attributes['width'] = $size[0];
-				$attributes['height'] = $size[1];
-			}
-
-			if (count($densities) > 1)
-			{
-				if (empty($imageSize->sizes))
-				{
-					$src .= ' ' . $density . 'x';
-				}
-				else
-				{
-					$size = getimagesize(TL_ROOT .'/'. $src);
-					$src .= ' ' . $size[0] . 'w';
-				}
-			}
-
-			$srcset[] = TL_FILES_URL . $src;
-		}
-
-		$attributes['srcset'] = htmlspecialchars(implode(', ', $srcset), ENT_QUOTES);
-
-		if (!empty($imageSize->sizes))
-		{
-			$attributes['sizes'] = htmlspecialchars($imageSize->sizes, ENT_QUOTES);
-		}
-
-		if (!empty($imageSize->media))
-		{
-			$attributes['media'] = htmlspecialchars($imageSize->media, ENT_QUOTES);
-		}
-
-		return $attributes;
-	}
-
 
 
 	/**
