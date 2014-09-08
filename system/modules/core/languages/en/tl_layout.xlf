@@ -170,6 +170,18 @@
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.externalPosition.0">
+        <source>Additional style sheets position</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.externalPosition.1">
+        <source>Here you can define whether to load the additional stylesheets before or after the internal stylesheets.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.externalPositions.before">
+        <source>Before internal stylesheets</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.externalPositions.after">
+        <source>After internal stylesheets</source>
+      </trans-unit>
       <trans-unit id="tl_layout.webfonts.0">
         <source>Google web fonts</source>
       </trans-unit>

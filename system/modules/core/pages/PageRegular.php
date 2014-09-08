@@ -591,12 +591,23 @@ class PageRegular extends \Frontend
 
 			if ($objFiles !== null)
 			{
+				$arrFiles = array();
 				while ($objFiles->next())
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
+						$arrFiles[] = $objFiles->path . '||static';
 					}
+				}
+				if ($objLayout->externalPosition == 'before')
+				{
+					// Inject external stylesheets before internal styles
+					array_splice($GLOBALS['TL_USER_CSS'], 0, 0, $arrFiles);
+				}
+				else
+				{
+					// Inject external stylesheets after internal styles
+					array_splice($GLOBALS['TL_USER_CSS'], count($GLOBALS['TL_USER_CSS']), 0, $arrFiles);
 				}
 			}
 		}
