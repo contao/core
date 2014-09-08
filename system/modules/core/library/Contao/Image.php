@@ -553,7 +553,7 @@ class Image
 
 			case 'jpg':
 			case 'jpeg':
-				imageinterlace($strNewImage, 1); // see #6529
+				imageinterlace($strGdImage, 1); // see #6529
 				imagejpeg($strGdImage, $path, (\Config::get('jpgQuality') ?: 80));
 				break;
 
