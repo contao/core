@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['imageSizes'],
 				'href'                => 'table=tl_image_size',
-				'icon'                => 'imageSizes.gif',
+				'icon'                => 'imageSizes.png',
 				'button_callback'     => array('tl_theme', 'editImageSizes')
 			),
 			'exportTheme' => array
