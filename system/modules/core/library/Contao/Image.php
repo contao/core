@@ -13,6 +13,7 @@
 namespace Contao;
 
 
+// @TODO: Adjust this description
 /**
  * Resizes images
  *
@@ -50,140 +51,398 @@ namespace Contao;
  */
 class Image
 {
+	/**
+	 * The image path
+	 *
+	 * @var string
+	 */
+	protected $path = '';
 
 	/**
-	 * Resize or crop an image and replace the original with the resized version
+	 * The File instance of the original image
 	 *
-	 * @param string  $image  The image path
-	 * @param integer $width  The target width
-	 * @param integer $height The target height
-	 * @param string  $mode   The resize mode
-	 *
-	 * @return boolean True if the image could be resized successfully
+	 * @var \File
 	 */
-	public static function resize($image, $width, $height, $mode='')
-	{
-		return static::get($image, $width, $height, $mode, $image, true) ? true : false;
-	}
-
+	protected $fileObj = null;
 
 	/**
-	 * Resize an image and store the resized version in the assets/images folder
+	 * The resized image path
 	 *
-	 * @param string  $image         The image path
-	 * @param integer $width         The target width
-	 * @param integer $height        The target height
-	 * @param string  $mode          The resize mode
-	 * @param string  $target        An optional target path
-	 * @param boolean $force         Override existing target images
-	 * @param integer $zoom          Zoom between 0 and 100
-	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
-	 *
-	 * @return string|null The path of the resized image or null
+	 * @var string
 	 */
-	public static function get($image, $width, $height, $mode='', $target=null, $force=false, $zoom=0, $importantPart=null)
+	protected $resizedPath = '';
+
+	/**
+	 * The target resize width
+	 *
+	 * @var int
+	 */
+	protected $targetWidth = 0;
+
+	/**
+	 * The target height
+	 *
+	 * @var int
+	 */
+	protected $targetHeight = 0;
+
+	/**
+	 * The resize mode
+	 * Default is crop for BC
+	 *
+	 * @var string
+	 */
+	protected $resizeMode = 'crop';
+
+	/**
+	 * The target Path
+	 *
+	 * @var string
+	 */
+	protected $targetPath = '';
+
+	/**
+	 * Whether to force overriding an existing target
+	 *
+	 * @var boolean
+	 */
+	protected $forceOverride = false;
+
+	/**
+	 * Zoom level (between 0 and 100)
+	 *
+	 * @var int
+	 */
+	protected $zoomLevel = 0;
+
+	/**
+	 * Important part of the image settings
+	 *
+	 * @var array
+	 */
+	protected $importantPart = array();
+
+	/**
+	 * Create a new object to handle an image
+	 *
+	 * @param string $path  The image path
+	 * @return $this
+	 * @throws \InvalidArgumentException
+	 */
+	public function __construct($path)
 	{
-		if ($image == '')
+		// @todo should throw specific exceptions so they can be caught properly
+		if ($path === '')
 		{
-			return null;
+			throw new \InvalidArgumentException('Cannot create image object from empty path!');
 		}
-
-		$image = rawurldecode($image);
 
 		// Check whether the file exists
-		if (!is_file(TL_ROOT . '/' . $image))
+		if (!is_file(TL_ROOT . '/' . $path))
 		{
-			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
-			return null;
+			throw new \InvalidArgumentException('Image "' . $path . '" could not be found');
 		}
 
-		// Load the image size from the database if $mode is an id
-		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
-		{
-			$fileRecord = \FilesModel::findByPath($image);
-			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
-			{
-				$importantPart = array(
-					'x' => (int)$fileRecord->importantPartX,
-					'y' => (int)$fileRecord->importantPartY,
-					'width' => (int)$fileRecord->importantPartWidth,
-					'height' => (int)$fileRecord->importantPartHeight,
-				);
-			}
-
-			return static::get($image, $imageSize->width, $imageSize->height, $imageSize->resizeMode, $target, $force, $imageSize->zoom, $importantPart);
-		}
-
-		$objFile = new \File($image, true);
-		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('validImageTypes')));
+		$this->fileObj = new \File($path, true);
+		$arrAllowedTypes = array_map('trim', explode(',', Config::get('validImageTypes')));
 
 		// Check the file type
-		if (!in_array($objFile->extension, $arrAllowedTypes))
+		if (!in_array($this->fileObj->extension, $arrAllowedTypes))
 		{
-			\System::log('Image type "' . $objFile->extension . '" was not allowed to be processed', __METHOD__, TL_ERROR);
-			return null;
+			throw new \InvalidArgumentException('Image type "' . $this->fileObj->extension . '" was not allowed to be processed');
 		}
+
+		$this->path = rawurldecode($path);
+
+		// Set default important part
+		$this->setImportantPart(array(
+			'x' => 0,
+			'y' => 0,
+			'width' => $this->fileObj->width,
+			'height' => $this->fileObj->height,
+		));
+	}
+
+	/**
+	 * Whether to force overriding the target image or not (default false)
+	 *
+	 * @param boolean $forceOverride
+	 * @return $this
+	 */
+	public function setForceOverride($forceOverride)
+	{
+		$this->forceOverride = (bool) $forceOverride;
+
+		return $this;
+	}
+
+	/**
+	 * Get force override setting
+	 *
+	 * @return boolean
+	 */
+	public function getForceOverride()
+	{
+		return $this->forceOverride;
+	}
+
+	/**
+	 * Set the important part settings
+	 *
+	 * @param array $importantPart
+	 * @return $this
+	 */
+	public function setImportantPart(array $importantPart)
+	{
+		$this->importantPart = $importantPart;
+
+		return $this;
+	}
+
+	/**
+	 * Set the important part settings
+	 *
+	 * @return array
+	 */
+	public function getImportantPart()
+	{
+		return $this->importantPart;
+	}
+
+	/**
+	 * Set the target height
+	 *
+	 * @param int $targetHeight
+	 * @return $this
+	 */
+	public function setTargetHeight($targetHeight)
+	{
+		$this->targetHeight = (int) $targetHeight;
+
+		return $this;
+	}
+
+	/**
+	 * Get the target height
+	 *
+	 * @return int
+	 */
+	public function getTargetHeight()
+	{
+		return $this->targetHeight;
+	}
+
+	/**
+	 * Set the target width
+	 *
+	 * @param int $targetWidth
+	 * @return $this
+	 */
+	public function setTargetWidth($targetWidth)
+	{
+		$this->targetWidth = (int) $targetWidth;
+
+		return $this;
+	}
+
+	/**
+	 * Get the target width
+	 *
+	 * @return int
+	 */
+	public function getTargetWidth()
+	{
+		return $this->targetWidth;
+	}
+
+	/**
+	 * Set the target path
+	 *
+	 * @param string $targetPath
+	 * @return $this
+	 */
+	public function setTargetPath($targetPath)
+	{
+		// @todo validate?
+		$this->targetPath = (string) $targetPath;
+
+		return $this;
+	}
+
+	/**
+	 * Get the target path
+	 *
+	 * @return string
+	 */
+	public function getTargetPath()
+	{
+		return $this->targetPath;
+	}
+
+	/**
+	 * Set the zoom level
+	 *
+	 * @param int $zoomLevel
+	 * @return $this
+	 * @throws \InvalidArgumentException
+	 */
+	public function setZoomLevel($zoomLevel)
+	{
+		$zoomLevel = (int) $zoomLevel;
+
+		if ($zoomLevel < 0 || $zoomLevel > 100)
+		{
+			throw new \InvalidArgumentException('Zoom level must be between 0 and 100!');
+		}
+
+		$this->zoomLevel = $zoomLevel;
+
+		return $this;
+	}
+
+	/**
+	 * Get the zoom level
+	 *
+	 * @return int
+	 */
+	public function getZoomLevel()
+	{
+		return $this->zoomLevel;
+	}
+
+	/**
+	 * Set the resize mode
+	 *
+	 * @param string $resizeMode
+	 * @return $this
+	 */
+	public function setResizeMode($resizeMode)
+	{
+		// @todo validate
+		$this->resizeMode = $resizeMode;
+
+		return $this;
+	}
+
+	/**
+	 * Get the resize mode
+	 *
+	 * @return string
+	 */
+	public function getResizeMode()
+	{
+		return $this->resizeMode;
+	}
+
+	/**
+	 * Get the original path
+	 *
+	 * @return string
+	 */
+	public function getOriginalPath()
+	{
+		return $this->path;
+	}
+
+	/**
+	 * Get the path of the resized image
+	 *
+	 * @return string
+	 */
+	public function getResizedPath()
+	{
+		return $this->resizedPath;
+	}
+
+	/**
+	 * Get the cache name
+	 *
+	 * @return string
+	 */
+	public function getCacheName()
+	{
+		$importantPart = $this->getImportantPart();
+
+		$strCacheKey = substr(md5('-w' . $this->getTargetWidth()
+			. '-h' . $this->getTargetHeight()
+			. '-' . $this->getOriginalPath()
+			. '-' . $this->getResizeMode()
+			. '-' . $this->getZoomLevel()
+			. '-' . $importantPart['x']
+			. '-' . $importantPart['y']
+			. '-' . $importantPart['width']
+			. '-' . $importantPart['height']
+			. '-' . $this->fileObj->mtime), 0, 8);
+
+		return 'assets/images/'
+		. substr($strCacheKey, -1)
+		. '/'
+		. $this->fileObj->filename
+		. '-'
+		. $strCacheKey
+		. '.'
+		. $this->fileObj->extension;
+	}
+
+	/**
+	 * Resize the image
+	 *
+	 * @return $this
+	 */
+	public function executeResize()
+	{
+		// @todo implement
+		$importantPart = $this->getImportantPart();
 
 		// No resizing required
-		if (($objFile->width == $width || !$width) && ($objFile->height == $height || !$height) && (!$importantPart || !$zoom))
+		if (
+			($this->fileObj->width == $this->getTargetWidth() || !$this->getTargetWidth())
+			&& ($this->fileObj->height == $this->getTargetHeight() || !$this->getTargetHeight())
+			&& (empty($importantPart) || !$this->getZoomLevel()))
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
-			if ($target)
+			if ($this->getTargetPath())
 			{
 				// Copy the source image if the target image does not exist or is older than the source image
-				if (!file_exists(TL_ROOT . '/' . $target) || $objFile->mtime > filemtime(TL_ROOT . '/' . $target))
+				if (!file_exists(TL_ROOT . '/' . $this->getTargetPath())
+					|| $this->fileObj->mtime > filemtime(TL_ROOT . '/' . $this->getTargetPath()))
 				{
-					\Files::getInstance()->copy($image, $target);
+					\Files::getInstance()->copy($this->getOriginalPath(), $this->getTargetPath());
 				}
 
-				return \System::urlEncode($target);
+				$this->resizedPath = \System::urlEncode($this->getOriginalPath());
 			}
 
-			return \System::urlEncode($image);
+			$this->resizedPath = \System::urlEncode($this->getOriginalPath());
 		}
-
-		if (!is_array($importantPart))
-		{
-			$importantPart = array(
-				'x' => 0,
-				'y' => 0,
-				'width' => $objFile->width,
-				'height' => $objFile->height,
-			);
-		}
-
-		// No mode given
-		if ($mode == '')
-		{
-			$mode = 'crop';
-		}
-
-		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $zoom . '-' . $importantPart['x'] . '-' . $importantPart['y'] . '-' . $importantPart['width'] . '-' . $importantPart['height'] . '-' . $objFile->mtime), 0, 8);
-		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
 		// Check whether the image exists already
 		if (!\Config::get('debugMode'))
 		{
 			// Custom target (thanks to Tristan Lins) (see #4166)
-			if ($target && !$force)
+			if ($this->getTargetPath() && !$this->getForceOverride())
 			{
-				if (file_exists(TL_ROOT . '/' . $target) && $objFile->mtime <= filemtime(TL_ROOT . '/' . $target))
+				if (file_exists(TL_ROOT . '/' . $this->getTargetPath())
+					&& $this->fileObj->mtime <= filemtime(TL_ROOT . '/' . $this->getTargetPath()))
 				{
-					return \System::urlEncode($target);
+					$this->resizedPath = \System::urlEncode($this->getOriginalPath());
 				}
 			}
 
 			// Regular cache file
-			if (file_exists(TL_ROOT . '/' . $strCacheName))
+			if (file_exists(TL_ROOT . '/' . $this->getCacheName()))
 			{
 				// Copy the cached file if it exists
-				if ($target)
+				if ($this->getOriginalPath())
 				{
-					\Files::getInstance()->copy($strCacheName, $target);
-					return \System::urlEncode($target);
+					\Files::getInstance()->copy(
+						$this->getCacheName(),
+						$this->getTargetPath()
+					);
+					$this->resizedPath = \System::urlEncode($this->getTargetPath());
 				}
 
-				return \System::urlEncode($strCacheName);
+				$this->resizedPath = \System::urlEncode($this->getCacheName());
 			}
 		}
 
@@ -192,33 +451,50 @@ class Image
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
-				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile, $target, $zoom, $importantPart);
+				$return = \System::importStatic($callback[0])->$callback[1](
+					$this->getOriginalPath(),
+					$this->getTargetWidth(),
+					$this->getTargetHeight(),
+					$this->getResizeMode(),
+					$this->getCacheName(),
+					$this->fileObj,
+					$this->getTargetPath(),
+					$this->getZoomLevel(),
+					$this->getImportantPart(),
+					$this
+				);
 
 				if (is_string($return))
 				{
-					return \System::urlEncode($return);
+					$this->resizedPath = \System::urlEncode($return);
 				}
 			}
 		}
 
 		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight'))
+		if (!extension_loaded('gd')
+			|| !$this->fileObj->isGdImage
+			|| $this->fileObj->width > \Config::get('gdMaxImgWidth')
+			|| $this->fileObj->height > \Config::get('gdMaxImgHeight')
+			|| (!$this->getTargetWidth() && !$this->getTargetHeight())
+			|| $this->getTargetWidth() > \Config::get('gdMaxImgWidth')
+			|| $this->getTargetHeight() > \Config::get('gdMaxImgHeight'))
 		{
-			return \System::urlEncode($image);
+			$this->resizedPath = \System::urlEncode($this->getOriginalPath());
 		}
 
-		$coordinates = static::computeResize($width, $height, $objFile->width, $objFile->height, $mode, $zoom, $importantPart);
+		$coordinates = $this->computeResize();
 
 		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
 
-		$strSourceImage = static::getGdImageFromFile($objFile);
+		$strSourceImage = static::getGdImageFromFile($this->fileObj);
 
 		// The new image could not be created
 		if (!$strSourceImage)
 		{
 			imagedestroy($strNewImage);
-			\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
-			return null;
+			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
+			$this->resizedPath = '';
 		}
 
 		imagecopyresampled(
@@ -230,31 +506,32 @@ class Image
 			0,
 			$coordinates['target_width'],
 			$coordinates['target_height'],
-			$objFile->width,
-			$objFile->height
+			$this->fileObj->width,
+			$this->fileObj->height
 		);
 
-		static::saveGdImageToFile($strNewImage, TL_ROOT . '/' . $strCacheName, $objFile->extension);
+		static::saveGdImageToFile($strNewImage, TL_ROOT . '/' . $this->getCacheName(), $this->fileObj->extension);
 
 		// Destroy the temporary images
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
 
 		// Resize the original image
-		if ($target)
+		if ($this->getTargetPath())
 		{
-			\Files::getInstance()->copy($strCacheName, $target);
-			return \System::urlEncode($target);
+			\Files::getInstance()->copy($this->getCacheName(), $this->getTargetPath());
+			return \System::urlEncode($this->getTargetPath());
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
 		if (\Config::get('useFTP'))
 		{
-			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
+			\Files::getInstance()->chmod($this->getCacheName(), \Config::get('defaultFileChmod'));
 		}
 
-		// Return the path to new image
-		return \System::urlEncode($strCacheName);
+		$this->resizedPath = \System::urlEncode($this->getCacheName());
+
+		return $this;
 	}
 
 
@@ -271,8 +548,16 @@ class Image
 	 *
 	 * @return array The resize coordinates: width, height, target_x, target_y, target_width, target_height
 	 */
-	protected static function computeResize($width, $height, $originalWidth, $originalHeight, $mode, $zoom, $importantPart)
+	public function computeResize()
 	{
+		$width = $this->getTargetWidth();
+		$height = $this->getTargetHeight();
+		$originalWidth = $this->fileObj->width;
+		$originalHeight = $this->fileObj->height;
+		$mode = $this->getResizeMode();
+		$zoom = $this->getZoomLevel();
+		$importantPart = $this->getImportantPart();
+
 		// Backwards compatibility for old modes:
 		// left_top, center_top, right_top,
 		// left_center, center_center, right_center,
@@ -458,7 +743,7 @@ class Image
 	 *
 	 * @return resource GD image
 	 */
-	protected static function createGdImage($width, $height)
+	public static function createGdImage($width, $height)
 	{
 		$gdImage = imagecreatetruecolor($width, $height);
 
@@ -484,7 +769,7 @@ class Image
 	 *
 	 * @return resource GD image
 	 */
-	protected static function getGdImageFromFile($objFile)
+	public static function getGdImageFromFile(\File $objFile)
 	{
 		$arrGdinfo = gd_info();
 		$strGdImage = null;
@@ -527,7 +812,7 @@ class Image
 	 *
 	 * @return void
 	 */
-	protected static function saveGdImageToFile($strGdImage, $path, $extension)
+	public static function saveGdImageToFile($strGdImage, $path, $extension)
 	{
 		$arrGdinfo = gd_info();
 
@@ -570,7 +855,7 @@ class Image
 	 *
 	 * @return resource The GD palette image
 	 */
-	protected static function convertGdImageToPaletteImage($image)
+	public static function convertGdImageToPaletteImage($image)
 	{
 		$width = imagesx($image);
 		$height = imagesy($image);
@@ -653,7 +938,7 @@ class Image
 	 *
 	 * @return integer
 	 */
-	protected static function countGdImageColors($image, $max = null)
+	public static function countGdImageColors($image, $max = null)
 	{
 		$colors = array();
 		$width = imagesx($image);
@@ -682,7 +967,7 @@ class Image
 	 *
 	 * @return boolean
 	 */
-	protected static function isGdImageSemitransparent($image)
+	public static function isGdImageSemitransparent($image)
 	{
 		$width = imagesx($image);
 		$height = imagesy($image);
@@ -868,5 +1153,108 @@ class Image
 		}
 
 		return $attributes;
+	}
+
+
+
+	/**
+	 * @deprecated
+	 * Resize or crop an image and replace the original with the resized version
+	 *
+	 * @param string  $image  The image path
+	 * @param integer $width  The target width
+	 * @param integer $height The target height
+	 * @param string  $mode   The resize mode
+	 *
+	 * @return boolean True if the image could be resized successfully
+	 */
+	public static function resize($image, $width, $height, $mode='')
+	{
+		try {
+			$imageObj = new Image($image);
+			$resizedPath = $imageObj->setTargetWidth($width)
+				->setTargetHeight($height)
+				->setResizeMode($mode)
+				->setTargetPath($image)
+				->setForceOverride(true)
+				->executeResize()
+				->getResizedPath();
+
+			return (bool) $resizedPath;
+		}
+		catch (\InvalidArgumentException $e)
+		{
+			return false;
+		}
+	}
+
+
+	/**
+	 * @deprecated
+	 * Resize an image and store the resized version in the assets/images folder
+	 *
+	 * @param string  $image         The image path
+	 * @param integer $width         The target width
+	 * @param integer $height        The target height
+	 * @param string  $mode          The resize mode
+	 * @param string  $target        An optional target path
+	 * @param boolean $force         Override existing target images
+	 * @param integer $zoom          Zoom between 0 and 100
+	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
+	 *
+	 * @return string|null The path of the resized image or null
+	 */
+	public static function get($image, $width, $height, $mode='', $target=null, $force=false, $zoom=0, $importantPart=null)
+	{
+		try
+		{
+			$imageObj = new Image($image);
+		}
+		catch (\InvalidArgumentException $e)
+		{
+			// @todo catch specific exceptions to log properly
+			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
+			return null;
+		}
+
+		// Load the image size from the database if $mode is an id
+		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
+		{
+			$fileRecord = \FilesModel::findByPath($image);
+			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+			{
+				$importantPart = array(
+					'x' => (int)$fileRecord->importantPartX,
+					'y' => (int)$fileRecord->importantPartY,
+					'width' => (int)$fileRecord->importantPartWidth,
+					'height' => (int)$fileRecord->importantPartHeight,
+				);
+			}
+
+			try
+			{
+				$resizedPath = $imageObj->setTargetWidth($width)
+					->setTargetHeight($height)
+					->setResizeMode($mode)
+					->setTargetPath($target)
+					->setForceOverride($force)
+					->setZoomLevel($zoom)
+					->setImportantPart($importantPart)
+					->executeResize()
+					->getResizedPath();
+
+				// BC
+				if ($resizedPath == '')
+				{
+					return null;
+				}
+
+				return $resizedPath;
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				return null;
+			}
+		}
 	}
 }
