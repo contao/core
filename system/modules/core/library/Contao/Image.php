@@ -403,9 +403,13 @@ class Image
 				}
 
 				$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+
+				return $this;
 			}
 
 			$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+
+			return $this;
 		}
 
 		// Check whether the image exists already
@@ -415,9 +419,12 @@ class Image
 			if ($this->getTargetPath() && !$this->getForceOverride())
 			{
 				if (file_exists(TL_ROOT . '/' . $this->getTargetPath())
-					&& $this->fileObj->mtime <= filemtime(TL_ROOT . '/' . $this->getTargetPath()))
+					&& $this->fileObj->mtime <= filemtime(TL_ROOT . '/' . $this->getTargetPath())
+				)
 				{
 					$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+
+					return $this;
 				}
 			}
 
@@ -432,9 +439,13 @@ class Image
 						$this->getTargetPath()
 					);
 					$this->resizedPath = \System::urlEncode($this->getTargetPath());
+
+					return $this;
 				}
 
 				$this->resizedPath = \System::urlEncode($this->getCacheName());
+
+				return $this;
 			}
 		}
 
@@ -459,6 +470,8 @@ class Image
 				if (is_string($return))
 				{
 					$this->resizedPath = \System::urlEncode($return);
+
+					return $this;
 				}
 			}
 		}
@@ -473,6 +486,8 @@ class Image
 			|| $this->getTargetHeight() > \Config::get('gdMaxImgHeight'))
 		{
 			$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+
+			return $this;
 		}
 
 		$coordinates = $this->computeResize();
@@ -487,6 +502,8 @@ class Image
 			imagedestroy($strNewImage);
 			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
 			$this->resizedPath = '';
+
+			return $this;
 		}
 
 		imagecopyresampled(
