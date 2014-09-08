@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Make the loading order of the style sheets configurable (see #6937).
+
 ### Removed
 Remove the `rel="author` support (see #7291).
 

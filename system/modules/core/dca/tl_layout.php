@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('rows', 'cols', 'addJQuery', 'addMooTools', 'static'),
-		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{sections_legend:hide},sections,sPosition;{webfonts_legend:hide},webfonts;{style_legend},framework,stylesheet,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,viewport,titleTag,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend:hide},analytics,script;{static_legend},static'
+		'default'                     => '{title_legend},name;{header_legend},rows;{column_legend},cols;{webfonts_legend:hide},webfonts;{style_legend},framework,stylesheet,external,loadingOrder;{feed_legend:hide},newsfeeds,calendarfeeds;{sections_legend:hide},sections,sPosition;{modules_legend},modules;{expert_legend:hide},template,doctype,viewport,titleTag,cssClass,onload,head;{jquery_legend},addJQuery;{mootools_legend},addMooTools;{script_legend:hide},analytics,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -261,6 +261,16 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['orderExt'],
 			'sql'                     => "blob NULL"
+		),
+		'loadingOrder' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['loadingOrder'],
+			'default'                 => 'external_first',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('external_first', 'internal_first'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'newsfeeds' => array
 		(
