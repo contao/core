@@ -608,7 +608,7 @@ class Image
 
 		foreach ($densities as $density)
 		{
-			$imageObj = new static($this->getOriginalPath());
+			$imageObj = new static($this->fileObj);
 			$src = $imageObj->setTargetWidth($imageSize->width * $density)
 				->setTargetHeight($imageSize->height * $density)
 				->setResizeMode($imageSize->resizeMode)
