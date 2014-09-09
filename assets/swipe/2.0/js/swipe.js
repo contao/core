@@ -178,7 +178,7 @@ function Swipe(container, options) {
 
   function updateMenu() {
 
-    for (var i=0; i<length; i++) {
+    for (var i=0, len = clonedSlides ? length/2 : length; i<len; i++) {
 
       var child = nodes.dots.children[i];
       child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == position) ? 'active' : '';
