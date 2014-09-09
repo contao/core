@@ -1641,6 +1641,23 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$error = true;
 				}
+
+				// Trigger the undo_callback
+				if (is_array($GLOBALS['TL_DCA'][$table]['config']['onundo_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$table]['config']['onundo_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($table, $row, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($table, $row, $this);
+						}
+					}
+				}
 			}
 		}
 
