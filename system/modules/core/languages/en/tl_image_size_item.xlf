@@ -42,13 +42,13 @@
         <source>Sizes attribute</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.sizes.1">
-        <source>Displayed image width(s), e.g. "(max-width: 600px) 50vw, 33vw". (&lt;a href=&quot;http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;)</source>
+        <source>Displayed image width(s), e.g. "(max-width: 600px) 100vw, 50vw". (&lt;a href=&quot;http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;)</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.densities.0">
-        <source>Pixel densities</source>
+        <source>Pixel densities / scale factors</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.densities.1">
-        <source>Define the pixel densities, e.g. "1x,2x,5.5x".</source>
+        <source>Define the pixel densities, e.g. "1x, 1.5x, 2x".</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.tstamp.0">
         <source>Revision date</source>

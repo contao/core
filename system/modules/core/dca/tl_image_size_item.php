@@ -142,16 +142,18 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['sizes'],
 			'inputType'               => 'text',
+			'explanation'             => 'imageSizeDensities',
 			'exclude'                 => true,
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50', 'decodeEntities'=>true),
+			'eval'                    => array('helpwizard'=>true, 'maxlength'=>255, 'tl_class'=>'w50', 'decodeEntities'=>true),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'densities' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['densities'],
 			'inputType'               => 'text',
+			'explanation'             => 'imageSizeDensities',
 			'exclude'                 => true,
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => array('helpwizard'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'width' => array

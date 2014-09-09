@@ -740,6 +740,9 @@
       <trans-unit id="MSC.aw_new">
         <source>Add language</source>
       </trans-unit>
+      <trans-unit id="MSC.image_sizes">
+        <source>Predefined dimensions</source>
+      </trans-unit>
       <trans-unit id="MSC.relative">
         <source>Relative dimensions</source>
       </trans-unit>
