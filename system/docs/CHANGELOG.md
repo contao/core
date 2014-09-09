@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Consider the values of referenced fields in the back end search (see #4376).
+
 ### New
 Add an option to export style sheets (see #7049).
 
