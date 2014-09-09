@@ -2009,6 +2009,41 @@ var Backend =
 				}
 			});
 		});
+	},
+
+	/**
+	 * Image size
+	 *
+	 * @param {string} id The ID of the select element
+	 */
+	imageSize: function(id) {
+		var el = $(id),
+			widthInput = el.getParent().getChildren('input')[0],
+			heightInput = el.getParent().getChildren('input')[1],
+			update = function() {
+				if (el.get('value').toInt().toString() === el.get('value')) {
+					widthInput.readOnly = true;
+					heightInput.readOnly = true;
+					var dimensions = $(el.getSelected()[0]).get('text');
+					dimensions = dimensions.split('(').length > 1
+						? dimensions.split('(').getLast().split(')')[0].split('x')
+						: ['', ''];
+					widthInput.set('value', dimensions[0] * 1 || '');
+					heightInput.set('value', dimensions[1] * 1 || '');
+				}
+				else {
+					if (widthInput.readOnly && heightInput.readOnly) {
+						widthInput.set('value', '');
+						heightInput.set('value', '');
+					}
+					widthInput.readOnly = false;
+					heightInput.readOnly = false;
+				}
+			};
+
+		update();
+		el.addEvent('change', update);
+		el.addEvent('keyup', update);
 	}
 };
 
