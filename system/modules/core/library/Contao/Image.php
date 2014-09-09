@@ -587,7 +587,7 @@ class Image
 	 * Get the attributes for one picture source element
 	 *
 	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
-	 * @param \Model  $imageSize	 The image size or image size item model
+	 * @param \Model  $imageSize     The image size or image size item model
 	 *
 	 * @return array The source element attributes
 	 */
@@ -662,13 +662,13 @@ class Image
 	/**
 	 * Calculate the resize coordinates
 	 *
-	 * @param integer $width		  The target width
-	 * @param integer $height		 The target height
-	 * @param integer $originalWidth  The original width
-	 * @param integer $originalHeight The original height
-	 * @param string  $mode		   The resize mode
-	 * @param integer $zoom		   Zoom between 0 and 100
-	 * @param array   $importantPart  Important part of the image, keys: x, y, width, height
+	 * @param integer $width            The target width
+	 * @param integer $height           The target height
+	 * @param integer $originalWidth    The original width
+	 * @param integer $originalHeight   The original height
+	 * @param string  $mode             The resize mode
+	 * @param integer $zoom             Zoom between 0 and 100
+	 * @param array   $importantPart    Important part of the image, keys: x, y, width, height
 	 *
 	 * @return array The resize coordinates: width, height, target_x, target_y, target_width, target_height
 	 */
@@ -975,9 +975,9 @@ class Image
 	 * Convert a true color image to a palette image with 256 colors
 	 * and preserve transparency
 	 *
-	 * @param resource $image GD true color image
+	 * @param resource $image   GD true color image
 	 *
-	 * @return resource The GD palette image
+	 * @return resource         The GD palette image
 	 */
 	public static function convertGdImageToPaletteImage($image)
 	{
