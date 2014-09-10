@@ -2028,14 +2028,12 @@ var Backend =
 					dimensions = dimensions.split('(').length > 1
 						? dimensions.split('(').getLast().split(')')[0].split('x')
 						: ['', ''];
-					widthInput.set('value', dimensions[0] * 1 || '');
-					heightInput.set('value', dimensions[1] * 1 || '');
+					widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
+					heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
 				}
 				else {
-					if (widthInput.readOnly && heightInput.readOnly) {
-						widthInput.set('value', '');
-						heightInput.set('value', '');
-					}
+					widthInput.set('placeholder', '');
+					heightInput.set('placeholder', '');
 					widthInput.readOnly = false;
 					heightInput.readOnly = false;
 				}
