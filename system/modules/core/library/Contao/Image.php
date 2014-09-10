@@ -138,14 +138,6 @@ class Image
 		{
 			throw new \InvalidArgumentException('Image type "' . $this->fileObj->extension . '" was not allowed to be processed');
 		}
-
-		// Set default important part
-		$this->setImportantPart(array(
-			'x' => 0,
-			'y' => 0,
-			'width' => $this->fileObj->width,
-			'height' => $this->fileObj->height,
-		));
 	}
 
 	/**
@@ -185,12 +177,21 @@ class Image
 	}
 
 	/**
-	 * Set the important part settings
+	 * Get the important part settings
 	 *
 	 * @return array
 	 */
 	public function getImportantPart()
 	{
+		if (!$this->importantPart) {
+			return array(
+				'x' => 0,
+				'y' => 0,
+				'width' => $this->fileObj->width,
+				'height' => $this->fileObj->height,
+			);
+		}
+
 		return $this->importantPart;
 	}
 
@@ -382,7 +383,12 @@ class Image
 		if (
 			($this->fileObj->width == $this->getTargetWidth() || !$this->getTargetWidth())
 			&& ($this->fileObj->height == $this->getTargetHeight() || !$this->getTargetHeight())
-			&& (empty($importantPart) || !$this->getZoomLevel()))
+			&& ((
+				$importantPart['x'] === 0
+				&& $importantPart['y'] === 0
+				&& $importantPart['width'] === $this->fileObj->width
+				&& $importantPart['height'] === $this->fileObj->height
+			) || !$this->getZoomLevel()))
 		{
 			// Return the target image (thanks to Tristan Lins) (see #4166)
 			if ($this->getTargetPath())
@@ -454,8 +460,6 @@ class Image
 					$this->getCacheName(),
 					$this->fileObj,
 					$this->getTargetPath(),
-					$this->getZoomLevel(),
-					$this->getImportantPart(),
 					$this
 				);
 
@@ -473,7 +477,6 @@ class Image
 			|| !$this->fileObj->isGdImage
 			|| $this->fileObj->width > \Config::get('gdMaxImgWidth')
 			|| $this->fileObj->height > \Config::get('gdMaxImgHeight')
-			|| (!$this->getTargetWidth() && !$this->getTargetHeight())
 			|| $this->getTargetWidth() > \Config::get('gdMaxImgWidth')
 			|| $this->getTargetHeight() > \Config::get('gdMaxImgHeight'))
 		{
@@ -482,21 +485,20 @@ class Image
 			return $this;
 		}
 
-		$coordinates = $this->computeResize();
-
-		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
-
 		$strSourceImage = static::getGdImageFromFile($this->fileObj);
 
 		// The new image could not be created
 		if (!$strSourceImage)
 		{
-			imagedestroy($strNewImage);
 			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
 			$this->resizedPath = '';
 
 			return $this;
 		}
+
+		$coordinates = $this->computeResize();
+
+		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
 
 		imagecopyresampled(
 			$strNewImage,
@@ -517,17 +519,19 @@ class Image
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
 
-		// Resize the original image
-		if ($this->getTargetPath())
-		{
-			\Files::getInstance()->copy($this->getCacheName(), $this->getTargetPath());
-			return \System::urlEncode($this->getTargetPath());
-		}
-
 		// Set the file permissions when the Safe Mode Hack is used
 		if (\Config::get('useFTP'))
 		{
 			\Files::getInstance()->chmod($this->getCacheName(), \Config::get('defaultFileChmod'));
+		}
+
+		// Resize the original image
+		if ($this->getTargetPath())
+		{
+			\Files::getInstance()->copy($this->getCacheName(), $this->getTargetPath());
+			$this->resizedPath = \System::urlEncode($this->getTargetPath());
+
+			return $this;
 		}
 
 		$this->resizedPath = \System::urlEncode($this->getCacheName());
@@ -571,9 +575,12 @@ class Image
 
 		$imageSizeItems = \ImageSizeItemModel::findByPid($imageSize->id, array('order' => 'sorting ASC'));
 
-		foreach ($imageSizeItems as $imageSizeItem)
+		if ($imageSizeItems !== null)
 		{
-			$sources[] = $this->getPictureSource($importantPart, $imageSizeItem);
+			foreach ($imageSizeItems as $imageSizeItem)
+			{
+				$sources[] = $this->getPictureSource($importantPart, $imageSizeItem);
+			}
 		}
 
 		return array(
@@ -612,8 +619,6 @@ class Image
 			$src = $imageObj->setTargetWidth($imageSize->width * $density)
 				->setTargetHeight($imageSize->height * $density)
 				->setResizeMode($imageSize->resizeMode)
-				->setTargetPath('')
-				->setForceOverride(false)
 				->setZoomLevel($imageSize->zoom)
 				->setImportantPart($importantPart)
 				->executeResize()
@@ -629,10 +634,12 @@ class Image
 
 			if (count($densities) > 1)
 			{
+				// Use pixel density descriptors if the sizes attribute is empty
 				if (empty($imageSize->sizes))
 				{
 					$src .= ' ' . $density . 'x';
 				}
+				// Otherwise use width descriptors
 				else
 				{
 					$size = getimagesize(TL_ROOT .'/'. $src);
@@ -901,7 +908,7 @@ class Image
 		switch ($objFile->extension)
 		{
 			case 'gif':
-				if ($arrGdinfo['GIF Read Support'])
+				if (!empty($arrGdinfo['GIF Read Support']))
 				{
 					$strGdImage = imagecreatefromgif(TL_ROOT . '/' . $objFile->path);
 				}
@@ -909,14 +916,14 @@ class Image
 
 			case 'jpg':
 			case 'jpeg':
-				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
+				if (!empty($arrGdinfo['JPG Support']) || !empty($arrGdinfo['JPEG Support']))
 				{
 					$strGdImage = imagecreatefromjpeg(TL_ROOT . '/' . $objFile->path);
 				}
 				break;
 
 			case 'png':
-				if ($arrGdinfo['PNG Support'])
+				if (!empty($arrGdinfo['PNG Support']))
 				{
 					$strGdImage = imagecreatefrompng(TL_ROOT . '/' . $objFile->path);
 				}
@@ -1116,8 +1123,8 @@ class Image
 	/**
 	 * Generate an image tag and return it as string
 	 *
-	 * @param string $src		The image path
-	 * @param string $alt		An optional alt attribute
+	 * @param string $src       The image path
+	 * @param string $alt       An optional alt attribute
 	 * @param string $attributes A string of other attributes
 	 *
 	 * @return string The image HTML tag
@@ -1177,12 +1184,10 @@ class Image
 	 * @param string  $mode         The resize mode
 	 * @param string  $target       An optional target path
 	 * @param boolean $force        Override existing target images
-	 * @param integer $zoom         Zoom between 0 and 100
-	 * @param array   $importantPart Important part of the image, keys: x, y, width, height
 	 *
 	 * @return string|null The path of the resized image or null
 	 */
-	public static function get($image, $width, $height, $mode='', $target=null, $force=false, $zoom=0, $importantPart=null)
+	public static function get($image, $width, $height, $mode='', $target=null, $force=false)
 	{
 		if ($image == '')
 		{
@@ -1190,12 +1195,6 @@ class Image
 		}
 
 		$file = new \File(rawurldecode($image), true);
-
-		if (!$file->exists())
-		{
-			\System::log('Image "' . $file->path . '" could not be found', __METHOD__, TL_ERROR);
-			return null;
-		}
 
 		try
 		{
@@ -1207,44 +1206,32 @@ class Image
 			return null;
 		}
 
+		$imageObj->setTargetWidth($width)
+			->setTargetHeight($height)
+			->setResizeMode($mode)
+			->setTargetPath($target)
+			->setForceOverride($force);
+
 		// Load the image size from the database if $mode is an id
 		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
 		{
 			$fileRecord = \FilesModel::findByPath($image);
 			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
 			{
-				$importantPart = array(
+				$imageObj->setImportantPart(array(
 					'x' => (int)$fileRecord->importantPartX,
 					'y' => (int)$fileRecord->importantPartY,
 					'width' => (int)$fileRecord->importantPartWidth,
 					'height' => (int)$fileRecord->importantPartHeight,
-				);
+				));
 			}
 
-			try
-			{
-				$resizedPath = $imageObj->setTargetWidth($width)
-					->setTargetHeight($height)
-					->setResizeMode($mode)
-					->setTargetPath($target)
-					->setForceOverride($force)
-					->setZoomLevel($zoom)
-					->setImportantPart($importantPart)
-					->executeResize()
-					->getResizedPath();
-
-				// BC
-				if ($resizedPath == '')
-				{
-					return null;
-				}
-
-				return $resizedPath;
-			}
-			catch (\InvalidArgumentException $e)
-			{
-				return null;
-			}
+			$imageObj->setTargetWidth($imageSize->width)
+				->setTargetHeight($imageSize->height)
+				->setResizeMode($imageSize->resizeMode)
+				->setZoomLevel($imageSize->zoom);
 		}
+
+		return $imageObj->executeResize()->getResizedPath() ?: null;
 	}
 }
