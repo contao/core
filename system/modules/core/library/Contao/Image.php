@@ -400,7 +400,7 @@ class Image
 					\Files::getInstance()->copy($this->getOriginalPath(), $this->getTargetPath());
 				}
 
-				$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+				$this->resizedPath = \System::urlEncode($this->getTargetPath());
 
 				return $this;
 			}
