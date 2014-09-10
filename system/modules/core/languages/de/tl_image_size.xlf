@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file datatype="php" original="system/modules/core/languages/en/tl_image_size.php" source-language="en">
+    <body>
+      <trans-unit id="tl_image_size.name.0">
+        <source>Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.name.1">
+        <source>Please enter the image size name.</source>
+        <target>Bitte geben Sie den Namen der Bildergröße ein.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.0">
+        <source>Width</source>
+        <target>Breite</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.width.1">
+        <source>Width in pixels.</source>
+        <target>Breite in Pixel.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.0">
+        <source>Height</source>
+        <target>Höhe</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.height.1">
+        <source>Height in pixels.</source>
+        <target>Höhe in Pixel.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.0">
+        <source>Resize mode</source>
+        <target>Skalierungsmodus</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.resizeMode.1">
+        <source>Only applicable if width and height are specified.</source>
+        <target>Wird nur angewendet sofern Breite und Höhe definiert sind.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.0">
+        <source>Zoom</source>
+        <target>Zoom</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.zoom.1">
+        <source>0 = the whole image is visible, 100 = only the important part of the image is visible.</source>
+        <target>0 = das gesamte Bild ist sichtbar, 100 = nur der wichtige Bereich des Bildes ist sichtbar.</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.0">
+        <source>Sizes attribute</source>
+        <target>Sizes-Attribut</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.sizes.1">
+        <source>Displayed image width(s), e.g. "(max-width: 600px) 100vw, 50vw". (&lt;a href=&quot;http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;)</source>
+        <target>Dargestellte Bildbreite(n), z. B. "(max-width: 600px) 100vw, 50vw". (&lt;a href=&quot;http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes&quot; target=&quot;_blank&quot;&gt;w3.org&lt;/a&gt;)</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.0">
+        <source>Pixel densities / scale factors</source>
+        <target>Pixeldichten / Skalierungsfaktoren</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.densities.1">
+        <source>Define the pixel densities, e.g. "1x, 1.5x, 2x".</source>
+        <target>Geben Sie die Pixeldichten an, z. B. "1x, 1.5x, 2x".</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.0">
+        <source>Revision date</source>
+        <target>Änderungsdatum</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.tstamp.1">
+        <source>Date and time of the latest revision</source>
+        <target>Datum und Uhrzeit der letzten Änderung</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.title_legend">
+        <source>Image size settings</source>
+        <target>Bildergrößen-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.expert_legend">
+        <source>Expert settings</source>
+        <target>Experten-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.0">
+        <source>New image size</source>
+        <target>Neue Bildergröße</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.new.1">
+        <source>Create a new image size</source>
+        <target>Eine neue Bildergröße anlegen</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.0">
+        <source>Image size details</source>
+        <target>Bildergrößendetails</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.show.1">
+        <source>Show the details of image size ID %s</source>
+        <target>Details der Bildergröße ID %s anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.0">
+        <source>Edit image size media queries</source>
+        <target>Bilder-Media-Queries bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.edit.1">
+        <source>Edit media queries of image size ID %s</source>
+        <target>Media-Queries der Bildergröße ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.0">
+        <source>Edit image size settings</source>
+        <target>Bildergrößen-Einstellungen bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.editheader.1">
+        <source>Edit the settings of image size ID %s</source>
+        <target>Einstellungen der Bildergröße ID %s bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.0">
+        <source>Move image size</source>
+        <target>Bildergröße verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.cut.1">
+        <source>Move image size ID %s</source>
+        <target>Bildergröße ID %s verschieben</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.0">
+        <source>Duplicate image size</source>
+        <target>Bildergröße duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.copy.1">
+        <source>Duplicate image size ID %s</source>
+        <target>Bildergröße ID %s duplizieren</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.0">
+        <source>Delete image size</source>
+        <target>Bildergröße löschen</target>
+      </trans-unit>
+      <trans-unit id="tl_image_size.delete.1">
+        <source>Delete image size ID %s</source>
+        <target>Bildergröße ID %s löschen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

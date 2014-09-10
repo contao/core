@@ -177,6 +177,14 @@
         <source>Edit the page layouts of theme ID %s</source>
         <target>Die Seitenlayouts des Theme ID %s bearbeiten</target>
       </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+        <target>Bildergrößen</target>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+        <target>Die Bildergrößen des Theme ID %s bearbeiten</target>
+      </trans-unit>
       <trans-unit id="tl_theme.importTheme.0">
         <source>Theme import</source>
         <target>Theme importieren</target>
