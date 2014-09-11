@@ -486,6 +486,12 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
 		}
 
+		// Make sure TL_USER_CSS is set
+		if (!is_array($GLOBALS['TL_USER_CSS']))
+		{
+			$GLOBALS['TL_USER_CSS'] = array();
+		}
+
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
