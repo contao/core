@@ -16,7 +16,15 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
     include TL_ROOT . '/system/themes/default/basic.css';
     include TL_ROOT . '/system/themes/default/error.css';
     include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvBlack21.css';
-  ?></style>
+  ?>
+    #header, #container {
+      min-width: 636px;
+      width: 90%;
+    }
+    #container {
+      margin-bottom: 18px;
+    }
+  </style>
   <script><?php
     include TL_ROOT . '/assets/mootools/core/' . MOOTOOLS . '/mootools.js';
     include TL_ROOT . '/assets/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js';

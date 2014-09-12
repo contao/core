@@ -92,7 +92,8 @@ a {
 	font-size:13px;
 	padding:4px 0;
 	border-top:1px solid #ddd;
-	white-space:pre-wrap;
+	white-space:pre;
+	overflow-x: auto;
 }
 .trace .index {
 	color:#333;

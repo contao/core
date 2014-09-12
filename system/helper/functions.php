@@ -144,6 +144,8 @@ function trace_nicely(\Exception $exception)
 		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $exception->getTraceAsString()) . "\n" . '</pre>';
 		echo '<br>' . $strMessage;
 	}
+
+	exit;
 }
 
 
