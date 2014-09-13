@@ -194,6 +194,10 @@ class ModulePersonalData extends \Module
 				$objWidget->validate();
 				$varValue = $objWidget->value;
 
+				if ($objWidget instanceof \FormPassword && count($this->editable) === 1 && !strlen($varValue)) {
+					$objWidget->addError($GLOBALS['TL_LANG']['MSC']['pw_change']);
+				}
+
 				$rgxp = $arrData['eval']['rgxp'];
 
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
