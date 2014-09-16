@@ -352,11 +352,11 @@ class FileSelector extends \Widget
 				$return .= "\n    " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 				// Generate thumbnail
-				if ($objFile->isGdImage && $objFile->height > 0)
+				if ($objFile->isImage && $objFile->height > 0)
 				{
 					$thumbnail .= ' <span class="tl_gray">(' . $objFile->width . 'x' . $objFile->height . ')</span>';
 
-					if (\Config::get('thumbnails') && $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+					if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
 					{
 						$_height = ($objFile->height < 70) ? $objFile->height : 70;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';

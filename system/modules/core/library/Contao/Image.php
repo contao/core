@@ -357,7 +357,7 @@ class Image
 		$svgElement->setAttribute('height', $height . 'px');
 
 		$xml = $doc->saveXML();
-#dump(specialchars($xml));
+
 		$objCacheFile = new \File($strCacheName, true);
 		$objCacheFile->write($xml);
 		$objCacheFile->close();

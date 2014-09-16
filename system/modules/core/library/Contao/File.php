@@ -283,6 +283,10 @@ class File extends \System
 				return $this->imageSize[1];
 				break;
 
+			case 'isImage':
+				return $this->isGdImage || $this->isSvgImage;
+				break;
+
 			case 'isGdImage':
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
 				break;

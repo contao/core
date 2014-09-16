@@ -161,13 +161,13 @@ class FileTree extends \Widget
 						else
 						{
 							$objFile = new \File($objFiles->path, true);
-							$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+							$strInfo = $objFiles->path . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
-							if ($objFile->isGdImage)
+							if ($objFile->isImage)
 							{
 								$image = 'placeholder.png';
 
-								if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+								if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 								{
 									$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 								}
@@ -202,16 +202,16 @@ class FileTree extends \Widget
 								}
 
 								$objFile = new \File($objSubfiles->path, true);
-								$strInfo = '<span class="dirname">' . dirname($objSubfiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+								$strInfo = '<span class="dirname">' . dirname($objSubfiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
 								if ($this->isGallery)
 								{
 									// Only show images
-									if ($objFile->isGdImage)
+									if ($objFile->isImage)
 									{
 										$image = 'placeholder.png';
 
-										if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+										if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 										{
 											$image = \Image::get($objSubfiles->path, 80, 60, 'center_center');
 										}
@@ -232,16 +232,16 @@ class FileTree extends \Widget
 						else
 						{
 							$objFile = new \File($objFiles->path, true);
-							$strInfo = '<span class="dirname">' . dirname($objFiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isGdImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
+							$strInfo = '<span class="dirname">' . dirname($objFiles->path) . '/</span>' . $objFile->basename . ' <span class="tl_gray">(' . $this->getReadableSize($objFile->size) . ($objFile->isImage ? ', ' . $objFile->width . 'x' . $objFile->height . ' px' : '') . ')</span>';
 
 							if ($this->isGallery)
 							{
 								// Only show images
-								if ($objFile->isGdImage)
+								if ($objFile->isImage)
 								{
 									$image = 'placeholder.png';
 
-									if ($objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+									if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 									{
 										$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 									}
