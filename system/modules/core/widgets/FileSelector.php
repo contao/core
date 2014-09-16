@@ -252,6 +252,13 @@ class FileSelector extends \Widget
 		natcasesort($files);
 		$files = array_values($files);
 
+		// Sort descending (see #4072)
+		if ($this->sort == 'desc')
+		{
+			$folders = array_reverse($folders);
+			$files = array_reverse($files);
+		}
+
 		$folderClass = ($this->files || $this->filesOnly) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
