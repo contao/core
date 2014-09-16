@@ -469,6 +469,5 @@ $GLOBALS['TL_ASSETS'] = array
 /**
  * Other global arrays
  */
-$GLOBALS['TL_MIME'] = array();
-$GLOBALS['TL_PERMISSIONS'] = array();
 $GLOBALS['TL_MODELS'] = array();
+$GLOBALS['TL_PERMISSIONS'] = array();

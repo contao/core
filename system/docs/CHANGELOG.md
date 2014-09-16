@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Changed
+Move the mime types array to a configuration file (see #6843).
+
 ### New
 Added the `sort` flag to the `eval` section of the DCA (see #4072).
 
