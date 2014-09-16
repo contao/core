@@ -178,24 +178,28 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'importantPartX' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartX'],
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'importantPartY' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartY'],
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'importantPartWidth' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartWidth'],
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'importantPartHeight' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartHeight'],
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"

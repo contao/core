@@ -505,14 +505,28 @@ class DataContainer extends \Backend
 
 				if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
-					$image = \Image::get($objFile->path, 80, 60, 'center_center');
+					if ($objFile->width > 699 || $objFile->height > 524) {
+						$image = \Image::get($objFile->path, 699, 524, 'box');
+					}
+					else {
+						$image = $objFile->path;
+					}
 				}
 
 				$strPreview = '
 
-<div class="tl_edit_preview">
+<div class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
 ' . \Image::getHtml($image) . '
 </div>';
+
+				if ($image !== 'placeholder.png')
+				{
+					$strPreview .= '<script>Backend.editPreviewWizard($$(\'.tl_edit_preview\').getLast());</script>';
+					if (\Config::get('showHelp'))
+					{
+						$strPreview .= '<p class="tl_help tl_tip">' . $GLOBALS['TL_LANG'][$this->strTable]['edit_preview_help'] . '</p>';
+					}
+				}
 			}
 		}
 

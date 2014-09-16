@@ -410,6 +410,17 @@ input[type=search]::-webkit-search-decoration {
 	background:#fff;
 	box-shadow:0 1px 3px #ddd;
 }
+.tl_edit_preview_enabled {
+	position:relative;
+	cursor:crosshair;
+}
+.tl_edit_preview_important_part {
+	position:absolute;
+	margin:-1px;
+	border:1px solid #000;
+	box-shadow:0 0 0 1px #fff, inset 0 0 0 1px #fff;
+	opacity:0.5;
+}
 
 /* Rebuild the search index */
 #tl_rebuild_index {
