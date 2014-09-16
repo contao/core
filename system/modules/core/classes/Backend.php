@@ -185,6 +185,10 @@ abstract class Backend extends \Controller
 				return 'php';
 				break;
 
+			case 'svg':
+				return 'xml';
+				break;
+
 			default:
 				return 'text';
 				break;

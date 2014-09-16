@@ -1,6 +1,12 @@
 Contao Open Source CMS known limitations
 ========================================
 
+SVG image
+---------
+
+Contao can currently only resize SVG images based on pixels.
+
+
 Models and database connections
 -------------------------------
 
