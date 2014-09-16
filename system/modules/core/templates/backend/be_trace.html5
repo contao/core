@@ -20,9 +20,13 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
     #header, #container {
       min-width: 636px;
       width: 90%;
+      box-sizing: border-box;
     }
     #container {
       margin-bottom: 18px;
+    }
+    #main {
+      width: auto;
     }
   </style>
   <script><?php
