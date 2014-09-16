@@ -192,41 +192,197 @@ class Image
 			return \System::urlEncode($image);
 		}
 
-		$intPositionX = 0;
-		$intPositionY = 0;
-		$intWidth = $width;
-		$intHeight = $height;
-
 		// Mode-specific changes
-		if ($intWidth && $intHeight)
+		if ($width && $height)
 		{
 			switch ($mode)
 			{
 				case 'proportional':
 					if ($objFile->width >= $objFile->height)
 					{
-						unset($height, $intHeight);
+						unset($height);
 					}
 					else
 					{
-						unset($width, $intWidth);
+						unset($width);
 					}
 					break;
 
 				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
+					if (round($objFile->height * $width / $objFile->width) <= $height)
 					{
-						unset($height, $intHeight);
+						unset($height);
 					}
 					else
 					{
-						unset($width, $intWidth);
+						unset($width);
 					}
 					break;
 			}
 		}
 
-		$strNewImage = null;
+		// Create the resized image
+		if ($objFile->isSvgImage)
+		{
+			static::resizeSvgImage($image, $width, $height, $mode, $objFile, $strCacheName);
+		}
+		elseif (static::resizeGdImage($image, $width, $height, $mode, $objFile, $strCacheName) === false)
+		{
+			return null;
+		}
+
+		// Resize the original image
+		if ($target)
+		{
+			\Files::getInstance()->copy($strCacheName, $target);
+
+			return \System::urlEncode($target);
+		}
+
+		// Set the file permissions when the Safe Mode Hack is used
+		if (\Config::get('useFTP'))
+		{
+			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
+		}
+
+		// Return the path to new image
+		return \System::urlEncode($strCacheName);
+	}
+
+
+	/**
+	 * Generate an image tag and return it as string
+	 *
+	 * @param string $src        The image path
+	 * @param string $alt        An optional alt attribute
+	 * @param string $attributes A string of other attributes
+	 *
+	 * @return string The image HTML tag
+	 */
+	public static function getHtml($src, $alt='', $attributes='')
+	{
+		$static = TL_FILES_URL;
+		$src = rawurldecode($src);
+
+		if (strpos($src, '/') === false)
+		{
+			if (strncmp($src, 'icon', 4) === 0)
+			{
+				$static = TL_ASSETS_URL;
+				$src = 'assets/contao/images/' . $src;
+			}
+			else
+			{
+				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
+			}
+		}
+
+		if (!file_exists(TL_ROOT .'/'. $src))
+		{
+			return '';
+		}
+
+		$size = getimagesize(TL_ROOT .'/'. $src);
+		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+	}
+
+
+	/**
+	 * Resize an SVG image
+	 *
+	 * @param string  $image        The image path
+	 * @param integer $width        The target width
+	 * @param integer $height       The target height
+	 * @param string  $mode         The resize mode
+	 * @param \File   $objFile      The file object
+	 * @param string  $strCacheName The name of the cached file
+	 *
+	 * @return boolean False if the target image cannot be created
+	 */
+	protected static function resizeSvgImage($image, $width, $height, $mode, $objFile, $strCacheName)
+	{
+		$doc = new \DOMDocument();
+		$doc->loadXML($objFile->getContent());
+
+		$svgElement = $doc->documentElement;
+
+		// Advanced crop modes
+		switch ($mode)
+		{
+			case 'left_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
+				break;
+
+			case 'center_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
+				break;
+
+			case 'right_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
+				break;
+
+			case 'left_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
+				break;
+
+			case 'center_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
+				break;
+
+			case 'right_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
+				break;
+
+			case 'left_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
+				break;
+
+			case 'center_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
+				break;
+
+			case 'right_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
+				break;
+		}
+
+		// This is a workaround at most, because the viewBox dimensions have
+		// nothing to do with the target width and height of the image (FIXME)
+		if (!$svgElement->hasAttribute('viewBox'))
+		{
+			$svgElement->setAttribute('viewBox', '0 0 ' . $width . ' ' . $height);
+		}
+
+		$svgElement->setAttribute('width', $width . 'px');
+		$svgElement->setAttribute('height', $height . 'px');
+
+		$xml = $doc->saveXML();
+#dump(specialchars($xml));
+		$objCacheFile = new \File($strCacheName, true);
+		$objCacheFile->write($xml);
+		$objCacheFile->close();
+	}
+
+
+	/**
+	 * Resize a GDlib image
+	 *
+	 * @param string  $image        The image path
+	 * @param integer $width        The target width
+	 * @param integer $height       The target height
+	 * @param string  $mode         The resize mode
+	 * @param \File   $objFile      The file object
+	 * @param string  $strCacheName The name of the cached file
+	 *
+	 * @return boolean False if the target image cannot be created
+	 */
+	protected static function resizeGdImage($image, $width, $height, $mode, $objFile, $strCacheName)
+	{
+		$intPositionX   = 0;
+		$intPositionY   = 0;
+		$intWidth       = $width;
+		$intHeight      = $height;
+		$strNewImage    = null;
 		$strSourceImage = null;
 
 		// Resize width and height and crop the image if necessary
@@ -295,271 +451,132 @@ class Image
 					break;
 			}
 
-			if ($objFile->isGdImage)
-			{
-				$strNewImage = imagecreatetruecolor($width, $height);
-			}
+			$strNewImage = imagecreatetruecolor($width, $height);
 		}
 
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
 			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
-
-			if ($objFile->isGdImage)
-			{
-				$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-			}
+			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
 			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
-
-			if ($objFile->isGdImage)
-			{
-				$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
-			}
+			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
-		// Handle SVG image
-		if ($objFile->isSvgImage)
+		$arrGdinfo = gd_info();
+		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
+
+		switch ($objFile->extension)
 		{
-			$doc = new \DOMDocument();
-			$doc->loadXML($objFile->getContent());
+			case 'gif':
+				if ($arrGdinfo['GIF Read Support'])
+				{
+					$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
+					$intTranspIndex = imagecolortransparent($strSourceImage);
 
-			$svgElement = $doc->documentElement;
+					// Handle transparency
+					if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
+					{
+						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
+						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
+						imagefill($strNewImage, 0, 0, $intTranspIndex);
+						imagecolortransparent($strNewImage, $intTranspIndex);
+					}
+				}
+				break;
 
-			$currentX = $svgElement->hasAttribute('x') ? $svgElement->getAttribute('x') : 0;
-			$currentY = $svgElement->hasAttribute('y') ? $svgElement->getAttribute('y') : 0;
+			case 'jpg':
+			case 'jpeg':
+				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
+				{
+					$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
+				}
+				break;
 
-			if (!$svgElement->hasAttribute('viewBox'))
-			{
-				$currentWidth  = $objFile->width;
-				$currentHeight = $objFile->height;
+			case 'png':
+				if ($arrGdinfo['PNG Support'])
+				{
+					$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
 
-				$svgElement->setAttribute('viewBox', sprintf('%s %s %s %s', $currentX, $currentY, $currentWidth, $currentHeight));
-			}
-
-			$newX = intval($currentX) + $intPositionX;
-			$newY = intval($currentY) + $intPositionY;
-
-			$newWidth = $intWidth;
-			$newHeight = $intHeight;
-
-			$svgElement->setAttribute('x', $newX);
-			$svgElement->setAttribute('y', $newY);
-			$svgElement->setAttribute('width', $newWidth . 'px');
-			$svgElement->setAttribute('height', $newHeight . 'px');
-
-			$xml = $doc->saveXML();
-
-			$objCacheFile = new \File($strCacheName, true);
-			$objCacheFile->write($xml);
-			$objCacheFile->close();
+					// Handle transparency (GDlib >= 2.0 required)
+					if (version_compare($strGdVersion, '2.0', '>='))
+					{
+						imagealphablending($strNewImage, false);
+						$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
+						imagefill($strNewImage, 0, 0, $intTranspIndex);
+						imagesavealpha($strNewImage, true);
+					}
+				}
+				break;
 		}
 
-		// Handle GD image
-		else
+		// The new image could not be created
+		if (!$strSourceImage)
 		{
-			$arrGdinfo = gd_info();
-			$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
-
-			switch ($objFile->extension)
-			{
-				case 'gif':
-					if ($arrGdinfo['GIF Read Support'])
-					{
-						$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
-						$intTranspIndex = imagecolortransparent($strSourceImage);
-
-						// Handle transparency
-						if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
-						{
-							$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
-							$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
-							imagefill($strNewImage, 0, 0, $intTranspIndex);
-							imagecolortransparent($strNewImage, $intTranspIndex);
-						}
-					}
-					break;
-
-				case 'jpg':
-				case 'jpeg':
-					if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
-					{
-						$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
-					}
-					break;
-
-				case 'png':
-					if ($arrGdinfo['PNG Support'])
-					{
-						$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
-
-						// Handle transparency (GDlib >= 2.0 required)
-						if (version_compare($strGdVersion, '2.0', '>='))
-						{
-							imagealphablending($strNewImage, false);
-							$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
-							imagefill($strNewImage, 0, 0, $intTranspIndex);
-							imagesavealpha($strNewImage, true);
-						}
-					}
-					break;
-			}
-
-			// The new image could not be created
-			if (!$strSourceImage)
-			{
-				imagedestroy($strNewImage);
-				\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
-				return null;
-			}
-
-			imageinterlace($strNewImage, 1); // see #6529
-			imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
-
-			// Fallback to PNG if GIF ist not supported
-			if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
-			{
-				$objFile->extension = 'png';
-			}
-
-			// Create the new image
-			switch ($objFile->extension)
-			{
-				case 'gif':
-					imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
-					break;
-
-				case 'jpg':
-				case 'jpeg':
-					imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
-					break;
-
-				case 'png':
-					// Optimize non-truecolor images (see #2426)
-					if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
-					{
-						// TODO: make it work with transparent images, too
-						if (imagecolortransparent($strSourceImage) == -1)
-						{
-							$intColors = imagecolorstotal($strSourceImage);
-
-							// Convert to a palette image
-							// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
-							if ($intColors > 0 && $intColors < 256)
-							{
-								$wi = imagesx($strNewImage);
-								$he = imagesy($strNewImage);
-								$ch = imagecreatetruecolor($wi, $he);
-								imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
-								imagetruecolortopalette($strNewImage, false, $intColors);
-								imagecolormatch($ch, $strNewImage);
-								imagedestroy($ch);
-							}
-						}
-					}
-
-					imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
-					break;
-			}
-
-			// Destroy the temporary images
-			imagedestroy($strSourceImage);
 			imagedestroy($strNewImage);
+			\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
+
+			return false;
 		}
 
-		// Resize the original image
-		if ($target)
+		imageinterlace($strNewImage, 1); // see #6529
+		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
+
+		// Fallback to PNG if GIF ist not supported
+		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
 		{
-			\Files::getInstance()->copy($strCacheName, $target);
-			return \System::urlEncode($target);
+			$objFile->extension = 'png';
 		}
 
-		// Set the file permissions when the Safe Mode Hack is used
-		if (\Config::get('useFTP'))
+		// Create the new image
+		switch ($objFile->extension)
 		{
-			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
-		}
-
-		// Return the path to new image
-		return \System::urlEncode($strCacheName);
-	}
-
-
-	/**
-	 * Generate an image tag and return it as string
-	 *
-	 * @param string $src        The image path
-	 * @param string $alt        An optional alt attribute
-	 * @param string $attributes A string of other attributes
-	 *
-	 * @return string The image HTML tag
-	 */
-	public static function getHtml($src, $alt='', $attributes='')
-	{
-		$static = TL_FILES_URL;
-		$src = rawurldecode($src);
-
-		if (strpos($src, '/') === false)
-		{
-			if (strncmp($src, 'icon', 4) === 0)
-			{
-				$static = TL_ASSETS_URL;
-				$src = 'assets/contao/images/' . $src;
-			}
-			else
-			{
-				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
-			}
-		}
-
-		if (!file_exists(TL_ROOT .'/'. $src))
-		{
-			return '';
-		}
-
-		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
-	}
-
-
-	/**
-	 * Convert sizes like 2em, 10% or 12pt to pixels
-	 *
-	 * @param string $strSize The size string
-	 *
-	 * @return integer The pixel value
-	 */
-	public static function getPixelValue($strSize)
-	{
-		$intValue = preg_replace('/[^0-9\.-]+/', '', $strSize);
-		$strUnit = preg_replace('/[^ceimnprtx%]/', '', $strSize);
-
-		// Convert 12pt = 16px = 1em = 100%
-		switch ($strUnit)
-		{
-			case '':
-			case 'px':
-				return $intValue;
+			case 'gif':
+				imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
 				break;
 
-			case 'em':
-				return round($intValue * 16);
+			case 'jpg':
+			case 'jpeg':
+				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
 				break;
 
-			case 'pt':
-				return round($intValue * (12 / 16));
-				break;
+			case 'png':
+				// Optimize non-truecolor images (see #2426)
+				if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
+				{
+					// TODO: make it work with transparent images, too
+					if (imagecolortransparent($strSourceImage) == -1)
+					{
+						$intColors = imagecolorstotal($strSourceImage);
 
-			case '%':
-				return round($intValue * (16 / 100));
+						// Convert to a palette image
+						// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
+						if ($intColors > 0 && $intColors < 256)
+						{
+							$wi = imagesx($strNewImage);
+							$he = imagesy($strNewImage);
+							$ch = imagecreatetruecolor($wi, $he);
+							imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
+							imagetruecolortopalette($strNewImage, false, $intColors);
+							imagecolormatch($ch, $strNewImage);
+							imagedestroy($ch);
+						}
+					}
+				}
+
+				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
 				break;
 		}
 
-		return 0;
+		// Destroy the temporary images
+		imagedestroy($strSourceImage);
+		imagedestroy($strNewImage);
+
+		return true;
 	}
 }
