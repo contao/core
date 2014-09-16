@@ -346,11 +346,10 @@ class Image
 				break;
 		}
 
-		// This is a workaround at most, because the viewBox dimensions have
-		// nothing to do with the target width and height of the image (FIXME)
+		// Resizing will most likely fail if there is no viewBox attribute
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
-			$svgElement->setAttribute('viewBox', '0 0 ' . $width . ' ' . $height);
+			\System::log('Image "' . $image . '" does not have a "viewBox" attribute', __METHOD__, TL_ERROR);
 		}
 
 		$svgElement->setAttribute('width', $width . 'px');
@@ -578,5 +577,42 @@ class Image
 		imagedestroy($strNewImage);
 
 		return true;
+	}
+
+
+	/**
+	 * Convert sizes like 2em, 10% or 12pt to pixels
+	 *
+	 * @param string $size The size string
+	 *
+	 * @return integer The pixel value
+	 */
+	public static function getPixelValue($size)
+	{
+		$value = preg_replace('/[^0-9\.-]+/', '', $size);
+		$unit = preg_replace('/[^ceimnprtx%]/', '', $size);
+
+		// Convert 12pt = 16px = 1em = 100%
+		switch ($unit)
+		{
+			case '':
+			case 'px':
+				return $value;
+				break;
+
+			case 'em':
+				return round($value * 16);
+				break;
+
+			case 'pt':
+				return round($value * (12 / 16));
+				break;
+
+			case '%':
+				return round($value * (16 / 100));
+				break;
+		}
+
+		return 0;
 	}
 }

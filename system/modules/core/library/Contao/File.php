@@ -264,11 +264,10 @@ class File extends \System
 
 						$svgElement = $doc->documentElement;
 
-						// Remove the unit (see LIMITATIONS.md)
 						$this->arrImageSize = array
 						(
-							intval($svgElement->getAttribute('width')),
-							intval($svgElement->getAttribute('height'))
+							\Image::getPixelValue($svgElement->getAttribute('width')),
+							\Image::getPixelValue($svgElement->getAttribute('height'))
 						);
 					}
 				}
