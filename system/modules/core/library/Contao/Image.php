@@ -336,8 +336,8 @@ class Image
 
 			if (!$svgElement->hasAttribute('viewBox'))
 			{
-				$currentWidth  = $svgElement->getAttribute('width');
-				$currentHeight = $svgElement->getAttribute('height');
+				$currentWidth  = $objFile->width;
+				$currentHeight = $objFile->height;
 
 				$svgElement->setAttribute('viewBox', sprintf('%s %s %s %s', $currentX, $currentY, $currentWidth, $currentHeight));
 			}
@@ -348,8 +348,8 @@ class Image
 			$newWidth = $intWidth;
 			$newHeight = $intHeight;
 
-			$svgElement->setAttribute('x', $newX . 'px');
-			$svgElement->setAttribute('y', $newY . 'px');
+			$svgElement->setAttribute('x', $newX);
+			$svgElement->setAttribute('y', $newY);
 			$svgElement->setAttribute('width', $newWidth . 'px');
 			$svgElement->setAttribute('height', $newHeight . 'px');
 
@@ -524,5 +524,42 @@ class Image
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
 		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+	}
+
+
+	/**
+	 * Convert sizes like 2em, 10% or 12pt to pixels
+	 *
+	 * @param string $strSize The size string
+	 *
+	 * @return integer The pixel value
+	 */
+	public static function getPixelValue($strSize)
+	{
+		$intValue = preg_replace('/[^0-9\.-]+/', '', $strSize);
+		$strUnit = preg_replace('/[^ceimnprtx%]/', '', $strSize);
+
+		// Convert 12pt = 16px = 1em = 100%
+		switch ($strUnit)
+		{
+			case '':
+			case 'px':
+				return $intValue;
+				break;
+
+			case 'em':
+				return round($intValue * 16);
+				break;
+
+			case 'pt':
+				return round($intValue * (12 / 16));
+				break;
+
+			case '%':
+				return round($intValue * (16 / 100));
+				break;
+		}
+
+		return 0;
 	}
 }
