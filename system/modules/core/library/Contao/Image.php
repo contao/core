@@ -186,8 +186,8 @@ class Image
 			}
 		}
 
-		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight'))
+		// Return the path to the original image if it cannot be handled
+		if ($objFile->isSvgImage && !extension_loaded('dom') || $objFile->isGdImage && (!extension_loaded('gd') || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight')))
 		{
 			return \System::urlEncode($image);
 		}
@@ -295,130 +295,182 @@ class Image
 					break;
 			}
 
-			$strNewImage = imagecreatetruecolor($width, $height);
+			if ($objFile->isGdImage)
+			{
+				$strNewImage = imagecreatetruecolor($width, $height);
+			}
 		}
 
 		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
 			$intHeight = max(round($objFile->height * $width / $objFile->width), 1);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
+
+			if ($objFile->isGdImage)
+			{
+				$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
+			}
 		}
 
 		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
 			$intWidth = max(round($objFile->width * $height / $objFile->height), 1);
-			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
+
+			if ($objFile->isGdImage)
+			{
+				$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
+			}
 		}
 
-		$arrGdinfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
-
-		switch ($objFile->extension)
+		// Handle SVG image
+		if ($objFile->isSvgImage)
 		{
-			case 'gif':
-				if ($arrGdinfo['GIF Read Support'])
-				{
-					$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
-					$intTranspIndex = imagecolortransparent($strSourceImage);
+			$doc = new \DOMDocument();
+			$doc->loadXML($objFile->getContent());
 
-					// Handle transparency
-					if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
+			$svgElement = $doc->documentElement;
+
+			$currentX = $svgElement->hasAttribute('x') ? $svgElement->getAttribute('x') : 0;
+			$currentY = $svgElement->hasAttribute('y') ? $svgElement->getAttribute('y') : 0;
+
+			if (!$svgElement->hasAttribute('viewBox'))
+			{
+				$currentWidth  = $svgElement->getAttribute('width');
+				$currentHeight = $svgElement->getAttribute('height');
+
+				$svgElement->setAttribute('viewBox', sprintf('%s %s %s %s', $currentX, $currentY, $currentWidth, $currentHeight));
+			}
+
+			$newX = intval($currentX) + $intPositionX;
+			$newY = intval($currentY) + $intPositionY;
+
+			$newWidth = $intWidth;
+			$newHeight = $intHeight;
+
+			$svgElement->setAttribute('x', $newX . 'px');
+			$svgElement->setAttribute('y', $newY . 'px');
+			$svgElement->setAttribute('width', $newWidth . 'px');
+			$svgElement->setAttribute('height', $newHeight . 'px');
+
+			$xml = $doc->saveXML();
+
+			$objCacheFile = new \File($strCacheName, true);
+			$objCacheFile->write($xml);
+			$objCacheFile->close();
+		}
+
+		// Handle GD image
+		else
+		{
+			$arrGdinfo = gd_info();
+			$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
+
+			switch ($objFile->extension)
+			{
+				case 'gif':
+					if ($arrGdinfo['GIF Read Support'])
 					{
-						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
-						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagecolortransparent($strNewImage, $intTranspIndex);
-					}
-				}
-				break;
+						$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
+						$intTranspIndex = imagecolortransparent($strSourceImage);
 
-			case 'jpg':
-			case 'jpeg':
-				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
-				{
-					$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
-				}
-				break;
-
-			case 'png':
-				if ($arrGdinfo['PNG Support'])
-				{
-					$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
-
-					// Handle transparency (GDlib >= 2.0 required)
-					if (version_compare($strGdVersion, '2.0', '>='))
-					{
-						imagealphablending($strNewImage, false);
-						$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
-						imagefill($strNewImage, 0, 0, $intTranspIndex);
-						imagesavealpha($strNewImage, true);
-					}
-				}
-				break;
-		}
-
-		// The new image could not be created
-		if (!$strSourceImage)
-		{
-			imagedestroy($strNewImage);
-			\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
-			return null;
-		}
-
-		imageinterlace($strNewImage, 1); // see #6529
-		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
-
-		// Fallback to PNG if GIF ist not supported
-		if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
-		{
-			$objFile->extension = 'png';
-		}
-
-		// Create the new image
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
-				break;
-
-			case 'png':
-				// Optimize non-truecolor images (see #2426)
-				if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
-				{
-					// TODO: make it work with transparent images, too
-					if (imagecolortransparent($strSourceImage) == -1)
-					{
-						$intColors = imagecolorstotal($strSourceImage);
-
-						// Convert to a palette image
-						// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
-						if ($intColors > 0 && $intColors < 256)
+						// Handle transparency
+						if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
 						{
-							$wi = imagesx($strNewImage);
-							$he = imagesy($strNewImage);
-							$ch = imagecreatetruecolor($wi, $he);
-							imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
-							imagetruecolortopalette($strNewImage, false, $intColors);
-							imagecolormatch($ch, $strNewImage);
-							imagedestroy($ch);
+							$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
+							$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
+							imagefill($strNewImage, 0, 0, $intTranspIndex);
+							imagecolortransparent($strNewImage, $intTranspIndex);
 						}
 					}
-				}
+					break;
 
-				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
-				break;
+				case 'jpg':
+				case 'jpeg':
+					if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
+					{
+						$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
+					}
+					break;
+
+				case 'png':
+					if ($arrGdinfo['PNG Support'])
+					{
+						$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
+
+						// Handle transparency (GDlib >= 2.0 required)
+						if (version_compare($strGdVersion, '2.0', '>='))
+						{
+							imagealphablending($strNewImage, false);
+							$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
+							imagefill($strNewImage, 0, 0, $intTranspIndex);
+							imagesavealpha($strNewImage, true);
+						}
+					}
+					break;
+			}
+
+			// The new image could not be created
+			if (!$strSourceImage)
+			{
+				imagedestroy($strNewImage);
+				\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
+				return null;
+			}
+
+			imageinterlace($strNewImage, 1); // see #6529
+			imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);
+
+			// Fallback to PNG if GIF ist not supported
+			if ($objFile->extension == 'gif' && !$arrGdinfo['GIF Create Support'])
+			{
+				$objFile->extension = 'png';
+			}
+
+			// Create the new image
+			switch ($objFile->extension)
+			{
+				case 'gif':
+					imagegif($strNewImage, TL_ROOT . '/' . $strCacheName);
+					break;
+
+				case 'jpg':
+				case 'jpeg':
+					imagejpeg($strNewImage, TL_ROOT . '/' . $strCacheName, (\Config::get('jpgQuality') ?: 80));
+					break;
+
+				case 'png':
+					// Optimize non-truecolor images (see #2426)
+					if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
+					{
+						// TODO: make it work with transparent images, too
+						if (imagecolortransparent($strSourceImage) == -1)
+						{
+							$intColors = imagecolorstotal($strSourceImage);
+
+							// Convert to a palette image
+							// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
+							if ($intColors > 0 && $intColors < 256)
+							{
+								$wi = imagesx($strNewImage);
+								$he = imagesy($strNewImage);
+								$ch = imagecreatetruecolor($wi, $he);
+								imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
+								imagetruecolortopalette($strNewImage, false, $intColors);
+								imagecolormatch($ch, $strNewImage);
+								imagedestroy($ch);
+							}
+						}
+					}
+
+					imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
+					break;
+			}
+
+			// Destroy the temporary images
+			imagedestroy($strSourceImage);
+			imagedestroy($strNewImage);
 		}
-
-		// Destroy the temporary images
-		imagedestroy($strSourceImage);
-		imagedestroy($strNewImage);
 
 		// Resize the original image
 		if ($target)
