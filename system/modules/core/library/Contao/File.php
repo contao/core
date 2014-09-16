@@ -160,9 +160,12 @@ class File extends \System
 	 * * atime:       the file's atime
 	 * * icon:        the name of the corresponding mime icon
 	 * * path:        the path to the file
+     * * imageSize:   the file dimensions (images only)
 	 * * width:       the file width (images only)
 	 * * height:      the file height (images only)
+	 * * isImage:     true if the file is an image
 	 * * isGdImage:   true if the file can be handled by the GDlib
+     * * isSvgImage:  true if the file is an SVG image
 	 * * channels:    the number of channels (images only)
 	 * * bits:        the number of bits for each color (images only)
 	 * * isRgbImage:  true if the file is an RGB image
@@ -248,24 +251,48 @@ class File extends \System
 				return $this->getIcon();
 				break;
 
-			case 'width':
+			case 'imageSize':
 				if (empty($this->arrImageSize))
 				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+					if ($this->isGdImage)
+					{
+						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+					}
+					elseif ($this->isSvgImage)
+					{
+						$doc = new \DOMDocument();
+						$doc->loadXML($this->getContent());
+
+						$svgElement = $doc->documentElement;
+
+						$this->arrImageSize = array
+						(
+							\Image::getPixelValue($svgElement->getAttribute('width')),
+							\Image::getPixelValue($svgElement->getAttribute('height'))
+						);
+					}
 				}
-				return $this->arrImageSize[0];
+				return $this->arrImageSize;
+				break;
+
+			case 'width':
+				return $this->imageSize[0];
 				break;
 
 			case 'height':
-				if (empty($this->arrImageSize))
-				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-				}
-				return $this->arrImageSize[1];
+				return $this->imageSize[1];
+				break;
+
+			case 'isImage':
+				return $this->isGdImage || $this->isSvgImage;
 				break;
 
 			case 'isGdImage':
 				return in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+				break;
+
+			case 'isSvgImage':
+				return in_array($this->extension, array('svg', 'svgz'));
 				break;
 
 			case 'channels':

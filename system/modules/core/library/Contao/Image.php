@@ -186,47 +186,202 @@ class Image
 			}
 		}
 
-		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight'))
+		// Return the path to the original image if it cannot be handled
+		if ($objFile->isSvgImage && !extension_loaded('dom') || $objFile->isGdImage && (!extension_loaded('gd') || $objFile->width > \Config::get('gdMaxImgWidth') || $objFile->height > \Config::get('gdMaxImgHeight') || (!$width && !$height) || $width > \Config::get('gdMaxImgWidth') || $height > \Config::get('gdMaxImgHeight')))
 		{
 			return \System::urlEncode($image);
 		}
 
-		$intPositionX = 0;
-		$intPositionY = 0;
-		$intWidth = $width;
-		$intHeight = $height;
-
 		// Mode-specific changes
-		if ($intWidth && $intHeight)
+		if ($width && $height)
 		{
 			switch ($mode)
 			{
 				case 'proportional':
 					if ($objFile->width >= $objFile->height)
 					{
-						unset($height, $intHeight);
+						unset($height);
 					}
 					else
 					{
-						unset($width, $intWidth);
+						unset($width);
 					}
 					break;
 
 				case 'box':
-					if (round($objFile->height * $width / $objFile->width) <= $intHeight)
+					if (round($objFile->height * $width / $objFile->width) <= $height)
 					{
-						unset($height, $intHeight);
+						unset($height);
 					}
 					else
 					{
-						unset($width, $intWidth);
+						unset($width);
 					}
 					break;
 			}
 		}
 
-		$strNewImage = null;
+		// Create the resized image
+		if ($objFile->isSvgImage)
+		{
+			static::resizeSvgImage($image, $width, $height, $mode, $objFile, $strCacheName);
+		}
+		elseif (static::resizeGdImage($image, $width, $height, $mode, $objFile, $strCacheName) === false)
+		{
+			return null;
+		}
+
+		// Resize the original image
+		if ($target)
+		{
+			\Files::getInstance()->copy($strCacheName, $target);
+
+			return \System::urlEncode($target);
+		}
+
+		// Set the file permissions when the Safe Mode Hack is used
+		if (\Config::get('useFTP'))
+		{
+			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
+		}
+
+		// Return the path to new image
+		return \System::urlEncode($strCacheName);
+	}
+
+
+	/**
+	 * Generate an image tag and return it as string
+	 *
+	 * @param string $src        The image path
+	 * @param string $alt        An optional alt attribute
+	 * @param string $attributes A string of other attributes
+	 *
+	 * @return string The image HTML tag
+	 */
+	public static function getHtml($src, $alt='', $attributes='')
+	{
+		$static = TL_FILES_URL;
+		$src = rawurldecode($src);
+
+		if (strpos($src, '/') === false)
+		{
+			if (strncmp($src, 'icon', 4) === 0)
+			{
+				$static = TL_ASSETS_URL;
+				$src = 'assets/contao/images/' . $src;
+			}
+			else
+			{
+				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
+			}
+		}
+
+		if (!file_exists(TL_ROOT .'/'. $src))
+		{
+			return '';
+		}
+
+		$size = getimagesize(TL_ROOT .'/'. $src);
+		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+	}
+
+
+	/**
+	 * Resize an SVG image
+	 *
+	 * @param string  $image        The image path
+	 * @param integer $width        The target width
+	 * @param integer $height       The target height
+	 * @param string  $mode         The resize mode
+	 * @param \File   $objFile      The file object
+	 * @param string  $strCacheName The name of the cached file
+	 *
+	 * @return boolean False if the target image cannot be created
+	 */
+	protected static function resizeSvgImage($image, $width, $height, $mode, $objFile, $strCacheName)
+	{
+		$doc = new \DOMDocument();
+		$doc->loadXML($objFile->getContent());
+
+		$svgElement = $doc->documentElement;
+
+		// Advanced crop modes
+		switch ($mode)
+		{
+			case 'left_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
+				break;
+
+			case 'center_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
+				break;
+
+			case 'right_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
+				break;
+
+			case 'left_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
+				break;
+
+			case 'center_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
+				break;
+
+			case 'right_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
+				break;
+
+			case 'left_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
+				break;
+
+			case 'center_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
+				break;
+
+			case 'right_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
+				break;
+		}
+
+		// Resizing will most likely fail if there is no viewBox attribute
+		if (!$svgElement->hasAttribute('viewBox'))
+		{
+			\System::log('Image "' . $image . '" does not have a "viewBox" attribute', __METHOD__, TL_ERROR);
+		}
+
+		$svgElement->setAttribute('width', $width . 'px');
+		$svgElement->setAttribute('height', $height . 'px');
+
+		$xml = $doc->saveXML();
+
+		$objCacheFile = new \File($strCacheName, true);
+		$objCacheFile->write($xml);
+		$objCacheFile->close();
+	}
+
+
+	/**
+	 * Resize a GDlib image
+	 *
+	 * @param string  $image        The image path
+	 * @param integer $width        The target width
+	 * @param integer $height       The target height
+	 * @param string  $mode         The resize mode
+	 * @param \File   $objFile      The file object
+	 * @param string  $strCacheName The name of the cached file
+	 *
+	 * @return boolean False if the target image cannot be created
+	 */
+	protected static function resizeGdImage($image, $width, $height, $mode, $objFile, $strCacheName)
+	{
+		$intPositionX   = 0;
+		$intPositionY   = 0;
+		$intWidth       = $width;
+		$intHeight      = $height;
+		$strNewImage    = null;
 		$strSourceImage = null;
 
 		// Resize width and height and crop the image if necessary
@@ -364,7 +519,8 @@ class Image
 		{
 			imagedestroy($strNewImage);
 			\System::log('Image "' . $image . '" could not be processed', __METHOD__, TL_ERROR);
-			return null;
+
+			return false;
 		}
 
 		imageinterlace($strNewImage, 1); // see #6529
@@ -420,57 +576,43 @@ class Image
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
 
-		// Resize the original image
-		if ($target)
-		{
-			\Files::getInstance()->copy($strCacheName, $target);
-			return \System::urlEncode($target);
-		}
-
-		// Set the file permissions when the Safe Mode Hack is used
-		if (\Config::get('useFTP'))
-		{
-			\Files::getInstance()->chmod($strCacheName, \Config::get('defaultFileChmod'));
-		}
-
-		// Return the path to new image
-		return \System::urlEncode($strCacheName);
+		return true;
 	}
 
 
 	/**
-	 * Generate an image tag and return it as string
+	 * Convert sizes like 2em, 10% or 12pt to pixels
 	 *
-	 * @param string $src        The image path
-	 * @param string $alt        An optional alt attribute
-	 * @param string $attributes A string of other attributes
+	 * @param string $size The size string
 	 *
-	 * @return string The image HTML tag
+	 * @return integer The pixel value
 	 */
-	public static function getHtml($src, $alt='', $attributes='')
+	public static function getPixelValue($size)
 	{
-		$static = TL_FILES_URL;
-		$src = rawurldecode($src);
+		$value = preg_replace('/[^0-9\.-]+/', '', $size);
+		$unit = preg_replace('/[^ceimnprtx%]/', '', $size);
 
-		if (strpos($src, '/') === false)
+		// Convert 12pt = 16px = 1em = 100%
+		switch ($unit)
 		{
-			if (strncmp($src, 'icon', 4) === 0)
-			{
-				$static = TL_ASSETS_URL;
-				$src = 'assets/contao/images/' . $src;
-			}
-			else
-			{
-				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
-			}
+			case '':
+			case 'px':
+				return $value;
+				break;
+
+			case 'em':
+				return round($value * 16);
+				break;
+
+			case 'pt':
+				return round($value * (12 / 16));
+				break;
+
+			case '%':
+				return round($value * (16 / 100));
+				break;
 		}
 
-		if (!file_exists(TL_ROOT .'/'. $src))
-		{
-			return '';
-		}
-
-		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . $static . \System::urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return 0;
 	}
 }
