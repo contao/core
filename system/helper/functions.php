@@ -126,6 +126,9 @@ function __exception($e)
  */
 function trace_nicely(\Exception $exception)
 {
+	// clean output buffer
+	while (ob_end_clean());
+
 	if (file_exists(TL_ROOT . "/templates/be_trace.html5"))
 	{
 		include TL_ROOT . "/templates/be_trace.html5";
