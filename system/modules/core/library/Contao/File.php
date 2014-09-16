@@ -253,7 +253,23 @@ class File extends \System
 			case 'imageSize':
 				if (empty($this->arrImageSize))
 				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+					if ($this->isGdImage)
+					{
+						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
+					}
+					elseif ($this->isSvgImage)
+					{
+						$doc = new \DOMDocument();
+						$doc->loadXML($this->getContent());
+
+						$svgElement = $doc->documentElement;
+
+						$this->arrImageSize = array
+						(
+							$this->getPixelValue($svgElement->getAttribute('width')),
+							$this->getPixelValue($svgElement->getAttribute('height'))
+						);
+					}
 				}
 				return $this->arrImageSize;
 				break;
@@ -780,5 +796,42 @@ class File extends \System
 		{
 			return md5_file(TL_ROOT . '/' . $this->strFile);
 		}
+	}
+
+
+	/**
+	 * Convert sizes like 2em, 10% or 12pt to pixels
+	 *
+	 * @param string $strSize The size string
+	 *
+	 * @return integer The pixel value
+	 */
+	protected function getPixelValue($strSize)
+	{
+		$intValue = preg_replace('/[^0-9\.-]+/', '', $strSize);
+		$strUnit = preg_replace('/[^ceimnprtx%]/', '', $strSize);
+
+		// Convert 12pt = 16px = 1em = 100%
+		switch ($strUnit)
+		{
+			case '':
+			case 'px':
+				return $intValue;
+				break;
+
+			case 'em':
+				return round($intValue * 16);
+				break;
+
+			case 'pt':
+				return round($intValue * (12 / 16));
+				break;
+
+			case '%':
+				return round($intValue * (16 / 100));
+				break;
+		}
+
+		return 0;
 	}
 }
