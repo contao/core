@@ -279,7 +279,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options_callback'        => array('tl_news', 'getImageSizes'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
@@ -794,6 +794,28 @@ class tl_news extends Backend
 		$session = $this->Session->get('news_feed_updater');
 		$session[] = $dc->activeRecord->pid;
 		$this->Session->set('news_feed_updater', array_unique($session));
+	}
+
+
+	/**
+	 * Return all image sizes as array
+	 * @return array
+	 */
+	public function getImageSizes()
+	{
+		$sizes = array();
+
+		$imageSize = $this->Database
+			->prepare("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name")
+			->execute(Input::get('id'));
+
+		while ($imageSize->next())
+		{
+			$sizes[$imageSize->id] = $imageSize->name;
+			$sizes[$imageSize->id] .= ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
+		}
+
+		return array_merge(array('image_sizes'=>$sizes), $GLOBALS['TL_CROP']);
 	}
 
 

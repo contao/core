@@ -169,7 +169,7 @@ class Image
 	 * @param array $importantPart
 	 * @return $this
 	 */
-	public function setImportantPart(array $importantPart)
+	public function setImportantPart(array $importantPart = null)
 	{
 		$this->importantPart = $importantPart;
 
