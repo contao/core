@@ -856,7 +856,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Copy the values if the record contains data
 		if ($objRow->numRows)
 		{
-			foreach ($objRow->fetchAssoc() as $k=>$v)
+			foreach ($objRow->row() as $k=>$v)
 			{
 				if (in_array($k, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])))
 				{
@@ -1057,15 +1057,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 												->execute($id);
 				}
 
-				foreach ($objCTable->fetchAllAssoc() as $row)
+				while ($objCTable->next())
 				{
 					// Exclude the duplicated record itself
-					if ($v == $table && $row['id'] == $parentId)
+					if ($v == $table && $objCTable->id == $parentId)
 					{
 						continue;
 					}
 
-					foreach ($row as $kk=>$vv)
+					foreach ($objCTable->row() as $kk=>$vv)
 					{
 						if ($kk == 'id')
 						{
@@ -1090,11 +1090,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$copy[$v][$row['id']][$kk] = $vv;
+						$copy[$v][$objCTable->id][$kk] = $vv;
 					}
 
-					$copy[$v][$row['id']]['pid'] = $insertID;
-					$copy[$v][$row['id']]['tstamp'] = $time;
+					$copy[$v][$objCTable->id]['pid'] = $insertID;
+					$copy[$v][$objCTable->id]['tstamp'] = $time;
 				}
 			}
 		}
@@ -1446,7 +1446,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if ($objSave->numRows)
 				{
-					$data[$table][$k] = $objSave->fetchAssoc();
+					$data[$table][$k] = $objSave->row();
 
 					// Store the active record
 					if ($table == $this->strTable && $v == $this->intId)
