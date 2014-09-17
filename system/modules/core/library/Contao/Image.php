@@ -354,10 +354,13 @@ class Image
 				break;
 		}
 
-		// Resizing will most likely fail if there is no viewBox attribute
+		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
-			\System::log('Image "' . $image . '" does not have a "viewBox" attribute', __METHOD__, TL_ERROR);
+			$origWidth = $svgElement->getAttribute('width');
+			$origHeight = $svgElement->getAttribute('height');
+
+			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
 		}
 
 		$svgElement->setAttribute('width', $width . 'px');
