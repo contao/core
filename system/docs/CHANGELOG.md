@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Changes
+Consider the options array in `Model::countBy()` (see #7033).
+
 ### New
 Support SVG and SVGZ images (see #7108, #5908).
 
