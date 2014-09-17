@@ -302,7 +302,15 @@ class Image
 	protected static function resizeSvgImage($image, $width, $height, $mode, $objFile, $strCacheName)
 	{
 		$doc = new \DOMDocument();
-		$doc->loadXML($objFile->getContent());
+
+		if ($objFile->extension == 'svgz')
+		{
+			$doc->loadXML(gzdecode($objFile->getContent()));
+		}
+		else
+		{
+			$doc->loadXML($objFile->getContent());
+		}
 
 		$svgElement = $doc->documentElement;
 
@@ -355,7 +363,14 @@ class Image
 		$svgElement->setAttribute('width', $width . 'px');
 		$svgElement->setAttribute('height', $height . 'px');
 
-		$xml = $doc->saveXML();
+		if ($objFile->extension == 'svgz')
+		{
+			$xml = gzencode($doc->saveXML());
+		}
+		else
+		{
+			$xml = $doc->saveXML();
+		}
 
 		$objCacheFile = new \File($strCacheName, true);
 		$objCacheFile->write($xml);

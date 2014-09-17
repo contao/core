@@ -261,7 +261,15 @@ class File extends \System
 					elseif ($this->isSvgImage)
 					{
 						$doc = new \DOMDocument();
-						$doc->loadXML($this->getContent());
+
+						if ($this->extension == 'svgz')
+						{
+							$doc->loadXML(gzdecode($this->getContent()));
+						}
+						else
+						{
+							$doc->loadXML($this->getContent());
+						}
 
 						$svgElement = $doc->documentElement;
 

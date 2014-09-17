@@ -1728,6 +1728,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		$strContent = $objFile->getContent();
 
+		if ($objFile->extension == 'svgz')
+		{
+			$strContent = gzdecode($strContent);
+		}
+
 		// Process the request
 		if (\Input::post('FORM_SUBMIT') == 'tl_files')
 		{
@@ -1737,6 +1742,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Save the file
 			if (md5($strContent) != md5($strSource))
 			{
+				if ($objFile->extension == 'svgz')
+				{
+					$strSource = gzencode($strSource);
+				}
+
 				// Write the file
 				$objFile->write($strSource);
 				$objFile->close();

@@ -5,7 +5,7 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### New
-Support SVG images (see #7108, #5908).
+Support SVG and SVGZ images (see #7108, #5908).
 
 ### Changed
 Move the mime types array to a configuration file (see #6843).
