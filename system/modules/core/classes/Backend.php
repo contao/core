@@ -186,6 +186,7 @@ abstract class Backend extends \Controller
 				break;
 
 			case 'svg':
+			case 'svgz':
 				return 'xml';
 				break;
 

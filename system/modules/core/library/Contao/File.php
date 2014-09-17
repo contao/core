@@ -656,7 +656,7 @@ class File extends \System
 	 */
 	public function resizeTo($width, $height, $mode='')
 	{
-		if (!$this->isGdImage)
+		if (!$this->isImage)
 		{
 			return false;
 		}
