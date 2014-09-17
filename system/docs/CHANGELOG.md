@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Support simple tokens in registration and lost password mails (see #7101).
+
 ### Changes
 Consider the options array in `Model::countBy()` (see #7033).
 
