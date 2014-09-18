@@ -148,18 +148,19 @@ class Image
 	/**
 	 * Set the important part settings
 	 *
-	 * @param array $importantPart
+	 * @param array|null $importantPart
 	 * @return $this
 	 *
 	 * @throws \InvalidArgumentException
 	 */
 	public function setImportantPart(array $importantPart = null)
 	{
-		if (!isset($importantPart['x'])
+		if ($importantPart !== null && (
+			!isset($importantPart['x'])
 			|| !isset($importantPart['y'])
 			|| !isset($importantPart['width'])
 			|| !isset($importantPart['height'])
-		)
+		))
 		{
 			throw new \InvalidArgumentException('Malformed array for setting the important part!');
 		}
