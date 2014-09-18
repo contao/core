@@ -667,9 +667,9 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
-		$this->addTableTlImageSize($xml, $tables, $objTheme);
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
