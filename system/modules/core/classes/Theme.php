@@ -669,6 +669,7 @@ class Theme extends \Backend
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
@@ -850,6 +851,45 @@ class Theme extends \Backend
 		while ($objLayout->next())
 		{
 			$this->addDataRow($xml, $table, $objLayout, $arrOrder);
+		}
+	}
+
+
+	/**
+	 * Add the table tl_image_size
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database\Result
+	 */
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	{
+		// Add the tables
+		$imageSizeTable = $xml->createElement('table');
+		$imageSizeTable->setAttribute('name', 'tl_image_size');
+		$imageSizeTable = $tables->appendChild($imageSizeTable);
+
+		$imageSizeItemTable = $xml->createElement('table');
+		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
+		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
+
+		// Get all sizes
+		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
+									->execute($objTheme->id);
+
+		// Add the rows
+		while ($objSizes->next())
+		{
+			$this->addDataRow($xml, $imageSizeTable, $objSizes);
+
+			// Get all size items
+			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
+				->execute($objSizes->id);
+
+			// Add the rows
+			while ($objSizeItems->next())
+			{
+				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems);
+			}
 		}
 	}
 
