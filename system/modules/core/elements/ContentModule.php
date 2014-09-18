@@ -56,9 +56,14 @@ class ContentModule extends \ContentElement
 		$objModule->typePrefix = 'ce_';
 		$objModule = new $strClass($objModule, $this->strColumn);
 
-		// Overwrite spacing and CSS ID
+		// Overwrite spacing, CSS ID and merge CSS classes
+		$cssID = $this->cssID;
+		if($objModule->cssID[1])
+		{
+			$cssID[1] = trim($cssID[1].' '.$objModule->cssID[1]);
+		}
 		$objModule->space = $this->space;
-		$objModule->cssID = $this->cssID;
+		$objModule->cssID = $cssID;
 
 		return $objModule->generate();
 	}
