@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Do not directly query the `INFORMATION_SCHEMA` database (see #7302).
+
 ### New
 Added the "doNoTrim" flag to the `Widget` class (see #4287).
 
