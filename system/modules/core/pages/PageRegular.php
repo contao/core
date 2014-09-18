@@ -489,6 +489,12 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
 		}
 
+		// Make sure TL_USER_CSS is set
+		if (!is_array($GLOBALS['TL_USER_CSS']))
+		{
+			$GLOBALS['TL_USER_CSS'] = array();
+		}
+
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
@@ -594,12 +600,24 @@ class PageRegular extends \Frontend
 
 			if ($objFiles !== null)
 			{
+				$arrFiles = array();
+
 				while ($objFiles->next())
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
+						$arrFiles[] = $objFiles->path . '|static';
 					}
+				}
+
+				// Inject the external style sheets before or after the internal ones (see #6937)
+				if ($objLayout->loadingOrder == 'external_first')
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], 0, 0, $arrFiles);
+				}
+				else
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], count($GLOBALS['TL_USER_CSS']), 0, $arrFiles);
 				}
 			}
 		}

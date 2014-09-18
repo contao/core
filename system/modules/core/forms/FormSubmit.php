@@ -34,6 +34,13 @@ class FormSubmit extends \Widget
 	 */
 	protected $strTemplate = 'form_submit';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-submit';
+
 
 	/**
 	 * Add specific attributes

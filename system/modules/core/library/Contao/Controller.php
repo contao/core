@@ -2511,8 +2511,10 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
+		$objFile = new \File($arrItem['singleSRC']);
+
+		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
-		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
 		if ($intMaxWidth === null)
 		{
@@ -2564,8 +2566,13 @@ abstract class Controller extends \System
 			->executeResize()
 			->getResizedPath();
 
+		if ($src !== $arrItem['singleSRC'])
+		{
+			$objFile = new \File($src);
+		}
+
 		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+		if (($imgSize = $objFile->imageSize) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' ' . $imgSize[3];

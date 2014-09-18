@@ -138,12 +138,10 @@
         <target>Prosim, vnesite ime datoteke (brez končnice) za strukturo spletnega mesta</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>Uporabi HTTPS v strukturi spletnega mesta</target>
+        <source>Use HTTPS</source>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Generiraj URL-je za strukturo spletnega mesta z &lt;em&gt;https://&lt;/em&gt;.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

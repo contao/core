@@ -286,15 +286,16 @@
         <target>Viewport</target>
       </trans-unit>
       <trans-unit id="tl_layout.viewport.1">
-        <source>Here you can overwrite the viewport content (defaults to &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</source>
-        <target>Tu môžete prepísať obsah viewport-u (prednastavené: &lt;em&gt;width=device-width,initial-scale=1.0&lt;/em&gt;).</target>
+        <source>Here you can add a custom viewport (e.g. &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</source>
+        <target>Tu môžete zadať vlastné nastavenie viewport-u (napr.: &lt;em&gt;initial-scale=1.0&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.0">
         <source>Title tag</source>
-        <target>Názov stránky - &lt;title&gt;</target>
+        <target>Názov stránky &amp;lt;title&amp;gt;</target>
       </trans-unit>
       <trans-unit id="tl_layout.titleTag.1">
         <source>Here you can overwrite the title tag (defaults to &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</source>
+        <target>Tu môžete prepísať názov stránky (prednastavené: &lt;em&gt;{{page::pageTitle}} - {{page::rootTitle}}&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.onload.0">
         <source>Body onload</source>

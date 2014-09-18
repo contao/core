@@ -856,7 +856,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Copy the values if the record contains data
 		if ($objRow->numRows)
 		{
-			foreach ($objRow->fetchAssoc() as $k=>$v)
+			foreach ($objRow->row() as $k=>$v)
 			{
 				if (in_array($k, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])))
 				{
@@ -1057,15 +1057,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 												->execute($id);
 				}
 
-				foreach ($objCTable->fetchAllAssoc() as $row)
+				while ($objCTable->next())
 				{
 					// Exclude the duplicated record itself
-					if ($v == $table && $row['id'] == $parentId)
+					if ($v == $table && $objCTable->id == $parentId)
 					{
 						continue;
 					}
 
-					foreach ($row as $kk=>$vv)
+					foreach ($objCTable->row() as $kk=>$vv)
 					{
 						if ($kk == 'id')
 						{
@@ -1090,11 +1090,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$copy[$v][$row['id']][$kk] = $vv;
+						$copy[$v][$objCTable->id][$kk] = $vv;
 					}
 
-					$copy[$v][$row['id']]['pid'] = $insertID;
-					$copy[$v][$row['id']]['tstamp'] = $time;
+					$copy[$v][$objCTable->id]['pid'] = $insertID;
+					$copy[$v][$objCTable->id]['tstamp'] = $time;
 				}
 			}
 		}
@@ -1446,7 +1446,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if ($objSave->numRows)
 				{
-					$data[$table][$k] = $objSave->fetchAssoc();
+					$data[$table][$k] = $objSave->row();
 
 					// Store the active record
 					if ($table == $this->strTable && $v == $this->intId)
@@ -1640,6 +1640,23 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				if ($objInsertStmt->affectedRows < 1)
 				{
 					$error = true;
+				}
+
+				// Trigger the undo_callback
+				if (is_array($GLOBALS['TL_DCA'][$table]['config']['onundo_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$table]['config']['onundo_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($table, $row, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($table, $row, $this);
+						}
+					}
 				}
 			}
 		}
@@ -3263,8 +3280,27 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ? GROUP BY $for")
-										  ->execute($session['search'][$this->strTable]['value']);
+				$strPattern = "CAST(%s AS CHAR) REGEXP ?";
+
+				if (substr(\Config::get('dbCollation'), -3) == '_ci')
+				{
+					$strPattern = "LOWER(CAST(%s AS CHAR)) REGEXP LOWER(?)";
+				}
+
+				$fld = $session['search'][$this->strTable]['field'];
+
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']))
+				{
+					list($t, $f) = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']);
+
+					$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE (" . sprintf($strPattern, $fld) . " OR " . sprintf($strPattern, "(SELECT $f FROM $t WHERE $t.id={$this->strTable}.$fld)") . ") GROUP BY $for")
+											  ->execute($session['search'][$this->strTable]['value'], $session['search'][$this->strTable]['value']);
+				}
+				else
+				{
+					$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE " . sprintf($strPattern, $fld) . " GROUP BY $for")
+											  ->execute($session['search'][$this->strTable]['value']);
+				}
 			}
 
 			if ($objRoot->numRows < 1)
@@ -4807,13 +4843,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Set the search value from the session
 		elseif ($session['search'][$this->strTable]['value'] != '')
 		{
+			$strPattern = "CAST(%s AS CHAR) REGEXP ?";
+
 			if (substr(\Config::get('dbCollation'), -3) == '_ci')
 			{
-				$this->procedure[] = "LOWER(CAST(".$session['search'][$this->strTable]['field']." AS CHAR)) REGEXP LOWER(?)";
+				$strPattern = "LOWER(CAST(%s AS CHAR)) REGEXP LOWER(?)";
+			}
+
+			$fld = $session['search'][$this->strTable]['field'];
+
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']))
+			{
+				list($t, $f) = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']);
+				$this->procedure[] = "(" . sprintf($strPattern, $fld) . " OR " . sprintf($strPattern, "(SELECT $f FROM $t WHERE $t.id={$this->strTable}.$fld)") . ")";
+				$this->values[] = $session['search'][$this->strTable]['value'];
 			}
 			else
 			{
-				$this->procedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
+				$this->procedure[] = sprintf($strPattern, $fld);
 			}
 
 			$this->values[] = $session['search'][$this->strTable]['value'];

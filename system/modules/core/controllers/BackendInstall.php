@@ -531,29 +531,33 @@ class BackendInstall extends \Backend
 			}
 			catch (\Exception $e) {}
 
-			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
-									   ->execute(\Config::get('dbDatabase'));
+			$objTable = $this->Database->query("SHOW TABLE STATUS WHERE Name LIKE 'tl_%' AND !ISNULL(Collation)");
 
-			while ($objField->next())
+			while ($objTable->next())
 			{
-				if (!in_array($objField->TABLE_NAME, $arrTables))
+				if (!in_array($objTable->Name, $arrTables))
 				{
-					$this->Database->query("ALTER TABLE {$objField->TABLE_NAME} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
-					$arrTables[] = $objField->TABLE_NAME;
+					$this->Database->query("ALTER TABLE {$objTable->Name} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+					$arrTables[] = $objTable->Name;
 				}
 
-				$strQuery = "ALTER TABLE {$objField->TABLE_NAME} CHANGE {$objField->COLUMN_NAME} {$objField->COLUMN_NAME} {$objField->COLUMN_TYPE} CHARACTER SET $strCharset COLLATE $strCollation";
+				$objField = $this->Database->query("SHOW FULL COLUMNS FROM {$objTable->Name} WHERE !ISNULL(Collation)");
 
-				if ($objField->IS_NULLABLE == 'YES')
+				while ($objField->next())
 				{
-					$strQuery .= " NULL";
-				}
-				else
-				{
-					$strQuery .= " NOT NULL DEFAULT '{$objField->COLUMN_DEFAULT}'";
-				}
+					$strQuery = "ALTER TABLE {$objTable->Name} CHANGE {$objField->Field} {$objField->Field} {$objField->Type} CHARACTER SET $strCharset COLLATE $strCollation";
 
-				$this->Database->query($strQuery);
+					if ($objField->Null == 'YES')
+					{
+						$strQuery .= " NULL";
+					}
+					else
+					{
+						$strQuery .= " NOT NULL DEFAULT '{$objField->Default}'";
+					}
+
+					$this->Database->query($strQuery);
+				}
 			}
 
 			\Config::persist('dbCollation', $strCollation);

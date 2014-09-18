@@ -48,6 +48,13 @@ class FormCheckBox extends \Widget
 	 */
 	protected $strError = '';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-checkbox';
+
 
 	/**
 	 * Add specific attributes

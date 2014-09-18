@@ -1981,6 +1981,7 @@ Tento e-mail bol automatický vygenerovaný systémom Contao. Neodpovedajte naň
       </trans-unit>
       <trans-unit id="MSC.global">
         <source>global</source>
+        <target>global</target>
       </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>

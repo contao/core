@@ -65,22 +65,6 @@ class ListWizard extends \Widget
 
 
 	/**
-	 * Trim values
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function validator($varInput)
-	{
-		if (is_array($varInput))
-		{
-			return parent::validator($varInput);
-		}
-
-		return parent::validator(trim($varInput));
-	}
-
-
-	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */

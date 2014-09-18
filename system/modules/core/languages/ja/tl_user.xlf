@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_user.useCE.1">
         <source>Use the code editor to modify code elements.</source>
-        <target>コードのコンテンツ要素の修正にコードエディターを使用します。</target>
+        <target>コードのコンテント要素の修正にコードエディターを使用します。</target>
       </trans-unit>
       <trans-unit id="tl_user.pwChange.0">
         <source>Password change required</source>

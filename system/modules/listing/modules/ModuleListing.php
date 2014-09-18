@@ -397,7 +397,7 @@ class ModuleListing extends \Module
 		}
 
 		$arrFields = array();
-		$arrRow = $objRecord->fetchAssoc();
+		$arrRow = $objRecord->row();
 		$limit = count($arrRow);
 		$count = -1;
 

@@ -138,12 +138,12 @@
         <target>Bitte geben Sie den Namen der Sitemap-Datei ohne Dateiendung ein.</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
-        <source>Use HTTPS in sitemaps</source>
-        <target>HTTPS in Sitemaps</target>
+        <source>Use HTTPS</source>
+        <target>HTTPS verwenden</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
-        <source>Generate the sitemap URLs of this website with &lt;em&gt;https://&lt;/em&gt;.</source>
-        <target>Die Sitemap-URLs dieser Webseite mit &lt;em&gt;https://&lt;/em&gt; generieren.</target>
+        <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Die URLs mit &lt;em&gt;https://&lt;/em&gt; generieren (z.B. in Sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

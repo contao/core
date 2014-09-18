@@ -254,7 +254,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'language', 'maxlength'=>5, 'nospace'=>true, 'tl_class'=>'w50 clr'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'language', 'maxlength'=>5, 'nospace'=>true, 'doNotCopy'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'robots' => array
@@ -356,7 +356,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['fallback'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12'),
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50 m12'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkFallback')
@@ -512,8 +512,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cuser'],
 			'default'                 => intval(Config::get('defaultUser')),
 			'exclude'                 => true,
+			'search'                  => true,
 			'inputType'               => 'select',
-			'foreignKey'              => 'tl_user.username',
+			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
@@ -523,6 +524,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cgroup'],
 			'default'                 => intval(Config::get('defaultGroup')),
 			'exclude'                 => true,
+			'search'                  => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
 			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),

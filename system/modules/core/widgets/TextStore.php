@@ -78,7 +78,7 @@ class TextStore extends \Widget
 			return true;
 		}
 
-		return parent::validator(trim($varInput));
+		return parent::validator($varInput);
 	}
 
 

@@ -48,6 +48,13 @@ class FormPassword extends \Widget
 	 */
 	protected $strTemplate = 'form_password';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-password';
+
 
 	/**
 	 * Always decode entities

@@ -201,6 +201,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,

@@ -111,10 +111,10 @@
         <source>Please select the position of the custom layout sections.</source>
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.0">
-        <source>Style sheets</source>
+        <source>Internal style sheets</source>
       </trans-unit>
       <trans-unit id="tl_layout.stylesheet.1">
-        <source>Please select the style sheets you want to add to the layout.</source>
+        <source>Here you can add internal style sheets to the layout.</source>
       </trans-unit>
       <trans-unit id="tl_layout.framework.0">
         <source>CSS framework</source>
@@ -159,16 +159,28 @@
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
-        <source>Additional style sheets</source>
+        <source>External style sheets</source>
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
-        <source>Here you can add additional CSS, SCSS or LESS files from the file system.</source>
+        <source>Here you can add external CSS, SCSS or LESS files from the file system.</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.1">
         <source>The sort order of the style sheets.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.0">
+        <source>Loading order</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.loadingOrder.1">
+        <source>Here you can select the loading order of the style sheets.</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.external_first">
+        <source>Load external style sheets first</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.internal_first">
+        <source>Load internal style sheets first</source>
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.0">
         <source>Google web fonts</source>

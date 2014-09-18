@@ -472,19 +472,60 @@ class Image
 			}
 		}
 
-		// Return the path to the original image if the GDlib cannot handle it
-		if (!extension_loaded('gd')
-			|| !$this->fileObj->isGdImage
-			|| $this->fileObj->width > \Config::get('gdMaxImgWidth')
-			|| $this->fileObj->height > \Config::get('gdMaxImgHeight')
-			|| $this->getTargetWidth() > \Config::get('gdMaxImgWidth')
-			|| $this->getTargetHeight() > \Config::get('gdMaxImgHeight'))
+		// Return the path to the original image if it cannot be handled
+		if (!$this->fileObj->isImage
+			|| $this->fileObj->isSvgImage && !extension_loaded('dom')
+			|| $this->fileObj->isGdImage && (
+				!extension_loaded('gd')
+				|| $this->fileObj->width > \Config::get('gdMaxImgWidth')
+				|| $this->fileObj->height > \Config::get('gdMaxImgHeight')
+				|| $this->getTargetWidth() > \Config::get('gdMaxImgWidth')
+				|| $this->getTargetHeight() > \Config::get('gdMaxImgHeight')
+			))
 		{
 			$this->resizedPath = \System::urlEncode($this->getOriginalPath());
 
 			return $this;
 		}
 
+		// Create the resized image
+		if ($this->fileObj->isSvgImage)
+		{
+			$this->executeResizeSvg();
+		}
+		elseif (!$this->executeResizeGd())
+		{
+			return $this;
+		}
+
+		// Set the file permissions when the Safe Mode Hack is used
+		if (\Config::get('useFTP'))
+		{
+			\Files::getInstance()->chmod($this->getCacheName(), \Config::get('defaultFileChmod'));
+		}
+
+		// Resize the original image
+		if ($this->getTargetPath())
+		{
+			\Files::getInstance()->copy($this->getCacheName(), $this->getTargetPath());
+			$this->resizedPath = \System::urlEncode($this->getTargetPath());
+
+			return $this;
+		}
+
+		$this->resizedPath = \System::urlEncode($this->getCacheName());
+
+		return $this;
+	}
+
+
+	/**
+	 * Resize an GD image
+	 *
+	 * @return boolean False if the target image cannot be created, otherwise true
+	 */
+	protected function executeResizeGd()
+	{
 		$strSourceImage = static::getGdImageFromFile($this->fileObj);
 
 		// The new image could not be created
@@ -493,7 +534,7 @@ class Image
 			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
 			$this->resizedPath = '';
 
-			return $this;
+			return false;
 		}
 
 		$coordinates = $this->computeResize();
@@ -519,24 +560,94 @@ class Image
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
 
-		// Set the file permissions when the Safe Mode Hack is used
-		if (\Config::get('useFTP'))
+		return true;
+	}
+
+
+	/**
+	 * Resize an SVG image
+	 *
+	 * @return void
+	 */
+	protected function executeResizeSvg()
+	{
+		$doc = new \DOMDocument();
+
+		if ($this->fileObj->extension == 'svgz')
 		{
-			\Files::getInstance()->chmod($this->getCacheName(), \Config::get('defaultFileChmod'));
+			$doc->loadXML(gzdecode($this->fileObj->getContent()));
+		}
+		else
+		{
+			$doc->loadXML($this->fileObj->getContent());
 		}
 
-		// Resize the original image
-		if ($this->getTargetPath())
-		{
-			\Files::getInstance()->copy($this->getCacheName(), $this->getTargetPath());
-			$this->resizedPath = \System::urlEncode($this->getTargetPath());
+		$svgElement = $doc->documentElement;
 
-			return $this;
+		// Advanced crop modes
+		switch ($this->getResizeMode())
+		{
+			case 'left_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
+				break;
+
+			case 'center_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
+				break;
+
+			case 'right_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
+				break;
+
+			case 'left_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
+				break;
+
+			case 'center_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
+				break;
+
+			case 'right_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
+				break;
+
+			case 'left_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
+				break;
+
+			case 'center_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
+				break;
+
+			case 'right_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
+				break;
 		}
 
-		$this->resizedPath = \System::urlEncode($this->getCacheName());
+		// Set the viewBox attribute from the original dimensions
+		if (!$svgElement->hasAttribute('viewBox'))
+		{
+			$origWidth = $svgElement->getAttribute('width');
+			$origHeight = $svgElement->getAttribute('height');
 
-		return $this;
+			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
+		}
+
+		$svgElement->setAttribute('width', $this->getTargetWidth() . 'px');
+		$svgElement->setAttribute('height', $this->getTargetHeight() . 'px');
+
+		if ($this->fileObj->extension == 'svgz')
+		{
+			$xml = gzencode($doc->saveXML());
+		}
+		else
+		{
+			$xml = $doc->saveXML();
+		}
+
+		$objCacheFile = new \File($this->getCacheName(), true);
+		$objCacheFile->write($xml);
+		$objCacheFile->close();
 	}
 
 
@@ -1233,5 +1344,42 @@ class Image
 		}
 
 		return $imageObj->executeResize()->getResizedPath() ?: null;
+	}
+
+
+	/**
+	 * Convert sizes like 2em, 10% or 12pt to pixels
+	 *
+	 * @param string $size The size string
+	 *
+	 * @return integer The pixel value
+	 */
+	public static function getPixelValue($size)
+	{
+		$value = preg_replace('/[^0-9\.-]+/', '', $size);
+		$unit = preg_replace('/[^ceimnprtx%]/', '', $size);
+
+		// Convert 12pt = 16px = 1em = 100%
+		switch ($unit)
+		{
+			case '':
+			case 'px':
+				return $value;
+				break;
+
+			case 'em':
+				return round($value * 16);
+				break;
+
+			case 'pt':
+				return round($value * (12 / 16));
+				break;
+
+			case '%':
+				return round($value * (16 / 100));
+				break;
+		}
+
+		return 0;
 	}
 }

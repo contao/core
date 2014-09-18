@@ -1,14 +1,14 @@
 
-<?php if (!$this->tableless): ?>
-
-  <tr class="<?php echo $this->class; ?>">
-    <td colspan="2"><div class="colspan"><?php echo $this->message; ?></div></td>
-  </tr>
-
-<?php else: ?>
+<?php if ($this->tableless): ?>
 
   <div class="<?php echo $this->class; ?>">
     <?php echo $this->message; ?>
   </div>
+
+<?php else: ?>
+
+  <tr class="<?php echo $this->class; ?>">
+    <td colspan="2"><div class="colspan"><?php echo $this->message; ?></div></td>
+  </tr>
 
 <?php endif; ?>

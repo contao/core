@@ -280,6 +280,7 @@
       </trans-unit>
       <trans-unit id="tl_install.repositoryInstall">
         <source>Install the Composer client</source>
+        <target>Installer Composer klienten</target>
       </trans-unit>
       <trans-unit id="tl_install.installConfirm">
         <source>You have successfully installed Contao.</source>

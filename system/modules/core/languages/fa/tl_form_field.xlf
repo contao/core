@@ -411,9 +411,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.customTpl.0">
         <source>Custom form field template</source>
+        <target>قالب فیلد فرم اختصاصی</target>
       </trans-unit>
       <trans-unit id="tl_form_field.customTpl.1">
         <source>Here you can overwrite the default form field template.</source>
+        <target>اینجا می‌توانید قالب فیلد اختیاری پیش‌فرض را رونویسی کنید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>

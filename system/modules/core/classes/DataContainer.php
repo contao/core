@@ -499,11 +499,11 @@ class DataContainer extends \Backend
 		{
 			$objFile = new \File($this->objActiveRecord->path);
 
-			if ($objFile->isGdImage)
+			if ($objFile->isImage)
 			{
 				$image = 'placeholder.png';
 
-				if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				if ($objFile->isSvgImage || $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
 					if ($objFile->width > 699 || $objFile->height > 524) {
 						$image = \Image::get($objFile->path, 699, 524, 'box');

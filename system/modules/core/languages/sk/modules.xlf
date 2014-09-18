@@ -171,6 +171,7 @@
       </trans-unit>
       <trans-unit id="MOD.theme_export">
         <source>Theme export</source>
+        <target>Exportovať tému vzhľadu</target>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>

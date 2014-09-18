@@ -74,6 +74,12 @@ abstract class Widget extends \BaseTemplate
 	protected $strClass;
 
 	/**
+	 * CSS class prefix
+	 * @var string
+	 */
+	protected $strPrefix;
+
+	/**
 	 * Wizard
 	 * @var string
 	 */
@@ -157,6 +163,7 @@ abstract class Widget extends \BaseTemplate
 	 * * label:             the field label
 	 * * value:             the field value
 	 * * class:             one or more CSS classes
+	 * * prefix:            the CSS class prefix
 	 * * template:          the template name
 	 * * wizard:            the field wizard markup
 	 * * alt:               an alternative text
@@ -195,6 +202,8 @@ abstract class Widget extends \BaseTemplate
 	 * * useHomeDir:        store uploaded files in the user's home directory
 	 * * trailingSlash:     add or remove a trailing slash
 	 * * spaceToUnderscore: convert spaces to underscores
+	 * * nullIfEmpty:       set to NULL if the value is empty
+	 * * doNotTrim:         do not trim the user input
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -230,6 +239,10 @@ abstract class Widget extends \BaseTemplate
 				{
 					$this->strClass = trim($this->strClass . ' ' . $varValue);
 				}
+				break;
+
+			case 'prefix':
+				$this->strPrefix = $varValue;
 				break;
 
 			case 'template':
@@ -310,6 +323,7 @@ abstract class Widget extends \BaseTemplate
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
 			case 'nullIfEmpty':
+			case 'doNotTrim':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -343,6 +357,7 @@ abstract class Widget extends \BaseTemplate
 	 * * label:    the field label
 	 * * value:    the field value
 	 * * class:    one or more CSS classes
+	 * * prefix:   the CSS class prefix
 	 * * template: the template name
 	 * * wizard:   the field wizard markup
 	 * * required: makes the widget a required field
@@ -382,6 +397,10 @@ abstract class Widget extends \BaseTemplate
 
 			case 'class':
 				return $this->strClass;
+				break;
+
+			case 'prefix':
+				return $this->strPrefix;
 				break;
 
 			case 'template':
@@ -785,7 +804,10 @@ abstract class Widget extends \BaseTemplate
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
+		if (!$this->doNotTrim)
+		{
+			$varInput = trim($varInput);
+		}
 
 		if ($varInput == '')
 		{

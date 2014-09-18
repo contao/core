@@ -123,12 +123,12 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('inherit', 'admin'),
-		'login'                       => '{name_legend},name,email;{backend_legend},language,uploader,showHelp,thumbnails,useRTE,useCE;{session_legend},session;{google_legend},google;{theme_legend:hide},backendTheme;{password_legend},password',
-		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{google_legend:hide},google;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{account_legend},disable,start,stop',
-		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{google_legend:hide},google;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{google_legend:hide},google;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{google_legend:hide},google;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
-		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{google_legend:hide},google;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
+		'login'                       => '{name_legend},name,email;{backend_legend},language,uploader,showHelp,thumbnails,useRTE,useCE;{session_legend},session;{theme_legend:hide},backendTheme;{password_legend},password',
+		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{account_legend},disable,start,stop',
+		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
+		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
+		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
+		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
 	),
 
 	// Fields
@@ -172,15 +172,6 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>255, 'unique'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'google' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['google'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'rgxp'=>'google+'),
-			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'language' => array
 		(

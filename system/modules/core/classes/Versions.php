@@ -118,7 +118,16 @@ class Versions extends \Backend
 
 		if ($this->strPath !== null)
 		{
-			$objRecord->content = file_get_contents(TL_ROOT . '/' . $this->strPath);
+			$objFile = new \File($this->strPath);
+
+			if ($objFile->extension == 'svgz')
+			{
+				$objRecord->content = gzdecode($objFile->getContent());
+			}
+			else
+			{
+				$objRecord->content = $objFile->getContent();
+			}
 		}
 
 		$intVersion = 1;

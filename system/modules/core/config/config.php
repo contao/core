@@ -39,7 +39,8 @@ $GLOBALS['BE_MOD'] = array
 			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout', 'tl_image_size', 'tl_image_size_item'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import'      => array('StyleSheets', 'importStyleSheet')
+			'import'      => array('StyleSheets', 'importStyleSheet'),
+			'export'      => array('StyleSheets', 'exportStyleSheet')
 		),
 		'page' => array
 		(
@@ -469,6 +470,5 @@ $GLOBALS['TL_ASSETS'] = array
 /**
  * Other global arrays
  */
-$GLOBALS['TL_MIME'] = array();
-$GLOBALS['TL_PERMISSIONS'] = array();
 $GLOBALS['TL_MODELS'] = array();
+$GLOBALS['TL_PERMISSIONS'] = array();
