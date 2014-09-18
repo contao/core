@@ -33,4 +33,23 @@ class ImageSizeItemModel extends \Model
 	 */
 	protected static $strTable = 'tl_image_size_item';
 
+
+	/**
+	 * Find visible image size items by their parent ID
+	 *
+	 * @param integer $pid        Parent ID
+	 * @param array   $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no items
+	 */
+	public static function findVisibleByPid($pid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array(
+			"$t.pid = " . intval($pid),
+			"$t.invisible = ''",
+		);
+
+		return static::findBy($arrColumns, null, $arrOptions);
+	}
 }

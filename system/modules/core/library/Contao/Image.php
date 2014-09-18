@@ -684,7 +684,7 @@ class Image
 		$mainSource = $this->getPictureSource($importantPart, $imageSize);
 		$sources = array();
 
-		$imageSizeItems = \ImageSizeItemModel::findByPid($imageSize->id, array('order' => 'sorting ASC'));
+		$imageSizeItems = \ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order' => 'sorting ASC'));
 
 		if ($imageSizeItems !== null)
 		{
