@@ -985,10 +985,6 @@
         <source>Add language</source>
         <target>Sprache hinzufügen</target>
       </trans-unit>
-      <trans-unit id="MSC.image_sizes">
-        <source>Predefined dimensions</source>
-        <target>Vordefiniertes Format</target>
-      </trans-unit>
       <trans-unit id="MSC.relative">
         <source>Relative dimensions</source>
         <target>Relatives Format</target>

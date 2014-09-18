@@ -9,22 +9,6 @@
         <source>Contao automatically adds the file extension.</source>
         <target>Contao fügt die Dateiendung bei Dateien automatisch ein.</target>
       </trans-unit>
-      <trans-unit id="tl_files.importantPartX.0">
-        <source>Important part x coordinate</source>
-        <target>Wichtiger Bereich X-Koordinate</target>
-      </trans-unit>
-      <trans-unit id="tl_files.importantPartY.0">
-        <source>Important part y coordinate</source>
-        <target>Wichtiger Bereich Y-Koordinate</target>
-      </trans-unit>
-      <trans-unit id="tl_files.importantPartWidth.0">
-        <source>Important part width</source>
-        <target>Wichtiger Bereich Breite</target>
-      </trans-unit>
-      <trans-unit id="tl_files.importantPartHeight.0">
-        <source>Important part height</source>
-        <target>Wichtiger Bereich Höhe</target>
-      </trans-unit>
       <trans-unit id="tl_files.protected.0">
         <source>Protected</source>
         <target>Geschützt</target>
@@ -228,10 +212,6 @@
       <trans-unit id="tl_files.sync.1">
         <source>Synchronize the file system and the database</source>
         <target>Dateisystem und Datenbank synchronisieren</target>
-      </trans-unit>
-      <trans-unit id="tl_files.edit_preview_help">
-        <source>Mark the important part of the image with your mouse cursor.</source>
-        <target>Markieren Sie den wichtigen Bereich des Bildes mit dem Mauszeiger.</target>
       </trans-unit>
     </body>
   </file>

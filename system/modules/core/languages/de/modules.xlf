@@ -153,14 +153,6 @@
         <source>Page layouts</source>
         <target>Seitenlayouts</target>
       </trans-unit>
-      <trans-unit id="MOD.tl_image_size">
-        <source>Image sizes</source>
-        <target>Bildergrößen</target>
-      </trans-unit>
-      <trans-unit id="MOD.tl_image_size_item">
-        <source>Image size media queries</source>
-        <target>Bilder-Media-Queries</target>
-      </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
         <target>Stylesheets</target>
