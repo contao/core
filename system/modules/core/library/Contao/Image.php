@@ -584,46 +584,6 @@ class Image
 
 		$svgElement = $doc->documentElement;
 
-		// Advanced crop modes
-		switch ($this->getResizeMode())
-		{
-			case 'left_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
-				break;
-
-			case 'center_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
-				break;
-
-			case 'right_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
-				break;
-
-			case 'left_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
-				break;
-
-			case 'center_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
-				break;
-
-			case 'right_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
-				break;
-
-			case 'left_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
-				break;
-
-			case 'center_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
-				break;
-
-			case 'right_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
-				break;
-		}
-
 		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
@@ -633,8 +593,24 @@ class Image
 			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
 		}
 
-		$svgElement->setAttribute('width', $this->getTargetWidth() . 'px');
-		$svgElement->setAttribute('height', $this->getTargetHeight() . 'px');
+		$coordinates = $this->computeResize();
+
+		$scale = $this->fileObj->width / $coordinates['target_width'];
+
+		$viewBox = preg_split('([\\s,]+)', $svgElement->getAttribute('viewBox'));
+		if (!empty($viewBox[3]))
+		{
+			$scale *= $viewBox[3] / $this->fileObj->width;
+		}
+
+		$svgElement->setAttribute('width', $coordinates['width'] . 'px');
+		$svgElement->setAttribute('height', $coordinates['height'] . 'px');
+		$svgElement->setAttribute('viewBox', implode(' ', array(
+			$coordinates['target_x'] * -$scale + $viewBox[0],
+			$coordinates['target_y'] * -$scale + $viewBox[1],
+			$coordinates['width'] * $scale,
+			$coordinates['height'] * $scale,
+		)));
 
 		if ($this->fileObj->extension == 'svgz')
 		{
