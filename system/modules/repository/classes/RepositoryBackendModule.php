@@ -219,6 +219,11 @@ class RepositoryBackendModule extends BackendModule
 			case 'local':
 				return $this->RepositoryServer->getExtensionList((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->getExtensionList($aOptions);
 			default:
 				return array();

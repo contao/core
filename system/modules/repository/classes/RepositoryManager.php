@@ -1354,6 +1354,11 @@ class RepositoryManager extends RepositoryBackendModule
 			case 'local':
 				return $this->RepositoryServer->getFileList((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->getFileList($aOptions);
 			default:
 				return array();
@@ -1371,6 +1376,11 @@ class RepositoryManager extends RepositoryBackendModule
 			case 'local':
 				return $this->RepositoryServer->getPackage((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->getPackage($aOptions);
 			default:
 				return array();
@@ -1388,6 +1398,11 @@ class RepositoryManager extends RepositoryBackendModule
 			case 'local':
 				return $this->RepositoryServer->recordAction((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->recordAction($aOptions);
 			default:
 				return array();

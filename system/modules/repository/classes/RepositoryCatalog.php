@@ -226,6 +226,11 @@ class RepositoryCatalog extends RepositoryBackendModule
 			case 'local':
 				return $this->RepositoryServer->getAuthorList((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->getAuthorList($aOptions);
 			default:
 				return array();
@@ -238,6 +243,11 @@ class RepositoryCatalog extends RepositoryBackendModule
 			case 'local':
 				return $this->RepositoryServer->getTagList((object)$aOptions);
 			case 'soap':
+				// PHP 5.6 now have cookie support for SOAP, but using cookies in the request end up with a
+				// "bad request" response, so we unset them before sending it. (see #7280)
+				if (isset($this->client->_cookies)) {
+					unset($this->client->_cookies);
+				}
 				return $this->client->getTagList($aOptions);
 			default:
 				return array();
