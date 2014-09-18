@@ -598,9 +598,9 @@ class Image
 		$scale = $this->fileObj->width / $coordinates['target_width'];
 
 		$viewBox = preg_split('([\\s,]+)', $svgElement->getAttribute('viewBox'));
-		if (!empty($viewBox[3]))
+		if (!empty($viewBox[2]))
 		{
-			$scale *= $viewBox[3] / $this->fileObj->width;
+			$scale *= $viewBox[2] / $this->fileObj->width;
 		}
 
 		$svgElement->setAttribute('width', $coordinates['width'] . 'px');
