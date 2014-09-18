@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### New
+Preserve the original CSS ID and classes in the alias elements (see #6638).
+
 ### Improved
 Do not directly query the `INFORMATION_SCHEMA` database (see #7302).
 
