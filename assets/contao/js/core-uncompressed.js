@@ -2171,6 +2171,8 @@ var Backend =
 
 			updateImage();
 
+			imageElement.addEvent('load', updateImage);
+
 			el.addEvents({
 				mousedown: start,
 				touchstart: start
