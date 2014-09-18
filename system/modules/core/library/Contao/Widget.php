@@ -202,6 +202,8 @@ abstract class Widget extends \BaseTemplate
 	 * * useHomeDir:        store uploaded files in the user's home directory
 	 * * trailingSlash:     add or remove a trailing slash
 	 * * spaceToUnderscore: convert spaces to underscores
+	 * * nullIfEmpty:       set to NULL if the value is empty
+	 * * doNotTrim:         do not trim the user input
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -321,6 +323,7 @@ abstract class Widget extends \BaseTemplate
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
 			case 'nullIfEmpty':
+			case 'doNotTrim':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -801,7 +804,10 @@ abstract class Widget extends \BaseTemplate
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
+		if (!$this->doNotTrim)
+		{
+			$varInput = trim($varInput);
+		}
 
 		if ($varInput == '')
 		{
