@@ -13,37 +13,19 @@
 namespace Contao;
 
 
-// @TODO: Adjust this description
 /**
  * Resizes images
  *
  * The class resizes images and stores them in the assets/images folder.
  *
- * The following resize modes are supported:
- *
- * * Proportional:  proportional resize
- * * Fit-the-box:   proportional resize that fits in the given dimensions
- * * Crop:          the image will be cropped to fit
- *
- * You can specify which part of the image will be preserved:
- *
- * * left_top:      the left side of a landscape image and the top of a portrait image
- * * center_top:    the center of a landscape image and the top of a portrait image
- * * right_top:     the right side of a landscape image and the top of a portrait image
- * * left_center:   the left side of a landscape image and the center of a portrait image
- * * center_center: the center of a landscape image and the center of a portrait image
- * * right_center:  the right side of a landscape image and the center of a portrait image
- * * left_bottom:   the left side of a landscape image and the bottom of a portrait image
- * * center_bottom: the center of a landscape image and the bottom of a portrait image
- * * right_bottm:   the right side of a landscape image and the bottom of a portrait image
- *
  * Usage:
  *
- *     // Stores the image in the assets/images folder
- *     $src = Image::get('example.jpg', 640, 480, 'center_center');
- *
- *     // Resizes the original image
- *     Image::resize('example.jpg', 640, 480);
+ *     $imageObj = new \Image(new \File('example.jpg'));
+ *     $src = $imageObj->setTargetWidth(640)
+ *           ->setTargetHeight(480)
+ *           ->setResizeMode('center_center')
+ *           ->executeResize()
+ *           ->getResizedPath();
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
