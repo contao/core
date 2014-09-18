@@ -150,9 +150,20 @@ class Image
 	 *
 	 * @param array $importantPart
 	 * @return $this
+	 *
+	 * @throws \InvalidArgumentException
 	 */
 	public function setImportantPart(array $importantPart = null)
 	{
+		if (!isset($importantPart['x'])
+			|| !isset($importantPart['y'])
+			|| !isset($importantPart['width'])
+			|| !isset($importantPart['height'])
+		)
+		{
+			throw new \InvalidArgumentException('Malformed array for setting the important part!');
+		}
+
 		$this->importantPart = $importantPart;
 
 		return $this;
@@ -231,7 +242,6 @@ class Image
 	 */
 	public function setTargetPath($targetPath)
 	{
-		// @todo validate?
 		$this->targetPath = (string) $targetPath;
 
 		return $this;
@@ -286,7 +296,6 @@ class Image
 	 */
 	public function setResizeMode($resizeMode)
 	{
-		// @todo validate
 		$this->resizeMode = $resizeMode;
 
 		return $this;
