@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### New
+Support the `backlink` configuration setting in the parent view (see #7083).
+
+### New
 Added a regex to check for nonnegative natural numbers (see #4392). This also
 includes the "minval" and "maxval" flags to specify a miminum or maximum value.
 
