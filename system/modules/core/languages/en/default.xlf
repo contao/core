@@ -20,8 +20,17 @@
       <trans-unit id="ERR.maxlength">
         <source>Field "%s" must not be longer than %d characters!</source>
       </trans-unit>
+      <trans-unit id="ERR.minval">
+        <source>Field "%s" has to be at least %d!</source>
+      </trans-unit>
+      <trans-unit id="ERR.maxval">
+        <source>Field "%s" must not be greater than %d!</source>
+      </trans-unit>
       <trans-unit id="ERR.digit">
         <source>Please enter digits only!</source>
+      </trans-unit>
+      <trans-unit id="ERR.natural">
+        <source>Please enter natural numbers only!</source>
       </trans-unit>
       <trans-unit id="ERR.prcnt">
         <source>Please enter a percentage between 0 and 100!</source>

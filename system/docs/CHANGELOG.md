@@ -4,6 +4,10 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### New
+Added a regex to check for nonnegative natural numbers (see #4392). This also
+includes the "minval" and "maxval" flags to specify a miminum or maximum value.
+
 ### Improved
 Optionally hide files without matching meta data in downloads (see #6874).
 

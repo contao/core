@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['repository_listsize'] = array
 	'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'],
 	'default'	=> '10',
 	'inputType'	=> 'text',
-	'eval'		=> array('rgxp'=>'digit', 'maxlength'=>6, 'tl_class'=>'w50')
+	'eval'		=> array('rgxp'=>'natural', 'maxlength'=>6, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['repository_unsafe_catalog'] = array
