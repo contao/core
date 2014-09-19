@@ -450,6 +450,7 @@ class Installer extends \Controller
 				if ($field['type'] != 'index')
 				{
 					unset($field['index']);
+					unset($field['origtype']);
 
 					// Field type
 					if ($field['length'] != '')
