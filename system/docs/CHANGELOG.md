@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Optionally hide files without matching meta data in downloads (see #6874).
+
 ### New
 Preserve the original CSS ID and classes in the alias elements (see #6638).
 

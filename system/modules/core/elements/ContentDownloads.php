@@ -113,6 +113,18 @@ class ContentDownloads extends \ContentElement
 
 		$objFiles = $this->objFiles;
 		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
+		$strFallback = null;
+
+		// Determine the fallback language (see #6874)
+		if (!$objPage->rootIsFallback)
+		{
+			$objFallback = \PageModel::findPublishedFallbackByHostname($objPage->domain);
+
+			if ($objFallback !== null)
+			{
+				$strFallback = $objFallback->language;
+			}
+		}
 
 		// Get all files
 		while ($objFiles->next())
@@ -134,6 +146,18 @@ class ContentDownloads extends \ContentElement
 				}
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($strFallback !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $strFallback);
+					}
+				}
 
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
@@ -198,6 +222,18 @@ class ContentDownloads extends \ContentElement
 					}
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($strFallback !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $strFallback);
+						}
+					}
 
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')

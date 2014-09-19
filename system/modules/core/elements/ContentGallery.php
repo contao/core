@@ -95,6 +95,18 @@ class ContentGallery extends \ContentElement
 		$images = array();
 		$auxDate = array();
 		$objFiles = $this->objFiles;
+		$strFallback = null;
+
+		// Determine the fallback language (see #6874)
+		if (!$objPage->rootIsFallback)
+		{
+			$objFallback = \PageModel::findPublishedFallbackByHostname($objPage->domain);
+
+			if ($objFallback !== null)
+			{
+				$strFallback = $objFallback->language;
+			}
+		}
 
 		// Get all images
 		while ($objFiles->next())
@@ -116,6 +128,18 @@ class ContentGallery extends \ContentElement
 				}
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($strFallback !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $strFallback);
+					}
+				}
 
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
@@ -164,6 +188,18 @@ class ContentGallery extends \ContentElement
 					}
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($strFallback !== null)
+						{
+							$arrMeta = $this->getMetaData($objFiles->meta, $strFallback);
+						}
+					}
 
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
