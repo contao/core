@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Changed
+Hide the "start" and "stop" fields if an element is not published (see #7148).
+
 ### New
 Support the `backlink` configuration setting in the parent view (see #7083).
 
