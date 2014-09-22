@@ -94,7 +94,7 @@ class ModuleCloseAccount extends \Module
 				// The password has been generated with crypt()
 				if (\Encryption::test($this->User->password))
 				{
-					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) === $this->User->password);
+					$blnAuthenticated = \Encryption::verify($objWidget->value, $this->User->password);
 				}
 				else
 				{

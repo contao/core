@@ -340,7 +340,7 @@ class BackendInstall extends \Backend
 		// The password has been generated with crypt()
 		if (\Encryption::test(\Config::get('installPassword')))
 		{
-			if (crypt(\Input::postRaw('password'), \Config::get('installPassword')) == \Config::get('installPassword'))
+			if (\Encryption::verify(\Input::postRaw('password'), \Config::get('installPassword')))
 			{
 				$this->setAuthCookie();
 				\Config::persist('installCount', 0);
