@@ -181,13 +181,18 @@ class Encryption
 	{
 		$intCost = \Config::get('bcryptCost') ?: 10;
 
+		if ($intCost < 4 || $intCost > 31)
+		{
+			throw new \Exception("The bcrypt cost has to be between 4 and 31, $intCost given");
+		}
+
 		if (function_exists('password_hash'))
 		{
 			return password_hash($strPassword, PASSWORD_BCRYPT, array('cost'=>$intCost));
 		}
 		elseif (CRYPT_BLOWFISH == 1)
 		{
-			return crypt($strPassword, '$2y$' . $intCost . '$' . md5(uniqid(mt_rand(), true)) . '$');
+			return crypt($strPassword, '$2y$' . sprintf('%02d', $intCost) . '$' . md5(uniqid(mt_rand(), true)) . '$');
 		}
 		elseif (CRYPT_SHA512 == 1)
 		{
@@ -250,7 +255,7 @@ class Encryption
 		}
 
 		$getLength = function($str) {
-			return function_exists('mb_strlen') ? mb_strlen($str, '8bit') : strlen($str);
+			return extension_loaded('mbstring') ? mb_strlen($str, '8bit') : strlen($str);
 		};
 
 		$newHash = crypt($strPassword, $strHash);
