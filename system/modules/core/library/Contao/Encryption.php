@@ -179,9 +179,15 @@ class Encryption
 	 */
 	public static function hash($strPassword)
 	{
+		$intCost = \Config::get('bcryptCost') ?: 10;
+
 		if (function_exists('password_hash'))
 		{
-			return password_hash($strPassword, PASSWORD_BCRYPT, array('cost'=>\Config::get('bcryptCost')));
+			return password_hash($strPassword, PASSWORD_BCRYPT, array('cost'=>$intCost));
+		}
+		elseif (CRYPT_BLOWFISH == 1)
+		{
+			return crypt($strPassword, '$2y$' . $intCost . '$' . md5(uniqid(mt_rand(), true)) . '$');
 		}
 		elseif (CRYPT_SHA512 == 1)
 		{
@@ -190,10 +196,6 @@ class Encryption
 		elseif (CRYPT_SHA256 == 1)
 		{
 			return crypt($strPassword, '$5$' . md5(uniqid(mt_rand(), true)) . '$');
-		}
-		elseif (CRYPT_BLOWFISH == 1)
-		{
-			return crypt($strPassword, '$2a$07$' . md5(uniqid(mt_rand(), true)) . '$');
 		}
 
 		throw new \Exception('None of the required crypt() algorithms is available');
@@ -213,15 +215,15 @@ class Encryption
 		{
 			return true;
 		}
+		elseif (strncmp($strHash, '$2a$', 4) === 0)
+		{
+			return true;
+		}
 		elseif (strncmp($strHash, '$6$', 3) === 0)
 		{
 			return true;
 		}
 		elseif (strncmp($strHash, '$5$', 3) === 0)
-		{
-			return true;
-		}
-		elseif (strncmp($strHash, '$2a$07$', 7) === 0)
 		{
 			return true;
 		}
