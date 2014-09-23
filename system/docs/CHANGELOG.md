@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### New
+Added the "sendNewsletter" hook (see #7222).
+
 ### Improved
 Make the pagination template more flexible (see #7174).
 
