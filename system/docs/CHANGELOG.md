@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Show a message if logging in is required to comment (see #7031).
+
 ### New
 Added the "sendNewsletter" hook (see #7222).
 
