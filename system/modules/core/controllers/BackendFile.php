@@ -78,6 +78,16 @@ class BackendFile extends \Backend
 		$this->loadDataContainer($strTable);
 		$strDriver = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
 		$objDca = new $strDriver($strTable);
+		$objDca->field = $strField;
+
+		// Set the active record
+		$strModel = \Model::getClassFromTable($strTable);
+		$objModel = $strModel::findByPk(\Input::get('id'));
+
+		if ($objModel !== null)
+		{
+			$objDca->activeRecord = $objModel;
+		}
 
 		// AJAX request
 		if ($_POST && \Environment::get('isAjaxRequest'))
@@ -95,6 +105,23 @@ class BackendFile extends \Backend
 			if (\Validator::isStringUuid($v))
 			{
 				$arrValues[$k] = \String::uuidToBin($v);
+			}
+		}
+
+		// Call the load_callback
+		if (is_array($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['load_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['load_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrValues = $this->$callback[0]->$callback[1]($arrValues, $objDca);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrValues = $callback($arrValues, $objDca);
+				}
 			}
 		}
 

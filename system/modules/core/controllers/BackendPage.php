@@ -78,6 +78,16 @@ class BackendPage extends \Backend
 		$this->loadDataContainer($strTable);
 		$strDriver = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
 		$objDca = new $strDriver($strTable);
+		$objDca->field = $strField;
+
+		// Set the active record
+		$strModel = \Model::getClassFromTable($strTable);
+		$objModel = $strModel::findByPk(\Input::get('id'));
+
+		if ($objModel !== null)
+		{
+			$objDca->activeRecord = $objModel;
+		}
 
 		// AJAX request
 		if ($_POST && \Environment::get('isAjaxRequest'))
@@ -86,10 +96,28 @@ class BackendPage extends \Backend
 		}
 
 		$this->Session->set('filePickerRef', \Environment::get('request'));
+		$arrValues = array_filter(explode(',', \Input::get('value')));
+
+		// Call the load_callback
+		if (is_array($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['load_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$strTable]['fields'][$strField]['load_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrValues = $this->$callback[0]->$callback[1]($arrValues, $objDca);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrValues = $callback($arrValues, $objDca);
+				}
+			}
+		}
 
 		// Prepare the widget
 		$class = $GLOBALS['BE_FFL']['pageSelector'];
-		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, array_filter(explode(',', \Input::get('value'))), $strField, $strTable, $objDca));
+		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 
 		$this->Template->main = $objPageTree->generate();
 		$this->Template->theme = \Backend::getTheme();

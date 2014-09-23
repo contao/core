@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Limit the selectable file types depending on the element type (see #7003).
+
 ### New
 Prevent timing attacks when verifying passwords (see #7115, #5853).
 
