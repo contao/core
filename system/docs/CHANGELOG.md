@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Improved
+Make the pagination template more flexible (see #7174).
+
+### Improved
 Limit the selectable file types depending on the element type (see #7003).
 
 ### New
