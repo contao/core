@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Improved
+Add a CSS class indicating the number of columns in a gallery (see #7138).
+
+### Improved
 Allow to switch between the page and file picker in TinyMCE (see #6974).
 
 ### Improved
