@@ -1149,11 +1149,11 @@ ul.sortable li:hover .dirname {
 	padding:3px 3px 4px;
 }
 #manager .open {
-	padding:2px 0 3px 20px;
+	padding:2px 15px 3px 20px;
 	background:url("images/manager.gif") left center no-repeat;
 }
 #manager .close {
-	padding:2px 0 3px 20px;
+	padding:2px 15px 3px 20px;
 	background:url("images/back.gif") left center no-repeat;
 }
 .ace_editor {

@@ -5,6 +5,40 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Improved
+Allow to switch between the page and file picker in TinyMCE (see #6974).
+
+### Improved
+Show a message if logging in is required to comment (see #7031).
+
+### New
+Added the "sendNewsletter" hook (see #7222).
+
+### Improved
+Make the pagination template more flexible (see #7174).
+
+### Improved
+Limit the selectable file types depending on the element type (see #7003).
+
+### New
+Prevent timing attacks when verifying passwords (see #7115, #5853).
+
+### Changed
+Hide the "start" and "stop" fields if an element is not published (see #7148).
+
+### New
+Support the `backlink` configuration setting in the parent view (see #7083).
+
+### New
+Added a regex to check for nonnegative natural numbers (see #4392). This also
+includes the "minval" and "maxval" flags to specify a miminum or maximum value.
+
+### Improved
+Optionally hide files without matching meta data in downloads (see #6874).
+
+### New
+Preserve the original CSS ID and classes in the alias elements (see #6638).
+
+### Improved
 Do not directly query the `INFORMATION_SCHEMA` database (see #7302).
 
 ### New

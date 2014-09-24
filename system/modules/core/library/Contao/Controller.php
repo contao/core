@@ -766,7 +766,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'email_open':
-							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" title="' . $strEmail . '" class="email">';
 							break;
 
 						case 'email_url':

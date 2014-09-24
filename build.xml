@@ -2,7 +2,7 @@
 <project name="Contao Open Source CMS" default="build" basedir=".">
   <exec executable="system/bin/version" outputProperty="version" />
 
-  <target name="build" depends="clone, update, purge, archive, cleanup">
+  <target name="build" depends="clone, update, languages, purge, archive, cleanup">
     <echo message="Contao ${version} build complete" />
   </target>
 
@@ -30,6 +30,10 @@
       <arg value="--no-dev" />
       <arg value="--no-scripts" />
     </exec>
+  </target>
+
+  <target name="languages">
+    <exec executable="txget" dir="contao-${version}" failonerror="true" />
   </target>
 
   <target name="purge">

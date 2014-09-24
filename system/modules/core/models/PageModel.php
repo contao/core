@@ -402,6 +402,28 @@ class PageModel extends \Model
 
 
 	/**
+	 * Find the language fallback page by hostname
+	 *
+	 * @param string $strHost The hostname
+	 *
+	 * @return \Model|null The page model or null if there is not fallback page
+	 */
+	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
+	}
+
+
+	/**
 	 * Find the parent pages of a page
 	 *
 	 * @param integer $intId The page's ID

@@ -227,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'inputType'               => 'imageSize',
 			'options_callback'        => array('tl_faq', 'getImageSizes'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array

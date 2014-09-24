@@ -340,7 +340,7 @@ class BackendInstall extends \Backend
 		// The password has been generated with crypt()
 		if (\Encryption::test(\Config::get('installPassword')))
 		{
-			if (crypt(\Input::postRaw('password'), \Config::get('installPassword')) == \Config::get('installPassword'))
+			if (\Encryption::verify(\Input::postRaw('password'), \Config::get('installPassword')))
 			{
 				$this->setAuthCookie();
 				\Config::persist('installCount', 0);
@@ -521,7 +521,6 @@ class BackendInstall extends \Backend
 	{
 		if (\Input::post('FORM_SUBMIT') == 'tl_collation')
 		{
-			$arrTables = array();
 			$strCharset = strtolower(\Config::get('dbCharset'));
 			$strCollation = \Input::post('dbCollation');
 
@@ -531,29 +530,39 @@ class BackendInstall extends \Backend
 			}
 			catch (\Exception $e) {}
 
-			$objTable = $this->Database->query("SHOW TABLE STATUS WHERE Name LIKE 'tl_%' AND !ISNULL(Collation)");
+			$arrTables = $this->Database->listTables();
 
-			while ($objTable->next())
+			foreach ($arrTables as $strTable)
 			{
-				if (!in_array($objTable->Name, $arrTables))
+				if (strncmp($strTable, 'tl_', 3) !== 0)
 				{
-					$this->Database->query("ALTER TABLE {$objTable->Name} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
-					$arrTables[] = $objTable->Name;
+					continue;
 				}
 
-				$objField = $this->Database->query("SHOW FULL COLUMNS FROM {$objTable->Name} WHERE !ISNULL(Collation)");
-
-				while ($objField->next())
+				if (!in_array($strTable, $arrTables))
 				{
-					$strQuery = "ALTER TABLE {$objTable->Name} CHANGE {$objField->Field} {$objField->Field} {$objField->Type} CHARACTER SET $strCharset COLLATE $strCollation";
+					$this->Database->query("ALTER TABLE $strTable DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+					$arrTables[] = $strTable;
+				}
 
-					if ($objField->Null == 'YES')
+				$arrFields = $this->Database->listFields($strTable);
+
+				foreach ($arrFields as $arrField)
+				{
+					if ($arrField['collation'] === null)
+					{
+						continue;
+					}
+
+					$strQuery = "ALTER TABLE $strTable CHANGE {$arrField['name']} {$arrField['name']} {$arrField['origtype']} CHARACTER SET $strCharset COLLATE $strCollation";
+
+					if ($arrField['null'] == 'NULL')
 					{
 						$strQuery .= " NULL";
 					}
 					else
 					{
-						$strQuery .= " NOT NULL DEFAULT '{$objField->Default}'";
+						$strQuery .= " NOT NULL DEFAULT '{$arrField['default']}'";
 					}
 
 					$this->Database->query($strQuery);

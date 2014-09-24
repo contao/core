@@ -185,6 +185,7 @@ class Mysqli extends \Database
 			$arrTmp['null'] = ($objFields->Null == 'YES') ? 'NULL' : 'NOT NULL';
 			$arrTmp['default'] = $objFields->Default;
 			$arrTmp['extra'] = $objFields->Extra;
+			$arrTmp['origtype'] = $objFields->Type;
 
 			$arrReturn[] = $arrTmp;
 		}

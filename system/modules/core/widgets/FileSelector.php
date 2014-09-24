@@ -405,6 +405,23 @@ class FileSelector extends \Widget
 			$this->varValue = array();
 		}
 
+		if (empty($this->varValue))
+		{
+			return;
+		}
+
+		// TinyMCE will pass the path instead of the ID
+		if (strncmp($this->varValue[0], \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0)
+		{
+			return;
+		}
+
+		// Ignore the numeric IDs when in switch mode (TinyMCE)
+		if (\Input::get('switch'))
+		{
+			return;
+		}
+
 		$objFiles = \FilesModel::findMultipleByIds($this->varValue);
 
 		if ($objFiles !== null)

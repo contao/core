@@ -44,6 +44,19 @@ class Validator
 
 
 	/**
+	 * Natural numbers (nonnegative integers)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a natural number
+	 */
+	public static function isNatural($varValue)
+	{
+		return preg_match('/^\d+$/', $varValue);
+	}
+
+
+	/**
 	 * Alphabetic characters (including full stop [.] minus [-] and space [ ])
 	 *
 	 * @param mixed $varValue The value to be validated

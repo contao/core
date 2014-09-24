@@ -352,15 +352,18 @@ abstract class Widget extends \BaseTemplate
 	 *
 	 * Supported keys:
 	 *
-	 * * id:       the field ID
-	 * * name:     the field name
-	 * * label:    the field label
-	 * * value:    the field value
-	 * * class:    one or more CSS classes
-	 * * prefix:   the CSS class prefix
-	 * * template: the template name
-	 * * wizard:   the field wizard markup
-	 * * required: makes the widget a required field
+	 * * id:            the field ID
+	 * * name:          the field name
+	 * * label:         the field label
+	 * * value:         the field value
+	 * * class:         one or more CSS classes
+	 * * prefix:        the CSS class prefix
+	 * * template:      the template name
+	 * * wizard:        the field wizard markup
+	 * * required:      makes the widget a required field
+	 * * forAttribute:  the "for" attribute
+	 * * dataContainer: the data container object
+	 * * activeRecord:  the active record
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -838,6 +841,16 @@ abstract class Widget extends \BaseTemplate
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
+		if ($this->minval && is_numeric($varInput) && $varInput < $this->minval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minval'], $this->strLabel, $this->minval));
+		}
+
+		if ($this->maxval && is_numeric($varInput) && $varInput > $this->maxval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxval'], $this->strLabel, $this->maxval));
+		}
+
 		if ($this->rgxp != '')
 		{
 			switch ($this->rgxp)
@@ -863,6 +876,14 @@ abstract class Widget extends \BaseTemplate
 					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
+					}
+					break;
+
+				// Natural numbers (positive integers)
+				case 'natural':
+					if (!\Validator::isNatural($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['natural'], $this->strLabel));
 					}
 					break;
 
