@@ -107,7 +107,7 @@ abstract class Model
 	{
 		$this->arrModified = array();
 
-		$objDca = new \DcaExtractor(static::$strTable);
+		$objDca = \DcaExtractor::getInstance(static::$strTable);
 		$this->arrRelations = $objDca->getRelations();
 
 		if ($objResult !== null)

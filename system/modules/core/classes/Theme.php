@@ -425,7 +425,7 @@ class Theme extends \Backend
 				$this->loadDataContainer($table);
 
 				// Get the order fields
-				$objDcaExtractor = new \DcaExtractor($table);
+				$objDcaExtractor = \DcaExtractor::getInstance($table);
 				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Loop through the rows
@@ -722,7 +722,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_theme');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_theme');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_theme');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the row
@@ -747,7 +747,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style_sheet');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style_sheet');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all style sheets
@@ -771,7 +771,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the child rows
@@ -807,7 +807,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_module');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_module');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all modules
@@ -839,7 +839,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_layout');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_layout');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all layouts

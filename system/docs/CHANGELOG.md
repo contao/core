@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Improved
+Only create one `DcaExtractor` instance per table (see #7324).
+
+### Improved
 Add a CSS class indicating the number of columns in a gallery (see #7138).
 
 ### Improved

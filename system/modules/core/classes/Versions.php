@@ -333,7 +333,7 @@ class Versions extends \Backend
 				$this->loadDataContainer($this->strTable);
 
 				// Get the order fields
-				$objDcaExtractor = new \DcaExtractor($this->strTable);
+				$objDcaExtractor = \DcaExtractor::getInstance($this->strTable);
 				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Find the changed fields and highlight the changes

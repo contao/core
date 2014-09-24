@@ -37,6 +37,12 @@ class DcaExtractor extends \Controller
 {
 
 	/**
+	 * Instances
+	 * @var string
+	 */
+	protected static $arrInstances = array();
+
+	/**
 	 * Table name
 	 * @var string
 	 */
@@ -119,6 +125,24 @@ class DcaExtractor extends \Controller
 		{
 			$this->createExtract();
 		}
+	}
+
+
+	/**
+	 * Get one object instance per table
+	 *
+	 * @param string $strTable The table name
+	 *
+	 * @return \DcaExtractor The object instance
+	 */
+	public static function getInstance($strTable)
+	{
+		if (!isset(static::$arrInstances[$strTable]))
+		{
+			static::$arrInstances[$strTable] = new static($strTable);
+		}
+
+		return static::$arrInstances[$strTable];
 	}
 
 

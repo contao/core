@@ -415,7 +415,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$row = $objRow->row();
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor($this->strTable);
+		$objDcaExtractor = \DcaExtractor::getInstance($this->strTable);
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all fields
