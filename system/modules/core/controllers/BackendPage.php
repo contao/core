@@ -133,6 +133,12 @@ class BackendPage extends \Backend
 		$this->Template->managerHref = 'contao/main.php?do=page&amp;popup=1';
 		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'];
 
+		if (\Input::get('switch'))
+		{
+			$this->Template->switch = $GLOBALS['TL_LANG']['MSC']['pagePicker'];
+			$this->Template->switchHref = str_replace('contao/page.php', 'contao/file.php', ampersand(\Environment::get('request')));
+		}
+
 		\Config::set('debugMode', false);
 		$this->Template->output();
 	}

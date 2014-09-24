@@ -143,6 +143,12 @@ class BackendFile extends \Backend
 		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
 		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
 
+		if (\Input::get('switch'))
+		{
+			$this->Template->switch = $GLOBALS['TL_LANG']['MSC']['filePicker'];
+			$this->Template->switchHref = str_replace('contao/file.php', 'contao/page.php', ampersand(\Environment::get('request')));
+		}
+
 		\Config::set('debugMode', false);
 		$this->Template->output();
 	}

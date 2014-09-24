@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Improved
+Allow to switch between the page and file picker in TinyMCE (see #6974).
+
+### Improved
 Show a message if logging in is required to comment (see #7031).
 
 ### New
