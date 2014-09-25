@@ -1536,8 +1536,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Add the form
 			$return = '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'">
@@ -1610,8 +1608,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			// Return the select menu
 			$return .= '
-
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
 
 <form action="'.ampersand(\Environment::get('request'), true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -2340,7 +2336,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Do not display buttons for mounted folders
 				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
 				{
-					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>178, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>123, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
 				}
 
 				// Upload button
@@ -2366,7 +2362,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
-			$popupHeight = 216;
+			$popupHeight = 161;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
 			$objFile = new \File($currentFile, true);
@@ -2383,7 +2379,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($objFile->isImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 255);
+				$popupHeight = ($objFile->height + 200);
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
 
 				if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
