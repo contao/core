@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Changed
+Removed the H2 sub-headlines in the back end (see #7248).
+
 ### Improved
 Only create one `DcaExtractor` instance per table (see #7324).
 
