@@ -146,6 +146,12 @@ class PageRegular extends \Frontend
 
 		$this->Template->sections = $arrCustomSections;
 
+		// Mark RTL languages (see #7171)
+		if ($GLOBALS['TL_LANG']['MSC']['textDirection'] == 'rtl')
+		{
+			$this->Template->direction = ' dir="rtl"';
+		}
+
 		// HOOK: modify the page or layout object
 		if (isset($GLOBALS['TL_HOOKS']['generatePage']) && is_array($GLOBALS['TL_HOOKS']['generatePage']))
 		{
@@ -445,6 +451,7 @@ class PageRegular extends \Frontend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
+		$this->Template->direction = '';
 	}
 
 

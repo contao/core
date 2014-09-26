@@ -602,6 +602,9 @@
       <trans-unit id="MSC.target.1">
         <source>Open the link in a new browser window.</source>
       </trans-unit>
+      <trans-unit id="MSC.textDirection">
+        <source>ltr</source>
+      </trans-unit>
       <trans-unit id="MSC.decimalSeparator">
         <source>.</source>
       </trans-unit>

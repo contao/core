@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### New
+Add the `dir="rtl"` attribute if the page language is RTL (see #7171).
+
 ### Improved
 Export `.sql` files in the theme folder and allow to reimport them (see #7048).
 
