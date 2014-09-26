@@ -621,12 +621,21 @@ class Theme extends \Backend
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 
+			if (!empty($arrMapper['tl_theme']))
+			{
+				$objTheme = \ThemeModel::findByPk(reset($arrMapper['tl_theme']));
+			}
+			else
+			{
+				$objTheme = null;
+			}
+
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['importTheme']) && is_array($GLOBALS['TL_HOOKS']['importTheme']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['importTheme'] as $callback)
 				{
-					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $arrMapper);
+					\System::importStatic($callback[0])->$callback[1]($objTheme, $xml, $objArchive, $arrMapper);
 				}
 			}
 		}
