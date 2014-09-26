@@ -41,7 +41,14 @@ function Swipe(container, options) {
 
     // cache slides
     slides = element.children;
-    length = slides.length;
+    // Internet explorer lower than 9 also lists comment nodes in children
+    // therefore count instead of using slides.length
+    length = 0;
+    for(var i=0, len = slides.length; i<len; i++) {
+      if(slides[i].tagName != '!') { // no a comment node
+        length++;
+      }
+    }
 
     // set continuous to false if only one slide
     if (slides.length < 2) options.continuous = false;
@@ -178,7 +185,7 @@ function Swipe(container, options) {
 
   function updateMenu() {
 
-    for (var i=0; i<length; i++) {
+    for (var i=0, len = clonedSlides ? length/2 : length; i<len; i++) {
 
       var child = nodes.dots.children[i];
       child.className = (parseInt(child.getAttribute ? child.getAttribute('data-index') : child.attributes['data-index'].nodeValue) == position) ? 'active' : '';
