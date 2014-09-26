@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Changed
+Use `addImageToTemplate()` in the `ContentHyperlink` class (see #7296).
+
+### Changed
 Removed the H2 sub-headlines in the back end (see #7248).
 
 ### Improved
