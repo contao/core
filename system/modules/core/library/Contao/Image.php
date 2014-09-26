@@ -615,7 +615,7 @@ class Image
 		{
 			case '':
 			case 'px':
-				return (int) $value;
+				return (int) round($value);
 				break;
 
 			case 'em':
