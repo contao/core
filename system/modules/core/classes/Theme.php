@@ -255,6 +255,15 @@ class Theme extends \Backend
 				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
 			}
 
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['compareTheme']) && is_array($GLOBALS['TL_HOOKS']['compareTheme']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['compareTheme'] as $callback)
+				{
+					$return .= \System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
+				}
+			}
+
 			$return .= '
 </div>';
 		}
