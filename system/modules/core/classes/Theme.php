@@ -644,7 +644,7 @@ class Theme extends \Backend
 			{
 				foreach ($GLOBALS['TL_HOOKS']['importTheme'] as $callback)
 				{
-					\System::importStatic($callback[0])->$callback[1]($objTheme, $xml, $objArchive, $arrMapper);
+					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme, $arrMapper);
 				}
 			}
 		}
@@ -724,7 +724,7 @@ class Theme extends \Backend
 		{
 			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
 			{
-				\System::importStatic($callback[0])->$callback[1]($objTheme, $xml, $objArchive);
+				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme);
 			}
 		}
 
