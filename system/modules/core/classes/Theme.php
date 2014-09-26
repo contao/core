@@ -121,8 +121,6 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
@@ -161,8 +159,6 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['checking_theme'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -451,7 +447,7 @@ class Theme extends \Backend
 				$this->loadDataContainer($table);
 
 				// Get the order fields
-				$objDcaExtractor = new \DcaExtractor($table);
+				$objDcaExtractor = \DcaExtractor::getInstance($table);
 				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Loop through the rows
@@ -766,7 +762,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_theme');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_theme');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_theme');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the row
@@ -791,7 +787,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style_sheet');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style_sheet');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all style sheets
@@ -815,7 +811,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the child rows
@@ -851,7 +847,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_module');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_module');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all modules
@@ -883,7 +879,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_layout');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_layout');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all layouts

@@ -562,15 +562,29 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 			{
-				if (\Input::get('do') == 'files')
+				if (\Input::get('id'))
 				{
-					$this->Template->headline .= ' » ' . \Input::get('id');
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('id');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					}
 				}
-				else
+				elseif (\Input::get('pid'))
 				{
-					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('pid');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('pid'));
+					}
 				}
 			}
 

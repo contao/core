@@ -1,5 +1,5 @@
 
-<ul>
+<ul class="cols_<?php echo $this->perRow; ?>">
   <?php foreach ($this->body as $class=>$row): ?>
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>

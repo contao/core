@@ -1,6 +1,4 @@
 
-<h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
-
 <div id="tl_soverview">
 
   <?php if (!empty($this->messages)): ?>

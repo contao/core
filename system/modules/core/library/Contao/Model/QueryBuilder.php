@@ -35,7 +35,7 @@ class QueryBuilder
 	 */
 	public static function find(array $arrOptions)
 	{
-		$objBase = new \DcaExtractor($arrOptions['table']);
+		$objBase = \DcaExtractor::getInstance($arrOptions['table']);
 
 		if (!$objBase->hasRelations())
 		{
@@ -55,7 +55,7 @@ class QueryBuilder
 					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
 						++$intCount;
-						$objRelated = new \DcaExtractor($arrConfig['table']);
+						$objRelated = \DcaExtractor::getInstance($arrConfig['table']);
 
 						foreach (array_keys($objRelated->getFields()) as $strField)
 						{

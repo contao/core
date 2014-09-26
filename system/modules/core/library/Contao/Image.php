@@ -1332,19 +1332,19 @@ class Image
 		{
 			case '':
 			case 'px':
-				return (int)round(floatval($value));
+				return (int) round($value);
 				break;
 
 			case 'em':
-				return (int)round($value * 16);
+				return (int) round($value * 16);
 				break;
 
 			case 'pt':
-				return (int)round($value * (16 / 12));
+				return (int) round($value * (12 / 16));
 				break;
 
 			case '%':
-				return (int)round($value * (16 / 100));
+				return (int) round($value * (16 / 100));
 				break;
 		}
 

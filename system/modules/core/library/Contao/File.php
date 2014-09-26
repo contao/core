@@ -283,7 +283,7 @@ class File extends \System
 						}
 						elseif ($svgElement->getAttribute('viewBox'))
 						{
-							$svgViewBox = preg_split('([\\s,]+)', $svgElement->getAttribute('viewBox'));
+							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
 							$this->arrImageSize = array($svgViewBox[2], $svgViewBox[3]);
 						}
 						else

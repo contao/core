@@ -4,6 +4,21 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Changed
+Do not mark pages as active if there are query parameters (see #7189).
+
+### Changed
+Use `addImageToTemplate()` in the `ContentHyperlink` class (see #7296).
+
+### Changed
+Removed the H2 sub-headlines in the back end (see #7248).
+
+### Improved
+Only create one `DcaExtractor` instance per table (see #7324).
+
+### Improved
+Add a CSS class indicating the number of columns in a gallery (see #7138).
+
 ### Improved
 Allow to switch between the page and file picker in TinyMCE (see #6974).
 
