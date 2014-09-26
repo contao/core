@@ -667,15 +667,6 @@ class Theme extends \Backend
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
-
-			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['importTheme']) && is_array($GLOBALS['TL_HOOKS']['importTheme']))
-			{
-				foreach ($GLOBALS['TL_HOOKS']['importTheme'] as $callback)
-				{
-					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
-				}
-			}
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -748,15 +739,6 @@ class Theme extends \Backend
 
 		// Add the template files
 		$this->addTemplatesToArchive($objArchive, $objTheme->templates);
-
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['exportTheme']) && is_array($GLOBALS['TL_HOOKS']['exportTheme']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
-			{
-				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
-			}
-		}
 
 		// Close the archive
 		$objArchive->close();
