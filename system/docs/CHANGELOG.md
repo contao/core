@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### Changed
+Do not mark pages as active if there are query parameters (see #7189).
+
+### Changed
 Use `addImageToTemplate()` in the `ContentHyperlink` class (see #7296).
 
 ### Changed

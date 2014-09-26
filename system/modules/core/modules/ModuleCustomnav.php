@@ -169,7 +169,7 @@ class ModuleCustomnav extends \Module
 				$trail = in_array($arrPage['id'], $objPage->trail);
 
 				// Active page
-				if ($objPage->id == $arrPage['id'])
+				if ($objPage->id == $arrPage['id'] && $href == \Environment::get('request'))
 				{
 					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
