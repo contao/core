@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Export `.sql` files in the theme folder and allow to reimport them (see #7048).
+
 ### Changed
 Do not mark pages as active if there are query parameters (see #7189).
 

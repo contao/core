@@ -635,14 +635,30 @@ class BackendInstall extends \Backend
 	 */
 	protected function importExampleWebsite()
 	{
+		// Recursively scan for .sql files
+		$objFiles = new \RecursiveIteratorIterator(
+			new \Filter\SqlFiles(
+				new \RecursiveDirectoryIterator(
+					TL_ROOT . '/templates',
+					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+				)
+			)
+		);
+
+		$arrTemplates = array();
+
+		// Add the relative paths
+		foreach ($objFiles as $objFile)
+		{
+			$arrTemplates[] = str_replace(TL_ROOT . '/templates/', '', $objFile->getPathname());
+		}
+
 		$strTemplates = '<option value="">-</option>';
 
-		foreach (scan(TL_ROOT . '/templates') as $strFile)
+		// Build the select options
+		foreach ($arrTemplates as $strTemplate)
 		{
-			if (preg_match('/.sql$/', $strFile))
-			{
-				$strTemplates .= sprintf('<option value="%s">%s</option>', $strFile, specialchars($strFile));
-			}
+			$strTemplates .= sprintf('<option value="%s">%s</option>', $strTemplate, specialchars($strTemplate));
 		}
 
 		$this->Template->templates = $strTemplates;
@@ -652,12 +668,11 @@ class BackendInstall extends \Backend
 		if (\Input::post('FORM_SUBMIT') == 'tl_tutorial')
 		{
 			$this->Template->emptySelection = true;
-			$strTemplate = basename(\Input::post('template'));
+			$strTemplate = \Input::post('template');
 
 			// Template selected
-			if ($strTemplate != '' && file_exists(TL_ROOT . '/templates/' . $strTemplate))
+			if ($strTemplate != '' && in_array($strTemplate, $arrTemplates))
 			{
-				\Config::persist('exampleWebsite', time());
 				$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
 				// Truncate tables
@@ -686,6 +701,7 @@ class BackendInstall extends \Backend
 					}
 				}
 
+				\Config::persist('exampleWebsite', time());
 				$this->reload();
 			}
 		}
