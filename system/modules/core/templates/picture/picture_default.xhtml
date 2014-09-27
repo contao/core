@@ -13,7 +13,9 @@
 
 <img
   src="<?php echo $this->img['src']; ?>"
-  srcset="<?php echo $this->img['srcset']; ?>"
+  <?php if ($this->img['srcset'] !== $this->img['src']): ?>
+    srcset="<?php echo $this->img['srcset']; ?>"
+  <?php endif; ?>
   <?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php endif; ?>
   <?php if (!$this->sources): ?>
     width="<?php echo $this->img['width']; ?>"
