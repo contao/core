@@ -703,12 +703,13 @@ class Image
 				->executeResize()
 				->getResizedPath();
 
+			$fileObj = new \File($src, true);
+
 			if (empty($attributes['src']))
 			{
 				$attributes['src'] = htmlspecialchars(TL_FILES_URL . $src, ENT_QUOTES);
-				$size = getimagesize(TL_ROOT .'/'. $src);
-				$attributes['width'] = $size[0];
-				$attributes['height'] = $size[1];
+				$attributes['width'] = $fileObj->width;
+				$attributes['height'] = $fileObj->height;
 			}
 
 			if (count($densities) > 1)
@@ -721,8 +722,7 @@ class Image
 				// Otherwise use width descriptors
 				else
 				{
-					$size = getimagesize(TL_ROOT .'/'. $src);
-					$src .= ' ' . $size[0] . 'w';
+					$src .= ' ' . $fileObj->width . 'w';
 				}
 			}
 
