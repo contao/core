@@ -30,6 +30,13 @@
 <?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
   <script>
     // Run the polyfill instantly
-    window.picturefill && window.picturefill();
+    if (window.picturefill) {
+      (function(){
+        var images = document.getElementsByTagName('img');
+        window.picturefill({
+          elements: [images[images.length - 1]]
+        });
+      })();
+    }
   </script>
 <?php endif; ?>
