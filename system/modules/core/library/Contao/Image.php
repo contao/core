@@ -367,13 +367,13 @@ class Image
 		// Calculate the missing width
 		if (!strlen($width))
 		{
-			$width = $height * intval($origWidth) / intval($origHeight);
+			$width = max(round($height * intval($origWidth) / intval($origHeight)), 1);
 		}
 
 		// Calculate the missing height
 		if (!strlen($height))
 		{
-			$height = $width * intval($origHeight) / intval($origWidth);
+			$height = max(round($width * intval($origHeight) / intval($origWidth)), 1);
 		}
 
 		$svgElement->setAttribute('width', $width . 'px');
