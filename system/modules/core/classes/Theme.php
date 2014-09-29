@@ -1099,6 +1099,7 @@ class Theme extends \Backend
 		}
 
 		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		array_push($arrAllowed, 'sql'); // see #7048
 
 		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)

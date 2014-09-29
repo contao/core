@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>">
+<html lang="<?php echo $this->language; ?>"<?php echo $this->direction; ?>>
 <head>
 
   <?php $this->block('head'); ?>

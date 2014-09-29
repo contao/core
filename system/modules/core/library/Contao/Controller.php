@@ -1610,13 +1610,14 @@ abstract class Controller extends \System
 					// Generate the thumbnail image
 					try
 					{
-						$src = \Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
+						$src = \Image::get($strFile, $width, $height, $mode);
+						$objFile = new \File($src);
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+						if (($imgSize = $objFile->imageSize) !== false)
 						{
-							$dimensions = $imgSize[3];
+							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 						}
 
 						// Generate the HTML markup
@@ -2575,7 +2576,7 @@ abstract class Controller extends \System
 		if (($imgSize = $objFile->imageSize) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 		}
 
 		if (is_numeric($size[2]))
@@ -2721,6 +2722,8 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		global $objPage;
+
 		$arrEnclosures = array();
 		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
@@ -2745,15 +2748,29 @@ abstract class Controller extends \System
 
 				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
+				$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta) && $objPage->rootFallbackLanguage !== null)
+				{
+					$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+				}
+
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
+				{
+					$arrMeta['title'] = specialchars($objFile->basename);
+				}
+
 				$arrEnclosures[] = array
 				(
-					'link'      => $objFiles->name,
+					'link'      => $arrMeta['title'],
 					'filesize'  => static::getReadableSize($objFile->filesize),
-					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
+					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
-					'mime'      => $objFile->mime
+					'mime'      => $objFile->mime,
+					'meta'      => $arrMeta
 				);
 			}
 		}
