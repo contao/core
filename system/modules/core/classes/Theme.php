@@ -256,9 +256,9 @@ class Theme extends \Backend
 			}
 
 			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['compareTheme']) && is_array($GLOBALS['TL_HOOKS']['compareTheme']))
+			if (isset($GLOBALS['TL_HOOKS']['compareThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['compareThemeFiles']))
 			{
-				foreach ($GLOBALS['TL_HOOKS']['compareTheme'] as $callback)
+				foreach ($GLOBALS['TL_HOOKS']['compareThemeFiles'] as $callback)
 				{
 					$return .= \System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
 				}
@@ -640,9 +640,9 @@ class Theme extends \Backend
 			}
 
 			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['importTheme']) && is_array($GLOBALS['TL_HOOKS']['importTheme']))
+			if (isset($GLOBALS['TL_HOOKS']['extractThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['extractThemeFiles']))
 			{
-				foreach ($GLOBALS['TL_HOOKS']['importTheme'] as $callback)
+				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
 				{
 					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme, $arrMapper);
 				}
