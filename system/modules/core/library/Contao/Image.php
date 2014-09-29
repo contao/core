@@ -355,13 +355,25 @@ class Image
 				break;
 		}
 
+		$origWidth = $svgElement->getAttribute('width');
+		$origHeight = $svgElement->getAttribute('height');
+
 		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
-			$origWidth = $svgElement->getAttribute('width');
-			$origHeight = $svgElement->getAttribute('height');
-
 			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
+		}
+
+		// Calculate the missing width
+		if (!strlen($width))
+		{
+			$width = $height * intval($origWidth) / intval($origHeight);
+		}
+
+		// Calculate the missing height
+		if (!strlen($height))
+		{
+			$height = $width * intval($origHeight) / intval($origWidth);
 		}
 
 		$svgElement->setAttribute('width', $width . 'px');

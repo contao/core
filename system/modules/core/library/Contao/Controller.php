@@ -1610,13 +1610,14 @@ abstract class Controller extends \System
 					// Generate the thumbnail image
 					try
 					{
-						$src = \Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
+						$src = \Image::get($strFile, $width, $height, $mode);
+						$objFile = new \File($src);
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+						if (($imgSize = $objFile->imageSize) !== false)
 						{
-							$dimensions = $imgSize[3];
+							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 						}
 
 						// Generate the HTML markup
@@ -2568,7 +2569,7 @@ abstract class Controller extends \System
 		if (($imgSize = $objFile->imageSize) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 		}
 
 		// Provide an ID for single lightbox images in HTML5 (see #3742)
