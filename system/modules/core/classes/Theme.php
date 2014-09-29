@@ -630,21 +630,14 @@ class Theme extends \Backend
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 
-			if (!empty($arrMapper['tl_theme']))
-			{
-				$objTheme = \ThemeModel::findByPk(reset($arrMapper['tl_theme']));
-			}
-			else
-			{
-				$objTheme = null;
-			}
+			$intThemeId = empty($arrMapper['tl_theme']) ? null : reset($arrMapper['tl_theme']);
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['extractThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['extractThemeFiles']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
 				{
-					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme, $arrMapper);
+					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
 				}
 			}
 		}
@@ -724,7 +717,7 @@ class Theme extends \Backend
 		{
 			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
 			{
-				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme);
+				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme->id);
 			}
 		}
 
