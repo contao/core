@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
+### Improved
+Use the image meta data in `Controller::addEnclosuresToTemplate()` (see #6746).
+
 ### New
 Add the `dir="rtl"` attribute if the page language is RTL (see #7171).
 
