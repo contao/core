@@ -630,11 +630,11 @@ class Theme extends \Backend
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 
-			$intThemeId = empty($arrMapper['tl_theme']) ? null : reset($arrMapper['tl_theme']);
-
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['extractThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['extractThemeFiles']))
 			{
+				$intThemeId = empty($arrMapper['tl_theme']) ? null : reset($arrMapper['tl_theme']);
+
 				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
 				{
 					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
