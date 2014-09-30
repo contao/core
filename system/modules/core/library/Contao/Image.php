@@ -609,10 +609,10 @@ class Image
 		{
 			$importantPart = array
 			(
-				'x' => (int)$fileRecord->importantPartX,
-				'y' => (int)$fileRecord->importantPartY,
-				'width' => (int)$fileRecord->importantPartWidth,
-				'height' => (int)$fileRecord->importantPartHeight,
+				'x' => (int) $fileRecord->importantPartX,
+				'y' => (int) $fileRecord->importantPartY,
+				'width' => (int) $fileRecord->importantPartWidth,
+				'height' => (int) $fileRecord->importantPartHeight,
 			);
 		}
 
@@ -760,7 +760,7 @@ class Image
 			}
 		}
 
-		$zoom = max(0, min(1, (int)$zoom / 100));
+		$zoom = max(0, min(1, (int) $zoom / 100));
 
 		$zoomedImportantPart = array
 		(
@@ -881,13 +881,13 @@ class Image
 			// Calculate the height if only the width is given
 			if ($width)
 			{
-				$height = max(round($zoomedImportantPart['height'] * $width / $zoomedImportantPart['width']), 1);
+				$height = max($zoomedImportantPart['height'] * $width / $zoomedImportantPart['width'], 1);
 			}
 
 			// Calculate the width if only the height is given
 			elseif ($height)
 			{
-				$width = max(round($zoomedImportantPart['width'] * $height / $zoomedImportantPart['height']), 1);
+				$width = max($zoomedImportantPart['width'] * $height / $zoomedImportantPart['height'], 1);
 			}
 
 			// Apply zoom
@@ -899,12 +899,12 @@ class Image
 
 		return array
 		(
-			'width' => (int)round($width),
-			'height' => (int)round($height),
-			'target_x' => (int)round($targetX),
-			'target_y' => (int)round($targetY),
-			'target_width' => (int)round($targetWidth),
-			'target_height' => (int)round($targetHeight),
+			'width' => (int) round($width),
+			'height' => (int) round($height),
+			'target_x' => (int) round($targetX),
+			'target_y' => (int) round($targetY),
+			'target_width' => (int) round($targetWidth),
+			'target_height' => (int) round($targetHeight),
 		);
 	}
 
@@ -1268,10 +1268,10 @@ class Image
 			{
 				$imageObj->setImportantPart(array
 				(
-					'x' => (int)$fileRecord->importantPartX,
-					'y' => (int)$fileRecord->importantPartY,
-					'width' => (int)$fileRecord->importantPartWidth,
-					'height' => (int)$fileRecord->importantPartHeight,
+					'x' => (int) $fileRecord->importantPartX,
+					'y' => (int) $fileRecord->importantPartY,
+					'width' => (int) $fileRecord->importantPartWidth,
+					'height' => (int) $fileRecord->importantPartHeight,
 				));
 			}
 
