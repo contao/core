@@ -2015,36 +2015,36 @@ var Backend =
 	},
 
 	/**
-	 * Image size
-	 *
-	 * @param {string} id The ID of the select element
+	 * Update the fields of the imageSize widget upon change
 	 */
-	imageSize: function(id) {
-		var el = $(id),
-			widthInput = el.getParent().getChildren('input')[0],
-			heightInput = el.getParent().getChildren('input')[1],
-			update = function() {
-				if (el.get('value').toInt().toString() === el.get('value')) {
-					widthInput.readOnly = true;
-					heightInput.readOnly = true;
-					var dimensions = $(el.getSelected()[0]).get('text');
-					dimensions = dimensions.split('(').length > 1
-						? dimensions.split('(').getLast().split(')')[0].split('x')
-						: ['', ''];
-					widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
-					heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
-				}
-				else {
-					widthInput.set('placeholder', '');
-					heightInput.set('placeholder', '');
-					widthInput.readOnly = false;
-					heightInput.readOnly = false;
-				}
-			};
+	enableImageSizeWidgets: function() {
+		$$('.tl_image_size').each(function(el) {
+			var select = el.getElement('select'),
+				widthInput = el.getChildren('input')[0],
+				heightInput = el.getChildren('input')[1],
+				update = function() {
+					if (select.get('value').toInt().toString() === select.get('value')) {
+						widthInput.readOnly = true;
+						heightInput.readOnly = true;
+						var dimensions = $(select.getSelected()[0]).get('text');
+						dimensions = dimensions.split('(').length > 1
+							? dimensions.split('(').getLast().split(')')[0].split('x')
+							: ['', ''];
+						widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
+						heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
+					}
+					else {
+						widthInput.set('placeholder', '');
+						heightInput.set('placeholder', '');
+						widthInput.readOnly = false;
+						heightInput.readOnly = false;
+					}
+				};
 
-		update();
-		el.addEvent('change', update);
-		el.addEvent('keyup', update);
+			update();
+			select.addEvent('change', update);
+			select.addEvent('keyup', update);
+		});
 	},
 
 	/**
@@ -2213,6 +2213,7 @@ window.addEvent('domready', function() {
 	Backend.addInteractiveHelp();
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -2234,6 +2235,7 @@ window.addEvent('load', function() {
 window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
