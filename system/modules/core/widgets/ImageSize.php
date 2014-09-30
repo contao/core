@@ -143,8 +143,7 @@ class ImageSize extends \Widget
 								$this->strName,
 								$this->strId.'_3',
 								$this->getAttribute('disabled'),
-								implode(' ', $arrOptions),
-								$this->strId.'_3');
+								implode(' ', $arrOptions));
 
 		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,

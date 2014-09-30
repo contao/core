@@ -834,9 +834,8 @@ class tl_module extends Backend
 	{
 		$sizes = array();
 
-		$imageSize = $this->Database
-			->prepare("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name")
-			->execute(Input::get('id'));
+		$imageSize = $this->Database->prepare("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name")
+									->execute(Input::get('id'));
 
 		while ($imageSize->next())
 		{
