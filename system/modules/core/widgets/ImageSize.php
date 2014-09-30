@@ -139,11 +139,12 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
+		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select><script>Backend.imageSize(\'ctrl_%s\');</script>',
 								$this->strName,
 								$this->strId.'_3',
 								$this->getAttribute('disabled'),
-								implode(' ', $arrOptions));
+								implode(' ', $arrOptions),
+								$this->strId.'_3');
 
 		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
 						$this->strId,
