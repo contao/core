@@ -104,7 +104,7 @@ class Image
 	 *
 	 * @param \File $file A file instance of the original image
 	 *
-	 * @throws \InvalidArgumentException If the file does not exists or cannot be processes
+	 * @throws \InvalidArgumentException If the file does not exists or cannot be processed
 	 */
 	public function __construct(\File $file)
 	{
