@@ -400,6 +400,12 @@ class Theme extends \Backend
 				'tl_theme'       => 'WRITE',
 			);
 
+			foreach (array_keys($arrLocks) as $table)
+			{
+				// Load the DCA
+				$this->loadDataContainer($table);
+			}
+
 			$this->Database->lockTables($arrLocks);
 
 			// Get the current auto_increment values
@@ -420,9 +426,6 @@ class Theme extends \Backend
 				{
 					continue;
 				}
-
-				// Load the DCA
-				$this->loadDataContainer($table);
 
 				// Get the order fields
 				$objDcaExtractor = new \DcaExtractor($table);
