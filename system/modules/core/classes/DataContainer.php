@@ -505,23 +505,29 @@ class DataContainer extends \Backend
 
 				if ($objFile->isSvgImage || $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
-					if ($objFile->width > 699 || $objFile->height > 524) {
+					if ($objFile->width > 699 || $objFile->height > 524)
+					{
 						$image = \Image::get($objFile->path, 699, 524, 'box');
 					}
-					else {
+					else
+					{
 						$image = $objFile->path;
 					}
 				}
 
+				$ctrl = 'ctrl_preview_' . substr(md5($image), 0, 8);
+
 				$strPreview = '
 
-<div class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
+<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
 ' . \Image::getHtml($image) . '
 </div>';
 
+				// Add the script to mark the important part
 				if ($image !== 'placeholder.png')
 				{
-					$strPreview .= '<script>Backend.editPreviewWizard($$(\'.tl_edit_preview\').getLast());</script>';
+					$strPreview .= '<script>Backend.editPreviewWizard($(\'' . $ctrl . '\'));</script>';
+
 					if (\Config::get('showHelp'))
 					{
 						$strPreview .= '<p class="tl_help tl_tip">' . $GLOBALS['TL_LANG'][$this->strTable]['edit_preview_help'] . '</p>';

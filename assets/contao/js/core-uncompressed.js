@@ -2048,148 +2048,129 @@ var Backend =
 	},
 
 	/**
-	 * Edit preview wizard
+	 * Allow to mark the important part of an image
 	 *
-	 * @param {object} el The tl_edit_preview DOM element
+	 * @param {object} el The DOM element
 	 */
 	editPreviewWizard: function(el) {
 		el = $(el);
-		var imageElement = el.getElement('img');
-		var inputElements = {};
-		var partElement;
-		var isDrawing = false;
-		var startPos;
-		var originalWidth = el.get('data-original-width');
-		var originalHeight = el.get('data-original-height');
-
-		var getScale = function() {
-			return imageElement.getComputedSize().width / originalWidth;
-		};
-
-		var updateImage = function() {
-			var scale = getScale();
-			var imageSize = imageElement.getComputedSize();
-			partElement.setStyles({
-				top: imageSize.computedTop + (inputElements.y.get('value') * scale).round() + 'px',
-				left: imageSize.computedLeft + (inputElements.x.get('value') * scale).round() + 'px',
-				width: (inputElements.width.get('value') * scale).round() + 'px',
-				height: (inputElements.height.get('value') * scale).round() + 'px'
-			});
-			if (!inputElements.width.get('value').toInt() || !inputElements.height.get('value').toInt()) {
-				partElement.setStyle('display', 'none');
-			}
-			else {
-				partElement.setStyle('display', '');
-			}
-		};
-
-		var updateValues = function() {
-			var scale = getScale();
-			var styles = partElement.getStyles('top', 'left', 'width', 'height');
-			var imageSize = imageElement.getComputedSize();
-			var values = {
-				x: Math.max(0, Math.min(originalWidth, (styles.left.toFloat() - imageSize.computedLeft) / scale)).round(),
-				y: Math.max(0, Math.min(originalHeight, (styles.top.toFloat() - imageSize.computedTop) / scale)).round()
-			};
-			values.width = Math.min(originalWidth - values.x, styles.width.toFloat() / scale).round();
-			values.height = Math.min(originalHeight - values.y, styles.height.toFloat() / scale).round();
-			if (!values.width || !values.height) {
-				values.x = values.y = values.width = values.height = '';
-				partElement.setStyle('display', 'none');
-			}
-			else {
-				partElement.setStyle('display', '');
-			}
-			Object.each(values, function(value, key) {
-				inputElements[key].set('value', value);
-			});
-		};
-
-		var start = function(event) {
-			event.preventDefault();
-			if (isDrawing) {
-				return;
-			}
-			isDrawing = true;
-			startPos = {
-				x: event.page.x - el.getPosition().x - imageElement.getComputedSize().computedLeft,
-				y: event.page.y - el.getPosition().y - imageElement.getComputedSize().computedTop
-			};
-			move(event);
-		};
-
-		var move = function(event) {
-			if (!isDrawing) {
-				return;
-			}
-			event.preventDefault();
-			var imageSize = imageElement.getComputedSize();
-			var rect = {
-				x: [
-					Math.max(0, Math.min(imageSize.width, startPos.x)),
-					Math.max(0, Math.min(imageSize.width, event.page.x - el.getPosition().x - imageSize.computedLeft))
-				],
-				y: [
-					Math.max(0, Math.min(imageSize.height, startPos.y)),
-					Math.max(0, Math.min(imageSize.height, event.page.y - el.getPosition().y - imageSize.computedTop))
-				]
-			};
-			partElement.setStyles({
-				top: Math.min(rect.y[0], rect.y[1]) + imageSize.computedTop + 'px',
-				left: Math.min(rect.x[0], rect.x[1]) + imageSize.computedLeft + 'px',
-				width: Math.abs(rect.x[0] - rect.x[1]) + 'px',
-				height: Math.abs(rect.y[0] - rect.y[1]) + 'px'
-			});
-			updateValues();
-		};
-
-		var stop = function(event) {
-			move(event);
-			isDrawing = false;
-		};
-
-		var init = function() {
-
-			el.getParent().getElements('input[name^="importantPart"]').each(function(input) {
-				['x', 'y', 'width', 'height'].each(function(key) {
-					if (input.get('name').substr(13, key.length) === key.capitalize()) {
-						inputElements[key] = input = $(input);
-					}
+		var imageElement = el.getElement('img'),
+			inputElements = {},
+			isDrawing = false,
+			originalWidth = el.get('data-original-width'),
+			originalHeight = el.get('data-original-height'),
+			partElement, startPos,
+			getScale = function() {
+				return imageElement.getComputedSize().width / originalWidth;
+			},
+			updateImage = function() {
+				var scale = getScale(),
+					imageSize = imageElement.getComputedSize();
+				partElement.setStyles({
+					top: imageSize.computedTop + (inputElements.y.get('value') * scale).round() + 'px',
+					left: imageSize.computedLeft + (inputElements.x.get('value') * scale).round() + 'px',
+					width: (inputElements.width.get('value') * scale).round() + 'px',
+					height: (inputElements.height.get('value') * scale).round() + 'px'
 				});
-			});
-
-			if (Object.getLength(inputElements) !== 4) {
-				return;
-			}
-
-			Object.each(inputElements, function(input) {
-				input.getParent().setStyle('display', 'none');
-			});
-
-			el.addClass('tl_edit_preview_enabled');
-
-			partElement = new Element('div', {
-				'class': 'tl_edit_preview_important_part'
-			}).inject(el);
-
-			updateImage();
-
-			imageElement.addEvent('load', updateImage);
-
-			el.addEvents({
-				mousedown: start,
-				touchstart: start
-			});
-
-			$(document.documentElement).addEvents({
-				mousemove: move,
-				touchmove: move,
-				mouseup: stop,
-				touchend: stop,
-				touchcancel: stop,
-				resize: updateImage
-			});
-		};
+				if (!inputElements.width.get('value').toInt() || !inputElements.height.get('value').toInt()) {
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+			},
+			updateValues = function() {
+				var scale = getScale(),
+					styles = partElement.getStyles('top', 'left', 'width', 'height'),
+					imageSize = imageElement.getComputedSize(),
+					values = {
+						x: Math.max(0, Math.min(originalWidth, (styles.left.toFloat() - imageSize.computedLeft) / scale)).round(),
+						y: Math.max(0, Math.min(originalHeight, (styles.top.toFloat() - imageSize.computedTop) / scale)).round()
+					};
+				values.width = Math.min(originalWidth - values.x, styles.width.toFloat() / scale).round();
+				values.height = Math.min(originalHeight - values.y, styles.height.toFloat() / scale).round();
+				if (!values.width || !values.height) {
+					values.x = values.y = values.width = values.height = '';
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+				Object.each(values, function(value, key) {
+					inputElements[key].set('value', value);
+				});
+			},
+			start = function(event) {
+				event.preventDefault();
+				if (isDrawing) {
+					return;
+				}
+				isDrawing = true;
+				startPos = {
+					x: event.page.x - el.getPosition().x - imageElement.getComputedSize().computedLeft,
+					y: event.page.y - el.getPosition().y - imageElement.getComputedSize().computedTop
+				};
+				move(event);
+			},
+			move = function(event) {
+				if (!isDrawing) {
+					return;
+				}
+				event.preventDefault();
+				var imageSize = imageElement.getComputedSize();
+				var rect = {
+					x: [
+						Math.max(0, Math.min(imageSize.width, startPos.x)),
+						Math.max(0, Math.min(imageSize.width, event.page.x - el.getPosition().x - imageSize.computedLeft))
+					],
+					y: [
+						Math.max(0, Math.min(imageSize.height, startPos.y)),
+						Math.max(0, Math.min(imageSize.height, event.page.y - el.getPosition().y - imageSize.computedTop))
+					]
+				};
+				partElement.setStyles({
+					top: Math.min(rect.y[0], rect.y[1]) + imageSize.computedTop + 'px',
+					left: Math.min(rect.x[0], rect.x[1]) + imageSize.computedLeft + 'px',
+					width: Math.abs(rect.x[0] - rect.x[1]) + 'px',
+					height: Math.abs(rect.y[0] - rect.y[1]) + 'px'
+				});
+				updateValues();
+			},
+			stop = function(event) {
+				move(event);
+				isDrawing = false;
+			},
+			init = function() {
+				el.getParent().getElements('input[name^="importantPart"]').each(function(input) {
+					['x', 'y', 'width', 'height'].each(function(key) {
+						if (input.get('name').substr(13, key.length) === key.capitalize()) {
+							inputElements[key] = input = $(input);
+						}
+					});
+				});
+				if (Object.getLength(inputElements) !== 4) {
+					return;
+				}
+				Object.each(inputElements, function(input) {
+					input.getParent().setStyle('display', 'none');
+				});
+				el.addClass('tl_edit_preview_enabled');
+				partElement = new Element('div', {
+					'class': 'tl_edit_preview_important_part'
+				}).inject(el);
+				updateImage();
+				imageElement.addEvent('load', updateImage);
+				el.addEvents({
+					mousedown: start,
+					touchstart: start
+				});
+				$(document.documentElement).addEvents({
+					mousemove: move,
+					touchmove: move,
+					mouseup: stop,
+					touchend: stop,
+					touchcancel: stop,
+					resize: updateImage
+				});
+			};
 
 		window.addEvent('domready', init);
 	}
