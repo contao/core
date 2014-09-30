@@ -18,7 +18,7 @@
 <?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
   <script>
     window.picturefill && window.picturefill({
-      elements: document.getElementById('img-<?php echo $id; ?>');
+      elements: [document.getElementById('img-<?php echo $id; ?>')]
     })
   </script>
 <?php endif; ?>
