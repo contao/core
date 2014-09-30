@@ -243,11 +243,13 @@ class tl_image_size extends Backend
 		$html = '<div class="tl_content_left">';
 		$html .= $row['name'];
 
-		if ($row['width'] || $row['height']) {
+		if ($row['width'] || $row['height'])
+		{
 			$html .= ' <span style="color:#b3b3b3;padding-left:3px">' . $row['width'] . 'x' . $row['height'] . '</span>';
 		}
 
-		if ($row['zoom']) {
+		if ($row['zoom'])
+		{
 			$html .= ' <span style="color:#b3b3b3;padding-left:3px">(' . (int)$row['zoom'] . '%)</span>';
 		}
 

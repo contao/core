@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,importantPartX,importantPartY,importantPartWidth,importantPartHeight,protected;meta'
+		'default'                     => 'name,protected,importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
 	),
 
 	// Fields
@@ -176,11 +176,17 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['protected'],
+			'input_field_callback'    => array('tl_files', 'protectFolder'),
+			'eval'                    => array('tl_class'=>'w50 m12')
+		),
 		'importantPartX' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartX'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50 clr'),
 			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'importantPartY' => array
@@ -194,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'importantPartHeight' => array
@@ -203,12 +209,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NOT NULL default '0'"
-		),
-		'protected' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['protected'],
-			'input_field_callback'    => array('tl_files', 'protectFolder'),
-			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'meta' => array
 		(

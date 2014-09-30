@@ -12,6 +12,12 @@
 
 
 /**
+ * Load tl_image_size language file
+ */
+System::loadLanguageFile('tl_image_size');
+
+
+/**
  * Table tl_image_size_item
  */
 $GLOBALS['TL_DCA']['tl_image_size_item'] = array
@@ -106,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'media,width,height,resizeMode,zoom;{expert_legend},sizes,densities;{visibility_legend},invisible',
+		'default'                     => '{title_legend},media,width,height,resizeMode,zoom;{expert_legend},sizes,densities;{visibility_legend},invisible',
 	),
 
 	// Fields
@@ -140,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'sizes' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['sizes'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['sizes'],
 			'inputType'               => 'text',
 			'explanation'             => 'imageSizeDensities',
 			'exclude'                 => true,
@@ -149,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'densities' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['densities'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['densities'],
 			'inputType'               => 'text',
 			'explanation'             => 'imageSizeDensities',
 			'exclude'                 => true,
@@ -158,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'width' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['width'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['width'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'clr w50'),
@@ -166,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'height' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['height'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['height'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
@@ -174,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'resizeMode' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['resizeMode'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['resizeMode'],
 			'inputType'               => 'select',
 			'options'                 => array('proportional', 'box', 'crop'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
@@ -184,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		),
 		'zoom' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['zoom'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['zoom'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'eval'                    => array('rgxp'=>'prcnt', 'nospace'=>true, 'tl_class'=>'w50'),
@@ -250,11 +256,13 @@ class tl_image_size_item extends Backend
 		$html = '<div class="tl_content_left">';
 		$html .= $row['media'];
 
-		if ($row['width'] || $row['height']) {
+		if ($row['width'] || $row['height'])
+		{
 			$html .= ' <span style="padding-left:3px">' . $row['width'] . 'x' . $row['height'] . '</span>';
 		}
 
-		if ($row['zoom']) {
+		if ($row['zoom'])
+		{
 			$html .= ' <span style="color:#b3b3b3;padding-left:3px">(' . $row['zoom'] . '%)</span>';
 		}
 

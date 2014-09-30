@@ -2559,13 +2559,13 @@ abstract class Controller extends \System
 		}
 
 		$file = new \File($arrItem['singleSRC'], true);
-
 		$imageObj = new \Image($file);
+
 		$src = $imageObj->setTargetWidth($size[0])
-			->setTargetHeight($size[1])
-			->setResizeMode($size[2])
-			->executeResize()
-			->getResizedPath();
+						->setTargetHeight($size[1])
+						->setResizeMode($size[2])
+						->executeResize()
+						->getResizedPath();
 
 		if ($src !== $arrItem['singleSRC'])
 		{
@@ -2585,14 +2585,18 @@ abstract class Controller extends \System
 		}
 		else
 		{
-			$picture = array(
-				'img' => array(
+			$picture = array
+			(
+				'img' => array
+				(
 					'src' => $src,
 					'srcset' => $src,
 				),
-				'sources' => array(),
+				'sources' => array()
 			);
-			if (!empty($objTemplate->arrSize)) {
+
+			if (!empty($objTemplate->arrSize))
+			{
 				$picture['img']['width'] = $objTemplate->arrSize[0];
 				$picture['img']['height'] = $objTemplate->arrSize[1];
 			}

@@ -95,13 +95,13 @@ class Theme extends \Backend
 			// Store the field names of the theme tables
 			$arrDbFields = array
 			(
-				'tl_theme'              => $this->Database->getFieldNames('tl_theme'),
-				'tl_style_sheet'        => $this->Database->getFieldNames('tl_style_sheet'),
-				'tl_style'              => $this->Database->getFieldNames('tl_style'),
-				'tl_module'             => $this->Database->getFieldNames('tl_module'),
-				'tl_layout'             => $this->Database->getFieldNames('tl_layout'),
-				'tl_image_size'         => $this->Database->getFieldNames('tl_image_size'),
-				'tl_image_size_item'    => $this->Database->getFieldNames('tl_image_size_item'),
+				'tl_theme'           => $this->Database->getFieldNames('tl_theme'),
+				'tl_style_sheet'     => $this->Database->getFieldNames('tl_style_sheet'),
+				'tl_style'           => $this->Database->getFieldNames('tl_style'),
+				'tl_module'          => $this->Database->getFieldNames('tl_module'),
+				'tl_layout'          => $this->Database->getFieldNames('tl_layout'),
+				'tl_image_size'      => $this->Database->getFieldNames('tl_image_size'),
+				'tl_image_size_item' => $this->Database->getFieldNames('tl_image_size_item')
 			);
 
 			// Proceed
@@ -202,17 +202,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if (!in_array($table, array
-				(
-					'tl_theme',
-					'tl_style_sheet',
-					'tl_style',
-					'tl_module',
-					'tl_layout',
-					'tl_image_size',
-					'tl_image_size_item'
-				))
-				)
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
@@ -409,14 +399,14 @@ class Theme extends \Backend
 			// Lock the tables
 			$arrLocks = array
 			(
-				'tl_files'              => 'WRITE',
-				'tl_layout'             => 'WRITE',
-				'tl_module'             => 'WRITE',
-				'tl_style_sheet'        => 'WRITE',
-				'tl_style'              => 'WRITE',
-				'tl_theme'              => 'WRITE',
-				'tl_image_size'         => 'WRITE',
-				'tl_image_size_item'    => 'WRITE',
+				'tl_files'           => 'WRITE',
+				'tl_layout'          => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_style_sheet'     => 'WRITE',
+				'tl_style'           => 'WRITE',
+				'tl_theme'           => 'WRITE',
+				'tl_image_size'      => 'WRITE',
+				'tl_image_size_item' => 'WRITE'
 			);
 
 			$this->Database->lockTables($arrLocks);
@@ -437,17 +427,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if (!in_array($table, array
-					(
-						'tl_theme',
-						'tl_style_sheet',
-						'tl_style',
-						'tl_module',
-						'tl_layout',
-						'tl_image_size',
-						'tl_image_size_item'
-					))
-				)
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
@@ -627,12 +607,15 @@ class Theme extends \Backend
 							}
 						}
 
-						// Adjust imageSize
+						// Adjust the imageSize widget data
 						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'imageSize')
 						{
 							$imageSizes = deserialize($value, true);
-							if (!empty($imageSizes)) {
-								if (is_numeric($imageSizes[2])) {
+
+							if (!empty($imageSizes))
+							{
+								if (is_numeric($imageSizes[2]))
+								{
 									$imageSizes[2] = $arrMapper['tl_image_size'][$imageSizes[2]];
 								}
 							}
@@ -942,7 +925,7 @@ class Theme extends \Backend
 
 		// Get all sizes
 		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
-									->execute($objTheme->id);
+								   ->execute($objTheme->id);
 
 		// Add the rows
 		while ($objSizes->next())
@@ -951,7 +934,7 @@ class Theme extends \Backend
 
 			// Get all size items
 			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
-				->execute($objSizes->id);
+										   ->execute($objSizes->id);
 
 			// Add the rows
 			while ($objSizeItems->next())
