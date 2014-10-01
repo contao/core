@@ -325,7 +325,8 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$arrTables = (array) $arrModule['tables'];
+		$strTable = \Input::get('table') ?: $arrTables[0];
 		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
@@ -360,7 +361,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array) $arrModule['tables']))
+			if (!in_array($strTable, $arrTables))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -421,7 +422,7 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
@@ -489,12 +490,21 @@ abstract class Backend extends \Controller
 			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
 			{
 				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
-				$this->loadDataContainer($ptable);
 
-				if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
+				if (in_array($ptable, $arrTables))
 				{
-					$strFirst = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
-					$strSecond = $ptable;
+					$this->loadDataContainer($ptable);
+
+					if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
+					{
+						$ftable = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
+
+						if (in_array($ftable, $arrTables))
+						{
+							$strFirst = $ftable;
+							$strSecond = $ptable;
+						}
+					}
 				}
 			}
 
@@ -543,7 +553,7 @@ abstract class Backend extends \Controller
 			else
 			{
 				// Add the name of the parent element
-				if ($strTable && in_array($strTable, $arrModule['tables']) && $strTable != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrTables) && $strTable != $arrTables[0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
