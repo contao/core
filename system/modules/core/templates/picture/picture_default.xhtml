@@ -1,4 +1,3 @@
-<?php $id = substr(md5(microtime(true)), 0, 8); ?>
 
 <?php if ($this->sources): ?>
   <picture>
@@ -9,7 +8,7 @@
     <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
 
-<img src="<?php echo $this->img['src']; ?>"<?php if ($this->img['srcset'] !== $this->img['src']): ?> srcset="<?php echo $this->img['srcset']; ?>"<?php endif; ?><?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php endif; ?><?php if (!$this->sources): ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>"<?php endif; ?><?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?> id="img-<?php echo $id; ?>"<?php endif; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?> />
+<img src="<?php echo $this->img['src']; ?>"<?php if ($this->img['srcset'] !== $this->img['src']): ?> srcset="<?php echo $this->img['srcset']; ?>"<?php endif; ?><?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php endif; ?><?php if (!$this->sources): ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>"<?php endif; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?> />
 
 <?php if ($this->sources): ?>
   </picture>
@@ -19,7 +18,7 @@
   <script type="text/javascript">
     /* <![CDATA[ */
     window.picturefill && window.picturefill({
-      elements: [document.getElementById('img-<?php echo $id; ?>')]
+      elements: [document.images[document.images.length - 1]]
     });
     /* ]]> */
   </script>
