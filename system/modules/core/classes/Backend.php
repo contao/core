@@ -360,7 +360,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array)$arrModule['tables']))
+			if (!in_array($strTable, (array) $arrModule['tables']))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -482,29 +482,45 @@ abstract class Backend extends \Controller
 					break;
 			}
 
-			// Correctly add the theme name in the style sheets module
-			if (strncmp($strTable, 'tl_style', 8) === 0)
+			$strFirst = null;
+			$strSecond = null;
+
+			// Handle child child tables (e.g. tl_style)
+			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
+			{
+				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+				$this->loadDataContainer($ptable);
+
+				if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
+				{
+					$strFirst = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
+					$strSecond = $ptable;
+				}
+			}
+
+			// Build the breadcrumb trail
+			if ($strFirst !== null && $strSecond !== null)
 			{
 				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select')
 				{
-					if ($strTable == 'tl_style_sheet')
+					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=?";
+						$strQuery = "SELECT name FROM $strFirst WHERE id=?";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 				}
 				else
 				{
-					if ($strTable == 'tl_style_sheet')
+					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))";
+						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
 					}
 				}
 
@@ -513,11 +529,11 @@ abstract class Backend extends \Controller
 										 ->execute($dc->id);
 
 				$this->Template->headline .= ' » ' . $objRow->name;
-				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
 
-				if ($strTable == 'tl_style')
+				if ($strTable == $strTable)
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
+					$objRow = $this->Database->prepare("SELECT name FROM $strSecond WHERE id=?")
 											 ->limit(1)
 											 ->execute(CURRENT_ID);
 

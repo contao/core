@@ -69,10 +69,10 @@
         <source>Show the details of image size ID %s</source>
       </trans-unit>
       <trans-unit id="tl_image_size.edit.0">
-        <source>Edit image size media queries</source>
+        <source>Edit image size</source>
       </trans-unit>
       <trans-unit id="tl_image_size.edit.1">
-        <source>Edit media queries of image size ID %s</source>
+        <source>Edit image size ID %s</source>
       </trans-unit>
       <trans-unit id="tl_image_size.editheader.0">
         <source>Edit image size settings</source>
