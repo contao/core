@@ -556,6 +556,46 @@ class Image
 
 		$svgElement = $doc->documentElement;
 
+		// Advanced crop modes
+		switch ($this->getResizeMode())
+		{
+			case 'left_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
+				break;
+
+			case 'center_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
+				break;
+
+			case 'right_top':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
+				break;
+
+			case 'left_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
+				break;
+
+			case 'center_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
+				break;
+
+			case 'right_center':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
+				break;
+
+			case 'left_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
+				break;
+
+			case 'center_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
+				break;
+
+			case 'right_bottom':
+				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
+				break;
+		}
+
 		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
@@ -566,7 +606,7 @@ class Image
 		}
 
 		$coordinates = $this->computeResize();
-# FIXME: is both width and height set?
+
 		$svgElement->setAttribute('width', $coordinates['width'] . 'px');
 		$svgElement->setAttribute('height', $coordinates['height'] . 'px');
 

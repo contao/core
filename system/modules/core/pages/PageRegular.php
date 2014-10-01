@@ -380,9 +380,6 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'] = array();
 		}
 
-		// Picturefill
-		$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static';
-
 		// jQuery scripts
 		if ($objLayout->addJQuery)
 		{
@@ -428,6 +425,12 @@ class PageRegular extends \Frontend
 		if (\Config::get('debugMode') && !$objLayout->addMooTools)
 		{
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
+		}
+
+		// Picturefill
+		if ($objLayout->addPicturefill)
+		{
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static';
 		}
 
 		// Check whether TL_APPEND_JS exists (see #4890)

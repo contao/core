@@ -4,7 +4,7 @@
   <picture>
     <!--[if IE 9]><video style="display: none;"><![endif]-->
     <?php foreach ($this->sources as $source): ?>
-      <source srcset="<?php echo $source['srcset'] ?>" <?php if (!empty($source['sizes'])): ?> sizes="<?php echo $source['sizes']; ?>"<?php endif; ?><?php if (!empty($source['media'])): ?> media="<?php echo $source['media']; ?>"<?php endif; ?>>
+      <source srcset="<?php echo $source['srcset'] ?>"<?php if (!empty($source['sizes'])): ?> sizes="<?php echo $source['sizes']; ?>"<?php endif; ?><?php if (!empty($source['media'])): ?> media="<?php echo $source['media']; ?>"<?php endif; ?>>
     <?php endforeach; ?>
     <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
