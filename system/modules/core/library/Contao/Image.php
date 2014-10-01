@@ -582,27 +582,23 @@ class Image
 			$origWidth = $svgElement->getAttribute('width');
 			$origHeight = $svgElement->getAttribute('height');
 
-			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
+			$svgElement->setAttribute('viewBox', '0 0 ' . floatval($origWidth) . ' ' . floatval($origHeight));
 		}
 
 		$coordinates = $this->computeResize();
 
-		$scale = $this->fileObj->width / $coordinates['target_width'];
+		$svgElement->setAttribute('x', $coordinates['target_x']);
+		$svgElement->setAttribute('y', $coordinates['target_y']);
+		$svgElement->setAttribute('width', $coordinates['target_width']);
+		$svgElement->setAttribute('height', $coordinates['target_height']);
 
-		$viewBox = preg_split('([\\s,]+)', $svgElement->getAttribute('viewBox'));
-		if (!empty($viewBox[2]))
-		{
-			$scale *= $viewBox[2] / $this->fileObj->width;
-		}
+		$svgWrapElement = $doc->createElementNS('http://www.w3.org/2000/svg', 'svg');
+		$svgWrapElement->setAttribute('version', '1.1');
+		$svgWrapElement->setAttribute('width', $coordinates['width']);
+		$svgWrapElement->setAttribute('height', $coordinates['height']);
 
-		$svgElement->setAttribute('width', $coordinates['width'] . 'px');
-		$svgElement->setAttribute('height', $coordinates['height'] . 'px');
-		$svgElement->setAttribute('viewBox', implode(' ', array(
-			$coordinates['target_x'] * -$scale + $viewBox[0],
-			$coordinates['target_y'] * -$scale + $viewBox[1],
-			$coordinates['width'] * $scale,
-			$coordinates['height'] * $scale,
-		)));
+		$svgWrapElement->appendChild($svgElement);
+		$doc->appendChild($svgWrapElement);
 
 		if ($this->fileObj->extension == 'svgz')
 		{
