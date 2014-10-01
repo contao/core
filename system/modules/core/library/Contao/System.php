@@ -67,6 +67,12 @@ abstract class System
 	 */
 	protected static $arrLanguageFiles = array();
 
+	/**
+	 * Available image sizes
+	 * @var array
+	 */
+	protected static $arrImageSizes = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -468,6 +474,32 @@ abstract class System
 		}
 
 		return $arrReturn;
+	}
+
+
+	/**
+	 * Return all image sizes as array
+	 *
+	 * @return array The available image sizes
+	 */
+	public static function getImageSizes()
+	{
+		if (empty(static::$arrImageSizes))
+		{
+			$sizes = array();
+
+			$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
+
+			while ($imageSize->next())
+			{
+				$sizes[$imageSize->id] = $imageSize->name;
+				$sizes[$imageSize->id] .= ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
+			}
+
+			static::$arrImageSizes = array_merge(array('image_sizes' => $sizes), $GLOBALS['TL_CROP']);
+		}
+
+		return static::$arrImageSizes;
 	}
 
 
