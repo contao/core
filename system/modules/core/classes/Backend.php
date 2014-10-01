@@ -511,42 +511,56 @@ abstract class Backend extends \Controller
 			// Build the breadcrumb trail
 			if ($strFirst !== null && $strSecond !== null)
 			{
-				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select')
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select' || \Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
 				{
 					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM $strFirst WHERE id=?";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=?";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 				}
 				else
 				{
 					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
 					}
 				}
 
+				// Add the first level name
 				$objRow = $this->Database->prepare($strQuery)
 										 ->limit(1)
 										 ->execute($dc->id);
 
-				$this->Template->headline .= ' » ' . $objRow->name;
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->name;
+				}
+
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
 
-				if ($strTable == $strTable)
-				{
-					$objRow = $this->Database->prepare("SELECT name FROM $strSecond WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
+				// Add the second level name
+				$objRow = $this->Database->prepare("SELECT name FROM $strSecond WHERE id=?")
+										 ->limit(1)
+										 ->execute(CURRENT_ID);
 
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 			}
