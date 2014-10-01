@@ -52,7 +52,8 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'limit',
 			'headerFields'            => array('name', 'tstamp', 'width', 'height', 'resizeMode', 'zoom'),
-			'child_record_callback'   => array('tl_image_size_item', 'listImageSizeItem')
+			'child_record_callback'   => array('tl_image_size_item', 'listImageSizeItem'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
