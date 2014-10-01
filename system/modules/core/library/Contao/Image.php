@@ -556,59 +556,29 @@ class Image
 
 		$svgElement = $doc->documentElement;
 
-		// Advanced crop modes
-		switch ($this->getResizeMode())
-		{
-			case 'left_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
-				break;
-
-			case 'center_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
-				break;
-
-			case 'right_top':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
-				break;
-
-			case 'left_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
-				break;
-
-			case 'center_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
-				break;
-
-			case 'right_center':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
-				break;
-
-			case 'left_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
-				break;
-
-			case 'center_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
-				break;
-
-			case 'right_bottom':
-				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
-				break;
-		}
-
 		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
 			$origWidth = $svgElement->getAttribute('width');
 			$origHeight = $svgElement->getAttribute('height');
 
-			$svgElement->setAttribute('viewBox', '0 0 ' . intval($origWidth) . ' ' . intval($origHeight));
+			$svgElement->setAttribute('viewBox', '0 0 ' . floatval($origWidth) . ' ' . floatval($origHeight));
 		}
 
 		$coordinates = $this->computeResize();
 
-		$svgElement->setAttribute('width', $coordinates['width'] . 'px');
-		$svgElement->setAttribute('height', $coordinates['height'] . 'px');
+		$svgElement->setAttribute('x', $coordinates['target_x']);
+		$svgElement->setAttribute('y', $coordinates['target_y']);
+		$svgElement->setAttribute('width', $coordinates['target_width']);
+		$svgElement->setAttribute('height', $coordinates['target_height']);
+
+		$svgWrapElement = $doc->createElementNS('http://www.w3.org/2000/svg', 'svg');
+		$svgWrapElement->setAttribute('version', '1.1');
+		$svgWrapElement->setAttribute('width', $coordinates['width']);
+		$svgWrapElement->setAttribute('height', $coordinates['height']);
+		$svgWrapElement->appendChild($svgElement);
+
+		$doc->appendChild($svgWrapElement);
 
 		if ($this->fileObj->extension == 'svgz')
 		{
