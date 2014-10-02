@@ -1288,20 +1288,20 @@ class Image
 			->setTargetPath($target)
 			->setForceOverride($force);
 
+		$fileRecord = \FilesModel::findByPath($image);
+		if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+		{
+			$imageObj->setImportantPart(array(
+				'x' => (int)$fileRecord->importantPartX,
+				'y' => (int)$fileRecord->importantPartY,
+				'width' => (int)$fileRecord->importantPartWidth,
+				'height' => (int)$fileRecord->importantPartHeight,
+			));
+		}
+
 		// Load the image size from the database if $mode is an id
 		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
 		{
-			$fileRecord = \FilesModel::findByPath($image);
-			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
-			{
-				$imageObj->setImportantPart(array(
-					'x' => (int)$fileRecord->importantPartX,
-					'y' => (int)$fileRecord->importantPartY,
-					'width' => (int)$fileRecord->importantPartWidth,
-					'height' => (int)$fileRecord->importantPartHeight,
-				));
-			}
-
 			$imageObj->setTargetWidth($imageSize->width)
 				->setTargetHeight($imageSize->height)
 				->setResizeMode($imageSize->resizeMode)
