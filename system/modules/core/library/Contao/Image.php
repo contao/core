@@ -1320,7 +1320,7 @@ class Image
 				break;
 
 			case 'pt':
-				return (int) round($value * (12 / 16));
+				return (int) round($value * (16 / 12));
 				break;
 
 			case '%':
