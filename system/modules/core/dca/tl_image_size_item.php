@@ -200,6 +200,7 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		'invisible' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size_item']['invisible'],
+			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'sql'                     => "char(1) NOT NULL default ''"

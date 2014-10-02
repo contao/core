@@ -131,6 +131,9 @@
       <trans-unit id="MOD.layout">
         <source>Page layouts</source>
       </trans-unit>
+      <trans-unit id="MOD.image_sizes">
+        <source>Image sizes</source>
+      </trans-unit>
       <trans-unit id="MOD.theme_import">
         <source>Theme import</source>
       </trans-unit>
