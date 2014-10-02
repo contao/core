@@ -27,6 +27,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			array('tl_files', 'checkPermission'),
 			array('tl_files', 'addBreadcrumb'),
+			array('tl_files', 'checkImportantPart')
 		),
 		'sql' => array
 		(
@@ -119,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,protected,importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
+		'default'                     => 'name,protected;importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
 	),
 
 	// Fields
@@ -404,6 +405,24 @@ class tl_files extends Backend
 	public function addBreadcrumb()
 	{
 		Backend::addFilesBreadcrumb();
+	}
+
+
+	/**
+	 * Only show the important part fields for images
+	 * @param DataContainer
+	 */
+	public function checkImportantPart(DataContainer $dc)
+	{
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(pathinfo($dc->id, PATHINFO_EXTENSION), trimsplit(',', Config::get('validImageTypes'))))
+		{
+			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(';importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
+		}
 	}
 
 
