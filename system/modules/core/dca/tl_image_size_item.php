@@ -31,7 +31,8 @@ $GLOBALS['TL_DCA']['tl_image_size_item'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_image_size_item', 'checkPermission')
+			array('tl_image_size_item', 'checkPermission'),
+			array('tl_image_size_item', 'showJsLibraryHint')
 		),
 		'sql' => array
 		(
@@ -271,6 +272,28 @@ class tl_image_size_item extends Backend
 		$html .= "</div>\n";
 
 		return $html;
+	}
+
+
+	/**
+	 * Show a hint if a JavaScript library needs to be included in the page layout
+	 * @param object
+	 */
+	public function showJsLibraryHint($dc)
+	{
+		if ($_POST || Input::get('act') != 'edit')
+		{
+			return;
+		}
+
+		// Return if the user cannot access the layout module (see #6190)
+		if (!$this->User->hasAccess('themes', 'modules') || !$this->User->hasAccess('layout', 'themes'))
+		{
+			return;
+		}
+
+		System::loadLanguageFile('tl_layout');
+		Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_image_size']['picturefill'], $GLOBALS['TL_LANG']['tl_layout']['addPicturefill'][0]));
 	}
 
 
