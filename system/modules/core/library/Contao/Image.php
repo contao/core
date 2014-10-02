@@ -615,7 +615,7 @@ class Image
 		$importantPart = null;
 		$fileRecord = \FilesModel::findByPath($this->getOriginalPath());
 
-		if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
 		{
 			$importantPart = array
 			(
@@ -1269,22 +1269,23 @@ class Image
 				 ->setTargetPath($target)
 				 ->setForceOverride($force);
 
-		// Load the image size from the database if $mode is an id
-		if (is_numeric($mode) && $imageSize = \ImageSizeModel::findByPk($mode))
+		$fileRecord = \FilesModel::findByPath($image);
+
+		// Set the important part
+		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
 		{
-			$fileRecord = \FilesModel::findByPath($image);
+			$imageObj->setImportantPart(array
+			(
+				'x' => (int) $fileRecord->importantPartX,
+				'y' => (int) $fileRecord->importantPartY,
+				'width' => (int) $fileRecord->importantPartWidth,
+				'height' => (int) $fileRecord->importantPartHeight,
+			));
+		}
 
-			if ($fileRecord && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
-			{
-				$imageObj->setImportantPart(array
-				(
-					'x' => (int) $fileRecord->importantPartX,
-					'y' => (int) $fileRecord->importantPartY,
-					'width' => (int) $fileRecord->importantPartWidth,
-					'height' => (int) $fileRecord->importantPartHeight,
-				));
-			}
-
+		// Load the image size from the database if $mode is an id
+		if (is_numeric($mode) && ($imageSize = \ImageSizeModel::findByPk($mode)) !== null)
+		{
 			$imageObj->setTargetWidth($imageSize->width)
 					 ->setTargetHeight($imageSize->height)
 					 ->setResizeMode($imageSize->resizeMode)
