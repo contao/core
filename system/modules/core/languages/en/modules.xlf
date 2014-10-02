@@ -116,6 +116,12 @@
       <trans-unit id="MOD.tl_layout">
         <source>Page layouts</source>
       </trans-unit>
+      <trans-unit id="MOD.tl_image_size">
+        <source>Image sizes</source>
+      </trans-unit>
+      <trans-unit id="MOD.tl_image_size_item">
+        <source>Image size media queries</source>
+      </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
       </trans-unit>

@@ -36,7 +36,7 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'themes' => array
 		(
-			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout', 'tl_image_size', 'tl_image_size_item'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
 			'import'      => array('StyleSheets', 'importStyleSheet'),
@@ -451,6 +451,7 @@ $GLOBALS['TL_ASSETS'] = array
 	'DROPZONE'     => '3.8.5',
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',
+	'PICTUREFILL'  => '2.1.0',
 	'SWIPE'        => '2.0',
 	'JQUERY'       => '1.11.0',
 	'JQUERY_UI'    => '1.10.4',
