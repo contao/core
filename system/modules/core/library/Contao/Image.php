@@ -145,18 +145,18 @@ class Image
 			// Backwards compatibility
 			if ($width && $height)
 			{
-				$mode = 'center_top';
+				$mode = self::RESIZE_CENTER_TOP;
 			}
 			else
 			{
-				$mode = 'proportional';
+				$mode = self::RESIZE_PROPORTIONAL;
 			}
 		}
 
 		// Backwards compatibility
 		if ($mode == 'crop')
 		{
-			$mode = 'center_center';
+			$mode = self::RESIZE_CENTER;
 		}
 
 		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
@@ -213,7 +213,7 @@ class Image
 		{
 			switch ($mode)
 			{
-				case 'proportional':
+				case self::RESIZE_PROPORTIONAL:
 					if ($objFile->width >= $objFile->height)
 					{
 						unset($height);
@@ -224,7 +224,7 @@ class Image
 					}
 					break;
 
-				case 'box':
+				case self::RESIZE_BOX:
 					if (round($objFile->height * $width / $objFile->width) <= $height)
 					{
 						unset($height);
@@ -334,39 +334,39 @@ class Image
 		// Advanced crop modes
 		switch ($mode)
 		{
-			case 'left_top':
+			case self::RESIZE_LEFT_TOP:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMin slice');
 				break;
 
-			case 'center_top':
+			case self::RESIZE_CENTER_TOP:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMin slice');
 				break;
 
-			case 'right_top':
+			case self::RESIZE_RIGHT_TOP:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMin slice');
 				break;
 
-			case 'left_center':
+			case self::RESIZE_LEFT_CENTER:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMid slice');
 				break;
 
-			case 'center_center':
+			case self::RESIZE_CENTER:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMid slice');
 				break;
 
-			case 'right_center':
+			case self::RESIZE_RIGHT_CENTER:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMid slice');
 				break;
 
-			case 'left_bottom':
+			case self::RESIZE_LEFT_BOTTOM:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMinYMax slice');
 				break;
 
-			case 'center_bottom':
+			case self::RESIZE_CENTER_BOTTOM:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMidYMax slice');
 				break;
 
-			case 'right_bottom':
+			case self::RESIZE_RIGHT_BOTTOM:
 				$svgElement->setAttribute('preserveAspectRatio', 'xMaxYMax slice');
 				break;
 		}
@@ -451,47 +451,47 @@ class Image
 			// Advanced crop modes
 			switch ($mode)
 			{
-				case 'left_top':
+				case self::RESIZE_LEFT_TOP:
 					$intPositionX = 0;
 					$intPositionY = 0;
 					break;
 
-				case 'center_top':
+				case self::RESIZE_CENTER_TOP:
 					$intPositionX = -intval(($intWidth - $width) / 2);
 					$intPositionY = 0;
 					break;
 
-				case 'right_top':
+				case self::RESIZE_RIGHT_TOP:
 					$intPositionX = -intval($intWidth - $width);
 					$intPositionY = 0;
 					break;
 
-				case 'left_center':
+				case self::RESIZE_LEFT_CENTER:
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 					break;
 
-				case 'center_center':
+				case self::RESIZE_CENTER:
 					$intPositionX = -intval(($intWidth - $width) / 2);
 					$intPositionY = -intval(($intHeight - $height) / 2);
 					break;
 
-				case 'right_center':
+				case self::RESIZE_RIGHT_CENTER:
 					$intPositionX = -intval($intWidth - $width);
 					$intPositionY = -intval(($intHeight - $height) / 2);
 					break;
 
-				case 'left_bottom':
+				case self::RESIZE_LEFT_BOTTOM:
 					$intPositionX = 0;
 					$intPositionY = -intval($intHeight - $height);
 					break;
 
-				case 'center_bottom':
+				case self::RESIZE_CENTER_BOTTOM:
 					$intPositionX = -intval(($intWidth - $width) / 2);
 					$intPositionY = -intval($intHeight - $height);
 					break;
 
-				case 'right_bottom':
+				case self::RESIZE_RIGHT_BOTTOM:
 					$intPositionX = -intval($intWidth - $width);
 					$intPositionY = -intval($intHeight - $height);
 					break;
