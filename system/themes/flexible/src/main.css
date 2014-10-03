@@ -1194,12 +1194,6 @@ ul.sortable li:hover .dirname {
 a.navigation.article {
 	background-image:url("images/article.gif");
 }
-a.navigation.news {
-	background-image:url("images/news.gif");
-}
-a.navigation.flash {
-	background-image:url("images/flash.gif");
-}
 a.navigation.form {
 	background-image:url("images/form.gif");
 }
@@ -1319,14 +1313,6 @@ a.navigation {
 }
 .header_sync {
 	background-image:url("images/sync.gif");
-}
-
-/* News icons */
-.tl_news_published,.tl_news_unpublished {
-	padding:2px 0 3px 24px;
-}
-.tl_news_published {
-	background:url("images/news.gif") no-repeat left center;
 }
 
 /* Visual hint for TRBL fields - thanks to Eugene Rybyakov */

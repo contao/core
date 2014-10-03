@@ -292,11 +292,6 @@ source_file = system/modules/news/languages/en/tl_news_archive.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_news_archive.xlf
 
-[contao.v3_4-news-tl_news_comments]
-source_file = system/modules/news/languages/en/tl_news_comments.xlf
-source_lang = en
-file_filter = system/modules/news/languages/<lang>/tl_news_comments.xlf
-
 [contao.v3_4-news-tl_news_feed]
 source_file = system/modules/news/languages/en/tl_news_feed.xlf
 source_lang = en
