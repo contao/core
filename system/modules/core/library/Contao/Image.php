@@ -52,6 +52,22 @@ class Image
 {
 
 	/**
+	 * Resize mode constants
+	 */
+	const RESIZE_PROPORTIONAL	= 'proportional';
+	const RESIZE_BOX			= 'box';
+	const RESIZE_LEFT_TOP		= 'left_top';
+	const RESIZE_LEFT_CENTER	= 'left_center';
+	const RESIZE_LEFT_BOTTOM	= 'left_bottom';
+	const RESIZE_RIGHT_TOP		= 'right_top';
+	const RESIZE_RIGHT_CENTER	= 'right_center';
+	const RESIZE_RIGHT_BOTTOM	= 'right_bottom';
+	const RESIZE_CENTER_TOP		= 'center_top';
+	const RESIZE_CENTER			= 'center_center';
+	const RESIZE_CENTER_BOTTOM	= 'center_bottom';
+
+
+	/**
 	 * Resize or crop an image and replace the original with the resized version
 	 *
 	 * @param string  $image  The image path
