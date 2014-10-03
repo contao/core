@@ -149,7 +149,7 @@ class PageRegular extends \Frontend
 		// Mark RTL languages (see #7171)
 		if ($GLOBALS['TL_LANG']['MSC']['textDirection'] == 'rtl')
 		{
-			$this->Template->direction = ' dir="rtl"';
+			$this->Template->isRTL = true;
 		}
 
 		// HOOK: modify the page or layout object
@@ -457,7 +457,7 @@ class PageRegular extends \Frontend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
-		$this->Template->direction = '';
+		$this->Template->isRTL = false;
 	}
 
 
