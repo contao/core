@@ -284,11 +284,24 @@ class File extends \System
 						elseif ($svgElement->getAttribute('viewBox'))
 						{
 							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
-							$this->arrImageSize = array($svgViewBox[2], $svgViewBox[3]);
+							$this->arrImageSize = array
+							(
+								\Image::getPixelValue($svgViewBox[2]),
+								\Image::getPixelValue($svgViewBox[3])
+							);
+						}
+
+						if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
+						{
+							$this->arrImageSize[2] = 0;  // Replace this with IMAGETYPE_SVG when it becomes available
+							$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
+							$this->arrImageSize['bits'] = 8;
+							$this->arrImageSize['channels'] = 3;
+							$this->arrImageSize['mime'] = $this->getMimeType();
 						}
 						else
 						{
-							$this->arrImageSize = array(0, 0);
+							$this->arrImageSize = false;
 						}
 					}
 				}
@@ -316,19 +329,11 @@ class File extends \System
 				break;
 
 			case 'channels':
-				if (empty($this->arrImageSize))
-				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-				}
-				return $this->arrImageSize['channels'];
+				return $this->imageSize['channels'];
 				break;
 
 			case 'bits':
-				if (empty($this->arrImageSize))
-				{
-					$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
-				}
-				return $this->arrImageSize['bits'];
+				return $this->imageSize['bits'];
 				break;
 
 			case 'isRgbImage':
