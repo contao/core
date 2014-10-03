@@ -2012,6 +2012,175 @@ var Backend =
 				}
 			});
 		});
+	},
+
+	/**
+	 * Update the fields of the imageSize widget upon change
+	 */
+	enableImageSizeWidgets: function() {
+		$$('.tl_image_size').each(function(el) {
+			var select = el.getElement('select'),
+				widthInput = el.getChildren('input')[0],
+				heightInput = el.getChildren('input')[1],
+				update = function() {
+					if (select.get('value').toInt().toString() === select.get('value')) {
+						widthInput.readOnly = true;
+						heightInput.readOnly = true;
+						var dimensions = $(select.getSelected()[0]).get('text');
+						dimensions = dimensions.split('(').length > 1
+							? dimensions.split('(').getLast().split(')')[0].split('x')
+							: ['', ''];
+						widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
+						heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
+					}
+					else {
+						widthInput.set('placeholder', '');
+						heightInput.set('placeholder', '');
+						widthInput.readOnly = false;
+						heightInput.readOnly = false;
+					}
+				};
+
+			update();
+			select.addEvent('change', update);
+			select.addEvent('keyup', update);
+		});
+	},
+
+	/**
+	 * Allow to mark the important part of an image
+	 *
+	 * @param {object} el The DOM element
+	 */
+	editPreviewWizard: function(el) {
+		el = $(el);
+		var imageElement = el.getElement('img'),
+			inputElements = {},
+			isDrawing = false,
+			originalWidth = el.get('data-original-width'),
+			originalHeight = el.get('data-original-height'),
+			partElement, startPos,
+			getScale = function() {
+				return imageElement.getComputedSize().width / originalWidth;
+			},
+			updateImage = function() {
+				var scale = getScale(),
+					imageSize = imageElement.getComputedSize();
+				partElement.setStyles({
+					top: imageSize.computedTop + (inputElements.y.get('value') * scale).round() + 'px',
+					left: imageSize.computedLeft + (inputElements.x.get('value') * scale).round() + 'px',
+					width: (inputElements.width.get('value') * scale).round() + 'px',
+					height: (inputElements.height.get('value') * scale).round() + 'px'
+				});
+				if (!inputElements.width.get('value').toInt() || !inputElements.height.get('value').toInt()) {
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+			},
+			updateValues = function() {
+				var scale = getScale(),
+					styles = partElement.getStyles('top', 'left', 'width', 'height'),
+					imageSize = imageElement.getComputedSize(),
+					values = {
+						x: Math.max(0, Math.min(originalWidth, (styles.left.toFloat() - imageSize.computedLeft) / scale)).round(),
+						y: Math.max(0, Math.min(originalHeight, (styles.top.toFloat() - imageSize.computedTop) / scale)).round()
+					};
+				values.width = Math.min(originalWidth - values.x, styles.width.toFloat() / scale).round();
+				values.height = Math.min(originalHeight - values.y, styles.height.toFloat() / scale).round();
+				if (!values.width || !values.height) {
+					values.x = values.y = values.width = values.height = '';
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+				Object.each(values, function(value, key) {
+					inputElements[key].set('value', value);
+				});
+			},
+			start = function(event) {
+				event.preventDefault();
+				if (isDrawing) {
+					return;
+				}
+				isDrawing = true;
+				startPos = {
+					x: event.page.x - el.getPosition().x - imageElement.getComputedSize().computedLeft,
+					y: event.page.y - el.getPosition().y - imageElement.getComputedSize().computedTop
+				};
+				move(event);
+			},
+			move = function(event) {
+				if (!isDrawing) {
+					return;
+				}
+				event.preventDefault();
+				var imageSize = imageElement.getComputedSize();
+				var rect = {
+					x: [
+						Math.max(0, Math.min(imageSize.width, startPos.x)),
+						Math.max(0, Math.min(imageSize.width, event.page.x - el.getPosition().x - imageSize.computedLeft))
+					],
+					y: [
+						Math.max(0, Math.min(imageSize.height, startPos.y)),
+						Math.max(0, Math.min(imageSize.height, event.page.y - el.getPosition().y - imageSize.computedTop))
+					]
+				};
+				partElement.setStyles({
+					top: Math.min(rect.y[0], rect.y[1]) + imageSize.computedTop + 'px',
+					left: Math.min(rect.x[0], rect.x[1]) + imageSize.computedLeft + 'px',
+					width: Math.abs(rect.x[0] - rect.x[1]) + 'px',
+					height: Math.abs(rect.y[0] - rect.y[1]) + 'px'
+				});
+				updateValues();
+			},
+			stop = function(event) {
+				move(event);
+				isDrawing = false;
+			},
+			init = function() {
+				var box = el.getParent().getNext('.tl_box');
+				if (!box) {
+					box = el.getParent();
+				}
+				box.getElements('input[name^="importantPart"]').each(function(input) {
+					['x', 'y', 'width', 'height'].each(function(key) {
+						if (input.get('name').substr(13, key.length) === key.capitalize()) {
+							inputElements[key] = input = $(input);
+						}
+					});
+				});
+				if (Object.getLength(inputElements) !== 4) {
+					return;
+				}
+				if (box.get('class') === 'tl_box') {
+					box.setStyle('display', 'none');
+				} else {
+					Object.each(inputElements, function(input) {
+						input.getParent().setStyle('display', 'none');
+					});
+				}
+				el.addClass('tl_edit_preview_enabled');
+				partElement = new Element('div', {
+					'class': 'tl_edit_preview_important_part'
+				}).inject(el);
+				updateImage();
+				imageElement.addEvent('load', updateImage);
+				el.addEvents({
+					mousedown: start,
+					touchstart: start
+				});
+				$(document.documentElement).addEvents({
+					mousemove: move,
+					touchmove: move,
+					mouseup: stop,
+					touchend: stop,
+					touchcancel: stop,
+					resize: updateImage
+				});
+			};
+
+		window.addEvent('domready', init);
 	}
 };
 
@@ -2033,6 +2202,7 @@ window.addEvent('domready', function() {
 	Backend.addInteractiveHelp();
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -2054,6 +2224,7 @@ window.addEvent('load', function() {
 window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {

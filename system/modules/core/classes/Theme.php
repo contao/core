@@ -95,11 +95,13 @@ class Theme extends \Backend
 			// Store the field names of the theme tables
 			$arrDbFields = array
 			(
-				'tl_theme'       => $this->Database->getFieldNames('tl_theme'),
-				'tl_style_sheet' => $this->Database->getFieldNames('tl_style_sheet'),
-				'tl_style'       => $this->Database->getFieldNames('tl_style'),
-				'tl_module'      => $this->Database->getFieldNames('tl_module'),
-				'tl_layout'      => $this->Database->getFieldNames('tl_layout')
+				'tl_theme'           => $this->Database->getFieldNames('tl_theme'),
+				'tl_style_sheet'     => $this->Database->getFieldNames('tl_style_sheet'),
+				'tl_style'           => $this->Database->getFieldNames('tl_style'),
+				'tl_module'          => $this->Database->getFieldNames('tl_module'),
+				'tl_layout'          => $this->Database->getFieldNames('tl_layout'),
+				'tl_image_size'      => $this->Database->getFieldNames('tl_image_size'),
+				'tl_image_size_item' => $this->Database->getFieldNames('tl_image_size_item')
 			);
 
 			// Proceed
@@ -200,7 +202,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
@@ -397,12 +399,14 @@ class Theme extends \Backend
 			// Lock the tables
 			$arrLocks = array
 			(
-				'tl_files'       => 'WRITE',
-				'tl_layout'      => 'WRITE',
-				'tl_module'      => 'WRITE',
-				'tl_style_sheet' => 'WRITE',
-				'tl_style'       => 'WRITE',
-				'tl_theme'       => 'WRITE',
+				'tl_files'           => 'WRITE',
+				'tl_layout'          => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_style_sheet'     => 'WRITE',
+				'tl_style'           => 'WRITE',
+				'tl_theme'           => 'WRITE',
+				'tl_image_size'      => 'WRITE',
+				'tl_image_size_item' => 'WRITE'
 			);
 
 			$this->Database->lockTables($arrLocks);
@@ -413,6 +417,8 @@ class Theme extends \Backend
 			$tl_style = $this->Database->getNextId('tl_style');
 			$tl_module = $this->Database->getNextId('tl_module');
 			$tl_layout = $this->Database->getNextId('tl_layout');
+			$tl_image_size = $this->Database->getNextId('tl_image_size');
+			$tl_image_size_item = $this->Database->getNextId('tl_image_size_item');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -421,7 +427,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
@@ -471,6 +477,10 @@ class Theme extends \Backend
 							if ($table == 'tl_style')
 							{
 								$value = $arrMapper['tl_style_sheet'][$value];
+							}
+							elseif ($table == 'tl_image_size_item')
+							{
+								$value = $arrMapper['tl_image_size'][$value];
 							}
 							else
 							{
@@ -597,6 +607,22 @@ class Theme extends \Backend
 							}
 						}
 
+						// Adjust the imageSize widget data
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'imageSize')
+						{
+							$imageSizes = deserialize($value, true);
+
+							if (!empty($imageSizes))
+							{
+								if (is_numeric($imageSizes[2]))
+								{
+									$imageSizes[2] = $arrMapper['tl_image_size'][$imageSizes[2]];
+								}
+							}
+
+							$value = serialize($imageSizes);
+						}
+
 						$set[$name] = $value;
 					}
 
@@ -683,6 +709,7 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
 
@@ -875,6 +902,45 @@ class Theme extends \Backend
 		while ($objLayout->next())
 		{
 			$this->addDataRow($xml, $table, $objLayout, $arrOrder);
+		}
+	}
+
+
+	/**
+	 * Add the table tl_image_size
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database\Result
+	 */
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	{
+		// Add the tables
+		$imageSizeTable = $xml->createElement('table');
+		$imageSizeTable->setAttribute('name', 'tl_image_size');
+		$imageSizeTable = $tables->appendChild($imageSizeTable);
+
+		$imageSizeItemTable = $xml->createElement('table');
+		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
+		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
+
+		// Get all sizes
+		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
+								   ->execute($objTheme->id);
+
+		// Add the rows
+		while ($objSizes->next())
+		{
+			$this->addDataRow($xml, $imageSizeTable, $objSizes);
+
+			// Get all size items
+			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
+										   ->execute($objSizes->id);
+
+			// Add the rows
+			while ($objSizeItems->next())
+			{
+				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems);
+			}
 		}
 	}
 

@@ -325,7 +325,8 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$arrTables = (array) $arrModule['tables'];
+		$strTable = \Input::get('table') ?: $arrTables[0];
 		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
@@ -360,7 +361,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array)$arrModule['tables']))
+			if (!in_array($strTable, $arrTables))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -421,7 +422,7 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
@@ -482,52 +483,91 @@ abstract class Backend extends \Controller
 					break;
 			}
 
-			// Correctly add the theme name in the style sheets module
-			if (strncmp($strTable, 'tl_style', 8) === 0)
+			$strFirst = null;
+			$strSecond = null;
+
+			// Handle child child tables (e.g. tl_style)
+			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
 			{
-				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select')
+				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+
+				if (in_array($ptable, $arrTables))
 				{
-					if ($strTable == 'tl_style_sheet')
+					$this->loadDataContainer($ptable);
+
+					if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=?";
+						$ftable = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
+
+						if (in_array($ftable, $arrTables))
+						{
+							$strFirst = $ftable;
+							$strSecond = $ptable;
+						}
+					}
+				}
+			}
+
+			// Build the breadcrumb trail
+			if ($strFirst !== null && $strSecond !== null)
+			{
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select' || \Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
+				{
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=?";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 				}
 				else
 				{
-					if ($strTable == 'tl_style_sheet')
+					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
 					}
 				}
 
+				// Add the first level name
 				$objRow = $this->Database->prepare($strQuery)
 										 ->limit(1)
 										 ->execute($dc->id);
 
-				$this->Template->headline .= ' » ' . $objRow->name;
-				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
-
-				if ($strTable == 'tl_style')
+				if ($objRow->title != '')
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->name;
+				}
 
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+
+				// Add the second level name
+				$objRow = $this->Database->prepare("SELECT name FROM $strSecond WHERE id=?")
+										 ->limit(1)
+										 ->execute(CURRENT_ID);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 			}
 			else
 			{
 				// Add the name of the parent element
-				if ($strTable && in_array($strTable, $arrModule['tables']) && $strTable != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrTables) && $strTable != $arrTables[0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{

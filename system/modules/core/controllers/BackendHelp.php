@@ -126,11 +126,21 @@ class BackendHelp extends \Backend
 			$rows = array();
 			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
 
+			// Unset the predefined image sizes
+			unset($options['image_sizes']);
+
 			foreach ($options as $key=>$option)
 			{
 				if (is_array($option))
 				{
-					$rows[] = array('headspan', $arrData['reference'][$key]);
+					if (is_array($arrData['reference'][$key]))
+					{
+						$rows[] = array('headspan', $arrData['reference'][$key][0]);
+					}
+					else
+					{
+						$rows[] = array('headspan', $arrData['reference'][$key]);
+					}
 
 					foreach ($option as $opt)
 					{

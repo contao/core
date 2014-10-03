@@ -5,6 +5,9 @@ Version 3.4.0-beta1 (2014-10-XX)
 --------------------------------
 
 ### New
+Support responsive images and the `<picture>` element (see #7296).
+
+### New
 Added the "compareThemeFiles", "extractThemeFiles" and "exportTheme" hooks.
 
 ### Improved

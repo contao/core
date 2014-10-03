@@ -752,6 +752,9 @@
       <trans-unit id="MSC.aw_new">
         <source>Add language</source>
       </trans-unit>
+      <trans-unit id="MSC.image_sizes">
+        <source>Predefined dimensions</source>
+      </trans-unit>
       <trans-unit id="MSC.relative">
         <source>Relative dimensions</source>
       </trans-unit>
@@ -767,8 +770,11 @@
       <trans-unit id="MSC.box.1">
         <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
       </trans-unit>
-      <trans-unit id="MSC.crop">
+      <trans-unit id="MSC.crop.0">
         <source>Exact dimensions</source>
+      </trans-unit>
+      <trans-unit id="MSC.crop.1">
+        <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
       </trans-unit>
       <trans-unit id="MSC.left_top.0">
         <source>Left | Top</source>

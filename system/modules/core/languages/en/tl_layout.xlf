@@ -284,6 +284,12 @@
       <trans-unit id="tl_layout.mootools.1">
         <source>Here you can select one or more MooTools templates.</source>
       </trans-unit>
+      <trans-unit id="tl_layout.addPicturefill.0">
+        <source>Include picturefill.js</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.addPicturefill.1">
+        <source>Include the picturefill.js script (responsive images).</source>
+      </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>
       </trans-unit>
@@ -342,7 +348,7 @@
         <source>Expert settings</source>
       </trans-unit>
       <trans-unit id="tl_layout.script_legend">
-        <source>Script settings</source>
+        <source>JavaScript</source>
       </trans-unit>
       <trans-unit id="tl_layout.static_legend">
         <source>Static layout</source>

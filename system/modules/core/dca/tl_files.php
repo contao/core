@@ -27,6 +27,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			array('tl_files', 'checkPermission'),
 			array('tl_files', 'addBreadcrumb'),
+			array('tl_files', 'checkImportantPart')
 		),
 		'sql' => array
 		(
@@ -119,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,protected;meta'
+		'default'                     => 'name,protected;importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
 	),
 
 	// Fields
@@ -181,6 +182,34 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['protected'],
 			'input_field_callback'    => array('tl_files', 'protectFolder'),
 			'eval'                    => array('tl_class'=>'w50 m12')
+		),
+		'importantPartX' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartX'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50 clr'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartY' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartY'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartWidth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartWidth'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'importantPartHeight' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['importantPartHeight'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) NOT NULL default '0'"
 		),
 		'meta' => array
 		(
@@ -376,6 +405,24 @@ class tl_files extends Backend
 	public function addBreadcrumb()
 	{
 		Backend::addFilesBreadcrumb();
+	}
+
+
+	/**
+	 * Only show the important part fields for images
+	 * @param DataContainer
+	 */
+	public function checkImportantPart(DataContainer $dc)
+	{
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(pathinfo($dc->id, PATHINFO_EXTENSION), trimsplit(',', Config::get('validImageTypes'))))
+		{
+			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(';importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
+		}
 	}
 
 
