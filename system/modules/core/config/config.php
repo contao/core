@@ -354,13 +354,13 @@ $GLOBALS['TL_CROP'] = array
 (
 	'relative' => array
 	(
-		'proportional', 'box'
+		\Contao\Image::RESIZE_PROPORTIONAL, \Contao\Image::RESIZE_BOX
 	),
 	'crop' => array
 	(
-		'left_top',    'center_top',    'right_top',
-		'left_center', 'center_center', 'right_center',
-		'left_bottom', 'center_bottom', 'right_bottom'
+		\Contao\Image::RESIZE_LEFT_TOP,    \Contao\Image::RESIZE_CENTER_TOP,    \Contao\Image::RESIZE_RIGHT_TOP,
+		\Contao\Image::RESIZE_LEFT_CENTER, \Contao\Image::RESIZE_CENTER,        \Contao\Image::RESIZE_RIGHT_CENTER,
+		\Contao\Image::RESIZE_LEFT_BOTTOM, \Contao\Image::RESIZE_CENTER_BOTTOM, \Contao\Image::RESIZE_RIGHT_BOTTOM
 	)
 );
 
