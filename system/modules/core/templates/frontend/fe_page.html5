@@ -29,7 +29,7 @@
 <body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 
   <?php $this->block('body'); ?>
-    <?php echo $this->sections('top'); ?>
+    <?php $this->sections('top'); ?>
 
     <div id="wrapper">
 
@@ -43,7 +43,7 @@
         <?php endif; ?>
       <?php $this->endblock(); ?>
 
-      <?php echo $this->sections('before'); ?>
+      <?php $this->sections('before'); ?>
 
       <?php $this->block('container'); ?>
         <div id="container">
@@ -53,7 +53,7 @@
               <div class="inside">
                 <?php echo $this->main; ?>
               </div>
-              <?php echo $this->sections('main'); ?>
+              <?php $this->sections('main'); ?>
             </div>
           <?php $this->endblock(); ?>
 
@@ -80,7 +80,7 @@
         </div>
       <?php $this->endblock(); ?>
 
-      <?php echo $this->sections('after'); ?>
+      <?php $this->sections('after'); ?>
 
       <?php $this->block('footer'); ?>
         <?php if ($this->footer): ?>
@@ -94,7 +94,7 @@
 
     </div>
 
-    <?php echo $this->sections('bottom'); ?>
+    <?php $this->sections('bottom'); ?>
   <?php $this->endblock(); ?>
 
   <?php echo $this->mootools; ?>

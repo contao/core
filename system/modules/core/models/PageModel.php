@@ -404,7 +404,8 @@ class PageModel extends \Model
 	/**
 	 * Find the language fallback page by hostname
 	 *
-	 * @param string $strHost The hostname
+	 * @param string $strHost    The hostname
+	 * @param array  $arrOptions An optional options array
 	 *
 	 * @return \Model|null The page model or null if there is not fallback page
 	 */

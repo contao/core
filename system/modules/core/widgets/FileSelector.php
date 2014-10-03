@@ -360,7 +360,7 @@ class FileSelector extends \Widget
 					{
 						$_height = ($objFile->height < 70) ? $objFile->height : 70;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
-						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px -19px">';
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
 					}
 				}
 

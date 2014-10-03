@@ -127,8 +127,6 @@ class FrontendTemplate extends \Template
 	 *
 	 * @param string $key      The section name
 	 * @param string $template An optional template name
-	 *
-	 * @return string The section markup
 	 */
 	public function section($key, $template=null)
 	{
@@ -149,20 +147,18 @@ class FrontendTemplate extends \Template
 	 *
 	 * @param string $key      An optional section name
 	 * @param string $template An optional template name
-	 *
-	 * @return string The section markup
 	 */
 	public function sections($key=null, $template=null)
 	{
 		if (empty($this->sections))
 		{
-			return '';
+			return;
 		}
 
 		// The key does not match
 		if ($key && $this->sPosition != $key)
 		{
-			return '';
+			return;
 		}
 
 		// Use the section tag in HTML5
