@@ -81,12 +81,15 @@ class BackendPage extends \Backend
 		$objDca->field = $strField;
 
 		// Set the active record
-		$strModel = \Model::getClassFromTable($strTable);
-		$objModel = $strModel::findByPk(\Input::get('id'));
-
-		if ($objModel !== null)
+		if ($this->Database->tableExists($strTable))
 		{
-			$objDca->activeRecord = $objModel;
+			$strModel = \Model::getClassFromTable($strTable);
+			$objModel = $strModel::findByPk(\Input::get('id'));
+
+			if ($objModel !== null)
+			{
+				$objDca->activeRecord = $objModel;
+			}
 		}
 
 		// AJAX request
