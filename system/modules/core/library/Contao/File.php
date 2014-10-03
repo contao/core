@@ -284,6 +284,7 @@ class File extends \System
 						elseif ($svgElement->getAttribute('viewBox'))
 						{
 							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
+
 							$this->arrImageSize = array
 							(
 								\Image::getPixelValue($svgViewBox[2]),
