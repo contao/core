@@ -698,11 +698,11 @@ abstract class Controller extends \System
 			$tag = array_shift($flags);
 			$elements = explode('::', $tag);
 
-            if (isset($GLOBALS['TL_INSERTTAG_FLAGS'][$elements[0]]))
-            {
-                $flags = array_merge($GLOBALS['TL_INSERTTAG_FLAGS'][$elements[0]], $flags);
-                $flags = array_unique($flags);
-            }
+			if (isset($GLOBALS['TL_INSERTTAG_FLAGS'][$elements[0]]))
+			{
+				$flags = array_merge($GLOBALS['TL_INSERTTAG_FLAGS'][$elements[0]], $flags);
+				$flags = array_unique($flags);
+			}
 
 			// Load the value from cache
 			if (isset($arrCache[$strTag]) && !in_array('refresh', $flags))
