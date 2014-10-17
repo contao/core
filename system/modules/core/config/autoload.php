@@ -148,6 +148,7 @@ ClassLoader::addClasses(array
 	'Contao\Filter\SqlFiles'           => 'system/modules/core/library/Contao/Filter/SqlFiles.php',
 	'Contao\Filter\SyncExclude'        => 'system/modules/core/library/Contao/Filter/SyncExclude.php',
 	'Contao\Folder'                    => 'system/modules/core/library/Contao/Folder.php',
+	'Contao\GdImage'                   => 'system/modules/core/library/Contao/GdImage.php',
 	'Contao\Idna'                      => 'system/modules/core/library/Contao/Idna.php',
 	'Contao\Image'                     => 'system/modules/core/library/Contao/Image.php',
 	'Contao\Input'                     => 'system/modules/core/library/Contao/Input.php',

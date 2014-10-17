@@ -512,10 +512,13 @@ class Image
 	 */
 	protected function executeResizeGd()
 	{
-		$strSourceImage = static::getGdImageFromFile($this->fileObj);
+		try
+		{
+			$sourceImage = \GdImage::fromFile($this->fileObj);
+		}
 
 		// The new image could not be created
-		if (!$strSourceImage)
+		catch (\Exception $e)
 		{
 			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
 			$this->resizedPath = '';
@@ -524,15 +527,11 @@ class Image
 		}
 
 		$coordinates = $this->computeResize();
-		$strNewImage = static::createGdImage($coordinates['width'], $coordinates['height']);
+		$newImage = \GdImage::fromDimensions($coordinates['width'], $coordinates['height']);
 
-		imagecopyresampled($strNewImage, $strSourceImage, $coordinates['target_x'], $coordinates['target_y'], 0, 0, $coordinates['target_width'], $coordinates['target_height'], $this->fileObj->width, $this->fileObj->height);
+		$sourceImage->copyTo($newImage, $coordinates['target_x'], $coordinates['target_y'], $coordinates['target_width'], $coordinates['target_height']);
 
-		static::saveGdImageToFile($strNewImage, TL_ROOT . '/' . $this->getCacheName(), $this->fileObj->extension);
-
-		// Destroy the temporary images
-		imagedestroy($strSourceImage);
-		imagedestroy($strNewImage);
+		$newImage->saveToFile(TL_ROOT . '/' . $this->getCacheName());
 
 		return true;
 	}
@@ -937,263 +936,6 @@ class Image
 			'target_width' => (int) round($targetWidth),
 			'target_height' => (int) round($targetHeight),
 		);
-	}
-
-
-	/**
-	 * Create a GD image
-	 *
-	 * @param integer $width  The target width
-	 * @param integer $height The target height
-	 *
-	 * @return resource The GD image
-	 */
-	public static function createGdImage($width, $height)
-	{
-		$gdImage = imagecreatetruecolor($width, $height);
-
-		$arrGdinfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
-
-		// Handle transparency (GDlib >= 2.0 required)
-		if (version_compare($strGdVersion, '2.0', '>='))
-		{
-			imagealphablending($gdImage, false);
-			imagefill($gdImage, 0, 0, imagecolorallocatealpha($gdImage, 0, 0, 0, 127));
-			imagesavealpha($gdImage, true);
-		}
-
-		return $gdImage;
-	}
-
-
-	/**
-	 * Get the GD image representation from a file
-	 *
-	 * @param \File $objFile The file object
-	 *
-	 * @return resource The GD image
-	 */
-	public static function getGdImageFromFile(\File $objFile)
-	{
-		$arrGdinfo = gd_info();
-		$strGdImage = null;
-
-		switch ($objFile->extension)
-		{
-			case 'gif':
-				if (!empty($arrGdinfo['GIF Read Support']))
-				{
-					$strGdImage = imagecreatefromgif(TL_ROOT . '/' . $objFile->path);
-				}
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				if (!empty($arrGdinfo['JPG Support']) || !empty($arrGdinfo['JPEG Support']))
-				{
-					$strGdImage = imagecreatefromjpeg(TL_ROOT . '/' . $objFile->path);
-				}
-				break;
-
-			case 'png':
-				if (!empty($arrGdinfo['PNG Support']))
-				{
-					$strGdImage = imagecreatefrompng(TL_ROOT . '/' . $objFile->path);
-				}
-				break;
-		}
-
-		return $strGdImage;
-	}
-
-
-	/**
-	 * Save a GD image resource to a file
-	 *
-	 * @param resource $strGdImage The GD image
-	 * @param string   $path       The image path
-	 * @param string   $extension  The file extension
-	 */
-	public static function saveGdImageToFile($strGdImage, $path, $extension)
-	{
-		$arrGdinfo = gd_info();
-
-		// Fallback to PNG if GIF ist not supported
-		if ($extension == 'gif' && !$arrGdinfo['GIF Create Support'])
-		{
-			$extension = 'png';
-		}
-
-		// Create the new image
-		switch ($extension)
-		{
-			case 'gif':
-				$strGdImage = static::convertGdImageToPaletteImage($strGdImage);
-				imagegif($strGdImage, $path);
-				break;
-
-			case 'jpg':
-			case 'jpeg':
-				imageinterlace($strGdImage, 1); // see #6529
-				imagejpeg($strGdImage, $path, (\Config::get('jpgQuality') ?: 80));
-				break;
-
-			case 'png':
-				if (static::countGdImageColors($strGdImage, 256) <= 256 && !static::isGdImageSemitransparent($strGdImage))
-				{
-					$strGdImage = static::convertGdImageToPaletteImage($strGdImage);
-				}
-				imagepng($strGdImage, $path);
-				break;
-		}
-	}
-
-
-	/**
-	 * Convert a true color image to a palette image with 256 colors and preserve transparency
-	 *
-	 * @param resource $image The GD true color image
-	 *
-	 * @return resource The GD palette image
-	 */
-	public static function convertGdImageToPaletteImage($image)
-	{
-		$width = imagesx($image);
-		$height = imagesy($image);
-
-		$transparentColor = null;
-
-		if (static::countGdImageColors($image, 256) <= 256)
-		{
-			$paletteImage = imagecreate($width, $height);
-			$colors = array();
-			$isTransparent = false;
-
-			for ($x = 0; $x < $width; $x++)
-			{
-				for ($y = 0; $y < $height; $y++)
-				{
-					$color = imagecolorat($image, $x, $y);
-
-					// Check if the pixel is fully transparent
-					if ((($color >> 24) & 0x7F) === 127)
-					{
-						$isTransparent = true;
-					}
-					else
-					{
-						$colors[$color & 0xFFFFFF] = true;
-					}
-				}
-			}
-
-			$colors = array_keys($colors);
-
-			foreach ($colors as $index => $color)
-			{
-				imagecolorset($paletteImage, $index, ($color >> 16) & 0xFF, ($color >> 8) & 0xFF, $color & 0xFF);
-			}
-
-			if ($isTransparent)
-			{
-				$transparentColor = imagecolorallocate($paletteImage, 0, 0, 0);
-				imagecolortransparent($paletteImage, $transparentColor);
-			}
-
-			imagecopy($paletteImage, $image, 0, 0, 0, 0, $width, $height);
-		}
-		else
-		{
-			$paletteImage = imagecreatetruecolor($width, $height);
-			imagealphablending($paletteImage, false);
-			imagesavealpha($paletteImage, true);
-			imagecopy($paletteImage, $image, 0, 0, 0, 0, $width, $height);
-
-			// 256 minus 1 for the transparent color
-			imagetruecolortopalette($paletteImage, false, 255);
-			$transparentColor = imagecolorallocate($paletteImage, 0, 0, 0);
-			imagecolortransparent($paletteImage, $transparentColor);
-		}
-
-		if ($transparentColor !== null)
-		{
-			// Fix fully transparent pixels
-			for ($x = 0; $x < $width; $x++)
-			{
-				for ($y = 0; $y < $height; $y++)
-				{
-					// Check if the pixel is fully transparent
-					if (((imagecolorat($image, $x, $y) >> 24) & 0x7F) === 127)
-					{
-						imagefilledrectangle($paletteImage, $x, $y, $x, $y, $transparentColor);
-					}
-				}
-			}
-		}
-
-		return $paletteImage;
-	}
-
-
-	/**
-	 * Count the number of colors in a true color image
-	 *
-	 * @param resource $image The image path
-	 * @param integer  $max   Stop parsing the image if more colors than $max were found
-	 *
-	 * @return integer The number of image colors
-	 */
-	public static function countGdImageColors($image, $max = null)
-	{
-		$colors = array();
-		$width = imagesx($image);
-		$height = imagesy($image);
-
-		for ($x = 0; $x < $width; $x++)
-		{
-			for ($y = 0; $y < $height; $y++)
-			{
-				$colors[imagecolorat($image, $x, $y)] = true;
-
-				if ($max !== null && count($colors) > $max)
-				{
-					break 2;
-				}
-			}
-		}
-
-		return count($colors);
-	}
-
-
-	/**
-	 * Detect if the image contains semitransparent pixels
-	 *
-	 * @param resource $image The image path
-	 *
-	 * @return boolean True if the image contains semitransparent pixels
-	 */
-	public static function isGdImageSemitransparent($image)
-	{
-		$width = imagesx($image);
-		$height = imagesy($image);
-
-		for ($x = 0; $x < $width; $x++)
-		{
-			for ($y = 0; $y < $height; $y++)
-			{
-				// Check if the pixel is semitransparent
-				$alpha = (imagecolorat($image, $x, $y) >> 24) & 0x7F;
-
-				if ($alpha > 0 && $alpha < 127)
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
 	}
 
 
