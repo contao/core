@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Faq
  * @link    https://contao.org
@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Class ModuleFaqPage
  *
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Faq
  */
@@ -79,7 +79,7 @@ class ModuleFaqPage extends \Module
 		}
 
 		global $objPage;
-		$arrFaq = array_fill_keys($this->faq_categories, array());
+		$arrFaqs = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs
 		while ($objFaq->next())
@@ -89,33 +89,36 @@ class ModuleFaqPage extends \Module
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objFaq->answer = \String::toXhtml($objFaq->answer);
+				$objTemp->answer = \String::toXhtml($objFaq->answer);
 			}
 			else
 			{
-				$objFaq->answer = \String::toHtml5($objFaq->answer);
+				$objTemp->answer = \String::toHtml5($objFaq->answer);
 			}
 
-			$objTemp->answer = \String::encodeEmail($objFaq->answer);
+			$objTemp->answer = \String::encodeEmail($objTemp->answer);
 			$objTemp->addImage = false;
 
 			// Add an image
 			if ($objFaq->addImage && $objFaq->singleSRC != '')
 			{
-				if (!is_numeric($objFaq->singleSRC))
-				{
-					$objTemp->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+				$objModel = \FilesModel::findByUuid($objFaq->singleSRC);
 
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($objFaq->singleSRC))
 					{
-						$objFaq->singleSRC = $objModel->path;
-						$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
-						$this->addImageToTemplate($objTemp, $objFaq->row(), null, $strLightboxId);
+						$objTemp->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 					}
+				}
+				elseif (is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					// Do not override the field now that we have a model registry (see #6303)
+					$arrFaq = $objFaq->row();
+					$arrFaq['singleSRC'] = $objModel->path;
+					$strLightboxId = 'lightbox[' . substr(md5('mod_faqpage_' . $objFaq->id), 0, 6) . ']'; // see #5810
+
+					$this->addImageToTemplate($objTemp, $arrFaq, null, $strLightboxId);
 				}
 			}
 
@@ -129,29 +132,33 @@ class ModuleFaqPage extends \Module
 
 			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
 
+			// Get the FAQ category
+			$objPid = $objFaq->getRelated('pid');
+
 			// Order by PID
-			$arrFaq[$objFaq->pid]['items'][] = $objTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaqs[$objFaq->pid]['items'][] = $objTemp;
+			$arrFaqs[$objFaq->pid]['headline'] = $objPid->headline;
+			$arrFaqs[$objFaq->pid]['title'] = $objPid->title;
 		}
 
-		$arrFaq = array_values(array_filter($arrFaq));
-		$limit_i = count($arrFaq) - 1;
+		$arrFaqs = array_values(array_filter($arrFaqs));
+		$limit_i = count($arrFaqs) - 1;
 
 		// Add classes first, last, even and odd
 		for ($i=0; $i<=$limit_i; $i++)
 		{
 			$class = (($i == 0) ? 'first ' : '') . (($i == $limit_i) ? 'last ' : '') . (($i%2 == 0) ? 'even' : 'odd');
-			$arrFaq[$i]['class'] = trim($class);
-			$limit_j = count($arrFaq[$i]['items']) - 1;
+			$arrFaqs[$i]['class'] = trim($class);
+			$limit_j = count($arrFaqs[$i]['items']) - 1;
 
 			for ($j=0; $j<=$limit_j; $j++)
 			{
 				$class = (($j == 0) ? 'first ' : '') . (($j == $limit_j) ? 'last ' : '') . (($j%2 == 0) ? 'even' : 'odd');
-				$arrFaq[$i]['items'][$j]->class = trim($class);
+				$arrFaqs[$i]['items'][$j]->class = trim($class);
 			}
 		}
 
-		$this->Template->faq = $arrFaq;
+		$this->Template->faq = $arrFaqs;
 		$this->Template->request = \Environment::get('indexFreeRequest');
 		$this->Template->topLink = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 	}

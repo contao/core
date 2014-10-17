@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentSliderStart
  *
  * Front end content element "slider" (wrapper start).
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -46,12 +46,8 @@ class ContentSliderStart extends \ContentElement
 			$this->Template = new \BackendTemplate($this->strTemplate);
 			$this->Template->title = $this->headline;
 		}
-		else
-		{
-			$this->strTemplate = 'ce_slider_start';
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-			$this->Template->config = $this->sliderDelay . ',' . $this->sliderSpeed . ',' . $this->sliderStartSlide . ',' . $this->sliderContinuous;
-		}
+
+		// Slider configuration
+		$this->Template->config = $this->sliderDelay . ',' . $this->sliderSpeed . ',' . $this->sliderStartSlide . ',' . $this->sliderContinuous;
 	}
 }

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -24,28 +24,32 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class ZipWriter
 {
 
 	/**
 	 * File signatur
+	 * @var string
 	 */
 	const FILE_SIGNATURE = "\x50\x4b\x03\x04";
 
 	/**
 	 * Central directory begin marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
 
 	/**
 	 * Central directory end marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_END   = "\x50\x4b\x05\x06";
 
 	/**
 	 * Temp folder path
+	 * @var string
 	 */
 	const TEMPORARY_FOLDER  = 'system/tmp';
 
@@ -281,9 +285,6 @@ class ZipWriter
 			 ($arrTime['seconds'] >> 1)
 		);
 
-		$strTime = '\x' . $hexTime[6] . $hexTime[7] . '\x' . $hexTime[4] . $hexTime[5] . '\x' . $hexTime[2] . $hexTime[3] . '\x' . $hexTime[0] . $hexTime[1];
-		eval('$strTime = "' . $strTime . '";');
-
-		return $strTime;
+		return pack("H*", $hexTime[6] . $hexTime[7] . $hexTime[4] . $hexTime[5] . $hexTime[2] . $hexTime[3] . $hexTime[0] . $hexTime[1]);
 	}
 }

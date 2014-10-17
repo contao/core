@@ -14,6 +14,30 @@
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
       </trans-unit>
+      <trans-unit id="tl_files.importantPartX.0">
+        <source>Important part x coordinate</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartX.1">
+        <source>Here you can enter the x coordinate of the important part.</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.0">
+        <source>Important part y coordinate</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartY.1">
+        <source>Here you can enter the y coordinate of the important part.</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.0">
+        <source>Important part width</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartWidth.1">
+        <source>Here you can enter the width of the important part.</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.0">
+        <source>Important part height</source>
+      </trans-unit>
+      <trans-unit id="tl_files.importantPartHeight.1">
+        <source>Here you can enter the height of the important part.</source>
+      </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>
       </trans-unit>
@@ -58,6 +82,12 @@
       </trans-unit>
       <trans-unit id="tl_files.startUpload">
         <source>Start upload</source>
+      </trans-unit>
+      <trans-unit id="tl_files.dropzone">
+        <source>Click or drop files here to upload</source>
+      </trans-unit>
+      <trans-unit id="tl_files.fileLocation">
+        <source>File location: %s</source>
       </trans-unit>
       <trans-unit id="tl_files.syncAdded">
         <source>Added the file or folder "%s"</source>
@@ -113,6 +143,12 @@
       <trans-unit id="tl_files.delete.1">
         <source>Delete file or folder "%s"</source>
       </trans-unit>
+      <trans-unit id="tl_files.show.0">
+        <source>File or folder details</source>
+      </trans-unit>
+      <trans-unit id="tl_files.show.1">
+        <source>Show the details of file or folder "%s"</source>
+      </trans-unit>
       <trans-unit id="tl_files.source.0">
         <source>Edit file</source>
       </trans-unit>
@@ -148,6 +184,9 @@
       </trans-unit>
       <trans-unit id="tl_files.sync.1">
         <source>Synchronize the file system and the database</source>
+      </trans-unit>
+      <trans-unit id="tl_files.edit_preview_help">
+        <source>Mark the important part of the image with your mouse cursor.</source>
       </trans-unit>
     </body>
   </file>

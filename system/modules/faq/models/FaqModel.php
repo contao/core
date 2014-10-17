@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Faq
  * @link    https://contao.org
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class FaqModel extends \Model
 {
@@ -59,6 +59,33 @@ class FaqModel extends \Model
 		}
 
 		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+	}
+
+
+	/**
+	 * Find all published FAQs by their parent ID
+	 *
+	 * @param int   $intPid     The parent ID
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
+	 */
+	public static function findPublishedByPid($intPid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=?");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$arrColumns[] = "$t.published=1";
+		}
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
 	}
 
 

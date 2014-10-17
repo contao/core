@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -25,7 +25,7 @@ if (Input::get('do') == 'calendar')
  * Class tl_content_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -143,14 +143,14 @@ class tl_content_calendar extends Backend
 		// Invalid ID
 		if ($objCalendar->numRows < 1)
 		{
-			$this->log('Invalid event content element ID ' . $id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid event content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The calendar is not mounted
 		if (!in_array($objCalendar->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, 'tl_content_calendar checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 

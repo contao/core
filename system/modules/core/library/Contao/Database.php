@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -28,7 +28,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Database
 {
@@ -134,15 +134,16 @@ abstract class Database
 	{
 		$arrConfig = array
 		(
-			'dbDriver'   => $GLOBALS['TL_CONFIG']['dbDriver'],
-			'dbHost'     => $GLOBALS['TL_CONFIG']['dbHost'],
-			'dbUser'     => $GLOBALS['TL_CONFIG']['dbUser'],
-			'dbPass'     => $GLOBALS['TL_CONFIG']['dbPass'],
-			'dbDatabase' => $GLOBALS['TL_CONFIG']['dbDatabase'],
-			'dbPconnect' => $GLOBALS['TL_CONFIG']['dbPconnect'],
-			'dbCharset'  => $GLOBALS['TL_CONFIG']['dbCharset'],
-			'dbPort'     => $GLOBALS['TL_CONFIG']['dbPort'],
-			'dbSocket'   => $GLOBALS['TL_CONFIG']['dbSocket']
+			'dbDriver'   => \Config::get('dbDriver'),
+			'dbHost'     => \Config::get('dbHost'),
+			'dbUser'     => \Config::get('dbUser'),
+			'dbPass'     => \Config::get('dbPass'),
+			'dbDatabase' => \Config::get('dbDatabase'),
+			'dbPconnect' => \Config::get('dbPconnect'),
+			'dbCharset'  => \Config::get('dbCharset'),
+			'dbPort'     => \Config::get('dbPort'),
+			'dbSocket'   => \Config::get('dbSocket'),
+			'dbSqlMode'  => \Config::get('dbSqlMode')
 		);
 
 		if (is_array($arrCustom))
@@ -156,7 +157,7 @@ abstract class Database
 
 		if (!isset(static::$arrInstances[$strKey]))
 		{
-			$strClass = 'Database\\' . ucfirst(strtolower($arrConfig['dbDriver']));
+			$strClass = 'Database\\' . str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($arrConfig['dbDriver']))));
 			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 
@@ -187,32 +188,6 @@ abstract class Database
 	public function execute($strQuery)
 	{
 		return $this->prepare($strQuery)->execute();
-	}
-
-
-	/**
-	 * Execute a query and do not cache the result
-	 *
-	 * @param string $strQuery The query string
-	 *
-	 * @return \Database\Result The Database\Result object
-	 */
-	public function executeUncached($strQuery)
-	{
-		return $this->prepare($strQuery)->executeUncached();
-	}
-
-
-	/**
-	 * Always execute the query and add or replace an existing cache entry
-	 *
-	 * @param string $strQuery The query string
-	 *
-	 * @return \Database\Result The Database\Result object
-	 */
-	public function executeCached($strQuery)
-	{
-		return $this->prepare($strQuery)->executeCached();
 	}
 
 
@@ -270,11 +245,11 @@ abstract class Database
 		}
 
 		$arrReturn = array();
-		$arrTables = $this->query(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
+		$objTables = $this->query(sprintf($this->strListTables, $strDatabase));
 
-		foreach ($arrTables as $arrTable)
+		while ($objTables->next())
 		{
-			$arrReturn[] = current($arrTable);
+			$arrReturn[] = current($objTables->row());
 		}
 
 		$this->arrCache[$strDatabase] = $arrReturn;
@@ -599,6 +574,17 @@ abstract class Database
 
 
 	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	public function getUuid()
+	{
+		return $this->get_uuid();
+	}
+
+
+	/**
 	 * Connect to the database server and select the database
 	 */
 	abstract protected function connect();
@@ -707,11 +693,19 @@ abstract class Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */
 	abstract protected function get_next_id($strTable);
+
+
+	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	abstract protected function get_uuid();
 
 
 	/**
@@ -723,4 +717,34 @@ abstract class Database
 	 * @return \Database\Statement The Database\Statement object
 	 */
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
+
+
+	/**
+	 * Execute a query and do not cache the result
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Result The Database\Result object
+	 *
+	 * @deprecated Use \Database::execute() instead
+	 */
+	public function executeUncached($strQuery)
+	{
+		return $this->execute($strQuery);
+	}
+
+
+	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return \Database\Result The Database\Result object
+	 *
+	 * @deprecated Use \Database::execute() instead
+	 */
+	public function executeCached($strQuery)
+	{
+		return $this->execute($strQuery);
+	}
 }

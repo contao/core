@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageRoot
  *
  * Provide methods to handle a website root page.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -43,8 +43,8 @@ class PageRoot extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('No active page found under root page "' . $pageId . '")', 'PageRoot generate()', TL_ERROR);
-			die('No active pages found');
+			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
+			die_nicely('be_no_active', 'No active pages found');
 		}
 
 		if (!$blnReturn)

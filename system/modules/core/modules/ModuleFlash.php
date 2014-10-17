@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleFlash
  *
  * Front end module "flash".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -53,14 +53,16 @@ class ModuleFlash extends \Module
 				return '';
 			}
 
-			if (!is_numeric($this->singleSRC))
+			$objFile = \FilesModel::findByUuid($this->singleSRC);
+
+			if ($objFile === null)
 			{
-				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				if (!\Validator::isUuid($this->singleSRC))
+				{
+					return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
 			}
-
-			$objFile = \FilesModel::findByPk($this->singleSRC);
-
-			if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
+			elseif (!is_file(TL_ROOT . '/' . $objFile->path))
 			{
 				return '';
 			}
@@ -93,7 +95,7 @@ class ModuleFlash extends \Module
 		$this->Template->width = $size[0];
 		$this->Template->height = $size[1];
 
-		$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+		$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 
 		// Adjust movie size
 		if ($intMaxWidth > 0 && $size[0] > $intMaxWidth)

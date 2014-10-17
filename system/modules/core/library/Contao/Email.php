@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -28,7 +28,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Email
 {
@@ -117,12 +117,12 @@ class Email
 	 */
 	public function __construct()
 	{
-		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->strCharset = \Config::get('characterSet');
 
 		// Instantiate mailer
 		if (self::$objMailer === null)
 		{
-			if (!$GLOBALS['TL_CONFIG']['useSMTP'])
+			if (!\Config::get('useSMTP'))
 			{
 				// Mail
 				$objTransport = \Swift_MailTransport::newInstance();
@@ -130,18 +130,18 @@ class Email
 			else
 			{
 				// SMTP
-				$objTransport = \Swift_SmtpTransport::newInstance($GLOBALS['TL_CONFIG']['smtpHost'], $GLOBALS['TL_CONFIG']['smtpPort']);
+				$objTransport = \Swift_SmtpTransport::newInstance(\Config::get('smtpHost'), \Config::get('smtpPort'));
 
 				// Encryption
-				if ($GLOBALS['TL_CONFIG']['smtpEnc'] == 'ssl' || $GLOBALS['TL_CONFIG']['smtpEnc'] == 'tls')
+				if (\Config::get('smtpEnc') == 'ssl' || \Config::get('smtpEnc') == 'tls')
 				{
-					$objTransport->setEncryption($GLOBALS['TL_CONFIG']['smtpEnc']);
+					$objTransport->setEncryption(\Config::get('smtpEnc'));
 				}
 
 				// Authentication
-				if ($GLOBALS['TL_CONFIG']['smtpUser'] != '')
+				if (\Config::get('smtpUser') != '')
 				{
-					$objTransport->setUsername($GLOBALS['TL_CONFIG']['smtpUser'])->setPassword($GLOBALS['TL_CONFIG']['smtpPass']);
+					$objTransport->setUsername(\Config::get('smtpUser'))->setPassword(\Config::get('smtpPass'));
 				}
 			}
 
@@ -497,7 +497,7 @@ class Email
 		// Add the administrator e-mail as default sender
 		if ($this->strSender == '')
 		{
-			list($this->strSenderName, $this->strSender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($this->strSenderName, $this->strSender) = \String::splitFriendlyEmail(\Config::get('adminEmail'));
 		}
 
 		// Sender

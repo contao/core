@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'name' => array
 		(
@@ -197,7 +197,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['uploader'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('FileUpload'),
+			'options'                 => array('DropZone', 'FileUpload'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -243,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>Config::get('minPasswordLength')),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'pwChange' => array
@@ -305,7 +305,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('css', 'modules', 'layout'),
+			'options'                 => array('css', 'modules', 'layout', 'image_sizes', 'theme_import', 'theme_export'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -324,7 +324,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => array('regular', 'redirect', 'forward'),
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('regular', 'redirect', 'forward', 'root', 'error_403', 'error_404'),
+			'options'                 => array_keys($GLOBALS['TL_PTY']),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
 			'sql'                     => "blob NULL"
@@ -415,7 +415,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'lastLogin' => array
 		(
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotShow'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'currentLogin' => array
@@ -443,7 +443,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
  * Class tl_user
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -482,7 +482,7 @@ class tl_user extends Backend
 			case 'delete':
 				if (Input::get('id') == $this->User->id)
 				{
-					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// no break;
@@ -497,7 +497,7 @@ class tl_user extends Backend
 
 				if ($objUser->admin && Input::get('act') != '')
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', 'tl_user checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -756,7 +756,7 @@ class tl_user extends Backend
 	{
 		if ($dc->activeRecord)
 		{
-			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
 				$this->removeSession($dc);
 			}
@@ -802,7 +802,7 @@ class tl_user extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -843,9 +843,9 @@ class tl_user extends Backend
 		}
 
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -857,8 +857,15 @@ class tl_user extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['disable']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -867,7 +874,7 @@ class tl_user extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_user.id='.$intId.'" has been created'.$this->getParentEntries('tl_user', $intId), 'tl_user toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_user.id='.$intId.'" has been created'.$this->getParentEntries('tl_user', $intId), __METHOD__, TL_GENERAL);
 
 		// Remove the session if the user is disabled (see #5353)
 		if (!$blnVisible)

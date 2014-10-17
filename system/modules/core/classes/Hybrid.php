@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Hybrid
  *
  * Parent class for objects that can be modules or content elements.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -182,6 +182,16 @@ abstract class Hybrid extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Return the parent object
 	 * @return object
 	 */
@@ -197,7 +207,7 @@ abstract class Hybrid extends \Frontend
 	 */
 	public function generate()
 	{
-		if ($this->objParent instanceof \ContentModel && TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start > 0 && $this->objParent->start > time()) || ($this->objParent->stop > 0 && $this->objParent->stop < time())))
+		if ($this->objParent instanceof \ContentModel && TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->objParent->invisible || ($this->objParent->start != '' && $this->objParent->start > time()) || ($this->objParent->stop != '' && $this->objParent->stop < time())))
 		{
 			return '';
 		}
@@ -231,6 +241,11 @@ abstract class Hybrid extends \Frontend
 		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
+		}
+
+		if (!empty($this->objParent->classes) && is_array($this->objParent->classes))
+		{
+			$this->Template->class .= ' ' . implode(' ', $this->objParent->classes);
 		}
 
 		return $this->Template->parse();

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageError404
  *
  * Provide methods to handle an error 404 page.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -33,17 +33,22 @@ class PageError404 extends \Frontend
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 */
-	public function generate($pageId, $strDomain=null, $strHost=null)
+	public function generate($pageId, $strDomain=null, $strHost=null, $blnUnusedGet=false)
 	{
 		// Add a log entry
-		if ($strDomain !== null || $strHost !== null)
+		if ($blnUnusedGet)
 		{
-			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', 'PageError404 generate()', TL_ERROR);
+			$this->log('The request for page ID "' . $pageId . '" contained unused GET parameters: "' . implode('", "', Input::getUnusedGet()) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
+		}
+		elseif ($strDomain !== null || $strHost !== null)
+		{
+			$this->log('Page ID "' . $pageId . '" was requested via "' . $strHost . '" but can only be accessed via "' . $strDomain . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
 		}
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
-			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', 'PageError404 generate()', TL_ERROR);
+			$this->log('No active page for page ID "' . $pageId . '", host "' . \Environment::get('host') . '" and languages "' . implode(', ', \Environment::get('httpAcceptLanguage')) . '" (' . \Environment::get('base') . \Environment::get('request') . ')', __METHOD__, TL_ERROR);
 		}
 
 		// Check the search index (see #3761)
@@ -53,7 +58,7 @@ class PageError404 extends \Frontend
 		$objRootPage = $this->getRootPageFromUrl();
 
 		// Forward if the language should be but is not set (see #4028)
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		if (\Config::get('addLanguageToUrl'))
 		{
 			// Get the request string without the index.php fragment
 			if (\Environment::get('request') == 'index.php')
@@ -79,7 +84,7 @@ class PageError404 extends \Frontend
 		if ($obj404 === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found');
+			die_nicely('be_no_page', 'Page not found');
 		}
 
 		// Generate the error page
@@ -102,8 +107,8 @@ class PageError404 extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
-			die('Forward page not found');
+			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
+			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));

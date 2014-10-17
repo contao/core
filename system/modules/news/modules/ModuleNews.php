@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleNews
  *
  * Parent class for news modules.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -109,14 +109,14 @@ abstract class ModuleNews extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objArticle->teaser = \String::toXhtml($objArticle->teaser);
+				$objTemplate->teaser = \String::toXhtml($objArticle->teaser);
 			}
 			else
 			{
-				$objArticle->teaser = \String::toHtml5($objArticle->teaser);
+				$objTemplate->teaser = \String::toHtml5($objArticle->teaser);
 			}
 
-			$objTemplate->teaser = \String::encodeEmail($objArticle->teaser);
+			$objTemplate->teaser = \String::encodeEmail($objTemplate->teaser);
 		}
 
 		// Display the "read more" button for external/article links
@@ -134,7 +134,7 @@ abstract class ModuleNews extends \Module
 			{
 				while ($objElement->next())
 				{
-					$objTemplate->text .= $this->getContentElement($objElement->id);
+					$objTemplate->text .= $this->getContentElement($objElement->current());
 				}
 			}
 		}
@@ -155,30 +155,33 @@ abstract class ModuleNews extends \Module
 		// Add an image
 		if ($objArticle->addImage && $objArticle->singleSRC != '')
 		{
-			if (!is_numeric($objArticle->singleSRC))
-			{
-				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objArticle->singleSRC);
+			$objModel = \FilesModel::findByUuid($objArticle->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objArticle->singleSRC))
 				{
-					// Override the default image size
-					if ($this->imgSize != '')
-					{
-						$size = deserialize($this->imgSize);
-
-						if ($size[0] > 0 || $size[1] > 0)
-						{
-							$objArticle->size = $this->imgSize;
-						}
-					}
-
-					$objArticle->singleSRC = $objModel->path;
-					$this->addImageToTemplate($objTemplate, $objArticle->row());
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrArticle = $objArticle->row();
+
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = deserialize($this->imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0)
+					{
+						$arrArticle['size'] = $this->imgSize;
+					}
+				}
+
+				$arrArticle['singleSRC'] = $objModel->path;
+				$this->addImageToTemplate($objTemplate, $arrArticle);
 			}
 		}
 
@@ -324,7 +327,7 @@ abstract class ModuleNews extends \Module
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -340,13 +343,13 @@ abstract class ModuleNews extends \Module
 			}
 			else
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
 			// Add the current archive parameter (news archive)
 			if ($blnAddArchive && \Input::get('month') != '')
 			{
-				self::$arrUrlCache[$strCacheKey] .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . \Input::get('month');
+				self::$arrUrlCache[$strCacheKey] .= (\Config::get('disableAlias') ? '&amp;' : '?') . 'month=' . \Input::get('month');
 			}
 		}
 
@@ -377,21 +380,21 @@ abstract class ModuleNews extends \Module
 		// Encode e-mail addresses
 		if (substr($objArticle->url, 0, 7) == 'mailto:')
 		{
-			$objArticle->url = \String::encodeEmail($objArticle->url);
+			$strArticleUrl = \String::encodeEmail($objArticle->url);
 		}
 
 		// Ampersand URIs
 		else
 		{
-			$objArticle->url = ampersand($objArticle->url);
+			$strArticleUrl = ampersand($objArticle->url);
 		}
 
 		global $objPage;
 
 		// External link
 		return sprintf('<a href="%s" title="%s"%s>%s</a>',
-						$objArticle->url,
-						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $objArticle->url)),
+						$strArticleUrl,
+						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $strArticleUrl)),
 						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') : ''),
 						$strLink);
 	}

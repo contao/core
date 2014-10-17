@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -53,8 +53,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
-				'selector' => 'index'
+				'pid' => 'index'
 			)
 		)
 	),
@@ -66,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'panelLayout'             => 'filter,search,limit',
+			'panelLayout'             => 'filter;search,limit',
 			'headerFields'            => array('name', 'tstamp', 'media'),
 			'child_record_callback'   => array('StyleSheets', 'compileDefinition')
 		),
@@ -165,18 +164,13 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'invisible' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible'],
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
 		'selector' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['selector'],
 			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'inputType'               => 'textarea',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>1022, 'decodeEntities'=>true, 'style'=>'height:60px'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'category' => array
 		(
@@ -384,7 +378,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -589,7 +583,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['liststyleimage'],
 			'inputType'               => 'text',
-			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
@@ -599,9 +593,17 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'own' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
+			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px'),
+			'eval'                    => array('preserveTags'=>true, 'style'=>'height:120px'),
 			'sql'                     => "text NULL"
+		),
+		'invisible' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible'],
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );
@@ -611,7 +613,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
  * Class tl_style
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -640,7 +642,7 @@ class tl_style extends Backend
 
 		if (!$this->User->hasAccess('css', 'themes'))
 		{
-			$this->log('Not enough permissions to access the style sheets module', 'tl_style checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the style sheets module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -679,7 +681,7 @@ class tl_style extends Backend
 	 */
 	public function filePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/file.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['files'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/file.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.$dc->value.'" title="'.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['filepicker'])).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MOD']['files'][0]).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -795,8 +797,15 @@ class tl_style extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -805,7 +814,7 @@ class tl_style extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), 'tl_style toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_style.id='.$intId.'" has been created'.$this->getParentEntries('tl_style', $intId), __METHOD__, TL_GENERAL);
 
 		// Recreate the style sheet
 		$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -25,7 +25,7 @@ if (Input::get('do') == 'news')
  * Class tl_content_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -143,14 +143,14 @@ class tl_content_news extends Backend
 		// Invalid ID
 		if ($objArchive->numRows < 1)
 		{
-			$this->log('Invalid news content element ID ' . $id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Invalid news content element ID ' . $id, __METHOD__, TL_ERROR);
 			return false;
 		}
 
 		// The news archive is not mounted
 		if (!in_array($objArchive->id, $root))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, 'tl_content_news checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, __METHOD__, TL_ERROR);
 			return false;
 		}
 

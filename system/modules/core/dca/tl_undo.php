@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -49,7 +49,7 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		(
 			'fields'                  => array('tstamp', 'query'),
 			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span>%s',
-			'maxCharacters'           => 120
+			'label_callback'          => array('tl_undo', 'ellipsis')
 		),
 		'operations' => array
 		(
@@ -119,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
  * Class tl_undo
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Controller
  */
@@ -156,8 +156,20 @@ class tl_undo extends Backend
 		// Redirect if there is an error
 		if (Input::get('act') && !in_array(Input::get('id'), $GLOBALS['TL_DCA']['tl_undo']['list']['sorting']['root']))
 		{
-			$this->log('Not enough permissions to '. Input::get('act') .' undo step ID '. Input::get('id'), 'tl_undo checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to '. Input::get('act') .' undo step ID '. Input::get('id'), __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
+	}
+
+
+	/**
+	 * Add the surrounding ellipsis layer
+	 * @param array
+	 * @param string
+	 * @return string
+	 */
+	public function ellipsis($row, $label)
+	{
+		return '<div class="ellipsis">' . $label . '</div>';
 	}
 }

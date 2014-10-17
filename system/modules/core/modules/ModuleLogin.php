@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleLogin
  *
  * Front end module "login".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -64,7 +64,7 @@ class ModuleLogin extends \Module
 		if (\Input::post('FORM_SUBMIT') == 'tl_login')
 		{
 			// Check whether username and password are set
-			if (!\Input::post('username', true) || !\Input::post('password', true))
+			if (empty($_POST['username']) || empty($_POST['password']))
 			{
 				$_SESSION['LOGIN_ERROR'] = $GLOBALS['TL_LANG']['MSC']['emptyField'];
 				$this->reload();
@@ -208,7 +208,7 @@ class ModuleLogin extends \Module
 		$this->Template->action = ampersand(\Environment::get('indexFreeRequest'));
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->value = specialchars(\Input::post('username'));
-		$this->Template->autologin = ($this->autologin && $GLOBALS['TL_CONFIG']['autologin'] > 0);
+		$this->Template->autologin = ($this->autologin && \Config::get('autologin') > 0);
 		$this->Template->autoLabel = $GLOBALS['TL_LANG']['MSC']['autologin'];
 	}
 }

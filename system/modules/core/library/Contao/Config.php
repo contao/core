@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Config
 {
@@ -129,14 +129,14 @@ class Config
 		$strCacheFile = 'system/cache/config/config.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		if (!static::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}
 		else
 		{
 			// Get the module configuration files
-			foreach ($this->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
 
@@ -147,7 +147,7 @@ class Config
 			}
 		}
 
-		// // Include the local configuration file again
+		// Include the local configuration file again
 		if (static::$blnHasLcf)
 		{
 			include TL_ROOT . '/system/config/localconfig.php';
@@ -255,17 +255,17 @@ class Config
 		// Make sure the file has been written (see #4483)
 		if (!filesize(TL_ROOT . '/system/tmp/' . $strTemp))
 		{
-			$this->log('The local configuration file could not be written. Have your reached your quota limit?');
+			\System::log('The local configuration file could not be written. Have your reached your quota limit?', __METHOD__, TL_ERROR);
 			return;
 		}
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
-		// Reset the Zend OPcache (unfortunately no API to delete just a single file)
-		if (function_exists('opcache_reset'))
+		// Reset the Zend OPcache
+		if (function_exists('opcache_invalidate'))
 		{
-			opcache_reset();
+			opcache_invalidate(TL_ROOT . '/system/config/localconfig.php', true);
 		}
 
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
@@ -277,7 +277,7 @@ class Config
 		// Recompile the APC file (thanks to Trenker)
 		if (function_exists('apc_compile_file') && !ini_get('apc.stat'))
 		{
-			apc_compile_file('system/config/localconfig.php');
+			apc_compile_file(TL_ROOT . '/system/config/localconfig.php');
 		}
 
 		// Purge the eAccelerator cache (thanks to Trenker)
@@ -348,6 +348,18 @@ class Config
 
 
 	/**
+	 * Remove a configuration variable
+	 *
+	 * @param string $strKey The full variable name
+	 */
+	public function delete($strKey)
+	{
+		$this->markModified();
+		unset($this->arrData[$strKey]);
+	}
+
+
+	/**
 	 * Return a configuration value
 	 *
 	 * @param string $strKey The short key (e.g. "displayErrors")
@@ -366,6 +378,55 @@ class Config
 
 
 	/**
+	 * Temporarily set a configuration value
+	 *
+	 * @param string $strKey   The short key (e.g. "displayErrors")
+	 * @param string $varValue The configuration value
+	 */
+	public static function set($strKey, $varValue)
+	{
+		$GLOBALS['TL_CONFIG'][$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Permanently set a configuration value
+	 *
+	 * @param string $strKey   The short key or full variable name
+	 * @param mixed  $varValue The configuration value
+	 */
+	public static function persist($strKey, $varValue)
+	{
+		$objConfig = static::getInstance();
+
+		if (strncmp($strKey, '$GLOBALS', 8) !== 0)
+		{
+			$strKey = "\$GLOBALS['TL_CONFIG']['$strKey']";
+		}
+
+		$objConfig->add($strKey, $varValue);
+	}
+
+
+	/**
+	 * Permanently remove a configuration value
+	 *
+	 * @param string $strKey The short key or full variable name
+	 */
+	public static function remove($strKey)
+	{
+		$objConfig = static::getInstance();
+
+		if (strncmp($strKey, '$GLOBALS', 8) !== 0)
+		{
+			$strKey = "\$GLOBALS['TL_CONFIG']['$strKey']";
+		}
+
+		$objConfig->delete($strKey);
+	}
+
+
+	/**
 	 * Preload the default and local configuration
 	 */
 	public static function preload()
@@ -373,6 +434,7 @@ class Config
 		// Load the default files
 		include TL_ROOT . '/system/config/default.php';
 		include TL_ROOT . '/system/config/agents.php';
+		include TL_ROOT . '/system/config/mimetypes.php';
 
 		// Include the local configuration file
 		if (($blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php')) === true)
@@ -381,18 +443,6 @@ class Config
 		}
 
 		static::$blnHasLcf = $blnHasLcf;
-	}
-
-
-	/**
-	 * Remove a configuration variable
-	 *
-	 * @param string $strKey The full variable name
-	 */
-	public function delete($strKey)
-	{
-		$this->markModified();
-		unset($this->arrData[$strKey]);
 	}
 
 
@@ -425,9 +475,6 @@ class Config
 			return 'false';
 		}
 
-		$varValue = preg_replace('/[\n\r\t]+/', ' ', str_replace("'", "\\'", $varValue));
-		$varValue = "'" . preg_replace('/ {2,}/', ' ', $varValue) . "'";
-
-		return $varValue;
+		return "'" . str_replace('\\"', '"', preg_replace('/[\n\r\t ]+/', ' ', addslashes($varValue))) . "'";
 	}
 }

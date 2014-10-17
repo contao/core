@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -195,7 +195,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
  * Class tl_newsletter_recipients
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -240,7 +240,7 @@ class tl_newsletter_recipients extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.Input::get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -256,13 +256,13 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objRecipient->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -273,7 +273,7 @@ class tl_newsletter_recipients extends Backend
 			case 'overrideAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -282,7 +282,7 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -294,12 +294,12 @@ class tl_newsletter_recipients extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -339,7 +339,7 @@ class tl_newsletter_recipients extends Backend
 
 		if ($row['addedOn'])
 		{
-			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
+			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], Date::parse(Config::get('datimFormat'), $row['addedOn'])) . ')</span>';
 		}
 		else
 		{
@@ -369,7 +369,7 @@ class tl_newsletter_recipients extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
+		if (!$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
 		{
 			return '';
 		}
@@ -398,9 +398,9 @@ class tl_newsletter_recipients extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
+		if (!$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', 'tl_newsletter_recipients toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -412,8 +412,15 @@ class tl_newsletter_recipients extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['active']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -422,6 +429,6 @@ class tl_newsletter_recipients extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), 'tl_newsletter_recipients toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_newsletter_recipients.id='.$intId.'" has been created'.$this->getParentEntries('tl_newsletter_recipients', $intId), __METHOD__, TL_GENERAL);
 	}
 }

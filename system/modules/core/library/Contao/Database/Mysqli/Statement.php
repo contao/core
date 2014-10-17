@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -18,7 +18,7 @@ namespace Contao\Database\Mysqli;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Statement extends \Database\Statement
 {
@@ -75,7 +75,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function execute_query()
 	{
-		return @$this->resConnection->query($this->strQuery);
+		return $this->resConnection->query($this->strQuery);
 	}
 
 
@@ -86,7 +86,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function get_error()
 	{
-		return @$this->resConnection->error;
+		return $this->resConnection->error;
 	}
 
 
@@ -97,7 +97,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function affected_rows()
 	{
-		return @$this->resConnection->affected_rows;
+		return $this->resConnection->affected_rows;
 	}
 
 
@@ -108,7 +108,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function insert_id()
 	{
-		return @$this->resConnection->insert_id;
+		return $this->resConnection->insert_id;
 	}
 
 
@@ -119,7 +119,7 @@ class Statement extends \Database\Statement
 	 */
 	protected function explain_query()
 	{
-		return @$this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
+		return $this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
 	}
 
 

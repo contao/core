@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class TableWizard
  *
  * Provide methods to handle table fields.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -197,7 +197,7 @@ class TableWizard extends \Widget
 			for ($j=0, $d=count($this->varValue[$i]); $j<$d; $j++)
 			{
 				$return .= '
-      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.$tabindex++.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
+      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea noresize" tabindex="'.$tabindex++.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
 			}
 
 			$return .= '
@@ -250,8 +250,8 @@ class TableWizard extends \Widget
 		$this->import('BackendUser', 'User');
 		$class = $this->User->uploader;
 
-		// See #4086
-		if (!class_exists($class))
+		// See #4086 and #7046
+		if (!class_exists($class) || $class == 'DropZone')
 		{
 			$class = 'FileUpload';
 		}
@@ -321,8 +321,6 @@ class TableWizard extends \Widget
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=table', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['MSC']['tw_import'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_table_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">

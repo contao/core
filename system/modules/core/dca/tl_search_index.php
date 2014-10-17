@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_search_index'] = array
 		),
 		'word' => array
 		(
-			'sql'                     => "varbinary(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'relevance' => array
 		(

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleEventlist
  *
  * Front end module "event list".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -69,7 +69,7 @@ class ModuleEventlist extends \Events
 		}
 
 		// Show the event reader if an item has been selected
-		if ($this->cal_readerModule > 0  && (isset($_GET['events']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->cal_readerModule > 0  && (isset($_GET['events']) || (\Config::get('useAutoItem') && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->cal_readerModule, $this->strColumn);
 		}
@@ -86,21 +86,25 @@ class ModuleEventlist extends \Events
 		global $objPage;
 		$blnClearInput = false;
 
+		$intYear = \Input::get('year');
+		$intMonth = \Input::get('month');
+		$intDay = \Input::get('day');
+
 		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
 		{
 			switch ($this->cal_format)
 			{
 				case 'cal_year':
-					\Input::setGet('year', date('Y'));
+					$intYear = date('Y');
 					break;
 
 				case 'cal_month':
-					\Input::setGet('month', date('Ym'));
+					$intMonth = date('Ym');
 					break;
 
 				case 'cal_day':
-					\Input::setGet('day', date('Ymd'));
+					$intDay = date('Ymd');
 					break;
 			}
 
@@ -110,26 +114,29 @@ class ModuleEventlist extends \Events
 		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
 		// Display year
-		if ($blnDynamicFormat && \Input::get('year'))
+		if ($blnDynamicFormat && $intYear)
 		{
-			$this->Date = new \Date(\Input::get('year'), 'Y');
+			$this->Date = new \Date($intYear, 'Y');
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
+
 		// Display month
-		elseif ($blnDynamicFormat && \Input::get('month'))
+		elseif ($blnDynamicFormat && $intMonth)
 		{
-			$this->Date = new \Date(\Input::get('month'), 'Ym');
+			$this->Date = new \Date($intMonth, 'Ym');
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
 		}
+
 		// Display day
-		elseif ($blnDynamicFormat && \Input::get('day'))
+		elseif ($blnDynamicFormat && $intDay)
 		{
-			$this->Date = new \Date(\Input::get('day'), 'Ymd');
+			$this->Date = new \Date($intDay, 'Ymd');
 			$this->cal_format = 'cal_day';
 			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
 		}
+
 		// Display all events or upcoming/past events
 		else
 		{
@@ -209,7 +216,7 @@ class ModuleEventlist extends \Events
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+			$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -265,11 +272,18 @@ class ModuleEventlist extends \Events
 				++$dayCount;
 			}
 
-			// Add template variables
+			// Show the teaser text of redirect events (see #6315)
+			if (is_bool($event['details']))
+			{
+				$objTemplate->details = $event['teaser'];
+			}
+
+			// Add the template variables
 			$objTemplate->classList = $event['class'] . ((($headerCount % 2) == 0) ? ' even' : ' odd') . (($headerCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->classUpcoming = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($offset + $eventCount + 1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $event['title']));
 			$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
+			$objTemplate->locationLabel = $GLOBALS['TL_LANG']['MSC']['location'];
 
 			// Short view
 			if ($this->cal_noSpan)
@@ -290,24 +304,24 @@ class ModuleEventlist extends \Events
 			// Add an image
 			if ($event['addImage'] && $event['singleSRC'] != '')
 			{
-				if (!is_numeric($event['singleSRC']))
-				{
-					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-				else
-				{
-					$objModel = \FilesModel::findByPk($event['singleSRC']);
+				$objModel = \FilesModel::findByUuid($event['singleSRC']);
 
-					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				if ($objModel === null)
+				{
+					if (!\Validator::isUuid($event['singleSRC']))
 					{
-						if ($imgSize)
-						{
-							$event['size'] = $imgSize;
-						}
-
-						$event['singleSRC'] = $objModel->path;
-						$this->addImageToTemplate($objTemplate, $event);
+						$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 					}
+				}
+				elseif (is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					if ($imgSize)
+					{
+						$event['size'] = $imgSize;
+					}
+
+					$event['singleSRC'] = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $event);
 				}
 			}
 

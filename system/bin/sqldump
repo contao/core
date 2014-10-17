@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Database name
+tpl=${1:-music_academy}
+
+# Clean the database
+mysql <<EOF
+  USE $tpl;
+  TRUNCATE tl_cron;
+  TRUNCATE tl_log;
+  TRUNCATE tl_session;
+  TRUNCATE tl_undo;
+  UPDATE tl_member SET session='', language='en';
+  UPDATE tl_user SET session='', language='en';
+EOF
+
+# Create the SQL dump
+mysqldump \
+  --compact \
+  --no-create-info \
+  --hex-blob \
+  --complete-insert \
+  --skip-opt \
+  --ignore-table $tpl.tl_repository_installs \
+  --ignore-table $tpl.tl_repository_instfiles \
+  $tpl > templates/$tpl.sql

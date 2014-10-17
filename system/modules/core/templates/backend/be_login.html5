@@ -6,6 +6,7 @@
   <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
   <base href="<?php echo $this->base; ?>">
   <meta name="generator" content="Contao Open Source CMS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <link rel="stylesheet" href="<?php
     $objCombiner = new Combiner();
@@ -20,7 +21,7 @@
   <script><?php echo $this->getLocaleString(); ?></script>
   <script src="<?php
     $objCombiner = new Combiner();
-    $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+    $objCombiner->add('assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js', $GLOBALS['TL_ASSETS']['MOOTOOLS']);
     $objCombiner->add('assets/mootools/stylect/js/stylect.js');
     $objCombiner->add('assets/mootools/mootao/Mootao.js');
     $objCombiner->add('assets/contao/js/core.js');
@@ -28,10 +29,10 @@
   ?>"></script>
   <script><?php echo $this->getDateString(); ?></script>
   <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
-<body class="__ua__">
+<body class="<?php echo $this->ua; ?>">
 
   <!--[if lte IE 6]>
     <div id="ie6warning"><?php echo $this->ie6warning; ?></div>
@@ -56,7 +57,7 @@
           <table class="tl_login_table">
             <tr>
               <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-              <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" required></td>
+              <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" autocapitalize="off" required></td>
             </tr>
             <tr>
               <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
@@ -81,7 +82,7 @@
         </div>
       </form>
       <div id="tl_license">
-        <p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are copyright of their respective owners :: Visit <a href="https://contao.org" target="_blank">contao.org</a> for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
+        <p>Contao Open Source CMS :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are copyright of their respective owners :: Visit <a href="https://contao.org" target="_blank">contao.org</a> for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 	    <p>Contao is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details. Contao is free software. You can redistribute it and/or modify it under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
 	  </div>
       <p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>

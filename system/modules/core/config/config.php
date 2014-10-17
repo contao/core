@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -36,10 +36,11 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'themes' => array
 		(
-			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout', 'tl_image_size', 'tl_image_size_item'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import'      => array('StyleSheets', 'importStyleSheet')
+			'import'      => array('StyleSheets', 'importStyleSheet'),
+			'export'      => array('StyleSheets', 'exportStyleSheet')
 		),
 		'page' => array
 		(
@@ -153,7 +154,8 @@ $GLOBALS['TL_CTE'] = array
 		'html'            => 'ContentHtml',
 		'list'            => 'ContentList',
 		'table'           => 'ContentTable',
-		'code'            => 'ContentCode'
+		'code'            => 'ContentCode',
+		'markdown'        => 'ContentMarkdown'
 	),
 	'accordion' => array
 	(
@@ -440,8 +442,33 @@ $GLOBALS['TL_WRAPPERS'] = array
 
 
 /**
+ * Asset versions
+ */
+$GLOBALS['TL_ASSETS'] = array
+(
+	'ACE'          => '1.1.6',
+	'CSS3PIE'      => '1.0.0',
+	'DROPZONE'     => '3.8.5',
+	'HIGHLIGHTER'  => '3.0.83',
+	'HTML5SHIV'    => '3.7.0',
+	'PICTUREFILL'  => '2.1.0',
+	'SWIPE'        => '2.0',
+	'JQUERY'       => '1.11.0',
+	'JQUERY_UI'    => '1.10.4',
+	'COLORBOX'     => '1.5.8',
+	'MEDIAELEMENT' => '2.14.2',
+	'TABLESORTER'  => '2.0.5',
+	'MOOTOOLS'     => '1.5.0',
+	'COLORPICKER'  => '1.4',
+	'DATEPICKER'   => '2.2.0',
+	'MEDIABOX'     => '1.4.6',
+	'SIMPLEMODAL'  => '1.2',
+	'SLIMBOX'      => '1.8'
+);
+
+
+/**
  * Other global arrays
  */
-$GLOBALS['TL_MIME'] = array();
-$GLOBALS['TL_PERMISSIONS'] = array();
 $GLOBALS['TL_MODELS'] = array();
+$GLOBALS['TL_PERMISSIONS'] = array();

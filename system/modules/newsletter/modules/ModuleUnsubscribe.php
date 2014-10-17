@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleUnsubscribe
  *
  * Front end module "newsletter unsubscribe".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -191,7 +191,7 @@ class ModuleUnsubscribe extends \Module
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity
-		$this->log($varInput . ' unsubscribed from ' . implode(', ', $arrChannels), 'ModuleUnsubscribe removeRecipient()', TL_NEWSLETTER);
+		$this->log($varInput . ' unsubscribed from ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
 
 		// HOOK: post unsubscribe callback
 		if (isset($GLOBALS['TL_HOOKS']['removeRecipient']) && is_array($GLOBALS['TL_HOOKS']['removeRecipient']))

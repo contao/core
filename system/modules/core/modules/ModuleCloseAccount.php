@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleCloseAccount
  *
  * Front end module "close account".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -94,12 +94,12 @@ class ModuleCloseAccount extends \Module
 				// The password has been generated with crypt()
 				if (\Encryption::test($this->User->password))
 				{
-					$blnAuthenticated = (crypt($objWidget->value, $this->User->password) == $this->User->password);
+					$blnAuthenticated = \Encryption::verify($objWidget->value, $this->User->password);
 				}
 				else
 				{
-					list(, $strSalt) = explode(':', $this->User->password);
-					$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1($objWidget->value)) : ($strPassword == sha1($strSalt . $objWidget->value));
+					list($strPassword, $strSalt) = explode(':', $this->User->password);
+					$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1($objWidget->value)) : ($strPassword === sha1($strSalt . $objWidget->value));
 				}
 
 				if (!$blnAuthenticated)
@@ -128,14 +128,14 @@ class ModuleCloseAccount extends \Module
 				if ($this->reg_close == 'close_delete')
 				{
 					$objMember->delete();
-					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deleted', 'ModuleCloseAccount compile()', TL_ACCESS);
+					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deleted', __METHOD__, TL_ACCESS);
 				}
 				// Deactivate the account
 				else
 				{
 					$objMember->disable = 1;
 					$objMember->save();
-					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deactivated', 'ModuleCloseAccount compile()', TL_ACCESS);
+					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deactivated', __METHOD__, TL_ACCESS);
 				}
 
 				$this->User->logout();

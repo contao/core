@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleWizard
  *
  * Provide methods to handle modules of a page layout.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -102,7 +102,7 @@ class ModuleWizard extends \Widget
 
 		// Show all columns and filter in PageRegular (see #3273)
 		$cols = array('header', 'left', 'right', 'main', 'footer');
-		$arrSections = deserialize($objRow->sections);
+		$arrSections = trimsplit(',', $objRow->sections);
 
 		// Add custom page sections
 		if (!empty($arrSections) && is_array($arrSections))
@@ -213,7 +213,7 @@ class ModuleWizard extends \Widget
 
 				if ($button == 'edit')
 				{
-					$return .= ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '&amp;nb=1" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" ' . (($this->varValue[$i]['mod'] > 0) ? '' : ' style="display:none"') . ' onclick="Backend.openModalIframe({\'width\':765,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_module'])) . '\',\'url\':this.href});return false">'.\Image::getHtml('edit.gif').'</a>' . \Image::getHtml('edit_.gif', '', 'class="module_image"' . (($this->varValue[$i]['mod'] > 0) ? ' style="display:none"' : ''));
+					$return .= ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '&amp;nb=1" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" ' . (($this->varValue[$i]['mod'] > 0) ? '' : ' style="display:none"') . ' onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_module'])) . '\',\'url\':this.href});return false">'.\Image::getHtml('edit.gif').'</a>' . \Image::getHtml('edit_.gif', '', 'class="module_image"' . (($this->varValue[$i]['mod'] > 0) ? ' style="display:none"' : ''));
 				}
 				elseif ($button == 'drag')
 				{

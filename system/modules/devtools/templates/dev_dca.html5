@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   <?php echo $this->package . "\n"; ?>
  * @author    <?php echo $this->author . "\n"; ?>
@@ -84,6 +84,12 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 				'icon'                => 'show.gif'
 			)
 		)
+	),
+
+	// Select
+	'select' => array
+	(
+		'buttons_callback' => array()
 	),
 
 	// Edit

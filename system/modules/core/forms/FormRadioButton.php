@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -20,8 +20,7 @@ namespace Contao;
 /**
  * Class FormRadioButton
  *
- * Form field "radio button".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -30,27 +29,38 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_radio';
 
 	/**
 	 * Error message
+	 *
 	 * @var string
 	 */
 	protected $strError = '';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-radio';
+
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute key
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -73,6 +83,8 @@ class FormRadioButton extends \Widget
 				break;
 
 			case 'rgxp':
+			case 'minlength':
+			case 'maxlength':
 				// Ignore
 				break;
 
@@ -85,8 +97,10 @@ class FormRadioButton extends \Widget
 
 	/**
 	 * Return a parameter
-	 * @param string
-	 * @return mixed
+	 *
+	 * @param string $strKey The parameter name
+	 *
+	 * @return mixed The parameter value
 	 */
 	public function __get($strKey)
 	{
@@ -104,7 +118,7 @@ class FormRadioButton extends \Widget
 	 */
 	public function validate()
 	{
-		$varValue = deserialize($this->getPost($this->strName));
+		$varValue = $this->getPost($this->strName);
 
 		if (!empty($varValue) && !$this->isValidOption($varValue))
 		{
@@ -116,20 +130,50 @@ class FormRadioButton extends \Widget
 
 
 	/**
+	 * Generate the options
+	 *
+	 * @return array The options array
+	 */
+	protected function getOptions()
+	{
+		$arrOptions = array();
+
+		foreach ($this->arrOptions as $i=>$arrOption)
+		{
+			$arrOptions[] = array
+			(
+				'name'       => $this->strName,
+				'id'         => $this->strId . '_' . $i,
+				'value'      => $arrOption['value'],
+				'checked'    => $this->isChecked($arrOption),
+				'attributes' => $this->getAttributes(),
+				'label'      => $arrOption['label']
+			);
+		}
+
+		return $arrOptions;
+	}
+
+
+	/**
 	 * Override the parent method and inject the error message inside the fieldset (see #3392)
-	 * @param boolean
-	 * @return string
+	 *
+	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
+	 *
+	 * @return string The form field markup
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$this->strError = $this->getErrorAsHTML();
+
 		return $this->generate();
 	}
 
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{
@@ -151,12 +195,12 @@ class FormRadioButton extends \Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-        					$this->strId,
+			return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
-							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
-							($this->required ? '<span class="mandatory">*</span>' : ''),
+							($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
@@ -165,7 +209,7 @@ class FormRadioButton extends \Widget
 		else
 		{
 	        return sprintf('<fieldset id="ctrl_%s" class="radio_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-    	    				$this->strId,
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							$this->strError,
 							$this->strName,

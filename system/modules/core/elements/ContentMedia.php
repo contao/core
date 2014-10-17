@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentMedia
  *
  * Content element "mediaelement".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -59,7 +59,7 @@ class ContentMedia extends \ContentElement
 			return '';
 		}
 
-		$objFiles = \FilesModel::findMultipleByIdsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav','ogg'));
+		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mp4','m4v','mov','wmv','webm','ogv','m4a','mp3','wma','mpeg','wav','ogg'));
 
 		if ($objFiles === null)
 		{
@@ -109,7 +109,7 @@ class ContentMedia extends \ContentElement
 		// Optional poster
 		if ($this->posterSRC != '')
 		{
-			if (($objFile = \FilesModel::findByPk($this->posterSRC)) !== null)
+			if (($objFile = \FilesModel::findByUuid($this->posterSRC)) !== null)
 			{
 				$this->Template->poster = $objFile->path;
 			}

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleSubscribe
  *
  * Front end module "newsletter subscribe".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -175,7 +175,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		// Log activity
-		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), 'ModuleSubscribe activateRecipient()', TL_NEWSLETTER);
+		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
 
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateRecipient']) && is_array($GLOBALS['TL_HOOKS']['activateRecipient']))
@@ -276,7 +276,7 @@ class ModuleSubscribe extends \Module
 		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
 		$strText = str_replace('##domain##', \Idna::decode(\Environment::get('host')), $strText);
-		$strText = str_replace('##link##', \Idna::decode(\Environment::get('base')) . \Environment::get('request') . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
+		$strText = str_replace('##link##', \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
 
 		// Activation e-mail

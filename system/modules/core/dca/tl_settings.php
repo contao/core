@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -28,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},adminEmail,characterSet,minifyMarkup,gzipScripts,disableCron,coreOnlyMode,debugMode,bypassCache;{backend_legend},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend:hide},allowedTags,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{sections_legend:hide},customSections;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},adminEmail,characterSet,minifyMarkup,gzipScripts,coreOnlyMode,bypassCache,debugMode,maintenanceMode;{backend_legend:hide},resultsPerPage,maxResultsPerPage,fileSyncExclude,doNotCollapse,staticFiles,staticPlugins;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{proxy_legend:hide},proxyServerIps,sslProxyDomain;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{security_legend},allowedTags,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend:hide},inactiveModules;{cron_legend:hide},disableCron;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -116,17 +116,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'checkResultsPerPage')
-			)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'minval'=>1, 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'maxResultsPerPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'staticFiles' => array
 		(
@@ -202,6 +198,18 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
+		'proxyServerIps' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['proxyServerIps'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'sslProxyDomain' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['sslProxyDomain'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'tl_class'=>'w50')
+		),
 		'cacheMode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['cacheMode'],
@@ -228,12 +236,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'tokenWhitelist' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['tokenWhitelist'],
-			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:60px'),
-		),
 		'allowedTags' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedTags'],
@@ -244,17 +246,23 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['debugMode'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'regenerateScripts')
-			)
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'maintenanceMode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maintenanceMode'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'bypassCache' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['bypassCache'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'purgeInternalCache')
+			)
 		),
 		'displayErrors' => array
 		(
@@ -306,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'jpgQuality' => array
 		(
@@ -318,13 +326,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'gdMaxImgHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'uploadPath' => array
 		(
@@ -346,25 +354,25 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadFields'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'maxFileSize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imageWidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['imageWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imageHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['imageHeight'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'enableSearch' => array
 		(
@@ -417,59 +425,48 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'inactiveModules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'],
-			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_settings', 'getModules'),
-			'eval'                    => array('multiple'=>true),
-			'save_callback' => array
-			(
-				array('tl_settings', 'updateInactiveModules')
-			)
-		),
-		'customSections' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['customSections'],
-			'inputType'               => 'text'
+			'input_field_callback'    => array('tl_settings', 'disableModules')
 		),
 		'undoPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'versionPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'logPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['logPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'sessionTimeout' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'autologin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['autologin'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'lockPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'defaultUser' => array(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultUser'],
@@ -502,7 +499,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
  * Class tl_settings
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -510,94 +507,113 @@ class tl_settings extends Backend
 {
 
 	/**
-	 * Return all modules except back end and front end as array
-	 * @return array
+	 * Disable modules
+	 * @param \DataContainer
+	 * @return string
 	 */
-	public function getModules()
+	public function disableModules(DataContainer $dc)
 	{
-		$arrReturn = array();
-		$arrModules = scan(TL_ROOT . '/system/modules');
+		$arrModules = array();
+		$arrFolders = scan(TL_ROOT . '/system/modules');
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
-		$blnCheckInactiveModules = is_array($arrInactiveModules);
-
-		foreach ($arrModules as $strModule)
+		// Store all extensions with their status (based on the .skip file)
+		foreach ($arrFolders as $strFolder)
 		{
-			if (substr($strModule, 0, 1) == '.')
+			if (substr($strFolder, 0, 1) == '.')
 			{
 				continue;
 			}
 
-			if ($strModule == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
+			if ($strFolder == 'core' || !is_dir(TL_ROOT . '/system/modules/' . $strFolder))
 			{
 				continue;
 			}
 
-			if ($blnCheckInactiveModules && in_array($strModule, $arrInactiveModules))
-			{
-				$strFile = sprintf('%s/system/modules/%s/languages/%s/modules.php', TL_ROOT, $strModule, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']));
+			$arrModules[$strFolder] = !file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/.skip');
+		}
 
-				if (file_exists($strFile))
+		// Enable or disable the modules as requested
+		if (Input::post('FORM_SUBMIT') == 'tl_settings')
+		{
+			$blnPurgeCache = false;
+			$arrDisabled = Input::post('inactiveModules');
+
+			if (!is_array($arrDisabled))
+			{
+				$arrDisabled = array();
+			}
+
+			// Check whether a module status has changed
+			foreach ($arrModules as $strModule=>$blnActive)
+			{
+				if (in_array($strModule, $arrDisabled))
 				{
-					include $strFile;
+					if ($blnActive)
+					{
+						$blnPurgeCache = System::disableModule($strModule);
+					}
+				}
+				else
+				{
+					if (!$blnActive)
+					{
+						$blnPurgeCache = System::enableModule($strModule);
+					}
 				}
 			}
 
-			$arrReturn[$strModule] = '<span style="color:#b3b3b3">['. $strModule .']</span> ' . (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
-		}
-
-		natcasesort($arrReturn);
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Update the inactive modules
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function updateInactiveModules($varValue)
-	{
-		// The field value has not changed
-		if ($varValue == $GLOBALS['TL_CONFIG']['inactiveModules'])
-		{
-			return $varValue;
-		}
-
-		$blnPurgeCache = false;
-		$arrModules = deserialize($varValue);
-
-		if (!is_array($arrModules))
-		{
-			$arrModules = array();
-		}
-
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
-		{
-			if (strncmp($strModule, '.', 1) === 0)
+			// Purge the internal cache (see #5016)
+			if ($blnPurgeCache)
 			{
-				continue;
-			}
-
-			// Disable the module
-			if (in_array($strModule, $arrModules))
-			{
-				$blnPurgeCache = System::disableModule($strModule);
-			}
-			else
-			{
-				$blnPurgeCache = System::enableModule($strModule);
+				$this->import('Automator');
+				$this->Automator->purgeInternalCache();
 			}
 		}
 
-		// Purge the internal cache (see #5016)
-		if ($blnPurgeCache)
+		// Return the form field
+		$return = '
+<div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . '">
+  <fieldset id="ctrl_' . $dc->field . '" class="tl_checkbox_container">
+    <legend>' . $GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] . '</legend>
+    <input type="hidden" name="' . $dc->inputName . '" value="">
+    <input type="checkbox" id="check_all_' . $dc->inputName . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $dc->inputName . '\')">
+    <label for="check_all_' . $dc->inputName . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>';
+
+		$i = 0;
+		$lng = str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
+
+		// Render the checkbox and label
+		foreach ($arrModules as $strModule=>$blnActive)
 		{
-			$this->import('Automator');
-			$this->Automator->purgeInternalCache();
+			if (!$blnActive)
+			{
+				$strFile = 'system/modules/' . $strModule . '/languages/' . $lng . '/modules';
+
+				// Load the modules language file of disabled extensions
+				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
+				{
+					static::convertXlfToPhp($strFile . '.xlf', $lng, true);
+				}
+				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
+				{
+					include TL_ROOT . '/' . $strFile . '.php';
+				}
+			}
+
+			$strTitle = (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
+
+			$return .= '
+    <input type="checkbox" name="' . $dc->inputName . '[]" id="opt_' . $dc->inputName . '_' . $i . '" class="tl_checkbox" value="' . $strModule . '" onfocus="Backend.getScrollOffset()"' . ($blnActive ? '' : ' checked') . '>
+    <label for="opt_' . $dc->inputName . '_' . $i++ . '"><span style="color:#b3b3b3">[' . $strModule . ']</span> ' . $strTitle . '</label><br>';
 		}
 
-		return $varValue;
+		// Add the help text
+		$return .= '
+  </fieldset>' . (Config::get('showHelp') ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][1] . '</p>' : '') . '
+</div>';
+
+		return $return;
 	}
 
 
@@ -608,7 +624,7 @@ class tl_settings extends Backend
 	 */
 	public function changeCoreOnlyMode($varValue)
 	{
-		if ($varValue != $GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		if ($varValue != Config::get('coreOnlyMode'))
 		{
 			$this->import('Automator');
 			$this->Automator->purgeInternalCache();
@@ -628,41 +644,6 @@ class tl_settings extends Backend
 		if (!$varValue)
 		{
 			$this->Database->execute("DELETE FROM tl_search WHERE protected=1");
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Make sure that resultsPerPage > 0
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function checkResultsPerPage($varValue)
-	{
-		if ($varValue < 1)
-		{
-			$varValue = 30;
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Regenerate the CSS scripts when the debug mode changes
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function regenerateScripts($varValue)
-	{
-		if ($varValue != $GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
-
-			$this->import('Automator');
-			$this->Automator->purgeScriptCache();
 		}
 
 		return $varValue;
@@ -719,6 +700,23 @@ class tl_settings extends Backend
 		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
 		{
 			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Purge the internal caches
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function purgeInternalCache($varValue)
+	{
+		if ($varValue && $varValue !== Config::get('bypassCache'))
+		{
+			$this->import('Automator');
+			$this->Automator->purgeInternalCache();
 		}
 
 		return $varValue;

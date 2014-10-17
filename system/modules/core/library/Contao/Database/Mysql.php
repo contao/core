@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -18,7 +18,7 @@ namespace Contao\Database;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Mysql extends \Database
 {
@@ -28,12 +28,6 @@ class Mysql extends \Database
 	 * @var string
 	 */
 	protected $strListTables = "SHOW TABLES FROM `%s`";
-
-	/**
-	 * List fields query
-	 * @var string
-	 */
-	protected $strListFields = "SHOW COLUMNS FROM `%s`";
 
 
 	/**
@@ -57,11 +51,11 @@ class Mysql extends \Database
 
 		if ($this->arrConfig['dbPconnect'])
 		{
-			$this->resConnection = @mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+			$this->resConnection = mysql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 		else
 		{
-			$this->resConnection = @mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
+			$this->resConnection = mysql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass']);
 		}
 
 		if (mysql_error())
@@ -69,9 +63,10 @@ class Mysql extends \Database
 			throw new \Exception(mysql_error());
 		}
 
-		@mysql_query("SET sql_mode=''", $this->resConnection);
-		@mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
-		@mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
+		mysql_query("SET NAMES " . $this->arrConfig['dbCharset'], $this->resConnection);
+		mysql_query("SET sql_mode='" . $this->arrConfig['dbSqlMode'] . "'", $this->resConnection);
+
+		mysql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 	}
 
 
@@ -80,7 +75,7 @@ class Mysql extends \Database
 	 */
 	protected function disconnect()
 	{
-		@mysql_close($this->resConnection);
+		mysql_close($this->resConnection);
 	}
 
 
@@ -144,43 +139,52 @@ class Mysql extends \Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$arrFields = $this->query(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
+		$objFields = $this->query("SHOW FULL COLUMNS FROM $strTable");
 
-		foreach ($arrFields as $k=>$v)
+		while ($objFields->next())
 		{
-			$arrChunks = preg_split('/(\([^\)]+\))/', $v['Type'], -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$arrTmp = array();
+			$arrChunks = preg_split('/(\([^\)]+\))/', $objFields->Type, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-			$arrReturn[$k]['name'] = $v['Field'];
-			$arrReturn[$k]['type'] = $arrChunks[0];
+			$arrTmp['name'] = $objFields->Field;
+			$arrTmp['type'] = $arrChunks[0];
 
-			if (strlen($arrChunks[1]))
+			if (!empty($arrChunks[1]))
 			{
-				$arrChunks[1] = str_replace(array('(', ')'), array('', ''), $arrChunks[1]);
-				$arrSubChunks = explode(',', $arrChunks[1]);
+				$arrChunks[1] = str_replace(array('(', ')'), '', $arrChunks[1]);
 
-				$arrReturn[$k]['length'] = trim($arrSubChunks[0]);
-
-				if (strlen($arrSubChunks[1]))
+				// Handle enum fields (see #6387)
+				if ($arrChunks[0] == 'enum')
 				{
-					$arrReturn[$k]['precision'] = trim($arrSubChunks[1]);
+					$arrTmp['length'] = $arrChunks[1];
+				}
+				else
+				{
+					$arrSubChunks = explode(',', $arrChunks[1]);
+					$arrTmp['length'] = trim($arrSubChunks[0]);
+
+					if (!empty($arrSubChunks[1]))
+					{
+						$arrTmp['precision'] = trim($arrSubChunks[1]);
+					}
 				}
 			}
 
-			if (strlen($arrChunks[2]))
+			if (!empty($arrChunks[2]))
 			{
-				$arrReturn[$k]['attributes'] = trim($arrChunks[2]);
+				$arrTmp['attributes'] = trim($arrChunks[2]);
 			}
 
-			if (strlen($v['Key']))
+			if ($objFields->Key != '')
 			{
-				switch ($v['Key'])
+				switch ($objFields->Key)
 				{
 					case 'PRI':
-						$arrReturn[$k]['index'] = 'PRIMARY';
+						$arrTmp['index'] = 'PRIMARY';
 						break;
 
 					case 'UNI':
-						$arrReturn[$k]['index'] = 'UNIQUE';
+						$arrTmp['index'] = 'UNIQUE';
 						break;
 
 					case 'MUL':
@@ -188,24 +192,29 @@ class Mysql extends \Database
 						break;
 
 					default:
-						$arrReturn[$k]['index'] = 'KEY';
+						$arrTmp['index'] = 'KEY';
 						break;
 				}
 			}
 
-			$arrReturn[$k]['null'] = ($v['Null'] == 'YES') ? 'NULL' : 'NOT NULL';
-			$arrReturn[$k]['default'] = $v['Default'];
-			$arrReturn[$k]['extra'] = $v['Extra'];
+			// Do not modify the order!
+			$arrTmp['collation'] = $objFields->Collation;
+			$arrTmp['null'] = ($objFields->Null == 'YES') ? 'NULL' : 'NOT NULL';
+			$arrTmp['default'] = $objFields->Default;
+			$arrTmp['extra'] = $objFields->Extra;
+			$arrTmp['origtype'] = $objFields->Type;
+
+			$arrReturn[] = $arrTmp;
 		}
 
-		$arrIndexes = $this->query("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+		$objIndex = $this->query("SHOW INDEXES FROM `$strTable`");
 
-		foreach ($arrIndexes as $arrIndex)
+		while ($objIndex->next())
 		{
-			$arrReturn[$arrIndex['Key_name']]['name'] = $arrIndex['Key_name'];
-			$arrReturn[$arrIndex['Key_name']]['type'] = 'index';
-			$arrReturn[$arrIndex['Key_name']]['index_fields'][] = $arrIndex['Column_name'];
-			$arrReturn[$arrIndex['Key_name']]['index'] = (($arrIndex['Non_unique'] == 0) ? 'UNIQUE' : 'KEY');
+			$arrReturn[$objIndex->Key_name]['name'] = $objIndex->Key_name;
+			$arrReturn[$objIndex->Key_name]['type'] = 'index';
+			$arrReturn[$objIndex->Key_name]['index_fields'][] = $objIndex->Column_name;
+			$arrReturn[$objIndex->Key_name]['index'] = (($objIndex->Non_unique == 0) ? 'UNIQUE' : 'KEY');
 		}
 
 		return $arrReturn;
@@ -221,7 +230,7 @@ class Mysql extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		return @mysql_select_db($strDatabase, $this->resConnection);
+		return mysql_select_db($strDatabase, $this->resConnection);
 	}
 
 
@@ -230,8 +239,8 @@ class Mysql extends \Database
 	 */
 	protected function begin_transaction()
 	{
-		@mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
-		@mysql_query("BEGIN", $this->resConnection);
+		mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
+		mysql_query("BEGIN", $this->resConnection);
 	}
 
 
@@ -240,8 +249,8 @@ class Mysql extends \Database
 	 */
 	protected function commit_transaction()
 	{
-		@mysql_query("COMMIT", $this->resConnection);
-		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
+		mysql_query("COMMIT", $this->resConnection);
+		mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -250,8 +259,8 @@ class Mysql extends \Database
 	 */
 	protected function rollback_transaction()
 	{
-		@mysql_query("ROLLBACK", $this->resConnection);
-		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
+		mysql_query("ROLLBACK", $this->resConnection);
+		mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -269,7 +278,7 @@ class Mysql extends \Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
+		mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -278,7 +287,7 @@ class Mysql extends \Database
 	 */
 	protected function unlock_tables()
 	{
-		@mysql_query("UNLOCK TABLES");
+		mysql_query("UNLOCK TABLES");
 	}
 
 
@@ -291,8 +300,8 @@ class Mysql extends \Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
-		$objStatus = @mysql_fetch_object($objStatus);
+		$objStatus = mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = mysql_fetch_object($objStatus);
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -301,16 +310,39 @@ class Mysql extends \Database
 	/**
 	 * Return the next autoincrement ID of a table
 	 *
-	 * @param string The table name
+	 * @param string $strTable The table name
 	 *
 	 * @return integer The autoincrement ID
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
-		$objStatus = @mysql_fetch_object($objStatus);
+		$objStatus = mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = mysql_fetch_object($objStatus);
 
 		return $objStatus->Auto_increment;
+	}
+
+
+	/**
+	 * Return a universal unique identifier
+	 *
+	 * @return string The UUID string
+	 */
+	protected function get_uuid()
+	{
+		static $ids;
+
+		if (empty($ids))
+		{
+			$res = mysql_query(implode(' UNION ALL ', array_fill(0, 10, "SELECT UNHEX(REPLACE(UUID(), '-', '')) AS uuid")));
+
+			while (($row = mysql_fetch_object($res)) != false)
+			{
+				$ids[] = $row->uuid;
+			}
+		}
+
+		return array_pop($ids);
 	}
 
 

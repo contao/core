@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -27,7 +27,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Folder extends \System
 {
@@ -76,14 +76,14 @@ class Folder extends \System
 		$this->strFolder = $strFolder;
 
 		// Check whether we need to sync the database
-		$this->blnSyncDb = ($GLOBALS['TL_CONFIG']['uploadPath'] != 'templates' && strncmp($strFolder . '/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) === 0);
+		$this->blnSyncDb = (\Config::get('uploadPath') != 'templates' && strncmp($strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0);
 
 		// Check the excluded folders
-		if ($this->blnSyncDb && $GLOBALS['TL_CONFIG']['fileSyncExclude'] != '')
+		if ($this->blnSyncDb && \Config::get('fileSyncExclude') != '')
 		{
 			$arrExempt = array_map(function($e) {
-				return $GLOBALS['TL_CONFIG']['uploadPath'] . '/' . $e;
-			}, trimsplit(',', $GLOBALS['TL_CONFIG']['fileSyncExclude']));
+				return \Config::get('uploadPath') . '/' . $e;
+			}, trimsplit(',', \Config::get('fileSyncExclude')));
 
 			foreach ($arrExempt as $strExempt)
 			{

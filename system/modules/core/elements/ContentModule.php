@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentModule
  *
  * Front end content element "module".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -34,7 +34,7 @@ class ContentModule extends \ContentElement
 	 */
 	public function generate()
 	{
-		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && ($this->invisible || ($this->start != '' && $this->start > time()) || ($this->stop != '' && $this->stop < time())))
 		{
 			return '';
 		}
@@ -57,7 +57,9 @@ class ContentModule extends \ContentElement
 		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID
+		$objModule->origSpace = $objModule->space;
 		$objModule->space = $this->space;
+		$objModule->origCssID = $objModule->cssID;
 		$objModule->cssID = $this->cssID;
 
 		return $objModule->generate();

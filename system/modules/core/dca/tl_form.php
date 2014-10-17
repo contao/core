@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -146,7 +146,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			(
 				array('tl_form', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
@@ -173,8 +173,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'emails', 'tl_class'=>'w50'),
-			'sql'                     => "text NULL"
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>1022, 'rgxp'=>'emails', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(1022) NOT NULL default ''"
 		),
 		'subject' => array
 		(
@@ -286,7 +286,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
  * Class tl_form
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -397,7 +397,7 @@ class tl_form extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'formp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' form ID "'.Input::get('id').'"', 'tl_form checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' form ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -420,7 +420,7 @@ class tl_form extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' forms', 'tl_form checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' forms', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -486,7 +486,7 @@ class tl_form extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_form::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_form') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -502,7 +502,7 @@ class tl_form extends Backend
 	 */
 	public function copyForm($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('create', 'formp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->hasAccess('create', 'formp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -518,6 +518,6 @@ class tl_form extends Backend
 	 */
 	public function deleteForm($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'formp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->hasAccess('delete', 'formp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }

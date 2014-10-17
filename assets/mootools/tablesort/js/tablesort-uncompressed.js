@@ -1,19 +1,32 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Tablesort
- * @link    https://contao.org
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
 
 /**
- * Current index
+ * The current sort index
+ * @var {int}
  */
 var SORT_INDEX;
+
+
+/**
+ * The default thousands separator
+ * @var {string}
+ */
 var THOUSANDS_SEPARATOR = ',';
+
+
+/**
+ * The default decimal separator
+ * @var {string}
+ */
 var DECIMAL_SEPARATOR = '.';
 
 
@@ -21,16 +34,17 @@ var DECIMAL_SEPARATOR = '.';
  * Class TableSort
  *
  * Provide methods to sort tables keeping the Contao class names intact.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <http://contao.org>
  */
 var TableSort = new Class(
 {
 	/**
 	 * Initialize the object
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} table              The DOM element
+	 * @param {string} thousandsSeparator The thousands separator
+	 * @param {string} decimalSeparator   The decimal separator
 	 */
 	initialize: function(table, thousandsSeparator, decimalSeparator) {
 		if (thousandsSeparator) {
@@ -49,7 +63,7 @@ var TableSort = new Class(
 			vars = Cookie.read('TS_' + table.get('id').toUpperCase());
 
 		if (vars !== null) {
-			var cook = vars.split('|');
+			cook = vars.split('|');
 		}
 
 		var lastRow = table.tHead.rows[table.tHead.rows.length-1];
@@ -61,11 +75,10 @@ var TableSort = new Class(
 			}
 
 			var el = lastRow.cells[i],
-				txt = el.innerHTML,
 				a = new Element('a').addClass('pointer');
 
 			// Append text
-			a.innerHTML = txt;
+			a.innerHTML = el.innerHTML;
 			el.innerHTML = '';
 
 			// Add the event
@@ -83,8 +96,9 @@ var TableSort = new Class(
 
 	/**
 	 * Resort the table
-	 * @param integer
-	 * @param object
+	 *
+	 * @param {int}    index The current index
+	 * @param {object} el    The DOM element
 	 */
 	resort: function(index, el) {
 		var col = $(el);
@@ -103,9 +117,7 @@ var TableSort = new Class(
 		}
 
 		SORT_INDEX = index;
-
-		var i = 0,
-			val = '';
+		var i = 0, val = '', j;
 
 		// Skip emtpy cells and get value
 		while (val == '' && table.tBodies[0].rows[i]) {
@@ -115,7 +127,7 @@ var TableSort = new Class(
 
 		var tbody = [];
 
-		for (var i=0; i<table.tBodies[0].rows.length; i++) {
+		for (i=0; i<table.tBodies[0].rows.length; i++) {
 			tbody[i] = table.tBodies[0].rows[i];
 		}
 
@@ -131,14 +143,13 @@ var TableSort = new Class(
 		}
 
 		// Get the cookie path
-		var base = $$('base').get('href');
-		var cpath = base[0].replace(window.location.protocol + '//', '').replace(window.location.host, '').replace(/\/$/, '') || '/';
+		var base = $$('base').get('href'),
+			cpath = base[0].replace(window.location.protocol + '//', '').replace(window.location.host, '').replace(/\/$/, '') || '/',
+			cs = th.getChildren(), cls;
 
 		// Sort ascending
 		if (el.className.indexOf('asc') == -1) {
-			var cs = th.getChildren();
-
-			for (var i=0; i<cs.length; i++) {
+			for (i=0; i<cs.length; i++) {
 				cs[i].removeClass('asc');
 				cs[i].removeClass('desc');
 			}
@@ -146,9 +157,7 @@ var TableSort = new Class(
 			el.addClass('asc');
 			Cookie.write('TS_' + table.id.toUpperCase(), index + '|asc', { path: cpath });
 		} else {
-			var cs = th.getChildren();
-
-			for (var i=0; i<cs.length; i++) {
+			for (i=0; i<cs.length; i++) {
 				cs[i].removeClass('asc');
 				cs[i].removeClass('desc');
 			}
@@ -160,7 +169,7 @@ var TableSort = new Class(
 
 		// Update the table
 		for (i=0; i<tbody.length; i++) {
-			var cls = tbody[i].className;
+			cls = tbody[i].className;
 			cls = cls.replace(/row_\d+/, '').replace(/odd|even|row_first|row_last/g, '').clean();
 
 			// Row number
@@ -183,7 +192,7 @@ var TableSort = new Class(
 			tbody[i].className = cls.trim();
 
 			for (j=0; j<tbody[i].cells.length; j++) {
-				var cls = tbody[i].cells[j].className;
+				cls = tbody[i].cells[j].className;
 				cls = cls.replace(/col_\d+/, '').replace(/odd|even|col_first|col_last/g, '').clean();
 
 				// Col number
@@ -209,27 +218,29 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two dates
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first date
+	 * @param {string} b The second date
+	 *
+	 * @returns {int}
 	 */
 	sortDate: function(a, b) {
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean();
-
-		var aaChunks = aa.replace(/[\/\.-]/g, ' ').split(' '),
-			bbChunks = bb.replace(/[\/\.-]/g, ' ').split(' ');
+		var aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean(),
+			bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean(),
+			aaChunks = aa.replace(/[\/\.-]/g, ' ').split(' '),
+			bbChunks = bb.replace(/[\/\.-]/g, ' ').split(' '),
+			aaTstamp, bbTstamp;
 
 		// DD-MM-YYYY
 		if (aa.match(/^\d{1,2}[\/\. -]\d{1,2}[\/\. -]\d{2,4}$/)) {
-			var aaTstamp = ((aaChunks[2].length == 4) ? aaChunks[2] : '19' + aaChunks[2]) + ((aaChunks[1].length == 2) ? aaChunks[1] : '0' + aaChunks[1]) + ((aaChunks[0].length == 2) ? aaChunks[0] : '0' + aaChunks[0]),
-				bbTstamp = ((bbChunks[2].length == 4) ? bbChunks[2] : '19' + bbChunks[2]) + ((bbChunks[1].length == 2) ? bbChunks[1] : '0' + bbChunks[1]) + ((bbChunks[0].length == 2) ? bbChunks[0] : '0' + bbChunks[0]);
+			aaTstamp = ((aaChunks[2].length == 4) ? aaChunks[2] : '19' + aaChunks[2]) + ((aaChunks[1].length == 2) ? aaChunks[1] : '0' + aaChunks[1]) + ((aaChunks[0].length == 2) ? aaChunks[0] : '0' + aaChunks[0]);
+			bbTstamp = ((bbChunks[2].length == 4) ? bbChunks[2] : '19' + bbChunks[2]) + ((bbChunks[1].length == 2) ? bbChunks[1] : '0' + bbChunks[1]) + ((bbChunks[0].length == 2) ? bbChunks[0] : '0' + bbChunks[0]);
 		}
 
 		// YYYY-MM-DD
 		if (aa.match(/^\d{2,4}[\/\. -]\d{1,2}[\/\. -]\d{1,2}$/)) {
-			var aaTstamp = ((aaChunks[0].length == 4) ? aaChunks[0] : '19' + aaChunks[0]) + ((aaChunks[1].length == 2) ? aaChunks[1] : '0' + aaChunks[1]) + ((aaChunks[2].length == 2) ? aaChunks[2] : '0' + aaChunks[2]),
-				bbTstamp = ((bbChunks[0].length == 4) ? bbChunks[0] : '19' + bbChunks[0]) + ((bbChunks[1].length == 2) ? bbChunks[1] : '0' + bbChunks[1]) + ((bbChunks[2].length == 2) ? bbChunks[2] : '0' + bbChunks[2]);
+			aaTstamp = ((aaChunks[0].length == 4) ? aaChunks[0] : '19' + aaChunks[0]) + ((aaChunks[1].length == 2) ? aaChunks[1] : '0' + aaChunks[1]) + ((aaChunks[2].length == 2) ? aaChunks[2] : '0' + aaChunks[2]);
+			bbTstamp = ((bbChunks[0].length == 4) ? bbChunks[0] : '19' + bbChunks[0]) + ((bbChunks[1].length == 2) ? bbChunks[1] : '0' + bbChunks[1]) + ((bbChunks[2].length == 2) ? bbChunks[2] : '0' + bbChunks[2]);
 		}
 
 		if (aaTstamp == bbTstamp) {
@@ -243,15 +254,16 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two numbers
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first number
+	 * @param {string} b The second number
+	 *
+	 * @returns {int}
 	 */
 	sortNumeric: function(a, b) {
-		var rgxp = new RegExp('\\' + THOUSANDS_SEPARATOR, 'g');
-
-		aa = a.cells[SORT_INDEX].innerHTML.replace(rgxp, '');
-		bb = b.cells[SORT_INDEX].innerHTML.replace(rgxp, '');
+		var rgxp = new RegExp('\\' + THOUSANDS_SEPARATOR, 'g'),
+			aa = a.cells[SORT_INDEX].innerHTML.replace(rgxp, ''),
+			bb = b.cells[SORT_INDEX].innerHTML.replace(rgxp, '');
 
 		if (DECIMAL_SEPARATOR != '.') {
 			aa = aa.replace(DECIMAL_SEPARATOR, '.');
@@ -278,13 +290,15 @@ var TableSort = new Class(
 
 	/**
 	 * Compare two strings
-	 * @param string
-	 * @param string
-	 * @return integer
+	 *
+	 * @param {string} a The first string
+	 * @param {string} b The second string
+	 *
+	 * @returns {int}
 	 */
 	sortCaseInsensitive: function(a, b) {
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
+		var aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase(),
+			bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/g, '').clean().toLowerCase();
 
 		if (aa == bb) {
 			return 0;

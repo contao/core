@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -212,7 +212,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'moderate' => array
@@ -255,7 +255,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
  * Class tl_news_archive
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -278,7 +278,7 @@ class tl_news_archive extends Backend
 	public function checkPermission()
 	{
 		// HOOK: comments extension required
-		if (!in_array('comments', $this->Config->getActiveModules()))
+		if (!in_array('comments', ModuleLoader::getActive()))
 		{
 			unset($GLOBALS['TL_DCA']['tl_news_archive']['fields']['allowComments']);
 		}
@@ -372,7 +372,7 @@ class tl_news_archive extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'newp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news archive ID "'.Input::get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news archive ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -395,7 +395,7 @@ class tl_news_archive extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news archives', 'tl_news_archive checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news archives', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -421,6 +421,9 @@ class tl_news_archive extends Backend
 		{
 			$this->News->generateFeed($id);
 		}
+
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
 
 		$this->Session->set('news_feed_updater', null);
 	}
@@ -475,7 +478,7 @@ class tl_news_archive extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_news_archive::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_news_archive') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -491,7 +494,7 @@ class tl_news_archive extends Backend
 	 */
 	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('create', 'newp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->hasAccess('create', 'newp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -507,6 +510,6 @@ class tl_news_archive extends Backend
 	 */
 	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'newp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->hasAccess('delete', 'newp') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }

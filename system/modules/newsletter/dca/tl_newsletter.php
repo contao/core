@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			(
 				array('tl_newsletter', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'content' => array
 		(
@@ -162,6 +162,10 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('rte'=>'tinyNews', 'helpwizard'=>true),
 			'explanation'             => 'insertTags',
+			'load_callback' => array
+			(
+				array('tl_newsletter', 'convertAbsoluteLinks')
+			),
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'convertRelativeLinks')
@@ -174,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true),
+			'eval'                    => array('decodeEntities'=>true, 'class'=>'noresize'),
 			'sql'                     => "mediumtext NULL"
 		),
 		'addFile' => array
@@ -267,7 +271,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
  * Class tl_newsletter
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -317,7 +321,7 @@ class tl_newsletter extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters in channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create newsletters in channel ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -326,7 +330,7 @@ class tl_newsletter extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" to channel ID "'.Input::get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" to channel ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -340,13 +344,13 @@ class tl_newsletter extends Backend
 
 				if ($objChannel->numRows < 1)
 				{
-					$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objChannel->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -358,7 +362,7 @@ class tl_newsletter extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -367,7 +371,7 @@ class tl_newsletter extends Backend
 
 				if ($objChannel->numRows < 1)
 				{
-					$this->log('Invalid newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Invalid newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -379,7 +383,7 @@ class tl_newsletter extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				if (Input::get('key') == 'send')
@@ -390,19 +394,19 @@ class tl_newsletter extends Backend
 
 					if ($objChannel->numRows < 1)
 					{
-						$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
+						$this->log('Invalid newsletter ID "'.$id.'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 
 					if (!in_array($objChannel->pid, $root))
 					{
-						$this->log('Not enough permissions to send newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
+						$this->log('Not enough permissions to send newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -418,11 +422,22 @@ class tl_newsletter extends Backend
 	public function listNewsletters($arrRow)
 	{
 		return '
-<div class="cte_type ' . (($arrRow['sent'] && $arrRow['date']) ? 'published' : 'unpublished') . '"><strong>' . $arrRow['subject'] . '</strong> - ' . (($arrRow['sent'] && $arrRow['date']) ? sprintf($GLOBALS['TL_LANG']['tl_newsletter']['sentOn'], Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date'])) : $GLOBALS['TL_LANG']['tl_newsletter']['notSent']) . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h128' : '') . '">' . (!$arrRow['sendText'] ? '
-' . $arrRow['content'] . '<hr>' : '' ) . '
-' . nl2br_html5($arrRow['text']) . '
+<div class="cte_type ' . (($arrRow['sent'] && $arrRow['date']) ? 'published' : 'unpublished') . '"><strong>' . $arrRow['subject'] . '</strong> - ' . (($arrRow['sent'] && $arrRow['date']) ? sprintf($GLOBALS['TL_LANG']['tl_newsletter']['sentOn'], Date::parse(Config::get('datimFormat'), $arrRow['date'])) : $GLOBALS['TL_LANG']['tl_newsletter']['notSent']) . '</div>
+<div class="limit_height' . (!Config::get('doNotCollapse') ? ' h128' : '') . '">' . (!$arrRow['sendText'] ? '
+' . $this->replaceInsertTags($arrRow['content'], false) . '<hr>' : '' ) . '
+<pre style="white-space:pre-wrap">' . $arrRow['text'] . '</pre>
 </div>' . "\n";
+	}
+
+
+	/**
+	 * Convert absolute URLs from TinyMCE to relative URLs
+	 * @param string
+	 * @return string
+	 */
+	public function convertAbsoluteLinks($strContent)
+	{
+		return str_replace('src="' .Environment::get('base'), 'src="', $strContent);
 	}
 
 

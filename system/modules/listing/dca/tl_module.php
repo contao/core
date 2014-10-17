@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Listing
  * @link    https://contao.org
@@ -14,7 +14,7 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['listing'] = '{title_legend},name,headline,type;{config_legend},list_table,list_fields,list_where,list_search,list_sort,perPage,list_info,list_info_where;{template_legend:hide},list_layout,list_info_layout;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['listing'] = '{title_legend},name,headline,type;{config_legend},list_table,list_fields,list_where,list_search,list_sort,perPage,list_info,list_info_where;{template_legend:hide},list_layout,list_info_layout,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -53,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_search'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
@@ -71,7 +71,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
  * Class tl_module_listing
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Listing
  */

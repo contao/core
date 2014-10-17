@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class CheckBox
  *
  * Provide methods to handle check boxes.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -66,7 +66,7 @@ class CheckBox extends \Widget
 	 */
 	public function validate()
 	{
-		$varValue = deserialize($this->getPost($this->strName));
+		$varValue = $this->getPost($this->strName);
 
 		if (!empty($varValue) && !$this->isValidOption($varValue))
 		{
@@ -155,12 +155,12 @@ class CheckBox extends \Widget
 			return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container%s"><legend>%s%s%s%s</legend><input type="hidden" name="%s" value="">%s%s</fieldset>%s',
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
-							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
-							($this->required ? '<span class="mandatory">*</span>' : ''),
+							($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 							$this->xlabel,
 							$this->strName,
-							($blnCheckAll ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $this->strId . '\')"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>' : ''),
+							($blnCheckAll ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $this->strId . '\')' . ($this->onclick ? ';' . $this->onclick : '') . '"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>' : ''),
 							str_replace('<br></fieldset><br>', '</fieldset>', implode('<br>', $arrOptions)),
 							$this->wizard);
 		}

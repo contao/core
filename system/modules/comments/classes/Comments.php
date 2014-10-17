@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Comments
  * @link    https://contao.org
@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Class Comments
  *
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */
@@ -84,7 +84,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
 
 			// Initialize the pagination menu
-			$objPagination = new \Pagination($total, $objConfig->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+			$objPagination = new \Pagination($total, $objConfig->perPage, \Config::get('maxPaginationLinks'), $id);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -119,14 +119,14 @@ class Comments extends \Frontend
 				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objComments->comment = \String::toXhtml($objComments->comment);
+					$objPartial->comment = \String::toXhtml($objComments->comment);
 				}
 				else
 				{
-					$objComments->comment = \String::toHtml5($objComments->comment);
+					$objPartial->comment = \String::toHtml5($objComments->comment);
 				}
 
-				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
+				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objPartial->comment));
 
 				$objPartial->datim = \Date::parse($objPage->datimFormat, $objComments->date);
 				$objPartial->date = \Date::parse($objPage->dateFormat, $objComments->date);
@@ -192,6 +192,8 @@ class Comments extends \Frontend
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
 			$objTemplate->requireLogin = true;
+			$objTemplate->login = $GLOBALS['TL_LANG']['MSC']['com_login'];
+
 			return;
 		}
 
@@ -321,7 +323,7 @@ class Comments extends \Frontend
 			}
 
 			// Do not parse any tags in the comment
-			$strComment = htmlspecialchars(trim($arrWidgets['comment']->value));
+			$strComment = specialchars(trim($arrWidgets['comment']->value));
 			$strComment = str_replace(array('&amp;', '&lt;', '&gt;'), array('[&]', '[lt]', '[gt]'), $strComment);
 
 			// Remove multiple line feeds
@@ -431,7 +433,7 @@ class Comments extends \Frontend
 	 * - [url][/url]
 	 * - [url=http://][/url]
 	 * - [email][/email]
-	 * - [email=name@domain.com][/email]
+	 * - [email=name@example.com][/email]
 	 * @param string
 	 * @return string
 	 */

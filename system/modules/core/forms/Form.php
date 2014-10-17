@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Form
  *
  * Provide methods to handle front end forms.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -46,12 +46,6 @@ class Form extends \Hybrid
 	 */
 	protected $strTemplate = 'form';
 
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
-
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
@@ -59,14 +53,19 @@ class Form extends \Hybrid
 	 */
 	public function generate()
 	{
-		$str = parent::generate();
-
 		if (TL_MODE == 'BE')
 		{
-			$str = preg_replace('/name="[^"]+" ?/i', '', $str);
+			$objTemplate = new \BackendTemplate('be_wildcard');
+
+			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->title;
+			$objTemplate->href = 'contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $this->id;
+
+			return $objTemplate->parse();
 		}
 
-		return $str;
+		return parent::generate();
 	}
 
 
@@ -93,16 +92,36 @@ class Form extends \Hybrid
 		$arrLabels = array();
 
 		// Get all form fields
+		$arrFields = array();
 		$objFields = \FormFieldModel::findPublishedByPid($this->id);
 
 		if ($objFields !== null)
 		{
-			$row = 0;
-			$max_row = $objFields->count();
-
 			while ($objFields->next())
 			{
-				$strClass = $GLOBALS['TL_FFL'][$objFields->type];
+				$arrFields[] = $objFields->current();
+			}
+		}
+
+		// HOOK: compile form fields
+		if (isset($GLOBALS['TL_HOOKS']['compileFormFields']) && is_array($GLOBALS['TL_HOOKS']['compileFormFields']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileFormFields'] as $callback)
+			{
+				$this->import($callback[0]);
+				$arrFields = $this->$callback[0]->$callback[1]($arrFields, $formId, $this);
+			}
+		}
+
+		// Process the fields
+		if (!empty($arrFields) && is_array($arrFields))
+		{
+			$row = 0;
+			$max_row = count($arrFields);
+
+			foreach ($arrFields as $objField)
+			{
+				$strClass = $GLOBALS['TL_FFL'][$objField->type];
 
 				// Continue if the class is not defined
 				if (!class_exists($strClass))
@@ -110,7 +129,7 @@ class Form extends \Hybrid
 					continue;
 				}
 
-				$arrData = $objFields->row();
+				$arrData = $objField->row();
 
 				$arrData['decodeEntities'] = true;
 				$arrData['allowHtml'] = $this->allowTags;
@@ -118,7 +137,7 @@ class Form extends \Hybrid
 				$arrData['tableless'] = $this->tableless;
 
 				// Increase the row count if its a password field
-				if ($objFields->type == 'password')
+				if ($objField->type == 'password')
 				{
 					++$row;
 					++$max_row;
@@ -127,7 +146,7 @@ class Form extends \Hybrid
 				}
 
 				// Submit buttons do not use the name attribute
-				if ($objFields->type == 'submit')
+				if ($objField->type == 'submit')
 				{
 					$arrData['name'] = '';
 				}
@@ -135,14 +154,14 @@ class Form extends \Hybrid
 				// Unset the default value depending on the field type (see #4722)
 				if (!empty($arrData['value']))
 				{
-					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objFields->type])))
+					if (!in_array('value', trimsplit('[,;]', $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$objField->type])))
 					{
 						$arrData['value'] = '';
 					}
 				}
 
 				$objWidget = new $strClass($arrData);
-				$objWidget->required = $objFields->mandatory ? true : false;
+				$objWidget->required = $objField->mandatory ? true : false;
 
 				// HOOK: load form field callback
 				if (isset($GLOBALS['TL_HOOKS']['loadFormField']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
@@ -177,9 +196,9 @@ class Form extends \Hybrid
 					// Store current value in the session
 					elseif ($objWidget->submitInput())
 					{
-						$arrSubmitted[$objFields->name] = $objWidget->value;
-						$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
-						unset($_POST[$objFields->name]); // see #5474
+						$arrSubmitted[$objField->name] = $objWidget->value;
+						$_SESSION['FORM_DATA'][$objField->name] = $objWidget->value;
+						unset($_POST[$objField->name]); // see #5474
 					}
 				}
 
@@ -195,7 +214,7 @@ class Form extends \Hybrid
 					continue;
 				}
 
-				if ($objWidget->name != '')
+				if ($objWidget->name != '' && $objWidget->label != '')
 				{
 					$arrLabels[$objWidget->name] = $this->replaceInsertTags($objWidget->label); // see #4268
 				}
@@ -345,7 +364,7 @@ class Form extends \Hybrid
 			// Fallback to default subject
 			if (!strlen($email->subject))
 			{
-				$email->subject = $this->replaceInsertTags($this->subject);
+				$email->subject = $this->replaceInsertTags($this->subject, false);
 			}
 
 			// Send copy to sender
@@ -361,7 +380,7 @@ class Form extends \Hybrid
 				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
-				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+				$objTemplate->charset = \Config::get('characterSet');
 
 				$email->attachFileFromString($objTemplate->parse(), 'form.xml', 'application/xml');
 			}
@@ -391,10 +410,17 @@ class Form extends \Hybrid
 			}
 
 			$uploaded = strlen(trim($uploaded)) ? "\n\n---\n" . $uploaded : '';
-
-			// Send e-mail
 			$email->text = \String::decodeEntities(trim($message)) . $uploaded . "\n\n";
-			$email->sendTo($recipients);
+
+			// Send the e-mail
+			try
+			{
+				$email->sendTo($recipients);
+			}
+			catch (\Swift_SwiftException $e)
+			{
+				$this->log('Form "' . $this->title . '" could not be sent: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+			}
 		}
 
 		// Store the values in the database
@@ -439,6 +465,15 @@ class Form extends \Hybrid
 				}
 			}
 
+			// Set the correct empty value (see #6284, #6373)
+			foreach ($arrSet as $k=>$v)
+			{
+				if ($v === '')
+				{
+					$arrSet[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->targetTable]['fields'][$k]['sql']);
+				}
+			}
+
 			// Do not use Models here (backwards compatibility)
 			$this->Database->prepare("INSERT INTO " . $this->targetTable . " %s")->set($arrSet)->execute();
 		}
@@ -450,7 +485,6 @@ class Form extends \Hybrid
 		}
 
 		$arrFiles = $_SESSION['FILES'];
-		$arrData = $_SESSION['FORM_DATA'];
 
 		// HOOK: process form data callback
 		if (isset($GLOBALS['TL_HOOKS']['processFormData']) && is_array($GLOBALS['TL_HOOKS']['processFormData']))
@@ -458,23 +492,21 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrData, $this->arrData, $arrFiles, $arrLabels, $this);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 
-		// Reset form data in case it has been modified in a callback function
-		$_SESSION['FORM_DATA'] = $arrData;
 		$_SESSION['FILES'] = array(); // DO NOT CHANGE
 
 		// Add a log entry
 		if (FE_USER_LOGGED_IN)
 		{
 			$this->import('FrontendUser', 'User');
-			$this->log('Form "' . $this->title . '" has been submitted by "' . $this->User->username . '".', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by "' . $this->User->username . '".', __METHOD__, TL_FORMS);
 		}
 		else
 		{
-			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', 'Form processFormData()', TL_FORMS);
+			$this->log('Form "' . $this->title . '" has been submitted by ' . \System::anonymizeIp(\Environment::get('ip')) . '.', __METHOD__, TL_FORMS);
 		}
 
 		// Check whether there is a jumpTo page
@@ -523,6 +555,7 @@ class Form extends \Hybrid
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);
+					$objTemplate->tableless = $this->tableless ? true : false;
 
 					$this->Template->fields .= $objTemplate->parse() . "\n";
 				}

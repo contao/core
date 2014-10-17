@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -26,7 +26,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class TemplateLoader
 {
@@ -53,7 +53,7 @@ class TemplateLoader
 	/**
 	 * Add multiple new templates with their file paths
 	 *
-	 * @param array An array of files
+	 * @param array $files An array of files
 	 */
 	public static function addFiles($files)
 	{
@@ -119,6 +119,29 @@ class TemplateLoader
 		}
 
 		// Load the default template
+		if (isset(self::$files[$template]))
+		{
+			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;
+		}
+
+		throw new \Exception('Could not find template "' . $template . '"');
+	}
+
+
+	/**
+	 * Return the path to the default template
+	 *
+	 * @param string $template The template name
+	 * @param string $format   The output format (e.g. "html5")
+	 *
+	 * @return string The path to the default template file
+	 *
+	 * @throws \Exception If $template does not exist
+	 */
+	public static function getDefaultPath($template, $format)
+	{
+		$file = $template .  '.' . $format;
+
 		if (isset(self::$files[$template]))
 		{
 			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;

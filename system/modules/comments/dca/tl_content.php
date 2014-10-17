@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Comments
  * @link    https://contao.org
@@ -14,7 +14,7 @@
 /**
  * Add palette to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = '{type_legend},type,headline;{comment_legend},com_order,com_perPage,com_moderate,com_bbcode,com_requireLogin,com_disableCaptcha;{template_legend:hide},com_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = '{type_legend},type,headline;{comment_legend},com_order,com_perPage,com_moderate,com_bbcode,com_requireLogin,com_disableCaptcha;{template_legend:hide},com_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 
 /**
@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_perPage'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_perPage'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+	'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
@@ -84,6 +84,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_content_comments', 'getCommentsTemplates'),
+	'eval'                    => array('tl_class'=>'w50'),
 	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
@@ -92,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
  * Class tl_content_comments
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */

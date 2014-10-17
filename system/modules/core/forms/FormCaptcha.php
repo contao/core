@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -20,8 +20,7 @@ namespace Contao;
 /**
  * Class FormCaptcha
  *
- * File upload field.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -30,26 +29,37 @@ class FormCaptcha extends \Widget
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_captcha';
 
 	/**
 	 * Captcha key
+	 *
 	 * @var string
 	 */
 	protected $strCaptchaKey;
 
 	/**
 	 * Security questions
+	 *
 	 * @var string
 	 */
 	protected $strQuestion;
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-captcha';
+
 
 	/**
 	 * Initialize the object
-	 * @param array
+	 *
+	 * @param array $arrAttributes An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -57,31 +67,60 @@ class FormCaptcha extends \Widget
 
 		$this->arrAttributes['maxlength'] = 2;
 		$this->strCaptchaKey = 'c' . md5(uniqid(mt_rand(), true));
-		$this->mandatory = true;
 		$this->arrAttributes['required'] = true;
+		$this->arrConfiguration['mandatory'] = true;
 	}
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute name
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
-			case 'required':
-			case 'mandatory':
-				// Is set by default
-				break;
-
 			case 'placeholder':
 				$this->arrAttributes['placeholder'] = $varValue;
 				break;
 
+			case 'required':
+			case 'mandatory':
+			case 'minlength':
+			case 'maxlength':
+				// Ignore
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
+				break;
+		}
+	}
+
+
+	/**
+	 * Return a parameter
+	 *
+	 * @param string $strKey The parameter key
+	 *
+	 * @return mixed The parameter value
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'name':
+				return $this->strCaptchaKey;
+				break;
+
+			case 'question':
+				return $this->strQuestion;
+				break;
+
+			default:
+				return parent::__get($strKey);
 				break;
 		}
 	}
@@ -105,68 +144,11 @@ class FormCaptcha extends \Widget
 
 
 	/**
-	 * Generate the label and return it as string
-	 * @return string
-	 */
-	public function generateLabel()
-	{
-		if ($this->strLabel == '')
-		{
-			return '';
-		}
-
-		if ($this->strQuestion == '')
-		{
-			$this->setQuestion();
-		}
-
-		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
-						$this->strLabel,
-						'<span class="mandatory">*</span>',
-						$this->strQuestion);
-	}
-
-
-	/**
-	 * Generate the widget and return it as string
-	 * @return string
-	 */
-	public function generate()
-	{
-		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s%s',
-						$this->strCaptchaKey,
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->getAttributes(),
-						$this->strTagEnding) . $this->addSubmit();
-	}
-
-
-	/**
-	 * Return the captcha question as string
-	 * @return string
-	 */
-	public function generateQuestion()
-	{
-		if ($this->strQuestion == '')
-		{
-			$this->setQuestion();
-		}
-
-		return sprintf('<span class="captcha_text%s">%s</span>',
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->strQuestion);
-	}
-
-
-	/**
 	 * Generate the captcha question
-	 * @return string
+	 *
+	 * @return string The question string
 	 */
-	protected function setQuestion()
+	protected function getQuestion()
 	{
 		$int1 = rand(1, 9);
 		$int2 = rand(1, 9);
@@ -189,6 +171,57 @@ class FormCaptcha extends \Widget
 			$strEncoded .= sprintf('&#%s;', utf8_ord($strCharacter));
 		}
 
-		$this->strQuestion = $strEncoded;
+		return $strEncoded;
+	}
+
+
+	/**
+	 * Generate the label and return it as string
+	 *
+	 * @return string The label markup
+	 */
+	public function generateLabel()
+	{
+		if ($this->strLabel == '')
+		{
+			return '';
+		}
+
+		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
+						$this->strId,
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
+						$this->strLabel,
+						'<span class="mandatory">*</span>',
+						$this->getQuestion());
+	}
+
+
+	/**
+	 * Generate the widget and return it as string
+	 *
+	 * @return string The widget markup
+	 */
+	public function generate()
+	{
+		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s%s',
+						$this->strCaptchaKey,
+						$this->strId,
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						$this->getAttributes(),
+						$this->strTagEnding) . $this->addSubmit();
+	}
+
+
+	/**
+	 * Return the captcha question as string
+	 *
+	 * @return string The question markup
+	 */
+	public function generateQuestion()
+	{
+		return sprintf('<span class="captcha_text%s">%s</span>',
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						$this->getQuestion());
 	}
 }

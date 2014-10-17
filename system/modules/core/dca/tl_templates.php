@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -22,8 +22,8 @@ System::loadLanguageFile('tl_files');
  */
 if (Input::get('do') == 'tpl_editor')
 {
-	$GLOBALS['TL_CONFIG']['uploadPath'] = 'templates';
-	$GLOBALS['TL_CONFIG']['editableFiles'] = $GLOBALS['TL_CONFIG']['templateFiles'];
+	Config::set('uploadPath', 'templates');
+	Config::set('editableFiles', Config::get('templateFiles'));
 }
 
 
@@ -37,7 +37,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'validFileTypes'              => $GLOBALS['TL_CONFIG']['templateFiles'],
+		'validFileTypes'              => Config::get('templateFiles'),
 		'closed'                      => true,
 		'onload_callback' => array
 		(
@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirmFile'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'source' => array
 			(
@@ -122,18 +122,17 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'spaceToUnderscore'=>true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'spaceToUnderscore'=>true)
 		)
 	)
 );
-
 
 
 /**
  * Class tl_templates
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -247,10 +246,10 @@ class tl_templates extends Backend
 		}
 
 		$arrAllTemplates = array();
-		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		$arrAllowed = trimsplit(',', Config::get('templateFiles'));
 
 		// Get all templates
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (ModuleLoader::getActive() as $strModule)
 		{
 			// Continue if there is no templates folder
 			if ($strModule == 'repository' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
@@ -259,10 +258,12 @@ class tl_templates extends Backend
 			}
 
 			// Find all templates
-			$objFiles = new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator(
-					TL_ROOT . '/system/modules/' . $strModule . '/templates',
-					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+			$objFiles = new SortedIterator(
+				new RecursiveIteratorIterator(
+					new RecursiveDirectoryIterator(
+						TL_ROOT . '/system/modules/' . $strModule . '/templates',
+						FilesystemIterator::UNIX_PATHS|FilesystemIterator::FOLLOW_SYMLINKS|FilesystemIterator::SKIP_DOTS
+					)
 				)
 			);
 
@@ -297,9 +298,7 @@ class tl_templates extends Backend
 		return '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
-</div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_templates']['headline'].'</h2>'.(($strError != '') ? '
+</div>'.(($strError != '') ? '
 
 <div class="tl_message">
 <p class="tl_error">'.$strError.'</p>
@@ -312,12 +311,12 @@ class tl_templates extends Backend
 <div class="tl_tbox">
 <div>
   <h3><label for="ctrl_original">'.$GLOBALS['TL_LANG']['tl_templates']['original'][0].'</label></h3>
-  <select name="original" id="ctrl_original" class="tl_select tl_chosen" onfocus="Backend.getScrollOffset()">'.$strAllTemplates.'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['original'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <select name="original" id="ctrl_original" class="tl_select tl_chosen" onfocus="Backend.getScrollOffset()">'.$strAllTemplates.'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['original'][1] && Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_templates']['original'][1].'</p>' : '').'
 </div>
 <div>
   <h3><label for="ctrl_target">'.$GLOBALS['TL_LANG']['tl_templates']['target'][0].'</label></h3>
-  <select name="target" id="ctrl_target" class="tl_select" onfocus="Backend.getScrollOffset()"><option value="templates">templates</option>'. $this->getTargetFolders('templates') .'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['target'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <select name="target" id="ctrl_target" class="tl_select" onfocus="Backend.getScrollOffset()"><option value="templates">templates</option>'. $this->getTargetFolders('templates') .'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['target'][1] && Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_templates']['target'][1].'</p>' : '').'
 </div>
 </div>

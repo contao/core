@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -15,7 +15,7 @@ body {
 
 /* Header */
 #header {
-	width:756px;
+	width:741px;
 	margin:18px auto 0;
 	padding:1px;
 	background:#fff;
@@ -26,21 +26,20 @@ body {
 #header h1 {
 	margin:0;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
 
 /* Container */
 #container {
-	width:760px;
+	width:745px;
 	margin:0 auto;
 	padding:0 0 18px;
 }
 
 /* Main */
 #main {
-	width:756px;
+	width:741px;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -55,6 +54,7 @@ body {
 	padding:8px 0 7px 36px;
 	background:url("images/install.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	color:#8ab858;
 }
 #container h2.important {
@@ -62,19 +62,22 @@ body {
 	padding:7px 0 8px 36px;
 	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	font-weight:bold;
-	color:#c55;
+	color:#c33;
 }
 #container h3 {
 	margin:0;
 	padding:18px 0 3px;
 	font-size:12px;
+	font-size:.75rem;
 	font-weight:bold;
 }
 #container h4 {
 	margin:12px 0 1px;
 	padding:0;
 	font-size:11px;
+	font-size:.6875rem;
 	font-weight:normal;
 }
 
@@ -105,22 +108,39 @@ li {
 }
 
 /* Form tables */
+#sql_wrapper {
+	max-height:300px;
+	overflow:auto;
+	border:1px solid #ddd;
+	background:#fcfcfc;
+	padding:9px;
+}
 #sql_table {
 	margin:-3px 0;
 }
 #sql_table pre {
 	white-space:pre-wrap;
 }
+#sql_table .tl_checkbox {
+	margin-top:3px;
+}
+.webkit #sql_table .tl_checkbox {
+	margin-top:4px;
+}
+.ie #sql_table .tl_checkbox {
+	margin-top:-1px;
+}
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
 }
 .mac #sql_table pre label {
 	font-size:12px;
+	font-size:.75rem;
 }
 .tl_col_0 {
 	padding:6px 0 2px;
 	font-weight:bold;
-	color:#8ab858;
+	color:#77ac45;
 }
 .tl_col_1 {
 	vertical-align:top;
@@ -135,16 +155,16 @@ li {
 	padding:2px 0 3px 20px;
 }
 .tl_error {
-	color:#c55;
-	background:url("images/error.gif") no-repeat left center;
+	color:#c33;
+	background:url("images/error.gif") no-repeat left 1px;
 }
 .tl_confirm {
-	color:#8ab858;
-	background:url("images/ok.gif") no-repeat left center;
+	color:#77ac45;
+	background:url("images/ok.gif") no-repeat left 1px;
 }
 .tl_info {
-	color:#5c9ac9;
-	background:url("images/show.gif") no-repeat 1px center;
+	color:#4b85ba;
+	background:url("images/show.gif") no-repeat 1px 1px;
 }
 .tl_formbody .tl_error {
 	margin:0;
@@ -152,14 +172,14 @@ li {
 
 /* Go to back end */
 #go_to_login {
-	margin:12px 18px 14px 0;
+	margin:0 18px 14px 0;
 	padding:0;
 	text-align:right;
 }
 #go_to_login a {
 	padding:2px 0 3px 20px;
 	background:url("images/login.gif") no-repeat left center;
-	color:#bbb;
+	color:#aaa;
 }
 
 /* License */
@@ -168,7 +188,7 @@ li {
 	overflow:auto;
 	margin:0;
 	background:#f9f9f9;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	padding:10px;
 }
 
@@ -193,17 +213,21 @@ fieldset.tl_tbox {
 fieldset.tl_tbox,fieldset.tl_box {
 	margin-left:18px;
 	margin-right:18px;
-	padding-top:6px;
+	padding:6px;
 	border:1px solid #ddd;
 	border-width:1px 0 0;
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	margin-top:-1px;
-	color:#8ab858;
+	color:#77ac45;
 	padding-left:18px;
 	padding-right:3px;
 	background:url("images/palOpen.gif") left center no-repeat;
 	cursor:pointer;
+}
+fieldset.tl_tbox.nolegend {
+	border:none;
+	margin-top:0;
 }
 fieldset.collapsed {
 	padding-top:0;
@@ -219,8 +243,8 @@ fieldset.collapsed > legend {
 
 /* Form fields */
 .tl_text {
-	width:232px !important;
+	width:250px !important;
 }
 .tl_select {
-	width:238px !important;
+	width:258px !important;
 }

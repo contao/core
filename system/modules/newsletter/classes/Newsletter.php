@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Newsletter
  *
  * Provide methods to handle newsletters.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -48,19 +48,18 @@ class Newsletter extends \Backend
 		// Overwrite the SMTP configuration
 		if ($objNewsletter->useSMTP)
 		{
-			$GLOBALS['TL_CONFIG']['useSMTP'] = true;
-
-			$GLOBALS['TL_CONFIG']['smtpHost'] = $objNewsletter->smtpHost;
-			$GLOBALS['TL_CONFIG']['smtpUser'] = $objNewsletter->smtpUser;
-			$GLOBALS['TL_CONFIG']['smtpPass'] = $objNewsletter->smtpPass;
-			$GLOBALS['TL_CONFIG']['smtpEnc']  = $objNewsletter->smtpEnc;
-			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
+			\Config::set('useSMTP', true);
+			\Config::set('smtpHost', $objNewsletter->smtpHost);
+			\Config::set('smtpUser', $objNewsletter->smtpUser);
+			\Config::set('smtpPass', $objNewsletter->smtpPass);
+			\Config::set('smtpEnc', $objNewsletter->smtpEnc);
+			\Config::set('smtpPort', $objNewsletter->smtpPort);
 		}
 
 		// Add default sender address
 		if ($objNewsletter->sender == '')
 		{
-			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail($GLOBALS['TL_CONFIG']['adminEmail']);
+			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail(\Config::get('adminEmail'));
 		}
 
 		$arrAttachments = array();
@@ -73,24 +72,23 @@ class Newsletter extends \Backend
 
 			if (!empty($files) && is_array($files))
 			{
-				// Check for version 3 format
-				if (!is_numeric($files[0]))
+				$objFiles = \FilesModel::findMultipleByUuids($files);
+
+				if ($objFiles === null)
 				{
-					$blnAttachmentsFormatError = true;
-					\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					if (!\Validator::isUuid($files[0]))
+					{
+						$blnAttachmentsFormatError = true;
+						\Message::addError($GLOBALS['TL_LANG']['ERR']['version2format']);
+					}
 				}
 				else
 				{
-					$objFiles = \FilesModel::findMultipleByIds($files);
-
-					if ($objFiles !== null)
+					while ($objFiles->next())
 					{
-						while ($objFiles->next())
+						if (is_file(TL_ROOT . '/' . $objFiles->path))
 						{
-							if (is_file(TL_ROOT . '/' . $objFiles->path))
-							{
-								$arrAttachments[] = $objFiles->path;
-							}
+							$arrAttachments[] = $objFiles->path;
 						}
 					}
 				}
@@ -98,8 +96,8 @@ class Newsletter extends \Backend
 		}
 
 		// Replace insert tags
-		$html = $this->replaceInsertTags($objNewsletter->content);
-		$text = $this->replaceInsertTags($objNewsletter->text);
+		$html = $this->replaceInsertTags($objNewsletter->content, false);
+		$text = $this->replaceInsertTags($objNewsletter->text, false);
 
 		// Convert relative URLs
 		if ($objNewsletter->externalImages)
@@ -199,7 +197,7 @@ class Newsletter extends \Backend
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
 									   ->execute($strRecipient);
 
-						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_ERROR);
+						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', __METHOD__, TL_ERROR);
 					}
 				}
 
@@ -232,10 +230,8 @@ class Newsletter extends \Backend
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>
 '.\Message::generate().'
-<form action="'.ampersand(\Environment::get('script'), true).'" id="tl_newsletter_send" class="tl_form" method="get">
+<form action="'.TL_SCRIPT.'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
 <input type="hidden" name="do" value="' . \Input::get('do') . '">
 <input type="hidden" name="table" value="' . \Input::get('table') . '">
@@ -264,29 +260,29 @@ class Newsletter extends \Backend
 ' . $html . '
 </div>' : '') . '
 <div class="preview_text">
-' . nl2br_html5($text) . '
+<pre style="white-space:pre-wrap">' . $text . '</pre>
 </div>
 
 <div class="tl_tbox">
 <div class="w50">
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
-  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && \Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_timeout">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][0] . '</label></h3>
-  <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && \Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_start">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][0] . '</label></h3>
-  <input type="text" name="start" id="ctrl_start" value="0" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['start'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="start" id="ctrl_start" value="0" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['start'][1] && \Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>
   <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (isset($_SESSION['TL_PREVIEW_MAIL_ERROR']) ? '
-  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && \Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '')) . '
 </div>
 <div class="clear"></div>
@@ -380,8 +376,9 @@ class Newsletter extends \Backend
 
 			$objTemplate->title = $objNewsletter->subject;
 			$objTemplate->body = \String::parseSimpleTokens($html, $arrRecipient);
-			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$objTemplate->charset = \Config::get('characterSet');
 			$objTemplate->css = $css; // Backwards compatibility
+			$objTemplate->recipient = $arrRecipient['email'];
 
 			// Parse template
 			$objEmail->html = $objTemplate->parse();
@@ -403,6 +400,16 @@ class Newsletter extends \Backend
 		{
 			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
 		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['sendNewsletter']) && is_array($GLOBALS['TL_HOOKS']['sendNewsletter']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sendNewsletter'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objEmail, $objNewsletter, $arrRecipient, $text, $html);
+			}
+		}
 	}
 
 
@@ -420,8 +427,8 @@ class Newsletter extends \Backend
 		$this->import('BackendUser', 'User');
 		$class = $this->User->uploader;
 
-		// See #4086
-		if (!class_exists($class))
+		// See #4086 and #7046
+		if (!class_exists($class) || $class == 'DropZone')
 		{
 			$class = 'FileUpload';
 		}
@@ -488,7 +495,7 @@ class Newsletter extends \Backend
 					// Skip invalid entries
 					if (!\Validator::isEmail($strRecipient))
 					{
-						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
+						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', __METHOD__, TL_ERROR);
 
 						++$intInvalid;
 						continue;
@@ -524,14 +531,12 @@ class Newsletter extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=import', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
@@ -914,7 +919,6 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
@@ -929,12 +933,17 @@ class Newsletter extends \Backend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
-					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
+					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objNewsletter->jumpTo];
@@ -946,7 +955,7 @@ class Newsletter extends \Backend
 				{
 					while ($objItem->next())
 					{
-						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 					}
 				}
 			}

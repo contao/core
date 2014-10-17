@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -101,28 +101,27 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	(
 		'__selector__'                => array('type', 'defineRoot', 'source', 'interactive', 'protected', 'reg_assignDir', 'reg_activate'),
 		'default'                     => '{title_legend},name,type',
-		'navigation'                  => '{title_legend},name,headline,type;{nav_legend},levelOffset,showLevel,hardLimit,showProtected;{reference_legend:hide},defineRoot;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},pages,showProtected;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'breadcrumb'                  => '{title_legend},name,headline,type;{nav_legend},showHidden;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'quicknav'                    => '{title_legend},name,headline,type;{nav_legend},customLabel,showLevel,hardLimit,showProtected,showHidden;{reference_legend:hide},rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'quicklink'                   => '{title_legend},name,headline,type;{nav_legend},pages,customLabel;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'booknav'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden,rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'articlenav'                  => '{title_legend},name,headline,type;{config_legend},loadFirst;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'languageSwitch'              => '{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'navigation'                  => '{title_legend},name,headline,type;{nav_legend},levelOffset,showLevel,hardLimit,showProtected;{reference_legend:hide},defineRoot;{template_legend:hide},navigationTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},pages,showProtected;{template_legend:hide},navigationTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'breadcrumb'                  => '{title_legend},name,headline,type;{nav_legend},showHidden;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'quicknav'                    => '{title_legend},name,headline,type;{nav_legend},customLabel,showLevel,hardLimit,showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'quicklink'                   => '{title_legend},name,headline,type;{nav_legend},pages,customLabel;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'booknav'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden,rootPage;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'articlenav'                  => '{title_legend},name,headline,type;{config_legend},loadFirst;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'login'                       => '{title_legend},name,headline,type;{config_legend},autologin;{redirect_legend},jumpTo,redirectBack;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable;{redirect_legend},jumpTo;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'registration'                => '{title_legend},name,headline,type;{config_legend},editable,newsletters,disableCaptcha;{account_legend},reg_groups,reg_allowLogin,reg_assignDir;{redirect_legend},jumpTo;{email_legend:hide},reg_activate;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'lostPassword'                => '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{template_legend:hide},tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'closeAccount'                => '{title_legend},name,headline,type;{config_legend},reg_close;{redirect_legend},jumpTo;{template_legend:hide},tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'lostPassword'                => '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'closeAccount'                => '{title_legend},name,headline,type;{config_legend},reg_close;{redirect_legend},jumpTo;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'search'                      => '{title_legend},name,headline,type;{config_legend},queryType,fuzzy,contextLength,totalLength,perPage,searchType;{redirect_legend:hide},jumpTo;{reference_legend:hide},rootPage;{template_legend:hide},searchTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests',
-		'rss_reader'                  => '{title_legend},name,headline,type;{config_legend},rss_feed,numberOfItems,perPage,skipFirst,rss_cache;{template_legend:hide},rss_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space'
+		'search'                      => '{title_legend},name,headline,type;{config_legend},queryType,fuzzy,contextLength,totalLength,perPage,searchType;{redirect_legend:hide},jumpTo;{reference_legend:hide},rootPage;{template_legend:hide},searchTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source;{interact_legend:hide},interactive;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'html'                        => '{title_legend},name,type;{html_legend},html;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests',
+		'rss_reader'                  => '{title_legend},name,headline,type;{config_legend},rss_feed,numberOfItems,perPage,skipFirst,rss_cache;{template_legend:hide},rss_template,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space'
 	),
 
 	// Subpalettes
@@ -194,7 +193,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['levelOffset'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>5, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>5, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'showLevel' => array
@@ -202,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['showLevel'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>5, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>5, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'hardLimit' => array
@@ -245,6 +244,16 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getNavigationTemplates'),
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'customTpl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['customTpl'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_module', 'getModuleTemplates'),
+			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'pages' => array
@@ -253,14 +262,14 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'foreignKey'              => 'tl_page.title',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'orderField'=>'orderPages', 'mandatory'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'orderField'=>'orderPages', 'mandatory'=>true),
 			'sql'                     => "blob NULL",
 			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'orderPages' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'showHidden' => array
 		(
@@ -310,7 +319,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'inputType'               => 'select',
 			'options'                 => array('1cl', '2cl'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-			'eval'                    => array('helpwizard'=>true),
+			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'editable' => array
@@ -344,9 +353,11 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['form'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
+			'foreignKey'              => 'tl_form.title',
 			'options_callback'        => array('tl_module', 'getForms'),
-			'eval'                    => array('chosen'=>true),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'queryType' => array
 		(
@@ -373,7 +384,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 48,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'totalLength' => array
@@ -382,7 +393,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 1000,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'perPage' => array
@@ -391,7 +402,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 0,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'searchType' => array
@@ -420,7 +431,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 'main',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections'])),
+			'options_callback'        => array('tl_module', 'getLayoutSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -430,7 +441,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['skipFirst'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'loadFirst' => array
@@ -445,7 +456,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'transparent' => array
@@ -490,7 +501,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'url' => array
 		(
@@ -521,7 +532,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['flashJS'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('class'=>'monospace'),
+			'eval'                    => array('class'=>'monospace', 'rte'=>'ace|js'),
 			'sql'                     => "text NULL"
 		),
 		'imgSize' => array
@@ -529,9 +540,9 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['imgSize'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'useCaption' => array
@@ -561,7 +572,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'orderSRC' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['orderSRC'],
-			'sql'                     => "text NULL"
+			'sql'                     => "blob NULL"
 		),
 		'html' => array
 		(
@@ -599,6 +610,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getRssTemplates'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'numberOfItems' => array
@@ -607,7 +619,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 3,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'disableCaptcha' => array
@@ -664,7 +676,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'reg_activate' => array
 		(
@@ -759,7 +771,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
  * Class tl_module
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -788,7 +800,7 @@ class tl_module extends Backend
 
 		if (!$this->User->hasAccess('modules', 'themes'))
 		{
-			$this->log('Not enough permissions to access the modules module', 'tl_module checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the modules module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -853,7 +865,7 @@ class tl_module extends Backend
 
 		while ($objForms->next())
 		{
-			if ($this->User->isAdmin || $this->User->hasAccess($objForms->id, 'forms'))
+			if ($this->User->hasAccess($objForms->id, 'forms'))
 			{
 				$arrForms[$objForms->id] = $objForms->title;
 			}
@@ -864,12 +876,51 @@ class tl_module extends Backend
 
 
 	/**
+	 * Return all layout sections as array
+	 * @return array
+	 */
+	public function getLayoutSections()
+	{
+		$arrCustom = array();
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
+
+		// Check for custom layout sections
+		$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+		while ($objLayout->next())
+		{
+			$arrCustom = array_merge($arrCustom, trimsplit(',', $objLayout->sections));
+		}
+
+		$arrCustom = array_unique($arrCustom);
+
+		// Add the custom layout sections
+		if (!empty($arrCustom) && is_array($arrCustom))
+		{
+			$arrSections = array_merge($arrSections, $arrCustom);
+		}
+
+		return $arrSections;
+	}
+
+
+	/**
 	 * Return all navigation templates as array
 	 * @return array
 	 */
 	public function getNavigationTemplates()
 	{
 		return $this->getTemplateGroup('nav_');
+	}
+
+
+	/**
+	 * Return all module templates as array
+	 * @return array
+	 */
+	public function getModuleTemplates()
+	{
+		return $this->getTemplateGroup('mod_');
 	}
 
 

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -33,7 +33,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class FeedItem
 {
@@ -48,7 +48,7 @@ class FeedItem
 	/**
 	 * Set the data from an array
 	 *
-	 * @param array An optional data array
+	 * @param array $arrData An optional data array
 	 */
 	public function __construct($arrData=null)
 	{

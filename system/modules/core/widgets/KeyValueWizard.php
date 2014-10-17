@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class KeyValueWizard
  *
  * Provide methods to handle key value pairs.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -70,7 +70,7 @@ class KeyValueWizard extends \Widget
 	public function validate()
 	{
 		$mandatory = $this->mandatory;
-		$options = deserialize($this->getPost($this->strName));
+		$options = $this->getPost($this->strName);
 
 		// Check keys only (values can be empty)
 		if (is_array($options))

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,12 +21,48 @@ namespace Contao;
  * Class BackendUser
  *
  * Provide methods to manage back end users.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
 class BackendUser extends \User
 {
+
+	/**
+	 * Edit page flag
+	 * @var string
+	 */
+	const CAN_EDIT_PAGE = 1;
+
+	/**
+	 * Edit page hierarchy flag
+	 * @var string
+	 */
+	const CAN_EDIT_PAGE_HIERARCHY = 2;
+
+	/**
+	 * Delete page flag
+	 * @var string
+	 */
+	const CAN_DELETE_PAGE = 3;
+
+	/**
+	 * Edit articles flag
+	 * @var string
+	 */
+	const CAN_EDIT_ARTICLES = 4;
+
+	/**
+	 * Edit article hierarchy flag
+	 * @var string
+	 */
+	const CAN_EDIT_ARTICLE_HIERARCHY = 5;
+
+	/**
+	 * Delete articles flag
+	 * @var string
+	 */
+	const CAN_DELETE_ARTICLES = 6;
 
 	/**
 	 * Current object instance (do not remove)
@@ -82,7 +118,7 @@ class BackendUser extends \User
 		{
 			$key = null;
 
-			if (\Environment::get('script') == 'contao/main.php')
+			if (TL_SCRIPT == 'contao/main.php')
 			{
 				$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 			}
@@ -177,7 +213,7 @@ class BackendUser extends \User
 	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
-		if (parent::authenticate() || \Environment::get('script') == 'contao/index.php')
+		if (parent::authenticate() || TL_SCRIPT == 'contao/index.php')
 		{
 			return;
 		}
@@ -185,16 +221,9 @@ class BackendUser extends \User
 		$strRedirect = 'contao/';
 
 		// Redirect to the last page visited upon login
-		if (\Environment::get('script') == 'contao/main.php' || \Environment::get('script') == 'contao/preview.php')
+		if (TL_SCRIPT == 'contao/main.php' || TL_SCRIPT == 'contao/preview.php')
 		{
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
-		}
-
-		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo '<script>location.replace("' . \Environment::get('base') . $strRedirect . '")</script>';
-			exit;
 		}
 
 		\Controller::redirect($strRedirect);
@@ -223,10 +252,9 @@ class BackendUser extends \User
 		{
 			return true;
 		}
-
-		// Enable all subfolders (filemounts)
 		elseif ($array == 'filemounts')
 		{
+			// Check the subfolders (filemounts)
 			foreach ($this->filemounts as $folder)
 			{
 				if (preg_match('/^'. preg_quote($folder, '/') .'/i', $field[0]))
@@ -248,6 +276,11 @@ class BackendUser extends \User
 	 */
 	public function isAllowed($int, $row)
 	{
+		if ($this->isAdmin)
+		{
+			return true;
+		}
+
 		// Inherit CHMOD settings
 		if (!$row['includeChmod'])
 		{
@@ -277,15 +310,15 @@ class BackendUser extends \User
 			// Set default values
 			if (!$row['chmod'])
 			{
-				$row['chmod'] = $GLOBALS['TL_CONFIG']['defaultChmod'];
+				$row['chmod'] = \Config::get('defaultChmod');
 			}
 			if (!$row['cuser'])
 			{
-				$row['cuser'] = intval($GLOBALS['TL_CONFIG']['defaultUser']);
+				$row['cuser'] = intval(\Config::get('defaultUser'));
 			}
 			if (!$row['cgroup'])
 			{
-				$row['cgroup'] = intval($GLOBALS['TL_CONFIG']['defaultGroup']);
+				$row['cgroup'] = intval(\Config::get('defaultGroup'));
 			}
 		}
 
@@ -305,6 +338,22 @@ class BackendUser extends \User
 		}
 
 		return (count(array_intersect($permission, $chmod)) > 0);
+	}
+
+
+	/**
+	 * Return true if there is at least one allowed excluded field
+	 * @param string
+	 * @return boolean
+	 */
+	public function canEditFieldsOf($table)
+	{
+		if ($this->isAdmin)
+		{
+			return true;
+		}
+
+		return (count(preg_grep('/^' . preg_quote($table, '/') . '::/', $this->alexf)) > 0);
 	}
 
 
@@ -344,11 +393,11 @@ class BackendUser extends \User
 		$GLOBALS['TL_USERNAME'] = $this->username;
 		$GLOBALS['TL_LANGUAGE'] = str_replace('_', '-', $this->language);
 
-		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
-		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
-		$GLOBALS['TL_CONFIG']['useCE'] = $this->useCE;
-		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
-		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
+		\Config::set('showHelp', $this->showHelp);
+		\Config::set('useRTE', $this->useRTE);
+		\Config::set('useCE', $this->useCE);
+		\Config::set('thumbnails', $this->thumbnails);
+		\Config::set('backendTheme', $this->backendTheme);
 
 		// Inherit permissions
 		$always = array('alexf');
@@ -430,7 +479,7 @@ class BackendUser extends \User
 		// Convert the file mounts into paths (backwards compatibility)
 		if (!$this->isAdmin && !empty($this->filemounts))
 		{
-			$objFiles = \FilesModel::findMultipleByIds($this->filemounts);
+			$objFiles = \FilesModel::findMultipleByUuids($this->filemounts);
 
 			if ($objFiles !== null)
 			{
@@ -458,7 +507,7 @@ class BackendUser extends \User
 			\Controller::redirect(preg_replace('/(&(amp;)?|\?)mtg=[^& ]*/i', '', \Environment::get('request')));
 		}
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
+		$arrInactiveModules = \ModuleLoader::getDisabled();
 		$blnCheckInactiveModules = is_array($arrInactiveModules);
 
 		foreach ($GLOBALS['BE_MOD'] as $strGroupName=>$arrGroupModules)
@@ -495,7 +544,7 @@ class BackendUser extends \User
 							$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 							$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = !empty($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\')"', TL_ASSETS_URL, $arrModuleConfig['icon']) : '';
 							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
-							$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = \Environment::get('script') . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
+							$arrModules[$strGroupName]['modules'][$strModuleName]['href'] = TL_SCRIPT . '?do=' . $strModuleName . '&amp;ref=' . TL_REFERER_ID;
 
 							// Mark the active module and its group
 							if (\Input::get('do') == $strModuleName)

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleBreadcrumb
  *
  * Front end module "breadcrumb".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -75,7 +75,7 @@ class ModuleBreadcrumb extends \Module
 
 		if ($objPages !== null)
 		{
-			while ($objPages->next() && $pageId > 0 && $type != 'root')
+			while ($pageId > 0 && $type != 'root' && $objPages->next())
 			{
 				$type = $objPages->type;
 				$pageId = $objPages->pid;
@@ -170,8 +170,13 @@ class ModuleBreadcrumb extends \Module
 				$strArticle = $strSection;
 			}
 
-			// Get the article title
 			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
+
+			if ($objArticle->inColumn != 'main')
+			{
+				$strAlias = $objArticle->inColumn . ':' . $strAlias;
+			}
 
 			if ($objArticle !== null)
 			{
@@ -179,6 +184,7 @@ class ModuleBreadcrumb extends \Module
 				(
 					'isRoot'   => false,
 					'isActive' => true,
+					'href'     => $this->generateFrontendUrl($pages[0], '/articles/' . $strAlias),
 					'title'    => specialchars($objArticle->title, true),
 					'link'     => $objArticle->title,
 					'data'     => $objArticle->row(),
@@ -194,6 +200,7 @@ class ModuleBreadcrumb extends \Module
 			(
 				'isRoot'   => false,
 				'isActive' => true,
+				'href'     => $this->generateFrontendUrl($pages[0]),
 				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
 				'link'     => $pages[0]['title'],
 				'data'     => $pages[0],

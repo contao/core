@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DC_File
  *
  * Provide methods to edit the local configuration file.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -40,7 +40,7 @@ class DC_File extends \DataContainer implements \editable
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
-			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_File __construct()', TL_ERROR);
+			$this->log('Could not load data container configuration for "' . $strTable . '"', __METHOD__, TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
 		}
 
@@ -56,6 +56,10 @@ class DC_File extends \DataContainer implements \editable
 				{
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($this);
 				}
 			}
 		}
@@ -209,7 +213,7 @@ class DC_File extends \DataContainer implements \editable
 
 					$this->strField = $vv;
 					$this->strInputName = $vv;
-					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+					$this->varValue = \Config::get($this->strField);
 
 					// Handle entities
 					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'textarea')
@@ -249,6 +253,10 @@ class DC_File extends \DataContainer implements \editable
 								$this->import($callback[0]);
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
+							elseif (is_callable($callback))
+							{
+								$this->varValue = $callback($this->varValue, $this);
+							}
 						}
 					}
 
@@ -269,15 +277,36 @@ class DC_File extends \DataContainer implements \editable
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
 		}
 
-		// Add some buttons and end the form
+		// Submit buttons
+		$arrButtons = array();
+		$arrButtons['save'] = '<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">';
+		$arrButtons['saveNclose'] = '<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">';
+
+		// Call the buttons_callback (see #4691)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['edit']['buttons_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$arrButtons = $this->$callback[0]->$callback[1]($arrButtons, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$arrButtons = $callback($arrButtons, $this);
+				}
+			}
+		}
+
+		// Add the buttons and end the form
 		$return .= '
 </div>
 
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'">
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
+  ' . implode(' ', $arrButtons) . '
 </div>
 
 </div>
@@ -294,8 +323,6 @@ class DC_File extends \DataContainer implements \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
@@ -314,8 +341,15 @@ class DC_File extends \DataContainer implements \editable
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
 				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this);
+					}
 				}
 			}
 
@@ -365,30 +399,43 @@ class DC_File extends \DataContainer implements \editable
 			$varValue = $varValue ? true : false;
 		}
 
-		// Convert date formats into timestamps
-		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '')
 		{
-			$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
-			$varValue = $objDate->tstamp;
-		}
-
-		// Handle entities
-		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
-		{
-			$varValue = deserialize($varValue);
-
-			if (!is_array($varValue))
+			// Convert binary UUIDs (see #6893)
+			if ($arrData['inputType'] == 'fileTree')
 			{
-				$varValue = \String::restoreBasicEntities($varValue);
-			}
-			else
-			{
-				foreach ($varValue as $k=>$v)
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
 				{
-					$varValue[$k] = \String::restoreBasicEntities($v);
+					$varValue = \String::binToUuid($varValue);
 				}
+				else
+				{
+					$varValue = serialize(array_map('String::binToUuid', $varValue));
+				}
+			}
 
-				$varValue = serialize($varValue);
+			// Convert date formats into timestamps
+			if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+			{
+				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$varValue = $objDate->tstamp;
+			}
+
+			// Handle entities
+			if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
+			{
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
+				{
+					$varValue = \String::restoreBasicEntities($varValue);
+				}
+				else
+				{
+					$varValue = serialize(array_map('String::restoreBasicEntities', $varValue));
+				}
 			}
 		}
 
@@ -397,8 +444,15 @@ class DC_File extends \DataContainer implements \editable
 		{
 			foreach ($arrData['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$varValue = $callback($varValue, $this);
+				}
 			}
 		}
 
@@ -411,34 +465,33 @@ class DC_File extends \DataContainer implements \editable
 		}
 		elseif (is_string($strCurrent))
 		{
-			$strCurrent = html_entity_decode($this->varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+			$strCurrent = html_entity_decode($this->varValue, ENT_QUOTES, \Config::get('characterSet'));
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent !== $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)
 		{
-			$strKey = sprintf("\$GLOBALS['TL_CONFIG']['%s']", $this->strField);
-			$this->Config->update($strKey, $varValue);
+			\Config::persist($this->strField, $varValue);
 
 			$deserialize = deserialize($varValue);
-			$prior = is_bool($GLOBALS['TL_CONFIG'][$this->strField]) ? ($GLOBALS['TL_CONFIG'][$this->strField] ? 'true' : 'false') : $GLOBALS['TL_CONFIG'][$this->strField];
+			$prior = is_bool(\Config::get($this->strField)) ? (\Config::get($this->strField) ? 'true' : 'false') : \Config::get($this->strField);
 
 			// Add a log entry
 			if (!is_array(deserialize($prior)) && !is_array($deserialize))
 			{
 				if ($arrData['inputType'] == 'password' || $arrData['inputType'] == 'textStore')
 				{
-					$this->log('The global configuration variable "'.$this->strField.'" has been changed', 'DC_File save()', TL_CONFIGURATION);
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed', __METHOD__, TL_CONFIGURATION);
 				}
 				else
 				{
-					$this->log('The global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', 'DC_File save()', TL_CONFIGURATION);
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', __METHOD__, TL_CONFIGURATION);
 				}
 			}
 
 			// Set the new value so the input field can show it
 			$this->varValue = $deserialize;
-			$GLOBALS['TL_CONFIG'][$this->strField] = $deserialize;
+			\Config::set($this->strField, $deserialize);
 		}
 	}
 
@@ -460,7 +513,7 @@ class DC_File extends \DataContainer implements \editable
 
 			foreach ($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__'] as $name)
 			{
-				$trigger = $GLOBALS['TL_CONFIG'][$name];
+				$trigger = \Config::get($name);
 
 				// Overwrite the trigger if the page is not reloaded
 				if (\Input::post('FORM_SUBMIT') == $this->strTable)

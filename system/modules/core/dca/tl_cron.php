@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -39,7 +39,7 @@ $GLOBALS['TL_DCA']['tl_cron'] = array
 		),
 		'name' => array
 		(
-			'sql'                     => "varchar(32) NOT NULL default ''"
+			'sql'                     => "varchar(32) NULL"
 		),
 		'value' => array
 		(

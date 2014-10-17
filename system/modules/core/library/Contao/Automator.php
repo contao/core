@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,12 +21,21 @@ namespace Contao;
  * Class Automator
  *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
 class Automator extends \System
 {
+
+	/**
+	 * Make the constuctor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 
 	/**
 	 * Check for new \Contao versions
@@ -39,16 +48,16 @@ class Automator extends \System
 		}
 
 		$objRequest = new \Request();
-		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
+		$objRequest->send(\Config::get('liveUpdateBase') . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
-			$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
+			\Config::set('latestVersion', $objRequest->response);
+			\Config::persist('latestVersion', $objRequest->response);
 		}
 
 		// Add a log entry
-		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
+		$this->log('Checked for Contao updates', __METHOD__, TL_CRON);
 	}
 
 
@@ -68,7 +77,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the search tables', 'Automator purgeSearchTables()', TL_CRON);
+		$this->log('Purged the search tables', __METHOD__, TL_CRON);
 	}
 
 
@@ -83,7 +92,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_undo");
 
 		// Add a log entry
-		$this->log('Purged the undo table', 'Automator purgeUndoTable()', TL_CRON);
+		$this->log('Purged the undo table', __METHOD__, TL_CRON);
 	}
 
 
@@ -98,7 +107,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_version");
 
 		// Add a log entry
-		$this->log('Purged the undo table', 'Automator purgeVersionTable()', TL_CRON);
+		$this->log('Purged the undo table', __METHOD__, TL_CRON);
 	}
 
 
@@ -113,7 +122,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_log");
 
 		// Add a log entry
-		$this->log('Purged the system log', 'Automator purgeSystemLog()', TL_CRON);
+		$this->log('Purged the system log', __METHOD__, TL_CRON);
 	}
 
 
@@ -141,7 +150,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Purged the image cache', 'Automator purgeImageCache()', TL_CRON);
+		$this->log('Purged the image cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -170,7 +179,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Purged the script cache', 'Automator purgeScriptCache()', TL_CRON);
+		$this->log('Purged the script cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -184,7 +193,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the page cache', 'Automator purgePageCache()', TL_CRON);
+		$this->log('Purged the page cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -198,7 +207,7 @@ class Automator extends \System
 		$objFolder->purge();
 
 		// Add a log entry
-		$this->log('Purged the search cache', 'Automator purgePageCache()', TL_CRON);
+		$this->log('Purged the search cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -219,7 +228,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Purged the internal cache', 'Automator purgeInternalCache()', TL_CRON);
+		$this->log('Purged the internal cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -237,7 +246,7 @@ class Automator extends \System
 		$objFile->copyTo('system/tmp/.gitignore');
 
 		// Add a log entry
-		$this->log('Purged the temp folder', 'Automator purgeTempFolder()', TL_CRON);
+		$this->log('Purged the temp folder', __METHOD__, TL_CRON);
 	}
 
 
@@ -263,7 +272,7 @@ class Automator extends \System
 		$this->purgePageCache();
 
 		// Add a log entry
-		$this->log('Regenerated the XML files', 'Automator generateXmlFiles()', TL_CRON);
+		$this->log('Regenerated the XML files', __METHOD__, TL_CRON);
 	}
 
 
@@ -302,6 +311,11 @@ class Automator extends \System
 		{
 			foreach (scan(TL_ROOT . '/share') as $file)
 			{
+				if (is_dir(TL_ROOT . '/share/' . $file))
+				{
+					continue; // see #6652
+				}
+
 				$objFile = new \File('share/' . $file, true);
 
 				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds))
@@ -317,7 +331,8 @@ class Automator extends \System
 
 	/**
 	 * Generate the Google XML sitemaps
-	 * @param integer
+	 *
+	 * @param integer $intId The root page ID
 	 */
 	public function generateSitemap($intId=0)
 	{
@@ -383,14 +398,10 @@ class Automator extends \System
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
 			$objFile->append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">');
 
-			$strDomain = '';
+			// Set the domain (see #6421)
+			$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . ($objRoot->dns ?: \Environment::get('host')) . TL_PATH . '/';
 
-			// Overwrite the domain
-			if ($objRoot->dns != '')
-			{
-				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
-			}
-
+			// Find the searchable pages
 			$arrPages = \Backend::findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages
@@ -417,7 +428,7 @@ class Automator extends \System
 			$objFile->close();
 
 			// Add a log entry
-			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', 'Automator generateSitemap()', TL_CRON);
+			$this->log('Generated sitemap "' . $objRoot->sitemapName . '.xml"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -544,7 +555,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Add a log entry
-		$this->log('Generated the autoload cache', 'Automator generateDcaCache()', TL_CRON);
+		$this->log('Generated the autoload cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -556,7 +567,7 @@ class Automator extends \System
 		$arrFiles = array();
 
 		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -568,7 +579,7 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
 				{
 					continue;
 				}
@@ -585,7 +596,7 @@ class Automator extends \System
 			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
 
@@ -600,7 +611,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the DCA cache', 'Automator generateDcaCache()', TL_CRON);
+		$this->log('Generated the DCA cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -609,14 +620,34 @@ class Automator extends \System
 	 */
 	public function generateLanguageCache()
 	{
-		$arrLanguages = scan(TL_ROOT . '/system/modules/core/languages');
+		$arrLanguages = array();
+		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page WHERE type='root'");
+
+		// Only cache the languages which are in use (see #6013)
+		while ($objLanguages->next())
+		{
+			if ($objLanguages->language == '')
+			{
+				continue;
+			}
+
+			$arrLanguages[] = $objLanguages->language;
+
+			// Also cache "de" if "de-CH" is requested
+			if (strlen($objLanguages->language) > 2)
+			{
+				$arrLanguages[] = substr($objLanguages->language, 0, 2);
+			}
+		}
+
+		$arrLanguages = array_unique($arrLanguages);
 
 		foreach ($arrLanguages as $strLanguage)
 		{
 			$arrFiles = array();
 
 			// Parse all active modules
-			foreach ($this->Config->getActiveModules() as $strModule)
+			foreach (\ModuleLoader::getActive() as $strModule)
 			{
 				$strDir = 'system/modules/' . $strModule . '/languages/' . $strLanguage;
 
@@ -627,7 +658,7 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if ((substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
+					if (strncmp($strFile, '.', 1) === 0 || (substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
 					{
 						continue;
 					}
@@ -646,7 +677,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2013 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2014 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
@@ -662,7 +693,7 @@ class Automator extends \System
 				$objCacheFile->write(sprintf($strHeader, $strLanguage));
 
 				// Parse all active modules and append to the cache file
-				foreach ($this->Config->getActiveModules() as $strModule)
+				foreach (\ModuleLoader::getActive() as $strModule)
 				{
 					$strFile = 'system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName;
 
@@ -682,7 +713,7 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the language cache', 'Automator generateLanguageCache()', TL_CRON);
+		$this->log('Generated the language cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -695,7 +726,7 @@ class Automator extends \System
 		$arrExtracts = array();
 
 		// Only check the active modules (see #4541)
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (\ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -707,13 +738,13 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -745,7 +776,19 @@ class Automator extends \System
 
 			foreach ($arrFields as $field=>$sql)
 			{
+				$sql = str_replace('"', '\"', $sql);
 				$objFile->append("\t'$field' => \"$sql\",");
+			}
+
+			$objFile->append(');', "\n\n");
+
+			// Order fields
+			$arrFields = $objExtract->getOrderFields();
+			$objFile->append("\$this->arrOrderFields = array\n(");
+
+			foreach ($arrFields as $field)
+			{
+				$objFile->append("\t'$field',");
 			}
 
 			$objFile->append(');', "\n\n");
@@ -787,6 +830,6 @@ class Automator extends \System
 		}
 
 		// Add a log entry
-		$this->log('Generated the DCA extracts', 'Automator generateDcaExtracts()', TL_CRON);
+		$this->log('Generated the DCA extracts', __METHOD__, TL_CRON);
 	}
 }

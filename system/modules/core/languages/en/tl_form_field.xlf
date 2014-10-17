@@ -200,6 +200,12 @@
       <trans-unit id="tl_form_field.placeholder.1">
         <source>Show this text as long as the field is empty (requires HTML5).</source>
       </trans-unit>
+      <trans-unit id="tl_form_field.minlength.0">
+        <source>Minimum length</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.minlength.1">
+        <source>Require the field value to be a certain number of characters long.</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.maxlength.0">
         <source>Maximum length</source>
       </trans-unit>
@@ -302,6 +308,12 @@
       <trans-unit id="tl_form_field.fSize.1">
         <source>Here you can enter the size of the upload field (&lt;em&gt;size&lt;/em&gt; attribute).</source>
       </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.0">
+        <source>Custom form field template</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.customTpl.1">
+        <source>Here you can overwrite the default form field template.</source>
+      </trans-unit>
       <trans-unit id="tl_form_field.addSubmit.0">
         <source>Add a submit button</source>
       </trans-unit>
@@ -343,6 +355,12 @@
       </trans-unit>
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.size_legend">
+        <source>Rows and columns</source>
+      </trans-unit>
+      <trans-unit id="tl_form_field.template_legend">
+        <source>Template settings</source>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

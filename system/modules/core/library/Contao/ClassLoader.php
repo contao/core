@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -27,7 +27,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class ClassLoader
 {
@@ -144,7 +144,7 @@ class ClassLoader
 		// The class file is set in the mapper
 		if (isset(self::$classes[$class]))
 		{
-			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			if (\Config::get('debugMode'))
 			{
 				$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
 			}
@@ -155,12 +155,16 @@ class ClassLoader
 		// Find the class in the registered namespaces
 		elseif (($namespaced = self::findClass($class)) != false)
 		{
-			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			if (!class_exists($namespaced, false))
 			{
-				$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
+				if (\Config::get('debugMode'))
+				{
+					$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
+				}
+
+				include TL_ROOT . '/' . self::$classes[$namespaced];
 			}
 
-			include TL_ROOT . '/' . self::$classes[$namespaced];
 			class_alias($namespaced, $class);
 		}
 
@@ -207,7 +211,7 @@ class ClassLoader
 		$strCacheFile = 'system/cache/config/autoload.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}

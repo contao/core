@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -11,13 +11,6 @@
  */
 
 namespace Contao;
-
-
-// Import the inda_convert class
-if (!class_exists('idna_convert', false))
-{
-	require_once TL_ROOT . '/system/modules/core/vendor/idna/idna_convert.class.php';
-}
 
 
 /**
@@ -34,7 +27,7 @@ if (!class_exists('idna_convert', false))
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Idna
 {
@@ -48,7 +41,7 @@ class Idna
 	 */
 	public static function encode($strDomain)
 	{
-		$objIdn = new \idna_convert();
+		$objIdn = new \idna_convert(array('idn_version'=>2008));
 		return $objIdn->encode($strDomain);
 	}
 
@@ -62,7 +55,7 @@ class Idna
 	 */
 	public static function decode($strDomain)
 	{
-		$objIdn = new \idna_convert();
+		$objIdn = new \idna_convert(array('idn_version'=>2008));
 		return $objIdn->decode($strDomain);
 	}
 
@@ -81,8 +74,13 @@ class Idna
 			return '';
 		}
 
+		if (strpos($strEmail, '@') === false)
+		{
+			return $strEmail; // see #6241
+		}
+
 		list($strLocal, $strHost) = explode('@', $strEmail);
-		return $strLocal .'@'. static::encode($strHost);
+		return $strLocal . '@' . static::encode($strHost);
 	}
 
 
@@ -129,6 +127,10 @@ class Idna
 			if ($blnSchemeAdded)
 			{
 				unset($arrUrl['scheme']);
+			}
+			elseif ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
+			{
+				$arrUrl['scheme'] .= ':'; // see #6148
 			}
 			else
 			{

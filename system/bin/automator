@@ -1,0 +1,69 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$file = fopen(__FILE__, 'r');
+
+// Lock the file
+if (!flock($file, LOCK_EX|LOCK_NB)) {
+	echo "  The script is running already.\n";
+	fclose($file);
+	exit(1);
+}
+
+// No method name given
+if (count($argv) == 1) {
+	echo "  Please pass the method name as argument (see -h).\n";
+	exit(1);
+}
+
+// Initialize the system
+define('TL_MODE', 'BE');
+require dirname(__DIR__) . '/initialize.php';
+
+$commands = array();
+
+// Find all public methods
+$class   = new ReflectionClass('Automator');
+$methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+
+// Get the available commands
+foreach ($methods as $method) {
+	if ($method->class == 'Contao\Automator' && $method->name != '__construct') {
+		$commands[] = $method->name;
+	}
+}
+
+// Help
+if (in_array('-h', $argv)) {
+	echo "  Usage: {$argv[0]} <command> [-h]\n";
+	echo "  Run the Automator tasks from the command line.\n\n";
+	echo "  Commands:\n";
+	echo "    " . implode("\n    ", $commands) . "\n\n";
+	echo "  Options:\n";
+	echo "    -h  Show this help text\n";
+	exit;
+}
+
+// Invalid command
+if (!in_array($argv[1], $commands)) {
+	echo "  Invalid command '{$argv[1]}' (see -h).\n";
+	exit(1);
+}
+
+// Run
+$automator = new Automator();
+$automator->$argv[1]();
+
+// Release the lock
+flock($file, LOCK_UN);
+fclose($file);

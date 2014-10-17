@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -24,7 +24,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class String
 {
@@ -118,7 +118,7 @@ class String
 		$arrEmptyTags = array('area', 'base', 'br', 'col', 'hr', 'img', 'input', 'frame', 'link', 'meta', 'param');
 
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$strString = preg_replace('/ +/', ' ', $strString);
 
 		// Seperate tags and text
@@ -233,7 +233,7 @@ class String
 
 		if ($strCharset === null)
 		{
-			$strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$strCharset = \Config::get('characterSet');
 		}
 
 		$strString = preg_replace('/(&#*\w+)[\x00-\x20]+;/i', '$1;', $strString);
@@ -477,7 +477,7 @@ class String
 		$strReturn = '';
 
 		// Remove any unwanted tags (especially PHP tags)
-		$strString = strip_tags($strString, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$strString = strip_tags($strString, \Config::get('allowedTags'));
 		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags
@@ -508,6 +508,7 @@ class String
 		// Replace tokens
 		$strReturn = str_replace('?><br />', '?>', $strReturn);
 		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
+		$strReturn = str_replace("]; ?>\n", '] . "\n"; ?>' . "\n", $strReturn); // see #7178
 
 		// Eval the code
 		ob_start();
@@ -523,6 +524,158 @@ class String
 
 		// Return the evaled code
 		return $strReturn;
+	}
+
+
+	/**
+	 * Convert a UUID string to binary data
+	 *
+	 * @param string $uuid The UUID string
+	 *
+	 * @return string The binary data
+	 */
+	public static function uuidToBin($uuid)
+	{
+		return pack('H*', str_replace('-', '', $uuid));
+	}
+
+
+	/**
+	 * Get a UUID string from binary data
+	 *
+	 * @param string $data The binary data
+	 *
+	 * @return string The UUID string
+	 */
+	public static function binToUuid($data)
+	{
+		return implode('-', unpack('H8time_low/H4time_mid/H4time_high/H4clock_seq/H12node', $data));
+	}
+
+
+	/**
+	 * Convert file paths inside "src" attributes to insert tags
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with file paths converted to insert tags
+	 */
+	public static function srcToInsertTag($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByPath($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="{{file::' . static::binToUuid($file->uuid) . '}}"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Convert insert tags inside "src" attributes to file paths
+	 *
+	 * @param string $data The markup string
+	 *
+	 * @return string The markup with insert tags converted to file paths
+	 */
+	public static function insertTagToSrc($data)
+	{
+		$return = '';
+		$paths = preg_split('/(src="\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		{
+			$return .= $paths[$i];
+
+			if (!isset($paths[$i+1]))
+			{
+				continue;
+			}
+
+			$file = \FilesModel::findByUuid($paths[$i+2]);
+
+			if ($file !== null)
+			{
+				$return .= 'src="' . $file->path . '"';
+			}
+			else
+			{
+				$return .= 'src="' . $paths[$i+2] . '"';
+			}
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
+	 *
+	 * @param string $url The URL
+	 *
+	 * @return \stdClass The options object
+	 */
+	public static function resolveFlaggedUrl(&$url)
+	{
+		$options = new \stdClass();
+
+		// Defaults
+		$options->static = false;
+		$options->media  = null;
+		$options->mtime  = null;
+		$options->async  = false;
+
+		$chunks = explode('|', $url);
+
+		// Remove the flags from the URL
+		$url = $chunks[0];
+
+		for ($i=1; $i<count($chunks); $i++)
+		{
+			switch ($chunks[$i])
+			{
+				case 'static':
+					$options->static = true;
+					break;
+
+				case 'async':
+					$options->async = true;
+					break;
+
+				case empty($chunks[$i]):
+					// Ignore
+					break;
+
+				case is_numeric($chunks[$i]):
+					$options->mtime = $chunks[$i];
+					break;
+
+				default:
+					$options->media = $chunks[$i];
+					break;
+			}
+		}
+
+		return $options;
 	}
 
 

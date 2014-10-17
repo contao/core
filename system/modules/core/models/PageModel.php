@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -22,7 +22,7 @@ namespace Contao;
  *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class PageModel extends \Model
 {
@@ -38,32 +38,6 @@ class PageModel extends \Model
 	 * @var boolean
 	 */
 	protected $blnDetailsLoaded = false;
-
-
-	/**
-	 * Find multiple pages by their IDs
-	 *
-	 * @param array $arrIds     An array of pages IDs
-	 * @param array $arrOptions An optional options array
-	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no pages
-	 */
-	public static function findMultipleByIds($arrIds, array $arrOptions=array())
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-
-		if (!isset($arrOptions['order']))
-		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
-		}
-
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
-	}
 
 
 	/**
@@ -131,7 +105,7 @@ class PageModel extends \Model
 		}
 		else
 		{
-			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND ($t.language=? OR $t.fallback=1)");
 			$arrValues = array($strHost, $varLanguage);
 
 			if (!isset($arrOptions['order']))
@@ -279,7 +253,7 @@ class PageModel extends \Model
 
 		// Remove everything that is not an alias
 		$arrAliases = array_filter(array_map(function($v) {
-			return preg_match('/^[\pN\pL\/\._-]+$/', $v) ? $v : null;
+			return preg_match('/^[\pN\pL\/\._-]+$/u', $v) ? $v : null;
 		}, $arrAliases));
 
 		// Return if nothing is left
@@ -352,7 +326,7 @@ class PageModel extends \Model
 			return null;
 		}
 
-		return new \Model\Collection($objSubpages, 'tl_page');
+		return static::createCollectionFromDbResult($objSubpages, 'tl_page');
 	}
 
 
@@ -428,6 +402,29 @@ class PageModel extends \Model
 
 
 	/**
+	 * Find the language fallback page by hostname
+	 *
+	 * @param string $strHost    The hostname
+	 * @param array  $arrOptions An optional options array
+	 *
+	 * @return \Model|null The page model or null if there is not fallback page
+	 */
+	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
+	}
+
+
+	/**
 	 * Find the parent pages of a page
 	 *
 	 * @param integer $intId The page's ID
@@ -436,15 +433,20 @@ class PageModel extends \Model
 	 */
 	public static function findParentsById($intId)
 	{
-		$objPages = \Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
-											->execute($intId);
+		$arrModels = array();
 
-		if ($objPages->numRows < 1)
+		while ($intId > 0 && ($objPage = static::findByPk($intId)) !== null)
+		{
+			$intId = $objPage->pid;
+			$arrModels[] = $objPage;
+		}
+
+		if (empty($arrModels))
 		{
 			return null;
 		}
 
-		return new \Model\Collection($objPages, 'tl_page');
+		return static::createCollection($arrModels, 'tl_page');
 	}
 
 
@@ -511,7 +513,7 @@ class PageModel extends \Model
 
 			if ($objParentPage !== null)
 			{
-				while ($objParentPage->next() && $pid > 0 && $type != 'root')
+				while ($pid > 0 && $type != 'root' && $objParentPage->next())
 				{
 					$pid = $objParentPage->pid;
 					$type = $objParentPage->type;
@@ -576,7 +578,9 @@ class PageModel extends \Model
 		if ($objParentPage !== null && $objParentPage->type == 'root')
 		{
 			$this->rootId = $objParentPage->id;
-			$this->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
+			$this->rootAlias = $objParentPage->alias;
+			$this->rootTitle = $objParentPage->title;
+			$this->rootPageTitle = $objParentPage->pageTitle ?: $objParentPage->title;
 			$this->domain = $objParentPage->dns;
 			$this->rootLanguage = $objParentPage->language;
 			$this->language = $objParentPage->language;
@@ -590,15 +594,31 @@ class PageModel extends \Model
 			// Store whether the root page has been published
 			$time = time();
 			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$this->rootIsFallback = ($objParentPage->fallback != '');
+			$this->rootIsFallback = true;
+			$this->rootUseSSL = $objParentPage->useSSL;
+			$this->rootFallbackLanguage = $objParentPage->language;
+
+			// Store the fallback language (see #6874)
+			if (!$objParentPage->fallback)
+			{
+				$this->rootIsFallback = false;
+				$this->rootFallbackLanguage = null;
+
+				$objFallback = static::findPublishedFallbackByHostname($objParentPage->dns);
+
+				if ($objFallback !== null)
+				{
+					$this->rootFallbackLanguage = $objFallback->language;
+				}
+			}
 		}
 
 		// No root page found
 		elseif (TL_MODE == 'FE' && $this->type != 'root')
 		{
 			header('HTTP/1.1 404 Not Found');
-			\System::log('Page ID "'. $this->id .'" does not belong to a root page', 'PageModel loadDetails()', TL_ERROR);
-			die('No root page found');
+			\System::log('Page ID "'. $this->id .'" does not belong to a root page', __METHOD__, TL_ERROR);
+			die_nicely('be_no_root', 'No root page found');
 		}
 
 		$this->trail = array_reverse($trail);
@@ -621,18 +641,35 @@ class PageModel extends \Model
 		// Use the global date format if none is set (see #6104)
 		if ($this->dateFormat == '')
 		{
-			$this->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$this->dateFormat = \Config::get('dateFormat');
 		}
 		if ($this->timeFormat == '')
 		{
-			$this->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+			$this->timeFormat = \Config::get('timeFormat');
 		}
 		if ($this->datimFormat == '')
 		{
-			$this->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+			$this->datimFormat = \Config::get('datimFormat');
 		}
 
+		// Prevent saving (see #6506 and #7199)
+		$this->preventSaving();
 		$this->blnDetailsLoaded = true;
+
 		return $this;
+	}
+
+
+	/**
+	 * Generate an URL depending on the current rewriteURL setting
+	 *
+	 * @param string $strParams    An optional string of URL parameters
+	 * @param string $strForceLang Force a certain language
+	 *
+	 * @return string An URL that can be used in the front end
+	 */
+	public function getFrontendUrl($strParams=null, $strForceLang=null)
+	{
+		return \Controller::generateFrontendUrl($this->row(), $strParams, $strForceLang);
 	}
 }

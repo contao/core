@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao\Model;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class QueryBuilder
 {
@@ -33,9 +33,9 @@ class QueryBuilder
 	 *
 	 * @return string The query string
 	 */
-	public static function find($arrOptions)
+	public static function find(array $arrOptions)
 	{
-		$objBase = new \DcaExtractor($arrOptions['table']);
+		$objBase = \DcaExtractor::getInstance($arrOptions['table']);
 
 		if (!$objBase->hasRelations())
 		{
@@ -55,14 +55,14 @@ class QueryBuilder
 					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
 						++$intCount;
-						$objRelated = new \DcaExtractor($arrConfig['table']);
+						$objRelated = \DcaExtractor::getInstance($arrConfig['table']);
 
 						foreach (array_keys($objRelated->getFields()) as $strField)
 						{
 							$arrFields[] = 'j' . $intCount . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
 						}
 
-						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " j$intCount ON " . $arrOptions['table'] . "." . $strKey . "=j$intCount.id";
+						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " j$intCount ON " . $arrOptions['table'] . "." . $strKey . "=j$intCount." . $arrConfig['field'];
 					}
 				}
 			}
@@ -83,6 +83,12 @@ class QueryBuilder
 			$strQuery .= " GROUP BY " . $arrOptions['group'];
 		}
 
+		// Having (see #6446)
+		if ($arrOptions['having'] !== null)
+		{
+			$strQuery .= " HAVING " . $arrOptions['having'];
+		}
+
 		// Order by
 		if ($arrOptions['order'] !== null)
 		{
@@ -100,7 +106,7 @@ class QueryBuilder
 	 *
 	 * @return string The query string
 	 */
-	public static function count($arrOptions)
+	public static function count(array $arrOptions)
 	{
 		$strQuery = "SELECT COUNT(*) AS count FROM " . $arrOptions['table'];
 

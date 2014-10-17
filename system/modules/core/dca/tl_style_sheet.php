@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -55,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'panelLayout'             => 'filter,search,limit',
+			'panelLayout'             => 'filter;search,limit',
 			'headerFields'            => array('name', 'author', 'tstamp'),
 			'child_record_callback'   => array('tl_style_sheet', 'listStyleSheet'),
 			'child_record_class'      => 'no_padding'
@@ -117,6 +117,12 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'export' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['export'],
+				'href'                => 'key=export',
+				'icon'                => 'theme_export.gif'
 			)
 		)
 	),
@@ -124,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{config_legend},disablePie,embedImages,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'default'                     => '{title_legend},name;{media_legend},media,mediaQuery;{vars_legend},vars;{expert_legend:hide},disablePie,embedImages,cc'
 	),
 
 	// Fields
@@ -152,7 +158,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'search'                  => true,
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
 		(
@@ -166,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'cc' => array
@@ -217,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
  * Class tl_style_sheet
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -246,7 +252,7 @@ class tl_style_sheet extends Backend
 
 		if (!$this->User->hasAccess('css', 'themes'))
 		{
-			$this->log('Not enough permissions to access the style sheets module', 'tl_style_sheets checkPermission', TL_ERROR);
+			$this->log('Not enough permissions to access the style sheets module', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
@@ -320,15 +326,15 @@ class tl_style_sheet extends Backend
 
 		if ($row['mediaQuery'] != '')
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. String::substr($row['mediaQuery'], 64) . $cc .'</span>' . "</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. $row['mediaQuery'] . $cc .'</span>' . "</div>\n";
 		}
 		elseif (!empty($media) && is_array($media))
 		{
-			return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">@media '. implode(', ', $media) . $cc .'</span>' . "</div>\n";
 		}
 		else
 		{
-			return '<div style="float:left">'. $row['name'] . $cc ."</div>\n";
+			return '<div class="tl_content_left">'. $row['name'] . $cc ."</div>\n";
 		}
 	}
 
@@ -361,6 +367,6 @@ class tl_style_sheet extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->canEditFieldsOf('tl_style_sheet') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }

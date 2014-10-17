@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -63,19 +63,17 @@ $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
  * DATE AND TIME SETTINGS
  * -------------------------------------------------------------------------
  *
- * Set 'timeZone' to your local timezone. If you leave it blank GMT will be
- * used as the default time zone.
- *
  *   datimFormat = show date and time
  *   dateFormat  = show date only
  *   timeFormat  = show time only
+ *   timeZone    = the server's default time zone
  *
  * See PHP function date() for more information.
  */
-$GLOBALS['TL_CONFIG']['timeZone']    = 'GMT';
 $GLOBALS['TL_CONFIG']['datimFormat'] = 'Y-m-d H:i';
 $GLOBALS['TL_CONFIG']['dateFormat']  = 'Y-m-d';
 $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
+$GLOBALS['TL_CONFIG']['timeZone']    = ini_get('date.timezone') ?: 'GMT';
 
 
 /**
@@ -120,7 +118,7 @@ $GLOBALS['TL_CONFIG']['requestTokenWhitelist'] = array();
  * DATABASE SETTINGS
  * -------------------------------------------------------------------------
  * Database drivers start with an uppercase character. Currently supported
- * databases: MySQL, MySQLi, MSSQL, Oracle, PostgreSQL, Sybase.
+ * databases: MySQLi, MySQL (deprecated).
  *
  *   dbUser     = database user name
  *   dbPass     = database password
@@ -143,6 +141,7 @@ $GLOBALS['TL_CONFIG']['dbSocket']    = '';
 $GLOBALS['TL_CONFIG']['dbPconnect']  = false;
 $GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
 $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
+$GLOBALS['TL_CONFIG']['dbSqlMode']   = '';
 
 
 /**
@@ -152,7 +151,7 @@ $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
  *
  * Here you can enable FTP for managing files and folders ("Safe Mode Hack").
  *
- *   ftpHost = host name (e.g. domain.com or domain.com:21)
+ *   ftpHost = host name (e.g. example.com or example.com:21)
  *   ftpPath = path to installation (e.g. html/)
  *   ftpUser = FTP username
  *   ftpPass = FTP password
@@ -183,6 +182,7 @@ $GLOBALS['TL_CONFIG']['ftpPort'] = 21;
 $GLOBALS['TL_CONFIG']['encryptionKey']    = '';
 $GLOBALS['TL_CONFIG']['encryptionMode']   = 'cfb';
 $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
+$GLOBALS['TL_CONFIG']['bcryptCost']       = 10;
 
 
 /**
@@ -201,11 +201,12 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadTypes']
-	= 'jpg,jpeg,gif,png,ico,'
+	= 'jpg,jpeg,gif,png,ico,svg,svgz,'
 	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,csv,'
 	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
-	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,'
-	. 'css,js,html,htm,txt,zip,rar,7z,cto';
+	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,fla,flv,swf,'
+	. 'ttf,ttc,otf,eot,woff,woff2,'
+	. 'css,scss,less,js,html,htm,txt,zip,rar,7z,cto';
 $GLOBALS['TL_CONFIG']['uploadPath']     = 'files';
 $GLOBALS['TL_CONFIG']['maxFileSize']    = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']     = 800;
@@ -263,13 +264,11 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *
  *   showHelp    = show a help text after each input field
  *   thumbnails  = show image thumbnails in the file manager
- *   debugMode   = debug the system and print results to the screen
  *   useRTE      = use the rich text editor (TinyMCE)
  *   useCE       = use the code editor (ACE)
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;
-$GLOBALS['TL_CONFIG']['debugMode']  = false;
 $GLOBALS['TL_CONFIG']['useRTE']     = true;
 $GLOBALS['TL_CONFIG']['useCE']      = true;
 
@@ -281,9 +280,6 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  *
  * The number of resultsPerPage is used to limit query results in the back
  * end. It does not apply to the search engine.
- *
- * If you need custom page sections (in addition to "header", "left", "main",
- * "right" and "footer", you can define a comma separated list here.
  *
  * If you enter a maximum image width, images and media files cannot be wider
  * than this value and will not break your page layout.
@@ -303,26 +299,25 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
 $GLOBALS['TL_CONFIG']['loginCount']           = 3;
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
 $GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
-$GLOBALS['TL_CONFIG']['customSections']       = '';
 $GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
 $GLOBALS['TL_CONFIG']['defaultUser']          = 0;
 $GLOBALS['TL_CONFIG']['defaultGroup']         = 0;
 $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'g4', 'g5', 'g6');
-$GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
-$GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
+$GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp,svg,svgz';
+$GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,scss,less,js,txt,log,xml,svg,svgz';
 $GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']
-	= 'jpg,jpeg,gif,png,'
+	= 'jpg,jpeg,gif,png,svg,svgz,'
 	. 'odt,ods,odp,odg,ott,ots,otp,otg,pdf,'
 	. 'doc,docx,dot,dotx,xls,xlsx,xlt,xltx,ppt,pptx,pot,potx,'
-	. 'mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,'
+	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,'
 	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
-$GLOBALS['TL_CONFIG']['backendTheme']         = 'default';
+$GLOBALS['TL_CONFIG']['backendTheme']         = 'flexible';
 $GLOBALS['TL_CONFIG']['inactiveModules']      = '';
 $GLOBALS['TL_CONFIG']['liveUpdateId']         = '';
 $GLOBALS['TL_CONFIG']['disableInsertTags']    = false;
@@ -348,3 +343,8 @@ $GLOBALS['TL_CONFIG']['loadGoogleFonts']      = false;
 $GLOBALS['TL_CONFIG']['defaultFileChmod']     = 0644;
 $GLOBALS['TL_CONFIG']['defaultFolderChmod']   = 0755;
 $GLOBALS['TL_CONFIG']['maxPaginationLinks']   = 7;
+$GLOBALS['TL_CONFIG']['proxyServerIps']       = '';
+$GLOBALS['TL_CONFIG']['sslProxyDomain']       = '';
+$GLOBALS['TL_CONFIG']['debugMode']            = false;
+$GLOBALS['TL_CONFIG']['maintenanceMode']      = true;
+$GLOBALS['TL_CONFIG']['errorReporting']       = E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED;

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleRssReader
  *
  * Front end module "rss reader".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -72,7 +72,7 @@ class ModuleRssReader extends \Module
 			$this->objFeed->set_feed_url($arrUrls[0]);
 		}
 
-		$this->objFeed->set_output_encoding($GLOBALS['TL_CONFIG']['characterSet']);
+		$this->objFeed->set_output_encoding(\Config::get('characterSet'));
 		$this->objFeed->set_cache_location(TL_ROOT . '/system/tmp');
 		$this->objFeed->enable_cache(false);
 
@@ -84,7 +84,7 @@ class ModuleRssReader extends \Module
 
 		if (!$this->objFeed->init())
 		{
-			$this->log('Error importing RSS feed "' . $this->rss_feed . '"', 'ModuleRssReader generate()', TL_ERROR);
+			$this->log('Error importing RSS feed "' . $this->rss_feed . '"', __METHOD__, TL_ERROR);
 			return '';
 		}
 
@@ -125,8 +125,8 @@ class ModuleRssReader extends \Module
 			$this->Template->width = $this->objFeed->get_image_width();
 		}
 
-		// Get items
-		$arrItems = $this->objFeed->get_items(intval($this->skipFirst), intval($this->numberOfItems));
+		// Get the items (see #6107)
+		$arrItems = array_slice($this->objFeed->get_items(0, intval($this->numberOfItems) + intval($this->skipFirst)), intval($this->skipFirst), (intval($this->numberOfItems) ?: null));
 
 		$limit = count($arrItems);
 		$offset = 0;
@@ -155,7 +155,7 @@ class ModuleRssReader extends \Module
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 
-			$objPagination = new \Pagination(count($arrItems), $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+			$objPagination = new \Pagination(count($arrItems), $this->perPage, \Config::get('maxPaginationLinks'), $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

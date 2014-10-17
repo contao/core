@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Module
  *
  * Parent class for front end modules.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -81,6 +81,11 @@ abstract class Module extends \Frontend
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
 
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
 		$arrHeadline = deserialize($objModule->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
@@ -127,6 +132,16 @@ abstract class Module extends \Frontend
 
 
 	/**
+	 * Return the model
+	 * @return \Model
+	 */
+	public function getModel()
+	{
+		return $this->objModel;
+	}
+
+
+	/**
 	 * Parse the template
 	 * @return string
 	 */
@@ -147,9 +162,10 @@ abstract class Module extends \Frontend
 
 		$this->compile();
 
+		// Do not change this order (see #6191)
 		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
-		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
+		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 
 		$this->Template->inColumn = $this->strColumn;
 
@@ -161,6 +177,11 @@ abstract class Module extends \Frontend
 		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
+		}
+
+		if (!empty($this->objModel->classes) && is_array($this->objModel->classes))
+		{
+			$this->Template->class .= ' ' . implode(' ', $this->objModel->classes);
 		}
 
 		return $this->Template->parse();
@@ -267,68 +288,48 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
+							// Hide the link if the target page is invisible
+							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
+							{
+								continue(2);
+							}
+
 							$strForceLang = null;
 							$objNext->loadDetails();
 
 							// Check the target page language (see #4706)
-							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							if (\Config::get('addLanguageToUrl'))
 							{
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-							// Add the domain if it differs from the current one (see #3765)
-							if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-							{
-								$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
-							}
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 						break;
 				}
 
+				$row = $objSubpages->row();
+				$trail = in_array($objSubpages->id, $objPage->trail);
+
 				// Active page
-				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && !\Input::get('articles'))
+				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && $href == \Environment::get('request'))
 				{
 					// Mark active forward pages (see #4822)
-					$strClass = (($objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) ? 'forward' . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
-					$row = $objSubpages->row();
+					$strClass = (($objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) ? 'forward' . ($trail ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
 
 					$row['isActive'] = true;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
+					$row['isTrail'] = false;
 				}
 
 				// Regular page
 				else
 				{
-					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
+					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . ($trail ? ' trail' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
 
 					// Mark pages on the same level (see #2419)
 					if ($objSubpages->pid == $objPage->pid)
@@ -336,27 +337,27 @@ abstract class Module extends \Frontend
 						$strClass .= ' sibling';
 					}
 
-					$row = $objSubpages->row();
-
 					$row['isActive'] = false;
-					$row['subitems'] = $subitems;
-					$row['class'] = trim($strClass);
-					$row['title'] = specialchars($objSubpages->title, true);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-					$row['link'] = $objSubpages->title;
-					$row['href'] = $href;
-					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = '';
-					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-
-					// Override the link target
-					if ($objSubpages->type == 'redirect' && $objSubpages->target)
-					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
-
-					$items[] = $row;
+					$row['isTrail'] = $trail;
 				}
+
+				$row['subitems'] = $subitems;
+				$row['class'] = trim($strClass);
+				$row['title'] = specialchars($objSubpages->title, true);
+				$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
+				$row['link'] = $objSubpages->title;
+				$row['href'] = $href;
+				$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+				$row['target'] = '';
+				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+
+				// Override the link target
+				if ($objSubpages->type == 'redirect' && $objSubpages->target)
+				{
+					$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+				}
+
+				$items[] = $row;
 			}
 		}
 

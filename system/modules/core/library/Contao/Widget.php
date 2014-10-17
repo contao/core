@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -38,9 +38,9 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Controller
+abstract class Widget extends \BaseTemplate
 {
 
 	/**
@@ -74,28 +74,16 @@ abstract class Widget extends \Controller
 	protected $strClass;
 
 	/**
-	 * Template
+	 * CSS class prefix
 	 * @var string
 	 */
-	protected $strTemplate;
+	protected $strPrefix;
 
 	/**
 	 * Wizard
 	 * @var string
 	 */
 	protected $strWizard;
-
-	/**
-	 * Output format
-	 * @var string
-	 */
-	protected $strFormat = 'html5';
-
-	/**
-	 * Tag ending
-	 * @var string
-	 */
-	protected $strTagEnding = '>';
 
 	/**
 	 * Errors
@@ -133,11 +121,17 @@ abstract class Widget extends \Controller
 	 */
 	protected $blnForAttribute = false;
 
+	/**
+	 * Data container
+	 * @var object
+	 */
+	protected $objDca;
+
 
 	/**
 	 * Initialize the object
 	 *
-	 * @param array An optional attributes array
+	 * @param array $arrAttributes An optional attributes array
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -151,9 +145,8 @@ abstract class Widget extends \Controller
 			if ($objPage->outputFormat != '')
 			{
 				$this->strFormat = $objPage->outputFormat;
+				$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 		}
 
 		$this->addAttributes($arrAttributes);
@@ -170,6 +163,7 @@ abstract class Widget extends \Controller
 	 * * label:             the field label
 	 * * value:             the field value
 	 * * class:             one or more CSS classes
+	 * * prefix:            the CSS class prefix
 	 * * template:          the template name
 	 * * wizard:            the field wizard markup
 	 * * alt:               an alternative text
@@ -208,6 +202,8 @@ abstract class Widget extends \Controller
 	 * * useHomeDir:        store uploaded files in the user's home directory
 	 * * trailingSlash:     add or remove a trailing slash
 	 * * spaceToUnderscore: convert spaces to underscores
+	 * * nullIfEmpty:       set to NULL if the value is empty
+	 * * doNotTrim:         do not trim the user input
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -245,6 +241,10 @@ abstract class Widget extends \Controller
 				}
 				break;
 
+			case 'prefix':
+				$this->strPrefix = $varValue;
+				break;
+
 			case 'template':
 				$this->strTemplate = $varValue;
 				break;
@@ -252,6 +252,16 @@ abstract class Widget extends \Controller
 			case 'wizard':
 				$this->strWizard = $varValue;
 				break;
+
+			case 'autocomplete':
+			case 'autocorrect':
+			case 'autocapitalize':
+			case 'spellcheck':
+				if (is_bool($varValue))
+				{
+					$varValue = $varValue ? 'on' : 'off';
+				}
+				// Do not add a break; statement here
 
 			case 'alt':
 			case 'style':
@@ -282,14 +292,7 @@ abstract class Widget extends \Controller
 
 			case 'disabled':
 			case 'readonly':
-				if ($varValue)
-				{
-					$this->blnSubmitInput = false;
-				}
-				else
-				{
-					$this->blnSubmitInput = true;
-				}
+				$this->blnSubmitInput = $varValue ? false : true;
 				// Do not add a break; statement here
 
 			case 'autofocus':
@@ -319,11 +322,22 @@ abstract class Widget extends \Controller
 			case 'storeValues':
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
+			case 'nullIfEmpty':
+			case 'doNotTrim':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
 			case 'forAttribute':
 				$this->blnForAttribute = $varValue;
+				break;
+
+			case 'dataContainer':
+				$this->objDca = $varValue;
+				break;
+
+			case strncmp($strKey, 'ng-', 3) === 0:
+			case strncmp($strKey, 'data-', 5) === 0:
+				$this->arrAttributes[$strKey] = $strKey;
 				break;
 
 			default:
@@ -338,14 +352,18 @@ abstract class Widget extends \Controller
 	 *
 	 * Supported keys:
 	 *
-	 * * id:       the field ID
-	 * * name:     the field name
-	 * * label:    the field label
-	 * * value:    the field value
-	 * * class:    one or more CSS classes
-	 * * template: the template name
-	 * * wizard:   the field wizard markup
-	 * * required: makes the widget a required field
+	 * * id:            the field ID
+	 * * name:          the field name
+	 * * label:         the field label
+	 * * value:         the field value
+	 * * class:         one or more CSS classes
+	 * * prefix:        the CSS class prefix
+	 * * template:      the template name
+	 * * wizard:        the field wizard markup
+	 * * required:      makes the widget a required field
+	 * * forAttribute:  the "for" attribute
+	 * * dataContainer: the data container object
+	 * * activeRecord:  the active record
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -373,11 +391,19 @@ abstract class Widget extends \Controller
 				{
 					return \Encryption::encrypt($this->varValue);
 				}
+				elseif ($this->arrConfiguration['nullIfEmpty'] && $this->varValue == '')
+				{
+					return null;
+				}
 				return $this->varValue;
 				break;
 
 			case 'class':
 				return $this->strClass;
+				break;
+
+			case 'prefix':
+				return $this->strPrefix;
 				break;
 
 			case 'template':
@@ -394,6 +420,14 @@ abstract class Widget extends \Controller
 
 			case 'forAttribute':
 				return $this->blnForAttribute;
+				break;
+
+			case 'dataContainer':
+				return $this->objDca;
+				break;
+
+			case 'activeRecord':
+				return $this->objDca->activeRecord;
 				break;
 
 			default:
@@ -529,10 +563,14 @@ abstract class Widget extends \Controller
 
 		$this->addAttributes($arrAttributes);
 
-		ob_start();
-		include $this->getTemplate($this->strTemplate, $this->strFormat);
-		$strBuffer = ob_get_contents();
-		ob_end_clean();
+		$this->mandatoryField = $GLOBALS['TL_LANG']['MSC']['mandatory'];
+
+		if ($this->customTpl != '' && TL_MODE == 'FE')
+		{
+			$this->strTemplate = $this->customTpl;
+		}
+
+		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filters (see #5553)
 		if (isset($GLOBALS['TL_HOOKS']['parseWidget']) && is_array($GLOBALS['TL_HOOKS']['parseWidget']))
@@ -602,9 +640,36 @@ abstract class Widget extends \Controller
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		$strAttributes = '';
+
+		foreach (array_keys($this->arrAttributes) as $strKey)
+		{
+			if (!in_array($strKey, $arrStrip))
+			{
+				$strAttributes .= $this->getAttribute($strKey);
+			}
+		}
+
+		return $strAttributes;
+	}
+
+
+	/**
+	 * Return a single attribute
+	 *
+	 * @param string $strKey The attribute name
+	 *
+	 * @return string The attribute markup
+	 */
+	public function getAttribute($strKey)
+	{
+		if (!isset($this->arrAttributes[$strKey]))
+		{
+			return '';
+		}
+
 		$blnIsXhtml = false;
 
-		// Remove HTML5 attributes in XHTML code
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
@@ -612,47 +677,39 @@ abstract class Widget extends \Controller
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$blnIsXhtml = true;
-				unset($this->arrAttributes['autofocus']);
-				unset($this->arrAttributes['placeholder']);
-				unset($this->arrAttributes['required']);
 			}
 		}
 
-		// Optionally strip certain attributes
-		if (is_array($arrStrip))
+		if ($blnIsXhtml)
 		{
-			foreach ($arrStrip as $strAttribute)
+			if ($strKey == 'autofocus' || $strKey == 'placeholder' || $strKey == 'required')
 			{
-				unset($this->arrAttributes[$strAttribute]);
+				return '';
 			}
 		}
 
-		$strAttributes = '';
+		$varValue = $this->arrAttributes[$strKey];
 
-		// Add the remaining attributes
-		foreach ($this->arrAttributes as $k=>$v)
+		if ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'required' || $strKey == 'autofocus' || $strKey == 'multiple')
 		{
-			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus' || $k == 'multiple')
+			if (TL_MODE == 'FE') // see #3878
 			{
-				if (TL_MODE == 'FE') // see #3878
-				{
-					$strAttributes .= $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
-				}
-				elseif ($k == 'disabled' || $k == 'readonly' || $k == 'multiple') // see #4131
-				{
-					$strAttributes .= ' ' . $k;
-				}
+				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
 			}
-			else
+			elseif ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'multiple') // see #4131
 			{
-				if ($v != '')
-				{
-					$strAttributes .= ' ' . $k . '="' . $v . '"';
-				}
+				return ' ' . $strKey;
+			}
+		}
+		else
+		{
+			if ($varValue != '')
+			{
+				return ' ' . $strKey . '="' . $varValue . '"';
 			}
 		}
 
-		return $strAttributes;
+		return '';
 	}
 
 
@@ -680,7 +737,7 @@ abstract class Widget extends \Controller
 	 */
 	public function validate()
 	{
-		$varValue = $this->validator(deserialize($this->getPost($this->strName)));
+		$varValue = $this->validator($this->getPost($this->strName));
 
 		if ($this->hasErrors())
 		{
@@ -711,7 +768,7 @@ abstract class Widget extends \Controller
 		$arrParts = explode('[', str_replace(']', '', $strKey));
 
 		if (!empty($arrParts))
-    	{
+		{
 			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
 			foreach($arrParts as $part)
@@ -725,7 +782,7 @@ abstract class Widget extends \Controller
 			}
 
 			return $varValue;
-    	}
+		}
 
 		return \Input::$strMethod($strKey, $this->decodeEntities);
 	}
@@ -750,7 +807,10 @@ abstract class Widget extends \Controller
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
+		if (!$this->doNotTrim)
+		{
+			$varInput = trim($varInput);
+		}
 
 		if ($varInput == '')
 		{
@@ -781,6 +841,16 @@ abstract class Widget extends \Controller
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
+		if ($this->minval && is_numeric($varInput) && $varInput < $this->minval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minval'], $this->strLabel, $this->minval));
+		}
+
+		if ($this->maxval && is_numeric($varInput) && $varInput > $this->maxval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxval'], $this->strLabel, $this->maxval));
+		}
+
 		if ($this->rgxp != '')
 		{
 			switch ($this->rgxp)
@@ -796,7 +866,7 @@ abstract class Widget extends \Controller
 					}
 					// DO NOT ADD A break; STATEMENT HERE
 
-				// Numeric characters (including full stop [.] minus [-] and space [ ])
+				// Numeric characters (including full stop [.] and minus [-])
 				case 'digit':
 					// Support decimal commas and convert them automatically (see #3488)
 					if (substr_count($varInput, ',') == 1 && strpos($varInput, '.') === false)
@@ -806,6 +876,14 @@ abstract class Widget extends \Controller
 					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
+					}
+					break;
+
+				// Natural numbers (positive integers)
+				case 'natural':
+					if (!\Validator::isNatural($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['natural'], $this->strLabel));
 					}
 					break;
 
@@ -970,6 +1048,14 @@ abstract class Widget extends \Controller
 					}
 					break;
 
+				// Check whether the current value is a Google+ ID or vanity name
+				case 'google+':
+					if (!\Validator::isGooglePlusId($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidGoogleId'], $this->strLabel));
+					}
+					break;
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
@@ -1042,7 +1128,7 @@ abstract class Widget extends \Controller
 	 */
 	protected function isChecked($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionChecked(1, 1);
 		}
@@ -1060,7 +1146,7 @@ abstract class Widget extends \Controller
 	 */
 	protected function isSelected($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionSelected(1, 1);
 		}
@@ -1206,7 +1292,7 @@ abstract class Widget extends \Controller
 		$arrAttributes['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
 		$arrAttributes['description'] = $arrData['label'][1];
 		$arrAttributes['type'] = $arrData['inputType'];
-		$arrAttributes['activeRecord'] = $arrData['activeRecord'];
+		$arrAttributes['dataContainer'] = $objDca;
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['eval']['submitOnChange'])
@@ -1241,21 +1327,21 @@ abstract class Widget extends \Controller
 			$arrCallback = $arrData['options_callback'];
 			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]($objDca);
 		}
+		elseif (is_callable($arrData['options_callback']))
+		{
+			$arrData['options'] = $arrData['options_callback']($objDca);
+		}
 
 		// Foreign key
 		elseif (isset($arrData['foreignKey']))
 		{
 			$arrKey = explode('.', $arrData['foreignKey'], 2);
 			$objOptions = \Database::getInstance()->query("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
+			$arrData['options'] = array();
 
-			if ($objOptions->numRows)
+			while ($objOptions->next())
 			{
-				$arrData['options'] = array();
-
-				while($objOptions->next())
-				{
-					$arrData['options'][$objOptions->id] = $objOptions->value;
-				}
+				$arrData['options'][$objOptions->id] = $objOptions->value;
 			}
 		}
 
@@ -1311,6 +1397,68 @@ abstract class Widget extends \Controller
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
+		// Add the "rootNodes" array as attribute (see #3563)
+		if (isset($arrData['rootNodes']) && !isset($arrData['eval']['rootNodes']))
+		{
+			$arrAttributes['rootNodes'] = $arrData['rootNodes'];
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getAttributesFromDca']) && is_array($GLOBALS['TL_HOOKS']['getAttributesFromDca']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAttributesFromDca'] as $callback)
+			{
+				$arrAttributes = static::importStatic($callback[0])->$callback[1]($arrAttributes, $objDca);
+			}
+		}
+
 		return $arrAttributes;
+	}
+
+
+	/**
+	 * Return the empty value based on the SQL string
+	 *
+	 * @return string|integer|null The empty value
+	 */
+	public function getEmptyValue()
+	{
+		if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']))
+		{
+			return '';
+		}
+
+		return static::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['sql']);
+	}
+
+
+	/**
+	 * Return the empty value based on the SQL string
+	 *
+	 * @param string $sql The SQL string
+	 *
+	 * @return string|integer|null The empty value
+	 */
+	public static function getEmptyValueByFieldType($sql)
+	{
+		if ($sql == '')
+		{
+			return '';
+		}
+
+		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
+
+		if (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
+		{
+			return null;
+		}
+		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
+		{
+			return 0;
+		}
+		else
+		{
+			return '';
+		}
 	}
 }

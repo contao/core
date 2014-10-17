@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -35,7 +35,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Files
 {
@@ -69,13 +69,13 @@ abstract class Files
 		if (self::$objInstance === null)
 		{
 			// Use FTP to modify files
-			if ($GLOBALS['TL_CONFIG']['useFTP'])
+			if (\Config::get('useFTP'))
 			{
 				self::$objInstance = new \Files\Ftp();
 			}
 
 			// HOOK: use the smhextended module
-			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', \Config::getInstance()->getActiveModules()))
+			elseif (\Config::get('useSmhExtended') && in_array('smhextended', \ModuleLoader::getActive()))
 			{
 				self::$objInstance = new \SMHExtended();
 			}

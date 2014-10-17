@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Newsletter
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleNewsletterReader
  *
  * Front end module "newsletter reader".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Newsletter
  */
@@ -55,7 +55,7 @@ class ModuleNewsletterReader extends \Module
 		}
 
 		// Set the item from the auto_item parameter
-		if (!isset($_GET['items']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		if (!isset($_GET['items']) && \Config::get('useAutoItem') && isset($_GET['auto_item']))
 		{
 			\Input::setGet('items', \Input::get('auto_item'));
 		}

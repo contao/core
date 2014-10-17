@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -27,23 +27,26 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class ZipReader
 {
 
 	/**
 	 * File signatur
+	 * @var string
 	 */
 	const FILE_SIGNATURE = "\x50\x4b\x03\x04";
 
 	/**
 	 * Central directory begin marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_START = "\x50\x4b\x01\x02";
 
 	/**
 	 * Central directory end marker
+	 * @var string
 	 */
 	const CENTRAL_DIR_END = "\x50\x4b\x05\x06";
 
@@ -434,6 +437,19 @@ class ZipReader
 	 */
 	protected function readCentralDirectory()
 	{
+		$strMbCharset = null;
+
+		// Set the mbstring encoding to ASCII (see #5842)
+		if (ini_get('mbstring.func_overload') > 0)
+		{
+			$strMbCharset = mb_internal_encoding();
+
+			if (mb_internal_encoding('ASCII') === false)
+			{
+				$strMbCharset = null;
+			}
+		}
+
 		$intOffset = 0;
 		$intInterval = min(filesize(TL_ROOT . '/' . $this->strFile), 1024);
 		$strBuffer = '';
@@ -533,6 +549,8 @@ class ZipReader
 
 		$this->intLast = (count($this->arrFiles) - 1);
 
+		// Restore the mbstring encoding (see #5842)
+		$strMbCharset && mb_internal_encoding($strMbCharset);
 	}
 
 

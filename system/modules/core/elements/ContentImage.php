@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentImage
  *
  * Front end content element "image".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -46,14 +46,19 @@ class ContentImage extends \ContentElement
 			return '';
 		}
 
-		if (!is_numeric($this->singleSRC))
+		$objFile = \FilesModel::findByUuid($this->singleSRC);
+
+		if ($objFile === null)
 		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			if (!\Validator::isUuid($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
+			return '';
 		}
 
-		$objFile = \FilesModel::findByPk($this->singleSRC);
-
-		if ($objFile === null || !is_file(TL_ROOT . '/' . $objFile->path))
+		if (!is_file(TL_ROOT . '/' . $objFile->path))
 		{
 			return '';
 		}

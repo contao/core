@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -78,7 +78,7 @@ class PageRegular extends \Frontend
 		// Filter the disabled modules
 		foreach ($arrModules as $module)
 		{
-			if (!$module['disable'])
+			if ($module['enable'])
 			{
 				$arrModuleIds[] = $module['mod'];
 			}
@@ -146,6 +146,12 @@ class PageRegular extends \Frontend
 
 		$this->Template->sections = $arrCustomSections;
 
+		// Mark RTL languages (see #7171)
+		if ($GLOBALS['TL_LANG']['MSC']['textDirection'] == 'rtl')
+		{
+			$this->Template->isRTL = true;
+		}
+
 		// HOOK: modify the page or layout object
 		if (isset($GLOBALS['TL_HOOKS']['generatePage']) && is_array($GLOBALS['TL_HOOKS']['generatePage']))
 		{
@@ -157,7 +163,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Set the page title and description AFTER the modules have been generated
-		$this->Template->mainTitle = $objPage->rootTitle;
+		$this->Template->mainTitle = $objPage->rootPageTitle;
 		$this->Template->pageTitle = $objPage->pageTitle ?: $objPage->title;
 
 		// Meta robots tag
@@ -167,8 +173,14 @@ class PageRegular extends \Frontend
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
 		$this->Template->pageTitle = str_replace('[-]', '', $this->Template->pageTitle);
 
-		// Assign the title (backwards compatibility)
-		$this->Template->title = $this->Template->mainTitle . ' - ' . $this->Template->pageTitle;
+		// Fall back to the default title tag
+		if ($objLayout->titleTag == '')
+		{
+			$objLayout->titleTag = '{{page::pageTitle}} - {{page::rootPageTitle}}';
+		}
+
+		// Assign the title and description
+		$this->Template->title = $this->replaceInsertTags($objLayout->titleTag); // see #7097
 		$this->Template->description = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), $objPage->description);
 
 		// Body onload and body classes
@@ -209,7 +221,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Override the autodetected value
-		if (\Input::cookie('TL_VIEW') == 'mobile' && $objPage->mobileLayout)
+		if (\Input::cookie('TL_VIEW') == 'mobile')
 		{
 			$blnMobile = true;
 		}
@@ -218,15 +230,15 @@ class PageRegular extends \Frontend
 			$blnMobile = false;
 		}
 
-		$intId = $blnMobile ? $objPage->mobileLayout : $objPage->layout;
+		$intId = ($blnMobile && $objPage->mobileLayout) ? $objPage->mobileLayout : $objPage->layout;
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
 		if ($objLayout === null)
 		{
 			header('HTTP/1.1 501 Not Implemented');
-			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
-			die('No layout specified');
+			$this->log('Could not find layout ID "' . $intId . '"', __METHOD__, TL_ERROR);
+			die_nicely('be_no_layout', 'No layout specified');
 		}
 
 		$objPage->hasJQuery = $objLayout->addJQuery;
@@ -260,7 +272,6 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		$strFramework = '';
 		$arrFramework = deserialize($objLayout->framework);
 
 		$this->Template->viewport = '';
@@ -269,7 +280,12 @@ class PageRegular extends \Frontend
 		// Generate the CSS framework
 		if (is_array($arrFramework) && in_array('layout.css', $arrFramework))
 		{
-			$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
+			$strFramework = '';
+
+			if (in_array('responsive.css', $arrFramework))
+			{
+				$this->Template->viewport = '<meta name="viewport" content="width=device-width,initial-scale=1.0"' . ($blnXhtml ? ' />' : '>') . "\n";
+			}
 
 			// Wrapper
 			if ($objLayout->static)
@@ -340,15 +356,14 @@ class PageRegular extends \Frontend
 			// Add the layout specific CSS
 			if ($strFramework != '')
 			{
-				if ($blnXhtml)
-				{
-					$this->Template->framework = '<style type="text/css">' . "\n/* <![CDATA[ */\n" . $strFramework . "\n/* ]]> */\n</style>\n";
-				}
-				else
-				{
-					$this->Template->framework = '<style>' . $strFramework . "</style>\n";
-				}
+				$this->Template->framework = \Template::generateInlineStyle($strFramework, $blnXhtml) . "\n";
 			}
+		}
+
+		// Overwrite the viewport tag (see #6251)
+		if ($objLayout->viewport != '')
+		{
+			$this->Template->viewport = '<meta name="viewport" content="' . $objLayout->viewport . '"' . ($blnXhtml ? ' />' : '>') . "\n";
 		}
 
 		$this->Template->mooScripts = '';
@@ -370,25 +385,17 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
 				{
-					if ($blnXhtml)
-					{
-						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
-					}
-					else
-					{
-						$this->Template->mooScripts .= '<script>window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . JQUERY . '/jquery.min.js">\x3C/script>\')</script>' . "\n";
-					}
+					$this->Template->mooScripts .= \Template::generateInlineScript('window.jQuery || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/jquery/core/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js">\x3C/script>\')', $blnXhtml) . "\n";
 				}
 			}
 			else
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/jquery/core/' . JQUERY . '/jquery.min.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/jquery/core/' . $GLOBALS['TL_ASSETS']['JQUERY'] . '/jquery.min.js|static';
 			}
 		}
 
@@ -397,41 +404,33 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
 				{
-					if ($blnXhtml)
-					{
-						$this->Template->mooScripts .= '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')' . "\n/* ]]> */\n" . '</script>' . "\n";
-					}
-					else
-					{
-						$this->Template->mooScripts .= '<script>window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
-					}
+					$this->Template->mooScripts .= \Template::generateInlineScript('window.MooTools || document.write(\'<script src="' . TL_ASSETS_URL . 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js">\x3C/script>\')', $blnXhtml) . "\n";
 				}
 
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-more.js|static';
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-mobile.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-more.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-mobile.js|static';
 			}
 			else
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js|static';
 			}
 		}
 
 		// Load MooTools core for the debug bar (see #5195)
-		if ($GLOBALS['TL_CONFIG']['debugMode'] && !$objLayout->addMooTools)
+		if (\Config::get('debugMode') && !$objLayout->addMooTools)
 		{
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-core.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
 		}
 
-		// Load MooTools request for the command scheduler (see #5195)
-		if (!$GLOBALS['TL_CONFIG']['disableCron'] && !$objLayout->addJQuery && !$objLayout->addMooTools)
+		// Picturefill
+		if ($objLayout->addPicturefill)
 		{
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . MOOTOOLS . '/mootools-request.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static';
 		}
 
 		// Check whether TL_APPEND_JS exists (see #4890)
@@ -454,10 +453,11 @@ class PageRegular extends \Frontend
 		// Default settings
 		$this->Template->layout = $objLayout;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+		$this->Template->charset = \Config::get('characterSet');
 		$this->Template->base = \Environment::get('base');
-		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
+		$this->Template->isRTL = false;
 	}
 
 
@@ -473,14 +473,12 @@ class PageRegular extends \Frontend
 		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$arrFramework = deserialize($objLayout->framework);
 
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= \Template::generateStyleTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts), 'all', $blnXhtml) . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets
@@ -496,9 +494,15 @@ class PageRegular extends \Frontend
 		}
 
 		// Add the TinyMCE style sheet
-		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . \Config::get('uploadPath') . '/tinymce.css'))
 		{
-			$GLOBALS['TL_FRAMEWORK_CSS'][] = $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css';
+			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
+		}
+
+		// Make sure TL_USER_CSS is set
+		if (!is_array($GLOBALS['TL_USER_CSS']))
+		{
+			$GLOBALS['TL_USER_CSS'] = array();
 		}
 
 		// User style sheets
@@ -521,7 +525,20 @@ class PageRegular extends \Frontend
 					// Style sheets with a CC or a combination of font-face and media-type != all cannot be aggregated (see #5216)
 					if ($objStylesheets->cc || ($objStylesheets->hasFontFace && $media != 'all'))
 					{
-						$strStyleSheet = '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding;
+						// External style sheet
+						if ($objStylesheets->type == 'external')
+						{
+							$objFile = \FilesModel::findByPk($objStylesheets->singleSRC);
+
+							if ($objFile !== null)
+							{
+								$strStyleSheet = \Template::generateStyleTag(TL_ASSETS_URL . $objFile->path, $media, $blnXhtml);
+							}
+						}
+						else
+						{
+							$strStyleSheet = \Template::generateStyleTag(TL_ASSETS_URL . 'assets/css/' . $objStylesheets->name . '.css', $media, $blnXhtml);
+						}
 
 						if ($objStylesheets->cc)
 						{
@@ -532,7 +549,20 @@ class PageRegular extends \Frontend
 					}
 					else
 					{
-						$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
+						// External style sheet
+						if ($objStylesheets->type == 'external')
+						{
+							$objFile = \FilesModel::findByPk($objStylesheets->singleSRC);
+
+							if ($objFile !== null)
+							{
+								$GLOBALS['TL_USER_CSS'][] = $objFile->path . '|' . $media . '|static|' . filemtime(TL_ROOT . '/' . $objFile->path);
+							}
+						}
+						else
+						{
+							$GLOBALS['TL_USER_CSS'][] = 'assets/css/' . $objStylesheets->name . '.css|' . $media . '|static|' . max($objStylesheets->tstamp, $objStylesheets->tstamp2, $objStylesheets->tstamp3);
+						}
 					}
 				}
 			}
@@ -546,40 +576,58 @@ class PageRegular extends \Frontend
 			// Consider the sorting order (see #5038)
 			if ($objLayout->orderExt != '')
 			{
-				// Turn the order string into an array and remove all values
-				$arrOrder = explode(',', $objLayout->orderExt);
-				$arrOrder = array_flip(array_map('intval', $arrOrder));
-				$arrOrder = array_map(function(){}, $arrOrder);
+				$tmp = deserialize($objLayout->orderExt);
 
-				// Move the matching elements to their position in $arrOrder
-				foreach ($arrExternal as $k=>$v)
+				if (!empty($tmp) && is_array($tmp))
 				{
-					$arrOrder[$v] = $v;
-					unset($arrExternal[$k]);
-				}
+					// Remove all values
+					$arrOrder = array_map(function(){}, array_flip($tmp));
 
-				// Append the left-over style sheets at the end
-				if (!empty($arrExternal))
-				{
-					$arrOrder = array_merge($arrOrder, array_values($arrExternal));
-				}
+					// Move the matching elements to their position in $arrOrder
+					foreach ($arrExternal as $k=>$v)
+					{
+						if (array_key_exists($v, $arrOrder))
+						{
+							$arrOrder[$v] = $v;
+							unset($arrExternal[$k]);
+						}
+					}
 
-				// Remove empty (unreplaced) entries
-				$arrExternal = array_filter($arrOrder);
-				unset($arrOrder);
+					// Append the left-over style sheets at the end
+					if (!empty($arrExternal))
+					{
+						$arrOrder = array_merge($arrOrder, array_values($arrExternal));
+					}
+
+					// Remove empty (unreplaced) entries
+					$arrExternal = array_values(array_filter($arrOrder));
+					unset($arrOrder);
+				}
 			}
 
 			// Get the file entries from the database
-			$objFiles = \FilesModel::findMultipleByIds($arrExternal);
+			$objFiles = \FilesModel::findMultipleByUuids($arrExternal);
 
 			if ($objFiles !== null)
 			{
+				$arrFiles = array();
+
 				while ($objFiles->next())
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
+						$arrFiles[] = $objFiles->path . '|static';
 					}
+				}
+
+				// Inject the external style sheets before or after the internal ones (see #6937)
+				if ($objLayout->loadingOrder == 'external_first')
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], 0, 0, $arrFiles);
+				}
+				else
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], count($GLOBALS['TL_USER_CSS']), 0, $arrFiles);
 				}
 			}
 		}
@@ -588,9 +636,9 @@ class PageRegular extends \Frontend
 		$strStyleSheets .= '[[TL_CSS]]';
 
 		// Add the debug style sheet
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if (\Config::get('debugMode'))
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo('assets/contao/css/debug.css'), 'all', $blnXhtml) . "\n";
 		}
 
 		// Always add conditional style sheets at the end
@@ -608,8 +656,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -623,8 +670,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = $objFeeds->feedBase ?: \Environment::get('base');
-					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}
 		}

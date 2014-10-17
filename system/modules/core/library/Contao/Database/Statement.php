@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -28,7 +28,7 @@ namespace Contao\Database;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Statement
 {
@@ -139,8 +139,8 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
-		$this->resResult = NULL;
-		$this->strQuery = $this->prepare_query($strQuery);
+		$this->resResult = null;
+		$this->strQuery = $this->prepare_query(trim($strQuery));
 
 		// Auto-generate the SET/VALUES subpart
 		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0 || strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
@@ -161,7 +161,7 @@ abstract class Statement
 			$arrChunks[$k] = str_replace('?', '%s', $v);
 		}
 
-		$this->strQuery = trim(implode('', $arrChunks));
+		$this->strQuery = implode('', $arrChunks);
 		return $this;
 	}
 
@@ -177,12 +177,13 @@ abstract class Statement
 	 *     );
 	 *     $stmt->prepare("UPDATE tl_member %s")->set($set);
 	 *
-	 * @param array The associative array
+	 * @param array $arrParams The associative array
 	 *
 	 * @return \Database\Statement The statement object
 	 */
 	public function set($arrParams)
 	{
+		$strQuery = '';
 		$arrParams = $this->escapeParams($arrParams);
 
 		// INSERT
@@ -236,7 +237,7 @@ abstract class Statement
 
 
 	/**
-	 * Load from cache or execute the query and cache the result
+	 * Execute the query and return the result object
 	 *
 	 * @return \Database\Result The result object
 	 */
@@ -250,71 +251,7 @@ abstract class Statement
 		}
 
 		$this->replaceWildcards($arrParams);
-		$strKey = md5($this->strQuery);
-
-		// Try to load the result from cache
-		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
-		{
-			return self::$arrCache[$strKey]->reset();
-		}
-
-		$objResult = $this->query();
-
-		// Cache the result object
-		if ($objResult instanceof \Database\Result)
-		{
-			self::$arrCache[$strKey] = $objResult;
-		}
-
-		return $objResult;
-	}
-
-
-	/**
-	 * Bypass the cache and always execute the query
-	 *
-	 * @return \Database\Result The result object
-	 */
-	public function executeUncached()
-	{
-		$arrParams = func_get_args();
-
-		if (is_array($arrParams[0]))
-		{
-			$arrParams = array_values($arrParams[0]);
-		}
-
-		$this->replaceWildcards($arrParams);
 		return $this->query();
-	}
-
-
-	/**
-	 * Always execute the query and add or replace an existing cache entry
-	 *
-	 * @return \Database\Result The result object
-	 */
-	public function executeCached()
-	{
-		$arrParams = func_get_args();
-
-		if (is_array($arrParams[0]))
-		{
-			$arrParams = array_values($arrParams[0]);
-		}
-
-		$this->replaceWildcards($arrParams);
-
-		$objResult = $this->query();
-		$strKey = md5($this->strQuery);
-
-		// Cache the result object
-		if ($objResult instanceof \Database\Result)
-		{
-			self::$arrCache[$strKey] = $objResult;
-		}
-
-		return $objResult;
 	}
 
 
@@ -331,7 +268,7 @@ abstract class Statement
 	{
 		if (!empty($strQuery))
 		{
-			$this->strQuery = $strQuery;
+			$this->strQuery = trim($strQuery);
 		}
 
 		// Make sure there is a query string
@@ -427,7 +364,7 @@ abstract class Statement
 	 */
 	protected function debugQuery($objResult=null)
 	{
-		if (!$GLOBALS['TL_CONFIG']['debugMode'])
+		if (!\Config::get('debugMode'))
 		{
 			return;
 		}
@@ -552,4 +489,29 @@ abstract class Statement
 	 */
 	abstract protected function createResult($resResult, $strQuery);
 
+
+	/**
+	 * Bypass the cache and always execute the query
+	 *
+	 * @return \Database\Result The result object
+	 *
+	 * @deprecated Use Database\Statement::execute() instead
+	 */
+	public function executeUncached()
+	{
+		return call_user_func_array(array($this, 'execute'), func_get_args());
+	}
+
+
+	/**
+	 * Always execute the query and add or replace an existing cache entry
+	 *
+	 * @return \Database\Result The result object
+	 *
+	 * @deprecated Use Database\Statement::execute() instead
+	 */
+	public function executeCached()
+	{
+		return call_user_func_array(array($this, 'execute'), func_get_args());
+	}
 }

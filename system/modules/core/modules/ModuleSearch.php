@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleSearch
  *
  * Front end module "search".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -78,27 +78,24 @@ class ModuleSearch extends \Module
 			$_GET['per_page'] = \Input::post('per_page');
 		}
 
+		$blnFuzzy = $this->fuzzy;
+		$strQueryType = \Input::get('query_type') ?: $this->queryType;
+
 		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
-		// Overwrite the default query_type
-		if (\Input::get('query_type'))
-		{
-			$this->queryType = \Input::get('query_type');
-		}
-
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
-		$objFormTemplate->queryType = $this->queryType;
+		$objFormTemplate->queryType = $strQueryType;
 		$objFormTemplate->keyword = specialchars($strKeywords);
 		$objFormTemplate->keywordLabel = $GLOBALS['TL_LANG']['MSC']['keywords'];
 		$objFormTemplate->optionsLabel = $GLOBALS['TL_LANG']['MSC']['options'];
 		$objFormTemplate->search = specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']);
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
-		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && \Input::get('id')) ? \Input::get('id') : false;
+		$objFormTemplate->id = (\Config::get('disableAlias') && \Input::get('id')) ? \Input::get('id') : false;
 		$objFormTemplate->action = ampersand(\Environment::get('indexFreeRequest'));
 
 		// Redirect page
@@ -129,15 +126,25 @@ class ModuleSearch extends \Module
 				$arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			}
 
+			// HOOK: add custom logic (see #5223)
+			if (isset($GLOBALS['TL_HOOKS']['customizeSearch']) && is_array($GLOBALS['TL_HOOKS']['customizeSearch']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['customizeSearch'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($arrPages, $strKeywords, $strQueryType, $blnFuzzy);
+				}
+			}
+
 			// Return if there are no pages
 			if (!is_array($arrPages) || empty($arrPages))
 			{
-				$this->log('No searchable pages found', 'ModuleSearch compile()', TL_ERROR);
+				$this->log('No searchable pages found', __METHOD__, TL_ERROR);
 				return;
 			}
 
 			$arrResult = null;
-			$strChecksum = md5($strKeywords.\Input::get('query_type').$intRootId.$this->fuzzy);
+			$strChecksum = md5($strKeywords . $strQueryType . $intRootId . $blnFuzzy);
 			$query_starttime = microtime(true);
 			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
@@ -161,12 +168,12 @@ class ModuleSearch extends \Module
 			{
 				try
 				{
-					$objSearch = \Search::searchFor($strKeywords, (\Input::get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
+					$objSearch = \Search::searchFor($strKeywords, ($strQueryType == 'or'), $arrPages, 0, 0, $blnFuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (\Exception $e)
 				{
-					$this->log('Website search failed: ' . $e->getMessage(), 'ModuleSearch compile()', TL_ERROR);
+					$this->log('Website search failed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
 					$arrResult = array();
 				}
 
@@ -176,7 +183,7 @@ class ModuleSearch extends \Module
 			$query_endtime = microtime(true);
 
 			// Sort out protected pages
-			if ($GLOBALS['TL_CONFIG']['indexProtected'] && !BE_USER_LOGGED_IN)
+			if (\Config::get('indexProtected') && !BE_USER_LOGGED_IN)
 			{
 				$this->import('FrontendUser', 'User');
 
@@ -241,7 +248,7 @@ class ModuleSearch extends \Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new \Pagination($count, $per_page, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+					$objPagination = new \Pagination($count, $per_page, \Config::get('maxPaginationLinks'), $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}

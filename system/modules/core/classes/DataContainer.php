@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class DataContainer
  *
  * Provide methods to handle data container arrays.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -96,6 +96,26 @@ class DataContainer extends \Backend
 
 
 	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'activeRecord':
+				$this->objActiveRecord = $varValue;
+				break;
+
+			default;
+				$this->$strKey = $varValue; // backwards compatibility
+				break;
+		}
+	}
+
+
+	/**
 	 * Return an object property
 	 * @param string
 	 * @return mixed
@@ -150,14 +170,14 @@ class DataContainer extends \Backend
 		// Redirect if the field is excluded
 		if ($arrData['exclude'])
 		{
-			$this->log('Field "'.$this->strField.'" of table "'.$this->strTable.'" was excluded from being edited', 'DataContainer row()', TL_ERROR);
+			$this->log('Field "'.$this->strField.'" of table "'.$this->strTable.'" was excluded from being edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		$xlabel = '';
 
 		// Toggle line wrap (textarea)
-		if ($arrData['inputType'] == 'textarea' && $arrData['eval']['rte'] == '')
+		if ($arrData['inputType'] == 'textarea' && !isset($arrData['eval']['rte']))
 		{
 			$xlabel .= ' ' . \Image::getHtml('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
 		}
@@ -173,20 +193,27 @@ class DataContainer extends \Backend
 		{
 			foreach ($arrData['xlabel'] as $callback)
 			{
-				$this->import($callback[0]);
-				$xlabel .= $this->$callback[0]->$callback[1]($this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$xlabel .= $this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$xlabel .= $callback($this);
+				}
 			}
 		}
 
 		// Input field callback
 		if (is_array($arrData['input_field_callback']))
 		{
-			if (!is_object($this->$arrData['input_field_callback'][0]))
-			{
-				$this->import($arrData['input_field_callback'][0]);
-			}
-
+			$this->import($arrData['input_field_callback'][0]);
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
+		}
+		elseif (is_callable($arrData['input_field_callback']))
+		{
+			return $arrData['input_field_callback']($this, $xlabel);
 		}
 
 		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
@@ -198,7 +225,6 @@ class DataContainer extends \Backend
 		}
 
 		$arrData['eval']['required'] = false;
-		$arrData['activeRecord'] = $this->activeRecord;
 
 		// Use strlen() here (see #3277)
 		if ($arrData['eval']['mandatory'])
@@ -217,6 +243,12 @@ class DataContainer extends \Backend
 					$arrData['eval']['required'] = true;
 				}
 			}
+		}
+
+		// Convert insert tags in src attributes (see #5965)
+		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		{
+			$this->varValue = \String::insertTagToSrc($this->varValue);
 		}
 
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
@@ -295,6 +327,12 @@ class DataContainer extends \Backend
 						$varValue = serialize($varValue);
 					}
 
+					// Convert file paths in src attributes (see #5965)
+					if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+					{
+						$varValue = \String::srcToInsertTag($varValue);
+					}
+
 					// Save the current value
 					try
 					{
@@ -304,7 +342,6 @@ class DataContainer extends \Backend
 					{
 						$this->noReload = true;
 						$objWidget->addError($e->getMessage());
-						$this->blnCreateNewRecord = false;
 					}
 				}
 			}
@@ -317,7 +354,7 @@ class DataContainer extends \Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = \Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+			$format = \Date::formatToJs(\Config::get($rgxp.'Format'));
 
 			switch ($rgxp)
 			{
@@ -334,15 +371,15 @@ class DataContainer extends \Backend
 					break;
 			}
 
-			$wizard .= ' <img src="assets/mootools/datepicker/' . DATEPICKER . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
+			$wizard .= ' <img src="assets/mootools/datepicker/' . $GLOBALS['TL_ASSETS']['DATEPICKER'] . '/icon.gif" width="20" height="20" alt="" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer">
   <script>
     window.addEvent("domready", function() {
       new Picker.Date($("ctrl_' . $objWidget->id . '"), {
         draggable: false,
         toggle: $("toggle_' . $objWidget->id . '"),
         format: "' . $format . '",
-        positionOffset: {x:-197,y:-182}' . $time . ',
-        pickerClass: "datepicker_dashboard",
+        positionOffset: {x:-211,y:-209}' . $time . ',
+        pickerClass: "datepicker_bootstrap",
         useFadeInOut: !Browser.ie,
         startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
         titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
@@ -363,7 +400,7 @@ class DataContainer extends \Backend
       new MooRainbow("moo_' . $this->strField . '", {
         id: "ctrl_' . $strKey . '",
         startColor: ((cl = $("ctrl_' . $strKey . '").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-        imgPath: "assets/mootools/colorpicker/'.COLORPICKER.'/images/",
+        imgPath: "assets/mootools/colorpicker/' . $GLOBALS['TL_ASSETS']['COLORPICKER'] . '/images/",
         onComplete: function(color) {
           $("ctrl_' . $strKey . '").value = color.hex.replace("#", "");
         }
@@ -377,8 +414,15 @@ class DataContainer extends \Backend
 		{
 			foreach ($arrData['wizard'] as $callback)
 			{
-				$this->import($callback[0]);
-				$wizard .= $this->$callback[0]->$callback[1]($this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$wizard .= $this->$callback[0]->$callback[1]($this);
+				}
+				elseif (is_callable($callback))
+				{
+					$wizard .= $callback($this);
+				}
 			}
 		}
 
@@ -409,9 +453,29 @@ class DataContainer extends \Backend
 		$updateMode = '';
 
 		// Replace the textarea with an RTE instance
-		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		if (!empty($arrData['eval']['rte']))
 		{
-			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_".$this->strInputName."');$('ctrl_".$this->strInputName."').erase('required')</script>";
+			list ($file, $type) = explode('|', $arrData['eval']['rte'], 2);
+
+			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
+			{
+				throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+			}
+
+			// Backwards compatibility
+			$language = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
+
+			if (!file_exists(TL_ROOT . '/assets/tinymce/langs/' . $language . '.js'))
+			{
+				$language = 'en';
+			}
+
+			$selector = 'ctrl_' . $this->strInputName;
+
+			ob_start();
+			include TL_ROOT . '/system/config/' . $file . '.php';
+			$updateMode = ob_get_contents();
+			ob_end_clean();
 		}
 
 		// Handle multi-select fields in "override all" mode
@@ -428,7 +492,51 @@ class DataContainer extends \Backend
   </fieldset>';
 		}
 
-		return '
+		$strPreview = '';
+
+		// Show a preview image (see #4948)
+		if ($this->strTable == 'tl_files' && $this->strField == 'name' && $this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
+		{
+			$objFile = new \File($this->objActiveRecord->path);
+
+			if ($objFile->isImage)
+			{
+				$image = 'placeholder.png';
+
+				if ($objFile->isSvgImage || $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				{
+					if ($objFile->width > 699 || $objFile->height > 524)
+					{
+						$image = \Image::get($objFile->path, 699, 524, 'box');
+					}
+					else
+					{
+						$image = $objFile->path;
+					}
+				}
+
+				$ctrl = 'ctrl_preview_' . substr(md5($image), 0, 8);
+
+				$strPreview = '
+
+<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
+' . \Image::getHtml($image) . '
+</div>';
+
+				// Add the script to mark the important part
+				if ($image !== 'placeholder.png')
+				{
+					$strPreview .= '<script>Backend.editPreviewWizard($(\'' . $ctrl . '\'));</script>';
+
+					if (\Config::get('showHelp'))
+					{
+						$strPreview .= '<p class="tl_help tl_tip">' . $GLOBALS['TL_LANG'][$this->strTable]['edit_preview_help'] . '</p>';
+					}
+				}
+			}
+		}
+
+		return $strPreview . '
 <div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
@@ -443,7 +551,7 @@ class DataContainer extends \Backend
 	{
 		$return = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['label'][1];
 
-		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
+		if (!\Config::get('showHelp') || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
 		{
 			return '';
 		}
@@ -498,10 +606,8 @@ class DataContainer extends \Backend
 			}
 		}
 
-		$strUrl = \Environment::get('script') . '?' . implode('&', $arrKeys);
-		$glue = !empty($arrKeys) ? '&' : '';
-
-		return $strUrl . $glue . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
+		$strUrl = TL_SCRIPT . '?' . implode('&', $arrKeys);
+		return $strUrl . (!empty($arrKeys) ? '&' : '') . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 
 
@@ -551,13 +657,18 @@ class DataContainer extends \Backend
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
 				continue;
 			}
+			elseif (is_callable($v['button_callback']))
+			{
+				$return .= $v['button_callback']($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
+				continue;
+			}
 
 			// Generate all buttons except "move up" and "move down" buttons
 			if ($k != 'move' && $v != 'move')
 			{
 				if ($k == 'show')
 				{
-					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']))).'\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
+					$return .= '<a href="'.$this->addToUrl($v['href'].'&amp;id='.$arrRow['id'].'&amp;popup=1').'" title="'.specialchars($title).'" onclick="Backend.openModalIframe({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG'][$strTable]['show'][1], $arrRow['id']))).'\',\'url\':this.href});return false"'.$attributes.'>'.\Image::getHtml($v['icon'], $label).'</a> ';
 				}
 				else
 				{
@@ -640,6 +751,11 @@ class DataContainer extends \Backend
 			{
 				$this->import($v['button_callback'][0]);
 				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
+				continue;
+			}
+			elseif (is_callable($v['button_callback']))
+			{
+				$return .= $v['button_callback']($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
 				continue;
 			}
 

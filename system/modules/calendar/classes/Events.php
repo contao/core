@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Events
  *
  * Provide methods to get all events of a certain period from the database.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -120,7 +120,7 @@ abstract class Events extends \Module
 			// Get the current "jumpTo" page
 			if ($objCalendar !== null && $objCalendar->jumpTo && ($objTarget = $objCalendar->getRelated('jumpTo')) !== null)
 			{
-				$strUrl = $this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+				$strUrl = $this->generateFrontendUrl($objTarget->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s'));
 			}
 
 			// Get the events of the current period
@@ -138,33 +138,35 @@ abstract class Events extends \Module
 				// Recurring events
 				if ($objEvents->recurring)
 				{
-					$count = 0;
-
 					$arrRepeat = deserialize($objEvents->repeatEach);
-					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
 
 					if ($arrRepeat['value'] < 1)
 					{
 						continue;
 					}
 
-					while ($objEvents->endTime < $intEnd)
+					$count = 0;
+					$intStartTime = $objEvents->startTime;
+					$intEndTime = $objEvents->endTime;
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
+
+					while ($intEndTime < $intEnd)
 					{
 						if ($objEvents->recurrences > 0 && $count++ >= $objEvents->recurrences)
 						{
 							break;
 						}
 
-						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
-						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
+						$intStartTime = strtotime($strtotime, $intStartTime);
+						$intEndTime = strtotime($strtotime, $intEndTime);
 
 						// Skip events outside the scope
-						if ($objEvents->endTime < $intStart || $objEvents->startTime > $intEnd)
+						if ($intEndTime < $intStart || $intStartTime > $intEnd)
 						{
 							continue;
 						}
 
-						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
+						$this->addEvent($objEvents, $intStartTime, $intEndTime, $strUrl, $intStart, $intEnd, $id);
 					}
 				}
 			}
@@ -203,10 +205,16 @@ abstract class Events extends \Module
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
 		global $objPage;
+		$span = \Calendar::calculateSpan($intStart, $intEnd);
+
+		// Adjust the start time of a multi-day event (see #6802)
+		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin && $intBegin < $intEnd)
+		{
+			$intStart = $intBegin;
+		}
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
-		$span = \Calendar::calculateSpan($intStart, $intEnd);
 		$strDate = \Date::parse($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
@@ -249,7 +257,7 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
-		$arrEvent['start'] = $intStart;
+		$arrEvent['begin'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 		$arrEvent['details'] = '';
 
@@ -287,7 +295,7 @@ abstract class Events extends \Module
 			{
 				while ($objElement->next())
 				{
-					$arrEvent['details'] .= $this->getContentElement($objElement->id);
+					$arrEvent['details'] .= $this->getContentElement($objElement->current());
 				}
 			}
 		}
@@ -369,13 +377,13 @@ abstract class Events extends \Module
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					return ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id)));
+		return ampersand(sprintf($strUrl, ((!\Config::get('disableAlias') && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id)));
 	}
 
 
@@ -407,48 +415,41 @@ abstract class Events extends \Module
 				break;
 
 			case 'next_7':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+7 days', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+7 days') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_14':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+14 days', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+14 days') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_30':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+1 month', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+1 month') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_90':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+3 months', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+3 months') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_180':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+6 months', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+6 months') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_365':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+1 year', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+1 year') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_two':
-				$objToday = new \Date();
-				return array($objToday->dayBegin, (strtotime('+2 years', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), (strtotime('+2 years') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_cur_month':
 				$objToday = new \Date();
-				return array($objToday->dayBegin, $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_cur_year':
 				$objToday = new \Date();
-				return array($objToday->dayBegin, $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_next_month':
@@ -462,53 +463,45 @@ abstract class Events extends \Module
 				break;
 
 			case 'next_all': // 2038-01-01 00:00:00
-				$objToday = new \Date();
-				return array($objToday->dayBegin, 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(time(), 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_7':
-				$objToday = new \Date();
-				return array((strtotime('-7 days', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-7 days'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_14':
-				$objToday = new \Date();
-				return array((strtotime('-14 days', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-14 days'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_30':
-				$objToday = new \Date();
-				return array((strtotime('-1 month', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-1 month'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_90':
-				$objToday = new \Date();
-				return array((strtotime('-3 months', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-3 months'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_180':
-				$objToday = new \Date();
-				return array((strtotime('-6 months', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-6 months'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_365':
-				$objToday = new \Date();
-				return array((strtotime('-1 year', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-1 year'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_two':
-				$objToday = new \Date();
-				return array((strtotime('-2 years', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array(strtotime('-2 years'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_cur_month':
 				$objToday = new \Date();
-				return array($objToday->monthBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array($objToday->monthBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_cur_year':
 				$objToday = new \Date();
-				return array($objToday->yearBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array($objToday->yearBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_prev_month':

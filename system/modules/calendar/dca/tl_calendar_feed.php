@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			(
 				array('tl_calendar_feed', 'checkFeedAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'language' => array
 		(
@@ -184,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'feedBase' => array
@@ -214,7 +214,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
  * Class tl_calendar_feed
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -325,7 +325,7 @@ class tl_calendar_feed extends Backend
 			case 'show':
 				if (!in_array(Input::get('id'), $root) || (Input::get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarfeedp')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendar feed ID "'.Input::get('id').'"', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendar feed ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -348,7 +348,7 @@ class tl_calendar_feed extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' calendar feeds', 'tl_calendar_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' calendar feeds', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -374,6 +374,9 @@ class tl_calendar_feed extends Backend
 		{
 			$this->Calendar->generateFeed($id, true);
 		}
+
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
 
 		$this->Session->set('calendar_feed_updater', null);
 	}

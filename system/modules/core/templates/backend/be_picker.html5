@@ -6,6 +6,7 @@
   <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
   <base href="<?php echo $this->base; ?>">
   <meta name="generator" content="Contao Open Source CMS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <link rel="stylesheet" href="<?php
     $objCombiner = new Combiner();
@@ -19,7 +20,7 @@
   <script><?php echo $this->getLocaleString(); ?></script>
   <script src="<?php
     $objCombiner = new Combiner();
-    $objCombiner->add('assets/mootools/core/' . MOOTOOLS . '/mootools.js', MOOTOOLS);
+    $objCombiner->add('assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js', $GLOBALS['TL_ASSETS']['MOOTOOLS']);
     $objCombiner->add('assets/mootools/mootao/Mootao.js');
     $objCombiner->add('assets/contao/js/core.js');
     $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
@@ -27,16 +28,23 @@
   ?>"></script>
   <script><?php echo $this->getDateString(); ?></script>
   <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo HTML5SHIV; ?>/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
 </head>
-<body class="__ua__ popup">
+<body class="<?php echo $this->ua; ?> popup">
 
   <div id="container">
     <div id="main">
-      <div id="manager">
-        <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
-      </div>
+      <?php if ($this->managerHref || $this->switchHref): ?>
+        <div id="manager">
+          <?php if ($this->switchHref): ?>
+            <a href="<?php echo $this->switchHref; ?>" class="open"><?php echo $this->switch; ?></a>
+          <?php endif; ?>
+          <?php if ($this->managerHref): ?>
+            <a href="<?php echo $this->managerHref; ?>" class="open"><?php echo $this->manager; ?></a>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
       <?php if ($this->addSearch): ?>
         <form action="<?php echo $this->action; ?>" method="post">
           <div id="search">
@@ -53,6 +61,12 @@
       </div>
     </div>
   </div>
+
+  <script>
+    if (window.outerWidth && window.outerWidth < 768) {
+      document.body.setStyle('width', window.outerWidth - 20);
+    }
+  </script>
 
 </body>
 </html>

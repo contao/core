@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -43,7 +43,7 @@
 	margin-left:0;
 	margin-right:0;
 }
-.mod_article *[class*="layout_"]>*,.mod_article *[class*="event_"]>* {
+.mod_article *[class*="layout_"] > *,.mod_article *[class*="event_"] > * {
 	margin-left:10px;
 	margin-right:10px;
 }
@@ -115,6 +115,22 @@
 .offset12 { margin-left:970px !important; }
 
 /**
+ * Floated articles do not have margin
+ */
+.mod_article.offset1  { margin-left:80px  !important; }
+.mod_article.offset2  { margin-left:160px !important; }
+.mod_article.offset3  { margin-left:240px !important; }
+.mod_article.offset4  { margin-left:320px !important; }
+.mod_article.offset5  { margin-left:400px !important; }
+.mod_article.offset6  { margin-left:480px !important; }
+.mod_article.offset7  { margin-left:560px !important; }
+.mod_article.offset8  { margin-left:640px !important; }
+.mod_article.offset9  { margin-left:720px !important; }
+.mod_article.offset10 { margin-left:800px !important; }
+.mod_article.offset11 { margin-left:880px !important; }
+.mod_article.offset12 { margin-left:960px !important; }
+
+/**
  * Reduce the overall width and the width of the grid columns if the screen
  * width is less than 980px (e.g. on a portrait tablet)
  */
@@ -174,6 +190,22 @@
 	.offset10 { margin-left:630px !important; }
 	.offset11 { margin-left:692px !important; }
 	.offset12 { margin-left:754px !important; }
+
+	/**
+	 * Floated articles do not have margin
+	 */
+	.mod_article.offset1  { margin-left:62px  !important; }
+	.mod_article.offset2  { margin-left:124px !important; }
+	.mod_article.offset3  { margin-left:186px !important; }
+	.mod_article.offset4  { margin-left:248px !important; }
+	.mod_article.offset5  { margin-left:310px !important; }
+	.mod_article.offset6  { margin-left:372px !important; }
+	.mod_article.offset7  { margin-left:434px !important; }
+	.mod_article.offset8  { margin-left:496px !important; }
+	.mod_article.offset9  { margin-left:558px !important; }
+	.mod_article.offset10 { margin-left:620px !important; }
+	.mod_article.offset11 { margin-left:682px !important; }
+	.mod_article.offset12 { margin-left:744px !important; }
 }
 
 /**

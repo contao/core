@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModulePersonalData
  *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -89,6 +89,10 @@ class ModulePersonalData extends \Module
 					$this->import($callback[0]);
 					$this->$callback[0]->$callback[1]();
 				}
+				elseif (is_callable($callback))
+				{
+					$callback();
+				}
 			}
 		}
 
@@ -106,6 +110,16 @@ class ModulePersonalData extends \Module
 		$doNotSubmit = false;
 		$hasUpload = false;
 		$row = 0;
+
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
 
 		$blnModified = false;
 		$objMember = \MemberModel::findByPk($this->User->id);
@@ -165,6 +179,10 @@ class ModulePersonalData extends \Module
 						$this->import($callback[0]);
 						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 					}
+					elseif (is_callable($callback))
+					{
+						$varValue = $callback($varValue, $this->User, $this);
+					}
 				}
 			}
 
@@ -213,11 +231,17 @@ class ModulePersonalData extends \Module
 				{
 					foreach ($arrData['save_callback'] as $callback)
 					{
-						$this->import($callback[0]);
-
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+							}
+							elseif (is_callable($callback))
+							{
+								$varValue = $callback($varValue, $this->User, $this);
+							}
 						}
 						catch (\Exception $e)
 						{
@@ -234,9 +258,17 @@ class ModulePersonalData extends \Module
 				}
 				elseif ($objWidget->submitInput())
 				{
+					// Store the form data
+					$_SESSION['FORM_DATA'][$field] = $varValue;
+
+					// Set the correct empty value (see #6284, #6373)
+					if ($varValue === '')
+					{
+						$varValue = $objWidget->getEmptyValue();
+					}
+
 					// Set the new value
 					$this->User->$field = $varValue;
-					$_SESSION['FORM_DATA'][$field] = $varValue;
 
 					// Set the new field in the member model
 					$blnModified = true;
@@ -260,6 +292,32 @@ class ModulePersonalData extends \Module
 		if ($blnModified)
 		{
 			$objMember->save();
+
+			$strTable = $objMember->getTable();
+
+			// Create a new version
+			if ($GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
+			{
+				$intVersion = 1;
+
+				$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
+											 ->execute($objMember->id, $strTable);
+
+				if ($objVersion->version !== null)
+				{
+					$intVersion = $objVersion->version + 1;
+				}
+
+				$strUrl = 'contao/main.php?do=member&act=edit&id=' . $objMember->id . '&rt=1';
+
+				$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
+							   ->execute($objMember->id, $strTable);
+
+				$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
+							   ->execute($objMember->id, time(), $intVersion, $strTable, $objMember->username, 0, $objMember->firstname . ' ' . $objMember->lastname, $strUrl, serialize($objMember->row()));
+
+				$this->log('A new version of record "'.$strTable.'.id='.$objMember->id.'" has been created'.$this->getParentEntries($strTable, $objMember->id), __METHOD__, TL_GENERAL);
+			}
 		}
 
 		$this->Template->hasError = $doNotSubmit;
@@ -287,6 +345,10 @@ class ModulePersonalData extends \Module
 						$this->import($callback[0]);
 						$this->$callback[0]->$callback[1]($this->User, $this);
 					}
+					elseif (is_callable($callback))
+					{
+						$callback($this->User, $this);
+					}
 				}
 			}
 
@@ -304,37 +366,20 @@ class ModulePersonalData extends \Module
 		$this->Template->contactDetails = $GLOBALS['TL_LANG']['tl_member']['contactDetails'];
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', $this->Config->getActiveModules()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', $this->Config->getActiveModules()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', $this->Config->getActiveModules()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
 	}
 }

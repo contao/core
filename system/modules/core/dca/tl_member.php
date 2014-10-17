@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -103,6 +103,13 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_member']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'su' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_member']['su'],
+				'href'                => 'key=su',
+				'icon'                => 'su.gif',
+				'button_callback'     => array('tl_member', 'switchUser')
 			)
 		)
 	),
@@ -317,14 +324,14 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
-			'sql'                     => "varchar(64) NOT NULL default ''"
+			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'password' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'], 'feEditable'=>true, 'feGroup'=>'login'),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'minlength'=>Config::get('minPasswordLength'), 'feEditable'=>true, 'feGroup'=>'login'),
 			'save_callback' => array
 			(
 				array('tl_member', 'setNewPassword')
@@ -345,7 +352,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'sql'                     => "binary(16) NULL"
 		),
 		'disable' => array
 		(
@@ -408,6 +415,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'autologin' => array
 		(
+			'default'                 => null,
 			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NULL"
 		),
@@ -426,10 +434,19 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 
 
 /**
+ * Filter disabled groups in the front end (see #6757)
+ */
+if (TL_MODE == 'FE')
+{
+	$GLOBALS['TL_DCA']['tl_member']['fields']['groups']['options_callback'] = array('tl_member', 'getActiveGroups');
+}
+
+
+/**
  * Class tl_member
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -443,6 +460,27 @@ class tl_member extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Filter disabled groups
+	 * @return array
+	 */
+	public function getActiveGroups()
+	{
+		$arrGroups = array();
+		$objGroup = \MemberGroupModel::findAllActive();
+
+		if ($objGroup !== null)
+		{
+			while ($objGroup->next())
+			{
+				$arrGroups[$objGroup->id] = $objGroup->name;
+			}
+		}
+
+		return $arrGroups;
 	}
 
 
@@ -465,6 +503,26 @@ class tl_member extends Backend
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
 		return $args;
+	}
+
+
+	/**
+	 * Generate a "switch account" button and return it as string
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function switchUser($row, $href, $label, $title, $icon)
+	{
+		if (!$this->User->isAdmin)
+		{
+			return '';
+		}
+
+		return '<a href="contao/preview.php?user='.$row['username'].'" target="_blank" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ';
 	}
 
 
@@ -544,7 +602,7 @@ class tl_member extends Backend
 	{
 		if ($dc instanceof \DataContainer && $dc->activeRecord)
 		{
-			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop <= time()))
+			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
 				$this->removeSession($dc);
 			}
@@ -585,7 +643,7 @@ class tl_member extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -609,9 +667,9 @@ class tl_member extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', 'tl_member toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -623,8 +681,15 @@ class tl_member extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_member']['fields']['disable']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -635,7 +700,7 @@ class tl_member extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_member.id='.$intId.'" has been created'.$this->getParentEntries('tl_member', $intId), 'tl_member toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_member.id='.$intId.'" has been created'.$this->getParentEntries('tl_member', $intId), __METHOD__, TL_GENERAL);
 
 		// Remove the session if the user is disabled (see #5353)
 		if (!$blnVisible)
@@ -645,7 +710,7 @@ class tl_member extends Backend
 		}
 
 		// HOOK: update newsletter subscriptions
-		if (in_array('newsletter', $this->Config->getActiveModules()))
+		if (in_array('newsletter', ModuleLoader::getActive()))
 		{
 			$objUser = $this->Database->prepare("SELECT email FROM tl_member WHERE id=?")
 									  ->limit(1)

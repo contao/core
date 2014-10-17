@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -63,16 +63,16 @@ function utf8_chr($dec)
 	if ($dec < 128)
 		return chr($dec);
 
-    if ($dec < 2048)
-    	return chr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
+	if ($dec < 2048)
+		return chr(($dec >> 6) + 192) . chr(($dec & 63) + 128);
 
-    if ($dec < 65536)
-    	return chr(($dec >> 12) + 224) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+	if ($dec < 65536)
+		return chr(($dec >> 12) + 224) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
 
-    if ($dec < 2097152)
-    	return chr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
+	if ($dec < 2097152)
+		return chr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
 
-    return '';
+	return '';
 }
 
 
@@ -418,7 +418,7 @@ function utf8_strtoupper($str)
 
 
 /**
- * Return part of a string
+ * Return substring of a string
  *
  * Use mb_substr() if available since it is about three times faster than
  * our workaround. Otherwise, use PCRE regular expressions with 'u' flag.
@@ -561,7 +561,7 @@ function utf8_str_split($str)
 	{
 		$split = 1;
 		$value = ord($str[$i]);
-		$key = NULL;
+		$key = null;
 
 		if($value >= 192 && $value <= 223)
 			$split=2;

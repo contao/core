@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -17,113 +17,66 @@
  */
 if ($GLOBALS['TL_CONFIG']['useCE']):
 
-	// Include the ACE script
-	$GLOBALS['TL_JAVASCRIPT'][] = 'assets/ace/'.ACE.'/ace.js" charset="utf-8';
-
-	foreach ($this->ceFields as $arrField):
-
-		// Validate the syntax
-		switch ($arrField['type'])
-		{
-			case 'css':
-			case 'diff':
-			case 'html':
-			case 'java':
-			case 'json':
-			case 'php':
-			case 'sql':
-			case 'xml':
-			case 'yaml':
-				// nothing to do
-				break;
-
-			case 'js':
-			case 'javascript':
-				$arrField['type'] = 'javascript';
-				break;
-
-			case 'md':
-			case 'markdown':
-				$arrField['type'] = 'markdown';
-				break;
-
-			case 'cgi':
-			case 'pl':
-				$arrField['type'] = 'perl';
-				break;
-
-			case 'py':
-				$arrField['type'] = 'python';
-				break;
-
-			case 'txt':
-				$arrField['type'] = 'text';
-				break;
-
-			case 'c': case 'cc': case 'cpp': case 'c++':
-			case 'h': case 'hh': case 'hpp': case 'h++':
-				$arrField['type'] = 'c_cpp';
-				break;
-
-			case 'html5':
-			case 'xhtml':
-				$arrField['type'] = 'php';
-				break;
-
-			default:
-				$arrField['type'] = 'text';
-				break;
-		}
-
 ?>
+<script>window.ace || document.write('<script src="<?php echo TL_ASSETS_URL; ?>assets/ace/<?php echo $GLOBALS['TL_ASSETS']['ACE']; ?>/ace.js" charset="utf-8">\x3C/script>')</script>
 <script>
-window.addEvent('domready', function() {
-  var ta = $('<?php echo $arrField['id']; ?>');
+window.ace && window.addEvent('domready', function() {
+  var ta = document.getElementById('<?php echo $selector; ?>'),
+      dom = ace.require("ace/lib/dom");
 
-  var div = new Element('div', {
-    'id':'<?php echo $arrField['id']; ?>_div',
-    'class':ta.get('class')
-  }).inject(ta, 'after');
+  // Create a div to apply the editor to
+  var div = document.createElement('div');
+  div.id = '<?php echo $selector; ?>_div';
+  div.className = ta.get('class');
+  ta.parentNode.insertBefore(div, ta.nextSibling);
 
-  ta.setStyle('display', 'none');
+  // Hide the textarea
+  ta.style['display'] = 'none';
 
-  var editor = ace.edit('<?php echo $arrField['id']; ?>_div');
+  // Instantiate the editor
+  var editor = ace.edit('<?php echo $selector; ?>_div');
   editor.setTheme("ace/theme/clouds");
+  editor.renderer.setScrollMargin(3, 3, 0, 0);
+  editor.renderer.scrollBy(0, -6);
   editor.getSession().setValue(ta.value);
-  editor.getSession().setMode("ace/mode/<?php echo $arrField['type']; ?>");
+  editor.getSession().setMode("ace/mode/<?php echo Backend::getAceType($type); ?>");
   editor.getSession().setUseSoftTabs(false);
+  editor.setAutoScrollEditorIntoView(true);
 
+  // Add the fullscreen command
   editor.commands.addCommand({
     name: 'Fullscreen',
     bindKey: 'F11',
     exec: function(editor) {
-      editor.container.toggleClass('fullsize');
+      dom.toggleCssClass(document.body, 'ace-fullsize');
       editor.resize();
     }
   });
 
   // Disable command conflicts with AltGr (see #5792)
-  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null)
+  editor.commands.bindKey('Ctrl-alt-a|Ctrl-alt-e|Ctrl-alt-h|Ctrl-alt-l|Ctrl-alt-s', null);
 
-  var updateTextarea = function() {
-    ta.value = editor.getValue();
-  };
-
-  editor.getSession().on('change', updateTextarea);
-
+  // Adjust the height of the editor
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
-      * editor.renderer.lineHeight
+      * (editor.renderer.lineHeight || 14)
       + editor.renderer.scrollBar.getWidth();
-    var setHeight = Math.max(newHeight, editor.container.getStyle('height'));
-    editor.container.setStyle('height', setHeight.toString() + 'px');
+    editor.container.style['height'] = Math.max(newHeight, editor.renderer.lineHeight) + 'px';
     editor.resize();
   };
 
+  editor.on('focus', function() {
+    Backend.getScrollOffset();
+    updateHeight();
+  });
+
+  editor.getSession().on('change', function() {
+    ta.value = editor.getValue();
+    updateHeight();
+  });
+
   updateHeight();
-  editor.getSession().on('change', updateHeight);
 });
 </script>
-<?php endforeach; ?>
 <?php endif; ?>

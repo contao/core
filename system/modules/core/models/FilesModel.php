@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -25,7 +25,7 @@ namespace Contao;
  *
  * @package   Models
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class FilesModel extends \Model
 {
@@ -38,9 +38,47 @@ class FilesModel extends \Model
 
 
 	/**
-	 * Find multiple files by their IDs
+	 * Find a file by its primary key (backwards compatibility)
 	 *
-	 * @param array $arrIds     An array of file IDs
+	 * @param mixed $varValue   The value
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByPk($varValue, array $arrOptions=array())
+	{
+		if (static::$strPk == 'id')
+		{
+			return static::findById($varValue, $arrOptions);
+		}
+
+		return parent::findByPk($varValue, $arrOptions);
+	}
+
+
+	/**
+	 * Find a file by its ID or UUID (backwards compatibility)
+	 *
+	 * @param mixed $intId      The ID or UUID
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findById($intId, array $arrOptions=array())
+	{
+		if (\Validator::isUuid($intId))
+		{
+			return static::findByUuid($intId, $arrOptions);
+		}
+
+		return static::findBy('id', $intId, $arrOptions);
+	}
+
+
+	/**
+	 * Find multiple files by their IDs or UUIDs (backwards compatibility)
+	 *
+	 * @param array $arrIds     An array of IDs or UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null if there are no files
@@ -52,14 +90,71 @@ class FilesModel extends \Model
 			return null;
 		}
 
+		if (\Validator::isUuid(current($arrIds)))
+		{
+			return static::findMultipleByUuids($arrIds, $arrOptions);
+		}
+
+		return parent::findMultipleByIds($arrIds, $arrOptions);
+	}
+
+
+	/**
+	 * Find a file by its UUID
+	 *
+	 * @param array $strUuid    The UUID string
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model|null A model or null if there is no file
+	 */
+	public static function findByUuid($strUuid, array $arrOptions=array())
+	{
 		$t = static::$strTable;
+
+		// Convert UUIDs to binary
+		if (\Validator::isStringUuid($strUuid))
+		{
+			$strUuid = \String::uuidToBin($strUuid);
+		}
+
+		return static::findOneBy(array("$t.uuid=UNHEX(?)"), bin2hex($strUuid), $arrOptions);
+	}
+
+
+	/**
+	 * Find multiple files by their UUIDs
+	 *
+	 * @param array $arrUuids   An array of UUIDs
+	 * @param array $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|null A collection of models or null if there are no files
+	 */
+	public static function findMultipleByUuids($arrUuids, array $arrOptions=array())
+	{
+		if (!is_array($arrUuids) || empty($arrUuids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+
+		foreach ($arrUuids as $k=>$v)
+		{
+			// Convert UUIDs to binary
+			if (\Validator::isStringUuid($v))
+			{
+				$v = \String::uuidToBin($v);
+			}
+
+			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
+		}
 
 		if (!isset($arrOptions['order']))
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+			$arrOptions['order'] = "$t.uuid!=" . implode(", $t.uuid!=", $arrUuids);
 		}
 
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, $arrOptions);
+		return static::findBy(array("$t.uuid IN(" . implode(",", $arrUuids) . ")"), null, $arrOptions);
 	}
 
 
@@ -105,17 +200,17 @@ class FilesModel extends \Model
 
 
 	/**
-	 * Find multiple files by ID and a list of extensions
+	 * Find multiple files by UUID and a list of extensions
 	 *
-	 * @param array $arrIds        An array of file IDs
+	 * @param array $arrUuids      An array of file UUIDs
 	 * @param array $arrExtensions An array of file extensions
 	 * @param array $arrOptions    An optional options array
 	 *
 	 * @return \Model\Collection|null A collection of models or null of there are no matching files
 	 */
-	public static function findMultipleByIdsAndExtensions($arrIds, $arrExtensions, array $arrOptions=array())
+	public static function findMultipleByUuidsAndExtensions($arrUuids, $arrExtensions, array $arrOptions=array())
 	{
-		if (!is_array($arrIds) || empty($arrIds) || !is_array($arrExtensions) || empty($arrExtensions))
+		if (!is_array($arrUuids) || empty($arrUuids) || !is_array($arrExtensions) || empty($arrExtensions))
 		{
 			return null;
 		}
@@ -130,12 +225,23 @@ class FilesModel extends \Model
 
 		$t = static::$strTable;
 
-		if (!isset($arrOptions['order']))
+		foreach ($arrUuids as $k=>$v)
 		{
-			$arrOptions['order'] = \Database::getInstance()->findInSet("$t.id", $arrIds);
+			// Convert UUIDs to binary
+			if (\Validator::isStringUuid($v))
+			{
+				$v = \String::uuidToBin($v);
+			}
+
+			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
 		}
 
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.uuid!=" . implode(", $t.uuid!=", $arrUuids);
+		}
+
+		return static::findBy(array("$t.uuid IN(" . implode(",", $arrUuids) . ") AND $t.extension IN('" . implode("','", $arrExtensions) . "')"), null, $arrOptions);
 	}
 
 

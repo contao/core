@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Search
 {
@@ -291,21 +291,11 @@ class Search
 					->execute($intInsertId);
 
 		// Create new index
-		$arrKeys = array();
-		$arrValues = array();
-
 		foreach ($arrIndex as $k=>$v)
 		{
-			$arrKeys[] = "(?, ?, ?, ?)";
-			$arrValues[] = $intInsertId;
-			$arrValues[] = $k;
-			$arrValues[] = $v;
-			$arrValues[] = $arrData['language'];
+			$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES (?, ?, ?, ?)")
+						->execute($intInsertId, $k, $v, $arrData['language']);
 		}
-
-		// Insert values
-		$objDatabase->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES " . implode(", ", $arrKeys))
-					->execute($arrValues);
 
 		return true;
 	}
@@ -550,17 +540,16 @@ class Search
 	{
 		$objDatabase = \Database::getInstance();
 
-		$objSearch = $objDatabase->prepare("SELECT * FROM tl_search WHERE url=?")
-								 ->limit(1)
+		$objResult = $objDatabase->prepare("SELECT id FROM tl_search WHERE url=?")
 								 ->execute($strUrl);
 
-		if ($objSearch->numRows)
+		while ($objResult->next())
 		{
 			$objDatabase->prepare("DELETE FROM tl_search WHERE id=?")
-						->execute($objSearch->id);
+						->execute($objResult->id);
 
 			$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
-						->execute($objSearch->id);
+						->execute($objResult->id);
 		}
 	}
 

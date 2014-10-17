@@ -1,9 +1,6 @@
+<?php $this->extend('block_searchable'); ?>
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
-
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+<?php $this->block('content'); ?>
 
   <?php if ($this->error): ?>
     <?php echo $this->error; ?>
@@ -16,13 +13,13 @@
       <?php endif; ?>
 
       <?php if ($this->addImage): ?>
-        <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+        <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
 
           <?php if ($this->href): ?>
             <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
           <?php endif; ?>
 
-          <img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>">
+          <?php $this->insert('picture_default', $this->picture); ?>
 
           <?php if ($this->href): ?>
             </a>
@@ -56,13 +53,13 @@
     <!-- indexer::continue -->
   <?php endif; ?>
 
-  <?php if ($this->allowComments && ($this->comments || !$this->requireLogin)): ?>
+  <?php if ($this->allowComments): ?>
     <div class="ce_comments block">
       <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
-      <?php foreach ($this->comments as $comment) echo $comment; ?>
+      <?php echo implode('', $this->comments); ?>
       <?php echo $this->pagination; ?>
       <?php include $this->getTemplate('mod_comment_form', 'html5'); ?>
     </div>
   <?php endif; ?>
 
-</div>
+<?php $this->endblock(); ?>

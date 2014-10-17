@@ -1,55 +1,70 @@
 Contao Open Source CMS
 ======================
 
-About
------
-
-Contao is an open source content management system (CMS) for people who want a
-professional internet presence that is easy to maintain. The state-of-the-art
-structure of the system offers a high security standard and allows you to
-develop search engine friendly websites that are also accessible for people with
-disabilities. Furthermore, the system can be expanded flexibly and
-inexpensively. Easy management of user rights, the Live Update Service, the
-modern CSS framework and many already integrated modules (news, calendar, forms,
-etc.) have quickly made Contao one of the most popular open source content
-management systems on the market.
-
-Visit the project website at https://contao.org.
+Contao is an Open Source PHP Content Management System for people who want a
+professional website that is easy to maintain. Visit the [project website][1]
+for more information.
 
 
 System requirements
 -------------------
 
- * Webserver (Apache, IIS, etc.)
- * PHP version 5.3.2 or greater
- * MySQL version 4.1 or greater
- * PHP extension GDLib
- * PHP extension mcrypt (optional)
+ * Web server
+ * PHP 5.3.7+ with GDlib, DOM, Phar and SOAP
+ * MySQL 5.0.3+
 
 
 Installation
 ------------
 
- * Download a Contao package from the project website
- * Unpack the archive on your server
- * Open the installation directory in your web browser
- * Follow the instructions of the install tool
+See the [installation chapter][2] of the user's manual.
 
 
-How to access the back end
---------------------------
+Documentation
+-------------
 
-Open your web browser and add `/contao` to the URL of your website. Here are a
-few examples:
-
- * `http://www.yourdomain.com/contao`
- * `http://www.yourdomain.com/contao/contao`
- * `http://www.yourdomain.com/contao-3.1.0/contao`
+ * [User's manual][3]
+ * [Change log][4]
+ * [API changes][5]
+ * [Community wiki][6]
 
 
-Troubleshooting
+License
+-------
+
+Contao is licensed under the terms of the LGPLv3. The full license text is
+available in the [`system/docs`][7] folder.
+
+Note that the LGPL incorporates the terms and conditions of the GPL, therefore
+both licenses are included there. This, however, does not imply that Contao is
+dual licensed under both the GPL and the LGPL.
+
+
+Getting support
 ---------------
 
-If you are having problems installing or using Contao, please visit the project
-website at https://contao.org/support.html and read the user's guide or post
-your question in the Contao forum.
+Visit the [support page][8] to learn about the available support options.
+
+
+Installing from Git
+-------------------
+
+We are using [Composer][9] to manage third-party scripts, so after you have
+cloned the repository, make sure to install the vendor libraries:
+
+```
+git clone https://github.com/contao/core.git
+cd core
+php composer.phar install --prefer-dist
+```
+
+
+[1]: https://contao.org
+[2]: https://contao.org/manual/installation.html
+[3]: https://contao.org/manual.html
+[4]: system/docs/CHANGELOG.md
+[5]: system/docs/UPGRADE.md
+[6]: http://contaowiki.org
+[7]: system/docs
+[8]: https://contao.org/support.html
+[9]: https://getcomposer.org

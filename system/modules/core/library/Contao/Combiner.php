@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,27 +21,41 @@ namespace Contao;
  *     $combiner = new Combiner();
  *
  *     $combiner->add('css/style.css');
- *     $combiner->add('css/fonts.css');
- *     $combiner->add('css/print.css');
+ *     $combiner->add('css/fonts.scss');
+ *     $combiner->add('css/print.less');
  *
  *     echo $combiner->getCombinedFile();
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Combiner extends \System
 {
 
 	/**
 	 * The .css file extension
+	 * @var string
 	 */
 	const CSS = '.css';
 
 	/**
 	 * The .js file extension
+	 * @var string
 	 */
 	const JS = '.js';
+
+	/**
+	 * The .scss file extension
+	 * @var string
+	 */
+	const SCSS = '.scss';
+
+	/**
+	 * The .less file extension
+	 * @var string
+	 */
+	const LESS = '.less';
 
 	/**
 	 * Unique file key
@@ -85,17 +99,19 @@ class Combiner extends \System
 		$strType = strrchr($strFile, '.');
 
 		// Check the file type
-		if ($strType != self::CSS && $strType != self::JS)
+		if ($strType != self::CSS && $strType != self::JS && $strType != self::SCSS && $strType != self::LESS)
 		{
 			throw new \Exception("Invalid file $strFile");
 		}
 
+		$strMode = ($strType == self::JS) ? self::JS : self::CSS;
+
 		// Set the operation mode
-		if (!$this->strMode)
+		if ($this->strMode === null)
 		{
-			$this->strMode = $strType;
+			$this->strMode = $strMode;
 		}
-		elseif ($this->strMode != $strType)
+		elseif ($this->strMode != $strMode)
 		{
 			throw new \Exception('You cannot mix different file types. Create another Combiner object instead.');
 		}
@@ -109,21 +125,22 @@ class Combiner extends \System
 		// Check the source file
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			if ($this->strMode == self::JS)
-			{
-				throw new \Exception("File $strFile does not exist");
-			}
-			else
+			// Create the style sheets and retry
+			if ($strType == self::CSS)
 			{
 				$this->import('StyleSheets');
 				$this->StyleSheets->updateStyleSheets();
 
-				// Retry
 				if (!file_exists(TL_ROOT . '/' . $strFile))
 				{
 					throw new \Exception("File $strFile does not exist");
 				}
 			}
+			else
+			{
+				throw new \Exception("File $strFile does not exist");
+			}
+
 		}
 
 		// Default version
@@ -137,7 +154,8 @@ class Combiner extends \System
 		(
 			'name' => $strFile,
 			'version' => $strVersion,
-			'media' => $strMedia
+			'media' => $strMedia,
+			'extension' => $strType
 		);
 
 		$this->arrFiles[$strFile] = $arrFile;
@@ -189,8 +207,52 @@ class Combiner extends \System
 		$strTarget = substr($this->strMode, 1);
 		$strKey = substr(md5($this->strKey), 0, 12);
 
+		// Do not combine the files in debug mode (see #6450)
+		if (\Config::get('debugMode'))
+		{
+			$return = array();
+
+			foreach ($this->arrFiles as $arrFile)
+			{
+				$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
+
+				// Compile SCSS/LESS files into temporary files
+				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
+				{
+					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
+
+					$objFile = new \File($strPath, true);
+					$objFile->write($this->handleScssLess($content, $arrFile));
+					$objFile->close();
+
+					$return[] = $strPath;
+				}
+				else
+				{
+					$name = $arrFile['name'];
+
+					// Add the media query (see #7070)
+					if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+					{
+						$name .= '" media="' . $arrFile['media'];
+					}
+
+					$return[] = $name;
+				}
+			}
+
+			if ($this->strMode == self::JS)
+			{
+				return implode('"></script><script src="', $return);
+			}
+			else
+			{
+				return implode('"><link rel="stylesheet" href="', $return);
+			}
+		}
+
 		// Load the existing file
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
+		if (file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
 		{
 			return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 		}
@@ -213,62 +275,13 @@ class Combiner extends \System
 				}
 			}
 
-			// Handle style sheets
-			if ($this->strMode == self::CSS)
+			if ($arrFile['extension'] == self::CSS)
 			{
-				// Adjust the file paths
-				$strDirname = dirname($arrFile['name']);
-				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
-
-				$strBuffer = '';
-				$chunks = preg_split('/url\(["\'](.+)["\']\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-				// Check the URLs
-				for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
-				{
-					$strBuffer .= $chunks[$i];
-
-					if (!isset($chunks[$i+1]))
-					{
-						break;
-					}
-
-					$strData = $chunks[$i+1];
-
-					// Skip absolute links and embedded images (see #5082)
-					if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0 && strncmp($strData, 'assets/css3pie/', 15) !== 0)
-					{
-						// Make the paths relative to the root (see #4161)
-						if (strncmp($strData, '../', 3) !== 0)
-						{
-							$strData = '../../' . $strGlue . $strData;
-						}
-						else
-						{
-							$dir = $strDirname;
-
-							// Remove relative paths
-							while (strncmp($strData, '../', 3) === 0)
-							{
-								$dir = dirname($dir);
-								$strData = substr($strData, 3);
-							}
-
-							$glue = ($dir != '.') ? $dir . '/' : '';
-							$strData = '../../' . $glue . $strData;
-						}
-					}
-
-					$strBuffer .= 'url("' . $strData . '")';
-				}
-
-				$content = $strBuffer;
-
-				// Add the media type if there is no @media command in the code
-				if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
-				{
-					$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
-				}
+				$content = $this->handleCss($content, $arrFile);
+			}
+			elseif ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
+			{
+				$content = $this->handleScssLess($content, $arrFile);
 			}
 
 			$objFile->append($content);
@@ -278,11 +291,131 @@ class Combiner extends \System
 		$objFile->close();
 
 		// Create a gzipped version
-		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
+		if (\Config::get('gzipScripts') && function_exists('gzencode'))
 		{
 			\File::putContent('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz', gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 		}
 
 		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
+	}
+
+
+	/**
+	 * Handle CSS files
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function handleCss($content, $arrFile)
+	{
+		$content = $this->fixPaths($content, $arrFile);
+
+		// Add the media type if there is no @media command in the code
+		if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+		{
+			$content = '@media ' . $arrFile['media'] . "{\n" . $content . "\n}";
+		}
+
+		return $content;
+	}
+
+
+	/**
+	 * Handle SCSS/LESS files
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function handleScssLess($content, $arrFile)
+	{
+		if ($arrFile['extension'] == self::SCSS)
+		{
+			$objCompiler = new \scssc();
+			new \scss_compass($objCompiler);
+
+			$objCompiler->setImportPaths(array
+			(
+				TL_ROOT . '/' . dirname($arrFile['name']),
+				TL_ROOT . '/vendor/leafo/scssphp-compass/stylesheets'
+			));
+
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));
+		}
+		else
+		{
+			$objCompiler = new \lessc();
+
+			$objCompiler->setImportDir(array
+			(
+				TL_ROOT . '/' . dirname($arrFile['name'])
+			));
+
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'lessjs' : 'compressed'));
+		}
+
+		return $this->fixPaths($objCompiler->compile($content), $arrFile);
+	}
+
+
+	/**
+	 * Fix the paths
+	 *
+	 * @param string $content The file content
+	 * @param array  $arrFile The file array
+	 *
+	 * @return string The modified file content
+	 */
+	protected function fixPaths($content, $arrFile)
+	{
+		$strDirname = dirname($arrFile['name']);
+		$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
+
+		$strBuffer = '';
+		$chunks = preg_split('/url\(["\']??(.+)["\']??\)/U', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		// Check the URLs
+		for ($i=0, $c=count($chunks); $i<$c; $i=$i+2)
+		{
+			$strBuffer .= $chunks[$i];
+
+			if (!isset($chunks[$i+1]))
+			{
+				break;
+			}
+
+			$strData = $chunks[$i+1];
+
+			// Skip absolute links and embedded images (see #5082)
+			if (strncmp($strData, 'data:', 5) !== 0 && strncmp($strData, 'http://', 7) !== 0 && strncmp($strData, 'https://', 8) !== 0 && strncmp($strData, '/', 1) !== 0 && strncmp($strData, 'assets/css3pie/', 15) !== 0)
+			{
+				// Make the paths relative to the root (see #4161)
+				if (strncmp($strData, '../', 3) !== 0)
+				{
+					$strData = '../../' . $strGlue . $strData;
+				}
+				else
+				{
+					$dir = $strDirname;
+
+					// Remove relative paths
+					while (strncmp($strData, '../', 3) === 0)
+					{
+						$dir = dirname($dir);
+						$strData = substr($strData, 3);
+					}
+
+					$glue = ($dir != '.') ? $dir . '/' : '';
+					$strData = '../../' . $glue . $strData;
+				}
+			}
+
+			$strBuffer .= 'url("' . $strData . '")';
+		}
+
+		return $strBuffer;
 	}
 }

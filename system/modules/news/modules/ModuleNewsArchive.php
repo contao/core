@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleNewsArchive
  *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -63,7 +63,7 @@ class ModuleNewsArchive extends \ModuleNews
 		}
 
 		// Show the news reader if an item has been selected
-		if ($this->news_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->news_readerModule > 0 && (isset($_GET['items']) || (\Config::get('useAutoItem') && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->news_readerModule, $this->strColumn);
 		}
@@ -90,53 +90,60 @@ class ModuleNewsArchive extends \ModuleNews
 		$intBegin = 0;
 		$intEnd = 0;
 
+		$intYear = \Input::get('year');
+		$intMonth = \Input::get('month');
+		$intDay = \Input::get('day');
+
 		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']) && $this->news_jumpToCurrent != 'all_items')
 		{
 			switch ($this->news_format)
 			{
 				case 'news_year':
-					\Input::setGet('year', date('Y'));
+					$intYear = date('Y');
 					break;
 
 				default:
 				case 'news_month':
-					\Input::setGet('month', date('Ym'));
+					$intMonth = date('Ym');
 					break;
 
 				case 'news_day':
-					\Input::setGet('day', date('Ymd'));
+					$intDay = date('Ymd');
 					break;
 			}
 		}
 
 		// Display year
-		if (\Input::get('year'))
+		if ($intYear)
 		{
-			$strDate = \Input::get('year');
+			$strDate = $intYear;
 			$objDate = new \Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
 		}
+
 		// Display month
-		elseif (\Input::get('month'))
+		elseif ($intMonth)
 		{
-			$strDate = \Input::get('month');
+			$strDate = $intMonth;
 			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
 		}
+
 		// Display day
-		elseif (\Input::get('day'))
+		elseif ($intDay)
 		{
-			$strDate = \Input::get('day');
+			$strDate = $intDay;
 			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
 			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
 		}
+
 		// Show all items
 		elseif ($this->news_jumpToCurrent == 'all_items')
 		{
@@ -177,7 +184,7 @@ class ModuleNewsArchive extends \ModuleNews
 				$offset = (max($page, 1) - 1) * $this->perPage;
 
 				// Add the pagination menu
-				$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+				$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
 				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
 		}
@@ -192,12 +199,8 @@ class ModuleNewsArchive extends \ModuleNews
 			$objArticles = \NewsModel::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 		}
 
-		// No items found
-		if ($objArticles === null)
-		{
-			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
-		}
-		else
+		// Add the articles
+		if ($objArticles !== null)
 		{
 			$this->Template->articles = $this->parseArticles($objArticles);
 		}

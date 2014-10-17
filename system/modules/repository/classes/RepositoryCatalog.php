@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -33,11 +33,13 @@ class RepositoryCatalog extends RepositoryBackendModule
 			System::loadLanguageFile('tl_repository');
 			return '<p class="tl_empty">'.$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'].'</p>';
 		} // if
+
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler
 			array('',				'repository_catlist',		'listExtensions' ),
 			array('view',			'repository_catview',		'viewExtension' )
 		);
+
 		return parent::generate();
 	} // generate
 
@@ -89,7 +91,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 
 		if ($rep->f_order=='') $rep->f_order = 'popular';
 
-		$perpage = (int)trim($GLOBALS['TL_CONFIG']['repository_listsize']);
+		$perpage = (int)trim(Config::get('repository_listsize'));
 		if ($perpage < 0) $perpage = 0;
 
 		// process parameters and build query options
@@ -107,7 +109,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 		if ($rep->f_state	!= '') $options['states']		= $rep->f_state;
 		if ($rep->f_author	!= '') $options['authors']		= $rep->f_author;
 		if ($rep->f_find	!= '') $options['find']			= $rep->f_find;
-		if (!$GLOBALS['TL_CONFIG']['repository_unsafe_catalog'])
+		if (!Config::get('repository_unsafe_catalog'))
 			$options['compatibility'] = Repository::encodeVersion(VERSION.'.'.BUILD);
 
 		switch ($rep->f_order) {

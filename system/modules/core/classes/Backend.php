@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Backend
  *
  * Provide methods to manage back end controllers.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -46,7 +46,12 @@ abstract class Backend extends \Controller
 	 */
 	public static function getTheme()
 	{
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
+		if (\Config::get('coreOnlyMode'))
+		{
+			return 'default'; // see #6505
+		}
+
+		$theme = \Config::get('backendTheme');
 
 		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
 		{
@@ -82,13 +87,157 @@ abstract class Backend extends \Controller
 
 
 	/**
-	 * Add the request token to the URL
+	 * Return the TinyMCE language
+	 * @return string
+	 */
+	public static function getTinyMceLanguage()
+	{
+		$lang = $GLOBALS['TL_LANGUAGE'];
+
+		if ($lang == '')
+		{
+			return 'en';
+		}
+
+		// The translation exists
+		if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $lang . '.js'))
+		{
+			return $lang;
+		}
+
+		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
+		{
+			// Try the short tag, e.g. "de" instead of "de_CH"
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $short . '.js'))
+			{
+				return $short;
+			}
+		}
+		elseif (($long = $short . '_' . strtoupper($short)) != $lang)
+		{
+			// Try the long tag, e.g. "fr_FR" instead of "fr" (see #6952)
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $long . '.js'))
+			{
+				return $long;
+			}
+		}
+
+		// Fallback to English
+		return 'en';
+	}
+
+
+	/**
+	 * Validate an ACE type
 	 * @param string
 	 * @return string
 	 */
-	public static function addToUrl($strRequest)
+	public static function getAceType($type)
 	{
-		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN);
+		switch ($type)
+		{
+			case 'css':
+			case 'diff':
+			case 'html':
+			case 'ini':
+			case 'java':
+			case 'json':
+			case 'less':
+			case 'php':
+			case 'scss':
+			case 'mysql':
+			case 'sql':
+			case 'xml':
+			case 'yaml':
+				return $type;
+				break;
+
+			case 'js':
+			case 'javascript':
+				return 'javascript';
+				break;
+
+			case 'md':
+			case 'markdown':
+				return 'markdown';
+				break;
+
+			case 'cgi':
+			case 'pl':
+				return 'perl';
+				break;
+
+			case 'py':
+				return 'python';
+				break;
+
+			case 'txt':
+				return 'text';
+				break;
+
+			case 'c': case 'cc': case 'cpp': case 'c++':
+			case 'h': case 'hh': case 'hpp': case 'h++':
+				return 'c_cpp';
+				break;
+
+			case 'html5':
+			case 'xhtml':
+				return 'php';
+				break;
+
+			case 'svg':
+			case 'svgz':
+				return 'xml';
+				break;
+
+			default:
+				return 'text';
+				break;
+		}
+	}
+
+
+	/**
+	 * Return a list of TinyMCE templates as JSON string
+	 * @return string
+	 */
+	public static function getTinyTemplates()
+	{
+		$strDir = \Config::get('uploadPath') . '/tiny_templates';
+
+		if (!is_dir(TL_ROOT . '/' . $strDir))
+		{
+			return '';
+		}
+
+		$arrFiles = array();
+		$arrTemplates = scan(TL_ROOT . '/' . $strDir);
+
+		foreach ($arrTemplates as $strFile)
+		{
+			if (strncmp('.', $strFile, 1) !== 0 && is_file(TL_ROOT . '/' . $strDir . '/' . $strFile))
+			{
+				$arrFiles[] = '{ title: "' . $strFile . '", url: "' . $strDir . '/' . $strFile . '" }';
+			}
+		}
+
+		return implode(",\n", $arrFiles) . "\n";
+	}
+
+
+	/**
+	 * Add the request token to the URL
+	 * @param string
+	 * @param boolean
+	 * @param array
+	 * @return string
+	 */
+	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
+	{
+		// Unset the "no back button" flag
+		$arrUnset[] = 'nb';
+
+		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN, $blnAddRef, $arrUnset);
 	}
 
 
@@ -128,7 +277,7 @@ abstract class Backend extends \Controller
 					throw new \Exception("The $strFile file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
 				}
 
-				$this->log("File $strFile ran once and has then been removed successfully", 'Backend handleRunOnce()', TL_GENERAL);
+				$this->log("File $strFile ran once and has then been removed successfully", __METHOD__, TL_GENERAL);
 			}
 		}
 	}
@@ -143,7 +292,7 @@ abstract class Backend extends \Controller
 	{
 		$arrModule = array();
 
-		foreach ($GLOBALS['BE_MOD'] as $arrGroup)
+		foreach ($GLOBALS['BE_MOD'] as &$arrGroup)
 		{
 			if (isset($arrGroup[$module]))
 			{
@@ -152,12 +301,12 @@ abstract class Backend extends \Controller
 			}
 		}
 
-		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
+		$arrInactiveModules = \ModuleLoader::getDisabled();
 
 		// Check whether the module is active
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))
 		{
-			$this->log('Attempt to access the inactive back end module "' . $module . '"', 'Backend getBackendModule()', TL_ACCESS);
+			$this->log('Attempt to access the inactive back end module "' . $module . '"', __METHOD__, TL_ACCESS);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -170,20 +319,20 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the current user has access to the current module
-		elseif ($module != 'undo' && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		elseif ($module != 'undo' && !$this->User->hasAccess($module, 'modules'))
 		{
-			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
+			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$arrTables = (array) $arrModule['tables'];
+		$strTable = \Input::get('table') ?: $arrTables[0];
 		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
 		if ($id != $this->Session->get('CURRENT_ID'))
 		{
 			$this->Session->set('CURRENT_ID', $id);
-			$this->reload();
 		}
 
 		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));
@@ -212,9 +361,9 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array)$arrModule['tables']))
+			if (!in_array($strTable, $arrTables))
 			{
-				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', 'Backend getBackendModule()', TL_ERROR);
+				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
 			}
 
@@ -245,7 +394,7 @@ abstract class Backend extends \Controller
 			// Fabricate a new data container object
 			if ($GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'] == '')
 			{
-				$this->log('Missing data container for table "' . $strTable . '"', 'Backend getBackendModule()', TL_ERROR);
+				$this->log('Missing data container for table "' . $strTable . '"', __METHOD__, TL_ERROR);
 				trigger_error('Could not create a data container object', E_USER_ERROR);
 			}
 
@@ -273,13 +422,13 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
 					$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
 											 ->limit(1)
-											 ->executeUncached(CURRENT_ID);
+											 ->execute(CURRENT_ID);
 
 					if ($objRow->title != '')
 					{
@@ -314,7 +463,7 @@ abstract class Backend extends \Controller
 				case 'undo':
 					if (!$dc instanceof \listable)
 					{
-						$this->log('Data container ' . $strTable . ' is not listable', 'Backend getBackendModule()', TL_ERROR);
+						$this->log('Data container ' . $strTable . ' is not listable', __METHOD__, TL_ERROR);
 						trigger_error('The current data container is not listable', E_USER_ERROR);
 					}
 					break;
@@ -328,59 +477,103 @@ abstract class Backend extends \Controller
 				case 'edit':
 					if (!$dc instanceof \editable)
 					{
-						$this->log('Data container ' . $strTable . ' is not editable', 'Backend getBackendModule()', TL_ERROR);
+						$this->log('Data container ' . $strTable . ' is not editable', __METHOD__, TL_ERROR);
 						trigger_error('The current data container is not editable', E_USER_ERROR);
 					}
 					break;
 			}
 
-			// Correctly add the theme name in the style sheets module
-			if (strncmp(\Input::get('table'), 'tl_style', 8) === 0)
+			$strFirst = null;
+			$strSecond = null;
+
+			// Handle child child tables (e.g. tl_style)
+			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
 			{
-				if (\Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
+				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+
+				if (in_array($ptable, $arrTables))
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
-											 ->limit(1)
-											 ->executeUncached(\Input::get('id'));
+					$this->loadDataContainer($ptable);
 
-					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
-
-					if (\Input::get('table') == 'tl_style')
+					if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
 					{
-						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-												 ->limit(1)
-												 ->executeUncached(CURRENT_ID);
+						$ftable = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
 
-						$this->Template->headline .= ' » ' . $objRow->name;
+						if (in_array($ftable, $arrTables))
+						{
+							$strFirst = $ftable;
+							$strSecond = $ptable;
+						}
 					}
 				}
-				elseif (\Input::get('table') == 'tl_style')
+			}
+
+			// Build the breadcrumb trail
+			if ($strFirst !== null && $strSecond !== null)
+			{
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select' || \Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
-											 ->limit(1)
-											 ->executeUncached(\Input::get('id'));
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=?";
+					}
+					else
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+					}
+				}
+				else
+				{
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+					}
+					else
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
+					}
+				}
 
+				// Add the first level name
+				$objRow = $this->Database->prepare($strQuery)
+										 ->limit(1)
+										 ->execute($dc->id);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+				}
 
-					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-											 ->limit(1)
-											 ->executeUncached(CURRENT_ID);
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
 
+				// Add the second level name
+				$objRow = $this->Database->prepare("SELECT * FROM $strSecond WHERE id=?")
+										 ->limit(1)
+										 ->execute(CURRENT_ID);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 			}
 			else
 			{
 				// Add the name of the parent element
-				if (\Input::get('table') && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrTables) && $strTable != $arrTables[0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
 						$objRow = $this->Database->prepare("SELECT * FROM " . $GLOBALS['TL_DCA'][$strTable]['config']['ptable'] . " WHERE id=?")
 												 ->limit(1)
-												 ->executeUncached(CURRENT_ID);
+												 ->execute(CURRENT_ID);
 
 						if ($objRow->title != '')
 						{
@@ -394,9 +587,9 @@ abstract class Backend extends \Controller
 				}
 
 				// Add the name of the submodule
-				if (\Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][\Input::get('table')]))
+				if ($strTable && isset($GLOBALS['TL_LANG']['MOD'][$strTable]))
 				{
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][\Input::get('table')];
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strTable];
 				}
 			}
 
@@ -409,15 +602,29 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 			{
-				if (\Input::get('do') == 'files')
+				if (\Input::get('id'))
 				{
-					$this->Template->headline .= ' » ' . \Input::get('id');
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('id');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					}
 				}
-				else
+				elseif (\Input::get('pid'))
 				{
-					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('pid');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('pid'));
+					}
 				}
 			}
 
@@ -480,7 +687,7 @@ abstract class Backend extends \Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected'] && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
@@ -493,14 +700,14 @@ abstract class Backend extends \Controller
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPages->protected || \Config::get('indexProtected')) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}
@@ -585,11 +792,11 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($arrIds, 'pagemounts'))
+		if (!$objUser->hasAccess($arrIds, 'pagemounts'))
 		{
 			$objSession->set($strKey, 0);
 
-			\System::log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
+			\System::log('Page ID '.$intNode.' was not mounted', __METHOD__, TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');
 		}
 
@@ -613,7 +820,7 @@ abstract class Backend extends \Controller
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param \DataContainer
+	 * @param DataContainer
 	 * @param string
 	 * @param boolean
 	 * @param boolean
@@ -679,8 +886,8 @@ abstract class Backend extends \Controller
 		}
 
 		$objUser  = \BackendUser::getInstance();
-		$strPath  = $GLOBALS['TL_CONFIG']['uploadPath'];
-		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
+		$strPath  = \Config::get('uploadPath');
+		$arrNodes = explode('/', preg_replace('/^' . preg_quote(\Config::get('uploadPath'), '/') . '\//', '', $strNode));
 		$arrLinks = array();
 
 		// Add root link
@@ -692,7 +899,7 @@ abstract class Backend extends \Controller
 			$strPath .= '/' . $strFolder;
 
 			// Do not show pages which are not mounted
-			if (!$objUser->isAdmin && !$objUser->hasAccess($strPath, 'filemounts'))
+			if (!$objUser->hasAccess($strPath, 'filemounts'))
 			{
 				continue;
 			}
@@ -709,11 +916,11 @@ abstract class Backend extends \Controller
 		}
 
 		// Check whether the node is mounted
-		if (!$objUser->isAdmin && !$objUser->hasAccess($strNode, 'filemounts'))
+		if (!$objUser->hasAccess($strNode, 'filemounts'))
 		{
 			$objSession->set($strKey, '');
 
-			\System::log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
+			\System::log('Folder ID '.$strNode.' was not mounted', __METHOD__, TL_ERROR);
 			\Controller::redirect('contao/main.php?act=error');
 		}
 
@@ -845,7 +1052,7 @@ abstract class Backend extends \Controller
 
 		if ($this->User->isAdmin)
 		{
-			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $strFilter);
+			return $this->doCreateFileList(\Config::get('uploadPath'), -1, $strFilter);
 		}
 
 		$return = '';

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -141,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('css', 'modules', 'layout'),
+			'options'                 => array('css', 'modules', 'layout', 'image_sizes', 'theme_import', 'theme_export'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -244,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
  * Class tl_user_group
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -308,7 +308,7 @@ class tl_user_group extends Backend
 	{
 		$included = array();
 
-		foreach ($this->Config->getActiveModules() as $strModule)
+		foreach (ModuleLoader::getActive() as $strModule)
 		{
 			$strDir = 'system/modules/' . $strModule . '/dca';
 
@@ -374,7 +374,7 @@ class tl_user_group extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			return '';
 		}
@@ -398,9 +398,9 @@ class tl_user_group extends Backend
 	public function toggleVisibility($intId, $blnVisible)
 	{
 		// Check permissions
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -412,8 +412,15 @@ class tl_user_group extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_user_group']['fields']['disable']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -422,6 +429,6 @@ class tl_user_group extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_user_group.id='.$intId.'" has been created'.$this->getParentEntries('tl_user_group', $intId), 'tl_user_group toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_user_group.id='.$intId.'" has been created'.$this->getParentEntries('tl_user_group', $intId), __METHOD__, TL_GENERAL);
 	}
 }

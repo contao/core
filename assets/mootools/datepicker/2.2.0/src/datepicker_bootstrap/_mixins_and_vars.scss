@@ -1,0 +1,34 @@
+// Colors
+$gray                       : #777;
+$grayLight                  : #999;
+$grayLightBetween           : #CCC;
+$grayLighter                : #EEE;
+$blue                       : #8ab858; // PATCH
+$hoveredColor               : $grayLighter;
+$selectedColor              : $blue;
+
+// Dimensions
+$datepicker-width           : 18em;
+$datepicker-height          : 15.5em; // PATCH
+$datepicker-header-height   : 2.5em;
+$datepicker-padding         : 0.3em;
+
+
+// Mixins
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+@mixin box-sizing($boxmodel) {
+  -webkit-box-sizing: $boxmodel;
+     -moz-box-sizing: $boxmodel;
+          box-sizing: $boxmodel;
+}

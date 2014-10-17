@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentSliderStop
  *
  * Front end content element "slider" (wrapper stop).
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -44,12 +44,6 @@ class ContentSliderStop extends \ContentElement
 		{
 			$this->strTemplate = 'be_wildcard';
 			$this->Template = new \BackendTemplate($this->strTemplate);
-		}
-		else
-		{
-			$this->strTemplate = 'ce_slider_stop';
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
 		}
 
 		// Previous and next labels

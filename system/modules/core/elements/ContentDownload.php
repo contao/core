@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentDownload
  *
  * Front end content element "download".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -47,20 +47,19 @@ class ContentDownload extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->singleSRC))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
-		$objFile = \FilesModel::findByPk($this->singleSRC);
+		$objFile = \FilesModel::findByUuid($this->singleSRC);
 
 		if ($objFile === null)
 		{
+			if (!\Validator::isUuid($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Return if the file type is not allowed
 		if (!in_array($objFile->extension, $allowedDownload))
@@ -90,7 +89,7 @@ class ContentDownload extends \ContentElement
 
 		if ($this->linkTitle == '')
 		{
-			$this->linkTitle = $objFile->basename;
+			$this->linkTitle = specialchars($objFile->basename);
 		}
 
 		$strHref = \Environment::get('request');
@@ -101,10 +100,10 @@ class ContentDownload extends \ContentElement
 			$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 		}
 
-		$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
+		$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
 
 		$this->Template->link = $this->linkTitle;
-		$this->Template->title = specialchars($this->titleText ?: $this->linkTitle);
+		$this->Template->title = specialchars($this->titleText ?: sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename));
 		$this->Template->href = $strHref;
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
 		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;

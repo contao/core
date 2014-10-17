@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -141,8 +141,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'__selector__'                => array('addImage', 'addEnclosure', 'source', 'published'),
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -152,7 +152,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'addEnclosure'                => 'enclosure',
 		'source_internal'             => 'jumpTo',
 		'source_article'              => 'articleId',
-		'source_external'             => 'url,target'
+		'source_external'             => 'url,target',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -194,13 +195,14 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			(
 				array('tl_news', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 		),
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,
@@ -262,8 +264,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('filesOnly'=>true, 'extensions'=>$GLOBALS['TL_CONFIG']['validImageTypes'], 'fieldType'=>'radio', 'mandatory'=>true),
-			'sql'                     => "varchar(255) NOT NULL default ''"
+			'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio', 'mandatory'=>true),
+			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
 		(
@@ -279,9 +281,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -289,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -326,6 +328,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'default'                 => 'above',
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
 			'options'                 => array('above', 'left', 'right', 'below'),
@@ -346,7 +349,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'source' => array
@@ -356,7 +359,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
-			'options'                 => array('default', 'internal', 'article', 'external'),
+			'options_callback'        => array('tl_news', 'getSourceOptions'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news'],
 			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true),
 			'sql'                     => "varchar(12) NOT NULL default ''"
@@ -429,7 +432,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -456,7 +459,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
  * Class tl_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -479,7 +482,7 @@ class tl_news extends Backend
 	public function checkPermission()
 	{
 		// HOOK: comments extension required
-		if (!in_array('comments', $this->Config->getActiveModules()))
+		if (!in_array('comments', ModuleLoader::getActive()))
 		{
 			$key = array_search('allowComments', $GLOBALS['TL_DCA']['tl_news']['list']['sorting']['headerFields']);
 			unset($GLOBALS['TL_DCA']['tl_news']['list']['sorting']['headerFields'][$key]);
@@ -512,7 +515,7 @@ class tl_news extends Backend
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to create news items in news archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -521,7 +524,7 @@ class tl_news extends Backend
 			case 'copy':
 				if (!in_array(Input::get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" to news archive ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -537,13 +540,13 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news item ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid news item ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.Input::get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -556,7 +559,7 @@ class tl_news extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -565,7 +568,7 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid news archive ID "'.$id.'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -577,12 +580,12 @@ class tl_news extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_news checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID ' . $id, 'tl_news checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access news archive ID ' . $id, __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -634,7 +637,7 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ']</span></div>';
+		return '<div class="tl_content_left">' . $arrRow['headline'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . Date::parse(Config::get('datimFormat'), $arrRow['date']) . ']</span></div>';
 	}
 
 
@@ -685,6 +688,49 @@ class tl_news extends Backend
 
 
 	/**
+	 * Add the source options depending on the allowed fields (see #5498)
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getSourceOptions(DataContainer $dc)
+	{
+		if ($this->User->isAdmin)
+		{
+			return array('default', 'internal', 'article', 'external');
+		}
+
+		$arrOptions = array('default');
+
+		// Add the "internal" option
+		if ($this->User->hasAccess('tl_news::jumpTo', 'alexf'))
+		{
+			$arrOptions[] = 'internal';
+		}
+
+		// Add the "article" option
+		if ($this->User->hasAccess('tl_news::articleId', 'alexf'))
+		{
+			$arrOptions[] = 'article';
+		}
+
+		// Add the "external" option
+		if ($this->User->hasAccess('tl_news::url', 'alexf') && $this->User->hasAccess('tl_news::target', 'alexf'))
+		{
+			$arrOptions[] = 'external';
+		}
+
+		// Add the option currently set
+		if ($dc->activeRecord && $dc->activeRecord->source != '')
+		{
+			$arrOptions[] = $dc->activeRecord->source;
+			$arrOptions = array_unique($arrOptions);
+		}
+
+		return $arrOptions;
+	}
+
+
+	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
 	 * @param \DataContainer
 	 */
@@ -722,6 +768,9 @@ class tl_news extends Backend
 			$this->News->generateFeed($id);
 		}
 
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
 		$this->Session->set('news_feed_updater', null);
 	}
 
@@ -733,18 +782,19 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
+	 * @param \DataContainer
 	 */
-	public function scheduleUpdate()
+	public function scheduleUpdate(DataContainer $dc)
 	{
 		// Return if there is no ID
-		if (!CURRENT_ID || Input::get('act') == 'copy')
+		if (!$dc->activeRecord || !$dc->activeRecord->pid || Input::get('act') == 'copy')
 		{
 			return;
 		}
 
 		// Store the ID in the session
 		$session = $this->Session->get('news_feed_updater');
-		$session[] = CURRENT_ID;
+		$session[] = $dc->activeRecord->pid;
 		$this->Session->set('news_feed_updater', array_unique($session));
 	}
 
@@ -756,7 +806,7 @@ class tl_news extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
@@ -779,7 +829,7 @@ class tl_news extends Backend
 		}
 
 		// Check permissions AFTER checking the fid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		{
 			return '';
 		}
@@ -809,9 +859,9 @@ class tl_news extends Backend
 		$this->checkPermission();
 
 		// Check permissions to feature
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::featured', 'alexf'))
 		{
-			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', 'tl_news toggleFeatured', TL_ERROR);
+			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -823,8 +873,15 @@ class tl_news extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -833,7 +890,7 @@ class tl_news extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleFeatured()', TL_GENERAL);
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
 	}
 
 
@@ -856,7 +913,7 @@ class tl_news extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
 			return '';
 		}
@@ -885,9 +942,9 @@ class tl_news extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -899,8 +956,15 @@ class tl_news extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -909,7 +973,7 @@ class tl_news extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), 'tl_news toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_news.id='.$intId.'" has been created'.$this->getParentEntries('tl_news', $intId), __METHOD__, TL_GENERAL);
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);

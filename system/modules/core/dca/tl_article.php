@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -135,17 +135,27 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		)
 	),
 
+	// Select
+	'select' => array
+	(
+		'buttons_callback' => array
+		(
+			array('tl_article', 'addAliasButton')
+		)
+	),
+
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('protected'),
-		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},teaserCssID,showTeaser,teaser;{syndication_legend},printable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{publish_legend},published,start,stop'
+		'__selector__'                => array('protected', 'published'),
+		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},teaserCssID,showTeaser,teaser;{syndication_legend},printable;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{publish_legend},published'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'groups'
+		'protected'                   => 'groups',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -191,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			(
 				array('tl_article', 'generateAlias')
 			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
+			'sql'                     => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
 
 		),
 		'author' => array
@@ -199,6 +209,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
@@ -211,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'default'                 => 'main',
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_article', 'getActivePageSections'),
+			'options_callback'        => array('tl_article', 'getActiveLayoutSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -258,6 +269,15 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'eval'                    => array('multiple'=>true),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'customTpl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['customTpl'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_article', 'getArticleTemplates'),
+			'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'protected' => array
 		(
@@ -308,7 +328,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['published'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -335,7 +355,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
  * Class tl_article
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -365,8 +385,8 @@ class tl_article extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval($GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id);
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval($GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0]);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = intval(Config::get('defaultUser') ?: $this->User->id);
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = intval(Config::get('defaultGroup') ?: $this->User->groups[0]);
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
@@ -390,12 +410,12 @@ class tl_article extends Backend
 
 				$row = $objArticle->row();
 
-				if ($this->User->isAllowed(4, $row))
+				if ($this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $row))
 				{
 					$edit_all[] = $id;
 				}
 
-				if ($this->User->isAllowed(6, $row))
+				if ($this->User->isAllowed(BackendUser::CAN_DELETE_ARTICLES, $row))
 				{
 					$delete_all[] = $id;
 				}
@@ -420,7 +440,7 @@ class tl_article extends Backend
 					continue;
 				}
 
-				if ($this->User->isAllowed(5, $objArticle->row()))
+				if ($this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLE_HIERARCHY, $objArticle->row()))
 				{
 					$clipboard[] = $id;
 				}
@@ -450,11 +470,11 @@ class tl_article extends Backend
 			{
 				case 'edit':
 				case 'toggle':
-					$permission = 4;
+					$permission = BackendUser::CAN_EDIT_ARTICLES;
 					break;
 
 				case 'move':
-					$permission = 5;
+					$permission = BackendUser::CAN_EDIT_ARTICLE_HIERARCHY;
 					$ids[] = Input::get('sid');
 					break;
 
@@ -464,7 +484,7 @@ class tl_article extends Backend
 				case 'copyAll':
 				case 'cut':
 				case 'cutAll':
-					$permission = 5;
+					$permission = BackendUser::CAN_EDIT_ARTICLE_HIERARCHY;
 
 					// Insert into a page
 					if (Input::get('mode') == 2)
@@ -488,13 +508,13 @@ class tl_article extends Backend
 
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
-						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), __METHOD__, TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 
 				case 'delete':
-					$permission = 6;
+					$permission = BackendUser::CAN_DELETE_ARTICLES;
 					break;
 			}
 
@@ -517,7 +537,7 @@ class tl_article extends Backend
 				{
 					if (!$error && !in_array($id, $pagemounts))
 					{
-						$this->log('Page ID ' . $id . ' was not mounted', 'tl_article checkPermission()', TL_ERROR);
+						$this->log('Page ID ' . $id . ' was not mounted', __METHOD__, TL_ERROR);
 						$error = true;
 					}
 
@@ -530,7 +550,7 @@ class tl_article extends Backend
 					{
 						if (!$this->User->isAllowed($permission, $objPage->row()))
 						{
-							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to '. Input::get('act') .' '. (strlen(Input::get('id')) ? 'article ID '. Input::get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, __METHOD__, TL_ERROR);
 							$error = true;
 						}
 					}
@@ -557,7 +577,7 @@ class tl_article extends Backend
 		$time = time();
 		$published = ($row['published'] && ($row['start'] == '' || $row['start'] < $time) && ($row['stop'] == '' || $row['stop'] > $time));
 
-		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif').'</a> '.$label;
+		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !Config::get('disableAlias')) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif').'</a> '.$label;
 	}
 
 
@@ -579,6 +599,12 @@ class tl_article extends Backend
 			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->title));
 		}
 
+		// Add a prefix to reserved names (see #6066)
+		if (in_array($varValue, array('top', 'wrapper', 'header', 'container', 'main', 'left', 'right', 'footer')))
+		{
+			$varValue = 'article-' . $varValue;
+		}
+
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_article WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
@@ -598,75 +624,80 @@ class tl_article extends Backend
 
 
 	/**
-	 * Return all active page sections as array
+	 * Return all active layout sections as array
 	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getActivePageSections(DataContainer $dc)
+	public function getActiveLayoutSections(DataContainer $dc)
 	{
-		$arrCustom = array();
-		$arrSections = array('header', 'left', 'right', 'main', 'footer');
-
 		// Show only active sections
 		if ($dc->activeRecord->pid)
 		{
-			// Load the page
+			$arrSections = array();
 			$objPage = PageModel::findWithDetails($dc->activeRecord->pid);
 
-			// Get the layout settings
-			$objLayout = LayoutModel::findByPk($objPage->layout);
-
-			// No layout specified
-			if ($objLayout === null)
+			// Get the layout sections
+			foreach (array('layout', 'mobileLayout') as $key)
 			{
-				return array('main');
+				if (!$objPage->$key)
+				{
+					continue;
+				}
+
+				$objLayout = LayoutModel::findByPk($objPage->$key);
+
+				if ($objLayout === null)
+				{
+					continue;
+				}
+
+				$arrModules = deserialize($objLayout->modules);
+
+				if (empty($arrModules) || !is_array($arrModules))
+				{
+					continue;
+				}
+
+				// Find all sections with an article module (see #6094)
+				foreach ($arrModules as $arrModule)
+				{
+					if ($arrModule['mod'] == 0 && $arrModule['enable'])
+					{
+						$arrSections[] = $arrModule['col'];
+					}
+				}
 			}
-
-			$arrSections = array();
-
-			// Header
-			if ($objLayout->rows == '2rwh' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'header';
-			}
-
-			// Left column
-			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'left';
-			}
-
-			// Right column
-			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-			{
-				$arrSections[] = 'right';
-			}
-
-			// Main column
-			$arrSections[] = 'main';
-
-			// Footer
-			if ($objLayout->rows == '2rwf' || $objLayout->rows == '3rw')
-			{
-				$arrSections[] = 'footer';
-			}
-
-			$arrCustom = deserialize($objLayout->sections);
 		}
 
-		// Always add the custom layout sections in "override all" mode
-		if (Input::get('act') == 'overrideAll')
+		// Show all sections (e.g. "override all" mode)
+		else
 		{
-			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
+			$arrSections = array('header', 'left', 'right', 'main', 'footer');
+			$objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+
+			while ($objLayout->next())
+			{
+				$arrCustom = trimsplit(',', $objLayout->sections);
+
+				// Add the custom layout sections
+				if (!empty($arrCustom) && is_array($arrCustom))
+				{
+					$arrSections = array_merge($arrSections, $arrCustom);
+				}
+			}
 		}
 
-		// Add the custom layout sections
-		if (!empty($arrCustom) && is_array($arrCustom))
-		{
-			$arrSections = array_merge($arrSections, $arrCustom);
-		}
+		return array_values(array_unique($arrSections));
+	}
 
-		return $arrSections;
+
+	/**
+	 * Return all module templates as array
+	 * @return array
+	 */
+	public function getArticleTemplates()
+	{
+		return $this->getTemplateGroup('mod_');
 	}
 
 
@@ -686,7 +717,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -702,7 +733,7 @@ class tl_article extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (!$this->User->isAdmin && count(preg_grep('/^tl_article::/', $this->User->alexf)) < 1)
+		if (!$this->User->canEditFieldsOf('tl_article'))
 		{
 			return Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -711,7 +742,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -737,7 +768,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLE_HIERARCHY, $objPage->row()) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -757,7 +788,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLE_HIERARCHY, $objPage->row()) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -777,14 +808,14 @@ class tl_article extends Backend
 
 		if ($table == $GLOBALS['TL_DCA'][$dc->table]['config']['ptable'])
 		{
-			return ($row['type'] == 'root' || (!$this->User->isAdmin && !$this->User->isAllowed(5, $row)) || $cr) ? Image::getHtml('pasteinto_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
+			return ($row['type'] == 'root' || !$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLE_HIERARCHY, $row) || $cr) ? Image::getHtml('pasteinto_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->row())) || $cr) ? Image::getHtml('pasteafter_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
+		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || !$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLE_HIERARCHY, $objPage->row()) || $cr) ? Image::getHtml('pasteafter_.gif').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
 	}
 
 
@@ -804,7 +835,60 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(6, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->User->isAllowed(BackendUser::CAN_DELETE_ARTICLES, $objPage->row()) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Automatically generate the folder URL aliases
+	 * @param array
+	 * @return array
+	 */
+	public function addAliasButton($arrButtons)
+	{
+		// Generate the aliases
+		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
+		{
+			$session = $this->Session->getData();
+			$ids = $session['CURRENT']['IDS'];
+
+			foreach ($ids as $id)
+			{
+				$objArticle = ArticleModel::findByPk($id);
+
+				if ($objArticle === null)
+				{
+					continue;
+				}
+
+				// Set the new alias
+				$strAlias = standardize(String::restoreBasicEntities($objArticle->title));
+
+				// The alias has not changed
+				if ($strAlias == $objArticle->alias)
+				{
+					continue;
+				}
+
+				// Initialize the version manager
+				$objVersions = new Versions('tl_article', $id);
+				$objVersions->initialize();
+
+				// Store the new alias
+				$this->Database->prepare("UPDATE tl_article SET alias=? WHERE id=?")
+							   ->execute($strAlias, $id);
+
+				// Create a new version
+				$objVersions->create();
+			}
+
+			$this->redirect($this->getReferer());
+		}
+
+		// Add the button
+		$arrButtons['alias'] = '<input type="submit" name="alias" id="alias" class="tl_submit" accesskey="a" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['aliasSelected']).'"> ';
+
+		return $arrButtons;
 	}
 
 
@@ -827,7 +911,7 @@ class tl_article extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
 			return '';
 		}
@@ -843,7 +927,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		if (!$this->User->isAdmin && !$this->User->isAllowed(4, $objPage->row()))
+		if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
 		{
 			return Image::getHtml($icon) . ' ';
 		}
@@ -865,9 +949,9 @@ class tl_article extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -879,8 +963,15 @@ class tl_article extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_article']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -889,6 +980,6 @@ class tl_article extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), 'tl_article toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_article.id='.$intId.'" has been created'.$this->getParentEntries('tl_article', $intId), __METHOD__, TL_GENERAL);
 	}
 }

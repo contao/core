@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class FrontendUser
  *
  * Provide methods to manage front end users.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -160,44 +160,41 @@ class FrontendUser extends \User
 			return true;
 		}
 
-		// Check whether auto login is active
-		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || \Input::cookie('FE_AUTO_LOGIN') == '')
+		// Check whether auto login is enabled
+		if (\Config::get('autologin') > 0 && ($strCookie = \Input::cookie('FE_AUTO_LOGIN')) != '')
 		{
-			return false;
+			// Try to find the user by his auto login cookie
+			if ($this->findBy('autologin', $strCookie) !== false)
+			{
+				// Check the auto login period
+				if ($this->createdOn >= (time() - \Config::get('autologin')))
+				{
+					// Validate the account status
+					if ($this->checkAccountStatus() !== false)
+					{
+						$this->setUserFromDb();
+
+						// Last login date
+						$this->lastLogin = $this->currentLogin;
+						$this->currentLogin = time();
+						$this->save();
+
+						// Generate the session
+						$this->generateSession();
+						$this->log('User "' . $this->username . '" was logged in automatically', __METHOD__, TL_ACCESS);
+
+						// Reload the page
+						\Controller::reload();
+						return true;
+					}
+				}
+			}
+
+			// Remove the cookie if it is invalid to enable loading cached pages
+			$this->setCookie('FE_AUTO_LOGIN', $strCookie, (time() - 86400), null, null, false, true);
 		}
 
-		// Try to find the user by his auto login cookie
-		if ($this->findBy('autologin', \Input::cookie('FE_AUTO_LOGIN')) == false)
-		{
-			return false;
-		}
-
-		// Check the auto login period
-		if ($this->createdOn < (time() - $GLOBALS['TL_CONFIG']['autologin']))
-		{
-			return false;
-		}
-
-		// Validate the account status
-		if ($this->checkAccountStatus() == false)
-		{
-			return false;
-		}
-
-		$this->setUserFromDb();
-
-		// Last login date
-		$this->lastLogin = $this->currentLogin;
-		$this->currentLogin = time();
-		$this->save();
-
-		// Generate the session
-		$this->generateSession();
-		$this->log('User "' . $this->username . '" was logged in automatically', get_class($this) . ' authenticate()', TL_ACCESS);
-
-		// Reload the page
-		\Controller::reload();
-		return true;
+		return false;
 	}
 
 
@@ -214,7 +211,7 @@ class FrontendUser extends \User
 		}
 
 		// Set the auto login data
-		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && \Input::post('autologin'))
+		if (\Config::get('autologin') > 0 && \Input::post('autologin'))
 		{
 			$time = time();
 			$strToken = md5(uniqid(mt_rand(), true));
@@ -223,7 +220,7 @@ class FrontendUser extends \User
 			$this->autologin = $strToken;
 			$this->save();
 
-			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + $GLOBALS['TL_CONFIG']['autologin']), null, null, false, true);
+			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + \Config::get('autologin')), null, null, false, true);
 		}
 
 		return true;
@@ -259,7 +256,7 @@ class FrontendUser extends \User
 	/**
 	 * Save the original group membership
 	 * @param string
-	 * @param integer
+	 * @param mixed
 	 * @return boolean
 	 */
 	public function findBy($strColumn, $varValue)

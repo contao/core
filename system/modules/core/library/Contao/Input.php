@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -30,7 +30,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Input
 {
@@ -107,12 +107,12 @@ class Input
 			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
 
-			// Mark the parameter as used (see #4277)
-			if (!$blnKeepUnused)
-			{
-				unset(static::$arrUnusedGet[$strKey]);
-			}
+		// Mark the parameter as used (see #4277)
+		if (!$blnKeepUnused)
+		{
+			unset(static::$arrUnusedGet[$strKey]);
 		}
 
 		return static::$arrCache[$strCacheKey][$strKey];
@@ -181,7 +181,7 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::decodeEntities($varValue);
 			$varValue = static::xssClean($varValue);
-			$varValue = static::stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
+			$varValue = static::stripTags($varValue, \Config::get('allowedTags'));
 
 			if (!$blnDecodeEntities)
 			{
@@ -288,7 +288,7 @@ class Input
 
 			if ($blnAddUnused)
 			{
-				static::$arrUnusedGet[$strKey] = $varValue; // see #4277
+				static::setUnusedGet($strKey, $varValue); // see #4277
 			}
 		}
 	}
@@ -356,12 +356,35 @@ class Input
 
 	/**
 	 * Return whether there are unused GET parameters
-	 * 
+	 *
 	 * @return boolean True if there are unused GET parameters
 	 */
 	public static function hasUnusedGet()
 	{
 		return count(static::$arrUnusedGet) > 0;
+	}
+
+
+	/**
+	 * Return the unused GET parameters as array
+	 *
+	 * @return array The unused GET parameter array
+	 */
+	public static function getUnusedGet()
+	{
+		return array_keys(static::$arrUnusedGet);
+	}
+
+
+	/**
+	 * Set an unused GET parameter
+	 *
+	 * @param string $strKey   The array key
+	 * @param mixed  $varValue The array value
+	 */
+	public static function setUnusedGet($strKey, $varValue)
+	{
+		static::$arrUnusedGet[$strKey] = $varValue;
 	}
 
 
@@ -462,6 +485,12 @@ class Input
 		$varValue = strip_tags($varValue, $strAllowedTags);
 		$varValue = str_replace(array('&lt;!--', '&lt;![', '--&gt;'), array('<!--', '<![', '-->'), $varValue);
 
+		// Recheck for encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
 		return $varValue;
 	}
 
@@ -492,7 +521,7 @@ class Input
 			return $varValue;
 		}
 
-		// Return if var is not a string
+		// Return if the value is not a string
 		if (is_bool($varValue) || $varValue === null || is_numeric($varValue))
 		{
 			return $varValue;
@@ -503,15 +532,21 @@ class Input
 		$varValue = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $varValue);
 
 		// Remove carriage returns
-      	$varValue = preg_replace('/\r+/', '', $varValue);
+		$varValue = preg_replace('/\r+/', '', $varValue);
 
-      	// Replace unicode entities
+		// Replace unicode entities
 		$varValue = utf8_decode_entities($varValue);
 
-		// Remove NULL characters
-		$varValue = preg_replace('/\0+/', '', $varValue);
-		$varValue = preg_replace('/(\\\\0)+/', '', $varValue);
+		// Remove null bytes
+		$varValue = str_replace(chr(0), '', $varValue);
 
+		// Remove encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
+		// Define a list of keywords
 		$arrKeywords = array
 		(
 			'/\bj\s*a\s*v\s*a\s*s\s*c\s*r\s*i\s*p\s*t\b/is', // javascript
@@ -574,7 +609,15 @@ class Input
 			$arrRegexp[] = '/<[^>]*[^a-z]onresize\s*=[^>]*>/is';
 		}
 
-		return preg_replace($arrRegexp, '', $varValue);
+		$varValue = preg_replace($arrRegexp, '', $varValue);
+
+		// Recheck for encoded null bytes
+		while (strpos($varValue, '\\0') !== false)
+		{
+			$varValue = str_replace('\\0', '', $varValue);
+		}
+
+		return $varValue;
 	}
 
 
@@ -605,7 +648,7 @@ class Input
 
 		// Preserve basic entities
 		$varValue = static::preserveBasicEntities($varValue);
-		$varValue = html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$varValue = html_entity_decode($varValue, ENT_QUOTES, \Config::get('characterSet'));
 
 		return $varValue;
 	}

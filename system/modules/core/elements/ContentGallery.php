@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentGallery
  *
  * Front end content element "gallery".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -68,17 +68,16 @@ class ContentGallery extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
 		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -95,7 +94,6 @@ class ContentGallery extends \ContentElement
 
 		$images = array();
 		$auxDate = array();
-		$auxId = array();
 		$objFiles = $this->objFiles;
 
 		// Get all images
@@ -112,23 +110,36 @@ class ContentGallery extends \ContentElement
 			{
 				$objFile = new \File($objFiles->path, true);
 
-				if (!$objFile->isGdImage)
+				if (!$objFile->isImage)
 				{
 					continue;
 				}
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($objPage->rootFallbackLanguage !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+					}
+				}
+
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					$arrMeta['title'] = specialchars($objFile->basename);
 				}
 
 				// Add the image
 				$images[$objFiles->path] = array
 				(
 					'id'        => $objFiles->id,
+					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
 					'singleSRC' => $objFiles->path,
 					'alt'       => $arrMeta['title'],
@@ -137,13 +148,12 @@ class ContentGallery extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
-				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 				if ($objSubfiles === null)
 				{
@@ -160,23 +170,36 @@ class ContentGallery extends \ContentElement
 
 					$objFile = new \File($objSubfiles->path, true);
 
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($objPage->rootFallbackLanguage !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->rootFallbackLanguage);
+						}
+					}
+
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+						$arrMeta['title'] = specialchars($objFile->basename);
 					}
 
 					// Add the image
 					$images[$objSubfiles->path] = array
 					(
 						'id'        => $objSubfiles->id,
+						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
 						'singleSRC' => $objSubfiles->path,
 						'alt'       => $arrMeta['title'],
@@ -185,7 +208,6 @@ class ContentGallery extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
-					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -214,30 +236,33 @@ class ContentGallery extends \ContentElement
 			case 'custom':
 				if ($this->orderSRC != '')
 				{
-					// Turn the order string into an array and remove all values
-					$arrOrder = explode(',', $this->orderSRC);
-					$arrOrder = array_flip(array_map('intval', $arrOrder));
-					$arrOrder = array_map(function(){}, $arrOrder);
+					$tmp = deserialize($this->orderSRC);
 
-					// Move the matching elements to their position in $arrOrder
-					foreach ($images as $k=>$v)
+					if (!empty($tmp) && is_array($tmp))
 					{
-						if (array_key_exists($v['id'], $arrOrder))
+						// Remove all values
+						$arrOrder = array_map(function(){}, array_flip($tmp));
+
+						// Move the matching elements to their position in $arrOrder
+						foreach ($images as $k=>$v)
 						{
-							$arrOrder[$v['id']] = $v;
-							unset($images[$k]);
+							if (array_key_exists($v['uuid'], $arrOrder))
+							{
+								$arrOrder[$v['uuid']] = $v;
+								unset($images[$k]);
+							}
 						}
-					}
 
-					// Append the left-over images at the end
-					if (!empty($images))
-					{
-						$arrOrder = array_merge($arrOrder, array_values($images));
-					}
+						// Append the left-over images at the end
+						if (!empty($images))
+						{
+							$arrOrder = array_merge($arrOrder, array_values($images));
+						}
 
-					// Remove empty (unreplaced) entries
-					$images = array_filter($arrOrder);
-					unset($arrOrder);
+						// Remove empty (unreplaced) entries
+						$images = array_values(array_filter($arrOrder));
+						unset($arrOrder);
+					}
 				}
 				break;
 
@@ -281,13 +306,13 @@ class ContentGallery extends \ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new \Pagination($total, $this->perPage, $GLOBALS['TL_CONFIG']['maxPaginationLinks'], $id);
+			$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
 		$rowcount = 0;
 		$colwidth = floor(100/$this->perRow);
-		$intMaxWidth = (TL_MODE == 'BE') ? floor((640 / $this->perRow)) : floor(($GLOBALS['TL_CONFIG']['maxImageWidth'] / $this->perRow));
+		$intMaxWidth = (TL_MODE == 'BE') ? floor((640 / $this->perRow)) : floor((\Config::get('maxImageWidth') / $this->perRow));
 		$strLightboxId = 'lightbox[lb' . $this->id . ']';
 		$body = array();
 
@@ -315,12 +340,12 @@ class ContentGallery extends \ContentElement
 
 				if ($j == 0)
 				{
-					$class_td = ' col_first';
+					$class_td .= ' col_first';
 				}
 
 				if ($j == ($this->perRow - 1))
 				{
-					$class_td = ' col_last';
+					$class_td .= ' col_last';
 				}
 
 				$objCell = new \stdClass();

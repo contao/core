@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleArticleList
  *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -88,7 +88,7 @@ class ModuleArticleList extends \Module
 		}
 
 		// Get published articles
-		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn, array('uncached'=>true));
+		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
 
 		if ($objArticles === null)
 		{

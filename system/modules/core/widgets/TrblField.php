@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class TrblField
  *
  * Provide methods to handle text fields with unit drop down menu.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -85,11 +85,34 @@ class TrblField extends \Widget
 		{
 			if ($k != 'unit')
 			{
-				$varInput[$k] = parent::validator(trim($v));
+				$varInput[$k] = parent::validator($v);
 			}
 		}
 
 		return $varInput;
+	}
+
+
+	/**
+	 * Only check against the unit values (see #7246)
+	 *
+	 * @param array $arrOption The options array
+	 *
+	 * @return string The "selected" attribute or an empty string
+	 */
+	protected function isSelected($arrOption)
+	{
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
+		{
+			return parent::optionSelected(1, 1);
+		}
+
+		if (empty($this->varValue) || !is_array($this->varValue))
+		{
+			return '';
+		}
+
+		return parent::optionSelected($arrOption['value'], $this->varValue['unit']);
 	}
 
 
@@ -129,9 +152,10 @@ class TrblField extends \Widget
 									$this->getAttributes());
 		}
 
-		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()">%s</select>%s',
+		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()"%s>%s</select>%s',
 						implode(' ', $arrFields),
 						$this->strName,
+						$this->getAttribute('disabled'),
 						implode('', $arrUnits),
 						$this->wizard);
 	}

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -38,6 +38,7 @@ class RepositoryManager extends RepositoryBackendModule
 </div>
 <p class="tl_empty">'.$GLOBALS['TL_LANG']['tl_repository']['missingSoapModule'].'</p>';
 		} // if
+
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler
 			array('',				'repository_mgrlist',		'listinsts'	),
@@ -47,6 +48,12 @@ class RepositoryManager extends RepositoryBackendModule
 			array('update',			'repository_mgrupdt',		'update'	),
 			array('uninstall',		'repository_mgruist',		'uninstall'	)
 		);
+
+		// Switch to maintenance mode (see #4561)
+		if (Input::post('repository_action') == 'install' || Input::post('repository_action') == 'uninstall') {
+			Config::persist('maintenanceMode', true);
+		}
+
 		return parent::generate();
 	} // generate
 
@@ -106,7 +113,7 @@ class RepositoryManager extends RepositoryBackendModule
 			);
 			$db->prepare("update `tl_repository_installs` %s where `extension`=?")
 				->set($params)
-				->executeUncached($aName);
+				->execute($aName);
 			$this->redirect($rep->homeLink);
 		} // if
 
@@ -157,10 +164,13 @@ class RepositoryManager extends RepositoryBackendModule
 						'languages' => $this->languages,
 						'match'		=> 'ignorecase',
 						'names'		=> $rep->f_extension,
-						'sets'		=> 'history'
+						'sets'		=> 'history,details'
 					));
 					// replace the case-insensitive user input with the real name (see #4689)
-					if (count($exts)>0) $rep->f_extension = $exts[0]->name;
+					if (count($exts)>0) {
+						$rep->f_extension = $exts[0]->name;
+						$rep->f_changelog = $exts[0]->releasenotes;
+					}
 				} else
 					$exts = array();
 				$ok = count($exts)>0;
@@ -242,7 +252,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'stable'	=> '1',
 									'error'		=> '1'
 								);
-								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->executeUncached();
+								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->execute();
 								$error = $this->installExtension($act->extension, $act->version, $lickey);
 								$checkdb = $updinst = true;
 								$record = 'install';
@@ -266,7 +276,7 @@ class RepositoryManager extends RepositoryBackendModule
 								'error'		=> $error ? '1' : ''
 							);
 							if ($lickey != '') $params['lickey'] = $lickey;
-							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->executeUncached($act->extension);
+							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->execute($act->extension);
 						} // if
 						if ($record != '')
 							$this->recordAction(array(
@@ -300,9 +310,10 @@ class RepositoryManager extends RepositoryBackendModule
 					'languages' => $this->languages,
 					'match'		=> 'exact',
 					'names'		=> $rep->f_extension,
-					'sets'		=> 'history'
+					'sets'		=> 'history,details'
 				);
 				$exts = $this->getExtensionList($options);
+				$rep->f_changelog = $exts[0]->releasenotes;
 				if (count($exts)>0) {
 					foreach ($exts[0]->allversions as $ver)
 						array_unshift($rep->f_allversions, $ver->version);
@@ -407,7 +418,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'stable'	=> '1',
 									'error'		=> '1'
 								);
-								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->executeUncached();
+								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->execute();
 								$error = $this->installExtension($act->extension, $act->version, $lickey);
 								$checkdb = $updinst = true;
 								$record = 'install';
@@ -431,7 +442,7 @@ class RepositoryManager extends RepositoryBackendModule
 								'error'		=> $error ? '1' : ''
 							);
 							if ($lickey != '') $params['lickey'] = $lickey;
-							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->executeUncached($act->extension);
+							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->execute($act->extension);
 						} // if
 						if ($record != '')
 							$this->recordAction(array(
@@ -459,11 +470,11 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$sql = deserialize(Input::post('sql'));
-			if (is_array($sql)) {
+			$sql = Input::post('sql');
+			if (!empty($sql) && is_array($sql)) {
 				foreach ($sql as $key) {
 					if (isset($_SESSION['sql_commands'][$key])) {
-						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . Config::get('dbCollation') . ';', $_SESSION['sql_commands'][$key]));
 					} // if
 				} // foreach
 			} // if
@@ -582,7 +593,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$q = $db->prepare("select `id` from `tl_repository_installs` where `extension`=?")->execute($aName);
 			if (!$q->next()) throw new Exception($text['extinstrecntf']);
 			$instId = $q->id;
-			$db->prepare("update `tl_repository_instfiles` set `flag`='D' where `pid`=? and `filetype`='F'")->executeUncached($instId);
+			$db->prepare("update `tl_repository_instfiles` set `flag`='D' where `pid`=? and `filetype`='F'")->execute($instId);
 
 			foreach ($files as $file) {
 				// get relative file name
@@ -618,7 +629,7 @@ class RepositoryManager extends RepositoryBackendModule
 									"update `tl_repository_instfiles` set `tstamp`=?".
 									" where `pid`=? and `filetype`='D' and `filename`=?"
 								  )
-								->executeUncached(array(time(), $instId, $dir));
+								->execute(array(time(), $instId, $dir));
 						if ($q->affectedRows == 0)
 							$db	->prepare("insert into `tl_repository_instfiles` %s")
 								->set(array(
@@ -627,14 +638,14 @@ class RepositoryManager extends RepositoryBackendModule
 									'filename'	=> $dir,
 									'filetype'	=> 'D'
 								  ))
-								->executeUncached();
+								->execute();
 						$dir = dirname($dir);
 					} // while
 
 					// save new or changed file - by Request
 					if ($save) {
 						// HOOK: proxy module
-						if ($GLOBALS['TL_CONFIG']['useProxy']) {
+						if (Config::get('useProxy')) {
 							$req = new ProxyRequest();
 						} else {
 							$req = new Request();
@@ -653,7 +664,7 @@ class RepositoryManager extends RepositoryBackendModule
 								"update `tl_repository_instfiles` set `tstamp`=?, `flag`=''".
 								" where `pid`=? and `filetype`='F' and `filename`=?"
 							  )
-							->executeUncached(array(time(), $instId, $filerel));
+							->execute(array(time(), $instId, $filerel));
 					if ($q->affectedRows == 0)
 						$db	->prepare("insert into `tl_repository_instfiles` %s")
 							->set(array(
@@ -662,7 +673,7 @@ class RepositoryManager extends RepositoryBackendModule
 								'filename'	=> $filerel,
 								'filetype'	=> 'F'
 							  ))
-							->executeUncached();
+							->execute();
 				} // if
 			} // foreach
 
@@ -670,7 +681,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$q = $db->prepare("select * from `tl_repository_instfiles` where `pid`=? and `filetype`='F' and `flag`='D'")->execute($instId);
 			while ($q->next()) {
 				$this->Files->delete($q->filename);
-				$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
+				$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
 				$sum_del++;
 			} // while
 
@@ -680,13 +691,12 @@ class RepositoryManager extends RepositoryBackendModule
 			if ($sum_ok>0) $rep->log .= '<div>'.sprintf($text['filesunchanged'],$sum_ok)."</div>\n";
 			if ($sum_del>0) $rep->log .= '<div>'.sprintf($text['filesdeleted'],$sum_del)."</div>\n";
 			$rep->log .= '<div class="color_green">'.$text['actionsuccess']."</div>\n";
-			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', 'RepositoryManager::updateExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -722,7 +732,7 @@ class RepositoryManager extends RepositoryBackendModule
 
 			// fetch package - using Request class
 			// HOOK: proxy module
-			if ($GLOBALS['TL_CONFIG']['useProxy']) {
+			if (Config::get('useProxy')) {
 				$req = new ProxyRequest();
 			} else {
 				$req = new Request();
@@ -770,7 +780,7 @@ class RepositoryManager extends RepositoryBackendModule
 											"update `tl_repository_instfiles` set `tstamp`=?".
 											" where `pid`=? and `filetype`='D' and `filename`=?"
 										  )
-										->executeUncached(array(time(), $instId, $dir));
+										->execute(array(time(), $instId, $dir));
 								if ($q->affectedRows == 0)
 									$db	->prepare("insert into `tl_repository_instfiles` %s")
 										->set(array(
@@ -779,7 +789,7 @@ class RepositoryManager extends RepositoryBackendModule
 											'filename'	=> $dir,
 											'filetype'	=> 'D'
 										  ))
-										->executeUncached();
+										->execute();
 								$dir = dirname($dir);
 							} // while
 
@@ -797,7 +807,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'filename'	=> $filerel,
 									'filetype'	=> 'F'
 								  ))
-								->executeUncached();
+								->execute();
 						} // if
 					} // for
 					$zip = null; // destruct = close
@@ -819,13 +829,12 @@ class RepositoryManager extends RepositoryBackendModule
 				$this->Files->delete($zipname);
 				throw $exc;
 			} // catch
-			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', 'RepositoryManager::installExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				str_replace("\n", "<br/>\n", $exc->getMessage()) . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -873,7 +882,7 @@ class RepositoryManager extends RepositoryBackendModule
 					$rep->log .= '<span class="color_blue">'.$text['notfound'];
 				$rep->log .= "</span></div>\n";
 				if ($del)
-					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
+					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
 			} // while
 
 			// delete the directories
@@ -890,7 +899,7 @@ class RepositoryManager extends RepositoryBackendModule
 					} else
 						$rep->log .= '<span class="color_blue">'.$text['notfound'];
 					$rep->log .= "</span></div>\n";
-					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
+					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
 				} // while
 			} // if
 
@@ -903,19 +912,18 @@ class RepositoryManager extends RepositoryBackendModule
 
 			$rep->log .= "<div>&nbsp;</div>\n";
 			if ($err) {
-				$db->prepare("update `tl_repository_installs` set `error`='1' where `id`=?")->executeUncached($instId);
+				$db->prepare("update `tl_repository_installs` set `error`='1' where `id`=?")->execute($instId);
 				$rep->log .= '<div class="color_red">'.$text['actionfailed'].'</div>';
 			} else {
-				$db->prepare("delete from `tl_repository_installs` where `id`=?")->executeUncached($instId);
+				$db->prepare("delete from `tl_repository_installs` where `id`=?")->execute($instId);
 				$rep->log .= '<div class="color_green">'.$text['actionsuccess'].'</div>';
 			} // if
-			$this->log('Extension "'. $aName .'" has been uninstalled', 'RepositoryManager::uninstallExtension()', TL_REPOSITORY);
+			$this->log('Extension "'. $aName .'" has been uninstalled', __METHOD__, TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .=
 				"<div class=\"color_red\">\n".
 				$exc->getMessage() . "<br/>\n".
-				$exc->getFile() . '[' .$exc->getLine() . ']'.
 				"</div>\n";
 			error_log(sprintf('Extension Manager: %s in %s on line %s', $exc->getMessage(), $exc->getFile(), $exc->getLine()));
 			$err = true;
@@ -1255,14 +1263,14 @@ class RepositoryManager extends RepositoryBackendModule
 				} // if
 				break;
 			} // foreach version
-		} // while
+		} // foreach
 
 		// find display status for each extension
 		foreach ($exts as &$ext) {
 			$ext->status = array();
 
 			// code red
-			if ((int)$e->error>0)
+			if ((int)$ext->error>0)
 				$ext->status[] = (object)array(
 					'color'	=> 'red',
 					'text'	=> 'errorinstall'

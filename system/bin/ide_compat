@@ -1,0 +1,166 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+// Include the helper functions
+define('TL_ROOT', dirname(dirname(__DIR__)));
+include TL_ROOT . '/system/helper/functions.php';
+
+$arrCompat = array();
+
+// Scan all modules
+$arrModules = array_filter(scan(TL_ROOT . '/system/modules'), function($e) {
+	return is_dir(TL_ROOT . '/system/modules/' . $e) ? $e : null;
+});
+
+foreach ($arrModules as $strModule) {
+	$arrFiles = array();
+
+	// Default configuration
+	$arrDefaultConfig = array(
+		'register_namespaces' => true,
+		'register_classes'    => true,
+		'register_templates'  => true,
+	);
+
+	// Create the autoload.ini file if it does not yet exist
+	if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini')) {
+		copy(TL_ROOT . '/system/modules/devtools/templates/dev_ini.html5', TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini');
+	}
+
+	$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
+
+	// Recursively scan all subfolders
+	$objFiles = new \RecursiveIteratorIterator(
+		new \RecursiveDirectoryIterator(
+			TL_ROOT . '/system/modules/' . $strModule,
+			\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
+		)
+	);
+
+	// Get all PHP files
+	foreach ($objFiles as $objFile) {
+		if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php') {
+			$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
+
+			if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0) {
+				$arrFiles[] = $strRelpath;
+			}
+		}
+	}
+
+	// Scan for classes
+	foreach ($arrFiles as $strFile) {
+		$arrConfig = $arrDefaultConfig;
+
+		// Search for a path configuration (see #4776)
+		foreach ($arrDefaultConfig as $strPattern=>$arrPathConfig) {
+
+			// Merge the path configuration with the global configuration
+			if (is_array($arrPathConfig) && fnmatch($strPattern, $strFile)) {
+				$arrConfig = array_merge($arrDefaultConfig, $arrPathConfig);
+				break;
+			}
+		}
+
+		// Continue if neither namespaces nor classes shall be registered
+		if (!$arrConfig['register_namespaces'] && !$arrConfig['register_classes']) {
+			continue;
+		}
+
+		$strBuffer = '';
+		$arrMatches = array();
+
+		// Open the file for reading
+		$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
+
+		// Read until a class or interface definition has been found
+		while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches)) {
+			$strBuffer .= fread($fh, 512);
+		}
+
+		fclose($fh);
+
+		// The file does not contain a class or interface
+		if (empty($arrMatches)) {
+			continue;
+		}
+
+		$strType = $arrMatches[1];
+		$strNamespace = preg_replace('/^.*namespace ([^; ]+);.*$/s', '$1', $strBuffer);
+
+		// No namespace declaration found
+		if ($strNamespace == $strBuffer) {
+			continue;
+		}
+
+		$strRest = '';
+		$strFirst = $strNamespace;
+
+		if (strpos($strNamespace, '\\') !== false) {
+			list($strFirst, $strRest) = explode('\\', $strNamespace, 2);
+		}
+
+		// Add the ide_compat information
+		$arrCompat[$strModule][$strRest][] = array(
+			'namespace' => $strFirst,
+			'class'     => basename($strFile, '.php'),
+			'abstract'  => preg_match('/^.*abstract ' . preg_quote($strType, '/') . ' [^;]+.*$/s', $strBuffer),
+			'type'      => $strType
+		);
+
+		unset($strBuffer);
+	}
+}
+
+$intYear = date('Y');
+$fh = fopen(TL_ROOT . '/system/helper/ide_compat.php', 'wb');
+
+// Write the file
+fputs($fh, <<<EOT
+<?php
+
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-$intYear Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+/**
+ * This file is not used in Contao. Its only purpose is to make PHP IDEs like
+ * Eclipse, Zend Studio or PHPStorm realize the class origins, since the dynamic
+ * class aliasing we are using is a bit too complex for them to understand.
+ */
+
+EOT
+);
+
+// Add the classes
+foreach ($arrCompat as $strModule=>$arrNamespaces) {
+	fputs($fh, "\n// " . $strModule . "\n");
+
+	foreach ($arrNamespaces as $strNamespace=>$arrClasses) {
+		fputs($fh, 'namespace ' . $strNamespace . " {\n");
+
+		foreach ($arrClasses as $arrClass) {
+			fputs($fh, "\t" . ($arrClass['abstract'] ? 'abstract ' : '') . $arrClass['type'] . ' ' . $arrClass['class'] . ' extends \\' . $arrClass['namespace'] . '\\' . ($strNamespace ? $strNamespace . '\\' : '') . $arrClass['class'] . " {}\n");
+		}
+
+		fputs($fh, "}\n");
+	}
+}
+
+fclose($fh);

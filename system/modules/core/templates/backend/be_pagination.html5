@@ -1,5 +1,5 @@
 
-<div class="pagination">
+<div class="pagination <?php echo $this->class; ?>">
 
   <p><?php echo $this->total; ?></p>
 

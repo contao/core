@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ImageSize
  *
  * Provide methods to handle image size fields.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -139,14 +139,15 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>',
+		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
 								$this->strName,
 								$this->strId.'_3',
+								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
 
-		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,
-						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}

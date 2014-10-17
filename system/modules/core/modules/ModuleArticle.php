@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleArticle
  *
  * Provides methodes to handle articles.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -48,13 +48,13 @@ class ModuleArticle extends \Module
 	 */
 	public function generate($blnNoMarkup=false)
 	{
-		$this->type = 'article';
-		$this->blnNoMarkup = $blnNoMarkup;
-
-		if (!BE_USER_LOGGED_IN && (!$this->published || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN && (!$this->published || ($this->start != '' && $this->start > time()) || ($this->stop != '' && $this->stop < time())))
 		{
 			return '';
 		}
+
+		$this->type = 'article';
+		$this->blnNoMarkup = $blnNoMarkup;
 
 		return parent::generate();
 	}
@@ -73,9 +73,9 @@ class ModuleArticle extends \Module
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = $this->alias ?: $this->title;
+		$alias = $this->alias ?: 'article';
 
-		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
+		if (in_array($alias, array('article', 'top', 'wrapper', 'header', 'container', 'left', 'main', 'right', 'footer')))
 		{
 			$alias .= '-' . $this->id;
 		}
@@ -124,7 +124,7 @@ class ModuleArticle extends \Module
 				$this->cssID = $arrCss;
 			}
 
-			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->alias != '') ? $this->alias : $this->id;
+			$article = (!\Config::get('disableAlias') && $this->alias != '') ? $this->alias : $this->id;
 			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
@@ -161,17 +161,8 @@ class ModuleArticle extends \Module
 		// Back link
 		if (!$this->multiMode && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias))
 		{
+			$this->Template->backlink = 'javascript:history.go(-1)'; // see #6955
 			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
-
-			// Remove the "/articles/…" part from the URL
-			if ($GLOBALS['TL_CONFIG']['disableAlias'])
-			{
-				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', \Environment::get('request'));
-			}
-			else
-			{
-				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . $GLOBALS['TL_CONFIG']['urlSuffix'];
-			}
 		}
 
 		$arrElements = array();
@@ -179,9 +170,31 @@ class ModuleArticle extends \Module
 
 		if ($objCte !== null)
 		{
+			$intCount = 0;
+			$intLast = $objCte->count() - 1;
+
 			while ($objCte->next())
 			{
-				$arrElements[] = $this->getContentElement($objCte->current(), $this->strColumn);
+				$arrCss = array();
+				$objRow = $objCte->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					if ($intCount == 0)
+					{
+						$arrCss[] = 'first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[] = 'last';
+					}
+				}
+
+				$objRow->classes = $arrCss;
+				$arrElements[] = $this->getContentElement($objRow, $this->strColumn);
+				++$intCount;
 			}
 		}
 
@@ -245,7 +258,7 @@ class ModuleArticle extends \Module
 
 		// Generate article
 		$strArticle = $this->replaceInsertTags($this->generate(), false);
-		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, \Config::get('characterSet'));
 		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
 
 		// Remove form elements and JavaScript links
@@ -267,8 +280,15 @@ class ModuleArticle extends \Module
 			}
 		}
 
+		// URL decode image paths (see #6411)
+		$strArticle = preg_replace_callback('@(src="[^"]+")@', function($arg) {
+			return rawurldecode($arg[0]);
+		}, $strArticle);
+
 		// Handle line breaks in preformatted text
-		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', function ($arg) {
+			return str_replace("\n", '<br>', $arg[0]);
+		}, $strArticle);
 
 		// Default PDF export using TCPDF
 		$arrSearch = array
@@ -295,13 +315,12 @@ class ModuleArticle extends \Module
 
 		// TCPDF configuration
 		$l['a_meta_dir'] = 'ltr';
-		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
+		$l['a_meta_charset'] = \Config::get('characterSet');
 		$l['a_meta_language'] = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
 		$l['w_page'] = 'page';
 
 		// Include library
 		require_once TL_ROOT . '/system/config/tcpdf.php';
-		require_once TL_ROOT . '/system/modules/core/vendor/tcpdf/tcpdf.php';
 
 		// Create new PDF document
 		$pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);

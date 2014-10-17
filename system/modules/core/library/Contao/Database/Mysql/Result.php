@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -18,7 +18,7 @@ namespace Contao\Database\Mysql;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Result extends \Database\Result
 {
@@ -30,7 +30,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_row()
 	{
-		return @mysql_fetch_row($this->resResult);
+		return mysql_fetch_row($this->resResult);
 	}
 
 
@@ -41,7 +41,7 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_assoc()
 	{
-		return @mysql_fetch_assoc($this->resResult);
+		return mysql_fetch_assoc($this->resResult);
 	}
 
 
@@ -52,7 +52,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_rows()
 	{
-		return @mysql_num_rows($this->resResult);
+		return mysql_num_rows($this->resResult);
 	}
 
 
@@ -63,7 +63,7 @@ class Result extends \Database\Result
 	 */
 	protected function num_fields()
 	{
-		return @mysql_num_fields($this->resResult);
+		return mysql_num_fields($this->resResult);
 	}
 
 
@@ -76,7 +76,37 @@ class Result extends \Database\Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return @mysql_fetch_field($this->resResult, $intOffset);
+		return mysql_fetch_field($this->resResult, $intOffset);
+	}
+
+
+	/**
+	 * Navigate to a certain row in the result set
+	 *
+	 * @param integer $intIndex The row index
+	 *
+	 * @throws \OutOfBoundsException If $intIndex is out of bounds
+	 */
+	protected function data_seek($intIndex)
+	{
+		if ($intIndex < 0)
+		{
+			throw new \OutOfBoundsException("Invalid index $intIndex (must be >= 0)");
+		}
+
+		$intTotal = $this->num_rows();
+
+		if ($intTotal <= 0)
+		{
+			return; // see #6319
+		}
+
+		if ($intIndex >= $intTotal)
+		{
+			throw new \OutOfBoundsException("Invalid index $intIndex (only $intTotal rows in the result set)");
+		}
+
+		mysql_data_seek($this->resResult, $intIndex);
 	}
 
 
@@ -87,7 +117,7 @@ class Result extends \Database\Result
 	{
 		if (is_resource($this->resResult))
 		{
-			@mysql_free_result($this->resResult);
+			mysql_free_result($this->resResult);
 		}
 	}
 }

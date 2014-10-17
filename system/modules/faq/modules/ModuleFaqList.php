@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Faq
  * @link    https://contao.org
@@ -20,7 +20,7 @@ namespace Contao;
 /**
  * Class ModuleFaqList
  *
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Faq
  */
@@ -68,7 +68,7 @@ class ModuleFaqList extends \Module
 		}
 
 		// Show the FAQ reader if an item has been selected
-		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || (\Config::get('useAutoItem') && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->faq_readerModule, $this->strColumn);
 		}
@@ -96,12 +96,15 @@ class ModuleFaqList extends \Module
 		while ($objFaq->next())
 		{
 			$arrTemp = $objFaq->row();
-
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
+			// Get the FAQ category
+			$objPid = $objFaq->getRelated('pid');
+
 			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->getRelated('pid')->headline;
+			$arrFaq[$objFaq->pid]['headline'] = $objPid->headline;
+			$arrFaq[$objFaq->pid]['title'] = $objPid->title;
 		}
 
 		$arrFaq = array_values(array_filter($arrFaq));
@@ -131,10 +134,17 @@ class ModuleFaqList extends \Module
 	 * Create links and remember pages that have been processed
 	 * @param object
 	 * @return string
+	 * @throws \Exception
 	 */
 	protected function generateFaqLink($objFaq)
 	{
 		$jumpTo = intval($objFaq->getRelated('pid')->jumpTo);
+
+		// A jumpTo page is not mandatory for FAQ categories (see #6226) but required for the FAQ list module
+		if ($jumpTo < 1)
+		{
+			throw new \Exception("FAQ categories without redirect page cannot be used in an FAQ list");
+		}
 
 		// Get the URL from the jumpTo page of the category
 		if (!isset($this->arrTargets[$jumpTo]))
@@ -147,11 +157,11 @@ class ModuleFaqList extends \Module
 
 				if ($objTarget !== null)
 				{
-					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s')));
+					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s')));
 				}
 			}
 		}
 
-		return sprintf($this->arrTargets[$jumpTo], ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+		return sprintf($this->arrTargets[$jumpTo], ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 	}
 }

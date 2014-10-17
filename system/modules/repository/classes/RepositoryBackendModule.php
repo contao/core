@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package   Repository
  * @author    Peter Koch, IBK Software AG
@@ -83,11 +83,11 @@ class RepositoryBackendModule extends BackendModule
 
 		// load other helpers
 		$this->tl_root = str_replace("\\",'/',TL_ROOT).'/';
-		$this->tl_files = str_replace("\\",'/',$GLOBALS['TL_CONFIG']['uploadPath']).'/';
+		$this->tl_files = str_replace("\\",'/',Config::get('uploadPath')).'/';
 		System::loadLanguageFile('tl_repository');
 		System::loadLanguageFile('languages');
 		$this->Template->rep = $this->rep;
-		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
+		$this->languages = rtrim(str_replace('-', '_', $GLOBALS['TL_LANGUAGE']).','.trim(Config::get('repository_languages')),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));
 
 		// complete rep initialization
@@ -99,55 +99,61 @@ class RepositoryBackendModule extends BackendModule
 		$rep->backLink	= $this->getReferer(true);
 		$rep->homeLink	= $this->createUrl();
 
-		// load soap client in case wsdl file is defined
-		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
-		if ($wsdl != '') {
-			try {
-				if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
-				// Buggy gzencode call in PHP 5.4.0-5.4.3 (thanks to borrible13th) (see #4087)
-				if (version_compare(PHP_VERSION, '5.4.0', '>=') && version_compare(PHP_VERSION, '5.4.4', '<')) {
-					define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_DEFLATE);
-				} else {
-					define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_GZIP);
+		// load soap client in case wsdl file is defined (see #6561)
+		if (extension_loaded('soap')) {
+			$wsdl = trim(Config::get('repository_wsdl'));
+			if ($wsdl != '') {
+				try {
+					if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
+					// Buggy gzencode call in PHP 5.4.0-5.4.3 (thanks to borrible13th) (see #4087)
+					if (version_compare(PHP_VERSION, '5.4.0', '>=') && version_compare(PHP_VERSION, '5.4.4', '<')) {
+						define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_DEFLATE);
+					} else {
+						define('SOAP_COMPRESSION_FIXED', SOAP_COMPRESSION_GZIP);
+					}
+					// HOOK: proxy module
+					if (Config::get('useProxy')) {
+						$proxy_uri = parse_url(Config::get('proxy_url'));
+						$this->client = new SoapClient($wsdl, array(
+							'soap_version' => SOAP_1_2,
+							'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1,
+							'proxy_host' => $proxy_uri['host'],
+							'proxy_port' => $proxy_uri['port'],
+							'proxy_login' => $proxy_uri['user'],
+							'proxy_password' => $proxy_uri['pass']
+						));
+					}
+					// Default client
+					else {
+						$this->client = new SoapClient($wsdl, array(
+							'soap_version' => SOAP_1_2,
+							'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1
+						));
+					}
+					$this->mode = 'soap';
+				} catch (SoapFault $e) {
+					$rep->installLink = $this->createUrl(array());
+					$rep->updateLink = $this->createUrl(array('update'=>'database'));
+					$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">' . $e->getMessage() . '</p>';
+					if ($compiler == 'update') $this->$compiler($this->parameter);
+					return;
 				}
-				// HOOK: proxy module
-				if ($GLOBALS['TL_CONFIG']['useProxy']) {
-					$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
-					$this->client = new SoapClient($wsdl, array(
-						'soap_version' => SOAP_1_2,
-						'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1,
-						'proxy_host' => $proxy_uri['host'],
-						'proxy_port' => $proxy_uri['port'],
-						'proxy_login' => $proxy_uri['user'],
-						'proxy_password' => $proxy_uri['pass']
-					));
-				}
-				// Default client
-				else {
-					$this->client = new SoapClient($wsdl, array(
-						'soap_version' => SOAP_1_2,
-						'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_FIXED | 1
-					));
-				}
-				$this->mode = 'soap';
-			} catch (Exception $e) {
-				$rep->installLink = $this->createUrl(array());
-				$rep->updateLink = $this->createUrl(array('update'=>'database'));
-				$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">Could not connect to the repository server</p>';
-				if ($compiler == 'update') $this->$compiler($this->parameter);
-				return;
-			}
-		} else {
-			// fallback to load RepositoryServer class if on central server
-			if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
-				$this->import('RepositoryServer');
-				$this->RepositoryServer->enableLocal();
-				$this->mode = 'local';
+			} else {
+				// fallback to load RepositoryServer class if on central server
+				if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
+					$this->import('RepositoryServer');
+					$this->RepositoryServer->enableLocal();
+					$this->mode = 'local';
+				} // if
 			} // if
-		}
+		} // if
 
 		// execute compiler
-		$this->$compiler($this->parameter);
+		try {
+			$this->$compiler($this->parameter);
+		} catch (SoapFault $e) {
+			$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">' . $e->getMessage() . '</p>';
+		}
 
 		// do not execute hooks upon installation/removal (see #2448)
 		if ($compiler == 'install' || $compiler == 'upgrade' || $compiler == 'uninstall') {
@@ -173,7 +179,7 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	protected function createPageUrl($aPage, $aParams = null)
 	{
-		$url = Environment::get('script') . '?do='.$aPage;
+		$url = TL_SCRIPT . '?do='.$aPage;
 		if (is_array($aParams)) {
 			foreach ($aParams as $key => $val)
 				if ($val!='')

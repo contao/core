@@ -1,0 +1,49 @@
+<?php
+
+$theme = Backend::getTheme();
+
+System::loadLanguageFile('exception');
+$lang = (object) $GLOBALS['TL_LANG']['XPT'];
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title><?php echo $lang->notFound; ?></title>
+  <meta name="generator" content="Contao Open Source CMS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <style><?php
+    include TL_ROOT . '/system/themes/' . $theme . '/basic.css';
+    include TL_ROOT . '/system/themes/' . $theme . '/error.css';
+  ?></style>
+
+</head>
+<body class="<?php echo Environment::get('agent')->class; ?>">
+
+  <div id="header">
+    <h1>Contao Open Source CMS</h1>
+  </div>
+
+  <div id="container">
+
+    <div id="main">
+
+      <h2><?php echo $lang->notFound; ?></h2>
+
+      <h3><?php echo $lang->matter; ?></h3>
+      <p><?php echo $lang->pageNotFound; ?></p>
+
+      <h3><?php echo $lang->howToFix; ?></h3>
+      <p><?php printf($lang->notFoundFix, Environment::get('base'), String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+
+    </div>
+
+    <p class="hint"><?php printf($lang->hint, 'templates/be_no_page.html5'); ?></p>
+
+  </div>
+
+</body>
+</html>

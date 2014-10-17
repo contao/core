@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentCode
  *
  * Front end content element "code".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -103,17 +103,17 @@ class ContentCode extends \ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.css||static';
+			$GLOBALS['TL_CSS'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/shCore.css|static';
 
 			// Add the JavaScripts
-			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/XRegExp.js';
-			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shCore.js';
-			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/' . $arrMapper[$this->highlight] . '.js';
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/XRegExp.js';
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/shCore.js';
+			$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/' . $arrMapper[$this->highlight] . '.js';
 
 			// The shBrushXml.js file is required for the "html-script" option (see #4748)
 			if ($this->shClass != '' && strpos($this->shClass, 'html-script') !== false)
 			{
-				$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/'.HIGHLIGHTER.'/shBrushXml.js';
+				$GLOBALS['TL_HIGHLIGHTER'][] = 'assets/highlighter/' . $GLOBALS['TL_ASSETS']['HIGHLIGHTER'] . '/shBrushXml.js';
 			}
 		}
 	}

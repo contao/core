@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentYouTube
  *
  * Content element "YouTube".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -78,15 +78,18 @@ class ContentYouTube extends \ContentElement
 		// Optional poster
 		if ($this->posterSRC != '')
 		{
-			if (($objFile = \FilesModel::findByPk($this->posterSRC)) !== null)
+			if (($objFile = \FilesModel::findByUuid($this->posterSRC)) !== null)
 			{
 				$this->Template->poster = $objFile->path;
 			}
 		}
 
+		// Check for SSL (see #6900)
+		$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
+
 		$objFile = new \stdClass();
 		$objFile->mime = 'video/x-youtube';
-		$objFile->path = 'http://www.youtube.com/watch?v=' . $this->youtube;
+		$objFile->path = $protocol . 'www.youtube.com/watch?v=' . $this->youtube;
 
 		$this->Template->isVideo = true;
 		$this->Template->files = array($objFile);

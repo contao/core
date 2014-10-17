@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Faq
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleFaq
  *
  * Provide methods regarding FAQs.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Faq
  */
@@ -70,7 +70,6 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
 
 					// The target page does not exist
@@ -85,24 +84,29 @@ class ModuleFaq extends \Frontend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
+					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objFaq->jumpTo];
 
 				// Get the items
-				$objItems = \FaqModel::findByPid($objFaq->id, array('order'=>'sorting'));
+				$objItems = \FaqModel::findPublishedByPid($objFaq->id);
 
 				if ($objItems !== null)
 				{
 					while ($objItems->next())
 					{
-						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItems->alias : $objItems->id));
+						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !\Config::get('disableAlias')) ? $objItems->alias : $objItems->id));
 					}
 				}
 			}

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -11,10 +11,9 @@
  */
 
 /**
- * This file is not used in Contao. Its only purpose is to make
- * PHP IDEs like Eclipse, Zend Studio or PHPStorm realize the
- * class origins, since the dynamic class aliasing we are using
- * is a bit too complex for them to understand.
+ * This file is not used in Contao. Its only purpose is to make PHP IDEs like
+ * Eclipse, Zend Studio or PHPStorm realize the class origins, since the dynamic
+ * class aliasing we are using is a bit too complex for them to understand.
  */
 
 // calendar
@@ -47,6 +46,7 @@ namespace  {
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
 	class DataContainer extends \Contao\DataContainer {}
+	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}
 	class FrontendTemplate extends \Contao\FrontendTemplate {}
@@ -59,6 +59,21 @@ namespace  {
 	class StyleSheets extends \Contao\StyleSheets {}
 	class Theme extends \Contao\Theme {}
 	class Versions extends \Contao\Versions {}
+	class BackendChangelog extends \Contao\BackendChangelog {}
+	class BackendConfirm extends \Contao\BackendConfirm {}
+	class BackendFile extends \Contao\BackendFile {}
+	class BackendHelp extends \Contao\BackendHelp {}
+	class BackendIndex extends \Contao\BackendIndex {}
+	class BackendInstall extends \Contao\BackendInstall {}
+	class BackendMain extends \Contao\BackendMain {}
+	class BackendPage extends \Contao\BackendPage {}
+	class BackendPassword extends \Contao\BackendPassword {}
+	class BackendPopup extends \Contao\BackendPopup {}
+	class BackendPreview extends \Contao\BackendPreview {}
+	class BackendSwitch extends \Contao\BackendSwitch {}
+	class FrontendCron extends \Contao\FrontendCron {}
+	class FrontendIndex extends \Contao\FrontendIndex {}
+	class FrontendShare extends \Contao\FrontendShare {}
 	class DC_File extends \Contao\DC_File {}
 	class DC_Folder extends \Contao\DC_Folder {}
 	class DC_Table extends \Contao\DC_Table {}
@@ -77,6 +92,7 @@ namespace  {
 	class ContentHyperlink extends \Contao\ContentHyperlink {}
 	class ContentImage extends \Contao\ContentImage {}
 	class ContentList extends \Contao\ContentList {}
+	class ContentMarkdown extends \Contao\ContentMarkdown {}
 	class ContentMedia extends \Contao\ContentMedia {}
 	class ContentModule extends \Contao\ContentModule {}
 	class ContentSliderStart extends \Contao\ContentSliderStart {}
@@ -102,6 +118,7 @@ namespace  {
 	class FormTextArea extends \Contao\FormTextArea {}
 	class FormTextField extends \Contao\FormTextField {}
 	class Automator extends \Contao\Automator {}
+	abstract class BaseTemplate extends \Contao\BaseTemplate {}
 	class Cache extends \Contao\Cache {}
 	class ClassLoader extends \Contao\ClassLoader {}
 	class Combiner extends \Contao\Combiner {}
@@ -111,6 +128,8 @@ namespace  {
 	class Date extends \Contao\Date {}
 	class Dbafs extends \Contao\Dbafs {}
 	class DcaExtractor extends \Contao\DcaExtractor {}
+	class DcaLoader extends \Contao\DcaLoader {}
+	class DiffRenderer extends \Contao\DiffRenderer {}
 	class Email extends \Contao\Email {}
 	class Encryption extends \Contao\Encryption {}
 	class Environment extends \Contao\Environment {}
@@ -130,6 +149,7 @@ namespace  {
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
 	class Session extends \Contao\Session {}
+	class SortedIterator extends \Contao\SortedIterator {}
 	class String extends \Contao\String {}
 	abstract class System extends \Contao\System {}
 	abstract class Template extends \Contao\Template {}
@@ -227,16 +247,18 @@ namespace Database\Mysqli {
 	class Result extends \Contao\Database\Mysqli\Result {}
 	class Statement extends \Contao\Database\Mysqli\Statement {}
 }
-namespace Dbafs {
-	class Filter extends \Contao\Dbafs\Filter {}
-}
 namespace Files {
 	class Ftp extends \Contao\Files\Ftp {}
 	class Php extends \Contao\Files\Php {}
 }
+namespace Filter {
+	class SqlFiles extends \Contao\Filter\SqlFiles {}
+	class SyncExclude extends \Contao\Filter\SyncExclude {}
+}
 namespace Model {
 	class Collection extends \Contao\Model\Collection {}
 	class QueryBuilder extends \Contao\Model\QueryBuilder {}
+	class Registry extends \Contao\Model\Registry {}
 }
 
 // devtools

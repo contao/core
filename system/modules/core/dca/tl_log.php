@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -45,7 +45,6 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		(
 			'fields'                  => array('tstamp', 'text'),
 			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span> %s',
-			'maxCharacters'           => 96,
 			'label_callback'          => array('tl_log', 'colorize')
 		),
 		'global_operations' => array
@@ -151,7 +150,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
  * Class tl_log
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -180,8 +179,19 @@ class tl_log extends Backend
 			case 'ERROR':
 				$label = preg_replace('@^(.*</span> )(.*)$@U', '$1 <span class="tl_red">$2</span>', $label);
 				break;
+
+			default:
+				if (isset($GLOBALS['TL_HOOKS']['colorizeLogEntries']) && is_array($GLOBALS['TL_HOOKS']['colorizeLogEntries']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['colorizeLogEntries'] as $callback)
+					{
+						$this->import($callback[0]);
+						$label = $this->$callback[0]->$callback[1]($row, $label);
+					}
+				}
+				break;
 		}
 
-		return $label;
+		return '<div class="ellipsis">' . $label . '</div>';
 	}
 }

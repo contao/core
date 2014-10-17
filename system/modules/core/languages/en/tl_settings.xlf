@@ -50,12 +50,6 @@
       <trans-unit id="tl_settings.characterSet.1">
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
       </trans-unit>
-      <trans-unit id="tl_settings.customSections.0">
-        <source>Custom layout sections</source>
-      </trans-unit>
-      <trans-unit id="tl_settings.customSections.1">
-        <source>Here you can enter a comma separated list of custom layout sections.</source>
-      </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
       </trans-unit>
@@ -66,7 +60,7 @@
         <source>Minify the markup</source>
       </trans-unit>
       <trans-unit id="tl_settings.minifyMarkup.1">
-        <source>Minify the HTML markup before it is sent to the browser (requires the PHP tidy extension).</source>
+        <source>Minify the HTML markup before it is sent to the browser.</source>
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.0">
         <source>Compress scripts</source>
@@ -110,6 +104,18 @@
       <trans-unit id="tl_settings.cacheMode.1">
         <source>Here you can select the cache mode.</source>
       </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.0">
+        <source>Trusted proxy servers</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.proxyServerIps.1">
+        <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.0">
+        <source>SSL proxy domain</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.sslProxyDomain.1">
+        <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
+      </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
       </trans-unit>
@@ -132,7 +138,7 @@
         <source>Add the language to the URL</source>
       </trans-unit>
       <trans-unit id="tl_settings.addLanguageToUrl.1">
-        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://domain.tld/en/&lt;/em&gt;).</source>
+        <source>Add the language string as first URL parameter (e.g. &lt;em&gt;http://example.com/en/&lt;/em&gt;).</source>
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.0">
         <source>Do not redirect empty URLs</source>
@@ -169,6 +175,12 @@
       </trans-unit>
       <trans-unit id="tl_settings.debugMode.1">
         <source>Print certain runtime information like database queries to the screen.</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.0">
+        <source>Maintenance mode</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.maintenanceMode.1">
+        <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -419,8 +431,8 @@
       <trans-unit id="tl_settings.frontend_legend">
         <source>Front end configuration</source>
       </trans-unit>
-      <trans-unit id="tl_settings.sections_legend">
-        <source>Layout sections</source>
+      <trans-unit id="tl_settings.proxy_legend">
+        <source>Proxy configuration</source>
       </trans-unit>
       <trans-unit id="tl_settings.privacy_legend">
         <source>Privacy settings</source>
@@ -445,6 +457,9 @@
       </trans-unit>
       <trans-unit id="tl_settings.modules_legend">
         <source>Inactive extensions</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.cron_legend">
+        <source>Command scheduler</source>
       </trans-unit>
       <trans-unit id="tl_settings.timeout_legend">
         <source>Timeout values</source>

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -25,7 +25,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Dbafs
 {
@@ -43,7 +43,7 @@ class Dbafs
 	 */
 	public static function addResource($strResource, $blnUpdateFolders=true)
 	{
-		$strUploadPath = $GLOBALS['TL_CONFIG']['uploadPath'] . '/';
+		$strUploadPath = \Config::get('uploadPath') . '/';
 
 		// Remove trailing slashes (see #5707)
 		if (substr($strResource, -1) == '/')
@@ -60,11 +60,12 @@ class Dbafs
 			throw new \InvalidArgumentException("Invalid resource $strResource");
 		}
 
-		$arrPaths  = array();
-		$arrChunks = explode('/', $strResource);
-		$strPath   = array_shift($arrChunks);
-		$arrPids   = array($strPath=>0);
-		$arrUpdate = array($strResource);
+		$arrPaths    = array();
+		$arrChunks   = explode('/', $strResource);
+		$strPath     = array_shift($arrChunks);
+		$arrPids     = array($strPath => null);
+		$arrUpdate   = array($strResource);
+		$objDatabase = \Database::getInstance();
 
 		// Build the paths
 		while (count($arrChunks))
@@ -76,7 +77,7 @@ class Dbafs
 		unset($arrChunks);
 
 		$objModel  = null;
-		$objModels = \FilesModel::findMultipleByPaths($arrPaths, array('cached'=>true));
+		$objModels = \FilesModel::findMultipleByPaths($arrPaths);
 
 		// Unset the entries in $arrPaths if the DB entry exists
 		if ($objModels !== null)
@@ -86,7 +87,7 @@ class Dbafs
 				if (($i = array_search($objModels->path, $arrPaths)) !== false)
 				{
 					unset($arrPaths[$i]);
-					$arrPids[$objModels->path] = $objModels->id;
+					$arrPids[$objModels->path] = $objModels->uuid;
 				}
 			}
 
@@ -110,7 +111,7 @@ class Dbafs
 		{
 			// Get a filtered list of all files
 			$objFiles = new \RecursiveIteratorIterator(
-				new \Dbafs\Filter(
+				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/' . $strResource,
 						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -140,9 +141,10 @@ class Dbafs
 			$strParent = dirname($strPath);
 
 			// The parent ID should be in $arrPids
-			if (isset($arrPids[$strParent]))
+			// Do not use isset() here, because the PID can be null
+			if (array_key_exists($strParent, $arrPids))
 			{
-				$intPid = $arrPids[$strParent];
+				$strPid = $arrPids[$strParent];
 			}
 			else
 			{
@@ -155,32 +157,34 @@ class Dbafs
 				$objFile = new \File($strPath, true);
 
 				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
+				$objModel->pid       = $strPid;
 				$objModel->tstamp    = time();
 				$objModel->name      = $objFile->name;
 				$objModel->type      = 'file';
 				$objModel->path      = $objFile->path;
 				$objModel->extension = $objFile->extension;
 				$objModel->hash      = $objFile->hash;
+				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFile->path] = $objModel->id;
+				$arrPids[$objFile->path] = $objModel->uuid;
 			}
 			else
 			{
 				$objFolder = new \Folder($strPath);
 
 				$objModel = new \FilesModel();
-				$objModel->pid       = $intPid;
+				$objModel->pid       = $strPid;
 				$objModel->tstamp    = time();
 				$objModel->name      = $objFolder->name;
 				$objModel->type      = 'folder';
 				$objModel->path      = $objFolder->path;
 				$objModel->extension = '';
 				$objModel->hash      = $objFolder->hash;
+				$objModel->uuid      = $objDatabase->getUuid();
 				$objModel->save();
 
-				$arrPids[$objFolder->path] = $objModel->id;
+				$arrPids[$objFolder->path] = $objModel->uuid;
 			}
 
 			// Store the model to be returned (see #5979)
@@ -210,7 +214,7 @@ class Dbafs
 	 */
 	public static function moveResource($strSource, $strDestination)
 	{
-		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+		$objFile = \FilesModel::findByPath($strSource);
 
 		// If there is no entry, directly add the destination
 		if ($objFile === null)
@@ -221,20 +225,20 @@ class Dbafs
 		$strFolder = dirname($strDestination);
 
 		// Set the new parent ID
-		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($strFolder == \Config::get('uploadPath'))
 		{
-			$objFile->pid = 0;
+			$objFile->pid = null;
 		}
 		else
 		{
-			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+			$objFolder = \FilesModel::findByPath($strFolder);
 
 			if ($objFolder === null)
 			{
 				$objFolder = static::addResource($strFolder);
 			}
 
-			$objFile->pid = $objFolder->id;
+			$objFile->pid = $objFolder->uuid;
 		}
 
 		// Save the resource
@@ -245,7 +249,7 @@ class Dbafs
 		// Update all child records
 		if ($objFile->type == 'folder')
 		{
-			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/');
 
 			if ($objFiles !== null)
 			{
@@ -258,11 +262,11 @@ class Dbafs
 		}
 
 		// Update the MD5 hash of the parent folders
-		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strSource)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
-		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strDestination)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
@@ -281,7 +285,8 @@ class Dbafs
 	 */
 	public static function copyResource($strSource, $strDestination)
 	{
-		$objFile = \FilesModel::findByPath($strSource, array('cached'=>true));
+		$objDatabase = \Database::getInstance();
+		$objFile = \FilesModel::findByPath($strSource);
 
 		// Add the source entry
 		if ($objFile === null)
@@ -293,24 +298,25 @@ class Dbafs
 		$objNewFile = clone $objFile->current();
 
 		// Set the new parent ID
-		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		if ($strFolder == \Config::get('uploadPath'))
 		{
-			$objNewFile->pid = 0;
+			$objNewFile->pid = null;
 		}
 		else
 		{
-			$objFolder = \FilesModel::findByPath($strFolder, array('cached'=>true));
+			$objFolder = \FilesModel::findByPath($strFolder);
 
 			if ($objFolder === null)
 			{
 				$objFolder = static::addResource($strFolder);
 			}
 
-			$objNewFile->pid = $objFolder->id;
+			$objNewFile->pid = $objFolder->uuid;
 		}
 
 		// Save the resource
 		$objNewFile->tstamp = time();
+		$objNewFile->uuid   = $objDatabase->getUuid();
 		$objNewFile->path   = $strDestination;
 		$objNewFile->name   = basename($strDestination);
 		$objNewFile->save();
@@ -318,7 +324,7 @@ class Dbafs
 		// Update all child records
 		if ($objFile->type == 'folder')
 		{
-			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/', array('cached'=>true));
+			$objFiles = \FilesModel::findMultipleByBasepath($strSource . '/');
 
 			if ($objFiles !== null)
 			{
@@ -326,8 +332,9 @@ class Dbafs
 				{
 					$objNew = clone $objFiles->current();
 
-					$objNew->pid    = $objNewFile->id;
+					$objNew->pid    = $objNewFile->uuid;
 					$objNew->tstamp = time();
+					$objNew->uuid   = $objDatabase->getUuid();
 					$objNew->path   = str_replace($strSource . '/', $strDestination . '/', $objFiles->path);
 					$objNew->save();
 				}
@@ -335,11 +342,11 @@ class Dbafs
 		}
 
 		// Update the MD5 hash of the parent folders
-		if (($strPath = dirname($strSource)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strSource)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
-		if (($strPath = dirname($strDestination)) != $GLOBALS['TL_CONFIG']['uploadPath'])
+		if (($strPath = dirname($strDestination)) != \Config::get('uploadPath'))
 		{
 			static::updateFolderHashes($strPath);
 		}
@@ -355,7 +362,7 @@ class Dbafs
 	 */
 	public static function deleteResource($strResource)
 	{
-		$objModel = \FilesModel::findByPath($strResource, array('uncached'=>true));
+		$objModel = \FilesModel::findByPath($strResource);
 
 		// Remove the resource
 		if ($objModel !== null)
@@ -420,7 +427,7 @@ class Dbafs
 		foreach (array_reverse($arrPaths) as $strPath)
 		{
 			$objFolder = new \Folder($strPath);
-			$objModel  = \FilesModel::findByPath($strPath, array('cached'=>true));
+			$objModel  = \FilesModel::findByPath($strPath);
 
 			// The DB entry does not yet exist
 			if ($objModel === null)
@@ -443,6 +450,10 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
+		// Try to raise the limits (see #7035)
+		@ini_set('memory_limit', -1);
+		@ini_set('max_execution_time', 0);
+
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
@@ -453,9 +464,9 @@ class Dbafs
 
 		// Get a filtered list of all files
 		$objFiles = new \RecursiveIteratorIterator(
-			new \Dbafs\Filter(
+			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(
-					TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'],
+					TL_ROOT . '/' . \Config::get('uploadPath'),
 					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
 				)
 			), \RecursiveIteratorIterator::SELF_FIRST
@@ -507,20 +518,20 @@ class Dbafs
 				$strParent = dirname($strRelpath);
 
 				// Get the parent ID
-				if ($strParent == $GLOBALS['TL_CONFIG']['uploadPath'])
+				if ($strParent == \Config::get('uploadPath'))
 				{
-					$intPid = 0;
+					$strPid = null;
 				}
 				else
 				{
-					$objParent = \FilesModel::findByPath($strParent, array('cached'=>true));
+					$objParent = \FilesModel::findByPath($strParent);
 
 					if ($objParent === null)
 					{
 						throw new \Exception("No parent entry for $strParent");
 					}
 
-					$intPid = $objParent->id;
+					$strPid = $objParent->uuid;
 				}
 
 				// Create the file or folder
@@ -529,13 +540,15 @@ class Dbafs
 					$objFile = new \File($strRelpath, true);
 
 					$objModel = new \FilesModel();
-					$objModel->pid       = $intPid;
+					$objModel->pid       = $strPid;
 					$objModel->tstamp    = time();
 					$objModel->name      = $objFile->name;
 					$objModel->type      = 'file';
 					$objModel->path      = $objFile->path;
 					$objModel->extension = $objFile->extension;
+					$objModel->found     = 2;
 					$objModel->hash      = $objFile->hash;
+					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
 				}
 				else
@@ -543,13 +556,15 @@ class Dbafs
 					$objFolder = new \Folder($strRelpath);
 
 					$objModel = new \FilesModel();
-					$objModel->pid       = $intPid;
+					$objModel->pid       = $strPid;
 					$objModel->tstamp    = time();
 					$objModel->name      = $objFolder->name;
 					$objModel->type      = 'folder';
 					$objModel->path      = $objFolder->path;
 					$objModel->extension = '';
+					$objModel->found     = 2;
 					$objModel->hash      = $objFolder->hash;
+					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
 				}
 			}
@@ -579,7 +594,7 @@ class Dbafs
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash, array('uncached'=>true));
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);
 
 				if ($objFound !== null)
 				{
@@ -609,7 +624,7 @@ class Dbafs
 					// Store the PID change
 					if ($objFiles->type == 'folder')
 					{
-						$arrPidUpdate[$objFound->id] = $objFiles->id;
+						$arrPidUpdate[$objFound->uuid] = $objFiles->uuid;
 					}
 
 					// Add a log entry BEFORE changing the object
@@ -660,6 +675,9 @@ class Dbafs
 
 		// Close the log file
 		$objLog->close();
+
+		// Reset the found flag
+		$objDatabase->query("UPDATE tl_files SET found=1 WHERE found=2");
 
 		// Unlock the tables
 		$objDatabase->unlockTables();

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleEventReader
  *
  * Front end module "event reader".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -55,7 +55,7 @@ class ModuleEventReader extends \Events
 		}
 
 		// Set the item from the auto_item parameter
-		if (!isset($_GET['events']) && $GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		if (!isset($_GET['events']) && \Config::get('useAutoItem') && isset($_GET['auto_item']))
 		{
 			\Input::setGet('events', \Input::get('auto_item'));
 		}
@@ -122,7 +122,21 @@ class ModuleEventReader extends \Events
 			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
-		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
+		$intStartTime = $objEvent->startTime;
+		$intEndTime = $objEvent->endTime;
+		$span = \Calendar::calculateSpan($intStartTime, $intEndTime);
+
+		// Do not show dates in the past if the event is recurring (see #923)
+		if ($objEvent->recurring)
+		{
+			$arrRange = deserialize($objEvent->repeatEach);
+
+			while ($intStartTime < time() && $intEndTime < $objEvent->repeatEnd)
+			{
+				$intStartTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $intStartTime);
+				$intEndTime = strtotime('+' . $arrRange['value'] . ' ' . $arrRange['unit'], $intEndTime);
+			}
+		}
 
 		if ($objPage->outputFormat == 'xhtml')
 		{
@@ -132,23 +146,23 @@ class ModuleEventReader extends \Events
 		}
 		else
 		{
-			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->startTime) . '">';
-			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->endTime) . '">';
+			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $intStartTime) . '">';
+			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $intEndTime) . '">';
 			$strTimeClose = '</time>';
 		}
 
 		// Get date
 		if ($span > 0)
 		{
-			$date = $strTimeStart . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->endTime) . $strTimeClose;
+			$date = $strTimeStart . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $intStartTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $intEndTime) . $strTimeClose;
 		}
-		elseif ($objEvent->startTime == $objEvent->endTime)
+		elseif ($intStartTime == $intEndTime)
 		{
-			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $objEvent->startTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $intStartTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStartTime) . ')' : '') . $strTimeClose;
 		}
 		else
 		{
-			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse($objPage->timeFormat, $objEvent->endTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . \Date::parse($objPage->dateFormat, $intStartTime) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStartTime) . $strTimeClose . ' - ' . $strTimeEnd . \Date::parse($objPage->timeFormat, $intEndTime) . ')' : '') . $strTimeClose;
 		}
 
 		$until = '';
@@ -182,8 +196,8 @@ class ModuleEventReader extends \Events
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
-		$objTemplate->start = $objEvent->startTime;
-		$objTemplate->end = $objEvent->endTime;
+		$objTemplate->begin = $intStartTime;
+		$objTemplate->end = $intEndTime;
 		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
@@ -196,7 +210,7 @@ class ModuleEventReader extends \Events
 		{
 			while ($objElement->next())
 			{
-				$objTemplate->details .= $this->getContentElement($objElement->id);
+				$objTemplate->details .= $this->getContentElement($objElement->current());
 			}
 		}
 
@@ -205,19 +219,22 @@ class ModuleEventReader extends \Events
 		// Add an image
 		if ($objEvent->addImage && $objEvent->singleSRC != '')
 		{
-			if (!is_numeric($objEvent->singleSRC))
-			{
-				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
+			$objModel = \FilesModel::findByUuid($objEvent->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($objEvent->singleSRC))
 				{
-					$objEvent->singleSRC = $objModel->path;
-					$this->addImageToTemplate($objTemplate, $objEvent->row());
+					$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				// Do not override the field now that we have a model registry (see #6303)
+				$arrEvent = $objEvent->row();
+				$arrEvent['singleSRC'] = $objModel->path;
+
+				$this->addImageToTemplate($objTemplate, $arrEvent);
 			}
 		}
 
@@ -232,7 +249,7 @@ class ModuleEventReader extends \Events
 		$this->Template->event = $objTemplate->parse();
 
 		// HOOK: comments extension required
-		if ($objEvent->noComments || !in_array('comments', $this->Config->getActiveModules()))
+		if ($objEvent->noComments || !in_array('comments', \ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
 			return;

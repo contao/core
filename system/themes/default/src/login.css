@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -26,7 +26,6 @@ body {
 #header h1 {
 	margin:0;
 	padding:4px 8px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 	border-radius:3px 3px 0 0;
 }
@@ -55,19 +54,20 @@ body {
 	padding:6px 0 8px 40px;
 	background:url("images/logo.gif") no-repeat left center;
 	font-size:14px;
+	font-size:.875rem;
 	color:#8ab858;
 }
 
 /* Front end link */
 #go_to_frontend {
-	margin:-6px 18px 12px 0;
+	margin:0 18px 12px 0;
 	padding:0;
 	text-align:right;
 }
 #go_to_frontend a {
 	padding:2px 0 3px 20px;
 	background:url("images/login.gif") no-repeat left center;
-	color:#bbb;
+	color:#aaa;
 }
 
 /* License (do not remove) */
@@ -79,10 +79,10 @@ body {
 	text-align:justify;
 }
 #tl_license p,#tl_license a {
-	color:#888b88;
+	color:#777;
 }
 #tl_license a:hover,#tl_license a:focus,#tl_license a:active {
-	color:#8ab858;
+	color:#77ac45;
 }
 
 /* Error messages */
@@ -92,22 +92,22 @@ body {
 	background:url("images/error.gif") no-repeat left center;
 }
 .login_error label {
-	color:#c55;
+	color:#c33;
 }
 .tl_error,.tl_info,.tl_confirm {
 	margin:0 0 12px;
 	padding:2px 0 3px 20px;
 }
 .tl_error {
-	color:#c55;
+	color:#c33;
 	background:url("images/error.gif") no-repeat left center;
 }
 .tl_info {
-	color:#5c9ac9;
+	color:#4b85ba;
 	background:url("images/show.gif") no-repeat 1px center;
 }
 .tl_confirm {
-	color:#8ab858;
+	color:#77ac45;
 	background:url("images/ok.gif") no-repeat left center;
 }
 

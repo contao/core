@@ -1,7 +1,7 @@
 ##
 # Contao Open Source CMS
 #
-# Copyright (c) 2005-2013 Leo Feyer
+# Copyright (c) 2005-2014 Leo Feyer
 #
 # @package Core
 # @link    https://contao.org
@@ -26,7 +26,7 @@
 # @see https://github.com/h5bp/html5-boilerplate
 ##
 <IfModule mod_headers.c>
-  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font\.css)$">
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff2?|font\.css)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
@@ -58,7 +58,7 @@ FileETag None
   AddType application/vnd.ms-fontobject       eot
   AddType application/x-font-ttf              ttf ttc
   AddType font/opentype                       otf
-  AddType application/x-font-woff             woff
+  AddType application/x-font-woff             woff woff2
   AddType image/x-icon                        ico
   AddType image/webp                          webp
   AddType text/cache-manifest                 appcache manifest
@@ -175,7 +175,7 @@ FileETag None
   # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
   # have to change the <FilesMatch> directive as follows:
   #
-  # <FilesMatch "\.(?i:js|css|xml|gz)$">
+  # <FilesMatch "\.(?i:js|css|xml|gz|svgz)$">
   #
   # For more information see: https://github.com/contao/core/issues/4364
   ##
@@ -212,15 +212,15 @@ FileETag None
   ##
   # Uncomment the following lines to add "www." to the domain:
   #
-  #   RewriteCond %{HTTP_HOST} ^domain\.com$ [NC]
-  #   RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+  #   RewriteCond %{HTTP_HOST} ^example\.com$ [NC]
+  #   RewriteRule (.*) http://www.example.com/$1 [R=301,L]
   #
   # Uncomment the following lines to remove "www." from the domain:
   #
-  #   RewriteCond %{HTTP_HOST} ^www\.domain\.com$ [NC]
-  #   RewriteRule (.*) http://domain.com/$1 [R=301,L]
+  #   RewriteCond %{HTTP_HOST} ^www\.example\.com$ [NC]
+  #   RewriteRule (.*) http://example.com/$1 [R=301,L]
   #
-  # Make sure to replace "domain.com" with your domain name.
+  # Make sure to replace "example.com" with your domain name.
   ##
 
   ##
@@ -240,21 +240,6 @@ FileETag None
   #RewriteRule ^(.*)$ $1.gz [QSA,L]
 
   ##
-  # Do not rewrite requests for static files or folders such as style sheets,
-  # images, movies or text documents. Do not add the URL suffix here!
-  #
-  # Note: If you are using a case-sensitive file system like HFS+ or ext4, you
-  # have to change the <FilesMatch> directive as follows:
-  #
-  # <FilesMatch "\.(?i:htm|php|js|css| … |gz)$">
-  #
-  # For more information see: https://github.com/contao/core/issues/4364
-  ##
-  <FilesMatch "\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|woff|svg|svgz|ttf|pdf|gz)$">
-    RewriteEngine Off
-  </FilesMatch>
-
-  ##
   # By default, Contao adds ".html" to the generated URLs to simulate static
   # HTML documents. If you change the URL suffix in the back end settings, make
   # sure to change it here accordingly!
@@ -263,7 +248,7 @@ FileETag None
   #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
   #   RewriteRule .*\.json$ index.php [L]   # URL suffix .json
   #
-  # If you do not want to use an URL suffix at all, you have to add a second
+  # If you do not want to use an URL suffix at all, you have to add a third
   # line to prevent URLs that point to folders from being rewritten (see #4031).
   #
   #   RewriteCond %{REQUEST_FILENAME} !-d
@@ -276,12 +261,13 @@ FileETag None
   #
   # Note that not all environments support mod_rewrite and mod_cache.
   ##
+  RewriteCond %{REQUEST_FILENAME} !\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|otf|tt[cf]|woff2?|svgz?|pdf|gz)$
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule .*\.html$ index.php [L]
 
   ##
   # The following rules are required if you want to pass the language as first
-  # URL parameter (added in Contao 2.11). The first rule rewrites an empty URL
+  # URL parameter (added in Contao 2.11). The first rule rewrites the empty URL
   # to the front end controller, the second one adds a missing trailing slash.
   ##
   RewriteRule ^[a-z]{2}(\-[A-Z]{2})?/$ index.php [L]

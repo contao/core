@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -23,7 +23,7 @@ legend {
  * Text fields and textareas
  */
 input[type="text"],input[type="password"],input[type="date"],input[type="datetime"],input[type="email"],
-input[type="number"],input[type="search"],input[type="tel"],input[type="time"],input[type="url"],textarea {
+input[type="number"],input[type="search"],input[type="tel"],input[type="time"],input[type="url"],input:not([type]),textarea {
 	width:100%;
 	display:inline-block;
 	padding:3px 6px;
@@ -44,7 +44,7 @@ input[type="number"],input[type="search"],input[type="tel"],input[type="time"],i
 	box-sizing: border-box;
 }
 input[type="text"]:focus,input[type="password"]:focus,input[type="date"]:focus,input[type="datetime"]:focus,input[type="email"]:focus,
-input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="time"]:focus,input[type="url"]:focus,textarea:focus {
+input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="time"]:focus,input[type="url"]:focus,input:not([type]):focus,textarea:focus {
 	outline:0;
 	background:#fcfcfc;
 	border-color:#bbb;

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -127,18 +127,28 @@ function show_help_message()
 	}
 
 	header('HTTP/1.1 500 Internal Server Error');
+	die_nicely('be_error', 'An error occurred while executing this script!');
+}
 
-	if (file_exists(TL_ROOT . '/templates/be_error.html5'))
+
+/**
+ * Try to die with a template instead of just a message
+ * @param string
+ * @param string
+ */
+function die_nicely($strTemplate, $strFallback)
+{
+	if (file_exists(TL_ROOT . "/templates/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/templates/be_error.html5';
+		include TL_ROOT . "/templates/$strTemplate.html5";
 	}
-	elseif (file_exists(TL_ROOT . '/system/modules/core/templates/backend/be_error.html5'))
+	elseif (file_exists(TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5"))
 	{
-		include TL_ROOT . '/system/modules/core/templates/backend/be_error.html5';
+		include TL_ROOT . "/system/modules/core/templates/backend/$strTemplate.html5";
 	}
 	else
 	{
-		echo 'An error occurred while executing this script!';
+		echo $strFallback;
 	}
 
 	exit;
@@ -221,15 +231,15 @@ function specialchars($strString, $blnStripInsertTags=false)
 
 
 /**
- * Standardize a parameter (strip special characters and convert spaces to underscores)
+ * Standardize a parameter (strip special characters and convert spaces)
  * @param string
  * @param boolean
  * @return string
  */
 function standardize($strString, $blnPreserveUppercase=false)
 {
-	$arrSearch = array('/[^a-zA-Z0-9 _-]+/', '/ +/', '/\-+/');
-	$arrReplace = array('', '-', '-');
+	$arrSearch = array('/[^a-zA-Z0-9 \.\&\/_-]+/', '/[ \.\&\/-]+/');
+	$arrReplace = array('', '-');
 
 	$strString = html_entity_decode($strString, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 	$strString = strip_insert_tags($strString);
@@ -269,18 +279,35 @@ function strip_insert_tags($strString)
  */
 function deserialize($varValue, $blnForceArray=false)
 {
+	// Already an array
 	if (is_array($varValue))
 	{
 		return $varValue;
 	}
 
+	// Null
+	if ($varValue === null)
+	{
+		return $blnForceArray ? array() : null;
+	}
+
+	// Not a string
 	if (!is_string($varValue))
 	{
-		return $blnForceArray ? (($varValue === null) ? array() : array($varValue)) : $varValue;
+		return $blnForceArray ? array($varValue) : $varValue;
 	}
-	elseif (trim($varValue) == '')
+
+	// Empty string
+	if (trim($varValue) == '')
 	{
 		return $blnForceArray ? array() : '';
+	}
+
+	// Potentially including an object (see #6724)
+	if (preg_match('/[OoC]:\+?[0-9]+:"/', $varValue))
+	{
+		trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
+		return $blnForceArray ? array($varValue) : $varValue;
 	}
 
 	$varUnserialized = @unserialize($varValue);
@@ -395,17 +422,6 @@ function nl2br_pre($str, $xhtml=false)
 	}
 
 	return $str;
-}
-
-
-/**
- * Replace line breaks with <br> tags (to be used with preg_replace_callback)
- * @param array
- * @return string
- */
-function nl2br_callback($matches)
-{
-	return str_replace("\n", '<br>', $matches[0]);
 }
 
 
@@ -628,7 +644,13 @@ require TL_ROOT . '/system/helper/mbstring.php';
  */
 if (!USE_MBSTRING)
 {
-	// mb_convert_encoding
+	/**
+	 * Convert character encoding
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_convert_encoding($str, $to, $from=null)
 	{
 		if ($from === null)
@@ -637,13 +659,23 @@ if (!USE_MBSTRING)
 		return utf8_convert_encoding($str, $to, $from);
 	}
 
-	// mb_detect_encoding
+	/**
+	 * Detect the encoding of a string
+	 * @param string
+	 * @return string
+	 */
 	function mb_detect_encoding($str)
 	{
 		return utf8_detect_encoding($str);
 	}
 
-	// mb_stripos
+	/**
+	 * Find the last occurrence of a character in a string (case-insensitive)
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_stripos($haystack, $needle, $offset=null)
 	{
 		if ($offset === null)
@@ -652,19 +684,35 @@ if (!USE_MBSTRING)
 		return stripos($haystack, $needle, $offset);
 	}
 
-	// mb_stristr
+	/**
+	 * Find the first occurrence of a character in a string (case-insensitive)
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_stristr($haystack, $needle)
 	{
 		return stristr($haystack, $needle);
 	}
 
-	// mb_strlen
+	/**
+	 * Determine the number of characters of a string
+	 * @param string
+	 * @return integer
+	 */
 	function mb_strlen($str)
 	{
 		return utf8_strlen($str);
 	}
 
-	// mb_strpos
+	/**
+	 * Find the first occurrence of a character in a string
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_strpos($haystack, $needle, $offset=0)
 	{
 		if ($offset === 0)
@@ -673,37 +721,66 @@ if (!USE_MBSTRING)
 		return utf8_strpos($haystack, $needle, $offset);
 	}
 
-	// mb_strrchr
+	/**
+	 * Find the last occurrence of a character in a string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_strrchr($haystack, $needle)
 	{
 		return utf8_strrchr($haystack, $needle);
 	}
 
-	// mb_strrpos
+	/**
+	 * Find the position of the last occurrence of a string in another string
+	 * @param string
+	 * @param string
+	 * @return mixed
+	 */
 	function mb_strrpos($haystack, $needle)
 	{
 		return utf8_strrpos($haystack, $needle);
 	}
 
-	// mb_strstr
+	/**
+	 * Find the first occurrence of a string in another string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
 	function mb_strstr($haystack, $needle)
 	{
 		return utf8_strstr($haystack, $needle);
 	}
 
-	// mb_strtolower
+	/**
+	 * Make a string lowercase
+	 * @param string
+	 * @return string
+	 */
 	function mb_strtolower($str)
 	{
 		return utf8_strtolower($str);
 	}
 
-	// mb_strtoupper
+	/**
+	 * Make a string uppercase
+	 * @param string
+	 * @return string
+	 */
 	function mb_strtoupper($str)
 	{
 		return utf8_strtoupper($str);
 	}
 
-	// mb_substr
+	/**
+	 * Return a substring of a string
+	 * @param string
+	 * @param integer
+	 * @param integer
+	 * @return string
+	 */
 	function mb_substr($str, $start, $length=null)
 	{
 		if ($length === null)
@@ -712,7 +789,13 @@ if (!USE_MBSTRING)
 		return utf8_substr($str, $start, $length);
 	}
 
-	// mb_substr_count
+	/**
+	 * Count the number of substring occurrences
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @return integer
+	 */
 	function mb_substr_count($haystack, $needle, $offset=null)
 	{
 		if ($offset === null)
@@ -720,4 +803,16 @@ if (!USE_MBSTRING)
 
 		return substr_count($haystack, $needle, $offset);
 	}
+}
+
+
+/**
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ * @deprecated
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", '<br>', $matches[0]);
 }

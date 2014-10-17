@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleNavigation
  *
  * Front end module "navigation".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -87,7 +87,7 @@ class ModuleNavigation extends \Module
 			$objRootPage = \PageModel::findWithDetails($this->rootPage);
 
 			// Set the language
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $objRootPage->rootLanguage != $objPage->rootLanguage)
+			if (\Config::get('addLanguageToUrl') && $objRootPage->rootLanguage != $objPage->rootLanguage)
 			{
 				$lang = $objRootPage->rootLanguage;
 			}

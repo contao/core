@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Ajax
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -146,8 +146,8 @@ class Ajax extends \Backend
 
 			// Check whether the temporary directory is writeable
 			case 'liveUpdate':
-				$GLOBALS['TL_CONFIG']['liveUpdateId'] = \Input::post('id');
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['liveUpdateId']", \Input::post('id'));
+				\Config::set('liveUpdateId', \Input::post('id'));
+				\Config::persist('liveUpdateId', \Input::post('id'));
 
 				// Check whether the temp directory is writeable
 				try
@@ -203,7 +203,14 @@ class Ajax extends \Backend
 	 */
 	public function executePostActions(\DataContainer $dc)
 	{
-		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: text/html; charset=' . \Config::get('characterSet'));
+
+		// Bypass any core logic for non-core drivers (see #5957)
+		if (!$dc instanceof \DC_File && !$dc instanceof \DC_Folder && !$dc instanceof \DC_Table)
+		{
+			$this->executePostActionsHook($dc);
+			exit;
+		}
 
 		switch ($this->strAction)
 		{
@@ -219,21 +226,20 @@ class Ajax extends \Backend
 
 			// Load nodes of the page tree
 			case 'loadPagetree':
-				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
+				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
-				$objWidget = new $GLOBALS['BE_FFL']['pageSelector']($arrData, $dc);
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
+
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
-				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = $this->strAjaxName ?: $dc->id;
-				$arrData['name'] = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
+				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
-				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
 				if (\Input::post('folder', true) != '')
@@ -250,7 +256,7 @@ class Ajax extends \Backend
 			case 'reloadPagetree':
 			case 'reloadFiletree':
 				$intId = \Input::get('id');
-				$strField = $strFieldName = \Input::post('name');
+				$strField = $dc->field = \Input::post('name');
 
 				// Handle the keys in "edit multiple" mode
 				if (\Input::get('act') == 'editAll')
@@ -259,39 +265,57 @@ class Ajax extends \Backend
 					$strField = preg_replace('/(.*)_[0-9a-zA-Z]+$/', '$1', $strField);
 				}
 
-				// Validate the request data
+				// The field does not exist
+				if (!isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]))
+				{
+					$this->log('Field "' . $strField . '" does not exist in DCA "' . $dc->table . '"', __METHOD__, TL_ERROR);
+					header('HTTP/1.1 400 Bad Request');
+					die('Bad Request');
+				}
+
+				$objRow = null;
+				$varValue = null;
+
+				// Load the value
 				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
 				{
-					// The field does not exist
-					if (!array_key_exists($strField, $GLOBALS['TL_CONFIG']))
-					{
-						$this->log('Field "' . $strField . '" does not exist in the global configuration', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
+					$varValue = \Config::get($strField);
 				}
-				elseif ($this->Database->tableExists($dc->table))
+				elseif ($intId > 0 && $this->Database->tableExists($dc->table))
 				{
-					// The field does not exist
-					if (!$this->Database->fieldExists($strField, $dc->table))
-					{
-						$this->log('Field "' . $strField . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
-						header('HTTP/1.1 400 Bad Request');
-						die('Bad Request');
-					}
-
 					$objRow = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
 											 ->execute($intId);
 
 					// The record does not exist
 					if ($objRow->numRows < 1)
 					{
-						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', 'Ajax executePostActions()', TL_ERROR);
+						$this->log('A record with the ID "' . $intId . '" does not exist in table "' . $dc->table . '"', __METHOD__, TL_ERROR);
 						header('HTTP/1.1 400 Bad Request');
 						die('Bad Request');
 					}
+
+					$varValue = $objRow->$strField;
+					$dc->activeRecord = $objRow;
 				}
 
+				// Call the load_callback
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
+
+				// Set the new value
 				$varValue = \Input::post('value', true);
 				$strKey = ($this->strAction == 'reloadPagetree') ? 'pageTree' : 'fileTree';
 
@@ -305,32 +329,16 @@ class Ajax extends \Backend
 					{
 						foreach ($varValue as $k=>$v)
 						{
-							$varValue[$k] = \Dbafs::addResource($v)->id;
+							$varValue[$k] = \Dbafs::addResource($v)->uuid;
 						}
 					}
 
 					$varValue = serialize($varValue);
 				}
 
-				// Set the new value
-				if ($GLOBALS['TL_DCA'][$dc->table]['config']['dataContainer'] == 'File')
-				{
-					$GLOBALS['TL_CONFIG'][$strField] = $varValue;
-					$arrAttribs['activeRecord'] = null;
-				}
-				elseif ($this->Database->tableExists($dc->table))
-				{
-					$objRow->$strField = $varValue;
-					$arrAttribs['activeRecord'] = $objRow;
-				}
+				$strClass = $GLOBALS['BE_FFL'][$strKey];
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
-				$arrAttribs['id'] = $strFieldName;
-				$arrAttribs['name'] = $strFieldName;
-				$arrAttribs['value'] = $varValue;
-				$arrAttribs['strTable'] = $dc->table;
-				$arrAttribs['strField'] = $strField;
-
-				$objWidget = new $GLOBALS['BE_FFL'][$strKey]($arrAttribs);
 				echo $objWidget->generate();
 				exit; break;
 
@@ -354,7 +362,7 @@ class Ajax extends \Backend
 				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
 				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
 				{
-					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', 'Ajax executePostActions()', TL_ERROR);
+					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}
@@ -384,27 +392,42 @@ class Ajax extends \Backend
 				elseif ($dc instanceof \DC_File)
 				{
 					$val = (intval(\Input::post('state') == 1) ? true : false);
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['".\Input::post('field')."']", $val);
+					\Config::persist(\Input::post('field'), $val);
 
 					if (\Input::post('load'))
 					{
-						$GLOBALS['TL_CONFIG'][\Input::post('field')] = $val;
+						\Config::set(\Input::post('field'), $val);
 						echo $dc->edit(false, \Input::post('id'));
 					}
 				}
 				exit; break;
 
+			// DropZone file upload
+			case 'fileupload':
+				$dc->move();
+				exit; break;
+
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->strAction, $dc);
-					}
-				}
+				$this->executePostActionsHook($dc);
 				exit; break;
+		}
+	}
+
+
+	/**
+	 * Execute the post actions hook
+	 * @param \DataContainer
+	 */
+	protected function executePostActionsHook(\DataContainer $dc)
+	{
+		if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->strAction, $dc);
+			}
 		}
 	}
 }

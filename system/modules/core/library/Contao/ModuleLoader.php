@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -26,7 +26,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class ModuleLoader
 {
@@ -79,14 +79,14 @@ class ModuleLoader
 	/**
 	 * Scan the modules and resolve their dependencies
 	 *
-	 * @throws \Exception If the dependencies cannot be resolved
+	 * @throws \UnresolvableDependenciesException If the dependencies cannot be resolved
 	 */
 	protected static function scanAndResolve()
 	{
 		$strCacheFile = 'system/cache/config/modules.php';
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
+		if (!\Config::get('bypassCache') && file_exists(TL_ROOT . '/' . $strCacheFile))
 		{
 			include TL_ROOT . '/' . $strCacheFile;
 		}
@@ -97,13 +97,20 @@ class ModuleLoader
 			static::$active = array();
 			static::$disabled = array();
 
-			// Load the core modules first (see #5261)
-			$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-
 			// Ignore non-core modules if the system runs in safe mode
-			if (!$GLOBALS['TL_CONFIG']['coreOnlyMode'])
+			if (\Config::get('coreOnlyMode'))
 			{
-				$modules = array_unique(array_merge($modules, scan(TL_ROOT . '/system/modules')));
+				$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+			}
+			else
+			{
+				// Sort the modules (see #6391)
+				$modules = scan(TL_ROOT . '/system/modules');
+				sort($modules);
+
+				// Load the "core" module first
+				array_unshift($modules, 'core');
+				$modules = array_unique($modules);
 			}
 
 			// Walk through the modules
@@ -142,42 +149,61 @@ class ModuleLoader
 				if (file_exists($path . '/config/autoload.ini'))
 				{
 					$config = parse_ini_file($path . '/config/autoload.ini', true);
-					$load[$file] = $config['requires'];
+					$load[$file] = $config['requires'] ?: array();
+
+					foreach ($load[$file] as $k=>$v)
+					{
+						// Optional requirements (see #6835)
+						if (strncmp($v, '*', 1) === 0)
+						{
+							$key = substr($v, 1);
+
+							if (!in_array($key, $modules))
+							{
+								unset($load[$file][$k]);
+							}
+							else
+							{
+								$load[$file][$k] = $key;
+							}
+						}
+					}
 				}
 			}
 
 			// Resolve the dependencies
 			while (!empty($load))
 			{
-				$matched = false;
+				$failed = true;
 
 				foreach ($load as $name=>$requires)
 				{
 					if (empty($requires))
 					{
-						$matched = true;
+						$resolved = true;
 					}
 					else
 					{
-						$matched = count(array_diff($requires, static::$active)) === 0;
+						$resolved = count(array_diff($requires, static::$active)) === 0;
 					}
 
-					if ($matched === true)
+					if ($resolved === true)
 					{
 						unset($load[$name]);
 						static::$active[] = $name;
+						$failed = false;
 					}
 				}
 
 				// The dependencies cannot be resolved
-				if ($matched === false)
+				if ($failed === true)
 				{
 					ob_start();
 					dump($load);
 					$buffer = ob_get_contents();
 					ob_end_clean();
 
-					throw new \Exception('The module dependencies could not be resolved: </strong>' . $buffer . '<strong>');
+					throw new \UnresolvableDependenciesException("The module dependencies could not be resolved.\n$buffer");
 				}
 			}
 		}

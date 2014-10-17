@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -20,8 +20,7 @@ namespace Contao;
 /**
  * Class FormHidden
  *
- * Form field "hidden".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -30,12 +29,14 @@ class FormHidden extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
 	protected $strTemplate = 'form_hidden';
@@ -43,7 +44,8 @@ class FormHidden extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{

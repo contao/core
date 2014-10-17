@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class OptionWizard
  *
  * Provide methods to handle form field options.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -47,7 +47,7 @@ class OptionWizard extends \Widget
 	public function validate()
 	{
 		$mandatory = $this->mandatory;
-		$options = deserialize($this->getPost($this->strName));
+		$options = $this->getPost($this->strName);
 
 		// Check labels only (values can be empty)
 		if (is_array($options))
@@ -67,6 +67,12 @@ class OptionWizard extends \Widget
 				if ($options[$key]['label'] != '')
 				{
 					$this->mandatory = false;
+				}
+
+				// Strip double quotes (see #6919)
+				if ($options[$key]['value'] != '')
+				{
+					$options[$key]['value'] = str_replace('"', '', $options[$key]['value']);
 				}
 			}
 		}

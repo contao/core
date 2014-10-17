@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleCustomnav
  *
  * Front end module "custom navigation".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -98,15 +98,18 @@ class ModuleCustomnav extends \Module
 		// Sort the array keys according to the given order
 		if ($this->orderPages != '')
 		{
-			$arrPages = array_flip(trimsplit(',', $this->orderPages));
-		}
+			$tmp = deserialize($this->orderPages);
 
-		$i = 0;
+			if (!empty($tmp) && is_array($tmp))
+			{
+				$arrPages = array_map(function(){}, array_flip($tmp));
+			}
+		}
 
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
+			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template
@@ -118,6 +121,7 @@ class ModuleCustomnav extends \Module
 		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
+		$objTemplate->cssID = $this->cssID; // see #4897 and 6129
 		$objTemplate->level = 'level_1';
 
 		foreach ($arrPages as $arrPage)
@@ -147,40 +151,31 @@ class ModuleCustomnav extends \Module
 							$objNext->loadDetails();
 
 							// Check the target page language (see #4706)
-							if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+							if (\Config::get('addLanguageToUrl'))
 							{
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-							// Add the domain if it differs from the current one (see #3765)
-							if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-							{
-								$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
-							}
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
 						break;
 				}
 
+				$trail = in_array($arrPage['id'], $objPage->trail);
+
 				// Active page
-				if ($objPage->id == $arrPage['id'])
+				if ($objPage->id == $arrPage['id'] && $href == \Environment::get('request'))
 				{
 					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
 
 					$row['isActive'] = true;
+					$row['isTrail'] = false;
 					$row['class'] = trim('active ' . $strClass);
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
@@ -202,10 +197,11 @@ class ModuleCustomnav extends \Module
 				// Regular page
 				else
 				{
-					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . ($trail ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;
+					$row['isTrail'] = $trail;
 					$row['class'] = $strClass;
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);

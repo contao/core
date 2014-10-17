@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -25,13 +25,13 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Validator
 {
 
 	/**
-	 * Numeric characters (including full stop [.] minus [-] and space [ ])
+	 * Numeric characters (including full stop [.] and minus [-])
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -39,7 +39,20 @@ class Validator
 	 */
 	public static function isNumeric($varValue)
 	{
-		return preg_match('/^[\d \.-]*$/', $varValue);
+		return preg_match('/^-?\d+(\.\d+)?$/', $varValue);
+	}
+
+
+	/**
+	 * Natural numbers (nonnegative integers)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a natural number
+	 */
+	public static function isNatural($varValue)
+	{
+		return preg_match('/^\d+$/', $varValue);
 	}
 
 
@@ -54,11 +67,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alpha:] \.-]*$', $varValue);
+			return mb_eregi('^[[:alpha:] \.-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pL \.-]*$/u', $varValue);
+			return preg_match('/^[\pL \.-]+$/u', $varValue);
 		}
 	}
 
@@ -74,11 +87,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:] \._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:] \._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL \._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL \._-]+$/u', $varValue);
 		}
 	}
 
@@ -144,12 +157,12 @@ class Validator
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,6}$/', \Idna::encodeEmail($varValue));
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,13}$/', \Idna::encodeEmail($varValue));
 	}
 
 
 	/**
-	 * Valid URL
+	 * Valid URL with special characters allowed (see #6402)
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -157,7 +170,14 @@ class Validator
 	 */
 	public static function isUrl($varValue)
 	{
-		return preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', \Idna::encodeUrl($varValue));
+		if (function_exists('mb_eregi'))
+		{
+			return mb_eregi('^[[:alnum:]\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$', \Idna::encodeUrl($varValue));
+		}
+		else
+		{
+			return preg_match('/^[\pN\pL\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/u', \Idna::encodeUrl($varValue));
+		}
 	}
 
 
@@ -172,11 +192,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:]\._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL\._-]+$/u', $varValue);
 		}
 	}
 
@@ -192,11 +212,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\/\._-]*$', $varValue);
+			return mb_eregi('^[[:alnum:]\/\._-]+$', $varValue);
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\/\._-]*$/u', $varValue);
+			return preg_match('/^[\pN\pL\/\._-]+$/u', $varValue);
 		}
 	}
 
@@ -250,5 +270,73 @@ class Validator
 	public static function isLanguage($varValue)
 	{
 		return preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $varValue);
+	}
+
+
+	/**
+	 * Valid UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a UUID
+	 */
+	public static function isUuid($varValue)
+	{
+		return static::isBinaryUuid($varValue) || static::isStringUuid($varValue);
+	}
+
+
+	/**
+	 * Valid binary UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a binary UUID
+	 *
+	 * @author Martin Auswöger <https://github.com/ausi>
+	 * @author Tristan Lins <https://github.com/tristanlins>
+	 */
+	public static function isBinaryUuid($varValue)
+	{
+		if (strlen($varValue) == 16)
+		{
+			return ($varValue & pack('H*', '000000000000F000C000000000000000')) === pack('H*', '00000000000010008000000000000000');
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Valid string UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a string UUID
+	 *
+	 * @author Martin Auswöger <https://github.com/ausi>
+	 * @author Tristan Lins <https://github.com/tristanlins>
+	 */
+	public static function isStringUuid($varValue)
+	{
+		if (strlen($varValue) == 36)
+		{
+			return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-1[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$/', $varValue);
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Valid Google+ ID or vanity name
+	 *
+	 * @param mixed $varValue The numeric ID or vanity name
+	 *
+	 * @return boolean True if the value is a Google+ ID
+	 */
+	public static function isGooglePlusId($varValue)
+	{
+		return preg_match('/^([0-9]{21}|\+[\pN\pL_-]+)$/u', $varValue);
 	}
 }

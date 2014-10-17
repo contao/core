@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageForward
  *
  * Provide methods to handle a forward page.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -48,14 +48,14 @@ class PageForward extends \Frontend
 		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
-			die('Forward page not found');
+			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
+			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
 		$strForceLang = null;
 
 		// Check the target page language (see #4706)
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		if (\Config::get('addLanguageToUrl'))
 		{
 			$objNextPage->loadDetails(); // see #3983
 			$strForceLang = $objNextPage->language;
@@ -82,12 +82,12 @@ class PageForward extends \Frontend
 		{
 			foreach (array_keys($_GET) as $key)
 			{
-				if ($GLOBALS['TL_CONFIG']['disableAlias'] && $key == 'id')
+				if (\Config::get('disableAlias') && $key == 'id')
 				{
 					continue;
 				}
 
-				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $key == 'language')
+				if (\Config::get('addLanguageToUrl') && $key == 'language')
 				{
 					continue;
 				}

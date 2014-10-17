@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Theme
  *
  * Provide methods to handle themes.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -37,8 +37,8 @@ class Theme extends \Backend
 		$this->import('BackendUser', 'User');
 		$class = $this->User->uploader;
 
-		// See #4086
-		if (!class_exists($class))
+		// See #4086 and #7046
+		if (!class_exists($class) || $class == 'DropZone')
 		{
 			$class = 'FileUpload';
 		}
@@ -95,11 +95,13 @@ class Theme extends \Backend
 			// Store the field names of the theme tables
 			$arrDbFields = array
 			(
-				'tl_theme'       => $this->Database->getFieldNames('tl_theme'),
-				'tl_style_sheet' => $this->Database->getFieldNames('tl_style_sheet'),
-				'tl_style'       => $this->Database->getFieldNames('tl_style'),
-				'tl_module'      => $this->Database->getFieldNames('tl_module'),
-				'tl_layout'      => $this->Database->getFieldNames('tl_layout')
+				'tl_theme'           => $this->Database->getFieldNames('tl_theme'),
+				'tl_style_sheet'     => $this->Database->getFieldNames('tl_style_sheet'),
+				'tl_style'           => $this->Database->getFieldNames('tl_style'),
+				'tl_module'          => $this->Database->getFieldNames('tl_module'),
+				'tl_layout'          => $this->Database->getFieldNames('tl_layout'),
+				'tl_image_size'      => $this->Database->getFieldNames('tl_image_size'),
+				'tl_image_size_item' => $this->Database->getFieldNames('tl_image_size_item')
 			);
 
 			// Proceed
@@ -119,14 +121,12 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_theme_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
+<input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
   <h3>'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
@@ -159,8 +159,6 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['checking_theme'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -185,7 +183,7 @@ class Theme extends \Backend
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
+				$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
 				continue;
 			}
 
@@ -195,7 +193,6 @@ class Theme extends \Backend
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
 
-			$tl_layout = null;
 			$blnHasError = false;
 
 			// Loop through the tables
@@ -205,18 +202,12 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
 
 				$fields = $rows->item(0)->childNodes;
-
-				// Store the tl_layout element
-				if ($table == 'tl_layout')
-				{
-					$tl_layout = $tables->item($i)->childNodes;
-				}
 
 				// Loop through the fields
 				for ($j=0; $j<$fields->length; $j++)
@@ -227,7 +218,7 @@ class Theme extends \Backend
 					if (!in_array($name, $arrDbFields[$table]))
 					{
 						$blnHasError = true;
-						$return .= "\n  " . '<p style="margin:0; color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
+						$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
 					}
 				}
 			}
@@ -235,64 +226,7 @@ class Theme extends \Backend
 			// Confirmation
 			if (!$blnHasError)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
-			}
-
-			$return .= '
-  <h4>'.$GLOBALS['TL_LANG']['tl_theme']['custom_sections'].'</h4>';
-
-			$blnHasLayout = false;
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-			$arrProcessed = array();
-
-			// Loop through tl_layout
-			for ($i=0; $i<$tl_layout->length; $i++)
-			{
-				$fields = $tl_layout->item($i)->childNodes;
-
-				// Loop through the fields
-				for ($j=0; $j<$fields->length; $j++)
-				{
-					if ($fields->item($j)->getAttribute('name') != 'modules')
-					{
-						continue;
-					}
-
-					$modules = deserialize($fields->item($j)->nodeValue);
-
-					// Continue if there are no modules
-					if (!is_array($modules) || empty($modules))
-					{
-						continue;
-					}
-
-					// Check all columns
-					foreach ($modules as $mod)
-					{
-						// Default columns
-						if ($mod['col'] == 'header' || $mod['col'] == 'left' || $mod['col'] == 'main' || $mod['col'] == 'right' || $mod['col'] == 'footer')
-						{
-							continue;
-						}
-
-						// Do not show multiple warnings
-						if (in_array($mod['col'], $arrProcessed) || in_array($mod['col'], $arrSections))
-						{
-							continue;
-						}
-
-						$blnHasLayout = true;
-						$arrProcessed[] = $mod['col'];
-
-						$return .= "\n  " . '<p style="margin:0;color:#5c9ac9">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
-					}
-				}
-			}
-
-			// Confirmation
-			if (!$blnHasLayout)
-			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
 			}
 
 			// Check the custom templates
@@ -313,14 +247,23 @@ class Theme extends \Backend
 				if (file_exists(TL_ROOT .'/'. $objArchive->file_name))
 				{
 					$blnTplExists = true;
-					$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
+					$return .= "\n  " . '<p class="tl_red" style="margin:0">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
 				}
 			}
 
 			// Confirmation
 			if (!$blnTplExists)
 			{
-				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['compareThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['compareThemeFiles']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['compareThemeFiles'] as $callback)
+				{
+					$return .= \System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
+				}
 			}
 
 			$return .= '
@@ -388,9 +331,9 @@ class Theme extends \Backend
 					}
 
 					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($strFileName, 'files/', 6) === 0)
+					if (\Config::get('uploadPath') != 'files' && strncmp($strFileName, 'files/', 6) === 0)
 					{
-						$strFileName = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFileName);
+						$strFileName = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFileName);
 					}
 
 					\File::putContent($strFileName, $objArchive->unzip());
@@ -444,27 +387,26 @@ class Theme extends \Backend
 					}
 
 					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					if (\Config::get('uploadPath') != 'files')
 					{
-						$strFolder = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $strFolder);
+						$strFolder = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFolder);
 					}
 
 					\Dbafs::addResource($strFolder);
 				}
 			}
 
-			$arrMissing = array();
-			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-
 			// Lock the tables
 			$arrLocks = array
 			(
-				'tl_files'       => 'WRITE',
-				'tl_layout'      => 'WRITE',
-				'tl_module'      => 'WRITE',
-				'tl_style_sheet' => 'WRITE',
-				'tl_style'       => 'WRITE',
-				'tl_theme'       => 'WRITE',
+				'tl_files'           => 'WRITE',
+				'tl_layout'          => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_style_sheet'     => 'WRITE',
+				'tl_style'           => 'WRITE',
+				'tl_theme'           => 'WRITE',
+				'tl_image_size'      => 'WRITE',
+				'tl_image_size_item' => 'WRITE'
 			);
 
 			$this->Database->lockTables($arrLocks);
@@ -475,6 +417,8 @@ class Theme extends \Backend
 			$tl_style = $this->Database->getNextId('tl_style');
 			$tl_module = $this->Database->getNextId('tl_module');
 			$tl_layout = $this->Database->getNextId('tl_layout');
+			$tl_image_size = $this->Database->getNextId('tl_image_size');
+			$tl_image_size_item = $this->Database->getNextId('tl_image_size_item');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -483,10 +427,17 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
+
+				// Load the DCA
+				$this->loadDataContainer($table);
+
+				// Get the order fields
+				$objDcaExtractor = \DcaExtractor::getInstance($table);
+				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Loop through the rows
 				for ($j=0; $j<$rows->length; $j++)
@@ -526,6 +477,10 @@ class Theme extends \Backend
 							if ($table == 'tl_style')
 							{
 								$value = $arrMapper['tl_style_sheet'][$value];
+							}
+							elseif ($table == 'tl_image_size_item')
+							{
+								$value = $arrMapper['tl_image_size'][$value];
 							}
 							else
 							{
@@ -568,11 +523,6 @@ class Theme extends \Backend
 									{
 										$modules[$key]['mod'] = $arrMapper['tl_module'][$mod['mod']];
 									}
-
-									if (!in_array($mod['col'], array('header', 'left', 'right', 'main', 'footer')) && !in_array($mod['col'], $arrSections) && !in_array($mod['col'], $arrMissing))
-									{
-										$arrMissing[] = $mod['col'];
-									}
 								}
 
 								$value = serialize($modules);
@@ -593,7 +543,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets
-						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
+						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -601,37 +551,37 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
+									$tmp[$kk] = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = preg_replace('@^files/@', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+								$value = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $value);
 							}
 						}
 
 						// Replace the file paths in singleSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'screenshot') || ($table == 'tl_module' && $name == 'singleSRC') || ($table == 'tl_module' && $name == 'reg_homeDir'))
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'fileTree' && !$GLOBALS['TL_DCA'][$table]['fields'][$name]['eval']['multiple'])
 						{
-							if ($value === null)
+							if (!$value)
 							{
-								$value = ''; // the field cannot be NULL
+								$value = null; // Contao >= 3.2
 							}
-							elseif ($value != '')
+							else
 							{
 								// Do not use the FilesModel here – tables are locked!
-								$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
-														  ->executeUncached($value);
+														  ->execute($value);
 
-								$value = $objFile->id;
+								$value = $objFile->uuid;
 							}
 						}
 
 						// Replace the file paths in multiSRC fields with their tl_files ID
-						elseif (($table == 'tl_theme' && $name == 'folders') || ($table == 'tl_module' && $name == 'multiSRC') || ($table == 'tl_module' && $name == 'orderSRC') || ($table == 'tl_layout' && $name == 'external') || ($table == 'tl_layout' && $name == 'orderExt'))
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'fileTree' || in_array($name, $arrOrder))
 						{
 							$tmp = deserialize($value);
 
@@ -646,15 +596,31 @@ class Theme extends \Backend
 									}
 
 									// Do not use the FilesModel here – tables are locked!
-									$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE path=?")
+									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
-															  ->executeUncached($vv);
+															  ->execute($vv);
 
-									$tmp[$kk] = $objFile->id;
+									$tmp[$kk] = $objFile->uuid;
 								}
 
-								$value = ($name == 'orderSRC' || $name == 'orderExt') ? implode(',', $tmp) : serialize($tmp);
+								$value = serialize($tmp);
 							}
+						}
+
+						// Adjust the imageSize widget data
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'imageSize')
+						{
+							$imageSizes = deserialize($value, true);
+
+							if (!empty($imageSizes))
+							{
+								if (is_numeric($imageSizes[2]))
+								{
+									$imageSizes[2] = $arrMapper['tl_image_size'][$imageSizes[2]];
+								}
+							}
+
+							$value = serialize($imageSizes);
 						}
 
 						$set[$name] = $value;
@@ -687,15 +653,19 @@ class Theme extends \Backend
 			$this->import('StyleSheets');
 			$this->StyleSheets->updateStyleSheets();
 
-			// Add missing sections to the local configuration
-			if (count($arrMissing))
-			{
-				$GLOBALS['TL_CONFIG']['customSections'] = implode(',', array_merge($arrSections, $arrMissing));
-				$this->Config->add("\$GLOBALS['TL_CONFIG']['customSections']", $GLOBALS['TL_CONFIG']['customSections']);
-			}
-
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['extractThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['extractThemeFiles']))
+			{
+				$intThemeId = empty($arrMapper['tl_theme']) ? null : reset($arrMapper['tl_theme']);
+
+				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
+				{
+					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
+				}
+			}
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -739,6 +709,7 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
 
@@ -754,7 +725,7 @@ class Theme extends \Backend
 
 		if (!empty($arrFolders) && is_array($arrFolders))
 		{
-			$objFolders = \FilesModel::findMultipleByIds($arrFolders);
+			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
 
 			if ($objFolders !== null)
 			{
@@ -768,25 +739,21 @@ class Theme extends \Backend
 		// Add the template files
 		$this->addTemplatesToArchive($objArchive, $objTheme->templates);
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['exportTheme']) && is_array($GLOBALS['TL_HOOKS']['exportTheme']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
+			{
+				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme->id);
+			}
+		}
+
 		// Close the archive
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
 		$objFile = new \File('system/tmp/'. $strTmp, true);
-
-		header('Content-Type: application/octet-stream');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $strName . '.cto"');
-		header('Content-Length: ' . $objFile->filesize);
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-		header('Expires: 0');
-
-		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strTmp, 'rb');
-		fpassthru($resFile);
-		fclose($resFile);
-
-		exit;
+		$objFile->sendToBrowser($strName . '.cto');
 	}
 
 
@@ -803,8 +770,15 @@ class Theme extends \Backend
 		$table->setAttribute('name', 'tl_theme');
 		$table = $tables->appendChild($table);
 
+		// Load the DCA
+		$this->loadDataContainer('tl_theme');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_theme');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
 		// Add the row
-		$this->addDataRow($xml, $table, $objTheme);
+		$this->addDataRow($xml, $table, $objTheme, $arrOrder);
 	}
 
 
@@ -821,6 +795,13 @@ class Theme extends \Backend
 		$table->setAttribute('name', 'tl_style_sheet');
 		$table = $tables->appendChild($table);
 
+		// Load the DCA
+		$this->loadDataContainer('tl_style_sheet');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
 		// Get all style sheets
 		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE pid=? ORDER BY name")
 										->execute($objTheme->id);
@@ -828,7 +809,7 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objStyleSheet->next())
 		{
-			$this->addDataRow($xml, $table, $objStyleSheet);
+			$this->addDataRow($xml, $table, $objStyleSheet, $arrOrder);
 		}
 
 		$objStyleSheet->reset();
@@ -837,6 +818,13 @@ class Theme extends \Backend
 		$table = $xml->createElement('table');
 		$table->setAttribute('name', 'tl_style');
 		$table = $tables->appendChild($table);
+
+		// Load the DCA
+		$this->loadDataContainer('tl_style');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style');
+		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the child rows
 		while ($objStyleSheet->next())
@@ -848,7 +836,7 @@ class Theme extends \Backend
 			// Add the rows
 			while ($objStyle->next())
 			{
-				$this->addDataRow($xml, $table, $objStyle);
+				$this->addDataRow($xml, $table, $objStyle, $arrOrder);
 			}
 		}
 	}
@@ -867,6 +855,13 @@ class Theme extends \Backend
 		$table->setAttribute('name', 'tl_module');
 		$table = $tables->appendChild($table);
 
+		// Load the DCA
+		$this->loadDataContainer('tl_module');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
 		// Get all modules
 		$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
@@ -874,7 +869,7 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objModule->next())
 		{
-			$this->addDataRow($xml, $table, $objModule);
+			$this->addDataRow($xml, $table, $objModule, $arrOrder);
 		}
 	}
 
@@ -892,6 +887,13 @@ class Theme extends \Backend
 		$table->setAttribute('name', 'tl_layout');
 		$table = $tables->appendChild($table);
 
+		// Load the DCA
+		$this->loadDataContainer('tl_layout');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
 		// Get all layouts
 		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
@@ -899,7 +901,46 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objLayout->next())
 		{
-			$this->addDataRow($xml, $table, $objLayout);
+			$this->addDataRow($xml, $table, $objLayout, $arrOrder);
+		}
+	}
+
+
+	/**
+	 * Add the table tl_image_size
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database\Result
+	 */
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	{
+		// Add the tables
+		$imageSizeTable = $xml->createElement('table');
+		$imageSizeTable->setAttribute('name', 'tl_image_size');
+		$imageSizeTable = $tables->appendChild($imageSizeTable);
+
+		$imageSizeItemTable = $xml->createElement('table');
+		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
+		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
+
+		// Get all sizes
+		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
+								   ->execute($objTheme->id);
+
+		// Add the rows
+		while ($objSizes->next())
+		{
+			$this->addDataRow($xml, $imageSizeTable, $objSizes);
+
+			// Get all size items
+			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
+										   ->execute($objSizes->id);
+
+			// Add the rows
+			while ($objSizeItems->next())
+			{
+				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems);
+			}
 		}
 	}
 
@@ -909,8 +950,9 @@ class Theme extends \Backend
 	 * @param \DOMDocument
 	 * @param \DOMElement
 	 * @param \Database\Result
+	 * @param array
 	 */
-	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData)
+	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData, array $arrOrder=array())
 	{
 		$t = $table->getAttribute('name');
 
@@ -929,43 +971,47 @@ class Theme extends \Backend
 			}
 
 			// Replace the IDs of singleSRC fields with their path (see #4952)
-			elseif (($t == 'tl_theme' && $k == 'screenshot') || ($t == 'tl_module' && $k == 'singleSRC') || ($t == 'tl_module' && $k == 'reg_homeDir'))
+			elseif ($GLOBALS['TL_DCA'][$t]['fields'][$k]['inputType'] == 'fileTree' && !$GLOBALS['TL_DCA'][$t]['fields'][$k]['eval']['multiple'])
 			{
-				$objFile = \FilesModel::findByPk($v);
+				$objFile = \FilesModel::findByUuid($v);
 
 				if ($objFile !== null)
 				{
 					// Standardize the upload path if it is not "files"
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+					if (\Config::get('uploadPath') != 'files')
 					{
-						$v = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFile->path);
+						$v = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFile->path);
 					}
 					else
 					{
 						$v = $objFile->path;
 					}
 				}
+				else
+				{
+					$v = 'NULL';
+				}
 			}
 
 			// Replace the IDs of multiSRC fields with their paths (see #4952)
-			elseif (($t == 'tl_theme' && $k == 'folders') || ($t == 'tl_module' && $k == 'multiSRC') || ($t == 'tl_module' && $k == 'orderSRC') || ($t == 'tl_layout' && $k == 'external') || ($t == 'tl_layout' && $k == 'orderExt'))
+			elseif ($GLOBALS['TL_DCA'][$t]['fields'][$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder))
 			{
-				$arrFiles = ($k == 'orderSRC' || $k == 'orderExt') ? explode(',', $v) : deserialize($v);
+				$arrFiles = deserialize($v);
 
 				if (!empty($arrFiles) && is_array($arrFiles))
 				{
-					$objFiles = \FilesModel::findMultipleByIds($arrFiles);
+					$objFiles = \FilesModel::findMultipleByUuids($arrFiles);
 
 					if ($objFiles !== null)
 					{
 						// Standardize the upload path if it is not "files"
-						if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files')
+						if (\Config::get('uploadPath') != 'files')
 						{
 							$arrTmp = array();
 
 							while ($objFiles->next())
 							{
-								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $objFiles->path);
+								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFiles->path);
 							}
 
 							$v = serialize($arrTmp);
@@ -974,6 +1020,10 @@ class Theme extends \Backend
 						{
 							$v = serialize($objFiles->fetchEach('path'));
 						}
+					}
+					else
+					{
+						$v = 'NULL';
 					}
 				}
 			}
@@ -993,17 +1043,17 @@ class Theme extends \Backend
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);
-		$strFolder = preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $strFolder);
+		$strFolder = preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strFolder);
 
 		if ($strFolder == '')
 		{
 			$strTarget = 'files';
-			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'];
+			$strFolder = \Config::get('uploadPath');
 		}
 		else
 		{
 			$strTarget = 'files/' . $strFolder;
-			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'] .'/'. $strFolder;
+			$strFolder = \Config::get('uploadPath') .'/'. $strFolder;
 		}
 
 		// Return if the folder does not exist
@@ -1060,7 +1110,8 @@ class Theme extends \Backend
 			return;
 		}
 
-		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		array_push($arrAllowed, 'sql'); // see #7048
 
 		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)

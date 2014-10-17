@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Pagination
  *
  * Provide methodes to render a pagination menu.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Library
  */
@@ -124,16 +124,24 @@ class Pagination
 	 */
 	protected $arrData = array();
 
+	/**
+	 * Data array
+	 * @var array
+	 */
+	protected $blnForceParam = false;
+
 
 	/**
 	 * Set the number of rows, the number of results per pages and the number of links
-	 * @param integer
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param \Template
+	 *
+	 * @param integer   $intRows          The number of rows
+	 * @param integer   $intPerPage       The number of items per page
+	 * @param integer   $intNumberOfLinks The number of links to generate
+	 * @param string    $strParameter     The parameter name
+	 * @param \Template $objTemplate      The template object
+	 * @param boolean   $blnForceParam    Force the URL parameter
 	 */
-	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null)
+	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7, $strParameter='page', \Template $objTemplate=null, $blnForceParam=false)
 	{
 		$this->intPage = 1;
 		$this->intRows = (int) $intRows;
@@ -147,7 +155,7 @@ class Pagination
 		$this->lblLast = $GLOBALS['TL_LANG']['MSC']['last'];
 		$this->lblTotal = $GLOBALS['TL_LANG']['MSC']['totalPages'];
 
-		if (\Input::get($strParameter) != '' && \Input::get($strParameter) > 0)
+		if (\Input::get($strParameter) > 0)
 		{
 			$this->intPage = \Input::get($strParameter);
 		}
@@ -161,12 +169,14 @@ class Pagination
 		}
 
 		$this->objTemplate = $objTemplate;
+		$this->blnForceParam = $blnForceParam;
 	}
 
 
 	/**
 	 * Return true if the pagination menu has a "<< first" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "<< first" link
 	 */
 	public function hasFirst()
 	{
@@ -176,7 +186,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "< previous" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "< previous" link
 	 */
 	public function hasPrevious()
 	{
@@ -186,7 +197,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "next >" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "next >" link
 	 */
 	public function hasNext()
 	{
@@ -196,7 +208,8 @@ class Pagination
 
 	/**
 	 * Return true if the pagination menu has a "last >>" link
-	 * @return boolean
+	 *
+	 * @return boolean True if the pagination menu has a "last >>" link
 	 */
 	public function hasLast()
 	{
@@ -206,8 +219,10 @@ class Pagination
 
 	/**
 	 * Generate the pagination menu and return it as HTML string
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strSeparator The separator string
+	 *
+	 * @return string The pagination menu as HTML string
 	 */
 	public function generate($strSeparator=' ')
 	{
@@ -250,7 +265,10 @@ class Pagination
 		$objTemplate->hasNext = $this->hasNext();
 		$objTemplate->hasLast = $this->hasLast();
 
+		// Backwards compatibility
 		$objTemplate->items = $this->getItemsAsString($strSeparator);
+
+		$objTemplate->pages = $this->getItemsAsArray();
 		$objTemplate->total = sprintf($this->lblTotal, $this->intPage, $this->intTotalPages);
 
 		$objTemplate->first = array
@@ -281,6 +299,8 @@ class Pagination
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
 
+		$objTemplate->class = 'pagination-' . $this->strParameter;
+
 		// Adding rel="prev" and rel="next" links is not possible
 		// anymore with unique variable names (see #3515 and #4141)
 
@@ -290,10 +310,37 @@ class Pagination
 
 	/**
 	 * Generate all page links separated with the given argument and return them as string
-	 * @param string
-	 * @return string
+	 *
+	 * @param string $strSeparator The separator string
+	 *
+	 * @return string The page links as HTML string
 	 */
 	public function getItemsAsString($strSeparator=' ')
+	{
+		$arrLinks = array();
+
+		foreach ($this->getItemsAsArray() as $arrItem)
+		{
+			if ($arrItem['href'] === null)
+			{
+				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $arrItem['page']);
+			}
+			else
+			{
+				$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>', $arrItem['href'], $arrItem['title'], $arrItem['page']);
+			}
+		}
+
+		return implode($strSeparator, $arrLinks);
+	}
+
+
+	/**
+	 * Generate all page links and return them as array
+	 *
+	 * @return array The page links as array
+	 */
+	public function getItemsAsArray()
 	{
 		$arrLinks = array();
 
@@ -330,28 +377,38 @@ class Pagination
 		{
 			if ($i == $this->intPage)
 			{
-				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $i);
-				continue;
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => null,
+					'title' => null
+				);
 			}
-
-			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
-								$this->linkToPage($i),
-								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
-								$i);
+			else
+			{
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => $this->linkToPage($i),
+					'title' => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['goToPage'], $i))
+				);
+			}
 		}
 
-		return implode($strSeparator, $arrLinks);
+		return $arrLinks;
 	}
 
 
 	/**
 	 * Generate a link and return the URL
-	 * @param integer
-	 * @return string
+	 *
+	 * @param integer $intPage The page ID
+	 *
+	 * @return string The URL string
 	 */
 	protected function linkToPage($intPage)
 	{
-		if ($intPage <= 1)
+		if ($intPage <= 1 && !$this->blnForceParam)
 		{
 			return ampersand($this->strUrl);
 		}

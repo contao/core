@@ -9,10 +9,10 @@
 .mod_repository .nowrap { white-space:nowrap; }
 .mod_repository .middle, .mod_repository .middle * { vertical-align:middle; }
 .mod_repository table.nested { width:100%; margin:0; border:0; }
-.mod_repository table td.nopadding { vertical-align:top; padding:0px !important;}
-.color_green { color:#8ab858; }
-.color_red { color:#c55; }
-.color_blue { color:#5c9ac9; }
+.mod_repository table td.nopadding { vertical-align:top; padding:0 !important;}
+.color_green { color:#77ac45; }
+.color_red { color:#c33; }
+.color_blue { color:#4b85ba; }
 .color_darkorange { color:#f90; }
 
 /* Extension list */
@@ -44,12 +44,12 @@
 	display:block;
 	float:left;
 }
-.mod_repository table tr.title span.leftblock a { color:#8ab858 !important; }
+.mod_repository table tr.title span.leftblock a { color:#77ac45 !important; }
 .mod_repository table tr.title span.rightblock { display:block; float:right; }
 .mod_repository table tr.description td { padding-top:8px; padding-bottom:10px; line-height:1.3; }
-.mod_repository table tr.info th, .mod_repository table tr.info td { border-top:1px solid #fff; font-size:10px; }
-.mod_repository table .listcol1, .mod_repository table .listcol3, .mod_repository table .viewcol1, .mod_repository table .viewcol3 { width:23%; }
-.mod_repository table .listcol2, .mod_repository table .viewcol2 { width:27%; }
+.mod_repository table tr.info th, .mod_repository table tr.info td { border-top:1px solid #fff; font-size:10px; font-size:.625rem; }
+.mod_repository table .listcol1, .mod_repository table .listcol3, .mod_repository table .viewcol1, .mod_repository table .viewcol3 { width:21%; }
+.mod_repository table .listcol2, .mod_repository table .viewcol2 { width:29%; }
 .mod_repository .col_functions { text-align:right; }
 
 /* Details view */
@@ -90,10 +90,13 @@
 	padding-top:3px;
 	padding-left:12px;
 }
-.mod_repository_view tr.description img { padding:2px; border:1px solid #ccc; }
-.mod_repository_view tr.description td { line-height:1.3; }
-.mod_repository_view tr.description ul { margin:0 0 0 2.1em; padding:0; }
-.mod_repository_view td.releasenotes { line-height:1.3 !important; }
+.mod_repository_view .description img { padding:2px; border:1px solid #ccc; }
+.mod_repository_view .description td { line-height:1.3; }
+.mod_repository_view .description ul { margin:0 0 1em 2.1em; padding:0; }
+.mod_repository_view .description li { list-style-type:disc; }
+.mod_repository_view .releasenotes { line-height:1.3 !important; }
+.mod_repository_view .releasenotes li { margin-left:2em; list-style-type:disc; }
+
 .mod_repository_view tr.spacer td
 {
 	background-color:#fff;
@@ -149,4 +152,4 @@
 .mod_repository #sql_table td.tl_col_1 { width:18px; vertical-align:top; }
 .mod_repository #sql_table td.tl_col_1, .mod_repository #sql_table td.tl_col_2 { padding-bottom:3px; }
 .mod_repository #sql_table pre { white-space:pre-wrap; }
-.mod_repository #sql_table pre label { font-family:monospace; }
+.mod_repository #sql_table pre label { font-family:Courier,monospace; font-size:12px; font-size:.75rem; }

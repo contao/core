@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -20,8 +20,7 @@ namespace Contao;
 /**
  * Class FormTextField
  *
- * Form field "text".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -30,27 +29,38 @@ class FormTextField extends \Widget
 
 	/**
 	 * Submit user input
+	 *
 	 * @var boolean
 	 */
 	protected $blnSubmitInput = true;
 
 	/**
 	 * Add a for attribute
+	 *
 	 * @var boolean
 	 */
 	protected $blnForAttribute = true;
 
 	/**
 	 * Template
+	 *
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_textfield';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-text';
 
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey   The attribute key
+	 * @param mixed  $varValue The attribute value
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -87,9 +97,81 @@ class FormTextField extends \Widget
 
 
 	/**
-	 * Trim values
-	 * @param mixed
-	 * @return mixed
+	 * Return a parameter
+	 *
+	 * @param string $strKey The parameter key
+	 *
+	 * @return mixed The parameter value
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'value':
+				// Hide the Punycode format (see #2750)
+				if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
+				{
+					return \Idna::decode($this->varValue);
+				}
+				else
+				{
+					return $this->varValue;
+				}
+				break;
+
+			case 'type':
+				// Use the HTML5 types (see #4138) but not the date, time and datetime types (see #5918)
+				if ($this->hideInput)
+				{
+					return 'password';
+				}
+
+				if ($this->strFormat != 'xhtml')
+				{
+					switch ($this->rgxp)
+					{
+						case 'digit':
+							// Allow floats (see #7257)
+							if (!isset($this->arrAttributes['step']))
+							{
+								$this->addAttribute('step', 'any');
+							}
+							// NO break; here
+
+						case 'natural':
+							return 'number';
+							break;
+
+						case 'phone':
+							return 'tel';
+							break;
+
+						case 'email':
+							return 'email';
+							break;
+
+						case 'url':
+							return 'url';
+							break;
+					}
+				}
+
+				return 'text';
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
+		}
+	}
+
+
+	/**
+	 * Trim the values
+	 *
+	 * @param mixed $varInput The user input
+	 *
+	 * @return mixed The validated user input
 	 */
 	protected function validator($varInput)
 	{
@@ -108,65 +190,24 @@ class FormTextField extends \Widget
 			$varInput = \Idna::encodeEmail($varInput);
 		}
 
-		return parent::validator(trim($varInput));
+		return parent::validator($varInput);
 	}
 
 
 	/**
 	 * Generate the widget and return it as string
-	 * @return string
+	 *
+	 * @return string The widget markup
 	 */
 	public function generate()
 	{
-		// Hide the Punycode format (see #2750)
-		if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
-		{
-			$this->varValue = \Idna::decode($this->varValue);
-		}
-
-		if ($this->hideInput)
-		{
-			$strType = 'password';
-		}
-		elseif ($this->strFormat != 'xhtml')
-		{
-			// Use the HTML5 types (see #4138)
-			// but not the date, time and datetime types (see #5918)
-			switch ($this->rgxp)
-			{
-				case 'digit':
-					$strType = 'number';
-					break;
-
-				case 'phone':
-					$strType = 'tel';
-					break;
-
-				case 'email':
-					$strType = 'email';
-					break;
-
-				case 'url':
-					$strType = 'url';
-					break;
-
-				default:
-					$strType = 'text';
-					break;
-			}
-		}
-		else
-		{
-			$strType = 'text';
-		}
-
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',
-						$strType,
+						$this->type,
 						$this->strName,
 						$this->strId,
 						($this->hideInput ? ' password' : ''),
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						specialchars($this->varValue),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						specialchars($this->value),
 						$this->getAttributes(),
 						$this->strTagEnding) . $this->addSubmit();
 	}

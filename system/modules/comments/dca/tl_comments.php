@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Comments
  * @link    https://contao.org
@@ -240,7 +240,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
  * Class tl_comments
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Comments
  */
@@ -278,13 +278,13 @@ class tl_comments extends Backend
 
 				if ($objComment->numRows < 1)
 				{
-					$this->log('Comment ID ' . Input::get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Comment ID ' . Input::get('id') . ' does not exist', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
 				{
-					$this->log('Not enough permissions to ' . Input::get('act') . ' comment ID ' . Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
+					$this->log('Not enough permissions to ' . Input::get('act') . ' comment ID ' . Input::get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -316,7 +316,7 @@ class tl_comments extends Backend
 			default:
 				if (strlen(Input::get('act')))
 				{
-					$this->log('Invalid command "'.Input::get('act').'"', 'tl_comments checkPermission', TL_ERROR);
+					$this->log('Invalid command "'.Input::get('act').'"', __METHOD__, TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -356,7 +356,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Do not check whether the page is mounted (see #5174)
-				if ($objPage->numRows > 0 && $this->User->isAllowed(4, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
@@ -368,7 +368,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Do not check whether the page is mounted (see #5174)
-				if ($objPage->numRows > 0 && $this->User->isAllowed(1, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->isAllowed(BackendUser::CAN_EDIT_PAGE, $objPage->row()))
 				{
 					Cache::set($strKey, true);
 				}
@@ -524,8 +524,8 @@ class tl_comments extends Backend
 
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
-<div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
+<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . Date::parse(Config::get('datimFormat'), $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
+<div class="limit_height mark_links' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
 ' . $arrRow['comment'] . '
 </div>
 </div>' . "\n    ";
@@ -544,7 +544,7 @@ class tl_comments extends Backend
 	 */
 	public function editComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->isAllowedToEditComment($row['parent'], $row['source']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -560,7 +560,7 @@ class tl_comments extends Backend
 	 */
 	public function deleteComment($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return $this->isAllowedToEditComment($row['parent'], $row['source']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -583,7 +583,7 @@ class tl_comments extends Backend
 		}
 
 		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
 			return '';
 		}
@@ -595,7 +595,7 @@ class tl_comments extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
+		if (!$this->isAllowedToEditComment($row['parent'], $row['source']))
 		{
 			return Image::getHtml($icon) . ' ';
 		}
@@ -617,9 +617,9 @@ class tl_comments extends Backend
 		$this->checkPermission();
 
 		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
+		if (!$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
+			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -631,8 +631,15 @@ class tl_comments extends Backend
 		{
 			foreach ($GLOBALS['TL_DCA']['tl_comments']['fields']['published']['save_callback'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, $this);
+				}
 			}
 		}
 
@@ -641,6 +648,6 @@ class tl_comments extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), 'tl_comments toggleVisibility()', TL_GENERAL);
+		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), __METHOD__, TL_GENERAL);
 	}
 }

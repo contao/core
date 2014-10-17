@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentHyperlink
  *
  * Front end content element "hyperlink".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -59,42 +59,26 @@ class ContentHyperlink extends \ContentElement
 		}
 
 		// Use an image instead of the title
-		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
+		if ($this->useImage && $this->singleSRC != '')
 		{
-			$objModel = \FilesModel::findByPk($this->singleSRC);
+			$objModel = \FilesModel::findByUuid($this->singleSRC);
 
-			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($this->singleSRC))
+				{
+					$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
 				$this->Template->setData($this->arrData);
 
-				$objFile = new \File($objModel->path, true);
+				$this->singleSRC = $objModel->path;
+				$this->addImageToTemplate($this->Template, $this->arrData);
 
-				if ($objFile->isGdImage)
-				{
-					$size = deserialize($this->size);
-					$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
-
-					// Adjust the image size
-					if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))
-					{
-						$size[0] = $intMaxWidth;
-						$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
-					}
-
-					$src = \Image::get($objModel->path, $size[0], $size[1], $size[2]);
-
-					if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
-					{
-						$this->Template->arrSize = $imgSize;
-						$this->Template->imgSize = ' ' . $imgSize[3];
-					}
-
-					$this->Template->src = TL_FILES_URL . $src;
-					$this->Template->alt = specialchars($this->alt);
-					$this->Template->linkTitle = specialchars($this->linkTitle);
-					$this->Template->caption = $this->caption;
-				}
+				$this->Template->linkTitle = specialchars($this->linkTitle);
 			}
 		}
 
@@ -119,6 +103,13 @@ class ContentHyperlink extends \ContentElement
 		if ($this->target)
 		{
 			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
+		}
+
+		// Unset the title attributes in the back end (see #6258)
+		if (TL_MODE == 'BE')
+		{
+			$this->Template->title = '';
+			$this->Template->linkTitle = '';
 		}
 	}
 }

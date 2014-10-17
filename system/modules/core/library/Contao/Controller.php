@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class Controller extends \System
 {
@@ -49,7 +49,7 @@ abstract class Controller extends \System
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
 		array_push($arrAllowed, 'html5'); // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))
@@ -89,7 +89,7 @@ abstract class Controller extends \System
 		// Get the default templates
 		foreach (\TemplateLoader::getPrefixedFiles($strPrefix) as $strTemplate)
 		{
-			$arrTemplates[$strTemplate] = $strTemplate;
+			$arrTemplates[$strTemplate][] = 'root';
 		}
 
 		$arrCustomized = glob(TL_ROOT . '/templates/' . $strPrefix . '*');
@@ -100,58 +100,72 @@ abstract class Controller extends \System
 			foreach ($arrCustomized as $strFile)
 			{
 				$strTemplate = basename($strFile, strrchr($strFile, '.'));
-
-				if (!isset($arrTemplates[$strTemplate]))
-				{
-					$arrTemplates[$strTemplate] = $strTemplate;
-				}
+				$arrTemplates[$strTemplate][] = $GLOBALS['TL_LANG']['MSC']['global'];
 			}
 		}
 
 		// Do not look for back end templates in theme folders (see #5379)
-		if ($strPrefix == 'be_' || $strPrefix == 'mail_')
+		if ($strPrefix != 'be_' && $strPrefix != 'mail_')
 		{
-			return $arrTemplates;
-		}
-
-		// Try to select the themes (see #5210)
-		try
-		{
-			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
-		}
-		catch (\Exception $e)
-		{
-			$objTheme = null;
-		}
-
-		// Add the theme templates
-		if ($objTheme !== null)
-		{
-			while ($objTheme->next())
+			// Try to select the themes (see #5210)
+			try
 			{
-				if ($objTheme->templates != '')
+				$objTheme = \ThemeModel::findAll(array('order'=>'name'));
+			}
+			catch (\Exception $e)
+			{
+				$objTheme = null;
+			}
+
+			// Add the theme templates
+			if ($objTheme !== null)
+			{
+				while ($objTheme->next())
 				{
-					$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
-
-					if (is_array($arrThemeTemplates))
+					if ($objTheme->templates != '')
 					{
-						foreach ($arrThemeTemplates as $strFile)
-						{
-							$strTemplate = basename($strFile, strrchr($strFile, '.'));
+						$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
 
-							if (!isset($arrTemplates[$strTemplate]))
+						if (is_array($arrThemeTemplates))
+						{
+							foreach ($arrThemeTemplates as $strFile)
 							{
-								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
-							}
-							else
-							{
-								$arrTemplates[$strTemplate] .= ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+								$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+								if (!isset($arrTemplates[$strTemplate]))
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
+								else
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
+
+		// Show the template sources (see #6875)
+		foreach ($arrTemplates as $k=>$v)
+		{
+			$v = array_filter($v, function($a) {
+				return $a != 'root';
+			});
+
+			if (empty($v))
+			{
+				$arrTemplates[$k] = $k;
+			}
+			else
+			{
+				$arrTemplates[$k] = $k . ' (' . implode(', ', $v) . ')';
+			}
+		}
+
+		// Sort the template names
+		ksort($arrTemplates);
 
 		return $arrTemplates;
 	}
@@ -165,7 +179,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The module HTML markup
 	 */
-	protected function getFrontendModule($intId, $strColumn='main')
+	public static function getFrontendModule($intId, $strColumn='main')
 	{
 		if (!is_object($intId) && !strlen($intId))
 		{
@@ -190,10 +204,10 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					$strBuffer = $this->getArticle($strArticle);
+					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
 
 					// Send a 404 header if the article does not exist
-					if ($strBuffer === false)
+					if ($objArticle === null)
 					{
 						// Do not index the page
 						$objPage->noSearch = 1;
@@ -203,12 +217,15 @@ abstract class Controller extends \System
 						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
-					return $strBuffer;
+					// Add the "first" and "last" classes (see #2583)
+					$objArticle->classes = array('first', 'last');
+
+					return static::getArticle($objArticle);
 				}
 			}
 
 			// HOOK: trigger the article_raster_designer extension
-			if (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			if (in_array('article_raster_designer', \ModuleLoader::getActive()))
 			{
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
@@ -222,11 +239,34 @@ abstract class Controller extends \System
 			}
 
 			$return = '';
+			$intCount = 0;
 			$blnMultiMode = ($objArticles->count() > 1);
+			$intLast = $objArticles->count() - 1;
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->current(), $blnMultiMode, false, $strColumn);
+				$objRow = $objArticles->current();
+
+				// Add the "first" and "last" classes (see #2583)
+				if ($intCount == 0 || $intCount == $intLast)
+				{
+					$arrCss = array();
+
+					if ($intCount == 0)
+					{
+						$arrCss[] = 'first';
+					}
+
+					if ($intCount == $intLast)
+					{
+						$arrCss[] = 'last';
+					}
+
+					$objRow->classes = $arrCss;
+				}
+
+				$return .= static::getArticle($objRow, $blnMultiMode, false, $strColumn);
+				++$intCount;
 			}
 
 			return $return;
@@ -242,38 +282,17 @@ abstract class Controller extends \System
 			else
 			{
 				$objRow = \ModuleModel::findByPk($intId);
-			}
 
-			if ($objRow === null)
-			{
-				return '';
-			}
-
-			// Apply the access restrictions in the front end only (see #5603)
-			if (TL_MODE == 'FE')
-			{
-				// Show to guests only
-				if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+				if ($objRow === null)
 				{
 					return '';
 				}
+			}
 
-				// Protected element
-				if (!BE_USER_LOGGED_IN && $objRow->protected)
-				{
-					if (!FE_USER_LOGGED_IN)
-					{
-						return '';
-					}
-
-					$this->import('FrontendUser', 'User');
-					$groups = deserialize($objRow->groups);
-
-					if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
-					{
-						return '';
-					}
-				}
+			// Check the visibility (see #6311)
+			if (!static::isVisibleElement($objRow))
+			{
+				return '';
 			}
 
 			$strClass = \Module::findClass($objRow->type);
@@ -281,7 +300,7 @@ abstract class Controller extends \System
 			// Return if the class does not exist
 			if (!class_exists($strClass))
 			{
-				$this->log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
+				static::log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 				return '';
 			}
 
@@ -294,8 +313,7 @@ abstract class Controller extends \System
 			{
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
-					$this->import($callback[0]);
-					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objModule);
+					$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objModule);
 				}
 			}
 
@@ -320,7 +338,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string|boolean The article HTML markup or false
 	 */
-	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
+	public static function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
 		global $objPage;
 
@@ -336,35 +354,17 @@ abstract class Controller extends \System
 			}
 
 			$objRow = \ArticleModel::findByIdOrAliasAndPid($varId, (!$blnIsInsertTag ? $objPage->id : null));
+
+			if ($objRow === null)
+			{
+				return false;
+			}
 		}
 
-		// Return if the article does not exist
-		if ($objRow === null)
-		{
-			return false;
-		}
-
-		// Show to guests only
-		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
+		// Check the visibility (see #6311)
+		if (!static::isVisibleElement($objRow))
 		{
 			return '';
-		}
-
-		// Protected the element
-		if ($objRow->protected && !BE_USER_LOGGED_IN)
-		{
-			if (!FE_USER_LOGGED_IN)
-			{
-				return '';
-			}
-
-			$this->import('FrontendUser', 'User');
-			$groups = deserialize($objRow->groups);
-
-			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-			{
-				return '';
-			}
 		}
 
 		// Print the article as PDF
@@ -396,8 +396,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objRow);
+				static::importStatic($callback[0])->$callback[1]($objRow);
 			}
 		}
 
@@ -422,7 +421,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The content element HTML markup
 	 */
-	protected function getContentElement($intId, $strColumn='main')
+	public static function getContentElement($intId, $strColumn='main')
 	{
 		if (is_object($intId))
 		{
@@ -443,31 +442,10 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Apply the access restrictions in the front end only (see #5603)
-		if (TL_MODE == 'FE')
+		// Check the visibility (see #6311)
+		if (!static::isVisibleElement($objRow))
 		{
-			// Show to guests only
-			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
-			{
-				return '';
-			}
-
-			// Protected the element
-			if ($objRow->protected && !BE_USER_LOGGED_IN)
-			{
-				if (!FE_USER_LOGGED_IN)
-				{
-					return '';
-				}
-
-				$this->import('FrontendUser', 'User');
-				$groups = deserialize($objRow->groups);
-
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-				{
-					return '';
-				}
-			}
+			return '';
 		}
 
 		// Remove the spacing in the back end preview
@@ -481,7 +459,7 @@ abstract class Controller extends \System
 		// Return if the class does not exist
 		if (!class_exists($strClass))
 		{
-			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
+			static::log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
 			return '';
 		}
 
@@ -494,8 +472,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -517,7 +494,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The form HTML markup
 	 */
-	protected function getForm($varId, $strColumn='main')
+	public static function getForm($varId, $strColumn='main')
 	{
 		if (is_object($varId))
 		{
@@ -548,8 +525,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -587,7 +563,7 @@ abstract class Controller extends \System
 	/**
 	 * Calculate the page status icon name based on the page parameters
 	 *
-	 * @param object A page object
+	 * @param object $objPage The page object
 	 *
 	 * @return string The status icon name
 	 */
@@ -597,7 +573,7 @@ abstract class Controller extends \System
 		$image = $objPage->type.'.gif';
 
 		// Page not published or not active
-		if (!$objPage->published || $objPage->start && $objPage->start > time() || $objPage->stop && $objPage->stop < time())
+		if (!$objPage->published || ($objPage->start != '' && $objPage->start > time()) || ($objPage->stop != '' && $objPage->stop < time()))
 		{
 			$sub += 1;
 		}
@@ -625,6 +601,60 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Check whether an element is visible in the front end
+	 *
+	 * @param \Model $objElement The element model
+	 *
+	 * @return boolean True if the element is visible
+	 */
+	public static function isVisibleElement(\Model $objElement)
+	{
+		// Only apply the restrictions in the front end
+		if (TL_MODE != 'FE' || BE_USER_LOGGED_IN)
+		{
+			return true;
+		}
+
+		$blnReturn = true;
+
+		// Protected element
+		if ($objElement->protected)
+		{
+			if (!FE_USER_LOGGED_IN)
+			{
+				$blnReturn = false;
+			}
+			else
+			{
+				$groups = deserialize($objElement->groups);
+
+				if (empty($groups) || !is_array($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
+				{
+					$blnReturn = false;
+				}
+			}
+		}
+
+		// Show to guests only
+		elseif ($objElement->guests && FE_USER_LOGGED_IN)
+		{
+			$blnReturn = false;
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['isVisibleElement']) && is_array($GLOBALS['TL_HOOKS']['isVisibleElement']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['isVisibleElement'] as $callback)
+			{
+				$blnReturn = static::importStatic($callback[0])->$callback[1]($objElement, $blnReturn);
+			}
+		}
+
+		return $blnReturn;
+	}
+
+
+	/**
 	 * Replace insert tags with their values
 	 *
 	 * @param string  $strBuffer The text with the tags to be replaced
@@ -637,7 +667,7 @@ abstract class Controller extends \System
 		global $objPage;
 
 		// Preserve insert tags
-		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
+		if (\Config::get('disableInsertTags'))
 		{
 			return \String::restoreBasicEntities($strBuffer);
 		}
@@ -665,7 +695,8 @@ abstract class Controller extends \System
 			}
 
 			$flags = explode('|', $strTag);
-			$elements = explode('::', array_shift($flags));
+			$tag = array_shift($flags);
+			$elements = explode('::', $tag);
 
 			// Load the value from cache
 			if (isset($arrCache[$strTag]) && !in_array('refresh', $flags))
@@ -677,7 +708,7 @@ abstract class Controller extends \System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'post' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || $elements[0] == 'toggle_view' || strncmp($elements[0], 'cache_', 6) === 0 || in_array('uncached', $flags))
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -691,7 +722,7 @@ abstract class Controller extends \System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
+					$arrCache[$strTag] = \Date::parse($elements[1] ?: \Config::get('dateFormat'));
 					break;
 
 				// Accessibility tags
@@ -708,6 +739,11 @@ abstract class Controller extends \System
 					{
 						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . $elements[1] . '">';
 					}
+					break;
+
+				// Line break
+				case 'br':
+					$arrCache[$strTag] = '<br' . ($objPage->outputFormat == 'xhtml' ? ' />' : '>');
 					break;
 
 				// E-mail addresses
@@ -730,7 +766,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'email_open':
-							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" title="' . $strEmail . '" class="email">';
 							break;
 
 						case 'email_url':
@@ -749,7 +785,42 @@ abstract class Controller extends \System
 						break;
 					}
 
-					\System::loadLanguageFile($keys[0]);
+					$file = $keys[0];
+
+					// Map the key (see #7217)
+					switch ($file)
+					{
+						case 'CNT':
+							$file = 'countries';
+							break;
+
+						case 'LNG':
+							$file = 'languages';
+							break;
+
+						case 'MOD':
+						case 'FMD':
+							$file = 'modules';
+							break;
+
+						case 'FFL':
+							$file = 'tl_form_field';
+							break;
+
+						case 'CACHE':
+							$file = 'tl_page';
+							break;
+
+						case 'XPL':
+							$file = 'explain';
+							break;
+
+						case 'XPT':
+							$file = 'exception';
+							break;
+					}
+
+					\System::loadLanguageFile($file);
 
 					if (count($keys) == 2)
 					{
@@ -789,15 +860,15 @@ abstract class Controller extends \System
 
 						if ($rgxp == 'date')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('dateFormat'), $value);
 						}
 						elseif ($rgxp == 'time')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('timeFormat'), $value);
 						}
 						elseif ($rgxp == 'datim')
 						{
-							$arrCache[$strTag] = \Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+							$arrCache[$strTag] = \Date::parse(\Config::get('datimFormat'), $value);
 						}
 						elseif (is_array($value))
 						{
@@ -826,6 +897,9 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_name':
+					$strTarget = null;
+
 					// Back link
 					if ($elements[1] == 'back')
 					{
@@ -875,7 +949,7 @@ abstract class Controller extends \System
 						switch ($objNextPage->type)
 						{
 							case 'redirect':
-								$strUrl = $objNextPage->url;
+								$strUrl = $this->replaceInsertTags($objNextPage->url); // see #6765
 
 								if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 								{
@@ -899,18 +973,12 @@ abstract class Controller extends \System
 									$objNext->loadDetails();
 
 									// Check the target page language (see #4706)
-									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+									if (\Config::get('addLanguageToUrl'))
 									{
 										$strForceLang = $objNext->language;
 									}
 
-									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-									// Add the domain if it differs from the current one (see #3765)
-									if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-									{
-										$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
-									}
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -920,18 +988,12 @@ abstract class Controller extends \System
 								$objNextPage->loadDetails();
 
 								// Check the target page language (see #4706, #5465)
-								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+								if (\Config::get('addLanguageToUrl'))
 								{
 									$strForceLang = $objNextPage->language;
 								}
 
-								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
-
-								// Add the domain if it differs from the current one (see #3765)
-								if ($objNextPage->domain != '' && $objNextPage->domain != \Environment::get('host'))
-								{
-									$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
-								}
+								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang, true);
 								break;
 						}
 
@@ -961,6 +1023,10 @@ abstract class Controller extends \System
 
 						case 'link_target':
 							$arrCache[$strTag] = $strTarget;
+							break;
+
+						case 'link_name':
+							$arrCache[$strTag] = specialchars($strName);
 							break;
 					}
 					break;
@@ -1007,7 +1073,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
+					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1036,12 +1102,12 @@ abstract class Controller extends \System
 				case 'faq_open':
 				case 'faq_url':
 				case 'faq_title':
-					if (($objFaq = \FaqModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objFaq->getRelated('pid')) === null)
+					if (($objFaq = \FaqModel::findByIdOrAlias($elements[1])) === null || ($objPid = $objFaq->getRelated('pid')) === null || ($objJumpTo = $objPid->getRelated('jumpTo')) === null)
 					{
 						break;
 					}
 
-					$strUrl = $this->generateFrontendUrl($objPid->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
+					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1075,6 +1141,8 @@ abstract class Controller extends \System
 						break;
 					}
 
+					$strUrl = '';
+
 					if ($objNews->source == 'external')
 					{
 						$strUrl = $objNews->url;
@@ -1090,14 +1158,14 @@ abstract class Controller extends \System
 					{
 						if (($objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
 						if (($objArchive = $objNews->getRelated('pid')) !== null && ($objJumpTo = $objArchive->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 						}
 					}
 
@@ -1133,6 +1201,8 @@ abstract class Controller extends \System
 						break;
 					}
 
+					$strUrl = '';
+
 					if ($objEvent->source == 'external')
 					{
 						$strUrl = $objEvent->url;
@@ -1148,14 +1218,14 @@ abstract class Controller extends \System
 					{
 						if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
+							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
 						if (($objCalendar = $objEvent->getRelated('pid')) !== null && ($objJumpTo = $objCalendar->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/events/') . ((!\Config::get('disableAlias') && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 						}
 					}
 
@@ -1238,7 +1308,7 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
@@ -1248,17 +1318,30 @@ abstract class Controller extends \System
 
 					if ($objFeed !== null)
 					{
-						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+						$arrCache[$strTag] = $objFeed->feedBase . 'share/' . $objFeed->alias . '.xml';
 					}
 					break;
 
 				// Last update
 				case 'last_update':
-					$objUpdate = \Database::getInstance()->execute("SELECT MAX(tstamp) AS tc, (SELECT MAX(tstamp) FROM tl_news) AS tn, (SELECT MAX(tstamp) FROM tl_calendar_events) AS te FROM tl_content");
+					$strQuery = "SELECT MAX(tstamp) AS tc";
+
+					if (in_array('news', \ModuleLoader::getActive()))
+					{
+						$strQuery .= ", (SELECT MAX(tstamp) FROM tl_news) AS tn";
+					}
+
+					if (in_array('calendar', \ModuleLoader::getActive()))
+					{
+						$strQuery .= ", (SELECT MAX(tstamp) FROM tl_calendar_events) AS te";
+					}
+
+					$strQuery .= " FROM tl_content";
+					$objUpdate = \Database::getInstance()->query($strQuery);
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = \Date::parse($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = \Date::parse($elements[1] ?: \Config::get('datimFormat'), max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 
@@ -1277,18 +1360,12 @@ abstract class Controller extends \System
 					$arrCache[$strTag] = \Input::post($elements[1]);
 					break;
 
-				// Mobile/desktop toggle (hide if there is no mobile layout)
+				// Mobile/desktop toggle (see #6469)
 				case 'toggle_view':
-					if (!$objPage->mobileLayout)
-					{
-						$arrCache[$strTag] = '';
-						break;
-					}
-
 					$strUrl = ampersand(\Environment::get('request'));
 					$strGlue = (strpos($strUrl, '?') === false) ? '?' : '&amp;';
 
-					if ($objPage->isMobile)
+					if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 					{
 						$arrCache[$strTag] = '<a href="' . $strUrl . $strGlue . 'toggle_view=desktop" class="toggle_desktop" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]) . '">' . $GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0] . '</a>';
 					}
@@ -1304,7 +1381,7 @@ abstract class Controller extends \System
 					{
 						for (; $_rit<$_cnt; $_rit+=3)
 						{
-							if ($tags[$_rit+1] == 'iflng')
+							if ($tags[$_rit+1] == 'iflng' || $tags[$_rit+1] == 'iflng::' . $objPage->language)
 							{
 								break;
 							}
@@ -1491,9 +1568,22 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Handle numeric IDs (see #4805)
-					if (is_numeric($strFile))
+					if (\Validator::isUuid($strFile))
 					{
+						// Handle UUIDs
+						$objFile = \FilesModel::findByUuid($strFile);
+
+						if ($objFile === null)
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$strFile = $objFile->path;
+					}
+					elseif (is_numeric($strFile))
+					{
+						// Handle numeric IDs (see #4805)
 						$objFile = \FilesModel::findByPk($strFile);
 
 						if ($objFile === null)
@@ -1511,22 +1601,23 @@ abstract class Controller extends \System
 					}
 
 					// Check the maximum image width
-					if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0 && $width > $GLOBALS['TL_CONFIG']['maxImageWidth'])
+					if (\Config::get('maxImageWidth') > 0 && $width > \Config::get('maxImageWidth'))
 					{
-						$width = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+						$width = \Config::get('maxImageWidth');
 						$height = null;
 					}
 
 					// Generate the thumbnail image
 					try
 					{
-						$src = \Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
+						$src = \Image::get($strFile, $width, $height, $mode);
+						$objFile = new \File($src);
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+						if (($imgSize = $objFile->imageSize) !== false)
 						{
-							$dimensions = $imgSize[3];
+							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 						}
 
 						// Generate the HTML markup
@@ -1554,8 +1645,19 @@ abstract class Controller extends \System
 					}
 					break;
 
-				// Files from the templates directory
+				// Files (UUID or template path)
 				case 'file':
+					if (\Validator::isUuid($elements[1]))
+					{
+						$objFile = \FilesModel::findByUuid($elements[1]);
+
+						if ($objFile !== null)
+						{
+							$arrCache[$strTag] = $objFile->path;
+							break;
+						}
+					}
+
 					$arrGet = $_GET;
 					\Input::resetCache();
 					$strFile = $elements[1];
@@ -1600,7 +1702,7 @@ abstract class Controller extends \System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache);
+							$varValue = $this->$callback[0]->$callback[1]($tag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
@@ -1610,7 +1712,7 @@ abstract class Controller extends \System
 							}
 						}
 					}
-					if ($GLOBALS['TL_CONFIG']['debugMode'])
+					if (\Config::get('debugMode'))
 					{
 						$GLOBALS['TL_DEBUG']['unknown_insert_tags'][] = $strTag;
 					}
@@ -1645,6 +1747,8 @@ abstract class Controller extends \System
 						case 'strrev':
 						case 'base64_encode':
 						case 'base64_decode':
+						case 'urlencode':
+						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
 							break;
 
@@ -1672,7 +1776,7 @@ abstract class Controller extends \System
 								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
 								{
 									$this->import($callback[0]);
-									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache);
+									$varValue = $this->$callback[0]->$callback[1]($flag, $tag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
 
 									// Replace the tag and stop the loop
 									if ($varValue !== false)
@@ -1682,7 +1786,7 @@ abstract class Controller extends \System
 									}
 								}
 							}
-							if ($GLOBALS['TL_CONFIG']['debugMode'])
+							if (\Config::get('debugMode'))
 							{
 								$GLOBALS['TL_DEBUG']['unknown_insert_tag_flags'][] = $flag;
 							}
@@ -1720,7 +1824,6 @@ abstract class Controller extends \System
 
 		$arrReplace = array();
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$strTagEnding = $blnXhtml ? ' />' : '>';
 		$strScripts = '';
 
 		// Add the internal jQuery scripts
@@ -1766,16 +1869,14 @@ abstract class Controller extends \System
 				$objCombiner->add($script);
 			}
 
-			$strScripts .= "\n" . '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>';
+			$strScripts .= "\n" . \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml);
+			$strScripts .= "\n" . \Template::generateInlineScript('SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()', $blnXhtml) . "\n";
+		}
 
-			if ($blnXhtml)
-			{
-				$strScripts .= "\n" . '<script type="text/javascript">' . "\n/* <![CDATA[ */\n" . 'SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()' . "\n/* ]]> */\n" . '</script>' . "\n";
-			}
-			else
-			{
-				$strScripts .= "\n" . '<script>SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()</script>' . "\n";
-			}
+		// Command scheduler
+		if (!\Config::get('disableCron'))
+		{
+			$strScripts .= "\n" . \Template::generateInlineScript('setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_BODY]]'] = $strScripts;
@@ -1797,15 +1898,15 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $options->media);
 				}
 				else
 				{
-					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1815,20 +1916,20 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode, $version) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if (!$version)
+				if ($options->static)
 				{
-					$version = filemtime(TL_ROOT . '/' . $stylesheet);
-				}
+					if ($options->mtime === null)
+					{
+						$options->mtime = filemtime(TL_ROOT . '/' . $stylesheet);
+					}
 
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, $version, $media);
+					$objCombiner->add($stylesheet, $options->mtime, $options->media);
 				}
 				else
 				{
-					$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . static::addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . $strTagEnding . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1836,7 +1937,7 @@ abstract class Controller extends \System
 		// Create the aggregated style sheet
 		if ($objCombiner->hasEntries())
 		{
-			$strScripts .= '<link' . ($blnXhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '"' . $strTagEnding . "\n";
+			$strScripts .= \Template::generateStyleTag($objCombiner->getCombinedFile(), 'all', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_CSS]]'] = $strScripts;
@@ -1849,22 +1950,22 @@ abstract class Controller extends \System
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				list($javascript, $mode) = explode('|', $javascript);
+				$options = \String::resolveFlaggedUrl($javascript);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
 					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
 				}
 				else
 				{
-					$strScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . static::addStaticUrlTo($javascript) . '"></script>' . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
 				}
 			}
 
 			// Create the aggregated script and add it before the non-static scripts (see #4890)
 			if ($objCombiner->hasEntries())
 			{
-				$strScripts = '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n" . $strScripts;
+				$strScripts = \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
 			}
 		}
 
@@ -1935,22 +2036,24 @@ abstract class Controller extends \System
 			}
 		}
 
-		return implode(' ', $return);
+		return implode($return);
 	}
 
 
 	/**
 	 * Add a request string to the current URL
 	 *
-	 * @param string $strRequest The string to be added
+	 * @param string  $strRequest The string to be added
+	 * @param boolean $blnAddRef  Add the referer ID
+	 * @param array   $arrUnset   An optional array of keys to unset
 	 *
 	 * @return string The new URL
 	 */
-	public static function addToUrl($strRequest)
+	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
 	{
 		$strRequest = preg_replace('/^&(amp;)?/i', '', $strRequest);
 
-		if ($strRequest != '')
+		if ($strRequest != '' && $blnAddRef)
 		{
 			$strRequest .= '&amp;ref=' . TL_REFERER_ID;
 		}
@@ -1960,14 +2063,9 @@ abstract class Controller extends \System
 		// Overwrite existing parameters
 		foreach ($queries as $k=>$v)
 		{
-			if ($v == 'nb=1')
-			{
-				unset($queries[$k]);
-			}
+			list($key) = explode('=', $v);
 
-			$explode = explode('=', $v);
-
-			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
+			if (in_array($key, $arrUnset) || preg_match('/(^|&(amp;)?)' . preg_quote($key, '/') . '=/i', $strRequest))
 			{
 				unset($queries[$k]);
 			}
@@ -1980,7 +2078,7 @@ abstract class Controller extends \System
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
 
-		return \Environment::get('script') . $href . str_replace(' ', '%20', $strRequest);
+		return TL_SCRIPT . $href . str_replace(' ', '%20', $strRequest);
 	}
 
 
@@ -1989,21 +2087,25 @@ abstract class Controller extends \System
 	 */
 	public static function reload()
 	{
-		$strLocation = \Environment::get('url') . \Environment::get('requestUri');
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		header('Location: ' . $strLocation);
+		$strLocation = \Environment::get('uri');
+
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
+		{
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
+		}
+		else
+		{
+			header('HTTP/1.1 303 See Other');
+			header('Location: ' . $strLocation);
+		}
+
 		exit;
 	}
 
@@ -2016,48 +2118,48 @@ abstract class Controller extends \System
 	 */
 	public static function redirect($strLocation, $intStatus=303)
 	{
-		$strLocation = str_replace('&amp;', '&', $strLocation);
-
-		// Ajax request
-		if (\Environment::get('isAjaxRequest'))
-		{
-			echo $strLocation;
-			exit;
-		}
-
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		// Header
-		switch ($intStatus)
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
+		// Make the location an absolute URL
+		if (!preg_match('@^https?://@i', $strLocation))
 		{
-			case 301:
-				header('HTTP/1.1 301 Moved Permanently');
-				break;
-
-			case 302:
-				header('HTTP/1.1 302 Found');
-				break;
-
-			case 303:
-				header('HTTP/1.1 303 See Other');
-				break;
-
-			case 307:
-				header('HTTP/1.1 307 Temporary Redirect');
-				break;
+			$strLocation = \Environment::get('base') . $strLocation;
 		}
 
-		// Check the target address
-		if (preg_match('@^https?://@i', $strLocation))
+		// Ajax request
+		if (\Environment::get('isAjaxRequest'))
 		{
-			header('Location: ' . $strLocation);
+			header('HTTP/1.1 204 No Content');
+			header('X-Ajax-Location: ' . $strLocation);
 		}
 		else
 		{
-			header('Location: ' . \Environment::get('base') . $strLocation);
+			// Add the HTTP header
+			switch ($intStatus)
+			{
+				case 301:
+					header('HTTP/1.1 301 Moved Permanently');
+					break;
+
+				case 302:
+					header('HTTP/1.1 302 Found');
+					break;
+
+				case 303:
+					header('HTTP/1.1 303 See Other');
+					break;
+
+				case 307:
+					header('HTTP/1.1 307 Temporary Redirect');
+					break;
+			}
+
+			header('Location: ' . $strLocation);
 		}
 
 		exit;
@@ -2067,19 +2169,20 @@ abstract class Controller extends \System
 	/**
 	 * Generate an URL depending on the current rewriteURL setting
 	 *
-	 * @param array  $arrRow       An array of page parameters
-	 * @param string $strParams    An optional string of URL parameters
-	 * @param string $strForceLang Force a certain language
+	 * @param array   $arrRow       An array of page parameters
+	 * @param string  $strParams    An optional string of URL parameters
+	 * @param string  $strForceLang Force a certain language
+	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
-		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
+		if (!\Config::get('disableAlias'))
 		{
 			$strLanguage = '';
 
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			if (\Config::get('addLanguageToUrl'))
 			{
 				if ($strForceLang != '')
 				{
@@ -2099,11 +2202,11 @@ abstract class Controller extends \System
 			// Correctly handle the "index" alias (see #3961)
 			if ($arrRow['alias'] == 'index' && $strParams == '')
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage;
+				$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage;
 			}
 			else
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . ($arrRow['alias'] ?: $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage . ($arrRow['alias'] ?: $arrRow['id']) . $strParams . \Config::get('urlSuffix');
 			}
 		}
 		else
@@ -2121,6 +2224,12 @@ abstract class Controller extends \System
 			}
 
 			$strUrl = 'index.php?id=' . $arrRow['id'] . $strRequest;
+		}
+
+		// Add the domain if it differs from the current one (see #3765 and #6927)
+		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		{
+			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2195,7 +2304,7 @@ abstract class Controller extends \System
 		}
 
 		// Limit downloads to the files directory
-		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $strFile))
+		if (!preg_match('@^' . preg_quote(\Config::get('uploadPath'), '@') . '@i', $strFile))
 		{
 			header('HTTP/1.1 404 Not Found');
 			die('Invalid path');
@@ -2209,7 +2318,7 @@ abstract class Controller extends \System
 		}
 
 		$objFile = new \File($strFile, true);
-		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Check whether the file type is allowed to be downloaded
 		if (!in_array($objFile->extension, $arrAllowedTypes))
@@ -2235,55 +2344,13 @@ abstract class Controller extends \System
 	/**
 	 * Load a set of DCA files
 	 *
-	 * @param string  $strName    The table name
+	 * @param string  $strTable   The table name
 	 * @param boolean $blnNoCache If true, the cache will be bypassed
 	 */
-	public function loadDataContainer($strName, $blnNoCache=false)
+	public static function loadDataContainer($strTable, $blnNoCache=false)
 	{
-		// Return if the data has been loaded already
-		if (isset($GLOBALS['loadDataContainer'][$strName]) && !$blnNoCache)
-		{
-			return;
-		}
-
-		$strCacheFile = 'system/cache/dca/' . $strName . '.php';
-
-		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheFile))
-		{
-			include TL_ROOT . '/' . $strCacheFile;
-		}
-		else
-		{
-			foreach ($this->Config->getActiveModules() as $strModule)
-			{
-				$strFile = 'system/modules/' . $strModule . '/dca/' . $strName . '.php';
-
-				if (file_exists(TL_ROOT . '/' . $strFile))
-				{
-					include TL_ROOT . '/' . $strFile;
-				}
-			}
-		}
-
-		// HOOK: allow to load custom settings
-		if (isset($GLOBALS['TL_HOOKS']['loadDataContainer']) && is_array($GLOBALS['TL_HOOKS']['loadDataContainer']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['loadDataContainer'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strName);
-			}
-		}
-
-		// Local configuration file
-		if (file_exists(TL_ROOT . '/system/config/dcaconfig.php'))
-		{
-			include TL_ROOT . '/system/config/dcaconfig.php';
-		}
-
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadDataContainer'][$strName] = true;
+		$loader = new \DcaLoader($strTable);
+		$loader->load($blnNoCache);
 	}
 
 
@@ -2310,11 +2377,12 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
 
-		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
+		// Make sure the URL is absolute (see #4332)
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
+			$strUrl = \Environment::get('base') . $strUrl;
 		}
 
 		if (!$blnReturn)
@@ -2444,13 +2512,100 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
+		$objFile = new \File($arrItem['singleSRC']);
+
+		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
-		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
 		if ($intMaxWidth === null)
 		{
-			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
+
+		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
+
+		// Store the original dimensions
+		$objTemplate->width = $imgSize[0];
+		$objTemplate->height = $imgSize[1];
+
+		// Adjust the image size
+		if ($intMaxWidth > 0)
+		{
+			// Subtract the margins before deciding whether to resize (see #6018)
+			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+			{
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
+				{
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
+				}
+				else
+				{
+					$intMaxWidth = $intMaxWidth - $intMargin;
+				}
+			}
+
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+			{
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
+			}
+		}
+
+		$file = new \File($arrItem['singleSRC'], true);
+		$imageObj = new \Image($file);
+
+		$src = $imageObj->setTargetWidth($size[0])
+						->setTargetHeight($size[1])
+						->setResizeMode($size[2])
+						->executeResize()
+						->getResizedPath();
+
+		if ($src !== $arrItem['singleSRC'])
+		{
+			$objFile = new \File($src);
+		}
+
+		// Image dimensions
+		if (($imgSize = $objFile->imageSize) !== false)
+		{
+			$objTemplate->arrSize = $imgSize;
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+		}
+
+		if (is_numeric($size[2]))
+		{
+			$picture = $imageObj->getPicture($size[2]);
+		}
+		else
+		{
+			$picture = array
+			(
+				'img' => array
+				(
+					'src' => $src,
+					'srcset' => $src,
+				),
+				'sources' => array()
+			);
+
+			if (!empty($objTemplate->arrSize))
+			{
+				$picture['img']['width'] = $objTemplate->arrSize[0];
+				$picture['img']['height'] = $objTemplate->arrSize[1];
+			}
+		}
+
+		$picture['alt'] = specialchars($arrItem['alt']);
+		$picture['title'] = specialchars($arrItem['title']);
+
+		$objTemplate->picture = $picture;
 
 		// Provide an ID for single lightbox images in HTML5 (see #3742)
 		if ($strLightboxId === null && $arrItem['fullsize'])
@@ -2465,56 +2620,19 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Store the original dimensions
-		$objTemplate->width = $imgSize[0];
-		$objTemplate->height = $imgSize[1];
-
-		// Adjust the image size
-		if ($intMaxWidth > 0)
-		{
-			$arrMargin = deserialize($arrItem['imagemargin']);
-
-			// Subtract the margins before deciding whether to resize (see #6018)
-			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
-			{
-				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
-			}
-
-			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
-			{
-				// See #2268 (thanks to Thyon)
-				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
-
-				$size[0] = $intMaxWidth;
-				$size[1] = floor($intMaxWidth * $ratio);
-			}
-		}
-
-		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
-
-		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
-		{
-			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
-		}
-
 		// Float image
 		if ($arrItem['floating'] != '')
 		{
 			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
-
-			// Only float:left and float:right are supported (see #4758)
-			if ($arrItem['floating'] == 'left' || $arrItem['floating'] == 'right')
-			{
-				$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
-			}
 		}
+
+		// Do not override the "href" key (see #6468)
+		$strHrefKey = ($objTemplate->href != '') ? 'imageHref' : 'href';
 
 		// Image link
 		if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $arrItem['imageUrl'];
+			$objTemplate->$strHrefKey = $arrItem['imageUrl'];
 			$objTemplate->attributes = '';
 
 			if ($arrItem['fullsize'])
@@ -2525,7 +2643,7 @@ abstract class Controller extends \System
 					// Do not add the TL_FILES_URL to external URLs (see #4923)
 					if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
 					{
-						$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
+						$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
 					}
 
 					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
@@ -2540,7 +2658,7 @@ abstract class Controller extends \System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
+			$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
@@ -2551,7 +2669,7 @@ abstract class Controller extends \System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objTemplate->margin = static::generateMargin($arrMargin);
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
@@ -2574,24 +2692,21 @@ abstract class Controller extends \System
 			return;
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($arrEnclosures[0]))
-		{
-			foreach (array('details', 'answer', 'text') as $key)
-			{
-				if (isset($objTemplate->$key))
-				{
-					$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-				}
-			}
-
-			return;
-		}
-
-		$objFiles = \FilesModel::findMultipleByIds($arrEnclosures);
+		$objFiles = \FilesModel::findMultipleByUuids($arrEnclosures);
 
 		if ($objFiles === null)
 		{
+			if (!\Validator::isUuid($arrEnclosures[0]))
+			{
+				foreach (array('details', 'answer', 'text') as $key)
+				{
+					if (isset($objTemplate->$key))
+					{
+						$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+					}
+				}
+			}
+
 			return;
 		}
 
@@ -2611,15 +2726,17 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		global $objPage;
+
 		$arrEnclosures = array();
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
 		// Add download links
 		while ($objFiles->next())
 		{
 			if ($objFiles->type == 'file')
 			{
-				if (!in_array($objFiles->extension, $allowedDownload))
+				if (!in_array($objFiles->extension, $allowedDownload) || !is_file(TL_ROOT . '/' . $objFiles->path))
 				{
 					continue;
 				}
@@ -2633,17 +2750,31 @@ abstract class Controller extends \System
 					$strHref = preg_replace('/(&(amp;)?|\?)file=[^&]+/', '', $strHref);
 				}
 
-				$strHref .= (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+
+				$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta) && $objPage->rootFallbackLanguage !== null)
+				{
+					$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+				}
+
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
+				{
+					$arrMeta['title'] = specialchars($objFile->basename);
+				}
 
 				$arrEnclosures[] = array
 				(
-					'link'      => $objFiles->name,
+					'link'      => $arrMeta['title'],
 					'filesize'  => static::getReadableSize($objFile->filesize),
-					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
+					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
-					'mime'      => $objFile->mime
+					'mime'      => $objFile->mime,
+					'meta'      => $arrMeta
 				);
 			}
 		}
@@ -2678,9 +2809,9 @@ abstract class Controller extends \System
 
 		foreach ($arrConstants as $strKey=>$strConstant)
 		{
-			$url = ($objPage !== null) ? $objPage->$strKey : $GLOBALS['TL_CONFIG'][$strKey];
+			$url = ($objPage !== null) ? $objPage->$strKey : \Config::get($strKey);
 
-			if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
+			if ($url == '' || \Config::get('debugMode'))
 			{
 				define($strConstant, '');
 			}
@@ -3035,7 +3166,7 @@ abstract class Controller extends \System
 	 */
 	public static function getPageSections()
 	{
-		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+		return array('header', 'left', 'right', 'main', 'footer');
 	}
 
 

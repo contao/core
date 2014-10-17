@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Request
 {
@@ -85,6 +85,38 @@ class Request
 	 */
 	protected $arrResponseHeaders = array();
 
+	/**
+	 * Request username
+	 * @var string
+	 */
+	protected $strUsername;
+
+	/**
+	 * Request password
+	 * @var string
+	 */
+	protected $strPassword;
+
+	/**
+	 * Follow redirects
+	 * @var boolean
+	 */
+	protected $blnFollowRedirects = false;
+
+
+	/**
+	 * Number of redirects
+	 * @var integer
+	 */
+	protected $intRedirects = 0;
+
+
+	/**
+	 * Maximum number of redirects
+	 * @var integer
+	 */
+	protected $intRedirectLimit = 3;
+
 
 	/**
 	 * Set the default values
@@ -101,8 +133,12 @@ class Request
 	 *
 	 * Supported keys:
 	 *
-	 * * data:   the request data
-	 * * method: the request method
+	 * * data:     the request data
+	 * * method:   the request method
+	 * * username: the auth username
+	 * * password: the auth password
+	 * * redirect: follow redirects
+	 * * rlimit:   maximum number of redirects
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -119,6 +155,22 @@ class Request
 
 			case 'method':
 				$this->strMethod = $varValue;
+				break;
+
+			case 'username':
+				$this->strUsername = $varValue;
+				break;
+
+			case 'password':
+				$this->strPassword = $varValue;
+				break;
+
+			case 'redirect':
+				$this->blnFollowRedirects = $varValue;
+				break;
+
+			case 'rlimit':
+				$this->intRedirectLimit = $varValue;
 				break;
 
 			default:
@@ -138,6 +190,9 @@ class Request
 	 * * request:  the request string
 	 * * response: the response string
 	 * * headers:  the response headers array
+	 * * username: the auth username
+	 * * redirect: the follow redirects status
+	 * * rlimit:   the maximum number of redirects
 	 *
 	 * @param string $strKey The property key
 	 *
@@ -165,6 +220,18 @@ class Request
 
 			case 'headers':
 				return $this->arrResponseHeaders;
+				break;
+
+			case 'username':
+				return $this->strUsername;
+				break;
+
+			case 'redirect':
+				return $this->blnFollowRedirects;
+				break;
+
+			case 'rlimit':
+				return $this->intRedirectLimit;
 				break;
 		}
 
@@ -259,6 +326,15 @@ class Request
 			'Connection' => 'Connection: close'
 		);
 
+		if (isset($uri['user']))
+		{
+			$default['Authorization'] = 'Authorization: Basic ' . base64_encode($uri['user'] . ':' . $uri['pass']);
+		}
+		elseif ($this->strUsername != '')
+		{
+			$default['Authorization'] = 'Authorization: Basic ' . base64_encode($this->strUsername . ':' . $this->strPassword);
+		}
+
 		foreach ($this->arrHeaders as $header=>$value)
 		{
 			$default[$header] = $header . ': ' . $value;
@@ -352,11 +428,29 @@ class Request
 			$code = floor($code / 100) * 100;
 		}
 
-		$this->intCode = $code;
+		$this->intCode = intval($code);
 
-		if (!in_array(intval($code), array(200, 304)))
+		switch ($this->intCode)
 		{
-			$this->strError = $text ?: $responses[$code];
+			case 200:
+			case 304:
+				// Ok
+				break;
+
+			case 301:
+			case 302:
+			case 303:
+			case 307:
+				if ($this->blnFollowRedirects && $this->intRedirects < $this->intRedirectLimit && !empty($this->arrResponseHeaders['Location']))
+				{
+					++$this->intRedirects;
+					$this->send($this->arrResponseHeaders['Location']);
+				}
+				break;
+
+			default:
+				$this->strError = $text ?: $responses[$this->intCode];
+				break;
 		}
 	}
 }

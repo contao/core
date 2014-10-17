@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleRandomImage
  *
  * Front end module "random image".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -54,17 +54,15 @@ class ModuleRandomImage extends \Module
 			return '';
 		}
 
-		// Check for version 3 format
-		if (!is_numeric($this->multiSRC[0]))
-		{
-			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-		}
-
-		// Get the file entries from the database
-		$this->objFiles = \FilesModel::findMultipleByIds($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
 		if ($this->objFiles === null)
 		{
+			if (!\Validator::isUuid($this->multiSRC[0]))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
 			return '';
 		}
 
@@ -96,7 +94,7 @@ class ModuleRandomImage extends \Module
 			{
 				$objFile = new \File($objFiles->path, true);
 
-				if (!$objFile->isGdImage)
+				if (!$objFile->isImage)
 				{
 					continue;
 				}
@@ -106,7 +104,7 @@ class ModuleRandomImage extends \Module
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					$arrMeta['title'] = specialchars($objFile->basename);
 				}
 
 				// Add the image
@@ -124,7 +122,7 @@ class ModuleRandomImage extends \Module
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesModel::findByPid($objFiles->id);
+				$objSubfiles = \FilesModel::findByPid($objFiles->uuid);
 
 				if ($objSubfiles === null)
 				{
@@ -141,7 +139,7 @@ class ModuleRandomImage extends \Module
 
 					$objFile = new \File($objSubfiles->path, true);
 
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}
@@ -151,7 +149,7 @@ class ModuleRandomImage extends \Module
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+						$arrMeta['title'] = specialchars($objFile->basename);
 					}
 
 					// Add the image

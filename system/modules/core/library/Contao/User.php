@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -32,7 +32,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 abstract class User extends \System
 {
@@ -156,6 +156,16 @@ abstract class User extends \System
 
 
 	/**
+	 * Return the current record as associative array
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->arrData;
+	}
+
+
+	/**
 	 * Authenticate a user
 	 *
 	 * @return boolean True if the user could be authenticated
@@ -163,7 +173,7 @@ abstract class User extends \System
 	public function authenticate()
 	{
 		// Check the cookie hash
-		if ($this->strHash != sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie))
+		if ($this->strHash != sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie))
 		{
 			return false;
 		}
@@ -174,16 +184,16 @@ abstract class User extends \System
 		// Try to find the session in the database
 		if ($objSession->numRows < 1)
 		{
-			$this->log('Could not find the session record', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not find the session record', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
 		$time = time();
 
 		// Validate the session
-		if ($objSession->sessionID != session_id() || (!$GLOBALS['TL_CONFIG']['disableIpCheck'] && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) < $time)
+		if ($objSession->sessionID != session_id() || (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
 		{
-			$this->log('Could not verify the session', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not verify the session', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -192,7 +202,7 @@ abstract class User extends \System
 		// Load the user object
 		if ($this->findBy('id', $this->intId) == false)
 		{
-			$this->log('Could not find the session user', get_class($this) . ' authenticate()', TL_ACCESS);
+			$this->log('Could not find the session user', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -202,7 +212,7 @@ abstract class User extends \System
 		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
 					   ->execute(session_id());
 
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 		return true;
 	}
 
@@ -217,7 +227,7 @@ abstract class User extends \System
 		\System::loadLanguageFile('default');
 
 		// Do not continue if username or password are missing
-		if (!\Input::post('username', true) || !\Input::post('password', true))
+		if (empty($_POST['username']) || empty($_POST['password']))
 		{
 			return false;
 		}
@@ -233,7 +243,7 @@ abstract class User extends \System
 				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
 				{
 					$this->import($callback[0], 'objImport', true);
-					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::post('password', true), $this->strTable);
+					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this->strTable);
 
 					// Load successfull
 					if ($blnLoaded === true)
@@ -247,7 +257,7 @@ abstract class User extends \System
 			if (!$blnLoaded || $this->findBy('username', \Input::post('username', true)) == false)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('Could not find user "' . \Input::post('username', true) . '"', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('Could not find user "' . \Input::post('username', true) . '"', __METHOD__, TL_ACCESS);
 
 				return false;
 			}
@@ -265,20 +275,20 @@ abstract class User extends \System
 		if ($this->loginCount < 1)
 		{
 			$this->locked = $time;
-			$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
+			$this->loginCount = \Config::get('loginCount');
 			$this->save();
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
-			$this->log('The account has been locked for security reasons', get_class($this) . ' login()', TL_ACCESS);
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			$this->log('The account has been locked for security reasons', __METHOD__, TL_ACCESS);
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 
 			// Send admin notification
-			if ($GLOBALS['TL_CONFIG']['adminEmail'] != '')
+			if (\Config::get('adminEmail') != '')
 			{
 				$objEmail = new \Email();
 				$objEmail->subject = $GLOBALS['TL_LANG']['MSC']['lockedAccount'][0];
-				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Idna::decode(\Environment::get('base')), ceil($GLOBALS['TL_CONFIG']['lockPeriod'] / 60));
-				$objEmail->sendTo($GLOBALS['TL_CONFIG']['adminEmail']);
+				$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['lockedAccount'][1], $this->username, ((TL_MODE == 'FE') ? $this->firstname . " " . $this->lastname : $this->name), \Idna::decode(\Environment::get('base')), ceil(\Config::get('lockPeriod') / 60));
+				$objEmail->sendTo(\Config::get('adminEmail'));
 			}
 
 			return false;
@@ -293,17 +303,17 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::post('password', true), $this->password) == $this->password);
+			$blnAuthenticated = \Encryption::verify(\Input::postRaw('password'), $this->password);
 		}
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::post('password', true))) : ($strPassword == sha1($strSalt . \Input::post('password', true)));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postRaw('password')));
 
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = \Encryption::hash(\Input::post('password', true));
+				$this->password = \Encryption::hash(\Input::postRaw('password'));
 			}
 		}
 
@@ -313,7 +323,7 @@ abstract class User extends \System
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
 				$this->import($callback[0], 'objAuth', true);
-				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::post('password', true), $this);
+				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this);
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)
@@ -330,7 +340,7 @@ abstract class User extends \System
 			$this->save();
 
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('Invalid password submitted for username "' . $this->username . '"', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('Invalid password submitted for username "' . $this->username . '"', __METHOD__, TL_ACCESS);
 
 			return false;
 		}
@@ -340,12 +350,12 @@ abstract class User extends \System
 		// Update the record
 		$this->lastLogin = $this->currentLogin;
 		$this->currentLogin = $time;
-		$this->loginCount = $GLOBALS['TL_CONFIG']['loginCount'];
+		$this->loginCount = \Config::get('loginCount');
 		$this->save();
 
 		// Generate the session
 		$this->generateSession();
-		$this->log('User "' . $this->username . '" has logged in', get_class($this) . ' login()', TL_ACCESS);
+		$this->log('User "' . $this->username . '" has logged in', __METHOD__, TL_ACCESS);
 
 		// HOOK: post login callback
 		if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
@@ -371,9 +381,9 @@ abstract class User extends \System
 		$time = time();
 
 		// Check whether the account is locked
-		if (($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) > $time)
+		if (($this->locked + \Config::get('lockPeriod')) > $time)
 		{
-			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + $GLOBALS['TL_CONFIG']['lockPeriod']) - $time) / 60)));
+			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 			return false;
 		}
 
@@ -381,7 +391,7 @@ abstract class User extends \System
 		elseif ($this->disable)
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('The account has been disabled', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('The account has been disabled', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -389,7 +399,7 @@ abstract class User extends \System
 		elseif ($this instanceof \FrontendUser && !$this->login)
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-			$this->log('User "' . $this->username . '" is not allowed to log in', get_class($this) . ' login()', TL_ACCESS);
+			$this->log('User "' . $this->username . '" is not allowed to log in', __METHOD__, TL_ACCESS);
 			return false;
 		}
 
@@ -399,14 +409,14 @@ abstract class User extends \System
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active yet (activation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active yet (activation date: ' . \Date::parse(\Config::get('dateFormat'), $this->start) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 
 			if ($this->stop != '' && $this->stop < $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
-				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse(\Config::get('dateFormat'), $this->stop) . ')', __METHOD__, TL_ACCESS);
 				return false;
 			}
 		}
@@ -427,7 +437,7 @@ abstract class User extends \System
 	{
 		$objResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $strColumn . "=?")
 									->limit(1)
-									->executeUncached($varValue);
+									->execute($varValue);
 
 		if ($objResult->numRows > 0)
 		{
@@ -458,20 +468,20 @@ abstract class User extends \System
 		$time = time();
 
 		// Generate the cookie hash
-		$this->strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie);
+		$this->strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie);
 
 		// Clean up old sessions
 		$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-					   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $this->strHash);
+					   ->execute(($time - \Config::get('sessionTimeout')), $this->strHash);
 
 		// Save the session in the database
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
 					   ->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
 
 		// Set the authentication cookie
-		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), null, null, false, true);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 
-		// Save the login status
+		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = true;
 	}
 
@@ -489,6 +499,9 @@ abstract class User extends \System
 			return false;
 		}
 
+		$intUserid = null;
+
+		// Find the session
 		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
 									 ->limit(1)
 									 ->execute($this->strHash, $this->strCookie);
@@ -515,16 +528,17 @@ abstract class User extends \System
 		session_write_close();
 
 		// Reset the session cookie
-		$this->setCookie(session_name(), session_id(), ($time - 86400), '/');
+		$params = session_get_cookie_params();
+		$this->setCookie(session_name(), session_id(), ($time - 86400), $params['path'], $params['domain'], $params['secure'], $params['httponly']);
 
-		// Remove the login status
+		// Set the login status (backwards compatibility)
 		$_SESSION['TL_USER_LOGGED_IN'] = false;
 
 		// Add a log entry
 		if ($this->findBy('id', $intUserid) != false)
 		{
 			$GLOBALS['TL_USERNAME'] = $this->username;
-			$this->log('User "' . $this->username . '" has logged out', $this->strTable . ' logout()', TL_ACCESS);
+			$this->log('User "' . $this->username . '" has logged out', __METHOD__, TL_ACCESS);
 		}
 
 		// HOOK: post logout callback
@@ -559,7 +573,7 @@ abstract class User extends \System
 		$groups = deserialize($this->arrData['groups']);
 
 		// No groups assigned
-		if (!is_array($groups) || empty($groups))
+		if (empty($groups) || !is_array($groups))
 		{
 			return false;
 		}

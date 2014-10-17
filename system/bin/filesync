@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+$file = fopen(__FILE__, 'r');
+
+// Lock the file
+if (!flock($file, LOCK_EX|LOCK_NB)) {
+	echo "  The script is running already.\n";
+	fclose($file);
+	exit(1);
+}
+
+// Help
+if (in_array('-h', $argv)) {
+	echo "  Usage: {$argv[0]} [-h]\n";
+	echo "  Synchronize the file system with the database.\n\n";
+	echo "  Options:\n";
+	echo "    -h  Show this help text\n";
+	exit;
+}
+
+// Initialize the system
+define('TL_MODE', 'BE');
+require dirname(__DIR__) . '/initialize.php';
+
+// Synchronize
+$strLog = Dbafs::syncFiles();
+
+// Confirm
+echo "  Synchronization complete (see $strLog).\n";
+
+// Release the lock
+flock($file, LOCK_UN);
+fclose($file);

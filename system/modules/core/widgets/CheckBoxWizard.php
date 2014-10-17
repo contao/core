@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class CheckBoxWizard
  *
  * Provide methods to handle sortable checkboxes.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     John Brand <http://www.thyon.com>
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
@@ -67,7 +67,7 @@ class CheckBoxWizard extends \Widget
 	 */
 	public function validate()
 	{
-		$varValue = deserialize($this->getPost($this->strName));
+		$varValue = $this->getPost($this->strName);
 
 		if (!empty($varValue) && !$this->isValidOption($varValue))
 		{
@@ -157,12 +157,12 @@ class CheckBoxWizard extends \Widget
 			$blnCheckAll = false;
 		}
 
-        return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container tl_checkbox_wizard%s"><legend>%s%s%s%s</legend><input type="hidden" name="%s" value="">%s<div class="sortable">%s</div></fieldset>%s',
-        				$this->strId,
+		return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container tl_checkbox_wizard%s"><legend>%s%s%s%s</legend><input type="hidden" name="%s" value="">%s<div class="sortable">%s</div></fieldset>%s',
+						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 						$this->strLabel,
-						($this->required ? '<span class="mandatory">*</span>' : ''),
+						($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 						$this->xlabel,
 						$this->strName,
 						($blnCheckAll ? '<span class="fixed"><input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $this->strId . '\')"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label></span>' : ''),

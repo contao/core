@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PageTree
  *
  * Provide methods to handle input field "page tree".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -52,18 +52,6 @@ class PageTree extends \Widget
 	 */
 	protected $strOrderName;
 
-	/**
-	 * Order field
-	 * @var string
-	 */
-	protected $strOrderField;
-
-	/**
-	 * Multiple flag
-	 * @var boolean
-	 */
-	protected $blnIsMultiple = false;
-
 
 	/**
 	 * Load the database object
@@ -74,21 +62,19 @@ class PageTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
-		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
-		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
-
 		// Prepare the order field
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
-			$this->strOrderId = $this->strOrderField . str_replace($this->strField, '', $this->strId);
-			$this->strOrderName = $this->strOrderField . str_replace($this->strField, '', $this->strName);
+			$this->strOrderId = $this->orderField . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = $this->orderField . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the order value
-			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
+			$objRow = $this->Database->prepare("SELECT {$this->orderField} FROM {$this->strTable} WHERE id=?")
 						   ->limit(1)
 						   ->execute($this->activeRecord->id);
 
-			$this->{$this->strOrderField} = $objRow->{$this->strOrderField};
+			$tmp = deserialize($objRow->{$this->orderField});
+			$this->{$this->orderField} = (!empty($tmp) && is_array($tmp)) ? array_filter($tmp) : array();
 		}
 	}
 
@@ -101,32 +87,38 @@ class PageTree extends \Widget
 	protected function validator($varInput)
 	{
 		// Store the order value
-		if ($this->strOrderField != '')
+		if ($this->orderField != '')
 		{
-			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
-						   ->execute(\Input::post($this->strOrderName), \Input::get('id'));
+			$arrNew = explode(',', \Input::post($this->strOrderName));
+
+			// Only proceed if the value has changed
+			if ($arrNew !== $this->{$this->orderField})
+			{
+				$this->Database->prepare("UPDATE {$this->strTable} SET tstamp=?, {$this->orderField}=? WHERE id=?")
+							   ->execute(time(), serialize($arrNew), $this->activeRecord->id);
+
+				$this->objDca->createNewVersion = true; // see #6285
+			}
 		}
 
 		// Return the value as usual
 		if ($varInput == '')
 		{
-			if (!$this->mandatory)
-			{
-				return '';
-			}
-			else
+			if ($this->mandatory)
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
 			}
+
+			return '';
 		}
 		elseif (strpos($varInput, ',') === false)
 		{
-			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
+			return $this->multiple ? array(intval($varInput)) : intval($varInput);
 		}
 		else
 		{
 			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
-			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
+			return $this->multiple ? $arrValue : $arrValue[0];
 		}
 	}
 
@@ -139,6 +131,7 @@ class PageTree extends \Widget
 	{
 		$arrSet = array();
 		$arrValues = array();
+		$blnHasOrder = ($this->orderField != '' && is_array($this->{$this->orderField}));
 
 		if (!empty($this->varValue)) // Can be an array
 		{
@@ -149,17 +142,16 @@ class PageTree extends \Widget
 				while ($objPages->next())
 				{
 					$arrSet[] = $objPages->id;
-					$arrValues[] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . \Config::get('urlSuffix') . ')';
 				}
 			}
 
 			// Apply a custom sort order
-			if ($this->strOrderField != '' && $this->{$this->strOrderField} != '')
+			if ($blnHasOrder)
 			{
 				$arrNew = array();
-				$arrOrder = array_map('intval', explode(',', $this->{$this->strOrderField}));
 
-				foreach ($arrOrder as $i)
+				foreach ($this->{$this->orderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{
@@ -182,13 +174,13 @@ class PageTree extends \Widget
 		}
 
 		// Load the fonts for the drag hint (see #4838)
-		$GLOBALS['TL_CONFIG']['loadGoogleFonts'] = true;
+		\Config::set('loadGoogleFonts', true);
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . (($this->strOrderField != '') ? '
-  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->strOrderField}.'">' : '') . '
-  <div class="selector_container">' . (($this->strOrderField != '' && count($arrValues)) ? '
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.implode(',', $arrSet).'">' . ($blnHasOrder ? '
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->{$this->orderField}.'">' : '') . '
+  <div class="selector_container">' . (($blnHasOrder && count($arrValues) > 1) ? '
     <p class="sort_hint">' . $GLOBALS['TL_LANG']['MSC']['dragItemsHint'] . '</p>' : '') . '
-    <ul id="sort_'.$this->strId.'" class="'.(($this->strOrderField != '') ? 'sortable' : '').'">';
+    <ul id="sort_'.$this->strId.'" class="'.($blnHasOrder ? 'sortable' : '').'">';
 
 		foreach ($arrValues as $k=>$v)
 		{
@@ -196,7 +188,7 @@ class PageTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.\Input::get('id').'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <p><a href="contao/page.php?do='.\Input::get('do').'&amp;table='.$this->strTable.'&amp;field='.$this->strField.'&amp;act=show&amp;id='.$this->activeRecord->id.'&amp;value='.implode(',', $arrSet).'&amp;rt='.REQUEST_TOKEN.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . ($blnHasOrder ? '
     <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'")</script>' : '') . '
   </div>';
 

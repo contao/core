@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ModuleQuicklink
  *
  * Front end module "quick link".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -91,15 +91,18 @@ class ModuleQuicklink extends \Module
 		// Sort the array keys according to the given order
 		if ($this->orderPages != '')
 		{
-			$arrPages = array_flip(trimsplit(',', $this->orderPages));
-		}
+			$tmp = deserialize($this->orderPages);
 
-		$i = 0;
+			if (!empty($tmp) && is_array($tmp))
+			{
+				$arrPages = array_map(function(){}, array_flip($tmp));
+			}
+		}
 
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$i++] = $objPages->current()->loadDetails()->row(); // see #3765
+			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 
 		$items = array();
@@ -123,30 +126,18 @@ class ModuleQuicklink extends \Module
 						$objNext->loadDetails();
 
 						// Check the target page language (see #4706)
-						if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+						if (\Config::get('addLanguageToUrl'))
 						{
 							$strForceLang = $objNext->language;
 						}
 
-						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 						break;
 					}
 					// DO NOT ADD A break; STATEMENT
 
 				default:
-					$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
-
-					// Add the domain if it differs from the current one (see #3765)
-					if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
-					{
-						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
-					}
+					$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
 					break;
 			}
 

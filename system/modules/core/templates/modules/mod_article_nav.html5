@@ -7,7 +7,6 @@
   <?php endif; ?>
 
   <ul>
-
     <?php if ($this->first): ?>
       <li class="first"><a href="<?php echo $this->first['href']; ?>" class="first" title="<?php echo $this->first['title']; ?>"><?php echo $this->first['link']; ?></a></li>
     <?php endif; ?>
@@ -31,8 +30,7 @@
     <?php if ($this->last): ?>
       <li class="last"><a href="<?php echo $this->last['href']; ?>" class="last" title="<?php echo $this->last['title']; ?>"><?php echo $this->last['link']; ?></a></li>
     <?php endif; ?>
-
-    </ul>
+  </ul>
 
 </div>
 <!-- indexer::continue -->

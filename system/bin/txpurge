@@ -1,0 +1,79 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package Core
+ * @link    https://contao.org
+ * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ */
+
+// Help
+if (in_array('-h', $argv)) {
+	echo "  Usage: {$argv[0]} [-h]\n";
+	echo "  Remove all translations which are less than 95% complete.\n\n";
+	echo "  Options:\n";
+	echo "    -h  Show this help text\n";
+	exit;
+}
+
+// Include the helper functions
+define('TL_ROOT', dirname(dirname(__DIR__)));
+include TL_ROOT . '/system/helper/functions.php';
+
+// Initialize the counter
+$counter = array();
+
+// Loop through the modules
+foreach (scan('system/modules') as $module) {
+	if (!is_dir("system/modules/$module")) {
+		continue;
+	}
+
+	// Loop through the languages
+	foreach (scan("system/modules/$module/languages") as $language) {
+
+		// Initialize the language
+		if (!isset($counter[$language])) {
+			$counter[$language] = 0;
+		}
+
+		// Parse all files and count the labels
+		foreach (scan("system/modules/$module/languages/$language") as $file) {
+			if (substr($file, -3) != 'xlf') {
+				die("Invalid file: $module/languages/$language/$file");
+			}
+
+			// Parse the XML document
+			$xml = new DOMDocument();
+			$xml->preserveWhiteSpace = false;
+			$xml->load("system/modules/$module/languages/$language/$file");
+			$units = $xml->getElementsByTagName('trans-unit');
+
+			// Count the translated nodes
+			foreach ($units as $unit) {
+				if ($language == 'en') {
+					++$counter['en'];
+				} elseif (($node = $unit->firstChild->nextSibling) && $node->nodeValue != '') {
+					++$counter[$language];
+				}
+			}
+		}
+	}
+}
+
+// Calculate the completion level
+foreach ($counter as $language=>$translated) {
+	if ($language != 'en') {
+		$completion = round($translated / $counter['en'] * 100);
+
+		// Remove languages which are less than 95% complete
+		if ($completion < 95) {
+			echo "  Removing $language (only $completion% complete)\n";
+			shell_exec("rm -r system/modules/*/languages/$language");
+		}
+	}
+}

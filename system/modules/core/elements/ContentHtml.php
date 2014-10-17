@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentHtml
  *
  * Front end content element "HTML".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -40,6 +40,13 @@ class ContentHtml extends \ContentElement
 	 */
 	protected function compile()
 	{
-		$this->Template->html = (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
+		if (TL_MODE == 'FE')
+		{
+			$this->Template->html = $this->html;
+		}
+		else
+		{
+			$this->Template->html = '<pre>' . htmlspecialchars($this->html) . '</pre>';
+		}
 	}
 }

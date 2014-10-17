@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class ContentAccordion
  *
  * Front end content element "accordion".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -58,19 +58,19 @@ class ContentAccordion extends \ContentElement
 		// Add an image
 		if ($this->addImage && $this->singleSRC != '')
 		{
-			if (!is_numeric($this->singleSRC))
-			{
-				$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
-			}
-			else
-			{
-				$objModel = \FilesModel::findByPk($this->singleSRC);
+			$objModel = \FilesModel::findByUuid($this->singleSRC);
 
-				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			if ($objModel === null)
+			{
+				if (!\Validator::isUuid($this->singleSRC))
 				{
-					$this->singleSRC = $objModel->path;
-					$this->addImageToTemplate($this->Template, $this->arrData);
+					$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 				}
+			}
+			elseif (is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				$this->singleSRC = $objModel->path;
+				$this->addImageToTemplate($this->Template, $this->arrData);
 			}
 		}
 

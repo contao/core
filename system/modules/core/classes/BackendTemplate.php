@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class BackendTemplate
  *
  * Provide methods to handle back end templates.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -56,46 +56,8 @@ class BackendTemplate extends \Template
 	 */
 	public function output()
 	{
-		// Rich text editor configuration
-		if (!empty($GLOBALS['TL_RTE']) && is_array($GLOBALS['TL_RTE']))
-		{
-			$this->base = \Environment::get('base');
-			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
-
-			// Fallback to English if the user language is not supported
-			$strRteLanguage = substr($GLOBALS['TL_LANGUAGE'], 0, 2);
-			$this->language = file_exists(TL_ROOT . '/assets/tinymce/langs/' . $strRteLanguage . '.js') ? $strRteLanguage : 'en';
-
-			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
-			{
-				$arrRteFields = array();
-
-				foreach ($fields as $field)
-				{
-					$arrRteFields[] = $field['id'];
-				}
-
-				$this->ceFields = $fields;
-				$this->rteFields = implode(',', $arrRteFields); // TinyMCE
-
-				if ($file == 'codeMirror')
-				{
-					$file = 'ace';
-				}
-
-				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
-
-				if (!file_exists($strFile))
-				{
-					throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
-				}
-
-				ob_start();
-				include $strFile;
-				$this->rteConfig .= ob_get_contents();
-				ob_end_clean();
-			}
-		}
+		// User agent class (see #3074 and #6277)
+		$this->ua = \Environment::get('agent')->class;
 
 		// Style sheets
 		if (!empty($GLOBALS['TL_CSS']) && is_array($GLOBALS['TL_CSS']))
@@ -104,15 +66,15 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . '>' . "\n";
+				$options = \String::resolveFlaggedUrl($stylesheet);
+				$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo($stylesheet), $options->media);
 			}
 
 			$this->stylesheets = $strStyleSheets;
 		}
 
 		// Add the debug style sheet
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		if (\Config::get('debugMode'))
 		{
 			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/css/debug.css') . '">' . "\n";
 		}
@@ -124,7 +86,8 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
+				$options = \String::resolveFlaggedUrl($javascript);
+				$strJavaScripts .= \Template::generateScriptTag($this->addStaticUrlTo($javascript), false, $options->async) . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;
@@ -154,10 +117,6 @@ class BackendTemplate extends \Template
 				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
 			}
 		}
-
-		// Add the browser and OS classes (see #3074)
-		$ua = \Environment::get('agent');
-		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;
 		parent::output();

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Calendar
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class Calendar
  *
  * Provide methods regarding calendars.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Calendar
  */
@@ -62,7 +62,7 @@ class Calendar extends \Frontend
 		else
 		{
 			$this->generateFiles($objCalendar->row());
-			$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeed()', TL_CRON);
+			$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -83,7 +83,7 @@ class Calendar extends \Frontend
 			{
 				$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
-				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
+				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
 			}
 		}
 	}
@@ -145,7 +145,7 @@ class Calendar extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s'), $objParent->language);
 					}
 				}
 
@@ -161,8 +161,17 @@ class Calendar extends \Frontend
 				// Recurring events
 				if ($objArticle->recurring)
 				{
-					$count = 0;
 					$arrRepeat = deserialize($objArticle->repeatEach);
+
+					if ($arrRepeat['value'] < 1)
+					{
+						continue;
+					}
+
+					$count = 0;
+					$intStartTime = $objArticle->startTime;
+					$intEndTime = $objArticle->endTime;
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
 
 					// Do not include more than 20 recurrences
 					while ($count++ < 20)
@@ -172,17 +181,12 @@ class Calendar extends \Frontend
 							break;
 						}
 
-						$arg = $arrRepeat['value'];
-						$unit = $arrRepeat['unit'];
+						$intStartTime = strtotime($strtotime, $intStartTime);
+						$intEndTime = strtotime($strtotime, $intEndTime);
 
-						$strtotime = '+ ' . $arg . ' ' . $unit;
-
-						$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
-						$objArticle->endTime = strtotime($strtotime, $objArticle->endTime);
-
-						if ($objArticle->startTime >= $time)
+						if ($intStartTime >= $time)
 						{
-							$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+							$this->addEvent($objArticle, $intStartTime, $intEndTime, $strUrl, $strLink);
 						}
 					}
 				}
@@ -209,7 +213,7 @@ class Calendar extends \Frontend
 					$objItem->title = $event['title'];
 					$objItem->link = $event['link'];
 					$objItem->published = $event['tstamp'];
-					$objItem->start = $event['start'];
+					$objItem->begin = $event['begin'];
 					$objItem->end = $event['end'];
 					$objItem->author = $event['authorName'];
 
@@ -223,7 +227,7 @@ class Calendar extends \Frontend
 						{
 							while ($objElement->next())
 							{
-								$strDescription .= $this->getContentElement($objElement->id);
+								$strDescription .= $this->getContentElement($objElement->current());
 							}
 						}
 					}
@@ -232,7 +236,7 @@ class Calendar extends \Frontend
 						$strDescription = $event['teaser'];
 					}
 
-					$strDescription = $this->replaceInsertTags($strDescription);
+					$strDescription = $this->replaceInsertTags($strDescription, false);
 					$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 					if (is_array($event['enclosure']))
@@ -249,7 +253,7 @@ class Calendar extends \Frontend
 		}
 
 		// Create the file
-		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType()));
+		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType(), false));
 	}
 
 
@@ -257,9 +261,10 @@ class Calendar extends \Frontend
 	 * Add events to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -294,7 +299,6 @@ class Calendar extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objCalendar->jumpTo);
 
 					// The target page does not exist
@@ -309,12 +313,17 @@ class Calendar extends \Frontend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
-					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
+					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objCalendar->jumpTo];
@@ -326,7 +335,7 @@ class Calendar extends \Frontend
 				{
 					while ($objEvents->next())
 					{
-						$arrPages[] = sprintf($strUrl, (($objEvents->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvents->alias : $objEvents->id));
+						$arrPages[] = sprintf($strUrl, (($objEvents->alias != '' && !\Config::get('disableAlias')) ? $objEvents->alias : $objEvents->id));
 					}
 				}
 			}
@@ -357,9 +366,9 @@ class Calendar extends \Frontend
 		if ($objPage === null)
 		{
 			$objPage = new \stdClass();
-			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
-			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
-			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+			$objPage->dateFormat = \Config::get('dateFormat');
+			$objPage->datimFormat = \Config::get('datimFormat');
+			$objPage->timeFormat = \Config::get('timeFormat');
 		}
 
 		$intKey = date('Ymd', $intStart);
@@ -396,7 +405,7 @@ class Calendar extends \Frontend
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					$link = $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -404,17 +413,7 @@ class Calendar extends \Frontend
 		// Link to the default page
 		if ($link == '')
 		{
-			$link = $strBase . sprintf($strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
-		}
-
-		// Clean the RTE output
-		if ($objPage->outputFormat == 'xhtml')
-		{
-			$objEvent->teaser = \String::toXhtml($objEvent->teaser);
-		}
-		else
-		{
-			$objEvent->teaser = \String::toHtml5($objEvent->teaser);
+			$link = $strBase . sprintf($strUrl, (($objEvent->alias != '' && !\Config::get('disableAlias')) ? $objEvent->alias : $objEvent->id));
 		}
 
 		// Store the whole row (see #5085)
@@ -424,13 +423,23 @@ class Calendar extends \Frontend
 		$arrEvent['link'] = $link;
 		$arrEvent['title'] = $title;
 
+		// Clean the RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$arrEvent['teaser'] = \String::toXhtml($objEvent->teaser);
+		}
+		else
+		{
+			$arrEvent['teaser'] = \String::toHtml5($objEvent->teaser);
+		}
+
 		// Reset the enclosures (see #5685)
 		$arrEvent['enclosure'] = array();
 
 		// Add the article image as enclosure
 		if ($objEvent->addImage)
 		{
-			$objFile = \FilesModel::findByPk($objEvent->singleSRC);
+			$objFile = \FilesModel::findByUuid($objEvent->singleSRC);
 
 			if ($objFile !== null)
 			{
@@ -445,7 +454,7 @@ class Calendar extends \Frontend
 
 			if (is_array($arrEnclosure))
 			{
-				$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+				$objFile = \FilesModel::findMultipleByUuids($arrEnclosure);
 
 				if ($objFile !== null)
 				{

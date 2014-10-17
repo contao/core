@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package News
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class News
  *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    News
  */
@@ -55,7 +55,7 @@ class News extends \Frontend
 		else
 		{
 			$this->generateFiles($objFeed->row());
-			$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeed()', TL_CRON);
+			$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
 		}
 	}
 
@@ -76,7 +76,7 @@ class News extends \Frontend
 			{
 				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 				$this->generateFiles($objFeed->row());
-				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ class News extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 					}
 				}
 
@@ -171,7 +171,7 @@ class News extends \Frontend
 					{
 						while ($objElement->next())
 						{
-							$strDescription .= $this->getContentElement($objElement->id);
+							$strDescription .= $this->getContentElement($objElement->current());
 						}
 					}
 				}
@@ -180,13 +180,13 @@ class News extends \Frontend
 					$strDescription = $objArticle->teaser;
 				}
 
-				$strDescription = $this->replaceInsertTags($strDescription);
+				$strDescription = $this->replaceInsertTags($strDescription, false);
 				$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 				// Add the article image as enclosure
 				if ($objArticle->addImage)
 				{
-					$objFile = \FilesModel::findByPk($objArticle->singleSRC);
+					$objFile = \FilesModel::findByUuid($objArticle->singleSRC);
 
 					if ($objFile !== null)
 					{
@@ -201,7 +201,7 @@ class News extends \Frontend
 
 					if (is_array($arrEnclosure))
 					{
-						$objFile = \FilesModel::findMultipleByIds($arrEnclosure);
+						$objFile = \FilesModel::findMultipleByUuids($arrEnclosure);
 
 						if ($objFile !== null)
 						{
@@ -218,7 +218,7 @@ class News extends \Frontend
 		}
 
 		// Create the file
-		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType()));
+		\File::putContent('share/' . $strFile . '.xml', $this->replaceInsertTags($objFeed->$strType(), false));
 	}
 
 
@@ -264,7 +264,6 @@ class News extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objArchive->jumpTo]))
 				{
-					$domain = \Environment::get('base');
 					$objParent = \PageModel::findWithDetails($objArchive->jumpTo);
 
 					// The target page does not exist
@@ -279,12 +278,17 @@ class News extends \Frontend
 						continue;
 					}
 
-					if ($objParent->domain != '')
+					// The target page is exempt from the sitemap (see #6418)
+					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
 					{
-						$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
+						continue;
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					// Set the domain (see #6421)
+					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
+
+					// Generate the URL
+					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 
 				$strUrl = $arrProcessed[$objArchive->jumpTo];
@@ -334,13 +338,13 @@ class News extends \Frontend
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					return $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return $strBase . sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+		return $strBase . sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 	}
 
 

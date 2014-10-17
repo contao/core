@@ -1,10 +1,10 @@
-/* Contao Open Source CMS, (c) 2005-2013 Leo Feyer, LGPL license */
+/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */
 .styled_select {
 	display:inline;
 	margin-top:1px;
 	position:absolute;
 	background:#fff;
-	border:1px solid #b8b8b8;
+	border:1px solid #aaa;
 	border-radius:3px;
 	padding:0 !important;
 	font-family:"Trebuchet MS",Verdana,sans-serif;
@@ -19,6 +19,10 @@
 }
 .styled_select.focused {
 	background-color:#ebfdd7;
+}
+.webkit .styled_select.focused {
+	outline-offset:-2px;
+	outline:auto 5px -webkit-focus-ring-color;
 }
 .styled_select.disabled {
 	color:#bbb;
@@ -51,7 +55,7 @@
 	position:absolute;
 	top:0;
 	right:0;
-	border-left:1px solid #b8b8b8;
+	border-left:1px solid #aaa;
 	background:#eee;
 	border-radius:0 3px 3px 0;
 	background-image:-moz-linear-gradient(bottom, #ccc 0%, #eee 60%);

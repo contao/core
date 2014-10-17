@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Library
  * @link    https://contao.org
@@ -31,7 +31,7 @@ namespace Contao;
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2013
+ * @copyright Leo Feyer 2005-2014
  */
 class Date
 {
@@ -49,24 +49,6 @@ class Date
 	protected $strFormat;
 
 	/**
-	 * Formatted date
-	 * @var string
-	 */
-	protected $strToDate;
-
-	/**
-	 * Formatted time
-	 * @var string
-	 */
-	protected $strToTime;
-
-	/**
-	 * Formatted date and time
-	 * @var string
-	 */
-	protected $strToDatim;
-
-	/**
 	 * Date range
 	 * @var array
 	 */
@@ -74,7 +56,7 @@ class Date
 
 
 	/**
-	 * Create the object properties and date ranges
+	 * Set the object properties
 	 *
 	 * @param integer $strDate   An optional date string
 	 * @param string  $strFormat An optional format string
@@ -88,23 +70,6 @@ class Date
 		{
 			$this->dateToUnix();
 		}
-
-		// Create the formatted dates
-		$this->strToDate = static::parse(static::getNumericDateFormat(), $this->strDate);
-		$this->strToTime = static::parse(static::getNumericTimeFormat(), $this->strDate);
-		$this->strToDatim = static::parse(static::getNumericDatimFormat(), $this->strDate);
-
-		$intYear = date('Y', $this->strDate);
-		$intMonth = date('m', $this->strDate);
-		$intDay = date('d', $this->strDate);
-
-		// Create the date ranges
-		$this->arrRange['day']['begin'] = mktime(0, 0, 0, $intMonth, $intDay, $intYear);
-		$this->arrRange['day']['end'] = mktime(23, 59, 59, $intMonth, $intDay, $intYear);
-		$this->arrRange['month']['begin'] = mktime(0, 0, 0, $intMonth, 1, $intYear);
-		$this->arrRange['month']['end'] = mktime(23, 59, 59, $intMonth, date('t', $this->strDate), $intYear);
-		$this->arrRange['year']['begin'] = mktime(0, 0, 0, 1, 1, $intYear);
-		$this->arrRange['year']['end'] = mktime(23, 59, 59, 12, 31, $intYear);
 	}
 
 
@@ -139,38 +104,44 @@ class Date
 				break;
 
 			case 'date':
-				return $this->strToDate;
+				return static::parse(static::getNumericDateFormat(), $this->strDate);
 				break;
 
 			case 'time':
-				return $this->strToTime;
+				return static::parse(static::getNumericTimeFormat(), $this->strDate);
 				break;
 
 			case 'datim':
-				return $this->strToDatim;
+				return static::parse(static::getNumericDatimFormat(), $this->strDate);
 				break;
 
 			case 'dayBegin':
+				$this->createDateRanges();
 				return $this->arrRange['day']['begin'];
 				break;
 
 			case 'dayEnd':
+				$this->createDateRanges();
 				return $this->arrRange['day']['end'];
 				break;
 
 			case 'monthBegin':
+				$this->createDateRanges();
 				return $this->arrRange['month']['begin'];
 				break;
 
 			case 'monthEnd':
+				$this->createDateRanges();
 				return $this->arrRange['month']['end'];
 				break;
 
 			case 'yearBegin':
+				$this->createDateRanges();
 				return $this->arrRange['year']['begin'];
 				break;
 
 			case 'yearEnd':
+				$this->createDateRanges();
 				return $this->arrRange['year']['end'];
 				break;
 
@@ -180,6 +151,29 @@ class Date
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * Create the date ranges
+	 */
+	protected function createDateRanges()
+	{
+		if (!empty($this->arrRange))
+		{
+			return;
+		}
+
+		$intYear = date('Y', $this->strDate);
+		$intMonth = date('m', $this->strDate);
+		$intDay = date('d', $this->strDate);
+
+		$this->arrRange['day']['begin'] = mktime(0, 0, 0, $intMonth, $intDay, $intYear);
+		$this->arrRange['day']['end'] = mktime(23, 59, 59, $intMonth, $intDay, $intYear);
+		$this->arrRange['month']['begin'] = mktime(0, 0, 0, $intMonth, 1, $intYear);
+		$this->arrRange['month']['end'] = mktime(23, 59, 59, $intMonth, date('t', $this->strDate), $intYear);
+		$this->arrRange['year']['begin'] = mktime(0, 0, 0, 1, 1, $intYear);
+		$this->arrRange['year']['end'] = mktime(23, 59, 59, 12, 31, $intYear);
 	}
 
 
@@ -257,7 +251,7 @@ class Date
 					'Y' => '(?P<Y>[0-9]{4})',
 					'y' => '(?P<y>[0-9]{2})',
 				);
-	
+
 				return isset($arrRegexp[$matches[0]]) ? $arrRegexp[$matches[0]] : $matches[0];
 			}
 		, preg_quote($strFormat));
@@ -444,7 +438,7 @@ class Date
 			throw new \OutOfBoundsException(sprintf('Invalid date "%s"', $this->strDate));
 		}
 
-		$this->strDate =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
+		$this->strDate = mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
 	}
 
 
@@ -486,9 +480,9 @@ class Date
 
 	/**
 	 * Check for a numeric date format
-	 * 
+	 *
 	 * @param string $strFormat The PHP format string
-	 * 
+	 *
 	 * @return boolean True if the date format is numeric
 	 */
 	public static function isNumericFormat($strFormat)
@@ -499,7 +493,7 @@ class Date
 
 	/**
 	 * Return the numeric date format string
-	 * 
+	 *
 	 * @return string The numeric date format string
 	 */
 	public static function getNumericDateFormat()
@@ -514,13 +508,13 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['dateFormat'];
+		return \Config::get('dateFormat');
 	}
 
 
 	/**
 	 * Return the numeric time format string
-	 * 
+	 *
 	 * @return string The numeric time format string
 	 */
 	public static function getNumericTimeFormat()
@@ -535,13 +529,13 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['timeFormat'];
+		return \Config::get('timeFormat');
 	}
 
 
 	/**
 	 * Return the numeric datim format string
-	 * 
+	 *
 	 * @return string The numeric datim format string
 	 */
 	public static function getNumericDatimFormat()
@@ -556,7 +550,7 @@ class Date
 			}
 		}
 
-		return $GLOBALS['TL_CONFIG']['datimFormat'];
+		return \Config::get('datimFormat');
 	}
 
 
@@ -633,6 +627,15 @@ class Date
 				default:
 					$strReturn .= $chunk;
 					break;
+			}
+		}
+
+		// HOOK: add custom logic (see #4260)
+		if (isset($GLOBALS['TL_HOOKS']['parseDate']) && is_array($GLOBALS['TL_HOOKS']['parseDate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
+			{
+				$strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
 			}
 		}
 

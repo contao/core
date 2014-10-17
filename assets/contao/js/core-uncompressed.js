@@ -1,10 +1,10 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
- * @link    https://contao.org
+ * @see     https://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -13,16 +13,18 @@
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 var AjaxRequest =
 {
 	/**
 	 * Toggle the navigation menu
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the menu item
+	 *
+	 * @returns {boolean}
 	 */
 	toggleNavigation: function(el, id) {
 		el.blur();
@@ -48,7 +50,7 @@ var AjaxRequest =
 		new Request.Contao({
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'tl_parent',
@@ -77,11 +79,13 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the site structure tree
-	 * @param object
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM lement
+	 * @param {string} id    The ID of the target element
+	 * @param {int}    level The indentation level
+	 * @param {int}    mode  The insert mode
+	 *
+	 * @returns {boolean}
 	 */
 	toggleStructure: function (el, id, level, mode) {
 		el.blur();
@@ -108,7 +112,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -126,7 +130,8 @@ var AjaxRequest =
 					li.inject($(el).getParent('li'), 'after');
 				} else {
 					var folder = false,
-						parent = $(el).getParent('li');
+						parent = $(el).getParent('li'),
+						next;
 
 					while (typeOf(parent) == 'element' && (next = parent.getNext('li'))) {
 						parent = next;
@@ -163,11 +168,13 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the file manager tree
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object} el     The DOM element
+	 * @param {string} id     The ID of the target element
+	 * @param {string} folder The folder's path
+	 * @param {int}    level  The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFileManager: function (el, id, folder, level) {
 		el.blur();
@@ -197,7 +204,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -233,12 +240,14 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the page tree input field
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} field The field name
+	 * @param {string} name  The Ajax field name
+	 * @param {int}    level The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	togglePagetree: function (el, id, field, name, level) {
 		el.blur();
@@ -266,7 +275,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -301,13 +310,15 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the file tree input field
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param integer
-	 * @return boolean
+	 *
+	 * @param {object} el     The DOM element
+	 * @param {string} id     The ID of the target element
+	 * @param {string} folder The folder name
+	 * @param {string} field  The field name
+	 * @param {string} name   The Ajax field name
+	 * @param {int}    level  The indentation level
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFiletree: function (el, id, folder, field, name, level) {
 		el.blur();
@@ -335,7 +346,7 @@ var AjaxRequest =
 			field: el,
 			evalScripts: true,
 			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
+			onSuccess: function(txt) {
 				var li = new Element('li', {
 					'id': id,
 					'class': 'parent',
@@ -370,9 +381,10 @@ var AjaxRequest =
 
 	/**
 	 * Toggle subpalettes in edit mode
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} field The field name
 	 */
 	toggleSubpalette: function (el, id, field) {
 		el.blur();
@@ -407,7 +419,24 @@ var AjaxRequest =
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
-				if (json.javascript) Browser.exec(json.javascript);
+				if (json.javascript) {
+
+					// Use Asset.javascript() instead of document.write() to load a
+					// JavaScript file and re-execude the code after it has been loaded
+					document.write = function(str) {
+						var src = '';
+						str.replace(/<script src="([^"]+)"/i, function(all, match){
+							src = match;
+						});
+						src && Asset.javascript(src, {
+							onLoad: function() {
+								Browser.exec(json.javascript);
+							}
+						});
+					};
+
+					Browser.exec(json.javascript);
+				}
 
 				el.value = 1;
 				el.checked = 'checked';
@@ -418,7 +447,6 @@ var AjaxRequest =
 				});
 
 				AjaxRequest.hideBox();
-				Backend.addColorPicker();
 
 				// HOOK
 				window.fireEvent('subpalette'); // Backwards compatibility
@@ -429,10 +457,12 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the visibility of an element
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} table The table name
+	 *
+	 * @returns {boolean}
 	 */
 	toggleVisibility: function(el, id, table) {
 		el.blur();
@@ -440,7 +470,8 @@ var AjaxRequest =
 		var img = null,
 			image = $(el).getFirst('img'),
 			publish = (image.src.indexOf('invisible') != -1),
-			div = el.getParent('div');
+			div = el.getParent('div'),
+			next;
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
@@ -475,11 +506,12 @@ var AjaxRequest =
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
+					var index;
 					if (publish) {
-						var index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
 					} else {
-						var index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2');
 					}
 				}
@@ -512,10 +544,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({'url':window.location.href}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0});
 		}
 
 		return false;
@@ -523,9 +555,11 @@ var AjaxRequest =
 
 	/**
 	 * Feature/unfeature an element
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFeatured: function(el, id) {
 		el.blur();
@@ -547,10 +581,12 @@ var AjaxRequest =
 
 	/**
 	 * Toggle the visibility of a fieldset
-	 * @param object
-	 * @param string
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el    The DOM element
+	 * @param {string} id    The ID of the target element
+	 * @param {string} table The table name
+	 *
+	 * @returns {boolean}
 	 */
 	toggleFieldset: function(el, id, table) {
 		el.blur();
@@ -569,9 +605,11 @@ var AjaxRequest =
 
 	/**
 	 * Toggle a group of a multi-checkbox field
-	 * @param object
-	 * @param string
-	 * @return boolean
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
+	 *
+	 * @returns {boolean}
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
@@ -597,7 +635,9 @@ var AjaxRequest =
 
 	/**
 	 * Store the Live Update ID
-	 * @param string
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the input field
 	 */
 	liveUpdate: function(el, id) {
 		var uid = $(id);
@@ -617,7 +657,8 @@ var AjaxRequest =
 
 	/**
 	 * Display the "loading data" message
-	 * @param string
+	 *
+	 * @param {string} message The message text
 	 */
 	displayBox: function(message) {
 		var box = $('tl_ajaxBox'),
@@ -674,22 +715,39 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  */
 var Backend =
 {
 	/**
-	 * Properties
+	 * The current ID
+	 * @member {string}
 	 */
 	currentId: null,
+
+	/**
+	 * The x mouse position
+	 * @member {int}
+	 */
 	xMousePosition: 0,
+
+	/**
+	 * The Y mouse position
+	 * @member {int}
+	 */
 	yMousePosition: 0,
+
+	/**
+	 * The popup window
+	 * @member {object}
+	 */
 	popupWindow: null,
 
 	/**
 	 * Get the current mouse position
-	 * @param object
+	 *
+	 * @param {object} event The event object
 	 */
 	getMousePosition: function(event) {
 		Backend.xMousePosition = event.client.x;
@@ -697,10 +755,13 @@ var Backend =
 	},
 
 	/**
-	 * Open a new window (backwards compatibility)
-	 * @param object
-	 * @param integer
-	 * @param integer
+	 * Open a new window
+	 *
+	 * @param {object} el     The DOM element
+	 * @param {int}    width  The width in pixels
+	 * @param {int}    height The height in pixels
+	 *
+	 * @deprecated Use Backend.openModalWindow() instead
 	 */
 	openWindow: function(el, width, height) {
 		el.blur();
@@ -711,14 +772,15 @@ var Backend =
 
 	/**
 	 * Open a modal window
-	 * @param integer
-	 * @param string
-	 * @param string
+	 *
+	 * @param {int}    width   The width in pixels
+	 * @param {string} title   The window's title
+	 * @param {string} content The window's content
 	 */
 	openModalWindow: function(width, title, content) {
 		new SimpleModal({
 			'width': width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -731,13 +793,14 @@ var Backend =
 
 	/**
 	 * Open an image in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalImage: function(options) {
 		var opt = options || {};
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -751,7 +814,8 @@ var Backend =
 
 	/**
 	 * Open an iframe in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalIframe: function(options) {
 		var opt = options || {};
@@ -759,7 +823,7 @@ var Backend =
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
-			'btn_ok': Contao.lang.close,
+			'hideFooter': true,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
@@ -773,11 +837,12 @@ var Backend =
 
 	/**
 	 * Open a selector page in a modal window
-	 * @param object
+	 *
+	 * @param {object} options An optional options object
 	 */
 	openModalSelector: function(options) {
-		var opt = options || {};
-		var max = (window.getSize().y-180).toInt();
+		var opt = options || {},
+			max = (window.getSize().y-180).toInt();
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
@@ -791,16 +856,9 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var val = [],
-				frm = null,
-				frms = window.frames;
-			for (var i=0; i<frms.length; i++) {
-				if (frms[i].name == 'simple-modal-iframe') {
-					frm = frms[i];
-					break;
-				}
-			}
-			if (frm === null) {
+			var frm = window.frames['simple-modal-iframe'],
+				val = [], inp, i;
+			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
@@ -808,8 +866,8 @@ var Backend =
 				alert(Contao.lang.picker);
 				return; // see #5704
 			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (var i=0; i<inp.length; i++) {
+			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
@@ -844,6 +902,62 @@ var Backend =
 	},
 
 	/**
+	 * Open a TinyMCE file browser in a modal window
+	 *
+	 * @param {string} field_name The field name
+	 * @param {object} url        An URI object
+	 * @param {string} type       The picker type
+	 * @param {object} win        The window object
+	 */
+	openModalBrowser: function(field_name, url, type, win) {
+		var file = 'file.php',
+			swtch = (type == 'file' ? '&amp;switch=1' : ''),
+			isLink = (url.indexOf('{{link_url::') != -1);
+		if (type == 'file' && (url == '' || isLink)) {
+			file = 'page.php';
+		}
+		if (isLink) {
+			url = url.replace(/^\{\{link_url::([0-9]+)\}\}$/, '$1');
+		}
+		var M = new SimpleModal({
+			'width': 768,
+			'btn_ok': Contao.lang.close,
+			'draggable': false,
+			'overlayOpacity': .5,
+			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
+		});
+		M.addButton(Contao.lang.close, 'btn', function() {
+			this.hide();
+		});
+		M.addButton(Contao.lang.apply, 'btn primary', function() {
+			var frm = window.frames['simple-modal-iframe'],
+				val, inp, i;
+			if (frm === undefined) {
+				alert('Could not find the SimpleModal frame');
+				return;
+			}
+			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (i=0; i<inp.length; i++) {
+				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
+					val = inp[i].get('value');
+					break;
+				}
+			}
+			if (!isNaN(val)) {
+				val = '{{link_url::' + val + '}}';
+			}
+			win.document.getElementById(field_name).value = val;
+			this.hide();
+		});
+		M.show({
+			'title': win.document.getElement('div.mce-title').get('text'),
+			'contents': '<iframe src="contao/' + file + '?table=tl_content&amp;field=singleSRC&amp;value=' + url + swtch + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'model': 'modal'
+		});
+	},
+
+	/**
 	 * Get the current scroll offset and store it in a cookie
 	 */
 	getScrollOffset: function() {
@@ -852,7 +966,8 @@ var Backend =
 
 	/**
 	 * Automatically submit a form
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	autoSubmit: function(el) {
 		Backend.getScrollOffset();
@@ -870,7 +985,8 @@ var Backend =
 
 	/**
 	 * Scroll the window to a certain vertical position
-	 * @param integer
+	 *
+	 * @param {int} offset The offset to scroll to
 	 */
 	vScrollTo: function(offset) {
 		window.addEvent('load', function() {
@@ -903,8 +1019,13 @@ var Backend =
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
+				'title': Contao.lang.expand,
 				'width': 20,
 				'height': 24
+			});
+
+			new Tips.Contao(toggler, {
+				offset: {x:0, y:30}
 			});
 
 			// Disable the function if the preview height is below the max-height
@@ -920,7 +1041,14 @@ var Backend =
 			toggler.addEvent('click', function() {
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
-				this.src = (this.src.indexOf('expand.gif') != -1) ? path + 'collapse.gif' : path + 'expand.gif';
+
+				if (this.src.indexOf('expand.gif') != -1) {
+					this.src = path + 'collapse.gif';
+					this.store('tip:title', Contao.lang.collapse);
+				} else {
+					this.src = path + 'expand.gif';
+					this.store('tip:title', Contao.lang.expand);
+				}
 			});
 
 			toggler.inject(div, 'after');
@@ -929,12 +1057,13 @@ var Backend =
 
 	/**
 	 * Toggle checkboxes
-	 * @param object
-	 * @param string
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
 	 */
-	toggleCheckboxes: function(trigger, id) {
+	toggleCheckboxes: function(el, id) {
 		var items = $$('input'),
-			status = trigger.checked ? 'checked' : '';
+			status = $(el).checked ? 'checked' : '';
 
 		for (var i=0; i<items.length; i++) {
 			if (items[i].type.toLowerCase() != 'checkbox') {
@@ -948,9 +1077,10 @@ var Backend =
 	},
 
 	/**
-	 * Toggle checkbox group
-	 * @param object
-	 * @param string
+	 * Toggle a checkbox group
+	 *
+	 * @param {object} el The DOM element
+	 * @param {string} id The ID of the target element
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		var cls = $(el).className,
@@ -972,8 +1102,9 @@ var Backend =
 
 	/**
 	 * Toggle checkbox elements
-	 * @param string
-	 * @param string
+	 *
+	 * @param {string} el  The DOM element
+	 * @param {string} cls The CSS class name
 	 */
 	toggleCheckboxElements: function(el, cls) {
 		var status = $(el).checked ? 'checked' : '';
@@ -988,8 +1119,9 @@ var Backend =
 	},
 
 	/**
-	 * Toggle textarea line wrap
-	 * @param string
+	 * Toggle the line wrapping mode of a textarea
+	 *
+	 * @param {string} id The ID of the target element
 	 */
 	toggleWrap: function(id) {
 		var textarea = $(id),
@@ -1007,16 +1139,18 @@ var Backend =
 	},
 
 	/**
-	 * Toggle opacity
-	 * @deprecated
+	 * Toggle the opacity of the paste buttons
+	 *
+	 * @deprecated Not required anymore
 	 */
-	blink: function() {
-		// Keep for backwards compatibility
-	},
+	blink: function() {},
 
 	/**
-	 * Initialize the mootools color picker (backwards compatibility)
-	 * @deprecated
+	 * Initialize the mootools color picker
+	 *
+	 * @returns {boolean}
+	 *
+	 * @deprecated Not required anymore
 	 */
 	addColorPicker: function() {
 		return true;
@@ -1024,7 +1158,9 @@ var Backend =
 
 	/**
 	 * Open the page picker wizard in a modal window
-	 * @param string
+	 *
+	 * @param {string} id The ID of the target element
+	 *
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickPage: function(id) {
@@ -1040,8 +1176,10 @@ var Backend =
 
 	/**
 	 * Open the file picker wizard in a modal window
-	 * @param string
-	 * @param string
+	 *
+	 * @param {string} id     The ID of the target element
+	 * @param {string} filter The filter value
+	 *
 	 * @deprecated Use Backend.openModalIframe() instead
 	 */
 	pickFile: function(id, filter) {
@@ -1056,17 +1194,15 @@ var Backend =
 	},
 
 	/**
-	 * Collapse palettes
-	 * @param string
+	 * Collapse all palettes
 	 */
-	collapsePalettes: function(id) {
+	collapsePalettes: function() {
 		$$('fieldset.hide').each(function(el) {
 			el.addClass('collapsed');
 		});
 		$$('label.error, label.mandatory').each(function(el) {
-			if (fs = el.getParent('fieldset')) {
-				fs.removeClass('collapsed');
-			}
+			var fs = el.getParent('fieldset');
+			fs && fs.removeClass('collapsed');
 		});
 	},
 
@@ -1102,7 +1238,9 @@ var Backend =
 
 	/**
 	 * Make parent view items sortable
-	 * @param object
+	 *
+	 * @param {object} ul The DOM element
+	 *
 	 * @author Joe Ray Gregory
 	 */
 	makeParentViewSortable: function(ul) {
@@ -1120,7 +1258,7 @@ var Backend =
 			},
 			onComplete: function() {
 				ds.stop();
-    		},
+			},
 			onSort: function(el) {
 				var div = el.getFirst('div'),
 					prev, next, first;
@@ -1165,49 +1303,51 @@ var Backend =
 		});
 
 		list.addEvent('complete', function(el) {
-	    	if (!list.active) return;
+			if (!list.active) return;
+			var id, pid, req, href;
 
-    		if (el.getPrevious('li')) {
-    			var id = el.get('id').replace(/li_/, ''),
-    				pid = el.getPrevious('li').get('id').replace(/li_/, ''),
-    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid,
-    				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
-    		} else if (el.getParent('ul')) {
-    			var id = el.get('id').replace(/li_/, ''),
-    				pid = el.getParent('ul').get('id').replace(/ul_/, ''),
-    				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid,
-    				href = window.location.href.replace(/\?.*$/, '');
-    			new Request({'url':href+req}).get();
-    		}
-    	});
+			if (el.getPrevious('li')) {
+				id = el.get('id').replace(/li_/, '');
+				pid = el.getPrevious('li').get('id').replace(/li_/, '');
+				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
+				href = window.location.href.replace(/\?.*$/, '');
+				new Request.Contao({'url':href+req, 'followRedirects':false}).get();
+			} else if (el.getParent('ul')) {
+				id = el.get('id').replace(/li_/, '');
+				pid = el.getParent('ul').get('id').replace(/ul_/, '');
+				req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
+				href = window.location.href.replace(/\?.*$/, '');
+				new Request.Contao({'url':href+req, 'followRedirects':false}).get();
+			}
+		});
 	},
 
-    /**
-     * Make multiSRC items sortable
-     * @param string
-     * @param string
-     */
-    makeMultiSrcSortable: function(id, oid) {
-        var list = new Sortables($(id), {
-            contstrain: true,
-            opacity: 0.6
-        }).addEvent('complete', function() {
-            var els = [],
-            	lis = $(id).getChildren('li');
-            for (i=0; i<lis.length; i++) {
-                els.push(lis[i].get('data-id'));
-            }
-            $(oid).value = els.join(',');
-        });
-        list.fireEvent("complete"); // Initial sorting
+	/**
+	 * Make multiSRC items sortable
+	 *
+	 * @param {string} id  The ID of the target element
+	 * @param {string} oid The DOM element
+	 */
+	makeMultiSrcSortable: function(id, oid) {
+		var list = new Sortables($(id), {
+			contstrain: true,
+			opacity: 0.6
+		}).addEvent('complete', function() {
+			var els = [],
+				lis = $(id).getChildren('li'),
+				i;
+			for (i=0; i<lis.length; i++) {
+				els.push(lis[i].get('data-id'));
+			}
+			$(oid).value = els.join(',');
+		});
+		list.fireEvent("complete"); // Initial sorting
 	},
 
 	/**
 	 * Make the wizards sortable
-	 * @param string
 	 */
-	makeWizardsSortable: function(id) {
+	makeWizardsSortable: function() {
 		$$('.tl_listwizard').each(function(el) {
 			new Sortables(el, {
 				contstrain: true,
@@ -1258,11 +1398,12 @@ var Backend =
 		});
 	},
 
-    /**
+	/**
 	 * List wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	listWizard: function(el, command, id) {
 		var list = $(id),
@@ -1320,9 +1461,10 @@ var Backend =
 
 	/**
 	 * Table wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	tableWizard: function(el, command, id) {
 		var table = $(id),
@@ -1333,7 +1475,7 @@ var Backend =
 			headTr = table.getElement('thead').getFirst('tr'),
 			cols = parentTr.getChildren(),
 			index = 0,
-			textarea, previous, next, i;
+			textarea, previous, next, current, i;
 
 		for (i=0; i<cols.length; i++) {
 			if (cols[i] == parentTd) {
@@ -1348,7 +1490,7 @@ var Backend =
 			case 'rcopy':
 				var tr = new Element('tr');
 				for (i=0; i<cols.length; i++) {
-					var next = cols[i].clone(true).inject(tr, 'bottom');
+					next = cols[i].clone(true).inject(tr, 'bottom');
 					if (textarea = cols[i].getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
@@ -1378,8 +1520,8 @@ var Backend =
 				break;
 			case 'ccopy':
 				for (i=0; i<rows.length; i++) {
-					var current = rows[i].getChildren()[index],
-						next = current.clone(true).inject(current, 'after');
+					current = rows[i].getChildren()[index];
+					next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
 					}
@@ -1389,12 +1531,12 @@ var Backend =
 			case 'cmovel':
 				if (index > 0) {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(current.getPrevious(), 'before');
 					}
 				} else {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(rows[i].getLast(), 'before');
 					}
 				}
@@ -1402,12 +1544,12 @@ var Backend =
 			case 'cmover':
 				if (index < (cols.length - 2)) {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(current.getNext(), 'after');
 					}
 				} else {
 					for (i=0; i<rows.length; i++) {
-						var current = rows[i].getChildren()[index];
+						current = rows[i].getChildren()[index];
 						current.inject(rows[i].getFirst(), 'before');
 					}
 				}
@@ -1442,7 +1584,8 @@ var Backend =
 
 	/**
 	 * Resort the table wizard fields
-	 * @param object
+	 *
+	 * @param {object} tbody The DOM element
 	 */
 	tableWizardResort: function(tbody) {
 		var rows = tbody.getChildren(),
@@ -1462,7 +1605,8 @@ var Backend =
 
 	/**
 	 * Resize the table wizard fields on focus
-	 * @param float
+	 *
+	 * @param {float} factor The resize factor
 	 */
 	tableWizardResize: function(factor) {
 		var size = Cookie.read('BE_CELL_SIZE');
@@ -1489,9 +1633,10 @@ var Backend =
 
 	/**
 	 * Module wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	moduleWizard: function(el, command, id) {
 		var table = $(id),
@@ -1505,8 +1650,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
@@ -1515,8 +1660,10 @@ var Backend =
 				}
 				tr.inject(parent, 'after');
 				tr.getElement('.chzn-container').destroy();
+				tr.getElement('.tl_select_column').destroy();
 				new Chosen(tr.getElement('select.tl_select'));
 				Stylect.convertSelects();
+				Backend.convertEnableModules();
 				break;
 			case 'up':
 				if (tr = parent.getPrevious('tr')) {
@@ -1566,9 +1713,10 @@ var Backend =
 
 	/**
 	 * Options wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	optionsWizard: function(el, command, id) {
 		var table = $(id),
@@ -1582,8 +1730,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1641,9 +1789,10 @@ var Backend =
 
 	/**
 	 * Key/value wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	keyValueWizard: function(el, command, id) {
 		var table = $(id),
@@ -1657,8 +1806,8 @@ var Backend =
 
 		switch (command) {
 			case 'copy':
-				var tr = new Element('tr'),
-					childs = parent.getChildren();
+				var tr = new Element('tr');
+				childs = parent.getChildren();
 				for (i=0; i<childs.length; i++) {
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
@@ -1693,7 +1842,7 @@ var Backend =
 		for (i=0; i<rows.length; i++) {
 			childs = rows[i].getChildren();
 			for (j=0; j<childs.length; j++) {
-				if (input = first = childs[j].getFirst('input')) {
+				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
 					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
 				}
@@ -1709,9 +1858,10 @@ var Backend =
 
 	/**
 	 * Checkbox wizard
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param {object} el      The DOM element
+	 * @param {string} command The command name
+	 * @param {string} id      The ID of the target element
 	 */
 	checkboxWizard: function(el, command, id) {
 		var container = $(id).getElement('.sortable'),
@@ -1739,8 +1889,9 @@ var Backend =
 
 	/**
 	 * Meta wizard
-	 * @param object
-	 * @param string
+	 *
+	 * @param {object} el The select element
+	 * @param {string} ul The DOM element
 	 */
 	metaWizard: function(el, ul) {
 		var opt = el.getParent('div').getElement('select');
@@ -1785,7 +1936,8 @@ var Backend =
 
 	/**
 	 * Remove a meta entry
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	metaDelete: function(el) {
 		var li = el.getParent('li'),
@@ -1809,7 +1961,8 @@ var Backend =
 
 	/**
 	 * Toggle the "add language" button
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	toggleAddLanguageButton: function(el) {
 		var inp = el.getParent('div').getElement('input[type="button"]');
@@ -1822,7 +1975,8 @@ var Backend =
 
 	/**
 	 * Update the "edit module" links in the module wizard
-	 * @param object
+	 *
+	 * @param {object} el The DOM element
 	 */
 	updateModuleLink: function(el) {
 		var td = el.getParent('tr').getLast('td'),
@@ -1843,7 +1997,9 @@ var Backend =
 	 * Convert the "enable module" checkboxes
 	 */
 	convertEnableModules: function() {
-		$$('img.mw_enable').each(function(el) {
+		$$('img.mw_enable').filter(function(el) {
+			return !el.hasEvent('click');
+		}).each(function(el) {
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
 				var cbx = el.getNext('input');
@@ -1856,6 +2012,175 @@ var Backend =
 				}
 			});
 		});
+	},
+
+	/**
+	 * Update the fields of the imageSize widget upon change
+	 */
+	enableImageSizeWidgets: function() {
+		$$('.tl_image_size').each(function(el) {
+			var select = el.getElement('select'),
+				widthInput = el.getChildren('input')[0],
+				heightInput = el.getChildren('input')[1],
+				update = function() {
+					if (select.get('value').toInt().toString() === select.get('value')) {
+						widthInput.readOnly = true;
+						heightInput.readOnly = true;
+						var dimensions = $(select.getSelected()[0]).get('text');
+						dimensions = dimensions.split('(').length > 1
+							? dimensions.split('(').getLast().split(')')[0].split('x')
+							: ['', ''];
+						widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
+						heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
+					}
+					else {
+						widthInput.set('placeholder', '');
+						heightInput.set('placeholder', '');
+						widthInput.readOnly = false;
+						heightInput.readOnly = false;
+					}
+				};
+
+			update();
+			select.addEvent('change', update);
+			select.addEvent('keyup', update);
+		});
+	},
+
+	/**
+	 * Allow to mark the important part of an image
+	 *
+	 * @param {object} el The DOM element
+	 */
+	editPreviewWizard: function(el) {
+		el = $(el);
+		var imageElement = el.getElement('img'),
+			inputElements = {},
+			isDrawing = false,
+			originalWidth = el.get('data-original-width'),
+			originalHeight = el.get('data-original-height'),
+			partElement, startPos,
+			getScale = function() {
+				return imageElement.getComputedSize().width / originalWidth;
+			},
+			updateImage = function() {
+				var scale = getScale(),
+					imageSize = imageElement.getComputedSize();
+				partElement.setStyles({
+					top: imageSize.computedTop + (inputElements.y.get('value') * scale).round() + 'px',
+					left: imageSize.computedLeft + (inputElements.x.get('value') * scale).round() + 'px',
+					width: (inputElements.width.get('value') * scale).round() + 'px',
+					height: (inputElements.height.get('value') * scale).round() + 'px'
+				});
+				if (!inputElements.width.get('value').toInt() || !inputElements.height.get('value').toInt()) {
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+			},
+			updateValues = function() {
+				var scale = getScale(),
+					styles = partElement.getStyles('top', 'left', 'width', 'height'),
+					imageSize = imageElement.getComputedSize(),
+					values = {
+						x: Math.max(0, Math.min(originalWidth, (styles.left.toFloat() - imageSize.computedLeft) / scale)).round(),
+						y: Math.max(0, Math.min(originalHeight, (styles.top.toFloat() - imageSize.computedTop) / scale)).round()
+					};
+				values.width = Math.min(originalWidth - values.x, styles.width.toFloat() / scale).round();
+				values.height = Math.min(originalHeight - values.y, styles.height.toFloat() / scale).round();
+				if (!values.width || !values.height) {
+					values.x = values.y = values.width = values.height = '';
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+				Object.each(values, function(value, key) {
+					inputElements[key].set('value', value);
+				});
+			},
+			start = function(event) {
+				event.preventDefault();
+				if (isDrawing) {
+					return;
+				}
+				isDrawing = true;
+				startPos = {
+					x: event.page.x - el.getPosition().x - imageElement.getComputedSize().computedLeft,
+					y: event.page.y - el.getPosition().y - imageElement.getComputedSize().computedTop
+				};
+				move(event);
+			},
+			move = function(event) {
+				if (!isDrawing) {
+					return;
+				}
+				event.preventDefault();
+				var imageSize = imageElement.getComputedSize();
+				var rect = {
+					x: [
+						Math.max(0, Math.min(imageSize.width, startPos.x)),
+						Math.max(0, Math.min(imageSize.width, event.page.x - el.getPosition().x - imageSize.computedLeft))
+					],
+					y: [
+						Math.max(0, Math.min(imageSize.height, startPos.y)),
+						Math.max(0, Math.min(imageSize.height, event.page.y - el.getPosition().y - imageSize.computedTop))
+					]
+				};
+				partElement.setStyles({
+					top: Math.min(rect.y[0], rect.y[1]) + imageSize.computedTop + 'px',
+					left: Math.min(rect.x[0], rect.x[1]) + imageSize.computedLeft + 'px',
+					width: Math.abs(rect.x[0] - rect.x[1]) + 'px',
+					height: Math.abs(rect.y[0] - rect.y[1]) + 'px'
+				});
+				updateValues();
+			},
+			stop = function(event) {
+				move(event);
+				isDrawing = false;
+			},
+			init = function() {
+				var box = el.getParent().getNext('.tl_box');
+				if (!box) {
+					box = el.getParent();
+				}
+				box.getElements('input[name^="importantPart"]').each(function(input) {
+					['x', 'y', 'width', 'height'].each(function(key) {
+						if (input.get('name').substr(13, key.length) === key.capitalize()) {
+							inputElements[key] = input = $(input);
+						}
+					});
+				});
+				if (Object.getLength(inputElements) !== 4) {
+					return;
+				}
+				if (box.get('class') === 'tl_box') {
+					box.setStyle('display', 'none');
+				} else {
+					Object.each(inputElements, function(input) {
+						input.getParent().setStyle('display', 'none');
+					});
+				}
+				el.addClass('tl_edit_preview_enabled');
+				partElement = new Element('div', {
+					'class': 'tl_edit_preview_important_part'
+				}).inject(el);
+				updateImage();
+				imageElement.addEvent('load', updateImage);
+				el.addEvents({
+					mousedown: start,
+					touchstart: start
+				});
+				$(document.documentElement).addEvents({
+					mousemove: move,
+					touchmove: move,
+					mouseup: stop,
+					touchend: stop,
+					touchcancel: stop,
+					resize: updateImage
+				});
+			};
+
+		window.addEvent('domready', init);
 	}
 };
 
@@ -1875,9 +2200,9 @@ window.addEvent('domready', function() {
 
 	Backend.collapsePalettes();
 	Backend.addInteractiveHelp();
-	Backend.addColorPicker();
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -1899,6 +2224,7 @@ window.addEvent('load', function() {
 window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -1907,91 +2233,3 @@ window.addEvent('ajax_change', function() {
 		}).chosen();
 	}
 });
-
-// Map the touch events to mouse events on mobile devices
-if (Browser.Features.Touch) (function() {
-	delete Element.NativeEvents['mousedown'];
-	Element.defineCustomEvent('mousedown', { base:'touchstart' });
-
-	delete Element.NativeEvents['mousemove'];
-	Element.defineCustomEvent('mousemove', { base:'touchmove' });
-
-	delete Element.NativeEvents['mouseup'];
-	Element.defineCustomEvent('mouseup', { base:'touchend' });
-})();
-
-
-/**
- * Class TinyCallback
- *
- * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2013
- * @author     Leo Feyer <https://contao.org>
- */
-var TinyCallback =
-{
-	/**
-	 * Get the scroll offset of the editor
-	 * @param object
-	 */
-	getScrollOffset: function(ed) {
-		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
-			Backend.getScrollOffset();
-	    });
-	},
-
-	fileBrowser: function(field_name, url, type, win) {
-		var M = new SimpleModal({
-			'width': 765,
-			'btn_ok': Contao.lang.close,
-			'draggable': false,
-			'overlayOpacity': .5,
-			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
-		});
-		M.addButton(Contao.lang.close, 'btn', function() {
-			this.hide();
-		});
-		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var frms = window.frames, frm, val, prev;
-			for (var i=0; i<frms.length; i++) {
-				if (frms[i].name == 'simple-modal-iframe') {
-					frm = frms[i];
-					break;
-				}
-			}
-			if (frm === null) {
-				alert('Could not find the SimpleModal frame');
-				return;
-			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (var i=0; i<inp.length; i++) {
-				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
-					val = inp[i].get('value');
-					break;
-				}
-			}
-			if (type == 'page') {
-				win.document.forms[0].elements[field_name].value = '{{link_url::' + val + '}}';
-				if (win.document.forms[0].elements['linktitle']) {
-					win.document.forms[0].elements['linktitle'].value = '{{link_title::' + val + '}}';
-				}
-			} else {
-				win.document.forms[0].elements[field_name].value = val;
-				if (win.document.forms[0].elements['linktitle']) {
-					win.document.forms[0].elements['linktitle'].value = '';
-				}
-				if (prev = win.document.getElementById('prev')) {
-					var u = new URI(val);
-					prev.innerHTML = '<img id="previewImg" src="' + u.toAbsolute() + '" onload="ImageDialog.updateImageData(this)" border="0">';
-				}
-			}
-			this.hide();
-		});
-		M.show({
-			'title': win.document.title,
-			'contents': '<iframe src="contao/' + ((type == 'page') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'page') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
-			'model': 'modal'
-		});
-	}
-};

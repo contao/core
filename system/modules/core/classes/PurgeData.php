@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2013 Leo Feyer
+ * Copyright (c) 2005-2014 Leo Feyer
  *
  * @package Core
  * @link    https://contao.org
@@ -21,7 +21,7 @@ namespace Contao;
  * Class PurgeData
  *
  * Maintenance module "purge data".
- * @copyright  Leo Feyer 2005-2013
+ * @copyright  Leo Feyer 2005-2014
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
@@ -168,7 +168,7 @@ class PurgeData extends \Backend implements \executable
 		$objTemplate->job = $GLOBALS['TL_LANG']['tl_maintenance']['job'];
 		$objTemplate->description = $GLOBALS['TL_LANG']['tl_maintenance']['description'];
 		$objTemplate->submit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
-		$objTemplate->help = ($GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] != '')) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
+		$objTemplate->help = (\Config::get('showHelp') && ($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] != '')) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 
 		return $objTemplate->parse();
 	}

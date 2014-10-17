@@ -19,7 +19,7 @@
       <div class="tl_tbox">
         <h3 style="padding-top:9px"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
         <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset()">
-        <?php if ($GLOBALS['TL_CONFIG']['showHelp']): ?>
+        <?php if (Config::get('showHelp')): ?>
           <p class="tl_help tl_tip"><?php echo $this->updateHelp; ?></p>
         <?php endif; ?>
       </div>
