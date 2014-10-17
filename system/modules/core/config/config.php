@@ -472,3 +472,4 @@ $GLOBALS['TL_ASSETS'] = array
  */
 $GLOBALS['TL_MODELS'] = array();
 $GLOBALS['TL_PERMISSIONS'] = array();
+$GLOBALS['TL_INSERTTAG_FLAGS'] = array();
