@@ -1611,7 +1611,8 @@ abstract class Controller extends \System
 					try
 					{
 						$dimensions = '';
-						$src = \Image::get($strFile, $width, $height, $mode);
+						$imageObj = \Image::create($strFile, array($width, $height, $mode));
+						$src = $imageObj->executeResize()->getResizedPath();
 						$objFile = new \File($src);
 
 						// Add the image dimensions
@@ -2558,14 +2559,9 @@ abstract class Controller extends \System
 			}
 		}
 
-		$file = new \File($arrItem['singleSRC'], true);
-		$imageObj = new \Image($file);
+		$imageObj = \Image::create($objFile, $size);
 
-		$src = $imageObj->setTargetWidth($size[0])
-						->setTargetHeight($size[1])
-						->setResizeMode($size[2])
-						->executeResize()
-						->getResizedPath();
+		$src = $imageObj->executeResize()->getResizedPath();
 
 		if ($src !== $arrItem['singleSRC'])
 		{

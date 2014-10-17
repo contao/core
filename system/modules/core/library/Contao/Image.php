@@ -1231,6 +1231,64 @@ class Image
 
 
 	/**
+	 * Create an image instance from the given image path and size
+	 *
+	 * @param string|File   $image The image path or File instance
+	 * @param array|integer $size  The image size as array (width, height, resize mode) or an tl_image_size ID
+	 *
+	 * @return static The created image instance
+	 */
+	public static function create($image, $size=null)
+	{
+		if (is_string($image))
+		{
+			$image = new \File(rawurldecode($image), true);
+		}
+
+		$imageObj = new static($image);
+
+		// tl_image_size ID as resize mode
+		if (is_array($size) && !empty($size[2]) && is_numeric($size[2]))
+		{
+			$size = (int) $size[2];
+		}
+
+		if (is_array($size))
+		{
+			$size = $size + array(0, 0, 'crop');
+			$imageObj->setTargetWidth($size[0])
+					 ->setTargetHeight($size[1])
+					 ->setResizeMode($size[2]);
+		}
+
+		// Load the image size from the database if $size is an ID
+		elseif (($imageSize = \ImageSizeModel::findByPk($size)) !== null)
+		{
+			$imageObj->setTargetWidth($imageSize->width)
+					 ->setTargetHeight($imageSize->height)
+					 ->setResizeMode($imageSize->resizeMode)
+					 ->setZoomLevel($imageSize->zoom);
+		}
+
+		$fileRecord = \FilesModel::findByPath($image->path);
+
+		// Set the important part
+		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
+		{
+			$imageObj->setImportantPart(array
+			(
+				'x' => (int) $fileRecord->importantPartX,
+				'y' => (int) $fileRecord->importantPartY,
+				'width' => (int) $fileRecord->importantPartWidth,
+				'height' => (int) $fileRecord->importantPartHeight,
+			));
+		}
+
+		return $imageObj;
+	}
+
+
+	/**
 	 * Resize an image and store the resized version in the assets/images folder
 	 *
 	 * @param string  $image        The image path
@@ -1249,12 +1307,10 @@ class Image
 			return null;
 		}
 
-		$file = new \File(rawurldecode($image), true);
-
 		try
 		{
 			/** @var Image $imageObj */
-			$imageObj = new static($file);
+			$imageObj = static::create($image, array($width, $height, $mode));
 		}
 		catch (\InvalidArgumentException $e)
 		{
@@ -1263,34 +1319,8 @@ class Image
 			return null;
 		}
 
-		$imageObj->setTargetWidth($width)
-				 ->setTargetHeight($height)
-				 ->setResizeMode($mode)
-				 ->setTargetPath($target)
-				 ->setForceOverride($force);
-
-		$fileRecord = \FilesModel::findByPath($image);
-
-		// Set the important part
-		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
-		{
-			$imageObj->setImportantPart(array
-			(
-				'x' => (int) $fileRecord->importantPartX,
-				'y' => (int) $fileRecord->importantPartY,
-				'width' => (int) $fileRecord->importantPartWidth,
-				'height' => (int) $fileRecord->importantPartHeight,
-			));
-		}
-
-		// Load the image size from the database if $mode is an id
-		if (is_numeric($mode) && ($imageSize = \ImageSizeModel::findByPk($mode)) !== null)
-		{
-			$imageObj->setTargetWidth($imageSize->width)
-					 ->setTargetHeight($imageSize->height)
-					 ->setResizeMode($imageSize->resizeMode)
-					 ->setZoomLevel($imageSize->zoom);
-		}
+		$imageObj->setTargetPath($target);
+		$imageObj->setForceOverride($force);
 
 		return $imageObj->executeResize()->getResizedPath() ?: null;
 	}
