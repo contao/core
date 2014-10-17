@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-beta1 (2014-10-03)
 --------------------------------
 
+### Fixed
+Handle disabled modules in the module loader.
+
 ### New
 Support responsive images and the `<picture>` element (see #7296).
 
