@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle disabled modules in the module loader (see #7380).
+
+### Fixed
 Fixed the "link_target" insert tag.
 
 ### Updated
