@@ -598,13 +598,31 @@ class Image
 	/**
 	 * Resize an image and create a picture element definition
 	 *
-	 * @param integer $imageSizeId The image size ID
+	 * @param array|integer $size The image size as array (width, height, resize mode) or an tl_image_size ID
 	 *
 	 * @return array The picture element definition
 	 */
-	public function getPicture($imageSizeId)
+	public function getPicture($size)
 	{
-		$imageSize = \ImageSizeModel::findByPk($imageSizeId);
+		// tl_image_size ID as resize mode
+		if (is_array($size) && !empty($size[2]) && is_numeric($size[2]))
+		{
+			$size = (int) $size[2];
+		}
+
+		if (is_array($size))
+		{
+			$size = $size + array(0, 0, 'crop');
+			$imageSize = new \stdClass;
+			$imageSize->width = $size[0];
+			$imageSize->height = $size[1];
+			$imageSize->resizeMode = $size[2];
+			$imageSize->zoomLevel = 0;
+		}
+		else
+		{
+			$imageSize = \ImageSizeModel::findByPk($size);
+		}
 
 		if ($imageSize === null)
 		{
@@ -629,13 +647,16 @@ class Image
 		$mainSource = $this->getPictureSource($importantPart, $imageSize);
 		$sources = array();
 
-		$imageSizeItems = \ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order'=>'sorting ASC'));
-
-		if ($imageSizeItems !== null)
+		if (!empty($imageSize->id))
 		{
-			foreach ($imageSizeItems as $imageSizeItem)
+			$imageSizeItems = \ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order'=>'sorting ASC'));
+
+			if ($imageSizeItems !== null)
 			{
-				$sources[] = $this->getPictureSource($importantPart, $imageSizeItem);
+				foreach ($imageSizeItems as $imageSizeItem)
+				{
+					$sources[] = $this->getPictureSource($importantPart, $imageSizeItem);
+				}
 			}
 		}
 

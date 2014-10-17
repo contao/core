@@ -2575,28 +2575,7 @@ abstract class Controller extends \System
 			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 		}
 
-		if (is_numeric($size[2]))
-		{
-			$picture = $imageObj->getPicture($size[2]);
-		}
-		else
-		{
-			$picture = array
-			(
-				'img' => array
-				(
-					'src' => $src,
-					'srcset' => $src,
-				),
-				'sources' => array()
-			);
-
-			if (!empty($objTemplate->arrSize))
-			{
-				$picture['img']['width'] = $objTemplate->arrSize[0];
-				$picture['img']['height'] = $objTemplate->arrSize[1];
-			}
-		}
+		$picture = $imageObj->getPicture($size);
 
 		$picture['alt'] = specialchars($arrItem['alt']);
 		$picture['title'] = specialchars($arrItem['title']);
