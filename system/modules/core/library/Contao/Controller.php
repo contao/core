@@ -2560,6 +2560,7 @@ abstract class Controller extends \System
 		}
 
 		$imageObj = \Image::create($objFile, $size);
+		$picture = \Picture::create($objFile, $size)->getData();
 
 		$src = $imageObj->executeResize()->getResizedPath();
 
@@ -2574,8 +2575,6 @@ abstract class Controller extends \System
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 		}
-
-		$picture = $imageObj->getPicture($size);
 
 		$picture['alt'] = specialchars($arrItem['alt']);
 		$picture['title'] = specialchars($arrItem['title']);
