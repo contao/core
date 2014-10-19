@@ -2513,7 +2513,7 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
-		$objFile = new \File($arrItem['singleSRC']);
+		$objFile = new \File($arrItem['singleSRC'], true);
 
 		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
@@ -2566,7 +2566,7 @@ abstract class Controller extends \System
 
 		if ($src !== $arrItem['singleSRC'])
 		{
-			$objFile = new \File($src);
+			$objFile = new \File($src, true);
 		}
 
 		// Image dimensions
