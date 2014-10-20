@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly shortend HTML strings in `String::substrHtml()` (see #7311).
+
 ### Updated
 Updated MooTools to version 1.5.1 (see #7267).
 
