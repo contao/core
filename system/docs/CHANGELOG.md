@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Updated swipe.js to version 2.0.1 (see #7307).
+
+### Fixed
 Use an `.invisible` class which plays nicely with screen readers (see #7372).
 
 ### Fixed
