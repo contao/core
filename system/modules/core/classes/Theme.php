@@ -400,10 +400,13 @@ class Theme extends \Backend
 				'tl_theme'       => 'WRITE',
 			);
 
+			// Load the DCAs of the locked tables (see #7345)
 			foreach (array_keys($arrLocks) as $table)
 			{
-				// Load the DCA
-				$this->loadDataContainer($table);
+				if ($table != 'tl_files')
+				{
+					$this->loadDataContainer($table);
+				}
 			}
 
 			$this->Database->lockTables($arrLocks);
@@ -422,7 +425,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table == 'tl_files' || !in_array($table, array_keys($arrLocks)))
 				{
 					continue;
 				}
