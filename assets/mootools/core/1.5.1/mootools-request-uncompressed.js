@@ -20,7 +20,7 @@ description: The heart of MooTools.
 
 license: MIT-style license.
 
-copyright: Copyright (c) 2006-2012 [Valerio Proietti](http://mad4milk.net/).
+copyright: Copyright (c) 2006-2014 [Valerio Proietti](http://mad4milk.net/).
 
 authors: The MooTools production team (http://mootools.net/developers/)
 
@@ -32,12 +32,12 @@ provides: [Core, MooTools, Type, typeOf, instanceOf, Native]
 
 ...
 */
-
+/*! MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2014 [Valerio Proietti](http://mad4milk.net/).*/
 (function(){
 
 this.MooTools = {
-	version: '1.4.5',
-	build: 'ab8ea8824dc3b24b6666867a2c4ed58ebb762cf0'
+	version: '1.5.1',
+	build: '0542c135fdeb7feed7d9917e01447a408f22c876'
 };
 
 // typeOf, instanceOf
@@ -50,7 +50,7 @@ var typeOf = this.typeOf = function(item){
 		if (item.nodeType == 1) return 'element';
 		if (item.nodeType == 3) return (/\S/).test(item.nodeValue) ? 'textnode' : 'whitespace';
 	} else if (typeof item.length == 'number'){
-		if (item.callee) return 'arguments';
+		if ('callee' in item) return 'arguments';
 		if ('item' in item) return 'collection';
 	}
 
@@ -267,7 +267,7 @@ var force = function(name, object, methods){
 			if (!methodsEnumerable) for (var i = 0, l = methods.length; i < l; i++){
 				fn.call(prototype, prototype[methods[i]], methods[i]);
 			}
-			for (var key in prototype) fn.call(prototype, prototype[key], key)
+			for (var key in prototype) fn.call(prototype, prototype[key], key);
 		};
 	}
 
@@ -275,7 +275,7 @@ var force = function(name, object, methods){
 };
 
 force('String', String, [
-	'charAt', 'charCodeAt', 'concat', 'indexOf', 'lastIndexOf', 'match', 'quote', 'replace', 'search',
+	'charAt', 'charCodeAt', 'concat', 'contains', 'indexOf', 'lastIndexOf', 'match', 'quote', 'replace', 'search',
 	'slice', 'split', 'substr', 'substring', 'trim', 'toLowerCase', 'toUpperCase'
 ])('Array', Array, [
 	'pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift', 'concat', 'join', 'slice',
@@ -325,11 +325,13 @@ Object.each = Object.forEach;
 
 Array.implement({
 
+	/*<!ES5>*/
 	forEach: function(fn, bind){
 		for (var i = 0, l = this.length; i < l; i++){
 			if (i in this) fn.call(bind, this[i], i, this);
 		}
 	},
+	/*</!ES5>*/
 
 	each: function(fn, bind){
 		Array.forEach(this, fn, bind);
@@ -544,7 +546,7 @@ description: Contains Array Prototypes like each, contains, and erase.
 
 license: MIT-style license.
 
-requires: Type
+requires: [Type]
 
 provides: Array
 
@@ -687,7 +689,7 @@ Array.implement({
 		if (this.length != 3) return null;
 		var rgb = this.map(function(value){
 			if (value.length == 1) value += value;
-			return value.toInt(16);
+			return parseInt(value, 16);
 		});
 		return (array) ? rgb : 'rgb(' + rgb + ')';
 	},
@@ -852,7 +854,7 @@ description: Contains String Prototypes like camelCase, capitalize, test, and to
 
 license: MIT-style license.
 
-requires: Type
+requires: [Type, Array]
 
 provides: String
 
@@ -861,12 +863,14 @@ provides: String
 
 String.implement({
 
+	//<!ES6>
+	contains: function(string, index){
+		return (index ? String(this).slice(index) : String(this)).indexOf(string) > -1;
+	},
+	//</!ES6>
+
 	test: function(regex, params){
 		return ((typeOf(regex) == 'regexp') ? regex : new RegExp('' + regex, params)).test(this);
-	},
-
-	contains: function(string, separator){
-		return (separator) ? (separator + this + separator).indexOf(separator + string + separator) > -1 : String(this).indexOf(string) > -1;
 	},
 
 	trim: function(){
@@ -927,6 +931,8 @@ String.implement({
 });
 
 
+
+
 /*
 ---
 
@@ -948,37 +954,47 @@ provides: [Browser, Window, Document]
 var document = this.document;
 var window = document.window = this;
 
-var ua = navigator.userAgent.toLowerCase(),
-	platform = navigator.platform.toLowerCase(),
-	UA = ua.match(/(opera|ie|firefox|chrome|version)[\s\/:]([\w\d\.]+)?.*?(safari|version[\s\/:]([\w\d\.]+)|$)/) || [null, 'unknown', 0],
-	mode = UA[1] == 'ie' && document.documentMode;
+var parse = function(ua, platform){
+	ua = ua.toLowerCase();
+	platform = (platform ? platform.toLowerCase() : '');
 
-var Browser = this.Browser = {
+	var UA = ua.match(/(opera|ie|firefox|chrome|trident|crios|version)[\s\/:]([\w\d\.]+)?.*?(safari|(?:rv[\s\/:]|version[\s\/:])([\w\d\.]+)|$)/) || [null, 'unknown', 0];
 
-	extend: Function.prototype.extend,
+	if (UA[1] == 'trident'){
+		UA[1] = 'ie';
+		if (UA[4]) UA[2] = UA[4];
+	} else if (UA[1] == 'crios'){
+		UA[1] = 'chrome';
+	}
 
-	name: (UA[1] == 'version') ? UA[3] : UA[1],
+	platform = ua.match(/ip(?:ad|od|hone)/) ? 'ios' : (ua.match(/(?:webos|android)/) || platform.match(/mac|win|linux/) || ['other'])[0];
+	if (platform == 'win') platform = 'windows';
 
-	version: mode || parseFloat((UA[1] == 'opera' && UA[4]) ? UA[4] : UA[2]),
+	return {
+		extend: Function.prototype.extend,
+		name: (UA[1] == 'version') ? UA[3] : UA[1],
+		version: parseFloat((UA[1] == 'opera' && UA[4]) ? UA[4] : UA[2]),
+		platform: platform
+	};
+};
 
-	Platform: {
-		name: ua.match(/ip(?:ad|od|hone)/) ? 'ios' : (ua.match(/(?:webos|android)/) || platform.match(/mac|win|linux/) || ['other'])[0]
-	},
+var Browser = this.Browser = parse(navigator.userAgent, navigator.platform);
 
+if (Browser.name == 'ie'){
+	Browser.version = document.documentMode;
+}
+
+Browser.extend({
 	Features: {
 		xpath: !!(document.evaluate),
 		air: !!(window.runtime),
 		query: !!(document.querySelector),
 		json: !!(window.JSON)
 	},
+	parseUA: parse
+});
 
-	Plugins: {}
 
-};
-
-Browser[Browser.name] = true;
-Browser[Browser.name + parseInt(Browser.version, 10)] = true;
-Browser.Platform[Browser.Platform.name] = true;
 
 // Request
 
@@ -1011,18 +1027,7 @@ Browser.Request = (function(){
 
 Browser.Features.xhr = !!(Browser.Request);
 
-// Flash detection
 
-var version = (Function.attempt(function(){
-	return navigator.plugins['Shockwave Flash'].description;
-}, function(){
-	return new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version');
-}) || '0 r0').match(/\d+/g);
-
-Browser.Plugins.Flash = {
-	version: Number(version[0] || '0.' + version[1]) || 0,
-	build: Number(version[2]) || 0
-};
 
 // String scripts
 
@@ -1088,6 +1093,7 @@ if (this.attachEvent && !this.addEventListener){
 	var unloadEvent = function(){
 		this.detachEvent('onunload', unloadEvent);
 		document.head = document.html = document.window = null;
+		window = this.Window = document = null;
 	};
 	this.attachEvent('onunload', unloadEvent);
 }
@@ -1518,7 +1524,7 @@ local.setDocument = function(document){
 
 		// native matchesSelector function
 
-		features.nativeMatchesSelector = root.matchesSelector || /*root.msMatchesSelector ||*/ root.mozMatchesSelector || root.webkitMatchesSelector;
+		features.nativeMatchesSelector = root.matches || /*root.msMatchesSelector ||*/ root.mozMatchesSelector || root.webkitMatchesSelector;
 		if (features.nativeMatchesSelector) try {
 			// if matchesSelector trows errors on incorrect sintaxes we can use it
 			features.nativeMatchesSelector.call(root, ':slick');
@@ -1531,7 +1537,7 @@ local.setDocument = function(document){
 		root.slick_expando = 1;
 		delete root.slick_expando;
 		features.getUID = this.getUIDHTML;
-	} catch(e) {
+	} catch(e){
 		features.getUID = this.getUIDXML;
 	}
 
@@ -1552,9 +1558,9 @@ local.setDocument = function(document){
 
 	// hasAttribute
 
-	features.hasAttribute = (root && this.isNativeCode(root.hasAttribute)) ? function(node, attribute) {
+	features.hasAttribute = (root && this.isNativeCode(root.hasAttribute)) ? function(node, attribute){
 		return node.hasAttribute(attribute);
-	} : function(node, attribute) {
+	} : function(node, attribute){
 		node = node.getAttributeNode(attribute);
 		return !!(node && (node.specified || node.nodeValue));
 	};
@@ -1636,7 +1642,7 @@ local.search = function(context, expression, append, first){
 
 		/*<simple-selectors-override>*/
 		var simpleSelector = expression.match(reSimpleSelector);
-		simpleSelectors: if (simpleSelector) {
+		simpleSelectors: if (simpleSelector){
 
 			var symbol = simpleSelector[1],
 				name = simpleSelector[2],
@@ -1689,7 +1695,7 @@ local.search = function(context, expression, append, first){
 		/*</simple-selectors-override>*/
 
 		/*<query-selector-override>*/
-		querySelector: if (context.querySelectorAll) {
+		querySelector: if (context.querySelectorAll){
 
 			if (!this.isHTMLDocument
 				|| qsaFailExpCache[expression]
@@ -1718,7 +1724,7 @@ local.search = function(context, expression, append, first){
 			try {
 				if (first) return context.querySelector(_expression) || null;
 				else nodes = context.querySelectorAll(_expression);
-			} catch(e) {
+			} catch(e){
 				qsaFailExpCache[expression] = 1;
 				break querySelector;
 			} finally {
@@ -1917,14 +1923,14 @@ local.matchNode = function(node, selector){
 	if (this.isHTMLDocument && this.nativeMatchesSelector){
 		try {
 			return this.nativeMatchesSelector.call(node, selector.replace(/\[([^=]+)=\s*([^'"\]]+?)\s*\]/g, '[$1="$2"]'));
-		} catch(matchError) {}
+		} catch(matchError){}
 	}
 
 	var parsed = this.Slick.parse(selector);
 	if (!parsed) return true;
 
 	// simple (single) selectors
-	var expressions = parsed.expressions, simpleExpCounter = 0, i;
+	var expressions = parsed.expressions, simpleExpCounter = 0, i, currentExpression;
 	for (i = 0; (currentExpression = expressions[i]); i++){
 		if (currentExpression.length == 1){
 			var exp = currentExpression[0];
@@ -2352,12 +2358,12 @@ license: MIT-style license.
 
 requires: [Window, Document, Array, String, Function, Object, Number, Slick.Parser, Slick.Finder]
 
-provides: [Element, Elements, $, $$, Iframe, Selectors]
+provides: [Element, Elements, $, $$, IFrame, Selectors]
 
 ...
 */
 
-var Element = function(tag, props){
+var Element = this.Element = function(tag, props){
 	var konstructor = Element.Constructors[tag];
 	if (konstructor) return konstructor(props);
 	if (typeof tag != 'string') return document.id(tag).set(props);
@@ -2541,7 +2547,7 @@ Array.mirror(Elements);
 /*<ltIE8>*/
 var createElementAcceptsHTML;
 try {
-    createElementAcceptsHTML = (document.createElement('<input name=x>').name == 'x');
+	createElementAcceptsHTML = (document.createElement('<input name=x>').name == 'x');
 } catch (e){}
 
 var escapeQuotes = function(html){
@@ -2549,20 +2555,44 @@ var escapeQuotes = function(html){
 };
 /*</ltIE8>*/
 
+/*<ltIE9>*/
+// #2479 - IE8 Cannot set HTML of style element
+var canChangeStyleHTML = (function(){
+    var div = document.createElement('style'),
+        flag = false;
+    try {
+        div.innerHTML = '#justTesing{margin: 0px;}';
+        flag = !!div.innerHTML;
+    } catch(e){}
+    return flag;
+})();
+/*</ltIE9>*/
+
 Document.implement({
 
 	newElement: function(tag, props){
-		if (props && props.checked != null) props.defaultChecked = props.checked;
-		/*<ltIE8>*/// Fix for readonly name and type properties in IE < 8
-		if (createElementAcceptsHTML && props){
-			tag = '<' + tag;
-			if (props.name) tag += ' name="' + escapeQuotes(props.name) + '"';
-			if (props.type) tag += ' type="' + escapeQuotes(props.type) + '"';
-			tag += '>';
-			delete props.name;
-			delete props.type;
+		if (props){
+			if (props.checked != null) props.defaultChecked = props.checked;
+			if ((props.type == 'checkbox' || props.type == 'radio') && props.value == null) props.value = 'on'; 
+			/*<ltIE9>*/ // IE needs the type to be set before changing content of style element
+			if (!canChangeStyleHTML && tag == 'style'){
+				var styleElement = document.createElement('style');
+				styleElement.setAttribute('type', 'text/css');
+				if (props.type) delete props.type;
+				return this.id(styleElement).set(props);
+			}
+			/*</ltIE9>*/
+			/*<ltIE8>*/// Fix for readonly name and type properties in IE < 8
+			if (createElementAcceptsHTML){
+				tag = '<' + tag;
+				if (props.name) tag += ' name="' + escapeQuotes(props.name) + '"';
+				if (props.type) tag += ' type="' + escapeQuotes(props.type) + '"';
+				tag += '>';
+				delete props.name;
+				delete props.type;
+			}
+			/*</ltIE8>*/
 		}
-		/*</ltIE8>*/
 		return this.id(this.createElement(tag)).set(props);
 	}
 
@@ -2797,6 +2827,21 @@ Object.forEach(properties, function(real, key){
 	};
 });
 
+/*<ltIE9>*/
+propertySetters.text = (function(setter){
+	return function(node, value){
+		if (node.get('tag') == 'style') node.set('html', value);
+		else node[properties.text] = value;
+	};
+})(propertySetters.text);
+
+propertyGetters.text = (function(getter){
+	return function(node){
+		return (node.get('tag') == 'style') ? node.innerHTML : getter(node);
+	};
+})(propertyGetters.text);
+/*</ltIE9>*/
+
 // Booleans
 
 var bools = [
@@ -2855,15 +2900,42 @@ el = null;
 /* </webkit> */
 
 /*<IE>*/
-var input = document.createElement('input');
+
+/*<ltIE9>*/
+// #2479 - IE8 Cannot set HTML of style element
+var canChangeStyleHTML = (function(){
+    var div = document.createElement('style'),
+        flag = false;
+    try {
+        div.innerHTML = '#justTesing{margin: 0px;}';
+        flag = !!div.innerHTML;
+    } catch(e){}
+    return flag;
+})();
+/*</ltIE9>*/
+
+var input = document.createElement('input'), volatileInputValue, html5InputSupport;
+
+// #2178
 input.value = 't';
 input.type = 'submit';
-if (input.value != 't') propertySetters.type = function(node, type){
-	var value = node.value;
-	node.type = type;
-	node.value = value;
-};
+volatileInputValue = input.value != 't';
+
+// #2443 - IE throws "Invalid Argument" when trying to use html5 input types
+try {
+	input.type = 'email';
+	html5InputSupport = input.type == 'email';
+} catch(e){}
+
 input = null;
+
+if (volatileInputValue || !html5InputSupport) propertySetters.type = function(node, type){
+	try {
+		var value = node.value;
+		node.type = type;
+		node.value = value;
+	} catch (e){}
+};
 /*</IE>*/
 
 /* getProperty, setProperty */
@@ -2874,7 +2946,28 @@ var pollutesGetAttribute = (function(div){
 	return (div.getAttribute('random') == 'attribute');
 })(document.createElement('div'));
 
-/* <ltIE9> */
+var hasCloneBug = (function(test){
+	test.innerHTML = '<object><param name="should_fix" value="the unknown" /></object>';
+	return test.cloneNode(true).firstChild.childNodes.length != 1;
+})(document.createElement('div'));
+/* </ltIE9> */
+
+var hasClassList = !!document.createElement('div').classList;
+
+var classes = function(className){
+	var classNames = (className || '').clean().split(" "), uniques = {};
+	return classNames.filter(function(className){
+		if (className !== "" && !uniques[className]) return uniques[className] = className;
+	});
+};
+
+var addToClassList = function(name){
+	this.classList.add(name);
+};
+
+var removeFromClassList = function(name){
+	this.classList.remove(name);
+};
 
 Element.implement({
 
@@ -2884,7 +2977,8 @@ Element.implement({
 			setter(this, value);
 		} else {
 			/* <ltIE9> */
-			if (pollutesGetAttribute) var attributeWhiteList = this.retrieve('$attributeWhiteList', {});
+			var attributeWhiteList;
+			if (pollutesGetAttribute) attributeWhiteList = this.retrieve('$attributeWhiteList', {});
 			/* </ltIE9> */
 
 			if (value == null){
@@ -2956,17 +3050,27 @@ Element.implement({
 		return this;
 	},
 
-	hasClass: function(className){
-		return this.className.clean().contains(className, ' ');
+	hasClass: hasClassList ? function(className){
+		return this.classList.contains(className);
+	} : function(className){
+		return classes(this.className).contains(className);
 	},
 
-	addClass: function(className){
-		if (!this.hasClass(className)) this.className = (this.className + ' ' + className).clean();
+	addClass: hasClassList ? function(className){
+		classes(className).forEach(addToClassList, this);
+		return this;
+	} : function(className){
+		this.className = classes(className + ' ' + this.className).join(' ');
 		return this;
 	},
 
-	removeClass: function(className){
-		this.className = this.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
+	removeClass: hasClassList ? function(className){
+		classes(className).forEach(removeFromClassList, this);
+		return this;
+	} : function(className){
+		var classNames = classes(this.className);
+		classes(className).forEach(classNames.erase, classNames);
+		this.className = classNames.join(' ');
 		return this;
 	},
 
@@ -3041,6 +3145,37 @@ Element.implement({
 
 });
 
+
+// appendHTML
+
+var appendInserters = {
+	before: 'beforeBegin',
+	after: 'afterEnd',
+	bottom: 'beforeEnd',
+	top: 'afterBegin',
+	inside: 'beforeEnd'
+};
+
+Element.implement('appendHTML', ('insertAdjacentHTML' in document.createElement('div')) ? function(html, where){
+	this.insertAdjacentHTML(appendInserters[where || 'bottom'], html);
+	return this;
+} : function(html, where){
+	var temp = new Element('div', {html: html}),
+		children = temp.childNodes,
+		fragment = temp.firstChild;
+
+	if (!fragment) return this;
+	if (children.length > 1){
+		fragment = document.createDocumentFragment();
+		for (var i = 0, l = children.length; i < l; i++){
+			fragment.appendChild(children[i]);
+		}
+	}
+
+	inserters[where || 'bottom'](fragment, this);
+	return this;
+});
+
 var collected = {}, storage = {};
 
 var get = function(uid){
@@ -3106,7 +3241,7 @@ Element.implement({
 		}
 
 		/*<ltIE9>*/
-		if (Browser.ie){
+		if (hasCloneBug){
 			var co = clone.getElementsByTagName('object'), to = this.getElementsByTagName('object');
 			for (i = co.length; i--;) co[i].outerHTML = to[i].outerHTML;
 		}
@@ -3119,13 +3254,7 @@ Element.implement({
 [Element, Window, Document].invoke('implement', {
 
 	addListener: function(type, fn){
-		if (type == 'unload'){
-			var old = fn, self = this;
-			fn = function(){
-				self.removeListener('unload', fn);
-				old();
-			};
-		} else {
+		if (window.attachEvent && !window.addEventListener){
 			collected[Slick.uidOf(this)] = this;
 		}
 		if (this.addEventListener) this.addEventListener(type, fn, !!arguments[2]);
@@ -3160,10 +3289,14 @@ Element.implement({
 });
 
 /*<ltIE9>*/
-if (window.attachEvent && !window.addEventListener) window.addListener('unload', function(){
-	Object.each(collected, clean);
-	if (window.CollectGarbage) CollectGarbage();
-});
+if (window.attachEvent && !window.addEventListener){
+	var gc = function(){
+		Object.each(collected, clean);
+		if (window.CollectGarbage) CollectGarbage();
+		window.removeListener('unload', gc);
+	}
+	window.addListener('unload', gc);
+}
 /*</ltIE9>*/
 
 Element.Properties = {};
@@ -3199,20 +3332,24 @@ Element.Properties.html = {
 	set: function(html){
 		if (html == null) html = '';
 		else if (typeOf(html) == 'array') html = html.join('');
-		this.innerHTML = html;
-	},
 
+		/*<ltIE9>*/
+		if (this.styleSheet && !canChangeStyleHTML) this.styleSheet.cssText = html;
+		else /*</ltIE9>*/this.innerHTML = html;
+	},
 	erase: function(){
-		this.innerHTML = '';
+		this.set('html', '');
 	}
 
 };
+
+var supportsHTML5Elements = true, supportsTableInnerHTML = true, supportsTRInnerHTML = true;
 
 /*<ltIE9>*/
 // technique by jdbarlett - http://jdbartlett.com/innershiv/
 var div = document.createElement('div');
 div.innerHTML = '<nav></nav>';
-var supportsHTML5Elements = (div.childNodes.length == 1);
+supportsHTML5Elements = (div.childNodes.length == 1);
 if (!supportsHTML5Elements){
 	var tags = 'abbr article aside audio canvas datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video'.split(' '),
 		fragment = document.createDocumentFragment(), l = tags.length;
@@ -3222,7 +3359,7 @@ div = null;
 /*</ltIE9>*/
 
 /*<IE>*/
-var supportsTableInnerHTML = Function.attempt(function(){
+supportsTableInnerHTML = Function.attempt(function(){
 	var table = document.createElement('table');
 	table.innerHTML = '<tr><td></td></tr>';
 	return true;
@@ -3231,7 +3368,7 @@ var supportsTableInnerHTML = Function.attempt(function(){
 /*<ltFF4>*/
 var tr = document.createElement('tr'), html = '<td></td>';
 tr.innerHTML = html;
-var supportsTRInnerHTML = (tr.innerHTML == html);
+supportsTRInnerHTML = (tr.innerHTML == html);
 tr = null;
 /*</ltFF4>*/
 
@@ -3249,6 +3386,10 @@ if (!supportsTableInnerHTML || !supportsTRInnerHTML || !supportsHTML5Elements){
 		translations.thead = translations.tfoot = translations.tbody;
 
 		return function(html){
+
+			/*<ltIE9>*/
+			if (this.styleSheet) return set.call(this, html);
+			/*</ltIE9>*/
 			var wrap = translations[this.get('tag')];
 			if (!wrap && !supportsHTML5Elements) wrap = [0, '', ''];
 			if (!wrap) return set.call(this, html);
@@ -3276,11 +3417,12 @@ if (testForm.firstChild.value != 's') Element.Properties.value = {
 		var tag = this.get('tag');
 		if (tag != 'select') return this.setProperty('value', value);
 		var options = this.getElements('option');
+		value = String(value);
 		for (var i = 0; i < options.length; i++){
 			var option = options[i],
 				attr = option.getAttributeNode('value'),
 				optionValue = (attr && attr.specified) ? option.value : option.get('text');
-			if (optionValue == value) return option.selected = true;
+			if (optionValue === value) return option.selected = true;
 		}
 	},
 
@@ -3512,7 +3654,7 @@ this.Events = new Class({
 		type = removeOn(type);
 		var events = this.$events[type];
 		if (events && !fn.internal){
-			var index =  events.indexOf(fn);
+			var index = events.indexOf(fn);
 			if (index != -1) delete events[index];
 		}
 		return this;
@@ -3590,7 +3732,8 @@ var Request = this.Request = new Class({
 		onException: function(headerName, value){},
 		onTimeout: function(){},
 		user: '',
-		password: '',*/
+		password: '',
+		withCredentials: false,*/
 		url: '',
 		data: '',
 		headers: {
@@ -3628,7 +3771,10 @@ var Request = this.Request = new Class({
 		}.bind(this));
 		xhr.onreadystatechange = empty;
 		if (progressSupport) xhr.onprogress = xhr.onloadstart = empty;
-		clearTimeout(this.timer);
+		if (this.timer){
+			clearTimeout(this.timer);
+			delete this.timer;
+		}
 
 		this.response = {text: this.xhr.responseText || '', xml: this.xhr.responseXML};
 		if (this.options.isSuccess.call(this, this.status))
@@ -3739,10 +3885,10 @@ var Request = this.Request = new Class({
 		if (trimPosition > -1 && (trimPosition = url.indexOf('#')) > -1) url = url.substr(0, trimPosition);
 
 		if (this.options.noCache)
-			url += (url.contains('?') ? '&' : '?') + String.uniqueID();
+			url += (url.indexOf('?') > -1 ? '&' : '?') + String.uniqueID();
 
-		if (data && method == 'get'){
-			url += (url.contains('?') ? '&' : '?') + data;
+		if (data && (method == 'get' || method == 'delete')){
+			url += (url.indexOf('?') > -1 ? '&' : '?') + data;
 			data = null;
 		}
 
@@ -3753,7 +3899,7 @@ var Request = this.Request = new Class({
 		}
 
 		xhr.open(method.toUpperCase(), url, this.options.async, this.options.user, this.options.password);
-		if (this.options.user && 'withCredentials' in xhr) xhr.withCredentials = true;
+		if ((this.options.withCredentials) && 'withCredentials' in xhr) xhr.withCredentials = true;
 
 		xhr.onreadystatechange = this.onStateChange.bind(this);
 
@@ -3777,7 +3923,10 @@ var Request = this.Request = new Class({
 		this.running = false;
 		var xhr = this.xhr;
 		xhr.abort();
-		clearTimeout(this.timer);
+		if (this.timer){
+			clearTimeout(this.timer);
+			delete this.timer;
+		}
 		xhr.onreadystatechange = empty;
 		if (progressSupport) xhr.onprogress = xhr.onloadstart = empty;
 		this.xhr = new Browser.Request();
@@ -3788,7 +3937,7 @@ var Request = this.Request = new Class({
 });
 
 var methods = {};
-['get', 'post', 'put', 'delete', 'GET', 'POST', 'PUT', 'DELETE'].each(function(method){
+['get', 'post', 'put', 'delete', 'patch', 'head', 'GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'].each(function(method){
 	methods[method] = function(data){
 		var object = {
 			method: method

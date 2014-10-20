@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
+### Updated
+Updated MooTools to version 1.5.1 (see #7267).
+
 ### Fixed
 Updated swipe.js to version 2.0.1 (see #7307).
 

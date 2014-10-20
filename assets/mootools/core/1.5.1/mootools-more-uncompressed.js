@@ -41,8 +41,8 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	version: '1.5.0',
-	build: '73db5e24e6e9c5c87b3a27aebef2248053f7db37'
+	version: '1.5.1',
+	build: '2dd695ba957196ae4b0275a690765d6636a61ccd'
 };
 
 
@@ -441,7 +441,7 @@ var Locale = this.Locale = {
 
 		if (set) locale.define(set, key, value);
 
-		
+
 
 		if (!current) current = locale;
 
@@ -456,7 +456,7 @@ var Locale = this.Locale = {
 
 			this.fireEvent('change', locale);
 
-			
+
 		}
 
 		return this;
@@ -1035,7 +1035,7 @@ Date.extend({
 		return this;
 	},
 
-	
+
 
 	defineParser: function(pattern){
 		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
@@ -1171,7 +1171,7 @@ var handle = function(key, value){
 	return this;
 };
 
-//PATCH: correctly parse German dates
+// PATCH: correctly parse German dates
 Date.defineParsers(
 	'%Y(-%m(-%d( %H:%M(:%S)?( ?%p)?)?)?)?', // 1999-12-31, 1999-12-31 11:59pm, 1999-12-31 23:59:59, ISO8601
 	'%m(/%d(/%Y( %H:%M(:%S)?( ?%p)?)?)?)?', // 12/31/1999, 12/31/1999 11:59pm, 12/31/1999 23:59:59
@@ -2127,7 +2127,7 @@ Element.implement({
 	},
 
 	getComputedSize: function(options){
-		
+
 
 		options = Object.merge({
 			styles: ['padding','border'],
@@ -4987,6 +4987,7 @@ var Drag = new Class({
 		invert: false,
 		preventDefault: false,
 		stopPropagation: false,
+		compensateScroll: false,
 		modifiers: {x: 'left', y: 'top'}
 	},
 
@@ -5005,9 +5006,14 @@ var Drag = new Class({
 		this.handles = ((htype == 'array' || htype == 'collection') ? $$(this.options.handle) : document.id(this.options.handle)) || this.element;
 		this.mouse = {'now': {}, 'pos': {}};
 		this.value = {'start': {}, 'now': {}};
-
+		this.offsetParent = (function(el){
+			var offsetParent = el.getOffsetParent();
+			var isBody = !offsetParent || (/^(?:body|html)$/i).test(offsetParent.tagName);
+			return isBody ? window : document.id(offsetParent);
+		})(this.element);
 		this.selection = 'selectstart' in document ? 'selectstart' : 'mousedown';
 
+		this.compensateScroll = {start: {}, diff: {}, last: {}};
 
 		if ('ondragstart' in document && !('FileReader' in window) && !Drag.ondragstartFixed){
 			document.ondragstart = Function.from(false);
@@ -5020,19 +5026,47 @@ var Drag = new Class({
 			drag: this.drag.bind(this),
 			stop: this.stop.bind(this),
 			cancel: this.cancel.bind(this),
-			eventStop: Function.from(false)
+			eventStop: Function.from(false),
+			scrollListener: this.scrollListener.bind(this)
 		};
 		this.attach();
 	},
 
 	attach: function(){
 		this.handles.addEvent('mousedown', this.bound.start);
+		if (this.options.compensateScroll) this.offsetParent.addEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
 
 	detach: function(){
 		this.handles.removeEvent('mousedown', this.bound.start);
+		if (this.options.compensateScroll) this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
 		return this;
+	},
+
+	scrollListener: function(){
+
+		if (!this.mouse.start) return;
+		var newScrollValue = this.offsetParent.getScroll();
+
+		if (this.element.getStyle('position') == 'absolute'){
+			var scrollDiff = this.sumValues(newScrollValue, this.compensateScroll.last, -1);
+			this.mouse.now = this.sumValues(this.mouse.now, scrollDiff, 1);
+		} else {
+			this.compensateScroll.diff = this.sumValues(newScrollValue, this.compensateScroll.start, -1);
+		}
+		if (this.offsetParent != window) this.compensateScroll.diff = this.sumValues(this.compensateScroll.start, newScrollValue, -1);
+		this.compensateScroll.last = newScrollValue;
+		this.render(this.options);
+	},
+
+	sumValues: function(alpha, beta, op){
+		var sum = {}, options = this.options;
+		for (z in options.modifiers){
+			if (!options.modifiers[z]) continue;
+			sum[z] = alpha[z] + beta[z] * op;
+		}
+		return sum;
 	},
 
 	start: function(event){
@@ -5042,14 +5076,15 @@ var Drag = new Class({
 
 		if (options.preventDefault) event.preventDefault();
 		if (options.stopPropagation) event.stopPropagation();
+		this.compensateScroll.start = this.compensateScroll.last = this.offsetParent.getScroll();
+		this.compensateScroll.diff = {x: 0, y: 0};
 		this.mouse.start = event.page;
-
 		this.fireEvent('beforeStart', this.element);
 
 		var limit = options.limit;
 		this.limit = {x: [], y: []};
 
-		var z, coordinates;
+		var z, coordinates, offsetParent = this.offsetParent == window ? null : this.offsetParent;
 		for (z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 
@@ -5057,7 +5092,7 @@ var Drag = new Class({
 
 			// Some browsers (IE and Opera) don't always return pixels.
 			if (style && !style.match(/px$/)){
-				if (!coordinates) coordinates = this.element.getCoordinates(this.element.getOffsetParent());
+				if (!coordinates) coordinates = this.element.getCoordinates(offsetParent);
 				style = coordinates[options.modifiers[z]];
 			}
 
@@ -5105,16 +5140,19 @@ var Drag = new Class({
 
 	drag: function(event){
 		var options = this.options;
-
 		if (options.preventDefault) event.preventDefault();
-		this.mouse.now = event.page;
+		this.mouse.now = this.sumValues(event.page, this.compensateScroll.diff, -1);
 
+		this.render(options);
+		this.fireEvent('drag', [this.element, event]);
+	},
+
+	render: function(options){
 		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 			this.value.now[z] = this.mouse.now[z] - this.mouse.pos[z];
 
 			if (options.invert) this.value.now[z] *= -1;
-
 			if (options.limit && this.limit[z]){
 				if ((this.limit[z][1] || this.limit[z][1] === 0) && (this.value.now[z] > this.limit[z][1])){
 					this.value.now[z] = this.limit[z][1];
@@ -5122,14 +5160,10 @@ var Drag = new Class({
 					this.value.now[z] = this.limit[z][0];
 				}
 			}
-
 			if (options.grid[z]) this.value.now[z] -= ((this.value.now[z] - (this.limit[z][0]||0)) % options.grid[z]);
-
 			if (options.style) this.element.setStyle(options.modifiers[z], this.value.now[z] + options.unit);
 			else this.element[options.modifiers[z]] = this.value.now[z];
 		}
-
-		this.fireEvent('drag', [this.element, event]);
 	},
 
 	cancel: function(event){
@@ -5150,6 +5184,7 @@ var Drag = new Class({
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
+		this.mouse.start = null;
 		if (event) this.fireEvent('complete', [this.element, event]);
 	}
 
@@ -5238,7 +5273,7 @@ Drag.Move = new Class({
 		this.addEvent('start', this.checkDroppables, true);
 		this.overed = null;
 	},
-	
+
 	setContainer: function(container) {
 		this.container = document.id(container);
 		if (this.container && typeOf(this.container) != 'element'){
@@ -5268,7 +5303,8 @@ Drag.Move = new Class({
 			elementBorder = {},
 			containerMargin = {},
 			containerBorder = {},
-			offsetParentPadding = {};
+			offsetParentPadding = {},
+			offsetScroll = offsetParent.getScroll();
 
 		['top', 'right', 'bottom', 'left'].each(function(pad){
 			elementMargin[pad] = element.getStyle('margin-' + pad).toInt();
@@ -5280,10 +5316,10 @@ Drag.Move = new Class({
 
 		var width = element.offsetWidth + elementMargin.left + elementMargin.right,
 			height = element.offsetHeight + elementMargin.top + elementMargin.bottom,
-			left = 0,
-			top = 0,
-			right = containerCoordinates.right - containerBorder.right - width,
-			bottom = containerCoordinates.bottom - containerBorder.bottom - height;
+			left = 0 + offsetScroll.x,
+			top = 0 + offsetScroll.y,
+			right = containerCoordinates.right - containerBorder.right - width + offsetScroll.x,
+			bottom = containerCoordinates.bottom - containerBorder.bottom - height + offsetScroll.y;
 
 		if (this.options.includeMargins){
 			left += elementMargin.left;
@@ -5481,7 +5517,7 @@ var Sortables = new Class({
 			return list;
 		}, this));
 	},
-    
+
 	getDroppableCoordinates: function (element){
 		var offsetParent = element.getOffsetParent();
 		var position = element.getPosition(offsetParent);
@@ -5554,7 +5590,7 @@ var Sortables = new Class({
 		this.clone = this.getClone(event, element);
 
 		this.drag = new Drag.Move(this.clone, Object.merge({
-			
+
 			droppables: this.getDroppables()
 		}, this.options.dragOptions)).addEvents({
 			onSnap: function(){
@@ -5599,7 +5635,7 @@ var Sortables = new Class({
 			this.clone.destroy();
 			self.reset();
 		}
-		
+
 	},
 
 	reset: function(){
@@ -5680,22 +5716,40 @@ var Asset = {
 	css: function(source, properties){
 		if (!properties) properties = {};
 
-		var link = new Element('link', {
-			rel: 'stylesheet',
-			media: 'screen',
-			type: 'text/css',
-			href: source
+		var load = properties.onload || properties.onLoad,
+			doc = properties.document || document,
+			timeout = properties.timeout || 3000;
+
+		['onload', 'onLoad', 'document'].each(function(prop){
+			delete properties[prop];
 		});
 
-		var load = properties.onload || properties.onLoad,
-			doc = properties.document || document;
+		var link = new Element('link', {
+			type: 'text/css',
+			rel: 'stylesheet',
+			media: 'screen',
+			href: source
+		}).setProperties(properties).inject(doc.head);
 
-		delete properties.onload;
-		delete properties.onLoad;
-		delete properties.document;
-
-		if (load) link.addEvent('load', load);
-		return link.set(properties).inject(doc.head);
+		if (load){
+			// based on article at http://www.yearofmoo.com/2011/03/cross-browser-stylesheet-preloading.html
+			var loaded = false, retries = 0;
+			var check = function(){
+				var stylesheets = document.styleSheets;
+				for (var i = 0; i < stylesheets.length; i++){
+					var file = stylesheets[i];
+					var owner = file.ownerNode ? file.ownerNode : file.owningElement;
+					if (owner && owner == link){
+						loaded = true;
+						return load.call(link);
+					}
+				}
+				retries++;
+				if (!loaded && retries < timeout / 50) return setTimeout(check, 50);
+			}
+			setTimeout(check, 0);
+		}
+		return link;
 	},
 
 	image: function(source, properties){
@@ -6636,7 +6690,7 @@ var Scroller = new Class({
 	scroll: function(){
 		var size = this.element.getSize(),
 			scroll = this.element.getScroll(),
-			pos = this.element != this.docBody ? this.element.getOffsets() : {x: 0, y:0},
+			pos = ((this.element != this.docBody) && (this.element != window)) ? element.getOffsets() : {x: 0, y: 0},
 			scrollSize = this.element.getScrollSize(),
 			change = {x: 0, y: 0},
 			top = this.options.area.top || this.options.area,
