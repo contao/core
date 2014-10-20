@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Use an `.invisible` class which plays nicely with screen readers (see #7372).
+
+### Fixed
 Handle disabled modules in the module loader (see #7380).
 
 ### Fixed
