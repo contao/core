@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle dynamic parent tables in the `DC_Table` driver (see #7335).
+
+### Fixed
 Correctly shortend HTML strings in `String::substrHtml()` (see #7311).
 
 ### Updated
