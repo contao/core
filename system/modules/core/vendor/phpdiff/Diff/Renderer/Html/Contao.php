@@ -48,28 +48,28 @@ class Diff_Renderer_Html_Contao extends Diff_Renderer_Html_Array
 				// Equal changes should be shown on both sides of the diff
 				if ($change['tag'] == 'equal') {
 					foreach ($change['base']['lines'] as $line) {
-						$html .= "\n  ".'<dt class="'.$change['tag'].' left">'.($line ?: '&nbsp').'</dt>';
+						$html .= "\n  ".'<dt class="'.$change['tag'].' left">'.($line ?: '&nbsp;').'</dt>';
 					}
 				}
 				// Added lines only on the right side
 				elseif ($change['tag'] == 'insert') {
 					foreach ($change['changed']['lines'] as $line) {
-						$html .= "\n ".'<dt class="'.$change['tag'].' right"><ins>'.($line ?: '&nbsp').'</ins></dt>';
+						$html .= "\n ".'<dt class="'.$change['tag'].' right"><ins>'.($line ?: '&nbsp;').'</ins></dt>';
 					}
 				}
 				// Show deleted lines only on the left side
 				elseif ($change['tag'] == 'delete') {
 					foreach ($change['base']['lines'] as $line) {
-						$html .= "\n  ".'<dt class="'.$change['tag'].' left"><del>'.($line ?: '&nbsp').'</del></dt>';
+						$html .= "\n  ".'<dt class="'.$change['tag'].' left"><del>'.($line ?: '&nbsp;').'</del></dt>';
 					}
 				}
 				// Show modified lines on both sides
 				elseif ($change['tag'] == 'replace') {
 					foreach ($change['base']['lines'] as $line) {
-						$html .= "\n  ".'<dt class="'.$change['tag'].' left"><span>'.($line ?: '&nbsp').'</span></dt>';
+						$html .= "\n  ".'<dt class="'.$change['tag'].' left"><span>'.($line ?: '&nbsp;').'</span></dt>';
 					}
 					foreach ($change['changed']['lines'] as $line) {
-						$html .= "\n  ".'<dd class="'.$change['tag'].' right"><span>'.($line ?: '&nbsp').'</span></dd>';
+						$html .= "\n  ".'<dd class="'.$change['tag'].' right"><span>'.($line ?: '&nbsp;').'</span></dd>';
 					}
 				}
 			}
