@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Added the `Widget::__isset()` method (see #7290).
+
+### Fixed
 Correctly handle dynamic parent tables in the `DC_Table` driver (see #7335).
 
 ### Fixed
