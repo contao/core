@@ -897,6 +897,7 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_target':
 				case 'link_name':
 					$strTarget = null;
 

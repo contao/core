@@ -3842,8 +3842,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$return .= '
 <div class="tl_content_right">'.((\Input::get('act') == 'select') ? '
-<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
-<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" class="edit" title="'.specialchars($strEditHeader).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : '')) . '
+<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
+<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" class="edit" title="'.specialchars($strEditHeader).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : ''))) . '
 </div>';
 
 			// Format header fields
@@ -3876,8 +3876,19 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 				elseif ($v == 'tstamp')
 				{
-					$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=?")
-												   ->execute($objParent->id);
+					if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
+					{
+						$ptable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'];
+						$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+
+						$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=? AND $cond")
+													   ->execute($objParent->id, $ptable);
+					}
+					else
+					{
+						$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=?")
+													   ->execute($objParent->id);
+					}
 
 					if (!$objMaxTstamp->tstamp)
 					{
@@ -3982,21 +3993,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 			}
 
+			$arrProcedure = $this->procedure;
+			$arrValues = $this->values;
+
 			// Support empty ptable fields (backwards compatibility)
 			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
 			{
-				$this->procedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
-				$this->values[] = $this->ptable;
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
 			}
 
 			// WHERE
-			if (!empty($this->procedure))
+			if (!empty($arrProcedure))
 			{
-				$query .= " WHERE " . implode(' AND ', $this->procedure);
+				$query .= " WHERE " . implode(' AND ', $arrProcedure);
 			}
 			if (!empty($this->root) && is_array($this->root))
 			{
-				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
+				$query .= (!empty($arrProcedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
 			// ORDER BY
@@ -4014,7 +4028,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$objOrderByStmt->limit($arrLimit[1], $arrLimit[0]);
 			}
 
-			$objOrderBy = $objOrderByStmt->execute($this->values);
+			$objOrderBy = $objOrderByStmt->execute($arrValues);
 
 			if ($objOrderBy->numRows < 1)
 			{
@@ -5014,19 +5028,30 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		else
 		{
 			$this->limit = ($session['filter'][$filter]['limit'] != '') ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . \Config::get('resultsPerPage');
+
+			$arrProcedure = $this->procedure;
+			$arrValues = $this->values;
+
 			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
 			if (!empty($this->root) && is_array($this->root))
 			{
-				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
+				$arrProcedure[] = 'id IN(' . implode(',', $this->root) . ')';
 			}
 
-			if (!empty($this->procedure))
+			// Support empty ptable fields (backwards compatibility)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
 			{
-				$query .= " WHERE " . implode(' AND ', $this->procedure);
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
 			}
 
-			$objTotal = $this->Database->prepare($query)->execute($this->values);
+			if (!empty($arrProcedure))
+			{
+				$query .= " WHERE " . implode(' AND ', $arrProcedure);
+			}
+
+			$objTotal = $this->Database->prepare($query)->execute($arrValues);
 			$this->total = $objTotal->count;
 			$options_total = 0;
 			$blnIsMaxResultsPerPage = false;
@@ -5254,7 +5279,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 			}
 
-			$objFields = $this->Database->prepare("SELECT DISTINCT(" . $field . ") FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
+			// Support empty ptable fields (backwards compatibility)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
+			{
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
+			}
+
+			$objFields = $this->Database->prepare("SELECT DISTINCT " . $field . " FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
 										->execute($arrValues);
 
 			// Begin select menu

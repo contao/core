@@ -263,7 +263,18 @@ abstract class BaseTemplate extends \Controller
 	 */
 	public function insert($name, array $data=null)
 	{
-		$tpl = new static($name);
+		if ($this instanceof \Template)
+		{
+			$tpl = new static($name);
+		}
+		elseif (TL_MODE == 'BE')
+		{
+			$tpl = new \BackendTemplate($name);
+		}
+		else
+		{
+			$tpl = new \FrontendTemplate($name);
+		}
 
 		if ($data !== null)
 		{
