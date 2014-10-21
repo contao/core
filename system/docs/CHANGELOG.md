@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.6 (2014-XX-XX)
 --------------------------
 
+### Updated
+Updated TinyMCE to version 4.1.6 and added the "lists" plugin (see #7349).
+
 ### Fixed
 Fixed the FAQ sorting in the back end (see #7362).
 
