@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the FAQ sorting in the back end (see #7362).
+
+### Fixed
 Added the `Widget::__isset()` method (see #7290).
 
 ### Fixed
