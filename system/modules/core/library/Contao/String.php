@@ -111,7 +111,7 @@ class String
 	 */
 	public static function substrHtml($strString, $intNumberOfChars)
 	{
-		$strReturn = "";
+		$strReturn = '';
 		$intCharCount = 0;
 		$arrOpenTags = array();
 		$arrTagBuffer = array();
@@ -133,12 +133,15 @@ class String
 				continue;
 			}
 
+			$buffer = $arrChunks[$i];
+
 			// Get the substring of the current text
 			if (($arrChunks[$i] = static::substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
 
+			$blnModified = ($buffer !== $arrChunks[$i]);
 			$intCharCount += utf8_strlen(static::decodeEntities($arrChunks[$i]));
 
 			if ($intCharCount <= $intNumberOfChars)
@@ -194,6 +197,12 @@ class String
 				if (strlen($arrChunks[$i]) || $i<$c)
 				{
 					$strReturn .= implode('', $arrTagBuffer) . $arrChunks[$i];
+				}
+
+				// Stop after the first shortened chunk (see #7311)
+				if ($blnModified)
+				{
+					break;
 				}
 
 				$arrTagBuffer = array();

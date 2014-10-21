@@ -5,6 +5,33 @@ Version 3.3.6 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the FAQ sorting in the back end (see #7362).
+
+### Fixed
+Added the `Widget::__isset()` method (see #7290).
+
+### Fixed
+Correctly handle dynamic parent tables in the `DC_Table` driver (see #7335).
+
+### Fixed
+Correctly shortend HTML strings in `String::substrHtml()` (see #7311).
+
+### Updated
+Updated MooTools to version 1.5.1 (see #7267).
+
+### Fixed
+Updated swipe.js to version 2.0.1 (see #7307).
+
+### Fixed
+Use an `.invisible` class which plays nicely with screen readers (see #7372).
+
+### Fixed
+Handle disabled modules in the module loader (see #7380).
+
+### Fixed
+Fixed the "link_target" insert tag.
+
+### Fixed
 Correctly mark CAPTCHA fields as mandatory (see #7283).
 
 ### Updated

@@ -138,7 +138,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['sorting'],
 			'sorting'                 => true,
-			'flag'                    => 2,
+			'flag'                    => 11,
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'tstamp' => array

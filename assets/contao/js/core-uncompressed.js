@@ -856,8 +856,8 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var val = [],
-				frm = window.frames['simple-modal-iframe'];
+			var frm = window.frames['simple-modal-iframe'],
+				val = [], inp, i;
 			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
@@ -866,8 +866,8 @@ var Backend =
 				alert(Contao.lang.picker);
 				return; // see #5704
 			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (var i=0; i<inp.length; i++) {
+			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
