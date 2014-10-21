@@ -61,7 +61,7 @@ class DiffRenderer extends \Diff_Renderer_Html_Array
 				{
 					foreach ($change['base']['lines'] as $line)
 					{
-						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left">' . ($line ?: '&nbsp') . '</dt>';
+						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left">' . ($line ?: '&nbsp;') . '</dt>';
 					}
 
 				}
@@ -71,7 +71,7 @@ class DiffRenderer extends \Diff_Renderer_Html_Array
 				{
 					foreach ($change['changed']['lines'] as $line)
 					{
-						$html .= "\n " . '<dt class="' . $change['tag'] . ' right"><ins>' . ($line ?: '&nbsp') . '</ins></dt>';
+						$html .= "\n " . '<dt class="' . $change['tag'] . ' right"><ins>' . ($line ?: '&nbsp;') . '</ins></dt>';
 					}
 				}
 
@@ -80,7 +80,7 @@ class DiffRenderer extends \Diff_Renderer_Html_Array
 				{
 					foreach ($change['base']['lines'] as $line)
 					{
-						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left"><del>' . ($line ?: '&nbsp') . '</del></dt>';
+						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left"><del>' . ($line ?: '&nbsp;') . '</del></dt>';
 					}
 				}
 
@@ -89,12 +89,12 @@ class DiffRenderer extends \Diff_Renderer_Html_Array
 				{
 					foreach ($change['base']['lines'] as $line)
 					{
-						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left"><span>' . ($line ?: '&nbsp') . '</span></dt>';
+						$html .= "\n  " . '<dt class="' . $change['tag'] . ' left"><span>' . ($line ?: '&nbsp;') . '</span></dt>';
 					}
 
 					foreach ($change['changed']['lines'] as $line)
 					{
-						$html .= "\n  " . '<dd class="' . $change['tag'] . ' right"><span>' . ($line ?: '&nbsp') . '</span></dd>';
+						$html .= "\n  " . '<dd class="' . $change['tag'] . ' right"><span>' . ($line ?: '&nbsp;') . '</span></dd>';
 					}
 				}
 			}
