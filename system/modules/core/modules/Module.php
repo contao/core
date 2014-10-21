@@ -338,6 +338,10 @@ abstract class Module extends \Frontend
 					$row['isActive'] = false;
 				}
 
+				// Remove insert tags from all titles (see #2853, #7198)
+				$objSubpages->title = strip_insert_tags($objSubpages->title);
+				$objSubpages->pageTitle = strip_insert_tags($objSubpages->pageTitle);
+
 				$row['subitems'] = $subitems;
 				$row['class'] = trim($strClass);
 				$row['title'] = specialchars($objSubpages->title, true);
