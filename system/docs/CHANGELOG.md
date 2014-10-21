@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.3.6 (2014-XX-XX)
 --------------------------
 
+### Fixed
+Correctly create the template object in `BaseTemplate::insert()` (see #7366).
+
 ### Updated
 Updated TinyMCE to version 4.1.6 and added the "lists" plugin (see #7349).
 
