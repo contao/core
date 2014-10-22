@@ -5,6 +5,9 @@ Version 3.3.6 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Re-add the surrounding "submit_container" in table forms (see #7396).
+
+### Fixed
 Do not generally remove insert tags from page titles (see #7198).
 
 ### Fixed
