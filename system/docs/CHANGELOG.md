@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Consider the `useSSL` flag of the root page when generating URLs (see #7390).
+
+### Fixed
 Fixed the FAQ sorting in the back end (see #7362).
 
 ### Fixed

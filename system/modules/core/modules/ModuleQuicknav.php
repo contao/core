@@ -160,7 +160,8 @@ class ModuleQuicknav extends \Module
 					// Add the domain if it differs from the current one (see #3765)
 					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
 					{
-						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
+						$objSubpages->current()->loadDetails();
+						$href = ($objSubpages->rootUseSSL ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
 					}
 
 					$arrPages[] = array
