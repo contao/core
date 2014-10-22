@@ -5,10 +5,10 @@ Version 3.3.6 (2014-XX-XX)
 --------------------------
 
 ### Fixed
-Consider the `useSSL` flag of the root page when generating URLs (see #7390).
+Do not generally remove insert tags from page titles (see #7198).
 
 ### Fixed
-Remove insert tags from page titles in the navigation menu (see #7198).
+Consider the `useSSL` flag of the root page when generating URLs (see #7390).
 
 ### Fixed
 Correctly create the template object in `BaseTemplate::insert()` (see #7366).
