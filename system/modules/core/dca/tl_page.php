@@ -1203,9 +1203,9 @@ class tl_page extends Backend
 	 */
 	public function checkStaticUrl($varValue)
 	{
-		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
+		if ($varValue != '')
 		{
-			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+			$varValue = preg_replace('@https?://@', '', $varValue);
 		}
 
 		return $varValue;

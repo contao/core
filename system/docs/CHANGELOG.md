@@ -5,6 +5,9 @@ Version 3.3.6 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the `useSSL` flag of the root page when generating URLs (see #7390).
+
+### Fixed
 Remove insert tags from page titles in the navigation menu (see #7198).
 
 ### Fixed
