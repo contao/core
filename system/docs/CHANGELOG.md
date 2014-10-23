@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly render the "read more" and article navigation links (see #7300).
+
+### Fixed
 Consider the `useSSL` flag of the root page when generating URLs (see #7390).
 
 ### Fixed
