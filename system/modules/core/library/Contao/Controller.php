@@ -1948,6 +1948,7 @@ abstract class Controller extends \System
 		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
+			$objCombinerAsync = new \Combiner();
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
@@ -1955,11 +1956,18 @@ abstract class Controller extends \System
 
 				if ($options->static)
 				{
-					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					if ($options->async)
+					{
+						$objCombinerAsync->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
+					else
+					{
+						$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
 				}
 				else
 				{
-					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml, $options->async) . "\n";
 				}
 			}
 
@@ -1967,6 +1975,11 @@ abstract class Controller extends \System
 			if ($objCombiner->hasEntries())
 			{
 				$strScripts = \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
+			}
+
+			if ($objCombinerAsync->hasEntries())
+			{
+				$strScripts = \Template::generateScriptTag($objCombinerAsync->getCombinedFile(), $blnXhtml, true) . "\n" . $strScripts;
 			}
 		}
 
