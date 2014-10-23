@@ -1615,7 +1615,7 @@ class tl_content extends Backend
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -1640,8 +1640,9 @@ class tl_content extends Backend
 	 * Toggle the visibility of an element
 	 * @param integer
 	 * @param boolean
+	 * @param \DataContainer
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions to edit
 		Input::setGet('id', $intId);
@@ -1655,11 +1656,11 @@ class tl_content extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this);
+					$this->$callback[0]->$callback[1](($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$callback($this);
+					$callback(($dc ?: $this));
 				}
 			}
 		}
@@ -1682,11 +1683,11 @@ class tl_content extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}

@@ -5,6 +5,9 @@ Version 3.2.15 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Always pass a DC object in the `toggleVisibility` callback (see #7314).
+
+### Fixed
 Correctly render the "read more" and article navigation links (see #7300).
 
 ### Fixed
