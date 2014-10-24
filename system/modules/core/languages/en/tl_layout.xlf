@@ -284,11 +284,11 @@
       <trans-unit id="tl_layout.mootools.1">
         <source>Here you can select one or more MooTools templates.</source>
       </trans-unit>
-      <trans-unit id="tl_layout.addPicturefill.0">
-        <source>Include picturefill.js</source>
+      <trans-unit id="tl_layout.picturefill.0">
+        <source>Image polyfill</source>
       </trans-unit>
-      <trans-unit id="tl_layout.addPicturefill.1">
-        <source>Include the picturefill.js script (responsive images).</source>
+      <trans-unit id="tl_layout.picturefill.1">
+        <source>Here you can select a responsive images polyfill.</source>
       </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>
@@ -337,6 +337,9 @@
       </trans-unit>
       <trans-unit id="tl_layout.style_legend">
         <source>Style sheets</source>
+      </trans-unit>
+      <trans-unit id="tl_layout.picturefill_legend">
+        <source>Responsive images</source>
       </trans-unit>
       <trans-unit id="tl_layout.feed_legend">
         <source>RSS/Atom feeds</source>

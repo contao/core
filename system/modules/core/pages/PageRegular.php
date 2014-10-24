@@ -428,9 +428,13 @@ class PageRegular extends \Frontend
 		}
 
 		// Picturefill
-		if ($objLayout->addPicturefill)
+		if ($objLayout->picturefill == 'respimage.js')
 		{
-			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/respimage/' . $GLOBALS['TL_ASSETS']['RESPIMAGE'] . '/respimage.min.js|static|async';
+		}
+		elseif ($objLayout->picturefill == 'picturefill.js')
+		{
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/picturefill/' . $GLOBALS['TL_ASSETS']['PICTUREFILL'] . '/picturefill.min.js|static|async';
 		}
 
 		// Check whether TL_APPEND_JS exists (see #4890)

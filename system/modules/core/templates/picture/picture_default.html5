@@ -16,8 +16,10 @@
 
 <?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
   <script>
-    window.picturefill && window.picturefill({
-      elements: [document.images[document.images.length - 1]]
-    });
+    (function(p) {
+      p && p({
+        elements: [document.images[document.images.length - 1]]
+      });
+    })(window.picturefill || window.respimage);
   </script>
 <?php endif; ?>
