@@ -1272,7 +1272,7 @@ class Image
 		$fileRecord = \FilesModel::findByPath($image);
 		
 		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['getCustomImage']) && is_array($GLOBALS['TL_HOOKS']['getAdaptiveImage']))
+		if (isset($GLOBALS['TL_HOOKS']['getCustomImage']) && is_array($GLOBALS['TL_HOOKS']['getCustomImage']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getCustomImage'] as $callback)
 			{
