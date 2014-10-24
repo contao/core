@@ -1270,7 +1270,20 @@ class Image
 				 ->setForceOverride($force);
 
 		$fileRecord = \FilesModel::findByPath($image);
-
+		
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCustomImage']) && is_array($GLOBALS['TL_HOOKS']['getCustomImage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCustomImage'] as $callback)
+			{
+				$return = \System::importStatic($callback[0])->$callback[1]($imageObj,$fileRecord);
+				if (is_string($return))
+				{
+					$this->resizedPath = \System::urlEncode($this->getCacheName());
+					return $this;
+				}
+		}
+		
 		// Set the important part
 		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
 		{
