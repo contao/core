@@ -6,7 +6,7 @@
         <source>Media query</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.media.1">
-        <source>Here you can define when to use the image size, e.g. &lt;em&gt;"(max-width: 600px)"&lt;/em&gt;.</source>
+        <source>Here you can define when to use the image size, e.g. &lt;em&gt;(max-width: 600px)&lt;/em&gt;.</source>
       </trans-unit>
       <trans-unit id="tl_image_size_item.invisible.0">
         <source>Invisible</source>

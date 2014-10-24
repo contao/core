@@ -36,13 +36,13 @@
         <source>Sizes attribute</source>
       </trans-unit>
       <trans-unit id="tl_image_size.sizes.1">
-        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;"(max-width: 600px) 100vw, 50vw"&lt;/em&gt;.</source>
+        <source>Here you can define the displayed image width(s), e.g. &lt;em&gt;(max-width: 600px) 100vw, 50vw&lt;/em&gt;.</source>
       </trans-unit>
       <trans-unit id="tl_image_size.densities.0">
         <source>Pixel densities/scale factors</source>
       </trans-unit>
       <trans-unit id="tl_image_size.densities.1">
-        <source>Here you can define the pixel densities, e.g. &lt;em&gt;"1x, 1.5x, 2x"&lt;/em&gt;.</source>
+        <source>Here you can define the pixel densities, e.g. &lt;em&gt;1x, 1.5x, 2x&lt;/em&gt;.</source>
       </trans-unit>
       <trans-unit id="tl_image_size.tstamp.0">
         <source>Revision date</source>
