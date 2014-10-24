@@ -285,10 +285,10 @@
         <source>Here you can select one or more MooTools templates.</source>
       </trans-unit>
       <trans-unit id="tl_layout.picturefill.0">
-        <source>Image polyfill</source>
+        <source>Load the image polyfill</source>
       </trans-unit>
       <trans-unit id="tl_layout.picturefill.1">
-        <source>Here you can select a responsive images polyfill.</source>
+        <source>Include the image polyfill (&lt;em&gt;respimage.js&lt;/em&gt;) in the layout.</source>
       </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>

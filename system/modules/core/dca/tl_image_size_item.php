@@ -292,7 +292,7 @@ class tl_image_size_item extends Backend
 		}
 
 		System::loadLanguageFile('tl_layout');
-		Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_image_size']['picturefill'], 'picturefill.js', 'respimage.js'));
+		Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_image_size']['picturefill'], $GLOBALS['TL_LANG']['tl_layout']['picturefill'][0]));
 	}
 
 
