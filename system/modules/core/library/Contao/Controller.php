@@ -2574,7 +2574,7 @@ abstract class Controller extends \System
 
 			if ($src !== $arrItem['singleSRC'])
 			{
-				$objFile = new \File($src, true);
+				$objFile = new \File(rawurldecode($src), true);
 			}
 		}
 		catch (\Exception $e)
