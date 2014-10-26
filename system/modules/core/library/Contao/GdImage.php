@@ -61,38 +61,33 @@ class GdImage
 	 * @return static The GD image object
 	 *
 	 * @throws \InvalidArgumentException If the image type cannot be processed
+	 * @throws \RuntimeException         If the image failed to be processed
 	 */
 	public static function fromFile(\File $file)
 	{
-		$arrGdInfo = gd_info();
+		$extension = strtolower($file->extension);
+		$function = null;
 
-		switch ($file->extension)
+		if ($extension === 'jpg')
 		{
-			case 'gif':
-				if (!empty($arrGdInfo['GIF Read Support']))
-				{
-					$image = imagecreatefromgif(TL_ROOT . '/' . $file->path);
-				}
-				break;
+			$extension = 'jpeg';
+		}
 
-			case 'jpg':
-			case 'jpeg':
-				if (!empty($arrGdInfo['JPG Support']) || !empty($arrGdInfo['JPEG Support']))
-				{
-					$image = imagecreatefromjpeg(TL_ROOT . '/' . $file->path);
-				}
-				break;
+		if (in_array($extension, array('gif', 'jpeg', 'png')))
+		{
+			$function = 'imagecreatefrom' . $extension;
+		}
 
-			case 'png':
-				if (!empty($arrGdInfo['PNG Support']))
-				{
-					$image = imagecreatefrompng(TL_ROOT . '/' . $file->path);
-				}
-				break;
+		if ($function === null || !is_callable($function))
+		{
+			throw new \InvalidArgumentException('Image type "' . $file->extension . '" cannot be processed by GD');
+		}
 
-			default:
-				throw new \InvalidArgumentException('Image type "' . $file->extension . '" cannot be processed');
+		$image = $function(TL_ROOT . '/' . $file->path);
 
+		if ($image === false)
+		{
+			throw new \RuntimeException('Image "' . $file->path . '" failed to be processed by GD');
 		}
 
 		return new static($image);
