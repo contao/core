@@ -2560,7 +2560,7 @@ abstract class Controller extends \System
 		}
 
 		$imageObj = \Image::create($objFile, $size);
-		$picture = \Picture::create($objFile, $size)->getData();
+		$picture = \Picture::create($objFile, $size)->getTemplateData();
 
 		$src = $imageObj->executeResize()->getResizedPath();
 

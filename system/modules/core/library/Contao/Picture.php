@@ -24,11 +24,11 @@ namespace Contao;
  *     $data = $picture->setImportantPart(array('x'=>10, 'y'=>10, 'width'=>100, 'height'=>100))
  *                     ->setImageSize(\ImageSizeModel::findByPk(1))
  *                     ->setImageSizeItems(\ImageSizeItemModel::findVisibleByPid(1, array('order'=>'sorting ASC')))
- *                     ->getData();
+ *                     ->getTemplateData();
  *
  *     // Shortcut
- *     $data = Picture::create('example.jpg', 1)->getData();
- *     $data = Picture::create('example.jpg', array(100, 100, 'crop'))->getData();
+ *     $data = Picture::create('example.jpg', 1)->getTemplateData();
+ *     $data = Picture::create('example.jpg', array(100, 100, 'crop'))->getTemplateData();
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
@@ -191,14 +191,14 @@ class Picture
 	 *
 	 * @return array The picture element definition
 	 */
-	public function getData()
+	public function getTemplateData()
 	{
-		$mainSource = $this->getDataSource($this->imageSize);
+		$mainSource = $this->getTemplateDataSource($this->imageSize);
 		$sources = array();
 
 		foreach ($this->imageSizeItems as $imageSizeItem)
 		{
-			$sources[] = $this->getDataSource($imageSizeItem);
+			$sources[] = $this->getTemplateDataSource($imageSizeItem);
 		}
 
 		return array
@@ -216,7 +216,7 @@ class Picture
 	 *
 	 * @return array The source element attributes
 	 */
-	protected function getDataSource($imageSize)
+	protected function getTemplateDataSource($imageSize)
 	{
 		$densities = array();
 
