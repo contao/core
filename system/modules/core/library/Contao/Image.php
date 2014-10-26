@@ -479,9 +479,9 @@ class Image
 		{
 			$this->executeResizeSvg();
 		}
-		elseif (!$this->executeResizeGd())
+		else
 		{
-			return $this;
+			$this->executeResizeGd();
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
@@ -512,19 +512,7 @@ class Image
 	 */
 	protected function executeResizeGd()
 	{
-		try
-		{
-			$sourceImage = \GdImage::fromFile($this->fileObj);
-		}
-
-		// The new image could not be created
-		catch (\Exception $e)
-		{
-			\System::log('Image "' . $this->getOriginalPath() . '" could not be processed', __METHOD__, TL_ERROR);
-			$this->resizedPath = '';
-
-			return false;
-		}
+		$sourceImage = \GdImage::fromFile($this->fileObj);
 
 		$coordinates = $this->computeResize();
 		$newImage = \GdImage::fromDimensions($coordinates['width'], $coordinates['height']);
@@ -532,8 +520,6 @@ class Image
 		$sourceImage->copyTo($newImage, $coordinates['target_x'], $coordinates['target_y'], $coordinates['target_width'], $coordinates['target_height']);
 
 		$newImage->saveToFile(TL_ROOT . '/' . $this->getCacheName());
-
-		return true;
 	}
 
 
@@ -923,18 +909,18 @@ class Image
 		{
 			/** @var Image $imageObj */
 			$imageObj = static::create($image, array($width, $height, $mode));
+
+			$imageObj->setTargetPath($target);
+			$imageObj->setForceOverride($force);
+
+			return $imageObj->executeResize()->getResizedPath() ?: null;
 		}
-		catch (\InvalidArgumentException $e)
+		catch (\Exception $e)
 		{
-			\System::log('Image "' . $image . '" could not be found', __METHOD__, TL_ERROR);
+			\System::log('Image "' . $image . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
 
 			return null;
 		}
-
-		$imageObj->setTargetPath($target);
-		$imageObj->setForceOverride($force);
-
-		return $imageObj->executeResize()->getResizedPath() ?: null;
 	}
 
 

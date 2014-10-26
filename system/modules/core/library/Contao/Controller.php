@@ -2513,7 +2513,15 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
-		$objFile = new \File($arrItem['singleSRC'], true);
+		try
+		{
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass;
+			$objFile->imageSize = false;
+		}
 
 		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
@@ -2559,14 +2567,22 @@ abstract class Controller extends \System
 			}
 		}
 
-		$imageObj = \Image::create($objFile, $size);
-		$picture = \Picture::create($objFile, $size)->getTemplateData();
-
-		$src = $imageObj->executeResize()->getResizedPath();
-
-		if ($src !== $arrItem['singleSRC'])
+		try
 		{
-			$objFile = new \File($src, true);
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File($src, true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
 		}
 
 		// Image dimensions
