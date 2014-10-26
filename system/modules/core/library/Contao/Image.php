@@ -387,6 +387,22 @@ class Image
 	 */
 	public function executeResize()
 	{
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['executeResize']) && is_array($GLOBALS['TL_HOOKS']['executeResize']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['executeResize'] as $callback)
+			{
+				$return = \System::importStatic($callback[0])->$callback[1]($this);
+
+				if (is_string($return))
+				{
+					$this->resizedPath = \System::urlEncode($return);
+
+					return $this;
+				}
+			}
+		}
+
 		$importantPart = $this->getImportantPart();
 
 		$widthMatches = ($this->fileObj->width == $this->getTargetWidth() || !$this->getTargetWidth());
