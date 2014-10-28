@@ -149,6 +149,7 @@ class Feed
 			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
 			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
 			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';
+			$xml .= '<author>' . $objItem->author . '</author>';
 
 			// Add the GUID
 			if ($objItem->guid)
