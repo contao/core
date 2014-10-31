@@ -516,6 +516,9 @@ class tl_settings extends Backend
 		$arrModules = array();
 		$arrFolders = scan(TL_ROOT . '/system/modules');
 
+		$blnError = false;
+		$strTip = (Config::get('showHelp') ? "\n".'  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][1] . '</p>' : '');
+
 		// Store all extensions with their status (based on the .skip file)
 		foreach ($arrFolders as $strFolder)
 		{
@@ -543,37 +546,52 @@ class tl_settings extends Backend
 				$arrDisabled = array();
 			}
 
-			// Check whether a module status has changed
-			foreach ($arrModules as $strModule=>$blnActive)
+			if (!ModuleLoader::testDependencies($arrDisabled))
 			{
-				if (in_array($strModule, $arrDisabled))
+				$blnError = true;
+				$dc->noReload = true;
+				$strTip = "\n".'  <p class="tl_error tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][2] . '</p>';
+
+				// Disable modules in the list to activate the correct checkboxes
+				foreach ($arrDisabled as $strModule)
 				{
-					if ($blnActive)
-					{
-						$blnPurgeCache = System::disableModule($strModule);
-					}
-				}
-				else
-				{
-					if (!$blnActive)
-					{
-						$blnPurgeCache = System::enableModule($strModule);
-					}
+					$arrModules[$strModule] = false;
 				}
 			}
-
-			// Purge the internal cache (see #5016)
-			if ($blnPurgeCache)
+			else
 			{
-				$this->import('Automator');
-				$this->Automator->purgeInternalCache();
+				// Check whether a module status has changed
+				foreach ($arrModules as $strModule=>$blnActive)
+				{
+					if (in_array($strModule, $arrDisabled))
+					{
+						if ($blnActive)
+						{
+							$blnPurgeCache = System::disableModule($strModule);
+						}
+					}
+					else
+					{
+						if (!$blnActive)
+						{
+							$blnPurgeCache = System::enableModule($strModule);
+						}
+					}
+				}
+
+				// Purge the internal cache (see #5016)
+				if ($blnPurgeCache)
+				{
+					$this->import('Automator');
+					$this->Automator->purgeInternalCache();
+				}
 			}
 		}
 
 		// Return the form field
 		$return = '
 <div class="' . $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['tl_class'] . '">
-  <fieldset id="ctrl_' . $dc->field . '" class="tl_checkbox_container">
+  <fieldset id="ctrl_' . $dc->field . '" class="tl_checkbox_container' . ($blnError ? ' error' : '') . '">
     <legend>' . $GLOBALS['TL_LANG']['tl_settings']['inactiveModules'][0] . '</legend>
     <input type="hidden" name="' . $dc->inputName . '" value="">
     <input type="checkbox" id="check_all_' . $dc->inputName . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $dc->inputName . '\')">
@@ -609,8 +627,7 @@ class tl_settings extends Backend
 
 		// Add the help text
 		$return .= '
-  </fieldset>' . (Config::get('showHelp') ? '
-  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_settings'][$dc->field][1] . '</p>' : '') . '
+  </fieldset>' . $strTip . '
 </div>';
 
 		return $return;
