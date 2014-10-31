@@ -104,7 +104,20 @@ class Image
 			\System::log('Image type "' . $objFile->extension . '" was not allowed to be processed', __METHOD__, TL_ERROR);
 			return null;
 		}
+		
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getAdaptiveImage']) && is_array($GLOBALS['TL_HOOKS']['getAdaptiveImage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAdaptiveImage'] as $callback)
+			{
+				$return = \System::importStatic($callback[0])->$callback[1]($image, $width, $height, $mode, $objFile, $target);
 
+				if (is_string($return))
+				{
+					return \System::urlEncode($return);
+				}
+			}
+		}
 		// No resizing required
 		if (($objFile->width == $width || !$width) && ($objFile->height == $height || !$height))
 		{
