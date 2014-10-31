@@ -748,11 +748,11 @@
       </trans-unit>
       <trans-unit id="tl_content.toggle.0">
         <source>Toggle visibility</source>
-        <target>表示状態を切り替え</target>
+        <target>表示と非表示を切り替え</target>
       </trans-unit>
       <trans-unit id="tl_content.toggle.1">
         <source>Toggle the visibility of element ID %s</source>
-        <target>ID %sのコンテント要素の表示状態を切り替え</target>
+        <target>ID %sのコンテント要素の表示と非表示を切り替え</target>
       </trans-unit>
       <trans-unit id="tl_content.editalias.0">
         <source>Edit source element</source>

@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.extnd.1">
         <source>Allows everything except special characters which are usually encoded for security reasons (#/()&lt;=&gt;).</source>
-        <target>Autorise tout caractère à l'exception des caractères spéciaux qui sont habituellement encodés pour des raisons de sécurité (#/()&lt;=&gt;).</target>
+        <target>Autorise tout caractère hormis des caractères spéciaux qui sont habituellement encodés pour des raisons de sécurité (#/()&lt;=&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_form_field.date.0">
         <source>Date</source>
@@ -323,11 +323,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.0">
         <source>Target folder</source>
-        <target>Dossier de destination</target>
+        <target>Dossier ciblé</target>
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.1">
         <source>Please select the target folder from the files directory.</source>
-        <target>Choisir le dossier de destination dans le répertoire de fichiers.</target>
+        <target>Choisir le dossier ciblé dans le répertoire de fichiers.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.useHomeDir.0">
         <source>Use home directory</source>
@@ -467,7 +467,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>
-        <target>Lignes et colonnes</target>
+        <target>Rangs et colonnes</target>
       </trans-unit>
       <trans-unit id="tl_form_field.submit_legend">
         <source>Submit button</source>

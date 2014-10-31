@@ -316,12 +316,12 @@ class ContentGallery extends \ContentElement
 
 				if ($j == 0)
 				{
-					$class_td = ' col_first';
+					$class_td .= ' col_first';
 				}
 
 				if ($j == ($this->perRow - 1))
 				{
-					$class_td = ' col_last';
+					$class_td .= ' col_last';
 				}
 
 				$objCell = new \stdClass();

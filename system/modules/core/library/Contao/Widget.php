@@ -434,6 +434,60 @@ abstract class Widget extends \Controller
 
 
 	/**
+	 * Check whether an object property exists
+	 *
+	 * @param string $strKey The property name
+	 *
+	 * @return boolean True if the property exists
+	 */
+	public function __isset($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'id':
+				return isset($this->strId);
+				break;
+
+			case 'name':
+				return isset($this->strName);
+				break;
+
+			case 'label':
+				return isset($this->strLabel);
+				break;
+
+			case 'value':
+				return isset($this->varValue);
+				break;
+
+			case 'class':
+				return isset($this->strClass);
+				break;
+
+			case 'template':
+				return isset($this->strTemplate);
+				break;
+
+			case 'wizard':
+				return isset($this->strWizard);
+				break;
+
+			case 'required':
+				return isset($this->arrConfiguration[$strKey]);
+				break;
+
+			case 'forAttribute':
+				return isset($this->blnForAttribute);
+				break;
+
+			default:
+				return isset($this->arrAttributes[$strKey]) || isset($this->arrConfiguration[$strKey]);
+				break;
+		}
+	}
+
+
+	/**
 	 * Add an attribute
 	 *
 	 * @param string $strName  The attribute name

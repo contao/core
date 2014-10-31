@@ -138,7 +138,7 @@ class Mysql extends \Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$objFields = $this->query("SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` LIKE '{$this->arrConfig['dbDatabase']}' AND `TABLE_NAME` LIKE '%$strTable'");
+		$objFields = $this->query("SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` LIKE '{$this->arrConfig['dbDatabase']}' AND `TABLE_NAME` LIKE '$strTable'");
 
 		while ($objFields->next())
 		{

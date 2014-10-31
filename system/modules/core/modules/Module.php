@@ -287,7 +287,7 @@ abstract class Module extends \Frontend
 							// Add the domain if it differs from the current one (see #3765)
 							if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
 							{
-								$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
+								$href = ($objNext->rootUseSSL ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
 							}
 							break;
 						}
@@ -299,7 +299,8 @@ abstract class Module extends \Frontend
 						// Add the domain if it differs from the current one (see #3765)
 						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
 						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
+							$objSubpages->current()->loadDetails();
+							$href = ($objSubpages->rootUseSSL ? 'https://' : 'http://') . $objSubpages->domain . TL_PATH . '/' . $href;
 						}
 						break;
 				}

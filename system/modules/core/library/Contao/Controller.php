@@ -887,6 +887,7 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_target':
 					$strTarget = null;
 
 					// Back link
@@ -972,7 +973,7 @@ abstract class Controller extends \System
 									// Add the domain if it differs from the current one (see #3765)
 									if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
 									{
-										$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
+										$strUrl = ($objNext->rootUseSSL ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $strUrl;
 									}
 									break;
 								}
@@ -993,7 +994,7 @@ abstract class Controller extends \System
 								// Add the domain if it differs from the current one (see #3765)
 								if ($objNextPage->domain != '' && $objNextPage->domain != \Environment::get('host'))
 								{
-									$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
+									$strUrl = ($objNext->rootUseSSL ? 'https://' : 'http://') . $objNextPage->domain . TL_PATH . '/' . $strUrl;
 								}
 								break;
 						}
@@ -2415,7 +2416,7 @@ abstract class Controller extends \System
 
 		if ($objPage->domain != '' && $objPage->domain != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
+			$strUrl = ($objPage->rootUseSSL ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/' . $strUrl;
 		}
 		else
 		{
@@ -2802,12 +2803,7 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				if (\Environment::get('ssl'))
-				{
-					$url = str_replace('http://', 'https://', $url);
-				}
-
-				define($strConstant, $url . TL_PATH . '/');
+				define($strConstant, '//' . preg_replace('@https?://@', '', $url) . TL_PATH . '/');
 			}
 		}
 

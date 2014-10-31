@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>
-        <target>Ni dogotkov za ta dan.</target>
+        <target>Ni dogodkov za ta dan.</target>
       </trans-unit>
       <trans-unit id="MSC.cal_emptyWeek">
         <source>There are no events for this week.</source>

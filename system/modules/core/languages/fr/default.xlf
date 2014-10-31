@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
-        <target>Erreur %s rencontrée lors de l'envoi du fichier %s !</target>
+        <target>Erreur %s survenue lors de l'envoi du fichier %s !</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -343,7 +343,7 @@
       </trans-unit>
       <trans-unit id="CTE.slider">
         <source>Content slider</source>
-        <target>Slider de contenu</target>
+        <target>Galerie de contenu</target>
       </trans-unit>
       <trans-unit id="CTE.sliderStart.0">
         <source>Wrapper start</source>
@@ -559,7 +559,7 @@
       </trans-unit>
       <trans-unit id="FOP.f6">
         <source>Synchronize the file system with the database</source>
-        <target>Synchroniser les fichiers avec la base de données</target>
+        <target>Concorder les fichiers avec la base de données</target>
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
@@ -991,7 +991,7 @@
       </trans-unit>
       <trans-unit id="MSC.box.0">
         <source>Fit the box</source>
-        <target>Étirer</target>
+        <target>Recadrer</target>
       </trans-unit>
       <trans-unit id="MSC.box.1">
         <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
@@ -1091,7 +1091,7 @@
       </trans-unit>
       <trans-unit id="MSC.sorting.0">
         <source>Sorting value</source>
-        <target>Ordre</target>
+        <target>Valeur de tri</target>
       </trans-unit>
       <trans-unit id="MSC.sorting.1">
         <source>The sorting value is usually assigned automatically.</source>
@@ -1545,7 +1545,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.fileAccessed">
         <source>Last accessed</source>
-        <target>Accédé</target>
+        <target>Accédé le</target>
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
@@ -1553,7 +1553,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
-        <target>ID unique</target>
+        <target>Identifiant unique</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1577,7 +1577,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.welcomeTo">
         <source>%s back end</source>
-        <target>%s administration</target>
+        <target>%s en coulisses</target>
       </trans-unit>
       <trans-unit id="MSC.updateVersion">
         <source>Contao version %s available</source>
@@ -1761,11 +1761,11 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
-        <target>Contao est actuellement en &lt;strong&gt;mode maintenance&lt;/strong&gt;, ce qui signifie que le site internet (front office) n'est pas disponible. Ne le désactiver pas si vous êtes en train d'installer ou mettre à niveau des extensions tierces ! Le site internet pourrait ne pas fonctionner correctement.</target>
+        <target>Contao est actuellement en &lt;strong&gt;mode maintenance&lt;/strong&gt;, ce qui signifie que le site internet (guichet) n'est pas disponible. Ne le désactiver pas si vous êtes en train d'installer ou mettre à niveau des extensions tierces ! Le site internet pourrait ne pas fonctionner correctement.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
-        <target>Désactivé</target>
+        <target>Désactiver</target>
       </trans-unit>
       <trans-unit id="MSC.buildCacheText">
         <source>The &lt;strong&gt;internal cache&lt;/strong&gt; has not been built yet. Building the cache will improve the performance of the application and is highly recommended. If you do not want to use the cache, you can permanently disable it in the back end settings.</source>
@@ -1865,7 +1865,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.ptable">
         <source>Parent table</source>
-        <target>Table parente</target>
+        <target>Table mère</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>
@@ -2001,7 +2001,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.matchAny">
         <source>match any word</source>
-        <target>chaque mot</target>
+        <target>n'importe quel mot</target>
       </trans-unit>
       <trans-unit id="MSC.saveData">
         <source>Save data</source>
@@ -2049,7 +2049,7 @@ Cet e-mail a été généré par Contao. Merci de ne pas y répondre directement
       </trans-unit>
       <trans-unit id="MSC.invalidPage">
         <source>Sorry, item &quot;%s&quot; does not exist.</source>
-        <target>Désolé, la page &quot;%s&quot; n'existe pas.</target>
+        <target>Malheureusement l'élément &quot;%s&quot; n'existe pas.</target>
       </trans-unit>
       <trans-unit id="MSC.list_orderBy">
         <source>Order by %s</source>

@@ -370,8 +370,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="//ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
@@ -397,8 +396,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . ($blnXhtml ? ' type="text/javascript"' : '') . ' src="//ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
@@ -479,8 +477,7 @@ class PageRegular extends \Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$protocol = \Environment::get('ssl') ? 'https://' : 'http://';
-			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts) . '"' . $strTagEnding . "\n";
+			$strStyleSheets .= '<link' . ($blnXhtml ? ' type="text/css"' : '') .' rel="stylesheet" href="//fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts) . '"' . $strTagEnding . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets

@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="MOD.accounts">
         <source>Account manager</source>
-        <target>Upravljalec računov</target>
+        <target>Upravljanje z računi</target>
       </trans-unit>
       <trans-unit id="MOD.member.0">
         <source>Members</source>

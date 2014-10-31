@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.0">
         <source>Redirect page</source>
-        <target>Aller à</target>
+        <target>Page de redirection</target>
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_page.fallback.1">
         <source>Show this page if there is none that matches the visitor's language.</source>
-        <target>Afficher cette page si aucune page n'est disponible dans la langue du visiteur.</target>
+        <target>Afficher cette page si aucune page ne correspond à la langue du visiteur.</target>
       </trans-unit>
       <trans-unit id="tl_page.dns.0">
         <source>Domain name</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_page.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>Les messages générés automatiquement (ex. : les e-mails de confirmation d'inscription) seront envoyés à cette adresse.</target>
+        <target>Les messages générés par eux-mêmes (ex.: les courriels de confirmation d'inscription) seront envoyés à cette adresse.</target>
       </trans-unit>
       <trans-unit id="tl_page.dateFormat.0">
         <source>Date format</source>

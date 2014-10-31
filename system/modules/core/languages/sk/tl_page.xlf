@@ -139,9 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS</source>
+        <target>Použiť HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Vygeneruje URL adresy začínajúce &lt;em&gt;https://&lt;/em&gt;  (napríklad v Mape stránok).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

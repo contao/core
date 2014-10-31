@@ -1142,17 +1142,20 @@ ul.sortable li {
 	font-size:.75rem;
 	color:inherit;
 }
-.ace_editor.fullsize {
-	position:absolute;
+.ace-fullsize {
+	overflow:hidden !important;
+}
+.ace-fullsize .ace_editor {
+	position:fixed !important;
 	top:0;
 	right:0;
 	bottom:0;
 	left:0;
-	width:auto;
+	width:auto !important;
 	height:auto !important;
-	-moz-box-sizing:border-box;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
+	margin:0;
+	border:0;
+	z-index:10000;
 }
 
 /* Navigation icons */

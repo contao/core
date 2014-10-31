@@ -136,7 +136,7 @@ class ModuleQuicklink extends \Module
 						// Add the domain if it differs from the current one (see #3765)
 						if ($objNext->domain != '' && $objNext->domain != \Environment::get('host'))
 						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
+							$href = ($objNext->rootUseSSL ? 'https://' : 'http://') . $objNext->domain . TL_PATH . '/' . $href;
 						}
 						break;
 					}
@@ -148,7 +148,7 @@ class ModuleQuicklink extends \Module
 					// Add the domain if it differs from the current one (see #3765)
 					if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
 					{
-						$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
+						$href = ($arrPage['rootUseSSL'] ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
 					}
 					break;
 			}
