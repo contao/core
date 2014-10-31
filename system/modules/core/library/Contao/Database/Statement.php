@@ -289,12 +289,14 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
-		// Execute the query
 		$this->intQueryStart = microtime(true);
+
+		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
 		{
 			throw new \Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
+
 		$this->intQueryEnd = microtime(true);
 
 		// No result set available
