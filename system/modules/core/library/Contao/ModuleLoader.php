@@ -77,6 +77,31 @@ class ModuleLoader
 
 
 	/**
+	 * Checks if module dependencies can be resolved with the given modules disabled
+	 *
+	 * @param array $arrDisabled The list of disabled modules
+	 *
+	 * @return bool True if dependencies could be resolved
+	 */
+	public static function testDependencies(array $arrDisabled)
+	{
+		$modules = static::findModules();
+		$active = array_diff($modules, $arrDisabled);
+
+		try
+		{
+			static::resolveDependencies($active);
+		}
+		catch (\UnresolvableDependenciesException $e)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
 	 * Scan the modules and resolve their dependencies
 	 *
 	 * @throws \UnresolvableDependenciesException If the dependencies cannot be resolved
