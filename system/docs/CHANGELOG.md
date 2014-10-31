@@ -5,6 +5,12 @@ Version 3.3.6 (2014-XX-XX)
 --------------------------
 
 ### Fixed
+Always pass a DC object in the `toggleVisibility` callback (see #7314).
+
+### Fixed
+Correctly render the "read more" and article navigation links (see #7300).
+
+### Fixed
 Fix the markup of the form submit button (see #7396).
 
 ### Fixed
