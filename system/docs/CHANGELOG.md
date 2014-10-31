@@ -1,6 +1,73 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.6 (2014-10-31)
+--------------------------
+
+### Fixed
+Always pass a DC object in the `toggleVisibility` callback (see #7314).
+
+### Fixed
+Correctly render the "read more" and article navigation links (see #7300).
+
+### Fixed
+Fix the markup of the form submit button (see #7396).
+
+### Fixed
+Do not generally remove insert tags from page titles (see #7198).
+
+### Fixed
+Consider the `useSSL` flag of the root page when generating URLs (see #7390).
+
+### Fixed
+Correctly create the template object in `BaseTemplate::insert()` (see #7366).
+
+### Updated
+Updated TinyMCE to version 4.1.6 and added the "lists" plugin (see #7349).
+
+### Fixed
+Fixed the FAQ sorting in the back end (see #7362).
+
+### Fixed
+Added the `Widget::__isset()` method (see #7290).
+
+### Fixed
+Correctly handle dynamic parent tables in the `DC_Table` driver (see #7335).
+
+### Fixed
+Correctly shortend HTML strings in `String::substrHtml()` (see #7311).
+
+### Updated
+Updated MooTools to version 1.5.1 (see #7267).
+
+### Fixed
+Updated swipe.js to version 2.0.1 (see #7307).
+
+### Fixed
+Use an `.invisible` class which plays nicely with screen readers (see #7372).
+
+### Fixed
+Handle disabled modules in the module loader (see #7380).
+
+### Fixed
+Fixed the "link_target" insert tag.
+
+### Fixed
+Correctly mark CAPTCHA fields as mandatory (see #7283).
+
+### Updated
+Updated the ACE editor to version 1.1.6 (see #7278).
+
+### Fixed
+Fix the `Database::list_fields()` method (see #7277).
+
+### Fixed
+Correctly assign "col_first" and "col_last" in the image gallery (see #7250).
+
+### Fixed
+Set the correct path to TCPDF in `system/config/tcpdf.php` (see #7264).
+
+
 Version 3.3.5 (2014-08-27)
 --------------------------
 
