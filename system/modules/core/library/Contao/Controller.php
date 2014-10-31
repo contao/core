@@ -1612,7 +1612,8 @@ abstract class Controller extends \System
 					try
 					{
 						$dimensions = '';
-						$src = \Image::get($strFile, $width, $height, $mode);
+						$imageObj = \Image::create($strFile, array($width, $height, $mode));
+						$src = $imageObj->executeResize()->getResizedPath();
 						$objFile = new \File($src);
 
 						// Add the image dimensions
@@ -2526,7 +2527,15 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
-		$objFile = new \File($arrItem['singleSRC']);
+		try
+		{
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass;
+			$objFile->imageSize = false;
+		}
 
 		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
@@ -2572,18 +2581,22 @@ abstract class Controller extends \System
 			}
 		}
 
-		$file = new \File($arrItem['singleSRC'], true);
-		$imageObj = new \Image($file);
-
-		$src = $imageObj->setTargetWidth($size[0])
-						->setTargetHeight($size[1])
-						->setResizeMode($size[2])
-						->executeResize()
-						->getResizedPath();
-
-		if ($src !== $arrItem['singleSRC'])
+		try
 		{
-			$objFile = new \File($src);
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File(rawurldecode($src), true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
 		}
 
 		// Image dimensions
@@ -2591,29 +2604,6 @@ abstract class Controller extends \System
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
-		}
-
-		if (is_numeric($size[2]))
-		{
-			$picture = $imageObj->getPicture($size[2]);
-		}
-		else
-		{
-			$picture = array
-			(
-				'img' => array
-				(
-					'src' => $src,
-					'srcset' => $src,
-				),
-				'sources' => array()
-			);
-
-			if (!empty($objTemplate->arrSize))
-			{
-				$picture['img']['width'] = $objTemplate->arrSize[0];
-				$picture['img']['height'] = $objTemplate->arrSize[1];
-			}
 		}
 
 		$picture['alt'] = specialchars($arrItem['alt']);
