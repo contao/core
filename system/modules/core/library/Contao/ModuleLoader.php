@@ -109,74 +109,92 @@ class ModuleLoader
 				}
 			}
 
-			// Walk through the modules
-			foreach ($modules as $module)
+			static::$active = static::resolveDependencies($modules);
+		}
+	}
+
+
+	/**
+	 * Checks if dependencies of the given modules can be resolved
+	 *
+	 * @param array $modules The list of Contao modules
+	 *
+	 * @return array The list of active modules
+	 * @throws \UnresolvableDependenciesException
+	 */
+	private static function resolveDependencies(array $modules)
+	{
+		$active = array();
+
+		// Walk through the modules
+		foreach ($modules as $module)
+		{
+			$load[$module] = array();
+			$path = TL_ROOT . '/system/modules/' . $module;
+
+			// Read the autoload.ini if any
+			if (file_exists($path . '/config/autoload.ini'))
 			{
-				$load[$module] = array();
-				$path = TL_ROOT . '/system/modules/' . $module;
+				$config = parse_ini_file($path . '/config/autoload.ini', true);
+				$load[$module] = $config['requires'] ?: array();
 
-				// Read the autoload.ini if any
-				if (file_exists($path . '/config/autoload.ini'))
+				foreach ($load[$module] as $k=>$v)
 				{
-					$config = parse_ini_file($path . '/config/autoload.ini', true);
-					$load[$module] = $config['requires'] ?: array();
-
-					foreach ($load[$module] as $k=>$v)
+					// Optional requirements (see #6835)
+					if (strncmp($v, '*', 1) === 0)
 					{
-						// Optional requirements (see #6835)
-						if (strncmp($v, '*', 1) === 0)
-						{
-							$key = substr($v, 1);
+						$key = substr($v, 1);
 
-							if (!in_array($key, $modules))
-							{
-								unset($load[$module][$k]);
-							}
-							else
-							{
-								$load[$module][$k] = $key;
-							}
+						if (!in_array($key, $modules))
+						{
+							unset($load[$module][$k]);
+						}
+						else
+						{
+							$load[$module][$k] = $key;
 						}
 					}
 				}
 			}
+		}
 
-			// Resolve the dependencies
-			while (!empty($load))
+		// Resolve the dependencies
+		while (!empty($load))
+		{
+			$failed = true;
+
+			foreach ($load as $name=>$requires)
 			{
-				$failed = true;
-
-				foreach ($load as $name=>$requires)
+				if (empty($requires))
 				{
-					if (empty($requires))
-					{
-						$resolved = true;
-					}
-					else
-					{
-						$resolved = count(array_diff($requires, static::$active)) === 0;
-					}
-
-					if ($resolved === true)
-					{
-						unset($load[$name]);
-						static::$active[] = $name;
-						$failed = false;
-					}
+					$resolved = true;
+				}
+				else
+				{
+					$resolved = count(array_diff($requires, $active)) === 0;
 				}
 
-				// The dependencies cannot be resolved
-				if ($failed === true)
+				if ($resolved === true)
 				{
-					ob_start();
-					dump($load);
-					$buffer = ob_get_contents();
-					ob_end_clean();
-
-					throw new \UnresolvableDependenciesException("The module dependencies could not be resolved.\n$buffer");
+					unset($load[$name]);
+					$active[] = $name;
+					$failed = false;
 				}
 			}
+
+			// The dependencies cannot be resolved
+			if ($failed === true)
+			{
+				ob_start();
+				dump($load);
+				$buffer = ob_get_contents();
+				ob_end_clean();
+
+				throw new \UnresolvableDependenciesException("The module dependencies could not be resolved.\n$buffer");
+			}
 		}
+
+		return $active;
 	}
 
 
