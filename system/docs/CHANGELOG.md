@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-RC1 (2014-XX-XX)
 ------------------------------
 
+### Improved
+Show the database query duration in debug mode (see #7323).
+
 ### New
 Added the "executeResize" hook (see #7404).
 

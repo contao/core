@@ -386,7 +386,6 @@ abstract class Statement
 		}
 
 		$arrData['query'] = specialchars($this->strQuery);
-		$arrData['duration'] = \System::getFormattedNumber((($this->intQueryEnd - $this->intQueryStart) * 1000), 3) . ' ms';
 
 		if ($objResult === null || strncasecmp($this->strQuery, 'SELECT', 6) !== 0)
 		{
@@ -412,6 +411,7 @@ abstract class Statement
 			$arrData['returned'] = sprintf('%s row(s) returned', $objResult->numRows);
 		}
 
+		$arrData['duration'] = \System::getFormattedNumber((($this->intQueryEnd - $this->intQueryStart) * 1000), 3) . ' ms';
 		$GLOBALS['TL_DEBUG']['database_queries'][] = $arrData;
 	}
 
