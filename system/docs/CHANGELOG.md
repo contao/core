@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0-RC1 (2014-XX-XX)
 ------------------------------
 
+### New
+Pass the parent ID of a page to the navigation template (see #7391).
+
 ### Improved
 Support the "min", "max" and "step" attributes on number fields (see #7363).
 
