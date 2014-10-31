@@ -583,7 +583,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_text.1">
         <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any input field (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
-        <target>&lt;em&gt;##domain##&lt;/em&gt; (ドメイン名)、&lt;em&gt;##link##&lt;/em&gt; (アクティベーションのリンク)、(例えば、&lt;em&gt;##lastname##&lt;/em&gt;といった)任意の入力フィールドをワイルドカードとして使用できます。</target>
+        <target>&lt;em&gt;##domain##&lt;/em&gt; (ドメイン名)、&lt;em&gt;##link##&lt;/em&gt; (アクティベーションのリンク)、(例えば、&lt;em&gt;##lastname##&lt;/em&gt;といった)任意の入力項目をワイルドカードとして使用できます。</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_password.0">
         <source>Password message</source>
@@ -591,7 +591,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_password.1">
         <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
-        <target>&lt;em&gt;##domain##&lt;/em&gt; (ドメイン名)、&lt;em&gt;##link##&lt;/em&gt; (アクティベーションのリンク)、(例えば、&lt;em&gt;##lastname##&lt;/em&gt;といった)任意の入力フィールドをワイルドカードとして使用できます。</target>
+        <target>&lt;em&gt;##domain##&lt;/em&gt; (ドメイン名)、&lt;em&gt;##link##&lt;/em&gt; (アクティベーションのリンク)、(例えば、&lt;em&gt;##lastname##&lt;/em&gt;といった)任意の入力項目をワイルドカードとして使用できます。</target>
       </trans-unit>
       <trans-unit id="tl_module.title_legend">
         <source>Title and type</source>

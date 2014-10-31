@@ -33,7 +33,7 @@
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
         <source>Browse your local computer and select the files you want to upload to the server.</source>
-        <target>Preišči računalnik in izberite eno ali več datotek za prenos na strežnik.</target>
+        <target>Na svojem računalniku izberite eno ali več datotek za prenos na strežnik.</target>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>
@@ -56,7 +56,7 @@
       </trans-unit>
       <trans-unit id="tl_files.uploadFF">
         <source>Upload files to folder &quot;%s&quot;</source>
-        <target>Prenesi datoeko v mapo &quot;%s&quot;</target>
+        <target>Prenesi datoteko v mapo &quot;%s&quot;</target>
       </trans-unit>
       <trans-unit id="tl_files.editFile">
         <source>Edit file &quot;%s&quot;</source>

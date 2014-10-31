@@ -407,6 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSize.1">
         <source>Width and height of the media player in pixels (e.g. 640x480).</source>
+        <target>အစက်အပြောက်များတွင်ဖွင့်စက်၏အနံနှင့်အမြင့် (ဥပမာ။ 640x480)</target>
       </trans-unit>
       <trans-unit id="tl_content.autoplay.0">
         <source>Autoplay</source>

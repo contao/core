@@ -79,69 +79,91 @@
       </trans-unit>
       <trans-unit id="XPT.incompleteExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>တစ်ခြားအချက်အလက်များကို &lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;ကွန်ဒေါင်လက်စွဲကျမ်း&lt;/a&gt; တွင်ကြည့်ပါ</target>
       </trans-unit>
       <trans-unit id="XPT.notFound">
         <source>Page not found</source>
+        <target>စာမျက်နှာရှာမတွေ့</target>
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
+        <target>သင်တောင်းဆိုသောစာမျက်နှာသည်ယခုဒိုမိန်းဖြင့်မရှိပါ</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>&lt;a href=&quot;%s&quot;&gt;အပေါ်အဆင့်သို့&lt;/a&gt; ရောက်အောင်သွားပြီးရှာချင်သောစာမျက်နှာကိုရှာပါ။ &lt;a href=&quot;%s&quot;&gt;ဝဘ်ထုတ်လုပ်သူ&lt;/a&gt; ကိုအကြောင်းကြားပြီးပြသနာကိုမေးမြန်းပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noForward">
         <source>Forward page not found</source>
+        <target>ရှေ့စာမျက်နှာရှာမတွေ့</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardPage">
         <source>The application has been configured to forward the request to another page, however, the target page does not exist or has not been published.</source>
+        <target>ယခုအသုံးချပရိုဂရမ်ကိုပုံစံပြင်ပြီးနှင့်အရှေ့စာမျက်နှာကိုပို့ဆောင်ပေးပြီးသော်လည်းရည်မှန်းစာမျက်နှာသည်မတည်ရှိဘဲမလွှင့်တင်ထားပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noForwardFix">
         <source>This is something that needs to be fixed by the administrator of the website. If you are a visitor, there is nothing you can do except to &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; to let him know that there is something wrong.</source>
+        <target>ဝဘ်ဆိုက်စီမံခန့်ခွဲသူမှသာဖြေရှင်းနိုင်မည်။ &lt;a href=&quot;%s&quot;&gt;ဝဘ်ထုတ်လုပ်သူ&lt;/a&gt; ကိုအကြောင်းကြားပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noRoot">
         <source>No root page found</source>
+        <target>အခြေခံစာမျက်နှာရှာမတွေ့</target>
       </trans-unit>
       <trans-unit id="XPT.noRootPage">
         <source>There is no website root page which matches the requested language and/or domain name.</source>
+        <target>တောင်းဆိုထားသောဘာသာစကားနှင့်ဒိုမိန်းဖြင့်ဆက်စပ်နေသောဝဘ်ဆိုက်အခြေခံစာမျက်နှာကိုမတွေ့ပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noRootFix">
         <source>If you have explicitly set a language, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and see whether you are being redirected. Otherwise &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>&lt;a href=&quot;%s&quot;&gt;အပေါ်ဆုံးအဆင့်&lt;/a&gt; သို့သွားပြီးဘာသာစကားကိုပြောင်းပါ။ မရပါက &lt;a href=&quot;%s&quot;&gt;ဝဘ်ထုတ်လုပ်သူ&lt;/a&gt; သို့အကြောင်းကြားပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noLayout">
         <source>No layout specified</source>
+        <target>တိကျသောပုံစံပြင်ရှာမတွေ့</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutSpecified">
         <source>The page you have requested has not yet been associated with a page layout.</source>
+        <target>သင်တောင်းဆိုထားသောစာမျက်နှာသည်စာမျက်နှာပုံစံပြင်ဖြင့်ဆက်စပ်မှုမရှိပါ</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
+        <target>ဆိုက်တည်ဆောက်ပုံတွင်းရှိဝဘ်ဆိုက်အခြေစာမျက်နှာတစ်ခုဆီကိုစာမျက်နှာပုံစံပြင်များဖြင့်ဆက်စပ်ပြီးပါစေ</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>
+        <target>နောက်ထပ်အချက်အလက်များကြည့်ရှုရန်&lt;a href=&quot;https://contao.org/manual/installation.html&quot; target=&quot;_blank&quot;&gt;Contao installation manual&lt;/a&gt;</target>
       </trans-unit>
       <trans-unit id="XPT.noActive">
         <source>No active pages found</source>
+        <target>အလုပ်လုပ်နေသောစာမျက်နှာများရှာမတွေ့</target>
       </trans-unit>
       <trans-unit id="XPT.noActivePages">
         <source>Your request has been mapped to a website which does not yet contain any published pages.</source>
+        <target>ထုတ်လွှင့်ပြီးစာမျက်နှာများမပါဝင်သေးသောဝဘ်ဆိုက်သို့ချိတ်ဆက်ရန်တောင်းဆိုခြင်းကိုလုပ်ပြီး</target>
       </trans-unit>
       <trans-unit id="XPT.noActiveFix">
         <source>Most likely, the website is still under development and will be online in a few days. If you still think that there is something wrong, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know.</source>
+        <target>ဝဘ်ဆိုက်သည်စမ်းသပ်ဆဲအဆင့်တွင်သာရှိသေးပြီးမကြာမီရက်များအတွင်းစတင်အသုံးပြုနိုင်ပါသည်။ တစ်ခုခုပြသနာတွေ့ပါက &lt;a href=&quot;%s&quot;&gt;ဝဘ်ထုတ်လုပ်သူ&lt;/a&gt; ကိုအကြောင်းကြားပါ</target>
       </trans-unit>
       <trans-unit id="XPT.forbidden">
         <source>Forbidden</source>
+        <target>တားမြစ်ပိတ်ပင်ထား</target>
       </trans-unit>
       <trans-unit id="XPT.notAuthenticated">
         <source>You are either not authenticated or you are not allowed to access the requested page.</source>
+        <target>တောင်းဆိုသောစာမျက်နှာကိုခိုင်လုံသောအထောက်အထားမပြနိုင်ခြင်းနှင့်အသုံးပြုခြင်းကိုတားမြစ်ထားပါသည်</target>
       </trans-unit>
       <trans-unit id="XPT.forbiddenFix">
         <source>If you are not logged in, try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and look for a login form. If there is no login form or if you are logged in already, &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>
+        <target>ဖွင့်မဝင်ရသေးလျှင် &lt;a href=&quot;%s&quot;&gt;အပေါ်ဆုံးအဆင့်&lt;/a&gt; ကိုသွားပြီးဖွင့်ဝင်ပုံစံကိုရှာပါ။ မတွေ့လျှင် &lt;a href=&quot;%s&quot;&gt;ဝဘ်ထုတ်လုပ်သူ&lt;/a&gt; ကိုအကြောင်းကြားပါ</target>
       </trans-unit>
       <trans-unit id="XPT.unavailable">
         <source>We'll be right back</source>
+        <target>ခဏလေးစောင့်</target>
       </trans-unit>
       <trans-unit id="XPT.maintenance">
         <source>The website is currently down for maintenance. Please come back later.</source>
+        <target>ပြုပြင်ထိန်းသိမ်းရန်လုပ်ဆောင်နေပါသည်။ မကြာခင်ပြန်လာခဲ့ပါ။</target>
       </trans-unit>
     </body>
   </file>
