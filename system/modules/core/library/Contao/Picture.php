@@ -96,6 +96,7 @@ class Picture
 		if (!is_array($size))
 		{
 			$imageSize = \ImageSizeModel::findByPk($size);
+
 			if ($imageSize === null)
 			{
 				$size = array();
@@ -105,6 +106,7 @@ class Picture
 		if (is_array($size))
 		{
 			$size = $size + array(0, 0, 'crop');
+
 			$imageSize = new \stdClass;
 			$imageSize->width = $size[0];
 			$imageSize->height = $size[1];

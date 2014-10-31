@@ -2533,7 +2533,7 @@ abstract class Controller extends \System
 		}
 		catch (\Exception $e)
 		{
-			$objFile = new \stdClass;
+			$objFile = new \stdClass();
 			$objFile->imageSize = false;
 		}
 

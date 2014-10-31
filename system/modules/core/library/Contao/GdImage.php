@@ -198,6 +198,7 @@ class GdImage
 
 			default:
 				throw new \InvalidArgumentException('Image type "' . $extension . '" cannot be generated');
+				break;
 		}
 
 		return $this;

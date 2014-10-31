@@ -854,6 +854,7 @@ class Image
 		if (is_array($size))
 		{
 			$size = $size + array(0, 0, 'crop');
+
 			$imageObj->setTargetWidth($size[0])
 					 ->setTargetHeight($size[1])
 					 ->setResizeMode($size[2]);
@@ -909,7 +910,6 @@ class Image
 		{
 			/** @var Image $imageObj */
 			$imageObj = static::create($image, array($width, $height, $mode));
-
 			$imageObj->setTargetPath($target);
 			$imageObj->setForceOverride($force);
 
