@@ -46,12 +46,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/contao/php-diff.git",
-                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd"
+                "reference": "f84024ea2ca4f5142dc2ed54a8c457b9cb62cfcd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/php-diff/zipball/9928f73548f26c4b8627d78a3722e52f63efadbd",
-                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd",
+                "url": "https://api.github.com/repos/contao/php-diff/zipball/f84024ea2ca4f5142dc2ed54a8c457b9cb62cfcd",
+                "reference": "f84024ea2ca4f5142dc2ed54a8c457b9cb62cfcd",
                 "shasum": ""
             },
             "type": "library",
@@ -71,7 +71,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2014-05-17 19:04:01"
+            "time": "2014-10-21 12:48:52"
         },
         {
             "name": "leafo/lessphp",
@@ -120,12 +120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8c08da585537e97efd528c7d278463d2b9396371"
+                "reference": "9bcad028603a185fbd1a590fa64a2cbab646a946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c08da585537e97efd528c7d278463d2b9396371",
-                "reference": "8c08da585537e97efd528c7d278463d2b9396371",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/9bcad028603a185fbd1a590fa64a2cbab646a946",
+                "reference": "9bcad028603a185fbd1a590fa64a2cbab646a946",
                 "shasum": ""
             },
             "require": {
@@ -167,7 +167,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2014-08-12 22:41:53"
+            "time": "2014-10-30 12:51:26"
         },
         {
             "name": "leafo/scssphp-compass",
