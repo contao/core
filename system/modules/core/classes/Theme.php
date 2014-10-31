@@ -723,9 +723,6 @@ class Theme extends \Backend
 		$strTmp = md5(uniqid(mt_rand(), true));
 		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
 
-		// Add the XML document
-		$objArchive->addString($xml->saveXML(), 'theme.xml');
-
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
 
@@ -753,6 +750,9 @@ class Theme extends \Backend
 				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme->id);
 			}
 		}
+
+		// Add the XML document
+		$objArchive->addString($xml->saveXML(), 'theme.xml');
 
 		// Close the archive
 		$objArchive->close();
