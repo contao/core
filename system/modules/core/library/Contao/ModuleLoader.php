@@ -97,38 +97,7 @@ class ModuleLoader
 			static::$active = array();
 			static::$disabled = array();
 
-			// Ignore non-core modules if the system runs in safe mode
-			if (\Config::get('coreOnlyMode'))
-			{
-				$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
-			}
-			else
-			{
-				// Sort the modules (see #6391)
-				$modules = scan(TL_ROOT . '/system/modules');
-				sort($modules);
-
-				// Filter dot resources, files and legacy modules
-				foreach ($modules as $k=>$v)
-				{
-					if (strncmp($v, '.', 1) === 0)
-					{
-						unset($modules[$k]);
-					}
-					elseif (!is_dir(TL_ROOT . '/system/modules/' . $v))
-					{
-						unset($modules[$k]);
-					}
-					elseif (in_array($v, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
-					{
-						unset($modules[$k]);
-					}
-				}
-
-				// Load the "core" module first
-				array_unshift($modules, 'core');
-				$modules = array_unique($modules);
-			}
+			$modules = static::findModules();
 
 			// Filter disabled modules
 			foreach ($modules as $k=>$v)
@@ -208,5 +177,49 @@ class ModuleLoader
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Scan system/modules and return all module names
+	 *
+	 * @return array
+	 */
+	private static function findModules()
+	{
+		// Ignore non-core modules if the system runs in safe mode
+		if (\Config::get('coreOnlyMode'))
+		{
+			$modules = array('core', 'calendar', 'comments', 'devtools', 'faq', 'listing', 'news', 'newsletter', 'repository');
+		}
+		else
+		{
+			// Sort the modules (see #6391)
+			$modules = scan(TL_ROOT . '/system/modules');
+			sort($modules);
+
+			// Filter dot resources, files and legacy modules
+			foreach ($modules as $k=>$v)
+			{
+				if (strncmp($v, '.', 1) === 0)
+				{
+					unset($modules[$k]);
+				}
+				elseif (!is_dir(TL_ROOT . '/system/modules/' . $v))
+				{
+					unset($modules[$k]);
+				}
+				elseif (in_array($v, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
+				{
+					unset($modules[$k]);
+				}
+			}
+
+			// Load the "core" module first
+			array_unshift($modules, 'core');
+			$modules = array_unique($modules);
+		}
+
+		return $modules;
 	}
 }
