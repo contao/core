@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.0-RC1 (2014-XX-XX)
+------------------------------
+
+### New
+Added the "executeResize" hook (see #7404).
+
+
 Version 3.4.0-beta1 (2014-10-03)
 --------------------------------
 
