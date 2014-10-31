@@ -100,11 +100,6 @@ class FormSubmit extends \Widget
 	 */
 	public function parse($arrAttributes=null)
 	{
-		if ($this->tableless)
-		{
-			$this->strClass = trim('submit_container ' . $this->strClass);
-		}
-
 		if ($this->imageSubmit && $this->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($this->singleSRC);

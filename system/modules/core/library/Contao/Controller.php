@@ -2243,7 +2243,7 @@ abstract class Controller extends \System
 		// Add the domain if it differs from the current one (see #3765 and #6927)
 		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
+			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2831,12 +2831,7 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				if (\Environment::get('ssl'))
-				{
-					$url = str_replace('http://', 'https://', $url);
-				}
-
-				define($strConstant, $url . TL_PATH . '/');
+				define($strConstant, '//' . preg_replace('@https?://@', '', $url) . TL_PATH . '/');
 			}
 		}
 

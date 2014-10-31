@@ -623,15 +623,6 @@ class PageModel extends \Model
 
 		$this->trail = array_reverse($trail);
 
-		// Remove insert tags from all titles (see #2853)
-		$this->title = strip_insert_tags($this->title);
-		$this->pageTitle = strip_insert_tags($this->pageTitle);
-		$this->parentTitle = strip_insert_tags($this->parentTitle);
-		$this->parentPageTitle = strip_insert_tags($this->parentPageTitle);
-		$this->mainTitle = strip_insert_tags($this->mainTitle);
-		$this->mainPageTitle = strip_insert_tags($this->mainPageTitle);
-		$this->rootTitle = strip_insert_tags($this->rootTitle);
-
 		// Do not cache protected pages
 		if ($this->protected)
 		{

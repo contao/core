@@ -309,6 +309,11 @@ abstract class Module extends \Frontend
 						// DO NOT ADD A break; STATEMENT
 
 					default:
+						if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
+						{
+							$objSubpages->current()->loadDetails();
+						}
+
 						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 						break;
 				}
@@ -340,10 +345,6 @@ abstract class Module extends \Frontend
 					$row['isActive'] = false;
 					$row['isTrail'] = $trail;
 				}
-
-				// Remove insert tags from all titles (see #2853, #7198)
-				$objSubpages->title = strip_insert_tags($objSubpages->title);
-				$objSubpages->pageTitle = strip_insert_tags($objSubpages->pageTitle);
 
 				$row['subitems'] = $subitems;
 				$row['class'] = trim($strClass);

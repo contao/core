@@ -110,25 +110,19 @@ class Idna
 			return static::encodeEmail($strUrl);
 		}
 
-		$blnSchemeAdded = false;
 		$arrUrl = parse_url($strUrl);
 
 		// Add the scheme to ensure that parse_url works correctly
 		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
 		{
-			$blnSchemeAdded = true;
 			$arrUrl = parse_url('http://' . $strUrl);
+			unset($arrUrl['scheme']);
 		}
 
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
-			// Remove the scheme if it has been added above (see #3792)
-			if ($blnSchemeAdded)
-			{
-				unset($arrUrl['scheme']);
-			}
-			elseif ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
+			if ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
 			{
 				$arrUrl['scheme'] .= ':'; // see #6148
 			}
