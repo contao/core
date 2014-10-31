@@ -5,6 +5,9 @@ Version 3.4.0-RC1 (2014-XX-XX)
 ------------------------------
 
 ### Improved
+Support the "min", "max" and "step" attributes on number fields (see #7363).
+
+### Improved
 Show the database query duration in debug mode (see #7323).
 
 ### New
