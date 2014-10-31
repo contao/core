@@ -28,7 +28,6 @@
       <arg value="install" />
       <arg value="--prefer-dist" />
       <arg value="--no-dev" />
-      <arg value="--no-scripts" />
     </exec>
   </target>
 
