@@ -53,12 +53,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "9bcad028603a185fbd1a590fa64a2cbab646a946"
+                "reference": "b65729d314abd13f83507a406246746e278f135d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/9bcad028603a185fbd1a590fa64a2cbab646a946",
-                "reference": "9bcad028603a185fbd1a590fa64a2cbab646a946",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/b65729d314abd13f83507a406246746e278f135d",
+                "reference": "b65729d314abd13f83507a406246746e278f135d",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2014-10-30 12:51:26"
+            "time": "2014-11-01 17:49:18"
         },
         {
             "name": "leafo/scssphp-compass",
