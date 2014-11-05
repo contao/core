@@ -376,7 +376,6 @@ class FrontendIndex extends \Frontend
 		$this->Session->setData($session);
 
 		// Load the default language file (see #2644)
-		$this->import('Config');
 		\System::loadLanguageFile('default');
 
 		// Replace the insert tags and then re-replace the request_token
