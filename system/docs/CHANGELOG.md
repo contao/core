@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.0 (2014-11-XX)
+--------------------------
+
+### Fixed
+Handle SVG images in the default back end uploader.
+
+
 Version 3.4.0-RC1 (2014-10-31)
 ------------------------------
 
