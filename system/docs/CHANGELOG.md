@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.16 (2014-XX-XX)
+---------------------------
+
+### Fixed
+Send a 301 redirect to forward to the language root page (see #7420).
+
+
 Version 3.2.15 (2014-10-31)
 ---------------------------
 
