@@ -497,7 +497,7 @@ class DataContainer extends \Backend
 		// Show a preview image (see #4948)
 		if ($this->strTable == 'tl_files' && $this->strField == 'name' && $this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
 		{
-			$objFile = new \File($this->objActiveRecord->path);
+			$objFile = new \File($this->objActiveRecord->path, true);
 
 			if ($objFile->isImage)
 			{

@@ -341,7 +341,7 @@ class FileSelector extends \Widget
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
 
-				$objFile = new \File($currentFile);
+				$objFile = new \File($currentFile, true);
 
 				// Check file extension
 				if (is_array($allowedExtensions) && !in_array($objFile->extension, $allowedExtensions))

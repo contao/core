@@ -118,7 +118,7 @@ class Versions extends \Backend
 
 		if ($this->strPath !== null)
 		{
-			$objFile = new \File($this->strPath);
+			$objFile = new \File($this->strPath, true);
 
 			if ($objFile->extension == 'svgz')
 			{
