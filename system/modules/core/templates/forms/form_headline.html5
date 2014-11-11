@@ -7,7 +7,7 @@
 
 <?php else: ?>
 
-  <div class="headline">
+  <div class="form_field headline">
     <?php echo $this->generate(); ?>
   </div>
 
