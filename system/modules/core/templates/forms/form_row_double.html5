@@ -1,7 +1,7 @@
 
 <?php if ($this->tableless): ?>
 
-  <div<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
+  <div<?php if ($this->class): ?> class="form_field <?php echo $this->class; ?>"<?php endif; ?>>
     <?php $this->block('label'); ?>
     <?php $this->endblock(); ?>
 
@@ -9,7 +9,7 @@
     <?php $this->endblock(); ?>
   </div>
 
-  <div class="confirm<?php if ($this->class) echo ' ' . $this->class; ?>">
+  <div class="form_field confirm<?php if ($this->class) echo ' ' . $this->class; ?>">
     <?php $this->block('label2'); ?>
     <?php $this->endblock(); ?>
 
