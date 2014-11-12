@@ -1260,38 +1260,27 @@ var Backend =
 				ds.stop();
 			},
 			onSort: function(el) {
-				var div = el.getFirst('div'),
-					prev, next, first;
+				var ul = el.getParent('ul'),
+					wrapLevel = 0;
 
-				if (!div) return;
+				if (!ul) return;
 
-				if (div.hasClass('wrapper_start')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
-						first.removeClass('indent');
+				ul.getChildren('li').each(function(el) {
+					var div = el.getFirst('div');
+
+					if (!div) return;
+
+					if (div.hasClass('wrapper_stop') && wrapLevel > 0) {
+						wrapLevel--;
 					}
-					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
-						first.addClass('indent');
+					div.className = div.className.replace(/(^|\s)indent[^\s]*/g, '');
+					if (wrapLevel > 0) {
+						div.addClass('indent').addClass('indent_' + wrapLevel);
 					}
-				} else if (div.hasClass('wrapper_stop')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
-						first.addClass('indent');
+					if (div.hasClass('wrapper_start')) {
+						wrapLevel++;
 					}
-					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
-						first.removeClass('indent');
-					}
-				} else if (div.hasClass('indent')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_stop')) {
-						div.removeClass('indent');
-					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_start')) {
-						div.removeClass('indent');
-					}
-				} else {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_start')) {
-						div.addClass('indent');
-					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_stop')) {
-						div.addClass('indent');
-					}
-				}
+				});
 			},
 			handle: '.drag-handle'
 		});
