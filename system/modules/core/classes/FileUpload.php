@@ -286,8 +286,8 @@ class FileUpload extends \Backend
 
 		$objFile = new \File($strImage, true);
 
-		// Not an image
-		if (!$objFile->isSvgImage && !$objFile->isGdImage)
+		// Not a GD image
+		if (!$objFile->isGdImage)
 		{
 			return false;
 		}
