@@ -77,7 +77,7 @@ class Dbafs
 		unset($arrChunks);
 
 		$objModel  = null;
-		$objModels = \FilesModel::findMultipleByPaths($arrPaths);
+		$objModels = \FilesModel::findMultipleByPaths($arrPaths, array('order' => 'path'));
 
 		// Unset the entries in $arrPaths if the DB entry exists
 		if ($objModels !== null)
