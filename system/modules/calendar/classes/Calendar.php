@@ -38,11 +38,10 @@ class Calendar extends \Frontend
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
-	 * @param boolean
 	 */
-	public function generateFeed($intId, $blnIsFeedId=false)
+	public function generateFeed($intId)
 	{
-		$objCalendar = $blnIsFeedId ? \CalendarFeedModel::findByPk($intId) : \CalendarFeedModel::findByCalendar($intId);
+		$objCalendar = \CalendarFeedModel::findByPk($intId);
 
 		if ($objCalendar === null)
 		{
@@ -84,6 +83,28 @@ class Calendar extends \Frontend
 				$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
 				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
+			}
+		}
+	}
+
+
+	/**
+	 * Generate all feeds including a certain calendar
+	 * @param integer
+	 */
+	public function generateFeedsByCalendar($intId)
+	{
+		$objFeed = \CalendarFeedModel::findByCalendar($intId);
+
+		if ($objFeed !== null)
+		{
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'calendar' . $objFeed->id;
+
+				// Update the XML file
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated calendar feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
 			}
 		}
 	}

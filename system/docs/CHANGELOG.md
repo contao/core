@@ -5,6 +5,9 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle archives being part of multiple RSS feeds (see #7398).
+
+### Fixed
 Correctly handle `0` in utf8_convert_encoding() (see #7403).
 
 ### Fixed

@@ -31,11 +31,10 @@ class News extends \Frontend
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
-	 * @param boolean
 	 */
-	public function generateFeed($intId, $blnIsFeedId=false)
+	public function generateFeed($intId)
 	{
-		$objFeed = $blnIsFeedId ? \NewsFeedModel::findByPk($intId) : \NewsFeedModel::findByArchive($intId);
+		$objFeed = \NewsFeedModel::findByPk($intId);
 
 		if ($objFeed === null)
 		{
@@ -75,6 +74,28 @@ class News extends \Frontend
 			while ($objFeed->next())
 			{
 				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
+			}
+		}
+	}
+
+
+	/**
+	 * Generate all feeds including a certain archive
+	 * @param integer
+	 */
+	public function generateFeedsByArchive($intId)
+	{
+		$objFeed = \NewsFeedModel::findByArchive($intId);
+
+		if ($objFeed !== null)
+		{
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+
+				// Update the XML file
 				$this->generateFiles($objFeed->row());
 				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
 			}
