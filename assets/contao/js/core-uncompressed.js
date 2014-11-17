@@ -1242,6 +1242,7 @@ var Backend =
 	 * @param {object} ul The DOM element
 	 *
 	 * @author Joe Ray Gregory
+	 * @author Martin Auswöger
 	 */
 	makeParentViewSortable: function(ul) {
 		var ds = new Scroller(document.getElement('body'), {
@@ -1273,10 +1274,13 @@ var Backend =
 					if (div.hasClass('wrapper_stop') && wrapLevel > 0) {
 						wrapLevel--;
 					}
+
 					div.className = div.className.replace(/(^|\s)indent[^\s]*/g, '');
+
 					if (wrapLevel > 0) {
 						div.addClass('indent').addClass('indent_' + wrapLevel);
 					}
+
 					if (div.hasClass('wrapper_start')) {
 						wrapLevel++;
 					}
@@ -2009,7 +2013,7 @@ var Backend =
 				widthInput = el.getChildren('input')[0],
 				heightInput = el.getChildren('input')[1],
 				update = function() {
-					if (select.get('value').toInt().toString() === select.get('value')) {
+					if (select.get('value') === '' || select.get('value').toInt().toString() === select.get('value')) {
 						widthInput.readOnly = true;
 						heightInput.readOnly = true;
 						var dimensions = $(select.getSelected()[0]).get('text');

@@ -5,6 +5,12 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Add an empty option to the image size select menu (see #7436).
+
+### Fixed
+Nest wrapper elements in the back end preview (see #7434).
+
+### Fixed
 Correctly handle archives being part of multiple RSS feeds (see #7398).
 
 ### Fixed
