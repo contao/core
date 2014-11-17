@@ -5,6 +5,9 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle `0` in utf8_convert_encoding() (see #7403).
+
+### Fixed
 Send a 301 redirect to forward to the language root page (see #7420).
 
 
