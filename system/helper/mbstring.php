@@ -124,7 +124,7 @@ function utf8_ord($str)
  */
 function utf8_convert_encoding($str, $to, $from=null)
 {
-	if (!$str)
+	if ($str == '')
 		return '';
 
 	if (!$from)

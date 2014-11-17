@@ -765,7 +765,7 @@ class tl_news extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id);
+			$this->News->generateFeedsByArchive($id);
 		}
 
 		$this->import('Automator');
@@ -979,6 +979,6 @@ class tl_news extends Backend
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);
 		$this->import('News');
-		$this->News->generateFeed(CURRENT_ID);
+		$this->News->generateFeedsByArchive(CURRENT_ID);
 	}
 }

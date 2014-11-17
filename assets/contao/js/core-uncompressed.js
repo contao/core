@@ -1954,9 +1954,6 @@ var Backend =
 			li.destroy();
 			opt.fireEvent('liszt:updated');
 		}
-
-		// Remove the tool tip of the delete button
-		$$('div.tip-wrap').destroy();
 	},
 
 	/**

@@ -5,6 +5,15 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Correctly handle archives being part of multiple RSS feeds (see #7398).
+
+### Fixed
+Correctly handle `0` in utf8_convert_encoding() (see #7403).
+
+### Fixed
+Send a 301 redirect to forward to the language root page (see #7420).
+
+### Fixed
 Handle SVG images in the default back end uploader.
 
 
