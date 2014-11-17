@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Show the correct root icon in the page/file picker (see #7409).
+
+### Fixed
 Add an empty option to the image size select menu (see #7436).
 
 ### Fixed
