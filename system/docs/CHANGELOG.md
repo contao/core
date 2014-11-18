@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.0 (2014-11-XX)
 --------------------------
 
+### New
+Added the CSS units `vw`, `vh`, `vmin` and `vmax` (see #7417).
+
 ### Fixed
 Replace leafo/lessphp with oyejorge/less.php (see 7012).
 
