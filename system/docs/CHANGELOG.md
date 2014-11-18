@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Replace leafo/lessphp with oyejorge/less.php (see 7012).
+
+### Fixed
 Show the correct root icon in the page/file picker (see #7409).
 
 ### Fixed

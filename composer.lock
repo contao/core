@@ -4,61 +4,48 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "82de9f8ddc29c698db21ef37511b706e",
+    "hash": "a1628c16e5c8ad255d4c57cd97732277",
     "packages": [
         {
-            "name": "leafo/lessphp",
-            "version": "v0.4.0",
+            "name": "contao-components/compass",
+            "version": "0.12.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/leafo/lessphp.git",
-                "reference": "51f3f06f0fe78a722dabfd14578444bdd078d9de"
+                "url": "https://github.com/contao-components/compass.git",
+                "reference": "a174266fa89c3c808a9c2c090bf64693dec237f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/51f3f06f0fe78a722dabfd14578444bdd078d9de",
-                "reference": "51f3f06f0fe78a722dabfd14578444bdd078d9de",
+                "url": "https://api.github.com/repos/contao-components/compass/zipball/a174266fa89c3c808a9c2c090bf64693dec237f2",
+                "reference": "a174266fa89c3c808a9c2c090bf64693dec237f2",
                 "shasum": ""
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "lessc.inc.php"
-                ]
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT",
-                "GPL-3.0"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
+                    "name": "Leo Feyer",
+                    "homepage": "https://github.com/leofeyer"
                 }
             ],
-            "description": "lessphp is a compiler for LESS written in PHP.",
-            "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-08-09 17:09:19"
+            "description": "Compass integration for Contao Open Source CMS",
+            "time": "2014-11-18 08:30:16"
         },
         {
             "name": "leafo/scssphp",
-            "version": "dev-master",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "b65729d314abd13f83507a406246746e278f135d"
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/b65729d314abd13f83507a406246746e278f135d",
-                "reference": "b65729d314abd13f83507a406246746e278f135d",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c08da585537e97efd528c7d278463d2b9396371",
+                "reference": "8c08da585537e97efd528c7d278463d2b9396371",
                 "shasum": ""
             },
             "require": {
@@ -100,88 +87,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2014-11-01 17:49:18"
-        },
-        {
-            "name": "leafo/scssphp-compass",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leafo/scssphp-compass.git",
-                "reference": "f1631ddb17731326863954d99b39694f0bbed6ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp-compass/zipball/f1631ddb17731326863954d99b39694f0bbed6ec",
-                "reference": "f1631ddb17731326863954d99b39694f0bbed6ec",
-                "shasum": ""
-            },
-            "require": {
-                "leafo/scssphp": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "compass.inc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
-                }
-            ],
-            "description": "Compass for scssphp",
-            "homepage": "http://leafo.net/scssphp/",
-            "time": "2012-08-02 02:04:32"
-        },
-        {
-            "name": "mabrahamde/idna-converter",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mabrahamde/php-idna-converter.git",
-                "reference": "8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mabrahamde/php-idna-converter/zipball/8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64",
-                "reference": "8bc7b0516564e40ec137f3b6c7b5f1b69a4fce64",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/phlylabs/idna_convert.class.php",
-                    "src/phlylabs/uctc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Martin Abraham",
-                    "email": "dev@mabraham.de",
-                    "homepage": "http://mabraham.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Converts domain names between UTF-8 and ASCII (punycode) notation. This is a fork of phlyLabs' pure PHP IDNA Converter",
-            "keywords": [
-                "domain",
-                "encode",
-                "idn",
-                "idna",
-                "lib"
-            ],
-            "time": "2013-12-05 18:00:20"
+            "time": "2014-08-12 22:41:53"
         },
         {
             "name": "michelf/php-markdown",
@@ -233,6 +139,65 @@
                 "markdown"
             ],
             "time": "2014-05-05 02:43:50"
+        },
+        {
+            "name": "oyejorge/less.php",
+            "version": "v1.7.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oyejorge/less.php.git",
+                "reference": "82372b389386ae1edab55495eae4b400cca3c86c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/82372b389386ae1edab55495eae4b400cca3c86c",
+                "reference": "82372b389386ae1edab55495eae4b400cca3c86c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "bin": [
+                "bin/lessc"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Less": "lib/"
+                },
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Agar",
+                    "homepage": "https://github.com/agar"
+                },
+                {
+                    "name": "Martin Jantošovič",
+                    "homepage": "https://github.com/Mordred"
+                },
+                {
+                    "name": "Josh Schmidt",
+                    "homepage": "https://github.com/oyejorge"
+                }
+            ],
+            "description": "PHP port of the Javascript version of LESS http://lesscss.org",
+            "homepage": "http://lessphp.gpeasy.com",
+            "keywords": [
+                "css",
+                "less",
+                "less.js",
+                "lesscss",
+                "php",
+                "stylesheet"
+            ],
+            "time": "2014-06-05 16:09:50"
         },
         {
             "name": "phpspec/php-diff",
@@ -376,16 +341,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.097",
+            "version": "6.0.099",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "73b436e180d91cb0e9897242ccfb4b49fc498901"
+                "reference": "75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/73b436e180d91cb0e9897242ccfb4b49fc498901",
-                "reference": "73b436e180d91cb0e9897242ccfb4b49fc498901",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01",
+                "reference": "75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01",
                 "shasum": ""
             },
             "require": {
@@ -435,17 +400,60 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-10-20 20:02:38"
+            "time": "2014-11-15 12:35:49"
+        },
+        {
+            "name": "true/punycode",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/true/php-punycode.git",
+                "reference": "59dca474914324763397be2ea3d6ad3bc48f4688"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/true/php-punycode/zipball/59dca474914324763397be2ea3d6ad3bc48f4688",
+                "reference": "59dca474914324763397be2ea3d6ad3bc48f4688",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.x",
+                "satooshi/php-coveralls": "dev-master",
+                "squizlabs/php_codesniffer": "2.0.x-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "True\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renan Gonçalves",
+                    "email": "renan.saddam@gmail.com"
+                }
+            ],
+            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
+            "homepage": "https://github.com/true/php-punycode",
+            "keywords": [
+                "idna",
+                "punycode"
+            ],
+            "time": "2014-08-26 14:21:01"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "leafo/scssphp": 20,
-        "leafo/scssphp-compass": 20,
-        "mabrahamde/idna-converter": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.2"
