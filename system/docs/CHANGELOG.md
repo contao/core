@@ -5,6 +5,12 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Send the request token when toggling the visibility of an element (see #7406).
+
+### Fixed
+Always apply the IE security fix in the Environment class (see #7453).
+
+### Fixed
 Correctly handle archives being part of multiple RSS feeds (see #7398).
 
 ### Fixed
