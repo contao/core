@@ -5,6 +5,9 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly store the model in Dbafs::addResource() (see #7440).
+
+### Fixed
 Send the request token when toggling the visibility of an element (see #7406).
 
 ### Fixed
