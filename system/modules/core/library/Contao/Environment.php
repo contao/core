@@ -173,15 +173,12 @@ class Environment
 	 */
 	protected static function queryString()
 	{
-		if (!isset($_SERVER['QUERY_STRING']))
+		if (empty($_SERVER['QUERY_STRING']))
 		{
 			return '';
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $_SERVER['QUERY_STRING']);
-
-		return $strRequest;
+		return static::normalizeQueryString($_SERVER['QUERY_STRING']);
 	}
 
 
@@ -201,8 +198,11 @@ class Environment
 			$strRequest = '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
+		if (strpos($strRequest, '?') !== false)
+		{
+			list($strPath, $strQuery) = explode('?', $strRequest, 2);
+			$strRequest = $strPath . '?' . static::normalizeQueryString($strQuery);
+		}
 
 		return $strRequest;
 	}
@@ -577,6 +577,47 @@ class Environment
 
 		return $return;
 	}
+
+
+	/**
+	 * Normalize a query string
+	 *
+	 * @param string $strQuery The query string
+	 *
+	 * @return string The normalized query string
+	 *
+	 * @see Symfony\Component\HttpFoundation\Request
+	 */
+	protected static function normalizeQueryString($strQuery)
+	{
+		if (empty($strQuery))
+		{
+			return '';
+		}
+
+		$arrParts = array();
+
+		foreach (explode('&', $strQuery) as $strParam)
+		{
+			// Ignore useless delimiters, e.g. "x=y&". Also ignore pairs with empty key, even if
+			// there was a value, e.g. "=value", as such nameless values cannot be retrieved anyway.
+			// PHP also does not include them when building _GET.
+			if ($strParam == '' || $strParam[0] == '=')
+			{
+				continue;
+			}
+
+			$arrKeyValue = explode('=', $strParam, 2);
+
+			// GET parameters, that are submitted from a HTML form, encode spaces as "+" by default
+			// (as defined in enctype application/x-www-form-urlencoded). PHP also converts "+" to
+			// spaces when filling the global _GET or when using the function parse_str. This is why
+			// we use urldecode and then normalize to RFC 3986 with rawurlencode.
+			$arrParts[] = isset($arrKeyValue[1]) ? rawurlencode(urldecode($arrKeyValue[0])) . '=' . rawurlencode(urldecode($arrKeyValue[1])) : rawurlencode(urldecode($arrKeyValue[0]));
+		}
+
+		return implode('&', $arrParts);
+    }
 
 
 	/**
