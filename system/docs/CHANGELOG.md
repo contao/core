@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Also use simple tokens for the newsletter subscription modules (see #7446).
+
+### Fixed
 Only show the root page languages in the meta wizard (see #7112).
 
 ### Fixed
