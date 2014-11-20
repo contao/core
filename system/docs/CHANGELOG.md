@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Only show the root page languages in the meta wizard (see #7112).
+
+### Fixed
 Correctly create the initial version in the personal data module (see #7415).
 
 ### Fixed
