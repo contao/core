@@ -25,7 +25,7 @@ namespace Contao;
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class Versions extends \Backend
+class Versions extends \Controller
 {
 
 	/**
@@ -46,6 +46,24 @@ class Versions extends \Backend
 	 */
 	protected $strPath;
 
+	/**
+	 * Edit URL
+	 * @var string
+	 */
+	protected $strEditUrl;
+
+	/**
+	 * Username
+	 * @var string
+	 */
+	protected $strUsername;
+
+	/**
+	 * User ID
+	 * @var integer
+	 */
+	protected $intUserId;
+
 
 	/**
 	 * Initialize the object
@@ -54,7 +72,9 @@ class Versions extends \Backend
 	 */
 	public function __construct($strTable, $intPid)
 	{
+		$this->import('Database');
 		parent::__construct();
+
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
 
@@ -68,6 +88,36 @@ class Versions extends \Backend
 				$this->strPath = $objFile->path;
 			}
 		}
+	}
+
+
+	/**
+	 * Set the edit URL
+	 * @param string
+	 */
+	public function setEditUrl($strEditUrl)
+	{
+		$this->strEditUrl = $strEditUrl;
+	}
+
+
+	/**
+	 * Set the username
+	 * @param string
+	 */
+	public function setUsername($strUsername)
+	{
+		$this->strUsername = $strUsername;
+	}
+
+
+	/**
+	 * Set the user ID
+	 * @param integer
+	 */
+	public function setUserId($intUserId)
+	{
+		$this->intUserId = $intUserId;
 	}
 
 
@@ -131,7 +181,6 @@ class Versions extends \Backend
 		}
 
 		$intVersion = 1;
-		$this->import('BackendUser', 'User');
 
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
 									 ->execute($this->intPid, $this->strTable);
@@ -164,23 +213,11 @@ class Versions extends \Backend
 			$strDescription = $objRecord->selector;
 		}
 
-		$strUrl = \Environment::get('request');
-
-		// Save the real edit URL if the visibility is toggled via Ajax
-		if (preg_match('/&(amp;)?state=/', $strUrl))
-		{
-			$strUrl = preg_replace
-			(
-				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
-				array('', '$1$3', '$1act=edit'), $strUrl
-			);
-		}
-
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($this->intPid, $this->strTable);
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
+					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
 	}
 
 
@@ -550,6 +587,67 @@ class Versions extends \Backend
 		}
 
 		$objTemplate->versions = $arrVersions;
+	}
+
+
+	/**
+	 * Return the edit URL
+	 * @return string
+	 */
+	protected function getEditUrl()
+	{
+		if ($this->strEditUrl !== null)
+		{
+			return sprintf($this->strEditUrl, $this->intPid);
+		}
+
+		$strUrl = \Environment::get('request');
+
+		// Save the real edit URL if the visibility is toggled via Ajax
+		if (preg_match('/&(amp;)?state=/', $strUrl))
+		{
+			$strUrl = preg_replace
+			(
+				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
+				array('', '$1$3', '$1act=edit'), $strUrl
+			);
+		}
+
+		return $strUrl;
+	}
+
+
+	/**
+	 * Return the username
+	 * @return string
+	 */
+	protected function getUsername()
+	{
+		if ($this->strUsername !== null)
+		{
+			return $this->strUsername;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->username;
+	}
+
+
+	/**
+	 * Return the user ID
+	 * @return string
+	 */
+	protected function getUserId()
+	{
+		if ($this->intUserId !== null)
+		{
+			return $this->intUserId;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->id;
 	}
 
 

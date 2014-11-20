@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Correctly create the initial version in the personal data module (see #7415).
+
+### Fixed
 Check if a DB driver has been configured in Config::isComplete() (see #7412).
 
 ### Fixed
