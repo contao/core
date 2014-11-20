@@ -80,7 +80,7 @@ class ModuleSearch extends \Module
 
 		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
-		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
+		$strKeywords = strip_insert_tags($strKeywords);
 
 		// Overwrite the default query_type
 		if (\Input::get('query_type'))

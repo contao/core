@@ -267,7 +267,15 @@ function standardize($strString, $blnPreserveUppercase=false)
  */
 function strip_insert_tags($strString)
 {
-	return preg_replace('/\{\{[^\}]+\}\}/U', '', $strString);
+	$count = 0;
+
+	do
+	{
+		$strString = preg_replace('/\{\{[^\{\}]*\}\}/', '', $strString, -1, $count);
+	}
+	while ($count > 0);
+
+	return $strString;
 }
 
 
