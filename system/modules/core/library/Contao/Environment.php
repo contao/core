@@ -178,10 +178,7 @@ class Environment
 			return '';
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $_SERVER['QUERY_STRING']);
-
-		return $strRequest;
+		return static::encodeRequestString($_SERVER['QUERY_STRING']);
 	}
 
 
@@ -201,10 +198,7 @@ class Environment
 			$strRequest = '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
-
-		return $strRequest;
+		return static::encodeRequestString($strRequest);
 	}
 
 
@@ -576,6 +570,19 @@ class Environment
 		$return->mobile   = $mobile;
 
 		return $return;
+	}
+
+
+	/**
+	 * Encode a request string preserving certain reserved characters
+	 *
+	 * @param string $strRequest The request string
+	 *
+	 * @return string The encoded request string
+	 */
+	protected static function encodeRequestString($strRequest)
+	{
+		return preg_replace_callback('/[^A-Za-z0-9\-_.~&=+,\/?%\[\]]+/', function($matches) { return rawurlencode($matches[0]); }, $strRequest);
 	}
 
 
