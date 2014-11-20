@@ -777,10 +777,10 @@
         <source>The image will be resized to the given dimensions. If necessary, it will be cropped.</source>
       </trans-unit>
       <trans-unit id="MSC.crop.0">
-        <source>Crop</source>
+        <source>Important part</source>
       </trans-unit>
       <trans-unit id="MSC.crop.1">
-        <source>Preserves the important part (specified in the file manager) of an image.</source>
+        <source>Preserves the important part of an image as specified in the file manager.</source>
       </trans-unit>
       <trans-unit id="MSC.left_top.0">
         <source>Left | Top</source>
