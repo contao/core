@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Correctly mark deleted versions in Versions::addToTemplate() (see #7442).
+
+### Fixed
 Replace insert tags of RTE fields in the back end preview (see #7428). 
 
 ### Fixed

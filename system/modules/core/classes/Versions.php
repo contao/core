@@ -485,7 +485,7 @@ class Versions extends \Backend
 
 		// Get the total number of versions
 		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
-							    ->execute($objUser->id);
+								->execute($objUser->id);
 
 		$intPage   = \Input::get('vp') ?: 1;
 		$intOffset = ($intPage - 1) * 30;
@@ -515,7 +515,7 @@ class Versions extends \Backend
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date(\Config::get('datimFormat'), $objVersions->tstamp);
 			$arrRow['description'] = \String::substr($arrRow['description'], 32);
-			$arrRow['fromTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
+			$arrRow['shortTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
 
 			if ($arrRow['editUrl'] != '')
 			{
