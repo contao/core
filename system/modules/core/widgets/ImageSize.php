@@ -94,12 +94,6 @@ class ImageSize extends \Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		// Backwards compatibility (see #3911)
-		if (@$this->varValue[2] == 'crop')
-		{
-			$this->varValue[2] = 'center_center';
-		}
-
 		$arrFields = array();
 
 		for ($i=0; $i<2; $i++)
