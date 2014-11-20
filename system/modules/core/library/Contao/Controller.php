@@ -1742,8 +1742,6 @@ abstract class Controller extends \System
 						case 'ltrim':
 						case 'utf8_romanize':
 						case 'strrev':
-						case 'base64_encode':
-						case 'base64_decode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
 							break;
 
