@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Check if a DB driver has been configured in Config::isComplete() (see #7412).
+
+### Fixed
 Correctly mark deleted versions in Versions::addToTemplate() (see #7442).
 
 ### Fixed
