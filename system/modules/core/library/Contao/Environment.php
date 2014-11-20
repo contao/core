@@ -178,10 +178,9 @@ class Environment
 			return '';
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $_SERVER['QUERY_STRING']);
+		$strQuery = static::normalizeUrlFragment($_SERVER['QUERY_STRING']);
 
-		return $strRequest;
+		return $strQuery;
 	}
 
 
@@ -201,10 +200,20 @@ class Environment
 			$strRequest = '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
+		$strRequest = static::normalizeUrlFragment($strRequest);
 
 		return $strRequest;
+	}
+
+
+	/**
+	 * Return the normalized URL fragment
+	 *
+	 * @return string The normalized URL fragment
+	 */
+	public static function normalizeUrlFragment($strFragment)
+	{
+		return preg_replace_callback('/[^A-Za-z0-9\-_.~&=+,\/?%\[\]]+/', function($matches) { return rawurlencode($matches[0]); }, $strFragment);
 	}
 
 
