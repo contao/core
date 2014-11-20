@@ -404,7 +404,7 @@ class tl_faq extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
-'.$arrRow['answer'].'
+' . $this->replaceInsertTags($arrRow['answer'], false) . '
 </div>' . "\n";
 	}
 

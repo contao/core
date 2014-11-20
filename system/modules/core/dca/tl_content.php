@@ -1163,7 +1163,7 @@ class tl_content extends Backend
 		return '
 <div class="cte_type ' . $key . '">' . $type . '</div>
 <div class="' . trim($class) . '">
-' . $this->getContentElement($objModel) . '
+' . $this->replaceInsertTags($this->getContentElement($objModel), false) . '
 </div>' . "\n";
 	}
 
