@@ -5,6 +5,9 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle nested insert tags in strip_insert_tags().
+
+### Fixed
 Correctly store the model in Dbafs::addResource() (see #7440).
 
 ### Fixed
