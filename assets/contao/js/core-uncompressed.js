@@ -544,10 +544,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
 
 		return false;

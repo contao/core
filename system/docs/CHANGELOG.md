@@ -4,6 +4,18 @@ Contao Open Source CMS changelog
 Version 3.4.0 (2014-11-XX)
 --------------------------
 
+### Fixed
+Handle nested insert tags in strip_insert_tags().
+
+### Fixed
+Correctly store the model in Dbafs::addResource() (see #7440).
+
+### Fixed
+Send the request token when toggling the visibility of an element (see #7406).
+
+### Fixed
+Always apply the IE security fix in the Environment class (see #7453).
+
 ### New
 Added the CSS units `vw`, `vh`, `vmin` and `vmax` (see #7417).
 

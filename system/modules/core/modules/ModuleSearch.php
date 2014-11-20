@@ -83,7 +83,7 @@ class ModuleSearch extends \Module
 
 		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
-		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
+		$strKeywords = strip_insert_tags($strKeywords);
 
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
