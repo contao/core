@@ -340,18 +340,36 @@ abstract class Template extends \BaseTemplate
 
 		$strDebug .= '</pre></div></div>'
 			. $this->generateInlineScript(
-				"(function($) {"
-					. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
-					. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
-					. "$('debug-tog').addEvent('click',function(e) {"
-						. "$('contao-debug').toggleClass('closed');"
-						. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
-					. "});"
-					. "window.addEvent('resize',function() {"
-						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
-					. "});"
-				. "})(document.id);",
+				'(function() {
+		                    var panel = document.getElementById("contao-debug");
+		                    var update = function() {
+		                        var width = window.getSize().x;
+		                        for (i = 0; i < panel.childNodes.length; i++) {
+		                            panel.childNodes[i].style.width=width+"px";
+		                        }
+		                    };
+		                    update();
+		
+		                    var toggle = function() {
+		                        document.body.style.marginBottom = (panel.className.indexOf("closed") != -1 ? "60px" : "320px");
+		                    };
+		                    toggle();
+		
+		                    document.getElementById("debug-tog").addEvent("click",function(e) {
+		                        var closed = panel.className.indexOf("closed") != -1;
+		                        if (closed) {
+		                            panel.className = panel.className.replace("closed","").trim();
+		                            closed = false;
+		                        }
+		                        else {
+		                            panel.className = panel.className + (panel.className.length > 0 ? " " : "") + "closed";
+		                            closed = true;
+		                        }
+		                        Cookie.write("CONTAO_CONSOLE", closed ? "closed" : "",{path:"' . (TL_PATH ?: '/') . '"});
+		                        toggle();
+		                    });
+		                    window.addEvent("resize", update);
+		                })();',
 				($this->strFormat == 'xhtml')
 			)
 			. "\n<!-- indexer::continue -->\n\n"
