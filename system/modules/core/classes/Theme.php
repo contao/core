@@ -577,6 +577,11 @@ class Theme extends \Backend
 							}
 							else
 							{
+								if (\Config::get('uploadPath') != 'files')
+								{
+									$value = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $value);
+								}
+
 								// Do not use the FilesModel here – tables are locked!
 								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
@@ -599,6 +604,11 @@ class Theme extends \Backend
 									if (strncmp($vv, 'tl_files/', 9) === 0)
 									{
 										$vv = substr($vv, 3);
+									}
+
+									if (\Config::get('uploadPath') != 'files')
+									{
+										$vv = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $vv);
 									}
 
 									// Do not use the FilesModel here – tables are locked!
