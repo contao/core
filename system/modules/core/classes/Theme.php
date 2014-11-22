@@ -1044,6 +1044,12 @@ class Theme extends \Backend
 				}
 			}
 
+			// Standardize the upload path if it is not "files"
+			if (\Config::get('uploadPath') != 'files' && $t == 'tl_style' && in_array($k, array('bgimage', 'liststyleimage')))
+			{
+				$v = preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', 'files/', $v);
+			}
+
 			$value = $xml->createTextNode($v);
 			$field->appendChild($value);
 		}
