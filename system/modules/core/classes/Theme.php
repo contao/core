@@ -647,12 +647,12 @@ class Theme extends \Backend
 
 					if ($table == 'tl_files')
 					{
-						// Update the datatbase
+						// Update the database
 						$this->Database->prepare("UPDATE ". $table ." %s WHERE path = ?")->set($set)->execute($set['path']);
 					}
 					else
 					{
-						// Update the datatbase
+						// Update the database
 						$this->Database->prepare("INSERT INTO ". $table ." %s")->set($set)->execute();
 					}
 				}
