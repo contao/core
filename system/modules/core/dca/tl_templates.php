@@ -215,14 +215,14 @@ class tl_templates extends Backend
 
 			if (Validator::isInsecurePath($strOriginal))
 			{
-				throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strOriginal));
+				throw new RuntimeException('Invalid path ' . $strOriginal);
 			}
 
 			$strTarget = Input::post('target');
 
 			if (Validator::isInsecurePath($strTarget))
 			{
-				throw new RuntimeException(sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget));
+				throw new RuntimeException('Invalid path ' . $strTarget);
 			}
 
 			// Validate the source path
