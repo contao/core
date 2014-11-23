@@ -1017,7 +1017,6 @@ class Theme extends \Backend
 		// Re-add the templates folder name
 		if ($strFolder == '')
 		{
-			// FIXME: Exception?
 			$strFolder = 'templates';
 		}
 		else

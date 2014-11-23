@@ -244,6 +244,35 @@ class Input
 
 
 	/**
+	 * Return a raw, unsafe and unfiltered $_POST variable
+	 *
+	 * @param string $strKey The variable name
+	 *
+	 * @return mixed The raw variable value
+	 *
+	 * @internal
+	 */
+	public static function postUnsafeRaw($strKey)
+	{
+		$strCacheKey = 'postUnsafeRaw';
+
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
+		{
+			$varValue = static::findPost($strKey);
+
+			if ($varValue === null)
+			{
+				return $varValue;
+			}
+
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
+
+		return static::$arrCache[$strCacheKey][$strKey];
+	}
+
+
+	/**
 	 * Return a $_COOKIE variable
 	 *
 	 * @param string  $strKey            The variable name
