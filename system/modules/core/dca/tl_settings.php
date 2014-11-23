@@ -714,13 +714,12 @@ class tl_settings extends Backend
 	 */
 	public function checkUploadPath($varValue)
 	{
-		$varValue = str_replace(array('../', '/..', '/.', './', '://'), '', $varValue);
-
-		if ($varValue == '.' || $varValue == '..' || $varValue == '')
+		if ($varValue == '' || Validator::isInsecurePath($varValue))
 		{
-			$varValue = 'files';
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
-		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
+
+		if (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}

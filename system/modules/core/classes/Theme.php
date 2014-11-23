@@ -956,10 +956,10 @@ class Theme extends \Backend
 	 */
 	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
 	{
-		// Sanitize the folder name
-		$strFolder = str_replace('../', '', $strFolder);
+		// Strip the custom upload folder name
 		$strFolder = preg_replace('@^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@').'/@', '', $strFolder);
 
+		// Add the default upload folder name
 		if ($strFolder == '')
 		{
 			$strTarget = 'files';
@@ -969,6 +969,11 @@ class Theme extends \Backend
 		{
 			$strTarget = 'files/' . $strFolder;
 			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'] .'/'. $strFolder;
+		}
+
+		if (\Validator::isInsecurePath($strFolder))
+		{
+			throw new \RuntimeException('Insecure path ' . $strFolder);
 		}
 
 		// Return if the folder does not exist
@@ -1006,17 +1011,23 @@ class Theme extends \Backend
 	 */
 	protected function addTemplatesToArchive(\ZipWriter $objArchive, $strFolder)
 	{
-		// Sanitize the folder name
-		$strFolder = str_replace('../', '', $strFolder);
+		// Strip the templates folder name
 		$strFolder = preg_replace('@^templates/@', '', $strFolder);
 
+		// Re-add the templates folder name
 		if ($strFolder == '')
 		{
+			// FIXME: Exception?
 			$strFolder = 'templates';
 		}
 		else
 		{
 			$strFolder = 'templates/' . $strFolder;
+		}
+
+		if (\Validator::isInsecurePath($strFolder))
+		{
+			throw new \RuntimeException('Insecure path ' . $strFolder);
 		}
 
 		// Return if the folder does not exist

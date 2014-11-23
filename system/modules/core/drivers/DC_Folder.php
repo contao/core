@@ -2390,12 +2390,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$strFolder = \Input::get('pid', true);
 
 		// Check the path
-		if (strpos($strFile, '../') !== false)
+		if (\Validator::isInsecurePath($strFile))
 		{
 			$this->log('Invalid file name "'.$strFile.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
-		elseif (strpos($strFolder, '../') !== false)
+		elseif (\Validator::isInsecurePath($strFolder))
 		{
 			$this->log('Invalid folder name "'.$strFolder.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
