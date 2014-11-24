@@ -5,6 +5,13 @@ Version 3.2.16 (2014-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed a potential directory traversal vulnerability.
+
+### Fixed
+Fixed a severe XSS vulnerability. In this context, the insert tag flags
+`base64_encode` and `base64_decode` have been removed.
+
+### Fixed
 Handle nested insert tags in strip_insert_tags().
 
 ### Fixed

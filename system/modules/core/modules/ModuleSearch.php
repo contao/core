@@ -78,9 +78,7 @@ class ModuleSearch extends \Module
 			$_GET['per_page'] = \Input::post('per_page');
 		}
 
-		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
-		$strKeywords = strip_insert_tags($strKeywords);
 
 		// Overwrite the default query_type
 		if (\Input::get('query_type'))
