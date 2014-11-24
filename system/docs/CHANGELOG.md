@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Consider image size IDs when overriding the default image size (see #7470).
+
+### Fixed
 Do not require to set a media query in the image sizes.
 
 ### Fixed
