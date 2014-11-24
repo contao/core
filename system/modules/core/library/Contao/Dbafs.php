@@ -89,12 +89,12 @@ class Dbafs
 					unset($arrPaths[$i]);
 					$arrPids[$objModels->path] = $objModels->uuid;
 				}
-			}
 
-			// Store the model if it exists
-			if ($objModels->path == $strResource)
-			{
-				$objModel = $objModels->current();
+				// Store the model if it exists
+				if ($objModels->path == $strResource)
+				{
+					$objModel = $objModels->current();
+				}
 			}
 		}
 

@@ -106,6 +106,8 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			$varValue = static::encodeInsertTags($varValue);
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -150,6 +152,11 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -188,6 +195,11 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -218,6 +230,40 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::preserveBasicEntities($varValue);
 			$varValue = static::xssClean($varValue);
+
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
+
+		return static::$arrCache[$strCacheKey][$strKey];
+	}
+
+
+	/**
+	 * Return a raw, unsafe and unfiltered $_POST variable
+	 *
+	 * @param string $strKey The variable name
+	 *
+	 * @return mixed The raw variable value
+	 *
+	 * @internal
+	 */
+	public static function postUnsafeRaw($strKey)
+	{
+		$strCacheKey = 'postUnsafeRaw';
+
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
+		{
+			$varValue = static::findPost($strKey);
+
+			if ($varValue === null)
+			{
+				return $varValue;
+			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
@@ -256,6 +302,8 @@ class Input
 			{
 				$varValue = static::encodeSpecialChars($varValue);
 			}
+
+			$varValue = static::encodeInsertTags($varValue);
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
@@ -719,6 +767,19 @@ class Input
 		$arrReplace = array('&#35;', '&#60;', '&#62;', '&#40;', '&#41;', '&#92;', '&#61;');
 
 		return str_replace($arrSearch, $arrReplace, $varValue);
+	}
+
+
+	/**
+	 * Encode the opening and closing delimiters of insert tags
+	 *
+	 * @param string $varValue The input string
+	 *
+	 * @return string The encoded input string
+	 */
+	public static function encodeInsertTags($varValue)
+	{
+		return str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $varValue);
 	}
 
 

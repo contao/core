@@ -81,9 +81,7 @@ class ModuleSearch extends \Module
 		$blnFuzzy = $this->fuzzy;
 		$strQueryType = \Input::get('query_type') ?: $this->queryType;
 
-		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
-		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 

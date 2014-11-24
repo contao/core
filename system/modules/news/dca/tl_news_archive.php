@@ -419,7 +419,7 @@ class tl_news_archive extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id);
+			$this->News->generateFeedsByArchive($id);
 		}
 
 		$this->import('Automator');
