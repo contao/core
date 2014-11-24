@@ -330,13 +330,7 @@ class Theme extends \Backend
 						$strFileName = substr($strFileName, 3);
 					}
 
-					// Override the files directory
-					if (\Config::get('uploadPath') != 'files' && strncmp($strFileName, 'files/', 6) === 0)
-					{
-						$strFileName = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFileName);
-					}
-
-					\File::putContent($strFileName, $objArchive->unzip());
+					\File::putContent($this->customizeUploadPath($strFileName), $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{
@@ -386,13 +380,7 @@ class Theme extends \Backend
 						$strFolder = substr($strFolder, 3);
 					}
 
-					// Override the files directory
-					if (\Config::get('uploadPath') != 'files')
-					{
-						$strFolder = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFolder);
-					}
-
-					\Dbafs::addResource($strFolder);
+					\Dbafs::addResource($this->customizeUploadPath($strFolder));
 				}
 			}
 
@@ -557,14 +545,14 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $vv);
+									$tmp[$kk] = $this->customizeUploadPath($vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $value);
+								$value = $this->customizeUploadPath($value);
 							}
 						}
 
@@ -580,7 +568,7 @@ class Theme extends \Backend
 								// Do not use the FilesModel here – tables are locked!
 								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
-														  ->execute($value);
+														  ->execute($this->customizeUploadPath($value));
 
 								$value = $objFile->uuid;
 							}
@@ -604,7 +592,7 @@ class Theme extends \Backend
 									// Do not use the FilesModel here – tables are locked!
 									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
-															  ->execute($vv);
+															  ->execute($this->customizeUploadPath($vv));
 
 									$tmp[$kk] = $objFile->uuid;
 								}
@@ -983,15 +971,7 @@ class Theme extends \Backend
 
 				if ($objFile !== null)
 				{
-					// Standardize the upload path if it is not "files"
-					if (\Config::get('uploadPath') != 'files')
-					{
-						$v = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFile->path);
-					}
-					else
-					{
-						$v = $objFile->path;
-					}
+					$v = $this->standardizeUploadPath($objFile->path);
 				}
 				else
 				{
@@ -1010,22 +990,14 @@ class Theme extends \Backend
 
 					if ($objFiles !== null)
 					{
-						// Standardize the upload path if it is not "files"
-						if (\Config::get('uploadPath') != 'files')
-						{
-							$arrTmp = array();
+						$arrTmp = array();
 
-							while ($objFiles->next())
-							{
-								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFiles->path);
-							}
-
-							$v = serialize($arrTmp);
-						}
-						else
+						while ($objFiles->next())
 						{
-							$v = serialize($objFiles->fetchEach('path'));
+							$arrTmp[] = $this->standardizeUploadPath($objFiles->path);
 						}
+
+						$v = serialize($arrTmp);
 					}
 					else
 					{
@@ -1137,5 +1109,49 @@ class Theme extends \Backend
 				$objArchive->addFile($strFolder .'/'. $strFile);
 			}
 		}
+	}
+
+
+	/**
+	 * Replace files/ with the custom upload folder name
+	 * @param string
+	 * @return string
+	 */
+	protected function customizeUploadPath($strPath)
+	{
+		if ($strPath == '')
+		{
+			return '';
+		}
+
+		// Using the default path already
+		if (\Config::get('uploadPath') == 'files')
+		{
+			return $strPath;
+		}
+
+		return preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strPath);
+	}
+
+
+	/**
+	 * Replace a custom upload folder name with files/
+	 * @param string
+	 * @return string
+	 */
+	protected function standardizeUploadPath($strPath)
+	{
+		if ($strPath == '')
+		{
+			return '';
+		}
+
+		// Using the default path already
+		if (\Config::get('uploadPath') == 'files')
+		{
+			return $strPath;
+		}
+
+		return 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strPath);
 	}
 }
