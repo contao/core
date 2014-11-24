@@ -58,8 +58,8 @@ class BackendPassword extends \Backend
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_password')
 		{
-			$pw = \Input::postRaw('password');
-			$cnf = \Input::postRaw('confirm');
+			$pw = \Input::postUnsafeRaw('password');
+			$cnf = \Input::postUnsafeRaw('confirm');
 
 			// The passwords do not match
 			if ($pw != $cnf)

@@ -5,6 +5,13 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Fixed a potential directory traversal vulnerability.
+
+### Fixed
+Fixed a severe XSS vulnerability. In this context, the insert tag flags
+`base64_encode` and `base64_decode` have been removed.
+
+### Fixed
 Also use simple tokens for the newsletter subscription modules (see #7446).
 
 ### Fixed
@@ -20,7 +27,7 @@ Check if a DB driver has been configured in Config::isComplete() (see #7412).
 Correctly mark deleted versions in Versions::addToTemplate() (see #7442).
 
 ### Fixed
-Replace insert tags of RTE fields in the back end preview (see #7428). 
+Replace insert tags of RTE fields in the back end preview (see #7428).
 
 ### Fixed
 Handle nested insert tags in strip_insert_tags().

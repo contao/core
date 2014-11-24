@@ -94,9 +94,9 @@ class FileUpload extends \Backend
 	 */
 	public function uploadTo($strTarget)
 	{
-		if ($strTarget == '' || strpos($strTarget, '../') !== false)
+		if ($strTarget == '' || \Validator::isInsecurePath($strTarget))
 		{
-			throw new \Exception("Invalid target path $strTarget");
+			throw new \InvalidArgumentException('Invalid target path ' . $strTarget);
 		}
 
 		$maxlength_kb = $this->getMaximumUploadSize();

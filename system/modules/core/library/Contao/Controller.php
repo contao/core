@@ -45,7 +45,8 @@ abstract class Controller extends \System
 	 *
 	 * @return string The path to the template file
 	 *
-	 * @throws \Exception If $strFormat is unknown
+	 * @throws \InvalidArgumentException If $strFormat is unknown
+	 * @throws \RuntimeException         If the template group folder is insecure
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
@@ -54,7 +55,7 @@ abstract class Controller extends \System
 
 		if (!in_array($strFormat, $arrAllowed))
 		{
-			throw new \Exception("Invalid output format $strFormat");
+			throw new \InvalidArgumentException('Invalid output format ' . $strFormat);
 		}
 
 		$strTemplate = basename($strTemplate);
@@ -63,11 +64,15 @@ abstract class Controller extends \System
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-			$strCustom = str_replace('../', '', $objPage->templateGroup);
 
-			if ($strCustom != '')
+			if ($objPage->templateGroup != '')
 			{
-				return \TemplateLoader::getPath($strTemplate, $strFormat, $strCustom);
+				if (\Validator::isInsecurePath($objPage->templateGroup))
+				{
+					throw new \RuntimeException('Invalid path ' . $objPage->templateGroup);
+				}
+
+				return \TemplateLoader::getPath($strTemplate, $strFormat, $objPage->templateGroup);
 			}
 		}
 
@@ -1597,8 +1602,11 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						// Sanitize the path
-						$strFile = str_replace('../', '', $strFile);
+						// Check the path
+						if (\Validator::isInsecurePath($strFile))
+						{
+							throw new \RuntimeException('Invalid path ' . $strFile);
+						}
 					}
 
 					// Check the maximum image width
@@ -1681,8 +1689,11 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
+					// Check the path
+					if (\Validator::isInsecurePath($strFile))
+					{
+						throw new \RuntimeException('Invalid path ' . $strFile);
+					}
 
 					// Include .php, .tpl, .xhtml and .html5 files
 					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
@@ -1747,8 +1758,6 @@ abstract class Controller extends \System
 						case 'ltrim':
 						case 'utf8_romanize':
 						case 'strrev':
-						case 'base64_encode':
-						case 'base64_decode':
 						case 'urlencode':
 						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
