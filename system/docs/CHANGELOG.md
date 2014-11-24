@@ -1,6 +1,38 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.3.7 (2014-11-24)
+--------------------------
+
+### Fixed
+Fixed a potential directory traversal vulnerability.
+
+### Fixed
+Fixed a severe XSS vulnerability. In this context, the insert tag flags
+`base64_encode` and `base64_decode` have been removed.
+
+### Fixed
+Handle nested insert tags in strip_insert_tags().
+
+### Fixed
+Correctly store the model in Dbafs::addResource() (see #7440).
+
+### Fixed
+Send the request token when toggling the visibility of an element (see #7406).
+
+### Fixed
+Always apply the IE security fix in the Environment class (see #7453).
+
+### Fixed
+Correctly handle archives being part of multiple RSS feeds (see #7398).
+
+### Fixed
+Correctly handle `0` in utf8_convert_encoding() (see #7403).
+
+### Fixed
+Send a 301 redirect to forward to the language root page (see #7420).
+
+
 Version 3.3.6 (2014-10-31)
 --------------------------
 
