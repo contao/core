@@ -5,6 +5,9 @@ Version 3.4.0 (2014-11-XX)
 --------------------------
 
 ### Fixed
+Do not require to set a media query in the image sizes.
+
+### Fixed
 Fixed a potential directory traversal vulnerability.
 
 ### Fixed
