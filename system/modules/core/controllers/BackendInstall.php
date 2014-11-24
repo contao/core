@@ -351,7 +351,7 @@ class BackendInstall extends \Backend
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', \Config::get('installPassword'));
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword == sha1(\Input::postUnsafeRaw('password'))) : ($strPassword == sha1($strSalt . \Input::postUnsafeRaw('password')));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postUnsafeRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
 
 			if ($blnAuthenticated)
 			{
