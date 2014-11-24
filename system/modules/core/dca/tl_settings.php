@@ -416,7 +416,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
 			'inputType'               => 'textStore',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'storeSmtpPass')
+			)
 		),
 		'smtpEnc' => array
 		(
@@ -648,6 +652,23 @@ class tl_settings extends Backend
 		if (!$varValue)
 		{
 			$this->Database->execute("DELETE FROM tl_search WHERE protected=1");
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Store the unfiltered SMTP password
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function storeSmtpPass($varValue, DataContainer $dc)
+	{
+		if (isset($_POST[$dc->field]))
+		{
+			return Input::postUnsafeRaw($dc->field);
 		}
 
 		return $varValue;
