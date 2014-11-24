@@ -343,8 +343,8 @@ abstract class Template extends \BaseTemplate
 				'(function() {
 		                    var panel = document.getElementById("contao-debug");
 		                    var update = function() {
-		                        for (i = 0; i < panel.childNodes.length; i++) {
-		                            panel.childNodes[i].style.width=document.documentElement.offsetWidth+"px";
+		                        for (i = 0; i < panel.children.length; i++) {
+		                            panel.children[i].style.width=document.documentElement.offsetWidth+"px";
 		                        }
 		                    };
 		                    update();
