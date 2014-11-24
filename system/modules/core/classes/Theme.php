@@ -322,15 +322,7 @@ class Theme extends \Backend
 				// Extract the files
 				try
 				{
-					$strFileName = $objArchive->file_name;
-
-					// Support the old "tl_files" directory
-					if (strncmp($strFileName, 'tl_files/', 9) === 0)
-					{
-						$strFileName = substr($strFileName, 3);
-					}
-
-					\File::putContent($this->customizeUploadPath($strFileName), $objArchive->unzip());
+					\File::putContent($this->customizeUploadPath($objArchive->file_name), $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{
@@ -374,12 +366,6 @@ class Theme extends \Backend
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
-					// Support the old "tl_files" folder
-					if (strncmp($strFolder, 'tl_files/', 9) === 0)
-					{
-						$strFolder = substr($strFolder, 3);
-					}
-
 					\Dbafs::addResource($this->customizeUploadPath($strFolder));
 				}
 			}
@@ -444,12 +430,6 @@ class Theme extends \Backend
 					{
 						$value = $fields->item($k)->nodeValue;
 						$name = $fields->item($k)->getAttribute('name');
-
-						// Support the old "tl_files" folder
-						if (strncmp($value, 'tl_files/', 9) === 0)
-						{
-							$value = substr($value, 3);
-						}
 
 						// Skip NULL values
 						if ($value == 'NULL')
@@ -583,12 +563,6 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									// Support the old "tl_files" folder
-									if (strncmp($vv, 'tl_files/', 9) === 0)
-									{
-										$vv = substr($vv, 3);
-									}
-
 									// Do not use the FilesModel here – tables are locked!
 									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
@@ -1134,7 +1108,7 @@ class Theme extends \Backend
 			return $strPath;
 		}
 
-		return preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strPath);
+		return preg_replace('@^(tl_)?files/@', \Config::get('uploadPath') . '/', $strPath);
 	}
 
 
@@ -1156,6 +1130,6 @@ class Theme extends \Backend
 			return $strPath;
 		}
 
-		return preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', 'files/', $strPath);
+		return preg_replace('@^' . preg_quote(\Config::get('uploadPath'), '@') . '/@', 'files/', $strPath);
 	}
 }
