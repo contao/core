@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="FFL.html.0">
         <source>HTML code</source>
-        <target>کد HTML</target>
+        <target>کد اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="FFL.html.1">
         <source>A custom field to insert HTML code.</source>
-        <target>یک فیلد اختصاصی برای وارد کردن کد HTML.</target>
+        <target>یک فیلد اختصاصی برای وارد کردن کد اچ‌تی‌ام‌ال.</target>
       </trans-unit>
       <trans-unit id="FFL.fieldset.0">
         <source>Fieldset</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="FFL.password.0">
         <source>Password field</source>
-        <target>فیلد رمزعبور</target>
+        <target>فیلد گذرواژه</target>
       </trans-unit>
       <trans-unit id="FFL.password.1">
         <source>A single-line input field for a password. Contao automatically adds a confirmation field.</source>
-        <target>یک فیلد ورودی تک خطی برای رمزعبور. کانتائو به صورت خودکار یک فیلد تایید اضافه می‌کند.</target>
+        <target>یک فیلد ورودی تک خطی برای گذرواژه. کانتائو به صورت خودکار یک فیلد تایید اضافه می‌کند.</target>
       </trans-unit>
       <trans-unit id="FFL.textarea.0">
         <source>Textarea</source>
@@ -83,11 +83,11 @@
       </trans-unit>
       <trans-unit id="FFL.upload.0">
         <source>File upload</source>
-        <target>بارگذاری فایل</target>
+        <target>بارگذاری پرونده</target>
       </trans-unit>
       <trans-unit id="FFL.upload.1">
         <source>A single-line input field to upload a local file to the server.</source>
-        <target>فیلد ورودی تک خط برای بارگذاری فایل محلی در سرور</target>
+        <target>فیلد ورودی تک خط برای بارگذاری پرونده محلی در سرور</target>
       </trans-unit>
       <trans-unit id="FFL.hidden.0">
         <source>Hidden field</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.type.1">
         <source>Please choose the type of field.</source>
-        <target>لطفاُ نوع فیلد را مشخص نمائید.</target>
+        <target>لطفاُ نوع فیلد را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.name.0">
         <source>Field name</source>
@@ -143,15 +143,15 @@
       </trans-unit>
       <trans-unit id="tl_form_field.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>می‌توانید از تگ‌های HTML برای شکل دادن به متن استفاده کنید.</target>
+        <target>می‌توانید از تگ‌های اچ‌تی‌ام‌ال برای شکل دادن به متن استفاده کنید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.html.0">
         <source>HTML</source>
-        <target>HTML</target>
+        <target>اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_form_field.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>می‌توانید لیست تگ‌هایی مجاز HTML را در تنظیمات بخش مدیریت تغییر دهید.</target>
+        <target>می‌توانید فهرست تگ‌هایی مجاز اچ‌تی‌ام‌ال را در تنظیمات بخش مدیریت تغییر دهید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.options.0">
         <source>Options</source>
@@ -243,19 +243,19 @@
       </trans-unit>
       <trans-unit id="tl_form_field.email.0">
         <source>E-mail address</source>
-        <target>آدرس پست الکترونیک</target>
+        <target>نشانی ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_form_field.email.1">
         <source>Checks whether the input is a valid e-mail address.</source>
-        <target>بررسی می‌کند که آیا ورودی یک آدرس ایمیل معتبر است.</target>
+        <target>بررسی می‌کند که آیا ورودی یک نشانی ایمیل معتبر است.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.url.0">
         <source>URL format</source>
-        <target>ساختار URL</target>
+        <target>ساختار نشانی وب</target>
       </trans-unit>
       <trans-unit id="tl_form_field.url.1">
         <source>Checks whether the input is a valid URL.</source>
-        <target>بررسی می‌کند که آیا ورودی یک URL معتبر است.</target>
+        <target>بررسی می‌کند که آیا ورودی یک نشانی وب معتبر است.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.placeholder.0">
         <source>Placeholder</source>
@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.maxlength.1">
         <source>Limit the field length to a certain number of characters (text) or bytes (file uploads).</source>
-        <target>اندازه فیلد را به یک تعداد کارکتر (متنی) یا بایت (فایل بارگذاری شده) محدود می‌کند.</target>
+        <target>اندازه فیلد را به یک تعداد کارکتر (متنی) یا بایت (پرونده بارگذاری شده) محدود می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.size.0">
         <source>Rows and columns</source>
@@ -299,27 +299,27 @@
       </trans-unit>
       <trans-unit id="tl_form_field.mSize.0">
         <source>List size</source>
-        <target>اندازه لیست</target>
+        <target>اندازه فهرست</target>
       </trans-unit>
       <trans-unit id="tl_form_field.mSize.1">
         <source>Here you can enter the size of the select box.</source>
-        <target>می‌توانید اندازه جعبه انتخاب را وارد نمائید.</target>
+        <target>می‌توانید اندازه جعبه انتخاب را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.extensions.0">
         <source>Allowed file types</source>
-        <target>نوع فایل‌های مجاز</target>
+        <target>نوع پرونده‌های مجاز</target>
       </trans-unit>
       <trans-unit id="tl_form_field.extensions.1">
         <source>A comma separated list of valid file extensions.</source>
-        <target>لیست جدا شده با کاما از پسوند فایل‌های مجاز.</target>
+        <target>فهرست جدا شده با کاما از پسوند پرونده‌های مجاز.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.storeFile.0">
         <source>Store uploaded files</source>
-        <target>ذخیره فایل‌های بارگذاری شده</target>
+        <target>ذخیره پرونده‌های بارگذاری شده</target>
       </trans-unit>
       <trans-unit id="tl_form_field.storeFile.1">
         <source>Move the uploaded files to a folder on the server.</source>
-        <target>انتقال فایل‌های بارگذاری شده به پوشه‌ای در سرور.</target>
+        <target>انتقال پرونده‌های بارگذاری شده به پوشه‌ای در سرور.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.0">
         <source>Target folder</source>
@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.uploadFolder.1">
         <source>Please select the target folder from the files directory.</source>
-        <target>لطفاً پوشه مقصد از دایرکتوری فایل‌ها را نمائید.</target>
+        <target>لطفاً پوشه مقصد از دایرکتوری پرونده‌ها را نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.useHomeDir.0">
         <source>Use home directory</source>
@@ -335,15 +335,15 @@
       </trans-unit>
       <trans-unit id="tl_form_field.useHomeDir.1">
         <source>Store the file in the home directory if there is an authenticated user.</source>
-        <target>ذخیره فایل در دایرکتوری شخصی برای کاربران تایید شده.</target>
+        <target>ذخیره پرونده در دایرکتوری شخصی برای کاربران تایید شده.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.doNotOverwrite.0">
         <source>Preserve existing files</source>
-        <target>عدم جایگزینی در صورت وجود فایل</target>
+        <target>عدم جایگزینی در صورت وجود پرونده</target>
       </trans-unit>
       <trans-unit id="tl_form_field.doNotOverwrite.1">
         <source>Add a numeric suffix to the new file if the file name already exists.</source>
-        <target>در صورت وجود فایل، به انتهای نام آن یک عدد اضافه می‌گردد.</target>
+        <target>در صورت وجود پرونده، به انتهای نام آن یک عدد اضافه می‌گردد.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fsType.0">
         <source>Operation mode</source>
@@ -375,15 +375,15 @@
       </trans-unit>
       <trans-unit id="tl_form_field.value.1">
         <source>Here you can enter a default value for the field.</source>
-        <target>می توانید مقدار پیش‌فرض را برای فیلد وارد نمائید.</target>
+        <target>می توانید مقدار پیش‌فرض را برای فیلد وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.class.0">
         <source>CSS class</source>
-        <target>CSS کلاس</target>
+        <target>کلاس سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_form_field.class.1">
         <source>Here you can enter one or more classes.</source>
-        <target>می‌توانید یک یا چند کلاس وارد نمائید.</target>
+        <target>می‌توانید یک یا چند کلاس وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.accesskey.0">
         <source>Access key</source>
@@ -423,7 +423,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.slabel.1">
         <source>Please enter the label of the submit button.</source>
-        <target>لطفاً عنوان دکمه ارسال فرم را وارد نمائید.</target>
+        <target>لطفاً عنوان دکمه ارسال فرم را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.imageSubmit.0">
         <source>Create an image button</source>
@@ -435,11 +435,11 @@
       </trans-unit>
       <trans-unit id="tl_form_field.singleSRC.0">
         <source>Source file</source>
-        <target>منبع فایل</target>
+        <target>منبع پرونده</target>
       </trans-unit>
       <trans-unit id="tl_form_field.singleSRC.1">
         <source>Please select an image from the files directory.</source>
-        <target>لطفاً یک تصویر از دایرکتوری فایل انتخاب نمائید.</target>
+        <target>لطفاً یک تصویر از دایرکتوری پرونده انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form_field.type_legend">
         <source>Field type and name</source>
@@ -447,7 +447,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.text_legend">
         <source>Text/HTML</source>
-        <target>متن/HTML</target>
+        <target>متن/اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_form_field.fconfig_legend">
         <source>Field configuration</source>
@@ -459,7 +459,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.store_legend">
         <source>Store file</source>
-        <target>ذخیره فایل</target>
+        <target>ذخیره پرونده</target>
       </trans-unit>
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>

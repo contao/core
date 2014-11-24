@@ -15,19 +15,19 @@
       </trans-unit>
       <trans-unit id="tl_install.locked.1">
         <source>For security reasons, the install tool has been locked after a wrong password had been entered more than three times in a row. To unlock it, open the local configuration file and set &lt;em&gt;installCount&lt;/em&gt; to &lt;em&gt;0&lt;/em&gt;.</source>
-        <target>به خاطر مسائل امنیتی، ابزار نصب بعد از وارد کردن بیش از سه بار رمزعبور اشتباه قفل خواهد شد. برای بازکردن آن، فایل پیکربندی محلی را باز نموده و &lt;em&gt;installCount&lt;/em&gt; را به &lt;em&gt;0&lt;/em&gt; تنظیم کنید.</target>
+        <target>به خاطر مسائل امنیتی، ابزار نصب بعد از وارد کردن بیش از سه بار گذرواژه اشتباه قفل خواهد شد. برای بازکردن آن، پرونده پیکربندی محلی را باز نموده و &lt;em&gt;installCount&lt;/em&gt; را به &lt;em&gt;0&lt;/em&gt; تنظیم کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.password.0">
         <source>Password</source>
-        <target>رمزعبور</target>
+        <target>گذرواژه</target>
       </trans-unit>
       <trans-unit id="tl_install.password.1">
         <source>Please enter the install tool password. The install tool password is not the same as the Contao back end password.</source>
-        <target>رمزعبور ابزار نصب را وارد کنید. رمزعبور ابزار نصب همان رمزعبور بخش مدیریت نمی‌باشد.</target>
+        <target>لطفا گذرواژه ابزار نصب را وارد کنید. گذرواژه ابزار نصب همان گذرواژه بخش مدیریت نمی‌باشد.</target>
       </trans-unit>
       <trans-unit id="tl_install.changePass.0">
         <source>Install tool password</source>
-        <target>رمزعبور ابزار نصب</target>
+        <target>گذرواژه ابزار نصب</target>
       </trans-unit>
       <trans-unit id="tl_install.changePass.1">
         <source>To additionally secure the Contao install tool, you can either rename or completely remove the &lt;strong&gt;contao/install.php&lt;/strong&gt; file.</source>
@@ -59,11 +59,11 @@
       </trans-unit>
       <trans-unit id="tl_install.update.0">
         <source>Update database tables</source>
-        <target>بروزرسانی جدول‌ها پایگاه‌داده</target>
+        <target>روزآمدسازی جدول‌ها پایگاه‌داده</target>
       </trans-unit>
       <trans-unit id="tl_install.update.1">
         <source>Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.</source>
-        <target>توجه داشته باشید که دستیار ارتقاء فقط با درایورهای MySQL و MuSQLi امتحان شده است. اگر شما از پایگاه‌داده‌های متفاوتی (مانند Oracle) استفاده می‌کنید شما شاید نصب و ارتقاء پایگاه داده را به صو.رت دستی انجام دهید. در این حالت، لطفاً به &lt;strong&gt;system/modules&lt;/strong&gt; رفته و همه زیرپوشه‌ها را برای فایل‌های &lt;strong&gt;config/database.sql&lt;/strong&gt; جستجو کنید.</target>
+        <target>توجه داشته باشید که دستیار روزآمدسازی فقط با درایورهای MySQL و MuSQLi امتحان شده است. اگر شما از پایگاه‌داده‌های متفاوتی (مانند Oracle) استفاده می‌کنید شما شاید نصب و ارتقاء پایگاه داده را به صو.رت دستی انجام دهید. در این حالت، لطفاً به &lt;strong&gt;system/modules&lt;/strong&gt; رفته و همه زیرپوشه‌ها را برای فایل‌های &lt;strong&gt;config/database.sql&lt;/strong&gt; جستجو کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.template.0">
         <source>Import a template</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_install.template.1">
         <source>Here you can import an &lt;em&gt;.sql&lt;/em&gt; file from the &lt;em&gt;templates&lt;/em&gt; directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.</source>
-        <target>لطفاً یک فایل &lt;em&gt;.sql&lt;/em&gt; از پوشه &lt;em&gt;templates&lt;/em&gt; انتخاب کنید.</target>
+        <target>اینجا می‌توانید یک پرونده &lt;em&gt;.sql&lt;/em&gt; از پوشه &lt;em&gt;templates&lt;/em&gt; انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_install.admin.0">
         <source>Create an admin user</source>
@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
-        <target>دستکاری فایل‌ها از طریق FTP</target>
+        <target>دستکاری پرونده‌ها از طریق FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.1">
         <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
-        <target>لطفاً جزئیات ورود FTP یتان را وارد کنید تا کانتائو فایل‌ها را از طریق FTP تغییر دهد (Safe Mode Hack).</target>
+        <target>اینجا می‌توانیدً جزئیات ورود FTP یتان را وارد کنید تا کانتائو پرونده‌ها را از طریق FTP تغییر دهد (Safe Mode Hack).</target>
       </trans-unit>
       <trans-unit id="tl_install.accept">
         <source>Accept license</source>
@@ -107,15 +107,15 @@
       </trans-unit>
       <trans-unit id="tl_install.passError">
         <source>Please enter a password to prevent unauthorized access!</source>
-        <target>لطفا رمزعبور پیش فرض را برای جلوگیری از دسترسی تایید نشده تغییر دهید!</target>
+        <target>لطفا گذرواژه پیش فرض را برای جلوگیری از دسترسی تایید نشده تغییر دهید!</target>
       </trans-unit>
       <trans-unit id="tl_install.passConfirm">
         <source>A custom password has been set.</source>
-        <target>رمزعبور پیش‌فرض تغییر داده شد.</target>
+        <target>گذرواژه پیش‌فرض تغییر داده شد.</target>
       </trans-unit>
       <trans-unit id="tl_install.passSave">
         <source>Save password</source>
-        <target>ذخیره رمزعبور</target>
+        <target>ذخیره گذرواژه</target>
       </trans-unit>
       <trans-unit id="tl_install.keyError">
         <source>Please create an encryption key!</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_install.updateSave">
         <source>Update database</source>
-        <target>بروزرسانی پایگاه‌داده</target>
+        <target>روزآمدسازی پایگاه‌داده</target>
       </trans-unit>
       <trans-unit id="tl_install.saveCollation">
         <source>Change collation</source>
@@ -207,23 +207,23 @@
       </trans-unit>
       <trans-unit id="tl_install.updateX">
         <source>It seems that you are upgrading from a Contao version prior to version %s. If that is the case, &lt;strong&gt;it is required to run the version %s update&lt;/strong&gt; to ensure the integrity of your data!</source>
-        <target>به نظر می‌رسد که شما می‌خواهید از کانتائو ویرایش قبل از ویرایش %s ارتقاء دهید. اگر این طور است، &lt;strong&gt;توصیه می‌شود که بروزرسانی ویرایش %s را اجراء نمایید&lt;/strong&gt; تا از درستی داده‌های خود مطمئن شوید.</target>
+        <target>به نظر می‌رسد که شما می‌خواهید از کانتائو نسخه قبل از نسخه %s ارتقاء دهید. اگر این طور است، &lt;strong&gt;توصیه می‌شود که روزآمدسازی نسخه %s را اجراء نمایید&lt;/strong&gt; تا از درستی داده‌های خود مطمئن شوید.</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrun">
         <source>Run version %s update</source>
-        <target>اجرای بروزسانی ویرایش %s</target>
+        <target>اجرای روزآمدسازی نسخه %s</target>
       </trans-unit>
       <trans-unit id="tl_install.updateXrunStep">
         <source>Run version %s update - step %s</source>
-        <target>اجرای بروزرسانی ویرایش %s - مرحله %s</target>
+        <target>اجرای روزآمدسازی نسخه %s - مرحله %s</target>
       </trans-unit>
       <trans-unit id="tl_install.importException">
         <source>The import failed! Is the database structure up to date and is the template file compatible with your Contao version?</source>
-        <target>وارد کردن ناموفق بود! آیا ساختار پایگاه داده بروز است و آیا پرونده الگو با ویرایش کانتائو شما سازگار است؟</target>
+        <target>وارد کردن ناموفق بود! آیا ساختار پایگاه داده بروز است و آیا پرونده الگو با نسخه کانتائو شما سازگار است؟</target>
       </trans-unit>
       <trans-unit id="tl_install.importError">
         <source>Please choose a template file!</source>
-        <target>یک فایل قالب انتخاب کنید!</target>
+        <target>یک پرونده قالب انتخاب کنید!</target>
       </trans-unit>
       <trans-unit id="tl_install.importConfirm">
         <source>Template imported on %s</source>
@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpPass">
         <source>FTP password</source>
-        <target>رمزعبور FTP</target>
+        <target>گذرواژه FTP</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSLh4">
         <source>Secure connection</source>
@@ -315,11 +315,11 @@
       </trans-unit>
       <trans-unit id="tl_install.filesRenamed">
         <source>The configured files directory does not exist!</source>
-        <target>فهرست فایل‌های تنظیم شده وجود ندارد!</target>
+        <target>فهرست پرونده‌های تنظیم شده وجود ندارد!</target>
       </trans-unit>
       <trans-unit id="tl_install.filesWarning">
         <source>Did you rename the &lt;strong&gt;tl_files&lt;/strong&gt; folder to &lt;strong&gt;files&lt;/strong&gt;? You cannot just rename the folder, because all the file references in the database and your style sheets will still point to the old location. If you want to rename the folder, please do so after the version 3 update and make sure to adjust your database data with the following script: %s.</source>
-        <target>آیا شما پوشه &lt;strong&gt;tl_files&lt;/strong&gt; را به &lt;strong&gt;files&lt;/strong&gt; تغییر نام داده‌اید؟ شما نمی‌توانید تنها نام پوشه تغییر دهید، زیرا همه مرجع‌های پرونده‌ها در پایگاه داده و برگه‌های سبک هنوز به مسیر قدیمی اشاره دارند. اگر شما می‌خواهید نام پوشه را تغییر دهید، بعد از بروزرسانی به نگارش ۳ انجام دهید و مطمئن باشید که پایگاه داده‌تان را با اسکریپت زیر تنظیم کرده‌اید: %s.</target>
+        <target>آیا شما پوشه &lt;strong&gt;tl_files&lt;/strong&gt; را به &lt;strong&gt;files&lt;/strong&gt; تغییر نام داده‌اید؟ شما نمی‌توانید تنها نام پوشه تغییر دهید، زیرا همه مرجع‌های پرونده‌ها در پایگاه داده و برگه‌های سبک هنوز به مسیر قدیمی اشاره دارند. اگر شما می‌خواهید نام پوشه را تغییر دهید، بعد از روزآمدسازی به نگارش ۳ انجام دهید و مطمئن باشید که پایگاه داده‌تان را با اسکریپت زیر تنظیم کرده‌اید: %s.</target>
       </trans-unit>
       <trans-unit id="tl_install.CREATE">
         <source>Create new tables</source>

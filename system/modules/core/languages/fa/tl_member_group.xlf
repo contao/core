@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_member_group.name.1">
         <source>Please enter the group title.</source>
-        <target>لطفاً عنوان گروه وارد نمائید.</target>
+        <target>لطفا عنوان گروه وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member_group.redirect.0">
         <source>Redirect on login</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_member_group.jumpTo.1">
         <source>Please choose the page to which the group members will be redirected.</source>
-        <target>لطفاً صفحه‌ای که می‌خواهید اعضای گروه به آنجا بازگردانده شوند را انتخاب نمائید.</target>
+        <target>لطفا صفحه‌ای که می‌خواهید اعضای گروه به آنجا بازگردانده شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member_group.disable.0">
         <source>Deactivate</source>

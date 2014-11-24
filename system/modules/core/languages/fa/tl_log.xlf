@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_log.ip.0">
         <source>IP address</source>
-        <target>آدرس IP</target>
+        <target>نشانی IP</target>
       </trans-unit>
       <trans-unit id="tl_log.ip.1">
         <source>IP address of the user</source>
-        <target>آدرس IP کاربر</target>
+        <target>نشانی IP کاربر</target>
       </trans-unit>
       <trans-unit id="tl_log.browser.0">
         <source>Browser</source>

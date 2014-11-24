@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.title.1">
         <source>Please enter a feed title.</source>
-        <target>عنوان خوراک را وارد نمایید</target>
+        <target>لطفا عنوان خوراک را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.alias.0">
         <source>Feed alias</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.language.1">
         <source>Please enter the feed language according to the ISO-639 standard (e.g. &lt;em&gt;en&lt;/em&gt; or &lt;em&gt;en-us&lt;/em&gt;).</source>
-        <target>زبان خوراک را بر اساس استاندارد ISO-639 وارد نمایید (مثلا &lt;em&gt;en&lt;/em&gt; یا &lt;em&gt;en-us&lt;/em&gt;).</target>
+        <target>لطفا زبان خوراک را بر اساس استاندارد ISO-639 وارد نمایید (مثلا &lt;em&gt;en&lt;/em&gt; یا &lt;em&gt;en-us&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.archives.0">
         <source>News archives</source>
-        <target>آرشیوهای خبر</target>
+        <target>بایگانی‌های خبر</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.archives.1">
         <source>Here you can choose the news archives to be included in the feed.</source>
-        <target>اینجا می‌توانید آرشیوهای اخباری را که می‌خواهید به خوراک اضافه کنید را انتخاب کنید.</target>
+        <target>اینجا می‌توانید بایگانی‌های اخباری را که می‌خواهید به خوراک اضافه کنید را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.format.0">
         <source>Feed format</source>

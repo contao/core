@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_content.type.1">
         <source>Please choose the type of content element.</source>
-        <target>لطفا نوع المان را انتخاب نمائید.</target>
+        <target>لطفا نوع المان را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.headline.0">
         <source>Headline</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_content.text.1">
         <source>You can use HTML tags to format the text.</source>
-        <target>شما می‌توانید از برچسب‌های HTML برای ساختار متن‌تان استفاده کنید.</target>
+        <target>شما می‌توانید از برچسب‌های اچ‌تی‌ام‌ال برای ساختار متن‌تان استفاده کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.addImage.0">
         <source>Add an image</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_content.imageUrl.1">
         <source>A custom image link target will override the lightbox link, so the image cannot be viewed fullsize anymore.</source>
-        <target>مقصد پیوند تصویر اختصاصی که جایگزین لینک lightbox خواهد شد، بنابراین تصویر دیگر در حالت اندازه کامل قابل مشاهده نخواهد بود.</target>
+        <target>مقصد پیوند تصویر اختصاصی که جایگزین پیوند lightbox خواهد شد، بنابراین تصویر دیگر در حالت اندازه کامل قابل مشاهده نخواهد بود.</target>
       </trans-unit>
       <trans-unit id="tl_content.fullsize.0">
         <source>Full-size view/new window</source>
@@ -107,23 +107,23 @@
       </trans-unit>
       <trans-unit id="tl_content.html.0">
         <source>HTML code</source>
-        <target>کد HTML</target>
+        <target>کد اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_content.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>می‌توانید لیست کدهای مجاز را در تنظیمات بخش مدیریت تغییر دهید.</target>
+        <target>می‌توانید فهرست کدهای مجاز را در تنظیمات بخش مدیریت تغییر دهید.</target>
       </trans-unit>
       <trans-unit id="tl_content.listtype.0">
         <source>List type</source>
-        <target>نوع لیست</target>
+        <target>نوع فهرست</target>
       </trans-unit>
       <trans-unit id="tl_content.listtype.1">
         <source>Please choose the type of list.</source>
-        <target>لطفاً نوع لیست را انتخاب نمائید.</target>
+        <target>لطفاً نوع فهرست را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.listitems.0">
         <source>List items</source>
-        <target>موارد لیست</target>
+        <target>موارد فهرست</target>
       </trans-unit>
       <trans-unit id="tl_content.listitems.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.1">
         <source>Please choose the sort order.</source>
-        <target>لطفاً شیوه مرتب کردن را انتخاب نمائید.</target>
+        <target>لطفاً شیوه مرتب کردن را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooType.0">
         <source>Operation mode</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooType.1">
         <source>Please select the operation mode of the accordion element.</source>
-        <target>لطفا حالت فرایند عنصر آکاردیونی را انتخاب نمائید.</target>
+        <target>لطفا حالت فرایند عنصر آکاردیونی را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStart.0">
         <source>Wrapper start</source>
@@ -231,15 +231,15 @@
       </trans-unit>
       <trans-unit id="tl_content.mooHeadline.1">
         <source>Please enter the headline of the content pane. HTML tags are allowed.</source>
-        <target>لطفا یک عنوان وارد نمائید. کدهای HTML مجاز می‌باشد.</target>
+        <target>لطفا یک عنوان وارد نمایید. کدهای اچ‌تی‌ام‌ال مجاز می‌باشد.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStyle.0">
         <source>CSS format</source>
-        <target>ساختار CSS</target>
+        <target>قالب سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_content.mooStyle.1">
         <source>Here you can format the section headline using CSS code.</source>
-        <target>می‌توانید بخش سرصفحه را با استفاده از کد CSS شکل دهید.</target>
+        <target>می‌توانید بخش سرصفحه را با استفاده از کد سی‌اس‌اس شکل دهید.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooClasses.0">
         <source>Element classes</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_content.highlight.1">
         <source>Please choose a scripting language.</source>
-        <target>لطفاً زبان کد خود را انتخاب نمائید.</target>
+        <target>لطفاً زبان کد خود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.code.0">
         <source>Code</source>
@@ -275,15 +275,15 @@
       </trans-unit>
       <trans-unit id="tl_content.linkTitle.0">
         <source>Link text</source>
-        <target>عنوان پیوند</target>
+        <target>متن پیوند</target>
       </trans-unit>
       <trans-unit id="tl_content.linkTitle.1">
         <source>The link text will be displayed instead of the target URL.</source>
-        <target>عنوان پیوند به جای URL مقصد نمایش داده خواهد شد.</target>
+        <target>متن پیوند به جای نشانی وب مقصد نمایش داده خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.0">
         <source>Link title</source>
-        <target>عنوان لینک</target>
+        <target>عنوان پیوند</target>
       </trans-unit>
       <trans-unit id="tl_content.titleText.1">
         <source>The link title is added as &lt;em&gt;title&lt;/em&gt; attribute in the HTML markup.</source>
@@ -379,11 +379,11 @@
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
-        <target>فایل‌های صوتی/تصویری</target>
+        <target>پرونده‌های صوتی/تصویری</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.1">
         <source>Here you can add the video/audio file or multiple files if you are using different codecs.</source>
-        <target>اینجا می‌توانید پرونده صوتی/تصویری یا چندیدن فایل اکر از کدک‌های متفاوت استفاده می‌کنید را اضافه نمایید.</target>
+        <target>اینجا می‌توانید پرونده صوتی/تصویری یا چندیدن پرونده اکر از کدک‌های متفاوت استفاده می‌کنید را اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.youtube.0">
         <source>YouTube ID</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_content.form.1">
         <source>Please select a form.</source>
-        <target>لطفا یک فرم را انتخاب نمائید.</target>
+        <target>لطفا یک فرم را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.module.0">
         <source>Module</source>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="tl_content.cssID.0">
         <source>CSS ID/class</source>
-        <target>شناسه/کلاس CSS</target>
+        <target>شناسه/کلاس سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_content.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
@@ -559,7 +559,7 @@
       </trans-unit>
       <trans-unit id="tl_content.text_legend">
         <source>Text/HTML/Code</source>
-        <target>متن/HTML/کد</target>
+        <target>متن/اچ‌تی‌ام‌ال/کد</target>
       </trans-unit>
       <trans-unit id="tl_content.image_legend">
         <source>Image settings</source>
@@ -571,7 +571,7 @@
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
-        <target>موارد لیست</target>
+        <target>موارد فهرست</target>
       </trans-unit>
       <trans-unit id="tl_content.table_legend">
         <source>Table items</source>
@@ -599,7 +599,7 @@
       </trans-unit>
       <trans-unit id="tl_content.source_legend">
         <source>Files and folders</source>
-        <target>فایل‌ها و پوشه‌ها</target>
+        <target>پرونده‌ها و پوشه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_content.dwnconfig_legend">
         <source>Download settings</source>
@@ -635,19 +635,19 @@
       </trans-unit>
       <trans-unit id="tl_content.ordered">
         <source>ordered list</source>
-        <target>لیست مرتب</target>
+        <target>فهرست مرتب</target>
       </trans-unit>
       <trans-unit id="tl_content.unordered">
         <source>unordered list</source>
-        <target>لیست نامرتب</target>
+        <target>فهرست نامرتب</target>
       </trans-unit>
       <trans-unit id="tl_content.name_asc">
         <source>File name (ascending)</source>
-        <target>نام فایل (صعودی)</target>
+        <target>نام پرونده (صعودی)</target>
       </trans-unit>
       <trans-unit id="tl_content.name_desc">
         <source>File name (descending)</source>
-        <target>نام فایل (نزولی)</target>
+        <target>نام پرونده (نزولی)</target>
       </trans-unit>
       <trans-unit id="tl_content.date_asc">
         <source>Date (ascending)</source>

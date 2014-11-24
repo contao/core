@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title_legend">
         <source>Title and redirect page</source>
-        <target>題名とリダイレクトページ</target>
+        <target>題名とリダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>

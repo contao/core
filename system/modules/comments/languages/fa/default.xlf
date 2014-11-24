@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="MSC.com_submit">
         <source>Submit comment</source>
-        <target>ارسال دیگاه</target>
+        <target>ارسال دیدگاه</target>
       </trans-unit>
       <trans-unit id="MSC.com_by">
         <source>Comment by</source>

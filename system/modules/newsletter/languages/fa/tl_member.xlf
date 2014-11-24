@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_member.newsletter.1">
         <source>Here you can manage the member's subscriptions.</source>
-        <target>در این قسمت شما می توانید اعضاء اشترک ها را مدیریت نمائید.</target>
+        <target>در این قسمت شما می توانید اعضاء اشترک ها را مدیریت نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member.newsletter_legend">
         <source>Subscriptions</source>

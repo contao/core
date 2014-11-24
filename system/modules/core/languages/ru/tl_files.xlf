@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_files.protected.1">
         <source>Prevent accessing the folder via HTTP. The files can still be made available e.g. with the downloads element.</source>
-        <target>Запретить доступ к каталогу через HTTP. Файлы можно сделать доступными с помощью элемента 'Загрузка с сайта'.</target>
+        <target>Запретить доступ к каталогу через HTTP. Файлы можно сделать доступными выбрав необходимый тип загрузки в разделе 'Элементы файла'.</target>
       </trans-unit>
       <trans-unit id="tl_files.meta.0">
         <source>Meta information</source>

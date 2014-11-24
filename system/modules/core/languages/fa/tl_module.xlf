@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.name.1">
         <source>Please enter the module title.</source>
-        <target>لطفاً عنوان ماژول را وارد نمائید.</target>
+        <target>لطفا عنوان ماژول را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.headline.0">
         <source>Headline</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_module.type.1">
         <source>Please choose the type of module.</source>
-        <target>لطفاً نوع ماژول را مشخص نمائید.</target>
+        <target>لطفا نوع ماژول را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.levelOffset.0">
         <source>Start level</source>
@@ -83,7 +83,7 @@
       </trans-unit>
       <trans-unit id="tl_module.pages.0">
         <source>Pages</source>
-        <target>صفحات</target>
+        <target>صفحه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_module.pages.1">
         <source>Please choose one or more pages from the site structure.</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_module.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
-        <target>صفحه‌ای که بازدیدکنندگان بعد از کلیک لینک یا ارسال یک فرم باید بازگردانی شوند را انتخاب کنید.</target>
+        <target>صفحه‌ای که بازدیدکنندگان بعد از کلیک پیوند یا ارسال یک فرم باید بازگردانی شوند را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_module.redirectBack.0">
         <source>Redirect to last page visited</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_module.tableless.1">
         <source>Render the form without HTML tables.</source>
-        <target>تولید فرم بودن جدول‌های HTML</target>
+        <target>تولید فرم بودن جدول‌های اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_module.form.0">
         <source>Form</source>
@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_module.inColumn.1">
         <source>Please choose the column whose articles you want to list.</source>
-        <target>لطفاً ستون نوشته‌هایی را می‌خواهید لیست شوند را انتخاب کنید.</target>
+        <target>لطفاً ستون نوشته‌هایی را می‌خواهید فهرست شوند را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_module.skipFirst.0">
         <source>Skip items</source>
@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_module.version.1">
         <source>Please enter the required Flash player version (e.g. 6.0.12).</source>
-        <target>لطفاً نسخه Flash player لازم را وارد کنید (به عنوان مثال 6.0.12).</target>
+        <target>لطفا نسخه Flash player لازم را وارد کنید (به عنوان مثال 6.0.12).</target>
       </trans-unit>
       <trans-unit id="tl_module.altContent.0">
         <source>Alternate content</source>
@@ -335,7 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_module.altContent.1">
         <source>The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.</source>
-        <target>محتوای جایگزین زمانی که فیلم بارگذاری نشود نمایش داده خواهد شد. تگ‌های HTML مجاز هستند.</target>
+        <target>محتوای جایگزین زمانی که فیلم بارگذاری نشود نمایش داده خواهد شد. تگ‌های اچ‌تی‌ام‌ال مجاز هستند.</target>
       </trans-unit>
       <trans-unit id="tl_module.source.0">
         <source>Source</source>
@@ -343,23 +343,23 @@
       </trans-unit>
       <trans-unit id="tl_module.source.1">
         <source>Whether to use a file on the server or point to an external URL.</source>
-        <target>چگونگی استفاده از یک فایل در سرور یا اشاره به URL خارجی.</target>
+        <target>چگونگی استفاده از یک پرونده در سرور یا اشاره به نشانی وب خارجی.</target>
       </trans-unit>
       <trans-unit id="tl_module.singleSRC.0">
         <source>Source file</source>
-        <target>منبع فایل</target>
+        <target>منبع پرونده</target>
       </trans-unit>
       <trans-unit id="tl_module.singleSRC.1">
         <source>Please select a file from the files directory.</source>
-        <target>لطفاً یک فایل از دایرکتوری فایل‌ها را انتخاب نمائید.</target>
+        <target>لطفاً یک پرونده از دایرکتوری پرونده‌ها را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.url.0">
         <source>URL</source>
-        <target>URL</target>
+        <target>نشانی وب</target>
       </trans-unit>
       <trans-unit id="tl_module.url.1">
         <source>Please enter the URL (http://…) of the Flash movie.</source>
-        <target>لطفاُ URL (http://...) فیلم فلش را وارد کنید.</target>
+        <target>لطفاُ نشانی وب (http://...) فیلم فلش را وارد کنید.</target>
       </trans-unit>
       <trans-unit id="tl_module.interactive.0">
         <source>Make interactive</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_module.imgSize.1">
         <source>Here you can set the image dimensions and the resize mode.</source>
-        <target>می‌توانید ابعاد تصویر و روش تغییر اندازه را انتخاب نمائید.</target>
+        <target>می‌توانید ابعاد تصویر و روش تغییر اندازه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.useCaption.0">
         <source>Show caption</source>
@@ -411,11 +411,11 @@
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.0">
         <source>Source files</source>
-        <target>منبع فایل‌ها</target>
+        <target>منبع پرونده‌ها</target>
       </trans-unit>
       <trans-unit id="tl_module.multiSRC.1">
         <source>Please select one or more files from the files directory.</source>
-        <target>لطفاً یک یا چند فایل از دایرکتوری فایل‌ها انتخاب نمائید.</target>
+        <target>لطفاً یک یا چند پرونده از دایرکتوری پرونده‌ها انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.orderSRC.0">
         <source>Sort order</source>
@@ -427,11 +427,11 @@
       </trans-unit>
       <trans-unit id="tl_module.html.0">
         <source>HTML code</source>
-        <target>کد HTML</target>
+        <target>کد اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_module.html.1">
         <source>You can modify the list of allowed HTML tags in the back end settings.</source>
-        <target>می‌توانید لیست تگ‌های HTML مجاز را در تنظیمات بخش مدیریت تغییر دهید.</target>
+        <target>می‌توانید فهرست تگ‌های اچ‌تی‌ام‌ال مجاز را در تنظیمات بخش مدیریت تغییر دهید.</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_cache.0">
         <source>Cache timeout</source>
@@ -443,11 +443,11 @@
       </trans-unit>
       <trans-unit id="tl_module.rss_feed.0">
         <source>Feed URLs</source>
-        <target>لینک RSS Feed</target>
+        <target>پیوند RSS Feed</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_feed.1">
         <source>Please enter the URL of one or more RSS feeds.</source>
-        <target>لطفا لینک RSS Feed را در این بخش وارد نمائید .</target>
+        <target>لطفا نشانی وب یک یا چند خوراک آراس‌اس را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.rss_template.0">
         <source>Feed template</source>
@@ -491,11 +491,11 @@
       </trans-unit>
       <trans-unit id="tl_module.cssID.0">
         <source>CSS ID/class</source>
-        <target>CSS ID/class</target>
+        <target>شناسه/کلاس سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_module.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>می‌توانید یک ID و یک یا چند class را انتخاب نمائید.</target>
+        <target>می‌توانید یک شناسه و یک یا چند کلاس انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.space.0">
         <source>Space in front and after</source>
@@ -519,7 +519,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_groups.1">
         <source>Here you can assign the user to one or more groups.</source>
-        <target>لطفاً کاربر را عضو یک یا چند گروه از گروه‌های زیر نمائید (اختیاری).</target>
+        <target>اینجا می‌توانید کاربر را به یک یا چند گروه اختصاص دهید.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_allowLogin.0">
         <source>Allow login</source>
@@ -559,15 +559,15 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_homeDir.1">
         <source>Please select the parent folder from the files directory.</source>
-        <target>لطفا دایرکتوری بالاتری دایرکتوری شخصی کاربر را انتخاب نمائید.</target>
+        <target>لطفا دایرکتوری بالاتری دایرکتوری شخصی کاربر را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_activate.0">
         <source>Send activation e-mail</source>
-        <target>ارسال پست الکترونیک فعال سازی عضویت</target>
+        <target>ارسال ایمیل فعال سازی عضویت</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_activate.1">
         <source>Send an activation e-mail to the registered e-mail address.</source>
-        <target>یک پست الکترونیک حاوی لینک فعال‌سازی برای کاربر ارسال خواهد شد.</target>
+        <target>یک ایمیل حاوی لینک فعال‌سازی برای کاربر ارسال خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_jumpTo.0">
         <source>Confirmation page</source>
@@ -575,7 +575,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_jumpTo.1">
         <source>Please choose the page to which users will be redirected after the request has been completed.</source>
-        <target>لطفاً صفحه‌ای را که می خواهید بعد از فعال‌سازی حساب کاربری، کاربر به آنجا منتقل گردد را مشخص نمائید.</target>
+        <target>لطفاً صفحه‌ای را که می خواهید بعد از فعال‌سازی حساب کاربری، کاربر به آنجا منتقل گردد را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_text.0">
         <source>Activation message</source>
@@ -587,7 +587,7 @@
       </trans-unit>
       <trans-unit id="tl_module.reg_password.0">
         <source>Password message</source>
-        <target>پیغام رمزعبور</target>
+        <target>پیغام گذرواژه</target>
       </trans-unit>
       <trans-unit id="tl_module.reg_password.1">
         <source>You can use the wildcards &lt;em&gt;##domain##&lt;/em&gt; (domain name), &lt;em&gt;##link##&lt;/em&gt; (activation link) and any user property (e.g. &lt;em&gt;##lastname##&lt;/em&gt;).</source>
@@ -623,7 +623,7 @@
       </trans-unit>
       <trans-unit id="tl_module.source_legend">
         <source>Files and folders</source>
-        <target>فایل‌ها و پوشه‌ها</target>
+        <target>پرونده‌ها و پوشه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_module.interact_legend">
         <source>Interactive Flash movie</source>
@@ -631,7 +631,7 @@
       </trans-unit>
       <trans-unit id="tl_module.html_legend">
         <source>Text/HTML</source>
-        <target>متن/HTML</target>
+        <target>متن/اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_module.protected_legend">
         <source>Access protection</source>
@@ -643,7 +643,7 @@
       </trans-unit>
       <trans-unit id="tl_module.email_legend">
         <source>E-mail settings</source>
-        <target>تنظیمات پست الکترونیک</target>
+        <target>تنظیمات ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_module.account_legend">
         <source>Account settings</source>
@@ -662,14 +662,14 @@ Please click ##link## to complete your registration and to activate your account
       </trans-unit>
       <trans-unit id="tl_module.passwordText.0">
         <source>Your password request on %s</source>
-        <target>درخواست رمزعبور شما در %s</target>
+        <target>درخواست گذرواژه شما در %s</target>
       </trans-unit>
       <trans-unit id="tl_module.passwordText.1">
         <source>You have requested a new password for ##domain##.
 
 Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
 </source>
-        <target>شما رمزعبور جدید برای ##domain## درخواست نموده اید. لطفا اینجا را ##link## برای واردنمودن رمز عبور جدید کلیک نمایی. اگر شما این ایمیل را درخواست ننموده اید لطفا با مدیریت سایت تماس بگیرید.</target>
+        <target>شما گذرواژه جدید برای ##domain## درخواست نموده اید. لطفا اینجا را ##link## برای واردنمودن رمز عبور جدید کلیک نمایی. اگر شما این ایمیل را درخواست ننموده اید لطفا با مدیریت وب‌سایت تماس بگیرید.</target>
       </trans-unit>
       <trans-unit id="tl_module.header">
         <source>Header</source>
@@ -693,7 +693,7 @@ Please click ##link## to set the new password. If you did not request this e-mai
       </trans-unit>
       <trans-unit id="tl_module.internal">
         <source>Internal file</source>
-        <target>فایل داخلی</target>
+        <target>پرونده داخلی</target>
       </trans-unit>
       <trans-unit id="tl_module.external">
         <source>External URL</source>

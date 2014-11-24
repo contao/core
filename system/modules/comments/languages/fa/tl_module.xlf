@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_module.comment_legend">
         <source>Comment settings</source>
-        <target>تنظیمات نظر</target>
+        <target>تنظیمات دیدگاه</target>
       </trans-unit>
     </body>
   </file>

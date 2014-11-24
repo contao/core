@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.ratingfmt">
         <source>%.2f (%d votes)</source>
-        <target>%.2f (%d голосов)</target>
+        <target>%.2f (голосов: %d)</target>
       </trans-unit>
       <trans-unit id="tl_repository.reldownloads">
         <source>Release downloads</source>

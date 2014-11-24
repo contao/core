@@ -627,31 +627,31 @@
       </trans-unit>
       <trans-unit id="DAYS_SHORT.0">
         <source>Sun</source>
-        <target>Sunnuntai</target>
+        <target>Su</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.1">
         <source>Mon</source>
-        <target>Maanantai</target>
+        <target>Ma</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.2">
         <source>Tue</source>
-        <target>Tiistai</target>
+        <target>Ti</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.3">
         <source>Wed</source>
-        <target>Keskiviikko</target>
+        <target>Ke</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.4">
         <source>Thu</source>
-        <target>Torstai</target>
+        <target>To</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.5">
         <source>Fri</source>
-        <target>Perjantai</target>
+        <target>Pe</target>
       </trans-unit>
       <trans-unit id="DAYS_SHORT.6">
         <source>Sat</source>
-        <target>Lauantai</target>
+        <target>La</target>
       </trans-unit>
       <trans-unit id="MONTHS.0">
         <source>January</source>
@@ -703,51 +703,51 @@
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.0">
         <source>Jan</source>
-        <target>Tammikuu</target>
+        <target>Tammi</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.1">
         <source>Feb</source>
-        <target>Helmikuu</target>
+        <target>Helmi</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.2">
         <source>Mar</source>
-        <target>Maaliskuu</target>
+        <target>Maalis</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.3">
         <source>Apr</source>
-        <target>Huhtikuu</target>
+        <target>Huhti</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.4">
         <source>May</source>
-        <target>Toukokuu</target>
+        <target>Touko</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.5">
         <source>Jun</source>
-        <target>Kesäkuu</target>
+        <target>Kesä</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.6">
         <source>Jul</source>
-        <target>Heinäkuu</target>
+        <target>Heinä</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.7">
         <source>Aug</source>
-        <target>Elokuu</target>
+        <target>Elo</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.8">
         <source>Sep</source>
-        <target>Syyskuu</target>
+        <target>Syys</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.9">
         <source>Oct</source>
-        <target>Lokakuu</target>
+        <target>Loka</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.10">
         <source>Nov</source>
-        <target>Marraskuu</target>
+        <target>Marras</target>
       </trans-unit>
       <trans-unit id="MONTHS_SHORT.11">
         <source>Dec</source>
-        <target>Joulukuu</target>
+        <target>Joulu</target>
       </trans-unit>
       <trans-unit id="MSC.dayShortLength">
         <source>3</source>

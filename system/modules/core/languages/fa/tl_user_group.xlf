@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.name.1">
         <source>Please enter the group title.</source>
-        <target>لطفا عنوان گروه را وارد نمائید.</target>
+        <target>لطفا عنوان گروه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user_group.alexf.0">
         <source>Allowed fields</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.alexf.1">
         <source>Here you can choose which fields will be editable.</source>
-        <target>لطفاً فیلدهایی را که می‌خواهید برای این گروه فعال باشند را انتخاب نمائید.</target>
+        <target>اینجا می‌توانید فیلدهایی قابل ویرایش را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user_group.disable.0">
         <source>Deactivate</source>
@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_user_group.pagemounts_legend">
         <source>Pagemounts</source>
-        <target>صفحات مونت شده</target>
+        <target>صفحه‌ها مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user_group.filemounts_legend">
         <source>Filemounts</source>
-        <target>فایل‌های مونت شده</target>
+        <target>پرونده‌های مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user_group.forms_legend">
         <source>Form permissions</source>

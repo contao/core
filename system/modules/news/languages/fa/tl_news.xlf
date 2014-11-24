@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_news.headline.1">
         <source>Please enter the news title.</source>
-        <target>لطفاً یک عنوان خبر را وارد نمائید.</target>
+        <target>لطفا یک عنوان خبر را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.alias.0">
         <source>News alias</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_news.date.1">
         <source>Please enter the date according to the global date format.</source>
-        <target>لطفاً تاریخ خبر را وارد نمائید.</target>
+        <target>لطفاً تاریخ خبر را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.time.0">
         <source>Time</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_news.time.1">
         <source>Please enter the time according to the global time format.</source>
-        <target>لطفاً زمان خبر را وارد نمائید.</target>
+        <target>لطفاً زمان خبر را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.subheadline.0">
         <source>Subheadline</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_news.subheadline.1">
         <source>Here you can enter a subheadline.</source>
-        <target>شما می‌توانید یک زیرعنوان وارد نمائید.</target>
+        <target>شما می‌توانید یک زیرعنوان وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.0">
         <source>News teaser</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news.teaser.1">
         <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
-        <target>خلاصه متن معمولاً در بخش خلاصه اخبلر به همراه یک لینک &quot;ادامه مطلب ...&quot; نمایش داده می‌شود .</target>
+        <target>خلاصه متن معمولاً در بخش خلاصه اخبار به همراه یک پیوند &quot;ادامه مطلب ...&quot; نمایش داده می‌شود .</target>
       </trans-unit>
       <trans-unit id="tl_news.text.0">
         <source>News text</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_news.text.1">
         <source>Here you can enter the news text.</source>
-        <target>متن خبر را در این بخش وارد نمائید.</target>
+        <target>متن خبر را در این بخش وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.addImage.0">
         <source>Add an image</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_news.addImage.1">
         <source>Add an image to the news item.</source>
-        <target>با فعال نمودن این گزینه می‌توانید به خبر خود عکس اضافه نمائید.</target>
+        <target>با فعال نمودن این گزینه می‌توانید به خبر خود عکس اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.addEnclosure.0">
         <source>Add enclosures</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_news.addEnclosure.1">
         <source>Add one or more downloadable files to the news item.</source>
-        <target>در این بخش می‌توانید در صورت تمایل به خبر خود فایل‌های قابل دانلود اضافه نمائید.</target>
+        <target>در این بخش می‌توانید در صورت تمایل به خبر خود پرونده‌های قابل دانلود اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.enclosure.0">
         <source>Enclosures</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_news.enclosure.1">
         <source>Please choose the files you want to attach.</source>
-        <target>لطفاً فایل‌هایی که می‌خواهید ضمیمه شوند را انتخاب نمائید.</target>
+        <target>لطفاً پرونده‌هایی که می‌خواهید ضمیمه شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.source.0">
         <source>Redirect target</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_news.source.1">
         <source>Here you can override the default redirect target.</source>
-        <target>لطفا انتخاب نمائید که می‌خواهید با کلیک بر روی خبر بازدیدکننده به صفحات داخلی منتقل گردد یا به صفحات خارجی.</target>
+        <target>اینجا می‌توانید مقصد بازگردانی پیش‌فرض را رونویسی نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.default.0">
         <source>Use default</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_news.external.0">
         <source>External URL</source>
-        <target>URL خارجی</target>
+        <target>نشانی وب خارجی</target>
       </trans-unit>
       <trans-unit id="tl_news.external.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="tl_news.cssClass.0">
         <source>CSS class</source>
-        <target>CSS کلاس</target>
+        <target>کلاس سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_news.cssClass.1">
         <source>Here you can enter one or more classes.</source>
@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="tl_news.noComments.0">
         <source>Disable comments</source>
-        <target>غیرفعال کردن نظرات</target>
+        <target>غیرفعال کردن دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_news.noComments.1">
         <source>Do not allow comments for this particular news item.</source>
-        <target>توسط این گزینه می‌توانید امکان نظر دادن به این خبر را غیرفعال سازید.</target>
+        <target>توسط این گزینه می‌توانید امکان دیدگاه دادن به این خبر را غیرفعال سازید.</target>
       </trans-unit>
       <trans-unit id="tl_news.featured.0">
         <source>Feature item</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_news.featured.1">
         <source>Show the news item in a featured news list.</source>
-        <target>نشان دادن مورد خبری در لیست خبرهای ویژه</target>
+        <target>نشان دادن مورد خبری در فهرست خبرهای ویژه</target>
       </trans-unit>
       <trans-unit id="tl_news.published.0">
         <source>Publish item</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_news.published.1">
         <source>Make the news item publicly visible on the website.</source>
-        <target>تا زمانی که این گزینه را فعال ننمائید خبر در سایت نمایش داده نخواهد شد.</target>
+        <target>تا زمانی که این گزینه را فعال ننمائید خبر در وب‌سایت نمایش داده نخواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_news.start.0">
         <source>Show from</source>

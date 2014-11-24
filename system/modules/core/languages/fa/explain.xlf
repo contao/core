@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.1">
         <source>Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.&lt;br&gt;&lt;br&gt;&lt;strong&gt;You can enter variant front end formats in the site structure (website root pages).&lt;/strong&gt;&lt;br&gt;&lt;br&gt;&lt;em&gt;Here are some examples of valid date and time formats&lt;/em&gt;:</source>
-        <target>کانتائو تمامی ساختارهای زمان و تاریخ را می‌تواند توسط تابع date() php ایجاد نماید. همچنین برای اینکه مطمئن باشید که ورودی‌ها می‌توانند به UNIX timestamp تبدیل شوند، باید فقط از ساختارهای تاریخ و زمان (j, d, m, n, y, Y, g, G, h, H, i, s) در بخش مدیریت استفاده نمایید.&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;شما می‌توانید ساختارهای مختلفی را برای وب سایت در ساختار سایت (صفحات ریشه وب‌سایت) تعریف نمایید.&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;em&gt;اینها چند مثال از ساختارهای زمان و تاریخ معتبر می‌باشند.&lt;/em&gt;:</target>
+        <target>کانتائو تمامی ساختارهای زمان و تاریخ را می‌تواند توسط تابع date() php ایجاد نماید. همچنین برای اینکه مطمئن باشید که ورودی‌ها می‌توانند به UNIX timestamp تبدیل شوند، باید فقط از ساختارهای تاریخ و زمان (j, d, m, n, y, Y, g, G, h, H, i, s) در بخش مدیریت استفاده نمایید.&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;شما می‌توانید ساختارهای مختلفی را برای وب‌سایت در ساختار وب‌سایت (صفحه‌ها ریشه وب‌سایت) تعریف نمایید.&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;em&gt;اینها چند مثال از ساختارهای زمان و تاریخ معتبر می‌باشند.&lt;/em&gt;:</target>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.1.0">
         <source>Y-m-d</source>

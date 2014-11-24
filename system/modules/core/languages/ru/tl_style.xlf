@@ -623,11 +623,11 @@
       </trans-unit>
       <trans-unit id="tl_style.pastenew.0">
         <source>Add new at the top</source>
-        <target>Создать новое определение формата в начале</target>
+        <target>Создать новое определение формата</target>
       </trans-unit>
       <trans-unit id="tl_style.pastenew.1">
         <source>Add new after format definition ID %s</source>
-        <target>Создать новое определение формата в начале ID %s</target>
+        <target>Создать новое определение формата после ID %s</target>
       </trans-unit>
       <trans-unit id="tl_style.toggle.0">
         <source>Toggle visibility</source>

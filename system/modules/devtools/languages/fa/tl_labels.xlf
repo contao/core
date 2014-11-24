@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_labels.label.1">
         <source>Please choose the translation you want to check.</source>
-        <target>زبانی را که می‌خواهید بررسی را کنید را انتخاب کنید.</target>
+        <target>لطفا زبانی را که می‌خواهید بررسی را کنید را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_labels.headline">
         <source>Find missing labels</source>

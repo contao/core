@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title.1">
         <source>Please enter the calendar title.</source>
-        <target>لطفا عنوان تقویم را وارد نمائید.</target>
+        <target>لطفا عنوان تقویم را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.0">
         <source>Redirect page</source>
@@ -15,15 +15,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
-        <target>لطفا صفحه ای را که می خواهید کاربران بعد از کلیک بر روی رویداد به آنجا منتقل شوند را انتخاب نمائید.</target>
+        <target>لطفا صفحه ای را که می خواهید کاربران بعد از کلیک بر روی رویداد به آنجا منتقل شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.0">
         <source>Enable comments</source>
-        <target>فعال کردن نظرخواهی</target>
+        <target>فعال کردن دیدگاه</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.1">
         <source>Allow visitors to comment events.</source>
-        <target>به کاربران اجازه نظر دادن به رویدادها می دهد.</target>
+        <target>به کاربران اجازه دیدگاه دادن به رویدادها می دهد.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify.0">
         <source>Notify</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.notify.1">
         <source>Please choose who to notify when comments are added.</source>
-        <target>لطفا کسی که باید وقتی نظرها اضافه شد اعلام کند را انتخاب نمایید.</target>
+        <target>لطفا کسی که باید وقتی دیدگاه‌ها اضافه شد اعلام کند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.0">
         <source>Sort order</source>
@@ -39,23 +39,23 @@
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
-        <target>به صورت پیش فرض، نظرات به صورت صعودی از قدیمی ترین مرتب می شوند.</target>
+        <target>به صورت پیش‌فرض، دیدگاه‌ها به صورت صعودی از قدیمی ترین مرتب می شوند.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.0">
         <source>Comments per page</source>
-        <target>نظر در هر صفحه</target>
+        <target>دیدگاه در هر صفحه</target>
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>تعداد نظرها در هر صفحه. برای غیرفعال کردن صفحه بندی 0 را انتخاب نمایید.</target>
+        <target>تعداد دیدگاه‌ها در هر صفحه. برای غیرفعال کردن صفحه بندی 0 را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.0">
         <source>Moderate comments</source>
-        <target>نظرات مناسب</target>
+        <target>بررسی دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>تایید نظرها قبل از انتشار در وب سایت.</target>
+        <target>تایید دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.0">
         <source>Allow BBCode</source>
@@ -63,15 +63,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.1">
         <source>Allow visitors to format their comments with BBCode.</source>
-        <target>اجازه دادن به کاربران برای نظر دادن با BBCode.</target>
+        <target>اجازه دادن به کاربران برای دیدگاه دادن با BBCode.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.0">
         <source>Require login to comment</source>
-        <target>برای نظر دادن نیاز به ورود است</target>
+        <target>برای دیدگاه نیاز به ورود است</target>
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
-        <target>اجازه دادن به کاربران تایید شده برای ایجاد نظرها</target>
+        <target>اجازه دادن به کاربران تایید شده برای ایجاد دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.0">
         <source>Disable the security question</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
-        <target>از این گزینه فقط برای محدود کردن نظرها به کاربران تایید شده استفاده نمایید.</target>
+        <target>از این گزینه فقط برای محدود کردن دیدگاه‌ها به کاربران تایید شده استفاده نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.protected.0">
         <source>Protect calendar</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>
-        <target>نظرها</target>
+        <target>دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_calendar.protected_legend">
         <source>Access protection</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.feed_legend">
         <source>RSS/Atom feed</source>
-        <target>خوراک RSS/Atom</target>
+        <target>خوراک آراس‌اس/اتم</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify_admin">
         <source>System administrator</source>
@@ -191,11 +191,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.0">
         <source>RSS feeds</source>
-        <target>خوراک آراس‌اس</target>
+        <target>خوراک‌های آر‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.1">
         <source>Manage RSS feeds</source>
-        <target>مدیریت خوراک آر‌اس‌اس</target>
+        <target>مدیریت خوراک‌های آراس‌اس</target>
       </trans-unit>
     </body>
   </file>

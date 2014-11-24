@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_form.tableless.1">
         <source>Render the form without HTML tables.</source>
-        <target>HTMLのテーブルを使用しないでページを生成します。</target>
+        <target>HTMLの表を使用しないでページを生成します。</target>
       </trans-unit>
       <trans-unit id="tl_form.allowTags.0">
         <source>Allow HTML tags</source>
@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="tl_form.title_legend">
         <source>Title and redirect page</source>
-        <target>題名とリダイレクトページ</target>
+        <target>題名とリダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_form.email_legend">
         <source>Send form data</source>

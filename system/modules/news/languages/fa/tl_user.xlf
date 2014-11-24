@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user.news.1">
         <source>Here you can grant access to one or more news archives.</source>
-        <target>لطفاً آرشیوهایی را که می‌خواهید برای کاربر فعال باشند را انتخاب نمائید.</target>
+        <target>اینجا می‌توانید دسترسی به یک یا چند بایگانی خبر را واگذار نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.newp.0">
         <source>News permissions</source>

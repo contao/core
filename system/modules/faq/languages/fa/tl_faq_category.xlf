@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.title.1">
         <source>Please enter the category title.</source>
-        <target>لطفا یک عنوان برای دسته وارد نمائید.</target>
+        <target>لطفا یک عنوان برای دسته وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.0">
         <source>Headline</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.1">
         <source>Please enter the category headline.</source>
-        <target>لطفا سرصفحه دسته را وارد نمائید.</target>
+        <target>لطفا سرصفحه دسته را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.0">
         <source>Redirect page</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
-        <target>لطفا صفحه ای را که می خواهید بازدیدکنندگان بعد از کلیک بر روی یک سوال به آنجا منتقل شوند را انتخاب نمائید.</target>
+        <target>لطفا صفحه ای را که می خواهید بازدیدکنندگان بعد از کلیک بر روی یک سوال به آنجا منتقل شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.allowComments.0">
         <source>Enable comments</source>
-        <target>فعال بودن نظرات</target>
+        <target>فعال بودن دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.allowComments.1">
         <source>Allow visitors to comment FAQs.</source>
-        <target>اجازه دادن به بازدیدکنندگان برای نظر دادن در مورد FAQ ها.</target>
+        <target>اجازه دادن به بازدیدکنندگان برای دیدگاه دادن در مورد FAQ ها.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify.0">
         <source>Notify</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.notify.1">
         <source>Please choose who to notify when comments are added.</source>
-        <target>کسی را که وقتی نظرات اضافه شد آگاه شود را انتخاب نمایید.</target>
+        <target>کسی را که وقتی دیدگاه‌ها اضافه شد آگاه شود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.sortOrder.0">
         <source>Sort order</source>
@@ -47,23 +47,23 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
-        <target>به صورت پیش فرض،</target>
+        <target>به صورت پیش‌فرض،</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.perPage.0">
         <source>Comments per page</source>
-        <target>نظرات در هر صفحه</target>
+        <target>دیدگاه‌ها در هر صفحه</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>تعداد نظرات در هر صفحه. 0 را برای غیرفعال کردن صفحه بندی انتخاب نمایید.</target>
+        <target>تعداد دیدگاه‌ها در هر صفحه. 0 را برای غیرفعال کردن صفحه بندی انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.0">
         <source>Moderate comments</source>
-        <target>نظرات مناسب</target>
+        <target>بررسی دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>تایید نظرات قبل از انتشار در وب سایت.</target>
+        <target>تایید دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.bbcode.0">
         <source>Allow BBCode</source>
@@ -75,11 +75,11 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.requireLogin.0">
         <source>Require login to comment</source>
-        <target>نیاز داشتن به ورود برای نظر دادن</target>
+        <target>برای دیدگاه نیاز به ورود است</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
-        <target>فقط به کاربران تایید شده امکان ایجاد نظرات را می دهد.</target>
+        <target>فقط به کاربران تایید شده امکان ایجاد دیدگاه‌ها را می دهد.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.disableCaptcha.0">
         <source>Disable the security question</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.disableCaptcha.1">
         <source>Use this option only if you have limited comments to authenticated users.</source>
-        <target>از گزینه فقط زمانی استفاده نمایید که نظرات محدودی برای کاربران تایید شده دارید.</target>
+        <target>از گزینه فقط زمانی استفاده نمایید که دیدگاه‌ها محدودی برای کاربران تایید شده دارید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.tstamp.0">
         <source>Revision date</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.comments_legend">
         <source>Comments</source>
-        <target>نظرات</target>
+        <target>دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_admin">
         <source>System administrator</source>

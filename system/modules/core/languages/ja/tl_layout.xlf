@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_layout.name.0">
         <source>Title</source>
-        <target>名前</target>
+        <target>題名</target>
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>

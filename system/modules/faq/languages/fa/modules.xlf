@@ -15,11 +15,11 @@
       </trans-unit>
       <trans-unit id="FMD.faqlist.0">
         <source>FAQ list</source>
-        <target>لیست پرسش و پاسخ ها</target>
+        <target>فهرست پرسش و پاسخ ها</target>
       </trans-unit>
       <trans-unit id="FMD.faqlist.1">
         <source>Adds a list of frequently asked questions to the page</source>
-        <target>توسط این ماژول شما می توانید لیست پرسش و پاسخ ها را در سایت نمایش دهید .</target>
+        <target>توسط این ماژول شما می توانید فهرست پرسش و پاسخ ها را در سایت نمایش دهید .</target>
       </trans-unit>
       <trans-unit id="FMD.faqreader.0">
         <source>FAQ reader</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="FMD.faqpage.1">
         <source>Shows the FAQ list and FAQ reader on the same page</source>
-        <target>لیست و خواننده سوالات متداول را در همان صفحه نمایش می‌دهد</target>
+        <target>فهرست و خواننده سوالات متداول را در همان صفحه نمایش می‌دهد</target>
       </trans-unit>
     </body>
   </file>

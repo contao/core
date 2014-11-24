@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventmenu.1">
         <source>Generates a navigation menu to browse the event list</source>
-        <target>Создаёт меню навигации для просмотра списка событий</target>
+        <target>Создает меню навигации для просмотра списка событий</target>
       </trans-unit>
     </body>
   </file>

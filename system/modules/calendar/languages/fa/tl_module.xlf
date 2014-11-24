@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_calendar.1">
         <source>Please select one or more calendars.</source>
-        <target>لطفا یک یا چند تقویم انتخاب نمائید.</target>
+        <target>لطفا یک یا چند تقویم انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_noSpan.0">
         <source>Shortened view</source>
@@ -23,23 +23,23 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_startDay.1">
         <source>Here you can choose the week start day.</source>
-        <target>لطفا اولین روز هفته را انتخاب نمائید.</target>
+        <target>اینجا می‌توانید اولین روز هفته را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_format.0">
         <source>Event list format</source>
-        <target>قالب لیست رویداد</target>
+        <target>قالب فهرست رویداد</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_format.1">
         <source>Here you can choose the event list format.</source>
-        <target>لطفا یک قالب مناسب برای لیست رویدادها انتخاب نمائید.</target>
+        <target>اینجا می‌توانید یک قالب فهرست رویدادها انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.0">
         <source>Ignore URL parameters</source>
-        <target>نادیده گرفتن پارمترهای URI</target>
+        <target>نادیده گرفتن پارمترهای نشانی وب</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ignoreDynamic.1">
         <source>Do not switch the time period based on the date/month/year URL parameters.</source>
-        <target>سویچ نکردن دوره زمانی بر اساس پارامترهای URI تاریخ/ماه/ماه</target>
+        <target>سویچ نکردن دوره زمانی بر اساس پارامترهای نشانی وب تاریخ/ماه/ماه</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_order.0">
         <source>Sort order</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_limit.1">
         <source>Here you can limit the number of events. Enter 0 to show all.</source>
-        <target>لطفا تعداد رویدادها را برای نمایش مشخص نمائید. در صورتی که 0 وارد نمائید تمامی رویدادها نمایش داده خواهند شد.</target>
+        <target>اینجا می‌توانید تعداد رویدادها را برای نمایش مشخص نمایید. در صورتی که 0 وارد نمایید تمامی رویدادها نمایش داده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_template.0">
         <source>Event template</source>
@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_list">
         <source>Event list</source>
-        <target>لیست رویداد</target>
+        <target>فهرست رویداد</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_day">
         <source>Day</source>

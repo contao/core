@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user.username.1">
         <source>Please enter a unique username.</source>
-        <target>لطفا یک نام کاربری یکتایی را وارد نمائید .</target>
+        <target>لطفا یک نام کاربری یکتایی را وارد نمایید .</target>
       </trans-unit>
       <trans-unit id="tl_user.name.0">
         <source>Name</source>
@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="tl_user.email.0">
         <source>E-mail address</source>
-        <target>آدرس پست الکترونیک</target>
+        <target>نشانی ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_user.email.1">
         <source>Please enter a valid e-mail address.</source>
-        <target>لطفا یک آدرس پست الکترونیک معتبر وارد کنید.</target>
+        <target>لطفا یک نشانی ایمیل معتبر وارد کنید.</target>
       </trans-unit>
       <trans-unit id="tl_user.google.0">
         <source>Google+ profile ID</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_user.language.1">
         <source>Here you can choose the back end language.</source>
-        <target>لطفا زبان بخش مدیریت را انتخاب نمائید.</target>
+        <target>اینجا می‌توانید زبان بخش مدیریت را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.backendTheme.0">
         <source>Back end theme</source>
@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_user.uploader.0">
         <source>File uploader</source>
-        <target>بارگذار فایل</target>
+        <target>بارگذار پرونده</target>
       </trans-unit>
       <trans-unit id="tl_user.uploader.1">
         <source>Here you can choose a file uploader.</source>
-        <target>می‌توانید بارگذار فایل را انتخاب نمایید.</target>
+        <target>می‌توانید بارگذار پرونده را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.showHelp.0">
         <source>Show explanation</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_user.thumbnails.1">
         <source>Show thumbnail images in the file manager.</source>
-        <target>نمایش تصاویر بندانگشتی در مدیریت فایل.</target>
+        <target>نمایش تصاویر بندانگشتی در مدیریت پرونده.</target>
       </trans-unit>
       <trans-unit id="tl_user.useRTE.0">
         <source>Enable the rich text editor</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_user.pagemounts.0">
         <source>Pagemounts</source>
-        <target>صفحات مونت شده</target>
+        <target>صفحه‌ها مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user.pagemounts.1">
         <source>Here you can grant access to one or more pages (subpages are included automatically).</source>
@@ -171,11 +171,11 @@
       </trans-unit>
       <trans-unit id="tl_user.alpty.0">
         <source>Allowed page types</source>
-        <target>نوع صفحات مجاز</target>
+        <target>نوع صفحه‌ها مجاز</target>
       </trans-unit>
       <trans-unit id="tl_user.alpty.1">
         <source>Here you can select the page types you want to allow.</source>
-        <target>لطفا نوع صفحاتی را که می خواهید برای این مدیر فعال باشند را انتخاب نمائید .</target>
+        <target>اینجا می‌توانید نوع‌های صفحه مجاز را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.filemounts.0">
         <source>Filemounts</source>
@@ -235,7 +235,7 @@
       </trans-unit>
       <trans-unit id="tl_user.name_legend">
         <source>Name and e-mail</source>
-        <target>نام و آدرس پست الکترونیک</target>
+        <target>نام و آدرس ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_user.google_legend">
         <source>Google+ settings</source>
@@ -267,11 +267,11 @@
       </trans-unit>
       <trans-unit id="tl_user.pagemounts_legend">
         <source>Pagemounts</source>
-        <target>صفحات مونت شده</target>
+        <target>صفحه‌ها مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user.filemounts_legend">
         <source>Filemounts</source>
-        <target>فایل‌های مونت شده</target>
+        <target>پرونده‌های مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user.forms_legend">
         <source>Form permissions</source>

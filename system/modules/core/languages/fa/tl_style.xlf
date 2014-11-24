@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_style.comment.0">
         <source>Comment</source>
-        <target>یادداشت</target>
+        <target>دیدگاه</target>
       </trans-unit>
       <trans-unit id="tl_style.comment.1">
         <source>Here you can add a comment.</source>
-        <target>اینجا می توانید یک یادداشت اضافه کنید.</target>
+        <target>اینجا می توانید یک دیدگاه اضافه کنید.</target>
       </trans-unit>
       <trans-unit id="tl_style.size.0">
         <source>Size</source>
@@ -343,7 +343,7 @@
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.1">
         <source>Here you can enter a comma separated list of font types.</source>
-        <target>اینجا می توانید لیست جدا شده با ویرگول از انواع فونت را وارد نمایید</target>
+        <target>اینجا می توانید فهرست جدا شده با ویرگول از انواع فونت را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_style.fontsize.0">
         <source>Font size</source>
@@ -411,7 +411,7 @@
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
-        <target>لیست</target>
+        <target>فهرست</target>
       </trans-unit>
       <trans-unit id="tl_style.list.1">
         <source>List-style-type and list-style-image.</source>
@@ -419,11 +419,11 @@
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.0">
         <source>List symbol</source>
-        <target>نشانه لیست</target>
+        <target>نشانه فهرست</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyletype.1">
         <source>Here you can choose a list symbol.</source>
-        <target>اینجا می‌توانید نشانه لیست را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید نشانه فهرست را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.0">
         <source>Custom symbol</source>
@@ -439,7 +439,7 @@
       </trans-unit>
       <trans-unit id="tl_style.own.1">
         <source>Here you can enter custom CSS code.</source>
-        <target>اینجا می‌توانید کد CSS اختصاصی را وارد نمایید.</target>
+        <target>اینجا می‌توانید کد سی‌اس‌اس اختصاصی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.selector_legend">
         <source>Selector and category</source>

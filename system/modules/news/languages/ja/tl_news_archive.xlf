@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.1">
         <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.title_legend">
         <source>Title and redirect page</source>
-        <target>題名とリダイレクトページ</target>
+        <target>題名とリダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments_legend">
         <source>Comments</source>

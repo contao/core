@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidToken">
         <source>The activation link is invalid or outdated.</source>
-        <target>این لینک فعال سازی اشتباه یا تاریخ گذشته می باشد.</target>
+        <target>این پیوند فعال سازی اشتباه یا تاریخ گذشته می باشد.</target>
       </trans-unit>
       <trans-unit id="ERR.noChannels">
         <source>Please select at least one channel.</source>

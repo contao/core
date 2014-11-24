@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.name.1">
         <source>Please enter a unique theme title.</source>
-        <target>عنوان یکتای پوسته را وارد نمایید.</target>
+        <target>لطفا عنوان یکتای پوسته را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_theme.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.folders.1">
         <source>Please select the folders that belong to the theme from the files directory.</source>
-        <target>پوشه‌هایی را به این پوسته مربوط هستند را انتخاب کنید</target>
+        <target>لطفا پوشه‌هایی را به این پوسته مربوط هستند را انتخاب کنید</target>
       </trans-unit>
       <trans-unit id="tl_theme.templates.0">
         <source>Templates folder</source>
@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_theme.source.0">
         <source>Source files</source>
-        <target>منبع فایل‌ها</target>
+        <target>منبع پرونده‌ها</target>
       </trans-unit>
       <trans-unit id="tl_theme.source.1">
         <source>Here you can upload one or more .cto files to be imported.</source>
-        <target>لطفا یک یا چند فایل با پسوند .cto را از منبع فایل‌ها انتخاب کنید.</target>
+        <target>اینجا می‌توانید یک یا چند پرونده با پسوند .cto را از منبع پرونده‌ها انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_theme.tstamp.0">
         <source>Revision date</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.layout.1">
         <source>Edit the page layouts of theme ID %s</source>
-        <target>ویرایش چیدمان صفحات پوسته شناسه %s</target>
+        <target>ویرایش چیدمان صفحه‌ها پوسته شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_theme.importTheme.0">
         <source>Theme import</source>

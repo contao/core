@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.source_text">
         <source>Full articles</source>
-        <target>イベントの全体</target>
+        <target>イベント全体</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.new.0">
         <source>New feed</source>
