@@ -343,9 +343,8 @@ abstract class Template extends \BaseTemplate
 				'(function() {
 		                    var panel = document.getElementById("contao-debug");
 		                    var update = function() {
-		                        var width = window.getSize().x;
 		                        for (i = 0; i < panel.childNodes.length; i++) {
-		                            panel.childNodes[i].style.width=width+"px";
+		                            panel.childNodes[i].style.width=document.documentElement.offsetWidth+"px";
 		                        }
 		                    };
 		                    update();
@@ -355,7 +354,7 @@ abstract class Template extends \BaseTemplate
 		                    };
 		                    toggle();
 		
-		                    document.getElementById("debug-tog").addEvent("click",function(e) {
+		                    document.getElementById("debug-tog").addEventListener("click",function(e) {
 		                        var closed = panel.className.indexOf("closed") != -1;
 		                        if (closed) {
 		                            panel.className = panel.className.replace("closed","").trim();
@@ -365,10 +364,10 @@ abstract class Template extends \BaseTemplate
 		                            panel.className = panel.className + (panel.className.length > 0 ? " " : "") + "closed";
 		                            closed = true;
 		                        }
-		                        Cookie.write("CONTAO_CONSOLE", closed ? "closed" : "",{path:"' . (TL_PATH ?: '/') . '"});
+		                        document.cookie="CONTAO_CONSOLE="+(closed ? "closed" : "")+"; path=' . (TL_PATH ?: '/') . '";
 		                        toggle();
 		                    });
-		                    window.addEvent("resize", update);
+		                    window.addEventListener("resize", update);
 		                })();',
 				($this->strFormat == 'xhtml')
 			)
