@@ -731,19 +731,19 @@
       </trans-unit>
       <trans-unit id="tl_content.pasteafter.0">
         <source>Paste at the top</source>
-        <target>Вставить в начало</target>
+        <target>Вставить после</target>
       </trans-unit>
       <trans-unit id="tl_content.pasteafter.1">
         <source>Paste after content element ID %s</source>
-        <target>Вставить в начало ID %s</target>
+        <target>Вставить после элемента контента ID %s</target>
       </trans-unit>
       <trans-unit id="tl_content.pastenew.0">
         <source>Add new at the top</source>
-        <target>Создать новый элемент контента в начале</target>
+        <target>Создать новый элемент контента</target>
       </trans-unit>
       <trans-unit id="tl_content.pastenew.1">
         <source>Add new after content element ID %s</source>
-        <target>Создать новый элемент контента в начале ID %s</target>
+        <target>Создать новый элемент контента после ID %s</target>
       </trans-unit>
       <trans-unit id="tl_content.toggle.0">
         <source>Toggle visibility</source>

@@ -283,7 +283,7 @@
       </trans-unit>
       <trans-unit id="tl_article.pasteafter.1">
         <source>Paste after article ID %s</source>
-        <target>Вставить после ID %s</target>
+        <target>Вставить после статьи ID %s</target>
       </trans-unit>
       <trans-unit id="tl_article.pasteinto.0">
         <source>Paste into</source>

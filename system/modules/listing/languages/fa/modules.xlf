@@ -3,19 +3,19 @@
     <body>
       <trans-unit id="MOD.listing.0">
         <source>Listing</source>
-        <target>لیست گیری</target>
+        <target>فهرست نویسی</target>
       </trans-unit>
       <trans-unit id="MOD.listing.1">
         <source>List the records of any table</source>
-        <target>لیست کردن رکوردهای هر جدول.</target>
+        <target>فهرست کردن رکوردهای هر جدول.</target>
       </trans-unit>
       <trans-unit id="FMD.listing.0">
         <source>Listing</source>
-        <target>لیست گیری</target>
+        <target>فهرست نویسی</target>
       </trans-unit>
       <trans-unit id="FMD.listing.1">
         <source>Lists the records of any table</source>
-        <target>رکوردهای هر جدول را لیست می کند.</target>
+        <target>رکوردهای هر جدول را فهرست می کند.</target>
       </trans-unit>
     </body>
   </file>

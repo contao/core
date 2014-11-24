@@ -7,15 +7,15 @@
       </trans-unit>
       <trans-unit id="tl_settings.websiteTitle.1">
         <source>Please enter the title of the website.</source>
-        <target>لطفا عنوان وب‌سایت را وارد نمائید.</target>
+        <target>لطفا عنوان وب‌سایت را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.0">
         <source>E-mail address of the system administrator</source>
-        <target>آدرس پست‌الکترونیک مدیر وب‌سایت</target>
+        <target>نشانی پست‌الکترونیک مدیر وب‌سایت</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>پیغام‌های خودکار مانند ایمیل تایید عضویت به این آدرس فرستاده خواهند شد.</target>
+        <target>پیغام‌های خودکار مانند ایمیل تایید عضویت به این نشانی فرستاده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.0">
         <source>Date format</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
-        <target>لطفا سرور منطقه زمانی را انتخاب نمائید.</target>
+        <target>لطفا سرور منطقه زمانی را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.gzipScripts.1">
         <source>Create a compressed version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.</source>
-        <target>ایجاد نسخه فشرده از پرونده‌های CSS و جاواسکریپت. به تنظیم پرونده .htaccess نیاز دارد.</target>
+        <target>ایجاد نسخه فشرده از پرونده‌های سی‌اس‌اس و جاواسکریپت. به تنظیم پرونده .htaccess نیاز دارد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.fileSyncExclude.1">
         <source>Here you can enter a comma separated list of folders which will be exempt from the files synchronization (e.g. &lt;em&gt;attachments,music_academy&lt;/em&gt;). Note that excluded resources cannot be used in e.g. image or download elements!</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از پوشه‌هایی از هماهنگ‌سازی پرونده‌ها باید معاف شوند (مثلا، &lt;em&gt;attachments,music_academy&lt;/em&gt;) را وارد نمایید. توجه کنید منابع مستثنی شده نمی‌توانند مثلا در المان‌های تصویر یا بارگیری استفاده شوند.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از پوشه‌هایی از هماهنگ‌سازی پرونده‌ها باید معاف شوند (مثلا، &lt;em&gt;attachments,music_academy&lt;/em&gt;) را وارد نمایید. توجه کنید منابع مستثنی شده نمی‌توانند مثلا در المان‌های تصویر یا بارگیری استفاده شوند.</target>
       </trans-unit>
       <trans-unit id="tl_settings.doNotCollapse.0">
         <source>Do not collapse elements</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از آدرس‌های IP سرور پروکسی قابل اعتماد را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نشانی‌های IP سرور پروکسی قابل اعتماد را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
-        <target>آدرس‌های آی‌پی ناشناس</target>
+        <target>نشانی‌های آی‌پی ناشناس</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.1">
         <source>Anonymize any IP address that is stored in the database, except in the &lt;em&gt;tl_session&lt;/em&gt; table (the IP address is bound to the session for security reasons).</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeGA.1">
         <source>Anonymize the IP addresses that are sent to Google Analytics.</source>
-        <target>گمنام کردن آدرس‌های IP که برای Google Analytics فرستاده می‌شود.</target>
+        <target>گمنام کردن نشانی‌های IP که برای Google Analytics فرستاده می‌شود.</target>
       </trans-unit>
       <trans-unit id="tl_settings.rewriteURL.0">
         <source>Rewrite URLs</source>
@@ -219,7 +219,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
-        <target>برچسب‌های HTML مجاز</target>
+        <target>برچسب‌های اچ‌تی‌ام‌ال مجاز</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.1">
         <source>Here you can enter a list of allowed HTML tags that will not be stripped.</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.lockPeriod.1">
         <source>An account will be locked if a wrong password is entered three times in a row.</source>
-        <target>اگر کاربری بیش از سه بار پشت سر هم رمزعبور اشتباه وارد نمایید قفل خواهد شد.</target>
+        <target>اگر کاربری بیش از سه بار پشت سر هم گذرواژه اشتباه وارد نمایید قفل خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.displayErrors.0">
         <source>Display error messages</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.disableIpCheck.1">
         <source>Do not bind sessions to IP addresses. Choosing this option is a potential security risk!</source>
-        <target>متصل نکردن نشست‌ها به آدرس‌های آی‌پی. انتخاب این گزینه یک خطر امنیتی بالقوه است!</target>
+        <target>متصل نکردن نشست‌ها به نشانی‌های آی‌پی. انتخاب این گزینه یک خطر امنیتی بالقوه است!</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedDownload.0">
         <source>Download file types</source>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.validImageTypes.1">
         <source>Here you can enter a comma separated list of file types that can be handled by the image class.</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط کلاس تصویر به کار گرفته شود را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط کلاس تصویر به کار گرفته شود را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.0">
         <source>Editable file types</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.editableFiles.1">
         <source>Here you can enter a comma separated list of file types that can be edited in the source editor.</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط ویرایشگر منبع ویرایش شوند را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نوع پرونده‌هایی که می‌تواند توسط ویرایشگر منبع ویرایش شوند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.0">
         <source>Template file types</source>
@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.templateFiles.1">
         <source>Here you can enter a comma separated list of supported template file types.</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌هایی قالبی پشتیبانی شده را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نوع پرونده‌هایی قالبی پشتیبانی شده را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxImageWidth.0">
         <source>Maximum front end width</source>
@@ -375,7 +375,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.uploadTypes.1">
         <source>Here you can enter a comma separated list of uploadable file types.</source>
-        <target>اینجا می‌توانید لیست جداشده با کاما از نوع پرونده‌های قابل بارگذاری را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نوع پرونده‌های قابل بارگذاری را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploadFields.0">
         <source>Simultaneous file uploads</source>
@@ -387,7 +387,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.0">
         <source>Maximum upload file size</source>
-        <target>بیشینه اندازه فایل بارگذاری</target>
+        <target>بیشینه اندازه پرونده بارگذاری</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxFileSize.1">
         <source>Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).</source>
@@ -451,11 +451,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.0">
         <source>SMTP password</source>
-        <target>رمزعبور SMTP</target>
+        <target>گذرواژه SMTP</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
-        <target>می‌توانید رمزعبور SMTP را وارد نمایید</target>
+        <target>می‌توانید گذرواژه SMTP را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.1">
         <source>Here you can deactivate unneeded extensions.</source>
-        <target>می‌توانید افزونه‌های غیر لازم را غیرفعال نمائید.</target>
+        <target>می‌توانید افزونه‌های غیر لازم را غیرفعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
@@ -523,7 +523,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
-        <target>صاحب پیشفرض صفحه</target>
+        <target>صاحب پیش‌فرض صفحه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.1">
         <source>Here you can select a user as the default owner of a page.</source>
@@ -531,7 +531,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.0">
         <source>Default page group</source>
-        <target>گروه پیشفرض صفحه</target>
+        <target>گروه پیش‌فرض صفحه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.1">
         <source>Here you can select a group as the default owner of a page.</source>
@@ -547,11 +547,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.0">
         <source>Live Update URL</source>
-        <target>نشانی وب بروزرسانی Live</target>
+        <target>نشانی وب روزآمدسازی لایو</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.1">
         <source>Here you can enter the Live Update URL.</source>
-        <target>اینجا می‌توانید نشانی وب بروزرسانی لایو را وارد نمایید.</target>
+        <target>اینجا می‌توانید نشانی وب روزآمدسازی لایو را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
@@ -587,7 +587,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.files_legend">
         <source>Files and images</source>
-        <target>فایل‌ها و تصاویر</target>
+        <target>پرونده‌ها و تصاویر</target>
       </trans-unit>
       <trans-unit id="tl_settings.uploads_legend">
         <source>Upload settings</source>
@@ -623,7 +623,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.update_legend">
         <source>Live Update</source>
-        <target>بروزرسانی Live</target>
+        <target>روزآمدسازی لایو</target>
       </trans-unit>
       <trans-unit id="tl_settings.static_legend">
         <source>Static resources</source>

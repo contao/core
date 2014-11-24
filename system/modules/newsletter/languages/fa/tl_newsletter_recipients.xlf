@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_newsletter_recipients.email.0">
         <source>E-mail address</source>
-        <target>آدرس پست الکترونیک</target>
+        <target>نشانی ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email.1">
         <source>Please enter the recipient's e-mail address.</source>
-        <target>آدرس پست الکترونیک گیرنده را وارد نمائید.</target>
+        <target>لطفا نشانی ایمیل گیرنده را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.active.0">
         <source>Activate recipient</source>
@@ -27,11 +27,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.ip.0">
         <source>IP address</source>
-        <target>آدرس IP</target>
+        <target>نشانی IP</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.ip.1">
         <source>The IP address of the subscriber.</source>
-        <target>آدرس IP مشترک.</target>
+        <target>نشانی IP مشترک.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.0">
         <source>Token key</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>
-        <target>آدرس پست الکترونیک</target>
+        <target>نشانی ایمیل</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirm">
         <source>%s new recipients have been imported.</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.import.1">
         <source>Import recipients from a CSV file</source>
-        <target>وارد کردن گیرنده ها از فایل CSV</target>
+        <target>وارد کردن گیرنده ها از پرونده CSV</target>
       </trans-unit>
     </body>
   </file>

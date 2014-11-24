@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>

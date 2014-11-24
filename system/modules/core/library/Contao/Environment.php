@@ -167,6 +167,22 @@ class Environment
 
 
 	/**
+	 * Return the query string (e.g. id=2)
+	 *
+	 * @return string The query string
+	 */
+	protected static function queryString()
+	{
+		if (!isset($_SERVER['QUERY_STRING']))
+		{
+			return '';
+		}
+
+		return static::encodeRequestString($_SERVER['QUERY_STRING']);
+	}
+
+
+	/**
 	 * Return the request URI [path]?[query] (e.g. /contao/index.php?id=2)
 	 *
 	 * @return string The request URI
@@ -175,12 +191,14 @@ class Environment
 	{
 		if (!empty($_SERVER['REQUEST_URI']))
 		{
-			return $_SERVER['REQUEST_URI'];
+			$strRequest = $_SERVER['REQUEST_URI'];
 		}
 		else
 		{
-			return '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+			$strRequest = '/' . preg_replace('/^\//', '', static::get('scriptName')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
+
+		return static::encodeRequestString($strRequest);
 	}
 
 
@@ -421,16 +439,7 @@ class Environment
 	 */
 	protected static function request()
 	{
-		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/', '', static::get('requestUri'));
-
-		// From version 2.9, do not fallback to $this->script
-		// anymore if the request string is empty (see #1844).
-
-		// IE security fix (thanks to Michiel Leideman)
-		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
-
-		// Do not urldecode() here (thanks to Russ McRee)!
-		return $strRequest;
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/', '', static::get('requestUri'));
 	}
 
 
@@ -561,6 +570,19 @@ class Environment
 		$return->mobile   = $mobile;
 
 		return $return;
+	}
+
+
+	/**
+	 * Encode a request string preserving certain reserved characters
+	 *
+	 * @param string $strRequest The request string
+	 *
+	 * @return string The encoded request string
+	 */
+	protected static function encodeRequestString($strRequest)
+	{
+		return preg_replace_callback('/[^A-Za-z0-9\-_.~&=+,\/?%\[\]]+/', function($matches) { return rawurlencode($matches[0]); }, $strRequest);
 	}
 
 

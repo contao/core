@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_article.title.1">
         <source>Please enter the article title.</source>
-        <target>لطفا عنوان نوشته را وارد نمائید.</target>
+        <target>لطفا عنوان نوشته را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_article.alias.0">
         <source>Article alias</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_article.inColumn.1">
         <source>Please choose the layout section you want the article to be displayed in.</source>
-        <target>لطفا محل قرارگیری این نوشته را در چیدمان مشخص نمائید.</target>
+        <target>لطفا محل قرارگیری این نوشته را در چیدمان مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_article.keywords.0">
         <source>Meta keywords</source>
@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.0">
         <source>Teaser CSS ID/class</source>
-        <target>شناسه/کلاس CSS تیزر</target>
+        <target>شناسه/کلاس سی‌اس‌اس تیزر</target>
       </trans-unit>
       <trans-unit id="tl_article.teaserCssID.1">
         <source>Here you can set an ID and one or more classes for the teaser element.</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_article.space.1">
         <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>لطفا مقدار فاصله‌ای که می‌خواهید در ابتدا و انتهای نوشته‌ باشد را به پیکسل وارد نمائید.</target>
+        <target>اینجا می‌توانید مقدار فاصله‌ای که می‌خواهید در ابتدا و انتهای نوشته‌ باشد را به پیکسل وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_article.published.0">
         <source>Publish article</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_article.start.1">
         <source>Do not show the article on the website before this day.</source>
-        <target>اگر شما در این بخش تاریخی را انتخاب نمائید، محتوا قبل از آن تاریخ نمایش داده نخواهد شد.</target>
+        <target>اگر شما در این بخش تاریخی را انتخاب نمایید، محتوا قبل از آن تاریخ نمایش داده نخواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_article.stop.0">
         <source>Show until</source>

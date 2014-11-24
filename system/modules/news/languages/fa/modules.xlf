@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="MOD.news.1">
         <source>Manage news and export them as RSS or Atom feed</source>
-        <target>مدیریت اخبار و خروجی خوراک RSS و Atom.</target>
+        <target>مدیریت اخبار و خروجی خوراک آراس‌اس و اتم.</target>
       </trans-unit>
       <trans-unit id="MOD.tl_news_feed">
         <source>News feeds</source>
@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="FMD.newslist.0">
         <source>Newslist</source>
-        <target>لیست اخبار</target>
+        <target>فهرست اخبار</target>
       </trans-unit>
       <trans-unit id="FMD.newslist.1">
         <source>Adds a list of news items to the page</source>
-        <target>اضافه کردن لیست موارد خبری به صفحه.</target>
+        <target>اضافه کردن فهرست موارد خبری به صفحه.</target>
       </trans-unit>
       <trans-unit id="FMD.newsreader.0">
         <source>Newsreader</source>

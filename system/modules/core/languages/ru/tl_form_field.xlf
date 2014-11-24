@@ -536,7 +536,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.pasteafter.0">
         <source>Paste at the top</source>
-        <target>Вставить в начало</target>
+        <target>Вставить после</target>
       </trans-unit>
       <trans-unit id="tl_form_field.pasteafter.1">
         <source>Paste after field ID %s</source>
@@ -544,7 +544,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.pastenew.0">
         <source>Add new at the top</source>
-        <target>Добавить новое поле в начале</target>
+        <target>Добавить новое поле</target>
       </trans-unit>
       <trans-unit id="tl_form_field.pastenew.1">
         <source>Add new after field ID %s</source>

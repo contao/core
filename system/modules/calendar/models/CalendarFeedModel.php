@@ -40,12 +40,12 @@ class CalendarFeedModel extends \Model
 	 * @param integer $intId      The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the calendar is not part of a feed
+	 * @return \Model\Collection|null A collection of models or null if the calendar is not part of a feed
 	 */
 	public static function findByCalendar($intId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null, $arrOptions);
+		return static::findBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null, $arrOptions);
 	}
 
 

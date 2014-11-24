@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.question.1">
         <source>Please enter the question.</source>
-        <target>لطفا پرسش خود را وارد نمائید.</target>
+        <target>لطفا پرسش خود را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq.alias.0">
         <source>FAQ alias</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.author.1">
         <source>Here you can change the author of the FAQ.</source>
-        <target>لطفا یک نویسنده انتخاب نمائید.</target>
+        <target>اینجا می‌توانید یک نویسنده انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq.answer.0">
         <source>Answer</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.answer.1">
         <source>Please enter the answer.</source>
-        <target>لطفا پاسخ را در این بخش وارد نمائید.</target>
+        <target>لطفا پاسخ را در این بخش وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq.addImage.0">
         <source>Add an image</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.1">
         <source>Add one or more downloadable files to the FAQ.</source>
-        <target>اضافه نمودن یک یا چند فایل قابل دانلود به FAQ.</target>
+        <target>اضافه نمودن یک یا چند پرونده قابل دانلود به FAQ.</target>
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.0">
         <source>Enclosures</source>
@@ -55,15 +55,15 @@
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.1">
         <source>Please choose the files you want to attach.</source>
-        <target>فایل هایی را که می خواهید اضافه شوند را انتخاب نماییدو</target>
+        <target>پرونده هایی را که می خواهید اضافه شوند را انتخاب نماییدو</target>
       </trans-unit>
       <trans-unit id="tl_faq.noComments.0">
         <source>Disable comments</source>
-        <target>غیرفعال کردن نظرات</target>
+        <target>غیرفعال کردن دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_faq.noComments.1">
         <source>Do not allow comments for this particular FAQ.</source>
-        <target>اجازه ندادن نظرات برای این FAQ خاص.</target>
+        <target>اجازه ندادن دیدگاه‌ها برای این FAQ خاص.</target>
       </trans-unit>
       <trans-unit id="tl_faq.published.0">
         <source>Publish the FAQ</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.published.1">
         <source>Make the FAQ publicly visible on the website.</source>
-        <target>برای نمایش دادن پرسش و پاسخ این گزینه را فعال نمائید .</target>
+        <target>برای نمایش دادن پرسش و پاسخ این گزینه را فعال نمایید .</target>
       </trans-unit>
       <trans-unit id="tl_faq.title_legend">
         <source>Title and author</source>

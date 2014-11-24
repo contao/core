@@ -115,7 +115,7 @@
       </trans-unit>
       <trans-unit id="tl_module.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_module.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking a link or submitting a form.</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_module.redirectBack.1">
         <source>Redirect the user back to the last page visited instead of the redirect page.</source>
-        <target>リダイレクトページの代わりに、ユーザーが最後に参照していたページに移動します。</target>
+        <target>リダイレクト先のページの代わりに、ユーザーが最後に参照していたページに移動します。</target>
       </trans-unit>
       <trans-unit id="tl_module.cols.0">
         <source>Number of columns</source>

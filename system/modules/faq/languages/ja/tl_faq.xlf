@@ -43,7 +43,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.0">
         <source>Add enclosures</source>
-        <target>添付ファイルを追加</target>
+        <target>エンクロージャーを追加</target>
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.1">
         <source>Add one or more downloadable files to the FAQ.</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.0">
         <source>Enclosures</source>
-        <target>添付ファイル</target>
+        <target>エンクロージャー</target>
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.1">
         <source>Please choose the files you want to attach.</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.enclosure_legend">
         <source>Enclosures</source>
-        <target>添付ファイル</target>
+        <target>エンクロージャー</target>
       </trans-unit>
       <trans-unit id="tl_faq.expert_legend">
         <source>Expert settings</source>

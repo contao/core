@@ -99,7 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_user.admin.0">
         <source>Make the user an administrator</source>
-        <target>Назначить Администратором</target>
+        <target>Назначить администратором</target>
       </trans-unit>
       <trans-unit id="tl_user.admin.1">
         <source>Administrators have unlimited access to all modules and elements!</source>

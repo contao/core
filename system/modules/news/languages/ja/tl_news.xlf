@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_news.enclosure_legend">
         <source>Enclosures</source>
-        <target>添付ファイル</target>
+        <target>エンクロージャー</target>
       </trans-unit>
       <trans-unit id="tl_news.source_legend">
         <source>Redirect target</source>

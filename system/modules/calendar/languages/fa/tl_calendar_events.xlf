@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.title.1">
         <source>Please enter the event title.</source>
-        <target>لطفا یک عنوان برای رویداد وارد نمائید .</target>
+        <target>لطفا یک عنوان برای رویداد وارد نمایید .</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.alias.0">
         <source>Event alias</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.startTime.1">
         <source>Please enter the start time according to the global time format.</source>
-        <target>لطفاً زمان شروع را بر اساس قالب ساعت جهانی وارد نمائید.</target>
+        <target>لطفاً زمان شروع را بر اساس قالب ساعت جهانی وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.endTime.0">
         <source>End time</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.endTime.1">
         <source>Use the same value for start and end time to create an open-ended event.</source>
-        <target>لطفاً زمان خاتمه را بر اساس قالب ساعت جهانی وارد نمائید.</target>
+        <target>لطفاً زمان خاتمه را بر اساس قالب ساعت جهانی وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.startDate.0">
         <source>Start date</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.startDate.1">
         <source>Please enter the start date according to the global date format.</source>
-        <target>لطفاً تاریخ شروع رویداد را مشخص نمائید.</target>
+        <target>لطفاً تاریخ شروع رویداد را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.endDate.0">
         <source>End date</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.endDate.1">
         <source>Leave blank to create a single day event.</source>
-        <target>لطفاً تاریخ خاتمه رویداد را مشخص نمائید .</target>
+        <target>لطفاً تاریخ خاتمه رویداد را مشخص نمایید .</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.location.0">
         <source>Event location</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.teaser.1">
         <source>The event teaser can be shown in an event list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
-        <target>متن خلاصه معمولا به همراه یک لینک &quot;ادامه مطلب ...&quot; به جای متن کامل رویداد نمایش داده می شود .</target>
+        <target>متن خلاصه معمولا به همراه یک پیوند &quot;ادامه مطلب ...&quot; به جای متن کامل رویداد نمایش داده می شود .</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.details.0">
         <source>Event text</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.details.1">
         <source>Here you can enter the event text.</source>
-        <target>لطفا جزئیات و توضیحات رویداد را در این بخش وارد نمائید .</target>
+        <target>اینجا می‌توانید متن رویداد را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.addImage.0">
         <source>Add an image</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.repeatEach.1">
         <source>Here you can set the recurrence interval.</source>
-        <target>لطفاً میزان فاصله زمانی برای تکرار رویداد را وارد نمائید.</target>
+        <target>اینجا می‌توانید فاصله زمانی تکرار را تنظیم نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.recurrences.0">
         <source>Recurrences</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.addEnclosure.1">
         <source>Add one or more downloadable files to the event.</source>
-        <target>اضافه کردن یک یا چند فایل قابل دانلود به رویداد.</target>
+        <target>اضافه کردن یک یا چند پرونده قابل دانلود به رویداد.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.0">
         <source>Enclosures</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure.1">
         <source>Please choose the files you want to attach.</source>
-        <target>لطفا فایل هایی که می خواهید پیوست شوند را انتخاب نمایید.</target>
+        <target>لطفا پرونده هایی که می خواهید پیوست شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.source.0">
         <source>Redirect target</source>
@@ -179,7 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.external.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
-        <target>با فشردن دکمه &quot;بیشتر بخوانید ...&quot;، بازدیدکننده ها به یک وب سایت خارجی هدایت خواهند شد.</target>
+        <target>با فشردن دکمه &quot;بیشتر بخوانید ...&quot;، بازدیدکننده ها به یک وب‌سایت خارجی هدایت خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.0">
         <source>Redirect page</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.0">
         <source>CSS class</source>
-        <target>CSS class</target>
+        <target>کلاس سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.cssClass.1">
         <source>Here you can enter one or more classes.</source>
@@ -207,11 +207,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.noComments.0">
         <source>Disable comments</source>
-        <target>غیرفعال کردن نظرها</target>
+        <target>غیرفعال کردن دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.noComments.1">
         <source>Do not allow comments for this particular event.</source>
-        <target>غیرفعال کردن نظرها برای این نظر.</target>
+        <target>غیرفعال کردن دیدگاه‌ها برای این دیدگاه.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.published.0">
         <source>Publish event</source>
@@ -219,7 +219,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.published.1">
         <source>Make the event publicly visible on the website.</source>
-        <target>قابل مشاهده نمودن رویداد در سایت برای عموم.</target>
+        <target>قابل مشاهده نمودن رویداد در وب‌سایت برای عموم.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.0">
         <source>Show from</source>
@@ -227,7 +227,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.start.1">
         <source>Do not show the event on the website before this day.</source>
-        <target>نشان ندادن رویداد در وب سایت تا قبل از این روز.</target>
+        <target>نشان ندادن رویداد در وب‌سایت تا قبل از این روز.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.stop.0">
         <source>Show until</source>

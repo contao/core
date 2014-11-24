@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="FMD.nl_list.0">
         <source>Newsletter list</source>
-        <target>لیست خبرنامه‌ها</target>
+        <target>فهرست خبرنامه‌ها</target>
       </trans-unit>
       <trans-unit id="FMD.nl_list.1">
         <source>Adds a list of newsletters to the page</source>

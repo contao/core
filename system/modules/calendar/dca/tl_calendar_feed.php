@@ -372,7 +372,7 @@ class tl_calendar_feed extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->Calendar->generateFeed($id, true);
+			$this->Calendar->generateFeedsByCalendar($id);
 		}
 
 		$this->import('Automator');

@@ -123,11 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_comments.approved">
         <source>Approved</source>
-        <target>承認</target>
+        <target>承認済み</target>
       </trans-unit>
       <trans-unit id="tl_comments.pending">
         <source>Awaiting moderation</source>
-        <target>審査待ち中</target>
+        <target>審査待ち</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>

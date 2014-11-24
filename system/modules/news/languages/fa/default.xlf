@@ -23,11 +23,11 @@
       </trans-unit>
       <trans-unit id="MSC.comments">
         <source>Comments</source>
-        <target>نظرات</target>
+        <target>دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="MSC.commentCount">
         <source>(comments: %s)</source>
-        <target>(نظرات: %s)</target>
+        <target>(دیدگاه‌ها: %s)</target>
       </trans-unit>
       <trans-unit id="MSC.news_items">
         <source>%d item(s)</source>

@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.title.1">
         <source>Please enter the title of the channel.</source>
-        <target>لطفا یک عنوان برای کانال وارد نمائید .</target>
+        <target>لطفا یک عنوان برای کانال وارد نمایید .</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.0">
         <source>Redirect page</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.0">
         <source>SMTP password</source>
-        <target>رمزعبور SMTP</target>
+        <target>گذرواژه SMTP</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
-        <target>رمزعبور SMTP را وارد نمایید.</target>
+        <target>گذرواژه SMTP را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.smtpEnc.0">
         <source>SMTP encryption</source>

@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.name.1">
         <source>Please enter the style sheet name.</source>
-        <target>لطفا نام شیوه‌نامه را وارد نمائید.</target>
+        <target>لطفا نام شیوه‌نامه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.disablePie.0">
         <source>Disable CSS3PIE</source>
@@ -23,15 +23,15 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.1">
         <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
-        <target>می‌توانید اندازه پرونده به بایت را در این قسمت وارد نمایید تا تصاویر به صورت رشته در برگه سبک الحاق شوند. 0 را برای غیرفعال کردن این ویژگی وارد نمایید.</target>
+        <target>می‌توانید اندازه پرونده به بایت را در این قسمت وارد نمایید تا تصاویر به صورت رشته در شیوه‌نامه الحاق شوند. 0 را برای غیرفعال کردن این ویژگی وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.0">
         <source>Conditional comment</source>
-        <target>یادداشت مشروط</target>
+        <target>دیدگاه مشروط</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.1">
         <source>Conditional comments allow you to create Internet Explorer specific style sheets (e.g. &lt;em&gt;if lt IE 9&lt;/em&gt;).</source>
-        <target>یادداشت‌های مشروط به شما شیوه‌نامه‌های مخصوص اینترنت اکسپلورر را مشخص نمایید (&lt;em&gt;if lt IE 9&lt;/em&gt;به عنوان مثال )</target>
+        <target>دیدگاه‌های مشروط به شما شیوه‌نامه‌های مخصوص اینترنت اکسپلورر را مشخص نمایید (&lt;em&gt;if lt IE 9&lt;/em&gt;به عنوان مثال )</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.media.0">
         <source>Media types</source>
@@ -59,11 +59,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.source.0">
         <source>Source files</source>
-        <target>منبع فایل‌ها</target>
+        <target>منبع پرونده‌ها</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.source.1">
         <source>Here you can upload one or more .css files to be imported.</source>
-        <target>لطفاً یک یا چند فایل از دایرکتوری فایل‌ها انتخاب کنید.</target>
+        <target>اینجا می‌توانید یک یا چند پرونده .css را برای وارد کردن بارگذاری نمایید</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.tstamp.0">
         <source>Revision date</source>
@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.import.0">
         <source>CSS import</source>
-        <target>وارد کردن CSS</target>
+        <target>وارد کردن سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.import.1">
         <source>Import existing CSS files</source>
-        <target>وارد کردن فایل‌های CSS موجود</target>
+        <target>وارد کردن پرونده‌های سی‌اس‌اس موجود</target>
       </trans-unit>
     </body>
   </file>

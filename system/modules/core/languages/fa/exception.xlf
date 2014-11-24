@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="XPT.tokenRetry">
         <source>Please &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;click this link&lt;/a&gt; and try again. Do not use the back button of your browser.</source>
-        <target>لطفا &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;این لینک&lt;/a&gt; را دوباره کلیک نمایید. از دکمه برگشت مرورگر استفاده نکنید.</target>
+        <target>لطفا &lt;a href=&quot;javascript:window.location.href=window.location.href&quot;&gt;این پیوند&lt;/a&gt; را دوباره کلیک نمایید. از دکمه برگشت مرورگر استفاده نکنید.</target>
       </trans-unit>
       <trans-unit id="XPT.tokenExplainOne">
         <source>This error occurs if there is a POST request without a valid authentication token. In Contao 2.10, the referer check has been replaced with a request token system. If the problem persists, you may be using an incompatible third-party extension or have not correctly updated your Contao installation.</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="XPT.noLayoutFix">
         <source>Make sure that you have assigned a page layout to each website root page in the site structure.</source>
-        <target>مطمئن شوید که شما برای صفحه ریشه وب‌سایت در ساختار سایت یک چیدمان اختصاص داده‌اید.</target>
+        <target>مطمئن شوید که شما برای صفحه ریشه وب‌سایت در ساختار وب‌سایت یک چیدمان اختصاص داده‌اید.</target>
       </trans-unit>
       <trans-unit id="XPT.noLayoutExplain">
         <source>For more information, please refer to the &lt;a href=&quot;https://contao.org/manual/managing-pages.html&quot; target=&quot;_blank&quot;&gt;Contao manual&lt;/a&gt;.</source>

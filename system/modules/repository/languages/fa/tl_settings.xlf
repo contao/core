@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_settings.repository_wsdl.0">
         <source>Extension repository URL</source>
-        <target>URL مخزن افزونه‌ها</target>
+        <target>نشانی وب مخزن افزونه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
-        <target>شما می‌توانید URL فایل WSDL مخزن افزونه‌ها را وارد نمایید.</target>
+        <target>شما می‌توانید نشانی وب پرونده WSDL مخزن افزونه‌ها را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>

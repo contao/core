@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.jumpTo.1">
         <source>Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.</source>

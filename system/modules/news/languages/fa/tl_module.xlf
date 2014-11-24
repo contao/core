@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_archives.1">
         <source>Please select one or more news archives.</source>
-        <target>لطفاً یک یا چند بایگانی خبر را انتخاب نمائید.</target>
+        <target>لطفا یک یا چند بایگانی خبر را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_featured.0">
         <source>Featured items</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_metaFields.1">
         <source>Here you can select the meta fields.</source>
-        <target>لطفا فیلدهایی متا را که مایلید انتخاب نمائید.</target>
+        <target>اینجا می‌توانید فیلدهایی متا را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_template.0">
         <source>News template</source>

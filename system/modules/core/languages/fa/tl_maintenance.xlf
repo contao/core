@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.cacheTables.1">
         <source>Please select the data you want to purge or rebuild.</source>
-        <target>لطفاً داده‌هایی را که می‌خواهید پاک‌سازی شوند را انتخاب کنید.</target>
+        <target>لطفا داده‌هایی را که می‌خواهید پاک‌سازی شوند را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.0">
         <source>Front end user</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.1">
         <source>Automatically log in a front end user to index protected pages.</source>
-        <target>ورود خودکار کاربر وب‌سایت برای اندیکس کردن صفحات حفاظت شده.</target>
+        <target>ورود خودکار کاربر وب‌سایت برای اندیکس کردن صفحه‌ها حفاظت شده.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.job">
         <source>Job</source>
@@ -35,15 +35,15 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.liveUpdate">
         <source>Live Update</source>
-        <target>بروزرسانی لایو</target>
+        <target>روزآمدسازی لایو</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.liveUpdateId">
         <source>Live Update ID</source>
-        <target>شناسه بروزرسانی لایو</target>
+        <target>شناسه روزآمدسازی لایو</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.toLiveUpdate">
         <source>Go to the Live Update</source>
-        <target>رفتن به بروزرسانی لایو</target>
+        <target>رفتن به روزآمدسازی لایو</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.upToDate">
         <source>Your Contao version %s is up to date</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.emptyLuId">
         <source>Please enter your Live Update ID</source>
-        <target>شناسه بروزرسانی لایو خود را وارد نمائید</target>
+        <target>شناسه روزآمدسازی لایو خود را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
@@ -67,19 +67,19 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.runLiveUpdate">
         <source>Run the update</source>
-        <target>اجرای بروزرسانی</target>
+        <target>اجرای روزآمدسازی</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.toc">
         <source>Content of the update archive</source>
-        <target>محتوای بایگانی بروزرسانی</target>
+        <target>محتوای بایگانی روزآمدسازی</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.backup">
         <source>Backuped files</source>
-        <target>فایل‌های پشتیبانی</target>
+        <target>پرونده‌های پشتیبانی</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.update">
         <source>Updated files</source>
-        <target>فایل‌های بروزرسانی</target>
+        <target>پرونده‌های روزآمدسازی</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.searchIndex">
         <source>Rebuild the search index</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.0">
         <source>Purge the version table</source>
-        <target>پاکسازی جدول ویرایش</target>
+        <target>پاکسازی جدول نسخه</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.1">
         <source>Removes the cached versions of the front end pages.</source>
-        <target>نسخه‌های نهان‌گاه صفحات مدیریت را پاک می‌کند</target>
+        <target>نسخه‌های نهان‌گاه صفحه‌ها مدیریت را پاک می‌کند</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>
@@ -179,7 +179,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.1">
         <source>Removes the cached versions of the DCA and language files. You can permanently disable the internal cache in the back end settings.</source>
-        <target>نسخه‌های ذخیره شده فایل‌های DCA و زبان را حذف می‌کند. شما می‌توانید نهان‌گاه داخلی را در تنظیمات مدیریت برای همیشه غیرفعال نمایید.</target>
+        <target>نسخه‌های ذخیره شده پرونده‌های DCA و زبان را حذف می‌کند. شما می‌توانید نهان‌گاه داخلی را در تنظیمات مدیریت برای همیشه غیرفعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.temp.0">
         <source>Purge the temp folder</source>

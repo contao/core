@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_module.nl_subscribe.1">
         <source>You can use the wildcards &lt;em&gt;##channels##&lt;/em&gt; (channel names), &lt;em&gt;##domain##&lt;/em&gt; (domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</source>
-        <target>Please enter the text of the subscription confirmation e-mail. You can use the wildcards &lt;em&gt;##channel##&lt;/em&gt; (channel name), &lt;em&gt;##domain##&lt;/em&gt; (current domain name) and &lt;em&gt;##link##&lt;/em&gt; (activation link).</target>
+        <target>شما می‌توانید از وایلدکارت‌ها استفاده کنید &lt;em&gt;##channels##&lt;/em&gt; (نام‌های کانال), &lt;em&gt;##domain##&lt;/em&gt; (نام دامنه) and &lt;em&gt;##link##&lt;/em&gt; (پیوند فعال‌سازی).</target>
       </trans-unit>
       <trans-unit id="tl_module.nl_unsubscribe.0">
         <source>Unsubscription message</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_module.nl_template.1">
         <source>Here you can select the newsletter template.</source>
-        <target>لطفا یک قالب برای ماژول انتخاب نمائید . شما می توانید یک قالب سفارشی به فولدر &lt;em&gt;templates&lt;/em&gt; اضافه نمائید . نام فایل قالب خبرنامه باید با &lt;em&gt;nl_&lt;/em&gt; شروع گردد و همچنین حتماً باید با پسوند &lt;em&gt;.tpl&lt;/em&gt; پایان یابد .</target>
+        <target>اینجا می‌توانید یک قالب برای ماژول انتخاب نمایید . شما می توانید یک قالب سفارشی به فولدر &lt;em&gt;templates&lt;/em&gt; اضافه نمایید . نام فایل قالب خبرنامه باید با &lt;em&gt;nl_&lt;/em&gt; شروع گردد و همچنین حتماً باید با پسوند &lt;em&gt;.tpl&lt;/em&gt; پایان یابد .</target>
       </trans-unit>
       <trans-unit id="tl_module.text_subscribe.0">
         <source>Your subscription on %s</source>
@@ -60,7 +60,7 @@
 
 Please click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.
 </source>
-        <target>شماره مشترک خبرنامه ##channel## در ##domain## شده اید . لطفا با کلیک بر روی لینک ##link## مراحل اشتراک خود را تکمیل نمائید . در صورتی که خودتان تقاضای اشتراک نداده اید ، می توانید از این پست الکترونیک چشم پوشی نمائید .</target>
+        <target>شماره مشترک خبرنامه ##channel## در ##domain## شده اید. لطفا با کلیک بر روی پیوند ##link## مراحل اشتراک خود را تکمیل نمایید. در صورتی که خودتان تقاضای اشتراک نداده اید، می توانید از این ایمیل چشم پوشی نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.text_unsubscribe.0">
         <source>Your subscription on %s</source>

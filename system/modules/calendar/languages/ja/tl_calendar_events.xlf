@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.0">
         <source>Redirect page</source>
-        <target>リダイレクトページ</target>
+        <target>リダイレクト先のページ</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the event.</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.enclosure_legend">
         <source>Enclosures</source>
-        <target>添付ファイル</target>
+        <target>エンクロージャー</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.source_legend">
         <source>Redirect target</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_events.editheader.0">
         <source>Edit calendar</source>
-        <target>カレンダーを変更</target>
+        <target>カレンダーを編集</target>
       </trans-unit>
       <trans-unit id="tl_calendar_events.editheader.1">
         <source>Edit the calendar settings</source>

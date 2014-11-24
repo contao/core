@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar_feed.title.1">
         <source>Please enter a feed title.</source>
-        <target>عنوان خوراک را وارد نمایید.</target>
+        <target>لطفا عنوان خوراک را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar_feed.alias.0">
         <source>Feed alias</source>

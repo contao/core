@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>
-        <target>لطفا عنوان چیدمان را وارد نمائید.</target>
+        <target>لطفا عنوان چیدمان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.fallback.0">
         <source>Default layout</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.rows.1">
         <source>Please choose the number of rows.</source>
-        <target>تعداد ردیف‌ها را انتخاب نمایید</target>
+        <target>لطفا تعداد ردیف‌ها را انتخاب نمایید</target>
       </trans-unit>
       <trans-unit id="tl_layout.1rw.0">
         <source>Main row only</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.headerHeight.1">
         <source>Please enter the height of the page header.</source>
-        <target>لطفاً ارتفاع قسمت فوقانی را وارد نمائید.</target>
+        <target>لطفاً ارتفاع قسمت فوقانی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.footerHeight.0">
         <source>Footer height</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.footerHeight.1">
         <source>Please enter the height of the page footer.</source>
-        <target>لطفا ارتفاع قسمت زیرین را وارد نمائید.</target>
+        <target>لطفا ارتفاع قسمت زیرین را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.cols.0">
         <source>Columns</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.cols.1">
         <source>Please choose the number of columns.</source>
-        <target>لطفاً تعداد ستون‌ها را مشخص نمائید.</target>
+        <target>لطفاً تعداد ستون‌ها را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.1cl.0">
         <source>Main column only</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.widthLeft.1">
         <source>Please enter the width of the left column.</source>
-        <target>لطفاً عرض ستون سمت چپ را وارد نمائید.</target>
+        <target>لطفاً عرض ستون سمت چپ را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.widthRight.0">
         <source>Right column width</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.widthRight.1">
         <source>Please enter the width of the right column.</source>
-        <target>لطفاً عرض ستون سمت راست را وارد نمائید.</target>
+        <target>لطفاً عرض ستون سمت راست را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sections.0">
         <source>Custom layout sections</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
         <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>می‌توانید لیست جدا شده با کاما از بخش‌های چیدمان اختصاصی را وارد نمایید.</target>
+        <target>می‌توانید فهرست جدا شده با کاما از بخش‌های چیدمان اختصاصی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.framework.0">
         <source>CSS framework</source>
-        <target>چارچوب CSS</target>
+        <target>چارچوب سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_layout.framework.1">
         <source>Here you can activate the components of the Contao CSS framework.</source>
-        <target>اینجا می‌توانید اجزاء چارچوب CSS کانتائو را فعال نمایید.</target>
+        <target>اینجا می‌توانید اجزاء چارچوب سی‌اس‌اس کانتائو را فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
@@ -175,15 +175,15 @@
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.1">
         <source>Adds a responsive 12-column grid that is triggered by the CSS classes &quot;grid1&quot; to &quot;grid12&quot; and &quot;offset1&quot; to &quot;offset12&quot;.</source>
-        <target>شبکه ۱۲-ستونی پاسخگو را اضافه می‌کند که با کلاس‌های CSS &quot;grid1&quot; تا &quot;grid12&quot; و &quot;offset1&quot; تا &quot;offset12&quot; مشخص می‌شوند.</target>
+        <target>شبکه ۱۲-ستونی پاسخگو را اضافه می‌کند که با کلاس‌های سی‌اس‌اس &quot;grid1&quot; تا &quot;grid12&quot; و &quot;offset1&quot; تا &quot;offset12&quot; مشخص می‌شوند.</target>
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.0">
         <source>CSS reset</source>
-        <target>بازتنظیم CSS</target>
+        <target>بازتنظیم سی‌اس‌اس</target>
       </trans-unit>
       <trans-unit id="tl_layout.reset.css.1">
         <source>Removes the inconsistent default styling of HTML elements in different browsers.</source>
-        <target>سبک‌های پیش‌فرض متناقض المان‌های HTML را در مرورگرهای متفاوت حذف می‌نماید.</target>
+        <target>سبک‌های پیش‌فرض متناقض المان‌های اچ‌تی‌ام‌ال را در مرورگرهای متفاوت حذف می‌نماید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.form.css.0">
         <source>Basic forms</source>
@@ -195,11 +195,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.0">
         <source>TinyMCE style sheet</source>
-        <target>برگه سبک TinyMCE</target>
+        <target>شیوه‌نامه TinyMCE</target>
       </trans-unit>
       <trans-unit id="tl_layout.tinymce.css.1">
         <source>Includes the &lt;em&gt;tinymce.css&lt;/em&gt; style sheet from your upload directory.</source>
-        <target>گنجاندن برگه سبک &lt;em&gt;tinymce.css&lt;/em&gt; از فهرست بارگذاری شما.</target>
+        <target>گنجاندن شیوه‌نامه &lt;em&gt;tinymce.css&lt;/em&gt; از فهرست بارگذاری شما.</target>
       </trans-unit>
       <trans-unit id="tl_layout.external.0">
         <source>Additional style sheets</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.template.1">
         <source>Here you can select the page template.</source>
-        <target>می‌توانید قالب صفحه را انتخاب نمائید.</target>
+        <target>می‌توانید قالب صفحه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.doctype.0">
         <source>Output format</source>
@@ -367,7 +367,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.width.1">
         <source>The overall width will be applied to the wrapper element.</source>
-        <target>لطفا مقدار عرض کل چیدمان را وارد نمائید.</target>
+        <target>لطفا مقدار عرض کل چیدمان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.align.0">
         <source>Alignment</source>
@@ -375,7 +375,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.align.1">
         <source>Please select the alignment of the page.</source>
-        <target>لطفا محل قرارگیری وب‌سایت را انتخاب نمائید.</target>
+        <target>لطفا محل قرارگیری وب‌سایت را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.title_legend">
         <source>Title</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.feed_legend">
         <source>RSS/Atom feeds</source>
-        <target>خوراک‌های RSS/Atom</target>
+        <target>خوراک‌های آراس‌اس/اتم</target>
       </trans-unit>
       <trans-unit id="tl_layout.modules_legend">
         <source>Front end modules</source>
@@ -439,7 +439,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.moo_local">
         <source>MooTools - local file</source>
-        <target>استفاده از فایل‌های محلی</target>
+        <target>استفاده از پرونده‌های محلی</target>
       </trans-unit>
       <trans-unit id="tl_layout.moo_googleapis">
         <source>MooTools - googleapis.com</source>
@@ -451,7 +451,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.html5">
         <source>HTML</source>
-        <target>HTML</target>
+        <target>اچ‌تی‌ام‌ال</target>
       </trans-unit>
       <trans-unit id="tl_layout.xhtml_strict">
         <source>XHTML Strict</source>

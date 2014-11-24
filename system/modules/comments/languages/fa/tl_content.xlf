@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.1">
         <source>The number of comments per page. Set to 0 to disable pagination.</source>
-        <target>لطفا تعداد نظرات در هر صفحه را وارد نمائید ( 0 = نامحدود ) .</target>
+        <target>لطفا تعداد دیدگاه‌ها در هر صفحه را وارد نمایید ( 0 = نامحدود ) .</target>
       </trans-unit>
       <trans-unit id="tl_content.com_moderate.0">
         <source>Moderate</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_content.com_moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>در صورت فعال بودن این گزینه ، نظرات ارسالی قبل از نمایش در سایت باید ابتدا توسط مدیر سایت تائید گردند .</target>
+        <target>دیدگاه‌ها ارسالی قبل از نمایش در وب‌سایت باید ابتدا توسط مدیر وب‌سایت تائید گردند .</target>
       </trans-unit>
       <trans-unit id="tl_content.com_bbcode.0">
         <source>Allow BBCode</source>
@@ -35,11 +35,11 @@
       </trans-unit>
       <trans-unit id="tl_content.com_requireLogin.0">
         <source>Require login to comment</source>
-        <target>برای نظردهی نیاز به ورود است</target>
+        <target>برای ارسال دیدگاه نیاز به ورود است</target>
       </trans-unit>
       <trans-unit id="tl_content.com_requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
-        <target>اجازه داده فقط به کاربران تایید شده برای ایجاد نظرات</target>
+        <target>اجازه داده فقط به کاربران تایید شده برای ایجاد دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_content.com_disableCaptcha.0">
         <source>Disable the security question</source>
@@ -51,15 +51,15 @@
       </trans-unit>
       <trans-unit id="tl_content.com_template.0">
         <source>Comments template</source>
-        <target>قالب نظرات</target>
+        <target>قالب دیدگاه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_content.com_template.1">
         <source>Here you can select the comments template.</source>
-        <target>لطفا یک طرح بندی برای نظرات انتخاب نمائید . شما می توانید یک طرح بندی سفارشی به فولدر &lt;em&gt;templates&lt;/em&gt; اضافه نمائید . نام فایل طرح بندی نظرات باید با &lt;em&gt;com_&lt;/em&gt; شروع گردد و همچنین حتماً باید با پسوند &lt;em&gt;.tpl&lt;/em&gt; پایان یابد .</target>
+        <target>اینجا می‌توانید قالب دیدگاه‌ها را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.comment_legend">
         <source>Comment settings</source>
-        <target>تنظیمات نظر</target>
+        <target>تنظیمات دیدگاه</target>
       </trans-unit>
     </body>
   </file>
