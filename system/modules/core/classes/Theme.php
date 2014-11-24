@@ -1005,6 +1005,10 @@ class Theme extends \Backend
 					}
 				}
 			}
+			elseif (\Config::get('uploadPath') != 'files' && $t == 'tl_style' && ($k == 'bgimage' || $k == 'liststyleimage'))
+			{
+				$v = $this->standardizeUploadPath($v);
+			}
 
 			$value = $xml->createTextNode($v);
 			$field->appendChild($value);
@@ -1152,6 +1156,6 @@ class Theme extends \Backend
 			return $strPath;
 		}
 
-		return 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strPath);
+		return preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', 'files/', $strPath);
 	}
 }
