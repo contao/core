@@ -517,7 +517,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets
-						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
+						elseif (($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -979,7 +979,7 @@ class Theme extends \Backend
 					}
 				}
 			}
-			elseif (\Config::get('uploadPath') != 'files' && $t == 'tl_style' && ($k == 'bgimage' || $k == 'liststyleimage'))
+			elseif ($t == 'tl_style' && ($k == 'bgimage' || $k == 'liststyleimage'))
 			{
 				$v = $this->standardizeUploadPath($v);
 			}
@@ -1102,12 +1102,6 @@ class Theme extends \Backend
 			return '';
 		}
 
-		// Using the default path already
-		if (\Config::get('uploadPath') == 'files')
-		{
-			return $strPath;
-		}
-
 		return preg_replace('@^(tl_)?files/@', \Config::get('uploadPath') . '/', $strPath);
 	}
 
@@ -1122,12 +1116,6 @@ class Theme extends \Backend
 		if ($strPath == '')
 		{
 			return '';
-		}
-
-		// Using the default path already
-		if (\Config::get('uploadPath') == 'files')
-		{
-			return $strPath;
 		}
 
 		return preg_replace('@^' . preg_quote(\Config::get('uploadPath'), '@') . '/@', 'files/', $strPath);
