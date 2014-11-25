@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Back port the fixes from #7475 and #7473.
+
+### Fixed
 Send the same cache headers for cached and uncached pages (see #7455).
 
 ### Fixed
