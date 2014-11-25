@@ -2029,7 +2029,8 @@ var Backend =
 						widthInput.readOnly = false;
 						heightInput.readOnly = false;
 					}
-				};
+				}
+			;
 
 			update();
 			select.addEvent('change', update);
@@ -2129,11 +2130,7 @@ var Backend =
 				isDrawing = false;
 			},
 			init = function() {
-				var box = el.getParent().getNext('.tl_box');
-				if (!box) {
-					box = el.getParent();
-				}
-				box.getElements('input[name^="importantPart"]').each(function(input) {
+				el.getParent().getElements('input[name^="importantPart"]').each(function(input) {
 					['x', 'y', 'width', 'height'].each(function(key) {
 						if (input.get('name').substr(13, key.length) === key.capitalize()) {
 							inputElements[key] = input = $(input);
@@ -2143,13 +2140,9 @@ var Backend =
 				if (Object.getLength(inputElements) !== 4) {
 					return;
 				}
-				if (box.get('class') === 'tl_box') {
-					box.setStyle('display', 'none');
-				} else {
-					Object.each(inputElements, function(input) {
-						input.getParent().setStyle('display', 'none');
-					});
-				}
+				Object.each(inputElements, function(input) {
+					input.getParent().setStyle('display', 'none');
+				});
 				el.addClass('tl_edit_preview_enabled');
 				partElement = new Element('div', {
 					'class': 'tl_edit_preview_important_part'
@@ -2168,7 +2161,8 @@ var Backend =
 					touchcancel: stop,
 					resize: updateImage
 				});
-			};
+			}
+		;
 
 		window.addEvent('domready', init);
 	}
