@@ -48,6 +48,13 @@ class FormCaptcha extends \Widget
 	 */
 	protected $strQuestion;
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-captcha';
+
 
 	/**
 	 * Initialize the object

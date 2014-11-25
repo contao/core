@@ -323,8 +323,6 @@ class DC_File extends \DataContainer implements \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 

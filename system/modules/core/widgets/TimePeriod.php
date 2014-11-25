@@ -97,7 +97,7 @@ class TimePeriod extends \Widget
 		{
 			if ($k != 'unit')
 			{
-				$varInput[$k] = parent::validator(trim($v));
+				$varInput[$k] = parent::validator($v);
 			}
 		}
 

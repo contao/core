@@ -284,19 +284,22 @@ class FileUpload extends \Backend
 			return false;
 		}
 
+		$objFile = new \File($strImage, true);
+
 		// Not an image
-		if (($arrImageSize = @getimagesize(TL_ROOT . '/' . $strImage)) === false)
+		if (!$objFile->isSvgImage && !$objFile->isGdImage)
 		{
 			return false;
 		}
 
-		$strName = basename($strImage);
+		$arrImageSize = $objFile->imageSize;
 
 		// The image is too big to be handled by the GD library
 		if ($arrImageSize[0] > \Config::get('gdMaxImgWidth') || $arrImageSize[1] > \Config::get('gdMaxImgHeight'))
 		{
-			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully but was too big to be resized automatically', __METHOD__, TL_FILES);
+			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $objFile->basename));
+			$this->log('File "' . $objFile->basename . '" uploaded successfully but was too big to be resized automatically', __METHOD__, TL_FILES);
+
 			return false;
 		}
 
@@ -324,9 +327,10 @@ class FileUpload extends \Backend
 		if ($blnResize)
 		{
 			\Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
-			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
+			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $objFile->basename));
+			$this->log('File "' . $objFile->basename . '" uploaded successfully and was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
 			$this->blnHasResized = true;
+
 			return true;
 		}
 

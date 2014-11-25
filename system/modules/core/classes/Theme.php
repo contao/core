@@ -95,11 +95,13 @@ class Theme extends \Backend
 			// Store the field names of the theme tables
 			$arrDbFields = array
 			(
-				'tl_theme'       => $this->Database->getFieldNames('tl_theme'),
-				'tl_style_sheet' => $this->Database->getFieldNames('tl_style_sheet'),
-				'tl_style'       => $this->Database->getFieldNames('tl_style'),
-				'tl_module'      => $this->Database->getFieldNames('tl_module'),
-				'tl_layout'      => $this->Database->getFieldNames('tl_layout')
+				'tl_theme'           => $this->Database->getFieldNames('tl_theme'),
+				'tl_style_sheet'     => $this->Database->getFieldNames('tl_style_sheet'),
+				'tl_style'           => $this->Database->getFieldNames('tl_style'),
+				'tl_module'          => $this->Database->getFieldNames('tl_module'),
+				'tl_layout'          => $this->Database->getFieldNames('tl_layout'),
+				'tl_image_size'      => $this->Database->getFieldNames('tl_image_size'),
+				'tl_image_size_item' => $this->Database->getFieldNames('tl_image_size_item')
 			);
 
 			// Proceed
@@ -119,8 +121,6 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['importTheme'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
@@ -159,8 +159,6 @@ class Theme extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=importTheme', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_theme']['checking_theme'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_theme_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -204,7 +202,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+				if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout' && $table != 'tl_image_size' && $table != 'tl_image_size_item')
 				{
 					continue;
 				}
@@ -257,6 +255,15 @@ class Theme extends \Backend
 			if (!$blnTplExists)
 			{
 				$return .= "\n  " . '<p class="tl_green" style="margin:0">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['compareThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['compareThemeFiles']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['compareThemeFiles'] as $callback)
+				{
+					$return .= \System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
+				}
 			}
 
 			$return .= '
@@ -315,21 +322,7 @@ class Theme extends \Backend
 				// Extract the files
 				try
 				{
-					$strFileName = $objArchive->file_name;
-
-					// Support the old "tl_files" directory
-					if (strncmp($strFileName, 'tl_files/', 9) === 0)
-					{
-						$strFileName = substr($strFileName, 3);
-					}
-
-					// Override the files directory
-					if (\Config::get('uploadPath') != 'files' && strncmp($strFileName, 'files/', 6) === 0)
-					{
-						$strFileName = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFileName);
-					}
-
-					\File::putContent($strFileName, $objArchive->unzip());
+					\File::putContent($this->customizeUploadPath($objArchive->file_name), $objArchive->unzip());
 				}
 				catch (\Exception $e)
 				{
@@ -373,31 +366,21 @@ class Theme extends \Backend
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
-					// Support the old "tl_files" folder
-					if (strncmp($strFolder, 'tl_files/', 9) === 0)
-					{
-						$strFolder = substr($strFolder, 3);
-					}
-
-					// Override the files directory
-					if (\Config::get('uploadPath') != 'files')
-					{
-						$strFolder = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $strFolder);
-					}
-
-					\Dbafs::addResource($strFolder);
+					\Dbafs::addResource($this->customizeUploadPath($strFolder));
 				}
 			}
 
 			// Lock the tables
 			$arrLocks = array
 			(
-				'tl_files'       => 'WRITE',
-				'tl_layout'      => 'WRITE',
-				'tl_module'      => 'WRITE',
-				'tl_style_sheet' => 'WRITE',
-				'tl_style'       => 'WRITE',
-				'tl_theme'       => 'WRITE',
+				'tl_files'           => 'WRITE',
+				'tl_layout'          => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_style_sheet'     => 'WRITE',
+				'tl_style'           => 'WRITE',
+				'tl_theme'           => 'WRITE',
+				'tl_image_size'      => 'WRITE',
+				'tl_image_size_item' => 'WRITE'
 			);
 
 			// Load the DCAs of the locked tables (see #7345)
@@ -417,6 +400,8 @@ class Theme extends \Backend
 			$tl_style = $this->Database->getNextId('tl_style');
 			$tl_module = $this->Database->getNextId('tl_module');
 			$tl_layout = $this->Database->getNextId('tl_layout');
+			$tl_image_size = $this->Database->getNextId('tl_image_size');
+			$tl_image_size_item = $this->Database->getNextId('tl_image_size_item');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -431,7 +416,7 @@ class Theme extends \Backend
 				}
 
 				// Get the order fields
-				$objDcaExtractor = new \DcaExtractor($table);
+				$objDcaExtractor = \DcaExtractor::getInstance($table);
 				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Loop through the rows
@@ -445,12 +430,6 @@ class Theme extends \Backend
 					{
 						$value = $fields->item($k)->nodeValue;
 						$name = $fields->item($k)->getAttribute('name');
-
-						// Support the old "tl_files" folder
-						if (strncmp($value, 'tl_files/', 9) === 0)
-						{
-							$value = substr($value, 3);
-						}
 
 						// Skip NULL values
 						if ($value == 'NULL')
@@ -472,6 +451,10 @@ class Theme extends \Backend
 							if ($table == 'tl_style')
 							{
 								$value = $arrMapper['tl_style_sheet'][$value];
+							}
+							elseif ($table == 'tl_image_size_item')
+							{
+								$value = $arrMapper['tl_image_size'][$value];
 							}
 							else
 							{
@@ -534,7 +517,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets
-						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
+						elseif (($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -542,14 +525,14 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $vv);
+									$tmp[$kk] = $this->customizeUploadPath($vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = preg_replace('@^files/@', \Config::get('uploadPath') . '/', $value);
+								$value = $this->customizeUploadPath($value);
 							}
 						}
 
@@ -565,7 +548,7 @@ class Theme extends \Backend
 								// Do not use the FilesModel here – tables are locked!
 								$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 														  ->limit(1)
-														  ->execute($value);
+														  ->execute($this->customizeUploadPath($value));
 
 								$value = $objFile->uuid;
 							}
@@ -580,22 +563,32 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									// Support the old "tl_files" folder
-									if (strncmp($vv, 'tl_files/', 9) === 0)
-									{
-										$vv = substr($vv, 3);
-									}
-
 									// Do not use the FilesModel here – tables are locked!
 									$objFile = $this->Database->prepare("SELECT uuid FROM tl_files WHERE path=?")
 															  ->limit(1)
-															  ->execute($vv);
+															  ->execute($this->customizeUploadPath($vv));
 
 									$tmp[$kk] = $objFile->uuid;
 								}
 
 								$value = serialize($tmp);
 							}
+						}
+
+						// Adjust the imageSize widget data
+						elseif ($GLOBALS['TL_DCA'][$table]['fields'][$name]['inputType'] == 'imageSize')
+						{
+							$imageSizes = deserialize($value, true);
+
+							if (!empty($imageSizes))
+							{
+								if (is_numeric($imageSizes[2]))
+								{
+									$imageSizes[2] = $arrMapper['tl_image_size'][$imageSizes[2]];
+								}
+							}
+
+							$value = serialize($imageSizes);
 						}
 
 						$set[$name] = $value;
@@ -630,6 +623,17 @@ class Theme extends \Backend
 
 			// Notify the user
 			\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['extractThemeFiles']) && is_array($GLOBALS['TL_HOOKS']['extractThemeFiles']))
+			{
+				$intThemeId = empty($arrMapper['tl_theme']) ? null : reset($arrMapper['tl_theme']);
+
+				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
+				{
+					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
+				}
+			}
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -673,15 +677,13 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
 		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
-
-		// Add the XML document
-		$objArchive->addString($xml->saveXML(), 'theme.xml');
 
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
@@ -701,6 +703,18 @@ class Theme extends \Backend
 
 		// Add the template files
 		$this->addTemplatesToArchive($objArchive, $objTheme->templates);
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['exportTheme']) && is_array($GLOBALS['TL_HOOKS']['exportTheme']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
+			{
+				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme->id);
+			}
+		}
+
+		// Add the XML document
+		$objArchive->addString($xml->saveXML(), 'theme.xml');
 
 		// Close the archive
 		$objArchive->close();
@@ -728,7 +742,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_theme');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_theme');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_theme');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the row
@@ -753,7 +767,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style_sheet');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style_sheet');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all style sheets
@@ -777,7 +791,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_style');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_style');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_style');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the child rows
@@ -813,7 +827,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_module');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_module');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all modules
@@ -845,7 +859,7 @@ class Theme extends \Backend
 		$this->loadDataContainer('tl_layout');
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor('tl_layout');
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all layouts
@@ -856,6 +870,45 @@ class Theme extends \Backend
 		while ($objLayout->next())
 		{
 			$this->addDataRow($xml, $table, $objLayout, $arrOrder);
+		}
+	}
+
+
+	/**
+	 * Add the table tl_image_size
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database\Result
+	 */
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	{
+		// Add the tables
+		$imageSizeTable = $xml->createElement('table');
+		$imageSizeTable->setAttribute('name', 'tl_image_size');
+		$imageSizeTable = $tables->appendChild($imageSizeTable);
+
+		$imageSizeItemTable = $xml->createElement('table');
+		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
+		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
+
+		// Get all sizes
+		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
+								   ->execute($objTheme->id);
+
+		// Add the rows
+		while ($objSizes->next())
+		{
+			$this->addDataRow($xml, $imageSizeTable, $objSizes);
+
+			// Get all size items
+			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
+										   ->execute($objSizes->id);
+
+			// Add the rows
+			while ($objSizeItems->next())
+			{
+				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems);
+			}
 		}
 	}
 
@@ -892,15 +945,7 @@ class Theme extends \Backend
 
 				if ($objFile !== null)
 				{
-					// Standardize the upload path if it is not "files"
-					if (\Config::get('uploadPath') != 'files')
-					{
-						$v = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFile->path);
-					}
-					else
-					{
-						$v = $objFile->path;
-					}
+					$v = $this->standardizeUploadPath($objFile->path);
 				}
 				else
 				{
@@ -919,28 +964,24 @@ class Theme extends \Backend
 
 					if ($objFiles !== null)
 					{
-						// Standardize the upload path if it is not "files"
-						if (\Config::get('uploadPath') != 'files')
-						{
-							$arrTmp = array();
+						$arrTmp = array();
 
-							while ($objFiles->next())
-							{
-								$arrTmp[] = 'files/' . preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $objFiles->path);
-							}
-
-							$v = serialize($arrTmp);
-						}
-						else
+						while ($objFiles->next())
 						{
-							$v = serialize($objFiles->fetchEach('path'));
+							$arrTmp[] = $this->standardizeUploadPath($objFiles->path);
 						}
+
+						$v = serialize($arrTmp);
 					}
 					else
 					{
 						$v = 'NULL';
 					}
 				}
+			}
+			elseif ($t == 'tl_style' && ($k == 'bgimage' || $k == 'liststyleimage'))
+			{
+				$v = $this->standardizeUploadPath($v);
 			}
 
 			$value = $xml->createTextNode($v);
@@ -1036,6 +1077,7 @@ class Theme extends \Backend
 		}
 
 		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		array_push($arrAllowed, 'sql'); // see #7048
 
 		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
@@ -1045,5 +1087,37 @@ class Theme extends \Backend
 				$objArchive->addFile($strFolder .'/'. $strFile);
 			}
 		}
+	}
+
+
+	/**
+	 * Replace files/ with the custom upload folder name
+	 * @param string
+	 * @return string
+	 */
+	protected function customizeUploadPath($strPath)
+	{
+		if ($strPath == '')
+		{
+			return '';
+		}
+
+		return preg_replace('@^(tl_)?files/@', \Config::get('uploadPath') . '/', $strPath);
+	}
+
+
+	/**
+	 * Replace a custom upload folder name with files/
+	 * @param string
+	 * @return string
+	 */
+	protected function standardizeUploadPath($strPath)
+	{
+		if ($strPath == '')
+		{
+			return '';
+		}
+
+		return preg_replace('@^' . preg_quote(\Config::get('uploadPath'), '@') . '/@', 'files/', $strPath);
 	}
 }

@@ -203,16 +203,17 @@ class ModuleUnsubscribe extends \Module
 			}
 		}
 
-		// Prepare the e-mail text
-		$strText = str_replace('##domain##', \Idna::decode(\Environment::get('host')), $this->nl_unsubscribe);
-		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
+		// Prepare the simple token data
+		$arrData = array();
+		$arrData['domain'] = \Idna::decode(\Environment::get('host'));
+		$arrData['channel'] = $arrData['channels'] = implode("\n", $arrChannels);
 
 		// Confirmation e-mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Idna::decode(\Environment::get('host')));
-		$objEmail->text = $strText;
+		$objEmail->text = \String::parseSimpleTokens($this->nl_unsubscribe, $arrData);
 		$objEmail->sendTo($varInput);
 
 		// Redirect to the jumpTo page

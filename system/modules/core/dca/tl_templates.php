@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirmFile'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'source' => array
 			(
@@ -309,9 +309,7 @@ class tl_templates extends Backend
 		return '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
-</div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_templates']['headline'].'</h2>'.(($strError != '') ? '
+</div>'.(($strError != '') ? '
 
 <div class="tl_message">
 <p class="tl_error">'.$strError.'</p>

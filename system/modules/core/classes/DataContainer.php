@@ -497,22 +497,42 @@ class DataContainer extends \Backend
 		// Show a preview image (see #4948)
 		if ($this->strTable == 'tl_files' && $this->strField == 'name' && $this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
 		{
-			$objFile = new \File($this->objActiveRecord->path);
+			$objFile = new \File($this->objActiveRecord->path, true);
 
-			if ($objFile->isGdImage)
+			if ($objFile->isImage)
 			{
 				$image = 'placeholder.png';
 
-				if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				if ($objFile->isSvgImage || $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
-					$image = \Image::get($objFile->path, 80, 60, 'center_center');
+					if ($objFile->width > 699 || $objFile->height > 524)
+					{
+						$image = \Image::get($objFile->path, 699, 524, 'box');
+					}
+					else
+					{
+						$image = $objFile->path;
+					}
 				}
+
+				$ctrl = 'ctrl_preview_' . substr(md5($image), 0, 8);
 
 				$strPreview = '
 
-<div class="tl_edit_preview">
+<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
 ' . \Image::getHtml($image) . '
 </div>';
+
+				// Add the script to mark the important part
+				if ($image !== 'placeholder.png')
+				{
+					$strPreview .= '<script>Backend.editPreviewWizard($(\'' . $ctrl . '\'));</script>';
+
+					if (\Config::get('showHelp'))
+					{
+						$strPreview .= '<p class="tl_help tl_tip">' . $GLOBALS['TL_LANG'][$this->strTable]['edit_preview_help'] . '</p>';
+					}
+				}
 			}
 		}
 

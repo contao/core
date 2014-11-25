@@ -771,7 +771,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'email_open':
-							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" title="' . $strEmail . '" class="email">';
 							break;
 
 						case 'email_url':
@@ -903,6 +903,7 @@ abstract class Controller extends \System
 				case 'link_url':
 				case 'link_title':
 				case 'link_target':
+				case 'link_name':
 					$strTarget = null;
 
 					// Back link
@@ -1028,6 +1029,10 @@ abstract class Controller extends \System
 
 						case 'link_target':
 							$arrCache[$strTag] = $strTarget;
+							break;
+
+						case 'link_name':
+							$arrCache[$strTag] = specialchars($strName);
 							break;
 					}
 					break;
@@ -1614,13 +1619,15 @@ abstract class Controller extends \System
 					// Generate the thumbnail image
 					try
 					{
-						$src = \Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
+						$imageObj = \Image::create($strFile, array($width, $height, $mode));
+						$src = $imageObj->executeResize()->getResizedPath();
+						$objFile = new \File($src, true);
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+						if (($imgSize = $objFile->imageSize) !== false)
 						{
-							$dimensions = $imgSize[3];
+							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 						}
 
 						// Generate the HTML markup
@@ -1902,15 +1909,15 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $options->media);
 				}
 				else
 				{
-					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1920,20 +1927,20 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode, $version) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if (!$version)
+				if ($options->static)
 				{
-					$version = filemtime(TL_ROOT . '/' . $stylesheet);
-				}
+					if ($options->mtime === null)
+					{
+						$options->mtime = filemtime(TL_ROOT . '/' . $stylesheet);
+					}
 
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, $version, $media);
+					$objCombiner->add($stylesheet, $options->mtime, $options->media);
 				}
 				else
 				{
-					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1951,18 +1958,26 @@ abstract class Controller extends \System
 		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
+			$objCombinerAsync = new \Combiner();
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				list($javascript, $mode) = explode('|', $javascript);
+				$options = \String::resolveFlaggedUrl($javascript);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
-					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					if ($options->async)
+					{
+						$objCombinerAsync->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
+					else
+					{
+						$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
 				}
 				else
 				{
-					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml, $options->async) . "\n";
 				}
 			}
 
@@ -1970,6 +1985,11 @@ abstract class Controller extends \System
 			if ($objCombiner->hasEntries())
 			{
 				$strScripts = \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
+			}
+
+			if ($objCombinerAsync->hasEntries())
+			{
+				$strScripts = \Template::generateScriptTag($objCombinerAsync->getCombinedFile(), $blnXhtml, true) . "\n" . $strScripts;
 			}
 		}
 
@@ -2516,8 +2536,18 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
+		try
+		{
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass();
+			$objFile->imageSize = false;
+		}
+
+		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
-		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
 		if ($intMaxWidth === null)
 		{
@@ -2560,14 +2590,35 @@ abstract class Controller extends \System
 			}
 		}
 
-		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
+		try
+		{
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File(rawurldecode($src), true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
+		}
 
 		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+		if (($imgSize = $objFile->imageSize) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 		}
+
+		$picture['alt'] = specialchars($arrItem['alt']);
+		$picture['title'] = specialchars($arrItem['title']);
+
+		$objTemplate->picture = $picture;
 
 		// Provide an ID for single lightbox images in HTML5 (see #3742)
 		if ($strLightboxId === null && $arrItem['fullsize'])
@@ -2688,6 +2739,8 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		global $objPage;
+
 		$arrEnclosures = array();
 		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
@@ -2712,15 +2765,29 @@ abstract class Controller extends \System
 
 				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
+				$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta) && $objPage->rootFallbackLanguage !== null)
+				{
+					$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+				}
+
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
+				{
+					$arrMeta['title'] = specialchars($objFile->basename);
+				}
+
 				$arrEnclosures[] = array
 				(
-					'link'      => $objFiles->name,
+					'link'      => $arrMeta['title'],
 					'filesize'  => static::getReadableSize($objFile->filesize),
-					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
+					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
-					'mime'      => $objFile->mime
+					'mime'      => $objFile->mime,
+					'meta'      => $arrMeta
 				);
 			}
 		}

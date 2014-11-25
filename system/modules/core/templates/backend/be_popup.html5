@@ -34,8 +34,6 @@
 
   <div id="container">
     <div id="main">
-      <h1>File preview</h1>
-      <h2><?php echo $this->headline; ?></h2>
       <table class="tl_help_table">
         <tr>
           <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>

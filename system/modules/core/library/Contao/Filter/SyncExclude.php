@@ -10,7 +10,7 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Contao\Dbafs;
+namespace Contao\Filter;
 
 
 /**
@@ -23,7 +23,7 @@ namespace Contao\Dbafs;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-class Filter extends \RecursiveFilterIterator
+class SyncExclude extends \RecursiveFilterIterator
 {
 
 	/**

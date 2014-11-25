@@ -213,9 +213,7 @@ abstract class Template extends \BaseTemplate
 	 */
 	public function dumpTemplateVars()
 	{
-		echo "<pre>\n";
-		var_dump($this->arrData);
-		echo "</pre>\n";
+		dump($this->arrData);
 	}
 
 
@@ -262,7 +260,7 @@ abstract class Template extends \BaseTemplate
 		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
 		// Add the debug bar
-		if (\Config::get('debugMode') && !isset($_GET['popup']))
+		if (\Config::get('debugMode') && !\Config::get('hideDebugBar') && !isset($_GET['popup']))
 		{
 			$this->strBuffer = str_replace('</body>', $this->getDebugBar() . '</body>', $this->strBuffer);
 		}
@@ -441,9 +439,9 @@ abstract class Template extends \BaseTemplate
 	 *
 	 * @return string The markup string
 	 */
-	public static function generateStyleTag($href, $media, $xhtml=false)
+	public static function generateStyleTag($href, $media=null, $xhtml=false)
 	{
-		return '<link' . ($xhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $href . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . ($xhtml ? ' />' : '>');
+		return '<link' . ($xhtml ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $href . '"' . (($media && $media != 'all') ? ' media="' . $media . '"' : '') . ($xhtml ? ' />' : '>');
 	}
 
 
@@ -473,12 +471,13 @@ abstract class Template extends \BaseTemplate
 	 *
 	 * @param string  $src   The script path
 	 * @param boolean $xhtml True if the output shall be XHTML compliant
+	 * @param boolean $async True to add the async attribute
 	 *
 	 * @return string The markup string
 	 */
-	public static function generateScriptTag($src, $xhtml=false)
+	public static function generateScriptTag($src, $xhtml=false, $async=false)
 	{
-		return '<script' . ($xhtml ? ' type="text/javascript"' : '') . ' src="' . $src . '"></script>';
+		return '<script' . ($xhtml ? ' type="text/javascript"' : '') . ' src="' . $src . '"' . ($async && !$xhtml ? ' async' : '') . '></script>';
 	}
 
 

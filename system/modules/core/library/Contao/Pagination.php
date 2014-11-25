@@ -265,7 +265,10 @@ class Pagination
 		$objTemplate->hasNext = $this->hasNext();
 		$objTemplate->hasLast = $this->hasLast();
 
+		// Backwards compatibility
 		$objTemplate->items = $this->getItemsAsString($strSeparator);
+
+		$objTemplate->pages = $this->getItemsAsArray();
 		$objTemplate->total = sprintf($this->lblTotal, $this->intPage, $this->intTotalPages);
 
 		$objTemplate->first = array
@@ -316,6 +319,31 @@ class Pagination
 	{
 		$arrLinks = array();
 
+		foreach ($this->getItemsAsArray() as $arrItem)
+		{
+			if ($arrItem['href'] === null)
+			{
+				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $arrItem['page']);
+			}
+			else
+			{
+				$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>', $arrItem['href'], $arrItem['title'], $arrItem['page']);
+			}
+		}
+
+		return implode($strSeparator, $arrLinks);
+	}
+
+
+	/**
+	 * Generate all page links and return them as array
+	 *
+	 * @return array The page links as array
+	 */
+	public function getItemsAsArray()
+	{
+		$arrLinks = array();
+
 		$intNumberOfLinks = floor($this->intNumberOfLinks / 2);
 		$intFirstOffset = $this->intPage - $intNumberOfLinks - 1;
 
@@ -349,17 +377,25 @@ class Pagination
 		{
 			if ($i == $this->intPage)
 			{
-				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $i);
-				continue;
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => null,
+					'title' => null
+				);
 			}
-
-			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
-								$this->linkToPage($i),
-								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
-								$i);
+			else
+			{
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => $this->linkToPage($i),
+					'title' => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['goToPage'], $i))
+				);
+			}
 		}
 
-		return implode($strSeparator, $arrLinks);
+		return $arrLinks;
 	}
 
 

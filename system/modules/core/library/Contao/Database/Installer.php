@@ -298,7 +298,7 @@ class Installer extends \Controller
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -450,6 +450,7 @@ class Installer extends \Controller
 				if ($field['type'] != 'index')
 				{
 					unset($field['index']);
+					unset($field['origtype']);
 
 					// Field type
 					if ($field['length'] != '')

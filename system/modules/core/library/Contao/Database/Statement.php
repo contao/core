@@ -52,6 +52,18 @@ abstract class Statement
 	protected $strQuery;
 
 	/**
+	 * Query start
+	 * @var int
+	 */
+	protected $intQueryStart;
+
+	/**
+	 * Query end
+	 * @var int
+	 */
+	protected $intQueryEnd;
+
+	/**
 	 * Autocommit indicator
 	 * @var boolean
 	 */
@@ -277,11 +289,15 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
+		$this->intQueryStart = microtime(true);
+
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
 		{
 			throw new \Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
+
+		$this->intQueryEnd = microtime(true);
 
 		// No result set available
 		if (!is_resource($this->resResult) && !is_object($this->resResult))
@@ -395,6 +411,7 @@ abstract class Statement
 			$arrData['returned'] = sprintf('%s row(s) returned', $objResult->numRows);
 		}
 
+		$arrData['duration'] = \System::getFormattedNumber((($this->intQueryEnd - $this->intQueryStart) * 1000), 3) . ' ms';
 		$GLOBALS['TL_DEBUG']['database_queries'][] = $arrData;
 	}
 

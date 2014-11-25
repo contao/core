@@ -285,9 +285,6 @@ class ZipWriter
 			 ($arrTime['seconds'] >> 1)
 		);
 
-		$strTime = '\x' . $hexTime[6] . $hexTime[7] . '\x' . $hexTime[4] . $hexTime[5] . '\x' . $hexTime[2] . $hexTime[3] . '\x' . $hexTime[0] . $hexTime[1];
-		eval('$strTime = "' . $strTime . '";');
-
-		return $strTime;
+		return pack("H*", $hexTime[6] . $hexTime[7] . $hexTime[4] . $hexTime[5] . $hexTime[2] . $hexTime[3] . $hexTime[0] . $hexTime[1]);
 	}
 }

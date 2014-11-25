@@ -48,6 +48,13 @@ class FormTextField extends \Widget
 	 */
 	protected $strTemplate = 'form_textfield';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-text';
+
 
 	/**
 	 * Add specific attributes
@@ -78,8 +85,11 @@ class FormTextField extends \Widget
 				parent::__set($strKey, $varValue);
 				break;
 
+			case 'min':
+			case 'max':
+			case 'step':
 			case 'placeholder':
-				$this->arrAttributes['placeholder'] = $varValue;
+				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
 			default:
@@ -129,6 +139,9 @@ class FormTextField extends \Widget
 							{
 								$this->addAttribute('step', 'any');
 							}
+							// NO break; here
+
+						case 'natural':
 							return 'number';
 							break;
 
@@ -180,7 +193,7 @@ class FormTextField extends \Widget
 			$varInput = \Idna::encodeEmail($varInput);
 		}
 
-		return parent::validator(trim($varInput));
+		return parent::validator($varInput);
 	}
 
 

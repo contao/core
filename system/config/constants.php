@@ -14,8 +14,8 @@
 /**
  * Core version
  */
-define('VERSION', '3.3');
-define('BUILD', '7');
+define('VERSION', '3.4');
+define('BUILD', '0');
 define('LONG_TERM_SUPPORT', false);
 
 
@@ -30,6 +30,7 @@ define('CSS3PIE', '1.0.0');
 define('DROPZONE', '3.8.5');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
+define('RESPIMAGE', '0.9.6');
 define('SWIPE', '2.0');
 define('JQUERY', '1.11.0');
 define('JQUERY_UI', '1.10.4');

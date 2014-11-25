@@ -146,6 +146,12 @@ class PageRegular extends \Frontend
 
 		$this->Template->sections = $arrCustomSections;
 
+		// Mark RTL languages (see #7171)
+		if ($GLOBALS['TL_LANG']['MSC']['textDirection'] == 'rtl')
+		{
+			$this->Template->isRTL = true;
+		}
+
 		// HOOK: modify the page or layout object
 		if (isset($GLOBALS['TL_HOOKS']['generatePage']) && is_array($GLOBALS['TL_HOOKS']['generatePage']))
 		{
@@ -421,6 +427,12 @@ class PageRegular extends \Frontend
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
 		}
 
+		// Picturefill
+		if ($objLayout->picturefill)
+		{
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/respimage/' . $GLOBALS['TL_ASSETS']['RESPIMAGE'] . '/respimage.min.js|static';
+		}
+
 		// Check whether TL_APPEND_JS exists (see #4890)
 		if (!empty($arrAppendJs))
 		{
@@ -445,6 +457,7 @@ class PageRegular extends \Frontend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
+		$this->Template->isRTL = false;
 	}
 
 
@@ -484,6 +497,12 @@ class PageRegular extends \Frontend
 		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . \Config::get('uploadPath') . '/tinymce.css'))
 		{
 			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
+		}
+
+		// Make sure TL_USER_CSS is set
+		if (!is_array($GLOBALS['TL_USER_CSS']))
+		{
+			$GLOBALS['TL_USER_CSS'] = array();
 		}
 
 		// User style sheets
@@ -591,12 +610,24 @@ class PageRegular extends \Frontend
 
 			if ($objFiles !== null)
 			{
+				$arrFiles = array();
+
 				while ($objFiles->next())
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
+						$arrFiles[] = $objFiles->path . '|static';
 					}
+				}
+
+				// Inject the external style sheets before or after the internal ones (see #6937)
+				if ($objLayout->loadingOrder == 'external_first')
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], 0, 0, $arrFiles);
+				}
+				else
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], count($GLOBALS['TL_USER_CSS']), 0, $arrFiles);
 				}
 			}
 		}

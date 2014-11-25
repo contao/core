@@ -133,8 +133,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addTime', 'addImage', 'recurring', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{details_legend},location,teaser;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop'
+		'__selector__'                => array('addTime', 'addImage', 'recurring', 'addEnclosure', 'source', 'published'),
+		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{details_legend},location,teaser;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -146,7 +146,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'addEnclosure'                => 'enclosure',
 		'source_internal'             => 'jumpTo',
 		'source_article'              => 'articleId',
-		'source_external'             => 'url,target'
+		'source_external'             => 'url,target',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -195,9 +196,10 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 1,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
@@ -307,9 +309,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -317,7 +319,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -378,11 +380,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'timePeriod',
 			'options'                 => array('days', 'weeks', 'months', 'years'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_events'],
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_calendar_events', 'checkInterval')
-			),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'minval'=>1, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'repeatEnd' => array
@@ -395,7 +393,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['recurrences'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'addEnclosure' => array
@@ -411,7 +409,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'source' => array
@@ -486,7 +484,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'filter'                  => true,
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -713,24 +711,6 @@ class tl_calendar_events extends Backend
 		}
 
 		return $varValue;
-	}
-
-
-	/**
-	 * Check for a valid recurrence interval
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function checkInterval($varValue)
-	{
-		$varValue = deserialize($varValue);
-
-		if ($varValue['value'] < 1)
-		{
-			$varValue['value'] = 1;
-		}
-
-		return serialize($varValue);
 	}
 
 

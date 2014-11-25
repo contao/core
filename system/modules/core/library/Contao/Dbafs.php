@@ -111,7 +111,7 @@ class Dbafs
 		{
 			// Get a filtered list of all files
 			$objFiles = new \RecursiveIteratorIterator(
-				new \Dbafs\Filter(
+				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/' . $strResource,
 						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -464,7 +464,7 @@ class Dbafs
 
 		// Get a filtered list of all files
 		$objFiles = new \RecursiveIteratorIterator(
-			new \Dbafs\Filter(
+			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(
 					TL_ROOT . '/' . \Config::get('uploadPath'),
 					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -571,7 +571,7 @@ class Dbafs
 			else
 			{
 				// Check whether the MD5 hash has changed
-				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath);
+				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath, true);
 				$strType = ($objModel->hash != $objResource->hash) ? 'Changed' : 'Unchanged';
 
 				// Add a log entry

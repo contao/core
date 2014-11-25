@@ -402,6 +402,29 @@ class PageModel extends \Model
 
 
 	/**
+	 * Find the language fallback page by hostname
+	 *
+	 * @param string $strHost    The hostname
+	 * @param array  $arrOptions An optional options array
+	 *
+	 * @return \Model|null The page model or null if there is not fallback page
+	 */
+	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
+	}
+
+
+	/**
 	 * Find the parent pages of a page
 	 *
 	 * @param integer $intId The page's ID
@@ -571,8 +594,23 @@ class PageModel extends \Model
 			// Store whether the root page has been published
 			$time = time();
 			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$this->rootIsFallback = ($objParentPage->fallback != '');
+			$this->rootIsFallback = true;
 			$this->rootUseSSL = $objParentPage->useSSL;
+			$this->rootFallbackLanguage = $objParentPage->language;
+
+			// Store the fallback language (see #6874)
+			if (!$objParentPage->fallback)
+			{
+				$this->rootIsFallback = false;
+				$this->rootFallbackLanguage = null;
+
+				$objFallback = static::findPublishedFallbackByHostname($objParentPage->dns);
+
+				if ($objFallback !== null)
+				{
+					$this->rootFallbackLanguage = $objFallback->language;
+				}
+			}
 		}
 
 		// No root page found

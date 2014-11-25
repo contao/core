@@ -22,7 +22,7 @@
                   <a href="<?php echo $faq->href; ?>"<?php echo $faq->attributes; ?> title="<?php echo $faq->alt; ?>">
                 <?php endif; ?>
 
-                <img src="<?php echo $faq->src; ?>"<?php echo $faq->imgSize; ?> alt="<?php echo $faq->alt; ?>">
+                <?php $this->insert('picture_default', $faq->picture); ?>
 
                 <?php if ($faq->href): ?>
                   </a>

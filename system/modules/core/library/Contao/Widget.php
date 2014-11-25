@@ -74,6 +74,12 @@ abstract class Widget extends \BaseTemplate
 	protected $strClass;
 
 	/**
+	 * CSS class prefix
+	 * @var string
+	 */
+	protected $strPrefix;
+
+	/**
 	 * Wizard
 	 * @var string
 	 */
@@ -157,6 +163,7 @@ abstract class Widget extends \BaseTemplate
 	 * * label:             the field label
 	 * * value:             the field value
 	 * * class:             one or more CSS classes
+	 * * prefix:            the CSS class prefix
 	 * * template:          the template name
 	 * * wizard:            the field wizard markup
 	 * * alt:               an alternative text
@@ -195,6 +202,8 @@ abstract class Widget extends \BaseTemplate
 	 * * useHomeDir:        store uploaded files in the user's home directory
 	 * * trailingSlash:     add or remove a trailing slash
 	 * * spaceToUnderscore: convert spaces to underscores
+	 * * nullIfEmpty:       set to NULL if the value is empty
+	 * * doNotTrim:         do not trim the user input
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -230,6 +239,10 @@ abstract class Widget extends \BaseTemplate
 				{
 					$this->strClass = trim($this->strClass . ' ' . $varValue);
 				}
+				break;
+
+			case 'prefix':
+				$this->strPrefix = $varValue;
 				break;
 
 			case 'template':
@@ -279,14 +292,7 @@ abstract class Widget extends \BaseTemplate
 
 			case 'disabled':
 			case 'readonly':
-				if ($varValue)
-				{
-					$this->blnSubmitInput = false;
-				}
-				else
-				{
-					$this->blnSubmitInput = true;
-				}
+				$this->blnSubmitInput = $varValue ? false : true;
 				// Do not add a break; statement here
 
 			case 'autofocus':
@@ -317,6 +323,7 @@ abstract class Widget extends \BaseTemplate
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
 			case 'nullIfEmpty':
+			case 'doNotTrim':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -326,6 +333,11 @@ abstract class Widget extends \BaseTemplate
 
 			case 'dataContainer':
 				$this->objDca = $varValue;
+				break;
+
+			case strncmp($strKey, 'ng-', 3) === 0:
+			case strncmp($strKey, 'data-', 5) === 0:
+				$this->arrAttributes[$strKey] = $strKey;
 				break;
 
 			default:
@@ -340,14 +352,18 @@ abstract class Widget extends \BaseTemplate
 	 *
 	 * Supported keys:
 	 *
-	 * * id:       the field ID
-	 * * name:     the field name
-	 * * label:    the field label
-	 * * value:    the field value
-	 * * class:    one or more CSS classes
-	 * * template: the template name
-	 * * wizard:   the field wizard markup
-	 * * required: makes the widget a required field
+	 * * id:            the field ID
+	 * * name:          the field name
+	 * * label:         the field label
+	 * * value:         the field value
+	 * * class:         one or more CSS classes
+	 * * prefix:        the CSS class prefix
+	 * * template:      the template name
+	 * * wizard:        the field wizard markup
+	 * * required:      makes the widget a required field
+	 * * forAttribute:  the "for" attribute
+	 * * dataContainer: the data container object
+	 * * activeRecord:  the active record
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -384,6 +400,10 @@ abstract class Widget extends \BaseTemplate
 
 			case 'class':
 				return $this->strClass;
+				break;
+
+			case 'prefix':
+				return $this->strPrefix;
 				break;
 
 			case 'template':
@@ -849,7 +869,10 @@ abstract class Widget extends \BaseTemplate
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
+		if (!$this->doNotTrim)
+		{
+			$varInput = trim($varInput);
+		}
 
 		if ($varInput == '')
 		{
@@ -880,6 +903,16 @@ abstract class Widget extends \BaseTemplate
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
+		if ($this->minval && is_numeric($varInput) && $varInput < $this->minval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minval'], $this->strLabel, $this->minval));
+		}
+
+		if ($this->maxval && is_numeric($varInput) && $varInput > $this->maxval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxval'], $this->strLabel, $this->maxval));
+		}
+
 		if ($this->rgxp != '')
 		{
 			switch ($this->rgxp)
@@ -905,6 +938,14 @@ abstract class Widget extends \BaseTemplate
 					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
+					}
+					break;
+
+				// Natural numbers (positive integers)
+				case 'natural':
+					if (!\Validator::isNatural($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['natural'], $this->strLabel));
 					}
 					break;
 

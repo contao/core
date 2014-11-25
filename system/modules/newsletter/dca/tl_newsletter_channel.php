@@ -197,7 +197,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		)
 	)

@@ -189,7 +189,8 @@ fieldset.checkbox_container,fieldset.radio_container {
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
 	background-color:#ebfdd7;
 }
-.tl_text[disabled],.tl_text_2[disabled],.tl_text_3[disabled],.tl_text_4[disabled],.tl_textarea[disabled],.tl_text_unit[disabled],.tl_text_trbl[disabled],.tl_text_interval[disabled] {
+.tl_text[disabled],.tl_text_2[disabled],.tl_text_3[disabled],.tl_text_4[disabled],.tl_textarea[disabled],.tl_text_unit[disabled],.tl_text_trbl[disabled],.tl_text_interval[disabled],
+.tl_text[readonly],.tl_text_2[readonly],.tl_text_3[readonly],.tl_text_4[readonly],.tl_textarea[readonly],.tl_text_unit[readonly],.tl_text_trbl[readonly],.tl_text_interval[readonly] {
 	color:#bbb;
 	background-color:#f9f9f9;
 	border:1px solid #c8c8c8;

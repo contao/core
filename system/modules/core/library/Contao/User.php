@@ -303,7 +303,7 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::postUnsafeRaw('password'), $this->password) === $this->password);
+			$blnAuthenticated = \Encryption::verify(\Input::postUnsafeRaw('password'), $this->password);
 		}
 		else
 		{

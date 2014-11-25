@@ -44,6 +44,19 @@ class Validator
 
 
 	/**
+	 * Natural numbers (nonnegative integers)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a natural number
+	 */
+	public static function isNatural($varValue)
+	{
+		return preg_match('/^\d+$/', $varValue);
+	}
+
+
+	/**
 	 * Alphabetic characters (including full stop [.] minus [-] and space [ ])
 	 *
 	 * @param mixed $varValue The value to be validated
@@ -331,7 +344,7 @@ class Validator
 	/**
 	 * Insecure path potentially containing directory traversal
 	 *
-	 * @param string $varValue The file path
+	 * @param string $strPath The file path
 	 *
 	 * @return boolean True if the file path is insecure
 	 */
@@ -339,7 +352,7 @@ class Validator
 	{
 		// Normalize backslashes
 		$strPath = str_replace('\\', '/', $strPath);
-		$strPath = preg_replace('#/+#', '/', $strPath);
+		$strPath = preg_replace('#//+#', '/', $strPath);
 
 		// Begins with ./
 		if (substr($strPath, 0, 2) == './')

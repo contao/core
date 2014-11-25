@@ -59,6 +59,21 @@ namespace  {
 	class StyleSheets extends \Contao\StyleSheets {}
 	class Theme extends \Contao\Theme {}
 	class Versions extends \Contao\Versions {}
+	class BackendChangelog extends \Contao\BackendChangelog {}
+	class BackendConfirm extends \Contao\BackendConfirm {}
+	class BackendFile extends \Contao\BackendFile {}
+	class BackendHelp extends \Contao\BackendHelp {}
+	class BackendIndex extends \Contao\BackendIndex {}
+	class BackendInstall extends \Contao\BackendInstall {}
+	class BackendMain extends \Contao\BackendMain {}
+	class BackendPage extends \Contao\BackendPage {}
+	class BackendPassword extends \Contao\BackendPassword {}
+	class BackendPopup extends \Contao\BackendPopup {}
+	class BackendPreview extends \Contao\BackendPreview {}
+	class BackendSwitch extends \Contao\BackendSwitch {}
+	class FrontendCron extends \Contao\FrontendCron {}
+	class FrontendIndex extends \Contao\FrontendIndex {}
+	class FrontendShare extends \Contao\FrontendShare {}
 	class DC_File extends \Contao\DC_File {}
 	class DC_Folder extends \Contao\DC_Folder {}
 	class DC_Table extends \Contao\DC_Table {}
@@ -114,6 +129,7 @@ namespace  {
 	class Dbafs extends \Contao\Dbafs {}
 	class DcaExtractor extends \Contao\DcaExtractor {}
 	class DcaLoader extends \Contao\DcaLoader {}
+	class DiffRenderer extends \Contao\DiffRenderer {}
 	class Email extends \Contao\Email {}
 	class Encryption extends \Contao\Encryption {}
 	class Environment extends \Contao\Environment {}
@@ -122,6 +138,7 @@ namespace  {
 	class File extends \Contao\File {}
 	abstract class Files extends \Contao\Files {}
 	class Folder extends \Contao\Folder {}
+	class GdImage extends \Contao\GdImage {}
 	class Idna extends \Contao\Idna {}
 	class Image extends \Contao\Image {}
 	class Input extends \Contao\Input {}
@@ -129,6 +146,7 @@ namespace  {
 	abstract class Model extends \Contao\Model {}
 	class ModuleLoader extends \Contao\ModuleLoader {}
 	class Pagination extends \Contao\Pagination {}
+	class Picture extends \Contao\Picture {}
 	class Request extends \Contao\Request {}
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
@@ -148,6 +166,8 @@ namespace  {
 	class FilesModel extends \Contao\FilesModel {}
 	class FormFieldModel extends \Contao\FormFieldModel {}
 	class FormModel extends \Contao\FormModel {}
+	class ImageSizeItemModel extends \Contao\ImageSizeItemModel {}
+	class ImageSizeModel extends \Contao\ImageSizeModel {}
 	class LayoutModel extends \Contao\LayoutModel {}
 	class MemberGroupModel extends \Contao\MemberGroupModel {}
 	class MemberModel extends \Contao\MemberModel {}
@@ -231,12 +251,13 @@ namespace Database\Mysqli {
 	class Result extends \Contao\Database\Mysqli\Result {}
 	class Statement extends \Contao\Database\Mysqli\Statement {}
 }
-namespace Dbafs {
-	class Filter extends \Contao\Dbafs\Filter {}
-}
 namespace Files {
 	class Ftp extends \Contao\Files\Ftp {}
 	class Php extends \Contao\Files\Php {}
+}
+namespace Filter {
+	class SqlFiles extends \Contao\Filter\SqlFiles {}
+	class SyncExclude extends \Contao\Filter\SyncExclude {}
 }
 namespace Model {
 	class Collection extends \Contao\Model\Collection {}

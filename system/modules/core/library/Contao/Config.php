@@ -301,13 +301,28 @@ class Config
 
 
 	/**
-	 * Return true if the installation is completed
+	 * Return true if the installation is complete
 	 *
-	 * @return boolean True if the local configuration file exists
+	 * @return boolean True if the installation is complete
 	 */
 	public function isComplete()
 	{
-		return static::$blnHasLcf;
+		if (!static::$blnHasLcf)
+		{
+			return false;
+		}
+
+		if (!$this->get('licenseAccepted'))
+		{
+			return false;
+		}
+
+		if ($this->get('dbDriver') == '')
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 
@@ -434,6 +449,7 @@ class Config
 		// Load the default files
 		include TL_ROOT . '/system/config/default.php';
 		include TL_ROOT . '/system/config/agents.php';
+		include TL_ROOT . '/system/config/mimetypes.php';
 
 		// Include the local configuration file
 		if (($blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php')) === true)

@@ -175,8 +175,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'search'                  => true,
+			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 1,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
@@ -224,9 +225,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -234,7 +235,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -293,7 +294,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'noComments' => array
@@ -403,7 +404,7 @@ class tl_faq extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
-'.$arrRow['answer'].'
+' . $this->replaceInsertTags($arrRow['answer'], false) . '
 </div>' . "\n";
 	}
 

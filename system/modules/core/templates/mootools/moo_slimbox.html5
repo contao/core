@@ -1,7 +1,7 @@
 <?php
 
 // Add slimbox style sheet
-$GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . $GLOBALS['TL_ASSETS']['SLIMBOX'] . '/css/slimbox.css||static';
+$GLOBALS['TL_CSS'][] = 'assets/mootools/slimbox/' . $GLOBALS['TL_ASSETS']['SLIMBOX'] . '/css/slimbox.css|static';
 
 ?>
 

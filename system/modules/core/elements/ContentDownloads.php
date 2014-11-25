@@ -135,6 +135,18 @@ class ContentDownloads extends \ContentElement
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($objPage->rootFallbackLanguage !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+					}
+				}
+
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
@@ -157,7 +169,7 @@ class ContentDownloads extends \ContentElement
 					'id'        => $objFiles->id,
 					'uuid'      => $objFiles->uuid,
 					'name'      => $objFile->basename,
-					'title'     => $arrMeta['title'],
+					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'link'      => $arrMeta['title'],
 					'caption'   => $arrMeta['caption'],
 					'href'      => $strHref,
@@ -199,6 +211,18 @@ class ContentDownloads extends \ContentElement
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($objPage->rootFallbackLanguage !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->rootFallbackLanguage);
+						}
+					}
+
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
@@ -221,7 +245,7 @@ class ContentDownloads extends \ContentElement
 						'id'        => $objSubfiles->id,
 						'uuid'      => $objSubfiles->uuid,
 						'name'      => $objFile->basename,
-						'title'     => $arrMeta['title'],
+						'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 						'link'      => $arrMeta['title'],
 						'caption'   => $arrMeta['caption'],
 						'href'      => $strHref,

@@ -247,7 +247,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['minlength'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'maxlength' => array
@@ -255,7 +255,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'size' => array
@@ -264,7 +264,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'default'                 => array(4, 40),
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'multiple' => array
@@ -280,7 +280,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['mSize'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit'),
+			'eval'                    => array('rgxp'=>'natural'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'extensions' => array
@@ -368,7 +368,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'fSize' => array
@@ -376,7 +376,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['fSize'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'customTpl' => array
