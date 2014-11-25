@@ -41,7 +41,7 @@
     <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
     <delete dir="contao-${version}/vendor/tecnick.com/tcpdf/examples" />
     <delete includeemptydirs="true" verbose="true">
-      <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/tests/**" />
+      <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/test/**,*/*/tests/**" />
     </delete>
     <delete includeemptydirs="true" verbose="true">
       <fileset dir="contao-${version}/vendor/tecnick.com/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
