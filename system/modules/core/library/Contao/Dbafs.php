@@ -89,12 +89,12 @@ class Dbafs
 					unset($arrPaths[$i]);
 					$arrPids[$objModels->path] = $objModels->uuid;
 				}
-			}
 
-			// Store the model if it exists
-			if ($objModels->path == $strResource)
-			{
-				$objModel = $objModels->current();
+				// Store the model if it exists
+				if ($objModels->path == $strResource)
+				{
+					$objModel = $objModels->current();
+				}
 			}
 		}
 
@@ -571,7 +571,7 @@ class Dbafs
 			else
 			{
 				// Check whether the MD5 hash has changed
-				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath);
+				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath, true);
 				$strType = ($objModel->hash != $objResource->hash) ? 'Changed' : 'Unchanged';
 
 				// Add a log entry

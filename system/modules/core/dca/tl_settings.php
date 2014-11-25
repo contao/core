@@ -412,7 +412,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
 			'inputType'               => 'textStore',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'storeSmtpPass')
+			)
 		),
 		'smtpEnc' => array
 		(
@@ -651,6 +655,23 @@ class tl_settings extends Backend
 
 
 	/**
+	 * Store the unfiltered SMTP password
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function storeSmtpPass($varValue, DataContainer $dc)
+	{
+		if (isset($_POST[$dc->field]))
+		{
+			return Input::postUnsafeRaw($dc->field);
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Make sure that "html5" is in the list of valid template
 	 * files, so the back end works correctly (see #3398)
 	 * @param mixed
@@ -675,13 +696,12 @@ class tl_settings extends Backend
 	 */
 	public function checkUploadPath($varValue)
 	{
-		$varValue = str_replace(array('../', '/..', '/.', './', '://'), '', $varValue);
-
-		if ($varValue == '.' || $varValue == '..' || $varValue == '')
+		if ($varValue == '' || Validator::isInsecurePath($varValue))
 		{
-			$varValue = 'files';
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
-		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
+
+		if (preg_match('@^(assets|contao|plugins|share|system|templates|vendor)(/|$)@', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}

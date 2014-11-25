@@ -174,7 +174,7 @@ abstract class ModuleNews extends \Module
 				{
 					$size = deserialize($this->imgSize);
 
-					if ($size[0] > 0 || $size[1] > 0)
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrArticle['size'] = $this->imgSize;
 					}

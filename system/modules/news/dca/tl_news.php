@@ -283,7 +283,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'imageSize',
 			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -291,7 +291,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -765,7 +765,7 @@ class tl_news extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id);
+			$this->News->generateFeedsByArchive($id);
 		}
 
 		$this->import('Automator');
@@ -979,6 +979,6 @@ class tl_news extends Backend
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);
 		$this->import('News');
-		$this->News->generateFeed(CURRENT_ID);
+		$this->News->generateFeedsByArchive(CURRENT_ID);
 	}
 }

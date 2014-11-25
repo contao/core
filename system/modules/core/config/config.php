@@ -356,8 +356,9 @@ $GLOBALS['TL_CROP'] = array
 	(
 		'proportional', 'box'
 	),
-	'crop' => array
+	'exact' => array
 	(
+		'crop',
 		'left_top',    'center_top',    'right_top',
 		'left_center', 'center_center', 'right_center',
 		'left_bottom', 'center_bottom', 'right_bottom'
@@ -416,6 +417,12 @@ $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
  * Do not index a page if one of the following parameters is set
  */
 $GLOBALS['TL_NOINDEX_KEYS'] = array('id', 'file', 'token', 'day', 'month', 'year', 'page', 'PHPSESSID');
+
+
+/**
+ * Register the supported CSS units
+ */
+$GLOBALS['TL_CSS_UNITS'] = array('px', '%', 'em', 'rem', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'pt', 'pc', 'in', 'cm', 'mm');
 
 
 /**

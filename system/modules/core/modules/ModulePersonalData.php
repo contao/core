@@ -123,6 +123,14 @@ class ModulePersonalData extends \Module
 
 		$blnModified = false;
 		$objMember = \MemberModel::findByPk($this->User->id);
+		$strTable = $objMember->getTable();
+
+		// Initialize the versioning (see #7415)
+		$objVersions = new \Versions($strTable, $objMember->id);
+		$objVersions->setUsername($objMember->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Build the form
 		foreach ($this->editable as $field)
@@ -293,29 +301,10 @@ class ModulePersonalData extends \Module
 		{
 			$objMember->save();
 
-			$strTable = $objMember->getTable();
-
 			// Create a new version
 			if ($GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
 			{
-				$intVersion = 1;
-
-				$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-											 ->execute($objMember->id, $strTable);
-
-				if ($objVersion->version !== null)
-				{
-					$intVersion = $objVersion->version + 1;
-				}
-
-				$strUrl = 'contao/main.php?do=member&act=edit&id=' . $objMember->id . '&rt=1';
-
-				$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
-							   ->execute($objMember->id, $strTable);
-
-				$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-							   ->execute($objMember->id, time(), $intVersion, $strTable, $objMember->username, 0, $objMember->firstname . ' ' . $objMember->lastname, $strUrl, serialize($objMember->row()));
-
+				$objVersions->create();
 				$this->log('A new version of record "'.$strTable.'.id='.$objMember->id.'" has been created'.$this->getParentEntries($strTable, $objMember->id), __METHOD__, TL_GENERAL);
 			}
 		}

@@ -235,7 +235,7 @@ class Pagination
 		$this->strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 
 		// Prepare the URL
-		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+		foreach (preg_split('/&(amp;)?/', \Environment::get('queryString'), -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
 			if (strpos($fragment, $this->strParameter . '=') === false)
 			{

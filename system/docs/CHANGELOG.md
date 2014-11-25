@@ -1,6 +1,80 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.0 (2014-11-25)
+--------------------------
+
+### Fixed
+Consider image size IDs when overriding the default image size (see #7470).
+
+### Fixed
+Do not require to set a media query in the image sizes.
+
+### Fixed
+Fixed a potential directory traversal vulnerability.
+
+### Fixed
+Fixed a severe XSS vulnerability. In this context, the insert tag flags
+`base64_encode` and `base64_decode` have been removed.
+
+### Fixed
+Also use simple tokens for the newsletter subscription modules (see #7446).
+
+### Fixed
+Only show the root page languages in the meta wizard (see #7112).
+
+### Fixed
+Correctly create the initial version in the personal data module (see #7415).
+
+### Fixed
+Check if a DB driver has been configured in Config::isComplete() (see #7412).
+
+### Fixed
+Correctly mark deleted versions in Versions::addToTemplate() (see #7442).
+
+### Fixed
+Replace insert tags of RTE fields in the back end preview (see #7428).
+
+### Fixed
+Handle nested insert tags in strip_insert_tags().
+
+### Fixed
+Correctly store the model in Dbafs::addResource() (see #7440).
+
+### Fixed
+Send the request token when toggling the visibility of an element (see #7406).
+
+### Fixed
+Always apply the IE security fix in the Environment class (see #7453).
+
+### New
+Added the CSS units `vw`, `vh`, `vmin` and `vmax` (see #7417).
+
+### Fixed
+Replace leafo/lessphp with oyejorge/less.php (see 7012).
+
+### Fixed
+Show the correct root icon in the page/file picker (see #7409).
+
+### Fixed
+Add an empty option to the image size select menu (see #7436).
+
+### Fixed
+Nest wrapper elements in the back end preview (see #7434).
+
+### Fixed
+Correctly handle archives being part of multiple RSS feeds (see #7398).
+
+### Fixed
+Correctly handle `0` in utf8_convert_encoding() (see #7403).
+
+### Fixed
+Send a 301 redirect to forward to the language root page (see #7420).
+
+### Fixed
+Handle SVG images in the default back end uploader.
+
+
 Version 3.4.0-RC1 (2014-10-31)
 ------------------------------
 

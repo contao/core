@@ -950,7 +950,7 @@ class Image
 	public static function getPixelValue($size)
 	{
 		$value = preg_replace('/[^0-9\.-]+/', '', $size);
-		$unit = preg_replace('/[^ceimnprtx%]/', '', $size);
+		$unit = preg_replace('/[^acehimnprtvwx%]/', '', $size);
 
 		// Convert 12pt = 16px = 1em = 100%
 		switch ($unit)

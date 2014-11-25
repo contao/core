@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_image_size'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['resizeMode'],
 			'inputType'               => 'select',
 			'options'                 => array('proportional', 'box', 'crop'),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'reference'               => &$GLOBALS['TL_LANG']['tl_image_size'],
 			'exclude'                 => true,
 			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'clr w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"

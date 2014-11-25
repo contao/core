@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,protected;importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
+		'default'                     => 'name,protected,importantPartX,importantPartY,importantPartWidth,importantPartHeight;meta'
 	),
 
 	// Fields
@@ -421,7 +421,7 @@ class tl_files extends Backend
 
 		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(pathinfo($dc->id, PATHINFO_EXTENSION), trimsplit(',', Config::get('validImageTypes'))))
 		{
-			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(';importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
+			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(',importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
 		}
 	}
 
