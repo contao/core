@@ -352,7 +352,7 @@ class Validator
 	{
 		// Normalize backslashes
 		$strPath = str_replace('\\', '/', $strPath);
-		$strPath = preg_replace('#/+#', '/', $strPath);
+		$strPath = preg_replace('#//+#', '/', $strPath);
 
 		// Begins with ./
 		if (substr($strPath, 0, 2) == './')
