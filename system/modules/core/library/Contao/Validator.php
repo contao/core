@@ -344,7 +344,7 @@ class Validator
 	/**
 	 * Insecure path potentially containing directory traversal
 	 *
-	 * @param string $varValue The file path
+	 * @param string $strPath The file path
 	 *
 	 * @return boolean True if the file path is insecure
 	 */
