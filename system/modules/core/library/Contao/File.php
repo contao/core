@@ -26,6 +26,26 @@ namespace Contao;
  *
  *     File::putContent('test.txt', 'This is a test');
  *
+ * @property int      $size        the file size
+ * @property string   $name        the file name and extension
+ * @property string   $dirname     the path of the parent folder
+ * @property string   $extension   the file extension
+ * @property string   $filename    the file name without extension
+ * @property string   $mime        the file's mime type
+ * @property string   $hash        the file's MD5 checksum
+ * @property int      $ctime       the file's ctime
+ * @property int      $mtime       the file's mtime
+ * @property int      $atime       the file's atime
+ * @property string   $icon        the name of the corresponding mime icon
+ * @property string   $path        the path to the file
+ * @property int      $width       the file width (images only)
+ * @property int      $height      the file height (images only)
+ * @property bool     $isGdImage   true if the file can be handled by the GDlib
+ * @property int      $channels    the number of channels (images only)
+ * @property int      $bits        the number of bits for each color (images only)
+ * @property bool     $isRgbImage  true if the file is an RGB image
+ * @property bool     $isCmykImage true if the file is a CMYK image
+ * @property resource $handle      the file handle (returned by fopen())
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
