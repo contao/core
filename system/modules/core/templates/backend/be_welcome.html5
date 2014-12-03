@@ -33,7 +33,7 @@
           <tr class="<?php echo $version['class']; ?> click2edit" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">
             <td><?php echo $version['date']; ?></td>
             <td><?php echo $version['username']; ?></td>
-            <td><?php echo $version['fromTable']; ?></td>
+            <td><?php echo $version['shortTable']; ?></td>
             <td><?php echo $version['pid']; ?></td>
             <td><?php echo $version['description'] ?: '-'; ?></td>
             <td><?php echo $version['active'] ? '<strong>' . $version['version'] . '</strong>' : $version['version']; ?></td>

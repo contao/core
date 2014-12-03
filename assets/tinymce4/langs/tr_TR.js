@@ -128,6 +128,7 @@ tinymce.addI18n('tr_TR',{
 "Finish": "Bitir",
 "Ignore all": "T\u00fcm\u00fcn\u00fc yoksay",
 "Ignore": "Yoksay",
+"Add to Dictionary": "S\u00f6zl\u00fc\u011fe ekle",
 "Insert row before": "\u00d6ncesine yeni sat\u0131r ekle",
 "Rows": "Sat\u0131rlar",
 "Height": "Y\u00fckseklik",

@@ -45,7 +45,8 @@ abstract class Controller extends \System
 	 *
 	 * @return string The path to the template file
 	 *
-	 * @throws \Exception If $strFormat is unknown
+	 * @throws \InvalidArgumentException If $strFormat is unknown
+	 * @throws \RuntimeException         If the template group folder is insecure
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
@@ -54,7 +55,7 @@ abstract class Controller extends \System
 
 		if (!in_array($strFormat, $arrAllowed))
 		{
-			throw new \Exception("Invalid output format $strFormat");
+			throw new \InvalidArgumentException('Invalid output format ' . $strFormat);
 		}
 
 		$strTemplate = basename($strTemplate);
@@ -63,11 +64,15 @@ abstract class Controller extends \System
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-			$strCustom = str_replace('../', '', $objPage->templateGroup);
 
-			if ($strCustom != '')
+			if ($objPage->templateGroup != '')
 			{
-				return \TemplateLoader::getPath($strTemplate, $strFormat, $strCustom);
+				if (\Validator::isInsecurePath($objPage->templateGroup))
+				{
+					throw new \RuntimeException('Invalid path ' . $objPage->templateGroup);
+				}
+
+				return \TemplateLoader::getPath($strTemplate, $strFormat, $objPage->templateGroup);
 			}
 		}
 
@@ -897,6 +902,7 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_target':
 				case 'link_name':
 					$strTarget = null;
 
@@ -1596,8 +1602,11 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						// Sanitize the path
-						$strFile = str_replace('../', '', $strFile);
+						// Check the path
+						if (\Validator::isInsecurePath($strFile))
+						{
+							throw new \RuntimeException('Invalid path ' . $strFile);
+						}
 					}
 
 					// Check the maximum image width
@@ -1611,8 +1620,9 @@ abstract class Controller extends \System
 					try
 					{
 						$dimensions = '';
-						$src = \Image::get($strFile, $width, $height, $mode);
-						$objFile = new \File($src);
+						$imageObj = \Image::create($strFile, array($width, $height, $mode));
+						$src = $imageObj->executeResize()->getResizedPath();
+						$objFile = new \File($src, true);
 
 						// Add the image dimensions
 						if (($imgSize = $objFile->imageSize) !== false)
@@ -1679,8 +1689,11 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
+					// Check the path
+					if (\Validator::isInsecurePath($strFile))
+					{
+						throw new \RuntimeException('Invalid path ' . $strFile);
+					}
 
 					// Include .php, .tpl, .xhtml and .html5 files
 					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
@@ -1745,8 +1758,6 @@ abstract class Controller extends \System
 						case 'ltrim':
 						case 'utf8_romanize':
 						case 'strrev':
-						case 'base64_encode':
-						case 'base64_decode':
 						case 'urlencode':
 						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
@@ -1947,6 +1958,7 @@ abstract class Controller extends \System
 		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
+			$objCombinerAsync = new \Combiner();
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
@@ -1954,11 +1966,18 @@ abstract class Controller extends \System
 
 				if ($options->static)
 				{
-					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					if ($options->async)
+					{
+						$objCombinerAsync->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
+					else
+					{
+						$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
 				}
 				else
 				{
-					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml, $options->async) . "\n";
 				}
 			}
 
@@ -1966,6 +1985,11 @@ abstract class Controller extends \System
 			if ($objCombiner->hasEntries())
 			{
 				$strScripts = \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
+			}
+
+			if ($objCombinerAsync->hasEntries())
+			{
+				$strScripts = \Template::generateScriptTag($objCombinerAsync->getCombinedFile(), $blnXhtml, true) . "\n" . $strScripts;
 			}
 		}
 
@@ -2229,7 +2253,7 @@ abstract class Controller extends \System
 		// Add the domain if it differs from the current one (see #3765 and #6927)
 		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
+			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2512,7 +2536,15 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
-		$objFile = new \File($arrItem['singleSRC']);
+		try
+		{
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass();
+			$objFile->imageSize = false;
+		}
 
 		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
@@ -2558,18 +2590,22 @@ abstract class Controller extends \System
 			}
 		}
 
-		$file = new \File($arrItem['singleSRC'], true);
-		$imageObj = new \Image($file);
-
-		$src = $imageObj->setTargetWidth($size[0])
-						->setTargetHeight($size[1])
-						->setResizeMode($size[2])
-						->executeResize()
-						->getResizedPath();
-
-		if ($src !== $arrItem['singleSRC'])
+		try
 		{
-			$objFile = new \File($src);
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File(rawurldecode($src), true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
 		}
 
 		// Image dimensions
@@ -2577,29 +2613,6 @@ abstract class Controller extends \System
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
-		}
-
-		if (is_numeric($size[2]))
-		{
-			$picture = $imageObj->getPicture($size[2]);
-		}
-		else
-		{
-			$picture = array
-			(
-				'img' => array
-				(
-					'src' => $src,
-					'srcset' => $src,
-				),
-				'sources' => array()
-			);
-
-			if (!empty($objTemplate->arrSize))
-			{
-				$picture['img']['width'] = $objTemplate->arrSize[0];
-				$picture['img']['height'] = $objTemplate->arrSize[1];
-			}
 		}
 
 		$picture['alt'] = specialchars($arrItem['alt']);
@@ -2817,12 +2830,7 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				if (\Environment::get('ssl'))
-				{
-					$url = str_replace('http://', 'https://', $url);
-				}
-
-				define($strConstant, $url . TL_PATH . '/');
+				define($strConstant, '//' . preg_replace('@https?://@', '', $url) . TL_PATH . '/');
 			}
 		}
 

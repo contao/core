@@ -230,6 +230,7 @@ abstract class Module extends \Frontend
 
 		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
+		$objTemplate->pid = $pid;
 		$objTemplate->type = get_class($this);
 		$objTemplate->cssID = $this->cssID; // see #4897
 		$objTemplate->level = 'level_' . $level++;
@@ -309,6 +310,11 @@ abstract class Module extends \Frontend
 						// DO NOT ADD A break; STATEMENT
 
 					default:
+						if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
+						{
+							$objSubpages->current()->loadDetails();
+						}
+
 						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 						break;
 				}

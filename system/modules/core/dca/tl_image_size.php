@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_image_size'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_image_size']['resizeMode'],
 			'inputType'               => 'select',
 			'options'                 => array('proportional', 'box', 'crop'),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'reference'               => &$GLOBALS['TL_LANG']['tl_image_size'],
 			'exclude'                 => true,
 			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'clr w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -262,9 +262,8 @@ class tl_image_size extends Backend
 
 	/**
 	 * Show a hint if a JavaScript library needs to be included in the page layout
-	 * @param object
 	 */
-	public function showJsLibraryHint($dc)
+	public function showJsLibraryHint()
 	{
 		if ($_POST || Input::get('act') != 'edit')
 		{
@@ -278,7 +277,7 @@ class tl_image_size extends Backend
 		}
 
 		System::loadLanguageFile('tl_layout');
-		Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_image_size']['picturefill'], $GLOBALS['TL_LANG']['tl_layout']['addPicturefill'][0]));
+		Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_image_size']['picturefill'], $GLOBALS['TL_LANG']['tl_layout']['picturefill'][0]));
 	}
 
 

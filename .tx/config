@@ -122,6 +122,16 @@ source_file = system/modules/core/languages/en/tl_form_field.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_form_field.xlf
 
+[contao.v3_4-core-tl_image_size]
+source_file = system/modules/core/languages/en/tl_image_size.xlf
+source_lang = en
+file_filter = system/modules/core/languages/<lang>/tl_image_size.xlf
+
+[contao.v3_4-core-tl_image_size_item]
+source_file = system/modules/core/languages/en/tl_image_size_item.xlf
+source_lang = en
+file_filter = system/modules/core/languages/<lang>/tl_image_size_item.xlf
+
 [contao.v3_4-core-tl_install]
 source_file = system/modules/core/languages/en/tl_install.xlf
 source_lang = en

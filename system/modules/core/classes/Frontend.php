@@ -344,7 +344,7 @@ abstract class Frontend extends \Controller
 			// Redirect to the language root (e.g. en/)
 			if (\Config::get('addLanguageToUrl') && !\Config::get('doNotRedirectEmpty') && \Environment::get('request') == '')
 			{
-				static::redirect((!\Config::get('rewriteURL') ? 'index.php/' : '') . $objRootPage->language . '/', 302);
+				static::redirect((!\Config::get('rewriteURL') ? 'index.php/' : '') . $objRootPage->language . '/', 301);
 			}
 		}
 

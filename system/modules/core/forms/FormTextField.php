@@ -85,8 +85,11 @@ class FormTextField extends \Widget
 				parent::__set($strKey, $varValue);
 				break;
 
+			case 'min':
+			case 'max':
+			case 'step':
 			case 'placeholder':
-				$this->arrAttributes['placeholder'] = $varValue;
+				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
 			default:

@@ -138,6 +138,7 @@ namespace  {
 	class File extends \Contao\File {}
 	abstract class Files extends \Contao\Files {}
 	class Folder extends \Contao\Folder {}
+	class GdImage extends \Contao\GdImage {}
 	class Idna extends \Contao\Idna {}
 	class Image extends \Contao\Image {}
 	class Input extends \Contao\Input {}
@@ -145,6 +146,7 @@ namespace  {
 	abstract class Model extends \Contao\Model {}
 	class ModuleLoader extends \Contao\ModuleLoader {}
 	class Pagination extends \Contao\Pagination {}
+	class Picture extends \Contao\Picture {}
 	class Request extends \Contao\Request {}
 	class RequestToken extends \Contao\RequestToken {}
 	class Search extends \Contao\Search {}
@@ -164,6 +166,8 @@ namespace  {
 	class FilesModel extends \Contao\FilesModel {}
 	class FormFieldModel extends \Contao\FormFieldModel {}
 	class FormModel extends \Contao\FormModel {}
+	class ImageSizeItemModel extends \Contao\ImageSizeItemModel {}
+	class ImageSizeModel extends \Contao\ImageSizeModel {}
 	class LayoutModel extends \Contao\LayoutModel {}
 	class MemberGroupModel extends \Contao\MemberGroupModel {}
 	class MemberModel extends \Contao\MemberModel {}
