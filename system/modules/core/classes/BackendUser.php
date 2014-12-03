@@ -179,7 +179,7 @@ class BackendUser extends \User
 		// Do not redirect if authentication is successful
 		if (parent::authenticate() || \Environment::get('script') == 'contao/index.php')
 		{
-			return;
+			return true;
 		}
 
 		$strRedirect = 'contao/';
