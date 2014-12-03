@@ -419,7 +419,7 @@ class tl_files extends Backend
 			return;
 		}
 
-		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(pathinfo($dc->id, PATHINFO_EXTENSION), trimsplit(',', Config::get('validImageTypes'))))
+		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(strtolower(pathinfo($dc->id, PATHINFO_EXTENSION)), trimsplit(',', Config::get('validImageTypes'))))
 		{
 			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(',importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
 		}
