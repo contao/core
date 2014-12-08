@@ -272,6 +272,15 @@ class BackendMain extends \Backend
 					$this->Template->frontendFile = '?page=' . $objArticle->pid;
 				}
 			}
+
+			// News
+			elseif (\Input::get('do') == 'news')
+			{
+				if (($objNews = \NewsModel::findByPk(CURRENT_ID)) !== null)
+				{
+					$this->Template->frontendFile = '?news=' . $objNews->id;
+				}
+			}
 		}
 
 		$this->Template->output();
