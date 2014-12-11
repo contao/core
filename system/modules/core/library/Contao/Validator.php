@@ -44,6 +44,19 @@ class Validator
 
 
 	/**
+	 * Natural numbers (nonnegative integers)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a natural number
+	 */
+	public static function isNatural($varValue)
+	{
+		return preg_match('/^\d+$/', $varValue);
+	}
+
+
+	/**
 	 * Alphabetic characters (including full stop [.] minus [-] and space [ ])
 	 *
 	 * @param mixed $varValue The value to be validated
@@ -144,7 +157,7 @@ class Validator
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,6}$/', \Idna::encodeEmail($varValue));
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,13}$/', \Idna::encodeEmail($varValue));
 	}
 
 
@@ -261,20 +274,57 @@ class Validator
 
 
 	/**
-	 * Valid UUID
+	 * Valid UUID (version 1)
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
-	 * @return boolean True if the value is an UUID
+	 * @return boolean True if the value is a UUID
 	 */
 	public static function isUuid($varValue)
 	{
+		return static::isBinaryUuid($varValue) || static::isStringUuid($varValue);
+	}
+
+
+	/**
+	 * Valid binary UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a binary UUID
+	 *
+	 * @author Martin Auswöger <https://github.com/ausi>
+	 * @author Tristan Lins <https://github.com/tristanlins>
+	 */
+	public static function isBinaryUuid($varValue)
+	{
 		if (strlen($varValue) == 16)
 		{
-			$varValue = \String::binToUuid($varValue);
+			return ($varValue & pack('H*', '000000000000F000C000000000000000')) === pack('H*', '00000000000010008000000000000000');
 		}
 
-		return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/', $varValue);
+		return false;
+	}
+
+
+	/**
+	 * Valid string UUID (version 1)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a string UUID
+	 *
+	 * @author Martin Auswöger <https://github.com/ausi>
+	 * @author Tristan Lins <https://github.com/tristanlins>
+	 */
+	public static function isStringUuid($varValue)
+	{
+		if (strlen($varValue) == 36)
+		{
+			return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-1[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$/', $varValue);
+		}
+
+		return false;
 	}
 
 
@@ -287,6 +337,53 @@ class Validator
 	 */
 	public static function isGooglePlusId($varValue)
 	{
-		return preg_match('/^([0-9]{21}|\+[\pN\pL-]+)$/u', $varValue);
+		return preg_match('/^([0-9]{21}|\+[\pN\pL_-]+)$/u', $varValue);
+	}
+
+
+	/**
+	 * Insecure path potentially containing directory traversal
+	 *
+	 * @param string $strPath The file path
+	 *
+	 * @return boolean True if the file path is insecure
+	 */
+	public static function isInsecurePath($strPath)
+	{
+		// Normalize backslashes
+		$strPath = str_replace('\\', '/', $strPath);
+		$strPath = preg_replace('#//+#', '/', $strPath);
+
+		// Begins with ./
+		if (substr($strPath, 0, 2) == './')
+		{
+			return true;
+		}
+
+		// Begins with ../
+		if (substr($strPath, 0, 3) == '../')
+		{
+			return true;
+		}
+
+		// Ends with /.
+		if (substr($strPath, -2) == '/.')
+		{
+			return true;
+		}
+
+		// Ends with /..
+		if (substr($strPath, -3) == '/..')
+		{
+			return true;
+		}
+
+		// Contains /../
+		if (strpos($strPath, '/../') !== false)
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

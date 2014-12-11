@@ -3,9 +3,7 @@
 <?php $this->block('content'); ?>
 
   <?php echo $this->embed_pre; ?>
-    <a href="<?php echo $this->href; ?>" class="hyperlink_txt" title="<?php echo $this->linkTitle; ?>"<?php echo $this->attribute; ?><?php echo $this->target; ?>>
-      <?php echo $this->link; ?>
-    </a>
+  <a href="<?php echo $this->href; ?>" class="hyperlink_txt" title="<?php echo $this->linkTitle; ?>"<?php echo $this->attribute; ?><?php echo $this->target; ?>><?php echo $this->link; ?></a>
   <?php echo $this->embed_post; ?>
 
 <?php $this->endblock(); ?>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<project name="Contao Open Source CMS" default="build" basedir=".">
+  <exec executable="system/bin/version" outputProperty="version" />
+
+  <target name="build" depends="clone, update, languages, purge, archive, cleanup">
+    <echo message="Contao ${version} build complete" />
+  </target>
+
+  <target name="clone">
+    <exec executable="git">
+      <arg value="clone" />
+      <arg value="." />
+      <arg value="contao-${version}" />
+    </exec>
+    <exec executable="git" dir="contao-${version}" failonerror="true">
+      <arg value="checkout" />
+      <arg value="--quiet" />
+      <arg value="${version}" />
+    </exec>
+    <exec executable="git" dir="contao-${version}">
+      <arg value="reset" />
+      <arg value="--hard" />
+    </exec>
+  </target>
+
+  <target name="update">
+    <exec executable="composer" dir="contao-${version}" failonerror="true">
+      <arg value="install" />
+      <arg value="--prefer-dist" />
+      <arg value="--no-dev" />
+    </exec>
+  </target>
+
+  <target name="languages">
+    <exec executable="txget" dir="contao-${version}" failonerror="true" />
+  </target>
+
+  <target name="purge">
+    <delete dir="contao-${version}/.tx" />
+    <delete dir="contao-${version}/.git" />
+    <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
+    <delete dir="contao-${version}/vendor/tecnick.com/tcpdf/examples" />
+    <delete includeemptydirs="true" verbose="true">
+      <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/test/**,*/*/tests/**" />
+    </delete>
+    <delete includeemptydirs="true" verbose="true">
+      <fileset dir="contao-${version}/vendor/tecnick.com/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
+    </delete>
+  </target>
+
+  <target name="archive">
+    <zip destfile="contao-${version}.zip">
+      <zipfileset dir="contao-${version}" prefix="contao-${version}" />
+    </zip>
+    <tar destfile="contao-${version}.tar.gz" compression="gzip" longfile="gnu">
+      <tarfileset dir="contao-${version}" prefix="contao-${version}" />
+    </tar>
+  </target>
+
+  <target name="cleanup">
+    <delete dir="contao-${version}" />
+  </target>
+
+  <target name="phpdoc">
+    <exec executable="phpdoc">
+      <arg value="--title=Contao Open Source CMS" />
+      <arg value="--target=../api" />
+      <arg value="--directory=system/modules/core/library,system/modules/*/models" />
+      <arg value="--template=responsive-contao" />
+    </exec>
+  </target>
+</project>

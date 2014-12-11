@@ -5,7 +5,7 @@
   <?php if (empty($this->articles)): ?>
     <p class="empty"><?php echo $this->empty; ?></p>
   <?php else: ?>
-    <?php foreach ($this->articles as $article) echo $article; ?>
+    <?php echo implode('', $this->articles); ?>
     <?php echo $this->pagination; ?>
   <?php endif; ?>
 

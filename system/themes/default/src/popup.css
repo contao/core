@@ -11,7 +11,7 @@
 /* Body */
 body {
 	background:#fff;
-	padding:6px 0;
+	padding:6px 0 0;
 }
 
 /* Headline */
@@ -23,12 +23,13 @@ h2 {
 	padding:7px 0 7px 36px;
 	background:url("images/help.gif") left center no-repeat;
 	font-size:14px;
+	font-size:.875rem;
 	color:#8ab858;
 }
 
 /* Preview table */
 .tl_help_table {
-	margin:0 18px;
+	margin:12px 18px 0;
 }
 .tl_help_table td {
 	padding:0 12px 3px 0;

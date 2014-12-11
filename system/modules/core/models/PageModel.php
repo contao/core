@@ -402,6 +402,29 @@ class PageModel extends \Model
 
 
 	/**
+	 * Find the language fallback page by hostname
+	 *
+	 * @param string $strHost    The hostname
+	 * @param array  $arrOptions An optional options array
+	 *
+	 * @return \Model|null The page model or null if there is not fallback page
+	 */
+	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
+	}
+
+
+	/**
 	 * Find the parent pages of a page
 	 *
 	 * @param integer $intId The page's ID
@@ -555,7 +578,9 @@ class PageModel extends \Model
 		if ($objParentPage !== null && $objParentPage->type == 'root')
 		{
 			$this->rootId = $objParentPage->id;
-			$this->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
+			$this->rootAlias = $objParentPage->alias;
+			$this->rootTitle = $objParentPage->title;
+			$this->rootPageTitle = $objParentPage->pageTitle ?: $objParentPage->title;
 			$this->domain = $objParentPage->dns;
 			$this->rootLanguage = $objParentPage->language;
 			$this->language = $objParentPage->language;
@@ -569,8 +594,23 @@ class PageModel extends \Model
 			// Store whether the root page has been published
 			$time = time();
 			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$this->rootIsFallback = ($objParentPage->fallback != '');
+			$this->rootIsFallback = true;
 			$this->rootUseSSL = $objParentPage->useSSL;
+			$this->rootFallbackLanguage = $objParentPage->language;
+
+			// Store the fallback language (see #6874)
+			if (!$objParentPage->fallback)
+			{
+				$this->rootIsFallback = false;
+				$this->rootFallbackLanguage = null;
+
+				$objFallback = static::findPublishedFallbackByHostname($objParentPage->dns);
+
+				if ($objFallback !== null)
+				{
+					$this->rootFallbackLanguage = $objFallback->language;
+				}
+			}
 		}
 
 		// No root page found
@@ -582,15 +622,6 @@ class PageModel extends \Model
 		}
 
 		$this->trail = array_reverse($trail);
-
-		// Remove insert tags from all titles (see #2853)
-		$this->title = strip_insert_tags($this->title);
-		$this->pageTitle = strip_insert_tags($this->pageTitle);
-		$this->parentTitle = strip_insert_tags($this->parentTitle);
-		$this->parentPageTitle = strip_insert_tags($this->parentPageTitle);
-		$this->mainTitle = strip_insert_tags($this->mainTitle);
-		$this->mainPageTitle = strip_insert_tags($this->mainPageTitle);
-		$this->rootTitle = strip_insert_tags($this->rootTitle);
 
 		// Do not cache protected pages
 		if ($this->protected)
@@ -612,7 +643,10 @@ class PageModel extends \Model
 			$this->datimFormat = \Config::get('datimFormat');
 		}
 
+		// Prevent saving (see #6506 and #7199)
+		$this->preventSaving();
 		$this->blnDetailsLoaded = true;
+
 		return $this;
 	}
 

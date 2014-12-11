@@ -48,6 +48,13 @@ class FormTextField extends \Widget
 	 */
 	protected $strTemplate = 'form_textfield';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-text';
+
 
 	/**
 	 * Add specific attributes
@@ -78,12 +85,85 @@ class FormTextField extends \Widget
 				parent::__set($strKey, $varValue);
 				break;
 
+			case 'min':
+			case 'max':
+			case 'step':
 			case 'placeholder':
-				$this->arrAttributes['placeholder'] = $varValue;
+				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
 			default:
 				parent::__set($strKey, $varValue);
+				break;
+		}
+	}
+
+
+	/**
+	 * Return a parameter
+	 *
+	 * @param string $strKey The parameter key
+	 *
+	 * @return mixed The parameter value
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'value':
+				// Hide the Punycode format (see #2750)
+				if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
+				{
+					return \Idna::decode($this->varValue);
+				}
+				else
+				{
+					return $this->varValue;
+				}
+				break;
+
+			case 'type':
+				// Use the HTML5 types (see #4138) but not the date, time and datetime types (see #5918)
+				if ($this->hideInput)
+				{
+					return 'password';
+				}
+
+				if ($this->strFormat != 'xhtml')
+				{
+					switch ($this->rgxp)
+					{
+						case 'digit':
+							// Allow floats (see #7257)
+							if (!isset($this->arrAttributes['step']))
+							{
+								$this->addAttribute('step', 'any');
+							}
+							// NO break; here
+
+						case 'natural':
+							return 'number';
+							break;
+
+						case 'phone':
+							return 'tel';
+							break;
+
+						case 'email':
+							return 'email';
+							break;
+
+						case 'url':
+							return 'url';
+							break;
+					}
+				}
+
+				return 'text';
+				break;
+
+			default:
+				return parent::__get($strKey);
 				break;
 		}
 	}
@@ -113,61 +193,7 @@ class FormTextField extends \Widget
 			$varInput = \Idna::encodeEmail($varInput);
 		}
 
-		return parent::validator(trim($varInput));
-	}
-
-
-	/**
-	 * Parse the template file and return it as string
-	 *
-	 * @param array $arrAttributes An optional attributes array
-	 *
-	 * @return string The template markup
-	 */
-	public function parse($arrAttributes=null)
-	{
-		// Hide the Punycode format (see #2750)
-		if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
-		{
-			$this->varValue = \Idna::decode($this->varValue);
-		}
-
-		// Use the HTML5 types (see #4138) but not the date, time and datetime types (see #5918)
-		if ($this->hideInput)
-		{
-			$this->type = 'password';
-		}
-		elseif ($this->strFormat != 'xhtml')
-		{
-			switch ($this->rgxp)
-			{
-				case 'digit':
-					$this->type = 'number';
-					break;
-
-				case 'phone':
-					$this->type = 'tel';
-					break;
-
-				case 'email':
-					$this->type = 'email';
-					break;
-
-				case 'url':
-					$this->type = 'url';
-					break;
-
-				default:
-					$this->type = 'text';
-					break;
-			}
-		}
-		else
-		{
-			$this->type = 'text';
-		}
-
-		return parent::parse($arrAttributes);
+		return parent::validator($varInput);
 	}
 
 
@@ -175,8 +201,6 @@ class FormTextField extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -186,7 +210,7 @@ class FormTextField extends \Widget
 						$this->strId,
 						($this->hideInput ? ' password' : ''),
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						specialchars($this->varValue),
+						specialchars($this->value),
 						$this->getAttributes(),
 						$this->strTagEnding) . $this->addSubmit();
 	}

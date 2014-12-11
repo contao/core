@@ -48,6 +48,13 @@ class FormRadioButton extends \Widget
 	 */
 	protected $strError = '';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-radio';
+
 
 	/**
 	 * Add specific attributes
@@ -123,19 +130,19 @@ class FormRadioButton extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Generate the options
 	 *
-	 * @param array $arrAttributes An optional attributes array
-	 *
-	 * @return string The template markup
+	 * @return array The options array
 	 */
-	public function parse($arrAttributes=null)
+	protected function getOptions()
 	{
+		$arrOptions = array();
+
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
 			$arrOptions[] = array
 			(
-				'name'       => $this->strName . ((count($this->arrOptions) > 1) ? '[]' : ''),
+				'name'       => $this->strName,
 				'id'         => $this->strId . '_' . $i,
 				'value'      => $arrOption['value'],
 				'checked'    => $this->isChecked($arrOption),
@@ -144,9 +151,7 @@ class FormRadioButton extends \Widget
 			);
 		}
 
-		$this->arrOptions = $arrOptions;
-
-		return parent::parse($arrAttributes);
+		return $arrOptions;
 	}
 
 
@@ -156,12 +161,11 @@ class FormRadioButton extends \Widget
 	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
 	 *
 	 * @return string The form field markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$this->strError = $this->getErrorAsHTML();
+
 		return $this->generate();
 	}
 
@@ -170,8 +174,6 @@ class FormRadioButton extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -193,8 +195,8 @@ class FormRadioButton extends \Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-        					$this->strId,
+			return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
@@ -207,7 +209,7 @@ class FormRadioButton extends \Widget
 		else
 		{
 	        return sprintf('<fieldset id="ctrl_%s" class="radio_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-    	    				$this->strId,
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							$this->strError,
 							$this->strName,

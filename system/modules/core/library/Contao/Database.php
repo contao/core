@@ -142,7 +142,8 @@ abstract class Database
 			'dbPconnect' => \Config::get('dbPconnect'),
 			'dbCharset'  => \Config::get('dbCharset'),
 			'dbPort'     => \Config::get('dbPort'),
-			'dbSocket'   => \Config::get('dbSocket')
+			'dbSocket'   => \Config::get('dbSocket'),
+			'dbSqlMode'  => \Config::get('dbSqlMode')
 		);
 
 		if (is_array($arrCustom))

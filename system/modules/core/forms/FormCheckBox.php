@@ -48,6 +48,13 @@ class FormCheckBox extends \Widget
 	 */
 	protected $strError = '';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-checkbox';
+
 
 	/**
 	 * Add specific attributes
@@ -148,13 +155,13 @@ class FormCheckBox extends \Widget
 
 
 	/**
-	 * Parse the template file and return it as string
+	 * Return all attributes as string
 	 *
-	 * @param array $arrAttributes An optional attributes array
+	 * @param array $arrStrip An optional array with attributes to strip
 	 *
-	 * @return string The template markup
+	 * @return string The attributes string
 	 */
-	public function parse($arrAttributes=null)
+	public function getAttributes($arrStrip=array())
 	{
 		// The "required" attribute only makes sense for single checkboxes
 		if (count($this->arrOptions) == 1 && $this->mandatory)
@@ -162,7 +169,19 @@ class FormCheckBox extends \Widget
 			$this->arrAttributes['required'] = 'required';
 		}
 
-		// Generate the options
+		return parent::getAttributes($arrStrip);
+	}
+
+
+	/**
+	 * Generate the options
+	 *
+	 * @return array The options array
+	 */
+	protected function getOptions()
+	{
+		$arrOptions = array();
+
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
 			$arrOptions[] = array
@@ -176,9 +195,7 @@ class FormCheckBox extends \Widget
 			);
 		}
 
-		$this->arrOptions = $arrOptions;
-
-		return parent::parse($arrAttributes);
+		return $arrOptions;
 	}
 
 
@@ -188,12 +205,11 @@ class FormCheckBox extends \Widget
 	 * @param boolean $blnSwitchOrder If true, the error message will be shown below the field
 	 *
 	 * @return string The form field markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$this->strError = $this->getErrorAsHTML();
+
 		return $this->generate();
 	}
 
@@ -202,8 +218,6 @@ class FormCheckBox extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
@@ -225,7 +239,7 @@ class FormCheckBox extends \Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+			return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
 	        				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
@@ -239,7 +253,7 @@ class FormCheckBox extends \Widget
 		else
 		{
 	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-    	    				$this->strId,
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							$this->strError,
 							$this->strName,

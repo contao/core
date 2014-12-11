@@ -67,6 +67,12 @@ abstract class System
 	 */
 	protected static $arrLanguageFiles = array();
 
+	/**
+	 * Available image sizes
+	 * @var array
+	 */
+	protected static $arrImageSizes = array();
+
 
 	/**
 	 * Import the Config and Session instances
@@ -304,7 +310,7 @@ abstract class System
 
 					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 					{
-						eval(static::convertXlfToPhp($strFile . '.xlf', $strCreateLang));
+						static::convertXlfToPhp($strFile . '.xlf', $strCreateLang, true);
 					}
 					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 					{
@@ -472,6 +478,39 @@ abstract class System
 
 
 	/**
+	 * Return all image sizes as array
+	 *
+	 * @return array The available image sizes
+	 */
+	public static function getImageSizes()
+	{
+		if (empty(static::$arrImageSizes))
+		{
+			try
+			{
+				$sizes = array();
+
+				$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
+
+				while ($imageSize->next())
+				{
+					$sizes[$imageSize->id] = $imageSize->name;
+					$sizes[$imageSize->id] .= ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
+				}
+
+				static::$arrImageSizes = array_merge(array('image_sizes' => $sizes), $GLOBALS['TL_CROP']);
+			}
+			catch (\Exception $e)
+			{
+				static::$arrImageSizes = $GLOBALS['TL_CROP'];
+			}
+		}
+
+		return static::$arrImageSizes;
+	}
+
+
+	/**
 	 * Urlencode a file path preserving slashes
 	 *
 	 * @param string $strPath The file path
@@ -628,17 +667,20 @@ abstract class System
 	/**
 	 * Convert an .xlf file into a PHP language file
 	 *
-	 * @param string $strName     The name of the .xlf file
-	 * @param string $strLanguage The language code
+	 * @param string  $strName     The name of the .xlf file
+	 * @param string  $strLanguage The language code
+	 * @param boolean $blnLoad     Add the labels to the global language array
 	 *
 	 * @return string The PHP code
 	 */
-	protected static function convertXlfToPhp($strName, $strLanguage)
+	protected static function convertXlfToPhp($strName, $strLanguage, $blnLoad=false)
 	{
 		// Read the .xlf file
 		$xml = new \DOMDocument();
 		$xml->preserveWhiteSpace = false;
-		$xml->load(TL_ROOT . '/' . $strName);
+
+		// Use loadXML() instead of load() (see 7192)
+		$xml->loadXML(file_get_contents(TL_ROOT . '/' . $strName));
 
 		$return = "\n// $strName\n";
 		$units = $xml->getElementsByTagName('trans-unit');
@@ -660,6 +702,19 @@ abstract class System
 			}
 		};
 
+		// Set up the quotevalue function
+		$quotevalue = function($value)
+		{
+			if (strpos($value, '\n') !== false)
+			{
+				return '"' . str_replace('"', '\\"', $value) . '"';
+			}
+			else
+			{
+				return "'" . str_replace("'", "\\'", $value) . "'";
+			}
+		};
+
 		// Add the labels
 		foreach ($units as $unit)
 		{
@@ -678,16 +733,6 @@ abstract class System
 				$value = str_replace('</ em>', '</em>', $value);
 			}
 
-			// Quote the value
-			if (strpos($value, '\n') !== false)
-			{
-				$value = '"' . str_replace('"', '\\"', $value) . '"';
-			}
-			else
-			{
-				$value = "'" . str_replace("'", "\\'", $value) . "'";
-			}
-
 			$chunks = explode('.', $unit->getAttribute('id'));
 
 			// Handle keys with dots
@@ -700,15 +745,30 @@ abstract class System
 			switch (count($chunks))
 			{
 				case 2:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]] = $value;
+					}
 					break;
 
 				case 3:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]] = $value;
+					}
 					break;
 
 				case 4:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]][$chunks[3]] = $value;
+					}
 					break;
 			}
 		}

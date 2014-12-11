@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-  <?php implode('', $this->comments); ?>
+  <?php echo implode('', $this->comments); ?>
   <?php echo $this->pagination; ?>
   <?php include $this->getTemplate('mod_comment_form', 'xhtml'); ?>
 

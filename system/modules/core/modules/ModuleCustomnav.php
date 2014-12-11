@@ -156,29 +156,26 @@ class ModuleCustomnav extends \Module
 								$strForceLang = $objNext->language;
 							}
 
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage']);
-
-						// Add the domain if it differs from the current one (see #3765)
-						if ($arrPage['domain'] != '' && $arrPage['domain'] != \Environment::get('host'))
-						{
-							$href = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrPage['domain'] . TL_PATH . '/' . $href;
-						}
+						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
 						break;
 				}
 
+				$trail = in_array($arrPage['id'], $objPage->trail);
+
 				// Active page
-				if ($objPage->id == $arrPage['id'])
+				if ($objPage->id == $arrPage['id'] && $href == \Environment::get('request'))
 				{
 					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
 
 					$row['isActive'] = true;
+					$row['isTrail'] = false;
 					$row['class'] = trim('active ' . $strClass);
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
@@ -200,10 +197,11 @@ class ModuleCustomnav extends \Module
 				// Regular page
 				else
 				{
-					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . ($trail ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;
+					$row['isTrail'] = $trail;
 					$row['class'] = $strClass;
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);

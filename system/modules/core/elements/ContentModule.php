@@ -57,7 +57,9 @@ class ContentModule extends \ContentElement
 		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID
+		$objModule->origSpace = $objModule->space;
 		$objModule->space = $this->space;
+		$objModule->origCssID = $objModule->cssID;
 		$objModule->cssID = $this->cssID;
 
 		return $objModule->generate();

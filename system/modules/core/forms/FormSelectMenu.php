@@ -48,6 +48,13 @@ class FormSelectMenu extends \Widget
 	 */
 	protected $strTemplate = 'form_select';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-select';
+
 
 	/**
 	 * Add specific attributes
@@ -176,9 +183,7 @@ class FormSelectMenu extends \Widget
 	 */
 	public function parse($arrAttributes=null)
 	{
-		$arrOptions = array();
 		$strClass = 'select';
-		$blnHasGroups = false;
 
 		if ($this->multiple)
 		{
@@ -190,12 +195,6 @@ class FormSelectMenu extends \Widget
 		elseif (is_array($this->varValue))
 		{
 			$this->varValue = $this->varValue[0];
-		}
-
-		// Add empty option (XHTML) if there are none
-		if (empty($this->arrOptions))
-		{
-			$this->arrOptions = array(array('value' => '', 'label' => '-'));
 		}
 
 		// Chosen
@@ -210,7 +209,27 @@ class FormSelectMenu extends \Widget
 			$strClass .= ' ' . $this->strClass;
 		}
 
-		$this->class = $strClass;
+		$this->strClass = $strClass;
+
+		return parent::parse($arrAttributes);
+	}
+
+
+	/**
+	 * Generate the options
+	 *
+	 * @return array The options array
+	 */
+	protected function getOptions()
+	{
+		$arrOptions = array();
+		$blnHasGroups = false;
+
+		// Add empty option (XHTML) if there are none
+		if (empty($this->arrOptions))
+		{
+			$this->arrOptions = array(array('value' => '', 'label' => '-'));
+		}
 
 		// Generate options
 		foreach ($this->arrOptions as $arrOption)
@@ -253,9 +272,7 @@ class FormSelectMenu extends \Widget
 			);
 		}
 
-		$this->arrOptions = $arrOptions;
-
-		return parent::parse($arrAttributes);
+		return $arrOptions;
 	}
 
 
@@ -263,8 +280,6 @@ class FormSelectMenu extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

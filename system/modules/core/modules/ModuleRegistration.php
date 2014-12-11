@@ -113,6 +113,16 @@ class ModuleRegistration extends \Module
 		$objCaptcha = null;
 		$doNotSubmit = false;
 
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
+
 		// Captcha
 		if (!$this->disableCaptcha)
 		{
@@ -281,7 +291,7 @@ class ModuleRegistration extends \Module
 			$strCaptcha = $objCaptcha->parse();
 
 			$this->Template->fields .= $strCaptcha;
-			$arrFields['captcha'] .= $strCaptcha;
+			$arrFields['captcha']['captcha'] .= $strCaptcha;
 		}
 
 		$this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -300,37 +310,20 @@ class ModuleRegistration extends \Module
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 		$this->Template->captchaDetails = $GLOBALS['TL_LANG']['MSC']['securityQuestion'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
-		$this->Template->captcha = $arrFields['captcha'];
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', \ModuleLoader::getActive()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', \ModuleLoader::getActive()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
+		$this->Template->captcha = $arrFields['captcha']['captcha']; // backwards compatibility
 	}
 
 
@@ -357,74 +350,48 @@ class ModuleRegistration extends \Module
 		// Send activation e-mail
 		if ($this->reg_activate)
 		{
-			$arrChunks = array();
+			// Prepare the simple token data
+			$arrTokenData = $arrData;
+			$arrTokenData['domain'] = \Idna::decode(\Environment::get('host'));
+			$arrTokenData['link'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'];
+			$arrTokenData['channels'] = '';
 
-			$strConfirmation = $this->reg_text;
-			preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
-
-			foreach ($arrChunks[0] as $strChunk)
+			if (in_array('newsletter', \ModuleLoader::getActive()))
 			{
-				$strKey = substr($strChunk, 2, -2);
-
-				switch ($strKey)
+				// Make sure newsletter is an array
+				if (!is_array($arrData['newsletter']))
 				{
-					case 'domain':
-						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('host')), $strConfirmation);
-						break;
+					if ($arrData['newsletter'] != '')
+					{
+						$arrData['newsletter'] = array($arrData['newsletter']);
+					}
+					else
+					{
+						$arrData['newsletter'] = array();
+					}
+				}
 
-					case 'link':
-						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
-						break;
+				// Replace the wildcard
+				if (!empty($arrData['newsletter']))
+				{
+					$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
 
-					// HOOK: support newsletter subscriptions
-					case 'channel':
-					case 'channels':
-						if (!in_array('newsletter', \ModuleLoader::getActive()))
-						{
-							break;
-						}
-
-						// Make sure newsletter is an array
-						if (!is_array($arrData['newsletter']))
-						{
-							if ($arrData['newsletter'] != '')
-							{
-								$arrData['newsletter'] = array($arrData['newsletter']);
-							}
-							else
-							{
-								$arrData['newsletter'] = array();
-							}
-						}
-
-						// Replace the wildcard
-						if (!empty($arrData['newsletter']))
-						{
-							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
-
-							if ($objChannels !== null)
-							{
-								$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
-							}
-						}
-						else
-						{
-							$strConfirmation = str_replace($strChunk, '', $strConfirmation);
-						}
-						break;
-
-					default:
-						$strConfirmation = str_replace($strChunk, $arrData[$strKey], $strConfirmation);
-						break;
+					if ($objChannels !== null)
+					{
+						$arrTokenData['channels'] = implode("\n", $objChannels->fetchEach('title'));
+					}
 				}
 			}
+
+			// Backwards compatibility
+			$arrTokenData['channel'] = $arrTokenData['channels'];
 
 			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], \Idna::decode(\Environment::get('host')));
-			$objEmail->text = $strConfirmation;
+			$objEmail->text = \String::parseSimpleTokens($this->reg_text, $arrTokenData);
 			$objEmail->sendTo($arrData['email']);
 		}
 

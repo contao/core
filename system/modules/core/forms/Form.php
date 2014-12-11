@@ -364,7 +364,7 @@ class Form extends \Hybrid
 			// Fallback to default subject
 			if (!strlen($email->subject))
 			{
-				$email->subject = $this->replaceInsertTags($this->subject);
+				$email->subject = $this->replaceInsertTags($this->subject, false);
 			}
 
 			// Send copy to sender
@@ -410,10 +410,17 @@ class Form extends \Hybrid
 			}
 
 			$uploaded = strlen(trim($uploaded)) ? "\n\n---\n" . $uploaded : '';
-
-			// Send e-mail
 			$email->text = \String::decodeEntities(trim($message)) . $uploaded . "\n\n";
-			$email->sendTo($recipients);
+
+			// Send the e-mail
+			try
+			{
+				$email->sendTo($recipients);
+			}
+			catch (\Swift_SwiftException $e)
+			{
+				$this->log('Form "' . $this->title . '" could not be sent: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+			}
 		}
 
 		// Store the values in the database

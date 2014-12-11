@@ -14,8 +14,8 @@
 /**
  * Core version
  */
-define('VERSION', '3.3');
-define('BUILD', 'RC1');
+define('VERSION', '3.4');
+define('BUILD', '0');
 define('LONG_TERM_SUPPORT', false);
 
 
@@ -25,18 +25,19 @@ define('LONG_TERM_SUPPORT', false);
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('ACE', '1.1.3');
+define('ACE', '1.1.6');
 define('CSS3PIE', '1.0.0');
 define('DROPZONE', '3.8.5');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.0');
+define('RESPIMAGE', '0.9.6');
 define('SWIPE', '2.0');
 define('JQUERY', '1.11.0');
 define('JQUERY_UI', '1.10.4');
 define('COLORBOX', '1.5.8');
 define('MEDIAELEMENT', '2.14.2');
 define('TABLESORTER', '2.0.5');
-define('MOOTOOLS', '1.4.5');
+define('MOOTOOLS', '1.5.1');
 define('COLORPICKER', '1.4');
 define('DATEPICKER', '2.2.0');
 define('MEDIABOX', '1.4.6');

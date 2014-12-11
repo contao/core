@@ -254,6 +254,13 @@ class Installer extends \Controller
 			}
 		}
 
+		// Remove the DROP statements if the safe mode is active (see #7085)
+		if (\Config::get('coreOnlyMode'))
+		{
+			unset($return['DROP']);
+			unset($return['ALTER_DROP']);
+		}
+
 		return $return;
 	}
 
@@ -291,7 +298,7 @@ class Installer extends \Controller
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -443,6 +450,7 @@ class Installer extends \Controller
 				if ($field['type'] != 'index')
 				{
 					unset($field['index']);
+					unset($field['origtype']);
 
 					// Field type
 					if ($field['length'] != '')

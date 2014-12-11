@@ -40,7 +40,7 @@ namespace Contao;
  * @author    Leo Feyer <https://github.com/leofeyer>
  * @copyright Leo Feyer 2005-2014
  */
-abstract class Widget extends \Template\Base
+abstract class Widget extends \BaseTemplate
 {
 
 	/**
@@ -72,6 +72,12 @@ abstract class Widget extends \Template\Base
 	 * @var string
 	 */
 	protected $strClass;
+
+	/**
+	 * CSS class prefix
+	 * @var string
+	 */
+	protected $strPrefix;
 
 	/**
 	 * Wizard
@@ -157,6 +163,7 @@ abstract class Widget extends \Template\Base
 	 * * label:             the field label
 	 * * value:             the field value
 	 * * class:             one or more CSS classes
+	 * * prefix:            the CSS class prefix
 	 * * template:          the template name
 	 * * wizard:            the field wizard markup
 	 * * alt:               an alternative text
@@ -195,6 +202,8 @@ abstract class Widget extends \Template\Base
 	 * * useHomeDir:        store uploaded files in the user's home directory
 	 * * trailingSlash:     add or remove a trailing slash
 	 * * spaceToUnderscore: convert spaces to underscores
+	 * * nullIfEmpty:       set to NULL if the value is empty
+	 * * doNotTrim:         do not trim the user input
 	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
@@ -230,6 +239,10 @@ abstract class Widget extends \Template\Base
 				{
 					$this->strClass = trim($this->strClass . ' ' . $varValue);
 				}
+				break;
+
+			case 'prefix':
+				$this->strPrefix = $varValue;
 				break;
 
 			case 'template':
@@ -279,14 +292,7 @@ abstract class Widget extends \Template\Base
 
 			case 'disabled':
 			case 'readonly':
-				if ($varValue)
-				{
-					$this->blnSubmitInput = false;
-				}
-				else
-				{
-					$this->blnSubmitInput = true;
-				}
+				$this->blnSubmitInput = $varValue ? false : true;
 				// Do not add a break; statement here
 
 			case 'autofocus':
@@ -317,6 +323,7 @@ abstract class Widget extends \Template\Base
 			case 'trailingSlash':
 			case 'spaceToUnderscore':
 			case 'nullIfEmpty':
+			case 'doNotTrim':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
 
@@ -326,6 +333,11 @@ abstract class Widget extends \Template\Base
 
 			case 'dataContainer':
 				$this->objDca = $varValue;
+				break;
+
+			case strncmp($strKey, 'ng-', 3) === 0:
+			case strncmp($strKey, 'data-', 5) === 0:
+				$this->arrAttributes[$strKey] = $strKey;
 				break;
 
 			default:
@@ -340,14 +352,18 @@ abstract class Widget extends \Template\Base
 	 *
 	 * Supported keys:
 	 *
-	 * * id:       the field ID
-	 * * name:     the field name
-	 * * label:    the field label
-	 * * value:    the field value
-	 * * class:    one or more CSS classes
-	 * * template: the template name
-	 * * wizard:   the field wizard markup
-	 * * required: makes the widget a required field
+	 * * id:            the field ID
+	 * * name:          the field name
+	 * * label:         the field label
+	 * * value:         the field value
+	 * * class:         one or more CSS classes
+	 * * prefix:        the CSS class prefix
+	 * * template:      the template name
+	 * * wizard:        the field wizard markup
+	 * * required:      makes the widget a required field
+	 * * forAttribute:  the "for" attribute
+	 * * dataContainer: the data container object
+	 * * activeRecord:  the active record
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -384,6 +400,10 @@ abstract class Widget extends \Template\Base
 
 			case 'class':
 				return $this->strClass;
+				break;
+
+			case 'prefix':
+				return $this->strPrefix;
 				break;
 
 			case 'template':
@@ -423,6 +443,68 @@ abstract class Widget extends \Template\Base
 		}
 
 		return parent::__get($strKey);
+	}
+
+
+	/**
+	 * Check whether an object property exists
+	 *
+	 * @param string $strKey The property name
+	 *
+	 * @return boolean True if the property exists
+	 */
+	public function __isset($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'id':
+				return isset($this->strId);
+				break;
+
+			case 'name':
+				return isset($this->strName);
+				break;
+
+			case 'label':
+				return isset($this->strLabel);
+				break;
+
+			case 'value':
+				return isset($this->varValue);
+				break;
+
+			case 'class':
+				return isset($this->strClass);
+				break;
+
+			case 'template':
+				return isset($this->strTemplate);
+				break;
+
+			case 'wizard':
+				return isset($this->strWizard);
+				break;
+
+			case 'required':
+				return isset($this->arrConfiguration[$strKey]);
+				break;
+
+			case 'forAttribute':
+				return isset($this->blnForAttribute);
+				break;
+
+			case 'dataContainer':
+				return isset($this->objDca);
+				break;
+
+			case 'activeRecord':
+				return isset($this->objDca->activeRecord);
+				break;
+
+			default:
+				return isset($this->arrAttributes[$strKey]) || isset($this->arrConfiguration[$strKey]);
+				break;
+		}
 	}
 
 
@@ -620,9 +702,36 @@ abstract class Widget extends \Template\Base
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		$strAttributes = '';
+
+		foreach (array_keys($this->arrAttributes) as $strKey)
+		{
+			if (!in_array($strKey, $arrStrip))
+			{
+				$strAttributes .= $this->getAttribute($strKey);
+			}
+		}
+
+		return $strAttributes;
+	}
+
+
+	/**
+	 * Return a single attribute
+	 *
+	 * @param string $strKey The attribute name
+	 *
+	 * @return string The attribute markup
+	 */
+	public function getAttribute($strKey)
+	{
+		if (!isset($this->arrAttributes[$strKey]))
+		{
+			return '';
+		}
+
 		$blnIsXhtml = false;
 
-		// Remove HTML5 attributes in XHTML code
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
@@ -630,47 +739,39 @@ abstract class Widget extends \Template\Base
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$blnIsXhtml = true;
-				unset($this->arrAttributes['autofocus']);
-				unset($this->arrAttributes['placeholder']);
-				unset($this->arrAttributes['required']);
 			}
 		}
 
-		// Optionally strip certain attributes
-		if (is_array($arrStrip))
+		if ($blnIsXhtml)
 		{
-			foreach ($arrStrip as $strAttribute)
+			if ($strKey == 'autofocus' || $strKey == 'placeholder' || $strKey == 'required')
 			{
-				unset($this->arrAttributes[$strAttribute]);
+				return '';
 			}
 		}
 
-		$strAttributes = '';
+		$varValue = $this->arrAttributes[$strKey];
 
-		// Add the remaining attributes
-		foreach ($this->arrAttributes as $k=>$v)
+		if ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'required' || $strKey == 'autofocus' || $strKey == 'multiple')
 		{
-			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus' || $k == 'multiple')
+			if (TL_MODE == 'FE') // see #3878
 			{
-				if (TL_MODE == 'FE') // see #3878
-				{
-					$strAttributes .= $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
-				}
-				elseif ($k == 'disabled' || $k == 'readonly' || $k == 'multiple') // see #4131
-				{
-					$strAttributes .= ' ' . $k;
-				}
+				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
 			}
-			else
+			elseif ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'multiple') // see #4131
 			{
-				if ($v != '')
-				{
-					$strAttributes .= ' ' . $k . '="' . $v . '"';
-				}
+				return ' ' . $strKey;
+			}
+		}
+		else
+		{
+			if ($varValue != '')
+			{
+				return ' ' . $strKey . '="' . $varValue . '"';
 			}
 		}
 
-		return $strAttributes;
+		return '';
 	}
 
 
@@ -729,7 +830,7 @@ abstract class Widget extends \Template\Base
 		$arrParts = explode('[', str_replace(']', '', $strKey));
 
 		if (!empty($arrParts))
-    	{
+		{
 			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
 			foreach($arrParts as $part)
@@ -743,7 +844,7 @@ abstract class Widget extends \Template\Base
 			}
 
 			return $varValue;
-    	}
+		}
 
 		return \Input::$strMethod($strKey, $this->decodeEntities);
 	}
@@ -768,7 +869,10 @@ abstract class Widget extends \Template\Base
 			return $varInput;
 		}
 
-		$varInput = trim($varInput);
+		if (!$this->doNotTrim)
+		{
+			$varInput = trim($varInput);
+		}
 
 		if ($varInput == '')
 		{
@@ -799,6 +903,16 @@ abstract class Widget extends \Template\Base
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
+		if ($this->minval && is_numeric($varInput) && $varInput < $this->minval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minval'], $this->strLabel, $this->minval));
+		}
+
+		if ($this->maxval && is_numeric($varInput) && $varInput > $this->maxval)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxval'], $this->strLabel, $this->maxval));
+		}
+
 		if ($this->rgxp != '')
 		{
 			switch ($this->rgxp)
@@ -824,6 +938,14 @@ abstract class Widget extends \Template\Base
 					if (!\Validator::isNumeric($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
+					}
+					break;
+
+				// Natural numbers (positive integers)
+				case 'natural':
+					if (!\Validator::isNatural($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['natural'], $this->strLabel));
 					}
 					break;
 
@@ -1068,7 +1190,7 @@ abstract class Widget extends \Template\Base
 	 */
 	protected function isChecked($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionChecked(1, 1);
 		}
@@ -1086,7 +1208,7 @@ abstract class Widget extends \Template\Base
 	 */
 	protected function isSelected($arrOption)
 	{
-		if (empty($this->varValue) && $arrOption['default'])
+		if (empty($this->varValue) && empty($_POST) && $arrOption['default'])
 		{
 			return static::optionSelected(1, 1);
 		}

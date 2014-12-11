@@ -75,33 +75,10 @@ class ContentHyperlink extends \ContentElement
 				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
 				$this->Template->setData($this->arrData);
 
-				$objFile = new \File($objModel->path, true);
+				$this->singleSRC = $objModel->path;
+				$this->addImageToTemplate($this->Template, $this->arrData);
 
-				if ($objFile->isGdImage)
-				{
-					$size = deserialize($this->size);
-					$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
-
-					// Adjust the image size
-					if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))
-					{
-						$size[0] = $intMaxWidth;
-						$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
-					}
-
-					$src = \Image::get($objModel->path, $size[0], $size[1], $size[2]);
-
-					if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
-					{
-						$this->Template->arrSize = $imgSize;
-						$this->Template->imgSize = ' ' . $imgSize[3];
-					}
-
-					$this->Template->src = TL_FILES_URL . $src;
-					$this->Template->alt = specialchars($this->alt);
-					$this->Template->linkTitle = specialchars($this->linkTitle);
-					$this->Template->caption = $this->caption;
-				}
+				$this->Template->linkTitle = specialchars($this->linkTitle);
 			}
 		}
 

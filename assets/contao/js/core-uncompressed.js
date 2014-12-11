@@ -419,7 +419,24 @@ var AjaxRequest =
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
-				if (json.javascript) Browser.exec(json.javascript);
+				if (json.javascript) {
+
+					// Use Asset.javascript() instead of document.write() to load a
+					// JavaScript file and re-execude the code after it has been loaded
+					document.write = function(str) {
+						var src = '';
+						str.replace(/<script src="([^"]+)"/i, function(all, match){
+							src = match;
+						});
+						src && Asset.javascript(src, {
+							onLoad: function() {
+								Browser.exec(json.javascript);
+							}
+						});
+					};
+
+					Browser.exec(json.javascript);
+				}
 
 				el.value = 1;
 				el.checked = 'checked';
@@ -527,10 +544,10 @@ var AjaxRequest =
 		// Send request
 		if (publish) {
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0});
+			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
 
 		return false;
@@ -839,16 +856,9 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var val = [],
-				frm = null,
-				frms = window.frames;
-			for (i=0; i<frms.length; i++) {
-				if (frms[i].name == 'simple-modal-iframe') {
-					frm = frms[i];
-					break;
-				}
-			}
-			if (frm === null) {
+			var frm = window.frames['simple-modal-iframe'],
+				val = [], inp, i;
+			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
@@ -856,8 +866,8 @@ var Backend =
 				alert(Contao.lang.picker);
 				return; // see #5704
 			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
-			for (var i=0; i<inp.length; i++) {
+			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
@@ -900,6 +910,15 @@ var Backend =
 	 * @param {object} win        The window object
 	 */
 	openModalBrowser: function(field_name, url, type, win) {
+		var file = 'file.php',
+			swtch = (type == 'file' ? '&amp;switch=1' : ''),
+			isLink = (url.indexOf('{{link_url::') != -1);
+		if (type == 'file' && (url == '' || isLink)) {
+			file = 'page.php';
+		}
+		if (isLink) {
+			url = url.replace(/^\{\{link_url::([0-9]+)\}\}$/, '$1');
+		}
 		var M = new SimpleModal({
 			'width': 768,
 			'btn_ok': Contao.lang.close,
@@ -912,26 +931,20 @@ var Backend =
 			this.hide();
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
-			var frms = window.frames,
-				frm, val, prev, i;
-			for (i=0; i<frms.length; i++) {
-				if (frms[i].name == 'simple-modal-iframe') {
-					frm = frms[i];
-					break;
-				}
-			}
-			if (frm === null) {
+			var frm = window.frames['simple-modal-iframe'],
+				val, inp, i;
+			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
-			var inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
 			for (i=0; i<inp.length; i++) {
 				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
 					val = inp[i].get('value');
 					break;
 				}
 			}
-			if (type == 'file') {
+			if (!isNaN(val)) {
 				val = '{{link_url::' + val + '}}';
 			}
 			win.document.getElementById(field_name).value = val;
@@ -939,7 +952,7 @@ var Backend =
 		});
 		M.show({
 			'title': win.document.getElement('div.mce-title').get('text'),
-			'contents': '<iframe src="contao/' + ((type == 'file') ? 'page.php' : 'file.php') + '?table=tl_content&amp;field=singleSRC&amp;value=' + ((type == 'file') ? url.replace('{{link_url::', '').replace('}}', '') : url) + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="contao/' + file + '?table=tl_content&amp;field=singleSRC&amp;value=' + url + swtch + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},
@@ -1229,6 +1242,7 @@ var Backend =
 	 * @param {object} ul The DOM element
 	 *
 	 * @author Joe Ray Gregory
+	 * @author Martin Auswöger
 	 */
 	makeParentViewSortable: function(ul) {
 		var ds = new Scroller(document.getElement('body'), {
@@ -1247,38 +1261,30 @@ var Backend =
 				ds.stop();
 			},
 			onSort: function(el) {
-				var div = el.getFirst('div'),
-					prev, next, first;
+				var ul = el.getParent('ul'),
+					wrapLevel = 0;
 
-				if (!div) return;
+				if (!ul) return;
 
-				if (div.hasClass('wrapper_start')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
-						first.removeClass('indent');
+				ul.getChildren('li').each(function(el) {
+					var div = el.getFirst('div');
+
+					if (!div) return;
+
+					if (div.hasClass('wrapper_stop') && wrapLevel > 0) {
+						wrapLevel--;
 					}
-					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
-						first.addClass('indent');
+
+					div.className = div.className.replace(/(^|\s)indent[^\s]*/g, '');
+
+					if (wrapLevel > 0) {
+						div.addClass('indent').addClass('indent_' + wrapLevel);
 					}
-				} else if (div.hasClass('wrapper_stop')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div'))) {
-						first.addClass('indent');
+
+					if (div.hasClass('wrapper_start')) {
+						wrapLevel++;
 					}
-					if ((next = el.getNext('li')) && (first = next.getFirst('div'))) {
-						first.removeClass('indent');
-					}
-				} else if (div.hasClass('indent')) {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_stop')) {
-						div.removeClass('indent');
-					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_start')) {
-						div.removeClass('indent');
-					}
-				} else {
-					if ((prev = el.getPrevious('li')) && (first = prev.getFirst('div')) && first.hasClass('wrapper_start')) {
-						div.addClass('indent');
-					} else if ((next = el.getNext('li')) && (first = next.getFirst('div')) && first.hasClass('wrapper_stop')) {
-						div.addClass('indent');
-					}
-				}
+				});
 			},
 			handle: '.drag-handle'
 		});
@@ -1650,6 +1656,7 @@ var Backend =
 				tr.getElement('.tl_select_column').destroy();
 				new Chosen(tr.getElement('select.tl_select'));
 				Stylect.convertSelects();
+				Backend.convertEnableModules();
 				break;
 			case 'up':
 				if (tr = parent.getPrevious('tr')) {
@@ -1940,9 +1947,6 @@ var Backend =
 			li.destroy();
 			opt.fireEvent('liszt:updated');
 		}
-
-		// Remove the tool tip of the delete button
-		$$('div.tip-wrap').destroy();
 	},
 
 	/**
@@ -1983,7 +1987,9 @@ var Backend =
 	 * Convert the "enable module" checkboxes
 	 */
 	convertEnableModules: function() {
-		$$('img.mw_enable').each(function(el) {
+		$$('img.mw_enable').filter(function(el) {
+			return !el.hasEvent('click');
+		}).each(function(el) {
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
 				var cbx = el.getNext('input');
@@ -1996,6 +2002,169 @@ var Backend =
 				}
 			});
 		});
+	},
+
+	/**
+	 * Update the fields of the imageSize widget upon change
+	 */
+	enableImageSizeWidgets: function() {
+		$$('.tl_image_size').each(function(el) {
+			var select = el.getElement('select'),
+				widthInput = el.getChildren('input')[0],
+				heightInput = el.getChildren('input')[1],
+				update = function() {
+					if (select.get('value') === '' || select.get('value').toInt().toString() === select.get('value')) {
+						widthInput.readOnly = true;
+						heightInput.readOnly = true;
+						var dimensions = $(select.getSelected()[0]).get('text');
+						dimensions = dimensions.split('(').length > 1
+							? dimensions.split('(').getLast().split(')')[0].split('x')
+							: ['', ''];
+						widthInput.set('value', '').set('placeholder', dimensions[0] * 1 || '');
+						heightInput.set('value', '').set('placeholder', dimensions[1] * 1 || '');
+					}
+					else {
+						widthInput.set('placeholder', '');
+						heightInput.set('placeholder', '');
+						widthInput.readOnly = false;
+						heightInput.readOnly = false;
+					}
+				}
+			;
+
+			update();
+			select.addEvent('change', update);
+			select.addEvent('keyup', update);
+		});
+	},
+
+	/**
+	 * Allow to mark the important part of an image
+	 *
+	 * @param {object} el The DOM element
+	 */
+	editPreviewWizard: function(el) {
+		el = $(el);
+		var imageElement = el.getElement('img'),
+			inputElements = {},
+			isDrawing = false,
+			originalWidth = el.get('data-original-width'),
+			originalHeight = el.get('data-original-height'),
+			partElement, startPos,
+			getScale = function() {
+				return imageElement.getComputedSize().width / originalWidth;
+			},
+			updateImage = function() {
+				var scale = getScale(),
+					imageSize = imageElement.getComputedSize();
+				partElement.setStyles({
+					top: imageSize.computedTop + (inputElements.y.get('value') * scale).round() + 'px',
+					left: imageSize.computedLeft + (inputElements.x.get('value') * scale).round() + 'px',
+					width: (inputElements.width.get('value') * scale).round() + 'px',
+					height: (inputElements.height.get('value') * scale).round() + 'px'
+				});
+				if (!inputElements.width.get('value').toInt() || !inputElements.height.get('value').toInt()) {
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+			},
+			updateValues = function() {
+				var scale = getScale(),
+					styles = partElement.getStyles('top', 'left', 'width', 'height'),
+					imageSize = imageElement.getComputedSize(),
+					values = {
+						x: Math.max(0, Math.min(originalWidth, (styles.left.toFloat() - imageSize.computedLeft) / scale)).round(),
+						y: Math.max(0, Math.min(originalHeight, (styles.top.toFloat() - imageSize.computedTop) / scale)).round()
+					};
+				values.width = Math.min(originalWidth - values.x, styles.width.toFloat() / scale).round();
+				values.height = Math.min(originalHeight - values.y, styles.height.toFloat() / scale).round();
+				if (!values.width || !values.height) {
+					values.x = values.y = values.width = values.height = '';
+					partElement.setStyle('display', 'none');
+				} else {
+					partElement.setStyle('display', '');
+				}
+				Object.each(values, function(value, key) {
+					inputElements[key].set('value', value);
+				});
+			},
+			start = function(event) {
+				event.preventDefault();
+				if (isDrawing) {
+					return;
+				}
+				isDrawing = true;
+				startPos = {
+					x: event.page.x - el.getPosition().x - imageElement.getComputedSize().computedLeft,
+					y: event.page.y - el.getPosition().y - imageElement.getComputedSize().computedTop
+				};
+				move(event);
+			},
+			move = function(event) {
+				if (!isDrawing) {
+					return;
+				}
+				event.preventDefault();
+				var imageSize = imageElement.getComputedSize();
+				var rect = {
+					x: [
+						Math.max(0, Math.min(imageSize.width, startPos.x)),
+						Math.max(0, Math.min(imageSize.width, event.page.x - el.getPosition().x - imageSize.computedLeft))
+					],
+					y: [
+						Math.max(0, Math.min(imageSize.height, startPos.y)),
+						Math.max(0, Math.min(imageSize.height, event.page.y - el.getPosition().y - imageSize.computedTop))
+					]
+				};
+				partElement.setStyles({
+					top: Math.min(rect.y[0], rect.y[1]) + imageSize.computedTop + 'px',
+					left: Math.min(rect.x[0], rect.x[1]) + imageSize.computedLeft + 'px',
+					width: Math.abs(rect.x[0] - rect.x[1]) + 'px',
+					height: Math.abs(rect.y[0] - rect.y[1]) + 'px'
+				});
+				updateValues();
+			},
+			stop = function(event) {
+				move(event);
+				isDrawing = false;
+			},
+			init = function() {
+				el.getParent().getElements('input[name^="importantPart"]').each(function(input) {
+					['x', 'y', 'width', 'height'].each(function(key) {
+						if (input.get('name').substr(13, key.length) === key.capitalize()) {
+							inputElements[key] = input = $(input);
+						}
+					});
+				});
+				if (Object.getLength(inputElements) !== 4) {
+					return;
+				}
+				Object.each(inputElements, function(input) {
+					input.getParent().setStyle('display', 'none');
+				});
+				el.addClass('tl_edit_preview_enabled');
+				partElement = new Element('div', {
+					'class': 'tl_edit_preview_important_part'
+				}).inject(el);
+				updateImage();
+				imageElement.addEvent('load', updateImage);
+				el.addEvents({
+					mousedown: start,
+					touchstart: start
+				});
+				$(document.documentElement).addEvents({
+					mousemove: move,
+					touchmove: move,
+					mouseup: stop,
+					touchend: stop,
+					touchcancel: stop,
+					resize: updateImage
+				});
+			}
+		;
+
+		window.addEvent('domready', init);
 	}
 };
 
@@ -2017,6 +2186,7 @@ window.addEvent('domready', function() {
 	Backend.addInteractiveHelp();
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -2038,6 +2208,7 @@ window.addEvent('load', function() {
 window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
+	Backend.enableImageSizeWidgets();
 
 	// Chosen
 	if (Elements.chosen != undefined) {

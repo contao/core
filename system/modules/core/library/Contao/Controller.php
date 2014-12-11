@@ -45,7 +45,8 @@ abstract class Controller extends \System
 	 *
 	 * @return string The path to the template file
 	 *
-	 * @throws \Exception If $strFormat is unknown
+	 * @throws \InvalidArgumentException If $strFormat is unknown
+	 * @throws \RuntimeException         If the template group folder is insecure
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
@@ -54,7 +55,7 @@ abstract class Controller extends \System
 
 		if (!in_array($strFormat, $arrAllowed))
 		{
-			throw new \Exception("Invalid output format $strFormat");
+			throw new \InvalidArgumentException('Invalid output format ' . $strFormat);
 		}
 
 		$strTemplate = basename($strTemplate);
@@ -63,11 +64,15 @@ abstract class Controller extends \System
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-			$strCustom = str_replace('../', '', $objPage->templateGroup);
 
-			if ($strCustom != '')
+			if ($objPage->templateGroup != '')
 			{
-				return \TemplateLoader::getPath($strTemplate, $strFormat, $strCustom);
+				if (\Validator::isInsecurePath($objPage->templateGroup))
+				{
+					throw new \RuntimeException('Invalid path ' . $objPage->templateGroup);
+				}
+
+				return \TemplateLoader::getPath($strTemplate, $strFormat, $objPage->templateGroup);
 			}
 		}
 
@@ -89,7 +94,7 @@ abstract class Controller extends \System
 		// Get the default templates
 		foreach (\TemplateLoader::getPrefixedFiles($strPrefix) as $strTemplate)
 		{
-			$arrTemplates[$strTemplate] = $strTemplate;
+			$arrTemplates[$strTemplate][] = 'root';
 		}
 
 		$arrCustomized = glob(TL_ROOT . '/templates/' . $strPrefix . '*');
@@ -100,58 +105,72 @@ abstract class Controller extends \System
 			foreach ($arrCustomized as $strFile)
 			{
 				$strTemplate = basename($strFile, strrchr($strFile, '.'));
-
-				if (!isset($arrTemplates[$strTemplate]))
-				{
-					$arrTemplates[$strTemplate] = $strTemplate;
-				}
+				$arrTemplates[$strTemplate][] = $GLOBALS['TL_LANG']['MSC']['global'];
 			}
 		}
 
 		// Do not look for back end templates in theme folders (see #5379)
-		if ($strPrefix == 'be_' || $strPrefix == 'mail_')
+		if ($strPrefix != 'be_' && $strPrefix != 'mail_')
 		{
-			return $arrTemplates;
-		}
-
-		// Try to select the themes (see #5210)
-		try
-		{
-			$objTheme = \ThemeModel::findAll(array('order'=>'name'));
-		}
-		catch (\Exception $e)
-		{
-			$objTheme = null;
-		}
-
-		// Add the theme templates
-		if ($objTheme !== null)
-		{
-			while ($objTheme->next())
+			// Try to select the themes (see #5210)
+			try
 			{
-				if ($objTheme->templates != '')
+				$objTheme = \ThemeModel::findAll(array('order'=>'name'));
+			}
+			catch (\Exception $e)
+			{
+				$objTheme = null;
+			}
+
+			// Add the theme templates
+			if ($objTheme !== null)
+			{
+				while ($objTheme->next())
 				{
-					$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
-
-					if (is_array($arrThemeTemplates))
+					if ($objTheme->templates != '')
 					{
-						foreach ($arrThemeTemplates as $strFile)
-						{
-							$strTemplate = basename($strFile, strrchr($strFile, '.'));
+						$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
 
-							if (!isset($arrTemplates[$strTemplate]))
+						if (is_array($arrThemeTemplates))
+						{
+							foreach ($arrThemeTemplates as $strFile)
 							{
-								$arrTemplates[$strTemplate] = $strTemplate . ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
-							}
-							else
-							{
-								$arrTemplates[$strTemplate] .= ' (' . sprintf($GLOBALS['TL_LANG']['MSC']['templatesTheme'], $objTheme->name) . ')';
+								$strTemplate = basename($strFile, strrchr($strFile, '.'));
+
+								if (!isset($arrTemplates[$strTemplate]))
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
+								else
+								{
+									$arrTemplates[$strTemplate][] = $objTheme->name;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
+
+		// Show the template sources (see #6875)
+		foreach ($arrTemplates as $k=>$v)
+		{
+			$v = array_filter($v, function($a) {
+				return $a != 'root';
+			});
+
+			if (empty($v))
+			{
+				$arrTemplates[$k] = $k;
+			}
+			else
+			{
+				$arrTemplates[$k] = $k . ' (' . implode(', ', $v) . ')';
+			}
+		}
+
+		// Sort the template names
+		ksort($arrTemplates);
 
 		return $arrTemplates;
 	}
@@ -681,7 +700,8 @@ abstract class Controller extends \System
 			}
 
 			$flags = explode('|', $strTag);
-			$elements = explode('::', array_shift($flags));
+			$tag = array_shift($flags);
+			$elements = explode('::', $tag);
 
 			// Load the value from cache
 			if (isset($arrCache[$strTag]) && !in_array('refresh', $flags))
@@ -751,7 +771,7 @@ abstract class Controller extends \System
 							break;
 
 						case 'email_open':
-							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" title="' . $strEmail . '" class="email">';
 							break;
 
 						case 'email_url':
@@ -770,7 +790,42 @@ abstract class Controller extends \System
 						break;
 					}
 
-					\System::loadLanguageFile($keys[0]);
+					$file = $keys[0];
+
+					// Map the key (see #7217)
+					switch ($file)
+					{
+						case 'CNT':
+							$file = 'countries';
+							break;
+
+						case 'LNG':
+							$file = 'languages';
+							break;
+
+						case 'MOD':
+						case 'FMD':
+							$file = 'modules';
+							break;
+
+						case 'FFL':
+							$file = 'tl_form_field';
+							break;
+
+						case 'CACHE':
+							$file = 'tl_page';
+							break;
+
+						case 'XPL':
+							$file = 'explain';
+							break;
+
+						case 'XPT':
+							$file = 'exception';
+							break;
+					}
+
+					\System::loadLanguageFile($file);
 
 					if (count($keys) == 2)
 					{
@@ -847,6 +902,8 @@ abstract class Controller extends \System
 				case 'link_open':
 				case 'link_url':
 				case 'link_title':
+				case 'link_target':
+				case 'link_name':
 					$strTarget = null;
 
 					// Back link
@@ -898,7 +955,7 @@ abstract class Controller extends \System
 						switch ($objNextPage->type)
 						{
 							case 'redirect':
-								$strUrl = $objNextPage->url;
+								$strUrl = $this->replaceInsertTags($objNextPage->url); // see #6765
 
 								if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 								{
@@ -927,7 +984,7 @@ abstract class Controller extends \System
 										$strForceLang = $objNext->language;
 									}
 
-									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang);
+									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -942,7 +999,7 @@ abstract class Controller extends \System
 									$strForceLang = $objNextPage->language;
 								}
 
-								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang);
+								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang, true);
 								break;
 						}
 
@@ -972,6 +1029,10 @@ abstract class Controller extends \System
 
 						case 'link_target':
 							$arrCache[$strTag] = $strTarget;
+							break;
+
+						case 'link_name':
+							$arrCache[$strTag] = specialchars($strName);
 							break;
 					}
 					break;
@@ -1541,8 +1602,11 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						// Sanitize the path
-						$strFile = str_replace('../', '', $strFile);
+						// Check the path
+						if (\Validator::isInsecurePath($strFile))
+						{
+							throw new \RuntimeException('Invalid path ' . $strFile);
+						}
 					}
 
 					// Check the maximum image width
@@ -1555,13 +1619,15 @@ abstract class Controller extends \System
 					// Generate the thumbnail image
 					try
 					{
-						$src = \Image::get($strFile, $width, $height, $mode);
 						$dimensions = '';
+						$imageObj = \Image::create($strFile, array($width, $height, $mode));
+						$src = $imageObj->executeResize()->getResizedPath();
+						$objFile = new \File($src, true);
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+						if (($imgSize = $objFile->imageSize) !== false)
 						{
-							$dimensions = $imgSize[3];
+							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 						}
 
 						// Generate the HTML markup
@@ -1623,8 +1689,11 @@ abstract class Controller extends \System
 						$strFile = $arrChunks[0];
 					}
 
-					// Sanitize path
-					$strFile = str_replace('../', '', $strFile);
+					// Check the path
+					if (\Validator::isInsecurePath($strFile))
+					{
+						throw new \RuntimeException('Invalid path ' . $strFile);
+					}
 
 					// Include .php, .tpl, .xhtml and .html5 files
 					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
@@ -1646,7 +1715,7 @@ abstract class Controller extends \System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($strTag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
+							$varValue = $this->$callback[0]->$callback[1]($tag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
@@ -1689,8 +1758,6 @@ abstract class Controller extends \System
 						case 'ltrim':
 						case 'utf8_romanize':
 						case 'strrev':
-						case 'base64_encode':
-						case 'base64_decode':
 						case 'urlencode':
 						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
@@ -1720,7 +1787,7 @@ abstract class Controller extends \System
 								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
 								{
 									$this->import($callback[0]);
-									$varValue = $this->$callback[0]->$callback[1]($flag, $strTag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
+									$varValue = $this->$callback[0]->$callback[1]($flag, $tag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
 
 									// Replace the tag and stop the loop
 									if ($varValue !== false)
@@ -1817,23 +1884,10 @@ abstract class Controller extends \System
 			$strScripts .= "\n" . \Template::generateInlineScript('SyntaxHighlighter.defaults.toolbar=false;SyntaxHighlighter.all()', $blnXhtml) . "\n";
 		}
 
-		$strSearchCron = '';
-
-		// Add to search index
-		if (\Config::get('enableSearch'))
-		{
-			$strSearchCron .= 'setTimeout(function(){try{var e=new XMLHttpRequest}catch(t){return}e.open("GET",window.location.href,!0),e.setRequestHeader("Index-Page",!0),e.setRequestHeader("X-Requested-With","XMLHttpRequest"),e.send()},1e4);';
-		}
-
 		// Command scheduler
 		if (!\Config::get('disableCron'))
 		{
-			$strSearchCron .= 'setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);';
-		}
-
-		if ($strSearchCron != '')
-		{
-			$strScripts .= "\n" . \Template::generateInlineScript($strSearchCron, $blnXhtml) . "\n";
+			$strScripts .= "\n" . \Template::generateInlineScript('setTimeout(function(){var e=function(e,t){try{var n=new XMLHttpRequest}catch(r){return}n.open("GET",e,!0),n.onreadystatechange=function(){this.readyState==4&&this.status==200&&typeof t=="function"&&t(this.responseText)},n.send()},t="system/cron/cron.";e(t+"txt",function(n){parseInt(n||0)<Math.round(+(new Date)/1e3)-' . \Frontend::getCronTimeout() . '&&e(t+"php")})},5e3);', $blnXhtml) . "\n";
 		}
 
 		$arrReplace['[[TL_BODY]]'] = $strScripts;
@@ -1855,15 +1909,15 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $options->media);
 				}
 				else
 				{
-					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1873,20 +1927,20 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media, $mode, $version) = explode('|', $stylesheet);
+				$options = \String::resolveFlaggedUrl($stylesheet);
 
-				if (!$version)
+				if ($options->static)
 				{
-					$version = filemtime(TL_ROOT . '/' . $stylesheet);
-				}
+					if ($options->mtime === null)
+					{
+						$options->mtime = filemtime(TL_ROOT . '/' . $stylesheet);
+					}
 
-				if ($mode == 'static')
-				{
-					$objCombiner->add($stylesheet, $version, $media);
+					$objCombiner->add($stylesheet, $options->mtime, $options->media);
 				}
 				else
 				{
-					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $media, $blnXhtml) . "\n";
+					$strScripts .= \Template::generateStyleTag(static::addStaticUrlTo($stylesheet), $options->media, $blnXhtml) . "\n";
 				}
 			}
 		}
@@ -1904,18 +1958,26 @@ abstract class Controller extends \System
 		if (!empty($GLOBALS['TL_JAVASCRIPT']) && is_array($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$objCombiner = new \Combiner();
+			$objCombinerAsync = new \Combiner();
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				list($javascript, $mode) = explode('|', $javascript);
+				$options = \String::resolveFlaggedUrl($javascript);
 
-				if ($mode == 'static')
+				if ($options->static)
 				{
-					$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					if ($options->async)
+					{
+						$objCombinerAsync->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
+					else
+					{
+						$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+					}
 				}
 				else
 				{
-					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml) . "\n";
+					$strScripts .= \Template::generateScriptTag(static::addStaticUrlTo($javascript), $blnXhtml, $options->async) . "\n";
 				}
 			}
 
@@ -1923,6 +1985,11 @@ abstract class Controller extends \System
 			if ($objCombiner->hasEntries())
 			{
 				$strScripts = \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml) . "\n" . $strScripts;
+			}
+
+			if ($objCombinerAsync->hasEntries())
+			{
+				$strScripts = \Template::generateScriptTag($objCombinerAsync->getCombinedFile(), $blnXhtml, true) . "\n" . $strScripts;
 			}
 		}
 
@@ -2129,11 +2196,11 @@ abstract class Controller extends \System
 	 * @param array   $arrRow       An array of page parameters
 	 * @param string  $strParams    An optional string of URL parameters
 	 * @param string  $strForceLang Force a certain language
-	 * @param boolean $blnAbsolute  If true, the return value is always an absolute URL
+	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnAbsolute=false)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
 		if (!\Config::get('disableAlias'))
 		{
@@ -2184,13 +2251,9 @@ abstract class Controller extends \System
 		}
 
 		// Add the domain if it differs from the current one (see #3765 and #6927)
-		if ($arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
-			$strUrl = (\Environment::get('ssl') ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . $strUrl;
-		}
-		elseif ($blnAbsolute)
-		{
-			$strUrl = \Environment::get('base') . $strUrl;
+			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
 		// HOOK: add custom logic
@@ -2338,7 +2401,13 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true); // see #4332
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
+
+		// Make sure the URL is absolute (see #4332)
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		{
+			$strUrl = \Environment::get('base') . $strUrl;
+		}
 
 		if (!$blnReturn)
 		{
@@ -2467,26 +2536,25 @@ abstract class Controller extends \System
 	{
 		global $objPage;
 
+		try
+		{
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass();
+			$objFile->imageSize = false;
+		}
+
+		$imgSize = $objFile->imageSize;
 		$size = deserialize($arrItem['size']);
-		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
 		if ($intMaxWidth === null)
 		{
 			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
 
-		// Provide an ID for single lightbox images in HTML5 (see #3742)
-		if ($strLightboxId === null && $arrItem['fullsize'])
-		{
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$strLightboxId = 'lightbox';
-			}
-			else
-			{
-				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
-			}
-		}
+		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
 
 		// Store the original dimensions
 		$objTemplate->width = $imgSize[0];
@@ -2495,12 +2563,21 @@ abstract class Controller extends \System
 		// Adjust the image size
 		if ($intMaxWidth > 0)
 		{
-			$arrMargin = deserialize($arrItem['imagemargin']);
-
 			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
+				{
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
+				}
+				else
+				{
+					$intMaxWidth = $intMaxWidth - $intMargin;
+				}
 			}
 
 			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
@@ -2513,13 +2590,47 @@ abstract class Controller extends \System
 			}
 		}
 
-		$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
+		try
+		{
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File(rawurldecode($src), true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
+		}
 
 		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
+		if (($imgSize = $objFile->imageSize) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+		}
+
+		$picture['alt'] = specialchars($arrItem['alt']);
+		$picture['title'] = specialchars($arrItem['title']);
+
+		$objTemplate->picture = $picture;
+
+		// Provide an ID for single lightbox images in HTML5 (see #3742)
+		if ($strLightboxId === null && $arrItem['fullsize'])
+		{
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$strLightboxId = 'lightbox';
+			}
+			else
+			{
+				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
+			}
 		}
 
 		// Float image
@@ -2571,7 +2682,7 @@ abstract class Controller extends \System
 		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = static::generateMargin(deserialize($arrItem['imagemargin']));
+		$objTemplate->margin = static::generateMargin($arrMargin);
 		$objTemplate->caption = $arrItem['caption'];
 		$objTemplate->singleSRC = $arrItem['singleSRC'];
 		$objTemplate->addImage = true;
@@ -2628,6 +2739,8 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		global $objPage;
+
 		$arrEnclosures = array();
 		$allowedDownload = trimsplit(',', strtolower(\Config::get('allowedDownload')));
 
@@ -2652,15 +2765,29 @@ abstract class Controller extends \System
 
 				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
 
+				$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta) && $objPage->rootFallbackLanguage !== null)
+				{
+					$arrMeta = \Frontend::getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+				}
+
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
+				{
+					$arrMeta['title'] = specialchars($objFile->basename);
+				}
+
 				$arrEnclosures[] = array
 				(
-					'link'      => $objFiles->name,
+					'link'      => $arrMeta['title'],
 					'filesize'  => static::getReadableSize($objFile->filesize),
-					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
+					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
 					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
-					'mime'      => $objFile->mime
+					'mime'      => $objFile->mime,
+					'meta'      => $arrMeta
 				);
 			}
 		}
@@ -2703,12 +2830,7 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				if (\Environment::get('ssl'))
-				{
-					$url = str_replace('http://', 'https://', $url);
-				}
-
-				define($strConstant, $url . TL_PATH . '/');
+				define($strConstant, '//' . preg_replace('@https?://@', '', $url) . TL_PATH . '/');
 			}
 		}
 

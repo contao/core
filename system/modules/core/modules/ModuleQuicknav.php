@@ -155,7 +155,12 @@ class ModuleQuicknav extends \Module
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
-					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language);
+					if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
+					{
+						$objSubpages->current()->loadDetails();
+					}
+
+					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
 
 					$arrPages[] = array
 					(

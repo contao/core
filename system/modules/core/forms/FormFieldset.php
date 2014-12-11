@@ -84,11 +84,15 @@ class FormFieldset extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{
+		// Only tableless forms are supported
+		if (!$this->tableless)
+		{
+			return '';
+		}
+
 		if ($this->fsType == 'fsStart')
 		{
 			return "  <fieldset" . ($this->strClass ? ' class="' . $this->strClass . '"' : '') . ">\n" . (($this->label != '') ? "  <legend>" . $this->label . "</legend>\n" : '');

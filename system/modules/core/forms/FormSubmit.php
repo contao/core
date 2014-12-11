@@ -34,6 +34,13 @@ class FormSubmit extends \Widget
 	 */
 	protected $strTemplate = 'form_submit';
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-submit';
+
 
 	/**
 	 * Add specific attributes
@@ -118,8 +125,6 @@ class FormSubmit extends \Widget
 	 * Generate the widget and return it as string
 	 *
 	 * @return string The widget markup
-	 *
-	 * @deprecated The logic has been moved into the template (see #6834)
 	 */
 	public function generate()
 	{

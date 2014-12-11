@@ -106,13 +106,15 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
-			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+			$varValue = static::encodeInsertTags($varValue);
 
-			// Mark the parameter as used (see #4277)
-			if (!$blnKeepUnused)
-			{
-				unset(static::$arrUnusedGet[$strKey]);
-			}
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
+
+		// Mark the parameter as used (see #4277)
+		if (!$blnKeepUnused)
+		{
+			unset(static::$arrUnusedGet[$strKey]);
 		}
 
 		return static::$arrCache[$strCacheKey][$strKey];
@@ -148,6 +150,11 @@ class Input
 			if (!$blnDecodeEntities)
 			{
 				$varValue = static::encodeSpecialChars($varValue);
+			}
+
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
 			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
@@ -188,6 +195,11 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -218,6 +230,40 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::preserveBasicEntities($varValue);
 			$varValue = static::xssClean($varValue);
+
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
+
+		return static::$arrCache[$strCacheKey][$strKey];
+	}
+
+
+	/**
+	 * Return a raw, unsafe and unfiltered $_POST variable
+	 *
+	 * @param string $strKey The variable name
+	 *
+	 * @return mixed The raw variable value
+	 *
+	 * @internal
+	 */
+	public static function postUnsafeRaw($strKey)
+	{
+		$strCacheKey = 'postUnsafeRaw';
+
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
+		{
+			$varValue = static::findPost($strKey);
+
+			if ($varValue === null)
+			{
+				return $varValue;
+			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
@@ -256,6 +302,8 @@ class Input
 			{
 				$varValue = static::encodeSpecialChars($varValue);
 			}
+
+			$varValue = static::encodeInsertTags($varValue);
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
@@ -532,9 +580,9 @@ class Input
 		$varValue = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $varValue);
 
 		// Remove carriage returns
-      	$varValue = preg_replace('/\r+/', '', $varValue);
+		$varValue = preg_replace('/\r+/', '', $varValue);
 
-      	// Replace unicode entities
+		// Replace unicode entities
 		$varValue = utf8_decode_entities($varValue);
 
 		// Remove null bytes
@@ -719,6 +767,19 @@ class Input
 		$arrReplace = array('&#35;', '&#60;', '&#62;', '&#40;', '&#41;', '&#92;', '&#61;');
 
 		return str_replace($arrSearch, $arrReplace, $varValue);
+	}
+
+
+	/**
+	 * Encode the opening and closing delimiters of insert tags
+	 *
+	 * @param string $varValue The input string
+	 *
+	 * @return string The encoded input string
+	 */
+	public static function encodeInsertTags($varValue)
+	{
+		return str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $varValue);
 	}
 
 

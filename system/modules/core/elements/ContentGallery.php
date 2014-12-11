@@ -110,17 +110,29 @@ class ContentGallery extends \ContentElement
 			{
 				$objFile = new \File($objFiles->path, true);
 
-				if (!$objFile->isGdImage)
+				if (!$objFile->isImage)
 				{
 					continue;
 				}
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($objPage->rootFallbackLanguage !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+					}
+				}
+
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+					$arrMeta['title'] = specialchars($objFile->basename);
 				}
 
 				// Add the image
@@ -158,17 +170,29 @@ class ContentGallery extends \ContentElement
 
 					$objFile = new \File($objSubfiles->path, true);
 
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($objPage->rootFallbackLanguage !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->rootFallbackLanguage);
+						}
+					}
+
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+						$arrMeta['title'] = specialchars($objFile->basename);
 					}
 
 					// Add the image
@@ -316,12 +340,12 @@ class ContentGallery extends \ContentElement
 
 				if ($j == 0)
 				{
-					$class_td = ' col_first';
+					$class_td .= ' col_first';
 				}
 
 				if ($j == ($this->perRow - 1))
 				{
-					$class_td = ' col_last';
+					$class_td .= ' col_last';
 				}
 
 				$objCell = new \stdClass();

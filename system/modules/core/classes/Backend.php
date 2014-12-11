@@ -105,12 +105,20 @@ abstract class Backend extends \Controller
 			return $lang;
 		}
 
-		// Fallback to the short tag (e.g. "de" instead of "de_CH")
 		if (($short = substr($GLOBALS['TL_LANGUAGE'], 0, 2)) != $lang)
 		{
+			// Try the short tag, e.g. "de" instead of "de_CH"
 			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $short . '.js'))
 			{
 				return $short;
+			}
+		}
+		elseif (($long = $short . '_' . strtoupper($short)) != $lang)
+		{
+			// Try the long tag, e.g. "fr_FR" instead of "fr" (see #6952)
+			if (file_exists(TL_ROOT . '/assets/tinymce4/langs/' . $long . '.js'))
+			{
+				return $long;
 			}
 		}
 
@@ -175,6 +183,11 @@ abstract class Backend extends \Controller
 			case 'html5':
 			case 'xhtml':
 				return 'php';
+				break;
+
+			case 'svg':
+			case 'svgz':
+				return 'xml';
 				break;
 
 			default:
@@ -312,14 +325,14 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$arrTables = (array) $arrModule['tables'];
+		$strTable = \Input::get('table') ?: $arrTables[0];
 		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
 		if ($id != $this->Session->get('CURRENT_ID'))
 		{
 			$this->Session->set('CURRENT_ID', $id);
-			$this->reload();
 		}
 
 		define('CURRENT_ID', (\Input::get('table') ? $id : \Input::get('id')));
@@ -348,7 +361,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array)$arrModule['tables']))
+			if (!in_array($strTable, $arrTables))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -409,7 +422,7 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
@@ -470,47 +483,91 @@ abstract class Backend extends \Controller
 					break;
 			}
 
-			// Correctly add the theme name in the style sheets module
-			if (strncmp(\Input::get('table'), 'tl_style', 8) === 0)
+			$strFirst = null;
+			$strSecond = null;
+
+			// Handle child child tables (e.g. tl_style)
+			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
 			{
-				if (\Input::get('table') == 'tl_style_sheet' || !isset($_GET['act']))
+				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+
+				if (in_array($ptable, $arrTables))
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)")
-											 ->limit(1)
-											 ->execute(\Input::get('id'));
+					$this->loadDataContainer($ptable);
 
-					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
-
-					if (\Input::get('table') == 'tl_style')
+					if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
 					{
-						$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-												 ->limit(1)
-												 ->execute(CURRENT_ID);
+						$ftable = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
 
-						$this->Template->headline .= ' » ' . $objRow->name;
+						if (in_array($ftable, $arrTables))
+						{
+							$strFirst = $ftable;
+							$strSecond = $ptable;
+						}
 					}
 				}
-				elseif (\Input::get('table') == 'tl_style')
+			}
+
+			// Build the breadcrumb trail
+			if ($strFirst !== null && $strSecond !== null)
+			{
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select' || \Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))")
-											 ->limit(1)
-											 ->execute(\Input::get('id'));
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=?";
+					}
+					else
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+					}
+				}
+				else
+				{
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
+					}
+					else
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
+					}
+				}
 
+				// Add the first level name
+				$objRow = $this->Database->prepare($strQuery)
+										 ->limit(1)
+										 ->execute($dc->id);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
+				}
 
-					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
 
+				// Add the second level name
+				$objRow = $this->Database->prepare("SELECT * FROM $strSecond WHERE id=?")
+										 ->limit(1)
+										 ->execute(CURRENT_ID);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 			}
 			else
 			{
 				// Add the name of the parent element
-				if (\Input::get('table') && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrTables) && $strTable != $arrTables[0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
@@ -530,9 +587,9 @@ abstract class Backend extends \Controller
 				}
 
 				// Add the name of the submodule
-				if (\Input::get('table') && isset($GLOBALS['TL_LANG']['MOD'][\Input::get('table')]))
+				if ($strTable && isset($GLOBALS['TL_LANG']['MOD'][$strTable]))
 				{
-					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][\Input::get('table')];
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strTable];
 				}
 			}
 
@@ -545,15 +602,29 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 			{
-				if (\Input::get('do') == 'files')
+				if (\Input::get('id'))
 				{
-					$this->Template->headline .= ' » ' . \Input::get('id');
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('id');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					}
 				}
-				else
+				elseif (\Input::get('pid'))
 				{
-					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('pid');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('pid'));
+					}
 				}
 			}
 
@@ -602,7 +673,7 @@ abstract class Backend extends \Controller
 			{
 				if ($objPages->dns != '')
 				{
-					$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
+					$domain = ($objPages->useSSL ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
 				}
 				else
 				{

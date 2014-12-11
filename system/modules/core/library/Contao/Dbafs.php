@@ -89,12 +89,12 @@ class Dbafs
 					unset($arrPaths[$i]);
 					$arrPids[$objModels->path] = $objModels->uuid;
 				}
-			}
 
-			// Store the model if it exists
-			if ($objModels->path == $strResource)
-			{
-				$objModel = $objModels->current();
+				// Store the model if it exists
+				if ($objModels->path == $strResource)
+				{
+					$objModel = $objModels->current();
+				}
 			}
 		}
 
@@ -111,7 +111,7 @@ class Dbafs
 		{
 			// Get a filtered list of all files
 			$objFiles = new \RecursiveIteratorIterator(
-				new \Dbafs\Filter(
+				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/' . $strResource,
 						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -450,6 +450,10 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
+		// Try to raise the limits (see #7035)
+		@ini_set('memory_limit', -1);
+		@ini_set('max_execution_time', 0);
+
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
@@ -460,7 +464,7 @@ class Dbafs
 
 		// Get a filtered list of all files
 		$objFiles = new \RecursiveIteratorIterator(
-			new \Dbafs\Filter(
+			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(
 					TL_ROOT . '/' . \Config::get('uploadPath'),
 					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -542,6 +546,7 @@ class Dbafs
 					$objModel->type      = 'file';
 					$objModel->path      = $objFile->path;
 					$objModel->extension = $objFile->extension;
+					$objModel->found     = 2;
 					$objModel->hash      = $objFile->hash;
 					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
@@ -557,6 +562,7 @@ class Dbafs
 					$objModel->type      = 'folder';
 					$objModel->path      = $objFolder->path;
 					$objModel->extension = '';
+					$objModel->found     = 2;
 					$objModel->hash      = $objFolder->hash;
 					$objModel->uuid      = $objDatabase->getUuid();
 					$objModel->save();
@@ -565,7 +571,7 @@ class Dbafs
 			else
 			{
 				// Check whether the MD5 hash has changed
-				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath);
+				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath, true);
 				$strType = ($objModel->hash != $objResource->hash) ? 'Changed' : 'Unchanged';
 
 				// Add a log entry
@@ -588,7 +594,7 @@ class Dbafs
 
 			while ($objFiles->next())
 			{
-				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);
 
 				if ($objFound !== null)
 				{
@@ -669,6 +675,9 @@ class Dbafs
 
 		// Close the log file
 		$objLog->close();
+
+		// Reset the found flag
+		$objDatabase->query("UPDATE tl_files SET found=1 WHERE found=2");
 
 		// Unlock the tables
 		$objDatabase->unlockTables();

@@ -36,10 +36,11 @@ $GLOBALS['BE_MOD'] = array
 	(
 		'themes' => array
 		(
-			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'tables'      => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout', 'tl_image_size', 'tl_image_size_item'),
 			'importTheme' => array('Theme', 'importTheme'),
 			'exportTheme' => array('Theme', 'exportTheme'),
-			'import'      => array('StyleSheets', 'importStyleSheet')
+			'import'      => array('StyleSheets', 'importStyleSheet'),
+			'export'      => array('StyleSheets', 'exportStyleSheet')
 		),
 		'page' => array
 		(
@@ -355,8 +356,9 @@ $GLOBALS['TL_CROP'] = array
 	(
 		'proportional', 'box'
 	),
-	'crop' => array
+	'exact' => array
 	(
+		'crop',
 		'left_top',    'center_top',    'right_top',
 		'left_center', 'center_center', 'right_center',
 		'left_bottom', 'center_bottom', 'right_bottom'
@@ -418,6 +420,12 @@ $GLOBALS['TL_NOINDEX_KEYS'] = array('id', 'file', 'token', 'day', 'month', 'year
 
 
 /**
+ * Register the supported CSS units
+ */
+$GLOBALS['TL_CSS_UNITS'] = array('px', '%', 'em', 'rem', 'vw', 'vh', 'vmin', 'vmax', 'ex', 'pt', 'pc', 'in', 'cm', 'mm');
+
+
+/**
  * Wrapper elements
  */
 $GLOBALS['TL_WRAPPERS'] = array
@@ -445,18 +453,19 @@ $GLOBALS['TL_WRAPPERS'] = array
  */
 $GLOBALS['TL_ASSETS'] = array
 (
-	'ACE'          => '1.1.3',
+	'ACE'          => '1.1.6',
 	'CSS3PIE'      => '1.0.0',
 	'DROPZONE'     => '3.8.5',
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',
+	'RESPIMAGE'    => '0.9.6',
 	'SWIPE'        => '2.0',
 	'JQUERY'       => '1.11.0',
 	'JQUERY_UI'    => '1.10.4',
 	'COLORBOX'     => '1.5.8',
 	'MEDIAELEMENT' => '2.14.2',
 	'TABLESORTER'  => '2.0.5',
-	'MOOTOOLS'     => '1.4.5',
+	'MOOTOOLS'     => '1.5.1',
 	'COLORPICKER'  => '1.4',
 	'DATEPICKER'   => '2.2.0',
 	'MEDIABOX'     => '1.4.6',
@@ -468,6 +477,5 @@ $GLOBALS['TL_ASSETS'] = array
 /**
  * Other global arrays
  */
-$GLOBALS['TL_MIME'] = array();
-$GLOBALS['TL_PERMISSIONS'] = array();
 $GLOBALS['TL_MODELS'] = array();
+$GLOBALS['TL_PERMISSIONS'] = array();

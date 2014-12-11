@@ -23,7 +23,7 @@ namespace Contao;
  *
  *     $session = Session::getInstance();
  *     $session->set('foo', 'bar');
- *     echo $session::->('foo');
+ *     echo $session->get('foo');
  *
  * @package   Library
  * @author    Leo Feyer <https://github.com/leofeyer>

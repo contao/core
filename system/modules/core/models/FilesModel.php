@@ -112,7 +112,7 @@ class FilesModel extends \Model
 		$t = static::$strTable;
 
 		// Convert UUIDs to binary
-		if (strlen($strUuid) == 36)
+		if (\Validator::isStringUuid($strUuid))
 		{
 			$strUuid = \String::uuidToBin($strUuid);
 		}
@@ -141,7 +141,7 @@ class FilesModel extends \Model
 		foreach ($arrUuids as $k=>$v)
 		{
 			// Convert UUIDs to binary
-			if (strlen($v) == 36)
+			if (\Validator::isStringUuid($v))
 			{
 				$v = \String::uuidToBin($v);
 			}
@@ -228,7 +228,7 @@ class FilesModel extends \Model
 		foreach ($arrUuids as $k=>$v)
 		{
 			// Convert UUIDs to binary
-			if (strlen($v) == 36)
+			if (\Validator::isStringUuid($v))
 			{
 				$v = \String::uuidToBin($v);
 			}

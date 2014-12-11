@@ -20,6 +20,9 @@
       <trans-unit id="MSC.com_submit">
         <source>Submit comment</source>
       </trans-unit>
+      <trans-unit id="MSC.com_login">
+        <source>You need to be logged in to add comments.</source>
+      </trans-unit>
       <trans-unit id="MSC.com_by">
         <source>Comment by</source>
       </trans-unit>

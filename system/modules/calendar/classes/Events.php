@@ -208,7 +208,7 @@ abstract class Events extends \Module
 		$span = \Calendar::calculateSpan($intStart, $intEnd);
 
 		// Adjust the start time of a multi-day event (see #6802)
-		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin)
+		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin && $intBegin < $intEnd)
 		{
 			$intStart = $intBegin;
 		}
@@ -257,7 +257,7 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
-		$arrEvent['start'] = $intStart;
+		$arrEvent['begin'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 		$arrEvent['details'] = '';
 

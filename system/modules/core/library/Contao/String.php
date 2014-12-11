@@ -111,7 +111,7 @@ class String
 	 */
 	public static function substrHtml($strString, $intNumberOfChars)
 	{
-		$strReturn = "";
+		$strReturn = '';
 		$intCharCount = 0;
 		$arrOpenTags = array();
 		$arrTagBuffer = array();
@@ -133,12 +133,15 @@ class String
 				continue;
 			}
 
+			$buffer = $arrChunks[$i];
+
 			// Get the substring of the current text
 			if (($arrChunks[$i] = static::substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
 
+			$blnModified = ($buffer !== $arrChunks[$i]);
 			$intCharCount += utf8_strlen(static::decodeEntities($arrChunks[$i]));
 
 			if ($intCharCount <= $intNumberOfChars)
@@ -194,6 +197,12 @@ class String
 				if (strlen($arrChunks[$i]) || $i<$c)
 				{
 					$strReturn .= implode('', $arrTagBuffer) . $arrChunks[$i];
+				}
+
+				// Stop after the first shortened chunk (see #7311)
+				if ($blnModified)
+				{
+					break;
 				}
 
 				$arrTagBuffer = array();
@@ -508,6 +517,7 @@ class String
 		// Replace tokens
 		$strReturn = str_replace('?><br />', '?>', $strReturn);
 		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
+		$strReturn = str_replace("]; ?>\n", '] . "\n"; ?>' . "\n", $strReturn); // see #7178
 
 		// Eval the code
 		ob_start();
@@ -623,6 +633,59 @@ class String
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
+	 *
+	 * @param string $url The URL
+	 *
+	 * @return \stdClass The options object
+	 */
+	public static function resolveFlaggedUrl(&$url)
+	{
+		$options = new \stdClass();
+
+		// Defaults
+		$options->static = false;
+		$options->media  = null;
+		$options->mtime  = null;
+		$options->async  = false;
+
+		$chunks = explode('|', $url);
+
+		// Remove the flags from the URL
+		$url = $chunks[0];
+
+		for ($i=1; $i<count($chunks); $i++)
+		{
+			if (empty($chunks[$i]))
+			{
+				continue;
+			}
+
+			switch ($chunks[$i])
+			{
+				case 'static':
+					$options->static = true;
+					break;
+
+				case 'async':
+					$options->async = true;
+					break;
+
+				case is_numeric($chunks[$i]):
+					$options->mtime = $chunks[$i];
+					break;
+
+				default:
+					$options->media = $chunks[$i];
+					break;
+			}
+		}
+
+		return $options;
 	}
 
 

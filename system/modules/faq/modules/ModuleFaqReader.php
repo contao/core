@@ -164,14 +164,7 @@ class ModuleFaqReader extends \Module
 		// Add the author
 		if (($objAuthor = $objFaq->getRelated('author')) !== null)
 		{
-			if ($objAuthor->google != '')
-			{
-				$strAuthor = '<a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
-			}
-			else
-			{
-				$strAuthor = $objAuthor->name;
-			}
+			$strAuthor = $objAuthor->name;
 		}
 
 		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $strAuthor);

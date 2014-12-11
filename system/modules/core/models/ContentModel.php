@@ -50,11 +50,11 @@ class ContentModel extends \Model
 		// Also handle empty ptable fields (backwards compatibility)
 		if ($strParentTable == 'tl_article')
 		{
-			$arrColumns = array("$t.pid=? AND (ptable=? OR ptable='')");
+			$arrColumns = array("$t.pid=? AND ($t.ptable=? OR $t.ptable='')");
 		}
 		else
 		{
-			$arrColumns = array("$t.pid=? AND ptable=?");
+			$arrColumns = array("$t.pid=? AND $t.ptable=?");
 		}
 
 		if (!BE_USER_LOGGED_IN)

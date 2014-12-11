@@ -125,10 +125,10 @@ class ModuleArticle extends \Module
 			}
 
 			$article = (!\Config::get('disableAlias') && $this->alias != '') ? $this->alias : $this->id;
-			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
+			$href = '/articles/' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
-			$this->Template->href = $this->addToUrl($href);
+			$this->Template->href = $this->generateFrontendUrl($objPage->row(), $href);
 			$this->Template->teaser = $this->teaser;
 			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline), true);
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
@@ -161,17 +161,8 @@ class ModuleArticle extends \Module
 		// Back link
 		if (!$this->multiMode && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias))
 		{
+			$this->Template->backlink = 'javascript:history.go(-1)'; // see #6955
 			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
-
-			// Remove the "/articles/…" part from the URL
-			if (\Config::get('disableAlias'))
-			{
-				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', \Environment::get('request'));
-			}
-			else
-			{
-				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', \Environment::get('request')) . \Config::get('urlSuffix');
-			}
 		}
 
 		$arrElements = array();

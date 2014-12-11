@@ -13,7 +13,7 @@
     <p class="time"><?php echo $this->time . $this->span; ?></p>
   <?php endif; ?>
 
-  <div class="ce_text">
+  <div class="ce_text block">
     <?php echo $this->details; ?>
   </div>
 

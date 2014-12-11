@@ -158,13 +158,20 @@ class PageSelector extends \Widget
 			// Root nodes (breadcrumb menu)
 			if (!empty($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']))
 			{
-				$tree = $this->renderPagetree($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'][0], -20);
+				$nodes = $this->eliminateNestedPages($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']);
+
+				foreach ($nodes as $node)
+				{
+					$tree .= $this->renderPagetree($node, -20);
+				}
 			}
 
 			// Predefined node set (see #3563)
 			elseif (is_array($this->rootNodes))
 			{
-				foreach ($this->eliminateNestedPages($this->rootNodes) as $node)
+				$nodes = $this->eliminateNestedPages($this->rootNodes);
+
+				foreach ($nodes as $node)
 				{
 					$tree .= $this->renderPagetree($node, -20);
 				}
@@ -185,7 +192,9 @@ class PageSelector extends \Widget
 			// Show only mounted pages to regular users
 			else
 			{
-				foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
+				$nodes = $this->eliminateNestedPages($this->User->pagemounts);
+
+				foreach ($nodes as $node)
 				{
 					$tree .= $this->renderPagetree($node, -20);
 				}
@@ -205,7 +214,7 @@ class PageSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view picker_selector'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 

@@ -94,12 +94,6 @@ class ImageSize extends \Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		// Backwards compatibility (see #3911)
-		if (@$this->varValue[2] == 'crop')
-		{
-			$this->varValue[2] = 'center_center';
-		}
-
 		$arrFields = array();
 
 		for ($i=0; $i<2; $i++)
@@ -139,14 +133,15 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>',
+		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
 								$this->strName,
 								$this->strId.'_3',
+								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
 
-		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,
-						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}

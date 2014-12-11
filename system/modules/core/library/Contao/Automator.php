@@ -579,7 +579,7 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
 				{
 					continue;
 				}
@@ -620,7 +620,7 @@ class Automator extends \System
 	 */
 	public function generateLanguageCache()
 	{
-		$arrLanguages = array();
+		$arrLanguages = array('en');
 		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page WHERE type='root'");
 
 		// Only cache the languages which are in use (see #6013)
@@ -658,7 +658,7 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if ((substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
+					if (strncmp($strFile, '.', 1) === 0 || (substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
 					{
 						continue;
 					}
@@ -738,13 +738,13 @@ class Automator extends \System
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
 				// Ignore non PHP files and files which have been included before
-				if (substr($strFile, -4) != '.php' || in_array($strFile, $included))
+				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $included))
 				{
 					continue;
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -778,6 +778,17 @@ class Automator extends \System
 			{
 				$sql = str_replace('"', '\"', $sql);
 				$objFile->append("\t'$field' => \"$sql\",");
+			}
+
+			$objFile->append(');', "\n\n");
+
+			// Order fields
+			$arrFields = $objExtract->getOrderFields();
+			$objFile->append("\$this->arrOrderFields = array\n(");
+
+			foreach ($arrFields as $field)
+			{
+				$objFile->append("\t'$field',");
 			}
 
 			$objFile->append(');', "\n\n");

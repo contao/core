@@ -184,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'feedBase' => array
@@ -372,7 +372,7 @@ class tl_calendar_feed extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->Calendar->generateFeed($id, true);
+			$this->Calendar->generateFeedsByCalendar($id);
 		}
 
 		$this->import('Automator');

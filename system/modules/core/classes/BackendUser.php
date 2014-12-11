@@ -252,10 +252,9 @@ class BackendUser extends \User
 		{
 			return true;
 		}
-
-		// Enable all subfolders (filemounts)
 		elseif ($array == 'filemounts')
 		{
+			// Check the subfolders (filemounts)
 			foreach ($this->filemounts as $folder)
 			{
 				if (preg_match('/^'. preg_quote($folder, '/') .'/i', $field[0]))

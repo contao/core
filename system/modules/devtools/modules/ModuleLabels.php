@@ -110,12 +110,12 @@ class ModuleLabels extends \BackendModule
 
 					// Include English file
 					$GLOBALS['TL_LANG'] = array();
-					eval(\System::convertXlfToPhp($strPath . '/' . $strFile, 'en'));
+					\System::convertXlfToPhp($strPath . '/' . $strFile, 'en', true);
 					$arrOld = $GLOBALS['TL_LANG'];
 
 					// Include foreign file
 					$GLOBALS['TL_LANG'] = array();
-					eval(\System::convertXlfToPhp($strLang . '/' . $strFile, $lng));
+					\System::convertXlfToPhp($strLang . '/' . $strFile, $lng, true);
 					$arrNew = $GLOBALS['TL_LANG'];
 
 					// Restore the former labels

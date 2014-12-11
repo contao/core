@@ -107,23 +107,24 @@ select,input,textarea {
  * Hide invisible elements
  */
 .invisible {
-	width:0;
-	height:0;
-	left:-1000px;
-	top:-1000px;
-	position:absolute;
+	border:0;
+	clip:rect(0 0 0 0);
+	height:1px;
+	margin:-1px;
 	overflow:hidden;
-	display:inline;
+	padding:0;
+	position:absolute;
+	width:1px;
 }
 
 /**
  * Custom layout sections
  */
 .custom {
-    display:block;
+	display:block;
 }
 #container:after,.custom:after {
-    content:"";
-    display:table;
-    clear:both;
+	content:"";
+	display:table;
+	clear:both;
 }

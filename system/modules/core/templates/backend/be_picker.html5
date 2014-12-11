@@ -35,9 +35,14 @@
 
   <div id="container">
     <div id="main">
-      <?php if ($this->managerHref): ?>
+      <?php if ($this->managerHref || $this->switchHref): ?>
         <div id="manager">
-          <a href="<?php echo $this->managerHref; ?>" class="open" title="<?php echo specialchars($this->manager); ?>"><?php echo $this->manager; ?></a>
+          <?php if ($this->switchHref): ?>
+            <a href="<?php echo $this->switchHref; ?>" class="open"><?php echo $this->switch; ?></a>
+          <?php endif; ?>
+          <?php if ($this->managerHref): ?>
+            <a href="<?php echo $this->managerHref; ?>" class="open"><?php echo $this->manager; ?></a>
+          <?php endif; ?>
         </div>
       <?php endif; ?>
       <?php if ($this->addSearch): ?>

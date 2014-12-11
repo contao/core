@@ -25,7 +25,7 @@ namespace Contao;
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class Versions extends \Backend
+class Versions extends \Controller
 {
 
 	/**
@@ -46,6 +46,24 @@ class Versions extends \Backend
 	 */
 	protected $strPath;
 
+	/**
+	 * Edit URL
+	 * @var string
+	 */
+	protected $strEditUrl;
+
+	/**
+	 * Username
+	 * @var string
+	 */
+	protected $strUsername;
+
+	/**
+	 * User ID
+	 * @var integer
+	 */
+	protected $intUserId;
+
 
 	/**
 	 * Initialize the object
@@ -54,7 +72,9 @@ class Versions extends \Backend
 	 */
 	public function __construct($strTable, $intPid)
 	{
+		$this->import('Database');
 		parent::__construct();
+
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
 
@@ -68,6 +88,36 @@ class Versions extends \Backend
 				$this->strPath = $objFile->path;
 			}
 		}
+	}
+
+
+	/**
+	 * Set the edit URL
+	 * @param string
+	 */
+	public function setEditUrl($strEditUrl)
+	{
+		$this->strEditUrl = $strEditUrl;
+	}
+
+
+	/**
+	 * Set the username
+	 * @param string
+	 */
+	public function setUsername($strUsername)
+	{
+		$this->strUsername = $strUsername;
+	}
+
+
+	/**
+	 * Set the user ID
+	 * @param integer
+	 */
+	public function setUserId($intUserId)
+	{
+		$this->intUserId = $intUserId;
 	}
 
 
@@ -118,11 +168,19 @@ class Versions extends \Backend
 
 		if ($this->strPath !== null)
 		{
-			$objRecord->content = file_get_contents(TL_ROOT . '/' . $this->strPath);
+			$objFile = new \File($this->strPath, true);
+
+			if ($objFile->extension == 'svgz')
+			{
+				$objRecord->content = gzdecode($objFile->getContent());
+			}
+			else
+			{
+				$objRecord->content = $objFile->getContent();
+			}
 		}
 
 		$intVersion = 1;
-		$this->import('BackendUser', 'User');
 
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
 									 ->execute($this->intPid, $this->strTable);
@@ -155,23 +213,11 @@ class Versions extends \Backend
 			$strDescription = $objRecord->selector;
 		}
 
-		$strUrl = \Environment::get('request');
-
-		// Save the real edit URL if the visibility is toggled via Ajax
-		if (preg_match('/&(amp;)?state=/', $strUrl))
-		{
-			$strUrl = preg_replace
-			(
-				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
-				array('', '$1$3', '$1act=edit'), $strUrl
-			);
-		}
-
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($this->intPid, $this->strTable);
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
+					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
 	}
 
 
@@ -323,29 +369,21 @@ class Versions extends \Backend
 				\System::loadLanguageFile($this->strTable);
 				$this->loadDataContainer($this->strTable);
 
-				$arrOrder = array();
-				$arrFields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
-
 				// Get the order fields
-				foreach ($arrFields as $arrField)
-				{
-					if (isset($arrField['eval']['orderField']))
-					{
-						$arrOrder[] = $arrField['eval']['orderField'];
-					}
-				}
+				$objDcaExtractor = \DcaExtractor::getInstance($this->strTable);
+				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Find the changed fields and highlight the changes
 				foreach ($to as $k=>$v)
 				{
 					if ($from[$k] != $to[$k])
 					{
-						if ($arrFields[$k]['inputType'] == 'password' || $arrFields[$k]['eval']['doNotShow'] || $arrFields[$k]['eval']['hideInput'])
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'password' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotShow'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['hideInput'])
 						{
 							continue;
 						}
 
-						$blnIsBinary = ($arrFields[$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
+						$blnIsBinary = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
 
 						// Convert serialized arrays into strings
 						if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
@@ -359,27 +397,27 @@ class Versions extends \Backend
 						unset($tmp);
 
 						// Convert binary UUIDs to their hex equivalents (see #6365)
-						if ($blnIsBinary && \Validator::isUuid($to[$k]))
+						if ($blnIsBinary && \Validator::isBinaryUuid($to[$k]))
 						{
 							$to[$k] = \String::binToUuid($to[$k]);
 						}
-						if ($blnIsBinary && \Validator::isUuid($from[$k]))
+						if ($blnIsBinary && \Validator::isBinaryUuid($from[$k]))
 						{
 							$to[$k] = \String::binToUuid($from[$k]);
 						}
 
 						// Convert date fields
-						if ($arrFields[$k]['eval']['rgxp'] == 'date')
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['rgxp'] == 'date')
 						{
 							$to[$k] = \Date::parse(\Config::get('dateFormat'), $to[$k] ?: '');
 							$from[$k] = \Date::parse(\Config::get('dateFormat'), $from[$k] ?: '');
 						}
-						elseif ($arrFields[$k]['eval']['rgxp'] == 'time')
+						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['rgxp'] == 'time')
 						{
 							$to[$k] = \Date::parse(\Config::get('timeFormat'), $to[$k] ?: '');
 							$from[$k] = \Date::parse(\Config::get('timeFormat'), $from[$k] ?: '');
 						}
-						elseif ($arrFields[$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
+						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['rgxp'] == 'datim' || $k == 'tstamp')
 						{
 							$to[$k] = \Date::parse(\Config::get('datimFormat'), $to[$k] ?: '');
 							$from[$k] = \Date::parse(\Config::get('datimFormat'), $from[$k] ?: '');
@@ -396,7 +434,7 @@ class Versions extends \Backend
 						}
 
 						$objDiff = new \Diff($from[$k], $to[$k]);
-						$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($arrFields[$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
+						$strBuffer .= $objDiff->Render(new DiffRenderer(array('field'=>($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
 					}
 				}
 			}
@@ -484,14 +522,14 @@ class Versions extends \Backend
 
 		// Get the total number of versions
 		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
-							    ->execute($objUser->id);
+								->execute($objUser->id);
 
 		$intPage   = \Input::get('vp') ?: 1;
 		$intOffset = ($intPage - 1) * 30;
 		$intLast   = ceil($objTotal->count / 30);
 
 		// Validate the page number
-		if ($intPage < 1 || $intPage > $intLast)
+		if ($intPage < 1 || ($intLast > 0 && $intPage > $intLast))
 		{
 			header('HTTP/1.1 404 Not Found');
 		}
@@ -514,7 +552,7 @@ class Versions extends \Backend
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date(\Config::get('datimFormat'), $objVersions->tstamp);
 			$arrRow['description'] = \String::substr($arrRow['description'], 32);
-			$arrRow['fromTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
+			$arrRow['shortTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
 
 			if ($arrRow['editUrl'] != '')
 			{
@@ -549,6 +587,67 @@ class Versions extends \Backend
 		}
 
 		$objTemplate->versions = $arrVersions;
+	}
+
+
+	/**
+	 * Return the edit URL
+	 * @return string
+	 */
+	protected function getEditUrl()
+	{
+		if ($this->strEditUrl !== null)
+		{
+			return sprintf($this->strEditUrl, $this->intPid);
+		}
+
+		$strUrl = \Environment::get('request');
+
+		// Save the real edit URL if the visibility is toggled via Ajax
+		if (preg_match('/&(amp;)?state=/', $strUrl))
+		{
+			$strUrl = preg_replace
+			(
+				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
+				array('', '$1$3', '$1act=edit'), $strUrl
+			);
+		}
+
+		return $strUrl;
+	}
+
+
+	/**
+	 * Return the username
+	 * @return string
+	 */
+	protected function getUsername()
+	{
+		if ($this->strUsername !== null)
+		{
+			return $this->strUsername;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->username;
+	}
+
+
+	/**
+	 * Return the user ID
+	 * @return string
+	 */
+	protected function getUserId()
+	{
+		if ($this->intUserId !== null)
+		{
+			return $this->intUserId;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->id;
 	}
 
 

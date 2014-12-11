@@ -131,10 +131,10 @@ class RepositoryBackendModule extends BackendModule
 						));
 					}
 					$this->mode = 'soap';
-				} catch (Exception $e) {
+				} catch (SoapFault $e) {
 					$rep->installLink = $this->createUrl(array());
 					$rep->updateLink = $this->createUrl(array('update'=>'database'));
-					$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">Could not connect to the repository server</p>';
+					$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">' . $e->getMessage() . '</p>';
 					if ($compiler == 'update') $this->$compiler($this->parameter);
 					return;
 				}
@@ -149,7 +149,11 @@ class RepositoryBackendModule extends BackendModule
 		} // if
 
 		// execute compiler
-		$this->$compiler($this->parameter);
+		try {
+			$this->$compiler($this->parameter);
+		} catch (SoapFault $e) {
+			$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = '<p class="tl_error">' . $e->getMessage() . '</p>';
+		}
 
 		// do not execute hooks upon installation/removal (see #2448)
 		if ($compiler == 'install' || $compiler == 'upgrade' || $compiler == 'uninstall') {

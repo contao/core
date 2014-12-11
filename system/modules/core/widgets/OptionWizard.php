@@ -68,6 +68,12 @@ class OptionWizard extends \Widget
 				{
 					$this->mandatory = false;
 				}
+
+				// Strip double quotes (see #6919)
+				if ($options[$key]['value'] != '')
+				{
+					$options[$key]['value'] = str_replace('"', '', $options[$key]['value']);
+				}
 			}
 		}
 

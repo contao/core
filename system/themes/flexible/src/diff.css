@@ -19,6 +19,7 @@ h2 {
 	margin:0;
 	padding:3px 6px 4px;
 	font-size:11px;
+	font-size:.6875rem;
 	background:#eee;
 	border-bottom:1px solid #ddd;
 }
@@ -53,6 +54,7 @@ h2 {
 	background:#fcfcfc;
 	font-family:Courier,monospace;
 	font-size:12px;
+	font-size:.75rem;
 	border-radius:3px;
 }
 #diff .replace.left,#diff .delete.left {

@@ -79,8 +79,9 @@ class ModuleListing extends \Module
 		}
 
 		$this->strTemplate = $this->list_layout;
-		$this->list_where = $this->replaceInsertTags($this->list_where);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+
+		$this->list_where = $this->replaceInsertTags($this->list_where, false);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		return parent::generate();
 	}
@@ -190,13 +191,18 @@ class ModuleListing extends \Module
 
 		$strQuery .= $strWhere;
 
+		// Do not use $this in anonymous functions in PHP 5.3 (see #7078)
+		$table = $this->list_table;
+
 		// Cast date fields to int (see #5609)
-		$blnCastInt = ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$this->list_sort]['eval']['rgxp'] == 'datim');
+		$isInt = function($field) use($table) {
+			return $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'datim';
+		};
 
 		// Order by
 		if (\Input::get('order_by'))
 		{
-			if ($blnCastInt)
+			if ($isInt(\Input::get('order_by')))
 			{
 				$strQuery .= " ORDER BY CAST(" . \Input::get('order_by') . " AS SIGNED) " . \Input::get('sort');
 			}
@@ -207,7 +213,7 @@ class ModuleListing extends \Module
 		}
 		elseif ($this->list_sort)
 		{
-			if ($blnCastInt)
+			if ($isInt($this->list_sort))
 			{
 				$strQuery .= " ORDER BY CAST(" . $this->list_sort . " AS SIGNED)";
 			}
@@ -238,7 +244,7 @@ class ModuleListing extends \Module
 		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
-		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
+		foreach (preg_split('/&(amp;)?/', \Environment::get('queryString')) as $fragment)
 		{
 			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, $id, strlen($id)) !== 0)
 			{
@@ -377,8 +383,9 @@ class ModuleListing extends \Module
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
+
 		$this->list_info = deserialize($this->list_info);
-		$this->list_info_where = $this->replaceInsertTags($this->list_info_where);
+		$this->list_info_where = $this->replaceInsertTags($this->list_info_where, false);
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? "(" . $this->list_info_where . ") AND " : "") . $this->strPk . "=?")
 									->limit(1)
@@ -390,7 +397,7 @@ class ModuleListing extends \Module
 		}
 
 		$arrFields = array();
-		$arrRow = $objRecord->fetchAssoc();
+		$arrRow = $objRecord->row();
 		$limit = count($arrRow);
 		$count = -1;
 

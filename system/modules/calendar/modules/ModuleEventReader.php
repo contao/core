@@ -186,7 +186,7 @@ class ModuleEventReader extends \Events
 		{
 			$size = deserialize($this->imgSize);
 
-			if ($size[0] > 0 || $size[1] > 0)
+			if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 			{
 				$objEvent->size = $this->imgSize;
 			}
@@ -196,7 +196,7 @@ class ModuleEventReader extends \Events
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
-		$objTemplate->start = $intStartTime;
+		$objTemplate->begin = $intStartTime;
 		$objTemplate->end = $intEndTime;
 		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;

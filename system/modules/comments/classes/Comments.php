@@ -192,6 +192,8 @@ class Comments extends \Frontend
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
 			$objTemplate->requireLogin = true;
+			$objTemplate->login = $GLOBALS['TL_LANG']['MSC']['com_login'];
+
 			return;
 		}
 
@@ -321,7 +323,7 @@ class Comments extends \Frontend
 			}
 
 			// Do not parse any tags in the comment
-			$strComment = htmlspecialchars(trim($arrWidgets['comment']->value));
+			$strComment = specialchars(trim($arrWidgets['comment']->value));
 			$strComment = str_replace(array('&amp;', '&lt;', '&gt;'), array('[&]', '[lt]', '[gt]'), $strComment);
 
 			// Remove multiple line feeds

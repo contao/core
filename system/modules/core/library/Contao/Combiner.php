@@ -12,6 +12,8 @@
 
 namespace Contao;
 
+use Leafo\ScssPhp\Compiler;
+
 
 /**
  * Combines .css or .js files into one single file
@@ -214,23 +216,30 @@ class Combiner extends \System
 
 			foreach ($this->arrFiles as $arrFile)
 			{
+				$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
+
 				// Compile SCSS/LESS files into temporary files
 				if ($arrFile['extension'] == self::SCSS || $arrFile['extension'] == self::LESS)
 				{
 					$strPath = 'assets/' . $strTarget . '/' . str_replace('/', '_', $arrFile['name']) . $this->strMode;
 
-					if (!file_exists(TL_ROOT . '/' . $strPath))
-					{
-						$objFile = new \File($strPath, true);
-						$objFile->write($this->handleScssLess(file_get_contents(TL_ROOT . '/' . $arrFile['name']), $arrFile));
-						$objFile->close();
-					}
+					$objFile = new \File($strPath, true);
+					$objFile->write($this->handleScssLess($content, $arrFile));
+					$objFile->close();
 
 					$return[] = $strPath;
 				}
 				else
 				{
-					$return[] = $arrFile['name'];
+					$name = $arrFile['name'];
+
+					// Add the media query (see #7070)
+					if ($arrFile['media'] != '' && $arrFile['media'] != 'all' && strpos($content, '@media') === false)
+					{
+						$name .= '" media="' . $arrFile['media'];
+					}
+
+					$return[] = $name;
 				}
 			}
 
@@ -327,18 +336,31 @@ class Combiner extends \System
 	{
 		if ($arrFile['extension'] == self::SCSS)
 		{
-			$objCompiler = new \scssc();
-			$objCompiler->setImportPaths(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));
+			$objCompiler = new Compiler();
+
+			$objCompiler->setImportPaths(array
+			(
+				TL_ROOT . '/' . dirname($arrFile['name']),
+				TL_ROOT . '/vendor/contao-components/compass/css'
+			));
+
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'Leafo\ScssPhp\Formatter\Expanded' : 'Leafo\ScssPhp\Formatter\Compressed'));
+
+			return $this->fixPaths($objCompiler->compile($content), $arrFile);
 		}
 		else
 		{
-			$objCompiler = new \lessc();
-			$objCompiler->setImportDir(TL_ROOT . '/' . dirname($arrFile['name']));
-			$objCompiler->setFormatter((\Config::get('debugMode') ? 'lessjs' : 'compressed'));
-		}
+			$arrOptions = array
+			(
+				'compress' => !\Config::get('debugMode'),
+				'import_dirs' => array(TL_ROOT . '/' . dirname($arrFile['name']))
+			);
 
-		return $this->fixPaths($objCompiler->compile($content), $arrFile);
+			$objParser = new \Less_Parser($arrOptions);
+			$objParser->parse($content);
+
+			return $this->fixPaths($objParser->getCss(), $arrFile);
+		}
 	}
 
 

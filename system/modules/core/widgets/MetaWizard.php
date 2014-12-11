@@ -87,6 +87,12 @@ class MetaWizard extends \Widget
 		$return = '';
 		$taken = array();
 
+		$this->import('Database');
+
+		// Only show the root page languages (see #7112)
+		$objRootLangs = $this->Database->query("SELECT language FROM tl_page WHERE type='root'");
+		$languages = array_intersect_key($languages, array_flip($objRootLangs->fetchEach('language')));
+
 		// Add the existing entries
 		if (!empty($this->varValue))
 		{
@@ -98,7 +104,7 @@ class MetaWizard extends \Widget
 				$return .= '
     <li class="' . (($count%2 == 0) ? 'even' : 'odd') . '" data-language="' . $lang . '">';
 
-				$return .= '<span class="lang">' . $languages[$lang] . ' ' . \Image::getHtml('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['aw_delete']) . '"') . '</span>';
+				$return .= '<span class="lang">' . $languages[$lang] . ' ' . \Image::getHtml('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)"') . '</span>';
 
 				// Take the fields from the DCA (see #4327)
 				foreach ($this->metaFields as $field)

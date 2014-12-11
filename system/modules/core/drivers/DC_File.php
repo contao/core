@@ -323,8 +323,6 @@ class DC_File extends \DataContainer implements \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
@@ -401,30 +399,43 @@ class DC_File extends \DataContainer implements \editable
 			$varValue = $varValue ? true : false;
 		}
 
-		// Convert date formats into timestamps
-		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '')
 		{
-			$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
-			$varValue = $objDate->tstamp;
-		}
-
-		// Handle entities
-		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
-		{
-			$varValue = deserialize($varValue);
-
-			if (!is_array($varValue))
+			// Convert binary UUIDs (see #6893)
+			if ($arrData['inputType'] == 'fileTree')
 			{
-				$varValue = \String::restoreBasicEntities($varValue);
-			}
-			else
-			{
-				foreach ($varValue as $k=>$v)
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
 				{
-					$varValue[$k] = \String::restoreBasicEntities($v);
+					$varValue = \String::binToUuid($varValue);
 				}
+				else
+				{
+					$varValue = serialize(array_map('String::binToUuid', $varValue));
+				}
+			}
 
-				$varValue = serialize($varValue);
+			// Convert date formats into timestamps
+			if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+			{
+				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$varValue = $objDate->tstamp;
+			}
+
+			// Handle entities
+			if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
+			{
+				$varValue = deserialize($varValue);
+
+				if (!is_array($varValue))
+				{
+					$varValue = \String::restoreBasicEntities($varValue);
+				}
+				else
+				{
+					$varValue = serialize(array_map('String::restoreBasicEntities', $varValue));
+				}
 			}
 		}
 
@@ -458,7 +469,7 @@ class DC_File extends \DataContainer implements \editable
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent !== $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)
 		{
 			\Config::persist($this->strField, $varValue);
 
