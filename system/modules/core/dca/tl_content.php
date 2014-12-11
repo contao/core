@@ -1692,7 +1692,7 @@ class tl_content extends Backend
 	 * @return mixed
 	 */
 	public function extractYoutubeId($varValue, DataContainer $dc)
-    {
+	{
 		$url = \Contao\Input::decodeEntities($varValue);
 		$url = parse_url($url, PHP_URL_QUERY);
 		if (false === $url || null === $url) {
@@ -1706,7 +1706,7 @@ class tl_content extends Backend
 		}
 
 		return $varValue;
-    }
+	}
 
 
 	/**
