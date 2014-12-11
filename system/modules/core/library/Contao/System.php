@@ -705,6 +705,8 @@ abstract class System
 		// Set up the quotevalue function
 		$quotevalue = function($value)
 		{
+			$value = str_replace("\n", '\n', $value);
+
 			if (strpos($value, '\n') !== false)
 			{
 				return '"' . str_replace('"', '\\"', $value) . '"';
@@ -725,7 +727,7 @@ abstract class System
 				continue;
 			}
 
-			$value = str_replace("\n", '\n', $node->item(0)->nodeValue);
+			$value = $node->item(0)->nodeValue;
 
 			// Some closing </em> tags oddly have an extra space in
 			if (strpos($value, '</ em>') !== false)
