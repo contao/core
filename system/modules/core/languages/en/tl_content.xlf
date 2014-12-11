@@ -228,7 +228,7 @@
         <source>Lightbox</source>
       </trans-unit>
       <trans-unit id="tl_content.rel.1">
-        <source>To trigger the lightbox, enter a &lt;em&gt;rel&lt;/em&gt; attribute here.</source>
+        <source>To trigger the lightbox (e.g. mediabox, slimbox, colorbox), enter a &lt;em&gt;rel&lt;/em&gt; attribute here. It will be replaced automatically with &lt;em&gt;data-lightbox&lt;/em&gt; if output format html is selected. Please use the following format: &lt;em&gt;lightbox[name-of-lightbox width height]&lt;/em&gt;</source>
       </trans-unit>
       <trans-unit id="tl_content.useImage.0">
         <source>Create an image link</source>
