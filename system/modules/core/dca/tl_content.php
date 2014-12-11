@@ -628,7 +628,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true),
-			'sql'                     => "varchar(16) NOT NULL default ''"
+			'sql'                     => "varchar(16) NOT NULL default ''",
+            'save_callback' => array
+            (
+                array('tl_content', 'extractYoutubeId')
+            )
 		),
 		'posterSRC' => array
 		(
@@ -1679,6 +1683,30 @@ class tl_content extends Backend
 
 		return $varValue;
 	}
+
+
+	/**
+	 * Extract the video id from a youtube url
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 */
+	public function extractYoutubeId($varValue, DataContainer $dc)
+    {
+        $url = \Contao\Input::decodeEntities($varValue);
+        $url = parse_url($url, PHP_URL_QUERY);
+        if (false === $url || null === $url) {
+            return $varValue;
+        }
+
+        $parts = array();
+        parse_str($url, $parts);
+        if (array_key_exists('v', $parts)) {
+            return $parts['v'];
+        }
+
+        return $varValue;
+    }
 
 
 	/**
