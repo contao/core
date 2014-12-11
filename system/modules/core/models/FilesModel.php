@@ -71,7 +71,7 @@ class FilesModel extends \Model
 			return static::findByUuid($intId, $arrOptions);
 		}
 
-		return static::findBy('id', $intId, $arrOptions);
+		return static::findOneBy('id', $intId, $arrOptions);
 	}
 
 
