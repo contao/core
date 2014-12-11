@@ -2192,8 +2192,22 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						array_unshift($this->strPalette, 'pid');
 					}
 
-					$GLOBALS['TL_DCA'][$this->strTable]['fields']['pid'] = array('label'=>&$GLOBALS['TL_LANG']['MSC']['pid'], 'inputType'=>'text', 'eval'=>array('rgxp'=>'natural'));
-					$GLOBALS['TL_DCA'][$this->strTable]['fields']['sorting'] = array('label'=>&$GLOBALS['TL_LANG']['MSC']['sorting'], 'inputType'=>'text', 'eval'=>array('rgxp'=>'natural'));
+					// Ensure a minimum configuration
+					foreach (array('pid', 'sorting') as $f)
+					{
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['label']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['label'] = &$GLOBALS['TL_LANG']['MSC'][$f];
+						}
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['inputType']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['inputType'] = 'text';
+						}
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['eval']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['eval'] = array('rgxp' => 'natural');
+						}
+					}
 				}
 
 				// Begin current row
