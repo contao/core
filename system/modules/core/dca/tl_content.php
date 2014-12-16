@@ -627,7 +627,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['youtube'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true),
+			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true, 'decodeEntities'=>true),
 			'sql'                     => "varchar(16) NOT NULL default ''",
 			'save_callback' => array
 			(
@@ -1693,8 +1693,7 @@ class tl_content extends Backend
 	 */
 	public function extractYoutubeId($varValue, DataContainer $dc)
 	{
-		$url = \Contao\Input::decodeEntities($varValue);
-		$url = parse_url($url, PHP_URL_QUERY);
+		$url = parse_url($varValue, PHP_URL_QUERY);
 		if (false === $url || null === $url) {
 			return $varValue;
 		}
