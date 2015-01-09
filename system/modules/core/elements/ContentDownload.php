@@ -101,10 +101,12 @@ class ContentDownload extends \ContentElement
 		}
 
 		$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
+		$strHrefFile = \System::urlEncode($objFile->value);
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->titleText ?: sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename));
 		$this->Template->href = $strHref;
+		$this->Template->hreffile = $strHrefFile;
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
 		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;
 		$this->Template->mime = $objFile->mime;
