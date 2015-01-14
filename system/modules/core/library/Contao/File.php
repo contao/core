@@ -541,6 +541,10 @@ class File extends \System
 	 */
 	public function getModel()
 	{
+		if ($this->blnSyncDb && $this->objModel === null) {
+			$this->objModel = \FilesModel::findByPath($this->strFile);
+		}
+
 		return $this->objModel;
 	}
 
