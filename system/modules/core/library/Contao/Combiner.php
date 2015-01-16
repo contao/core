@@ -350,10 +350,12 @@ class Combiner extends \System
 		}
 		else
 		{
+			$strPath = dirname($arrFile['name']);
+
 			$arrOptions = array
 			(
 				'compress' => !\Config::get('debugMode'),
-				'import_dirs' => array(TL_ROOT . '/' . dirname($arrFile['name']))
+				'import_dirs' => array(TL_ROOT . '/' . $strPath => $strPath)
 			);
 
 			$objParser = new \Less_Parser($arrOptions);

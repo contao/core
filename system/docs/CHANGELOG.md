@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Fix the LESS import path in the Combiner (see #7533).
+
+### Fixed
 Hide the width and height attributes if there is a sizes attribute (see #7500).
 
 ### Fixed
