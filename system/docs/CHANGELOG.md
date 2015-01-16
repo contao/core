@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.17 (2015-01-XX)
+---------------------------
+
+### Fixed
+Unset the `postUnsafeRaw` cache in `Input::setPost()` (see #7481).
+
+
 Version 3.2.16 (2014-11-24)
 ---------------------------
 
