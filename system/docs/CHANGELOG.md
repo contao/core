@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Hide the width and height attributes if there is a sizes attribute (see #7500).
+
+### Fixed
 Remove the hardcoded figcaption width (see #7549).
 
 ### Fixed
