@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Remove the hardcoded figcaption width (see #7549).
+
+### Fixed
 Only load the model in the file/page picker if the class exists (see #7490).
 
 
