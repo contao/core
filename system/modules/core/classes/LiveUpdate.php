@@ -69,10 +69,6 @@ class LiveUpdate extends \Backend implements \executable
 		{
 			\Config::set('liveUpdateBase', str_replace('http://', 'https://', \Config::get('liveUpdateBase')));
 		}
-		else
-		{
-			\Config::set('liveUpdateBase', str_replace('https://', 'http://', \Config::get('liveUpdateBase')));
-		}
 
 		$objTemplate->uid = \Config::get('liveUpdateId');
 		$objTemplate->updateServer = \Config::get('liveUpdateBase') . 'index.php';

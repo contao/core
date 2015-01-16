@@ -165,14 +165,6 @@ class Ajax extends \Backend
 						exit; break;
 					}
 				}
-
-				// Empty Live Update ID
-				if (!strlen(\Input::post('id')))
-				{
-					\System::loadLanguageFile('tl_maintenance');
-					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
-					exit; break;
-				}
 				exit; break;
 
 			// Toggle checkbox groups

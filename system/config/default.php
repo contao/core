@@ -313,8 +313,8 @@ $GLOBALS['TL_CONFIG']['allowedDownload']
 	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,'
 	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';
-$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
-$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
+$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'https://update.contao.org/liveupdate/';
+$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'https://contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
 $GLOBALS['TL_CONFIG']['backendTheme']         = 'flexible';
