@@ -93,7 +93,7 @@
       </div>
     <?php endif; ?>
 
-	<div id="main">
+    <div id="main">
       <h1 class="main_headline"><?php echo $this->headline; ?></h1>
       <?php if ($this->managerHref): ?>
         <div id="manager">
