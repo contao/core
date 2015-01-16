@@ -245,7 +245,7 @@ class Picture
 							->executeResize()
 							->getResizedPath();
 
-			$fileObj = new \File($src, true);
+			$fileObj = new \File(rawurldecode($src), true);
 
 			if (empty($attributes['src']))
 			{

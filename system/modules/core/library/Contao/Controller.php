@@ -1622,7 +1622,7 @@ abstract class Controller extends \System
 						$dimensions = '';
 						$imageObj = \Image::create($strFile, array($width, $height, $mode));
 						$src = $imageObj->executeResize()->getResizedPath();
-						$objFile = new \File($src, true);
+						$objFile = new \File(rawurldecode($src), true);
 
 						// Add the image dimensions
 						if (($imgSize = $objFile->imageSize) !== false)
