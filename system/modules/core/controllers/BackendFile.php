@@ -84,11 +84,15 @@ class BackendFile extends \Backend
 		if ($this->Database->tableExists($strTable))
 		{
 			$strModel = \Model::getClassFromTable($strTable);
-			$objModel = $strModel::findByPk(\Input::get('id'));
 
-			if ($objModel !== null)
+			if (class_exists($strModel))
 			{
-				$objDca->activeRecord = $objModel;
+				$objModel = $strModel::findByPk(\Input::get('id'));
+
+				if ($objModel !== null)
+				{
+					$objDca->activeRecord = $objModel;
+				}
 			}
 		}
 

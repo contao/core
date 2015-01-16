@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.1 (2015-01-XX)
+--------------------------
+
+### Fixed
+Only load the model in the file/page picker if the class exists (see #7490).
+
+
 Version 3.4.0 (2014-11-25)
 --------------------------
 
