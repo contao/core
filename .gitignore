@@ -17,7 +17,6 @@ nbproject/
 /contao/update.phar.php
 /files/*
 /assets/css/*
-/assets/images/*
 /assets/js/*
 /share/*.xml
 /system/cache/*
@@ -27,9 +26,7 @@ nbproject/
 /system/config/localconfig.php
 /system/config/pathconfig.php
 /system/cron/cron.txt
-/system/logs/*
 /system/modules/!composer
 /system/modules/*/.skip
-/system/tmp/*
 /templates/*
 /vendor/
