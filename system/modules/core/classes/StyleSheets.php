@@ -197,14 +197,21 @@ class StyleSheets extends \Backend
 	 * @param boolean
 	 * @param array
 	 * @param array
+	 * @param boolean
 	 * @return string
 	 */
-	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
+	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array(), $export=false)
 	{
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
 			$lb = '';
+			$return = '';
+		}
+		elseif ($export)
+		{
+			$strGlue = '';
+			$lb = "\n    ";
 			$return = '';
 		}
 		else
@@ -217,12 +224,20 @@ class StyleSheets extends \Backend
 		$blnNeedsPie = false;
 
 		// Comment
-		if (!$blnWriteToFile && $row['comment'] != '')
+		if ((!$blnWriteToFile || $export) && $row['comment'] != '')
 		{
 			$search = array('@^\s*/\*+@', '@\*+/\s*$@');
 			$comment = preg_replace($search, '', $row['comment']);
-			$comment = wordwrap(trim($comment), 72);
-			$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
+
+			if ($export)
+			{
+				$return .= "\n/* " . $comment . " */\n";
+			}
+			else
+			{
+				$comment = wordwrap(trim($comment), 72);
+				$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
+			}
 		}
 
 		// Selector
@@ -950,6 +965,10 @@ class StyleSheets extends \Backend
 
 			$return .= '}';
 		}
+		elseif ($export)
+		{
+			$return .= "\n}\n";
+		}
 		else
 		{
 			$return .= "\n}</pre>\n";
@@ -1384,7 +1403,7 @@ class StyleSheets extends \Backend
 
 		// Create the file
 		$objFile = new \File('system/tmp/' . md5(uniqid(mt_rand(), true)), true);
-		$objFile->write('/* ' . $objStyleSheet->name . ".css */\n");
+		$objFile->write('');
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($objStyleSheet->id);
@@ -1392,7 +1411,7 @@ class StyleSheets extends \Backend
 		// Append the definition
 		while ($objDefinitions->next())
 		{
-			$objFile->append(strip_tags($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row())), '');
+			$objFile->append($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row(), true), '');
 		}
 
 		$objFile->close();
