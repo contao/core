@@ -107,8 +107,11 @@ catch (UnresolvableDependenciesException $e)
 /**
  * Include the Composer autoloader
  */
-require_once TL_ROOT . '/vendor/autoload.php';
 
+if (file_exists(TL_ROOT . '/vendor/autoload.php'))
+{
+	require_once TL_ROOT . '/vendor/autoload.php';
+}
 
 /**
  * Override some SwiftMailer defaults
