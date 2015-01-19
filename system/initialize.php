@@ -63,8 +63,8 @@ require TL_ROOT . '/system/helper/exception.php';
 /**
  * Set the error and exception handler
  */
-@set_error_handler('__error');
-@set_exception_handler('__exception');
+set_error_handler('__error');
+set_exception_handler('__exception');
 
 
 /**
@@ -89,6 +89,12 @@ require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
 Config::preload(); // see #5872
+
+
+/**
+ * Adjust the error handler to the desired error types
+ */
+set_error_handler('__error', Config::get('errorReporting'));
 
 
 /**
