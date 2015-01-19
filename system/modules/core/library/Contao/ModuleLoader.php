@@ -150,7 +150,15 @@ class ModuleLoader
 				if (file_exists($path . '/config/autoload.ini'))
 				{
 					$config = parse_ini_file($path . '/config/autoload.ini', true);
-					$load[$module] = $config['requires'] ?: array();
+
+					if (isset($config['requires']))
+					{
+						$load[$module] = $config['requires'];
+					}
+					else
+					{
+						$load[$module] = array();
+					}
 
 					foreach ($load[$module] as $k=>$v)
 					{
