@@ -92,8 +92,10 @@ Config::preload(); // see #5872
 
 
 /**
- * Adjust the error handler to the desired error types
+ * Adjust the error handling
  */
+@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
+error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? Config::get('errorReporting') : 0);
 set_error_handler('__error', Config::get('errorReporting'));
 
 
@@ -215,13 +217,6 @@ if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && 
 {
 	Config::set('displayErrors', 1);
 }
-
-
-/**
- * Configure the error handling
- */
-@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
-error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? Config::get('errorReporting') : 0);
 
 
 /**
