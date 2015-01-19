@@ -330,6 +330,8 @@ class Config
 	 * Return all active modules as array
 	 *
 	 * @return array An array of active modules
+	 *
+	 * @deprecated Use ModuleLoader::getActive() instead
 	 */
 	public function getActiveModules()
 	{
