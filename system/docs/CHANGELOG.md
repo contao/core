@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Fix the `current() expects parameter 1 to be array` issue (see #6739).
+
+### Fixed
 Correctly replace the `*_teaser` insert tags (see #7488).
 
 ### Fixed
