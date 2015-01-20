@@ -1262,11 +1262,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser), $blnCache);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser), $blnCache);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;
@@ -1279,11 +1279,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;
@@ -1296,11 +1296,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;

@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Correctly replace the `*_teaser` insert tags (see #7488).
+
+### Fixed
 Adjust the last and previous login labels (see #7426).
 
 ### Fixed
