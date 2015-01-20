@@ -1405,6 +1405,12 @@ class StyleSheets extends \Backend
 		$objFile = new \File('system/tmp/' . md5(uniqid(mt_rand(), true)), true);
 		$objFile->write('');
 
+		// Add the media query (see #7560)
+		if ($objStyleSheet->mediaQuery != '')
+		{
+			$objFile->append($objStyleSheet->mediaQuery . ' {');
+		}
+
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($objStyleSheet->id);
 
@@ -1412,6 +1418,12 @@ class StyleSheets extends \Backend
 		while ($objDefinitions->next())
 		{
 			$objFile->append($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row(), true), '');
+		}
+
+		// Close the media query
+		if ($objStyleSheet->mediaQuery != '')
+		{
+			$objFile->append('}');
 		}
 
 		$objFile->close();
