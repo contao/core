@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Do not show the diff icon if a record has been deleted (see #7429).
+
+### Fixed
 Remove a left-over headline from the `ce_text.xhtml` template (see #7502).
 
 ### Fixed

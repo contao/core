@@ -937,6 +937,10 @@ ul.sgallery li {
 #tl_versions td:last-child {
 	width:32px;
 	white-space:nowrap;
+	text-align:right;
+}
+#tl_versions img.undo {
+	padding-right:2px;
 }
 
 /* CHMOD table */
