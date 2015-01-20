@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Do not apply the GDlib maximum dimensions to SVG images (see #7435).
+
+### Fixed
 Do not show the diff icon if a record has been deleted (see #7429).
 
 ### Fixed
