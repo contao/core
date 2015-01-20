@@ -503,7 +503,7 @@ class DataContainer extends \Backend
 			{
 				$image = 'placeholder.png';
 
-				if ($objFile->isSvgImage || $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 				{
 					if ($objFile->width > 699 || $objFile->height > 524)
 					{

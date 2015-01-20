@@ -445,7 +445,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
+			$sql['charset'] = \Config::get('dbCharset');
 		}
 
 		// Meta
