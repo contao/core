@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Add the username to the "account has been locked" log entry (see #7551).
+
+### Fixed
 Consider the suhosin.memory_limit when raising the PHP limits (see #7035).
 
 ### Fixed
