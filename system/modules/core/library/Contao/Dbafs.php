@@ -450,9 +450,20 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
-		// Try to raise the limits (see #7035)
-		@ini_set('memory_limit', -1);
 		@ini_set('max_execution_time', 0);
+
+		// Consider the suhosin.memory_limit (see #7035)
+		if (extension_loaded('suhosin'))
+		{
+			if (($limit = ini_get('suhosin.memory_limit')) !== '0')
+			{
+				@ini_set('memory_limit', $limit);
+			}
+		}
+		else
+		{
+			@ini_set('memory_limit', -1);
+		}
 
 		$objDatabase = \Database::getInstance();
 

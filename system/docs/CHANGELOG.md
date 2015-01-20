@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Consider the suhosin.memory_limit when raising the PHP limits (see #7035).
+
+### Fixed
 Added two missing `exclude` flags in the `tl_page` data container (see #7522).
 
 ### Fixed
