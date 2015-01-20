@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Send the same cache headers for cached and uncached pages (see #7455).
+
+### Fixed
 Fix the `current() expects parameter 1 to be array` issue (see #6739).
 
 ### Fixed
