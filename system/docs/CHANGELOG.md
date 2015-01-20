@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Send an UTF-8 charset header in the `die_nicely()` function (see #7519).
+
+### Fixed
 Correctly validate dates in the `Widget` class (see #7498).
 
 ### Fixed
