@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Adjust the last and previous login labels (see #7426).
+
+### Fixed
 Unset the `postUnsafeRaw` cache in `Input::setPost()` (see #7481).
 
 
