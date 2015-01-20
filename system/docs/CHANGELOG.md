@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Correctly validate dates in the `Widget` class (see #7498).
+
+### Fixed
 Back port the fixes from #7475 and #7473.
 
 ### Fixed

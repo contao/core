@@ -938,7 +938,7 @@ abstract class Widget extends \Controller
 						// Validate the date (see #5086)
 						try
 						{
-							new \Date($varInput);
+							new \Date($varInput, \Date::getNumericDateFormat());
 						}
 						catch (\OutOfBoundsException $e)
 						{
@@ -966,7 +966,7 @@ abstract class Widget extends \Controller
 						// Validate the date (see #5086)
 						try
 						{
-							new \Date($varInput);
+							new \Date($varInput, \Date::getNumericDatimFormat());
 						}
 						catch (\OutOfBoundsException $e)
 						{
