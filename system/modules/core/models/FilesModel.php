@@ -102,8 +102,8 @@ class FilesModel extends \Model
 	/**
 	 * Find a file by its UUID
 	 *
-	 * @param array $strUuid    The UUID string
-	 * @param array $arrOptions An optional options array
+	 * @param string $strUuid    The UUID string
+	 * @param array  $arrOptions An optional options array
 	 *
 	 * @return \Model|null A model or null if there is no file
 	 */
