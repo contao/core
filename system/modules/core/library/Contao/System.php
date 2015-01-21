@@ -709,7 +709,7 @@ abstract class System
 
 			if (strpos($value, '\n') !== false)
 			{
-				return '"' . str_replace('"', '\\"', $value) . '"';
+				return '"' . str_replace(array('$', '"'), array('\\$', '\\"'), $value) . '"';
 			}
 			else
 			{
