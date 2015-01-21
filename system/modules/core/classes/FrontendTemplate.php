@@ -250,9 +250,9 @@ class FrontendTemplate extends \Template
 			if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache - time()));
-				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
 			}
 			else
 			{

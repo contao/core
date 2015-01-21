@@ -181,7 +181,7 @@ abstract class Frontend extends \Controller
 				}
 				else
 				{
-					$arrLangs = $arrPages['*']; // Empty domain
+					$arrLangs = $arrPages['*'] ?: array(); // empty domain
 				}
 
 				$arrAliases = array();

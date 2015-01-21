@@ -71,7 +71,7 @@ class FilesModel extends \Model
 			return static::findByUuid($intId, $arrOptions);
 		}
 
-		return static::findBy('id', $intId, $arrOptions);
+		return static::findOneBy('id', $intId, $arrOptions);
 	}
 
 
@@ -102,8 +102,8 @@ class FilesModel extends \Model
 	/**
 	 * Find a file by its UUID
 	 *
-	 * @param array $strUuid    The UUID string
-	 * @param array $arrOptions An optional options array
+	 * @param string $strUuid    The UUID string
+	 * @param array  $arrOptions An optional options array
 	 *
 	 * @return \Model|null A model or null if there is no file
 	 */

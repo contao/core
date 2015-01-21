@@ -357,6 +357,7 @@ class Input
 		unset(static::$arrCache['postHtmlEncoded'][$strKey]);
 		unset(static::$arrCache['postHtmlDecoded'][$strKey]);
 		unset(static::$arrCache['postRaw'][$strKey]);
+		unset(static::$arrCache['postUnsafeRaw'][$strKey]);
 
 		if ($varValue === null)
 		{
