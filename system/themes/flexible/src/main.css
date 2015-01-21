@@ -1364,52 +1364,52 @@ a.navigation {
 	background:url("images/hints.gif") no-repeat -20px 20px;
 }
 #ctrl_playerSize_0 {
-	background-position:142px 1px !important;
+	background-position:right 1px !important;
 }
 #ctrl_playerSize_1 {
-	background-position:143px -18px !important;
+	background-position:right -18px !important;
 }
 .tl_imageSize_0 {
-	background-position:63px 1px !important;
+	background-position:right 1px !important;
 }
 .tl_imageSize_1 {
-	background-position:64px -18px !important;
+	background-position:right -18px !important;
 }
 .trbl_top {
-	background-position:47px -39px !important;
+	background-position:right -39px !important;
 }
 .trbl_right {
-	background-position:47px -59px !important;
+	background-position:right -59px !important;
 }
 .trbl_bottom {
-	background-position:47px -79px !important;
+	background-position:right -79px !important;
 }
 .trbl_left {
-	background-position:47px -99px !important;
+	background-position:right -99px !important;
 }
 #ctrl_shadowsize_top {
-	background-position:46px -119px !important;
+	background-position:right -119px !important;
 }
 #ctrl_shadowsize_right {
-	background-position:46px -139px !important;
+	background-position:right -139px !important;
 }
 #ctrl_shadowsize_bottom {
-	background-position:46px -159px !important;
+	background-position:right -159px !important;
 }
 #ctrl_shadowsize_left {
-	background-position:46px -179px !important;
+	background-position:right -179px !important;
 }
 #ctrl_borderradius_top {
-	background-position:0 -199px !important;
+	background-position:left -199px !important;
 }
 #ctrl_borderradius_right {
-	background-position:47px -219px !important;
+	background-position:right -219px !important;
 }
 #ctrl_borderradius_bottom {
-	background-position:47px -241px !important;
+	background-position:right -241px !important;
 }
 #ctrl_borderradius_left {
-	background-position:0 -261px !important;
+	background-position:left -261px !important;
 }
 
 /* Error messages */
@@ -1689,54 +1689,6 @@ fieldset.collapsed > legend {
 	}
 	.mac .tl_panel select {
 		max-width:184px;
-	}
-	#ctrl_playerSize_0 {
-		background-position:164px 1px !important;
-	}
-	#ctrl_playerSize_1 {
-		background-position:165px -18px !important;
-	}
-	.tl_imageSize_0 {
-		background-position:85px 1px !important;
-	}
-	.tl_imageSize_1 {
-		background-position:86px -18px !important;
-	}
-	.trbl_top {
-		background-position:70px -39px !important;
-	}
-	.trbl_right {
-		background-position:70px -59px !important;
-	}
-	.trbl_bottom {
-		background-position:70px -79px !important;
-	}
-	.trbl_left {
-		background-position:70px -99px !important;
-	}
-	#ctrl_shadowsize_top {
-		background-position:69px -119px !important;
-	}
-	#ctrl_shadowsize_right {
-		background-position:69px -139px !important;
-	}
-	#ctrl_shadowsize_bottom {
-		background-position:69px -159px !important;
-	}
-	#ctrl_shadowsize_left {
-		background-position:69px -179px !important;
-	}
-	#ctrl_borderradius_top {
-		background-position:0 -199px !important;
-	}
-	#ctrl_borderradius_right {
-		background-position:70px -219px !important;
-	}
-	#ctrl_borderradius_bottom {
-		background-position:70px -241px !important;
-	}
-	#ctrl_borderradius_left {
-		background-position:0 -261px !important;
 	}
 }
 

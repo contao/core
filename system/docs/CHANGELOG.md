@@ -5,6 +5,9 @@ Version 3.4.1 (2015-01-XX)
 --------------------------
 
 ### Fixed
+Fix the position of the input field hints (see #7561).
+
+### Fixed
 Do not apply the GDlib maximum dimensions to SVG images (see #7435).
 
 ### Fixed
