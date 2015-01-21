@@ -29,6 +29,9 @@ Remove the hardcoded figcaption width (see #7549).
 Only load the model in the file/page picker if the class exists (see #7490).
 
 ### Fixed
+Romanize style sheet names (see #7526).
+
+### Fixed
 Add the username to the "account has been locked" log entry (see #7551).
 
 ### Fixed

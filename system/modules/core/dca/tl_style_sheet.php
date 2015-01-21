@@ -158,6 +158,10 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'search'                  => true,
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
+			'save_callback' => array
+			(
+				array('tl_style_sheet', 'romanizeName')
+			),
 			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
@@ -336,6 +340,17 @@ class tl_style_sheet extends Backend
 		{
 			return '<div class="tl_content_left">'. $row['name'] . $cc ."</div>\n";
 		}
+	}
+
+
+	/**
+	 * Romanize the file name (see #7526)
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function romanizeName($varValue)
+	{
+		return utf8_romanize($varValue);
 	}
 
 
