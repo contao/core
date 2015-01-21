@@ -17,7 +17,7 @@ namespace Contao\Model;
  * The class handles traversing a set of models and lazy loads the database
  * result rows upon their first usage.
  *
- * @author Tristan Lins <tristan.lins@bit3.de>
+ * @author Tristan Lins <https://github.com/tristanlins>
  */
 class Registry implements \Countable
 {

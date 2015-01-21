@@ -28,7 +28,8 @@ namespace Contao;
  *     $data = Picture::create('example.jpg', 1)->getTemplateData();
  *     $data = Picture::create('example.jpg', array(100, 100, 'crop'))->getTemplateData();
  *
- * @author Leo Feyer <https://github.com/leofeyer>
+ * @author Martin Auswöger <https://github.com/ausi>
+ * @author Yanick Witschi <https://github.com/Toflar>
  */
 class Picture
 {
