@@ -5,6 +5,9 @@ Version 3.2.17 (2015-01-XX)
 ---------------------------
 
 ### Fixed
+Romanize style sheet names (see #7526).
+
+### Fixed
 Add the username to the "account has been locked" log entry (see #7551).
 
 ### Fixed
