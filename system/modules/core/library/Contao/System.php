@@ -643,7 +643,7 @@ abstract class System
 			// Quote the value
 			if (strpos($value, '\n') !== false)
 			{
-				$value = '"' . str_replace('"', '\\"', $value) . '"';
+				$value = '"' . str_replace(array('$', '"'), array('\\$', '\\"'), $value) . '"';
 			}
 			else
 			{
