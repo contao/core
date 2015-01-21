@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Model;
@@ -19,9 +17,7 @@ namespace Contao\Model;
  * The class handles traversing a set of models and lazy loads the database
  * result rows upon their first usage.
  *
- * @package   Library
- * @author    Tristan Lins <tristan.lins@bit3.de>
- * @copyright Leo Feyer 2005-2014
+ * @author Tristan Lins <tristan.lins@bit3.de>
  */
 class Registry implements \Countable
 {
