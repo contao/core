@@ -181,6 +181,21 @@ abstract class Model
 
 
 	/**
+	 * Clone a model with exactly the same original values
+	 *
+	 * @return static
+	 */
+	public function cloneOriginal()
+	{
+		$clone = clone $this;
+
+		$clone->setRow($this->originalRow());
+
+		return $clone;
+	}
+
+
+	/**
 	 * Set an object property
 	 *
 	 * @param string $strKey   The property name
@@ -261,6 +276,29 @@ abstract class Model
 	public function row()
 	{
 		return $this->arrData;
+	}
+
+
+	/**
+	 * Return the original values as associative array
+	 *
+	 * @return array The data record
+	 */
+	public function originalRow()
+	{
+		$row = $this->row();
+
+		if (!$this->isModified()) {
+			return $row;
+		}
+
+		$originalRow = array();
+
+		foreach ($row as $k => $v) {
+			$originalRow[$k] = isset($this->arrModified[$k]) ? $this->arrModified[$k] : $v;
+		}
+
+		return $originalRow;
 	}
 
 
@@ -610,19 +648,36 @@ abstract class Model
 
 	/**
 	 * Detach the model from the registry
+	 *
+	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function detach()
+	public function detach($blnKeepClone = true)
 	{
 		\Model\Registry::getInstance()->unregister($this);
+
+		if ($blnKeepClone) {
+			$this->cloneOriginal()->attach();
+		}
+	}
+
+
+	/**
+	 * Attach the model to the registry
+	 */
+	public function attach()
+	{
+		\Model\Registry::getInstance()->register($this);
 	}
 
 
 	/**
 	 * Prevent saving the model
+	 *
+	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function preventSaving()
+	public function preventSaving($blnKeepClone = true)
 	{
-		$this->detach();
+		$this->detach($blnKeepClone);
 		$this->blnPreventSaving = true;
 	}
 
