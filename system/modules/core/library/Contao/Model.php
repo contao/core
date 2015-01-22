@@ -288,13 +288,15 @@ abstract class Model
 	{
 		$row = $this->row();
 
-		if (!$this->isModified()) {
+		if (!$this->isModified())
+		{
 			return $row;
 		}
 
 		$originalRow = array();
 
-		foreach ($row as $k => $v) {
+		foreach ($row as $k => $v)
+		{
 			$originalRow[$k] = isset($this->arrModified[$k]) ? $this->arrModified[$k] : $v;
 		}
 
@@ -655,7 +657,8 @@ abstract class Model
 	{
 		\Model\Registry::getInstance()->unregister($this);
 
-		if ($blnKeepClone) {
+		if ($blnKeepClone)
+		{
 			$this->cloneOriginal()->attach();
 		}
 	}
