@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,7 @@ namespace Contao;
  *         return $this->getArticle(2);
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Controller extends \System
 {
@@ -1265,11 +1261,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser), $blnCache);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser), $blnCache);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;
@@ -1282,11 +1278,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;
@@ -1299,11 +1295,11 @@ abstract class Controller extends \System
 					{
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = \String::toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toXhtml($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 						else
 						{
-							$arrCache[$strTag] = \String::toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = \String::toHtml5($this->replaceInsertTags($objTeaser->teaser, $blnCache));
 						}
 					}
 					break;
@@ -1622,7 +1618,7 @@ abstract class Controller extends \System
 						$dimensions = '';
 						$imageObj = \Image::create($strFile, array($width, $height, $mode));
 						$src = $imageObj->executeResize()->getResizedPath();
-						$objFile = new \File($src, true);
+						$objFile = new \File(rawurldecode($src), true);
 
 						// Add the image dimensions
 						if (($imgSize = $objFile->imageSize) !== false)

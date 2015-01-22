@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.2",
+		"php": ">=5.3.7",
 		"leafo/scssphp": "~0.1",
 		"michelf/php-markdown": "~1.4",
 		"oyejorge/less.php": "~1.7",

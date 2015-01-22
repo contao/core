@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,8 @@ namespace Contao;
  *     $data = Picture::create('example.jpg', 1)->getTemplateData();
  *     $data = Picture::create('example.jpg', array(100, 100, 'crop'))->getTemplateData();
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Martin Auswöger <https://github.com/ausi>
+ * @author Yanick Witschi <https://github.com/Toflar>
  */
 class Picture
 {
@@ -245,7 +242,7 @@ class Picture
 							->executeResize()
 							->getResizedPath();
 
-			$fileObj = new \File($src, true);
+			$fileObj = new \File(rawurldecode($src), true);
 
 			if (empty($attributes['src']))
 			{
