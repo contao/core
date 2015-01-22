@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.2 (2015-01-22)
+--------------------------
+
+### Fixed
+Fix an infinite recursion problem in the `FilesModel` class (see #7588).
+
+
 Version 3.4.1 (2015-01-22)
 --------------------------
 
