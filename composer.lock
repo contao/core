@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a1628c16e5c8ad255d4c57cd97732277",
+    "hash": "46679e748fd634e13ba6fe4f630365a1",
     "packages": [
         {
             "name": "contao-components/compass",
@@ -289,16 +289,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205"
+                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/b86b927dfefdb56ab0b22d1350033d9a38e9f205",
-                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
+                "reference": "c5f963e7f9d6f6438fda4f22d5cc2db296ec621a",
                 "shasum": ""
             },
             "require": {
@@ -337,20 +337,20 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-10-04 05:53:18"
+            "time": "2014-12-05 14:17:14"
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.099",
+            "version": "6.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01"
+                "reference": "ba2afad72c6191bfed735dfa357bcaf3f225f52b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01",
-                "reference": "75e7ad39458e060d0cae6fcb7d50a2c9f3af1b01",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/ba2afad72c6191bfed735dfa357bcaf3f225f52b",
+                "reference": "ba2afad72c6191bfed735dfa357bcaf3f225f52b",
                 "shasum": ""
             },
             "require": {
@@ -400,7 +400,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-11-15 12:35:49"
+            "time": "2015-01-08 18:35:22"
         },
         {
             "name": "true/punycode",
@@ -455,8 +455,9 @@
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.2"
+        "php": ">=5.3.7"
     },
     "platform-dev": []
 }

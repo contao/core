@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -333,6 +331,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'staticFiles' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFiles'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -344,6 +343,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'staticPlugins' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticPlugins'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -635,12 +635,9 @@ if (Input::get('popup'))
 
 
 /**
- * Class tl_page
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_page extends Backend
 {

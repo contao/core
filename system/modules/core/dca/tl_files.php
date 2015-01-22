@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -224,12 +222,9 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 
 
 /**
- * Class tl_files
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_files extends Backend
 {
@@ -419,7 +414,7 @@ class tl_files extends Backend
 			return;
 		}
 
-		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(pathinfo($dc->id, PATHINFO_EXTENSION), trimsplit(',', Config::get('validImageTypes'))))
+		if (is_dir(TL_ROOT . '/' . $dc->id) || !in_array(strtolower(pathinfo($dc->id, PATHINFO_EXTENSION)), trimsplit(',', Config::get('validImageTypes'))))
 		{
 			$GLOBALS['TL_DCA'][$dc->table]['palettes'] = str_replace(',importantPartX,importantPartY,importantPartWidth,importantPartHeight', '', $GLOBALS['TL_DCA'][$dc->table]['palettes']);
 		}

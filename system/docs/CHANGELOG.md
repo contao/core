@@ -1,6 +1,73 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.1 (2015-01-22)
+--------------------------
+
+### Fixed
+Fix the position of the input field hints (see #7561).
+
+### Fixed
+Do not apply the GDlib maximum dimensions to SVG images (see #7435).
+
+### Fixed
+Do not show the diff icon if a record has been deleted (see #7429).
+
+### Fixed
+Remove a left-over headline from the `ce_text.xhtml` template (see #7502).
+
+### Fixed
+Preserve comments when exporting CSS files (see #7482).
+
+### Fixed
+Fix the LESS import path in the Combiner (see #7533).
+
+### Fixed
+Hide the width and height attributes if there is a sizes attribute (see #7500).
+
+### Fixed
+Remove the hardcoded figcaption width (see #7549).
+
+### Fixed
+Only load the model in the file/page picker if the class exists (see #7490).
+
+### Fixed
+Romanize style sheet names (see #7526).
+
+### Fixed
+Add the username to the "account has been locked" log entry (see #7551).
+
+### Fixed
+Consider the suhosin.memory_limit when raising the PHP limits (see #7035).
+
+### Fixed
+Added two missing `exclude` flags in the `tl_page` data container (see #7522).
+
+### Fixed
+Send an UTF-8 charset header in the `die_nicely()` function (see #7519).
+
+### Fixed
+Correctly validate dates in the `Widget` class (see #7498).
+
+### Fixed
+Back port the fixes from #7475 and #7473.
+
+### Fixed
+Send the same cache headers for cached and uncached pages (see #7455).
+
+### Fixed
+Fix the `current() expects parameter 1 to be array` issue (see #6739).
+
+### Fixed
+Correctly replace the `*_teaser` insert tags (see #7488).
+
+### Fixed
+Adjust the last and previous login labels (see #7426).
+
+### Fixed
+Unset the `postUnsafeRaw` cache in `Input::setPost()` (see #7481).
+
+
 Version 3.4.0 (2014-11-25)
 --------------------------
 

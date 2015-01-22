@@ -11,7 +11,7 @@
               <?php $this->insert('picture_default', $col->picture); ?>
             <?php endif; ?>
             <?php if ($col->caption): ?>
-              <figcaption class="caption" style="width:<?php echo $col->arrSize[0]; ?>px"><?php echo $col->caption; ?></figcaption>
+              <figcaption class="caption"><?php echo $col->caption; ?></figcaption>
             <?php endif; ?>
           </figure>
         </li>
