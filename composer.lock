@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a1628c16e5c8ad255d4c57cd97732277",
+    "hash": "46679e748fd634e13ba6fe4f630365a1",
     "packages": [
         {
             "name": "contao-components/compass",
@@ -341,16 +341,16 @@
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.2.3",
+            "version": "6.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "d7071cbf26ac735f3883afaf895aba4fe394140b"
+                "reference": "ba2afad72c6191bfed735dfa357bcaf3f225f52b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/d7071cbf26ac735f3883afaf895aba4fe394140b",
-                "reference": "d7071cbf26ac735f3883afaf895aba4fe394140b",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/ba2afad72c6191bfed735dfa357bcaf3f225f52b",
+                "reference": "ba2afad72c6191bfed735dfa357bcaf3f225f52b",
                 "shasum": ""
             },
             "require": {
@@ -400,7 +400,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-12-18 13:36:04"
+            "time": "2015-01-08 18:35:22"
         },
         {
             "name": "true/punycode",
@@ -457,7 +457,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.2"
+        "php": ">=5.3.7"
     },
     "platform-dev": []
 }
