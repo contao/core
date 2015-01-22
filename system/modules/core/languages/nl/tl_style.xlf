@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_style.category.1">
         <source>Categories can be used to group format definitions in the back end.</source>
-        <target>Gebruik categorieën om uw layout definities te groeperen en te ordenen.</target>
+        <target>Gebruik categorieën om uw lay-out-definities te groeperen en te ordenen.</target>
       </trans-unit>
       <trans-unit id="tl_style.comment.0">
         <source>Comment</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_style.comment.1">
         <source>Here you can add a comment.</source>
-        <target>Commentaar wordt weergegeven boven de corresponderende layout definitie.</target>
+        <target>Commentaar wordt weergegeven boven de corresponderende lay-out-definitie.</target>
       </trans-unit>
       <trans-unit id="tl_style.size.0">
         <source>Size</source>

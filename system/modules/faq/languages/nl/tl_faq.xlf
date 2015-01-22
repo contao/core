@@ -91,11 +91,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_faq.publish_legend">
         <source>Publish settings</source>
-        <target>Publiceer instellingen</target>
+        <target>Publicatie-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_faq.new.0">
         <source>New question</source>

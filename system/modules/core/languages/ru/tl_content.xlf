@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_content.listitems.0">
         <source>List items</source>
-        <target>Пункты списка</target>
+        <target>Элементы списка</target>
       </trans-unit>
       <trans-unit id="tl_content.listitems.1">
         <source>If JavaScript is disabled, make sure to save your changes before modifying the order.</source>
@@ -571,11 +571,11 @@
       </trans-unit>
       <trans-unit id="tl_content.list_legend">
         <source>List items</source>
-        <target>Список пунктов</target>
+        <target>Список элементов</target>
       </trans-unit>
       <trans-unit id="tl_content.table_legend">
         <source>Table items</source>
-        <target>Таблица пунктов</target>
+        <target>Элементы таблицы</target>
       </trans-unit>
       <trans-unit id="tl_content.tconfig_legend">
         <source>Table configuration</source>

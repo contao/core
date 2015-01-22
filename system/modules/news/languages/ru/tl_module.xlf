@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_showQuantity.0">
         <source>Show number of items</source>
-        <target>Показать количество записей</target>
+        <target>Показать количество элементов</target>
       </trans-unit>
       <trans-unit id="tl_module.news_showQuantity.1">
         <source>Show the number of news items of each month.</source>

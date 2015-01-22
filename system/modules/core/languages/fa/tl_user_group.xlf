@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_user_group.pagemounts_legend">
         <source>Pagemounts</source>
-        <target>صفحه‌ها مونت شده</target>
+        <target>برگه‌ها مونت شده</target>
       </trans-unit>
       <trans-unit id="tl_user_group.filemounts_legend">
         <source>Filemounts</source>

@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.title.1">
         <source>Please enter the category title.</source>
-        <target>لطفا یک عنوان برای دسته وارد نمایید.</target>
+        <target>لطفا عنوان دسته‌بندی وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.0">
         <source>Headline</source>
@@ -15,15 +15,15 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.headline.1">
         <source>Please enter the category headline.</source>
-        <target>لطفا سرصفحه دسته را وارد نمایید.</target>
+        <target>لطفا سرصفحه دسته‌بندی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه انتقال</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.jumpTo.1">
         <source>Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.</source>
-        <target>لطفا صفحه ای را که می خواهید بازدیدکنندگان بعد از کلیک بر روی یک سوال به آنجا منتقل شوند را انتخاب نمایید.</target>
+        <target>لطفا برگه ای را که می خواهید بازدیدکنندگان بعد از کلیک بر روی یک سوال به آنجا بازگردانی شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.allowComments.0">
         <source>Enable comments</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.allowComments.1">
         <source>Allow visitors to comment FAQs.</source>
-        <target>اجازه دادن به بازدیدکنندگان برای دیدگاه دادن در مورد FAQ ها.</target>
+        <target>اجازه دادن به بازدیدکنندگان برای دیدگاه دادن در مورد پرسش و پاسخ ها.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify.0">
         <source>Notify</source>
@@ -51,11 +51,11 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.perPage.0">
         <source>Comments per page</source>
-        <target>دیدگاه‌ها در هر صفحه</target>
+        <target>دیدگاه‌ها در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>تعداد دیدگاه‌ها در هر صفحه. 0 را برای غیرفعال کردن صفحه بندی انتخاب نمایید.</target>
+        <target>تعداد دیدگاه‌ها در هر برگه. 0 را برای غیرفعال کردن برگه بندی انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.0">
         <source>Moderate comments</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>تایید دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
+        <target>تایید دیدگاه‌ها قبل از انتشار در تارنما.</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.bbcode.0">
         <source>Allow BBCode</source>
@@ -99,7 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.title_legend">
         <source>Title and redirect</source>
-        <target>عنوان و انتقال</target>
+        <target>عنوان و بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.comments_legend">
         <source>Comments</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_author">
         <source>Author of the FAQ</source>
-        <target>نویسنده FAQ</target>
+        <target>نویسنده پرسش و پاسخ</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.notify_both">
         <source>Author and system administrator</source>
@@ -119,55 +119,55 @@
       </trans-unit>
       <trans-unit id="tl_faq_category.deleteConfirm">
         <source>Deleting category ID %s will also delete all its FAQs! Continue?</source>
-        <target>با حذف دسته با شناسه %s تمامی FAQهای آن نیز حذف خواهد شد! ادامه می دهید؟</target>
+        <target>با حذف دسته‌بندی با شناسه %s تمامی FAQهای آن نیز حذف خواهد شد! ادامه می دهید؟</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.new.0">
         <source>New category</source>
-        <target>دسته جدید</target>
+        <target>دسته‌بندی جدید</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.new.1">
         <source>Create a new category</source>
-        <target>ایجاد دسته جدید</target>
+        <target>ایجاد دسته‌بندی جدید</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.show.0">
         <source>Category details</source>
-        <target>جزئیات دسته</target>
+        <target>جزئیات دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.show.1">
         <source>Show the details of category ID %s</source>
-        <target>نمایش جزئیات دسته با شناسه %s</target>
+        <target>نمایش جزئیات دسته‌بندی با شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.edit.0">
         <source>Edit category</source>
-        <target>ویرایش دسته</target>
+        <target>ویرایش دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.edit.1">
         <source>Edit category ID %s</source>
-        <target>ویرایش دسته با شناسه %s</target>
+        <target>ویرایش دسته‌بندی با شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.editheader.0">
         <source>Edit category settings</source>
-        <target>ویرایش تنظیمات دسته</target>
+        <target>ویرایش تنظیمات دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.editheader.1">
         <source>Edit the settings of category ID %s</source>
-        <target>ویرایش تنظیمات دسته با شناسه %s</target>
+        <target>ویرایش تنظیمات دسته‌بندی با شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.copy.0">
         <source>Duplicate category</source>
-        <target>تکثیر دسته</target>
+        <target>تکثیر دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.copy.1">
         <source>Duplicate category ID %s</source>
-        <target>تکثیر دسته با شناسه %s</target>
+        <target>تکثیر دسته‌بندی شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.delete.0">
         <source>Delete category</source>
-        <target>حذف دسته</target>
+        <target>حذف دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq_category.delete.1">
         <source>Delete category ID %s</source>
-        <target>حذف دسته با شناسه %s</target>
+        <target>حذف دسته‌بندی شناسه %s</target>
       </trans-unit>
     </body>
   </file>

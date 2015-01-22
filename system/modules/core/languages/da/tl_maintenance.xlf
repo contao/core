@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>En nyere version %s af TYPOlight er tilgængelig</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Indtast venligst dit live-opdaterings ID</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Der kan ikke skrives i den midlertidige mappe (system/tmp)</target>

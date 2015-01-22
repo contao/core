@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_news.alias.1">
         <source>The news alias is a unique reference to the article which can be called instead of its numeric ID.</source>
-        <target>نام مستعار خبر یک مرجع واحد برای مقاله است که می‌تواند به جای شناسه استفاده شود.</target>
+        <target>نام مستعار خبر یک مرجع واحد برای نوشته است که می‌تواند به جای شناسه استفاده شود.</target>
       </trans-unit>
       <trans-unit id="tl_news.author.0">
         <source>Author</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_news.author.1">
         <source>Here you can change the author of the news item.</source>
-        <target>در این بخش می‌توانید نام نویسنده را تغییر دهید.</target>
+        <target>اینجا می‌توانید نام نویسنده خبر را عوض کنید.</target>
       </trans-unit>
       <trans-unit id="tl_news.date.0">
         <source>Date</source>
@@ -47,15 +47,15 @@
       </trans-unit>
       <trans-unit id="tl_news.subheadline.1">
         <source>Here you can enter a subheadline.</source>
-        <target>شما می‌توانید یک زیرعنوان وارد نمایید.</target>
+        <target>اینجا می‌توانید یک زیرعنوان وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.0">
         <source>News teaser</source>
-        <target>خلاصه خبر</target>
+        <target>تیزر خبر</target>
       </trans-unit>
       <trans-unit id="tl_news.teaser.1">
         <source>The news teaser can be shown in a news list instead of the full article. A &quot;read more …&quot; link will be added automatically.</source>
-        <target>خلاصه متن معمولاً در بخش خلاصه اخبار به همراه یک پیوند &quot;ادامه مطلب ...&quot; نمایش داده می‌شود .</target>
+        <target>تیزر خبر معمولاً در بخش فهرست اخبار به همراه یک پیوند &quot;بیشتر بخوانید ...&quot; نمایش داده می‌شود .</target>
       </trans-unit>
       <trans-unit id="tl_news.text.0">
         <source>News text</source>
@@ -103,15 +103,15 @@
       </trans-unit>
       <trans-unit id="tl_news.default.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to the default page of the news archive.</source>
-        <target>با کلیک بر روی &quot;ادامه مطلب ...&quot; بازدیدکنندگان به صفحه پیش‌فرض خبر منتقل خواهند شد.</target>
+        <target>با کلیک دکمه &quot;بیشتر بخوانید ...&quot; بازدیدکنندگان به برگه پیش‌فرض خبر بازگردانی خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.0">
         <source>Page</source>
-        <target>صفحه</target>
+        <target>برگه</target>
       </trans-unit>
       <trans-unit id="tl_news.internal.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to a page.</source>
-        <target>با کلیک بر روی &quot;ادامه مطلب ...&quot; بازدیدکنندگان برای مشاهده ادامه مطلب به صفحه‌ای دیگر منتقل می‌شوند.</target>
+        <target>با کلیک دکمه &quot;بیشتر بخوانید ...&quot; بازدیدکنندگان برای مشاهده بیشتر بخوانید به برگه‌ای دیگر بازگردانی می‌شوند.</target>
       </trans-unit>
       <trans-unit id="tl_news.article.0">
         <source>Article</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_news.article.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an article.</source>
-        <target>با فشردن دکمه &quot;بیشتر بخوانید...&quot; بازدیدکننده به این نوشته هدایت خواهد شد.</target>
+        <target>با کلیک دکمه &quot;بیشتر بخوانید...&quot; بازدیدکننده به این نوشته بازگردانی خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_news.external.0">
         <source>External URL</source>
@@ -127,15 +127,15 @@
       </trans-unit>
       <trans-unit id="tl_news.external.1">
         <source>By clicking the &quot;read more …&quot; button, visitors will be redirected to an external website.</source>
-        <target>با کلیک بر روی &quot;ادامه مطلب ...&quot; بازدیدکنندگان برای مشاهده ادامه مطلب به صفحه‌ای در سایتی دیگر منتقل می‌شوند.</target>
+        <target>با کلیک دکمه &quot;بیشتر بخوانید ...&quot; بازدیدکنندگان برای مشاهده بیشتر بخوانید به صفحه‌ای در تارنمایی دیگر بازگردانی می‌شوند.</target>
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه بازگردانی</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_news.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected when clicking the news item.</source>
-        <target>صفحه‌ای را که بازدیدکننده بعد از کلیک مورد خبری باید هدایت شود را انتخاب نمایید.</target>
+        <target>برگه‌ای را که بازدیدکننده بعد از کلیک مورد خبری باید بازگردانده شود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.articleId.0">
         <source>Article</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_news.articleId.1">
         <source>Please choose the article to which visitors will be redirected when clicking the news item.</source>
-        <target>نوشته‌ای که را بازدیدکننده بعداز کلیک مورد خبری باید به آن هدایت شود را انتخاب نمایید.</target>
+        <target>نوشته‌ای که را بازدیدکننده بعداز کلیک مورد خبری باید به آن بازگردانده شود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.cssClass.0">
         <source>CSS class</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_news.cssClass.1">
         <source>Here you can enter one or more classes.</source>
-        <target>می‌توانید یک یا چند کلاس را وارد نمایید.</target>
+        <target>اینجا می‌توانید یک یا چند کلاس را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news.noComments.0">
         <source>Disable comments</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_news.published.1">
         <source>Make the news item publicly visible on the website.</source>
-        <target>تا زمانی که این گزینه را فعال ننمائید خبر در وب‌سایت نمایش داده نخواهد شد.</target>
+        <target>تا زمانی که این گزینه را فعال ننمائید خبر در تارنما نمایش داده نخواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_news.start.0">
         <source>Show from</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_news.start.1">
         <source>Do not show the news item on the website before this day.</source>
-        <target>نشان ندادن آیتم خبری در وب‌سایت قبل از این روز</target>
+        <target>نشان ندادن آیتم خبری در تارنما قبل از این روز</target>
       </trans-unit>
       <trans-unit id="tl_news.stop.0">
         <source>Show until</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_news.stop.1">
         <source>Do not show the news item on the website on and after this day.</source>
-        <target>نشان ندادن آیتم خبری در وب‌سایت در این روز و بعد از آن</target>
+        <target>نشان ندادن آیتم خبری در تارنما در این روز و بعد از آن</target>
       </trans-unit>
       <trans-unit id="tl_news.tstamp.0">
         <source>Revision date</source>

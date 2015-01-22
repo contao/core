@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="ERR.minlength">
         <source>Field &quot;%s&quot; has to be at least %d characters long!</source>
-        <target>فيلد &quot;%s&quot; حداقل بايد %d حرف باشد!</target>
+        <target>فيلد &quot;%s&quot; دست‌کم بايد %d نویسه باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.maxlength">
         <source>Field &quot;%s&quot; must not be longer than %d characters!</source>
-        <target>فیلد &quot;%s&quot; نباید بلندتر از %d حرف باشد!</target>
+        <target>فیلد &quot;%s&quot; نباید بلندتر از %d نویسه باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.digit">
         <source>Please enter digits only!</source>
@@ -35,11 +35,11 @@
       </trans-unit>
       <trans-unit id="ERR.alpha">
         <source>Please enter alphabetic characters only!</source>
-        <target>لطفا فقط حروف الفبائی وارد نمایید!</target>
+        <target>لطفا فقط نویسه‌های الفبائی وارد نمایید!</target>
       </trans-unit>
       <trans-unit id="ERR.alnum">
         <source>Please enter alphanumeric characters only!</source>
-        <target>لطفا فقط کاراکترهای حرفی-عددی وارد نمایید!</target>
+        <target>لطفا فقط نویسه‌های حرفی-عددی وارد نمایید!</target>
       </trans-unit>
       <trans-unit id="ERR.phone">
         <source>Please enter a valid phone number!</source>
@@ -47,19 +47,19 @@
       </trans-unit>
       <trans-unit id="ERR.extnd">
         <source>For security reasons you can not use the following characters here: =&lt;&gt;&amp;/()#</source>
-        <target>به دلیل مسائل امنیتی شما نمی‌توانید از این کاراکترها استفاده نمایید: =&lt;&gt;&amp;/()#</target>
+        <target>به دلیل مسائل امنیتی شما نمی‌توانید از این نویسه‌ها استفاده نمایید: =&lt;&gt;&amp;/()#</target>
       </trans-unit>
       <trans-unit id="ERR.email">
         <source>Please enter a valid e-mail address!</source>
-        <target>لطفا یک نشانی ایمیل معتبر وارد نمایید!</target>
+        <target>لطفا یک نشانی رایانامه معتبر وارد نمایید!</target>
       </trans-unit>
       <trans-unit id="ERR.emails">
         <source>There is at least one invalid e-mail address!</source>
-        <target>حداقل یک نشانی ایمیل اشتباه وجود دارد!</target>
+        <target>دست‌کم یک نشانی رایانامه اشتباه وجود دارد!</target>
       </trans-unit>
       <trans-unit id="ERR.url">
         <source>Please enter a valid URL format and encode special characters!</source>
-        <target>لطفا ساختار نشانی وب معتبر وارد كرده و حروف ويژه را كد شده وارد نمائيد!</target>
+        <target>لطفا ساختار نشانی وب معتبر وارد كرده و نویسه‌های ويژه را كد شده وارد نمائيد!</target>
       </trans-unit>
       <trans-unit id="ERR.locale">
         <source>Please enter a valid locale such as &quot;en&quot; or &quot;en_US&quot;!</source>
@@ -71,11 +71,11 @@
       </trans-unit>
       <trans-unit id="ERR.alias">
         <source>Please enter only alphanumeric characters and the following special characters: .-_</source>
-        <target>لطفا فقط از کاراکترهای حرفی-عددی و کاراکترهای ویژه .-_ استفاده نمایید.</target>
+        <target>لطفا فقط از نویسه‌های حرفی-عددی و نویسه‌های ویژه .-_ استفاده نمایید.</target>
       </trans-unit>
       <trans-unit id="ERR.folderalias">
         <source>Please enter only alphanumeric characters and the following special characters: .-/_</source>
-        <target>لطفا فقط از کاراکترهای حرفی-عددی و کاراکترهای ویژه .-/_ استفاده نمایید.</target>
+        <target>لطفا فقط از نویسه‌های حرفی-عددی و نویسه‌های ویژه .-/_ استفاده نمایید.</target>
       </trans-unit>
       <trans-unit id="ERR.date">
         <source>Please enter the date as &quot;%s&quot;!</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="ERR.noSpace">
         <source>Field &quot;%s&quot; must not contain any whitespace characters!</source>
-        <target>فيلد &quot;%s&quot; نبايد حاوی فاصله‌های خالی باشد!</target>
+        <target>فيلد &quot;%s&quot; نبايد حاوی نویسه‌های فاصله خالی باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="ERR.passwordLength">
         <source>A password has to be at least %d characters long!</source>
-        <target>طول گذرواژه می‌بایست حداقل %d حرف باشد!</target>
+        <target>طول گذرواژه می‌بایست دست‌کم %d نویسه باشد!</target>
       </trans-unit>
       <trans-unit id="ERR.passwordName">
         <source>Your username and password must not be the same!</source>
@@ -159,11 +159,11 @@
       </trans-unit>
       <trans-unit id="ERR.all_fields">
         <source>Please select at least one field!</source>
-        <target>لطفاً حداقل يك فيلد را انتخاب نمائيد!</target>
+        <target>لطفا دست‌کم یک فيلد را انتخاب نمائيد!</target>
       </trans-unit>
       <trans-unit id="ERR.emptyUpload">
         <source>Please select at least one file!</source>
-        <target>لطفا حداقل یک پرونده انتخاب نمایید!</target>
+        <target>لطفا دست‌کم یک پرونده انتخاب نمایید!</target>
       </trans-unit>
       <trans-unit id="ERR.aliasExists">
         <source>The alias &quot;%s&quot; already exists!</source>
@@ -195,31 +195,31 @@
       </trans-unit>
       <trans-unit id="ERR.ie6warning">
         <source>&lt;strong&gt;Attention!&lt;/strong&gt; Your web browser is %sout of date%s and &lt;strong&gt;you cannot use all features of this website&lt;/strong&gt;.</source>
-        <target>%s&lt;strong&gt;توجه!&lt;/strong&gt; مرورگر شما %sقدیمی%s است و &lt;strong&gt;شما نمی‌توانید از همه ویژگی‌های این وب‌سایت استفاده نمایید &lt;/strong&gt;.%s</target>
+        <target>%s&lt;strong&gt;توجه!&lt;/strong&gt; مرورگر شما %sقدیمی%s است و &lt;strong&gt;شما نمی‌توانید از همه ویژگی‌های این تارنما استفاده نمایید &lt;/strong&gt;.%s</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackEmpty">
         <source>None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
-        <target>در هیچ کدام از صفحه‌های ریشه وب‌سایت فعال بدون DNS مشخص گزینه زبان جایگزین تنظیم نشده است، که این به معنای این است که این وب‌سایت‌ها فقط برای یک زبان که در تنظیمات صفحه تعریف شده در دسترس خواهند بود! بازدیدکنندگان و موتورهای جستجو که به این زبان صحبت نمی‌کنند قادر به مرور وب‌سایت شما نخواهند بود.</target>
+        <target>در هیچ کدام از برگه‌های ریشه تارنما فعال بدون DNS مشخص گزینه زبان جایگزین تنظیم نشده است، که این به معنای این است که این تارنما‌ها فقط برای یک زبان که در تنظیمات برگه تعریف شده در دسترس خواهند بود! بازدیدکنندگان و موتورهای جستجو که به این زبان صحبت نمی‌کنند قادر به مرور تارنما شما نخواهند بود.</target>
       </trans-unit>
       <trans-unit id="ERR.noFallbackDns">
         <source>None of the active website root pages for &lt;strong&gt;%s&lt;/strong&gt; has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.</source>
-        <target>در هیچ کدام از صفحه‌های ریشه وب‌سایت فعال &lt;strong&gt;%s&lt;/strong&gt; گزینه زبان جایگزین تنظیم نشده است، که این به معنای این است که این وب‌سایت‌ها فقط برای یک زبان که در تنظیمات صفحه تعریف شده در دسترس خواهند بود! بازدیدکنندگان و موتورهای جستجو که به این زبان صحبت نمی‌کنند قادر به مرور وب‌سایت شما نخواهند بود.</target>
+        <target>در هیچ کدام از برگه‌های ریشه تارنما فعال &lt;strong&gt;%s&lt;/strong&gt; گزینه زبان جایگزین تنظیم نشده است، که این به معنای این است که این تارنما‌ها فقط برای یک زبان که در تنظیمات برگه تعریف شده در دسترس خواهند بود! بازدیدکنندگان و موتورهای جستجو که به این زبان صحبت نمی‌کنند قادر به مرور تارنما شما نخواهند بود.</target>
       </trans-unit>
       <trans-unit id="ERR.multipleFallback">
         <source>You can only define one website root page per domain as language fallback.</source>
-        <target>شما می‌توانید تنها یک صفحه ریشه وب‌سایت برای هر دامنه به عنوان زبان مجدد انتخاب نمایید.</target>
+        <target>شما می‌توانید تنها یک برگه ریشه تارنما برای هر دامنه به عنوان زبان مجدد انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRoot">
         <source>Top-level pages must be website root pages!</source>
-        <target>صفحه‌های سطح بالا باید ریشه وب‌سایت باشند!</target>
+        <target>برگه‌های سطح بالا باید ریشه تارنما باشند!</target>
       </trans-unit>
       <trans-unit id="ERR.topLevelRegular">
         <source>There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.</source>
-        <target>صفحه‌هایی در سطح بالا وجود دارند که صفحه‌های ریشه وب‌سایت نیستند. ایجاد وب‌سایت‌های بدون صفحه ریشه وب‌سایت پشتیبانی نمی‌شود، بنابراین لطفا مطمئن شوید که همه صفحه‌ها در یک صفحه ریشه وب‌سایت باشند.</target>
+        <target>برگه‌هایی در سطح بالا وجود دارند که برگه‌های ریشه تارنما نیستند. ایجاد تارنما‌های بدون برگه ریشه تارنما پشتیبانی نمی‌شود، بنابراین لطفا مطمئن شوید که همه برگه‌ها در یک برگه ریشه تارنما باشند.</target>
       </trans-unit>
       <trans-unit id="ERR.invalidTokenUrl">
         <source>The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.</source>
-        <target>پیوندی که شما سعی در باز کردنش دارید نمی‌تواند تایید شود. اگر شما خودتان پیوند را کلیک کرده‌اید یا از شخص مطمئنی آن را دریافت کرده‌اید، می توانید روند را از طریق زیر تایید نمایید.</target>
+        <target>پیوندی که شما سعی در باز کردنش دارید نمی‌تواند تایید شود. اگر شما خودتان پیوند را کلیک کرده‌اید یا از شخص مطمئنی آن را دریافت کرده‌اید، می‌توانید روند را از طریق زیر تایید نمایید.</target>
       </trans-unit>
       <trans-unit id="ERR.version2format">
         <source>This element still uses the old Contao 2 SRC format. Did you upgrade the database?</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="CTE.hyperlink.1">
         <source>Generates a link to another website.</source>
-        <target>یک پیوند به وب‌سایت دیگر ایجاد می‌کند.</target>
+        <target>یک پیوند به تارنما دیگر ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.toplink.0">
         <source>Top link</source>
@@ -379,7 +379,7 @@
       </trans-unit>
       <trans-unit id="CTE.toplink.1">
         <source>Generates a link to jump to the top of the page.</source>
-        <target>یک پیوند برای پرش به بالای صفحه ایجاد می‌کند.</target>
+        <target>یک پیوند برای پرش به بالای برگه ایجاد می‌کند.</target>
       </trans-unit>
       <trans-unit id="CTE.media">
         <source>Media elements</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
-        <target>این عنصر به شما امکان قرار دادن چندین تصویر کوچک را می دهد . به طوری که می توانید با کلیک بر روی هر یک از تصاویر ، سایز اصلی آنرا مشاهده نمایید .</target>
+        <target>این عنصر به شما امکان قرار دادن چندین تصویر کوچک را می دهد . به طوری که می‌توانید با کلیک بر روی هر یک از تصاویر ، سایز اصلی آنرا مشاهده نمایید .</target>
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
@@ -443,11 +443,11 @@
       </trans-unit>
       <trans-unit id="CTE.article.0">
         <source>Article</source>
-        <target>مقاله</target>
+        <target>نوشته</target>
       </trans-unit>
       <trans-unit id="CTE.article.1">
         <source>Includes another article.</source>
-        <target>شامل مقاله دیگری است.</target>
+        <target>شامل نوشته دیگری است.</target>
       </trans-unit>
       <trans-unit id="CTE.alias.0">
         <source>Content element</source>
@@ -475,19 +475,19 @@
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
-        <target>خلاصه مقاله</target>
+        <target>تیزر نوشته</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.1">
         <source>Displays the teaser text of an article.</source>
-        <target>خلاصه متن یک مقاله را نمایش می‌دهد.</target>
+        <target>متن تیزر متن یک نوشته را نمایش می‌دهد.</target>
       </trans-unit>
       <trans-unit id="PTY.regular.0">
         <source>Regular page</source>
-        <target>صفحه عادی</target>
+        <target>برگه عادی</target>
       </trans-unit>
       <trans-unit id="PTY.regular.1">
         <source>A regular page contains articles and content elements. It is the default page type.</source>
-        <target>صفحه عمومی به عنوان نوع پيش‌فرض، حاوی عناوين، لينك ها و انواع مختلف محتوا می‌باشد.</target>
+        <target>برگه عمومی به عنوان نوع پيش‌فرض، حاوی عناوين، لينك ها و انواع مختلف محتوا می‌باشد.</target>
       </trans-unit>
       <trans-unit id="PTY.redirect.0">
         <source>External redirect</source>
@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="PTY.redirect.1">
         <source>This type of page automatically redirects visitors to an external website. It works like a hyperlink.</source>
-        <target>اين صفحه خودکار به يك نشانی خارجی بازگردانی می‌شود و همانند يك پیوند عمل می‌نمايد.</target>
+        <target>اين برگه خودکار به يك نشانی خارجی بازگردانی می‌شود و همانند يك پیوند عمل می‌نمايد.</target>
       </trans-unit>
       <trans-unit id="PTY.forward.0">
         <source>Internal redirect</source>
@@ -503,15 +503,15 @@
       </trans-unit>
       <trans-unit id="PTY.forward.1">
         <source>This type of page automatically forwards visitors to another page within the site structure.</source>
-        <target>این نوع از صفحه این امکان را به شما می‌دهد که بازدیدکننده را به صفحه‌ای دیگر از وب‌سایت منتقل نمایید. این انتقال با استفاده از شماره صفحه یا نام مستعار صفحه انجام می‌پذیرد.</target>
+        <target>این نوع از برگه این امکان را به شما می‌دهد که بازدیدکننده را به برگه‌ای دیگر از وب‌سایت منتقل نمایید. این انتقال با استفاده از شماره برگه یا نام مستعار برگه انجام می‌پذیرد.</target>
       </trans-unit>
       <trans-unit id="PTY.root.0">
         <source>Website root</source>
-        <target>ریشه وب‌سایت</target>
+        <target>ریشه تارنما</target>
       </trans-unit>
       <trans-unit id="PTY.root.1">
         <source>This type of page marks the starting point of a new website within the site structure.</source>
-        <target>اگر شما می‌خواهید با استفاده از ساختار درختی صفحه‌ها همین وب‌سایت، چندین وب‌سایت ایجاد نمایید، می‌توانید نقطه آغازین سیستم را توسط این گزینه مشخص نمایید.</target>
+        <target>اگر شما می‌خواهید با استفاده از ساختار درختی برگه‌ها همین تارنما، چندین تارنما ایجاد نمایید، می‌توانید نقطه آغازین سیستم را توسط این گزینه مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="PTY.error_403.0">
         <source>403 Access denied</source>
@@ -519,15 +519,15 @@
       </trans-unit>
       <trans-unit id="PTY.error_403.1">
         <source>If a user requests a protected page without permission, a 403 error page will be loaded instead.</source>
-        <target>این صفحه زمانی نمایش داده می‌شود که یک کاربر بخواهد بدون داشتن مجوز به صفحه‌ها دارای سطح محدودیت، دسترسی یابد.</target>
+        <target>این برگه زمانی نمایش داده می‌شود که یک کاربر بخواهد بدون داشتن مجوز به برگه‌ها دارای سطح محدودیت، دسترسی یابد.</target>
       </trans-unit>
       <trans-unit id="PTY.error_404.0">
         <source>404 Page not found</source>
-        <target>۴۰۴ صفحه پیدا نشد</target>
+        <target>۴۰۴ برگه پیدا نشد</target>
       </trans-unit>
       <trans-unit id="PTY.error_404.1">
         <source>If a user requests a non-existent page, a 404 error page will be loaded instead.</source>
-        <target>این صفحه زمانی نمایش داده می‌شود که یک کاربر بخواهد به صفحه‌ای که وجود ندارد دسترسی یابد.</target>
+        <target>این برگه زمانی نمایش داده می‌شود که یک کاربر بخواهد به برگه‌ای که وجود ندارد دسترسی یابد.</target>
       </trans-unit>
       <trans-unit id="FOP.fop.0">
         <source>File operation permissions</source>
@@ -539,7 +539,7 @@
       </trans-unit>
       <trans-unit id="FOP.f1">
         <source>Upload files to the server</source>
-        <target>بارگذاری پرونده‌ها در سرور</target>
+        <target>بارگذاری پرونده‌ها در سامانه</target>
       </trans-unit>
       <trans-unit id="FOP.f2">
         <source>Edit, copy or move files and folders</source>
@@ -563,15 +563,15 @@
       </trans-unit>
       <trans-unit id="CHMOD.editpage">
         <source>Edit page</source>
-        <target>ویرایش صفحه</target>
+        <target>ویرایش برگه</target>
       </trans-unit>
       <trans-unit id="CHMOD.editnavigation">
         <source>Edit page hierarchy</source>
-        <target>ويرايش ساختار درختی صفحه‌ها</target>
+        <target>ويرايش ساختار درختی برگه‌ها</target>
       </trans-unit>
       <trans-unit id="CHMOD.deletepage">
         <source>Delete page</source>
-        <target>حذف صفحه</target>
+        <target>حذف برگه</target>
       </trans-unit>
       <trans-unit id="CHMOD.editarticles">
         <source>Edit articles</source>
@@ -771,7 +771,7 @@
       </trans-unit>
       <trans-unit id="MSC.url.1">
         <source>Please enter a web address (http://…), an e-mail address (mailto:…) or an insert tag.</source>
-        <target>لطفاً نشانی وب (http://…), یک نشانی ایمیل (mailto:…) یا یک برچسب وارد نمایید.</target>
+        <target>لطفاً نشانی وب (http://…), یک نشانی رایانامه (mailto:…) یا یک برچسب وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="MSC.target.0">
         <source>Open in new window</source>
@@ -1146,24 +1146,24 @@
         <target>تاریخ اضافه شد: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>ورود قبلی</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>ورود قبلی:‌ %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
         <source>Last login</source>
         <target>آخرین ورود</target>
       </trans-unit>
-      <trans-unit id="MSC.lastLogin.1">
+      <trans-unit id="MSC.currentLogin.1">
         <source>Last login: %s</source>
         <target>آخرین ورود: %s</target>
       </trans-unit>
-      <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>ورود فعلی</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>ورودی جاری: %s</target>
-      </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
-        <target>تلاش برای ورود به سیستم</target>
+        <target>تلاش برای ورود</target>
       </trans-unit>
       <trans-unit id="MSC.locked">
         <source>Locked</source>
@@ -1195,7 +1195,7 @@
       </trans-unit>
       <trans-unit id="MSC.staticFiles.1">
         <source>The files URL applies to the &lt;em&gt;files&lt;/em&gt; directory (page speed optimization).</source>
-        <target>نشانی وب پرونده‌ها به شاخه &lt;em&gt;tl_files&lt;/em&gt; و همه تصاویر بند انگشتی اعمال خواهد شد (بهینه‌سازی سرعت صفحه)</target>
+        <target>نشانی وب پرونده‌ها به شاخه &lt;em&gt;tl_files&lt;/em&gt; و همه تصاویر بند انگشتی اعمال خواهد شد (بهینه‌سازی سرعت برگه)</target>
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.0">
         <source>Assets URL</source>
@@ -1203,7 +1203,7 @@
       </trans-unit>
       <trans-unit id="MSC.staticPlugins.1">
         <source>The assets URL applies to the &lt;em&gt;assets&lt;/em&gt; directory (page speed optimization).</source>
-        <target>نشانی وب افزونه‌ها به همه منابع در شاخه &lt;em&gt;plugins&lt;/em&gt; اعمال خواهد شد (بهینه‌سازی سرعت صفحه)</target>
+        <target>نشانی وب افزونه‌ها به همه منابع در شاخه &lt;em&gt;plugins&lt;/em&gt; اعمال خواهد شد (بهینه‌سازی سرعت برگه)</target>
       </trans-unit>
       <trans-unit id="MSC.shortcuts.0">
         <source>Back end keyboard shortcuts</source>
@@ -1240,11 +1240,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
 
 نام کاربری: %s
 نام واقعی: %s
-وب‌سایت: %s
+تارنما: %s
 
 حساب کاربری به مدت %d دقیقه قفل شده است، زیرا کاربر سه بار پشت سر هم  گذرواژه را اشتباه وارد کرده است. بعد از این دوره زمانی، حساب کاربری به صورت خودکار باز خواهد شد.
 
-این ایمیل توسط کانتائو ایجاد شده است. شما مستقیما نمی‌تواند به آن پاسخ دهید.
+این رایانامه توسط کانتائو ایجاد شده است. شما مستقیما نمی‌تواند به آن پاسخ دهید.
 </target>
       </trans-unit>
       <trans-unit id="MSC.toggleMobile.0">
@@ -1273,7 +1273,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.fePreviewTitle">
         <source>Preview of the website in a new window</source>
-        <target>پیش‌نمایش وب‌سایت در پنجره جدید</target>
+        <target>پیش‌نمایش تارنما در پنجره جدید</target>
       </trans-unit>
       <trans-unit id="MSC.feUser">
         <source>Front end user</source>
@@ -1285,7 +1285,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backToTopTitle">
         <source>Go to the top of the page</source>
-        <target>رفتن به بالای صفحه</target>
+        <target>رفتن به بالای برگه</target>
       </trans-unit>
       <trans-unit id="MSC.home">
         <source>Home</source>
@@ -1293,7 +1293,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.homeTitle">
         <source>Back to the back end start page</source>
-        <target>بازگشت به صفحه اصلی مدیریت</target>
+        <target>بازگشت به برگه اصلی مدیریت</target>
       </trans-unit>
       <trans-unit id="MSC.user">
         <source>User</source>
@@ -1321,7 +1321,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.backBTTitle">
         <source>Back to the previous page</source>
-        <target>بازگشت به صفحه قبلی</target>
+        <target>بازگشت به برگه قبلی</target>
       </trans-unit>
       <trans-unit id="MSC.cancelBT">
         <source>Cancel</source>
@@ -1365,7 +1365,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.filter">
         <source>Filter</source>
-        <target>فیلتر</target>
+        <target>پالایه</target>
       </trans-unit>
       <trans-unit id="MSC.search">
         <source>Search</source>
@@ -1445,7 +1445,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pagepicker">
         <source>Page picker</source>
-        <target>انتخاب كننده صفحه (نياز به فعال بودن Javascript)</target>
+        <target>انتخاب كننده برگه (نياز به فعال بودن Javascript)</target>
       </trans-unit>
       <trans-unit id="MSC.filepicker">
         <source>File picker</source>
@@ -1453,7 +1453,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.ppHeadline">
         <source>Contao pages</source>
-        <target>صفحه‌های کانتائو</target>
+        <target>برگه‌های کانتائو</target>
       </trans-unit>
       <trans-unit id="MSC.fpHeadline">
         <source>Contao files</source>
@@ -1653,11 +1653,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.pagePickerHome">
         <source>Back to the page picker</source>
-        <target>بازگشت به انتخاب صفحه</target>
+        <target>بازگشت به انتخاب برگه</target>
       </trans-unit>
       <trans-unit id="MSC.pickerNoSelection">
         <source>Please go back to the page or file picker and make a selection before you close the dialog.</source>
-        <target>لطفا به انتخابگر پرونده یا صفحه باز گردید قبل از این دیالوگ را ببندید.</target>
+        <target>لطفا به انتخابگر پرونده یا برگه باز گردید قبل از این دیالوگ را ببندید.</target>
       </trans-unit>
       <trans-unit id="MSC.systemMessages">
         <source>System messages</source>
@@ -1761,7 +1761,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
-        <target>کانتائو در &lt;strong&gt;وضعیت نگهداشت&lt;/strong&gt; کار می‌کند، که وب‌سایت (نمای بیرونی) در دسترس نیست. اگر در حال نصب یا ارتقاء افزونه‌ها هستید این حالت را غیرفعال نکنید! وب‌سایت ممکن است به درستی کار نکند.</target>
+        <target>کانتائو در &lt;strong&gt;وضعیت نگهداشت&lt;/strong&gt; کار می‌کند، که تارنما (نمای بیرونی) در دسترس نیست. اگر در حال نصب یا ارتقاء افزونه‌ها هستید این حالت را غیرفعال نکنید! تارنما ممکن است به درستی کار نکند.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1781,11 +1781,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.emailAddress">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="MSC.register">
         <source>Register</source>
-        <target>عضویت</target>
+        <target>نام‌نویسی</target>
       </trans-unit>
       <trans-unit id="MSC.accountActivated">
         <source>Your account has been activated.</source>
@@ -1797,15 +1797,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.emailSubject">
         <source>Your registration on %s</source>
-        <target>عضویت شما در %s</target>
+        <target>نام‌نویسی شما در %s</target>
       </trans-unit>
       <trans-unit id="MSC.adminSubject">
         <source>New registration on %s</source>
-        <target>کانتائو :: عضویت جدید در %s</target>
+        <target>نام‌نویسی جدید در %s</target>
       </trans-unit>
       <trans-unit id="MSC.adminText">
         <source>A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.</source>
-        <target>یک کاربر جدید (با شناسه %s) در وب‌سایت شما عضو گردید. %s در صورتی که شما اجازه فعال شده عضویت را توسط ایمیل تصدیق نداده‌اید، لطفا به بخش مدیریت وب‌سایت رفته و به صورت معمولی کاربر را فعال نمایید.</target>
+        <target>یک کاربر جدید (با شناسه %s) در تارنما شما عضو گردید. %s در صورتی که شما اجازه فعال شده نام‌نویسی را توسط رایانامه تصدیق نداده‌اید، لطفا به بخش مدیریت تارنما رفته و به صورت معمولی کاربر را فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="MSC.requestPassword">
         <source>Request password</source>
@@ -1965,11 +1965,11 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.goToPage">
         <source>Go to page %s</source>
-        <target>برو به صفحه %s</target>
+        <target>برو به برگه %s</target>
       </trans-unit>
       <trans-unit id="MSC.totalPages">
         <source>Page %s of %s</source>
-        <target>صفحه %s از %s</target>
+        <target>برگه %s از %s</target>
       </trans-unit>
       <trans-unit id="MSC.fileUploaded">
         <source>File %s uploaded successfully.</source>
@@ -2009,7 +2009,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.printPage">
         <source>Print this page</source>
-        <target>چاپ کردن این صفحه</target>
+        <target>چاپ کردن این برگه</target>
       </trans-unit>
       <trans-unit id="MSC.printAsPdf">
         <source>Print article as PDF</source>
@@ -2037,15 +2037,15 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.more">
         <source>Read more …</source>
-        <target>ادامه مطلب ...</target>
+        <target>بیشتر بخوانید ...</target>
       </trans-unit>
       <trans-unit id="MSC.readMore">
         <source>Read the article: %s</source>
-        <target>مشاهده مقاله: %s</target>
+        <target>مشاهده نوشته: %s</target>
       </trans-unit>
       <trans-unit id="MSC.targetPage">
         <source>Target page</source>
-        <target>صفحه مقصد</target>
+        <target>برگه مقصد</target>
       </trans-unit>
       <trans-unit id="MSC.invalidPage">
         <source>Sorry, item &quot;%s&quot; does not exist.</source>
@@ -2057,7 +2057,7 @@ This e-mail has been generated by Contao. You can not reply to it directly.
       </trans-unit>
       <trans-unit id="MSC.list_perPage">
         <source>Results per page</source>
-        <target>تعداد نتایج در هر صفحه</target>
+        <target>تعداد نتایج در هر برگه</target>
       </trans-unit>
       <trans-unit id="MSC.published">
         <source>Published</source>

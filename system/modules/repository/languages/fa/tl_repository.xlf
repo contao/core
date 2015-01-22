@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_repository.category.0">
         <source>Category</source>
-        <target>دسته</target>
+        <target>دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_repository.category.1">
         <source>Please select the extension category.</source>
-        <target>دسته افزونه را انتخاب نمایید.</target>
+        <target>دسته‌بندی افزونه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_repository.copyright.0">
         <source>Copyright</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
-        <target>نام افزونه باید با a-z، A-Z و یا 0-9 شروع شود نام‌های با حروف کوچک مرجح هستند. علاوه بر این، کارکترهای _ و - در بین نام مجاز هستند.</target>
+        <target>نام افزونه باید با a-z، A-Z و یا 0-9 شروع شود نام‌های با حروف کوچک مرجح هستند. علاوه بر این، نویسه‌های _ و - در بین نام مجاز هستند.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.pageof">
         <source>Page %s of %s</source>
-        <target>صفحه %s از %s</target>
+        <target>برگه %s از %s</target>
       </trans-unit>
       <trans-unit id="tl_repository.ratingfmt">
         <source>%.2f (%d votes)</source>

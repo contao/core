@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_featured.1">
         <source>Here you can choose how featured items are handled.</source>
-        <target>شما می‌توانید نحوه به کار بردن موردهای ویژه را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید نحوه به کار بردن موردهای ویژه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_jumpToCurrent.0">
         <source>No period selected</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_jumpToCurrent.1">
         <source>Here you can define what to display if no period is selected.</source>
-        <target>اینجا شما می‌توانید حالتی را وقتی که بازه‌ای انتخاب نشده است باید نمایش داده شود را تعریف نمایید.</target>
+        <target>اینجا می‌توانید حالتی را وقتی که بازه‌ای انتخاب نشده است باید نمایش داده شود را تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_readerModule.0">
         <source>News reader module</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_template.1">
         <source>Here you can select the news template.</source>
-        <target>اینجا شما می‌توانید قالب اخبار را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قالب اخبار را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_format.0">
         <source>Archive format</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_format.1">
         <source>Here you can choose the news archive format.</source>
-        <target>شما می‌توانید ساختار بایگانی خبر را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید ساختار بایگانی خبر را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_startDay.0">
         <source>Week start day</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_module.news_startDay.1">
         <source>Here you can choose the week start day.</source>
-        <target>شما می‌توانید روز شروع هفته را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید روز شروع هفته را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.news_order.0">
         <source>Sort order</source>

@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
-        <target>Создавать URL-адреса с &lt;em&gt;https://&lt;/em&gt; (напр., в файле sitemaps).</target>
+        <target>Создавать URL-адреса с &lt;em&gt;https://&lt;/em&gt; (напр., в файлах sitemaps).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

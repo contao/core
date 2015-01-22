@@ -827,7 +827,7 @@
       </trans-unit>
       <trans-unit id="MSC.lw_import.1">
         <source>Import list items from a CSV file</source>
-        <target>Импорт списка из CSV-файла</target>
+        <target>Импорт списка элементов из CSV-файла</target>
       </trans-unit>
       <trans-unit id="MSC.lw_copy">
         <source>Duplicate the element</source>
@@ -851,7 +851,7 @@
       </trans-unit>
       <trans-unit id="MSC.tw_import.1">
         <source>Import table items from a CSV file</source>
-        <target>Импорт табличных значений из CSV-файла</target>
+        <target>Импорт элементов таблицы из CSV-файла</target>
       </trans-unit>
       <trans-unit id="MSC.tw_expand">
         <source>Increase the input field size</source>
@@ -1146,20 +1146,20 @@
         <target>Дата добавления: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>Предыдущий вход</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>Предыдущий вход: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
         <source>Last login</source>
         <target>Последний вход</target>
       </trans-unit>
-      <trans-unit id="MSC.lastLogin.1">
+      <trans-unit id="MSC.currentLogin.1">
         <source>Last login: %s</source>
         <target>Последний вход: %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>Текущий вход.</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>Текущее имя входа: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>

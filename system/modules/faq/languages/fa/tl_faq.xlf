@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.alias.0">
         <source>FAQ alias</source>
-        <target>اسم مستعار سوالات متداول</target>
+        <target>اسم مستعار پرسش و پاسخ</target>
       </trans-unit>
       <trans-unit id="tl_faq.alias.1">
         <source>The FAQ alias is a unique reference to the FAQ which can be called instead of its numeric ID.</source>
-        <target>اسم مستعار سوالات متداول مرجعی یکتا برای سوالات متداول است که می تواند بجای شناسه عددی استفاده شود.</target>
+        <target>اسم مستعار پرسش و پاسخ مرجعی یکتا برای پرسش و پاسخ است که می تواند بجای شناسه عددی استفاده شود.</target>
       </trans-unit>
       <trans-unit id="tl_faq.author.0">
         <source>Author</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.addEnclosure.1">
         <source>Add one or more downloadable files to the FAQ.</source>
-        <target>اضافه نمودن یک یا چند پرونده قابل دانلود به FAQ.</target>
+        <target>اضافه نمودن یک یا چند پرونده قابل دانلود به پرسش و پاسخ.</target>
       </trans-unit>
       <trans-unit id="tl_faq.enclosure.0">
         <source>Enclosures</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.noComments.1">
         <source>Do not allow comments for this particular FAQ.</source>
-        <target>اجازه ندادن دیدگاه‌ها برای این FAQ خاص.</target>
+        <target>اجازه ندادن دیدگاه‌ها برای این پرسش و پاسخ خاص.</target>
       </trans-unit>
       <trans-unit id="tl_faq.published.0">
         <source>Publish the FAQ</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.published.1">
         <source>Make the FAQ publicly visible on the website.</source>
-        <target>برای نمایش دادن پرسش و پاسخ این گزینه را فعال نمایید .</target>
+        <target>برای نمایش پرسش و پاسخ در تارنما این گزینه را فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_faq.title_legend">
         <source>Title and author</source>
@@ -123,11 +123,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.copy.0">
         <source>Duplicate question</source>
-        <target>دو نسخه کردن پرسش</target>
+        <target>تکثیر پرسش</target>
       </trans-unit>
       <trans-unit id="tl_faq.copy.1">
         <source>Duplicate question ID %s</source>
-        <target>تکثیر پرسش با شناسه %s</target>
+        <target>تکثیر پرسش شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_faq.cut.0">
         <source>Move question</source>
@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="tl_faq.editheader.0">
         <source>Edit category</source>
-        <target>ویرایش دسته</target>
+        <target>ویرایش دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq.editheader.1">
         <source>Edit the category settings</source>
-        <target>ویرایش تنظیمات دسته</target>
+        <target>ویرایش تنظیمات دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_faq.pasteafter.0">
         <source>Paste at the top</source>

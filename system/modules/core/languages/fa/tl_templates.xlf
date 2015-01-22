@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_templates.original.1">
         <source>Here you can select the template that you want to customize.</source>
-        <target>قالبی را که می‌خواهید سفارشی کنید را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قالبی را که می‌خواهید سفارشی کنید را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_templates.target.0">
         <source>Target folder</source>

@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.author.1">
         <source>Please enter the author's name and an optional e-mail address (e.g. &lt;em&gt;Name [e-mail@address.com]&lt;/em&gt;).</source>
-        <target>لطفا نام نویسنده و یک نشانی ایمیل اختیاری را وارد نمایید (مثلا &lt;em&gt;نام [e-mail@address.com]&lt;/em&gt;).</target>
+        <target>لطفا نام نویسنده و یک نشانی رایانامه اختیاری را وارد نمایید (مثلا &lt;em&gt;نام [e-mail@address.com]&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.copyright.0">
         <source>Copyright</source>
@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_extension.languages.1">
         <source>Here you can enter a comma separated list of languages (e.g. &lt;em&gt;en,de&lt;/em&gt;).</source>
-        <target>می‌توانید فهرست جدا شده با کاما از زبان‌ها را وارد نمایید (مثلا &lt;em&gt;en,de&lt;/em&gt;).</target>
+        <target>اینجا می‌توانید فهرست جدا شده با کاما از زبان‌ها را وارد نمایید (مثلا &lt;em&gt;en,de&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_extension.title_legend">
         <source>Title and name</source>

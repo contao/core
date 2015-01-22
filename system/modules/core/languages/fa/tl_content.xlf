@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_content.headline.1">
         <source>Here you can add a headline to the content element.</source>
-        <target>می‌توانید عنوان اصلی را به المان محتوا اضافه کنید.</target>
+        <target>اینجا می‌توانید عنوان اصلی را به المان محتوا اضافه کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.text.0">
         <source>Text</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_content.title.1">
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
-        <target>می‌توانید عنوان تصویر ا وارد کنید (خصوصیت &lt;em&gt;title&lt;/em&gt;).</target>
+        <target>اینجا می‌توانید عنوان تصویر ا وارد کنید (خصوصیت &lt;em&gt;title&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_content.size.0">
         <source>Image width and height</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_content.size.1">
         <source>Here you can set the image dimensions and the resize mode.</source>
-        <target>می‌توانید ابعاد و نوع تغییر اندازه را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید ابعاد و نوع تغییر اندازه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.imagemargin.0">
         <source>Image margin</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_content.imagemargin.1">
         <source>Here you can enter the top, right, bottom and left margin.</source>
-        <target>می‌توانید حاشیه بالا، راست، پایین و چپ را وارد نمایید.</target>
+        <target>اینجا می‌توانید حاشیه بالا، راست، پایین و چپ را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.imageUrl.0">
         <source>Image link target</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_content.caption.1">
         <source>Here you can enter a short text that will be displayed below the image.</source>
-        <target>می‌توانید یک متن کوتاه که در زیر تصویر نمایش داده خواهد شد را وارد نمایید.</target>
+        <target>اینجا می‌توانید یک متن کوتاه که در زیر تصویر نمایش داده خواهد شد را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_content.html.0">
         <source>HTML code</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortIndex.1">
         <source>The number of the default sort column.</source>
-        <target>شماره سوتن مرتب‌سازی پیش‌فرض.</target>
+        <target>شماره ستون مرتب‌سازی پیش‌فرض.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.0">
         <source>Sort order</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_content.mooStyle.1">
         <source>Here you can format the section headline using CSS code.</source>
-        <target>می‌توانید بخش سرصفحه را با استفاده از کد سی‌اس‌اس شکل دهید.</target>
+        <target>اینجا می‌توانید بخش سرصفحه را با استفاده از کد سی‌اس‌اس شکل دهید.</target>
       </trans-unit>
       <trans-unit id="tl_content.mooClasses.0">
         <source>Element classes</source>
@@ -255,7 +255,7 @@
       </trans-unit>
       <trans-unit id="tl_content.shClass.1">
         <source>Here you can configure the syntax highlighter (e.g. &lt;em&gt;gutter: false;&lt;/em&gt;).</source>
-        <target>می‌توانید syntax highlighter را پیکربندی کنید (به عنوان مثال &lt;em&gt;gutter: false;&lt;/em&gt;)</target>
+        <target>اینجا می‌توانید syntax highlighter را پیکربندی کنید (به عنوان مثال &lt;em&gt;gutter: false;&lt;/em&gt;)</target>
       </trans-unit>
       <trans-unit id="tl_content.highlight.0">
         <source>Syntax highlighting</source>
@@ -347,11 +347,11 @@
       </trans-unit>
       <trans-unit id="tl_content.perPage.0">
         <source>Items per page</source>
-        <target>تعداد موارد در هر صفحه</target>
+        <target>تعداد موارد در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_content.perPage.1">
         <source>The number of items per page. Set to 0 to disable pagination.</source>
-        <target>تعداد موارد در هر صفحه. 0 را برای غیرفعال کردن صفحه‌بندی انتخاب کنید.</target>
+        <target>تعداد موارد در هر برگه. 0 را برای غیرفعال کردن برگه‌بندی انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.numberOfItems.0">
         <source>Total number of images</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="tl_content.numberOfItems.1">
         <source>Here you can limit the total number of images. Set to 0 to show all.</source>
-        <target>می‌توانید تعدادکل تصاویر را محدود کنید. صفر برای نمایش همه.</target>
+        <target>اینجا می‌توانید تعدادکل تصاویر را محدود کنید. صفر برای نمایش همه.</target>
       </trans-unit>
       <trans-unit id="tl_content.sortBy.0">
         <source>Order by</source>
@@ -375,7 +375,7 @@
       </trans-unit>
       <trans-unit id="tl_content.galleryTpl.1">
         <source>Here you can select the gallery template.</source>
-        <target>می‌توانید قالب گالری را انتخاب کنید.</target>
+        <target>اینجا می‌توانید قالب گالری را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.playerSRC.0">
         <source>Video/audio files</source>
@@ -415,7 +415,7 @@
       </trans-unit>
       <trans-unit id="tl_content.autoplay.1">
         <source>Automatically play the video when the page loads.</source>
-        <target>پخش خودکار ویدیو زمان بارگذاری صفحه.</target>
+        <target>پخش خودکار ویدیو زمان بارگذاری برگه.</target>
       </trans-unit>
       <trans-unit id="tl_content.sliderDelay.0">
         <source>Sliding interval</source>
@@ -519,7 +519,7 @@
       </trans-unit>
       <trans-unit id="tl_content.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>می‌توانید یک شناسه و یک یا چند کلاس انتخاب کنید.</target>
+        <target>اینجا می‌توانید یک شناسه و یک یا چند کلاس انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.space.0">
         <source>Space in front and after</source>
@@ -527,7 +527,7 @@
       </trans-unit>
       <trans-unit id="tl_content.space.1">
         <source>Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
-        <target>می‌توانید فاصله در ابتداء و انتهاء عنصر به پیسکل وارد کنید. با این حال شما باید سعی کنید از استایل خطی برحذر باشید و از شیوه‌نامه استفاده کنید.</target>
+        <target>اینجا می‌توانید فاصله در ابتداء و انتهاء عنصر به پیسکل وارد کنید. با این حال شما باید سعی کنید از استایل خطی برحذر باشید و از شیوه‌نامه استفاده کنید.</target>
       </trans-unit>
       <trans-unit id="tl_content.invisible.0">
         <source>Invisible</source>
@@ -535,7 +535,7 @@
       </trans-unit>
       <trans-unit id="tl_content.invisible.1">
         <source>Hide the element on the website.</source>
-        <target>غیرقابل مشاهده کردن عنصر در وب‌سایت.</target>
+        <target>غیرقابل مشاهده کردن عنصر در تارنما.</target>
       </trans-unit>
       <trans-unit id="tl_content.start.0">
         <source>Show from</source>
@@ -667,11 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>نیاز است که قالب &lt;em&gt;%s&lt;/em&gt; در چیدمان صفحه قرار داده شود.</target>
+        <target>نیاز است که قالب &lt;em&gt;%s&lt;/em&gt; در چیدمان برگه قرار داده شود.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>قالب &lt;em&gt;%s&lt;/em&gt; یا &lt;em&gt;%s&lt;/em&gt; باید در چیدمان صفحه قرار داده شود.</target>
+        <target>قالب &lt;em&gt;%s&lt;/em&gt; یا &lt;em&gt;%s&lt;/em&gt; باید در چیدمان برگه قرار داده شود.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

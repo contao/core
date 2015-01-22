@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.1">
         <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
-        <target>Выберите страницу просмотрщика новостей, к которой будут перенаправлены посетители при нажатии на новость.</target>
+        <target>Выберите страницу просмотрщика новостей к которой будут перенаправлены посетители при нажатии на новость.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.allowComments.0">
         <source>Enable comments</source>

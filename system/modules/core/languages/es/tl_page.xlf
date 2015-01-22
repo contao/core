@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_page.title.1">
         <source>Please enter the page name.</source>
-        <target>El nombre de página se muestra en la navegación de la web.</target>
+        <target>Por favor, introduzca el nombre de la página</target>
       </trans-unit>
       <trans-unit id="tl_page.alias.0">
         <source>Page alias</source>
@@ -139,9 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS</source>
+        <target>Usar HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Generar las URLs con &lt;em&gt;https://&lt;/em&gt; (por ejemplo en mapas del sitio)</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

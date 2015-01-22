@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>Na voljo je nova različica %s Contao urejevalnika</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Prosimo, vnesite ID enostavne posodobitve</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Imenik začasnih datotek (system/tmp) ni zapisljiv</target>

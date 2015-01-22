@@ -35,19 +35,19 @@
       </trans-unit>
       <trans-unit id="tl_comments.email.0">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_comments.email.1">
         <source>The e-mail address will not be published.</source>
-        <target>نشانی ایمیل نمایش داده نخواهد شد.</target>
+        <target>نشانی رایانامه نمایش داده نخواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.0">
         <source>Website</source>
-        <target>وب‌سایت</target>
+        <target>تارنما</target>
       </trans-unit>
       <trans-unit id="tl_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>اینجا می‌توانید نشانی وب‌سایت را وارد نمایید.</target>
+        <target>اینجا می‌توانید نشانی تارنما را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_comments.comment.0">
         <source>Comment</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>تنها نظراتی که منتشر شده باشند در وب‌سایت نمایش داده خواهند شد.</target>
+        <target>تنها نظراتی که منتشر شده باشند در تارنما نمایش داده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_comments.ip.0">
         <source>IP address</source>
@@ -131,11 +131,11 @@
       </trans-unit>
       <trans-unit id="tl_comments.tl_content">
         <source>Article</source>
-        <target>مقاله</target>
+        <target>نوشته</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_page">
         <source>Page</source>
-        <target>صفحه</target>
+        <target>برگه</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_news">
         <source>News item</source>
@@ -143,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_comments.tl_faq">
         <source>FAQ</source>
-        <target>سوالات متداول</target>
+        <target>پرسش و پاسخ</target>
       </trans-unit>
       <trans-unit id="tl_comments.tl_calendar_events">
         <source>Event</source>

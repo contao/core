@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>Une nouvelle version %s de Contao est disponible</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Saisir l'ID de la mise à jour automatique</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Le répertoire temporaire (system/tmp) ne possède pas de droits en écriture</target>

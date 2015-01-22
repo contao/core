@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>Újabb Contao verzió érhető el: %s</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Kérem adja meg az online frissítési ID-t (azonosítót)</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Az átmeneti tároló mappa (system/tmp) írásvédett</target>

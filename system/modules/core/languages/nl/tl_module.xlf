@@ -499,7 +499,7 @@
       </trans-unit>
       <trans-unit id="tl_module.space.0">
         <source>Space in front and after</source>
-        <target>Ruimte voor en na</target>
+        <target>Ruimte voor en achter</target>
       </trans-unit>
       <trans-unit id="tl_module.space.1">
         <source>Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
@@ -611,7 +611,7 @@
       </trans-unit>
       <trans-unit id="tl_module.template_legend">
         <source>Template settings</source>
-        <target>Template instellingen</target>
+        <target>Template-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_module.config_legend">
         <source>Module configuration</source>
@@ -639,7 +639,7 @@
       </trans-unit>
       <trans-unit id="tl_module.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_module.email_legend">
         <source>E-mail settings</source>

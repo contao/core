@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.embedImages.1">
         <source>Here you can enter the file size in bytes up to which images will be embedded in the style sheet as data: string. Set to 0 to disable the feature.</source>
-        <target>می‌توانید اندازه پرونده به بایت را در این قسمت وارد نمایید تا تصاویر به صورت رشته در شیوه‌نامه الحاق شوند. 0 را برای غیرفعال کردن این ویژگی وارد نمایید.</target>
+        <target>اینجا می‌توانید اندازه پرونده به بایت را اینجا وارد نمایید تا تصاویر به صورت رشته در شیوه‌نامه الحاق شوند. 0 را برای غیرفعال کردن این ویژگی وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.cc.0">
         <source>Conditional comment</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.media.1">
         <source>Here you can choose the media types the style sheet applies to.</source>
-        <target>می‌توانید انواع رسانه که باید به شیوه‌نامه اعمال شود را انتخاب کنید.</target>
+        <target>اینجا می‌توانید انواع رسانه که باید به شیوه‌نامه اعمال شود را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.mediaQuery.0">
         <source>Media query</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.mediaQuery.1">
         <source>Here you can define the media type using a media query like &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt;. The media types defined above will then be overwritten.</source>
-        <target>می‌توانید نوع رسانه را با یک پرسش رسانه مثل &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt; تعریف نمایید. نوع رسانه‌های تعریف شده در بالا رونویسی خواهند شد.</target>
+        <target>اینجا می‌توانید نوع رسانه را با یک پرسش رسانه مثل &lt;em&gt;screen and (min-width: 800px)&lt;/em&gt; تعریف نمایید. نوع رسانه‌های تعریف شده در بالا رونویسی خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars.0">
         <source>Global variables</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_style_sheet.vars.1">
         <source>Here you can define global variables for the style sheet (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
-        <target>می‌توانید متغییرهای جهانی را برای شیوه‌نامه (مانند &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;) تعریف نمایید.</target>
+        <target>اینجا می‌توانید متغییرهای جهانی را برای شیوه‌نامه (مانند &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;) تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style_sheet.source.0">
         <source>Source files</source>

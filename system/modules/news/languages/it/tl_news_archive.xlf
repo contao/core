@@ -31,11 +31,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.notify.1">
         <source>Please choose who to notify when comments are added.</source>
-        <target>Per cortesia scegli a chi mandare una notifica quando sono aggiunti commenti.</target>
+        <target>Seleziona a chi mandare una notifica quando sono aggiunti commenti.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.sortOrder.0">
         <source>Sort order</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>

@@ -7,15 +7,15 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title.1">
         <source>Please enter the calendar title.</source>
-        <target>لطفا عنوان تقویم را وارد نمایید.</target>
+        <target>لطفا عنوان سالنما را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.0">
         <source>Redirect page</source>
-        <target>انتقال به صفحه</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
-        <target>لطفا صفحه ای را که می خواهید کاربران بعد از کلیک بر روی رویداد به آنجا منتقل شوند را انتخاب نمایید.</target>
+        <target>لطفا برگه‌ای را که می خواهید کاربران بعد از کلیک بر روی رویداد به آنجا بازگردانی شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.0">
         <source>Enable comments</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.0">
         <source>Comments per page</source>
-        <target>دیدگاه در هر صفحه</target>
+        <target>دیدگاه در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>تعداد دیدگاه‌ها در هر صفحه. برای غیرفعال کردن صفحه بندی 0 را انتخاب نمایید.</target>
+        <target>تعداد دیدگاه‌ها در هر برگه. برای غیرفعال کردن برگه بندی 0 را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.0">
         <source>Moderate comments</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>تایید دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
+        <target>تایید دیدگاه‌ها قبل از انتشار در تارنما.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.bbcode.0">
         <source>Allow BBCode</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.groups.1">
         <source>These groups will be able to see the events in this calendar.</source>
-        <target>در این بخش می توانید مشخص کنید که اعضای کدام گروه قادر به مشاهده این تقویم می باشند .</target>
+        <target>در این بخش می‌توانید مشخص کنید که اعضای کدام گروه قادر به مشاهده این سالنما می باشند .</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title_legend">
         <source>Title and redirect page</source>
-        <target>عنوان و صفحه انتقال</target>
+        <target>عنوان و برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_calendar.comments_legend">
         <source>Comments</source>
@@ -139,55 +139,55 @@
       </trans-unit>
       <trans-unit id="tl_calendar.source_text">
         <source>Full articles</source>
-        <target>مقاله کامل</target>
+        <target>نوشته کامل</target>
       </trans-unit>
       <trans-unit id="tl_calendar.new.0">
         <source>New calendar</source>
-        <target>تقویم جدید</target>
+        <target>سالنمای جدید</target>
       </trans-unit>
       <trans-unit id="tl_calendar.new.1">
         <source>Create a new calendar</source>
-        <target>ساخت یک تقویم جدید</target>
+        <target>ساخت یک سالنمای جدید</target>
       </trans-unit>
       <trans-unit id="tl_calendar.show.0">
         <source>Calendar details</source>
-        <target>جزئیات تقویم</target>
+        <target>جزئیات سالنما</target>
       </trans-unit>
       <trans-unit id="tl_calendar.show.1">
         <source>Show the details of calendar ID %s</source>
-        <target>نمایش جزئیات تقویم شناسه %s</target>
+        <target>نمایش جزئیات سالنما شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.edit.0">
         <source>Edit calendar</source>
-        <target>ویرایش تقویم</target>
+        <target>ویرایش سالنما</target>
       </trans-unit>
       <trans-unit id="tl_calendar.edit.1">
         <source>Edit calendar ID %s</source>
-        <target>ویرایش تقویم شناسه %s</target>
+        <target>ویرایش سالنما شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.0">
         <source>Edit calendar settings</source>
-        <target>ویرایش تنظیمات تقویم</target>
+        <target>ویرایش تنظیمات سالنما</target>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.1">
         <source>Edit the settings of calendar ID %s</source>
-        <target>ویرایش تنظیمات تقویم شناسه %s</target>
+        <target>ویرایش تنظیمات سالنما شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.0">
         <source>Duplicate calendar</source>
-        <target>تکثیر تقویم</target>
+        <target>تکثیر سالنما</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.1">
         <source>Duplicate calendar ID %s</source>
-        <target>تکثیر تقویم شناسه %s</target>
+        <target>تکثیر سالنما شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.delete.0">
         <source>Delete calendar</source>
-        <target>حذف تقویم</target>
+        <target>حذف سالنما</target>
       </trans-unit>
       <trans-unit id="tl_calendar.delete.1">
         <source>Delete calendar ID %s</source>
-        <target>حذف تقویم شناسه %s</target>
+        <target>حذف سالنما شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.0">
         <source>RSS feeds</source>

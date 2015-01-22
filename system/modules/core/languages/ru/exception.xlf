@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="XPT.matter">
         <source>What's the matter?</source>
-        <target>В чем дело?</target>
+        <target>В чем проблема?</target>
       </trans-unit>
       <trans-unit id="XPT.howToFix">
         <source>How can I fix the issue?</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="XPT.pageNotFound">
         <source>The page you have requested does not exist under this domain.</source>
-        <target>Запрашиваемая вами страница не существует в этом домене.</target>
+        <target>Запрошенная вами страница не существует в этом домене.</target>
       </trans-unit>
       <trans-unit id="XPT.notFoundFix">
         <source>Try to &lt;a href=&quot;%s&quot;&gt;go to the top level&lt;/a&gt; and use the search function (if any) to find the page you were looking for. You may also &lt;a href=&quot;%s&quot;&gt;contact the webmaster&lt;/a&gt; and let him know that there is something wrong.</source>

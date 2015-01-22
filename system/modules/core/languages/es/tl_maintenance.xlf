@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>La nueva versión de Contao %s está disponible</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Por favor introduce tu ID de actualización en vivo</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>La carpeta temporal (system/tmp) no tiene permiso de escritura</target>
@@ -167,9 +163,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>
+        <target>Purgar la caché de búsqueda</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.1">
         <source>Removes the cached versions of the search results.</source>
+        <target>Elimina las versiones cacheadas de los resultados de búsqueda.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.internal.0">
         <source>Purge the internal cache</source>

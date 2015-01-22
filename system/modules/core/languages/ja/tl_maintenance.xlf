@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>新しいContaoバージョン%sを利用できます。</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>ライブアップデートのIDを入力してください。</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>一時フォルダー(system/tmp)に書き込みできません。</target>

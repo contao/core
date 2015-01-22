@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.screenshot.1">
         <source>Here you can choose a screenshot of the theme.</source>
-        <target>می‌توانید تصویری را برای پوسته انتخاب کنید.</target>
+        <target>اینجا می‌توانید تصویری را برای پوسته انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_theme.vars.0">
         <source>Global variables</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.vars.1">
         <source>Here you can define global variables for the style sheets of the theme (e.g. &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;).</source>
-        <target>می‌توانید متغییرهای جهانی را برای شیوه‌نامه‌های استایل پوسته (به عنوان مثال &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;) تعریف کنید.</target>
+        <target>اینجا می‌توانید متغییرهای جهانی را برای شیوه‌نامه‌های استایل پوسته (به عنوان مثال &lt;em&gt;$red&lt;/em&gt; -&gt; &lt;em&gt;c00&lt;/em&gt; or &lt;em&gt;$margin&lt;/em&gt; -&gt; &lt;em&gt;12px&lt;/em&gt;) تعریف کنید.</target>
       </trans-unit>
       <trans-unit id="tl_theme.source.0">
         <source>Source files</source>
@@ -175,7 +175,7 @@
       </trans-unit>
       <trans-unit id="tl_theme.layout.1">
         <source>Edit the page layouts of theme ID %s</source>
-        <target>ویرایش چیدمان صفحه‌ها پوسته شناسه %s</target>
+        <target>ویرایش چیدمان برگه‌ها پوسته شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_theme.importTheme.0">
         <source>Theme import</source>

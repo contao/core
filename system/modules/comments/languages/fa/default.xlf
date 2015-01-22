@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="MSC.com_email">
         <source>E-mail (not published)</source>
-        <target>ایمیل (منتشر نخواهد شد)</target>
+        <target>رایانامه (منتشر نخواهد شد)</target>
       </trans-unit>
       <trans-unit id="MSC.com_website">
         <source>Website</source>
-        <target>وب‌سایت</target>
+        <target>تارنما</target>
       </trans-unit>
       <trans-unit id="MSC.com_comment">
         <source>Comment</source>
@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="MSC.com_notify">
         <source>Notify me of new comments by e-mail</source>
-        <target>مرا از دیدگاه‌های جدید با ایمیل آگاه ساز</target>
+        <target>مرا از دیدگاه‌های جدید با رایانامه آگاه ساز</target>
       </trans-unit>
       <trans-unit id="MSC.com_submit">
         <source>Submit comment</source>
@@ -58,7 +58,7 @@ View: %s
 Edit: %s
 
 If you are moderating comments, you have to log in to the back end to publish it.</source>
-        <target>%s یک دیدگاه جدید در وب‌سایت شما ایجاد کرده است.
+        <target>%s یک دیدگاه جدید در تارنما شما ایجاد کرده است.
 ---
 
 %s
@@ -100,7 +100,7 @@ Cancel: %s
 </source>
         <target>درود %s,
 
-لطفا تایید نمایید که می‌خواهید از دیدگاه‌های جدید در صفحه زیر با ایمیل آگاه شوید:
+لطفا تایید نمایید که می‌خواهید از دیدگاه‌های جدید در برگه زیر با رایانامه آگاه شوید:
 
 %s
 
@@ -128,7 +128,7 @@ To cancel your subscription, please click here:
 </source>
         <target>سلام %s,
 
-دیدگاه جدیدی در صفحه‌ای که شما اشتراک شده‌اید اضافه شده است:
+دیدگاه جدیدی در برگه‌ای که شما اشتراک شده‌اید اضافه شده است:
 
 %s
 

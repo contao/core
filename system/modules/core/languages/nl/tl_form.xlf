@@ -147,7 +147,7 @@
       </trans-unit>
       <trans-unit id="tl_form.tableless.0">
         <source>Tableless layout</source>
-        <target>Layout zonder tabellen</target>
+        <target>Lay-out zonder tabellen</target>
       </trans-unit>
       <trans-unit id="tl_form.tableless.1">
         <source>Render the form without HTML tables.</source>
@@ -183,7 +183,7 @@
       </trans-unit>
       <trans-unit id="tl_form.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_form.config_legend">
         <source>Form configuration</source>

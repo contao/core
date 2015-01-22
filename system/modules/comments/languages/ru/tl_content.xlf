@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.0">
         <source>Items per page</source>
-        <target>Комментариев на странице</target>
+        <target>Элементов на странице</target>
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.1">
         <source>The number of comments per page. Set to 0 to disable pagination.</source>

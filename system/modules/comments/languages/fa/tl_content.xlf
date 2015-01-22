@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.0">
         <source>Items per page</source>
-        <target>تعداد نظرات در هر صفحه</target>
+        <target>تعداد نظرات در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_content.com_perPage.1">
         <source>The number of comments per page. Set to 0 to disable pagination.</source>
-        <target>لطفا تعداد دیدگاه‌ها در هر صفحه را وارد نمایید ( 0 = نامحدود ) .</target>
+        <target>لطفا تعداد دیدگاه‌ها در هر برگه را وارد نمایید ( 0 = نامحدود ) .</target>
       </trans-unit>
       <trans-unit id="tl_content.com_moderate.0">
         <source>Moderate</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_content.com_moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>دیدگاه‌ها ارسالی قبل از نمایش در وب‌سایت باید ابتدا توسط مدیر وب‌سایت تائید گردند .</target>
+        <target>دیدگاه‌ها ارسالی قبل از نمایش در تارنما باید ابتدا توسط مدیر تارنما تائید گردند .</target>
       </trans-unit>
       <trans-unit id="tl_content.com_bbcode.0">
         <source>Allow BBCode</source>

@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_install.admin.1">
         <source>If you have imported the example website, the admin's username is &lt;strong&gt;k.jones&lt;/strong&gt; and the password is &lt;strong&gt;kevinjones&lt;/strong&gt;. See the example website (front end) for more information.</source>
-        <target>اگر شما وب‌سایت نمونه را وارد کرده باشید.، نام کاربری مدیر &lt;strong&gt;k.jones&lt;/strong&gt; و رمز عبور &lt;strong&gt;kevinjones&lt;/strong&gt; هستند. وب‌سایت نمونه را برای اطلاعات بیشتر ببینید.</target>
+        <target>اگر شما تارنما نمونه را وارد کرده باشید.، نام کاربری مدیر &lt;strong&gt;k.jones&lt;/strong&gt; و گذرواژه &lt;strong&gt;kevinjones&lt;/strong&gt; هستند. تارنما نمونه را برای اطلاعات بیشتر ببینید.</target>
       </trans-unit>
       <trans-unit id="tl_install.completed.0">
         <source>Congratulations!</source>
@@ -87,15 +87,15 @@
       </trans-unit>
       <trans-unit id="tl_install.completed.1">
         <source>Now please log into the &lt;a href=&quot;contao/&quot;&gt;Contao back end&lt;/a&gt; and check the system settings. Then visit your website to make sure that Contao is working correctly.</source>
-        <target>حالا لطفاً وارد بخش مدیریت شده و تنظیمات سیستم را بررسی کنید. سپس وب‌سایت‌تان را برای مطمئن شدند از کارکرد صحیح ببینید.</target>
+        <target>حالا لطفاً وارد بخش مدیریت شده و تنظیمات سیستم را بررسی کنید. سپس تارنما‌تان را برای مطمئن شدند از کارکرد صحیح ببینید.</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.0">
         <source>Modify files via FTP</source>
-        <target>دستکاری پرونده‌ها از طریق FTP</target>
+        <target>دستکاری پرونده‌ها از طریق اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftp.1">
         <source>Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).</source>
-        <target>اینجا می‌توانیدً جزئیات ورود FTP یتان را وارد کنید تا کانتائو پرونده‌ها را از طریق FTP تغییر دهد (Safe Mode Hack).</target>
+        <target>سامانه‌ی شما از دسترسی به پرونده از طریق پی‌اچ‌پی را پشتیبانی نمی‌کند؛ غالبا پی‌اچ‌پی به صورت ماژول آپاچی در یک کاربر متفاوت اجرا می‌شود. بنابراین جزئیات ورود اف‌تی‌پی‌تان را وارد کنید تا کانتائو پرونده‌ها را از طریق اف‌تی‌پی تغییر دهد (Safe Mode Hack).</target>
       </trans-unit>
       <trans-unit id="tl_install.accept">
         <source>Accept license</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="tl_install.keyLength">
         <source>An encryption key has to be at least 12 characters long!</source>
-        <target>یک کلید رمزگذاری باید حداقل ۱۲ کاراکتر طول داشته باشد!</target>
+        <target>یک کلید رمزگذاری باید دست‌کم ۱۲ نویسه طول داشته باشد!</target>
       </trans-unit>
       <trans-unit id="tl_install.keyConfirm">
         <source>An encryption key has been created.</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_install.dbCharset">
         <source>Character set</source>
-        <target>مجموعه کاراکتر</target>
+        <target>مجموعه نویسه</target>
       </trans-unit>
       <trans-unit id="tl_install.dbCollation">
         <source>Collation</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpHost">
         <source>FTP hostname</source>
-        <target>نام میزبان FTP</target>
+        <target>نام میزبان اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPath">
         <source>Relative path to Contao directory (e.g. &lt;em&gt;httpdocs/&lt;/em&gt;)</source>
@@ -279,11 +279,11 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpUser">
         <source>FTP username</source>
-        <target>نام کاربری FTP</target>
+        <target>نام کاربری اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPass">
         <source>FTP password</source>
-        <target>گذرواژه FTP</target>
+        <target>گذرواژه اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSSLh4">
         <source>Secure connection</source>
@@ -291,19 +291,19 @@
       </trans-unit>
       <trans-unit id="tl_install.ftpSSL">
         <source>Connect via FTP-SSL</source>
-        <target>ارتباط از طریق FTP-SSL</target>
+        <target>ارتباط از طریق اف‌تی‌پی-SSL</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpPort">
         <source>FTP port</source>
-        <target>گذرگاه FTP</target>
+        <target>گذرگاه اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpSave">
         <source>Save FTP settings</source>
-        <target>ذخیره تنظیمات FTP</target>
+        <target>ذخیره تنظیمات اف‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpHostError">
         <source>Could not connect to FTP server %s</source>
-        <target>ارتباط با سرویس دهنده FTP %s نتوانست برقرار شود</target>
+        <target>ارتباط با سامانه اف‌تی‌پی %s نتوانست برقرار شود</target>
       </trans-unit>
       <trans-unit id="tl_install.ftpUserError">
         <source>Could not login as &quot;%s&quot;</source>

@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>O nouă versiune %s Contao este disponibilă</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Introduceţi ID-ul pentru update online</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>În directorul temporar (system/tmp) nu se poate scrie</target>

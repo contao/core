@@ -3,23 +3,23 @@
     <body>
       <trans-unit id="tl_user.faqs.0">
         <source>Allowed FAQ categories</source>
-        <target>دسته‌های FAQ مجاز</target>
+        <target>دسته‌های پرسش و پاسخ مجاز</target>
       </trans-unit>
       <trans-unit id="tl_user.faqs.1">
         <source>Here you can grant access to one or more FAQ categories.</source>
-        <target>می‌توانید دسترسی به یک یا چند دسته FAQ را اعطاء کنید</target>
+        <target>اینجا می‌توانید اینجا می‌توانید دسترسی به یک یا چند دسته پرسش و پاسخ را واگذار نمایید</target>
       </trans-unit>
       <trans-unit id="tl_user.faqp.0">
         <source>FAQ category permissions</source>
-        <target>مجوزهای دسته FAQ</target>
+        <target>مجوزهای دسته‌بندی پرسش و پاسخ</target>
       </trans-unit>
       <trans-unit id="tl_user.faqp.1">
         <source>Here you can define the FAQ category permissions.</source>
-        <target>می‌توانید مجوزهای دسته FAQ را تعیین کنید.</target>
+        <target>اینجا می‌توانید مجوزهای دسته‌بندی پرسش و پاسخ را تعیین کنید.</target>
       </trans-unit>
       <trans-unit id="tl_user.faq_legend">
         <source>FAQ permissions</source>
-        <target>مجوزهای FAQ</target>
+        <target>مجوزهای پرسش و پاسخ</target>
       </trans-unit>
     </body>
   </file>

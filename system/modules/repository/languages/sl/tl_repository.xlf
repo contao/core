@@ -55,6 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.name.1">
         <source>Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are preferred. Additionally, the characters _ and - are allowed within the name.</source>
+        <target>Imena podaljškov datotek se morajo začeti z a-z, A-Z ali 0-9, pri čemer imajo prednost imena z malimi črkami. Poleg tega sta znaka _ in - dovoljena, v imenu.</target>
       </trans-unit>
       <trans-unit id="tl_repository.popularity.0">
         <source>Popularity</source>
@@ -102,6 +103,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.usability.1">
         <source>Does the extension meet the Contao standards for usability and accessibility?</source>
+        <target>Ali razširitev izpolnjuje standarde Contao-a za uporabnost in dostopnost?</target>
       </trans-unit>
       <trans-unit id="tl_repository.version.0">
         <source>Version</source>
@@ -505,6 +507,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.showIncompatible">
         <source>You are currently viewing extensions compatible with the current Contao version only. Modify the back end settings to expand the search results by showing all extensions.</source>
+        <target>Trenutno pregledujete končnice datoteke, ki so združljive le s trenutno različico Contao-a. Spremenite back-end nastavitve za razširitev rezultatov iskanja, ki prikazuje vse končnice.</target>
       </trans-unit>
       <trans-unit id="tl_repository_statext.uptodate">
         <source>Up to date</source>

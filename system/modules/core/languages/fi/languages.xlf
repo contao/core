@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="LNG.en">
         <source>English</source>
-        <target>Enlanti</target>
+        <target>Englanti</target>
       </trans-unit>
       <trans-unit id="LNG.en_AU">
         <source>English (Australia)</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="LNG.en_CA">
         <source>English (Canada)</source>
-        <target>Englandi (Kanada)</target>
+        <target>Englanti (Kanada)</target>
       </trans-unit>
       <trans-unit id="LNG.en_GB">
         <source>English (United Kingdom)</source>

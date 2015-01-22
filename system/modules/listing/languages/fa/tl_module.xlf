@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_where.1">
         <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
-        <target>شما می توانید شرطی را برای فیلتر کردن نتایج وارد نمایی (به عنوان مثال &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+        <target>اینجا می‌توانید شرطی را برای پالایش نتایج وارد نمایید (به عنوان مثال &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.list_search.0">
         <source>Searchable fields</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_search.1">
         <source>Here you can enter a comma seperated list of fields that you want to be searchable.</source>
-        <target>شما می توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید قابل جستجو باشند را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید قابل جستجو باشند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_sort.0">
         <source>Order by</source>
@@ -39,23 +39,23 @@
       </trans-unit>
       <trans-unit id="tl_module.list_sort.1">
         <source>Here you can enter a comma seperated list of fields to sort the results by.</source>
-        <target>شما می توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید نتایج بر اساس آن ها مرتب شوند را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جدا شده توسط کاما از فیلدهایی که می خواهید نتایج بر اساس آن ها مرتب شوند را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info.0">
         <source>Details page fields</source>
-        <target>فیلدهای صفحه جزئیات</target>
+        <target>فیلدهای برگه جزئیات</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info.1">
         <source>Enter a comma separated list of the fields you want to show on the details page. Leave blank to disable the feature.</source>
-        <target>فهرست جدا شده توسط کاما از فیلدهاییکه می خواهیددر صفحه جزئیات نمایش داده شوند را وارد نمایید. برای غیرفعال کردن این ویژگی خالی نگه دارید.</target>
+        <target>فهرست جدا شده توسط کاما از فیلدهاییکه می خواهیددر برگه جزئیات نمایش داده شوند را وارد نمایید. برای غیرفعال کردن این ویژگی خالی نگه دارید.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_where.0">
         <source>Details page condition</source>
-        <target>شرط صفحه جزئیات</target>
+        <target>شرط برگه جزئیات</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_where.1">
         <source>Here you can enter a condition to filter the results (e.g. &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</source>
-        <target>شما می توانید شرطی را برای فیلتر کردن نتایج وارد نمایی (به عنوان مثال &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
+        <target>اینجا می‌توانید شرطی را برای پالایش نتایج وارد نمایید (به عنوان مثال &lt;em&gt;published=1&lt;/em&gt; or &lt;em&gt;type!=&quot;admin&quot;&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_module.list_layout.0">
         <source>List template</source>
@@ -63,15 +63,15 @@
       </trans-unit>
       <trans-unit id="tl_module.list_layout.1">
         <source>Here you can select the list template.</source>
-        <target>شما می توانید قابل فهرست را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قابل فهرست را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_layout.0">
         <source>Details page template</source>
-        <target>قالب صفحه جزئیات</target>
+        <target>قالب برگه جزئیات</target>
       </trans-unit>
       <trans-unit id="tl_module.list_info_layout.1">
         <source>Here you can select the details page template.</source>
-        <target>شما می توانید قالب صفحه جزئیات را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قالب برگه جزئیات را انتخاب نمایید.</target>
       </trans-unit>
     </body>
   </file>

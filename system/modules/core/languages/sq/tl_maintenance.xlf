@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>Gjindet një version i ri i TYPOlight Version %s</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Epeni Live Update ID-në</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Në dosjen e përkohshme nuk mund të shkruhet (system/tmp)</target>

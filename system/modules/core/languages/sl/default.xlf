@@ -976,12 +976,15 @@
       </trans-unit>
       <trans-unit id="MSC.proportional.1">
         <source>The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Daljša stranica slike se prilagodi na podane dimenzije in slika spremeni velikost proporcionalno.</target>
       </trans-unit>
       <trans-unit id="MSC.box.0">
         <source>Fit the box</source>
+        <target>Se prilega oknu</target>
       </trans-unit>
       <trans-unit id="MSC.box.1">
         <source>The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.</source>
+        <target>Krajša stranica se prilagodi na podane dimenzije in slika spremeni velikost proporcionalno.</target>
       </trans-unit>
       <trans-unit id="MSC.crop">
         <source>Exact dimensions</source>
@@ -1132,20 +1135,18 @@
         <target>Datum dodan: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
         <source>Last login</source>
         <target>Zadnja prijava</target>
       </trans-unit>
-      <trans-unit id="MSC.lastLogin.1">
+      <trans-unit id="MSC.currentLogin.1">
         <source>Last login: %s</source>
         <target>Zadnja prijava: %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>Trenutna prijava</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>Trenutna prijava: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>

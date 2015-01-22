@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_member.company.1">
         <source>Here you can enter a company name.</source>
-        <target>در این بخش می‌توانید نام شرکت خود را وارد نمایید.</target>
+        <target>در این بخش اینجا می‌توانید نام شرکت خود را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member.street.0">
         <source>Street</source>
@@ -107,19 +107,19 @@
       </trans-unit>
       <trans-unit id="tl_member.email.0">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_member.email.1">
         <source>Please enter a valid e-mail address.</source>
-        <target>لطفا نشانی ایمیل معتبر وارد نمایید.</target>
+        <target>لطفا نشانی رایانامه معتبر وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member.website.0">
         <source>Website</source>
-        <target>وب‌سایت</target>
+        <target>تارنما</target>
       </trans-unit>
       <trans-unit id="tl_member.website.1">
         <source>Here you can enter a web address.</source>
-        <target>می‌توانید نشانی وب‌سایت را وارد نمایید.</target>
+        <target>اینجا می‌توانید نشانی وب‌سایت را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member.language.0">
         <source>Language</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_member.groups.1">
         <source>Here you can assign the member to one or more groups.</source>
-        <target>می‌توانید کاربر را به یک یا چند گروه اختصاص دهید.</target>
+        <target>اینجا می‌توانید کاربر را به یک یا چند گروه اختصاص دهید.</target>
       </trans-unit>
       <trans-unit id="tl_member.login.0">
         <source>Allow login</source>

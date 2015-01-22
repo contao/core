@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_module.cal_calendar.0">
         <source>Calendars</source>
-        <target>تقویم‌ها</target>
+        <target>سالنما‌ها</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_calendar.1">
         <source>Please select one or more calendars.</source>
-        <target>لطفا یک یا چند تقویم انتخاب نمایید.</target>
+        <target>لطفا یک یا چند سالنما انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_noSpan.0">
         <source>Shortened view</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_order.1">
         <source>Here you can choose the sort order.</source>
-        <target>اینجا شما می‌بایست ترتیب مرتب‌سازی را انتخاب نمایید.</target>
+        <target>اینجا می‌بایست ترتیب مرتب‌سازی را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_readerModule.0">
         <source>Event reader module</source>
@@ -71,15 +71,15 @@
       </trans-unit>
       <trans-unit id="tl_module.cal_template.1">
         <source>Here you can select the event template.</source>
-        <target>شما می توانید قالب رویداد را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قالب رویداد را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.0">
         <source>Calendar template</source>
-        <target>قالب تقویم</target>
+        <target>قالب سالنما</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_ctemplate.1">
         <source>Here you can select the calendar template.</source>
-        <target>قالب تقویم را انتخاب نمایید</target>
+        <target>قالب سالنما را انتخاب نمایید</target>
       </trans-unit>
       <trans-unit id="tl_module.cal_showQuantity.0">
         <source>Show number of events</source>

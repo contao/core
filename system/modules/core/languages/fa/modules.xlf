@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="MOD.themes.1">
         <source>Manage front end modules, style sheets, page layouts and templates</source>
-        <target>مدیریت ماژول‌های، شیوه‌نامه‌ها، چیدمان صفحه‌ها و قالب‌های وب‌سایت</target>
+        <target>مدیریت ماژول‌های، شیوه‌نامه‌ها، چیدمان برگه‌ها و قالب‌های وب‌سایت</target>
       </trans-unit>
       <trans-unit id="MOD.page.0">
         <source>Site structure</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="MOD.page.1">
         <source>Set up the site structure of your website(s)</source>
-        <target>بر پا کردن ساختار وب‌سایت(های) شما</target>
+        <target>بر پا کردن ساختار تارنما(های) شما</target>
       </trans-unit>
       <trans-unit id="MOD.tpl_editor.0">
         <source>Templates</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="MOD.files.1">
         <source>Manage files and folders or upload new files to the server</source>
-        <target>مدیریت پرونده‌ها و پوشه‌ها یا بارگذاری پرونده‌های جدید به سرور</target>
+        <target>مدیریت پرونده‌ها و پوشه‌ها یا بارگذاری پرونده‌های جدید به سامانه</target>
       </trans-unit>
       <trans-unit id="MOD.log.0">
         <source>System log</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="MOD.log.1">
         <source>Browse the system log and analyze the activity on the website</source>
-        <target>مرور گزارشات سیستم و تحلیل فعالیت در وب‌سایت</target>
+        <target>مرور گزارشات سیستم و تحلیل فعالیت در تارنما</target>
       </trans-unit>
       <trans-unit id="MOD.settings.0">
         <source>Settings</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_layout">
         <source>Page layouts</source>
-        <target>چیدمان‌های صفحه</target>
+        <target>چیدمان‌های برگه</target>
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="MOD.layout">
         <source>Page layouts</source>
-        <target>چیدمان‌های صفحه</target>
+        <target>چیدمان‌های برگه</target>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>
@@ -219,11 +219,11 @@
       </trans-unit>
       <trans-unit id="FMD.articlenav.0">
         <source>Article navigation</source>
-        <target>ناوبری مقاله</target>
+        <target>ناوبری نوشته</target>
       </trans-unit>
       <trans-unit id="FMD.articlenav.1">
         <source>Generates a pagination menu to navigate articles</source>
-        <target>یک منوی صفحه‌بندی برای ناوبری مقاله‌ها ایجاد می‌کند</target>
+        <target>یک منوی صفحه‌بندی برای ناوبری نوشته‌ها ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.sitemap.0">
         <source>Sitemap</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="FMD.sitemap.1">
         <source>Generates a list of all pages in the site structure</source>
-        <target>لیستی از تمامی صفحه‌ها در ساختار سایت را ایجاد می‌کند</target>
+        <target>فهرستی از تمامی برگه‌ها در ساختار سایت را ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.user">
         <source>User</source>
@@ -263,11 +263,11 @@
       </trans-unit>
       <trans-unit id="FMD.registration.0">
         <source>Registration</source>
-        <target>ثبت‌نام</target>
+        <target>نام‌نویسی</target>
       </trans-unit>
       <trans-unit id="FMD.registration.1">
         <source>Generates a user registration form</source>
-        <target>یک فرم ثبت‌نام کاربر ایجاد می‌کند</target>
+        <target>یک فرم نام‌نویسی کاربر ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.lostPassword.0">
         <source>Lost password</source>
@@ -295,7 +295,7 @@
       </trans-unit>
       <trans-unit id="FMD.form.1">
         <source>Adds a form to the page</source>
-        <target>یک فرم به صفحه اضافه می‌کند</target>
+        <target>یک فرم به برگه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.search.0">
         <source>Search engine</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="FMD.search.1">
         <source>Adds a search form to the page</source>
-        <target>یک فرم  جستجو به صفحه اضافه می‌کند</target>
+        <target>یک فرم  جستجو به برگه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.articleList.0">
         <source>Article list</source>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="FMD.articleList.1">
         <source>Generates a list of articles of a column</source>
-        <target>لیستی از نوشته‌های یک ستون ایجاد می‌کند</target>
+        <target>فهرستی از نوشته‌های یک ستون ایجاد می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.miscellaneous">
         <source>Miscellaneous</source>
@@ -323,7 +323,7 @@
       </trans-unit>
       <trans-unit id="FMD.flash.1">
         <source>Embeds a Flash movie into the page</source>
-        <target>یک فیلم فلش در صفحه درج می‌کند</target>
+        <target>یک فیلم فلش در برگه درج می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.randomImage.0">
         <source>Random image</source>
@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="FMD.randomImage.1">
         <source>Adds a random image to the page</source>
-        <target>تصویر تصادفی به صفحه اضافه می‌کند</target>
+        <target>تصویر تصادفی به برگه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.html.0">
         <source>Custom HTML</source>
@@ -347,7 +347,7 @@
       </trans-unit>
       <trans-unit id="FMD.rss_reader.1">
         <source>Adds an RSS feed to the page</source>
-        <target>یک خوراک آراس‌اس به صفحه اضافه می‌کند</target>
+        <target>یک خوراک آراس‌اس به برگه اضافه می‌کند</target>
       </trans-unit>
     </body>
   </file>

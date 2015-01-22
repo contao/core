@@ -27,19 +27,19 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.email.0">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.email.1">
         <source>The e-mail address will not be published.</source>
-        <target>نشانی ایمیل منتشر نخواهد شد.</target>
+        <target>نشانی رایانامه منتشر نخواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.website.0">
         <source>Website</source>
-        <target>وب‌سایت</target>
+        <target>تارنما</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.website.1">
         <source>Here you can enter a website address.</source>
-        <target>اینجا می‌توانید نشانی وب‌سایت را وارد نمایید.</target>
+        <target>اینجا می‌توانید نشانی تارنما را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.comment.0">
         <source>Comment</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.published.1">
         <source>Make the comment publicly visible on the website.</source>
-        <target>تنها دیدگاه‌ها منتشر شده در وب‌سایت نمایش داده خواهند شد.</target>
+        <target>تنها دیدگاه‌ها منتشر شده در تارنما نمایش داده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.author_legend">
         <source>Author</source>
