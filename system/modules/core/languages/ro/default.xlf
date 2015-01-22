@@ -227,7 +227,7 @@
       </trans-unit>
       <trans-unit id="ERR.form">
         <source>The form could not be sent</source>
-        <target>Formularul nu a putut fi trimis</target>
+        <target>Formularul nu a putut fi trimis.</target>
       </trans-unit>
       <trans-unit id="ERR.captcha">
         <source>Please answer the security question!</source>
@@ -247,6 +247,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidGoogleId">
         <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Introduceţi un identificator sau nume deţinut pe Google+!</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -270,7 +271,7 @@
       </trans-unit>
       <trans-unit id="CTE.headline.1">
         <source>Generates a headline (h1 - h6).</source>
-        <target>generează un headline de sine stătător (h1 - h6).</target>
+        <target>Generează un headline (h1 - h6).</target>
       </trans-unit>
       <trans-unit id="CTE.text.0">
         <source>Text</source>
@@ -278,7 +279,7 @@
       </trans-unit>
       <trans-unit id="CTE.text.1">
         <source>Generates a rich text element.</source>
-        <target>generează un element ce conţine text, hyperlink-uri şi imagini.</target>
+        <target>Generează un element ce conţine text, hyperlink-uri şi imagini.</target>
       </trans-unit>
       <trans-unit id="CTE.html.0">
         <source>HTML</source>
@@ -286,7 +287,7 @@
       </trans-unit>
       <trans-unit id="CTE.html.1">
         <source>Allows you to add custom HTML code.</source>
-        <target>permite adăugarea de cod HTML (unele tag-uri HTML nu pot fi folosite, din motive de securitate).</target>
+        <target>Permite adăugarea de cod HTML (unele tag-uri HTML nu pot fi folosite, din motive de securitate).</target>
       </trans-unit>
       <trans-unit id="CTE.list.0">
         <source>List</source>
@@ -294,7 +295,7 @@
       </trans-unit>
       <trans-unit id="CTE.list.1">
         <source>Generates an ordered or unordered list.</source>
-        <target>generează o listă ordonată sau neordonată.</target>
+        <target>Generează o listă ordonată sau neordonată.</target>
       </trans-unit>
       <trans-unit id="CTE.table.0">
         <source>Table</source>
@@ -370,7 +371,7 @@
       </trans-unit>
       <trans-unit id="CTE.hyperlink.1">
         <source>Generates a link to another website.</source>
-        <target>generează un link către un alt website.</target>
+        <target>Generează un link către un alt website.</target>
       </trans-unit>
       <trans-unit id="CTE.toplink.0">
         <source>Top link</source>
@@ -378,7 +379,7 @@
       </trans-unit>
       <trans-unit id="CTE.toplink.1">
         <source>Generates a link to jump to the top of the page.</source>
-        <target>generează o legătură care permite întoarcerea la partea superioară a paginii.</target>
+        <target>Generează o legătură care permite întoarcerea la partea superioară a paginii.</target>
       </trans-unit>
       <trans-unit id="CTE.media">
         <source>Media elements</source>
@@ -390,7 +391,7 @@
       </trans-unit>
       <trans-unit id="CTE.image.1">
         <source>Generates a stand-alone image.</source>
-        <target>generează o imagine separată.</target>
+        <target>Generează o imagine separată.</target>
       </trans-unit>
       <trans-unit id="CTE.gallery.0">
         <source>Gallery</source>
@@ -398,7 +399,7 @@
       </trans-unit>
       <trans-unit id="CTE.gallery.1">
         <source>Generates a lightbox image gallery.</source>
-        <target>generează mai multe thumbnail-uri ce pot fi vizualizate în mărime naturală prin lightbox.</target>
+        <target>Generează mai multe thumbnail-uri ce pot fi vizualizate în mărime naturală prin lightbox.</target>
       </trans-unit>
       <trans-unit id="CTE.player.0">
         <source>Video/audio</source>
@@ -426,7 +427,7 @@
       </trans-unit>
       <trans-unit id="CTE.download.1">
         <source>Generates a link to download a file.</source>
-        <target>generează un link către un fişier ce poate fi descărcat de vizitatori.</target>
+        <target>Generează un link către un fişier ce poate fi descărcat de vizitatori.</target>
       </trans-unit>
       <trans-unit id="CTE.downloads.0">
         <source>Downloads</source>
@@ -434,7 +435,7 @@
       </trans-unit>
       <trans-unit id="CTE.downloads.1">
         <source>Generates multiple links to download files.</source>
-        <target>generează un linkuri la mai multe fişiere ce pot fi descărcate de vizitatori.</target>
+        <target>Generează un linkuri la mai multe fişiere ce pot fi descărcate de vizitatori.</target>
       </trans-unit>
       <trans-unit id="CTE.includes">
         <source>Include elements</source>
@@ -454,7 +455,7 @@
       </trans-unit>
       <trans-unit id="CTE.alias.1">
         <source>Includes another content element.</source>
-        <target>permite afişarea unui anume element de conţinut în mai multe articole.</target>
+        <target>Permite afişarea unui anume element de conţinut în mai multe articole.</target>
       </trans-unit>
       <trans-unit id="CTE.form.0">
         <source>Form</source>
@@ -470,7 +471,7 @@
       </trans-unit>
       <trans-unit id="CTE.module.1">
         <source>Includes a front end module.</source>
-        <target>inserează un modul (ex. un meniu de navigare sau o animaţie Flash) într-un articol.</target>
+        <target>Inserează un modul (ex. un meniu de navigare sau o animaţie Flash) într-un articol.</target>
       </trans-unit>
       <trans-unit id="CTE.teaser.0">
         <source>Article teaser</source>
@@ -478,7 +479,7 @@
       </trans-unit>
       <trans-unit id="CTE.teaser.1">
         <source>Displays the teaser text of an article.</source>
-        <target>permite afişarea textului de rezumat al unui articol.</target>
+        <target>Permite afişarea textului de rezumat al unui articol.</target>
       </trans-unit>
       <trans-unit id="PTY.regular.0">
         <source>Regular page</source>
@@ -1145,20 +1146,18 @@
         <target>Dată adăugare: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
         <source>Last login</source>
         <target>Ultima autentificare</target>
       </trans-unit>
-      <trans-unit id="MSC.lastLogin.1">
+      <trans-unit id="MSC.currentLogin.1">
         <source>Last login: %s</source>
         <target>Ultima autentificare: %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>Autentificare curentă</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>Autentificare curentă: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
@@ -1564,7 +1563,7 @@ Acest mesaj a fost generat de Contao. Nu puteţi face reply direct la acest emai
       </trans-unit>
       <trans-unit id="MSC.version">
         <source>Version</source>
-        <target>Versiune'</target>
+        <target>Versiune</target>
       </trans-unit>
       <trans-unit id="MSC.restore">
         <source>Restore</source>

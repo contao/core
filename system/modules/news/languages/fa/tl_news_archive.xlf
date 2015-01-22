@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه بازگردانی</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.jumpTo.1">
         <source>Please choose the news reader page to which visitors will be redirected when clicking a news item.</source>
-        <target>لطفا صفحه‌ای را که می‌خواهید کاربر بعد از کلیک بر روی خبر به آنجا منتقل شود را انتخاب نمایید.</target>
+        <target>لطفا برگه‌ای را که می‌خواهید کاربر بعد از کلیک بر روی خبر به آنجا بازگردانی شود را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.allowComments.0">
         <source>Enable comments</source>
@@ -43,11 +43,11 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.perPage.0">
         <source>Comments per page</source>
-        <target>تعداد دیدگاه‌ها در هر صفحه</target>
+        <target>تعداد دیدگاه‌ها در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>تعداد دیدگاه‌ها در هر صفحه. برای غیرفعال کردن صفحه‌بندی عدد 0 را وارد نمایید.</target>
+        <target>تعداد دیدگاه‌ها در هر برگه. برای غیرفعال کردن برگه‌بندی عدد 0 را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.moderate.0">
         <source>Moderate comments</source>
@@ -55,7 +55,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.moderate.1">
         <source>Approve comments before they are published on the website.</source>
-        <target>بررسی دیدگاه‌ها قبل از انتشار در وب‌سایت.</target>
+        <target>بررسی دیدگاه‌ها قبل از انتشار در تارنما.</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.bbcode.0">
         <source>Allow BBCode</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_news_archive.title_legend">
         <source>Title and redirect page</source>
-        <target>عنوان و صفحه بازگردانی</target>
+        <target>عنوان و برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_news_archive.comments_legend">
         <source>Comments</source>

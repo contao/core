@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="tl_style.category.0">
         <source>Category</source>
-        <target>دسته</target>
+        <target>دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_style.category.1">
         <source>Categories can be used to group format definitions in the back end.</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_style.comment.1">
         <source>Here you can add a comment.</source>
-        <target>اینجا می توانید یک دیدگاه اضافه کنید.</target>
+        <target>اینجا می‌توانید یک دیدگاه اضافه کنید.</target>
       </trans-unit>
       <trans-unit id="tl_style.size.0">
         <source>Size</source>
@@ -63,7 +63,7 @@
       </trans-unit>
       <trans-unit id="tl_style.minwidth.1">
         <source>Here you can enter the element's minimum width.</source>
-        <target>می‌توانید عرض کمینه المان را وارد نمایید.</target>
+        <target>اینجا می‌توانید عرض کمینه المان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.minheight.0">
         <source>Minimum height</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_style.minheight.1">
         <source>Here you can enter the element's minimum height.</source>
-        <target>می‌توانید ارتفاع کمینه المان را وارد نمایید.</target>
+        <target>اینجا می‌توانید ارتفاع کمینه المان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.maxwidth.0">
         <source>Maximum width</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_style.maxwidth.1">
         <source>Here you can enter the element's maximum width.</source>
-        <target>می‌توانید عرض بیشینه المان را وارد نمایید.</target>
+        <target>اینجا می‌توانید عرض بیشینه المان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.maxheight.0">
         <source>Maximum height</source>
@@ -87,7 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_style.maxheight.1">
         <source>Here you can enter the element's maximum height.</source>
-        <target>می‌توانید ارتفاع بیشینه المان را وارد نمایید.</target>
+        <target>اینجا می‌توانید ارتفاع بیشینه المان را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.positioning.0">
         <source>Position</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="tl_style.position.1">
         <source>Here you can choose the position type.</source>
-        <target>اینجا می توانید نوع موقعیت را وارد نمایید.</target>
+        <target>اینجا می‌توانید نوع موقعیت را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.floating.0">
         <source>Float</source>
@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_style.floating.1">
         <source>Here you can choose the float type.</source>
-        <target>اینجا می توانید نوع شناوری را تعیین کنید.</target>
+        <target>اینجا می‌توانید نوع شناوری را تعیین کنید.</target>
       </trans-unit>
       <trans-unit id="tl_style.clear.0">
         <source>Clear</source>
@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgimage.1">
         <source>Here you can enter the path to a background image.</source>
-        <target>‌می‌توانید مسیر تصویر زمینه را وارد نمایید.</target>
+        <target>‌اینجا می‌توانید مسیر تصویر زمینه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.bgposition.0">
         <source>Background position</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgposition.1">
         <source>Here you can select the position of the background image.</source>
-        <target>می‌توانید موقعیت تصویر زمینه را انتخاب کنید.</target>
+        <target>اینجا می‌توانید موقعیت تصویر زمینه را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_style.bgrepeat.0">
         <source>Background repeat</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_style.bgrepeat.1">
         <source>Here you can select the repeating mode.</source>
-        <target>می‌توانید حالت تکرار زمینه را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید حالت تکرار زمینه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowsize.0">
         <source>Shadow size</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_style.shadowsize.1">
         <source>Here you can enter the X and Y offset, an optional blur size and an optional spread radius.</source>
-        <target>می‌توانید افست X و Y، اندازه محو بودن اختیاری و شعاع پخش‌شدگی اختیاری را وارد نمایید.</target>
+        <target>اینجا می‌توانید افست X و Y، اندازه محو بودن اختیاری و شعاع پخش‌شدگی اختیاری را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.shadowcolor.0">
         <source>Shadow color and opacity</source>
@@ -331,7 +331,7 @@
       </trans-unit>
       <trans-unit id="tl_style.font.0">
         <source>Font</source>
-        <target>فونت</target>
+        <target>قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.font.1">
         <source>Font-family, font-size, font-color, line-height, font-style and white-space.</source>
@@ -339,27 +339,27 @@
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.0">
         <source>Font family</source>
-        <target>خانواده فونت</target>
+        <target>خانواده قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.1">
         <source>Here you can enter a comma separated list of font types.</source>
-        <target>اینجا می توانید فهرست جدا شده با ویرگول از انواع فونت را وارد نمایید</target>
+        <target>اینجا می‌توانید فهرست جدا شده با ویرگول از انواع قلم را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_style.fontsize.0">
         <source>Font size</source>
-        <target>اندازه فونت</target>
+        <target>اندازه قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.fontsize.1">
         <source>Here you can enter the font size.</source>
-        <target>اینجا می‌تواندی اندازه فونت را وارد نمایید</target>
+        <target>اینجا می‌توانید اندازه قلم را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.0">
         <source>Font color and opacity</source>
-        <target>رنگ و شفافیت فونت</target>
+        <target>رنگ و شفافیت قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.fontcolor.1">
         <source>Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).</source>
-        <target>اینجا می‌توانید رنگ فونت در مبنای ۱۶ (مانند ff0000 برای قرمز) و درصد شفافیت (مانند ۷۵) اختیاری را وارد نمایید.</target>
+        <target>اینجا می‌توانید رنگ قلم در مبنای ۱۶ (مانند ff0000 برای قرمز) و درصد شفافیت (مانند ۷۵) اختیاری را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.lineheight.0">
         <source>Line height</source>
@@ -371,11 +371,11 @@
       </trans-unit>
       <trans-unit id="tl_style.fontstyle.0">
         <source>Font style</source>
-        <target>سبک فونت</target>
+        <target>سبک قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.fontstyle.1">
         <source>Here you can choose one or more font styles.</source>
-        <target>اینجا می توانید یک یا چند سبک فونت را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید یک یا چند سبک قلم را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.texttransform.0">
         <source>Text transform</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="tl_style.letterspacing.1">
         <source>Here you can modify the letter spacing (default: 0px).</source>
-        <target>اینجا می‌توانید فاصله حروف را تغییر دهید (پیشفرض: 0px).</target>
+        <target>اینجا می‌توانید فاصله حروف را تغییر دهید (پیش‌فرض: 0px).</target>
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.0">
         <source>Word spacing</source>
@@ -407,7 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_style.wordspacing.1">
         <source>Here you can modify the word spacing (default: 0px).</source>
-        <target>اینجا می‌توانید فاصله کلمات را تغییر دهید (پیشفرض: 0px).</target>
+        <target>اینجا می‌توانید فاصله کلمات را تغییر دهید (پیش‌فرض: 0px).</target>
       </trans-unit>
       <trans-unit id="tl_style.list.0">
         <source>List</source>
@@ -431,7 +431,7 @@
       </trans-unit>
       <trans-unit id="tl_style.liststyleimage.1">
         <source>Here you can enter the path to an individual symbol.</source>
-        <target>اینجا می توانید مسیر نشانه اختصاصی را وارد نمایید.</target>
+        <target>اینجا می‌توانید مسیر نشانه اختصاصی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_style.own.0">
         <source>Custom code</source>
@@ -443,7 +443,7 @@
       </trans-unit>
       <trans-unit id="tl_style.selector_legend">
         <source>Selector and category</source>
-        <target>گزینشگر و دسته</target>
+        <target>گزینشگر و دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_style.size_legend">
         <source>Size</source>
@@ -467,7 +467,7 @@
       </trans-unit>
       <trans-unit id="tl_style.font_legend">
         <source>Font settings</source>
-        <target>تنظیمات فونت</target>
+        <target>تنظیمات قلم</target>
       </trans-unit>
       <trans-unit id="tl_style.list_legend">
         <source>List settings</source>
@@ -535,11 +535,11 @@
       </trans-unit>
       <trans-unit id="tl_style.upper-alpha">
         <source>upper characters</source>
-        <target>کاراکترهای بالا</target>
+        <target>نویسه‌های بالا</target>
       </trans-unit>
       <trans-unit id="tl_style.lower-alpha">
         <source>lower characters</source>
-        <target>کاراکترهای پایین</target>
+        <target>نویسه‌های پایین</target>
       </trans-unit>
       <trans-unit id="tl_style.uppercase">
         <source>uppercase</source>

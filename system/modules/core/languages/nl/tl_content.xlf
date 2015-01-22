@@ -615,11 +615,11 @@
       </trans-unit>
       <trans-unit id="tl_content.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_content.template_legend">
         <source>Template settings</source>
-        <target>Template instellingen</target>
+        <target>Template-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_content.player_legend">
         <source>Player settings</source>
@@ -667,11 +667,11 @@
       </trans-unit>
       <trans-unit id="tl_content.includeTemplate">
         <source>The &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>De &lt;em&gt;%s&lt;/em&gt; template dient te worden opgenomen in de  pagina layout.</target>
+        <target>De &lt;em&gt;%s&lt;/em&gt; template dient te worden opgenomen in de  pagina-lay-out.</target>
       </trans-unit>
       <trans-unit id="tl_content.includeTemplates">
         <source>The &lt;em&gt;%s&lt;/em&gt; or &lt;em&gt;%s&lt;/em&gt; template needs to be included in the page layout.</source>
-        <target>De &lt;em&gt;%s&lt;/em&gt; of &lt;em&gt;%s&lt;/em&gt; template dient te worden opgenomen in de  pagina layout.</target>
+        <target>De &lt;em&gt;%s&lt;/em&gt; of &lt;em&gt;%s&lt;/em&gt; template dient te worden opgenomen in de  pagina-lay-out.</target>
       </trans-unit>
       <trans-unit id="tl_content.new.0">
         <source>New element</source>

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -25,12 +23,9 @@ require 'system/initialize.php';
 
 
 /**
- * Class Index
- *
  * Main front end controller.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Index extends Frontend
 {
@@ -411,17 +406,16 @@ class Index extends Frontend
 		if ($expire !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
-			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
-			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 			header('Pragma: public');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
 		}
 		else
 		{
-			header('Cache-Control: no-cache');
-			header('Cache-Control: pre-check=0, post-check=0', false);
+			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: no-cache');
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 			header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
-			header('Pragma: no-cache');
 		}
 
 		echo $strBuffer;

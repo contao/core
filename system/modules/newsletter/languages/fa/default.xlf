@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="ERR.noChannels">
         <source>Please select at least one channel.</source>
-        <target>لطفاٍ حداقل یک کانال را انتخاب نمایید.</target>
+        <target>لطفاٍ دست‌کم یک کانال را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="MSC.subscribe">
         <source>Subscribe</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="MSC.nl_confirm">
         <source>Thank you for your subscription. You will receive a confirmation e-mail.</source>
-        <target>از اشتراک شما ممنونیم. هم اکنون شما برای شما یک ایمیل حاوی لینک فعال‌سازی ارسال گردید.</target>
+        <target>از اشتراک شما سپاس‌گزاریم. هم اکنون شما برای شما یک رایانامه حاوی لینک فعال‌سازی ارسال گردید.</target>
       </trans-unit>
       <trans-unit id="MSC.nl_activate">
         <source>Your subscription has been activated.</source>

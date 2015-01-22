@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.description.1">
         <source>Here you can enter a short description of the news feed.</source>
-        <target>می‌توانید توضیحی کوتاه در مورد خوراک خبر وارد نمایید.</target>
+        <target>اینجا می‌توانید توضیحی کوتاه در مورد خوراک خبر وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.title_legend">
         <source>Title and language</source>
@@ -87,11 +87,11 @@
       </trans-unit>
       <trans-unit id="tl_news_feed.source_teaser">
         <source>News teasers</source>
-        <target>تیزر خبر</target>
+        <target>تیزرهای خبر</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.source_text">
         <source>Full articles</source>
-        <target>مقاله کامل</target>
+        <target>نوشته کامل</target>
       </trans-unit>
       <trans-unit id="tl_news_feed.new.0">
         <source>New feed</source>

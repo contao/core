@@ -139,9 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS</source>
+        <target>Käytä HTTPS:ää</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Muodosta URL-osoitteet &lt;em&gt;https://&lt;/em&gt;-etuliitteellä (esim. sivustokartoissa).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

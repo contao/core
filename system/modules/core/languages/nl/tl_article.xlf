@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_article.printable.0">
         <source>Syndication</source>
-        <target>Printbaar</target>
+        <target>Syndicatie</target>
       </trans-unit>
       <trans-unit id="tl_article.printable.1">
         <source>Here you can choose which options are available.</source>
@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="tl_article.space.0">
         <source>Space in front and after</source>
-        <target>Ruimte voor en na</target>
+        <target>Ruimte voor en achter</target>
       </trans-unit>
       <trans-unit id="tl_article.space.1">
         <source>Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.</source>
@@ -155,7 +155,7 @@
       </trans-unit>
       <trans-unit id="tl_article.syndication_legend">
         <source>Syndication</source>
-        <target>Printbaar</target>
+        <target>Syndicatie</target>
       </trans-unit>
       <trans-unit id="tl_article.teaser_legend">
         <source>Article teaser</source>
@@ -167,11 +167,11 @@
       </trans-unit>
       <trans-unit id="tl_article.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_article.publish_legend">
         <source>Publish settings</source>
-        <target>Publicatie instellingen</target>
+        <target>Publicatie-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_article.print">
         <source>Print the page</source>

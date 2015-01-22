@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Automator
- *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Library
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Automator extends \System
 {
@@ -668,7 +659,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2014 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2015 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
@@ -676,7 +667,7 @@ class Automator extends \System
 						   . " * @link http://help.transifex.com/intro/translating.html\n"
 						   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
 						   . " * \n"
-						   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
+						   . " * @license LGPL-3.0+\n"
 						   . " */\n";
 
 				// Generate the cache file

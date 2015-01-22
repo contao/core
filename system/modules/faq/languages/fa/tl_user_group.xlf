@@ -3,7 +3,7 @@
     <body>
       <trans-unit id="tl_user_group.faq_legend">
         <source>FAQ permissions</source>
-        <target>مجوزهای FAQ</target>
+        <target>مجوزهای پرسش و پاسخ</target>
       </trans-unit>
     </body>
   </file>

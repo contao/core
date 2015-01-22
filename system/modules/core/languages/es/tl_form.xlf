@@ -87,6 +87,7 @@
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
+        <target>Ignorar todos los campos excepto &lt;em&gt;nombre&lt;/em&gt;, &lt;em&gt;e-mail&lt;/em&gt;, &lt;em&gt;asunto&lt;/em&gt;, &lt;em&gt;mensaje&lt;/em&gt; y &lt;em&gt;cc&lt;/em&gt; (copia)  y envía los datos del formulario como si hubiesen sido enviados desde un cliente de correo. La subida de ficheros está permitida.</target>
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.0">
         <source>Skip empty fields</source>

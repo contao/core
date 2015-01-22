@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_module.levelOffset.1">
         <source>Enter a value greater than 0 to show only submenu items.</source>
-        <target>Введите значение больше 0, чтобы показать только пункты подменю.</target>
+        <target>Введите значение больше 0, чтобы показать только элементы подменю.</target>
       </trans-unit>
       <trans-unit id="tl_module.showLevel.0">
         <source>Stop level</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_module.showLevel.1">
         <source>Enter a value greater than 0 to limit the nesting level of the menu.</source>
-        <target>Введите значение больше 0, чтобы ограничить уровень вложений пунктов подменю.</target>
+        <target>Введите значение больше 0, чтобы ограничить уровень вложений элементов подменю.</target>
       </trans-unit>
       <trans-unit id="tl_module.hardLimit.0">
         <source>Hard limit</source>
@@ -251,11 +251,11 @@
       </trans-unit>
       <trans-unit id="tl_module.perPage.0">
         <source>Items per page</source>
-        <target>Записей на странице</target>
+        <target>Элементов на странице</target>
       </trans-unit>
       <trans-unit id="tl_module.perPage.1">
         <source>The number of items per page. Set to 0 to disable pagination.</source>
-        <target>Количество записей на странице. Установите 0 для отключения нумерации.</target>
+        <target>Количество элементов на странице. Установите 0 для отключения нумерации.</target>
       </trans-unit>
       <trans-unit id="tl_module.searchType.0">
         <source>Search form layout</source>
@@ -283,15 +283,15 @@
       </trans-unit>
       <trans-unit id="tl_module.skipFirst.0">
         <source>Skip items</source>
-        <target>Пропустить записи</target>
+        <target>Пропустить элемент</target>
       </trans-unit>
       <trans-unit id="tl_module.skipFirst.1">
         <source>Here you can define how many items will be skipped.</source>
-        <target>Вы можете определить сколько записей будет пропущено.</target>
+        <target>Вы можете определить сколько элементов будет пропущено.</target>
       </trans-unit>
       <trans-unit id="tl_module.loadFirst.0">
         <source>Load the first item</source>
-        <target>Загрузить первую запись</target>
+        <target>Загрузить первый элемент</target>
       </trans-unit>
       <trans-unit id="tl_module.loadFirst.1">
         <source>Automatically redirect to the first item if none is selected.</source>
@@ -459,11 +459,11 @@
       </trans-unit>
       <trans-unit id="tl_module.numberOfItems.0">
         <source>Number of items</source>
-        <target>Общее количество записей</target>
+        <target>Общее количество элементов</target>
       </trans-unit>
       <trans-unit id="tl_module.numberOfItems.1">
         <source>Here you can limit the number of items. Set to 0 to show all.</source>
-        <target>Ограничение общего количества записей. Установите 0, чтобы показать все.</target>
+        <target>Ограничение общего количества элементов. Установите 0, чтобы показать все.</target>
       </trans-unit>
       <trans-unit id="tl_module.protected.0">
         <source>Protect module</source>

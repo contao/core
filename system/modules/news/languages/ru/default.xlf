@@ -11,7 +11,7 @@
       </trans-unit>
       <trans-unit id="MSC.by">
         <source>by</source>
-        <target>опубликовано пользователем</target>
+        <target>пишет:</target>
       </trans-unit>
       <trans-unit id="MSC.empty">
         <source>There are no news items for this period.</source>

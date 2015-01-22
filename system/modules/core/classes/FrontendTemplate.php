@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class FrontendTemplate
- *
  * Provide methods to handle front end templates.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendTemplate extends \Template
 {
@@ -137,9 +128,9 @@ class FrontendTemplate extends \Template
 			if ($intCache > 0 && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache - time()));
-				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
 			}
 			else
 			{

@@ -3,35 +3,35 @@
     <body>
       <trans-unit id="tl_page.title.0">
         <source>Page name</source>
-        <target>نام صفحه</target>
+        <target>نام برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.title.1">
         <source>Please enter the page name.</source>
-        <target>لطفا نام صفحه را وارد نمایید.</target>
+        <target>لطفا نام برگه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.alias.0">
         <source>Page alias</source>
-        <target>نام مستعار صفحه</target>
+        <target>نام مستعار برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.alias.1">
         <source>The page alias is a unique reference to the page which can be called instead of its numeric ID.</source>
-        <target>نام مستعار صفحه مرجعی یکتا است که می‌تواند به جای شناسه عددی فراخوانی شود.</target>
+        <target>نام مستعار برگه مرجعی یکتا است که می‌تواند به جای شناسه عددی فراخوانی شود.</target>
       </trans-unit>
       <trans-unit id="tl_page.type.0">
         <source>Page type</source>
-        <target>نوع صفحه</target>
+        <target>نوع برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.type.1">
         <source>Please choose the page type.</source>
-        <target>لطفا نوع صفحه را مشخص نمایید.</target>
+        <target>لطفا نوع برگه را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.pageTitle.0">
         <source>Page title</source>
-        <target>عنوان صفحه</target>
+        <target>عنوان برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.pageTitle.1">
         <source>Please enter the page title.</source>
-        <target>لطفا عنوان صفحه را وارد نمایید.</target>
+        <target>لطفا عنوان برگه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.language.0">
         <source>Language</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_page.language.1">
         <source>Please enter the page language according to the ISO-639-1 standard (e.g. &quot;en&quot; for English or &quot;en-US&quot; for American English).</source>
-        <target>لطفا زبان صفحه را بر اساس استاندارد ISO-639-1 (به عنوان مثال &quot;fa&quot; برای فارسی) وارد نمایید.</target>
+        <target>لطفا زبان برگه را بر اساس استاندارد ISO-639-1 (به عنوان مثال &quot;fa&quot; برای فارسی) وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.robots.0">
         <source>Robots tag</source>
@@ -47,15 +47,15 @@
       </trans-unit>
       <trans-unit id="tl_page.robots.1">
         <source>Here you can define how search engines handle the page.</source>
-        <target>می‌توانید نحوه برخورد موتورهای جستجو را با صفحه مشخص کنید.</target>
+        <target>اینجا می‌توانید نحوه برخورد موتورهای جستجو را با برگه مشخص کنید.</target>
       </trans-unit>
       <trans-unit id="tl_page.description.0">
         <source>Page description</source>
-        <target>توضیحات صفحه</target>
+        <target>توضیحات برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.description.1">
         <source>Here you can enter a short description of the page which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate between 150 and 300 characters.</source>
-        <target>می توانید توضیح کوتاهی برای صفحه که توسط موتورهای جستجو مانند گوگل و یاهو ارزیابی خواهند شد را نمایید. موتورهای جستجو معمولا بین ۱۵۰ تا ۳۰۰ کاراکتر را نمایش می‌دهند.</target>
+        <target>اینجا می‌توانید توضیح کوتاهی برای برگه که توسط موتورهای جستجو مانند گوگل و یاهو ارزیابی خواهند شد را نمایید. موتورهای جستجو معمولا بین ۱۵۰ تا ۳۰۰ نویسه را نمایش می‌دهند.</target>
       </trans-unit>
       <trans-unit id="tl_page.redirect.0">
         <source>Redirect type</source>
@@ -67,11 +67,11 @@
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه بازگردانی</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_page.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.</source>
-        <target>لطفاً صفحه مقصد را که می‌خواهید بازگردانی به آن صفحه صورت گیرد، از ساختار درختی زیر انتخاب نمایید.</target>
+        <target>لطفاً برگه مقصد را که می‌خواهید بازگردانی به آن برگه صورت گیرد، از ساختار درختی زیر انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.fallback.0">
         <source>Language fallback</source>
@@ -79,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_page.fallback.1">
         <source>Show this page if there is none that matches the visitor's language.</source>
-        <target>این صفحه زمانی که هیچ صفحه منطبق بر زبان بازدیدکننده وجود نداشته باشد نمایش داده می‌شود.</target>
+        <target>این برگه زمانی که هیچ برگه منطبق بر زبان بازدیدکننده وجود نداشته باشد نمایش داده می‌شود.</target>
       </trans-unit>
       <trans-unit id="tl_page.dns.0">
         <source>Domain name</source>
@@ -87,15 +87,15 @@
       </trans-unit>
       <trans-unit id="tl_page.dns.1">
         <source>Here you can restrict the access to the website to a certain domain name.</source>
-        <target>می‌توانید دسترسی به وب‌سایت را به یک نام دامنه مشخص محدود کنید.</target>
+        <target>اینجا می‌توانید دسترسی به تارنما را به یک نام دامنه مشخص محدود کنید.</target>
       </trans-unit>
       <trans-unit id="tl_page.adminEmail.0">
         <source>E-mail address of the website administrator</source>
-        <target>نشانی ایمیل مدیر وب‌سایت</target>
+        <target>نشانی رایانامه مدیر تارنما</target>
       </trans-unit>
       <trans-unit id="tl_page.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>پیغام خودکار مانند ایمیل تایید عضویت به این نشانی ارسال خواهند شد.</target>
+        <target>پیغام خودکار مانند رایانامه تایید عضویت به این نشانی ارسال خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_page.dateFormat.0">
         <source>Date format</source>
@@ -147,19 +147,19 @@
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>
-        <target>منتقل کردن به صفحه‌ای دیگر</target>
+        <target>منتقل کردن به برگه‌ای دیگر</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.1">
         <source>Redirect visitors to another page (e.g. a login page).</source>
-        <target>بازگردانی بازدیدکنندگان به صفحه دیگر (مانند صفحه ورود به سیستم)</target>
+        <target>بازگردانی بازدیدکنندگان به برگه دیگر (مانند برگه ورود به سیستم)</target>
       </trans-unit>
       <trans-unit id="tl_page.protected.0">
         <source>Protect page</source>
-        <target>حفاظت از صفحه</target>
+        <target>حفاظت از برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.protected.1">
         <source>Restrict page access to certain member groups.</source>
-        <target>محدود کردن دسترسی صفحه به گروه‌های اعضاء مشخص.</target>
+        <target>محدود کردن دسترسی برگه به گروه‌های اعضاء مشخص.</target>
       </trans-unit>
       <trans-unit id="tl_page.groups.0">
         <source>Allowed member groups</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_page.groups.1">
         <source>These groups will be able to access the page.</source>
-        <target>این گروه‌ها مجاز به دسترسی به این صفحه خواهند بود.</target>
+        <target>این گروه‌ها مجاز به دسترسی به این برگه خواهند بود.</target>
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.0">
         <source>Assign a layout</source>
@@ -175,19 +175,19 @@
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.1">
         <source>Assign a page layout to the page and its subpages.</source>
-        <target>اختصاص یک چیدمان صفحه به صفحه و زیرصفحه‌هایش.</target>
+        <target>اختصاص یک چیدمان برگه به برگه و زیرصفحه‌هایش.</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.0">
         <source>Page layout</source>
-        <target>چیدمان صفحه</target>
+        <target>چیدمان برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
         <source>You can manage page layouts with the &quot;themes&quot; module.</source>
-        <target>می‌توانید چیدمان‌های صفحه را با ماژول «پوسته» مدیریت کنید.</target>
+        <target>می‌توانید چیدمان‌های برگه را با ماژول «پوسته» مدیریت کنید.</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.0">
         <source>Mobile page layout</source>
-        <target>چیدمان صفحه موبایل</target>
+        <target>چیدمان برگه موبایل</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.1">
         <source>This layout will be used if the visitor uses a mobile device.</source>
@@ -199,7 +199,7 @@
       </trans-unit>
       <trans-unit id="tl_page.includeCache.1">
         <source>Set a cache timeout value for the page and its subpages.</source>
-        <target>تنظیم مقدار زمان انقضاء برای صفحه و زیرصفحه‌هایش.</target>
+        <target>تنظیم مقدار زمان انقضاء برای برگه و زیرصفحه‌هایش.</target>
       </trans-unit>
       <trans-unit id="tl_page.cache.0">
         <source>Cache timeout</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cache.1">
         <source>After this period, the cached version of the page will expire.</source>
-        <target>بعد از این زمان، نسخه نهانگاه صفحه منقضی خواهد شد.</target>
+        <target>بعد از این زمان، نسخه نهانگاه برگه منقضی خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_page.includeChmod.0">
         <source>Assign access rights</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_page.includeChmod.1">
         <source>Access rights determine what back end users can do with the page.</source>
-        <target>سطوح دسترسی کارهایی را که کاربران بخش مدیریت می‌توانند با صفحه انجام دهند را تعیین می‌کند.</target>
+        <target>سطوح دسترسی کارهایی را که کاربران بخش مدیریت می‌توانند با برگه انجام دهند را تعیین می‌کند.</target>
       </trans-unit>
       <trans-unit id="tl_page.cuser.0">
         <source>Owner</source>
@@ -223,7 +223,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cuser.1">
         <source>Please select a user as the owner of the page.</source>
-        <target>لطفاً یک کاربر را به عنوان مالک صفحه انتخاب نمایید.</target>
+        <target>لطفاً یک کاربر را به عنوان مالک برگه انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.cgroup.0">
         <source>Group</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_page.cgroup.1">
         <source>Please select a group as the owner of the page.</source>
-        <target>لطفاً یک گروه را به عنوان مالک صفحه انتخاب نمایید.</target>
+        <target>لطفاً یک گروه را به عنوان مالک برگه انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.chmod.0">
         <source>Access rights</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_page.chmod.1">
         <source>Please assign the access rights for the page and its subpages.</source>
-        <target>لطفاً سطوح دسترسی برای صفحه و زیر صفحه را اختصاص دهید.</target>
+        <target>لطفاً سطوح دسترسی برای برگه و زیر برگه را اختصاص دهید.</target>
       </trans-unit>
       <trans-unit id="tl_page.noSearch.0">
         <source>Do not search</source>
@@ -247,7 +247,7 @@
       </trans-unit>
       <trans-unit id="tl_page.noSearch.1">
         <source>Exclude the page from the search index.</source>
-        <target>خارج کردن صفحه از ایندکس جستجو.</target>
+        <target>خارج کردن برگه از ایندکس جستجو.</target>
       </trans-unit>
       <trans-unit id="tl_page.cssClass.0">
         <source>CSS class</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="tl_page.sitemap.1">
         <source>Here you can define whether the page is shown in the sitemap.</source>
-        <target>می‌توانید چگونگی نمایش صفحه پر نقشه سایت را تعریف نمایید.</target>
+        <target>اینجا می‌توانید چگونگی نمایش برگه پر نقشه سایت را تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_page.hide.0">
         <source>Hide from navigation</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="tl_page.hide.1">
         <source>Hide the page from the navigation menu.</source>
-        <target>مخفی کردن صفحه از منوی ناوبری</target>
+        <target>مخفی کردن برگه از منوی ناوبری</target>
       </trans-unit>
       <trans-unit id="tl_page.guests.0">
         <source>Show to guests only</source>
@@ -279,7 +279,7 @@
       </trans-unit>
       <trans-unit id="tl_page.guests.1">
         <source>Hide the page if there is an authenticated user.</source>
-        <target>مخفی کردن صفحه برای کاربر تایید شده‌ای که وارد سیستم شده باشند.</target>
+        <target>مخفی کردن برگه برای کاربر تایید شده‌ای که وارد سیستم شده باشند.</target>
       </trans-unit>
       <trans-unit id="tl_page.tabindex.0">
         <source>Tab index</source>
@@ -299,11 +299,11 @@
       </trans-unit>
       <trans-unit id="tl_page.published.0">
         <source>Publish page</source>
-        <target>انتشار صفحه</target>
+        <target>انتشار برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.published.1">
         <source>Make the page publicly visible on the website.</source>
-        <target>قابل دیدن کردن صفحه در وب‌سایت</target>
+        <target>قابل دیدن کردن برگه در تارنما</target>
       </trans-unit>
       <trans-unit id="tl_page.start.0">
         <source>Show from</source>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="tl_page.start.1">
         <source>Do not show the page on the website before this day.</source>
-        <target>نمایش ندادن صفحه در وب‌سایت قبل از این روز.</target>
+        <target>نمایش ندادن برگه در تارنما قبل از این روز.</target>
       </trans-unit>
       <trans-unit id="tl_page.stop.0">
         <source>Show until</source>
@@ -319,7 +319,7 @@
       </trans-unit>
       <trans-unit id="tl_page.stop.1">
         <source>Do not show the page on the website on and after this day.</source>
-        <target>نشان ندادن صفحه را در وب‌سایت در این روز و بعد از آن.</target>
+        <target>نشان ندادن برگه را در تارنما در این روز و بعد از آن.</target>
       </trans-unit>
       <trans-unit id="tl_page.title_legend">
         <source>Name and type</source>
@@ -411,43 +411,43 @@
       </trans-unit>
       <trans-unit id="tl_page.new.0">
         <source>New page</source>
-        <target>صفحه جدید</target>
+        <target>برگه جدید</target>
       </trans-unit>
       <trans-unit id="tl_page.new.1">
         <source>Create a new page</source>
-        <target>ساخت یک صفحه جدید</target>
+        <target>ساخت یک برگه جدید</target>
       </trans-unit>
       <trans-unit id="tl_page.show.0">
         <source>Page details</source>
-        <target>جزئیات صفحه</target>
+        <target>جزئیات برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.show.1">
         <source>Show the details of page ID %s</source>
-        <target>نمایش جزئیات صفحه شناسه %s</target>
+        <target>نمایش جزئیات برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.edit.0">
         <source>Edit page</source>
-        <target>ویرایش صفحه</target>
+        <target>ویرایش برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.edit.1">
         <source>Edit page ID %s</source>
-        <target>ویرایش صفحه شناسه %s</target>
+        <target>ویرایش برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.cut.0">
         <source>Move page</source>
-        <target>انتقال صفحه</target>
+        <target>انتقال برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.cut.1">
         <source>Move page ID %s</source>
-        <target>انتقال صفحه شناسه %s</target>
+        <target>انتقال برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.copy.0">
         <source>Duplicate page</source>
-        <target>تکثیر صفحه</target>
+        <target>تکثیر برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.copy.1">
         <source>Duplicate page ID %s</source>
-        <target>تکثیر صفحه شناسه %s</target>
+        <target>تکثیر برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.copyChilds.0">
         <source>Duplicate with subpages</source>
@@ -455,23 +455,23 @@
       </trans-unit>
       <trans-unit id="tl_page.copyChilds.1">
         <source>Duplicate page ID %s with its subpages</source>
-        <target>تکثیر صفحه شناسه %s به همراه تمامی زیرصفحه‌ها</target>
+        <target>تکثیر برگه شناسه %s به همراه تمامی زیرصفحه‌ها</target>
       </trans-unit>
       <trans-unit id="tl_page.delete.0">
         <source>Delete page</source>
-        <target>حذف صفحه</target>
+        <target>حذف برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.delete.1">
         <source>Delete page ID %s</source>
-        <target>حذف صفحه شناسه %s</target>
+        <target>حذف برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.toggle.0">
         <source>Publish/unpublish page</source>
-        <target>انتشار/عدم انتشار صفحه</target>
+        <target>انتشار/عدم انتشار برگه</target>
       </trans-unit>
       <trans-unit id="tl_page.toggle.1">
         <source>Publish/unpublish page ID %s</source>
-        <target>انتشار/عدم انتشار صفحه شناسه %s</target>
+        <target>انتشار/عدم انتشار برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteafter.0">
         <source>Paste after</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_page.pasteafter.1">
         <source>Paste after page ID %s</source>
-        <target>جاگذاری بعد از صفحه شناسه %s</target>
+        <target>جاگذاری بعد از برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.0">
         <source>Paste into</source>
@@ -487,7 +487,7 @@
       </trans-unit>
       <trans-unit id="tl_page.pasteinto.1">
         <source>Paste into page ID %s</source>
-        <target>افزودن در صفحه شناسه %s</target>
+        <target>افزودن در برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_page.articles.0">
         <source>Edit articles</source>
@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tl_page.articles.1">
         <source>Edit the articles of page ID %s</source>
-        <target>ویرایش نوشته‌های صفحه شناسه %s</target>
+        <target>ویرایش نوشته‌های برگه شناسه %s</target>
       </trans-unit>
       <trans-unit id="CACHE.0">
         <source>0 (do not cache)</source>

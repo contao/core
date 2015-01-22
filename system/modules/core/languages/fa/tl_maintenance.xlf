@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.1">
         <source>Automatically log in a front end user to index protected pages.</source>
-        <target>ورود خودکار کاربر وب‌سایت برای اندیکس کردن صفحه‌ها حفاظت شده.</target>
+        <target>ورود خودکار کاربر وب‌سایت برای اندیکس کردن برگه‌ها حفاظت شده.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.job">
         <source>Job</source>
@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>نسخه جدیدتر کانتائو نسخه %s موجود می‌باشد</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>شناسه روزآمدسازی لایو خود را وارد نمایید</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>پوشه موقت (system/tmp) قابل نوشتن نمی‌باشد</target>
@@ -91,11 +87,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.noSearchable">
         <source>No searchable pages found</source>
-        <target>صفحه‌ قابل جستجویی یافت نشد</target>
+        <target>برگه‌ قابل جستجویی یافت نشد</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.indexNote">
         <source>Please wait for the page to load completely before you proceed!</source>
-        <target>لطفاً صبر کنید تا صفحه به طور کامل بارگذاری شود قبل از اینکه شما ادامه دهید!</target>
+        <target>لطفاً صبر کنید تا برگه به طور کامل بارگذاری شود قبل از اینکه شما ادامه دهید!</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.indexLoading">
         <source>Please wait while the search index is being rebuilt.</source>
@@ -147,7 +143,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.1">
         <source>Removes the automatically generated images and then purges the page cache, so there are no links to deleted resources.</source>
-        <target>تصاویری را که به صورت خودکار تولید شده‌اند را حذف  و نهانگاه صفحه را را پالایش می‌کند، بنابراین پیوندی برای منابع حذف شده وجود ندارد.</target>
+        <target>تصاویری را که به صورت خودکار تولید شده‌اند را حذف  و نهانگاه برگه را را پالایش می‌کند، بنابراین پیوندی برای منابع حذف شده وجود ندارد.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.0">
         <source>Purge the script cache</source>
@@ -155,15 +151,15 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.1">
         <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
-        <target>پرونده‌های .css و .js را که به صورت خودکار تولید شده‌اند را حذف و برگه‌های سبک داخلی را بازتولید کرده و سپس نهان‌گاه صفحه را پالایش می نماید.</target>
+        <target>پرونده‌های .css و .js را که به صورت خودکار تولید شده‌اند را حذف و برگه‌های سبک داخلی را بازتولید کرده و سپس نهان‌گاه برگه را پالایش می نماید.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.0">
         <source>Purge the page cache</source>
-        <target>پاکسازی نهان‌گاه صفحه</target>
+        <target>پاکسازی نهان‌گاه برگه</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.1">
         <source>Removes the cached versions of the front end pages.</source>
-        <target>نسخه‌های نهان‌گاه صفحه‌ها مدیریت را پاک می‌کند</target>
+        <target>نسخه‌های نهان‌گاه برگه‌ها مدیریت را پاک می‌کند</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.search.0">
         <source>Purge the search cache</source>
@@ -195,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.1">
         <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
-        <target>پرونده‌های XML (نقشه‌های وب‌سایت و خوراک‌ها) را بازتولید نموده و سپس نهان‌گاه صفحه را پالایش می‌نماید، بنابراین پیوندی به منابع حذف شده وجود نخواهد داشت.</target>
+        <target>پرونده‌های XML (نقشه‌های وب‌سایت و خوراک‌ها) را بازتولید نموده و سپس نهان‌گاه برگه را پالایش می‌نماید، بنابراین پیوندی به منابع حذف شده وجود نخواهد داشت.</target>
       </trans-unit>
     </body>
   </file>

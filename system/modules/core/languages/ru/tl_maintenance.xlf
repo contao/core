@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.cacheTables.1">
         <source>Please select the data you want to purge or rebuild.</source>
-        <target>Выберите данные, которые хотите очистить и перестроить.</target>
+        <target>Выберите данные, которые хотите очистить или перестроить.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.frontendUser.0">
         <source>Front end user</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.cacheCleared">
         <source>The data has been purged</source>
-        <target>Данные были очищены</target>
+        <target>Данные очищены успешно</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.liveUpdate">
         <source>Live Update</source>
@@ -47,15 +47,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.upToDate">
         <source>Your Contao version %s is up to date</source>
-        <target>Contao %s не требует обновления.</target>
+        <target>Установленная версия Contao %s не требует обновления.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.newVersion">
         <source>A newer Contao version %s is available</source>
-        <target>Доступна новая Contao %s</target>
-      </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Введите ID онлайн обновления</target>
+        <target>Доступна новая версия Contao %s</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
@@ -83,7 +79,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.searchIndex">
         <source>Rebuild the search index</source>
-        <target>Перестроить поисковый индекс</target>
+        <target>Перестроение поискового индекса</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.indexSubmit">
         <source>Rebuild index</source>
@@ -99,11 +95,11 @@
       </trans-unit>
       <trans-unit id="tl_maintenance.indexLoading">
         <source>Please wait while the search index is being rebuilt.</source>
-        <target>Дождитесь окончания перестройки поискового индекса.</target>
+        <target>Дождитесь окончания перестроения поискового индекса.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.indexComplete">
         <source>The search index has been rebuilt. You can now proceed.</source>
-        <target>Поисковый индекс перестроен. Теперь можете продолжить.</target>
+        <target>Поисковый индекс перестроен. Теперь вы можете продолжить.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance.updateHelp">
         <source>Please enter your %s here.</source>
@@ -123,7 +119,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.undo.1">
         <source>Truncates the &lt;em&gt;tl_undo&lt;/em&gt; table which stores the deleted records. This job permanently deletes these records.</source>
-        <target>Очищает &lt;em&gt;tl_undo&lt;/em&gt; таблицу, которая хранит удаленные данные. Это задание постоянно удаляет эти данные.</target>
+        <target>Очищает таблицу &lt;em&gt;tl_undo&lt;/em&gt;, которая хранит удаленные данные. Это задание безвозвратно удаляет эти записи.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.0">
         <source>Purge the version table</source>
@@ -131,7 +127,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.versions.1">
         <source>Truncates the &lt;em&gt;tl_version&lt;/em&gt; table which stores the previous versions of a record. This job permanently deletes these records.</source>
-        <target>Очищает &lt;em&gt;tl_version&lt;/em&gt; таблицу, которая хранит предыдущие версии данных. Это задание постоянно удаляет эти версии.</target>
+        <target>Очищает таблицу &lt;em&gt;tl_version&lt;/em&gt;, которая хранит предыдущие версии данных. Это задание безвозвратно удаляет эти записи.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.0">
         <source>Purge the system log</source>
@@ -139,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.log.1">
         <source>Truncates the &lt;em&gt;tl_log&lt;/em&gt; table which stores all the system log entries. This job permanently deletes these records.</source>
-        <target>Очищает &lt;em&gt;tl_log&lt;/em&gt; таблицу, которая хранит все записи системного журнала. Это задание постоянно удаляет эти данные.</target>
+        <target>Очищает таблицу &lt;em&gt;tl_log&lt;/em&gt;, которая хранит все записи системного журнала. Это задание безвозвратно удаляет эти записи.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.images.0">
         <source>Purge the image cache</source>
@@ -155,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.scripts.1">
         <source>Removes the automatically generated .css and .js files, recreates the internal style sheets and then purges the page cache.</source>
-        <target>Удаляет автоматически созданные .css и .js файлы, создает заново внутренние таблицы стилей и затем очищает кэш страниц.</target>
+        <target>Удаляет автоматически созданные .css и .js файлы, создает заново внутренние таблицы стилей, а затем очищает кэш страниц.</target>
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.pages.0">
         <source>Purge the page cache</source>
@@ -195,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_maintenance_jobs.xml.1">
         <source>Recreates the XML files (sitemaps and feeds) and then purges the page cache, so there are no links to deleted resources.</source>
-        <target>Создает заново XML файлы (карты веб-сайта и каналы), а затем очищает кэш страниц, при этом очищаются ссылки на удаленные ресурсы.</target>
+        <target>Создает заново XML-файлы (карты веб-сайта и каналы), а затем очищает кэш страниц, при этом очищаются ссылки на удаленные ресурсы.</target>
       </trans-unit>
     </body>
   </file>

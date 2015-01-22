@@ -463,7 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_form_field.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_form_field.size_legend">
         <source>Rows and columns</source>

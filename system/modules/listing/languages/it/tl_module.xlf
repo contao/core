@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="tl_module.list_sort.0">
         <source>Order by</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_module.list_sort.1">
         <source>Here you can enter a comma seperated list of fields to sort the results by.</source>

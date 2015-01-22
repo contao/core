@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.name.1">
         <source>Please enter the layout title.</source>
-        <target>Geef een lay-out naam op.</target>
+        <target>Geef een lay-out-naam op.</target>
       </trans-unit>
       <trans-unit id="tl_layout.fallback.0">
         <source>Default layout</source>
@@ -163,11 +163,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.0">
         <source>Layout builder</source>
-        <target>Layout builder</target>
+        <target>Lay-out-builder</target>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>Genereert een responsieve CSS layout gebaseerd op de pagina indeling instellingen. Deze component is vereist om de pagina layout generator te laten werken!</target>
+        <target>Genereert een responsieve CSS lay-out gebaseerd op de lay-out-instellingen van de pagina. Deze component is vereist om de pagina-lay-out-generator te laten werken!</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
@@ -231,7 +231,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.1">
         <source>Please select the news feeds you want to add to the layout.</source>
-        <target>Selecteer de RSS/Atom nieuws feeds die u wilt toevoegen aan de huidige layout.</target>
+        <target>Selecteer de RSS/Atom nieuws feeds die u wilt toevoegen aan de huidige lay-out.</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
-        <target>Selecteer de RSS/Atom kalender feeds die u wilt toevoegen aan de huidige layout.</target>
+        <target>Selecteer de RSS/Atom kalender feeds die u wilt toevoegen aan de huidige lay-out.</target>
       </trans-unit>
       <trans-unit id="tl_layout.modules.0">
         <source>Included modules</source>
@@ -407,7 +407,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_layout.script_legend">
         <source>Script settings</source>

@@ -187,7 +187,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.0">
         <source>Sort order</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_content.sortOrder.1">
         <source>Please choose the sort order.</source>
@@ -323,7 +323,7 @@
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.0">
         <source>Sort order</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_content.orderSRC.1">
         <source>The sort order of the items.</source>
@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="tl_content.sortBy.0">
         <source>Order by</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_content.sortBy.1">
         <source>Please choose the sort order.</source>

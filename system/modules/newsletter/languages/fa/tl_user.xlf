@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_user.newsletters.1">
         <source>Here you can grant access to one or more channels.</source>
-        <target>در این قسمت می توانید دسترسی به یک چند کانال را اعطاء نمایید.</target>
+        <target>اینجا می‌توانید دسترسی به یک چند کانال را واگذار نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsletterp.0">
         <source>Channel permissions</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_user.newsletterp.1">
         <source>Here you can define the channel permissions.</source>
-        <target>در این قسمت می توانید مجوزهای کانال را تعیین کنید.</target>
+        <target>اینجا می‌توانید مجوزهای کانال را تعیین کنید.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsletter_legend">
         <source>Newsletter permissions</source>

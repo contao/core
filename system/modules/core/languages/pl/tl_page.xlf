@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_page.title.0">
         <source>Page name</source>
-        <target>Tytuł strony</target>
+        <target>Nazwa strony</target>
       </trans-unit>
       <trans-unit id="tl_page.title.1">
         <source>Please enter the page name.</source>
-        <target>Tytuł strony wyświetla się w nawigacji. Nie powinien zawierać więcej niż 65 znaków.</target>
+        <target>Nazwa strony wyświetla się w nawigacji. Nie powinien zawierać więcej niż 65 znaków.</target>
       </trans-unit>
       <trans-unit id="tl_page.alias.0">
         <source>Page alias</source>

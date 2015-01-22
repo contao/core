@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>新的 TYPOlight 版本 %s 可更新</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>请输入在线升级 ID</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>临时文件夹 (system/tmp) 不可写</target>

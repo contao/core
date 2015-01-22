@@ -1,6 +1,46 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.17 (2015-01-22)
+---------------------------
+
+### Fixed
+Romanize style sheet names (see #7526).
+
+### Fixed
+Add the username to the "account has been locked" log entry (see #7551).
+
+### Fixed
+Consider the suhosin.memory_limit when raising the PHP limits (see #7035).
+
+### Fixed
+Added two missing `exclude` flags in the `tl_page` data container (see #7522).
+
+### Fixed
+Send an UTF-8 charset header in the `die_nicely()` function (see #7519).
+
+### Fixed
+Correctly validate dates in the `Widget` class (see #7498).
+
+### Fixed
+Back port the fixes from #7475 and #7473.
+
+### Fixed
+Send the same cache headers for cached and uncached pages (see #7455).
+
+### Fixed
+Fix the `current() expects parameter 1 to be array` issue (see #6739).
+
+### Fixed
+Correctly replace the `*_teaser` insert tags (see #7488).
+
+### Fixed
+Adjust the last and previous login labels (see #7426).
+
+### Fixed
+Unset the `postUnsafeRaw` cache in `Input::setPost()` (see #7481).
+
+
 Version 3.2.16 (2014-11-24)
 ---------------------------
 

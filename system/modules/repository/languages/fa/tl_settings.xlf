@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_wsdl.1">
         <source>Here you can enter the URL of the extension repository WSDL file.</source>
-        <target>شما می‌توانید نشانی وب پرونده WSDL مخزن افزونه‌ها را وارد نمایید.</target>
+        <target>اینجا می‌توانید نشانی وب پرونده WSDL مخزن افزونه‌ها را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.0">
         <source>Fallback languages</source>
@@ -15,15 +15,15 @@
       </trans-unit>
       <trans-unit id="tl_settings.repository_languages.1">
         <source>Here you can enter a comma separated list of ISO language codes to be used if an extension description is not available in the current back end language.</source>
-        <target>شما می‌توانید لیستی (جدا شده توسط کاما) از کدهای زبان ISO اگر توضیحات یک افزونه در زبان مدیریت سایت موجود نیست استفاده نمایید.</target>
+        <target>اینجا می‌توانید فهرستی (جدا شده توسط کاما) از کدهای زبان ISO اگر توضیحات یک افزونه در زبان مدیریت سایت موجود نیست استفاده نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_listsize.0">
         <source>Extensions per page</source>
-        <target>افزونه در هر صفحه</target>
+        <target>افزونه در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_listsize.1">
         <source>Here you can define the number of extensions per page.</source>
-        <target>شما می‌توانید تعداد افزونه در هر صفحه را مشخص نمایید.</target>
+        <target>اینجا می‌توانید تعداد افزونه در هر برگه را مشخص نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.repository_unsafe_catalog.0">
         <source>Show incompatible extensions</source>

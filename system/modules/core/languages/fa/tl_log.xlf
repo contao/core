@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="tl_log.action.0">
         <source>Category</source>
-        <target>دسته</target>
+        <target>دسته‌بندی</target>
       </trans-unit>
       <trans-unit id="tl_log.action.1">
         <source>Category of the action</source>
-        <target>دسته عمل</target>
+        <target>دسته‌بندی عمل</target>
       </trans-unit>
       <trans-unit id="tl_log.username.0">
         <source>User</source>

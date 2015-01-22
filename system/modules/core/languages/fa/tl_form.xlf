@@ -19,19 +19,19 @@
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه بازگردانی</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_form.jumpTo.1">
         <source>Please choose the page to which visitors will be redirected after submitting the form.</source>
-        <target>لطفا صفحه‌ای را که کاربران بعد از ارسال فرم باید بازگردانی شوند را انتخاب کنید.</target>
+        <target>لطفا برگه‌ای را که کاربران بعد از ارسال فرم باید بازگردانی شوند را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.0">
         <source>Send form data via e-mail</source>
-        <target>ارسال داده‌ها توسط ایمیل</target>
+        <target>ارسال داده‌ها توسط رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_form.sendViaEmail.1">
         <source>Send the submitted data to an e-mail address.</source>
-        <target>داده‌های ارسال شده توسط به نشانی ایمیل فرستاده خواهند شد.</target>
+        <target>داده‌های ارسال شده توسط به نشانی رایانامه فرستاده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_form.recipient.0">
         <source>Recipient address</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_form.recipient.1">
         <source>Separate multiple e-mail addresses with comma.</source>
-        <target>نشانی‌های ایمیل چندتایی را با کاما از هم جدا کنید.</target>
+        <target>نشانی‌های رایانامه چندتایی را با کاما از هم جدا کنید.</target>
       </trans-unit>
       <trans-unit id="tl_form.subject.0">
         <source>Subject</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_form.subject.1">
         <source>Please enter the e-mail subject.</source>
-        <target>لطفا موضوع ایمیل را وارد نمایید.</target>
+        <target>لطفا موضوع رایانامه را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form.format.0">
         <source>Data format</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_form.xml.1">
         <source>The form data will be attached to the e-mail as an XML file.</source>
-        <target>داده‌های فرم به صورت پرونده XML به ایمیل پیوست خواهد شد.</target>
+        <target>داده‌های فرم به صورت پرونده XML به رایانامه پیوست خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_form.csv.0">
         <source>CSV file</source>
@@ -79,11 +79,11 @@
       </trans-unit>
       <trans-unit id="tl_form.csv.1">
         <source>The form data will be attached to the e-mail as a CSV file.</source>
-        <target>داده‌های فرم به صورت پرونده CSV به ایمیل پیوست خواهد شد.</target>
+        <target>داده‌های فرم به صورت پرونده CSV به رایانامه پیوست خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_form.email.0">
         <source>E-mail</source>
-        <target>ایمیل</target>
+        <target>رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_form.email.1">
         <source>Ignores all fields except &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;email&lt;/em&gt;, &lt;em&gt;subject&lt;/em&gt;, &lt;em&gt;message&lt;/em&gt; and &lt;em&gt;cc&lt;/em&gt; (carbon copy) and sends the form data like it had been sent from a mail client. File uploads are allowed.</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_form.skipEmtpy.1">
         <source>Hide empty fields in the e-mail.</source>
-        <target>مخفی کردن فیلد‌های خالی در ایمیل.</target>
+        <target>مخفی کردن فیلد‌های خالی در رایانامه.</target>
       </trans-unit>
       <trans-unit id="tl_form.storeValues.0">
         <source>Store data</source>
@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_form.attributes.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>می‌توانید یک شناسه و یک یا چند کلاس انتخاب نمایید.</target>
+        <target>اینجا می‌توانید یک شناسه و یک یا چند کلاس انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_form.formID.0">
         <source>Form ID</source>
@@ -171,7 +171,7 @@
       </trans-unit>
       <trans-unit id="tl_form.title_legend">
         <source>Title and redirect page</source>
-        <target>عنوان و صفحه بازگردانی</target>
+        <target>عنوان و برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_form.email_legend">
         <source>Send form data</source>

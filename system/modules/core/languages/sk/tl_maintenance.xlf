@@ -53,10 +53,6 @@
         <source>A newer Contao version %s is available</source>
         <target>Nová verzia Contao %s je dostupná</target>
       </trans-unit>
-      <trans-unit id="tl_maintenance.emptyLuId">
-        <source>Please enter your Live Update ID</source>
-        <target>Prosím, vložte ID vašej on-line aktualizácie</target>
-      </trans-unit>
       <trans-unit id="tl_maintenance.notWriteable">
         <source>The temporary folder (system/tmp) is not writeable</source>
         <target>Priečinok dočasného zápisu (system/tmp) nemá práva k zapisovaniu</target>

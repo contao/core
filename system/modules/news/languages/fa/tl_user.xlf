@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_user.newp.1">
         <source>Here you can define the news permissions.</source>
-        <target>مجوزهای خبر را تعریف نمایید.</target>
+        <target>اینجا می‌توانید مجوزهای خبر را تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsfeeds.0">
         <source>Allowed RSS feeds</source>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="tl_user.newsfeeds.1">
         <source>Here you can grant access to one or more news feeds.</source>
-        <target>شما می توانید دسترسی به یک یا چند خوراک اخبار را اعطاء نمایید.</target>
+        <target>اینجا می‌توانید دسترسی به یک یا چند خوراک اخبار را واگذار نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.newsfeedp.0">
         <source>RSS feed permissions</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_user.newsfeedp.1">
         <source>Here you can define the news feed permissions.</source>
-        <target>شما می‌توانید مجوزهای خوراک اخبار را تعریف نمایید.</target>
+        <target>اینجا می‌توانید مجوزهای خوراک اخبار را تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_user.news_legend">
         <source>News permissions</source>

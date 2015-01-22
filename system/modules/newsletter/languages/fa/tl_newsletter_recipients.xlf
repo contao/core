@@ -3,11 +3,11 @@
     <body>
       <trans-unit id="tl_newsletter_recipients.email.0">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email.1">
         <source>Please enter the recipient's e-mail address.</source>
-        <target>لطفا نشانی ایمیل گیرنده را وارد نمایید.</target>
+        <target>لطفا نشانی رایانامه گیرنده را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.active.0">
         <source>Activate recipient</source>
@@ -51,7 +51,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.email_legend">
         <source>E-mail address</source>
-        <target>نشانی ایمیل</target>
+        <target>نشانی رایانامه</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirm">
         <source>%s new recipients have been imported.</source>
@@ -99,7 +99,7 @@
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.copy.1">
         <source>Duplicate recipient ID %s</source>
-        <target>تکثیر گیرنده با شناسه %s</target>
+        <target>تکثیر گیرنده شناسه %s</target>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.delete.0">
         <source>Delete recipient</source>

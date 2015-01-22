@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="MSC.cal_empty">
         <source>Currently there are no events.</source>
-        <target>No hay eventos próximos</target>
+        <target>Actualmente no hay eventos próximos</target>
       </trans-unit>
       <trans-unit id="MSC.cal_days">
         <source>This event is repeated every %s. day</source>

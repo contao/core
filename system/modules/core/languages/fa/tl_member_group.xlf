@@ -11,19 +11,19 @@
       </trans-unit>
       <trans-unit id="tl_member_group.redirect.0">
         <source>Redirect on login</source>
-        <target>بازگردانی در ورود به سیستم</target>
+        <target>بازگردانی در ورود</target>
       </trans-unit>
       <trans-unit id="tl_member_group.redirect.1">
         <source>Redirect group members to a custom page when they log in.</source>
-        <target>بازگردانی اعضاء گروه به صفحه اختصاصی هنگام ورود به سیستم.</target>
+        <target>بازگردانی اعضاء گروه به برگه اختصاصی هنگام ورود به سیستم.</target>
       </trans-unit>
       <trans-unit id="tl_member_group.jumpTo.0">
         <source>Redirect page</source>
-        <target>صفحه بازگردانی</target>
+        <target>برگه بازگردانی</target>
       </trans-unit>
       <trans-unit id="tl_member_group.jumpTo.1">
         <source>Please choose the page to which the group members will be redirected.</source>
-        <target>لطفا صفحه‌ای که می‌خواهید اعضای گروه به آنجا بازگردانده شوند را انتخاب نمایید.</target>
+        <target>لطفا برگه‌ای که می‌خواهید اعضای گروه به آنجا بازگردانده شوند را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_member_group.disable.0">
         <source>Deactivate</source>

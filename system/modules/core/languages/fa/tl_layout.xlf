@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.sections.1">
         <source>Here you can enter a comma separated list of custom layout sections.</source>
-        <target>می‌توانید فهرست جدا شده با کاما از بخش‌های چیدمان اختصاصی را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جدا شده با کاما از بخش‌های چیدمان اختصاصی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.sPosition.0">
         <source>Custom sections position</source>
@@ -167,7 +167,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
         <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
-        <target>چیدمان سی‌اس‌اس واکنش‌گرا براساس تنظیمات چیدمان صفحه را ایجاد می‌کند. این مولفه برای کارکرد تولیدکننده چیدمان صفحه لازم است.</target>
+        <target>چیدمان سی‌اس‌اس واکنش‌گرا براساس تنظیمات چیدمان برگه را ایجاد می‌کند. این مولفه برای کارکرد تولیدکننده چیدمان برگه لازم است.</target>
       </trans-unit>
       <trans-unit id="tl_layout.grid.css.0">
         <source>12-column grid</source>
@@ -219,11 +219,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.0">
         <source>Google web fonts</source>
-        <target>فونت‌های وب گوگل</target>
+        <target>قلم‌های وب گوگل</target>
       </trans-unit>
       <trans-unit id="tl_layout.webfonts.1">
         <source>Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</source>
-        <target>اینجا می‌توانید فونت‌های وب گوگل را به وب‌سایت خود اضافه نمایید. خانواده‌های فونت را بدون نشانی وب مشخص نمایید (مثلا &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
+        <target>اینجا می‌توانید قلم‌های وب گوگل را به تارنما خود اضافه نمایید. خانواده‌های قلم را بدون نشانی وب مشخص نمایید (مثلا &lt;em&gt;Ubuntu|Ubuntu+Mono&lt;/em&gt;).</target>
       </trans-unit>
       <trans-unit id="tl_layout.newsfeeds.0">
         <source>News feeds</source>
@@ -235,11 +235,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.0">
         <source>Calendar feeds</source>
-        <target>خوراک تقویم</target>
+        <target>خوراک سالنما</target>
       </trans-unit>
       <trans-unit id="tl_layout.calendarfeeds.1">
         <source>Please select the calendar feeds you want to add to the layout.</source>
-        <target>خوراک‌های تقویم که می‌خواهید به چیدمان اضافه شود را انتخاب کنید.</target>
+        <target>خوراک‌های سالنما که می‌خواهید به چیدمان اضافه شود را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.modules.0">
         <source>Included modules</source>
@@ -251,11 +251,11 @@
       </trans-unit>
       <trans-unit id="tl_layout.template.0">
         <source>Page template</source>
-        <target>قالب صفحه</target>
+        <target>قالب برگه</target>
       </trans-unit>
       <trans-unit id="tl_layout.template.1">
         <source>Here you can select the page template.</source>
-        <target>می‌توانید قالب صفحه را انتخاب نمایید.</target>
+        <target>اینجا می‌توانید قالب برگه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.doctype.0">
         <source>Output format</source>
@@ -287,7 +287,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.head.1">
         <source>Here you can add individual tags to the &amp;lt;head&amp;gt; section of the page.</source>
-        <target>اینجا شما می‌توانید برچسب‌های منحصربفرد را به بخش &amp;lt;head&amp;gt; اضافه نمایید.</target>
+        <target>اینجا می‌توانید برچسب‌های منحصربفرد را به بخش &amp;lt;head&amp;gt; اضافه نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.addJQuery.0">
         <source>Include jQuery</source>
@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.mooSource.1">
         <source>Here you can select from where to load the MooTools scripts.</source>
-        <target>شما می توانید یا از اسکریپت موتولز محلی و یا از شبکه‌های تحویل محتوا بارگذاری کنید.</target>
+        <target>اینجا می‌توانید یا از اسکریپت موتولز محلی و یا از شبکه‌های تحویل محتوا بارگذاری کنید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.mootools.0">
         <source>MooTools templates</source>
@@ -335,7 +335,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.mootools.1">
         <source>Here you can select one or more MooTools templates.</source>
-        <target>یک یا چند قالب موتولز را انتخاب کنید.</target>
+        <target>اینجا می‌توانید یک یا چند قالب موتولز را انتخاب کنید.</target>
       </trans-unit>
       <trans-unit id="tl_layout.analytics.0">
         <source>Analytics templates</source>
@@ -351,7 +351,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.script.1">
         <source>The JavaScript code which will be inserted at the bottom of the page.</source>
-        <target>کد جاوا اسکریپت که در پایین صفحه اضافه خواهد شد.</target>
+        <target>کد جاوا اسکریپت که در پایین برگه اضافه خواهد شد.</target>
       </trans-unit>
       <trans-unit id="tl_layout.static.0">
         <source>Static layout</source>

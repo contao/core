@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="MOD.tl_layout">
         <source>Page layouts</source>
-        <target>Pagina layouts</target>
+        <target>Pagina-lay-outs</target>
       </trans-unit>
       <trans-unit id="MOD.css">
         <source>Style sheets</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="MOD.layout">
         <source>Page layouts</source>
-        <target>Pagina layouts</target>
+        <target>Pagina-lay-outs</target>
       </trans-unit>
       <trans-unit id="FMD.navigationMenu">
         <source>Navigation</source>

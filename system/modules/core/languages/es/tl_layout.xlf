@@ -207,6 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.external.1">
         <source>Here you can add additional CSS files from the file system.</source>
+        <target>Aquí puedes añadir ficheros CSS adicionales desde el sistema de ficheros.</target>
       </trans-unit>
       <trans-unit id="tl_layout.orderExt.0">
         <source>Sort order</source>
@@ -462,6 +463,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.top">
         <source>Before the wrapper</source>
+        <target>Antes del contenedor</target>
       </trans-unit>
       <trans-unit id="tl_layout.before">
         <source>After the page header</source>
@@ -477,6 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_layout.bottom">
         <source>After the wrapper</source>
+        <target>Despues del contenedor</target>
       </trans-unit>
       <trans-unit id="tl_layout.edit_styles">
         <source>Edit the style sheets</source>

@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="ERR.fileerror">
         <source>Error %s occurred when uploading file %s!</source>
+        <target>Ocurrió un error %s cuando se subía el fichero %s!</target>
       </trans-unit>
       <trans-unit id="ERR.filetarget">
         <source>Cannot move %s to %s because the target exists!</source>
@@ -150,6 +151,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidLogin">
         <source>Login failed (note that usernames and passwords are case-sensitive)!</source>
+        <target>Fallo en el login (nota: los usuarios y las contraseñas son sensibles a las mayúsculas)</target>
       </trans-unit>
       <trans-unit id="ERR.invalidColor">
         <source>Invalid color format!</source>
@@ -245,6 +247,7 @@
       </trans-unit>
       <trans-unit id="ERR.invalidGoogleId">
         <source>Please enter a numeric Google+ ID or vanity name!</source>
+        <target>Por favor introduzca un ID Google+ o un alias!</target>
       </trans-unit>
       <trans-unit id="SEC.question1">
         <source>Please add %d and %d.</source>
@@ -1143,20 +1146,20 @@
         <target>Fecha agregada: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
+        <source>Previous login</source>
+        <target>Login anterior</target>
+      </trans-unit>
+      <trans-unit id="MSC.lastLogin.1">
+        <source>Previous login: %s</source>
+        <target>Previous login: %s</target>
+      </trans-unit>
+      <trans-unit id="MSC.currentLogin.0">
         <source>Last login</source>
         <target>Ultimo inicio de sesión</target>
       </trans-unit>
-      <trans-unit id="MSC.lastLogin.1">
+      <trans-unit id="MSC.currentLogin.1">
         <source>Last login: %s</source>
         <target>Ultimo inicio de sesión: %s</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>Inicio de sesión actual</target>
-      </trans-unit>
-      <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>Inicio de sesión actual: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>
@@ -1546,9 +1549,11 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       </trans-unit>
       <trans-unit id="MSC.fileDownload">
         <source>Download the file</source>
+        <target>Descargar fichero</target>
       </trans-unit>
       <trans-unit id="MSC.fileUuid">
         <source>Unique ID</source>
+        <target>ID único</target>
       </trans-unit>
       <trans-unit id="MSC.fileImageSize">
         <source>Width/height in pixel</source>
@@ -1756,6 +1761,7 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       </trans-unit>
       <trans-unit id="MSC.maintenanceMode">
         <source>Contao is currently running in &lt;strong&gt;maintenance mode&lt;/strong&gt;, in which the website (front end) is not available. Do not disable it if you are currently installing or upgrading third-party extensions! The website might not function properly.</source>
+        <target>Contao está en &lt;strong&gt;modo mantenimiento&lt;/strong&gt;, en el que el sitio web no se encuentra disponible. No desactive si está instalando o actualizando extensiones de terceros. El sitio web puede no funcionar correctamente.</target>
       </trans-unit>
       <trans-unit id="MSC.maintenanceOff">
         <source>Disable</source>
@@ -1859,6 +1865,7 @@ Este e-mail ha sido generado por Contao. No puedes contestar directamente.
       </trans-unit>
       <trans-unit id="MSC.ptable">
         <source>Parent table</source>
+        <target>Tabla padre</target>
       </trans-unit>
       <trans-unit id="MSC.description">
         <source>Description</source>

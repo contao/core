@@ -3,19 +3,19 @@
     <body>
       <trans-unit id="tl_settings.websiteTitle.0">
         <source>Website title</source>
-        <target>عنوان وب‌سایت</target>
+        <target>عنوان تارنما</target>
       </trans-unit>
       <trans-unit id="tl_settings.websiteTitle.1">
         <source>Please enter the title of the website.</source>
-        <target>لطفا عنوان وب‌سایت را وارد نمایید.</target>
+        <target>لطفا عنوان تارنما را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.0">
         <source>E-mail address of the system administrator</source>
-        <target>نشانی پست‌الکترونیک مدیر وب‌سایت</target>
+        <target>نشانی رایانامه مدیر وب‌سایت</target>
       </trans-unit>
       <trans-unit id="tl_settings.adminEmail.1">
         <source>Auto-generated messages like subscription confirmation e-mails will be sent to this address.</source>
-        <target>پیغام‌های خودکار مانند ایمیل تایید عضویت به این نشانی فرستاده خواهند شد.</target>
+        <target>پیغام‌های خودکار مانند رایانامه تایید عضویت به این نشانی فرستاده خواهند شد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.dateFormat.0">
         <source>Date format</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.timeZone.1">
         <source>Please select the server time zone.</source>
-        <target>لطفا سرور منطقه زمانی را انتخاب نمایید.</target>
+        <target>لطفا منطقه زمانی سامانه را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.websitePath.0">
         <source>Relative path to the Contao directory</source>
@@ -59,11 +59,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.0">
         <source>Character set</source>
-        <target>مجموعه کاراکتر</target>
+        <target>مجموعه نویسه</target>
       </trans-unit>
       <trans-unit id="tl_settings.characterSet.1">
         <source>It is recommended to use UTF-8, so special characters are displayed correctly.</source>
-        <target>استفاده از UTF-8 به خاطر اینکه کاراکترهای ویژه درست نمایش داده می‌شوند توصیه می‌شود.</target>
+        <target>استفاده از UTF-8 به خاطر اینکه نویسه‌های ویژه درست نمایش داده می‌شوند توصیه می‌شود.</target>
       </trans-unit>
       <trans-unit id="tl_settings.disableCron.0">
         <source>Disable the command scheduler</source>
@@ -91,15 +91,15 @@
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.0">
         <source>Items per page</source>
-        <target>موردها در هر صفحه</target>
+        <target>موردها در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_settings.resultsPerPage.1">
         <source>Here you can define the number of items per page in the back end.</source>
-        <target>اینجا می‌توانید تعداد آیتم در صفحه بخش مدیریت را تعریف نمایید.</target>
+        <target>اینجا می‌توانید تعداد آیتم در برگه بخش مدیریت را تعریف نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.0">
         <source>Maximum items per page</source>
-        <target>بیشترین موردها در هر صفحه</target>
+        <target>بیشترین موردها در هر برگه</target>
       </trans-unit>
       <trans-unit id="tl_settings.maxResultsPerPage.1">
         <source>This overall limit takes effect if a user chooses the &quot;show all records&quot; option.</source>
@@ -139,11 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.0">
         <source>Trusted proxy servers</source>
-        <target>سرورهای پروکسی قابل اعتماد</target>
+        <target>سامانه‌های پروکسی قابل اعتماد</target>
       </trans-unit>
       <trans-unit id="tl_settings.proxyServerIps.1">
         <source>Here you can enter a comma separated list of trusted proxy server IP addresses.</source>
-        <target>اینجا می‌توانید فهرست جداشده با کاما از نشانی‌های IP سرور پروکسی قابل اعتماد را وارد نمایید.</target>
+        <target>اینجا می‌توانید فهرست جداشده با کاما از نشانی‌های IP سامانه پروکسی قابل اعتماد را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.0">
         <source>SSL proxy domain</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sslProxyDomain.1">
         <source>If your website is available via an SSL proxy server, please enter its domain here (e.g. &lt;em&gt;sslsites.de&lt;/em&gt;).</source>
-        <target>اگر وب‌سایت شما از طریق سرور پروکسی SSL قابل دسترسی است، لطفا دامنه (مثلا &lt;em&gt;sslsites.de&lt;/em&gt;) آن را اینجا وارد نمایید.</target>
+        <target>اگر تارنما شما از طریق سامانه پروکسی SSL قابل دسترسی است، لطفا دامنه (مثلا &lt;em&gt;sslsites.de&lt;/em&gt;) آن را اینجا وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.privacyAnonymizeIp.0">
         <source>Anonymize IP addresses</source>
@@ -191,7 +191,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.doNotRedirectEmpty.1">
         <source>For an empty URL display the website instead of redirecting to the language root page (not recommended).</source>
-        <target>برای نشانی وب خالی، وب‌سایت را به جای بازگردانی به صفحه ریشه زبانی، نمایش می‌دهد (توصیه نمی‌شود).</target>
+        <target>برای نشانی وب خالی، تارنما را به جای بازگردانی به برگه ریشه زبانی، نمایش می‌دهد (توصیه نمی‌شود).</target>
       </trans-unit>
       <trans-unit id="tl_settings.useAutoItem.0">
         <source>Enable auto_item</source>
@@ -207,7 +207,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.disableAlias.1">
         <source>Use the numeric ID of a page or article instead of its alias.</source>
-        <target>استفاده از شناسه عددی صفحه با مقاله به جای اسم مستعارش</target>
+        <target>استفاده از شناسه عددی برگه با نوشته به جای اسم مستعارش</target>
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.0">
         <source>Enable folder URLs</source>
@@ -215,7 +215,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.folderUrl.1">
         <source>Here you can enable folder-style page aliases like &lt;em&gt;docs/install/download.html&lt;/em&gt; instead of &lt;em&gt;docs-install-download.html&lt;/em&gt;.</source>
-        <target>در اینجا می‌توانید نام مستعار صفحه شبیه-پوشه مانند &lt;em&gt;docs/install/download.html&lt;/em&gt; را به جای &lt;em&gt;docs-install-download.html&lt;/em&gt; فعال نمایید.</target>
+        <target>در اینجا می‌توانید نام مستعار برگه شبیه-پوشه مانند &lt;em&gt;docs/install/download.html&lt;/em&gt; را به جای &lt;em&gt;docs-install-download.html&lt;/em&gt; فعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.allowedTags.0">
         <source>Allowed HTML tags</source>
@@ -239,7 +239,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.maintenanceMode.1">
         <source>Send a 503 HTTP header and show a maintenance page in the front end.</source>
-        <target>سربرگ اچ‌تی‌پی 503 را ارسال می‌کند و یک صفحه نگهداشت را در وب‌سایت نمایش می‌دهد.</target>
+        <target>سربرگ اچ‌تی‌پی 503 را ارسال می‌کند و یک برگه نگهداشت را در وب‌سایت نمایش می‌دهد.</target>
       </trans-unit>
       <trans-unit id="tl_settings.bypassCache.0">
         <source>Bypass the internal cache</source>
@@ -415,51 +415,51 @@
       </trans-unit>
       <trans-unit id="tl_settings.enableSearch.1">
         <source>Index pages so they can be searched.</source>
-        <target>صفحه‌ها را فهرست می‌کند تا بتوانند جستجو شوند.</target>
+        <target>برگه‌ها را فهرست می‌کند تا بتوانند جستجو شوند.</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.0">
         <source>Index protected pages</source>
-        <target>فهرست کردن صفحه‌های محافظت شده</target>
+        <target>فهرست کردن برگه‌های محافظت شده</target>
       </trans-unit>
       <trans-unit id="tl_settings.indexProtected.1">
         <source>Use this option carefully and always exclude personalized pages from being indexed!</source>
-        <target>این گزینه را با احتیاط استفاده کنید و همیشه صفحه‌های شخصی از فهرست شدن مستثنی کنید.</target>
+        <target>این گزینه را با احتیاط استفاده کنید و همیشه برگه‌های شخصی از فهرست شدن مستثنی کنید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.0">
         <source>Send e-mails via SMTP</source>
-        <target>ارسال ایمیل از طریق SMTP</target>
+        <target>ارسال رایانامه از طریق اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.useSMTP.1">
         <source>Use an SMTP server instead of the PHP mail() function to send e-mails.</source>
-        <target>از یک سرویس دهنده SMTP به جای تابع mail() پی‌اچ‌پی برای ارسال ایمیل استفاده می‌نماید.</target>
+        <target>از یک سامانه اس‌ام‌تی‌پی به جای تابع mail() پی‌اچ‌پی برای ارسال رایانامه استفاده می‌نماید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.0">
         <source>SMTP hostname</source>
-        <target>میزبان SMTP</target>
+        <target>میزبان اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpHost.1">
         <source>Please enter the host name of the SMTP server.</source>
-        <target>نام میزبان سرور SMTP را وارد نمایید.</target>
+        <target>نام میزبان سامانه اس‌ام‌تی‌پی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.0">
         <source>SMTP username</source>
-        <target>نام کاربری SMTP</target>
+        <target>نام کاربری اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpUser.1">
         <source>Here you can enter the SMTP username.</source>
-        <target>می‌توانید نام کاربری SMTP را وارد نمایید</target>
+        <target>اینجا می‌توانید نام کاربری اس‌ام‌تی‌پی را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.0">
         <source>SMTP password</source>
-        <target>گذرواژه SMTP</target>
+        <target>گذرواژه اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPass.1">
         <source>Here you can enter the SMTP password.</source>
-        <target>می‌توانید گذرواژه SMTP را وارد نمایید</target>
+        <target>اینجا می‌توانید گذرواژه اس‌ام‌تی‌پی را وارد نمایید</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.0">
         <source>SMTP encryption</source>
-        <target>رمزگذاری SMTP</target>
+        <target>رمزگذاری اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpEnc.1">
         <source>Here you can choose an encryption method (SSL or TLS).</source>
@@ -467,11 +467,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.0">
         <source>SMTP port number</source>
-        <target>شماره درگاه SMTP</target>
+        <target>شماره درگاه اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.smtpPort.1">
         <source>Please enter the port number of the SMTP server.</source>
-        <target>شماره درگاه سرور SMTP را وارد نمایید.</target>
+        <target>شماره درگاه سامانه اس‌ام‌تی‌پی را وارد نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.0">
         <source>Inactive extensions</source>
@@ -479,7 +479,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.inactiveModules.1">
         <source>Here you can deactivate unneeded extensions.</source>
-        <target>می‌توانید افزونه‌های غیر لازم را غیرفعال نمایید.</target>
+        <target>اینجا می‌توانید افزونه‌های غیر لازم را غیرفعال نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
@@ -487,7 +487,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.1">
         <source>Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).</source>
-        <target>می‌توانید زمان ذخیره‌سازی بازگردانی مراحل را به ثانیه وارد نمایید (۲۴ ساعت = ۸۶۴۰۰ ثانیه).</target>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی بازگردانی مراحل را به ثانیه وارد نمایید (۲۴ ساعت = ۸۶۴۰۰ ثانیه).</target>
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.0">
         <source>Storage time for versions</source>
@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.versionPeriod.1">
         <source>Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).</source>
-        <target>می‌توانید زمان ذخیره‌سازی نگارش‌های مختلف یک رکورد را به ثانیه وارد نمایید (۹۰ روز = ۷۷۷۶۰۰ ثانیه).</target>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی نگارش‌های مختلف یک رکورد را به ثانیه وارد نمایید (۹۰ روز = ۷۷۷۶۰۰ ثانیه).</target>
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.0">
         <source>Storage time for log entries</source>
@@ -503,7 +503,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.logPeriod.1">
         <source>Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).</source>
-        <target>می‌توانید زمان ذخیره‌سازی ورودی‌های گزارش را به ثانیه وارد نمایید (۱۴ روز = ۱۲۰۹۶۰۰ ثانیه).</target>
+        <target>اینجا می‌توانید زمان ذخیره‌سازی ورودی‌های گزارش را به ثانیه وارد نمایید (۱۴ روز = ۱۲۰۹۶۰۰ ثانیه).</target>
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.0">
         <source>Session timeout</source>
@@ -511,7 +511,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.sessionTimeout.1">
         <source>Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).</source>
-        <target>می‌توانید بیشترین زمان یک نشست  را به ثانیه وارد نمایید (۶۰ دقیقه = ۳۶۰۰ ثانیه).</target>
+        <target>اینجا می‌توانید بیشترین زمان یک نشست  را به ثانیه وارد نمایید (۶۰ دقیقه = ۳۶۰۰ ثانیه).</target>
       </trans-unit>
       <trans-unit id="tl_settings.autologin.0">
         <source>Auto login period</source>
@@ -519,23 +519,23 @@
       </trans-unit>
       <trans-unit id="tl_settings.autologin.1">
         <source>Here you can set the front end auto login period (90 days = 7776000 seconds).</source>
-        <target>می‌توانید دوره ورود خودکار وب‌سایت را تنظیم نمایید (۹۰ روز = ۷۷۷۶۰۰۰ ثانیه).</target>
+        <target>اینجا می‌توانید دوره ورود خودکار وب‌سایت را تنظیم نمایید (۹۰ روز = ۷۷۷۶۰۰۰ ثانیه).</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.0">
         <source>Default page owner</source>
-        <target>صاحب پیش‌فرض صفحه</target>
+        <target>صاحب پیش‌فرض برگه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultUser.1">
         <source>Here you can select a user as the default owner of a page.</source>
-        <target>می‌توانید کاربری را به عنوان صاحب پیش‌فرض هر صفحه انتخاب نمایید.</target>
+        <target>اینجا می‌توانید کاربری را به عنوان صاحب پیش‌فرض هر برگه انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.0">
         <source>Default page group</source>
-        <target>گروه پیش‌فرض صفحه</target>
+        <target>گروه پیش‌فرض برگه</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultGroup.1">
         <source>Here you can select a group as the default owner of a page.</source>
-        <target>می‌توانید گروهی را به عنوان صاحب پیش‌فرض هر صفحه انتخاب نمایید.</target>
+        <target>اینجا می‌توانید گروهی را به عنوان صاحب پیش‌فرض هر برگه انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.0">
         <source>Default access rights</source>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.defaultChmod.1">
         <source>Please assign the default access rights for pages and articles.</source>
-        <target>اختصاص قوانین دسترسی پیش‌فرض به صفحه‌ها و مقاله‌ها.</target>
+        <target>اختصاص قوانین دسترسی پیش‌فرض به برگه‌ها و نوشته‌ها.</target>
       </trans-unit>
       <trans-unit id="tl_settings.liveUpdateBase.0">
         <source>Live Update URL</source>
@@ -555,7 +555,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.title_legend">
         <source>Website title</source>
-        <target>عنوان وب‌سایت</target>
+        <target>عنوان تارنما</target>
       </trans-unit>
       <trans-unit id="tl_settings.date_legend">
         <source>Date and time</source>
@@ -599,7 +599,7 @@
       </trans-unit>
       <trans-unit id="tl_settings.smtp_legend">
         <source>SMTP configuration</source>
-        <target>تنظیمات SMTP</target>
+        <target>تنظیمات اس‌ام‌تی‌پی</target>
       </trans-unit>
       <trans-unit id="tl_settings.ftp_legend">
         <source>Safe Mode Hack</source>
@@ -635,11 +635,11 @@
       </trans-unit>
       <trans-unit id="tl_settings.both">
         <source>Use the server and the browser cache</source>
-        <target>استفاده از نهانگاه سرور و مرورگر</target>
+        <target>استفاده از نهانگاه سامانه و مرورگر</target>
       </trans-unit>
       <trans-unit id="tl_settings.server">
         <source>Use only the server cache</source>
-        <target>استفاده فقط از نهانگاه سرور</target>
+        <target>استفاده فقط از نهانگاه سامانه</target>
       </trans-unit>
       <trans-unit id="tl_settings.browser">
         <source>Use only the browser cache</source>

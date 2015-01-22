@@ -67,7 +67,7 @@
       </trans-unit>
       <trans-unit id="tl_news_comments.publish_legend">
         <source>Publish settings</source>
-        <target>Publicatie instellingen</target>
+        <target>Publicatie-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_news_comments.approved">
         <source>Approved</source>

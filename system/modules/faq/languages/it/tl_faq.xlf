@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_faq.answer.1">
         <source>Please enter the answer.</source>
-        <target>Inserisci una risposta per cortesia.</target>
+        <target>Inserisci una risposta.</target>
       </trans-unit>
       <trans-unit id="tl_faq.addImage.0">
         <source>Add an image</source>

@@ -171,15 +171,15 @@
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.0">
         <source>Assign a layout</source>
-        <target>Opmaak toewijzen</target>
+        <target>Lay-out toewijzen</target>
       </trans-unit>
       <trans-unit id="tl_page.includeLayout.1">
         <source>Assign a page layout to the page and its subpages.</source>
-        <target>Wijs een opmaak toe aan een pagina en onderliggende subpagina's.</target>
+        <target>Wijs een lay-out toe aan een pagina en onderliggende subpagina's.</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.0">
         <source>Page layout</source>
-        <target>Pagina opmaak</target>
+        <target>Pagina-lay-out</target>
       </trans-unit>
       <trans-unit id="tl_page.layout.1">
         <source>You can manage page layouts with the &quot;themes&quot; module.</source>
@@ -187,11 +187,11 @@
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.0">
         <source>Mobile page layout</source>
-        <target>Pagina opmaak voor mobiel</target>
+        <target>Pagina-lay-out voor mobiel</target>
       </trans-unit>
       <trans-unit id="tl_page.mobileLayout.1">
         <source>This layout will be used if the visitor uses a mobile device.</source>
-        <target>Deze opmaak zal worden gebruikt als de bezoeker een mobiele telefoon gebruikt.</target>
+        <target>Deze lay-out zal worden gebruikt als de bezoeker een mobiele telefoon gebruikt.</target>
       </trans-unit>
       <trans-unit id="tl_page.includeCache.0">
         <source>Set cache timeout</source>
@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="tl_page.layout_legend">
         <source>Layout settings</source>
-        <target>Layout instellingen</target>
+        <target>Lay-out-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_page.cache_legend">
         <source>Cache settings</source>
@@ -379,7 +379,7 @@
       </trans-unit>
       <trans-unit id="tl_page.expert_legend">
         <source>Expert settings</source>
-        <target>Expert instellingen</target>
+        <target>Expert-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_page.tabnav_legend">
         <source>Keyboard navigation</source>
@@ -387,7 +387,7 @@
       </trans-unit>
       <trans-unit id="tl_page.publish_legend">
         <source>Publish settings</source>
-        <target>Publiceer instellingen</target>
+        <target>Publicatie-instellingen</target>
       </trans-unit>
       <trans-unit id="tl_page.permanent">
         <source>301 Permanent redirect</source>

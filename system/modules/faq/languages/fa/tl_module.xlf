@@ -3,19 +3,19 @@
     <body>
       <trans-unit id="tl_module.faq_categories.0">
         <source>FAQ categories</source>
-        <target>دسته‌های FAQ</target>
+        <target>دسته‌های پرسش و پاسخ</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_categories.1">
         <source>Please select one or more FAQ categories.</source>
-        <target>لطفا یک یا چند دسته FAQ را انتخاب نمایید.</target>
+        <target>لطفا یک یا چند دسته پرسش و پاسخ را انتخاب نمایید.</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.0">
         <source>FAQ reader module</source>
-        <target>ماژول FAQ خوان</target>
+        <target>ماژول پرسش و پاسخ خوان</target>
       </trans-unit>
       <trans-unit id="tl_module.faq_readerModule.1">
         <source>Automatically switch to the FAQ reader if an item has been selected.</source>
-        <target>اگر یک آیتم انتخاب شده باشد به FAQ خوان تعویض خواهد شد.</target>
+        <target>اگر یک آیتم انتخاب شده باشد به پرسش و پاسخ خوان تعویض خواهد شد.</target>
       </trans-unit>
     </body>
   </file>

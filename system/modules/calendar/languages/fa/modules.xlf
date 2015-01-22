@@ -7,11 +7,11 @@
       </trans-unit>
       <trans-unit id="MOD.calendar.1">
         <source>Manage events and display them in a calendar or event list</source>
-        <target>مدیریت رویدادها و نمایش آنها در فهرست تقویم یا رویداد</target>
+        <target>مدیریت رویدادها و نمایش آنها در فهرست سالنما یا رویداد</target>
       </trans-unit>
       <trans-unit id="MOD.tl_calendar_feed">
         <source>Calendar feeds</source>
-        <target>خوراک‌های تقویم</target>
+        <target>خوراک‌های سالنما</target>
       </trans-unit>
       <trans-unit id="FMD.events">
         <source>Events</source>
@@ -19,11 +19,11 @@
       </trans-unit>
       <trans-unit id="FMD.calendar.0">
         <source>Calendar</source>
-        <target>تقویم</target>
+        <target>سالنما</target>
       </trans-unit>
       <trans-unit id="FMD.calendar.1">
         <source>Adds a calendar to the page</source>
-        <target>یک تقویم به صفحه اضافه می‌کند</target>
+        <target>یک سالنما به برگه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.eventlist.0">
         <source>Event list</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="FMD.eventlist.1">
         <source>Adds a list of events to the page</source>
-        <target>فهرست رویدادها را به صفحه اضافه می‌کند</target>
+        <target>فهرست رویدادها را به برگه اضافه می‌کند</target>
       </trans-unit>
       <trans-unit id="FMD.eventreader.0">
         <source>Event reader</source>

@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="CTE.comments.1">
         <source>Adds a comment form to the page</source>
-        <target>افزودن یک فرم دیدگاه به صفحه.</target>
+        <target>افزودن یک فرم دیدگاه به برگه.</target>
       </trans-unit>
       <trans-unit id="FMD.comments.0">
         <source>Comments</source>

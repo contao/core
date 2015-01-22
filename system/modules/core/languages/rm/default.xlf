@@ -1146,20 +1146,20 @@
         <target>Data agiuntà: %s</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.0">
-        <source>Last login</source>
+        <source>Previous login</source>
         <target>Ultima annunzia</target>
       </trans-unit>
       <trans-unit id="MSC.lastLogin.1">
-        <source>Last login: %s</source>
+        <source>Previous login: %s</source>
         <target>Ultima annunzia: %s</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.0">
-        <source>Current login</source>
-        <target>Annunzia actuala</target>
+        <source>Last login</source>
+        <target>Ultima annunzia</target>
       </trans-unit>
       <trans-unit id="MSC.currentLogin.1">
-        <source>Current login: %s</source>
-        <target>Annunzia actuala: %s</target>
+        <source>Last login: %s</source>
+        <target>Ultima annunzia: %s</target>
       </trans-unit>
       <trans-unit id="MSC.loginCount">
         <source>Login attempts</source>

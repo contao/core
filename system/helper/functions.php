@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -138,6 +136,8 @@ function show_help_message()
  */
 function die_nicely($strTemplate, $strFallback)
 {
+	header('Content-type: text/html; charset=utf-8');
+
 	if (file_exists(TL_ROOT . "/templates/$strTemplate.html5"))
 	{
 		include TL_ROOT . "/templates/$strTemplate.html5";

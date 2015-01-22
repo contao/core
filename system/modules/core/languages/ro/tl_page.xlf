@@ -139,9 +139,11 @@
       </trans-unit>
       <trans-unit id="tl_page.useSSL.0">
         <source>Use HTTPS</source>
+        <target>Foloseşte HTTPS</target>
       </trans-unit>
       <trans-unit id="tl_page.useSSL.1">
         <source>Generate the URLs with &lt;em&gt;https://&lt;/em&gt; (e.g. in sitemaps).</source>
+        <target>Generează URL-uri cu &lt;em&gt;https://&lt;/em&gt; (de ex. în sitemap).</target>
       </trans-unit>
       <trans-unit id="tl_page.autoforward.0">
         <source>Forward to another page</source>

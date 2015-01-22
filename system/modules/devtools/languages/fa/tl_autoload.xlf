@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_autoload.emptySelection">
         <source>Please select at least one module!</source>
-        <target>لطفا حداقل یک ماژول را انتخاب نمایید!</target>
+        <target>لطفا دست‌کم یک ماژول را انتخاب نمایید!</target>
       </trans-unit>
       <trans-unit id="tl_autoload.autoloadExists">
         <source>Module &quot;%s&quot; has an autoload.php file already. Do you want to override?</source>

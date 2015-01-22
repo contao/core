@@ -203,7 +203,7 @@
       </trans-unit>
       <trans-unit id="tl_repository.orderby">
         <source>Order by</source>
-        <target>Ordina per</target>
+        <target>Ordinamento</target>
       </trans-unit>
       <trans-unit id="tl_repository.otherlanguages">
         <source>Other languages</source>
