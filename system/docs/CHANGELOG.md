@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.2 (2015-XX-XX)
+--------------------------
+
+### Fixed
+Consider the error reporting level in the install tool (see #7593).
+
+
 Version 3.4.2 (2015-01-22)
 --------------------------
 
