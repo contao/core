@@ -299,7 +299,8 @@ class Environment
 	 */
 	protected static function httpXForwardedHost()
 	{
-		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
+		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', 
+			isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : '');
 	}
 
 
@@ -310,7 +311,9 @@ class Environment
 	 */
 	protected static function ssl()
 	{
-		return ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1);
+		return (isset($_SERVER['SSL_SESSION_ID']) 
+			|| (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+			|| (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 1));
 	}
 
 
