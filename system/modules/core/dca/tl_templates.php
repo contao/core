@@ -103,6 +103,21 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'href'                => 'act=source',
 				'icon'                => 'editor.gif',
 				'button_callback'     => array('tl_templates', 'editSource')
+			),
+			'diff' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['diff'],
+				'href'                => 'key=diff',
+				'icon'                => 'diff.gif',
+				'button_callback'     => function($row, $href, $label, $title, $icon, $attributes) {
+					return sprintf('<a href="%s" title="%s" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'%s\',\'url\':this.href});return false"%s>%s</a>',
+						$this->addToUrl($href . '&amp;popup=1&amp;id=' . $row['id']),
+						specialchars($title),
+						specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_templates']['diff'][1], $row['id']))),
+						$attributes,
+						\Image::getHtml($icon, $label)
+					);
+				}
 			)
 		)
 	),
@@ -336,6 +351,120 @@ class tl_templates extends Backend
 </form>';
 	}
 
+	/**
+	 * Create a diff from the current to the original template
+	 *
+	 * @param   \DataContainer $dc
+	 * @return  string
+	 */
+	public function diffTemplate(\DataContainer $dc)
+	{
+		$strCurrentPath = $dc->id;
+		$strName = pathinfo($strCurrentPath, PATHINFO_FILENAME);
+		$strExtension = pathinfo($strCurrentPath, PATHINFO_EXTENSION);
+		$arrTemplates = TemplateLoader::getFiles();
+		$blnOverridesAnotherTpl = isset($arrTemplates[$strName]);
+		$strPrefix = '';
+		if ($pos = strpos($strName, '_'))
+		{
+			$strPrefix = substr($strName, 0, $pos + 1);
+		}
+
+		// By default it's the original template to compare against
+		$strCompareName = $strName;
+		$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+
+		// Compare to itself if no original template available
+		if (!$blnOverridesAnotherTpl)
+		{
+			$strComparePath = $strCurrentPath;
+		}
+
+		// User selected template to compare against
+		if (\Input::post('to') && isset($arrTemplates[\Input::post('to')]))
+		{
+			$strCompareName = \Input::post('to');
+			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+		}
+
+		$objCurrentFile = new \File($strCurrentPath, true);
+		$objCompareFile = new \File($strComparePath, true);
+
+		// Abort if either does not exist
+		if (!$objCurrentFile->exists() || !$objCompareFile->exists())
+		{
+			$this->redirect('contao/main.php?act=error');
+		}
+
+		$objDiff = new \Diff(
+			$objCompareFile->getContentAsArray(),
+			$objCurrentFile->getContentAsArray()
+		);
+
+		$objTemplate = new \BackendTemplate('be_diff');
+
+		if ($blnOverridesAnotherTpl)
+		{
+			$strMsg = sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'],
+				$strCurrentPath,
+				$strComparePath
+			);
+		}
+		else
+		{
+			$strMsg = sprintf($GLOBALS['TL_LANG']['tl_templates']['standaloneTpl'],
+				$strCurrentPath
+			);
+		}
+
+
+		$strBuffer = sprintf('<p class="tl_info">%s</p><br>',
+			$strMsg
+		);
+
+		$strDiff = $objDiff->Render(new \DiffRenderer());
+
+		// Identical versions
+		if ($strDiff == '')
+		{
+			$strBuffer .= '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
+		}
+		else
+		{
+			$strBuffer .= $strDiff;
+		}
+
+		// Templates to compare against
+		$arrComparable = array();
+		$intPrefixLength = strlen($strPrefix);
+		foreach ($arrTemplates as $k => $v)
+		{
+			if (substr($k, 0, $intPrefixLength) === $strPrefix)
+			{
+				$arrComparable[$k] = array
+				(
+					'version'	=> $k,
+					'info'		=> $k
+				);
+			}
+		}
+
+		// Template variables
+		$objTemplate->staticFrom = $strCurrentPath;
+		$objTemplate->versions = $arrComparable;
+		$objTemplate->to = $strCompareName;
+		$objTemplate->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
+		$objTemplate->content = $strBuffer;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
+		$objTemplate->charset = \Config::get('characterSet');
+
+		\Config::set('debugMode', false);
+
+		return $objTemplate->parse();
+	}
 
 	/**
 	 * Recursively scan the templates directory and return all folders as array
