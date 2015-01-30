@@ -1473,8 +1473,8 @@ class StyleSheets extends \Backend
 				continue;
 			}
 
-			// Handle important definitions
-			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false)
+			// Handle keywords, variables and functions (see #7448)
+			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false || strpos($strDefinition, '$') !== false || strpos($strDefinition, '(') !== false)
 			{
 				$arrSet['own'][] = $strDefinition;
 				continue;

@@ -17,7 +17,7 @@ require dirname(__DIR__) . '/system/initialize.php';
 
 // Show error messages
 @ini_set('display_errors', 1);
-@error_reporting(E_ALL|E_STRICT);
+error_reporting(Config::get('errorReporting'));
 
 // Run the controller
 $controller = new BackendInstall;
