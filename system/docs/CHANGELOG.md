@@ -7,6 +7,9 @@ Version 3.4.3 (2015-XX-XX)
 ### Fixed
 Consider the error reporting level in the install tool (see #7593).
 
+### Fixed
+Handle variables and functions when importing style sheets (see #7448).
+
 
 Version 3.4.2 (2015-01-22)
 --------------------------
