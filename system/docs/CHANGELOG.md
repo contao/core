@@ -5,6 +5,9 @@ Version 3.2.18 (2015-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle variables and functions when importing style sheets (see #7448).
+
+### Fixed
 Fix an infinite recursion problem in the `FilesModel` class (see #7588).
 
 
