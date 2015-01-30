@@ -1,6 +1,16 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.18 (2015-01-30)
+---------------------------
+
+### Fixed
+Handle variables and functions when importing style sheets (see #7448).
+
+### Fixed
+Fix an infinite recursion problem in the `FilesModel` class (see #7588).
+
+
 Version 3.2.17 (2015-01-22)
 ---------------------------
 
