@@ -371,15 +371,35 @@ class Environment
 			$arrIps = array($strXip);
 		}
 
-		$arrIps = array_reverse($arrIps);
+		// Filter away the trusted IPs or IP ranges
+		$arrIps = array_filter($arrIps, function($ip) use ($arrTrusted)
+		{
+			foreach ($arrTrusted as $trusted)
+			{
+				if (strpos($trusted, '/') !== false)
+				{
+					list ($subnet, $bits) = explode('/', $trusted);
+					$ip     = ip2long($ip);
+					$subnet = ip2long($subnet);
+					$mask   = -1 << (32 - $bits);
+					$subnet &= $mask;
+
+					if (($ip & $mask) == $subnet) {
+						return false;
+					}
+				}
+				elseif ($ip == $trusted)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		});
 
 		// Return the first untrusted IP address (see #5830)
-		foreach ($arrIps as $strIp)
-		{
-			if (!in_array($strIp, $arrTrusted))
-			{
-				return substr($strIp, 0, 64);
-			}
+		if (!empty($arrIps)) {
+			return substr(array_pop($arrIps), 0, 64);
 		}
 
 		// If all X-Forward-For IPs are trusted, return the remote address
