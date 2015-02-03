@@ -509,6 +509,16 @@ class Email
 		// Set the return path (see #5004)
 		$this->objMessage->setReturnPath($this->strSender);
 
+		// HOOK: manipulate the message
+		if (isset($GLOBALS['TL_HOOKS']['manipulateMailMessage']) && is_array($GLOBALS['TL_HOOKS']['manipulateMailMessage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['manipulateMailMessage'] as $callback)
+			{
+				$objHook = (in_array('getInstance', get_class_methods($callback[0]))) ? call_user_func(array($callback[0], 'getInstance')) : new $callback[0]();
+				$objHook->$callback[1]($this->objMessage, $this);
+			}
+		}
+
 		// Send e-mail
 		$intSent = self::$objMailer->send($this->objMessage, $this->arrFailures);
 
