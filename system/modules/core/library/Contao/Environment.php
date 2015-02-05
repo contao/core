@@ -374,17 +374,18 @@ class Environment
 		// Filter away the trusted IPs or IP ranges
 		$arrIps = array_filter($arrIps, function($ip) use ($arrTrusted)
 		{
+			$ip_long = ip2long($ip);
+
 			foreach ($arrTrusted as $trusted)
 			{
 				if (strpos($trusted, '/') !== false)
 				{
 					list ($subnet, $bits) = explode('/', $trusted);
-					$ip     = ip2long($ip);
 					$subnet = ip2long($subnet);
 					$mask   = -1 << (32 - $bits);
 					$subnet &= $mask;
 
-					if (($ip & $mask) == $subnet) {
+					if (($ip_long & $mask) == $subnet) {
 						return false;
 					}
 				}
