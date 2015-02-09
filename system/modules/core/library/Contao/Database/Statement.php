@@ -24,6 +24,11 @@ namespace Contao\Database;
  *     $stmt->limit(10);
  *     $res = $stmt->execute('London');
  *
+ * @property string  $query        The query string
+ * @property string  $error        The last error message
+ * @property integer $affectedRows The number of affected rows
+ * @property integer $insertId     The last insert ID
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Statement
@@ -170,6 +175,7 @@ abstract class Statement
 		}
 
 		$this->strQuery = implode('', $arrChunks);
+
 		return $this;
 	}
 
@@ -215,6 +221,7 @@ abstract class Statement
 		}
 
 		$this->strQuery = str_replace('%p', $strQuery, $this->strQuery);
+
 		return $this;
 	}
 
@@ -240,6 +247,7 @@ abstract class Statement
 		}
 
 		$this->limit_query($intRows, $intOffset);
+
 		return $this;
 	}
 
@@ -247,7 +255,7 @@ abstract class Statement
 	/**
 	 * Execute the query and return the result object
 	 *
-	 * @return \Database\Result The result object
+	 * @return \Database\Result|object The result object
 	 */
 	public function execute()
 	{
@@ -259,6 +267,7 @@ abstract class Statement
 		}
 
 		$this->replaceWildcards($arrParams);
+
 		return $this->query();
 	}
 
@@ -299,6 +308,7 @@ abstract class Statement
 		if (!is_resource($this->resResult) && !is_object($this->resResult))
 		{
 			$this->debugQuery();
+
 			return $this;
 		}
 

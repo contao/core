@@ -25,6 +25,11 @@ namespace Contao\Database;
  *         print_r($result->row());
  *     }
  *
+ * @property string  $query      The query string
+ * @property integer $numRows    The number of rows in the result
+ * @property integer $numFields  The number of fields in the result
+ * @property boolean $isModified True if the result has been modified
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Result
@@ -465,7 +470,7 @@ abstract class Result
 	 *
 	 * @param integer $intOffset The field offset
 	 *
-	 * @return array An array with the column information
+	 * @return array|object An array or object with the column information
 	 */
 	abstract protected function fetch_field($intOffset);
 

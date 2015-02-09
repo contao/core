@@ -34,7 +34,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 	/**
 	 * Models
-	 * @var array
+	 * @var \Model[]
 	 */
 	protected $arrModels = array();
 
@@ -128,7 +128,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 * @param \Database\Result $objResult The database result object
 	 * @param string           $strTable  The table name
 	 *
-	 * @return \Model\Collection The model collection
+	 * @return static The model collection
 	 */
 	public static function createFromDbResult(\Database\Result $objResult, $strTable)
 	{
@@ -137,6 +137,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 
 		while ($objResult->next())
 		{
+			/** @var \Model $strClass */
 			$objModel = \Model\Registry::getInstance()->fetch($strTable, $objResult->{$strClass::getPk()});
 
 			if ($objModel !== null)
@@ -175,7 +176,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 *
 	 * @param array $arrData The row data as array
 	 *
-	 * @return \Model\Collection The model collection object
+	 * @return static The model collection object
 	 */
 	public function setRow(array $arrData)
 	{
@@ -185,6 +186,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		$this->arrModels[$this->intIndex]->setRow($arrData);
+
 		return $this;
 	}
 
@@ -192,7 +194,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Save the current model
 	 *
-	 * @return \Model\Collection The model collection object
+	 * @return static The model collection object
 	 */
 	public function save()
 	{
@@ -202,6 +204,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		$this->arrModels[$this->intIndex]->save();
+
 		return $this;
 	}
 
@@ -225,7 +228,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Return the models as array
 	 *
-	 * @return array An array of models
+	 * @return \Model[] An array of models
 	 */
 	public function getModels()
 	{
@@ -238,7 +241,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	 *
 	 * @param string $strKey The property name
 	 *
-	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
+	 * @return \Model|static The model or a model collection if there are multiple rows
 	 */
 	public function getRelated($strKey)
 	{
@@ -265,11 +268,12 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Go to the first row
 	 *
-	 * @return \Model\Collection The model collection object
+	 * @return static The model collection object
 	 */
 	public function first()
 	{
 		$this->intIndex = 0;
+
 		return $this;
 	}
 
@@ -277,7 +281,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Go to the previous row
 	 *
-	 * @return \Model\Collection|false The model collection object or false if there is no previous row
+	 * @return static|false The model collection object or false if there is no previous row
 	 */
 	public function prev()
 	{
@@ -287,6 +291,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		--$this->intIndex;
+
 		return $this;
 	}
 
@@ -310,7 +315,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Go to the next row
 	 *
-	 * @return \Model\Collection|boolean The model collection object or false if there is no next row
+	 * @return static|boolean The model collection object or false if there is no next row
 	 */
 	public function next()
 	{
@@ -320,6 +325,7 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 		}
 
 		++$this->intIndex;
+
 		return $this;
 	}
 
@@ -327,11 +333,12 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Go to the last row
 	 *
-	 * @return \Model\Collection The model collection object
+	 * @return static The model collection object
 	 */
 	public function last()
 	{
 		$this->intIndex = count($this->arrModels) - 1;
+
 		return $this;
 	}
 
@@ -339,11 +346,12 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Reset the model
 	 *
-	 * @return \Model\Collection The model collection object
+	 * @return static The model collection object
 	 */
 	public function reset()
 	{
 		$this->intIndex = -1;
+
 		return $this;
 	}
 

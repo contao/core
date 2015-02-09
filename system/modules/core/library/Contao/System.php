@@ -28,6 +28,10 @@ namespace Contao;
  *         }
  *     }
  *
+ * @property Database $Database The database object
+ * @property Files    $Files    The files object
+ * @property Session  $Session  The session object
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class System
@@ -713,7 +717,7 @@ abstract class System
 			}
 		};
 
-		// Add the labels
+		/** @var \DOMElement $unit */
 		foreach ($units as $unit)
 		{
 			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');

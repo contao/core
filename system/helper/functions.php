@@ -87,7 +87,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
  * in the application file "config/error.php".
  * @param Exception
  */
-function __exception($e)
+function __exception(Exception $e)
 {
 	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s\n%s",
 					get_class($e),

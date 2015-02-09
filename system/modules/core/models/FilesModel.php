@@ -17,6 +17,8 @@ namespace Contao;
  * The files themselves reside in the files directory. This class only handles
  * the corresponding database entries (database aided file system).
  *
+ * @method static findByPath()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FilesModel extends \Model

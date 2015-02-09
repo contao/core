@@ -24,6 +24,8 @@ namespace Contao;
  *     $stmt = $db->prepare("SELECT * FROM tl_user WHERE id=?");
  *     $res  = $stmt->execute(4);
  *
+ * @property string $error The last error message
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Database
@@ -58,6 +60,12 @@ abstract class Database
 	 * @var array
 	 */
 	protected $arrCache = array();
+
+	/**
+	 * List tables query
+	 * @var string
+	 */
+	protected $strListTables = "SHOW TABLES FROM `%s`";
 
 
 	/**
@@ -179,7 +187,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 */
 	public function execute($strQuery)
 	{
@@ -192,7 +200,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 */
 	public function query($strQuery)
 	{
@@ -249,6 +257,7 @@ abstract class Database
 		}
 
 		$this->arrCache[$strDatabase] = $arrReturn;
+
 		return $this->arrCache[$strDatabase];
 	}
 
@@ -289,6 +298,7 @@ abstract class Database
 		}
 
 		$this->arrCache[$strTable] = $this->list_fields($strTable);
+
 		return $this->arrCache[$strTable];
 	}
 
