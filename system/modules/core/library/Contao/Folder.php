@@ -23,6 +23,13 @@ namespace Contao;
  *         $folder->purge();
  *     }
  *
+ * @property string  $hash     The MD5 hash
+ * @property string  $name     The folder name
+ * @property string  $basename Alias of $name
+ * @property string  $path     The folder path
+ * @property string  $value    Alias of $path
+ * @property integer $size     The folder size
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Folder extends \System
@@ -115,12 +122,6 @@ class Folder extends \System
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * hash: the folder's MD5 hash
-	 * * path: the path to the folder
-	 * * size: the folder size
 	 *
 	 * @param string $strKey The property name
 	 *

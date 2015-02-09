@@ -24,6 +24,34 @@ namespace Contao;
  *
  *     File::putContent('test.txt', 'This is a test');
  *
+ * @property integer  $size        The file size
+ * @property integer  $filesize    Alias of $size
+ * @property string   $name        The file name and extension
+ * @property string   $basename    Alias of $name
+ * @property string   $dirname     The path of the parent folder
+ * @property string   $extension   The file extension
+ * @property string   $filename    The file name without extension
+ * @property string   $tmpname     The name of the temporary file
+ * @property string   $path        The file path
+ * @property string   $value       Alias of $path
+ * @property string   $mime        The mime type
+ * @property string   $hash        The MD5 checksum
+ * @property string   $ctime       The ctime
+ * @property string   $mtime       The mtime
+ * @property string   $atime       The atime
+ * @property string   $icon        The mime icon name
+ * @property array    $imageSize   The file dimensions (images only)
+ * @property integer  $width       The file width (images only)
+ * @property integer  $height      The file height (images only)
+ * @property boolean  $isImage     True if the file is an image
+ * @property boolean  $isGdImage   True if the file can be handled by the GDlib
+ * @property boolean  $isSvgImage  True if the file is an SVG image
+ * @property integer  $channels    The number of channels (images only)
+ * @property integer  $bits        The number of bits for each color (images only)
+ * @property boolean  $isRgbImage  True if the file is an RGB image
+ * @property boolean  $isCmykImage True if the file is a CMYK image
+ * @property resource $handle      The file handle (returned by fopen())
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class File extends \System
@@ -141,32 +169,6 @@ class File extends \System
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * size:        the file size
-	 * * name:        the file name and extension
-	 * * dirname:     the path of the parent folder
-	 * * extension:   the file extension
-	 * * filename:    the file name without extension
-	 * * mime:        the file's mime type
-	 * * hash:        the file's MD5 checksum
-	 * * ctime:       the file's ctime
-	 * * mtime:       the file's mtime
-	 * * atime:       the file's atime
-	 * * icon:        the name of the corresponding mime icon
-	 * * path:        the path to the file
-     * * imageSize:   the file dimensions (images only)
-	 * * width:       the file width (images only)
-	 * * height:      the file height (images only)
-	 * * isImage:     true if the file is an image
-	 * * isGdImage:   true if the file can be handled by the GDlib
-     * * isSvgImage:  true if the file is an SVG image
-	 * * channels:    the number of channels (images only)
-	 * * bits:        the number of bits for each color (images only)
-	 * * isRgbImage:  true if the file is an RGB image
-	 * * isCmykImage: true if the file is a CMYK image
-	 * * handle:      the file handle (returned by fopen())
 	 *
 	 * @param string $strKey The property name
 	 *

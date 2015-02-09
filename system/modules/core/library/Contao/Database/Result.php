@@ -140,13 +140,6 @@ abstract class Result
 	/**
 	 * Return an object property or a field of the current row
 	 *
-	 * Supported parameters:
-	 *
-	 * * query:      the corresponding query string
-	 * * numRows:    the number of rows of the current result
-	 * * numFields:  the number of fields of the current result
-	 * * isModified: true if the row has been modified
-	 *
 	 * @param string $strKey The field name
 	 *
 	 * @return mixed|null The field value or null

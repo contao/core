@@ -100,13 +100,6 @@ abstract class Statement
 	/**
 	 * Return an object property
 	 *
-	 * Supported parameters:
-	 *
-	 * * query:        the query string
-	 * * error:        the last error message
-	 * * affectedRows: the number of affected rows
-	 * * insertId:     the last insert ID
-	 *
 	 * @param string $strKey The property name
 	 *
 	 * @return mixed|null The property value or null

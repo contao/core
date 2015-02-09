@@ -24,6 +24,18 @@ namespace Contao;
  *     $email->text = 'Is it me you are looking for?';
  *     $email->sendTo('lionel@richie.com');
  *
+ * @property string  $subject     The e-mail subject
+ * @property string  $text        The text part of the mail
+ * @property string  $html        The HTML part of the mail
+ * @property string  $from        The sender's e-mail address
+ * @property string  $fromName    The sender's name
+ * @property string  $priority    The e-mail priority
+ * @property string  $charset     The e-mail character set
+ * @property string  $imageDir    The base directory to look for internal images
+ * @property boolean $embedImages Whether to embed images inline
+ * @property string  $logFile     The log file path
+ * @property array   $failures    An array of rejected e-mail addresses
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Email
@@ -153,19 +165,6 @@ class Email
 	/**
 	 * Set an object property
 	 *
-	 * Supported keys:
-	 *
-	 * * subject:     the e-mail subject
-	 * * text:        the text part of the mail
-	 * * html:        the HTML part of the mail
-	 * * from:        the sender's e-mail address
-	 * * fromName:    the sender's name
-	 * * priority:    the e-mail priority
-	 * * charset:     the e-mail character set
-	 * * imageDir:    the base directory to look for internal images
-	 * * embedImages: whether to embed images inline
-	 * * logFile:     the log file path
-	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 *
@@ -246,20 +245,6 @@ class Email
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * subject:     the e-mail subject
-	 * * text:        the text part of the mail
-	 * * html:        the HTML part of the mail
-	 * * from:        the sender's e-mail address
-	 * * fromName:    the sender's name
-	 * * priority:    the e-mail priority
-	 * * charset:     the e-mail character set
-	 * * imageDir:    the base directory to look for internal images
-	 * * embedImages: whether to embed images inline
-	 * * logFile:     the log file path
-	 * * failures:    an array of rejected e-mail addresses
 	 *
 	 * @param string $strKey The property name
 	 *
