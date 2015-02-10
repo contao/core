@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Class FormFieldset
  *
+ * @property string  $fsType
+ * @property boolean $tableless
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormFieldset extends \Widget
@@ -48,7 +51,7 @@ class FormFieldset extends \Widget
 		// Return a wildcard in the back end
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			if ($this->fsType == 'fsStart')
 			{

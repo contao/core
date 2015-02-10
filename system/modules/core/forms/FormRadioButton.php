@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Class FormRadioButton
  *
+ * @property boolean $mandatory
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormRadioButton extends \Widget

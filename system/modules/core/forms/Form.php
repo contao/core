@@ -14,6 +14,23 @@ namespace Contao;
 /**
  * Provide methods to handle front end forms.
  *
+ * @property integer $id
+ * @property string  $title
+ * @property string  $formID
+ * @property string  $method
+ * @property boolean $tableless
+ * @property boolean $allowTags
+ * @property string  $attributes
+ * @property boolean $novalidate
+ * @property integer $jumpTo
+ * @property boolean $sendViaEmail
+ * @property boolean $skipEmpty
+ * @property string  $format
+ * @property string  $recipient
+ * @property string  $subject
+ * @property boolean $storeValues
+ * @property string  $targetTable
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Form extends \Hybrid
@@ -46,7 +63,7 @@ class Form extends \Hybrid
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
 			$objTemplate->id = $this->id;
@@ -112,6 +129,7 @@ class Form extends \Hybrid
 
 			foreach ($arrFields as $objField)
 			{
+				/** @var \FormFieldModel $objField */
 				$strClass = $GLOBALS['TL_FFL'][$objField->type];
 
 				// Continue if the class is not defined
@@ -151,6 +169,7 @@ class Form extends \Hybrid
 					}
 				}
 
+				/** @var \Widget $objWidget */
 				$objWidget = new $strClass($arrData);
 				$objWidget->required = $objField->mandatory ? true : false;
 
@@ -243,8 +262,15 @@ class Form extends \Hybrid
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
 		$this->Template->action = \Environment::get('indexFreeRequest');
-		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
 		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';
+		$this->Template->maxFileSize = false;
+
+		if ($hasUpload)
+		{
+			/** @var \FormModel $objModel */
+			$objModel = $this->objModel;
+			$this->Template->maxFileSize = $objModel->getMaxUploadFileSize();
+		}
 
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -368,7 +394,7 @@ class Form extends \Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
-				$objTemplate = new \FrontendTemplate('form_xml');
+				$objTemplate = \FrontendTemplate::create('form_xml');
 
 				$objTemplate->fields = $fields;
 				$objTemplate->charset = \Config::get('characterSet');
@@ -516,7 +542,10 @@ class Form extends \Hybrid
 	 */
 	protected function getMaxFileSize()
 	{
-		return $this->objModel->getMaxUploadFileSize(); // Backwards compatibility
+		/** @var \FormModel $objModel */
+		$objModel = $this->objModel;
+
+		return $objModel->getMaxUploadFileSize(); // Backwards compatibility
 	}
 
 
@@ -542,7 +571,7 @@ class Form extends \Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
-					$objTemplate = new \FrontendTemplate('form_message');
+					$objTemplate = \FrontendTemplate::create('form_message');
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);

@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Class FormHeadline
  *
+ * @property string $text
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormHeadline extends \Widget

@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Class FormFileUpload
  *
+ * @property boolean $mandatory
+ * @property integer $maxlength
+ * @property integer $fSize
+ * @property string  $extensions
+ * @property string  $uploadFolder
+ * @property boolean $doNotOverwrite
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormFileUpload extends \Widget implements \uploadable
@@ -238,6 +245,8 @@ class FormFileUpload extends \Widget implements \uploadable
 
 					// Generate the DB entries
 					$strFile = $strUploadFolder . '/' . $file['name'];
+
+					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPath($strFile);
 
 					// Existing file is being replaced (see #4818)

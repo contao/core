@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Class FormPassword
  *
+ * @property boolean $mandatory
+ * @property integer $maxlength
+ * @property string  $placeholder
+ * @property string  $confirmLabel
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormPassword extends \Widget
