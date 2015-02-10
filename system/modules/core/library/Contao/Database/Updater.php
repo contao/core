@@ -827,6 +827,7 @@ class Updater extends \Controller
 			// Path to UUID
 			else
 			{
+				/** @var \FilesModel $objFile */
 				$objFile = \FilesModel::findByPath($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
@@ -881,6 +882,7 @@ class Updater extends \Controller
 				// Numeric ID to UUID
 				if ($objHelper->isNumeric)
 				{
+					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPk($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}
@@ -888,6 +890,7 @@ class Updater extends \Controller
 				// Path to UUID
 				else
 				{
+					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPath($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}

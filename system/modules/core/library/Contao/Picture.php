@@ -120,6 +120,7 @@ class Picture
 			$picture->setImageSizeItems(\ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order'=>'sorting ASC')));
 		}
 
+		/** @var \FilesModel $fileRecord */
 		$fileRecord = \FilesModel::findByPath($file->path);
 
 		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)

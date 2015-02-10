@@ -248,7 +248,7 @@ abstract class Statement
 	/**
 	 * Execute the query and return the result object
 	 *
-	 * @return \Database\Result|object The result object
+	 * @return \Database\Result The result object
 	 */
 	public function execute()
 	{
