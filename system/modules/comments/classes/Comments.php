@@ -104,8 +104,7 @@ class Comments extends \Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			/** @var \FrontendTemplate|object $objPartial */
-			$objPartial = new \FrontendTemplate($objConfig->template);
+			$objPartial = \FrontendTemplate::create($objConfig->template);
 
 			while ($objComments->next())
 			{
@@ -577,6 +576,7 @@ class Comments extends \Frontend
 		if ($objNotify === null)
 		{
 			$objTemplate->confirm = 'Invalid token';
+
 			return;
 		}
 

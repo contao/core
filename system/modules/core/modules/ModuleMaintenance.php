@@ -60,6 +60,5 @@ class ModuleMaintenance extends \BackendModule
 				$this->Template->content .= $buffer;
 			}
 		}
-
 	}
 }

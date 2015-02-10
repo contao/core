@@ -21,7 +21,7 @@ class ModuleEventlist extends \Events
 
 	/**
 	 * Current date object
-	 * @var integer
+	 * @var \Date
 	 */
 	protected $Date;
 
@@ -40,7 +40,7 @@ class ModuleEventlist extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventlist'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -242,7 +242,7 @@ class ModuleEventlist extends \Events
 				$blnIsLastEvent = true;
 			}
 
-			$objTemplate = new \FrontendTemplate($this->cal_template);
+			$objTemplate = \FrontendTemplate::create($this->cal_template);
 			$objTemplate->setData($event);
 
 			// Month header

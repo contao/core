@@ -34,7 +34,7 @@ class ModuleQuicklink extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['quicklink'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -93,6 +93,7 @@ class ModuleQuicklink extends \Module
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
+			/** @var \PageModel $objPages */
 			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
 		}
 

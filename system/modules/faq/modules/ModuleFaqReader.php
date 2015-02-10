@@ -34,7 +34,7 @@ class ModuleFaqReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqreader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -168,6 +168,7 @@ class ModuleFaqReader extends \Module
 			return;
 		}
 
+		/** @var \FaqCategoryModel $objCategory */
 		$objCategory = $objFaq->getRelated('pid');
 		$this->Template->allowComments = $objCategory->allowComments;
 
@@ -193,6 +194,7 @@ class ModuleFaqReader extends \Module
 		// Notify the author
 		if ($objCategory->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objFaq->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

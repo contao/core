@@ -40,7 +40,7 @@ class ModuleFaqList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqlist'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -87,11 +87,12 @@ class ModuleFaqList extends \Module
 		// Add FAQs
 		while ($objFaq->next())
 		{
+			/** @var \FaqModel $objFaq */
 			$arrTemp = $objFaq->row();
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
-			// Get the FAQ category
+			/** @var \FaqCategoryModel $objPid */
 			$objPid = $objFaq->getRelated('pid');
 
 			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
@@ -130,7 +131,12 @@ class ModuleFaqList extends \Module
 	 */
 	protected function generateFaqLink($objFaq)
 	{
-		$jumpTo = intval($objFaq->getRelated('pid')->jumpTo);
+		/**
+		 * @var \FaqModel         $objFaq
+		 * @var \FaqCategoryModel $objCategory
+		 */
+		$objCategory = $objFaq->getRelated('pid');
+		$jumpTo = intval($objCategory->jumpTo);
 
 		// A jumpTo page is not mandatory for FAQ categories (see #6226) but required for the FAQ list module
 		if ($jumpTo < 1)

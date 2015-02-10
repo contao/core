@@ -363,8 +363,7 @@ class Newsletter extends \Backend
 				$objNewsletter->template = 'mail_default';
 			}
 
-			/** @var \BackendTemplate|object $objTemplate */
-			$objTemplate = new \BackendTemplate($objNewsletter->template);
+			$objTemplate = \BackendTemplate::create($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;

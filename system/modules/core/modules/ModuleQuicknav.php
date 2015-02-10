@@ -34,7 +34,7 @@ class ModuleQuicknav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['quicknav'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -130,6 +130,7 @@ class ModuleQuicknav extends \Module
 
 		while($objSubpages->next())
 		{
+			/** @var \PageModel $objSubpages $_groups */
 			$_groups = deserialize($objSubpages->groups);
 
 			// Override the domain (see #3765)

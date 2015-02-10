@@ -40,7 +40,7 @@ class ModuleBooknav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['booknav'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -154,6 +154,7 @@ class ModuleBooknav extends \Module
 		{
 			while ($objPages->next())
 			{
+				/** @var \PageModel $objPages */
 				$_groups = deserialize($objPages->groups);
 
 				// Do not show protected pages unless a back end or front end user is logged in

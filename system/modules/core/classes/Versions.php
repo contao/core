@@ -437,8 +437,7 @@ class Versions extends \Controller
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
-		/** @var \BackendTemplate|object $objTemplate */
-		$objTemplate = new \BackendTemplate('be_diff');
+		$objTemplate = \BackendTemplate::create('be_diff');
 
 		// Template variables
 		$objTemplate->content = $strBuffer;

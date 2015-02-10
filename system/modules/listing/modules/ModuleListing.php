@@ -40,7 +40,7 @@ class ModuleListing extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['listing'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -369,7 +369,7 @@ class ModuleListing extends \Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new \FrontendTemplate($this->list_info_layout);
+		$this->Template = \FrontendTemplate::create($this->list_info_layout);
 
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';

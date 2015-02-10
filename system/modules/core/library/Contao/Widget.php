@@ -90,8 +90,11 @@ namespace Contao;
  * @property boolean          $isHexColor        The field value is a hex color
  * @property string           $strTable          The table name
  * @property string           $strField          The field name
- * @property string           $xlabel            The field name
- * @property integer          $currentRecord     The field name
+ * @property string           $xlabel
+ * @property integer          $currentRecord
+ * @property integer          $rowClass
+ * @property integer          $rowClassConfirm
+ * @property integer          $storeValues
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

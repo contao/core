@@ -60,6 +60,20 @@ abstract class Template extends \BaseTemplate
 	 *
 	 * @param string $strTemplate    The template name
 	 * @param string $strContentType The content type (defaults to "text/html")
+	 *
+	 * @return static|object The template object
+	 */
+	public static function create($strTemplate='', $strContentType='text/html')
+	{
+		return new static($strTemplate, $strContentType);
+	}
+
+
+	/**
+	 * Create a new template object
+	 *
+	 * @param string $strTemplate    The template name
+	 * @param string $strContentType The content type (defaults to "text/html")
 	 */
 	public function __construct($strTemplate='', $strContentType='text/html')
 	{

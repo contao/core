@@ -34,7 +34,7 @@ class ModuleUnsubscribe extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['unsubscribe'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -65,7 +65,7 @@ class ModuleUnsubscribe extends \Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new \FrontendTemplate($this->nl_template);
+			$this->Template = \FrontendTemplate::create($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -102,6 +102,7 @@ class ModuleUnsubscribe extends \Module
 		{
 			while ($objChannel->next())
 			{
+				/** @var \NewsletterChannelModel $objChannel */
 				$arrChannels[$objChannel->id] = $objChannel->title;
 			}
 		}

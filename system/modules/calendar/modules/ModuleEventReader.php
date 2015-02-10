@@ -34,7 +34,7 @@ class ModuleEventReader extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventreader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -183,7 +183,7 @@ class ModuleEventReader extends \Events
 			}
 		}
 
-		$objTemplate = new \FrontendTemplate($this->cal_template);
+		$objTemplate = \FrontendTemplate::create($this->cal_template);
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
@@ -246,6 +246,7 @@ class ModuleEventReader extends \Events
 			return;
 		}
 
+		/** @var \CalendarModel $objCalendar */
 		$objCalendar = $objEvent->getRelated('pid');
 		$this->Template->allowComments = $objCalendar->allowComments;
 
@@ -271,6 +272,7 @@ class ModuleEventReader extends \Events
 		// Notify the author
 		if ($objCalendar->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objEvent->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

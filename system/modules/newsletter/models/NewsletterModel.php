@@ -30,6 +30,7 @@ namespace Contao;
  * @property string  $senderName
  * @property boolean $sent
  * @property string  $date
+ * @property integer $channel
  *
  * @method static $this findById()
  * @method static $this findOneByPid()
@@ -98,7 +99,7 @@ class NewsletterModel extends \Model
 	 * @param array   $arrPids    An array of newsletter channel IDs
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
+	 * @return static A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{
@@ -115,7 +116,7 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
 
 

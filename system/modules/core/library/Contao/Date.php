@@ -27,7 +27,7 @@ namespace Contao;
  *
  *     Date::formatToJs('m/d/Y H:i');
  *
- * @property integer $timestamp  The Unix timestamp
+ * @property integer $tstamp     The Unix timestamp
  * @property string  $date       The formatted date
  * @property string  $time       The formatted time
  * @property string  $datim      The formatted date and time

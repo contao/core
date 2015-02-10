@@ -34,7 +34,7 @@ class ModuleNewsReader extends \ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsreader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -123,6 +123,7 @@ class ModuleNewsReader extends \ModuleNews
 			return;
 		}
 
+		/** @var \NewsArchiveModel $objArchive */
 		$objArchive = $objArticle->getRelated('pid');
 		$this->Template->allowComments = $objArchive->allowComments;
 
@@ -148,6 +149,7 @@ class ModuleNewsReader extends \ModuleNews
 		// Notify the author
 		if ($objArchive->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objArticle->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

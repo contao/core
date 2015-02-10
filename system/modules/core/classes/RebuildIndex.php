@@ -42,8 +42,7 @@ class RebuildIndex extends \Backend implements \executable
 
 		$time = time();
 
-		/** @var \BackendTemplate|object $objTemplate */
-		$objTemplate = new \BackendTemplate('be_rebuild_index');
+		$objTemplate = \BackendTemplate::create('be_rebuild_index');
 		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->isActive = $this->isActive();

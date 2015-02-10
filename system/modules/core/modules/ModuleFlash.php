@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Front end module "flash".
  *
+ * @property string $version
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleFlash extends \Module
@@ -57,8 +59,10 @@ class ModuleFlash extends \Module
 			{
 				return '';
 			}
-
-			$this->singleSRC = $objFile->path;
+			else
+			{
+				$this->singleSRC = $objFile->path;
+			}
 		}
 
 		return parent::generate();

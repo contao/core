@@ -34,7 +34,7 @@ class ModuleNewsletterList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['nl_list'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -73,6 +73,7 @@ class ModuleNewsletterList extends \Module
 		{
 			while ($objNewsletter->next())
 			{
+				/** @var \NewsletterModel $objNewsletter */
 				if (($objTarget = $objNewsletter->getRelated('pid')) === null)
 				{
 					continue;
@@ -90,7 +91,9 @@ class ModuleNewsletterList extends \Module
 
 				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
-					$objJumpTo = $objTarget->getRelated('jumpTo')->loadDetails();
+					/** @var \PageModel $objModel */
+					$objModel = $objTarget->getRelated('jumpTo');
+					$objJumpTo = $objModel->loadDetails();
 
 					if ($objJumpTo !== null)
 					{

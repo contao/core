@@ -46,6 +46,7 @@ abstract class ModuleNews extends \Module
 		{
 			while ($objArchive->next())
 			{
+				/** @var \NewsArchiveModel $objArchive */
 				if ($objArchive->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
@@ -81,7 +82,9 @@ abstract class ModuleNews extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = new \FrontendTemplate($this->news_template);
+		$objTemplate = \FrontendTemplate::create($this->news_template);
+
+		/** @var \NewsModel $objArticle */
 		$objTemplate->setData($objArticle->row());
 
 		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
@@ -206,6 +209,7 @@ abstract class ModuleNews extends \Module
 	 */
 	protected function parseArticles($objArticles, $blnAddArchive=false)
 	{
+		/** @var \Model\Collection $objArticles */
 		$limit = $objArticles->count();
 
 		if ($limit < 1)
@@ -251,6 +255,10 @@ abstract class ModuleNews extends \Module
 					break;
 
 				case 'author':
+					/**
+					 * @var \UserModel $objAuthor
+					 * @var \NewsModel $objArticle
+					 */
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
 						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
@@ -292,6 +300,7 @@ abstract class ModuleNews extends \Module
 		// Initialize the cache
 		self::$arrUrlCache[$strCacheKey] = null;
 
+		/** @var \NewsModel $objItem */
 		switch ($objItem->source)
 		{
 			// Link to an external page

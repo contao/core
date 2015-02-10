@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Front end module "registration".
  *
+ * @property array $editable
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleRegistration extends \Module
@@ -34,7 +36,7 @@ class ModuleRegistration extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['registration'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -95,7 +97,7 @@ class ModuleRegistration extends \Module
 
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			$this->Template = \FrontendTemplate::create($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -135,6 +137,10 @@ class ModuleRegistration extends \Module
 				$strClass = 'FormCaptcha';
 			}
 
+			/**
+			 * @var \FormCaptcha $strClass
+			 * @var \FormCaptcha $objCaptcha
+			 */
 			$objCaptcha = new $strClass($arrCaptcha);
 
 			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
@@ -417,6 +423,8 @@ class ModuleRegistration extends \Module
 
 				// Create the user folder
 				new \Folder($objHomeDir->path . '/' . $strUserDir);
+
+				/** @var \FilesModel $objUserDir */
 				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
 
 				// Save the folder ID
@@ -458,15 +466,16 @@ class ModuleRegistration extends \Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = \FrontendTemplate::create($this->strTemplate);
 
-		// Check the token
+		/** @var \MemberModel $objMember */
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
+
 			return;
 		}
 

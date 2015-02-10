@@ -80,6 +80,8 @@ namespace Contao;
  * @property boolean $rootIsFallback
  * @property boolean $rootUseSSL
  * @property string  $rootFallbackLanguage
+ * @property array   $subpages
+ * @property string  $outputFormat
  *
  * @method static $this findById()
  * @method static $this findOneByPid()

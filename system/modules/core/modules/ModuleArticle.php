@@ -14,6 +14,21 @@ namespace Contao;
 /**
  * Provides methodes to handle articles.
  *
+ * @property integer $tstamp
+ * @property string  $title
+ * @property string  $alias
+ * @property string  $inColumn
+ * @property boolean $showTeaser
+ * @property boolean $multiMode
+ * @property string  $teaser
+ * @property string  $teaserCssID
+ * @property string  $classes
+ * @property string  $keywords
+ * @property boolean $printable
+ * @property boolean $published
+ * @property integer $start
+ * @property integer $stop
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleArticle extends \Module
@@ -56,11 +71,12 @@ class ModuleArticle extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_plain');
+			$this->Template = \FrontendTemplate::create('mod_article_plain');
 			$this->Template->setData($this->arrData);
 		}
 
@@ -98,7 +114,7 @@ class ModuleArticle extends \Module
 		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_teaser');
+			$this->Template = \FrontendTemplate::create('mod_article_teaser');
 			$this->Template->setData($this->arrData);
 
 			$this->cssID = array($alias, '');
@@ -167,6 +183,8 @@ class ModuleArticle extends \Module
 			while ($objCte->next())
 			{
 				$arrCss = array();
+
+				/** @var \ContentModel $objRow */
 				$objRow = $objCte->current();
 
 				// Add the "first" and "last" classes (see #2583)

@@ -34,7 +34,7 @@ class ModuleSubscribe extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['subscribe'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -65,7 +65,7 @@ class ModuleSubscribe extends \Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new \FrontendTemplate($this->nl_template);
+			$this->Template = \FrontendTemplate::create($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -109,6 +109,7 @@ class ModuleSubscribe extends \Module
 		{
 			while ($objChannel->next())
 			{
+				/** @var \NewsletterChannelModel $objChannel */
 				$arrChannels[$objChannel->id] = $objChannel->title;
 			}
 		}
@@ -132,7 +133,7 @@ class ModuleSubscribe extends \Module
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = new \FrontendTemplate('mod_newsletter');
+		$this->Template = \FrontendTemplate::create('mod_newsletter');
 
 		// Check the token
 		$objRecipient = \NewsletterRecipientsModel::findByToken(\Input::get('token'));
@@ -141,6 +142,7 @@ class ModuleSubscribe extends \Module
 		{
 			$this->Template->mclass = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['ERR']['invalidToken'];
+
 			return;
 		}
 
@@ -152,6 +154,10 @@ class ModuleSubscribe extends \Module
 		// Update the subscriptions
 		while ($objRecipient->next())
 		{
+			/**
+			 * @var \NewsletterChannelModel    $objChannel
+			 * @var \NewsletterRecipientsModel $objRecipient
+			 */
 			$objChannel = $objRecipient->getRelated('pid');
 
 			$arrAdd[] = $objRecipient->id;
@@ -165,7 +171,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->save();
 		}
 
-		// Log activity
+		/** @var \NewsletterRecipientsModel $objRecipient */
 		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
 
 		// HOOK: post activation callback

@@ -34,7 +34,7 @@ class ModuleBreadcrumb extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['breadcrumb'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -54,6 +54,7 @@ class ModuleBreadcrumb extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$type = null;
@@ -68,6 +69,7 @@ class ModuleBreadcrumb extends \Module
 		{
 			while ($pageId > 0 && $type != 'root' && $objPages->next())
 			{
+				/** @var \PageModel $objPages */
 				$type = $objPages->type;
 				$pageId = $objPages->pid;
 				$pages[] = $objPages->row();

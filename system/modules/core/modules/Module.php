@@ -150,7 +150,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Model
-	 * @var Model
+	 * @var \ModuleModel
 	 */
 	protected $objModel;
 
@@ -185,6 +185,7 @@ abstract class Module extends \Frontend
 
 		parent::__construct();
 
+		/** @var \ModuleModel $objModule */
 		$this->arrData = $objModule->row();
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
@@ -265,7 +266,7 @@ abstract class Module extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = \FrontendTemplate::create($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();
@@ -336,7 +337,7 @@ abstract class Module extends \Frontend
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new \FrontendTemplate($this->navigationTpl);
+		$objTemplate = \FrontendTemplate::create($this->navigationTpl);
 
 		$objTemplate->pid = $pid;
 		$objTemplate->type = get_class($this);
@@ -349,7 +350,7 @@ abstract class Module extends \Frontend
 		// Browse subpages
 		while ($objSubpages->next())
 		{
-			// Skip hidden sitemap pages
+			/** @var \PageModel $objSubpages */
 			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
 			{
 				continue;
@@ -372,6 +373,8 @@ abstract class Module extends \Frontend
 				{
 					$subitems = $this->renderNavigation($objSubpages->id, $level, $host, $language);
 				}
+
+				$href = null;
 
 				// Get href
 				switch ($objSubpages->type)
@@ -397,7 +400,7 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
-							// Hide the link if the target page is invisible
+							/** @var \PageModel $objNext */
 							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
 							{
 								continue(2);

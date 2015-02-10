@@ -131,6 +131,7 @@ namespace Contao;
  * @property string  $nl_unsubscribe
  * @property string  $nl_template
  * @property string  $typePrefix
+ * @property string  $classes
  *
  * @method static $this findById()
  * @method static $this findOneByPid()

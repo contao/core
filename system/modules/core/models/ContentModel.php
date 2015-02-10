@@ -96,6 +96,7 @@ namespace Contao;
  * @property boolean $com_requireLogin
  * @property string  $com_template
  * @property string  $typePrefix
+ * @property string  $classes
  *
  * @method static $this findById()
  * @method static $this findOneByPid()

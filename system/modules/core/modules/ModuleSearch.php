@@ -34,7 +34,7 @@ class ModuleSearch extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['search'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -74,7 +74,7 @@ class ModuleSearch extends \Module
 
 		$strKeywords = trim(\Input::get('keywords'));
 
-		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
+		$objFormTemplate = \FrontendTemplate::create((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $strQueryType;
@@ -245,7 +245,7 @@ class ModuleSearch extends \Module
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$objTemplate = new \FrontendTemplate($this->searchTpl ?: 'search_default');
+				$objTemplate = \FrontendTemplate::create($this->searchTpl ?: 'search_default');
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];

@@ -34,7 +34,7 @@ class ModuleLogin extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['login'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -82,6 +82,7 @@ class ModuleLogin extends \Module
 
 				if ($objMember !== null)
 				{
+					/** @var \MemberModel $objMember */
 					$arrGroups = deserialize($objMember->groups);
 
 					if (!empty($arrGroups) && is_array($arrGroups))
@@ -156,7 +157,7 @@ class ModuleLogin extends \Module
 			$this->import('FrontendUser', 'User');
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = \FrontendTemplate::create($this->strTemplate);
 			$this->Template->setData($this->arrData);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
@@ -174,7 +175,7 @@ class ModuleLogin extends \Module
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		$this->Template = \FrontendTemplate::create($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$blnHasError = false;

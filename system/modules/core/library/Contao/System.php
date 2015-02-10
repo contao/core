@@ -29,6 +29,7 @@ namespace Contao;
  *     }
  *
  * @property \Automator                                $Automator   The automator object
+ * @property \Comments                                 $Comments    The comments object
  * @property \Config                                   $Config      The config object
  * @property \Database                                 $Database    The database object
  * @property \Files                                    $Files       The files object

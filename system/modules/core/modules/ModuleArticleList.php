@@ -34,7 +34,7 @@ class ModuleArticleList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articleList'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -46,6 +46,7 @@ class ModuleArticleList extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
@@ -94,6 +95,7 @@ class ModuleArticleList extends \Module
 				continue;
 			}
 
+			/** @var \ArticleModel $objArticles */
 			$cssID = deserialize($objArticles->cssID, true);
 			$alias = $objArticles->alias ?: $objArticles->title;
 

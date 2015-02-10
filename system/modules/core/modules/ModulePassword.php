@@ -34,7 +34,7 @@ class ModulePassword extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['lostPassword'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -108,6 +108,10 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
+			/**
+			 * @var \Widget $strClass
+			 * @var \Widget $objWidget
+			 */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
 
 			$objWidget->storeValues = true;
@@ -171,11 +175,12 @@ class ModulePassword extends \Module
 	{
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
+		/** @var \MemberModel $objMember */
 		if ($objMember === null || $objMember->login == '')
 		{
 			$this->strTemplate = 'mod_message';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = \FrontendTemplate::create($this->strTemplate);
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -194,6 +199,10 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
+		/**
+		 * @var \Widget $strClass
+		 * @var \Widget $objWidget
+		 */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes
@@ -235,7 +244,7 @@ class ModulePassword extends \Module
 				// Confirm
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				$this->Template = \FrontendTemplate::create($this->strTemplate);
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 

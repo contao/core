@@ -40,7 +40,7 @@ class ModuleRssReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new \BackendTemplate('be_wildcard');
+			$objTemplate = \BackendTemplate::create('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['rss_reader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -95,7 +95,7 @@ class ModuleRssReader extends \Module
 		{
 			$this->strTemplate = $this->rss_template;
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			$this->Template = \FrontendTemplate::create($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
 
