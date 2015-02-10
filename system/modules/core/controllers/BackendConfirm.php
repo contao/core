@@ -52,7 +52,7 @@ class BackendConfirm extends \Backend
 			$this->redirect($strUrl);
 		}
 
-		$this->Template = new \BackendTemplate('be_confirm');
+		$this->Template = \BackendTemplate::create('be_confirm');
 
 		// Prepare the URL
 		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));

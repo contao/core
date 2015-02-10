@@ -42,7 +42,7 @@ class BackendInstall extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_install');
+		$this->Template = \BackendTemplate::create('be_install');
 
 		// Lock the tool if there are too many login attempts
 		if (\Config::get('installCount') >= 3)

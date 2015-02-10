@@ -45,7 +45,7 @@ class BackendPassword extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_password');
+		$this->Template = \BackendTemplate::create('be_password');
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_password')
 		{

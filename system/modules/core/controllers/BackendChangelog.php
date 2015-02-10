@@ -52,7 +52,7 @@ class BackendChangelog extends \Backend
 		$strBuffer = \Michelf\MarkdownExtra::defaultTransform($strBuffer);
 
 		// Add the template
-		$this->Template = new \BackendTemplate('be_changelog');
+		$this->Template = \BackendTemplate::create('be_changelog');
 
 		// Assign the template variables
 		$this->Template->content = $strBuffer;

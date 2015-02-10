@@ -65,7 +65,7 @@ class BackendSwitch extends \Backend
 		}
 
 		// Create the template object
-		$this->Template = new \BackendTemplate('be_switch');
+		$this->Template = \BackendTemplate::create('be_switch');
 		$this->Template->user = $strUser;
 		$this->Template->show = \Input::cookie('FE_PREVIEW');
 		$this->Template->update = false;
@@ -101,6 +101,7 @@ class BackendSwitch extends \Backend
 				{
 					$objUser = \MemberModel::findByUsername(\Input::post('user'));
 
+					/** @var \MemberModel $objUser */
 					if ($objUser !== null)
 					{
 						// Insert the new session

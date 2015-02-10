@@ -64,6 +64,8 @@ class FrontendIndex extends \Frontend
 		if ($pageId === null)
 		{
 			$objRootPage = $this->getRootPageFromUrl();
+
+			/** @var \PageRoot $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$pageId = $objHandler->generate($objRootPage->id, true);
 		}
@@ -71,6 +73,8 @@ class FrontendIndex extends \Frontend
 		elseif ($pageId === false)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError404 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -78,6 +82,8 @@ class FrontendIndex extends \Frontend
 		elseif (\Config::get('rewriteURL') && strncmp(\Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError403 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -94,6 +100,7 @@ class FrontendIndex extends \Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
+				/** @var \PageModel $objPage */
 				$objCurrentPage = $objPage->current()->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';

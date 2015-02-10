@@ -50,7 +50,7 @@ class BackendFile extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_picker');
+		$this->Template = \BackendTemplate::create('be_picker');
 		$this->Template->main = '';
 
 		// Ajax request
@@ -74,6 +74,7 @@ class BackendFile extends \Backend
 		// Set the active record
 		if ($this->Database->tableExists($strTable))
 		{
+			/** @var \Model $strModel */
 			$strModel = \Model::getClassFromTable($strTable);
 
 			if (class_exists($strModel))
@@ -123,7 +124,10 @@ class BackendFile extends \Backend
 			}
 		}
 
-		// Prepare the widget
+		/**
+		 * @var \FileSelector $class
+		 * @var \FileSelector $objFileTree
+		 */
 		$class = $GLOBALS['BE_FFL']['fileSelector'];
 		$objFileTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 

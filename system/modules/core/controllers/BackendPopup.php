@@ -98,7 +98,7 @@ class BackendPopup extends \Backend
 			$objModel = \Dbafs::addResource($this->strFile);
 		}
 
-		$this->Template = new \BackendTemplate('be_popup');
+		$this->Template = \BackendTemplate::create('be_popup');
 		$this->Template->uuid = \String::binToUuid($objModel->uuid); // see #5211
 
 		// Add the file info

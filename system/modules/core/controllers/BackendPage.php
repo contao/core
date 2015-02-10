@@ -50,7 +50,7 @@ class BackendPage extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_picker');
+		$this->Template = \BackendTemplate::create('be_picker');
 		$this->Template->main = '';
 
 		// Ajax request
@@ -74,6 +74,7 @@ class BackendPage extends \Backend
 		// Set the active record
 		if ($this->Database->tableExists($strTable))
 		{
+			/** @var \Model $strModel $strModel */
 			$strModel = \Model::getClassFromTable($strTable);
 
 			if (class_exists($strModel))
@@ -113,7 +114,10 @@ class BackendPage extends \Backend
 			}
 		}
 
-		// Prepare the widget
+		/**
+		 * @var \PageSelector $class
+		 * @var \PageSelector $objPageTree
+		 */
 		$class = $GLOBALS['BE_FFL']['pageSelector'];
 		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 

@@ -43,7 +43,7 @@ class BackendPreview extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_preview');
+		$this->Template = \BackendTemplate::create('be_preview');
 
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -69,6 +69,7 @@ class BackendPreview extends \Backend
 		{
 			$objUser = \MemberModel::findByUsername(\Input::get('user'));
 
+			/** @var \MemberModel $objUser */
 			if ($objUser !== null)
 			{
 				$strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . 'FE_USER_AUTH');

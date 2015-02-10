@@ -98,7 +98,7 @@ class BackendMain extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_main');
+		$this->Template = \BackendTemplate::create('be_main');
 		$this->Template->main = '';
 
 		// Ajax request
@@ -139,7 +139,7 @@ class BackendMain extends \Backend
 	{
 		\System::loadLanguageFile('explain');
 
-		$objTemplate = new \BackendTemplate('be_welcome');
+		$objTemplate = \BackendTemplate::create('be_welcome');
 		$objTemplate->messages = \Message::generate(false, true);
 
 		// HOOK: add custom messages

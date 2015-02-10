@@ -51,7 +51,7 @@ class BackendHelp extends \Backend
 		\System::loadLanguageFile($table);
 		$this->loadDataContainer($table);
 
-		$this->Template = new \BackendTemplate('be_help');
+		$this->Template = \BackendTemplate::create('be_help');
 		$this->Template->rows = array();
 		$this->Template->explanation = '';
 

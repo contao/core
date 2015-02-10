@@ -69,7 +69,7 @@ class BackendIndex extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_login');
+		$this->Template = BackendTemplate::create('be_login');
 
 		// Show a cookie warning
 		if (\Input::get('referer', true) != '' && empty($_COOKIE))

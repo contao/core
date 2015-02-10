@@ -34,6 +34,8 @@ namespace Contao;
  * @property \Database                                 $Database    The database object
  * @property \Files                                    $Files       The files object
  * @property \Input                                    $Input       The input object
+ * @property \Database\Installer                       $Installer   The database installer object
+ * @property \Database\Updater                         $Updater     The database updater object
  * @property \Session                                  $Session     The session object
  * @property \StyleSheets                              $StyleSheets The style sheets object
  * @property \BackendTemplate|\FrontendTemplate|object $Template    The template object
