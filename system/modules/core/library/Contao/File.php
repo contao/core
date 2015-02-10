@@ -649,7 +649,7 @@ class File extends \System
 			new \Folder($strParent);
 		}
 
-		$return = $this->Files->copy($this->strFile, $strNewName);
+		$this->Files->copy($this->strFile, $strNewName);
 
 		// Update the database AFTER the file has been renamed
 		if ($this->blnSyncDb)
@@ -657,7 +657,7 @@ class File extends \System
 			$this->objModel = \Dbafs::copyResource($this->strFile, $strNewName);
 		}
 
-		return $return;
+		return true;
 	}
 
 
@@ -765,6 +765,7 @@ class File extends \System
 		}
 
 		fputs($this->resFile, $varData);
+
 		return true;
 	}
 
@@ -793,6 +794,7 @@ class File extends \System
 	protected function getMimeType()
 	{
 		$arrMime = $this->getMimeInfo();
+
 		return $arrMime[0];
 	}
 
@@ -805,6 +807,7 @@ class File extends \System
 	protected function getIcon()
 	{
 		$arrMime = $this->getMimeInfo();
+
 		return $arrMime[1];
 	}
 

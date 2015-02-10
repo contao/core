@@ -28,9 +28,11 @@ namespace Contao;
  *         }
  *     }
  *
+ * @property Config   $Config   The config object
  * @property Database $Database The database object
  * @property Files    $Files    The files object
  * @property Session  $Session  The session object
+ * @property User     $User     The user object
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

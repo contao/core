@@ -283,7 +283,7 @@ class Folder extends \System
 			new \Folder($strParent);
 		}
 
-		$return = $this->Files->rcopy($this->strFolder, $strNewName);
+		$this->Files->rcopy($this->strFolder, $strNewName);
 
 		// Update the database AFTER the folder has been renamed
 		if ($this->blnSyncDb)
@@ -291,7 +291,7 @@ class Folder extends \System
 			$this->objModel = \Dbafs::copyResource($this->strFolder, $strNewName);
 		}
 
-		return $return;
+		return true;
 	}
 
 
@@ -340,6 +340,7 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
+		/** @var \RecursiveDirectoryIterator $it */
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
 				TL_ROOT . '/' . $this->strFolder,
