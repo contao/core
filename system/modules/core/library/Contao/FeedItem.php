@@ -29,6 +29,14 @@ namespace Contao;
  *     $feed->addItem($item);
  *     echo $feed->generateRss();
  *
+ * @property string  $title       The item title
+ * @property string  $link        The item link
+ * @property integer $published   The publication status
+ * @property integer $begin       The start date
+ * @property integer $end         The end date
+ * @property string  $author      The item author
+ * @property string  $description The item description
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FeedItem

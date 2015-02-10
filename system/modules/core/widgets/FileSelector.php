@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Provide methods to handle input field "file tree".
  *
+ * @property string  $path
+ * @property string  $fieldType
+ * @property string  $sort
+ * @property boolean $files
+ * @property boolean $filesOnly
+ * @property string  $extensions
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileSelector extends \Widget
@@ -200,9 +207,9 @@ class FileSelector extends \Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get session data and toggle nodes
-		if ($this->Input->get($flag.'tg'))
+		if (Input::get($flag.'tg'))
 		{
-			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][Input::get($flag.'tg')] = (isset($session[$node][Input::get($flag.'tg')]) && $session[$node][Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}

@@ -47,9 +47,9 @@ namespace Contao;
  * @property string  $inherit
  * @property string  $modules
  * @property string  $themes
- * @property string  $pagemounts
+ * @property array   $pagemounts
  * @property string  $alpty
- * @property string  $filemounts
+ * @property array   $filemounts
  * @property string  $fop
  * @property string  $forms
  * @property string  $formp
@@ -211,7 +211,7 @@ abstract class User extends \System
 	/**
 	 * Instantiate a new user object (Factory)
 	 *
-	 * @return \User The object instance
+	 * @return static The object instance
 	 */
 	public static function getInstance()
 	{

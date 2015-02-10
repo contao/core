@@ -46,6 +46,7 @@ namespace Contao;
  * @property boolean $published
  * @property string  $start
  * @property string  $stop
+ * @property string  $authorName
  *
  * @method static $this findById()
  * @method static $this findOneByPid()

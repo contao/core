@@ -83,6 +83,7 @@ class Ajax extends \Backend
 
 				$this->import('BackendUser', 'User');
 
+				/** @var \BackendTemplate|object $objTemplate */
 				$objTemplate = new \BackendTemplate('be_navigation');
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
@@ -195,6 +196,7 @@ class Ajax extends \Backend
 			exit;
 		}
 
+		/** @var \DataContainer|object $dc */
 		switch ($this->strAction)
 		{
 			// Load nodes of the page structure tree
@@ -212,6 +214,10 @@ class Ajax extends \Backend
 				$strField = $dc->field = \Input::post('name');
 				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
+				/**
+				 * @var \PageSelector $strClass
+				 * @var \PageSelector $objWidget
+				 */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
@@ -222,6 +228,10 @@ class Ajax extends \Backend
 				$strField = $dc->field = \Input::post('name');
 				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
+				/**
+				 * @var \PageSelector $strClass
+				 * @var \PageSelector $objWidget
+				 */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
@@ -319,6 +329,10 @@ class Ajax extends \Backend
 					$varValue = serialize($varValue);
 				}
 
+				/**
+				 * @var \FileTree|\PageTree $strClass
+				 * @var \FileTree|\PageTree $objWidget
+				 */
 				$strClass = $GLOBALS['BE_FFL'][$strKey];
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
@@ -343,9 +357,9 @@ class Ajax extends \Backend
 				$this->import('BackendUser', 'User');
 
 				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
-				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
+				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array(Input::post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][Input::post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . Input::post('field'), 'alexf')))
 				{
-					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
+					$this->log('Field "' . Input::post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}

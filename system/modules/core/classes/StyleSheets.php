@@ -1083,6 +1083,7 @@ class StyleSheets extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -1215,6 +1216,8 @@ class StyleSheets extends \Backend
 					// Regular block
 					else
 					{
+						$strSelector = '';
+
 						while ($i<$intLength)
 						{
 							$strBuffer .= $strFile[$i++];
@@ -1350,6 +1353,7 @@ class StyleSheets extends \Backend
 	 */
 	public function exportStyleSheet(\DataContainer $dc)
 	{
+		/** @var \DataContainer|object $dc */
 		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE id=?")
 										->limit(1)
 										->execute($dc->id);

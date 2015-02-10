@@ -34,6 +34,7 @@ class Theme extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_theme_import')
@@ -641,7 +642,7 @@ class Theme extends \Backend
 	 */
 	public function exportTheme(\DataContainer $dc)
 	{
-		// Get the theme meta data
+		/** @var \DataContainer|object $dc */
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
 								   ->limit(1)
 								   ->execute($dc->id);
@@ -959,6 +960,7 @@ class Theme extends \Backend
 
 						while ($objFiles->next())
 						{
+							/** @var \FilesModel $objFiles */
 							$arrTmp[] = $this->standardizeUploadPath($objFiles->path);
 						}
 

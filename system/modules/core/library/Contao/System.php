@@ -28,13 +28,15 @@ namespace Contao;
  *         }
  *     }
  *
- * @property Automator   $Automator   The automator object
- * @property Config      $Config      The config object
- * @property Database    $Database    The database object
- * @property Files       $Files       The files object
- * @property Session     $Session     The session object
- * @property StyleSheets $StyleSheets The style sheets object
- * @property User        $User        The user object
+ * @property \Automator                                $Automator   The automator object
+ * @property \Config                                   $Config      The config object
+ * @property \Database                                 $Database    The database object
+ * @property \Files                                    $Files       The files object
+ * @property \Input                                    $Input       The input object
+ * @property \Session                                  $Session     The session object
+ * @property \StyleSheets                              $StyleSheets The style sheets object
+ * @property \BackendTemplate|\FrontendTemplate|object $Template    The template object
+ * @property \BackendUser|\FrontendUser                $User        The user object
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

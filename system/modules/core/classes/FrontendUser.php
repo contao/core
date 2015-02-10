@@ -14,6 +14,10 @@ namespace Contao;
 /**
  * Provide methods to manage front end users.
  *
+ * @property array   $allGroups
+ * @property string  $loginPage
+ * @property boolean $blnRecordExists
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendUser extends \User

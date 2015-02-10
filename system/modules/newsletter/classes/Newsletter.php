@@ -26,6 +26,7 @@ class Newsletter extends \Backend
 	 */
 	public function send(\DataContainer $objDc)
 	{
+		/** @var \DataContainer|object $objDc */
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
 										->execute($objDc->id);
@@ -77,6 +78,7 @@ class Newsletter extends \Backend
 				{
 					while ($objFiles->next())
 					{
+						/** @var \FilesModel $objFiles */
 						if (is_file(TL_ROOT . '/' . $objFiles->path))
 						{
 							$arrAttachments[] = $objFiles->path;
@@ -361,7 +363,7 @@ class Newsletter extends \Backend
 				$objNewsletter->template = 'mail_default';
 			}
 
-			// Load the mail template
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
@@ -424,6 +426,7 @@ class Newsletter extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -670,6 +673,7 @@ class Newsletter extends \Backend
 		// If called from the back end, the second argument is a DataContainer object
 		if ($objUser instanceof \DataContainer)
 		{
+			/** @var \DataContainer|object $objUser */
 			$objUser = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
 									  ->limit(1)
 									  ->execute($objUser->id);
@@ -843,6 +847,7 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
+				/** @var \NewsletterChannelModel $objNewsletter */
 				$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
 			}
 		}
@@ -857,6 +862,7 @@ class Newsletter extends \Backend
 
 			while ($objNewsletter->next())
 			{
+				/** @var \NewsletterChannelModel $objNewsletter */
 				if (in_array($objNewsletter->id, $newsletters))
 				{
 					$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
@@ -895,7 +901,7 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				// Skip channels without target page
+				/** @var \NewsletterChannelModel $objNewsletter */
 				if (!$objNewsletter->jumpTo)
 				{
 					continue;
@@ -946,6 +952,7 @@ class Newsletter extends \Backend
 				{
 					while ($objItem->next())
 					{
+						/** @var \NewsletterModel $objItem */
 						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 					}
 				}

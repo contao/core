@@ -14,9 +14,12 @@ namespace Contao;
 /**
  * Provide methods to handle data container arrays.
  *
+ * @property boolean $blnUploadable
+ * @property array   $root
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class DataContainer extends \Backend
+abstract class DataContainer extends \Backend
 {
 
 	/**
@@ -242,6 +245,10 @@ class DataContainer extends \Backend
 			$this->varValue = \String::insertTagToSrc($this->varValue);
 		}
 
+		/**
+		 * @var \Widget $strClass
+		 * @var \Widget $objWidget
+		 */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
@@ -467,6 +474,8 @@ class DataContainer extends \Backend
 			include TL_ROOT . '/system/config/' . $file . '.php';
 			$updateMode = ob_get_contents();
 			ob_end_clean();
+
+			unset($file, $type, $language, $selector);
 		}
 
 		// Handle multi-select fields in "override all" mode
@@ -755,4 +764,17 @@ class DataContainer extends \Backend
 
 		return $return;
 	}
+
+	/**
+	 * Return the name of the current palette
+	 * @return string
+	 */
+	abstract public function getPalette();
+
+	/**
+	 * Save the current value
+	 * @param mixed
+	 * @throws \Exception
+	 */
+	abstract protected function save($varValue);
 }

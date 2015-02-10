@@ -151,7 +151,9 @@ abstract class Frontend extends \Controller
 				// Order by domain and language
 				while ($objPages->next())
 				{
-					$objPage = $objPages->current()->loadDetails();
+					/** @var \PageModel $objModel */
+					$objModel = $objPages->current();
+					$objPage  = $objModel->loadDetails();
 
 					$domain = $objPage->domain ?: '*';
 					$arrPages[$domain][$objPage->rootLanguage][] = $objPage;
@@ -293,6 +295,7 @@ abstract class Frontend extends \Controller
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getRootPageFromUrl'] as $callback)
 			{
+				/** @var \PageModel $objRootPage */
 				if (is_object(($objRootPage = static::importStatic($callback[0])->$callback[1]())))
 				{
 					return $objRootPage;
@@ -585,7 +588,7 @@ abstract class Frontend extends \Controller
 			list($strLabel, $strValue) = array_map('trim', explode('=', $v, 2));
 			$this->arrMeta[$strLabel] = array_map('trim', explode('|', $strValue));
 
-			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC))
+			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC)) # FIXME: $this->multiSRC is not used
 			{
 				$this->arrAux[] = $strPath . '/' . $strLabel;
 			}

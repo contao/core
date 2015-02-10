@@ -25,6 +25,7 @@ namespace Contao;
  * @property integer $maxItems
  * @property string  $feedBase
  * @property string  $description
+ * @property string  $feedName
  *
  * @method static $this findById()
  * @method static $this findOneByTstamp()

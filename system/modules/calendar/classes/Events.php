@@ -64,6 +64,7 @@ abstract class Events extends \Module
 		{
 			while ($objCalendar->next())
 			{
+				/** @var \CalendarModel $objCalendar */
 				if ($objCalendar->protected)
 				{
 					if (!FE_USER_LOGGED_IN)
@@ -124,6 +125,7 @@ abstract class Events extends \Module
 
 			while ($objEvents->next())
 			{
+				/** @var \CalendarEventsModel $objEvents */
 				$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
 
 				// Recurring events
@@ -218,6 +220,7 @@ abstract class Events extends \Module
 
 		$strTime = '';
 
+		/** @var \CalendarEventsModel $objEvents */
 		if ($objEvents->addTime)
 		{
 			if ($span > 0)
@@ -342,6 +345,7 @@ abstract class Events extends \Module
 	 */
 	protected function generateEventUrl($objEvent, $strUrl)
 	{
+		/** @var \CalendarEventsModel $objEvent */
 		switch ($objEvent->source)
 		{
 			// Link to an external page

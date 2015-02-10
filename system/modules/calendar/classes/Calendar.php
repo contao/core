@@ -71,6 +71,7 @@ class Calendar extends \Frontend
 		{
 			while ($objCalendar->next())
 			{
+				/** @var \CalendarFeedModel $objCalendar */
 				$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
 				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', __METHOD__, TL_CRON);
@@ -91,6 +92,7 @@ class Calendar extends \Frontend
 		{
 			while ($objFeed->next())
 			{
+				/** @var \CalendarFeedModel $objFeed */
 				$objFeed->feedName = $objFeed->alias ?: 'calendar' . $objFeed->id;
 
 				// Update the XML file
@@ -137,6 +139,7 @@ class Calendar extends \Frontend
 		{
 			while ($objArticle->next())
 			{
+				/** @var \CalendarEventsModel $objArticle */
 				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
 
 				// No jumpTo page set (see #4784)
@@ -296,7 +299,7 @@ class Calendar extends \Frontend
 		{
 			while ($objCalendar->next())
 			{
-				// Skip calendars without target page
+				/** @var \CalendarModel $objCalendar */
 				if (!$objCalendar->jumpTo)
 				{
 					continue;
@@ -347,6 +350,7 @@ class Calendar extends \Frontend
 				{
 					while ($objEvents->next())
 					{
+						/** @var \CalendarEventsModel $objEvents */
 						$arrPages[] = sprintf($strUrl, (($objEvents->alias != '' && !\Config::get('disableAlias')) ? $objEvents->alias : $objEvents->id));
 					}
 				}
@@ -401,6 +405,7 @@ class Calendar extends \Frontend
 		$title .= ' ' . $objEvent->title;
 		$link = '';
 
+		/** @var \CalendarEventsModel $objEvent */
 		switch ($objEvent->source)
 		{
 			case 'external':
@@ -472,6 +477,7 @@ class Calendar extends \Frontend
 				{
 					while ($objFile->next())
 					{
+						/** @var \FilesModel $objFile */
 						$arrEvent['enclosure'][] = $objFile->path;
 					}
 				}
@@ -539,6 +545,7 @@ class Calendar extends \Frontend
 		{
 			while ($objFeeds->next())
 			{
+				/** @var \CalendarFeedModel $objFeeds */
 				$arrFeeds[] = $objFeeds->alias ?: 'calendar' . $objFeeds->id;
 			}
 		}

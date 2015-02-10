@@ -437,6 +437,7 @@ class Versions extends \Controller
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
@@ -527,6 +528,8 @@ class Versions extends \Controller
 
 		// Create the pagination menu
 		$objPagination = new \Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
+
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions

@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to manage back end controllers.
  *
+ * @property \Ajax $objAjax
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Backend extends \Controller
@@ -390,6 +392,8 @@ abstract class Backend extends \Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+
+			/** @var \DataContainer|object $dc */
 			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
@@ -403,6 +407,8 @@ abstract class Backend extends \Controller
 		elseif (class_exists($arrModule['callback']))
 		{
 			$objCallback = new $arrModule['callback']($dc);
+
+			/** @var \Module $objCallback */
 			$this->Template->main .= $objCallback->generate();
 		}
 
@@ -841,7 +847,7 @@ abstract class Backend extends \Controller
 		// Add the breadcrumb link
 		$label = '<a href="' . \Controller::addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
 
-		// Return the image
+		/** @var \DataContainer|object $dc */
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
 	}
 

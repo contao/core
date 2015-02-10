@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Parent class for objects that can be modules or content elements.
  *
+ * @property string $hl
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Hybrid extends \Frontend
@@ -45,13 +47,13 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Model
-	 * @var Model
+	 * @var \Model
 	 */
 	protected $objModel;
 
 	/**
 	 * Parent element
-	 * @var Model
+	 * @var \Model|object
 	 */
 	protected $objParent;
 
@@ -77,10 +79,10 @@ abstract class Hybrid extends \Frontend
 	{
 		parent::__construct();
 
-		// Store the parent element (see #4556)
+		/** @var \ContentModel|\ModuleModel $objElement */
 		if ($objElement instanceof \Model)
 		{
-			$this->objParent = $objElement;
+			$this->objParent = $objElement; // see #4556
 		}
 		elseif ($objElement instanceof \Model\Collection)
 		{
@@ -92,6 +94,7 @@ abstract class Hybrid extends \Frontend
 			return;
 		}
 
+		/** @var \Model $strModelClass */
 		$strModelClass = \Model::getClassFromTable($this->strTable);
 
 		// Load the model

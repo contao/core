@@ -62,6 +62,24 @@ namespace Contao;
  * @property boolean $published
  * @property string  $start
  * @property string  $stop
+ * @property array   $trail
+ * @property string  $mainAlias
+ * @property string  $mainTitle
+ * @property string  $mainPageTitle
+ * @property string  $parentAlias
+ * @property string  $parentTitle
+ * @property string  $parentPageTitle
+ * @property string  $folderUrl
+ * @property integer $rootId
+ * @property string  $rootAlias
+ * @property string  $rootTitle
+ * @property string  $rootPageTitle
+ * @property string  $domain
+ * @property string  $rootLanguage
+ * @property boolean $rootIsPublic
+ * @property boolean $rootIsFallback
+ * @property boolean $rootUseSSL
+ * @property string  $rootFallbackLanguage
  *
  * @method static $this findById()
  * @method static $this findOneByPid()
@@ -700,6 +718,7 @@ class PageModel extends \Model
 			{
 				while ($pid > 0 && $type != 'root' && $objParentPage->next())
 				{
+					/** @var \PageModel $objParentPage */
 					$pid = $objParentPage->pid;
 					$type = $objParentPage->type;
 
