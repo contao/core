@@ -14,6 +14,199 @@ namespace Contao;
 /**
  * Reads and writes pages
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $sorting
+ * @property integer $tstamp
+ * @property string  $title
+ * @property string  $alias
+ * @property string  $type
+ * @property string  $pageTitle
+ * @property string  $language
+ * @property string  $robots
+ * @property string  $description
+ * @property string  $redirect
+ * @property integer $jumpTo
+ * @property string  $url
+ * @property boolean $target
+ * @property string  $dns
+ * @property string  $staticFiles
+ * @property string  $staticPlugins
+ * @property boolean $fallback
+ * @property string  $adminEmail
+ * @property string  $dateFormat
+ * @property string  $timeFormat
+ * @property string  $datimFormat
+ * @property boolean $createSitemap
+ * @property string  $sitemapName
+ * @property boolean $useSSL
+ * @property boolean $autoforward
+ * @property boolean $protected
+ * @property string  $groups
+ * @property boolean $includeLayout
+ * @property integer $layout
+ * @property integer $mobileLayout
+ * @property boolean $includeCache
+ * @property integer $cache
+ * @property boolean $includeChmod
+ * @property integer $cuser
+ * @property integer $cgroup
+ * @property string  $chmod
+ * @property boolean $noSearch
+ * @property string  $cssClass
+ * @property string  $sitemap
+ * @property boolean $hide
+ * @property boolean $guests
+ * @property integer $tabindex
+ * @property boolean $accesskey
+ * @property boolean $published
+ * @property string  $start
+ * @property string  $stop
+ *
+ * @method static $this findById()
+ * @method static $this findOneByPid()
+ * @method static $this findOneBySorting()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByTitle()
+ * @method static $this findOneByAlias()
+ * @method static $this findOneByType()
+ * @method static $this findOneByPageTitle()
+ * @method static $this findOneByLanguage()
+ * @method static $this findOneByRobots()
+ * @method static $this findOneByDescription()
+ * @method static $this findOneByRedirect()
+ * @method static $this findOneByJumpTo()
+ * @method static $this findOneByUrl()
+ * @method static $this findOneByTarget()
+ * @method static $this findOneByDns()
+ * @method static $this findOneByStaticFiles()
+ * @method static $this findOneByStaticPlugins()
+ * @method static $this findOneByFallback()
+ * @method static $this findOneByAdminEmail()
+ * @method static $this findOneByDateFormat()
+ * @method static $this findOneByTimeFormat()
+ * @method static $this findOneByDatimFormat()
+ * @method static $this findOneByCreateSitemap()
+ * @method static $this findOneBySitemapName()
+ * @method static $this findOneByUseSSL()
+ * @method static $this findOneByAutoforward()
+ * @method static $this findOneByProtected()
+ * @method static $this findOneByGroups()
+ * @method static $this findOneByIncludeLayout()
+ * @method static $this findOneByLayout()
+ * @method static $this findOneByMobileLayout()
+ * @method static $this findOneByIncludeCache()
+ * @method static $this findOneByCache()
+ * @method static $this findOneByIncludeChmod()
+ * @method static $this findOneByCuser()
+ * @method static $this findOneByCgroup()
+ * @method static $this findOneByChmod()
+ * @method static $this findOneByNoSearch()
+ * @method static $this findOneByCssClass()
+ * @method static $this findOneBySitemap()
+ * @method static $this findOneByHide()
+ * @method static $this findOneByGuests()
+ * @method static $this findOneByTabindex()
+ * @method static $this findOneByAccesskey()
+ * @method static $this findOneByPublished()
+ * @method static $this findOneByStart()
+ * @method static $this findOneByStop()
+ * @method static \Model\Collection findByPid()
+ * @method static \Model\Collection findBySorting()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findByTitle()
+ * @method static \Model\Collection findByAlias()
+ * @method static \Model\Collection findByType()
+ * @method static \Model\Collection findByPageTitle()
+ * @method static \Model\Collection findByLanguage()
+ * @method static \Model\Collection findByRobots()
+ * @method static \Model\Collection findByDescription()
+ * @method static \Model\Collection findByRedirect()
+ * @method static \Model\Collection findByJumpTo()
+ * @method static \Model\Collection findByUrl()
+ * @method static \Model\Collection findByTarget()
+ * @method static \Model\Collection findByDns()
+ * @method static \Model\Collection findByStaticFiles()
+ * @method static \Model\Collection findByStaticPlugins()
+ * @method static \Model\Collection findByFallback()
+ * @method static \Model\Collection findByAdminEmail()
+ * @method static \Model\Collection findByDateFormat()
+ * @method static \Model\Collection findByTimeFormat()
+ * @method static \Model\Collection findByDatimFormat()
+ * @method static \Model\Collection findByCreateSitemap()
+ * @method static \Model\Collection findBySitemapName()
+ * @method static \Model\Collection findByUseSSL()
+ * @method static \Model\Collection findByAutoforward()
+ * @method static \Model\Collection findByProtected()
+ * @method static \Model\Collection findByGroups()
+ * @method static \Model\Collection findByIncludeLayout()
+ * @method static \Model\Collection findByLayout()
+ * @method static \Model\Collection findByMobileLayout()
+ * @method static \Model\Collection findByIncludeCache()
+ * @method static \Model\Collection findByCache()
+ * @method static \Model\Collection findByIncludeChmod()
+ * @method static \Model\Collection findByCuser()
+ * @method static \Model\Collection findByCgroup()
+ * @method static \Model\Collection findByChmod()
+ * @method static \Model\Collection findByNoSearch()
+ * @method static \Model\Collection findByCssClass()
+ * @method static \Model\Collection findBySitemap()
+ * @method static \Model\Collection findByHide()
+ * @method static \Model\Collection findByGuests()
+ * @method static \Model\Collection findByTabindex()
+ * @method static \Model\Collection findByAccesskey()
+ * @method static \Model\Collection findByPublished()
+ * @method static \Model\Collection findByStart()
+ * @method static \Model\Collection findByStop()
+ * @method static integer countById()
+ * @method static integer countByPid()
+ * @method static integer countBySorting()
+ * @method static integer countByTstamp()
+ * @method static integer countByTitle()
+ * @method static integer countByAlias()
+ * @method static integer countByType()
+ * @method static integer countByPageTitle()
+ * @method static integer countByLanguage()
+ * @method static integer countByRobots()
+ * @method static integer countByDescription()
+ * @method static integer countByRedirect()
+ * @method static integer countByJumpTo()
+ * @method static integer countByUrl()
+ * @method static integer countByTarget()
+ * @method static integer countByDns()
+ * @method static integer countByStaticFiles()
+ * @method static integer countByStaticPlugins()
+ * @method static integer countByFallback()
+ * @method static integer countByAdminEmail()
+ * @method static integer countByDateFormat()
+ * @method static integer countByTimeFormat()
+ * @method static integer countByDatimFormat()
+ * @method static integer countByCreateSitemap()
+ * @method static integer countBySitemapName()
+ * @method static integer countByUseSSL()
+ * @method static integer countByAutoforward()
+ * @method static integer countByProtected()
+ * @method static integer countByGroups()
+ * @method static integer countByIncludeLayout()
+ * @method static integer countByLayout()
+ * @method static integer countByMobileLayout()
+ * @method static integer countByIncludeCache()
+ * @method static integer countByCache()
+ * @method static integer countByIncludeChmod()
+ * @method static integer countByCuser()
+ * @method static integer countByCgroup()
+ * @method static integer countByChmod()
+ * @method static integer countByNoSearch()
+ * @method static integer countByCssClass()
+ * @method static integer countBySitemap()
+ * @method static integer countByHide()
+ * @method static integer countByGuests()
+ * @method static integer countByTabindex()
+ * @method static integer countByAccesskey()
+ * @method static integer countByPublished()
+ * @method static integer countByStart()
+ * @method static integer countByStop()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageModel extends \Model
@@ -38,7 +231,7 @@ class PageModel extends \Model
 	 * @param integer $intId      The page ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no published page
+	 * @return static The model or null if there is no published page
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
 	{
@@ -62,7 +255,7 @@ class PageModel extends \Model
 	 * @param mixed  $varLanguage An ISO language code or an array of ISO language codes
 	 * @param array  $arrOptions  An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no matching root page
+	 * @return static The model or null if there is no matching root page
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage, array $arrOptions=array())
 	{
@@ -122,7 +315,7 @@ class PageModel extends \Model
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no published page
+	 * @return static The model or null if there is no published page
 	 */
 	public static function findFirstPublishedByPid($intPid, array $arrOptions=array())
 	{
@@ -150,7 +343,7 @@ class PageModel extends \Model
 	 * @param integer $intPid The parent page's ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no published regular page
+	 * @return static The model or null if there is no published regular page
 	 */
 	public static function findFirstPublishedRegularByPid($intPid, array $arrOptions=array())
 	{
@@ -178,7 +371,7 @@ class PageModel extends \Model
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no 403 page
+	 * @return static The model or null if there is no 403 page
 	 */
 	public static function find403ByPid($intPid, array $arrOptions=array())
 	{
@@ -206,7 +399,7 @@ class PageModel extends \Model
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no 404 page
+	 * @return static The model or null if there is no 404 page
 	 */
 	public static function find404ByPid($intPid, array $arrOptions=array())
 	{
@@ -234,7 +427,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
+	 * @return \Model\Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{
@@ -399,7 +592,7 @@ class PageModel extends \Model
 	 * @param string $strHost    The hostname
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return \Model|null The page model or null if there is not fallback page
+	 * @return static The page model or null if there is not fallback page
 	 */
 	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
 	{
@@ -447,7 +640,7 @@ class PageModel extends \Model
 	 *
 	 * @param integer $intId The page's ID
 	 *
-	 * @return \Model|null The model or null if there is no matching page
+	 * @return static The model or null if there is no matching page
 	 */
 	public static function findWithDetails($intId)
 	{
@@ -465,7 +658,7 @@ class PageModel extends \Model
 	/**
 	 * Get the details of a page including inherited parameters
 	 *
-	 * @return \Model The page model
+	 * @return static The page model
 	 */
 	public function loadDetails()
 	{

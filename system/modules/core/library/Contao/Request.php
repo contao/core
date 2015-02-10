@@ -293,6 +293,7 @@ class Request
 		if (!is_resource($fp))
 		{
 			$this->strError = trim($errno .' '. $errstr);
+
 			return;
 		}
 

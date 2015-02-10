@@ -123,6 +123,7 @@ abstract class Controller extends \System
 			{
 				while ($objTheme->next())
 				{
+					/** @var \ThemeModel $objTheme */
 					if ($objTheme->templates != '')
 					{
 						$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
@@ -215,6 +216,7 @@ abstract class Controller extends \System
 						$objPage->cache = 0;
 
 						header('HTTP/1.1 404 Not Found');
+
 						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
@@ -246,6 +248,7 @@ abstract class Controller extends \System
 
 			while ($objArticles->next())
 			{
+				/** @var \ArticleModel $objRow */
 				$objRow = $objArticles->current();
 
 				// Add the "first" and "last" classes (see #2583)
@@ -302,10 +305,13 @@ abstract class Controller extends \System
 			if (!class_exists($strClass))
 			{
 				static::log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+
 				return '';
 			}
 
 			$objRow->typePrefix = 'mod_';
+
+			/** @var \Module $objModule */
 			$objModule = new $strClass($objRow, $strColumn);
 			$strBuffer = $objModule->generate();
 
@@ -461,10 +467,13 @@ abstract class Controller extends \System
 		if (!class_exists($strClass))
 		{
 			static::log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+
 			return '';
 		}
 
 		$objRow->typePrefix = 'ce_';
+
+		/** @var \ContentElement $objElement */
 		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
@@ -618,7 +627,7 @@ abstract class Controller extends \System
 
 		$blnReturn = true;
 
-		// Protected element
+		/** @var \ContentModel|\ModuleModel $objElement */
 		if ($objElement->protected)
 		{
 			if (!FE_USER_LOGGED_IN)
@@ -962,6 +971,7 @@ abstract class Controller extends \System
 							case 'forward':
 								if ($objNextPage->jumpTo)
 								{
+									/** @var \PageModel $objNext */
 									$objNext = $objNextPage->getRelated('jumpTo');
 								}
 								else
@@ -1999,6 +2009,7 @@ abstract class Controller extends \System
 		}
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
+
 		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
 	}
 
@@ -2726,6 +2737,7 @@ abstract class Controller extends \System
 		{
 			while ($objFiles->next())
 			{
+				/** @var \FilesModel $objFiles */
 				if ($file == $objFiles->path)
 				{
 					static::sendFileToBrowser($file);
@@ -2743,6 +2755,7 @@ abstract class Controller extends \System
 		// Add download links
 		while ($objFiles->next())
 		{
+			/** @var \FilesModel $objFiles */
 			if ($objFiles->type == 'file')
 			{
 				if (!in_array($objFiles->extension, $allowedDownload) || !is_file(TL_ROOT . '/' . $objFiles->path))
@@ -2892,19 +2905,22 @@ abstract class Controller extends \System
 	 *
 	 * @param mixed $intId A page ID or a Model object
 	 *
-	 * @return \Model|null The page model or null
+	 * @return \PageModel The page model or null
 	 *
 	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
 	 */
 	public static function getPageDetails($intId)
 	{
-		if ($intId instanceof \Model)
+		if ($intId instanceof \PageModel)
 		{
 			return $intId->loadDetails();
 		}
 		elseif ($intId instanceof \Model\Collection)
 		{
-			return $intId->current()->loadDetails();
+			/** @var \PageModel $objPage */
+			$objPage = $intId->current();
+
+			return $objPage->loadDetails();
 		}
 		elseif (is_object($intId))
 		{
@@ -2922,6 +2938,7 @@ abstract class Controller extends \System
 			$objPage->loadDetails();
 
 			\Cache::set($strKey, $objPage);
+
 			return $objPage;
 		}
 		else
@@ -2943,6 +2960,7 @@ abstract class Controller extends \System
 			$objPage = \PageModel::findWithDetails($intId);
 
 			\Cache::set($strKey, $objPage);
+
 			return $objPage;
 		}
 	}

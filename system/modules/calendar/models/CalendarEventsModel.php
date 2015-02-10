@@ -14,6 +14,159 @@ namespace Contao;
 /**
  * Reads and writes events
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $tstamp
+ * @property string  $title
+ * @property string  $alias
+ * @property integer $author
+ * @property boolean $addTime
+ * @property integer $startTime
+ * @property integer $endTime
+ * @property integer $startDate
+ * @property integer $endDate
+ * @property string  $location
+ * @property string  $teaser
+ * @property boolean $addImage
+ * @property string  $singleSRC
+ * @property string  $alt
+ * @property string  $size
+ * @property string  $imagemargin
+ * @property string  $imageUrl
+ * @property boolean $fullsize
+ * @property string  $caption
+ * @property string  $floating
+ * @property boolean $recurring
+ * @property string  $repeatEach
+ * @property integer $repeatEnd
+ * @property integer $recurrences
+ * @property boolean $addEnclosure
+ * @property string  $enclosure
+ * @property string  $source
+ * @property integer $jumpTo
+ * @property integer $articleId
+ * @property string  $url
+ * @property boolean $target
+ * @property string  $cssClass
+ * @property boolean $noComments
+ * @property boolean $published
+ * @property string  $start
+ * @property string  $stop
+ *
+ * @method static $this findById()
+ * @method static $this findOneByPid()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByTitle()
+ * @method static $this findOneByAlias()
+ * @method static $this findOneByAuthor()
+ * @method static $this findOneByAddTime()
+ * @method static $this findOneByStartTime()
+ * @method static $this findOneByEndTime()
+ * @method static $this findOneByStartDate()
+ * @method static $this findOneByEndDate()
+ * @method static $this findOneByLocation()
+ * @method static $this findOneByTeaser()
+ * @method static $this findOneByAddImage()
+ * @method static $this findOneBySingleSRC()
+ * @method static $this findOneByAlt()
+ * @method static $this findOneBySize()
+ * @method static $this findOneByImagemargin()
+ * @method static $this findOneByImageUrl()
+ * @method static $this findOneByFullsize()
+ * @method static $this findOneByCaption()
+ * @method static $this findOneByFloating()
+ * @method static $this findOneByRecurring()
+ * @method static $this findOneByRepeatEach()
+ * @method static $this findOneByRepeatEnd()
+ * @method static $this findOneByRecurrences()
+ * @method static $this findOneByAddEnclosure()
+ * @method static $this findOneByEnclosure()
+ * @method static $this findOneBySource()
+ * @method static $this findOneByJumpTo()
+ * @method static $this findOneByArticleId()
+ * @method static $this findOneByUrl()
+ * @method static $this findOneByTarget()
+ * @method static $this findOneByCssClass()
+ * @method static $this findOneByNoComments()
+ * @method static $this findOneByPublished()
+ * @method static $this findOneByStart()
+ * @method static $this findOneByStop()
+ * @method static \Model\Collection findByPid()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findByTitle()
+ * @method static \Model\Collection findByAlias()
+ * @method static \Model\Collection findByAuthor()
+ * @method static \Model\Collection findByAddTime()
+ * @method static \Model\Collection findByStartTime()
+ * @method static \Model\Collection findByEndTime()
+ * @method static \Model\Collection findByStartDate()
+ * @method static \Model\Collection findByEndDate()
+ * @method static \Model\Collection findByLocation()
+ * @method static \Model\Collection findByTeaser()
+ * @method static \Model\Collection findByAddImage()
+ * @method static \Model\Collection findBySingleSRC()
+ * @method static \Model\Collection findByAlt()
+ * @method static \Model\Collection findBySize()
+ * @method static \Model\Collection findByImagemargin()
+ * @method static \Model\Collection findByImageUrl()
+ * @method static \Model\Collection findByFullsize()
+ * @method static \Model\Collection findByCaption()
+ * @method static \Model\Collection findByFloating()
+ * @method static \Model\Collection findByRecurring()
+ * @method static \Model\Collection findByRepeatEach()
+ * @method static \Model\Collection findByRepeatEnd()
+ * @method static \Model\Collection findByRecurrences()
+ * @method static \Model\Collection findByAddEnclosure()
+ * @method static \Model\Collection findByEnclosure()
+ * @method static \Model\Collection findBySource()
+ * @method static \Model\Collection findByJumpTo()
+ * @method static \Model\Collection findByArticleId()
+ * @method static \Model\Collection findByUrl()
+ * @method static \Model\Collection findByTarget()
+ * @method static \Model\Collection findByCssClass()
+ * @method static \Model\Collection findByNoComments()
+ * @method static \Model\Collection findByPublished()
+ * @method static \Model\Collection findByStart()
+ * @method static \Model\Collection findByStop()
+ * @method static integer countById()
+ * @method static integer countByPid()
+ * @method static integer countByTstamp()
+ * @method static integer countByTitle()
+ * @method static integer countByAlias()
+ * @method static integer countByAuthor()
+ * @method static integer countByAddTime()
+ * @method static integer countByStartTime()
+ * @method static integer countByEndTime()
+ * @method static integer countByStartDate()
+ * @method static integer countByEndDate()
+ * @method static integer countByLocation()
+ * @method static integer countByTeaser()
+ * @method static integer countByAddImage()
+ * @method static integer countBySingleSRC()
+ * @method static integer countByAlt()
+ * @method static integer countBySize()
+ * @method static integer countByImagemargin()
+ * @method static integer countByImageUrl()
+ * @method static integer countByFullsize()
+ * @method static integer countByCaption()
+ * @method static integer countByFloating()
+ * @method static integer countByRecurring()
+ * @method static integer countByRepeatEach()
+ * @method static integer countByRepeatEnd()
+ * @method static integer countByRecurrences()
+ * @method static integer countByAddEnclosure()
+ * @method static integer countByEnclosure()
+ * @method static integer countBySource()
+ * @method static integer countByJumpTo()
+ * @method static integer countByArticleId()
+ * @method static integer countByUrl()
+ * @method static integer countByTarget()
+ * @method static integer countByCssClass()
+ * @method static integer countByNoComments()
+ * @method static integer countByPublished()
+ * @method static integer countByStart()
+ * @method static integer countByStop()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class CalendarEventsModel extends \Model
@@ -33,7 +186,7 @@ class CalendarEventsModel extends \Model
 	 * @param array $arrPids    An array of calendar IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no event
+	 * @return static The model or null if there is no event
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{

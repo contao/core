@@ -17,6 +17,46 @@ namespace Contao;
  * The class reads from and writes to the style sheet table. It does not create
  * .css files on the hard disk. This is done by the StyleSheet class.
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $tstamp
+ * @property string  $name
+ * @property boolean $disablePie
+ * @property integer $embedImages
+ * @property string  $cc
+ * @property string  $media
+ * @property string  $mediaQuery
+ * @property string  $vars
+ *
+ * @method static $this findById()
+ * @method static $this findByName()
+ * @method static $this findOneByPid()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByDisablePie()
+ * @method static $this findOneByEmbedImages()
+ * @method static $this findOneByCc()
+ * @method static $this findOneByMedia()
+ * @method static $this findOneByMediaQuery()
+ * @method static $this findOneByVars()
+ * @method static \Model\Collection findByPid()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findByDisablePie()
+ * @method static \Model\Collection findByEmbedImages()
+ * @method static \Model\Collection findByCc()
+ * @method static \Model\Collection findByMedia()
+ * @method static \Model\Collection findByMediaQuery()
+ * @method static \Model\Collection findByVars()
+ * @method static integer countById()
+ * @method static integer countByPid()
+ * @method static integer countByTstamp()
+ * @method static integer countByName()
+ * @method static integer countByDisablePie()
+ * @method static integer countByEmbedImages()
+ * @method static integer countByCc()
+ * @method static integer countByMedia()
+ * @method static integer countByMediaQuery()
+ * @method static integer countByVars()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class StyleSheetModel extends \Model
@@ -47,6 +87,7 @@ class StyleSheetModel extends \Model
 		$arrIds = array_map('intval', $arrIds);
 
 		$objResult = $objDatabase->execute("SELECT *, (SELECT tstamp FROM tl_theme WHERE tl_theme.id=tl_style_sheet.pid) AS tstamp3, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.invisible='' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(',', $arrIds) . ") ORDER BY " . $objDatabase->findInSet('id', $arrIds));
+
 		return static::createCollectionFromDbResult($objResult, 'tl_style_sheet');
 	}
 }

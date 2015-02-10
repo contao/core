@@ -111,31 +111,37 @@ class Date
 
 			case 'dayBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['day']['begin'];
 				break;
 
 			case 'dayEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['day']['end'];
 				break;
 
 			case 'monthBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['month']['begin'];
 				break;
 
 			case 'monthEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['month']['end'];
 				break;
 
 			case 'yearBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['year']['begin'];
 				break;
 
 			case 'yearEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['year']['end'];
 				break;
 

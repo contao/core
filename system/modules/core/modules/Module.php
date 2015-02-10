@@ -14,6 +14,123 @@ namespace Contao;
 /**
  * Parent class for front end modules.
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $tstamp
+ * @property string  $name
+ * @property string  $headline
+ * @property string  $type
+ * @property integer $levelOffset
+ * @property integer $showLevel
+ * @property boolean $hardLimit
+ * @property boolean $showProtected
+ * @property boolean $defineRoot
+ * @property integer $rootPage
+ * @property string  $navigationTpl
+ * @property string  $customTpl
+ * @property string  $pages
+ * @property string  $orderPages
+ * @property boolean $showHidden
+ * @property string  $customLabel
+ * @property boolean $autologin
+ * @property integer $jumpTo
+ * @property boolean $redirectBack
+ * @property string  $cols
+ * @property string  $editable
+ * @property string  $memberTpl
+ * @property boolean $tableless
+ * @property integer $form
+ * @property string  $queryType
+ * @property boolean $fuzzy
+ * @property integer $contextLength
+ * @property integer $totalLength
+ * @property integer $perPage
+ * @property string  $searchType
+ * @property string  $searchTpl
+ * @property string  $inColumn
+ * @property integer $skipFirst
+ * @property boolean $loadFirst
+ * @property string  $size
+ * @property boolean $transparent
+ * @property string  $flashvars
+ * @property string  $altContent
+ * @property string  $source
+ * @property string  $singleSRC
+ * @property string  $url
+ * @property boolean $interactive
+ * @property string  $flashID
+ * @property string  $flashJS
+ * @property string  $imgSize
+ * @property boolean $useCaption
+ * @property boolean $fullsize
+ * @property string  $multiSRC
+ * @property string  $orderSRC
+ * @property string  $html
+ * @property integer $rss_cache
+ * @property string  $rss_feed
+ * @property string  $rss_template
+ * @property integer $numberOfItems
+ * @property boolean $disableCaptcha
+ * @property string  $reg_groups
+ * @property boolean $reg_allowLogin
+ * @property boolean $reg_skipName
+ * @property string  $reg_close
+ * @property boolean $reg_assignDir
+ * @property string  $reg_homeDir
+ * @property boolean $reg_activate
+ * @property integer $reg_jumpTo
+ * @property string  $reg_text
+ * @property string  $reg_password
+ * @property boolean $protected
+ * @property string  $groups
+ * @property boolean $guests
+ * @property string  $cssID
+ * @property string  $space
+ * @property string  $cal_calendar
+ * @property boolean $cal_noSpan
+ * @property integer $cal_startDay
+ * @property string  $cal_format
+ * @property boolean $cal_ignoreDynamic
+ * @property string  $cal_order
+ * @property integer $cal_readerModule
+ * @property integer $cal_limit
+ * @property string  $cal_template
+ * @property string  $cal_ctemplate
+ * @property boolean $cal_showQuantity
+ * @property string  $com_order
+ * @property boolean $com_moderate
+ * @property boolean $com_bbcode
+ * @property boolean $com_requireLogin
+ * @property boolean $com_disableCaptcha
+ * @property string  $com_template
+ * @property string  $faq_categories
+ * @property integer $faq_readerModule
+ * @property string  $list_table
+ * @property string  $list_fields
+ * @property string  $list_where
+ * @property string  $list_search
+ * @property string  $list_sort
+ * @property string  $list_info
+ * @property string  $list_info_where
+ * @property string  $list_layout
+ * @property string  $list_info_layout
+ * @property string  $news_archives
+ * @property string  $news_featured
+ * @property string  $news_jumpToCurrent
+ * @property integer $news_readerModule
+ * @property string  $news_metaFields
+ * @property string  $news_template
+ * @property string  $news_format
+ * @property integer $news_startDay
+ * @property string  $news_order
+ * @property boolean $news_showQuantity
+ * @property string  $newsletters
+ * @property string  $nl_channels
+ * @property boolean $nl_hideChannels
+ * @property string  $nl_subscribe
+ * @property string  $nl_unsubscribe
+ * @property string  $nl_template
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Module extends \Frontend
@@ -368,6 +485,7 @@ abstract class Module extends \Frontend
 		}
 
 		$objTemplate->items = $items;
+
 		return !empty($items) ? $objTemplate->parse() : '';
 	}
 

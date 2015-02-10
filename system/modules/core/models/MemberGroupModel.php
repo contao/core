@@ -14,6 +14,39 @@ namespace Contao;
 /**
  * Reads and writes member groups
  *
+ * @property integer $id
+ * @property integer $tstamp
+ * @property string  $name
+ * @property boolean $redirect
+ * @property integer $jumpTo
+ * @property boolean $disable
+ * @property string  $start
+ * @property string  $stop
+ *
+ * @method static $this findById()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByName()
+ * @method static $this findOneByRedirect()
+ * @method static $this findOneByJumpTo()
+ * @method static $this findOneByDisable()
+ * @method static $this findOneByStart()
+ * @method static $this findOneByStop()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findByName()
+ * @method static \Model\Collection findByRedirect()
+ * @method static \Model\Collection findByJumpTo()
+ * @method static \Model\Collection findByDisable()
+ * @method static \Model\Collection findByStart()
+ * @method static \Model\Collection findByStop()
+ * @method static integer countById()
+ * @method static integer countByTstamp()
+ * @method static integer countByName()
+ * @method static integer countByRedirect()
+ * @method static integer countByJumpTo()
+ * @method static integer countByDisable()
+ * @method static integer countByStart()
+ * @method static integer countByStop()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class MemberGroupModel extends \Model
@@ -32,7 +65,7 @@ class MemberGroupModel extends \Model
 	 * @param integer $intId      The member group ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no member group
+	 * @return static The model or null if there is no member group
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
 	{
@@ -54,7 +87,7 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param string $arrIds An array of member group IDs
 	 *
-	 * @return \Model|null The model or null if there is no matching member group
+	 * @return static The model or null if there is no matching member group
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{

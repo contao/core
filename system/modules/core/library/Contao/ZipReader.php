@@ -230,6 +230,7 @@ class ZipReader
 			if ($strName == $v['file_name'])
 			{
 				$this->intIndex = $k;
+
 				return true;
 			}
 		}

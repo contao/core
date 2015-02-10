@@ -14,6 +14,71 @@ namespace Contao;
 /**
  * Reads and writes newsletters
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $tstamp
+ * @property string  $subject
+ * @property string  $alias
+ * @property string  $content
+ * @property string  $text
+ * @property boolean $addFile
+ * @property string  $files
+ * @property string  $template
+ * @property boolean $sendText
+ * @property boolean $externalImages
+ * @property string  $sender
+ * @property string  $senderName
+ * @property boolean $sent
+ * @property string  $date
+ *
+ * @method static $this findById()
+ * @method static $this findOneByPid()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneBySubject()
+ * @method static $this findOneByAlias()
+ * @method static $this findOneByContent()
+ * @method static $this findOneByText()
+ * @method static $this findOneByAddFile()
+ * @method static $this findOneByFiles()
+ * @method static $this findOneByTemplate()
+ * @method static $this findOneBySendText()
+ * @method static $this findOneByExternalImages()
+ * @method static $this findOneBySender()
+ * @method static $this findOneBySenderName()
+ * @method static $this findOneBySent()
+ * @method static $this findOneByDate()
+ * @method static \Model\Collection findByPid()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findBySubject()
+ * @method static \Model\Collection findByAlias()
+ * @method static \Model\Collection findByContent()
+ * @method static \Model\Collection findByText()
+ * @method static \Model\Collection findByAddFile()
+ * @method static \Model\Collection findByFiles()
+ * @method static \Model\Collection findByTemplate()
+ * @method static \Model\Collection findBySendText()
+ * @method static \Model\Collection findByExternalImages()
+ * @method static \Model\Collection findBySender()
+ * @method static \Model\Collection findBySenderName()
+ * @method static \Model\Collection findBySent()
+ * @method static \Model\Collection findByDate()
+ * @method static integer countById()
+ * @method static integer countByPid()
+ * @method static integer countByTstamp()
+ * @method static integer countBySubject()
+ * @method static integer countByAlias()
+ * @method static integer countByContent()
+ * @method static integer countByText()
+ * @method static integer countByAddFile()
+ * @method static integer countByFiles()
+ * @method static integer countByTemplate()
+ * @method static integer countBySendText()
+ * @method static integer countByExternalImages()
+ * @method static integer countBySender()
+ * @method static integer countBySenderName()
+ * @method static integer countBySent()
+ * @method static integer countByDate()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class NewsletterModel extends \Model

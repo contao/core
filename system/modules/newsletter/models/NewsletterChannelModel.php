@@ -14,6 +14,47 @@ namespace Contao;
 /**
  * Reads and writes newsletter channels
  *
+ * @property integer $id
+ * @property integer $tstamp
+ * @property string  $title
+ * @property integer $jumpTo
+ * @property boolean $useSMTP
+ * @property string  $smtpHost
+ * @property string  $smtpUser
+ * @property string  $smtpPass
+ * @property string  $smtpEnc
+ * @property integer $smtpPort
+ *
+ * @method static $this findById()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByTitle()
+ * @method static $this findOneByJumpTo()
+ * @method static $this findOneByUseSMTP()
+ * @method static $this findOneBySmtpHost()
+ * @method static $this findOneBySmtpUser()
+ * @method static $this findOneBySmtpPass()
+ * @method static $this findOneBySmtpEnc()
+ * @method static $this findOneBySmtpPort()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findByTitle()
+ * @method static \Model\Collection findByJumpTo()
+ * @method static \Model\Collection findByUseSMTP()
+ * @method static \Model\Collection findBySmtpHost()
+ * @method static \Model\Collection findBySmtpUser()
+ * @method static \Model\Collection findBySmtpPass()
+ * @method static \Model\Collection findBySmtpEnc()
+ * @method static \Model\Collection findBySmtpPort()
+ * @method static integer countById()
+ * @method static integer countByTstamp()
+ * @method static integer countByTitle()
+ * @method static integer countByJumpTo()
+ * @method static integer countByUseSMTP()
+ * @method static integer countBySmtpHost()
+ * @method static integer countBySmtpUser()
+ * @method static integer countBySmtpPass()
+ * @method static integer countBySmtpEnc()
+ * @method static integer countBySmtpPort()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class NewsletterChannelModel extends \Model

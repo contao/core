@@ -14,6 +14,51 @@ namespace Contao;
 /**
  * Reads and writes comments subscriptions
  *
+ * @property integer $id
+ * @property integer $tstamp
+ * @property string  $source
+ * @property integer $parent
+ * @property string  $name
+ * @property string  $email
+ * @property string  $url
+ * @property string  $addedOn
+ * @property string  $ip
+ * @property string  $tokenConfirm
+ * @property string  $tokenRemove
+ *
+ * @method static $this findById()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneBySource()
+ * @method static $this findOneByParent()
+ * @method static $this findOneByName()
+ * @method static $this findOneByEmail()
+ * @method static $this findOneByUrl()
+ * @method static $this findOneByAddedOn()
+ * @method static $this findOneByIp()
+ * @method static $this findOneByTokenConfirm()
+ * @method static $this findOneByTokenRemove()
+ * @method static \Model\Collection findByTstamp()
+ * @method static \Model\Collection findBySource()
+ * @method static \Model\Collection findByParent()
+ * @method static \Model\Collection findByName()
+ * @method static \Model\Collection findByEmail()
+ * @method static \Model\Collection findByUrl()
+ * @method static \Model\Collection findByAddedOn()
+ * @method static \Model\Collection findByIp()
+ * @method static \Model\Collection findByTokenConfirm()
+ * @method static \Model\Collection findByTokenRemove()
+ * @method static integer countById()
+ * @method static integer countByTstamp()
+ * @method static integer countBySource()
+ * @method static integer countByParent()
+ * @method static integer countByName()
+ * @method static integer countByEmail()
+ * @method static integer countByUrl()
+ * @method static integer countByAddedOn()
+ * @method static integer countByIp()
+ * @method static integer countByTokenConfirm()
+ * @method static integer countByTokenRemove()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class CommentsNotifyModel extends \Model
@@ -32,11 +77,12 @@ class CommentsNotifyModel extends \Model
 	 * @param string $strToken   The token string
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return \Model|null The subscription model or null
+	 * @return static The subscription model or null
 	 */
 	public static function findByTokens($strToken, array $arrOptions=array())
 	{
 		$t = static::$strTable;
+
 		return static::findOneBy(array("($t.tokenConfirm=? OR $t.tokenRemove=?)"), array($strToken, $strToken), $arrOptions);
 	}
 
@@ -49,11 +95,12 @@ class CommentsNotifyModel extends \Model
 	 * @param string  $strEmail   The e-mail address
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The subscription model or null
+	 * @return static The subscription model or null
 	 */
 	public static function findBySourceParentAndEmail($strSource, $intParent, $strEmail, array $arrOptions=array())
 	{
 		$t = static::$strTable;
+
 		return static::findOneBy(array("$t.source=? AND $t.parent=? AND $t.email=?"), array($strSource, $intParent, $strEmail), $arrOptions);
 	}
 
@@ -70,6 +117,7 @@ class CommentsNotifyModel extends \Model
 	public static function findActiveBySourceAndParent($strSource, $intParent, array $arrOptions=array())
 	{
 		$t = static::$strTable;
+
 		return static::findBy(array("$t.source=? AND $t.parent=? AND tokenConfirm=''"), array($strSource, $intParent), $arrOptions);
 	}
 }
