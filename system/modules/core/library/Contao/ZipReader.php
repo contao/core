@@ -30,11 +30,11 @@ namespace Contao;
  * @property integer $size_of_cd                The size of the central directory
  * @property integer $offset_start_cd           The offset of the start of the central directory with respect to the starting disk number
  * @property integer $zipfile_comment_length    The ZIP file comment length
- * @property integer $zipfile_comment           The ZIP file comment
- * @property string  $version_made_by           The version made by
- * @property string  $version_needed_to_extract The version needed to extract
+ * @property string  $zipfile_comment           The ZIP file comment
+ * @property integer $version_made_by           The version made by
+ * @property integer $version_needed_to_extract The version needed to extract
  * @property integer $general_purpose_bit_flag  General purpose bit flag
- * @property string  $compression_method        The compression method
+ * @property integer $compression_method        The compression method
  * @property integer $last_mod_file_time        The last modification file time
  * @property integer $last_mod_file_date        The last modification file date
  * @property integer $last_mod_file_unix        The last modification file unix timestamp
@@ -246,6 +246,7 @@ class ZipReader
 	public function first()
 	{
 		$this->intIndex = 0;
+
 		return $this;
 	}
 
@@ -263,6 +264,7 @@ class ZipReader
 		}
 
 		++$this->intIndex;
+
 		return $this;
 	}
 
@@ -280,6 +282,7 @@ class ZipReader
 		}
 
 		--$this->intIndex;
+
 		return $this;
 	}
 
@@ -292,6 +295,7 @@ class ZipReader
 	public function last()
 	{
 		$this->intIndex = $this->intLast;
+
 		return $this;
 	}
 
@@ -320,6 +324,7 @@ class ZipReader
 	public function reset()
 	{
 		$this->intIndex = -1;
+
 		return $this;
 	}
 
@@ -442,6 +447,7 @@ class ZipReader
 		}
 
 		$intOffset = 0;
+		$pos = 0;
 		$intInterval = min(filesize(TL_ROOT . '/' . $this->strFile), 1024);
 		$strBuffer = '';
 

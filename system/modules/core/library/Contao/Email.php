@@ -526,6 +526,7 @@ class Email
 		}
 
 		log_message($strMessage, $this->strLogFile);
+
 		return true;
 	}
 

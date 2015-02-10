@@ -90,6 +90,8 @@ class Picture
 			$size = (int) $size[2];
 		}
 
+		$imageSize = null;
+
 		if (!is_array($size))
 		{
 			$imageSize = \ImageSizeModel::findByPk($size);

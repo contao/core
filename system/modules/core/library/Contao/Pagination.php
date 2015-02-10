@@ -81,7 +81,7 @@ class Pagination
 
 	/**
 	 * Template object
-	 * @var \Template
+	 * @var \Template|object
 	 */
 	protected $objTemplate;
 
