@@ -68,7 +68,7 @@ class PageError404 extends \Frontend
 			}
 		}
 
-		// Look for an 404 page
+		/** @var \PageModel $obj404 */
 		$obj404 = \PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
@@ -82,8 +82,9 @@ class PageError404 extends \Frontend
 		if (!$obj404->autoforward || !$obj404->jumpTo)
 		{
 			global $objPage;
-
 			$objPage = $obj404->loadDetails();
+
+			/** @var \PageRegular $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 404 Not Found');
@@ -102,6 +103,7 @@ class PageError404 extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
+		/** @var \PageModel $objNextPage */
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));
 	}
 }

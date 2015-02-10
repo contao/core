@@ -286,7 +286,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Try to find a root page based on language and URL
-	 * @return \Model
+	 * @return \PageModel
 	 */
 	public static function getRootPageFromUrl()
 	{

@@ -27,6 +27,11 @@ namespace Contao;
  * @property string  $media
  * @property string  $mediaQuery
  * @property string  $vars
+ * @property string  $type
+ * @property boolean $hasFontFace
+ * @property string  $singleSRC
+ * @property integer $tstamp2
+ * @property integer $tstamp3
  *
  * @method static $this findById()
  * @method static $this findByName()

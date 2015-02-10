@@ -25,7 +25,7 @@ class PageForward extends \Frontend
 	 */
 	public function generate($objPage)
 	{
-		// Forward to the jumpTo or first published page
+		/** @var \PageModel $objPage */
 		if ($objPage->jumpTo)
 		{
 			$objNextPage = $objPage->getRelated('jumpTo');
@@ -48,6 +48,7 @@ class PageForward extends \Frontend
 		// Check the target page language (see #4706)
 		if (\Config::get('addLanguageToUrl'))
 		{
+			/** @var \PageModel $objNextPage */
 			$objNextPage->loadDetails(); // see #3983
 			$strForceLang = $objNextPage->language;
 		}
