@@ -91,7 +91,7 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Active record
-	 * @param object
+	 * @param \Model
 	 */
 	protected $objActiveRecord;
 

@@ -885,6 +885,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Process the uploaded files
@@ -904,6 +905,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				foreach ($arrUploaded as $strFile)
 				{
+					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPath($strFile);
 
 					// Existing file is being replaced (see #4818)
@@ -1046,6 +1048,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->blnCreateNewVersion = false;
+
+		/** @var \FilesModel $objFile */
 		$objVersions = new \Versions($this->strTable, $objFile->id);
 
 		// Compare versions
@@ -1376,6 +1380,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->objActiveRecord = $objFile;
 				}
 
+				/** @var \FilesModel $objFile */
 				$objVersions = new \Versions($this->strTable, $objFile->id);
 				$objVersions->initialize();
 
@@ -1737,6 +1742,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				if ($this->blnIsDbAssisted)
 				{
+					/** @var \FilesModel $objMeta */
 					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
 
@@ -1773,6 +1779,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			include TL_ROOT . '/system/config/ace.php';
 			$codeEditor = ob_get_contents();
 			ob_end_clean();
+
+			unset($selector, $type);
 		}
 
 		// Versions overview
