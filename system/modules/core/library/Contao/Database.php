@@ -187,7 +187,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 */
 	public function execute($strQuery)
 	{
@@ -200,7 +200,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 */
 	public function query($strQuery)
 	{
@@ -730,7 +730,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 *
 	 * @deprecated Use \Database::execute() instead
 	 */
@@ -745,7 +745,7 @@ abstract class Database
 	 *
 	 * @param string $strQuery The query string
 	 *
-	 * @return \Database\Result The Database\Result object
+	 * @return \Database\Result|object The Database\Result object
 	 *
 	 * @deprecated Use \Database::execute() instead
 	 */

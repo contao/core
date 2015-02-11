@@ -963,6 +963,7 @@ class Updater extends \Controller
 	 */
 	protected function createContentElement(\Database\Result $objElement, $strPtable, $strField)
 	{
+		/** @var \Database\Result|object $objElement */
 		$set = array
 		(
 			'pid'         => $objElement->id,

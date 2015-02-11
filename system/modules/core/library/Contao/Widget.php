@@ -34,67 +34,67 @@ namespace Contao;
  *         }
  *     }
  *
- * @property string           $id                The field ID
- * @property string           $name              the field name
- * @property string           $label             The field label
- * @property mixed            $value             The field value
- * @property string           $class             One or more CSS classes
- * @property string           $prefix            The CSS class prefix
- * @property string           $template          The template name
- * @property string           $wizard            The field wizard markup
- * @property string           $alt               The alternative text
- * @property string           $style             The style attribute
- * @property string           $accesskey         The key to focus the field
- * @property integer          $tabindex          The tabindex of the field
- * @property boolean          $disabled          Adds the disabled attribute
- * @property boolean          $readonly          Adds the readonly attribute
- * @property boolean          $autofocus         Adds the autofocus attribute
- * @property boolean          $required          Adds the required attribute
- * @property string           $onblur            The blur event
- * @property string           $onchange          The change event
- * @property string           $onclick           The click event
- * @property string           $ondblclick        The double click event
- * @property string           $onfocus           The focus event
- * @property string           $onmousedown       The mouse down event
- * @property string           $onmousemove       The mouse move event
- * @property string           $onmouseout        The mouse out event
- * @property string           $onmouseover       The mouse over event
- * @property string           $onmouseup         The mouse up event
- * @property string           $onkeydown         The key down event
- * @property string           $onkeypress        The key press event
- * @property string           $onkeyup           The key up event
- * @property string           $onselect          The select event
- * @property boolean          $mandatory         The field value must not be empty
- * @property boolean          $nospace           Do not allow whitespace characters
- * @property boolean          $allowHtml         Allow HTML tags in the field value
- * @property boolean          $addSubmit         Add an inline submit button
- * @property boolean          $storeFile         Store uploaded files in a given folder
- * @property boolean          $useHomeDir        Store uploaded files in the user's home directory
- * @property boolean          $trailingSlash     Add or remove a trailing slash
- * @property boolean          $spaceToUnderscore Convert spaces to underscores
- * @property boolean          $nullIfEmpty       Set to NULL if the value is empty
- * @property boolean          $doNotTrim         Do not trim the user input
- * @property string           $forAttribute      The "for" attribute
- * @property \DataContainer   $dataContainer     The data container object
- * @property \Database\Result $activeRecord      The active record
- * @property string           $mandatoryField    The "mandatory field" label
- * @property string           $customTpl         A custom template name
- * @property string           $slabel            The submit button label
- * @property boolean          $preserveTags      Preserve HTML tags
- * @property boolean          $decodeEntities    Decode HTML entities
- * @property integer          $minlength         The minimum length
- * @property integer          $maxlength         The maximum length
- * @property integer          $minval            The minimum value
- * @property integer          $maxval            The maximum value
- * @property integer          $rgxp              The regular expression name
- * @property boolean          $isHexColor        The field value is a hex color
- * @property string           $strTable          The table name
- * @property string           $strField          The field name
- * @property string           $xlabel
- * @property integer          $currentRecord
- * @property integer          $rowClass
- * @property integer          $rowClassConfirm
- * @property integer          $storeValues
+ * @property string                  $id                The field ID
+ * @property string                  $name              the field name
+ * @property string                  $label             The field label
+ * @property mixed                   $value             The field value
+ * @property string                  $class             One or more CSS classes
+ * @property string                  $prefix            The CSS class prefix
+ * @property string                  $template          The template name
+ * @property string                  $wizard            The field wizard markup
+ * @property string                  $alt               The alternative text
+ * @property string                  $style             The style attribute
+ * @property string                  $accesskey         The key to focus the field
+ * @property integer                 $tabindex          The tabindex of the field
+ * @property boolean                 $disabled          Adds the disabled attribute
+ * @property boolean                 $readonly          Adds the readonly attribute
+ * @property boolean                 $autofocus         Adds the autofocus attribute
+ * @property boolean                 $required          Adds the required attribute
+ * @property string                  $onblur            The blur event
+ * @property string                  $onchange          The change event
+ * @property string                  $onclick           The click event
+ * @property string                  $ondblclick        The double click event
+ * @property string                  $onfocus           The focus event
+ * @property string                  $onmousedown       The mouse down event
+ * @property string                  $onmousemove       The mouse move event
+ * @property string                  $onmouseout        The mouse out event
+ * @property string                  $onmouseover       The mouse over event
+ * @property string                  $onmouseup         The mouse up event
+ * @property string                  $onkeydown         The key down event
+ * @property string                  $onkeypress        The key press event
+ * @property string                  $onkeyup           The key up event
+ * @property string                  $onselect          The select event
+ * @property boolean                 $mandatory         The field value must not be empty
+ * @property boolean                 $nospace           Do not allow whitespace characters
+ * @property boolean                 $allowHtml         Allow HTML tags in the field value
+ * @property boolean                 $addSubmit         Add an inline submit button
+ * @property boolean                 $storeFile         Store uploaded files in a given folder
+ * @property boolean                 $useHomeDir        Store uploaded files in the user's home directory
+ * @property boolean                 $trailingSlash     Add or remove a trailing slash
+ * @property boolean                 $spaceToUnderscore Convert spaces to underscores
+ * @property boolean                 $nullIfEmpty       Set to NULL if the value is empty
+ * @property boolean                 $doNotTrim         Do not trim the user input
+ * @property string                  $forAttribute      The "for" attribute
+ * @property \DataContainer          $dataContainer     The data container object
+ * @property \Database\Result|object $activeRecord      The active record
+ * @property string                  $mandatoryField    The "mandatory field" label
+ * @property string                  $customTpl         A custom template name
+ * @property string                  $slabel            The submit button label
+ * @property boolean                 $preserveTags      Preserve HTML tags
+ * @property boolean                 $decodeEntities    Decode HTML entities
+ * @property integer                 $minlength         The minimum length
+ * @property integer                 $maxlength         The maximum length
+ * @property integer                 $minval            The minimum value
+ * @property integer                 $maxval            The maximum value
+ * @property integer                 $rgxp              The regular expression name
+ * @property boolean                 $isHexColor        The field value is a hex color
+ * @property string                  $strTable          The table name
+ * @property string                  $strField          The field name
+ * @property string                  $xlabel
+ * @property integer                 $currentRecord
+ * @property integer                 $rowClass
+ * @property integer                 $rowClassConfirm
+ * @property integer                 $storeValues
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

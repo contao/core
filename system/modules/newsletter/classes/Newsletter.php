@@ -314,6 +314,7 @@ class Newsletter extends \Backend
 	{
 		$objEmail = new \Email();
 
+		/** @var \Database\Result|object $objNewsletter */
 		$objEmail->from = $objNewsletter->sender;
 		$objEmail->subject = $objNewsletter->subject;
 
@@ -354,7 +355,7 @@ class Newsletter extends \Backend
 		// Prepare the text content
 		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
 
-		// Add the HTML content
+		/** @var \Database\Result|object $objNewsletter */
 		if (!$objNewsletter->sendText)
 		{
 			// Default template

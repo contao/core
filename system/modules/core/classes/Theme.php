@@ -762,7 +762,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		// Get all style sheets
+		/** @var \Database\Result|object $objTheme */
 		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE pid=? ORDER BY name")
 										->execute($objTheme->id);
 
@@ -822,7 +822,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		// Get all modules
+		/** @var \Database\Result|object $objTheme */
 		$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
 
@@ -854,7 +854,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		// Get all layouts
+		/** @var \Database\Result|object $objTheme */
 		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
 
@@ -883,7 +883,7 @@ class Theme extends \Backend
 		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
 		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
 
-		// Get all sizes
+		/** @var \Database\Result|object $objTheme */
 		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
 								   ->execute($objTheme->id);
 

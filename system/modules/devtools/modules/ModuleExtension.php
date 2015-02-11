@@ -106,6 +106,8 @@ class ModuleExtension extends \BackendModule
 				}
 			}
 
+			$arrTables = array();
+
 			// Front end
 			if ($objModule->addFeMod)
 			{
@@ -221,6 +223,7 @@ class ModuleExtension extends \BackendModule
 	{
 		$objTemplate = \BackendTemplate::create($strTemplate);
 
+		/** @var \Database\Result|object $objModule */
 		$objTemplate->folder = $objModule->folder;
 		$objTemplate->author = str_replace(array('[', ']'), array('<', '>'), $objModule->author);
 		$objTemplate->copyright = $objModule->copyright;

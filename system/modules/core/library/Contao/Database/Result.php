@@ -32,7 +32,7 @@ namespace Contao\Database;
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-abstract class Result extends \stdClass
+abstract class Result
 {
 
 	/**
