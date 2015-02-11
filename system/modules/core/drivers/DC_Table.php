@@ -21,85 +21,85 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Name of the parent table
-	 * @param string
+	 * @var string
 	 */
 	protected $ptable;
 
 	/**
 	 * Names of the child tables
-	 * @param array
+	 * @var array
 	 */
 	protected $ctable;
 
 	/**
 	 * IDs of all root records
-	 * @param array
+	 * @var array
 	 */
 	protected $root;
 
 	/**
 	 * ID of the button container
-	 * @param string
+	 * @var string
 	 */
 	protected $bid;
 
 	/**
 	 * Limit (database query)
-	 * @param string
+	 * @var string
 	 */
 	protected $limit;
 
 	/**
 	 * Total (database query)
-	 * @param string
+	 * @var string
 	 */
 	protected $total;
 
 	/**
 	 * First sorting field
-	 * @param string
+	 * @var string
 	 */
 	protected $firstOrderBy;
 
 	/**
 	 * Order by (database query)
-	 * @param array
+	 * @var array
 	 */
 	protected $orderBy = array();
 
 	/**
 	 * Fields of a new or duplicated record
-	 * @param array
+	 * @var array
 	 */
 	protected $set = array();
 
 	/**
 	 * IDs of all records that are currently displayed
-	 * @param array
+	 * @var array
 	 */
 	protected $current = array();
 
 	/**
 	 * Show the current table as tree
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $treeView = false;
 
 	/**
 	 * True if a new version has to be created
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnCreateNewVersion = false;
 
 	/**
 	 * True if one of the form fields is uploadable
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnUploadable = false;
 
 	/**
 	 * The current back end module
-	 * @param array
+	 * @var array
 	 */
 	protected $arrModule = array();
 

@@ -103,7 +103,7 @@ class BackendMain extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_main');;
+		$this->Template = new \BackendTemplate('be_main');
 		$this->Template->main = '';
 
 		// Ajax request
@@ -132,6 +132,63 @@ class BackendMain extends \Backend
 			$this->Template->title = $this->Template->headline;
 		}
 
+		$this->output();
+	}
+
+
+	/**
+	 * Add the welcome screen
+	 * @return string
+	 */
+	protected function welcomeScreen()
+	{
+		\System::loadLanguageFile('explain');
+
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_welcome');
+		$objTemplate->messages = \Message::generate(false, true);
+
+		// HOOK: add custom messages
+		if (isset($GLOBALS['TL_HOOKS']['getSystemMessages']) && is_array($GLOBALS['TL_HOOKS']['getSystemMessages']))
+		{
+			$arrMessages = array();
+
+			foreach ($GLOBALS['TL_HOOKS']['getSystemMessages'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]();
+
+				if ($strBuffer != '')
+				{
+					$arrMessages[] = $strBuffer;
+				}
+			}
+
+			if (!empty($arrMessages))
+			{
+				$objTemplate->messages .= "\n" . implode("\n", $arrMessages);
+			}
+		}
+
+		// Add the versions overview
+		\Versions::addToTemplate($objTemplate);
+
+		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], \Config::get('websiteTitle'));
+		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
+		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
+		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
+		$objTemplate->shortcutsLink = $GLOBALS['TL_LANG']['MSC']['shortcuts'][1];
+		$objTemplate->editElement = specialchars($GLOBALS['TL_LANG']['MSC']['editElement']);
+
+		return $objTemplate->parse();
+	}
+
+
+	/**
+	 * Output the template file
+	 */
+	protected function output()
+	{
 		// Default headline
 		if ($this->Template->headline == '')
 		{
@@ -215,53 +272,5 @@ class BackendMain extends \Backend
 		}
 
 		$this->Template->output();
-	}
-
-
-	/**
-	 * Add the welcome screen
-	 * @return string
-	 */
-	protected function welcomeScreen()
-	{
-		\System::loadLanguageFile('explain');
-
-		/** @var \BackendTemplate|object $objTemplate */
-		$objTemplate = new \BackendTemplate('be_welcome');
-		$objTemplate->messages = \Message::generate(false, true);
-
-		// HOOK: add custom messages
-		if (isset($GLOBALS['TL_HOOKS']['getSystemMessages']) && is_array($GLOBALS['TL_HOOKS']['getSystemMessages']))
-		{
-			$arrMessages = array();
-
-			foreach ($GLOBALS['TL_HOOKS']['getSystemMessages'] as $callback)
-			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]();
-
-				if ($strBuffer != '')
-				{
-					$arrMessages[] = $strBuffer;
-				}
-			}
-
-			if (!empty($arrMessages))
-			{
-				$objTemplate->messages .= "\n" . implode("\n", $arrMessages);
-			}
-		}
-
-		// Add the versions overview
-		\Versions::addToTemplate($objTemplate);
-
-		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], \Config::get('websiteTitle'));
-		$objTemplate->showDifferences = specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['showDifferences']));
-		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
-		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
-		$objTemplate->shortcutsLink = $GLOBALS['TL_LANG']['MSC']['shortcuts'][1];
-		$objTemplate->editElement = specialchars($GLOBALS['TL_LANG']['MSC']['editElement']);
-
-		return $objTemplate->parse();
 	}
 }

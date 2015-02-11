@@ -160,7 +160,7 @@ class ModuleRssReader extends \Module
 		$items = array();
 		$last = min($limit, count($arrItems)) - 1;
 
-		/** @var \SimplePie_Item[] $arrItems $i */
+		/** @var \SimplePie_Item[] $arrItems */
 		for ($i=$offset, $c=count($arrItems); $i<$limit && $i<$c; $i++)
 		{
 			$items[$i] = array

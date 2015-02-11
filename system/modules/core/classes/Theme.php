@@ -639,11 +639,10 @@ class Theme extends \Backend
 
 	/**
 	 * Export a theme
-	 * @param \DataContainer
+	 * @param object
 	 */
-	public function exportTheme(\DataContainer $dc)
+	public function exportTheme($dc)
 	{
-		/** @var \DataContainer|object $dc */
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
 								   ->limit(1)
 								   ->execute($dc->id);

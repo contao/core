@@ -32,67 +32,67 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Current ID
-	 * @param integer
+	 * @var integer
 	 */
 	protected $intId;
 
 	/**
 	 * Name of the current table
-	 * @param string
+	 * @var string
 	 */
 	protected $strTable;
 
 	/**
 	 * Name of the current field
-	 * @param string
+	 * @var string
 	 */
 	protected $strField;
 
 	/**
 	 * Name attribute of the current input field
-	 * @param string
+	 * @var string
 	 */
 	protected $strInputName;
 
 	/**
 	 * Value of the current field
-	 * @param mixed
+	 * @var mixed
 	 */
 	protected $varValue;
 
 	/**
 	 * Name of the current palette
-	 * @param string
+	 * @var string
 	 */
 	protected $strPalette;
 
 	/**
 	 * WHERE clause of the database query
-	 * @param array
+	 * @var array
 	 */
 	protected $procedure = array();
 
 	/**
 	 * Values for the WHERE clause of the database query
-	 * @param array
+	 * @var array
 	 */
 	protected $values = array();
 
 	/**
 	 * Form attribute "onsubmit"
-	 * @param array
+	 * @var array
 	 */
 	protected $onsubmit = array();
 
 	/**
 	 * Reload the page after the form has been submitted
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $noReload = false;
 
 	/**
 	 * Active record
-	 * @param \Model
+	 * @var \Model
 	 */
 	protected $objActiveRecord;
 

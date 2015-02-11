@@ -840,7 +840,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Mark root pages
-		if ($row['type'] == 'root' || Input::get('do') == 'article')
+		if ($row['type'] == 'root' || \Input::get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
@@ -848,7 +848,6 @@ abstract class Backend extends \Controller
 		// Add the breadcrumb link
 		$label = '<a href="' . \Controller::addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
 
-		/** @var \DataContainer|object $dc */
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
 	}
 

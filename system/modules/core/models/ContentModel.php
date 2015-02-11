@@ -97,6 +97,7 @@ namespace Contao;
  * @property string  $com_template
  * @property string  $typePrefix
  * @property string  $classes
+ * @property integer $origId
  *
  * @method static $this findById()
  * @method static $this findOneByPid()
