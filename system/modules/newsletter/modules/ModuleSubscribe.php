@@ -34,7 +34,8 @@ class ModuleSubscribe extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['subscribe'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -65,7 +66,10 @@ class ModuleSubscribe extends \Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = \FrontendTemplate::create($this->nl_template);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->nl_template);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -133,7 +137,10 @@ class ModuleSubscribe extends \Module
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = \FrontendTemplate::create('mod_newsletter');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsletter');
+
+		$this->Template = $objTemplate;
 
 		// Check the token
 		$objRecipient = \NewsletterRecipientsModel::findByToken(\Input::get('token'));

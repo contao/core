@@ -156,7 +156,8 @@ class Pagination
 		// Backwards compatibility
 		if ($objTemplate === null)
 		{
-			$objTemplate = \FrontendTemplate::create('pagination');
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate('pagination');
 		}
 
 		$this->objTemplate = $objTemplate;

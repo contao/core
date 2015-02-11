@@ -376,7 +376,8 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
-		$objTemplate = \FrontendTemplate::create($strTemplate);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;

@@ -76,7 +76,10 @@ class ModuleArticle extends \Module
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = \FrontendTemplate::create('mod_article_plain');
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('mod_article_plain');
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -114,7 +117,10 @@ class ModuleArticle extends \Module
 		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = \FrontendTemplate::create('mod_article_teaser');
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('mod_article_teaser');
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 
 			$this->cssID = array($alias, '');

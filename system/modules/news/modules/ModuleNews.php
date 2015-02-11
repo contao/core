@@ -82,7 +82,8 @@ abstract class ModuleNews extends \Module
 	{
 		global $objPage;
 
-		$objTemplate = \FrontendTemplate::create($this->news_template);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->news_template);
 
 		/** @var \NewsModel $objArticle */
 		$objTemplate->setData($objArticle->row());

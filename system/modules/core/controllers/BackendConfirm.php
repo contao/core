@@ -52,11 +52,12 @@ class BackendConfirm extends \Backend
 			$this->redirect($strUrl);
 		}
 
-		$this->Template = \BackendTemplate::create('be_confirm');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_confirm');
 
 		// Prepare the URL
 		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));
-		$this->Template->href = ampersand($url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN);
+		$objTemplate->href = ampersand($url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN);
 
 		$vars = array();
 		list(, $request) = explode('?', $url, 2);
@@ -131,19 +132,19 @@ class BackendConfirm extends \Backend
 		unset($arrInfo['mode']);
 
 		// Template variables
-		$this->Template->confirm = true;
-		$this->Template->link = specialchars($url);
-		$this->Template->info = $arrInfo;
-		$this->Template->labels = $GLOBALS['TL_LANG']['CONFIRM'];
-		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
-		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
-		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);
-		$this->Template->charset = \Config::get('characterSet');
+		$objTemplate->confirm = true;
+		$objTemplate->link = specialchars($url);
+		$objTemplate->info = $arrInfo;
+		$objTemplate->labels = $GLOBALS['TL_LANG']['CONFIRM'];
+		$objTemplate->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
+		$objTemplate->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
+		$objTemplate->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['invalidTokenUrl']);
+		$objTemplate->charset = \Config::get('characterSet');
 
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

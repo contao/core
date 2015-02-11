@@ -64,11 +64,11 @@ class BackendSwitch extends \Backend
 			}
 		}
 
-		// Create the template object
-		$this->Template = \BackendTemplate::create('be_switch');
-		$this->Template->user = $strUser;
-		$this->Template->show = \Input::cookie('FE_PREVIEW');
-		$this->Template->update = false;
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_switch');
+		$objTemplate->user = $strUser;
+		$objTemplate->show = \Input::cookie('FE_PREVIEW');
+		$objTemplate->update = false;
 
 		// Switch
 		if (\Input::post('FORM_SUBMIT') == 'tl_switch')
@@ -79,14 +79,14 @@ class BackendSwitch extends \Backend
 			if (\Input::post('unpublished') == 'hide')
 			{
 				$this->setCookie('FE_PREVIEW', 0, ($time - 86400));
-				$this->Template->show = 0;
+				$objTemplate->show = 0;
 			}
 
 			// Show unpublished elements
 			else
 			{
 				$this->setCookie('FE_PREVIEW', 1, ($time + \Config::get('sessionTimeout')));
-				$this->Template->show = 1;
+				$objTemplate->show = 1;
 			}
 
 			// Allow admins to switch user accounts
@@ -110,7 +110,7 @@ class BackendSwitch extends \Backend
 
 						// Set the cookie
 						$this->setCookie('FE_USER_AUTH', $strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
-						$this->Template->user = \Input::post('user');
+						$objTemplate->user = \Input::post('user');
 					}
 				}
 
@@ -119,32 +119,32 @@ class BackendSwitch extends \Backend
 				{
 					// Remove cookie
 					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
-					$this->Template->user = '';
+					$objTemplate->user = '';
 				}
 			}
 
-			$this->Template->update = true;
+			$objTemplate->update = true;
 		}
 
 		// Default variables
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
-		$this->Template->reload = $GLOBALS['TL_LANG']['MSC']['reload'];
-		$this->Template->feUser = $GLOBALS['TL_LANG']['MSC']['feUser'];
-		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->lblHide = $GLOBALS['TL_LANG']['MSC']['hiddenHide'];
-		$this->Template->lblShow = $GLOBALS['TL_LANG']['MSC']['hiddenShow'];
-		$this->Template->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
-		$this->Template->hiddenElements = $GLOBALS['TL_LANG']['MSC']['hiddenElements'];
-		$this->Template->closeSrc = TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/close.gif';
-		$this->Template->action = ampersand(\Environment::get('request'));
-		$this->Template->isAdmin = $this->User->isAdmin;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
+		$objTemplate->reload = $GLOBALS['TL_LANG']['MSC']['reload'];
+		$objTemplate->feUser = $GLOBALS['TL_LANG']['MSC']['feUser'];
+		$objTemplate->username = $GLOBALS['TL_LANG']['MSC']['username'];
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->lblHide = $GLOBALS['TL_LANG']['MSC']['hiddenHide'];
+		$objTemplate->lblShow = $GLOBALS['TL_LANG']['MSC']['hiddenShow'];
+		$objTemplate->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
+		$objTemplate->hiddenElements = $GLOBALS['TL_LANG']['MSC']['hiddenElements'];
+		$objTemplate->closeSrc = TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/close.gif';
+		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->isAdmin = $this->User->isAdmin;
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 
 

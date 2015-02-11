@@ -63,7 +63,8 @@ class Form extends \Hybrid
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
 			$objTemplate->id = $this->id;
@@ -394,7 +395,8 @@ class Form extends \Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
-				$objTemplate = \FrontendTemplate::create('form_xml');
+				/** @var \FrontendTemplate|object $objTemplate */
+				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
 				$objTemplate->charset = \Config::get('characterSet');
@@ -571,7 +573,8 @@ class Form extends \Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
-					$objTemplate = \FrontendTemplate::create('form_message');
+					/** @var \FrontendTemplate|object $objTemplate */
+					$objTemplate = new \FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);

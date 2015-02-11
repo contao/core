@@ -51,18 +51,18 @@ class BackendChangelog extends \Backend
 		// Convert to HTML
 		$strBuffer = \Michelf\MarkdownExtra::defaultTransform($strBuffer);
 
-		// Add the template
-		$this->Template = \BackendTemplate::create('be_changelog');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_changelog');
 
 		// Assign the template variables
-		$this->Template->content = $strBuffer;
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
-		$this->Template->charset = \Config::get('characterSet');
+		$objTemplate->content = $strBuffer;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
+		$objTemplate->charset = \Config::get('characterSet');
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

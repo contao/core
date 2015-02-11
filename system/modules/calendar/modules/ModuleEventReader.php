@@ -34,7 +34,8 @@ class ModuleEventReader extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventreader'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -183,7 +184,8 @@ class ModuleEventReader extends \Events
 			}
 		}
 
-		$objTemplate = \FrontendTemplate::create($this->cal_template);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;

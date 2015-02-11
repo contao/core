@@ -46,7 +46,8 @@ class ModuleCalendar extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['calendar'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -103,8 +104,8 @@ class ModuleCalendar extends \Events
 		// Find the boundaries
 		$objMinMax = $this->Database->query("SELECT MIN(startTime) AS dateFrom, MAX(endTime) AS dateTo, MAX(repeatEnd) AS repeatUntil FROM tl_calendar_events WHERE pid IN(". implode(',', array_map('intval', $this->cal_calendar)) .")" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""));
 
-		// Instantiate the template
-		$objTemplate = \FrontendTemplate::create(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
 		// Store year and month
 		$intYear = date('Y', $this->Date->tstamp);

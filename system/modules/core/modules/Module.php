@@ -269,7 +269,7 @@ abstract class Module extends \Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = \FrontendTemplate::create($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();
@@ -340,7 +340,8 @@ abstract class Module extends \Frontend
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = \FrontendTemplate::create($this->navigationTpl);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->pid = $pid;
 		$objTemplate->type = get_class($this);

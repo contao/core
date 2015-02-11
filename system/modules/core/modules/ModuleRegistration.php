@@ -36,7 +36,8 @@ class ModuleRegistration extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['registration'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -97,7 +98,10 @@ class ModuleRegistration extends \Module
 
 		if ($this->memberTpl != '')
 		{
-			$this->Template = \FrontendTemplate::create($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -466,7 +470,11 @@ class ModuleRegistration extends \Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = \FrontendTemplate::create($this->strTemplate);
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+		$this->Template = $objTemplate;
 
 		/** @var \MemberModel $objMember */
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));

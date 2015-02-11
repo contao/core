@@ -221,7 +221,8 @@ class ModuleExtension extends \BackendModule
 	 */
 	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
-		$objTemplate = \BackendTemplate::create($strTemplate);
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate($strTemplate);
 
 		/** @var \Database\Result|object $objModule */
 		$objTemplate->folder = $objModule->folder;

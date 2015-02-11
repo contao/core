@@ -104,7 +104,8 @@ class Comments extends \Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			$objPartial = \FrontendTemplate::create($objConfig->template);
+			/** @var \FrontendTemplate|object $objPartial */
+			$objPartial = new \FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
 			{

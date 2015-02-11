@@ -35,7 +35,8 @@ class LiveUpdate extends \Backend implements \executable
 	 */
 	public function run()
 	{
-		$objTemplate = \BackendTemplate::create('be_live_update');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];

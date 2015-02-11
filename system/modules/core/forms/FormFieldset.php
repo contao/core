@@ -51,7 +51,8 @@ class FormFieldset extends \Widget
 		// Return a wildcard in the back end
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			if ($this->fsType == 'fsStart')
 			{

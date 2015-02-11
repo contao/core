@@ -37,7 +37,8 @@ class PurgeData extends \Backend implements \executable
 	{
 		$arrJobs = array();
 
-		$objTemplate = \BackendTemplate::create('be_purge_data');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message

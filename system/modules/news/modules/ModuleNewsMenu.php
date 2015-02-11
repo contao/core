@@ -40,7 +40,8 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = \BackendTemplate::create('be_wildcard');
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsmenu'][0]) . ' ###';
 			$objTemplate->title = $this->headline;
@@ -94,7 +95,11 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$time = time();
 		$arrData = array();
-		$this->Template = \FrontendTemplate::create('mod_newsmenu_year');
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsmenu_year');
+
+		$this->Template = $objTemplate;
 
 		// Get the dates
 		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " GROUP BY year ORDER BY year DESC");
@@ -208,7 +213,11 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$time = time();
 		$arrData = array();
-		$this->Template = \FrontendTemplate::create('mod_newsmenu_day');
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsmenu_day');
+
+		$this->Template = $objTemplate;
 
 		// Get the dates
 		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y%m%d') AS day, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " GROUP BY day ORDER BY day DESC");

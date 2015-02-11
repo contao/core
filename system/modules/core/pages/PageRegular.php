@@ -252,7 +252,11 @@ class PageRegular extends \Frontend
 	protected function createTemplate($objPage, $objLayout)
 	{
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$this->Template = \FrontendTemplate::create($objPage->template);
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($objPage->template);
+
+		$this->Template = $objTemplate;
 
 		// Generate the DTD
 		if ($blnXhtml)
