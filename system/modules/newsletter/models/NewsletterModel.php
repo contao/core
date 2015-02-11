@@ -48,21 +48,21 @@ namespace Contao;
  * @method static $this findOneBySenderName()
  * @method static $this findOneBySent()
  * @method static $this findOneByDate()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findBySubject()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByContent()
- * @method static \Model\Collection findByText()
- * @method static \Model\Collection findByAddFile()
- * @method static \Model\Collection findByFiles()
- * @method static \Model\Collection findByTemplate()
- * @method static \Model\Collection findBySendText()
- * @method static \Model\Collection findByExternalImages()
- * @method static \Model\Collection findBySender()
- * @method static \Model\Collection findBySenderName()
- * @method static \Model\Collection findBySent()
- * @method static \Model\Collection findByDate()
+ * @method static \NewsletterModel[]|\Model\Collection findByPid()
+ * @method static \NewsletterModel[]|\Model\Collection findByTstamp()
+ * @method static \NewsletterModel[]|\Model\Collection findBySubject()
+ * @method static \NewsletterModel[]|\Model\Collection findByAlias()
+ * @method static \NewsletterModel[]|\Model\Collection findByContent()
+ * @method static \NewsletterModel[]|\Model\Collection findByText()
+ * @method static \NewsletterModel[]|\Model\Collection findByAddFile()
+ * @method static \NewsletterModel[]|\Model\Collection findByFiles()
+ * @method static \NewsletterModel[]|\Model\Collection findByTemplate()
+ * @method static \NewsletterModel[]|\Model\Collection findBySendText()
+ * @method static \NewsletterModel[]|\Model\Collection findByExternalImages()
+ * @method static \NewsletterModel[]|\Model\Collection findBySender()
+ * @method static \NewsletterModel[]|\Model\Collection findBySenderName()
+ * @method static \NewsletterModel[]|\Model\Collection findBySent()
+ * @method static \NewsletterModel[]|\Model\Collection findByDate()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -126,7 +126,7 @@ class NewsletterModel extends \Model
 	 * @param integer $intPid     The newsletter channel ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPid($intPid, array $arrOptions=array())
 	{
@@ -153,7 +153,7 @@ class NewsletterModel extends \Model
 	 * @param array $arrPids    An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no sent newsletters
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPids($arrPids, array $arrOptions=array())
 	{

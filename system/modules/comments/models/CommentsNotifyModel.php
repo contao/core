@@ -37,16 +37,16 @@ namespace Contao;
  * @method static $this findOneByIp()
  * @method static $this findOneByTokenConfirm()
  * @method static $this findOneByTokenRemove()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByParent()
- * @method static \Model\Collection findByName()
- * @method static \Model\Collection findByEmail()
- * @method static \Model\Collection findByUrl()
- * @method static \Model\Collection findByAddedOn()
- * @method static \Model\Collection findByIp()
- * @method static \Model\Collection findByTokenConfirm()
- * @method static \Model\Collection findByTokenRemove()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByTstamp()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findBySource()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByParent()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByName()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByEmail()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByUrl()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByAddedOn()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByIp()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByTokenConfirm()
+ * @method static \CommentsNotifyModel[]|\Model\Collection findByTokenRemove()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countBySource()
@@ -112,7 +112,7 @@ class CommentsNotifyModel extends \Model
 	 * @param integer $intParent  The parent ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no active subscriptions
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no active subscriptions
 	 */
 	public static function findActiveBySourceAndParent($strSource, $intParent, array $arrOptions=array())
 	{

@@ -43,14 +43,14 @@ namespace Contao;
  * @method static $this findOneByMedia()
  * @method static $this findOneByMediaQuery()
  * @method static $this findOneByVars()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByDisablePie()
- * @method static \Model\Collection findByEmbedImages()
- * @method static \Model\Collection findByCc()
- * @method static \Model\Collection findByMedia()
- * @method static \Model\Collection findByMediaQuery()
- * @method static \Model\Collection findByVars()
+ * @method static \StyleSheetModel[]|\Model\Collection findByPid()
+ * @method static \StyleSheetModel[]|\Model\Collection findByTstamp()
+ * @method static \StyleSheetModel[]|\Model\Collection findByDisablePie()
+ * @method static \StyleSheetModel[]|\Model\Collection findByEmbedImages()
+ * @method static \StyleSheetModel[]|\Model\Collection findByCc()
+ * @method static \StyleSheetModel[]|\Model\Collection findByMedia()
+ * @method static \StyleSheetModel[]|\Model\Collection findByMediaQuery()
+ * @method static \StyleSheetModel[]|\Model\Collection findByVars()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -79,7 +79,7 @@ class StyleSheetModel extends \Model
 	 *
 	 * @param array $arrIds An array of style sheet IDs
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no style sheets
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no style sheets
 	 */
 	public static function findByIds($arrIds)
 	{

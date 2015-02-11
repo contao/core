@@ -60,27 +60,27 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findBySorting()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByTitle()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByAuthor()
- * @method static \Model\Collection findByInColumn()
- * @method static \Model\Collection findByKeywords()
- * @method static \Model\Collection findByShowTeaser()
- * @method static \Model\Collection findByTeaserCssID()
- * @method static \Model\Collection findByTeaser()
- * @method static \Model\Collection findByPrintable()
- * @method static \Model\Collection findByCustomTpl()
- * @method static \Model\Collection findByProtected()
- * @method static \Model\Collection findByGroups()
- * @method static \Model\Collection findByGuests()
- * @method static \Model\Collection findByCssID()
- * @method static \Model\Collection findBySpace()
- * @method static \Model\Collection findByPublished()
- * @method static \Model\Collection findByStart()
- * @method static \Model\Collection findByStop()
+ * @method static \ArticleModel[]|\Model\Collection findByPid()
+ * @method static \ArticleModel[]|\Model\Collection findBySorting()
+ * @method static \ArticleModel[]|\Model\Collection findByTstamp()
+ * @method static \ArticleModel[]|\Model\Collection findByTitle()
+ * @method static \ArticleModel[]|\Model\Collection findByAlias()
+ * @method static \ArticleModel[]|\Model\Collection findByAuthor()
+ * @method static \ArticleModel[]|\Model\Collection findByInColumn()
+ * @method static \ArticleModel[]|\Model\Collection findByKeywords()
+ * @method static \ArticleModel[]|\Model\Collection findByShowTeaser()
+ * @method static \ArticleModel[]|\Model\Collection findByTeaserCssID()
+ * @method static \ArticleModel[]|\Model\Collection findByTeaser()
+ * @method static \ArticleModel[]|\Model\Collection findByPrintable()
+ * @method static \ArticleModel[]|\Model\Collection findByCustomTpl()
+ * @method static \ArticleModel[]|\Model\Collection findByProtected()
+ * @method static \ArticleModel[]|\Model\Collection findByGroups()
+ * @method static \ArticleModel[]|\Model\Collection findByGuests()
+ * @method static \ArticleModel[]|\Model\Collection findByCssID()
+ * @method static \ArticleModel[]|\Model\Collection findBySpace()
+ * @method static \ArticleModel[]|\Model\Collection findByPublished()
+ * @method static \ArticleModel[]|\Model\Collection findByStart()
+ * @method static \ArticleModel[]|\Model\Collection findByStop()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countBySorting()
@@ -171,7 +171,7 @@ class ArticleModel extends \Model
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{
@@ -201,7 +201,7 @@ class ArticleModel extends \Model
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{

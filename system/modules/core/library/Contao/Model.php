@@ -524,7 +524,7 @@ abstract class Model
 	 * @param string $strKey     The property name
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static|\Model\Collection The model or a model collection if there are multiple rows
+	 * @return static|static[]|\Model\Collection|null The model or a model collection if there are multiple rows
 	 *
 	 * @throws \Exception If $strKey is not a related field
 	 */
@@ -716,7 +716,7 @@ abstract class Model
 	 * @param array $arrIds     An array of IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no records
+	 * @return static[]|\Model\Collection|null The model collection or null if there are no records
 	 */
 	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
@@ -830,7 +830,7 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 * @return static[]|\Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
@@ -855,7 +855,7 @@ abstract class Model
 	 *
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 * @return static[]|\Model\Collection|null The model collection or null if the result is empty
 	 */
 	public static function findAll(array $arrOptions=array())
 	{
@@ -879,7 +879,7 @@ abstract class Model
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 *
-	 * @return static|\Model\Collection A model or model collection
+	 * @return static|static[]|\Model\Collection|null A model or model collection
 	 *
 	 * @throws \Exception If the method name is invalid
 	 */
@@ -922,7 +922,7 @@ abstract class Model
 	 *
 	 * @param array $arrOptions The options array
 	 *
-	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
+	 * @return static|static[]|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(array $arrOptions)
 	{

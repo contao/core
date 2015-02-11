@@ -38,16 +38,16 @@ namespace Contao;
  * @method static $this findOneByMaxItems()
  * @method static $this findOneByFeedBase()
  * @method static $this findOneByDescription()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByTitle()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByLanguage()
- * @method static \Model\Collection findByArchives()
- * @method static \Model\Collection findByFormat()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByMaxItems()
- * @method static \Model\Collection findByFeedBase()
- * @method static \Model\Collection findByDescription()
+ * @method static \NewsFeedModel[]|\Model\Collection findByTstamp()
+ * @method static \NewsFeedModel[]|\Model\Collection findByTitle()
+ * @method static \NewsFeedModel[]|\Model\Collection findByAlias()
+ * @method static \NewsFeedModel[]|\Model\Collection findByLanguage()
+ * @method static \NewsFeedModel[]|\Model\Collection findByArchives()
+ * @method static \NewsFeedModel[]|\Model\Collection findByFormat()
+ * @method static \NewsFeedModel[]|\Model\Collection findBySource()
+ * @method static \NewsFeedModel[]|\Model\Collection findByMaxItems()
+ * @method static \NewsFeedModel[]|\Model\Collection findByFeedBase()
+ * @method static \NewsFeedModel[]|\Model\Collection findByDescription()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -78,7 +78,7 @@ class NewsFeedModel extends \Model
 	 * @param integer $intId      The news archive ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if the news archive is not part of a feed
+	 * @return static[]|\Model\Collection|null A collection of models or null if the news archive is not part of a feed
 	 */
 	public static function findByArchive($intId, array $arrOptions=array())
 	{
@@ -94,7 +94,7 @@ class NewsFeedModel extends \Model
 	 * @param array $arrIds     An array of news feed IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no feeds
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

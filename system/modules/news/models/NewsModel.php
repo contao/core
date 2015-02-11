@@ -80,37 +80,37 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByHeadline()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByAuthor()
- * @method static \Model\Collection findByDate()
- * @method static \Model\Collection findByTime()
- * @method static \Model\Collection findBySubheadline()
- * @method static \Model\Collection findByTeaser()
- * @method static \Model\Collection findByAddImage()
- * @method static \Model\Collection findBySingleSRC()
- * @method static \Model\Collection findByAlt()
- * @method static \Model\Collection findBySize()
- * @method static \Model\Collection findByImagemargin()
- * @method static \Model\Collection findByImageUrl()
- * @method static \Model\Collection findByFullsize()
- * @method static \Model\Collection findByCaption()
- * @method static \Model\Collection findByFloating()
- * @method static \Model\Collection findByAddEnclosure()
- * @method static \Model\Collection findByEnclosure()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByJumpTo()
- * @method static \Model\Collection findByArticleId()
- * @method static \Model\Collection findByUrl()
- * @method static \Model\Collection findByTarget()
- * @method static \Model\Collection findByCssClass()
- * @method static \Model\Collection findByNoComments()
- * @method static \Model\Collection findByFeatured()
- * @method static \Model\Collection findByPublished()
- * @method static \Model\Collection findByStart()
- * @method static \Model\Collection findByStop()
+ * @method static \NewsModel[]|\Model\Collection findByPid()
+ * @method static \NewsModel[]|\Model\Collection findByTstamp()
+ * @method static \NewsModel[]|\Model\Collection findByHeadline()
+ * @method static \NewsModel[]|\Model\Collection findByAlias()
+ * @method static \NewsModel[]|\Model\Collection findByAuthor()
+ * @method static \NewsModel[]|\Model\Collection findByDate()
+ * @method static \NewsModel[]|\Model\Collection findByTime()
+ * @method static \NewsModel[]|\Model\Collection findBySubheadline()
+ * @method static \NewsModel[]|\Model\Collection findByTeaser()
+ * @method static \NewsModel[]|\Model\Collection findByAddImage()
+ * @method static \NewsModel[]|\Model\Collection findBySingleSRC()
+ * @method static \NewsModel[]|\Model\Collection findByAlt()
+ * @method static \NewsModel[]|\Model\Collection findBySize()
+ * @method static \NewsModel[]|\Model\Collection findByImagemargin()
+ * @method static \NewsModel[]|\Model\Collection findByImageUrl()
+ * @method static \NewsModel[]|\Model\Collection findByFullsize()
+ * @method static \NewsModel[]|\Model\Collection findByCaption()
+ * @method static \NewsModel[]|\Model\Collection findByFloating()
+ * @method static \NewsModel[]|\Model\Collection findByAddEnclosure()
+ * @method static \NewsModel[]|\Model\Collection findByEnclosure()
+ * @method static \NewsModel[]|\Model\Collection findBySource()
+ * @method static \NewsModel[]|\Model\Collection findByJumpTo()
+ * @method static \NewsModel[]|\Model\Collection findByArticleId()
+ * @method static \NewsModel[]|\Model\Collection findByUrl()
+ * @method static \NewsModel[]|\Model\Collection findByTarget()
+ * @method static \NewsModel[]|\Model\Collection findByCssClass()
+ * @method static \NewsModel[]|\Model\Collection findByNoComments()
+ * @method static \NewsModel[]|\Model\Collection findByFeatured()
+ * @method static \NewsModel[]|\Model\Collection findByPublished()
+ * @method static \NewsModel[]|\Model\Collection findByStart()
+ * @method static \NewsModel[]|\Model\Collection findByStop()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -194,7 +194,7 @@ class NewsModel extends \Model
 	 * @param integer $intOffset   An optional offset
 	 * @param array   $arrOptions  An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
@@ -278,7 +278,7 @@ class NewsModel extends \Model
 	 * @param integer $intPid     The news archive ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{
@@ -307,7 +307,7 @@ class NewsModel extends \Model
 	 * @param integer $intLimit   An optional limit
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0, array $arrOptions=array())
 	{
@@ -340,7 +340,7 @@ class NewsModel extends \Model
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no news
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no news
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{

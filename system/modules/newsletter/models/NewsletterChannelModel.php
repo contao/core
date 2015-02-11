@@ -35,15 +35,15 @@ namespace Contao;
  * @method static $this findOneBySmtpPass()
  * @method static $this findOneBySmtpEnc()
  * @method static $this findOneBySmtpPort()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByTitle()
- * @method static \Model\Collection findByJumpTo()
- * @method static \Model\Collection findByUseSMTP()
- * @method static \Model\Collection findBySmtpHost()
- * @method static \Model\Collection findBySmtpUser()
- * @method static \Model\Collection findBySmtpPass()
- * @method static \Model\Collection findBySmtpEnc()
- * @method static \Model\Collection findBySmtpPort()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findByTstamp()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findByTitle()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findByJumpTo()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findByUseSMTP()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpHost()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpUser()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpPass()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpEnc()
+ * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpPort()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -73,7 +73,7 @@ class NewsletterChannelModel extends \Model
 	 * @param array $arrIds     An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no newsletter channels
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no newsletter channels
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

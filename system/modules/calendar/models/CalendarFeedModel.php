@@ -38,16 +38,16 @@ namespace Contao;
  * @method static $this findOneByMaxItems()
  * @method static $this findOneByFeedBase()
  * @method static $this findOneByDescription()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByTitle()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByLanguage()
- * @method static \Model\Collection findByCalendars()
- * @method static \Model\Collection findByFormat()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByMaxItems()
- * @method static \Model\Collection findByFeedBase()
- * @method static \Model\Collection findByDescription()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByTstamp()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByTitle()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByAlias()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByLanguage()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByCalendars()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByFormat()
+ * @method static \CalendarFeedModel[]|\Model\Collection findBySource()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByMaxItems()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByFeedBase()
+ * @method static \CalendarFeedModel[]|\Model\Collection findByDescription()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -78,7 +78,7 @@ class CalendarFeedModel extends \Model
 	 * @param integer $intId      The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if the calendar is not part of a feed
+	 * @return static[]|\Model\Collection|null A collection of models or null if the calendar is not part of a feed
 	 */
 	public static function findByCalendar($intId, array $arrOptions=array())
 	{
@@ -94,7 +94,7 @@ class CalendarFeedModel extends \Model
 	 * @param array $arrIds     An array of calendar feed IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no feeds
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

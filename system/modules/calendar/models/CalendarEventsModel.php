@@ -91,43 +91,43 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByTitle()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByAuthor()
- * @method static \Model\Collection findByAddTime()
- * @method static \Model\Collection findByStartTime()
- * @method static \Model\Collection findByEndTime()
- * @method static \Model\Collection findByStartDate()
- * @method static \Model\Collection findByEndDate()
- * @method static \Model\Collection findByLocation()
- * @method static \Model\Collection findByTeaser()
- * @method static \Model\Collection findByAddImage()
- * @method static \Model\Collection findBySingleSRC()
- * @method static \Model\Collection findByAlt()
- * @method static \Model\Collection findBySize()
- * @method static \Model\Collection findByImagemargin()
- * @method static \Model\Collection findByImageUrl()
- * @method static \Model\Collection findByFullsize()
- * @method static \Model\Collection findByCaption()
- * @method static \Model\Collection findByFloating()
- * @method static \Model\Collection findByRecurring()
- * @method static \Model\Collection findByRepeatEach()
- * @method static \Model\Collection findByRepeatEnd()
- * @method static \Model\Collection findByRecurrences()
- * @method static \Model\Collection findByAddEnclosure()
- * @method static \Model\Collection findByEnclosure()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByJumpTo()
- * @method static \Model\Collection findByArticleId()
- * @method static \Model\Collection findByUrl()
- * @method static \Model\Collection findByTarget()
- * @method static \Model\Collection findByCssClass()
- * @method static \Model\Collection findByNoComments()
- * @method static \Model\Collection findByPublished()
- * @method static \Model\Collection findByStart()
- * @method static \Model\Collection findByStop()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByPid()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByTstamp()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByTitle()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAlias()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAuthor()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAddTime()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByStartTime()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByEndTime()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByStartDate()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByEndDate()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByLocation()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByTeaser()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAddImage()
+ * @method static \CalendarEventsModel[]|\Model\Collection findBySingleSRC()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAlt()
+ * @method static \CalendarEventsModel[]|\Model\Collection findBySize()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByImagemargin()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByImageUrl()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByFullsize()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByCaption()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByFloating()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByRecurring()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByRepeatEach()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByRepeatEnd()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByRecurrences()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByAddEnclosure()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByEnclosure()
+ * @method static \CalendarEventsModel[]|\Model\Collection findBySource()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByJumpTo()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByArticleId()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByUrl()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByTarget()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByCssClass()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByNoComments()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByPublished()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByStart()
+ * @method static \CalendarEventsModel[]|\Model\Collection findByStop()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -216,7 +216,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intEnd     The end date as Unix timestamp
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no events
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no events
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd, array $arrOptions=array())
 	{
@@ -247,7 +247,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intPid     The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no events
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no events
 	 */
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{
@@ -276,7 +276,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intLimit   An optional limit
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no events
+	 * @return static[]|null A collection of models or null if there are no events
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0, array $arrOptions=array())
 	{

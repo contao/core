@@ -51,7 +51,7 @@ class Picture
 	/**
 	 * The image size items collection
 	 *
-	 * @var array|\Model\Collection
+	 * @var array|\ImageSizeItemModel[]|\Model\Collection
 	 */
 	protected $imageSizeItems = array();
 
@@ -171,7 +171,7 @@ class Picture
 	/**
 	 * Set the image size items collection
 	 *
-	 * @param array|\Model\Collection $imageSizeItems The image size items collection
+	 * @param array|\ImageSizeItemModel|\Model\Collection $imageSizeItems The image size items collection
 	 *
 	 * @return $this The picture object
 	 */

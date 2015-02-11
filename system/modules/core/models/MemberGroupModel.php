@@ -31,13 +31,13 @@ namespace Contao;
  * @method static $this findOneByDisable()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByName()
- * @method static \Model\Collection findByRedirect()
- * @method static \Model\Collection findByJumpTo()
- * @method static \Model\Collection findByDisable()
- * @method static \Model\Collection findByStart()
- * @method static \Model\Collection findByStop()
+ * @method static \MemberGroupModel[]|\Model\Collection findByTstamp()
+ * @method static \MemberGroupModel[]|\Model\Collection findByName()
+ * @method static \MemberGroupModel[]|\Model\Collection findByRedirect()
+ * @method static \MemberGroupModel[]|\Model\Collection findByJumpTo()
+ * @method static \MemberGroupModel[]|\Model\Collection findByDisable()
+ * @method static \MemberGroupModel[]|\Model\Collection findByStart()
+ * @method static \MemberGroupModel[]|\Model\Collection findByStop()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByName()
@@ -118,7 +118,7 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no member groups
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no member groups
 	 */
 	public static function findAllActive(array $arrOptions=array())
 	{

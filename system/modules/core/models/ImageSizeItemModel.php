@@ -39,17 +39,17 @@ namespace Contao;
  * @method static $this findOneByResizeMode()
  * @method static $this findOneByZoom()
  * @method static $this findOneByInvisible()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findBySorting()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByMedia()
- * @method static \Model\Collection findBySizes()
- * @method static \Model\Collection findByDensities()
- * @method static \Model\Collection findByWidth()
- * @method static \Model\Collection findByHeight()
- * @method static \Model\Collection findByResizeMode()
- * @method static \Model\Collection findByZoom()
- * @method static \Model\Collection findByInvisible()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByPid()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findBySorting()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByTstamp()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByMedia()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findBySizes()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByDensities()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByWidth()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByHeight()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByResizeMode()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByZoom()
+ * @method static \ImageSizeItemModel[]|\Model\Collection findByInvisible()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countBySorting()
@@ -81,7 +81,7 @@ class ImageSizeItemModel extends \Model
 	 * @param integer $intPid     Parent ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no items
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no items
 	 */
 	public static function findVisibleByPid($intPid, array $arrOptions=array())
 	{

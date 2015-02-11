@@ -57,26 +57,26 @@ namespace Contao;
  * @method static $this findOneByEnclosure()
  * @method static $this findOneByNoComments()
  * @method static $this findOneByPublished()
- * @method static \Model\Collection findByPid()
- * @method static \Model\Collection findBySorting()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findByQuestion()
- * @method static \Model\Collection findByAlias()
- * @method static \Model\Collection findByAuthor()
- * @method static \Model\Collection findByAnswer()
- * @method static \Model\Collection findByAddImage()
- * @method static \Model\Collection findBySingleSRC()
- * @method static \Model\Collection findByAlt()
- * @method static \Model\Collection findBySize()
- * @method static \Model\Collection findByImagemargin()
- * @method static \Model\Collection findByImageUrl()
- * @method static \Model\Collection findByFullsize()
- * @method static \Model\Collection findByCaption()
- * @method static \Model\Collection findByFloating()
- * @method static \Model\Collection findByAddEnclosure()
- * @method static \Model\Collection findByEnclosure()
- * @method static \Model\Collection findByNoComments()
- * @method static \Model\Collection findByPublished()
+ * @method static \FaqModel[]|\Model\Collection findByPid()
+ * @method static \FaqModel[]|\Model\Collection findBySorting()
+ * @method static \FaqModel[]|\Model\Collection findByTstamp()
+ * @method static \FaqModel[]|\Model\Collection findByQuestion()
+ * @method static \FaqModel[]|\Model\Collection findByAlias()
+ * @method static \FaqModel[]|\Model\Collection findByAuthor()
+ * @method static \FaqModel[]|\Model\Collection findByAnswer()
+ * @method static \FaqModel[]|\Model\Collection findByAddImage()
+ * @method static \FaqModel[]|\Model\Collection findBySingleSRC()
+ * @method static \FaqModel[]|\Model\Collection findByAlt()
+ * @method static \FaqModel[]|\Model\Collection findBySize()
+ * @method static \FaqModel[]|\Model\Collection findByImagemargin()
+ * @method static \FaqModel[]|\Model\Collection findByImageUrl()
+ * @method static \FaqModel[]|\Model\Collection findByFullsize()
+ * @method static \FaqModel[]|\Model\Collection findByCaption()
+ * @method static \FaqModel[]|\Model\Collection findByFloating()
+ * @method static \FaqModel[]|\Model\Collection findByAddEnclosure()
+ * @method static \FaqModel[]|\Model\Collection findByEnclosure()
+ * @method static \FaqModel[]|\Model\Collection findByNoComments()
+ * @method static \FaqModel[]|\Model\Collection findByPublished()
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countBySorting()
@@ -145,7 +145,7 @@ class FaqModel extends \Model
 	 * @param int   $intPid     The parent ID
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPid($intPid, array $arrOptions=array())
 	{
@@ -172,7 +172,7 @@ class FaqModel extends \Model
 	 * @param array $arrPids    An array of FAQ category IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no FAQs
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPids($arrPids, array $arrOptions=array())
 	{

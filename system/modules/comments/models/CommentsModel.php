@@ -45,20 +45,20 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByIp()
  * @method static $this findOneByNotified()
- * @method static \Model\Collection findByTstamp()
- * @method static \Model\Collection findBySource()
- * @method static \Model\Collection findByParent()
- * @method static \Model\Collection findByDate()
- * @method static \Model\Collection findByName()
- * @method static \Model\Collection findByEmail()
- * @method static \Model\Collection findByWebsite()
- * @method static \Model\Collection findByComment()
- * @method static \Model\Collection findByAddReply()
- * @method static \Model\Collection findByAuthor()
- * @method static \Model\Collection findByReply()
- * @method static \Model\Collection findByPublished()
- * @method static \Model\Collection findByIp()
- * @method static \Model\Collection findByNotified()
+ * @method static \CommentsModel[]|\Model\Collection findByTstamp()
+ * @method static \CommentsModel[]|\Model\Collection findBySource()
+ * @method static \CommentsModel[]|\Model\Collection findByParent()
+ * @method static \CommentsModel[]|\Model\Collection findByDate()
+ * @method static \CommentsModel[]|\Model\Collection findByName()
+ * @method static \CommentsModel[]|\Model\Collection findByEmail()
+ * @method static \CommentsModel[]|\Model\Collection findByWebsite()
+ * @method static \CommentsModel[]|\Model\Collection findByComment()
+ * @method static \CommentsModel[]|\Model\Collection findByAddReply()
+ * @method static \CommentsModel[]|\Model\Collection findByAuthor()
+ * @method static \CommentsModel[]|\Model\Collection findByReply()
+ * @method static \CommentsModel[]|\Model\Collection findByPublished()
+ * @method static \CommentsModel[]|\Model\Collection findByIp()
+ * @method static \CommentsModel[]|\Model\Collection findByNotified()
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countBySource()
@@ -97,7 +97,7 @@ class CommentsModel extends \Model
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no comments
+	 * @return static[]|\Model\Collection|null A collection of models or null if there are no comments
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
