@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle input field "page tree".
  *
+ * @property string  $orderField
+ * @property boolean $multiple
+ * @property boolean $isGallery
+ * @property boolean $isDownloads
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileTree extends \Widget
@@ -134,7 +139,7 @@ class FileTree extends \Widget
 			{
 				while ($objFiles->next())
 				{
-					// File system and database seem not in sync
+					/** @var \FilesModel $objFiles */
 					if (!file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
 						continue;
@@ -186,10 +191,10 @@ class FileTree extends \Widget
 
 							while ($objSubfiles->next())
 							{
-								// Skip subfolders
+								/** @var \FilesModel $objSubfiles */
 								if ($objSubfiles->type == 'folder')
 								{
-									continue;
+									continue; // skip sub-folders
 								}
 
 								$objFile = new \File($objSubfiles->path, true);

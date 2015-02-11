@@ -14,6 +14,10 @@ namespace Contao;
 /**
  * Provide methods to handle text fields with interval drop down menu.
  *
+ * @property integer $maxlength
+ * @property array   $options
+ * @property boolean $mandatory
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TimePeriod extends \Widget

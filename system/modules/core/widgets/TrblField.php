@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle text fields with unit drop down menu.
  *
+ * @property integer $maxlength
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TrblField extends \Widget

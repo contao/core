@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle table fields.
  *
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TableWizard extends \Widget
@@ -247,6 +250,7 @@ class TableWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -297,6 +301,7 @@ class TableWizard extends \Widget
 				}
 			}
 
+			/** @var \DataContainer $dc */
 			$objVersions = new \Versions($dc->table, \Input::get('id'));
 			$objVersions->create();
 

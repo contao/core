@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle radio button tables.
  *
+ * @property integer $cols
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class RadioTable extends \Widget

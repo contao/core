@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Provide methods to handle select menus.
  *
+ * @property boolean $mandatory
+ * @property integer $size
+ * @property boolean $multiple
+ * @property array   $options
+ * @property boolean $chosen
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class SelectMenu extends \Widget

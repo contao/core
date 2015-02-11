@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Provide methods to handle data container arrays.
  *
+ * @property integer $id
+ * @property string  $table
+ * @property mixed   $value
+ * @property string  $field
+ * @property string  $inputName
+ * @property string  $palette
+ * @property object  $activeRecord
  * @property boolean $blnUploadable
  * @property array   $root
  *

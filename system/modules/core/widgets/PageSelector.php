@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle input field "page tree".
  *
+ * @property array  $rootNodes
+ * @property string $fieldType
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageSelector extends \Widget

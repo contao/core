@@ -15,6 +15,8 @@ namespace Contao;
  * A TextStore field is used to enter data only. It will not show the
  * currently stored value (useful e.g. to store passwords).
  *
+ * @property integer $maxlength
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TextStore extends \Widget

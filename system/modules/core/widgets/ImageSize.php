@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle image size fields.
  *
+ * @property integer $maxlength
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ImageSize extends \Widget

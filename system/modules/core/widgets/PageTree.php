@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle input field "page tree".
  *
+ * @property string  $orderField
+ * @property boolean $multiple
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageTree extends \Widget
@@ -132,6 +135,7 @@ class PageTree extends \Widget
 			{
 				while ($objPages->next())
 				{
+					/** @var \PageModel $objPages */
 					$arrSet[] = $objPages->id;
 					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . \Config::get('urlSuffix') . ')';
 				}
