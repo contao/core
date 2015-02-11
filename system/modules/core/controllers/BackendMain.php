@@ -25,6 +25,11 @@ class BackendMain extends \Backend
 	 */
 	protected $objAjax;
 
+	/**
+	 * @var \BackendTemplate|object
+	 */
+	protected $Template;
+
 
 	/**
 	 * Initialize the controller
@@ -98,9 +103,8 @@ class BackendMain extends \Backend
 	 */
 	public function run()
 	{
-		/** @var \BackendTemplate|object $objTemplate */
-		$objTemplate = new \BackendTemplate('be_main');
-		$objTemplate->main = '';
+		$this->Template = new \BackendTemplate('be_main');;
+		$this->Template->main = '';
 
 		// Ajax request
 		if ($_POST && \Environment::get('isAjaxRequest'))
@@ -112,83 +116,83 @@ class BackendMain extends \Backend
 		// Error
 		if (\Input::get('act') == 'error')
 		{
-			$objTemplate->error = $GLOBALS['TL_LANG']['ERR']['general'];
-			$objTemplate->title = $GLOBALS['TL_LANG']['ERR']['general'];
+			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
+			$this->Template->title = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
 		// Welcome screen
 		elseif (!\Input::get('do') && !\Input::get('act'))
 		{
-			$objTemplate->main .= $this->welcomeScreen();
-			$objTemplate->title = $GLOBALS['TL_LANG']['MSC']['home'];
+			$this->Template->main .= $this->welcomeScreen();
+			$this->Template->title = $GLOBALS['TL_LANG']['MSC']['home'];
 		}
 		// Open a module
 		elseif (\Input::get('do'))
 		{
-			$objTemplate->main .= $this->getBackendModule(\Input::get('do'));
-			$objTemplate->title = $objTemplate->headline;
+			$this->Template->main .= $this->getBackendModule(\Input::get('do'));
+			$this->Template->title = $this->Template->headline;
 		}
 
 		// Default headline
-		if ($objTemplate->headline == '')
+		if ($this->Template->headline == '')
 		{
-			$objTemplate->headline = \Config::get('websiteTitle');
+			$this->Template->headline = \Config::get('websiteTitle');
 		}
 
 		// Default title
-		if ($objTemplate->title == '')
+		if ($this->Template->title == '')
 		{
-			$objTemplate->title = $objTemplate->headline;
+			$this->Template->title = $this->Template->headline;
 		}
 
 		// File picker reference
 		if (\Input::get('popup') && \Input::get('act') != 'show' && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
 		{
-			$objTemplate->managerHref = $this->Session->get('filePickerRef');
-			$objTemplate->manager = (strpos($this->Session->get('filePickerRef'), 'contao/page.php') !== false) ? $GLOBALS['TL_LANG']['MSC']['pagePickerHome'] : $GLOBALS['TL_LANG']['MSC']['filePickerHome'];
+			$this->Template->managerHref = $this->Session->get('filePickerRef');
+			$this->Template->manager = (strpos($this->Session->get('filePickerRef'), 'contao/page.php') !== false) ? $GLOBALS['TL_LANG']['MSC']['pagePickerHome'] : $GLOBALS['TL_LANG']['MSC']['filePickerHome'];
 		}
 
-		$objTemplate->theme = \Backend::getTheme();
-		$objTemplate->base = \Environment::get('base');
-		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
-		$objTemplate->title = specialchars($objTemplate->title);
-		$objTemplate->charset = \Config::get('characterSet');
-		$objTemplate->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
-		$objTemplate->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
-		$objTemplate->previewTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fePreviewTitle']);
-		$objTemplate->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
-		$objTemplate->logout = $GLOBALS['TL_LANG']['MSC']['logoutBT'];
-		$objTemplate->logoutTitle = specialchars($GLOBALS['TL_LANG']['MSC']['logoutBTTitle']);
-		$objTemplate->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
-		$objTemplate->username = $GLOBALS['TL_LANG']['MSC']['user'] . ' ' . $GLOBALS['TL_USERNAME'];
-		$objTemplate->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$objTemplate->request = ampersand(\Environment::get('request'));
-		$objTemplate->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
-		$objTemplate->modules = $this->User->navigation();
-		$objTemplate->home = $GLOBALS['TL_LANG']['MSC']['home'];
-		$objTemplate->homeTitle = $GLOBALS['TL_LANG']['MSC']['homeTitle'];
-		$objTemplate->backToTop = specialchars($GLOBALS['TL_LANG']['MSC']['backToTopTitle']);
-		$objTemplate->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
-		$objTemplate->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
-		$objTemplate->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
-		$objTemplate->loadFonts = \Config::get('loadGoogleFonts');
-		$objTemplate->isAdmin = $this->User->isAdmin;
-		$objTemplate->isCoreOnlyMode = \Config::get('coreOnlyMode');
-		$objTemplate->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
-		$objTemplate->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
-		$objTemplate->coreOnlyHref = $this->addToUrl('smo=1');
-		$objTemplate->isMaintenanceMode = \Config::get('maintenanceMode');
-		$objTemplate->maintenanceMode = $GLOBALS['TL_LANG']['MSC']['maintenanceMode'];
-		$objTemplate->maintenanceOff = specialchars($GLOBALS['TL_LANG']['MSC']['maintenanceOff']);
-		$objTemplate->maintenanceHref = $this->addToUrl('mmo=1');
-		$objTemplate->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
-		$objTemplate->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
-		$objTemplate->buildCacheHref = $this->addToUrl('bic=1');
-		$objTemplate->isPopup = \Input::get('popup');
+		$this->Template->theme = \Backend::getTheme();
+		$this->Template->base = \Environment::get('base');
+		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
+		$this->Template->title = specialchars($this->Template->title);
+		$this->Template->charset = \Config::get('characterSet');
+		$this->Template->account = $GLOBALS['TL_LANG']['MOD']['login'][1];
+		$this->Template->preview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
+		$this->Template->previewTitle = specialchars($GLOBALS['TL_LANG']['MSC']['fePreviewTitle']);
+		$this->Template->pageOffset = \Input::cookie('BE_PAGE_OFFSET');
+		$this->Template->logout = $GLOBALS['TL_LANG']['MSC']['logoutBT'];
+		$this->Template->logoutTitle = specialchars($GLOBALS['TL_LANG']['MSC']['logoutBTTitle']);
+		$this->Template->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
+		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['user'] . ' ' . $GLOBALS['TL_USERNAME'];
+		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
+		$this->Template->request = ampersand(\Environment::get('request'));
+		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
+		$this->Template->modules = $this->User->navigation();
+		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
+		$this->Template->homeTitle = $GLOBALS['TL_LANG']['MSC']['homeTitle'];
+		$this->Template->backToTop = specialchars($GLOBALS['TL_LANG']['MSC']['backToTopTitle']);
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
+		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
+		$this->Template->loadFonts = \Config::get('loadGoogleFonts');
+		$this->Template->isAdmin = $this->User->isAdmin;
+		$this->Template->isCoreOnlyMode = \Config::get('coreOnlyMode');
+		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
+		$this->Template->coreOnlyOff = specialchars($GLOBALS['TL_LANG']['MSC']['coreOnlyOff']);
+		$this->Template->coreOnlyHref = $this->addToUrl('smo=1');
+		$this->Template->isMaintenanceMode = \Config::get('maintenanceMode');
+		$this->Template->maintenanceMode = $GLOBALS['TL_LANG']['MSC']['maintenanceMode'];
+		$this->Template->maintenanceOff = specialchars($GLOBALS['TL_LANG']['MSC']['maintenanceOff']);
+		$this->Template->maintenanceHref = $this->addToUrl('mmo=1');
+		$this->Template->buildCacheLink = $GLOBALS['TL_LANG']['MSC']['buildCacheLink'];
+		$this->Template->buildCacheText = $GLOBALS['TL_LANG']['MSC']['buildCacheText'];
+		$this->Template->buildCacheHref = $this->addToUrl('bic=1');
+		$this->Template->isPopup = \Input::get('popup');
 
 		// Hide the cache message in the repository manager (see #5966)
 		if (!\Config::get('bypassCache') && $this->User->isAdmin)
 		{
-			$objTemplate->needsCacheBuild = ((\Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
+			$this->Template->needsCacheBuild = ((\Input::get('do') != 'repository_manager' || !isset($_GET['install']) && !isset($_GET['uninstall']) && !isset($_GET['update'])) && !is_dir(TL_ROOT . '/system/cache/dca'));
 		}
 
 		// Front end preview links
@@ -197,7 +201,7 @@ class BackendMain extends \Backend
 			// Pages
 			if (\Input::get('do') == 'page')
 			{
-				$objTemplate->frontendFile = '?page=' . CURRENT_ID;
+				$this->Template->frontendFile = '?page=' . CURRENT_ID;
 			}
 
 			// Articles
@@ -205,12 +209,12 @@ class BackendMain extends \Backend
 			{
 				if (($objArticle = \ArticleModel::findByPk(CURRENT_ID)) !== null)
 				{
-					$objTemplate->frontendFile = '?page=' . $objArticle->pid;
+					$this->Template->frontendFile = '?page=' . $objArticle->pid;
 				}
 			}
 		}
 
-		$objTemplate->output();
+		$this->Template->output();
 	}
 
 
