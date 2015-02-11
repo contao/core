@@ -27,7 +27,7 @@ class ContentMedia extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection
 	 */
 	protected $objFiles;
 
@@ -64,6 +64,7 @@ class ContentMedia extends \ContentElement
 
 			while ($objFiles->next())
 			{
+				/** @var \FilesModel $objFiles */
 				$objFile = new \File($objFiles->path, true);
 				$return .= '<li><img src="' . TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
 			}
@@ -72,6 +73,7 @@ class ContentMedia extends \ContentElement
 		}
 
 		$this->objFiles = $objFiles;
+
 		return parent::generate();
 	}
 
@@ -106,8 +108,11 @@ class ContentMedia extends \ContentElement
 			}
 		}
 
+		/** @var \FilesModel $objFirst */
+		$objFirst = $this->objFiles->current();
+
 		// Pre-sort the array by preference
-		if (in_array($this->objFiles->extension , array('mp4','m4v','mov','wmv','webm','ogv')))
+		if (in_array($objFirst->extension , array('mp4','m4v','mov','wmv','webm','ogv')))
 		{
 			$this->Template->isVideo = true;
 			$arrFiles = array('mp4'=>null, 'm4v'=>null, 'mov'=>null, 'wmv'=>null, 'webm'=>null, 'ogv'=>null);
@@ -118,15 +123,16 @@ class ContentMedia extends \ContentElement
 			$arrFiles = array('m4a'=>null, 'mp3'=>null, 'wma'=>null, 'mpeg'=>null, 'wav'=>null, 'ogg'=>null);
 		}
 
-		$this->objFiles->reset();
+		$objFiles = $this->objFiles->reset();
 
 		// Convert the language to a locale (see #5678)
 		$strLanguage = str_replace('-', '_', $objPage->language);
 
 		// Pass File objects to the template
-		while ($this->objFiles->next())
+		while ($objFiles->next())
 		{
-			$arrMeta = deserialize($this->objFiles->meta);
+			/** @var \FilesModel $objFiles */
+			$arrMeta = deserialize($objFiles->meta);
 
 			if (is_array($arrMeta) && isset($arrMeta[$strLanguage]))
 			{
@@ -134,10 +140,10 @@ class ContentMedia extends \ContentElement
 			}
 			else
 			{
-				$strTitle = $this->objFiles->name;
+				$strTitle = $objFiles->name;
 			}
 
-			$objFile = new \File($this->objFiles->path, true);
+			$objFile = new \File($objFiles->path, true);
 			$objFile->title = specialchars($strTitle);
 
 			$arrFiles[$objFile->extension] = $objFile;

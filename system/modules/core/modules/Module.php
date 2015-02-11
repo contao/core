@@ -130,6 +130,9 @@ namespace Contao;
  * @property string  $nl_subscribe
  * @property string  $nl_unsubscribe
  * @property string  $nl_template
+ * @property string  $origSpace
+ * @property string  $origCssID
+ *
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

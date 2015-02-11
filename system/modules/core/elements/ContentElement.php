@@ -95,6 +95,11 @@ namespace Contao;
  * @property boolean $com_disableCaptcha
  * @property boolean $com_requireLogin
  * @property string  $com_template
+ * @property string  $classes
+ * @property string  $typePrefix
+ * @property integer $origId
+ * @property string  $origSpace
+ * @property string  $origCssID
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -115,7 +120,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Model
-	 * @var Model
+	 * @var \ContentElement
 	 */
 	protected $objModel;
 
@@ -157,6 +162,8 @@ abstract class ContentElement extends \Frontend
 		parent::__construct();
 
 		$this->arrData = $objElement->row();
+
+		/** @var \ContentElement $objElement */
 		$this->space = deserialize($objElement->space);
 		$this->cssID = deserialize($objElement->cssID, true);
 

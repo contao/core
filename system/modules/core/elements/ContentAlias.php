@@ -39,7 +39,7 @@ class ContentAlias extends \ContentElement
 			return '';
 		}
 
-		// Overwrite the ID
+		/** @var \ContentElement $objElement */
 		$objElement->origId = $objElement->id;
 		$objElement->id = $this->id;
 

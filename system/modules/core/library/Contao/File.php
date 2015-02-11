@@ -51,6 +51,7 @@ namespace Contao;
  * @property boolean  $isRgbImage  True if the file is an RGB image
  * @property boolean  $isCmykImage True if the file is a CMYK image
  * @property resource $handle      The file handle (returned by fopen())
+ * @property string   $title       The file title
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
