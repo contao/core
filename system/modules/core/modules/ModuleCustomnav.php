@@ -55,6 +55,7 @@ class ModuleCustomnav extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 

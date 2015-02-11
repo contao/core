@@ -77,6 +77,7 @@ class ModuleSubscribe extends \Module
 		if (\Input::get('token'))
 		{
 			$this->activateRecipient();
+
 			return;
 		}
 

@@ -1361,6 +1361,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					// Set new sorting
 					$this->set['sorting'] = intval($newSorting);
+
 					return;
 				}
 			}
@@ -3556,6 +3557,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if ($objRow->numRows < 1)
 		{
 			$this->Session->setData($session);
+
 			return '';
 		}
 
@@ -3769,6 +3771,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$this->Session->setData($session);
+
 		return $return;
 	}
 
@@ -5571,6 +5574,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$objPagination = new \Pagination($this->total, $limit, 7, 'lp', new \BackendTemplate('be_pagination'), true);
+
 		return $objPagination->generate();
 	}
 

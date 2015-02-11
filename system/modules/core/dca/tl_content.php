@@ -965,6 +965,7 @@ class tl_content extends Backend
 		if ($objPage->numRows < 1)
 		{
 			$this->log('Invalid content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -972,6 +973,7 @@ class tl_content extends Backend
 		if (!in_array($objPage->id, $pagemounts))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -979,6 +981,7 @@ class tl_content extends Backend
 		if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -1518,6 +1521,7 @@ class tl_content extends Backend
 		}
 
 		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'ace|' . $syntax;
+
 		return $varValue;
 	}
 

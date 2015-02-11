@@ -104,6 +104,7 @@ class Theme extends \Backend
 			else
 			{
 				$this->Session->set('uploaded_themes', implode(',', $arrFiles));
+
 				return $this->compareThemeFiles($arrFiles, $arrDbFields);
 			}
 		}

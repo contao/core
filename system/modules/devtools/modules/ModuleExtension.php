@@ -39,6 +39,7 @@ class ModuleExtension extends \BackendModule
 	public function generate()
 	{
 		$this->objDc = func_get_arg(0);
+
 		return parent::generate();
 	}
 

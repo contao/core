@@ -315,6 +315,7 @@ function deserialize($varValue, $blnForceArray=false)
 	if (preg_match('/[OoC]:\+?[0-9]+:"/', $varValue))
 	{
 		trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
+
 		return $blnForceArray ? array($varValue) : $varValue;
 	}
 
@@ -367,6 +368,7 @@ function trimsplit($strPattern, $strString)
 	}
 
 	$arrSplitCache[$strKey] = $arrFragments;
+
 	return $arrFragments;
 }
 
@@ -530,6 +532,7 @@ function array_insert(&$arrCurrent, $intIndex, $arrNew)
 	if (!is_array($arrCurrent))
 	{
 		$arrCurrent = $arrNew;
+
 		return;
 	}
 
@@ -537,6 +540,7 @@ function array_insert(&$arrCurrent, $intIndex, $arrNew)
 	{
 		$arrBuffer = array_splice($arrCurrent, 0, $intIndex);
 		$arrCurrent = array_merge_recursive($arrBuffer, $arrNew, $arrCurrent);
+
 		return;
 	}
 
@@ -626,6 +630,7 @@ function array_move_down($arrStack, $intIndex)
 function array_delete($arrStack, $intIndex)
 {
 	unset($arrStack[$intIndex]);
+
 	return array_values($arrStack);
 }
 

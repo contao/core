@@ -439,21 +439,25 @@ abstract class Events extends \Module
 
 			case 'next_cur_month':
 				$objToday = new \Date();
+
 				return array(time(), $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_cur_year':
 				$objToday = new \Date();
+
 				return array(time(), $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_next_month':
 				$objToday = new \Date();
+
 				return array(($objToday->monthEnd + 1), strtotime('+1 month', $objToday->monthEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_next_year':
 				$objToday = new \Date();
+
 				return array(($objToday->yearEnd + 1), strtotime('+1 year', $objToday->yearEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
@@ -491,26 +495,31 @@ abstract class Events extends \Module
 
 			case 'past_cur_month':
 				$objToday = new \Date();
+
 				return array($objToday->monthBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_cur_year':
 				$objToday = new \Date();
+
 				return array($objToday->yearBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_prev_month':
 				$objToday = new \Date();
+
 				return array(strtotime('-1 month', $objToday->monthBegin), ($objToday->monthBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_prev_year':
 				$objToday = new \Date();
+
 				return array(strtotime('-1 year', $objToday->yearBegin), ($objToday->yearBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_all': // 1970-01-01 00:00:00
 				$objToday = new \Date();
+
 				return array(0, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 		}

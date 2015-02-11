@@ -58,6 +58,7 @@ class ModuleNewsletterReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -69,6 +70,7 @@ class ModuleNewsletterReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 

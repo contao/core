@@ -131,6 +131,7 @@ class ModuleSearch extends \Module
 			if (!is_array($arrPages) || empty($arrPages))
 			{
 				$this->log('No searchable pages found', __METHOD__, TL_ERROR);
+
 				return;
 			}
 
@@ -208,6 +209,7 @@ class ModuleSearch extends \Module
 			{
 				$this->Template->header = sprintf($GLOBALS['TL_LANG']['MSC']['sEmpty'], $strKeywords);
 				$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
+
 				return;
 			}
 
@@ -230,6 +232,7 @@ class ModuleSearch extends \Module
 
 					// Send a 404 header
 					header('HTTP/1.1 404 Not Found');
+
 					return;
 				}
 

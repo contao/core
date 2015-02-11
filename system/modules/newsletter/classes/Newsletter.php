@@ -300,6 +300,7 @@ class Newsletter extends \Backend
 </form>';
 
 		unset($_SESSION['TL_PREVIEW_MAIL_ERROR']);
+
 		return $return;
 	}
 

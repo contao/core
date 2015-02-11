@@ -58,6 +58,7 @@ class ModuleEventReader extends \Events
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -69,6 +70,7 @@ class ModuleEventReader extends \Events
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -99,6 +101,7 @@ class ModuleEventReader extends \Events
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
 			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('events')) . '</p>';
+
 			return;
 		}
 
@@ -245,6 +248,7 @@ class ModuleEventReader extends \Events
 		if ($objEvent->noComments || !in_array('comments', \ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
+
 			return;
 		}
 

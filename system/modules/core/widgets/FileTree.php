@@ -110,11 +110,13 @@ class FileTree extends \Widget
 		elseif (strpos($varInput, ',') === false)
 		{
 			$varInput = \String::uuidToBin($varInput);
+
 			return $this->multiple ? array($varInput) : $varInput;
 		}
 		else
 		{
 			$arrValue = array_filter(explode(',', $varInput));
+
 			return $this->multiple ? array_map('String::uuidToBin', $arrValue) : \String::uuidToBin($arrValue[0]);
 		}
 	}

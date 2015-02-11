@@ -91,6 +91,7 @@ class ModuleListing extends \Module
 		if (\Input::get('show'))
 		{
 			$this->listSingleRecord(\Input::get('show'));
+
 			return;
 		}
 
@@ -159,6 +160,7 @@ class ModuleListing extends \Module
 
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
+
 				return;
 			}
 		}

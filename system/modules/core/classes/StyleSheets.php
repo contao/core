@@ -129,6 +129,7 @@ class StyleSheets extends \Backend
 		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
+
 			return;
 		}
 

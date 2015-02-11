@@ -759,6 +759,7 @@ abstract class Backend extends \Controller
 					if ($intId == $intNode)
 					{
 						$objSession->set($strKey, 0);
+
 						return;
 					}
 
@@ -879,6 +880,7 @@ abstract class Backend extends \Controller
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
 			$objSession->set($strKey, '');
+
 			return;
 		}
 

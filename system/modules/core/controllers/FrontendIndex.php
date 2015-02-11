@@ -352,6 +352,7 @@ class FrontendIndex extends \Frontend
 		if ($expire < time())
 		{
 			ob_end_clean();
+
 			return;
 		}
 

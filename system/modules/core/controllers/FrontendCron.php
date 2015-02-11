@@ -145,6 +145,7 @@ class FrontendCron extends \Frontend
 		}
 
 		$this->Database->unlockTables();
+
 		return $return;
 	}
 

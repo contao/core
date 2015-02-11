@@ -80,6 +80,7 @@ class ModuleFaqList extends \Module
 		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
+
 			return;
 		}
 

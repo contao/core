@@ -67,6 +67,7 @@ class ContentDownload extends \ContentElement
 		}
 
 		$this->singleSRC = $objFile->path;
+
 		return parent::generate();
 	}
 

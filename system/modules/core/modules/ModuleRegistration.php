@@ -93,6 +93,7 @@ class ModuleRegistration extends \Module
 		if (\Input::get('token') != '')
 		{
 			$this->activateAcount();
+
 			return;
 		}
 

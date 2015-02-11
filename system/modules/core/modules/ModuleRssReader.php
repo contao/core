@@ -77,10 +77,12 @@ class ModuleRssReader extends \Module
 		if (!$this->objFeed->init())
 		{
 			$this->log('Error importing RSS feed "' . $this->rss_feed . '"', __METHOD__, TL_ERROR);
+
 			return '';
 		}
 
 		$this->objFeed->handle_content_type();
+
 		return parent::generate();
 	}
 
@@ -143,6 +145,7 @@ class ModuleRssReader extends \Module
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
 				$this->Template->items = array();
+
 				return;
 			}
 

@@ -211,6 +211,7 @@ abstract class DataContainer extends \Backend
 		if (is_array($arrData['input_field_callback']))
 		{
 			$this->import($arrData['input_field_callback'][0]);
+
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
 		}
 		elseif (is_callable($arrData['input_field_callback']))
@@ -615,6 +616,7 @@ abstract class DataContainer extends \Backend
 		}
 
 		$strUrl = TL_SCRIPT . '?' . implode('&', $arrKeys);
+
 		return $strUrl . (!empty($arrKeys) ? '&' : '') . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 

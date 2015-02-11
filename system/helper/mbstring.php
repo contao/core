@@ -140,6 +140,7 @@ function utf8_convert_encoding($str, $to, $from=null)
 	if (USE_MBSTRING)
 	{
 		@mb_substitute_character('none');
+
 		return @mb_convert_encoding($str, $to, $from);
 	}
 

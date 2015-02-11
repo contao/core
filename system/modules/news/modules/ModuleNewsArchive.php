@@ -168,6 +168,7 @@ class ModuleNewsArchive extends \ModuleNews
 
 					// Send a 404 header
 					header('HTTP/1.1 404 Not Found');
+
 					return;
 				}
 

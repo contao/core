@@ -65,6 +65,7 @@ class ModulePassword extends \Module
 		if (strlen(\Input::get('token')))
 		{
 			$this->setNewPassword();
+
 			return;
 		}
 

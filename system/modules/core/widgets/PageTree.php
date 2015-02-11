@@ -112,6 +112,7 @@ class PageTree extends \Widget
 		else
 		{
 			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+
 			return $this->multiple ? $arrValue : $arrValue[0];
 		}
 	}

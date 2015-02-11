@@ -173,6 +173,7 @@ class FileSelector extends \Widget
 		}
 
 		$this->convertValuesToPaths();
+
 		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
 	}
 

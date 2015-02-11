@@ -68,6 +68,7 @@ class TextStore extends \Widget
 		if ($varInput == '*****')
 		{
 			$this->blnSubmitInput = false;
+
 			return true;
 		}
 
