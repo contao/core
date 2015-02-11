@@ -420,6 +420,7 @@ class tl_news_feed extends Backend
 		{
 			while ($objArchive->next())
 			{
+				/** @var NewsArchiveModel $objArchive */
 				$return[$objArchive->id] = $objArchive->title;
 			}
 		}

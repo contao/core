@@ -420,6 +420,7 @@ class tl_calendar_feed extends Backend
 		{
 			while ($objCalendar->next())
 			{
+				/** @var CalendarModel $objCalendar */
 				$return[$objCalendar->id] = $objCalendar->title;
 			}
 		}

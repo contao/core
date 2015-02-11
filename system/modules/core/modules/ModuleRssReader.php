@@ -21,7 +21,7 @@ class ModuleRssReader extends \Module
 
 	/**
 	 * RSS feed
-	 * @var object
+	 * @var \SimplePie
 	 */
 	protected $objFeed;
 
@@ -153,6 +153,7 @@ class ModuleRssReader extends \Module
 		$items = array();
 		$last = min($limit, count($arrItems)) - 1;
 
+		/** @var \SimplePie_Item[] $arrItems $i */
 		for ($i=$offset, $c=count($arrItems); $i<$limit && $i<$c; $i++)
 		{
 			$items[$i] = array

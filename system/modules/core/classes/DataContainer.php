@@ -23,6 +23,7 @@ namespace Contao;
  * @property object  $activeRecord
  * @property boolean $blnUploadable
  * @property array   $root
+ * @property array   $rootIds
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

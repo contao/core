@@ -215,11 +215,11 @@ class ModuleExtension extends \BackendModule
 	 * Return a new template object
 	 * @param string
 	 * @param \Database\Result
-	 * @return \BackendTemplate
+	 * @return \BackendTemplate|object
 	 */
 	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
-		$objTemplate = new \BackendTemplate($strTemplate);
+		$objTemplate = \BackendTemplate::create($strTemplate);
 
 		$objTemplate->folder = $objModule->folder;
 		$objTemplate->author = str_replace(array('[', ']'), array('<', '>'), $objModule->author);
