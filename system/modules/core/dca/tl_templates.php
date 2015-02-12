@@ -136,12 +136,20 @@ class tl_templates extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 *
+	 * @throws RuntimeException
 	 */
 	public function addBreadcrumb()
 	{
 		// Set a new node
 		if (isset($_GET['node']))
 		{
+			// Check the path (thanks to Arnaud Buchoux)
+			if (Validator::isInsecurePath(Input::get('node', true)))
+			{
+				throw new RuntimeException('Insecure path ' . Input::get('node', true));
+			}
+
 			$this->Session->set('tl_templates_node', Input::get('node', true));
 			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', Environment::get('request')));
 		}
@@ -151,6 +159,12 @@ class tl_templates extends Backend
 		if ($strNode == '')
 		{
 			return;
+		}
+
+		// Check the path (thanks to Arnaud Buchoux)
+		if (Validator::isInsecurePath($strNode))
+		{
+			throw new RuntimeException('Insecure path ' . $strNode);
 		}
 
 		// Currently selected folder does not exist
