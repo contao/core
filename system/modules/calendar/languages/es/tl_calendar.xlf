@@ -7,7 +7,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.title.1">
         <source>Please enter the calendar title.</source>
-        <target>Introduce un título para el calendario.</target>
+        <target>Introduzca un título para el calendario.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.0">
         <source>Redirect page</source>
@@ -15,7 +15,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.jumpTo.1">
         <source>Please choose the event reader page to which visitors will be redirected when clicking an event.</source>
-        <target>Selecciona la página a la que serán redirigidos los visitantes cuando hagan clic sobre un evento.</target>
+        <target>Seleccione la página a la que serán redirigidos los visitantes cuando hagan clic sobre un evento.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.allowComments.0">
         <source>Enable comments</source>
@@ -31,7 +31,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.notify.1">
         <source>Please choose who to notify when comments are added.</source>
-        <target>Seleccionar a quién se debe notificar cuando se agreguen comentarios.</target>
+        <target>Seleccione a quién se debe notificar cuando se agreguen comentarios.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.0">
         <source>Sort order</source>
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.sortOrder.1">
         <source>By default, comments are sorted ascending, starting with the oldest one.</source>
-        <target>De manera preestablecida los comentarios se ordenen de manera ascendente, comenzando por el más antiguo.</target>
+        <target>De manera preestablecida los comentarios se ordenan de manera ascendente, comenzando por el más antiguo.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.0">
         <source>Comments per page</source>
@@ -47,7 +47,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.perPage.1">
         <source>Number of comments per page. Set to 0 to disable pagination.</source>
-        <target>Cantidad de comentarios por página. Introducir 0 para deshabilitar la paginación.</target>
+        <target>Cantidad de comentarios por página. Introduzca 0 para deshabilitar la paginación.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.moderate.0">
         <source>Moderate comments</source>
@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.requireLogin.1">
         <source>Allow only authenticated users to create comments.</source>
-        <target>Sólo los usuarios que hayan iniciado sesión pueden crear comentarios.</target>
+        <target>Sólo los usuarios que hayan iniciado la sesión pueden crear comentarios.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.disableCaptcha.0">
         <source>Disable the security question</source>
@@ -95,7 +95,7 @@
       </trans-unit>
       <trans-unit id="tl_calendar.groups.1">
         <source>These groups will be able to see the events in this calendar.</source>
-        <target>Estos grupos podrán ver los eventos.</target>
+        <target>Estos grupos podrán ver los eventos de este calendario.</target>
       </trans-unit>
       <trans-unit id="tl_calendar.tstamp.0">
         <source>Revision date</source>
@@ -127,11 +127,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.notify_author">
         <source>Author of the event</source>
-        <target>Autor del elemento</target>
+        <target>Autor del evento</target>
       </trans-unit>
       <trans-unit id="tl_calendar.notify_both">
         <source>Author and system administrator</source>
-        <target>Administrador del sistema y autor del elemento</target>
+        <target>Autor y administrador del sistema</target>
       </trans-unit>
       <trans-unit id="tl_calendar.source_teaser">
         <source>Event teasers</source>
@@ -175,11 +175,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.copy.0">
         <source>Duplicate calendar</source>
-        <target>Copiar calendario</target>
+        <target>Duplicar calendario</target>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.1">
         <source>Duplicate calendar ID %s</source>
-        <target>Copiar calendario con ID %s</target>
+        <target>Duplicar calendario con ID %s</target>
       </trans-unit>
       <trans-unit id="tl_calendar.delete.0">
         <source>Delete calendar</source>
@@ -191,11 +191,11 @@
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.0">
         <source>RSS feeds</source>
-        <target>RSS feeds</target>
+        <target>feeds RSS</target>
       </trans-unit>
       <trans-unit id="tl_calendar.feeds.1">
         <source>Manage RSS feeds</source>
-        <target>Administrar RSS feeds</target>
+        <target>Administrar feeds RSS</target>
       </trans-unit>
     </body>
   </file>
