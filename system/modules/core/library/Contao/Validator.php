@@ -350,6 +350,12 @@ class Validator
 		$strPath = str_replace('\\', '/', $strPath);
 		$strPath = preg_replace('#//+#', '/', $strPath);
 
+		// Equals ..
+		if ($strPath == '..')
+		{
+			return true;
+		}
+
 		// Begins with ./
 		if (substr($strPath, 0, 2) == './')
 		{

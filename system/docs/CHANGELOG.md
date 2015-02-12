@@ -1,6 +1,14 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.4 (2015-02-XX)
+--------------------------
+
+### Fixed
+Fixed a directory traversal vulnerability discovered by Arnaud Buchoux. See
+CVE-2015-0269 for more information.
+
+
 Version 3.4.3 (2015-01-30)
 --------------------------
 
