@@ -52,7 +52,9 @@ class PageError403 extends \Frontend
 		// Generate the error page
 		if (!$obj403->autoforward || !$obj403->jumpTo)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage = $obj403->loadDetails();
 
 			/** @var \PageRegular $objHandler */

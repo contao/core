@@ -58,6 +58,7 @@ class ModuleArticleList extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (!strlen($this->inColumn))

@@ -378,6 +378,7 @@ class Calendar extends \Frontend
 			return;
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Called in the back end (see #4026)

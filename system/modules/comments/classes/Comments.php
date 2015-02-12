@@ -30,6 +30,7 @@ class Comments extends \Frontend
 	 */
 	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$limit = 0;
@@ -63,7 +64,9 @@ class Comments extends \Frontend
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$objConfig->perPage), 1))
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 
@@ -304,7 +307,9 @@ class Comments extends \Frontend
 		// Do not index or cache the page with the confirmation message
 		if ($_SESSION['TL_COMMENT_ADDED'])
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -498,7 +503,9 @@ class Comments extends \Frontend
 	 */
 	public function convertLineFeeds($strComment)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$strComment = nl2br_pre($strComment, ($objPage->outputFormat == 'xhtml'));
 
 		// Use paragraphs to generate new lines

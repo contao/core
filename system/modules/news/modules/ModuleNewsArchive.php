@@ -76,6 +76,7 @@ class ModuleNewsArchive extends \ModuleNews
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$limit = null;
@@ -163,7 +164,9 @@ class ModuleNewsArchive extends \ModuleNews
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 				{
+					/** @var \PageModel $objPage */
 					global $objPage;
+
 					$objPage->noSearch = 1;
 					$objPage->cache = 0;
 

@@ -53,6 +53,7 @@ class ModuleBooknav extends \Module
 			return $objTemplate->parse();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (!$this->rootPage || !in_array($this->rootPage, $objPage->trail))
@@ -88,6 +89,7 @@ class ModuleBooknav extends \Module
 		$this->arrPages[$objTarget->id] = $objTarget->row();
 		$this->getBookPages($objTarget->id, $groups, time());
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Upper page

@@ -425,7 +425,9 @@ abstract class Frontend extends \Controller
 			return 'index.php?' . preg_replace('/^&(amp;)?/i', '', $strParams);
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$pageId = $objPage->alias ?: $objPage->id;
 
 		// Get the page ID from URL if not set
@@ -455,6 +457,7 @@ abstract class Frontend extends \Controller
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Always redirect if there are additional arguments (see #5734)

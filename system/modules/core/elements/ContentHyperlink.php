@@ -31,6 +31,7 @@ class ContentHyperlink extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (substr($this->url, 0, 7) == 'mailto:')

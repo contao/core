@@ -67,6 +67,7 @@ class ModuleRandomImage extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();

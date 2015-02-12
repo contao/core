@@ -163,7 +163,9 @@ class FormTextArea extends \Widget
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$arrStrip = array();
 
 		// XHTML does not support maxlength

@@ -52,6 +52,7 @@ class FormExplanation extends \Widget
 	 */
 	public function generate()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Clean RTE output

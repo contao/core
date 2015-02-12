@@ -152,7 +152,9 @@ class ModuleListing extends \Module
 		{
 			if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 
@@ -442,6 +444,7 @@ class ModuleListing extends \Module
 			return '';
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Array
@@ -471,7 +474,9 @@ class ModuleListing extends \Module
 		// URLs
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$value = \Idna::decode($value); // see #5946
 			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') . '>' . $value . '</a>';
 		}

@@ -31,6 +31,7 @@ class ContentTable extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$rows = deserialize($this->tableitems);

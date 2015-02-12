@@ -83,6 +83,7 @@ abstract class ModuleNews extends \Module
 	 */
 	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		/** @var \FrontendTemplate|object $objTemplate */
@@ -252,7 +253,9 @@ abstract class ModuleNews extends \Module
 			return array();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$return = array();
 
 		foreach ($meta as $field)
@@ -398,6 +401,7 @@ abstract class ModuleNews extends \Module
 			$strArticleUrl = ampersand($objArticle->url);
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// External link

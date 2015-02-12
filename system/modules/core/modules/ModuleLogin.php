@@ -117,6 +117,7 @@ class ModuleLogin extends \Module
 		// Logout and redirect to the website root if the current page is protected
 		if (\Input::post('FORM_SUBMIT') == 'tl_logout')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			$this->import('FrontendUser', 'User');
@@ -170,7 +171,9 @@ class ModuleLogin extends \Module
 
 			if ($this->User->lastLogin > 0)
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], \Date::parse($objPage->datimFormat, $this->User->lastLogin));
 			}
 

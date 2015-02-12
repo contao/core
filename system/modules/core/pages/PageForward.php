@@ -25,6 +25,7 @@ class PageForward extends \Frontend
 	 */
 	public function generate($objPage)
 	{
+		// Forward to the jumpTo or first published page
 		if ($objPage->jumpTo)
 		{
 			/** @var \PageModel $objNextPage */

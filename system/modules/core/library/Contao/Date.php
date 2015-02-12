@@ -500,6 +500,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->dateFormat != '' && static::isNumericFormat($objPage->dateFormat))
@@ -521,6 +522,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->timeFormat != '' && static::isNumericFormat($objPage->timeFormat))
@@ -542,6 +544,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->datimFormat != '' && static::isNumericFormat($objPage->datimFormat))

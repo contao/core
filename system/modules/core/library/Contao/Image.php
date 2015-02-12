@@ -857,6 +857,7 @@ class Image
 			$image = new \File(rawurldecode($image), true);
 		}
 
+		/** @var \Image $imageObj */
 		$imageObj = new static($image);
 
 		// tl_image_size ID as resize mode
@@ -869,18 +870,18 @@ class Image
 		{
 			$size = $size + array(0, 0, 'crop');
 
-			$imageObj->setTargetWidth($size[0]);
-			$imageObj->setTargetHeight($size[1]);
-			$imageObj->setResizeMode($size[2]);
+			$imageObj->setTargetWidth($size[0])
+					 ->setTargetHeight($size[1])
+					 ->setResizeMode($size[2]);
 		}
 
 		// Load the image size from the database if $size is an ID
 		elseif (($imageSize = \ImageSizeModel::findByPk($size)) !== null)
 		{
-			$imageObj->setTargetWidth($imageSize->width);
-			$imageObj->setTargetHeight($imageSize->height);
-			$imageObj->setResizeMode($imageSize->resizeMode);
-			$imageObj->setZoomLevel($imageSize->zoom);
+			$imageObj->setTargetWidth($imageSize->width)
+					 ->setTargetHeight($imageSize->height)
+					 ->setResizeMode($imageSize->resizeMode)
+					 ->setZoomLevel($imageSize->zoom);
 		}
 
 		$fileRecord = \FilesModel::findByPath($image->path);

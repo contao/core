@@ -56,7 +56,9 @@ class ModuleEventReader extends \Events
 		// Do not index or cache the page if no event has been specified
 		if (!\Input::get('events'))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -68,7 +70,9 @@ class ModuleEventReader extends \Events
 		// Do not index or cache the page if there are no calendars
 		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -84,6 +88,7 @@ class ModuleEventReader extends \Events
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$this->Template->event = '';

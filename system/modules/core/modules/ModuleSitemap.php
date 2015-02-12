@@ -56,6 +56,7 @@ class ModuleSitemap extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$lang = null;

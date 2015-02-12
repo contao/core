@@ -200,7 +200,9 @@ abstract class Events extends \Module
 	 */
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$span = \Calendar::calculateSpan($intStart, $intEnd);
 
 		// Adjust the start time of a multi-day event (see #6802)

@@ -93,6 +93,7 @@ class ModuleRssReader extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if ($this->rss_template != 'rss_default')
@@ -139,7 +140,9 @@ class ModuleRssReader extends \Module
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil(count($arrItems)/$this->perPage), 1))
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 

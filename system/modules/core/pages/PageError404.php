@@ -82,7 +82,9 @@ class PageError404 extends \Frontend
 		// Generate the error page
 		if (!$obj404->autoforward || !$obj404->jumpTo)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage = $obj404->loadDetails();
 
 			/** @var \PageRegular $objHandler */

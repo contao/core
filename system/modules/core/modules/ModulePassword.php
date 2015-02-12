@@ -56,7 +56,9 @@ class ModulePassword extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		\System::loadLanguageFile('tl_member');

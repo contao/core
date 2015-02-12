@@ -357,7 +357,7 @@ abstract class Module extends \Frontend
 		$objTemplate->cssID = $this->cssID; // see #4897
 		$objTemplate->level = 'level_' . $level++;
 
-		// Get page object
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Browse subpages

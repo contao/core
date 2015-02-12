@@ -56,7 +56,9 @@ class ModuleNewsReader extends \ModuleNews
 		// Do not index or cache the page if no news item has been specified
 		if (!\Input::get('items'))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -68,7 +70,9 @@ class ModuleNewsReader extends \ModuleNews
 		// Do not index or cache the page if there are no archives
 		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -84,6 +88,7 @@ class ModuleNewsReader extends \ModuleNews
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$this->Template->articles = '';

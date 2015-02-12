@@ -56,7 +56,9 @@ class FrontendIndex extends \Frontend
 	 */
 	public function run()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
 

@@ -59,6 +59,7 @@ abstract class Controller extends \System
 		// Check for a theme folder
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->templateGroup != '')
@@ -187,6 +188,7 @@ abstract class Controller extends \System
 			return '';
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Articles
@@ -346,6 +348,7 @@ abstract class Controller extends \System
 	 */
 	public static function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (is_object($varId))
@@ -673,6 +676,7 @@ abstract class Controller extends \System
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=true)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Preserve insert tags
@@ -1836,6 +1840,7 @@ abstract class Controller extends \System
 			}
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$arrReplace = array();
@@ -2224,7 +2229,9 @@ abstract class Controller extends \System
 				}
 				elseif (TL_MODE == 'FE')
 				{
+					/** @var \PageModel $objPage */
 					global $objPage;
+
 					$strLanguage = $objPage->rootLanguage . '/';
 				}
 			}
@@ -2540,6 +2547,7 @@ abstract class Controller extends \System
 	 */
 	public static function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		try
@@ -2745,6 +2753,7 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$arrEnclosures = array();
@@ -2805,7 +2814,7 @@ abstract class Controller extends \System
 	/**
 	 * Set the static URL constants
 	 *
-	 * @param object $objPage An optional page object
+	 * @param \PageModel $objPage An optional page object
 	 */
 	public static function setStaticUrls($objPage=null)
 	{

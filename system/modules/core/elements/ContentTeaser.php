@@ -72,6 +72,7 @@ class ContentTeaser extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$link = '/articles/';

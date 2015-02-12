@@ -98,6 +98,7 @@ class ContentDownloads extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$files = array();

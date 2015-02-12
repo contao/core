@@ -56,6 +56,7 @@ class ModuleComments extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$this->import('Comments');

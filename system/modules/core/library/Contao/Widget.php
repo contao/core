@@ -198,6 +198,7 @@ abstract class Widget extends \BaseTemplate
 		// Override the output format in the front end
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->outputFormat != '')
@@ -728,6 +729,7 @@ abstract class Widget extends \BaseTemplate
 
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->outputFormat == 'xhtml')
@@ -1230,6 +1232,7 @@ abstract class Widget extends \BaseTemplate
 
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->outputFormat == 'xhtml')
@@ -1261,6 +1264,7 @@ abstract class Widget extends \BaseTemplate
 
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->outputFormat == 'xhtml')

@@ -176,6 +176,7 @@ class ModuleSubscribe extends \Module
 			$objRecipient->save();
 		}
 
+		// Log activity
 		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
 
 		// HOOK: post activation callback

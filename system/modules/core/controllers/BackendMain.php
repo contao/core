@@ -21,7 +21,7 @@ class BackendMain extends \Backend
 
 	/**
 	 * Current Ajax object
-	 * @var object
+	 * @var \Ajax
 	 */
 	protected $objAjax;
 
