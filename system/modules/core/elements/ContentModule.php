@@ -45,6 +45,8 @@ class ContentModule extends \ContentElement
 		}
 
 		$objModule->typePrefix = 'ce_';
+
+		/** @var \Module $objModule */
 		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID

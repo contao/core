@@ -34,6 +34,7 @@ class ModuleQuicknav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['quicknav'][0]) . ' ###';
@@ -148,7 +149,9 @@ class ModuleQuicknav extends \Module
 				{
 					if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
 					{
-						$objSubpages->current()->loadDetails();
+						/** @var \PageModel $objModel */
+						$objModel = $objSubpages->current();
+						$objModel->loadDetails();
 					}
 
 					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);

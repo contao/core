@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle check boxes.
  *
+ * @property array   $options
+ * @property boolean $multiple
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class CheckBox extends \Widget

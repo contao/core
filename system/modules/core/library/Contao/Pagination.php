@@ -81,7 +81,7 @@ class Pagination
 
 	/**
 	 * Template object
-	 * @var \Template
+	 * @var \Template|object
 	 */
 	protected $objTemplate;
 
@@ -156,6 +156,7 @@ class Pagination
 		// Backwards compatibility
 		if ($objTemplate === null)
 		{
+			/** @var \FrontendTemplate|object $objTemplate */
 			$objTemplate = new \FrontendTemplate('pagination');
 		}
 

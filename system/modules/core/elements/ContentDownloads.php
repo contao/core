@@ -21,7 +21,7 @@ class ContentDownloads extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|FilesModel
 	 */
 	protected $objFiles;
 

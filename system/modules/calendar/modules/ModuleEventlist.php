@@ -21,7 +21,7 @@ class ModuleEventlist extends \Events
 
 	/**
 	 * Current date object
-	 * @var integer
+	 * @var \Date
 	 */
 	protected $Date;
 
@@ -40,6 +40,7 @@ class ModuleEventlist extends \Events
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventlist'][0]) . ' ###';
@@ -201,6 +202,7 @@ class ModuleEventlist extends \Events
 
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
+
 				return;
 			}
 
@@ -242,6 +244,7 @@ class ModuleEventlist extends \Events
 				$blnIsLastEvent = true;
 			}
 
+			/** @var \FrontendTemplate|object $objTemplate */
 			$objTemplate = new \FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
 

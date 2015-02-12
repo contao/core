@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to manage back end controllers.
  *
+ * @property \Ajax $objAjax
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Backend extends \Controller
@@ -390,6 +392,8 @@ abstract class Backend extends \Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+
+			/** @var \DataContainer $dc */
 			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
@@ -402,7 +406,9 @@ abstract class Backend extends \Controller
 		// Trigger the module callback
 		elseif (class_exists($arrModule['callback']))
 		{
+			/** @var \Module $objCallback */
 			$objCallback = new $arrModule['callback']($dc);
+
 			$this->Template->main .= $objCallback->generate();
 		}
 
@@ -753,6 +759,7 @@ abstract class Backend extends \Controller
 					if ($intId == $intNode)
 					{
 						$objSession->set($strKey, 0);
+
 						return;
 					}
 
@@ -833,7 +840,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Mark root pages
-		if ($row['type'] == 'root' || Input::get('do') == 'article')
+		if ($row['type'] == 'root' || \Input::get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
@@ -873,6 +880,7 @@ abstract class Backend extends \Controller
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
 			$objSession->set($strKey, '');
+
 			return;
 		}
 

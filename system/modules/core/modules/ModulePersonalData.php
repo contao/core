@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Front end module "personal data".
  *
+ * @property array $editable
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePersonalData extends \Module
@@ -34,6 +36,7 @@ class ModulePersonalData extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['personalData'][0]) . ' ###';
@@ -90,7 +93,10 @@ class ModulePersonalData extends \Module
 		// Set the template
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -134,6 +140,7 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
@@ -185,6 +192,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
 			$objWidget->storeValues = true;

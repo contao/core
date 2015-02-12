@@ -20,6 +20,13 @@ class Result extends \Database\Result
 {
 
 	/**
+	 * Database result
+	 * @var \mysqli_result
+	 */
+	protected $resResult;
+
+
+	/**
 	 * Fetch the current row as enumerated array
 	 *
 	 * @return array The row as array
@@ -68,7 +75,7 @@ class Result extends \Database\Result
 	 *
 	 * @param integer $intOffset The field offset
 	 *
-	 * @return array An array with the column information
+	 * @return array|object An array or object with the column information
 	 */
 	protected function fetch_field($intOffset)
 	{

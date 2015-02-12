@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Class FormExplanation
  *
+ * @property string $text
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormExplanation extends \Widget

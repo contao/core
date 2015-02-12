@@ -14,6 +14,104 @@ namespace Contao;
 /**
  * Reads and writes articles
  *
+ * @property integer $id
+ * @property integer $pid
+ * @property integer $sorting
+ * @property integer $tstamp
+ * @property string  $title
+ * @property string  $alias
+ * @property integer $author
+ * @property string  $inColumn
+ * @property string  $keywords
+ * @property boolean $showTeaser
+ * @property string  $teaserCssID
+ * @property string  $teaser
+ * @property string  $printable
+ * @property string  $customTpl
+ * @property boolean $protected
+ * @property string  $groups
+ * @property boolean $guests
+ * @property string  $cssID
+ * @property string  $space
+ * @property boolean $published
+ * @property string  $start
+ * @property string  $stop
+ * @property string  $classes
+ *
+ * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
+ * @method static $this findOneByPid()
+ * @method static $this findOneBySorting()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByTitle()
+ * @method static $this findOneByAlias()
+ * @method static $this findOneByAuthor()
+ * @method static $this findOneByInColumn()
+ * @method static $this findOneByKeywords()
+ * @method static $this findOneByShowTeaser()
+ * @method static $this findOneByTeaserCssID()
+ * @method static $this findOneByTeaser()
+ * @method static $this findOneByPrintable()
+ * @method static $this findOneByCustomTpl()
+ * @method static $this findOneByProtected()
+ * @method static $this findOneByGroups()
+ * @method static $this findOneByGuests()
+ * @method static $this findOneByCssID()
+ * @method static $this findOneBySpace()
+ * @method static $this findOneByPublished()
+ * @method static $this findOneByStart()
+ * @method static $this findOneByStop()
+ *
+ * @method static \Model\Collection|\ArticleModel findByPid()
+ * @method static \Model\Collection|\ArticleModel findBySorting()
+ * @method static \Model\Collection|\ArticleModel findByTstamp()
+ * @method static \Model\Collection|\ArticleModel findByTitle()
+ * @method static \Model\Collection|\ArticleModel findByAlias()
+ * @method static \Model\Collection|\ArticleModel findByAuthor()
+ * @method static \Model\Collection|\ArticleModel findByInColumn()
+ * @method static \Model\Collection|\ArticleModel findByKeywords()
+ * @method static \Model\Collection|\ArticleModel findByShowTeaser()
+ * @method static \Model\Collection|\ArticleModel findByTeaserCssID()
+ * @method static \Model\Collection|\ArticleModel findByTeaser()
+ * @method static \Model\Collection|\ArticleModel findByPrintable()
+ * @method static \Model\Collection|\ArticleModel findByCustomTpl()
+ * @method static \Model\Collection|\ArticleModel findByProtected()
+ * @method static \Model\Collection|\ArticleModel findByGroups()
+ * @method static \Model\Collection|\ArticleModel findByGuests()
+ * @method static \Model\Collection|\ArticleModel findByCssID()
+ * @method static \Model\Collection|\ArticleModel findBySpace()
+ * @method static \Model\Collection|\ArticleModel findByPublished()
+ * @method static \Model\Collection|\ArticleModel findByStart()
+ * @method static \Model\Collection|\ArticleModel findByStop()
+ * @method static \Model\Collection|\ArticleModel findMultipleByIds()
+ * @method static \Model\Collection|\ArticleModel findBy()
+ * @method static \Model\Collection|\ArticleModel findAll()
+ *
+ * @method static integer countById()
+ * @method static integer countByPid()
+ * @method static integer countBySorting()
+ * @method static integer countByTstamp()
+ * @method static integer countByTitle()
+ * @method static integer countByAlias()
+ * @method static integer countByAuthor()
+ * @method static integer countByInColumn()
+ * @method static integer countByKeywords()
+ * @method static integer countByShowTeaser()
+ * @method static integer countByTeaserCssID()
+ * @method static integer countByTeaser()
+ * @method static integer countByPrintable()
+ * @method static integer countByCustomTpl()
+ * @method static integer countByProtected()
+ * @method static integer countByGroups()
+ * @method static integer countByGuests()
+ * @method static integer countByCssID()
+ * @method static integer countBySpace()
+ * @method static integer countByPublished()
+ * @method static integer countByStart()
+ * @method static integer countByStop()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ArticleModel extends \Model
@@ -33,7 +131,7 @@ class ArticleModel extends \Model
 	 * @param integer $intPid     The page ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no article
+	 * @return static The model or null if there is no article
 	 */
 	public static function findByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
 	{
@@ -57,7 +155,7 @@ class ArticleModel extends \Model
 	 * @param integer $intId      The article ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no published article
+	 * @return static The model or null if there is no published article
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
 	{
@@ -81,7 +179,7 @@ class ArticleModel extends \Model
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
+	 * @return \Model\Collection|\ArticleModel|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{
@@ -111,7 +209,7 @@ class ArticleModel extends \Model
 	 * @param string  $strColumn  The column name
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no articles in the given column
+	 * @return \Model\Collection|\ArticleModel|null A collection of models or null if there are no articles in the given column
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn, array $arrOptions=array())
 	{

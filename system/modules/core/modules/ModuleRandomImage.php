@@ -21,7 +21,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 

@@ -39,11 +39,11 @@ class ContentAlias extends \ContentElement
 			return '';
 		}
 
-		// Overwrite the ID
 		$objElement->origId = $objElement->id;
 		$objElement->id = $this->id;
-
 		$objElement->typePrefix = 'ce_';
+
+		/** @var \ContentElement $objElement */
 		$objElement = new $strClass($objElement);
 
 		// Overwrite spacing and CSS ID

@@ -20,6 +20,13 @@ class Statement extends \Database\Statement
 {
 
 	/**
+	 * Connection ID
+	 * @var \mysqli
+	 */
+	protected $resConnection;
+
+
+	/**
 	 * Prepare a query string and return it
 	 *
 	 * @param string $strQuery The query string

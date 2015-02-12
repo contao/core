@@ -14,6 +14,14 @@ namespace Contao;
 /**
  * Provide methods to manage back end users.
  *
+ * @property boolean $isAdmin
+ * @property string  $groups
+ * @property array   $pagemounts
+ * @property array   $filemounts
+ * @property array   $filemountIds
+ * @property string  $fop
+ * @property string  $alexf
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendUser extends \User

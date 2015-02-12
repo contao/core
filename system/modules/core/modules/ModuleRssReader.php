@@ -21,7 +21,7 @@ class ModuleRssReader extends \Module
 
 	/**
 	 * RSS feed
-	 * @var object
+	 * @var \SimplePie
 	 */
 	protected $objFeed;
 
@@ -40,6 +40,7 @@ class ModuleRssReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['rss_reader'][0]) . ' ###';
@@ -76,10 +77,12 @@ class ModuleRssReader extends \Module
 		if (!$this->objFeed->init())
 		{
 			$this->log('Error importing RSS feed "' . $this->rss_feed . '"', __METHOD__, TL_ERROR);
+
 			return '';
 		}
 
 		$this->objFeed->handle_content_type();
+
 		return parent::generate();
 	}
 
@@ -95,7 +98,10 @@ class ModuleRssReader extends \Module
 		{
 			$this->strTemplate = $this->rss_template;
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -139,6 +145,7 @@ class ModuleRssReader extends \Module
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
 				$this->Template->items = array();
+
 				return;
 			}
 
@@ -153,6 +160,7 @@ class ModuleRssReader extends \Module
 		$items = array();
 		$last = min($limit, count($arrItems)) - 1;
 
+		/** @var \SimplePie_Item[] $arrItems */
 		for ($i=$offset, $c=count($arrItems); $i<$limit && $i<$c; $i++)
 		{
 			$items[$i] = array

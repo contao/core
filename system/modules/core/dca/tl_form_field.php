@@ -588,6 +588,7 @@ class tl_form_field extends Backend
 			return '';
 		}
 
+		/** @var Widget $objWidget */
 		$objWidget = new $strClass($arrRow);
 
 		$strWidget = $objWidget->parse();

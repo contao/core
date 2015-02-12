@@ -139,6 +139,7 @@ class tl_content_news extends Backend
 		if ($objArchive->numRows < 1)
 		{
 			$this->log('Invalid news content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -146,6 +147,7 @@ class tl_content_news extends Backend
 		if (!in_array($objArchive->id, $root))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objArchive->nid . ' in news archive ID ' . $objArchive->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 

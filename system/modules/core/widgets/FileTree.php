@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle input field "page tree".
  *
+ * @property string  $orderField
+ * @property boolean $multiple
+ * @property boolean $isGallery
+ * @property boolean $isDownloads
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileTree extends \Widget
@@ -105,11 +110,13 @@ class FileTree extends \Widget
 		elseif (strpos($varInput, ',') === false)
 		{
 			$varInput = \String::uuidToBin($varInput);
+
 			return $this->multiple ? array($varInput) : $varInput;
 		}
 		else
 		{
 			$arrValue = array_filter(explode(',', $varInput));
+
 			return $this->multiple ? array_map('String::uuidToBin', $arrValue) : \String::uuidToBin($arrValue[0]);
 		}
 	}

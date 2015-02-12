@@ -71,7 +71,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse an item and return it as string
-	 * @param object
+	 * @param \NewsModel $objArticle
 	 * @param boolean
 	 * @param string
 	 * @param integer
@@ -81,7 +81,9 @@ abstract class ModuleNews extends \Module
 	{
 		global $objPage;
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($this->news_template);
+
 		$objTemplate->setData($objArticle->row());
 
 		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
@@ -200,7 +202,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse one or more items and return them as array
-	 * @param object
+	 * @param \Model\Collection $objArticles
 	 * @param boolean
 	 * @return array
 	 */
@@ -218,7 +220,10 @@ abstract class ModuleNews extends \Module
 
 		while ($objArticles->next())
 		{
-			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			/** @var \NewsModel $objArticle */
+			$objArticle = $objArticles->current();
+
+			$arrArticles[] = $this->parseArticle($objArticle, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
 		return $arrArticles;
@@ -227,7 +232,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Return the meta fields of a news article as array
-	 * @param object
+	 * @param \NewsModel $objArticle
 	 * @return array
 	 */
 	protected function getMetaFields($objArticle)
@@ -251,6 +256,7 @@ abstract class ModuleNews extends \Module
 					break;
 
 				case 'author':
+					/** @var \UserModel $objAuthor */
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
 						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
@@ -275,7 +281,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param object
+	 * @param \NewsModel $objItem
 	 * @param boolean
 	 * @return string
 	 */

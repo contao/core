@@ -34,6 +34,7 @@ class ModuleFaqReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqreader'][0]) . ' ###';
@@ -57,6 +58,7 @@ class ModuleFaqReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -68,6 +70,7 @@ class ModuleFaqReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -96,6 +99,7 @@ class ModuleFaqReader extends \Module
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
 			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+
 			return;
 		}
 
@@ -165,9 +169,11 @@ class ModuleFaqReader extends \Module
 		if ($objFaq->noComments || !in_array('comments', ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
+
 			return;
 		}
 
+		/** @var \FaqCategoryModel $objCategory */
 		$objCategory = $objFaq->getRelated('pid');
 		$this->Template->allowComments = $objCategory->allowComments;
 
@@ -193,6 +199,7 @@ class ModuleFaqReader extends \Module
 		// Notify the author
 		if ($objCategory->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objFaq->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

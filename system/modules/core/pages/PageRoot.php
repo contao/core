@@ -38,6 +38,7 @@ class PageRoot extends \Frontend
 			die_nicely('be_no_active', 'No active pages found');
 		}
 
+		/** @var \PageModel $objNextPage */
 		if (!$blnReturn)
 		{
 			global $objPage;

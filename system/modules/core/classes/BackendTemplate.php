@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle back end templates.
  *
+ * @property string $ua
+ * @property array  $javascripts
+ * @property array  $stylesheets
+ * @property string $mootools
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendTemplate extends \Template

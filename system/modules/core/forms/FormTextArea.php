@@ -14,6 +14,14 @@ namespace Contao;
 /**
  * Class FormTextArea
  *
+ * @property string  $value
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property string  $size
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormTextArea extends \Widget

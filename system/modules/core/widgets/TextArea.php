@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Provide methods to handle textareas.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property boolean $rte
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TextArea extends \Widget

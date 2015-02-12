@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Class FrontendTemplate
  *
+ * @property integer $id
+ * @property string  $keywords
+ * @property string  $content
+ * @property array   $sections
+ * @property string  $sPosition
+ * @property string  $tag
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendTemplate extends \Template

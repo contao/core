@@ -135,7 +135,9 @@ class News extends \Frontend
 
 			while ($objArticle->next())
 			{
-				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
+				/** @var \PageModel $objPage */
+				$objPage = $objArticle->getRelated('pid');
+				$jumpTo = $objPage->jumpTo;
 
 				// No jumpTo page set (see #4784)
 				if (!$jumpTo)
@@ -324,7 +326,7 @@ class News extends \Frontend
 
 	/**
 	 * Return the link of a news article
-	 * @param object
+	 * @param \NewsModel $objItem
 	 * @param string
 	 * @param string
 	 * @return string

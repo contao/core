@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle sortable checkboxes.
  *
+ * @property array   $options
+ * @property boolean $multiple
+ *
  * @author John Brand <http://www.thyon.com>
  * @author Leo Feyer <https://github.com/leofeyer>
  */

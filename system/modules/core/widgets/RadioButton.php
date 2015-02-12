@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle radio buttons.
  *
+ * @property boolean $mandatory
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class RadioButton extends \Widget

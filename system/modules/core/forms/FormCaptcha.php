@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Class FormCaptcha
  *
+ * @property string $name
+ * @property string $question
+ * @property string $placeholder
+ * @property string $rowClass
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormCaptcha extends \Widget

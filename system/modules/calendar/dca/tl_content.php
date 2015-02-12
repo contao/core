@@ -139,6 +139,7 @@ class tl_content_calendar extends Backend
 		if ($objCalendar->numRows < 1)
 		{
 			$this->log('Invalid event content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -146,6 +147,7 @@ class tl_content_calendar extends Backend
 		if (!in_array($objCalendar->id, $root))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 

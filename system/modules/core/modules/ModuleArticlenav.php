@@ -27,7 +27,7 @@ class ModuleArticlenav extends \Module
 
 	/**
 	 * Articles
-	 * @var array
+	 * @var \Model\Collection
 	 */
 	protected $objArticles;
 
@@ -40,6 +40,7 @@ class ModuleArticlenav extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articlenav'][0]) . ' ###';
@@ -51,7 +52,9 @@ class ModuleArticlenav extends \Module
 			return $objTemplate->parse();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$this->objArticles = \ArticleModel::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
 
 		// Return if there are no articles
@@ -68,7 +71,10 @@ class ModuleArticlenav extends \Module
 				return '';
 			}
 
-			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
+			/** @var \ArticleModel $objArticle */
+			$objArticle = $this->objArticles->current();
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
+
 			$this->redirect($this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias));
 		}
 
@@ -81,6 +87,7 @@ class ModuleArticlenav extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$intActive = null;
@@ -89,7 +96,9 @@ class ModuleArticlenav extends \Module
 
 		while ($this->objArticles->next())
 		{
-			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
+			/** @var \ArticleModel $objArticle */
+			$objArticle = $this->objArticles->current();
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
 
 			// Active article
 			if (\Input::get('articles') == $strAlias)
@@ -98,7 +107,7 @@ class ModuleArticlenav extends \Module
 				(
 					'isActive' => true,
 					'href' => $this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias),
-					'title' => specialchars($this->objArticles->title, true),
+					'title' => specialchars($objArticle->title, true),
 					'link' => $intCount
 				);
 
@@ -112,7 +121,7 @@ class ModuleArticlenav extends \Module
 				(
 					'isActive' => false,
 					'href' => $this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias),
-					'title' => specialchars($this->objArticles->title, true),
+					'title' => specialchars($objArticle->title, true),
 					'link' => $intCount
 				);
 			}

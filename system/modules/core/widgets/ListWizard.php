@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to handle list items.
  *
+ * @property integer $maxlength
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ListWizard extends \Widget
@@ -162,6 +164,7 @@ class ListWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS

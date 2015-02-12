@@ -129,6 +129,7 @@ class StyleSheets extends \Backend
 		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
+
 			return;
 		}
 
@@ -1083,6 +1084,7 @@ class StyleSheets extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -1215,6 +1217,8 @@ class StyleSheets extends \Backend
 					// Regular block
 					else
 					{
+						$strSelector = '';
+
 						while ($i<$intLength)
 						{
 							$strBuffer .= $strFile[$i++];
@@ -1345,7 +1349,7 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Export a style sheet
-	 * @param \DataContainer
+	 * @param \DataContainer $dc
 	 * @throws \Exception
 	 */
 	public function exportStyleSheet(\DataContainer $dc)

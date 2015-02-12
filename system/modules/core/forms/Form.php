@@ -14,10 +14,33 @@ namespace Contao;
 /**
  * Provide methods to handle front end forms.
  *
+ * @property integer $id
+ * @property string  $title
+ * @property string  $formID
+ * @property string  $method
+ * @property boolean $tableless
+ * @property boolean $allowTags
+ * @property string  $attributes
+ * @property boolean $novalidate
+ * @property integer $jumpTo
+ * @property boolean $sendViaEmail
+ * @property boolean $skipEmpty
+ * @property string  $format
+ * @property string  $recipient
+ * @property string  $subject
+ * @property boolean $storeValues
+ * @property string  $targetTable
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Form extends \Hybrid
 {
+
+	/**
+	 * Model
+	 * @var \FormModel
+	 */
+	protected $objModel;
 
 	/**
 	 * Key
@@ -46,6 +69,7 @@ class Form extends \Hybrid
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
@@ -112,6 +136,7 @@ class Form extends \Hybrid
 
 			foreach ($arrFields as $objField)
 			{
+				/** @var \FormFieldModel $objField */
 				$strClass = $GLOBALS['TL_FFL'][$objField->type];
 
 				// Continue if the class is not defined
@@ -151,6 +176,7 @@ class Form extends \Hybrid
 					}
 				}
 
+				/** @var \Widget $objWidget */
 				$objWidget = new $strClass($arrData);
 				$objWidget->required = $objField->mandatory ? true : false;
 
@@ -368,6 +394,7 @@ class Form extends \Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
+				/** @var \FrontendTemplate|object $objTemplate */
 				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
@@ -542,6 +569,7 @@ class Form extends \Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
+					/** @var \FrontendTemplate|object $objTemplate */
 					$objTemplate = new \FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;

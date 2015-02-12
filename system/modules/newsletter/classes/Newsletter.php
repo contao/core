@@ -24,11 +24,11 @@ class Newsletter extends \Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function send(\DataContainer $objDc)
+	public function send(\DataContainer $dc)
 	{
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
-										->execute($objDc->id);
+										->execute($dc->id);
 
 		// Return if there is no newsletter
 		if ($objNewsletter->numRows < 1)
@@ -298,13 +298,14 @@ class Newsletter extends \Backend
 </form>';
 
 		unset($_SESSION['TL_PREVIEW_MAIL_ERROR']);
+
 		return $return;
 	}
 
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param \Database\Result
+	 * @param \Database\Result|object $objNewsletter
 	 * @param array
 	 * @return \Email
 	 */
@@ -340,7 +341,7 @@ class Newsletter extends \Backend
 	/**
 	 * Compile the newsletter and send it
 	 * @param \Email
-	 * @param \Database\Result
+	 * @param \Database\Result|object $objNewsletter
 	 * @param array
 	 * @param string
 	 * @param string
@@ -352,7 +353,6 @@ class Newsletter extends \Backend
 		// Prepare the text content
 		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
 
-		// Add the HTML content
 		if (!$objNewsletter->sendText)
 		{
 			// Default template
@@ -361,7 +361,7 @@ class Newsletter extends \Backend
 				$objNewsletter->template = 'mail_default';
 			}
 
-			// Load the mail template
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
@@ -424,6 +424,7 @@ class Newsletter extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -653,7 +654,7 @@ class Newsletter extends \Backend
 	/**
 	 * Synchronize newsletter subscription of existing users
 	 * @param mixed
-	 * @param object
+	 * @param \DataContainer $objUser
 	 * @param object
 	 * @return mixed
 	 */
@@ -895,7 +896,6 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				// Skip channels without target page
 				if (!$objNewsletter->jumpTo)
 				{
 					continue;

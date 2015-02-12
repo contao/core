@@ -34,6 +34,7 @@ class ModuleFaqPage extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqpage'][0]) . ' ###';
@@ -67,6 +68,7 @@ class ModuleFaqPage extends \Module
 		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
+
 			return;
 		}
 
@@ -76,6 +78,7 @@ class ModuleFaqPage extends \Module
 		// Add FAQs
 		while ($objFaq->next())
 		{
+			/** @var \FaqModel $objFaq */
 			$objTemp = (object) $objFaq->row();
 
 			// Clean RTE output
@@ -122,9 +125,11 @@ class ModuleFaqPage extends \Module
 				$this->addEnclosuresToTemplate($objTemp, $objFaq->row());
 			}
 
-			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
+			/** @var \UserModel $objAuthor */
+			$objAuthor = $objFaq->getRelated('author');
+			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objAuthor->name);
 
-			// Get the FAQ category
+			/** @var \FaqCategoryModel $objPid */
 			$objPid = $objFaq->getRelated('pid');
 
 			// Order by PID

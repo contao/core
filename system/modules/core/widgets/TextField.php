@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Provide methods to handle text fields.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property boolean $multiple
+ * @property boolean $hideInput
+ * @property integer $size
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TextField extends \Widget

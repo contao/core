@@ -346,6 +346,7 @@ class tl_user_group extends Backend
 		}
 
 		ksort($arrReturn);
+
 		return $arrReturn;
 	}
 

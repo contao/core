@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle password fields.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property string  $description
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Password extends \Widget
@@ -123,6 +128,7 @@ class Password extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+
 			return \Encryption::hash($varInput);
 		}
 

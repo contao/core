@@ -527,6 +527,7 @@ class tl_user extends Backend
 		}
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
+
 		return $args;
 	}
 

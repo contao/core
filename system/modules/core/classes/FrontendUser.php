@@ -14,6 +14,10 @@ namespace Contao;
 /**
  * Provide methods to manage front end users.
  *
+ * @property array   $allGroups
+ * @property string  $loginPage
+ * @property boolean $blnRecordExists
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendUser extends \User
@@ -176,6 +180,7 @@ class FrontendUser extends \User
 
 						// Reload the page
 						\Controller::reload();
+
 						return true;
 					}
 				}
@@ -240,6 +245,7 @@ class FrontendUser extends \User
 
 		// Remove the auto login cookie
 		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), null, null, false, true);
+
 		return true;
 	}
 
@@ -258,6 +264,7 @@ class FrontendUser extends \User
 		}
 
 		$this->arrGroups = $this->groups;
+
 		return true;
 	}
 

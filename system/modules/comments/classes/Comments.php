@@ -36,6 +36,8 @@ class Comments extends \Frontend
 		$total = 0;
 		$gtotal = 0;
 		$arrComments = array();
+
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate->comments = array(); // see #4064
 
 		// Pagination
@@ -68,6 +70,7 @@ class Comments extends \Frontend
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
 				$objTemplate->allowComments = false;
+
 				return;
 			}
 
@@ -102,6 +105,7 @@ class Comments extends \Frontend
 				$objConfig->template = 'com_default';
 			}
 
+			/** @var \FrontendTemplate|object $objPartial */
 			$objPartial = new \FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
@@ -183,6 +187,7 @@ class Comments extends \Frontend
 		// Access control
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
+			/** @var \FrontendTemplate|object $objTemplate */
 			$objTemplate->requireLogin = true;
 			$objTemplate->login = $GLOBALS['TL_LANG']['MSC']['com_login'];
 
@@ -193,6 +198,7 @@ class Comments extends \Frontend
 		if (\Input::get('token'))
 		{
 			static::changeSubscriptionStatus($objTemplate);
+
 			return;
 		}
 
@@ -260,6 +266,7 @@ class Comments extends \Frontend
 		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
@@ -269,6 +276,8 @@ class Comments extends \Frontend
 			}
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
+
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
@@ -285,6 +294,7 @@ class Comments extends \Frontend
 			$arrWidgets[$arrField['name']] = $objWidget;
 		}
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$objTemplate->action = ampersand(\Environment::get('request'));
@@ -561,9 +571,11 @@ class Comments extends \Frontend
 	{
 		$objNotify = \CommentsNotifyModel::findByTokens(\Input::get('token'));
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		if ($objNotify === null)
 		{
 			$objTemplate->confirm = 'Invalid token';
+
 			return;
 		}
 

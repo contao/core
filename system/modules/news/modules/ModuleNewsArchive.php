@@ -34,6 +34,7 @@ class ModuleNewsArchive extends \ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsarchive'][0]) . ' ###';
@@ -167,6 +168,7 @@ class ModuleNewsArchive extends \ModuleNews
 
 					// Send a 404 header
 					header('HTTP/1.1 404 Not Found');
+
 					return;
 				}
 

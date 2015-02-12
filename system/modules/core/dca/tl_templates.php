@@ -157,6 +157,7 @@ class tl_templates extends Backend
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
 			$this->Session->set('tl_templates_node', '');
+
 			return;
 		}
 

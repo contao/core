@@ -81,6 +81,7 @@ class ModuleAutoload extends \BackendModule
 		if (empty($arrModules))
 		{
 			\Message::addError($GLOBALS['TL_LANG']['tl_autoload']['emptySelection']);
+
 			return;
 		}
 
@@ -92,6 +93,7 @@ class ModuleAutoload extends \BackendModule
 			if (!\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 			{
 				\Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'], $strModule));
+
 				continue;
 			}
 

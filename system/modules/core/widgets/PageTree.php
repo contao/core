@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle input field "page tree".
  *
+ * @property string  $orderField
+ * @property boolean $multiple
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageTree extends \Widget
@@ -109,6 +112,7 @@ class PageTree extends \Widget
 		else
 		{
 			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+
 			return $this->multiple ? $arrValue : $arrValue[0];
 		}
 	}

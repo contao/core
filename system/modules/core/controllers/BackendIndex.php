@@ -69,39 +69,40 @@ class BackendIndex extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_login');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_login');
 
 		// Show a cookie warning
 		if (\Input::get('referer', true) != '' && empty($_COOKIE))
 		{
-			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
+			$objTemplate->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		}
 
 		$strHeadline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], \Config::get('websiteTitle'));
 
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->messages = \Message::generate();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->languages = \System::getLanguages(true);
-		$this->Template->title = specialchars($strHeadline);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->action = ampersand(\Environment::get('request'));
-		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
-		$this->Template->headline = $strHeadline;
-		$this->Template->curLanguage = \Input::post('language') ?: str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
-		$this->Template->curUsername = \Input::post('username') ?: '';
-		$this->Template->uClass = ($_POST && empty($_POST['username'])) ? ' class="login_error"' : '';
-		$this->Template->pClass = ($_POST && empty($_POST['password'])) ? ' class="login_error"' : '';
-		$this->Template->loginButton = specialchars($GLOBALS['TL_LANG']['MSC']['loginBT']);
-		$this->Template->username = $GLOBALS['TL_LANG']['tl_user']['username'][0];
-		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
-		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
-		$this->Template->frontendFile = \Environment::get('base');
-		$this->Template->disableCron = \Config::get('disableCron');
-		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
-		$this->Template->default = $GLOBALS['TL_LANG']['MSC']['default'];
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->messages = \Message::generate();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->languages = \System::getLanguages(true);
+		$objTemplate->title = specialchars($strHeadline);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
+		$objTemplate->headline = $strHeadline;
+		$objTemplate->curLanguage = \Input::post('language') ?: str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
+		$objTemplate->curUsername = \Input::post('username') ?: '';
+		$objTemplate->uClass = ($_POST && empty($_POST['username'])) ? ' class="login_error"' : '';
+		$objTemplate->pClass = ($_POST && empty($_POST['password'])) ? ' class="login_error"' : '';
+		$objTemplate->loginButton = specialchars($GLOBALS['TL_LANG']['MSC']['loginBT']);
+		$objTemplate->username = $GLOBALS['TL_LANG']['tl_user']['username'][0];
+		$objTemplate->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
+		$objTemplate->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
+		$objTemplate->frontendFile = \Environment::get('base');
+		$objTemplate->disableCron = \Config::get('disableCron');
+		$objTemplate->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
+		$objTemplate->default = $GLOBALS['TL_LANG']['MSC']['default'];
 
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

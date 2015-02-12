@@ -34,6 +34,7 @@ class ModulePassword extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['lostPassword'][0]) . ' ###';
@@ -64,6 +65,7 @@ class ModulePassword extends \Module
 		if (strlen(\Input::get('token')))
 		{
 			$this->setNewPassword();
+
 			return;
 		}
 
@@ -97,6 +99,7 @@ class ModulePassword extends \Module
 		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
@@ -108,6 +111,7 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
 
 			$objWidget->storeValues = true;
@@ -175,7 +179,10 @@ class ModulePassword extends \Module
 		{
 			$this->strTemplate = 'mod_message';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -186,6 +193,7 @@ class ModulePassword extends \Module
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
 		$arrField['eval']['tableless'] = $this->tableless;
 
+		/** @var \Widget $strClass */
 		$strClass = $GLOBALS['TL_FFL']['password'];
 
 		// Fallback to default if the class is not defined
@@ -194,6 +202,7 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
+		/** @var \Widget $objWidget */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes
@@ -235,7 +244,10 @@ class ModulePassword extends \Module
 				// Confirm
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				/** @var \FrontendTemplate|object $objTemplate */
+				$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+				$this->Template = $objTemplate;
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 

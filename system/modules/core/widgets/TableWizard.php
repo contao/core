@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle table fields.
  *
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TableWizard extends \Widget
@@ -228,7 +231,7 @@ class TableWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param \DataContainer
+	 * @param \DataContainer $dc
 	 * @return string
 	 */
 	public function importTable(\DataContainer $dc)
@@ -247,6 +250,7 @@ class TableWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS

@@ -47,9 +47,12 @@ class PageRegular extends \Frontend
 			}
 		}
 
+		/** @var \ThemeModel $objTheme */
+		$objTheme = $objLayout->getRelated('pid');
+
 		// Set the layout template and template group
 		$objPage->template = $objLayout->template ?: 'fe_page';
-		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
+		$objPage->templateGroup = $objTheme->templates;
 
 		// Store the output format
 		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
@@ -189,8 +192,8 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
-	 * @param \Model
-	 * @return \Model
+	 * @param \PageModel $objPage
+	 * @return \LayoutModel
 	 */
 	protected function getPageLayout($objPage)
 	{
@@ -232,6 +235,7 @@ class PageRegular extends \Frontend
 			die_nicely('be_no_layout', 'No layout specified');
 		}
 
+		/** @var \LayoutModel $objLayout */
 		$objPage->hasJQuery = $objLayout->addJQuery;
 		$objPage->hasMooTools = $objLayout->addMooTools;
 		$objPage->isMobile = $blnMobile;
@@ -248,7 +252,11 @@ class PageRegular extends \Frontend
 	protected function createTemplate($objPage, $objLayout)
 	{
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$this->Template = new \FrontendTemplate($objPage->template);
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($objPage->template);
+
+		$this->Template = $objTemplate;
 
 		// Generate the DTD
 		if ($blnXhtml)
@@ -516,6 +524,8 @@ class PageRegular extends \Frontend
 					// Style sheets with a CC or a combination of font-face and media-type != all cannot be aggregated (see #5216)
 					if ($objStylesheets->cc || ($objStylesheets->hasFontFace && $media != 'all'))
 					{
+						$strStyleSheet = '';
+
 						// External style sheet
 						if ($objStylesheets->type == 'external')
 						{

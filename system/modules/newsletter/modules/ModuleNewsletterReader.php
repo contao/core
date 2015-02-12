@@ -34,6 +34,7 @@ class ModuleNewsletterReader extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['nl_reader'][0]) . ' ###';
@@ -57,6 +58,7 @@ class ModuleNewsletterReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -68,6 +70,7 @@ class ModuleNewsletterReader extends \Module
 			global $objPage;
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -97,6 +100,7 @@ class ModuleNewsletterReader extends \Module
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
 			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+
 			return;
 		}
 

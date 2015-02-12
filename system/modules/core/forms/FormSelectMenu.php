@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Class FormSelectMenu
  *
+ * @property integer $mSize
+ * @property boolean $mandatory
+ * @property boolean $multiple
+ * @property array   $options
+ * @property boolean $chosen
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormSelectMenu extends \Widget

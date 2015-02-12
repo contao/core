@@ -34,6 +34,7 @@ class ModuleArticleList extends \Module
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articleList'][0]) . ' ###';
@@ -46,6 +47,7 @@ class ModuleArticleList extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
