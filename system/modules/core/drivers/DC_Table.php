@@ -15,7 +15,7 @@ namespace Contao;
  * Provide methods to modify the database.
  *
  * @author Leo Feyer <https://github.com/leofeyer>
- * @author Andreas Schempp <https://github.com/schempp>
+ * @author Andreas Schempp <https://github.com/aschempp>
  */
 class DC_Table extends \DataContainer implements \listable, \editable
 {
