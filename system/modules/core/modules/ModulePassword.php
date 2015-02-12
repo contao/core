@@ -268,7 +268,8 @@ class ModulePassword extends \Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param object
+	 *
+	 * @param \MemberModel $objMember
 	 */
 	protected function sendPasswordLink($objMember)
 	{

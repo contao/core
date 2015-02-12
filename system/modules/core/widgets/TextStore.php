@@ -37,8 +37,9 @@ class TextStore extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -60,7 +61,9 @@ class TextStore extends \Widget
 
 	/**
 	 * Ignore the field if nothing has been entered
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)

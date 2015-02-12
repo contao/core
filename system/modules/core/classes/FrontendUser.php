@@ -103,8 +103,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent setter class and modify some parameters
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -123,7 +124,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent getter class and modify some parameters
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -252,8 +255,10 @@ class FrontendUser extends \User
 
 	/**
 	 * Save the original group membership
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strColumn
+	 * @param mixed  $varValue
+	 *
 	 * @return boolean
 	 */
 	public function findBy($strColumn, $varValue)

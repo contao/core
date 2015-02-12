@@ -72,8 +72,9 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Initialize the object
+	 *
 	 * @param \ContentModel|\ModuleModel $objElement
-	 * @param string
+	 * @param string                     $strColumn
 	 */
 	public function __construct($objElement, $strColumn='main')
 	{
@@ -138,8 +139,9 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -149,7 +151,9 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -165,7 +169,9 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Check whether a property is set
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return boolean
 	 */
 	public function __isset($strKey)

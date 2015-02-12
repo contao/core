@@ -69,7 +69,8 @@ class FileUpload extends \Backend
 
 	/**
 	 * Override the field name
-	 * @param string
+	 *
+	 * @param string $strName
 	 */
 	public function setName($strName)
 	{
@@ -79,8 +80,11 @@ class FileUpload extends \Backend
 
 	/**
 	 * Check the uploaded files and move them to the target directory
-	 * @param string
+	 *
+	 * @param string $strTarget
+	 *
 	 * @return array
+	 *
 	 * @throws \Exception
 	 */
 	public function uploadTo($strTarget)
@@ -264,7 +268,9 @@ class FileUpload extends \Backend
 
 	/**
 	 * Resize an uploaded image if neccessary
-	 * @param string
+	 *
+	 * @param string $strImage
+	 *
 	 * @return boolean
 	 */
 	protected function resizeUploadedImage($strImage)

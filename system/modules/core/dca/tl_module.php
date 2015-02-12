@@ -951,7 +951,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default activation text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getActivationDefault($varValue)
@@ -967,7 +969,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default password text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getPasswordDefault($varValue)
@@ -983,7 +987,9 @@ class tl_module extends Backend
 
 	/**
 	 * List a front end module
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listModule($row)

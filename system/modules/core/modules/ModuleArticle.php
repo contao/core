@@ -49,7 +49,9 @@ class ModuleArticle extends \Module
 
 	/**
 	 * Check whether the article is published
-	 * @param boolean
+	 *
+	 * @param boolean $blnNoMarkup
+	 *
 	 * @return string
 	 */
 	public function generate($blnNoMarkup=false)

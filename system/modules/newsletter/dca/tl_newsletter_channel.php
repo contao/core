@@ -347,12 +347,14 @@ class tl_newsletter_channel extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
@@ -363,12 +365,14 @@ class tl_newsletter_channel extends Backend
 
 	/**
 	 * Return the copy channel button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function copyChannel($row, $href, $label, $title, $icon, $attributes)
@@ -379,12 +383,14 @@ class tl_newsletter_channel extends Backend
 
 	/**
 	 * Return the delete channel button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteChannel($row, $href, $label, $title, $icon, $attributes)

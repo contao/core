@@ -21,8 +21,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Generate a regular page
-	 * @param object
-	 * @param boolean
+	 *
+	 * @param \PageModel $objPage
+	 * @param boolean    $blnCheckRequest
 	 */
 	public function generate($objPage, $blnCheckRequest=false)
 	{
@@ -246,8 +247,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create a new template
-	 * @param object
-	 * @param object
+	 *
+	 * @param \PageModel   $objPage
+	 * @param \LayoutModel $objLayout
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
@@ -462,8 +464,10 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all header scripts
-	 * @param object
-	 * @param object
+	 *
+	 * @param \PageModel   $objPage
+	 * @param \LayoutModel $objLayout
+	 *
 	 * @throws \Exception
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
@@ -692,7 +696,8 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all footer scripts
-	 * @param object
+	 *
+	 * @param \LayoutModel $objLayout
 	 */
 	protected function createFooterScripts($objLayout)
 	{

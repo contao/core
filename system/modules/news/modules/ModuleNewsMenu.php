@@ -301,8 +301,10 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Return all weeks of the current month as array
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $arrData
+	 * @param string $strUrl
+	 *
 	 * @return array
 	 */
 	protected function compileWeeks($arrData, $strUrl)

@@ -152,7 +152,8 @@ class FrontendCron extends \Frontend
 
 	/**
 	 * Update the cron.txt file
-	 * @param integer
+	 *
+	 * @param integer $time
 	 */
 	protected function updateCronTxt($time)
 	{

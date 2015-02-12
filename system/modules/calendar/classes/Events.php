@@ -46,7 +46,9 @@ abstract class Events extends \Module
 
 	/**
 	 * Sort out protected archives
-	 * @param array
+	 *
+	 * @param array $arrCalendars
+	 *
 	 * @return array
 	 */
 	protected function sortOutProtected($arrCalendars)
@@ -89,9 +91,11 @@ abstract class Events extends \Module
 
 	/**
 	 * Get all events of a certain period
-	 * @param array
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param array   $arrCalendars
+	 * @param integer $intStart
+	 * @param integer $intEnd
+	 *
 	 * @return array
 	 */
 	protected function getAllEvents($arrCalendars, $intStart, $intEnd)
@@ -185,13 +189,14 @@ abstract class Events extends \Module
 
 	/**
 	 * Add an event to the array of active events
+	 *
 	 * @param \CalendarEventsModel $objEvents
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param integer
+	 * @param integer              $intStart
+	 * @param integer              $intEnd
+	 * @param string               $strUrl
+	 * @param integer              $intBegin
+	 * @param integer              $intLimit
+	 * @param integer              $intCalendar
 	 */
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
@@ -336,8 +341,10 @@ abstract class Events extends \Module
 
 	/**
 	 * Generate a URL and return it as string
+	 *
 	 * @param \CalendarEventsModel $objEvent
-	 * @param string
+	 * @param string               $strUrl
+	 *
 	 * @return string
 	 */
 	protected function generateEventUrl($objEvent, $strUrl)
@@ -380,8 +387,10 @@ abstract class Events extends \Module
 
 	/**
 	 * Return the begin and end timestamp and an error message as array
-	 * @param \Date
-	 * @param string
+	 *
+	 * @param \Date  $objDate
+	 * @param string $strFormat
+	 *
 	 * @return array
 	 */
 	protected function getDatesFromFormat(\Date $objDate, $strFormat)

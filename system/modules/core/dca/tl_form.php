@@ -425,10 +425,13 @@ class tl_form extends Backend
 
 	/**
 	 * Auto-generate a form alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -471,12 +474,14 @@ class tl_form extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
@@ -487,12 +492,14 @@ class tl_form extends Backend
 
 	/**
 	 * Return the copy form button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function copyForm($row, $href, $label, $title, $icon, $attributes)
@@ -503,12 +510,14 @@ class tl_form extends Backend
 
 	/**
 	 * Return the delete form button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteForm($row, $href, $label, $title, $icon, $attributes)

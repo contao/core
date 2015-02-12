@@ -37,8 +37,9 @@ class CheckBox extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -172,8 +173,10 @@ class CheckBox extends \Widget
 
 	/**
 	 * Generate a checkbox and return it as string
-	 * @param array
-	 * @param integer
+	 *
+	 * @param array   $arrOption
+	 * @param integer $i
+	 *
 	 * @return string
 	 */
 	protected function generateCheckbox($arrOption, $i)

@@ -28,7 +28,8 @@ class Calendar extends \Frontend
 
 	/**
 	 * Update a particular RSS feed
-	 * @param integer
+	 *
+	 * @param integer $intId
 	 */
 	public function generateFeed($intId)
 	{
@@ -81,7 +82,8 @@ class Calendar extends \Frontend
 
 	/**
 	 * Generate all feeds including a certain calendar
-	 * @param integer
+	 *
+	 * @param integer $intId
 	 */
 	public function generateFeedsByCalendar($intId)
 	{
@@ -103,7 +105,8 @@ class Calendar extends \Frontend
 
 	/**
 	 * Generate an XML file and save it to the root directory
-	 * @param array
+	 *
+	 * @param array $arrFeed
 	 */
 	protected function generateFiles($arrFeed)
 	{
@@ -271,9 +274,11 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add events to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -359,11 +364,12 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add an event to the array of active events
+	 *
 	 * @param \CalendarEventsModel $objEvent
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param string
+	 * @param integer              $intStart
+	 * @param integer              $intEnd
+	 * @param string               $strUrl
+	 * @param string               $strBase
 	 */
 	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strBase)
 	{
@@ -484,8 +490,10 @@ class Calendar extends \Frontend
 
 	/**
 	 * Calculate the span between two timestamps in days
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intStart
+	 * @param integer $intEnd
+	 *
 	 * @return integer
 	 */
 	public static function calculateSpan($intStart, $intEnd)
@@ -496,7 +504,9 @@ class Calendar extends \Frontend
 
 	/**
 	 * Convert a UNIX timestamp to a Julian day
-	 * @param integer
+	 *
+	 * @param integer $tstamp
+	 *
 	 * @return integer
 	 */
 	public static function unixToJd($tstamp)

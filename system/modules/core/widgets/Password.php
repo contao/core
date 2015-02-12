@@ -45,7 +45,8 @@ class Password extends \Widget
 
 	/**
 	 * Always decode entities
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -56,8 +57,9 @@ class Password extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -95,7 +97,9 @@ class Password extends \Widget
 
 	/**
 	 * Validate input and set value
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return string
 	 */
 	protected function validator($varInput)

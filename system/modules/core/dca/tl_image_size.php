@@ -231,7 +231,9 @@ class tl_image_size extends Backend
 
 	/**
 	 * List an image size
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listImageSize($row)
@@ -278,12 +280,14 @@ class tl_image_size extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)

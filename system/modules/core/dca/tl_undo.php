@@ -159,8 +159,10 @@ class tl_undo extends Backend
 
 	/**
 	 * Add the surrounding ellipsis layer
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $label
+	 *
 	 * @return string
 	 */
 	public function ellipsis($row, $label)

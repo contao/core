@@ -569,7 +569,9 @@ class tl_form_field extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listFormFields($arrRow)
@@ -595,7 +597,7 @@ class tl_form_field extends Backend
 		$strWidget = preg_replace('/ name="[^"]+"/i', '', $strWidget);
 		$strWidget = str_replace(array(' type="submit"', ' autofocus', ' required'), array(' type="button"', '', ''), $strWidget);
 
-		if ($objWidget instanceof \FormHidden)
+		if ($objWidget instanceof FormHidden)
 		{
 			return $strType . "\n" . $objWidget->value . "\n</div>\n";
 		}
@@ -609,7 +611,9 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return a list of form fields
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getFields(DataContainer $dc)
@@ -654,12 +658,14 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -683,9 +689,10 @@ class tl_form_field extends Backend
 
 	/**
 	 * Toggle the visibility of a form field
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

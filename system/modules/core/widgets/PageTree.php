@@ -49,7 +49,8 @@ class PageTree extends \Widget
 
 	/**
 	 * Load the database object
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -75,7 +76,9 @@ class PageTree extends \Widget
 
 	/**
 	 * Return an array if the "multiple" attribute is set
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)

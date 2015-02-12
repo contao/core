@@ -284,8 +284,9 @@ class Form extends \Hybrid
 
 	/**
 	 * Process form data, store it in the session and redirect to the jumpTo page
-	 * @param array
-	 * @param array
+	 *
+	 * @param array $arrSubmitted
+	 * @param array $arrLabels
 	 */
 	protected function processFormData($arrSubmitted, $arrLabels)
 	{
@@ -549,7 +550,8 @@ class Form extends \Hybrid
 
 	/**
 	 * Initialize the form in the current session
-	 * @param string
+	 *
+	 * @param string $formId
 	 */
 	protected function initializeSession($formId)
 	{

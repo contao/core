@@ -37,8 +37,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -64,7 +65,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)

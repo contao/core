@@ -28,7 +28,9 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Sort out protected archives
-	 * @param array
+	 *
+	 * @param array $arrArchives
+	 *
 	 * @return array
 	 */
 	protected function sortOutProtected($arrArchives)
@@ -71,10 +73,12 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse an item and return it as string
+	 *
 	 * @param \NewsModel $objArticle
-	 * @param boolean
-	 * @param string
-	 * @param integer
+	 * @param boolean    $blnAddArchive
+	 * @param string     $strClass
+	 * @param integer    $intCount
+	 *
 	 * @return string
 	 */
 	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
@@ -202,8 +206,10 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse one or more items and return them as array
+	 *
 	 * @param \Model\Collection $objArticles
-	 * @param boolean
+	 * @param boolean           $blnAddArchive
+	 *
 	 * @return array
 	 */
 	protected function parseArticles($objArticles, $blnAddArchive=false)
@@ -281,8 +287,10 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a URL and return it as string
+	 *
 	 * @param \NewsModel $objItem
-	 * @param boolean
+	 * @param boolean    $blnAddArchive
+	 *
 	 * @return string
 	 */
 	protected function generateNewsUrl($objItem, $blnAddArchive=false)
@@ -356,10 +364,12 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a link and return it as string
-	 * @param string
-	 * @param object
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $strLink
+	 * @param object  $objArticle
+	 * @param boolean $blnAddArchive
+	 * @param boolean $blnIsReadMore
+	 *
 	 * @return string
 	 */
 	protected function generateLink($strLink, $objArticle, $blnAddArchive=false, $blnIsReadMore=false)

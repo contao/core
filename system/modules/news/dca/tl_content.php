@@ -115,9 +115,11 @@ class tl_content_news extends Backend
 
 	/**
 	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param array   $root
+	 * @param boolean $blnIsPid
+	 *
 	 * @return boolean
 	 */
 	protected function checkAccessToElement($id, $root, $blnIsPid=false)

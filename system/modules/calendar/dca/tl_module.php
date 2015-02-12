@@ -212,7 +212,9 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return the calendar formats depending on the module type
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getFormats(DataContainer $dc)

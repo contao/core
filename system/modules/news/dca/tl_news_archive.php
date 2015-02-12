@@ -429,7 +429,8 @@ class tl_news_archive extends Backend
 	 *
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -448,11 +449,13 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the manage feeds button
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $class
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function manageFeeds($href, $label, $title, $class, $attributes)
@@ -463,12 +466,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
@@ -479,12 +484,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the copy archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
@@ -495,12 +502,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the delete archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)

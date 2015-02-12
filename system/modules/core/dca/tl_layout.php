@@ -530,7 +530,9 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all style sheets of the current theme
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getStyleSheets(DataContainer $dc)
@@ -661,7 +663,9 @@ class tl_layout extends Backend
 
 	/**
 	 * List a page layout
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listLayout($row)
@@ -672,7 +676,9 @@ class tl_layout extends Backend
 
 	/**
 	 * Add a link to edit the stylesheets of the theme
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function styleSheetLink(DataContainer $dc)

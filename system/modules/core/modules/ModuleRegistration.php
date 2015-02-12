@@ -329,7 +329,8 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param array
+	 *
+	 * @param array $arrData
 	 */
 	protected function createNewUser($arrData)
 	{
@@ -516,8 +517,9 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Send an admin notification e-mail
-	 * @param integer
-	 * @param array
+	 *
+	 * @param integer $intId
+	 * @param array   $arrData
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{

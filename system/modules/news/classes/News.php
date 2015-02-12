@@ -21,7 +21,8 @@ class News extends \Frontend
 
 	/**
 	 * Update a particular RSS feed
-	 * @param integer
+	 *
+	 * @param integer $intId
 	 */
 	public function generateFeed($intId)
 	{
@@ -74,7 +75,8 @@ class News extends \Frontend
 
 	/**
 	 * Generate all feeds including a certain archive
-	 * @param integer
+	 * #
+	 * @param integer $intId
 	 */
 	public function generateFeedsByArchive($intId)
 	{
@@ -96,7 +98,8 @@ class News extends \Frontend
 
 	/**
 	 * Generate an XML files and save them to the root directory
-	 * @param array
+	 *
+	 * @param array $arrFeed
 	 */
 	protected function generateFiles($arrFeed)
 	{
@@ -238,9 +241,11 @@ class News extends \Frontend
 
 	/**
 	 * Add news items to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -326,9 +331,11 @@ class News extends \Frontend
 
 	/**
 	 * Return the link of a news article
+	 *
 	 * @param \NewsModel $objItem
-	 * @param string
-	 * @param string
+	 * @param string     $strUrl
+	 * @param string     $strBase
+	 *
 	 * @return string
 	 */
 	protected function getLink($objItem, $strUrl, $strBase='')

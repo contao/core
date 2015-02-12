@@ -58,8 +58,9 @@ class Versions extends \Controller
 
 	/**
 	 * Initialize the object
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strTable
+	 * @param integer $intPid
 	 */
 	public function __construct($strTable, $intPid)
 	{
@@ -84,7 +85,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the edit URL
-	 * @param string
+	 *
+	 * @param string $strEditUrl
 	 */
 	public function setEditUrl($strEditUrl)
 	{
@@ -94,7 +96,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the username
-	 * @param string
+	 *
+	 * @param string $strUsername
 	 */
 	public function setUsername($strUsername)
 	{
@@ -104,7 +107,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the user ID
-	 * @param integer
+	 *
+	 * @param integer $intUserId
 	 */
 	public function setUserId($intUserId)
 	{
@@ -214,7 +218,8 @@ class Versions extends \Controller
 
 	/**
 	 * Restore a version
-	 * @param integer
+	 *
+	 * @param integer $intVersion
 	 */
 	public function restore($intVersion)
 	{
@@ -503,7 +508,8 @@ class Versions extends \Controller
 
 	/**
 	 * Add a list of versions to a template
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
@@ -528,8 +534,6 @@ class Versions extends \Controller
 
 		// Create the pagination menu
 		$objPagination = new \Pagination($objTotal->count, 30, 7, 'vp', new \BackendTemplate('be_pagination'));
-
-		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions
@@ -647,8 +651,10 @@ class Versions extends \Controller
 
 	/**
 	 * Implode a multi-dimensional array recursively
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param mixed   $var
+	 * @param boolean $binary
+	 *
 	 * @return string
 	 */
 	protected function implodeRecursive($var, $binary=false)

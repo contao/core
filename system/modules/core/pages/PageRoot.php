@@ -21,9 +21,10 @@ class PageRoot extends \Frontend
 
 	/**
 	 * Redirect to the first active regular page
-	 * @param integer
-	 * @param boolean
-	 * @return integer
+	 *
+	 * @param integer $pageId
+	 * @param boolean $blnReturn
+	 *
 	 * @return integer
 	 */
 	public function generate($pageId, $blnReturn=false)

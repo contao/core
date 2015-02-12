@@ -21,7 +21,8 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Initialize the object
-	 * @param string
+	 *
+	 * @param string $strTable
 	 */
 	public function __construct($strTable)
 	{
@@ -373,7 +374,8 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
 	 */
 	protected function save($varValue)
 	{

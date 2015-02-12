@@ -85,7 +85,8 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Run the Live Update
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
@@ -99,7 +100,6 @@ class LiveUpdate extends \Backend implements \executable
 
 			if ($objRequest->hasError())
 			{
-				/** @var \BackendTemplate|object $objTemplate */
 				$objTemplate->updateClass = 'tl_error';
 				$objTemplate->updateMessage = $objRequest->response;
 

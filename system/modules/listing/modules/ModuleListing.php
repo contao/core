@@ -362,7 +362,8 @@ class ModuleListing extends \Module
 
 	/**
 	 * List a single record
-	 * @param integer
+	 *
+	 * @param integer $id
 	 */
 	protected function listSingleRecord($id)
 	{
@@ -423,9 +424,11 @@ class ModuleListing extends \Module
 
 	/**
 	 * Format a value
-	 * @param string
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param string  $k
+	 * @param mixed   $value
+	 * @param boolean $blnListSingle
+	 *
 	 * @return mixed
 	 */
 	protected function formatValue($k, $value, $blnListSingle=false)

@@ -99,10 +99,12 @@ class ModuleQuicknav extends \Module
 
 	/**
 	 * Recursively get all quicknav pages and return them as array
-	 * @param integer
-	 * @param integer
-	 * @param sting
-	 * @param sting
+	 *
+	 * @param integer $pid
+	 * @param integer $level
+	 * @param string  $host
+	 * @param string  $language
+	 *
 	 * @return array
 	 */
 	protected function getQuicknavPages($pid, $level=1, $host=null, $language=null)

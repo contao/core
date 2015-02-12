@@ -10,14 +10,13 @@
 
 
 /**
- * Error handler
- *
  * Handle errors like PHP does it natively but additionaly log them to the
  * application error log file.
- * @param integer
- * @param string
- * @param string
- * @param integer
+ *
+ * @param integer $intType
+ * @param string  $strMessage
+ * @param string  $strFile
+ * @param integer $intLine
  */
 function __error($intType, $strMessage, $strFile, $intLine)
 {
@@ -85,7 +84,8 @@ function __error($intType, $strMessage, $strFile, $intLine)
  * Log exceptions in the application log file and print them to the screen
  * if "display_errors" is set. Callback to a custom exception handler defined
  * in the application file "config/error.php".
- * @param Exception
+ *
+ * @param Exception $e
  */
 function __exception(Exception $e)
 {
@@ -131,8 +131,9 @@ function show_help_message()
 
 /**
  * Try to die with a template instead of just a message
- * @param string
- * @param string
+ *
+ * @param string $strTemplate
+ * @param string $strFallback
  */
 function die_nicely($strTemplate, $strFallback)
 {
@@ -157,8 +158,9 @@ function die_nicely($strTemplate, $strFallback)
 
 /**
  * Add a log entry
- * @param string
- * @param string
+ *
+ * @param string $strMessage
+ * @param string $strLog
  */
 function log_message($strMessage, $strLog='error.log')
 {
@@ -168,8 +170,10 @@ function log_message($strMessage, $strLog='error.log')
 
 /**
  * Scan a directory and return its files and folders as array
- * @param string
- * @param boolean
+ *
+ * @param string  $strFolder
+ * @param boolean $blnUncached
+ *
  * @return array
  */
 function scan($strFolder, $blnUncached=false)
@@ -214,8 +218,10 @@ function scan($strFolder, $blnUncached=false)
 /**
  * Convert special characters to HTML entities and make sure that
  * entities are never double converted.
- * @param string
- * @param boolean
+ *
+ * @param string  $strString
+ * @param boolean $blnStripInsertTags
+ *
  * @return string
  */
 function specialchars($strString, $blnStripInsertTags=false)
@@ -232,8 +238,10 @@ function specialchars($strString, $blnStripInsertTags=false)
 
 /**
  * Standardize a parameter (strip special characters and convert spaces)
- * @param string
- * @param boolean
+ *
+ * @param string  $strString
+ * @param boolean $blnPreserveUppercase
+ *
  * @return string
  */
 function standardize($strString, $blnPreserveUppercase=false)
@@ -262,7 +270,9 @@ function standardize($strString, $blnPreserveUppercase=false)
 
 /**
  * Remove Contao insert tags from a string
- * @param string
+ *
+ * @param string $strString
+ *
  * @return string
  */
 function strip_insert_tags($strString)
@@ -281,8 +291,10 @@ function strip_insert_tags($strString)
 
 /**
  * Return an unserialized array or the argument
- * @param mixed
- * @param boolean
+ *
+ * @param mixed   $varValue
+ * @param boolean $blnForceArray
+ *
  * @return mixed
  */
 function deserialize($varValue, $blnForceArray=false)
@@ -336,8 +348,10 @@ function deserialize($varValue, $blnForceArray=false)
 
 /**
  * Split a string into fragments, remove whitespace and return fragments as array
- * @param string
- * @param string
+ *
+ * @param string $strPattern
+ * @param string $strString
+ *
  * @return array
  */
 function trimsplit($strPattern, $strString)
@@ -375,8 +389,10 @@ function trimsplit($strPattern, $strString)
 
 /**
  * Convert all ampersands into their HTML entity (default) or unencoded value
- * @param string
- * @param boolean
+ *
+ * @param string  $strString
+ * @param boolean $blnEncode
+ *
  * @return string
  */
 function ampersand($strString, $blnEncode=true)
@@ -387,8 +403,10 @@ function ampersand($strString, $blnEncode=true)
 
 /**
  * Replace line breaks with HTML5-style <br> tags
- * @param string
- * @param boolean
+ *
+ * @param string  $str
+ * @param boolean $xhtml
+ *
  * @return string
  */
 function nl2br_html5($str, $xhtml=false)
@@ -399,7 +417,9 @@ function nl2br_html5($str, $xhtml=false)
 
 /**
  * Replace line breaks with XHTML-style <br /> tags
- * @param string
+ *
+ * @param string $str
+ *
  * @return string
  */
 function nl2br_xhtml($str)
@@ -410,8 +430,10 @@ function nl2br_xhtml($str)
 
 /**
  * Replace line breaks with <br> tags preserving preformatted text
- * @param string
- * @param boolean
+ *
+ * @param string  $str
+ * @param boolean $xhtml
+ *
  * @return string
  */
 function nl2br_pre($str, $xhtml=false)
@@ -460,8 +482,10 @@ function dump()
 
 /**
  * Compare two file names using a case insensitive "natural order" algorithm
- * @param string
- * @param string
+ *
+ * @param string $a
+ * @param string $b
+ *
  * @return integer
  */
 function basename_natcasecmp($a, $b)
@@ -472,8 +496,10 @@ function basename_natcasecmp($a, $b)
 
 /**
  * Compare two file names using a case insensitive, reverse "natural order" algorithm
- * @param string
- * @param string
+ *
+ * @param string $a
+ * @param string $b
+ *
  * @return integer
  */
 function basename_natcasercmp($a, $b)
@@ -484,7 +510,9 @@ function basename_natcasercmp($a, $b)
 
 /**
  * Sort an array by keys using a case insensitive "natural order" algorithm
- * @param array
+ *
+ * @param array $arrArray
+ *
  * @return array
  */
 function natcaseksort($arrArray)
@@ -499,8 +527,10 @@ function natcaseksort($arrArray)
 
 /**
  * Compare two values based on their length (ascending)
- * @param integer
- * @param integer
+ *
+ * @param integer $a
+ * @param integer $b
+ *
  * @return integer
  */
 function length_sort_asc($a, $b)
@@ -511,8 +541,10 @@ function length_sort_asc($a, $b)
 
 /**
  * Compare two values based on their length (descending)
- * @param integer
- * @param integer
+ *
+ * @param integer $a
+ * @param integer $b
+ *
  * @return integer
  */
 function length_sort_desc($a, $b)
@@ -523,9 +555,10 @@ function length_sort_desc($a, $b)
 
 /**
  * Insert a parameter or array into an existing array at a particular index
- * @param array
- * @param integer
- * @param mixed
+ *
+ * @param array   $arrCurrent
+ * @param integer $intIndex
+ * @param mixed   $arrNew
  */
 function array_insert(&$arrCurrent, $intIndex, $arrNew)
 {
@@ -550,8 +583,10 @@ function array_insert(&$arrCurrent, $intIndex, $arrNew)
 
 /**
  * Duplicate a particular element of an array
- * @param array
- * @param integer
+ *
+ * @param array   $arrStack
+ * @param integer $intIndex
+ *
  * @return array
  */
 function array_duplicate($arrStack, $intIndex)
@@ -575,8 +610,10 @@ function array_duplicate($arrStack, $intIndex)
 
 /**
  * Move an array element one position up
- * @param array
- * @param integer
+ *
+ * @param array   $arrStack
+ * @param integer $intIndex
+ *
  * @return array
  */
 function array_move_up($arrStack, $intIndex)
@@ -599,8 +636,10 @@ function array_move_up($arrStack, $intIndex)
 
 /**
  * Move an array element one position down
- * @param array
- * @param integer
+ *
+ * @param array   $arrStack
+ * @param integer $intIndex
+ *
  * @return array
  */
 function array_move_down($arrStack, $intIndex)
@@ -623,8 +662,10 @@ function array_move_down($arrStack, $intIndex)
 
 /**
  * Delete a particular element of an array
- * @param array
- * @param integer
+ *
+ * @param array   $arrStack
+ * @param integer $intIndex
+ *
  * @return array
  */
 function array_delete($arrStack, $intIndex)
@@ -637,7 +678,9 @@ function array_delete($arrStack, $intIndex)
 
 /**
  * Return true if an array is associative
- * @param array
+ *
+ * @param array $arrArray
+ *
  * @return boolean
  */
 function array_is_assoc($arrArray)
@@ -659,9 +702,11 @@ if (!USE_MBSTRING)
 {
 	/**
 	 * Convert character encoding
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $str
+	 * @param string $to
+	 * @param string $from
+	 *
 	 * @return string
 	 */
 	function mb_convert_encoding($str, $to, $from=null)
@@ -674,7 +719,9 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Detect the encoding of a string
-	 * @param string
+	 *
+	 * @param string $str
+	 *
 	 * @return string
 	 */
 	function mb_detect_encoding($str)
@@ -684,9 +731,11 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the last occurrence of a character in a string (case-insensitive)
-	 * @param string
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $haystack
+	 * @param string  $needle
+	 * @param integer $offset
+	 *
 	 * @return integer
 	 */
 	function mb_stripos($haystack, $needle, $offset=null)
@@ -699,9 +748,10 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the first occurrence of a character in a string (case-insensitive)
-	 * @param string
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string $haystack
+	 * @param string $needle
+	 *
 	 * @return integer
 	 */
 	function mb_stristr($haystack, $needle)
@@ -711,7 +761,9 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Determine the number of characters of a string
-	 * @param string
+	 *
+	 * @param string $str
+	 *
 	 * @return integer
 	 */
 	function mb_strlen($str)
@@ -721,9 +773,11 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the first occurrence of a character in a string
-	 * @param string
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $haystack
+	 * @param string  $needle
+	 * @param integer $offset
+	 *
 	 * @return integer
 	 */
 	function mb_strpos($haystack, $needle, $offset=0)
@@ -736,8 +790,10 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the last occurrence of a character in a string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $haystack
+	 * @param string $needle
+	 *
 	 * @return string
 	 */
 	function mb_strrchr($haystack, $needle)
@@ -747,8 +803,10 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the position of the last occurrence of a string in another string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $haystack
+	 * @param string $needle
+	 *
 	 * @return mixed
 	 */
 	function mb_strrpos($haystack, $needle)
@@ -758,8 +816,10 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Find the first occurrence of a string in another string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $haystack
+	 * @param string $needle
+	 *
 	 * @return string
 	 */
 	function mb_strstr($haystack, $needle)
@@ -769,7 +829,9 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Make a string lowercase
-	 * @param string
+	 *
+	 * @param string $str
+	 *
 	 * @return string
 	 */
 	function mb_strtolower($str)
@@ -779,7 +841,9 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Make a string uppercase
-	 * @param string
+	 *
+	 * @param string $str
+	 *
 	 * @return string
 	 */
 	function mb_strtoupper($str)
@@ -789,9 +853,11 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Return a substring of a string
-	 * @param string
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param string  $str
+	 * @param integer $start
+	 * @param integer $length
+	 *
 	 * @return string
 	 */
 	function mb_substr($str, $start, $length=null)
@@ -804,9 +870,11 @@ if (!USE_MBSTRING)
 
 	/**
 	 * Count the number of substring occurrences
-	 * @param string
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $haystack
+	 * @param string  $needle
+	 * @param integer $offset
+	 *
 	 * @return integer
 	 */
 	function mb_substr_count($haystack, $needle, $offset=null)
@@ -821,8 +889,11 @@ if (!USE_MBSTRING)
 
 /**
  * Replace line breaks with <br> tags (to be used with preg_replace_callback)
- * @param array
+ *
+ * @param array $matches
+ *
  * @return string
+ *
  * @deprecated
  */
 function nl2br_callback($matches)

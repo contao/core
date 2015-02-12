@@ -340,8 +340,10 @@ class tl_templates extends Backend
 
 	/**
 	 * Recursively scan the templates directory and return all folders as array
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strFolder
+	 * @param integer $intLevel
+	 *
 	 * @return string
 	 */
 	protected function getTargetFolders($strFolder, $intLevel=1)
@@ -367,12 +369,14 @@ class tl_templates extends Backend
 
 	/**
 	 * Return the edit file source button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editSource($row, $href, $label, $title, $icon, $attributes)

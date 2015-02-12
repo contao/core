@@ -122,7 +122,9 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Validate an ACE type
-	 * @param string
+	 *
+	 * @param string $type
+	 *
 	 * @return string
 	 */
 	public static function getAceType($type)
@@ -220,9 +222,11 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add the request token to the URL
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $strRequest
+	 * @param boolean $blnAddRef
+	 * @param array   $arrUnset
+	 *
 	 * @return string
 	 */
 	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
@@ -278,7 +282,9 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Open a back end module and return it as HTML
-	 * @param string
+	 *
+	 * @param string $module
+	 *
 	 * @return string
 	 */
 	protected function getBackendModule($module)
@@ -634,10 +640,12 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all searchable pages and return them as array
-	 * @param integer
-	 * @param string
-	 * @param boolean
-	 * @param string
+	 *
+	 * @param integer $pid
+	 * @param string  $domain
+	 * @param boolean $blnIsSitemap
+	 * @param string  $strLanguage
+	 *
 	 * @return array
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
@@ -717,7 +725,7 @@ abstract class Backend extends \Controller
 	/**
 	 * Add a breadcrumb menu to the page tree
 	 *
-	 * @param string
+	 * @param string $strKey
 	 */
 	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{
@@ -816,12 +824,14 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add an image to each page in the tree
-	 * @param array
-	 * @param string
-	 * @param DataContainer
-	 * @param string
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param string        $imageAttribute
+	 * @param boolean       $blnReturnImage
+	 * @param boolean       $blnProtected
+	 *
 	 * @return string
 	 */
 	public static function addPageIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
@@ -856,7 +866,7 @@ abstract class Backend extends \Controller
 	/**
 	 * Add a breadcrumb menu to the file tree
 	 *
-	 * @param string
+	 * @param string $strKey
 	 */
 	public static function addFilesBreadcrumb($strKey='tl_files_node')
 	{
@@ -991,8 +1001,10 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Recursively get all allowed pages and return them as string
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intId
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	protected function doCreatePageList($intId=0, $level=-1)
@@ -1035,8 +1047,10 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all allowed files and return them as string
-	 * @param string
-	 * @param boolean
+	 *
+	 * @param string  $strFilter
+	 * @param boolean $filemount
+	 *
 	 * @return string
 	 */
 	public function createFileList($strFilter='', $filemount=false)
@@ -1081,9 +1095,11 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Recursively get all allowed files and return them as string
-	 * @param integer
-	 * @param integer
-	 * @param string
+	 *
+	 * @param string  $strFolder
+	 * @param integer $level
+	 * @param string  $strFilter
+	 *
 	 * @return string
 	 */
 	protected function doCreateFileList($strFolder=null, $level=-1, $strFilter='')

@@ -348,9 +348,11 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Overwrite the parent method as front end URLs are handled differently
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $strRequest
+	 * @param boolean $blnIgnoreParams
+	 * @param array   $arrUnset
+	 *
 	 * @return string
 	 */
 	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
@@ -443,9 +445,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Redirect to a jumpTo page or reload the current page
-	 * @param integer|array
-	 * @param string
-	 * @param string
+	 *
+	 * @param integer|array $intId
+	 * @param string        $strParams
+	 * @param string        $strForceLang
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
@@ -481,7 +484,9 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Check whether a back end or front end user is logged in
-	 * @param string
+	 *
+	 * @param string $strCookie
+	 *
 	 * @return boolean
 	 */
 	protected function getLoginStatus($strCookie)
@@ -534,8 +539,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Get the meta data from a serialized string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $strData
+	 * @param string $strLanguage
+	 *
 	 * @return array
 	 */
 	public static function getMetaData($strData, $strLanguage)
@@ -556,8 +563,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Parse the meta.txt file of a folder
-	 * @param string
-	 * @param boolean
+	 *
+	 * @param string  $strPath
+	 * @param boolean $blnIsFile
+	 *
 	 * @deprecated Meta data is now stored in the database
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)
@@ -600,7 +609,9 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Prepare a text to be used in the meta description tag
-	 * @param string
+	 *
+	 * @param string $strText
+	 *
 	 * @return string
 	 */
 	protected function prepareMetaDescription($strText)

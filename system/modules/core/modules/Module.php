@@ -172,8 +172,9 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Initialize the object
+	 *
 	 * @param \ModuleModel $objModule
-	 * @param string
+	 * @param string       $strColumn
 	 */
 	public function __construct($objModule, $strColumn='main')
 	{
@@ -206,8 +207,9 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -217,7 +219,9 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -233,7 +237,9 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Check whether a property is set
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return boolean
 	 */
 	public function __isset($strKey)
@@ -307,10 +313,12 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Recursively compile the navigation menu and return it as HTML string
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param string
+	 *
+	 * @param integer $pid
+	 * @param integer $level
+	 * @param string  $host
+	 * @param string  $language
+	 *
 	 * @return string
 	 */
 	protected function renderNavigation($pid, $level=1, $host=null, $language=null)

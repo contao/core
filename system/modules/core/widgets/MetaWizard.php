@@ -36,7 +36,9 @@ class MetaWizard extends \Widget
 
 	/**
 	 * Trim the values and add new languages if necessary
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	public function validator($varInput)

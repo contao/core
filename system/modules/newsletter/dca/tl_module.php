@@ -108,7 +108,9 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default subscribe text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getSubscribeDefault($varValue)
@@ -124,7 +126,9 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default unsubscribe text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getUnsubscribeDefault($varValue)

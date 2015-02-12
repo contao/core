@@ -46,7 +46,9 @@ class Ajax extends \Backend
 
 	/**
 	 * Get the current action
-	 * @param string
+	 *
+	 * @param string $strAction
+	 *
 	 * @throws \Exception
 	 */
 	public function __construct($strAction)
@@ -183,7 +185,8 @@ class Ajax extends \Backend
 
 	/**
 	 * Ajax actions that do require a data container object
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
 	public function executePostActions(\DataContainer $dc)
 	{
@@ -410,7 +413,8 @@ class Ajax extends \Backend
 
 	/**
 	 * Execute the post actions hook
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
 	protected function executePostActionsHook(\DataContainer $dc)
 	{

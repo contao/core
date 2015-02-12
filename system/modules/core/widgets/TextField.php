@@ -47,7 +47,8 @@ class TextField extends \Widget
 
 	/**
 	 * Disable the for attribute if the "multiple" option is set
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -62,8 +63,9 @@ class TextField extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -101,7 +103,9 @@ class TextField extends \Widget
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)

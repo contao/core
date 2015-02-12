@@ -21,11 +21,12 @@ class Comments extends \Frontend
 
 	/**
 	 * Add comments to a template
-	 * @param \FrontendTemplate
-	 * @param \stdClass
-	 * @param string
-	 * @param integer
-	 * @param mixed
+	 *
+	 * @param \FrontendTemplate|object $objTemplate
+	 * @param \stdClass                $objConfig
+	 * @param string                   $strSource
+	 * @param integer                  $intParent
+	 * @param mixed                    $varNotifies
 	 */
 	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
@@ -37,7 +38,6 @@ class Comments extends \Frontend
 		$gtotal = 0;
 		$arrComments = array();
 
-		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate->comments = array(); // see #4064
 
 		// Pagination
@@ -174,11 +174,12 @@ class Comments extends \Frontend
 
 	/**
 	 * Add a form to create new comments
-	 * @param \FrontendTemplate
-	 * @param \stdClass
-	 * @param string
-	 * @param integer
-	 * @param mixed
+	 *
+	 * @param \FrontendTemplate|object $objTemplate
+	 * @param \stdClass                $objConfig
+	 * @param string                   $strSource
+	 * @param integer                  $intParent
+	 * @param mixed                    $varNotifies
 	 */
 	protected function renderCommentForm(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $varNotifies)
 	{
@@ -187,7 +188,6 @@ class Comments extends \Frontend
 		// Access control
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
-			/** @var \FrontendTemplate|object $objTemplate */
 			$objTemplate->requireLogin = true;
 			$objTemplate->login = $GLOBALS['TL_LANG']['MSC']['com_login'];
 
@@ -294,7 +294,6 @@ class Comments extends \Frontend
 			$arrWidgets[$arrField['name']] = $objWidget;
 		}
 
-		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$objTemplate->action = ampersand(\Environment::get('request'));
@@ -424,19 +423,22 @@ class Comments extends \Frontend
 	 * Replace bbcode and return the HTML string
 	 *
 	 * Supports the following tags:
-	 * - [b][/b] bold
-	 * - [i][/i] italic
-	 * - [u][/u] underline
-	 * - [img][/img]
-	 * - [code][/code]
-	 * - [color=#ff0000][/color]
-	 * - [quote][/quote]
-	 * - [quote=tim][/quote]
-	 * - [url][/url]
-	 * - [url=http://][/url]
-	 * - [email][/email]
-	 * - [email=name@example.com][/email]
-	 * @param string
+	 *
+	 * * [b][/b] bold
+	 * * [i][/i] italic
+	 * * [u][/u] underline
+	 * * [img][/img]
+	 * * [code][/code]
+	 * * [color=#ff0000][/color]
+	 * * [quote][/quote]
+	 * * [quote=tim][/quote]
+	 * * [url][/url]
+	 * * [url=http://][/url]
+	 * * [email][/email]
+	 * * [email=name@example.com][/email]
+	 *
+	 * @param string $strComment
+	 *
 	 * @return string
 	 */
 	public function parseBbCode($strComment)
@@ -489,7 +491,9 @@ class Comments extends \Frontend
 
 	/**
 	 * Convert line feeds to <br /> tags
-	 * @param string
+	 *
+	 * @param string $strComment
+	 *
 	 * @return string
 	 */
 	public function convertLineFeeds($strComment)
@@ -517,7 +521,8 @@ class Comments extends \Frontend
 
 	/**
 	 * Add the subscription and send the activation mail (double opt-in)
-	 * @param \CommentsModel
+	 *
+	 * @param \CommentsModel $objComment
 	 */
 	public static function addCommentsSubscription(\CommentsModel $objComment)
 	{
@@ -565,13 +570,13 @@ class Comments extends \Frontend
 
 	/**
 	 * Change the subscription status
-	 * @param \FrontendTemplate
+	 *
+	 * @param \FrontendTemplate|object $objTemplate
 	 */
 	public static function changeSubscriptionStatus(\FrontendTemplate $objTemplate)
 	{
 		$objNotify = \CommentsNotifyModel::findByTokens(\Input::get('token'));
 
-		/** @var \FrontendTemplate|object $objTemplate */
 		if ($objNotify === null)
 		{
 			$objTemplate->confirm = 'Invalid token';
@@ -595,7 +600,8 @@ class Comments extends \Frontend
 
 	/**
 	 * Notify the subscribers of new comments
-	 * @param \CommentsModel
+	 *
+	 * @param \CommentsModel $objComment
 	 */
 	public static function notifyCommentsSubscribers(\CommentsModel $objComment)
 	{

@@ -127,10 +127,12 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate a particular subpart of the file tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $folder
+	 * @param string  $strField
+	 * @param integer $level
+	 * @param boolean $mount
+	 *
 	 * @return string
 	 */
 	public function generateAjax($folder, $strField, $level, $mount=false)
@@ -180,10 +182,12 @@ class FileSelector extends \Widget
 
 	/**
 	 * Recursively render the filetree
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $path
+	 * @param integer $intMargin
+	 * @param boolean $mount
+	 * @param boolean $blnProtected
+	 *
 	 * @return string
 	 */
 	protected function renderFiletree($path, $intMargin, $mount=false, $blnProtected=false)

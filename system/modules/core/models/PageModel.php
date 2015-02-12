@@ -82,6 +82,12 @@ namespace Contao;
  * @property string  $rootFallbackLanguage
  * @property array   $subpages
  * @property string  $outputFormat
+ * @property string  $outputVariant
+ * @property boolean $hasJQuery
+ * @property boolean $hasMooTools
+ * @property boolean $isMobile
+ * @property string  $template
+ * @property string  $templateGroup
  *
  * @method static $this findById()
  * @method static $this findByPk()

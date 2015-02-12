@@ -21,10 +21,11 @@ class PageError404 extends \Frontend
 
 	/**
 	 * Generate an error 404 page
-	 * @param integer
-	 * @param string
-	 * @param string
-	 * @param boolean
+	 *
+	 * @param integer $pageId
+	 * @param string  $strDomain
+	 * @param string  $strHost
+	 * @param boolean $blnUnusedGet
 	 */
 	public function generate($pageId, $strDomain=null, $strHost=null, $blnUnusedGet=false)
 	{

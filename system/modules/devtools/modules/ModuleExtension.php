@@ -238,7 +238,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the subfolder of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessSubfolder($strClassName)
@@ -272,7 +274,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the parent class of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessParentClass($strClassName)

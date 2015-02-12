@@ -405,7 +405,8 @@ class tl_files extends Backend
 
 	/**
 	 * Only show the important part fields for images
-	 * @param DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function checkImportantPart(DataContainer $dc)
 	{
@@ -423,7 +424,9 @@ class tl_files extends Backend
 
 	/**
 	 * Add the file location instead of the help text (see #6503)
-	 * @param DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function addFileLocation(DataContainer $dc)
@@ -442,9 +445,12 @@ class tl_files extends Backend
 
 	/**
 	 * Check a file name and romanize it
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFilename($varValue)
 	{
@@ -462,12 +468,13 @@ class tl_files extends Backend
 
 	/**
 	 * Return the sync files button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $class
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function syncFiles($href, $label, $title, $class, $attributes)
@@ -478,12 +485,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the edit file button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editFile($row, $href, $label, $title, $icon, $attributes)
@@ -494,12 +503,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the copy file button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function copyFile($row, $href, $label, $title, $icon, $attributes)
@@ -510,12 +521,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the cut file button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function cutFile($row, $href, $label, $title, $icon, $attributes)
@@ -526,12 +539,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the delete file button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteFile($row, $href, $label, $title, $icon, $attributes)
@@ -549,12 +564,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the edit file source button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editSource($row, $href, $label, $title, $icon, $attributes)
@@ -584,12 +601,14 @@ class tl_files extends Backend
 
 	/**
 	 * Return the show file button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function showFile($row, $href, $label, $title, $icon, $attributes)
@@ -607,7 +626,9 @@ class tl_files extends Backend
 
 	/**
 	 * Return a checkbox to delete session data
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function protectFolder(DataContainer $dc)

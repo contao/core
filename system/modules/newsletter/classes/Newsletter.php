@@ -21,7 +21,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Renturn a form to choose an existing style sheet and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function send(\DataContainer $dc)
@@ -305,8 +307,10 @@ class Newsletter extends \Backend
 
 	/**
 	 * Generate the e-mail object and return it
+	 *
 	 * @param \Database\Result|object $objNewsletter
-	 * @param array
+	 * @param array                   $arrAttachments
+	 *
 	 * @return \Email
 	 */
 	protected function generateEmailObject(\Database\Result $objNewsletter, $arrAttachments)
@@ -340,12 +344,14 @@ class Newsletter extends \Backend
 
 	/**
 	 * Compile the newsletter and send it
-	 * @param \Email
+	 *
+	 * @param \Email                  $objEmail
 	 * @param \Database\Result|object $objNewsletter
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
+	 * @param array                   $arrRecipient
+	 * @param string                  $text
+	 * @param string                  $html
+	 * @param string                  $css
+	 *
 	 * @return string
 	 */
 	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
@@ -558,8 +564,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Remove the newsletter subscriptions of members who close their account
-	 * @param integer
-	 * @param string
+	 *
+	 * @param integer $intUser
+	 * @param string  $strMode
 	 */
 	public function removeSubscriptions($intUser, $strMode)
 	{
@@ -584,8 +591,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of new users
-	 * @param object
-	 * @param array
+	 *
+	 * @param \MemberModel $intUser
+	 * @param array        $arrData
 	 */
 	public function createNewUser($intUser, $arrData)
 	{
@@ -623,7 +631,8 @@ class Newsletter extends \Backend
 
 	/**
 	 * Activate newsletter subscription of new users
-	 * @param object
+	 *
+	 * @param \MemberModel $objUser
 	 */
 	public function activateAccount($objUser)
 	{
@@ -653,9 +662,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of existing users
-	 * @param mixed
-	 * @param \DataContainer $objUser
-	 * @param object
+	 *
+	 * @param mixed        $varValue
+	 * @param \MemberModel $objUser
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return mixed
 	 */
 	public function synchronize($varValue, $objUser, $objModule=null)
@@ -825,7 +836,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Get all editable newsletters and return them as array
-	 * @param object
+	 *
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return array
 	 */
 	public function getNewsletters($objModule)
@@ -871,9 +884,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Add newsletters to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)

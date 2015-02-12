@@ -42,19 +42,21 @@ abstract class BackendModule extends \Backend
 
 	/**
 	 * Initialize the object
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
-	public function __construct(\DataContainer $objDc=null)
+	public function __construct(\DataContainer $dc=null)
 	{
 		parent::__construct();
-		$this->objDc = $objDc;
+		$this->objDc = $dc;
 	}
 
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -64,7 +66,9 @@ abstract class BackendModule extends \Backend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)

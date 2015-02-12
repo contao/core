@@ -145,8 +145,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Initialize the object
+	 *
 	 * @param \ContentElement $objElement
-	 * @param string
+	 * @param string          $strColumn
 	 */
 	public function __construct($objElement, $strColumn='main')
 	{
@@ -179,8 +180,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -190,7 +192,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -206,7 +210,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Check whether a property is set
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return boolean
 	 */
 	public function __isset($strKey)
@@ -217,6 +223,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Return the model
+	 *
 	 * @return \Model
 	 */
 	public function getModel()

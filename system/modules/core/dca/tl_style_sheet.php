@@ -285,7 +285,8 @@ class tl_style_sheet extends Backend
 	 *
 	 * This method is triggered when a single style sheet or multiple style
 	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
-	 * @param mixed
+	 *
+	 * @param mixed $id
 	 */
 	public function scheduleUpdate($id)
 	{
@@ -310,7 +311,9 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * List a style sheet
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listStyleSheet($row)
@@ -340,7 +343,9 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Romanize the file name (see #7526)
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function romanizeName($varValue)
@@ -351,7 +356,9 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Sanitize the conditional comments field
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function sanitizeCc($varValue)
@@ -367,12 +374,14 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)

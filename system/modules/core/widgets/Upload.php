@@ -50,7 +50,8 @@ class Upload extends \Widget implements \uploadable
 
 	/**
 	 * Initialize the FileUpload object
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -63,7 +64,9 @@ class Upload extends \Widget implements \uploadable
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)

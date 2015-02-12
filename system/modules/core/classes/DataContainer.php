@@ -99,8 +99,9 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -119,7 +120,9 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -161,8 +164,11 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Render a row of a box and return it as HTML string
-	 * @param string
+	 *
+	 * @param string $strPalette
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	protected function row($strPalette=null)
@@ -551,7 +557,9 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Return the field explanation as HTML string
-	 * @param string
+	 *
+	 * @param string $strClass
+	 *
 	 * @return string
 	 */
 	public function help($strClass='')
@@ -570,7 +578,9 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Generate possible palette names from an array by taking the first value and either adding or not adding the following values
-	 * @param array
+	 *
+	 * @param array $names
+	 *
 	 * @return array
 	 */
 	protected function combiner($names)
@@ -597,7 +607,9 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Return a query string that switches into edit mode
-	 * @param integer
+	 *
+	 * @param integer $id
+	 *
 	 * @return string
 	 */
 	protected function switchToEdit($id)
@@ -621,13 +633,15 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Compile buttons from the table configuration array and return them as HTML
-	 * @param array
-	 * @param string
-	 * @param array
-	 * @param boolean
-	 * @param array
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param array   $arrRow
+	 * @param string  $strTable
+	 * @param array   $arrRootIds
+	 * @param boolean $blnCircularReference
+	 * @param array   $arrChildRecordIds
+	 * @param string  $strPrevious
+	 * @param string  $strNext
+	 *
 	 * @return string
 	 */
 	protected function generateButtons($arrRow, $strTable, $arrRootIds=array(), $blnCircularReference=false, $arrChildRecordIds=null, $strPrevious=null, $strNext=null)
