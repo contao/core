@@ -64,7 +64,6 @@ class News extends \Frontend
 		{
 			while ($objFeed->next())
 			{
-				/** @var \NewsFeedModel $objFeed */
 				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 				$this->generateFiles($objFeed->row());
 				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
@@ -85,7 +84,6 @@ class News extends \Frontend
 		{
 			while ($objFeed->next())
 			{
-				/** @var \NewsFeedModel $objFeed */
 				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
 				// Update the XML file
@@ -137,12 +135,9 @@ class News extends \Frontend
 
 			while ($objArticle->next())
 			{
-				/**
-				 * @var \NewsModel $objArticle
-				 * @var \PageModel $objPage
-				 */
+				/** @var \PageModel $objPage */
 				$objPage = $objArticle->getRelated('pid');
-				$jumpTo  = $objPage->jumpTo;
+				$jumpTo = $objPage->jumpTo;
 
 				// No jumpTo page set (see #4784)
 				if (!$jumpTo)
@@ -226,7 +221,6 @@ class News extends \Frontend
 						{
 							while ($objFile->next())
 							{
-								/** @var \FilesModel $objFile */
 								$objItem->addEnclosure($objFile->path);
 							}
 						}
@@ -269,7 +263,7 @@ class News extends \Frontend
 		{
 			while ($objArchive->next())
 			{
-				/** @var \NewsArchiveModel $objArchive */
+				// Skip news archives without target page
 				if (!$objArchive->jumpTo)
 				{
 					continue;
@@ -332,14 +326,13 @@ class News extends \Frontend
 
 	/**
 	 * Return the link of a news article
-	 * @param object
+	 * @param \NewsModel $objItem
 	 * @param string
 	 * @param string
 	 * @return string
 	 */
 	protected function getLink($objItem, $strUrl, $strBase='')
 	{
-		/** @var \NewsModel $objItem */
 		switch ($objItem->source)
 		{
 			// Link to an external page
@@ -382,7 +375,6 @@ class News extends \Frontend
 		{
 			while ($objFeeds->next())
 			{
-				/** @var \NewsFeedModel $objFeeds */
 				$arrFeeds[] = $objFeeds->alias ?: 'news' . $objFeeds->id;
 			}
 		}

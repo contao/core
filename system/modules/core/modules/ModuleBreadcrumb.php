@@ -70,7 +70,6 @@ class ModuleBreadcrumb extends \Module
 		{
 			while ($pageId > 0 && $type != 'root' && $objPages->next())
 			{
-				/** @var \PageModel $objPages */
 				$type = $objPages->type;
 				$pageId = $objPages->pid;
 				$pages[] = $objPages->row();

@@ -472,7 +472,6 @@ class tl_member extends Backend
 		{
 			while ($objGroup->next())
 			{
-				/** @var MemberGroupModel $objGroup */
 				$arrGroups[$objGroup->id] = $objGroup->name;
 			}
 		}

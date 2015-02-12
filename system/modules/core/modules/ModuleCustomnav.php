@@ -103,7 +103,9 @@ class ModuleCustomnav extends \Module
 		while ($objPages->next())
 		{
 			/** @var \PageModel $objPages */
-			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
+			$objModel = $objPages->current();
+
+			$arrPages[$objPages->id] = $objModel->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template

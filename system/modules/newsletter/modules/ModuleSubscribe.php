@@ -114,7 +114,6 @@ class ModuleSubscribe extends \Module
 		{
 			while ($objChannel->next())
 			{
-				/** @var \NewsletterChannelModel $objChannel */
 				$arrChannels[$objChannel->id] = $objChannel->title;
 			}
 		}
@@ -162,10 +161,7 @@ class ModuleSubscribe extends \Module
 		// Update the subscriptions
 		while ($objRecipient->next())
 		{
-			/**
-			 * @var \NewsletterChannelModel    $objChannel
-			 * @var \NewsletterRecipientsModel $objRecipient
-			 */
+			/** @var \NewsletterChannelModel $objChannel */
 			$objChannel = $objRecipient->getRelated('pid');
 
 			$arrAdd[] = $objRecipient->id;
@@ -179,7 +175,6 @@ class ModuleSubscribe extends \Module
 			$objRecipient->save();
 		}
 
-		/** @var \NewsletterRecipientsModel $objRecipient */
 		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
 
 		// HOOK: post activation callback

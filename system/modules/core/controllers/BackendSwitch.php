@@ -101,7 +101,6 @@ class BackendSwitch extends \Backend
 				{
 					$objUser = \MemberModel::findByUsername(\Input::post('user'));
 
-					/** @var \MemberModel $objUser */
 					if ($objUser !== null)
 					{
 						// Insert the new session

@@ -746,7 +746,7 @@ class Automator extends \System
 			}
 		}
 
-		/** @var \DcaExtractor $objExtract */
+		/** @var \DcaExtractor[] $arrExtracts */
 		foreach ($arrExtracts as $strTable=>$objExtract)
 		{
 			// Create the file

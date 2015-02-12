@@ -27,7 +27,7 @@ class ContentMedia extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \Model\Collection
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -64,7 +64,6 @@ class ContentMedia extends \ContentElement
 
 			while ($objFiles->next())
 			{
-				/** @var \FilesModel $objFiles */
 				$objFile = new \File($objFiles->path, true);
 				$return .= '<li><img src="' . TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon . '" width="18" height="18" alt="" class="mime_icon"> <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
 			}
@@ -108,8 +107,10 @@ class ContentMedia extends \ContentElement
 			}
 		}
 
+		$objFiles = $this->objFiles;
+
 		/** @var \FilesModel $objFirst */
-		$objFirst = $this->objFiles->current();
+		$objFirst = $objFiles->current();
 
 		// Pre-sort the array by preference
 		if (in_array($objFirst->extension , array('mp4','m4v','mov','wmv','webm','ogv')))
@@ -123,7 +124,7 @@ class ContentMedia extends \ContentElement
 			$arrFiles = array('m4a'=>null, 'mp3'=>null, 'wma'=>null, 'mpeg'=>null, 'wav'=>null, 'ogg'=>null);
 		}
 
-		$objFiles = $this->objFiles->reset();
+		$objFiles->reset();
 
 		// Convert the language to a locale (see #5678)
 		$strLanguage = str_replace('-', '_', $objPage->language);
@@ -131,7 +132,6 @@ class ContentMedia extends \ContentElement
 		// Pass File objects to the template
 		while ($objFiles->next())
 		{
-			/** @var \FilesModel $objFiles */
 			$arrMeta = deserialize($objFiles->meta);
 
 			if (is_array($arrMeta) && isset($arrMeta[$strLanguage]))

@@ -34,6 +34,7 @@ class PageRegular extends \Frontend
 		// Static URLs
 		$this->setStaticUrls();
 
+		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage);
 
 		// HOOK: modify the page or layout object (see #4736)
@@ -89,7 +90,6 @@ class PageRegular extends \Frontend
 			{
 				while ($objModules->next())
 				{
-					/** @var \ModuleModel $objModules */
 					$arrMapper[$objModules->id] = $objModules->current();
 				}
 			}
@@ -192,7 +192,7 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
-	 * @param \PageModel
+	 * @param \PageModel $objPage
 	 * @return \LayoutModel
 	 */
 	protected function getPageLayout($objPage)
@@ -513,7 +513,6 @@ class PageRegular extends \Frontend
 			{
 				while ($objStylesheets->next())
 				{
-					/** @var \StylesheetModel $objStylesheets */
 					$media = implode(',', deserialize($objStylesheets->media));
 
 					// Overwrite the media type with a custom media query
@@ -616,7 +615,6 @@ class PageRegular extends \Frontend
 
 				while ($objFiles->next())
 				{
-					/** @var \FilesModel $objFiles */
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
 						$arrFiles[] = $objFiles->path . '|static';
@@ -659,7 +657,6 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					/** @var \NewsFeedModel $objFeeds */
 					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}
@@ -674,7 +671,6 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					/** @var \CalendarFeedModel $objFeeds */
 					$strStyleSheets .= \Template::generateFeedTag(($objFeeds->feedBase ?: \Environment::get('base')) . 'share/' . $objFeeds->alias . '.xml', $objFeeds->format, $objFeeds->title, $blnXhtml) . "\n";
 				}
 			}

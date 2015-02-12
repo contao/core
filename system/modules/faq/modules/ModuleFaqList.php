@@ -89,7 +89,6 @@ class ModuleFaqList extends \Module
 		// Add FAQs
 		while ($objFaq->next())
 		{
-			/** @var \FaqModel $objFaq */
 			$arrTemp = $objFaq->row();
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
@@ -127,16 +126,13 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Create links and remember pages that have been processed
-	 * @param object
+	 * @param \FaqModel $objFaq
 	 * @return string
 	 * @throws \Exception
 	 */
 	protected function generateFaqLink($objFaq)
 	{
-		/**
-		 * @var \FaqModel         $objFaq
-		 * @var \FaqCategoryModel $objCategory
-		 */
+		/** @var \FaqCategoryModel $objCategory */
 		$objCategory = $objFaq->getRelated('pid');
 		$jumpTo = intval($objCategory->jumpTo);
 

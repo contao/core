@@ -172,7 +172,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param \ModuleModel $objModule
 	 * @param string
 	 */
 	public function __construct($objModule, $strColumn='main')
@@ -188,7 +188,6 @@ abstract class Module extends \Frontend
 
 		parent::__construct();
 
-		/** @var \ModuleModel $objModule */
 		$this->arrData = $objModule->row();
 		$this->space = deserialize($objModule->space);
 		$this->cssID = deserialize($objModule->cssID, true);
@@ -354,7 +353,7 @@ abstract class Module extends \Frontend
 		// Browse subpages
 		while ($objSubpages->next())
 		{
-			/** @var \PageModel $objSubpages */
+			// Skip hidden sitemap pages
 			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
 			{
 				continue;
@@ -395,6 +394,7 @@ abstract class Module extends \Frontend
 					case 'forward':
 						if ($objSubpages->jumpTo)
 						{
+							/** @var \PageModel $objNext */
 							$objNext = $objSubpages->getRelated('jumpTo');
 						}
 						else
@@ -404,7 +404,7 @@ abstract class Module extends \Frontend
 
 						if ($objNext !== null)
 						{
-							/** @var \PageModel $objNext */
+							// Hide the link if the target page is invisible
 							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
 							{
 								continue(2);
@@ -427,7 +427,9 @@ abstract class Module extends \Frontend
 					default:
 						if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
 						{
-							$objSubpages->current()->loadDetails();
+							/** @var \PageModel $objModel */
+							$objModel = $objSubpages->current();
+							$objModel->loadDetails();
 						}
 
 						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);

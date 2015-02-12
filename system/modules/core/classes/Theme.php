@@ -140,10 +140,11 @@ class Theme extends \Backend
 
 
 	/**
-	 * Compare the theme tables with the local database and check
-	 * whether there are custom layout sections
-	 * @param array
-	 * @param array
+	 * Compare the theme tables with the local database and check whether there are custom layout sections
+	 *
+	 * @param array $arrFiles
+	 * @param array $arrDbFields
+	 *
 	 * @return string
 	 */
 	protected function compareThemeFiles($arrFiles, $arrDbFields)
@@ -281,8 +282,9 @@ class Theme extends \Backend
 
 	/**
 	 * Extract the theme files and write the data to the database
-	 * @param array
-	 * @param array
+	 *
+	 * @param array $arrFiles
+	 * @param array $arrDbFields
 	 */
 	protected function extractThemeFiles($arrFiles, $arrDbFields)
 	{
@@ -627,6 +629,8 @@ class Theme extends \Backend
 					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
 				}
 			}
+
+			unset($tl_theme, $tl_style_sheet, $tl_style, $tl_module, $tl_layout, $tl_image_size, $tl_image_size_item);
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -639,10 +643,12 @@ class Theme extends \Backend
 
 	/**
 	 * Export a theme
-	 * @param object
+	 *
+	 * @param \DataContainer $dc
 	 */
 	public function exportTheme($dc)
 	{
+		// Get the theme meta data
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
 								   ->limit(1)
 								   ->execute($dc->id);
@@ -719,11 +725,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_theme
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlTheme(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -744,11 +751,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_style_sheet
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -762,7 +770,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_style_sheet');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		/** @var \Database\Result|object $objTheme */
+		// Get all style sheets
 		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE pid=? ORDER BY name")
 										->execute($objTheme->id);
 
@@ -804,11 +812,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_module
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlModule(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -822,7 +831,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_module');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		/** @var \Database\Result|object $objTheme */
+		// Get all modules
 		$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
 
@@ -836,11 +845,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_layout
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlLayout(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -854,7 +864,7 @@ class Theme extends \Backend
 		$objDcaExtractor = \DcaExtractor::getInstance('tl_layout');
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
-		/** @var \Database\Result|object $objTheme */
+		// Get all layouts
 		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE pid=? ORDER BY name")
 									->execute($objTheme->id);
 
@@ -868,11 +878,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_image_size
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the tables
 		$imageSizeTable = $xml->createElement('table');
@@ -883,7 +894,7 @@ class Theme extends \Backend
 		$imageSizeItemTable->setAttribute('name', 'tl_image_size_item');
 		$imageSizeItemTable = $tables->appendChild($imageSizeItemTable);
 
-		/** @var \Database\Result|object $objTheme */
+		// Get all sizes
 		$objSizes = $this->Database->prepare("SELECT * FROM tl_image_size WHERE pid=?")
 								   ->execute($objTheme->id);
 
@@ -907,12 +918,13 @@ class Theme extends \Backend
 
 	/**
 	 * Add a data row to the XML document
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
-	 * @param array
+
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $table
+	 * @param \Database\Result|object $objData
+	 * @param array                   $arrOrder
 	 */
-	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData, array $arrOrder=array())
+	protected function addDataRow(\DOMDocument $xml, \DOMNode $table, \Database\Result $objData, array $arrOrder=array())
 	{
 		$t = $table->getAttribute('name');
 
@@ -960,7 +972,6 @@ class Theme extends \Backend
 
 						while ($objFiles->next())
 						{
-							/** @var \FilesModel $objFiles */
 							$arrTmp[] = $this->standardizeUploadPath($objFiles->path);
 						}
 
@@ -985,8 +996,9 @@ class Theme extends \Backend
 
 	/**
 	 * Recursively add a folder to the archive
-	 * @param \ZipWriter
-	 * @param string
+	 *
+	 * @param \ZipWriter $objArchive
+	 * @param string     $strFolder
 	 */
 	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
 	{
@@ -1040,8 +1052,9 @@ class Theme extends \Backend
 
 	/**
 	 * Add templates to the archive
-	 * @param \ZipWriter
-	 * @param string
+	 *
+	 * @param \ZipWriter $objArchive
+	 * @param string     $strFolder
 	 */
 	protected function addTemplatesToArchive(\ZipWriter $objArchive, $strFolder)
 	{
@@ -1085,7 +1098,9 @@ class Theme extends \Backend
 
 	/**
 	 * Replace files/ with the custom upload folder name
-	 * @param string
+	 *
+	 * @param string $strPath
+	 *
 	 * @return string
 	 */
 	protected function customizeUploadPath($strPath)
@@ -1101,7 +1116,9 @@ class Theme extends \Backend
 
 	/**
 	 * Replace a custom upload folder name with files/
-	 * @param string
+	 *
+	 * @param string $strPath
+	 *
 	 * @return string
 	 */
 	protected function standardizeUploadPath($strPath)

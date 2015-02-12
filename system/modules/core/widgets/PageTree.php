@@ -136,7 +136,6 @@ class PageTree extends \Widget
 			{
 				while ($objPages->next())
 				{
-					/** @var \PageModel $objPages */
 					$arrSet[] = $objPages->id;
 					$arrValues[$objPages->id] = \Image::getHtml($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . \Config::get('urlSuffix') . ')';
 				}

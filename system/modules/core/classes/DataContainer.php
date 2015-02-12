@@ -92,7 +92,7 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Active record
-	 * @var \Model
+	 * @var \Model|\FilesModel
 	 */
 	protected $objActiveRecord;
 
@@ -219,6 +219,7 @@ abstract class DataContainer extends \Backend
 			return $arrData['input_field_callback']($this, $xlabel);
 		}
 
+		/** @var \Widget $strClass */
 		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
 
 		// Return if the widget class does not exists
@@ -254,10 +255,7 @@ abstract class DataContainer extends \Backend
 			$this->varValue = \String::insertTagToSrc($this->varValue);
 		}
 
-		/**
-		 * @var \Widget $strClass
-		 * @var \Widget $objWidget
-		 */
+		/** @var \Widget $objWidget */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
@@ -783,7 +781,7 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 * @param mixed $varValue
 	 * @throws \Exception
 	 */
 	abstract protected function save($varValue);

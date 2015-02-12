@@ -393,7 +393,7 @@ abstract class Backend extends \Controller
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
 
-			/** @var \DataContainer|object $dc */
+			/** @var \DataContainer $dc */
 			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
@@ -406,9 +406,9 @@ abstract class Backend extends \Controller
 		// Trigger the module callback
 		elseif (class_exists($arrModule['callback']))
 		{
+			/** @var \Module $objCallback */
 			$objCallback = new $arrModule['callback']($dc);
 
-			/** @var \Module $objCallback */
 			$this->Template->main .= $objCallback->generate();
 		}
 
@@ -848,6 +848,7 @@ abstract class Backend extends \Controller
 		// Add the breadcrumb link
 		$label = '<a href="' . \Controller::addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
 
+		// Return the image
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
 	}
 

@@ -145,7 +145,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param \ContentElement $objElement
 	 * @param string
 	 */
 	public function __construct($objElement, $strColumn='main')
@@ -162,8 +162,6 @@ abstract class ContentElement extends \Frontend
 		parent::__construct();
 
 		$this->arrData = $objElement->row();
-
-		/** @var \ContentElement $objElement */
 		$this->space = deserialize($objElement->space);
 		$this->cssID = deserialize($objElement->cssID, true);
 

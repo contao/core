@@ -24,12 +24,11 @@ class Newsletter extends \Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function send(\DataContainer $objDc)
+	public function send(\DataContainer $dc)
 	{
-		/** @var \DataContainer|object $objDc */
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
-										->execute($objDc->id);
+										->execute($dc->id);
 
 		// Return if there is no newsletter
 		if ($objNewsletter->numRows < 1)
@@ -78,7 +77,6 @@ class Newsletter extends \Backend
 				{
 					while ($objFiles->next())
 					{
-						/** @var \FilesModel $objFiles */
 						if (is_file(TL_ROOT . '/' . $objFiles->path))
 						{
 							$arrAttachments[] = $objFiles->path;
@@ -307,7 +305,7 @@ class Newsletter extends \Backend
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param \Database\Result
+	 * @param \Database\Result|object $objNewsletter
 	 * @param array
 	 * @return \Email
 	 */
@@ -315,7 +313,6 @@ class Newsletter extends \Backend
 	{
 		$objEmail = new \Email();
 
-		/** @var \Database\Result|object $objNewsletter */
 		$objEmail->from = $objNewsletter->sender;
 		$objEmail->subject = $objNewsletter->subject;
 
@@ -344,7 +341,7 @@ class Newsletter extends \Backend
 	/**
 	 * Compile the newsletter and send it
 	 * @param \Email
-	 * @param \Database\Result
+	 * @param \Database\Result|object $objNewsletter
 	 * @param array
 	 * @param string
 	 * @param string
@@ -356,7 +353,6 @@ class Newsletter extends \Backend
 		// Prepare the text content
 		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
 
-		/** @var \Database\Result|object $objNewsletter */
 		if (!$objNewsletter->sendText)
 		{
 			// Default template
@@ -658,7 +654,7 @@ class Newsletter extends \Backend
 	/**
 	 * Synchronize newsletter subscription of existing users
 	 * @param mixed
-	 * @param object
+	 * @param \DataContainer $objUser
 	 * @param object
 	 * @return mixed
 	 */
@@ -675,7 +671,6 @@ class Newsletter extends \Backend
 		// If called from the back end, the second argument is a DataContainer object
 		if ($objUser instanceof \DataContainer)
 		{
-			/** @var \DataContainer|object $objUser */
 			$objUser = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
 									  ->limit(1)
 									  ->execute($objUser->id);
@@ -849,7 +844,6 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				/** @var \NewsletterChannelModel $objNewsletter */
 				$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
 			}
 		}
@@ -864,7 +858,6 @@ class Newsletter extends \Backend
 
 			while ($objNewsletter->next())
 			{
-				/** @var \NewsletterChannelModel $objNewsletter */
 				if (in_array($objNewsletter->id, $newsletters))
 				{
 					$arrNewsletters[$objNewsletter->id] = $objNewsletter->title;
@@ -903,7 +896,6 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				/** @var \NewsletterChannelModel $objNewsletter */
 				if (!$objNewsletter->jumpTo)
 				{
 					continue;
@@ -954,7 +946,6 @@ class Newsletter extends \Backend
 				{
 					while ($objItem->next())
 					{
-						/** @var \NewsletterModel $objItem */
 						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 					}
 				}

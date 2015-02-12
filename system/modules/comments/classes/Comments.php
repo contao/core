@@ -110,7 +110,6 @@ class Comments extends \Frontend
 
 			while ($objComments->next())
 			{
-				/** @var \CommentsModel $objComments */
 				$objPartial->setData($objComments->row());
 
 				// Clean the RTE output
@@ -267,6 +266,7 @@ class Comments extends \Frontend
 		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
@@ -277,10 +277,7 @@ class Comments extends \Frontend
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
-			/**
-			 * @var \Widget $strClass
-			 * @var \Widget $objWidget
-			 */
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate the widget
@@ -618,7 +615,7 @@ class Comments extends \Frontend
 
 		while ($objNotify->next())
 		{
-			/** @var \CommentsNotifyModel $objNotify */
+			// Don't notify the commentor about his own comment
 			if ($objNotify->email == $objComment->email)
 			{
 				continue;

@@ -37,6 +37,12 @@ class Form extends \Hybrid
 {
 
 	/**
+	 * Model
+	 * @var \FormModel
+	 */
+	protected $objModel;
+
+	/**
 	 * Key
 	 * @var string
 	 */
@@ -263,15 +269,8 @@ class Form extends \Hybrid
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
 		$this->Template->action = \Environment::get('indexFreeRequest');
+		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
 		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';
-		$this->Template->maxFileSize = false;
-
-		if ($hasUpload)
-		{
-			/** @var \FormModel $objModel */
-			$objModel = $this->objModel;
-			$this->Template->maxFileSize = $objModel->getMaxUploadFileSize();
-		}
 
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
@@ -544,10 +543,7 @@ class Form extends \Hybrid
 	 */
 	protected function getMaxFileSize()
 	{
-		/** @var \FormModel $objModel */
-		$objModel = $this->objModel;
-
-		return $objModel->getMaxUploadFileSize(); // Backwards compatibility
+		return $this->objModel->getMaxUploadFileSize(); // Backwards compatibility
 	}
 
 

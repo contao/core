@@ -120,7 +120,6 @@ class Picture
 			$picture->setImageSizeItems(\ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order'=>'sorting ASC')));
 		}
 
-		/** @var \FilesModel $fileRecord */
 		$fileRecord = \FilesModel::findByPath($file->path);
 
 		if ($fileRecord !== null && $fileRecord->importantPartWidth && $fileRecord->importantPartHeight)
@@ -235,7 +234,6 @@ class Picture
 
 		foreach ($densities as $density)
 		{
-			/** @var Image $imageObj */
 			$imageObj = clone $this->image;
 
 			$src = $imageObj->setTargetWidth($imageSize->width * $density)

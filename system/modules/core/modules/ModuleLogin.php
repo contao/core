@@ -83,7 +83,6 @@ class ModuleLogin extends \Module
 
 				if ($objMember !== null)
 				{
-					/** @var \MemberModel $objMember */
 					$arrGroups = deserialize($objMember->groups);
 
 					if (!empty($arrGroups) && is_array($arrGroups))

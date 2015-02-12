@@ -115,12 +115,11 @@ class BackendPage extends \Backend
 			}
 		}
 
-		/**
-		 * @var \PageSelector $class
-		 * @var \PageSelector $objPageTree
-		 */
-		$class = $GLOBALS['BE_FFL']['pageSelector'];
-		$objPageTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
+		/** @var \PageSelector $strClass */
+		$strClass = $GLOBALS['BE_FFL']['pageSelector'];
+
+		/** @var \PageSelector $objPageTree */
+		$objPageTree = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 
 		$objTemplate->main = $objPageTree->generate();
 		$objTemplate->theme = \Backend::getTheme();

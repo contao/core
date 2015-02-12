@@ -141,7 +141,7 @@ class FileTree extends \Widget
 			{
 				while ($objFiles->next())
 				{
-					/** @var \FilesModel $objFiles */
+					// File system and database seem not in sync
 					if (!file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
 						continue;
@@ -193,10 +193,10 @@ class FileTree extends \Widget
 
 							while ($objSubfiles->next())
 							{
-								/** @var \FilesModel $objSubfiles */
+								// Skip subfolders
 								if ($objSubfiles->type == 'folder')
 								{
-									continue; // skip sub-folders
+									continue;
 								}
 
 								$objFile = new \File($objSubfiles->path, true);

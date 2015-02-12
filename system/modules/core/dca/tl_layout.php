@@ -583,7 +583,6 @@ class tl_layout extends Backend
 
 		while ($objFeed->next())
 		{
-			/** @var \NewsFeedModel $objFeed */
 			$return[$objFeed->id] = $objFeed->title;
 		}
 
@@ -613,7 +612,6 @@ class tl_layout extends Backend
 
 		while ($objFeed->next())
 		{
-			/** @var \CalendarFeedModel $objFeed */
 			$return[$objFeed->id] = $objFeed->title;
 		}
 

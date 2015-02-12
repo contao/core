@@ -72,14 +72,13 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param \ContentModel|\ModuleModel $objElement
 	 * @param string
 	 */
 	public function __construct($objElement, $strColumn='main')
 	{
 		parent::__construct();
 
-		/** @var \ContentModel|\ModuleModel $objElement */
 		if ($objElement instanceof \Model)
 		{
 			$this->objParent = $objElement; // see #4556

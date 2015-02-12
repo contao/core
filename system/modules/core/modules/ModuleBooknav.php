@@ -155,7 +155,6 @@ class ModuleBooknav extends \Module
 		{
 			while ($objPages->next())
 			{
-				/** @var \PageModel $objPages */
 				$_groups = deserialize($objPages->groups);
 
 				// Do not show protected pages unless a back end or front end user is logged in

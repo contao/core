@@ -21,7 +21,7 @@ class ContentGallery extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \Model\Collection
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -90,7 +90,7 @@ class ContentGallery extends \ContentElement
 		// Get all images
 		while ($objFiles->next())
 		{
-			/** @var \FilesModel $objFiles */
+			// Continue if the files has been processed or does not exist
 			if (isset($images[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
@@ -153,10 +153,10 @@ class ContentGallery extends \ContentElement
 
 				while ($objSubfiles->next())
 				{
-					/** @var \FilesModel $objSubfiles */
+					// Skip subfolders
 					if ($objSubfiles->type == 'folder')
 					{
-						continue; // skip sub-folders
+						continue;
 					}
 
 					$objFile = new \File($objSubfiles->path, true);

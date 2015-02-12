@@ -284,7 +284,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intLimit   An optional limit
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|null A collection of models or null if there are no events
+	 * @return \Model\Collection|\CalendarEventsModel|null A collection of models or null if there are no events
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0, array $arrOptions=array())
 	{

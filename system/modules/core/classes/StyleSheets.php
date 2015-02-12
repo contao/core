@@ -1349,12 +1349,11 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Export a style sheet
-	 * @param \DataContainer
+	 * @param \DataContainer $dc
 	 * @throws \Exception
 	 */
 	public function exportStyleSheet(\DataContainer $dc)
 	{
-		/** @var \DataContainer|object $dc */
 		$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE id=?")
 										->limit(1)
 										->execute($dc->id);

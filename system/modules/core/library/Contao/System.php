@@ -729,7 +729,7 @@ abstract class System
 			}
 		};
 
-		/** @var \DOMElement $unit */
+		/** @var \DOMElement[] $units */
 		foreach ($units as $unit)
 		{
 			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');

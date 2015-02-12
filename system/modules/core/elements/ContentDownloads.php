@@ -21,7 +21,7 @@ class ContentDownloads extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \Model\Collection
+	 * @var \Model\Collection|FilesModel
 	 */
 	protected $objFiles;
 
@@ -60,9 +60,9 @@ class ContentDownloads extends \ContentElement
 		}
 
 		// Get the file entries from the database
-		$objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
+		$this->objFiles = \FilesModel::findMultipleByUuids($this->multiSRC);
 
-		if ($objFiles === null)
+		if ($this->objFiles === null)
 		{
 			if (!\Validator::isUuid($this->multiSRC[0]))
 			{
@@ -77,19 +77,16 @@ class ContentDownloads extends \ContentElement
 		// Send the file to the browser and do not send a 404 header (see #4632)
 		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 		{
-			while ($objFiles->next())
+			while ($this->objFiles->next())
 			{
-				/** @var \FilesModel $objFiles */
-				if ($file == $objFiles->path || dirname($file) == $objFiles->path)
+				if ($file == $this->objFiles->path || dirname($file) == $this->objFiles->path)
 				{
 					\Controller::sendFileToBrowser($file);
 				}
 			}
 
-			$objFiles->reset();
+			$this->objFiles->reset();
 		}
-
-		$this->objFiles = $objFiles;
 
 		return parent::generate();
 	}
@@ -111,7 +108,7 @@ class ContentDownloads extends \ContentElement
 		// Get all files
 		while ($objFiles->next())
 		{
-			/** @var \FilesModel $objFiles */
+			// Continue if the files has been processed or does not exist
 			if (isset($files[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
@@ -190,10 +187,10 @@ class ContentDownloads extends \ContentElement
 
 				while ($objSubfiles->next())
 				{
-					/** @var \FilesModel $objSubfiles */
+					// Skip subfolders
 					if ($objSubfiles->type == 'folder')
 					{
-						continue; // skip sub-folders
+						continue;
 					}
 
 					$objFile = new \File($objSubfiles->path, true);

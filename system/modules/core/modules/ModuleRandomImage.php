@@ -21,7 +21,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Files object
-	 * @var \Model\Collection
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -74,7 +74,7 @@ class ModuleRandomImage extends \Module
 		// Get all images
 		while ($objFiles->next())
 		{
-			/** @var \FilesModel $objFiles */
+			// Continue if the files has been processed or does not exist
 			if (isset($images[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
@@ -122,7 +122,7 @@ class ModuleRandomImage extends \Module
 
 				while ($objSubfiles->next())
 				{
-					/** @var \FilesModel $objSubfiles */
+					// Skip subfolders
 					if ($objSubfiles->type == 'folder')
 					{
 						continue;

@@ -134,6 +134,7 @@ class ModuleRegistration extends \Module
 				'tableless' => $this->tableless
 			);
 
+			/** @var \FormCaptcha $strClass */
 			$strClass = $GLOBALS['TL_FFL']['captcha'];
 
 			// Fallback to default if the class is not defined
@@ -142,10 +143,7 @@ class ModuleRegistration extends \Module
 				$strClass = 'FormCaptcha';
 			}
 
-			/**
-			 * @var \FormCaptcha $strClass
-			 * @var \FormCaptcha $objCaptcha
-			 */
+			/** @var \FormCaptcha $objCaptcha */
 			$objCaptcha = new $strClass($arrCaptcha);
 
 			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
@@ -429,7 +427,6 @@ class ModuleRegistration extends \Module
 				// Create the user folder
 				new \Folder($objHomeDir->path . '/' . $strUserDir);
 
-				/** @var \FilesModel $objUserDir */
 				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
 
 				// Save the folder ID
@@ -477,7 +474,6 @@ class ModuleRegistration extends \Module
 
 		$this->Template = $objTemplate;
 
-		/** @var \MemberModel $objMember */
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)

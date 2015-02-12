@@ -131,7 +131,6 @@ class ModuleQuicknav extends \Module
 
 		while($objSubpages->next())
 		{
-			/** @var \PageModel $objSubpages $_groups */
 			$_groups = deserialize($objSubpages->groups);
 
 			// Override the domain (see #3765)
@@ -150,7 +149,9 @@ class ModuleQuicknav extends \Module
 				{
 					if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
 					{
-						$objSubpages->current()->loadDetails();
+						/** @var \PageModel $objModel */
+						$objModel = $objSubpages->current();
+						$objModel->loadDetails();
 					}
 
 					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);

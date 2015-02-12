@@ -99,6 +99,7 @@ class ModulePassword extends \Module
 		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
@@ -110,10 +111,7 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
-			/**
-			 * @var \Widget $strClass
-			 * @var \Widget $objWidget
-			 */
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
 
 			$objWidget->storeValues = true;
@@ -177,7 +175,6 @@ class ModulePassword extends \Module
 	{
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
-		/** @var \MemberModel $objMember */
 		if ($objMember === null || $objMember->login == '')
 		{
 			$this->strTemplate = 'mod_message';
@@ -196,6 +193,7 @@ class ModulePassword extends \Module
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
 		$arrField['eval']['tableless'] = $this->tableless;
 
+		/** @var \Widget $strClass */
 		$strClass = $GLOBALS['TL_FFL']['password'];
 
 		// Fallback to default if the class is not defined
@@ -204,10 +202,7 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
-		/**
-		 * @var \Widget $strClass
-		 * @var \Widget $objWidget
-		 */
+		/** @var \Widget $objWidget */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes

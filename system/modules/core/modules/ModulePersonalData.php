@@ -140,6 +140,7 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
@@ -191,10 +192,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
-			/**
-			 * @var \Widget $strClass
-			 * @var \Widget $objWidget
-			 */
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
 			$objWidget->storeValues = true;

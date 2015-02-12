@@ -100,8 +100,9 @@ class FrontendIndex extends \Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				/** @var \PageModel $objPage */
-				$objCurrentPage = $objPage->current()->loadDetails();
+				/** @var \PageModel $objModel */
+				$objModel = $objPage->current();
+				$objCurrentPage = $objModel->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;

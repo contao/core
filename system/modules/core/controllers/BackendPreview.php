@@ -70,7 +70,6 @@ class BackendPreview extends \Backend
 		{
 			$objUser = \MemberModel::findByUsername(\Input::get('user'));
 
-			/** @var \MemberModel $objUser */
 			if ($objUser !== null)
 			{
 				$strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . 'FE_USER_AUTH');

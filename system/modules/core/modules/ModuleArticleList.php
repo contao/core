@@ -96,7 +96,6 @@ class ModuleArticleList extends \Module
 				continue;
 			}
 
-			/** @var \ArticleModel $objArticles */
 			$cssID = deserialize($objArticles->cssID, true);
 			$alias = $objArticles->alias ?: $objArticles->title;
 

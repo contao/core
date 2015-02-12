@@ -21,8 +21,8 @@ class PageError403 extends \Frontend
 
 	/**
 	 * Generate an error 403 page
-	 * @param integer
-	 * @param object
+	 * @param integer $pageId
+	 * @param \PageModel $objRootPage
 	 */
 	public function generate($pageId, $objRootPage=null)
 	{
@@ -36,7 +36,6 @@ class PageError403 extends \Frontend
 		}
 		else
 		{
-			/** @var \PageModel $objRootPage */
 			$objRootPage = \PageModel::findPublishedById(is_integer($objRootPage) ? $objRootPage : $objRootPage->id);
 		}
 

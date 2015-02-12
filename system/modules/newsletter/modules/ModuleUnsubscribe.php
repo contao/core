@@ -106,7 +106,6 @@ class ModuleUnsubscribe extends \Module
 		{
 			while ($objChannel->next())
 			{
-				/** @var \NewsletterChannelModel $objChannel */
 				$arrChannels[$objChannel->id] = $objChannel->title;
 			}
 		}

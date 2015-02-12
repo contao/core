@@ -46,7 +46,7 @@ class ModuleFaq extends \Frontend
 		{
 			while ($objFaq->next())
 			{
-				/** @var \FaqCategoryModel $objFaq */
+				// Skip FAQs without target page
 				if (!$objFaq->jumpTo)
 				{
 					continue;
@@ -97,7 +97,6 @@ class ModuleFaq extends \Frontend
 				{
 					while ($objItems->next())
 					{
-						/** @var \FaqModel $objItems */
 						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !\Config::get('disableAlias')) ? $objItems->alias : $objItems->id));
 					}
 				}

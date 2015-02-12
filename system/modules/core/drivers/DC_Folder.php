@@ -905,7 +905,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 				foreach ($arrUploaded as $strFile)
 				{
-					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPath($strFile);
 
 					// Existing file is being replaced (see #4818)

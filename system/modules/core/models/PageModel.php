@@ -728,7 +728,6 @@ class PageModel extends \Model
 			{
 				while ($pid > 0 && $type != 'root' && $objParentPage->next())
 				{
-					/** @var \PageModel $objParentPage */
 					$pid = $objParentPage->pid;
 					$type = $objParentPage->type;
 

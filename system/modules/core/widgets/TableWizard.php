@@ -231,7 +231,7 @@ class TableWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param \DataContainer
+	 * @param \DataContainer $dc
 	 * @return string
 	 */
 	public function importTable(\DataContainer $dc)
@@ -301,7 +301,6 @@ class TableWizard extends \Widget
 				}
 			}
 
-			/** @var \DataContainer $dc */
 			$objVersions = new \Versions($dc->table, \Input::get('id'));
 			$objVersions->create();
 

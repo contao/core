@@ -80,7 +80,6 @@ class Dbafs
 		{
 			while ($objModels->next())
 			{
-				/** @var \FilesModel $objModels */
 				if (($i = array_search($objModels->path, $arrPaths)) !== false)
 				{
 					unset($arrPaths[$i]);
@@ -252,7 +251,6 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
-					/** @var \FilesModel $objFiles */
 					$objFiles->path = preg_replace('@^' . $strSource . '/@', $strDestination . '/', $objFiles->path);
 					$objFiles->save();
 				}
@@ -330,10 +328,7 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
-					/**
-					 * @var \FilesModel $objNew
-					 * @var \FilesModel $objFiles
-					 */
+					/**@var \FilesModel $objNew */
 					$objNew = clone $objFiles->current();
 
 					$objNew->pid    = $objNewFile->uuid;
@@ -509,7 +504,6 @@ class Dbafs
 				{
 					while ($objSubfiles->next())
 					{
-						/** @var \FilesModel $objSubfiles */
 						$arrModels[$objSubfiles->path] = $objSubfiles->current();
 					}
 				}
@@ -525,7 +519,6 @@ class Dbafs
 				$objModel = \FilesModel::findByPath($strRelpath);
 			}
 
-			/** @var \FilesModel $objModel */
 			if ($objModel === null)
 			{
 				// Add a log entry
@@ -548,7 +541,6 @@ class Dbafs
 						throw new \Exception("No parent entry for $strParent");
 					}
 
-					/** @var \FilesModel $objParent */
 					$strPid = $objParent->uuid;
 				}
 
@@ -612,7 +604,6 @@ class Dbafs
 
 			while ($objFiles->next())
 			{
-				/** @var \FilesModel $objFiles */
 				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);
 
 				if ($objFound !== null)
@@ -622,7 +613,6 @@ class Dbafs
 					{
 						while ($objFound->next())
 						{
-							/** @var \FilesModel $objFound */
 							if ($objFound->name == $objFiles->name)
 							{
 								$objFound = $objFound->current();
@@ -685,7 +675,6 @@ class Dbafs
 					{
 						while ($objChildren->next())
 						{
-							/** @var \FilesModel $objChildren */
 							$objChildren->pid = $to;
 							$objChildren->save();
 						}

@@ -579,7 +579,6 @@ class String
 				continue;
 			}
 
-			/** @var \FilesModel $file */
 			$file = \FilesModel::findByPath($paths[$i+2]);
 
 			if ($file !== null)

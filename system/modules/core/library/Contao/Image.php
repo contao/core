@@ -883,7 +883,6 @@ class Image
 			$imageObj->setZoomLevel($imageSize->zoom);
 		}
 
-		/** @var \FilesModel $fileRecord */
 		$fileRecord = \FilesModel::findByPath($image->path);
 
 		// Set the important part
@@ -923,7 +922,6 @@ class Image
 
 		try
 		{
-			/** @var Image $imageObj */
 			$imageObj = static::create($image, array($width, $height, $mode));
 			$imageObj->setTargetPath($target);
 			$imageObj->setForceOverride($force);

@@ -125,12 +125,11 @@ class BackendFile extends \Backend
 			}
 		}
 
-		/**
-		 * @var \FileSelector $class
-		 * @var \FileSelector $objFileTree
-		 */
-		$class = $GLOBALS['BE_FFL']['fileSelector'];
-		$objFileTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
+		/** @var \FileSelector $strClass */
+		$strClass = $GLOBALS['BE_FFL']['fileSelector'];
+
+		/** @var \FileSelector $objFileTree */
+		$objFileTree = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
 
 		$objTemplate->main = $objFileTree->generate();
 		$objTemplate->theme = \Backend::getTheme();

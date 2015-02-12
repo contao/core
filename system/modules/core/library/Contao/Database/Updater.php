@@ -827,7 +827,6 @@ class Updater extends \Controller
 			// Path to UUID
 			else
 			{
-				/** @var \FilesModel $objFile */
 				$objFile = \FilesModel::findByPath($objHelper->value);
 
 				$objDatabase->prepare("UPDATE $table SET $field=? WHERE id=?")
@@ -882,7 +881,6 @@ class Updater extends \Controller
 				// Numeric ID to UUID
 				if ($objHelper->isNumeric)
 				{
-					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPk($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}
@@ -890,7 +888,6 @@ class Updater extends \Controller
 				// Path to UUID
 				else
 				{
-					/** @var \FilesModel $objFile */
 					$objFile = \FilesModel::findByPath($objHelper->value[$k]);
 					$arrValues[$k] = $objFile->uuid;
 				}
@@ -957,13 +954,12 @@ class Updater extends \Controller
 	/**
 	 * Create a content element
 	 *
-	 * @param \Database\Result $objElement A database result object
-	 * @param string           $strPtable  The name of the parent table
-	 * @param string           $strField   The name of the text column
+	 * @param \Database\Result|object $objElement A database result object
+	 * @param string                  $strPtable  The name of the parent table
+	 * @param string                  $strField   The name of the text column
 	 */
 	protected function createContentElement(\Database\Result $objElement, $strPtable, $strField)
 	{
-		/** @var \Database\Result|object $objElement */
 		$set = array
 		(
 			'pid'         => $objElement->id,

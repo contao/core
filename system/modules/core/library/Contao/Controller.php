@@ -123,7 +123,6 @@ abstract class Controller extends \System
 			{
 				while ($objTheme->next())
 				{
-					/** @var \ThemeModel $objTheme */
 					if ($objTheme->templates != '')
 					{
 						$arrThemeTemplates = glob(TL_ROOT . '/' . $objTheme->templates . '/' . $strPrefix . '*');
@@ -613,7 +612,7 @@ abstract class Controller extends \System
 	/**
 	 * Check whether an element is visible in the front end
 	 *
-	 * @param \Model $objElement The element model
+	 * @param \Model|\ContentModel|\ModuleModel $objElement The element model
 	 *
 	 * @return boolean True if the element is visible
 	 */
@@ -627,7 +626,7 @@ abstract class Controller extends \System
 
 		$blnReturn = true;
 
-		/** @var \ContentModel|\ModuleModel $objElement */
+		// Protected element
 		if ($objElement->protected)
 		{
 			if (!FE_USER_LOGGED_IN)
@@ -2737,7 +2736,6 @@ abstract class Controller extends \System
 		{
 			while ($objFiles->next())
 			{
-				/** @var \FilesModel $objFiles */
 				if ($file == $objFiles->path)
 				{
 					static::sendFileToBrowser($file);
@@ -2755,7 +2753,6 @@ abstract class Controller extends \System
 		// Add download links
 		while ($objFiles->next())
 		{
-			/** @var \FilesModel $objFiles */
 			if ($objFiles->type == 'file')
 			{
 				if (!in_array($objFiles->extension, $allowedDownload) || !is_file(TL_ROOT . '/' . $objFiles->path))

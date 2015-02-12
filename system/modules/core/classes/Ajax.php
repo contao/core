@@ -211,12 +211,11 @@ class Ajax extends \Backend
 			// Load nodes of the page tree
 			case 'loadPagetree':
 				$strField = $dc->field = \Input::post('name');
+
+				/** @var \PageSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
-				/**
-				 * @var \PageSelector $strClass
-				 * @var \PageSelector $objWidget
-				 */
+				/** @var \PageSelector $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
@@ -225,12 +224,11 @@ class Ajax extends \Backend
 			// Load nodes of the file tree
 			case 'loadFiletree':
 				$strField = $dc->field = \Input::post('name');
+
+				/** @var \FileSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
-				/**
-				 * @var \PageSelector $strClass
-				 * @var \PageSelector $objWidget
-				 */
+				/** @var \FileSelector $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
@@ -328,11 +326,10 @@ class Ajax extends \Backend
 					$varValue = serialize($varValue);
 				}
 
-				/**
-				 * @var \FileTree|\PageTree $strClass
-				 * @var \FileTree|\PageTree $objWidget
-				 */
+				/** @var \FileTree|\PageTree $strClass */
 				$strClass = $GLOBALS['BE_FFL'][$strKey];
+
+				/** @var \FileTree|\PageTree $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
 				echo $objWidget->generate();

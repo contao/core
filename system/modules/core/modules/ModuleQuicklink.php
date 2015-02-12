@@ -94,8 +94,10 @@ class ModuleQuicklink extends \Module
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			/** @var \PageModel $objPages */
-			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
+			/** @var \PageModel $objModel */
+			$objModel = $objPages->current();
+
+			$arrPages[$objPages->id] = $objModel->loadDetails()->row(); // see #3765
 		}
 
 		$items = array();

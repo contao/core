@@ -21,13 +21,13 @@ class PageForward extends \Frontend
 
 	/**
 	 * Redirect to an internal page
-	 * @param object
+	 * @param \PageModel $objPage
 	 */
 	public function generate($objPage)
 	{
-		/** @var \PageModel $objPage */
 		if ($objPage->jumpTo)
 		{
+			/** @var \PageModel $objNextPage */
 			$objNextPage = $objPage->getRelated('jumpTo');
 		}
 		else
@@ -48,7 +48,6 @@ class PageForward extends \Frontend
 		// Check the target page language (see #4706)
 		if (\Config::get('addLanguageToUrl'))
 		{
-			/** @var \PageModel $objNextPage */
 			$objNextPage->loadDetails(); // see #3983
 			$strForceLang = $objNextPage->language;
 		}
