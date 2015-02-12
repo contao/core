@@ -370,10 +370,10 @@ abstract class ModuleNews extends \Module
 	/**
 	 * Generate a link and return it as string
 	 *
-	 * @param string  $strLink
-	 * @param object  $objArticle
-	 * @param boolean $blnAddArchive
-	 * @param boolean $blnIsReadMore
+	 * @param string     $strLink
+	 * @param \NewsModel $objArticle
+	 * @param boolean    $blnAddArchive
+	 * @param boolean    $blnIsReadMore
 	 *
 	 * @return string
 	 */

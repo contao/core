@@ -231,14 +231,13 @@ class PageRegular extends \Frontend
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
-		if ($objLayout === null)
+		if (null === $objLayout)
 		{
 			header('HTTP/1.1 501 Not Implemented');
 			$this->log('Could not find layout ID "' . $intId . '"', __METHOD__, TL_ERROR);
 			die_nicely('be_no_layout', 'No layout specified');
 		}
 
-		/** @var \LayoutModel $objLayout */
 		$objPage->hasJQuery = $objLayout->addJQuery;
 		$objPage->hasMooTools = $objLayout->addMooTools;
 		$objPage->isMobile = $blnMobile;

@@ -36,7 +36,7 @@ namespace Contao;
  * @property integer $jumpTo
  * @property boolean $redirectBack
  * @property string  $cols
- * @property string  $editable
+ * @property array   $editable
  * @property string  $memberTpl
  * @property boolean $tableless
  * @property integer $form

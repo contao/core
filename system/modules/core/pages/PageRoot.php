@@ -32,14 +32,13 @@ class PageRoot extends \Frontend
 		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
 
 		// No published pages yet
-		if ($objNextPage === null)
+		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
 			die_nicely('be_no_active', 'No active pages found');
 		}
 
-		/** @var \PageModel $objNextPage */
 		if (!$blnReturn)
 		{
 			/** @var \PageModel $objPage */

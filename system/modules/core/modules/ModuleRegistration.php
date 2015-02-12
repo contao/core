@@ -14,8 +14,6 @@ namespace Contao;
 /**
  * Front end module "registration".
  *
- * @property array $editable
- *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleRegistration extends \Module

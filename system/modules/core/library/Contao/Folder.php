@@ -340,7 +340,7 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
-		/** @var \RecursiveDirectoryIterator $it */
+		/** @var \RecursiveDirectoryIterator[] $it */
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
 				TL_ROOT . '/' . $this->strFolder,
@@ -348,14 +348,12 @@ class Folder extends \System
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
-		while ($it->valid())
+		foreach ($it as $i)
 		{
-			if ($it->getFilename() != '.DS_Store')
+			if ($i->getFilename() != '.DS_Store')
 			{
-				$arrFiles[] = $it->getSubPathname();
+				$arrFiles[] = str_replace(TL_ROOT . '/' . $this->strFolder . '/', '', $i->getPathname());
 			}
-
-			$it->next();
 		}
 
 		return md5(implode('-', $arrFiles));

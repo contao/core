@@ -3174,7 +3174,7 @@ abstract class Controller extends \System
 	/**
 	 * Print an article as PDF and stream it to the browser
 	 *
-	 * @param object $objArticle An article object
+	 * @param \ModuleModel $objArticle An article object
 	 *
 	 * @deprecated Use ModuleArticle->generatePdf() instead
 	 */

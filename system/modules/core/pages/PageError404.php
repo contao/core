@@ -69,11 +69,11 @@ class PageError404 extends \Frontend
 			}
 		}
 
-		/** @var \PageModel $obj404 */
+		// Look for a 404 page
 		$obj404 = \PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj404 === null)
+		if (null === $obj404)
 		{
 			header('HTTP/1.1 404 Not Found');
 			die_nicely('be_no_page', 'Page not found');

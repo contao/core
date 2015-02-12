@@ -39,11 +39,11 @@ class PageError403 extends \Frontend
 			$objRootPage = \PageModel::findPublishedById(is_integer($objRootPage) ? $objRootPage : $objRootPage->id);
 		}
 
-		/** @var \PageModel $obj403 */
+		// Look for a 403 page
 		$obj403 = \PageModel::find403ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj403 === null)
+		if (null === $obj403)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			die_nicely('be_forbidden', 'Forbidden');
