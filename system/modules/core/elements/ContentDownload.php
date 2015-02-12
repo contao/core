@@ -28,6 +28,7 @@ class ContentDownload extends \ContentElement
 
 	/**
 	 * Return if the file does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()

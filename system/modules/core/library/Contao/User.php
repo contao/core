@@ -226,6 +226,7 @@ abstract class User extends \System
 
 	/**
 	 * Return the current record as associative array
+	 *
 	 * @return array
 	 */
 	public function getData()

@@ -28,6 +28,7 @@ class ModuleLogout extends \Module
 
 	/**
 	 * Logout the current user and redirect
+	 *
 	 * @return string
 	 */
 	public function generate()

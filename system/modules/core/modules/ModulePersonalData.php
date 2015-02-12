@@ -30,6 +30,7 @@ class ModulePersonalData extends \Module
 
 	/**
 	 * Return a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()

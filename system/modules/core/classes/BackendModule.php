@@ -89,6 +89,7 @@ abstract class BackendModule extends \Backend
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

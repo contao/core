@@ -467,6 +467,7 @@ class Versions extends \Controller
 
 	/**
 	 * Render the versions dropdown menu
+	 *
 	 * @return string
 	 */
 	public function renderDropdown()
@@ -590,6 +591,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the edit URL
+	 *
 	 * @return string
 	 */
 	protected function getEditUrl()
@@ -617,6 +619,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the username
+	 *
 	 * @return string
 	 */
 	protected function getUsername()
@@ -634,6 +637,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the user ID
+	 *
 	 * @return string
 	 */
 	protected function getUserId()

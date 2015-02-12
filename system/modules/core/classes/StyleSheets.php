@@ -1076,7 +1076,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Return a form to choose an existing style sheet and import it
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	public function importStyleSheet()
@@ -1360,7 +1362,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Export a style sheet
+	 *
 	 * @param \DataContainer $dc
+	 *
 	 * @throws \Exception
 	 */
 	public function exportStyleSheet(\DataContainer $dc)

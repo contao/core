@@ -144,6 +144,7 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Get all channels and return them as array
+	 *
 	 * @return array
 	 */
 	public function getChannels()
@@ -170,6 +171,7 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Return all newsletter templates as array
+	 *
 	 * @return array
 	 */
 	public function getNewsletterTemplates()

@@ -28,6 +28,7 @@ class ModuleQuicknav extends \Module
 
 	/**
 	 * Redirect to the selected page
+	 *
 	 * @return string
 	 */
 	public function generate()

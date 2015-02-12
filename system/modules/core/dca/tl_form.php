@@ -464,6 +464,7 @@ class tl_form extends Backend
 
 	/**
 	 * Get all tables and return them as array
+	 *
 	 * @return array
 	 */
 	public function getAllTables()

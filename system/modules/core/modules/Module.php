@@ -250,6 +250,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Return the model
+	 *
 	 * @return \Model
 	 */
 	public function getModel()
@@ -260,6 +261,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

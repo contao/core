@@ -34,6 +34,7 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function generate()

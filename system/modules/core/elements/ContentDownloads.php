@@ -34,6 +34,7 @@ class ContentDownloads extends \ContentElement
 
 	/**
 	 * Return if there are no files
+	 *
 	 * @return string
 	 */
 	public function generate()

@@ -193,7 +193,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
+	 *
 	 * @param \PageModel $objPage
+	 *
 	 * @return \LayoutModel
 	 */
 	protected function getPageLayout($objPage)

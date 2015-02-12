@@ -49,6 +49,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was an error
+	 *
 	 * @return boolean
 	 */
 	public function hasError()
@@ -59,6 +60,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was a resized image
+	 *
 	 * @return boolean
 	 */
 	public function hasResized()
@@ -180,6 +182,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Generate the markup for the default uploader
+	 *
 	 * @return string
 	 */
 	public function generateMarkup()
@@ -211,6 +214,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Get the files from the global $_FILES array
+	 *
 	 * @return array
 	 */
 	protected function getFilesFromGlobal()
@@ -241,6 +245,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return the maximum upload file size in bytes
+	 *
 	 * @return string
 	 */
 	protected function getMaximumUploadSize()

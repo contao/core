@@ -21,6 +21,7 @@ class Theme extends \Backend
 
 	/**
 	 * Import a theme
+	 *
 	 * @return string
 	 */
 	public function importTheme()

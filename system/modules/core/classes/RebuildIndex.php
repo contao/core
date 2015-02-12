@@ -21,6 +21,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -31,6 +32,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()

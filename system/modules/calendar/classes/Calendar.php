@@ -538,6 +538,7 @@ class Calendar extends \Frontend
 
 	/**
 	 * Return the names of the existing feeds so they are not removed
+	 *
 	 * @return array
 	 */
 	public function purgeOldFeeds()

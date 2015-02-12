@@ -111,6 +111,7 @@ class FrontendCron extends \Frontend
 
 	/**
 	 * Check whether the last script execution was less than a minute ago
+	 *
 	 * @return boolean
 	 */
 	protected function hasToWait()

@@ -34,6 +34,7 @@ class ModuleArticlenav extends \Module
 
 	/**
 	 * Do not display the module if there are no articles
+	 *
 	 * @return string
 	 */
 	public function generate()

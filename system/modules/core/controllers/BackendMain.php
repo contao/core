@@ -138,6 +138,7 @@ class BackendMain extends \Backend
 
 	/**
 	 * Add the welcome screen
+	 *
 	 * @return string
 	 */
 	protected function welcomeScreen()

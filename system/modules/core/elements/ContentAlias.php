@@ -21,6 +21,7 @@ class ContentAlias extends \ContentElement
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

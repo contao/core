@@ -34,6 +34,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Check the source folder
+	 *
 	 * @return string
 	 */
 	public function generate()

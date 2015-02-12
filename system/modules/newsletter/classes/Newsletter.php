@@ -412,6 +412,7 @@ class Newsletter extends \Backend
 
 	/**
 	 * Return a form to choose a CSV file and import it
+	 *
 	 * @return string
 	 */
 	public function importRecipients()

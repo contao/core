@@ -63,6 +63,7 @@ class Form extends \Hybrid
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -86,6 +87,7 @@ class Form extends \Hybrid
 
 	/**
 	 * Generate the form
+	 *
 	 * @return string
 	 */
 	protected function compile()
@@ -540,6 +542,7 @@ class Form extends \Hybrid
 
 	/**
 	 * Get the maximum file size that is allowed for file uploads
+	 *
 	 * @return integer
 	 */
 	protected function getMaxFileSize()

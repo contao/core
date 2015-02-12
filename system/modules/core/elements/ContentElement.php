@@ -234,6 +234,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

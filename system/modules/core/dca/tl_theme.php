@@ -374,6 +374,7 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the theme store link
+	 *
 	 * @return string
 	 */
 	public function themeStore()

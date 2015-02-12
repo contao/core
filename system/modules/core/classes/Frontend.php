@@ -52,6 +52,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Split the current request into fragments, strip the URL suffix, recreate the $_GET array and return the page ID
+	 *
 	 * @return mixed
 	 */
 	public static function getPageIdFromUrl()
@@ -276,6 +277,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Return the root page ID (backwards compatibility)
+	 *
 	 * @return integer
 	 */
 	public static function getRootIdFromUrl()
@@ -286,6 +288,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Try to find a root page based on language and URL
+	 *
 	 * @return \PageModel
 	 */
 	public static function getRootPageFromUrl()
@@ -627,6 +630,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Return the cron timeout in seconds
+	 *
 	 * @return integer
 	 */
 	public static function getCronTimeout()

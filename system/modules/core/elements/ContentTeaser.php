@@ -40,6 +40,7 @@ class ContentTeaser extends \ContentElement
 
 	/**
 	 * Check whether the target page and the article are published
+	 *
 	 * @return string
 	 */
 	public function generate()

@@ -34,6 +34,7 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -126,8 +127,11 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Create links and remember pages that have been processed
+	 *
 	 * @param \FaqModel $objFaq
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	protected function generateFaqLink($objFaq)

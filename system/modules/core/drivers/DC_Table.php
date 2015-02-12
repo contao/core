@@ -15,6 +15,7 @@ namespace Contao;
  * Provide methods to modify the database.
  *
  * @author Leo Feyer <https://github.com/leofeyer>
+ * @author Andreas Schempp <https://github.com/schempp>
  */
 class DC_Table extends \DataContainer implements \listable, \editable
 {
@@ -306,6 +307,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of a particular table
+	 *
 	 * @return string
 	 */
 	public function showAll()
@@ -388,6 +390,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return all non-excluded fields of a record as HTML table
+	 *
 	 * @return string
 	 */
 	public function show()
@@ -2532,8 +2535,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to override all records that are currently shown
+	 *
 	 * @return string
-	 * @author based on a patch by Andreas Schempp
 	 */
 	public function overrideAll()
 	{
@@ -2983,6 +2986,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()
@@ -3193,6 +3197,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of the current table as tree and return them as HTML string
+	 *
 	 * @return string
 	 */
 	protected function treeView()
@@ -3801,6 +3806,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
  	 * Show header of the parent table and list all records of the current table
+	 *
 	 * @return string
 	 */
 	protected function parentView()
@@ -4304,6 +4310,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of the current table and return them as HTML string
+	 *
 	 * @return string
 	 */
 	protected function listView()
@@ -4723,6 +4730,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Build the sort panel and return it as string
+	 *
 	 * @return string
 	 */
 	protected function panel()
@@ -4837,6 +4845,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a search form that allows to search results using regular expressions
+	 *
 	 * @return string
 	 */
 	protected function searchMenu()
@@ -4935,6 +4944,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a select menu that allows to sort results by a particular field
+	 *
 	 * @return string
 	 */
 	protected function sortMenu()
@@ -5572,6 +5582,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a pagination menu to browse results
+	 *
 	 * @return string
 	 */
 	protected function paginationMenu()

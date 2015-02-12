@@ -495,6 +495,7 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Return all mail templates as array
+	 *
 	 * @return array
 	 */
 	public function getMailTemplates()

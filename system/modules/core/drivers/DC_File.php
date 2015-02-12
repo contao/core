@@ -60,6 +60,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function create()
@@ -70,6 +71,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function cut()
@@ -80,6 +82,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function copy()
@@ -90,6 +93,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function move()
@@ -100,6 +104,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Auto-generate a form to edit the local configuration file
+	 *
 	 * @return string
 	 */
 	public function edit()
@@ -491,6 +496,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()

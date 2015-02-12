@@ -461,6 +461,7 @@ class tl_member extends Backend
 
 	/**
 	 * Filter disabled groups
+	 *
 	 * @return array
 	 */
 	public function getActiveGroups()

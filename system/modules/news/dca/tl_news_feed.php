@@ -402,6 +402,7 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Return the IDs of the allowed news archives as array
+	 *
 	 * @return array
 	 */
 	public function getAllowedArchives()

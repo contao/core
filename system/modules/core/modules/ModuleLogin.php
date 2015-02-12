@@ -28,6 +28,7 @@ class ModuleLogin extends \Module
 
 	/**
 	 * Display a login form
+	 *
 	 * @return string
 	 */
 	public function generate()

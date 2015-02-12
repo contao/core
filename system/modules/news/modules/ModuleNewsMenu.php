@@ -34,6 +34,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -283,6 +284,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Return the week days and labels as array
+	 *
 	 * @return array
 	 */
 	protected function compileDays()

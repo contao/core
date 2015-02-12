@@ -40,6 +40,7 @@ class ModuleCalendar extends \Events
 
 	/**
 	 * Do not show the module if no calendar has been selected
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -162,6 +163,7 @@ class ModuleCalendar extends \Events
 
 	/**
 	 * Return the week days and labels as array
+	 *
 	 * @return array
 	 */
 	protected function compileDays()
@@ -200,6 +202,7 @@ class ModuleCalendar extends \Events
 
 	/**
 	 * Return all weeks of the current month as array
+	 *
 	 * @return array
 	 */
 	protected function compileWeeks()

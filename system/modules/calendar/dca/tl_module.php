@@ -168,6 +168,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Get all calendars and return them as array
+	 *
 	 * @return array
 	 */
 	public function getCalendars()
@@ -194,6 +195,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Get all event reader modules and return them as array
+	 *
 	 * @return array
 	 */
 	public function getReaderModules()
@@ -235,6 +237,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Hide the start day drop-down if not applicable
+	 *
 	 * @return string
 	 */
 	public function hideStartDay()
@@ -264,6 +267,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
+	 *
 	 * @return array
 	 */
 	public function getEventTemplates()
@@ -274,6 +278,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
+	 *
 	 * @return array
 	 */
 	public function getCalendarTemplates()

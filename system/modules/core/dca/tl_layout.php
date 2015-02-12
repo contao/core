@@ -565,6 +565,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all news archives with XML feeds
+	 *
 	 * @return array
 	 */
 	public function getNewsfeeds()
@@ -594,6 +595,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all calendars with XML feeds
+	 *
 	 * @return array
 	 */
 	public function getCalendarfeeds()
@@ -623,6 +625,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all page templates as array
+	 *
 	 * @return array
 	 */
 	public function getPageTemplates()
@@ -633,6 +636,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all MooTools templates as array
+	 *
 	 * @return array
 	 */
 	public function getMooToolsTemplates()
@@ -643,6 +647,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all jQuery templates as array
+	 *
 	 * @return array
 	 */
 	public function getJqueryTemplates()
@@ -653,6 +658,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all analytics templates as array
+	 *
 	 * @return array
 	 */
 	public function getAnalyticsTemplates()

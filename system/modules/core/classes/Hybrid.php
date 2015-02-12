@@ -182,6 +182,7 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Return the model
+	 *
 	 * @return \Model
 	 */
 	public function getModel()
@@ -192,6 +193,7 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Return the parent object
+	 *
 	 * @return object
 	 */
 	public function getParent()
@@ -202,6 +204,7 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

@@ -238,7 +238,9 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Return the meta fields of a news article as array
+	 *
 	 * @param \NewsModel $objArticle
+	 *
 	 * @return array
 	 */
 	protected function getMetaFields($objArticle)

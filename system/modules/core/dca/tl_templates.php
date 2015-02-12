@@ -198,6 +198,7 @@ class tl_templates extends Backend
 
 	/**
 	 * Create a new template
+	 *
 	 * @return string
 	 */
 	public function addNewTemplate()

@@ -28,6 +28,7 @@ class ContentYouTube extends \ContentElement
 
 	/**
 	 * Extend the parent method
+	 *
 	 * @return string
 	 */
 	public function generate()

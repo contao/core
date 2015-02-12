@@ -648,6 +648,7 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return all form field templates as array
+	 *
 	 * @return array
 	 */
 	public function getFormFieldTemplates()

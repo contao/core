@@ -28,6 +28,7 @@ class ModuleNewsArchive extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()

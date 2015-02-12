@@ -28,6 +28,7 @@ class ModuleUnsubscribe extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()

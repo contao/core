@@ -28,6 +28,7 @@ class ContentImage extends \ContentElement
 
 	/**
 	 * Return if the image does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()

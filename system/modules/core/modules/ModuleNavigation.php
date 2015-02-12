@@ -28,6 +28,7 @@ class ModuleNavigation extends \Module
 
 	/**
 	 * Do not display the module if there are no menu items
+	 *
 	 * @return string
 	 */
 	public function generate()

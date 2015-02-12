@@ -993,6 +993,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all content elements as array
+	 *
 	 * @return array
 	 */
 	public function getContentElements()
@@ -1328,6 +1329,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all forms and return them as array
+	 *
 	 * @return array
 	 */
 	public function getForms()
@@ -1386,6 +1388,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all gallery templates as array
+	 *
 	 * @return array
 	 */
 	public function getGalleryTemplates()
@@ -1396,6 +1399,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all content element templates as array
+	 *
 	 * @return array
 	 */
 	public function getElementTemplates()
@@ -1553,6 +1557,7 @@ class tl_content extends Backend
 
 	/**
 	 * Add a link to the list items import wizard
+	 *
 	 * @return string
 	 */
 	public function listImportWizard()
@@ -1563,6 +1568,7 @@ class tl_content extends Backend
 
 	/**
 	 * Add a link to the table items import wizard
+	 *
 	 * @return string
 	 */
 	public function tableImportWizard()

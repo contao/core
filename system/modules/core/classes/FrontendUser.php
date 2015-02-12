@@ -148,6 +148,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Authenticate a user
+	 *
 	 * @return boolean
 	 */
 	public function authenticate()
@@ -199,6 +200,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Add the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function login()
@@ -228,6 +230,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Remove the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function logout()

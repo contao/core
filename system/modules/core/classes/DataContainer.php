@@ -727,6 +727,7 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Compile global buttons from the table configuration array and return them as HTML
+	 *
 	 * @return string
 	 */
 	protected function generateGlobalButtons()
@@ -789,13 +790,16 @@ abstract class DataContainer extends \Backend
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	abstract public function getPalette();
 
 	/**
 	 * Save the current value
+	 *
 	 * @param mixed $varValue
+	 *
 	 * @throws \Exception
 	 */
 	abstract protected function save($varValue);

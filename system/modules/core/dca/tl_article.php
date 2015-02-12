@@ -695,6 +695,7 @@ class tl_article extends Backend
 
 	/**
 	 * Return all module templates as array
+	 *
 	 * @return array
 	 */
 	public function getArticleTemplates()

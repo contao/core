@@ -85,6 +85,7 @@ class Upload extends \Widget implements \uploadable
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

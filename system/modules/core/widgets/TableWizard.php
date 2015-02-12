@@ -74,6 +74,7 @@ class TableWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -232,7 +233,9 @@ class TableWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
+	 *
 	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function importTable(\DataContainer $dc)

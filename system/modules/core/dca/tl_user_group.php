@@ -278,6 +278,7 @@ class tl_user_group extends Backend
 
 	/**
 	 * Return all modules except profile modules
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -299,6 +300,7 @@ class tl_user_group extends Backend
 
 	/**
 	 * Return all excluded fields as HTML drop down menu
+	 *
 	 * @return array
 	 */
 	public function getExcludedFields()

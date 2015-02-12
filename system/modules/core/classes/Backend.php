@@ -81,6 +81,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return the TinyMCE language
+	 *
 	 * @return string
 	 */
 	public static function getTinyMceLanguage()
@@ -194,6 +195,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return a list of TinyMCE templates as JSON string
+	 *
 	 * @return string
 	 */
 	public static function getTinyTemplates()
@@ -240,6 +242,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Handle "runonce" files
+	 *
 	 * @throws \Exception
 	 */
 	protected function handleRunOnce()
@@ -947,6 +950,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all allowed pages and return them as string
+	 *
 	 * @return string
 	 */
 	public function createPageList()

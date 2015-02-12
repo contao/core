@@ -30,6 +30,7 @@ class ModuleFlash extends \Module
 
 	/**
 	 * Extend the parent method
+	 *
 	 * @return string
 	 */
 	public function generate()

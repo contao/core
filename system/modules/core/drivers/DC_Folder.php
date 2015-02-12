@@ -239,6 +239,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all files and folders of the file system
+	 *
 	 * @return string
 	 */
 	public function showAll()
@@ -423,6 +424,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Automatically switch to showAll
+	 *
 	 * @return string
 	 */
 	public function show()
@@ -845,6 +847,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Automatically switch to showAll
+	 *
 	 * @return string
 	 */
 	public function undo()
@@ -1028,6 +1031,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to rename a file or folder
+	 *
 	 * @return string
 	 */
 	public function edit()
@@ -1338,6 +1342,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to edit all records that are currently shown
+	 *
 	 * @return string
 	 */
 	public function editAll()
@@ -1651,6 +1656,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Load the source editor
+	 *
 	 * @return string
 	 */
 	public function source()
@@ -2078,6 +2084,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Synchronize the file system with the database
+	 *
 	 * @return string
 	 */
 	public function sync()
@@ -2178,6 +2185,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()

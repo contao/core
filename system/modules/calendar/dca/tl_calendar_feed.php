@@ -402,6 +402,7 @@ class tl_calendar_feed extends Backend
 
 	/**
 	 * Return the IDs of the allowed calendars as array
+	 *
 	 * @return array
 	 */
 	public function getAllowedCalendars()
