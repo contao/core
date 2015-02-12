@@ -515,6 +515,8 @@ abstract class Backend extends \Controller
 	 * Add a breadcrumb menu to the page tree
 	 *
 	 * @param string
+	 *
+	 * @throws \RuntimeException
 	 */
 	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{
@@ -523,7 +525,13 @@ abstract class Backend extends \Controller
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$objSession->set($strKey, \Input::get('node'));
+			// Check the path (thanks to Arnaud Buchoux)
+			if (\Validator::isInsecurePath(\Input::get('node', true)))
+			{
+				throw new \RuntimeException('Insecure path ' . \Input::get('node', true));
+			}
+
+			$objSession->set($strKey, \Input::get('node', true));
 			\Controller::redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
 		}
 
@@ -532,6 +540,12 @@ abstract class Backend extends \Controller
 		if ($intNode < 1)
 		{
 			return;
+		}
+
+		// Check the path (thanks to Arnaud Buchoux)
+		if (\Validator::isInsecurePath($intNode))
+		{
+			throw new \RuntimeException('Insecure path ' . $intNode);
 		}
 
 		$arrIds   = array();
@@ -653,6 +667,8 @@ abstract class Backend extends \Controller
 	 * Add a breadcrumb menu to the file tree
 	 *
 	 * @param string
+	 *
+	 * @throws \RuntimeException
 	 */
 	public static function addFilesBreadcrumb($strKey='tl_files_node')
 	{
@@ -661,6 +677,12 @@ abstract class Backend extends \Controller
 		// Set a new node
 		if (isset($_GET['node']))
 		{
+			// Check the path (thanks to Arnaud Buchoux)
+			if (\Validator::isInsecurePath(\Input::get('node', true)))
+			{
+				throw new \RuntimeException('Insecure path ' . \Input::get('node', true));
+			}
+
 			$objSession->set($strKey, \Input::get('node', true));
 			\Controller::redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
@@ -670,6 +692,12 @@ abstract class Backend extends \Controller
 		if ($strNode == '')
 		{
 			return;
+		}
+
+		// Check the path (thanks to Arnaud Buchoux)
+		if (\Validator::isInsecurePath($strNode))
+		{
+			throw new \RuntimeException('Insecure path ' . $strNode);
 		}
 
 		// Currently selected folder does not exist

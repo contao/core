@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tl_module.cssID.1">
         <source>Here you can set an ID and one or more classes.</source>
-        <target>Вы можете ввести CSS ID (ID атрибута) и один или несколько CSS классов (атрибутов класса).</target>
+        <target>Вы можете ввести ID одного или нескольких классов.</target>
       </trans-unit>
       <trans-unit id="tl_module.space.0">
         <source>Space in front and after</source>
