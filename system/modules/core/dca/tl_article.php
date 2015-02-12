@@ -762,6 +762,7 @@ class tl_article extends Backend
 	 * @param string $title
 	 * @param string $icon
 	 * @param string $attributes
+	 * @param string $table
 	 *
 	 * @return string
 	 */

@@ -1334,6 +1334,7 @@ class tl_page extends Backend
 	 * @param string $title
 	 * @param string $icon
 	 * @param string $attributes
+	 * @param string $table
 	 *
 	 * @return string
 	 */
@@ -1357,6 +1358,7 @@ class tl_page extends Backend
 	 * @param string $title
 	 * @param string $icon
 	 * @param string $attributes
+	 * @param string $table
 	 *
 	 * @return string
 	 */

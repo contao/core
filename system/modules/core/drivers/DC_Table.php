@@ -1717,7 +1717,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 *
 	 * @return string
 	 */
-	public function edit($intID=null, $ajaxId=null)
+	public function edit($intId=null, $ajaxId=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
@@ -1725,9 +1725,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		if ($intID != '')
+		if ($intId != '')
 		{
-			$this->intId = $intID;
+			$this->intId = $intId;
 		}
 
 		// Get the current record
