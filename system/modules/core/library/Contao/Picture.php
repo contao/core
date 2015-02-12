@@ -51,7 +51,7 @@ class Picture
 	/**
 	 * The image size items collection
 	 *
-	 * @var array|\ImageSizeItemModel[]|\Model\Collection
+	 * @var array|\Model\Collection|\ImageSizeItemModel
 	 */
 	protected $imageSizeItems = array();
 

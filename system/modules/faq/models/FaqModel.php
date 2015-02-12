@@ -37,6 +37,9 @@ namespace Contao;
  * @property boolean $published
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneBySorting()
  * @method static $this findOneByTstamp()
@@ -57,26 +60,31 @@ namespace Contao;
  * @method static $this findOneByEnclosure()
  * @method static $this findOneByNoComments()
  * @method static $this findOneByPublished()
- * @method static \FaqModel[]|\Model\Collection findByPid()
- * @method static \FaqModel[]|\Model\Collection findBySorting()
- * @method static \FaqModel[]|\Model\Collection findByTstamp()
- * @method static \FaqModel[]|\Model\Collection findByQuestion()
- * @method static \FaqModel[]|\Model\Collection findByAlias()
- * @method static \FaqModel[]|\Model\Collection findByAuthor()
- * @method static \FaqModel[]|\Model\Collection findByAnswer()
- * @method static \FaqModel[]|\Model\Collection findByAddImage()
- * @method static \FaqModel[]|\Model\Collection findBySingleSRC()
- * @method static \FaqModel[]|\Model\Collection findByAlt()
- * @method static \FaqModel[]|\Model\Collection findBySize()
- * @method static \FaqModel[]|\Model\Collection findByImagemargin()
- * @method static \FaqModel[]|\Model\Collection findByImageUrl()
- * @method static \FaqModel[]|\Model\Collection findByFullsize()
- * @method static \FaqModel[]|\Model\Collection findByCaption()
- * @method static \FaqModel[]|\Model\Collection findByFloating()
- * @method static \FaqModel[]|\Model\Collection findByAddEnclosure()
- * @method static \FaqModel[]|\Model\Collection findByEnclosure()
- * @method static \FaqModel[]|\Model\Collection findByNoComments()
- * @method static \FaqModel[]|\Model\Collection findByPublished()
+ *
+ * @method static \Model\Collection|\FaqModel findByPid()
+ * @method static \Model\Collection|\FaqModel findBySorting()
+ * @method static \Model\Collection|\FaqModel findByTstamp()
+ * @method static \Model\Collection|\FaqModel findByQuestion()
+ * @method static \Model\Collection|\FaqModel findByAlias()
+ * @method static \Model\Collection|\FaqModel findByAuthor()
+ * @method static \Model\Collection|\FaqModel findByAnswer()
+ * @method static \Model\Collection|\FaqModel findByAddImage()
+ * @method static \Model\Collection|\FaqModel findBySingleSRC()
+ * @method static \Model\Collection|\FaqModel findByAlt()
+ * @method static \Model\Collection|\FaqModel findBySize()
+ * @method static \Model\Collection|\FaqModel findByImagemargin()
+ * @method static \Model\Collection|\FaqModel findByImageUrl()
+ * @method static \Model\Collection|\FaqModel findByFullsize()
+ * @method static \Model\Collection|\FaqModel findByCaption()
+ * @method static \Model\Collection|\FaqModel findByFloating()
+ * @method static \Model\Collection|\FaqModel findByAddEnclosure()
+ * @method static \Model\Collection|\FaqModel findByEnclosure()
+ * @method static \Model\Collection|\FaqModel findByNoComments()
+ * @method static \Model\Collection|\FaqModel findByPublished()
+ * @method static \Model\Collection|\FaqModel findMultipleByIds()
+ * @method static \Model\Collection|\FaqModel findBy()
+ * @method static \Model\Collection|\FaqModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countBySorting()
@@ -145,7 +153,7 @@ class FaqModel extends \Model
 	 * @param int   $intPid     The parent ID
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no FAQs
+	 * @return \Model\Collection|\FaqModel|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPid($intPid, array $arrOptions=array())
 	{
@@ -172,7 +180,7 @@ class FaqModel extends \Model
 	 * @param array $arrPids    An array of FAQ category IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no FAQs
+	 * @return \Model\Collection|\FaqModel|null A collection of models or null if there are no FAQs
 	 */
 	public static function findPublishedByPids($arrPids, array $arrOptions=array())
 	{

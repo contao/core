@@ -26,6 +26,9 @@ namespace Contao;
  * @property integer $smtpPort
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByTitle()
  * @method static $this findOneByJumpTo()
@@ -35,15 +38,20 @@ namespace Contao;
  * @method static $this findOneBySmtpPass()
  * @method static $this findOneBySmtpEnc()
  * @method static $this findOneBySmtpPort()
- * @method static \NewsletterChannelModel[]|\Model\Collection findByTstamp()
- * @method static \NewsletterChannelModel[]|\Model\Collection findByTitle()
- * @method static \NewsletterChannelModel[]|\Model\Collection findByJumpTo()
- * @method static \NewsletterChannelModel[]|\Model\Collection findByUseSMTP()
- * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpHost()
- * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpUser()
- * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpPass()
- * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpEnc()
- * @method static \NewsletterChannelModel[]|\Model\Collection findBySmtpPort()
+ *
+ * @method static \Model\Collection|\NewsletterChannelModel findByTstamp()
+ * @method static \Model\Collection|\NewsletterChannelModel findByTitle()
+ * @method static \Model\Collection|\NewsletterChannelModel findByJumpTo()
+ * @method static \Model\Collection|\NewsletterChannelModel findByUseSMTP()
+ * @method static \Model\Collection|\NewsletterChannelModel findBySmtpHost()
+ * @method static \Model\Collection|\NewsletterChannelModel findBySmtpUser()
+ * @method static \Model\Collection|\NewsletterChannelModel findBySmtpPass()
+ * @method static \Model\Collection|\NewsletterChannelModel findBySmtpEnc()
+ * @method static \Model\Collection|\NewsletterChannelModel findBySmtpPort()
+ * @method static \Model\Collection|\NewsletterChannelModel findMultipleByIds()
+ * @method static \Model\Collection|\NewsletterChannelModel findBy()
+ * @method static \Model\Collection|\NewsletterChannelModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -73,7 +81,7 @@ class NewsletterChannelModel extends \Model
 	 * @param array $arrIds     An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no newsletter channels
+	 * @return \Model\Collection|\NewsletterChannelModel|null A collection of models or null if there are no newsletter channels
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

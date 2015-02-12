@@ -84,6 +84,9 @@ namespace Contao;
  * @property string  $outputFormat
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneBySorting()
  * @method static $this findOneByTstamp()
@@ -131,53 +134,58 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \PageModel[]|\Model\Collection findByPid()
- * @method static \PageModel[]|\Model\Collection findBySorting()
- * @method static \PageModel[]|\Model\Collection findByTstamp()
- * @method static \PageModel[]|\Model\Collection findByTitle()
- * @method static \PageModel[]|\Model\Collection findByAlias()
- * @method static \PageModel[]|\Model\Collection findByType()
- * @method static \PageModel[]|\Model\Collection findByPageTitle()
- * @method static \PageModel[]|\Model\Collection findByLanguage()
- * @method static \PageModel[]|\Model\Collection findByRobots()
- * @method static \PageModel[]|\Model\Collection findByDescription()
- * @method static \PageModel[]|\Model\Collection findByRedirect()
- * @method static \PageModel[]|\Model\Collection findByJumpTo()
- * @method static \PageModel[]|\Model\Collection findByUrl()
- * @method static \PageModel[]|\Model\Collection findByTarget()
- * @method static \PageModel[]|\Model\Collection findByDns()
- * @method static \PageModel[]|\Model\Collection findByStaticFiles()
- * @method static \PageModel[]|\Model\Collection findByStaticPlugins()
- * @method static \PageModel[]|\Model\Collection findByFallback()
- * @method static \PageModel[]|\Model\Collection findByAdminEmail()
- * @method static \PageModel[]|\Model\Collection findByDateFormat()
- * @method static \PageModel[]|\Model\Collection findByTimeFormat()
- * @method static \PageModel[]|\Model\Collection findByDatimFormat()
- * @method static \PageModel[]|\Model\Collection findByCreateSitemap()
- * @method static \PageModel[]|\Model\Collection findBySitemapName()
- * @method static \PageModel[]|\Model\Collection findByUseSSL()
- * @method static \PageModel[]|\Model\Collection findByAutoforward()
- * @method static \PageModel[]|\Model\Collection findByProtected()
- * @method static \PageModel[]|\Model\Collection findByGroups()
- * @method static \PageModel[]|\Model\Collection findByIncludeLayout()
- * @method static \PageModel[]|\Model\Collection findByLayout()
- * @method static \PageModel[]|\Model\Collection findByMobileLayout()
- * @method static \PageModel[]|\Model\Collection findByIncludeCache()
- * @method static \PageModel[]|\Model\Collection findByCache()
- * @method static \PageModel[]|\Model\Collection findByIncludeChmod()
- * @method static \PageModel[]|\Model\Collection findByCuser()
- * @method static \PageModel[]|\Model\Collection findByCgroup()
- * @method static \PageModel[]|\Model\Collection findByChmod()
- * @method static \PageModel[]|\Model\Collection findByNoSearch()
- * @method static \PageModel[]|\Model\Collection findByCssClass()
- * @method static \PageModel[]|\Model\Collection findBySitemap()
- * @method static \PageModel[]|\Model\Collection findByHide()
- * @method static \PageModel[]|\Model\Collection findByGuests()
- * @method static \PageModel[]|\Model\Collection findByTabindex()
- * @method static \PageModel[]|\Model\Collection findByAccesskey()
- * @method static \PageModel[]|\Model\Collection findByPublished()
- * @method static \PageModel[]|\Model\Collection findByStart()
- * @method static \PageModel[]|\Model\Collection findByStop()
+ *
+ * @method static \Model\Collection|\PageModel findByPid()
+ * @method static \Model\Collection|\PageModel findBySorting()
+ * @method static \Model\Collection|\PageModel findByTstamp()
+ * @method static \Model\Collection|\PageModel findByTitle()
+ * @method static \Model\Collection|\PageModel findByAlias()
+ * @method static \Model\Collection|\PageModel findByType()
+ * @method static \Model\Collection|\PageModel findByPageTitle()
+ * @method static \Model\Collection|\PageModel findByLanguage()
+ * @method static \Model\Collection|\PageModel findByRobots()
+ * @method static \Model\Collection|\PageModel findByDescription()
+ * @method static \Model\Collection|\PageModel findByRedirect()
+ * @method static \Model\Collection|\PageModel findByJumpTo()
+ * @method static \Model\Collection|\PageModel findByUrl()
+ * @method static \Model\Collection|\PageModel findByTarget()
+ * @method static \Model\Collection|\PageModel findByDns()
+ * @method static \Model\Collection|\PageModel findByStaticFiles()
+ * @method static \Model\Collection|\PageModel findByStaticPlugins()
+ * @method static \Model\Collection|\PageModel findByFallback()
+ * @method static \Model\Collection|\PageModel findByAdminEmail()
+ * @method static \Model\Collection|\PageModel findByDateFormat()
+ * @method static \Model\Collection|\PageModel findByTimeFormat()
+ * @method static \Model\Collection|\PageModel findByDatimFormat()
+ * @method static \Model\Collection|\PageModel findByCreateSitemap()
+ * @method static \Model\Collection|\PageModel findBySitemapName()
+ * @method static \Model\Collection|\PageModel findByUseSSL()
+ * @method static \Model\Collection|\PageModel findByAutoforward()
+ * @method static \Model\Collection|\PageModel findByProtected()
+ * @method static \Model\Collection|\PageModel findByGroups()
+ * @method static \Model\Collection|\PageModel findByIncludeLayout()
+ * @method static \Model\Collection|\PageModel findByLayout()
+ * @method static \Model\Collection|\PageModel findByMobileLayout()
+ * @method static \Model\Collection|\PageModel findByIncludeCache()
+ * @method static \Model\Collection|\PageModel findByCache()
+ * @method static \Model\Collection|\PageModel findByIncludeChmod()
+ * @method static \Model\Collection|\PageModel findByCuser()
+ * @method static \Model\Collection|\PageModel findByCgroup()
+ * @method static \Model\Collection|\PageModel findByChmod()
+ * @method static \Model\Collection|\PageModel findByNoSearch()
+ * @method static \Model\Collection|\PageModel findByCssClass()
+ * @method static \Model\Collection|\PageModel findBySitemap()
+ * @method static \Model\Collection|\PageModel findByHide()
+ * @method static \Model\Collection|\PageModel findByGuests()
+ * @method static \Model\Collection|\PageModel findByTabindex()
+ * @method static \Model\Collection|\PageModel findByAccesskey()
+ * @method static \Model\Collection|\PageModel findByPublished()
+ * @method static \Model\Collection|\PageModel findByStart()
+ * @method static \Model\Collection|\PageModel findByStop()
+ * @method static \Model\Collection|\PageModel findMultipleByIds()
+ * @method static \Model\Collection|\PageModel findBy()
+ * @method static \Model\Collection|\PageModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countBySorting()
@@ -447,7 +455,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of Models or null if there is no matching pages
+	 * @return \Model\Collection|\PageModel|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{
@@ -492,7 +500,7 @@ class PageModel extends \Model
 	 * @param mixed $varId      The numeric ID or the alias name
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|\PageModel|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedByIdOrAlias($varId, array $arrOptions=array())
 	{
@@ -517,7 +525,7 @@ class PageModel extends \Model
 	 * @param boolean $blnShowHidden If true, hidden pages will be included
 	 * @param boolean $blnIsSitemap  If true, the sitemap settings apply
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|\PageModel|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
@@ -541,7 +549,7 @@ class PageModel extends \Model
 	 * @param integer $arrIds     An array of page IDs
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|\PageModel|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds, array $arrOptions=array())
 	{
@@ -579,7 +587,7 @@ class PageModel extends \Model
 	 * @param integer $intPid     The parent page's ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no pages
+	 * @return \Model\Collection|\PageModel|null A collection of models or null if there are no pages
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intPid, array $arrOptions=array())
 	{
@@ -634,7 +642,7 @@ class PageModel extends \Model
 	 *
 	 * @param integer $intId The page's ID
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no parent pages
+	 * @return \Model\Collection|\PageModel|null A collection of models or null if there are no parent pages
 	 */
 	public static function findParentsById($intId)
 	{

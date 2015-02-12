@@ -24,6 +24,9 @@ namespace Contao;
  * @property boolean $su
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findByHash()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
@@ -31,12 +34,17 @@ namespace Contao;
  * @method static $this findOneBySessionID()
  * @method static $this findOneByIp()
  * @method static $this findOneBySu()
- * @method static \SessionModel[]|\Model\Collection findByPid()
- * @method static \SessionModel[]|\Model\Collection findByTstamp()
- * @method static \SessionModel[]|\Model\Collection findByName()
- * @method static \SessionModel[]|\Model\Collection findBySessionID()
- * @method static \SessionModel[]|\Model\Collection findByIp()
- * @method static \SessionModel[]|\Model\Collection findBySu()
+ *
+ * @method static \Model\Collection|\SessionModel findByPid()
+ * @method static \Model\Collection|\SessionModel findByTstamp()
+ * @method static \Model\Collection|\SessionModel findByName()
+ * @method static \Model\Collection|\SessionModel findBySessionID()
+ * @method static \Model\Collection|\SessionModel findByIp()
+ * @method static \Model\Collection|\SessionModel findBySu()
+ * @method static \Model\Collection|\SessionModel findMultipleByIds()
+ * @method static \Model\Collection|\SessionModel findBy()
+ * @method static \Model\Collection|\SessionModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()

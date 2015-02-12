@@ -28,6 +28,9 @@ namespace Contao;
  * @property string  $feedName
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByTitle()
  * @method static $this findOneByAlias()
@@ -38,16 +41,21 @@ namespace Contao;
  * @method static $this findOneByMaxItems()
  * @method static $this findOneByFeedBase()
  * @method static $this findOneByDescription()
- * @method static \CalendarFeedModel[]|\Model\Collection findByTstamp()
- * @method static \CalendarFeedModel[]|\Model\Collection findByTitle()
- * @method static \CalendarFeedModel[]|\Model\Collection findByAlias()
- * @method static \CalendarFeedModel[]|\Model\Collection findByLanguage()
- * @method static \CalendarFeedModel[]|\Model\Collection findByCalendars()
- * @method static \CalendarFeedModel[]|\Model\Collection findByFormat()
- * @method static \CalendarFeedModel[]|\Model\Collection findBySource()
- * @method static \CalendarFeedModel[]|\Model\Collection findByMaxItems()
- * @method static \CalendarFeedModel[]|\Model\Collection findByFeedBase()
- * @method static \CalendarFeedModel[]|\Model\Collection findByDescription()
+ *
+ * @method static \Model\Collection|\CalendarFeedModel findByTstamp()
+ * @method static \Model\Collection|\CalendarFeedModel findByTitle()
+ * @method static \Model\Collection|\CalendarFeedModel findByAlias()
+ * @method static \Model\Collection|\CalendarFeedModel findByLanguage()
+ * @method static \Model\Collection|\CalendarFeedModel findByCalendars()
+ * @method static \Model\Collection|\CalendarFeedModel findByFormat()
+ * @method static \Model\Collection|\CalendarFeedModel findBySource()
+ * @method static \Model\Collection|\CalendarFeedModel findByMaxItems()
+ * @method static \Model\Collection|\CalendarFeedModel findByFeedBase()
+ * @method static \Model\Collection|\CalendarFeedModel findByDescription()
+ * @method static \Model\Collection|\CalendarFeedModel findMultipleByIds()
+ * @method static \Model\Collection|\CalendarFeedModel findBy()
+ * @method static \Model\Collection|\CalendarFeedModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -78,7 +86,7 @@ class CalendarFeedModel extends \Model
 	 * @param integer $intId      The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if the calendar is not part of a feed
+	 * @return \Model\Collection|\CalendarFeedModel|null A collection of models or null if the calendar is not part of a feed
 	 */
 	public static function findByCalendar($intId, array $arrOptions=array())
 	{
@@ -94,7 +102,7 @@ class CalendarFeedModel extends \Model
 	 * @param array $arrIds     An array of calendar feed IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no feeds
+	 * @return \Model\Collection|\CalendarFeedModel|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

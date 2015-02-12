@@ -26,6 +26,9 @@ namespace Contao;
  * @property string  $token
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByEmail()
@@ -35,15 +38,20 @@ namespace Contao;
  * @method static $this findOneByConfirmed()
  * @method static $this findOneByIp()
  * @method static $this findOneByToken()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByPid()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByTstamp()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByEmail()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByActive()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findBySource()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByAddedOn()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByConfirmed()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByIp()
- * @method static \NewsletterRecipientsModel[]|\Model\Collection findByToken()
+ *
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByPid()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByTstamp()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByEmail()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByActive()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findBySource()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByAddedOn()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByConfirmed()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByIp()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findByToken()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findMultipleByIds()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findBy()
+ * @method static \Model\Collection|\NewsletterRecipientsModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -74,7 +82,7 @@ class NewsletterRecipientsModel extends \Model
 	 * @param array  $arrPids    An array of newsletter channel IDs
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no recipients
+	 * @return \Model\Collection|\NewsletterRecipientsModel|null A collection of models or null if there are no recipients
 	 */
 	public static function findByEmailAndPids($strEmail, $arrPids, array $arrOptions=array())
 	{

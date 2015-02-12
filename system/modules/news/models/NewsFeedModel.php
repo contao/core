@@ -28,6 +28,9 @@ namespace Contao;
  * @property string  $feedName
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByTitle()
  * @method static $this findOneByAlias()
@@ -38,16 +41,21 @@ namespace Contao;
  * @method static $this findOneByMaxItems()
  * @method static $this findOneByFeedBase()
  * @method static $this findOneByDescription()
- * @method static \NewsFeedModel[]|\Model\Collection findByTstamp()
- * @method static \NewsFeedModel[]|\Model\Collection findByTitle()
- * @method static \NewsFeedModel[]|\Model\Collection findByAlias()
- * @method static \NewsFeedModel[]|\Model\Collection findByLanguage()
- * @method static \NewsFeedModel[]|\Model\Collection findByArchives()
- * @method static \NewsFeedModel[]|\Model\Collection findByFormat()
- * @method static \NewsFeedModel[]|\Model\Collection findBySource()
- * @method static \NewsFeedModel[]|\Model\Collection findByMaxItems()
- * @method static \NewsFeedModel[]|\Model\Collection findByFeedBase()
- * @method static \NewsFeedModel[]|\Model\Collection findByDescription()
+ *
+ * @method static \Model\Collection|\NewsFeedModel findByTstamp()
+ * @method static \Model\Collection|\NewsFeedModel findByTitle()
+ * @method static \Model\Collection|\NewsFeedModel findByAlias()
+ * @method static \Model\Collection|\NewsFeedModel findByLanguage()
+ * @method static \Model\Collection|\NewsFeedModel findByArchives()
+ * @method static \Model\Collection|\NewsFeedModel findByFormat()
+ * @method static \Model\Collection|\NewsFeedModel findBySource()
+ * @method static \Model\Collection|\NewsFeedModel findByMaxItems()
+ * @method static \Model\Collection|\NewsFeedModel findByFeedBase()
+ * @method static \Model\Collection|\NewsFeedModel findByDescription()
+ * @method static \Model\Collection|\NewsFeedModel findMultipleByIds()
+ * @method static \Model\Collection|\NewsFeedModel findBy()
+ * @method static \Model\Collection|\NewsFeedModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByTitle()
@@ -78,7 +86,7 @@ class NewsFeedModel extends \Model
 	 * @param integer $intId      The news archive ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if the news archive is not part of a feed
+	 * @return \Model\Collection|\NewsFeedModel|null A collection of models or null if the news archive is not part of a feed
 	 */
 	public static function findByArchive($intId, array $arrOptions=array())
 	{
@@ -94,7 +102,7 @@ class NewsFeedModel extends \Model
 	 * @param array $arrIds     An array of news feed IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no feeds
+	 * @return \Model\Collection|\NewsFeedModel|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

@@ -34,6 +34,9 @@ namespace Contao;
  * @property integer $tstamp3
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findByName()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
@@ -43,14 +46,19 @@ namespace Contao;
  * @method static $this findOneByMedia()
  * @method static $this findOneByMediaQuery()
  * @method static $this findOneByVars()
- * @method static \StyleSheetModel[]|\Model\Collection findByPid()
- * @method static \StyleSheetModel[]|\Model\Collection findByTstamp()
- * @method static \StyleSheetModel[]|\Model\Collection findByDisablePie()
- * @method static \StyleSheetModel[]|\Model\Collection findByEmbedImages()
- * @method static \StyleSheetModel[]|\Model\Collection findByCc()
- * @method static \StyleSheetModel[]|\Model\Collection findByMedia()
- * @method static \StyleSheetModel[]|\Model\Collection findByMediaQuery()
- * @method static \StyleSheetModel[]|\Model\Collection findByVars()
+ *
+ * @method static \Model\Collection|\StyleSheetModel findByPid()
+ * @method static \Model\Collection|\StyleSheetModel findByTstamp()
+ * @method static \Model\Collection|\StyleSheetModel findByDisablePie()
+ * @method static \Model\Collection|\StyleSheetModel findByEmbedImages()
+ * @method static \Model\Collection|\StyleSheetModel findByCc()
+ * @method static \Model\Collection|\StyleSheetModel findByMedia()
+ * @method static \Model\Collection|\StyleSheetModel findByMediaQuery()
+ * @method static \Model\Collection|\StyleSheetModel findByVars()
+ * @method static \Model\Collection|\StyleSheetModel findMultipleByIds()
+ * @method static \Model\Collection|\StyleSheetModel findBy()
+ * @method static \Model\Collection|\StyleSheetModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -79,7 +87,7 @@ class StyleSheetModel extends \Model
 	 *
 	 * @param array $arrIds An array of style sheet IDs
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no style sheets
+	 * @return \Model\Collection|\StyleSheetModel|null A collection of models or null if there are no style sheets
 	 */
 	public static function findByIds($arrIds)
 	{

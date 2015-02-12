@@ -54,6 +54,9 @@ namespace Contao;
  * @property string  $stop
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByTitle()
@@ -91,43 +94,48 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \CalendarEventsModel[]|\Model\Collection findByPid()
- * @method static \CalendarEventsModel[]|\Model\Collection findByTstamp()
- * @method static \CalendarEventsModel[]|\Model\Collection findByTitle()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAlias()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAuthor()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAddTime()
- * @method static \CalendarEventsModel[]|\Model\Collection findByStartTime()
- * @method static \CalendarEventsModel[]|\Model\Collection findByEndTime()
- * @method static \CalendarEventsModel[]|\Model\Collection findByStartDate()
- * @method static \CalendarEventsModel[]|\Model\Collection findByEndDate()
- * @method static \CalendarEventsModel[]|\Model\Collection findByLocation()
- * @method static \CalendarEventsModel[]|\Model\Collection findByTeaser()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAddImage()
- * @method static \CalendarEventsModel[]|\Model\Collection findBySingleSRC()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAlt()
- * @method static \CalendarEventsModel[]|\Model\Collection findBySize()
- * @method static \CalendarEventsModel[]|\Model\Collection findByImagemargin()
- * @method static \CalendarEventsModel[]|\Model\Collection findByImageUrl()
- * @method static \CalendarEventsModel[]|\Model\Collection findByFullsize()
- * @method static \CalendarEventsModel[]|\Model\Collection findByCaption()
- * @method static \CalendarEventsModel[]|\Model\Collection findByFloating()
- * @method static \CalendarEventsModel[]|\Model\Collection findByRecurring()
- * @method static \CalendarEventsModel[]|\Model\Collection findByRepeatEach()
- * @method static \CalendarEventsModel[]|\Model\Collection findByRepeatEnd()
- * @method static \CalendarEventsModel[]|\Model\Collection findByRecurrences()
- * @method static \CalendarEventsModel[]|\Model\Collection findByAddEnclosure()
- * @method static \CalendarEventsModel[]|\Model\Collection findByEnclosure()
- * @method static \CalendarEventsModel[]|\Model\Collection findBySource()
- * @method static \CalendarEventsModel[]|\Model\Collection findByJumpTo()
- * @method static \CalendarEventsModel[]|\Model\Collection findByArticleId()
- * @method static \CalendarEventsModel[]|\Model\Collection findByUrl()
- * @method static \CalendarEventsModel[]|\Model\Collection findByTarget()
- * @method static \CalendarEventsModel[]|\Model\Collection findByCssClass()
- * @method static \CalendarEventsModel[]|\Model\Collection findByNoComments()
- * @method static \CalendarEventsModel[]|\Model\Collection findByPublished()
- * @method static \CalendarEventsModel[]|\Model\Collection findByStart()
- * @method static \CalendarEventsModel[]|\Model\Collection findByStop()
+ *
+ * @method static \Model\Collection|\CalendarEventsModel findByPid()
+ * @method static \Model\Collection|\CalendarEventsModel findByTstamp()
+ * @method static \Model\Collection|\CalendarEventsModel findByTitle()
+ * @method static \Model\Collection|\CalendarEventsModel findByAlias()
+ * @method static \Model\Collection|\CalendarEventsModel findByAuthor()
+ * @method static \Model\Collection|\CalendarEventsModel findByAddTime()
+ * @method static \Model\Collection|\CalendarEventsModel findByStartTime()
+ * @method static \Model\Collection|\CalendarEventsModel findByEndTime()
+ * @method static \Model\Collection|\CalendarEventsModel findByStartDate()
+ * @method static \Model\Collection|\CalendarEventsModel findByEndDate()
+ * @method static \Model\Collection|\CalendarEventsModel findByLocation()
+ * @method static \Model\Collection|\CalendarEventsModel findByTeaser()
+ * @method static \Model\Collection|\CalendarEventsModel findByAddImage()
+ * @method static \Model\Collection|\CalendarEventsModel findBySingleSRC()
+ * @method static \Model\Collection|\CalendarEventsModel findByAlt()
+ * @method static \Model\Collection|\CalendarEventsModel findBySize()
+ * @method static \Model\Collection|\CalendarEventsModel findByImagemargin()
+ * @method static \Model\Collection|\CalendarEventsModel findByImageUrl()
+ * @method static \Model\Collection|\CalendarEventsModel findByFullsize()
+ * @method static \Model\Collection|\CalendarEventsModel findByCaption()
+ * @method static \Model\Collection|\CalendarEventsModel findByFloating()
+ * @method static \Model\Collection|\CalendarEventsModel findByRecurring()
+ * @method static \Model\Collection|\CalendarEventsModel findByRepeatEach()
+ * @method static \Model\Collection|\CalendarEventsModel findByRepeatEnd()
+ * @method static \Model\Collection|\CalendarEventsModel findByRecurrences()
+ * @method static \Model\Collection|\CalendarEventsModel findByAddEnclosure()
+ * @method static \Model\Collection|\CalendarEventsModel findByEnclosure()
+ * @method static \Model\Collection|\CalendarEventsModel findBySource()
+ * @method static \Model\Collection|\CalendarEventsModel findByJumpTo()
+ * @method static \Model\Collection|\CalendarEventsModel findByArticleId()
+ * @method static \Model\Collection|\CalendarEventsModel findByUrl()
+ * @method static \Model\Collection|\CalendarEventsModel findByTarget()
+ * @method static \Model\Collection|\CalendarEventsModel findByCssClass()
+ * @method static \Model\Collection|\CalendarEventsModel findByNoComments()
+ * @method static \Model\Collection|\CalendarEventsModel findByPublished()
+ * @method static \Model\Collection|\CalendarEventsModel findByStart()
+ * @method static \Model\Collection|\CalendarEventsModel findByStop()
+ * @method static \Model\Collection|\CalendarEventsModel findMultipleByIds()
+ * @method static \Model\Collection|\CalendarEventsModel findBy()
+ * @method static \Model\Collection|\CalendarEventsModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -216,7 +224,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intEnd     The end date as Unix timestamp
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no events
+	 * @return \Model\Collection|\CalendarEventsModel|null A collection of models or null if there are no events
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd, array $arrOptions=array())
 	{
@@ -247,7 +255,7 @@ class CalendarEventsModel extends \Model
 	 * @param integer $intPid     The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no events
+	 * @return \Model\Collection|\CalendarEventsModel|null A collection of models or null if there are no events
 	 */
 	public static function findPublishedDefaultByPid($intPid, array $arrOptions=array())
 	{

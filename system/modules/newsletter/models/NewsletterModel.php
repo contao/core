@@ -33,6 +33,9 @@ namespace Contao;
  * @property integer $channel
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
  * @method static $this findOneBySubject()
@@ -48,21 +51,26 @@ namespace Contao;
  * @method static $this findOneBySenderName()
  * @method static $this findOneBySent()
  * @method static $this findOneByDate()
- * @method static \NewsletterModel[]|\Model\Collection findByPid()
- * @method static \NewsletterModel[]|\Model\Collection findByTstamp()
- * @method static \NewsletterModel[]|\Model\Collection findBySubject()
- * @method static \NewsletterModel[]|\Model\Collection findByAlias()
- * @method static \NewsletterModel[]|\Model\Collection findByContent()
- * @method static \NewsletterModel[]|\Model\Collection findByText()
- * @method static \NewsletterModel[]|\Model\Collection findByAddFile()
- * @method static \NewsletterModel[]|\Model\Collection findByFiles()
- * @method static \NewsletterModel[]|\Model\Collection findByTemplate()
- * @method static \NewsletterModel[]|\Model\Collection findBySendText()
- * @method static \NewsletterModel[]|\Model\Collection findByExternalImages()
- * @method static \NewsletterModel[]|\Model\Collection findBySender()
- * @method static \NewsletterModel[]|\Model\Collection findBySenderName()
- * @method static \NewsletterModel[]|\Model\Collection findBySent()
- * @method static \NewsletterModel[]|\Model\Collection findByDate()
+ *
+ * @method static \Model\Collection|\NewsletterModel findByPid()
+ * @method static \Model\Collection|\NewsletterModel findByTstamp()
+ * @method static \Model\Collection|\NewsletterModel findBySubject()
+ * @method static \Model\Collection|\NewsletterModel findByAlias()
+ * @method static \Model\Collection|\NewsletterModel findByContent()
+ * @method static \Model\Collection|\NewsletterModel findByText()
+ * @method static \Model\Collection|\NewsletterModel findByAddFile()
+ * @method static \Model\Collection|\NewsletterModel findByFiles()
+ * @method static \Model\Collection|\NewsletterModel findByTemplate()
+ * @method static \Model\Collection|\NewsletterModel findBySendText()
+ * @method static \Model\Collection|\NewsletterModel findByExternalImages()
+ * @method static \Model\Collection|\NewsletterModel findBySender()
+ * @method static \Model\Collection|\NewsletterModel findBySenderName()
+ * @method static \Model\Collection|\NewsletterModel findBySent()
+ * @method static \Model\Collection|\NewsletterModel findByDate()
+ * @method static \Model\Collection|\NewsletterModel findMultipleByIds()
+ * @method static \Model\Collection|\NewsletterModel findBy()
+ * @method static \Model\Collection|\NewsletterModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -126,7 +134,7 @@ class NewsletterModel extends \Model
 	 * @param integer $intPid     The newsletter channel ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no sent newsletters
+	 * @return \Model\Collection|\NewsletterModel|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPid($intPid, array $arrOptions=array())
 	{
@@ -153,7 +161,7 @@ class NewsletterModel extends \Model
 	 * @param array $arrPids    An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no sent newsletters
+	 * @return \Model\Collection|\NewsletterModel|null A collection of models or null if there are no sent newsletters
 	 */
 	public static function findSentByPids($arrPids, array $arrOptions=array())
 	{

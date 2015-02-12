@@ -24,6 +24,9 @@ namespace Contao;
  * @property string  $stop
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByName()
  * @method static $this findOneByRedirect()
@@ -31,13 +34,18 @@ namespace Contao;
  * @method static $this findOneByDisable()
  * @method static $this findOneByStart()
  * @method static $this findOneByStop()
- * @method static \MemberGroupModel[]|\Model\Collection findByTstamp()
- * @method static \MemberGroupModel[]|\Model\Collection findByName()
- * @method static \MemberGroupModel[]|\Model\Collection findByRedirect()
- * @method static \MemberGroupModel[]|\Model\Collection findByJumpTo()
- * @method static \MemberGroupModel[]|\Model\Collection findByDisable()
- * @method static \MemberGroupModel[]|\Model\Collection findByStart()
- * @method static \MemberGroupModel[]|\Model\Collection findByStop()
+ *
+ * @method static \Model\Collection|\MemberGroupModel findByTstamp()
+ * @method static \Model\Collection|\MemberGroupModel findByName()
+ * @method static \Model\Collection|\MemberGroupModel findByRedirect()
+ * @method static \Model\Collection|\MemberGroupModel findByJumpTo()
+ * @method static \Model\Collection|\MemberGroupModel findByDisable()
+ * @method static \Model\Collection|\MemberGroupModel findByStart()
+ * @method static \Model\Collection|\MemberGroupModel findByStop()
+ * @method static \Model\Collection|\MemberGroupModel findMultipleByIds()
+ * @method static \Model\Collection|\MemberGroupModel findBy()
+ * @method static \Model\Collection|\MemberGroupModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countByName()
@@ -118,7 +126,7 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no member groups
+	 * @return \Model\Collection|\MemberGroupModel|null A collection of models or null if there are no member groups
 	 */
 	public static function findAllActive(array $arrOptions=array())
 	{

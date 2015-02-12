@@ -34,6 +34,8 @@ namespace Contao;
  * @property integer $importantPartHeight
  * @property string  $meta
  *
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByType()
@@ -48,20 +50,24 @@ namespace Contao;
  * @method static $this findOneByImportantPartWidth()
  * @method static $this findOneByImportantPartHeight()
  * @method static $this findOneByMeta()
- * @method static \FilesModel[]|\Model\Collection findByPid()
- * @method static \FilesModel[]|\Model\Collection findByTstamp()
- * @method static \FilesModel[]|\Model\Collection findByType()
- * @method static \FilesModel[]|\Model\Collection findByPath()
- * @method static \FilesModel[]|\Model\Collection findByExtension()
- * @method static \FilesModel[]|\Model\Collection findByHash()
- * @method static \FilesModel[]|\Model\Collection findByFound()
- * @method static \FilesModel[]|\Model\Collection findByName()
- * @method static \FilesModel[]|\Model\Collection findByProtected()
- * @method static \FilesModel[]|\Model\Collection findByImportantPartX()
- * @method static \FilesModel[]|\Model\Collection findByImportantPartY()
- * @method static \FilesModel[]|\Model\Collection findByImportantPartWidth()
- * @method static \FilesModel[]|\Model\Collection findByImportantPartHeight()
- * @method static \FilesModel[]|\Model\Collection findByMeta()
+ *
+ * @method static \Model\Collection|\FilesModel findByPid()
+ * @method static \Model\Collection|\FilesModel findByTstamp()
+ * @method static \Model\Collection|\FilesModel findByType()
+ * @method static \Model\Collection|\FilesModel findByPath()
+ * @method static \Model\Collection|\FilesModel findByExtension()
+ * @method static \Model\Collection|\FilesModel findByHash()
+ * @method static \Model\Collection|\FilesModel findByFound()
+ * @method static \Model\Collection|\FilesModel findByName()
+ * @method static \Model\Collection|\FilesModel findByProtected()
+ * @method static \Model\Collection|\FilesModel findByImportantPartX()
+ * @method static \Model\Collection|\FilesModel findByImportantPartY()
+ * @method static \Model\Collection|\FilesModel findByImportantPartWidth()
+ * @method static \Model\Collection|\FilesModel findByImportantPartHeight()
+ * @method static \Model\Collection|\FilesModel findByMeta()
+ * @method static \Model\Collection|\FilesModel findBy()
+ * @method static \Model\Collection|\FilesModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByPid()
  * @method static integer countByTstamp()
@@ -135,7 +141,7 @@ class FilesModel extends \Model
 	 * @param array $arrIds     An array of IDs or UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null if there are no files
 	 */
 	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
@@ -181,7 +187,7 @@ class FilesModel extends \Model
 	 * @param array $arrUuids   An array of UUIDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null if there are no files
 	 */
 	public static function findMultipleByUuids($arrUuids, array $arrOptions=array())
 	{
@@ -218,7 +224,7 @@ class FilesModel extends \Model
 	 * @param array $arrPaths   An array of file paths
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null if there are no files
 	 */
 	public static function findMultipleByPaths($arrPaths, array $arrOptions=array())
 	{
@@ -244,7 +250,7 @@ class FilesModel extends \Model
 	 * @param string $strPath    The base path
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no matching files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null if there are no matching files
 	 */
 	public static function findMultipleByBasepath($strPath, array $arrOptions=array())
 	{
@@ -261,7 +267,7 @@ class FilesModel extends \Model
 	 * @param array $arrExtensions An array of file extensions
 	 * @param array $arrOptions    An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null of there are no matching files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null of there are no matching files
 	 */
 	public static function findMultipleByUuidsAndExtensions($arrUuids, $arrExtensions, array $arrOptions=array())
 	{
@@ -306,7 +312,7 @@ class FilesModel extends \Model
 	 * @param string $strPath    The folder path
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no matching files
+	 * @return \Model\Collection|\FilesModel|null A collection of models or null if there are no matching files
 	 */
 	public static function findMultipleFilesByFolder($strPath, array $arrOptions=array())
 	{

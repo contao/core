@@ -27,6 +27,9 @@ namespace Contao;
  * @property string  $tokenRemove
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneBySource()
  * @method static $this findOneByParent()
@@ -37,16 +40,21 @@ namespace Contao;
  * @method static $this findOneByIp()
  * @method static $this findOneByTokenConfirm()
  * @method static $this findOneByTokenRemove()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByTstamp()
- * @method static \CommentsNotifyModel[]|\Model\Collection findBySource()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByParent()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByName()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByEmail()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByUrl()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByAddedOn()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByIp()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByTokenConfirm()
- * @method static \CommentsNotifyModel[]|\Model\Collection findByTokenRemove()
+ *
+ * @method static \Model\Collection|\CommentsNotifyModel findByTstamp()
+ * @method static \Model\Collection|\CommentsNotifyModel findBySource()
+ * @method static \Model\Collection|\CommentsNotifyModel findByParent()
+ * @method static \Model\Collection|\CommentsNotifyModel findByName()
+ * @method static \Model\Collection|\CommentsNotifyModel findByEmail()
+ * @method static \Model\Collection|\CommentsNotifyModel findByUrl()
+ * @method static \Model\Collection|\CommentsNotifyModel findByAddedOn()
+ * @method static \Model\Collection|\CommentsNotifyModel findByIp()
+ * @method static \Model\Collection|\CommentsNotifyModel findByTokenConfirm()
+ * @method static \Model\Collection|\CommentsNotifyModel findByTokenRemove()
+ * @method static \Model\Collection|\CommentsNotifyModel findMultipleByIds()
+ * @method static \Model\Collection|\CommentsNotifyModel findBy()
+ * @method static \Model\Collection|\CommentsNotifyModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countBySource()
@@ -112,7 +120,7 @@ class CommentsNotifyModel extends \Model
 	 * @param integer $intParent  The parent ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no active subscriptions
+	 * @return \Model\Collection|\CommentsNotifyModel|null A collection of models or null if there are no active subscriptions
 	 */
 	public static function findActiveBySourceAndParent($strSource, $intParent, array $arrOptions=array())
 	{

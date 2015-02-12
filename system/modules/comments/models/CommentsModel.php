@@ -31,6 +31,9 @@ namespace Contao;
  * @property boolean $notified
  *
  * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
  * @method static $this findOneByTstamp()
  * @method static $this findOneBySource()
  * @method static $this findOneByParent()
@@ -45,20 +48,25 @@ namespace Contao;
  * @method static $this findOneByPublished()
  * @method static $this findOneByIp()
  * @method static $this findOneByNotified()
- * @method static \CommentsModel[]|\Model\Collection findByTstamp()
- * @method static \CommentsModel[]|\Model\Collection findBySource()
- * @method static \CommentsModel[]|\Model\Collection findByParent()
- * @method static \CommentsModel[]|\Model\Collection findByDate()
- * @method static \CommentsModel[]|\Model\Collection findByName()
- * @method static \CommentsModel[]|\Model\Collection findByEmail()
- * @method static \CommentsModel[]|\Model\Collection findByWebsite()
- * @method static \CommentsModel[]|\Model\Collection findByComment()
- * @method static \CommentsModel[]|\Model\Collection findByAddReply()
- * @method static \CommentsModel[]|\Model\Collection findByAuthor()
- * @method static \CommentsModel[]|\Model\Collection findByReply()
- * @method static \CommentsModel[]|\Model\Collection findByPublished()
- * @method static \CommentsModel[]|\Model\Collection findByIp()
- * @method static \CommentsModel[]|\Model\Collection findByNotified()
+ *
+ * @method static \Model\Collection|\CommentsModel findByTstamp()
+ * @method static \Model\Collection|\CommentsModel findBySource()
+ * @method static \Model\Collection|\CommentsModel findByParent()
+ * @method static \Model\Collection|\CommentsModel findByDate()
+ * @method static \Model\Collection|\CommentsModel findByName()
+ * @method static \Model\Collection|\CommentsModel findByEmail()
+ * @method static \Model\Collection|\CommentsModel findByWebsite()
+ * @method static \Model\Collection|\CommentsModel findByComment()
+ * @method static \Model\Collection|\CommentsModel findByAddReply()
+ * @method static \Model\Collection|\CommentsModel findByAuthor()
+ * @method static \Model\Collection|\CommentsModel findByReply()
+ * @method static \Model\Collection|\CommentsModel findByPublished()
+ * @method static \Model\Collection|\CommentsModel findByIp()
+ * @method static \Model\Collection|\CommentsModel findByNotified()
+ * @method static \Model\Collection|\CommentsModel findMultipleByIds()
+ * @method static \Model\Collection|\CommentsModel findBy()
+ * @method static \Model\Collection|\CommentsModel findAll()
+ *
  * @method static integer countById()
  * @method static integer countByTstamp()
  * @method static integer countBySource()
@@ -97,7 +105,7 @@ class CommentsModel extends \Model
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static[]|\Model\Collection|null A collection of models or null if there are no comments
+	 * @return \Model\Collection|\CommentsModel|null A collection of models or null if there are no comments
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{
