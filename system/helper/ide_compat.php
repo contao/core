@@ -14,6 +14,11 @@
  * class aliasing we are using is a bit too complex for them to understand.
  */
 
+// TL_ROOT
+namespace {
+	define('TL_ROOT', __DIR__ . '../../../');
+}
+
 // calendar
 namespace  {
 	class Calendar extends \Contao\Calendar {}
