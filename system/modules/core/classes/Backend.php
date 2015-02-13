@@ -855,7 +855,7 @@ abstract class Backend extends \Controller
 	 *
 	 * @return string
 	 */
-	public static function addPageIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
+	public static function addPageIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
 	{
 		if ($blnProtected)
 		{

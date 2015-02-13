@@ -21,7 +21,8 @@ class PageError403 extends \Frontend
 
 	/**
 	 * Generate an error 403 page
-	 * @param integer $pageId
+	 *
+	 * @param integer    $pageId
 	 * @param \PageModel $objRootPage
 	 */
 	public function generate($pageId, $objRootPage=null)
@@ -69,14 +70,13 @@ class PageError403 extends \Frontend
 		// Forward to another page
 		$objNextPage = \PageModel::findPublishedById($obj403->jumpTo);
 
-		if ($objNextPage === null)
+		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		/** @var \PageModel $objNextPage */
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }

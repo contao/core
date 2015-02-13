@@ -468,8 +468,6 @@ class PageRegular extends \Frontend
 	 *
 	 * @param \PageModel   $objPage
 	 * @param \LayoutModel $objLayout
-	 *
-	 * @throws \Exception
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
 	{

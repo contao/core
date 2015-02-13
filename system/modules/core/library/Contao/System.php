@@ -501,7 +501,6 @@ abstract class System
 			try
 			{
 				$sizes = array();
-
 				$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
 
 				while ($imageSize->next())

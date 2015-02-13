@@ -110,8 +110,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 *
 	 * @param string $strTable
 	 * @param array  $arrModule
-	 *
-	 * @throws \Exception
 	 */
 	public function __construct($strTable, $arrModule=array())
 	{
@@ -5082,7 +5080,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$arrProcedure = $this->procedure;
 			$arrValues = $this->values;
-
 			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
 			if (!empty($this->root) && is_array($this->root))
@@ -5116,7 +5113,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 
 				$blnIsMaxResultsPerPage = true;
-				Config::set('resultsPerPage', \Config::get('maxResultsPerPage'));
+				\Config::set('resultsPerPage', \Config::get('maxResultsPerPage'));
 				$session['filter'][$filter]['limit'] = \Config::get('maxResultsPerPage');
 			}
 

@@ -50,14 +50,14 @@ class Image
 	/**
 	 * The target width
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $targetWidth = 0;
 
 	/**
 	 * The target height
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $targetHeight = 0;
 
@@ -85,7 +85,7 @@ class Image
 	/**
 	 * Zoom level (between 0 and 100)
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $zoomLevel = 0;
 
@@ -113,7 +113,7 @@ class Image
 		}
 
 		$this->fileObj = $file;
-		$arrAllowedTypes = array_map('trim', explode(',', Config::get('validImageTypes')));
+		$arrAllowedTypes = array_map('trim', explode(',', \Config::get('validImageTypes')));
 
 		// Check the file type
 		if (!in_array($this->fileObj->extension, $arrAllowedTypes))
@@ -193,7 +193,7 @@ class Image
 	/**
 	 * Set the target height
 	 *
-	 * @param int $targetHeight The target height
+	 * @param integer $targetHeight The target height
 	 *
 	 * @return $this The image object
 	 */
@@ -208,7 +208,7 @@ class Image
 	/**
 	 * Get the target height
 	 *
-	 * @return int The target height
+	 * @return integer The target height
 	 */
 	public function getTargetHeight()
 	{
@@ -219,7 +219,7 @@ class Image
 	/**
 	 * Set the target width
 	 *
-	 * @param int $targetWidth The target width
+	 * @param integer $targetWidth The target width
 	 *
 	 * @return $this The image object
 	 */
@@ -234,7 +234,7 @@ class Image
 	/**
 	 * Get the target width
 	 *
-	 * @return int The target width
+	 * @return integer The target width
 	 */
 	public function getTargetWidth()
 	{
@@ -271,7 +271,7 @@ class Image
 	/**
 	 * Set the zoom level
 	 *
-	 * @param int $zoomLevel The zoom level
+	 * @param integer $zoomLevel The zoom level
 	 *
 	 * @return $this The object instance
 	 *
@@ -295,7 +295,7 @@ class Image
 	/**
 	 * Get the zoom level
 	 *
-	 * @return int The zoom level
+	 * @return integer The zoom level
 	 */
 	public function getZoomLevel()
 	{

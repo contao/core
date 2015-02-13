@@ -339,7 +339,7 @@ abstract class DataContainer extends \Backend
 					}
 
 					// Convert file paths in src attributes (see #5965)
-					if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+					if ($varValue && isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
 					{
 						$varValue = \String::srcToInsertTag($varValue);
 					}

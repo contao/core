@@ -152,7 +152,7 @@ class ModuleQuicknav extends \Module
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
-					if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
+					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
 					{
 						/** @var \PageModel $objModel */
 						$objModel = $objSubpages->current();

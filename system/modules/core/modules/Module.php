@@ -435,7 +435,7 @@ abstract class Module extends \Frontend
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
+						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
 						{
 							/** @var \PageModel $objModel */
 							$objModel = $objSubpages->current();

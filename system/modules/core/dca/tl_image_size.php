@@ -188,7 +188,7 @@ $GLOBALS['TL_DCA']['tl_image_size'] = array
 			'exclude'                 => true,
 			'eval'                    => array('rgxp'=>'prcnt', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) NULL"
-		),
+		)
 	)
 );
 
