@@ -846,12 +846,12 @@ abstract class Backend extends \Controller
 	/**
 	 * Add an image to each page in the tree
 	 *
-	 * @param array         $row
-	 * @param string        $label
-	 * @param DataContainer $dc
-	 * @param string        $imageAttribute
-	 * @param boolean       $blnReturnImage
-	 * @param boolean       $blnProtected
+	 * @param array          $row
+	 * @param string         $label
+	 * @param \DataContainer $dc
+	 * @param string         $imageAttribute
+	 * @param boolean        $blnReturnImage
+	 * @param boolean        $blnProtected
 	 *
 	 * @return string
 	 */
