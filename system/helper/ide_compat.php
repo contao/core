@@ -43,7 +43,7 @@ namespace  {
 	abstract class BackendModule extends \Contao\BackendModule {}
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
-	class DataContainer extends \Contao\DataContainer {}
+	abstract class DataContainer extends \Contao\DataContainer {}
 	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}

@@ -28,6 +28,7 @@ class ContentImage extends \ContentElement
 
 	/**
 	 * Return if the image does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -55,6 +56,7 @@ class ContentImage extends \ContentElement
 		}
 
 		$this->singleSRC = $objFile->path;
+
 		return parent::generate();
 	}
 

@@ -28,12 +28,14 @@ class ModuleNewsReader extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsreader'][0]) . ' ###';
@@ -54,9 +56,12 @@ class ModuleNewsReader extends \ModuleNews
 		// Do not index or cache the page if no news item has been specified
 		if (!\Input::get('items'))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -65,9 +70,12 @@ class ModuleNewsReader extends \ModuleNews
 		// Do not index or cache the page if there are no archives
 		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -80,6 +88,7 @@ class ModuleNewsReader extends \ModuleNews
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$this->Template->articles = '';
@@ -98,6 +107,7 @@ class ModuleNewsReader extends \ModuleNews
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
 			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+
 			return;
 		}
 
@@ -120,9 +130,11 @@ class ModuleNewsReader extends \ModuleNews
 		if ($objArticle->noComments || !in_array('comments', \ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
+
 			return;
 		}
 
+		/** @var \NewsArchiveModel $objArchive */
 		$objArchive = $objArticle->getRelated('pid');
 		$this->Template->allowComments = $objArchive->allowComments;
 
@@ -148,6 +160,7 @@ class ModuleNewsReader extends \ModuleNews
 		// Notify the author
 		if ($objArchive->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objArticle->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Class FormCheckBox
  *
+ * @property array $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormCheckBox extends \Widget

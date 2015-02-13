@@ -52,6 +52,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Split the current request into fragments, strip the URL suffix, recreate the $_GET array and return the page ID
+	 *
 	 * @return mixed
 	 */
 	public static function getPageIdFromUrl()
@@ -151,7 +152,9 @@ abstract class Frontend extends \Controller
 				// Order by domain and language
 				while ($objPages->next())
 				{
-					$objPage = $objPages->current()->loadDetails();
+					/** @var \PageModel $objModel */
+					$objModel = $objPages->current();
+					$objPage  = $objModel->loadDetails();
 
 					$domain = $objPage->domain ?: '*';
 					$arrPages[$domain][$objPage->rootLanguage][] = $objPage;
@@ -274,6 +277,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Return the root page ID (backwards compatibility)
+	 *
 	 * @return integer
 	 */
 	public static function getRootIdFromUrl()
@@ -284,7 +288,8 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Try to find a root page based on language and URL
-	 * @return \Model
+	 *
+	 * @return \PageModel
 	 */
 	public static function getRootPageFromUrl()
 	{
@@ -293,6 +298,7 @@ abstract class Frontend extends \Controller
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getRootPageFromUrl'] as $callback)
 			{
+				/** @var \PageModel $objRootPage */
 				if (is_object(($objRootPage = static::importStatic($callback[0])->$callback[1]())))
 				{
 					return $objRootPage;
@@ -345,9 +351,11 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Overwrite the parent method as front end URLs are handled differently
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $strRequest
+	 * @param boolean $blnIgnoreParams
+	 * @param array   $arrUnset
+	 *
 	 * @return string
 	 */
 	public static function addToUrl($strRequest, $blnIgnoreParams=false, $arrUnset=array())
@@ -417,7 +425,9 @@ abstract class Frontend extends \Controller
 			return 'index.php?' . preg_replace('/^&(amp;)?/i', '', $strParams);
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$pageId = $objPage->alias ?: $objPage->id;
 
 		// Get the page ID from URL if not set
@@ -440,12 +450,14 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Redirect to a jumpTo page or reload the current page
-	 * @param integer|array
-	 * @param string
-	 * @param string
+	 *
+	 * @param integer|array $intId
+	 * @param string        $strParams
+	 * @param string        $strForceLang
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Always redirect if there are additional arguments (see #5734)
@@ -478,7 +490,9 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Check whether a back end or front end user is logged in
-	 * @param string
+	 *
+	 * @param string $strCookie
+	 *
 	 * @return boolean
 	 */
 	protected function getLoginStatus($strCookie)
@@ -531,8 +545,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Get the meta data from a serialized string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $strData
+	 * @param string $strLanguage
+	 *
 	 * @return array
 	 */
 	public static function getMetaData($strData, $strLanguage)
@@ -553,8 +569,10 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Parse the meta.txt file of a folder
-	 * @param string
-	 * @param boolean
+	 *
+	 * @param string  $strPath
+	 * @param boolean $blnIsFile
+	 *
 	 * @deprecated Meta data is now stored in the database
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)
@@ -585,7 +603,7 @@ abstract class Frontend extends \Controller
 			list($strLabel, $strValue) = array_map('trim', explode('=', $v, 2));
 			$this->arrMeta[$strLabel] = array_map('trim', explode('|', $strValue));
 
-			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC))
+			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC)) # FIXME: $this->multiSRC is not used
 			{
 				$this->arrAux[] = $strPath . '/' . $strLabel;
 			}
@@ -597,7 +615,9 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Prepare a text to be used in the meta description tag
-	 * @param string
+	 *
+	 * @param string $strText
+	 *
 	 * @return string
 	 */
 	protected function prepareMetaDescription($strText)
@@ -613,6 +633,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Return the cron timeout in seconds
+	 *
 	 * @return integer
 	 */
 	public static function getCronTimeout()

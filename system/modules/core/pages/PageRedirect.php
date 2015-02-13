@@ -21,7 +21,8 @@ class PageRedirect extends \Frontend
 
 	/**
 	 * Redirect to an external page
-	 * @param object
+	 *
+	 * @param \PageModel $objPage
 	 */
 	public function generate($objPage)
 	{

@@ -31,6 +31,7 @@ class ContentHyperlink extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (substr($this->url, 0, 7) == 'mailto:')
@@ -63,7 +64,10 @@ class ContentHyperlink extends \ContentElement
 			}
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
+				/** @var \FrontendTemplate|object $objTemplate */
+				$objTemplate = new \BackendTemplate('ce_hyperlink_image');
+
+				$this->Template = $objTemplate;
 				$this->Template->setData($this->arrData);
 
 				$this->singleSRC = $objModel->path;

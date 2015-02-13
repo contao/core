@@ -51,7 +51,7 @@ class Picture
 	/**
 	 * The image size items collection
 	 *
-	 * @var array|\Model\Collection
+	 * @var array|\Model\Collection|\ImageSizeItemModel
 	 */
 	protected $imageSizeItems = array();
 
@@ -89,6 +89,8 @@ class Picture
 		{
 			$size = (int) $size[2];
 		}
+
+		$imageSize = null;
 
 		if (!is_array($size))
 		{
@@ -168,7 +170,7 @@ class Picture
 	/**
 	 * Set the image size items collection
 	 *
-	 * @param array|\Model\Collection $imageSizeItems The image size items collection
+	 * @param array|\ImageSizeItemModel|\Model\Collection $imageSizeItems The image size items collection
 	 *
 	 * @return $this The picture object
 	 */
@@ -232,7 +234,6 @@ class Picture
 
 		foreach ($densities as $density)
 		{
-			/** @var Image $imageObj */
 			$imageObj = clone $this->image;
 
 			$src = $imageObj->setTargetWidth($imageSize->width * $density)

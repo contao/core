@@ -98,8 +98,9 @@ class BackendPopup extends \Backend
 			$objModel = \Dbafs::addResource($this->strFile);
 		}
 
-		$this->Template = new \BackendTemplate('be_popup');
-		$this->Template->uuid = \String::binToUuid($objModel->uuid); // see #5211
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_popup');
+		$objTemplate->uuid = \String::binToUuid($objModel->uuid); // see #5211
 
 		// Add the file info
 		if (is_dir(TL_ROOT . '/' . $this->strFile))
@@ -113,48 +114,38 @@ class BackendPopup extends \Backend
 			// Image
 			if ($objFile->isImage)
 			{
-				$this->Template->isImage = true;
-				$this->Template->width = $objFile->width;
-				$this->Template->height = $objFile->height;
-				$this->Template->src = $this->urlEncode($this->strFile);
+				$objTemplate->isImage = true;
+				$objTemplate->width = $objFile->width;
+				$objTemplate->height = $objFile->height;
+				$objTemplate->src = $this->urlEncode($this->strFile);
 			}
 
-			$this->Template->href = ampersand(\Environment::get('request'), true) . '&amp;download=1';
-			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
+			$objTemplate->href = ampersand(\Environment::get('request'), true) . '&amp;download=1';
+			$objTemplate->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 		}
 
-		$this->Template->icon = $objFile->icon;
-		$this->Template->mime = $objFile->mime;
-		$this->Template->ctime = \Date::parse(\Config::get('datimFormat'), $objFile->ctime);
-		$this->Template->mtime = \Date::parse(\Config::get('datimFormat'), $objFile->mtime);
-		$this->Template->atime = \Date::parse(\Config::get('datimFormat'), $objFile->atime);
-		$this->Template->path = $this->strFile;
-
-		$this->output();
-	}
-
-
-	/**
-	 * Output the template file
-	 */
-	protected function output()
-	{
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($this->strFile);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, \Config::get('characterSet')));
-		$this->Template->label_uuid = $GLOBALS['TL_LANG']['MSC']['fileUuid'];
-		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
-		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
-		$this->Template->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];
-		$this->Template->label_mtime = $GLOBALS['TL_LANG']['MSC']['fileModified'];
-		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
-		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
-		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
+		$objTemplate->icon = $objFile->icon;
+		$objTemplate->mime = $objFile->mime;
+		$objTemplate->ctime = \Date::parse(\Config::get('datimFormat'), $objFile->ctime);
+		$objTemplate->mtime = \Date::parse(\Config::get('datimFormat'), $objFile->mtime);
+		$objTemplate->atime = \Date::parse(\Config::get('datimFormat'), $objFile->atime);
+		$objTemplate->path = $this->strFile;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($this->strFile);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->headline = basename(utf8_convert_encoding($this->strFile, \Config::get('characterSet')));
+		$objTemplate->label_uuid = $GLOBALS['TL_LANG']['MSC']['fileUuid'];
+		$objTemplate->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
+		$objTemplate->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
+		$objTemplate->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];
+		$objTemplate->label_mtime = $GLOBALS['TL_LANG']['MSC']['fileModified'];
+		$objTemplate->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
+		$objTemplate->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
+		$objTemplate->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

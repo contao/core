@@ -14,82 +14,94 @@ namespace Contao;
 /**
  * Provide methods to handle data container arrays.
  *
+ * @property integer $id
+ * @property string  $table
+ * @property mixed   $value
+ * @property string  $field
+ * @property string  $inputName
+ * @property string  $palette
+ * @property object  $activeRecord
+ * @property boolean $blnUploadable
+ * @property array   $root
+ * @property array   $rootIds
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
-class DataContainer extends \Backend
+abstract class DataContainer extends \Backend
 {
 
 	/**
 	 * Current ID
-	 * @param integer
+	 * @var integer
 	 */
 	protected $intId;
 
 	/**
 	 * Name of the current table
-	 * @param string
+	 * @var string
 	 */
 	protected $strTable;
 
 	/**
 	 * Name of the current field
-	 * @param string
+	 * @var string
 	 */
 	protected $strField;
 
 	/**
 	 * Name attribute of the current input field
-	 * @param string
+	 * @var string
 	 */
 	protected $strInputName;
 
 	/**
 	 * Value of the current field
-	 * @param mixed
+	 * @var mixed
 	 */
 	protected $varValue;
 
 	/**
 	 * Name of the current palette
-	 * @param string
+	 * @var string
 	 */
 	protected $strPalette;
 
 	/**
 	 * WHERE clause of the database query
-	 * @param array
+	 * @var array
 	 */
 	protected $procedure = array();
 
 	/**
 	 * Values for the WHERE clause of the database query
-	 * @param array
+	 * @var array
 	 */
 	protected $values = array();
 
 	/**
 	 * Form attribute "onsubmit"
-	 * @param array
+	 * @var array
 	 */
 	protected $onsubmit = array();
 
 	/**
 	 * Reload the page after the form has been submitted
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $noReload = false;
 
 	/**
 	 * Active record
-	 * @param object
+	 * @var \Model|\FilesModel
 	 */
 	protected $objActiveRecord;
 
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -108,7 +120,9 @@ class DataContainer extends \Backend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -150,8 +164,11 @@ class DataContainer extends \Backend
 
 	/**
 	 * Render a row of a box and return it as HTML string
-	 * @param string
+	 *
+	 * @param string $strPalette
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	protected function row($strPalette=null)
@@ -200,6 +217,7 @@ class DataContainer extends \Backend
 		if (is_array($arrData['input_field_callback']))
 		{
 			$this->import($arrData['input_field_callback'][0]);
+
 			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
 		}
 		elseif (is_callable($arrData['input_field_callback']))
@@ -207,6 +225,7 @@ class DataContainer extends \Backend
 			return $arrData['input_field_callback']($this, $xlabel);
 		}
 
+		/** @var \Widget $strClass */
 		$strClass = $GLOBALS['BE_FFL'][$arrData['inputType']];
 
 		// Return if the widget class does not exists
@@ -242,6 +261,7 @@ class DataContainer extends \Backend
 			$this->varValue = \String::insertTagToSrc($this->varValue);
 		}
 
+		/** @var \Widget $objWidget */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable, $this));
 
 		$objWidget->xlabel = $xlabel;
@@ -467,6 +487,8 @@ class DataContainer extends \Backend
 			include TL_ROOT . '/system/config/' . $file . '.php';
 			$updateMode = ob_get_contents();
 			ob_end_clean();
+
+			unset($file, $type, $language, $selector);
 		}
 
 		// Handle multi-select fields in "override all" mode
@@ -535,7 +557,9 @@ class DataContainer extends \Backend
 
 	/**
 	 * Return the field explanation as HTML string
-	 * @param string
+	 *
+	 * @param string $strClass
+	 *
 	 * @return string
 	 */
 	public function help($strClass='')
@@ -554,7 +578,9 @@ class DataContainer extends \Backend
 
 	/**
 	 * Generate possible palette names from an array by taking the first value and either adding or not adding the following values
-	 * @param array
+	 *
+	 * @param array $names
+	 *
 	 * @return array
 	 */
 	protected function combiner($names)
@@ -581,7 +607,9 @@ class DataContainer extends \Backend
 
 	/**
 	 * Return a query string that switches into edit mode
-	 * @param integer
+	 *
+	 * @param integer $id
+	 *
 	 * @return string
 	 */
 	protected function switchToEdit($id)
@@ -598,19 +626,22 @@ class DataContainer extends \Backend
 		}
 
 		$strUrl = TL_SCRIPT . '?' . implode('&', $arrKeys);
+
 		return $strUrl . (!empty($arrKeys) ? '&' : '') . (\Input::get('table') ? 'table='.\Input::get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
 
 
 	/**
 	 * Compile buttons from the table configuration array and return them as HTML
-	 * @param array
-	 * @param string
-	 * @param array
-	 * @param boolean
-	 * @param array
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param array   $arrRow
+	 * @param string  $strTable
+	 * @param array   $arrRootIds
+	 * @param boolean $blnCircularReference
+	 * @param array   $arrChildRecordIds
+	 * @param string  $strPrevious
+	 * @param string  $strNext
+	 *
 	 * @return string
 	 */
 	protected function generateButtons($arrRow, $strTable, $arrRootIds=array(), $blnCircularReference=false, $arrChildRecordIds=null, $strPrevious=null, $strNext=null)
@@ -696,6 +727,7 @@ class DataContainer extends \Backend
 
 	/**
 	 * Compile global buttons from the table configuration array and return them as HTML
+	 *
 	 * @return string
 	 */
 	protected function generateGlobalButtons()
@@ -755,4 +787,20 @@ class DataContainer extends \Backend
 
 		return $return;
 	}
+
+	/**
+	 * Return the name of the current palette
+	 *
+	 * @return string
+	 */
+	abstract public function getPalette();
+
+	/**
+	 * Save the current value
+	 *
+	 * @param mixed $varValue
+	 *
+	 * @throws \Exception
+	 */
+	abstract protected function save($varValue);
 }

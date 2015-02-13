@@ -21,6 +21,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -31,6 +32,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
@@ -41,6 +43,8 @@ class RebuildIndex extends \Backend implements \executable
 		}
 
 		$time = time();
+
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];

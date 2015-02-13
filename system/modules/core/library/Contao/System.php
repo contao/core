@@ -28,6 +28,22 @@ namespace Contao;
  *         }
  *     }
  *
+ * @property \Automator                                $Automator   The automator object
+ * @property \Calendar                                 $Calendar    The calendar object
+ * @property \Comments                                 $Comments    The comments object
+ * @property \Config                                   $Config      The config object
+ * @property \Database                                 $Database    The database object
+ * @property \Files                                    $Files       The files object
+ * @property \Input                                    $Input       The input object
+ * @property \Database\Installer                       $Installer   The database installer object
+ * @property \Database\Updater                         $Updater     The database updater object
+ * @property \Messages                                 $Messages    The messages object
+ * @property \News                                     $News        The news object
+ * @property \Session                                  $Session     The session object
+ * @property \StyleSheets                              $StyleSheets The style sheets object
+ * @property \BackendTemplate|\FrontendTemplate|object $Template    The template object
+ * @property \BackendUser|\FrontendUser                $User        The user object
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class System
@@ -713,7 +729,7 @@ abstract class System
 			}
 		};
 
-		// Add the labels
+		/** @var \DOMElement[] $units */
 		foreach ($units as $unit)
 		{
 			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');
@@ -792,6 +808,7 @@ abstract class System
 		}
 
 		$objFile->delete();
+
 		return true;
 	}
 

@@ -28,6 +28,7 @@ class ModuleMaintenance extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @throws \Exception
 	 */
 	protected function compile()
@@ -60,6 +61,5 @@ class ModuleMaintenance extends \BackendModule
 				$this->Template->content .= $buffer;
 			}
 		}
-
 	}
 }

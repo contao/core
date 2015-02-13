@@ -21,6 +21,7 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -31,10 +32,12 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
 	{
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
@@ -84,7 +87,8 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Run the Live Update
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
@@ -100,6 +104,7 @@ class LiveUpdate extends \Backend implements \executable
 			{
 				$objTemplate->updateClass = 'tl_error';
 				$objTemplate->updateMessage = $objRequest->response;
+
 				return;
 			}
 
@@ -119,8 +124,10 @@ class LiveUpdate extends \Backend implements \executable
 				}
 				catch (\Exception $e)
 				{
+					/** @var \BackendTemplate|object $objTemplate */
 					$objTemplate->updateClass = 'tl_error';
 					$objTemplate->updateMessage = 'Error updating ' . $objArchive->file_name . ': ' . $e->getMessage();
+
 					return;
 				}
 			}

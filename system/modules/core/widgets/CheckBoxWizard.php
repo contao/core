@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle sortable checkboxes.
  *
+ * @property array   $options
+ * @property boolean $multiple
+ *
  * @author John Brand <http://www.thyon.com>
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -35,8 +38,9 @@ class CheckBoxWizard extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -71,6 +75,7 @@ class CheckBoxWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -164,9 +169,11 @@ class CheckBoxWizard extends \Widget
 
 	/**
 	 * Generate a checkbox and return it as string
-	 * @param array
-	 * @param integer
-	 * @param string
+	 *
+	 * @param array   $arrOption
+	 * @param integer $i
+	 * @param string  $strButtons
+	 *
 	 * @return string
 	 */
 	protected function generateCheckbox($arrOption, $i, $strButtons)

@@ -803,6 +803,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all front end modules as array
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -823,6 +824,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all editable fields of table tl_member
+	 *
 	 * @return array
 	 */
 	public function getEditableMemberProperties()
@@ -846,6 +848,7 @@ class tl_module extends Backend
 
 	/**
 	 * Get all forms and return them as array
+	 *
 	 * @return array
 	 */
 	public function getForms()
@@ -872,6 +875,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all layout sections as array
+	 *
 	 * @return array
 	 */
 	public function getLayoutSections()
@@ -901,6 +905,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getNavigationTemplates()
@@ -911,6 +916,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all module templates as array
+	 *
 	 * @return array
 	 */
 	public function getModuleTemplates()
@@ -921,6 +927,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all member templates as array
+	 *
 	 * @return array
 	 */
 	public function getMemberTemplates()
@@ -931,6 +938,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all search templates as array
+	 *
 	 * @return array
 	 */
 	public function getSearchTemplates()
@@ -941,6 +949,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getRssTemplates()
@@ -951,7 +960,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default activation text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getActivationDefault($varValue)
@@ -967,7 +978,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default password text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getPasswordDefault($varValue)
@@ -983,7 +996,9 @@ class tl_module extends Backend
 
 	/**
 	 * List a front end module
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listModule($row)

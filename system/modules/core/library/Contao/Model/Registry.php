@@ -24,7 +24,7 @@ class Registry implements \Countable
 
 	/**
 	 * Object instance (Singleton)
-	 * @var \Registry
+	 * @var static
 	 */
 	protected static $objInstance;
 
@@ -56,7 +56,7 @@ class Registry implements \Countable
 	/**
 	 * Return the current object instance (Singleton)
 	 *
-	 * @return \Registry The object instance
+	 * @return static The object instance
 	 */
 	public static function getInstance()
 	{
@@ -171,6 +171,7 @@ class Registry implements \Countable
 	public function isRegistered(\Model $objModel)
 	{
 		$intObjectId = spl_object_hash($objModel);
+
 		return isset($this->arrIdentities[$intObjectId]);
 	}
 }

@@ -34,12 +34,14 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqlist'][0]) . ' ###';
@@ -79,6 +81,7 @@ class ModuleFaqList extends \Module
 		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
+
 			return;
 		}
 
@@ -91,7 +94,7 @@ class ModuleFaqList extends \Module
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
-			// Get the FAQ category
+			/** @var \FaqCategoryModel $objPid */
 			$objPid = $objFaq->getRelated('pid');
 
 			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
@@ -124,13 +127,18 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Create links and remember pages that have been processed
-	 * @param object
+	 *
+	 * @param \FaqModel $objFaq
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	protected function generateFaqLink($objFaq)
 	{
-		$jumpTo = intval($objFaq->getRelated('pid')->jumpTo);
+		/** @var \FaqCategoryModel $objCategory */
+		$objCategory = $objFaq->getRelated('pid');
+		$jumpTo = intval($objCategory->jumpTo);
 
 		// A jumpTo page is not mandatory for FAQ categories (see #6226) but required for the FAQ list module
 		if ($jumpTo < 1)

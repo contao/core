@@ -641,10 +641,13 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Auto-generate the event alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -678,8 +681,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Automatically set the end time if not set
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function setEmptyEndTime($varValue, DataContainer $dc)
@@ -695,8 +700,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Set the end date to null if empty
-	 * @param mixed
-	 * @return string
+	 *
+	 * @param mixed $varValue
+	 *
+	 * @return mixed
 	 */
 	public function setEmptyEndDate($varValue)
 	{
@@ -711,7 +718,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listEvents($arrRow)
@@ -737,7 +746,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -783,7 +794,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Add the source options depending on the allowed fields (see #5498)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getSourceOptions(DataContainer $dc)
@@ -826,7 +839,8 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -926,7 +940,8 @@ class tl_calendar_events extends Backend
 	 * modified (edit/editAll), moved (cut/cutAll) or deleted (delete/deleteAll).
 	 * Since duplicated events are unpublished by default, it is not necessary
 	 * to schedule updates on copyAll as well.
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -945,7 +960,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
@@ -956,12 +973,14 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -991,9 +1010,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer        $intId
+	 * @param boolean        $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle text fields with unit drop down menu.
  *
+ * @property integer $maxlength
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TrblField extends \Widget
@@ -40,8 +43,9 @@ class TrblField extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -67,7 +71,9 @@ class TrblField extends \Widget
 
 	/**
 	 * Do not validate unit fields
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -109,6 +115,7 @@ class TrblField extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

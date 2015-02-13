@@ -59,6 +59,7 @@ abstract class Controller extends \System
 		// Check for a theme folder
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->templateGroup != '')
@@ -187,6 +188,7 @@ abstract class Controller extends \System
 			return '';
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Articles
@@ -215,6 +217,7 @@ abstract class Controller extends \System
 						$objPage->cache = 0;
 
 						header('HTTP/1.1 404 Not Found');
+
 						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
@@ -246,6 +249,7 @@ abstract class Controller extends \System
 
 			while ($objArticles->next())
 			{
+				/** @var \ArticleModel $objRow */
 				$objRow = $objArticles->current();
 
 				// Add the "first" and "last" classes (see #2583)
@@ -302,10 +306,13 @@ abstract class Controller extends \System
 			if (!class_exists($strClass))
 			{
 				static::log('Module class "'.$strClass.'" (module "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+
 				return '';
 			}
 
 			$objRow->typePrefix = 'mod_';
+
+			/** @var \Module $objModule */
 			$objModule = new $strClass($objRow, $strColumn);
 			$strBuffer = $objModule->generate();
 
@@ -341,6 +348,7 @@ abstract class Controller extends \System
 	 */
 	public static function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (is_object($varId))
@@ -461,10 +469,13 @@ abstract class Controller extends \System
 		if (!class_exists($strClass))
 		{
 			static::log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', __METHOD__, TL_ERROR);
+
 			return '';
 		}
 
 		$objRow->typePrefix = 'ce_';
+
+		/** @var \ContentElement $objElement */
 		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
@@ -604,7 +615,7 @@ abstract class Controller extends \System
 	/**
 	 * Check whether an element is visible in the front end
 	 *
-	 * @param \Model $objElement The element model
+	 * @param \Model|\ContentModel|\ModuleModel $objElement The element model
 	 *
 	 * @return boolean True if the element is visible
 	 */
@@ -665,6 +676,7 @@ abstract class Controller extends \System
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=true)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Preserve insert tags
@@ -962,6 +974,7 @@ abstract class Controller extends \System
 							case 'forward':
 								if ($objNextPage->jumpTo)
 								{
+									/** @var \PageModel $objNext */
 									$objNext = $objNextPage->getRelated('jumpTo');
 								}
 								else
@@ -1827,6 +1840,7 @@ abstract class Controller extends \System
 			}
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$arrReplace = array();
@@ -1999,6 +2013,7 @@ abstract class Controller extends \System
 		}
 
 		$arrReplace['[[TL_HEAD]]'] = $strScripts;
+
 		return str_replace(array_keys($arrReplace), array_values($arrReplace), $strBuffer);
 	}
 
@@ -2214,7 +2229,9 @@ abstract class Controller extends \System
 				}
 				elseif (TL_MODE == 'FE')
 				{
+					/** @var \PageModel $objPage */
 					global $objPage;
+
 					$strLanguage = $objPage->rootLanguage . '/';
 				}
 			}
@@ -2530,6 +2547,7 @@ abstract class Controller extends \System
 	 */
 	public static function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		try
@@ -2735,6 +2753,7 @@ abstract class Controller extends \System
 			$objFiles->reset();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$arrEnclosures = array();
@@ -2795,7 +2814,7 @@ abstract class Controller extends \System
 	/**
 	 * Set the static URL constants
 	 *
-	 * @param object $objPage An optional page object
+	 * @param \PageModel $objPage An optional page object
 	 */
 	public static function setStaticUrls($objPage=null)
 	{
@@ -2892,19 +2911,22 @@ abstract class Controller extends \System
 	 *
 	 * @param mixed $intId A page ID or a Model object
 	 *
-	 * @return \Model|null The page model or null
+	 * @return \PageModel The page model or null
 	 *
 	 * @deprecated Use PageModel::findWithDetails() or PageModel->loadDetails() instead
 	 */
 	public static function getPageDetails($intId)
 	{
-		if ($intId instanceof \Model)
+		if ($intId instanceof \PageModel)
 		{
 			return $intId->loadDetails();
 		}
 		elseif ($intId instanceof \Model\Collection)
 		{
-			return $intId->current()->loadDetails();
+			/** @var \PageModel $objPage */
+			$objPage = $intId->current();
+
+			return $objPage->loadDetails();
 		}
 		elseif (is_object($intId))
 		{
@@ -2922,6 +2944,7 @@ abstract class Controller extends \System
 			$objPage->loadDetails();
 
 			\Cache::set($strKey, $objPage);
+
 			return $objPage;
 		}
 		else
@@ -2943,6 +2966,7 @@ abstract class Controller extends \System
 			$objPage = \PageModel::findWithDetails($intId);
 
 			\Cache::set($strKey, $objPage);
+
 			return $objPage;
 		}
 	}
@@ -3150,7 +3174,7 @@ abstract class Controller extends \System
 	/**
 	 * Print an article as PDF and stream it to the browser
 	 *
-	 * @param object $objArticle An article object
+	 * @param \ModuleModel $objArticle An article object
 	 *
 	 * @deprecated Use ModuleArticle->generatePdf() instead
 	 */

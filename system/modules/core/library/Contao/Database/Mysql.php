@@ -20,13 +20,6 @@ class Mysql extends \Database
 {
 
 	/**
-	 * List tables query
-	 * @var string
-	 */
-	protected $strListTables = "SHOW TABLES FROM `%s`";
-
-
-	/**
 	 * Connect to the database server and select the database
 	 *
 	 * @throws \Exception If the connection cannot be established

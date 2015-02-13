@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Class FrontendTemplate
  *
+ * @property integer $id
+ * @property string  $keywords
+ * @property string  $content
+ * @property array   $sections
+ * @property string  $sPosition
+ * @property string  $tag
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendTemplate extends \Template
@@ -26,6 +33,7 @@ class FrontendTemplate extends \Template
 	 */
 	public function parse()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Adjust the output format
@@ -185,6 +193,7 @@ class FrontendTemplate extends \Template
 	 */
 	protected function addToCache()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$intCache = 0;
@@ -262,6 +271,7 @@ class FrontendTemplate extends \Template
 	 */
 	protected function addToSearchIndex()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Index page if searching is allowed and there is no back end user
@@ -337,6 +347,7 @@ class FrontendTemplate extends \Template
 
 		if ($strKey == 'main')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			// Use the section tag in HTML5

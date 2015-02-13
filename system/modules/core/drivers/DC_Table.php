@@ -15,99 +15,102 @@ namespace Contao;
  * Provide methods to modify the database.
  *
  * @author Leo Feyer <https://github.com/leofeyer>
+ * @author Andreas Schempp <https://github.com/aschempp>
  */
 class DC_Table extends \DataContainer implements \listable, \editable
 {
 
 	/**
 	 * Name of the parent table
-	 * @param string
+	 * @var string
 	 */
 	protected $ptable;
 
 	/**
 	 * Names of the child tables
-	 * @param array
+	 * @var array
 	 */
 	protected $ctable;
 
 	/**
 	 * IDs of all root records
-	 * @param array
+	 * @var array
 	 */
 	protected $root;
 
 	/**
 	 * ID of the button container
-	 * @param string
+	 * @var string
 	 */
 	protected $bid;
 
 	/**
 	 * Limit (database query)
-	 * @param string
+	 * @var string
 	 */
 	protected $limit;
 
 	/**
 	 * Total (database query)
-	 * @param string
+	 * @var string
 	 */
 	protected $total;
 
 	/**
 	 * First sorting field
-	 * @param string
+	 * @var string
 	 */
 	protected $firstOrderBy;
 
 	/**
 	 * Order by (database query)
-	 * @param array
+	 * @var array
 	 */
 	protected $orderBy = array();
 
 	/**
 	 * Fields of a new or duplicated record
-	 * @param array
+	 * @var array
 	 */
 	protected $set = array();
 
 	/**
 	 * IDs of all records that are currently displayed
-	 * @param array
+	 * @var array
 	 */
 	protected $current = array();
 
 	/**
 	 * Show the current table as tree
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $treeView = false;
 
 	/**
 	 * True if a new version has to be created
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnCreateNewVersion = false;
 
 	/**
 	 * True if one of the form fields is uploadable
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnUploadable = false;
 
 	/**
 	 * The current back end module
-	 * @param array
+	 * @var array
 	 */
 	protected $arrModule = array();
 
 
 	/**
 	 * Initialize the object
-	 * @param string
-	 * @param array
+	 *
+	 * @param string $strTable
+	 * @param array  $arrModule
+	 *
 	 * @throws \Exception
 	 */
 	public function __construct($strTable, $arrModule=array())
@@ -247,8 +250,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -267,7 +271,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -301,6 +307,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of a particular table
+	 *
 	 * @return string
 	 */
 	public function showAll()
@@ -383,6 +390,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return all non-excluded fields of a record as HTML table
+	 *
 	 * @return string
 	 */
 	public function show()
@@ -604,7 +612,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Insert a new row into a database table
-	 * @param array
+	 *
+	 * @param array $set
 	 */
 	public function create($set=array())
 	{
@@ -698,7 +707,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Assign a new position to an existing record
-	 * @param boolean
+	 *
+	 * @param boolean $blnDoNotRedirect
 	 */
 	public function cut($blnDoNotRedirect=false)
 	{
@@ -822,7 +832,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Duplicate a particular record of the current table
-	 * @param boolean
+	 *
+	 * @param boolean $blnDoNotRedirect
+	 *
 	 * @return integer|boolean
 	 */
 	public function copy($blnDoNotRedirect=false)
@@ -1001,10 +1013,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Duplicate all child records of a duplicated record
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param string  $table
+	 * @param integer $insertID
+	 * @param integer $id
+	 * @param integer $parentId
 	 */
 	protected function copyChilds($table, $insertID, $id, $parentId)
 	{
@@ -1150,9 +1163,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Calculate the new position of a moved or inserted record
-	 * @param string
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param string  $mode
+	 * @param integer $pid
+	 * @param boolean $insertInto
 	 */
 	protected function getNewPosition($mode, $pid=null, $insertInto=false)
 	{
@@ -1361,6 +1375,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					// Set new sorting
 					$this->set['sorting'] = intval($newSorting);
+
 					return;
 				}
 			}
@@ -1374,7 +1389,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Delete a record of the current table table and save it to tl_undo
-	 * @param boolean
+	 *
+	 * @param boolean $blnDoNotRedirect
 	 */
 	public function delete($blnDoNotRedirect=false)
 	{
@@ -1529,9 +1545,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively get all related table names and records
-	 * @param string
-	 * @param integer
-	 * @param array
+	 *
+	 * @param string  $table
+	 * @param integer $id
+	 * @param array   $delete
 	 */
 	public function deleteChilds($table, $id, &$delete)
 	{
@@ -1694,11 +1711,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to edit the current database record
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intId
+	 * @param integer $ajaxId
+	 *
 	 * @return string
 	 */
-	public function edit($intID=null, $ajaxId=null)
+	public function edit($intId=null, $ajaxId=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
@@ -1706,9 +1725,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		if ($intID != '')
+		if ($intId != '')
 		{
-			$this->intId = $intID;
+			$this->intId = $intId;
 		}
 
 		// Get the current record
@@ -2120,8 +2139,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to edit all records that are currently shown
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intId
+	 * @param integer $ajaxId
+	 *
 	 * @return string
 	 */
 	public function editAll($intId=null, $ajaxId=null)
@@ -2514,8 +2535,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to override all records that are currently shown
+	 *
 	 * @return string
-	 * @author based on a patch by Andreas Schempp
 	 */
 	public function overrideAll()
 	{
@@ -2832,7 +2853,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @throws \Exception
 	 */
 	protected function save($varValue)
@@ -2963,6 +2986,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()
@@ -3173,6 +3197,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of the current table as tree and return them as HTML string
+	 *
 	 * @return string
 	 */
 	protected function treeView()
@@ -3452,8 +3477,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Generate a particular subpart of the tree and return it as HTML string
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $id
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	public function ajaxTreeView($id, $level)
@@ -3521,15 +3548,17 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively generate the tree and return it as HTML string
-	 * @param string
-	 * @param integer
-	 * @param array
-	 * @param boolean
-	 * @param integer
-	 * @param array
-	 * @param boolean
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $table
+	 * @param integer $id
+	 * @param array   $arrPrevNext
+	 * @param boolean $blnHasSorting
+	 * @param integer $intMargin
+	 * @param array   $arrClipboard
+	 * @param boolean $blnCircularReference
+	 * @param boolean $protectedPage
+	 * @param boolean $blnNoRecursion
+	 *
 	 * @return string
 	 */
 	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=null, $blnCircularReference=false, $protectedPage=false, $blnNoRecursion=false)
@@ -3556,6 +3585,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if ($objRow->numRows < 1)
 		{
 			$this->Session->setData($session);
+
 			return '';
 		}
 
@@ -3769,12 +3799,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$this->Session->setData($session);
+
 		return $return;
 	}
 
 
 	/**
  	 * Show header of the parent table and list all records of the current table
+	 *
 	 * @return string
 	 */
 	protected function parentView()
@@ -4278,6 +4310,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all records of the current table and return them as HTML string
+	 *
 	 * @return string
 	 */
 	protected function listView()
@@ -4697,6 +4730,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Build the sort panel and return it as string
+	 *
 	 * @return string
 	 */
 	protected function panel()
@@ -4811,6 +4845,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a search form that allows to search results using regular expressions
+	 *
 	 * @return string
 	 */
 	protected function searchMenu()
@@ -4909,6 +4944,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a select menu that allows to sort results by a particular field
+	 *
 	 * @return string
 	 */
 	protected function sortMenu()
@@ -5002,7 +5038,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a select menu to limit results
-	 * @param boolean
+	 *
+	 * @param boolean $blnOptional
+	 *
 	 * @return string
 	 */
 	protected function limitMenu($blnOptional=false)
@@ -5140,7 +5178,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Generate the filter panel and return it as HTML string
-	 * @param integer
+	 *
+	 * @param integer $intFilterPanel
+	 *
 	 * @return string
 	 */
 	protected function filterMenu($intFilterPanel)
@@ -5542,6 +5582,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return a pagination menu to browse results
+	 *
 	 * @return string
 	 */
 	protected function paginationMenu()
@@ -5571,15 +5612,18 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		$objPagination = new \Pagination($this->total, $limit, 7, 'lp', new \BackendTemplate('be_pagination'), true);
+
 		return $objPagination->generate();
 	}
 
 
 	/**
 	 * Return the formatted group header as string
-	 * @param string
-	 * @param mixed
-	 * @param integer
+	 *
+	 * @param string  $field
+	 * @param mixed   $value
+	 * @param integer $mode
+	 *
 	 * @return string
 	 */
 	protected function formatCurrentValue($field, $value, $mode)
@@ -5670,10 +5714,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return the formatted group header as string
-	 * @param string
-	 * @param mixed
-	 * @param integer
-	 * @param array
+	 *
+	 * @param string  $field
+	 * @param mixed   $value
+	 * @param integer $mode
+	 * @param array   $row
+	 *
 	 * @return string
 	 */
 	protected function formatGroupHeader($field, $value, $mode, $row)

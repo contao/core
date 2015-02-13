@@ -28,12 +28,14 @@ class ModuleQuicknav extends \Module
 
 	/**
 	 * Redirect to the selected page
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['quicknav'][0]) . ' ###';
@@ -59,6 +61,7 @@ class ModuleQuicknav extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$lang = null;
@@ -98,14 +101,17 @@ class ModuleQuicknav extends \Module
 
 	/**
 	 * Recursively get all quicknav pages and return them as array
-	 * @param integer
-	 * @param integer
-	 * @param sting
-	 * @param sting
+	 *
+	 * @param integer $pid
+	 * @param integer $level
+	 * @param string  $host
+	 * @param string  $language
+	 *
 	 * @return array
 	 */
 	protected function getQuicknavPages($pid, $level=1, $host=null, $language=null)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$groups = array();
@@ -148,7 +154,9 @@ class ModuleQuicknav extends \Module
 				{
 					if ($objSubpages->domain != '' && $objSubpages->domain != Environment::get('host'))
 					{
-						$objSubpages->current()->loadDetails();
+						/** @var \PageModel $objModel */
+						$objModel = $objSubpages->current();
+						$objModel->loadDetails();
 					}
 
 					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);

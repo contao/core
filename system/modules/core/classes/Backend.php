@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to manage back end controllers.
  *
+ * @property \Ajax $objAjax
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Backend extends \Controller
@@ -79,6 +81,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return the TinyMCE language
+	 *
 	 * @return string
 	 */
 	public static function getTinyMceLanguage()
@@ -120,7 +123,9 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Validate an ACE type
-	 * @param string
+	 *
+	 * @param string $type
+	 *
 	 * @return string
 	 */
 	public static function getAceType($type)
@@ -190,6 +195,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Return a list of TinyMCE templates as JSON string
+	 *
 	 * @return string
 	 */
 	public static function getTinyTemplates()
@@ -218,9 +224,11 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add the request token to the URL
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $strRequest
+	 * @param boolean $blnAddRef
+	 * @param array   $arrUnset
+	 *
 	 * @return string
 	 */
 	public static function addToUrl($strRequest, $blnAddRef=true, $arrUnset=array())
@@ -234,6 +242,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Handle "runonce" files
+	 *
 	 * @throws \Exception
 	 */
 	protected function handleRunOnce()
@@ -276,7 +285,9 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Open a back end module and return it as HTML
-	 * @param string
+	 *
+	 * @param string $module
+	 *
 	 * @return string
 	 */
 	protected function getBackendModule($module)
@@ -390,6 +401,8 @@ abstract class Backend extends \Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+
+			/** @var \DataContainer $dc */
 			$dc = new $dataContainer($strTable, $arrModule);
 		}
 
@@ -402,7 +415,9 @@ abstract class Backend extends \Controller
 		// Trigger the module callback
 		elseif (class_exists($arrModule['callback']))
 		{
+			/** @var \Module $objCallback */
 			$objCallback = new $arrModule['callback']($dc);
+
 			$this->Template->main .= $objCallback->generate();
 		}
 
@@ -628,10 +643,12 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all searchable pages and return them as array
-	 * @param integer
-	 * @param string
-	 * @param boolean
-	 * @param string
+	 *
+	 * @param integer $pid
+	 * @param string  $domain
+	 * @param boolean $blnIsSitemap
+	 * @param string  $strLanguage
+	 *
 	 * @return array
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
@@ -711,9 +728,13 @@ abstract class Backend extends \Controller
 	/**
 	 * Add a breadcrumb menu to the page tree
 	 *
+<<<<<<< HEAD
 	 * @param string
 	 *
 	 * @throws \RuntimeException
+=======
+	 * @param string $strKey
+>>>>>>> ide-compatibility
 	 */
 	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{
@@ -767,6 +788,7 @@ abstract class Backend extends \Controller
 					if ($intId == $intNode)
 					{
 						$objSession->set($strKey, 0);
+
 						return;
 					}
 
@@ -823,12 +845,14 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Add an image to each page in the tree
-	 * @param array
-	 * @param string
-	 * @param DataContainer
-	 * @param string
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param string        $imageAttribute
+	 * @param boolean       $blnReturnImage
+	 * @param boolean       $blnProtected
+	 *
 	 * @return string
 	 */
 	public static function addPageIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
@@ -847,7 +871,7 @@ abstract class Backend extends \Controller
 		}
 
 		// Mark root pages
-		if ($row['type'] == 'root' || Input::get('do') == 'article')
+		if ($row['type'] == 'root' || \Input::get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
@@ -863,7 +887,7 @@ abstract class Backend extends \Controller
 	/**
 	 * Add a breadcrumb menu to the file tree
 	 *
-	 * @param string
+	 * @param string $strKey
 	 *
 	 * @throws \RuntimeException
 	 */
@@ -901,6 +925,7 @@ abstract class Backend extends \Controller
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
 			$objSession->set($strKey, '');
+
 			return;
 		}
 
@@ -957,6 +982,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all allowed pages and return them as string
+	 *
 	 * @return string
 	 */
 	public function createPageList()
@@ -1011,8 +1037,10 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Recursively get all allowed pages and return them as string
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intId
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	protected function doCreatePageList($intId=0, $level=-1)
@@ -1055,8 +1083,10 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Get all allowed files and return them as string
-	 * @param string
-	 * @param boolean
+	 *
+	 * @param string  $strFilter
+	 * @param boolean $filemount
+	 *
 	 * @return string
 	 */
 	public function createFileList($strFilter='', $filemount=false)
@@ -1101,9 +1131,11 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Recursively get all allowed files and return them as string
-	 * @param integer
-	 * @param integer
-	 * @param string
+	 *
+	 * @param string  $strFolder
+	 * @param integer $level
+	 * @param string  $strFilter
+	 *
 	 * @return string
 	 */
 	protected function doCreateFileList($strFolder=null, $level=-1, $strFilter='')

@@ -21,8 +21,8 @@ class PageError403 extends \Frontend
 
 	/**
 	 * Generate an error 403 page
-	 * @param integer
-	 * @param object
+	 * @param integer $pageId
+	 * @param \PageModel $objRootPage
 	 */
 	public function generate($pageId, $objRootPage=null)
 	{
@@ -39,11 +39,11 @@ class PageError403 extends \Frontend
 			$objRootPage = \PageModel::findPublishedById(is_integer($objRootPage) ? $objRootPage : $objRootPage->id);
 		}
 
-		// Look for an error_403 page
+		// Look for a 403 page
 		$obj403 = \PageModel::find403ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj403 === null)
+		if (null === $obj403)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			die_nicely('be_forbidden', 'Forbidden');
@@ -52,9 +52,12 @@ class PageError403 extends \Frontend
 		// Generate the error page
 		if (!$obj403->autoforward || !$obj403->jumpTo)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			$objPage = $obj403->loadDetails();
+
+			/** @var \PageRegular $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 403 Forbidden');
@@ -73,6 +76,7 @@ class PageError403 extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
+		/** @var \PageModel $objNextPage */
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }

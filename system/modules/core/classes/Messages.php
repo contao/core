@@ -21,6 +21,7 @@ class Messages extends \Backend
 
 	/**
 	 * Check for the latest Contao version
+	 *
 	 * @return string
 	 */
 	public function versionCheck()
@@ -36,6 +37,7 @@ class Messages extends \Backend
 
 	/**
 	 * Return the date of the last login
+	 *
 	 * @return string
 	 */
 	public function lastLogin()
@@ -53,6 +55,7 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
+	 *
 	 * @return string
 	 */
 	public function languageFallback()
@@ -98,6 +101,7 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there are non-root pages on the top-level
+	 *
 	 * @return string
 	 */
 	public function topLevelRoot()

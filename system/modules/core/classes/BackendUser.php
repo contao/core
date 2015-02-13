@@ -14,6 +14,14 @@ namespace Contao;
 /**
  * Provide methods to manage back end users.
  *
+ * @property boolean $isAdmin
+ * @property string  $groups
+ * @property array   $pagemounts
+ * @property array   $filemounts
+ * @property array   $filemountIds
+ * @property string  $fop
+ * @property string  $alexf
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendUser extends \User
@@ -158,7 +166,9 @@ class BackendUser extends \User
 
 	/**
 	 * Extend parent getter class and modify some parameters
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -223,8 +233,10 @@ class BackendUser extends \User
 
 	/**
 	 * Check whether the current user has a certain access right
-	 * @param string
-	 * @param array
+	 *
+	 * @param string $field
+	 * @param array  $array
+	 *
 	 * @return boolean
 	 */
 	public function hasAccess($field, $array)
@@ -261,8 +273,10 @@ class BackendUser extends \User
 
 	/**
 	 * Return true if the current user is allowed to do the current operation on the current page
-	 * @param integer
-	 * @param array
+	 *
+	 * @param integer $int
+	 * @param array   $row
+	 *
 	 * @return boolean
 	 */
 	public function isAllowed($int, $row)
@@ -334,7 +348,9 @@ class BackendUser extends \User
 
 	/**
 	 * Return true if there is at least one allowed excluded field
-	 * @param string
+	 *
+	 * @param string $table
+	 *
 	 * @return boolean
 	 */
 	public function canEditFieldsOf($table)
@@ -482,7 +498,9 @@ class BackendUser extends \User
 
 	/**
 	 * Generate the navigation menu and return it as array
-	 * @param boolean
+	 *
+	 * @param boolean $blnShowAll
+	 *
 	 * @return array
 	 */
 	public function navigation($blnShowAll=false)

@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Provide methods to handle select menus.
  *
+ * @property boolean $mandatory
+ * @property integer $size
+ * @property boolean $multiple
+ * @property array   $options
+ * @property boolean $chosen
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class SelectMenu extends \Widget
@@ -34,8 +40,9 @@ class SelectMenu extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -96,6 +103,7 @@ class SelectMenu extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

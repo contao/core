@@ -34,7 +34,11 @@ class ContentSliderStart extends \ContentElement
 		if (TL_MODE == 'BE')
 		{
 			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
+
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->title = $this->headline;
 		}
 

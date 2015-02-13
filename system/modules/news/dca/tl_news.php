@@ -590,10 +590,13 @@ class tl_news extends Backend
 
 	/**
 	 * Auto-generate the news alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -627,7 +630,9 @@ class tl_news extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listNewsArticles($arrRow)
@@ -638,7 +643,9 @@ class tl_news extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -684,7 +691,9 @@ class tl_news extends Backend
 
 	/**
 	 * Add the source options depending on the allowed fields (see #5498)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getSourceOptions(DataContainer $dc)
@@ -727,7 +736,8 @@ class tl_news extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -777,7 +787,8 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -796,7 +807,9 @@ class tl_news extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
@@ -807,12 +820,14 @@ class tl_news extends Backend
 
 	/**
 	 * Return the "feature/unfeature element" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
@@ -842,8 +857,10 @@ class tl_news extends Backend
 
 	/**
 	 * Feature/unfeature a news item
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $intId
+	 * @param boolean $blnVisible
+	 *
 	 * @return string
 	 */
 	public function toggleFeatured($intId, $blnVisible)
@@ -891,12 +908,14 @@ class tl_news extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -926,9 +945,10 @@ class tl_news extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

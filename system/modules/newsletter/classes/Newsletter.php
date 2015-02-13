@@ -21,14 +21,16 @@ class Newsletter extends \Backend
 
 	/**
 	 * Renturn a form to choose an existing style sheet and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
-	public function send(\DataContainer $objDc)
+	public function send(\DataContainer $dc)
 	{
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
-										->execute($objDc->id);
+										->execute($dc->id);
 
 		// Return if there is no newsletter
 		if ($objNewsletter->numRows < 1)
@@ -298,14 +300,17 @@ class Newsletter extends \Backend
 </form>';
 
 		unset($_SESSION['TL_PREVIEW_MAIL_ERROR']);
+
 		return $return;
 	}
 
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param \Database\Result
-	 * @param array
+	 *
+	 * @param \Database\Result|object $objNewsletter
+	 * @param array                   $arrAttachments
+	 *
 	 * @return \Email
 	 */
 	protected function generateEmailObject(\Database\Result $objNewsletter, $arrAttachments)
@@ -339,12 +344,14 @@ class Newsletter extends \Backend
 
 	/**
 	 * Compile the newsletter and send it
-	 * @param \Email
-	 * @param \Database\Result
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param \Email                  $objEmail
+	 * @param \Database\Result|object $objNewsletter
+	 * @param array                   $arrRecipient
+	 * @param string                  $text
+	 * @param string                  $html
+	 * @param string                  $css
+	 *
 	 * @return string
 	 */
 	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
@@ -352,7 +359,6 @@ class Newsletter extends \Backend
 		// Prepare the text content
 		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
 
-		// Add the HTML content
 		if (!$objNewsletter->sendText)
 		{
 			// Default template
@@ -361,7 +367,7 @@ class Newsletter extends \Backend
 				$objNewsletter->template = 'mail_default';
 			}
 
-			// Load the mail template
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
@@ -406,6 +412,7 @@ class Newsletter extends \Backend
 
 	/**
 	 * Return a form to choose a CSV file and import it
+	 *
 	 * @return string
 	 */
 	public function importRecipients()
@@ -424,6 +431,7 @@ class Newsletter extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -557,8 +565,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Remove the newsletter subscriptions of members who close their account
-	 * @param integer
-	 * @param string
+	 *
+	 * @param integer $intUser
+	 * @param string  $strMode
 	 */
 	public function removeSubscriptions($intUser, $strMode)
 	{
@@ -583,8 +592,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of new users
-	 * @param object
-	 * @param array
+	 *
+	 * @param \MemberModel $intUser
+	 * @param array        $arrData
 	 */
 	public function createNewUser($intUser, $arrData)
 	{
@@ -622,7 +632,8 @@ class Newsletter extends \Backend
 
 	/**
 	 * Activate newsletter subscription of new users
-	 * @param object
+	 *
+	 * @param \MemberModel $objUser
 	 */
 	public function activateAccount($objUser)
 	{
@@ -652,9 +663,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of existing users
-	 * @param mixed
-	 * @param object
-	 * @param object
+	 *
+	 * @param mixed        $varValue
+	 * @param \MemberModel $objUser
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return mixed
 	 */
 	public function synchronize($varValue, $objUser, $objModule=null)
@@ -824,7 +837,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Get all editable newsletters and return them as array
-	 * @param object
+	 *
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return array
 	 */
 	public function getNewsletters($objModule)
@@ -870,9 +885,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Add newsletters to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -895,7 +912,6 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				// Skip channels without target page
 				if (!$objNewsletter->jumpTo)
 				{
 					continue;

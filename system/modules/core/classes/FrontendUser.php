@@ -14,6 +14,10 @@ namespace Contao;
 /**
  * Provide methods to manage front end users.
  *
+ * @property array   $allGroups
+ * @property string  $loginPage
+ * @property boolean $blnRecordExists
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendUser extends \User
@@ -99,8 +103,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent setter class and modify some parameters
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -119,7 +124,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent getter class and modify some parameters
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -141,6 +148,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Authenticate a user
+	 *
 	 * @return boolean
 	 */
 	public function authenticate()
@@ -176,6 +184,7 @@ class FrontendUser extends \User
 
 						// Reload the page
 						\Controller::reload();
+
 						return true;
 					}
 				}
@@ -191,6 +200,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Add the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function login()
@@ -220,6 +230,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Remove the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function logout()
@@ -240,14 +251,17 @@ class FrontendUser extends \User
 
 		// Remove the auto login cookie
 		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), null, null, false, true);
+
 		return true;
 	}
 
 
 	/**
 	 * Save the original group membership
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strColumn
+	 * @param mixed  $varValue
+	 *
 	 * @return boolean
 	 */
 	public function findBy($strColumn, $varValue)
@@ -258,6 +272,7 @@ class FrontendUser extends \User
 		}
 
 		$this->arrGroups = $this->groups;
+
 		return true;
 	}
 

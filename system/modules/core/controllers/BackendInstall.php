@@ -20,6 +20,12 @@ class BackendInstall extends \Backend
 {
 
 	/**
+	 * @var \BackendTemplate|object
+	 */
+	protected $Template;
+
+
+	/**
 	 * Initialize the controller
 	 */
 	public function __construct()

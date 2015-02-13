@@ -34,12 +34,14 @@ class ModuleListing extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['listing'][0]) . ' ###';
@@ -90,6 +92,7 @@ class ModuleListing extends \Module
 		if (\Input::get('show'))
 		{
 			$this->listSingleRecord(\Input::get('show'));
+
 			return;
 		}
 
@@ -149,7 +152,9 @@ class ModuleListing extends \Module
 		{
 			if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 
@@ -158,6 +163,7 @@ class ModuleListing extends \Module
 
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
+
 				return;
 			}
 		}
@@ -359,7 +365,8 @@ class ModuleListing extends \Module
 
 	/**
 	 * List a single record
-	 * @param integer
+	 *
+	 * @param integer $id
 	 */
 	protected function listSingleRecord($id)
 	{
@@ -369,8 +376,10 @@ class ModuleListing extends \Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new \FrontendTemplate($this->list_info_layout);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->list_info_layout);
 
+		$this->Template = $objTemplate;
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
@@ -418,9 +427,11 @@ class ModuleListing extends \Module
 
 	/**
 	 * Format a value
-	 * @param string
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param string  $k
+	 * @param mixed   $value
+	 * @param boolean $blnListSingle
+	 *
 	 * @return mixed
 	 */
 	protected function formatValue($k, $value, $blnListSingle=false)
@@ -433,6 +444,7 @@ class ModuleListing extends \Module
 			return '';
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Array
@@ -462,7 +474,9 @@ class ModuleListing extends \Module
 		// URLs
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$value = \Idna::decode($value); // see #5946
 			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') . '>' . $value . '</a>';
 		}

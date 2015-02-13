@@ -461,12 +461,13 @@ class tl_member extends Backend
 
 	/**
 	 * Filter disabled groups
+	 *
 	 * @return array
 	 */
 	public function getActiveGroups()
 	{
 		$arrGroups = array();
-		$objGroup = \MemberGroupModel::findAllActive();
+		$objGroup = MemberGroupModel::findAllActive();
 
 		if ($objGroup !== null)
 		{
@@ -482,10 +483,11 @@ class tl_member extends Backend
 
 	/**
 	 * Add an image to each record
-	 * @param array
-	 * @param string
-	 * @param \DataContainer
-	 * @param array
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param array         $args
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label, DataContainer $dc, $args)
@@ -498,17 +500,20 @@ class tl_member extends Backend
 		}
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
+
 		return $args;
 	}
 
 
 	/**
 	 * Generate a "switch account" button and return it as string
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 *
 	 * @return string
 	 */
 	public function switchUser($row, $href, $label, $title, $icon)
@@ -524,8 +529,10 @@ class tl_member extends Backend
 
 	/**
 	 * Call the "setNewPassword" callback
-	 * @param string
-	 * @param object
+	 *
+	 * @param string $strPassword
+	 * @param DataContainer|MemberModel $user
+	 *
 	 * @return string
 	 */
 	public function setNewPassword($strPassword, $user)
@@ -559,12 +566,13 @@ class tl_member extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function storeDateAdded($dc)
 	{
 		// Front end call
-		if (!$dc instanceof \DataContainer)
+		if (!$dc instanceof DataContainer)
 		{
 			return;
 		}
@@ -592,11 +600,12 @@ class tl_member extends Backend
 
 	/**
 	 * Check whether the user session should be removed
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function checkRemoveSession($dc)
 	{
-		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		if ($dc instanceof DataContainer && $dc->activeRecord)
 		{
 			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
@@ -608,11 +617,12 @@ class tl_member extends Backend
 
 	/**
 	 * Remove the session if a user is deleted (see #5353)
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function removeSession($dc)
 	{
-		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		if ($dc instanceof DataContainer && $dc->activeRecord)
 		{
 			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
 						   ->execute($dc->activeRecord->id);
@@ -622,12 +632,14 @@ class tl_member extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -657,9 +669,10 @@ class tl_member extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
