@@ -471,6 +471,11 @@ $GLOBALS['TL_ASSETS'] = array
 	'SLIMBOX'      => '1.8'
 );
 
+/**
+ * Register LESS/SCSS import paths
+ */
+ $GLOBALS['TL_SCSSLESS_PATHS'] = array();
+
 
 /**
  * Other global arrays

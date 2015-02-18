@@ -340,6 +340,12 @@ class Combiner extends \System
 				TL_ROOT . '/vendor/contao-components/compass/css'
 			));
 
+			foreach ($GLOBALS['TL_SCSSLESS_PATHS'] as $strScssLessPath)
+			{
+				$strImportPath = ltrim($strScssLessPath, '/\\');
+				$objCompiler->addImportPath(TL_ROOT . '/' . $strImportPath);
+			}
+
 			$objCompiler->setFormatter((\Config::get('debugMode') ? 'Leafo\ScssPhp\Formatter\Expanded' : 'Leafo\ScssPhp\Formatter\Compressed'));
 
 			return $this->fixPaths($objCompiler->compile($content), $arrFile);
@@ -353,6 +359,12 @@ class Combiner extends \System
 				'compress' => !\Config::get('debugMode'),
 				'import_dirs' => array(TL_ROOT . '/' . $strPath => $strPath)
 			);
+
+			foreach ($GLOBALS['TL_SCSSLESS_PATHS'] as $strScssLessPath)
+			{
+				$strImportPath = ltrim($strScssLessPath, '/\\');
+				$arrOptions['import_dirs'][] = array(TL_ROOT . '/' . $strImportPath => $strImportPath);
+			}
 
 			$objParser = new \Less_Parser($arrOptions);
 			$objParser->parse($content);
