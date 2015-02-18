@@ -123,6 +123,11 @@ abstract class Widget extends \BaseTemplate
 	 */
 	protected $objDca;
 
+	/**
+	 * Element usages during same request
+	 * @var array
+	 */
+	static protected $arrElementUsages = array();
 
 	/**
 	 * Initialize the object
@@ -209,7 +214,9 @@ abstract class Widget extends \BaseTemplate
 		switch ($strKey)
 		{
 			case 'id':
-				$this->strId = $varValue;
+		                static::$arrElementUsages[] = $varValue;
+		                $arrUsages = array_count_values(static::$arrElementUsages);
+				$this->strId = $varValue . (($arrUsages[$varValue] > 1) ? '_' . ($arrUsages[$varValue] - 1) : '');
 				break;
 
 			case 'name':
