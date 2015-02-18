@@ -94,6 +94,7 @@ class tl_module_comments extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getCommentTemplates()

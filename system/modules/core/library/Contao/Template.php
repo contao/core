@@ -24,6 +24,13 @@ namespace Contao;
  *     $template->name = 'Leo Feyer';
  *     $template->output();
  *
+ * @property string $style
+ * @property array  $cssID
+ * @property string $class
+ * @property string $inColumn
+ * @property string $headline
+ * @property array  $hl
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Template extends \BaseTemplate

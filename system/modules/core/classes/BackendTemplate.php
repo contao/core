@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle back end templates.
  *
+ * @property string $ua
+ * @property array  $javascripts
+ * @property array  $stylesheets
+ * @property string $mootools
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendTemplate extends \Template
@@ -21,6 +26,7 @@ class BackendTemplate extends \Template
 
 	/**
 	 * Add a hook to modify the template output
+	 *
 	 * @return string
 	 */
 	public function parse()
@@ -43,6 +49,7 @@ class BackendTemplate extends \Template
 
 	/**
 	 * Parse the template file, add the TinyMCE configuration and print it to the screen
+	 *
 	 * @throws \Exception
 	 */
 	public function output()
@@ -116,6 +123,7 @@ class BackendTemplate extends \Template
 
 	/**
 	 * Return the locale string
+	 *
 	 * @return string
 	 */
 	protected function getLocaleString()
@@ -144,6 +152,7 @@ class BackendTemplate extends \Template
 	 *
 	 * Fix the MooTools more parsers which incorrectly parse ISO-8601 and do
 	 * not handle German date formats at all.
+	 *
 	 * @return string
 	 */
 	protected function getDateString()

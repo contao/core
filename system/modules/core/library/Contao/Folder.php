@@ -23,6 +23,13 @@ namespace Contao;
  *         $folder->purge();
  *     }
  *
+ * @property string  $hash     The MD5 hash
+ * @property string  $name     The folder name
+ * @property string  $basename Alias of $name
+ * @property string  $path     The folder path
+ * @property string  $value    Alias of $path
+ * @property integer $size     The folder size
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Folder extends \System
@@ -115,12 +122,6 @@ class Folder extends \System
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * hash: the folder's MD5 hash
-	 * * path: the path to the folder
-	 * * size: the folder size
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -282,7 +283,7 @@ class Folder extends \System
 			new \Folder($strParent);
 		}
 
-		$return = $this->Files->rcopy($this->strFolder, $strNewName);
+		$this->Files->rcopy($this->strFolder, $strNewName);
 
 		// Update the database AFTER the folder has been renamed
 		if ($this->blnSyncDb)
@@ -290,7 +291,7 @@ class Folder extends \System
 			$this->objModel = \Dbafs::copyResource($this->strFolder, $strNewName);
 		}
 
-		return $return;
+		return true;
 	}
 
 
@@ -339,6 +340,7 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
+		/** @var \RecursiveDirectoryIterator[] $it */
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
 				TL_ROOT . '/' . $this->strFolder,
@@ -346,14 +348,12 @@ class Folder extends \System
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
-		while ($it->valid())
+		foreach ($it as $i)
 		{
-			if ($it->getFilename() != '.DS_Store')
+			if ($i->getFilename() != '.DS_Store')
 			{
-				$arrFiles[] = $it->getSubPathname();
+				$arrFiles[] = str_replace(TL_ROOT . '/' . $this->strFolder . '/', '', $i->getPathname());
 			}
-
-			$it->next();
 		}
 
 		return md5(implode('-', $arrFiles));

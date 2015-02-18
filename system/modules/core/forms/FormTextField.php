@@ -14,6 +14,16 @@ namespace Contao;
 /**
  * Class FormTextField
  *
+ * @property string  $value
+ * @property string  $type
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property integer $min
+ * @property integer $max
+ * @property integer $step
+ * @property string  $placeholder
+ * @property boolean $hideInput
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormTextField extends \Widget

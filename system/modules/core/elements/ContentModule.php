@@ -21,6 +21,7 @@ class ContentModule extends \ContentElement
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -45,6 +46,8 @@ class ContentModule extends \ContentElement
 		}
 
 		$objModule->typePrefix = 'ce_';
+
+		/** @var \Module $objModule */
 		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID

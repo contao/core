@@ -31,7 +31,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Update a particular style sheet
-	 * @param integer
+	 *
+	 * @param integer $intId
 	 */
 	public function updateStyleSheet($intId)
 	{
@@ -114,7 +115,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Write a style sheet to a file
-	 * @param array
+	 *
+	 * @param array $row
 	 */
 	protected function writeStyleSheet($row)
 	{
@@ -129,6 +131,7 @@ class StyleSheets extends \Backend
 		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
+
 			return;
 		}
 
@@ -184,11 +187,13 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Compile format definitions and return them as string
-	 * @param array
-	 * @param boolean
-	 * @param array
-	 * @param array
-	 * @param boolean
+	 *
+	 * @param array   $row
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 * @param array   $parent
+	 * @param boolean $export
+	 *
 	 * @return string
 	 */
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array(), $export=false)
@@ -978,9 +983,11 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Compile a color value and return a hex or rgba color
-	 * @param mixed
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param mixed   $color
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 *
 	 * @return string
 	 */
 	protected function compileColor($color, $blnWriteToFile=false, $vars=array())
@@ -1002,7 +1009,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Try to shorten a hex color
-	 * @param string
+	 *
+	 * @param string $color
+	 *
 	 * @return string
 	 */
 	protected function shortenHexColor($color)
@@ -1018,10 +1027,13 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Convert hex colors to rgb
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $color
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 *
 	 * @return array
+	 *
 	 * @see http://de3.php.net/manual/de/function.hexdec.php#99478
 	 */
 	protected function convertHexColor($color, $blnWriteToFile=false, $vars=array())
@@ -1064,7 +1076,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Return a form to choose an existing style sheet and import it
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	public function importStyleSheet()
@@ -1083,6 +1097,7 @@ class StyleSheets extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -1215,6 +1230,8 @@ class StyleSheets extends \Backend
 					// Regular block
 					else
 					{
+						$strSelector = '';
+
 						while ($i<$intLength)
 						{
 							$strBuffer .= $strFile[$i++];
@@ -1345,7 +1362,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Export a style sheet
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @throws \Exception
 	 */
 	public function exportStyleSheet(\DataContainer $dc)
@@ -1425,7 +1444,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Check the name of an imported file
-	 * @param string
+	 *
+	 * @param string $strName
+	 *
 	 * @return string
 	 */
 	public function checkStyleSheetName($strName)
@@ -1449,7 +1470,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Create a format definition and insert it into the database
-	 * @param array
+	 *
+	 * @param array $arrDefinition
 	 */
 	protected function createDefinition($arrDefinition)
 	{
@@ -2240,8 +2262,10 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Return an image as data: string
-	 * @param string
-	 * @param array
+	 *
+	 * @param string $strImage
+	 * @param array  $arrParent
+	 *
 	 * @return string|boolean
 	 */
 	protected function generateBase64Image($strImage, $arrParent)

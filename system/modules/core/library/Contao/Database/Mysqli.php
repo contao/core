@@ -20,10 +20,10 @@ class Mysqli extends \Database
 {
 
 	/**
-	 * List tables query
-	 * @var string
+	 * Connection ID
+	 * @var \mysqli
 	 */
-	protected $strListTables = "SHOW TABLES FROM `%s`";
+	protected $resConnection;
 
 
 	/**

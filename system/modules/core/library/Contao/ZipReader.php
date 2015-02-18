@@ -23,6 +23,37 @@ namespace Contao;
  *         echo $zip->->file_name;
  *     }
  *
+ * @property integer $number_of_this_disk       The number of this disk
+ * @property integer $number_of_disk_with_cd    The number of the disk with the start of the central directory
+ * @property integer $total_cd_entries_disk     The total number of entries in the central directory on this disk
+ * @property integer $total_cd_entries          The total number of entries in the central directory
+ * @property integer $size_of_cd                The size of the central directory
+ * @property integer $offset_start_cd           The offset of the start of the central directory with respect to the starting disk number
+ * @property integer $zipfile_comment_length    The ZIP file comment length
+ * @property string  $zipfile_comment           The ZIP file comment
+ * @property integer $version_made_by           The version made by
+ * @property integer $version_needed_to_extract The version needed to extract
+ * @property integer $general_purpose_bit_flag  General purpose bit flag
+ * @property integer $compression_method        The compression method
+ * @property integer $last_mod_file_time        The last modification file time
+ * @property integer $last_mod_file_date        The last modification file date
+ * @property integer $last_mod_file_unix        The last modification file unix timestamp
+ * @property integer $crc-32                    The CRC32 checksum
+ * @property integer $compressed_size           The compressed size
+ * @property integer $uncompressed_size         The uncompressed size
+ * @property integer $file_name_length          The file name length
+ * @property integer $extra_field_length        The extra field length
+ * @property integer $file_comment_length       The file comment length
+ * @property integer $disk_number_start         Disk number start
+ * @property integer $internal_file_attributes  Internal file attributes
+ * @property integer $external_file_attributes  External file attributes
+ * @property integer $offset_of_local_header    The relative offset of local header
+ * @property string  $file_name                 The file name
+ * @property string  $file_basename             The file basename
+ * @property string  $file_dirname              The file dirname
+ * @property string  $extra_field               The extra field
+ * @property string  $file_comment              The file comment
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ZipReader
@@ -130,42 +161,6 @@ class ZipReader
 	/**
 	 * Return a property of the archive header or the current file
 	 *
-	 * Supported header parameters:
-	 *
-	 * * number_of_this_disk:       the number of this disk
-	 * * number_of_disk_with_cd:    the number of the disk with thestart of the central directory
-	 * * total_cd_entries_disk:     the total number of entries in the central directory on this disk
-	 * * total_cd_entries:          the total number of entries in the central directory
-	 * * size_of_cd:                the size of the central directory
-	 * * offset_start_cd:           the offset of the start of the central directory with respect to the starting disk number
-	 * * zipfile_comment_length:    the ZIP file comment length
-	 * * zipfile_comment:           the ZIP file comment
-	 *
-	 * Supported file parameters:
-	 *
-	 * * version_made_by:           the version made by
-	 * * version_needed_to_extract: the version needed to extract
-	 * * general_purpose_bit_flag:  general purpose bit flag
-	 * * compression_method:        the compression method
-	 * * last_mod_file_time:        the last modification file time
-	 * * last_mod_file_date:        the last modification file date
-	 * * last_mod_file_unix:        the last modification file unix timestamp
-	 * * crc-32:                    the CRC32 checksum
-	 * * compressed_size:           the compressed size
-	 * * uncompressed_size:         the uncompressed size
-	 * * file_name_length:          the file name length
-	 * * extra_field_length:        the extra field length
-	 * * file_comment_length:       the file comment length
-	 * * disk_number_start:         disk number start
-	 * * internal_file_attributes:  internal file attributes
-	 * * external_file_attributes:  external file attributes
-	 * * offset_of_local_header:    the relative offset of local header
-	 * * file_name:                 the file name
-	 * * file_basename:             the file basename
-	 * * file_dirname:              the file dirname
-	 * * extra_field:               the extra field
-	 * * file_comment:              the file comment
-	 *
 	 * @param string $strKey The property name
 	 *
 	 * @return mixed|null The property value or null
@@ -235,6 +230,7 @@ class ZipReader
 			if ($strName == $v['file_name'])
 			{
 				$this->intIndex = $k;
+
 				return true;
 			}
 		}
@@ -251,6 +247,7 @@ class ZipReader
 	public function first()
 	{
 		$this->intIndex = 0;
+
 		return $this;
 	}
 
@@ -268,6 +265,7 @@ class ZipReader
 		}
 
 		++$this->intIndex;
+
 		return $this;
 	}
 
@@ -285,6 +283,7 @@ class ZipReader
 		}
 
 		--$this->intIndex;
+
 		return $this;
 	}
 
@@ -297,6 +296,7 @@ class ZipReader
 	public function last()
 	{
 		$this->intIndex = $this->intLast;
+
 		return $this;
 	}
 
@@ -325,6 +325,7 @@ class ZipReader
 	public function reset()
 	{
 		$this->intIndex = -1;
+
 		return $this;
 	}
 
@@ -447,6 +448,7 @@ class ZipReader
 		}
 
 		$intOffset = 0;
+		$pos = 0;
 		$intInterval = min(filesize(TL_ROOT . '/' . $this->strFile), 1024);
 		$strBuffer = '';
 

@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle text fields with unit drop down menu.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class InputUnit extends \Widget
@@ -40,8 +45,9 @@ class InputUnit extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -83,7 +89,9 @@ class InputUnit extends \Widget
 
 	/**
 	 * Do not validate unit fields
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -125,6 +133,7 @@ class InputUnit extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

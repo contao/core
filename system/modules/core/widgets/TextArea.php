@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Provide methods to handle textareas.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property boolean $rte
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TextArea extends \Widget
@@ -52,8 +58,9 @@ class TextArea extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -95,6 +102,7 @@ class TextArea extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

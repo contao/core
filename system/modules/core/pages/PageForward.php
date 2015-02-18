@@ -21,13 +21,14 @@ class PageForward extends \Frontend
 
 	/**
 	 * Redirect to an internal page
-	 * @param object
+	 * @param \PageModel $objPage
 	 */
 	public function generate($objPage)
 	{
 		// Forward to the jumpTo or first published page
 		if ($objPage->jumpTo)
 		{
+			/** @var \PageModel $objNextPage */
 			$objNextPage = $objPage->getRelated('jumpTo');
 		}
 		else

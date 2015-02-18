@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Class FormFileUpload
  *
+ * @property boolean $mandatory
+ * @property integer $maxlength
+ * @property integer $fSize
+ * @property string  $extensions
+ * @property string  $uploadFolder
+ * @property boolean $doNotOverwrite
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormFileUpload extends \Widget implements \uploadable
@@ -124,6 +131,7 @@ class FormFileUpload extends \Widget implements \uploadable
 			}
 
 			unset($_FILES[$this->strName]);
+
 			return;
 		}
 
@@ -134,6 +142,7 @@ class FormFileUpload extends \Widget implements \uploadable
 			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, __METHOD__, TL_ERROR);
 
 			unset($_FILES[$this->strName]);
+
 			return;
 		}
 
@@ -147,6 +156,7 @@ class FormFileUpload extends \Widget implements \uploadable
 			$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', __METHOD__, TL_ERROR);
 
 			unset($_FILES[$this->strName]);
+
 			return;
 		}
 
@@ -159,6 +169,7 @@ class FormFileUpload extends \Widget implements \uploadable
 				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.\Config::get('imageWidth').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
+
 				return;
 			}
 
@@ -169,6 +180,7 @@ class FormFileUpload extends \Widget implements \uploadable
 				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.\Config::get('imageHeight').' pixels', __METHOD__, TL_ERROR);
 
 				unset($_FILES[$this->strName]);
+
 				return;
 			}
 		}

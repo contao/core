@@ -115,6 +115,7 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Get all tables and return them as array
+	 *
 	 * @return array
 	 */
 	public function getAllTables()
@@ -125,6 +126,7 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all list templates as array
+	 *
 	 * @return array
 	 */
 	public function getListTemplates()
@@ -135,6 +137,7 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all info templates as array
+	 *
 	 * @return array
 	 */
 	public function getInfoTemplates()

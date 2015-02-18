@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle radio button tables.
  *
+ * @property integer $cols
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class RadioTable extends \Widget
@@ -40,8 +43,9 @@ class RadioTable extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -83,6 +87,7 @@ class RadioTable extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

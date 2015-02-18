@@ -28,12 +28,14 @@ class ModuleLogin extends \Module
 
 	/**
 	 * Display a login form
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['login'][0]) . ' ###';
@@ -115,6 +117,7 @@ class ModuleLogin extends \Module
 		// Logout and redirect to the website root if the current page is protected
 		if (\Input::post('FORM_SUBMIT') == 'tl_logout')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			$this->import('FrontendUser', 'User');
@@ -156,7 +159,10 @@ class ModuleLogin extends \Module
 			$this->import('FrontendUser', 'User');
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
@@ -165,7 +171,9 @@ class ModuleLogin extends \Module
 
 			if ($this->User->lastLogin > 0)
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], \Date::parse($objPage->datimFormat, $this->User->lastLogin));
 			}
 
@@ -174,7 +182,10 @@ class ModuleLogin extends \Module
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
 
-		$this->Template = new \FrontendTemplate($this->strTemplate);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+		$this->Template = $objTemplate;
 		$this->Template->setData($this->arrData);
 
 		$blnHasError = false;
