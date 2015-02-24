@@ -98,7 +98,7 @@ class Automator extends \System
 		$objDatabase->execute("TRUNCATE TABLE tl_version");
 
 		// Add a log entry
-		$this->log('Purged the undo table', __METHOD__, TL_CRON);
+		$this->log('Purged the version table', __METHOD__, TL_CRON);
 	}
 
 
