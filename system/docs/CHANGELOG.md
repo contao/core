@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.4.5 (2015-03-XX)
+--------------------------
+
+### Fixed
+Replace only the `{{file}}` insert tag in the back end preview (see #7647).
+
+
 Version 3.4.4 (2015-02-12)
 --------------------------
 
