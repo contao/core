@@ -5,6 +5,9 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Handle language fragments without trailing slash when redirecting (see #7666).
+
+### Fixed
 Trigger the `load_callback` upon saving in "override all" mode (see #7670). 
 
 ### Fixed
