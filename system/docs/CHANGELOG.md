@@ -5,6 +5,9 @@ Version 3.4.5 (2015-03-XX)
 --------------------------
 
 ### Fixed
+Convert language codes to locales in the meta wizard (see #7667).
+
+### Fixed
 Replace only the `{{file}}` insert tag in the back end preview (see #7647).
 
 
