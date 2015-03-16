@@ -5,6 +5,9 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Trigger the `load_callback` upon saving in "override all" mode (see #7670). 
+
+### Fixed
 Ensure a unique language file array in the `Automator` class (see #7687).
 
 
