@@ -603,7 +603,7 @@ abstract class Frontend extends \Controller
 			list($strLabel, $strValue) = array_map('trim', explode('=', $v, 2));
 			$this->arrMeta[$strLabel] = array_map('trim', explode('|', $strValue));
 
-			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC)) # FIXME: $this->multiSRC is not used
+			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC))
 			{
 				$this->arrAux[] = $strPath . '/' . $strLabel;
 			}
