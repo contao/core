@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Faq
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class ModuleFaqReader
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Faq
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleFaqReader extends \Module
 {
@@ -36,12 +28,14 @@ class ModuleFaqReader extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqreader'][0]) . ' ###';
@@ -62,9 +56,12 @@ class ModuleFaqReader extends \Module
 		// Do not index or cache the page if no FAQ has been specified
 		if (!\Input::get('items'))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -73,9 +70,12 @@ class ModuleFaqReader extends \Module
 		// Do not index or cache the page if there are no categories
 		if (!is_array($this->faq_categories) || empty($this->faq_categories))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -88,6 +88,7 @@ class ModuleFaqReader extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
@@ -104,6 +105,7 @@ class ModuleFaqReader extends \Module
 			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
 			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
+
 			return;
 		}
 
@@ -170,12 +172,14 @@ class ModuleFaqReader extends \Module
 		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $strAuthor);
 
 		// HOOK: comments extension required
-		if ($objFaq->noComments || !in_array('comments', ModuleLoader::getActive()))
+		if ($objFaq->noComments || !in_array('comments', \ModuleLoader::getActive()))
 		{
 			$this->Template->allowComments = false;
+
 			return;
 		}
 
+		/** @var \FaqCategoryModel $objCategory */
 		$objCategory = $objFaq->getRelated('pid');
 		$this->Template->allowComments = $objCategory->allowComments;
 
@@ -201,6 +205,7 @@ class ModuleFaqReader extends \Module
 		// Notify the author
 		if ($objCategory->notify != 'notify_admin')
 		{
+			/** @var \UserModel $objAuthor */
 			if (($objAuthor = $objFaq->getRelated('author')) !== null && $objAuthor->email != '')
 			{
 				$arrNotifies[] = $objAuthor->email;

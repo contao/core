@@ -3,27 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageSelector
- *
  * Provide methods to handle input field "page tree".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array  $rootNodes
+ * @property string $fieldType
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageSelector extends \Widget
 {
@@ -49,7 +43,8 @@ class PageSelector extends \Widget
 
 	/**
 	 * Load the database object
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -60,6 +55,7 @@ class PageSelector extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -221,9 +217,11 @@ class PageSelector extends \Widget
 
 	/**
 	 * Generate a particular subpart of the page tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
+	 *
+	 * @param integer $id
+	 * @param string  $strField
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	public function generateAjax($id, $strField, $level)
@@ -283,10 +281,12 @@ class PageSelector extends \Widget
 
 	/**
 	 * Recursively render the pagetree
-	 * @param int
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param integer $intMargin
+	 * @param boolean $protectedPage
+	 * @param boolean $blnNoRecursion
+	 *
 	 * @return string
 	 */
 	protected function renderPagetree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)

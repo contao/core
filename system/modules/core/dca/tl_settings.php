@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -500,19 +498,18 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 
 
 /**
- * Class tl_settings
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_settings extends Backend
 {
 
 	/**
 	 * Disable modules
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function disableModules(DataContainer $dc)
@@ -623,7 +620,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Purge the internal cache when toggling the Contao safe mode
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function changeCoreOnlyMode($varValue)
@@ -640,7 +639,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Remove protected search results if the feature is being disabled
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function clearSearchIndex($varValue)
@@ -656,8 +657,10 @@ class tl_settings extends Backend
 
 	/**
 	 * Store the unfiltered SMTP password
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function storeSmtpPass($varValue, DataContainer $dc)
@@ -672,9 +675,10 @@ class tl_settings extends Backend
 
 
 	/**
-	 * Make sure that "html5" is in the list of valid template
-	 * files, so the back end works correctly (see #3398)
-	 * @param mixed
+	 * Make sure that "html5" is in the list of valid template files, so the back end works correctly (see #3398)
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkTemplateFiles($varValue)
@@ -690,9 +694,12 @@ class tl_settings extends Backend
 
 	/**
 	 * Check the upload path
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkUploadPath($varValue)
 	{
@@ -712,7 +719,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Check a static URL
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
@@ -728,7 +737,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Purge the internal caches
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function purgeInternalCache($varValue)

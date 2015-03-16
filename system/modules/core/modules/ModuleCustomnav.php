@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleCustomnav
- *
  * Front end module "custom navigation".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleCustomnav extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleCustomnav extends \Module
 
 	/**
 	 * Redirect to the selected page
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['customnav'][0]) . ' ###';
@@ -63,6 +56,7 @@ class ModuleCustomnav extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 
@@ -72,6 +66,7 @@ class ModuleCustomnav extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$items = array();
@@ -109,7 +104,10 @@ class ModuleCustomnav extends \Module
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
-			$arrPages[$objPages->id] = $objPages->current()->loadDetails()->row(); // see #3765
+			/** @var \PageModel $objPages */
+			$objModel = $objPages->current();
+
+			$arrPages[$objPages->id] = $objModel->loadDetails()->row(); // see #3765
 		}
 
 		// Set default template
@@ -118,6 +116,7 @@ class ModuleCustomnav extends \Module
 			$this->navigationTpl = 'nav_default';
 		}
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);

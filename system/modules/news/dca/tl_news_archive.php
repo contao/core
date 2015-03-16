@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -252,12 +250,9 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 
 
 /**
- * Class tl_news_archive
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_news_archive extends Backend
 {
@@ -434,7 +429,8 @@ class tl_news_archive extends Backend
 	 *
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -453,11 +449,13 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the manage feeds button
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $class
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function manageFeeds($href, $label, $title, $class, $attributes)
@@ -468,12 +466,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
@@ -484,12 +484,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the copy archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
@@ -500,12 +502,14 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Return the delete archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)

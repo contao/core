@@ -3,35 +3,27 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageRegular
- *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageRegular extends \Frontend
 {
 
 	/**
 	 * Generate a regular page
-	 * @param object
-	 * @param boolean
+	 *
+	 * @param \PageModel $objPage
+	 * @param boolean    $blnCheckRequest
 	 */
 	public function generate($objPage, $blnCheckRequest=false)
 	{
@@ -56,9 +48,12 @@ class PageRegular extends \Frontend
 			}
 		}
 
+		/** @var \ThemeModel $objTheme */
+		$objTheme = $objLayout->getRelated('pid');
+
 		// Set the layout template and template group
 		$objPage->template = $objLayout->template ?: 'fe_page';
-		$objPage->templateGroup = $objLayout->getRelated('pid')->templates;
+		$objPage->templateGroup = $objTheme->templates;
 
 		// Store the output format
 		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
@@ -198,8 +193,10 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Get a page layout and return it as database result object
-	 * @param \Model
-	 * @return \Model
+	 *
+	 * @param \PageModel $objPage
+	 *
+	 * @return \LayoutModel
 	 */
 	protected function getPageLayout($objPage)
 	{
@@ -234,7 +231,7 @@ class PageRegular extends \Frontend
 		$objLayout = \LayoutModel::findByPk($intId);
 
 		// Die if there is no layout
-		if ($objLayout === null)
+		if (null === $objLayout)
 		{
 			header('HTTP/1.1 501 Not Implemented');
 			$this->log('Could not find layout ID "' . $intId . '"', __METHOD__, TL_ERROR);
@@ -251,13 +248,18 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create a new template
-	 * @param object
-	 * @param object
+	 *
+	 * @param \PageModel   $objPage
+	 * @param \LayoutModel $objLayout
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
 		$blnXhtml = ($objPage->outputFormat == 'xhtml');
-		$this->Template = new \FrontendTemplate($objPage->template);
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($objPage->template);
+
+		$this->Template = $objTemplate;
 
 		// Generate the DTD
 		if ($blnXhtml)
@@ -463,9 +465,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all header scripts
-	 * @param object
-	 * @param object
-	 * @throws \Exception
+	 *
+	 * @param \PageModel   $objPage
+	 * @param \LayoutModel $objLayout
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
 	{
@@ -525,6 +527,8 @@ class PageRegular extends \Frontend
 					// Style sheets with a CC or a combination of font-face and media-type != all cannot be aggregated (see #5216)
 					if ($objStylesheets->cc || ($objStylesheets->hasFontFace && $media != 'all'))
 					{
+						$strStyleSheet = '';
+
 						// External style sheet
 						if ($objStylesheets->type == 'external')
 						{
@@ -691,7 +695,8 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all footer scripts
-	 * @param object
+	 *
+	 * @param \LayoutModel $objLayout
 	 */
 	protected function createFooterScripts($objLayout)
 	{

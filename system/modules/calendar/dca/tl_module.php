@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -151,12 +149,9 @@ if (in_array('comments', ModuleLoader::getActive()))
 
 
 /**
- * Class tl_module_calendar
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_module_calendar extends Backend
 {
@@ -173,6 +168,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Get all calendars and return them as array
+	 *
 	 * @return array
 	 */
 	public function getCalendars()
@@ -199,6 +195,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Get all event reader modules and return them as array
+	 *
 	 * @return array
 	 */
 	public function getReaderModules()
@@ -217,7 +214,9 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return the calendar formats depending on the module type
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getFormats(DataContainer $dc)
@@ -238,6 +237,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Hide the start day drop-down if not applicable
+	 *
 	 * @return string
 	 */
 	public function hideStartDay()
@@ -267,6 +267,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
+	 *
 	 * @return array
 	 */
 	public function getEventTemplates()
@@ -277,6 +278,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
+	 *
 	 * @return array
 	 */
 	public function getCalendarTemplates()

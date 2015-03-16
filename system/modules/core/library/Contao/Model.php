@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -36,9 +34,9 @@ namespace Contao;
  *         echo $user->name;
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property integer $id The ID
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Model
 {
@@ -136,6 +134,8 @@ abstract class Model
 			foreach ($arrRelated as $key=>$row)
 			{
 				$table = $this->arrRelations[$key]['table'];
+
+				/** @var static $strClass */
 				$strClass = static::getClassFromTable($table);
 				$intPk = $strClass::getPk();
 
@@ -154,6 +154,7 @@ abstract class Model
 					}
 					else
 					{
+						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
 					}
@@ -280,7 +281,7 @@ abstract class Model
 	 *
 	 * @param array $arrData The data record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function setRow(array $arrData)
 	{
@@ -293,6 +294,7 @@ abstract class Model
 		}
 
 		$this->arrData = $arrData;
+
 		return $this;
 	}
 
@@ -302,7 +304,7 @@ abstract class Model
 	 *
 	 * @param array $arrData The data record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function mergeRow(array $arrData)
 	{
@@ -340,7 +342,7 @@ abstract class Model
 	/**
 	 * Return the object instance
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function current()
 	{
@@ -351,7 +353,7 @@ abstract class Model
 	/**
 	 * Save the current record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 *
 	 * @throws \InvalidArgumentException If an argument is passed
 	 * @throws \LogicException           If the model cannot be saved
@@ -522,7 +524,7 @@ abstract class Model
 	 * @param string $strKey     The property name
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
+	 * @return static|\Model\Collection|null The model or a model collection if there are multiple rows
 	 *
 	 * @throws \Exception If $strKey is not a related field
 	 */
@@ -547,6 +549,8 @@ abstract class Model
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
+
+		/** @var static $strClass */
 		$strClass = static::getClassFromTable($arrRelation['table']);
 
 		// Load the related record(s)
@@ -563,6 +567,7 @@ abstract class Model
 			// Handle UUIDs (see #6525)
 			if ($strField == 'tl_files.uuid')
 			{
+				/** @var \FilesModel $strClass */
 				$objModel = $strClass::findMultipleByUuids($arrValues, $arrOptions);
 			}
 			else
@@ -633,7 +638,7 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
@@ -671,7 +676,7 @@ abstract class Model
 	 * @param mixed $varId      The ID or alias
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
@@ -711,7 +716,7 @@ abstract class Model
 	 * @param array $arrIds     An array of IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no records
+	 * @return \Model\Collection|null The model collection or null if there are no records
 	 */
 	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
@@ -780,27 +785,23 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		$intId = is_array($varValue) ? $varValue[0] : $varValue;
-
 		// Try to load from the registry
 		if (empty($arrOptions))
 		{
-			if (is_array($strColumn))
+			$arrColumn = (array) $strColumn;
+
+			if (count($arrColumn) == 1 && $arrColumn[0] == static::$strPk)
 			{
-				if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
+				$intId = is_array($varValue) ? $varValue[0] : $varValue;
+				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
+
+				if ($objModel !== null)
 				{
-					return static::findByPk($intId, $arrOptions);
-				}
-			}
-			else
-			{
-				if ($strColumn == static::$strPk)
-				{
-					return static::findByPk($intId, $arrOptions);
+					return $objModel;
 				}
 			}
 		}
@@ -878,7 +879,7 @@ abstract class Model
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 *
-	 * @return \Model|\Model\Collection A model or model collection
+	 * @return static|\Model\Collection|null A model or model collection
 	 *
 	 * @throws \Exception If the method name is invalid
 	 */
@@ -887,16 +888,19 @@ abstract class Model
 		if (strncmp($name, 'findBy', 6) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 6)));
+
 			return call_user_func_array('static::findBy', $args);
 		}
 		elseif (strncmp($name, 'findOneBy', 9) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 9)));
+
 			return call_user_func_array('static::findOneBy', $args);
 		}
 		elseif (strncmp($name, 'countBy', 7) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 7)));
+
 			return call_user_func_array('static::countBy', $args);
 		}
 
@@ -918,7 +922,7 @@ abstract class Model
 	 *
 	 * @param array $arrOptions The options array
 	 *
-	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
+	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(array $arrOptions)
 	{
@@ -1109,7 +1113,7 @@ abstract class Model
 	 *
 	 * @param \Database\Result $objResult The database result object
 	 *
-	 * @return \Model The model
+	 * @return static The model
 	 */
 	protected static function createModelFromDbResult(\Database\Result $objResult)
 	{

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Newsletter
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -268,12 +266,9 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 
 
 /**
- * Class tl_newsletter
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Newsletter
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_newsletter extends Backend
 {
@@ -416,7 +411,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * List records
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listNewsletters($arrRow)
@@ -432,7 +429,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Convert absolute URLs from TinyMCE to relative URLs
-	 * @param string
+	 *
+	 * @param string $strContent
+	 *
 	 * @return string
 	 */
 	public function convertAbsoluteLinks($strContent)
@@ -443,7 +442,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Convert relative URLs from TinyMCE to absolute URLs
-	 * @param string
+	 *
+	 * @param string $strContent
+	 *
 	 * @return string
 	 */
 	public function convertRelativeLinks($strContent)
@@ -454,10 +455,13 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Auto-generate the newsletter alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -491,6 +495,7 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Return all mail templates as array
+	 *
 	 * @return array
 	 */
 	public function getMailTemplates()

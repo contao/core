@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Model;
@@ -19,16 +17,14 @@ namespace Contao\Model;
  * The class handles traversing a set of models and lazy loads the database
  * result rows upon their first usage.
  *
- * @package   Library
- * @author    Tristan Lins <tristan.lins@bit3.de>
- * @copyright Leo Feyer 2005-2014
+ * @author Tristan Lins <https://github.com/tristanlins>
  */
 class Registry implements \Countable
 {
 
 	/**
 	 * Object instance (Singleton)
-	 * @var \Registry
+	 * @var static
 	 */
 	protected static $objInstance;
 
@@ -60,7 +56,7 @@ class Registry implements \Countable
 	/**
 	 * Return the current object instance (Singleton)
 	 *
-	 * @return \Registry The object instance
+	 * @return static The object instance
 	 */
 	public static function getInstance()
 	{
@@ -175,6 +171,7 @@ class Registry implements \Countable
 	public function isRegistered(\Model $objModel)
 	{
 		$intObjectId = spl_object_hash($objModel);
+
 		return isset($this->arrIdentities[$intObjectId]);
 	}
 }

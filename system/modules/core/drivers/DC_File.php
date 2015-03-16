@@ -3,34 +3,26 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DC_File
- *
  * Provide methods to edit the local configuration file.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DC_File extends \DataContainer implements \editable
 {
 
 	/**
 	 * Initialize the object
-	 * @param string
+	 *
+	 * @param string $strTable
 	 */
 	public function __construct($strTable)
 	{
@@ -68,6 +60,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function create()
@@ -78,6 +71,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function cut()
@@ -88,6 +82,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function copy()
@@ -98,6 +93,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function move()
@@ -108,6 +104,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Auto-generate a form to edit the local configuration file
+	 *
 	 * @return string
 	 */
 	public function edit()
@@ -382,7 +379,8 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
 	 */
 	protected function save($varValue)
 	{
@@ -498,6 +496,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()

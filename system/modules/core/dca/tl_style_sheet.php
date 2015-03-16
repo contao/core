@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -158,6 +156,10 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'search'                  => true,
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
+			'save_callback' => array
+			(
+				array('tl_style_sheet', 'romanizeName')
+			),
 			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
@@ -220,12 +222,9 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 
 
 /**
- * Class tl_style_sheet
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_style_sheet extends Backend
 {
@@ -286,7 +285,8 @@ class tl_style_sheet extends Backend
 	 *
 	 * This method is triggered when a single style sheet or multiple style
 	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
-	 * @param mixed
+	 *
+	 * @param mixed $id
 	 */
 	public function scheduleUpdate($id)
 	{
@@ -311,7 +311,9 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * List a style sheet
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listStyleSheet($row)
@@ -340,8 +342,23 @@ class tl_style_sheet extends Backend
 
 
 	/**
+	 * Romanize the file name (see #7526)
+	 *
+	 * @param mixed $varValue
+	 *
+	 * @return mixed
+	 */
+	public function romanizeName($varValue)
+	{
+		return utf8_romanize($varValue);
+	}
+
+
+	/**
 	 * Sanitize the conditional comments field
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function sanitizeCc($varValue)
@@ -357,12 +374,14 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)

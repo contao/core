@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
@@ -16,19 +14,10 @@ namespace Contao\Database;
 /**
  * MySQL-specific database class
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Mysql extends \Database
 {
-
-	/**
-	 * List tables query
-	 * @var string
-	 */
-	protected $strListTables = "SHOW TABLES FROM `%s`";
-
 
 	/**
 	 * Connect to the database server and select the database

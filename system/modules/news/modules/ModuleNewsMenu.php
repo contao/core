@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleNewsMenu
- *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleNewsMenu extends \ModuleNews
 {
 
 	/**
 	 * Current date object
-	 * @var integer
+	 * @var \Date
 	 */
 	protected $Date;
 
@@ -43,12 +34,14 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsmenu'][0]) . ' ###';
@@ -103,7 +96,11 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$time = time();
 		$arrData = array();
-		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsmenu_year');
+
+		$this->Template = $objTemplate;
 
 		// Get the dates
 		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " GROUP BY year ORDER BY year DESC");
@@ -217,7 +214,11 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$time = time();
 		$arrData = array();
-		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
+
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsmenu_day');
+
+		$this->Template = $objTemplate;
 
 		// Get the dates
 		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y%m%d') AS day, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " GROUP BY day ORDER BY day DESC");
@@ -283,6 +284,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Return the week days and labels as array
+	 *
 	 * @return array
 	 */
 	protected function compileDays()
@@ -301,8 +303,10 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Return all weeks of the current month as array
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $arrData
+	 * @param string $strUrl
+	 *
 	 * @return array
 	 */
 	protected function compileWeeks($arrData, $strUrl)

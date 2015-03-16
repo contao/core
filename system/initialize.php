@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -63,8 +61,8 @@ require TL_ROOT . '/system/helper/exception.php';
 /**
  * Set the error and exception handler
  */
-@set_error_handler('__error');
-@set_exception_handler('__exception');
+set_error_handler('__error');
+set_exception_handler('__exception');
 
 
 /**
@@ -89,6 +87,14 @@ require TL_ROOT . '/system/modules/core/library/Contao/ModuleLoader.php';
 class_alias('Contao\\ModuleLoader', 'ModuleLoader');
 
 Config::preload(); // see #5872
+
+
+/**
+ * Adjust the error handling
+ */
+@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
+error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? Config::get('errorReporting') : 0);
+set_error_handler('__error', Config::get('errorReporting'));
 
 
 /**
@@ -209,13 +215,6 @@ if (Input::cookie('TL_INSTALL_AUTH') && !empty($_SESSION['TL_INSTALL_AUTH']) && 
 {
 	Config::set('displayErrors', 1);
 }
-
-
-/**
- * Configure the error handling
- */
-@ini_set('display_errors', (Config::get('displayErrors') ? 1 : 0));
-error_reporting((Config::get('displayErrors') || Config::get('logErrors')) ? Config::get('errorReporting') : 0);
 
 
 /**

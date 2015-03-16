@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -23,9 +21,7 @@ namespace Contao;
  *
  *     $file = Dbafs::addResource('files/james-wilson.jpg');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Dbafs
 {
@@ -295,6 +291,8 @@ class Dbafs
 		}
 
 		$strFolder = dirname($strDestination);
+
+		/** @var \FilesModel $objNewFile */
 		$objNewFile = clone $objFile->current();
 
 		// Set the new parent ID
@@ -330,6 +328,7 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
+					/**@var \FilesModel $objNew */
 					$objNew = clone $objFiles->current();
 
 					$objNew->pid    = $objNewFile->uuid;
@@ -450,9 +449,20 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
-		// Try to raise the limits (see #7035)
-		@ini_set('memory_limit', -1);
 		@ini_set('max_execution_time', 0);
+
+		// Consider the suhosin.memory_limit (see #7035)
+		if (extension_loaded('suhosin'))
+		{
+			if (($limit = ini_get('suhosin.memory_limit')) !== '0')
+			{
+				@ini_set('memory_limit', $limit);
+			}
+		}
+		else
+		{
+			@ini_set('memory_limit', -1);
+		}
 
 		$objDatabase = \Database::getInstance();
 

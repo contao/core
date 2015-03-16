@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleArticlenav
- *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleArticlenav extends \Module
 {
@@ -36,19 +27,21 @@ class ModuleArticlenav extends \Module
 
 	/**
 	 * Articles
-	 * @var array
+	 * @var \Model\Collection
 	 */
 	protected $objArticles;
 
 
 	/**
 	 * Do not display the module if there are no articles
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articlenav'][0]) . ' ###';
@@ -60,7 +53,9 @@ class ModuleArticlenav extends \Module
 			return $objTemplate->parse();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$this->objArticles = \ArticleModel::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
 
 		// Return if there are no articles
@@ -77,7 +72,10 @@ class ModuleArticlenav extends \Module
 				return '';
 			}
 
-			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
+			/** @var \ArticleModel $objArticle */
+			$objArticle = $this->objArticles->current();
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
+
 			$this->redirect($this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias));
 		}
 
@@ -90,6 +88,7 @@ class ModuleArticlenav extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$intActive = null;
@@ -98,7 +97,9 @@ class ModuleArticlenav extends \Module
 
 		while ($this->objArticles->next())
 		{
-			$strAlias = ($this->objArticles->alias != '' && !\Config::get('disableAlias')) ? $this->objArticles->alias : $this->objArticles->id;
+			/** @var \ArticleModel $objArticle */
+			$objArticle = $this->objArticles->current();
+			$strAlias = ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
 
 			// Active article
 			if (\Input::get('articles') == $strAlias)
@@ -107,7 +108,7 @@ class ModuleArticlenav extends \Module
 				(
 					'isActive' => true,
 					'href' => $this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias),
-					'title' => specialchars($this->objArticles->title, true),
+					'title' => specialchars($objArticle->title, true),
 					'link' => $intCount
 				);
 
@@ -121,7 +122,7 @@ class ModuleArticlenav extends \Module
 				(
 					'isActive' => false,
 					'href' => $this->generateFrontendUrl($objPage->row(), '/articles/' . $strAlias),
-					'title' => specialchars($this->objArticles->title, true),
+					'title' => specialchars($objArticle->title, true),
 					'link' => $intCount
 				);
 			}

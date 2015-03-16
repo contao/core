@@ -897,7 +897,8 @@ var Mediabox;
 					preload.width = mediaWidth;
 				}
 				if (Browser.ie) preload = document.id(preload);
-				preload.addEvent('mousedown', function(e){ e.stop(); }).addEvent('contextmenu', function(e){ e.stop(); });
+				// PATCH: enable the contextmenu (see #7501)
+				//preload.addEvent('mousedown', function(e){ e.stop(); }).addEvent('contextmenu', function(e){ e.stop(); });
 				image.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(image);
 			}

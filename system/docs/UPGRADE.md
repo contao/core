@@ -1,6 +1,15 @@
 Contao Open Source CMS API changes
 ==================================
 
+Version 3.4 to 3.5
+------------------
+
+### `DataContainer`
+
+The `DataContainer` class is now abstract, which however should not matter,
+because the contructor has been protected ever since.
+
+
 Version 3.3 to 3.4
 ------------------
 

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
@@ -27,9 +25,12 @@ namespace Contao\Database;
  *         print_r($result->row());
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property string  $query      The query string
+ * @property integer $numRows    The number of rows in the result
+ * @property integer $numFields  The number of fields in the result
+ * @property boolean $isModified True if the result has been modified
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Result
 {
@@ -138,13 +139,6 @@ abstract class Result
 
 	/**
 	 * Return an object property or a field of the current row
-	 *
-	 * Supported parameters:
-	 *
-	 * * query:      the corresponding query string
-	 * * numRows:    the number of rows of the current result
-	 * * numFields:  the number of fields of the current result
-	 * * isModified: true if the row has been modified
 	 *
 	 * @param string $strKey The field name
 	 *
@@ -355,6 +349,7 @@ abstract class Result
 		if (($arrRow = $this->fetch_assoc()) == false)
 		{
 			$this->blnDone = true;
+
 			return false;
 		}
 
@@ -469,7 +464,7 @@ abstract class Result
 	 *
 	 * @param integer $intOffset The field offset
 	 *
-	 * @return array An array with the column information
+	 * @return array|object An array or object with the column information
 	 */
 	abstract protected function fetch_field($intOffset);
 

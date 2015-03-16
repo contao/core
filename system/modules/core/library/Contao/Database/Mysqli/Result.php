@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database\Mysqli;
@@ -16,12 +14,17 @@ namespace Contao\Database\Mysqli;
 /**
  * MySQLi-specific database result class
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Result extends \Database\Result
 {
+
+	/**
+	 * Database result
+	 * @var \mysqli_result
+	 */
+	protected $resResult;
+
 
 	/**
 	 * Fetch the current row as enumerated array
@@ -72,7 +75,7 @@ class Result extends \Database\Result
 	 *
 	 * @param integer $intOffset The field offset
 	 *
-	 * @return array An array with the column information
+	 * @return array|object An array or object with the column information
 	 */
 	protected function fetch_field($intOffset)
 	{

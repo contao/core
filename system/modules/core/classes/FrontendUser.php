@@ -3,27 +3,22 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class FrontendUser
- *
  * Provide methods to manage front end users.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array   $allGroups
+ * @property string  $loginPage
+ * @property boolean $blnRecordExists
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendUser extends \User
 {
@@ -45,18 +40,6 @@ class FrontendUser extends \User
 	 * @var string
 	 */
 	protected $strCookie = 'FE_USER_AUTH';
-
-	/**
-	 * Path to the login script
-	 * @var string
-	 */
-	protected $strLoginScript = 'index.php';
-
-	/**
-	 * Path to the protected file
-	 * @var string
-	 */
-	protected $strRedirect = 'index.php';
 
 	/**
 	 * Group login page
@@ -108,8 +91,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent setter class and modify some parameters
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -128,7 +112,9 @@ class FrontendUser extends \User
 
 	/**
 	 * Extend parent getter class and modify some parameters
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -150,6 +136,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Authenticate a user
+	 *
 	 * @return boolean
 	 */
 	public function authenticate()
@@ -185,6 +172,7 @@ class FrontendUser extends \User
 
 						// Reload the page
 						\Controller::reload();
+
 						return true;
 					}
 				}
@@ -200,6 +188,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Add the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function login()
@@ -229,6 +218,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Remove the auto login resources
+	 *
 	 * @return boolean
 	 */
 	public function logout()
@@ -249,14 +239,17 @@ class FrontendUser extends \User
 
 		// Remove the auto login cookie
 		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), null, null, false, true);
+
 		return true;
 	}
 
 
 	/**
 	 * Save the original group membership
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strColumn
+	 * @param mixed  $varValue
+	 *
 	 * @return boolean
 	 */
 	public function findBy($strColumn, $varValue)
@@ -267,6 +260,7 @@ class FrontendUser extends \User
 		}
 
 		$this->arrGroups = $this->groups;
+
 		return true;
 	}
 

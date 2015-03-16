@@ -3,36 +3,32 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendMain
- *
  * Main back end controller.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendMain extends \Backend
 {
 
 	/**
 	 * Current Ajax object
-	 * @var object
+	 * @var \Ajax
 	 */
 	protected $objAjax;
+
+	/**
+	 * @var \BackendTemplate|object
+	 */
+	protected $Template;
 
 
 	/**
@@ -142,12 +138,14 @@ class BackendMain extends \Backend
 
 	/**
 	 * Add the welcome screen
+	 *
 	 * @return string
 	 */
 	protected function welcomeScreen()
 	{
 		\System::loadLanguageFile('explain');
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_welcome');
 		$objTemplate->messages = \Message::generate(false, true);
 

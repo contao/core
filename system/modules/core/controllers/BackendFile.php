@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendFile
- *
  * Back end file picker.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendFile extends \Backend
 {
 
 	/**
 	 * Current Ajax object
-	 * @var object
+	 * @var \Ajax
 	 */
 	protected $objAjax;
 
@@ -59,8 +50,9 @@ class BackendFile extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_picker');
-		$this->Template->main = '';
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_picker');
+		$objTemplate->main = '';
 
 		// Ajax request
 		if ($_POST && \Environment::get('isAjaxRequest'))
@@ -83,12 +75,17 @@ class BackendFile extends \Backend
 		// Set the active record
 		if ($this->Database->tableExists($strTable))
 		{
+			/** @var \Model $strModel */
 			$strModel = \Model::getClassFromTable($strTable);
-			$objModel = $strModel::findByPk(\Input::get('id'));
 
-			if ($objModel !== null)
+			if (class_exists($strModel))
 			{
-				$objDca->activeRecord = $objModel;
+				$objModel = $strModel::findByPk(\Input::get('id'));
+
+				if ($objModel !== null)
+				{
+					$objDca->activeRecord = $objModel;
+				}
 			}
 		}
 
@@ -128,31 +125,33 @@ class BackendFile extends \Backend
 			}
 		}
 
-		// Prepare the widget
-		$class = $GLOBALS['BE_FFL']['fileSelector'];
-		$objFileTree = new $class($class::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
+		/** @var \FileSelector $strClass */
+		$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
-		$this->Template->main = $objFileTree->generate();
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->addSearch = false;
-		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
-		$this->Template->action = ampersand(\Environment::get('request'));
-		$this->Template->value = $this->Session->get('file_selector_search');
-		$this->Template->manager = $GLOBALS['TL_LANG']['MSC']['fileManager'];
-		$this->Template->managerHref = 'contao/main.php?do=files&amp;popup=1';
-		$this->Template->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
+		/** @var \FileSelector $objFileTree */
+		$objFileTree = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$strTable]['fields'][$strField], $strField, $arrValues, $strField, $strTable, $objDca));
+
+		$objTemplate->main = $objFileTree->generate();
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['filepicker']);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->addSearch = false;
+		$objTemplate->search = $GLOBALS['TL_LANG']['MSC']['search'];
+		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->value = $this->Session->get('file_selector_search');
+		$objTemplate->manager = $GLOBALS['TL_LANG']['MSC']['fileManager'];
+		$objTemplate->managerHref = 'contao/main.php?do=files&amp;popup=1';
+		$objTemplate->breadcrumb = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'];
 
 		if (\Input::get('switch'))
 		{
-			$this->Template->switch = $GLOBALS['TL_LANG']['MSC']['pagePicker'];
-			$this->Template->switchHref = str_replace('contao/file.php', 'contao/page.php', ampersand(\Environment::get('request')));
+			$objTemplate->switch = $GLOBALS['TL_LANG']['MSC']['pagePicker'];
+			$objTemplate->switchHref = str_replace('contao/file.php', 'contao/page.php', ampersand(\Environment::get('request')));
 		}
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

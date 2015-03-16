@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -149,12 +147,9 @@ if (in_array('comments', ModuleLoader::getActive()))
 
 
 /**
- * Class tl_module_news
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_module_news extends Backend
 {
@@ -171,6 +166,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Get all news archives and return them as array
+	 *
 	 * @return array
 	 */
 	public function getNewsArchives()
@@ -197,6 +193,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Get all news reader modules and return them as array
+	 *
 	 * @return array
 	 */
 	public function getReaderModules()
@@ -215,6 +212,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Hide the start day drop-down if not applicable
+	 *
 	 * @return string
 	 */
 	public function hideStartDay()
@@ -244,6 +242,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Return all news templates as array
+	 *
 	 * @return array
 	 */
 	public function getNewsTemplates()

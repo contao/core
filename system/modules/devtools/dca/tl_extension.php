@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Devtools
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -244,22 +242,22 @@ $GLOBALS['TL_DCA']['tl_extension'] = array
 
 
 /**
- * Class tl_extension
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
- * @author     Leo Feyer <https://contao.org>
- * @package    Devtools
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_extension extends Backend
 {
 
 	/**
 	 * Check whether a module exists already
-	 * @param string
-	 * @param \DataContainer
+	 *
+	 * @param string        $strFolder
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFolder($strFolder, DataContainer $dc)
 	{

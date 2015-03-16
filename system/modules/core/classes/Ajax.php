@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Ajax
- *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Ajax extends \Backend
 {
@@ -55,7 +46,9 @@ class Ajax extends \Backend
 
 	/**
 	 * Get the current action
-	 * @param string
+	 *
+	 * @param string $strAction
+	 *
 	 * @throws \Exception
 	 */
 	public function __construct($strAction)
@@ -92,6 +85,7 @@ class Ajax extends \Backend
 
 				$this->import('BackendUser', 'User');
 
+				/** @var \BackendTemplate|object $objTemplate */
 				$objTemplate = new \BackendTemplate('be_navigation');
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[\Input::post('id')]['modules'];
@@ -165,14 +159,6 @@ class Ajax extends \Backend
 						exit; break;
 					}
 				}
-
-				// Empty Live Update ID
-				if (!strlen(\Input::post('id')))
-				{
-					\System::loadLanguageFile('tl_maintenance');
-					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
-					exit; break;
-				}
 				exit; break;
 
 			// Toggle checkbox groups
@@ -199,7 +185,8 @@ class Ajax extends \Backend
 
 	/**
 	 * Ajax actions that do require a data container object
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
 	public function executePostActions(\DataContainer $dc)
 	{
@@ -227,8 +214,11 @@ class Ajax extends \Backend
 			// Load nodes of the page tree
 			case 'loadPagetree':
 				$strField = $dc->field = \Input::post('name');
+
+				/** @var \PageSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
+				/** @var \PageSelector $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
@@ -237,8 +227,11 @@ class Ajax extends \Backend
 			// Load nodes of the file tree
 			case 'loadFiletree':
 				$strField = $dc->field = \Input::post('name');
+
+				/** @var \FileSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
+				/** @var \FileSelector $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
 
 				// Load a particular node
@@ -336,7 +329,10 @@ class Ajax extends \Backend
 					$varValue = serialize($varValue);
 				}
 
+				/** @var \FileTree|\PageTree $strClass */
 				$strClass = $GLOBALS['BE_FFL'][$strKey];
+
+				/** @var \FileTree|\PageTree $objWidget */
 				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
 				echo $objWidget->generate();
@@ -360,9 +356,9 @@ class Ajax extends \Backend
 				$this->import('BackendUser', 'User');
 
 				// Check whether the field is a selector field and allowed for regular users (thanks to Fabian Mihailowitsch) (see #4427)
-				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array($this->Input->post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . $this->Input->post('field'), 'alexf')))
+				if (!is_array($GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || !in_array(\Input::post('field'), $GLOBALS['TL_DCA'][$dc->table]['palettes']['__selector__']) || ($GLOBALS['TL_DCA'][$dc->table]['fields'][\Input::post('field')]['exclude'] && !$this->User->hasAccess($dc->table . '::' . \Input::post('field'), 'alexf')))
 				{
-					$this->log('Field "' . $this->Input->post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
+					$this->log('Field "' . \Input::post('field') . '" is not an allowed selector field (possible SQL injection attempt)', __METHOD__, TL_ERROR);
 					header('HTTP/1.1 400 Bad Request');
 					die('Bad Request');
 				}
@@ -417,7 +413,8 @@ class Ajax extends \Backend
 
 	/**
 	 * Execute the post actions hook
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
 	protected function executePostActionsHook(\DataContainer $dc)
 	{

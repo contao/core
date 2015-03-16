@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class StyleSheets
- *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class StyleSheets extends \Backend
 {
@@ -40,7 +31,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Update a particular style sheet
-	 * @param integer
+	 *
+	 * @param integer $intId
 	 */
 	public function updateStyleSheet($intId)
 	{
@@ -123,7 +115,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Write a style sheet to a file
-	 * @param array
+	 *
+	 * @param array $row
 	 */
 	protected function writeStyleSheet($row)
 	{
@@ -138,6 +131,7 @@ class StyleSheets extends \Backend
 		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
+
 			return;
 		}
 
@@ -193,18 +187,27 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Compile format definitions and return them as string
-	 * @param array
-	 * @param boolean
-	 * @param array
-	 * @param array
+	 *
+	 * @param array   $row
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 * @param array   $parent
+	 * @param boolean $export
+	 *
 	 * @return string
 	 */
-	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array())
+	public function compileDefinition($row, $blnWriteToFile=false, $vars=array(), $parent=array(), $export=false)
 	{
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
 			$lb = '';
+			$return = '';
+		}
+		elseif ($export)
+		{
+			$strGlue = '';
+			$lb = "\n    ";
 			$return = '';
 		}
 		else
@@ -217,12 +220,20 @@ class StyleSheets extends \Backend
 		$blnNeedsPie = false;
 
 		// Comment
-		if (!$blnWriteToFile && $row['comment'] != '')
+		if ((!$blnWriteToFile || $export) && $row['comment'] != '')
 		{
 			$search = array('@^\s*/\*+@', '@\*+/\s*$@');
 			$comment = preg_replace($search, '', $row['comment']);
-			$comment = wordwrap(trim($comment), 72);
-			$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
+
+			if ($export)
+			{
+				$return .= "\n/* " . $comment . " */\n";
+			}
+			else
+			{
+				$comment = wordwrap(trim($comment), 72);
+				$return .= "\n" . '<span class="comment">' . $comment . '</span>' . "\n";
+			}
 		}
 
 		// Selector
@@ -950,6 +961,10 @@ class StyleSheets extends \Backend
 
 			$return .= '}';
 		}
+		elseif ($export)
+		{
+			$return .= "\n}\n";
+		}
 		else
 		{
 			$return .= "\n}</pre>\n";
@@ -968,9 +983,11 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Compile a color value and return a hex or rgba color
-	 * @param mixed
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param mixed   $color
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 *
 	 * @return string
 	 */
 	protected function compileColor($color, $blnWriteToFile=false, $vars=array())
@@ -992,7 +1009,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Try to shorten a hex color
-	 * @param string
+	 *
+	 * @param string $color
+	 *
 	 * @return string
 	 */
 	protected function shortenHexColor($color)
@@ -1008,10 +1027,13 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Convert hex colors to rgb
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $color
+	 * @param boolean $blnWriteToFile
+	 * @param array   $vars
+	 *
 	 * @return array
+	 *
 	 * @see http://de3.php.net/manual/de/function.hexdec.php#99478
 	 */
 	protected function convertHexColor($color, $blnWriteToFile=false, $vars=array())
@@ -1054,7 +1076,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Return a form to choose an existing style sheet and import it
+	 *
 	 * @return string
+	 *
 	 * @throws \Exception
 	 */
 	public function importStyleSheet()
@@ -1073,6 +1097,7 @@ class StyleSheets extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -1205,6 +1230,8 @@ class StyleSheets extends \Backend
 					// Regular block
 					else
 					{
+						$strSelector = '';
+
 						while ($i<$intLength)
 						{
 							$strBuffer .= $strFile[$i++];
@@ -1335,7 +1362,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Export a style sheet
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @throws \Exception
 	 */
 	public function exportStyleSheet(\DataContainer $dc)
@@ -1384,7 +1413,13 @@ class StyleSheets extends \Backend
 
 		// Create the file
 		$objFile = new \File('system/tmp/' . md5(uniqid(mt_rand(), true)), true);
-		$objFile->write('/* ' . $objStyleSheet->name . ".css */\n");
+		$objFile->write('');
+
+		// Add the media query (see #7560)
+		if ($objStyleSheet->mediaQuery != '')
+		{
+			$objFile->append($objStyleSheet->mediaQuery . ' {');
+		}
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($objStyleSheet->id);
@@ -1392,7 +1427,13 @@ class StyleSheets extends \Backend
 		// Append the definition
 		while ($objDefinitions->next())
 		{
-			$objFile->append(strip_tags($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row())), '');
+			$objFile->append($this->compileDefinition($objDefinitions->row(), false, $vars, $objStyleSheet->row(), true), '');
+		}
+
+		// Close the media query
+		if ($objStyleSheet->mediaQuery != '')
+		{
+			$objFile->append('}');
 		}
 
 		$objFile->close();
@@ -1403,7 +1444,9 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Check the name of an imported file
-	 * @param string
+	 *
+	 * @param string $strName
+	 *
 	 * @return string
 	 */
 	public function checkStyleSheetName($strName)
@@ -1427,7 +1470,8 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Create a format definition and insert it into the database
-	 * @param array
+	 *
+	 * @param array $arrDefinition
 	 */
 	protected function createDefinition($arrDefinition)
 	{
@@ -1451,8 +1495,8 @@ class StyleSheets extends \Backend
 				continue;
 			}
 
-			// Handle important definitions
-			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false)
+			// Handle keywords, variables and functions (see #7448)
+			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false || strpos($strDefinition, '$') !== false || strpos($strDefinition, '(') !== false)
 			{
 				$arrSet['own'][] = $strDefinition;
 				continue;
@@ -2218,8 +2262,10 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Return an image as data: string
-	 * @param string
-	 * @param array
+	 *
+	 * @param string $strImage
+	 * @param array  $arrParent
+	 *
 	 * @return string|boolean
 	 */
 	protected function generateBase64Image($strImage, $arrParent)

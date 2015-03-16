@@ -3,27 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageTree
- *
  * Provide methods to handle input field "page tree".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property string  $orderField
+ * @property boolean $multiple
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageTree extends \Widget
 {
@@ -55,7 +49,8 @@ class PageTree extends \Widget
 
 	/**
 	 * Load the database object
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -81,7 +76,9 @@ class PageTree extends \Widget
 
 	/**
 	 * Return an array if the "multiple" attribute is set
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -118,6 +115,7 @@ class PageTree extends \Widget
 		else
 		{
 			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+
 			return $this->multiple ? $arrValue : $arrValue[0];
 		}
 	}
@@ -125,6 +123,7 @@ class PageTree extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

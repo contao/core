@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -313,8 +311,8 @@ $GLOBALS['TL_CONFIG']['allowedDownload']
 	. 'mp3,mp4,m4a,m4v,webm,ogg,ogv,wma,wmv,ram,rm,mov,'
 	. 'zip,rar,7z';
 $GLOBALS['TL_CONFIG']['installPassword']      = '';
-$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
-$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://contao.org/services/repository.wsdl';
+$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'https://update.contao.org/service/';
+$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'https://contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
 $GLOBALS['TL_CONFIG']['backendTheme']         = 'flexible';

@@ -3,35 +3,27 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageError403
- *
  * Provide methods to handle an error 403 page.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageError403 extends \Frontend
 {
 
 	/**
 	 * Generate an error 403 page
-	 * @param integer
-	 * @param object
+	 *
+	 * @param integer    $pageId
+	 * @param \PageModel $objRootPage
 	 */
 	public function generate($pageId, $objRootPage=null)
 	{
@@ -48,11 +40,11 @@ class PageError403 extends \Frontend
 			$objRootPage = \PageModel::findPublishedById(is_integer($objRootPage) ? $objRootPage : $objRootPage->id);
 		}
 
-		// Look for an error_403 page
+		// Look for a 403 page
 		$obj403 = \PageModel::find403ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj403 === null)
+		if (null === $obj403)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			die_nicely('be_forbidden', 'Forbidden');
@@ -61,9 +53,12 @@ class PageError403 extends \Frontend
 		// Generate the error page
 		if (!$obj403->autoforward || !$obj403->jumpTo)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			$objPage = $obj403->loadDetails();
+
+			/** @var \PageRegular $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 403 Forbidden');
@@ -75,7 +70,7 @@ class PageError403 extends \Frontend
 		// Forward to another page
 		$objNextPage = \PageModel::findPublishedById($obj403->jumpTo);
 
-		if ($objNextPage === null)
+		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', __METHOD__, TL_ERROR);

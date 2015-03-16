@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -333,6 +331,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'staticFiles' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFiles'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -344,6 +343,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'staticPlugins' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticPlugins'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
@@ -635,12 +635,9 @@ if (Input::get('popup'))
 
 
 /**
- * Class tl_page
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_page extends Backend
 {
@@ -884,7 +881,8 @@ class tl_page extends Backend
 
 	/**
 	 * Make new top-level pages root pages
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function setRootType(DataContainer $dc)
 	{
@@ -914,10 +912,13 @@ class tl_page extends Backend
 
 	/**
 	 * Make sure that top-level pages are root pages
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkRootType($varValue, DataContainer $dc)
 	{
@@ -948,10 +949,13 @@ class tl_page extends Backend
 
 	/**
 	 * Auto-generate a page alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -1042,7 +1046,8 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically create an article in the main column of a new page
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function generateArticle(DataContainer $dc)
 	{
@@ -1091,7 +1096,8 @@ class tl_page extends Backend
 
 	/**
 	 * Purge the search index if a page is being deleted
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function purgeSearchIndex(DataContainer $dc)
 	{
@@ -1116,10 +1122,13 @@ class tl_page extends Backend
 
 	/**
 	 * Check the sitemap alias
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
 	{
@@ -1146,10 +1155,13 @@ class tl_page extends Backend
 
 	/**
 	 * Prevent circular references
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkJumpTo($varValue, DataContainer $dc)
 	{
@@ -1164,7 +1176,9 @@ class tl_page extends Backend
 
 	/**
 	 * Check the DNS settings
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkDns($varValue)
@@ -1175,10 +1189,13 @@ class tl_page extends Backend
 
 	/**
 	 * Make sure there is only one fallback per domain (thanks to Andreas Schempp)
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFallback($varValue, DataContainer $dc)
 	{
@@ -1201,7 +1218,9 @@ class tl_page extends Backend
 
 	/**
 	 * Check a static URL
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
@@ -1217,7 +1236,9 @@ class tl_page extends Backend
 
 	/**
 	 * Returns all allowed page types as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function getPageTypes(DataContainer $dc)
@@ -1245,6 +1266,7 @@ class tl_page extends Backend
 
 	/**
 	 * Return all page layouts grouped by theme
+	 *
 	 * @return array
 	 */
 	public function getPageLayouts()
@@ -1269,12 +1291,14 @@ class tl_page extends Backend
 
 	/**
 	 * Add an image to each page in the tree
-	 * @param array
-	 * @param string
-	 * @param \DataContainer
-	 * @param string
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param string        $imageAttribute
+	 * @param boolean       $blnReturnImage
+	 * @param boolean       $blnProtected
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false, $blnProtected=false)
@@ -1285,12 +1309,14 @@ class tl_page extends Backend
 
 	/**
 	 * Return the edit page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editPage($row, $href, $label, $title, $icon, $attributes)
@@ -1301,13 +1327,15 @@ class tl_page extends Backend
 
 	/**
 	 * Return the copy page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 * @param string $table
+	 *
 	 * @return string
 	 */
 	public function copyPage($row, $href, $label, $title, $icon, $attributes, $table)
@@ -1323,13 +1351,15 @@ class tl_page extends Backend
 
 	/**
 	 * Return the copy page with subpages button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 * @param string $table
+	 *
 	 * @return string
 	 */
 	public function copyPageWithSubpages($row, $href, $label, $title, $icon, $attributes, $table)
@@ -1349,12 +1379,14 @@ class tl_page extends Backend
 
 	/**
 	 * Return the cut page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function cutPage($row, $href, $label, $title, $icon, $attributes)
@@ -1365,11 +1397,13 @@ class tl_page extends Backend
 
 	/**
 	 * Return the paste page button
-	 * @param \DataContainer
-	 * @param array
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param DataContainer $dc
+	 * @param array         $row
+	 * @param string        $table
+	 * @param boolean       $cr
+	 * @param array         $arrClipboard
+	 *
 	 * @return string
 	 */
 	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
@@ -1451,28 +1485,33 @@ class tl_page extends Backend
 
 	/**
 	 * Return the delete page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deletePage($row, $href, $label, $title, $icon, $attributes)
 	{
 		$root = func_get_arg(7);
+
 		return ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(BackendUser::CAN_DELETE_PAGE, $row) && ($this->User->isAdmin || !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
 	/**
 	 * Generate an "edit articles" button and return it as string
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 *
 	 * @return string
 	 */
 	public function editArticles($row, $href, $label, $title, $icon)
@@ -1488,8 +1527,10 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically generate the folder URL aliases
-	 * @param array
-	 * @param DataContainer
+	 *
+	 * @param array         $arrButtons
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function addAliasButton($arrButtons, DataContainer $dc)
@@ -1558,7 +1599,8 @@ class tl_page extends Backend
 
 	/**
 	 * Recursively add pages to a sitemap
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function updateSitemap(DataContainer $dc)
 	{
@@ -1569,12 +1611,14 @@ class tl_page extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -1613,9 +1657,10 @@ class tl_page extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

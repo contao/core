@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentDownloads
- *
  * Front end content element "downloads".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentDownloads extends \ContentElement
 {
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|FilesModel
 	 */
 	protected $objFiles;
 
@@ -43,6 +34,7 @@ class ContentDownloads extends \ContentElement
 
 	/**
 	 * Return if there are no files
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -106,6 +98,7 @@ class ContentDownloads extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$files = array();

@@ -3,26 +3,28 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormTextField
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string  $value
+ * @property string  $type
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property integer $min
+ * @property integer $max
+ * @property integer $step
+ * @property string  $placeholder
+ * @property boolean $hideInput
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormTextField extends \Widget
 {

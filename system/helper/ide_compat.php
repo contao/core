@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 /**
@@ -15,6 +13,11 @@
  * Eclipse, Zend Studio or PHPStorm realize the class origins, since the dynamic
  * class aliasing we are using is a bit too complex for them to understand.
  */
+
+// TL_ROOT
+namespace {
+	define('TL_ROOT', __DIR__ . '../../../');
+}
 
 // calendar
 namespace  {
@@ -45,7 +48,7 @@ namespace  {
 	abstract class BackendModule extends \Contao\BackendModule {}
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
-	class DataContainer extends \Contao\DataContainer {}
+	abstract class DataContainer extends \Contao\DataContainer {}
 	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}

@@ -3,27 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModulePersonalData
- *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array $editable
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePersonalData extends \Module
 {
@@ -37,12 +30,14 @@ class ModulePersonalData extends \Module
 
 	/**
 	 * Return a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['personalData'][0]) . ' ###';
@@ -71,7 +66,9 @@ class ModulePersonalData extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$this->import('FrontendUser', 'User');
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -99,7 +96,10 @@ class ModulePersonalData extends \Module
 		// Set the template
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -143,6 +143,7 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
@@ -194,6 +195,7 @@ class ModulePersonalData extends \Module
 				}
 			}
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
 			$objWidget->storeValues = true;

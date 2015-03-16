@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -211,12 +209,9 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 
 
 /**
- * Class tl_news_feed
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_news_feed extends Backend
 {
@@ -387,7 +382,8 @@ class tl_news_feed extends Backend
 	 *
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -406,6 +402,7 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Return the IDs of the allowed news archives as array
+	 *
 	 * @return array
 	 */
 	public function getAllowedArchives()
@@ -435,10 +432,13 @@ class tl_news_feed extends Backend
 
 	/**
 	 * Check the RSS-feed alias
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
 	{

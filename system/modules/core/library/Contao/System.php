@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,23 @@ namespace Contao;
  *         }
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property \Automator                                $Automator   The automator object
+ * @property \Calendar                                 $Calendar    The calendar object
+ * @property \Comments                                 $Comments    The comments object
+ * @property \Config                                   $Config      The config object
+ * @property \Database                                 $Database    The database object
+ * @property \Files                                    $Files       The files object
+ * @property \Input                                    $Input       The input object
+ * @property \Database\Installer                       $Installer   The database installer object
+ * @property \Database\Updater                         $Updater     The database updater object
+ * @property \Messages                                 $Messages    The messages object
+ * @property \News                                     $News        The news object
+ * @property \Session                                  $Session     The session object
+ * @property \StyleSheets                              $StyleSheets The style sheets object
+ * @property \BackendTemplate|\FrontendTemplate|object $Template    The template object
+ * @property \BackendUser|\FrontendUser                $User        The user object
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class System
 {
@@ -489,7 +501,6 @@ abstract class System
 			try
 			{
 				$sizes = array();
-
 				$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
 
 				while ($imageSize->next())
@@ -705,9 +716,11 @@ abstract class System
 		// Set up the quotevalue function
 		$quotevalue = function($value)
 		{
+			$value = str_replace("\n", '\n', $value);
+
 			if (strpos($value, '\n') !== false)
 			{
-				return '"' . str_replace('"', '\\"', $value) . '"';
+				return '"' . str_replace(array('$', '"'), array('\\$', '\\"'), $value) . '"';
 			}
 			else
 			{
@@ -715,7 +728,7 @@ abstract class System
 			}
 		};
 
-		// Add the labels
+		/** @var \DOMElement[] $units */
 		foreach ($units as $unit)
 		{
 			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');
@@ -725,7 +738,7 @@ abstract class System
 				continue;
 			}
 
-			$value = str_replace("\n", '\n', $node->item(0)->nodeValue);
+			$value = $node->item(0)->nodeValue;
 
 			// Some closing </em> tags oddly have an extra space in
 			if (strpos($value, '</ em>') !== false)
@@ -794,6 +807,7 @@ abstract class System
 		}
 
 		$objFile->delete();
+
 		return true;
 	}
 

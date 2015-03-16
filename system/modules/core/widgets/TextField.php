@@ -3,27 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class TextField
- *
  * Provide methods to handle text fields.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property boolean $multiple
+ * @property boolean $hideInput
+ * @property integer $size
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TextField extends \Widget
 {
@@ -49,7 +47,8 @@ class TextField extends \Widget
 
 	/**
 	 * Disable the for attribute if the "multiple" option is set
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -64,8 +63,9 @@ class TextField extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -103,7 +103,9 @@ class TextField extends \Widget
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -132,6 +134,7 @@ class TextField extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

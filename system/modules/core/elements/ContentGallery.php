@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentGallery
- *
  * Front end content element "gallery".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentGallery extends \ContentElement
 {
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -43,6 +34,7 @@ class ContentGallery extends \ContentElement
 
 	/**
 	 * Return if there are no files
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -90,6 +82,7 @@ class ContentGallery extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();
@@ -293,12 +286,12 @@ class ContentGallery extends \ContentElement
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 			{
-				global $objPage;
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
+
 				return;
 			}
 
@@ -385,6 +378,7 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 

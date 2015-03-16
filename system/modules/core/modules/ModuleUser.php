@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleUser
- *
  * Back end module "edit account".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleUser extends \BackendModule
 {
@@ -37,6 +28,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Change the palette of the current table and switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -64,6 +56,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string|void
 	 */
 	protected function compile()

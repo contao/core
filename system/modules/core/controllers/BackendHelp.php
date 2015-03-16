@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendHelp
- *
  * Back end help wizard.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendHelp extends \Backend
 {
@@ -60,9 +51,10 @@ class BackendHelp extends \Backend
 		\System::loadLanguageFile($table);
 		$this->loadDataContainer($table);
 
-		$this->Template = new \BackendTemplate('be_help');
-		$this->Template->rows = array();
-		$this->Template->explanation = '';
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_help');
+		$objTemplate->rows = array();
+		$objTemplate->explanation = '';
 
 		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
@@ -81,7 +73,7 @@ class BackendHelp extends \Backend
 				}
 			}
 
-			$this->Template->rows = $rows;
+			$objTemplate->rows = $rows;
 		}
 
 		// Front end modules
@@ -99,7 +91,7 @@ class BackendHelp extends \Backend
 				}
 			}
 
-			$this->Template->rows = $rows;
+			$objTemplate->rows = $rows;
 		}
 
 		// Content elements
@@ -117,7 +109,7 @@ class BackendHelp extends \Backend
 				}
 			}
 
-			$this->Template->rows = $rows;
+			$objTemplate->rows = $rows;
 		}
 
 		// Add the reference
@@ -160,7 +152,7 @@ class BackendHelp extends \Backend
 				}
 			}
 
-			$this->Template->rows = $rows;
+			$objTemplate->rows = $rows;
 		}
 
 		// Add an explanation
@@ -171,23 +163,23 @@ class BackendHelp extends \Backend
 
 			if (!is_array($GLOBALS['TL_LANG']['XPL'][$key]))
 			{
-				$this->Template->explanation = trim($GLOBALS['TL_LANG']['XPL'][$key]);
+				$objTemplate->explanation = trim($GLOBALS['TL_LANG']['XPL'][$key]);
 			}
 			else
 			{
-				$this->Template->rows = $GLOBALS['TL_LANG']['XPL'][$key];
+				$objTemplate->rows = $GLOBALS['TL_LANG']['XPL'][$key];
 			}
 		}
 
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['helpWizardTitle']);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->headline = $arrData['label'][0] ?: $field;
-		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['helpWizardTitle']);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->headline = $arrData['label'][0] ?: $field;
+		$objTemplate->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

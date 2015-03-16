@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendPassword
- *
  * Back end help wizard.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendPassword extends \Backend
 {
@@ -54,7 +45,8 @@ class BackendPassword extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_password');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_password');
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_password')
 		{
@@ -118,18 +110,18 @@ class BackendPassword extends \Backend
 			$this->reload();
 		}
 
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->messages = \Message::generate();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['pw_new']);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->action = ampersand(\Environment::get('request'));
-		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['pw_change'];
-		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
-		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
-		$this->Template->confirm = $GLOBALS['TL_LANG']['MSC']['confirm'][0];
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->messages = \Message::generate();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['pw_new']);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->action = ampersand(\Environment::get('request'));
+		$objTemplate->headline = $GLOBALS['TL_LANG']['MSC']['pw_change'];
+		$objTemplate->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
+		$objTemplate->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
+		$objTemplate->confirm = $GLOBALS['TL_LANG']['MSC']['confirm'][0];
 
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 // Set the script name
@@ -19,7 +17,7 @@ require dirname(__DIR__) . '/system/initialize.php';
 
 // Show error messages
 @ini_set('display_errors', 1);
-@error_reporting(E_ALL|E_STRICT);
+error_reporting(Config::get('errorReporting'));
 
 // Run the controller
 $controller = new BackendInstall;

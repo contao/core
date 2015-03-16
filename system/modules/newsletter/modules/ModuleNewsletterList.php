@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Newsletter
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleNewsletterList
- *
  * Front end module "newsletter list".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Newsletter
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleNewsletterList extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleNewsletterList extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['nl_list'][0]) . ' ###';
@@ -71,7 +64,9 @@ class ModuleNewsletterList extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$arrJumpTo = array();
 		$arrNewsletter = array();
 
@@ -82,6 +77,7 @@ class ModuleNewsletterList extends \Module
 		{
 			while ($objNewsletter->next())
 			{
+				/** @var \NewsletterModel $objNewsletter */
 				if (($objTarget = $objNewsletter->getRelated('pid')) === null)
 				{
 					continue;
@@ -99,7 +95,9 @@ class ModuleNewsletterList extends \Module
 
 				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
-					$objJumpTo = $objTarget->getRelated('jumpTo')->loadDetails();
+					/** @var \PageModel $objModel */
+					$objModel = $objTarget->getRelated('jumpTo');
+					$objJumpTo = $objModel->loadDetails();
 
 					if ($objJumpTo !== null)
 					{

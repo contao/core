@@ -3,26 +3,23 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormPassword
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property boolean $mandatory
+ * @property integer $maxlength
+ * @property string  $placeholder
+ * @property string  $confirmLabel
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormPassword extends \Widget
 {
@@ -134,6 +131,7 @@ class FormPassword extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+
 			return \Encryption::hash($varInput);
 		}
 

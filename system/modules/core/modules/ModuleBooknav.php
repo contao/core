@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleBooknav
- *
  * Front end module "book navigation".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleBooknav extends \Module
 {
@@ -43,12 +34,14 @@ class ModuleBooknav extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['booknav'][0]) . ' ###';
@@ -60,6 +53,7 @@ class ModuleBooknav extends \Module
 			return $objTemplate->parse();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (!$this->rootPage || !in_array($this->rootPage, $objPage->trail))
@@ -95,6 +89,7 @@ class ModuleBooknav extends \Module
 		$this->arrPages[$objTarget->id] = $objTarget->row();
 		$this->getBookPages($objTarget->id, $groups, time());
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Upper page
@@ -151,9 +146,10 @@ class ModuleBooknav extends \Module
 
 	/**
 	 * Recursively get all book pages
-	 * @param integer
-	 * @param array
-	 * @param integer
+	 *
+	 * @param integer $intParentId
+	 * @param array   $groups
+	 * @param integer $time
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -28,9 +26,9 @@ namespace Contao;
  *                     ->executeResize()
  *                     ->getResizedPath();
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
+ * @author Martin Auswöger <https://github.com/ausi>
+ * @author Yanick Witschi <https://github.com/Toflar>
  */
 class Image
 {
@@ -52,14 +50,14 @@ class Image
 	/**
 	 * The target width
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $targetWidth = 0;
 
 	/**
 	 * The target height
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $targetHeight = 0;
 
@@ -87,7 +85,7 @@ class Image
 	/**
 	 * Zoom level (between 0 and 100)
 	 *
-	 * @var int
+	 * @var integer
 	 */
 	protected $zoomLevel = 0;
 
@@ -115,7 +113,7 @@ class Image
 		}
 
 		$this->fileObj = $file;
-		$arrAllowedTypes = array_map('trim', explode(',', Config::get('validImageTypes')));
+		$arrAllowedTypes = array_map('trim', explode(',', \Config::get('validImageTypes')));
 
 		// Check the file type
 		if (!in_array($this->fileObj->extension, $arrAllowedTypes))
@@ -195,7 +193,7 @@ class Image
 	/**
 	 * Set the target height
 	 *
-	 * @param int $targetHeight The target height
+	 * @param integer $targetHeight The target height
 	 *
 	 * @return $this The image object
 	 */
@@ -210,7 +208,7 @@ class Image
 	/**
 	 * Get the target height
 	 *
-	 * @return int The target height
+	 * @return integer The target height
 	 */
 	public function getTargetHeight()
 	{
@@ -221,7 +219,7 @@ class Image
 	/**
 	 * Set the target width
 	 *
-	 * @param int $targetWidth The target width
+	 * @param integer $targetWidth The target width
 	 *
 	 * @return $this The image object
 	 */
@@ -236,7 +234,7 @@ class Image
 	/**
 	 * Get the target width
 	 *
-	 * @return int The target width
+	 * @return integer The target width
 	 */
 	public function getTargetWidth()
 	{
@@ -273,7 +271,7 @@ class Image
 	/**
 	 * Set the zoom level
 	 *
-	 * @param int $zoomLevel The zoom level
+	 * @param integer $zoomLevel The zoom level
 	 *
 	 * @return $this The object instance
 	 *
@@ -297,7 +295,7 @@ class Image
 	/**
 	 * Get the zoom level
 	 *
-	 * @return int The zoom level
+	 * @return integer The zoom level
 	 */
 	public function getZoomLevel()
 	{
@@ -859,6 +857,7 @@ class Image
 			$image = new \File(rawurldecode($image), true);
 		}
 
+		/** @var \Image $imageObj */
 		$imageObj = new static($image);
 
 		// tl_image_size ID as resize mode
@@ -924,7 +923,6 @@ class Image
 
 		try
 		{
-			/** @var Image $imageObj */
 			$imageObj = static::create($image, array($width, $height, $mode));
 			$imageObj->setTargetPath($target);
 			$imageObj->setForceOverride($force);

@@ -3,33 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentModule
- *
  * Front end content element "module".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentModule extends \ContentElement
 {
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -54,6 +46,8 @@ class ContentModule extends \ContentElement
 		}
 
 		$objModule->typePrefix = 'ce_';
+
+		/** @var \Module $objModule */
 		$objModule = new $strClass($objModule, $this->strColumn);
 
 		// Overwrite spacing and CSS ID

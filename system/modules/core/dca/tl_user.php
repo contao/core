@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -440,12 +438,9 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 
 
 /**
- * Class tl_user
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_user extends Backend
 {
@@ -516,10 +511,12 @@ class tl_user extends Backend
 
 	/**
 	 * Add an image to each record
-	 * @param array
-	 * @param string
-	 * @param \DataContainer
-	 * @param array
+	 *
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param array         $args
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label, DataContainer $dc, $args)
@@ -532,18 +529,21 @@ class tl_user extends Backend
 		}
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
+
 		return $args;
 	}
 
 
 	/**
 	 * Return the edit user button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editUser($row, $href, $label, $title, $icon, $attributes)
@@ -554,13 +554,15 @@ class tl_user extends Backend
 
 	/**
 	 * Return the copy page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 * @param string $table
+	 *
 	 * @return string
 	 */
 	public function copyUser($row, $href, $label, $title, $icon, $attributes, $table)
@@ -576,12 +578,14 @@ class tl_user extends Backend
 
 	/**
 	 * Return the delete page button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteUser($row, $href, $label, $title, $icon, $attributes)
@@ -592,11 +596,13 @@ class tl_user extends Backend
 
 	/**
 	 * Generate a "switch account" button and return it as string
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 *
 	 * @return string
 	 */
 	public function switchUser($row, $href, $label, $title, $icon)
@@ -620,7 +626,9 @@ class tl_user extends Backend
 
 	/**
 	 * Return a checkbox to delete session data
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function sessionField(DataContainer $dc)
@@ -668,6 +676,7 @@ class tl_user extends Backend
 
 	/**
 	 * Return all modules except profile modules
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -689,8 +698,10 @@ class tl_user extends Backend
 
 	/**
 	 * Prevent administrators from downgrading their own account
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function checkAdminStatus($varValue, DataContainer $dc)
@@ -706,8 +717,10 @@ class tl_user extends Backend
 
 	/**
 	 * Prevent administrators from disabling their own account
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function checkAdminDisable($varValue, DataContainer $dc)
@@ -723,7 +736,8 @@ class tl_user extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
@@ -750,7 +764,8 @@ class tl_user extends Backend
 
 	/**
 	 * Check whether the user session should be removed
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function checkRemoveSession(DataContainer $dc)
 	{
@@ -766,7 +781,8 @@ class tl_user extends Backend
 
 	/**
 	 * Remove the session if a user is deleted (see #5353)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function removeSession(DataContainer $dc)
 	{
@@ -785,12 +801,14 @@ class tl_user extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -826,9 +844,10 @@ class tl_user extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

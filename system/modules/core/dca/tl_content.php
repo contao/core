@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -836,12 +834,9 @@ if (Input::get('do') == 'article' || Input::get('do') == 'page')
 
 
 /**
- * Class tl_content
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_content extends Backend
 {
@@ -946,9 +941,11 @@ class tl_content extends Backend
 
 	/**
 	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param array   $pagemounts
+	 * @param boolean $blnIsPid
+	 *
 	 * @return boolean
 	 */
 	protected function checkAccessToElement($id, $pagemounts, $blnIsPid=false)
@@ -970,6 +967,7 @@ class tl_content extends Backend
 		if ($objPage->numRows < 1)
 		{
 			$this->log('Invalid content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -977,6 +975,7 @@ class tl_content extends Backend
 		if (!in_array($objPage->id, $pagemounts))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -984,6 +983,7 @@ class tl_content extends Backend
 		if (!$this->User->isAllowed(BackendUser::CAN_EDIT_ARTICLES, $objPage->row()))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -993,6 +993,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all content elements as array
+	 *
 	 * @return array
 	 */
 	public function getContentElements()
@@ -1013,7 +1014,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the group of a content element
-	 * @param string
+	 *
+	 * @param string $element
+	 *
 	 * @return string
 	 */
 	public function getContentElementGroup($element)
@@ -1035,9 +1038,10 @@ class tl_content extends Backend
 
 	/**
 	 * Show a hint if a JavaScript library needs to be included in the page layout
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
-	public function showJsLibraryHint($dc)
+	public function showJsLibraryHint(DataContainer $dc)
 	{
 		if ($_POST || Input::get('act') != 'edit')
 		{
@@ -1091,7 +1095,9 @@ class tl_content extends Backend
 
 	/**
 	 * Add the type of content element
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function addCteType($arrRow)
@@ -1170,7 +1176,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article alias wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function editArticleAlias(DataContainer $dc)
@@ -1181,7 +1189,9 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article alias)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -1228,7 +1238,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit alias wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function editAlias(DataContainer $dc)
@@ -1239,6 +1251,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all content elements and return them as array (content element alias)
+	 *
 	 * @return array
 	 */
 	public function getAlias()
@@ -1303,7 +1316,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit form wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function editForm(DataContainer $dc)
@@ -1314,6 +1329,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all forms and return them as array
+	 *
 	 * @return array
 	 */
 	public function getForms()
@@ -1340,7 +1356,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit module wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function editModule(DataContainer $dc)
@@ -1351,6 +1369,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all modules and return them as array
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -1369,6 +1388,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all gallery templates as array
+	 *
 	 * @return array
 	 */
 	public function getGalleryTemplates()
@@ -1379,6 +1399,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all content element templates as array
+	 *
 	 * @return array
 	 */
 	public function getElementTemplates()
@@ -1389,7 +1410,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article teaser wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function editArticle(DataContainer $dc)
@@ -1400,7 +1423,9 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article teaser)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticles(DataContainer $dc)
@@ -1473,8 +1498,10 @@ class tl_content extends Backend
 
 	/**
 	 * Dynamically set the ace syntax
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function setRteSyntax($varValue, DataContainer $dc)
@@ -1523,12 +1550,14 @@ class tl_content extends Backend
 		}
 
 		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'ace|' . $syntax;
+
 		return $varValue;
 	}
 
 
 	/**
 	 * Add a link to the list items import wizard
+	 *
 	 * @return string
 	 */
 	public function listImportWizard()
@@ -1539,6 +1568,7 @@ class tl_content extends Backend
 
 	/**
 	 * Add a link to the table items import wizard
+	 *
 	 * @return string
 	 */
 	public function tableImportWizard()
@@ -1549,7 +1579,9 @@ class tl_content extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
@@ -1560,12 +1592,14 @@ class tl_content extends Backend
 
 	/**
 	 * Return the delete content element button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteElement($row, $href, $label, $title, $icon, $attributes)
@@ -1580,8 +1614,10 @@ class tl_content extends Backend
 
 	/**
 	 * Dynamically add flags to the "singleSRC" field
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function setSingleSrcFlags($varValue, DataContainer $dc)
@@ -1609,8 +1645,10 @@ class tl_content extends Backend
 
 	/**
 	 * Dynamically add flags to the "multiSRC" field
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function setMultiSrcFlags($varValue, DataContainer $dc)
@@ -1637,8 +1675,10 @@ class tl_content extends Backend
 
 	/**
 	 * Pre-fill the "alt" and "caption" fields with the file meta data
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
 	public function storeFileMetaInformation($varValue, DataContainer $dc)
@@ -1648,7 +1688,7 @@ class tl_content extends Backend
 			return $varValue;
 		}
 
-		$objFile = \FilesModel::findByUuid($varValue);
+		$objFile = FilesModel::findByUuid($varValue);
 
 		if ($objFile !== null)
 		{
@@ -1670,8 +1710,8 @@ class tl_content extends Backend
 
 					if (isset($arrMeta[$strLanguage]))
 					{
-						\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
-						\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
+						Input::setPost('alt', $arrMeta[$strLanguage]['title']);
+						Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
 					}
 				}
 			}
@@ -1683,12 +1723,14 @@ class tl_content extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -1718,9 +1760,10 @@ class tl_content extends Backend
 
 	/**
 	 * Toggle the visibility of an element
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

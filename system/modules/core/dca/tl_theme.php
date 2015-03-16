@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -221,12 +219,9 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 
 
 /**
- * Class tl_theme
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_theme extends Backend
 {
@@ -275,8 +270,10 @@ class tl_theme extends Backend
 
 	/**
 	 * Add an image to each record
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $label
+	 *
 	 * @return string
 	 */
 	public function addPreviewImage($row, $label)
@@ -324,6 +321,7 @@ class tl_theme extends Backend
 
 	/**
 	 * Return all template folders as array
+	 *
 	 * @return array
 	 */
 	public function getTemplateFolders()
@@ -334,8 +332,10 @@ class tl_theme extends Backend
 
 	/**
 	 * Return all template folders as array
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $path
+	 * @param integer $level
+	 *
 	 * @return array
 	 */
 	protected function doGetTemplateFolders($path, $level=0)
@@ -357,11 +357,13 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "import theme" link
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $class
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function importTheme($href, $label, $title, $class, $attributes)
@@ -372,6 +374,7 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the theme store link
+	 *
 	 * @return string
 	 */
 	public function themeStore()
@@ -382,12 +385,14 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "edit CSS" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editCss($row, $href, $label, $title, $icon, $attributes)
@@ -398,12 +403,14 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "edit modules" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editModules($row, $href, $label, $title, $icon, $attributes)
@@ -414,12 +421,14 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "edit page layouts" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editLayout($row, $href, $label, $title, $icon, $attributes)
@@ -430,12 +439,14 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "edit image sizes" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editImageSizes($row, $href, $label, $title, $icon, $attributes)
@@ -446,12 +457,14 @@ class tl_theme extends Backend
 
 	/**
 	 * Return the "export theme" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function exportTheme($row, $href, $label, $title, $icon, $attributes)

@@ -3,27 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class CheckBox
- *
  * Provide methods to handle check boxes.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array   $options
+ * @property boolean $multiple
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class CheckBox extends \Widget
 {
@@ -43,8 +37,9 @@ class CheckBox extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -79,6 +74,7 @@ class CheckBox extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -178,8 +174,10 @@ class CheckBox extends \Widget
 
 	/**
 	 * Generate a checkbox and return it as string
-	 * @param array
-	 * @param integer
+	 *
+	 * @param array   $arrOption
+	 * @param integer $i
+	 *
 	 * @return string
 	 */
 	protected function generateCheckbox($arrOption, $i)

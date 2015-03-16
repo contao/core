@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -22,12 +20,9 @@ if (Input::get('do') == 'calendar')
 
 
 /**
- * Class tl_content_calendar
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_content_calendar extends Backend
 {
@@ -120,9 +115,11 @@ class tl_content_calendar extends Backend
 
 	/**
 	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param array   $root
+	 * @param boolean $blnIsPid
+	 *
 	 * @return boolean
 	 */
 	protected function checkAccessToElement($id, $root, $blnIsPid=false)
@@ -144,6 +141,7 @@ class tl_content_calendar extends Backend
 		if ($objCalendar->numRows < 1)
 		{
 			$this->log('Invalid event content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -151,6 +149,7 @@ class tl_content_calendar extends Backend
 		if (!in_array($objCalendar->id, $root))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 

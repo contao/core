@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,16 @@ namespace Contao;
  *         echo "The latest Contao version is " . $request->response;
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property string  $error    The error message
+ * @property integer $code     The response code
+ * @property string  $request  The request string
+ * @property string  $response The response string
+ * @property array   $headers  The response headers array
+ * @property string  $username The auth username
+ * @property boolean $redirect The follow redirects status
+ * @property integer $rlimit   The maximum number of redirects
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Request
 {
@@ -131,15 +136,6 @@ class Request
 	/**
 	 * Set an object property
 	 *
-	 * Supported keys:
-	 *
-	 * * data:     the request data
-	 * * method:   the request method
-	 * * username: the auth username
-	 * * password: the auth password
-	 * * redirect: follow redirects
-	 * * rlimit:   maximum number of redirects
-	 *
 	 * @param string $strKey   The property name
 	 * @param mixed  $varValue The property value
 	 *
@@ -182,17 +178,6 @@ class Request
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * error:    the error message or an empty string
-	 * * code:     the response code
-	 * * request:  the request string
-	 * * response: the response string
-	 * * headers:  the response headers array
-	 * * username: the auth username
-	 * * redirect: the follow redirects status
-	 * * rlimit:   the maximum number of redirects
 	 *
 	 * @param string $strKey The property key
 	 *
@@ -308,6 +293,7 @@ class Request
 		if (!is_resource($fp))
 		{
 			$this->strError = trim($errno .' '. $errstr);
+
 			return;
 		}
 

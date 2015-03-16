@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendChangelog
- *
  * Show the changelog to authenticated users.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendChangelog extends \Backend
 {
@@ -60,18 +51,18 @@ class BackendChangelog extends \Backend
 		// Convert to HTML
 		$strBuffer = \Michelf\MarkdownExtra::defaultTransform($strBuffer);
 
-		// Add the template
-		$this->Template = new \BackendTemplate('be_changelog');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_changelog');
 
 		// Assign the template variables
-		$this->Template->content = $strBuffer;
-		$this->Template->theme = \Backend::getTheme();
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
-		$this->Template->charset = \Config::get('characterSet');
+		$objTemplate->content = $strBuffer;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['changelog']);
+		$objTemplate->charset = \Config::get('characterSet');
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

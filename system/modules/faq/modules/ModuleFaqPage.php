@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Faq
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class ModuleFaqPage
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Faq
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleFaqPage extends \Module
 {
@@ -36,12 +28,14 @@ class ModuleFaqPage extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['faqpage'][0]) . ' ###';
@@ -75,15 +69,19 @@ class ModuleFaqPage extends \Module
 		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
+
 			return;
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$arrFaqs = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs
 		while ($objFaq->next())
 		{
+			/** @var \FaqModel $objFaq */
 			$objTemp = (object) $objFaq->row();
 
 			// Clean RTE output
@@ -130,9 +128,11 @@ class ModuleFaqPage extends \Module
 				$this->addEnclosuresToTemplate($objTemp, $objFaq->row());
 			}
 
-			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objFaq->getRelated('author')->name);
+			/** @var \UserModel $objAuthor */
+			$objAuthor = $objFaq->getRelated('author');
+			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $objAuthor->name);
 
-			// Get the FAQ category
+			/** @var \FaqCategoryModel $objPid */
 			$objPid = $objFaq->getRelated('pid');
 
 			// Order by PID
