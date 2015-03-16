@@ -246,7 +246,7 @@ class Form extends \Hybrid
 		// Process the form data
 		if (\Input::post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
-			$this->processFormData($arrSubmitted, $arrLabels);
+			$this->processFormData($arrSubmitted, $arrLabels, $arrFields);
 		}
 
 		// Add a warning to the page title
@@ -291,8 +291,9 @@ class Form extends \Hybrid
 	 *
 	 * @param array $arrSubmitted
 	 * @param array $arrLabels
+	 * @param array $arrFields
 	 */
-	protected function processFormData($arrSubmitted, $arrLabels)
+	protected function processFormData($arrSubmitted, $arrLabels, $arrFields)
 	{
 		// HOOK: prepare form data callback
 		if (isset($GLOBALS['TL_HOOKS']['prepareFormData']) && is_array($GLOBALS['TL_HOOKS']['prepareFormData']))
@@ -300,7 +301,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['prepareFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this, $arrFields);
 			}
 		}
 
