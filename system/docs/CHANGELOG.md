@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.20 (2015-03-XX)
+---------------------------
+
+### Fixed
+Ensure a unique language file array in the `Automator` class (see #7687).
+
+
 Version 3.2.19 (2015-02-12)
 ---------------------------
 
