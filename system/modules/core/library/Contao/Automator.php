@@ -649,14 +649,14 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if (strncmp($strFile, '.', 1) === 0 || (substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
+					if (strncmp($strFile, '.', 1) !== 0 && (substr($strFile, -4) == '.php' || substr($strFile, -4) == '.xlf'))
 					{
-						continue;
+						$arrFiles[] = substr($strFile, 0, -4);
 					}
-
-					$arrFiles[] = substr($strFile, 0, -4);
 				}
 			}
+
+			$arrFiles = array_values(array_unique($arrFiles));
 
 			// Create one file per table
 			foreach ($arrFiles as $strName)

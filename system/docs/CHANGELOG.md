@@ -5,6 +5,9 @@ Version 3.4.5 (2015-03-XX)
 --------------------------
 
 ### Fixed
+Ensure a unique language file array in the `Automator` class (see #7687).
+
+### Fixed
 Convert language codes to locales in the meta wizard (see #7667).
 
 ### Fixed
