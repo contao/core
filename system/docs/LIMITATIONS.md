@@ -35,6 +35,6 @@ SVGZ support
 ------------
 
 Contao cannot handle SVGZ images under PHP 5.3, due to the missing `gzdecode()`
-funtion. If you need SVGZ support, you have to use PHP 5.4+. 
+function. If you need SVGZ support, you have to use PHP 5.4+. 
 
 More information: https://github.com/contao/core/issues/7639
