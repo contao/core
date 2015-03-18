@@ -545,8 +545,54 @@ class Automator extends \System
 		// Close the file (moves it to its final destination)
 		$objCacheFile->close();
 
+		// Generate the page mapping array
+		$arrMapper = [];
+		$objPages = \PageModel::findPublishedRootPages();
+
+		if ($objPages !== null)
+		{
+			while ($objPages->next())
+			{
+				if ($objPages->dns != '')
+				{
+					$strBase = $objPages->useSSL ? 'https://' : 'http://';
+					$strBase .= $objPages->dns . \Environment::get('path') . '/';
+				}
+				else
+				{
+					$strBase = \Environment::get('base');
+				}
+
+				if ($objPages->fallback)
+				{
+					$arrMapper[$strBase . 'empty.fallback'] = $strBase . 'empty.' . $objPages->language;
+				}
+
+				$arrMapper[$strBase . 'empty.' . $objPages->language] = $strBase . 'empty.' . $objPages->language;
+			}
+		}
+
+		// Generate the page mapper file
+		$objCacheFile = new \File('system/cache/config/mapping.php', true);
+		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+		$strContent = "\n\n";
+		$strContent .= "return array\n";
+		$strContent .= "(\n";
+
+		foreach ($arrMapper as $strKey=>$strCacheKey)
+		{
+			$strContent .= "\t'$strKey' => '$strCacheKey',\n";
+		}
+
+		$strContent .= ");";
+		$objCacheFile->append($strContent);
+
+		// Close the file (moves it to its final destination)
+		$objCacheFile->close();
+
 		// Add a log entry
-		$this->log('Generated the autoload cache', __METHOD__, TL_CRON);
+		$this->log('Generated the config cache', __METHOD__, TL_CRON);
 	}
 
 
