@@ -5,6 +5,10 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Correctly set the CSS classes in the jQuery accordion and do not try to mess
+with its ARIA handling (see #7622).
+
+### Fixed
 Handle language fragments without trailing slash when redirecting (see #7666).
 
 ### Fixed
