@@ -608,6 +608,15 @@ abstract class Controller extends \System
 			$image = $objPage->type.'_'.$sub.'.gif';
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getPageStatusIcon']) && is_array($GLOBALS['TL_HOOKS']['getPageStatusIcon']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getPageStatusIcon'] as $callback)
+			{
+				$image = static::importStatic($callback[0])->$callback[1]($objPage, $image);
+			}
+		}
+
 		return $image;
 	}
 
