@@ -2886,6 +2886,23 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$new = deserialize($varValue, true);
 				$old = deserialize($this->objActiveRecord->{$this->strField}, true);
 
+				// Call load_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$old = $this->$callback[0]->$callback[1]($old, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$old = $callback($old, $this);
+						}
+					}
+				}
+
 				switch (\Input::post($this->strInputName . '_update'))
 				{
 					case 'add':
