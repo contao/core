@@ -5,6 +5,9 @@ Version 3.4.5 (2015-03-XX)
 --------------------------
 
 ### Fixed
+Correctly calculate the max upload size in the DropZone uploader (see #7633).
+
+### Fixed
 Ensure a unique language file array in the `Automator` class (see #7687).
 
 ### Fixed
