@@ -546,7 +546,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Generate the page mapping array
-		$arrMapper = array();
+		$arrMapper = [];
 		$objPages = \PageModel::findPublishedRootPages();
 
 		if ($objPages !== null)
@@ -574,7 +574,21 @@ class Automator extends \System
 
 		// Generate the page mapper file
 		$objCacheFile = new \File('system/cache/config/mapping.php', true);
-		$objCacheFile->write(sprintf("<?php\n\nreturn %s;\n", var_export($arrMapper, true)));
+		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+
+		$strContent = "\n\n";
+		$strContent .= "return array\n";
+		$strContent .= "(\n";
+
+		foreach ($arrMapper as $strKey=>$strCacheKey)
+		{
+			$strContent .= "\t'$strKey' => '$strCacheKey',\n";
+		}
+
+		$strContent .= ");";
+		$objCacheFile->append($strContent);
+
+		// Close the file (moves it to its final destination)
 		$objCacheFile->close();
 
 		// Add a log entry
