@@ -234,7 +234,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of Models or null if there is no matching pages
+	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{
@@ -413,28 +413,6 @@ class PageModel extends \Model
 		}
 
 		return static::findOneBy($arrColumns, $strHost, $arrOptions);
-	}
-
-
-	/**
-	 * Finds the published root pages
-	 *
-	 * @param array $arrOptions An optional options array
-	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no parent pages
-	 */
-	public static function findPublishedRootPages(array $arrOptions=array())
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.type=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, 'root', $arrOptions);
 	}
 
 

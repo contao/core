@@ -268,7 +268,12 @@ class FrontendIndex extends \Frontend
 			return;
 		}
 
-		// Try to map the empty request
+		/**
+		 * If the request string is empty, look for a cached page matching the
+		 * primary browser language. This is a compromise between not caching
+		 * empty requests at all and considering all browser languages, which
+		 * is not possible for various reasons.
+		 */
 		if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
@@ -277,43 +282,8 @@ class FrontendIndex extends \Frontend
 				return;
 			}
 
-			$strCacheKey = null;
 			$arrLanguage = \Environment::get('httpAcceptLanguage');
-
-			// Try to get the cache key from the mapper array
-			if (file_exists(TL_ROOT . '/system/cache/config/mapping.php'))
-			{
-				$arrMapper = include TL_ROOT . '/system/cache/config/mapping.php';
-
-				// Try the language specific keys
-				foreach ($arrLanguage as $strLanguage)
-				{
-					$strSpecificKey = \Environment::get('base') . 'empty.' . $strLanguage;
-
-					if (isset($arrMapper[$strSpecificKey]))
-					{
-						$strCacheKey = $arrMapper[$strSpecificKey];
-						break;
-					}
-				}
-
-				// Try the fallback key
-				if ($strCacheKey === null)
-				{
-					$strSpecificKey = \Environment::get('base') . 'empty.fallback';
-
-					if (isset($arrMapper[$strSpecificKey]))
-					{
-						$strCacheKey = $arrMapper[$strSpecificKey];
-					}
-				}
-			}
-
-			// Fall back to the first accepted language
-			if ($strCacheKey === null)
-			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $arrLanguage[0];
-			}
+			$strCacheKey = \Environment::get('base') .'empty.'. $arrLanguage[0];
 		}
 		else
 		{
@@ -336,8 +306,8 @@ class FrontendIndex extends \Frontend
 		// Check for a mobile layout
 		if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 		{
-			$strMd5CacheKey = md5($strCacheKey . '.mobile');
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
+			$strCacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{
@@ -348,8 +318,8 @@ class FrontendIndex extends \Frontend
 		// Check for a regular layout
 		if (!$blnFound)
 		{
-			$strMd5CacheKey = md5($strCacheKey);
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
+			$strCacheKey = md5($strCacheKey);
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{

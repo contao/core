@@ -5,9 +5,6 @@ Version 3.4.5 (2015-03-XX)
 --------------------------
 
 ### Fixed
-Improve the cache handling for empty URLs (see #7618).
-
-### Fixed
 Ensure a unique language file array in the `Automator` class (see #7687).
 
 ### Fixed
