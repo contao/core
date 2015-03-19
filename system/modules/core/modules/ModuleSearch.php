@@ -206,6 +206,9 @@ class ModuleSearch extends \Module
 			{
 				$this->Template->header = sprintf($GLOBALS['TL_LANG']['MSC']['sEmpty'], $strKeywords);
 				$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
+				$this->Template->keywords = $strKeywords;
+				$this->Template->count = 0;
+				$this->Template->page = 1;
 				return;
 			}
 
@@ -285,6 +288,9 @@ class ModuleSearch extends \Module
 
 			$this->Template->header = vsprintf($GLOBALS['TL_LANG']['MSC']['sResults'], array($from, $to, $count, $strKeywords));
 			$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
+      $this->Template->keywords = $strKeywords;
+      $this->Template->count = $count;
+      $this->Template->page = $page;			
 		}
 	}
 }
