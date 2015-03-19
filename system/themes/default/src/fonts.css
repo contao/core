@@ -21,8 +21,8 @@
 #paste_hint p {
 	position:absolute;
 	font-family:"Architects Daughter",cursive;
-	font-size:12px;
-	font-size:.75rem;
+	font-size:15px;
+	font-size:.9375rem;
 	color:#838990;
 	top:10px;
 	right:30px;
@@ -40,8 +40,8 @@
 .sort_hint {
 	position:absolute;
 	font-family:"Architects Daughter",cursive;
-	font-size:12px;
-	font-size:.75rem;
+	font-size:15px;
+	font-size:.9375rem;
 	color:#838990;
 	top:-48px;
 	left:300px;

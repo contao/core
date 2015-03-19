@@ -64,7 +64,15 @@ class PageError404 extends \Frontend
 			// Only redirect if there is no language fragment (see #4669)
 			if ($strRequest != '' && !preg_match('@^[a-z]{2}(\-[A-Z]{2})?/@', $strRequest))
 			{
-				$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+				// Handle language fragments without trailing slash (see #7666)
+				if (preg_match('@^[a-z]{2}(\-[A-Z]{2})?$@', $strRequest))
+				{
+					$this->redirect(\Environment::get('request') . '/', 301);
+				}
+				else
+				{
+					$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+				}
 			}
 		}
 

@@ -16,6 +16,19 @@ Convert language codes to locales in the meta wizard (see #7667).
 ### Fixed
 Replace only the `{{file}}` insert tag in the back end preview (see #7647).
 
+### Fixed
+Correctly set the CSS classes in the jQuery accordion and do not try to mess
+with its ARIA handling (see #7622).
+
+### Fixed
+Handle language fragments without trailing slash when redirecting (see #7666).
+
+### Fixed
+Trigger the `load_callback` upon saving in "override all" mode (see #7670). 
+
+### Fixed
+Ensure a unique language file array in the `Automator` class (see #7687).
+
 
 Version 3.4.4 (2015-02-12)
 --------------------------

@@ -546,7 +546,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Add a log entry
-		$this->log('Generated the autoload cache', __METHOD__, TL_CRON);
+		$this->log('Generated the config cache', __METHOD__, TL_CRON);
 	}
 
 
