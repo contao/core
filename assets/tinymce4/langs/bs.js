@@ -66,6 +66,7 @@ tinymce.addI18n('bs',{
 "Restore last draft": "Vrati posljednju skicu",
 "Special character": "Specijalni znak",
 "Source code": "Izvorni kod",
+"Color": "Boja",
 "Right to left": "S desna na lijevo",
 "Left to right": "S lijeva na desno",
 "Emoticons": "Smajliji",

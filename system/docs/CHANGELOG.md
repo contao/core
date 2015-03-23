@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.5 (2015-03-XX)
 --------------------------
 
+### Updated
+Updated TinyMCE to version 4.1.9 (see #7690).
+
 ### Fixed
 Correctly calculate the max upload size in the DropZone uploader (see #7633).
 
