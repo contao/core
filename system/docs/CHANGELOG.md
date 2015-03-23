@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### New
+Make `count`, `page` and `keywords` available in the search module (see #7577).
+
+### New
 Added the "getPageStatusIcon" hook (see #7556).
 
 ### Fixed

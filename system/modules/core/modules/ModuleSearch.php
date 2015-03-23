@@ -207,6 +207,10 @@ class ModuleSearch extends \Module
 
 			$count = count($arrResult);
 
+			$this->Template->count = $count;
+			$this->Template->page = null;
+			$this->Template->keywords = $strKeywords;
+
 			// No results
 			if ($count < 1)
 			{
@@ -250,6 +254,8 @@ class ModuleSearch extends \Module
 					$objPagination = new \Pagination($count, $per_page, \Config::get('maxPaginationLinks'), $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
+
+				$this->Template->page = $page;
 			}
 
 			// Get the results
