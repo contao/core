@@ -560,15 +560,14 @@ class Automator extends \System
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				// Ignore non PHP files and files which have been included before
-				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
+				if (strncmp($strFile, '.', 1) !== 0 && substr($strFile, -4) == '.php')
 				{
-					continue;
+					$arrFiles[] = substr($strFile, 0, -4);
 				}
-
-				$arrFiles[] = substr($strFile, 0, -4);
 			}
 		}
+
+		$arrFiles = array_values(array_unique($arrFiles));
 
 		// Create one file per table
 		foreach ($arrFiles as $strName)
