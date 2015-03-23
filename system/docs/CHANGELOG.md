@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Fixed
+Return a boolean value in the `*User::authenticate()` method (see #7497).
+
 ### New
 Make `count`, `page` and `keywords` available in the search module (see #7577).
 
