@@ -235,6 +235,12 @@ class FrontendIndex extends \Frontend
 		// Load the page object depending on its type
 		$objHandler = new $GLOBALS['TL_PTY'][$objPage->type]();
 
+		// Backup some globals (see #7659)
+		$arrHead = $GLOBALS['TL_HEAD'];
+		$arrBody = $GLOBALS['TL_BODY'];
+		$arrMootools = $GLOBALS['TL_MOOTOOLS'];
+		$arrJquery = $GLOBALS['TL_JQUERY'];
+
 		try
 		{
 			// Generate the page
@@ -256,6 +262,12 @@ class FrontendIndex extends \Frontend
 		}
 		catch (\UnusedArgumentsException $e)
 		{
+			// Restore the globals (see #7659)
+			$GLOBALS['TL_HEAD'] = $arrHead;
+			$GLOBALS['TL_BODY'] = $arrBody;
+			$GLOBALS['TL_MOOTOOLS'] = $arrMootools;
+			$GLOBALS['TL_JQUERY'] = $arrJquery;
+
 			// Render the error page (see #5570)
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId, null, null, true);
