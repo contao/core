@@ -5,6 +5,9 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Restore some globals when catching the unused argument exception (see #7659).
+
+### Fixed
 Correctly set the CSS classes in the jQuery accordion and do not try to mess
 with its ARIA handling (see #7622).
 
