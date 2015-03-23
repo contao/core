@@ -44,11 +44,11 @@
       <trans-unit id="tl_templates.pasteinto.1">
         <source>Paste into this folder</source>
       </trans-unit>
-      <trans-unit id="tl_templates.diff.0">
+      <trans-unit id="tl_templates.compare.0">
         <source>Compare template</source>
       </trans-unit>
-      <trans-unit id="tl_templates.diff.1">
-        <source>Compare "%s" with another template.</source>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare "%s" with another template</source>
       </trans-unit>
       <trans-unit id="tl_templates.overridesAnotherTpl">
         <source>This template overrides "%s".</source>

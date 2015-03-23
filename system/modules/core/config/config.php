@@ -48,7 +48,7 @@ $GLOBALS['BE_MOD'] = array
 		(
 			'tables'      => array('tl_templates'),
 			'new_tpl'     => array('tl_templates', 'addNewTemplate'),
-			'diff'        => array('tl_templates', 'diffTemplate'),
+			'compare'     => array('tl_templates', 'compareTemplate'),
 		)
 	),
 

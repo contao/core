@@ -104,12 +104,12 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'icon'                => 'editor.gif',
 				'button_callback'     => array('tl_templates', 'editSource')
 			),
-			'diff' => array
+			'compare' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['diff'],
-				'href'                => 'key=diff',
+				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['compare'],
+				'href'                => 'key=compare',
 				'icon'                => 'diffTemplate.gif',
-				'button_callback'     => array('tl_templates', 'diffTemplateButton')
+				'button_callback'     => array('tl_templates', 'compareButton')
 			)
 		)
 	),
@@ -361,13 +361,13 @@ class tl_templates extends Backend
 
 
 	/**
-	 * Create a diff from the current to the original template
+	 * Compares the current to the original template
 	 *
 	 * @param DataContainer $dc
 	 *
 	 * @return string
 	 */
-	public function diffTemplate(DataContainer $dc)
+	public function compareTemplate(DataContainer $dc)
 	{
 		$strCurrentPath = $dc->id;
 		$strName = pathinfo($strCurrentPath, PATHINFO_FILENAME);
@@ -474,7 +474,7 @@ class tl_templates extends Backend
 
 
 	/**
-	 * Return the diff button
+	 * Return the "compare template" button
 	 *
 	 * @param array  $row
 	 * @param string $href
@@ -485,7 +485,7 @@ class tl_templates extends Backend
 	 *
 	 * @return string
 	 */
-	public function diffTemplateButton($row, $href, $label, $title, $icon, $attributes)
+	public function compareButton($row, $href, $label, $title, $icon, $attributes)
 	{
 		return '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $row['id'])) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
 	}
