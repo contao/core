@@ -16,6 +16,7 @@ if (Input::get('do') == 'calendar')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_calendar_events';
 	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_calendar', 'checkPermission');
+	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_calendar', 'generateFeed');
 }
 
 
@@ -150,5 +151,31 @@ class tl_content_calendar extends Backend
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Check for modified calendar feeds and update the XML files if necessary
+	 */
+	public function generateFeed()
+	{
+		$session = $this->Session->get('calendar_feed_updater');
+
+		if (!is_array($session) || empty($session))
+		{
+			return;
+		}
+
+		$this->import('Calendar');
+
+		foreach ($session as $id)
+		{
+			$this->Calendar->generateFeedsByCalendar($id);
+		}
+
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
+		$this->Session->set('calendar_feed_updater', null);
 	}
 }

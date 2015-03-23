@@ -5,6 +5,9 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Update news and calendar feeds from the content view (see #7679).
+
+### Fixed
 Do not generally encode stand-alone ampersands (see #7684).
 
 ### Fixed
