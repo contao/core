@@ -182,14 +182,13 @@ abstract class Model
 
 
 	/**
-	 * Clone a model with exactly the same original values
+	 * Clone a model with its original values
 	 *
-	 * @return static
+	 * @return static The model
 	 */
 	public function cloneOriginal()
 	{
 		$clone = clone $this;
-
 		$clone->setRow($this->originalRow());
 
 		return $clone;
@@ -283,7 +282,7 @@ abstract class Model
 	/**
 	 * Return the original values as associative array
 	 *
-	 * @return array The data record
+	 * @return array The original data
 	 */
 	public function originalRow()
 	{
@@ -296,7 +295,7 @@ abstract class Model
 
 		$originalRow = array();
 
-		foreach ($row as $k => $v)
+		foreach ($row as $k=>$v)
 		{
 			$originalRow[$k] = isset($this->arrModified[$k]) ? $this->arrModified[$k] : $v;
 		}
@@ -658,7 +657,7 @@ abstract class Model
 	 *
 	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function detach($blnKeepClone = true)
+	public function detach($blnKeepClone=true)
 	{
 		\Model\Registry::getInstance()->unregister($this);
 
@@ -683,7 +682,7 @@ abstract class Model
 	 *
 	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function preventSaving($blnKeepClone = true)
+	public function preventSaving($blnKeepClone=true)
 	{
 		$this->detach($blnKeepClone);
 		$this->blnPreventSaving = true;
