@@ -108,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['diff'],
 				'href'                => 'key=diff',
-				'icon'                => 'diff.gif',
+				'icon'                => 'diffTemplate.gif',
 				'button_callback'     => array('tl_templates', 'diffTemplateButton')
 			)
 		)
@@ -433,7 +433,7 @@ class tl_templates extends Backend
 		}
 		else
 		{
-			$strBuffer .= '<p>' . $GLOBALS['TL_LANG']['tl_templates']['pleaseSelect'] . '</p>';
+			$strBuffer .= '<p class="tl_info">' . $GLOBALS['TL_LANG']['tl_templates']['pleaseSelect'] . '</p>';
 		}
 
 		// Templates to compare against
@@ -447,7 +447,7 @@ class tl_templates extends Backend
 				$arrComparable[$k] = array
 				(
 					'version' => $k,
-					'info'    => $k
+					'info'    => $k . '.' . $strExtension
 				);
 			}
 		}
@@ -487,7 +487,7 @@ class tl_templates extends Backend
 	 */
 	public function diffTemplateButton($row, $href, $label, $title, $icon, $attributes)
 	{
-		return '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_templates']['diff'][1], $row['id']))) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
+		return '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $row['id'])) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
 	}
 
 
