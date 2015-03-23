@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### New
+Add a diff view for custom templates (see #7599).
+
+### New
 Added the "postAuthenticate" hook (see #7493).
 
 ### New

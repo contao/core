@@ -45,6 +45,18 @@ h2 {
 	top:2px;
 }
 
+/* Messages */
+.tl_info {
+	margin:1px 0 0;
+	padding:4px 5px 5px 25px;
+	border-radius:3px;
+	background:#eff5fa url("images/show.gif") no-repeat 6px center;
+	color:#4b85ba;
+}
+.nobg .tl_info {
+	background-color:transparent;
+}
+
 /* Diff */
 #diff .change {
 	margin-bottom:13px;

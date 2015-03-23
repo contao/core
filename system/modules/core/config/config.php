@@ -47,7 +47,8 @@ $GLOBALS['BE_MOD'] = array
 		'tpl_editor' => array
 		(
 			'tables'      => array('tl_templates'),
-			'new_tpl'     => array('tl_templates', 'addNewTemplate')
+			'new_tpl'     => array('tl_templates', 'addNewTemplate'),
+			'compare'     => array('tl_templates', 'compareTemplate'),
 		)
 	),
 
