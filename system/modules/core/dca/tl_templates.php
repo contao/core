@@ -374,6 +374,7 @@ class tl_templates extends Backend
 		$strExtension = pathinfo($strCurrentPath, PATHINFO_EXTENSION);
 		$arrTemplates = TemplateLoader::getFiles();
 		$blnOverridesAnotherTpl = isset($arrTemplates[$strName]);
+
 		$strPrefix = '';
 
 		if (($pos = strpos($strName, '_')) !== false)
@@ -381,14 +382,14 @@ class tl_templates extends Backend
 			$strPrefix = substr($strName, 0, $pos + 1);
 		}
 
-		// By default it's the original template to compare against
-		$strCompareName = $strName;
-		$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+		$strCompareName = null;
+		$strComparePath = null;
 
-		// Compare to itself if no original template available
-		if (!$blnOverridesAnotherTpl)
+		// By default it's the original template to compare against
+		if ($blnOverridesAnotherTpl)
 		{
-			$strComparePath = $strCurrentPath;
+			$strCompareName = $strName;
+			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
 		}
 
 		// User selected template to compare against
@@ -398,38 +399,41 @@ class tl_templates extends Backend
 			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
 		}
 
-		$objCurrentFile = new \File($strCurrentPath, true);
-		$objCompareFile = new \File($strComparePath, true);
+		$strBuffer = '';
 
-		// Abort if one file is missing
-		if (!$objCurrentFile->exists() || !$objCompareFile->exists())
+		if ($strComparePath !== null)
 		{
-			$this->redirect('contao/main.php?act=error');
-		}
+			$objCurrentFile = new \File($strCurrentPath, true);
+			$objCompareFile = new \File($strComparePath, true);
 
-		$objDiff = new Diff($objCompareFile->getContentAsArray(), $objCurrentFile->getContentAsArray());
-		$objTemplate = new \BackendTemplate('be_diff');
+			// Abort if one file is missing
+			if (!$objCurrentFile->exists() || !$objCompareFile->exists())
+			{
+				$this->redirect('contao/main.php?act=error');
+			}
 
-		if ($blnOverridesAnotherTpl)
-		{
-			$strMsg = sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'], $strCurrentPath, $strComparePath);
+			$objDiff = new Diff($objCompareFile->getContentAsArray(), $objCurrentFile->getContentAsArray());
+
+			if ($blnOverridesAnotherTpl)
+			{
+				$strBuffer .= '<p class="tl_info" style="margin-bottom:1em">' . sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'], $strComparePath) . '</p>';
+			}
+
+			$strDiff = $objDiff->Render(new DiffRenderer(array('field'=>$strCurrentPath)));
+
+			// Identical versions
+			if ($strDiff == '')
+			{
+				$strBuffer .= '<p>' . $GLOBALS['TL_LANG']['MSC']['identicalVersions'] . '</p>';
+			}
+			else
+			{
+				$strBuffer .= $strDiff;
+			}
 		}
 		else
 		{
-			$strMsg = sprintf($GLOBALS['TL_LANG']['tl_templates']['standaloneTpl'], $strCurrentPath);
-		}
-
-		$strBuffer = sprintf('<p class="tl_info">%s</p><br>', $strMsg);
-		$strDiff = $objDiff->Render(new DiffRenderer());
-
-		// Identical versions
-		if ($strDiff == '')
-		{
-			$strBuffer .= '<p>' . $GLOBALS['TL_LANG']['MSC']['identicalVersions'] . '</p>';
-		}
-		else
-		{
-			$strBuffer .= $strDiff;
+			$strBuffer .= '<p>' . $GLOBALS['TL_LANG']['tl_templates']['pleaseSelect'] . '</p>';
 		}
 
 		// Templates to compare against
@@ -448,6 +452,8 @@ class tl_templates extends Backend
 			}
 		}
 
+		$objTemplate = new \BackendTemplate('be_diff');
+
 		// Template variables
 		$objTemplate->staticFrom = $strCurrentPath;
 		$objTemplate->versions = $arrComparable;
@@ -462,7 +468,8 @@ class tl_templates extends Backend
 
 		\Config::set('debugMode', false);
 
-		return $objTemplate->parse();
+		$objTemplate->output();
+		exit;
 	}
 
 
@@ -480,7 +487,7 @@ class tl_templates extends Backend
 	 */
 	public function diffTemplateButton($row, $href, $label, $title, $icon, $attributes)
 	{
-		return '<a href="' . $this->addToUrl($href . '&amp;popup=1&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_templates']['diff'][1], $row['id']))) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
+		return '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", sprintf($GLOBALS['TL_LANG']['tl_templates']['diff'][1], $row['id']))) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
 	}
 
 

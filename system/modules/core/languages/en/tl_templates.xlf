@@ -45,16 +45,16 @@
         <source>Paste into this folder</source>
       </trans-unit>
       <trans-unit id="tl_templates.diff.0">
-        <source>View differences to another template</source>
+        <source>Compare template</source>
       </trans-unit>
       <trans-unit id="tl_templates.diff.1">
-        <source>View differences of "%s" to another template.</source>
+        <source>Compare "%s" with another template.</source>
       </trans-unit>
       <trans-unit id="tl_templates.overridesAnotherTpl">
-        <source>This template ("%s") overrides a template from an extension or the core itself. The path to the original template is "%s".</source>
+        <source>This template overrides "%s".</source>
       </trans-unit>
-      <trans-unit id="tl_templates.standaloneTpl">
-        <source>This template ("%s") is a standalone template and does not override a template from an extension or the core itself.</source>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click "Show differences".</source>
       </trans-unit>
     </body>
   </file>
