@@ -287,6 +287,16 @@ abstract class User extends \System
 
 		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 
+		// HOOK: post authenticate callback
+		if (isset($GLOBALS['TL_HOOKS']['postAuthenticate']) && is_array($GLOBALS['TL_HOOKS']['postAuthenticate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postAuthenticate'] as $callback)
+			{
+				$this->import($callback[0], 'objAuth', true);
+				$this->objAuth->$callback[1]($this);
+			}
+		}
+
 		return true;
 	}
 
