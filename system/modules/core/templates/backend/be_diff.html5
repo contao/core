@@ -38,13 +38,13 @@
         <div class="formbody">
           <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
           <?php if ($this->staticFrom): ?>
-          <span><?php echo $this->staticFrom; ?></span>
+            <span><?php echo $this->staticFrom; ?></span>
           <?php else: ?>
-          <select name="from" id="ctrl_from" class="tl_select">
-            <?php foreach ($this->versions as $k=>$v): ?>
-              <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->from): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
-            <?php endforeach; ?>
-          </select>
+            <select name="from" id="ctrl_from" class="tl_select">
+              <?php foreach ($this->versions as $k=>$v): ?>
+                <option value="<?php echo $k; ?>"<?php if ($v['version'] == $this->from): ?> selected="selected"<?php endif; ?>><?php echo $v['info']; ?></option>
+              <?php endforeach; ?>
+            </select>
           <?php endif; ?>
           <span class="arrow">→</span>
           <select name="to" id="ctrl_to" class="tl_select">
