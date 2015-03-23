@@ -238,9 +238,9 @@ class ModuleArticle extends \Module
 		}
 
 		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
+		if (isset($GLOBALS['TL_HOOKS']['parseArticle']) && is_array($GLOBALS['TL_HOOKS']['parseArticle']))
 		{
-			foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
+			foreach ($GLOBALS['TL_HOOKS']['parseArticle'] as $callback)
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]($this->Template, $this->arrData, $this);
