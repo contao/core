@@ -5,6 +5,9 @@ Version 3.2.20 (2015-03-XX)
 ---------------------------
 
 ### Fixed
+Do not generally encode stand-alone ampersands (see #7684).
+
+### Fixed
 Restore some globals when catching the unused argument exception (see #7659).
 
 ### Fixed
