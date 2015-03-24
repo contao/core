@@ -340,7 +340,7 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
-		/** @var \RecursiveDirectoryIterator[] $it */
+		/** @var \SplFileInfo[] $it */
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
 				TL_ROOT . '/' . $this->strFolder,

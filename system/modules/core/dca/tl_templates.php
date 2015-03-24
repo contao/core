@@ -286,7 +286,7 @@ class tl_templates extends Backend
 				continue;
 			}
 
-			// Find all templates
+			/** @var \SplFileInfo[] $objFiles */
 			$objFiles = new SortedIterator(
 				new RecursiveIteratorIterator(
 					new RecursiveDirectoryIterator(

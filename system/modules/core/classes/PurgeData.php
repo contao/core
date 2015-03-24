@@ -123,7 +123,7 @@ class PurgeData extends \Backend implements \executable
 				// Only check existing folders
 				if (is_dir(TL_ROOT . '/' . $folder))
 				{
-					// Recursively scan all subfolders
+					/** @var \SplFileInfo[] $objFiles */
 					$objFiles = new \RecursiveIteratorIterator(
 						new \RecursiveDirectoryIterator(
 							TL_ROOT . '/' . $folder,

@@ -119,7 +119,7 @@ class ModuleAutoload extends \BackendModule
 
 			$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
 
-			// Recursively scan all subfolders
+			/** @var \SplFileInfo[] $objFiles */
 			$objFiles = new \RecursiveIteratorIterator(
 				new \RecursiveDirectoryIterator(
 					TL_ROOT . '/system/modules/' . $strModule,
@@ -230,6 +230,7 @@ class ModuleAutoload extends \BackendModule
 			// Scan for templates
 			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
+				/** @var \SplFileInfo[] $objFiles */
 				$objFiles = new \RecursiveIteratorIterator(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/system/modules/' . $strModule . '/templates',

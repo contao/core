@@ -105,7 +105,7 @@ class Dbafs
 		// If the resource is a folder, also add its contents
 		if (is_dir(TL_ROOT . '/' . $strResource))
 		{
-			// Get a filtered list of all files
+			/** @var \SplFileInfo[] $objFiles */
 			$objFiles = new \RecursiveIteratorIterator(
 				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
@@ -472,7 +472,7 @@ class Dbafs
 		// Reset the "found" flag
 		$objDatabase->query("UPDATE tl_files SET found=''");
 
-		// Get a filtered list of all files
+		/** @var \SplFileInfo[] $objFiles */
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(

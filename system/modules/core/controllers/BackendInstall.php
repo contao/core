@@ -632,7 +632,7 @@ class BackendInstall extends \Backend
 	 */
 	protected function importExampleWebsite()
 	{
-		// Recursively scan for .sql files
+		/** @var \SplFileInfo[] $objFiles */
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Filter\SqlFiles(
 				new \RecursiveDirectoryIterator(
