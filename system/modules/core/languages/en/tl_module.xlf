@@ -515,21 +515,6 @@ Please click ##link## to complete your registration and to activate your account
 Please click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.
 </source>
       </trans-unit>
-      <trans-unit id="tl_module.header">
-        <source>Header</source>
-      </trans-unit>
-      <trans-unit id="tl_module.left">
-        <source>Left column</source>
-      </trans-unit>
-      <trans-unit id="tl_module.main">
-        <source>Main column</source>
-      </trans-unit>
-      <trans-unit id="tl_module.right">
-        <source>Right column</source>
-      </trans-unit>
-      <trans-unit id="tl_module.footer">
-        <source>Footer</source>
-      </trans-unit>
       <trans-unit id="tl_module.internal">
         <source>Internal file</source>
       </trans-unit>

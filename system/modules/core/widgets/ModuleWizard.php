@@ -191,7 +191,7 @@ class ModuleWizard extends \Widget
 			// Add columns
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['COLS'][$v]) && !is_array($GLOBALS['TL_LANG']['COLS'][$v])) ? $GLOBALS['TL_LANG']['COLS'][$v] : $v) .'</option>';
 			}
 
 			$return .= '

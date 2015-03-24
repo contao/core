@@ -430,7 +430,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getLayoutSections'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+			'reference'               => &$GLOBALS['TL_LANG']['COLS'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
