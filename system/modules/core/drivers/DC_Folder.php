@@ -2267,7 +2267,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach (scan($path) as $v)
 			{
-				if ($v == '.svn' || $v == '.DS_Store')
+				if (strncmp($v, '.', 1) === 0)
 				{
 					continue;
 				}
@@ -2307,24 +2307,15 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$countFiles = count($content);
 
 			// Subtract files that will not be shown
-			if (!empty($this->arrValidFileTypes))
+			foreach ($content as $file)
 			{
-				foreach ($content as $file)
+				if (strncmp($file, '.', 1) === 0)
 				{
-					// Folders
-					if (is_dir($folders[$f] .'/'. $file))
-					{
-						if ($file == '.svn')
-						{
-							--$countFiles;
-						}
-					}
-
-					// Files
-					elseif (!in_array(strtolower(substr($file, (strrpos($file, '.') + 1))), $this->arrValidFileTypes))
-					{
-						--$countFiles;
-					}
+					--$countFiles;
+				}
+				elseif (!empty($this->arrValidFileTypes) && is_file($folders[$f] . '/' . $file) && !in_array(strtolower(substr($file, (strrpos($file, '.') + 1))), $this->arrValidFileTypes))
+				{
+					--$countFiles;
 				}
 			}
 
@@ -2357,7 +2348,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Do not display buttons for mounted folders
 				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
 				{
-					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>123, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>640, 'popupHeight'=>132, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
 				}
 
 				// Upload button

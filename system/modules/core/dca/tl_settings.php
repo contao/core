@@ -520,7 +520,7 @@ class tl_settings extends Backend
 		// Store all extensions with their status (based on the .skip file)
 		foreach ($arrFolders as $strFolder)
 		{
-			if (substr($strFolder, 0, 1) == '.')
+			if (strncmp($strFolder, '.', 1) === 0)
 			{
 				continue;
 			}

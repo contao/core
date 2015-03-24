@@ -253,7 +253,7 @@ abstract class Backend extends \Controller
 		// Always scan all folders and not just the active modules (see #4200)
 		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
 		{
-			if (substr($strModule, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
+			if (strncmp($strModule, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/modules/' . $strModule))
 			{
 				continue;
 			}
@@ -1167,7 +1167,7 @@ abstract class Backend extends \Controller
 		// Recursively list all files and folders
 		foreach ($arrPages as $strFile)
 		{
-			if (substr($strFile, 0, 1) == '.')
+			if (strncmp($strFile, '.', 1) === 0)
 			{
 				continue;
 			}

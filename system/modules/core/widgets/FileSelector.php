@@ -237,15 +237,18 @@ class FileSelector extends \Widget
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
+				if (strncmp($v, '.', 1) === 0)
 				{
-					$files[] = $path.'/'.$v;
 					continue;
 				}
 
-				if (substr($v, 0, 1) != '.')
+				if (is_dir($path . '/' . $v))
 				{
-					$folders[] = $path.'/'.$v;
+					$folders[] = $path . '/' . $v;
+				}
+				else
+				{
+					$files[] = $path . '/' . $v;
 				}
 			}
 		}

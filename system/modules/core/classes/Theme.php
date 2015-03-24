@@ -1033,7 +1033,7 @@ class Theme extends \Backend
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
 		{
 			// Skip hidden resources
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if (strncmp($strFile, '.', 1) === 0)
 			{
 				continue;
 			}

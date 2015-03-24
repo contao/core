@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Fixed
+Consistently ignore hidden system files (see #7536).
+
 ### New
 Make the calendar model available in the templates (see #7388).
 

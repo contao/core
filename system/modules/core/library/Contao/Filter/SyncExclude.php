@@ -14,8 +14,8 @@ namespace Contao\Filter;
 /**
  * Filters a directory listing
  *
- * The class filters .svn folders, .DS_Store files and folders which are
- * excluded from being synchronized from a directory listing.
+ * The class filters dot files and folders, which are excluded from
+ * being synchronized, from a directory listing.
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -27,12 +27,6 @@ class SyncExclude extends \RecursiveFilterIterator
 	 * @var array
 	 */
 	protected $arrExempt = array();
-
-	/**
-	 * Ignored files
-	 * @var array
-	 */
-	protected $arrIgnore = array('.DS_Store', '.svn');
 
 
 	/**
@@ -61,7 +55,7 @@ class SyncExclude extends \RecursiveFilterIterator
 	public function accept()
 	{
 		// The resource is to be ignored
-		if (in_array($this->current()->getFilename(), $this->arrIgnore))
+		if (strncmp($this->current()->getFilename(), '.', 1) === 0)
 		{
 			return false;
 		}

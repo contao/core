@@ -350,7 +350,7 @@ class Folder extends \System
 
 		foreach ($it as $i)
 		{
-			if ($i->getFilename() != '.DS_Store')
+			if (strncmp($i->getFilename(), '.', 1) !== 0)
 			{
 				$arrFiles[] = str_replace(TL_ROOT . '/' . $this->strFolder . '/', '', $i->getPathname());
 			}
@@ -371,7 +371,7 @@ class Folder extends \System
 
 		foreach (scan(TL_ROOT . '/' . $this->strFolder, true) as $strFile)
 		{
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if (strncmp($strFile, '.', 1) === 0)
 			{
 				continue;
 			}
