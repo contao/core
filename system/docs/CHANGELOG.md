@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Fixed
+Add a unique index for member usernames, too (see #7701).
+
 ### New
 Add a diff view for custom templates (see #7599).
 
