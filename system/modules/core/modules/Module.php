@@ -311,7 +311,7 @@ abstract class Module extends \Frontend
 				}
 
 				$row = $objSubpages->row();
-				$trail = in_array($objSubpages->id, $objPage->trail);
+				$trail = in_array((($objSubpages->type == 'forward') ? $objSubpages->jumpTo : $objSubpages->id), $objPage->trail);
 
 				// Active page
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && $href == \Environment::get('request'))
