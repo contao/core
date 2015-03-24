@@ -250,6 +250,7 @@ abstract class Events extends \Module
 		$arrEvent['day'] = $strDay;
 		$arrEvent['month'] = $strMonth;
 		$arrEvent['parent'] = $intCalendar;
+		$arrEvent['calendar'] = $objEvents->getRelated('pid');
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['target'] = '';
 		$arrEvent['title'] = specialchars($objEvents->title, true);

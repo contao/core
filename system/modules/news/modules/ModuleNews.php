@@ -90,7 +90,6 @@ abstract class ModuleNews extends \Module
 		$objTemplate = new \FrontendTemplate($this->news_template);
 
 		$objTemplate->setData($objArticle->row());
-
 		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
 		$objTemplate->newsHeadline = $objArticle->headline;
 		$objTemplate->subHeadline = $objArticle->subheadline;

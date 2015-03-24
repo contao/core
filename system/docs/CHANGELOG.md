@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### New
+Make the calendar model available in the templates (see #7388).
+
 ### Changed
 Render the 404 page if the request contains an invalid date format (see #7545).
 
