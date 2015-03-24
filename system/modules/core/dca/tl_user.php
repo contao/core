@@ -604,6 +604,8 @@ class tl_user extends Backend
 	 * @param string $icon
 	 *
 	 * @return string
+     *
+     * @throws Exception
 	 */
 	public function switchUser($row, $href, $label, $title, $icon)
 	{
@@ -614,8 +616,18 @@ class tl_user extends Backend
 
 		if (Input::get('key') == 'su' && Input::get('id'))
 		{
+			$objUser = $this->Database->prepare("SELECT id, username FROM tl_user WHERE id=?")
+									  ->execute(Input::get('id'));
+
+			if (!$objUser->numRows)
+			{
+				throw new Exception('Invalid user ID ' . Input::get('id'));
+			}
+
 			$this->Database->prepare("UPDATE tl_session SET pid=?, su=1 WHERE pid=?")
-						   ->execute(Input::get('id'), $this->User->id);
+						   ->execute($objUser->id, $this->User->id);
+
+			$this->log('User "' . $this->User->username . '" has switched to user "' . $objUser->username . '"', __METHOD__, TL_ACCESS);
 
 			$this->redirect('contao/main.php');
 		}
