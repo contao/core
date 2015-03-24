@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Improved
+Simplify the `moo_mediabox` templates (see #7521).
+
 ### Changed
 Always return the model in the `File` and `Folder` classes (see #7567).
 

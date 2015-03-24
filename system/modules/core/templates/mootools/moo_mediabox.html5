@@ -9,10 +9,7 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/mediabox/'. $GLOBALS['TL_ASSETS']['MEDIA
 <script>
   (function($) {
     window.addEvent('domready', function() {
-      var links = $$('a').filter(function(el) {
-        return el.getAttribute('data-lightbox') != null;
-      });
-      $$(links).mediabox({
+      $$('a[data-lightbox]').mediabox({
         // Put custom options here
       }, function(el) {
         return [el.href, el.title, el.getAttribute('data-lightbox')];
