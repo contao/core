@@ -114,7 +114,7 @@ class CommentsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		$arrOptions['limit']  = $intLimit;
@@ -144,7 +144,7 @@ class CommentsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		return static::countBy($arrColumns, array($strSource, $intParent));

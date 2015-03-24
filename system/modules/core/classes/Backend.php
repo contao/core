@@ -657,7 +657,7 @@ abstract class Backend extends \Controller
 		$objDatabase = \Database::getInstance();
 
 		// Get published pages
-		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
+		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1' ORDER BY sorting")
 								->execute($pid);
 
 		if ($objPages->numRows < 1)
@@ -703,7 +703,7 @@ abstract class Backend extends \Controller
 						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
 
 						// Get articles with teaser
-						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
+						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1' AND showTeaser='1' ORDER BY sorting")
 												  ->execute($objPages->id);
 
 						while ($objArticle->next())

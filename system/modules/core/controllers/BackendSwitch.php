@@ -162,7 +162,7 @@ class BackendSwitch extends \Backend
 		$time = time() - (time() % 60);
 
 		// Get the active front end users
-		$objUsers = $this->Database->prepare("SELECT username FROM tl_member WHERE username LIKE ? AND login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username")
+		$objUsers = $this->Database->prepare("SELECT username FROM tl_member WHERE username LIKE ? AND login='1' AND disable!='1' AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username")
 								   ->limit(10)
 								   ->execute(str_replace('%', '', \Input::post('value')) . '%');
 

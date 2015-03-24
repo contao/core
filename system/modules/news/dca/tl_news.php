@@ -986,7 +986,7 @@ class tl_news extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();
