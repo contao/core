@@ -98,17 +98,11 @@ class ModuleNewsReader extends \ModuleNews
 		// Get the news item
 		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias(\Input::get('items'), $this->news_archives);
 
-		if ($objArticle === null)
+		if (null === $objArticle)
 		{
-			// Do not index or cache the page
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			// Send a 404 header
-			header('HTTP/1.1 404 Not Found');
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], \Input::get('items')) . '</p>';
-
-			return;
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
 		}
 
 		$arrArticle = $this->parseArticle($objArticle);

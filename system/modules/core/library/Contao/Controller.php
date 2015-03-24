@@ -210,15 +210,11 @@ abstract class Controller extends \System
 					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
 
 					// Send a 404 header if the article does not exist
-					if ($objArticle === null)
+					if (null === $objArticle)
 					{
-						// Do not index the page
-						$objPage->noSearch = 1;
-						$objPage->cache = 0;
-
-						header('HTTP/1.1 404 Not Found');
-
-						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
+						/** @var \PageError404 $objHandler */
+						$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+						$objHandler->generate($objPage->id);
 					}
 
 					// Add the "first" and "last" classes (see #2583)

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Changed
+Always render the 404 page if a news/event/FAQ alias is invalid (see #7238).
+
 ### New
 Prevent calling a page via ID if there is a page alias (see #7661).
 

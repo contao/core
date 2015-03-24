@@ -56,6 +56,9 @@ class ModuleSearch extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
+		global $objPage;
+
 		// Mark the x and y parameter as used (see #4277)
 		if (isset($_GET['x']))
 		{
@@ -113,9 +116,6 @@ class ModuleSearch extends \Module
 			// Website root
 			else
 			{
-				/** @var \PageModel $objPage */
-				global $objPage;
-
 				$intRootId = $objPage->rootId;
 				$arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			}
@@ -227,22 +227,15 @@ class ModuleSearch extends \Module
 			if ($this->perPage > 0)
 			{
 				$id = 'page_s' . $this->id;
-				$page = \Input::get($id) ?: 1;
+				$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 				$per_page = \Input::get('per_page') ?: $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > max(ceil($count/$per_page), 1))
 				{
-					/** @var \PageModel $objPage */
-					global $objPage;
-
-					$objPage->noSearch = 1;
-					$objPage->cache = 0;
-
-					// Send a 404 header
-					header('HTTP/1.1 404 Not Found');
-
-					return;
+					/** @var \PageError404 $objHandler */
+					$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+					$objHandler->generate($objPage->id);
 				}
 
 				$from = (($page - 1) * $per_page) + 1;
