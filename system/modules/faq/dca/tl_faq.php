@@ -461,7 +461,7 @@ class tl_faq extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * 
+	 *
 	 * @param integer       $intId
 	 * @param boolean       $blnVisible
 	 * @param DataContainer $dc
