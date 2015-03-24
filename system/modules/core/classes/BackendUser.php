@@ -433,7 +433,7 @@ class BackendUser extends \User
 
 		// Merge permissions
 		$inherit = in_array($this->inherit, array('group', 'extend')) ? array_merge($always, $depends) : $always;
-		$time = time();
+		$time = time() - (time() % 60);
 
 		foreach ((array) $this->groups as $id)
 		{

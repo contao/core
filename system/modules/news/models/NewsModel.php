@@ -185,7 +185,7 @@ class NewsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
@@ -226,7 +226,7 @@ class NewsModel extends \Model
 		// Never return unpublished elements in the back end, so they don't end up in the RSS feed
 		if (!BE_USER_LOGGED_IN || TL_MODE == 'BE')
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
@@ -272,7 +272,7 @@ class NewsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
@@ -295,7 +295,7 @@ class NewsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
@@ -319,8 +319,8 @@ class NewsModel extends \Model
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0, array $arrOptions=array())
 	{
-		$time = time();
 		$t = static::$strTable;
+		$time = time() - (time() % 60);
 
 		$arrColumns = array("$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
 
@@ -362,7 +362,7 @@ class NewsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
@@ -400,7 +400,7 @@ class NewsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 

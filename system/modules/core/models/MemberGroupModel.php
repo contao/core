@@ -82,7 +82,7 @@ class MemberGroupModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''";
 		}
 
@@ -104,7 +104,7 @@ class MemberGroupModel extends \Model
 			return null;
 		}
 
-		$time = time();
+		$time = time() - (time() % 60);
 		$objDatabase = \Database::getInstance();
 		$arrIds = array_map('intval', $arrIds);
 
@@ -130,8 +130,8 @@ class MemberGroupModel extends \Model
 	 */
 	public static function findAllActive(array $arrOptions=array())
 	{
-		$time = time();
 		$t = static::$strTable;
+		$time = time() - (time() % 60);
 
 		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null, $arrOptions);
 	}

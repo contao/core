@@ -333,7 +333,7 @@ class Automator extends \System
 	 */
 	public function generateSitemap($intId=0)
 	{
-		$time = time();
+		$time = time() - (time() % 60);
 		$objDatabase = \Database::getInstance();
 
 		$this->purgeXmlFiles();

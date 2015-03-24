@@ -61,7 +61,7 @@ class Messages extends \Backend
 	public function languageFallback()
 	{
 		$arrRoots = array();
-		$time = time();
+		$time = time() - (time() % 60);
 		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
 
 		while ($objRoots->next())

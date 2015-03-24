@@ -37,8 +37,8 @@ class ModuleFaq extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = time() - (time() % 60);
 
 		// Get all categories
 		$objFaq = \FaqCategoryModel::findAll();
