@@ -97,7 +97,13 @@ class LiveUpdate extends \Backend implements \executable
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
-			$objRequest = new \Request();
+			// HOOK: proxy module
+			if (Config::get('useProxy')) {
+				$objRequest = new \ProxyRequest();
+			} else {
+				$objRequest = new \Request();
+			}
+
 			$objRequest->send(\Config::get('liveUpdateBase') . 'request.php?token=' . \Input::get('token'));
 
 			if ($objRequest->hasError())

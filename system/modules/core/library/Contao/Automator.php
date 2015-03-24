@@ -38,7 +38,13 @@ class Automator extends \System
 			return;
 		}
 
-		$objRequest = new \Request();
+		// HOOK: proxy module
+		if (Config::get('useProxy')) {
+			$objRequest = new \ProxyRequest();
+		} else {
+			$objRequest = new \Request();
+		}
+
 		$objRequest->send(\Config::get('liveUpdateBase') . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())

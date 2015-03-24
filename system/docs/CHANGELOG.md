@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Improved
+Optionally use the `ProxyRequest` class in the automator (see #7681).
+
 ### Fixed
 Add a unique index for member usernames, too (see #7701).
 
