@@ -160,6 +160,14 @@ class FrontendIndex extends \Frontend
 			$objPage = $objPage->current();
 		}
 
+		// If the page has an alias, it can no longer be called via ID (see #7661)
+		if ($objPage->alias != '' && $pageId == $objPage->id)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
+
 		// Load a website root page object (will redirect to the first active regular page)
 		if ($objPage->type == 'root')
 		{

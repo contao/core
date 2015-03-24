@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### New
+Prevent calling a page via ID if there is a page alias (see #7661).
+
 ### Improved
 Use closures to lazy-load content elements in the news/event list (see #7614).
 
