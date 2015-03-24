@@ -287,10 +287,12 @@ abstract class Events extends \Module
 		// Compile the event text
 		else
 		{
-			$arrEvent['details'] = function () use ($objEvents)
+			$id = $objEvents->id;
+
+			$arrEvent['details'] = function () use ($id)
 			{
 				$strDetails = '';
-				$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
+				$objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_calendar_events');
 
 				if ($objElement !== null)
 				{

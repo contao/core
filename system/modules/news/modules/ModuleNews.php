@@ -126,10 +126,12 @@ abstract class ModuleNews extends \Module
 		// Compile the news text
 		else
 		{
-			$objTemplate->text = function () use ($objArticle)
+			$id = $objArticle->id;
+
+			$objTemplate->text = function () use ($id)
 			{
 				$strText = '';
-				$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
+				$objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_news');
 
 				if ($objElement !== null)
 				{
