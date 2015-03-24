@@ -32,6 +32,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 				'id' => 'primary',
 				'source' => 'index',
 				'parent' => 'index'
+				// FIXME: combined index?
 			)
 		)
 	),

@@ -35,6 +35,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'pid' => 'index',
 				'uuid' => 'unique',
 				'extension' => 'index'
+				// FIXME: add an index for "path", either fulltext or btree w/length 255 (see #6462)
 			)
 		)
 	),

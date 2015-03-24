@@ -41,6 +41,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'id' => 'primary',
 				'pid' => 'index',
 				'alias' => 'index'
+				// FIXME: combined index?
 			)
 		)
 	),
