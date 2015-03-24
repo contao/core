@@ -126,15 +126,21 @@ abstract class ModuleNews extends \Module
 		// Compile the news text
 		else
 		{
-			$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
-
-			if ($objElement !== null)
+			$objTemplate->text = function () use ($objArticle)
 			{
-				while ($objElement->next())
+				$strText = '';
+				$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
+
+				if ($objElement !== null)
 				{
-					$objTemplate->text .= $this->getContentElement($objElement->current());
+					while ($objElement->next())
+					{
+						$strText .= $this->getContentElement($objElement->current());
+					}
 				}
-			}
+
+				return $strText;
+			};
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);

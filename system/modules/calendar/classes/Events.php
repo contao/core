@@ -287,15 +287,21 @@ abstract class Events extends \Module
 		// Compile the event text
 		else
 		{
-			$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
-
-			if ($objElement !== null)
+			$arrEvent['details'] = function () use ($objEvents)
 			{
-				while ($objElement->next())
+				$strDetails = '';
+				$objElement = \ContentModel::findPublishedByPidAndTable($objEvents->id, 'tl_calendar_events');
+
+				if ($objElement !== null)
 				{
-					$arrEvent['details'] .= $this->getContentElement($objElement->current());
+					while ($objElement->next())
+					{
+						$strDetails .= $this->getContentElement($objElement->current());
+					}
 				}
-			}
+
+				return $strDetails;
+			};
 		}
 
 		// Get todays start and end timestamp

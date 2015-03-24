@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### Improved
+Use closures to lazy-load content elements in the news/event list (see #7614).
+
+### Improved
 Add a log entry if a back end user switches to another account (see #7441).
 
 ### Improved

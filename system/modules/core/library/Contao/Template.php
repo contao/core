@@ -93,6 +93,11 @@ abstract class Template extends \BaseTemplate
 	{
 		if (isset($this->arrData[$strKey]))
 		{
+			if (is_callable($this->arrData[$strKey]))
+			{
+				return $this->arrData[$strKey]();
+			}
+
 			return $this->arrData[$strKey];
 		}
 
