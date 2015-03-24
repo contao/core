@@ -578,6 +578,17 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.5.0 update
+	 */
+	public function run35Update()
+	{
+		$this->Database->query("ALTER TABLE `tl_member` CHANGE `username` `username` varchar(64) COLLATE utf8_bin NULL");
+		$this->Database->query("UPDATE `tl_member` SET username=NULL WHERE username=''");
+		$this->Database->query("ALTER TABLE `tl_member` DROP INDEX `username`, ADD UNIQUE KEY `username` (`username`)");
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
 	 *
 	 * @param string  $strPath The target folder
