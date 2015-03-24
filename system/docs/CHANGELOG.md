@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Changed
+Always return the model in the `File` and `Folder` classes (see #7567).
+
 ### Fixed
 Consistently ignore hidden system files (see #7536).
 

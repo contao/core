@@ -327,7 +327,8 @@ class Folder extends \System
 	 */
 	public function getModel()
 	{
-		if ($this->blnSyncDb && $this->objModel === null) {
+		if ($this->blnSyncDb && $this->objModel === null)
+		{
 			$this->objModel = \FilesModel::findByPath($this->strFolder);
 		}
 
