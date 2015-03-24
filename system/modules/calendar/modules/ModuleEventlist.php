@@ -108,34 +108,37 @@ class ModuleEventlist extends \Events
 
 		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
-		// Display year
-		if ($blnDynamicFormat && $intYear)
+		// Create the date object
+		try
 		{
-			$this->Date = new \Date($intYear, 'Y');
-			$this->cal_format = 'cal_year';
-			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
+			if ($blnDynamicFormat && $intYear)
+			{
+				$this->Date = new \Date($intYear, 'Y');
+				$this->cal_format = 'cal_year';
+				$this->headline .= ' ' . date('Y', $this->Date->tstamp);
+			}
+			elseif ($blnDynamicFormat && $intMonth)
+			{
+				$this->Date = new \Date($intMonth, 'Ym');
+				$this->cal_format = 'cal_month';
+				$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
+			}
+			elseif ($blnDynamicFormat && $intDay)
+			{
+				$this->Date = new \Date($intDay, 'Ymd');
+				$this->cal_format = 'cal_day';
+				$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
+			}
+			else
+			{
+				$this->Date = new \Date();
+			}
 		}
-
-		// Display month
-		elseif ($blnDynamicFormat && $intMonth)
+		catch (\OutOfBoundsException $e)
 		{
-			$this->Date = new \Date($intMonth, 'Ym');
-			$this->cal_format = 'cal_month';
-			$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
-		}
-
-		// Display day
-		elseif ($blnDynamicFormat && $intDay)
-		{
-			$this->Date = new \Date($intDay, 'Ymd');
-			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
-		}
-
-		// Display all events or upcoming/past events
-		else
-		{
-			$this->Date = new \Date();
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
 		}
 
 		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);

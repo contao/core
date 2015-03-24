@@ -238,7 +238,20 @@ class ModuleNewsMenu extends \ModuleNews
 			$strUrl = $this->generateFrontendUrl($objTarget->row());
 		}
 
-		$this->Date = \Input::get('day') ? new \Date(\Input::get('day'), 'Ymd') : new \Date();
+		// Create the date object
+		try
+		{
+			$this->Date = \Input::get('day') ? new \Date(\Input::get('day'), 'Ymd') : new \Date();
+		}
+		catch (\OutOfBoundsException $e)
+		{
+			/** @var \PageModel $objPage */
+			global $objPage;
+
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
+		}
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);

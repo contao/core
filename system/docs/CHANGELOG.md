@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### Changed
+Render the 404 page if the request contains an invalid date format (see #7545).
+
+### Changed
 Always render the 404 page if a news/event/FAQ alias is invalid (see #7238).
 
 ### New

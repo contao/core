@@ -84,20 +84,30 @@ class ModuleCalendar extends \Events
 	 */
 	protected function compile()
 	{
-		// Respond to month
-		if (\Input::get('month'))
+		// Create the date object
+		try
 		{
-			$this->Date = new \Date(\Input::get('month'), 'Ym');
+			if (\Input::get('month'))
+			{
+				$this->Date = new \Date(\Input::get('month'), 'Ym');
+			}
+			elseif (\Input::get('day'))
+			{
+				$this->Date = new \Date(\Input::get('day'), 'Ymd');
+			}
+			else
+			{
+				$this->Date = new \Date();
+			}
 		}
-		// Respond to day
-		elseif (\Input::get('day'))
+		catch (\OutOfBoundsException $e)
 		{
-			$this->Date = new \Date(\Input::get('day'), 'Ymd');
-		}
-		// Fallback to today
-		else
-		{
-			$this->Date = new \Date();
+			/** @var \PageModel $objPage */
+			global $objPage;
+
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
 		}
 
 		$time = time();
