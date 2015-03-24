@@ -34,11 +34,13 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		$this->objDc = func_get_arg(0);
+
 		return parent::generate();
 	}
 
@@ -105,6 +107,8 @@ class ModuleExtension extends \BackendModule
 					\File::putContent('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', $tplTemplate->parse());
 				}
 			}
+
+			$arrTables = array();
 
 			// Front end
 			if ($objModule->addFeMod)
@@ -213,12 +217,14 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Return a new template object
-	 * @param string
-	 * @param \Database\Result
-	 * @return \BackendTemplate
+	 * @param string $strTemplate
+	 * @param \Database\Result|object $objModule
+	 *
+	 * @return \BackendTemplate|object
 	 */
 	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate($strTemplate);
 
 		$objTemplate->folder = $objModule->folder;
@@ -233,7 +239,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the subfolder of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessSubfolder($strClassName)
@@ -267,7 +275,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the parent class of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessParentClass($strClassName)

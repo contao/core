@@ -166,6 +166,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Get all news archives and return them as array
+	 *
 	 * @return array
 	 */
 	public function getNewsArchives()
@@ -192,6 +193,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Get all news reader modules and return them as array
+	 *
 	 * @return array
 	 */
 	public function getReaderModules()
@@ -210,6 +212,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Hide the start day drop-down if not applicable
+	 *
 	 * @return string
 	 */
 	public function hideStartDay()
@@ -239,6 +242,7 @@ class tl_module_news extends Backend
 
 	/**
 	 * Return all news templates as array
+	 *
 	 * @return array
 	 */
 	public function getNewsTemplates()

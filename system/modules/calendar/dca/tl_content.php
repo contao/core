@@ -16,6 +16,7 @@ if (Input::get('do') == 'calendar')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_calendar_events';
 	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_calendar', 'checkPermission');
+	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_calendar', 'generateFeed');
 }
 
 
@@ -115,9 +116,11 @@ class tl_content_calendar extends Backend
 
 	/**
 	 * Check access to a particular content element
-	 * @param integer
-	 * @param array
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param array   $root
+	 * @param boolean $blnIsPid
+	 *
 	 * @return boolean
 	 */
 	protected function checkAccessToElement($id, $root, $blnIsPid=false)
@@ -139,6 +142,7 @@ class tl_content_calendar extends Backend
 		if ($objCalendar->numRows < 1)
 		{
 			$this->log('Invalid event content element ID ' . $id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
@@ -146,9 +150,36 @@ class tl_content_calendar extends Backend
 		if (!in_array($objCalendar->id, $root))
 		{
 			$this->log('Not enough permissions to modify article ID ' . $objCalendar->nid . ' in calendar ID ' . $objCalendar->id, __METHOD__, TL_ERROR);
+
 			return false;
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Check for modified calendar feeds and update the XML files if necessary
+	 */
+	public function generateFeed()
+	{
+		$session = $this->Session->get('calendar_feed_updater');
+
+		if (!is_array($session) || empty($session))
+		{
+			return;
+		}
+
+		$this->import('Calendar');
+
+		foreach ($session as $id)
+		{
+			$this->Calendar->generateFeedsByCalendar($id);
+		}
+
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
+		$this->Session->set('calendar_feed_updater', null);
 	}
 }

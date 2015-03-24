@@ -291,6 +291,8 @@ class Dbafs
 		}
 
 		$strFolder = dirname($strDestination);
+
+		/** @var \FilesModel $objNewFile */
 		$objNewFile = clone $objFile->current();
 
 		// Set the new parent ID
@@ -326,6 +328,7 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
+					/**@var \FilesModel $objNew */
 					$objNew = clone $objFiles->current();
 
 					$objNew->pid    = $objNewFile->uuid;

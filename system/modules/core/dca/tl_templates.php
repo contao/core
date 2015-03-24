@@ -103,6 +103,13 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 				'href'                => 'act=source',
 				'icon'                => 'editor.gif',
 				'button_callback'     => array('tl_templates', 'editSource')
+			),
+			'compare' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['compare'],
+				'href'                => 'key=compare',
+				'icon'                => 'diffTemplate.gif',
+				'button_callback'     => array('tl_templates', 'compareButton')
 			)
 		)
 	),
@@ -171,6 +178,7 @@ class tl_templates extends Backend
 		if (!is_dir(TL_ROOT . '/' . $strNode))
 		{
 			$this->Session->set('tl_templates_node', '');
+
 			return;
 		}
 
@@ -211,6 +219,7 @@ class tl_templates extends Backend
 
 	/**
 	 * Create a new template
+	 *
 	 * @return string
 	 */
 	public function addNewTemplate()
@@ -352,9 +361,142 @@ class tl_templates extends Backend
 
 
 	/**
+	 * Compares the current to the original template
+	 *
+	 * @param DataContainer $dc
+	 *
+	 * @return string
+	 */
+	public function compareTemplate(DataContainer $dc)
+	{
+		$strCurrentPath = $dc->id;
+		$strName = pathinfo($strCurrentPath, PATHINFO_FILENAME);
+		$strExtension = pathinfo($strCurrentPath, PATHINFO_EXTENSION);
+		$arrTemplates = TemplateLoader::getFiles();
+		$blnOverridesAnotherTpl = isset($arrTemplates[$strName]);
+
+		$strPrefix = '';
+
+		if (($pos = strpos($strName, '_')) !== false)
+		{
+			$strPrefix = substr($strName, 0, $pos + 1);
+		}
+
+		$strCompareName = null;
+		$strComparePath = null;
+
+		// By default it's the original template to compare against
+		if ($blnOverridesAnotherTpl)
+		{
+			$strCompareName = $strName;
+			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+		}
+
+		// User selected template to compare against
+		if (\Input::post('to') && isset($arrTemplates[\Input::post('to')]))
+		{
+			$strCompareName = \Input::post('to');
+			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+		}
+
+		$strBuffer = '';
+
+		if ($strComparePath !== null)
+		{
+			$objCurrentFile = new \File($strCurrentPath, true);
+			$objCompareFile = new \File($strComparePath, true);
+
+			// Abort if one file is missing
+			if (!$objCurrentFile->exists() || !$objCompareFile->exists())
+			{
+				$this->redirect('contao/main.php?act=error');
+			}
+
+			$objDiff = new Diff($objCompareFile->getContentAsArray(), $objCurrentFile->getContentAsArray());
+
+			if ($blnOverridesAnotherTpl)
+			{
+				$strBuffer .= '<p class="tl_info" style="margin-bottom:1em">' . sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'], $strComparePath) . '</p>';
+			}
+
+			$strDiff = $objDiff->Render(new DiffRenderer(array('field'=>$strCurrentPath)));
+
+			// Identical versions
+			if ($strDiff == '')
+			{
+				$strBuffer .= '<p>' . $GLOBALS['TL_LANG']['MSC']['identicalVersions'] . '</p>';
+			}
+			else
+			{
+				$strBuffer .= $strDiff;
+			}
+		}
+		else
+		{
+			$strBuffer .= '<p class="tl_info">' . $GLOBALS['TL_LANG']['tl_templates']['pleaseSelect'] . '</p>';
+		}
+
+		// Templates to compare against
+		$arrComparable = array();
+		$intPrefixLength = strlen($strPrefix);
+
+		foreach ($arrTemplates as $k => $v)
+		{
+			if (substr($k, 0, $intPrefixLength) === $strPrefix)
+			{
+				$arrComparable[$k] = array
+				(
+					'version' => $k,
+					'info'    => $k . '.' . $strExtension
+				);
+			}
+		}
+
+		$objTemplate = new \BackendTemplate('be_diff');
+
+		// Template variables
+		$objTemplate->staticFrom = $strCurrentPath;
+		$objTemplate->versions = $arrComparable;
+		$objTemplate->to = $strCompareName;
+		$objTemplate->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
+		$objTemplate->content = $strBuffer;
+		$objTemplate->theme = \Backend::getTheme();
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
+		$objTemplate->charset = \Config::get('characterSet');
+
+		\Config::set('debugMode', false);
+
+		$objTemplate->output();
+		exit;
+	}
+
+
+	/**
+	 * Return the "compare template" button
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
+	 * @return string
+	 */
+	public function compareButton($row, $href, $label, $title, $icon, $attributes)
+	{
+		return '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="' . specialchars($title) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $row['id'])) . '\',\'url\':this.href});return false"' . $attributes . '>' . Image::getHtml($icon, $label) . '</a> ';
+	}
+
+
+	/**
 	 * Recursively scan the templates directory and return all folders as array
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strFolder
+	 * @param integer $intLevel
+	 *
 	 * @return string
 	 */
 	protected function getTargetFolders($strFolder, $intLevel=1)
@@ -380,12 +522,14 @@ class tl_templates extends Backend
 
 	/**
 	 * Return the edit file source button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editSource($row, $href, $label, $title, $icon, $attributes)

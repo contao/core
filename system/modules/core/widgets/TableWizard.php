@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle table fields.
  *
+ * @property integer $rows
+ * @property integer $cols
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TableWizard extends \Widget
@@ -46,8 +49,9 @@ class TableWizard extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -70,6 +74,7 @@ class TableWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -228,7 +233,9 @@ class TableWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function importTable(\DataContainer $dc)
@@ -247,6 +254,7 @@ class TableWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS

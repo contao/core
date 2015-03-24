@@ -57,6 +57,7 @@ class FrontendIndex extends \Frontend
 	public function run()
 	{
 		global $objPage;
+
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
 
@@ -64,6 +65,8 @@ class FrontendIndex extends \Frontend
 		if ($pageId === null)
 		{
 			$objRootPage = $this->getRootPageFromUrl();
+
+			/** @var \PageRoot $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$pageId = $objHandler->generate($objRootPage->id, true);
 		}
@@ -71,6 +74,8 @@ class FrontendIndex extends \Frontend
 		elseif ($pageId === false)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError404 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -78,6 +83,8 @@ class FrontendIndex extends \Frontend
 		elseif (\Config::get('rewriteURL') && strncmp(\Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError403 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -94,7 +101,9 @@ class FrontendIndex extends \Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $objPage->current()->loadDetails();
+				/** @var \PageModel $objModel */
+				$objModel = $objPage->current();
+				$objCurrentPage = $objModel->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
@@ -226,6 +235,12 @@ class FrontendIndex extends \Frontend
 		// Load the page object depending on its type
 		$objHandler = new $GLOBALS['TL_PTY'][$objPage->type]();
 
+		// Backup some globals (see #7659)
+		$arrHead = $GLOBALS['TL_HEAD'];
+		$arrBody = $GLOBALS['TL_BODY'];
+		$arrMootools = $GLOBALS['TL_MOOTOOLS'];
+		$arrJquery = $GLOBALS['TL_JQUERY'];
+
 		try
 		{
 			// Generate the page
@@ -247,6 +262,12 @@ class FrontendIndex extends \Frontend
 		}
 		catch (\UnusedArgumentsException $e)
 		{
+			// Restore the globals (see #7659)
+			$GLOBALS['TL_HEAD'] = $arrHead;
+			$GLOBALS['TL_BODY'] = $arrBody;
+			$GLOBALS['TL_MOOTOOLS'] = $arrMootools;
+			$GLOBALS['TL_JQUERY'] = $arrJquery;
+
 			// Render the error page (see #5570)
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId, null, null, true);
@@ -268,12 +289,7 @@ class FrontendIndex extends \Frontend
 			return;
 		}
 
-		/**
-		 * If the request string is empty, look for a cached page matching the
-		 * primary browser language. This is a compromise between not caching
-		 * empty requests at all and considering all browser languages, which
-		 * is not possible for various reasons.
-		 */
+		// Try to map the empty request
 		if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
@@ -282,8 +298,43 @@ class FrontendIndex extends \Frontend
 				return;
 			}
 
+			$strCacheKey = null;
 			$arrLanguage = \Environment::get('httpAcceptLanguage');
-			$strCacheKey = \Environment::get('base') .'empty.'. $arrLanguage[0];
+
+			// Try to get the cache key from the mapper array
+			if (file_exists(TL_ROOT . '/system/cache/config/mapping.php'))
+			{
+				$arrMapper = include TL_ROOT . '/system/cache/config/mapping.php';
+
+				// Try the language specific keys
+				foreach ($arrLanguage as $strLanguage)
+				{
+					$strSpecificKey = \Environment::get('base') . 'empty.' . $strLanguage;
+
+					if (isset($arrMapper[$strSpecificKey]))
+					{
+						$strCacheKey = $arrMapper[$strSpecificKey];
+						break;
+					}
+				}
+
+				// Try the fallback key
+				if ($strCacheKey === null)
+				{
+					$strSpecificKey = \Environment::get('base') . 'empty.fallback';
+
+					if (isset($arrMapper[$strSpecificKey]))
+					{
+						$strCacheKey = $arrMapper[$strSpecificKey];
+					}
+				}
+			}
+
+			// Fall back to the first accepted language
+			if ($strCacheKey === null)
+			{
+				$strCacheKey = \Environment::get('base') . 'empty.' . $arrLanguage[0];
+			}
 		}
 		else
 		{
@@ -306,8 +357,8 @@ class FrontendIndex extends \Frontend
 		// Check for a mobile layout
 		if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 		{
-			$strCacheKey = md5($strCacheKey . '.mobile');
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+			$strMd5CacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{
@@ -318,8 +369,8 @@ class FrontendIndex extends \Frontend
 		// Check for a regular layout
 		if (!$blnFound)
 		{
-			$strCacheKey = md5($strCacheKey);
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+			$strMd5CacheKey = md5($strCacheKey);
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{
@@ -345,6 +396,7 @@ class FrontendIndex extends \Frontend
 		if ($expire < time())
 		{
 			ob_end_clean();
+
 			return;
 		}
 

@@ -154,8 +154,10 @@ class tl_log extends Backend
 
 	/**
 	 * Colorize the log entries depending on their category
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $label
+	 *
 	 * @return string
 	 */
 	public function colorize($row, $label)

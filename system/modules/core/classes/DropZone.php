@@ -21,12 +21,13 @@ class DropZone extends \FileUpload
 
 	/**
 	 * Generate the markup for the default uploader
+     *
 	 * @return string
 	 */
 	public function generateMarkup()
 	{
 		// Maximum file size in MB
-		$intMaxSize = ($this->getMaximumUploadSize() / 1024000);
+		$intMaxSize = ($this->getMaximumUploadSize() / 1024 / 1024);
 
 		// String of accepted file extensions
 		$strAccepted = implode(',', array_map(function($a) { return '.' . $a; }, trimsplit(',', strtolower(\Config::get('uploadTypes')))));

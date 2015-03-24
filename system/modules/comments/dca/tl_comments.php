@@ -32,6 +32,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 				'id' => 'primary',
 				'source' => 'index',
 				'parent' => 'index'
+				// FIXME: combined index?
 			)
 		)
 	),
@@ -321,8 +322,10 @@ class tl_comments extends Backend
 
 	/**
 	 * Check whether the user is allowed to edit a comment
-	 * @param integer
-	 * @param string
+	 *
+	 * @param integer $intParent
+	 * @param string  $strSource
+	 *
 	 * @return boolean
 	 */
 	protected function isAllowedToEditComment($intParent, $strSource)
@@ -422,7 +425,9 @@ class tl_comments extends Backend
 
 	/**
 	 * Send out the new comment notifications
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function sendNotifications($varValue)
@@ -438,7 +443,9 @@ class tl_comments extends Backend
 
 	/**
 	 * List a particular record
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listComments($arrRow)
@@ -529,12 +536,14 @@ class tl_comments extends Backend
 
 	/**
 	 * Return the edit comment button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editComment($row, $href, $label, $title, $icon, $attributes)
@@ -545,12 +554,14 @@ class tl_comments extends Backend
 
 	/**
 	 * Return the delete comment button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteComment($row, $href, $label, $title, $icon, $attributes)
@@ -561,12 +572,14 @@ class tl_comments extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -601,9 +614,10 @@ class tl_comments extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
@@ -640,7 +654,7 @@ class tl_comments extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

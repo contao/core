@@ -21,9 +21,11 @@ class ModuleFaq extends \Frontend
 
 	/**
 	 * Add FAQs to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -35,8 +37,8 @@ class ModuleFaq extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = time() - (time() % 60);
 
 		// Get all categories
 		$objFaq = \FaqCategoryModel::findAll();

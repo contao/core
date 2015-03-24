@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to handle list items.
  *
+ * @property integer $maxlength
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ListWizard extends \Widget
@@ -34,8 +36,9 @@ class ListWizard extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -57,6 +60,7 @@ class ListWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -143,7 +147,9 @@ class ListWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function importList(\DataContainer $dc)
@@ -162,6 +168,7 @@ class ListWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS

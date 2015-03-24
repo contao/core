@@ -43,25 +43,26 @@ class BackendPreview extends \Backend
 	 */
 	public function run()
 	{
-		$this->Template = new \BackendTemplate('be_preview');
+		/** @var \BackendTemplate|object $objTemplate */
+		$objTemplate = new \BackendTemplate('be_preview');
 
-		$this->Template->base = \Environment::get('base');
-		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['fePreview']);
-		$this->Template->charset = \Config::get('characterSet');
-		$this->Template->site = \Input::get('site', true);
+		$objTemplate->base = \Environment::get('base');
+		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
+		$objTemplate->title = specialchars($GLOBALS['TL_LANG']['MSC']['fePreview']);
+		$objTemplate->charset = \Config::get('characterSet');
+		$objTemplate->site = \Input::get('site', true);
 
 		if (\Input::get('url'))
 		{
-			$this->Template->url = \Environment::get('base') . \Input::get('url');
+			$objTemplate->url = \Environment::get('base') . \Input::get('url');
 		}
 		elseif (\Input::get('page'))
 		{
-			$this->Template->url = $this->redirectToFrontendPage(\Input::get('page'), \Input::get('article'), true);
+			$objTemplate->url = $this->redirectToFrontendPage(\Input::get('page'), \Input::get('article'), true);
 		}
 		else
 		{
-			$this->Template->url = \Environment::get('base');
+			$objTemplate->url = \Environment::get('base');
 		}
 
 		// Switch to a particular member (see #6546)
@@ -83,11 +84,11 @@ class BackendPreview extends \Backend
 
 				// Set the cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, (time() + \Config::get('sessionTimeout')), null, null, false, true);
-				$this->Template->user = \Input::post('user');
+				$objTemplate->user = \Input::post('user');
 			}
 		}
 
 		\Config::set('debugMode', false);
-		$this->Template->output();
+		$objTemplate->output();
 	}
 }

@@ -28,12 +28,14 @@ class ModuleNavigation extends \Module
 
 	/**
 	 * Do not display the module if there are no menu items
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['navigation'][0]) . ' ###';
@@ -46,6 +48,7 @@ class ModuleNavigation extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 
@@ -55,6 +58,7 @@ class ModuleNavigation extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Set the trail and level

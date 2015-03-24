@@ -14,6 +14,47 @@ namespace Contao;
 /**
  * Reads and writes member groups
  *
+ * @property integer $id
+ * @property integer $tstamp
+ * @property string  $name
+ * @property boolean $redirect
+ * @property integer $jumpTo
+ * @property boolean $disable
+ * @property string  $start
+ * @property string  $stop
+ *
+ * @method static $this findById()
+ * @method static $this findByPk()
+ * @method static $this findByIdOrAlias()
+ * @method static $this findOneBy()
+ * @method static $this findOneByTstamp()
+ * @method static $this findOneByName()
+ * @method static $this findOneByRedirect()
+ * @method static $this findOneByJumpTo()
+ * @method static $this findOneByDisable()
+ * @method static $this findOneByStart()
+ * @method static $this findOneByStop()
+ *
+ * @method static \Model\Collection|\MemberGroupModel findByTstamp()
+ * @method static \Model\Collection|\MemberGroupModel findByName()
+ * @method static \Model\Collection|\MemberGroupModel findByRedirect()
+ * @method static \Model\Collection|\MemberGroupModel findByJumpTo()
+ * @method static \Model\Collection|\MemberGroupModel findByDisable()
+ * @method static \Model\Collection|\MemberGroupModel findByStart()
+ * @method static \Model\Collection|\MemberGroupModel findByStop()
+ * @method static \Model\Collection|\MemberGroupModel findMultipleByIds()
+ * @method static \Model\Collection|\MemberGroupModel findBy()
+ * @method static \Model\Collection|\MemberGroupModel findAll()
+ *
+ * @method static integer countById()
+ * @method static integer countByTstamp()
+ * @method static integer countByName()
+ * @method static integer countByRedirect()
+ * @method static integer countByJumpTo()
+ * @method static integer countByDisable()
+ * @method static integer countByStart()
+ * @method static integer countByStop()
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class MemberGroupModel extends \Model
@@ -32,7 +73,7 @@ class MemberGroupModel extends \Model
 	 * @param integer $intId      The member group ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if there is no member group
+	 * @return static The model or null if there is no member group
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
 	{
@@ -41,7 +82,7 @@ class MemberGroupModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
+			$time = time() - (time() % 60);
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''";
 		}
 
@@ -54,7 +95,7 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param string $arrIds An array of member group IDs
 	 *
-	 * @return \Model|null The model or null if there is no matching member group
+	 * @return static The model or null if there is no matching member group
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{
@@ -63,11 +104,11 @@ class MemberGroupModel extends \Model
 			return null;
 		}
 
-		$time = time();
+		$time = time() - (time() % 60);
 		$objDatabase = \Database::getInstance();
 		$arrIds = array_map('intval', $arrIds);
 
-		$objResult = $objDatabase->prepare("SELECT p.* FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', $arrIds) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $objDatabase->findInSet('g.id', $arrIds))
+		$objResult = $objDatabase->prepare("SELECT p.* FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', $arrIds) . ") AND g.jumpTo>0 AND g.redirect='1' AND g.disable!='1' AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published='1' AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $objDatabase->findInSet('g.id', $arrIds))
 								 ->limit(1)
 								 ->execute();
 
@@ -85,12 +126,12 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no member groups
+	 * @return \Model\Collection|\MemberGroupModel|null A collection of models or null if there are no member groups
 	 */
 	public static function findAllActive(array $arrOptions=array())
 	{
-		$time = time();
 		$t = static::$strTable;
+		$time = time() - (time() % 60);
 
 		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null, $arrOptions);
 	}

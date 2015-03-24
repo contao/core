@@ -21,7 +21,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -34,6 +34,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Check the source folder
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -66,6 +67,7 @@ class ModuleRandomImage extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();

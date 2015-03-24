@@ -28,6 +28,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Change the palette of the current table and switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -55,6 +56,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string|void
 	 */
 	protected function compile()

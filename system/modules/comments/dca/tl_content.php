@@ -97,6 +97,7 @@ class tl_content_comments extends Backend
 
 	/**
 	 * Return all comments templates as array
+	 *
 	 * @return array
 	 */
 	public function getCommentsTemplates()

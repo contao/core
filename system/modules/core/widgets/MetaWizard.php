@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to handle file meta information.
  *
+ * @property array $metaFields
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class MetaWizard extends \Widget
@@ -34,7 +36,9 @@ class MetaWizard extends \Widget
 
 	/**
 	 * Trim the values and add new languages if necessary
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	public function validator($varInput)
@@ -62,6 +66,7 @@ class MetaWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -80,8 +85,8 @@ class MetaWizard extends \Widget
 
 		$this->import('Database');
 
-		// Only show the root page languages (see #7112)
-		$objRootLangs = $this->Database->query("SELECT language FROM tl_page WHERE type='root'");
+		// Only show the root page languages (see #7112, #7667)
+		$objRootLangs = $this->Database->query("SELECT REPLACE(language, '-', '_') AS language FROM tl_page WHERE type='root'");
 		$languages = array_intersect_key($languages, array_flip($objRootLangs->fetchEach('language')));
 
 		// Add the existing entries

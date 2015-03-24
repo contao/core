@@ -304,10 +304,13 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Check if recipients are unique per channel
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkUniqueRecipient($varValue, DataContainer $dc)
 	{
@@ -325,7 +328,9 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * List a recipient
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listRecipient($row)
@@ -347,12 +352,14 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -382,9 +389,10 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{

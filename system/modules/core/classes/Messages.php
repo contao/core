@@ -21,6 +21,7 @@ class Messages extends \Backend
 
 	/**
 	 * Check for the latest Contao version
+	 *
 	 * @return string
 	 */
 	public function versionCheck()
@@ -36,6 +37,7 @@ class Messages extends \Backend
 
 	/**
 	 * Return the date of the last login
+	 *
 	 * @return string
 	 */
 	public function lastLogin()
@@ -53,13 +55,14 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
+	 *
 	 * @return string
 	 */
 	public function languageFallback()
 	{
 		$arrRoots = array();
-		$time = time();
-		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
+		$time = time() - (time() % 60);
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1' ORDER BY dns");
 
 		while ($objRoots->next())
 		{
@@ -98,6 +101,7 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there are non-root pages on the top-level
+	 *
 	 * @return string
 	 */
 	public function topLevelRoot()

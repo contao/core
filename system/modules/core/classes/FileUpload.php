@@ -49,6 +49,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was an error
+	 *
 	 * @return boolean
 	 */
 	public function hasError()
@@ -59,6 +60,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was a resized image
+	 *
 	 * @return boolean
 	 */
 	public function hasResized()
@@ -69,7 +71,8 @@ class FileUpload extends \Backend
 
 	/**
 	 * Override the field name
-	 * @param string
+	 *
+	 * @param string $strName
 	 */
 	public function setName($strName)
 	{
@@ -79,8 +82,11 @@ class FileUpload extends \Backend
 
 	/**
 	 * Check the uploaded files and move them to the target directory
-	 * @param string
+	 *
+	 * @param string $strTarget
+	 *
 	 * @return array
+	 *
 	 * @throws \Exception
 	 */
 	public function uploadTo($strTarget)
@@ -176,6 +182,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Generate the markup for the default uploader
+	 *
 	 * @return string
 	 */
 	public function generateMarkup()
@@ -207,6 +214,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Get the files from the global $_FILES array
+	 *
 	 * @return array
 	 */
 	protected function getFilesFromGlobal()
@@ -237,6 +245,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return the maximum upload file size in bytes
+	 *
 	 * @return string
 	 */
 	protected function getMaximumUploadSize()
@@ -264,7 +273,9 @@ class FileUpload extends \Backend
 
 	/**
 	 * Resize an uploaded image if neccessary
-	 * @param string
+	 *
+	 * @param string $strImage
+	 *
 	 * @return boolean
 	 */
 	protected function resizeUploadedImage($strImage)

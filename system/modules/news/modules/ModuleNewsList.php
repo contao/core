@@ -28,12 +28,14 @@ class ModuleNewsList extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newslist'][0]) . ' ###';
@@ -114,12 +116,15 @@ class ModuleNewsList extends \ModuleNews
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 			{
+				/** @var \PageModel $objPage */
 				global $objPage;
+
 				$objPage->noSearch = 1;
 				$objPage->cache = 0;
 
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
+
 				return;
 			}
 

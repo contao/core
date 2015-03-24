@@ -29,3 +29,12 @@ extension is upgraded. It does upgrade dependencies which are already installed,
 but fails to install new dependencies that have been added in the meantime.
 
 More information: https://github.com/contao/core/issues/3804
+
+
+SVGZ support
+------------
+
+Contao cannot handle SVGZ images under PHP 5.3, due to the missing `gzdecode()`
+function. If you need SVGZ support, you have to use PHP 5.4+. 
+
+More information: https://github.com/contao/core/issues/7639

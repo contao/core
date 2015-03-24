@@ -37,6 +37,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index'
+				// FIXME: combined index?
 			)
 		)
 	),
@@ -351,10 +352,13 @@ class tl_faq extends Backend
 
 	/**
 	 * Auto-generate the FAQ alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -388,7 +392,9 @@ class tl_faq extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listQuestions($arrRow)
@@ -399,14 +405,16 @@ class tl_faq extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
-' . $this->replaceInsertTags($arrRow['answer'], false) . '
+' . String::insertTagToSrc($arrRow['answer']) . '
 </div>' . "\n";
 	}
 
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
@@ -417,12 +425,14 @@ class tl_faq extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -452,9 +462,10 @@ class tl_faq extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 * 
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
@@ -486,7 +497,7 @@ class tl_faq extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

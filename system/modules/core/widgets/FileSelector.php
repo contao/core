@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Provide methods to handle input field "file tree".
  *
+ * @property string  $path
+ * @property string  $fieldType
+ * @property string  $sort
+ * @property boolean $files
+ * @property boolean $filesOnly
+ * @property string  $extensions
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileSelector extends \Widget
@@ -40,6 +47,7 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -120,10 +128,12 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate a particular subpart of the file tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $folder
+	 * @param string  $strField
+	 * @param integer $level
+	 * @param boolean $mount
+	 *
 	 * @return string
 	 */
 	public function generateAjax($folder, $strField, $level, $mount=false)
@@ -166,16 +176,19 @@ class FileSelector extends \Widget
 		}
 
 		$this->convertValuesToPaths();
+
 		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
 	}
 
 
 	/**
 	 * Recursively render the filetree
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $path
+	 * @param integer $intMargin
+	 * @param boolean $mount
+	 * @param boolean $blnProtected
+	 *
 	 * @return string
 	 */
 	protected function renderFiletree($path, $intMargin, $mount=false, $blnProtected=false)
@@ -200,9 +213,9 @@ class FileSelector extends \Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get session data and toggle nodes
-		if ($this->Input->get($flag.'tg'))
+		if (\Input::get($flag.'tg'))
 		{
-			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}

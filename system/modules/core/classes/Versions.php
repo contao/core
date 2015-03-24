@@ -58,8 +58,9 @@ class Versions extends \Controller
 
 	/**
 	 * Initialize the object
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strTable
+	 * @param integer $intPid
 	 */
 	public function __construct($strTable, $intPid)
 	{
@@ -84,7 +85,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the edit URL
-	 * @param string
+	 *
+	 * @param string $strEditUrl
 	 */
 	public function setEditUrl($strEditUrl)
 	{
@@ -94,7 +96,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the username
-	 * @param string
+	 *
+	 * @param string $strUsername
 	 */
 	public function setUsername($strUsername)
 	{
@@ -104,7 +107,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the user ID
-	 * @param integer
+	 *
+	 * @param integer $intUserId
 	 */
 	public function setUserId($intUserId)
 	{
@@ -214,7 +218,8 @@ class Versions extends \Controller
 
 	/**
 	 * Restore a version
-	 * @param integer
+	 *
+	 * @param integer $intVersion
 	 */
 	public function restore($intVersion)
 	{
@@ -437,6 +442,7 @@ class Versions extends \Controller
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
@@ -461,6 +467,7 @@ class Versions extends \Controller
 
 	/**
 	 * Render the versions dropdown menu
+	 *
 	 * @return string
 	 */
 	public function renderDropdown()
@@ -502,7 +509,8 @@ class Versions extends \Controller
 
 	/**
 	 * Add a list of versions to a template
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
@@ -583,6 +591,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the edit URL
+	 *
 	 * @return string
 	 */
 	protected function getEditUrl()
@@ -610,6 +619,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the username
+	 *
 	 * @return string
 	 */
 	protected function getUsername()
@@ -627,6 +637,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the user ID
+	 *
 	 * @return string
 	 */
 	protected function getUserId()
@@ -644,8 +655,10 @@ class Versions extends \Controller
 
 	/**
 	 * Implode a multi-dimensional array recursively
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param mixed   $var
+	 * @param boolean $binary
+	 *
 	 * @return string
 	 */
 	protected function implodeRecursive($var, $binary=false)

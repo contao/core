@@ -21,6 +21,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -31,6 +32,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
@@ -41,6 +43,8 @@ class RebuildIndex extends \Backend implements \executable
 		}
 
 		$time = time();
+
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
@@ -139,7 +143,7 @@ class RebuildIndex extends \Backend implements \executable
 		$arrUser = array(''=>'-');
 
 		// Get active front end users
-		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
+		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!='1' AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
 
 		while ($objUser->next())
 		{

@@ -155,21 +155,6 @@
       <trans-unit id="tl_article.gplus">
         <source>Share on Google+</source>
       </trans-unit>
-      <trans-unit id="tl_article.header">
-        <source>Header</source>
-      </trans-unit>
-      <trans-unit id="tl_article.left">
-        <source>Left column</source>
-      </trans-unit>
-      <trans-unit id="tl_article.main">
-        <source>Main column</source>
-      </trans-unit>
-      <trans-unit id="tl_article.right">
-        <source>Right column</source>
-      </trans-unit>
-      <trans-unit id="tl_article.footer">
-        <source>Footer</source>
-      </trans-unit>
       <trans-unit id="tl_article.new.0">
         <source>New article</source>
       </trans-unit>
