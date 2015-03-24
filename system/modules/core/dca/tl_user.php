@@ -604,8 +604,8 @@ class tl_user extends Backend
 	 * @param string $icon
 	 *
 	 * @return string
-     *
-     * @throws Exception
+	 *
+	 * @throws Exception
 	 */
 	public function switchUser($row, $href, $label, $title, $icon)
 	{
