@@ -28,7 +28,7 @@ define('CSS3PIE', '1.0.0');
 define('DROPZONE', '3.12.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.2');
-define('RESPIMAGE', '0.9.6');
+define('RESPIMAGE', '1.3.0');
 define('SWIPE', '2.0');
 define('JQUERY', '1.11.2');
 define('JQUERY_UI', '1.11.4');
