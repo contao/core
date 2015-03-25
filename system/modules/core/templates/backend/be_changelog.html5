@@ -18,7 +18,7 @@
   <?php echo $this->stylesheets; ?>
 
   <script src="assets/mootools/core/<?php echo $GLOBALS['TL_ASSETS']['MOOTOOLS']; ?>/mootools.js"></script>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.min.js"></script><![endif]-->
 
 </head>
 <body class="<?php echo $this->ua; ?>">

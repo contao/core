@@ -21,7 +21,7 @@
     <?php echo $this->head; ?>
 
     <?php $this->block('html5shiv'); ?>
-      <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.js"></script><![endif]-->
+      <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.min.js"></script><![endif]-->
     <?php $this->endblock(); ?>
   <?php $this->endblock(); ?>
 

@@ -1,10 +1,10 @@
 /**
-* @preserve HTML5 Shiv v3.7.0 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+* @preserve HTML5 Shiv 3.7.2 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
 */
 ;(function(window, document) {
 /*jshint evil:true */
   /** version */
-  var version = '3.7.0';
+  var version = '3.7.2';
 
   /** Preset options */
   var options = window.html5 || {};
@@ -82,6 +82,24 @@
     return typeof elements == 'string' ? elements.split(' ') : elements;
   }
 
+  /**
+   * Extends the built-in list of html5 elements
+   * @memberOf html5
+   * @param {String|Array} newElements whitespace separated list or array of new element names to shiv
+   * @param {Document} ownerDocument The context document.
+   */
+  function addElements(newElements, ownerDocument) {
+    var elements = html5.elements;
+    if(typeof elements != 'string'){
+      elements = elements.join(' ');
+    }
+    if(typeof newElements != 'string'){
+      newElements = newElements.join(' ');
+    }
+    html5.elements = elements +' '+ newElements;
+    shivDocument(ownerDocument);
+  }
+
     /**
    * Returns the data associated to the given document
    * @private
@@ -133,7 +151,7 @@
     //   a 403 response, will cause the tab/window to crash
     // * Script elements appended to fragments will execute when their `src`
     //   or `text` property is set
-    return node.canHaveChildren && !reSkip.test(nodeName) ? data.frag.appendChild(node) : node;
+    return node.canHaveChildren && !reSkip.test(nodeName) && !node.tagUrn ? data.frag.appendChild(node) : node;
   }
 
   /**
@@ -187,7 +205,7 @@
       'var n=f.cloneNode(),c=n.createElement;' +
       'h.shivMethods&&(' +
         // unroll the `createElement` calls
-        getElements().join().replace(/[\w\-]+/g, function(nodeName) {
+        getElements().join().replace(/[\w\-:]+/g, function(nodeName) {
           data.createElem(nodeName);
           data.frag.createElement(nodeName);
           return 'c("' + nodeName + '")';
@@ -244,7 +262,7 @@
      * @memberOf html5
      * @type Array|String
      */
-    'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video',
+    'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output picture progress section summary template time video',
 
     /**
      * current version of html5shiv
@@ -287,7 +305,10 @@
     createElement: createElement,
 
     //creates a shived documentFragment
-    createDocumentFragment: createDocumentFragment
+    createDocumentFragment: createDocumentFragment,
+
+    //extends list of elements
+    addElements: addElements
   };
 
   /*--------------------------------------------------------------------------*/
@@ -297,5 +318,203 @@
 
   // shiv the document
   shivDocument(document);
+
+  /*------------------------------- Print Shiv -------------------------------*/
+
+  /** Used to filter media types */
+  var reMedia = /^$|\b(?:all|print)\b/;
+
+  /** Used to namespace printable elements */
+  var shivNamespace = 'html5shiv';
+
+  /** Detect whether the browser supports shivable style sheets */
+  var supportsShivableSheets = !supportsUnknownElements && (function() {
+    // assign a false negative if unable to shiv
+    var docEl = document.documentElement;
+    return !(
+      typeof document.namespaces == 'undefined' ||
+      typeof document.parentWindow == 'undefined' ||
+      typeof docEl.applyElement == 'undefined' ||
+      typeof docEl.removeNode == 'undefined' ||
+      typeof window.attachEvent == 'undefined'
+    );
+  }());
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Wraps all HTML5 elements in the given document with printable elements.
+   * (eg. the "header" element is wrapped with the "html5shiv:header" element)
+   * @private
+   * @param {Document} ownerDocument The document.
+   * @returns {Array} An array wrappers added.
+   */
+  function addWrappers(ownerDocument) {
+    var node,
+        nodes = ownerDocument.getElementsByTagName('*'),
+        index = nodes.length,
+        reElements = RegExp('^(?:' + getElements().join('|') + ')$', 'i'),
+        result = [];
+
+    while (index--) {
+      node = nodes[index];
+      if (reElements.test(node.nodeName)) {
+        result.push(node.applyElement(createWrapper(node)));
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Creates a printable wrapper for the given element.
+   * @private
+   * @param {Element} element The element.
+   * @returns {Element} The wrapper.
+   */
+  function createWrapper(element) {
+    var node,
+        nodes = element.attributes,
+        index = nodes.length,
+        wrapper = element.ownerDocument.createElement(shivNamespace + ':' + element.nodeName);
+
+    // copy element attributes to the wrapper
+    while (index--) {
+      node = nodes[index];
+      node.specified && wrapper.setAttribute(node.nodeName, node.nodeValue);
+    }
+    // copy element styles to the wrapper
+    wrapper.style.cssText = element.style.cssText;
+    return wrapper;
+  }
+
+  /**
+   * Shivs the given CSS text.
+   * (eg. header{} becomes html5shiv\:header{})
+   * @private
+   * @param {String} cssText The CSS text to shiv.
+   * @returns {String} The shived CSS text.
+   */
+  function shivCssText(cssText) {
+    var pair,
+        parts = cssText.split('{'),
+        index = parts.length,
+        reElements = RegExp('(^|[\\s,>+~])(' + getElements().join('|') + ')(?=[[\\s,>+~#.:]|$)', 'gi'),
+        replacement = '$1' + shivNamespace + '\\:$2';
+
+    while (index--) {
+      pair = parts[index] = parts[index].split('}');
+      pair[pair.length - 1] = pair[pair.length - 1].replace(reElements, replacement);
+      parts[index] = pair.join('}');
+    }
+    return parts.join('{');
+  }
+
+  /**
+   * Removes the given wrappers, leaving the original elements.
+   * @private
+   * @params {Array} wrappers An array of printable wrappers.
+   */
+  function removeWrappers(wrappers) {
+    var index = wrappers.length;
+    while (index--) {
+      wrappers[index].removeNode();
+    }
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  /**
+   * Shivs the given document for print.
+   * @memberOf html5
+   * @param {Document} ownerDocument The document to shiv.
+   * @returns {Document} The shived document.
+   */
+  function shivPrint(ownerDocument) {
+    var shivedSheet,
+        wrappers,
+        data = getExpandoData(ownerDocument),
+        namespaces = ownerDocument.namespaces,
+        ownerWindow = ownerDocument.parentWindow;
+
+    if (!supportsShivableSheets || ownerDocument.printShived) {
+      return ownerDocument;
+    }
+    if (typeof namespaces[shivNamespace] == 'undefined') {
+      namespaces.add(shivNamespace);
+    }
+
+    function removeSheet() {
+      clearTimeout(data._removeSheetTimer);
+      if (shivedSheet) {
+          shivedSheet.removeNode(true);
+      }
+      shivedSheet= null;
+    }
+
+    ownerWindow.attachEvent('onbeforeprint', function() {
+
+      removeSheet();
+
+      var imports,
+          length,
+          sheet,
+          collection = ownerDocument.styleSheets,
+          cssText = [],
+          index = collection.length,
+          sheets = Array(index);
+
+      // convert styleSheets collection to an array
+      while (index--) {
+        sheets[index] = collection[index];
+      }
+      // concat all style sheet CSS text
+      while ((sheet = sheets.pop())) {
+        // IE does not enforce a same origin policy for external style sheets...
+        // but has trouble with some dynamically created stylesheets
+        if (!sheet.disabled && reMedia.test(sheet.media)) {
+
+          try {
+            imports = sheet.imports;
+            length = imports.length;
+          } catch(er){
+            length = 0;
+          }
+
+          for (index = 0; index < length; index++) {
+            sheets.push(imports[index]);
+          }
+
+          try {
+            cssText.push(sheet.cssText);
+          } catch(er){}
+        }
+      }
+
+      // wrap all HTML5 elements with printable elements and add the shived style sheet
+      cssText = shivCssText(cssText.reverse().join(''));
+      wrappers = addWrappers(ownerDocument);
+      shivedSheet = addStyleSheet(ownerDocument, cssText);
+
+    });
+
+    ownerWindow.attachEvent('onafterprint', function() {
+      // remove wrappers, leaving the original elements, and remove the shived style sheet
+      removeWrappers(wrappers);
+      clearTimeout(data._removeSheetTimer);
+      data._removeSheetTimer = setTimeout(removeSheet, 500);
+    });
+
+    ownerDocument.printShived = true;
+    return ownerDocument;
+  }
+
+  /*--------------------------------------------------------------------------*/
+
+  // expose API
+  html5.type += ' print';
+  html5.shivPrint = shivPrint;
+
+  // shiv for print
+  shivPrint(document);
 
 }(this, document));
