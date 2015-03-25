@@ -698,7 +698,7 @@ abstract class Backend extends \Controller
 				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
-					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
+					if ($objPages->published && ($objPages->start == '' || $objPages->start <= $time) && ($objPages->stop == '' || $objPages->stop > ($time + 60)))
 					{
 						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
 

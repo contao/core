@@ -360,7 +360,7 @@ class Automator extends \System
 			while ($objRoot->type != 'root' && $intId > 0);
 
 			// Make sure the page is published
-			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop < $time))
+			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop <= ($time + 60)))
 			{
 				return;
 			}

@@ -573,7 +573,7 @@ class tl_article extends Backend
 	public function addIcon($row, $label)
 	{
 		$time = time() - (time() % 60);
-		$published = ($row['published'] && ($row['start'] == '' || $row['start'] < $time) && ($row['stop'] == '' || $row['stop'] > $time));
+		$published = ($row['published'] && ($row['start'] == '' || $row['start'] <= $time) && ($row['stop'] == '' || $row['stop'] > ($time + 60)));
 
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !Config::get('disableAlias')) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif').'</a> '.$label;
 	}
