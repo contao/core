@@ -4,6 +4,30 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Updated
+Updated respimage to version 1.3.0.
+
+### Updated
+Updated jQuery UI to version 1.11.4.
+
+### Updated
+Updated mediaelement.js to version 2.16.4.
+
+### Updated
+Updated Colorbox to version 1.6.0.
+
+### Updated
+Updated jQuery to version 1.11.2.
+
+### Updated
+Updated HTML5 Shiv to version 3.7.2.
+
+### Updated
+Updated DropZone to version 3.12.0.
+
+### Updated
+Updated the ACE editor to version 1.1.8.
+
 ### Improved
 Also convert image links in TinyMCE to `{{file}}` insert tags (see #7581).
 
