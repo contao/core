@@ -68,7 +68,7 @@ class FrontendIndex extends \Frontend
 
 			/** @var \PageRoot $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
-			$pageId = $objHandler->generate($objRootPage->id, true);
+			$pageId = $objHandler->generate($objRootPage->id, true, true);
 		}
 		// Throw a 404 error if the request is not a Contao request (see #2864)
 		elseif ($pageId === false)

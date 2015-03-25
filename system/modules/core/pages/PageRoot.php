@@ -24,10 +24,11 @@ class PageRoot extends \Frontend
 	 *
 	 * @param integer $pageId
 	 * @param boolean $blnReturn
+	 * @param boolean $blnPreferAlias
 	 *
 	 * @return integer
 	 */
-	public function generate($pageId, $blnReturn=false)
+	public function generate($pageId, $blnReturn=false, $blnPreferAlias=false)
 	{
 		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
 
@@ -45,6 +46,11 @@ class PageRoot extends \Frontend
 			global $objPage;
 
 			$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objPage->language));
+		}
+
+		if ($blnPreferAlias && $objNextPage->alias != '')
+		{
+			return $objNextPage->alias;
 		}
 
 		return $objNextPage->id;
