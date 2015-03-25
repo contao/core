@@ -454,7 +454,7 @@ $GLOBALS['TL_ASSETS'] = array
 (
 	'ACE'          => '1.1.8',
 	'CSS3PIE'      => '1.0.0',
-	'DROPZONE'     => '3.8.5',
+	'DROPZONE'     => '3.12.0',
 	'HIGHLIGHTER'  => '3.0.83',
 	'HTML5SHIV'    => '3.7.0',
 	'RESPIMAGE'    => '0.9.6',

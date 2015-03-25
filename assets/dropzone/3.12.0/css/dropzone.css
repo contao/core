@@ -1,4 +1,9 @@
-/* The MIT License */
+/**
+ * DropZone
+ *
+ * Matias Meno
+ * Copyright 2012, MIT License
+ */
 .dropzone,
 .dropzone *,
 .dropzone-previews,
@@ -25,8 +30,6 @@
 }
 .dropzone .dz-message {
   opacity: 1;
-  -ms-filter: none;
-  filter: none;
 }
 .dropzone.dz-drag-hover {
   border-color: rgba(0,0,0,0.15);
@@ -364,47 +367,34 @@
   color: #666;
 }
 @-moz-keyframes loading {
-  0% {
+  from {
     background-position: 0 -400px;
   }
-
-  100% {
+  to {
     background-position: -7px -400px;
   }
 }
 @-webkit-keyframes loading {
-  0% {
+  from {
     background-position: 0 -400px;
   }
-
-  100% {
+  to {
     background-position: -7px -400px;
   }
 }
 @-o-keyframes loading {
-  0% {
+  from {
     background-position: 0 -400px;
   }
-
-  100% {
-    background-position: -7px -400px;
-  }
-}
-@-ms-keyframes loading {
-  0% {
-    background-position: 0 -400px;
-  }
-
-  100% {
+  to {
     background-position: -7px -400px;
   }
 }
 @keyframes loading {
-  0% {
+  from {
     background-position: 0 -400px;
   }
-
-  100% {
+  to {
     background-position: -7px -400px;
   }
 }
