@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Improved
+Also convert image links in TinyMCE to `{{file}}` insert tags (see #7581).
+
 ### New
 Support copying all records in the list view (see #7499).
 

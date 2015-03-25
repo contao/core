@@ -568,9 +568,9 @@ class String
 	public static function srcToInsertTag($data)
 	{
 		$return = '';
-		$paths = preg_split('/(src="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$paths = preg_split('/((src|href)="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+4)
 		{
 			$return .= $paths[$i];
 
@@ -579,15 +579,15 @@ class String
 				continue;
 			}
 
-			$file = \FilesModel::findByPath($paths[$i+2]);
+			$file = \FilesModel::findByPath($paths[$i+3]);
 
 			if ($file !== null)
 			{
-				$return .= 'src="{{file::' . static::binToUuid($file->uuid) . '}}"';
+				$return .= $paths[$i+2] . '="{{file::' . static::binToUuid($file->uuid) . '}}"';
 			}
 			else
 			{
-				$return .= 'src="' . $paths[$i+2] . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . '"';
 			}
 		}
 
@@ -605,9 +605,9 @@ class String
 	public static function insertTagToSrc($data)
 	{
 		$return = '';
-		$paths = preg_split('/(src="([^"]*)\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$paths = preg_split('/((src|href)="([^"]*)\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-		for ($i=0, $c=count($paths); $i<$c; $i=$i+4)
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+5)
 		{
 			$return .= $paths[$i];
 
@@ -616,15 +616,15 @@ class String
 				continue;
 			}
 
-			$file = \FilesModel::findByUuid($paths[$i+3]);
+			$file = \FilesModel::findByUuid($paths[$i+4]);
 
 			if ($file !== null)
 			{
-				$return .= 'src="' . $paths[$i+2] . $file->path . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . $file->path . '"';
 			}
 			else
 			{
-				$return .= 'src="' . $paths[$i+2] . $paths[$i+3] . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . $paths[$i+4] . '"';
 			}
 		}
 
