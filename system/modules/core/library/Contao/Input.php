@@ -529,7 +529,7 @@ class Input
 		// Encode opening arrow brackets (see #3998)
 		$varValue = preg_replace_callback('@</?([^\s<>/]*)@', function ($matches) use ($strAllowedTags)
 		{
-			if (!isset($matches[1]) || strpos($strAllowedTags, '<' . $matches[1] . '>') === false)
+			if ($matches[1] == '' || strpos($strAllowedTags, '<' . $matches[1] . '>') === false)
 			{
 				$matches[0] = str_replace('<', '&lt;', $matches[0]);
 			}
