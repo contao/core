@@ -30,7 +30,7 @@ define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIV', '3.7.2');
 define('RESPIMAGE', '0.9.6');
 define('SWIPE', '2.0');
-define('JQUERY', '1.11.0');
+define('JQUERY', '1.11.2');
 define('JQUERY_UI', '1.10.4');
 define('COLORBOX', '1.5.8');
 define('MEDIAELEMENT', '2.14.2');
