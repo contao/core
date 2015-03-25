@@ -8,7 +8,7 @@
     <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
 
-<img src="<?php echo $this->img['src']; ?>"<?php if ($this->img['srcset'] !== $this->img['src']): ?> srcset="<?php echo $this->img['srcset']; ?>"<?php endif; ?><?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php elseif (!$this->sources): ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>"<?php endif; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?><?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
+<img src="<?php echo $this->img['src']; ?>"<?php if ($this->img['srcset'] !== $this->img['src']): ?> srcset="<?php echo $this->img['srcset']; ?>"<?php endif; ?><?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php elseif (!$this->sources): ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>"<?php endif; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?><?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?><?php echo $this->attributes; ?>>
 
 <?php if ($this->sources): ?>
   </picture>
