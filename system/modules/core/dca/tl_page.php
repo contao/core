@@ -43,9 +43,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
 				'alias' => 'index',
-				'type' => 'index',
+				'type' => 'index', // FIXME: remove?
 				'pid,type,start,stop,published' => 'index'
 			)
 		)

@@ -36,8 +36,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
-				// FIXME: combined index?
+				'pid,published,sorting' => 'index'
 			)
 		)
 	),
