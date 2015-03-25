@@ -1537,6 +1537,7 @@ abstract class Controller extends \System
 
 				// Images
 				case 'image':
+				case 'picture':
 					$width = null;
 					$height = null;
 					$alt = '';
@@ -1544,6 +1545,8 @@ abstract class Controller extends \System
 					$rel = '';
 					$strFile = $elements[1];
 					$mode = '';
+					$size = null;
+					$strTemplate = 'picture_default';
 
 					// Take arguments
 					if (strpos($elements[1], '?') !== false)
@@ -1581,6 +1584,14 @@ abstract class Controller extends \System
 
 								case 'mode':
 									$mode = $value;
+									break;
+
+								case 'size':
+									$size = (int)$value;
+									break;
+
+								case 'template':
+									$strTemplate = preg_replace('([^a-z0-9_])i', '', $value);
 									break;
 							}
 						}
@@ -1633,15 +1644,31 @@ abstract class Controller extends \System
 					// Generate the thumbnail image
 					try
 					{
-						$dimensions = '';
-						$imageObj = \Image::create($strFile, array($width, $height, $mode));
-						$src = $imageObj->executeResize()->getResizedPath();
-						$objFile = new \File(rawurldecode($src), true);
-
-						// Add the image dimensions
-						if (($imgSize = $objFile->imageSize) !== false)
+						// Image
+						if (strtolower($elements[0]) == 'image')
 						{
-							$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+							$dimensions = '';
+							$imageObj = \Image::create($strFile, array($width, $height, $mode));
+							$src = $imageObj->executeResize()->getResizedPath();
+							$objFile = new \File(rawurldecode($src), true);
+
+							// Add the image dimensions
+							if (($imgSize = $objFile->imageSize) !== false)
+							{
+								$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+							}
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
+						}
+
+						// Picture
+						else
+						{
+							$picture = \Picture::create($strFile, array(0, 0, $size))->getTemplateData();
+							$picture['alt'] = $alt;
+							$picture['class'] = $class;
+							$pictureTemplate = new \FrontendTemplate($strTemplate);
+							$pictureTemplate->setData($picture);
+							$arrCache[$strTag] = $pictureTemplate->parse();
 						}
 
 						// Generate the HTML markup
@@ -1656,11 +1683,7 @@ abstract class Controller extends \System
 								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
 							}
 
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
-						}
-						else
-						{
-							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '>' . $arrCache[$strTag] . '</a>';
 						}
 					}
 					catch (\Exception $e)
