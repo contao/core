@@ -96,7 +96,7 @@ class CommentsNotifyModel extends \Model
 
 
 	/**
-	 * Find a subscription by its tokens
+	 * Find a subscription by its source table, parent ID and e-mail address
 	 *
 	 * @param string  $strSource  The source element
 	 * @param integer $intParent  The parent ID
@@ -114,7 +114,7 @@ class CommentsNotifyModel extends \Model
 
 
 	/**
-	 * Find published comments by their source table and parent ID
+	 * Find active subscriptions by their source table and parent ID
 	 *
 	 * @param string  $strSource  The source element
 	 * @param integer $intParent  The parent ID

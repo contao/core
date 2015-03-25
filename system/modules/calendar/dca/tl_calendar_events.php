@@ -52,8 +52,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
-				// FIXME: combined index?
+				'alias' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),

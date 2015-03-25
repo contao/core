@@ -30,9 +30,9 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'source' => 'index',
-				'parent' => 'index'
-				// FIXME: combined index?
+				'source' => 'index', // FIXME: remove?
+				'parent' => 'index', // FIXME: remove?
+				'source,parent,published' => 'index'
 			)
 		)
 	),
