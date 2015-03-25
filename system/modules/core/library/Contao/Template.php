@@ -93,8 +93,7 @@ abstract class Template extends \BaseTemplate
 	{
 		if (isset($this->arrData[$strKey]))
 		{
-			// Disable string callables to avoid calling PHP functions
-			if (!is_string($this->arrData[$strKey]) && is_callable($this->arrData[$strKey]))
+			if (is_object($this->arrData[$strKey]) && is_callable($this->arrData[$strKey]))
 			{
 				return $this->arrData[$strKey]();
 			}
