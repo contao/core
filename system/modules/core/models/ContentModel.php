@@ -388,7 +388,7 @@ class ContentModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.invisible=''";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.invisible=''";
 		}
 
 		if (!isset($arrOptions['order']))

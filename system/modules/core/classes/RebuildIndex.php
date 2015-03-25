@@ -143,7 +143,7 @@ class RebuildIndex extends \Backend implements \executable
 		$arrUser = array(''=>'-');
 
 		// Get active front end users
-		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!='1' AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
+		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!='1' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') ORDER BY username");
 
 		while ($objUser->next())
 		{

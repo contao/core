@@ -377,7 +377,7 @@ class Automator extends \System
 		// Get all published root pages
 		else
 		{
-			$objRoot = $objDatabase->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap='1' AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1'");
+			$objRoot = $objDatabase->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap='1' AND sitemapName!='' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'");
 		}
 
 		// Return if there are no pages

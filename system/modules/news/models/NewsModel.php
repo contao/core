@@ -186,7 +186,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
@@ -227,7 +227,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN || TL_MODE == 'BE')
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -273,7 +273,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::countBy($arrColumns, null, $arrOptions);
@@ -296,7 +296,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -320,9 +320,13 @@ class NewsModel extends \Model
 	public static function findPublishedByPid($intId, $intLimit=0, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		$time = time() - (time() % 60);
+		$arrColumns = array("$t.pid=?");
 
-		$arrColumns = array("$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'");
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time() - (time() % 60);
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
+		}
 
 		if (!isset($arrOptions['order']))
 		{
@@ -363,7 +367,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -401,7 +405,7 @@ class NewsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::countBy($arrColumns, array($intFrom, $intTo), $arrOptions);

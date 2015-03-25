@@ -196,7 +196,7 @@ class MemberModel extends \Model
 		$t = static::$strTable;
 		$time = time() - (time() % 60);
 
-		$arrColumns = array("$t.email=? AND $t.login='1' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''");
+		$arrColumns = array("$t.email=? AND $t.login='1' AND ($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.disable=''");
 
 		if ($strUsername !== null)
 		{

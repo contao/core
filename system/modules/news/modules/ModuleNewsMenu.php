@@ -103,7 +103,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$this->Template = $objTemplate;
 
 		// Get the dates
-		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1'" : "") . " GROUP BY year ORDER BY year DESC");
+		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'" : "") . " GROUP BY year ORDER BY year DESC");
 
 		while ($objDates->next())
 		{
@@ -153,7 +153,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$time = time() - (time() % 60);
 
 		// Get the dates
-		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, FROM_UNIXTIME(date, '%m') AS month, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1'" : "") . " GROUP BY year, month ORDER BY year DESC, month DESC");
+		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, FROM_UNIXTIME(date, '%m') AS month, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'" : "") . " GROUP BY year, month ORDER BY year DESC, month DESC");
 
 		while ($objDates->next())
 		{
@@ -221,7 +221,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$this->Template = $objTemplate;
 
 		// Get the dates
-		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y%m%d') AS day, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published='1'" : "") . " GROUP BY day ORDER BY day DESC");
+		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y%m%d') AS day, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'" : "") . " GROUP BY day ORDER BY day DESC");
 
 		while ($objDates->next())
 		{

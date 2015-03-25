@@ -209,7 +209,7 @@ class CalendarEventsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
@@ -237,7 +237,7 @@ class CalendarEventsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -265,7 +265,7 @@ class CalendarEventsModel extends \Model
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time() - (time() % 60);
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'";
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -297,7 +297,7 @@ class CalendarEventsModel extends \Model
 		$time = time() - (time() % 60);
 
 		// Get upcoming events using endTime instead of startTime (see #3917)
-		$arrColumns = array("($t.endTime>=$time OR ($t.recurring='1' AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND $t.pid IN(" . implode(',', array_map('intval', $arrIds)) . ") AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published='1'");
+		$arrColumns = array("($t.endTime>=$time OR ($t.recurring='1' AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND $t.pid IN(" . implode(',', array_map('intval', $arrIds)) . ") AND ($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'");
 
 		if ($intLimit > 0)
 		{
