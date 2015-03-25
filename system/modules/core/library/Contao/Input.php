@@ -526,9 +526,20 @@ class Input
 			return $varValue;
 		}
 
-		$varValue = str_replace(array('<!--','<![', '-->'), array('&lt;!--', '&lt;![', '--&gt;'), $varValue);
+		// Encode opening arrow brackets (see #3998)
+		$varValue = preg_replace_callback('@</?([^\s<>/]*)@', function ($matches)
+		{
+			if (!isset($matches[1]) || strpos(\Config::get('allowedTags'), '<' . $matches[1] . '>') === false)
+			{
+				$matches[0] = str_replace('<', '&lt;', $matches[0]);
+			}
+
+			return $matches[0];
+		}, $varValue);
+
+		// Strip the tags and restore HTML comments
 		$varValue = strip_tags($varValue, $strAllowedTags);
-		$varValue = str_replace(array('&lt;!--', '&lt;![', '--&gt;'), array('<!--', '<![', '-->'), $varValue);
+		$varValue = str_replace(array('&lt;!--', '&lt;!['), array('<!--', '<!['), $varValue);
 
 		// Recheck for encoded null bytes
 		while (strpos($varValue, '\\0') !== false)

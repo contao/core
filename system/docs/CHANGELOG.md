@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Fixed
+Do not strip opening arrow brackets when stripping tags (see #3998).
+
 ### Improved
 Simplify the `moo_mediabox` templates (see #7521).
 
