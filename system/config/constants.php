@@ -31,7 +31,7 @@ define('HTML5SHIV', '3.7.2');
 define('RESPIMAGE', '0.9.6');
 define('SWIPE', '2.0');
 define('JQUERY', '1.11.2');
-define('JQUERY_UI', '1.10.4');
+define('JQUERY_UI', '1.11.4');
 define('COLORBOX', '1.6.0');
 define('MEDIAELEMENT', '2.16.4');
 define('TABLESORTER', '2.0.5');
