@@ -178,6 +178,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				);
 
 				$this->Session->set('CLIPBOARD', $arrClipboard);
+
+				// Support copyAll in the list view (see #7499)
+				if (isset($_POST['copy']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] < 4)
+				{
+					$this->redirect(str_replace('act=select', 'act=copyAll', \Environment::get('request')));
+				}
+
 				$this->redirect($this->getReferer());
 			}
 		}
@@ -805,12 +812,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		// PID is mandatory
-		if (!strlen(\Input::get('pid')))
-		{
-			$this->redirect($this->getReferer());
-		}
-
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		if (isset($arrClipboard[$this->strTable]) && is_array($arrClipboard[$this->strTable]['id']))
@@ -1134,12 +1135,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		{
 			$this->log('Table "'.$this->strTable.'" is not copyable', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
-		}
-
-		// PID is mandatory
-		if (!strlen(\Input::get('pid')))
-		{
-			$this->redirect($this->getReferer());
 		}
 
 		$arrClipboard = $this->Session->get('CLIPBOARD');
@@ -4699,6 +4694,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 				{
 					$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+				}
+
+				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notCopyable'])
+				{
+					$arrButtons['copy'] = '<input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'">';
 				}
 
 				if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
