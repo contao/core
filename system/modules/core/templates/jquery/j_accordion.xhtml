@@ -8,24 +8,14 @@
         // Put custom options here
         heightStyle: 'content',
         header: 'div.toggler',
-        collapsible: true
-      });
-      var activate = function(tog) {
-        var tgs = $('div.toggler');
-        tgs.removeClass('active');
-        tog.addClass('active');
-        tgs.next('div.accordion').attr('aria-hidden', 'true');
-        tog.next('div.accordion').attr('aria-hidden', 'false');
-      };
-      $('div.toggler').focus(function() {
-        $('div.toggler').attr('tabindex', 0);
-        $(this).attr('tabindex', -1);
-      }).blur(function() {
-        $(this).attr('tabindex', 0);
-      }).click(function() {
-        activate($(this));
-      }).keypress(function(event) {
-        if (event.keyCode == 13) activate($(this));
+        collapsible: true,
+        create: function(event, ui) {
+          ui.header.addClass('active');
+        },
+        activate: function(event, ui) {
+          ui.newHeader.addClass('active');
+          ui.oldHeader.removeClass('active');
+        }
       });
     });
   })(jQuery);

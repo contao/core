@@ -60,7 +60,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Parse the template
-		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
+		$strBuffer = $this->parse();
 
 		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))

@@ -1,6 +1,35 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.2.20 (2015-03-26)
+---------------------------
+
+### Fixed
+Correctly convert date strings depending on their rgxp format (see #7721).
+
+### Fixed
+Update news and calendar feeds from the content view (see #7679).
+
+### Fixed
+Do not generally encode stand-alone ampersands (see #7684).
+
+### Fixed
+Restore some globals when catching the unused argument exception (see #7659).
+
+### Fixed
+Correctly set the CSS classes in the jQuery accordion and do not try to mess
+with its ARIA handling (see #7622).
+
+### Fixed
+Handle language fragments without trailing slash when redirecting (see #7666).
+
+### Fixed
+Trigger the `load_callback` upon saving in "override all" mode (see #7670). 
+
+### Fixed
+Ensure a unique language file array in the `Automator` class (see #7687).
+
+
 Version 3.2.19 (2015-02-12)
 ---------------------------
 

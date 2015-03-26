@@ -46,7 +46,7 @@ class ModuleLogin extends \Module
 		}
 
 		// Set the last page visited
-		if ($this->redirectBack)
+		if (!$_POST && $this->redirectBack)
 		{
 			$_SESSION['LAST_PAGE_VISITED'] = $this->getReferer();
 		}
