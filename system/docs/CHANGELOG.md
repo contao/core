@@ -1,7 +1,7 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.2.20 (2015-03-XX)
+Version 3.2.20 (2015-03-26)
 ---------------------------
 
 ### Fixed
