@@ -60,13 +60,4 @@
   <target name="cleanup">
     <delete dir="contao-${version}" />
   </target>
-
-  <target name="phpdoc">
-    <exec executable="phpdoc">
-      <arg value="--title=Contao Open Source CMS" />
-      <arg value="--target=../api" />
-      <arg value="--directory=system/modules/core/library,system/modules/*/models" />
-      <arg value="--template=responsive-contao" />
-    </exec>
-  </target>
 </project>
