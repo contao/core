@@ -66,6 +66,12 @@ abstract class Model
 	protected static $strPk = 'id';
 
 	/**
+	 * Class name cache
+	 * @var array
+	 */
+	protected static $arrClassNames = array();
+
+	/**
 	 * Data
 	 * @var array
 	 */
@@ -1140,9 +1146,15 @@ abstract class Model
 	 */
 	public static function getClassFromTable($strTable)
 	{
+		if (isset(static::$arrClassNames[$strTable]))
+		{
+			return static::$arrClassNames[$strTable];
+		}
+
 		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
-			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+			static::$arrClassNames[$strTable] = $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+			return static::$arrClassNames[$strTable];
 		}
 		else
 		{
@@ -1153,7 +1165,8 @@ abstract class Model
 				array_shift($arrChunks);
 			}
 
-			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			static::$arrClassNames[$strTable] = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			return static::$arrClassNames[$strTable];
 		}
 	}
 
