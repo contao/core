@@ -190,7 +190,7 @@ abstract class Controller extends \System
 		global $objPage;
 
 		// Articles
-		if ($intId == 0)
+		if (!is_object($intId) && $intId == 0)
 		{
 			// Show a particular article only
 			if ($objPage->type == 'regular' && \Input::get('articles'))
