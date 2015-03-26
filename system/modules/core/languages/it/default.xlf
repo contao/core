@@ -759,7 +759,7 @@
       </trans-unit>
       <trans-unit id="MSC.weekOffset">
         <source>0</source>
-        <target>0</target>
+        <target>1</target>
       </trans-unit>
       <trans-unit id="MSC.titleFormat">
         <source>%B %d%o, %Y</source>
