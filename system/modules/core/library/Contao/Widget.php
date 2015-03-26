@@ -1451,7 +1451,7 @@ abstract class Widget extends \BaseTemplate
 		// Convert timestamps
 		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
 		{
-			$objDate = new \Date($varValue);
+			$objDate = new \Date($varValue, call_user_func(array('Date', 'getNumeric' . ucfirst($arrData['eval']['rgxp']) . 'Format')));
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
