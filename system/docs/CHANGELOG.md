@@ -17,6 +17,9 @@ Convert language codes to locales in the meta wizard (see #7667).
 Replace only the `{{file}}` insert tag in the back end preview (see #7647).
 
 ### Fixed
+Correctly convert date strings depending on their rgxp format (see #7721).
+
+### Fixed
 Update news and calendar feeds from the content view (see #7679).
 
 ### Fixed
