@@ -42,30 +42,27 @@ function __error($intType, $strMessage, $strFile, $intLine)
 	// Ignore functions with an error control operator (@function_name)
 	if (ini_get('error_reporting') > 0)
 	{
-		if ($intType != E_NOTICE)
+		$e = new Exception();
+
+		// Log the error
+		error_log(sprintf("\nPHP %s: %s in %s on line %s\n%s\n",
+						$arrErrors[$intType],
+						$strMessage,
+						$strFile,
+						$intLine,
+						$e->getTraceAsString()));
+
+		// Display the error
+		if (ini_get('display_errors'))
 		{
-			$e = new Exception();
+			$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
+								$arrErrors[$intType],
+								$strMessage,
+								str_replace(TL_ROOT . '/', '', $strFile), // see #4971
+								$intLine);
 
-			// Log the error
-			error_log(sprintf("\nPHP %s: %s in %s on line %s\n%s\n",
-							$arrErrors[$intType],
-							$strMessage,
-							$strFile,
-							$intLine,
-							$e->getTraceAsString()));
-
-			// Display the error
-			if (ini_get('display_errors'))
-			{
-				$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
-									$arrErrors[$intType],
-									$strMessage,
-									str_replace(TL_ROOT . '/', '', $strFile), // see #4971
-									$intLine);
-
-				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
-				echo '<br>' . $strMessage;
-			}
+			$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
+			echo '<br>' . $strMessage;
 		}
 
 		// Exit on severe errors

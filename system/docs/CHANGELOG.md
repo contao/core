@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Changed
+Stop ignoring notices by defaut now that the error level is configurable.
+
 ### Updated
 Updated respimage to version 1.3.0.
 
