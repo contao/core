@@ -49,12 +49,14 @@
   </target>
 
   <target name="archive">
+    <defaultexcludes remove="**/.gitignore" />
     <zip destfile="contao-${version}.zip">
       <zipfileset dir="contao-${version}" prefix="contao-${version}" />
     </zip>
     <tar destfile="contao-${version}.tar.gz" compression="gzip" longfile="gnu">
       <tarfileset dir="contao-${version}" prefix="contao-${version}" />
     </tar>
+    <defaultexcludes default="true" />
   </target>
 
   <target name="cleanup">
