@@ -35,6 +35,12 @@ class Registry implements \Countable
 	protected $arrRegistry;
 
 	/**
+	 * Aliases to PK's by table and column
+	 * @var array
+	 */
+	protected $arrRegistryAliases;
+
+	/**
 	 * Models by object hash
 	 * @var array
 	 */
@@ -83,16 +89,49 @@ class Registry implements \Countable
 	/**
 	 * Fetch a model by table name and primary key
 	 *
-	 * @param string  $strTable The table name
-	 * @param integer $intPk    The primary key
+	 * @param string  $strTable     The table name
+	 * @param mixed   $varKey       The key
+	 * @param string  $strColumn    The column name (by default: PK)
 	 *
 	 * @return \Model|null The model or null
 	 */
-	public function fetch($strTable, $intPk)
+	public function fetch($strTable, $varKey, $strColumn = null)
 	{
-		if (isset($this->arrRegistry[$strTable][$intPk]))
+		// Default is PK and is the most common case
+		if ($strColumn === null)
 		{
-			return $this->arrRegistry[$strTable][$intPk];
+			if (isset($this->arrRegistry[$strTable][$varKey]))
+			{
+				return $this->arrRegistry[$strTable][$varKey];
+			}
+
+			return null;
+		}
+
+		/** @var \Model $strClass */
+		$strClass = \Model::getClassFromTable($strTable);
+		$strPk = $strClass::getPk();
+
+		// Possible that one passed $strColumn === $strPk
+		if ($strColumn === $strPk)
+		{
+			if (isset($this->arrRegistry[$strTable][$varKey]))
+			{
+				return $this->arrRegistry[$strTable][$varKey];
+			}
+
+			return null;
+		}
+
+		// Try to find in aliases
+		if (isset($this->arrRegistryAliases[$strTable][$strColumn][$varKey]))
+		{
+			$strPk = $this->arrRegistryAliases[$strTable][$strColumn][$varKey];
+
+			if (isset($this->arrRegistry[$strTable][$strPk]))
+			{
+				return $this->arrRegistry[$strTable][$strPk];
+			}
 		}
 
 		return null;
@@ -121,19 +160,26 @@ class Registry implements \Countable
 		if (!is_array($this->arrRegistry[$strTable]))
 		{
 			$this->arrRegistry[$strTable] = array();
+			$this->arrRegistryAliases[$strTable] = array();
 		}
 
 		$strPk = $objModel->getPk();
-		$intPk = $objModel->$strPk;
+		$varPk = $objModel->$strPk;
 
 		// Another model object is pointing to the DB record already
-		if (isset($this->arrRegistry[$strTable][$intPk]))
+		if (isset($this->arrRegistry[$strTable][$varPk]))
 		{
-			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($intPk)");
+			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($varPk)");
 		}
 
 		$this->arrIdentities[$intObjectId] = $objModel;
-		$this->arrRegistry[$strTable][$intPk] = $objModel;
+		$this->arrRegistry[$strTable][$varPk] = $objModel;
+
+		// Also store aliases
+		foreach ($objModel->getUniqueFields() as $strColumn)
+		{
+			$this->arrRegistryAliases[$strTable][$strColumn][$objModel->$strColumn] = $varPk;
+		}
 	}
 
 
@@ -158,6 +204,12 @@ class Registry implements \Countable
 
 		unset($this->arrIdentities[$intObjectId]);
 		unset($this->arrRegistry[$strTable][$intPk]);
+
+		// Unset aliases
+		foreach ($objModel->getUniqueFields() as $strColumn)
+		{
+			unset($this->arrRegistryAliases[$strTable][$strColumn][$objModel->$strColumn]);
+		}
 	}
 
 
