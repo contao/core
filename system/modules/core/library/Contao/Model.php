@@ -871,23 +871,6 @@ abstract class Model
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		// Try to load from the registry
-		if (empty($arrOptions))
-		{
-			$arrColumn = (array) $strColumn;
-
-			if (count($arrColumn) == 1 && $arrColumn[0] == static::$strPk)
-			{
-				$intId = is_array($varValue) ? $varValue[0] : $varValue;
-				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
-
-				if ($objModel !== null)
-				{
-					return $objModel;
-				}
-			}
-		}
-
 		$arrOptions = array_merge
 		(
 			array
@@ -1020,6 +1003,25 @@ abstract class Model
 		if (static::$strTable == '')
 		{
 			return null;
+		}
+
+		if ($arrOptions['return'] === 'Model')
+		{
+			$arrColumn = (array) $arrOptions['column'];
+
+			if (count($arrColumn) == 1)
+			{
+				if ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields()))
+				{
+					$intId = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+					$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId, $arrColumn[0]);
+
+					if ($objModel !== null)
+					{
+						return $objModel;
+					}
+				}
+			}
 		}
 
 		$arrOptions['table'] = static::$strTable;
