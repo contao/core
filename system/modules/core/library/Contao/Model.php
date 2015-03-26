@@ -258,6 +258,25 @@ abstract class Model
 
 
 	/**
+	 * Return an array of unique field/column names
+	 * Do not include the PK here as this is handled separately
+	 *
+	 * @return array
+	 */
+	public static function getUniqueFields()
+	{
+		$objDca = \DcaExtractor::getInstance(static::getTable());
+
+		if ($objDca->hasUniqueFields())
+		{
+			return $objDca->getUniqueFields();
+		}
+
+		return array();
+	}
+
+
+	/**
 	 * Return the name of the related table
 	 *
 	 * @return string The table name
