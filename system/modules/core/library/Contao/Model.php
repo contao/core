@@ -916,13 +916,22 @@ abstract class Model
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
+		$blnModel = false;
+
+		$arrColumn = (array) $strColumn;
+
+		if (count($arrColumn) == 1 && ($arrColumn[0] === static::getPk() || in_array($arrColumn[0], static::getUniqueFields())))
+		{
+			$blnModel = true;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
 			(
 				'column' => $strColumn,
 				'value'  => $varValue,
-				'return' => 'Collection'
+				'return' => $blnModel ? 'Model' : 'Collection'
 			),
 
 			$arrOptions
