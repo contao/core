@@ -493,7 +493,7 @@ abstract class User extends \System
 		// Check whether account is not active yet or anymore
 		elseif ($this->start != '' || $this->stop != '')
 		{
-			$time = $time - ($time % 60);
+			$time = \Date::floorToMinute($time);
 
 			if ($this->start != '' && $this->start > $time)
 			{

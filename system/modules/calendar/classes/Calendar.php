@@ -291,7 +291,7 @@ class Calendar extends \Frontend
 		}
 
 		$arrProcessed = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		// Get all calendars
 		$objCalendar = \CalendarModel::findByProtected('');

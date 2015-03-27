@@ -95,7 +95,7 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileYearlyMenu()
 	{
 		$arrData = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate('mod_newsmenu_year');
@@ -150,7 +150,7 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileMonthlyMenu()
 	{
 		$arrData = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		// Get the dates
 		$objDates = $this->Database->query("SELECT FROM_UNIXTIME(date, '%Y') AS year, FROM_UNIXTIME(date, '%m') AS month, COUNT(*) AS count FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . ((!BE_USER_LOGGED_IN || TL_MODE == 'BE') ? " AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'" : "") . " GROUP BY year, month ORDER BY year DESC, month DESC");
@@ -213,7 +213,7 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileDailyMenu()
 	{
 		$arrData = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate('mod_newsmenu_day');

@@ -902,7 +902,7 @@ class Newsletter extends \Backend
 		}
 
 		$arrProcessed = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		// Get all channels
 		$objNewsletter = \NewsletterChannelModel::findAll();

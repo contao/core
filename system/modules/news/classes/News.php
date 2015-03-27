@@ -258,7 +258,7 @@ class News extends \Frontend
 		}
 
 		$arrProcessed = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		// Get all news archives
 		$objArchive = \NewsArchiveModel::findByProtected('');

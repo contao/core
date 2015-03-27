@@ -653,7 +653,7 @@ abstract class Backend extends \Controller
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
 	{
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 		$objDatabase = \Database::getInstance();
 
 		// Get published pages

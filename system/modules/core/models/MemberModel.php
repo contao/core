@@ -194,7 +194,7 @@ class MemberModel extends \Model
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		$arrColumns = array("$t.email=? AND $t.login='1' AND ($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.disable=''");
 

@@ -38,7 +38,7 @@ class ModuleFaq extends \Frontend
 		}
 
 		$arrProcessed = array();
-		$time = time() - (time() % 60);
+		$time = \Date::floorToMinute();
 
 		// Get all categories
 		$objFaq = \FaqCategoryModel::findAll();
