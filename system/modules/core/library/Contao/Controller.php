@@ -1590,11 +1590,11 @@ abstract class Controller extends \System
 									break;
 
 								case 'size':
-									$size = (int)$value;
+									$size = (int) $value;
 									break;
 
 								case 'template':
-									$strTemplate = preg_replace('([^a-z0-9_])i', '', $value);
+									$strTemplate = preg_replace('/[^a-z0-9_]/i', '', $value);
 									break;
 							}
 						}
@@ -1660,6 +1660,7 @@ abstract class Controller extends \System
 							{
 								$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
 							}
+
 							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 
