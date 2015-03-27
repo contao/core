@@ -728,13 +728,9 @@ abstract class Backend extends \Controller
 	/**
 	 * Add a breadcrumb menu to the page tree
 	 *
-<<<<<<< HEAD
-	 * @param string
+	 * @param string $strKey
 	 *
 	 * @throws \RuntimeException
-=======
-	 * @param string $strKey
->>>>>>> ide-compatibility
 	 */
 	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{

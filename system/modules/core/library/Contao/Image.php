@@ -374,7 +374,7 @@ class Image
 			. '-t' . $this->fileObj->mtime
 		), 0, 8);
 
-		return 'assets/images/' . substr($strCacheKey, -1) . '/' . $this->fileObj->filename	. '-' . $strCacheKey . '.' . $this->fileObj->extension;
+		return 'assets/images/' . substr($strCacheKey, -1) . '/' . $this->fileObj->filename . '-' . $strCacheKey . '.' . $this->fileObj->extension;
 	}
 
 

@@ -35,11 +35,11 @@ namespace Contao;
  * @property string  $meta
  *
  * @method static $this findByIdOrAlias()
+ * @method static $this findByPath()
  * @method static $this findOneBy()
  * @method static $this findOneByPid()
  * @method static $this findOneByTstamp()
  * @method static $this findOneByType()
- * @method static $this findOneByPath()
  * @method static $this findOneByExtension()
  * @method static $this findOneByHash()
  * @method static $this findOneByFound()
@@ -54,7 +54,6 @@ namespace Contao;
  * @method static \Model\Collection|\FilesModel findByPid()
  * @method static \Model\Collection|\FilesModel findByTstamp()
  * @method static \Model\Collection|\FilesModel findByType()
- * @method static \Model\Collection|\FilesModel findByPath()
  * @method static \Model\Collection|\FilesModel findByExtension()
  * @method static \Model\Collection|\FilesModel findByHash()
  * @method static \Model\Collection|\FilesModel findByFound()
