@@ -226,6 +226,12 @@ class FrontendIndex extends \Frontend
 		// Load the page object depending on its type
 		$objHandler = new $GLOBALS['TL_PTY'][$objPage->type]();
 
+		// Backup some globals (see #7659)
+		$arrHead = $GLOBALS['TL_HEAD'];
+		$arrBody = $GLOBALS['TL_BODY'];
+		$arrMootools = $GLOBALS['TL_MOOTOOLS'];
+		$arrJquery = $GLOBALS['TL_JQUERY'];
+
 		try
 		{
 			// Generate the page
@@ -247,6 +253,12 @@ class FrontendIndex extends \Frontend
 		}
 		catch (\UnusedArgumentsException $e)
 		{
+			// Restore the globals (see #7659)
+			$GLOBALS['TL_HEAD'] = $arrHead;
+			$GLOBALS['TL_BODY'] = $arrBody;
+			$GLOBALS['TL_MOOTOOLS'] = $arrMootools;
+			$GLOBALS['TL_JQUERY'] = $arrJquery;
+
 			// Render the error page (see #5570)
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId, null, null, true);
@@ -306,8 +318,8 @@ class FrontendIndex extends \Frontend
 		// Check for a mobile layout
 		if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 		{
-			$strCacheKey = md5($strCacheKey . '.mobile');
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+			$strMd5CacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{
@@ -318,8 +330,8 @@ class FrontendIndex extends \Frontend
 		// Check for a regular layout
 		if (!$blnFound)
 		{
-			$strCacheKey = md5($strCacheKey);
-			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
+			$strMd5CacheKey = md5($strCacheKey);
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
 
 			if (file_exists($strCacheFile))
 			{

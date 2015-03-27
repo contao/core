@@ -234,7 +234,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
+	 * @return \Model\Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{

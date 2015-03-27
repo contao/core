@@ -80,8 +80,8 @@ class MetaWizard extends \Widget
 
 		$this->import('Database');
 
-		// Only show the root page languages (see #7112)
-		$objRootLangs = $this->Database->query("SELECT language FROM tl_page WHERE type='root'");
+		// Only show the root page languages (see #7112, #7667)
+		$objRootLangs = $this->Database->query("SELECT REPLACE(language, '-', '_') AS language FROM tl_page WHERE type='root'");
 		$languages = array_intersect_key($languages, array_flip($objRootLangs->fetchEach('language')));
 
 		// Add the existing entries
