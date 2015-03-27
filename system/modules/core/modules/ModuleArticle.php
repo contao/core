@@ -262,6 +262,16 @@ class ModuleArticle extends \Module
 			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
 			$this->Template->gplusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
 		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['compileArticle']) && is_array($GLOBALS['TL_HOOKS']['compileArticle']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileArticle'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->Template, $this->arrData, $this);
+			}
+		}
 	}
 
 

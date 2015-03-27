@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### New
+Added the "compileArticle" hook (see #7686).
+
+### New
 Added the "picture" insert tag (see #7635 and #7718).
 
 ### Changed
