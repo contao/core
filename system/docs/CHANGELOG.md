@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.4.5 (2015-03-XX)
 --------------------------
 
+### Fixed
+Consider the `$blnCache` flag when caching insert tags (see #7700).
+
 ### Updated
 Updated TinyMCE to version 4.1.9 (see #7690).
 

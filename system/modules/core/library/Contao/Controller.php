@@ -676,7 +676,10 @@ abstract class Controller extends \System
 		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
-		static $arrCache = array();
+
+		// Create one cache per cache setting (see #7700)
+		static $arrItCache;
+		$arrCache = &$arrItCache[$blnCache];
 
 		for ($_rit=0, $_cnt=count($tags); $_rit<$_cnt; $_rit+=3)
 		{
