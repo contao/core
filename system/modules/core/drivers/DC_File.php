@@ -415,9 +415,9 @@ class DC_File extends \DataContainer implements \editable
 			}
 
 			// Convert date formats into timestamps
-			if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 			{
-				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$objDate = new \Date($varValue, \Date::getFormatFromRgxp($arrData['eval']['rgxp']));
 				$varValue = $objDate->tstamp;
 			}
 

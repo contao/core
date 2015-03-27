@@ -217,11 +217,11 @@ class ModulePersonalData extends \Module
 				$rgxp = $arrData['eval']['rgxp'];
 
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
-				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
+				if ($varValue != '' && in_array($rgxp, array('date', 'time', 'datim')))
 				{
 					try
 					{
-						$objDate = new \Date($varValue);
+						$objDate = new \Date($varValue, \Date::getFormatFromRgxp($rgxp));
 						$varValue = $objDate->tstamp;
 					}
 					catch (\OutOfBoundsException $e)

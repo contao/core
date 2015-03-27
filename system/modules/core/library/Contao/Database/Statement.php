@@ -254,7 +254,7 @@ abstract class Statement
 	{
 		$arrParams = func_get_args();
 
-		if (is_array($arrParams[0]))
+		if (!empty($arrParams) && is_array($arrParams[0]))
 		{
 			$arrParams = array_values($arrParams[0]);
 		}

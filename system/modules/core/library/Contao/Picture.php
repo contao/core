@@ -82,6 +82,7 @@ class Picture
 			$file = new \File(rawurldecode($file), true);
 		}
 
+		$imageSize = null;
 		$picture = new static($file);
 
 		// tl_image_size ID as resize mode
@@ -106,16 +107,16 @@ class Picture
 		{
 			$size = $size + array(0, 0, 'crop');
 
-			$imageSize = new \stdClass;
+			$imageSize = new \stdClass();
 			$imageSize->width = $size[0];
 			$imageSize->height = $size[1];
 			$imageSize->resizeMode = $size[2];
-			$imageSize->zoomLevel = 0;
+			$imageSize->zoom = 0;
 		}
 
 		$picture->setImageSize($imageSize);
 
-		if (!empty($imageSize->id))
+		if ($imageSize !== null && !empty($imageSize->id))
 		{
 			$picture->setImageSizeItems(\ImageSizeItemModel::findVisibleByPid($imageSize->id, array('order'=>'sorting ASC')));
 		}

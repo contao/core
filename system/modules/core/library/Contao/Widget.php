@@ -1451,9 +1451,9 @@ abstract class Widget extends \BaseTemplate
 		$arrAttributes['value'] = deserialize($varValue);
 
 		// Convert timestamps
-		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
+		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
-			$objDate = new \Date($varValue);
+			$objDate = new \Date($varValue, \Date::getFormatFromRgxp($arrData['eval']['rgxp']));
 			$arrAttributes['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
