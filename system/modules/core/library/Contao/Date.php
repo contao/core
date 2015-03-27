@@ -670,4 +670,22 @@ class Date
 
 		return $strReturn;
 	}
+
+
+	/**
+	 * Round a UNIX timestamp to the full minute
+	 *
+	 * @param integer $intTime The timestamp
+	 *
+	 * @return integer The rounded timestamp
+	 */
+	public static function floorToMinute($intTime=null)
+	{
+		if ($intTime === null)
+		{
+			$intTime = time();
+		}
+
+		return $intTime - ($intTime % 60);
+	}
 }

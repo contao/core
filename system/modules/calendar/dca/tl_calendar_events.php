@@ -52,7 +52,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'alias' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -1050,7 +1051,7 @@ class tl_calendar_events extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_calendar_events SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_calendar_events SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

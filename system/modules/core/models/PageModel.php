@@ -274,8 +274,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findOneBy($arrColumns, $intId, $arrOptions);
@@ -302,11 +302,11 @@ class PageModel extends \Model
 
 			if (!empty($varLanguage))
 			{
-				$arrColumns[] = "($t.language IN('". implode("','", $varLanguage) ."') OR $t.fallback=1)";
+				$arrColumns[] = "($t.language IN('". implode("','", $varLanguage) ."') OR $t.fallback='1')";
 			}
 			else
 			{
-				$arrColumns[] = "$t.fallback=1";
+				$arrColumns[] = "$t.fallback='1'";
 			}
 
 			if (!isset($arrOptions['order']))
@@ -316,15 +316,15 @@ class PageModel extends \Model
 
 			if (!BE_USER_LOGGED_IN)
 			{
-				$time = time();
-				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+				$time = \Date::floorToMinute();
+				$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 			}
 
 			return static::findOneBy($arrColumns, $strHost, $arrOptions);
 		}
 		else
 		{
-			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND ($t.language=? OR $t.fallback=1)");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND ($t.language=? OR $t.fallback='1')");
 			$arrValues = array($strHost, $varLanguage);
 
 			if (!isset($arrOptions['order']))
@@ -334,8 +334,8 @@ class PageModel extends \Model
 
 			if (!BE_USER_LOGGED_IN)
 			{
-				$time = time();
-				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+				$time = \Date::floorToMinute();
+				$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 			}
 
 			return static::findOneBy($arrColumns, $arrValues, $arrOptions);
@@ -358,8 +358,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -386,8 +386,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -414,8 +414,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -442,8 +442,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -487,8 +487,8 @@ class PageModel extends \Model
 		// Check the publication status (see #4652)
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -516,8 +516,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findBy($arrColumns, $arrValues, $arrOptions);
@@ -535,9 +535,9 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
-		$time = time();
+		$time = \Date::floorToMinute();
 
-		$objSubpages = \Database::getInstance()->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p2.hide='' OR sitemap='map_always')" : " AND p2.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<$time) AND (p2.stop='' OR p2.stop>$time) AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p1.hide='' OR sitemap='map_always')" : " AND p1.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<$time) AND (p1.stop='' OR p1.stop>$time) AND p1.published=1" : "") . " ORDER BY p1.sorting")
+		$objSubpages = \Database::getInstance()->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p2.hide='' OR sitemap='map_always')" : " AND p2.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<='$time') AND (p2.stop='' OR p2.stop>'" . ($time + 60) . "') AND p2.published='1'" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p1.hide='' OR sitemap='map_always')" : " AND p1.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<='$time') AND (p1.stop='' OR p1.stop>'" . ($time + 60) . "') AND p1.published='1'" : "") . " ORDER BY p1.sorting")
 											   ->execute($intPid);
 
 		if ($objSubpages->numRows < 1)
@@ -574,8 +574,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -607,8 +607,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -631,12 +631,12 @@ class PageModel extends \Model
 	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+		$arrColumns = array("$t.dns=? AND $t.fallback='1'");
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findOneBy($arrColumns, $strHost, $arrOptions);
@@ -657,8 +657,8 @@ class PageModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findBy($arrColumns, 'root', $arrOptions);
@@ -833,8 +833,8 @@ class PageModel extends \Model
 			$this->adminEmail = $objParentPage->adminEmail;
 
 			// Store whether the root page has been published
-			$time = time();
-			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
+			$time = \Date::floorToMinute();
+			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start <= $time) && ($objParentPage->stop == '' || $objParentPage->stop > ($time + 60)));
 			$this->rootIsFallback = true;
 			$this->rootUseSSL = $objParentPage->useSSL;
 			$this->rootFallbackLanguage = $objParentPage->language;

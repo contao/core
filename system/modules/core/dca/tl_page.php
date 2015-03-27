@@ -43,9 +43,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
 				'alias' => 'index',
-				'type' => 'index'
+				'pid,type,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -1697,7 +1696,7 @@ class tl_page extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_page SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_page SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

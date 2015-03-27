@@ -493,6 +493,8 @@ abstract class User extends \System
 		// Check whether account is not active yet or anymore
 		elseif ($this->start != '' || $this->stop != '')
 		{
+			$time = \Date::floorToMinute($time);
+
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
@@ -501,7 +503,7 @@ abstract class User extends \System
 				return false;
 			}
 
-			if ($this->stop != '' && $this->stop < $time)
+			if ($this->stop != '' && $this->stop <= ($time + 60))
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse(\Config::get('dateFormat'), $this->stop) . ')', __METHOD__, TL_ACCESS);

@@ -433,11 +433,11 @@ class BackendUser extends \User
 
 		// Merge permissions
 		$inherit = in_array($this->inherit, array('group', 'extend')) ? array_merge($always, $depends) : $always;
-		$time = time();
+		$time = \Date::floorToMinute();
 
 		foreach ((array) $this->groups as $id)
 		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
+			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!='1' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "')")
 									   ->limit(1)
 									   ->execute($id);
 

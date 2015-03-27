@@ -333,7 +333,7 @@ class Automator extends \System
 	 */
 	public function generateSitemap($intId=0)
 	{
-		$time = time();
+		$time = \Date::floorToMinute();
 		$objDatabase = \Database::getInstance();
 
 		$this->purgeXmlFiles();
@@ -360,7 +360,7 @@ class Automator extends \System
 			while ($objRoot->type != 'root' && $intId > 0);
 
 			// Make sure the page is published
-			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop < $time))
+			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop <= ($time + 60)))
 			{
 				return;
 			}
@@ -377,7 +377,7 @@ class Automator extends \System
 		// Get all published root pages
 		else
 		{
-			$objRoot = $objDatabase->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $objDatabase->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap='1' AND sitemapName!='' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1'");
 		}
 
 		// Return if there are no pages

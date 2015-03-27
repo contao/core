@@ -184,7 +184,7 @@ class Updater extends \Controller
 		if ($this->Database->fieldExists('news_featured', 'tl_module'))
 		{
 			$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
-			$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
+			$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured='1'");
 		}
 
 		// Other version 2.9 updates

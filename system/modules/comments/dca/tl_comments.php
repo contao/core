@@ -30,8 +30,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'source' => 'index',
-				'parent' => 'index'
+				'published' => 'index',
+				'source,parent,published' => 'index'
 			)
 		)
 	),
@@ -653,7 +653,7 @@ class tl_comments extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

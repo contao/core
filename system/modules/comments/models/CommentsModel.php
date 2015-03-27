@@ -114,7 +114,7 @@ class CommentsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		$arrOptions['limit']  = $intLimit;
@@ -125,7 +125,7 @@ class CommentsModel extends \Model
 			$arrOptions['order']  = ($blnDesc ? "$t.date DESC" : "$t.date");
 		}
 
-		return static::findBy($arrColumns, array($strSource, $intParent), $arrOptions);
+		return static::findBy($arrColumns, array($strSource, (int) $intParent), $arrOptions);
 	}
 
 
@@ -144,9 +144,9 @@ class CommentsModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
-		return static::countBy($arrColumns, array($strSource, $intParent));
+		return static::countBy($arrColumns, array($strSource, (int) $intParent));
 	}
 }

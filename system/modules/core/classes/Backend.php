@@ -653,11 +653,11 @@ abstract class Backend extends \Controller
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
 	{
-		$time = time();
+		$time = \Date::floorToMinute();
 		$objDatabase = \Database::getInstance();
 
 		// Get published pages
-		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
+		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' ORDER BY sorting")
 								->execute($pid);
 
 		if ($objPages->numRows < 1)
@@ -698,12 +698,12 @@ abstract class Backend extends \Controller
 				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
-					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
+					if ($objPages->published && ($objPages->start == '' || $objPages->start <= $time) && ($objPages->stop == '' || $objPages->stop > ($time + 60)))
 					{
 						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
 
 						// Get articles with teaser
-						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
+						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' AND showTeaser='1' ORDER BY sorting")
 												  ->execute($objPages->id);
 
 						while ($objArticle->next())

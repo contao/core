@@ -140,7 +140,7 @@ class FaqModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
@@ -162,7 +162,7 @@ class FaqModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -194,7 +194,7 @@ class FaqModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "$t.published=1";
+			$arrColumns[] = "$t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))

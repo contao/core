@@ -164,8 +164,8 @@ class ArticleModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		return static::findOneBy($arrColumns, $intId, $arrOptions);
@@ -189,8 +189,8 @@ class ArticleModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))
@@ -219,8 +219,8 @@ class ArticleModel extends \Model
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
 		if (!isset($arrOptions['order']))

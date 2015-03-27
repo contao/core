@@ -65,6 +65,9 @@ Prevent calling a page via ID if there is a page alias (see #7661).
 Use closures to lazy-load content elements in the news/event list (see #7614).
 
 ### Improved
+Optimized the database queries (see #7450 and #7710).
+
+### Improved
 Add a log entry if a back end user switches to another account (see #7441).
 
 ### Improved

@@ -36,7 +36,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid,published,sorting' => 'index'
 			)
 		)
 	),
@@ -496,7 +496,7 @@ class tl_faq extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();
