@@ -26,9 +26,6 @@ $GLOBALS['TL_DCA']['tl_comments_notify'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'source' => 'index', // FIXME: remove?
-				'parent' => 'index', // FIXME: remove?
-				'tokenConfirm' => 'index', // FIXME: remove?
 				'tokenRemove' => 'index',
 				'source,parent,tokenConfirm' => 'index'
 			)
