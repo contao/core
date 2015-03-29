@@ -64,8 +64,8 @@ class ModuleNewsList extends \ModuleNews
 	 */
 	protected function compile()
 	{
-		$offset = intval($this->skipFirst);
 		$limit = null;
+		$offset = intval($this->skipFirst);
 
 		// Maximum number of items
 		if ($this->numberOfItems > 0)
@@ -140,15 +140,7 @@ class ModuleNewsList extends \ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		// Get the items
-		if (isset($limit))
-		{
-			$objArticles = $this->fetchItems($this->news_archives, $blnFeatured, $limit, $offset);
-		}
-		else
-		{
-			$objArticles = $this->fetchItems($this->news_archives, $blnFeatured, 0, $offset);
-		}
+		$objArticles = $this->fetchItems($this->news_archives, $blnFeatured, ($limit ?: 0), $offset);
 
 		// Add the articles
 		if ($objArticles !== null)
@@ -159,13 +151,14 @@ class ModuleNewsList extends \ModuleNews
 		$this->Template->archives = $this->news_archives;
 	}
 
+
 	/**
-	 * Counts the total matching items
+	 * Count the total matching items
 	 *
-	 * @param   array $newsArchives
-	 * @param   boolean $blnFeatured
+	 * @param array $newsArchives
+	 * @param boolean $blnFeatured
 	 *
-	 * @return  int
+	 * @return integer
 	 */
 	protected function countItems($newsArchives, $blnFeatured)
 	{
@@ -174,9 +167,12 @@ class ModuleNewsList extends \ModuleNews
 		{
 			foreach ($GLOBALS['TL_HOOKS']['newsListCountItems'] as $callback)
 			{
-				$intResult = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $this);
+				if (($intResult = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $this)) === false)
+				{
+					continue;
+				}
 
-				if ($intResult !== false && is_int($intResult))
+				if (is_int($intResult))
 				{
 					return $intResult;
 				}
@@ -186,15 +182,16 @@ class ModuleNewsList extends \ModuleNews
 		return \NewsModel::countPublishedByPids($newsArchives, $blnFeatured);
 	}
 
+
 	/**
-	 * Fetches the matching items
+	 * Fetch the matching items
 	 *
-	 * @param   array $newsArchives
-	 * @param   boolean $blnFeatured
-	 * @param   int $limit
-	 * @param   int $offset
+	 * @param  array   $newsArchives
+	 * @param  boolean $blnFeatured
+	 * @param  integer $limit
+	 * @param  integer $offset
 	 *
-	 * @return  \Model\Collection|\NewsModel|null
+	 * @return \Model\Collection|\NewsModel|null
 	 */
 	protected function fetchItems($newsArchives, $blnFeatured, $limit, $offset)
 	{
@@ -203,9 +200,12 @@ class ModuleNewsList extends \ModuleNews
 		{
 			foreach ($GLOBALS['TL_HOOKS']['newsListFetchItems'] as $callback)
 			{
-				$objCollection = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $limit, $offset, $this);
+				if (($objCollection = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $limit, $offset, $this)) === false)
+				{
+					continue;
+				}
 
-				if ($objCollection !== false && ($objCollection === null || $objCollection instanceof \Model\Collection))
+				if ($objCollection === null || $objCollection instanceof \Model\Collection)
 				{
 					return $objCollection;
 				}

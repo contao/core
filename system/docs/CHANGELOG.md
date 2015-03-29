@@ -5,6 +5,9 @@ Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
 ### New
+Added the "newsListCountItems" and "newsListFetchItems" hooks (see #7694).
+
+### New
 Added the "compileArticle" hook (see #7686).
 
 ### New
