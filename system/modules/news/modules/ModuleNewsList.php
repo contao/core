@@ -64,8 +64,8 @@ class ModuleNewsList extends \ModuleNews
 	 */
 	protected function compile()
 	{
-		$offset = intval($this->skipFirst);
 		$limit = null;
+		$offset = intval($this->skipFirst);
 
 		// Maximum number of items
 		if ($this->numberOfItems > 0)
@@ -91,7 +91,7 @@ class ModuleNewsList extends \ModuleNews
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 
 		// Get the total number of items
-		$intTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
+		$intTotal = $this->countItems($this->news_archives, $blnFeatured);
 
 		if ($intTotal < 1)
 		{
@@ -140,15 +140,7 @@ class ModuleNewsList extends \ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		// Get the items
-		if (isset($limit))
-		{
-			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
-		}
-		else
-		{
-			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, 0, $offset);
-		}
+		$objArticles = $this->fetchItems($this->news_archives, $blnFeatured, ($limit ?: 0), $offset);
 
 		// Add the articles
 		if ($objArticles !== null)
@@ -157,5 +149,69 @@ class ModuleNewsList extends \ModuleNews
 		}
 
 		$this->Template->archives = $this->news_archives;
+	}
+
+
+	/**
+	 * Count the total matching items
+	 *
+	 * @param array $newsArchives
+	 * @param boolean $blnFeatured
+	 *
+	 * @return integer
+	 */
+	protected function countItems($newsArchives, $blnFeatured)
+	{
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['newsListCountItems']) && is_array($GLOBALS['TL_HOOKS']['newsListCountItems']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['newsListCountItems'] as $callback)
+			{
+				if (($intResult = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $this)) === false)
+				{
+					continue;
+				}
+
+				if (is_int($intResult))
+				{
+					return $intResult;
+				}
+			}
+		}
+
+		return \NewsModel::countPublishedByPids($newsArchives, $blnFeatured);
+	}
+
+
+	/**
+	 * Fetch the matching items
+	 *
+	 * @param  array   $newsArchives
+	 * @param  boolean $blnFeatured
+	 * @param  integer $limit
+	 * @param  integer $offset
+	 *
+	 * @return \Model\Collection|\NewsModel|null
+	 */
+	protected function fetchItems($newsArchives, $blnFeatured, $limit, $offset)
+	{
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['newsListFetchItems']) && is_array($GLOBALS['TL_HOOKS']['newsListFetchItems']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['newsListFetchItems'] as $callback)
+			{
+				if (($objCollection = \System::importStatic($callback[0])->$callback[1]($newsArchives, $blnFeatured, $limit, $offset, $this)) === false)
+				{
+					continue;
+				}
+
+				if ($objCollection === null || $objCollection instanceof \Model\Collection)
+				{
+					return $objCollection;
+				}
+			}
+		}
+
+		return \NewsModel::findPublishedByPids($newsArchives, $blnFeatured, $limit, $offset);
 	}
 }
