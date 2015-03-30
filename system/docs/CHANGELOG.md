@@ -38,7 +38,7 @@ Updated Colorbox to version 1.6.0.
 Updated jQuery to version 1.11.2.
 
 ### Updated
-Updated HTML5 Shiv to version 3.7.2.
+Updated HTML5Shiv to version 3.7.2.
 
 ### Updated
 Updated DropZone to version 3.12.0.
@@ -50,7 +50,7 @@ Updated the ACE editor to version 1.1.8.
 Also convert image links in TinyMCE to `{{file}}` insert tags (see #7581).
 
 ### New
-Support copying all records in the list view (see #7499).
+Support copying multiple records in the list view (see #7499).
 
 ### Fixed
 Do not strip opening arrow brackets when stripping tags (see #3998).
