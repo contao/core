@@ -97,23 +97,12 @@ class Registry implements \Countable
 	 */
 	public function fetch($strTable, $varKey, $strAlias = null)
 	{
-		// Default is searching by PK and is the most common case
-		if ($strAlias === null)
-		{
-			if (isset($this->arrRegistry[$strTable][$varKey]))
-			{
-				return $this->arrRegistry[$strTable][$varKey];
-			}
-
-			return null;
-		}
-
 		/** @var \Model $strClass */
 		$strClass = \Model::getClassFromTable($strTable);
 		$strPk = $strClass::getPk();
 
-		// Possible that one passed an alias that is === $strPk
-		if ($strAlias === $strPk)
+		// Default is searching by PK and is the most common case
+		if ($strAlias === null || $strAlias === $strPk)
 		{
 			if (isset($this->arrRegistry[$strTable][$varKey]))
 			{
