@@ -710,7 +710,7 @@ abstract class Model
 	public function onRegister(\Model\Registry $registry)
 	{
 		// Register aliases to unique fields
-		foreach ($this->getUniqueFields() as $strColumn)
+		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
 			if (!$registry->isAliasRegistered($this, $strColumn, $varAliasValue))
@@ -729,7 +729,7 @@ abstract class Model
 	public function onUnregister(\Model\Registry $registry)
 	{
 		// Unregister aliases to unique fields
-		foreach ($this->getUniqueFields() as $strColumn)
+		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
 			if ($registry->isAliasRegistered($this, $strColumn, $varAliasValue))
