@@ -226,4 +226,70 @@ class Registry implements \Countable
 
 		return isset($this->arrIdentities[$intObjectId]);
 	}
+
+
+	/**
+	 * Registers an alias for model
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+     *
+     * @throws \InvalidArgumentException If the alias is already registered
+	 */
+	public function registerAlias(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+		$strPk    = $objModel->getPk();
+		$varPk    = $objModel->$strPk;
+
+		if (isset($this->arrRegistryAliases[$strTable][$strAlias][$varValue]))
+		{
+			throw new \InvalidArgumentException("Cannot register already existing alias for $strTable::$strPk($varPk) (Alias/Value: $strAlias/$varValue)");
+		}
+
+		$this->arrRegistryAliases[$strTable][$strAlias][$varValue] = $varPk;
+	}
+
+
+	/**
+	 * Unregister an alias from the registry
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+	 *
+	 * @throws \InvalidArgumentException If the alias is not registered
+	 */
+	public function unregisterAlias(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+
+		if (!isset($this->arrRegistryAliases[$strTable][$strAlias][$varValue]))
+		{
+			$strPk    = $objModel->getPk();
+			$varPk    = $objModel->$strPk;
+			throw new \InvalidArgumentException("Cannot unregister non-existent alias for $strTable::$strPk($varPk) (Alias/Value: $strAlias/$varValue)");
+		}
+
+		unset($this->arrRegistryAliases[$strTable][$strAlias][$varValue]);
+	}
+
+
+
+	/**
+	 * Check if an alias is registered
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+	 *
+	 * @return boolean True if the model is registered
+	 */
+	public function isAliasRegistered(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+
+		return isset($this->arrRegistryAliases[$strTable][$strAlias][$varValue]);
+	}
 }
