@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### Changed
+Allow to copy and move newsletter recipients across channels (see #7570).
+
 ### New
 Added the "newsListCountItems" and "newsListFetchItems" hooks (see #7694).
 

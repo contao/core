@@ -71,6 +71,12 @@
       <trans-unit id="tl_newsletter_recipients.edit.1">
         <source>Edit recipient ID %s</source>
       </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.cut.0">
+        <source>Move recipient</source>
+      </trans-unit>
+      <trans-unit id="tl_newsletter_recipients.cut.1">
+        <source>Move recipient ID %s</source>
+      </trans-unit>
       <trans-unit id="tl_newsletter_recipients.copy.0">
         <source>Duplicate recipient</source>
       </trans-unit>
