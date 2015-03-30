@@ -713,7 +713,7 @@ abstract class Model
 		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
-			if (!$registry->isAliasRegistered($this, $strColumn, $varAliasValue))
+			if (!$registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
 			{
 				$registry->registerAlias($this, $strColumn, $varAliasValue);
 			}
@@ -732,7 +732,7 @@ abstract class Model
 		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
-			if ($registry->isAliasRegistered($this, $strColumn, $varAliasValue))
+			if ($registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
 			{
 				$registry->unregisterAlias($this, $strColumn, $varAliasValue);
 			}

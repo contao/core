@@ -280,7 +280,7 @@ class Registry implements \Countable
 	 *
 	 * @return boolean True if the model is registered
 	 */
-	public function isAliasRegistered(\Model $objModel, $strAlias, $varValue)
+	public function isRegisteredAlias(\Model $objModel, $strAlias, $varValue)
 	{
 		$strTable = $objModel->getTable();
 
