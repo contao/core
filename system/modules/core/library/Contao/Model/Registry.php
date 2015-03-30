@@ -113,9 +113,24 @@ class Registry implements \Countable
 		}
 
 		// Try to find in aliases
-		if (isset($this->arrRegistryAliases[$strTable][$strAlias][$varKey]))
+        return $this->fetchByAlias($strTable, $strAlias, $varKey);
+	}
+
+
+	/**
+	 * Fetch a model by an alias
+	 *
+	 * @param string  $strTable The table name
+	 * @param string  $strAlias The alias
+	 * @param mixed   $varValue The alias value
+	 *
+	 * @return \Model|null The model or null
+	 */
+	public function fetchByAlias($strTable, $strAlias, $varValue)
+	{
+		if (isset($this->arrRegistryAliases[$strTable][$strAlias][$varValue]))
 		{
-			$strPk = $this->arrRegistryAliases[$strTable][$strAlias][$varKey];
+			$strPk = $this->arrRegistryAliases[$strTable][$strAlias][$varValue];
 
 			if (isset($this->arrRegistry[$strTable][$strPk]))
 			{
