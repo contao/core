@@ -77,7 +77,7 @@ abstract class ModuleNews extends \Module
 	 * @param integer
 	 * @return string
 	 */
-	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
+	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0, $total=0)
 	{
 		global $objPage;
 
@@ -93,6 +93,7 @@ abstract class ModuleNews extends \Module
 		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
 		$objTemplate->archive = $objArticle->getRelated('pid');
 		$objTemplate->count = $intCount; // see #5708
+		$objTemplate->total = $total; //see #6822 
 		$objTemplate->text = '';
 
 		// Clean the RTE output
@@ -218,7 +219,7 @@ abstract class ModuleNews extends \Module
 
 		while ($objArticles->next())
 		{
-			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count, $limit);
 		}
 
 		return $arrArticles;
