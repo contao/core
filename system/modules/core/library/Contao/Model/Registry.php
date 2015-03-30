@@ -89,9 +89,9 @@ class Registry implements \Countable
 	/**
 	 * Fetch a model by table name and primary key
 	 *
-	 * @param string  $strTable     The table name
-	 * @param mixed   $varKey       The key
-	 * @param string  $strAlias     An optional alias
+	 * @param string  $strTable The table name
+	 * @param mixed   $varKey   The key
+	 * @param string  $strAlias An optional alias
 	 *
 	 * @return \Model|null The model or null
 	 */
