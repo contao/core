@@ -273,12 +273,7 @@ abstract class Model
 	{
 		$objDca = \DcaExtractor::getInstance(static::getTable());
 
-		if ($objDca->hasUniqueFields())
-		{
-			return $objDca->getUniqueFields();
-		}
-
-		return array();
+		return $objDca->getUniqueFields();
 	}
 
 
