@@ -91,14 +91,14 @@ class Registry implements \Countable
 	 *
 	 * @param string  $strTable     The table name
 	 * @param mixed   $varKey       The key
-	 * @param string  $strColumn    The column name (by default: PK)
+	 * @param string  $strAlias     An optional alias
 	 *
 	 * @return \Model|null The model or null
 	 */
-	public function fetch($strTable, $varKey, $strColumn = null)
+	public function fetch($strTable, $varKey, $strAlias = null)
 	{
-		// Default is PK and is the most common case
-		if ($strColumn === null)
+		// Default is searching by PK and is the most common case
+		if ($strAlias === null)
 		{
 			if (isset($this->arrRegistry[$strTable][$varKey]))
 			{
@@ -112,8 +112,8 @@ class Registry implements \Countable
 		$strClass = \Model::getClassFromTable($strTable);
 		$strPk = $strClass::getPk();
 
-		// Possible that one passed $strColumn === $strPk
-		if ($strColumn === $strPk)
+		// Possible that one passed an alias that is === $strPk
+		if ($strAlias === $strPk)
 		{
 			if (isset($this->arrRegistry[$strTable][$varKey]))
 			{
@@ -124,9 +124,9 @@ class Registry implements \Countable
 		}
 
 		// Try to find in aliases
-		if (isset($this->arrRegistryAliases[$strTable][$strColumn][$varKey]))
+		if (isset($this->arrRegistryAliases[$strTable][$strAlias][$varKey]))
 		{
-			$strPk = $this->arrRegistryAliases[$strTable][$strColumn][$varKey];
+			$strPk = $this->arrRegistryAliases[$strTable][$strAlias][$varKey];
 
 			if (isset($this->arrRegistry[$strTable][$strPk]))
 			{

@@ -513,7 +513,7 @@ class DcaExtractor extends \Controller
 			{
 				$this->arrKeys[$field] = $type;
 
-				if ($type === 'unique')
+				if ($type == 'unique')
 				{
 					$this->arrUniqueFields[] = $field;
 				}
