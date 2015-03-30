@@ -703,6 +703,44 @@ abstract class Model
 
 
 	/**
+	 * Called when the model is attached/registered to the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onRegister(\Model\Registry $registry)
+	{
+		// Register aliases to unique fields
+		foreach ($this->getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+			if (!$registry->isAliasRegistered($this, $strColumn, $varAliasValue))
+			{
+				$registry->registerAlias($this, $strColumn, $varAliasValue);
+			}
+		}
+	}
+
+
+	/**
+	 * Called when the model is detached/unregistered from the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onUnregister(\Model\Registry $registry)
+	{
+		// Unregister aliases to unique fields
+		foreach ($this->getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+			if ($registry->isAliasRegistered($this, $strColumn, $varAliasValue))
+			{
+				$registry->unregisterAlias($this, $strColumn, $varAliasValue);
+			}
+		}
+	}
+
+
+	/**
 	 * Prevent saving the model
 	 *
 	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry

@@ -175,11 +175,8 @@ class Registry implements \Countable
 		$this->arrIdentities[$intObjectId] = $objModel;
 		$this->arrRegistry[$strTable][$varPk] = $objModel;
 
-		// Also store aliases
-		foreach ($objModel->getUniqueFields() as $strColumn)
-		{
-			$this->arrRegistryAliases[$strTable][$strColumn][$objModel->$strColumn] = $varPk;
-		}
+		// Allow the model to modify the registry
+		$objModel->onRegister($this);
 	}
 
 
@@ -205,11 +202,8 @@ class Registry implements \Countable
 		unset($this->arrIdentities[$intObjectId]);
 		unset($this->arrRegistry[$strTable][$intPk]);
 
-		// Unset aliases
-		foreach ($objModel->getUniqueFields() as $strColumn)
-		{
-			unset($this->arrRegistryAliases[$strTable][$strColumn][$objModel->$strColumn]);
-		}
+		// Allow the model to modify the registry
+		$objModel->onUnregister($this);
 	}
 
 
