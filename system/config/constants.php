@@ -14,7 +14,7 @@
  */
 define('VERSION', '3.5');
 define('BUILD', '0-beta1');
-define('LONG_TERM_SUPPORT', false);
+define('LONG_TERM_SUPPORT', true);
 
 
 /**
