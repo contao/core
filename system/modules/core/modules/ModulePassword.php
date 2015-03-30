@@ -166,7 +166,7 @@ class ModulePassword extends \Module
 		$this->Template->email = specialchars($GLOBALS['TL_LANG']['MSC']['emailAddress']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
-		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
+		$this->Template->rowLast = 'row_' . $row . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
 		$this->Template->tableless = $this->tableless;
 	}
 

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-beta1 (2015-XX-XX)
 --------------------------------
 
+### New
+Add a front end module to change the password (see #7418).
+
 ### Changed
 Allow to copy and move newsletter recipients across channels (see #7570).
 

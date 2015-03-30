@@ -122,6 +122,7 @@ $GLOBALS['FE_MOD'] = array
 		'logout'         => 'ModuleLogout',
 		'personalData'   => 'ModulePersonalData',
 		'registration'   => 'ModuleRegistration',
+		'changePassword' => 'ModuleChangePassword',
 		'lostPassword'   => 'ModulePassword',
 		'closeAccount'   => 'ModuleCloseAccount'
 	),
