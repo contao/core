@@ -188,6 +188,7 @@ namespace  {
 	class ModuleArticlenav extends \Contao\ModuleArticlenav {}
 	class ModuleBooknav extends \Contao\ModuleBooknav {}
 	class ModuleBreadcrumb extends \Contao\ModuleBreadcrumb {}
+	class ModuleChangePassword extends \Contao\ModuleChangePassword {}
 	class ModuleCloseAccount extends \Contao\ModuleCloseAccount {}
 	class ModuleCustomnav extends \Contao\ModuleCustomnav {}
 	class ModuleFlash extends \Contao\ModuleFlash {}
