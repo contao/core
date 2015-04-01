@@ -2,11 +2,11 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->v2warning; ?>
+  <?= $this->v2warning ?>
 
   <ul>
     <?php foreach ($this->files as $file): ?>
-      <li><img src="<?php echo $file['icon']; ?>" width="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $file['href']; ?>" title="<?php echo $file['title']; ?>"><?php echo $file['link']; ?> <span class="size">(<?php echo $file['filesize']; ?>)</span></a></li>
+      <li><img src="<?= $file['icon'] ?>" width="18" height="18" alt="" class="mime_icon" /> <a href="<?= $file['href'] ?>" title="<?= $file['title'] ?>"><?= $file['link'] ?> <span class="size">(<?= $file['filesize'] ?>)</span></a></li>
     <?php endforeach; ?>
   </ul>
 

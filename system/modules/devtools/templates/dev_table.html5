@@ -1,35 +1,35 @@
-<?php echo '<?php' . "\n"; ?>
+<?= '<?php' . "\n" ?>
 
 /**
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package   <?php echo $this->package . "\n"; ?>
- * @author    <?php echo $this->author . "\n"; ?>
- * @license   <?php echo $this->license . "\n"; ?>
- * @copyright <?php echo $this->copyright . "\n"; ?>
+ * @package   <?= $this->package . "\n" ?>
+ * @author    <?= $this->author . "\n" ?>
+ * @license   <?= $this->license . "\n" ?>
+ * @copyright <?= $this->copyright . "\n" ?>
  */
 
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title'] = array('Title', 'Please enter the title.');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['title'] = array('Title', 'Please enter the title.');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title_legend'] = 'Title';
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['title_legend'] = 'Title';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['new']    = array('New ', 'Create a new ');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['show']   = array(' details', 'Show the details of  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['edit']   = array('Edit ', 'Edit  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['cut']    = array('Move ', 'Move  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['copy']   = array('Duplicate ', 'Duplicate  ID %s');
-$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'] = array('Delete ', 'Delete  ID %s');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['new']    = array('New ', 'Create a new ');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['show']   = array(' details', 'Show the details of  ID %s');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['edit']   = array('Edit ', 'Edit  ID %s');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['cut']    = array('Move ', 'Move  ID %s');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['copy']   = array('Duplicate ', 'Duplicate  ID %s');
+$GLOBALS['TL_LANG']['<?= $this->table ?>']['delete'] = array('Delete ', 'Delete  ID %s');

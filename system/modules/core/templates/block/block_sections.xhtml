@@ -2,9 +2,9 @@
 <div class="custom">
 
   <?php foreach ($this->sections as $key=>$section): ?>
-    <div id="<?php echo standardize($key, true); ?>">
+    <div id="<?= standardize($key, true) ?>">
       <div class="inside">
-        <?php echo $section; ?>
+        <?= $section ?>
       </div>
     </div>
   <?php endforeach; ?>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>">
+<html lang="<?= $this->language ?>">
 <head>
 
-  <meta charset="<?php echo $this->charset; ?>">
-  <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-  <base href="<?php echo $this->base; ?>">
+  <meta charset="<?= $this->charset ?>">
+  <title><?= $this->title ?> - Contao Open Source CMS <?= VERSION ?></title>
+  <base href="<?= $this->base ?>">
   <meta name="generator" content="Contao Open Source CMS">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -14,10 +14,10 @@
     $objCombiner->add('system/themes/'. $this->theme .'/popup.css');
     echo $objCombiner->getCombinedFile();
   ?>">
-  <!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
-  <?php echo $this->stylesheets; ?>
+  <!--[if IE]><link rel="stylesheet" href="<?= TL_ASSETS_URL ?>system/themes/<?= $this->theme ?>/iefixes.css"><![endif]-->
+  <?= $this->stylesheets ?>
 
-  <script><?php echo $this->getLocaleString(); ?></script>
+  <script><?= $this->getLocaleString() ?></script>
   <script src="<?php
     $objCombiner = new Combiner();
     $objCombiner->add('assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js', $GLOBALS['TL_ASSETS']['MOOTOOLS']);
@@ -25,60 +25,60 @@
     $objCombiner->add('assets/contao/js/core.js');
     echo $objCombiner->getCombinedFile();
   ?>"></script>
-  <script><?php echo $this->getDateString(); ?></script>
-  <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.min.js"></script><![endif]-->
+  <script><?= $this->getDateString() ?></script>
+  <?= $this->javascripts ?>
+  <!--[if lt IE 9]><script src="<?= TL_ASSETS_URL ?>assets/html5shiv/<?= $GLOBALS['TL_ASSETS']['HTML5SHIV'] ?>/html5shiv.min.js"></script><![endif]-->
 
 </head>
-<body class="<?php echo $this->ua; ?> popup">
+<body class="<?= $this->ua ?> popup">
 
   <div id="container">
     <div id="main">
       <table class="tl_help_table">
         <tr>
-          <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
-          <td><?php echo $this->ctime; ?></td>
+          <td class="tl_label"><?= $this->label_ctime ?>:</td>
+          <td><?= $this->ctime ?></td>
         </tr>
         <tr>
-          <td class="tl_label"><?php echo $this->label_mtime; ?>:</td>
-          <td><?php echo $this->mtime; ?></td>
+          <td class="tl_label"><?= $this->label_mtime ?>:</td>
+          <td><?= $this->mtime ?></td>
         </tr>
         <tr>
-          <td class="tl_label"><?php echo $this->label_atime; ?>:</td>
-          <td><?php echo $this->atime; ?></td>
+          <td class="tl_label"><?= $this->label_atime ?>:</td>
+          <td><?= $this->atime ?></td>
         </tr>
         <tr>
-          <td class="tl_label"><?php echo $this->label_path; ?>:</td>
-          <td><?php echo $this->path; ?></td>
+          <td class="tl_label"><?= $this->label_path ?>:</td>
+          <td><?= $this->path ?></td>
         </tr>
         <?php if ($this->uuid): ?>
           <tr>
-            <td class="tl_label"><?php echo $this->label_uuid; ?>:</td>
-            <td><?php echo $this->uuid; ?></td>
+            <td class="tl_label"><?= $this->label_uuid ?>:</td>
+            <td><?= $this->uuid ?></td>
           </tr>
         <?php endif; ?>
         <?php if ($this->filesize): ?>
           <tr>
-            <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
-            <td><?php echo $this->filesize; ?></td>
+            <td class="tl_label"><?= $this->label_filesize ?>:</td>
+            <td><?= $this->filesize ?></td>
           </tr>
         <?php endif; ?>
         <?php if ($this->src): ?>
           <tr>
-            <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>
-            <td><?php echo $this->width; ?> x <?php echo $this->height; ?></td>
+            <td class="tl_label"><?= $this->label_imagesize ?>:</td>
+            <td><?= $this->width ?> x <?= $this->height ?></td>
           </tr>
         <?php endif; ?>
       </table>
       <?php if ($this->href): ?>
         <div id="download">
-          <a href="<?php echo $this->href; ?>"><img src="<?php echo TL_ASSETS_URL; ?>assets/contao/images/<?php echo $this->icon; ?>" width="18" height="18" class="mime_icon"> <?php echo $this->download; ?></a>
+          <a href="<?= $this->href ?>"><img src="<?= TL_ASSETS_URL ?>assets/contao/images/<?= $this->icon ?>" width="18" height="18" class="mime_icon"> <?= $this->download ?></a>
         </div>
       <?php endif; ?>
       <?php if ($this->isImage): ?>
         <div id="preview">
-          <div class="checkerbox" style="width:<?php echo $this->width; ?>px;height:<?php echo $this->height; ?>px">
-            <img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
+          <div class="checkerbox" style="width:<?= $this->width ?>px;height:<?= $this->height ?>px">
+            <img src="<?= $this->src ?>" width="<?= $this->width ?>" height="<?= $this->height ?>" alt="">
           </div>
         </div>
       <?php endif; ?>

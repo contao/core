@@ -1,21 +1,21 @@
 
-<div class="<?php echo $this->class; ?> ce_accordion ce_text block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?= $this->class ?> ce_accordion ce_text block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
 
-  <div class="<?php echo $this->toggler; ?>"<?php if ($this->headlineStyle): ?> style="<?php echo $this->headlineStyle; ?>"<?php endif; ?>>
-    <?php echo $this->headline; ?>
+  <div class="<?= $this->toggler ?>"<?php if ($this->headlineStyle): ?> style="<?= $this->headlineStyle ?>"<?php endif; ?>>
+    <?= $this->headline ?>
   </div>
 
-  <div class="<?php echo $this->accordion; ?>"><div>
+  <div class="<?= $this->accordion ?>"><div>
 
     <?php if (!$this->addBefore): ?>
-      <?php echo $this->text; ?>
+      <?= $this->text ?>
     <?php endif; ?>
 
     <?php if ($this->addImage): ?>
-      <div class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
+      <div class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
         <?php if ($this->href): ?>
-          <a href="<?php echo $this->href; ?>"<?php if ($this->linkTitle): ?> title="<?php echo $this->linkTitle; ?>"<?php endif; ?><?php echo $this->attributes; ?>>
+          <a href="<?= $this->href ?>"<?php if ($this->linkTitle): ?> title="<?= $this->linkTitle ?>"<?php endif; ?><?= $this->attributes ?>>
         <?php endif; ?>
 
         <?php $this->insert('picture_default', $this->picture); ?>
@@ -25,14 +25,14 @@
         <?php endif; ?>
 
         <?php if ($this->caption): ?>
-          <div class="caption"><?php echo $this->caption; ?></div>
+          <div class="caption"><?= $this->caption ?></div>
         <?php endif; ?>
 
       </div>
     <?php endif; ?>
 
     <?php if ($this->addBefore): ?>
-      <?php echo $this->text; ?>
+      <?= $this->text ?>
     <?php endif; ?>
 
   </div></div>

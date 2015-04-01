@@ -3,22 +3,22 @@
 <?php $this->block('content'); ?>
 
   <?php if (empty($this->items)): ?>
-    <p class="empty"><?php echo $this->empty; ?></p>
+    <p class="empty"><?= $this->empty ?></p>
   <?php else: ?>
     <ul class="level_1">
       <?php foreach ($this->items as $year=>$months): ?>
         <li class="year submenu">
           <?php if ($year == $this->activeYear): ?>
-            <span class="active"><?php echo $year; ?></span>
+            <span class="active"><?= $year ?></span>
           <?php else: ?>
-            <a href="<?php echo $this->url; ?>year=<?php echo $year; ?>"><?php echo $year; ?></a>
+            <a href="<?= $this->url ?>year=<?= $year ?>"><?= $year ?></a>
           <?php endif; ?>
           <ul class="level_2">
             <?php foreach ($months as $month): ?>
               <?php if($month['isActive']): ?>
-                <li class="active<?php if ($month['class']): ?> <?php echo $month['class']; endif; ?>"><span class="active"><?php echo $month['link']; ?><?php if ($this->showQuantity): ?> (<?php echo $month['quantity']; ?>)<?php endif; ?></span></li>
+                <li class="active<?php if ($month['class']) echo ' ' . $month['class']; ?>"><span class="active"><?= $month['link'] ?><?php if ($this->showQuantity): ?> (<?= $month['quantity'] ?>)<?php endif; ?></span></li>
               <?php else: ?>
-                <li<?php if ($month['class']): ?> class="<?php echo $month['class']; ?>"<?php endif; ?>><a href="<?php echo $this->url; ?>month=<?php echo $month['date']; ?>" title="<?php echo $month['title']; ?>"><?php echo $month['link']; ?><?php if ($this->showQuantity): ?> (<?php echo $month['quantity']; ?>)<?php endif; ?></a></li>
+                <li<?php if ($month['class']): ?> class="<?= $month['class'] ?>"<?php endif; ?>><a href="<?= $this->url ?>month=<?= $month['date'] ?>" title="<?= $month['title'] ?>"><?= $month['link'] ?><?php if ($this->showQuantity): ?> (<?= $month['quantity'] ?>)<?php endif; ?></a></li>
               <?php endif; ?>
             <?php endforeach; ?>
           </ul>

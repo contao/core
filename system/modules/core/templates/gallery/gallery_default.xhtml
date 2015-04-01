@@ -1,17 +1,17 @@
 
-<ul class="cols_<?php echo $this->perRow; ?>">
+<ul class="cols_<?= $this->perRow ?>">
   <?php foreach ($this->body as $class=>$row): ?>
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>
-        <li class="<?php echo $class; ?> <?php echo $col->class; ?>">
-          <div class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>
+        <li class="<?= $class ?> <?= $col->class ?>">
+          <div class="image_container"<?php if ($col->margin): ?> style="<?= $col->margin ?>"<?php endif; ?>>
             <?php if ($col->href): ?>
-              <a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><?php $this->insert('picture_default', $col->picture); ?></a>
+              <a href="<?= $col->href ?>"<?= $col->attributes ?> title="<?= $col->alt ?>"><?php $this->insert('picture_default', $col->picture); ?></a>
             <?php else: ?>
               <?php $this->insert('picture_default', $col->picture); ?>
             <?php endif; ?>
             <?php if ($col->caption): ?>
-              <div class="caption"><?php echo $col->caption; ?></div>
+              <div class="caption"><?= $col->caption ?></div>
             <?php endif; ?>
           </div>
         </li>

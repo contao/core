@@ -1,31 +1,31 @@
 <?php $this->extend('form_row'); ?>
 
 <?php $this->block('field'); ?>
-  <fieldset id="ctrl_<?php echo $this->id; ?>" class="checkbox_container<?php if ($this->class) echo ' ' . $this->class; ?>">
+  <fieldset id="ctrl_<?= $this->id ?>" class="checkbox_container<?php if ($this->class) echo ' ' . $this->class; ?>">
 
     <?php if ($this->label): ?>
       <legend>
         <?php if ($this->mandatory): ?>
-          <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
+          <span class="invisible"><?= $this->mandatoryField ?></span> <?= $this->label ?><span class="mandatory">*</span>
         <?php else: ?>
-          <?php echo $this->label; ?>
+          <?= $this->label ?>
         <?php endif; ?>
       </legend>
     <?php endif; ?>
 
     <?php if ($this->hasErrors()): ?>
-      <p class="error"><?php echo $this->getErrorAsString(); ?></p>
+      <p class="error"><?= $this->getErrorAsString() ?></p>
     <?php endif; ?>
 
-    <input type="hidden" name="<?php echo $this->name; ?>" value="" />
+    <input type="hidden" name="<?= $this->name ?>" value="" />
 
     <?php foreach ($this->getOptions() as $option): ?>
-      <span><input type="checkbox" name="<?php echo $option['name']; ?>" id="opt_<?php echo $option['id']; ?>" class="checkbox" value="<?php echo $option['value']; ?>"<?php echo $option['checked']; ?><?php echo $option['attributes']; ?> /> <label id="lbl_<?php echo $option['id']; ?>" for="opt_<?php echo $option['id']; ?>"><?php echo $option['label']; ?></label></span>
+      <span><input type="checkbox" name="<?= $option['name'] ?>" id="opt_<?= $option['id'] ?>" class="checkbox" value="<?= $option['value'] ?>"<?= $option['checked'] ?><?= $option['attributes'] ?> /> <label id="lbl_<?= $option['id'] ?>" for="opt_<?= $option['id'] ?>"><?= $option['label'] ?></label></span>
     <?php endforeach; ?>
 
   </fieldset>
 
   <?php if ($this->addSubmit): ?>
-    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
+    <input type="submit" id="ctrl_<?= $this->id ?>_submit" class="submit" value="<?= $this->slabel ?>" />
   <?php endif; ?>
 <?php $this->endblock(); ?>

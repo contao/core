@@ -1,21 +1,21 @@
-<?php echo '<?php' . "\n"; ?>
+<?= '<?php' . "\n" ?>
 
 /**
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package   <?php echo $this->package . "\n"; ?>
- * @author    <?php echo $this->author . "\n"; ?>
- * @license   <?php echo $this->license . "\n"; ?>
- * @copyright <?php echo $this->copyright . "\n"; ?>
+ * @package   <?= $this->package . "\n" ?>
+ * @author    <?= $this->author . "\n" ?>
+ * @license   <?= $this->license . "\n" ?>
+ * @copyright <?= $this->copyright . "\n" ?>
  */
 
 
 /**
- * Table <?php echo $this->table . "\n"; ?>
+ * Table <?= $this->table . "\n" ?>
  */
-$GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
+$GLOBALS['TL_DCA']['<?= $this->table ?>'] = array
 (
 
 	// Config

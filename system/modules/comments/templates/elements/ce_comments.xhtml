@@ -2,8 +2,8 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo implode('', $this->comments); ?>
-  <?php echo $this->pagination; ?>
+  <?= implode('', $this->comments) ?>
+  <?= $this->pagination ?>
   <?php include $this->getTemplate('mod_comment_form', 'xhtml'); ?>
 
 <?php $this->endblock(); ?>

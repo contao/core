@@ -2,8 +2,8 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->events; ?>
+  <?= $this->events ?>
 
-  <?php echo $this->pagination; ?>
+  <?= $this->pagination ?>
 
 <?php $this->endblock(); ?>

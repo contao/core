@@ -3,33 +3,33 @@
 <?php $this->block('content'); ?>
 
   <!-- indexer::continue -->
-  <div id="<?php echo $this->flashId; ?>_container">
-    <?php echo $this->alt; ?>
+  <div id="<?= $this->flashId ?>_container">
+    <?= $this->alt ?>
   </div>
   <!-- indexer::stop -->
 
   <script>
     <?php if ($this->interactive): ?>
-      function <?php echo $this->flashId; ?>_DoFSCommand(command, args) {
-        <?php echo $this->fsCommand; ?>
+      function <?= $this->flashId ?>_DoFSCommand(command, args) {
+        <?= $this->fsCommand ?>
       }
     <?php endif; ?>
     if (Browser.Plugins.Flash.version > 0) {
-      new Swiff("<?php echo $this->href; ?>", {
-        id: "<?php echo $this->flashId; ?>",
-        width: <?php echo $this->width; ?>,
-        height: <?php echo $this->height; ?>,
+      new Swiff("<?= $this->href ?>", {
+        id: "<?= $this->flashId ?>",
+        width: <?= $this->width ?>,
+        height: <?= $this->height ?>,
         <?php if ($this->interactive): ?>
           properties : {
-            name: "<?php echo $this->flashId; ?>"
+            name: "<?= $this->flashId ?>"
           },
         <?php endif; ?>
         params : {
           wMode: "<?php if ($this->transparent): ?>transparent<?php else: ?>window<?php endif; ?>",
           allowFullScreen: true,
-          flashvars: "<?php echo $this->flashvars; ?>"
+          flashvars: "<?= $this->flashvars ?>"
         },
-        container: $('<?php echo $this->flashId; ?>_container')
+        container: $('<?= $this->flashId ?>_container')
       });
     }
   </script>

@@ -1,10 +1,10 @@
 
 <div class="w50">
-  <h3><?php echo $this->generateLabel(); echo $this->xlabel; ?></h3>
-  <?php echo $this->generateWithError(true); ?>
+  <h3><?= $this->generateLabel() . $this->xlabel ?></h3>
+  <?= $this->generateWithError(true) ?>
 </div>
 
 <div class="w50">
-  <h3><?php echo $this->generateConfirmationLabel(); ?></h3>
-  <?php echo $this->generateConfirmation(); ?>
+  <h3><?= $this->generateConfirmationLabel() ?></h3>
+  <?= $this->generateConfirmation() ?>
 </div>

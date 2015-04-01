@@ -3,12 +3,12 @@
   <picture>
     <!--[if IE 9]><video style="display: none;"><![endif]-->
     <?php foreach ($this->sources as $source): ?>
-      <source srcset="<?php echo $source['srcset'] ?>"<?php if (!empty($source['sizes'])): ?> sizes="<?php echo $source['sizes']; ?>"<?php endif; ?><?php if (!empty($source['media'])): ?> media="<?php echo $source['media']; ?>"<?php endif; ?>>
+      <source srcset="<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?>>
     <?php endforeach; ?>
     <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
 
-<img src="<?php echo $this->img['src']; ?>"<?php if ($this->img['srcset'] !== $this->img['src']): ?> srcset="<?php echo $this->img['srcset']; ?>"<?php endif; ?><?php if (!empty($this->img['sizes'])): ?> sizes="<?php echo $this->img['sizes']; ?>"<?php elseif (!$this->sources): ?> width="<?php echo $this->img['width']; ?>" height="<?php echo $this->img['height']; ?>"<?php endif; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?><?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?><?php echo $this->attributes; ?>>
+<img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?>>
 
 <?php if ($this->sources): ?>
   </picture>

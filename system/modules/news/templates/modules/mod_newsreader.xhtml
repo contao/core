@@ -2,17 +2,17 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->articles; ?>
+  <?= $this->articles ?>
 
   <!-- indexer::stop -->
-  <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+  <p class="back"><a href="<?= $this->referer ?>" title="<?= $this->back ?>"><?= $this->back ?></a></p>
   <!-- indexer::continue -->
 
   <?php if ($this->allowComments): ?>
     <div class="ce_comments block">
-      <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
-      <?php echo implode('', $this->comments); ?>
-      <?php echo $this->pagination; ?>
+      <<?= $this->hlc ?>><?= $this->addComment ?></<?= $this->hlc ?>>
+      <?= implode('', $this->comments) ?>
+      <?= $this->pagination ?>
       <?php include $this->getTemplate('mod_comment_form', 'xhtml'); ?>
     </div>
   <?php endif; ?>

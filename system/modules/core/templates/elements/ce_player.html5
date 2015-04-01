@@ -4,15 +4,15 @@
 
   <!-- indexer::stop -->
   <?php if ($this->isVideo): ?>
-    <video<?php echo $this->size; ?><?php if ($this->poster): ?> poster="<?php echo $this->poster; ?>" preload="none"<?php endif; ?><?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
+    <video<?= $this->size ?><?php if ($this->poster): ?> poster="<?= $this->poster ?>" preload="none"<?php endif; ?><?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
       <?php foreach ($this->files as $file): ?>
-        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" title="<?php echo $file->title; ?>">
+        <source type="<?= $file->mime ?>" src="<?= $file->path ?>" title="<?= $file->title ?>">
       <?php endforeach; ?>
     </video>
   <?php else: ?>
-    <audio<?php echo $this->size; ?> preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
+    <audio<?= $this->size ?> preload="none"<?php if ($this->autoplay): ?> autoplay<?php endif; ?> controls>
       <?php foreach ($this->files as $file): ?>
-        <source type="<?php echo $file->mime; ?>" src="<?php echo $file->path; ?>" title="<?php echo $file->title; ?>">
+        <source type="<?= $file->mime ?>" src="<?= $file->path ?>" title="<?= $file->title ?>">
       <?php endforeach; ?>
     </audio>
   <?php endif; ?>

@@ -1,28 +1,28 @@
 
-<div class="layout_full block<?php echo $this->class; ?>">
+<div class="layout_full block<?= $this->class ?>">
 
-  <h1><?php echo $this->newsHeadline; ?></h1>
+  <h1><?= $this->newsHeadline ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
+    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
   <?php endif; ?>
 
   <?php if ($this->hasSubHeadline): ?>
-    <h2><?php echo $this->subHeadline; ?></h2>
+    <h2><?= $this->subHeadline ?></h2>
   <?php endif; ?>
 
   <?php if ($this->text): ?>
-    <?php echo $this->text; ?>
+    <?= $this->text ?>
   <?php else: ?>
     <div class="ce_text block">
-      <?php echo $this->teaser; ?>
+      <?= $this->teaser ?>
     </div>
   <?php endif; ?>
 
   <?php if ($this->enclosure): ?>
     <div class="enclosure">
       <?php foreach ($this->enclosure as $enclosure): ?>
-        <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
+        <p><img src="<?= $enclosure['icon'] ?>" width="18" height="18" alt="<?= $enclosure['mime'] ?>" class="mime_icon"> <a href="<?= $enclosure['href'] ?>" title="<?= $enclosure['title'] ?>"><?= $enclosure['link'] ?> <span class="size">(<?= $enclosure['filesize'] ?>)</span></a></p>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>

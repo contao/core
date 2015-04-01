@@ -5,7 +5,7 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. $GLOBALS['TL_ASSETS']['SWIPE'] .'/css/sw
 
 ?>
 
-<script src="<?php echo TL_ASSETS_URL; ?>assets/swipe/<?php echo $GLOBALS['TL_ASSETS']['SWIPE']; ?>/js/swipe.min.js"></script>
+<script src="<?= TL_ASSETS_URL ?>assets/swipe/<?= $GLOBALS['TL_ASSETS']['SWIPE'] ?>/js/swipe.min.js"></script>
 <script>
   (function($) {
     $(document).ready(function() {

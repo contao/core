@@ -2,6 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-  <p class="<?php echo $this->type; ?> message"><?php echo $this->message; ?></p>
+  <p class="<?= $this->type ?> message"><?= $this->message ?></p>
 
 <?php $this->endblock(); ?>
