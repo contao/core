@@ -2,6 +2,8 @@ User-agent: *
 Disallow: /check/
 Disallow: /contao/
 Disallow: /system/
+Allow: /system/cron/cron.txt
+Allow: /system/modules/*/assets
 Disallow: /templates/
 Disallow: /vendor/
 Disallow: /share/index.php
