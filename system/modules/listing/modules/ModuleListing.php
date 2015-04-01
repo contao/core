@@ -178,12 +178,9 @@ class ModuleListing extends \Module
 
 		$strQuery .= $strWhere;
 
-		// Do not use $this in anonymous functions in PHP 5.3 (see #7078)
-		$table = $this->list_table;
-
 		// Cast date fields to int (see #5609)
-		$isInt = function($field) use($table) {
-			return $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'datim';
+		$isInt = function ($field) {
+			return $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'datim';
 		};
 
 		// Order by
