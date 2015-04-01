@@ -2,22 +2,22 @@
 
   <div class="submit_container<?php if ($this->class) echo ' ' . $this->class; ?>">
     <?php if ($this->src): ?>
-      <input type="image" src="<?php echo $this->src; ?>" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?php echo specialchars($this->slabel); ?>" alt="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+      <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
     <?php else: ?>
-      <input type="submit" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+      <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
     <?php endif; ?>
   </div>
 
 <?php else: ?>
 
-  <tr class="<?php echo $this->rowClass; ?>">
+  <tr class="<?= $this->rowClass ?>">
     <td class="col_0 col_first">&nbsp;</td>
     <td class="col_1 col_last">
       <div class="submit_container">
         <?php if ($this->src): ?>
-          <input type="image" src="<?php echo $this->src; ?>" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?php echo specialchars($this->slabel); ?>" alt="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+          <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
         <?php else: ?>
-          <input type="submit" id="ctrl_<?php echo $this->id; ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?php echo specialchars($this->slabel); ?>"<?php echo $this->getAttributes(); ?>>
+          <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
         <?php endif; ?>
       </div>
     </td>

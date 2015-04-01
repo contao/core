@@ -1,2 +1,2 @@
 
-  <?php echo $this->generateWithError(true); ?>
+  <?= $this->generateWithError(true) ?>

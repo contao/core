@@ -1,2 +1,2 @@
 
-<input type="hidden" name="<?php echo $this->name; ?>" value="<?php echo $this->value; ?>">
+<input type="hidden" name="<?= $this->name ?>" value="<?= $this->value ?>">

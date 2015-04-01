@@ -11,7 +11,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
 <head>
 
   <meta charset="utf-8">
-  <title><?php echo $lang->requestToken; ?></title>
+  <title><?= $lang->requestToken ?></title>
   <meta name="generator" content="Contao Open Source CMS">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -21,7 +21,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
   ?></style>
 
 </head>
-<body class="<?php echo Environment::get('agent')->class; ?>">
+<body class="<?= Environment::get('agent')->class ?>">
 
   <div id="header">
     <h1>Contao Open Source CMS</h1>
@@ -31,17 +31,17 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
 
     <div id="main">
 
-      <h2><?php echo $lang->requestToken; ?></h2>
+      <h2><?= $lang->requestToken ?></h2>
 
-      <h3><?php echo $lang->matter; ?></h3>
-      <p><?php echo $lang->invalidToken; ?></p>
+      <h3><?= $lang->matter ?></h3>
+      <p><?= $lang->invalidToken ?></p>
 
-      <h3><?php echo $lang->howToFix; ?></h3>
-      <p><?php echo $lang->tokenRetry; ?></p>
+      <h3><?= $lang->howToFix ?></h3>
+      <p><?= $lang->tokenRetry ?></p>
 
-      <h3><?php echo $lang->more; ?></h3>
-      <p><?php echo $lang->tokenExplainOne; ?></p>
-      <p><?php echo $lang->tokenExplainTwo; ?></p>
+      <h3><?= $lang->more ?></h3>
+      <p><?= $lang->tokenExplainOne ?></p>
+      <p><?= $lang->tokenExplainTwo ?></p>
 
     </div>
 

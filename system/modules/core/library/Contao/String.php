@@ -541,7 +541,7 @@ class String
 	 */
 	public static function uuidToBin($uuid)
 	{
-		return pack('H*', str_replace('-', '', $uuid));
+		return hex2bin(str_replace('-', '', $uuid));
 	}
 
 

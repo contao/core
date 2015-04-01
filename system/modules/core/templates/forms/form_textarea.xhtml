@@ -2,11 +2,11 @@
 
 <?php $this->block('label'); ?>
   <?php if ($this->label): ?>
-    <label for="ctrl_<?php echo $this->id; ?>"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
+    <label for="ctrl_<?= $this->id ?>"<?php if ($this->class): ?> class="<?= $this->class ?>"<?php endif; ?>>
       <?php if ($this->mandatory): ?>
-        <span class="invisible"><?php echo $this->mandatoryField; ?></span> <?php echo $this->label; ?><span class="mandatory">*</span>
+        <span class="invisible"><?= $this->mandatoryField ?></span> <?= $this->label ?><span class="mandatory">*</span>
       <?php else: ?>
-        <?php echo $this->label; ?>
+        <?= $this->label ?>
       <?php endif; ?>
     </label>
   <?php endif; ?>
@@ -14,12 +14,12 @@
 
 <?php $this->block('field'); ?>
   <?php if ($this->hasErrors()): ?>
-    <p class="error"><?php echo $this->getErrorAsString(); ?></p>
+    <p class="error"><?= $this->getErrorAsString() ?></p>
   <?php endif; ?>
 
-  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea<?php if ($this->class) echo ' ' . $this->class; ?>" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->getAttributes(); ?>><?php echo $this->value; ?></textarea>
+  <textarea name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="textarea<?php if ($this->class) echo ' ' . $this->class; ?>" rows="<?= $this->rows ?>" cols="<?= $this->cols ?>"<?= $this->getAttributes() ?>><?= $this->value ?></textarea>
 
   <?php if ($this->addSubmit): ?>
-    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>" />
+    <input type="submit" id="ctrl_<?= $this->id ?>_submit" class="submit" value="<?= $this->slabel ?>" />
   <?php endif; ?>
 <?php $this->endblock(); ?>

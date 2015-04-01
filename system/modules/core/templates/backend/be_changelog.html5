@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>">
+<html lang="<?= $this->language ?>">
 <head>
 
-  <meta charset="<?php echo $this->charset; ?>">
-  <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-  <base href="<?php echo $this->base; ?>">
+  <meta charset="<?= $this->charset ?>">
+  <title><?= $this->title ?> - Contao Open Source CMS <?= VERSION ?></title>
+  <base href="<?= $this->base ?>">
   <meta name="generator" content="Contao Open Source CMS">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -14,17 +14,17 @@
     $objCombiner->add('system/themes/'. $this->theme .'/changelog.css');
     echo $objCombiner->getCombinedFile();
   ?>">
-  <!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
-  <?php echo $this->stylesheets; ?>
+  <!--[if IE]><link rel="stylesheet" href="<?= TL_ASSETS_URL ?>system/themes/<?= $this->theme ?>/iefixes.css"><![endif]-->
+  <?= $this->stylesheets ?>
 
-  <script src="assets/mootools/core/<?php echo $GLOBALS['TL_ASSETS']['MOOTOOLS']; ?>/mootools.js"></script>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.min.js"></script><![endif]-->
+  <script src="assets/mootools/core/<?= $GLOBALS['TL_ASSETS']['MOOTOOLS'] ?>/mootools.js"></script>
+  <!--[if lt IE 9]><script src="<?= TL_ASSETS_URL ?>assets/html5shiv/<?= $GLOBALS['TL_ASSETS']['HTML5SHIV'] ?>/html5shiv.min.js"></script><![endif]-->
 
 </head>
-<body class="<?php echo $this->ua; ?>">
+<body class="<?= $this->ua ?>">
 
   <div id="changelog">
-    <?php echo $this->content; ?>
+    <?= $this->content ?>
   </div>
 
 </body>

@@ -1,30 +1,30 @@
-<?php echo $this->doctype; ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>"<?php if ($this->isRTL): ?> dir="rtl"<?php endif; ?>>
+<?= $this->doctype ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?= $this->language ?>" lang="<?= $this->language ?>"<?php if ($this->isRTL): ?> dir="rtl"<?php endif; ?>>
 <head>
 
   <?php $this->block('head'); ?>
-    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-    <title><?php echo $this->title; ?></title>
-    <base href="<?php echo $this->base; ?>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=<?= $this->charset ?>" />
+    <title><?= $this->title ?></title>
+    <base href="<?= $this->base ?>" />
 
     <?php $this->block('meta'); ?>
-      <meta name="robots" content="<?php echo $this->robots; ?>" />
-      <meta name="description" content="<?php echo $this->description; ?>" />
-      <meta name="keywords" content="<?php echo $this->keywords; ?>" />
+      <meta name="robots" content="<?= $this->robots ?>" />
+      <meta name="description" content="<?= $this->description ?>" />
+      <meta name="keywords" content="<?= $this->keywords ?>" />
       <meta name="generator" content="Contao Open Source CMS" />
       <meta http-equiv="Content-Style-Type" content="text/css" />
       <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <?php $this->endblock(); ?>
 
-    <?php echo $this->viewport; ?>
-    <?php echo $this->framework; ?>
-    <?php echo $this->stylesheets; ?>
-    <?php echo $this->mooScripts; ?>
-    <?php echo $this->head; ?>
+    <?= $this->viewport ?>
+    <?= $this->framework ?>
+    <?= $this->stylesheets ?>
+    <?= $this->mooScripts ?>
+    <?= $this->head ?>
   <?php $this->endblock(); ?>
 
 </head>
-<body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+<body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?= $this->onload ?>"<?php endif; ?>>
 
   <?php $this->block('body'); ?>
     <?php $this->sections('top'); ?>
@@ -35,7 +35,7 @@
         <?php if ($this->header): ?>
           <div id="header">
             <div class="inside">
-              <?php echo $this->header; ?>
+              <?= $this->header ?>
             </div>
           </div>
         <?php endif; ?>
@@ -49,7 +49,7 @@
           <?php $this->block('main'); ?>
             <div id="main">
               <div class="inside">
-                <?php echo $this->main; ?>
+                <?= $this->main ?>
               </div>
               <?php $this->sections('main'); ?>
             </div>
@@ -59,7 +59,7 @@
             <?php if ($this->left): ?>
               <div id="left">
                 <div class="inside">
-                  <?php echo $this->left; ?>
+                  <?= $this->left ?>
                 </div>
               </div>
             <?php endif; ?>
@@ -69,7 +69,7 @@
             <?php if ($this->right): ?>
               <div id="right">
                 <div class="inside">
-                  <?php echo $this->right; ?>
+                  <?= $this->right ?>
                 </div>
               </div>
             <?php endif; ?>
@@ -84,7 +84,7 @@
         <?php if ($this->footer): ?>
           <div id="footer">
             <div class="inside">
-              <?php echo $this->footer; ?>
+              <?= $this->footer ?>
             </div>
           </div>
         <?php endif; ?>
@@ -95,7 +95,7 @@
     <?php $this->sections('bottom'); ?>
   <?php $this->endblock(); ?>
 
-  <?php echo $this->mootools; ?>
+  <?= $this->mootools ?>
 
 </body>
 </html>

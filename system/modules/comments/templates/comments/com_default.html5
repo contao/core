@@ -1,19 +1,19 @@
 
-<div class="comment_default<?php echo $this->class; ?>" id="<?php echo $this->id; ?>">
+<div class="comment_default<?= $this->class ?>" id="<?= $this->id ?>">
 
-  <p class="info"><?php echo $this->by; ?> <?php if ($this->website): ?><a href="<?php echo $this->website; ?>" rel="nofollow" target="_blank"><?php endif; ?><?php echo $this->name; ?><?php if ($this->website): ?></a><?php endif; ?> | <time datetime="<?php echo $this->datetime; ?>" class="date"><?php echo $this->date; ?></time></p>
+  <p class="info"><?= $this->by ?> <?php if ($this->website): ?><a href="<?= $this->website ?>" rel="nofollow" target="_blank"><?php endif; ?><?= $this->name ?><?php if ($this->website): ?></a><?php endif; ?> | <time datetime="<?= $this->datetime ?>" class="date"><?= $this->date ?></time></p>
 
   <div class="comment">
-    <?php echo $this->comment; ?>
+    <?= $this->comment ?>
   </div>
 
   <?php if ($this->addReply): ?>
     <div class="reply">
 
-      <p class="info"><?php echo $this->rby; ?> <?php echo $this->author->name; ?></p>
+      <p class="info"><?= $this->rby ?> <?= $this->author->name ?></p>
 
       <div class="comment">
-        <?php echo $this->reply; ?>
+        <?= $this->reply ?>
       </div>
 
     </div>

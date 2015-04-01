@@ -1,15 +1,15 @@
 
-<div class="layout_latest arc_<?php echo $this->archive->id; ?> block<?php echo $this->class; ?>">
+<div class="layout_latest arc_<?= $this->archive->id ?> block<?= $this->class ?>">
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
+    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
   <?php endif; ?>
 
   <?php if ($this->addImage): ?>
-    <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?>>
+    <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
       <?php if ($this->href): ?>
-        <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+        <a href="<?= $this->href ?>"<?= $this->attributes ?> title="<?= $this->alt ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
@@ -19,20 +19,20 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption"><?php echo $this->caption; ?></figcaption>
+        <figcaption class="caption"><?= $this->caption ?></figcaption>
       <?php endif; ?>
 
     </figure>
   <?php endif; ?>
 
-  <h2><?php echo $this->linkHeadline; ?></h2>
+  <h2><?= $this->linkHeadline ?></h2>
 
   <div class="teaser">
-    <?php echo $this->teaser; ?>
+    <?= $this->teaser ?>
   </div>
 
   <?php if ($this->text || $this->teaser): ?>
-    <p class="more"><?php echo $this->more; ?></p>
+    <p class="more"><?= $this->more ?></p>
   <?php endif; ?>
 
 </div>

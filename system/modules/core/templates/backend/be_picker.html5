@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>">
+<html lang="<?= $this->language ?>">
 <head>
 
-  <meta charset="<?php echo $this->charset; ?>">
-  <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-  <base href="<?php echo $this->base; ?>">
+  <meta charset="<?= $this->charset ?>">
+  <title><?= $this->title ?> - Contao Open Source CMS <?= VERSION ?></title>
+  <base href="<?= $this->base ?>">
   <meta name="generator" content="Contao Open Source CMS">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -14,10 +14,10 @@
     $objCombiner->add('system/themes/'. $this->theme .'/main.css');
     echo $objCombiner->getCombinedFile();
   ?>">
-  <!--[if IE]><link rel="stylesheet" href="<?php echo TL_ASSETS_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
-  <?php echo $this->stylesheets; ?>
+  <!--[if IE]><link rel="stylesheet" href="<?= TL_ASSETS_URL ?>system/themes/<?= $this->theme ?>/iefixes.css"><![endif]-->
+  <?= $this->stylesheets ?>
 
-  <script><?php echo $this->getLocaleString(); ?></script>
+  <script><?= $this->getLocaleString() ?></script>
   <script src="<?php
     $objCombiner = new Combiner();
     $objCombiner->add('assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.js', $GLOBALS['TL_ASSETS']['MOOTOOLS']);
@@ -26,38 +26,38 @@
     $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
     echo $objCombiner->getCombinedFile();
   ?>"></script>
-  <script><?php echo $this->getDateString(); ?></script>
-  <?php echo $this->javascripts; ?>
-  <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.min.js"></script><![endif]-->
+  <script><?= $this->getDateString() ?></script>
+  <?= $this->javascripts ?>
+  <!--[if lt IE 9]><script src="<?= TL_ASSETS_URL ?>assets/html5shiv/<?= $GLOBALS['TL_ASSETS']['HTML5SHIV'] ?>/html5shiv.min.js"></script><![endif]-->
 
 </head>
-<body class="<?php echo $this->ua; ?> popup">
+<body class="<?= $this->ua ?> popup">
 
   <div id="container">
     <div id="main">
       <?php if ($this->managerHref || $this->switchHref): ?>
         <div id="manager">
           <?php if ($this->switchHref): ?>
-            <a href="<?php echo $this->switchHref; ?>" class="open"><?php echo $this->switch; ?></a>
+            <a href="<?= $this->switchHref ?>" class="open"><?= $this->switch ?></a>
           <?php endif; ?>
           <?php if ($this->managerHref): ?>
-            <a href="<?php echo $this->managerHref; ?>" class="open"><?php echo $this->manager; ?></a>
+            <a href="<?= $this->managerHref ?>" class="open"><?= $this->manager ?></a>
           <?php endif; ?>
         </div>
       <?php endif; ?>
       <?php if ($this->addSearch): ?>
-        <form action="<?php echo $this->action; ?>" method="post">
+        <form action="<?= $this->action ?>" method="post">
           <div id="search">
             <input type="hidden" name="FORM_SUBMIT" value="item_selector">
-            <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
-            <input type="text" name="keyword" id="keyword" value="<?php echo $this->value; ?>" class="tl_text<?php if ($this->value != ''): ?> active<?php endif; ?>">
-            <input type="submit" name="search" value="<?php echo $this->search; ?>" class="tl_submit">
+            <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
+            <input type="text" name="keyword" id="keyword" value="<?= $this->value ?>" class="tl_text<?php if ($this->value != ''): ?> active<?php endif; ?>">
+            <input type="submit" name="search" value="<?= $this->search ?>" class="tl_submit">
           </div>
         </form>
       <?php endif; ?>
       <div class="tl_listing_container tree_view" id="tl_listing">
-        <?php echo $this->breadcrumb; ?>
-        <?php echo $this->main; ?>
+        <?= $this->breadcrumb ?>
+        <?= $this->main ?>
       </div>
     </div>
   </div>

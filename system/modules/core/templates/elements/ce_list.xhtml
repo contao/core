@@ -2,10 +2,10 @@
 
 <?php $this->block('content'); ?>
 
-  <<?php echo $this->tag; ?>>
+  <<?= $this->tag ?>>
     <?php foreach ($this->items as $item): ?>
-      <li<?php if ($item['class']): ?> class="<?php echo $item['class']; ?>"<?php endif; ?>><?php echo $item['content']; ?></li>
+      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><?= $item['content'] ?></li>
     <?php endforeach; ?>
-  </<?php echo $this->tag; ?>>
+  </<?= $this->tag ?>>
 
 <?php $this->endblock(); ?>

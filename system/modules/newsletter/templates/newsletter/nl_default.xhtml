@@ -2,34 +2,34 @@
 
 <?php $this->block('content'); ?>
 
-  <form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post">
+  <form action="<?= $this->action ?>" id="<?= $this->formId ?>" method="post">
     <div class="formbody">
-      <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
+      <input type="hidden" name="FORM_SUBMIT" value="<?= $this->formId ?>" />
       <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
 
       <?php if ($this->message): ?>
-        <p class="<?php echo $this->mclass; ?>"><?php echo $this->message; ?></p>
+        <p class="<?= $this->mclass ?>"><?= $this->message ?></p>
       <?php endif; ?>
 
       <?php if (!$this->showChannels): ?>
         <?php foreach ($this->channels as $id=>$title): ?>
-          <input type="hidden" name="channels[]" value="<?php echo $id; ?>" />
+          <input type="hidden" name="channels[]" value="<?= $id ?>" />
         <?php endforeach; ?>
       <?php endif; ?>
 
-      <label for="ctrl_email_<?php echo $this->id; ?>" class="invisible"><?php echo $this->emailLabel; ?></label>
-      <input type="text" name="email" id="ctrl_email_<?php echo $this->id; ?>" class="text" value="<?php echo $this->email; ?>" />
+      <label for="ctrl_email_<?= $this->id ?>" class="invisible"><?= $this->emailLabel ?></label>
+      <input type="text" name="email" id="ctrl_email_<?= $this->id ?>" class="text" value="<?= $this->email ?>" />
 
       <?php if ($this->showChannels): ?>
-        <label for="ctrl_channels_<?php echo $this->id; ?>" class="invisible"><?php echo $this->channelsLabel; ?></label>
-        <div id="ctrl_channels_<?php echo $this->id; ?>" class="checkbox_container">
+        <label for="ctrl_channels_<?= $this->id ?>" class="invisible"><?= $this->channelsLabel ?></label>
+        <div id="ctrl_channels_<?= $this->id ?>" class="checkbox_container">
           <?php foreach ($this->channels as $id=>$title): ?>
-            <span><input type="checkbox" name="channels[]" id="opt_<?php echo $this->id; ?>_<?php echo $id; ?>" value="<?php echo $id; ?>" class="checkbox" /> <label for="opt_<?php echo $this->id; ?>_<?php echo $id; ?>"><?php echo $title; ?></label></span>
+            <span><input type="checkbox" name="channels[]" id="opt_<?= $this->id ?>_<?= $id ?>" value="<?= $id ?>" class="checkbox" /> <label for="opt_<?= $this->id ?>_<?= $id ?>"><?= $title ?></label></span>
           <?php endforeach; ?>
         </div>
       <?php endif; ?>
 
-      <input type="submit" name="submit" class="submit" value="<?php echo $this->submit; ?>" />
+      <input type="submit" name="submit" class="submit" value="<?= $this->submit ?>" />
 
     </div>
   </form>

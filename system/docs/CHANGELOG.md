@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.0-RC1 (2015-04-XX)
+------------------------------
+
+### Changed
+The templates now use short open tags.
+
+
 Version 3.5.0-beta1 (2015-03-30)
 --------------------------------
 

@@ -1,3 +1,3 @@
 
-  <h3><?php echo $this->generateLabel(); echo $this->xlabel; ?></h3>
-  <?php echo $this->generateWithError(true); ?>
+  <h3><?= $this->generateLabel() . $this->xlabel ?></h3>
+  <?= $this->generateWithError(true) ?>
