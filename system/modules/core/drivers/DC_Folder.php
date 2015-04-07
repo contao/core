@@ -1011,8 +1011,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
-  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
-  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
+  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>'.$objUploader->generateMarkup().'
 </div>
 
 </div>

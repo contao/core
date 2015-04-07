@@ -208,7 +208,8 @@ class FileUpload extends \Backend
         input.inject(div);
       }
     });
-  </script>';
+  </script>
+  <p class="tl_help tl_tip">' . sprintf($GLOBALS['TL_LANG']['tl_files']['fileupload'][1], \System::getReadableSize($this->getMaximumUploadSize()), \Config::get('gdMaxImgWidth') . 'x' . \Config::get('gdMaxImgHeight')) . '</p>';
 	}
 
 

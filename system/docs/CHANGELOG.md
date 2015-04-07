@@ -5,6 +5,9 @@ Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
 ### Improved
+Show the upload limits in the file manager (see #7389).
+
+### Improved
 Improve the model registry (see #7725).
 
 ### Changed

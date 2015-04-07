@@ -51,7 +51,7 @@
         <source>File upload</source>
       </trans-unit>
       <trans-unit id="tl_files.fileupload.1">
-        <source>Browse your local computer and select the files you want to upload to the server.</source>
+        <source>Select the files you want to upload to the server (maximum %s and %s pixel).</source>
       </trans-unit>
       <trans-unit id="tl_files.editor.0">
         <source>Source editor</source>

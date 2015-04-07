@@ -61,6 +61,7 @@ class DropZone extends \FileUpload
       });
       $$("div.tl_formbody_submit").setStyle("display", "none");
     });
-  </script>';
+  </script>
+  <p class="tl_help tl_tip">' . sprintf($GLOBALS['TL_LANG']['tl_files']['fileupload'][1], \System::getReadableSize($this->getMaximumUploadSize()), \Config::get('gdMaxImgWidth') . 'x' . \Config::get('gdMaxImgHeight')) . '</p>';
 	}
 }
