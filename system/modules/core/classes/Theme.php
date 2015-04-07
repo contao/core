@@ -512,7 +512,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets and tl_files
-						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style' || ($table == 'tl_files' && $name == 'path')) && strpos($value, 'files') !== false)
+						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style' || $table == 'tl_files') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
