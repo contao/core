@@ -264,8 +264,7 @@ abstract class Model
 
 
 	/**
-	 * Return an array of unique field/column names
-	 * Do not include the PK here as this is handled separately
+	 * Return an array of unique field/column names (without the PK)
 	 *
 	 * @return array
 	 */
@@ -698,7 +697,7 @@ abstract class Model
 
 
 	/**
-	 * Called when the model is attached/registered to the model registry
+	 * Called when the model is attached to the model registry
 	 *
 	 * @param \Model\Registry
 	 */
@@ -708,6 +707,7 @@ abstract class Model
 		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
+
 			if (!$registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
 			{
 				$registry->registerAlias($this, $strColumn, $varAliasValue);
@@ -717,7 +717,7 @@ abstract class Model
 
 
 	/**
-	 * Called when the model is detached/unregistered from the model registry
+	 * Called when the model is detached from the model registry
 	 *
 	 * @param \Model\Registry
 	 */
@@ -727,6 +727,7 @@ abstract class Model
 		foreach (static::getUniqueFields() as $strColumn)
 		{
 			$varAliasValue = $this->{$strColumn};
+
 			if ($registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
 			{
 				$registry->unregisterAlias($this, $strColumn, $varAliasValue);
@@ -928,12 +929,11 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
 		$blnModel = false;
-
 		$arrColumn = (array) $strColumn;
 
 		if (count($arrColumn) == 1 && ($arrColumn[0] === static::getPk() || in_array($arrColumn[0], static::getUniqueFields())))
@@ -1038,21 +1038,19 @@ abstract class Model
 			return null;
 		}
 
-		if ($arrOptions['return'] === 'Model')
+		// FIXME: what about line 1089?
+		if ($arrOptions['return'] == 'Model')
 		{
 			$arrColumn = (array) $arrOptions['column'];
 
-			if (count($arrColumn) == 1)
+			if (count($arrColumn) == 1 && ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields())))
 			{
-				if ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields()))
-				{
-					$intId = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
-					$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId, $arrColumn[0]);
+				$intId = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId, $arrColumn[0]);
 
-					if ($objModel !== null)
-					{
-						return $objModel;
-					}
+				if ($objModel !== null)
+				{
+					return $objModel; // FIXME: in line 1099, we are returning $objModel->mergeRow($objResult->row());
 				}
 			}
 		}
@@ -1198,6 +1196,7 @@ abstract class Model
 		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
 			static::$arrClassNames[$strTable] = $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+
 			return static::$arrClassNames[$strTable];
 		}
 		else
@@ -1210,6 +1209,7 @@ abstract class Model
 			}
 
 			static::$arrClassNames[$strTable] = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+
 			return static::$arrClassNames[$strTable];
 		}
 	}

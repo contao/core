@@ -497,7 +497,7 @@ class DcaExtractor extends \Controller
 					$this->arrOrderFields[] = $config['eval']['orderField'];
 				}
 
-				if (isset($config['eval']['unique']) && $config['eval']['unique'] === true)
+				if (isset($config['eval']['unique']) && $config['eval']['unique'])
 				{
 					$this->arrUniqueFields[] = $field;
 				}
