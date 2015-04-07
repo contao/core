@@ -126,7 +126,7 @@
         <source>Layout builder</source>
       </trans-unit>
       <trans-unit id="tl_layout.layout.css.1">
-        <source>Generates a responsive CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
+        <source>Generates a CSS layout based on the page layout settings. This component is required for the page layout generator to work!</source>
       </trans-unit>
       <trans-unit id="tl_layout.responsive.css.0">
         <source>Responsive layout</source>
