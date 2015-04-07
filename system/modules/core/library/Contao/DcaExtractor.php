@@ -69,6 +69,12 @@ class DcaExtractor extends \Controller
 	protected $arrOrderFields = array();
 
 	/**
+	 * Unique fields
+	 * @var array
+	 */
+	protected $arrUniqueFields = array();
+
+	/**
 	 * Keys
 	 * @var array
 	 */
@@ -205,6 +211,28 @@ class DcaExtractor extends \Controller
 	public function hasOrderFields()
 	{
 		return !empty($this->arrOrderFields);
+	}
+
+
+	/**
+	 * Return an array of unique columns
+	 *
+	 * @return array
+	 */
+	public function getUniqueFields()
+	{
+		return $this->arrUniqueFields;
+	}
+
+
+	/**
+	 * Return true if there are unique fields
+	 *
+	 * @return boolean True if there are unique fields
+	 */
+	public function hasUniqueFields()
+	{
+		return !empty($this->arrUniqueFields);
 	}
 
 
@@ -468,6 +496,11 @@ class DcaExtractor extends \Controller
 				{
 					$this->arrOrderFields[] = $config['eval']['orderField'];
 				}
+
+				if (isset($config['eval']['unique']) && $config['eval']['unique'] === true)
+				{
+					$this->arrUniqueFields[] = $field;
+				}
 			}
 		}
 
@@ -479,6 +512,11 @@ class DcaExtractor extends \Controller
 			foreach ($sql['keys'] as $field=>$type)
 			{
 				$this->arrKeys[$field] = $type;
+
+				if ($type == 'unique')
+				{
+					$this->arrUniqueFields[] = $field;
+				}
 			}
 		}
 
@@ -498,6 +536,7 @@ class DcaExtractor extends \Controller
 			}
 		}
 
+		$this->arrUniqueFields = array_unique($this->arrUniqueFields);
 		$this->blnIsDbTable = true;
 	}
 }
