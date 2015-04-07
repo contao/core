@@ -512,7 +512,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets and tl_files
-						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style' || $table == 'tl_files') && strpos($value, 'files') !== false)
+						elseif (($table == 'tl_style_sheet' || $table == 'tl_style' || $table == 'tl_files') && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -680,6 +680,7 @@ class Theme extends \Backend
 		$tables = $xml->appendChild($tables);
 
 		// Add the tables
+		$this->addTableTlFiles($xml, $tables, $objTheme);
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
@@ -690,9 +691,8 @@ class Theme extends \Backend
 		$strTmp = md5(uniqid(mt_rand(), true));
 		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
 
-		$this->addTableTlFiles($xml, $tables, $objTheme, $objArchive);
-
-		// Add the template files
+		// Add the files
+		$this->addFilesToArchive($objArchive, $objTheme->folders);
 		$this->addTemplatesToArchive($objArchive, $objTheme->templates);
 
 		// HOOK: add custom logic
@@ -713,6 +713,57 @@ class Theme extends \Backend
 		// Open the "save as …" dialogue
 		$objFile = new \File('system/tmp/'. $strTmp, true);
 		$objFile->sendToBrowser($strName . '.cto');
+	}
+
+
+	/**
+	 * Add the table tl_files
+     *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode                $tables
+	 * @param \Database\Result|object $objTheme
+	 */
+	protected function addTableTlFiles(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
+	{
+		// Add the table
+		$table = $xml->createElement('table');
+		$table->setAttribute('name', 'tl_files');
+		$table = $tables->appendChild($table);
+
+		// Load the DCA
+		$this->loadDataContainer('tl_files');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_files');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
+		$arrFolders = deserialize($objTheme->folders);
+
+		if (!empty($arrFolders) && is_array($arrFolders))
+		{
+			$arrFolders = array_map('bin2hex', $arrFolders);
+			$objFolders = $this->Database->execute("SELECT * FROM tl_files WHERE uuid IN(UNHEX('" . implode("'), UNHEX('", $arrFolders) . "'))");
+
+			foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
+			{
+				// Get all files
+				$objFiles = $this->Database->prepare("SELECT * FROM tl_files WHERE path LIKE ? AND type='file'")
+										   ->execute($strFolder . '/%');
+
+				// Add the rows
+				while ($objFiles->next())
+				{
+					$arrRow = $objFiles->row();
+
+					foreach (array('id', 'pid', 'tstamp', 'uuid', 'type', 'extension', 'found', 'name') as $key)
+					{
+						unset($arrRow[$key]);
+					}
+
+					$this->addDataRow($xml, $table, $arrRow, $arrOrder);
+				}
+			}
+		}
 	}
 
 
@@ -910,45 +961,6 @@ class Theme extends \Backend
 
 
 	/**
-	 * Add the table tl_files to the XML and the files to the archive
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
-	 * @param \ZipWriter
-	 */
-	protected function addTableTlFiles(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme, \ZipWriter $objArchive)
-	{
-		// Add the table
-		$table = $xml->createElement('table');
-		$table->setAttribute('name', 'tl_files');
-		$table = $tables->appendChild($table);
-
-		// Load the DCA
-		$this->loadDataContainer('tl_files');
-
-		// Get the order fields
-		$objDcaExtractor = \DcaExtractor::getInstance('tl_files');
-		$arrOrder = $objDcaExtractor->getOrderFields();
-
-		// Add the folders
-		$arrFolders = deserialize($objTheme->folders);
-
-		if (!empty($arrFolders) && is_array($arrFolders))
-		{
-			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
-
-			if ($objFolders !== null)
-			{
-				foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
-				{
-					$this->addFolderToArchive($objArchive, $strFolder, $xml, $table, $arrOrder);
-				}
-			}
-		}
-	}
-
-
-	/**
 	 * Add a data row to the XML document
 	 * @param \DOMDocument         $xml
 	 * @param \DOMNode|\DOMElement $table
@@ -1031,7 +1043,7 @@ class Theme extends \Backend
 	 * @param \ZipWriter $objArchive
 	 * @param string     $strFolder
 	 */
-	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder, \DOMDocument $xml, \DOMElement $table, array $arrOrder=array())
+	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
 	{
 		// Strip the custom upload folder name
 		$strFolder = preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strFolder);
@@ -1068,36 +1080,38 @@ class Theme extends \Backend
 				continue;
 			}
 
+			// Always store files in files and convert the directory upon import
 			if (is_dir(TL_ROOT .'/'. $strFolder .'/'. $strFile))
 			{
-				$this->addFolderToArchive($objArchive, $strFolder .'/'. $strFile, $xml, $table, $arrOrder);
+				$this->addFolderToArchive($objArchive, $strFolder .'/'. $strFile);
 			}
 			else
 			{
-				// Always store files in files and convert the directory upon import
 				$objArchive->addFile($strFolder .'/'. $strFile, $strTarget .'/'. $strFile);
+			}
+		}
+	}
 
-				$objModel = \FilesModel::findByPath($strFolder .'/'. $strFile);
 
-				$arrRow = array();
-				$objFile = new \File($strFolder .'/'. $strFile, true);
+	/**
+	 * Add the files to the archive
+	 *
+	 * @param \ZipWriter $objArchive
+	 * @param string     $strFolders
+	 */
+	protected function addFilesToArchive(\ZipWriter $objArchive, $strFolders)
+	{
+		// Add the folders
+		$arrFolders = deserialize($strFolders);
 
-				if ($objModel !== null)
-				{
-					$arrRow = $objModel->row();
+		if (!empty($arrFolders) && is_array($arrFolders))
+		{
+			$arrFolders = array_map('bin2hex', $arrFolders);
+			$objFolders = $this->Database->execute("SELECT * FROM tl_files WHERE uuid IN(UNHEX('" . implode("'), UNHEX('", $arrFolders) . "'))");
 
-					foreach (array('id', 'pid', 'tstamp', 'uuid', 'type', 'extension', 'found', 'name') as $key)
-					{
-						unset($arrRow[$key]);
-					}
-				}
-
-				// Always use files as directory and convert it upon import
-				$arrRow['path'] = $strTarget .'/'. $strFile;
-				$arrRow['hash'] = $objFile->hash;
-
-				// Add the row
-				$this->addDataRow($xml, $table, $arrRow, $arrOrder);
+			foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
+			{
+				$this->addFolderToArchive($objArchive, $strFolder);
 			}
 		}
 	}
