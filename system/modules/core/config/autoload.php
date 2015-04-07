@@ -150,6 +150,7 @@ ClassLoader::addClasses(array
 	'Contao\Idna'                      => 'system/modules/core/library/Contao/Idna.php',
 	'Contao\Image'                     => 'system/modules/core/library/Contao/Image.php',
 	'Contao\Input'                     => 'system/modules/core/library/Contao/Input.php',
+	'Contao\InsertTags'                => 'system/modules/core/library/Contao/InsertTags.php',
 	'Contao\Message'                   => 'system/modules/core/library/Contao/Message.php',
 	'Contao\Model\Collection'          => 'system/modules/core/library/Contao/Model/Collection.php',
 	'Contao\Model\QueryBuilder'        => 'system/modules/core/library/Contao/Model/QueryBuilder.php',

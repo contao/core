@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Changed
+Moved the insert tag logic into a separate class.
+
 ### Improved
 Show the upload limits in the file manager (see #7389).
 
