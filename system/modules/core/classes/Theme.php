@@ -371,11 +371,11 @@ class Theme extends \Backend
 			$arrLocks = array
 			(
 				'tl_files'           => 'WRITE',
-				'tl_layout'          => 'WRITE',
-				'tl_module'          => 'WRITE',
+				'tl_theme'           => 'WRITE',
 				'tl_style_sheet'     => 'WRITE',
 				'tl_style'           => 'WRITE',
-				'tl_theme'           => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_layout'          => 'WRITE',
 				'tl_image_size'      => 'WRITE',
 				'tl_image_size_item' => 'WRITE'
 			);
@@ -389,6 +389,7 @@ class Theme extends \Backend
 			$this->Database->lockTables($arrLocks);
 
 			// Get the current auto_increment values
+			$tl_files = $this->Database->getNextId('tl_files');
 			$tl_theme = $this->Database->getNextId('tl_theme');
 			$tl_style_sheet = $this->Database->getNextId('tl_style_sheet');
 			$tl_style = $this->Database->getNextId('tl_style');
@@ -603,15 +604,14 @@ class Theme extends \Backend
 						new \Folder($set['templates']);
 					}
 
+					// Update tl_files (entries have been created by the Dbafs class)
 					if ($table == 'tl_files')
 					{
-						// Update the database
-						$this->Database->prepare("UPDATE ". $table ." %s WHERE path = ?")->set($set)->execute($set['path']);
+						$this->Database->prepare("UPDATE $table %s WHERE path=?")->set($set)->execute($set['path']);
 					}
 					else
 					{
-						// Update the database
-						$this->Database->prepare("INSERT INTO ". $table ." %s")->set($set)->execute();
+						$this->Database->prepare("INSERT INTO $table %s")->set($set)->execute();
 					}
 				}
 			}
@@ -637,7 +637,7 @@ class Theme extends \Backend
 				}
 			}
 
-			unset($tl_theme, $tl_style_sheet, $tl_style, $tl_module, $tl_layout, $tl_image_size, $tl_image_size_item);
+			unset($tl_files, $tl_theme, $tl_style_sheet, $tl_style, $tl_module, $tl_layout, $tl_image_size, $tl_image_size_item);
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -682,9 +682,9 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
-		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
@@ -950,11 +950,10 @@ class Theme extends \Backend
 
 	/**
 	 * Add a data row to the XML document
-
-	 * @param \DOMDocument            $xml
-	 * @param \DOMNode|\DOMElement    $table
-	 * @param \Database\Result|object $objData
-	 * @param array                   $arrOrder
+	 * @param \DOMDocument         $xml
+	 * @param \DOMNode|\DOMElement $table
+	 * @param array                $arrRow
+	 * @param array                $arrOrder
 	 */
 	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, array $arrRow, array $arrOrder=array())
 	{
@@ -1086,6 +1085,7 @@ class Theme extends \Backend
 				if ($objModel !== null)
 				{
 					$arrRow = $objModel->row();
+
 					foreach (array('id', 'pid', 'tstamp', 'uuid', 'type', 'extension', 'found', 'name') as $key)
 					{
 						unset($arrRow[$key]);
