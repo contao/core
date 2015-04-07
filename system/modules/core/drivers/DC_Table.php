@@ -1233,7 +1233,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						if (is_numeric($newPID))
 						{
 							$objNextSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE pid=? AND sorting>?")
-											  				 ->execute($newPID, $curSorting);
+															 ->execute($newPID, $curSorting);
 
 							// Select sorting value of the next record
 							if ($objNextSorting->sorting !== null)
@@ -1324,7 +1324,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$objCurrentRecord = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 												   ->limit(1)
-											 	   ->execute($this->intId);
+												   ->execute($this->intId);
 
 				// Select current record
 				if ($objCurrentRecord->numRows)
@@ -1597,7 +1597,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	{
 		$objRecords = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 									 ->limit(1)
-								 	 ->execute($this->intId);
+									 ->execute($this->intId);
 
 		// Check whether there is a record
 		if ($objRecords->numRows < 1)
@@ -3530,7 +3530,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		// Get records
 		$objRows = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($hasSorting ? " ORDER BY sorting" : ""))
-							 	  ->execute($id);
+								  ->execute($id);
 
 		while ($objRows->next())
 		{
@@ -3768,7 +3768,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		if ($table != $this->strTable)
 		{
 			$objChilds = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=?" . ($blnHasSorting ? " ORDER BY sorting" : ''))
-							 			->execute($id);
+										->execute($id);
 
 			if ($objChilds->numRows)
 			{

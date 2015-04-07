@@ -241,10 +241,10 @@ abstract class DataContainer extends \Backend
 		{
 			if (is_array($this->varValue))
 			{
-				 if (empty($this->varValue))
-				 {
-				 	$arrData['eval']['required'] = true;
-				 }
+				if (empty($this->varValue))
+				{
+					$arrData['eval']['required'] = true;
+				}
 			}
 			else
 			{

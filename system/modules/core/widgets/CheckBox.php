@@ -162,8 +162,8 @@ class CheckBox extends \Widget
 		}
 		else
 		{
-	        return sprintf('<div id="ctrl_%s" class="tl_checkbox_single_container%s"><input type="hidden" name="%s" value="">%s</div>%s',
-	        				$this->strId,
+			return sprintf('<div id="ctrl_%s" class="tl_checkbox_single_container%s"><input type="hidden" name="%s" value="">%s</div>%s',
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							$this->strName,
 							str_replace('<br></div><br>', '</div>', implode('<br>', $arrOptions)),

@@ -162,10 +162,10 @@ class ModulePersonalData extends \Module
 			{
 				if (is_array($this->User->$field))
 				{
-					 if (empty($this->User->$field))
-					 {
-					 	$arrData['eval']['required'] = true;
-					 }
+					if (empty($this->User->$field))
+					{
+						$arrData['eval']['required'] = true;
+					}
 				}
 				else
 				{
