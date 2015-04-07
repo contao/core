@@ -263,7 +263,7 @@ class Registry implements \Countable
 	 *
 	 * @throws \InvalidArgumentException If the alias is not registered
 	 */
-	public function RuntimeException(\Model $objModel, $strAlias, $varValue)
+	public function unregisterAlias(\Model $objModel, $strAlias, $varValue)
 	{
 		$strTable = $objModel->getTable();
 
