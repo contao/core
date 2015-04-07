@@ -35,6 +35,12 @@ class Registry implements \Countable
 	protected $arrRegistry;
 
 	/**
+	 * Aliases to PK's by table and column
+	 * @var array
+	 */
+	protected $arrAliases;
+
+	/**
 	 * Models by object hash
 	 * @var array
 	 */
@@ -84,15 +90,52 @@ class Registry implements \Countable
 	 * Fetch a model by table name and primary key
 	 *
 	 * @param string  $strTable The table name
-	 * @param integer $intPk    The primary key
+	 * @param mixed   $varKey   The key
+	 * @param string  $strAlias An optional alias
 	 *
 	 * @return \Model|null The model or null
 	 */
-	public function fetch($strTable, $intPk)
+	public function fetch($strTable, $varKey, $strAlias=null)
 	{
-		if (isset($this->arrRegistry[$strTable][$intPk]))
+		/** @var \Model $strClass */
+		$strClass = \Model::getClassFromTable($strTable);
+		$strPk    = $strClass::getPk();
+
+		// Search by PK (most common case)
+		if ($strAlias === null || $strAlias == $strPk)
 		{
-			return $this->arrRegistry[$strTable][$intPk];
+			if (isset($this->arrRegistry[$strTable][$varKey]))
+			{
+				return $this->arrRegistry[$strTable][$varKey];
+			}
+
+			return null;
+		}
+
+		// Try to find the model by one of its aliases
+		return $this->fetchByAlias($strTable, $strAlias, $varKey);
+	}
+
+
+	/**
+	 * Fetch a model by one of its aliases
+	 *
+	 * @param string  $strTable The table name
+	 * @param string  $strAlias The alias
+	 * @param mixed   $varValue The alias value
+	 *
+	 * @return \Model|null The model or null
+	 */
+	public function fetchByAlias($strTable, $strAlias, $varValue)
+	{
+		if (isset($this->arrAliases[$strTable][$strAlias][$varValue]))
+		{
+			$strPk = $this->arrAliases[$strTable][$strAlias][$varValue];
+
+			if (isset($this->arrRegistry[$strTable][$strPk]))
+			{
+				return $this->arrRegistry[$strTable][$strPk];
+			}
 		}
 
 		return null;
@@ -118,22 +161,30 @@ class Registry implements \Countable
 
 		$strTable = $objModel->getTable();
 
+		if (!is_array($this->arrAliases[$strTable]))
+		{
+			$this->arrAliases[$strTable] = array();
+		}
+
 		if (!is_array($this->arrRegistry[$strTable]))
 		{
 			$this->arrRegistry[$strTable] = array();
 		}
 
 		$strPk = $objModel->getPk();
-		$intPk = $objModel->$strPk;
+		$varPk = $objModel->$strPk;
 
 		// Another model object is pointing to the DB record already
-		if (isset($this->arrRegistry[$strTable][$intPk]))
+		if (isset($this->arrRegistry[$strTable][$varPk]))
 		{
-			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($intPk)");
+			throw new \RuntimeException("The registry already contains an instance for $strTable::$strPk($varPk)");
 		}
 
 		$this->arrIdentities[$intObjectId] = $objModel;
-		$this->arrRegistry[$strTable][$intPk] = $objModel;
+		$this->arrRegistry[$strTable][$varPk] = $objModel;
+
+		// Allow the model to modify the registry
+		$objModel->onRegister($this);
 	}
 
 
@@ -158,6 +209,9 @@ class Registry implements \Countable
 
 		unset($this->arrIdentities[$intObjectId]);
 		unset($this->arrRegistry[$strTable][$intPk]);
+
+		// Allow the model to modify the registry
+		$objModel->onUnregister($this);
 	}
 
 
@@ -173,5 +227,71 @@ class Registry implements \Countable
 		$intObjectId = spl_object_hash($objModel);
 
 		return isset($this->arrIdentities[$intObjectId]);
+	}
+
+
+	/**
+	 * Register an alias for a model
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+	 *
+	 * @throws \RuntimeException If the alias is already registered
+	 */
+	public function registerAlias(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+		$strPk    = $objModel->getPk();
+		$varPk    = $objModel->$strPk;
+
+		if (isset($this->arrAliases[$strTable][$strAlias][$varValue]))
+		{
+			throw new \RuntimeException("The registry already contains an alias for $strTable::$strPk($varPk) ($strAlias/$varValue)");
+		}
+
+		$this->arrAliases[$strTable][$strAlias][$varValue] = $varPk;
+	}
+
+
+	/**
+	 * Unregister an alias
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+	 *
+	 * @throws \InvalidArgumentException If the alias is not registered
+	 */
+	public function unregisterAlias(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+
+		if (!isset($this->arrAliases[$strTable][$strAlias][$varValue]))
+		{
+			$strPk = $objModel->getPk();
+			$varPk = $objModel->$strPk;
+
+			throw new \RuntimeException("The registry does not contain an alias for $strTable::$strPk($varPk) ($strAlias/$varValue)");
+		}
+
+		unset($this->arrAliases[$strTable][$strAlias][$varValue]);
+	}
+
+
+	/**
+	 * Check if an alias is registered
+	 *
+	 * @param \Model $objModel The model object
+	 * @param string $strAlias The alias name
+	 * @param mixed  $varValue The value of the alias
+	 *
+	 * @return boolean True if the alias is registered
+	 */
+	public function isRegisteredAlias(\Model $objModel, $strAlias, $varValue)
+	{
+		$strTable = $objModel->getTable();
+
+		return isset($this->arrAliases[$strTable][$strAlias][$varValue]);
 	}
 }

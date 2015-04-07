@@ -66,6 +66,12 @@ abstract class Model
 	protected static $strPk = 'id';
 
 	/**
+	 * Class name cache
+	 * @var array
+	 */
+	protected static $arrClassNames = array();
+
+	/**
 	 * Data
 	 * @var array
 	 */
@@ -254,6 +260,19 @@ abstract class Model
 	public static function getPk()
 	{
 		return static::$strPk;
+	}
+
+
+	/**
+	 * Return an array of unique field/column names (without the PK)
+	 *
+	 * @return array
+	 */
+	public static function getUniqueFields()
+	{
+		$objDca = \DcaExtractor::getInstance(static::getTable());
+
+		return $objDca->getUniqueFields();
 	}
 
 
@@ -678,6 +697,46 @@ abstract class Model
 
 
 	/**
+	 * Called when the model is attached to the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onRegister(\Model\Registry $registry)
+	{
+		// Register aliases to unique fields
+		foreach (static::getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+
+			if (!$registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
+			{
+				$registry->registerAlias($this, $strColumn, $varAliasValue);
+			}
+		}
+	}
+
+
+	/**
+	 * Called when the model is detached from the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onUnregister(\Model\Registry $registry)
+	{
+		// Unregister aliases to unique fields
+		foreach (static::getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+
+			if ($registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
+			{
+				$registry->unregisterAlias($this, $strColumn, $varAliasValue);
+			}
+		}
+	}
+
+
+	/**
 	 * Prevent saving the model
 	 *
 	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
@@ -846,23 +905,6 @@ abstract class Model
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		// Try to load from the registry
-		if (empty($arrOptions))
-		{
-			$arrColumn = (array) $strColumn;
-
-			if (count($arrColumn) == 1 && $arrColumn[0] == static::$strPk)
-			{
-				$intId = is_array($varValue) ? $varValue[0] : $varValue;
-				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
-
-				if ($objModel !== null)
-				{
-					return $objModel;
-				}
-			}
-		}
-
 		$arrOptions = array_merge
 		(
 			array
@@ -887,17 +929,25 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
+		$blnModel = false;
+		$arrColumn = (array) $strColumn;
+
+		if (count($arrColumn) == 1 && ($arrColumn[0] === static::getPk() || in_array($arrColumn[0], static::getUniqueFields())))
+		{
+			$blnModel = true;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
 			(
 				'column' => $strColumn,
 				'value'  => $varValue,
-				'return' => 'Collection'
+				'return' => $blnModel ? 'Model' : 'Collection'
 			),
 
 			$arrOptions
@@ -988,6 +1038,23 @@ abstract class Model
 			return null;
 		}
 
+		// Try to load from the registry
+		if ($arrOptions['return'] == 'Model')
+		{
+			$arrColumn = (array) $arrOptions['column'];
+
+			if (count($arrColumn) == 1 && ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields())))
+			{
+				$varKey = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varKey, $arrColumn[0]);
+
+				if ($objModel !== null)
+				{
+					return $objModel;
+				}
+			}
+		}
+
 		$arrOptions['table'] = static::$strTable;
 		$strQuery = static::buildFindQuery($arrOptions);
 
@@ -1019,13 +1086,10 @@ abstract class Model
 
 		$objResult = static::postFind($objResult);
 
+		// Try to load from the registry
 		if ($arrOptions['return'] == 'Model')
 		{
-			$strPk = static::$strPk;
-			$intPk = $objResult->$strPk;
-
-			// Try to load from the registry
-			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intPk);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $objResult->{static::$strPk});
 
 			if ($objModel !== null)
 			{
@@ -1121,9 +1185,16 @@ abstract class Model
 	 */
 	public static function getClassFromTable($strTable)
 	{
+		if (isset(static::$arrClassNames[$strTable]))
+		{
+			return static::$arrClassNames[$strTable];
+		}
+
 		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
-			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+			static::$arrClassNames[$strTable] = $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+
+			return static::$arrClassNames[$strTable];
 		}
 		else
 		{
@@ -1134,7 +1205,9 @@ abstract class Model
 				array_shift($arrChunks);
 			}
 
-			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			static::$arrClassNames[$strTable] = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+
+			return static::$arrClassNames[$strTable];
 		}
 	}
 

@@ -147,7 +147,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		),
 		'path' => array
 		(
-			'sql'                     => "varchar(1022) NOT NULL default ''"
+			'eval'                    => array('unique'=>true),
+			'sql'                     => "varchar(1022) NOT NULL default ''",
 		),
 		'extension' => array
 		(
