@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Improved
+Improve the model registry (see #7725).
+
 ### Changed
 The templates now use short open tags.
 
