@@ -83,48 +83,53 @@ class PageSelector extends \Widget
 				$for = substr($for, 1);
 			}
 
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
-									  ->execute($for);
-
-			if ($objRoot->numRows > 0)
+			// Wrap in a try catch block in case the regular expression is invalid (see #7743)
+			try
 			{
-				// Respect existing limitations
-				if (is_array($this->rootNodes))
-				{
-					$arrRoot = array();
+				$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
+										  ->execute($for);
 
-					while ($objRoot->next())
+				if ($objRoot->numRows > 0)
+				{
+					// Respect existing limitations
+					if (is_array($this->rootNodes))
 					{
-						// Predefined node set (see #3563)
-						if (count(array_intersect($this->rootNodes, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						$arrRoot = array();
+
+						while ($objRoot->next())
 						{
-							$arrRoot[] = $objRoot->id;
+							// Predefined node set (see #3563)
+							if (count(array_intersect($this->rootNodes, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+							{
+								$arrRoot[] = $objRoot->id;
+							}
 						}
+
+						$arrIds = $arrRoot;
 					}
-
-					$arrIds = $arrRoot;
-				}
-				elseif ($this->User->isAdmin)
-				{
-					// Show all pages to admins
-					$arrIds = $objRoot->fetchEach('id');
-				}
-				else
-				{
-					$arrRoot = array();
-
-					while ($objRoot->next())
+					elseif ($this->User->isAdmin)
 					{
-						// Show only mounted pages to regular users
-						if (count(array_intersect($this->User->pagemounts, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
-						{
-							$arrRoot[] = $objRoot->id;
-						}
+						// Show all pages to admins
+						$arrIds = $objRoot->fetchEach('id');
 					}
+					else
+					{
+						$arrRoot = array();
 
-					$arrIds = $arrRoot;
+						while ($objRoot->next())
+						{
+							// Show only mounted pages to regular users
+							if (count(array_intersect($this->User->pagemounts, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+							{
+								$arrRoot[] = $objRoot->id;
+							}
+						}
+
+						$arrIds = $arrRoot;
+					}
 				}
 			}
+			catch (\Exception $e) {}
 
 			// Build the tree
 			foreach ($arrIds as $id)
