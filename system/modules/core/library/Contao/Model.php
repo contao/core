@@ -1038,19 +1038,19 @@ abstract class Model
 			return null;
 		}
 
-		// FIXME: what about line 1089?
+		// Try to load from the registry
 		if ($arrOptions['return'] == 'Model')
 		{
 			$arrColumn = (array) $arrOptions['column'];
 
 			if (count($arrColumn) == 1 && ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields())))
 			{
-				$intId = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
-				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intId, $arrColumn[0]);
+				$varKey = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varKey, $arrColumn[0]);
 
 				if ($objModel !== null)
 				{
-					return $objModel; // FIXME: in line 1099, we are returning $objModel->mergeRow($objResult->row());
+					return $objModel;
 				}
 			}
 		}
@@ -1086,13 +1086,10 @@ abstract class Model
 
 		$objResult = static::postFind($objResult);
 
+		// Try to load from the registry
 		if ($arrOptions['return'] == 'Model')
 		{
-			$strPk = static::$strPk;
-			$intPk = $objResult->$strPk;
-
-			// Try to load from the registry
-			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intPk);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $objResult->{static::$strPk});
 
 			if ($objModel !== null)
 			{
