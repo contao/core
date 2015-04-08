@@ -539,15 +539,7 @@ class Automator extends \System
 		{
 			while ($objPages->next())
 			{
-				if ($objPages->dns != '')
-				{
-					$strBase = $objPages->useSSL ? 'https://' : 'http://';
-					$strBase .= $objPages->dns . \Environment::get('path') . '/';
-				}
-				else
-				{
-					$strBase = '*' . \Environment::get('path') . '/';
-				}
+				$strBase = ($objPages->dns ?: '*') . \Environment::get('path') . '/';
 
 				if ($objPages->fallback)
 				{

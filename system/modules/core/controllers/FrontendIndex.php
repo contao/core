@@ -313,42 +313,35 @@ class FrontendIndex extends \Frontend
 			if (file_exists(TL_ROOT . '/system/cache/config/mapping.php'))
 			{
 				$arrMapper = include TL_ROOT . '/system/cache/config/mapping.php';
+				$arrPaths = array(\Environment::get('host') . \Environment::get('path'), '*' . \Environment::get('path'));
 
 				// Try the language specific keys
 				foreach ($arrLanguage as $strLanguage)
 				{
-					$strKey = \Environment::get('base') . 'empty.' . $strLanguage;
-
-					if (isset($arrMapper[$strKey]))
+					foreach ($arrPaths as $strPath)
 					{
-						$strCacheKey = $arrMapper[$strKey];
-						break;
-					}
+						$strKey = $strPath . '/empty.' . $strLanguage;
 
-					$strKey = '*' . \Environment::get('path') . '/empty.' . $strLanguage;
-
-					if (isset($arrMapper[$strKey]))
-					{
-						$strCacheKey = $arrMapper[$strKey];
-						break;
+						if (isset($arrMapper[$strKey]))
+						{
+							$strCacheKey = $arrMapper[$strKey];
+							break;
+						}
 					}
 				}
 
 				// Try the fallback key
 				if ($strCacheKey === null)
 				{
-					$strKey = \Environment::get('base') . 'empty.fallback';
-
-					if (isset($arrMapper[$strKey]))
+					foreach ($arrPaths as $strPath)
 					{
-						$strCacheKey = $arrMapper[$strKey];
-					}
+						$strKey = $strPath . '/empty.fallback';
 
-					$strKey = '*' . \Environment::get('path') . '/empty.fallback';
-
-					if (isset($arrMapper[$strKey]))
-					{
-						$strCacheKey = $arrMapper[$strKey];
+						if (isset($arrMapper[$strKey]))
+						{
+							$strCacheKey = $arrMapper[$strKey];
+							break;
+						}
 					}
 				}
 			}
