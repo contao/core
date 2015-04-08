@@ -317,11 +317,19 @@ class FrontendIndex extends \Frontend
 				// Try the language specific keys
 				foreach ($arrLanguage as $strLanguage)
 				{
-					$strSpecificKey = \Environment::get('base') . 'empty.' . $strLanguage;
+					$strKey = \Environment::get('base') . 'empty.' . $strLanguage;
 
-					if (isset($arrMapper[$strSpecificKey]))
+					if (isset($arrMapper[$strKey]))
 					{
-						$strCacheKey = $arrMapper[$strSpecificKey];
+						$strCacheKey = $arrMapper[$strKey];
+						break;
+					}
+
+					$strKey = '*' . \Environment::get('path') . '/empty.' . $strLanguage;
+
+					if (isset($arrMapper[$strKey]))
+					{
+						$strCacheKey = $arrMapper[$strKey];
 						break;
 					}
 				}
@@ -329,11 +337,18 @@ class FrontendIndex extends \Frontend
 				// Try the fallback key
 				if ($strCacheKey === null)
 				{
-					$strSpecificKey = \Environment::get('base') . 'empty.fallback';
+					$strKey = \Environment::get('base') . 'empty.fallback';
 
-					if (isset($arrMapper[$strSpecificKey]))
+					if (isset($arrMapper[$strKey]))
 					{
-						$strCacheKey = $arrMapper[$strSpecificKey];
+						$strCacheKey = $arrMapper[$strKey];
+					}
+
+					$strKey = '*' . \Environment::get('path') . '/empty.fallback';
+
+					if (isset($arrMapper[$strKey]))
+					{
+						$strCacheKey = $arrMapper[$strKey];
 					}
 				}
 			}

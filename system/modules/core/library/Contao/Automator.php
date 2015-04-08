@@ -546,7 +546,7 @@ class Automator extends \System
 				}
 				else
 				{
-					$strBase = \Environment::get('base');
+					$strBase = '*' . \Environment::get('path') . '/';
 				}
 
 				if ($objPages->fallback)
