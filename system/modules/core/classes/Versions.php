@@ -250,13 +250,7 @@ class Versions extends \Controller
 				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
 
 				// Unset fields that do not exist (see #5219)
-				foreach (array_keys($data) as $k)
-				{
-					if (!isset($arrFields[$k]))
-					{
-						unset($data[$k]);
-					}
-				}
+				$data = array_intersect_key($data, $arrFields);
 
 				$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
 							   ->set($data)
