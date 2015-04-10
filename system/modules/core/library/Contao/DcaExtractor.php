@@ -20,7 +20,7 @@ namespace Contao;
  *
  * Usage:
  *
- *     $user = new DcaExtractor('tl_user');
+ *     $user = DcaExtractor::getInstance('tl_user');
  *
  *     if ($user->hasRelations())
  *     {
