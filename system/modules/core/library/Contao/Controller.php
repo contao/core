@@ -679,7 +679,7 @@ abstract class Controller extends \System
 	 *
 	 * @return string The text with the replaced tags
 	 */
-	protected function replaceInsertTags($strBuffer, $blnCache=true)
+	public static function replaceInsertTags($strBuffer, $blnCache=true)
 	{
 		$objIt = new InsertTags();
 

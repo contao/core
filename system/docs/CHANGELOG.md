@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Changed
+`Controller::replaceInsertTags()` is now public static.
+
 ### Fixed
 Restore the removed attributes of the "picture_default" templates (see #7752). 
 
