@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Fixed
+Restore the removed attributes of the "picture_default" templates (see #7752). 
+
 ### Changed
 Moved the insert tag logic into a separate class.
 
