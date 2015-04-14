@@ -539,14 +539,14 @@ class Automator extends \System
 		{
 			while ($objPages->next())
 			{
-				$strBase = ($objPages->dns ?: '*') . \Environment::get('path') . '/';
+				$strBase = ($objPages->dns ?: '*');
 
 				if ($objPages->fallback)
 				{
-					$arrMapper[$strBase . 'empty.fallback'] = $strBase . 'empty.' . $objPages->language;
+					$arrMapper[$strBase . '/empty.fallback'] = $strBase . '/empty.' . $objPages->language;
 				}
 
-				$arrMapper[$strBase . 'empty.' . $objPages->language] = $strBase . 'empty.' . $objPages->language;
+				$arrMapper[$strBase . '/empty.' . $objPages->language] = $strBase . '/empty.' . $objPages->language;
 			}
 		}
 

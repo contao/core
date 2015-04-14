@@ -313,7 +313,7 @@ class FrontendIndex extends \Frontend
 			if (file_exists(TL_ROOT . '/system/cache/config/mapping.php'))
 			{
 				$arrMapper = include TL_ROOT . '/system/cache/config/mapping.php';
-				$arrPaths = array(\Environment::get('host') . \Environment::get('path'), '*' . \Environment::get('path'));
+				$arrPaths = array(\Environment::get('host'), '*');
 
 				// Try the language specific keys
 				foreach ($arrLanguage as $strLanguage)
@@ -349,12 +349,12 @@ class FrontendIndex extends \Frontend
 			// Fall back to the first accepted language
 			if ($strCacheKey === null)
 			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $arrLanguage[0];
+				$strCacheKey = \Environment::get('host') . '/empty.' . $arrLanguage[0];
 			}
 		}
 		else
 		{
-			$strCacheKey = \Environment::get('base') . \Environment::get('request');
+			$strCacheKey = \Environment::get('host') . '/' . \Environment::get('request');
 		}
 
 		// HOOK: add custom logic

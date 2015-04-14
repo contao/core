@@ -210,11 +210,11 @@ class FrontendTemplate extends \Template
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
+				$strCacheKey = \Environment::get('host') . '/empty.' . $objPage->language;
 			}
 			else
 			{
-				$strCacheKey = \Environment::get('base') . \Environment::get('request');
+				$strCacheKey = \Environment::get('host') . '/' . \Environment::get('request');
 			}
 
 			// HOOK: add custom logic
