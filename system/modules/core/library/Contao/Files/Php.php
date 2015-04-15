@@ -57,6 +57,9 @@ class Php extends \Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
+		if (is_link($strFile)) {
+			$strFile = readlink($strFile);
+		}
 		$this->validate($strFile);
 		return @fopen(TL_ROOT . '/' . $strFile, $strMode);
 	}
