@@ -252,6 +252,9 @@ function utf8_detect_encoding($str)
  */
 function utf8_romanize($str)
 {
+	if (utf8_detect_encoding($str) == 'ASCII')
+		return $str;
+
 	global $UTF8_LOOKUP_TABLE;
 
 	if (!is_array($UTF8_LOOKUP_TABLE))

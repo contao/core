@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Improved
+Check for ASCII strings in the `utf8_romanize()` function (see #7748).
+
 ### Fixed
 Use `DIRECTORY_SEPARATOR` in conjunction with `str_replace()` (see #7769).
 
