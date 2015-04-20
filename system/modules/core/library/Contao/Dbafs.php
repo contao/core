@@ -454,7 +454,7 @@ class Dbafs
 		// Consider the suhosin.memory_limit (see #7035)
 		if (extension_loaded('suhosin'))
 		{
-			if (($limit = ini_get('suhosin.memory_limit')) !== '0')
+			if ($limit = ini_get('suhosin.memory_limit'))
 			{
 				@ini_set('memory_limit', $limit);
 			}
@@ -602,6 +602,7 @@ class Dbafs
 			$arrMapped = array();
 			$arrPidUpdate = array();
 
+			/** @var \Model\Collection|\FilesModel $objFiles */
 			while ($objFiles->next())
 			{
 				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);
