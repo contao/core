@@ -306,32 +306,41 @@ class DcaExtractor extends \Controller
 			$return['TABLE_FIELDS'][$k] = '`' . $k . '` ' . $v;
 		}
 
+		$quote = function ($item) { return '`' . $item . '`'; };
+
 		// Keys
 		foreach ($this->arrKeys as $k=>$v)
 		{
 			// Handle multi-column indexes (see #5556)
 			if (strpos($k, ',') !== false)
 			{
-				$f = trimsplit(',', $k);
+				$f = array_map($quote, trimsplit(',', $k));
 				$k = str_replace(',', '_', $k);
 			}
 			else
 			{
-				$f = array($k);
+				$f = array($quote($k));
+			}
+
+			// Handle key lengths (see #221)
+			if (preg_match('/\([0-9]+\)/', $v))
+			{
+				list($v, $length) = explode('(', rtrim($v, ')'));
+				$f = array($quote($k) . '(' . $length . ')');
 			}
 
 			if ($v == 'primary')
 			{
 				$k = 'PRIMARY';
-				$v = 'PRIMARY KEY  (`' . implode('`, `', $f) . '`)';
+				$v = 'PRIMARY KEY  (' . implode(', ', $f) . ')';
 			}
 			elseif ($v == 'index')
 			{
-				$v = 'KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = 'KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 			else
 			{
-				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = strtoupper($v) . ' KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 
 			$return['TABLE_CREATE_DEFINITIONS'][$k] = $v;

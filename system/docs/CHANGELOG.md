@@ -5,6 +5,9 @@ Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
 ### Improved
+Support specifying the database key length (see #7771).
+
+### Improved
 Check for ASCII strings in the `utf8_romanize()` function (see #7748).
 
 ### Fixed

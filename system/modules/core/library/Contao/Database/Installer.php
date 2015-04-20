@@ -431,6 +431,7 @@ class Installer extends \Controller
 		}
 
 		$return = array();
+		$quote = function ($item) { return '`' . $item . '`'; };
 
 		foreach ($tables as $table)
 		{
@@ -439,7 +440,7 @@ class Installer extends \Controller
 			foreach ($fields as $field)
 			{
 				$name = $field['name'];
-				$field['name'] = '`'.$field['name'].'`';
+				$field['name'] = $quote($field['name']);
 
 				if ($field['type'] != 'index')
 				{
@@ -487,27 +488,40 @@ class Installer extends \Controller
 				// Indices
 				if (isset($field['index']) && $field['index_fields'])
 				{
-					$index_fields = implode('`, `', $field['index_fields']);
+					// Quote the field names
+					$index_fields = implode(', ', array_map
+					(
+						function ($item) use ($quote) {
+							if (strpos($item, '(') === false) {
+								return $quote($item);
+							}
+
+							list($name, $length) = explode('(', rtrim($item, ')'));
+
+							return $quote($name) . '(' . $length . ')';
+						},
+						$field['index_fields'])
+					);
 
 					switch ($field['index'])
 					{
 						case 'UNIQUE':
 							if ($name == 'PRIMARY')
 							{
-								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  (`'.$index_fields.'`)';
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  ('.$index_fields.')';
 							}
 							else
 							{
-								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` (`'.$index_fields.'`)';
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` ('.$index_fields.')';
 							}
 							break;
 
 						case 'FULLTEXT':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` (`'.$index_fields.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` ('.$index_fields.')';
 							break;
 
 						default:
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` (`'.$index_fields.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` ('.$index_fields.')';
 							break;
 					}
 
