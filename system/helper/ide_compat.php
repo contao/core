@@ -17,6 +17,8 @@
 // TL_ROOT
 namespace {
 	define('TL_ROOT', __DIR__ . '../../../');
+	define('TL_ASSETS_URL', 'http://locahost/');
+	define('TL_FILES_URL', 'http://locahost/');
 }
 
 // calendar
