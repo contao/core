@@ -106,7 +106,7 @@ abstract class BaseTemplate extends \Controller
 		// Add start and end markers in debug mode
 		if (\Config::get('debugMode'))
 		{
-			$strRelPath = str_replace(TL_ROOT . '/', '', $this->getTemplate($this->strTemplate, $this->strFormat));
+			$strRelPath = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $this->getTemplate($this->strTemplate, $this->strFormat));
 			$strBuffer = "\n<!-- TEMPLATE START: $strRelPath -->\n$strBuffer\n<!-- TEMPLATE END: $strRelPath -->\n";
 		}
 

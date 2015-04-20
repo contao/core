@@ -60,7 +60,7 @@ class SyncExclude extends \RecursiveFilterIterator
 			return false;
 		}
 
-		$strRelpath = str_replace(TL_ROOT . '/', '', $this->current()->getPathname());
+		$strRelpath = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $this->current()->getPathname());
 
 		// The resource is an exempt folder
 		if (in_array($strRelpath, $this->arrExempt))

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Fixed
+Use `DIRECTORY_SEPARATOR` in conjunction with `str_replace()` (see #7769).
+
 ### Changed
 `Controller::replaceInsertTags()` is now public static.
 

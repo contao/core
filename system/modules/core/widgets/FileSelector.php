@@ -287,7 +287,7 @@ class FileSelector extends \Widget
 			$tid = md5($folders[$f]);
 			$folderAttribute = 'style="margin-left:20px"';
 			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
-			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$currentFolder = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $folders[$f]);
 			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
 
 			// Add a toggle button if there are childs
@@ -345,7 +345,7 @@ class FileSelector extends \Widget
 			for ($h=0, $c=count($files); $h<$c; $h++)
 			{
 				$thumbnail = '';
-				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
+				$currentFile = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
 
 				$objFile = new \File($currentFile, true);

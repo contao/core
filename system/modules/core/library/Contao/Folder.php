@@ -357,7 +357,7 @@ class Folder extends \System
 		{
 			if (strncmp($i->getFilename(), '.', 1) !== 0)
 			{
-				$arrFiles[] = str_replace(TL_ROOT . '/' . $this->strFolder . '/', '', $i->getPathname());
+				$arrFiles[] = str_replace(TL_ROOT . DIRECTORY_SEPARATOR . $this->strFolder . DIRECTORY_SEPARATOR, '', $i->getPathname());
 			}
 		}
 
