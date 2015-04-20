@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Changed
+Show versions even if there is only one (see #7730).
+
 ### Fixed
 Loosely check the `suhosin.memory_limit` setting (see #7696).
 

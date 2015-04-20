@@ -46,7 +46,11 @@
                 <?php else: ?>
                   <?= Image::getHtml('edit_.gif', '', 'style="padding:0 2px"') ?>
                 <?php endif; ?>
-                <a href="<?= $version['editUrl'] ?>&amp;from=<?= $version['from'] ?>&amp;to=<?= $version['to'] ?>&amp;versions=1&amp;popup=1" title="<?= $this->showDifferences ?>" onclick="Backend.openModalIframe({'width':768,'title':'<?= $this->showDifferences ?>','url':this.href});return false"><?= Image::getHtml('diff.gif') ?></a>
+                <?php if ($version['to'] > 1): ?>
+                  <a href="<?= $version['editUrl'] ?>&amp;from=<?= $version['from'] ?>&amp;to=<?= $version['to'] ?>&amp;versions=1&amp;popup=1" title="<?= $this->showDifferences ?>" onclick="Backend.openModalIframe({'width':768,'title':'<?= $this->showDifferences ?>','url':this.href});return false"><?= Image::getHtml('diff.gif') ?></a>
+                <?php else: ?>
+                  <?= Image::getHtml('diff_.gif') ?>
+                <?php endif; ?>
               <?php endif; ?>
             </td>
           </tr>
