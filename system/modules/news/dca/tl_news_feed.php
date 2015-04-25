@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -184,7 +182,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'feedBase' => array
@@ -211,12 +209,9 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 
 
 /**
- * Class tl_news_feed
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_news_feed extends Backend
 {
@@ -372,7 +367,7 @@ class tl_news_feed extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id, true);
+			$this->News->generateFeedsByArchive($id);
 		}
 
 		$this->import('Automator');

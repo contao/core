@@ -1,11 +1,9 @@
 ##
 # Contao Open Source CMS
 #
-# Copyright (c) 2005-2014 Leo Feyer
+# Copyright (c) 2005-2015 Leo Feyer
 #
-# @package Core
-# @link    https://contao.org
-# @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+# @license LGPL-3.0+
 ##
 
 ##
@@ -26,7 +24,7 @@
 # @see https://github.com/h5bp/html5-boilerplate
 ##
 <IfModule mod_headers.c>
-  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font\.css)$">
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff2?|font\.css)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
@@ -58,7 +56,7 @@ FileETag None
   AddType application/vnd.ms-fontobject       eot
   AddType application/x-font-ttf              ttf ttc
   AddType font/opentype                       otf
-  AddType application/x-font-woff             woff
+  AddType application/x-font-woff             woff woff2
   AddType image/x-icon                        ico
   AddType image/webp                          webp
   AddType text/cache-manifest                 appcache manifest
@@ -261,7 +259,7 @@ FileETag None
   #
   # Note that not all environments support mod_rewrite and mod_cache.
   ##
-  RewriteCond %{REQUEST_FILENAME} !\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|otf|tt[cf]|woff|svg|svgz|pdf|gz)$
+  RewriteCond %{REQUEST_FILENAME} !\.(htm|php|js|css|htc|png|gif|jpe?g|ico|xml|csv|txt|swf|flv|mp4|webm|ogv|mp3|ogg|oga|eot|otf|tt[cf]|woff2?|svgz?|pdf|gz)$
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule .*\.html$ index.php [L]
 

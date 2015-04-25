@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,7 @@ namespace Contao;
  *         echo $user->name;
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class User extends \System
 {
@@ -243,7 +239,7 @@ abstract class User extends \System
 				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
 				{
 					$this->import($callback[0], 'objImport', true);
-					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this->strTable);
+					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::postUnsafeRaw('password'), $this->strTable);
 
 					// Load successfull
 					if ($blnLoaded === true)
@@ -279,7 +275,7 @@ abstract class User extends \System
 			$this->save();
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
-			$this->log('The account has been locked for security reasons', __METHOD__, TL_ACCESS);
+			$this->log('User "' . $this->username . '" has been locked for ' . ceil(\Config::get('lockPeriod') / 60) . ' minutes', __METHOD__, TL_ACCESS);
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 
 			// Send admin notification
@@ -303,17 +299,17 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::postRaw('password'), $this->password) === $this->password);
+			$blnAuthenticated = \Encryption::verify(\Input::postUnsafeRaw('password'), $this->password);
 		}
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postRaw('password')));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postUnsafeRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
 
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = \Encryption::hash(\Input::postRaw('password'));
+				$this->password = \Encryption::hash(\Input::postUnsafeRaw('password'));
 			}
 		}
 
@@ -323,7 +319,7 @@ abstract class User extends \System
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
 				$this->import($callback[0], 'objAuth', true);
-				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this);
+				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::postUnsafeRaw('password'), $this);
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)

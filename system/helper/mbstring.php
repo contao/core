@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -124,7 +122,7 @@ function utf8_ord($str)
  */
 function utf8_convert_encoding($str, $to, $from=null)
 {
-	if (!$str)
+	if ($str == '')
 		return '';
 
 	if (!$from)

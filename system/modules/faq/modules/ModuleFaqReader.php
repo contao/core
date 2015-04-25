@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Faq
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class ModuleFaqReader
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Faq
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleFaqReader extends \Module
 {
@@ -164,14 +156,7 @@ class ModuleFaqReader extends \Module
 		// Add the author
 		if (($objAuthor = $objFaq->getRelated('author')) !== null)
 		{
-			if ($objAuthor->google != '')
-			{
-				$strAuthor = '<a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
-			}
-			else
-			{
-				$strAuthor = $objAuthor->name;
-			}
+			$strAuthor = $objAuthor->name;
 		}
 
 		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], \Date::parse($objPage->dateFormat, $objFaq->tstamp), $strAuthor);

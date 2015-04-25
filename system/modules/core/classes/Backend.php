@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Backend
- *
  * Provide methods to manage back end controllers.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Backend extends \Controller
 {
@@ -185,6 +176,11 @@ abstract class Backend extends \Controller
 				return 'php';
 				break;
 
+			case 'svg':
+			case 'svgz':
+				return 'xml';
+				break;
+
 			default:
 				return 'text';
 				break;
@@ -320,7 +316,8 @@ abstract class Backend extends \Controller
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$strTable = \Input::get('table') ?: $arrModule['tables'][0];
+		$arrTables = (array) $arrModule['tables'];
+		$strTable = \Input::get('table') ?: $arrTables[0];
 		$id = (!\Input::get('act') && \Input::get('id')) ? \Input::get('id') : $this->Session->get('CURRENT_ID');
 
 		// Store the current ID in the current session
@@ -355,7 +352,7 @@ abstract class Backend extends \Controller
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
-			if (!in_array($strTable, (array)$arrModule['tables']))
+			if (!in_array($strTable, $arrTables))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
@@ -416,7 +413,7 @@ abstract class Backend extends \Controller
 			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
 
 			// Add the name of the parent element
-			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrModule['tables']) && \Input::get('table') != $arrModule['tables'][0])
+			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
 			{
 				if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 				{
@@ -477,52 +474,91 @@ abstract class Backend extends \Controller
 					break;
 			}
 
-			// Correctly add the theme name in the style sheets module
-			if (strncmp($strTable, 'tl_style', 8) === 0)
+			$strFirst = null;
+			$strSecond = null;
+
+			// Handle child child tables (e.g. tl_style)
+			if (isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
 			{
-				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select')
+				$ptable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+
+				if (in_array($ptable, $arrTables))
 				{
-					if ($strTable == 'tl_style_sheet')
+					$this->loadDataContainer($ptable);
+
+					if (isset($GLOBALS['TL_DCA'][$ptable]['config']['ptable']))
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=?";
+						$ftable = $GLOBALS['TL_DCA'][$ptable]['config']['ptable'];
+
+						if (in_array($ftable, $arrTables))
+						{
+							$strFirst = $ftable;
+							$strSecond = $ptable;
+						}
+					}
+				}
+			}
+
+			// Build the breadcrumb trail
+			if ($strFirst !== null && $strSecond !== null)
+			{
+				if (!isset($_GET['act']) || \Input::get('act') == 'paste' && \Input::get('mode') == 'create' || \Input::get('act') == 'select' || \Input::get('act') == 'editAll' || \Input::get('act') == 'overrideAll')
+				{
+					if ($strTable == $strSecond)
+					{
+						$strQuery = "SELECT * FROM $strFirst WHERE id=?";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 				}
 				else
 				{
-					if ($strTable == 'tl_style_sheet')
+					if ($strTable == $strSecond)
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=?)";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=?)";
 					}
 					else
 					{
-						$strQuery = "SELECT name FROM tl_theme WHERE id=(SELECT pid FROM tl_style_sheet WHERE id=(SELECT pid FROM tl_style WHERE id=?))";
+						$strQuery = "SELECT * FROM $strFirst WHERE id=(SELECT pid FROM $strSecond WHERE id=(SELECT pid FROM $strTable WHERE id=?))";
 					}
 				}
 
+				// Add the first level name
 				$objRow = $this->Database->prepare($strQuery)
 										 ->limit(1)
 										 ->execute($dc->id);
 
-				$this->Template->headline .= ' » ' . $objRow->name;
-				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD']['tl_style'];
-
-				if ($strTable == 'tl_style')
+				if ($objRow->title != '')
 				{
-					$objRow = $this->Database->prepare("SELECT name FROM tl_style_sheet WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->name;
+				}
 
+				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+
+				// Add the second level name
+				$objRow = $this->Database->prepare("SELECT * FROM $strSecond WHERE id=?")
+										 ->limit(1)
+										 ->execute(CURRENT_ID);
+
+				if ($objRow->title != '')
+				{
+					$this->Template->headline .= ' » ' . $objRow->title;
+				}
+				elseif ($objRow->name != '')
+				{
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 			}
 			else
 			{
 				// Add the name of the parent element
-				if ($strTable && in_array($strTable, $arrModule['tables']) && $strTable != $arrModule['tables'][0])
+				if ($strTable && in_array($strTable, $arrTables) && $strTable != $arrTables[0])
 				{
 					if ($GLOBALS['TL_DCA'][$strTable]['config']['ptable'] != '')
 					{
@@ -557,15 +593,29 @@ abstract class Backend extends \Controller
 			{
 				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MSC']['all_override'][0];
 			}
-			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]) && \Input::get('id'))
+			elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 			{
-				if (\Input::get('do') == 'files')
+				if (\Input::get('id'))
 				{
-					$this->Template->headline .= ' » ' . \Input::get('id');
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('id');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					}
 				}
-				else
+				elseif (\Input::get('pid'))
 				{
-					$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('id'));
+					if (\Input::get('do') == 'files')
+					{
+						$this->Template->headline .= ' » ' . \Input::get('pid');
+					}
+					else
+					{
+						$this->Template->headline .= ' » ' . sprintf($GLOBALS['TL_LANG'][$strTable][$act][1], \Input::get('pid'));
+					}
 				}
 			}
 
@@ -614,7 +664,7 @@ abstract class Backend extends \Controller
 			{
 				if ($objPages->dns != '')
 				{
-					$domain = (\Environment::get('ssl') ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
+					$domain = ($objPages->useSSL ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
 				}
 				else
 				{
@@ -662,6 +712,8 @@ abstract class Backend extends \Controller
 	 * Add a breadcrumb menu to the page tree
 	 *
 	 * @param string
+	 *
+	 * @throws \RuntimeException
 	 */
 	public static function addPagesBreadcrumb($strKey='tl_page_node')
 	{
@@ -670,7 +722,13 @@ abstract class Backend extends \Controller
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$objSession->set($strKey, \Input::get('node'));
+			// Check the path (thanks to Arnaud Buchoux)
+			if (\Validator::isInsecurePath(\Input::get('node', true)))
+			{
+				throw new \RuntimeException('Insecure path ' . \Input::get('node', true));
+			}
+
+			$objSession->set($strKey, \Input::get('node', true));
 			\Controller::redirect(preg_replace('/&node=[^&]*/', '', \Environment::get('request')));
 		}
 
@@ -679,6 +737,12 @@ abstract class Backend extends \Controller
 		if ($intNode < 1)
 		{
 			return;
+		}
+
+		// Check the path (thanks to Arnaud Buchoux)
+		if (\Validator::isInsecurePath($intNode))
+		{
+			throw new \RuntimeException('Insecure path ' . $intNode);
 		}
 
 		$arrIds   = array();
@@ -800,6 +864,8 @@ abstract class Backend extends \Controller
 	 * Add a breadcrumb menu to the file tree
 	 *
 	 * @param string
+	 *
+	 * @throws \RuntimeException
 	 */
 	public static function addFilesBreadcrumb($strKey='tl_files_node')
 	{
@@ -808,6 +874,12 @@ abstract class Backend extends \Controller
 		// Set a new node
 		if (isset($_GET['node']))
 		{
+			// Check the path (thanks to Arnaud Buchoux)
+			if (\Validator::isInsecurePath(\Input::get('node', true)))
+			{
+				throw new \RuntimeException('Insecure path ' . \Input::get('node', true));
+			}
+
 			$objSession->set($strKey, \Input::get('node', true));
 			\Controller::redirect(preg_replace('/(&|\?)node=[^&]*/', '', \Environment::get('request')));
 		}
@@ -817,6 +889,12 @@ abstract class Backend extends \Controller
 		if ($strNode == '')
 		{
 			return;
+		}
+
+		// Check the path (thanks to Arnaud Buchoux)
+		if (\Validator::isInsecurePath($strNode))
+		{
+			throw new \RuntimeException('Insecure path ' . $strNode);
 		}
 
 		// Currently selected folder does not exist

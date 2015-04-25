@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ImageSize
- *
  * Provide methods to handle image size fields.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ImageSize extends \Widget
 {
@@ -94,12 +85,6 @@ class ImageSize extends \Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		// Backwards compatibility (see #3911)
-		if (@$this->varValue[2] == 'crop')
-		{
-			$this->varValue[2] = 'center_center';
-		}
-
 		$arrFields = array();
 
 		for ($i=0; $i<2; $i++)
@@ -145,9 +130,9 @@ class ImageSize extends \Widget
 								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
 
-		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
+		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,
-						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}

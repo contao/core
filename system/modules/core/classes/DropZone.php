@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DropZone
- *
  * Provide methods to handle file uploads in the back end.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DropZone extends \FileUpload
 {
@@ -35,7 +26,7 @@ class DropZone extends \FileUpload
 	public function generateMarkup()
 	{
 		// Maximum file size in MB
-		$intMaxSize = ($this->getMaximumUploadSize() / 1024000);
+		$intMaxSize = ($this->getMaximumUploadSize() / 1024 / 1024);
 
 		// String of accepted file extensions
 		$strAccepted = implode(',', array_map(function($a) { return '.' . $a; }, trimsplit(',', strtolower(\Config::get('uploadTypes')))));

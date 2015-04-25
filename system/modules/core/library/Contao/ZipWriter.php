@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -22,9 +20,7 @@ namespace Contao;
  *     $zip->addFile('test.txt');
  *     $zip->close();
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ZipWriter
 {
@@ -285,9 +281,6 @@ class ZipWriter
 			 ($arrTime['seconds'] >> 1)
 		);
 
-		$strTime = '\x' . $hexTime[6] . $hexTime[7] . '\x' . $hexTime[4] . $hexTime[5] . '\x' . $hexTime[2] . $hexTime[3] . '\x' . $hexTime[0] . $hexTime[1];
-		eval('$strTime = "' . $strTime . '";');
-
-		return $strTime;
+		return pack("H*", $hexTime[6] . $hexTime[7] . $hexTime[4] . $hexTime[5] . $hexTime[2] . $hexTime[3] . $hexTime[0] . $hexTime[1]);
 	}
 }

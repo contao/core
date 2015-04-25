@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Automator
- *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Library
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Automator extends \System
 {
@@ -555,7 +546,7 @@ class Automator extends \System
 		$objCacheFile->close();
 
 		// Add a log entry
-		$this->log('Generated the autoload cache', __METHOD__, TL_CRON);
+		$this->log('Generated the config cache', __METHOD__, TL_CRON);
 	}
 
 
@@ -578,15 +569,14 @@ class Automator extends \System
 
 			foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 			{
-				// Ignore non PHP files and files which have been included before
-				if (strncmp($strFile, '.', 1) === 0 || substr($strFile, -4) != '.php' || in_array($strFile, $arrFiles))
+				if (strncmp($strFile, '.', 1) !== 0 && substr($strFile, -4) == '.php')
 				{
-					continue;
+					$arrFiles[] = substr($strFile, 0, -4);
 				}
-
-				$arrFiles[] = substr($strFile, 0, -4);
 			}
 		}
+
+		$arrFiles = array_values(array_unique($arrFiles));
 
 		// Create one file per table
 		foreach ($arrFiles as $strName)
@@ -620,7 +610,7 @@ class Automator extends \System
 	 */
 	public function generateLanguageCache()
 	{
-		$arrLanguages = array();
+		$arrLanguages = array('en');
 		$objLanguages = \Database::getInstance()->query("SELECT language FROM tl_member UNION SELECT language FROM tl_user UNION SELECT REPLACE(language, '-', '_') FROM tl_page WHERE type='root'");
 
 		// Only cache the languages which are in use (see #6013)
@@ -658,14 +648,14 @@ class Automator extends \System
 
 				foreach (scan(TL_ROOT . '/' . $strDir) as $strFile)
 				{
-					if (strncmp($strFile, '.', 1) === 0 || (substr($strFile, -4) != '.php' && substr($strFile, -4) != '.xlf') || in_array($strFile, $arrFiles))
+					if (strncmp($strFile, '.', 1) !== 0 && (substr($strFile, -4) == '.php' || substr($strFile, -4) == '.xlf'))
 					{
-						continue;
+						$arrFiles[] = substr($strFile, 0, -4);
 					}
-
-					$arrFiles[] = substr($strFile, 0, -4);
 				}
 			}
+
+			$arrFiles = array_values(array_unique($arrFiles));
 
 			// Create one file per table
 			foreach ($arrFiles as $strName)
@@ -677,7 +667,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2014 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2015 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
@@ -685,7 +675,7 @@ class Automator extends \System
 						   . " * @link http://help.transifex.com/intro/translating.html\n"
 						   . " * @link https://www.transifex.com/projects/p/contao/language/%s/\n"
 						   . " * \n"
-						   . " * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL\n"
+						   . " * @license LGPL-3.0+\n"
 						   . " */\n";
 
 				// Generate the cache file
@@ -744,7 +734,7 @@ class Automator extends \System
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{

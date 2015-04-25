@@ -38,8 +38,6 @@
   <div id="container">
 
     <div id="main">
-      <h2><?php echo $GLOBALS['TL_LANG']['tl_install']['installTool'][0]; ?></h2>
-
       <?php if ($this->locked): ?>
         <fieldset class="tl_tbox nolegend">
           <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['installTool'][1]; ?></h3>

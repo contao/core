@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -29,12 +27,16 @@ namespace Contao;
  *         print_r($user->getRelations());
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DcaExtractor extends \Controller
 {
+
+	/**
+	 * Instances
+	 * @var string
+	 */
+	protected static $arrInstances = array();
 
 	/**
 	 * Table name
@@ -119,6 +121,24 @@ class DcaExtractor extends \Controller
 		{
 			$this->createExtract();
 		}
+	}
+
+
+	/**
+	 * Get one object instance per table
+	 *
+	 * @param string $strTable The table name
+	 *
+	 * @return \DcaExtractor The object instance
+	 */
+	public static function getInstance($strTable)
+	{
+		if (!isset(static::$arrInstances[$strTable]))
+		{
+			static::$arrInstances[$strTable] = new static($strTable);
+		}
+
+		return static::$arrInstances[$strTable];
 	}
 
 
@@ -398,9 +418,12 @@ class DcaExtractor extends \Controller
 			{
 				foreach ($arrTable['TABLE_CREATE_DEFINITIONS'] as $strKey)
 				{
-					$strKey = preg_replace('/^([A-Z]+ )?KEY .+\(`([^`]+)`\)$/', '$2 $1', $strKey);
-					list($field, $type) = explode(' ', $strKey);
-					$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					if (preg_match('/^([A-Z]+ )?KEY .+\(([^)]+)\)$/', $strKey, $arrMatches) && preg_match_all('/`([^`]+)`/', $arrMatches[2], $arrFields))
+					{
+						$type = trim($arrMatches[1]);
+						$field = implode(',', $arrFields[1]);
+						$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					}
 				}
 			}
 		}
@@ -418,7 +441,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
+			$sql['charset'] = \Config::get('dbCharset');
 		}
 
 		// Meta

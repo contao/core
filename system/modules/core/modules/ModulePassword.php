@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModulePassword
- *
  * Front end module "lost password".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePassword extends \Module
 {
@@ -269,7 +260,6 @@ class ModulePassword extends \Module
 	 */
 	protected function sendPasswordLink($objMember)
 	{
-		$arrChunks = array();
 		$confirmationId = md5(uniqid(mt_rand(), true));
 
 		// Store the confirmation ID
@@ -277,36 +267,10 @@ class ModulePassword extends \Module
 		$objMember->activation = $confirmationId;
 		$objMember->save();
 
-		$strConfirmation = $this->reg_password;
-		preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
-
-		foreach ($arrChunks[0] as $strChunk)
-		{
-			$strKey = substr($strChunk, 2, -2);
-
-			switch ($strKey)
-			{
-				case 'domain':
-					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('host')), $strConfirmation);
-					break;
-
-				case 'link':
-					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
-					break;
-
-				default:
-					try
-					{
-						$strConfirmation = str_replace($strChunk, $objMember->$strKey, $strConfirmation);
-					}
-					catch (\Exception $e)
-					{
-						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
-						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', __METHOD__, TL_GENERAL, $e->getMessage());
-					}
-					break;
-			}
-		}
+		// Prepare the simple token data
+		$arrData = $objMember->row();
+		$arrData['domain'] = \Idna::decode(\Environment::get('host'));
+		$arrData['link'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId;
 
 		// Send e-mail
 		$objEmail = new \Email();
@@ -314,7 +278,7 @@ class ModulePassword extends \Module
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], \Idna::decode(\Environment::get('host')));
-		$objEmail->text = $strConfirmation;
+		$objEmail->text = \String::parseSimpleTokens($this->reg_password, $arrData);
 		$objEmail->sendTo($objMember->email);
 
 		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', __METHOD__, TL_ACCESS);

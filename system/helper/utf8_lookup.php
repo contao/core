@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -222,6 +220,9 @@ $UTF8_LOOKUP_TABLE = array
 		'ا'=>'a','ب'=>'b','ت'=>'t','ث'=>'th','ج'=>'g','ح'=>'xh','خ'=>'x','د'=>'d','ذ'=>'dh','ر'=>'r',
 		'ز'=>'z','س'=>'s','ش'=>'sh','ص'=>'s\'','ض'=>'d\'','ط'=>'t\'','ظ'=>'z\'','ع'=>'y','غ'=>'gh',
 		'ف'=>'f','ق'=>'q','ك'=>'k','ل'=>'l','م'=>'m','ن'=>'n','ه'=>'x\'','و'=>'u','ي'=>'i',
+
+		// Persian
+		'ک'=>'k','گ'=>'g','پ'=>'p','ژ'=>'zh','ی'=>'i','چ'=>'ch',
 
 		// Japanese hiragana
 		'あ'=>'a','え'=>'e','い'=>'i','お'=>'o','う'=>'u','ば'=>'ba','べ'=>'be','び'=>'bi','ぼ'=>'bo','ぶ'=>'bu',

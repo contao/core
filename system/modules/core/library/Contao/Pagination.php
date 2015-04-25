@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Pagination
- *
  * Provide methodes to render a pagination menu.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Library
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Pagination
 {
@@ -235,7 +226,7 @@ class Pagination
 		$this->strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 
 		// Prepare the URL
-		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+		foreach (preg_split('/&(amp;)?/', \Environment::get('queryString'), -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
 			if (strpos($fragment, $this->strParameter . '=') === false)
 			{
@@ -265,7 +256,10 @@ class Pagination
 		$objTemplate->hasNext = $this->hasNext();
 		$objTemplate->hasLast = $this->hasLast();
 
+		// Backwards compatibility
 		$objTemplate->items = $this->getItemsAsString($strSeparator);
+
+		$objTemplate->pages = $this->getItemsAsArray();
 		$objTemplate->total = sprintf($this->lblTotal, $this->intPage, $this->intTotalPages);
 
 		$objTemplate->first = array
@@ -316,6 +310,31 @@ class Pagination
 	{
 		$arrLinks = array();
 
+		foreach ($this->getItemsAsArray() as $arrItem)
+		{
+			if ($arrItem['href'] === null)
+			{
+				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $arrItem['page']);
+			}
+			else
+			{
+				$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>', $arrItem['href'], $arrItem['title'], $arrItem['page']);
+			}
+		}
+
+		return implode($strSeparator, $arrLinks);
+	}
+
+
+	/**
+	 * Generate all page links and return them as array
+	 *
+	 * @return array The page links as array
+	 */
+	public function getItemsAsArray()
+	{
+		$arrLinks = array();
+
 		$intNumberOfLinks = floor($this->intNumberOfLinks / 2);
 		$intFirstOffset = $this->intPage - $intNumberOfLinks - 1;
 
@@ -349,17 +368,25 @@ class Pagination
 		{
 			if ($i == $this->intPage)
 			{
-				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $i);
-				continue;
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => null,
+					'title' => null
+				);
 			}
-
-			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
-								$this->linkToPage($i),
-								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
-								$i);
+			else
+			{
+				$arrLinks[] = array
+				(
+					'page'  => $i,
+					'href'  => $this->linkToPage($i),
+					'title' => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['goToPage'], $i))
+				);
+			}
 		}
 
-		return implode($strSeparator, $arrLinks);
+		return $arrLinks;
 	}
 
 

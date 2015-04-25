@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -23,9 +21,7 @@ namespace Contao;
  *
  *     $file = Dbafs::addResource('files/james-wilson.jpg');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Dbafs
 {
@@ -89,12 +85,12 @@ class Dbafs
 					unset($arrPaths[$i]);
 					$arrPids[$objModels->path] = $objModels->uuid;
 				}
-			}
 
-			// Store the model if it exists
-			if ($objModels->path == $strResource)
-			{
-				$objModel = $objModels->current();
+				// Store the model if it exists
+				if ($objModels->path == $strResource)
+				{
+					$objModel = $objModels->current();
+				}
 			}
 		}
 
@@ -111,7 +107,7 @@ class Dbafs
 		{
 			// Get a filtered list of all files
 			$objFiles = new \RecursiveIteratorIterator(
-				new \Dbafs\Filter(
+				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/' . $strResource,
 						\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -450,9 +446,20 @@ class Dbafs
 	 */
 	public static function syncFiles()
 	{
-		// Try to raise the limits (see #7035)
-		@ini_set('memory_limit', -1);
 		@ini_set('max_execution_time', 0);
+
+		// Consider the suhosin.memory_limit (see #7035)
+		if (extension_loaded('suhosin'))
+		{
+			if (($limit = ini_get('suhosin.memory_limit')) !== '0')
+			{
+				@ini_set('memory_limit', $limit);
+			}
+		}
+		else
+		{
+			@ini_set('memory_limit', -1);
+		}
 
 		$objDatabase = \Database::getInstance();
 
@@ -464,7 +471,7 @@ class Dbafs
 
 		// Get a filtered list of all files
 		$objFiles = new \RecursiveIteratorIterator(
-			new \Dbafs\Filter(
+			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(
 					TL_ROOT . '/' . \Config::get('uploadPath'),
 					\FilesystemIterator::UNIX_PATHS|\FilesystemIterator::FOLLOW_SYMLINKS|\FilesystemIterator::SKIP_DOTS
@@ -571,7 +578,7 @@ class Dbafs
 			else
 			{
 				// Check whether the MD5 hash has changed
-				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath);
+				$objResource = $objFile->isDir() ? new \Folder($strRelpath) : new \File($strRelpath, true);
 				$strType = ($objModel->hash != $objResource->hash) ? 'Changed' : 'Unchanged';
 
 				// Add a log entry

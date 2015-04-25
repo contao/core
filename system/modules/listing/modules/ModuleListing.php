@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Listing
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleListing
- *
  * Provide methods to render content element "listing".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Listing
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleListing extends \Module
 {
@@ -244,7 +235,7 @@ class ModuleListing extends \Module
 		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
-		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
+		foreach (preg_split('/&(amp;)?/', \Environment::get('queryString')) as $fragment)
 		{
 			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, $id, strlen($id)) !== 0)
 			{
@@ -397,7 +388,7 @@ class ModuleListing extends \Module
 		}
 
 		$arrFields = array();
-		$arrRow = $objRecord->fetchAssoc();
+		$arrRow = $objRecord->row();
 		$limit = count($arrRow);
 		$count = -1;
 

@@ -36,7 +36,6 @@
 
     <div id="main">
       <h1><?php echo $this->helpWizard; ?></h1>
-      <h2><?php echo $this->headline; ?></h2>
       <?php echo $this->explanation; ?>
 
       <?php if (!empty($this->rows)): ?>

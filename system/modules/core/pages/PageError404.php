@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageError404
- *
  * Provide methods to handle an error 404 page.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageError404 extends \Frontend
 {
@@ -73,7 +64,15 @@ class PageError404 extends \Frontend
 			// Only redirect if there is no language fragment (see #4669)
 			if ($strRequest != '' && !preg_match('@^[a-z]{2}(\-[A-Z]{2})?/@', $strRequest))
 			{
-				$this->redirect($objRootPage->language . '/' . \Environment::get('request'), 301);
+				// Handle language fragments without trailing slash (see #7666)
+				if (preg_match('@^[a-z]{2}(\-[A-Z]{2})?$@', $strRequest))
+				{
+					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strRequest . '/', 301);
+				}
+				else
+				{
+					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $objRootPage->language . '/' . $strRequest, 301);
+				}
 			}
 		}
 

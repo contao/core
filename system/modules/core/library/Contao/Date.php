@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -29,9 +27,7 @@ namespace Contao;
  *
  *     Date::formatToJs('m/d/Y H:i');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Date
 {
@@ -551,6 +547,32 @@ class Date
 		}
 
 		return \Config::get('datimFormat');
+	}
+
+
+	/**
+	 * Return a numeric format string depending on the regular expression name
+	 *
+	 * @return string The numeric format string
+	 */
+	public static function getFormatFromRgxp($strRgxp)
+	{
+		switch ($strRgxp)
+		{
+			case 'date':
+				return static::getNumericDateFormat();
+				break;
+
+			case 'time':
+				return static::getNumericTimeFormat();
+				break;
+
+			case 'datim':
+				return static::getNumericDatimFormat();
+				break;
+		}
+
+		return null;
 	}
 
 

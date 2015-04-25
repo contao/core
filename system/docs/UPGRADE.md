@@ -1,6 +1,15 @@
 Contao Open Source CMS API changes
 ==================================
 
+Version 3.3 to 3.4
+------------------
+
+### PHP version
+
+We are using a new Blowfish mode that deals with potential high-bit attacks in
+Contao 3.4, therefore the minimum PHP version is raised from 5.3.2 to 5.3.7.
+
+
 Version 3.2 to 3.3
 ------------------
 

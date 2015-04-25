@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -117,6 +115,12 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'export' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['export'],
+				'href'                => 'key=export',
+				'icon'                => 'theme_export.gif'
 			)
 		)
 	),
@@ -152,6 +156,10 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'search'                  => true,
 			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true),
+			'save_callback' => array
+			(
+				array('tl_style_sheet', 'romanizeName')
+			),
 			'sql'                     => "varchar(64) NULL"
 		),
 		'disablePie' => array
@@ -166,7 +174,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['embedImages'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'cc' => array
@@ -214,12 +222,9 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 
 
 /**
- * Class tl_style_sheet
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_style_sheet extends Backend
 {
@@ -330,6 +335,17 @@ class tl_style_sheet extends Backend
 		{
 			return '<div class="tl_content_left">'. $row['name'] . $cc ."</div>\n";
 		}
+	}
+
+
+	/**
+	 * Romanize the file name (see #7526)
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function romanizeName($varValue)
+	{
+		return utf8_romanize($varValue);
 	}
 
 

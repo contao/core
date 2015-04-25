@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DataContainer
- *
  * Provide methods to handle data container arrays.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DataContainer extends \Backend
 {
@@ -497,22 +488,42 @@ class DataContainer extends \Backend
 		// Show a preview image (see #4948)
 		if ($this->strTable == 'tl_files' && $this->strField == 'name' && $this->objActiveRecord !== null && $this->objActiveRecord->type == 'file')
 		{
-			$objFile = new \File($this->objActiveRecord->path);
+			$objFile = new \File($this->objActiveRecord->path, true);
 
-			if ($objFile->isGdImage)
+			if ($objFile->isImage)
 			{
 				$image = 'placeholder.png';
 
-				if ($objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 				{
-					$image = \Image::get($objFile->path, 80, 60, 'center_center');
+					if ($objFile->width > 699 || $objFile->height > 524)
+					{
+						$image = \Image::get($objFile->path, 699, 524, 'box');
+					}
+					else
+					{
+						$image = $objFile->path;
+					}
 				}
+
+				$ctrl = 'ctrl_preview_' . substr(md5($image), 0, 8);
 
 				$strPreview = '
 
-<div class="tl_edit_preview">
+<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
 ' . \Image::getHtml($image) . '
 </div>';
+
+				// Add the script to mark the important part
+				if ($image !== 'placeholder.png')
+				{
+					$strPreview .= '<script>Backend.editPreviewWizard($(\'' . $ctrl . '\'));</script>';
+
+					if (\Config::get('showHelp'))
+					{
+						$strPreview .= '<p class="tl_help tl_tip">' . $GLOBALS['TL_LANG'][$this->strTable]['edit_preview_help'] . '</p>';
+					}
+				}
 			}
 		}
 
@@ -634,12 +645,12 @@ class DataContainer extends \Backend
 			if (is_array($v['button_callback']))
 			{
 				$this->import($v['button_callback'][0]);
-				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
+				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext, $this);
 				continue;
 			}
 			elseif (is_callable($v['button_callback']))
 			{
-				$return .= $v['button_callback']($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext);
+				$return .= $v['button_callback']($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext, $this);
 				continue;
 			}
 

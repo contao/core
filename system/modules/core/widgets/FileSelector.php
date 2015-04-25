@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class FileSelector
- *
  * Provide methods to handle input field "file tree".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileSelector extends \Widget
 {
@@ -122,7 +113,7 @@ class FileSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view picker_selector'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'filemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['icon'] ?: 'filemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
@@ -252,6 +243,13 @@ class FileSelector extends \Widget
 		natcasesort($files);
 		$files = array_values($files);
 
+		// Sort descending (see #4072)
+		if ($this->sort == 'desc')
+		{
+			$folders = array_reverse($folders);
+			$files = array_reverse($files);
+		}
+
 		$folderClass = ($this->files || $this->filesOnly) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
@@ -334,7 +332,7 @@ class FileSelector extends \Widget
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
 
-				$objFile = new \File($currentFile);
+				$objFile = new \File($currentFile, true);
 
 				// Check file extension
 				if (is_array($allowedExtensions) && !in_array($objFile->extension, $allowedExtensions))
@@ -345,15 +343,16 @@ class FileSelector extends \Widget
 				$return .= "\n    " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 				// Generate thumbnail
-				if ($objFile->isGdImage && $objFile->height > 0)
+				if ($objFile->isImage && $objFile->height > 0)
 				{
 					$thumbnail .= ' <span class="tl_gray">(' . $objFile->width . 'x' . $objFile->height . ')</span>';
 
-					if (\Config::get('thumbnails') && $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+					if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
 					{
-						$_height = ($objFile->height < 70) ? $objFile->height : 70;
+						$_height = ($objFile->height < 50) ? $objFile->height : 50;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
-						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px -19px">';
+
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
 					}
 				}
 
@@ -396,6 +395,23 @@ class FileSelector extends \Widget
 		elseif (empty($this->varValue[0]))
 		{
 			$this->varValue = array();
+		}
+
+		if (empty($this->varValue))
+		{
+			return;
+		}
+
+		// TinyMCE will pass the path instead of the ID
+		if (strncmp($this->varValue[0], \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0)
+		{
+			return;
+		}
+
+		// Ignore the numeric IDs when in switch mode (TinyMCE)
+		if (\Input::get('switch'))
+		{
+			return;
 		}
 
 		$objFiles = \FilesModel::findMultipleByIds($this->varValue);

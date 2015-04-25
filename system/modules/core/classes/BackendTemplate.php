@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class BackendTemplate
- *
  * Provide methods to handle back end templates.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendTemplate extends \Template
 {
@@ -66,8 +57,8 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '"' . (($media != '' && $media != 'all') ? ' media="' . $media . '"' : '') . '>' . "\n";
+				$options = \String::resolveFlaggedUrl($stylesheet);
+				$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo($stylesheet), $options->media);
 			}
 
 			$this->stylesheets = $strStyleSheets;
@@ -86,7 +77,8 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
+				$options = \String::resolveFlaggedUrl($javascript);
+				$strJavaScripts .= \Template::generateScriptTag($this->addStaticUrlTo($javascript), false, $options->async) . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -19,9 +17,7 @@ namespace Contao;
  * Custom settings above or below the `### INSTALL SCRIPT ###` markers will be
  * preserved.
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Config
 {
@@ -301,13 +297,28 @@ class Config
 
 
 	/**
-	 * Return true if the installation is completed
+	 * Return true if the installation is complete
 	 *
-	 * @return boolean True if the local configuration file exists
+	 * @return boolean True if the installation is complete
 	 */
 	public function isComplete()
 	{
-		return static::$blnHasLcf;
+		if (!static::$blnHasLcf)
+		{
+			return false;
+		}
+
+		if (!$this->get('licenseAccepted'))
+		{
+			return false;
+		}
+
+		if ($this->get('dbDriver') == '')
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 
@@ -315,6 +326,8 @@ class Config
 	 * Return all active modules as array
 	 *
 	 * @return array An array of active modules
+	 *
+	 * @deprecated Use ModuleLoader::getActive() instead
 	 */
 	public function getActiveModules()
 	{
@@ -434,6 +447,7 @@ class Config
 		// Load the default files
 		include TL_ROOT . '/system/config/default.php';
 		include TL_ROOT . '/system/config/agents.php';
+		include TL_ROOT . '/system/config/mimetypes.php';
 
 		// Include the local configuration file
 		if (($blnHasLcf = file_exists(TL_ROOT . '/system/config/localconfig.php')) === true)

@@ -3,25 +3,19 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
 
 
 /**
- * Handles database updates
- *
  * Compares the existing database structure with the DCA table settings and
  * calculates the queries needed to update the database.
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Installer extends \Controller
 {
@@ -298,7 +292,7 @@ class Installer extends \Controller
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -450,6 +444,7 @@ class Installer extends \Controller
 				if ($field['type'] != 'index')
 				{
 					unset($field['index']);
+					unset($field['origtype']);
 
 					// Field type
 					if ($field['length'] != '')

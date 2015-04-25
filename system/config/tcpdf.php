@@ -3,21 +3,19 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
 /**
  * This is the TCPDF (PDF generator) configuration file. See
- * system/vendor/tcpdf for more information.
+ * vendor/tecnick.com/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/vendor/contao/tcpdf/');
-define('K_PATH_URL', Environment::get('base') . 'vendor/contao/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/vendor/tecnick.com/tcpdf/');
+define('K_PATH_URL', Environment::get('base') . 'vendor/tecnick.com/tcpdf/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', TL_ROOT . '/system/tmp/');
 define('K_PATH_URL_CACHE', TL_ROOT . '/system/tmp/');

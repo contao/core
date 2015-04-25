@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -18,16 +16,14 @@ if (Input::get('do') == 'news')
 {
 	$GLOBALS['TL_DCA']['tl_content']['config']['ptable'] = 'tl_news';
 	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_news', 'checkPermission');
+	$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('tl_content_news', 'generateFeed');
 }
 
 
 /**
- * Class tl_content_news
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_content_news extends Backend
 {
@@ -155,5 +151,31 @@ class tl_content_news extends Backend
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Check for modified news feeds and update the XML files if necessary
+	 */
+	public function generateFeed()
+	{
+		$session = $this->Session->get('news_feed_updater');
+
+		if (!is_array($session) || empty($session))
+		{
+			return;
+		}
+
+		$this->import('News');
+
+		foreach ($session as $id)
+		{
+			$this->News->generateFeedsByArchive($id);
+		}
+
+		$this->import('Automator');
+		$this->Automator->generateSitemap();
+
+		$this->Session->set('news_feed_updater', null);
 	}
 }

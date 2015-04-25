@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Reads and writes pages
  *
- * @package   Models
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageModel extends \Model
 {
@@ -242,7 +234,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model_Collection|null A collection of Models or null if there is no matching pages
+	 * @return \Model\Collection|null A collection of Models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{
@@ -398,6 +390,29 @@ class PageModel extends \Model
 		}
 
 		return static::findBy($arrColumns, $intPid, $arrOptions);
+	}
+
+
+	/**
+	 * Find the language fallback page by hostname
+	 *
+	 * @param string $strHost    The hostname
+	 * @param array  $arrOptions An optional options array
+	 *
+	 * @return \Model|null The page model or null if there is not fallback page
+	 */
+	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.dns=? AND $t.fallback=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
 	}
 
 
@@ -571,8 +586,23 @@ class PageModel extends \Model
 			// Store whether the root page has been published
 			$time = time();
 			$this->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
-			$this->rootIsFallback = ($objParentPage->fallback != '');
+			$this->rootIsFallback = true;
 			$this->rootUseSSL = $objParentPage->useSSL;
+			$this->rootFallbackLanguage = $objParentPage->language;
+
+			// Store the fallback language (see #6874)
+			if (!$objParentPage->fallback)
+			{
+				$this->rootIsFallback = false;
+				$this->rootFallbackLanguage = null;
+
+				$objFallback = static::findPublishedFallbackByHostname($objParentPage->dns);
+
+				if ($objFallback !== null)
+				{
+					$this->rootFallbackLanguage = $objFallback->language;
+				}
+			}
 		}
 
 		// No root page found
@@ -584,15 +614,6 @@ class PageModel extends \Model
 		}
 
 		$this->trail = array_reverse($trail);
-
-		// Remove insert tags from all titles (see #2853)
-		$this->title = strip_insert_tags($this->title);
-		$this->pageTitle = strip_insert_tags($this->pageTitle);
-		$this->parentTitle = strip_insert_tags($this->parentTitle);
-		$this->parentPageTitle = strip_insert_tags($this->parentPageTitle);
-		$this->mainTitle = strip_insert_tags($this->mainTitle);
-		$this->mainPageTitle = strip_insert_tags($this->mainPageTitle);
-		$this->rootTitle = strip_insert_tags($this->rootTitle);
 
 		// Do not cache protected pages
 		if ($this->protected)

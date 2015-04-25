@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DC_Table
- *
  * Provide methods to modify the database.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DC_Table extends \DataContainer implements \listable, \editable
 {
@@ -415,7 +406,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$row = $objRow->row();
 
 		// Get the order fields
-		$objDcaExtractor = new \DcaExtractor($this->strTable);
+		$objDcaExtractor = \DcaExtractor::getInstance($this->strTable);
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Get all fields
@@ -605,8 +596,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">' . (!\Input::get('popup') ? '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . '
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['showRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
 
 <table class="tl_show">'.$return.'
 </table>';
@@ -856,7 +845,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Copy the values if the record contains data
 		if ($objRow->numRows)
 		{
-			foreach ($objRow->fetchAssoc() as $k=>$v)
+			foreach ($objRow->row() as $k=>$v)
 			{
 				if (in_array($k, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])))
 				{
@@ -1057,15 +1046,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 												->execute($id);
 				}
 
-				foreach ($objCTable->fetchAllAssoc() as $row)
+				while ($objCTable->next())
 				{
 					// Exclude the duplicated record itself
-					if ($v == $table && $row['id'] == $parentId)
+					if ($v == $table && $objCTable->id == $parentId)
 					{
 						continue;
 					}
 
-					foreach ($row as $kk=>$vv)
+					foreach ($objCTable->row() as $kk=>$vv)
 					{
 						if ($kk == 'id')
 						{
@@ -1090,11 +1079,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							}
 						}
 
-						$copy[$v][$row['id']][$kk] = $vv;
+						$copy[$v][$objCTable->id][$kk] = $vv;
 					}
 
-					$copy[$v][$row['id']]['pid'] = $insertID;
-					$copy[$v][$row['id']]['tstamp'] = $time;
+					$copy[$v][$objCTable->id]['pid'] = $insertID;
+					$copy[$v][$objCTable->id]['tstamp'] = $time;
 				}
 			}
 		}
@@ -1446,7 +1435,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 				if ($objSave->numRows)
 				{
-					$data[$table][$k] = $objSave->fetchAssoc();
+					$data[$table][$k] = $objSave->row();
 
 					// Store the active record
 					if ($table == $this->strTable && $v == $this->intId)
@@ -1640,6 +1629,23 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				if ($objInsertStmt->affectedRows < 1)
 				{
 					$error = true;
+				}
+
+				// Trigger the undo_callback
+				if (is_array($GLOBALS['TL_DCA'][$table]['config']['onundo_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$table]['config']['onundo_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($table, $row, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$callback($table, $row, $this);
+						}
+					}
 				}
 			}
 		}
@@ -1954,8 +1960,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">' . (\Input::get('nb') ? '&nbsp;' : '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>') . '
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['editRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
@@ -2179,8 +2183,22 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						array_unshift($this->strPalette, 'pid');
 					}
 
-					$GLOBALS['TL_DCA'][$this->strTable]['fields']['pid'] = array('label'=>&$GLOBALS['TL_LANG']['MSC']['pid'], 'inputType'=>'text', 'eval'=>array('rgxp'=>'digit'));
-					$GLOBALS['TL_DCA'][$this->strTable]['fields']['sorting'] = array('label'=>&$GLOBALS['TL_LANG']['MSC']['sorting'], 'inputType'=>'text', 'eval'=>array('rgxp'=>'digit'));
+					// Ensure a minimum configuration
+					foreach (array('pid', 'sorting') as $f)
+					{
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['label']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['label'] = &$GLOBALS['TL_LANG']['MSC'][$f];
+						}
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['inputType']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['inputType'] = 'text';
+						}
+						if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['eval']))
+						{
+							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['eval'] = array('rgxp' => 'natural');
+						}
+					}
 				}
 
 				// Begin current row
@@ -2371,8 +2389,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Add the form
 			$return = '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'">
@@ -2459,8 +2475,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			// Return the select menu
 			$return .= '
-
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
 
 <form action="'.ampersand(\Environment::get('request'), true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -2699,8 +2713,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Add the form
 			$return = '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'">
@@ -2782,8 +2794,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Return the select menu
 			$return .= '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'_all">
@@ -2837,7 +2847,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Convert date formats into timestamps
 		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
-			$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+			$objDate = new \Date($varValue, \Date::getFormatFromRgxp($arrData['eval']['rgxp']));
 			$varValue = $objDate->tstamp;
 		}
 
@@ -2854,6 +2864,23 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$new = deserialize($varValue, true);
 				$old = deserialize($this->objActiveRecord->{$this->strField}, true);
+
+				// Call load_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$old = $this->$callback[0]->$callback[1]($old, $this);
+						}
+						elseif (is_callable($callback))
+						{
+							$old = $callback($old, $this);
+						}
+					}
+				}
 
 				switch (\Input::post($this->strInputName . '_update'))
 				{
@@ -3263,8 +3290,27 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ? GROUP BY $for")
-										  ->execute($session['search'][$this->strTable]['value']);
+				$strPattern = "CAST(%s AS CHAR) REGEXP ?";
+
+				if (substr(\Config::get('dbCollation'), -3) == '_ci')
+				{
+					$strPattern = "LOWER(CAST(%s AS CHAR)) REGEXP LOWER(?)";
+				}
+
+				$fld = $session['search'][$this->strTable]['field'];
+
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']))
+				{
+					list($t, $f) = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']);
+
+					$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE (" . sprintf($strPattern, $fld) . " OR " . sprintf($strPattern, "(SELECT $f FROM $t WHERE $t.id={$this->strTable}.$fld)") . ") GROUP BY $for")
+											  ->execute($session['search'][$this->strTable]['value'], $session['search'][$this->strTable]['value']);
+				}
+				else
+				{
+					$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE " . sprintf($strPattern, $fld) . " GROUP BY $for")
+											  ->execute($session['search'][$this->strTable]['value']);
+				}
 			}
 
 			if ($objRoot->numRows < 1)
@@ -3776,8 +3822,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->loadDataContainer($this->ptable);
 
 		$return = '
-<div id="tl_buttons">' . (\Input::get('nb') ? '&nbsp;' : '
-<a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>') . ' ' . (!$blnClipboard ? ((\Input::get('act') != 'select') ? ((!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? '
+<div id="tl_buttons">' . (\Input::get('nb') ? '&nbsp;' : ($this->ptable ? '
+<a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : (isset($GLOBALS['TL_DCA'][$this->strTable]['config']['backlink']) ? '
+<a href="contao/main.php?'.$GLOBALS['TL_DCA'][$this->strTable]['config']['backlink'].'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : ''))) . ' ' . (!$blnClipboard ? ((\Input::get('act') != 'select') ? ((!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? '
 <a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a> ' : '') . $this->generateGlobalButtons() : '') : '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ') . '
 </div>' . \Message::generate(true);
 
@@ -3817,8 +3864,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$return .= '
 <div class="tl_content_right">'.((\Input::get('act') == 'select') ? '
-<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
-<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" class="edit" title="'.specialchars($strEditHeader).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : '')) . '
+<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
+<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" class="edit" title="'.specialchars($strEditHeader).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : ''))) . '
 </div>';
 
 			// Format header fields
@@ -3851,8 +3898,19 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 				elseif ($v == 'tstamp')
 				{
-					$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=?")
-												   ->execute($objParent->id);
+					if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
+					{
+						$ptable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'];
+						$cond = ($ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?"; // backwards compatibility
+
+						$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=? AND $cond")
+													   ->execute($objParent->id, $ptable);
+					}
+					else
+					{
+						$objMaxTstamp = $this->Database->prepare("SELECT MAX(tstamp) AS tstamp FROM " . $this->strTable . " WHERE pid=?")
+													   ->execute($objParent->id);
+					}
 
 					if (!$objMaxTstamp->tstamp)
 					{
@@ -3890,7 +3948,15 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Add the sorting field
 				if ($_v != '')
 				{
-					$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0] : $v;
+					if (isset($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['label']))
+					{
+						$key = is_array($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['label']) ? $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['label'][0] : $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['label'];
+					}
+					else
+					{
+						$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0] : $v;
+					}
+
 					$add[$key] = $_v;
 				}
 			}
@@ -3957,21 +4023,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$firstOrderBy = preg_replace('/\s+.*$/', '', $orderBy[0]);
 			}
 
+			$arrProcedure = $this->procedure;
+			$arrValues = $this->values;
+
 			// Support empty ptable fields (backwards compatibility)
 			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
 			{
-				$this->procedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
-				$this->values[] = $this->ptable;
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
 			}
 
 			// WHERE
-			if (!empty($this->procedure))
+			if (!empty($arrProcedure))
 			{
-				$query .= " WHERE " . implode(' AND ', $this->procedure);
+				$query .= " WHERE " . implode(' AND ', $arrProcedure);
 			}
 			if (!empty($this->root) && is_array($this->root))
 			{
-				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
+				$query .= (!empty($arrProcedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
 			// ORDER BY
@@ -3989,7 +4058,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$objOrderByStmt->limit($arrLimit[1], $arrLimit[0]);
 			}
 
-			$objOrderBy = $objOrderByStmt->execute($this->values);
+			$objOrderBy = $objOrderByStmt->execute($arrValues);
 
 			if ($objOrderBy->numRows < 1)
 			{
@@ -4066,7 +4135,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 					$return .= '
 
-<div class="tl_content'.($blnWrapperStart ? ' wrapper_start' : '').($blnWrapperSeparator ? ' wrapper_separator' : '').($blnWrapperStop ? ' wrapper_stop' : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').' click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)">
+<div class="tl_content'.($blnWrapperStart ? ' wrapper_start' : '').($blnWrapperSeparator ? ' wrapper_separator' : '').($blnWrapperStop ? ' wrapper_stop' : '').($blnIndent ? ' indent indent_'.$intWrapLevel : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').' click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)">
 <div class="tl_content_right">';
 
 					// Opening wrappers
@@ -4807,13 +4876,24 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Set the search value from the session
 		elseif ($session['search'][$this->strTable]['value'] != '')
 		{
+			$strPattern = "CAST(%s AS CHAR) REGEXP ?";
+
 			if (substr(\Config::get('dbCollation'), -3) == '_ci')
 			{
-				$this->procedure[] = "LOWER(CAST(".$session['search'][$this->strTable]['field']." AS CHAR)) REGEXP LOWER(?)";
+				$strPattern = "LOWER(CAST(%s AS CHAR)) REGEXP LOWER(?)";
+			}
+
+			$fld = $session['search'][$this->strTable]['field'];
+
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']))
+			{
+				list($t, $f) = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$fld]['foreignKey']);
+				$this->procedure[] = "(" . sprintf($strPattern, $fld) . " OR " . sprintf($strPattern, "(SELECT $f FROM $t WHERE $t.id={$this->strTable}.$fld)") . ")";
+				$this->values[] = $session['search'][$this->strTable]['value'];
 			}
 			else
 			{
-				$this->procedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
+				$this->procedure[] = sprintf($strPattern, $fld);
 			}
 
 			$this->values[] = $session['search'][$this->strTable]['value'];
@@ -4823,7 +4903,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 		foreach ($searchFields as $field)
 		{
-			$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] ?: $GLOBALS['TL_LANG']['MSC'][$field];
+			$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] ?: (is_array($GLOBALS['TL_LANG']['MSC'][$field]) ? $GLOBALS['TL_LANG']['MSC'][$field][0] : $GLOBALS['TL_LANG']['MSC'][$field]);
 			$options_sorter[utf8_romanize($option_label).'_'.$field] = '  <option value="'.specialchars($field).'"'.(($field == $session['search'][$this->strTable]['field']) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
 		}
 
@@ -4978,19 +5058,30 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		else
 		{
 			$this->limit = ($session['filter'][$filter]['limit'] != '') ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . \Config::get('resultsPerPage');
+
+			$arrProcedure = $this->procedure;
+			$arrValues = $this->values;
+
 			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
 			if (!empty($this->root) && is_array($this->root))
 			{
-				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
+				$arrProcedure[] = 'id IN(' . implode(',', $this->root) . ')';
 			}
 
-			if (!empty($this->procedure))
+			// Support empty ptable fields (backwards compatibility)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
 			{
-				$query .= " WHERE " . implode(' AND ', $this->procedure);
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
 			}
 
-			$objTotal = $this->Database->prepare($query)->execute($this->values);
+			if (!empty($arrProcedure))
+			{
+				$query .= " WHERE " . implode(' AND ', $arrProcedure);
+			}
+
+			$objTotal = $this->Database->prepare($query)->execute($arrValues);
 			$this->total = $objTotal->count;
 			$options_total = 0;
 			$blnIsMaxResultsPerPage = false;
@@ -5218,7 +5309,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 			}
 
-			$objFields = $this->Database->prepare("SELECT DISTINCT(" . $field . ") FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
+			// Support empty ptable fields (backwards compatibility)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dynamicPtable'])
+			{
+				$arrProcedure[] = ($this->ptable == 'tl_article') ? "(ptable=? OR ptable='')" : "ptable=?";
+				$arrValues[] = $this->ptable;
+			}
+
+			$objFields = $this->Database->prepare("SELECT DISTINCT " . $field . " FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
 										->execute($arrValues);
 
 			// Begin select menu

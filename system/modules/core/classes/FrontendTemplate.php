@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FrontendTemplate
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendTemplate extends \Template
 {
@@ -78,7 +70,7 @@ class FrontendTemplate extends \Template
 		}
 
 		// Parse the template
-		$this->strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
+		$this->strBuffer = $this->parse();
 
 		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
@@ -127,8 +119,6 @@ class FrontendTemplate extends \Template
 	 *
 	 * @param string $key      The section name
 	 * @param string $template An optional template name
-	 *
-	 * @return string The section markup
 	 */
 	public function section($key, $template=null)
 	{
@@ -149,20 +139,18 @@ class FrontendTemplate extends \Template
 	 *
 	 * @param string $key      An optional section name
 	 * @param string $template An optional template name
-	 *
-	 * @return string The section markup
 	 */
 	public function sections($key=null, $template=null)
 	{
 		if (empty($this->sections))
 		{
-			return '';
+			return;
 		}
 
 		// The key does not match
 		if ($key && $this->sPosition != $key)
 		{
-			return '';
+			return;
 		}
 
 		// Use the section tag in HTML5
@@ -254,9 +242,9 @@ class FrontendTemplate extends \Template
 			if ($intCache > 0 && (\Config::get('cacheMode') == 'both' || \Config::get('cacheMode') == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache - time()));
-				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
-				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
 			}
 			else
 			{

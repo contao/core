@@ -1,11 +1,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 /* Body */
@@ -36,6 +34,12 @@ h2 {
 	vertical-align:top;
 	border-bottom:1px solid #e6e6e6;
 	line-height:16px;
+}
+.tl_help_table td code {
+	font-size:11px;
+	background:#f0f0f0;
+	border-radius:3px;
+	padding:0 1px;
 }
 .tl_label {
 	width:200px;

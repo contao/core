@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleNews
- *
  * Parent class for news modules.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class ModuleNews extends \Module
 {
@@ -174,7 +165,7 @@ abstract class ModuleNews extends \Module
 				{
 					$size = deserialize($this->imgSize);
 
-					if ($size[0] > 0 || $size[1] > 0)
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
 					{
 						$arrArticle['size'] = $this->imgSize;
 					}
@@ -262,14 +253,7 @@ abstract class ModuleNews extends \Module
 				case 'author':
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
-						if ($objAuthor->google != '')
-						{
-							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' <a href="https://plus.google.com/' . $objAuthor->google . '" rel="author" target="_blank">' . $objAuthor->name . '</a>';
-						}
-						else
-						{
-							$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
-						}
+						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
 					}
 					break;
 

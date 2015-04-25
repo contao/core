@@ -3,14 +3,14 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
+
+use Leafo\ScssPhp\Compiler;
 
 
 /**
@@ -26,9 +26,7 @@ namespace Contao;
  *
  *     echo $combiner->getCombinedFile();
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Combiner extends \System
 {
@@ -334,30 +332,33 @@ class Combiner extends \System
 	{
 		if ($arrFile['extension'] == self::SCSS)
 		{
-			$objCompiler = new \scssc();
-			new \scss_compass($objCompiler);
+			$objCompiler = new Compiler();
 
 			$objCompiler->setImportPaths(array
 			(
 				TL_ROOT . '/' . dirname($arrFile['name']),
-				TL_ROOT . '/vendor/leafo/scssphp-compass/stylesheets'
+				TL_ROOT . '/vendor/contao-components/compass/css'
 			));
 
-			$objCompiler->setFormatter((\Config::get('debugMode') ? 'scss_formatter' : 'scss_formatter_compressed'));
+			$objCompiler->setFormatter((\Config::get('debugMode') ? 'Leafo\ScssPhp\Formatter\Expanded' : 'Leafo\ScssPhp\Formatter\Compressed'));
+
+			return $this->fixPaths($objCompiler->compile($content), $arrFile);
 		}
 		else
 		{
-			$objCompiler = new \lessc();
+			$strPath = dirname($arrFile['name']);
 
-			$objCompiler->setImportDir(array
+			$arrOptions = array
 			(
-				TL_ROOT . '/' . dirname($arrFile['name'])
-			));
+				'compress' => !\Config::get('debugMode'),
+				'import_dirs' => array(TL_ROOT . '/' . $strPath => $strPath)
+			);
 
-			$objCompiler->setFormatter((\Config::get('debugMode') ? 'lessjs' : 'compressed'));
+			$objParser = new \Less_Parser($arrOptions);
+			$objParser->parse($content);
+
+			return $this->fixPaths($objParser->getCss(), $arrFile);
 		}
-
-		return $this->fixPaths($objCompiler->compile($content), $arrFile);
 	}
 
 

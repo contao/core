@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class News
- *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class News extends \Frontend
 {
@@ -31,11 +22,10 @@ class News extends \Frontend
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
-	 * @param boolean
 	 */
-	public function generateFeed($intId, $blnIsFeedId=false)
+	public function generateFeed($intId)
 	{
-		$objFeed = $blnIsFeedId ? \NewsFeedModel::findByPk($intId) : \NewsFeedModel::findByArchive($intId);
+		$objFeed = \NewsFeedModel::findByPk($intId);
 
 		if ($objFeed === null)
 		{
@@ -75,6 +65,28 @@ class News extends \Frontend
 			while ($objFeed->next())
 			{
 				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
+			}
+		}
+	}
+
+
+	/**
+	 * Generate all feeds including a certain archive
+	 * @param integer
+	 */
+	public function generateFeedsByArchive($intId)
+	{
+		$objFeed = \NewsFeedModel::findByArchive($intId);
+
+		if ($objFeed !== null)
+		{
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+
+				// Update the XML file
 				$this->generateFiles($objFeed->row());
 				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
 			}

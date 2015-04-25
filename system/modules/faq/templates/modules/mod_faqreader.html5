@@ -19,14 +19,14 @@
             <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
           <?php endif; ?>
 
-          <img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>">
+          <?php $this->insert('picture_default', $this->picture); ?>
 
           <?php if ($this->href): ?>
             </a>
           <?php endif; ?>
 
           <?php if ($this->caption): ?>
-            <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+            <figcaption class="caption"><?php echo $this->caption; ?></figcaption>
           <?php endif; ?>
 
         </figure>
@@ -53,7 +53,7 @@
     <!-- indexer::continue -->
   <?php endif; ?>
 
-  <?php if ($this->allowComments && ($this->comments || !$this->requireLogin)): ?>
+  <?php if ($this->allowComments): ?>
     <div class="ce_comments block">
       <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
       <?php echo implode('', $this->comments); ?>

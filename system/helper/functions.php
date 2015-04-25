@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -138,6 +136,8 @@ function show_help_message()
  */
 function die_nicely($strTemplate, $strFallback)
 {
+	header('Content-type: text/html; charset=utf-8');
+
 	if (file_exists(TL_ROOT . "/templates/$strTemplate.html5"))
 	{
 		include TL_ROOT . "/templates/$strTemplate.html5";
@@ -267,7 +267,15 @@ function standardize($strString, $blnPreserveUppercase=false)
  */
 function strip_insert_tags($strString)
 {
-	return preg_replace('/\{\{[^\}]+\}\}/U', '', $strString);
+	$count = 0;
+
+	do
+	{
+		$strString = preg_replace('/\{\{[^\{\}]*\}\}/', '', $strString, -1, $count);
+	}
+	while ($count > 0);
+
+	return $strString;
 }
 
 

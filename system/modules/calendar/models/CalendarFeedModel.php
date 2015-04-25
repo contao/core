@@ -3,26 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Reads and writes calendar feeds
  *
- * @package   Models
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class CalendarFeedModel extends \Model
 {
@@ -40,12 +32,12 @@ class CalendarFeedModel extends \Model
 	 * @param integer $intId      The calendar ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the calendar is not part of a feed
+	 * @return \Model\Collection|null A collection of models or null if the calendar is not part of a feed
 	 */
 	public static function findByCalendar($intId, array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null, $arrOptions);
+		return static::findBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null, $arrOptions);
 	}
 
 

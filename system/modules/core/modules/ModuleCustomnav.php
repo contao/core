@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleCustomnav
- *
  * Front end module "custom navigation".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleCustomnav extends \Module
 {
@@ -166,13 +157,16 @@ class ModuleCustomnav extends \Module
 						break;
 				}
 
+				$trail = in_array($arrPage['id'], $objPage->trail);
+
 				// Active page
-				if ($objPage->id == $arrPage['id'])
+				if ($objPage->id == $arrPage['id'] && $href == \Environment::get('request'))
 				{
 					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
 
 					$row['isActive'] = true;
+					$row['isTrail'] = false;
 					$row['class'] = trim('active ' . $strClass);
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
@@ -194,10 +188,11 @@ class ModuleCustomnav extends \Module
 				// Regular page
 				else
 				{
-					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . ($trail ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;
+					$row['isTrail'] = $trail;
 					$row['class'] = $strClass;
 					$row['title'] = specialchars($arrPage['title'], true);
 					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);

@@ -3,14 +3,14 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
+
+use True\Punycode;
 
 
 /**
@@ -25,9 +25,7 @@ namespace Contao;
  *     echo Idna::encodeEmail('mit@bürger.de');
  *     echo Idna::encodeUrl('http://www.bürger.de');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Idna
 {
@@ -41,8 +39,9 @@ class Idna
 	 */
 	public static function encode($strDomain)
 	{
-		$objIdn = new \idna_convert();
-		return $objIdn->encode($strDomain);
+		$objPunycode = new Punycode();
+
+		return $objPunycode->encode($strDomain);
 	}
 
 
@@ -55,8 +54,9 @@ class Idna
 	 */
 	public static function decode($strDomain)
 	{
-		$objIdn = new \idna_convert();
-		return $objIdn->decode($strDomain);
+		$objPunycode = new Punycode();
+
+		return $objPunycode->decode($strDomain);
 	}
 
 
@@ -80,6 +80,7 @@ class Idna
 		}
 
 		list($strLocal, $strHost) = explode('@', $strEmail);
+
 		return $strLocal . '@' . static::encode($strHost);
 	}
 
@@ -110,25 +111,19 @@ class Idna
 			return static::encodeEmail($strUrl);
 		}
 
-		$blnSchemeAdded = false;
 		$arrUrl = parse_url($strUrl);
 
 		// Add the scheme to ensure that parse_url works correctly
 		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
 		{
-			$blnSchemeAdded = true;
 			$arrUrl = parse_url('http://' . $strUrl);
+			unset($arrUrl['scheme']);
 		}
 
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
-			// Remove the scheme if it has been added above (see #3792)
-			if ($blnSchemeAdded)
-			{
-				unset($arrUrl['scheme']);
-			}
-			elseif ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
+			if ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
 			{
 				$arrUrl['scheme'] .= ':'; // see #6148
 			}

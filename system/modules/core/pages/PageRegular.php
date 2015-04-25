@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageRegular
- *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageRegular extends \Frontend
 {
@@ -146,6 +137,12 @@ class PageRegular extends \Frontend
 
 		$this->Template->sections = $arrCustomSections;
 
+		// Mark RTL languages (see #7171)
+		if ($GLOBALS['TL_LANG']['MSC']['textDirection'] == 'rtl')
+		{
+			$this->Template->isRTL = true;
+		}
+
 		// HOOK: modify the page or layout object
 		if (isset($GLOBALS['TL_HOOKS']['generatePage']) && is_array($GLOBALS['TL_HOOKS']['generatePage']))
 		{
@@ -174,7 +171,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Assign the title and description
-		$this->Template->title = $this->replaceInsertTags($objLayout->titleTag); // see #7097
+		$this->Template->title = strip_insert_tags($this->replaceInsertTags($objLayout->titleTag)); // see #7097
 		$this->Template->description = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), $objPage->description);
 
 		// Body onload and body classes
@@ -379,7 +376,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js', $blnXhtml) . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag('//code.jquery.com/jquery-' . $GLOBALS['TL_ASSETS']['JQUERY'] . '.min.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->jSource == 'j_fallback')
@@ -398,7 +395,7 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$this->Template->mooScripts .= \Template::generateScriptTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
+				$this->Template->mooScripts .= \Template::generateScriptTag('//ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
@@ -419,6 +416,12 @@ class PageRegular extends \Frontend
 		if (\Config::get('debugMode') && !$objLayout->addMooTools)
 		{
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
+		}
+
+		// Picturefill
+		if ($objLayout->picturefill)
+		{
+			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/respimage/' . $GLOBALS['TL_ASSETS']['RESPIMAGE'] . '/respimage.min.js|static';
 		}
 
 		// Check whether TL_APPEND_JS exists (see #4890)
@@ -445,6 +448,7 @@ class PageRegular extends \Frontend
 		$this->Template->base = \Environment::get('base');
 		$this->Template->disableCron = \Config::get('disableCron');
 		$this->Template->cronTimeout = $this->getCronTimeout();
+		$this->Template->isRTL = false;
 	}
 
 
@@ -465,7 +469,7 @@ class PageRegular extends \Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$strStyleSheets .= \Template::generateStyleTag((\Environment::get('ssl') ? 'https://' : 'http://') . 'fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts), 'all', $blnXhtml) . "\n";
+			$strStyleSheets .= \Template::generateStyleTag('//fonts.googleapis.com/css?family=' . str_replace('|', '%7C', $objLayout->webfonts), 'all', $blnXhtml) . "\n";
 		}
 
 		// Add the Contao CSS framework style sheets
@@ -484,6 +488,12 @@ class PageRegular extends \Frontend
 		if (is_array($arrFramework) && in_array('tinymce.css', $arrFramework) && file_exists(TL_ROOT . '/' . \Config::get('uploadPath') . '/tinymce.css'))
 		{
 			$GLOBALS['TL_FRAMEWORK_CSS'][] = \Config::get('uploadPath') . '/tinymce.css';
+		}
+
+		// Make sure TL_USER_CSS is set
+		if (!is_array($GLOBALS['TL_USER_CSS']))
+		{
+			$GLOBALS['TL_USER_CSS'] = array();
 		}
 
 		// User style sheets
@@ -591,12 +601,24 @@ class PageRegular extends \Frontend
 
 			if ($objFiles !== null)
 			{
+				$arrFiles = array();
+
 				while ($objFiles->next())
 				{
 					if (file_exists(TL_ROOT . '/' . $objFiles->path))
 					{
-						$GLOBALS['TL_USER_CSS'][] = $objFiles->path . '||static';
+						$arrFiles[] = $objFiles->path . '|static';
 					}
+				}
+
+				// Inject the external style sheets before or after the internal ones (see #6937)
+				if ($objLayout->loadingOrder == 'external_first')
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], 0, 0, $arrFiles);
+				}
+				else
+				{
+					array_splice($GLOBALS['TL_USER_CSS'], count($GLOBALS['TL_USER_CSS']), 0, $arrFiles);
 				}
 			}
 		}

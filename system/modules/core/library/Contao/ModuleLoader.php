@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -24,9 +22,7 @@ namespace Contao;
  *     $arrModules = ModuleLoader::getActive();
  *     $arrModules = ModuleLoader::getDisabled();
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleLoader
 {
@@ -108,50 +104,51 @@ class ModuleLoader
 				$modules = scan(TL_ROOT . '/system/modules');
 				sort($modules);
 
+				// Filter dot resources, files and legacy modules
+				foreach ($modules as $k=>$v)
+				{
+					if (strncmp($v, '.', 1) === 0)
+					{
+						unset($modules[$k]);
+					}
+					elseif (!is_dir(TL_ROOT . '/system/modules/' . $v))
+					{
+						unset($modules[$k]);
+					}
+					elseif (in_array($v, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
+					{
+						unset($modules[$k]);
+					}
+				}
+
 				// Load the "core" module first
 				array_unshift($modules, 'core');
 				$modules = array_unique($modules);
 			}
 
-			// Walk through the modules
-			foreach ($modules as $file)
+			// Filter disabled modules
+			foreach ($modules as $k=>$v)
 			{
-				// Ignore dot resources
-				if (strncmp($file, '.', 1) === 0)
+				if (file_exists(TL_ROOT . '/system/modules/' . $v . '/.skip'))
 				{
-					continue;
+					unset($modules[$k]);
+					static::$disabled[] = $v;
 				}
+			}
 
-				// Ignore legacy modules
-				if (in_array($file, array('backend', 'frontend', 'rep_base', 'rep_client', 'registration', 'rss_reader', 'tpl_editor')))
-				{
-					continue;
-				}
-
-				$path = TL_ROOT . '/system/modules/' . $file;
-
-				// Ignore files
-				if (!is_dir($path))
-				{
-					continue;
-				}
-
-				// Ignore disabled module
-				if (file_exists($path . '/.skip'))
-				{
-					static::$disabled[] = $file;
-					continue;
-				}
-
-				$load[$file] = array();
+			// Walk through the modules
+			foreach ($modules as $module)
+			{
+				$load[$module] = array();
+				$path = TL_ROOT . '/system/modules/' . $module;
 
 				// Read the autoload.ini if any
 				if (file_exists($path . '/config/autoload.ini'))
 				{
 					$config = parse_ini_file($path . '/config/autoload.ini', true);
-					$load[$file] = $config['requires'] ?: array();
+					$load[$module] = $config['requires'] ?: array();
 
-					foreach ($load[$file] as $k=>$v)
+					foreach ($load[$module] as $k=>$v)
 					{
 						// Optional requirements (see #6835)
 						if (strncmp($v, '*', 1) === 0)
@@ -160,11 +157,11 @@ class ModuleLoader
 
 							if (!in_array($key, $modules))
 							{
-								unset($load[$file][$k]);
+								unset($load[$module][$k]);
 							}
 							else
 							{
-								$load[$file][$k] = $key;
+								$load[$module][$k] = $key;
 							}
 						}
 					}
