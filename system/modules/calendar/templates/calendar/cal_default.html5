@@ -19,8 +19,9 @@
         <td class="<?php echo $day['class']; ?>">
           <div class="header"><?php echo $day['label']; ?></div>
           <?php foreach ($day['events'] as $event): ?>
-            <div class="event cal_<?php echo $event['parent']; ?><?php echo $event['class']; ?>">
-              <a href="<?php echo $event['href']; ?>" title="<?php echo $event['title']; ?> (<?php if ($event['day']): echo $event['day']; ?>, <?php endif; echo $event['date']; if ($event['time']): ?>, <?php echo $event['time']; endif; ?>)"<?php echo $event['target']; ?>><?php echo $event['link']; ?></a>
+            <div class="event cal_<?php echo $event['parent']; ?><?php echo $event['class']; ?>" itemscope itemtype="http://schema.org/Event">
+              <a href="<?php echo $event['href']; ?>" title="<?php echo $event['title']; ?> (<?php if ($event['day']): echo $event['day']; ?>, <?php endif; echo $event['date']; if ($event['time']): ?>, <?php echo $event['time']; endif; ?>)"<?php echo $event['target']; ?> itemprop="url"><span itemprop="name"><?php echo $event['link']; ?></span></a>
+              <time datetime="<?php echo $this->datetime; ?>" class="date invisible" itemprop="startDate" content="<?php echo $this->datetime; ?>"><?php echo $event['date']; ?><?php if ($event['time']): ?>, <?php echo $event['time']; endif; ?></time>
             </div>
           <?php endforeach; ?>
         </td>
