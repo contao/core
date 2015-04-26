@@ -10,7 +10,7 @@
     <?php endif; ?>
 
     <?php if ($this->hasPrevious): ?>
-      <li class="previous"><a href="<?php echo $this->previous['href']; ?>" class="previous" title="<?php echo $this->previous['title']; ?>"><?php echo $this->previous['link']; ?></a></li>
+      <li class="previous"><a href="<?php echo $this->previous['href']; ?>" class="previous" title="<?php echo $this->previous['title']; ?>" rel="prev"><?php echo $this->previous['link']; ?></a></li>
     <?php endif; ?>
 
     <?php foreach ($this->pages as $page): ?>
@@ -22,7 +22,7 @@
     <?php endforeach; ?>
 
     <?php if ($this->hasNext): ?>
-      <li class="next"><a href="<?php echo $this->next['href']; ?>" class="next" title="<?php echo $this->next['title']; ?>"><?php echo $this->next['link']; ?></a></li>
+      <li class="next"><a href="<?php echo $this->next['href']; ?>" class="next" title="<?php echo $this->next['title']; ?>" rel="prev"><?php echo $this->next['link']; ?></a></li>
     <?php endif; ?>
 
     <?php if ($this->hasLast): ?>
