@@ -356,6 +356,10 @@ $GLOBALS['TL_CROP'] = array
 	(
 		'proportional', 'box'
 	),
+	'image_sizes' => array
+	(
+		// placeholder
+	),
 	'exact' => array
 	(
 		'crop',

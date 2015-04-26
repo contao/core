@@ -500,21 +500,16 @@ abstract class System
 		{
 			try
 			{
-				$sizes = array();
 				$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
 
 				while ($imageSize->next())
 				{
-					$sizes[$imageSize->id] = $imageSize->name;
-					$sizes[$imageSize->id] .= ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
+					$GLOBALS['TL_CROP']['image_sizes'][$imageSize->id] = $imageSize->name . ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
 				}
+			}
+			catch (\Exception $e) {}
 
-				static::$arrImageSizes = array_merge(array('image_sizes' => $sizes), $GLOBALS['TL_CROP']);
-			}
-			catch (\Exception $e)
-			{
-				static::$arrImageSizes = $GLOBALS['TL_CROP'];
-			}
+			static::$arrImageSizes = $GLOBALS['TL_CROP'];
 		}
 
 		return static::$arrImageSizes;

@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### Fixed
+Fix the usability of the image size fields (see #7565).
+
 ### Changed
 Show versions even if there is only one (see #7730).
 
