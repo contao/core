@@ -1,10 +1,10 @@
 
-<div class="layout_full block<?php echo $this->class; ?>">
+<div class="layout_full block<?php echo $this->class; ?>" itemscope itemtype="http://schema.org/Article">
 
-  <h1><?php echo $this->newsHeadline; ?></h1>
+  <h1 itemprop="name"><?php echo $this->newsHeadline; ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
+    <p class="info"><time datetime="<?php echo $this->datetime; ?>" itemprop="datePublished"><?php echo $this->date; ?></time> <span itemprop="publisher"><?php echo $this->author; ?></span> <?php echo $this->commentCount; ?></p>
   <?php endif; ?>
 
   <?php if ($this->hasSubHeadline): ?>
