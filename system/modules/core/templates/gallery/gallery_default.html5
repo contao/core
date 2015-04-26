@@ -1,17 +1,18 @@
 
-<ul class="cols_<?php echo $this->perRow; ?>">
+
+<ul class="cols_<?php echo $this->perRow; ?>" itemscope itemtype="http://schema.org/ImageGallery">
   <?php foreach ($this->body as $class=>$row): ?>
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>
         <li class="<?php echo $class; ?> <?php echo $col->class; ?>">
-          <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?>>
+          <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="ImageObject">
             <?php if ($col->href): ?>
-              <a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>"><?php $this->insert('picture_default', $col->picture); ?></a>
+              <a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>" itemprop="contentUrl"><?php $this->insert('picture_default', $col->picture); ?></a>
             <?php else: ?>
               <?php $this->insert('picture_default', $col->picture); ?>
             <?php endif; ?>
             <?php if ($col->caption): ?>
-              <figcaption class="caption"><?php echo $col->caption; ?></figcaption>
+              <figcaption class="caption" itemprop="caption description"><?php echo $col->caption; ?></figcaption>
             <?php endif; ?>
           </figure>
         </li>
