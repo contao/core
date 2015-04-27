@@ -2,7 +2,7 @@
 
 <?php $this->block('content'); ?>
 
-  <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+  <ul itemscope itemtype="http://schema.org/BreadcrumbList">
     <?php foreach ($this->items as $item): ?>
       <?php if ($item['isActive']): ?>
         <li class="active<?php if ($item['class']): ?> <?php echo $item['class']; ?><?php endif; ?> last" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="item name"><?php echo $item['title']; ?></span></li>
@@ -10,6 +10,6 @@
         <li<?php if ($item['class']): ?> class="<?php echo $item['class']; ?>"<?php endif; ?> itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="<?php echo $item['href']; ?>" title="<?php echo $item['title']; ?>" itemprop="item"><span itemprop="name"><?php echo $item['link']; ?></span></a></li>
       <?php endif; ?>
     <?php endforeach; ?>
-  </ol>
+  </ul>
 
 <?php $this->endblock(); ?>
