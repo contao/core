@@ -161,6 +161,9 @@ fieldset.checkbox_container,fieldset.radio_container {
 .tl_text_4 {
 	width:70px;
 }
+.tl_imageSize_0.tl_text_4,.tl_imageSize_1.tl_text_4 {
+	width:71px;
+}
 .tl_textarea {
 	width:676px;
 	height:240px;
@@ -478,6 +481,9 @@ a.tl_submit,a.tl_submit:hover {
 	}
 	.tl_text_4 {
 		width:92px;
+	}
+	.tl_imageSize_0.tl_text_4,.tl_imageSize_1.tl_text_4 {
+		width:94px;
 	}
 	.tl_textarea {
 		width:854px;

@@ -93,17 +93,6 @@ class ImageSize extends \Widget
 		}
 
 		$arrFields = array();
-
-		for ($i=0; $i<2; $i++)
-		{
-			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$this->strName,
-									$this->strId.'_'.$i,
-									$i,
-									specialchars(@$this->varValue[$i]), // see #4979
-									$this->getAttributes());
-		}
-
 		$arrOptions = array();
 
 		foreach ($this->arrOptions as $strKey=>$arrOption)
@@ -131,11 +120,22 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
+		$arrFields[] = sprintf('<select name="%s[2]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
 								$this->strName,
 								$this->strId.'_3',
 								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
+
+		for ($i=0; $i<2; $i++)
+		{
+			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+									$this->strName,
+									$i,
+									$this->strId.'_'.$i,
+									$i,
+									specialchars(@$this->varValue[$i]), // see #4979
+									$this->getAttributes());
+		}
 
 		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,

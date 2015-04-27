@@ -303,7 +303,7 @@
         <source>Open the full-size image in a lightbox or the link in a new browser window.</source>
       </trans-unit>
       <trans-unit id="tl_module.imgSize.0">
-        <source>Image width and height</source>
+        <source>Image size</source>
       </trans-unit>
       <trans-unit id="tl_module.imgSize.1">
         <source>Here you can set the image dimensions and the resize mode.</source>
