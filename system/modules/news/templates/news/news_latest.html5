@@ -6,7 +6,7 @@
   <?php endif; ?>
 
   <?php if ($this->addImage): ?>
-    <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="ImageObject">
+    <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin): ?> style="<?php echo $this->margin; ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
 
       <?php if ($this->href): ?>
         <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>" itemprop="contentUrl">

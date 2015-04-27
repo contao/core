@@ -5,7 +5,7 @@
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>
         <li class="<?php echo $class; ?> <?php echo $col->class; ?>">
-          <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="ImageObject">
+          <figure class="image_container"<?php if ($col->margin): ?> style="<?php echo $col->margin; ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
             <?php if ($col->href): ?>
               <a href="<?php echo $col->href; ?>"<?php echo $col->attributes; ?> title="<?php echo $col->alt; ?>" itemprop="contentUrl"><?php $this->insert('picture_default', $col->picture); ?></a>
             <?php else: ?>
