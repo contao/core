@@ -19,7 +19,7 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption" itemprop="caption description"><?php echo $this->caption; ?></figcaption>
+        <figcaption class="caption" itemprop="caption"><?php echo $this->caption; ?></figcaption>
       <?php endif; ?>
 
     </figure>

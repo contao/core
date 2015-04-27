@@ -12,7 +12,7 @@
               <?php $this->insert('picture_default', $col->picture); ?>
             <?php endif; ?>
             <?php if ($col->caption): ?>
-              <figcaption class="caption" itemprop="caption description"><?php echo $col->caption; ?></figcaption>
+              <figcaption class="caption" itemprop="caption"><?php echo $col->caption; ?></figcaption>
             <?php endif; ?>
           </figure>
         </li>
