@@ -512,7 +512,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets and tl_files
-						elseif (\Config::get('uploadPath') != 'files' && ($table == 'tl_style_sheet' || $table == 'tl_style' || $table == 'tl_files') && strpos($value, 'files') !== false)
+						elseif (($table == 'tl_style_sheet' || $table == 'tl_style' || ($table == 'tl_files' && $name == 'path')) && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -690,6 +690,7 @@ class Theme extends \Backend
 		$strTmp = md5(uniqid(mt_rand(), true));
 		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
 
+		// Add the files
 		$this->addTableTlFiles($xml, $tables, $objTheme, $objArchive);
 
 		// Add the template files
@@ -911,10 +912,10 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_files to the XML and the files to the archive
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
-	 * @param \ZipWriter
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
+	 * @param \ZipWriter              $objArchive
 	 */
 	protected function addTableTlFiles(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme, \ZipWriter $objArchive)
 	{
@@ -1028,8 +1029,13 @@ class Theme extends \Backend
 	/**
 	 * Recursively add a folder to the archive
 	 *
-	 * @param \ZipWriter $objArchive
-	 * @param string     $strFolder
+	 * @param \ZipWriter           $objArchive
+	 * @param string               $strFolder
+	 * @param \DOMDocument         $xml
+	 * @param \DOMNode|\DOMElement $table
+	 * @param array                $arrOrder
+	 *
+	 * @throws \Exception If the folder path is insecure
 	 */
 	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder, \DOMDocument $xml, \DOMElement $table, array $arrOrder=array())
 	{
