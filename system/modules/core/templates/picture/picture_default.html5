@@ -8,7 +8,7 @@
     <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>
 
-<img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?php if ($this->class) echo ' class="' . $this->class . '"'; ?><?= $this->attributes ?> itemprop="http://schema.org/image">
+<img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?php if ($this->class) echo ' class="' . $this->class . '"'; ?><?= $this->attributes ?> itemprop="image" content="<?= $this->img['src'] ?>">
 
 <?php if ($this->sources): ?>
   </picture>

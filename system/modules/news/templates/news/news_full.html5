@@ -4,7 +4,7 @@
   <h1 itemprop="name"><?= $this->newsHeadline ?></h1>
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <span itemprop="publisher"><?= $this->author ?></span> <?= $this->commentCount ?></p>
+    <p class="info"><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
   <?php endif; ?>
 
   <?php if ($this->hasSubHeadline): ?>

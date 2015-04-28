@@ -2,9 +2,9 @@
 <ul class="<?= $this->level ?>" role="<?= ($this->level == 'level_1') ? 'menubar' : 'menu' ?>">
   <?php foreach ($this->items as $item): ?>
     <?php if ($item['isActive']): ?>
-      <li class="<?= $item['class'] ?>" itemprop="name"><span class="<?= $item['class'] ?>" role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></span><?= $item['subitems'] ?></li>
+      <li class="<?= $item['class'] ?>"><span class="<?= $item['class'] ?>" role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?> itemprop="name"><?= $item['link'] ?></span><?= $item['subitems'] ?></li>
     <?php else: ?>
-      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?> itemprop="name"><a href="<?= $item['href'] ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?= $item['target'] ?> role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?> itemprop="url"><?= $item['link'] ?></a><?= $item['subitems'] ?></li>
+      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><a href="<?= $item['href'] ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?= $item['target'] ?> role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?> itemprop="url"><span itemprop="name"><?= $item['link'] ?></span></a><?= $item['subitems'] ?></li>
     <?php endif; ?>
   <?php endforeach; ?>
 </ul>

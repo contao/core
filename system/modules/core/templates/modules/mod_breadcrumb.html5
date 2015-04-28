@@ -5,9 +5,9 @@
   <ul itemscope itemtype="http://schema.org/BreadcrumbList">
     <?php foreach ($this->items as $item): ?>
       <?php if ($item['isActive']): ?>
-        <li class="active<?php if ($item['class']): ?> <?= $item['class'] ?><?php endif; ?> last" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="item name"><?= $item['title'] ?></span></li>
+        <li class="active<?php if ($item['class']): ?> <?= $item['class'] ?><?php endif; ?> last" itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name"><?= $item['title'] ?></span></li>
       <?php else: ?>
-        <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?> itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="<?= $item['href'] ?>" title="<?= $item['title'] ?>" itemprop="item"><span itemprop="name"><?= $item['link'] ?></span></a></li>
+        <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement"><a href="<?= $item['href'] ?>" title="<?= $item['title'] ?>" itemprop="url"><span itemprop="name"><?= $item['link'] ?></span></a></li>
       <?php endif; ?>
     <?php endforeach; ?>
   </ul>

@@ -49,7 +49,7 @@
         <div id="container">
 
           <?php $this->block('main'); ?>
-            <div id="main" itemscope itemprop="mainContentOfPage">
+            <div id="main" itemscope itemtype="http://schema.org/WebPageElement" itemprop="mainContentOfPage">
               <div class="inside">
                 <?= $this->main ?>
               </div>
