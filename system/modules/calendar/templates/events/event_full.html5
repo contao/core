@@ -1,7 +1,7 @@
 
-<div class="event layout_full block<?php echo $this->class; ?>">
+<div class="event layout_full block<?php echo $this->class; ?>" itemscope itemtype="http://schema.org/Event">
 
-  <h1><?php echo $this->title; ?></h1>
+  <h1 itemprop="name"><?php echo $this->title; ?></h1>
   <p class="info"><?php echo $this->date; ?></p>
 
   <?php if ($this->recurring): ?>
