@@ -2033,7 +2033,9 @@ var Backend =
 	},
 
 	/**
-	 * Allow to select multiple checkboxes while holding the SHIFT key
+	 * Allow to select multiple checkboxes while holding down the SHIFT key
+	 *
+	 * @author Kamil Kuzminski
 	 */
 	enableSelectMultipleCheckboxes: function() {
 		var container = $('tl_select');
@@ -2055,11 +2057,9 @@ var Backend =
 				startIndex = checkboxes.indexOf(start);
 				from = Math.min(thisIndex, startIndex);
 				to = Math.max(thisIndex, startIndex);
-
-				// Check or uncheck?
 				check = checkboxes[from].checked ? true : false;
 
-				for (from; from < to; from++) {
+				for (from; from<to; from++) {
 					checkboxes[from].checked = check;
 				}
 			}
