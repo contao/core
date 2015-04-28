@@ -5,6 +5,9 @@ Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
 ### Improved
+Also export the image meta data when exporting themes (see #7480). 
+
+### Improved
 Improve the model registry (see #7725).
 
 ### Changed

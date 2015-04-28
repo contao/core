@@ -1083,10 +1083,9 @@ class Theme extends \Backend
 				// Always store files in files and convert the directory upon import
 				$objArchive->addFile($strFolder .'/'. $strFile, $strTarget .'/'. $strFile);
 
-				$objModel = \FilesModel::findByPath($strFolder .'/'. $strFile);
-
 				$arrRow = array();
 				$objFile = new \File($strFolder .'/'. $strFile, true);
+				$objModel = \FilesModel::findByPath($strFolder .'/'. $strFile);
 
 				if ($objModel !== null)
 				{
