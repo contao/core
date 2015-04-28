@@ -38,6 +38,9 @@ Moved the insert tag logic into a separate class.
 Show the upload limits in the file manager (see #7389).
 
 ### Improved
+Also export the image meta data when exporting themes (see #7480). 
+
+### Improved
 Improve the model registry (see #7725).
 
 ### Changed
