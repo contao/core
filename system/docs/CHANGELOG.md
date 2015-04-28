@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
+### New
+Select multiple checkboxes by holding down the SHIFT key (see #7781).
+
 ### Changed
 Show versions even if there is only one (see #7730).
 

@@ -2033,6 +2033,42 @@ var Backend =
 	},
 
 	/**
+	 * Allow to select multiple checkboxes while holding down the SHIFT key
+	 *
+	 * @author Kamil Kuzminski
+	 */
+	enableSelectMultipleCheckboxes: function() {
+		var container = $('tl_select');
+
+		if (!container) {
+			return;
+		}
+
+		var checkboxes = container.getElements('input[type="checkbox"]'),
+			start, thisIndex, startIndex, check, from, to;
+
+		checkboxes.addEvent('click', function(e) {
+			if (this.get('id') == 'tl_select_trigger') {
+				return;
+			}
+
+			if (e.shift && start) {
+				thisIndex = checkboxes.indexOf(this);
+				startIndex = checkboxes.indexOf(start);
+				from = Math.min(thisIndex, startIndex);
+				to = Math.max(thisIndex, startIndex);
+				check = checkboxes[from].checked ? true : false;
+
+				for (from; from<to; from++) {
+					checkboxes[from].checked = check;
+				}
+			}
+
+			start = this;
+		});
+	},
+
+	/**
 	 * Allow to mark the important part of an image
 	 *
 	 * @param {object} el The DOM element
@@ -2181,6 +2217,7 @@ window.addEvent('domready', function() {
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
+	Backend.enableSelectMultipleCheckboxes();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
