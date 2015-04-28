@@ -1,17 +1,17 @@
 
-<ul class="cols_<?= $this->perRow ?>">
+<ul class="cols_<?= $this->perRow ?>" itemscope itemtype="http://schema.org/ImageGallery">
   <?php foreach ($this->body as $class=>$row): ?>
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>
         <li class="<?= $class ?> <?= $col->class ?>">
-          <figure class="image_container"<?php if ($col->margin): ?> style="<?= $col->margin ?>"<?php endif; ?>>
+          <figure class="image_container"<?php if ($col->margin): ?> style="<?= $col->margin ?>"<?php endif; ?> itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
             <?php if ($col->href): ?>
-              <a href="<?= $col->href ?>"<?= $col->attributes ?> title="<?= $col->alt ?>"><?php $this->insert('picture_default', $col->picture); ?></a>
+              <a href="<?= $col->href ?>"<?= $col->attributes ?> title="<?= $col->alt ?>" itemprop="contentUrl"><?php $this->insert('picture_default', $col->picture); ?></a>
             <?php else: ?>
               <?php $this->insert('picture_default', $col->picture); ?>
             <?php endif; ?>
             <?php if ($col->caption): ?>
-              <figcaption class="caption"><?= $col->caption ?></figcaption>
+              <figcaption class="caption" itemprop="caption"><?= $col->caption ?></figcaption>
             <?php endif; ?>
           </figure>
         </li>

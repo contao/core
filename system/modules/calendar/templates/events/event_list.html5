@@ -1,13 +1,13 @@
 
 <?php if ($this->header): ?>
   <div class="header<?= $this->classHeader ?>">
-    <time datetime="<?= $this->datetime ?>" class="date"><?= $this->firstDate ?></time><?php if ($this->firstDay): ?> <span class="day">(<?= $this->firstDay ?>)</span><?php endif; ?>
+    <time datetime="<?= $this->datetime ?>" class="date" itemprop="startDate" content="<?= $this->datetime ?>"><?= $this->firstDate ?></time><?php if ($this->firstDay): ?> <span class="day">(<?= $this->firstDay ?>)</span><?php endif; ?>
   </div>
 <?php endif; ?>
 
-<div class="event layout_list<?= $this->classList ?>">
+<div class="event layout_list<?= $this->classList ?>" itemscope itemtype="http://schema.org/Event">
 
-  <h2><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?>><?= $this->link ?></a></h2>
+  <h2 itemprop="name"><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?> itemprop="url"><?= $this->link ?></a></h2>
 
   <?php if ($this->time || $this->span): ?>
     <p class="time"><?= $this->time . $this->span ?></p>

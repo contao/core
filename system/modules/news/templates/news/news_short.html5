@@ -1,13 +1,13 @@
 
-<div class="layout_short arc_<?= $this->archive->id ?> block<?= $this->class ?>">
+<div class="layout_short arc_<?= $this->archive->id ?> block<?= $this->class ?>" itemscope itemtype="http://schema.org/Article">
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
+    <p class="info"><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <span itemprop="publisher"><?= $this->author ?></span> <?= $this->commentCount ?></p>
   <?php endif; ?>
 
-  <h2><?= $this->linkHeadline ?></h2>
+  <h2 itemprop="name"><?= $this->linkHeadline ?></h2>
 
-  <div class="teaser">
+  <div class="teaser" itemprop="description">
     <?= $this->teaser ?>
   </div>
 
