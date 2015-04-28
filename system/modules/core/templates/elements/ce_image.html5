@@ -2,10 +2,10 @@
 
 <?php $this->block('content'); ?>
 
-  <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
+  <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ImageObject">
 
     <?php if ($this->href): ?>
-      <a href="<?= $this->href ?>"<?php if ($this->linkTitle): ?> title="<?= $this->linkTitle ?>"<?php endif; ?><?= $this->attributes ?>>
+      <a href="<?= $this->href ?>"<?php if ($this->linkTitle): ?> title="<?= $this->linkTitle ?>"<?php endif; ?><?= $this->attributes ?> itemprop="contentUrl">
     <?php endif; ?>
 
     <?php $this->insert('picture_default', $this->picture); ?>
@@ -15,7 +15,7 @@
     <?php endif; ?>
 
     <?php if ($this->caption): ?>
-      <figcaption class="caption"><?= $this->caption ?></figcaption>
+      <figcaption class="caption" itemprop="caption"><?= $this->caption ?></figcaption>
     <?php endif; ?>
 
   </figure>

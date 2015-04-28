@@ -1,5 +1,5 @@
 
-<div class="layout_simple arc_<?= $this->archive->id ?> block<?= $this->class ?>">
-  <?php if ($this->date): ?><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?php endif; ?>
+<div class="layout_simple arc_<?= $this->archive->id ?> block<?= $this->class ?>" itemscope itemtype="http://schema.org/Article">
+  <?php if ($this->date): ?><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <?php endif; ?>
   <?= $this->linkHeadline ?>
 </div>

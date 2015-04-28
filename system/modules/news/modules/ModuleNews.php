@@ -389,7 +389,7 @@ abstract class ModuleNews extends \Module
 		// Internal link
 		if ($objArticle->source != 'external')
 		{
-			return sprintf('<a href="%s" title="%s">%s%s</a>',
+			return sprintf('<a href="%s" title="%s" itemprop="url">%s%s</a>',
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
 							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline), true),
 							$strLink,
@@ -412,7 +412,7 @@ abstract class ModuleNews extends \Module
 		global $objPage;
 
 		// External link
-		return sprintf('<a href="%s" title="%s"%s>%s</a>',
+		return sprintf('<a href="%s" title="%s"%s itemprop="url">%s</a>',
 						$strArticleUrl,
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $strArticleUrl)),
 						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') : ''),

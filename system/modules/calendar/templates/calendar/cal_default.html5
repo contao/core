@@ -19,8 +19,8 @@
         <td class="<?= $day['class'] ?>">
           <div class="header"><?= $day['label'] ?></div>
           <?php foreach ($day['events'] as $event): ?>
-            <div class="event cal_<?= $event['parent'] ?><?= $event['class'] ?>">
-              <a href="<?= $event['href'] ?>" title="<?= $event['title'] ?> (<?php if ($event['day']) echo $event['day'] . ', '; ?><?= $event['date'] ?><?php if ($event['time']) echo ', ' .  $event['time']; ?>)"<?= $event['target'] ?>><?= $event['link'] ?></a>
+            <div class="event cal_<?= $event['parent'] ?><?= $event['class'] ?>" itemscope itemtype="http://schema.org/Event">
+              <a href="<?= $event['href'] ?>" title="<?= $event['title'] ?> (<?php if ($event['day']) echo $event['day'] . ', '; ?><?= $event['date'] ?><?php if ($event['time']) echo ', ' .  $event['time']; ?>)"<?= $event['target'] ?> itemprop="url"><span itemprop="name"><?= $event['link'] ?></span></a>
             </div>
           <?php endforeach; ?>
         </td>
