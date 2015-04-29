@@ -55,7 +55,7 @@
           </div>
         </form>
       <?php endif; ?>
-      <div class="tl_listing_container tree_view" id="tl_listing">
+      <div class="tl_listing_container tree_view unselectable" id="tl_select">
         <?= $this->breadcrumb ?>
         <?= $this->main ?>
       </div>

@@ -2041,12 +2041,6 @@ var Backend =
 		var container = $('tl_select'),
 			checkboxes = [], start, thisIndex, startIndex, status, from, to,
 			shiftToggle = function(el) {
-				if (window.getSelection) {
-					window.getSelection().removeAllRanges();
-				} else if (document.selection) {
-					document.selection.empty();
-				}
-
 				thisIndex = checkboxes.indexOf(el);
 				startIndex = checkboxes.indexOf(start);
 				from = Math.min(thisIndex, startIndex);

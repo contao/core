@@ -100,6 +100,13 @@ p {
 .hidden {
 	display:none;
 }
+.unselectable {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+}
 
 /* Invisible elements */
 .clear {
