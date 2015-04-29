@@ -42,7 +42,7 @@ window.tinymce && tinymce.init({
   content_css: "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH . '/' . Config::get('uploadPath'); ?>/tinymce.css",
   extended_valid_elements: "q[cite|class|title],article,section,hgroup,figure,figcaption",
   menubar: "file edit insert view format table",
-  toolbar: "link unlink | image | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | undo redo | code"
+  toolbar: "link unlink | image | bold italic | formatselect | alignleft aligncenter alignright alignjustify | bullist outdent indent | undo redo | code"
 });
 </script>
 <?php endif; ?>
