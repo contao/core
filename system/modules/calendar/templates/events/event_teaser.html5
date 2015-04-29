@@ -5,10 +5,10 @@
   </div>
 <?php endif; ?>
 
-<div class="event layout_teaser<?= $this->classList ?>" itemscope itemtype="http://schema.org/Event">
+<div class="event layout_teaser<?= $this->classList ?>">
 
   <?php if ($this->details): ?>
-    <h2 itemprop="name"><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?> itemprop="url"><?= $this->link ?></a></h2>
+    <h2><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?>><?= $this->link ?></a></h2>
   <?php else: ?>
     <h2><?= $this->title ?></h2>
   <?php endif; ?>
@@ -17,12 +17,12 @@
     <p class="time"><?= $this->time . $this->span ?></p>
   <?php endif; ?>
 
-  <div class="teaser" itemprop="description">
+  <div class="teaser">
     <?= $this->teaser ?>
   </div>
 
   <?php if ($this->details): ?>
-    <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"<?= $this->target ?> itemprop="url"><?= $this->more ?> <span class="invisible"><?= $this->link ?></span></a></p>
+    <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"<?= $this->target ?>><?= $this->more ?> <span class="invisible"><?= $this->link ?></span></a></p>
   <?php endif; ?>
 
 </div>

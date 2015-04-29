@@ -141,8 +141,8 @@ class ModuleEventReader extends \Events
 		}
 		else
 		{
-			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $intStartTime) . '" itemprop="startDate">';
-			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $intEndTime) . '" itemprop="endDate">';
+			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $intStartTime) . '">';
+			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $intEndTime) . '">';
 			$strTimeClose = '</time>';
 		}
 

@@ -1,15 +1,15 @@
 
-<div class="layout_latest arc_<?= $this->archive->id ?> block<?= $this->class ?>" itemscope itemtype="http://schema.org/Article">
+<div class="layout_latest arc_<?= $this->archive->id ?> block<?= $this->class ?>">
 
   <?php if ($this->hasMetaFields): ?>
-    <p class="info"><time datetime="<?= $this->datetime ?>" itemprop="datePublished"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
+    <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?= $this->author ?> <?= $this->commentCount ?></p>
   <?php endif; ?>
 
   <?php if ($this->addImage): ?>
-    <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ImageObject" itemprop="associatedMedia">
+    <figure class="image_container<?= $this->floatClass ?>"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?>>
 
       <?php if ($this->href): ?>
-        <a href="<?= $this->href ?>"<?= $this->attributes ?> title="<?= $this->alt ?>" itemprop="contentUrl">
+        <a href="<?= $this->href ?>"<?= $this->attributes ?> title="<?= $this->alt ?>">
       <?php endif; ?>
 
       <?php $this->insert('picture_default', $this->picture); ?>
@@ -19,15 +19,15 @@
       <?php endif; ?>
 
       <?php if ($this->caption): ?>
-        <figcaption class="caption" itemprop="caption"><?= $this->caption ?></figcaption>
+        <figcaption class="caption"><?= $this->caption ?></figcaption>
       <?php endif; ?>
 
     </figure>
   <?php endif; ?>
 
-  <h2 itemprop="name"><?= $this->linkHeadline ?></h2>
+  <h2><?= $this->linkHeadline ?></h2>
 
-  <div class="teaser" itemprop="description">
+  <div class="teaser">
     <?= $this->teaser ?>
   </div>
 

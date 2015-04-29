@@ -5,9 +5,6 @@ Version 3.5.0-RC1 (2015-04-XX)
 ------------------------------
 
 ### New
-Add schema.org tags where applicable (see #7780).
-
-### New
 Select multiple checkboxes by holding down the SHIFT key (see #7781).
 
 ### Changed

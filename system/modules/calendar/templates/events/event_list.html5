@@ -5,9 +5,9 @@
   </div>
 <?php endif; ?>
 
-<div class="event layout_list<?= $this->classList ?>" itemscope itemtype="http://schema.org/Event">
+<div class="event layout_list<?= $this->classList ?>">
 
-  <h2 itemprop="name"><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?> itemprop="url"><?= $this->link ?></a></h2>
+  <h2><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?>><?= $this->link ?></a></h2>
 
   <?php if ($this->time || $this->span): ?>
     <p class="time"><?= $this->time . $this->span ?></p>

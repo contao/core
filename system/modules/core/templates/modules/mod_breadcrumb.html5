@@ -2,12 +2,12 @@
 
 <?php $this->block('content'); ?>
 
-  <ul itemscope itemtype="http://schema.org/BreadcrumbList">
+  <ul>
     <?php foreach ($this->items as $item): ?>
       <?php if ($item['isActive']): ?>
-        <li class="active<?php if ($item['class']): ?> <?= $item['class'] ?><?php endif; ?> last" itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name"><?= $item['title'] ?></span></li>
+        <li class="active<?php if ($item['class']): ?> <?= $item['class'] ?><?php endif; ?> last"><?= $item['title'] ?></li>
       <?php else: ?>
-        <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement"><a href="<?= $item['href'] ?>" title="<?= $item['title'] ?>" itemprop="url"><span itemprop="name"><?= $item['link'] ?></span></a></li>
+        <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><a href="<?= $item['href'] ?>" title="<?= $item['title'] ?>"><?= $item['link'] ?></a></li>
       <?php endif; ?>
     <?php endforeach; ?>
   </ul>
