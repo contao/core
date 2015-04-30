@@ -501,7 +501,8 @@ class DcaExtractor extends \Controller
 					$this->arrFields[$field] = $config['sql'];
 				}
 
-				if (isset($config['eval']['orderField']))
+				// Only add order fields of binary fields (see #7785)
+				if ($config['inputType'] == 'fileTree' && isset($config['eval']['orderField']))
 				{
 					$this->arrOrderFields[] = $config['eval']['orderField'];
 				}

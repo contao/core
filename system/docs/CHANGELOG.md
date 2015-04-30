@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.0 (2015-05-XX)
+--------------------------
+
+### Fixed
+Only add order fields of binary fields in the DCA extractor (see #7785).
+
+
 Version 3.5.0-RC1 (2015-04-30)
 ------------------------------
 

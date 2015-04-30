@@ -860,7 +860,7 @@ var Backend =
 				alert(Contao.lang.picker);
 				return; // see #5704
 			}
-			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			inp = frm.document.getElementById('tl_select').getElementsByTagName('input');
 			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
@@ -931,7 +931,7 @@ var Backend =
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
-			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			inp = frm.document.getElementById('tl_select').getElementsByTagName('input');
 			for (i=0; i<inp.length; i++) {
 				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
 					val = inp[i].get('value');
