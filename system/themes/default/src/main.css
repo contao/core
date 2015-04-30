@@ -1222,6 +1222,15 @@ ul.sortable li:hover .dirname {
 	border:0;
 	z-index:10000;
 }
+.zoomable {
+	position:relative;
+}
+.zoomable:before {
+	position:absolute;
+	top:-2px;
+	left:24px;
+	content:url("images/link.png") left top no-repeat;
+}
 
 /* Navigation icons */
 a.navigation.article {
