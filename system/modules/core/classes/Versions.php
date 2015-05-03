@@ -203,6 +203,10 @@ class Versions extends \Controller
 		{
 			$strDescription = $objRecord->selector;
 		}
+		elseif (isset($objRecord->subject))
+		{
+			$strDescription = $objRecord->subject;
+		}
 
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($this->intPid, $this->strTable);
