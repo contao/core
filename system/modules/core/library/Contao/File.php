@@ -401,7 +401,7 @@ class File extends \System
 
 
 	/**
-	 * Truncate the file
+	 * Truncate the file and reset file pointer
 	 *
 	 * @return boolean True if the operation was successful
 	 */
@@ -410,6 +410,7 @@ class File extends \System
 		if (is_resource($this->resFile))
 		{
 			ftruncate($this->resFile, 0);
+            rewind($this->resFile);
 		}
 
 		return $this->write('');
