@@ -410,7 +410,7 @@ class File extends \System
 		if (is_resource($this->resFile))
 		{
 			ftruncate($this->resFile, 0);
-            rewind($this->resFile);
+			rewind($this->resFile);
 		}
 
 		return $this->write('');
