@@ -172,11 +172,11 @@ class Image
 				'x' => max(0, min($this->fileObj->width - 1, (int) $importantPart['x'])),
 				'y' => max(0, min($this->fileObj->height - 1, (int) $importantPart['y'])),
 			);
+
 			$this->importantPart['width'] = max(1, min($this->fileObj->width - $this->importantPart['x'], (int) $importantPart['width']));
 			$this->importantPart['height'] = max(1, min($this->fileObj->height - $this->importantPart['y'], (int) $importantPart['height']));
 
 		}
-
 		else
 		{
 			$this->importantPart = null;

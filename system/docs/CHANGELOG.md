@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Validate the coordinates in the `Image::setImportantPart()` method (see #7804).
+
+### Fixed
 Only add order fields of binary fields in the DCA extractor (see #7785).
 
 
