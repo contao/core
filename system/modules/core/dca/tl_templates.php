@@ -382,6 +382,7 @@ class tl_templates extends Backend
 			$strPrefix = substr($strName, 0, $pos + 1);
 		}
 
+		$strBuffer = '';
 		$strCompareName = null;
 		$strComparePath = null;
 
@@ -390,16 +391,19 @@ class tl_templates extends Backend
 		{
 			$strCompareName = $strName;
 			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
+
+			if ($strComparePath !== null)
+			{
+				$strBuffer .= '<p class="tl_info" style="margin-bottom:1em">' . sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'], $strComparePath) . '</p>';
+			}
 		}
 
 		// User selected template to compare against
-		if (\Input::post('to') && isset($arrTemplates[\Input::post('to')]))
+		if (\Input::post('from') && isset($arrTemplates[\Input::post('from')]))
 		{
-			$strCompareName = \Input::post('to');
+			$strCompareName = \Input::post('from');
 			$strComparePath = $arrTemplates[$strCompareName] . '/' .$strCompareName . '.' . $strExtension;
 		}
-
-		$strBuffer = '';
 
 		if ($strComparePath !== null)
 		{
@@ -413,12 +417,6 @@ class tl_templates extends Backend
 			}
 
 			$objDiff = new Diff($objCompareFile->getContentAsArray(), $objCurrentFile->getContentAsArray());
-
-			if ($blnOverridesAnotherTpl)
-			{
-				$strBuffer .= '<p class="tl_info" style="margin-bottom:1em">' . sprintf($GLOBALS['TL_LANG']['tl_templates']['overridesAnotherTpl'], $strComparePath) . '</p>';
-			}
-
 			$strDiff = $objDiff->Render(new DiffRenderer(array('field'=>$strCurrentPath)));
 
 			// Identical versions
@@ -455,9 +453,9 @@ class tl_templates extends Backend
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
-		$objTemplate->staticFrom = $strCurrentPath;
+		$objTemplate->staticTo = $strCurrentPath;
 		$objTemplate->versions = $arrComparable;
-		$objTemplate->to = $strCompareName;
+		$objTemplate->from = $strCompareName;
 		$objTemplate->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);
 		$objTemplate->content = $strBuffer;
 		$objTemplate->theme = \Backend::getTheme();

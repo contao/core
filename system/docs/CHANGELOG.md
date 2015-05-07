@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fix the field order in the template diff view (see #7808).
+
+### Fixed
 Validate the coordinates in the `Image::setImportantPart()` method (see #7804).
 
 ### Fixed
