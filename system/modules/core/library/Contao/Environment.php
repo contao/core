@@ -446,14 +446,7 @@ class Environment
 	 */
 	protected static function indexFreeRequest()
 	{
-		$strRequest = static::get('request');
-
-		if ($strRequest == 'index.php')
-		{
-			return '';
-		}
-
-		return $strRequest;
+		return preg_replace('/index.php(\/)?/', '', static::get('request'));
 	}
 
 
