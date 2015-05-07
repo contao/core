@@ -180,7 +180,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->Session->set('CLIPBOARD', $arrClipboard);
 
 				// Support copyAll in the list view (see #7499)
-				if (isset($_POST['copy']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] < 4)
+				if (isset($_POST['copy']) && $GLOBALS['TL_DCA'][$strTable]['list']['sorting']['mode'] < 4)
 				{
 					$this->redirect(str_replace('act=select', 'act=copyAll', \Environment::get('request')));
 				}

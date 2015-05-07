@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fix copying multiple items in parent view (see #7776).
+
+### Fixed
 Disable the "compare template" icon for folders (see #7802).
 
 ### Fixed
