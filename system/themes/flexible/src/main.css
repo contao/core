@@ -1238,7 +1238,7 @@ ul.sortable li:hover .dirname {
 	position:absolute;
 	top:-2px;
 	left:24px;
-	content:url("images/link.png") left top no-repeat;
+	content:url("images/link.png");
 }
 
 /* Navigation icons */

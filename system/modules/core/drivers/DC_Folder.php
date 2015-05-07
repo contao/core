@@ -2401,7 +2401,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$origPath = $imageObj->executeResize()->getResizedPath();
 					$importantPart = $imageObj->getImportantPart();
 
-					if ($importantPart['x'] > 0 || $importantPart['y'] > 0)
+					if ($importantPart['x'] > 0 || $importantPart['y'] > 0 || $importantPart['width'] < $objFile->width || $importantPart['height'] < $objFile->height)
 					{
 						$thumbnail .= '<br><span class="zoomable"><img src="' . TL_FILES_URL . $origPath . '" onmouseover="this.src=\'' . str_replace("'", "\\'", $imageObj->setZoomLevel(100)->executeResize()->getResizedPath()) . '\'" onmouseout="this.src=\'' . str_replace("'", "\\'", $origPath) . '\'" alt="" style="margin:0 0 2px -19px"></span>';
 					}
