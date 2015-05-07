@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Make the "the old password is incorrect" message translatable (see #7793).
+
+### Fixed
 Fix copying multiple items in parent view (see #7776).
 
 ### Fixed

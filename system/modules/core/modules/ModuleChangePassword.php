@@ -151,7 +151,7 @@ class ModuleChangePassword extends \Module
 					if (!$blnAuthenticated)
 					{
 						$objWidget->value = '';
-						$objWidget->addError('The old password is not correct');
+						$objWidget->addError($GLOBALS['TL_LANG']['MSC']['oldPasswordWrong']);
 						sleep(2); // Wait 2 seconds while brute forcing :)
 					}
 				}
