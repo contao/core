@@ -65,7 +65,7 @@ class ContentHyperlink extends \ContentElement
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
 				/** @var \FrontendTemplate|object $objTemplate */
-				$objTemplate = new \BackendTemplate('ce_hyperlink_image');
+				$objTemplate = new \FrontendTemplate('ce_hyperlink_image');
 
 				$this->Template = $objTemplate;
 				$this->Template->setData($this->arrData);
