@@ -60,8 +60,8 @@ php composer.phar install --prefer-dist
 
 
 [1]: https://contao.org
-[2]: https://docs.contao.org/manual/current/01-installation/
-[3]: https://docs.contao.org/manual/current/
+[2]: https://docs.contao.org/books/manual/current/01-installation/
+[3]: https://docs.contao.org/books/manual/current/
 [4]: system/docs/CHANGELOG.md
 [5]: system/docs/UPGRADE.md
 [6]: http://contaowiki.org
