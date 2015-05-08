@@ -404,7 +404,7 @@ class File extends \System
 
 
 	/**
-	 * Truncate the file and reset file pointer
+	 * Truncate the file and reset the file pointer
 	 *
 	 * @return boolean True if the operation was successful
 	 */
