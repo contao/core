@@ -117,7 +117,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -209,7 +209,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -280,7 +280,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -351,7 +351,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -2033,11 +2033,11 @@ var Backend =
 	},
 
 	/**
-	 * Allow to toggle checkboxes clicking a row
+	 * Allow to toggle checkboxes or radio buttons by clicking a row
 	 *
 	 * @author Kamil Kuzminski
 	 */
-	enableToggleCheckboxes: function() {
+	enableToggleSelect: function() {
 		var container = $('tl_select'),
 			checkboxes = [], start, thisIndex, startIndex, status, from, to,
 			shiftToggle = function(el) {
@@ -2059,12 +2059,21 @@ var Backend =
 		// Row click
 		$$('.toggle_select').each(function(el) {
 			el.addEvent('click', function(e) {
-				var input = $(el).getElement('input[type="checkbox"]');
+				var input = $(el).getElement('input[type="checkbox"],input[type="radio"]');
 
 				if (!input) {
 					return;
 				}
 
+				// Radio buttons
+				if (input.type == 'radio') {
+					if (!input.checked) {
+						input.checked = 'checked';
+					}
+					return;
+				}
+
+				// Checkboxes
 				if (e.shift && start) {
 					shiftToggle(input);
 				} else {
@@ -2240,7 +2249,7 @@ window.addEvent('domready', function() {
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
-	Backend.enableToggleCheckboxes();
+	Backend.enableToggleSelect();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
