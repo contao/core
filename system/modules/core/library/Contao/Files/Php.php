@@ -57,9 +57,6 @@ class Php extends \Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
-		if (is_link($strFile)) {
-			$strFile = readlink($strFile);
-		}
 		$this->validate($strFile);
 		return @fopen(TL_ROOT . '/' . $strFile, $strMode);
 	}
@@ -148,9 +145,17 @@ class Php extends \Files
 	public function copy($strSource, $strDestination)
 	{
 		$this->validate($strSource, $strDestination);
-		return @copy(TL_ROOT . '/' . $strSource, TL_ROOT . '/' . $strDestination);
-	}
 
+		// Prepare paths by combining with TL_ROOT
+		$strSourcePath = TL_ROOT . '/' . $strSource;
+		$strDestinationPath = TL_ROOT . '/' . $strDestination;
+
+		if (is_link($strSourcePath)) {
+			return symlink(readlink($strSourcePath), $strDestinationPath);
+		}
+
+		return @copy($strSourcePath, $strDestinationPath);
+	}
 
 	/**
 	 * Delete a file
