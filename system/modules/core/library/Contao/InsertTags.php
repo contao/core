@@ -1027,7 +1027,7 @@ class InsertTags extends \Controller
 							$arrCache[$strTag] = $pictureTemplate->parse();
 						}
 
-						// Generate the HTML markup
+						// Add a lightbox link
 						if ($rel != '')
 						{
 							if (strncmp($rel, 'lightbox', 8) !== 0 || $objPage->outputFormat == 'xhtml')

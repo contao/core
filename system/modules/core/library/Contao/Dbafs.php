@@ -467,7 +467,7 @@ class Dbafs
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
-		$objDatabase->lockTables(array('tl_files'));
+		$objDatabase->lockTables(array('tl_files'=>'WRITE'));
 
 		// Reset the "found" flag
 		$objDatabase->query("UPDATE tl_files SET found=''");

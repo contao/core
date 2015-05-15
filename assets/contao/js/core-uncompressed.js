@@ -851,7 +851,7 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var frm = window.frames['simple-modal-iframe'],
-				val = [], inp, i;
+				val = [], inp, field, i;
 			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
@@ -872,10 +872,11 @@ var Backend =
 				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
-				$('ctrl_'+opt.id).value = val.join("\t");
+				field = $('ctrl_' + opt.id);
+				field.value = val.join("\t");
 				var act = (opt.url.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
 				new Request.Contao({
-					field: $('ctrl_'+opt.id),
+					field: field,
 					evalScripts: false,
 					onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
 					onSuccess: function(txt, json) {
@@ -884,7 +885,7 @@ var Backend =
 						AjaxRequest.hideBox();
 						window.fireEvent('ajax_change');
 					}
-				}).post({'action':act, 'name':opt.id, 'value':$('ctrl_'+opt.id).value, 'REQUEST_TOKEN':Contao.request_token});
+				}).post({'action':act, 'name':opt.id, 'value':field.value, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			this.hide();
 		});
