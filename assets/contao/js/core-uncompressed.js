@@ -2273,6 +2273,7 @@ window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
+	Backend.enableToggleSelect();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
