@@ -250,12 +250,13 @@ class Versions extends \Controller
 				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
 
 				// Unset fields that do not exist (see #5219)
-				foreach (array_keys($data) as $k)
+				$data = array_intersect_key($data, $arrFields);
+
+				// Reset fields added after storing the version to their default value
+				$this->loadDataContainer($this->strTable);
+				foreach (array_diff_key($arrFields, $data) as $k => $v)
 				{
-					if (!isset($arrFields[$k]))
-					{
-						unset($data[$k]);
-					}
+					$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
 				}
 
 				$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
