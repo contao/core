@@ -12,6 +12,7 @@ $GoogleAnalyticsId = 'UA-XXXXX-X';
 if ($GoogleAnalyticsId != 'UA-XXXXX-X' && !BE_USER_LOGGED_IN && sha1(session_id() . (!Config::get('disableIpCheck') ? Environment::get('ip') : '') . 'BE_USER_AUTH') != Input::cookie('BE_USER_AUTH')): ?>
 
 <script>
+  window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
   ga('create', '<?php echo $GoogleAnalyticsId; ?>', 'auto');
   <?php if (Config::get('privacyAnonymizeGA')): ?>
     ga('set', 'anonymizeIp', true);
