@@ -27,9 +27,17 @@ body.popup {
 }
 #header h1 {
 	margin:1px;
-	padding:4px 8px 6px;
+	padding:4px 20px 6px 8px;
 	color:#fff;
 	border-radius:3px 3px 0 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#header h1 small {
+	font-size:10px;
+	font-weight:normal;
+	opacity:0.7;
 }
 #tmenu {
 	margin:0;
