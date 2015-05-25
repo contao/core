@@ -1693,15 +1693,34 @@ class tl_content extends Backend
 	 */
 	public function extractYoutubeId($varValue, DataContainer $dc)
 	{
-		$url = parse_url($varValue, PHP_URL_QUERY);
-		if (false === $url || null === $url) {
+		$url = parse_url($varValue);
+		if (false === $url ||
+			!array_key_exists('host', $url) ||
+			!array_key_exists('path', $url)
+		) {
 			return $varValue;
 		}
 
-		$parts = array();
-		parse_str($url, $parts);
-		if (array_key_exists('v', $parts)) {
-			return $parts['v'];
+		// http(s)://youtu.be/<video_id>
+		if (false !== stripos($url['host'], 'youtu.be')) {
+			return substr($url['path'], 1);
+		}
+		// http(s)://www.youtube.com/watch?v=<video_id>
+		// http(s)://m.youtube.com/watch?v=<video_id>
+		elseif ('/watch' === $url['path'] && array_key_exists('query', $url)) {
+			$query = array();
+			parse_str($url['query'], $query);
+			if (array_key_exists('v', $query)) {
+				return $query['v'];
+			}
+		}
+		// http(s)://www.youtube.com/embed/<video_id>
+		elseif ('/embed/' === substr($url['path'], 0, 7)) {
+			return substr($url['path'], 7);
+		}
+		// http(s)://www.youtube.com/v/<video_id>
+		elseif ('/v/' === substr($url['path'], 0, 3)) {
+			return substr($url['path'], 3);
 		}
 
 		return $varValue;
