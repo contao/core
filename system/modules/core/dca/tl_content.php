@@ -1694,20 +1694,20 @@ class tl_content extends Backend
 	public function extractYoutubeId($varValue, DataContainer $dc)
 	{
 		$url = parse_url($varValue);
-		if (false === $url ||
-			!array_key_exists('host', $url) ||
-			!array_key_exists('path', $url)
-		) {
+		if (false === $url || !array_key_exists('host', $url) || !array_key_exists('path', $url))
+		{
 			return $varValue;
 		}
 
 		// http(s)://youtu.be/<video_id>
-		if (false !== stripos($url['host'], 'youtu.be')) {
+		if (false !== stripos($url['host'], 'youtu.be'))
+		{
 			return substr($url['path'], 1);
 		}
 		// http(s)://www.youtube.com/watch?v=<video_id>
 		// http(s)://m.youtube.com/watch?v=<video_id>
-		elseif ('/watch' === $url['path'] && array_key_exists('query', $url)) {
+		elseif ('/watch' === $url['path'] && array_key_exists('query', $url))
+		{
 			$query = array();
 			parse_str($url['query'], $query);
 			if (array_key_exists('v', $query)) {
@@ -1715,11 +1715,13 @@ class tl_content extends Backend
 			}
 		}
 		// http(s)://www.youtube.com/embed/<video_id>
-		elseif ('/embed/' === substr($url['path'], 0, 7)) {
+		elseif ('/embed/' === substr($url['path'], 0, 7))
+		{
 			return substr($url['path'], 7);
 		}
 		// http(s)://www.youtube.com/v/<video_id>
-		elseif ('/v/' === substr($url['path'], 0, 3)) {
+		elseif ('/v/' === substr($url['path'], 0, 3))
+		{
 			return substr($url['path'], 3);
 		}
 
