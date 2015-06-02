@@ -191,6 +191,21 @@ class InsertTags extends \Controller
 						case 'XPT':
 							$file = 'exception';
 							break;
+
+						case 'MSC':
+						case 'ERR':
+						case 'CTE':
+						case 'PTY':
+						case 'FOP':
+						case 'CHMOD':
+						case 'DAYS':
+						case 'MONTHS':
+						case 'UNITS':
+						case 'CONFIRM':
+						case 'DP':
+						case 'COLS':
+							$file = 'default';
+							break;
 					}
 
 					\System::loadLanguageFile($file);
