@@ -1063,17 +1063,20 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		/** @var \FilesModel $objFile */
 		$objVersions = new \Versions($this->strTable, $objFile->id);
 
-		// Compare versions
-		if (\Input::get('versions'))
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
-			$objVersions->compare();
-		}
+			// Compare versions
+			if (\Input::get('versions'))
+			{
+				$objVersions->compare();
+			}
 
-		// Restore a version
-		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-		{
-			$objVersions->restore(\Input::post('version'));
-			$this->reload();
+			// Restore a version
+			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+			{
+				$objVersions->restore(\Input::post('version'));
+				$this->reload();
+			}
 		}
 
 		$objVersions->initialize();
@@ -1190,7 +1193,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Versions overview
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}
@@ -1703,25 +1706,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			$objVersions = new \Versions($this->strTable, $objMeta->id);
 
-			// Compare versions
-			if (\Input::get('versions'))
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 			{
-				$objVersions->compare();
-			}
-
-			// Restore a version
-			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-			{
-				$objVersions->restore(\Input::post('version'));
-
-				// Purge the script cache (see #7005)
-				if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+				// Compare versions
+				if (\Input::get('versions'))
 				{
-					$this->import('Automator');
-					$this->Automator->purgeScriptCache();
+					$objVersions->compare();
 				}
 
-				$this->reload();
+				// Restore a version
+				if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+				{
+					$objVersions->restore(\Input::post('version'));
+
+					// Purge the script cache (see #7005)
+					if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+					{
+						$this->import('Automator');
+						$this->Automator->purgeScriptCache();
+					}
+
+					$this->reload();
+				}
 			}
 
 			$objVersions->initialize();
@@ -1797,7 +1803,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Versions overview
-		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}

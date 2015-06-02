@@ -1744,17 +1744,20 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->blnCreateNewVersion = false;
 		$objVersions = new \Versions($this->strTable, $this->intId);
 
-		// Compare versions
-		if (\Input::get('versions'))
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
-			$objVersions->compare();
-		}
+			// Compare versions
+			if (\Input::get('versions'))
+			{
+				$objVersions->compare();
+			}
 
-		// Restore a version
-		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-		{
-			$objVersions->restore(\Input::post('version'));
-			$this->reload();
+			// Restore a version
+			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+			{
+				$objVersions->restore(\Input::post('version'));
+				$this->reload();
+			}
 		}
 
 		$objVersions->initialize();
@@ -1899,7 +1902,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Versions overview
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}

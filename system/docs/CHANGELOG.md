@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Do not allow to restore versions in the back end user settings (see #7713).
+
+### Fixed
 Use the timestamp of an element to initialize its first version (see #7730).
 
 ### Fixed
