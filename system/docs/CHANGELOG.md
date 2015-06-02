@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fixed switching between the page and file picker in the URL wizard (see #5863).
+
+### Fixed
 Make the "the old password is incorrect" message translatable (see #7793).
 
 ### Fixed

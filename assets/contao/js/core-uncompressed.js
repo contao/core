@@ -867,14 +867,14 @@ var Backend =
 			}
 			if (opt.tag) {
 				$(opt.tag).value = val.join(',');
-				if (opt.url.match(/page\.php/)) {
+				if (frm.document.location.href.indexOf('contao/page.php') != -1) {
 					$(opt.tag).value = '{{link_url::' + $(opt.tag).value + '}}';
 				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				field = $('ctrl_' + opt.id);
 				field.value = val.join("\t");
-				var act = (opt.url.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
+				var act = (frm.document.location.href.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
 				new Request.Contao({
 					field: field,
 					evalScripts: false,
