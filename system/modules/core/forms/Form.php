@@ -425,7 +425,7 @@ class Form extends \Hybrid
 					// Add a link to the uploaded file
 					if ($file['uploaded'])
 					{
-						$uploaded .= "\n" . \Environment::get('base') . str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', dirname($file['tmp_name'])) . '/' . rawurlencode($file['name']);
+						$uploaded .= "\n" . \Environment::get('base') . str_replace(TL_ROOT . '/', '', dirname($file['tmp_name'])) . '/' . rawurlencode($file['name']);
 						continue;
 					}
 
@@ -474,7 +474,7 @@ class Form extends \Hybrid
 				{
 					if ($v['uploaded'])
 					{
-						$arrSet[$k] = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $v['tmp_name']);
+						$arrSet[$k] = str_replace(TL_ROOT . '/', '', $v['tmp_name']);
 					}
 				}
 			}

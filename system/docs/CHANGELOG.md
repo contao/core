@@ -59,9 +59,6 @@ Support specifying the database key length (see #7771).
 ### Improved
 Check for ASCII strings in the `utf8_romanize()` function (see #7748).
 
-### Fixed
-Use `DIRECTORY_SEPARATOR` in conjunction with `str_replace()` (see #7769).
-
 ### Changed
 `Controller::replaceInsertTags()` is now public static.
 

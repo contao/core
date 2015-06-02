@@ -302,7 +302,7 @@ class tl_templates extends Backend
 
 				if (in_array($strExtension, $arrAllowed))
 				{
-					$strRelpath = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $objFile->getPathname());
+					$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 					$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
 				}
 			}

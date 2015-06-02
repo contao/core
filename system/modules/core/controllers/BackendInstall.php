@@ -647,7 +647,7 @@ class BackendInstall extends \Backend
 		// Add the relative paths
 		foreach ($objFiles as $objFile)
 		{
-			$arrTemplates[] = str_replace(TL_ROOT . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR, '', $objFile->getPathname());
+			$arrTemplates[] = str_replace(TL_ROOT . '/templates/', '', $objFile->getPathname());
 		}
 
 		$strTemplates = '<option value="">-</option>';
