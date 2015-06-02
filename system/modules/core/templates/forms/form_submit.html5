@@ -1,11 +1,13 @@
 <?php if ($this->tableless): ?>
 
   <div class="submit_container<?php if ($this->class) echo ' ' . $this->class; ?>">
-    <?php if ($this->src): ?>
-      <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
-    <?php else: ?>
-      <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
-    <?php endif; ?>
+    <?php $this->block('field'); ?>
+      <?php if ($this->src): ?>
+        <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
+      <?php else: ?>
+        <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
+      <?php endif; ?>
+    <?php $this->endblock(); ?>
   </div>
 
 <?php else: ?>
@@ -14,11 +16,13 @@
     <td class="col_0 col_first">&nbsp;</td>
     <td class="col_1 col_last">
       <div class="submit_container">
-        <?php if ($this->src): ?>
-          <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
-        <?php else: ?>
-          <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
-        <?php endif; ?>
+        <?php $this->block('field'); ?>
+          <?php if ($this->src): ?>
+            <input type="image" src="<?= $this->src ?>" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" title="<?= specialchars($this->slabel) ?>" alt="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
+          <?php else: ?>
+            <input type="submit" id="ctrl_<?= $this->id ?>" class="submit<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?= specialchars($this->slabel) ?>"<?= $this->getAttributes() ?>>
+          <?php endif; ?>
+        <?php $this->endblock(); ?>
       </div>
     </td>
   </tr>

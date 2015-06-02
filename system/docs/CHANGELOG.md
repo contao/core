@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Make the "form_submit" templates overwritable again (see #7854).
+
+### Fixed
 Correctly inherit empty page permissions (see #6782).
 
 ### Fixed
