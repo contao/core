@@ -822,7 +822,7 @@ class tl_calendar_events extends Backend
 		}
 
 		// Add the "external" option
-		if ($this->User->hasAccess('tl_calendar_events::url', 'alexf') && $this->User->hasAccess('tl_calendar_events::target', 'alexf'))
+		if ($this->User->hasAccess('tl_calendar_events::url', 'alexf'))
 		{
 			$arrOptions[] = 'external';
 		}

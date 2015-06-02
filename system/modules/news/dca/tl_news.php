@@ -718,7 +718,7 @@ class tl_news extends Backend
 		}
 
 		// Add the "external" option
-		if ($this->User->hasAccess('tl_news::url', 'alexf') && $this->User->hasAccess('tl_news::target', 'alexf'))
+		if ($this->User->hasAccess('tl_news::url', 'alexf'))
 		{
 			$arrOptions[] = 'external';
 		}
