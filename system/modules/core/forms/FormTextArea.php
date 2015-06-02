@@ -136,7 +136,17 @@ class FormTextArea extends \Widget
 				break;
 
 			case 'value':
-				return specialchars(str_replace('\n', "\n", $this->varValue));
+				if ($this->allowHtml || $this->preserveTags) {
+					return $this->varValue;
+				}
+
+				$value = str_replace('\n', "\n", $this->varValue);
+
+				if ($this->decodeEntities) {
+					return $value;
+				}
+
+				return specialchars($value);
 				break;
 
 			default:
