@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Correctly set `data-` or `ng-` attributes in the widgets (see #7772).
+
+### Fixed
 Correctly display the headline in the template editor (see #7746).
 
 ### Fixed
