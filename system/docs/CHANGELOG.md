@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Make `Validator::isValidUrl()` RFC 3986 compliant (see contao/core#7790).
+
+### Fixed
 Fixed switching between the page and file picker in the URL wizard (see #5863).
 
 ### Fixed
