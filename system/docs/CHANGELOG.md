@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Use the timestamp of an element to initialize its first version (see #7730).
+
+### Fixed
 Hide the "edit header" button if there are no editable fields (see #7770).
 
 ### Fixed
