@@ -5,7 +5,10 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
-Make `Validator::isValidUrl()` RFC 3986 compliant (see contao/core#7790).
+Correctly display the headline in the template editor (see #7746).
+
+### Fixed
+Make `Validator::isValidUrl()` RFC 3986 compliant (see #7790).
 
 ### Fixed
 Fixed switching between the page and file picker in the URL wizard (see #5863).
