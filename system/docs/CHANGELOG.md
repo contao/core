@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fixed the "specified value 't' is not a valid email address" error (see #7784).
+
+### Fixed
 Correctly set `data-` or `ng-` attributes in the widgets (see #7772).
 
 ### Fixed
