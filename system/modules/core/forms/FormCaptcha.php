@@ -50,7 +50,7 @@ class FormCaptcha extends \Widget
 	 *
 	 * @var string
 	 */
-	protected $strPrefix = 'widget widget-captcha';
+	protected $strPrefix = 'widget widget-captcha mandatory';
 
 
 	/**
