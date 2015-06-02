@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Correctly inherit empty page permissions (see #6782).
+
+### Fixed
 Decode the GET parameters before setting them in the `Input` class (see #7829).
 
 ### Fixed

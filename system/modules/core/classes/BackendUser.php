@@ -305,7 +305,7 @@ class BackendUser extends \User
 											->limit(1)
 											->execute($pid);
 
-			while (!$row['chmod'] && $pid > 0 && $objParentPage->numRows)
+			while ($row['chmod'] === false && $pid > 0 && $objParentPage->numRows)
 			{
 				$pid = $objParentPage->pid;
 
@@ -319,15 +319,15 @@ class BackendUser extends \User
 			}
 
 			// Set default values
-			if (!$row['chmod'])
+			if ($row['chmod'] === false)
 			{
 				$row['chmod'] = \Config::get('defaultChmod');
 			}
-			if (!$row['cuser'])
+			if ($row['cuser'] === false)
 			{
 				$row['cuser'] = intval(\Config::get('defaultUser'));
 			}
-			if (!$row['cgroup'])
+			if ($row['cgroup'] === false)
 			{
 				$row['cgroup'] = intval(\Config::get('defaultGroup'));
 			}
