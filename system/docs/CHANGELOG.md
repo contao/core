@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Hide the "edit header" button if there are no editable fields (see #7770).
+
+### Fixed
 Make the "form_submit" templates overwritable again (see #7854).
 
 ### Fixed

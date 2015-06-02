@@ -3881,6 +3881,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// List all records of the child table
 		if (!\Input::get('act') || \Input::get('act') == 'paste' || \Input::get('act') == 'select')
 		{
+			$this->import('BackendUser', 'User');
+
 			// Header
 			$imagePasteNew = \Image::getHtml('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]);
 			$imagePasteAfter = \Image::getHtml('pasteafter.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]);
@@ -3888,7 +3890,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 			$return .= '
 <div class="tl_content_right">'.((\Input::get('act') == 'select') ? '
-<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
+<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">' : ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a>' : ((!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] && $this->User->canEditFieldsOf($this->ptable)) ? '
 <a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (($this->ptable != '') ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" class="edit" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : ''))) . '
 </div>';
 
