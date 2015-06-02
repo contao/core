@@ -633,6 +633,28 @@ class String
 
 
 	/**
+	 * Sanitize a file name
+	 *
+	 * @param string $strName The file name
+	 *
+	 * @return string The sanitized file name
+	 */
+	public static function sanitizeFileName($strName)
+	{
+		$strName = basename($strName);
+		$strName = utf8_romanize($strName);
+
+		// Remove invisible control characters and unused code points
+		$strName = preg_replace('/[\pC\pZ\s]/u', '', $strName);
+
+		// File names must not start or end with a dot
+		$strName = trim($strName, '.');
+
+		return $strName;
+	}
+
+
+	/**
 	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
 	 *
 	 * @param string $url The URL

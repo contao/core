@@ -388,4 +388,40 @@ class Validator
 
 		return false;
 	}
+
+
+	/**
+	 * Valid file name
+	 *
+	 * @param mixed $strName The file name
+	 *
+	 * @return boolean True if the file name is valid
+	 */
+	public static function isValidFileName($strName)
+	{
+		if (strpos($strName, '/') !== false)
+		{
+			return false;
+		}
+
+		// Invisible control characters or unused code points
+		if (preg_match('/[\pC\pZ\s]/u', $strName))
+		{
+			return false;
+		}
+
+		// Begins or ends with .
+		if (substr($strName, 0, 1) == '.' || substr($strName, -1) == '.')
+		{
+			return false;
+		}
+
+		// Must not be longer than 255 characters
+		if (strlen($strName) > 255)
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

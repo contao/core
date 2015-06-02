@@ -108,8 +108,17 @@ class FormFileUpload extends \Widget implements \uploadable
 		$file = $_FILES[$this->strName];
 		$maxlength_kb = $this->getReadableSize($this->maxlength);
 
-		// Romanize the filename
-		$file['name'] = utf8_romanize($file['name']);
+		// Sanitize the filename
+		$file['name'] = \String::sanitizeFileName($file['name']);
+
+		// Invalid file name
+		if (!\Validator::isValidFileName($file['name']))
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
+			$this->log('File "'.$file['name'].'" contains invalid characters or is longer than 255 characters' , __METHOD__, TL_ERROR);
+
+			return;
+		}
 
 		// File was not uploaded
 		if (!is_uploaded_file($file['tmp_name']))
