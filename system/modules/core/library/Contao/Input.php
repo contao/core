@@ -317,6 +317,9 @@ class Input
 	 */
 	public static function setGet($strKey, $varValue, $blnAddUnused=false)
 	{
+		// Convert special characters (see #7829)
+		$strKey = str_replace(array(' ', '.', '['), '_', $strKey);
+
 		$strKey = static::cleanKey($strKey);
 
 		unset(static::$arrCache['getEncoded'][$strKey]);
