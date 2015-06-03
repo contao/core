@@ -410,14 +410,14 @@ class Validator
 			return false;
 		}
 
-		// Begins or ends with .
-		if (substr($strName, 0, 1) == '.' || substr($strName, -1) == '.')
+		// Special characters not supported on e.g. Windows
+		if (preg_match('/[\\/:*?"<>|]/', $strName))
 		{
 			return false;
 		}
 
 		// Must not be longer than 255 characters
-		if (strlen($strName) > 255)
+		if (utf8_strlen($strName) > 255)
 		{
 			return false;
 		}

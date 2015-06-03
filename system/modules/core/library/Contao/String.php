@@ -646,8 +646,8 @@ class String
 		// Remove invisible control characters and unused code points
 		$strName = preg_replace('/[\pC]/u', '', $strName);
 
-		// File names must not start or end with a dot
-		$strName = trim($strName, '.');
+		// Remove special characters not supported on e.g. Windows
+		$strName = str_replace(array('\\', '/', ':', '*', '?', '"', '<', '>', '|'), '-', $strName);
 
 		return $strName;
 	}
