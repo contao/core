@@ -201,7 +201,6 @@ class ModuleLogin extends \Module
 		{
 			$blnHasError = true;
 			$this->Template->message = $_SESSION['LOGIN_ERROR'];
-			unset($_SESSION['LOGIN_ERROR']);
 		}
 
 		$this->Template->hasError = $blnHasError;

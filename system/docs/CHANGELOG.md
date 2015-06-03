@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Do not cache the login module if there is an error (see #7824).
+
+### Fixed
 Correctly handle encrypted rows (see #7815).
 
 ### Fixed

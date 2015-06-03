@@ -93,6 +93,9 @@ class FrontendTemplate extends \Template
 		// Add the output to the cache
 		$this->addToCache();
 
+		// Unset only after the output has been cached (see #7824)
+		unset($_SESSION['LOGIN_ERROR']);
+
 		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($this->strBuffer, false);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
