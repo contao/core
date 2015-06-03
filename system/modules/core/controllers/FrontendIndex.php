@@ -437,10 +437,19 @@ class FrontendIndex extends \Frontend
 		// Load the default language file (see #2644)
 		\System::loadLanguageFile('default');
 
-		// Replace the insert tags and then re-replace the request_token
-		// tag in case a form element has been loaded via insert tag
+		// Replace the insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
+
+		// HOOK: allow to modify the compiled markup (see #4291 and #7457)
+		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, null);
+			}
+		}
 
 		// Content type
 		if (!$content)

@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Also fire the "modifyFrontendPage" hook when loading from cache (see #7457).
+
+### Fixed
 Fixed several minor issues with the registration module (see #7816).
 
 ### Fixed
