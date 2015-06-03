@@ -641,8 +641,6 @@ class String
 	 */
 	public static function sanitizeFileName($strName)
 	{
-		$strName = basename($strName);
-
 		// Remove invisible control characters and unused code points
 		$strName = preg_replace('/[\pC]/u', '', $strName);
 
