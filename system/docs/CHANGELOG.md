@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Adjust the edit URLs in the versions menu in "edit multiple" mode (see #7745).
+
+### Fixed
 Do not cache the login module if there is an error (see #7824).
 
 ### Fixed
