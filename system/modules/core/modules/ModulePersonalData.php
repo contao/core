@@ -305,6 +305,7 @@ class ModulePersonalData extends \Module
 		// Save the model
 		if ($blnModified)
 		{
+			$objMember->tstamp = time();
 			$objMember->save();
 
 			// Create a new version

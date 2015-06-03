@@ -171,6 +171,7 @@ class ModuleChangePassword extends \Module
 		// Store the new password
 		if (\Input::post('FORM_SUBMIT') == 'tl_change_password' && !$doNotSubmit)
         {
+			$objMember->tstamp = time();
 			$objMember->password = $objNewPassword->value;
 			$objMember->save();
 

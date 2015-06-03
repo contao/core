@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Update the revision date if a member updates their personal data (see #7818).
+
+### Fixed
 Do not allow to restore versions in the back end user settings (see #7713).
 
 ### Fixed

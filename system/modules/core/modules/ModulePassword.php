@@ -224,6 +224,7 @@ class ModulePassword extends \Module
 				$this->Session->set('setPasswordToken', '');
 				array_pop($_SESSION['TL_CONFIRM']);
 
+				$objMember->tstamp = time();
 				$objMember->activation = '';
 				$objMember->password = $objWidget->value;
 				$objMember->save();
