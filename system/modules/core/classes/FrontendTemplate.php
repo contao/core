@@ -230,10 +230,17 @@ class FrontendTemplate extends \Template
 				}
 			}
 
-			// Store mobile pages separately
-			if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
+			// Add a suffix if there is a mobile layout (see #7826)
+			if ($objPage->mobileLayout > 0)
 			{
-				$strCacheKey .= '.mobile';
+				if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
+				{
+					$strCacheKey .= '.mobile';
+				}
+				else
+				{
+					$strCacheKey .= '.desktop';
+				}
 			}
 
 			// Replace insert tags for caching
