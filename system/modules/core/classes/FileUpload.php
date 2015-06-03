@@ -110,8 +110,7 @@ class FileUpload extends \Backend
 			}
 			catch (\InvalidArgumentException $e)
 			{
-				\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
-				$this->log('File "'.$file['name'].'" cannot be sanitized' , __METHOD__, TL_ERROR);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
 				$this->blnHasError = true;
 
 				continue;
@@ -120,8 +119,7 @@ class FileUpload extends \Backend
 			// Invalid file name
 			if (!\Validator::isValidFileName($file['name']))
 			{
-				\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
-				$this->log('File "'.$file['name'].'" is longer than 255 characters' , __METHOD__, TL_ERROR);
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
 				$this->blnHasError = true;
 			}
 

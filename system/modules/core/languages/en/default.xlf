@@ -84,7 +84,7 @@
         <source>Field "%s" must not contain any whitespace characters!</source>
       </trans-unit>
       <trans-unit id="ERR.filename">
-        <source>The file name contains invalid characters or is longer than 255 characters!</source>
+        <source>The name of at least one uploaded file contains invalid characters or exceeds the maximum length of 255 characters!</source>
       </trans-unit>
       <trans-unit id="ERR.filesize">
         <source>The maximum size for file uploads is %s (Contao or php.ini settings)!</source>

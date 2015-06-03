@@ -115,8 +115,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		}
 		catch (\InvalidArgumentException $e)
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
-			$this->log('File "'.$file['name'].'" cannot be sanitized' , __METHOD__, TL_ERROR);
+			$this->addError($GLOBALS['TL_LANG']['ERR']['filename']);
 
 			return;
 		}
@@ -124,8 +123,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		// Invalid file name
 		if (!\Validator::isValidFileName($file['name']))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
-			$this->log('File "'.$file['name'].'" is longer than 255 characters' , __METHOD__, TL_ERROR);
+			$this->addError($GLOBALS['TL_LANG']['ERR']['filename']);
 
 			return;
 		}
