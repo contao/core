@@ -383,7 +383,7 @@ class FrontendIndex extends \Frontend
 		}
 
 		// Check for a desktop layout (see #7826)
-		if (!$blnFound)
+		else
 		{
 			$strMd5CacheKey = md5($strCacheKey . '.desktop');
 			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
