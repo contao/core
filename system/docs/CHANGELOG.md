@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Correctly handle encrypted rows (see #7815).
+
+### Fixed
 Only create a new version in the personal data module if something actually
 changed (see #7415).
 

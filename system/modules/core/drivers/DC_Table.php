@@ -449,6 +449,13 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			}
 
 			$value = deserialize($row[$i]);
+
+			// Decrypt the value
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['encrypt'])
+			{
+				$value = \Encryption::decrypt($value);
+			}
+
 			$class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
 
 			// Get the field value
@@ -527,6 +534,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
 			{
 				$row[$i] = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options'][$row[$i]];
+			}
+			else
+			{
+				$row[$i] = $value;
 			}
 
 			// Label

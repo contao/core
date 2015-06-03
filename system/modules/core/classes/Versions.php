@@ -387,6 +387,13 @@ class Versions extends \Controller
 
 						$blnIsBinary = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
 
+						// Decrypt the values
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
+						{
+							$to[$k] = \Encryption::decrypt($to[$k]);
+							$from[$k] = \Encryption::decrypt($from[$k]);
+						}
+
 						// Convert serialized arrays into strings
 						if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
 						{
@@ -396,6 +403,7 @@ class Versions extends \Controller
 						{
 							$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
 						}
+
 						unset($tmp);
 
 						// Convert binary UUIDs to their hex equivalents (see #6365)
