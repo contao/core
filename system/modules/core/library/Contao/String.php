@@ -642,10 +642,9 @@ class String
 	public static function sanitizeFileName($strName)
 	{
 		$strName = basename($strName);
-		$strName = utf8_romanize($strName);
 
 		// Remove invisible control characters and unused code points
-		$strName = preg_replace('/[\pC\pZ\s]/u', '', $strName);
+		$strName = preg_replace('/[\pC]/u', '', $strName);
 
 		// File names must not start or end with a dot
 		$strName = trim($strName, '.');

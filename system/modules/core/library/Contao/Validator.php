@@ -405,7 +405,7 @@ class Validator
 		}
 
 		// Invisible control characters or unused code points
-		if (preg_match('/[\pC\pZ\s]/u', $strName))
+		if (preg_match('/[\pC]/u', $strName))
 		{
 			return false;
 		}
