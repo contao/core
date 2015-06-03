@@ -105,8 +105,19 @@ class Php extends \Files
 
 		$this->validate($strOldName, $strNewName);
 
+		// Prepare paths by combining with TL_ROOT
+		$strOldFilePath = TL_ROOT . '/' . $strOldName;
+		$strNewFilePath = TL_ROOT . '/' . $strNewName;
+
+		// Resolve the path, if the file is a symbolic link. This may break
+		// out of TL_ROOT, but as the link already existed before, we can
+		// assume the user is aware of this behaviour.
+		if (is_link($strNewFilePath)) {
+			$strNewFilePath = readlink($strNewFilePath);
+		}
+
 		// Windows fix: delete the target file
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists(TL_ROOT . '/' . $strNewName))
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists($strNewFilePath))
 		{
 			$this->delete($strNewName);
 		}
@@ -114,11 +125,12 @@ class Php extends \Files
 		// Unix fix: rename case sensitively
 		if (strcasecmp($strOldName, $strNewName) === 0 && strcmp($strOldName, $strNewName) !== 0)
 		{
-			@rename(TL_ROOT . '/' . $strOldName, TL_ROOT . '/' . $strOldName . '__');
+			@rename($strOldFilePath, $strOldFilePath . '__');
 			$strOldName .= '__';
+			$strOldFilePath .= '__';
 		}
 
-		return @rename(TL_ROOT . '/' . $strOldName, TL_ROOT . '/' . $strNewName);
+		return @rename($strOldFilePath, $strNewFilePath);
 	}
 
 
@@ -133,9 +145,17 @@ class Php extends \Files
 	public function copy($strSource, $strDestination)
 	{
 		$this->validate($strSource, $strDestination);
-		return @copy(TL_ROOT . '/' . $strSource, TL_ROOT . '/' . $strDestination);
-	}
 
+		// Prepare paths by combining with TL_ROOT
+		$strSourcePath = TL_ROOT . '/' . $strSource;
+		$strDestinationPath = TL_ROOT . '/' . $strDestination;
+
+		if (is_link($strSourcePath)) {
+			return symlink(readlink($strSourcePath), $strDestinationPath);
+		}
+
+		return @copy($strSourcePath, $strDestinationPath);
+	}
 
 	/**
 	 * Delete a file
