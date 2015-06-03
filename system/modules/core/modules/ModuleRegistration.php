@@ -407,8 +407,6 @@ class ModuleRegistration extends \Module
 		$objNewUser->setRow($arrData);
 		$objNewUser->save();
 
-		$insertId = $objNewUser->id;
-
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
@@ -417,12 +415,12 @@ class ModuleRegistration extends \Module
 			if ($objHomeDir !== null)
 			{
 				$this->import('Files');
-				$strUserDir = standardize($arrData['username']) ?: 'user_' . $insertId;
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $objNewUser->id;
 
 				// Add the user ID if the directory exists
 				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
 				{
-					$strUserDir .= '_' . $insertId;
+					$strUserDir .= '_' . $objNewUser->id;
 				}
 
 				// Create the user folder
@@ -443,14 +441,21 @@ class ModuleRegistration extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($insertId, $arrData, $this);
+				$this->$callback[0]->$callback[1]($objNewUser->id, $arrData, $this);
 			}
 		}
+
+		// Create the initial version (see #7816)
+		$objVersions = new \Versions('tl_member', $objNewUser->id);
+		$objVersions->setUsername($objNewUser->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Inform admin if no activation link is sent
 		if (!$this->reg_activate)
 		{
-			$this->sendAdminNotification($insertId, $arrData);
+			$this->sendAdminNotification($objNewUser->id, $arrData);
 		}
 
 		// Check whether there is a jumpTo page
@@ -534,7 +539,7 @@ class ModuleRegistration extends \Module
 		// Add user details
 		foreach ($arrData as $k=>$v)
 		{
-			if ($k == 'password' || $k == 'tstamp' || $k == 'activation')
+			if ($k == 'password' || $k == 'tstamp' || $k == 'activation' || $k == 'dateAdded')
 			{
 				continue;
 			}

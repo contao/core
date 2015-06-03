@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fixed several minor issues with the registration module (see #7816).
+
+### Fixed
 Update the revision date if a member updates their personal data (see #7818).
 
 ### Fixed
