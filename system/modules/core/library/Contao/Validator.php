@@ -411,7 +411,7 @@ class Validator
 		}
 
 		// Special characters not supported on e.g. Windows
-		if (preg_match('/[\\/:*?"<>|]/', $strName))
+		if (preg_match('@[\\\\/:*?"<>\|]@', $strName))
 		{
 			return false;
 		}
