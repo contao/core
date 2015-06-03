@@ -282,11 +282,14 @@ class ModulePersonalData extends \Module
 					}
 
 					// Set the new value
-					$this->User->$field = $varValue;
+					if ($varValue !== $this->User->$field)
+					{
+						$this->User->$field = $varValue;
 
-					// Set the new field in the member model
-					$blnModified = true;
-					$objMember->$field = $varValue;
+						// Set the new field in the member model
+						$blnModified = true;
+						$objMember->$field = $varValue;
+					}
 				}
 			}
 

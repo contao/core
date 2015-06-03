@@ -5,6 +5,10 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Only create a new version in the personal data module if something actually
+changed (see #7415).
+
+### Fixed
 Also fire the "modifyFrontendPage" hook when loading from cache (see #7457).
 
 ### Fixed
