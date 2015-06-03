@@ -829,7 +829,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			$varValue = \Input::$strMethod(array_shift($arrParts), $this->decodeEntities);
 
-			foreach($arrParts as $part)
+			foreach ($arrParts as $part)
 			{
 				if (!is_array($varValue))
 				{
