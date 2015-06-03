@@ -399,19 +399,14 @@ class Validator
 	 */
 	public static function isValidFileName($strName)
 	{
-		if (strpos($strName, '/') !== false)
+		// Special characters not supported on e.g. Windows
+		if (preg_match('@[\\\\/:*?"<>\|]@', $strName))
 		{
 			return false;
 		}
 
 		// Invisible control characters or unused code points
 		if (preg_match('/[\pC]/u', $strName))
-		{
-			return false;
-		}
-
-		// Special characters not supported on e.g. Windows
-		if (preg_match('@[\\\\/:*?"<>\|]@', $strName))
 		{
 			return false;
 		}

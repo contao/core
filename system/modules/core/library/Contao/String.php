@@ -646,6 +646,11 @@ class String
 		// Remove invisible control characters and unused code points
 		$strName = preg_replace('/[\pC]/u', '', $strName);
 
+		if ($strName === null)
+		{
+			throw new \InvalidArgumentException('The file name could not be sanitzied');
+		}
+
 		// Remove special characters not supported on e.g. Windows
 		$strName = str_replace(array('\\', '/', ':', '*', '?', '"', '<', '>', '|'), '-', $strName);
 
