@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Omit the `index.php` fragment if the request string is empty (see #7757).
+
+### Fixed
 Adjust the edit URLs in the versions menu in "edit multiple" mode (see #7745).
 
 ### Fixed

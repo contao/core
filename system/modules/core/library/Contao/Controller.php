@@ -1104,7 +1104,10 @@ abstract class Controller extends \System
 			// Correctly handle the "index" alias (see #3961)
 			if ($arrRow['alias'] == 'index' && $strParams == '')
 			{
-				$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage;
+				if ($strLanguage != '') // see #7757
+				{
+					$strUrl = (\Config::get('rewriteURL') ? '' : 'index.php/') . $strLanguage;
+				}
 			}
 			else
 			{
