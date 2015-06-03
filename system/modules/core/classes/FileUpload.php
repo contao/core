@@ -110,8 +110,10 @@ class FileUpload extends \Backend
 			}
 			catch (\InvalidArgumentException $e)
 			{
+				\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['filename'], $file['name']));
 				$this->log('File "'.$file['name'].'" cannot be sanitized' , __METHOD__, TL_ERROR);
 				$this->blnHasError = true;
+
 				continue;
 			}
 
