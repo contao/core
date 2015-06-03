@@ -573,7 +573,7 @@ class BackendInstall extends \Backend
 		$arrOptions = array();
 
 		$objCollation = $this->Database->prepare("SHOW COLLATION LIKE ?")
-									   ->execute(\Config::get('dbCharset') .'%');
+									   ->execute(\Config::get('dbCharset') . '\_%');
 
 		while ($objCollation->next())
 		{
