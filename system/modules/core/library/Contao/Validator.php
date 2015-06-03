@@ -400,7 +400,7 @@ class Validator
 	public static function isValidFileName($strName)
 	{
 		// Special characters not supported on e.g. Windows
-		if (preg_match('@[\\\\/:*?"<>\|]@', $strName))
+		if (preg_match('@[\\\\/:*?"<>|]@', $strName))
 		{
 			return false;
 		}
