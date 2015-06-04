@@ -48,7 +48,13 @@
 
   <?php if (!$this->isPopup): ?>
     <div id="header" class="collapsible">
-      <h1>Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?></h1>
+      <h1>
+        <?php if (\Config::get('websiteTitle') !== 'Contao Open Source CMS') : ?>
+          <?php echo \Config::get('websiteTitle') ?> <small>(Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?>)</small>
+        <?php else : ?>
+          Contao Open Source CMS <?php echo VERSION . '.' . BUILD; ?>
+        <?php endif; ?>
+      </h1>
       <div class="collapsible_area">
         <div id="tmenu">
           <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login&amp;ref=<?php echo TL_REFERER_ID; ?>" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a></span>
