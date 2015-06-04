@@ -130,7 +130,7 @@ class BackendPopup extends \Backend
 		$objTemplate->ctime = \Date::parse(\Config::get('datimFormat'), $objFile->ctime);
 		$objTemplate->mtime = \Date::parse(\Config::get('datimFormat'), $objFile->mtime);
 		$objTemplate->atime = \Date::parse(\Config::get('datimFormat'), $objFile->atime);
-		$objTemplate->path = $this->strFile;
+		$objTemplate->path = specialchars($this->strFile);
 		$objTemplate->theme = \Backend::getTheme();
 		$objTemplate->base = \Environment::get('base');
 		$objTemplate->language = $GLOBALS['TL_LANGUAGE'];
