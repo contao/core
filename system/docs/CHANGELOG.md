@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Consistently sanitize the names of uploaded files (see #7852).
+
+### Fixed
 Fixed loading cached pages with both a mobile and desktop layout (see #7859).
 
 ### Fixed
