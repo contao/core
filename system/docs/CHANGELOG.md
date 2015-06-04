@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Fixed
+Fixed loading cached pages with both a mobile and desktop layout (see #7859).
+
+### Fixed
 Omit the `index.php` fragment if the request string is empty (see #7757).
 
 ### Fixed
