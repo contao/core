@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Updated
+Updated TinyMCE to version 4.1.10.
+
+### Updated
 Updated respimage to version 1.4.0.
 
 ### Updated
