@@ -216,9 +216,10 @@ function scan($strFolder, $blnUncached=false)
  * entities are never double converted.
  * @param string
  * @param boolean
+ * @param boolean
  * @return string
  */
-function specialchars($strString, $blnStripInsertTags=false)
+function specialchars($strString, $blnStripInsertTags=false, $blnDoubleEncode=false)
 {
 	if ($blnStripInsertTags)
 	{
@@ -226,7 +227,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 	}
 
 	// Use ENT_COMPAT here (see #4889)
-	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], $blnDoubleEncode);
 }
 
 

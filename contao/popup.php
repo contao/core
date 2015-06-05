@@ -130,7 +130,7 @@ class Popup extends Backend
 			$this->Template->atime = Date::parse($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
 			$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 			$this->Template->href = ampersand(Environment::get('request'), true) . '&amp;download=1';
-			$this->Template->path = $this->strFile;
+			$this->Template->path = specialchars($this->strFile);
 
 			// Image
 			if ($objFile->isGdImage)
