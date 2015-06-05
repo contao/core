@@ -44,6 +44,10 @@ h2 {
 	position:relative;
 	top:2px;
 }
+.formbody .static-version {
+	margin-right:3px;
+	vertical-align:middle;
+}
 
 /* Messages */
 .tl_info {

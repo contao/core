@@ -58,10 +58,10 @@ function __error($intType, $strMessage, $strFile, $intLine)
 			$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
 								$arrErrors[$intType],
 								$strMessage,
-								str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $strFile), // see #4971
+								str_replace(TL_ROOT . '/', '', $strFile), // see #4971
 								$intLine);
 
-			$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $e->getTraceAsString()) . "\n" . '</pre>';
+			$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
 			echo '<br>' . $strMessage;
 		}
 
@@ -99,10 +99,10 @@ function __exception(Exception $e)
 		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
 							get_class($e),
 							$e->getMessage(),
-							str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $e->getFile()),
+							str_replace(TL_ROOT . '/', '', $e->getFile()),
 							$e->getLine());
 
-		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $e->getTraceAsString()) . "\n" . '</pre>';
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . str_replace(TL_ROOT . '/', '', $e->getTraceAsString()) . "\n" . '</pre>';
 		echo '<br>' . $strMessage;
 	}
 
@@ -218,10 +218,11 @@ function scan($strFolder, $blnUncached=false)
  *
  * @param string  $strString
  * @param boolean $blnStripInsertTags
+ * @param boolean $blnDoubleEncode
  *
  * @return string
  */
-function specialchars($strString, $blnStripInsertTags=false)
+function specialchars($strString, $blnStripInsertTags=false, $blnDoubleEncode=false)
 {
 	if ($blnStripInsertTags)
 	{
@@ -229,7 +230,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 	}
 
 	// Use ENT_COMPAT here (see #4889)
-	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], $blnDoubleEncode);
 }
 
 

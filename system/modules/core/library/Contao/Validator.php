@@ -168,11 +168,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$', \Idna::encodeUrl($varValue));
+			return mb_eregi('^[[:alnum:]\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$', \Idna::encodeUrl($varValue));
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/u', \Idna::encodeUrl($varValue));
+			return preg_match('/^[\pN\pL\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$/u', \Idna::encodeUrl($varValue));
 		}
 	}
 
@@ -387,5 +387,41 @@ class Validator
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Valid file name
+	 *
+	 * @param mixed $strName The file name
+	 *
+	 * @return boolean True if the file name is valid
+	 */
+	public static function isValidFileName($strName)
+	{
+		if ($strName == '')
+		{
+			return false;
+		}
+
+		// Special characters not supported on e.g. Windows
+		if (preg_match('@[\\\\/:*?"<>|]@', $strName))
+		{
+			return false;
+		}
+
+		// Invisible control characters or unused code points
+		if (preg_match('/[\pC]/u', $strName) !== 0)
+		{
+			return false;
+		}
+
+		// Must not be longer than 255 characters
+		if (utf8_strlen($strName) > 255)
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

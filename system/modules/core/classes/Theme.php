@@ -203,13 +203,25 @@ class Theme extends \Backend
 					continue;
 				}
 
-				$fields = $rows->item(0)->childNodes;
+				$arrFieldNames = array();
+
+				// Loop through the rows
+				for ($j=0; $j<$rows->length; $j++)
+				{
+					$fields = $rows->item($j)->childNodes;
+
+					// Loop through the fields
+					for ($k=0; $k<$fields->length; $k++)
+					{
+						$arrFieldNames[$fields->item($k)->getAttribute('name')] = true;
+					}
+				}
+
+				$arrFieldNames = array_keys($arrFieldNames);
 
 				// Loop through the fields
-				for ($j=0; $j<$fields->length; $j++)
+				foreach ($arrFieldNames as $name)
 				{
-					$name = $fields->item($j)->getAttribute('name');
-
 					// Print a warning if a field is missing
 					if (!in_array($name, $arrDbFields[$table]))
 					{

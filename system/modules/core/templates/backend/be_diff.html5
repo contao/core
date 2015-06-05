@@ -38,7 +38,7 @@
         <div class="formbody">
           <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
           <?php if ($this->staticFrom): ?>
-            <span class="arrow"><?= $this->staticFrom ?></span>
+            <span class="static-version"><?= $this->staticFrom ?></span>
           <?php else: ?>
             <select name="from" id="ctrl_from" class="tl_select">
               <?php foreach ($this->versions as $k=>$v): ?>
@@ -47,11 +47,15 @@
             </select>
           <?php endif; ?>
           <span class="arrow">→</span>
-          <select name="to" id="ctrl_to" class="tl_select">
-            <?php foreach ($this->versions as $k=>$v): ?>
-              <option value="<?= $k ?>"<?php if ($v['version'] == $this->to): ?> selected="selected"<?php endif; ?>><?= $v['info'] ?></option>
-            <?php endforeach; ?>
-          </select>
+          <?php if ($this->staticTo): ?>
+            <span class="static-version"><?= $this->staticTo ?></span>
+          <?php else: ?>
+            <select name="to" id="ctrl_to" class="tl_select">
+              <?php foreach ($this->versions as $k=>$v): ?>
+                <option value="<?= $k ?>"<?php if ($v['version'] == $this->to): ?> selected="selected"<?php endif; ?>><?= $v['info'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          <?php endif; ?>
           <input type="submit" class="tl_submit" value="<?= $this->showLabel ?>">
         </div>
       </form>

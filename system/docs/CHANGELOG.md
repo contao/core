@@ -1,6 +1,104 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.0 (2015-06-05)
+--------------------------
+
+### Updated
+Updated TinyMCE to version 4.1.10.
+
+### Updated
+Updated respimage to version 1.4.0.
+
+### Updated
+Updated jQuery to version 1.11.3.
+
+### Updated
+Updated Colorbox to version 1.6.1.
+
+### Fixed
+Consistently sanitize the names of uploaded files (see #7852).
+
+### Fixed
+Fixed loading cached pages with both a mobile and desktop layout (see #7859).
+
+### Fixed
+Omit the `index.php` fragment if the request string is empty (see #7757).
+
+### Fixed
+Adjust the edit URLs in the versions menu in "edit multiple" mode (see #7745).
+
+### Fixed
+Do not cache the login module if there is an error (see #7824).
+
+### Fixed
+Correctly handle encrypted rows (see #7815).
+
+### Fixed
+Only create a new version in the personal data module if something actually
+changed (see #7415).
+
+### Fixed
+Also fire the "modifyFrontendPage" hook when loading from cache (see #7457).
+
+### Fixed
+Fixed several minor issues with the registration module (see #7816).
+
+### Fixed
+Update the revision date if a member updates their personal data (see #7818).
+
+### Fixed
+Do not allow to restore versions in the back end user settings (see #7713).
+
+### Fixed
+Use the timestamp of an element to initialize its first version (see #7730).
+
+### Fixed
+Hide the "edit header" button if there are no editable fields (see #7770).
+
+### Fixed
+Make the "form_submit" templates overwritable again (see #7854).
+
+### Fixed
+Correctly inherit empty page permissions (see #6782).
+
+### Fixed
+Decode the GET parameters before setting them in the `Input` class (see #7829).
+
+### Fixed
+Fixed the "specified value 't' is not a valid email address" error (see #7784).
+
+### Fixed
+Correctly set `data-` or `ng-` attributes in the widgets (see #7772).
+
+### Fixed
+Correctly display the headline in the template editor (see #7746).
+
+### Fixed
+Make `Validator::isValidUrl()` RFC 3986 compliant (see #7790).
+
+### Fixed
+Fixed switching between the page and file picker in the URL wizard (see #5863).
+
+### Fixed
+Make the "the old password is incorrect" message translatable (see #7793).
+
+### Fixed
+Fix copying multiple items in parent view (see #7776).
+
+### Fixed
+Disable the "compare template" icon for folders (see #7802).
+
+### Fixed
+Fix the field order in the template diff view (see #7808).
+
+### Fixed
+Validate the coordinates in the `Image::setImportantPart()` method (see #7804).
+
+### Fixed
+Only add order fields of binary fields in the DCA extractor (see #7785).
+
+
 Version 3.5.0-RC1 (2015-04-30)
 ------------------------------
 
@@ -18,9 +116,6 @@ Support specifying the database key length (see #7771).
 
 ### Improved
 Check for ASCII strings in the `utf8_romanize()` function (see #7748).
-
-### Fixed
-Use `DIRECTORY_SEPARATOR` in conjunction with `str_replace()` (see #7769).
 
 ### Changed
 `Controller::replaceInsertTags()` is now public static.

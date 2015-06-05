@@ -633,6 +633,30 @@ class String
 
 
 	/**
+	 * Sanitize a file name
+	 *
+	 * @param string $strName The file name
+	 *
+	 * @return string The sanitized file name
+	 */
+	public static function sanitizeFileName($strName)
+	{
+		// Remove invisible control characters and unused code points
+		$strName = preg_replace('/[\pC]/u', '', $strName);
+
+		if ($strName === null)
+		{
+			throw new \InvalidArgumentException('The file name could not be sanitzied');
+		}
+
+		// Remove special characters not supported on e.g. Windows
+		$strName = str_replace(array('\\', '/', ':', '*', '?', '"', '<', '>', '|'), '-', $strName);
+
+		return $strName;
+	}
+
+
+	/**
 	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
 	 *
 	 * @param string $url The URL

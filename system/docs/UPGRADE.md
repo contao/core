@@ -12,7 +12,9 @@ The minimum PHP version is raised from 5.3.7 to 5.4.0.
 ### DataContainer
 
 The `DataContainer` class is now abstract, which however should not matter,
-because the contructor has been protected ever since.
+because the contructor has been protected ever since. Also, the methods
+`getPalette()` and `save()` have been added as abstract methods, which need to
+be implemented by all child classes (already the case in the `DC_` classes).
 
 
 Version 3.3 to 3.4

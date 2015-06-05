@@ -118,7 +118,7 @@ class Dbafs
 			// Add the relative path
 			foreach ($objFiles as $objFile)
 			{
-				$strRelpath = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $objFile->getPathname());
+				$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 
 				if ($objFile->isDir())
 				{
@@ -467,7 +467,7 @@ class Dbafs
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
-		$objDatabase->lockTables(array('tl_files'));
+		$objDatabase->lockTables(array('tl_files'=>'WRITE'));
 
 		// Reset the "found" flag
 		$objDatabase->query("UPDATE tl_files SET found=''");
@@ -493,7 +493,7 @@ class Dbafs
 		// Create or update the database entries
 		foreach ($objFiles as $objFile)
 		{
-			$strRelpath = str_replace(TL_ROOT . DIRECTORY_SEPARATOR, '', $objFile->getPathname());
+			$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 
 			// Get all subfiles in a single query
 			if ($objFile->isDir())

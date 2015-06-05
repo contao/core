@@ -103,13 +103,28 @@ class FileUpload extends \Backend
 
 		foreach ($arrFiles as $file)
 		{
-			// Romanize the filename
-			$file['name'] = strip_tags($file['name']);
-			$file['name'] = utf8_romanize($file['name']);
-			$file['name'] = str_replace('"', '', $file['name']);
+			// Sanitize the filename
+			try
+			{
+				$file['name'] = \String::sanitizeFileName($file['name']);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
+				$this->blnHasError = true;
+
+				continue;
+			}
+
+			// Invalid file name
+			if (!\Validator::isValidFileName($file['name']))
+			{
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
+				$this->blnHasError = true;
+			}
 
 			// File was not uploaded
-			if (!is_uploaded_file($file['tmp_name']))
+			elseif (!is_uploaded_file($file['tmp_name']))
 			{
 				if ($file['error'] == 1 || $file['error'] == 2)
 				{

@@ -199,7 +199,7 @@ Class.refactor(Drag,
 		return this.previous.apply(this, arguments);
 	},
 
-	start: function(event) {
+	start: function() {
 		document.addEvents({
 			touchmove: this.bound.check,
 			touchend: this.bound.cancel
@@ -224,7 +224,7 @@ Class.refactor(Drag,
 		}
 	},
 
-	cancel: function(event) {
+	cancel: function() {
 		document.removeEvents({
 			touchmove: this.bound.check,
 			touchend: this.bound.cancel
@@ -232,7 +232,7 @@ Class.refactor(Drag,
 		return this.previous.apply(this, arguments);
 	},
 
-	stop: function(event) {
+	stop: function() {
 		document.removeEvents({
 			touchmove: this.bound.drag,
 			touchend: this.bound.stop

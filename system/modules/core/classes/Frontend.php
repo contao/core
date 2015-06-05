@@ -268,7 +268,7 @@ abstract class Frontend extends \Controller
 				return false;
 			}
 
-			\Input::setGet($arrFragments[$i], (string) $arrFragments[$i+1], true);
+			\Input::setGet(urldecode($arrFragments[$i]), urldecode($arrFragments[$i+1]), true);
 		}
 
 		return $arrFragments[0] ?: null;
