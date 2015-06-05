@@ -2304,6 +2304,12 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						$blnIsFirst = false;
 					}
 
+					// Convert CSV fields (see #2890)
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv']))
+					{
+						$this->varValue = trimsplit($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'], $this->varValue);
+					}
+
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
 					{
