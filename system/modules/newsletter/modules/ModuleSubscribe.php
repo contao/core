@@ -28,12 +28,14 @@ class ModuleSubscribe extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['subscribe'][0]) . ' ###';
@@ -65,7 +67,10 @@ class ModuleSubscribe extends \Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new \FrontendTemplate($this->nl_template);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->nl_template);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -73,6 +78,7 @@ class ModuleSubscribe extends \Module
 		if (\Input::get('token'))
 		{
 			$this->activateRecipient();
+
 			return;
 		}
 
@@ -132,7 +138,10 @@ class ModuleSubscribe extends \Module
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = new \FrontendTemplate('mod_newsletter');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_newsletter');
+
+		$this->Template = $objTemplate;
 
 		// Check the token
 		$objRecipient = \NewsletterRecipientsModel::findByToken(\Input::get('token'));
@@ -141,6 +150,7 @@ class ModuleSubscribe extends \Module
 		{
 			$this->Template->mclass = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['ERR']['invalidToken'];
+
 			return;
 		}
 
@@ -152,6 +162,7 @@ class ModuleSubscribe extends \Module
 		// Update the subscriptions
 		while ($objRecipient->next())
 		{
+			/** @var \NewsletterChannelModel $objChannel */
 			$objChannel = $objRecipient->getRelated('pid');
 
 			$arrAdd[] = $objRecipient->id;

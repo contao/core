@@ -21,6 +21,7 @@ class Theme extends \Backend
 
 	/**
 	 * Import a theme
+	 *
 	 * @return string
 	 */
 	public function importTheme()
@@ -34,6 +35,7 @@ class Theme extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		if (\Input::post('FORM_SUBMIT') == 'tl_theme_import')
@@ -86,6 +88,7 @@ class Theme extends \Backend
 			// Store the field names of the theme tables
 			$arrDbFields = array
 			(
+				'tl_files'           => $this->Database->getFieldNames('tl_files'),
 				'tl_theme'           => $this->Database->getFieldNames('tl_theme'),
 				'tl_style_sheet'     => $this->Database->getFieldNames('tl_style_sheet'),
 				'tl_style'           => $this->Database->getFieldNames('tl_style'),
@@ -103,6 +106,7 @@ class Theme extends \Backend
 			else
 			{
 				$this->Session->set('uploaded_themes', implode(',', $arrFiles));
+
 				return $this->compareThemeFiles($arrFiles, $arrDbFields);
 			}
 		}
@@ -138,10 +142,11 @@ class Theme extends \Backend
 
 
 	/**
-	 * Compare the theme tables with the local database and check
-	 * whether there are custom layout sections
-	 * @param array
-	 * @param array
+	 * Compare the theme tables with the local database and check whether there are custom layout sections
+	 *
+	 * @param array $arrFiles
+	 * @param array $arrDbFields
+	 *
 	 * @return string
 	 */
 	protected function compareThemeFiles($arrFiles, $arrDbFields)
@@ -198,13 +203,25 @@ class Theme extends \Backend
 					continue;
 				}
 
-				$fields = $rows->item(0)->childNodes;
+				$arrFieldNames = array();
+
+				// Loop through the rows
+				for ($j=0; $j<$rows->length; $j++)
+				{
+					$fields = $rows->item($j)->childNodes;
+
+					// Loop through the fields
+					for ($k=0; $k<$fields->length; $k++)
+					{
+						$arrFieldNames[$fields->item($k)->getAttribute('name')] = true;
+					}
+				}
+
+				$arrFieldNames = array_keys($arrFieldNames);
 
 				// Loop through the fields
-				for ($j=0; $j<$fields->length; $j++)
+				foreach ($arrFieldNames as $name)
 				{
-					$name = $fields->item($j)->getAttribute('name');
-
 					// Print a warning if a field is missing
 					if (!in_array($name, $arrDbFields[$table]))
 					{
@@ -279,8 +296,9 @@ class Theme extends \Backend
 
 	/**
 	 * Extract the theme files and write the data to the database
-	 * @param array
-	 * @param array
+	 *
+	 * @param array $arrFiles
+	 * @param array $arrDbFields
 	 */
 	protected function extractThemeFiles($arrFiles, $arrDbFields)
 	{
@@ -365,11 +383,11 @@ class Theme extends \Backend
 			$arrLocks = array
 			(
 				'tl_files'           => 'WRITE',
-				'tl_layout'          => 'WRITE',
-				'tl_module'          => 'WRITE',
+				'tl_theme'           => 'WRITE',
 				'tl_style_sheet'     => 'WRITE',
 				'tl_style'           => 'WRITE',
-				'tl_theme'           => 'WRITE',
+				'tl_module'          => 'WRITE',
+				'tl_layout'          => 'WRITE',
 				'tl_image_size'      => 'WRITE',
 				'tl_image_size_item' => 'WRITE'
 			);
@@ -377,15 +395,13 @@ class Theme extends \Backend
 			// Load the DCAs of the locked tables (see #7345)
 			foreach (array_keys($arrLocks) as $table)
 			{
-				if ($table != 'tl_files')
-				{
-					$this->loadDataContainer($table);
-				}
+				$this->loadDataContainer($table);
 			}
 
 			$this->Database->lockTables($arrLocks);
 
 			// Get the current auto_increment values
+			$tl_files = $this->Database->getNextId('tl_files');
 			$tl_theme = $this->Database->getNextId('tl_theme');
 			$tl_style_sheet = $this->Database->getNextId('tl_style_sheet');
 			$tl_style = $this->Database->getNextId('tl_style');
@@ -401,7 +417,7 @@ class Theme extends \Backend
 				$table = $tables->item($i)->getAttribute('name');
 
 				// Skip invalid tables
-				if ($table == 'tl_files' || !in_array($table, array_keys($arrLocks)))
+				if (!in_array($table, array_keys($arrLocks)))
 				{
 					continue;
 				}
@@ -507,8 +523,8 @@ class Theme extends \Backend
 							}
 						}
 
-						// Adjust the file paths in style sheets
-						elseif (($table == 'tl_style_sheet' || $table == 'tl_style') && strpos($value, 'files') !== false)
+						// Adjust the file paths in style sheets and tl_files
+						elseif (($table == 'tl_style_sheet' || $table == 'tl_style' || ($table == 'tl_files' && $name == 'path')) && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -600,8 +616,15 @@ class Theme extends \Backend
 						new \Folder($set['templates']);
 					}
 
-					// Update the datatbase
-					$this->Database->prepare("INSERT INTO ". $table ." %s")->set($set)->execute();
+					// Update tl_files (entries have been created by the Dbafs class)
+					if ($table == 'tl_files')
+					{
+						$this->Database->prepare("UPDATE $table %s WHERE path=?")->set($set)->execute($set['path']);
+					}
+					else
+					{
+						$this->Database->prepare("INSERT INTO $table %s")->set($set)->execute();
+					}
 				}
 			}
 
@@ -625,6 +648,8 @@ class Theme extends \Backend
 					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
 				}
 			}
+
+			unset($tl_files, $tl_theme, $tl_style_sheet, $tl_style, $tl_module, $tl_layout, $tl_image_size, $tl_image_size_item);
 		}
 
 		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
@@ -637,9 +662,10 @@ class Theme extends \Backend
 
 	/**
 	 * Export a theme
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
 	 */
-	public function exportTheme(\DataContainer $dc)
+	public function exportTheme($dc)
 	{
 		// Get the theme meta data
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
@@ -668,29 +694,16 @@ class Theme extends \Backend
 		// Add the tables
 		$this->addTableTlTheme($xml, $tables, $objTheme);
 		$this->addTableTlStyleSheet($xml, $tables, $objTheme);
-		$this->addTableTlImageSize($xml, $tables, $objTheme);
 		$this->addTableTlModule($xml, $tables, $objTheme);
 		$this->addTableTlLayout($xml, $tables, $objTheme);
+		$this->addTableTlImageSize($xml, $tables, $objTheme);
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
 		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
 
-		// Add the folders
-		$arrFolders = deserialize($objTheme->folders);
-
-		if (!empty($arrFolders) && is_array($arrFolders))
-		{
-			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
-
-			if ($objFolders !== null)
-			{
-				foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
-				{
-					$this->addFolderToArchive($objArchive, $strFolder);
-				}
-			}
-		}
+		// Add the files
+		$this->addTableTlFiles($xml, $tables, $objTheme, $objArchive);
 
 		// Add the template files
 		$this->addTemplatesToArchive($objArchive, $objTheme->templates);
@@ -718,11 +731,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_theme
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlTheme(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -737,17 +751,18 @@ class Theme extends \Backend
 		$arrOrder = $objDcaExtractor->getOrderFields();
 
 		// Add the row
-		$this->addDataRow($xml, $table, $objTheme, $arrOrder);
+		$this->addDataRow($xml, $table, $objTheme->row(), $arrOrder);
 	}
 
 
 	/**
 	 * Add the table tl_style_sheet
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -768,7 +783,7 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objStyleSheet->next())
 		{
-			$this->addDataRow($xml, $table, $objStyleSheet, $arrOrder);
+			$this->addDataRow($xml, $table, $objStyleSheet->row(), $arrOrder);
 		}
 
 		$objStyleSheet->reset();
@@ -795,7 +810,7 @@ class Theme extends \Backend
 			// Add the rows
 			while ($objStyle->next())
 			{
-				$this->addDataRow($xml, $table, $objStyle, $arrOrder);
+				$this->addDataRow($xml, $table, $objStyle->row(), $arrOrder);
 			}
 		}
 	}
@@ -803,11 +818,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_module
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlModule(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -828,18 +844,19 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objModule->next())
 		{
-			$this->addDataRow($xml, $table, $objModule, $arrOrder);
+			$this->addDataRow($xml, $table, $objModule->row(), $arrOrder);
 		}
 	}
 
 
 	/**
 	 * Add the table tl_layout
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlLayout(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -860,18 +877,19 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objLayout->next())
 		{
-			$this->addDataRow($xml, $table, $objLayout, $arrOrder);
+			$this->addDataRow($xml, $table, $objLayout->row(), $arrOrder);
 		}
 	}
 
 
 	/**
 	 * Add the table tl_image_size
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
+	 *
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
 	 */
-	protected function addTableTlImageSize(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme)
+	protected function addTableTlImageSize(\DOMDocument $xml, \DOMNode $tables, \Database\Result $objTheme)
 	{
 		// Add the tables
 		$imageSizeTable = $xml->createElement('table');
@@ -889,7 +907,7 @@ class Theme extends \Backend
 		// Add the rows
 		while ($objSizes->next())
 		{
-			$this->addDataRow($xml, $imageSizeTable, $objSizes);
+			$this->addDataRow($xml, $imageSizeTable, $objSizes->row());
 
 			// Get all size items
 			$objSizeItems = $this->Database->prepare("SELECT * FROM tl_image_size_item WHERE pid=?")
@@ -898,7 +916,46 @@ class Theme extends \Backend
 			// Add the rows
 			while ($objSizeItems->next())
 			{
-				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems);
+				$this->addDataRow($xml, $imageSizeItemTable, $objSizeItems->row());
+			}
+		}
+	}
+
+
+	/**
+	 * Add the table tl_files to the XML and the files to the archive
+	 * @param \DOMDocument            $xml
+	 * @param \DOMNode|\DOMElement    $tables
+	 * @param \Database\Result|object $objTheme
+	 * @param \ZipWriter              $objArchive
+	 */
+	protected function addTableTlFiles(\DOMDocument $xml, \DOMElement $tables, \Database\Result $objTheme, \ZipWriter $objArchive)
+	{
+		// Add the table
+		$table = $xml->createElement('table');
+		$table->setAttribute('name', 'tl_files');
+		$table = $tables->appendChild($table);
+
+		// Load the DCA
+		$this->loadDataContainer('tl_files');
+
+		// Get the order fields
+		$objDcaExtractor = \DcaExtractor::getInstance('tl_files');
+		$arrOrder = $objDcaExtractor->getOrderFields();
+
+		// Add the folders
+		$arrFolders = deserialize($objTheme->folders);
+
+		if (!empty($arrFolders) && is_array($arrFolders))
+		{
+			$objFolders = \FilesModel::findMultipleByUuids($arrFolders);
+
+			if ($objFolders !== null)
+			{
+				foreach ($this->eliminateNestedPaths($objFolders->fetchEach('path')) as $strFolder)
+				{
+					$this->addFolderToArchive($objArchive, $strFolder, $xml, $table, $arrOrder);
+				}
 			}
 		}
 	}
@@ -906,19 +963,19 @@ class Theme extends \Backend
 
 	/**
 	 * Add a data row to the XML document
-	 * @param \DOMDocument
-	 * @param \DOMElement
-	 * @param \Database\Result
-	 * @param array
+	 * @param \DOMDocument         $xml
+	 * @param \DOMNode|\DOMElement $table
+	 * @param array                $arrRow
+	 * @param array                $arrOrder
 	 */
-	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database\Result $objData, array $arrOrder=array())
+	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, array $arrRow, array $arrOrder=array())
 	{
 		$t = $table->getAttribute('name');
 
 		$row = $xml->createElement('row');
 		$row = $table->appendChild($row);
 
-		foreach ($objData->row() as $k=>$v)
+		foreach ($arrRow as $k=>$v)
 		{
 			$field = $xml->createElement('field');
 			$field->setAttribute('name', $k);
@@ -983,10 +1040,16 @@ class Theme extends \Backend
 
 	/**
 	 * Recursively add a folder to the archive
-	 * @param \ZipWriter
-	 * @param string
+	 *
+	 * @param \ZipWriter           $objArchive
+	 * @param string               $strFolder
+	 * @param \DOMDocument         $xml
+	 * @param \DOMNode|\DOMElement $table
+	 * @param array                $arrOrder
+	 *
+	 * @throws \Exception If the folder path is insecure
 	 */
-	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
+	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder, \DOMDocument $xml, \DOMElement $table, array $arrOrder=array())
 	{
 		// Strip the custom upload folder name
 		$strFolder = preg_replace('@^'.preg_quote(\Config::get('uploadPath'), '@').'/@', '', $strFolder);
@@ -1018,19 +1081,40 @@ class Theme extends \Backend
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
 		{
 			// Skip hidden resources
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if (strncmp($strFile, '.', 1) === 0)
 			{
 				continue;
 			}
 
 			if (is_dir(TL_ROOT .'/'. $strFolder .'/'. $strFile))
 			{
-				$this->addFolderToArchive($objArchive, $strFolder .'/'. $strFile);
+				$this->addFolderToArchive($objArchive, $strFolder .'/'. $strFile, $xml, $table, $arrOrder);
 			}
 			else
 			{
 				// Always store files in files and convert the directory upon import
 				$objArchive->addFile($strFolder .'/'. $strFile, $strTarget .'/'. $strFile);
+
+				$arrRow = array();
+				$objFile = new \File($strFolder .'/'. $strFile, true);
+				$objModel = \FilesModel::findByPath($strFolder .'/'. $strFile);
+
+				if ($objModel !== null)
+				{
+					$arrRow = $objModel->row();
+
+					foreach (array('id', 'pid', 'tstamp', 'uuid', 'type', 'extension', 'found', 'name') as $key)
+					{
+						unset($arrRow[$key]);
+					}
+				}
+
+				// Always use files as directory and convert it upon import
+				$arrRow['path'] = $strTarget .'/'. $strFile;
+				$arrRow['hash'] = $objFile->hash;
+
+				// Add the row
+				$this->addDataRow($xml, $table, $arrRow, $arrOrder);
 			}
 		}
 	}
@@ -1038,8 +1122,9 @@ class Theme extends \Backend
 
 	/**
 	 * Add templates to the archive
-	 * @param \ZipWriter
-	 * @param string
+	 *
+	 * @param \ZipWriter $objArchive
+	 * @param string     $strFolder
 	 */
 	protected function addTemplatesToArchive(\ZipWriter $objArchive, $strFolder)
 	{
@@ -1083,7 +1168,9 @@ class Theme extends \Backend
 
 	/**
 	 * Replace files/ with the custom upload folder name
-	 * @param string
+	 *
+	 * @param string $strPath
+	 *
 	 * @return string
 	 */
 	protected function customizeUploadPath($strPath)
@@ -1099,7 +1186,9 @@ class Theme extends \Backend
 
 	/**
 	 * Replace a custom upload folder name with files/
-	 * @param string
+	 *
+	 * @param string $strPath
+	 *
 	 * @return string
 	 */
 	protected function standardizeUploadPath($strPath)

@@ -251,10 +251,13 @@ class tl_extension extends Backend
 
 	/**
 	 * Check whether a module exists already
-	 * @param string
-	 * @param \DataContainer
+	 *
+	 * @param string        $strFolder
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFolder($strFolder, DataContainer $dc)
 	{

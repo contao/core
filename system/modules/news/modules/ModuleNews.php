@@ -28,7 +28,9 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Sort out protected archives
-	 * @param array
+	 *
+	 * @param array $arrArchives
+	 *
 	 * @return array
 	 */
 	protected function sortOutProtected($arrArchives)
@@ -71,19 +73,23 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse an item and return it as string
-	 * @param object
-	 * @param boolean
-	 * @param string
-	 * @param integer
+	 *
+	 * @param \NewsModel $objArticle
+	 * @param boolean    $blnAddArchive
+	 * @param string     $strClass
+	 * @param integer    $intCount
+	 *
 	 * @return string
 	 */
 	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='', $intCount=0)
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($this->news_template);
-		$objTemplate->setData($objArticle->row());
 
+		$objTemplate->setData($objArticle->row());
 		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
 		$objTemplate->newsHeadline = $objArticle->headline;
 		$objTemplate->subHeadline = $objArticle->subheadline;
@@ -119,15 +125,23 @@ abstract class ModuleNews extends \Module
 		// Compile the news text
 		else
 		{
-			$objElement = \ContentModel::findPublishedByPidAndTable($objArticle->id, 'tl_news');
+			$id = $objArticle->id;
 
-			if ($objElement !== null)
+			$objTemplate->text = function () use ($id)
 			{
-				while ($objElement->next())
+				$strText = '';
+				$objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_news');
+
+				if ($objElement !== null)
 				{
-					$objTemplate->text .= $this->getContentElement($objElement->current());
+					while ($objElement->next())
+					{
+						$strText .= $this->getContentElement($objElement->current());
+					}
 				}
-			}
+
+				return $strText;
+			};
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);
@@ -200,8 +214,10 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse one or more items and return them as array
-	 * @param object
-	 * @param boolean
+	 *
+	 * @param \Model\Collection $objArticles
+	 * @param boolean           $blnAddArchive
+	 *
 	 * @return array
 	 */
 	protected function parseArticles($objArticles, $blnAddArchive=false)
@@ -218,7 +234,10 @@ abstract class ModuleNews extends \Module
 
 		while ($objArticles->next())
 		{
-			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
+			/** @var \NewsModel $objArticle */
+			$objArticle = $objArticles->current();
+
+			$arrArticles[] = $this->parseArticle($objArticle, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'), $count);
 		}
 
 		return $arrArticles;
@@ -227,7 +246,9 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Return the meta fields of a news article as array
-	 * @param object
+	 *
+	 * @param \NewsModel $objArticle
+	 *
 	 * @return array
 	 */
 	protected function getMetaFields($objArticle)
@@ -239,7 +260,9 @@ abstract class ModuleNews extends \Module
 			return array();
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$return = array();
 
 		foreach ($meta as $field)
@@ -251,6 +274,7 @@ abstract class ModuleNews extends \Module
 					break;
 
 				case 'author':
+					/** @var \UserModel $objAuthor */
 					if (($objAuthor = $objArticle->getRelated('author')) !== null)
 					{
 						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
@@ -275,8 +299,10 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param object
-	 * @param boolean
+	 *
+	 * @param \NewsModel $objItem
+	 * @param boolean    $blnAddArchive
+	 *
 	 * @return string
 	 */
 	protected function generateNewsUrl($objItem, $blnAddArchive=false)
@@ -350,10 +376,12 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a link and return it as string
-	 * @param string
-	 * @param object
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string     $strLink
+	 * @param \NewsModel $objArticle
+	 * @param boolean    $blnAddArchive
+	 * @param boolean    $blnIsReadMore
+	 *
 	 * @return string
 	 */
 	protected function generateLink($strLink, $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
@@ -380,6 +408,7 @@ abstract class ModuleNews extends \Module
 			$strArticleUrl = ampersand($objArticle->url);
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// External link

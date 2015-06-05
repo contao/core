@@ -5,7 +5,7 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/tablesorter/' . $GLOBALS['TL_ASSETS']['TAB
 
 ?>
 
-<script src="<?php echo TL_ASSETS_URL; ?>assets/jquery/tablesorter/<?php echo $GLOBALS['TL_ASSETS']['TABLESORTER']; ?>/js/tablesorter.js"></script>
+<script src="<?= TL_ASSETS_URL ?>assets/jquery/tablesorter/<?= $GLOBALS['TL_ASSETS']['TABLESORTER'] ?>/js/tablesorter.js"></script>
 <script>
   (function($) {
     $(document).ready(function() {

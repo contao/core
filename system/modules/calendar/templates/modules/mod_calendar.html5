@@ -2,6 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->calendar; ?>
+  <?= $this->calendar ?>
 
 <?php $this->endblock(); ?>

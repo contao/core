@@ -4,12 +4,12 @@
 
   <div class="image_container">
 
-    <?php echo $this->embed_pre; ?>
-    <a href="<?php echo $this->href; ?>" class="hyperlink_img" title="<?php echo $this->linkTitle; ?>"<?php echo $this->attribute; ?><?php echo $this->target; ?>><?php $this->insert('picture_default', $this->picture); ?></a>
-    <?php echo $this->embed_post; ?>
+    <?= $this->embed_pre ?>
+    <a href="<?= $this->href ?>" class="hyperlink_img" title="<?= $this->linkTitle ?>"<?= $this->attribute ?><?= $this->target ?>><?php $this->insert('picture_default', $this->picture); ?></a>
+    <?= $this->embed_post ?>
 
     <?php if ($this->caption): ?>
-      <div class="caption"><?php echo $this->caption; ?></div>
+      <div class="caption"><?= $this->caption ?></div>
     <?php endif; ?>
 
   </div>

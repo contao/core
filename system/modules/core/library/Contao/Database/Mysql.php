@@ -20,13 +20,6 @@ class Mysql extends \Database
 {
 
 	/**
-	 * List tables query
-	 * @var string
-	 */
-	protected $strListTables = "SHOW TABLES FROM `%s`";
-
-
-	/**
 	 * Connect to the database server and select the database
 	 *
 	 * @throws \Exception If the connection cannot be established
@@ -207,9 +200,16 @@ class Mysql extends \Database
 
 		while ($objIndex->next())
 		{
+			$strColumnName = $objIndex->Column_name;
+
+			if ($objIndex->Sub_part != '')
+			{
+				$strColumnName .= '(' . $objIndex->Sub_part . ')';
+			}
+
 			$arrReturn[$objIndex->Key_name]['name'] = $objIndex->Key_name;
 			$arrReturn[$objIndex->Key_name]['type'] = 'index';
-			$arrReturn[$objIndex->Key_name]['index_fields'][] = $objIndex->Column_name;
+			$arrReturn[$objIndex->Key_name]['index_fields'][] = $strColumnName;
 			$arrReturn[$objIndex->Key_name]['index'] = (($objIndex->Non_unique == 0) ? 'UNIQUE' : 'KEY');
 		}
 

@@ -155,7 +155,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 
 	/**
 	 * Detailed view of one extension.
-	 * @param string
+	 * @param string $aParams
 	 */
 	protected function viewExtension($aParams)
 	{

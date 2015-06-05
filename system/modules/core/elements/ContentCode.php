@@ -28,6 +28,7 @@ class ContentCode extends \ContentElement
 
 	/**
 	 * Return if the highlighter plugin is not loaded
+	 *
 	 * @return string
 	 */
 	public function generate()

@@ -24,6 +24,13 @@ namespace Contao;
  *     $template->name = 'Leo Feyer';
  *     $template->output();
  *
+ * @property string $style
+ * @property array  $cssID
+ * @property string $class
+ * @property string $inColumn
+ * @property string $headline
+ * @property array  $hl
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Template extends \BaseTemplate
@@ -86,6 +93,11 @@ abstract class Template extends \BaseTemplate
 	{
 		if (isset($this->arrData[$strKey]))
 		{
+			if (is_object($this->arrData[$strKey]) && is_callable($this->arrData[$strKey]))
+			{
+				return $this->arrData[$strKey]();
+			}
+
 			return $this->arrData[$strKey];
 		}
 

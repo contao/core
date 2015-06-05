@@ -14,6 +14,9 @@ namespace Contao;
 /**
  * Provide methods to handle image size fields.
  *
+ * @property integer $maxlength
+ * @property array   $options
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ImageSize extends \Widget
@@ -34,8 +37,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -61,7 +65,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -76,6 +82,7 @@ class ImageSize extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -86,17 +93,6 @@ class ImageSize extends \Widget
 		}
 
 		$arrFields = array();
-
-		for ($i=0; $i<2; $i++)
-		{
-			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$this->strName,
-									$this->strId.'_'.$i,
-									$i,
-									specialchars(@$this->varValue[$i]), // see #4979
-									$this->getAttributes());
-		}
-
 		$arrOptions = array();
 
 		foreach ($this->arrOptions as $strKey=>$arrOption)
@@ -124,11 +120,22 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
+		$arrFields[] = sprintf('<select name="%s[2]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
 								$this->strName,
 								$this->strId.'_3',
 								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
+
+		for ($i=0; $i<2; $i++)
+		{
+			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+									$this->strName,
+									$i,
+									$this->strId.'_'.$i,
+									$i,
+									specialchars(@$this->varValue[$i]), // see #4979
+									$this->getAttributes());
+		}
 
 		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,

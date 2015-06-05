@@ -28,6 +28,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Change the palette of the current table and switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -35,6 +36,7 @@ class ModuleUser extends \BackendModule
 		$this->import('BackendUser', 'User');
 
 		$GLOBALS['TL_DCA'][$this->table]['config']['closed'] = true;
+		$GLOBALS['TL_DCA'][$this->table]['config']['hideVersionMenu'] = true;
 
 		$GLOBALS['TL_DCA'][$this->table]['palettes'] = array
 		(
@@ -55,6 +57,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string|void
 	 */
 	protected function compile()

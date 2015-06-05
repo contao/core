@@ -5,13 +5,13 @@ $GLOBALS['TL_CSS'][] = 'assets/mootools/tablesort/css/tablesort.css|static';
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_ASSETS_URL; ?>assets/mootools/tablesort/js/tablesort.js"></script>
+<script type="text/javascript" src="<?= TL_ASSETS_URL ?>assets/mootools/tablesort/js/tablesort.js"></script>
 <script type="text/javascript">
   /* <![CDATA[ */
   (function() {
     window.addEvent('domready', function() {
       $$('.ce_table .sortable').each(function(table) {
-        new TableSort(table, '<?php echo $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']; ?>', '<?php echo $GLOBALS['TL_LANG']['MSC']['decimalSeparator']; ?>');
+        new TableSort(table, '<?= $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] ?>', '<?= $GLOBALS['TL_LANG']['MSC']['decimalSeparator'] ?>');
       });
     });
   })();

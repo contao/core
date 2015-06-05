@@ -28,12 +28,14 @@ class ModuleArticleList extends \Module
 
 	/**
 	 * Do not display the module if there are no articles
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articleList'][0]) . ' ###';
@@ -46,6 +48,7 @@ class ModuleArticleList extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
@@ -55,6 +58,7 @@ class ModuleArticleList extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (!strlen($this->inColumn))

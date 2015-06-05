@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Class FormExplanation
  *
+ * @property string $text
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormExplanation extends \Widget
@@ -50,6 +52,7 @@ class FormExplanation extends \Widget
 	 */
 	public function generate()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Clean RTE output

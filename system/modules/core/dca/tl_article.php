@@ -39,8 +39,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
-				'alias' => 'index'
+				'alias' => 'index',
+				'pid,start,stop,published,sorting' => 'index'
 			)
 		)
 	),
@@ -221,7 +221,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'default'                 => 'main',
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_article', 'getActiveLayoutSections'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
+			'reference'               => &$GLOBALS['TL_LANG']['COLS'],
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'keywords' => array
@@ -563,14 +563,16 @@ class tl_article extends Backend
 
 	/**
 	 * Add an image to each page in the tree
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $label
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label)
 	{
-		$time = time();
-		$published = ($row['published'] && ($row['start'] == '' || $row['start'] < $time) && ($row['stop'] == '' || $row['stop'] > $time));
+		$time = \Date::floorToMinute();
+		$published = ($row['published'] && ($row['start'] == '' || $row['start'] <= $time) && ($row['stop'] == '' || $row['stop'] > ($time + 60)));
 
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !Config::get('disableAlias')) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif').'</a> '.$label;
 	}
@@ -578,10 +580,13 @@ class tl_article extends Backend
 
 	/**
 	 * Auto-generate an article alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -620,7 +625,9 @@ class tl_article extends Backend
 
 	/**
 	 * Return all active layout sections as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getActiveLayoutSections(DataContainer $dc)
@@ -688,6 +695,7 @@ class tl_article extends Backend
 
 	/**
 	 * Return all module templates as array
+	 *
 	 * @return array
 	 */
 	public function getArticleTemplates()
@@ -698,12 +706,14 @@ class tl_article extends Backend
 
 	/**
 	 * Return the edit article button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editArticle($row, $href, $label, $title, $icon, $attributes)
@@ -718,12 +728,14 @@ class tl_article extends Backend
 
 	/**
 	 * Return the edit header button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
@@ -743,13 +755,15 @@ class tl_article extends Backend
 
 	/**
 	 * Return the copy article button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 * @param string $table
+	 *
 	 * @return string
 	 */
 	public function copyArticle($row, $href, $label, $title, $icon, $attributes, $table)
@@ -769,12 +783,14 @@ class tl_article extends Backend
 
 	/**
 	 * Return the cut article button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function cutArticle($row, $href, $label, $title, $icon, $attributes)
@@ -789,11 +805,13 @@ class tl_article extends Backend
 
 	/**
 	 * Return the paste article button
-	 * @param \DataContainer
-	 * @param array
-	 * @param string
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param DataContainer $dc
+	 * @param array         $row
+	 * @param string        $table
+	 * @param boolean       $cr
+	 * @param array         $arrClipboard
+	 *
 	 * @return string
 	 */
 	public function pasteArticle(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
@@ -816,12 +834,14 @@ class tl_article extends Backend
 
 	/**
 	 * Return the delete article button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function deleteArticle($row, $href, $label, $title, $icon, $attributes)
@@ -836,7 +856,9 @@ class tl_article extends Backend
 
 	/**
 	 * Automatically generate the folder URL aliases
-	 * @param array
+	 *
+	 * @param array $arrButtons
+	 *
 	 * @return array
 	 */
 	public function addAliasButton($arrButtons)
@@ -889,12 +911,14 @@ class tl_article extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -933,9 +957,10 @@ class tl_article extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
@@ -972,7 +997,7 @@ class tl_article extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_article SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_article SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

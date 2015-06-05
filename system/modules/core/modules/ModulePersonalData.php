@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Front end module "personal data".
  *
+ * @property array $editable
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePersonalData extends \Module
@@ -28,12 +30,14 @@ class ModulePersonalData extends \Module
 
 	/**
 	 * Return a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['personalData'][0]) . ' ###';
@@ -62,7 +66,9 @@ class ModulePersonalData extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$this->import('FrontendUser', 'User');
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -90,7 +96,10 @@ class ModulePersonalData extends \Module
 		// Set the template
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -134,6 +143,7 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
@@ -152,10 +162,10 @@ class ModulePersonalData extends \Module
 			{
 				if (is_array($this->User->$field))
 				{
-					 if (empty($this->User->$field))
-					 {
-					 	$arrData['eval']['required'] = true;
-					 }
+					if (empty($this->User->$field))
+					{
+						$arrData['eval']['required'] = true;
+					}
 				}
 				else
 				{
@@ -185,16 +195,21 @@ class ModulePersonalData extends \Module
 				}
 			}
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
 			$objWidget->storeValues = true;
-			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+			$objWidget->rowClass = 'row_' . $row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if it is a password field
 			if ($objWidget instanceof \FormPassword)
 			{
-				++$row;
-				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
+				if ($objMember->password != '')
+				{
+					$objWidget->mandatory = false;
+				}
+
+				$objWidget->rowClassConfirm = 'row_' . ++$row . ((($row % 2) == 0) ? ' even' : ' odd');
 			}
 
 			// Validate the form data
@@ -266,12 +281,21 @@ class ModulePersonalData extends \Module
 						$varValue = $objWidget->getEmptyValue();
 					}
 
-					// Set the new value
-					$this->User->$field = $varValue;
+					// Encrypt the value (see #7815)
+					if ($arrData['eval']['encrypt'])
+					{
+						$varValue = \Encryption::encrypt($varValue);
+					}
 
-					// Set the new field in the member model
-					$blnModified = true;
-					$objMember->$field = $varValue;
+					// Set the new value
+					if ($varValue !== $this->User->$field)
+					{
+						$this->User->$field = $varValue;
+
+						// Set the new field in the member model
+						$blnModified = true;
+						$objMember->$field = $varValue;
+					}
 				}
 			}
 
@@ -290,6 +314,7 @@ class ModulePersonalData extends \Module
 		// Save the model
 		if ($blnModified)
 		{
+			$objMember->tstamp = time();
 			$objMember->save();
 
 			// Create a new version

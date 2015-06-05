@@ -58,8 +58,9 @@ class Versions extends \Controller
 
 	/**
 	 * Initialize the object
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strTable
+	 * @param integer $intPid
 	 */
 	public function __construct($strTable, $intPid)
 	{
@@ -84,7 +85,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the edit URL
-	 * @param string
+	 *
+	 * @param string $strEditUrl
 	 */
 	public function setEditUrl($strEditUrl)
 	{
@@ -94,7 +96,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the username
-	 * @param string
+	 *
+	 * @param string $strUsername
 	 */
 	public function setUsername($strUsername)
 	{
@@ -104,7 +107,8 @@ class Versions extends \Controller
 
 	/**
 	 * Set the user ID
-	 * @param integer
+	 *
+	 * @param integer $intUserId
 	 */
 	public function setUserId($intUserId)
 	{
@@ -203,18 +207,23 @@ class Versions extends \Controller
 		{
 			$strDescription = $objRecord->selector;
 		}
+		elseif (isset($objRecord->subject))
+		{
+			$strDescription = $objRecord->subject;
+		}
 
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($this->intPid, $this->strTable);
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
+					   ->execute($this->intPid, ($intVersion == 1 ? $objRecord->tstamp : time()), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
 	}
 
 
 	/**
 	 * Restore a version
-	 * @param integer
+	 *
+	 * @param integer $intVersion
 	 */
 	public function restore($intVersion)
 	{
@@ -245,12 +254,14 @@ class Versions extends \Controller
 				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
 
 				// Unset fields that do not exist (see #5219)
-				foreach (array_keys($data) as $k)
+				$data = array_intersect_key($data, $arrFields);
+
+				$this->loadDataContainer($this->strTable);
+
+				// Reset fields added after storing the version to their default value (see #7755)
+				foreach (array_diff_key($arrFields, $data) as $k=>$v)
 				{
-					if (!isset($arrFields[$k]))
-					{
-						unset($data[$k]);
-					}
+					$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
 				}
 
 				$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
@@ -376,6 +387,13 @@ class Versions extends \Controller
 
 						$blnIsBinary = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
 
+						// Decrypt the values
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
+						{
+							$to[$k] = \Encryption::decrypt($to[$k]);
+							$from[$k] = \Encryption::decrypt($from[$k]);
+						}
+
 						// Convert serialized arrays into strings
 						if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
 						{
@@ -385,6 +403,7 @@ class Versions extends \Controller
 						{
 							$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
 						}
+
 						unset($tmp);
 
 						// Convert binary UUIDs to their hex equivalents (see #6365)
@@ -437,6 +456,7 @@ class Versions extends \Controller
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
@@ -461,6 +481,7 @@ class Versions extends \Controller
 
 	/**
 	 * Render the versions dropdown menu
+	 *
 	 * @return string
 	 */
 	public function renderDropdown()
@@ -502,7 +523,8 @@ class Versions extends \Controller
 
 	/**
 	 * Add a list of versions to a template
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
@@ -515,9 +537,9 @@ class Versions extends \Controller
 		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
 								->execute($objUser->id);
 
-		$intPage   = \Input::get('vp') ?: 1;
-		$intOffset = ($intPage - 1) * 30;
 		$intLast   = ceil($objTotal->count / 30);
+		$intPage   = (\Input::get('vp') !== null) ? \Input::get('vp') : 1;
+		$intOffset = ($intPage - 1) * 30;
 
 		// Validate the page number
 		if ($intPage < 1 || ($intLast > 0 && $intPage > $intLast))
@@ -530,7 +552,7 @@ class Versions extends \Controller
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions
-		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
+		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version" . (!$objUser->isAdmin ? " WHERE userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
 								   ->limit(30, $intOffset)
 								   ->execute($objUser->id);
 
@@ -583,6 +605,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the edit URL
+	 *
 	 * @return string
 	 */
 	protected function getEditUrl()
@@ -604,12 +627,16 @@ class Versions extends \Controller
 			);
 		}
 
+		// Correct the URL in "edit|override multiple" mode (see #7745)
+		$strUrl = preg_replace('/act=(edit|override)All/', 'act=edit&id=' . $this->intPid, $strUrl);
+
 		return $strUrl;
 	}
 
 
 	/**
 	 * Return the username
+	 *
 	 * @return string
 	 */
 	protected function getUsername()
@@ -627,6 +654,7 @@ class Versions extends \Controller
 
 	/**
 	 * Return the user ID
+	 *
 	 * @return string
 	 */
 	protected function getUserId()
@@ -644,8 +672,10 @@ class Versions extends \Controller
 
 	/**
 	 * Implode a multi-dimensional array recursively
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param mixed   $var
+	 * @param boolean $binary
+	 *
 	 * @return string
 	 */
 	protected function implodeRecursive($var, $binary=false)

@@ -21,17 +21,19 @@ class PageRoot extends \Frontend
 
 	/**
 	 * Redirect to the first active regular page
-	 * @param integer
-	 * @param boolean
-	 * @return integer
+	 *
+	 * @param integer $pageId
+	 * @param boolean $blnReturn
+	 * @param boolean $blnPreferAlias
+	 *
 	 * @return integer
 	 */
-	public function generate($pageId, $blnReturn=false)
+	public function generate($pageId, $blnReturn=false, $blnPreferAlias=false)
 	{
 		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
 
 		// No published pages yet
-		if ($objNextPage === null)
+		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
@@ -40,8 +42,15 @@ class PageRoot extends \Frontend
 
 		if (!$blnReturn)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objPage->language));
+		}
+
+		if ($blnPreferAlias && $objNextPage->alias != '')
+		{
+			return $objNextPage->alias;
 		}
 
 		return $objNextPage->id;

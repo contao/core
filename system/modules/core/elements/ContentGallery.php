@@ -21,7 +21,7 @@ class ContentGallery extends \ContentElement
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -34,6 +34,7 @@ class ContentGallery extends \ContentElement
 
 	/**
 	 * Return if there are no files
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -81,6 +82,7 @@ class ContentGallery extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();
@@ -279,18 +281,14 @@ class ContentGallery extends \ContentElement
 		{
 			// Get the current page
 			$id = 'page_g' . $this->id;
-			$page = \Input::get($id) ?: 1;
+			$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 			{
-				global $objPage;
-				$objPage->noSearch = 1;
-				$objPage->cache = 0;
-
-				// Send a 404 header
-				header('HTTP/1.1 404 Not Found');
-				return;
+				/** @var \PageError404 $objHandler */
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($objPage->id);
 			}
 
 			// Set limit and offset
@@ -376,6 +374,7 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 

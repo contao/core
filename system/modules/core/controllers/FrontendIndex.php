@@ -57,6 +57,7 @@ class FrontendIndex extends \Frontend
 	public function run()
 	{
 		global $objPage;
+
 		$pageId = $this->getPageIdFromUrl();
 		$objRootPage = null;
 
@@ -64,13 +65,17 @@ class FrontendIndex extends \Frontend
 		if ($pageId === null)
 		{
 			$objRootPage = $this->getRootPageFromUrl();
+
+			/** @var \PageRoot $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
-			$pageId = $objHandler->generate($objRootPage->id, true);
+			$pageId = $objHandler->generate($objRootPage->id, true, true);
 		}
 		// Throw a 404 error if the request is not a Contao request (see #2864)
 		elseif ($pageId === false)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError404 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -78,6 +83,8 @@ class FrontendIndex extends \Frontend
 		elseif (\Config::get('rewriteURL') && strncmp(\Environment::get('request'), 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
+
+			/** @var \PageError403 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -94,7 +101,9 @@ class FrontendIndex extends \Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $objPage->current()->loadDetails();
+				/** @var \PageModel $objModel */
+				$objModel = $objPage->current();
+				$objCurrentPage = $objModel->loadDetails();
 
 				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
@@ -149,6 +158,14 @@ class FrontendIndex extends \Frontend
 		if ($objPage instanceof \Model\Collection)
 		{
 			$objPage = $objPage->current();
+		}
+
+		// If the page has an alias, it can no longer be called via ID (see #7661)
+		if ($objPage->alias != '' && $pageId == $objPage->id)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
 		}
 
 		// Load a website root page object (will redirect to the first active regular page)
@@ -280,12 +297,7 @@ class FrontendIndex extends \Frontend
 			return;
 		}
 
-		/**
-		 * If the request string is empty, look for a cached page matching the
-		 * primary browser language. This is a compromise between not caching
-		 * empty requests at all and considering all browser languages, which
-		 * is not possible for various reasons.
-		 */
+		// Try to map the empty request
 		if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 		{
 			// Return if the language is added to the URL and the empty domain will be redirected
@@ -294,12 +306,55 @@ class FrontendIndex extends \Frontend
 				return;
 			}
 
+			$strCacheKey = null;
 			$arrLanguage = \Environment::get('httpAcceptLanguage');
-			$strCacheKey = \Environment::get('base') .'empty.'. $arrLanguage[0];
+
+			// Try to get the cache key from the mapper array
+			if (file_exists(TL_ROOT . '/system/cache/config/mapping.php'))
+			{
+				$arrMapper = include TL_ROOT . '/system/cache/config/mapping.php';
+				$arrPaths = array(\Environment::get('host'), '*');
+
+				// Try the language specific keys
+				foreach ($arrLanguage as $strLanguage)
+				{
+					foreach ($arrPaths as $strPath)
+					{
+						$strKey = $strPath . '/empty.' . $strLanguage;
+
+						if (isset($arrMapper[$strKey]))
+						{
+							$strCacheKey = $arrMapper[$strKey];
+							break;
+						}
+					}
+				}
+
+				// Try the fallback key
+				if ($strCacheKey === null)
+				{
+					foreach ($arrPaths as $strPath)
+					{
+						$strKey = $strPath . '/empty.fallback';
+
+						if (isset($arrMapper[$strKey]))
+						{
+							$strCacheKey = $arrMapper[$strKey];
+							break;
+						}
+					}
+				}
+			}
+
+			// Fall back to the first accepted language
+			if ($strCacheKey === null)
+			{
+				$strCacheKey = \Environment::get('host') . '/empty.' . $arrLanguage[0];
+			}
 		}
 		else
 		{
-			$strCacheKey = \Environment::get('base') . \Environment::get('request');
+			$strCacheKey = \Environment::get('host') . '/' . \Environment::get('request');
 		}
 
 		// HOOK: add custom logic
@@ -319,6 +374,18 @@ class FrontendIndex extends \Frontend
 		if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
 		{
 			$strMd5CacheKey = md5($strCacheKey . '.mobile');
+			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
+
+			if (file_exists($strCacheFile))
+			{
+				$blnFound = true;
+			}
+		}
+
+		// Check for a desktop layout (see #7826)
+		else
+		{
+			$strMd5CacheKey = md5($strCacheKey . '.desktop');
 			$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strMd5CacheKey, 0, 1) . '/' . $strMd5CacheKey . '.html';
 
 			if (file_exists($strCacheFile))
@@ -357,6 +424,7 @@ class FrontendIndex extends \Frontend
 		if ($expire < time())
 		{
 			ob_end_clean();
+
 			return;
 		}
 
@@ -381,10 +449,19 @@ class FrontendIndex extends \Frontend
 		// Load the default language file (see #2644)
 		\System::loadLanguageFile('default');
 
-		// Replace the insert tags and then re-replace the request_token
-		// tag in case a form element has been loaded via insert tag
+		// Replace the insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$strBuffer = $this->replaceInsertTags($strBuffer, false);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
+
+		// HOOK: allow to modify the compiled markup (see #4291 and #7457)
+		if (isset($GLOBALS['TL_HOOKS']['modifyFrontendPage']) && is_array($GLOBALS['TL_HOOKS']['modifyFrontendPage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, null);
+			}
+		}
 
 		// Content type
 		if (!$content)

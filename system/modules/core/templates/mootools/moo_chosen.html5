@@ -11,7 +11,7 @@ $objCombiner->add('assets/mootools/stylect/js/stylect.js');
 
 ?>
 
-<script src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
+<script src="<?= $objCombiner->getCombinedFile() ?>"></script>
 <script>
   (function() {
     window.addEvent('domready', function() {

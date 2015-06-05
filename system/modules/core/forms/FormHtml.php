@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Class FormHtml
  *
+ * @property string $html
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormHtml extends \Widget

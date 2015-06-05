@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Class FrontendTemplate
  *
+ * @property integer $id
+ * @property string  $keywords
+ * @property string  $content
+ * @property array   $sections
+ * @property string  $sPosition
+ * @property string  $tag
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FrontendTemplate extends \Template
@@ -26,6 +33,7 @@ class FrontendTemplate extends \Template
 	 */
 	public function parse()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Adjust the output format
@@ -84,6 +92,9 @@ class FrontendTemplate extends \Template
 
 		// Add the output to the cache
 		$this->addToCache();
+
+		// Unset only after the output has been cached (see #7824)
+		unset($_SESSION['LOGIN_ERROR']);
 
 		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($this->strBuffer, false);
@@ -185,6 +196,7 @@ class FrontendTemplate extends \Template
 	 */
 	protected function addToCache()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$intCache = 0;
@@ -201,11 +213,11 @@ class FrontendTemplate extends \Template
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = \Environment::get('base') . 'empty.' . $objPage->language;
+				$strCacheKey = \Environment::get('host') . '/empty.' . $objPage->language;
 			}
 			else
 			{
-				$strCacheKey = \Environment::get('base') . \Environment::get('request');
+				$strCacheKey = \Environment::get('host') . '/' . \Environment::get('request');
 			}
 
 			// HOOK: add custom logic
@@ -218,10 +230,17 @@ class FrontendTemplate extends \Template
 				}
 			}
 
-			// Store mobile pages separately
-			if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
+			// Add a suffix if there is a mobile layout (see #7826)
+			if ($objPage->mobileLayout > 0)
 			{
-				$strCacheKey .= '.mobile';
+				if (\Input::cookie('TL_VIEW') == 'mobile' || (\Environment::get('agent')->mobile && \Input::cookie('TL_VIEW') != 'desktop'))
+				{
+					$strCacheKey .= '.mobile';
+				}
+				else
+				{
+					$strCacheKey .= '.desktop';
+				}
 			}
 
 			// Replace insert tags for caching
@@ -262,6 +281,7 @@ class FrontendTemplate extends \Template
 	 */
 	protected function addToSearchIndex()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Index page if searching is allowed and there is no back end user
@@ -337,6 +357,7 @@ class FrontendTemplate extends \Template
 
 		if ($strKey == 'main')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			// Use the section tag in HTML5

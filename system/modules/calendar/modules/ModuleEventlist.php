@@ -21,7 +21,7 @@ class ModuleEventlist extends \Events
 
 	/**
 	 * Current date object
-	 * @var integer
+	 * @var \Date
 	 */
 	protected $Date;
 
@@ -34,12 +34,14 @@ class ModuleEventlist extends \Events
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventlist'][0]) . ' ###';
@@ -74,7 +76,9 @@ class ModuleEventlist extends \Events
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$blnClearInput = false;
 
 		$intYear = \Input::get('year');
@@ -104,34 +108,37 @@ class ModuleEventlist extends \Events
 
 		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
-		// Display year
-		if ($blnDynamicFormat && $intYear)
+		// Create the date object
+		try
 		{
-			$this->Date = new \Date($intYear, 'Y');
-			$this->cal_format = 'cal_year';
-			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
+			if ($blnDynamicFormat && $intYear)
+			{
+				$this->Date = new \Date($intYear, 'Y');
+				$this->cal_format = 'cal_year';
+				$this->headline .= ' ' . date('Y', $this->Date->tstamp);
+			}
+			elseif ($blnDynamicFormat && $intMonth)
+			{
+				$this->Date = new \Date($intMonth, 'Ym');
+				$this->cal_format = 'cal_month';
+				$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
+			}
+			elseif ($blnDynamicFormat && $intDay)
+			{
+				$this->Date = new \Date($intDay, 'Ymd');
+				$this->cal_format = 'cal_day';
+				$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
+			}
+			else
+			{
+				$this->Date = new \Date();
+			}
 		}
-
-		// Display month
-		elseif ($blnDynamicFormat && $intMonth)
+		catch (\OutOfBoundsException $e)
 		{
-			$this->Date = new \Date($intMonth, 'Ym');
-			$this->cal_format = 'cal_month';
-			$this->headline .= ' ' . \Date::parse('F Y', $this->Date->tstamp);
-		}
-
-		// Display day
-		elseif ($blnDynamicFormat && $intDay)
-		{
-			$this->Date = new \Date($intDay, 'Ymd');
-			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $this->Date->tstamp);
-		}
-
-		// Display all events or upcoming/past events
-		else
-		{
-			$this->Date = new \Date();
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
 		}
 
 		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
@@ -190,18 +197,14 @@ class ModuleEventlist extends \Events
 		if ($this->perPage > 0)
 		{
 			$id = 'page_e' . $this->id;
-			$page = \Input::get($id) ?: 1;
+			$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 			{
-				global $objPage;
-				$objPage->noSearch = 1;
-				$objPage->cache = 0;
-
-				// Send a 404 header
-				header('HTTP/1.1 404 Not Found');
-				return;
+				/** @var \PageError404 $objHandler */
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($objPage->id);
 			}
 
 			$offset = ($page - 1) * $this->perPage;
@@ -242,6 +245,7 @@ class ModuleEventlist extends \Events
 				$blnIsLastEvent = true;
 			}
 
+			/** @var \FrontendTemplate|object $objTemplate */
 			$objTemplate = new \FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
 

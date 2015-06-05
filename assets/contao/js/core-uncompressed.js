@@ -117,7 +117,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -209,7 +209,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -280,7 +280,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -351,7 +351,7 @@ var AjaxRequest =
 					}
 				});
 
-				var ul = new Element('ul', {
+				new Element('ul', {
 					'class': 'level_' + level,
 					'html': txt
 				}).inject(li, 'bottom');
@@ -851,7 +851,7 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var frm = window.frames['simple-modal-iframe'],
-				val = [], inp, i;
+				val = [], inp, field, i;
 			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
@@ -860,22 +860,23 @@ var Backend =
 				alert(Contao.lang.picker);
 				return; // see #5704
 			}
-			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			inp = frm.document.getElementById('tl_select').getElementsByTagName('input');
 			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
 				$(opt.tag).value = val.join(',');
-				if (opt.url.match(/page\.php/)) {
+				if (frm.document.location.href.indexOf('contao/page.php') != -1) {
 					$(opt.tag).value = '{{link_url::' + $(opt.tag).value + '}}';
 				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
-				$('ctrl_'+opt.id).value = val.join("\t");
-				var act = (opt.url.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
+				field = $('ctrl_' + opt.id);
+				field.value = val.join("\t");
+				var act = (frm.document.location.href.indexOf('contao/page.php') != -1) ? 'reloadPagetree' : 'reloadFiletree';
 				new Request.Contao({
-					field: $('ctrl_'+opt.id),
+					field: field,
 					evalScripts: false,
 					onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
 					onSuccess: function(txt, json) {
@@ -884,7 +885,7 @@ var Backend =
 						AjaxRequest.hideBox();
 						window.fireEvent('ajax_change');
 					}
-				}).post({'action':act, 'name':opt.id, 'value':$('ctrl_'+opt.id).value, 'REQUEST_TOKEN':Contao.request_token});
+				}).post({'action':act, 'name':opt.id, 'value':field.value, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			this.hide();
 		});
@@ -931,7 +932,7 @@ var Backend =
 				alert('Could not find the SimpleModal frame');
 				return;
 			}
-			inp = frm.document.getElementById('tl_listing').getElementsByTagName('input');
+			inp = frm.document.getElementById('tl_select').getElementsByTagName('input');
 			for (i=0; i<inp.length; i++) {
 				if (inp[i].checked && !inp[i].id.match(/^reset_/)) {
 					val = inp[i].get('value');
@@ -2033,6 +2034,74 @@ var Backend =
 	},
 
 	/**
+	 * Allow to toggle checkboxes or radio buttons by clicking a row
+	 *
+	 * @author Kamil Kuzminski
+	 */
+	enableToggleSelect: function() {
+		var container = $('tl_select'),
+			checkboxes = [], start, thisIndex, startIndex, status, from, to,
+			shiftToggle = function(el) {
+				thisIndex = checkboxes.indexOf(el);
+				startIndex = checkboxes.indexOf(start);
+				from = Math.min(thisIndex, startIndex);
+				to = Math.max(thisIndex, startIndex);
+				status = checkboxes[startIndex].checked ? true : false;
+
+				for (from; from<=to; from++) {
+					checkboxes[from].checked = status;
+				}
+			};
+
+		if (container) {
+			checkboxes = container.getElements('input[type="checkbox"]');
+		}
+
+		// Row click
+		$$('.toggle_select').each(function(el) {
+			el.addEvent('click', function(e) {
+				var input = $(el).getElement('input[type="checkbox"],input[type="radio"]');
+
+				if (!input) {
+					return;
+				}
+
+				// Radio buttons
+				if (input.type == 'radio') {
+					if (!input.checked) {
+						input.checked = 'checked';
+					}
+					return;
+				}
+
+				// Checkboxes
+				if (e.shift && start) {
+					shiftToggle(input);
+				} else {
+					input.checked = input.checked ? '' : 'checked';
+
+					if (input.get('onclick') == 'Backend.toggleCheckboxes(this)') {
+						Backend.toggleCheckboxes(input); // see #6399
+					}
+				}
+
+				start = input;
+			});
+		});
+
+		// Checkbox click
+		checkboxes.each(function(el) {
+			el.addEvent('click', function(e) {
+				if (e.shift && start) {
+					shiftToggle(this);
+				}
+
+				start = this;
+			});
+		});
+	},
+
+	/**
 	 * Allow to mark the important part of an image
 	 *
 	 * @param {object} el The DOM element
@@ -2181,6 +2250,7 @@ window.addEvent('domready', function() {
 	Backend.convertEnableModules();
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
+	Backend.enableToggleSelect();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
@@ -2203,6 +2273,7 @@ window.addEvent('ajax_change', function() {
 	Backend.addInteractiveHelp();
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
+	Backend.enableToggleSelect();
 
 	// Chosen
 	if (Elements.chosen != undefined) {

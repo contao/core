@@ -1,16 +1,16 @@
 
 <!-- indexer::stop -->
-<nav class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<nav class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
 
   <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+    <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
   <?php endif; ?>
 
-  <a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
+  <a href="<?= $this->request ?>#<?= $this->skipId ?>" class="invisible"><?= $this->skipNavigation ?></a>
 
-  <?php echo $this->items; ?>
+  <?= $this->items ?>
 
-  <a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
+  <a id="<?= $this->skipId ?>" class="invisible">&nbsp;</a>
 
 </nav>
 <!-- indexer::continue -->

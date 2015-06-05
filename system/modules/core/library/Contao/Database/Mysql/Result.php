@@ -68,7 +68,7 @@ class Result extends \Database\Result
 	 *
 	 * @param integer $intOffset The field offset
 	 *
-	 * @return array An array with the column information
+	 * @return array|object An array or object with the column information
 	 */
 	protected function fetch_field($intOffset)
 	{

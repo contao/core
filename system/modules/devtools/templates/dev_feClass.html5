@@ -1,31 +1,31 @@
-<?php echo '<?php' . "\n"; ?>
+<?= '<?php' . "\n" ?>
 
 /**
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package   <?php echo $this->package . "\n"; ?>
- * @author    <?php echo $this->author . "\n"; ?>
- * @license   <?php echo $this->license . "\n"; ?>
- * @copyright <?php echo $this->copyright . "\n"; ?>
+ * @package   <?= $this->package . "\n" ?>
+ * @author    <?= $this->author . "\n" ?>
+ * @license   <?= $this->license . "\n" ?>
+ * @copyright <?= $this->copyright . "\n" ?>
  */
 
 
 /**
  * Namespace
  */
-namespace <?php echo $this->package; ?>;
+namespace <?= $this->package ?>;
 
 
 /**
- * Class <?php echo $this->class . "\n"; ?>
+ * Class <?= $this->class . "\n" ?>
  *
- * @copyright  <?php echo $this->copyright . "\n"; ?>
- * @author     <?php echo $this->author . "\n"; ?>
+ * @copyright  <?= $this->copyright . "\n" ?>
+ * @author     <?= $this->author . "\n" ?>
  * @package    Devtools
  */
-class <?php echo $this->class; ?> extends \<?php echo $this->extends . "\n"; ?>
+class <?= $this->class ?> extends \<?= $this->extends . "\n" ?>
 {
 
 	/**

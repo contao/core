@@ -21,12 +21,14 @@ class ModuleEventMenu extends \ModuleCalendar
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventmenu'][0]) . ' ###';
@@ -73,7 +75,10 @@ class ModuleEventMenu extends \ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new \FrontendTemplate('mod_eventmenu_year');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_eventmenu_year');
+
+		$this->Template = $objTemplate;
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -125,7 +130,10 @@ class ModuleEventMenu extends \ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new \FrontendTemplate('mod_eventmenu');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_eventmenu');
+
+		$this->Template = $objTemplate;
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)

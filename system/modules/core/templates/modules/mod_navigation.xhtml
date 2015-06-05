@@ -2,10 +2,10 @@
 
 <?php $this->block('content'); ?>
 
-  <a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
+  <a href="<?= $this->request ?>#<?= $this->skipId ?>" class="invisible"><?= $this->skipNavigation ?></a>
 
-  <?php echo $this->items; ?>
+  <?= $this->items ?>
 
-  <a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
+  <a id="<?= $this->skipId ?>" class="invisible">&nbsp;</a>
 
 <?php $this->endblock(); ?>

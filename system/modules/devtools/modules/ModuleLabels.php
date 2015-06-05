@@ -44,7 +44,7 @@ class ModuleLabels extends \BackendModule
 		// Get languages
 		foreach (scan(TL_ROOT . '/system/modules/core/languages') as $strLanguage)
 		{
-			if ($strLanguage != 'en' && substr($strLanguage, 0, 1) != '.')
+			if ($strLanguage != 'en' && strncmp($strLanguage, '.', 1) !== 0)
 			{
 				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language') || $strLanguage == $GLOBALS['TL_LANGUAGE']) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
 			}

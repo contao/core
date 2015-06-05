@@ -1,12 +1,12 @@
 
-<div class="<?php echo $this->class; ?>">
+<div class="<?= $this->class ?>">
 
-  <h3><a href="<?php echo $this->href; ?>" title="<?php echo $this->title; ?>"><?php echo $this->link; ?></a> <span class="relevance">[<?php echo $this->relevance; ?>]</span></h3>
+  <h3><a href="<?= $this->href ?>" title="<?= $this->title ?>"><?= $this->link ?></a> <span class="relevance">[<?= $this->relevance ?>]</span></h3>
 
   <?php if ($this->context): ?>
-    <p class="context"><?php echo $this->context; ?></p>
+    <p class="context"><?= $this->context ?></p>
   <?php endif; ?>
 
-  <p class="url"><?php echo $this->url; ?><span class="filesize"> - <?php echo $this->filesize; ?> kB</span></p>
+  <p class="url"><?= $this->url ?><span class="filesize"> - <?= $this->filesize ?> kB</span></p>
 
 </div>

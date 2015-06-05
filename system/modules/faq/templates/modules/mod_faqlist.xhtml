@@ -3,10 +3,10 @@
 <?php $this->block('content'); ?>
 
   <?php foreach($this->faq as $category): ?>
-    <h2><?php echo $category['headline']; ?></h2>
-    <ul class="<?php echo $category['class']; ?>">
+    <h2><?= $category['headline'] ?></h2>
+    <ul class="<?= $category['class'] ?>">
       <?php foreach ($category['items'] as $faq): ?>
-        <li class="<?php echo $faq['class']; ?>"><a href="<?php echo $faq['href']; ?>" title="<?php echo $faq['title']; ?>"><?php echo $faq['question']; ?></a></li>
+        <li class="<?= $faq['class'] ?>"><a href="<?= $faq['href'] ?>" title="<?= $faq['title'] ?>"><?= $faq['question'] ?></a></li>
       <?php endforeach; ?>
     </ul>
   <?php endforeach; ?>

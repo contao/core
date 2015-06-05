@@ -14,6 +14,16 @@ namespace Contao;
 /**
  * Class FormSubmit
  *
+ * @property string  $name
+ * @property string  $label
+ * @property string  $singleSRC
+ * @property boolean $imageSubmit
+ * @property boolean $required
+ * @property boolean $mandatory
+ * @property integer $minlength
+ * @property integer $maxlength
+ * @property string  $src
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormSubmit extends \Widget

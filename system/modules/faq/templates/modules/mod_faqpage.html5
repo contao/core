@@ -3,23 +3,23 @@
 <?php $this->block('content'); ?>
 
   <?php foreach($this->faq as $category): ?>
-    <article class="<?php echo $category['class']; ?>">
-      <h2><?php echo $category['headline']; ?></h2>
+    <article class="<?= $category['class'] ?>">
+      <h2><?= $category['headline'] ?></h2>
 
       <?php foreach ($category['items'] as $faq): ?>
-        <section class="<?php echo $faq->class; ?>">
-          <h3 id="<?php echo $faq->alias; ?>"><?php echo $faq->question; ?></h3>
+        <section class="<?= $faq->class ?>">
+          <h3 id="<?= $faq->alias ?>"><?= $faq->question ?></h3>
           <div class="ce_text block">
 
             <?php if (!$faq->addBefore): ?>
-              <?php echo $faq->answer; ?>
+              <?= $faq->answer ?>
             <?php endif; ?>
 
             <?php if ($faq->addImage): ?>
-              <figure class="image_container<?php echo $faq->floatClass; ?>"<?php if ($faq->margin): ?> style="<?php echo $faq->margin; ?>"<?php endif; ?>>
+              <figure class="image_container<?= $faq->floatClass ?>"<?php if ($faq->margin): ?> style="<?= $faq->margin ?>"<?php endif; ?>>
 
                 <?php if ($faq->href): ?>
-                  <a href="<?php echo $faq->href; ?>"<?php echo $faq->attributes; ?> title="<?php echo $faq->alt; ?>">
+                  <a href="<?= $faq->href ?>"<?= $faq->attributes ?> title="<?= $faq->alt ?>">
                 <?php endif; ?>
 
                 <?php $this->insert('picture_default', $faq->picture); ?>
@@ -29,14 +29,14 @@
                 <?php endif; ?>
 
                 <?php if ($faq->caption): ?>
-                  <figcaption class="caption"><?php echo $faq->caption; ?></figcaption>
+                  <figcaption class="caption"><?= $faq->caption ?></figcaption>
                 <?php endif; ?>
 
               </figure>
             <?php endif; ?>
 
             <?php if ($faq->addBefore): ?>
-              <?php echo $faq->answer; ?>
+              <?= $faq->answer ?>
             <?php endif; ?>
 
           </div>
@@ -44,16 +44,16 @@
           <?php if ($faq->enclosure): ?>
             <div class="enclosure">
               <?php foreach ($faq->enclosure as $enclosure): ?>
-                <p><img src="<?php echo $enclosure['icon']; ?>" width="18" height="18" alt="<?php echo $enclosure['mime']; ?>" class="mime_icon"> <a href="<?php echo $enclosure['href']; ?>" title="<?php echo $enclosure['title']; ?>"><?php echo $enclosure['link']; ?> <span class="size">(<?php echo $enclosure['filesize']; ?>)</span></a></p>
+                <p><img src="<?= $enclosure['icon'] ?>" width="18" height="18" alt="<?= $enclosure['mime'] ?>" class="mime_icon"> <a href="<?= $enclosure['href'] ?>" title="<?= $enclosure['title'] ?>"><?= $enclosure['link'] ?> <span class="size">(<?= $enclosure['filesize'] ?>)</span></a></p>
               <?php endforeach; ?>
             </div>
           <?php endif; ?>
 
-          <p class="info"><?php echo $faq->info; ?></p>
+          <p class="info"><?= $faq->info ?></p>
         </section>
       <?php endforeach; ?>
 
-      <p class="toplink"><a href="<?php echo $this->request; ?>#top"><?php echo $this->topLink; ?></a></p>
+      <p class="toplink"><a href="<?= $this->request ?>#top"><?= $this->topLink ?></a></p>
     </article>
   <?php endforeach; ?>
 

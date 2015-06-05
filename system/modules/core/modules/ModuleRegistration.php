@@ -28,12 +28,14 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['registration'][0]) . ' ###';
@@ -62,6 +64,7 @@ class ModuleRegistration extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -90,12 +93,16 @@ class ModuleRegistration extends \Module
 		if (\Input::get('token') != '')
 		{
 			$this->activateAcount();
+
 			return;
 		}
 
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -127,6 +134,7 @@ class ModuleRegistration extends \Module
 				'tableless' => $this->tableless
 			);
 
+			/** @var \FormCaptcha $strClass */
 			$strClass = $GLOBALS['TL_FFL']['captcha'];
 
 			// Fallback to default if the class is not defined
@@ -135,6 +143,7 @@ class ModuleRegistration extends \Module
 				$strClass = 'FormCaptcha';
 			}
 
+			/** @var \FormCaptcha $objCaptcha */
 			$objCaptcha = new $strClass($arrCaptcha);
 
 			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
@@ -320,7 +329,8 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param array
+	 *
+	 * @param array $arrData
 	 */
 	protected function createNewUser($arrData)
 	{
@@ -397,8 +407,6 @@ class ModuleRegistration extends \Module
 		$objNewUser->setRow($arrData);
 		$objNewUser->save();
 
-		$insertId = $objNewUser->id;
-
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
@@ -407,16 +415,17 @@ class ModuleRegistration extends \Module
 			if ($objHomeDir !== null)
 			{
 				$this->import('Files');
-				$strUserDir = standardize($arrData['username']) ?: 'user_' . $insertId;
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $objNewUser->id;
 
 				// Add the user ID if the directory exists
 				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
 				{
-					$strUserDir .= '_' . $insertId;
+					$strUserDir .= '_' . $objNewUser->id;
 				}
 
 				// Create the user folder
 				new \Folder($objHomeDir->path . '/' . $strUserDir);
+
 				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
 
 				// Save the folder ID
@@ -432,14 +441,21 @@ class ModuleRegistration extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($insertId, $arrData, $this);
+				$this->$callback[0]->$callback[1]($objNewUser->id, $arrData, $this);
 			}
 		}
+
+		// Create the initial version (see #7816)
+		$objVersions = new \Versions('tl_member', $objNewUser->id);
+		$objVersions->setUsername($objNewUser->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Inform admin if no activation link is sent
 		if (!$this->reg_activate)
 		{
-			$this->sendAdminNotification($insertId, $arrData);
+			$this->sendAdminNotification($objNewUser->id, $arrData);
 		}
 
 		// Check whether there is a jumpTo page
@@ -458,15 +474,19 @@ class ModuleRegistration extends \Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new \FrontendTemplate($this->strTemplate);
 
-		// Check the token
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+		$this->Template = $objTemplate;
+
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
+
 			return;
 		}
 
@@ -502,8 +522,9 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Send an admin notification e-mail
-	 * @param integer
-	 * @param array
+	 *
+	 * @param integer $intId
+	 * @param array   $arrData
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{
@@ -518,7 +539,7 @@ class ModuleRegistration extends \Module
 		// Add user details
 		foreach ($arrData as $k=>$v)
 		{
-			if ($k == 'password' || $k == 'tstamp' || $k == 'activation')
+			if ($k == 'password' || $k == 'tstamp' || $k == 'activation' || $k == 'dateAdded')
 			{
 				continue;
 			}

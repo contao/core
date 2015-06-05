@@ -14,6 +14,14 @@ namespace Contao;
 /**
  * Provide methods to manage back end users.
  *
+ * @property boolean $isAdmin
+ * @property string  $groups
+ * @property array   $pagemounts
+ * @property array   $filemounts
+ * @property array   $filemountIds
+ * @property string  $fop
+ * @property string  $alexf
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class BackendUser extends \User
@@ -158,7 +166,9 @@ class BackendUser extends \User
 
 	/**
 	 * Extend parent getter class and modify some parameters
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -204,9 +214,13 @@ class BackendUser extends \User
 	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
-		if (parent::authenticate() || TL_SCRIPT == 'contao/index.php')
+ 		if (parent::authenticate())
+ 		{
+ 			return true;
+ 		}
+		elseif (TL_SCRIPT == 'contao/index.php')
 		{
-			return;
+			return false;
 		}
 
 		$strRedirect = 'contao/';
@@ -218,13 +232,17 @@ class BackendUser extends \User
 		}
 
 		\Controller::redirect($strRedirect);
+
+		return false;
 	}
 
 
 	/**
 	 * Check whether the current user has a certain access right
-	 * @param string
-	 * @param array
+	 *
+	 * @param string $field
+	 * @param array  $array
+	 *
 	 * @return boolean
 	 */
 	public function hasAccess($field, $array)
@@ -261,8 +279,10 @@ class BackendUser extends \User
 
 	/**
 	 * Return true if the current user is allowed to do the current operation on the current page
-	 * @param integer
-	 * @param array
+	 *
+	 * @param integer $int
+	 * @param array   $row
+	 *
 	 * @return boolean
 	 */
 	public function isAllowed($int, $row)
@@ -285,7 +305,7 @@ class BackendUser extends \User
 											->limit(1)
 											->execute($pid);
 
-			while (!$row['chmod'] && $pid > 0 && $objParentPage->numRows)
+			while ($row['chmod'] === false && $pid > 0 && $objParentPage->numRows)
 			{
 				$pid = $objParentPage->pid;
 
@@ -299,15 +319,15 @@ class BackendUser extends \User
 			}
 
 			// Set default values
-			if (!$row['chmod'])
+			if ($row['chmod'] === false)
 			{
 				$row['chmod'] = \Config::get('defaultChmod');
 			}
-			if (!$row['cuser'])
+			if ($row['cuser'] === false)
 			{
 				$row['cuser'] = intval(\Config::get('defaultUser'));
 			}
-			if (!$row['cgroup'])
+			if ($row['cgroup'] === false)
 			{
 				$row['cgroup'] = intval(\Config::get('defaultGroup'));
 			}
@@ -334,7 +354,9 @@ class BackendUser extends \User
 
 	/**
 	 * Return true if there is at least one allowed excluded field
-	 * @param string
+	 *
+	 * @param string $table
+	 *
 	 * @return boolean
 	 */
 	public function canEditFieldsOf($table)
@@ -411,11 +433,11 @@ class BackendUser extends \User
 
 		// Merge permissions
 		$inherit = in_array($this->inherit, array('group', 'extend')) ? array_merge($always, $depends) : $always;
-		$time = time();
+		$time = \Date::floorToMinute();
 
 		foreach ((array) $this->groups as $id)
 		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
+			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!='1' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "')")
 									   ->limit(1)
 									   ->execute($id);
 
@@ -482,7 +504,9 @@ class BackendUser extends \User
 
 	/**
 	 * Generate the navigation menu and return it as array
-	 * @param boolean
+	 *
+	 * @param boolean $blnShowAll
+	 *
 	 * @return array
 	 */
 	public function navigation($blnShowAll=false)

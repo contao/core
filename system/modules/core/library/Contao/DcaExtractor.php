@@ -20,7 +20,7 @@ namespace Contao;
  *
  * Usage:
  *
- *     $user = new DcaExtractor('tl_user');
+ *     $user = DcaExtractor::getInstance('tl_user');
  *
  *     if ($user->hasRelations())
  *     {
@@ -67,6 +67,12 @@ class DcaExtractor extends \Controller
 	 * @var array
 	 */
 	protected $arrOrderFields = array();
+
+	/**
+	 * Unique fields
+	 * @var array
+	 */
+	protected $arrUniqueFields = array();
 
 	/**
 	 * Keys
@@ -209,6 +215,28 @@ class DcaExtractor extends \Controller
 
 
 	/**
+	 * Return an array of unique columns
+	 *
+	 * @return array
+	 */
+	public function getUniqueFields()
+	{
+		return $this->arrUniqueFields;
+	}
+
+
+	/**
+	 * Return true if there are unique fields
+	 *
+	 * @return boolean True if there are unique fields
+	 */
+	public function hasUniqueFields()
+	{
+		return !empty($this->arrUniqueFields);
+	}
+
+
+	/**
 	 * Return the keys as array
 	 *
 	 * @return array The keys array
@@ -278,32 +306,41 @@ class DcaExtractor extends \Controller
 			$return['TABLE_FIELDS'][$k] = '`' . $k . '` ' . $v;
 		}
 
+		$quote = function ($item) { return '`' . $item . '`'; };
+
 		// Keys
 		foreach ($this->arrKeys as $k=>$v)
 		{
 			// Handle multi-column indexes (see #5556)
 			if (strpos($k, ',') !== false)
 			{
-				$f = trimsplit(',', $k);
+				$f = array_map($quote, trimsplit(',', $k));
 				$k = str_replace(',', '_', $k);
 			}
 			else
 			{
-				$f = array($k);
+				$f = array($quote($k));
+			}
+
+			// Handle key lengths (see #221)
+			if (preg_match('/\([0-9]+\)/', $v))
+			{
+				list($v, $length) = explode('(', rtrim($v, ')'));
+				$f = array($quote($k) . '(' . $length . ')');
 			}
 
 			if ($v == 'primary')
 			{
 				$k = 'PRIMARY';
-				$v = 'PRIMARY KEY  (`' . implode('`, `', $f) . '`)';
+				$v = 'PRIMARY KEY  (' . implode(', ', $f) . ')';
 			}
 			elseif ($v == 'index')
 			{
-				$v = 'KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = 'KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 			else
 			{
-				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = strtoupper($v) . ' KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 
 			$return['TABLE_CREATE_DEFINITIONS'][$k] = $v;
@@ -464,9 +501,15 @@ class DcaExtractor extends \Controller
 					$this->arrFields[$field] = $config['sql'];
 				}
 
-				if (isset($config['eval']['orderField']))
+				// Only add order fields of binary fields (see #7785)
+				if ($config['inputType'] == 'fileTree' && isset($config['eval']['orderField']))
 				{
 					$this->arrOrderFields[] = $config['eval']['orderField'];
+				}
+
+				if (isset($config['eval']['unique']) && $config['eval']['unique'])
+				{
+					$this->arrUniqueFields[] = $field;
 				}
 			}
 		}
@@ -479,6 +522,11 @@ class DcaExtractor extends \Controller
 			foreach ($sql['keys'] as $field=>$type)
 			{
 				$this->arrKeys[$field] = $type;
+
+				if ($type == 'unique')
+				{
+					$this->arrUniqueFields[] = $field;
+				}
 			}
 		}
 
@@ -498,6 +546,7 @@ class DcaExtractor extends \Controller
 			}
 		}
 
+		$this->arrUniqueFields = array_unique($this->arrUniqueFields);
 		$this->blnIsDbTable = true;
 	}
 }

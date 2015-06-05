@@ -111,6 +111,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable;{redirect_legend},jumpTo;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'registration'                => '{title_legend},name,headline,type;{config_legend},editable,newsletters,disableCaptcha;{account_legend},reg_groups,reg_allowLogin,reg_assignDir;{redirect_legend},jumpTo;{email_legend:hide},reg_activate;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'changePassword'              => '{title_legend},name,headline,type;{redirect_legend},jumpTo;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'lostPassword'                => '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'closeAccount'                => '{title_legend},name,headline,type;{config_legend},reg_close;{redirect_legend},jumpTo;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -430,7 +431,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getLayoutSections'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+			'reference'               => &$GLOBALS['TL_LANG']['COLS'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -803,6 +804,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all front end modules as array
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -823,6 +825,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all editable fields of table tl_member
+	 *
 	 * @return array
 	 */
 	public function getEditableMemberProperties()
@@ -846,6 +849,7 @@ class tl_module extends Backend
 
 	/**
 	 * Get all forms and return them as array
+	 *
 	 * @return array
 	 */
 	public function getForms()
@@ -872,6 +876,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all layout sections as array
+	 *
 	 * @return array
 	 */
 	public function getLayoutSections()
@@ -901,6 +906,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getNavigationTemplates()
@@ -911,6 +917,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all module templates as array
+	 *
 	 * @return array
 	 */
 	public function getModuleTemplates()
@@ -921,6 +928,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all member templates as array
+	 *
 	 * @return array
 	 */
 	public function getMemberTemplates()
@@ -931,6 +939,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all search templates as array
+	 *
 	 * @return array
 	 */
 	public function getSearchTemplates()
@@ -941,6 +950,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getRssTemplates()
@@ -951,7 +961,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default activation text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getActivationDefault($varValue)
@@ -967,7 +979,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default password text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getPasswordDefault($varValue)
@@ -983,7 +997,9 @@ class tl_module extends Backend
 
 	/**
 	 * List a front end module
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listModule($row)

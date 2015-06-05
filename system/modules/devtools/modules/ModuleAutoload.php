@@ -81,6 +81,7 @@ class ModuleAutoload extends \BackendModule
 		if (empty($arrModules))
 		{
 			\Message::addError($GLOBALS['TL_LANG']['tl_autoload']['emptySelection']);
+
 			return;
 		}
 
@@ -92,6 +93,7 @@ class ModuleAutoload extends \BackendModule
 			if (!\Input::post('override') && file_exists(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.php'))
 			{
 				\Message::addInfo(sprintf($GLOBALS['TL_LANG']['tl_autoload']['autoloadExists'], $strModule));
+
 				continue;
 			}
 
@@ -117,7 +119,7 @@ class ModuleAutoload extends \BackendModule
 
 			$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
 
-			// Recursively scan all subfolders
+			/** @var \SplFileInfo[] $objFiles */
 			$objFiles = new \RecursiveIteratorIterator(
 				new \RecursiveDirectoryIterator(
 					TL_ROOT . '/system/modules/' . $strModule,
@@ -228,6 +230,7 @@ class ModuleAutoload extends \BackendModule
 			// Scan for templates
 			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
+				/** @var \SplFileInfo[] $objFiles */
 				$objFiles = new \RecursiveIteratorIterator(
 					new \RecursiveDirectoryIterator(
 						TL_ROOT . '/system/modules/' . $strModule . '/templates',

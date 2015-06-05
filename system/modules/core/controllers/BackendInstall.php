@@ -20,6 +20,12 @@ class BackendInstall extends \Backend
 {
 
 	/**
+	 * @var \BackendTemplate|object
+	 */
+	protected $Template;
+
+
+	/**
 	 * Initialize the controller
 	 */
 	public function __construct()
@@ -567,7 +573,7 @@ class BackendInstall extends \Backend
 		$arrOptions = array();
 
 		$objCollation = $this->Database->prepare("SHOW COLLATION LIKE ?")
-									   ->execute(\Config::get('dbCharset') .'%');
+									   ->execute(\Config::get('dbCharset') . '\_%');
 
 		while ($objCollation->next())
 		{
@@ -626,7 +632,7 @@ class BackendInstall extends \Backend
 	 */
 	protected function importExampleWebsite()
 	{
-		// Recursively scan for .sql files
+		/** @var \SplFileInfo[] $objFiles */
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Filter\SqlFiles(
 				new \RecursiveDirectoryIterator(
@@ -753,7 +759,7 @@ class BackendInstall extends \Backend
 					$strPassword = \Encryption::hash(\Input::post('pass', true));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, backendTheme, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
-								   ->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username', true), $strPassword, $GLOBALS['TL_LANGUAGE'], \Config::get('backendTheme'));
+								   ->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username', true), $strPassword, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']), \Config::get('backendTheme'));
 
 					\Config::persist('adminEmail', \Input::post('email', true));
 
@@ -1142,6 +1148,42 @@ class BackendInstall extends \Backend
 
 			$this->Template->is33Update = true;
 			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Version 3.5.0 update
+	 */
+	protected function update35()
+	{
+		if ($this->Database->tableExists('tl_member'))
+		{
+			$strIndex = null;
+
+			foreach ($this->Database->listFields('tl_member') as $arrField)
+			{
+				if ($arrField['name'] == 'username' && $arrField['type'] == 'index')
+				{
+					$strIndex = $arrField['index'];
+					break;
+				}
+			}
+
+			if ($strIndex != 'UNIQUE')
+			{
+				$this->enableSafeMode();
+
+				if (\Input::post('FORM_SUBMIT') == 'tl_35update')
+				{
+					$this->import('Database\\Updater', 'Updater');
+					$this->Updater->run35Update();
+					$this->reload();
+				}
+
+				$this->Template->is35Update = true;
+				$this->outputAndExit();
+			}
 		}
 	}
 }

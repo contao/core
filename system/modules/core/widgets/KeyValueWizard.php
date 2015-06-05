@@ -14,6 +14,8 @@ namespace Contao;
 /**
  * Provide methods to handle key value pairs.
  *
+ * @property integer $maxlength
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class KeyValueWizard extends \Widget
@@ -34,8 +36,9 @@ class KeyValueWizard extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -103,6 +106,7 @@ class KeyValueWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

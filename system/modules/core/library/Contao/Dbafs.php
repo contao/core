@@ -105,7 +105,7 @@ class Dbafs
 		// If the resource is a folder, also add its contents
 		if (is_dir(TL_ROOT . '/' . $strResource))
 		{
-			// Get a filtered list of all files
+			/** @var \SplFileInfo[] $objFiles */
 			$objFiles = new \RecursiveIteratorIterator(
 				new \Filter\SyncExclude(
 					new \RecursiveDirectoryIterator(
@@ -291,6 +291,8 @@ class Dbafs
 		}
 
 		$strFolder = dirname($strDestination);
+
+		/** @var \FilesModel $objNewFile */
 		$objNewFile = clone $objFile->current();
 
 		// Set the new parent ID
@@ -326,6 +328,7 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
+					/**@var \FilesModel $objNew */
 					$objNew = clone $objFiles->current();
 
 					$objNew->pid    = $objNewFile->uuid;
@@ -451,7 +454,7 @@ class Dbafs
 		// Consider the suhosin.memory_limit (see #7035)
 		if (extension_loaded('suhosin'))
 		{
-			if (($limit = ini_get('suhosin.memory_limit')) !== '0')
+			if ($limit = ini_get('suhosin.memory_limit'))
 			{
 				@ini_set('memory_limit', $limit);
 			}
@@ -464,12 +467,12 @@ class Dbafs
 		$objDatabase = \Database::getInstance();
 
 		// Lock the files table
-		$objDatabase->lockTables(array('tl_files'));
+		$objDatabase->lockTables(array('tl_files'=>'WRITE'));
 
 		// Reset the "found" flag
 		$objDatabase->query("UPDATE tl_files SET found=''");
 
-		// Get a filtered list of all files
+		/** @var \SplFileInfo[] $objFiles */
 		$objFiles = new \RecursiveIteratorIterator(
 			new \Filter\SyncExclude(
 				new \RecursiveDirectoryIterator(
@@ -599,6 +602,7 @@ class Dbafs
 			$arrMapped = array();
 			$arrPidUpdate = array();
 
+			/** @var \Model\Collection|\FilesModel $objFiles */
 			while ($objFiles->next())
 			{
 				$objFound = \FilesModel::findBy(array('hash=?', 'found=2'), $objFiles->hash);

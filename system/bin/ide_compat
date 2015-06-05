@@ -82,7 +82,7 @@ foreach ($arrModules as $strModule) {
 		$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 
 		// Read until a class or interface definition has been found
-		while (!feof($fh) && !preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches)) {
+		while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && !feof($fh)) {
 			$strBuffer .= fread($fh, 512);
 		}
 
@@ -140,6 +140,13 @@ fputs($fh, <<<EOT
  * Eclipse, Zend Studio or PHPStorm realize the class origins, since the dynamic
  * class aliasing we are using is a bit too complex for them to understand.
  */
+
+// TL_ROOT
+namespace {
+	define('TL_ROOT', __DIR__ . '../../../');
+	define('TL_ASSETS_URL', 'http://localhost/');
+	define('TL_FILES_URL', 'http://localhost/');
+}
 
 EOT
 );

@@ -14,6 +14,13 @@
  * class aliasing we are using is a bit too complex for them to understand.
  */
 
+// TL_ROOT
+namespace {
+	define('TL_ROOT', __DIR__ . '../../../');
+	define('TL_ASSETS_URL', 'http://localhost/');
+	define('TL_FILES_URL', 'http://localhost/');
+}
+
 // calendar
 namespace  {
 	class Calendar extends \Contao\Calendar {}
@@ -43,7 +50,7 @@ namespace  {
 	abstract class BackendModule extends \Contao\BackendModule {}
 	class BackendTemplate extends \Contao\BackendTemplate {}
 	class BackendUser extends \Contao\BackendUser {}
-	class DataContainer extends \Contao\DataContainer {}
+	abstract class DataContainer extends \Contao\DataContainer {}
 	class DropZone extends \Contao\DropZone {}
 	class FileUpload extends \Contao\FileUpload {}
 	abstract class Frontend extends \Contao\Frontend {}
@@ -183,6 +190,7 @@ namespace  {
 	class ModuleArticlenav extends \Contao\ModuleArticlenav {}
 	class ModuleBooknav extends \Contao\ModuleBooknav {}
 	class ModuleBreadcrumb extends \Contao\ModuleBreadcrumb {}
+	class ModuleChangePassword extends \Contao\ModuleChangePassword {}
 	class ModuleCloseAccount extends \Contao\ModuleCloseAccount {}
 	class ModuleCustomnav extends \Contao\ModuleCustomnav {}
 	class ModuleFlash extends \Contao\ModuleFlash {}

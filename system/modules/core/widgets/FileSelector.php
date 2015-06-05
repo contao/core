@@ -14,6 +14,13 @@ namespace Contao;
 /**
  * Provide methods to handle input field "file tree".
  *
+ * @property string  $path
+ * @property string  $fieldType
+ * @property string  $sort
+ * @property boolean $files
+ * @property boolean $filesOnly
+ * @property string  $extensions
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileSelector extends \Widget
@@ -40,6 +47,7 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -120,10 +128,12 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate a particular subpart of the file tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $folder
+	 * @param string  $strField
+	 * @param integer $level
+	 * @param boolean $mount
+	 *
 	 * @return string
 	 */
 	public function generateAjax($folder, $strField, $level, $mount=false)
@@ -166,16 +176,19 @@ class FileSelector extends \Widget
 		}
 
 		$this->convertValuesToPaths();
+
 		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
 	}
 
 
 	/**
 	 * Recursively render the filetree
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $path
+	 * @param integer $intMargin
+	 * @param boolean $mount
+	 * @param boolean $blnProtected
+	 *
 	 * @return string
 	 */
 	protected function renderFiletree($path, $intMargin, $mount=false, $blnProtected=false)
@@ -200,9 +213,9 @@ class FileSelector extends \Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get session data and toggle nodes
-		if ($this->Input->get($flag.'tg'))
+		if (\Input::get($flag.'tg'))
 		{
-			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
@@ -224,15 +237,18 @@ class FileSelector extends \Widget
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
+				if (strncmp($v, '.', 1) === 0)
 				{
-					$files[] = $path.'/'.$v;
 					continue;
 				}
 
-				if (substr($v, 0, 1) != '.')
+				if (is_dir($path . '/' . $v))
 				{
-					$folders[] = $path.'/'.$v;
+					$folders[] = $path . '/' . $v;
+				}
+				else
+				{
+					$files[] = $path . '/' . $v;
 				}
 			}
 		}
@@ -257,7 +273,7 @@ class FileSelector extends \Widget
 		{
 			$countFiles = 0;
 			$content = scan($folders[$f]);
-			$return .= "\n    " . '<li class="'.$folderClass.'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
+			$return .= "\n    " . '<li class="'.$folderClass.' toggle_select" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
 
 			// Check whether there are subfolders or files
 			foreach ($content as $v)
@@ -271,7 +287,7 @@ class FileSelector extends \Widget
 			$tid = md5($folders[$f]);
 			$folderAttribute = 'style="margin-left:20px"';
 			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
-			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$currentFolder = str_replace(TL_ROOT . '/', '', $folders[$f]);
 			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
 
 			// Add a toggle button if there are childs
@@ -340,7 +356,7 @@ class FileSelector extends \Widget
 					continue;
 				}
 
-				$return .= "\n    " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+				$return .= "\n    " . '<li class="tl_file toggle_select" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 				// Generate thumbnail
 				if ($objFile->isImage && $objFile->height > 0)

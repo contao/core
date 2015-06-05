@@ -54,27 +54,6 @@ var Theme = {
 	},
 
 	/**
-	 * Toggle a group of checkboxes
-	 *
-	 * @param {object} el The DOM element
-	 */
-	toggleSelect: function(el) {
-		var input = $(el).getElement('input');
-		if (input) {
-			if (input.checked) {
-				if (input.get('type') != 'radio') {
-					input.checked = '';
-				}
-			} else {
-				input.checked = 'checked';
-			}
-			if (input.get('onclick') == 'Backend.toggleCheckboxes(this)') {
-				Backend.toggleCheckboxes(input); // see #6399
-			}
-		}
-	},
-
-	/**
 	 * Work around the missing :last-child support in IE7 and IE8 (see #4017)
 	 */
 	fixLabelLastChild: function() {

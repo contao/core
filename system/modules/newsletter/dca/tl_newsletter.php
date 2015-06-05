@@ -411,7 +411,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * List records
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listNewsletters($arrRow)
@@ -427,7 +429,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Convert absolute URLs from TinyMCE to relative URLs
-	 * @param string
+	 *
+	 * @param string $strContent
+	 *
 	 * @return string
 	 */
 	public function convertAbsoluteLinks($strContent)
@@ -438,7 +442,9 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Convert relative URLs from TinyMCE to absolute URLs
-	 * @param string
+	 *
+	 * @param string $strContent
+	 *
 	 * @return string
 	 */
 	public function convertRelativeLinks($strContent)
@@ -449,10 +455,13 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Auto-generate the newsletter alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -486,6 +495,7 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Return all mail templates as array
+	 *
 	 * @return array
 	 */
 	public function getMailTemplates()

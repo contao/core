@@ -1,12 +1,12 @@
 
-<div class="<?php echo $this->class; ?> ce_text block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?= $this->class ?> ce_text block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
 
   <?php if ($this->headline): ?>
-    <h1><?php echo $this->headline; ?></h1>
+    <h1><?= $this->headline ?></h1>
   <?php endif; ?>
 
-  <?php echo $this->text; ?>
+  <?= $this->text ?>
 
-  <a href="<?php echo $this->href; ?>" title="<?php echo $this->readMore; ?>" class="more"><?php echo $this->more; ?> <span class="invisible"><?php echo $this->headline; ?></span></a>
+  <a href="<?= $this->href ?>" title="<?= $this->readMore ?>" class="more"><?= $this->more ?> <span class="invisible"><?= $this->headline ?></span></a>
 
 </div>

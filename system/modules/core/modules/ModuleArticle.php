@@ -14,6 +14,21 @@ namespace Contao;
 /**
  * Provides methodes to handle articles.
  *
+ * @property integer $tstamp
+ * @property string  $title
+ * @property string  $alias
+ * @property string  $inColumn
+ * @property boolean $showTeaser
+ * @property boolean $multiMode
+ * @property string  $teaser
+ * @property string  $teaserCssID
+ * @property string  $classes
+ * @property string  $keywords
+ * @property boolean $printable
+ * @property boolean $published
+ * @property integer $start
+ * @property integer $stop
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleArticle extends \Module
@@ -34,7 +49,9 @@ class ModuleArticle extends \Module
 
 	/**
 	 * Check whether the article is published
-	 * @param boolean
+	 *
+	 * @param boolean $blnNoMarkup
+	 *
 	 * @return string
 	 */
 	public function generate($blnNoMarkup=false)
@@ -56,11 +73,15 @@ class ModuleArticle extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_plain');
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('mod_article_plain');
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -98,7 +119,10 @@ class ModuleArticle extends \Module
 		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = new \FrontendTemplate('mod_article_teaser');
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate('mod_article_teaser');
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 
 			$this->cssID = array($alias, '');
@@ -167,6 +191,8 @@ class ModuleArticle extends \Module
 			while ($objCte->next())
 			{
 				$arrCss = array();
+
+				/** @var \ContentModel $objRow */
 				$objRow = $objCte->current();
 
 				// Add the "first" and "last" classes (see #2583)
@@ -236,6 +262,16 @@ class ModuleArticle extends \Module
 			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
 			$this->Template->gplusTitle = specialchars($GLOBALS['TL_LANG']['MSC']['gplusShare']);
 		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['compileArticle']) && is_array($GLOBALS['TL_HOOKS']['compileArticle']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileArticle'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this->Template, $this->arrData, $this);
+			}
+		}
 	}
 
 
@@ -272,7 +308,7 @@ class ModuleArticle extends \Module
 		}
 
 		// URL decode image paths (see #6411)
-		$strArticle = preg_replace_callback('@(src="[^"]+")@', function($arg) {
+		$strArticle = preg_replace_callback('@(src="[^"]+")@', function ($arg) {
 			return rawurldecode($arg[0]);
 		}, $strArticle);
 

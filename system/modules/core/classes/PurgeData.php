@@ -21,6 +21,7 @@ class PurgeData extends \Backend implements \executable
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -31,11 +32,14 @@ class PurgeData extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
 	{
 		$arrJobs = array();
+
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
@@ -119,7 +123,7 @@ class PurgeData extends \Backend implements \executable
 				// Only check existing folders
 				if (is_dir(TL_ROOT . '/' . $folder))
 				{
-					// Recursively scan all subfolders
+					/** @var \SplFileInfo[] $objFiles */
 					$objFiles = new \RecursiveIteratorIterator(
 						new \RecursiveDirectoryIterator(
 							TL_ROOT . '/' . $folder,

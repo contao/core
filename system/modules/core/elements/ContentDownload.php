@@ -28,6 +28,7 @@ class ContentDownload extends \ContentElement
 
 	/**
 	 * Return if the file does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -67,6 +68,7 @@ class ContentDownload extends \ContentElement
 		}
 
 		$this->singleSRC = $objFile->path;
+
 		return parent::generate();
 	}
 

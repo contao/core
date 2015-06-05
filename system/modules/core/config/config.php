@@ -47,7 +47,8 @@ $GLOBALS['BE_MOD'] = array
 		'tpl_editor' => array
 		(
 			'tables'      => array('tl_templates'),
-			'new_tpl'     => array('tl_templates', 'addNewTemplate')
+			'new_tpl'     => array('tl_templates', 'addNewTemplate'),
+			'compare'     => array('tl_templates', 'compareTemplate'),
 		)
 	),
 
@@ -121,6 +122,7 @@ $GLOBALS['FE_MOD'] = array
 		'logout'         => 'ModuleLogout',
 		'personalData'   => 'ModulePersonalData',
 		'registration'   => 'ModuleRegistration',
+		'changePassword' => 'ModuleChangePassword',
 		'lostPassword'   => 'ModulePassword',
 		'closeAccount'   => 'ModuleCloseAccount'
 	),
@@ -451,17 +453,17 @@ $GLOBALS['TL_WRAPPERS'] = array
  */
 $GLOBALS['TL_ASSETS'] = array
 (
-	'ACE'          => '1.1.6',
+	'ACE'          => '1.1.8',
 	'CSS3PIE'      => '1.0.0',
-	'DROPZONE'     => '3.8.5',
+	'DROPZONE'     => '3.12.0',
 	'HIGHLIGHTER'  => '3.0.83',
-	'HTML5SHIV'    => '3.7.0',
-	'RESPIMAGE'    => '0.9.6',
+	'HTML5SHIV'    => '3.7.2',
+	'RESPIMAGE'    => '1.4.0',
 	'SWIPE'        => '2.0',
-	'JQUERY'       => '1.11.0',
-	'JQUERY_UI'    => '1.10.4',
-	'COLORBOX'     => '1.5.8',
-	'MEDIAELEMENT' => '2.14.2',
+	'JQUERY'       => '1.11.3',
+	'JQUERY_UI'    => '1.11.4',
+	'COLORBOX'     => '1.6.1',
+	'MEDIAELEMENT' => '2.16.4',
 	'TABLESORTER'  => '2.0.5',
 	'MOOTOOLS'     => '1.5.1',
 	'COLORPICKER'  => '1.4',

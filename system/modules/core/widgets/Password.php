@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to handle password fields.
  *
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property string  $description
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Password extends \Widget
@@ -40,7 +45,8 @@ class Password extends \Widget
 
 	/**
 	 * Always decode entities
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -51,8 +57,9 @@ class Password extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -90,7 +97,9 @@ class Password extends \Widget
 
 	/**
 	 * Validate input and set value
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return string
 	 */
 	protected function validator($varInput)
@@ -123,6 +132,7 @@ class Password extends \Widget
 		{
 			$this->blnSubmitInput = true;
 			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+
 			return \Encryption::hash($varInput);
 		}
 
@@ -132,6 +142,7 @@ class Password extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -149,6 +160,7 @@ class Password extends \Widget
 
 	/**
 	 * Generate the label of the confirmation field and return it as string
+	 *
 	 * @return string
 	 */
 	public function generateConfirmationLabel()
@@ -164,6 +176,7 @@ class Password extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generateConfirmation()

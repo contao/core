@@ -25,6 +25,10 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		(
 			array('tl_newsletter_recipients', 'checkPermission')
 		),
+		'oncut_callback' => array
+		(
+			array('tl_newsletter_recipients', 'clearOptInData')
+		),
 		'sql' => array
 		(
 			'keys' => array
@@ -76,8 +80,14 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy'],
-				'href'                => 'act=copy',
+				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(
@@ -160,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotCopy'=>true),
 			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'confirmed' => array
@@ -169,7 +179,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotCopy'=>true),
 			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'ip' => array
@@ -178,11 +188,13 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'token' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['token'],
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
@@ -232,6 +244,11 @@ class tl_newsletter_recipients extends Backend
 		// Check current action
 		switch (Input::get('act'))
 		{
+			case 'paste':
+			case 'select':
+				// Allow
+				break;
+
 			case 'create':
 				if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
 				{
@@ -240,9 +257,17 @@ class tl_newsletter_recipients extends Backend
 				}
 				break;
 
+			case 'cut':
+			case 'copy':
+				if (!in_array(Input::get('pid'), $root))
+				{
+					$this->log('Not enough permissions to '.Input::get('act').' newsletter recipient ID "'.$id.'" to channel ID "'.Input::get('pid').'"', __METHOD__, TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
 			case 'edit':
 			case 'show':
-			case 'copy':
 			case 'delete':
 			case 'toggle':
 				$objRecipient = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE id=?")
@@ -262,7 +287,6 @@ class tl_newsletter_recipients extends Backend
 				}
 				break;
 
-			case 'select':
 			case 'editAll':
 			case 'deleteAll':
 			case 'overrideAll':
@@ -303,11 +327,26 @@ class tl_newsletter_recipients extends Backend
 
 
 	/**
+	 * Reset the double opt-in data if a recipient is moved manually
+	 *
+	 * @param DataContainer $dc
+	 */
+	public function clearOptInData(DataContainer $dc)
+	{
+		$this->Database->prepare("UPDATE tl_newsletter_recipients SET addedOn='', confirmed='', ip='', token='' WHERE id=?")
+					   ->execute($dc->id);
+	}
+
+
+	/**
 	 * Check if recipients are unique per channel
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkUniqueRecipient($varValue, DataContainer $dc)
 	{
@@ -325,7 +364,9 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * List a recipient
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listRecipient($row)
@@ -347,12 +388,14 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
@@ -382,9 +425,10 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
-	 * @param \DataContainer
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
