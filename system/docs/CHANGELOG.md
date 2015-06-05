@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.0 (2015-05-XX)
 --------------------------
 
+### Updated
+Updated Colorbox to version 1.6.1.
+
 ### Fixed
 Consistently sanitize the names of uploaded files (see #7852).
 

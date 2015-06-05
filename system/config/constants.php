@@ -32,7 +32,7 @@ define('RESPIMAGE', '1.3.0');
 define('SWIPE', '2.0');
 define('JQUERY', '1.11.2');
 define('JQUERY_UI', '1.11.4');
-define('COLORBOX', '1.6.0');
+define('COLORBOX', '1.6.1');
 define('MEDIAELEMENT', '2.16.4');
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.5.1');
