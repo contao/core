@@ -5,6 +5,9 @@ Version 3.5.0 (2015-05-XX)
 --------------------------
 
 ### Updated
+Updated jQuery to version 1.11.3.
+
+### Updated
 Updated Colorbox to version 1.6.1.
 
 ### Fixed
