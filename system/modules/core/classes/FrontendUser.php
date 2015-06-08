@@ -73,7 +73,7 @@ class FrontendUser extends \User
 	{
 		$session = $this->Session->getData();
 
-		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri'))
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri') && !\Environment::get('isAjaxRequest'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
 			$session['referer']['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
