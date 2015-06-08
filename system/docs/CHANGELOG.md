@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Filter the indices in `Database::getFieldNames()` (see #7869).
+
+### Fixed
 Back-ported two fixes from the upstream versions.
 
 
