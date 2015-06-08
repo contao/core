@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.1 (2015-XX-XX)
+--------------------------
+
+### Fixed
+Back-ported two fixes from the upstream versions.
+
+
 Version 3.5.0 (2015-06-05)
 --------------------------
 
