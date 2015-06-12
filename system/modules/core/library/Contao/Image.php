@@ -169,12 +169,12 @@ class Image
 
 			$this->importantPart = array
 			(
-				'x' => max(0, min($this->fileObj->width - 1, (int) $importantPart['x'])),
-				'y' => max(0, min($this->fileObj->height - 1, (int) $importantPart['y'])),
+				'x' => max(0, min($this->fileObj->viewWidth - 1, (int) $importantPart['x'])),
+				'y' => max(0, min($this->fileObj->viewHeight - 1, (int) $importantPart['y'])),
 			);
 
-			$this->importantPart['width'] = max(1, min($this->fileObj->width - $this->importantPart['x'], (int) $importantPart['width']));
-			$this->importantPart['height'] = max(1, min($this->fileObj->height - $this->importantPart['y'], (int) $importantPart['height']));
+			$this->importantPart['width'] = max(1, min($this->fileObj->viewWidth - $this->importantPart['x'], (int) $importantPart['width']));
+			$this->importantPart['height'] = max(1, min($this->fileObj->viewHeight - $this->importantPart['y'], (int) $importantPart['height']));
 
 		}
 		else
@@ -198,7 +198,7 @@ class Image
 			return $this->importantPart;
 		}
 
-		return array('x'=>0, 'y'=>0, 'width'=>$this->fileObj->width, 'height'=>$this->fileObj->height,);
+		return array('x'=>0, 'y'=>0, 'width'=>$this->fileObj->viewWidth, 'height'=>$this->fileObj->viewHeight);
 	}
 
 
@@ -417,7 +417,7 @@ class Image
 
 		$widthMatches = ($this->fileObj->width == $this->getTargetWidth() || !$this->getTargetWidth());
 		$heightMatches = ($this->fileObj->height == $this->getTargetHeight() || !$this->getTargetHeight());
-		$zoomMatches = (($importantPart['x'] === 0 && $importantPart['y'] === 0 && $importantPart['width'] === $this->fileObj->width && $importantPart['height'] === $this->fileObj->height) || !$this->getZoomLevel());
+		$zoomMatches = (($importantPart['x'] === 0 && $importantPart['y'] === 0 && $importantPart['width'] === $this->fileObj->viewWidth && $importantPart['height'] === $this->fileObj->viewHeight) || !$this->getZoomLevel());
 
 		// No resizing required
 		if ($widthMatches && $heightMatches && $zoomMatches)
@@ -489,7 +489,7 @@ class Image
 			}
 		}
 
-		$svgNotPossible = ($this->fileObj->isSvgImage && !extension_loaded('dom'));
+		$svgNotPossible = ($this->fileObj->isSvgImage && (!extension_loaded('dom') || !$this->fileObj->viewWidth || !$this->fileObj->viewHeight));
 		$gdNotPossible = ($this->fileObj->isGdImage && (!extension_loaded('gd') || $this->fileObj->width > \Config::get('gdMaxImgWidth') || $this->fileObj->height > \Config::get('gdMaxImgHeight') || $this->getTargetWidth() > \Config::get('gdMaxImgWidth') || $this->getTargetHeight() > \Config::get('gdMaxImgHeight')));
 
 		// Return the path to the original image if it cannot be handled
@@ -570,10 +570,13 @@ class Image
 		// Set the viewBox attribute from the original dimensions
 		if (!$svgElement->hasAttribute('viewBox'))
 		{
-			$origWidth = $svgElement->getAttribute('width');
-			$origHeight = $svgElement->getAttribute('height');
+			$origWidth = floatval($svgElement->getAttribute('width'));
+			$origHeight = floatval($svgElement->getAttribute('height'));
 
-			$svgElement->setAttribute('viewBox', '0 0 ' . floatval($origWidth) . ' ' . floatval($origHeight));
+			if ($origWidth && $origHeight)
+			{
+				$svgElement->setAttribute('viewBox', '0 0 ' . $origWidth . ' ' . $origHeight);
+			}
 		}
 
 		$coordinates = $this->computeResize();
@@ -615,8 +618,8 @@ class Image
 	{
 		$width = $this->getTargetWidth();
 		$height = $this->getTargetHeight();
-		$originalWidth = $this->fileObj->width;
-		$originalHeight = $this->fileObj->height;
+		$originalWidth = $this->fileObj->viewWidth;
+		$originalHeight = $this->fileObj->viewHeight;
 		$mode = $this->getResizeMode();
 		$zoom = $this->getZoomLevel();
 		$importantPart = $this->getImportantPart();
@@ -962,7 +965,7 @@ class Image
 		$value = preg_replace('/[^0-9\.-]+/', '', $size);
 		$unit = preg_replace('/[^acehimnprtvwx%]/', '', $size);
 
-		// Convert 12pt = 16px = 1em = 100%
+		// Convert 16px = 1em = 2ex = 12pt = 1pc = 1/6in = 2.54/6cm = 25.4/6mm = 100%
 		switch ($unit)
 		{
 			case '':
@@ -974,12 +977,32 @@ class Image
 				return (int) round($value * 16);
 				break;
 
+			case 'ex':
+				return (int) round($value * 16 / 2);
+				break;
+
 			case 'pt':
-				return (int) round($value * (16 / 12));
+				return (int) round($value * 16 / 12);
+				break;
+
+			case 'pc':
+				return (int) round($value * 16);
+				break;
+
+			case 'in':
+				return (int) round($value * 16 * 6);
+				break;
+
+			case 'cm':
+				return (int) round($value * 16 / (2.54 / 6));
+				break;
+
+			case 'mm':
+				return (int) round($value * 16 / (25.4 / 6));
 				break;
 
 			case '%':
-				return (int) round($value * (16 / 100));
+				return (int) round($value * 16 / 100);
 				break;
 		}
 

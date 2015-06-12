@@ -511,7 +511,7 @@ abstract class DataContainer extends \Backend
 
 				if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
 				{
-					if ($objFile->width > 699 || $objFile->height > 524)
+					if ($objFile->width > 699 || $objFile->height > 524 || !$objFile->width || !$objFile->height)
 					{
 						$image = \Image::get($objFile->path, 699, 524, 'box');
 					}
@@ -525,7 +525,7 @@ abstract class DataContainer extends \Backend
 
 				$strPreview = '
 
-<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->width . '" data-original-height="' . $objFile->height . '">
+<div id="' . $ctrl . '" class="tl_edit_preview" data-original-width="' . $objFile->viewWidth . '" data-original-height="' . $objFile->viewHeight . '">
 ' . \Image::getHtml($image) . '
 </div>';
 

@@ -272,22 +272,12 @@ class File extends \System
 
 						$svgElement = $doc->documentElement;
 
-						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height'))
+						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) !== '%' && substr(rtrim($svgElement->getAttribute('height')), -1) !== '%')
 						{
 							$this->arrImageSize = array
 							(
 								\Image::getPixelValue($svgElement->getAttribute('width')),
 								\Image::getPixelValue($svgElement->getAttribute('height'))
-							);
-						}
-						elseif ($svgElement->getAttribute('viewBox'))
-						{
-							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
-
-							$this->arrImageSize = array
-							(
-								\Image::getPixelValue($svgViewBox[2]),
-								\Image::getPixelValue($svgViewBox[3])
 							);
 						}
 
@@ -314,6 +304,59 @@ class File extends \System
 
 			case 'height':
 				return $this->imageSize[1];
+				break;
+
+			case 'imageViewSize':
+				if (empty($this->arrImageViewSize))
+				{
+					if ($this->imageSize) {
+						$this->arrImageViewSize = array
+						(
+							$this->imageSize[0],
+							$this->imageSize[1]
+						);
+					}
+					elseif ($this->isSvgImage)
+					{
+						$doc = new \DOMDocument();
+
+						if ($this->extension == 'svgz')
+						{
+							$doc->loadXML(gzdecode($this->getContent()));
+						}
+						else
+						{
+							$doc->loadXML($this->getContent());
+						}
+
+						$svgElement = $doc->documentElement;
+
+						if ($svgElement->getAttribute('viewBox'))
+						{
+							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
+
+							$this->arrImageViewSize = array
+							(
+								intval($svgViewBox[2]),
+								intval($svgViewBox[3])
+							);
+						}
+
+						if (!$this->arrImageViewSize || !$this->arrImageViewSize[0] || !$this->arrImageViewSize[1])
+						{
+							$this->arrImageViewSize = false;
+						}
+					}
+				}
+				return $this->arrImageViewSize;
+				break;
+
+			case 'viewWidth':
+				return $this->imageViewSize[0];
+				break;
+
+			case 'viewHeight':
+				return $this->imageViewSize[1];
 				break;
 
 			case 'isImage':
