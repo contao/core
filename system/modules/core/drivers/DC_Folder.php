@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DC_Folder
- *
  * Provide methods to modify the file system.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DC_Folder extends \DataContainer implements \listable, \editable
 {
@@ -66,20 +57,21 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * True if a new version has to be created
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnCreateNewVersion = false;
 
 	/**
 	 * Database assisted
-	 * @param boolean
+	 * @var boolean
 	 */
 	protected $blnIsDbAssisted = false;
 
 
 	/**
 	 * Initialize the object
-	 * @param string
+	 *
+	 * @param string $strTable
 	 */
 	public function __construct($strTable)
 	{
@@ -194,8 +186,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -214,7 +207,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -244,6 +239,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * List all files and folders of the file system
+	 *
 	 * @return string
 	 */
 	public function showAll()
@@ -345,7 +341,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset()">'.$lblNew.'</a> ' . ((!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notCreatable']) ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> ' : '') . $this->generateGlobalButtons(true) : '') . ($blnClipboard ? '<a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="x">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a> ' : '') . '
 </div>' . \Message::generate(true) . ((\Input::get('act') == 'select') ? '
 
-<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form" method="post" novalidate>
+<form action="'.ampersand(\Environment::get('request'), true).'" id="tl_select" class="tl_form'.((\Input::get('act') == 'select') ? ' unselectable' : '').'" method="post" novalidate>
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">' : '').($blnClipboard ? '
@@ -374,7 +370,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 			{
-				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
+				$arrButtons['delete'] = '<input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirmFile'].'\')" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'">';
 			}
 
 			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'])
@@ -428,6 +424,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Automatically switch to showAll
+	 *
 	 * @return string
 	 */
 	public function show()
@@ -468,7 +465,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Move an existing file or folder
-	 * @param string
+	 *
+	 * @param string $source
 	 */
 	public function cut($source=null)
 	{
@@ -594,8 +592,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively duplicate files and folders
-	 * @param string
-	 * @param string
+	 *
+	 * @param string $source
+	 * @param string $destination
 	 */
 	public function copy($source=null, $destination=null)
 	{
@@ -747,7 +746,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Recursively delete files and folders
-	 * @param string
+	 *
+	 * @param string $source
 	 */
 	public function delete($source=null)
 	{
@@ -809,7 +809,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		$this->log('File or folder "'.str_replace(TL_ROOT.'/', '', $source).'" has been deleted', __METHOD__, TL_FILES);
+		$this->log('File or folder "' . str_replace(TL_ROOT . '/', '', $source) . '" has been deleted', __METHOD__, TL_FILES);
 
 		// Redirect
 		if (!$blnDoNotRedirect)
@@ -847,6 +847,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Automatically switch to showAll
+	 *
 	 * @return string
 	 */
 	public function undo()
@@ -857,7 +858,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Move one or more local files to the server
-	 * @param boolean
+	 *
+	 * @param boolean $blnIsAjax
+	 *
 	 * @return string
 	 */
 	public function move($blnIsAjax=false)
@@ -894,6 +897,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Process the uploaded files
@@ -999,8 +1003,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
 <div class="tl_formbody_edit">
@@ -1009,8 +1011,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <input type="hidden" name="MAX_FILE_SIZE" value="'.\Config::get('maxFileSize').'">
 
 <div class="tl_tbox">
-  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>'.$objUploader->generateMarkup().(isset($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
-  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
+  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>'.$objUploader->generateMarkup().'
 </div>
 
 </div>
@@ -1029,6 +1030,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to rename a file or folder
+	 *
 	 * @return string
 	 */
 	public function edit()
@@ -1057,19 +1059,24 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		$this->blnCreateNewVersion = false;
+
+		/** @var \FilesModel $objFile */
 		$objVersions = new \Versions($this->strTable, $objFile->id);
 
-		// Compare versions
-		if (\Input::get('versions'))
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
-			$objVersions->compare();
-		}
+			// Compare versions
+			if (\Input::get('versions'))
+			{
+				$objVersions->compare();
+			}
 
-		// Restore a version
-		if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-		{
-			$objVersions->restore(\Input::post('version'));
-			$this->reload();
+			// Restore a version
+			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+			{
+				$objVersions->restore(\Input::post('version'));
+				$this->reload();
+			}
 		}
 
 		$objVersions->initialize();
@@ -1186,7 +1193,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Versions overview
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}
@@ -1241,8 +1248,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
@@ -1339,6 +1344,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Auto-generate a form to edit all records that are currently shown
+	 *
 	 * @return string
 	 */
 	public function editAll()
@@ -1389,6 +1395,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->objActiveRecord = $objFile;
 				}
 
+				/** @var \FilesModel $objFile */
 				$objVersions = new \Versions($this->strTable, $objFile->id);
 				$objVersions->initialize();
 
@@ -1540,8 +1547,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Add the form
 			$return = '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'">
@@ -1615,8 +1620,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Return the select menu
 			$return .= '
 
-<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
-
 <form action="'.ampersand(\Environment::get('request'), true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'_all">
@@ -1655,6 +1658,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Load the source editor
+	 *
 	 * @return string
 	 */
 	public function source()
@@ -1702,31 +1706,39 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			$objVersions = new \Versions($this->strTable, $objMeta->id);
 
-			// Compare versions
-			if (\Input::get('versions'))
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 			{
-				$objVersions->compare();
-			}
-
-			// Restore a version
-			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-			{
-				$objVersions->restore(\Input::post('version'));
-
-				// Purge the script cache (see #7005)
-				if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+				// Compare versions
+				if (\Input::get('versions'))
 				{
-					$this->import('Automator');
-					$this->Automator->purgeScriptCache();
+					$objVersions->compare();
 				}
 
-				$this->reload();
+				// Restore a version
+				if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+				{
+					$objVersions->restore(\Input::post('version'));
+
+					// Purge the script cache (see #7005)
+					if ($objFile->extension == 'css' || $objFile->extension == 'scss' || $objFile->extension == 'less')
+					{
+						$this->import('Automator');
+						$this->Automator->purgeScriptCache();
+					}
+
+					$this->reload();
+				}
 			}
 
 			$objVersions->initialize();
 		}
 
 		$strContent = $objFile->getContent();
+
+		if ($objFile->extension == 'svgz')
+		{
+			$strContent = gzdecode($strContent);
+		}
 
 		// Process the request
 		if (\Input::post('FORM_SUBMIT') == 'tl_files')
@@ -1737,6 +1749,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Save the file
 			if (md5($strContent) != md5($strSource))
 			{
+				if ($objFile->extension == 'svgz')
+				{
+					$strSource = gzencode($strSource);
+				}
+
 				// Write the file
 				$objFile->write($strSource);
 				$objFile->close();
@@ -1744,6 +1761,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Update the database
 				if ($this->blnIsDbAssisted)
 				{
+					/** @var \FilesModel $objMeta */
 					$objMeta->hash = $objFile->hash;
 					$objMeta->save();
 
@@ -1780,10 +1798,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			include TL_ROOT . '/system/config/ace.php';
 			$codeEditor = ob_get_contents();
 			ob_end_clean();
+
+			unset($selector, $type);
 		}
 
 		// Versions overview
-		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}
@@ -1819,8 +1839,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['editFile'], $objFile->basename).'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_files" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -1876,7 +1894,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @throws \Exception
 	 */
 	protected function save($varValue)
@@ -1929,7 +1949,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				foreach (glob(TL_ROOT . '/assets/images/*/' . $this->varValue . '-*' . $this->strExtension) as $strThumbnail)
 				{
-					$this->Files->delete(str_replace(TL_ROOT, '', $strThumbnail));
+					$this->Files->delete(str_replace(TL_ROOT . '/', '', $strThumbnail));
 				}
 			}
 
@@ -1957,9 +1977,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$session = $this->Session->getData();
 
-				if (($index = array_search($this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension, $session['CURRENT']['IDS'])) !== false)
+				if (($index = array_search($this->strPath.'/'.$this->varValue.$this->strExtension, $session['CURRENT']['IDS'])) !== false)
 				{
-					$session['CURRENT']['IDS'][$index] = $this->urlEncode($this->strPath.'/'.$varValue).$this->strExtension;
+					$session['CURRENT']['IDS'][$index] = $this->strPath.'/'.$varValue.$this->strExtension;
 					$this->Session->setData($session);
 				}
 			}
@@ -1971,7 +1991,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Convert date formats into timestamps
 			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 			{
-				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$objDate = new \Date($varValue, \Date::getFormatFromRgxp($arrData['eval']['rgxp']));
 				$varValue = $objDate->tstamp;
 			}
 
@@ -2069,6 +2089,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Synchronize the file system with the database
+	 *
 	 * @return string
 	 */
 	public function sync()
@@ -2141,8 +2162,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
 '.\Message::generate().'
 <div id="sync-results">
   <p class="left">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncResult'], \System::getFormattedNumber($arrCounts['Added'], 0), \System::getFormattedNumber($arrCounts['Changed'], 0), \System::getFormattedNumber($arrCounts['Unchanged'], 0), \System::getFormattedNumber($arrCounts['Moved'], 0), \System::getFormattedNumber($arrCounts['Deleted'], 0)) . '</p>
@@ -2171,6 +2190,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()
@@ -2181,8 +2201,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Generate a particular subpart of the tree and return it as HTML string
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strFolder
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	public function ajaxTreeView($strFolder, $level)
@@ -2211,11 +2233,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Render the file tree and return it as HTML string
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
-	 * @param array
+	 *
+	 * @param string  $path
+	 * @param integer $intMargin
+	 * @param boolean $mount
+	 * @param boolean $blnProtected
+	 * @param array   $arrClipboard
+	 *
 	 * @return string
 	 */
 	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false, $arrClipboard=null)
@@ -2248,7 +2272,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			foreach (scan($path) as $v)
 			{
-				if ($v == '.svn' || $v == '.DS_Store')
+				if (strncmp($v, '.', 1) === 0)
 				{
 					continue;
 				}
@@ -2261,7 +2285,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				{
 					if ($v == '__new__')
 					{
-						$this->Files->rmdir(str_replace(TL_ROOT.'/', '', $path) . '/' . $v);
+						$this->Files->rmdir(str_replace(TL_ROOT . '/', '', $path) . '/' . $v);
 					}
 					else
 					{
@@ -2282,34 +2306,25 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$md5 = substr(md5($folders[$f]), 0, 8);
 			$content = scan($folders[$f]);
-			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$currentFolder = str_replace(TL_ROOT . '/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
 			$currentEncoded = $this->urlEncode($currentFolder);
 			$countFiles = count($content);
 
 			// Subtract files that will not be shown
-			if (!empty($this->arrValidFileTypes))
+			foreach ($content as $file)
 			{
-				foreach ($content as $file)
+				if (strncmp($file, '.', 1) === 0)
 				{
-					// Folders
-					if (is_dir($folders[$f] .'/'. $file))
-					{
-						if ($file == '.svn')
-						{
-							--$countFiles;
-						}
-					}
-
-					// Files
-					elseif (!in_array(strtolower(substr($file, (strrpos($file, '.') + 1))), $this->arrValidFileTypes))
-					{
-						--$countFiles;
-					}
+					--$countFiles;
+				}
+				elseif (!empty($this->arrValidFileTypes) && is_file($folders[$f] . '/' . $file) && !in_array(strtolower(substr($file, (strrpos($file, '.') + 1))), $this->arrValidFileTypes))
+				{
+					--$countFiles;
 				}
 			}
 
-			$return .= "\n  " . '<li class="tl_folder click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
+			$return .= "\n  " . '<li class="tl_folder click2edit toggle_select" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
@@ -2338,7 +2353,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				// Do not display buttons for mounted folders
 				if ($this->User->isAdmin || !in_array($currentFolder, $this->User->filemounts))
 				{
-					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>600, 'popupHeight'=>178, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
+					$return .= (\Input::get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'">' : $this->generateButtons(array('id'=>$currentEncoded, 'popupWidth'=>640, 'popupHeight'=>132, 'fileNameEncoded'=>$strFolderNameEncoded), $this->strTable);
 				}
 
 				// Upload button
@@ -2364,8 +2379,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
-			$popupHeight = 216;
-			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
+			$popupHeight = 161;
+			$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 
 			$objFile = new \File($currentFile, true);
 
@@ -2375,16 +2390,16 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 
 			$currentEncoded = $this->urlEncode($currentFile);
-			$return .= "\n  " . '<li class="tl_file click2edit" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+			$return .= "\n  " . '<li class="tl_file click2edit toggle_select" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 			// Generate the thumbnail
-			if ($objFile->isGdImage && $objFile->height > 0)
+			if ($objFile->isImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 255);
+				$popupHeight = ($objFile->height + 200);
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
 
-				if (\Config::get('thumbnails') && $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+				if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
 				{
 					$_height = ($objFile->height < 50) ? $objFile->height : 50;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
@@ -2428,7 +2443,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return true if the current folder is mounted
-	 * @param string
+	 *
+	 * @param string $strFolder
+	 *
 	 * @return boolean
 	 */
 	protected function isMounted($strFolder)
@@ -2461,7 +2478,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Check a file operation
-	 * @param string
+	 *
+	 * @param string $strFile
+	 *
 	 * @return boolean
 	 */
 	protected function isValid($strFile)
@@ -2469,12 +2488,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$strFolder = \Input::get('pid', true);
 
 		// Check the path
-		if (strpos($strFile, '../') !== false)
+		if (\Validator::isInsecurePath($strFile))
 		{
 			$this->log('Invalid file name "'.$strFile.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
-		elseif (strpos($strFolder, '../') !== false)
+		elseif (\Validator::isInsecurePath($strFolder))
 		{
 			$this->log('Invalid folder name "'.$strFolder.'" (hacking attempt)', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
@@ -2524,7 +2543,9 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 	/**
 	 * Return an array of encrypted folder names
-	 * @param string
+	 *
+	 * @param string $strPath
+	 *
 	 * @return array
 	 */
 	protected function getMD5Folders($strPath)

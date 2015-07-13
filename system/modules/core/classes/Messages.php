@@ -3,33 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Messages
- *
  * Add system messages to the welcome screen.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Messages extends \Backend
 {
 
 	/**
 	 * Check for the latest Contao version
+	 *
 	 * @return string
 	 */
 	public function versionCheck()
@@ -45,6 +37,7 @@ class Messages extends \Backend
 
 	/**
 	 * Return the date of the last login
+	 *
 	 * @return string
 	 */
 	public function lastLogin()
@@ -62,13 +55,14 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
+	 *
 	 * @return string
 	 */
 	public function languageFallback()
 	{
 		$arrRoots = array();
-		$time = time();
-		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
+		$time = \Date::floorToMinute();
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' ORDER BY dns");
 
 		while ($objRoots->next())
 		{
@@ -107,6 +101,7 @@ class Messages extends \Backend
 
 	/**
 	 * Show a warning if there are non-root pages on the top-level
+	 *
 	 * @return string
 	 */
 	public function topLevelRoot()

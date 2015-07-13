@@ -1,4 +1,11 @@
-/* Contao Open Source CMS, (c) 2005-2014 Leo Feyer, LGPL license */
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2015 Leo Feyer
+ *
+ * @license LGPL-3.0+
+ */
+
 var Theme = {
 
 	/**
@@ -44,27 +51,6 @@ var Theme = {
 			el.removeAttribute('data-visited');
 		}
 		$(el).setStyle('background-color', (state ? '#ebfdd7' : ''));
-	},
-
-	/**
-	 * Toggle a group of checkboxes
-	 *
-	 * @param {object} el The DOM element
-	 */
-	toggleSelect: function(el) {
-		var input = $(el).getElement('input');
-		if (input) {
-			if (input.checked) {
-				if (input.get('type') != 'radio') {
-					input.checked = '';
-				}
-			} else {
-				input.checked = 'checked';
-			}
-			if (input.get('onclick') == 'Backend.toggleCheckboxes(this)') {
-				Backend.toggleCheckboxes(input); // see #6399
-			}
-		}
 	},
 
 	/**

@@ -1,21 +1,21 @@
-<?php echo '<?php' . "\n"; ?>
+<?= '<?php' . "\n" ?>
 
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package   <?php echo $this->package . "\n"; ?>
- * @author    <?php echo $this->author . "\n"; ?>
- * @license   <?php echo $this->license . "\n"; ?>
- * @copyright <?php echo $this->copyright . "\n"; ?>
+ * @package   <?= $this->package . "\n" ?>
+ * @author    <?= $this->author . "\n" ?>
+ * @license   <?= $this->license . "\n" ?>
+ * @copyright <?= $this->copyright . "\n" ?>
  */
 
 
 /**
- * Table <?php echo $this->table . "\n"; ?>
+ * Table <?= $this->table . "\n" ?>
  */
-$GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
+$GLOBALS['TL_DCA']['<?= $this->table ?>'] = array
 (
 
 	// Config
@@ -60,26 +60,26 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['<?= $this->table ?>']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['<?= $this->table ?>']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['<?= $this->table ?>']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['<?= $this->table ?>']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['<?php echo $this->table; ?>'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['<?php echo $this->table; ?>']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['<?= $this->table ?>']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),

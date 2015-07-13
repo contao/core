@@ -3,33 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class RebuildIndex
- *
  * Maintenance module "rebuild index".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class RebuildIndex extends \Backend implements \executable
 {
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -40,6 +32,7 @@ class RebuildIndex extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
@@ -50,6 +43,8 @@ class RebuildIndex extends \Backend implements \executable
 		}
 
 		$time = time();
+
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
@@ -148,7 +143,7 @@ class RebuildIndex extends \Backend implements \executable
 		$arrUser = array(''=>'-');
 
 		// Get active front end users
-		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
+		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!='1' AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') ORDER BY username");
 
 		while ($objUser->next())
 		{

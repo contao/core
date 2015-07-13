@@ -3,26 +3,28 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormSubmit
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string  $name
+ * @property string  $label
+ * @property string  $singleSRC
+ * @property boolean $imageSubmit
+ * @property boolean $required
+ * @property boolean $mandatory
+ * @property integer $minlength
+ * @property integer $maxlength
+ * @property string  $src
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormSubmit extends \Widget
 {
@@ -33,6 +35,13 @@ class FormSubmit extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_submit';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-submit';
 
 
 	/**
@@ -93,11 +102,6 @@ class FormSubmit extends \Widget
 	 */
 	public function parse($arrAttributes=null)
 	{
-		if ($this->tableless)
-		{
-			$this->strClass = trim('submit_container ' . $this->strClass);
-		}
-
 		if ($this->imageSubmit && $this->singleSRC != '')
 		{
 			$objModel = \FilesModel::findByUuid($this->singleSRC);

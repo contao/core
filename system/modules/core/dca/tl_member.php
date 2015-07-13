@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -36,7 +34,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'username' => 'index',
+				'username' => 'unique',
 				'email' => 'index',
 				'autologin' => 'unique',
 				'activation' => 'index'
@@ -323,8 +321,8 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
-			'sql'                     => "varchar(64) COLLATE utf8_bin NOT NULL default ''"
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'nullIfEmpty'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login'),
+			'sql'                     => "varchar(64) COLLATE utf8_bin NULL"
 		),
 		'password' => array
 		(
@@ -388,12 +386,13 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'lastLogin' => array
 		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
 			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'currentLogin' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['currentLogin'],
 			'sorting'                 => true,
 			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim'),
@@ -443,12 +442,9 @@ if (TL_MODE == 'FE')
 
 
 /**
- * Class tl_member
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_member extends Backend
 {
@@ -465,12 +461,13 @@ class tl_member extends Backend
 
 	/**
 	 * Filter disabled groups
+	 *
 	 * @return array
 	 */
 	public function getActiveGroups()
 	{
 		$arrGroups = array();
-		$objGroup = \MemberGroupModel::findAllActive();
+		$objGroup = MemberGroupModel::findAllActive();
 
 		if ($objGroup !== null)
 		{
@@ -486,10 +483,11 @@ class tl_member extends Backend
 
 	/**
 	 * Add an image to each record
-	 * @param array
-	 * @param string
-	 * @param \DataContainer
-	 * @param array
+	 * @param array         $row
+	 * @param string        $label
+	 * @param DataContainer $dc
+	 * @param array         $args
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label, DataContainer $dc, $args)
@@ -502,17 +500,20 @@ class tl_member extends Backend
 		}
 
 		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image);
+
 		return $args;
 	}
 
 
 	/**
 	 * Generate a "switch account" button and return it as string
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 *
 	 * @return string
 	 */
 	public function switchUser($row, $href, $label, $title, $icon)
@@ -528,8 +529,10 @@ class tl_member extends Backend
 
 	/**
 	 * Call the "setNewPassword" callback
-	 * @param string
-	 * @param object
+	 *
+	 * @param string $strPassword
+	 * @param DataContainer|MemberModel $user
+	 *
 	 * @return string
 	 */
 	public function setNewPassword($strPassword, $user)
@@ -563,12 +566,13 @@ class tl_member extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function storeDateAdded($dc)
 	{
 		// Front end call
-		if (!$dc instanceof \DataContainer)
+		if (!$dc instanceof DataContainer)
 		{
 			return;
 		}
@@ -596,11 +600,12 @@ class tl_member extends Backend
 
 	/**
 	 * Check whether the user session should be removed
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function checkRemoveSession($dc)
 	{
-		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		if ($dc instanceof DataContainer && $dc->activeRecord)
 		{
 			if ($dc->activeRecord->disable || ($dc->activeRecord->start != '' && $dc->activeRecord->start > time()) || ($dc->activeRecord->stop != '' && $dc->activeRecord->stop < time()))
 			{
@@ -612,11 +617,12 @@ class tl_member extends Backend
 
 	/**
 	 * Remove the session if a user is deleted (see #5353)
-	 * @param object
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function removeSession($dc)
 	{
-		if ($dc instanceof \DataContainer && $dc->activeRecord)
+		if ($dc instanceof DataContainer && $dc->activeRecord)
 		{
 			$this->Database->prepare("DELETE FROM tl_session WHERE name='FE_USER_AUTH' AND pid=?")
 						   ->execute($dc->activeRecord->id);
@@ -626,19 +632,21 @@ class tl_member extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -661,10 +669,12 @@ class tl_member extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions
 		if (!$this->User->hasAccess('tl_member::disable', 'alexf'))
@@ -684,11 +694,11 @@ class tl_member extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}

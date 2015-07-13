@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleRegistration
- *
  * Front end module "registration".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleRegistration extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['registration'][0]) . ' ###';
@@ -71,6 +64,7 @@ class ModuleRegistration extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -99,12 +93,16 @@ class ModuleRegistration extends \Module
 		if (\Input::get('token') != '')
 		{
 			$this->activateAcount();
+
 			return;
 		}
 
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -112,6 +110,16 @@ class ModuleRegistration extends \Module
 		$this->Template->tableless = $this->tableless;
 		$objCaptcha = null;
 		$doNotSubmit = false;
+
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
 
 		// Captcha
 		if (!$this->disableCaptcha)
@@ -126,6 +134,7 @@ class ModuleRegistration extends \Module
 				'tableless' => $this->tableless
 			);
 
+			/** @var \FormCaptcha $strClass */
 			$strClass = $GLOBALS['TL_FFL']['captcha'];
 
 			// Fallback to default if the class is not defined
@@ -134,6 +143,7 @@ class ModuleRegistration extends \Module
 				$strClass = 'FormCaptcha';
 			}
 
+			/** @var \FormCaptcha $objCaptcha */
 			$objCaptcha = new $strClass($arrCaptcha);
 
 			if (\Input::post('FORM_SUBMIT') == 'tl_registration')
@@ -200,11 +210,11 @@ class ModuleRegistration extends \Module
 				$rgxp = $arrData['eval']['rgxp'];
 
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
-				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
+				if ($varValue != '' && in_array($rgxp, array('date', 'time', 'datim')))
 				{
 					try
 					{
-						$objDate = new \Date($varValue);
+						$objDate = new \Date($varValue, \Date::getFormatFromRgxp($rgxp));
 						$varValue = $objDate->tstamp;
 					}
 					catch (\OutOfBoundsException $e)
@@ -281,7 +291,7 @@ class ModuleRegistration extends \Module
 			$strCaptcha = $objCaptcha->parse();
 
 			$this->Template->fields .= $strCaptcha;
-			$arrFields['captcha'] .= $strCaptcha;
+			$arrFields['captcha']['captcha'] .= $strCaptcha;
 		}
 
 		$this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -300,43 +310,27 @@ class ModuleRegistration extends \Module
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 		$this->Template->captchaDetails = $GLOBALS['TL_LANG']['MSC']['securityQuestion'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
-		$this->Template->captcha = $arrFields['captcha'];
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', \ModuleLoader::getActive()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', \ModuleLoader::getActive()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
+		$this->Template->captcha = $arrFields['captcha']['captcha']; // backwards compatibility
 	}
 
 
 	/**
 	 * Create a new user and redirect
-	 * @param array
+	 *
+	 * @param array $arrData
 	 */
 	protected function createNewUser($arrData)
 	{
@@ -357,74 +351,48 @@ class ModuleRegistration extends \Module
 		// Send activation e-mail
 		if ($this->reg_activate)
 		{
-			$arrChunks = array();
+			// Prepare the simple token data
+			$arrTokenData = $arrData;
+			$arrTokenData['domain'] = \Idna::decode(\Environment::get('host'));
+			$arrTokenData['link'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'];
+			$arrTokenData['channels'] = '';
 
-			$strConfirmation = $this->reg_text;
-			preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
-
-			foreach ($arrChunks[0] as $strChunk)
+			if (in_array('newsletter', \ModuleLoader::getActive()))
 			{
-				$strKey = substr($strChunk, 2, -2);
-
-				switch ($strKey)
+				// Make sure newsletter is an array
+				if (!is_array($arrData['newsletter']))
 				{
-					case 'domain':
-						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('host')), $strConfirmation);
-						break;
+					if ($arrData['newsletter'] != '')
+					{
+						$arrData['newsletter'] = array($arrData['newsletter']);
+					}
+					else
+					{
+						$arrData['newsletter'] = array();
+					}
+				}
 
-					case 'link':
-						$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
-						break;
+				// Replace the wildcard
+				if (!empty($arrData['newsletter']))
+				{
+					$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
 
-					// HOOK: support newsletter subscriptions
-					case 'channel':
-					case 'channels':
-						if (!in_array('newsletter', \ModuleLoader::getActive()))
-						{
-							break;
-						}
-
-						// Make sure newsletter is an array
-						if (!is_array($arrData['newsletter']))
-						{
-							if ($arrData['newsletter'] != '')
-							{
-								$arrData['newsletter'] = array($arrData['newsletter']);
-							}
-							else
-							{
-								$arrData['newsletter'] = array();
-							}
-						}
-
-						// Replace the wildcard
-						if (!empty($arrData['newsletter']))
-						{
-							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
-
-							if ($objChannels !== null)
-							{
-								$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
-							}
-						}
-						else
-						{
-							$strConfirmation = str_replace($strChunk, '', $strConfirmation);
-						}
-						break;
-
-					default:
-						$strConfirmation = str_replace($strChunk, $arrData[$strKey], $strConfirmation);
-						break;
+					if ($objChannels !== null)
+					{
+						$arrTokenData['channels'] = implode("\n", $objChannels->fetchEach('title'));
+					}
 				}
 			}
+
+			// Backwards compatibility
+			$arrTokenData['channel'] = $arrTokenData['channels'];
 
 			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], \Idna::decode(\Environment::get('host')));
-			$objEmail->text = $strConfirmation;
+			$objEmail->text = \String::parseSimpleTokens($this->reg_text, $arrTokenData);
 			$objEmail->sendTo($arrData['email']);
 		}
 
@@ -439,8 +407,6 @@ class ModuleRegistration extends \Module
 		$objNewUser->setRow($arrData);
 		$objNewUser->save();
 
-		$insertId = $objNewUser->id;
-
 		// Assign home directory
 		if ($this->reg_assignDir)
 		{
@@ -449,16 +415,17 @@ class ModuleRegistration extends \Module
 			if ($objHomeDir !== null)
 			{
 				$this->import('Files');
-				$strUserDir = standardize($arrData['username']) ?: 'user_' . $insertId;
+				$strUserDir = standardize($arrData['username']) ?: 'user_' . $objNewUser->id;
 
 				// Add the user ID if the directory exists
 				while (is_dir(TL_ROOT . '/' . $objHomeDir->path . '/' . $strUserDir))
 				{
-					$strUserDir .= '_' . $insertId;
+					$strUserDir .= '_' . $objNewUser->id;
 				}
 
 				// Create the user folder
 				new \Folder($objHomeDir->path . '/' . $strUserDir);
+
 				$objUserDir = \FilesModel::findByPath($objHomeDir->path . '/' . $strUserDir);
 
 				// Save the folder ID
@@ -474,14 +441,21 @@ class ModuleRegistration extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($insertId, $arrData, $this);
+				$this->$callback[0]->$callback[1]($objNewUser->id, $arrData, $this);
 			}
 		}
+
+		// Create the initial version (see #7816)
+		$objVersions = new \Versions('tl_member', $objNewUser->id);
+		$objVersions->setUsername($objNewUser->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Inform admin if no activation link is sent
 		if (!$this->reg_activate)
 		{
-			$this->sendAdminNotification($insertId, $arrData);
+			$this->sendAdminNotification($objNewUser->id, $arrData);
 		}
 
 		// Check whether there is a jumpTo page
@@ -500,15 +474,19 @@ class ModuleRegistration extends \Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new \FrontendTemplate($this->strTemplate);
 
-		// Check the token
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+		$this->Template = $objTemplate;
+
 		$objMember = \MemberModel::findByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
+
 			return;
 		}
 
@@ -544,8 +522,9 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Send an admin notification e-mail
-	 * @param integer
-	 * @param array
+	 *
+	 * @param integer $intId
+	 * @param array   $arrData
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{
@@ -560,7 +539,7 @@ class ModuleRegistration extends \Module
 		// Add user details
 		foreach ($arrData as $k=>$v)
 		{
-			if ($k == 'password' || $k == 'tstamp' || $k == 'activation')
+			if ($k == 'password' || $k == 'tstamp' || $k == 'activation' || $k == 'dateAdded')
 			{
 				continue;
 			}

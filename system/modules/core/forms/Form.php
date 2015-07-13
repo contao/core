@@ -3,30 +3,44 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Form
- *
  * Provide methods to handle front end forms.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $id
+ * @property string  $title
+ * @property string  $formID
+ * @property string  $method
+ * @property boolean $tableless
+ * @property boolean $allowTags
+ * @property string  $attributes
+ * @property boolean $novalidate
+ * @property integer $jumpTo
+ * @property boolean $sendViaEmail
+ * @property boolean $skipEmpty
+ * @property string  $format
+ * @property string  $recipient
+ * @property string  $subject
+ * @property boolean $storeValues
+ * @property string  $targetTable
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Form extends \Hybrid
 {
+
+	/**
+	 * Model
+	 * @var \FormModel
+	 */
+	protected $objModel;
 
 	/**
 	 * Key
@@ -49,12 +63,14 @@ class Form extends \Hybrid
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
@@ -71,6 +87,7 @@ class Form extends \Hybrid
 
 	/**
 	 * Generate the form
+	 *
 	 * @return string
 	 */
 	protected function compile()
@@ -121,6 +138,7 @@ class Form extends \Hybrid
 
 			foreach ($arrFields as $objField)
 			{
+				/** @var \FormFieldModel $objField */
 				$strClass = $GLOBALS['TL_FFL'][$objField->type];
 
 				// Continue if the class is not defined
@@ -160,6 +178,7 @@ class Form extends \Hybrid
 					}
 				}
 
+				/** @var \Widget $objWidget */
 				$objWidget = new $strClass($arrData);
 				$objWidget->required = $objField->mandatory ? true : false;
 
@@ -227,13 +246,15 @@ class Form extends \Hybrid
 		// Process the form data
 		if (\Input::post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
-			$this->processFormData($arrSubmitted, $arrLabels);
+			$this->processFormData($arrSubmitted, $arrLabels, $arrFields);
 		}
 
 		// Add a warning to the page title
 		if ($doNotSubmit && !\Environment::get('isAjaxRequest'))
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$title = $objPage->pageTitle ?: $objPage->title;
 			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $title;
 			$_SESSION['FILES'] = array(); // see #3007
@@ -267,10 +288,12 @@ class Form extends \Hybrid
 
 	/**
 	 * Process form data, store it in the session and redirect to the jumpTo page
-	 * @param array
-	 * @param array
+	 *
+	 * @param array $arrSubmitted
+	 * @param array $arrLabels
+	 * @param array $arrFields
 	 */
-	protected function processFormData($arrSubmitted, $arrLabels)
+	protected function processFormData($arrSubmitted, $arrLabels, $arrFields)
 	{
 		// HOOK: prepare form data callback
 		if (isset($GLOBALS['TL_HOOKS']['prepareFormData']) && is_array($GLOBALS['TL_HOOKS']['prepareFormData']))
@@ -278,7 +301,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['prepareFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this);
+				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this, $arrFields);
 			}
 		}
 
@@ -377,6 +400,7 @@ class Form extends \Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
+				/** @var \FrontendTemplate|object $objTemplate */
 				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
@@ -521,6 +545,7 @@ class Form extends \Hybrid
 
 	/**
 	 * Get the maximum file size that is allowed for file uploads
+	 *
 	 * @return integer
 	 */
 	protected function getMaxFileSize()
@@ -531,7 +556,8 @@ class Form extends \Hybrid
 
 	/**
 	 * Initialize the form in the current session
-	 * @param string
+	 *
+	 * @param string $formId
 	 */
 	protected function initializeSession($formId)
 	{
@@ -551,6 +577,7 @@ class Form extends \Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
+					/** @var \FrontendTemplate|object $objTemplate */
 					$objTemplate = new \FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;

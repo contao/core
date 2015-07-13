@@ -3,27 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModulePersonalData
- *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array $editable
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePersonalData extends \Module
 {
@@ -37,12 +30,14 @@ class ModulePersonalData extends \Module
 
 	/**
 	 * Return a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['personalData'][0]) . ' ###';
@@ -71,7 +66,9 @@ class ModulePersonalData extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$this->import('FrontendUser', 'User');
 
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -99,7 +96,10 @@ class ModulePersonalData extends \Module
 		// Set the template
 		if ($this->memberTpl != '')
 		{
-			$this->Template = new \FrontendTemplate($this->memberTpl);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->memberTpl);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -111,8 +111,26 @@ class ModulePersonalData extends \Module
 		$hasUpload = false;
 		$row = 0;
 
+		// Predefine the group order (other groups will be appended automatically)
+		$arrGroups = array
+		(
+			'personal' => array(),
+			'address'  => array(),
+			'contact'  => array(),
+			'login'    => array(),
+			'profile'  => array()
+		);
+
 		$blnModified = false;
 		$objMember = \MemberModel::findByPk($this->User->id);
+		$strTable = $objMember->getTable();
+
+		// Initialize the versioning (see #7415)
+		$objVersions = new \Versions($strTable, $objMember->id);
+		$objVersions->setUsername($objMember->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Build the form
 		foreach ($this->editable as $field)
@@ -125,6 +143,7 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class does not exist
@@ -143,10 +162,10 @@ class ModulePersonalData extends \Module
 			{
 				if (is_array($this->User->$field))
 				{
-					 if (empty($this->User->$field))
-					 {
-					 	$arrData['eval']['required'] = true;
-					 }
+					if (empty($this->User->$field))
+					{
+						$arrData['eval']['required'] = true;
+					}
 				}
 				else
 				{
@@ -176,16 +195,21 @@ class ModulePersonalData extends \Module
 				}
 			}
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
 			$objWidget->storeValues = true;
-			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+			$objWidget->rowClass = 'row_' . $row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if it is a password field
 			if ($objWidget instanceof \FormPassword)
 			{
-				++$row;
-				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
+				if ($objMember->password != '')
+				{
+					$objWidget->mandatory = false;
+				}
+
+				$objWidget->rowClassConfirm = 'row_' . ++$row . ((($row % 2) == 0) ? ' even' : ' odd');
 			}
 
 			// Validate the form data
@@ -197,11 +221,11 @@ class ModulePersonalData extends \Module
 				$rgxp = $arrData['eval']['rgxp'];
 
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
-				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
+				if ($varValue != '' && in_array($rgxp, array('date', 'time', 'datim')))
 				{
 					try
 					{
-						$objDate = new \Date($varValue);
+						$objDate = new \Date($varValue, \Date::getFormatFromRgxp($rgxp));
 						$varValue = $objDate->tstamp;
 					}
 					catch (\OutOfBoundsException $e)
@@ -257,12 +281,21 @@ class ModulePersonalData extends \Module
 						$varValue = $objWidget->getEmptyValue();
 					}
 
-					// Set the new value
-					$this->User->$field = $varValue;
+					// Encrypt the value (see #7815)
+					if ($arrData['eval']['encrypt'])
+					{
+						$varValue = \Encryption::encrypt($varValue);
+					}
 
-					// Set the new field in the member model
-					$blnModified = true;
-					$objMember->$field = $varValue;
+					// Set the new value
+					if ($varValue !== $this->User->$field)
+					{
+						$this->User->$field = $varValue;
+
+						// Set the new field in the member model
+						$blnModified = true;
+						$objMember->$field = $varValue;
+					}
 				}
 			}
 
@@ -281,31 +314,13 @@ class ModulePersonalData extends \Module
 		// Save the model
 		if ($blnModified)
 		{
+			$objMember->tstamp = time();
 			$objMember->save();
-
-			$strTable = $objMember->getTable();
 
 			// Create a new version
 			if ($GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
 			{
-				$intVersion = 1;
-
-				$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-											 ->execute($objMember->id, $strTable);
-
-				if ($objVersion->version !== null)
-				{
-					$intVersion = $objVersion->version + 1;
-				}
-
-				$strUrl = 'contao/main.php?do=member&act=edit&id=' . $objMember->id . '&rt=1';
-
-				$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
-							   ->execute($objMember->id, $strTable);
-
-				$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-							   ->execute($objMember->id, time(), $intVersion, $strTable, $objMember->username, 0, $objMember->firstname . ' ' . $objMember->lastname, $strUrl, serialize($objMember->row()));
-
+				$objVersions->create();
 				$this->log('A new version of record "'.$strTable.'.id='.$objMember->id.'" has been created'.$this->getParentEntries($strTable, $objMember->id), __METHOD__, TL_GENERAL);
 			}
 		}
@@ -356,37 +371,20 @@ class ModulePersonalData extends \Module
 		$this->Template->contactDetails = $GLOBALS['TL_LANG']['tl_member']['contactDetails'];
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 
-		// Add groups
+		// Add the groups
 		foreach ($arrFields as $k=>$v)
 		{
-			$this->Template->$k = $v;
+			$this->Template->$k = $v; // backwards compatibility
+
+			$key = $k . (($k == 'personal') ? 'Data' : 'Details');
+			$arrGroups[$GLOBALS['TL_LANG']['tl_member'][$key]] = $v;
 		}
 
+		$this->Template->categories = $arrGroups;
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
-
-		// HOOK: add memberlist fields
-		if (in_array('memberlist', \ModuleLoader::getActive()))
-		{
-			$this->Template->profile = $arrFields['profile'];
-			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
-		}
-
-		// HOOK: add newsletter fields
-		if (in_array('newsletter', \ModuleLoader::getActive()))
-		{
-			$this->Template->newsletter = $arrFields['newsletter'];
-			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
-		}
-
-		// HOOK: add helpdesk fields
-		if (in_array('helpdesk', \ModuleLoader::getActive()))
-		{
-			$this->Template->helpdesk = $arrFields['helpdesk'];
-			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
-		}
 	}
 }

@@ -3,26 +3,26 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormTextArea
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string  $value
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property string  $placeholder
+ * @property string  $size
+ * @property integer $rows
+ * @property integer $cols
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormTextArea extends \Widget
 {
@@ -61,6 +61,13 @@ class FormTextArea extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_textarea';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-textarea';
 
 
 	/**
@@ -156,7 +163,9 @@ class FormTextArea extends \Widget
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$arrStrip = array();
 
 		// XHTML does not support maxlength

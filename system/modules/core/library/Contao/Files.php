@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -33,9 +31,7 @@ namespace Contao;
  *
  *     $files->rrdir('test');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Files
 {
@@ -263,9 +259,9 @@ abstract class Files
 
 
 	/**
-	 * Validate a path (must not contain ../ fragments)
+	 * Validate a path
 	 *
-	 * @throws \Exception If the given paths are not valid
+	 * @throws \RuntimeException If the given paths are not valid
 	 */
 	protected function validate()
 	{
@@ -273,11 +269,11 @@ abstract class Files
 		{
 			if ($strPath == '') // see #5795
 			{
-				throw new \Exception('No file or folder name given');
+				throw new \RuntimeException('No file or folder name given');
 			}
-			elseif (strpos($strPath, '../') !== false)
+			elseif (\Validator::isInsecurePath($strPath))
 			{
-				throw new \Exception('Invalid file or folder name ' . $strPath);
+				throw new \RuntimeException('Invalid file or folder name ' . $strPath);
 			}
 		}
 	}

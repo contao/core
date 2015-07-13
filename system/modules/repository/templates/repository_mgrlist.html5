@@ -16,25 +16,25 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 ?>
 
 <div id="tl_buttons" class="buttonwrapper">
-  <?php echo $theme->createMainButton('dbcheck16', $rep->updateLink, $text['updatedatabase']); ?>
-  <?php echo $theme->createMainButton('install16', $rep->installLink, $text['installextension']); ?>
+  <?= $theme->createMainButton('dbcheck16', $rep->updateLink, $text['updatedatabase']) ?>
+  <?= $theme->createMainButton('install16', $rep->installLink, $text['installextension']) ?>
 </div>
 
 <div class="mod_repository">
-  <form action="<?php echo $rep->f_link; ?>" id="repository_upgdform" method="post" >
+  <form action="<?= $rep->f_link ?>" id="repository_upgdform" method="post" >
     <div class="extension_container">
-      <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
-      <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+      <input type="hidden" name="repository_action" value="<?= $rep->f_action ?>">
+      <input type="hidden" name="REQUEST_TOKEN" value="<?= REQUEST_TOKEN ?>">
       <?php if (count($rep->extensions) < 1): ?>
-        <p><?php echo $text['noextensionsfound']; ?></p>
+        <p><?= $text['noextensionsfound'] ?></p>
       <?php else: ?>
         <table class="installs">
           <tr class="title">
             <th class="col_selectcheckbox"><input type="checkbox" id="selectall" onclick="selectUnselectAll()"></th>
-            <th class="col_extension"><?php echo $text['extension'][0]; ?></th>
-            <th class="col_version"><?php echo $text['version'][0]; ?></th>
-            <th class="col_build"><?php echo $text['build']; ?></th>
-            <th class="col_status"><?php echo $text['status']; ?></th>
+            <th class="col_extension"><?= $text['extension'][0] ?></th>
+            <th class="col_version"><?= $text['version'][0] ?></th>
+            <th class="col_build"><?= $text['build'] ?></th>
+            <th class="col_status"><?= $text['status'] ?></th>
             <th class="col_functions">&nbsp;</th>
           </tr>
           <?php foreach ($rep->extensions as $ext):
@@ -49,12 +49,12 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
               $icons[] = $theme->createListButton('ok16', $ext->updateLink, $text['updateextension']);
             ?>
             <tr class="datarow">
-              <td class="col_selectcheckbox"><?php if (property_exists($ext, 'updateLink')): ?><input type="checkbox" name="selectedids[]" value="<?php echo $ext->id; ?>" onclick="enableSelectFunctions()"><?php else: ?>&nbsp;<?php endif; ?></td>
-              <td class="col_extension"><?php echo property_exists($ext, 'catalogLink') ? '<a href="'.$ext->catalogLink.'" title="'.$text['showdetails'].'">'.$ext->extension.'</a>' : $ext->extension; ?></td>
-              <td class="col_version"><?php echo Repository::formatVersion($ext->version); ?></td>
-              <td class="col_build"><?php echo $ext->build; ?></td>
+              <td class="col_selectcheckbox"><?php if (property_exists($ext, 'updateLink')): ?><input type="checkbox" name="selectedids[]" value="<?= $ext->id ?>" onclick="enableSelectFunctions()"><?php else: ?>&nbsp;<?php endif; ?></td>
+              <td class="col_extension"><?= property_exists($ext, 'catalogLink') ? '<a href="'.$ext->catalogLink.'" title="'.$text['showdetails'].'">'.$ext->extension.'</a>' : $ext->extension ?></td>
+              <td class="col_version"><?= Repository::formatVersion($ext->version) ?></td>
+              <td class="col_build"><?= $ext->build ?></td>
               <td class="col_status"><?php foreach ($ext->status as $sta) echo '<div class="color_'.$sta->color.'">'.sprintf($statext[$sta->text], $sta->par1, $sta->par2).'</div>'; ?></td>
-              <td class="col_functions"><?php echo implode(' ',$icons); ?></td>
+              <td class="col_functions"><?= implode(' ',$icons) ?></td>
             </tr>
           <?php endforeach; ?>
         </table>
@@ -62,7 +62,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
     </div>
     <div class="tl_formbody_submit">
       <div class="tl_submit_container">
-        <input type="submit" name="repository_upgradebutton" id="repository_upgradebutton" class="tl_submit" value="<?php echo $text['updateextensions']; ?>">
+        <input type="submit" name="repository_upgradebutton" id="repository_upgradebutton" class="tl_submit" value="<?= $text['updateextensions'] ?>">
       </div>
     </div>
   </form>

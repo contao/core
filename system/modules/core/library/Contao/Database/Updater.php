@@ -3,22 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
 
 
 /**
- * Adjust the database if the system is updated
+ * Adjust the database if the system is updated.
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Updater extends \Controller
 {
@@ -188,7 +184,7 @@ class Updater extends \Controller
 		if ($this->Database->fieldExists('news_featured', 'tl_module'))
 		{
 			$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
-			$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
+			$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured='1'");
 		}
 
 		// Other version 2.9 updates
@@ -582,6 +578,17 @@ class Updater extends \Controller
 
 
 	/**
+	 * Version 3.5.0 update
+	 */
+	public function run35Update()
+	{
+		$this->Database->query("ALTER TABLE `tl_member` CHANGE `username` `username` varchar(64) COLLATE utf8_bin NULL");
+		$this->Database->query("UPDATE `tl_member` SET username=NULL WHERE username=''");
+		$this->Database->query("ALTER TABLE `tl_member` DROP INDEX `username`, ADD UNIQUE KEY `username` (`username`)");
+	}
+
+
+	/**
 	 * Scan the upload folder and create the database entries
 	 *
 	 * @param string  $strPath The target folder
@@ -958,9 +965,9 @@ class Updater extends \Controller
 	/**
 	 * Create a content element
 	 *
-	 * @param \Database\Result $objElement A database result object
-	 * @param string           $strPtable  The name of the parent table
-	 * @param string           $strField   The name of the text column
+	 * @param \Database\Result|object $objElement A database result object
+	 * @param string                  $strPtable  The name of the parent table
+	 * @param string                  $strField   The name of the text column
 	 */
 	protected function createContentElement(\Database\Result $objElement, $strPtable, $strField)
 	{

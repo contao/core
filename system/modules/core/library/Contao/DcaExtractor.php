@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -22,19 +20,23 @@ namespace Contao;
  *
  * Usage:
  *
- *     $user = new DcaExtractor('tl_user');
+ *     $user = DcaExtractor::getInstance('tl_user');
  *
  *     if ($user->hasRelations())
  *     {
  *         print_r($user->getRelations());
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DcaExtractor extends \Controller
 {
+
+	/**
+	 * Instances
+	 * @var string
+	 */
+	protected static $arrInstances = array();
 
 	/**
 	 * Table name
@@ -65,6 +67,12 @@ class DcaExtractor extends \Controller
 	 * @var array
 	 */
 	protected $arrOrderFields = array();
+
+	/**
+	 * Unique fields
+	 * @var array
+	 */
+	protected $arrUniqueFields = array();
 
 	/**
 	 * Keys
@@ -119,6 +127,24 @@ class DcaExtractor extends \Controller
 		{
 			$this->createExtract();
 		}
+	}
+
+
+	/**
+	 * Get one object instance per table
+	 *
+	 * @param string $strTable The table name
+	 *
+	 * @return \DcaExtractor The object instance
+	 */
+	public static function getInstance($strTable)
+	{
+		if (!isset(static::$arrInstances[$strTable]))
+		{
+			static::$arrInstances[$strTable] = new static($strTable);
+		}
+
+		return static::$arrInstances[$strTable];
 	}
 
 
@@ -185,6 +211,28 @@ class DcaExtractor extends \Controller
 	public function hasOrderFields()
 	{
 		return !empty($this->arrOrderFields);
+	}
+
+
+	/**
+	 * Return an array of unique columns
+	 *
+	 * @return array
+	 */
+	public function getUniqueFields()
+	{
+		return $this->arrUniqueFields;
+	}
+
+
+	/**
+	 * Return true if there are unique fields
+	 *
+	 * @return boolean True if there are unique fields
+	 */
+	public function hasUniqueFields()
+	{
+		return !empty($this->arrUniqueFields);
 	}
 
 
@@ -258,32 +306,41 @@ class DcaExtractor extends \Controller
 			$return['TABLE_FIELDS'][$k] = '`' . $k . '` ' . $v;
 		}
 
+		$quote = function ($item) { return '`' . $item . '`'; };
+
 		// Keys
 		foreach ($this->arrKeys as $k=>$v)
 		{
 			// Handle multi-column indexes (see #5556)
 			if (strpos($k, ',') !== false)
 			{
-				$f = trimsplit(',', $k);
+				$f = array_map($quote, trimsplit(',', $k));
 				$k = str_replace(',', '_', $k);
 			}
 			else
 			{
-				$f = array($k);
+				$f = array($quote($k));
+			}
+
+			// Handle key lengths (see #221)
+			if (preg_match('/\([0-9]+\)/', $v))
+			{
+				list($v, $length) = explode('(', rtrim($v, ')'));
+				$f = array($quote($k) . '(' . $length . ')');
 			}
 
 			if ($v == 'primary')
 			{
 				$k = 'PRIMARY';
-				$v = 'PRIMARY KEY  (`' . implode('`, `', $f) . '`)';
+				$v = 'PRIMARY KEY  (' . implode(', ', $f) . ')';
 			}
 			elseif ($v == 'index')
 			{
-				$v = 'KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = 'KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 			else
 			{
-				$v = strtoupper($v) . ' KEY `' . $k . '` (`' . implode('`, `', $f) . '`)';
+				$v = strtoupper($v) . ' KEY `' . $k . '` (' . implode(', ', $f) . ')';
 			}
 
 			$return['TABLE_CREATE_DEFINITIONS'][$k] = $v;
@@ -398,9 +455,12 @@ class DcaExtractor extends \Controller
 			{
 				foreach ($arrTable['TABLE_CREATE_DEFINITIONS'] as $strKey)
 				{
-					$strKey = preg_replace('/^([A-Z]+ )?KEY .+\(`([^`]+)`\)$/', '$2 $1', $strKey);
-					list($field, $type) = explode(' ', $strKey);
-					$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					if (preg_match('/^([A-Z]+ )?KEY .+\(([^)]+)\)$/', $strKey, $arrMatches) && preg_match_all('/`([^`]+)`/', $arrMatches[2], $arrFields))
+					{
+						$type = trim($arrMatches[1]);
+						$field = implode(',', $arrFields[1]);
+						$sql['keys'][$field] = ($type != '') ? strtolower($type) : 'index';
+					}
 				}
 			}
 		}
@@ -418,7 +478,7 @@ class DcaExtractor extends \Controller
 		}
 		if (empty($sql['charset']))
 		{
-			$sql['charset'] = $GLOBALS['TL_CONFIG']['dbCharset'];
+			$sql['charset'] = \Config::get('dbCharset');
 		}
 
 		// Meta
@@ -441,9 +501,15 @@ class DcaExtractor extends \Controller
 					$this->arrFields[$field] = $config['sql'];
 				}
 
-				if (isset($config['eval']['orderField']))
+				// Only add order fields of binary fields (see #7785)
+				if ($config['inputType'] == 'fileTree' && isset($config['eval']['orderField']))
 				{
 					$this->arrOrderFields[] = $config['eval']['orderField'];
+				}
+
+				if (isset($config['eval']['unique']) && $config['eval']['unique'])
+				{
+					$this->arrUniqueFields[] = $field;
 				}
 			}
 		}
@@ -456,6 +522,11 @@ class DcaExtractor extends \Controller
 			foreach ($sql['keys'] as $field=>$type)
 			{
 				$this->arrKeys[$field] = $type;
+
+				if ($type == 'unique')
+				{
+					$this->arrUniqueFields[] = $field;
+				}
 			}
 		}
 
@@ -475,6 +546,7 @@ class DcaExtractor extends \Controller
 			}
 		}
 
+		$this->arrUniqueFields = array_unique($this->arrUniqueFields);
 		$this->blnIsDbTable = true;
 	}
 }

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -113,6 +111,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable;{redirect_legend},jumpTo;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'registration'                => '{title_legend},name,headline,type;{config_legend},editable,newsletters,disableCaptcha;{account_legend},reg_groups,reg_allowLogin,reg_assignDir;{redirect_legend},jumpTo;{email_legend:hide},reg_activate;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'changePassword'              => '{title_legend},name,headline,type;{redirect_legend},jumpTo;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'lostPassword'                => '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'closeAccount'                => '{title_legend},name,headline,type;{config_legend},reg_close;{redirect_legend},jumpTo;{template_legend:hide},customTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -193,7 +192,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['levelOffset'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>5, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>5, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'showLevel' => array
@@ -201,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['showLevel'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>5, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('maxlength'=>5, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'hardLimit' => array
@@ -384,7 +383,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 48,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'totalLength' => array
@@ -393,7 +392,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 1000,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'perPage' => array
@@ -402,7 +401,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 0,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'searchType' => array
@@ -432,7 +431,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getLayoutSections'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+			'reference'               => &$GLOBALS['TL_LANG']['COLS'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
@@ -441,7 +440,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['skipFirst'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'loadFirst' => array
@@ -456,7 +455,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'transparent' => array
@@ -540,9 +539,9 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['imgSize'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'useCaption' => array
@@ -619,7 +618,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'default'                 => 3,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'disableCaptcha' => array
@@ -768,12 +767,9 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 
 
 /**
- * Class tl_module
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_module extends Backend
 {
@@ -808,6 +804,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all front end modules as array
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -828,6 +825,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all editable fields of table tl_member
+	 *
 	 * @return array
 	 */
 	public function getEditableMemberProperties()
@@ -851,6 +849,7 @@ class tl_module extends Backend
 
 	/**
 	 * Get all forms and return them as array
+	 *
 	 * @return array
 	 */
 	public function getForms()
@@ -877,6 +876,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all layout sections as array
+	 *
 	 * @return array
 	 */
 	public function getLayoutSections()
@@ -906,6 +906,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getNavigationTemplates()
@@ -916,6 +917,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all module templates as array
+	 *
 	 * @return array
 	 */
 	public function getModuleTemplates()
@@ -926,6 +928,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all member templates as array
+	 *
 	 * @return array
 	 */
 	public function getMemberTemplates()
@@ -936,6 +939,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all search templates as array
+	 *
 	 * @return array
 	 */
 	public function getSearchTemplates()
@@ -946,6 +950,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
+	 *
 	 * @return array
 	 */
 	public function getRssTemplates()
@@ -956,7 +961,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default activation text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getActivationDefault($varValue)
@@ -972,7 +979,9 @@ class tl_module extends Backend
 
 	/**
 	 * Load the default password text
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function getPasswordDefault($varValue)
@@ -988,7 +997,9 @@ class tl_module extends Backend
 
 	/**
 	 * List a front end module
-	 * @param array
+	 *
+	 * @param array $row
+	 *
 	 * @return string
 	 */
 	public function listModule($row)

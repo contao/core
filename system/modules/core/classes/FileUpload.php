@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class FileUpload
- *
  * Provide methods to handle file uploads in the back end.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileUpload extends \Backend
 {
@@ -58,6 +49,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was an error
+	 *
 	 * @return boolean
 	 */
 	public function hasError()
@@ -68,6 +60,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return true if there was a resized image
+	 *
 	 * @return boolean
 	 */
 	public function hasResized()
@@ -78,7 +71,8 @@ class FileUpload extends \Backend
 
 	/**
 	 * Override the field name
-	 * @param string
+	 *
+	 * @param string $strName
 	 */
 	public function setName($strName)
 	{
@@ -88,15 +82,18 @@ class FileUpload extends \Backend
 
 	/**
 	 * Check the uploaded files and move them to the target directory
-	 * @param string
+	 *
+	 * @param string $strTarget
+	 *
 	 * @return array
+	 *
 	 * @throws \Exception
 	 */
 	public function uploadTo($strTarget)
 	{
-		if ($strTarget == '' || strpos($strTarget, '../') !== false)
+		if ($strTarget == '' || \Validator::isInsecurePath($strTarget))
 		{
-			throw new \Exception("Invalid target path $strTarget");
+			throw new \InvalidArgumentException('Invalid target path ' . $strTarget);
 		}
 
 		$maxlength_kb = $this->getMaximumUploadSize();
@@ -106,13 +103,28 @@ class FileUpload extends \Backend
 
 		foreach ($arrFiles as $file)
 		{
-			// Romanize the filename
-			$file['name'] = strip_tags($file['name']);
-			$file['name'] = utf8_romanize($file['name']);
-			$file['name'] = str_replace('"', '', $file['name']);
+			// Sanitize the filename
+			try
+			{
+				$file['name'] = \String::sanitizeFileName($file['name']);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
+				$this->blnHasError = true;
+
+				continue;
+			}
+
+			// Invalid file name
+			if (!\Validator::isValidFileName($file['name']))
+			{
+				\Message::addError($GLOBALS['TL_LANG']['ERR']['filename']);
+				$this->blnHasError = true;
+			}
 
 			// File was not uploaded
-			if (!is_uploaded_file($file['tmp_name']))
+			elseif (!is_uploaded_file($file['tmp_name']))
 			{
 				if ($file['error'] == 1 || $file['error'] == 2)
 				{
@@ -185,6 +197,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Generate the markup for the default uploader
+	 *
 	 * @return string
 	 */
 	public function generateMarkup()
@@ -210,12 +223,14 @@ class FileUpload extends \Backend
         input.inject(div);
       }
     });
-  </script>';
+  </script>
+  <p class="tl_help tl_tip">' . sprintf($GLOBALS['TL_LANG']['tl_files']['fileupload'][1], \System::getReadableSize($this->getMaximumUploadSize()), \Config::get('gdMaxImgWidth') . 'x' . \Config::get('gdMaxImgHeight')) . '</p>';
 	}
 
 
 	/**
 	 * Get the files from the global $_FILES array
+	 *
 	 * @return array
 	 */
 	protected function getFilesFromGlobal()
@@ -246,6 +261,7 @@ class FileUpload extends \Backend
 
 	/**
 	 * Return the maximum upload file size in bytes
+	 *
 	 * @return string
 	 */
 	protected function getMaximumUploadSize()
@@ -273,7 +289,9 @@ class FileUpload extends \Backend
 
 	/**
 	 * Resize an uploaded image if neccessary
-	 * @param string
+	 *
+	 * @param string $strImage
+	 *
 	 * @return boolean
 	 */
 	protected function resizeUploadedImage($strImage)
@@ -284,19 +302,22 @@ class FileUpload extends \Backend
 			return false;
 		}
 
+		$objFile = new \File($strImage, true);
+
 		// Not an image
-		if (($arrImageSize = @getimagesize(TL_ROOT . '/' . $strImage)) === false)
+		if (!$objFile->isSvgImage && !$objFile->isGdImage)
 		{
 			return false;
 		}
 
-		$strName = basename($strImage);
+		$arrImageSize = $objFile->imageSize;
 
 		// The image is too big to be handled by the GD library
-		if ($arrImageSize[0] > \Config::get('gdMaxImgWidth') || $arrImageSize[1] > \Config::get('gdMaxImgHeight'))
+		if ($objFile->isGdImage && ($arrImageSize[0] > \Config::get('gdMaxImgWidth') || $arrImageSize[1] > \Config::get('gdMaxImgHeight')))
 		{
-			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully but was too big to be resized automatically', __METHOD__, TL_FILES);
+			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $objFile->basename));
+			$this->log('File "' . $objFile->basename . '" uploaded successfully but was too big to be resized automatically', __METHOD__, TL_FILES);
+
 			return false;
 		}
 
@@ -324,9 +345,10 @@ class FileUpload extends \Backend
 		if ($blnResize)
 		{
 			\Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
-			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
-			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
+			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $objFile->basename));
+			$this->log('File "' . $objFile->basename . '" uploaded successfully and was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
 			$this->blnHasResized = true;
+
 			return true;
 		}
 

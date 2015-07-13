@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentDownload
- *
  * Front end content element "download".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentDownload extends \ContentElement
 {
@@ -37,6 +28,7 @@ class ContentDownload extends \ContentElement
 
 	/**
 	 * Return if the file does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -76,6 +68,7 @@ class ContentDownload extends \ContentElement
 		}
 
 		$this->singleSRC = $objFile->path;
+
 		return parent::generate();
 	}
 
@@ -103,7 +96,7 @@ class ContentDownload extends \ContentElement
 		$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFile->value);
 
 		$this->Template->link = $this->linkTitle;
-		$this->Template->title = specialchars($this->titleText ?: $this->linkTitle);
+		$this->Template->title = specialchars($this->titleText ?: sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename));
 		$this->Template->href = $strHref;
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
 		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;

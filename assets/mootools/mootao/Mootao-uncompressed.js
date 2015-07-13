@@ -1,11 +1,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Mootao
- * @see     https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -201,7 +199,7 @@ Class.refactor(Drag,
 		return this.previous.apply(this, arguments);
 	},
 
-	start: function(event) {
+	start: function() {
 		document.addEvents({
 			touchmove: this.bound.check,
 			touchend: this.bound.cancel
@@ -226,7 +224,7 @@ Class.refactor(Drag,
 		}
 	},
 
-	cancel: function(event) {
+	cancel: function() {
 		document.removeEvents({
 			touchmove: this.bound.check,
 			touchend: this.bound.cancel
@@ -234,7 +232,7 @@ Class.refactor(Drag,
 		return this.previous.apply(this, arguments);
 	},
 
-	stop: function(event) {
+	stop: function() {
 		document.removeEvents({
 			touchmove: this.bound.drag,
 			touchend: this.bound.stop

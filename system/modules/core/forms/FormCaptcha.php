@@ -3,26 +3,23 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormCaptcha
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string $name
+ * @property string $question
+ * @property string $placeholder
+ * @property string $rowClass
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormCaptcha extends \Widget
 {
@@ -48,6 +45,13 @@ class FormCaptcha extends \Widget
 	 */
 	protected $strQuestion;
 
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-captcha mandatory';
+
 
 	/**
 	 * Initialize the object
@@ -60,8 +64,8 @@ class FormCaptcha extends \Widget
 
 		$this->arrAttributes['maxlength'] = 2;
 		$this->strCaptchaKey = 'c' . md5(uniqid(mt_rand(), true));
-		$this->mandatory = true;
 		$this->arrAttributes['required'] = true;
+		$this->arrConfiguration['mandatory'] = true;
 	}
 
 

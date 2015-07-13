@@ -4,19 +4,19 @@
 
   <ul>
     <?php if ($this->prevHref): ?>
-      <li class="prev"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevPageTitle; ?>">&lt; <?php echo $this->prevLink; ?></a></li>
+      <li class="prev"><a href="<?= $this->prevHref ?>" title="<?= $this->prevPageTitle ?>">&lt; <?= $this->prevLink ?></a></li>
     <?php else: ?>
       <li class="prev empty">&nbsp;</li>
     <?php endif; ?>
 
     <?php if ($this->upHref): ?>
-      <li class="up"><a href="<?php echo $this->upHref; ?>" title="<?php echo $this->upPageTitle; ?>"><?php echo $this->upLink; ?></a></li>
+      <li class="up"><a href="<?= $this->upHref ?>" title="<?= $this->upPageTitle ?>"><?= $this->upLink ?></a></li>
     <?php else: ?>
       <li class="up empty">&nbsp;</li>
     <?php endif; ?>
 
     <?php if ($this->nextHref): ?>
-      <li class="next"><a href="<?php echo $this->nextHref; ?>" title="<?php echo $this->nextPageTitle; ?>"><?php echo $this->nextLink; ?> &gt;</a></li>
+      <li class="next"><a href="<?= $this->nextHref ?>" title="<?= $this->nextPageTitle ?>"><?= $this->nextLink ?> &gt;</a></li>
     <?php else: ?>
       <li class="next empty">&nbsp;</li>
     <?php endif; ?>

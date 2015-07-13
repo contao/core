@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>">
+<html lang="<?= $this->language ?>"<?php if ($this->isRTL): ?> dir="rtl"<?php endif; ?>>
 <head>
 
   <?php $this->block('head'); ?>
-    <meta charset="<?php echo $this->charset; ?>">
-    <title><?php echo $this->title; ?></title>
-    <base href="<?php echo $this->base; ?>">
+    <meta charset="<?= $this->charset ?>">
+    <title><?= $this->title ?></title>
+    <base href="<?= $this->base ?>">
 
     <?php $this->block('meta'); ?>
-      <meta name="robots" content="<?php echo $this->robots; ?>">
-      <meta name="description" content="<?php echo $this->description; ?>">
-      <meta name="keywords" content="<?php echo $this->keywords; ?>">
+      <meta name="robots" content="<?= $this->robots ?>">
+      <meta name="description" content="<?= $this->description ?>">
+      <meta name="keywords" content="<?= $this->keywords ?>">
       <meta name="generator" content="Contao Open Source CMS">
     <?php $this->endblock(); ?>
 
-    <?php echo $this->viewport; ?>
-    <?php echo $this->framework; ?>
-    <?php echo $this->stylesheets; ?>
-    <?php echo $this->mooScripts; ?>
-    <?php echo $this->head; ?>
+    <?= $this->viewport ?>
+    <?= $this->framework ?>
+    <?= $this->stylesheets ?>
+    <?= $this->mooScripts ?>
+    <?= $this->head ?>
 
     <?php $this->block('html5shiv'); ?>
-      <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv-printshiv.js"></script><![endif]-->
+      <!--[if lt IE 9]><script src="<?= TL_ASSETS_URL ?>assets/html5shiv/<?= $GLOBALS['TL_ASSETS']['HTML5SHIV'] ?>/html5shiv-printshiv.min.js"></script><![endif]-->
     <?php $this->endblock(); ?>
   <?php $this->endblock(); ?>
 
 </head>
-<body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+<body id="top" class="{{ua::class}}<?php if ($this->class) echo ' ' . $this->class; ?>"<?php if ($this->onload): ?> onload="<?= $this->onload ?>"<?php endif; ?>>
 
   <?php $this->block('body'); ?>
-    <?php echo $this->sections('top'); ?>
+    <?php $this->sections('top'); ?>
 
     <div id="wrapper">
 
@@ -37,13 +37,13 @@
         <?php if ($this->header): ?>
           <header id="header">
             <div class="inside">
-              <?php echo $this->header; ?>
+              <?= $this->header ?>
             </div>
           </header>
         <?php endif; ?>
       <?php $this->endblock(); ?>
 
-      <?php echo $this->sections('before'); ?>
+      <?php $this->sections('before'); ?>
 
       <?php $this->block('container'); ?>
         <div id="container">
@@ -51,9 +51,9 @@
           <?php $this->block('main'); ?>
             <div id="main">
               <div class="inside">
-                <?php echo $this->main; ?>
+                <?= $this->main ?>
               </div>
-              <?php echo $this->sections('main'); ?>
+              <?php $this->sections('main'); ?>
             </div>
           <?php $this->endblock(); ?>
 
@@ -61,7 +61,7 @@
             <?php if ($this->left): ?>
               <aside id="left">
                 <div class="inside">
-                  <?php echo $this->left; ?>
+                  <?= $this->left ?>
                 </div>
               </aside>
             <?php endif; ?>
@@ -71,7 +71,7 @@
             <?php if ($this->right): ?>
               <aside id="right">
                 <div class="inside">
-                  <?php echo $this->right; ?>
+                  <?= $this->right ?>
                 </div>
               </aside>
             <?php endif; ?>
@@ -80,13 +80,13 @@
         </div>
       <?php $this->endblock(); ?>
 
-      <?php echo $this->sections('after'); ?>
+      <?php $this->sections('after'); ?>
 
       <?php $this->block('footer'); ?>
         <?php if ($this->footer): ?>
           <footer id="footer">
             <div class="inside">
-              <?php echo $this->footer; ?>
+              <?= $this->footer ?>
             </div>
           </footer>
         <?php endif; ?>
@@ -94,10 +94,10 @@
 
     </div>
 
-    <?php echo $this->sections('bottom'); ?>
+    <?php $this->sections('bottom'); ?>
   <?php $this->endblock(); ?>
 
-  <?php echo $this->mootools; ?>
+  <?= $this->mootools ?>
 
 </body>
 </html>

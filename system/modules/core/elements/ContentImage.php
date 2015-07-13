@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentImage
- *
  * Front end content element "image".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentImage extends \ContentElement
 {
@@ -37,6 +28,7 @@ class ContentImage extends \ContentElement
 
 	/**
 	 * Return if the image does not exist
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -64,6 +56,7 @@ class ContentImage extends \ContentElement
 		}
 
 		$this->singleSRC = $objFile->path;
+
 		return parent::generate();
 	}
 

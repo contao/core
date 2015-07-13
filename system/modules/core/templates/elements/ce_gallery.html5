@@ -2,10 +2,10 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->v2warning; ?>
+  <?= $this->v2warning ?>
 
-  <?php echo $this->images; ?>
+  <?= $this->images ?>
 
-  <?php echo $this->pagination; ?>
+  <?= $this->pagination ?>
 
 <?php $this->endblock(); ?>

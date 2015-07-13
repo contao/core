@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -36,9 +34,9 @@ namespace Contao;
  *         echo $user->name;
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property integer $id The ID
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Model
 {
@@ -66,6 +64,12 @@ abstract class Model
 	 * @var string
 	 */
 	protected static $strPk = 'id';
+
+	/**
+	 * Class name cache
+	 * @var array
+	 */
+	protected static $arrClassNames = array();
 
 	/**
 	 * Data
@@ -107,7 +111,7 @@ abstract class Model
 	{
 		$this->arrModified = array();
 
-		$objDca = new \DcaExtractor(static::$strTable);
+		$objDca = \DcaExtractor::getInstance(static::$strTable);
 		$this->arrRelations = $objDca->getRelations();
 
 		if ($objResult !== null)
@@ -136,6 +140,8 @@ abstract class Model
 			foreach ($arrRelated as $key=>$row)
 			{
 				$table = $this->arrRelations[$key]['table'];
+
+				/** @var static $strClass */
 				$strClass = static::getClassFromTable($table);
 				$intPk = $strClass::getPk();
 
@@ -154,6 +160,7 @@ abstract class Model
 					}
 					else
 					{
+						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
 					}
@@ -177,6 +184,20 @@ abstract class Model
 		$this->blnPreventSaving = false;
 
 		unset($this->arrData[static::$strPk]);
+	}
+
+
+	/**
+	 * Clone a model with its original values
+	 *
+	 * @return static The model
+	 */
+	public function cloneOriginal()
+	{
+		$clone = clone $this;
+		$clone->setRow($this->originalRow());
+
+		return $clone;
 	}
 
 
@@ -243,6 +264,19 @@ abstract class Model
 
 
 	/**
+	 * Return an array of unique field/column names (without the PK)
+	 *
+	 * @return array
+	 */
+	public static function getUniqueFields()
+	{
+		$objDca = \DcaExtractor::getInstance(static::getTable());
+
+		return $objDca->getUniqueFields();
+	}
+
+
+	/**
 	 * Return the name of the related table
 	 *
 	 * @return string The table name
@@ -265,6 +299,31 @@ abstract class Model
 
 
 	/**
+	 * Return the original values as associative array
+	 *
+	 * @return array The original data
+	 */
+	public function originalRow()
+	{
+		$row = $this->row();
+
+		if (!$this->isModified())
+		{
+			return $row;
+		}
+
+		$originalRow = array();
+
+		foreach ($row as $k=>$v)
+		{
+			$originalRow[$k] = isset($this->arrModified[$k]) ? $this->arrModified[$k] : $v;
+		}
+
+		return $originalRow;
+	}
+
+
+	/**
 	 * Return true if the model has been modified
 	 *
 	 * @return boolean True if the model has been modified
@@ -280,7 +339,7 @@ abstract class Model
 	 *
 	 * @param array $arrData The data record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function setRow(array $arrData)
 	{
@@ -293,6 +352,7 @@ abstract class Model
 		}
 
 		$this->arrData = $arrData;
+
 		return $this;
 	}
 
@@ -302,7 +362,7 @@ abstract class Model
 	 *
 	 * @param array $arrData The data record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function mergeRow(array $arrData)
 	{
@@ -340,7 +400,7 @@ abstract class Model
 	/**
 	 * Return the object instance
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 */
 	public function current()
 	{
@@ -351,7 +411,7 @@ abstract class Model
 	/**
 	 * Save the current record
 	 *
-	 * @return \Model The model object
+	 * @return static The model object
 	 *
 	 * @throws \InvalidArgumentException If an argument is passed
 	 * @throws \LogicException           If the model cannot be saved
@@ -522,7 +582,7 @@ abstract class Model
 	 * @param string $strKey     The property name
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return \Model|\Model\Collection The model or a model collection if there are multiple rows
+	 * @return static|\Model\Collection|null The model or a model collection if there are multiple rows
 	 *
 	 * @throws \Exception If $strKey is not a related field
 	 */
@@ -547,6 +607,8 @@ abstract class Model
 		}
 
 		$arrRelation = $this->arrRelations[$strKey];
+
+		/** @var static $strClass */
 		$strClass = static::getClassFromTable($arrRelation['table']);
 
 		// Load the related record(s)
@@ -563,6 +625,7 @@ abstract class Model
 			// Handle UUIDs (see #6525)
 			if ($strField == 'tl_files.uuid')
 			{
+				/** @var \FilesModel $strClass */
 				$objModel = $strClass::findMultipleByUuids($arrValues, $arrOptions);
 			}
 			else
@@ -610,19 +673,77 @@ abstract class Model
 
 	/**
 	 * Detach the model from the registry
+	 *
+	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function detach()
+	public function detach($blnKeepClone=true)
 	{
 		\Model\Registry::getInstance()->unregister($this);
+
+		if ($blnKeepClone)
+		{
+			$this->cloneOriginal()->attach();
+		}
+	}
+
+
+	/**
+	 * Attach the model to the registry
+	 */
+	public function attach()
+	{
+		\Model\Registry::getInstance()->register($this);
+	}
+
+
+	/**
+	 * Called when the model is attached to the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onRegister(\Model\Registry $registry)
+	{
+		// Register aliases to unique fields
+		foreach (static::getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+
+			if (!$registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
+			{
+				$registry->registerAlias($this, $strColumn, $varAliasValue);
+			}
+		}
+	}
+
+
+	/**
+	 * Called when the model is detached from the model registry
+	 *
+	 * @param \Model\Registry
+	 */
+	public function onUnregister(\Model\Registry $registry)
+	{
+		// Unregister aliases to unique fields
+		foreach (static::getUniqueFields() as $strColumn)
+		{
+			$varAliasValue = $this->{$strColumn};
+
+			if ($registry->isRegisteredAlias($this, $strColumn, $varAliasValue))
+			{
+				$registry->unregisterAlias($this, $strColumn, $varAliasValue);
+			}
+		}
 	}
 
 
 	/**
 	 * Prevent saving the model
+	 *
+	 * @param boolean $blnKeepClone Keeps a clone of the model in the registry
 	 */
-	public function preventSaving()
+	public function preventSaving($blnKeepClone=true)
 	{
-		$this->detach();
+		$this->detach($blnKeepClone);
 		$this->blnPreventSaving = true;
 	}
 
@@ -633,7 +754,7 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
@@ -671,7 +792,7 @@ abstract class Model
 	 * @param mixed $varId      The ID or alias
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findByIdOrAlias($varId, array $arrOptions=array())
 	{
@@ -711,7 +832,7 @@ abstract class Model
 	 * @param array $arrIds     An array of IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null A collection of models or null if there are no records
+	 * @return \Model\Collection|null The model collection or null if there are no records
 	 */
 	public static function findMultipleByIds($arrIds, array $arrOptions=array())
 	{
@@ -780,31 +901,10 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model|null The model or null if the result is empty
+	 * @return static The model or null if the result is empty
 	 */
 	public static function findOneBy($strColumn, $varValue, array $arrOptions=array())
 	{
-		$intId = is_array($varValue) ? $varValue[0] : $varValue;
-
-		// Try to load from the registry
-		if (empty($arrOptions))
-		{
-			if (is_array($strColumn))
-			{
-				if (count($strColumn) == 1 && $strColumn[0] == static::$strPk)
-				{
-					return static::findByPk($intId, $arrOptions);
-				}
-			}
-			else
-			{
-				if ($strColumn == static::$strPk)
-				{
-					return static::findByPk($intId, $arrOptions);
-				}
-			}
-		}
-
 		$arrOptions = array_merge
 		(
 			array
@@ -829,17 +929,25 @@ abstract class Model
 	 * @param mixed $varValue   The property value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|null The model collection or null if the result is empty
+	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	public static function findBy($strColumn, $varValue, array $arrOptions=array())
 	{
+		$blnModel = false;
+		$arrColumn = (array) $strColumn;
+
+		if (count($arrColumn) == 1 && ($arrColumn[0] === static::getPk() || in_array($arrColumn[0], static::getUniqueFields())))
+		{
+			$blnModel = true;
+		}
+
 		$arrOptions = array_merge
 		(
 			array
 			(
 				'column' => $strColumn,
 				'value'  => $varValue,
-				'return' => 'Collection'
+				'return' => $blnModel ? 'Model' : 'Collection'
 			),
 
 			$arrOptions
@@ -878,7 +986,7 @@ abstract class Model
 	 * @param string $name The method name
 	 * @param array  $args The passed arguments
 	 *
-	 * @return \Model|\Model\Collection A model or model collection
+	 * @return static|\Model\Collection|null A model or model collection
 	 *
 	 * @throws \Exception If the method name is invalid
 	 */
@@ -887,16 +995,19 @@ abstract class Model
 		if (strncmp($name, 'findBy', 6) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 6)));
+
 			return call_user_func_array('static::findBy', $args);
 		}
 		elseif (strncmp($name, 'findOneBy', 9) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 9)));
+
 			return call_user_func_array('static::findOneBy', $args);
 		}
 		elseif (strncmp($name, 'countBy', 7) === 0)
 		{
 			array_unshift($args, lcfirst(substr($name, 7)));
+
 			return call_user_func_array('static::countBy', $args);
 		}
 
@@ -918,13 +1029,30 @@ abstract class Model
 	 *
 	 * @param array $arrOptions The options array
 	 *
-	 * @return \Model|\Model\Collection|null A model, model collection or null if the result is empty
+	 * @return static|\Model\Collection|null A model, model collection or null if the result is empty
 	 */
 	protected static function find(array $arrOptions)
 	{
 		if (static::$strTable == '')
 		{
 			return null;
+		}
+
+		// Try to load from the registry
+		if ($arrOptions['return'] == 'Model')
+		{
+			$arrColumn = (array) $arrOptions['column'];
+
+			if (count($arrColumn) == 1 && ($arrColumn[0] == static::$strPk || in_array($arrColumn[0], static::getUniqueFields())))
+			{
+				$varKey = is_array($arrOptions['value']) ? $arrOptions['value'][0] : $arrOptions['value'];
+				$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $varKey, $arrColumn[0]);
+
+				if ($objModel !== null)
+				{
+					return $objModel;
+				}
+			}
 		}
 
 		$arrOptions['table'] = static::$strTable;
@@ -958,13 +1086,10 @@ abstract class Model
 
 		$objResult = static::postFind($objResult);
 
+		// Try to load from the registry
 		if ($arrOptions['return'] == 'Model')
 		{
-			$strPk = static::$strPk;
-			$intPk = $objResult->$strPk;
-
-			// Try to load from the registry
-			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $intPk);
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $objResult->{static::$strPk});
 
 			if ($objModel !== null)
 			{
@@ -1009,26 +1134,34 @@ abstract class Model
 	/**
 	 * Return the number of records matching certain criteria
 	 *
-	 * @param mixed $strColumn An optional property name
-	 * @param mixed $varValue  An optional property value
+	 * @param mixed $strColumn  An optional property name
+	 * @param mixed $varValue   An optional property value
+	 * @param array $arrOptions An optional options array
 	 *
 	 * @return integer The number of matching rows
 	 */
-	public static function countBy($strColumn=null, $varValue=null)
+	public static function countBy($strColumn=null, $varValue=null, array $arrOptions=array())
 	{
 		if (static::$strTable == '')
 		{
 			return 0;
 		}
 
-		$strQuery = static::buildCountQuery(array
+		$arrOptions = array_merge
 		(
-			'table'  => static::$strTable,
-			'column' => $strColumn,
-			'value'  => $varValue
-		));
+			array
+			(
+				'table'  => static::$strTable,
+				'column' => $strColumn,
+				'value'  => $varValue
+			),
 
-		return (int) \Database::getInstance()->prepare($strQuery)->execute($varValue)->count;
+			$arrOptions
+		);
+
+		$strQuery = static::buildCountQuery($arrOptions);
+
+		return (int) \Database::getInstance()->prepare($strQuery)->execute($arrOptions['value'])->count;
 	}
 
 
@@ -1052,9 +1185,16 @@ abstract class Model
 	 */
 	public static function getClassFromTable($strTable)
 	{
+		if (isset(static::$arrClassNames[$strTable]))
+		{
+			return static::$arrClassNames[$strTable];
+		}
+
 		if (isset($GLOBALS['TL_MODELS'][$strTable]))
 		{
-			return $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+			static::$arrClassNames[$strTable] = $GLOBALS['TL_MODELS'][$strTable]; // see 4796
+
+			return static::$arrClassNames[$strTable];
 		}
 		else
 		{
@@ -1065,7 +1205,9 @@ abstract class Model
 				array_shift($arrChunks);
 			}
 
-			return implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+			static::$arrClassNames[$strTable] = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+
+			return static::$arrClassNames[$strTable];
 		}
 	}
 
@@ -1101,7 +1243,7 @@ abstract class Model
 	 *
 	 * @param \Database\Result $objResult The database result object
 	 *
-	 * @return \Model The model
+	 * @return static The model
 	 */
 	protected static function createModelFromDbResult(\Database\Result $objResult)
 	{

@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleNewsArchive
- *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleNewsArchive extends \ModuleNews
 {
@@ -37,12 +28,14 @@ class ModuleNewsArchive extends \ModuleNews
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['newsarchive'][0]) . ' ###';
@@ -83,6 +76,7 @@ class ModuleNewsArchive extends \ModuleNews
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$limit = null;
@@ -114,41 +108,44 @@ class ModuleNewsArchive extends \ModuleNews
 			}
 		}
 
-		// Display year
-		if ($intYear)
+		// Create the date object
+		try
 		{
-			$strDate = $intYear;
-			$objDate = new \Date($strDate, 'Y');
-			$intBegin = $objDate->yearBegin;
-			$intEnd = $objDate->yearEnd;
-			$this->headline .= ' ' . date('Y', $objDate->tstamp);
+			if ($intYear)
+			{
+				$strDate = $intYear;
+				$objDate = new \Date($strDate, 'Y');
+				$intBegin = $objDate->yearBegin;
+				$intEnd = $objDate->yearEnd;
+				$this->headline .= ' ' . date('Y', $objDate->tstamp);
+			}
+			elseif ($intMonth)
+			{
+				$strDate = $intMonth;
+				$objDate = new \Date($strDate, 'Ym');
+				$intBegin = $objDate->monthBegin;
+				$intEnd = $objDate->monthEnd;
+				$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
+			}
+			elseif ($intDay)
+			{
+				$strDate = $intDay;
+				$objDate = new \Date($strDate, 'Ymd');
+				$intBegin = $objDate->dayBegin;
+				$intEnd = $objDate->dayEnd;
+				$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
+			}
+			elseif ($this->news_jumpToCurrent == 'all_items')
+			{
+				$intBegin = 0;
+				$intEnd = time();
+			}
 		}
-
-		// Display month
-		elseif ($intMonth)
+		catch (\OutOfBoundsException $e)
 		{
-			$strDate = $intMonth;
-			$objDate = new \Date($strDate, 'Ym');
-			$intBegin = $objDate->monthBegin;
-			$intEnd = $objDate->monthEnd;
-			$this->headline .= ' ' . \Date::parse('F Y', $objDate->tstamp);
-		}
-
-		// Display day
-		elseif ($intDay)
-		{
-			$strDate = $intDay;
-			$objDate = new \Date($strDate, 'Ymd');
-			$intBegin = $objDate->dayBegin;
-			$intEnd = $objDate->dayEnd;
-			$this->headline .= ' ' . \Date::parse($objPage->dateFormat, $objDate->tstamp);
-		}
-
-		// Show all items
-		elseif ($this->news_jumpToCurrent == 'all_items')
-		{
-			$intBegin = 0;
-			$intEnd = time();
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			#$objHandler->generate($objPage->id);
 		}
 
 		$this->Template->articles = array();
@@ -165,18 +162,14 @@ class ModuleNewsArchive extends \ModuleNews
 
 				// Get the current page
 				$id = 'page_a' . $this->id;
-				$page = \Input::get($id) ?: 1;
+				$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 				{
-					global $objPage;
-					$objPage->noSearch = 1;
-					$objPage->cache = 0;
-
-					// Send a 404 header
-					header('HTTP/1.1 404 Not Found');
-					return;
+					/** @var \PageError404 $objHandler */
+					$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+					$objHandler->generate($objPage->id);
 				}
 
 				// Set limit and offset

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -204,7 +202,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['width'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -212,7 +210,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['height'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -220,7 +218,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minwidth'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -228,7 +226,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -236,7 +234,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -244,7 +242,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit_none', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -259,7 +257,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['trbl'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -314,7 +312,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['margin'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -322,7 +320,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['padding'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -405,7 +403,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -441,7 +439,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderwidth'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -464,7 +462,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderradius'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -480,7 +478,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -502,7 +500,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontsize'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -517,7 +515,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['lineheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -543,7 +541,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['textindent'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -551,7 +549,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['letterspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -559,7 +557,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['wordspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'maxlength' => 20, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
@@ -610,12 +608,9 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 
 
 /**
- * Class tl_style
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_style extends Backend
 {
@@ -650,7 +645,9 @@ class tl_style extends Backend
 
 	/**
 	 * Automatically set the category if not set
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return string
 	 */
 	public function checkCategory($varValue)
@@ -676,7 +673,9 @@ class tl_style extends Backend
 
 	/**
 	 * Return the file picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function filePicker(DataContainer $dc)
@@ -732,9 +731,10 @@ class tl_style extends Backend
 
 	/**
 	 * Update a style sheet after a version has been restored
-	 * @param integer
-	 * @param string
-	 * @param array
+	 *
+	 * @param integer $id
+	 * @param string  $table
+	 * @param array   $data
 	 */
 	public function updateAfterRestore($id, $table, $data)
 	{
@@ -755,19 +755,21 @@ class tl_style extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -784,10 +786,12 @@ class tl_style extends Backend
 
 	/**
 	 * Toggle the visibility of a format definition
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		$objVersions = new Versions('tl_style', $intId);
 		$objVersions->initialize();
@@ -800,11 +804,11 @@ class tl_style extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}

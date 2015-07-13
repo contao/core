@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,23 @@ namespace Contao;
  *         }
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property \Automator                                $Automator   The automator object
+ * @property \Calendar                                 $Calendar    The calendar object
+ * @property \Comments                                 $Comments    The comments object
+ * @property \Config                                   $Config      The config object
+ * @property \Database                                 $Database    The database object
+ * @property \Files                                    $Files       The files object
+ * @property \Input                                    $Input       The input object
+ * @property \Database\Installer                       $Installer   The database installer object
+ * @property \Database\Updater                         $Updater     The database updater object
+ * @property \Messages                                 $Messages    The messages object
+ * @property \News                                     $News        The news object
+ * @property \Session                                  $Session     The session object
+ * @property \StyleSheets                              $StyleSheets The style sheets object
+ * @property \BackendTemplate|\FrontendTemplate|object $Template    The template object
+ * @property \BackendUser|\FrontendUser                $User        The user object
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class System
 {
@@ -66,6 +78,12 @@ abstract class System
 	 * @var array
 	 */
 	protected static $arrLanguageFiles = array();
+
+	/**
+	 * Available image sizes
+	 * @var array
+	 */
+	protected static $arrImageSizes = array();
 
 
 	/**
@@ -304,7 +322,7 @@ abstract class System
 
 					if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 					{
-						eval(static::convertXlfToPhp($strFile . '.xlf', $strCreateLang));
+						static::convertXlfToPhp($strFile . '.xlf', $strCreateLang, true);
 					}
 					elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 					{
@@ -472,6 +490,38 @@ abstract class System
 
 
 	/**
+	 * Return all image sizes as array
+	 *
+	 * @return array The available image sizes
+	 */
+	public static function getImageSizes()
+	{
+		if (empty(static::$arrImageSizes))
+		{
+			try
+			{
+				$sizes = array();
+				$imageSize = \Database::getInstance()->query("SELECT id, name, width, height FROM tl_image_size ORDER BY pid, name");
+
+				while ($imageSize->next())
+				{
+					$sizes[$imageSize->id] = $imageSize->name;
+					$sizes[$imageSize->id] .= ' (' . $imageSize->width . 'x' . $imageSize->height . ')';
+				}
+
+				static::$arrImageSizes = array_merge(array('image_sizes' => $sizes), $GLOBALS['TL_CROP']);
+			}
+			catch (\Exception $e)
+			{
+				static::$arrImageSizes = $GLOBALS['TL_CROP'];
+			}
+		}
+
+		return static::$arrImageSizes;
+	}
+
+
+	/**
 	 * Urlencode a file path preserving slashes
 	 *
 	 * @param string $strPath The file path
@@ -628,12 +678,13 @@ abstract class System
 	/**
 	 * Convert an .xlf file into a PHP language file
 	 *
-	 * @param string $strName     The name of the .xlf file
-	 * @param string $strLanguage The language code
+	 * @param string  $strName     The name of the .xlf file
+	 * @param string  $strLanguage The language code
+	 * @param boolean $blnLoad     Add the labels to the global language array
 	 *
 	 * @return string The PHP code
 	 */
-	protected static function convertXlfToPhp($strName, $strLanguage)
+	protected static function convertXlfToPhp($strName, $strLanguage, $blnLoad=false)
 	{
 		// Read the .xlf file
 		$xml = new \DOMDocument();
@@ -662,7 +713,22 @@ abstract class System
 			}
 		};
 
-		// Add the labels
+		// Set up the quotevalue function
+		$quotevalue = function($value)
+		{
+			$value = str_replace("\n", '\n', $value);
+
+			if (strpos($value, '\n') !== false)
+			{
+				return '"' . str_replace(array('$', '"'), array('\\$', '\\"'), $value) . '"';
+			}
+			else
+			{
+				return "'" . str_replace("'", "\\'", $value) . "'";
+			}
+		};
+
+		/** @var \DOMElement[] $units */
 		foreach ($units as $unit)
 		{
 			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');
@@ -672,22 +738,12 @@ abstract class System
 				continue;
 			}
 
-			$value = str_replace("\n", '\n', $node->item(0)->nodeValue);
+			$value = $node->item(0)->nodeValue;
 
 			// Some closing </em> tags oddly have an extra space in
 			if (strpos($value, '</ em>') !== false)
 			{
 				$value = str_replace('</ em>', '</em>', $value);
-			}
-
-			// Quote the value
-			if (strpos($value, '\n') !== false)
-			{
-				$value = '"' . str_replace('"', '\\"', $value) . '"';
-			}
-			else
-			{
-				$value = "'" . str_replace("'", "\\'", $value) . "'";
 			}
 
 			$chunks = explode('.', $unit->getAttribute('id'));
@@ -702,15 +758,30 @@ abstract class System
 			switch (count($chunks))
 			{
 				case 2:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]] = $value;
+					}
 					break;
 
 				case 3:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]] = $value;
+					}
 					break;
 
 				case 4:
-					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $value . ";\n";
+					$return .= "\$GLOBALS['TL_LANG']['" . $chunks[0] . "'][" . $quotekey($chunks[1]) . "][" . $quotekey($chunks[2]) . "][" . $quotekey($chunks[3]) . "] = " . $quotevalue($value) . ";\n";
+
+					if ($blnLoad)
+					{
+						$GLOBALS['TL_LANG'][$chunks[0]][$chunks[1]][$chunks[2]][$chunks[3]] = $value;
+					}
 					break;
 			}
 		}
@@ -736,6 +807,7 @@ abstract class System
 		}
 
 		$objFile->delete();
+
 		return true;
 	}
 

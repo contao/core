@@ -45,7 +45,7 @@
         <source>Here you can enter the image title (&lt;em&gt;title&lt;/em&gt; attribute).</source>
       </trans-unit>
       <trans-unit id="tl_content.size.0">
-        <source>Image width and height</source>
+        <source>Image size</source>
       </trans-unit>
       <trans-unit id="tl_content.size.1">
         <source>Here you can set the image dimensions and the resize mode.</source>
@@ -277,6 +277,12 @@
       </trans-unit>
       <trans-unit id="tl_content.sortBy.1">
         <source>Please choose the sort order.</source>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.0">
+        <source>Ignore files without meta data</source>
+      </trans-unit>
+      <trans-unit id="tl_content.metaIgnore.1">
+        <source>Do not show files without meta data matching the page language.</source>
       </trans-unit>
       <trans-unit id="tl_content.galleryTpl.0">
         <source>Gallery template</source>
@@ -583,6 +589,12 @@
       </trans-unit>
       <trans-unit id="tl_content.editarticle.1">
         <source>Edit article ID %s</source>
+      </trans-unit>
+      <trans-unit id="tl_content.list.1">
+        <source>Import list items from a CSV file</source>
+      </trans-unit>
+      <trans-unit id="tl_content.table.1">
+        <source>Import table items from a CSV file</source>
       </trans-unit>
     </body>
   </file>

@@ -44,6 +44,18 @@
       <trans-unit id="tl_templates.pasteinto.1">
         <source>Paste into this folder</source>
       </trans-unit>
+      <trans-unit id="tl_templates.compare.0">
+        <source>Compare template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.compare.1">
+        <source>Compare "%s" with another template</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.overridesAnotherTpl">
+        <source>This template overrides "%s".</source>
+      </trans-unit>
+      <trans-unit id="tl_templates.pleaseSelect">
+        <source>Please select a template from the list above and click "Show differences".</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

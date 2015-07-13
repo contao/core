@@ -3,29 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Versions
- *
  * Provide methods to handle versioning.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
-class Versions extends \Backend
+class Versions extends \Controller
 {
 
 	/**
@@ -46,15 +37,36 @@ class Versions extends \Backend
 	 */
 	protected $strPath;
 
+	/**
+	 * Edit URL
+	 * @var string
+	 */
+	protected $strEditUrl;
+
+	/**
+	 * Username
+	 * @var string
+	 */
+	protected $strUsername;
+
+	/**
+	 * User ID
+	 * @var integer
+	 */
+	protected $intUserId;
+
 
 	/**
 	 * Initialize the object
-	 * @param string
-	 * @param integer
+	 *
+	 * @param string  $strTable
+	 * @param integer $intPid
 	 */
 	public function __construct($strTable, $intPid)
 	{
+		$this->import('Database');
 		parent::__construct();
+
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
 
@@ -68,6 +80,39 @@ class Versions extends \Backend
 				$this->strPath = $objFile->path;
 			}
 		}
+	}
+
+
+	/**
+	 * Set the edit URL
+	 *
+	 * @param string $strEditUrl
+	 */
+	public function setEditUrl($strEditUrl)
+	{
+		$this->strEditUrl = $strEditUrl;
+	}
+
+
+	/**
+	 * Set the username
+	 *
+	 * @param string $strUsername
+	 */
+	public function setUsername($strUsername)
+	{
+		$this->strUsername = $strUsername;
+	}
+
+
+	/**
+	 * Set the user ID
+	 *
+	 * @param integer $intUserId
+	 */
+	public function setUserId($intUserId)
+	{
+		$this->intUserId = $intUserId;
 	}
 
 
@@ -118,11 +163,19 @@ class Versions extends \Backend
 
 		if ($this->strPath !== null)
 		{
-			$objRecord->content = file_get_contents(TL_ROOT . '/' . $this->strPath);
+			$objFile = new \File($this->strPath, true);
+
+			if ($objFile->extension == 'svgz')
+			{
+				$objRecord->content = gzdecode($objFile->getContent());
+			}
+			else
+			{
+				$objRecord->content = $objFile->getContent();
+			}
 		}
 
 		$intVersion = 1;
-		$this->import('BackendUser', 'User');
 
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
 									 ->execute($this->intPid, $this->strTable);
@@ -154,30 +207,23 @@ class Versions extends \Backend
 		{
 			$strDescription = $objRecord->selector;
 		}
-
-		$strUrl = \Environment::get('request');
-
-		// Save the real edit URL if the visibility is toggled via Ajax
-		if (preg_match('/&(amp;)?state=/', $strUrl))
+		elseif (isset($objRecord->subject))
 		{
-			$strUrl = preg_replace
-			(
-				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
-				array('', '$1$3', '$1act=edit'), $strUrl
-			);
+			$strDescription = $objRecord->subject;
 		}
 
 		$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=? AND fromTable=?")
 					   ->execute($this->intPid, $this->strTable);
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
-					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->User->username, $this->User->id, $strDescription, $strUrl, serialize($objRecord->row()));
+					   ->execute($this->intPid, ($intVersion == 1 ? $objRecord->tstamp : time()), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
 	}
 
 
 	/**
 	 * Restore a version
-	 * @param integer
+	 *
+	 * @param integer $intVersion
 	 */
 	public function restore($intVersion)
 	{
@@ -208,12 +254,14 @@ class Versions extends \Backend
 				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
 
 				// Unset fields that do not exist (see #5219)
-				foreach (array_keys($data) as $k)
+				$data = array_intersect_key($data, $arrFields);
+
+				$this->loadDataContainer($this->strTable);
+
+				// Reset fields added after storing the version to their default value (see #7755)
+				foreach (array_diff_key($arrFields, $data) as $k=>$v)
 				{
-					if (!isset($arrFields[$k]))
-					{
-						unset($data[$k]);
-					}
+					$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
 				}
 
 				$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
@@ -324,7 +372,7 @@ class Versions extends \Backend
 				$this->loadDataContainer($this->strTable);
 
 				// Get the order fields
-				$objDcaExtractor = new \DcaExtractor($this->strTable);
+				$objDcaExtractor = \DcaExtractor::getInstance($this->strTable);
 				$arrOrder = $objDcaExtractor->getOrderFields();
 
 				// Find the changed fields and highlight the changes
@@ -339,6 +387,13 @@ class Versions extends \Backend
 
 						$blnIsBinary = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'fileTree' || in_array($k, $arrOrder));
 
+						// Decrypt the values
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
+						{
+							$to[$k] = \Encryption::decrypt($to[$k]);
+							$from[$k] = \Encryption::decrypt($from[$k]);
+						}
+
 						// Convert serialized arrays into strings
 						if (is_array(($tmp = deserialize($to[$k]))) && !is_array($to[$k]))
 						{
@@ -348,6 +403,7 @@ class Versions extends \Backend
 						{
 							$from[$k] = $this->implodeRecursive($tmp, $blnIsBinary);
 						}
+
 						unset($tmp);
 
 						// Convert binary UUIDs to their hex equivalents (see #6365)
@@ -388,7 +444,7 @@ class Versions extends \Backend
 						}
 
 						$objDiff = new \Diff($from[$k], $to[$k]);
-						$strBuffer .= $objDiff->Render(new \Diff_Renderer_Html_Contao(array('field'=>($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
+						$strBuffer .= $objDiff->Render(new DiffRenderer(array('field'=>($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
 					}
 				}
 			}
@@ -400,6 +456,7 @@ class Versions extends \Backend
 			$strBuffer = '<p>'.$GLOBALS['TL_LANG']['MSC']['identicalVersions'].'</p>';
 		}
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
@@ -424,6 +481,7 @@ class Versions extends \Backend
 
 	/**
 	 * Render the versions dropdown menu
+	 *
 	 * @return string
 	 */
 	public function renderDropdown()
@@ -465,7 +523,8 @@ class Versions extends \Backend
 
 	/**
 	 * Add a list of versions to a template
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	public static function addToTemplate(\BackendTemplate $objTemplate)
 	{
@@ -476,11 +535,11 @@ class Versions extends \Backend
 
 		// Get the total number of versions
 		$objTotal = $objDatabase->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : ""))
-							    ->execute($objUser->id);
+								->execute($objUser->id);
 
-		$intPage   = \Input::get('vp') ?: 1;
-		$intOffset = ($intPage - 1) * 30;
 		$intLast   = ceil($objTotal->count / 30);
+		$intPage   = (\Input::get('vp') !== null) ? \Input::get('vp') : 1;
+		$intOffset = ($intPage - 1) * 30;
 
 		// Validate the page number
 		if ($intPage < 1 || ($intLast > 0 && $intPage > $intLast))
@@ -493,7 +552,7 @@ class Versions extends \Backend
 		$objTemplate->pagination = $objPagination->generate();
 
 		// Get the versions
-		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version WHERE version>1" . (!$objUser->isAdmin ? " AND userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
+		$objVersions = $objDatabase->prepare("SELECT pid, tstamp, version, fromTable, username, userid, description, editUrl, active FROM tl_version" . (!$objUser->isAdmin ? " WHERE userid=?" : "") . " ORDER BY tstamp DESC, pid, version DESC")
 								   ->limit(30, $intOffset)
 								   ->execute($objUser->id);
 
@@ -506,7 +565,7 @@ class Versions extends \Backend
 			$arrRow['to'] = $objVersions->version;
 			$arrRow['date'] = date(\Config::get('datimFormat'), $objVersions->tstamp);
 			$arrRow['description'] = \String::substr($arrRow['description'], 32);
-			$arrRow['fromTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
+			$arrRow['shortTable'] = \String::substr($arrRow['fromTable'], 18); // see #5769
 
 			if ($arrRow['editUrl'] != '')
 			{
@@ -545,9 +604,78 @@ class Versions extends \Backend
 
 
 	/**
+	 * Return the edit URL
+	 *
+	 * @return string
+	 */
+	protected function getEditUrl()
+	{
+		if ($this->strEditUrl !== null)
+		{
+			return sprintf($this->strEditUrl, $this->intPid);
+		}
+
+		$strUrl = \Environment::get('request');
+
+		// Save the real edit URL if the visibility is toggled via Ajax
+		if (preg_match('/&(amp;)?state=/', $strUrl))
+		{
+			$strUrl = preg_replace
+			(
+				array('/&(amp;)?id=[^&]+/', '/(&(amp;)?)t(id=[^&]+)/', '/(&(amp;)?)state=[^&]*/'),
+				array('', '$1$3', '$1act=edit'), $strUrl
+			);
+		}
+
+		// Correct the URL in "edit|override multiple" mode (see #7745)
+		$strUrl = preg_replace('/act=(edit|override)All/', 'act=edit&id=' . $this->intPid, $strUrl);
+
+		return $strUrl;
+	}
+
+
+	/**
+	 * Return the username
+	 *
+	 * @return string
+	 */
+	protected function getUsername()
+	{
+		if ($this->strUsername !== null)
+		{
+			return $this->strUsername;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->username;
+	}
+
+
+	/**
+	 * Return the user ID
+	 *
+	 * @return string
+	 */
+	protected function getUserId()
+	{
+		if ($this->intUserId !== null)
+		{
+			return $this->intUserId;
+		}
+
+		$this->import('BackendUser', 'User');
+
+		return $this->User->id;
+	}
+
+
+	/**
 	 * Implode a multi-dimensional array recursively
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param mixed   $var
+	 * @param boolean $binary
+	 *
 	 * @return string
 	 */
 	protected function implodeRecursive($var, $binary=false)

@@ -3,27 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class FileSelector
- *
  * Provide methods to handle input field "file tree".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property string  $path
+ * @property string  $fieldType
+ * @property string  $sort
+ * @property boolean $files
+ * @property boolean $filesOnly
+ * @property string  $extensions
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FileSelector extends \Widget
 {
@@ -49,6 +47,7 @@ class FileSelector extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -122,17 +121,19 @@ class FileSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view picker_selector'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'filemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['icon'] ?: 'filemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
 
 	/**
 	 * Generate a particular subpart of the file tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $folder
+	 * @param string  $strField
+	 * @param integer $level
+	 * @param boolean $mount
+	 *
 	 * @return string
 	 */
 	public function generateAjax($folder, $strField, $level, $mount=false)
@@ -175,16 +176,19 @@ class FileSelector extends \Widget
 		}
 
 		$this->convertValuesToPaths();
+
 		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
 	}
 
 
 	/**
 	 * Recursively render the filetree
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param string  $path
+	 * @param integer $intMargin
+	 * @param boolean $mount
+	 * @param boolean $blnProtected
+	 *
 	 * @return string
 	 */
 	protected function renderFiletree($path, $intMargin, $mount=false, $blnProtected=false)
@@ -209,9 +213,9 @@ class FileSelector extends \Widget
 		$xtnode = 'tree_' . $this->strTable . '_' . $this->strName;
 
 		// Get session data and toggle nodes
-		if ($this->Input->get($flag.'tg'))
+		if (\Input::get($flag.'tg'))
 		{
-			$session[$node][$this->Input->get($flag.'tg')] = (isset($session[$node][$this->Input->get($flag.'tg')]) && $session[$node][$this->Input->get($flag.'tg')] == 1) ? 0 : 1;
+			$session[$node][\Input::get($flag.'tg')] = (isset($session[$node][\Input::get($flag.'tg')]) && $session[$node][\Input::get($flag.'tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', \Environment::get('request')));
 		}
@@ -233,15 +237,18 @@ class FileSelector extends \Widget
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
+				if (strncmp($v, '.', 1) === 0)
 				{
-					$files[] = $path.'/'.$v;
 					continue;
 				}
 
-				if (substr($v, 0, 1) != '.')
+				if (is_dir($path . '/' . $v))
 				{
-					$folders[] = $path.'/'.$v;
+					$folders[] = $path . '/' . $v;
+				}
+				else
+				{
+					$files[] = $path . '/' . $v;
 				}
 			}
 		}
@@ -252,6 +259,13 @@ class FileSelector extends \Widget
 		natcasesort($files);
 		$files = array_values($files);
 
+		// Sort descending (see #4072)
+		if ($this->sort == 'desc')
+		{
+			$folders = array_reverse($folders);
+			$files = array_reverse($files);
+		}
+
 		$folderClass = ($this->files || $this->filesOnly) ? 'tl_folder' : 'tl_file';
 
 		// Process folders
@@ -259,7 +273,7 @@ class FileSelector extends \Widget
 		{
 			$countFiles = 0;
 			$content = scan($folders[$f]);
-			$return .= "\n    " . '<li class="'.$folderClass.'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
+			$return .= "\n    " . '<li class="'.$folderClass.' toggle_select" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
 
 			// Check whether there are subfolders or files
 			foreach ($content as $v)
@@ -273,7 +287,7 @@ class FileSelector extends \Widget
 			$tid = md5($folders[$f]);
 			$folderAttribute = 'style="margin-left:20px"';
 			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
-			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$currentFolder = str_replace(TL_ROOT . '/', '', $folders[$f]);
 			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
 
 			// Add a toggle button if there are childs
@@ -334,7 +348,7 @@ class FileSelector extends \Widget
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
 
-				$objFile = new \File($currentFile);
+				$objFile = new \File($currentFile, true);
 
 				// Check file extension
 				if (is_array($allowedExtensions) && !in_array($objFile->extension, $allowedExtensions))
@@ -342,18 +356,19 @@ class FileSelector extends \Widget
 					continue;
 				}
 
-				$return .= "\n    " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+				$return .= "\n    " . '<li class="tl_file toggle_select" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 				// Generate thumbnail
-				if ($objFile->isGdImage && $objFile->height > 0)
+				if ($objFile->isImage && $objFile->height > 0)
 				{
 					$thumbnail .= ' <span class="tl_gray">(' . $objFile->width . 'x' . $objFile->height . ')</span>';
 
-					if (\Config::get('thumbnails') && $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+					if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
 					{
-						$_height = ($objFile->height < 70) ? $objFile->height : 70;
+						$_height = ($objFile->height < 50) ? $objFile->height : 50;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
-						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px -19px">';
+
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
 					}
 				}
 
@@ -396,6 +411,23 @@ class FileSelector extends \Widget
 		elseif (empty($this->varValue[0]))
 		{
 			$this->varValue = array();
+		}
+
+		if (empty($this->varValue))
+		{
+			return;
+		}
+
+		// TinyMCE will pass the path instead of the ID
+		if (strncmp($this->varValue[0], \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0)
+		{
+			return;
+		}
+
+		// Ignore the numeric IDs when in switch mode (TinyMCE)
+		if (\Input::get('switch'))
+		{
+			return;
 		}
 
 		$objFiles = \FilesModel::findMultipleByIds($this->varValue);

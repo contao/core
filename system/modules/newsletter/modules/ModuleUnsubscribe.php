@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Newsletter
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleUnsubscribe
- *
  * Front end module "newsletter unsubscribe".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Newsletter
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleUnsubscribe extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleUnsubscribe extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['unsubscribe'][0]) . ' ###';
@@ -74,7 +67,10 @@ class ModuleUnsubscribe extends \Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new \FrontendTemplate($this->nl_template);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->nl_template);
+
+			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
 		}
 
@@ -203,16 +199,17 @@ class ModuleUnsubscribe extends \Module
 			}
 		}
 
-		// Prepare the e-mail text
-		$strText = str_replace('##domain##', \Idna::decode(\Environment::get('host')), $this->nl_unsubscribe);
-		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
+		// Prepare the simple token data
+		$arrData = array();
+		$arrData['domain'] = \Idna::decode(\Environment::get('host'));
+		$arrData['channel'] = $arrData['channels'] = implode("\n", $arrChannels);
 
 		// Confirmation e-mail
 		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Idna::decode(\Environment::get('host')));
-		$objEmail->text = $strText;
+		$objEmail->text = \String::parseSimpleTokens($this->nl_unsubscribe, $arrData);
 		$objEmail->sendTo($varInput);
 
 		// Redirect to the jumpTo page

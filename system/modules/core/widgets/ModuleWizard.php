@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleWizard
- *
  * Provide methods to handle modules of a page layout.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleWizard extends \Widget
 {
@@ -43,6 +34,7 @@ class ModuleWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -199,7 +191,7 @@ class ModuleWizard extends \Widget
 			// Add columns
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.static::optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['COLS'][$v]) && !is_array($GLOBALS['TL_LANG']['COLS'][$v])) ? $GLOBALS['TL_LANG']['COLS'][$v] : $v) .'</option>';
 			}
 
 			$return .= '

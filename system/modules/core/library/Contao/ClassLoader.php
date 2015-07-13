@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -25,9 +23,7 @@ namespace Contao;
  *     ClassLoader::addNamespace('Custom');
  *     ClassLoader::addClass('Custom\\Calendar', 'calendar/Calendar.php');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ClassLoader
 {
@@ -152,10 +148,10 @@ class ClassLoader
 			include TL_ROOT . '/' . self::$classes[$class];
 		}
 
-		// Find the class in the registered namespaces
-		elseif (($namespaced = self::findClass($class)) != false)
-		{
-			if (!class_exists($namespaced, false))
+ 		// Find the class in the registered namespaces
+		elseif (($namespaced = self::findClass($class)) !== null)
+ 		{
+			if (!class_exists($namespaced, false) && !interface_exists($namespaced, false))
 			{
 				if (\Config::get('debugMode'))
 				{
@@ -177,7 +173,7 @@ class ClassLoader
 	 *
 	 * @param string $class The class name
 	 *
-	 * @return string The full path including the namespace
+	 * @return string|null The full path including the namespace or null
 	 */
 	protected static function findClass($class)
 	{
@@ -189,7 +185,7 @@ class ClassLoader
 			}
 		}
 
-		return '';
+		return null;
 	}
 
 

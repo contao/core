@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -19,6 +17,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 	'news' => array
 	(
 		'tables'      => array('tl_news_archive', 'tl_news', 'tl_news_feed', 'tl_content'),
+		'icon'        => 'system/modules/news/assets/icon.gif',
 		'table'       => array('TableWizard', 'importTable'),
 		'list'        => array('ListWizard', 'importList')
 	)

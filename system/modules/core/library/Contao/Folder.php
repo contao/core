@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -25,9 +23,14 @@ namespace Contao;
  *         $folder->purge();
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property string  $hash     The MD5 hash
+ * @property string  $name     The folder name
+ * @property string  $basename Alias of $name
+ * @property string  $path     The folder path
+ * @property string  $value    Alias of $path
+ * @property integer $size     The folder size
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Folder extends \System
 {
@@ -119,12 +122,6 @@ class Folder extends \System
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported keys:
-	 *
-	 * * hash: the folder's MD5 hash
-	 * * path: the path to the folder
-	 * * size: the folder size
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -286,7 +283,7 @@ class Folder extends \System
 			new \Folder($strParent);
 		}
 
-		$return = $this->Files->rcopy($this->strFolder, $strNewName);
+		$this->Files->rcopy($this->strFolder, $strNewName);
 
 		// Update the database AFTER the folder has been renamed
 		if ($this->blnSyncDb)
@@ -294,7 +291,7 @@ class Folder extends \System
 			$this->objModel = \Dbafs::copyResource($this->strFolder, $strNewName);
 		}
 
-		return $return;
+		return true;
 	}
 
 
@@ -330,6 +327,11 @@ class Folder extends \System
 	 */
 	public function getModel()
 	{
+		if ($this->blnSyncDb && $this->objModel === null)
+		{
+			$this->objModel = \FilesModel::findByPath($this->strFolder);
+		}
+
 		return $this->objModel;
 	}
 
@@ -343,6 +345,7 @@ class Folder extends \System
 	{
 		$arrFiles = array();
 
+		/** @var \SplFileInfo[] $it */
 		$it = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator(
 				TL_ROOT . '/' . $this->strFolder,
@@ -350,14 +353,12 @@ class Folder extends \System
 			), \RecursiveIteratorIterator::SELF_FIRST
 		);
 
-		while ($it->valid())
+		foreach ($it as $i)
 		{
-			if ($it->getFilename() != '.DS_Store')
+			if (strncmp($i->getFilename(), '.', 1) !== 0)
 			{
-				$arrFiles[] = $it->getSubPathname();
+				$arrFiles[] = str_replace(TL_ROOT . '/' . $this->strFolder . '/', '', $i->getPathname());
 			}
-
-			$it->next();
 		}
 
 		return md5(implode('-', $arrFiles));
@@ -375,7 +376,7 @@ class Folder extends \System
 
 		foreach (scan(TL_ROOT . '/' . $this->strFolder, true) as $strFile)
 		{
-			if ($strFile == '.svn' || $strFile == '.DS_Store')
+			if (strncmp($strFile, '.', 1) === 0)
 			{
 				continue;
 			}

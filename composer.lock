@@ -1,35 +1,29 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f005f71a223747f9ed58bd6e0964fba6",
+    "hash": "338ebaa43d969ec72190efac41c7e7f0",
     "packages": [
         {
-            "name": "contao/idna",
-            "version": "dev-master",
+            "name": "contao-components/compass",
+            "version": "0.12.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/contao/idna.git",
-                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c"
+                "url": "https://github.com/contao-components/compass.git",
+                "reference": "a174266fa89c3c808a9c2c090bf64693dec237f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contao/idna/zipball/176e7549aeac534f3be8dfbf8a543fd9c54b431c",
-                "reference": "176e7549aeac534f3be8dfbf8a543fd9c54b431c",
+                "url": "https://api.github.com/repos/contao-components/compass/zipball/a174266fa89c3c808a9c2c090bf64693dec237f2",
+                "reference": "a174266fa89c3c808a9c2c090bf64693dec237f2",
                 "shasum": ""
             },
             "type": "library",
-            "autoload": {
-                "classmap": [
-                    "idna_convert.class.php",
-                    "uctc.php"
-                ]
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1+"
+                "MIT"
             ],
             "authors": [
                 {
@@ -37,95 +31,21 @@
                     "homepage": "https://github.com/leofeyer"
                 }
             ],
-            "description": "A library for encoding and decoding internationalized domain names.",
-            "time": "2014-05-17 19:04:55"
-        },
-        {
-            "name": "contao/php-diff",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/contao/php-diff.git",
-                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/contao/php-diff/zipball/9928f73548f26c4b8627d78a3722e52f63efadbd",
-                "reference": "9928f73548f26c4b8627d78a3722e52f63efadbd",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Diff": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Leo Feyer",
-                    "homepage": "https://github.com/leofeyer"
-                }
-            ],
-            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2014-05-17 19:04:01"
-        },
-        {
-            "name": "leafo/lessphp",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leafo/lessphp.git",
-                "reference": "51f3f06f0fe78a722dabfd14578444bdd078d9de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/51f3f06f0fe78a722dabfd14578444bdd078d9de",
-                "reference": "51f3f06f0fe78a722dabfd14578444bdd078d9de",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.3-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "lessc.inc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
-                }
-            ],
-            "description": "lessphp is a compiler for LESS written in PHP.",
-            "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-08-09 17:09:19"
+            "description": "Compass integration for Contao Open Source CMS",
+            "time": "2014-11-18 08:30:16"
         },
         {
             "name": "leafo/scssphp",
-            "version": "dev-master",
+            "version": "v0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "8c08da585537e97efd528c7d278463d2b9396371"
+                "reference": "7917e45591d2170031d91111fe9bf3aa64aed6d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/8c08da585537e97efd528c7d278463d2b9396371",
-                "reference": "8c08da585537e97efd528c7d278463d2b9396371",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/7917e45591d2170031d91111fe9bf3aa64aed6d0",
+                "reference": "7917e45591d2170031d91111fe9bf3aa64aed6d0",
                 "shasum": ""
             },
             "require": {
@@ -167,55 +87,20 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2014-08-12 22:41:53"
-        },
-        {
-            "name": "leafo/scssphp-compass",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leafo/scssphp-compass.git",
-                "reference": "f1631ddb17731326863954d99b39694f0bbed6ec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp-compass/zipball/f1631ddb17731326863954d99b39694f0bbed6ec",
-                "reference": "f1631ddb17731326863954d99b39694f0bbed6ec",
-                "shasum": ""
-            },
-            "require": {
-                "leafo/scssphp": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "compass.inc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
-                }
-            ],
-            "description": "Compass for scssphp",
-            "homepage": "http://leafo.net/scssphp/",
-            "time": "2012-08-02 02:04:32"
+            "time": "2015-06-02 14:16:57"
         },
         {
             "name": "michelf/php-markdown",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michelf/php-markdown.git",
-                "reference": "de9a19c7bf352d41cc99ed86c3c0ef17e87394b6"
+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/de9a19c7bf352d41cc99ed86c3c0ef17e87394b6",
-                "reference": "de9a19c7bf352d41cc99ed86c3c0ef17e87394b6",
+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/e1aabe18173231ebcefc90e615565742fc1c7fd9",
+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9",
                 "shasum": ""
             },
             "require": {
@@ -238,22 +123,115 @@
             ],
             "authors": [
                 {
-                    "name": "Michel Fortin",
-                    "email": "michel.fortin@michelf.ca",
-                    "homepage": "http://michelf.ca/",
-                    "role": "Developer"
-                },
-                {
                     "name": "John Gruber",
                     "homepage": "http://daringfireball.net/"
+                },
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
                 }
             ],
             "description": "PHP Markdown",
-            "homepage": "http://michelf.ca/projects/php-markdown/",
+            "homepage": "https://michelf.ca/projects/php-markdown/",
             "keywords": [
                 "markdown"
             ],
-            "time": "2014-05-05 02:43:50"
+            "time": "2015-03-01 12:03:08"
+        },
+        {
+            "name": "oyejorge/less.php",
+            "version": "v1.7.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oyejorge/less.php.git",
+                "reference": "fc971e6d3eb54dff3d3eba4734ff207d37cb4e0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/fc971e6d3eb54dff3d3eba4734ff207d37cb4e0e",
+                "reference": "fc971e6d3eb54dff3d3eba4734ff207d37cb4e0e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "bin": [
+                "bin/lessc"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Less": "lib/"
+                },
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Agar",
+                    "homepage": "https://github.com/agar"
+                },
+                {
+                    "name": "Martin Jantošovič",
+                    "homepage": "https://github.com/Mordred"
+                },
+                {
+                    "name": "Josh Schmidt",
+                    "homepage": "https://github.com/oyejorge"
+                }
+            ],
+            "description": "PHP port of the Javascript version of LESS http://lesscss.org",
+            "homepage": "http://lessphp.gpeasy.com",
+            "keywords": [
+                "css",
+                "less",
+                "less.js",
+                "lesscss",
+                "php",
+                "stylesheet"
+            ],
+            "time": "2015-05-27 17:50:32"
+        },
+        {
+            "name": "phpspec/php-diff",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/php-diff.git",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Diff": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
+                }
+            ],
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "time": "2013-11-01 13:02:21"
         },
         {
             "name": "simplepie/simplepie",
@@ -311,20 +289,20 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.2.1",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af"
+                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/2b9af56cc676c338d52fca4c657e5bdff73bb7af",
-                "reference": "2b9af56cc676c338d52fca4c657e5bdff73bb7af",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/31454f258f10329ae7c48763eb898a75c39e0a9f",
+                "reference": "31454f258f10329ae7c48763eb898a75c39e0a9f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.4"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.1"
@@ -332,7 +310,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.2-dev"
+                    "dev-master": "5.4-dev"
                 }
             },
             "autoload": {
@@ -346,13 +324,11 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "name": "Chris Corbyn"
                 },
                 {
-                    "name": "Chris Corbyn"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
@@ -361,20 +337,20 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-06-13 11:44:54"
+            "time": "2015-03-14 06:06:39"
         },
         {
             "name": "tecnick.com/tcpdf",
-            "version": "6.0.091",
+            "version": "6.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a"
+                "reference": "3dee9e7f3a414875fd1d9f4f1dfc2433493a86d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/5252fd2e968ef17854ec0915ab3c600272c00f8a",
-                "reference": "5252fd2e968ef17854ec0915ab3c600272c00f8a",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/3dee9e7f3a414875fd1d9f4f1dfc2433493a86d2",
+                "reference": "3dee9e7f3a414875fd1d9f4f1dfc2433493a86d2",
                 "shasum": ""
             },
             "require": {
@@ -424,21 +400,64 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2014-08-13 16:57:25"
+            "time": "2015-04-29 16:13:58"
+        },
+        {
+            "name": "true/punycode",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/true/php-punycode.git",
+                "reference": "21c0025130b4e2b2d0b7dbe5f86e9e1512507656"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/true/php-punycode/zipball/21c0025130b4e2b2d0b7dbe5f86e9e1512507656",
+                "reference": "21c0025130b4e2b2d0b7dbe5f86e9e1512507656",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.x",
+                "satooshi/php-coveralls": "dev-master",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "True\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renan Gonçalves",
+                    "email": "renan.saddam@gmail.com"
+                }
+            ],
+            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
+            "homepage": "https://github.com/true/php-punycode",
+            "keywords": [
+                "idna",
+                "punycode"
+            ],
+            "time": "2015-03-12 16:49:35"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "contao/idna": 20,
-        "contao/php-diff": 20,
-        "leafo/scssphp": 20,
-        "leafo/scssphp-compass": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.2"
+        "php": ">=5.4.0"
     },
     "platform-dev": []
 }

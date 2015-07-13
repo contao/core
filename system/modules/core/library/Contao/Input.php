@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -28,9 +26,7 @@ namespace Contao;
  *         $password = Input::post('password');
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Input
 {
@@ -106,6 +102,8 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			$varValue = static::encodeInsertTags($varValue);
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -150,6 +148,11 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -188,6 +191,11 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -218,6 +226,40 @@ class Input
 			$varValue = static::stripSlashes($varValue);
 			$varValue = static::preserveBasicEntities($varValue);
 			$varValue = static::xssClean($varValue);
+
+			if (TL_MODE != 'BE')
+			{
+				$varValue = static::encodeInsertTags($varValue);
+			}
+
+			static::$arrCache[$strCacheKey][$strKey] = $varValue;
+		}
+
+		return static::$arrCache[$strCacheKey][$strKey];
+	}
+
+
+	/**
+	 * Return a raw, unsafe and unfiltered $_POST variable
+	 *
+	 * @param string $strKey The variable name
+	 *
+	 * @return mixed The raw variable value
+	 *
+	 * @internal
+	 */
+	public static function postUnsafeRaw($strKey)
+	{
+		$strCacheKey = 'postUnsafeRaw';
+
+		if (!isset(static::$arrCache[$strCacheKey][$strKey]))
+		{
+			$varValue = static::findPost($strKey);
+
+			if ($varValue === null)
+			{
+				return $varValue;
+			}
 
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
@@ -257,6 +299,8 @@ class Input
 				$varValue = static::encodeSpecialChars($varValue);
 			}
 
+			$varValue = static::encodeInsertTags($varValue);
+
 			static::$arrCache[$strCacheKey][$strKey] = $varValue;
 		}
 
@@ -273,6 +317,9 @@ class Input
 	 */
 	public static function setGet($strKey, $varValue, $blnAddUnused=false)
 	{
+		// Convert special characters (see #7829)
+		$strKey = str_replace(array(' ', '.', '['), '_', $strKey);
+
 		$strKey = static::cleanKey($strKey);
 
 		unset(static::$arrCache['getEncoded'][$strKey]);
@@ -309,6 +356,7 @@ class Input
 		unset(static::$arrCache['postHtmlEncoded'][$strKey]);
 		unset(static::$arrCache['postHtmlDecoded'][$strKey]);
 		unset(static::$arrCache['postRaw'][$strKey]);
+		unset(static::$arrCache['postUnsafeRaw'][$strKey]);
 
 		if ($varValue === null)
 		{
@@ -481,9 +529,20 @@ class Input
 			return $varValue;
 		}
 
-		$varValue = str_replace(array('<!--','<![', '-->'), array('&lt;!--', '&lt;![', '--&gt;'), $varValue);
+		// Encode opening arrow brackets (see #3998)
+		$varValue = preg_replace_callback('@</?([^\s<>/]*)@', function ($matches) use ($strAllowedTags)
+		{
+			if ($matches[1] == '' || strpos(strtolower($strAllowedTags), '<' . strtolower($matches[1]) . '>') === false)
+			{
+				$matches[0] = str_replace('<', '&lt;', $matches[0]);
+			}
+
+			return $matches[0];
+		}, $varValue);
+
+		// Strip the tags and restore HTML comments
 		$varValue = strip_tags($varValue, $strAllowedTags);
-		$varValue = str_replace(array('&lt;!--', '&lt;![', '--&gt;'), array('<!--', '<![', '-->'), $varValue);
+		$varValue = str_replace(array('&lt;!--', '&lt;!['), array('<!--', '<!['), $varValue);
 
 		// Recheck for encoded null bytes
 		while (strpos($varValue, '\\0') !== false)
@@ -719,6 +778,19 @@ class Input
 		$arrReplace = array('&#35;', '&#60;', '&#62;', '&#40;', '&#41;', '&#92;', '&#61;');
 
 		return str_replace($arrSearch, $arrReplace, $varValue);
+	}
+
+
+	/**
+	 * Encode the opening and closing delimiters of insert tags
+	 *
+	 * @param string $varValue The input string
+	 *
+	 * @return string The encoded input string
+	 */
+	public static function encodeInsertTags($varValue)
+	{
+		return str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $varValue);
 	}
 
 

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Faq
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -38,7 +36,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'pid,published,sorting' => 'index'
 			)
 		)
 	),
@@ -138,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['sorting'],
 			'sorting'                 => true,
-			'flag'                    => 2,
+			'flag'                    => 11,
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'tstamp' => array
@@ -175,8 +173,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
 			'search'                  => true,
+			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 1,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
@@ -224,9 +223,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -234,7 +233,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -244,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'fieldType'=>'radio', 'filesOnly'=>true, 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_faq', 'pagePicker')
@@ -293,7 +292,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'noComments' => array
@@ -319,12 +318,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 
 
 /**
- * Class tl_faq
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Faq
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_faq extends Backend
 {
@@ -355,10 +351,13 @@ class tl_faq extends Backend
 
 	/**
 	 * Auto-generate the FAQ alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -392,7 +391,9 @@ class tl_faq extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listQuestions($arrRow)
@@ -403,37 +404,41 @@ class tl_faq extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
-'.$arrRow['answer'].'
+' . String::insertTagToSrc($arrRow['answer']) . '
 </div>' . "\n";
 	}
 
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="' . ((strpos($dc->value, '{{link_url::') !== false) ? 'contao/page.php' : 'contao/file.php') . '?do=' . Input::get('do') . '&amp;table=' . $dc->table . '&amp;field=' . $dc->field . '&amp;value=' . str_replace(array('{{link_url::', '}}'), '', $dc->value) . '&amp;switch=1' . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']) . '" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])) . '\',\'url\':this.href,\'id\':\'' . $dc->field . '\',\'tag\':\'ctrl_'. $dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '') . '\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -456,10 +461,12 @@ class tl_faq extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions to publish
 		if (!$this->User->hasAccess('tl_faq::published', 'alexf'))
@@ -479,17 +486,17 @@ class tl_faq extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();

@@ -3,34 +3,26 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class DC_File
- *
  * Provide methods to edit the local configuration file.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DC_File extends \DataContainer implements \editable
 {
 
 	/**
 	 * Initialize the object
-	 * @param string
+	 *
+	 * @param string $strTable
 	 */
 	public function __construct($strTable)
 	{
@@ -68,6 +60,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function create()
@@ -78,6 +71,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function cut()
@@ -88,6 +82,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function copy()
@@ -98,6 +93,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Automatically switch to edit mode
+	 *
 	 * @return string
 	 */
 	public function move()
@@ -108,6 +104,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Auto-generate a form to edit the local configuration file
+	 *
 	 * @return string
 	 */
 	public function edit()
@@ -323,8 +320,6 @@ class DC_File extends \DataContainer implements \editable
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
@@ -384,7 +379,8 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Save the current value
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
 	 */
 	protected function save($varValue)
 	{
@@ -419,9 +415,9 @@ class DC_File extends \DataContainer implements \editable
 			}
 
 			// Convert date formats into timestamps
-			if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 			{
-				$objDate = new \Date($varValue, \Config::get($arrData['eval']['rgxp'] . 'Format'));
+				$objDate = new \Date($varValue, \Date::getFormatFromRgxp($arrData['eval']['rgxp']));
 				$varValue = $objDate->tstamp;
 			}
 
@@ -500,6 +496,7 @@ class DC_File extends \DataContainer implements \editable
 
 	/**
 	 * Return the name of the current palette
+	 *
 	 * @return string
 	 */
 	public function getPalette()

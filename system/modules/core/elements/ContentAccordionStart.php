@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentAccordionStart
- *
  * Front end content element "accordion" (wrapper start).
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentAccordionStart extends \ContentElement
 {
@@ -43,7 +34,11 @@ class ContentAccordionStart extends \ContentElement
 		if (TL_MODE == 'BE')
 		{
 			$this->strTemplate = 'be_wildcard';
-			$this->Template = new \BackendTemplate($this->strTemplate);
+
+			/** @var \BackendTemplate|object $objTemplate */
+			$objTemplate = new \BackendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->title = $this->mooHeadline;
 		}
 

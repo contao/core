@@ -3,27 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class MetaWizard
- *
  * Provide methods to handle file meta information.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array $metaFields
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class MetaWizard extends \Widget
 {
@@ -43,7 +36,9 @@ class MetaWizard extends \Widget
 
 	/**
 	 * Trim the values and add new languages if necessary
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	public function validator($varInput)
@@ -71,6 +66,7 @@ class MetaWizard extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -87,6 +83,12 @@ class MetaWizard extends \Widget
 		$return = '';
 		$taken = array();
 
+		$this->import('Database');
+
+		// Only show the root page languages (see #7112, #7667)
+		$objRootLangs = $this->Database->query("SELECT REPLACE(language, '-', '_') AS language FROM tl_page WHERE type='root'");
+		$languages = array_intersect_key($languages, array_flip($objRootLangs->fetchEach('language')));
+
 		// Add the existing entries
 		if (!empty($this->varValue))
 		{
@@ -98,7 +100,7 @@ class MetaWizard extends \Widget
 				$return .= '
     <li class="' . (($count%2 == 0) ? 'even' : 'odd') . '" data-language="' . $lang . '">';
 
-				$return .= '<span class="lang">' . $languages[$lang] . ' ' . \Image::getHtml('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['aw_delete']) . '"') . '</span>';
+				$return .= '<span class="lang">' . $languages[$lang] . ' ' . \Image::getHtml('delete.gif', '', 'class="tl_metawizard_img" onclick="Backend.metaDelete(this)"') . '</span>';
 
 				// Take the fields from the DCA (see #4327)
 				foreach ($this->metaFields as $field)

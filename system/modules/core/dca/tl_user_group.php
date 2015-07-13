@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -141,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'options'                 => array('css', 'modules', 'layout', 'theme_import', 'theme_export'),
+			'options'                 => array('css', 'modules', 'layout', 'image_sizes', 'theme_import', 'theme_export'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true),
 			'sql'                     => "blob NULL"
@@ -241,12 +239,9 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 
 
 /**
- * Class tl_user_group
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_user_group extends Backend
 {
@@ -262,8 +257,10 @@ class tl_user_group extends Backend
 
 	/**
 	 * Add an image to each record
-	 * @param array
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $label
+	 *
 	 * @return string
 	 */
 	public function addIcon($row, $label)
@@ -281,6 +278,7 @@ class tl_user_group extends Backend
 
 	/**
 	 * Return all modules except profile modules
+	 *
 	 * @return array
 	 */
 	public function getModules()
@@ -302,6 +300,7 @@ class tl_user_group extends Backend
 
 	/**
 	 * Return all excluded fields as HTML drop down menu
+	 *
 	 * @return array
 	 */
 	public function getExcludedFields()
@@ -351,25 +350,28 @@ class tl_user_group extends Backend
 		}
 
 		ksort($arrReturn);
+
 		return $arrReturn;
 	}
 
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -392,10 +394,12 @@ class tl_user_group extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions
 		if (!$this->User->hasAccess('tl_user_group::disable', 'alexf'))
@@ -415,11 +419,11 @@ class tl_user_group extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}

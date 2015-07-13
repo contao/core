@@ -1,9 +1,9 @@
 
 <?php if ($this->fsType == 'fsStart'): ?>
 
-  <fieldset<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; ?>>
+  <fieldset<?php if ($this->class): ?> class="<?= $this->class ?>"<?php endif; ?>>
   <?php if ($this->label): ?>
-    <legend><?php echo $this->label; ?></legend>
+    <legend><?= $this->label ?></legend>
   <?php endif; ?>
 
 <?php else: ?>

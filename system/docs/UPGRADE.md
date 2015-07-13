@@ -1,10 +1,35 @@
 Contao Open Source CMS API changes
 ==================================
 
+Version 3.4 to 3.5
+------------------
+
+### PHP version
+
+The minimum PHP version is raised from 5.3.7 to 5.4.0.
+
+
+### DataContainer
+
+The `DataContainer` class is now abstract, which however should not matter,
+because the contructor has been protected ever since. Also, the methods
+`getPalette()` and `save()` have been added as abstract methods, which need to
+be implemented by all child classes (already the case in the `DC_` classes).
+
+
+Version 3.3 to 3.4
+------------------
+
+### PHP version
+
+We are using a new Blowfish mode that deals with potential high-bit attacks in
+Contao 3.4, therefore the minimum PHP version is raised from 5.3.2 to 5.3.7.
+
+
 Version 3.2 to 3.3
 ------------------
 
-### "processFormData" hook
+### processFormData hook
 
 The "processFormData" hook now passes `$arrSubmitted` as first argument instead
 of `$_SESSION['FORM_DATA']`. This is actually a bug fix, because so far the hook
@@ -32,7 +57,7 @@ public function myProcessFormData($arrData, …) {
 Version 3.1 to 3.2
 ------------------
 
-### `Controller::addImageToTemplate()`
+### Controller::addImageToTemplate()
 
 Before Contao 3.2.2, the `addImageToTemplate()` method would override the "href"
 property with the image URL or link target even if the property was set already.
@@ -135,7 +160,7 @@ In case you have been using the "buttons_callback", please make sure to adjust
 your extension accordingly.
 
 
-### `Model::save()`
+### Model::save()
 
 In Contao 3.0 and 3.1 it was possible to create two models for the same database
 record by passing `true` to the `Model::save()` method. However, this could lead

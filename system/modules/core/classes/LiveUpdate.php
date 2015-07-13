@@ -3,33 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class LiveUpdate
- *
  * Maintenance module "Live Update".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class LiveUpdate extends \Backend implements \executable
 {
 
 	/**
 	 * Return true if the module is active
+	 *
 	 * @return boolean
 	 */
 	public function isActive()
@@ -40,10 +32,12 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function run()
 	{
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
@@ -69,10 +63,6 @@ class LiveUpdate extends \Backend implements \executable
 		{
 			\Config::set('liveUpdateBase', str_replace('http://', 'https://', \Config::get('liveUpdateBase')));
 		}
-		else
-		{
-			\Config::set('liveUpdateBase', str_replace('https://', 'http://', \Config::get('liveUpdateBase')));
-		}
 
 		$objTemplate->uid = \Config::get('liveUpdateId');
 		$objTemplate->updateServer = \Config::get('liveUpdateBase') . 'index.php';
@@ -97,7 +87,8 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Run the Live Update
-	 * @param \BackendTemplate
+	 *
+	 * @param \BackendTemplate|object $objTemplate
 	 */
 	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
@@ -106,13 +97,20 @@ class LiveUpdate extends \Backend implements \executable
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
-			$objRequest = new \Request();
+			// HOOK: proxy module
+			if (Config::get('useProxy')) {
+				$objRequest = new \ProxyRequest();
+			} else {
+				$objRequest = new \Request();
+			}
+
 			$objRequest->send(\Config::get('liveUpdateBase') . 'request.php?token=' . \Input::get('token'));
 
 			if ($objRequest->hasError())
 			{
 				$objTemplate->updateClass = 'tl_error';
 				$objTemplate->updateMessage = $objRequest->response;
+
 				return;
 			}
 
@@ -132,8 +130,10 @@ class LiveUpdate extends \Backend implements \executable
 				}
 				catch (\Exception $e)
 				{
+					/** @var \BackendTemplate|object $objTemplate */
 					$objTemplate->updateClass = 'tl_error';
 					$objTemplate->updateMessage = 'Error updating ' . $objArchive->file_name . ': ' . $e->getMessage();
+
 					return;
 				}
 			}

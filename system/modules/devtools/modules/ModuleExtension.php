@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Devtools
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleExtension
- *
  * Back end module "extension".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Devtools
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleExtension extends \BackendModule
 {
@@ -43,11 +34,13 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Generate the module
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		$this->objDc = func_get_arg(0);
+
 		return parent::generate();
 	}
 
@@ -114,6 +107,8 @@ class ModuleExtension extends \BackendModule
 					\File::putContent('system/modules/' . $objModule->folder . '/templates/' . $strTemplate . '.html5', $tplTemplate->parse());
 				}
 			}
+
+			$arrTables = array();
 
 			// Front end
 			if ($objModule->addFeMod)
@@ -222,12 +217,14 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Return a new template object
-	 * @param string
-	 * @param \Database\Result
-	 * @return \BackendTemplate
+	 * @param string $strTemplate
+	 * @param \Database\Result|object $objModule
+	 *
+	 * @return \BackendTemplate|object
 	 */
 	protected function newTemplate($strTemplate, \Database\Result $objModule)
 	{
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate($strTemplate);
 
 		$objTemplate->folder = $objModule->folder;
@@ -242,7 +239,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the subfolder of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessSubfolder($strClassName)
@@ -276,7 +275,9 @@ class ModuleExtension extends \BackendModule
 
 	/**
 	 * Try to guess the parent class of a class depending on its name
-	 * @param string
+	 *
+	 * @param string $strClassName
+	 *
 	 * @return string
 	 */
 	protected function guessParentClass($strClassName)

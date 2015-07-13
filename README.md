@@ -10,7 +10,7 @@ System requirements
 -------------------
 
  * Web server
- * PHP 5.3.2+ with GDlib, DOM, Phar and SOAP
+ * PHP 5.4.0+ with GDlib, DOM, Phar and SOAP
  * MySQL 5.0.3+
 
 
@@ -60,8 +60,8 @@ php composer.phar install --prefer-dist
 
 
 [1]: https://contao.org
-[2]: https://contao.org/manual/installation.html
-[3]: https://contao.org/manual.html
+[2]: https://docs.contao.org/books/manual/current/en/01-installation/installing-contao.html
+[3]: https://docs.contao.org/books/manual/current/
 [4]: system/docs/CHANGELOG.md
 [5]: system/docs/UPGRADE.md
 [6]: http://contaowiki.org

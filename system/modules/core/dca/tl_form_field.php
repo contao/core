@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -247,7 +245,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['minlength'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'maxlength' => array
@@ -255,7 +253,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'size' => array
@@ -264,7 +262,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'default'                 => array(4, 40),
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'multiple' => array
@@ -280,7 +278,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['mSize'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit'),
+			'eval'                    => array('rgxp'=>'natural'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'extensions' => array
@@ -368,7 +366,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'fSize' => array
@@ -376,7 +374,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['fSize'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'customTpl' => array
@@ -425,12 +423,9 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 
 
 /**
- * Class tl_form_field
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_form_field extends Backend
 {
@@ -574,7 +569,9 @@ class tl_form_field extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listFormFields($arrRow)
@@ -593,13 +590,14 @@ class tl_form_field extends Backend
 			return '';
 		}
 
+		/** @var Widget $objWidget */
 		$objWidget = new $strClass($arrRow);
 
 		$strWidget = $objWidget->parse();
 		$strWidget = preg_replace('/ name="[^"]+"/i', '', $strWidget);
 		$strWidget = str_replace(array(' type="submit"', ' autofocus', ' required'), array(' type="button"', '', ''), $strWidget);
 
-		if ($objWidget instanceof \FormHidden)
+		if ($objWidget instanceof FormHidden)
 		{
 			return $strType . "\n" . $objWidget->value . "\n</div>\n";
 		}
@@ -613,7 +611,9 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return a list of form fields
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getFields(DataContainer $dc)
@@ -648,6 +648,7 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return all form field templates as array
+	 *
 	 * @return array
 	 */
 	public function getFormFieldTemplates()
@@ -658,19 +659,21 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -687,10 +690,12 @@ class tl_form_field extends Backend
 
 	/**
 	 * Toggle the visibility of a form field
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions
 		Input::setGet('id', $intId);
@@ -708,11 +713,11 @@ class tl_form_field extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}

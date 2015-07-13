@@ -1,21 +1,17 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Stylect
- * @see     https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
 /**
- * Class Stylect
- *
  * Replace select menus with a nicer, JavaScript based solution.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <http://contao.org>
- * @author     Joe Ray Gregory <https://github.com/may17>
+ *
+ * @author Leo Feyer <http://contao.org>
+ * @author Joe Ray Gregory <https://github.com/may17>
  */
 var Stylect =
 {

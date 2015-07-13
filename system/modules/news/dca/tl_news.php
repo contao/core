@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -54,8 +52,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index',
-				'alias' => 'index'
+				'alias' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -141,8 +139,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'__selector__'                => array('addImage', 'addEnclosure', 'source', 'published'),
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend},subheadline,teaser;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -152,7 +150,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'addEnclosure'                => 'enclosure',
 		'source_internal'             => 'jumpTo',
 		'source_article'              => 'articleId',
-		'source_external'             => 'url,target'
+		'source_external'             => 'url,target',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -201,6 +200,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,
@@ -279,9 +279,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -289,7 +289,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -299,7 +299,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'fieldType'=>'radio', 'filesOnly'=>true, 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_news', 'pagePicker')
@@ -347,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'source' => array
@@ -430,7 +430,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'filter'                  => true,
 			'flag'                    => 1,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -454,12 +454,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 
 
 /**
- * Class tl_news
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_news extends Backend
 {
@@ -593,10 +590,13 @@ class tl_news extends Backend
 
 	/**
 	 * Auto-generate the news alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -630,7 +630,9 @@ class tl_news extends Backend
 
 	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listNewsArticles($arrRow)
@@ -641,7 +643,9 @@ class tl_news extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -677,7 +681,7 @@ class tl_news extends Backend
 
 			while ($objAlias->next())
 			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['COLS'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
@@ -687,7 +691,9 @@ class tl_news extends Backend
 
 	/**
 	 * Add the source options depending on the allowed fields (see #5498)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getSourceOptions(DataContainer $dc)
@@ -712,7 +718,7 @@ class tl_news extends Backend
 		}
 
 		// Add the "external" option
-		if ($this->User->hasAccess('tl_news::url', 'alexf') && $this->User->hasAccess('tl_news::target', 'alexf'))
+		if ($this->User->hasAccess('tl_news::url', 'alexf'))
 		{
 			$arrOptions[] = 'external';
 		}
@@ -730,7 +736,8 @@ class tl_news extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -763,7 +770,7 @@ class tl_news extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id);
+			$this->News->generateFeedsByArchive($id);
 		}
 
 		$this->import('Automator');
@@ -780,7 +787,8 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -799,23 +807,27 @@ class tl_news extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="' . ((strpos($dc->value, '{{link_url::') !== false) ? 'contao/page.php' : 'contao/file.php') . '?do=' . Input::get('do') . '&amp;table=' . $dc->table . '&amp;field=' . $dc->field . '&amp;value=' . str_replace(array('{{link_url::', '}}'), '', $dc->value) . '&amp;switch=1' . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']) . '" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])) . '\',\'url\':this.href,\'id\':\'' . $dc->field . '\',\'tag\':\'ctrl_'. $dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '') . '\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
 	/**
 	 * Return the "feature/unfeature element" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
@@ -845,8 +857,10 @@ class tl_news extends Backend
 
 	/**
 	 * Feature/unfeature a news item
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $intId
+	 * @param boolean $blnVisible
+	 *
 	 * @return string
 	 */
 	public function toggleFeatured($intId, $blnVisible)
@@ -894,19 +908,21 @@ class tl_news extends Backend
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -929,10 +945,12 @@ class tl_news extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer       $intId
+	 * @param boolean       $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions to edit
 		Input::setGet('id', $intId);
@@ -957,17 +975,17 @@ class tl_news extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();
@@ -976,6 +994,6 @@ class tl_news extends Backend
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);
 		$this->import('News');
-		$this->News->generateFeed(CURRENT_ID);
+		$this->News->generateFeedsByArchive(CURRENT_ID);
 	}
 }

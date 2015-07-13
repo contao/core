@@ -3,27 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageSelector
- *
  * Provide methods to handle input field "page tree".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property array  $rootNodes
+ * @property string $fieldType
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageSelector extends \Widget
 {
@@ -49,7 +43,8 @@ class PageSelector extends \Widget
 
 	/**
 	 * Load the database object
-	 * @param array
+	 *
+	 * @param array $arrAttributes
 	 */
 	public function __construct($arrAttributes=null)
 	{
@@ -60,6 +55,7 @@ class PageSelector extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -87,48 +83,53 @@ class PageSelector extends \Widget
 				$for = substr($for, 1);
 			}
 
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
-									  ->execute($for);
-
-			if ($objRoot->numRows > 0)
+			// Wrap in a try catch block in case the regular expression is invalid (see #7743)
+			try
 			{
-				// Respect existing limitations
-				if (is_array($this->rootNodes))
-				{
-					$arrRoot = array();
+				$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
+										  ->execute($for);
 
-					while ($objRoot->next())
+				if ($objRoot->numRows > 0)
+				{
+					// Respect existing limitations
+					if (is_array($this->rootNodes))
 					{
-						// Predefined node set (see #3563)
-						if (count(array_intersect($this->rootNodes, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						$arrRoot = array();
+
+						while ($objRoot->next())
 						{
-							$arrRoot[] = $objRoot->id;
+							// Predefined node set (see #3563)
+							if (count(array_intersect($this->rootNodes, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+							{
+								$arrRoot[] = $objRoot->id;
+							}
 						}
+
+						$arrIds = $arrRoot;
 					}
-
-					$arrIds = $arrRoot;
-				}
-				elseif ($this->User->isAdmin)
-				{
-					// Show all pages to admins
-					$arrIds = $objRoot->fetchEach('id');
-				}
-				else
-				{
-					$arrRoot = array();
-
-					while ($objRoot->next())
+					elseif ($this->User->isAdmin)
 					{
-						// Show only mounted pages to regular users
-						if (count(array_intersect($this->User->pagemounts, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
-						{
-							$arrRoot[] = $objRoot->id;
-						}
+						// Show all pages to admins
+						$arrIds = $objRoot->fetchEach('id');
 					}
+					else
+					{
+						$arrRoot = array();
 
-					$arrIds = $arrRoot;
+						while ($objRoot->next())
+						{
+							// Show only mounted pages to regular users
+							if (count(array_intersect($this->User->pagemounts, $this->Database->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+							{
+								$arrRoot[] = $objRoot->id;
+							}
+						}
+
+						$arrIds = $arrRoot;
+					}
 				}
 			}
+			catch (\Exception $e) {}
 
 			// Build the tree
 			foreach ($arrIds as $id)
@@ -214,16 +215,18 @@ class PageSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view picker_selector'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.\Image::getHtml($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['icon'] ?: 'pagemounts.gif').' '.(\Config::get('websiteTitle') ?: 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
 
 	/**
 	 * Generate a particular subpart of the page tree and return it as HTML string
-	 * @param integer
-	 * @param string
-	 * @param integer
+	 *
+	 * @param integer $id
+	 * @param string  $strField
+	 * @param integer $level
+	 *
 	 * @return string
 	 */
 	public function generateAjax($id, $strField, $level)
@@ -283,10 +286,12 @@ class PageSelector extends \Widget
 
 	/**
 	 * Recursively render the pagetree
-	 * @param int
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
+	 *
+	 * @param integer $id
+	 * @param integer $intMargin
+	 * @param boolean $protectedPage
+	 * @param boolean $blnNoRecursion
+	 *
 	 * @return string
 	 */
 	protected function renderPagetree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)
@@ -332,7 +337,7 @@ class PageSelector extends \Widget
 			}
 		}
 
-		$return .= "\n    " . '<li class="'.(($objPage->type == 'root') ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)" onclick="Theme.toggleSelect(this)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+		$return .= "\n    " . '<li class="'.(($objPage->type == 'root') ? 'tl_folder' : 'tl_file').' toggle_select" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 		$folderAttribute = 'style="margin-left:20px"';
 		$session[$node][$id] = is_numeric($session[$node][$id]) ? $session[$node][$id] : 0;

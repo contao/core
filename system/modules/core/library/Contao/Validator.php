@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -23,9 +21,7 @@ namespace Contao;
  *         $email->sendTo($recipient);
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Validator
 {
@@ -40,6 +36,19 @@ class Validator
 	public static function isNumeric($varValue)
 	{
 		return preg_match('/^-?\d+(\.\d+)?$/', $varValue);
+	}
+
+
+	/**
+	 * Natural numbers (nonnegative integers)
+	 *
+	 * @param mixed $varValue The value to be validated
+	 *
+	 * @return boolean True if the value is a natural number
+	 */
+	public static function isNatural($varValue)
+	{
+		return preg_match('/^\d+$/', $varValue);
 	}
 
 
@@ -159,11 +168,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$', \Idna::encodeUrl($varValue));
+			return mb_eregi('^[[:alnum:]\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$', \Idna::encodeUrl($varValue));
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]+$/u', \Idna::encodeUrl($varValue));
+			return preg_match('/^[\pN\pL\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$/u', \Idna::encodeUrl($varValue));
 		}
 	}
 
@@ -287,7 +296,7 @@ class Validator
 	{
 		if (strlen($varValue) == 16)
 		{
-			return ($varValue & pack('H*', '000000000000F000C000000000000000')) === pack('H*', '00000000000010008000000000000000');
+			return ($varValue & hex2bin('000000000000F000C000000000000000')) === hex2bin('00000000000010008000000000000000');
 		}
 
 		return false;
@@ -325,5 +334,94 @@ class Validator
 	public static function isGooglePlusId($varValue)
 	{
 		return preg_match('/^([0-9]{21}|\+[\pN\pL_-]+)$/u', $varValue);
+	}
+
+
+	/**
+	 * Insecure path potentially containing directory traversal
+	 *
+	 * @param string $strPath The file path
+	 *
+	 * @return boolean True if the file path is insecure
+	 */
+	public static function isInsecurePath($strPath)
+	{
+		// Normalize backslashes
+		$strPath = str_replace('\\', '/', $strPath);
+		$strPath = preg_replace('#//+#', '/', $strPath);
+
+		// Equals ..
+		if ($strPath == '..')
+		{
+			return true;
+		}
+
+		// Begins with ./
+		if (substr($strPath, 0, 2) == './')
+		{
+			return true;
+		}
+
+		// Begins with ../
+		if (substr($strPath, 0, 3) == '../')
+		{
+			return true;
+		}
+
+		// Ends with /.
+		if (substr($strPath, -2) == '/.')
+		{
+			return true;
+		}
+
+		// Ends with /..
+		if (substr($strPath, -3) == '/..')
+		{
+			return true;
+		}
+
+		// Contains /../
+		if (strpos($strPath, '/../') !== false)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Valid file name
+	 *
+	 * @param mixed $strName The file name
+	 *
+	 * @return boolean True if the file name is valid
+	 */
+	public static function isValidFileName($strName)
+	{
+		if ($strName == '')
+		{
+			return false;
+		}
+
+		// Special characters not supported on e.g. Windows
+		if (preg_match('@[\\\\/:*?"<>|]@', $strName))
+		{
+			return false;
+		}
+
+		// Invisible control characters or unused code points
+		if (preg_match('/[\pC]/u', $strName) !== 0)
+		{
+			return false;
+		}
+
+		// Must not be longer than 255 characters
+		if (utf8_strlen($strName) > 255)
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

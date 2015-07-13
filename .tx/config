@@ -2,372 +2,377 @@
 host = https://www.transifex.com
 type = XLIFF
 
-[contao.v3_3-calendar-default]
+[contao.v3_5-calendar-default]
 source_file = system/modules/calendar/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/default.xlf
 
-[contao.v3_3-calendar-modules]
+[contao.v3_5-calendar-modules]
 source_file = system/modules/calendar/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/modules.xlf
 
-[contao.v3_3-calendar-tl_calendar]
+[contao.v3_5-calendar-tl_calendar]
 source_file = system/modules/calendar/languages/en/tl_calendar.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_calendar.xlf
 
-[contao.v3_3-calendar-tl_calendar_events]
+[contao.v3_5-calendar-tl_calendar_events]
 source_file = system/modules/calendar/languages/en/tl_calendar_events.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_calendar_events.xlf
 
-[contao.v3_3-calendar-tl_calendar_feed]
+[contao.v3_5-calendar-tl_calendar_feed]
 source_file = system/modules/calendar/languages/en/tl_calendar_feed.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_calendar_feed.xlf
 
-[contao.v3_3-calendar-tl_module]
+[contao.v3_5-calendar-tl_module]
 source_file = system/modules/calendar/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-calendar-tl_user]
+[contao.v3_5-calendar-tl_user]
 source_file = system/modules/calendar/languages/en/tl_user.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_user.xlf
 
-[contao.v3_3-calendar-tl_user_group]
+[contao.v3_5-calendar-tl_user_group]
 source_file = system/modules/calendar/languages/en/tl_user_group.xlf
 source_lang = en
 file_filter = system/modules/calendar/languages/<lang>/tl_user_group.xlf
 
-[contao.v3_3-comments-default]
+[contao.v3_5-comments-default]
 source_file = system/modules/comments/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/comments/languages/<lang>/default.xlf
 
-[contao.v3_3-comments-modules]
+[contao.v3_5-comments-modules]
 source_file = system/modules/comments/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/comments/languages/<lang>/modules.xlf
 
-[contao.v3_3-comments-tl_comments]
+[contao.v3_5-comments-tl_comments]
 source_file = system/modules/comments/languages/en/tl_comments.xlf
 source_lang = en
 file_filter = system/modules/comments/languages/<lang>/tl_comments.xlf
 
-[contao.v3_3-comments-tl_content]
+[contao.v3_5-comments-tl_content]
 source_file = system/modules/comments/languages/en/tl_content.xlf
 source_lang = en
 file_filter = system/modules/comments/languages/<lang>/tl_content.xlf
 
-[contao.v3_3-comments-tl_module]
+[contao.v3_5-comments-tl_module]
 source_file = system/modules/comments/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/comments/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-core-countries]
+[contao.v3_5-core-countries]
 source_file = system/modules/core/languages/en/countries.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/countries.xlf
 
-[contao.v3_3-core-default]
+[contao.v3_5-core-default]
 source_file = system/modules/core/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/default.xlf
 
-[contao.v3_3-core-exception]
+[contao.v3_5-core-exception]
 source_file = system/modules/core/languages/en/exception.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/exception.xlf
 
-[contao.v3_3-core-explain]
+[contao.v3_5-core-explain]
 source_file = system/modules/core/languages/en/explain.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/explain.xlf
 
-[contao.v3_3-core-languages]
+[contao.v3_5-core-languages]
 source_file = system/modules/core/languages/en/languages.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/languages.xlf
 
-[contao.v3_3-core-modules]
+[contao.v3_5-core-modules]
 source_file = system/modules/core/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/modules.xlf
 
-[contao.v3_3-core-tl_article]
+[contao.v3_5-core-tl_article]
 source_file = system/modules/core/languages/en/tl_article.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_article.xlf
 
-[contao.v3_3-core-tl_content]
+[contao.v3_5-core-tl_content]
 source_file = system/modules/core/languages/en/tl_content.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_content.xlf
 
-[contao.v3_3-core-tl_files]
+[contao.v3_5-core-tl_files]
 source_file = system/modules/core/languages/en/tl_files.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_files.xlf
 
-[contao.v3_3-core-tl_form]
+[contao.v3_5-core-tl_form]
 source_file = system/modules/core/languages/en/tl_form.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_form.xlf
 
-[contao.v3_3-core-tl_form_field]
+[contao.v3_5-core-tl_form_field]
 source_file = system/modules/core/languages/en/tl_form_field.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_form_field.xlf
 
-[contao.v3_3-core-tl_install]
+[contao.v3_5-core-tl_image_size]
+source_file = system/modules/core/languages/en/tl_image_size.xlf
+source_lang = en
+file_filter = system/modules/core/languages/<lang>/tl_image_size.xlf
+
+[contao.v3_5-core-tl_image_size_item]
+source_file = system/modules/core/languages/en/tl_image_size_item.xlf
+source_lang = en
+file_filter = system/modules/core/languages/<lang>/tl_image_size_item.xlf
+
+[contao.v3_5-core-tl_install]
 source_file = system/modules/core/languages/en/tl_install.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_install.xlf
 
-[contao.v3_3-core-tl_layout]
+[contao.v3_5-core-tl_layout]
 source_file = system/modules/core/languages/en/tl_layout.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_layout.xlf
 
-[contao.v3_3-core-tl_log]
+[contao.v3_5-core-tl_log]
 source_file = system/modules/core/languages/en/tl_log.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_log.xlf
 
-[contao.v3_3-core-tl_maintenance]
+[contao.v3_5-core-tl_maintenance]
 source_file = system/modules/core/languages/en/tl_maintenance.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_maintenance.xlf
 
-[contao.v3_3-core-tl_member]
+[contao.v3_5-core-tl_member]
 source_file = system/modules/core/languages/en/tl_member.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_member.xlf
 
-[contao.v3_3-core-tl_member_group]
+[contao.v3_5-core-tl_member_group]
 source_file = system/modules/core/languages/en/tl_member_group.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_member_group.xlf
 
-[contao.v3_3-core-tl_module]
+[contao.v3_5-core-tl_module]
 source_file = system/modules/core/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-core-tl_page]
+[contao.v3_5-core-tl_page]
 source_file = system/modules/core/languages/en/tl_page.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_page.xlf
 
-[contao.v3_3-core-tl_settings]
+[contao.v3_5-core-tl_settings]
 source_file = system/modules/core/languages/en/tl_settings.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_settings.xlf
 
-[contao.v3_3-core-tl_style]
+[contao.v3_5-core-tl_style]
 source_file = system/modules/core/languages/en/tl_style.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_style.xlf
 
-[contao.v3_3-core-tl_style_sheet]
+[contao.v3_5-core-tl_style_sheet]
 source_file = system/modules/core/languages/en/tl_style_sheet.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_style_sheet.xlf
 
-[contao.v3_3-core-tl_templates]
+[contao.v3_5-core-tl_templates]
 source_file = system/modules/core/languages/en/tl_templates.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_templates.xlf
 
-[contao.v3_3-core-tl_theme]
+[contao.v3_5-core-tl_theme]
 source_file = system/modules/core/languages/en/tl_theme.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_theme.xlf
 
-[contao.v3_3-core-tl_undo]
+[contao.v3_5-core-tl_undo]
 source_file = system/modules/core/languages/en/tl_undo.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_undo.xlf
 
-[contao.v3_3-core-tl_user]
+[contao.v3_5-core-tl_user]
 source_file = system/modules/core/languages/en/tl_user.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_user.xlf
 
-[contao.v3_3-core-tl_user_group]
+[contao.v3_5-core-tl_user_group]
 source_file = system/modules/core/languages/en/tl_user_group.xlf
 source_lang = en
 file_filter = system/modules/core/languages/<lang>/tl_user_group.xlf
 
-[contao.v3_3-devtools-modules]
+[contao.v3_5-devtools-modules]
 source_file = system/modules/devtools/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/devtools/languages/<lang>/modules.xlf
 
-[contao.v3_3-devtools-tl_autoload]
+[contao.v3_5-devtools-tl_autoload]
 source_file = system/modules/devtools/languages/en/tl_autoload.xlf
 source_lang = en
 file_filter = system/modules/devtools/languages/<lang>/tl_autoload.xlf
 
-[contao.v3_3-devtools-tl_extension]
+[contao.v3_5-devtools-tl_extension]
 source_file = system/modules/devtools/languages/en/tl_extension.xlf
 source_lang = en
 file_filter = system/modules/devtools/languages/<lang>/tl_extension.xlf
 
-[contao.v3_3-devtools-tl_labels]
+[contao.v3_5-devtools-tl_labels]
 source_file = system/modules/devtools/languages/en/tl_labels.xlf
 source_lang = en
 file_filter = system/modules/devtools/languages/<lang>/tl_labels.xlf
 
-[contao.v3_3-faq-default]
+[contao.v3_5-faq-default]
 source_file = system/modules/faq/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/default.xlf
 
-[contao.v3_3-faq-modules]
+[contao.v3_5-faq-modules]
 source_file = system/modules/faq/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/modules.xlf
 
-[contao.v3_3-faq-tl_faq]
+[contao.v3_5-faq-tl_faq]
 source_file = system/modules/faq/languages/en/tl_faq.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/tl_faq.xlf
 
-[contao.v3_3-faq-tl_faq_category]
+[contao.v3_5-faq-tl_faq_category]
 source_file = system/modules/faq/languages/en/tl_faq_category.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/tl_faq_category.xlf
 
-[contao.v3_3-faq-tl_module]
+[contao.v3_5-faq-tl_module]
 source_file = system/modules/faq/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-faq-tl_user]
+[contao.v3_5-faq-tl_user]
 source_file = system/modules/faq/languages/en/tl_user.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/tl_user.xlf
 
-[contao.v3_3-faq-tl_user_group]
+[contao.v3_5-faq-tl_user_group]
 source_file = system/modules/faq/languages/en/tl_user_group.xlf
 source_lang = en
 file_filter = system/modules/faq/languages/<lang>/tl_user_group.xlf
 
-[contao.v3_3-listing-modules]
+[contao.v3_5-listing-modules]
 source_file = system/modules/listing/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/listing/languages/<lang>/modules.xlf
 
-[contao.v3_3-listing-tl_module]
+[contao.v3_5-listing-tl_module]
 source_file = system/modules/listing/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/listing/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-news-default]
+[contao.v3_5-news-default]
 source_file = system/modules/news/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/default.xlf
 
-[contao.v3_3-news-modules]
+[contao.v3_5-news-modules]
 source_file = system/modules/news/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/modules.xlf
 
-[contao.v3_3-news-tl_module]
+[contao.v3_5-news-tl_module]
 source_file = system/modules/news/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-news-tl_news]
+[contao.v3_5-news-tl_news]
 source_file = system/modules/news/languages/en/tl_news.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_news.xlf
 
-[contao.v3_3-news-tl_news_archive]
+[contao.v3_5-news-tl_news_archive]
 source_file = system/modules/news/languages/en/tl_news_archive.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_news_archive.xlf
 
-[contao.v3_3-news-tl_news_comments]
-source_file = system/modules/news/languages/en/tl_news_comments.xlf
-source_lang = en
-file_filter = system/modules/news/languages/<lang>/tl_news_comments.xlf
-
-[contao.v3_3-news-tl_news_feed]
+[contao.v3_5-news-tl_news_feed]
 source_file = system/modules/news/languages/en/tl_news_feed.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_news_feed.xlf
 
-[contao.v3_3-news-tl_user]
+[contao.v3_5-news-tl_user]
 source_file = system/modules/news/languages/en/tl_user.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_user.xlf
 
-[contao.v3_3-news-tl_user_group]
+[contao.v3_5-news-tl_user_group]
 source_file = system/modules/news/languages/en/tl_user_group.xlf
 source_lang = en
 file_filter = system/modules/news/languages/<lang>/tl_user_group.xlf
 
-[contao.v3_3-newsletter-default]
+[contao.v3_5-newsletter-default]
 source_file = system/modules/newsletter/languages/en/default.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/default.xlf
 
-[contao.v3_3-newsletter-modules]
+[contao.v3_5-newsletter-modules]
 source_file = system/modules/newsletter/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/modules.xlf
 
-[contao.v3_3-newsletter-tl_member]
+[contao.v3_5-newsletter-tl_member]
 source_file = system/modules/newsletter/languages/en/tl_member.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_member.xlf
 
-[contao.v3_3-newsletter-tl_module]
+[contao.v3_5-newsletter-tl_module]
 source_file = system/modules/newsletter/languages/en/tl_module.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_module.xlf
 
-[contao.v3_3-newsletter-tl_newsletter]
+[contao.v3_5-newsletter-tl_newsletter]
 source_file = system/modules/newsletter/languages/en/tl_newsletter.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_newsletter.xlf
 
-[contao.v3_3-newsletter-tl_newsletter_channel]
+[contao.v3_5-newsletter-tl_newsletter_channel]
 source_file = system/modules/newsletter/languages/en/tl_newsletter_channel.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_newsletter_channel.xlf
 
-[contao.v3_3-newsletter-tl_newsletter_recipients]
+[contao.v3_5-newsletter-tl_newsletter_recipients]
 source_file = system/modules/newsletter/languages/en/tl_newsletter_recipients.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_newsletter_recipients.xlf
 
-[contao.v3_3-newsletter-tl_user]
+[contao.v3_5-newsletter-tl_user]
 source_file = system/modules/newsletter/languages/en/tl_user.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_user.xlf
 
-[contao.v3_3-newsletter-tl_user_group]
+[contao.v3_5-newsletter-tl_user_group]
 source_file = system/modules/newsletter/languages/en/tl_user_group.xlf
 source_lang = en
 file_filter = system/modules/newsletter/languages/<lang>/tl_user_group.xlf
 
-[contao.v3_3-repository-modules]
+[contao.v3_5-repository-modules]
 source_file = system/modules/repository/languages/en/modules.xlf
 source_lang = en
 file_filter = system/modules/repository/languages/<lang>/modules.xlf
 
-[contao.v3_3-repository-tl_repository]
+[contao.v3_5-repository-tl_repository]
 source_file = system/modules/repository/languages/en/tl_repository.xlf
 source_lang = en
 file_filter = system/modules/repository/languages/<lang>/tl_repository.xlf
 
-[contao.v3_3-repository-tl_settings]
+[contao.v3_5-repository-tl_settings]
 source_file = system/modules/repository/languages/en/tl_settings.xlf
 source_lang = en
 file_filter = system/modules/repository/languages/<lang>/tl_settings.xlf

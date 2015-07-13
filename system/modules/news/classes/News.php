@@ -3,39 +3,30 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package News
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class News
- *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    News
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class News extends \Frontend
 {
 
 	/**
 	 * Update a particular RSS feed
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $intId
 	 */
-	public function generateFeed($intId, $blnIsFeedId=false)
+	public function generateFeed($intId)
 	{
-		$objFeed = $blnIsFeedId ? \NewsFeedModel::findByPk($intId) : \NewsFeedModel::findByArchive($intId);
+		$objFeed = \NewsFeedModel::findByPk($intId);
 
 		if ($objFeed === null)
 		{
@@ -83,8 +74,32 @@ class News extends \Frontend
 
 
 	/**
+	 * Generate all feeds including a certain archive
+	 * #
+	 * @param integer $intId
+	 */
+	public function generateFeedsByArchive($intId)
+	{
+		$objFeed = \NewsFeedModel::findByArchive($intId);
+
+		if ($objFeed !== null)
+		{
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+
+				// Update the XML file
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
+			}
+		}
+	}
+
+
+	/**
 	 * Generate an XML files and save them to the root directory
-	 * @param array
+	 *
+	 * @param array $arrFeed
 	 */
 	protected function generateFiles($arrFeed)
 	{
@@ -123,7 +138,9 @@ class News extends \Frontend
 
 			while ($objArticle->next())
 			{
-				$jumpTo = $objArticle->getRelated('pid')->jumpTo;
+				/** @var \PageModel $objPage */
+				$objPage = $objArticle->getRelated('pid');
+				$jumpTo = $objPage->jumpTo;
 
 				// No jumpTo page set (see #4784)
 				if (!$jumpTo)
@@ -224,9 +241,11 @@ class News extends \Frontend
 
 	/**
 	 * Add news items to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -238,8 +257,8 @@ class News extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = \Date::floorToMinute();
 
 		// Get all news archives
 		$objArchive = \NewsArchiveModel::findByProtected('');
@@ -273,7 +292,7 @@ class News extends \Frontend
 					}
 
 					// The target page has not been published (see #5520)
-					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop <= ($time + 60)))
 					{
 						continue;
 					}
@@ -312,9 +331,11 @@ class News extends \Frontend
 
 	/**
 	 * Return the link of a news article
-	 * @param object
-	 * @param string
-	 * @param string
+	 *
+	 * @param \NewsModel $objItem
+	 * @param string     $strUrl
+	 * @param string     $strBase
+	 *
 	 * @return string
 	 */
 	protected function getLink($objItem, $strUrl, $strBase='')
@@ -350,6 +371,7 @@ class News extends \Frontend
 
 	/**
 	 * Return the names of the existing feeds so they are not removed
+	 *
 	 * @return array
 	 */
 	public function purgeOldFeeds()

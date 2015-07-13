@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -116,17 +114,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'checkResultsPerPage')
-			)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'minval'=>1, 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'maxResultsPerPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'staticFiles' => array
 		(
@@ -318,7 +312,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'jpgQuality' => array
 		(
@@ -330,13 +324,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'gdMaxImgHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['gdMaxImgHeight'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'uploadPath' => array
 		(
@@ -358,25 +352,25 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadFields'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'maxFileSize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxFileSize'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imageWidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['imageWidth'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imageHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['imageHeight'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'enableSearch' => array
 		(
@@ -416,7 +410,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
 			'inputType'               => 'textStore',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'storeSmtpPass')
+			)
 		),
 		'smtpEnc' => array
 		(
@@ -429,7 +427,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'inactiveModules' => array
 		(
@@ -440,37 +438,37 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['undoPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'versionPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['versionPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'logPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['logPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'sessionTimeout' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'autologin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['autologin'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'lockPeriod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'defaultUser' => array(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultUser'],
@@ -500,19 +498,18 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 
 
 /**
- * Class tl_settings
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_settings extends Backend
 {
 
 	/**
 	 * Disable modules
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function disableModules(DataContainer $dc)
@@ -523,7 +520,7 @@ class tl_settings extends Backend
 		// Store all extensions with their status (based on the .skip file)
 		foreach ($arrFolders as $strFolder)
 		{
-			if (substr($strFolder, 0, 1) == '.')
+			if (strncmp($strFolder, '.', 1) === 0)
 			{
 				continue;
 			}
@@ -596,7 +593,7 @@ class tl_settings extends Backend
 				// Load the modules language file of disabled extensions
 				if (file_exists(TL_ROOT . '/' . $strFile . '.xlf'))
 				{
-					eval(static::convertXlfToPhp($strFile . '.xlf', $lng));
+					static::convertXlfToPhp($strFile . '.xlf', $lng, true);
 				}
 				elseif (file_exists(TL_ROOT . '/' . $strFile . '.php'))
 				{
@@ -623,7 +620,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Purge the internal cache when toggling the Contao safe mode
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function changeCoreOnlyMode($varValue)
@@ -640,7 +639,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Remove protected search results if the feature is being disabled
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function clearSearchIndex($varValue)
@@ -655,15 +656,18 @@ class tl_settings extends Backend
 
 
 	/**
-	 * Make sure that resultsPerPage > 0
-	 * @param mixed
+	 * Store the unfiltered SMTP password
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
 	 */
-	public function checkResultsPerPage($varValue)
+	public function storeSmtpPass($varValue, DataContainer $dc)
 	{
-		if ($varValue < 1)
+		if (isset($_POST[$dc->field]))
 		{
-			$varValue = 30;
+			return Input::postUnsafeRaw($dc->field);
 		}
 
 		return $varValue;
@@ -671,9 +675,10 @@ class tl_settings extends Backend
 
 
 	/**
-	 * Make sure that "html5" is in the list of valid template
-	 * files, so the back end works correctly (see #3398)
-	 * @param mixed
+	 * Make sure that "html5" is in the list of valid template files, so the back end works correctly (see #3398)
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkTemplateFiles($varValue)
@@ -689,19 +694,21 @@ class tl_settings extends Backend
 
 	/**
 	 * Check the upload path
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkUploadPath($varValue)
 	{
-		$varValue = str_replace(array('../', '/..', '/.', './', '://'), '', $varValue);
-
-		if ($varValue == '.' || $varValue == '..' || $varValue == '')
+		if ($varValue == '' || Validator::isInsecurePath($varValue))
 		{
-			$varValue = 'files';
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
-		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
+
+		if (preg_match('@^(assets|contao|plugins|share|system|templates|vendor)(/|$)@', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
@@ -712,14 +719,16 @@ class tl_settings extends Backend
 
 	/**
 	 * Check a static URL
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
 	{
-		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
+		if ($varValue != '')
 		{
-			$varValue = (Environment::get('ssl') ? 'https://' : 'http://') . $varValue;
+			$varValue = preg_replace('@https?://@', '', $varValue);
 		}
 
 		return $varValue;
@@ -728,7 +737,9 @@ class tl_settings extends Backend
 
 	/**
 	 * Purge the internal caches
-	 * @param mixed
+	 *
+	 * @param mixed $varValue
+	 *
 	 * @return mixed
 	 */
 	public function purgeInternalCache($varValue)

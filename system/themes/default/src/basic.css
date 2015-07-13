@@ -1,11 +1,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 /* HTML */
@@ -101,6 +99,13 @@ p {
 .hidden {
 	display:none;
 }
+.unselectable {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+}
 
 /* Invisible elements */
 .clear {
@@ -110,13 +115,14 @@ p {
 	font-size:0.1px;
 }
 .invisible {
-	width:0;
-	height:0;
-	left:-1000px;
-	top:-1000px;
-	position:absolute;
+	border:0;
+	clip:rect(0 0 0 0);
+	height:1px;
+	margin:-1px;
 	overflow:hidden;
-	display:inline;
+	padding:0;
+	position:absolute;
+	width:1px;
 }
 
 /* Forms */
@@ -161,6 +167,9 @@ fieldset.checkbox_container,fieldset.radio_container {
 .tl_text_4 {
 	width:70px;
 }
+.tl_imageSize_0.tl_text_4,.tl_imageSize_1.tl_text_4 {
+	width:71px;
+}
 .tl_textarea {
 	width:676px;
 	height:240px;
@@ -188,7 +197,8 @@ fieldset.checkbox_container,fieldset.radio_container {
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
 	background-color:#ebfdd7;
 }
-.tl_text[disabled],.tl_text_2[disabled],.tl_text_3[disabled],.tl_text_4[disabled],.tl_textarea[disabled],.tl_text_unit[disabled],.tl_text_trbl[disabled],.tl_text_interval[disabled] {
+.tl_text[disabled],.tl_text_2[disabled],.tl_text_3[disabled],.tl_text_4[disabled],.tl_textarea[disabled],.tl_text_unit[disabled],.tl_text_trbl[disabled],.tl_text_interval[disabled],
+.tl_text[readonly],.tl_text_2[readonly],.tl_text_3[readonly],.tl_text_4[readonly],.tl_textarea[readonly],.tl_text_unit[readonly],.tl_text_trbl[readonly],.tl_text_interval[readonly] {
 	color:#bbb;
 	background-color:#f9f9f9;
 	border:1px solid #c8c8c8;

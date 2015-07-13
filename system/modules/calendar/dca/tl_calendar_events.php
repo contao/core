@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -54,7 +52,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'keys' => array
 			(
 				'id' => 'primary',
-				'pid' => 'index'
+				'alias' => 'index',
+				'pid,start,stop,published' => 'index'
 			)
 		)
 	),
@@ -133,8 +132,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('addTime', 'addImage', 'recurring', 'addEnclosure', 'source'),
-		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{details_legend},location,teaser;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop'
+		'__selector__'                => array('addTime', 'addImage', 'recurring', 'addEnclosure', 'source', 'published'),
+		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{details_legend},location,teaser;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -146,7 +145,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'addEnclosure'                => 'enclosure',
 		'source_internal'             => 'jumpTo',
 		'source_article'              => 'articleId',
-		'source_external'             => 'url,target'
+		'source_external'             => 'url,target',
+		'published'                   => 'start,stop'
 	),
 
 	// Fields
@@ -195,9 +195,10 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['author'],
 			'default'                 => BackendUser::getInstance()->id,
 			'exclude'                 => true,
+			'search'                  => true,
 			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 1,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
@@ -307,9 +308,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => $GLOBALS['TL_CROP'],
+			'options'                 => System::getImageSizes(),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'imagemargin' => array
@@ -317,7 +318,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'rem', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => $GLOBALS['TL_CSS_UNITS'],
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
@@ -327,7 +328,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'fieldType'=>'radio', 'filesOnly'=>true, 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_calendar_events', 'pagePicker')
@@ -378,11 +379,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'timePeriod',
 			'options'                 => array('days', 'weeks', 'months', 'years'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_events'],
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_calendar_events', 'checkInterval')
-			),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'minval'=>1, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'repeatEnd' => array
@@ -395,7 +392,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['recurrences'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'addEnclosure' => array
@@ -411,7 +408,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'filesOnly'=>true, 'isDownloads'=>true, 'extensions'=>Config::get('allowedDownload'), 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'source' => array
@@ -486,7 +483,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'filter'                  => true,
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true),
+			'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
@@ -510,12 +507,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 
 
 /**
- * Class tl_calendar_events
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_calendar_events extends Backend
 {
@@ -648,10 +642,13 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Auto-generate the event alias if it has not been set yet
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -685,8 +682,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Automatically set the end time if not set
-	 * @param mixed
-	 * @param \DataContainer
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function setEmptyEndTime($varValue, DataContainer $dc)
@@ -702,8 +701,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Set the end date to null if empty
-	 * @param mixed
-	 * @return string
+	 *
+	 * @param mixed $varValue
+	 *
+	 * @return mixed
 	 */
 	public function setEmptyEndDate($varValue)
 	{
@@ -717,26 +718,10 @@ class tl_calendar_events extends Backend
 
 
 	/**
-	 * Check for a valid recurrence interval
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function checkInterval($varValue)
-	{
-		$varValue = deserialize($varValue);
-
-		if ($varValue['value'] < 1)
-		{
-			$varValue['value'] = 1;
-		}
-
-		return serialize($varValue);
-	}
-
-
-	/**
 	 * Add the type of input field
-	 * @param array
+	 *
+	 * @param array $arrRow
+	 *
 	 * @return string
 	 */
 	public function listEvents($arrRow)
@@ -762,7 +747,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -798,7 +785,7 @@ class tl_calendar_events extends Backend
 
 			while ($objAlias->next())
 			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['COLS'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
@@ -808,7 +795,9 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Add the source options depending on the allowed fields (see #5498)
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return array
 	 */
 	public function getSourceOptions(DataContainer $dc)
@@ -833,7 +822,7 @@ class tl_calendar_events extends Backend
 		}
 
 		// Add the "external" option
-		if ($this->User->hasAccess('tl_calendar_events::url', 'alexf') && $this->User->hasAccess('tl_calendar_events::target', 'alexf'))
+		if ($this->User->hasAccess('tl_calendar_events::url', 'alexf'))
 		{
 			$arrOptions[] = 'external';
 		}
@@ -851,7 +840,8 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -934,7 +924,7 @@ class tl_calendar_events extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->Calendar->generateFeed($id);
+			$this->Calendar->generateFeedsByCalendar($id);
 		}
 
 		$this->import('Automator');
@@ -951,7 +941,8 @@ class tl_calendar_events extends Backend
 	 * modified (edit/editAll), moved (cut/cutAll) or deleted (delete/deleteAll).
 	 * Since duplicated events are unpublished by default, it is not necessary
 	 * to schedule updates on copyAll as well.
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -970,30 +961,34 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' <a href="contao/page.php?do='.Input::get('do').'&amp;table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link_url::', '}}'), '', $dc->value).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])).'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
+		return ' <a href="' . ((strpos($dc->value, '{{link_url::') !== false) ? 'contao/page.php' : 'contao/file.php') . '?do=' . Input::get('do') . '&amp;table=' . $dc->table . '&amp;field=' . $dc->field . '&amp;value=' . str_replace(array('{{link_url::', '}}'), '', $dc->value) . '&amp;switch=1' . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['pagepicker']) . '" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':768,\'title\':\'' . specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['MOD']['page'][0])) . '\',\'url\':this.href,\'id\':\'' . $dc->field . '\',\'tag\':\'ctrl_'. $dc->field . ((Input::get('act') == 'editAll') ? '_' . $dc->id : '') . '\',\'self\':this});return false">' . Image::getHtml('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
 
 
 	/**
 	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param array  $row
+	 * @param string $href
+	 * @param string $label
+	 * @param string $title
+	 * @param string $icon
+	 * @param string $attributes
+	 *
 	 * @return string
 	 */
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
 		if (strlen(Input::get('tid')))
 		{
-			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
 			$this->redirect($this->getReferer());
 		}
 
@@ -1016,10 +1011,12 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Disable/enable a user group
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer        $intId
+	 * @param boolean        $blnVisible
+	 * @param DataContainer $dc
 	 */
-	public function toggleVisibility($intId, $blnVisible)
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
 		// Check permissions to edit
 		Input::setGet('id', $intId);
@@ -1044,17 +1041,17 @@ class tl_calendar_events extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
-					$blnVisible = $callback($blnVisible, $this);
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
 				}
 			}
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_calendar_events SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_calendar_events SET tstamp=". time() .", published='" . ($blnVisible ? '1' : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$objVersions->create();
@@ -1063,6 +1060,6 @@ class tl_calendar_events extends Backend
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);
 		$this->import('Calendar');
-		$this->Calendar->generateFeed(CURRENT_ID);
+		$this->Calendar->generateFeedsByCalendar(CURRENT_ID);
 	}
 }

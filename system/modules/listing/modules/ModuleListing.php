@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Listing
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleListing
- *
  * Provide methods to render content element "listing".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Listing
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleListing extends \Module
 {
@@ -43,12 +34,14 @@ class ModuleListing extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['listing'][0]) . ' ###';
@@ -99,6 +92,7 @@ class ModuleListing extends \Module
 		if (\Input::get('show'))
 		{
 			$this->listSingleRecord(\Input::get('show'));
+
 			return;
 		}
 
@@ -150,25 +144,18 @@ class ModuleListing extends \Module
 		 * Validate the page count
 		 */
 		$id = 'page_l' . $this->id;
-		$page = \Input::get($id) ?: 1;
+		$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 		$per_page = \Input::get('per_page') ?: $this->perPage;
 
 		// Thanks to Hagen Klemp (see #4485)
-		if ($per_page > 0)
+		if ($per_page > 0 && ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1)))
 		{
-			if ($page < 1 || $page > max(ceil($objTotal->count/$per_page), 1))
-			{
-				global $objPage;
-				$objPage->noSearch = 1;
-				$objPage->cache = 0;
+			/** @var \PageModel $objPage */
+			global $objPage;
 
-				$this->Template->thead = array();
-				$this->Template->tbody = array();
-
-				// Send a 404 header
-				header('HTTP/1.1 404 Not Found');
-				return;
-			}
+			/** @var \PageError404 $objHandler */
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($objPage->id);
 		}
 
 
@@ -191,12 +178,9 @@ class ModuleListing extends \Module
 
 		$strQuery .= $strWhere;
 
-		// Do not use $this in anonymous functions in PHP 5.3 (see #7078)
-		$table = $this->list_table;
-
 		// Cast date fields to int (see #5609)
-		$isInt = function($field) use($table) {
-			return $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$table]['fields'][$field]['eval']['rgxp'] == 'datim';
+		$isInt = function ($field) {
+			return $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'date' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'time' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['eval']['rgxp'] == 'datim';
 		};
 
 		// Order by
@@ -244,7 +228,7 @@ class ModuleListing extends \Module
 		$strUrl = preg_replace('/\?.*$/', '', \Environment::get('request'));
 		$blnQuery = false;
 
-		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
+		foreach (preg_split('/&(amp;)?/', \Environment::get('queryString')) as $fragment)
 		{
 			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, $id, strlen($id)) !== 0)
 			{
@@ -368,7 +352,8 @@ class ModuleListing extends \Module
 
 	/**
 	 * List a single record
-	 * @param integer
+	 *
+	 * @param integer $id
 	 */
 	protected function listSingleRecord($id)
 	{
@@ -378,8 +363,10 @@ class ModuleListing extends \Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new \FrontendTemplate($this->list_info_layout);
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate($this->list_info_layout);
 
+		$this->Template = $objTemplate;
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
@@ -397,7 +384,7 @@ class ModuleListing extends \Module
 		}
 
 		$arrFields = array();
-		$arrRow = $objRecord->fetchAssoc();
+		$arrRow = $objRecord->row();
 		$limit = count($arrRow);
 		$count = -1;
 
@@ -427,9 +414,11 @@ class ModuleListing extends \Module
 
 	/**
 	 * Format a value
-	 * @param string
-	 * @param mixed
-	 * @param boolean
+	 *
+	 * @param string  $k
+	 * @param mixed   $value
+	 * @param boolean $blnListSingle
+	 *
 	 * @return mixed
 	 */
 	protected function formatValue($k, $value, $blnListSingle=false)
@@ -442,6 +431,7 @@ class ModuleListing extends \Module
 			return '';
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Array
@@ -471,7 +461,6 @@ class ModuleListing extends \Module
 		// URLs
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
-			global $objPage;
 			$value = \Idna::decode($value); // see #5946
 			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"') . '>' . $value . '</a>';
 		}

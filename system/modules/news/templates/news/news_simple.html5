@@ -1,5 +1,5 @@
 
-<div class="layout_simple arc_<?php echo $this->archive->id; ?> block<?php echo $this->class; ?>">
-  <?php if ($this->date): ?><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php endif; ?>
-  <?php echo $this->linkHeadline; ?>
+<div class="layout_simple arc_<?= $this->archive->id ?> block<?= $this->class ?>">
+  <?php if ($this->date): ?><time datetime="<?= $this->datetime ?>"><?= $this->date ?></time> <?php endif; ?>
+  <?= $this->linkHeadline ?>
 </div>

@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Calendar
- *
  * Provide methods regarding calendars.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Calendar extends \Frontend
 {
@@ -37,12 +28,12 @@ class Calendar extends \Frontend
 
 	/**
 	 * Update a particular RSS feed
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param integer $intId
 	 */
-	public function generateFeed($intId, $blnIsFeedId=false)
+	public function generateFeed($intId)
 	{
-		$objCalendar = $blnIsFeedId ? \CalendarFeedModel::findByPk($intId) : \CalendarFeedModel::findByCalendar($intId);
+		$objCalendar = \CalendarFeedModel::findByPk($intId);
 
 		if ($objCalendar === null)
 		{
@@ -90,8 +81,32 @@ class Calendar extends \Frontend
 
 
 	/**
+	 * Generate all feeds including a certain calendar
+	 *
+	 * @param integer $intId
+	 */
+	public function generateFeedsByCalendar($intId)
+	{
+		$objFeed = \CalendarFeedModel::findByCalendar($intId);
+
+		if ($objFeed !== null)
+		{
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'calendar' . $objFeed->id;
+
+				// Update the XML file
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated calendar feed "' . $objFeed->feedName . '.xml"', __METHOD__, TL_CRON);
+			}
+		}
+	}
+
+
+	/**
 	 * Generate an XML file and save it to the root directory
-	 * @param array
+	 *
+	 * @param array $arrFeed
 	 */
 	protected function generateFiles($arrFeed)
 	{
@@ -259,9 +274,11 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add events to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -273,8 +290,8 @@ class Calendar extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = \Date::floorToMinute();
 
 		// Get all calendars
 		$objCalendar = \CalendarModel::findByProtected('');
@@ -308,7 +325,7 @@ class Calendar extends \Frontend
 					}
 
 					// The target page has not been published (see #5520)
-					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop <= ($time + 60)))
 					{
 						continue;
 					}
@@ -347,11 +364,12 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add an event to the array of active events
-	 * @param object
-	 * @param integer
-	 * @param integer
-	 * @param string
-	 * @param string
+	 *
+	 * @param \CalendarEventsModel $objEvent
+	 * @param integer              $intStart
+	 * @param integer              $intEnd
+	 * @param string               $strUrl
+	 * @param string               $strBase
 	 */
 	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strBase)
 	{
@@ -360,6 +378,7 @@ class Calendar extends \Frontend
 			return;
 		}
 
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Called in the back end (see #4026)
@@ -472,8 +491,10 @@ class Calendar extends \Frontend
 
 	/**
 	 * Calculate the span between two timestamps in days
-	 * @param integer
-	 * @param integer
+	 *
+	 * @param integer $intStart
+	 * @param integer $intEnd
+	 *
 	 * @return integer
 	 */
 	public static function calculateSpan($intStart, $intEnd)
@@ -484,7 +505,9 @@ class Calendar extends \Frontend
 
 	/**
 	 * Convert a UNIX timestamp to a Julian day
-	 * @param integer
+	 *
+	 * @param integer $tstamp
+	 *
 	 * @return integer
 	 */
 	public static function unixToJd($tstamp)
@@ -516,6 +539,7 @@ class Calendar extends \Frontend
 
 	/**
 	 * Return the names of the existing feeds so they are not removed
+	 *
 	 * @return array
 	 */
 	public function purgeOldFeeds()

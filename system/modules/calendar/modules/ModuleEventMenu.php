@@ -3,39 +3,32 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleEventMenu
- *
  * Front end module "event menu".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleEventMenu extends \ModuleCalendar
 {
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['eventmenu'][0]) . ' ###';
@@ -82,7 +75,10 @@ class ModuleEventMenu extends \ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new \FrontendTemplate('mod_eventmenu_year');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_eventmenu_year');
+
+		$this->Template = $objTemplate;
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -134,7 +130,10 @@ class ModuleEventMenu extends \ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new \FrontendTemplate('mod_eventmenu');
+		/** @var \FrontendTemplate|object $objTemplate */
+		$objTemplate = new \FrontendTemplate('mod_eventmenu');
+
+		$this->Template = $objTemplate;
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)

@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModulePassword
- *
  * Front end module "lost password".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModulePassword extends \Module
 {
@@ -37,12 +28,14 @@ class ModulePassword extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['lostPassword'][0]) . ' ###';
@@ -63,7 +56,9 @@ class ModulePassword extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
+
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		\System::loadLanguageFile('tl_member');
@@ -73,6 +68,7 @@ class ModulePassword extends \Module
 		if (strlen(\Input::get('token')))
 		{
 			$this->setNewPassword();
+
 			return;
 		}
 
@@ -106,6 +102,7 @@ class ModulePassword extends \Module
 		// Initialize the widgets
 		foreach ($arrFields as $arrField)
 		{
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
 
 			// Continue if the class is not defined
@@ -117,10 +114,11 @@ class ModulePassword extends \Module
 			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
+			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, $arrField['name']));
 
 			$objWidget->storeValues = true;
-			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+			$objWidget->rowClass = 'row_' . $row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
 
 			// Validate the widget
@@ -168,7 +166,7 @@ class ModulePassword extends \Module
 		$this->Template->email = specialchars($GLOBALS['TL_LANG']['MSC']['emailAddress']);
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
-		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
+		$this->Template->rowLast = 'row_' . $row . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
 		$this->Template->tableless = $this->tableless;
 	}
 
@@ -184,7 +182,10 @@ class ModulePassword extends \Module
 		{
 			$this->strTemplate = 'mod_message';
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
+			/** @var \FrontendTemplate|object $objTemplate */
+			$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+			$this->Template = $objTemplate;
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -195,6 +196,7 @@ class ModulePassword extends \Module
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
 		$arrField['eval']['tableless'] = $this->tableless;
 
+		/** @var \Widget $strClass */
 		$strClass = $GLOBALS['TL_FFL']['password'];
 
 		// Fallback to default if the class is not defined
@@ -203,6 +205,7 @@ class ModulePassword extends \Module
 			$strClass = 'FormPassword';
 		}
 
+		/** @var \Widget $objWidget */
 		$objWidget = new $strClass($strClass::getAttributesFromDca($arrField, 'password'));
 
 		// Set row classes
@@ -221,6 +224,7 @@ class ModulePassword extends \Module
 				$this->Session->set('setPasswordToken', '');
 				array_pop($_SESSION['TL_CONFIRM']);
 
+				$objMember->tstamp = time();
 				$objMember->activation = '';
 				$objMember->password = $objWidget->value;
 				$objMember->save();
@@ -244,7 +248,10 @@ class ModulePassword extends \Module
 				// Confirm
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new \FrontendTemplate($this->strTemplate);
+				/** @var \FrontendTemplate|object $objTemplate */
+				$objTemplate = new \FrontendTemplate($this->strTemplate);
+
+				$this->Template = $objTemplate;
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 
@@ -265,11 +272,11 @@ class ModulePassword extends \Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param object
+	 *
+	 * @param \MemberModel $objMember
 	 */
 	protected function sendPasswordLink($objMember)
 	{
-		$arrChunks = array();
 		$confirmationId = md5(uniqid(mt_rand(), true));
 
 		// Store the confirmation ID
@@ -277,36 +284,10 @@ class ModulePassword extends \Module
 		$objMember->activation = $confirmationId;
 		$objMember->save();
 
-		$strConfirmation = $this->reg_password;
-		preg_match_all('/##[^#]+##/', $strConfirmation, $arrChunks);
-
-		foreach ($arrChunks[0] as $strChunk)
-		{
-			$strKey = substr($strChunk, 2, -2);
-
-			switch ($strKey)
-			{
-				case 'domain':
-					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('host')), $strConfirmation);
-					break;
-
-				case 'link':
-					$strConfirmation = str_replace($strChunk, \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId, $strConfirmation);
-					break;
-
-				default:
-					try
-					{
-						$strConfirmation = str_replace($strChunk, $objMember->$strKey, $strConfirmation);
-					}
-					catch (\Exception $e)
-					{
-						$strConfirmation = str_replace($strChunk, '', $strConfirmation);
-						$this->log('Invalid wildcard "' . $strKey . '" used in password request e-mail', __METHOD__, TL_GENERAL, $e->getMessage());
-					}
-					break;
-			}
-		}
+		// Prepare the simple token data
+		$arrData = $objMember->row();
+		$arrData['domain'] = \Idna::decode(\Environment::get('host'));
+		$arrData['link'] = \Idna::decode(\Environment::get('base')) . \Environment::get('request') . ((\Config::get('disableAlias') || strpos(\Environment::get('request'), '?') !== false) ? '&' : '?') . 'token=' . $confirmationId;
 
 		// Send e-mail
 		$objEmail = new \Email();
@@ -314,7 +295,7 @@ class ModulePassword extends \Module
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], \Idna::decode(\Environment::get('host')));
-		$objEmail->text = $strConfirmation;
+		$objEmail->text = \String::parseSimpleTokens($this->reg_password, $arrData);
 		$objEmail->sendTo($objMember->email);
 
 		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', __METHOD__, TL_ACCESS);

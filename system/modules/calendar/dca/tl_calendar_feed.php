@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Calendar
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
@@ -184,7 +182,7 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'natural', 'tl_class'=>'w50'),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'feedBase' => array
@@ -211,12 +209,9 @@ $GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 
 
 /**
- * Class tl_calendar_feed
- *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Calendar
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class tl_calendar_feed extends Backend
 {
@@ -372,7 +367,7 @@ class tl_calendar_feed extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->Calendar->generateFeed($id, true);
+			$this->Calendar->generateFeedsByCalendar($id);
 		}
 
 		$this->import('Automator');
@@ -387,7 +382,8 @@ class tl_calendar_feed extends Backend
 	 *
 	 * This method is triggered when a single calendar or multiple calendars
 	 * are modified (edit/editAll).
-	 * @param \DataContainer
+	 *
+	 * @param DataContainer $dc
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -406,6 +402,7 @@ class tl_calendar_feed extends Backend
 
 	/**
 	 * Return the IDs of the allowed calendars as array
+	 *
 	 * @return array
 	 */
 	public function getAllowedCalendars()
@@ -435,10 +432,12 @@ class tl_calendar_feed extends Backend
 
 	/**
 	 * Check the RSS-feed alias
-	 * @param mixed
-	 * @param \DataContainer
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
 	 * @return mixed
-	 * @throws \Exception
+	 *
+	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
 	{

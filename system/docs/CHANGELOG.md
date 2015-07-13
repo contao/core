@@ -1,451 +1,254 @@
 Contao Open Source CMS changelog
 ================================
 
-Version 3.3.5 (2014-08-27)
+Version 3.5.0 (2015-06-05)
 --------------------------
 
-### Fixed
-Do not output an empty `label` tag (see #7249).
+### Updated
+Updated TinyMCE to version 4.1.10.
+
+### Updated
+Updated respimage to version 1.4.0.
+
+### Updated
+Updated jQuery to version 1.11.3.
+
+### Updated
+Updated Colorbox to version 1.6.1.
 
 ### Fixed
-Allow floating point numbers in "number" input fields (see #7257).
+Consistently sanitize the names of uploaded files (see #7852).
 
 ### Fixed
-Do not adjust the start time of past events (see #7121).
+Fixed loading cached pages with both a mobile and desktop layout (see #7859).
 
 ### Fixed
-Reset the image margins if it exceeds the maximum image size (see #7245).
+Omit the `index.php` fragment if the request string is empty (see #7757).
 
 ### Fixed
-Reset `$blnPreventSaving` when a model is cloned (see #7243).
+Adjust the edit URLs in the versions menu in "edit multiple" mode (see #7745).
 
 ### Fixed
-Do not reload after storing `CURRENT_ID` in the session (see #7240).
+Do not cache the login module if there is an error (see #7824).
 
 ### Fixed
-Correctly validate the page number of the versions menu (see #7235).
+Correctly handle encrypted rows (see #7815).
 
 ### Fixed
-Handle underscores in the Google+ vanity name (see #7241).
+Only create a new version in the personal data module if something actually
+changed (see #7415).
 
 ### Fixed
-Correctly handle the `rem` unit when importing style sheets (see #7220).
+Also fire the "modifyFrontendPage" hook when loading from cache (see #7457).
 
 ### Fixed
-Fix two issues with the extension repository theme.
-
-
-Version 3.3.4 (2014-07-29)
---------------------------
+Fixed several minor issues with the registration module (see #7816).
 
 ### Fixed
-Restore permission to delete root pages for admin users (see #7135).
+Update the revision date if a member updates their personal data (see #7818).
 
 ### Fixed
-Pass the file IDs instead of their UUIDs to the file picker (see #7139).
+Do not allow to restore versions in the back end user settings (see #7713).
 
 ### Fixed
-Correctly handle double quotes in comments (see #7102).
+Use the timestamp of an element to initialize its first version (see #7730).
 
 ### Fixed
-Ignore hidden files when building the internal cache (see #7098).
+Hide the "edit header" button if there are no editable fields (see #7770).
 
 ### Fixed
-Correctly pass the insert ID of the undo record (see #6234).
+Make the "form_submit" templates overwritable again (see #7854).
 
 ### Fixed
-Update the vendor libraries (fixes various issues).
-
-
-Version 3.3.3 (2014-06-18)
---------------------------
+Correctly inherit empty page permissions (see #6782).
 
 ### Fixed
-Convert insert tags before assigning the page title to the template (see #7097).
+Decode the GET parameters before setting them in the `Input` class (see #7829).
 
 ### Fixed
-Correctly render images in TinyMCE in the newsletter module (see #7089).
-
-
-Version 3.3.2 (2014-06-04)
---------------------------
+Fixed the "specified value 't' is not a valid email address" error (see #7784).
 
 ### Fixed
-Add the media query to the style sheets in debug mode (see #7070).
+Correctly set `data-` or `ng-` attributes in the widgets (see #7772).
 
 ### Fixed
-Disable the debug mode in the extension creator (see #7068).
+Correctly display the headline in the template editor (see #7746).
 
 ### Fixed
-Convert image source insert tags in the back end preview (see #7065).
+Make `Validator::isValidUrl()` RFC 3986 compliant (see #7790).
 
 ### Fixed
-Render all root nodes in the page and file picker (see #6844).
+Fixed switching between the page and file picker in the URL wizard (see #5863).
 
 ### Fixed
-Add the "scssphp-compass" library to support Compass functions.
+Make the "the old password is incorrect" message translatable (see #7793).
 
 ### Fixed
-Support adding multiple TinyMCE instances to the same page (see #7061).
-
-
-Version 3.3.1 (2014-05-30)
---------------------------
+Fix copying multiple items in parent view (see #7776).
 
 ### Fixed
-Grant access to static files inside the `vendor` folder.
+Disable the "compare template" icon for folders (see #7802).
 
 ### Fixed
-Do not make the `FormRadioButton` options an array (see #7060).
+Fix the field order in the template diff view (see #7808).
 
 ### Fixed
-Support adding ACE and TinyMCE in subpalettes (see #7056).
+Validate the coordinates in the `Image::setImportantPart()` method (see #7804).
 
 ### Fixed
-Only use the DropZone uploader where Ajax uploads can be processed (see #7046).
-
-### Fixed
-Make the viewport field 255 characters long (see #7050).
-
-### Fixed
-Restore the "submit_container" class in the `FormSubmit` widget (see #7055).
-
-### Fixed
-Correctly generate the CSS classes of the `FormSelectMenu` widget (see #7045).
-
-### Fixed
-Use a more precise UUID detection in the `FilesModel` class (see #7054).
-
-### Fixed
-Use `pack()` instead of `hex2bin()` to be compatible with PHP 5.3 (see #7010).
+Only add order fields of binary fields in the DCA extractor (see #7785).
 
 
-Version 3.3.0 (2014-05-26)
---------------------------
-
-### Fixed
-Correctly show the comments in the "comments" element (see #7040).
-
-### Fixed
-Correctly store the file selection in "edit multiple" mode (see #7028).
-
-### Update
-Update Compass to version 0.12.6.
-
-### Fixed
-Improve the UUID validation to prevent false positives (see #7010).
-
-### Fixed
-Correctly sort by date in the listing module (see #5609).
-
-### Fixed
-Fix the back link in the "single article" view (see #6955).
-
-### Fixed
-Never cache insert tags if the output is not used on the website (see #7018).
-
-### Fixed
-Strip forbidden HTML tags in the markdown content element (see #7021).
-
-### Fixed
-Prevent parallel execution of the new command line scripts.
-
-### Fixed
-Also set the `sql_mode` in the MySQLi driver (see #6996).
-
-### Fixed
-Purge the script cache if a style sheet is edited (see #7005).
-
-### Fixed
-Disable the maintenance screen if a back end user is logged in (see #7009).
-
-### Fixed
-Correctly set the textarea value in the template (see #6995).
-
-### Fixed
-Make sure the security questions gets always generated (see #6990).
-
-### Fixed
-Do not use `date_default_timezone_get()` in the configuration file (see #6989).
-
-### Fixed
-Correctly generate absolute URIs in `Controller::generateFrontendUrl()`.
-
-### Fixed
-Fix the link button padding (`a.tl_submit`).
-
-
-Version 3.3.0-RC2 (2014-05-09)
-------------------------------
-
-### Update
-Update TinyMCE to version 4.0.26.
-
-### Fixed
-Correctly set and explain the page title field (see #6953).
-
-### Fixed
-Correctly show the template sources (see #6875).
-
-### Fixed
-Support input tags without a "type" attribute in the CSS framwork (see #6902).
-
-### Fixed
-Import the `tinymce.css` style sheet in TinyMCE (see #6970).
-
-### Fixed
-Catch Swift exceptions when sending form data via e-mail (see #6941).
-
-### Fixed
-Try all locale variations when loading TinyMCE (see #6952).
-
-### Fixed
-Correctly overwrite the article template (see #6938).
-
-### Fixed
-Correctly wrap long labels in the tree view (see #6954).
-
-### Fixed
-Correctly add the WAI-ARIA attributes (see #6217).
-
-
-Version 3.3.0-RC1 (2014-05-02)
+Version 3.5.0-RC1 (2015-04-30)
 ------------------------------
 
 ### New
-Allow to override the default form field template (see #4547).
+Select multiple checkboxes by holding down the SHIFT key (see #7781).
 
 ### Changed
-Only pass the current form data to the "processFormData" hook (see #6705).
-
-### New
-Add a DropZone-based file uploader (see #6064).
-
-### New
-Add permissions to import and export themes (see #5835).
-
-### Improved
-Make the fields of the meta wizard configurable in the DCA (see #4327).
-
-### Improved
-Also show the preview image when editing multiple files (see #6643).
-
-### Improved
-Show the file location below the "name" field in the file manager (see #6503).
-
-### Improved
-Add some basic WAI-ARIA attributes to the navigation menu (see #6217).
-
-### Improved
-Automatically convert file paths in TinyMCE into insert tags (see #5965).
-
-### Changed
-Move the custom layout section markup into template files (see #6531).
-
-### Improved
-Move the form field markup into the template files (see #6834).
-
-### New
-Add template inheritance and template insertion (see #6508 and #6934).
-
-### New
-Add a flexible back end theme.
-
-### Update
-Update colorbox to version 1.5.8.
-
-### Update
-Update mediaelement.js to version 2.14.2.
-
-### Update
-Update jQuery to version 1.11.0 and jQuery UI to version 1.10.4.
-
-### Update
-Update the color picker to version 1.4.
-
-### Changed
-Use the "bootstrap" theme for the date picker (see #6692).
-
-### Update
-Update the back end date picker to version 2.2.0.
-
-### Update
-Update ACE to version 1.1.3.
-
-### Improved
-Use the widget attributes instead of the DCA in the picker widgets (see #6881).
-
-### Improved
-Enable the interlace bit when creating image thumbnails (see #6529).
-
-### Improved
-Assign articles to layout sections with an article module only (see #6094).
-
-### New
-Add the "parseDate" hook (see #4260).
-
-### New
-Make the title tag configurable in the page layout (see #6783).
-
-### New
-Add helper methods to generate markup depending on the output type:
-
- - `Template::generateStyleTag()`
- - `Template::generateInlineStyle()`
- - `Template::generateScriptTag()`
- - `Template::generateInlineScript()`
- - `Template::generateFeedTag()`
-
-### New
-Add the "customizeSearch" hook (see #5223).
-
-### New
-Add a button to generate article aliases via "edit multiple" (see #6628).
-
-### New
-Add a pagination menu at the listing bottom (see #6377).
+Show versions even if there is only one (see #7730).
 
 ### Fixed
-Only override element and module templates in the front end (see #6878).
-
-### Changed
-Use the `html5shiv-printshiv.js` script in the front end (see #6293).
-
-### New
-Added the "getLanguages" hook (see #6545).
-
-### Changed
-Render the table summary as `<caption>` in HTML5 (see #6295).
-
-### Changed
-Also convert paths without delimiter in `Combiner::fixPaths()` (see #6417).
-
-### New
-Add the "colorizeLogEntries" hook (see #5803).
-
-### New
-Added an "oncut_callback" and "oncopy_callback" to `DC_Folder` (see #6814).
+Loosely check the `suhosin.memory_limit` setting (see #7696).
 
 ### Improved
-Support optional dependencies in the module loader (see #6835).
-
-### New
-Mark the beginning and end of each template in debug mode (see #6841).
-
-### New
-Added the insert tag flags "urlencode" and "rawurlencode" (see #6859).
+Support specifying the database key length (see #7771).
 
 ### Improved
-Add files and folders to the database in details view (see #6880).
+Check for ASCII strings in the `utf8_romanize()` function (see #7748).
+
+### Changed
+`Controller::replaceInsertTags()` is now public static.
+
+### Fixed
+Restore the removed attributes of the "picture_default" templates (see #7752). 
+
+### Changed
+Moved the insert tag logic into a separate class.
+
+### Improved
+Show the upload limits in the file manager (see #7389).
+
+### Improved
+Also export the image meta data when exporting themes (see #7480). 
+
+### Improved
+Improve the model registry (see #7725).
+
+### Changed
+The templates now use short open tags.
 
 
-Version 3.3.0-beta1 (2014-04-11)
+Version 3.5.0-beta1 (2015-03-30)
 --------------------------------
 
 ### New
-Add version control for editable files.
+Add a front end module to change the password (see #7418).
+
+### Changed
+Allow to copy and move newsletter recipients across channels (see #7570).
 
 ### New
-Add a configurable "viewport" field to the page layout (see #6251).
+Added the "newsListCountItems" and "newsListFetchItems" hooks (see #7694).
 
 ### New
-Split the layout builder CSS code into a static and a responsive style sheet,
-so the responsive behaviour can be disabled (see #6251).
+Added the "compileArticle" hook (see #7686).
 
 ### New
-Added more static convenience methods to the `Config` class:
+Added the "picture" insert tag (see #7635 and #7718).
 
- - `set()`: temporarily set a configuration value
- - `presist()`: permanently store a configuration value
- - `remove()`: permanently remove a configuration value
+### Changed
+Stop ignoring notices by defaut now that the error level is configurable.
 
-A static `get()` method has been available already.
+### Updated
+Updated respimage to version 1.3.0.
 
-### Update
-Update TinyMCE to version 4.0.20 (see #1495).
+### Updated
+Updated jQuery UI to version 1.11.4.
 
-### New
-Handle `.scss` and `.less` files in the `Combiner`. This also allows to add SCSS
-or LESS files as external style sheets to the page layout.
+### Updated
+Updated mediaelement.js to version 2.16.4.
 
-### New
-Allow to override the default module or content element template (see #4547).
+### Updated
+Updated Colorbox to version 1.6.0.
+
+### Updated
+Updated jQuery to version 1.11.2.
+
+### Updated
+Updated HTML5Shiv to version 3.7.2.
+
+### Updated
+Updated DropZone to version 3.12.0.
+
+### Updated
+Updated the ACE editor to version 1.1.8.
 
 ### Improved
-Create a new version if a member changes their data in the front end.
-
-### Improved
-Shorten the file paths in the `FileTree` widget (see #6488).
-
-### Improved
-Hide the details page link in the listing module if the details page condition
-is not met (see #6332).
+Also convert image links in TinyMCE to `{{file}}` insert tags (see #7581).
 
 ### New
-Make the file system synchronization available on the command line (see #6815).
+Support copying multiple records in the list view (see #7499).
 
-### New
-Make the `Automator` methods available on the command line (see #6815).
-
-### Changed
-Moved the asset version constants to `$GLOBALS['TL_ASSETS']` (see #5759).
-
-### New
-Added a "preview front end as member" button (see #6546).
-
-### Changed
-Hide forward pages if they point to unpublished target pages (see #6376).
-
-### Changed
-Only enable the debug mode in the FE if there is a BE user (see #6450).
-
-### Changed
-Do not require MooTools or jQuery for the command scheduler (see #6755).
-
-### Changed
-Use the new Google Universal Analytics code snippet (see #6103).
+### Fixed
+Do not strip opening arrow brackets when stripping tags (see #3998).
 
 ### Improved
-Add `$parent` as fourth parameter to the "compileDefinition" hook (see #6697).
-
-### Update
-Update TCPDF to version 6.0.062.
+Simplify the `moo_mediabox` templates (see #7521).
 
 ### Changed
-Enable the maintanance mode by default (see #6758).
+Always return the model in the `File` and `Folder` classes (see #7567).
+
+### Fixed
+Consistently ignore hidden system files (see #7536).
 
 ### New
-Added a markdown content element (see #6052).
+Make the calendar model available in the templates (see #7388).
 
 ### Changed
-Merged the "newsarchive" and "newsarchive_empty" templates (see #6647).
+Render the 404 page if the request contains an invalid date format (see #7545).
 
 ### Changed
-Make the following functions public static (see #6351):
-
- - `Controller::getArticle`
- - `Controller::getContentElement`
- - `Controller::getForm`
- - `Controller::getFrontendModule`
+Always render the 404 page if a news/event/FAQ alias is invalid (see #7238).
 
 ### New
-Support editing the front end preview page via the "url" parameter (see #6471).
+Prevent calling a page via ID if there is a page alias (see #7661).
 
 ### Improved
-Do not combine .js and .css files when running in debug mode (see #6450).
+Use closures to lazy-load content elements in the news/event list (see #7614).
+
+### Improved
+Optimized the database queries (see #7450 and #7710).
+
+### Improved
+Add a log entry if a back end user switches to another account (see #7441).
+
+### Improved
+Optionally use the `ProxyRequest` class in the automator (see #7681).
+
+### Fixed
+Add a unique index for member usernames, too (see #7701).
 
 ### New
-Added a `DcaLoader` class to decouple the DCA loading process (see #5441). DCAs
-can now be loaded anywhere using `Controller::loadDataContainer()`.
+Add a diff view for custom templates (see #7599).
 
-### Changed
-Convert slashes to hyphens in the `standardize()` function (see #6396).
+### New
+Added the "postAuthenticate" hook (see #7493).
+
+### New
+Pass `$arrFields` as fourth argument in the "prepareFormData" hook (see #7693).
+
+### Fixed
+Return a boolean value in the `*User::authenticate()` method (see #7497).
+
+### New
+Make `count`, `page` and `keywords` available in the search module (see #7577).
+
+### New
+Added the "getPageStatusIcon" hook (see #7556).
+
+### Fixed
+Improve the cache handling for empty URLs (see #7618).
 
 ### Improved
-Add a `getModel()` method to modules, elements and hybrids (see #6492).
-
-### Improved
-Support the "HAVING" command in the `Model\QueryBuilder` class (see #6446).
-
-### Changed
-Use class constants for `BackendUser::isAllowed()`.
+Improved the IDE compatibility (see #7634).

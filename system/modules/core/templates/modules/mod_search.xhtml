@@ -2,12 +2,12 @@
 
 <?php $this->block('content'); ?>
 
-  <?php echo $this->form; ?>
+  <?= $this->form ?>
 
   <?php if ($this->header): ?>
-    <p class="header"><?php echo $this->header; ?> (<?php echo $this->duration; ?>)</p>
+    <p class="header"><?= $this->header ?> (<?= $this->duration ?>)</p>
   <?php endif; ?>
 
-  <?php echo $this->results . $this->pagination; ?>
+  <?= $this->results . $this->pagination ?>
 
 <?php $this->endblock(); ?>

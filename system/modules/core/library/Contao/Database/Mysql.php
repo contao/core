@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
@@ -16,19 +14,10 @@ namespace Contao\Database;
 /**
  * MySQL-specific database class
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Mysql extends \Database
 {
-
-	/**
-	 * List tables query
-	 * @var string
-	 */
-	protected $strListTables = "SHOW TABLES FROM `%s`";
-
 
 	/**
 	 * Connect to the database server and select the database
@@ -139,14 +128,14 @@ class Mysql extends \Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$objFields = $this->query("SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` LIKE '{$this->arrConfig['dbDatabase']}' AND `TABLE_NAME` LIKE '%$strTable'");
+		$objFields = $this->query("SHOW FULL COLUMNS FROM $strTable");
 
 		while ($objFields->next())
 		{
 			$arrTmp = array();
-			$arrChunks = preg_split('/(\([^\)]+\))/', $objFields->COLUMN_TYPE, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$arrChunks = preg_split('/(\([^\)]+\))/', $objFields->Type, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-			$arrTmp['name'] = $objFields->COLUMN_NAME;
+			$arrTmp['name'] = $objFields->Field;
 			$arrTmp['type'] = $arrChunks[0];
 
 			if (!empty($arrChunks[1]))
@@ -161,7 +150,6 @@ class Mysql extends \Database
 				else
 				{
 					$arrSubChunks = explode(',', $arrChunks[1]);
-
 					$arrTmp['length'] = trim($arrSubChunks[0]);
 
 					if (!empty($arrSubChunks[1]))
@@ -176,9 +164,9 @@ class Mysql extends \Database
 				$arrTmp['attributes'] = trim($arrChunks[2]);
 			}
 
-			if ($objFields->COLUMN_KEY != '')
+			if ($objFields->Key != '')
 			{
-				switch ($objFields->COLUMN_KEY)
+				switch ($objFields->Key)
 				{
 					case 'PRI':
 						$arrTmp['index'] = 'PRIMARY';
@@ -199,10 +187,11 @@ class Mysql extends \Database
 			}
 
 			// Do not modify the order!
-			$arrTmp['collation'] = $objFields->COLLATION_NAME;
-			$arrTmp['null'] = ($objFields->IS_NULLABLE == 'YES') ? 'NULL' : 'NOT NULL';
-			$arrTmp['default'] = $objFields->COLUMN_DEFAULT;
-			$arrTmp['extra'] = $objFields->EXTRA;
+			$arrTmp['collation'] = $objFields->Collation;
+			$arrTmp['null'] = ($objFields->Null == 'YES') ? 'NULL' : 'NOT NULL';
+			$arrTmp['default'] = $objFields->Default;
+			$arrTmp['extra'] = $objFields->Extra;
+			$arrTmp['origtype'] = $objFields->Type;
 
 			$arrReturn[] = $arrTmp;
 		}
@@ -211,9 +200,16 @@ class Mysql extends \Database
 
 		while ($objIndex->next())
 		{
+			$strColumnName = $objIndex->Column_name;
+
+			if ($objIndex->Sub_part != '')
+			{
+				$strColumnName .= '(' . $objIndex->Sub_part . ')';
+			}
+
 			$arrReturn[$objIndex->Key_name]['name'] = $objIndex->Key_name;
 			$arrReturn[$objIndex->Key_name]['type'] = 'index';
-			$arrReturn[$objIndex->Key_name]['index_fields'][] = $objIndex->Column_name;
+			$arrReturn[$objIndex->Key_name]['index_fields'][] = $strColumnName;
 			$arrReturn[$objIndex->Key_name]['index'] = (($objIndex->Non_unique == 0) ? 'UNIQUE' : 'KEY');
 		}
 

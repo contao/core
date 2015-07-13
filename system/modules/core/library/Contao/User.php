@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -30,9 +28,80 @@ namespace Contao;
  *         echo $user->name;
  *     }
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property integer $id
+ * @property integer $tstamp
+ * @property string  $username
+ * @property string  $name
+ * @property string  $email
+ * @property string  $language
+ * @property string  $backendTheme
+ * @property string  $uploader
+ * @property boolean $showHelp
+ * @property boolean $thumbnails
+ * @property boolean $useRTE
+ * @property boolean $useCE
+ * @property string  $password
+ * @property boolean $pwChange
+ * @property boolean $admin
+ * @property string  $groups
+ * @property string  $inherit
+ * @property string  $modules
+ * @property string  $themes
+ * @property array   $pagemounts
+ * @property string  $alpty
+ * @property array   $filemounts
+ * @property string  $fop
+ * @property string  $forms
+ * @property string  $formp
+ * @property boolean $disable
+ * @property string  $start
+ * @property string  $stop
+ * @property string  $session
+ * @property integer $dateAdded
+ * @property integer $lastLogin
+ * @property integer $currentLogin
+ * @property integer $loginCount
+ * @property integer $locked
+ * @property string  $calendars
+ * @property string  $calendarp
+ * @property string  $calendarfeeds
+ * @property string  $calendarfeedp
+ * @property string  $faqs
+ * @property string  $faqp
+ * @property string  $news
+ * @property string  $newp
+ * @property string  $newsfeeds
+ * @property string  $newsfeedp
+ * @property string  $newsletters
+ * @property string  $newsletterp
+ * @property string  $firstname
+ * @property string  $lastname
+ * @property string  $dateOfBirth
+ * @property string  $gender
+ * @property string  $company
+ * @property string  $street
+ * @property string  $postal
+ * @property string  $city
+ * @property string  $state
+ * @property string  $country
+ * @property string  $phone
+ * @property string  $mobile
+ * @property string  $fax
+ * @property string  $website
+ * @property boolean $login
+ * @property boolean $assignDir
+ * @property string  $homeDir
+ * @property string  $autologin
+ * @property integer $createdOn
+ * @property string  $activation
+ * @property string  $newsletter
+ * @property string  $loginPage
+ * @property object  $objImport
+ * @property object  $objAuth
+ * @property object  $objLogin
+ * @property object  $objLogout
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class User extends \System
 {
@@ -142,7 +211,7 @@ abstract class User extends \System
 	/**
 	 * Instantiate a new user object (Factory)
 	 *
-	 * @return \User The object instance
+	 * @return static The object instance
 	 */
 	public static function getInstance()
 	{
@@ -157,6 +226,7 @@ abstract class User extends \System
 
 	/**
 	 * Return the current record as associative array
+	 *
 	 * @return array
 	 */
 	public function getData()
@@ -185,6 +255,7 @@ abstract class User extends \System
 		if ($objSession->numRows < 1)
 		{
 			$this->log('Could not find the session record', __METHOD__, TL_ACCESS);
+
 			return false;
 		}
 
@@ -194,6 +265,7 @@ abstract class User extends \System
 		if ($objSession->sessionID != session_id() || (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
 		{
 			$this->log('Could not verify the session', __METHOD__, TL_ACCESS);
+
 			return false;
 		}
 
@@ -203,6 +275,7 @@ abstract class User extends \System
 		if ($this->findBy('id', $this->intId) == false)
 		{
 			$this->log('Could not find the session user', __METHOD__, TL_ACCESS);
+
 			return false;
 		}
 
@@ -213,6 +286,17 @@ abstract class User extends \System
 					   ->execute(session_id());
 
 		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
+
+		// HOOK: post authenticate callback
+		if (isset($GLOBALS['TL_HOOKS']['postAuthenticate']) && is_array($GLOBALS['TL_HOOKS']['postAuthenticate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postAuthenticate'] as $callback)
+			{
+				$this->import($callback[0], 'objAuth', true);
+				$this->objAuth->$callback[1]($this);
+			}
+		}
+
 		return true;
 	}
 
@@ -243,7 +327,7 @@ abstract class User extends \System
 				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
 				{
 					$this->import($callback[0], 'objImport', true);
-					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this->strTable);
+					$blnLoaded = $this->objImport->$callback[1](\Input::post('username', true), \Input::postUnsafeRaw('password'), $this->strTable);
 
 					// Load successfull
 					if ($blnLoaded === true)
@@ -279,7 +363,7 @@ abstract class User extends \System
 			$this->save();
 
 			// Add a log entry and the error message, because checkAccountStatus() will not be called (see #4444)
-			$this->log('The account has been locked for security reasons', __METHOD__, TL_ACCESS);
+			$this->log('User "' . $this->username . '" has been locked for ' . ceil(\Config::get('lockPeriod') / 60) . ' minutes', __METHOD__, TL_ACCESS);
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
 
 			// Send admin notification
@@ -303,17 +387,17 @@ abstract class User extends \System
 		// The password has been generated with crypt()
 		if (\Encryption::test($this->password))
 		{
-			$blnAuthenticated = (crypt(\Input::postRaw('password'), $this->password) === $this->password);
+			$blnAuthenticated = \Encryption::verify(\Input::postUnsafeRaw('password'), $this->password);
 		}
 		else
 		{
 			list($strPassword, $strSalt) = explode(':', $this->password);
-			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postRaw('password')));
+			$blnAuthenticated = ($strSalt == '') ? ($strPassword === sha1(\Input::postUnsafeRaw('password'))) : ($strPassword === sha1($strSalt . \Input::postUnsafeRaw('password')));
 
 			// Store a SHA-512 encrpyted version of the password
 			if ($blnAuthenticated)
 			{
-				$this->password = \Encryption::hash(\Input::postRaw('password'));
+				$this->password = \Encryption::hash(\Input::postUnsafeRaw('password'));
 			}
 		}
 
@@ -323,7 +407,7 @@ abstract class User extends \System
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
 				$this->import($callback[0], 'objAuth', true);
-				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::postRaw('password'), $this);
+				$blnAuthenticated = $this->objAuth->$callback[1](\Input::post('username', true), \Input::postUnsafeRaw('password'), $this);
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)
@@ -384,6 +468,7 @@ abstract class User extends \System
 		if (($this->locked + \Config::get('lockPeriod')) > $time)
 		{
 			\Message::addError(sprintf($GLOBALS['TL_LANG']['ERR']['accountLocked'], ceil((($this->locked + \Config::get('lockPeriod')) - $time) / 60)));
+
 			return false;
 		}
 
@@ -392,6 +477,7 @@ abstract class User extends \System
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('The account has been disabled', __METHOD__, TL_ACCESS);
+
 			return false;
 		}
 
@@ -400,23 +486,28 @@ abstract class User extends \System
 		{
 			\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('User "' . $this->username . '" is not allowed to log in', __METHOD__, TL_ACCESS);
+
 			return false;
 		}
 
 		// Check whether account is not active yet or anymore
 		elseif ($this->start != '' || $this->stop != '')
 		{
+			$time = \Date::floorToMinute($time);
+
 			if ($this->start != '' && $this->start > $time)
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active yet (activation date: ' . \Date::parse(\Config::get('dateFormat'), $this->start) . ')', __METHOD__, TL_ACCESS);
+
 				return false;
 			}
 
-			if ($this->stop != '' && $this->stop < $time)
+			if ($this->stop != '' && $this->stop <= ($time + 60))
 			{
 				\Message::addError($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 				$this->log('The account was not active anymore (deactivation date: ' . \Date::parse(\Config::get('dateFormat'), $this->stop) . ')', __METHOD__, TL_ACCESS);
+
 				return false;
 			}
 		}
@@ -442,6 +533,7 @@ abstract class User extends \System
 		if ($objResult->numRows > 0)
 		{
 			$this->arrData = $objResult->row();
+
 			return true;
 		}
 

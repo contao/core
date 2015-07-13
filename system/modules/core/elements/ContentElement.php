@@ -3,27 +3,105 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentElement
- *
  * Parent class for content elements.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $id
+ * @property integer $pid
+ * @property string  $ptable
+ * @property integer $sorting
+ * @property integer $tstamp
+ * @property string  $type
+ * @property string  $headline
+ * @property string  $text
+ * @property boolean $addImage
+ * @property string  $singleSRC
+ * @property string  $alt
+ * @property string  $title
+ * @property string  $size
+ * @property string  $imagemargin
+ * @property string  $imageUrl
+ * @property boolean $fullsize
+ * @property string  $caption
+ * @property string  $floating
+ * @property string  $html
+ * @property string  $listtype
+ * @property string  $listitems
+ * @property string  $tableitems
+ * @property string  $summary
+ * @property boolean $thead
+ * @property boolean $tfoot
+ * @property boolean $tleft
+ * @property boolean $sortable
+ * @property integer $sortIndex
+ * @property string  $sortOrder
+ * @property string  $mooHeadline
+ * @property string  $mooStyle
+ * @property string  $mooClasses
+ * @property string  $highlight
+ * @property string  $shClass
+ * @property string  $code
+ * @property string  $url
+ * @property boolean $target
+ * @property string  $titleText
+ * @property string  $linkTitle
+ * @property string  $embed
+ * @property string  $rel
+ * @property boolean $useImage
+ * @property string  $multiSRC
+ * @property string  $orderSRC
+ * @property boolean $useHomeDir
+ * @property integer $perRow
+ * @property integer $perPage
+ * @property integer $numberOfItems
+ * @property string  $sortBy
+ * @property boolean $metaIgnore
+ * @property string  $galleryTpl
+ * @property string  $customTpl
+ * @property string  $playerSRC
+ * @property string  $youtube
+ * @property string  $posterSRC
+ * @property string  $playerSize
+ * @property boolean $autoplay
+ * @property integer $sliderDelay
+ * @property integer $sliderSpeed
+ * @property integer $sliderStartSlide
+ * @property boolean $sliderContinuous
+ * @property integer $cteAlias
+ * @property integer $articleAlias
+ * @property integer $article
+ * @property integer $form
+ * @property integer $module
+ * @property boolean $protected
+ * @property string  $groups
+ * @property boolean $guests
+ * @property string  $cssID
+ * @property string  $space
+ * @property boolean $invisible
+ * @property string  $start
+ * @property string  $stop
+ * @property string  $com_order
+ * @property integer $com_perPage
+ * @property boolean $com_moderate
+ * @property boolean $com_bbcode
+ * @property boolean $com_disableCaptcha
+ * @property boolean $com_requireLogin
+ * @property string  $com_template
+ * @property string  $classes
+ * @property string  $typePrefix
+ * @property integer $origId
+ * @property string  $origSpace
+ * @property string  $origCssID
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class ContentElement extends \Frontend
 {
@@ -42,7 +120,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Model
-	 * @var Model
+	 * @var \ContentElement
 	 */
 	protected $objModel;
 
@@ -67,8 +145,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
-	 * @param string
+	 *
+	 * @param \ContentModel $objElement
+	 * @param string        $strColumn
 	 */
 	public function __construct($objElement, $strColumn='main')
 	{
@@ -101,8 +180,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Set an object property
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -112,7 +192,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Return an object property
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return mixed
 	 */
 	public function __get($strKey)
@@ -128,7 +210,9 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Check whether a property is set
-	 * @param string
+	 *
+	 * @param string $strKey
+	 *
 	 * @return boolean
 	 */
 	public function __isset($strKey)
@@ -139,6 +223,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Return the model
+	 *
 	 * @return \Model
 	 */
 	public function getModel()
@@ -149,6 +234,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Parse the template
+	 *
 	 * @return string
 	 */
 	public function generate()

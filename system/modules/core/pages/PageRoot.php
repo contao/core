@@ -3,44 +3,37 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class PageRoot
- *
  * Provide methods to handle a website root page.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class PageRoot extends \Frontend
 {
 
 	/**
 	 * Redirect to the first active regular page
-	 * @param integer
-	 * @param boolean
-	 * @return integer
+	 *
+	 * @param integer $pageId
+	 * @param boolean $blnReturn
+	 * @param boolean $blnPreferAlias
+	 *
 	 * @return integer
 	 */
-	public function generate($pageId, $blnReturn=false)
+	public function generate($pageId, $blnReturn=false, $blnPreferAlias=false)
 	{
 		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
 
 		// No published pages yet
-		if ($objNextPage === null)
+		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
@@ -49,8 +42,15 @@ class PageRoot extends \Frontend
 
 		if (!$blnReturn)
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
+
 			$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objPage->language));
+		}
+
+		if ($blnPreferAlias && $objNextPage->alias != '')
+		{
+			return $objNextPage->alias;
 		}
 
 		return $objNextPage->id;

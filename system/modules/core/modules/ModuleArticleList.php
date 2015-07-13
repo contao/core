@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleArticleList
- *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleArticleList extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleArticleList extends \Module
 
 	/**
 	 * Do not display the module if there are no articles
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['articleList'][0]) . ' ###';
@@ -55,6 +48,7 @@ class ModuleArticleList extends \Module
 		}
 
 		$strBuffer = parent::generate();
+
 		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
@@ -64,6 +58,7 @@ class ModuleArticleList extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		if (!strlen($this->inColumn))

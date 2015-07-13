@@ -3,26 +3,28 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormTextField
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string  $value
+ * @property string  $type
+ * @property integer $maxlength
+ * @property boolean $mandatory
+ * @property integer $min
+ * @property integer $max
+ * @property integer $step
+ * @property string  $placeholder
+ * @property boolean $hideInput
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormTextField extends \Widget
 {
@@ -47,6 +49,13 @@ class FormTextField extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_textfield';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-text';
 
 
 	/**
@@ -78,8 +87,11 @@ class FormTextField extends \Widget
 				parent::__set($strKey, $varValue);
 				break;
 
+			case 'min':
+			case 'max':
+			case 'step':
 			case 'placeholder':
-				$this->arrAttributes['placeholder'] = $varValue;
+				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
 			default:
@@ -129,6 +141,9 @@ class FormTextField extends \Widget
 							{
 								$this->addAttribute('step', 'any');
 							}
+							// NO break; here
+
+						case 'natural':
 							return 'number';
 							break;
 
@@ -180,7 +195,7 @@ class FormTextField extends \Widget
 			$varInput = \Idna::encodeEmail($varInput);
 		}
 
-		return parent::validator(trim($varInput));
+		return parent::validator($varInput);
 	}
 
 

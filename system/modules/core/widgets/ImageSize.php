@@ -3,27 +3,21 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ImageSize
- *
  * Provide methods to handle image size fields.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $maxlength
+ * @property array   $options
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ImageSize extends \Widget
 {
@@ -43,8 +37,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -70,7 +65,9 @@ class ImageSize extends \Widget
 
 	/**
 	 * Trim values
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -85,6 +82,7 @@ class ImageSize extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -94,24 +92,7 @@ class ImageSize extends \Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		// Backwards compatibility (see #3911)
-		if (@$this->varValue[2] == 'crop')
-		{
-			$this->varValue[2] = 'center_center';
-		}
-
 		$arrFields = array();
-
-		for ($i=0; $i<2; $i++)
-		{
-			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
-									$this->strName,
-									$this->strId.'_'.$i,
-									$i,
-									specialchars(@$this->varValue[$i]), // see #4979
-									$this->getAttributes());
-		}
-
 		$arrOptions = array();
 
 		foreach ($this->arrOptions as $strKey=>$arrOption)
@@ -139,15 +120,26 @@ class ImageSize extends \Widget
 			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
+		$arrFields[] = sprintf('<select name="%s[2]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()"%s>%s</select>',
 								$this->strName,
 								$this->strId.'_3',
 								$this->getAttribute('disabled'),
 								implode(' ', $arrOptions));
 
-		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
+		for ($i=0; $i<2; $i++)
+		{
+			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_4 tl_imageSize_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
+									$this->strName,
+									$i,
+									$this->strId.'_'.$i,
+									$i,
+									specialchars(@$this->varValue[$i]), // see #4979
+									$this->getAttributes());
+		}
+
+		return sprintf('<div id="ctrl_%s" class="tl_image_size%s">%s</div>%s',
 						$this->strId,
-						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}

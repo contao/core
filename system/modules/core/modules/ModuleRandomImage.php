@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleRandomImage
- *
  * Front end module "random image".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleRandomImage extends \Module
 {
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -43,6 +34,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Check the source folder
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -75,6 +67,7 @@ class ModuleRandomImage extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();
@@ -94,7 +87,7 @@ class ModuleRandomImage extends \Module
 			{
 				$objFile = new \File($objFiles->path, true);
 
-				if (!$objFile->isGdImage)
+				if (!$objFile->isImage)
 				{
 					continue;
 				}
@@ -139,7 +132,7 @@ class ModuleRandomImage extends \Module
 
 					$objFile = new \File($objSubfiles->path, true);
 
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}

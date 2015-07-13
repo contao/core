@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -29,9 +27,19 @@ namespace Contao;
  *
  *     Date::formatToJs('m/d/Y H:i');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property integer $tstamp     The Unix timestamp
+ * @property string  $date       The formatted date
+ * @property string  $time       The formatted time
+ * @property string  $datim      The formatted date and time
+ * @property integer $dayBegin   The beginning of the current day
+ * @property integer $dayEnd     The end of the current day
+ * @property integer $monthBegin The beginning of the current month
+ * @property integer $monthEnd   The end of the current month
+ * @property integer $yearBegin  The beginning of the current year
+ * @property integer $yearEnd    The end of the current year
+ * @property string  $format     The date format string
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Date
 {
@@ -76,20 +84,6 @@ class Date
 	/**
 	 * Return an object property
 	 *
-	 * Supported keys:
-	 *
-	 * * timestamp:  the Unix timestamp
-	 * * date:       the formatted date
-	 * * time:       the formatted time
-	 * * datim:      the formatted date and time
-	 * * dayBegin:   the beginning of the current day
-	 * * dayEnd:     the end of the current day
-	 * * monthBegin: the beginning of the current month
-	 * * monthEnd:   the end of the current month
-	 * * yearBegin:  the beginning of the current year
-	 * * yearEnd:    the end of the current year
-	 * * format:     the date format string
-	 *
 	 * @param string $strKey The property name
 	 *
 	 * @return mixed|null The property value
@@ -117,31 +111,37 @@ class Date
 
 			case 'dayBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['day']['begin'];
 				break;
 
 			case 'dayEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['day']['end'];
 				break;
 
 			case 'monthBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['month']['begin'];
 				break;
 
 			case 'monthEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['month']['end'];
 				break;
 
 			case 'yearBegin':
 				$this->createDateRanges();
+
 				return $this->arrRange['year']['begin'];
 				break;
 
 			case 'yearEnd':
 				$this->createDateRanges();
+
 				return $this->arrRange['year']['end'];
 				break;
 
@@ -500,6 +500,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->dateFormat != '' && static::isNumericFormat($objPage->dateFormat))
@@ -521,6 +522,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->timeFormat != '' && static::isNumericFormat($objPage->timeFormat))
@@ -542,6 +544,7 @@ class Date
 	{
 		if (TL_MODE == 'FE')
 		{
+			/** @var \PageModel $objPage */
 			global $objPage;
 
 			if ($objPage->datimFormat != '' && static::isNumericFormat($objPage->datimFormat))
@@ -551,6 +554,32 @@ class Date
 		}
 
 		return \Config::get('datimFormat');
+	}
+
+
+	/**
+	 * Return a numeric format string depending on the regular expression name
+	 *
+	 * @return string The numeric format string
+	 */
+	public static function getFormatFromRgxp($strRgxp)
+	{
+		switch ($strRgxp)
+		{
+			case 'date':
+				return static::getNumericDateFormat();
+				break;
+
+			case 'time':
+				return static::getNumericTimeFormat();
+				break;
+
+			case 'datim':
+				return static::getNumericDatimFormat();
+				break;
+		}
+
+		return null;
 	}
 
 
@@ -640,5 +669,23 @@ class Date
 		}
 
 		return $strReturn;
+	}
+
+
+	/**
+	 * Round a UNIX timestamp to the full minute
+	 *
+	 * @param integer $intTime The timestamp
+	 *
+	 * @return integer The rounded timestamp
+	 */
+	public static function floorToMinute($intTime=null)
+	{
+		if ($intTime === null)
+		{
+			$intTime = time();
+		}
+
+		return $intTime - ($intTime % 60);
 	}
 }

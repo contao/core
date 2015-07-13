@@ -1,11 +1,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 /* Body */
@@ -224,6 +222,10 @@ fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	padding-right:3px;
 	background:url("images/palOpen.gif") left center no-repeat;
 	cursor:pointer;
+}
+fieldset.tl_tbox.nolegend {
+	border:none;
+	margin-top:0;
 }
 fieldset.collapsed {
 	padding-top:0;

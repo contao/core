@@ -1,4 +1,4 @@
-<?php echo '<?'; ?>xml version="1.0" encoding="<?php echo $this->charset; ?>" standalone="yes" ?>
+<?= '<?' ?>xml version="1.0" encoding="<?= $this->charset ?>" standalone="yes" ?>
 <!DOCTYPE form [
   <!ELEMENT form (field)+>
   <!ELEMENT field (name, value+)>
@@ -8,9 +8,9 @@
 <form>
   <?php foreach ($this->fields as $field): ?>
     <field>
-      <name><?php echo $field['name']; ?></name>
+      <name><?= $field['name'] ?></name>
       <?php foreach ($field['values'] as $value): ?>
-        <value><?php echo $value; ?></value>
+        <value><?= $value ?></value>
       <?php endforeach; ?>
     </field>
   <?php endforeach; ?>

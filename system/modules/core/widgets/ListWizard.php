@@ -3,27 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ListWizard
- *
  * Provide methods to handle list items.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $maxlength
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ListWizard extends \Widget
 {
@@ -43,8 +36,9 @@ class ListWizard extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -65,23 +59,8 @@ class ListWizard extends \Widget
 
 
 	/**
-	 * Trim values
-	 * @param mixed
-	 * @return mixed
-	 */
-	public function validator($varInput)
-	{
-		if (is_array($varInput))
-		{
-			return parent::validator($varInput);
-		}
-
-		return parent::validator(trim($varInput));
-	}
-
-
-	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -168,7 +147,9 @@ class ListWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
 	public function importList(\DataContainer $dc)
@@ -187,6 +168,7 @@ class ListWizard extends \Widget
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -256,8 +238,6 @@ class ListWizard extends \Widget
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=list', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['MSC']['lw_import'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_list_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">

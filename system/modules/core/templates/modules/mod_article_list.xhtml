@@ -4,7 +4,7 @@
 
   <ul>
     <?php foreach ($this->articles as $article): ?>
-      <li><a href="<?php echo $this->request; ?>#<?php echo $article['id']; ?>" title="<?php echo $article['title']; ?>"><?php echo $article['link']; ?></a></li>
+      <li><a href="<?= $this->request ?>#<?= $article['id'] ?>" title="<?= $article['title'] ?>"><?= $article['link'] ?></a></li>
     <?php endforeach; ?>
   </ul>
 

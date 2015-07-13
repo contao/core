@@ -3,27 +3,22 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class TimePeriod
- *
  * Provide methods to handle text fields with interval drop down menu.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @property integer $maxlength
+ * @property array   $options
+ * @property boolean $mandatory
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class TimePeriod extends \Widget
 {
@@ -49,8 +44,9 @@ class TimePeriod extends \Widget
 
 	/**
 	 * Add specific attributes
-	 * @param string
-	 * @param mixed
+	 *
+	 * @param string $strKey
+	 * @param mixed  $varValue
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -88,7 +84,9 @@ class TimePeriod extends \Widget
 
 	/**
 	 * Do not validate unit fields
-	 * @param mixed
+	 *
+	 * @param mixed $varInput
+	 *
 	 * @return mixed
 	 */
 	protected function validator($varInput)
@@ -97,7 +95,7 @@ class TimePeriod extends \Widget
 		{
 			if ($k != 'unit')
 			{
-				$varInput[$k] = parent::validator(trim($v));
+				$varInput[$k] = parent::validator($v);
 			}
 		}
 
@@ -130,6 +128,7 @@ class TimePeriod extends \Widget
 
 	/**
 	 * Generate the widget and return it as string
+	 *
 	 * @return string
 	 */
 	public function generate()

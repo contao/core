@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Devtools
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleLabels
- *
  * Back end module "missing labels".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Devtools
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleLabels extends \BackendModule
 {
@@ -53,7 +44,7 @@ class ModuleLabels extends \BackendModule
 		// Get languages
 		foreach (scan(TL_ROOT . '/system/modules/core/languages') as $strLanguage)
 		{
-			if ($strLanguage != 'en' && substr($strLanguage, 0, 1) != '.')
+			if ($strLanguage != 'en' && strncmp($strLanguage, '.', 1) !== 0)
 			{
 				$strOptions .= sprintf('<option value="%s"%s>%s</option>', $strLanguage, (($strLanguage == \Input::post('language') || $strLanguage == $GLOBALS['TL_LANGUAGE']) ? ' selected="selected"' : ''), $arrLanguages[$strLanguage]);
 			}
@@ -110,12 +101,12 @@ class ModuleLabels extends \BackendModule
 
 					// Include English file
 					$GLOBALS['TL_LANG'] = array();
-					eval(\System::convertXlfToPhp($strPath . '/' . $strFile, 'en'));
+					\System::convertXlfToPhp($strPath . '/' . $strFile, 'en', true);
 					$arrOld = $GLOBALS['TL_LANG'];
 
 					// Include foreign file
 					$GLOBALS['TL_LANG'] = array();
-					eval(\System::convertXlfToPhp($strLang . '/' . $strFile, $lng));
+					\System::convertXlfToPhp($strLang . '/' . $strFile, $lng, true);
 					$arrNew = $GLOBALS['TL_LANG'];
 
 					// Restore the former labels

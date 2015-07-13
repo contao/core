@@ -3,34 +3,25 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ContentGallery
- *
  * Front end content element "gallery".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ContentGallery extends \ContentElement
 {
 
 	/**
 	 * Files object
-	 * @var \FilesModel
+	 * @var \Model\Collection|\FilesModel
 	 */
 	protected $objFiles;
 
@@ -43,6 +34,7 @@ class ContentGallery extends \ContentElement
 
 	/**
 	 * Return if there are no files
+	 *
 	 * @return string
 	 */
 	public function generate()
@@ -90,6 +82,7 @@ class ContentGallery extends \ContentElement
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		$images = array();
@@ -110,12 +103,24 @@ class ContentGallery extends \ContentElement
 			{
 				$objFile = new \File($objFiles->path, true);
 
-				if (!$objFile->isGdImage)
+				if (!$objFile->isImage)
 				{
 					continue;
 				}
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
+
+				if (empty($arrMeta))
+				{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($objPage->rootFallbackLanguage !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+					}
+				}
 
 				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
@@ -158,12 +163,24 @@ class ContentGallery extends \ContentElement
 
 					$objFile = new \File($objSubfiles->path, true);
 
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
+						{
+							continue;
+						}
+						elseif ($objPage->rootFallbackLanguage !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->rootFallbackLanguage);
+						}
+					}
 
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
@@ -264,18 +281,14 @@ class ContentGallery extends \ContentElement
 		{
 			// Get the current page
 			$id = 'page_g' . $this->id;
-			$page = \Input::get($id) ?: 1;
+			$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 
 			// Do not index or cache the page if the page number is outside the range
 			if ($page < 1 || $page > max(ceil($total/$this->perPage), 1))
 			{
-				global $objPage;
-				$objPage->noSearch = 1;
-				$objPage->cache = 0;
-
-				// Send a 404 header
-				header('HTTP/1.1 404 Not Found');
-				return;
+				/** @var \PageError404 $objHandler */
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($objPage->id);
 			}
 
 			// Set limit and offset
@@ -316,12 +329,12 @@ class ContentGallery extends \ContentElement
 
 				if ($j == 0)
 				{
-					$class_td = ' col_first';
+					$class_td .= ' col_first';
 				}
 
 				if ($j == ($this->perRow - 1))
 				{
-					$class_td = ' col_last';
+					$class_td .= ' col_last';
 				}
 
 				$objCell = new \stdClass();
@@ -361,6 +374,7 @@ class ContentGallery extends \ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
+		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 

@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -24,9 +22,7 @@ namespace Contao;
  *     $encrypted = Encryption::encrypt('Leo Feyer');
  *     $decrypted = Encryption::decrypt($encrypted);
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Encryption
 {
@@ -179,7 +175,22 @@ class Encryption
 	 */
 	public static function hash($strPassword)
 	{
-		if (CRYPT_SHA512 == 1)
+		$intCost = \Config::get('bcryptCost') ?: 10;
+
+		if ($intCost < 4 || $intCost > 31)
+		{
+			throw new \Exception("The bcrypt cost has to be between 4 and 31, $intCost given");
+		}
+
+		if (function_exists('password_hash'))
+		{
+			return password_hash($strPassword, PASSWORD_BCRYPT, array('cost'=>$intCost));
+		}
+		elseif (CRYPT_BLOWFISH == 1)
+		{
+			return crypt($strPassword, '$2y$' . sprintf('%02d', $intCost) . '$' . md5(uniqid(mt_rand(), true)) . '$');
+		}
+		elseif (CRYPT_SHA512 == 1)
 		{
 			return crypt($strPassword, '$6$' . md5(uniqid(mt_rand(), true)) . '$');
 		}
@@ -187,14 +198,8 @@ class Encryption
 		{
 			return crypt($strPassword, '$5$' . md5(uniqid(mt_rand(), true)) . '$');
 		}
-		elseif (CRYPT_BLOWFISH == 1)
-		{
-			return crypt($strPassword, '$2a$07$' . md5(uniqid(mt_rand(), true)) . '$');
-		}
-		else
-		{
-			throw new \Exception('None of the required crypt() algorithms is available');
-		}
+
+		throw new \Exception('None of the required crypt() algorithms is available');
 	}
 
 
@@ -207,7 +212,15 @@ class Encryption
 	 */
 	public static function test($strHash)
 	{
-		if (strncmp($strHash, '$6$', 3) === 0)
+		if (strncmp($strHash, '$2y$', 4) === 0)
+		{
+			return true;
+		}
+		elseif (strncmp($strHash, '$2a$', 4) === 0)
+		{
+			return true;
+		}
+		elseif (strncmp($strHash, '$6$', 3) === 0)
 		{
 			return true;
 		}
@@ -215,14 +228,47 @@ class Encryption
 		{
 			return true;
 		}
-		elseif (strncmp($strHash, '$2a$07$', 7) === 0)
+
+		return false;
+	}
+
+
+	/**
+	 * Verify a readable password against a password hash
+	 *
+	 * @param string $strPassword The readable password
+	 * @param string $strHash     The password hash
+	 *
+	 * @return boolean True if the password could be verified
+	 *
+	 * @see https://github.com/ircmaxell/password_compat
+	 */
+	public static function verify($strPassword, $strHash)
+	{
+		if (function_exists('password_verify'))
 		{
-			return true;
+			return password_verify($strPassword, $strHash);
 		}
-		else
+
+		$getLength = function($str) {
+			return extension_loaded('mbstring') ? mb_strlen($str, '8bit') : strlen($str);
+		};
+
+		$newHash = crypt($strPassword, $strHash);
+
+		if (!is_string($newHash) || $getLength($newHash) != $getLength($strHash) || $getLength($newHash) <= 13)
 		{
 			return false;
 		}
+
+		$intStatus = 0;
+
+		for ($i=0; $i<$getLength($newHash); $i++)
+		{
+			$intStatus |= (ord($newHash[$i]) ^ ord($strHash[$i]));
+		}
+
+		return $intStatus === 0;
 	}
 
 

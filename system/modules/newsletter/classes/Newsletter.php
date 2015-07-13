@@ -3,41 +3,34 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Newsletter
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class Newsletter
- *
  * Provide methods to handle newsletters.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Newsletter
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Newsletter extends \Backend
 {
 
 	/**
 	 * Renturn a form to choose an existing style sheet and import it
-	 * @param \DataContainer
+	 *
+	 * @param \DataContainer $dc
+	 *
 	 * @return string
 	 */
-	public function send(\DataContainer $objDc)
+	public function send(\DataContainer $dc)
 	{
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
-										->execute($objDc->id);
+										->execute($dc->id);
 
 		// Return if there is no newsletter
 		if ($objNewsletter->numRows < 1)
@@ -230,8 +223,6 @@ class Newsletter extends \Backend
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>
 '.\Message::generate().'
 <form action="'.TL_SCRIPT.'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
@@ -309,14 +300,17 @@ class Newsletter extends \Backend
 </form>';
 
 		unset($_SESSION['TL_PREVIEW_MAIL_ERROR']);
+
 		return $return;
 	}
 
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param \Database\Result
-	 * @param array
+	 *
+	 * @param \Database\Result|object $objNewsletter
+	 * @param array                   $arrAttachments
+	 *
 	 * @return \Email
 	 */
 	protected function generateEmailObject(\Database\Result $objNewsletter, $arrAttachments)
@@ -350,12 +344,14 @@ class Newsletter extends \Backend
 
 	/**
 	 * Compile the newsletter and send it
-	 * @param \Email
-	 * @param \Database\Result
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
+	 *
+	 * @param \Email                  $objEmail
+	 * @param \Database\Result|object $objNewsletter
+	 * @param array                   $arrRecipient
+	 * @param string                  $text
+	 * @param string                  $html
+	 * @param string                  $css
+	 *
 	 * @return string
 	 */
 	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
@@ -363,7 +359,6 @@ class Newsletter extends \Backend
 		// Prepare the text content
 		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
 
-		// Add the HTML content
 		if (!$objNewsletter->sendText)
 		{
 			// Default template
@@ -372,7 +367,7 @@ class Newsletter extends \Backend
 				$objNewsletter->template = 'mail_default';
 			}
 
-			// Load the mail template
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
@@ -402,11 +397,22 @@ class Newsletter extends \Backend
 		{
 			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
 		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['sendNewsletter']) && is_array($GLOBALS['TL_HOOKS']['sendNewsletter']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sendNewsletter'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objEmail, $objNewsletter, $arrRecipient, $text, $html);
+			}
+		}
 	}
 
 
 	/**
 	 * Return a form to choose a CSV file and import it
+	 *
 	 * @return string
 	 */
 	public function importRecipients()
@@ -425,6 +431,7 @@ class Newsletter extends \Backend
 			$class = 'FileUpload';
 		}
 
+		/** @var \FileUpload $objUploader */
 		$objUploader = new $class();
 
 		// Import CSS
@@ -523,8 +530,6 @@ class Newsletter extends \Backend
 <div id="tl_buttons">
 <a href="'.ampersand(str_replace('&key=import', '', \Environment::get('request'))).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
-
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
 '.\Message::generate().'
 <form action="'.ampersand(\Environment::get('request'), true).'" id="tl_recipients_import" class="tl_form" method="post" enctype="multipart/form-data">
 <div class="tl_formbody_edit">
@@ -560,8 +565,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Remove the newsletter subscriptions of members who close their account
-	 * @param integer
-	 * @param string
+	 *
+	 * @param integer $intUser
+	 * @param string  $strMode
 	 */
 	public function removeSubscriptions($intUser, $strMode)
 	{
@@ -586,8 +592,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of new users
-	 * @param object
-	 * @param array
+	 *
+	 * @param \MemberModel $intUser
+	 * @param array        $arrData
 	 */
 	public function createNewUser($intUser, $arrData)
 	{
@@ -625,7 +632,8 @@ class Newsletter extends \Backend
 
 	/**
 	 * Activate newsletter subscription of new users
-	 * @param object
+	 *
+	 * @param \MemberModel $objUser
 	 */
 	public function activateAccount($objUser)
 	{
@@ -655,9 +663,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of existing users
-	 * @param mixed
-	 * @param object
-	 * @param object
+	 *
+	 * @param mixed        $varValue
+	 * @param \MemberModel $objUser
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return mixed
 	 */
 	public function synchronize($varValue, $objUser, $objModule=null)
@@ -827,7 +837,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Get all editable newsletters and return them as array
-	 * @param object
+	 *
+	 * @param \ModuleModel $objModule
+	 *
 	 * @return array
 	 */
 	public function getNewsletters($objModule)
@@ -873,9 +885,11 @@ class Newsletter extends \Backend
 
 	/**
 	 * Add newsletters to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -887,8 +901,8 @@ class Newsletter extends \Backend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = \Date::floorToMinute();
 
 		// Get all channels
 		$objNewsletter = \NewsletterChannelModel::findAll();
@@ -898,7 +912,6 @@ class Newsletter extends \Backend
 		{
 			while ($objNewsletter->next())
 			{
-				// Skip channels without target page
 				if (!$objNewsletter->jumpTo)
 				{
 					continue;
@@ -922,7 +935,7 @@ class Newsletter extends \Backend
 					}
 
 					// The target page has not been published (see #5520)
-					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop <= ($time + 60)))
 					{
 						continue;
 					}

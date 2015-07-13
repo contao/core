@@ -3,26 +3,23 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormPassword
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property boolean $mandatory
+ * @property integer $maxlength
+ * @property string  $placeholder
+ * @property string  $confirmLabel
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormPassword extends \Widget
 {
@@ -47,6 +44,13 @@ class FormPassword extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_password';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-password';
 
 
 	/**
@@ -79,8 +83,14 @@ class FormPassword extends \Widget
 				break;
 
 			case 'mandatory':
-				// Do not set the "required" attribute here, because password
-				// fields can remain empty if a password has been set already
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
 				parent::__set($strKey, $varValue);
 				break;
 
@@ -126,7 +136,7 @@ class FormPassword extends \Widget
 		if (!$this->hasErrors())
 		{
 			$this->blnSubmitInput = true;
-			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
+
 			return \Encryption::hash($varInput);
 		}
 

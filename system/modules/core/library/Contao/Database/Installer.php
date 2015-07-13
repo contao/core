@@ -3,25 +3,19 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
 
 
 /**
- * Handles database updates
- *
  * Compares the existing database structure with the DCA table settings and
  * calculates the queries needed to update the database.
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class Installer extends \Controller
 {
@@ -298,7 +292,7 @@ class Installer extends \Controller
 				}
 
 				$strTable = substr($strFile, 0, -4);
-				$objExtract = new \DcaExtractor($strTable);
+				$objExtract = \DcaExtractor::getInstance($strTable);
 
 				if ($objExtract->isDbTable())
 				{
@@ -437,6 +431,7 @@ class Installer extends \Controller
 		}
 
 		$return = array();
+		$quote = function ($item) { return '`' . $item . '`'; };
 
 		foreach ($tables as $table)
 		{
@@ -445,11 +440,12 @@ class Installer extends \Controller
 			foreach ($fields as $field)
 			{
 				$name = $field['name'];
-				$field['name'] = '`'.$field['name'].'`';
+				$field['name'] = $quote($field['name']);
 
 				if ($field['type'] != 'index')
 				{
 					unset($field['index']);
+					unset($field['origtype']);
 
 					// Field type
 					if ($field['length'] != '')
@@ -492,27 +488,40 @@ class Installer extends \Controller
 				// Indices
 				if (isset($field['index']) && $field['index_fields'])
 				{
-					$index_fields = implode('`, `', $field['index_fields']);
+					// Quote the field names
+					$index_fields = implode(', ', array_map
+					(
+						function ($item) use ($quote) {
+							if (strpos($item, '(') === false) {
+								return $quote($item);
+							}
+
+							list($name, $length) = explode('(', rtrim($item, ')'));
+
+							return $quote($name) . '(' . $length . ')';
+						},
+						$field['index_fields'])
+					);
 
 					switch ($field['index'])
 					{
 						case 'UNIQUE':
 							if ($name == 'PRIMARY')
 							{
-								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  (`'.$index_fields.'`)';
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  ('.$index_fields.')';
 							}
 							else
 							{
-								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` (`'.$index_fields.'`)';
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` ('.$index_fields.')';
 							}
 							break;
 
 						case 'FULLTEXT':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` (`'.$index_fields.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` ('.$index_fields.')';
 							break;
 
 						default:
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` (`'.$index_fields.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` ('.$index_fields.')';
 							break;
 					}
 

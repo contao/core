@@ -3,27 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleSearch
- *
  * Front end module "search".
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleSearch extends \Module
 {
@@ -37,12 +28,14 @@ class ModuleSearch extends \Module
 
 	/**
 	 * Display a wildcard in the back end
+	 *
 	 * @return string
 	 */
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
 		{
+			/** @var \BackendTemplate|object $objTemplate */
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['search'][0]) . ' ###';
@@ -63,6 +56,9 @@ class ModuleSearch extends \Module
 	 */
 	protected function compile()
 	{
+		/** @var \PageModel $objPage */
+		global $objPage;
+
 		// Mark the x and y parameter as used (see #4277)
 		if (isset($_GET['x']))
 		{
@@ -81,10 +77,9 @@ class ModuleSearch extends \Module
 		$blnFuzzy = $this->fuzzy;
 		$strQueryType = \Input::get('query_type') ?: $this->queryType;
 
-		// Remove insert tags
 		$strKeywords = trim(\Input::get('keywords'));
-		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
+		/** @var \FrontendTemplate|object $objFormTemplate */
 		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
@@ -121,7 +116,6 @@ class ModuleSearch extends \Module
 			// Website root
 			else
 			{
-				global $objPage;
 				$intRootId = $objPage->rootId;
 				$arrPages = $this->Database->getChildRecords($objPage->rootId, 'tl_page');
 			}
@@ -140,6 +134,7 @@ class ModuleSearch extends \Module
 			if (!is_array($arrPages) || empty($arrPages))
 			{
 				$this->log('No searchable pages found', __METHOD__, TL_ERROR);
+
 				return;
 			}
 
@@ -212,11 +207,16 @@ class ModuleSearch extends \Module
 
 			$count = count($arrResult);
 
+			$this->Template->count = $count;
+			$this->Template->page = null;
+			$this->Template->keywords = $strKeywords;
+
 			// No results
 			if ($count < 1)
 			{
 				$this->Template->header = sprintf($GLOBALS['TL_LANG']['MSC']['sEmpty'], $strKeywords);
 				$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
+
 				return;
 			}
 
@@ -227,19 +227,15 @@ class ModuleSearch extends \Module
 			if ($this->perPage > 0)
 			{
 				$id = 'page_s' . $this->id;
-				$page = \Input::get($id) ?: 1;
+				$page = (\Input::get($id) !== null) ? \Input::get($id) : 1;
 				$per_page = \Input::get('per_page') ?: $this->perPage;
 
 				// Do not index or cache the page if the page number is outside the range
 				if ($page < 1 || $page > max(ceil($count/$per_page), 1))
 				{
-					global $objPage;
-					$objPage->noSearch = 1;
-					$objPage->cache = 0;
-
-					// Send a 404 header
-					header('HTTP/1.1 404 Not Found');
-					return;
+					/** @var \PageError404 $objHandler */
+					$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+					$objHandler->generate($objPage->id);
 				}
 
 				$from = (($page - 1) * $per_page) + 1;
@@ -251,11 +247,14 @@ class ModuleSearch extends \Module
 					$objPagination = new \Pagination($count, $per_page, \Config::get('maxPaginationLinks'), $id);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
+
+				$this->Template->page = $page;
 			}
 
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
+				/** @var \FrontendTemplate|object $objTemplate */
 				$objTemplate = new \FrontendTemplate($this->searchTpl ?: 'search_default');
 
 				$objTemplate->url = $arrResult[$i]['url'];

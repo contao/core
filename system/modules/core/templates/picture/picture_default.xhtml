@@ -1,0 +1,25 @@
+
+<?php if ($this->sources): ?>
+  <picture>
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    <?php foreach ($this->sources as $source): ?>
+      <source srcset="<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?> />
+    <?php endforeach; ?>
+    <!--[if IE 9]></video><![endif]-->
+<?php endif; ?>
+
+<img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?php if ($this->class) echo ' class="' . $this->class . '"'; ?><?= $this->attributes ?> />
+
+<?php if ($this->sources): ?>
+  </picture>
+<?php endif; ?>
+
+<?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    window.respimage && window.respimage({
+      elements: [document.images[document.images.length - 1]]
+    });
+    /* ]]> */
+  </script>
+<?php endif; ?>

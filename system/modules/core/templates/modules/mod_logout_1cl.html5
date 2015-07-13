@@ -1,18 +1,18 @@
 
 <!-- indexer::stop -->
-<div class="<?php echo $this->class; ?> one_column tableless logout block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?= $this->class ?> one_column tableless logout block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
 
   <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+    <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
   <?php endif; ?>
 
-  <form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> id="tl_logout" method="post">
+  <form<?php if ($this->action): ?> action="<?= $this->action ?>"<?php endif; ?> id="tl_logout" method="post">
     <div class="formbody">
       <input type="hidden" name="FORM_SUBMIT" value="tl_logout">
       <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
-      <p class="login_info"><?php echo $this->loggedInAs; ?><br><?php echo $this->lastLogin; ?></p>
+      <p class="login_info"><?= $this->loggedInAs ?><br><?= $this->lastLogin ?></p>
       <div class="submit_container">
-        <input type="submit" class="submit" value="<?php echo $this->slabel; ?>">
+        <input type="submit" class="submit" value="<?= $this->slabel ?>">
       </div>
     </div>
   </form>

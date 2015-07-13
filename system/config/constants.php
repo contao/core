@@ -3,20 +3,18 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 
 /**
  * Core version
  */
-define('VERSION', '3.3');
-define('BUILD', '5');
-define('LONG_TERM_SUPPORT', false);
+define('VERSION', '3.5');
+define('BUILD', '0');
+define('LONG_TERM_SUPPORT', true);
 
 
 /**
@@ -25,18 +23,19 @@ define('LONG_TERM_SUPPORT', false);
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('ACE', '1.1.3');
+define('ACE', '1.1.8');
 define('CSS3PIE', '1.0.0');
-define('DROPZONE', '3.8.5');
+define('DROPZONE', '3.12.0');
 define('HIGHLIGHTER', '3.0.83');
-define('HTML5SHIV', '3.7.0');
+define('HTML5SHIV', '3.7.2');
+define('RESPIMAGE', '1.4.0');
 define('SWIPE', '2.0');
-define('JQUERY', '1.11.0');
-define('JQUERY_UI', '1.10.4');
-define('COLORBOX', '1.5.8');
-define('MEDIAELEMENT', '2.14.2');
+define('JQUERY', '1.11.3');
+define('JQUERY_UI', '1.11.4');
+define('COLORBOX', '1.6.1');
+define('MEDIAELEMENT', '2.16.4');
 define('TABLESORTER', '2.0.5');
-define('MOOTOOLS', '1.5.0');
+define('MOOTOOLS', '1.5.1');
 define('COLORPICKER', '1.4');
 define('DATEPICKER', '2.2.0');
 define('MEDIABOX', '1.4.6');

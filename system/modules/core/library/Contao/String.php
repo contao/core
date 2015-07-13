@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao;
@@ -22,9 +20,7 @@ namespace Contao;
  *     $html  = String::substrHtml($str, 32);
  *     $xhtml = String::toXhtml($html5);
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class String
 {
@@ -111,7 +107,7 @@ class String
 	 */
 	public static function substrHtml($strString, $intNumberOfChars)
 	{
-		$strReturn = "";
+		$strReturn = '';
 		$intCharCount = 0;
 		$arrOpenTags = array();
 		$arrTagBuffer = array();
@@ -133,12 +129,15 @@ class String
 				continue;
 			}
 
+			$buffer = $arrChunks[$i];
+
 			// Get the substring of the current text
 			if (($arrChunks[$i] = static::substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
 
+			$blnModified = ($buffer !== $arrChunks[$i]);
 			$intCharCount += utf8_strlen(static::decodeEntities($arrChunks[$i]));
 
 			if ($intCharCount <= $intNumberOfChars)
@@ -194,6 +193,12 @@ class String
 				if (strlen($arrChunks[$i]) || $i<$c)
 				{
 					$strReturn .= implode('', $arrTagBuffer) . $arrChunks[$i];
+				}
+
+				// Stop after the first shortened chunk (see #7311)
+				if ($blnModified)
+				{
+					break;
 				}
 
 				$arrTagBuffer = array();
@@ -536,7 +541,7 @@ class String
 	 */
 	public static function uuidToBin($uuid)
 	{
-		return pack('H*', str_replace('-', '', $uuid));
+		return hex2bin(str_replace('-', '', $uuid));
 	}
 
 
@@ -563,9 +568,9 @@ class String
 	public static function srcToInsertTag($data)
 	{
 		$return = '';
-		$paths = preg_split('/(src="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$paths = preg_split('/((src|href)="([^"]+)")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+4)
 		{
 			$return .= $paths[$i];
 
@@ -574,15 +579,15 @@ class String
 				continue;
 			}
 
-			$file = \FilesModel::findByPath($paths[$i+2]);
+			$file = \FilesModel::findByPath($paths[$i+3]);
 
 			if ($file !== null)
 			{
-				$return .= 'src="{{file::' . static::binToUuid($file->uuid) . '}}"';
+				$return .= $paths[$i+2] . '="{{file::' . static::binToUuid($file->uuid) . '}}"';
 			}
 			else
 			{
-				$return .= 'src="' . $paths[$i+2] . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . '"';
 			}
 		}
 
@@ -600,9 +605,9 @@ class String
 	public static function insertTagToSrc($data)
 	{
 		$return = '';
-		$paths = preg_split('/(src="\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$paths = preg_split('/((src|href)="([^"]*)\{\{file::([^"\}]+)\}\}")/i', $data, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-		for ($i=0, $c=count($paths); $i<$c; $i=$i+3)
+		for ($i=0, $c=count($paths); $i<$c; $i=$i+5)
 		{
 			$return .= $paths[$i];
 
@@ -611,19 +616,96 @@ class String
 				continue;
 			}
 
-			$file = \FilesModel::findByUuid($paths[$i+2]);
+			$file = \FilesModel::findByUuid($paths[$i+4]);
 
 			if ($file !== null)
 			{
-				$return .= 'src="' . $file->path . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . $file->path . '"';
 			}
 			else
 			{
-				$return .= 'src="' . $paths[$i+2] . '"';
+				$return .= $paths[$i+2] . '="' . $paths[$i+3] . $paths[$i+4] . '"';
 			}
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Sanitize a file name
+	 *
+	 * @param string $strName The file name
+	 *
+	 * @return string The sanitized file name
+	 */
+	public static function sanitizeFileName($strName)
+	{
+		// Remove invisible control characters and unused code points
+		$strName = preg_replace('/[\pC]/u', '', $strName);
+
+		if ($strName === null)
+		{
+			throw new \InvalidArgumentException('The file name could not be sanitzied');
+		}
+
+		// Remove special characters not supported on e.g. Windows
+		$strName = str_replace(array('\\', '/', ':', '*', '?', '"', '<', '>', '|'), '-', $strName);
+
+		return $strName;
+	}
+
+
+	/**
+	 * Resolve a flagged URL such as assets/js/core.js|static|10184084
+	 *
+	 * @param string $url The URL
+	 *
+	 * @return \stdClass The options object
+	 */
+	public static function resolveFlaggedUrl(&$url)
+	{
+		$options = new \stdClass();
+
+		// Defaults
+		$options->static = false;
+		$options->media  = null;
+		$options->mtime  = null;
+		$options->async  = false;
+
+		$chunks = explode('|', $url);
+
+		// Remove the flags from the URL
+		$url = $chunks[0];
+
+		for ($i=1; $i<count($chunks); $i++)
+		{
+			if (empty($chunks[$i]))
+			{
+				continue;
+			}
+
+			switch ($chunks[$i])
+			{
+				case 'static':
+					$options->static = true;
+					break;
+
+				case 'async':
+					$options->async = true;
+					break;
+
+				case is_numeric($chunks[$i]):
+					$options->mtime = $chunks[$i];
+					break;
+
+				default:
+					$options->media = $chunks[$i];
+					break;
+			}
+		}
+
+		return $options;
 	}
 
 

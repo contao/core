@@ -3,26 +3,20 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Core
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
  * Class FormHeadline
  *
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Core
+ * @property string $text
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class FormHeadline extends \Widget
 {
@@ -32,6 +26,13 @@ class FormHeadline extends \Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'form_headline';
+
+	/**
+	 * The CSS class prefix
+	 *
+	 * @var string
+	 */
+	protected $strPrefix = 'widget widget-headline';
 
 
 	/**
@@ -50,6 +51,7 @@ class FormHeadline extends \Widget
 	 */
 	public function generate()
 	{
+		/** @var \PageModel $objPage */
 		global $objPage;
 
 		// Clean RTE output

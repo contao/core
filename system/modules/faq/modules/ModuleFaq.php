@@ -3,36 +3,29 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Faq
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
-
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
 /**
- * Class ModuleFaq
- *
  * Provide methods regarding FAQs.
- * @copyright  Leo Feyer 2005-2014
- * @author     Leo Feyer <https://contao.org>
- * @package    Faq
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 class ModuleFaq extends \Frontend
 {
 
 	/**
 	 * Add FAQs to the indexer
-	 * @param array
-	 * @param integer
-	 * @param boolean
+	 *
+	 * @param array   $arrPages
+	 * @param integer $intRoot
+	 * @param boolean $blnIsSitemap
+	 *
 	 * @return array
 	 */
 	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
@@ -44,8 +37,8 @@ class ModuleFaq extends \Frontend
 			$arrRoot = $this->Database->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
+		$time = \Date::floorToMinute();
 
 		// Get all categories
 		$objFaq = \FaqCategoryModel::findAll();
@@ -79,7 +72,7 @@ class ModuleFaq extends \Frontend
 					}
 
 					// The target page has not been published (see #5520)
-					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop < $time))
+					if (!$objParent->published || ($objParent->start != '' && $objParent->start > $time) || ($objParent->stop != '' && $objParent->stop <= ($time + 60)))
 					{
 						continue;
 					}

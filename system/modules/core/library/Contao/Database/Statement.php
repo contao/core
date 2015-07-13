@@ -3,11 +3,9 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2014 Leo Feyer
+ * Copyright (c) 2005-2015 Leo Feyer
  *
- * @package Library
- * @link    https://contao.org
- * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
+ * @license LGPL-3.0+
  */
 
 namespace Contao\Database;
@@ -26,9 +24,12 @@ namespace Contao\Database;
  *     $stmt->limit(10);
  *     $res = $stmt->execute('London');
  *
- * @package   Library
- * @author    Leo Feyer <https://github.com/leofeyer>
- * @copyright Leo Feyer 2005-2014
+ * @property string  $query        The query string
+ * @property string  $error        The last error message
+ * @property integer $affectedRows The number of affected rows
+ * @property integer $insertId     The last insert ID
+ *
+ * @author Leo Feyer <https://github.com/leofeyer>
  */
 abstract class Statement
 {
@@ -50,6 +51,18 @@ abstract class Statement
 	 * @var string
 	 */
 	protected $strQuery;
+
+	/**
+	 * Query start
+	 * @var int
+	 */
+	protected $intQueryStart;
+
+	/**
+	 * Query end
+	 * @var int
+	 */
+	protected $intQueryEnd;
 
 	/**
 	 * Autocommit indicator
@@ -86,13 +99,6 @@ abstract class Statement
 
 	/**
 	 * Return an object property
-	 *
-	 * Supported parameters:
-	 *
-	 * * query:        the query string
-	 * * error:        the last error message
-	 * * affectedRows: the number of affected rows
-	 * * insertId:     the last insert ID
 	 *
 	 * @param string $strKey The property name
 	 *
@@ -162,6 +168,7 @@ abstract class Statement
 		}
 
 		$this->strQuery = implode('', $arrChunks);
+
 		return $this;
 	}
 
@@ -207,6 +214,7 @@ abstract class Statement
 		}
 
 		$this->strQuery = str_replace('%p', $strQuery, $this->strQuery);
+
 		return $this;
 	}
 
@@ -232,6 +240,7 @@ abstract class Statement
 		}
 
 		$this->limit_query($intRows, $intOffset);
+
 		return $this;
 	}
 
@@ -239,18 +248,19 @@ abstract class Statement
 	/**
 	 * Execute the query and return the result object
 	 *
-	 * @return \Database\Result The result object
+	 * @return \Database\Result|object The result object
 	 */
 	public function execute()
 	{
 		$arrParams = func_get_args();
 
-		if (is_array($arrParams[0]))
+		if (!empty($arrParams) && is_array($arrParams[0]))
 		{
 			$arrParams = array_values($arrParams[0]);
 		}
 
 		$this->replaceWildcards($arrParams);
+
 		return $this->query();
 	}
 
@@ -277,16 +287,21 @@ abstract class Statement
 			throw new \Exception('Empty query string');
 		}
 
+		$this->intQueryStart = microtime(true);
+
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
 		{
 			throw new \Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
 
+		$this->intQueryEnd = microtime(true);
+
 		// No result set available
 		if (!is_resource($this->resResult) && !is_object($this->resResult))
 		{
 			$this->debugQuery();
+
 			return $this;
 		}
 
@@ -395,6 +410,7 @@ abstract class Statement
 			$arrData['returned'] = sprintf('%s row(s) returned', $objResult->numRows);
 		}
 
+		$arrData['duration'] = \System::getFormattedNumber((($this->intQueryEnd - $this->intQueryStart) * 1000), 3) . ' ms';
 		$GLOBALS['TL_DEBUG']['database_queries'][] = $arrData;
 	}
 

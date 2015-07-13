@@ -134,6 +134,12 @@
       <trans-unit id="tl_theme.layout.1">
         <source>Edit the page layouts of theme ID %s</source>
       </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.0">
+        <source>Image sizes</source>
+      </trans-unit>
+      <trans-unit id="tl_theme.imageSizes.1">
+        <source>Edit the image sizes of theme ID %s</source>
+      </trans-unit>
       <trans-unit id="tl_theme.importTheme.0">
         <source>Theme import</source>
       </trans-unit>
