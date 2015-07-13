@@ -45,7 +45,7 @@
         <source>Aruba</source>
       </trans-unit>
       <trans-unit id="CNT.ax">
-        <source>Aland Islands</source>
+        <source>Åland Islands</source>
       </trans-unit>
       <trans-unit id="CNT.az">
         <source>Azerbaijan</source>
@@ -89,6 +89,9 @@
       <trans-unit id="CNT.bo">
         <source>Bolivia</source>
       </trans-unit>
+      <trans-unit id="CNT.bq">
+        <source>Caribbean Netherlands</source>
+      </trans-unit>
       <trans-unit id="CNT.br">
         <source>Brazil</source>
       </trans-unit>
@@ -129,7 +132,7 @@
         <source>Switzerland</source>
       </trans-unit>
       <trans-unit id="CNT.ci">
-        <source>Cote d'Ivoire</source>
+        <source>Côte d'Ivoire</source>
       </trans-unit>
       <trans-unit id="CNT.ck">
         <source>Cook Islands</source>
@@ -153,7 +156,7 @@
         <source>Cuba</source>
       </trans-unit>
       <trans-unit id="CNT.cv">
-        <source>Cape Verde</source>
+        <source>Cabo Verde</source>
       </trans-unit>
       <trans-unit id="CNT.cw">
         <source>Curaçao</source>
@@ -291,7 +294,7 @@
         <source>Honduras</source>
       </trans-unit>
       <trans-unit id="CNT.hr">
-        <source>Croatia/Hrvatska</source>
+        <source>Croatia</source>
       </trans-unit>
       <trans-unit id="CNT.ht">
         <source>Haiti</source>
@@ -365,9 +368,6 @@
       <trans-unit id="CNT.kr">
         <source>South Korea</source>
       </trans-unit>
-      <trans-unit id="CNT.kv">
-        <source>Kosovo</source>
-      </trans-unit>
       <trans-unit id="CNT.kw">
         <source>Kuwait</source>
       </trans-unit>
@@ -378,7 +378,7 @@
         <source>Kazakhstan</source>
       </trans-unit>
       <trans-unit id="CNT.la">
-        <source>Lao</source>
+        <source>Laos</source>
       </trans-unit>
       <trans-unit id="CNT.lb">
         <source>Lebanon</source>
@@ -408,7 +408,7 @@
         <source>Latvia</source>
       </trans-unit>
       <trans-unit id="CNT.ly">
-        <source>Libyan Arab Jamahiriya</source>
+        <source>Libya</source>
       </trans-unit>
       <trans-unit id="CNT.ma">
         <source>Morocco</source>
@@ -423,7 +423,7 @@
         <source>Montenegro</source>
       </trans-unit>
       <trans-unit id="CNT.mf">
-        <source>Saint Martin</source>
+        <source>Saint Martin (French part)</source>
       </trans-unit>
       <trans-unit id="CNT.mg">
         <source>Madagascar</source>
@@ -549,7 +549,7 @@
         <source>Puerto Rico</source>
       </trans-unit>
       <trans-unit id="CNT.ps">
-        <source>Palestinian Territories</source>
+        <source>Palestine, State of</source>
       </trans-unit>
       <trans-unit id="CNT.pt">
         <source>Portugal</source>
@@ -564,7 +564,7 @@
         <source>Qatar</source>
       </trans-unit>
       <trans-unit id="CNT.re">
-        <source>Reunion Island</source>
+        <source>Réunion</source>
       </trans-unit>
       <trans-unit id="CNT.ro">
         <source>Romania</source>
@@ -606,7 +606,7 @@
         <source>Svalbard and Jan Mayen Islands</source>
       </trans-unit>
       <trans-unit id="CNT.sk">
-        <source>Slovak Republic</source>
+        <source>Slovakia</source>
       </trans-unit>
       <trans-unit id="CNT.sl">
         <source>Sierra Leone</source>
@@ -623,14 +623,20 @@
       <trans-unit id="CNT.sr">
         <source>Suriname</source>
       </trans-unit>
+      <trans-unit id="CNT.ss">
+        <source>South Sudan</source>
+      </trans-unit>
       <trans-unit id="CNT.st">
         <source>Sao Tome and Principe</source>
       </trans-unit>
       <trans-unit id="CNT.sv">
         <source>El Salvador</source>
       </trans-unit>
+      <trans-unit id="CNT.sx">
+        <source>Sint Maarten (Dutch part)</source>
+      </trans-unit>
       <trans-unit id="CNT.sy">
-        <source>Syrian Arab Republic</source>
+        <source>Syria</source>
       </trans-unit>
       <trans-unit id="CNT.sz">
         <source>Swaziland</source>
@@ -657,7 +663,7 @@
         <source>Tokelau</source>
       </trans-unit>
       <trans-unit id="CNT.tl">
-        <source>Timor-Leste</source>
+        <source>East Timor</source>
       </trans-unit>
       <trans-unit id="CNT.tm">
         <source>Turkmenistan</source>
@@ -693,7 +699,7 @@
         <source>United States Minor Outlying Islands</source>
       </trans-unit>
       <trans-unit id="CNT.us">
-        <source>United States</source>
+        <source>United States of America</source>
       </trans-unit>
       <trans-unit id="CNT.uy">
         <source>Uruguay</source>
