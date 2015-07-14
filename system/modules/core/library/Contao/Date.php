@@ -616,7 +616,9 @@ class Date
 		if (strpos($strDate, '::') === false)
 		{
 			$strReturn = $strDate;
-		} else {
+		} 
+		else
+		{
     		if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
     		{
     			$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
