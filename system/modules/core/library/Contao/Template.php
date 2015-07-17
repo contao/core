@@ -433,10 +433,9 @@ abstract class Template extends \BaseTemplate
 			}
 			else
 			{
-				// Remove line indentation
+				// Remove line indentations and trailing spaces
 				$strChunk = str_replace("\r", '', $strChunk);
-				$strChunk = preg_replace(array('/^[\t ]+/m', '/\n\n+/'), array('', "\n"), $strChunk);
-				$strChunk = rtrim($strChunk, "\t ");
+				$strChunk = preg_replace(array('/^[\t ]+/m', '/[\t ]+$/m', '/\n\n+/'), array('', '', "\n"), $strChunk);
 			}
 
 			$strHtml .= $strChunk;
