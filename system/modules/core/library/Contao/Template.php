@@ -10,6 +10,8 @@
 
 namespace Contao;
 
+use MatthiasMullie\Minify;
+
 
 /**
  * Parses and outputs template files
@@ -388,6 +390,7 @@ abstract class Template extends \BaseTemplate
 		$strHtml = '';
 		$blnPreserveNext = false;
 		$blnOptimizeNext = false;
+		$strType = null;
 
 		// Recombine the markup
 		foreach ($arrChunks as $strChunk)
@@ -396,9 +399,15 @@ abstract class Template extends \BaseTemplate
 			{
 				$blnPreserveNext = true;
 			}
-			elseif (strncasecmp($strChunk, '<script', 7) === 0 || strncasecmp($strChunk, '<style', 6) === 0)
+			elseif (strncasecmp($strChunk, '<script', 7) === 0)
 			{
 				$blnOptimizeNext = true;
+				$strType = 'js';
+			}
+			elseif (strncasecmp($strChunk, '<style', 6) === 0)
+			{
+				$blnOptimizeNext = true;
+				$strType = 'css';
 			}
 			elseif ($blnPreserveNext)
 			{
@@ -409,26 +418,31 @@ abstract class Template extends \BaseTemplate
 				$blnOptimizeNext = false;
 
 				// Minify inline scripts
-				$strChunk = str_replace(array("/* <![CDATA[ */\n", "<!--\n", "\n//-->"), array('/* <![CDATA[ */', '', ''), $strChunk);
-				$strChunk = preg_replace(array('@(?<![:\'"])//(?!W3C|DTD|EN).*@', '/[ \n\t]*(;|=|\{|\}|\[|\]|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
-				$strChunk = trim($strChunk);
+				if ($strType == 'js')
+				{
+					$objMinify = new Minify\JS();
+					$objMinify->add($strChunk);
+					$strChunk = $objMinify->minify();
+				}
+				elseif ($strType == 'css')
+				{
+					$objMinify = new Minify\CSS();
+					$objMinify->add($strChunk);
+					$strChunk = $objMinify->minify();
+				}
 			}
 			else
 			{
 				// Remove line indentation
 				$strChunk = str_replace("\r", '', $strChunk);
-				$strChunk = preg_replace('/^[\t ]+(<|\n)/m', '$1', $strChunk);
+				$strChunk = preg_replace(array('/^[\t ]+/m', '/\n\n+/'), array('', "\n"), $strChunk);
 				$strChunk = rtrim($strChunk, "\t ");
 			}
 
 			$strHtml .= $strChunk;
 		}
 
-		// Remove consecutive new lines
-		$strHtml = preg_replace('/\n\n+/', "\n", $strHtml);
-		$strHtml = trim($strHtml);
-
-		return $strHtml;
+		return trim($strHtml);
 	}
 
 
