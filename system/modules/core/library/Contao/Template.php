@@ -56,6 +56,29 @@ abstract class Template extends \BaseTemplate
 	 */
 	protected $arrData = array();
 
+	/**
+	 * Valid JavaScipt types, see <http://www.w3.org/TR/html5/scripting-1.html#scriptingLanguages>
+	 * @var array
+	 */
+	protected static $validJavaScriptTypes = array(
+		'application/ecmascript',
+		'application/javascript',
+		'application/x-ecmascript',
+		'application/x-javascript',
+		'text/ecmascript',
+		'text/javascript',
+		'text/javascript1.0',
+		'text/javascript1.1',
+		'text/javascript1.2',
+		'text/javascript1.3',
+		'text/javascript1.4',
+		'text/javascript1.5',
+		'text/jscript',
+		'text/livescript',
+		'text/x-ecmascript',
+		'text/x-javascript',
+	);
+
 
 	/**
 	 * Create a new template object
@@ -401,13 +424,29 @@ abstract class Template extends \BaseTemplate
 			}
 			elseif (strncasecmp($strChunk, '<script', 7) === 0)
 			{
-				$blnOptimizeNext = true;
-				$strType = 'js';
+				if (
+					(preg_match('/\stype\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array(strtolower($typeMatch['type']), static::$validJavaScriptTypes)) ||
+					(preg_match('/\slanguage\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array('text/' . strtolower($typeMatch['type']), static::$validJavaScriptTypes))
+				)
+				{
+					$blnPreserveNext = true;
+				}
+				else
+				{
+					$blnOptimizeNext = true;
+					$strType = 'js';
+				}
 			}
 			elseif (strncasecmp($strChunk, '<style', 6) === 0)
 			{
-				$blnOptimizeNext = true;
-				$strType = 'css';
+				if (preg_match('/\stype\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && strtolower($typeMatch['type']) != 'text/css') {
+					$blnPreserveNext = true;
+				}
+				else
+				{
+					$blnOptimizeNext = true;
+					$strType = 'css';
+				}
 			}
 			elseif ($blnPreserveNext)
 			{
