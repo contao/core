@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Make the markup minification less aggressive (see #7734).
+
+### Fixed
 Filter the indices in `Database::getFieldNames()` (see #7869).
 
 ### Fixed

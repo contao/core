@@ -415,24 +415,18 @@ abstract class Template extends \BaseTemplate
 			}
 			else
 			{
-				$arrReplace = array
-				(
-					'/\n ?\n+/'                   => "\n",    // Convert multiple line-breaks
-					'/^[\t ]+</m'                 => '<',     // Remove tag indentation
-					'/>\n<(a|input|select|span)/' => '> <$1', // Remove line-breaks between tags
-					'/([^>])\n/'                  => '$1 ',   // Remove line-breaks of wrapped text
-					'/  +/'                       => ' ',     // Remove redundant whitespace characters
-					'/\n/'                        => '',      // Remove all remaining line-breaks
-					'/ <\/(div|p)>/'              => '</$1>'  // Remove spaces before closing DIV and P tags
-				);
-
+				// Remove line indentation
 				$strChunk = str_replace("\r", '', $strChunk);
-				$strChunk = preg_replace(array_keys($arrReplace), array_values($arrReplace), $strChunk);
-				$strChunk = trim($strChunk);
+				$strChunk = preg_replace('/^[\t ]+(<|\n)/m', '$1', $strChunk);
+				$strChunk = rtrim($strChunk, "\t ");
 			}
 
 			$strHtml .= $strChunk;
 		}
+
+		// Remove consecutive new lines
+		$strHtml = preg_replace('/\n\n+/', "\n", $strHtml);
+		$strHtml = trim($strHtml);
 
 		return $strHtml;
 	}
