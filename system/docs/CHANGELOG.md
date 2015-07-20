@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Disable responsive images in the back end preview (see #7875).
+
+### Fixed
 Overwrite the request string when generating news/event feeds (see #7756).
 
 ### Fixed
