@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly check the subfolders in the `hasAccess()` method (see #7920).
+
+### Fixed
 Updated the countries list (see #7918).
 
 ### Fixed
