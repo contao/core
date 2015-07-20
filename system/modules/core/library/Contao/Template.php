@@ -57,10 +57,12 @@ abstract class Template extends \BaseTemplate
 	protected $arrData = array();
 
 	/**
-	 * Valid JavaScipt types, see <http://www.w3.org/TR/html5/scripting-1.html#scriptingLanguages>
+	 * Valid JavaScipt types
 	 * @var array
+	 * @see http://www.w3.org/TR/html5/scripting-1.html#scriptingLanguages
 	 */
-	protected static $validJavaScriptTypes = array(
+	protected static $validJavaScriptTypes = array
+	(
 		'application/ecmascript',
 		'application/javascript',
 		'application/x-ecmascript',
@@ -415,6 +417,24 @@ abstract class Template extends \BaseTemplate
 		$blnOptimizeNext = false;
 		$strType = null;
 
+		// Check for valid JavaScript types (see #7927)
+		$isJavaScript = function ($strChunk)
+		{
+			$typeMatch = array();
+
+			if (preg_match('/\stype\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array(strtolower($typeMatch['type']), static::$validJavaScriptTypes))
+			{
+				return false;
+			}
+
+			if (preg_match('/\slanguage\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array('text/' . strtolower($typeMatch['type']), static::$validJavaScriptTypes))
+			{
+				return false;
+			}
+
+			return true;
+		};
+
 		// Recombine the markup
 		foreach ($arrChunks as $strChunk)
 		{
@@ -424,29 +444,20 @@ abstract class Template extends \BaseTemplate
 			}
 			elseif (strncasecmp($strChunk, '<script', 7) === 0)
 			{
-				if (
-					(preg_match('/\stype\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array(strtolower($typeMatch['type']), static::$validJavaScriptTypes)) ||
-					(preg_match('/\slanguage\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && !in_array('text/' . strtolower($typeMatch['type']), static::$validJavaScriptTypes))
-				)
-				{
-					$blnPreserveNext = true;
-				}
-				else
+				if ($isJavaScript($strChunk))
 				{
 					$blnOptimizeNext = true;
 					$strType = 'js';
 				}
+				else
+				{
+					$blnPreserveNext = true;
+				}
 			}
 			elseif (strncasecmp($strChunk, '<style', 6) === 0)
 			{
-				if (preg_match('/\stype\s*=\s*(?:(?J)(["\'])\s*(?<type>.*?)\s*\1|(?<type>[^\s>]+))/i', $strChunk, $typeMatch) && strtolower($typeMatch['type']) != 'text/css') {
-					$blnPreserveNext = true;
-				}
-				else
-				{
-					$blnOptimizeNext = true;
-					$strType = 'css';
-				}
+				$blnOptimizeNext = true;
+				$strType = 'css';
 			}
 			elseif ($blnPreserveNext)
 			{
