@@ -176,7 +176,7 @@ class FileUpload extends \Backend
 					if ($this->Files->move_uploaded_file($file['tmp_name'], $strNewFile))
 					{
 						$this->Files->chmod($strNewFile, \Config::get('defaultFileChmod'));
-						$blnResized = $this->resizeUploadedImage($strNewFile, $file);
+						$blnResized = $this->resizeUploadedImage($strNewFile);
 
 						// Notify the user
 						if (!$blnResized)
