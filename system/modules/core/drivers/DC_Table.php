@@ -4264,7 +4264,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		}
 
 		// Make items sortable
-		if ($blnHasSorting && \Input::get('act') != 'select')
+		if ($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['notSortable'] && \Input::get('act') != 'select')
 		{
 			$return .= '
 </ul>

@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Respect the `notSortable` flag in the parent (see #7902).
+
+### Fixed
 Round the maximum upload size to an integer value (see #7880).
 
 ### Fixed
