@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Round the maximum upload size to an integer value (see #7880).
+
+### Fixed
 Make the markup minification less aggressive (see #7734).
 
 ### Fixed
