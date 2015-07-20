@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Updated the countries list (see #7918).
+
+### Fixed
 Respect the `notSortable` flag in the parent (see #7902).
 
 ### Fixed
