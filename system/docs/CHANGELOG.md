@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Overwrite the request string when generating news/event feeds (see #7756).
+
+### Fixed
 Store the static URLs with the cached file (see #7914).
 
 ### Fixed
