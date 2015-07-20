@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Also sort the newsletter channels alphabetically in the front end (see #7864).
+
+### Fixed
 Disable responsive images in the back end preview (see #7875).
 
 ### Fixed
