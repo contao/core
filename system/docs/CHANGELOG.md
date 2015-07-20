@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Store the static URLs with the cached file (see #7914).
+
+### Fixed
 Correctly check the subfolders in the `hasAccess()` method (see #7920).
 
 ### Fixed
