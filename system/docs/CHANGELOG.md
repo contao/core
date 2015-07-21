@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Check for the comments module when compiling the news meta fields (see #7901).
+
+### Fixed
 Also sort the newsletter channels alphabetically in the front end (see #7864).
 
 ### Fixed
