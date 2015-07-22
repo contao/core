@@ -101,7 +101,7 @@ class Installer extends \Controller
 	 *
 	 * @return array An array of commands
 	 */
-	protected function compileCommands()
+	public function compileCommands()
 	{
 		$drop = array();
 		$create = array();
