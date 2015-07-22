@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly encode the URLs in the popup file manager (see #7929).
+
+### Fixed
 Check for the comments module when compiling the news meta fields (see #7901).
 
 ### Fixed
