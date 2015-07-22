@@ -415,6 +415,8 @@ class FrontendIndex extends \Frontend
 		$expire = null;
 		$content = null;
 		$type = null;
+		$files = null;
+		$assets = null;
 
 		// Include the file
 		ob_start();
@@ -427,6 +429,10 @@ class FrontendIndex extends \Frontend
 
 			return;
 		}
+
+		// Define the static URL constants (see #7914)
+		define('TL_FILES_URL', $files);
+		define('TL_ASSETS_URL', $assets);
 
 		// Read the buffer
 		$strBuffer = ob_get_contents();

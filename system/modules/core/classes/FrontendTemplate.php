@@ -247,29 +247,17 @@ class FrontendTemplate extends \Template
 			$strBuffer = $this->replaceInsertTags($this->strBuffer);
 			$strBuffer = $this->replaceDynamicScriptTags($strBuffer); // see #4203
 
-			// Store the static URLs with the cached file (see #7914)
-			$strFilesUrl = TL_FILES_URL;
-			$strAssetsUrl = TL_ASSETS_URL;
-
-			$strHeader = <<<EOT
-<?php
-
-// $strCacheKey
-\$expire = $intCache;
-\$content = '{$this->strContentType}';
-\$type = '{$objPage->type}';
-
-if (!defined('TL_FILES_URL')) {
-    define('TL_FILES_URL', '$strFilesUrl');
-}
-
-if (!defined('TL_ASSETS_URL')) {
-    define('TL_ASSETS_URL', '$strAssetsUrl');
-}
-
-?>
-
-EOT;
+			// Add the cache file header
+			$strHeader = sprintf
+			(
+				"<?php /* %s */ \$expire = %d; \$content = %s; \$type = %s; \$files = %s; \$assets = %s; ?>\n",
+				$strCacheKey,
+				(int) $intCache,
+				var_export($this->strContentType, true),
+				var_export($objPage->type, true),
+				var_export(TL_FILES_URL, true),
+				var_export(TL_ASSETS_URL, true)
+			);
 
 			// Create the cache file
 			$strMd5CacheKey = md5($strCacheKey);
