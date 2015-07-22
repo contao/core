@@ -262,6 +262,23 @@ class String
 
 
 	/**
+	 * Generate an alias from a string
+	 *
+	 * @param string $strString The string
+	 *
+	 * @return string The alias
+	 */
+	public static function generateAlias($strString)
+	{
+		$strString = static::decodeEntities($strString);
+		$strString = static::restoreBasicEntities($strString);
+		$strString = standardize(strip_tags($strString));
+
+		return $strString;
+	}
+
+
+	/**
 	 * Censor a single word or an array of words within a string
 	 *
 	 * @param string $strString  The string to censor

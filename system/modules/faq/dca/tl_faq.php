@@ -367,7 +367,7 @@ class tl_faq extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = standardize(String::restoreBasicEntities($dc->activeRecord->question));
+			$varValue = String::generateAlias($dc->activeRecord->question);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_faq WHERE alias=?")

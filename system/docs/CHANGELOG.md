@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Strip tags before auto-generating aliases (see #7857). 
+
+### Fixed
 Correctly encode the URLs in the popup file manager (see #7929).
 
 ### Fixed
