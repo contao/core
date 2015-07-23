@@ -36,23 +36,24 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.1.7",
+            "version": "v0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "59e7ee0eb46ee531afa1723c143c45d696a3519e"
+                "reference": "9ea6a90fd36a1ca27ae1012449f28bf7ae77f454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/59e7ee0eb46ee531afa1723c143c45d696a3519e",
-                "reference": "59e7ee0eb46ee531afa1723c143c45d696a3519e",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/9ea6a90fd36a1ca27ae1012449f28bf7ae77f454",
+                "reference": "9ea6a90fd36a1ca27ae1012449f28bf7ae77f454",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*",
+                "kherge/box": "~2.5",
+                "phpunit/phpunit": "~3.7",
                 "squizlabs/php_codesniffer": "~2.3"
             },
             "bin": [
@@ -79,7 +80,7 @@
                 }
             ],
             "description": "scssphp is a compiler for SCSS written in PHP.",
-            "homepage": "http://leafo.net/scssphp/",
+            "homepage": "http://leafo.github.io/scssphp/",
             "keywords": [
                 "css",
                 "less",
@@ -87,7 +88,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2015-07-02 01:33:11"
+            "time": "2015-07-18 13:59:07"
         },
         {
             "name": "matthiasmullie/minify",
