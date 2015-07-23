@@ -57,11 +57,11 @@ class FormHeadline extends \Widget
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->text = \String::toXhtml($this->text);
+			$this->text = \StringUtil::toXhtml($this->text);
 		}
 		else
 		{
-			$this->text = \String::toHtml5($this->text);
+			$this->text = \StringUtil::toHtml5($this->text);
 		}
 
 		return $this->text;

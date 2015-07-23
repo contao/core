@@ -658,7 +658,7 @@ class tl_calendar_events extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->title);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->title);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_calendar_events WHERE alias=?")

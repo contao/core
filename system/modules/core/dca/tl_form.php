@@ -441,7 +441,7 @@ class tl_form extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->title);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->title);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_form WHERE id=? OR alias=?")

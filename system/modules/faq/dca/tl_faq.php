@@ -367,7 +367,7 @@ class tl_faq extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->question);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->question);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_faq WHERE alias=?")
@@ -404,7 +404,7 @@ class tl_faq extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!Config::get('doNotCollapse') ? ' h52' : '') . '">
-' . String::insertTagToSrc($arrRow['answer']) . '
+' . StringUtil::insertTagToSrc($arrRow['answer']) . '
 </div>' . "\n";
 	}
 

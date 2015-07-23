@@ -112,7 +112,7 @@ class ModuleBreadcrumb extends \Module
 
 					if (strncasecmp($href, 'mailto:', 7) === 0)
 					{
-						$href = \String::encodeEmail($href);
+						$href = \StringUtil::encodeEmail($href);
 					}
 					break;
 

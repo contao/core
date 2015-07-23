@@ -606,7 +606,7 @@ class tl_news extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->headline);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->headline);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")

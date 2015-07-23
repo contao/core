@@ -784,7 +784,7 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				$options = \String::resolveFlaggedUrl($stylesheet);
+				$options = \StringUtil::resolveFlaggedUrl($stylesheet);
 
 				if ($options->static)
 				{
@@ -802,7 +802,7 @@ abstract class Controller extends \System
 		{
 			foreach (array_unique($GLOBALS['TL_USER_CSS']) as $stylesheet)
 			{
-				$options = \String::resolveFlaggedUrl($stylesheet);
+				$options = \StringUtil::resolveFlaggedUrl($stylesheet);
 
 				if ($options->static)
 				{
@@ -837,7 +837,7 @@ abstract class Controller extends \System
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$options = \String::resolveFlaggedUrl($javascript);
+				$options = \StringUtil::resolveFlaggedUrl($javascript);
 
 				if ($options->static)
 				{
@@ -1884,11 +1884,11 @@ abstract class Controller extends \System
 	 *
 	 * @return string The string with the original entities
 	 *
-	 * @deprecated Use String::restoreBasicEntities() instead
+	 * @deprecated Use StringUtil::restoreBasicEntities() instead
 	 */
 	public static function restoreBasicEntities($strBuffer)
 	{
-		return \String::restoreBasicEntities($strBuffer);
+		return \StringUtil::restoreBasicEntities($strBuffer);
 	}
 
 
@@ -1981,11 +1981,11 @@ abstract class Controller extends \System
 	 *
 	 * @return string The text with the replaced tokens
 	 *
-	 * @deprecated Use String::parseSimpleTokens() instead
+	 * @deprecated Use StringUtil::parseSimpleTokens() instead
 	 */
 	protected function parseSimpleTokens($strBuffer, $arrData)
 	{
-		return \String::parseSimpleTokens($strBuffer, $arrData);
+		return \StringUtil::parseSimpleTokens($strBuffer, $arrData);
 	}
 
 

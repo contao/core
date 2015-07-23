@@ -1744,7 +1744,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		if (\Input::post('FORM_SUBMIT') == 'tl_files')
 		{
 			// Restore the basic entities (see #7170)
-			$strSource = \String::restoreBasicEntities(\Input::postRaw('source'));
+			$strSource = \StringUtil::restoreBasicEntities(\Input::postRaw('source'));
 
 			// Save the file
 			if (md5($strContent) != md5($strSource))

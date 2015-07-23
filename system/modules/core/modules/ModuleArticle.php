@@ -109,11 +109,11 @@ class ModuleArticle extends \Module
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->teaser = \String::toXhtml($this->teaser);
+			$this->teaser = \StringUtil::toXhtml($this->teaser);
 		}
 		else
 		{
-			$this->teaser = \String::toHtml5($this->teaser);
+			$this->teaser = \StringUtil::toHtml5($this->teaser);
 		}
 
 		// Show the teaser only

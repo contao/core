@@ -52,7 +52,7 @@ class Newsletter extends \Backend
 		// Add default sender address
 		if ($objNewsletter->sender == '')
 		{
-			list($objNewsletter->senderName, $objNewsletter->sender) = \String::splitFriendlyEmail(\Config::get('adminEmail'));
+			list($objNewsletter->senderName, $objNewsletter->sender) = \StringUtil::splitFriendlyEmail(\Config::get('adminEmail'));
 		}
 
 		$arrAttachments = array();
@@ -357,7 +357,7 @@ class Newsletter extends \Backend
 	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
 	{
 		// Prepare the text content
-		$objEmail->text = \String::parseSimpleTokens($text, $arrRecipient);
+		$objEmail->text = \StringUtil::parseSimpleTokens($text, $arrRecipient);
 
 		if (!$objNewsletter->sendText)
 		{
@@ -372,7 +372,7 @@ class Newsletter extends \Backend
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;
-			$objTemplate->body = \String::parseSimpleTokens($html, $arrRecipient);
+			$objTemplate->body = \StringUtil::parseSimpleTokens($html, $arrRecipient);
 			$objTemplate->charset = \Config::get('characterSet');
 			$objTemplate->css = $css; // Backwards compatibility
 			$objTemplate->recipient = $arrRecipient['email'];

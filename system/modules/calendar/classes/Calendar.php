@@ -451,11 +451,11 @@ class Calendar extends \Frontend
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$arrEvent['teaser'] = \String::toXhtml($objEvent->teaser);
+			$arrEvent['teaser'] = \StringUtil::toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$arrEvent['teaser'] = \String::toHtml5($objEvent->teaser);
+			$arrEvent['teaser'] = \StringUtil::toHtml5($objEvent->teaser);
 		}
 
 		// Reset the enclosures (see #5685)

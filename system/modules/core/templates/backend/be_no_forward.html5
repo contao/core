@@ -37,7 +37,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?= $lang->noForwardPage ?></p>
 
       <h3><?= $lang->howToFix ?></h3>
-      <p><?php printf($lang->noForwardFix, String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+      <p><?php printf($lang->noForwardFix, StringUtil::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
     </div>
 

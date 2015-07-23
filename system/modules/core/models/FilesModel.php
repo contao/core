@@ -173,7 +173,7 @@ class FilesModel extends \Model
 		// Convert UUIDs to binary
 		if (\Validator::isStringUuid($strUuid))
 		{
-			$strUuid = \String::uuidToBin($strUuid);
+			$strUuid = \StringUtil::uuidToBin($strUuid);
 		}
 
 		return static::findOneBy(array("$t.uuid=UNHEX(?)"), bin2hex($strUuid), $arrOptions);
@@ -202,7 +202,7 @@ class FilesModel extends \Model
 			// Convert UUIDs to binary
 			if (\Validator::isStringUuid($v))
 			{
-				$v = \String::uuidToBin($v);
+				$v = \StringUtil::uuidToBin($v);
 			}
 
 			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
@@ -290,7 +290,7 @@ class FilesModel extends \Model
 			// Convert UUIDs to binary
 			if (\Validator::isStringUuid($v))
 			{
-				$v = \String::uuidToBin($v);
+				$v = \StringUtil::uuidToBin($v);
 			}
 
 			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";

@@ -158,6 +158,7 @@ namespace  {
 	class Session extends \Contao\Session {}
 	class SortedIterator extends \Contao\SortedIterator {}
 	class String extends \Contao\String {}
+	class StringUtil extends \Contao\StringUtil {}
 	abstract class System extends \Contao\System {}
 	abstract class Template extends \Contao\Template {}
 	class TemplateLoader extends \Contao\TemplateLoader {}

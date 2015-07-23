@@ -1163,7 +1163,7 @@ class tl_content extends Backend
 		return '
 <div class="cte_type ' . $key . '">' . $type . '</div>
 <div class="' . trim($class) . '">
-' . String::insertTagToSrc($this->getContentElement($objModel)) . '
+' . StringUtil::insertTagToSrc($this->getContentElement($objModel)) . '
 </div>' . "\n";
 	}
 
@@ -1281,14 +1281,14 @@ class tl_content extends Backend
 
 			if (isset($arrHeadline['value']))
 			{
-				$headline = String::substr($arrHeadline['value'], 32);
+				$headline = StringUtil::substr($arrHeadline['value'], 32);
 			}
 			else
 			{
-				$headline = String::substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
+				$headline = StringUtil::substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 32);
 			}
 
-			$text = String::substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
+			$text = StringUtil::substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 32);
 			$strText = $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . ' (';
 
 			if ($headline != '')

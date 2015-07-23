@@ -5,6 +5,9 @@ Version 3.5.1 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Add a `StringUtil` class to restore PHP 7 compatibility (see contao/core-bundle#309).
+
+### Fixed
 Fix the `Validator::isEmail()` method (see contao/core-bundle#313).
 
 ### Fixed

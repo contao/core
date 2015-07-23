@@ -596,7 +596,7 @@ class tl_article extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->title);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->title);
 		}
 
 		// Add a prefix to reserved names (see #6066)
@@ -879,7 +879,7 @@ class tl_article extends Backend
 				}
 
 				// Set the new alias
-				$strAlias = String::generateAlias($objArticle->title);
+				$strAlias = StringUtil::generateAlias($objArticle->title);
 
 				// The alias has not changed
 				if ($strAlias == $objArticle->alias)

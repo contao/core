@@ -964,7 +964,7 @@ class tl_page extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = String::generateAlias($dc->activeRecord->title);
+			$varValue = StringUtil::generateAlias($dc->activeRecord->title);
 
 			// Generate folder URL aliases (see #4933)
 			if (Config::get('folderUrl'))

@@ -106,14 +106,14 @@ abstract class ModuleNews extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objTemplate->teaser = \String::toXhtml($objArticle->teaser);
+				$objTemplate->teaser = \StringUtil::toXhtml($objArticle->teaser);
 			}
 			else
 			{
-				$objTemplate->teaser = \String::toHtml5($objArticle->teaser);
+				$objTemplate->teaser = \StringUtil::toHtml5($objArticle->teaser);
 			}
 
-			$objTemplate->teaser = \String::encodeEmail($objTemplate->teaser);
+			$objTemplate->teaser = \StringUtil::encodeEmail($objTemplate->teaser);
 		}
 
 		// Display the "read more" button for external/article links
@@ -324,7 +324,7 @@ abstract class ModuleNews extends \Module
 			case 'external':
 				if (substr($objItem->url, 0, 7) == 'mailto:')
 				{
-					self::$arrUrlCache[$strCacheKey] = \String::encodeEmail($objItem->url);
+					self::$arrUrlCache[$strCacheKey] = \StringUtil::encodeEmail($objItem->url);
 				}
 				else
 				{
@@ -399,7 +399,7 @@ abstract class ModuleNews extends \Module
 		// Encode e-mail addresses
 		if (substr($objArticle->url, 0, 7) == 'mailto:')
 		{
-			$strArticleUrl = \String::encodeEmail($objArticle->url);
+			$strArticleUrl = \StringUtil::encodeEmail($objArticle->url);
 		}
 
 		// Ampersand URIs

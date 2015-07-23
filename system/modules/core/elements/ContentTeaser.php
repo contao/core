@@ -89,11 +89,11 @@ class ContentTeaser extends \ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->Template->text = \String::toXhtml($objArticle->teaser);
+			$this->Template->text = \StringUtil::toXhtml($objArticle->teaser);
 		}
 		else
 		{
-			$this->Template->text = \String::toHtml5($objArticle->teaser);
+			$this->Template->text = \StringUtil::toHtml5($objArticle->teaser);
 		}
 
 		$this->Template->headline = $objArticle->title;

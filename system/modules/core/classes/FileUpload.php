@@ -106,7 +106,7 @@ class FileUpload extends \Backend
 			// Sanitize the filename
 			try
 			{
-				$file['name'] = \String::sanitizeFileName($file['name']);
+				$file['name'] = \StringUtil::sanitizeFileName($file['name']);
 			}
 			catch (\InvalidArgumentException $e)
 			{

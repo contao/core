@@ -37,7 +37,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?= $lang->pageNotFound ?></p>
 
       <h3><?= $lang->howToFix ?></h3>
-      <p><?php printf($lang->notFoundFix, Environment::get('base'), String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+      <p><?php printf($lang->notFoundFix, Environment::get('base'), StringUtil::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
     </div>
 

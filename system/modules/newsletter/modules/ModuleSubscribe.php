@@ -287,7 +287,7 @@ class ModuleSubscribe extends \Module
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], \Idna::decode(\Environment::get('host')));
-		$objEmail->text = \String::parseSimpleTokens($this->nl_subscribe, $arrData);
+		$objEmail->text = \StringUtil::parseSimpleTokens($this->nl_subscribe, $arrData);
 		$objEmail->sendTo($varInput);
 
 		// Redirect to the jumpTo page

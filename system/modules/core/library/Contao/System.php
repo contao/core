@@ -1092,11 +1092,11 @@ abstract class System
 	 *
 	 * @return array An array with name and e-mail address
 	 *
-	 * @deprecated Use String::splitFriendlyEmail() instead
+	 * @deprecated Use StringUtil::splitFriendlyEmail() instead
 	 */
 	public static function splitFriendlyName($strEmail)
 	{
-		return \String::splitFriendlyEmail($strEmail);
+		return \StringUtil::splitFriendlyEmail($strEmail);
 	}
 
 
