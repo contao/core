@@ -450,6 +450,7 @@ class tl_templates extends Backend
 			}
 		}
 
+		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_diff');
 
 		// Template variables
