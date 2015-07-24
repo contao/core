@@ -63,8 +63,6 @@ class Folder extends \System
 	 */
 	public function __construct($strFolder)
 	{
-		parent::__construct();
-
 		// Handle open_basedir restrictions
 		if ($strFolder == '.')
 		{
