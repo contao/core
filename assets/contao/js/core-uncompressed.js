@@ -568,15 +568,17 @@ var AjaxRequest =
 		el.blur();
 
 		var image = $(el).getFirst('img'),
-			featured = (image.src.indexOf('featured_') == -1),
+			featured = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('featured_') == -1),
 			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		// Send the request
 		if (!featured) {
 			image.src = path + 'featured.gif';
+			image.set('data-state', 1);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 		} else {
 			image.src = path + 'featured_.gif';
+			image.set('data-state', 0);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 		}
 
