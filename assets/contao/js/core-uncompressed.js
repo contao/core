@@ -26,17 +26,18 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
+				image.src = path + 'modMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
+				image.src = path + 'modPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -62,7 +63,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
+				image.src = path + 'modMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -87,17 +88,18 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = path + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -150,7 +152,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				window.fireEvent('structure');
 				AjaxRequest.hideBox();
 
@@ -177,19 +179,20 @@ var AjaxRequest =
 
 		var item = $(id),
 			image = $(el).getFirst('img'),
-			icon = $(el).getNext('img');
+			icon = $(el).getNext('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				icon.src = icon.src.replace('folderC', 'folderO');
+				image.src = path + 'folMinus.gif';
+				icon.src = path + 'folderO.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				icon.src = icon.src.replace('folderO', 'folderC');
+				image.src = path + 'folPlus.gif';
+				icon.src = path + 'folderC.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -222,8 +225,8 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
+				image.src = path + 'folMinus.gif';
+				icon.src = path + 'folderO.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -250,17 +253,18 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = path + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -293,7 +297,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -321,17 +325,18 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = path + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -364,7 +369,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -467,6 +472,7 @@ var AjaxRequest =
 			image = $(el).getFirst('img'),
 			publish = (image.src.indexOf('invisible') != -1),
 			div = el.getParent('div'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
 			index, next;
 
 		// Find the icon depending on the view (tree view, list view, parent view)
@@ -540,10 +546,10 @@ var AjaxRequest =
 
 		// Send request
 		if (publish) {
-			image.src = image.src.replace('invisible.gif', 'visible.gif');
+			image.src = path + 'visible.gif';
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
-			image.src = image.src.replace('visible.gif', 'invisible.gif');
+			image.src = path + 'invisible.gif';
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
 
@@ -562,14 +568,15 @@ var AjaxRequest =
 		el.blur();
 
 		var image = $(el).getFirst('img'),
-			featured = (image.src.indexOf('featured_') == -1);
+			featured = (image.src.indexOf('featured_') == -1),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		// Send the request
 		if (!featured) {
-			image.src = image.src.replace('featured_.gif', 'featured.gif');
+			image.src = path + 'featured.gif';
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 		} else {
-			image.src = image.src.replace('featured.gif', 'featured_.gif');
+			image.src = path + 'featured_.gif';
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 		}
 
@@ -612,16 +619,17 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 		if (item) {
 			if (item.getStyle('display') != 'block') {
 				item.setStyle('display', 'block');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = path + 'folMinus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = path + 'folPlus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return true;
@@ -1017,7 +1025,8 @@ var Backend =
 				'alt': '',
 				'title': Contao.lang.expand,
 				'width': 20,
-				'height': 24
+				'height': 24,
+				'data-state': 0
 			});
 
 			new Tips.Contao(toggler, {
@@ -1038,11 +1047,13 @@ var Backend =
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
 
-				if (this.src.indexOf('expand.gif') != -1) {
+				if (this.get('data-state') == 0) {
 					this.src = path + 'collapse.gif';
+					this.set('data-state', 1);
 					this.store('tip:title', Contao.lang.collapse);
 				} else {
 					this.src = path + 'expand.gif';
+					this.set('data-state', 0);
 					this.store('tip:title', Contao.lang.expand);
 				}
 			});
@@ -1988,13 +1999,15 @@ var Backend =
 		}).each(function(el) {
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
-				var cbx = el.getNext('input');
+				var cbx = el.getNext('input'),
+					path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+
 				if (cbx.checked) {
 					cbx.checked = '';
-					el.src = el.src.replace('visible.gif', 'invisible.gif');
+					el.src = path + 'invisible.gif';
 				} else {
 					cbx.checked = 'checked';
-					el.src = el.src.replace('invisible.gif', 'visible.gif');
+					el.src = path + 'visible.gif';
 				}
 			});
 		});
