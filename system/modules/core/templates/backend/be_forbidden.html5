@@ -37,7 +37,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?= $lang->notAuthenticated ?></p>
 
       <h3><?= $lang->howToFix ?></h3>
-      <p><?php printf($lang->forbiddenFix, Environment::get('base'), String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+      <p><?php printf($lang->forbiddenFix, Environment::get('base'), StringUtil::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
     </div>
 

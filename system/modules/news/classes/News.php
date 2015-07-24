@@ -186,10 +186,16 @@ class News extends \Frontend
 
 					if ($objElement !== null)
 					{
+						// Overwrite the request (see #7756)
+						$strRequest = \Environment::get('request');
+						\Environment::set('request', $objItem->link);
+
 						while ($objElement->next())
 						{
 							$strDescription .= $this->getContentElement($objElement->current());
 						}
+
+						\Environment::set('request', $strRequest);
 					}
 				}
 				else

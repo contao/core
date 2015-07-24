@@ -34,55 +34,55 @@ namespace Contao;
  * @property integer $importantPartHeight
  * @property string  $meta
  *
- * @method static $this findByIdOrAlias()
- * @method static $this findByPath()
- * @method static $this findOneBy()
- * @method static $this findOneByPid()
- * @method static $this findOneByTstamp()
- * @method static $this findOneByType()
- * @method static $this findOneByExtension()
- * @method static $this findOneByHash()
- * @method static $this findOneByFound()
- * @method static $this findOneByName()
- * @method static $this findOneByProtected()
- * @method static $this findOneByImportantPartX()
- * @method static $this findOneByImportantPartY()
- * @method static $this findOneByImportantPartWidth()
- * @method static $this findOneByImportantPartHeight()
- * @method static $this findOneByMeta()
+ * @method static $this findByIdOrAlias($val, $opt=array())
+ * @method static $this findByPath($val, $opt=array())
+ * @method static $this findOneBy($col, $val, $opt=array())
+ * @method static $this findOneByPid($val, $opt=array())
+ * @method static $this findOneByTstamp($val, $opt=array())
+ * @method static $this findOneByType($val, $opt=array())
+ * @method static $this findOneByExtension($val, $opt=array())
+ * @method static $this findOneByHash($val, $opt=array())
+ * @method static $this findOneByFound($val, $opt=array())
+ * @method static $this findOneByName($val, $opt=array())
+ * @method static $this findOneByProtected($val, $opt=array())
+ * @method static $this findOneByImportantPartX($val, $opt=array())
+ * @method static $this findOneByImportantPartY($val, $opt=array())
+ * @method static $this findOneByImportantPartWidth($val, $opt=array())
+ * @method static $this findOneByImportantPartHeight($val, $opt=array())
+ * @method static $this findOneByMeta($val, $opt=array())
  *
- * @method static \Model\Collection|\FilesModel findByPid()
- * @method static \Model\Collection|\FilesModel findByTstamp()
- * @method static \Model\Collection|\FilesModel findByType()
- * @method static \Model\Collection|\FilesModel findByExtension()
- * @method static \Model\Collection|\FilesModel findByHash()
- * @method static \Model\Collection|\FilesModel findByFound()
- * @method static \Model\Collection|\FilesModel findByName()
- * @method static \Model\Collection|\FilesModel findByProtected()
- * @method static \Model\Collection|\FilesModel findByImportantPartX()
- * @method static \Model\Collection|\FilesModel findByImportantPartY()
- * @method static \Model\Collection|\FilesModel findByImportantPartWidth()
- * @method static \Model\Collection|\FilesModel findByImportantPartHeight()
- * @method static \Model\Collection|\FilesModel findByMeta()
- * @method static \Model\Collection|\FilesModel findBy()
- * @method static \Model\Collection|\FilesModel findAll()
+ * @method static \Model\Collection|\FilesModel findByPid($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByType($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByExtension($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByHash($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByFound($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByName($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByProtected($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByImportantPartX($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByImportantPartY($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByImportantPartWidth($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByImportantPartHeight($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findByMeta($val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\FilesModel findAll($opt=array())
  *
- * @method static integer countById()
- * @method static integer countByPid()
- * @method static integer countByTstamp()
- * @method static integer countByUuid()
- * @method static integer countByType()
- * @method static integer countByPath()
- * @method static integer countByExtension()
- * @method static integer countByHash()
- * @method static integer countByFound()
- * @method static integer countByName()
- * @method static integer countByProtected()
- * @method static integer countByImportantPartX()
- * @method static integer countByImportantPartY()
- * @method static integer countByImportantPartWidth()
- * @method static integer countByImportantPartHeight()
- * @method static integer countByMeta()
+ * @method static integer countById($id, $opt=array())
+ * @method static integer countByPid($val, $opt=array())
+ * @method static integer countByTstamp($val, $opt=array())
+ * @method static integer countByUuid($val, $opt=array())
+ * @method static integer countByType($val, $opt=array())
+ * @method static integer countByPath($val, $opt=array())
+ * @method static integer countByExtension($val, $opt=array())
+ * @method static integer countByHash($val, $opt=array())
+ * @method static integer countByFound($val, $opt=array())
+ * @method static integer countByName($val, $opt=array())
+ * @method static integer countByProtected($val, $opt=array())
+ * @method static integer countByImportantPartX($val, $opt=array())
+ * @method static integer countByImportantPartY($val, $opt=array())
+ * @method static integer countByImportantPartWidth($val, $opt=array())
+ * @method static integer countByImportantPartHeight($val, $opt=array())
+ * @method static integer countByMeta($val, $opt=array())
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -173,7 +173,7 @@ class FilesModel extends \Model
 		// Convert UUIDs to binary
 		if (\Validator::isStringUuid($strUuid))
 		{
-			$strUuid = \String::uuidToBin($strUuid);
+			$strUuid = \StringUtil::uuidToBin($strUuid);
 		}
 
 		return static::findOneBy(array("$t.uuid=UNHEX(?)"), bin2hex($strUuid), $arrOptions);
@@ -202,7 +202,7 @@ class FilesModel extends \Model
 			// Convert UUIDs to binary
 			if (\Validator::isStringUuid($v))
 			{
-				$v = \String::uuidToBin($v);
+				$v = \StringUtil::uuidToBin($v);
 			}
 
 			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";
@@ -290,7 +290,7 @@ class FilesModel extends \Model
 			// Convert UUIDs to binary
 			if (\Validator::isStringUuid($v))
 			{
-				$v = \String::uuidToBin($v);
+				$v = \StringUtil::uuidToBin($v);
 			}
 
 			$arrUuids[$k] = "UNHEX('" . bin2hex($v) . "')";

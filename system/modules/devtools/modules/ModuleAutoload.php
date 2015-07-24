@@ -280,8 +280,6 @@ class ModuleAutoload extends \BackendModule
 				continue;
 			}
 
-			$strPackage = ucfirst($strModule);
-
 			$objFile = new \File('system/modules/' . $strModule . '/config/autoload.php', true);
 			$objFile->write(
 <<<EOT

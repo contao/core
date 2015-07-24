@@ -36,7 +36,7 @@ class ContentHyperlink extends \ContentElement
 
 		if (substr($this->url, 0, 7) == 'mailto:')
 		{
-			$this->url = \String::encodeEmail($this->url);
+			$this->url = \StringUtil::encodeEmail($this->url);
 		}
 		else
 		{

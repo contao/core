@@ -468,7 +468,7 @@ class ModuleListing extends \Module
 		// E-mail addresses
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
 		{
-			$value = \String::encodeEmail(\Idna::decode($value)); // see #5946
+			$value = \StringUtil::encodeEmail(\Idna::decode($value)); // see #5946
 			$value = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $value . '">' . $value . '</a>';
 		}
 

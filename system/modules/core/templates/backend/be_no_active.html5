@@ -37,7 +37,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?= $lang->noActivePages ?></p>
 
       <h3><?= $lang->howToFix ?></h3>
-      <p><?php printf($lang->noActiveFix, String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+      <p><?php printf($lang->noActiveFix, StringUtil::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
     </div>
 

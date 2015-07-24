@@ -271,11 +271,11 @@ abstract class Events extends \Module
 		{
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$arrEvent['teaser'] = \String::toXhtml($arrEvent['teaser']);
+				$arrEvent['teaser'] = \StringUtil::toXhtml($arrEvent['teaser']);
 			}
 			else
 			{
-				$arrEvent['teaser'] = \String::toHtml5($arrEvent['teaser']);
+				$arrEvent['teaser'] = \StringUtil::toHtml5($arrEvent['teaser']);
 			}
 		}
 
@@ -366,7 +366,7 @@ abstract class Events extends \Module
 			case 'external':
 				if (substr($objEvent->url, 0, 7) == 'mailto:')
 				{
-					return \String::encodeEmail($objEvent->url);
+					return \StringUtil::encodeEmail($objEvent->url);
 				}
 				else
 				{

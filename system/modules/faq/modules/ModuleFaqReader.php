@@ -115,14 +115,14 @@ class ModuleFaqReader extends \Module
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objFaq->answer = \String::toXhtml($objFaq->answer);
+			$objFaq->answer = \StringUtil::toXhtml($objFaq->answer);
 		}
 		else
 		{
-			$objFaq->answer = \String::toHtml5($objFaq->answer);
+			$objFaq->answer = \StringUtil::toHtml5($objFaq->answer);
 		}
 
-		$this->Template->answer = \String::encodeEmail($objFaq->answer);
+		$this->Template->answer = \StringUtil::encodeEmail($objFaq->answer);
 		$this->Template->addImage = false;
 
 		// Add image

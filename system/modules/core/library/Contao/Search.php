@@ -162,13 +162,13 @@ class Search
 		// Get description
 		if (preg_match('/<meta[^>]+name="description"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['description'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($tags[1])));
+			$arrData['description'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($tags[1])));
 		}
 
 		// Get keywords
 		if (preg_match('/<meta[^>]+name="keywords"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($tags[1])));
+			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($tags[1])));
 		}
 
 		// Read title and alt attributes
@@ -183,7 +183,7 @@ class Search
 
 		// Put everything together
 		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . $strBody . ' ' . $arrData['keywords'];
-		$arrSet['text'] = trim(preg_replace('/ +/', ' ', \String::decodeEntities($arrSet['text'])));
+		$arrSet['text'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($arrSet['text'])));
 
 		$arrSet['tstamp'] = time();
 
@@ -315,7 +315,7 @@ class Search
 	{
 		// Clean the keywords
 		$strKeywords = utf8_strtolower($strKeywords);
-		$strKeywords = \String::decodeEntities($strKeywords);
+		$strKeywords = \StringUtil::decodeEntities($strKeywords);
 
 		if (function_exists('mb_eregi_replace'))
 		{

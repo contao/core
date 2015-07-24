@@ -100,7 +100,7 @@ class BackendPopup extends \Backend
 
 		/** @var \BackendTemplate|object $objTemplate */
 		$objTemplate = new \BackendTemplate('be_popup');
-		$objTemplate->uuid = \String::binToUuid($objModel->uuid); // see #5211
+		$objTemplate->uuid = \StringUtil::binToUuid($objModel->uuid); // see #5211
 
 		// Add the file info
 		if (is_dir(TL_ROOT . '/' . $this->strFile))

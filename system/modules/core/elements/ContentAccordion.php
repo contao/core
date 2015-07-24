@@ -37,14 +37,14 @@ class ContentAccordion extends \ContentElement
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->text = \String::toXhtml($this->text);
+			$this->text = \StringUtil::toXhtml($this->text);
 		}
 		else
 		{
-			$this->text = \String::toHtml5($this->text);
+			$this->text = \StringUtil::toHtml5($this->text);
 		}
 
-		$this->Template->text = \String::encodeEmail($this->text);
+		$this->Template->text = \StringUtil::encodeEmail($this->text);
 		$this->Template->addImage = false;
 
 		// Add an image
