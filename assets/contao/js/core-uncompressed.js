@@ -467,11 +467,13 @@ var AjaxRequest =
 			image = $(el).getFirst('img'),
 			publish = (image.src.indexOf('invisible') != -1),
 			div = el.getParent('div'),
-			next;
+			index, next;
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
 			img = div.getPrevious('div').getElement('img');
+		} else if (div.hasClass('tl_content_right')) {
+			img = div.getNext('div').getFirst('div.list_icon');
 		} else if (div.hasClass('tl_listing_container')) {
 			img = el.getParent('td').getPrevious('td').getFirst('div.list_icon');
 			if (img == null) { // Comments
@@ -502,7 +504,6 @@ var AjaxRequest =
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
-					var index;
 					if (publish) {
 						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
