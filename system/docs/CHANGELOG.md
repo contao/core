@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.2 (2015-07-24)
+--------------------------
+
+### Fixed
+Revert some of the PhpStorm code inspector changes (see #7937).
+
+
 Version 3.5.1 (2015-07-24)
 --------------------------
 
