@@ -470,7 +470,7 @@ var AjaxRequest =
 
 		var img = null,
 			image = $(el).getFirst('img'),
-			publish = (image.src.indexOf('invisible') != -1),
+			published = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('invisible') == -1),
 			div = el.getParent('div'),
 			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
 			index, next;
@@ -497,7 +497,7 @@ var AjaxRequest =
 			// Tree view
 			if (img.nodeName.toLowerCase() == 'img') {
 				if (img.getParent('ul.tl_listing').hasClass('tl_tree_xtnd')) {
-					if (publish) {
+					if (!published) {
 						img.src = img.src.replace(/_\.(gif|png|jpe?g)/, '.$1');
 					} else {
 						img.src = img.src.replace(/\.(gif|png|jpe?g)/, '_.$1');
@@ -510,7 +510,7 @@ var AjaxRequest =
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
-					if (publish) {
+					if (!published) {
 						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
 						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
 					} else {
@@ -521,7 +521,7 @@ var AjaxRequest =
 			}
 			// Parent view
 			else if (img.hasClass('cte_type')) {
-				if (publish) {
+				if (!published) {
 					img.addClass('published');
 					img.removeClass('unpublished');
 				} else {
@@ -531,7 +531,7 @@ var AjaxRequest =
 			}
 			// List view
 			else {
-				if (publish) {
+				if (!published) {
 					img.setStyle('background-image', img.getStyle('background-image').replace(/_\.(gif|png|jpe?g)/, '.$1'));
 				} else {
 					img.setStyle('background-image', img.getStyle('background-image').replace(/\.(gif|png|jpe?g)/, '_.$1'));
@@ -545,11 +545,13 @@ var AjaxRequest =
 		}
 
 		// Send request
-		if (publish) {
+		if (!published) {
 			image.src = path + 'visible.gif';
+			image.set('data-state', 1);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
 			image.src = path + 'invisible.gif';
+			image.set('data-state', 0);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
 
