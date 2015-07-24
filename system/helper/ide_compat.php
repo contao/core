@@ -147,6 +147,7 @@ namespace  {
 	class Idna extends \Contao\Idna {}
 	class Image extends \Contao\Image {}
 	class Input extends \Contao\Input {}
+	class InsertTags extends \Contao\InsertTags {}
 	class Message extends \Contao\Message {}
 	abstract class Model extends \Contao\Model {}
 	class ModuleLoader extends \Contao\ModuleLoader {}
