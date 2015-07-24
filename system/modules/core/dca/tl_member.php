@@ -488,7 +488,7 @@ class tl_member extends Backend
 	 * @param DataContainer $dc
 	 * @param array         $args
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function addIcon($row, $label, DataContainer $dc, $args)
 	{
