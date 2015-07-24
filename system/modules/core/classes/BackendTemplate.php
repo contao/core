@@ -64,7 +64,7 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				$options = \String::resolveFlaggedUrl($stylesheet);
+				$options = \StringUtil::resolveFlaggedUrl($stylesheet);
 				$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo($stylesheet), $options->media);
 			}
 
@@ -84,7 +84,7 @@ class BackendTemplate extends \Template
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$options = \String::resolveFlaggedUrl($javascript);
+				$options = \StringUtil::resolveFlaggedUrl($javascript);
 				$strJavaScripts .= \Template::generateScriptTag($this->addStaticUrlTo($javascript), false, $options->async) . "\n";
 			}
 

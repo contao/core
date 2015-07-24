@@ -40,7 +40,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
             <?php if ($ext->teaser!=''): ?>
               <h2><?= $ext->teaser ?></h2>
             <?php endif; ?>
-            <?= str_replace('<br />', '<br>', String::restoreBasicEntities($ext->description)) ?>
+            <?= str_replace('<br />', '<br>', StringUtil::restoreBasicEntities($ext->description)) ?>
           </td>
         </tr>
         <tr class="spacer"><td colspan="4" class="spacer">&nbsp;</td></tr>

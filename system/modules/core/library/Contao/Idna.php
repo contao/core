@@ -79,9 +79,10 @@ class Idna
 			return $strEmail; // see #6241
 		}
 
-		list($strLocal, $strHost) = explode('@', $strEmail);
+		$arrChunks = explode('@', $strEmail);
+		$strHost = array_pop($arrChunks);
 
-		return $strLocal . '@' . static::encode($strHost);
+		return implode('@', $arrChunks) . '@' . static::encode($strHost);
 	}
 
 

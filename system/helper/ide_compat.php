@@ -147,6 +147,7 @@ namespace  {
 	class Idna extends \Contao\Idna {}
 	class Image extends \Contao\Image {}
 	class Input extends \Contao\Input {}
+	class InsertTags extends \Contao\InsertTags {}
 	class Message extends \Contao\Message {}
 	abstract class Model extends \Contao\Model {}
 	class ModuleLoader extends \Contao\ModuleLoader {}
@@ -158,6 +159,7 @@ namespace  {
 	class Session extends \Contao\Session {}
 	class SortedIterator extends \Contao\SortedIterator {}
 	class String extends \Contao\String {}
+	class StringUtil extends \Contao\StringUtil {}
 	abstract class System extends \Contao\System {}
 	abstract class Template extends \Contao\Template {}
 	class TemplateLoader extends \Contao\TemplateLoader {}

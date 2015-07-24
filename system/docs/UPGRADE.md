@@ -4,6 +4,14 @@ Contao Open Source CMS API changes
 Version 3.4 to 3.5
 ------------------
 
+### StringUtil class
+
+Since the `String` class is not compatible with PHP 7, we have renamed it to
+`StringUtil`. The `String` class remains available for reasons of backwards
+compatibility, however it has been deprecated and will be removed in a future
+version.
+
+
 ### PHP version
 
 The minimum PHP version is raised from 5.3.7 to 5.4.0.

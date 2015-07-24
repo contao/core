@@ -397,7 +397,7 @@ abstract class Module extends \Frontend
 
 						if (strncasecmp($href, 'mailto:', 7) === 0)
 						{
-							$href = \String::encodeEmail($href);
+							$href = \StringUtil::encodeEmail($href);
 						}
 						break;
 

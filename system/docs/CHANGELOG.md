@@ -1,6 +1,65 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.2 (2015-07-24)
+--------------------------
+
+### Fixed
+Revert some of the PhpStorm code inspector changes (see #7937).
+
+
+Version 3.5.1 (2015-07-24)
+--------------------------
+
+### Fixed
+Add a `StringUtil` class to restore PHP 7 compatibility (see contao/core-bundle#309).
+
+### Fixed
+Fix the `Validator::isEmail()` method (see contao/core-bundle#313).
+
+### Fixed
+Strip tags before auto-generating aliases (see #7857). 
+
+### Fixed
+Correctly encode the URLs in the popup file manager (see #7929).
+
+### Fixed
+Check for the comments module when compiling the news meta fields (see #7901).
+
+### Fixed
+Also sort the newsletter channels alphabetically in the front end (see #7864).
+
+### Fixed
+Disable responsive images in the back end preview (see #7875).
+
+### Fixed
+Overwrite the request string when generating news/event feeds (see #7756).
+
+### Fixed
+Store the static URLs with the cached file (see #7914).
+
+### Fixed
+Correctly check the subfolders in the `hasAccess()` method (see #7920).
+
+### Fixed
+Updated the countries list (see #7918).
+
+### Fixed
+Respect the `notSortable` flag in the parent (see #7902).
+
+### Fixed
+Round the maximum upload size to an integer value (see #7880).
+
+### Fixed
+Make the markup minification less aggressive (see #7734).
+
+### Fixed
+Filter the indices in `Database::getFieldNames()` (see #7869).
+
+### Fixed
+Back-ported two fixes from the upstream versions.
+
+
 Version 3.5.0 (2015-06-05)
 --------------------------
 

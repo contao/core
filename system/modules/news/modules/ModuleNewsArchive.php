@@ -145,7 +145,7 @@ class ModuleNewsArchive extends \ModuleNews
 		{
 			/** @var \PageError404 $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-			#$objHandler->generate($objPage->id);
+			$objHandler->generate($objPage->id);
 		}
 
 		$this->Template->articles = array();

@@ -560,6 +560,8 @@ class Date
 	/**
 	 * Return a numeric format string depending on the regular expression name
 	 *
+	 * @param string $strRgxp The regular expression name
+	 *
 	 * @return string The numeric format string
 	 */
 	public static function getFormatFromRgxp($strRgxp)

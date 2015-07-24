@@ -37,7 +37,7 @@ $lang = (object) $GLOBALS['TL_LANG']['XPT'];
       <p><?= $lang->noLayoutSpecified ?></p>
 
       <h3><?= $lang->howToFix ?></h3>
-      <p><?php printf($lang->noLayoutFix, String::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
+      <p><?php printf($lang->noLayoutFix, StringUtil::encodeEmail('mailto:' . Config::get('adminEmail'))); ?></p>
 
       <h3><?= $lang->more ?></h3>
       <p><?= $lang->noLayoutExplain ?></p>

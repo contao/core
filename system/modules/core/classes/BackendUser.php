@@ -266,7 +266,7 @@ class BackendUser extends \User
 			// Check the subfolders (filemounts)
 			foreach ($this->filemounts as $folder)
 			{
-				if (preg_match('/^'. preg_quote($folder, '/') .'/i', $field[0]))
+				if (preg_match('/^' . preg_quote($folder, '/') . '(\/|$)/i', $field[0]))
 				{
 					return true;
 				}
