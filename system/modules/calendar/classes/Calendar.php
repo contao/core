@@ -240,10 +240,16 @@ class Calendar extends \Frontend
 
 						if ($objElement !== null)
 						{
+							// Overwrite the request (see #7756)
+							$strRequest = \Environment::get('request');
+							\Environment::set('request', $objItem->link);
+
 							while ($objElement->next())
 							{
 								$strDescription .= $this->getContentElement($objElement->current());
 							}
+
+							\Environment::set('request', $strRequest);
 						}
 					}
 					else
@@ -445,11 +451,11 @@ class Calendar extends \Frontend
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$arrEvent['teaser'] = \String::toXhtml($objEvent->teaser);
+			$arrEvent['teaser'] = \StringUtil::toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$arrEvent['teaser'] = \String::toHtml5($objEvent->teaser);
+			$arrEvent['teaser'] = \StringUtil::toHtml5($objEvent->teaser);
 		}
 
 		// Reset the enclosures (see #5685)

@@ -237,7 +237,7 @@ class StyleSheets extends \Backend
 		}
 
 		// Selector
-		$arrSelector = trimsplit(',', \String::decodeEntities($row['selector']));
+		$arrSelector = trimsplit(',', \StringUtil::decodeEntities($row['selector']));
 		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? '' : ' ') . '{';
 
 		// Size
@@ -928,7 +928,7 @@ class StyleSheets extends \Backend
 		// Custom code
 		if ($row['own'] != '')
 		{
-			$own = trim(\String::decodeEntities($row['own']));
+			$own = trim(\StringUtil::decodeEntities($row['own']));
 			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/', $own);
 			$own = implode(($blnWriteToFile ? '' : $lb), $own);

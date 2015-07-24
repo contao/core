@@ -37,11 +37,11 @@ class ContentText extends \ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->text = \String::toXhtml($this->text);
+			$this->text = \StringUtil::toXhtml($this->text);
 		}
 		else
 		{
-			$this->text = \String::toHtml5($this->text);
+			$this->text = \StringUtil::toHtml5($this->text);
 		}
 
 		// Add the static files URL to images
@@ -51,7 +51,7 @@ class ContentText extends \ContentElement
 			$this->text = str_replace(' src="' . $path, ' src="' . TL_FILES_URL . $path, $this->text);
 		}
 
-		$this->Template->text = \String::encodeEmail($this->text);
+		$this->Template->text = \StringUtil::encodeEmail($this->text);
 		$this->Template->addImage = false;
 
 		// Add an image

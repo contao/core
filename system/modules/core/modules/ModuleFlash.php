@@ -82,7 +82,7 @@ class ModuleFlash extends \Module
 		$this->Template->transparent = $this->transparent ? true : false;
 		$this->Template->interactive = $this->interactive ? true : false;
 		$this->Template->flashId = $this->flashID ?: 'swf_' . $this->id;
-		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", \String::decodeEntities($this->flashJS));
+		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", \StringUtil::decodeEntities($this->flashJS));
 		$this->Template->flashvars = 'URL=' . \Environment::get('base');
 		$this->Template->version = $this->version ?: '6.0.0';
 
@@ -102,7 +102,7 @@ class ModuleFlash extends \Module
 
 		if (strlen($this->flashvars))
 		{
-			$this->Template->flashvars .= '&' . \String::decodeEntities($this->flashvars);
+			$this->Template->flashvars .= '&' . \StringUtil::decodeEntities($this->flashvars);
 		}
 	}
 }

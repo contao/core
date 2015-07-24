@@ -111,7 +111,7 @@ class FormFileUpload extends \Widget implements \uploadable
 		// Sanitize the filename
 		try
 		{
-			$file['name'] = \String::sanitizeFileName($file['name']);
+			$file['name'] = \StringUtil::sanitizeFileName($file['name']);
 		}
 		catch (\InvalidArgumentException $e)
 		{
@@ -294,7 +294,7 @@ class FormFileUpload extends \Widget implements \uploadable
 						'error'    => $file['error'],
 						'size'     => $file['size'],
 						'uploaded' => true,
-						'uuid'     => \String::binToUuid($objFile->uuid)
+						'uuid'     => \StringUtil::binToUuid($objFile->uuid)
 					);
 
 					// Add a log entry

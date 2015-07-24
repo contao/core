@@ -111,6 +111,8 @@ class File extends \System
 	 */
 	public function __construct($strFile, $blnDoNotCreate=false)
 	{
+		parent::__construct();
+
 		// Handle open_basedir restrictions
 		if ($strFile == '.')
 		{

@@ -6,7 +6,7 @@
         <source>An error occurred!</source>
       </trans-unit>
       <trans-unit id="ERR.unique">
-        <source>Duplicate entry in field "%s"!</source>
+        <source>This entry already exists!</source>
       </trans-unit>
       <trans-unit id="ERR.mandatory">
         <source>Field "%s" must not be empty!</source>

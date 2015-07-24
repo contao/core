@@ -153,7 +153,9 @@ class Validator
 	 */
 	public static function isEmail($varValue)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[A-Za-z]{2,13}$/', \Idna::encodeEmail($varValue));
+		$email = \Idna::encodeEmail($varValue);
+
+		return filter_var($email, FILTER_VALIDATE_EMAIL) === $email;
 	}
 
 

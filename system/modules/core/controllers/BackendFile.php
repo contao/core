@@ -104,7 +104,7 @@ class BackendFile extends \Backend
 			// Can be a UUID or a path
 			if (\Validator::isStringUuid($v))
 			{
-				$arrValues[$k] = \String::uuidToBin($v);
+				$arrValues[$k] = \StringUtil::uuidToBin($v);
 			}
 		}
 
