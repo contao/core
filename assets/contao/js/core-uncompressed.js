@@ -15,6 +15,12 @@
 var AjaxRequest =
 {
 	/**
+	 * The theme path
+	 * @member {string}
+	 */
+	themePath: Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
+
+	/**
 	 * Toggle the navigation menu
 	 *
 	 * @param {object} el The DOM element
@@ -26,18 +32,17 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = path + 'modMinus.gif';
+				image.src = AjaxRequest.themePath + 'modMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'modPlus.gif';
+				image.src = AjaxRequest.themePath + 'modPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -63,7 +68,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = path + 'modMinus.gif';
+				image.src = AjaxRequest.themePath + 'modMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -88,18 +93,17 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'folPlus.gif';
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -152,7 +156,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				window.fireEvent('structure');
 				AjaxRequest.hideBox();
 
@@ -179,20 +183,19 @@ var AjaxRequest =
 
 		var item = $(id),
 			image = $(el).getFirst('img'),
-			icon = $(el).getNext('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			icon = $(el).getNext('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = path + 'folMinus.gif';
-				icon.src = path + 'folderO.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
+				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'folPlus.gif';
-				icon.src = path + 'folderC.gif';
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
+				icon.src = AjaxRequest.themePath + 'folderC.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -225,8 +228,8 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = path + 'folMinus.gif';
-				icon.src = path + 'folderO.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
+				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -253,18 +256,17 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'folPlus.gif';
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -297,7 +299,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -325,18 +327,17 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'folPlus.gif';
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -369,7 +370,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -472,7 +473,6 @@ var AjaxRequest =
 			image = $(el).getFirst('img'),
 			published = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('invisible') == -1),
 			div = el.getParent('div'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
 			index, next;
 
 		// Find the icon depending on the view (tree view, list view, parent view)
@@ -546,11 +546,11 @@ var AjaxRequest =
 
 		// Send request
 		if (!published) {
-			image.src = path + 'visible.gif';
+			image.src = AjaxRequest.themePath + 'visible.gif';
 			image.set('data-state', 1);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
-			image.src = path + 'invisible.gif';
+			image.src = AjaxRequest.themePath + 'invisible.gif';
 			image.set('data-state', 0);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
@@ -570,16 +570,15 @@ var AjaxRequest =
 		el.blur();
 
 		var image = $(el).getFirst('img'),
-			featured = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('featured_') == -1),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			featured = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('featured_') == -1);
 
 		// Send the request
 		if (!featured) {
-			image.src = path + 'featured.gif';
+			image.src = AjaxRequest.themePath + 'featured.gif';
 			image.set('data-state', 1);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 		} else {
-			image.src = path + 'featured_.gif';
+			image.src = AjaxRequest.themePath + 'featured_.gif';
 			image.set('data-state', 0);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 		}
@@ -623,17 +622,16 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') != 'block') {
 				item.setStyle('display', 'block');
-				image.src = path + 'folMinus.gif';
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = path + 'folPlus.gif';
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return true;
@@ -750,6 +748,12 @@ var Backend =
 	 * @member {object}
 	 */
 	popupWindow: null,
+
+	/**
+	 * The theme path
+	 * @member {string}
+	 */
+	themePath: Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
 
 	/**
 	 * Get the current mouse position
@@ -1022,7 +1026,6 @@ var Backend =
 			if (!hgt) return;
 
 			div.setStyle('height', hgt);
-			var path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
@@ -1039,12 +1042,12 @@ var Backend =
 
 			// Disable the function if the preview height is below the max-height
 			if (size.height < hgt) {
-				toggler.src = path + 'expand_.gif';
+				toggler.src = Backend.themePath + 'expand_.gif';
 				toggler.inject(div, 'after');
 				return;
 			}
 
-			toggler.src = path + 'expand.gif';
+			toggler.src = Backend.themePath + 'expand.gif';
 			toggler.setStyle('cursor', 'pointer');
 
 			toggler.addEvent('click', function() {
@@ -1052,11 +1055,11 @@ var Backend =
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
 
 				if (this.get('data-state') == 0) {
-					this.src = path + 'collapse.gif';
+					this.src = Backend.themePath + 'collapse.gif';
 					this.set('data-state', 1);
 					this.store('tip:title', Contao.lang.collapse);
 				} else {
-					this.src = path + 'expand.gif';
+					this.src = Backend.themePath + 'expand.gif';
 					this.set('data-state', 0);
 					this.store('tip:title', Contao.lang.expand);
 				}
@@ -2003,15 +2006,14 @@ var Backend =
 		}).each(function(el) {
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
-				var cbx = el.getNext('input'),
-					path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
+				var cbx = el.getNext('input');
 
 				if (cbx.checked) {
 					cbx.checked = '';
-					el.src = path + 'invisible.gif';
+					el.src = Backend.themePath + 'invisible.gif';
 				} else {
 					cbx.checked = 'checked';
-					el.src = path + 'visible.gif';
+					el.src = Backend.themePath + 'visible.gif';
 				}
 			});
 		});
