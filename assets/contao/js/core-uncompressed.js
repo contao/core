@@ -471,52 +471,82 @@ var AjaxRequest =
 
 		var img = null,
 			image = $(el).getFirst('img'),
-			published = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('invisible') == -1),
+			published = (image.get('data-state') == 1),
 			div = el.getParent('div'),
-			index, next;
+			index, next, icon, icond, pa;
+
+		// Backwards compatibility
+		if (image.get('data-state') === null) {
+			published = (image.src.indexOf('invisible') == -1);
+			console.warn('Using a visibility toggle without a "data-state" attribute is deprecated. Please adjust your Contao DCA file.');
+		}
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
 			img = div.getPrevious('div').getElement('img');
-		} else if (div.hasClass('tl_content_right')) {
-			img = div.getNext('div').getFirst('div.list_icon');
 		} else if (div.hasClass('tl_listing_container')) {
 			img = el.getParent('td').getPrevious('td').getFirst('div.list_icon');
-			if (img == null) { // Comments
+			if (img === null) { // comments
 				img = el.getParent('td').getPrevious('td').getElement('div.cte_type');
 			}
-			if (img == null) { // showColumns
+			if (img === null) { // showColumns
 				img = el.getParent('tr').getFirst('td').getElement('div.list_icon_new');
 			}
-		} else if ((next = div.getNext('div')) && next.hasClass('cte_type')) {
-			img = next;
+		} else if (next = div.getNext('div')) {
+			if (next.hasClass('cte_type')) {
+				img = next;
+			}
+			if (img === null) { // newsletter recipients
+				img = next.getFirst('div.list_icon');
+			}
 		}
 
 		// Change the icon
-		if (img != null) {
+		if (img !== null) {
 			// Tree view
 			if (img.nodeName.toLowerCase() == 'img') {
 				if (img.getParent('ul.tl_listing').hasClass('tl_tree_xtnd')) {
-					if (!published) {
-						img.src = img.src.replace(/_\.(gif|png|jpe?g)/, '.$1');
-					} else {
-						img.src = img.src.replace(/\.(gif|png|jpe?g)/, '_.$1');
+					icon = img.get('data-icon');
+					icond = img.get('data-icon-disabled');
+
+					// Backwards compatibility
+					if (img.get('data-icon') === null) {
+						icon = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1.$2');
+						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
+					if (img.get('data-icon-disabled') === null) {
+						icond = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1_.$2');
+						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+					}
+
+					img.src = AjaxRequest.themePath + (!published ? icon : icond);
 				} else {
-					if (img.src.match(/folPlus|folMinus/)) {
-						if (img.getParent('a').getNext('a')) {
-							img = img.getParent('a').getNext('a').getFirst('img');
+					pa = img.getParent('a');
+
+					if (pa.href.indexOf('do=feRedirect') == -1) {
+						if (next = pa.getNext('a')) {
+							img = next.getFirst('img');
 						} else {
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
-					if (!published) {
-						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
-						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
-					} else {
-						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
-						img.src = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2');
+
+					icon = img.get('data-icon');
+					icond = img.get('data-icon-disabled');
+
+					// Backwards compatibility
+					if (img.get('data-icon') === null) {
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
+						icon = img.src.replace(/_[0-9]\.(gif|png|jpe?g|svg)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1').split(/[\\/]/).pop();
+						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
+					if (img.get('data-icon-disabled') === null) {
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
+						icond = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g|svg)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2').split(/[\\/]/).pop();
+						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+					}
+
+					img.src = AjaxRequest.themePath + (!published ? icon : icond);
 				}
 			}
 			// Parent view
@@ -531,11 +561,20 @@ var AjaxRequest =
 			}
 			// List view
 			else {
-				if (!published) {
-					img.setStyle('background-image', img.getStyle('background-image').replace(/_\.(gif|png|jpe?g)/, '.$1'));
-				} else {
-					img.setStyle('background-image', img.getStyle('background-image').replace(/\.(gif|png|jpe?g)/, '_.$1'));
+				icon = img.get('data-icon');
+				icond = img.get('data-icon-disabled');
+
+				// Backwards compatibility
+				if (img.get('data-icon') === null) {
+					icon = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1.$2');
+					console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 				}
+				if (img.get('data-icon-disabled') === null) {
+					icond = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1_.$2');
+					console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+				}
+
+				img.setStyle('background-image', 'url(' + AjaxRequest.themePath + (!published ? icon : icond) + ')');
 			}
 		}
 
@@ -570,7 +609,13 @@ var AjaxRequest =
 		el.blur();
 
 		var image = $(el).getFirst('img'),
-			featured = (image.get('data-state') !== null) ? (image.get('data-state') == 1) : (image.src.indexOf('featured_') == -1);
+			featured = (image.get('data-state') == 1);
+
+		// Backwards compatibility
+		if (image.get('data-state') === null) {
+			featured = (image.src.indexOf('featured_') == -1);
+			console.warn('Using a featured toggle without a "data-state" attribute is deprecated. Please adjust your Contao DCA file.');
+		}
 
 		// Send the request
 		if (!featured) {
@@ -672,7 +717,7 @@ var AjaxRequest =
 			overlay = $('tl_ajaxOverlay'),
 			scroll = window.getScroll();
 
-		if (overlay == null) {
+		if (overlay === null) {
 			overlay = new Element('div', {
 				'id': 'tl_ajaxOverlay'
 			}).inject($(document.body), 'bottom');
@@ -685,7 +730,7 @@ var AjaxRequest =
 			}
 		});
 
-		if (box == null) {
+		if (box === null) {
 			box = new Element('div', {
 				'id': 'tl_ajaxBox'
 			}).inject($(document.body), 'bottom');
@@ -1617,9 +1662,9 @@ var Backend =
 	 */
 	tableWizardResize: function(factor) {
 		var size = Cookie.read('BE_CELL_SIZE');
-		if (size == null && factor == null) return;
+		if (size === null && factor === null) return;
 
-		if (factor != null) {
+		if (factor !== null) {
 			size = '';
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', (el.getStyle('width').toInt() * factor).round().limit(142, 284));
@@ -1629,7 +1674,7 @@ var Backend =
 				}
 			});
 			Cookie.write('BE_CELL_SIZE', size, { path: Contao.path });
-		} else if (size != null) {
+		} else if (size !== null) {
 			var chunks = size.split('|');
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', chunks[0]);
