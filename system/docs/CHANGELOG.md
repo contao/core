@@ -1,6 +1,15 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.3 (2015-XX-XX)
+--------------------------
+
+### Fixed
+Do not parse the image `src` attribute to determine the state of an element,
+because the image path might have been replaced with a `data:` string (e.g. by
+the Apache module "mod_pagespeed").
+
+
 Version 3.5.2 (2015-07-24)
 --------------------------
 
