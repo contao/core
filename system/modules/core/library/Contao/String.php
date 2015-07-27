@@ -13,7 +13,7 @@ namespace Contao;
 
 if (version_compare(PHP_VERSION, '7.0', '>=')) {
 	throw new \RuntimeException(
-		'The String class cannot be used in PHP ' . PHP_VERSION . '. Use the StringUtils class instead.'
+		'The String class cannot be used in PHP ' . PHP_VERSION . '. Use the StringUtil class instead.'
 	);
 }
 
@@ -23,7 +23,7 @@ if (version_compare(PHP_VERSION, '7.0', '>=')) {
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  *
- * @deprecated Use the StringUtils class instead
+ * @deprecated Use the StringUtil class instead
  */
 class String extends \StringUtil
 {
