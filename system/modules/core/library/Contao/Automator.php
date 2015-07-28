@@ -115,6 +115,16 @@ class Automator extends \System
 	{
 		$objDatabase = \Database::getInstance();
 
+		// HOOK: call before purge
+		if (isset($GLOBALS['TL_HOOKS']['beforeLogPurge']) && is_array($GLOBALS['TL_HOOKS']['beforeLogPurge']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['beforeLogPurge'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]();
+			}
+		}
+
 		// Truncate the table
 		$objDatabase->execute("TRUNCATE TABLE tl_log");
 
