@@ -11,3 +11,4 @@ Disallow: /composer.lock
 Disallow: /README.md
 Allow: /system/cron/cron.txt
 Allow: /system/modules/*/assets/
+Allow: /system/modules/*/html/
