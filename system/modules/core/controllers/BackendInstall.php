@@ -30,6 +30,8 @@ class BackendInstall extends \Backend
 	 */
 	public function __construct()
 	{
+		// No parent::__construct() here
+
 		$this->import('Config');
 		$this->import('Session');
 
