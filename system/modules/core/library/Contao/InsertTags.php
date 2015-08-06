@@ -23,6 +23,16 @@ namespace Contao;
  */
 class InsertTags extends \Controller
 {
+
+	/**
+	 * Make the constructor public
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+
 	/**
 	 * Replace insert tags with their values
 	 *

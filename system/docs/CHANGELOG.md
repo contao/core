@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Allow to instantiate the `InsertTags` class (see #7946).
+
+### Fixed
 Do not parse the image `src` attribute to determine the state of an element,
 because the image path might have been replaced with a `data:` string (e.g. by
 the Apache module "mod_pagespeed").
