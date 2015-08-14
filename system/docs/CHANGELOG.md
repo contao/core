@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Always trigger the "parseDate" hook (see #4260).
+
+### Fixed
 Allow to instantiate the `InsertTags` class (see #7946).
 
 ### Fixed
