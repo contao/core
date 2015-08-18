@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Handle option callbacks in the back end help (see #7951).
+
+### Fixed
 Fixed the external links in the text field help wizard (see #7954) and the
 keyboard shortcuts link on the back end start page (see #7935).
 
