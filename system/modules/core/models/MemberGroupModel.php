@@ -23,17 +23,17 @@ namespace Contao;
  * @property string  $start
  * @property string  $stop
  *
- * @method static $this findById($id, $opt=array())
- * @method static $this findByPk($id, $opt=array())
- * @method static $this findByIdOrAlias($val, $opt=array())
- * @method static $this findOneBy($col, $val, $opt=array())
- * @method static $this findOneByTstamp($val, $opt=array())
- * @method static $this findOneByName($val, $opt=array())
- * @method static $this findOneByRedirect($val, $opt=array())
- * @method static $this findOneByJumpTo($val, $opt=array())
- * @method static $this findOneByDisable($val, $opt=array())
- * @method static $this findOneByStart($val, $opt=array())
- * @method static $this findOneByStop($val, $opt=array())
+ * @method static \MemberGroupModel findById($id, $opt=array())
+ * @method static \MemberGroupModel findByPk($id, $opt=array())
+ * @method static \MemberGroupModel findByIdOrAlias($val, $opt=array())
+ * @method static \MemberGroupModel findOneBy($col, $val, $opt=array())
+ * @method static \MemberGroupModel findOneByTstamp($val, $opt=array())
+ * @method static \MemberGroupModel findOneByName($val, $opt=array())
+ * @method static \MemberGroupModel findOneByRedirect($val, $opt=array())
+ * @method static \MemberGroupModel findOneByJumpTo($val, $opt=array())
+ * @method static \MemberGroupModel findOneByDisable($val, $opt=array())
+ * @method static \MemberGroupModel findOneByStart($val, $opt=array())
+ * @method static \MemberGroupModel findOneByStop($val, $opt=array())
  *
  * @method static \Model\Collection|\MemberGroupModel findByTstamp($val, $opt=array())
  * @method static \Model\Collection|\MemberGroupModel findByName($val, $opt=array())

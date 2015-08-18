@@ -23,17 +23,17 @@ namespace Contao;
  * @property string  $templates
  * @property string  $vars
  *
- * @method static $this findById($id, $opt=array())
- * @method static $this findByPk($id, $opt=array())
- * @method static $this findByIdOrAlias($val, $opt=array())
- * @method static $this findOneBy($col, $val, $opt=array())
- * @method static $this findOneByTstamp($val, $opt=array())
- * @method static $this findOneByName($val, $opt=array())
- * @method static $this findOneByAuthor($val, $opt=array())
- * @method static $this findOneByFolders($val, $opt=array())
- * @method static $this findOneByScreenshot($val, $opt=array())
- * @method static $this findOneByTemplates($val, $opt=array())
- * @method static $this findOneByVars($val, $opt=array())
+ * @method static \ThemeModel findById($id, $opt=array())
+ * @method static \ThemeModel findByPk($id, $opt=array())
+ * @method static \ThemeModel findByIdOrAlias($val, $opt=array())
+ * @method static \ThemeModel findOneBy($col, $val, $opt=array())
+ * @method static \ThemeModel findOneByTstamp($val, $opt=array())
+ * @method static \ThemeModel findOneByName($val, $opt=array())
+ * @method static \ThemeModel findOneByAuthor($val, $opt=array())
+ * @method static \ThemeModel findOneByFolders($val, $opt=array())
+ * @method static \ThemeModel findOneByScreenshot($val, $opt=array())
+ * @method static \ThemeModel findOneByTemplates($val, $opt=array())
+ * @method static \ThemeModel findOneByVars($val, $opt=array())
  *
  * @method static \Model\Collection|\ThemeModel findByTstamp($val, $opt=array())
  * @method static \Model\Collection|\ThemeModel findByName($val, $opt=array())

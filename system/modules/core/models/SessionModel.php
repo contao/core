@@ -23,17 +23,17 @@ namespace Contao;
  * @property string  $ip
  * @property boolean $su
  *
- * @method static $this findById($id, $opt=array())
- * @method static $this findByPk($id, $opt=array())
- * @method static $this findByIdOrAlias($val, $opt=array())
- * @method static $this findOneBy($col, $val, $opt=array())
- * @method static $this findByHash($val, $opt=array())
- * @method static $this findOneByPid($val, $opt=array())
- * @method static $this findOneByTstamp($val, $opt=array())
- * @method static $this findOneByName($val, $opt=array())
- * @method static $this findOneBySessionID($val, $opt=array())
- * @method static $this findOneByIp($val, $opt=array())
- * @method static $this findOneBySu($val, $opt=array())
+ * @method static \SessionModel findById($id, $opt=array())
+ * @method static \SessionModel findByPk($id, $opt=array())
+ * @method static \SessionModel findByIdOrAlias($val, $opt=array())
+ * @method static \SessionModel findOneBy($col, $val, $opt=array())
+ * @method static \SessionModel findByHash($val, $opt=array())
+ * @method static \SessionModel findOneByPid($val, $opt=array())
+ * @method static \SessionModel findOneByTstamp($val, $opt=array())
+ * @method static \SessionModel findOneByName($val, $opt=array())
+ * @method static \SessionModel findOneBySessionID($val, $opt=array())
+ * @method static \SessionModel findOneByIp($val, $opt=array())
+ * @method static \SessionModel findOneBySu($val, $opt=array())
  *
  * @method static \Model\Collection|\SessionModel findByPid($val, $opt=array())
  * @method static \Model\Collection|\SessionModel findByTstamp($val, $opt=array())
