@@ -11,7 +11,7 @@
 
 /**
  * This is the ACE (code editor) configuration file. Please visit
- * http://ace.ajax.org for more information.
+ * http://ace.c9.io for more information.
  */
 if ($GLOBALS['TL_CONFIG']['useCE']):
 

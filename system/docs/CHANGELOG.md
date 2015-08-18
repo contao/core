@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the external links in the text field help wizard (see #7954).
+
+### Fixed
 Fixed the CSS group field explanations (see #7949).
 
 ### Fixed
