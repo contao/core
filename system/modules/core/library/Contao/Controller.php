@@ -1078,6 +1078,8 @@ abstract class Controller extends \System
 	 */
 	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
+		$strUrl = '';
+
 		if (!\Config::get('disableAlias'))
 		{
 			$strLanguage = '';
@@ -1135,6 +1137,12 @@ abstract class Controller extends \System
 		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
 			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
+		}
+
+		// Use ./ instead of an empty href (see #7967)
+		if ($strUrl == '')
+		{
+			$strUrl = './';
 		}
 
 		// HOOK: add custom logic
