@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed the CSS group field explanations (see #7949).
+
+### Fixed
 Use ./ instead of an empty href (see #7967).
 
 ### Fixed
