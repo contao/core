@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly detect Microsoft Edge (see #7970).
+
+### Fixed
 Respect the "order" parameter in the `findMultipleByIds()` method (see #7940).
 
 ### Fixed
