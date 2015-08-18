@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the back end pagination menu (see #7956).
+
+### Fixed
 Handle option callbacks in the back end help (see #7951).
 
 ### Fixed
