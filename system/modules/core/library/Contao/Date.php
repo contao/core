@@ -432,8 +432,8 @@ class Date
 			$intYear = 1970;
 		}
 
-		// Validate the date (see #5086)
-		if (checkdate($intMonth, $intDay, $intYear) === false)
+		// Validate the date (see #5086 and #7955)
+		if (!is_numeric($intMonth) || !is_numeric($intDay) || !is_numeric($intYear) || checkdate($intMonth, $intDay, $intYear) === false)
 		{
 			throw new \OutOfBoundsException(sprintf('Invalid date "%s"', $this->strDate));
 		}
