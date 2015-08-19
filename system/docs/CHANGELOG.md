@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Check the script when storing the front end referer (see #7908).
+
+### Fixed
 Fix the back end pagination menu (see #7956).
 
 ### Fixed
