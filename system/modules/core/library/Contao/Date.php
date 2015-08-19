@@ -417,12 +417,12 @@ class Date
 			$intHour -= 12;
 		}
 
-		if (!strlen($intMonth))
+		if ($intMonth == '')
 		{
 			$intMonth = 1;
 		}
 
-		if (!strlen($intDay))
+		if ($intDay == '')
 		{
 			$intDay = 1;
 		}
