@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly generate the news and event menu URLs (see #7953).
+
+### Fixed
 Check the script when storing the front end referer (see #7908).
 
 ### Fixed
