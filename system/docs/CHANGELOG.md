@@ -5,6 +5,10 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Override the tabindex handling of the accordion to ensure that the togglers are
+always focusable via keyboard (see #7963).
+
+### Fixed
 Correctly generate the news and event menu URLs (see #7953).
 
 ### Fixed
