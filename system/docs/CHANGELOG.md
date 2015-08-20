@@ -288,7 +288,7 @@ Updated HTML5Shiv to version 3.7.2.
 Updated DropZone to version 3.12.0.
 
 ### Updated
-Updated the ACE editor to version 1.1.8.
+Updated the Ace code editor to version 1.1.8.
 
 ### Improved
 Also convert image links in TinyMCE to `{{file}}` insert tags (see #7581).

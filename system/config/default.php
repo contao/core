@@ -262,8 +262,8 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *
  *   showHelp    = show a help text after each input field
  *   thumbnails  = show image thumbnails in the file manager
- *   useRTE      = use the rich text editor (TinyMCE)
- *   useCE       = use the code editor (ACE)
+ *   useRTE      = use the TinyMCE rich text editor
+ *   useCE       = use the Ace code editor
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;

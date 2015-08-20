@@ -124,15 +124,15 @@ abstract class Backend extends \Controller
 
 
 	/**
-	 * Validate an ACE type
+	 * Get the Ace code editor type from a file extension
 	 *
-	 * @param string $type
+	 * @param string $ext
 	 *
 	 * @return string
 	 */
-	public static function getAceType($type)
+	public static function getAceType($ext)
 	{
-		switch ($type)
+		switch ($ext)
 		{
 			case 'css':
 			case 'diff':
@@ -147,7 +147,7 @@ abstract class Backend extends \Controller
 			case 'sql':
 			case 'xml':
 			case 'yaml':
-				return $type;
+				return $ext;
 				break;
 
 			case 'js':
