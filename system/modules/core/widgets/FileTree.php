@@ -12,7 +12,7 @@ namespace Contao;
 
 
 /**
- * Provide methods to handle input field "page tree".
+ * Provide methods to handle input field "file tree".
  *
  * @property string  $orderField
  * @property boolean $multiple
