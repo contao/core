@@ -68,7 +68,7 @@ Add a `StringUtil` class to restore PHP 7 compatibility (see contao/core-bundle#
 Fix the `Validator::isEmail()` method (see contao/core-bundle#313).
 
 ### Fixed
-Strip tags before auto-generating aliases (see #7857). 
+Strip tags before auto-generating aliases (see #7857).
 
 ### Fixed
 Correctly encode the URLs in the popup file manager (see #7929).
@@ -230,7 +230,7 @@ Check for ASCII strings in the `utf8_romanize()` function (see #7748).
 `Controller::replaceInsertTags()` is now public static.
 
 ### Fixed
-Restore the removed attributes of the "picture_default" templates (see #7752). 
+Restore the removed attributes of the "picture_default" templates (see #7752).
 
 ### Changed
 Moved the insert tag logic into a separate class.
@@ -239,7 +239,7 @@ Moved the insert tag logic into a separate class.
 Show the upload limits in the file manager (see #7389).
 
 ### Improved
-Also export the image meta data when exporting themes (see #7480). 
+Also export the image meta data when exporting themes (see #7480).
 
 ### Improved
 Improve the model registry (see #7725).
