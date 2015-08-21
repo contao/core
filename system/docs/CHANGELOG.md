@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly escape in the `findMultipleFilesByFolder()` method (see #7966).
+
+### Fixed
 Override the tabindex handling of the accordion to ensure that the togglers are
 always focusable via keyboard (see #7963).
 
