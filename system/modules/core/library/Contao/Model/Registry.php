@@ -145,7 +145,7 @@ class Registry implements \Countable
 	/**
 	 * Register a model in the registry
 	 *
-	 * @param \Model $objModel The model object
+	 * @param \Model|\Contao\Model $objModel The model object
 	 *
 	 * @throws \RuntimeException If the instance exists already
 	 */

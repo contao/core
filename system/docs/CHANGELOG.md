@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Register the related models in the registry (see contao/core-bundle#333).
+
+### Fixed
 Correctly escape in the `findMultipleFilesByFolder()` method (see #7966).
 
 ### Fixed

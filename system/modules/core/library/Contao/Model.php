@@ -136,6 +136,8 @@ abstract class Model
 				}
 			}
 
+			$objRegistry = \Model\Registry::getInstance();
+
 			// Create the related models
 			foreach ($arrRelated as $key=>$row)
 			{
@@ -152,7 +154,7 @@ abstract class Model
 				}
 				else
 				{
-					$objRelated = \Model\Registry::getInstance()->fetch($table, $row[$intPk]);
+					$objRelated = $objRegistry->fetch($table, $row[$intPk]);
 
 					if ($objRelated !== null)
 					{
@@ -163,6 +165,8 @@ abstract class Model
 						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
+
+						$objRegistry->register($objRelated);
 					}
 
 					$this->arrRelated[$key] = $objRelated;
@@ -170,7 +174,7 @@ abstract class Model
 			}
 
 			$this->setRow($arrData); // see #5439
-			\Model\Registry::getInstance()->register($this);
+			$objRegistry->register($this);
 		}
 	}
 
