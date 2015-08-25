@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly parse dates in MooTools (see #7983).
+
+### Fixed
 Register the related models in the registry (see contao/core-bundle#333).
 
 ### Fixed
