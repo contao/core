@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the duplicate content check in the front end controller (see #7661).
+
+### Fixed
 Correctly parse dates in MooTools (see #7983).
 
 ### Fixed
