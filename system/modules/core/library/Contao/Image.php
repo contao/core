@@ -449,7 +449,7 @@ class Image
 			{
 				if (file_exists(TL_ROOT . '/' . $this->getTargetPath()) && $this->fileObj->mtime <= filemtime(TL_ROOT . '/' . $this->getTargetPath()))
 				{
-					$this->resizedPath = \System::urlEncode($this->getOriginalPath());
+					$this->resizedPath = \System::urlEncode($this->getTargetPath());
 
 					return $this;
 				}
