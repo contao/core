@@ -948,7 +948,7 @@ abstract class Backend extends \Controller
 			}
 
 			// No link for the active folder
-			if ($strFolder == basename($strNode))
+			if ($strPath == $strNode)
 			{
 				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
 			}
