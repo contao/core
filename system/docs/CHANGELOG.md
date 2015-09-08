@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Store the correct edit URL in the back end personal data module (see #7987).
+
+### Fixed
 Adjust the breadcrumb trail when creating new folders (see #7980).
 
 ### Fixed
