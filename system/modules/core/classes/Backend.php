@@ -616,7 +616,15 @@ abstract class Backend extends \Controller
 				{
 					if (\Input::get('do') == 'files' || \Input::get('do') == 'tpl_editor')
 					{
-						$this->Template->headline .= ' » ' . \Input::get('id');
+						// Handle new folders (see #7980)
+						if (strpos(\Input::get('id'), '__new__') !== false)
+						{
+							$this->Template->headline .= ' » ' . dirname(\Input::get('id')) . ' » ' . $GLOBALS['TL_LANG'][$strTable]['new'][1];
+						}
+						else
+						{
+							$this->Template->headline .= ' » ' . \Input::get('id');
+						}
 					}
 					elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 					{

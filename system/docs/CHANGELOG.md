@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Adjust the breadcrumb trail when creating new folders (see #7980).
+
+### Fixed
 Use `$this->hasText` in news and event templates (see #7993).
 
 ### Fixed
