@@ -403,11 +403,11 @@ class Calendar extends \Frontend
 		// Add date
 		if ($span > 0)
 		{
-			$title = \Date::parse($objPage->$format, $intStart) . ' - ' . \Date::parse($objPage->$format, $intEnd);
+			$title = \Date::parse($objPage->$format, $intStart) . ' – ' . \Date::parse($objPage->$format, $intEnd);
 		}
 		else
 		{
-			$title = \Date::parse($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . \Date::parse($objPage->timeFormat, $intEnd) : '') . ')' : '');
+			$title = \Date::parse($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . \Date::parse($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' – ' . \Date::parse($objPage->timeFormat, $intEnd) : '') . ')' : '');
 		}
 
 		// Add title and link

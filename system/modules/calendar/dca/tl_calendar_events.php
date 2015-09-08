@@ -730,7 +730,7 @@ class tl_calendar_events extends Backend
 
 		if ($span > 0)
 		{
-			$date = Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['startTime']) . ' - ' . Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['endTime']);
+			$date = Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['startTime']) . ' – ' . Date::parse(Config::get(($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')), $arrRow['endTime']);
 		}
 		elseif ($arrRow['startTime'] == $arrRow['endTime'])
 		{
@@ -738,7 +738,7 @@ class tl_calendar_events extends Backend
 		}
 		else
 		{
-			$date = Date::parse(Config::get('dateFormat'), $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse(Config::get('timeFormat'), $arrRow['startTime']) . '-' . Date::parse(Config::get('timeFormat'), $arrRow['endTime']) : '');
+			$date = Date::parse(Config::get('dateFormat'), $arrRow['startTime']) . ($arrRow['addTime'] ? ' ' . Date::parse(Config::get('timeFormat'), $arrRow['startTime']) . ' – ' . Date::parse(Config::get('timeFormat'), $arrRow['endTime']) : '');
 		}
 
 		return '<div class="tl_content_left">' . $arrRow['title'] . ' <span style="color:#b3b3b3;padding-left:3px">[' . $date . ']</span></div>';

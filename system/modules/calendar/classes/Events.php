@@ -219,7 +219,7 @@ abstract class Events extends \Module
 
 		if ($span > 0)
 		{
-			$strDate = \Date::parse($objPage->dateFormat, $intStart) . ' - ' . \Date::parse($objPage->dateFormat, $intEnd);
+			$strDate = \Date::parse($objPage->dateFormat, $intStart) . ' – ' . \Date::parse($objPage->dateFormat, $intEnd);
 			$strDay = '';
 		}
 
@@ -229,7 +229,7 @@ abstract class Events extends \Module
 		{
 			if ($span > 0)
 			{
-				$strDate = \Date::parse($objPage->datimFormat, $intStart) . ' - ' . \Date::parse($objPage->datimFormat, $intEnd);
+				$strDate = \Date::parse($objPage->datimFormat, $intStart) . ' – ' . \Date::parse($objPage->datimFormat, $intEnd);
 			}
 			elseif ($intStart == $intEnd)
 			{
@@ -237,7 +237,7 @@ abstract class Events extends \Module
 			}
 			else
 			{
-				$strTime = \Date::parse($objPage->timeFormat, $intStart) . ' - ' . \Date::parse($objPage->timeFormat, $intEnd);
+				$strTime = \Date::parse($objPage->timeFormat, $intStart) . ' – ' . \Date::parse($objPage->timeFormat, $intEnd);
 			}
 		}
 
