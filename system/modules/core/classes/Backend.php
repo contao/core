@@ -556,7 +556,10 @@ abstract class Backend extends \Controller
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 
-				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+				if (isset($GLOBALS['TL_LANG']['MOD'][$strSecond]))
+				{
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+				}
 
 				// Add the second level name
 				$objRow = $this->Database->prepare("SELECT * FROM $strSecond WHERE id=?")
