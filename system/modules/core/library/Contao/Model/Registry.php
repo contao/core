@@ -218,7 +218,7 @@ class Registry implements \Countable
 	/**
 	 * Check if a model is registered
 	 *
-	 * @param \Model $objModel The model object
+	 * @param \Model|\Contao\Model $objModel The model object
 	 *
 	 * @return boolean True if the model is registered
 	 */
