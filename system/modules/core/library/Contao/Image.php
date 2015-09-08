@@ -939,14 +939,17 @@ class Image
 			$imageObj->setTargetPath($target);
 			$imageObj->setForceOverride($force);
 
-			return $imageObj->executeResize()->getResizedPath() ?: null;
+			if ($path = $imageObj->executeResize()->getResizedPath())
+			{
+				return $path;
+			}
 		}
 		catch (\Exception $e)
 		{
 			\System::log('Image "' . $image . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
-
-			return null;
 		}
+
+		return null;
 	}
 
 
