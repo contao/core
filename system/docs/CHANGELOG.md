@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Convert the HTML content to XHTML when generating Atom feeds (see #7996).
+
+### Fixed
 Correctly link the items in the files breadcrumb menu (see #7965).
 
 ### Fixed
