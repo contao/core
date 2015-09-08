@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Use `$this->hasText` in news and event templates (see #7993).
+
+### Fixed
 Convert the HTML content to XHTML when generating Atom feeds (see #7996).
 
 ### Fixed

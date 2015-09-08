@@ -259,6 +259,8 @@ abstract class Events extends \Module
 		$arrEvent['begin'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 		$arrEvent['details'] = '';
+		$arrEvent['hasDetails'] = false;
+		$arrEvent['hasTeaser'] = false;
 
 		// Override the link target
 		if ($objEvents->source == 'external' && $objEvents->target)
@@ -269,6 +271,8 @@ abstract class Events extends \Module
 		// Clean the RTE output
 		if ($arrEvent['teaser'] != '')
 		{
+			$arrEvent['hasTeaser'] = true;
+
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$arrEvent['teaser'] = \StringUtil::toXhtml($arrEvent['teaser']);
@@ -283,6 +287,7 @@ abstract class Events extends \Module
 		if ($objEvents->source != 'default')
 		{
 			$arrEvent['details'] = true;
+			$arrEvent['hasDetails'] = true;
 		}
 
 		// Compile the event text
@@ -305,6 +310,8 @@ abstract class Events extends \Module
 
 				return $strDetails;
 			};
+
+			$arrEvent['hasDetails'] = (\ContentModel::countPublishedByPidAndTable($id, 'tl_calendar_events') > 0);
 		}
 
 		// Get todays start and end timestamp

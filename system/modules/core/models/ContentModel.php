@@ -398,4 +398,42 @@ class ContentModel extends \Model
 
 		return static::findBy($arrColumns, array($intPid, $strParentTable), $arrOptions);
 	}
+
+
+	/**
+	 * Find all published content elements by their parent ID and parent table
+	 *
+	 * @param integer $intPid         The article ID
+	 * @param string  $strParentTable The parent table name
+	 * @param array   $arrOptions     An optional options array
+	 *
+	 * @return integer The number of matching rows
+	 */
+	public static function countPublishedByPidAndTable($intPid, $strParentTable, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+
+		// Also handle empty ptable fields (backwards compatibility)
+		if ($strParentTable == 'tl_article')
+		{
+			$arrColumns = array("$t.pid=? AND ($t.ptable=? OR $t.ptable='')");
+		}
+		else
+		{
+			$arrColumns = array("$t.pid=? AND $t.ptable=?");
+		}
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.invisible=''";
+		}
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::countBy($arrColumns, array($intPid, $strParentTable), $arrOptions);
+	}
 }

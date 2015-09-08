@@ -100,10 +100,14 @@ abstract class ModuleNews extends \Module
 		$objTemplate->archive = $objArticle->getRelated('pid');
 		$objTemplate->count = $intCount; // see #5708
 		$objTemplate->text = '';
+		$objTemplate->hasText = false;
+		$objTemplate->hasTeaser = false;
 
 		// Clean the RTE output
 		if ($objArticle->teaser != '')
 		{
+			$objTemplate->hasTeaser = true;
+
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$objTemplate->teaser = \StringUtil::toXhtml($objArticle->teaser);
@@ -120,6 +124,7 @@ abstract class ModuleNews extends \Module
 		if ($objArticle->source != 'default')
 		{
 			$objTemplate->text = true;
+			$objTemplate->hasText = true;
 		}
 
 		// Compile the news text
@@ -142,6 +147,8 @@ abstract class ModuleNews extends \Module
 
 				return $strText;
 			};
+
+			$objTemplate->hasText = (\ContentModel::countPublishedByPidAndTable($objArticle->id, 'tl_news') > 0);
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);

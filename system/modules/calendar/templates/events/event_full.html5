@@ -8,7 +8,7 @@
     <p class="recurring"><?= $this->recurring ?><?php if ($this->until) echo ' ' . $this->until; ?>.</p>
   <?php endif; ?>
 
-  <?php if ($this->details): ?>
+  <?php if ($this->hasDetails): ?>
     <?= $this->details ?>
   <?php else: ?>
     <div class="ce_text block">
