@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Consider the pagination menu when inserting at the top (see #7895).
+
+### Fixed
 Use en-dashes in event intervals (see #7978).
 
 ### Fixed
