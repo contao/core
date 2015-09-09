@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Enable the `strictMath` option of the LESS parser (see #7985).
+
+### Fixed
 Consider the pagination menu when inserting at the top (see #7895).
 
 ### Fixed
