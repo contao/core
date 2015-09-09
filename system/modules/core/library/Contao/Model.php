@@ -703,7 +703,7 @@ abstract class Model
 	/**
 	 * Called when the model is attached to the model registry
 	 *
-	 * @param \Model\Registry
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
 	public function onRegister(\Model\Registry $registry)
 	{
@@ -723,7 +723,7 @@ abstract class Model
 	/**
 	 * Called when the model is detached from the model registry
 	 *
-	 * @param \Model\Registry
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
 	public function onUnregister(\Model\Registry $registry)
 	{

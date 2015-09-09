@@ -269,7 +269,7 @@ class FileTree extends \Widget
 			{
 				$arrNew = array();
 
-				foreach ($this->{$this->orderField} as $i)
+				foreach ((array) $this->{$this->orderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{

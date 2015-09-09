@@ -24,36 +24,37 @@ namespace Contao;
  *
  *     File::putContent('test.txt', 'This is a test');
  *
- * @property integer  $size        The file size
- * @property integer  $filesize    Alias of $size
- * @property string   $name        The file name and extension
- * @property string   $basename    Alias of $name
- * @property string   $dirname     The path of the parent folder
- * @property string   $extension   The file extension
- * @property string   $filename    The file name without extension
- * @property string   $tmpname     The name of the temporary file
- * @property string   $path        The file path
- * @property string   $value       Alias of $path
- * @property string   $mime        The mime type
- * @property string   $hash        The MD5 checksum
- * @property string   $ctime       The ctime
- * @property string   $mtime       The mtime
- * @property string   $atime       The atime
- * @property string   $icon        The mime icon name
- * @property array    $imageSize   The file dimensions (images only)
- * @property integer  $width       The file width (images only)
- * @property integer  $height      The file height (images only)
- * @property integer  $viewWidth   The viewbox width (SVG images only)
- * @property integer  $viewHeight  The viewbox height (SVG images only)
- * @property boolean  $isImage     True if the file is an image
- * @property boolean  $isGdImage   True if the file can be handled by the GDlib
- * @property boolean  $isSvgImage  True if the file is an SVG image
- * @property integer  $channels    The number of channels (images only)
- * @property integer  $bits        The number of bits for each color (images only)
- * @property boolean  $isRgbImage  True if the file is an RGB image
- * @property boolean  $isCmykImage True if the file is a CMYK image
- * @property resource $handle      The file handle (returned by fopen())
- * @property string   $title       The file title
+ * @property integer  $size          The file size
+ * @property integer  $filesize      Alias of $size
+ * @property string   $name          The file name and extension
+ * @property string   $basename      Alias of $name
+ * @property string   $dirname       The path of the parent folder
+ * @property string   $extension     The file extension
+ * @property string   $filename      The file name without extension
+ * @property string   $tmpname       The name of the temporary file
+ * @property string   $path          The file path
+ * @property string   $value         Alias of $path
+ * @property string   $mime          The mime type
+ * @property string   $hash          The MD5 checksum
+ * @property string   $ctime         The ctime
+ * @property string   $mtime         The mtime
+ * @property string   $atime         The atime
+ * @property string   $icon          The mime icon name
+ * @property array    $imageSize     The file dimensions (images only)
+ * @property integer  $width         The file width (images only)
+ * @property integer  $height        The file height (images only)
+ * @property array    $imageViewSize The viewbox dimensions (SVG images only)
+ * @property integer  $viewWidth     The viewbox width (SVG images only)
+ * @property integer  $viewHeight    The viewbox height (SVG images only)
+ * @property boolean  $isImage       True if the file is an image
+ * @property boolean  $isGdImage     True if the file can be handled by the GDlib
+ * @property boolean  $isSvgImage    True if the file is an SVG image
+ * @property integer  $channels      The number of channels (images only)
+ * @property integer  $bits          The number of bits for each color (images only)
+ * @property boolean  $isRgbImage    True if the file is an RGB image
+ * @property boolean  $isCmykImage   True if the file is a CMYK image
+ * @property resource $handle        The file handle (returned by fopen())
+ * @property string   $title         The file title
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -95,6 +96,12 @@ class File extends \System
 	 * @var array
 	 */
 	protected $arrImageSize = array();
+
+	/**
+	 * Image view size
+	 * @var array
+	 */
+	protected $arrImageViewSize = array();
 
 	/**
 	 * Do not create the file
