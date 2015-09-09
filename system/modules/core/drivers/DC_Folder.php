@@ -2395,8 +2395,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			// Generate the thumbnail
 			if ($objFile->isImage && $objFile->viewHeight > 0)
 			{
-				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 200);
+				if ($objFile->width && $objFile->height)
+				{
+					$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
+					$popupHeight = ($objFile->height + 210);
+				}
+				else
+				{
+					$popupWidth = 661;
+					$popupHeight = 625 / $objFile->viewWidth * $objFile->viewHeight + 210;
+				}
+
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
 				if ($objFile->width && $objFile->height)
 				{
@@ -2413,6 +2422,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
+				if ($objFile->isImage)
+				{
+					$popupHeight = 360;
+				}
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).')</span>';
 			}
 
