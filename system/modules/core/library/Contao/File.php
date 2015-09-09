@@ -294,7 +294,7 @@ class File extends \System
 
 						if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
 						{
-							$this->arrImageSize[2] = 0;  // replace this with IMAGETYPE_SVG when it becomes available
+							$this->arrImageSize[2] = 0; // replace this with IMAGETYPE_SVG when it becomes available
 							$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
 							$this->arrImageSize['bits'] = 8;
 							$this->arrImageSize['channels'] = 3;
