@@ -213,7 +213,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio', 'mandatory'=>true, 'tl_class'=>'clr'),
-			'sql'                     => "binary(16) NULL",
 			'load_callback' => array
 			(
 				array('tl_content', 'setSingleSrcFlags')
@@ -221,7 +220,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'save_callback' => array
 			(
 				array('tl_content', 'storeFileMetaInformation')
-			)
+			),
+			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
 		(
@@ -1677,38 +1677,9 @@ class tl_content extends Backend
 	 */
 	public function storeFileMetaInformation($varValue, DataContainer $dc)
 	{
-		if ($dc->activeRecord->singleSRC == $varValue)
+		if ($dc->activeRecord->singleSRC != $varValue)
 		{
-			return $varValue;
-		}
-
-		$objFile = FilesModel::findByUuid($varValue);
-
-		if ($objFile !== null)
-		{
-			$arrMeta = deserialize($objFile->meta);
-
-			if (!empty($arrMeta))
-			{
-				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM " . ($dc->activeRecord->ptable ?: 'tl_article') . " WHERE id=?)")
-										  ->execute($dc->activeRecord->pid);
-
-				if ($objPage->numRows)
-				{
-					$objModel = new PageModel();
-					$objModel->setRow($objPage->row());
-					$objModel->loadDetails();
-
-					// Convert the language to a locale (see #5678)
-					$strLanguage = str_replace('-', '_', $objModel->rootLanguage);
-
-					if (isset($arrMeta[$strLanguage]))
-					{
-						Input::setPost('alt', $arrMeta[$strLanguage]['title']);
-						Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
-					}
-				}
-			}
+			$this->addFileMetaInformationToRequest($varValue, ($dc->activeRecord->ptable ?: 'tl_article'), $dc->activeRecord->pid);
 		}
 
 		return $varValue;
