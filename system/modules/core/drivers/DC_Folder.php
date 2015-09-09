@@ -2393,40 +2393,42 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$return .= "\n  " . '<li class="tl_file click2edit toggle_select" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 			// Generate the thumbnail
-			if ($objFile->isImage && $objFile->viewHeight > 0)
+			if ($objFile->isImage)
 			{
-				if ($objFile->width && $objFile->height)
+				if ($objFile->viewHeight > 0)
 				{
-					$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-					$popupHeight = ($objFile->height + 210);
+					if ($objFile->width && $objFile->height)
+					{
+						$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
+						$popupHeight = ($objFile->height + 210);
+					}
+					else
+					{
+						$popupWidth = 661;
+						$popupHeight = 625 / $objFile->viewWidth * $objFile->viewHeight + 210;
+					}
+
+					$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
+
+					if ($objFile->width && $objFile->height)
+					{
+						$thumbnail .= ', '.$objFile->width.'x'.$objFile->height.' px';
+					}
+
+					$thumbnail .= ')</span>';
+
+					if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
+					{
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, 400, (($objFile->height && $objFile->height < 50) ? $objFile->height : 50), 'box') . '" alt="" style="margin:0 0 2px -19px">';
+					}
 				}
 				else
 				{
-					$popupWidth = 661;
-					$popupHeight = 625 / $objFile->viewWidth * $objFile->viewHeight + 210;
-				}
-
-				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
-
-				if ($objFile->width && $objFile->height)
-				{
-					$thumbnail .= ', '.$objFile->width.'x'.$objFile->height.' px';
-				}
-
-				$thumbnail .= ')</span>';
-
-				if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
-				{
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, 400, (($objFile->height && $objFile->height < 50) ? $objFile->height : 50), 'box') . '" alt="" style="margin:0 0 2px -19px">';
+					$popupHeight = 360; // dimensionless SVGs are rendered at 300x150px, so the popup needs to be 150px + 210px high
 				}
 			}
 			else
 			{
-				if ($objFile->isImage)
-				{
-					$popupHeight = 360;
-				}
-
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).')</span>';
 			}
 
