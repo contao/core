@@ -43,6 +43,8 @@ namespace Contao;
  * @property array    $imageSize   The file dimensions (images only)
  * @property integer  $width       The file width (images only)
  * @property integer  $height      The file height (images only)
+ * @property integer  $viewWidth   The viewbox width (SVG images only)
+ * @property integer  $viewHeight  The viewbox height (SVG images only)
  * @property boolean  $isImage     True if the file is an image
  * @property boolean  $isGdImage   True if the file can be handled by the GDlib
  * @property boolean  $isSvgImage  True if the file is an SVG image
@@ -274,7 +276,7 @@ class File extends \System
 
 						$svgElement = $doc->documentElement;
 
-						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) !== '%' && substr(rtrim($svgElement->getAttribute('height')), -1) !== '%')
+						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) != '%' && substr(rtrim($svgElement->getAttribute('height')), -1) != '%')
 						{
 							$this->arrImageSize = array
 							(
@@ -285,7 +287,7 @@ class File extends \System
 
 						if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
 						{
-							$this->arrImageSize[2] = 0;  // Replace this with IMAGETYPE_SVG when it becomes available
+							$this->arrImageSize[2] = 0;  // replace this with IMAGETYPE_SVG when it becomes available
 							$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
 							$this->arrImageSize['bits'] = 8;
 							$this->arrImageSize['channels'] = 3;
@@ -311,7 +313,8 @@ class File extends \System
 			case 'imageViewSize':
 				if (empty($this->arrImageViewSize))
 				{
-					if ($this->imageSize) {
+					if ($this->imageSize)
+					{
 						$this->arrImageViewSize = array
 						(
 							$this->imageSize[0],

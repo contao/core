@@ -2407,17 +2407,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
+
 				if ($objFile->width && $objFile->height)
 				{
 					$thumbnail .= ', '.$objFile->width.'x'.$objFile->height.' px';
 				}
+
 				$thumbnail .= ')</span>';
 
 				if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
 				{
-					$_height = ($objFile->height && $objFile->height < 50) ? $objFile->height : 50;
-
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, 400, $_height, 'box') . '" alt="" style="margin:0 0 2px -19px">';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, 400, (($objFile->height && $objFile->height < 50) ? $objFile->height : 50), 'box') . '" alt="" style="margin:0 0 2px -19px">';
 				}
 			}
 			else
@@ -2426,6 +2426,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				{
 					$popupHeight = 360;
 				}
+
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).')</span>';
 			}
 
