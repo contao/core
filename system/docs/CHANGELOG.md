@@ -5,6 +5,9 @@ Version 3.5.3 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly handle dimensionless SVG images (see #7882).
+
+### Fixed
 Correctly fill in the image meta data in news, events and FAQs (see #7907).
 
 ### Fixed
