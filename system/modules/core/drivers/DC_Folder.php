@@ -2393,18 +2393,38 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$return .= "\n  " . '<li class="tl_file click2edit toggle_select" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 			// Generate the thumbnail
-			if ($objFile->isImage && $objFile->height > 0)
+			if ($objFile->isImage)
 			{
-				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 200);
-				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
-
-				if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
+				if ($objFile->viewHeight > 0)
 				{
-					$_height = ($objFile->height < 50) ? $objFile->height : 50;
-					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
+					if ($objFile->width && $objFile->height)
+					{
+						$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
+						$popupHeight = ($objFile->height + 210);
+					}
+					else
+					{
+						$popupWidth = 661;
+						$popupHeight = 625 / $objFile->viewWidth * $objFile->viewHeight + 210;
+					}
 
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
+					$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
+
+					if ($objFile->width && $objFile->height)
+					{
+						$thumbnail .= ', '.$objFile->width.'x'.$objFile->height.' px';
+					}
+
+					$thumbnail .= ')</span>';
+
+					if (\Config::get('thumbnails') && ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')))
+					{
+						$thumbnail .= '<br><img src="' . TL_FILES_URL . \Image::get($currentEncoded, 400, (($objFile->height && $objFile->height < 50) ? $objFile->height : 50), 'box') . '" alt="" style="margin:0 0 2px -19px">';
+					}
+				}
+				else
+				{
+					$popupHeight = 360; // dimensionless SVGs are rendered at 300x150px, so the popup needs to be 150px + 210px high
 				}
 			}
 			else
