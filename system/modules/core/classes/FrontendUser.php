@@ -75,12 +75,23 @@ class FrontendUser extends \User
 
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri') && !\Environment::get('isAjaxRequest'))
 		{
-			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
+			$key = null;
+
+			if (TL_SCRIPT == 'index.php')
+			{
+				$key = 'referer';
+			}
+
+			if ($key !== null)
+			{
+				$session[$key]['last'] = $session[$key]['current'];
+				$session[$key]['current'] = substr(\Environment::get('requestUri'), strlen(TL_PATH) + 1);
+
+				$this->Session->setData($session);
+			}
 		}
 
-		$this->Session->setData($session);
-
+		// Store the session data
 		if ($this->intId)
 		{
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")

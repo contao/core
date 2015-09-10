@@ -157,7 +157,7 @@ class Installer extends \Controller
 					{
 						$return['ALTER_ADD'][] = 'ALTER TABLE `'.$k.'` ADD '.$vv.';';
 					}
-					elseif ($sql_current[$k]['TABLE_FIELDS'][$kk] != $vv)
+					elseif ($sql_current[$k]['TABLE_FIELDS'][$kk] != $vv && $sql_current[$k]['TABLE_FIELDS'][$kk] != str_replace(' COLLATE ' . \Config::get('dbCollation'), '', $vv))
 					{
 						$return['ALTER_CHANGE'][] = 'ALTER TABLE `'.$k.'` CHANGE `'.$kk.'` '.$vv.';';
 					}

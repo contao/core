@@ -7340,14 +7340,8 @@ var handle = function(key, value){
 	return this;
 };
 
-// PATCH: correctly parse German dates
 Date.defineParsers(
-	'%Y(-%m(-%d( %H:%M(:%S)?( ?%p)?)?)?)?', // 1999-12-31, 1999-12-31 11:59pm, 1999-12-31 23:59:59, ISO8601
-	'%m(/%d(/%Y( %H:%M(:%S)?( ?%p)?)?)?)?', // 12/31/1999, 12/31/1999 11:59pm, 12/31/1999 23:59:59
-	'%d(.%m(.%Y( %H:%M(:%S)?)?)?)?'         // 31.12.1999, 31.12.1999 11:59, 31.12.1999 23:59:59
-);
-/*
-Date.defineParsers(
+	'%d(.%m(.%Y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse German dates
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?', // "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
 	'%Y%m%d(T%H(%M%S?)?)?', // "19991231", "19991231T1159", compact
 	'%x( %X)?', // "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
@@ -7358,8 +7352,6 @@ Date.defineParsers(
 	'%T', // %H:%M:%S
 	'%H:%M( ?%p)?' // "11:05pm", "11:05 am" and "11:05"
 );
-*/
-// PATCH EOF
 
 Locale.addEvent('change', function(language){
 	if (Locale.get('Date')) recompile(language);

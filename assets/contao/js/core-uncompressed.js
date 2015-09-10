@@ -15,6 +15,12 @@
 var AjaxRequest =
 {
 	/**
+	 * The theme path
+	 * @member {string}
+	 */
+	themePath: Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
+
+	/**
 	 * Toggle the navigation menu
 	 *
 	 * @param {object} el The DOM element
@@ -31,12 +37,12 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
+				image.src = AjaxRequest.themePath + 'modMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
+				image.src = AjaxRequest.themePath + 'modPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -62,7 +68,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
+				image.src = AjaxRequest.themePath + 'modMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -92,12 +98,12 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -150,7 +156,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				window.fireEvent('structure');
 				AjaxRequest.hideBox();
 
@@ -182,14 +188,14 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				icon.src = icon.src.replace('folderC', 'folderO');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
+				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				icon.src = icon.src.replace('folderO', 'folderC');
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
+				icon.src = AjaxRequest.themePath + 'folderC.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -222,8 +228,8 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
+				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -255,12 +261,12 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -293,7 +299,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -326,12 +332,12 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -364,7 +370,7 @@ var AjaxRequest =
 				});
 
 				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -465,56 +471,87 @@ var AjaxRequest =
 
 		var img = null,
 			image = $(el).getFirst('img'),
-			publish = (image.src.indexOf('invisible') != -1),
+			published = (image.get('data-state') == 1),
 			div = el.getParent('div'),
-			next;
+			index, next, icon, icond, pa;
+
+		// Backwards compatibility
+		if (image.get('data-state') === null) {
+			published = (image.src.indexOf('invisible') == -1);
+			console.warn('Using a visibility toggle without a "data-state" attribute is deprecated. Please adjust your Contao DCA file.');
+		}
 
 		// Find the icon depending on the view (tree view, list view, parent view)
 		if (div.hasClass('tl_right')) {
 			img = div.getPrevious('div').getElement('img');
 		} else if (div.hasClass('tl_listing_container')) {
 			img = el.getParent('td').getPrevious('td').getFirst('div.list_icon');
-			if (img == null) { // Comments
+			if (img === null) { // comments
 				img = el.getParent('td').getPrevious('td').getElement('div.cte_type');
 			}
-			if (img == null) { // showColumns
+			if (img === null) { // showColumns
 				img = el.getParent('tr').getFirst('td').getElement('div.list_icon_new');
 			}
-		} else if ((next = div.getNext('div')) && next.hasClass('cte_type')) {
-			img = next;
+		} else if (next = div.getNext('div')) {
+			if (next.hasClass('cte_type')) {
+				img = next;
+			}
+			if (img === null) { // newsletter recipients
+				img = next.getFirst('div.list_icon');
+			}
 		}
 
 		// Change the icon
-		if (img != null) {
+		if (img !== null) {
 			// Tree view
 			if (img.nodeName.toLowerCase() == 'img') {
 				if (img.getParent('ul.tl_listing').hasClass('tl_tree_xtnd')) {
-					if (publish) {
-						img.src = img.src.replace(/_\.(gif|png|jpe?g)/, '.$1');
-					} else {
-						img.src = img.src.replace(/\.(gif|png|jpe?g)/, '_.$1');
+					icon = img.get('data-icon');
+					icond = img.get('data-icon-disabled');
+
+					// Backwards compatibility
+					if (img.get('data-icon') === null) {
+						icon = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1.$2');
+						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
+					if (img.get('data-icon-disabled') === null) {
+						icond = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1_.$2');
+						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+					}
+
+					img.src = AjaxRequest.themePath + (!published ? icon : icond);
 				} else {
-					if (img.src.match(/folPlus|folMinus/)) {
-						if (img.getParent('a').getNext('a')) {
-							img = img.getParent('a').getNext('a').getFirst('img');
+					pa = img.getParent('a');
+
+					if (pa.href.indexOf('do=feRedirect') == -1) {
+						if (next = pa.getNext('a')) {
+							img = next.getFirst('img');
 						} else {
 							img = new Element('img'); // no icons used (see #2286)
 						}
 					}
-					var index;
-					if (publish) {
-						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
-						img.src = img.src.replace(/_[0-9]\.(gif|png|jpe?g)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1');
-					} else {
-						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g)/, '$1');
-						img.src = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2');
+
+					icon = img.get('data-icon');
+					icond = img.get('data-icon-disabled');
+
+					// Backwards compatibility
+					if (img.get('data-icon') === null) {
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
+						icon = img.src.replace(/_[0-9]\.(gif|png|jpe?g|svg)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1').split(/[\\/]/).pop();
+						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
+					if (img.get('data-icon-disabled') === null) {
+						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
+						icond = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g|svg)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2').split(/[\\/]/).pop();
+						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+					}
+
+					img.src = AjaxRequest.themePath + (!published ? icon : icond);
 				}
 			}
 			// Parent view
 			else if (img.hasClass('cte_type')) {
-				if (publish) {
+				if (!published) {
 					img.addClass('published');
 					img.removeClass('unpublished');
 				} else {
@@ -524,11 +561,20 @@ var AjaxRequest =
 			}
 			// List view
 			else {
-				if (publish) {
-					img.setStyle('background-image', img.getStyle('background-image').replace(/_\.(gif|png|jpe?g)/, '.$1'));
-				} else {
-					img.setStyle('background-image', img.getStyle('background-image').replace(/\.(gif|png|jpe?g)/, '_.$1'));
+				icon = img.get('data-icon');
+				icond = img.get('data-icon-disabled');
+
+				// Backwards compatibility
+				if (img.get('data-icon') === null) {
+					icon = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1.$2');
+					console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 				}
+				if (img.get('data-icon-disabled') === null) {
+					icond = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1_.$2');
+					console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
+				}
+
+				img.setStyle('background-image', 'url(' + AjaxRequest.themePath + (!published ? icon : icond) + ')');
 			}
 		}
 
@@ -538,11 +584,13 @@ var AjaxRequest =
 		}
 
 		// Send request
-		if (publish) {
-			image.src = image.src.replace('invisible.gif', 'visible.gif');
+		if (!published) {
+			image.src = AjaxRequest.themePath + 'visible.gif';
+			image.set('data-state', 1);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':1, 'rt':Contao.request_token});
 		} else {
-			image.src = image.src.replace('visible.gif', 'invisible.gif');
+			image.src = AjaxRequest.themePath + 'invisible.gif';
+			image.set('data-state', 0);
 			new Request.Contao({'url':window.location.href, 'followRedirects':false}).get({'tid':id, 'state':0, 'rt':Contao.request_token});
 		}
 
@@ -561,14 +609,22 @@ var AjaxRequest =
 		el.blur();
 
 		var image = $(el).getFirst('img'),
+			featured = (image.get('data-state') == 1);
+
+		// Backwards compatibility
+		if (image.get('data-state') === null) {
 			featured = (image.src.indexOf('featured_') == -1);
+			console.warn('Using a featured toggle without a "data-state" attribute is deprecated. Please adjust your Contao DCA file.');
+		}
 
 		// Send the request
 		if (!featured) {
-			image.src = image.src.replace('featured_.gif', 'featured.gif');
+			image.src = AjaxRequest.themePath + 'featured.gif';
+			image.set('data-state', 1);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 		} else {
-			image.src = image.src.replace('featured.gif', 'featured_.gif');
+			image.src = AjaxRequest.themePath + 'featured_.gif';
+			image.set('data-state', 0);
 			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 		}
 
@@ -616,11 +672,11 @@ var AjaxRequest =
 		if (item) {
 			if (item.getStyle('display') != 'block') {
 				item.setStyle('display', 'block');
-				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
-				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				image.src = AjaxRequest.themePath + 'folPlus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return true;
@@ -661,7 +717,7 @@ var AjaxRequest =
 			overlay = $('tl_ajaxOverlay'),
 			scroll = window.getScroll();
 
-		if (overlay == null) {
+		if (overlay === null) {
 			overlay = new Element('div', {
 				'id': 'tl_ajaxOverlay'
 			}).inject($(document.body), 'bottom');
@@ -674,7 +730,7 @@ var AjaxRequest =
 			}
 		});
 
-		if (box == null) {
+		if (box === null) {
 			box = new Element('div', {
 				'id': 'tl_ajaxBox'
 			}).inject($(document.body), 'bottom');
@@ -737,6 +793,12 @@ var Backend =
 	 * @member {object}
 	 */
 	popupWindow: null,
+
+	/**
+	 * The theme path
+	 * @member {string}
+	 */
+	themePath: Contao.script_url + 'system/themes/' + Contao.theme + '/images/',
 
 	/**
 	 * Get the current mouse position
@@ -1009,14 +1071,14 @@ var Backend =
 			if (!hgt) return;
 
 			div.setStyle('height', hgt);
-			var path = Contao.script_url + 'system/themes/' + Contao.theme + '/images/';
 
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
 				'title': Contao.lang.expand,
 				'width': 20,
-				'height': 24
+				'height': 24,
+				'data-state': 0
 			});
 
 			new Tips.Contao(toggler, {
@@ -1025,23 +1087,25 @@ var Backend =
 
 			// Disable the function if the preview height is below the max-height
 			if (size.height < hgt) {
-				toggler.src = path + 'expand_.gif';
+				toggler.src = Backend.themePath + 'expand_.gif';
 				toggler.inject(div, 'after');
 				return;
 			}
 
-			toggler.src = path + 'expand.gif';
+			toggler.src = Backend.themePath + 'expand.gif';
 			toggler.setStyle('cursor', 'pointer');
 
 			toggler.addEvent('click', function() {
 				style = this.getPrevious('div').getStyle('height').toInt();
 				this.getPrevious('div').setStyle('height', ((style > hgt) ? hgt : ''));
 
-				if (this.src.indexOf('expand.gif') != -1) {
-					this.src = path + 'collapse.gif';
+				if (this.get('data-state') == 0) {
+					this.src = Backend.themePath + 'collapse.gif';
+					this.set('data-state', 1);
 					this.store('tip:title', Contao.lang.collapse);
 				} else {
-					this.src = path + 'expand.gif';
+					this.src = Backend.themePath + 'expand.gif';
+					this.set('data-state', 0);
 					this.store('tip:title', Contao.lang.expand);
 				}
 			});
@@ -1598,9 +1662,9 @@ var Backend =
 	 */
 	tableWizardResize: function(factor) {
 		var size = Cookie.read('BE_CELL_SIZE');
-		if (size == null && factor == null) return;
+		if (size === null && factor === null) return;
 
-		if (factor != null) {
+		if (factor !== null) {
 			size = '';
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', (el.getStyle('width').toInt() * factor).round().limit(142, 284));
@@ -1610,7 +1674,7 @@ var Backend =
 				}
 			});
 			Cookie.write('BE_CELL_SIZE', size, { path: Contao.path });
-		} else if (size != null) {
+		} else if (size !== null) {
 			var chunks = size.split('|');
 			$$('.tl_tablewizard textarea').each(function(el) {
 				el.setStyle('width', chunks[0]);
@@ -1988,12 +2052,13 @@ var Backend =
 			el.addEvent('click', function() {
 				Backend.getScrollOffset();
 				var cbx = el.getNext('input');
+
 				if (cbx.checked) {
 					cbx.checked = '';
-					el.src = el.src.replace('visible.gif', 'invisible.gif');
+					el.src = Backend.themePath + 'invisible.gif';
 				} else {
 					cbx.checked = 'checked';
-					el.src = el.src.replace('invisible.gif', 'visible.gif');
+					el.src = Backend.themePath + 'visible.gif';
 				}
 			});
 		});

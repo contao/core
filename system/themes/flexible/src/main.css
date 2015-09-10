@@ -1496,22 +1496,24 @@ fieldset.collapsed > legend {
 	margin-top:6px;
 	border:1px solid #e9e9e9;
 	border-width:1px 0;
-	padding:2px 0 4px;
 }
 .pagination ul {
-	width:60%;
+	max-width:60%;
 	float:right;
 	text-align:right;
-	padding-right:3px;
+	padding-right:2px;
 }
 .pagination p {
-	width:30%;
+	max-width:30%;
 	float:left;
 	margin-bottom:0;
 }
 .pagination li {
-	display:inline;
-	padding-right:3px;
+	float:left;
+}
+.pagination a,.pagination span,.pagination p {
+	display:block;
+	padding:3px 4px 4px;
 }
 .pagination .current {
 	color:#999;

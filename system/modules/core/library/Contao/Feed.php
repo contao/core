@@ -212,7 +212,7 @@ class Feed
 		{
 			$xml .= '<entry>';
 			$xml .= '<title>' . specialchars($objItem->title) . '</title>';
-			$xml .= '<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>';
+			$xml .= '<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', \StringUtil::toXhtml($objItem->description)) . '</div></content>';
 			$xml .= '<link rel="alternate" href="' . specialchars($objItem->link) . '" />';
 			$xml .= '<updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>';
 			$xml .= '<id>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</id>';

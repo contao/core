@@ -12,7 +12,7 @@ namespace Contao;
 
 
 /**
- * Provide methods to handle input field "page tree".
+ * Provide methods to handle input field "file tree".
  *
  * @property string  $orderField
  * @property boolean $multiple
@@ -169,7 +169,7 @@ class FileTree extends \Widget
 							{
 								$image = 'placeholder.png';
 
-								if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+								if (($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')) && $objFile->viewWidth && $objFile->viewHeight)
 								{
 									$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 								}
@@ -213,7 +213,7 @@ class FileTree extends \Widget
 									{
 										$image = 'placeholder.png';
 
-										if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+										if (($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')) && $objFile->viewWidth && $objFile->viewHeight)
 										{
 											$image = \Image::get($objSubfiles->path, 80, 60, 'center_center');
 										}
@@ -243,7 +243,7 @@ class FileTree extends \Widget
 								{
 									$image = 'placeholder.png';
 
-									if ($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth'))
+									if (($objFile->isSvgImage || $objFile->height <= \Config::get('gdMaxImgHeight') && $objFile->width <= \Config::get('gdMaxImgWidth')) && $objFile->viewWidth && $objFile->viewHeight)
 									{
 										$image = \Image::get($objFiles->path, 80, 60, 'center_center');
 									}
@@ -269,7 +269,7 @@ class FileTree extends \Widget
 			{
 				$arrNew = array();
 
-				foreach ($this->{$this->orderField} as $i)
+				foreach ((array) $this->{$this->orderField} as $i)
 				{
 					if (isset($arrValues[$i]))
 					{

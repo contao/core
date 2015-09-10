@@ -788,7 +788,12 @@ abstract class Controller extends \System
 
 				if ($options->static)
 				{
-					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $options->media);
+					if ($options->mtime === null)
+					{
+						$options->mtime = filemtime(TL_ROOT . '/' . $stylesheet);
+					}
+
+					$objCombiner->add($stylesheet, $options->mtime, $options->media);
 				}
 				else
 				{
@@ -841,14 +846,12 @@ abstract class Controller extends \System
 
 				if ($options->static)
 				{
-					if ($options->async)
+					if ($options->mtime === null)
 					{
-						$objCombinerAsync->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
+						$options->mtime = filemtime(TL_ROOT . '/' . $javascript);
 					}
-					else
-					{
-						$objCombiner->add($javascript, filemtime(TL_ROOT . '/' . $javascript));
-					}
+
+					$options->async ? $objCombinerAsync->add($javascript, $options->mtime) : $objCombiner->add($javascript, $options->mtime);
 				}
 				else
 				{
@@ -1078,6 +1081,8 @@ abstract class Controller extends \System
 	 */
 	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
+		$strUrl = '';
+
 		if (!\Config::get('disableAlias'))
 		{
 			$strLanguage = '';
@@ -1135,6 +1140,12 @@ abstract class Controller extends \System
 		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
 		{
 			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
+		}
+
+		// Use ./ instead of an empty href (see #7967)
+		if ($strUrl == '')
+		{
+			$strUrl = './';
 		}
 
 		// HOOK: add custom logic
@@ -1429,53 +1440,59 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
-		$size = deserialize($arrItem['size']);
-
-		if ($intMaxWidth === null)
-		{
-			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
-		}
-
-		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
 
 		// Store the original dimensions
-		$objTemplate->width = $imgSize[0];
-		$objTemplate->height = $imgSize[1];
-
-		// Adjust the image size
-		if ($intMaxWidth > 0)
+		if ($imgSize !== false)
 		{
-			// Subtract the margins before deciding whether to resize (see #6018)
-			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
-			{
-				$intMargin = $arrMargin['left'] + $arrMargin['right'];
-
-				// Reset the margin if it exceeds the maximum width (see #7245)
-				if ($intMaxWidth - $intMargin < 1)
-				{
-					$arrMargin['left'] = '';
-					$arrMargin['right'] = '';
-				}
-				else
-				{
-					$intMaxWidth = $intMaxWidth - $intMargin;
-				}
-			}
-
-			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
-			{
-				// See #2268 (thanks to Thyon)
-				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
-
-				$size[0] = $intMaxWidth;
-				$size[1] = floor($intMaxWidth * $ratio);
-			}
+			$objTemplate->width = $imgSize[0];
+			$objTemplate->height = $imgSize[1];
 		}
 
-		// Disable responsive images in the back end (see #7875)
-		if (TL_MODE == 'BE')
+		$size = deserialize($arrItem['size']);
+		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
+
+		if (is_array($size))
 		{
-			unset($size[2]);
+			if ($intMaxWidth === null)
+			{
+				$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
+			}
+
+			// Adjust the image size
+			if ($intMaxWidth > 0 && $imgSize !== false)
+			{
+				// Subtract the margins before deciding whether to resize (see #6018)
+				if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+				{
+					$intMargin = $arrMargin['left'] + $arrMargin['right'];
+
+					// Reset the margin if it exceeds the maximum width (see #7245)
+					if ($intMaxWidth - $intMargin < 1)
+					{
+						$arrMargin['left'] = '';
+						$arrMargin['right'] = '';
+					}
+					else
+					{
+						$intMaxWidth = $intMaxWidth - $intMargin;
+					}
+				}
+
+				if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+				{
+					// See #2268 (thanks to Thyon)
+					$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+
+					$size[0] = $intMaxWidth;
+					$size[1] = floor($intMaxWidth * $ratio);
+				}
+			}
+
+			// Disable responsive images in the back end (see #7875)
+			if (TL_MODE == 'BE')
+			{
+				unset($size[2]);
+			}
 		}
 
 		try

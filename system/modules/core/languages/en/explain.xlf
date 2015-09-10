@@ -3,7 +3,7 @@
   <file datatype="php" original="system/modules/core/languages/en/explain.php" source-language="en">
     <body>
       <trans-unit id="XPL.insertTags.0.0">
-        <source>Rich Text Editor</source>
+        <source>Rich text editor</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.0.1">
         <source>For more information about TinyMCE please visit &lt;a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank"&gt;http://www.tinymce.com/&lt;/a&gt;.</source>
@@ -12,13 +12,13 @@
         <source>Insert tags</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.1.1">
-        <source>For more information on insert tags please visit &lt;a href="https://contao.org/manual/managing-content.html#insert-tags" title="Contao online documentation" target="_blank"&gt;https://contao.org/manual/managing-content.html#insert-tags&lt;/a&gt;.</source>
+        <source>For more information on insert tags please visit &lt;a href="https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html" title="Contao online documentation" target="_blank"&gt;https://docs.contao.org/books/manual/current/en/04-managing-content/insert-tags.html&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.0">
-        <source>Code Editor</source>
+        <source>Code editor</source>
       </trans-unit>
       <trans-unit id="XPL.insertTags.2.1">
-        <source>For more information about ACE please visit &lt;a href="http://ace.ajax.org" title="ACE (Ajax.org Cloud9 Editor)" target="_blank"&gt;http://ace.ajax.org&lt;/a&gt;.</source>
+        <source>For more information about Ace please visit &lt;a href="http://ace.c9.io" title="Ace - The High Performance Code Editor for the Web" target="_blank"&gt;http://ace.c9.io&lt;/a&gt;.</source>
       </trans-unit>
       <trans-unit id="XPL.dateFormat.0.0">
         <source>colspan</source>

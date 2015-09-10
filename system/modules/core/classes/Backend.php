@@ -124,15 +124,15 @@ abstract class Backend extends \Controller
 
 
 	/**
-	 * Validate an ACE type
+	 * Get the Ace code editor type from a file extension
 	 *
-	 * @param string $type
+	 * @param string $ext
 	 *
 	 * @return string
 	 */
-	public static function getAceType($type)
+	public static function getAceType($ext)
 	{
-		switch ($type)
+		switch ($ext)
 		{
 			case 'css':
 			case 'diff':
@@ -147,7 +147,7 @@ abstract class Backend extends \Controller
 			case 'sql':
 			case 'xml':
 			case 'yaml':
-				return $type;
+				return $ext;
 				break;
 
 			case 'js':
@@ -556,7 +556,10 @@ abstract class Backend extends \Controller
 					$this->Template->headline .= ' » ' . $objRow->name;
 				}
 
-				$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+				if (isset($GLOBALS['TL_LANG']['MOD'][$strSecond]))
+				{
+					$this->Template->headline .= ' » ' . $GLOBALS['TL_LANG']['MOD'][$strSecond];
+				}
 
 				// Add the second level name
 				$objRow = $this->Database->prepare("SELECT * FROM $strSecond WHERE id=?")
@@ -616,7 +619,15 @@ abstract class Backend extends \Controller
 				{
 					if (\Input::get('do') == 'files' || \Input::get('do') == 'tpl_editor')
 					{
-						$this->Template->headline .= ' » ' . \Input::get('id');
+						// Handle new folders (see #7980)
+						if (strpos(\Input::get('id'), '__new__') !== false)
+						{
+							$this->Template->headline .= ' » ' . dirname(\Input::get('id')) . ' » ' . $GLOBALS['TL_LANG'][$strTable]['new'][1];
+						}
+						else
+						{
+							$this->Template->headline .= ' » ' . \Input::get('id');
+						}
 					}
 					elseif (is_array($GLOBALS['TL_LANG'][$strTable][$act]))
 					{
@@ -724,6 +735,99 @@ abstract class Backend extends \Controller
 		}
 
 		return $arrPages;
+	}
+
+
+	/**
+	 * Add the file meta information to the request
+	 *
+	 * @param string  $strUuid
+	 * @param string  $strPtable
+	 * @param integer $intPid
+	 */
+	public static function addFileMetaInformationToRequest($strUuid, $strPtable, $intPid)
+	{
+		$objFile = \FilesModel::findByUuid($strUuid);
+
+		if ($objFile === null)
+		{
+			return;
+		}
+
+		$arrMeta = deserialize($objFile->meta);
+
+		if (empty($arrMeta))
+		{
+			return;
+		}
+
+		$objPage = null;
+		$db = \Database::getInstance();
+
+		switch ($strPtable)
+		{
+			case 'tl_article':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE id=?)")
+							  ->execute($intPid);
+				break;
+
+			case 'tl_news':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_news_archive WHERE id=(SELECT pid FROM tl_news WHERE id=?))")
+							  ->execute($intPid);
+				break;
+
+			case 'tl_news_archive':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_news_archive WHERE id=?)")
+							  ->execute($intPid);
+				break;
+
+			case 'tl_calendar_events':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=(SELECT pid FROM tl_calendar_events WHERE id=?))")
+							  ->execute($intPid);
+				break;
+
+			case 'tl_calendar':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=?)")
+							  ->execute($intPid);
+				break;
+
+			case 'tl_faq_category':
+				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_faq_category WHERE id=?)")
+							  ->execute($intPid);
+				break;
+
+			default:
+				// HOOK: support custom modules
+				if (isset($GLOBALS['TL_HOOKS']['addFileMetaInformationToRequest']) && is_array($GLOBALS['TL_HOOKS']['addFileMetaInformationToRequest']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['addFileMetaInformationToRequest'] as $callback)
+					{
+						if (($val = \System::importStatic($callback[0])->$callback[1]($strPtable, $intPid)) !== false)
+						{
+							$objPage = $val;
+						}
+					}
+				}
+				break;
+		}
+
+		if ($objPage === null || $objPage->numRows < 1)
+		{
+			return;
+		}
+
+		$objModel = new \PageModel();
+		$objModel->setRow($objPage->row());
+		$objModel->loadDetails();
+
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $objModel->rootLanguage);
+
+		if (isset($arrMeta[$strLanguage]))
+		{
+			\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
+			\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
+		}
 	}
 
 
@@ -861,6 +965,7 @@ abstract class Backend extends \Controller
 		}
 
 		$image = \Controller::getPageStatusIcon((object) $row);
+		$imageAttribute = trim($imageAttribute . ' data-icon="' . \Controller::getPageStatusIcon((object) array_merge($row, array('published'=>'1'))) . '" data-icon-disabled="' . \Controller::getPageStatusIcon((object) array_merge($row, array('published'=>''))) . '"');
 
 		// Return the image only
 		if ($blnReturnImage)
@@ -947,7 +1052,7 @@ abstract class Backend extends \Controller
 			}
 
 			// No link for the active folder
-			if ($strFolder == basename($strNode))
+			if ($strPath == $strNode)
 			{
 				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . \Backend::getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
 			}
