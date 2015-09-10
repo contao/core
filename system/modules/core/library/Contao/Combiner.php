@@ -350,11 +350,13 @@ class Combiner extends \System
 
 			$arrOptions = array
 			(
+				'strictMath' => true,
 				'compress' => !\Config::get('debugMode'),
 				'import_dirs' => array(TL_ROOT . '/' . $strPath => $strPath)
 			);
 
-			$objParser = new \Less_Parser($arrOptions);
+			$objParser = new \Less_Parser();
+			$objParser->SetOptions($arrOptions);
 			$objParser->parse($content);
 
 			return $this->fixPaths($objParser->getCss(), $arrFile);

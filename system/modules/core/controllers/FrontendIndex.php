@@ -161,7 +161,7 @@ class FrontendIndex extends \Frontend
 		}
 
 		// If the page has an alias, it can no longer be called via ID (see #7661)
-		if ($objPage->alias != '' && $pageId == $objPage->id)
+		if ($objPage->alias != '' && preg_match('#^' . $objPage->id . '[$/.]#', \Environment::get('relativeRequest')))
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();

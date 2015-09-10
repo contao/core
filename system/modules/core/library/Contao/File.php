@@ -24,34 +24,37 @@ namespace Contao;
  *
  *     File::putContent('test.txt', 'This is a test');
  *
- * @property integer  $size        The file size
- * @property integer  $filesize    Alias of $size
- * @property string   $name        The file name and extension
- * @property string   $basename    Alias of $name
- * @property string   $dirname     The path of the parent folder
- * @property string   $extension   The file extension
- * @property string   $filename    The file name without extension
- * @property string   $tmpname     The name of the temporary file
- * @property string   $path        The file path
- * @property string   $value       Alias of $path
- * @property string   $mime        The mime type
- * @property string   $hash        The MD5 checksum
- * @property string   $ctime       The ctime
- * @property string   $mtime       The mtime
- * @property string   $atime       The atime
- * @property string   $icon        The mime icon name
- * @property array    $imageSize   The file dimensions (images only)
- * @property integer  $width       The file width (images only)
- * @property integer  $height      The file height (images only)
- * @property boolean  $isImage     True if the file is an image
- * @property boolean  $isGdImage   True if the file can be handled by the GDlib
- * @property boolean  $isSvgImage  True if the file is an SVG image
- * @property integer  $channels    The number of channels (images only)
- * @property integer  $bits        The number of bits for each color (images only)
- * @property boolean  $isRgbImage  True if the file is an RGB image
- * @property boolean  $isCmykImage True if the file is a CMYK image
- * @property resource $handle      The file handle (returned by fopen())
- * @property string   $title       The file title
+ * @property integer  $size          The file size
+ * @property integer  $filesize      Alias of $size
+ * @property string   $name          The file name and extension
+ * @property string   $basename      Alias of $name
+ * @property string   $dirname       The path of the parent folder
+ * @property string   $extension     The file extension
+ * @property string   $filename      The file name without extension
+ * @property string   $tmpname       The name of the temporary file
+ * @property string   $path          The file path
+ * @property string   $value         Alias of $path
+ * @property string   $mime          The mime type
+ * @property string   $hash          The MD5 checksum
+ * @property string   $ctime         The ctime
+ * @property string   $mtime         The mtime
+ * @property string   $atime         The atime
+ * @property string   $icon          The mime icon name
+ * @property array    $imageSize     The file dimensions (images only)
+ * @property integer  $width         The file width (images only)
+ * @property integer  $height        The file height (images only)
+ * @property array    $imageViewSize The viewbox dimensions (SVG images only)
+ * @property integer  $viewWidth     The viewbox width (SVG images only)
+ * @property integer  $viewHeight    The viewbox height (SVG images only)
+ * @property boolean  $isImage       True if the file is an image
+ * @property boolean  $isGdImage     True if the file can be handled by the GDlib
+ * @property boolean  $isSvgImage    True if the file is an SVG image
+ * @property integer  $channels      The number of channels (images only)
+ * @property integer  $bits          The number of bits for each color (images only)
+ * @property boolean  $isRgbImage    True if the file is an RGB image
+ * @property boolean  $isCmykImage   True if the file is a CMYK image
+ * @property resource $handle        The file handle (returned by fopen())
+ * @property string   $title         The file title
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
@@ -95,6 +98,12 @@ class File extends \System
 	protected $arrImageSize = array();
 
 	/**
+	 * Image view size
+	 * @var array
+	 */
+	protected $arrImageViewSize = array();
+
+	/**
 	 * Do not create the file
 	 * @var string
 	 */
@@ -111,6 +120,8 @@ class File extends \System
 	 */
 	public function __construct($strFile, $blnDoNotCreate=false)
 	{
+		// No parent::__construct() here
+
 		// Handle open_basedir restrictions
 		if ($strFile == '.')
 		{
@@ -272,7 +283,7 @@ class File extends \System
 
 						$svgElement = $doc->documentElement;
 
-						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height'))
+						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) != '%' && substr(rtrim($svgElement->getAttribute('height')), -1) != '%')
 						{
 							$this->arrImageSize = array
 							(
@@ -280,20 +291,10 @@ class File extends \System
 								\Image::getPixelValue($svgElement->getAttribute('height'))
 							);
 						}
-						elseif ($svgElement->getAttribute('viewBox'))
-						{
-							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
-
-							$this->arrImageSize = array
-							(
-								\Image::getPixelValue($svgViewBox[2]),
-								\Image::getPixelValue($svgViewBox[3])
-							);
-						}
 
 						if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
 						{
-							$this->arrImageSize[2] = 0;  // Replace this with IMAGETYPE_SVG when it becomes available
+							$this->arrImageSize[2] = 0; // replace this with IMAGETYPE_SVG when it becomes available
 							$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
 							$this->arrImageSize['bits'] = 8;
 							$this->arrImageSize['channels'] = 3;
@@ -314,6 +315,60 @@ class File extends \System
 
 			case 'height':
 				return $this->imageSize[1];
+				break;
+
+			case 'imageViewSize':
+				if (empty($this->arrImageViewSize))
+				{
+					if ($this->imageSize)
+					{
+						$this->arrImageViewSize = array
+						(
+							$this->imageSize[0],
+							$this->imageSize[1]
+						);
+					}
+					elseif ($this->isSvgImage)
+					{
+						$doc = new \DOMDocument();
+
+						if ($this->extension == 'svgz')
+						{
+							$doc->loadXML(gzdecode($this->getContent()));
+						}
+						else
+						{
+							$doc->loadXML($this->getContent());
+						}
+
+						$svgElement = $doc->documentElement;
+
+						if ($svgElement->getAttribute('viewBox'))
+						{
+							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
+
+							$this->arrImageViewSize = array
+							(
+								intval($svgViewBox[2]),
+								intval($svgViewBox[3])
+							);
+						}
+
+						if (!$this->arrImageViewSize || !$this->arrImageViewSize[0] || !$this->arrImageViewSize[1])
+						{
+							$this->arrImageViewSize = false;
+						}
+					}
+				}
+				return $this->arrImageViewSize;
+				break;
+
+			case 'viewWidth':
+				return $this->imageViewSize[0];
+				break;
+
+			case 'viewHeight':
+				return $this->imageViewSize[1];
 				break;
 
 			case 'isImage':

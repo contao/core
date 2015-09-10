@@ -10,10 +10,12 @@
         collapsible: true,
         create: function(event, ui) {
           ui.header.addClass('active');
+          $('div.toggler').attr('tabindex', 0);
         },
         activate: function(event, ui) {
           ui.newHeader.addClass('active');
           ui.oldHeader.removeClass('active');
+          $('div.toggler').attr('tabindex', 0);
         }
       });
     });

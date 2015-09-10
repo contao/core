@@ -207,6 +207,10 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio', 'mandatory'=>true),
+			'save_callback' => array
+			(
+				array('tl_faq', 'storeFileMetaInformation')
+			),
 			'sql'                     => "binary(16) NULL"
 		),
 		'alt' => array
@@ -423,6 +427,25 @@ class tl_faq extends Backend
 
 
 	/**
+	 * Pre-fill the "alt" and "caption" fields with the file meta data
+	 *
+	 * @param mixed         $varValue
+	 * @param DataContainer $dc
+	 *
+	 * @return mixed
+	 */
+	public function storeFileMetaInformation($varValue, DataContainer $dc)
+	{
+		if ($dc->activeRecord->singleSRC != $varValue)
+		{
+			$this->addFileMetaInformationToRequest($varValue, 'tl_faq_category', $dc->activeRecord->pid);
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Return the "toggle visibility" button
 	 *
 	 * @param array  $row
@@ -455,7 +478,7 @@ class tl_faq extends Backend
 			$icon = 'invisible.gif';
 		}
 
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label, 'data-state="' . ($row['published'] ? 1 : 0) . '"').'</a> ';
 	}
 
 

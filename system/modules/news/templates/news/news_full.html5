@@ -11,7 +11,7 @@
     <h2><?= $this->subHeadline ?></h2>
   <?php endif; ?>
 
-  <?php if ($this->text): ?>
+  <?php if ($this->hasText): ?>
     <?= $this->text ?>
   <?php else: ?>
     <div class="ce_text block">

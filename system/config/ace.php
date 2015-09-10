@@ -10,8 +10,8 @@
 
 
 /**
- * This is the ACE (code editor) configuration file. Please visit
- * http://ace.ajax.org for more information.
+ * This is the Ace code editor configuration file. Please visit
+ * http://ace.c9.io for more information.
  */
 if ($GLOBALS['TL_CONFIG']['useCE']):
 

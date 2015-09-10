@@ -627,6 +627,13 @@ class Versions extends \Controller
 			);
 		}
 
+		// Adjust the URL of the "personal data" module (see #7987)
+		if (preg_match('/do=login(&|$)/', $strUrl))
+		{
+			$strUrl = preg_replace('/do=login(&|$)/', 'do=user$1', $strUrl);
+			$strUrl .= '&amp;act=edit&amp;id=' . $this->User->id . '&amp;rt=' . REQUEST_TOKEN;
+		}
+
 		// Correct the URL in "edit|override multiple" mode (see #7745)
 		$strUrl = preg_replace('/act=(edit|override)All/', 'act=edit&id=' . $this->intPid, $strUrl);
 

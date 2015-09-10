@@ -7,7 +7,7 @@
 
 <div class="event layout_teaser<?= $this->classList ?>">
 
-  <?php if ($this->details): ?>
+  <?php if ($this->hasDetails): ?>
     <h2><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?>><?= $this->link ?></a></h2>
   <?php else: ?>
     <h2><?= $this->title ?></h2>
@@ -21,7 +21,7 @@
     <?= $this->teaser ?>
   </div>
 
-  <?php if ($this->details): ?>
+  <?php if ($this->hasDetails): ?>
     <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"<?= $this->target ?>><?= $this->more ?> <span class="invisible"><?= $this->link ?></span></a></p>
   <?php endif; ?>
 

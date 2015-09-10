@@ -114,7 +114,7 @@
         <source>Margin, padding and alignment</source>
       </trans-unit>
       <trans-unit id="tl_style.alignment.1">
-        <source>Margin, padding, align, vertical-align, text-align and whitespace.</source>
+        <source>Margin, padding, align, vertical-align, text-align and white-space.</source>
       </trans-unit>
       <trans-unit id="tl_style.margin.0">
         <source>Margin</source>
@@ -156,7 +156,7 @@
         <source>Background</source>
       </trans-unit>
       <trans-unit id="tl_style.background.1">
-        <source>Background-color, background-image, background-position, background-repeat, linear-gradient and box-shadow.</source>
+        <source>Background-color, background-image, background-position, background-repeat, box-shadow and linear-gradient.</source>
       </trans-unit>
       <trans-unit id="tl_style.bgcolor.0">
         <source>Background color and opacity</source>
@@ -252,7 +252,7 @@
         <source>Font</source>
       </trans-unit>
       <trans-unit id="tl_style.font.1">
-        <source>Font-family, font-size, font-color, line-height, font-style and white-space.</source>
+        <source>Font-family, font-size, font-color, line-height, font-style, text-transform, text-indent, letter-spacing and word-spacing.</source>
       </trans-unit>
       <trans-unit id="tl_style.fontfamily.0">
         <source>Font family</source>

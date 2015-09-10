@@ -136,6 +136,8 @@ abstract class Model
 				}
 			}
 
+			$objRegistry = \Model\Registry::getInstance();
+
 			// Create the related models
 			foreach ($arrRelated as $key=>$row)
 			{
@@ -152,7 +154,7 @@ abstract class Model
 				}
 				else
 				{
-					$objRelated = \Model\Registry::getInstance()->fetch($table, $row[$intPk]);
+					$objRelated = $objRegistry->fetch($table, $row[$intPk]);
 
 					if ($objRelated !== null)
 					{
@@ -163,6 +165,8 @@ abstract class Model
 						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
+
+						$objRegistry->register($objRelated);
 					}
 
 					$this->arrRelated[$key] = $objRelated;
@@ -170,7 +174,7 @@ abstract class Model
 			}
 
 			$this->setRow($arrData); // see #5439
-			\Model\Registry::getInstance()->register($this);
+			$objRegistry->register($this);
 		}
 	}
 
@@ -699,7 +703,7 @@ abstract class Model
 	/**
 	 * Called when the model is attached to the model registry
 	 *
-	 * @param \Model\Registry
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
 	public function onRegister(\Model\Registry $registry)
 	{
@@ -719,7 +723,7 @@ abstract class Model
 	/**
 	 * Called when the model is detached from the model registry
 	 *
-	 * @param \Model\Registry
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
 	public function onUnregister(\Model\Registry $registry)
 	{
@@ -847,14 +851,12 @@ abstract class Model
 		// Search for registered models
 		foreach ($arrIds as $intId)
 		{
-			$arrRegistered[$intId] = null;
-
 			if (empty($arrOptions))
 			{
 				$arrRegistered[$intId] = \Model\Registry::getInstance()->fetch(static::$strTable, $intId);
 			}
 
-			if ($arrRegistered[$intId] === null)
+			if (!isset($arrRegistered[$intId]))
 			{
 				$arrUnregistered[] = $intId;
 			}

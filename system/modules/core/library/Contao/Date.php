@@ -417,12 +417,12 @@ class Date
 			$intHour -= 12;
 		}
 
-		if (!strlen($intMonth))
+		if ($intMonth == '')
 		{
 			$intMonth = 1;
 		}
 
-		if (!strlen($intDay))
+		if ($intDay == '')
 		{
 			$intDay = 1;
 		}
@@ -432,8 +432,8 @@ class Date
 			$intYear = 1970;
 		}
 
-		// Validate the date (see #5086)
-		if (checkdate($intMonth, $intDay, $intYear) === false)
+		// Validate the date (see #5086 and #7955)
+		if (!is_numeric($intMonth) || !is_numeric($intDay) || !is_numeric($intYear) || checkdate($intMonth, $intDay, $intYear) === false)
 		{
 			throw new \OutOfBoundsException(sprintf('Invalid date "%s"', $this->strDate));
 		}
@@ -615,6 +615,48 @@ class Date
 			$strDate = date($strModified, $intTstamp);
 		}
 
+		$strReturn = static::resolveCustomModifiers($strDate);
+
+		// HOOK: add custom logic (see #4260)
+		if (isset($GLOBALS['TL_HOOKS']['parseDate']) && is_array($GLOBALS['TL_HOOKS']['parseDate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
+			{
+				$strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
+			}
+		}
+
+		return $strReturn;
+	}
+
+
+	/**
+	 * Round a UNIX timestamp to the full minute
+	 *
+	 * @param integer $intTime The timestamp
+	 *
+	 * @return integer The rounded timestamp
+	 */
+	public static function floorToMinute($intTime=null)
+	{
+		if ($intTime === null)
+		{
+			$intTime = time();
+		}
+
+		return $intTime - ($intTime % 60);
+	}
+
+
+	/**
+	 * Resolve the custom modifiers
+	 *
+	 * @param string $strDate The date string
+	 *
+	 * @return string The resolved date string
+	 */
+	protected function resolveCustomModifiers($strDate)
+	{
 		if (strpos($strDate, '::') === false)
 		{
 			return $strDate;
@@ -661,33 +703,6 @@ class Date
 			}
 		}
 
-		// HOOK: add custom logic (see #4260)
-		if (isset($GLOBALS['TL_HOOKS']['parseDate']) && is_array($GLOBALS['TL_HOOKS']['parseDate']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
-			{
-				$strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
-			}
-		}
-
 		return $strReturn;
-	}
-
-
-	/**
-	 * Round a UNIX timestamp to the full minute
-	 *
-	 * @param integer $intTime The timestamp
-	 *
-	 * @return integer The rounded timestamp
-	 */
-	public static function floorToMinute($intTime=null)
-	{
-		if ($intTime === null)
-		{
-			$intTime = time();
-		}
-
-		return $intTime - ($intTime % 60);
 	}
 }

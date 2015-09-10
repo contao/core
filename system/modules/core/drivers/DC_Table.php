@@ -1188,6 +1188,27 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$newPID = null;
 				$newSorting = null;
+				$session = $this->Session->getData();
+				$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
+
+				// Consider the pagination menu when inserting at the top (see #7895)
+				if ($insertInto && isset($session['filter'][$filter]['limit']))
+				{
+					$limit = substr($session['filter'][$filter]['limit'], 0, strpos($session['filter'][$filter]['limit'], ','));
+
+					if ($limit > 0)
+					{
+						$objInsertAfter = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=? ORDER BY sorting" )
+														 ->limit(1, $limit - 1)
+														 ->execute($pid);
+
+						if ($objInsertAfter->numRows)
+						{
+							$insertInto = false;
+							$pid = $objInsertAfter->id;
+						}
+					}
+				}
 
 				// Insert the current record at the beginning when inserting into the parent record
 				if ($insertInto)

@@ -31,7 +31,7 @@
     <?= $this->teaser ?>
   </div>
 
-  <?php if ($this->text || $this->teaser): ?>
+  <?php if ($this->hasText || $this->hasTeaser): ?>
     <p class="more"><?= $this->more ?></p>
   <?php endif; ?>
 

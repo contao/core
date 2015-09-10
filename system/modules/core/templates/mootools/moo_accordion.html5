@@ -25,7 +25,7 @@
         el.setProperty('tabindex', 0);
         el.addEvents({
           'keypress': function(event) {
-            if (event.code == 13) {
+            if (event.code == 13 || event.code == 32) {
               this.fireEvent('click');
             }
           },

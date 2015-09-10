@@ -145,7 +145,7 @@ class Registry implements \Countable
 	/**
 	 * Register a model in the registry
 	 *
-	 * @param \Model $objModel The model object
+	 * @param \Model|\Contao\Model $objModel The model object
 	 *
 	 * @throws \RuntimeException If the instance exists already
 	 */
@@ -191,7 +191,7 @@ class Registry implements \Countable
 	/**
 	 * Unregister a model from the registry
 	 *
-	 * @param \Model $objModel The model object
+	 * @param \Model|\Contao\Model $objModel The model object
 	 */
 	public function unregister(\Model $objModel)
 	{
@@ -218,7 +218,7 @@ class Registry implements \Countable
 	/**
 	 * Check if a model is registered
 	 *
-	 * @param \Model $objModel The model object
+	 * @param \Model|\Contao\Model $objModel The model object
 	 *
 	 * @return boolean True if the model is registered
 	 */
@@ -233,9 +233,9 @@ class Registry implements \Countable
 	/**
 	 * Register an alias for a model
 	 *
-	 * @param \Model $objModel The model object
-	 * @param string $strAlias The alias name
-	 * @param mixed  $varValue The value of the alias
+	 * @param \Model|\Contao\Model $objModel The model object
+	 * @param string               $strAlias The alias name
+	 * @param mixed                $varValue The value of the alias
 	 *
 	 * @throws \RuntimeException If the alias is already registered
 	 */
@@ -257,9 +257,9 @@ class Registry implements \Countable
 	/**
 	 * Unregister an alias
 	 *
-	 * @param \Model $objModel The model object
-	 * @param string $strAlias The alias name
-	 * @param mixed  $varValue The value of the alias
+	 * @param \Model|\Contao\Model $objModel The model object
+	 * @param string               $strAlias The alias name
+	 * @param mixed                $varValue The value of the alias
 	 *
 	 * @throws \InvalidArgumentException If the alias is not registered
 	 */
@@ -282,9 +282,9 @@ class Registry implements \Countable
 	/**
 	 * Check if an alias is registered
 	 *
-	 * @param \Model $objModel The model object
-	 * @param string $strAlias The alias name
-	 * @param mixed  $varValue The value of the alias
+	 * @param \Model|\Contao\Model $objModel The model object
+	 * @param string               $strAlias The alias name
+	 * @param mixed                $varValue The value of the alias
 	 *
 	 * @return boolean True if the alias is registered
 	 */

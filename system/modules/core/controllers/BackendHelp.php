@@ -116,7 +116,20 @@ class BackendHelp extends \Backend
 		elseif (!empty($arrData['reference']))
 		{
 			$rows = array();
-			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
+
+			if (is_array($arrData['options']))
+			{
+				$options = $arrData['options'];
+			}
+			elseif (is_array($arrData['options_callback']))
+			{
+				$this->import($arrData['options_callback'][0]);
+				$options = $this->$arrData['options_callback'][0]->$arrData['options_callback'][1]();
+			}
+			else
+			{
+				$options = array_keys($arrData['reference']);
+			}
 
 			// Unset the predefined image sizes
 			unset($options['image_sizes']);
