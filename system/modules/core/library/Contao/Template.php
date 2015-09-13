@@ -343,7 +343,7 @@ abstract class Template extends \BaseTemplate
 
 		$strDebug = sprintf(
 			"<!-- indexer::stop -->\n"
-			. '<div id="contao-debug" class="%s">'
+			. '<div id="contao-debug">'
 			. '<p>'
 				. '<span class="debug-time">Execution time: %s ms</span>'
 				. '<span class="debug-memory">Memory usage: %s</span>'
@@ -353,7 +353,6 @@ abstract class Template extends \BaseTemplate
 				. '<span id="debug-tog">&nbsp;</span>'
 			. '</p>'
 			. '<div><pre>',
-			\Input::cookie('CONTAO_CONSOLE'),
 			$this->getFormattedNumber(($intElapsed * 1000), 0),
 			$this->getReadableSize(memory_get_peak_usage()),
 			count($GLOBALS['TL_DEBUG']['database_queries']),
@@ -374,15 +373,10 @@ abstract class Template extends \BaseTemplate
 		$strDebug .= '</pre></div></div>'
 			. $this->generateInlineScript(
 				"(function($) {"
-					. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
-					. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
+					. "$(document.body).addClass('debug-enabled ". \Input::cookie('CONTAO_CONSOLE') ."');"
 					. "$('debug-tog').addEvent('click',function(e) {"
-						. "$('contao-debug').toggleClass('closed');"
-						. "Cookie.write('CONTAO_CONSOLE',$('contao-debug').hasClass('closed')?'closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
-						. "$(document.body).setStyle('margin-bottom',$('contao-debug').hasClass('closed')?'60px':'320px');"
-					. "});"
-					. "window.addEvent('resize',function() {"
-						. "$$('#contao-debug>*').setStyle('width',window.getSize().x);"
+						. "$(document.body).toggleClass('debug-closed');"
+						. "Cookie.write('CONTAO_CONSOLE',$(document.body).hasClass('debug-closed')?'debug-closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
 					. "});"
 				. "})(document.id);",
 				($this->strFormat == 'xhtml')
