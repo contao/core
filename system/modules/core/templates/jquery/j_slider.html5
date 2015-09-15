@@ -8,18 +8,16 @@ $GLOBALS['TL_CSS'][] = 'assets/swipe/'. $GLOBALS['TL_ASSETS']['SWIPE'] .'/css/sw
 <script src="<?= TL_ASSETS_URL ?>assets/swipe/<?= $GLOBALS['TL_ASSETS']['SWIPE'] ?>/js/swipe.min.js"></script>
 <script>
   (function($) {
-    $(document).ready(function() {
-      $('.ce_sliderStart').each(function(i, cte) {
-        var s = $('.content-slider', cte)[0],
-            c = s.getAttribute('data-config').split(',');
-        new Swipe(s, {
-          // Put custom options here
-          'auto': parseInt(c[0]),
-          'speed': parseInt(c[1]),
-          'startSlide': parseInt(c[2]),
-          'continuous': parseInt(c[3]),
-          'menu': $('.slider-control', cte)[0]
-        });
+    $('.ce_sliderStart').each(function(i, cte) {
+      var s = $('.content-slider', cte)[0],
+          c = s.getAttribute('data-config').split(',');
+      new Swipe(s, {
+        // Put custom options here
+        'auto': parseInt(c[0]),
+        'speed': parseInt(c[1]),
+        'startSlide': parseInt(c[2]),
+        'continuous': parseInt(c[3]),
+        'menu': $('.slider-control', cte)[0]
       });
     });
   })(jQuery);

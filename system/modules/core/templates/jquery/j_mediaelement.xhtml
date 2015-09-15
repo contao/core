@@ -9,13 +9,11 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/mediaelement/'. $GLOBALS['TL_ASSETS']['MED
 <script type="text/javascript">
   /* <![CDATA[ */
   (function($) {
-    $(document).ready(function() {
-      $('video,audio').mediaelementplayer({
-        // Put custom options here
-        pluginPath: '<?= TL_PATH ?>/assets/jquery/mediaelement/<?= $GLOBALS['TL_ASSETS']['MEDIAELEMENT'] ?>/',
-        flashName: 'legacy/flashmediaelement.swf',
-        silverlightName: 'legacy/silverlightmediaelement.xap'
-      });
+    $('video,audio').mediaelementplayer({
+      // Put custom options here
+      pluginPath: '<?= TL_PATH ?>/assets/jquery/mediaelement/<?= $GLOBALS['TL_ASSETS']['MEDIAELEMENT'] ?>/',
+      flashName: 'legacy/flashmediaelement.swf',
+      silverlightName: 'legacy/silverlightmediaelement.xap'
     });
   })(jQuery);
   /* ]]> */
