@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.4 (2015-XX-XX)
+--------------------------
+
+### Fixed
+Support the `hasDetails` variable in the event reader (see #8011).
+
+
 Version 3.5.3 (2015-09-10)
 --------------------------
 
