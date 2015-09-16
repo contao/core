@@ -176,17 +176,6 @@ class ModuleEventReader extends \Events
 			}
 		}
 
-		// Override the default image size
-		if ($this->imgSize != '')
-		{
-			$size = deserialize($this->imgSize);
-
-			if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-			{
-				$objEvent->size = $this->imgSize;
-			}
-		}
-
 		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
@@ -268,8 +257,19 @@ class ModuleEventReader extends \Events
 			{
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrEvent = $objEvent->row();
-				$arrEvent['singleSRC'] = $objModel->path;
 
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = deserialize($this->imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrEvent['size'] = $this->imgSize;
+					}
+				}
+
+				$arrEvent['singleSRC'] = $objModel->path;
 				$this->addImageToTemplate($objTemplate, $arrEvent);
 			}
 		}
