@@ -198,6 +198,7 @@ class ModulePersonalData extends \Module
 			/** @var \Widget $objWidget */
 			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
 
+			$objWidget->class = $field;
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
@@ -259,7 +260,7 @@ class ModulePersonalData extends \Module
 						}
 						catch (\Exception $e)
 						{
-							$objWidget->class = 'error';
+							$objWidget->class .= ' error';
 							$objWidget->addError($e->getMessage());
 						}
 					}
