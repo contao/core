@@ -2,8 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-  <?= $this->v2warning ?>
-
   <ul>
     <?php foreach ($this->files as $file): ?>
       <li><img src="<?= $file['icon'] ?>" width="18" height="18" alt="" class="mime_icon"> <a href="<?= $file['href'] ?>" title="<?= $file['title'] ?>"><?= $file['link'] ?> <span class="size">(<?= $file['filesize'] ?>)</span></a></li>

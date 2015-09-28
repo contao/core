@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Remove the left-over usages of `$this->v2warning` (see #8027).
+
+### Fixed
 Support the `hasDetails` variable in the event reader (see #8011).
 
 
