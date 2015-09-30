@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Ensure that the database port is not empty (see #7950).
+
+### Fixed
 Remove the left-over usages of `$this->v2warning` (see #8027).
 
 ### Fixed

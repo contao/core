@@ -454,6 +454,12 @@ class BackendInstall extends \Backend
 					continue;
 				}
 
+				// The port number must not be empty (see #7950)
+				if ($strKey == 'dbPort' && \Input::post($strKey, true) == '')
+				{
+					\Input::setPost($strKey, 3306);
+				}
+
 				\Config::persist($strKey, \Input::post($strKey, true));
 			}
 
