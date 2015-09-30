@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Improve the e-mail regex to also match the new TLDs (see #7984).
+
+### Fixed
 Ensure that the database port is not empty (see #7950).
 
 ### Fixed

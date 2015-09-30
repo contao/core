@@ -301,7 +301,8 @@ class StringUtil
 	public static function encodeEmail($strString)
 	{
 		$arrEmails = array();
-		preg_match_all('/\w([-._\w]*\w)?@\w([-._\w]*\w)?\.\w{2,6}/', $strString, $arrEmails);
+
+		preg_match_all('/\w([-.+!#$%&\'*\/=?^`{}|~\w]*\w)?@\w([-.\w]*\w)?\.\w{2,63}/u', $strString, $arrEmails);
 
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{
