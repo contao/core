@@ -52,7 +52,7 @@ class InsertTags extends \Controller
 			return \StringUtil::restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/{{(([^{}]*|(?R))*)}}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 

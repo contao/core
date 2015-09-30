@@ -103,7 +103,7 @@ class GdImage
 		$image = imagecreatetruecolor($width, $height);
 
 		$arrGdInfo = gd_info();
-		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdInfo['GD Version']);
+		$strGdVersion = preg_replace('/[^0-9.]+/', '', $arrGdInfo['GD Version']);
 
 		// Handle transparency (GDlib >= 2.0 required)
 		if (version_compare($strGdVersion, '2.0', '>='))

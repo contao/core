@@ -494,7 +494,7 @@ class StringUtil
 
 		// Remove any unwanted tags (especially PHP tags)
 		$strString = strip_tags($strString, \Config::get('allowedTags'));
-		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$arrTags = preg_split('/({[^}]+})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags
 		foreach ($arrTags as $strTag)

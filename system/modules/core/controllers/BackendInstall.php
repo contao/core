@@ -731,7 +731,7 @@ class BackendInstall extends \Backend
 			elseif (\Input::post('FORM_SUBMIT') == 'tl_admin')
 			{
 				// Do not allow special characters in usernames
-				if (preg_match('/[#\(\)\/<=>]/', \Input::post('username', true)))
+				if (preg_match('/[#()\/<=>]/', \Input::post('username', true)))
 				{
 					$this->Template->usernameError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}

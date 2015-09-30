@@ -67,7 +67,7 @@ class Validator
 		}
 		else
 		{
-			return preg_match('/^[\pL \.-]+$/u', $varValue);
+			return preg_match('/^[\pL .-]+$/u', $varValue);
 		}
 	}
 
@@ -87,7 +87,7 @@ class Validator
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL \._-]+$/u', $varValue);
+			return preg_match('/^[\w .-]+$/u', $varValue);
 		}
 	}
 
@@ -101,7 +101,7 @@ class Validator
 	 */
 	public static function isExtendedAlphanumeric($varValue)
 	{
-		return !preg_match('/[#\(\)\/<=>]/', $varValue);
+		return !preg_match('/[#()\/<=>]/', $varValue);
 	}
 
 
@@ -174,7 +174,7 @@ class Validator
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$/u', \Idna::encodeUrl($varValue));
+			return preg_match('/^[\w\/.*+?$#%:,;{}()[\]@&!=~-]+$/u', \Idna::encodeUrl($varValue));
 		}
 	}
 
@@ -194,7 +194,7 @@ class Validator
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\._-]+$/u', $varValue);
+			return preg_match('/^[\w.-]+$/u', $varValue);
 		}
 	}
 
@@ -214,7 +214,7 @@ class Validator
 		}
 		else
 		{
-			return preg_match('/^[\pN\pL\/\._-]+$/u', $varValue);
+			return preg_match('/^[\w\/.-]+$/u', $varValue);
 		}
 	}
 
@@ -267,7 +267,7 @@ class Validator
 	 */
 	public static function isLanguage($varValue)
 	{
-		return preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $varValue);
+		return preg_match('/^[a-z]{2}(-[A-Z]{2})?$/', $varValue);
 	}
 
 
@@ -319,7 +319,7 @@ class Validator
 	{
 		if (strlen($varValue) == 36)
 		{
-			return preg_match('/^[a-f0-9]{8}\-[a-f0-9]{4}\-1[a-f0-9]{3}\-[89ab][a-f0-9]{3}\-[a-f0-9]{12}$/', $varValue);
+			return preg_match('/^[a-f0-9]{8}-[a-f0-9]{4}-1[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/', $varValue);
 		}
 
 		return false;
@@ -335,7 +335,7 @@ class Validator
 	 */
 	public static function isGooglePlusId($varValue)
 	{
-		return preg_match('/^([0-9]{21}|\+[\pN\pL_-]+)$/u', $varValue);
+		return preg_match('/^([0-9]{21}|\+[\w-]+)$/u', $varValue);
 	}
 
 

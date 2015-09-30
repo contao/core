@@ -680,7 +680,7 @@ class Theme extends \Backend
 		// Romanize the name
 		$strName = utf8_romanize($objTheme->name);
 		$strName = strtolower(str_replace(' ', '_', $strName));
-		$strName = preg_replace('/[^A-Za-z0-9\._-]/', '', $strName);
+		$strName = preg_replace('/[^A-Za-z0-9._-]/', '', $strName);
 		$strName = basename($strName);
 
 		// Create a new XML document
