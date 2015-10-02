@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly show the group headlines in the repository DB updater (see #8020).
+
+### Fixed
 Improve the e-mail regex to also match the new TLDs (see #7984).
 
 ### Fixed

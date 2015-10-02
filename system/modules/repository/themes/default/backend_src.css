@@ -148,7 +148,7 @@
 .mod_repository .fulltextsearch { width:180px; }
 .mod_repository #sql_table { border:0; }
 .mod_repository #sql_table td { background:#fff; }
-.mod_repository #sql_table td.tl_col_0 { padding-top:18px; }
+.mod_repository #sql_table td.tl_col_0 { padding-top:18px; font-weight:bold; }
 .mod_repository #sql_table td.tl_col_1 { width:18px; vertical-align:top; }
 .mod_repository #sql_table td.tl_col_1, .mod_repository #sql_table td.tl_col_2 { padding-bottom:3px; }
 .mod_repository #sql_table pre { white-space:pre-wrap; }
