@@ -373,7 +373,7 @@ abstract class Template extends \BaseTemplate
 		$strDebug .= '</pre></div></div>'
 			. $this->generateInlineScript(
 				"(function($) {"
-					. "$(document.body).addClass('debug-enabled ". \Input::cookie('CONTAO_CONSOLE') ."');"
+					. "$(document.body).addClass('debug-enabled " . \Input::cookie('CONTAO_CONSOLE') . "');"
 					. "$('debug-tog').addEvent('click',function(e) {"
 						. "$(document.body).toggleClass('debug-closed');"
 						. "Cookie.write('CONTAO_CONSOLE',$(document.body).hasClass('debug-closed')?'debug-closed':'',{path:'" . (TL_PATH ?: '/') . "'});"
