@@ -5,7 +5,10 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
-Only modify empty `href` attributes in the `nav_` template (see #8038).
+Correctly output the event details in the `event_list` template (see #8041).
+
+### Fixed
+Only modify empty `href` attributes in the `nav_` template (see #8006, #8038).
 
 ### Fixed
 Correctly show the group headlines in the repository DB updater (see #8020).

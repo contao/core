@@ -13,8 +13,12 @@
     <p class="time"><?= $this->time . $this->span ?></p>
   <?php endif; ?>
 
-  <div class="ce_text block">
+  <?php if (!is_bool($this->details)): ?>
     <?= $this->details ?>
+  <?php else: ?>
+    <div class="ce_text block">
+      <?= $this->teaser ?>
   </div>
+  <?php endif; ?>
 
 </div>
