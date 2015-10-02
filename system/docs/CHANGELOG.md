@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly create the initial version of a member without username (see #8037).
+
+### Fixed
 Improve the performance of the debug bar (see #7839).
 
 ### Fixed

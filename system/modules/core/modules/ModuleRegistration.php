@@ -447,7 +447,7 @@ class ModuleRegistration extends \Module
 
 		// Create the initial version (see #7816)
 		$objVersions = new \Versions('tl_member', $objNewUser->id);
-		$objVersions->setUsername($objNewUser->username);
+		$objVersions->setUsername($objNewUser->username ?: '-'); // see #8037
 		$objVersions->setUserId(0);
 		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
 		$objVersions->initialize();
