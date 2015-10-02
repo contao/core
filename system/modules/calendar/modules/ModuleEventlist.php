@@ -267,6 +267,12 @@ class ModuleEventlist extends \Events
 				++$dayCount;
 			}
 
+			// Show the teaser text of redirect events (see #6315)
+			if (is_bool($event['details']))
+			{
+				$objTemplate->hasDetails = false;
+			}
+
 			// Add the template variables
 			$objTemplate->classList = $event['class'] . ((($headerCount % 2) == 0) ? ' even' : ' odd') . (($headerCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->classUpcoming = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($offset + $eventCount + 1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];

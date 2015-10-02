@@ -13,7 +13,7 @@
     <p class="time"><?= $this->time . $this->span ?></p>
   <?php endif; ?>
 
-  <?php if (!is_bool($this->details)): ?>
+  <?php if ($this->hasDetails): ?>
     <?= $this->details ?>
   <?php else: ?>
     <div class="ce_text block">
