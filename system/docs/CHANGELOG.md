@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Improve the performance of the debug bar (see #7839).
+
+### Fixed
 Correctly output the event details in the `event_list` template (see #8041).
 
 ### Fixed
