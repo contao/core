@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Trigger the options_callback for the parent view header fields (see #8031).
+
+### Fixed
 Correctly create the initial version of a member without username (see #8037).
 
 ### Fixed

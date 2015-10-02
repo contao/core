@@ -4011,6 +4011,22 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options'][$_v];
 				}
+				elseif (is_array($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options_callback']))
+				{
+					$strClass = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options_callback'][0];
+					$strMethod = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options_callback'][1];
+
+					$this->import($strClass);
+					$options_callback = $this->$strClass->$strMethod($this);
+
+					$_v = $options_callback[$_v];
+				}
+				elseif (is_callable($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options_callback']))
+				{
+					$options_callback = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options_callback']($this);
+
+					$_v = $options_callback[$_v];
+				}
 
 				// Add the sorting field
 				if ($_v != '')
