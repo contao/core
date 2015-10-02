@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Translate UUIDs to paths in the parent view header fields.
+
+### Fixed
 Trigger the options_callback for the parent view header fields (see #8031).
 
 ### Fixed

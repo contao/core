@@ -3943,6 +3943,17 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$_v = deserialize($objParent->$v);
 
+				// Translate UUIDs to paths
+				if ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['inputType'] == 'fileTree')
+				{
+					$objFiles = \FilesModel::findMultipleByUuids((array) $_v);
+
+					if ($objFiles !== null)
+					{
+						$_v = $objFiles->fetchEach('path');
+					}
+				}
+
 				if (is_array($_v))
 				{
 					$_v = implode(', ', $_v);
