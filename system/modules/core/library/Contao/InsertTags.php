@@ -1205,6 +1205,29 @@ class InsertTags extends \Controller
 							$arrCache[$strTag] = \System::getReadableSize($arrCache[$strTag]);
 							break;
 
+						case 'flatten':
+							if (!is_array($arrCache[$strTag]))
+							{
+								break;
+							}
+
+							$it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($arrCache[$strTag]));
+							$result = array();
+
+							foreach ($it as $leafValue)
+							{
+								$keys = array();
+								foreach (range(0, $it->getDepth()) as $depth)
+								{
+									$keys[] = $it->getSubIterator($depth)->key();
+								}
+
+								$result[] = implode('.', $keys) . ': ' . $leafValue;
+							}
+
+							$arrCache[$strTag] = implode(', ', $result);
+							break;
+
 						// HOOK: pass unknown flags to callback functions
 						default:
 							if (isset($GLOBALS['TL_HOOKS']['insertTagFlags']) && is_array($GLOBALS['TL_HOOKS']['insertTagFlags']))
