@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Add the `|flatten` insert tag flag to handle arrays (see #8021).
+
+### Fixed
 Check for excluded folders in the back end file popup (see #8003).
 
 ### Fixed

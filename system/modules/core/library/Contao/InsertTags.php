@@ -1217,6 +1217,7 @@ class InsertTags extends \Controller
 							foreach ($it as $leafValue)
 							{
 								$keys = array();
+
 								foreach (range(0, $it->getDepth()) as $depth)
 								{
 									$keys[] = $it->getSubIterator($depth)->key();
