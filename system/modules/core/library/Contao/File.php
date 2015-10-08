@@ -138,27 +138,10 @@ class File extends \System
 
 		$this->strFile = $strFile;
 		$this->blnDoNotCreate = $blnDoNotCreate;
-		$strFolder = dirname($strFile);
+		$objFolder = new \Folder(dirname($strFile));
 
 		// Check whether we need to sync the database
-		$this->blnSyncDb = (\Config::get('uploadPath') != 'templates' && strncmp($strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0);
-
-		// Check the excluded folders
-		if ($this->blnSyncDb && \Config::get('fileSyncExclude') != '')
-		{
-			$arrExempt = array_map(function($e) {
-				return \Config::get('uploadPath') . '/' . $e;
-			}, trimsplit(',', \Config::get('fileSyncExclude')));
-
-			foreach ($arrExempt as $strExempt)
-			{
-				if (strncmp($strExempt . '/', $strFolder . '/', strlen($strExempt) + 1) === 0)
-				{
-					$this->blnSyncDb = false;
-					break;
-				}
-			}
-		}
+		$this->blnSyncDb = $objFolder->shouldBeSynchronized();
 
 		if (!$blnDoNotCreate)
 		{

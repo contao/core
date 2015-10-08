@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Check for excluded folders in the back end file popup (see #8003).
+
+### Fixed
 Fixed a wrong option name when initializing sortables (see #8053).
 
 ### Fixed
