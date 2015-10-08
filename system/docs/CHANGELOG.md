@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fixed a wrong option name when initializing sortables (see #8053).
+
+### Fixed
 Translate UUIDs to paths in the parent view header fields.
 
 ### Fixed
