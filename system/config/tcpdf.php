@@ -11,11 +11,11 @@
 
 /**
  * This is the TCPDF (PDF generator) configuration file. See
- * vendor/tecnick.com/tcpdf for more information.
+ * vendor/tecnickcom/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/vendor/tecnick.com/tcpdf/');
-define('K_PATH_URL', Environment::get('base') . 'vendor/tecnick.com/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/vendor/tecnickcom/tcpdf/');
+define('K_PATH_URL', Environment::get('base') . 'vendor/tecnickcom/tcpdf/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', TL_ROOT . '/system/tmp/');
 define('K_PATH_URL_CACHE', TL_ROOT . '/system/tmp/');

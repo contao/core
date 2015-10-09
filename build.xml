@@ -39,12 +39,12 @@
     <delete dir="contao-${version}/.tx" />
     <delete dir="contao-${version}/.git" />
     <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
-    <delete dir="contao-${version}/vendor/tecnick.com/tcpdf/examples" />
+    <delete dir="contao-${version}/vendor/tecnickcom/tcpdf/examples" />
     <delete includeemptydirs="true" verbose="true">
       <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/test/**,*/*/tests/**" />
     </delete>
     <delete includeemptydirs="true" verbose="true">
-      <fileset dir="contao-${version}/vendor/tecnick.com/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
+      <fileset dir="contao-${version}/vendor/tecnickcom/tcpdf/fonts" excludes="courier.php,freeserif*.*,helvetica*.php" />
     </delete>
   </target>
 
