@@ -223,7 +223,7 @@ class Environment
 			{
 				$locale = $chunks[0] . '-' . strtoupper($chunks[1]);
 
-				if (preg_match('/^[a-z]{2}(\-[A-Z]{2})?$/', $locale))
+				if (preg_match('/^[a-z]{2}(-[A-Z]{2})?$/', $locale))
 				{
 					$arrLanguages[] = $locale;
 				}
@@ -288,7 +288,7 @@ class Environment
 			}
 		}
 
-		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $host);
+		return preg_replace('/[^A-Za-z0-9[\].:-]/', '', $host);
 	}
 
 
@@ -299,7 +299,7 @@ class Environment
 	 */
 	protected static function httpXForwardedHost()
 	{
-		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
+		return preg_replace('/[^A-Za-z0-9[\].:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
 	}
 
 
@@ -353,7 +353,7 @@ class Environment
 	protected static function ip()
 	{
 		// No X-Forwarded-For IP
-		if (empty($_SERVER['HTTP_X_FORWARDED_FOR']) || !preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
+		if (empty($_SERVER['HTTP_X_FORWARDED_FOR']) || !preg_match('/^[A-Fa-f0-9, .:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
 		{
 			return substr($_SERVER['REMOTE_ADDR'], 0, 64);
 		}

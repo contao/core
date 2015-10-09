@@ -153,6 +153,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->strTable = $strTable;
 		$this->blnIsDbAssisted = $GLOBALS['TL_DCA'][$strTable]['config']['databaseAssisted'];
 
+		// Check if the folder is excluded
+		if ($this->blnIsDbAssisted && $this->intId)
+		{
+			$objFolder = new \Folder(is_dir(TL_ROOT . '/' . $this->intId) ? $this->intId : dirname($this->intId));
+
+			if (!$objFolder->shouldBeSynchronized())
+			{
+				$this->blnIsDbAssisted = false;
+			}
+		}
+
 		// Check for valid file types
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
 		{
@@ -1045,41 +1056,52 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		// Get the DB entry
-		if ($this->blnIsDbAssisted && stristr($this->intId, '__new__') === false)
+		$objFile = null;
+		$objVersions = null;
+
+		// Add the versioning routines
+		if ($this->blnIsDbAssisted)
 		{
-			$objFile = \FilesModel::findByPath($this->intId);
-
-			if ($objFile === null)
+			if (stristr($this->intId, '__new__') === false)
 			{
-				$objFile = \Dbafs::addResource($this->intId);
+				$objFile = \FilesModel::findByPath($this->intId);
+
+				if ($objFile === null)
+				{
+					$objFile = \Dbafs::addResource($this->intId);
+				}
+
+				$this->objActiveRecord = $objFile;
 			}
 
-			$this->objActiveRecord = $objFile;
+			$this->blnCreateNewVersion = false;
+
+			/** @var \FilesModel $objFile */
+			$objVersions = new \Versions($this->strTable, $objFile->id);
+
+			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
+			{
+				// Compare versions
+				if (\Input::get('versions'))
+				{
+					$objVersions->compare();
+				}
+
+				// Restore a version
+				if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
+				{
+					$objVersions->restore(\Input::post('version'));
+					$this->reload();
+				}
+			}
+
+			$objVersions->initialize();
 		}
-
-		$this->blnCreateNewVersion = false;
-
-		/** @var \FilesModel $objFile */
-		$objVersions = new \Versions($this->strTable, $objFile->id);
-
-		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
+		else
 		{
-			// Compare versions
-			if (\Input::get('versions'))
-			{
-				$objVersions->compare();
-			}
-
-			// Restore a version
-			if (\Input::post('FORM_SUBMIT') == 'tl_version' && \Input::post('version') != '')
-			{
-				$objVersions->restore(\Input::post('version'));
-				$this->reload();
-			}
+			// Unset the database fields
+			$GLOBALS['TL_DCA'][$this->strTable]['fields'] = array_intersect_key($GLOBALS['TL_DCA'][$this->strTable]['fields'], array('name' => true, 'protected' => true));
 		}
-
-		$objVersions->initialize();
 
 		// Build an array from boxes and rows (do not show excluded fields)
 		$this->strPalette = $this->getPalette();
@@ -1153,7 +1175,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$this->varValue = $objFile->$vv;
+						$this->varValue = ($objFile !== null) ? $objFile->$vv : null;
 					}
 
 					// Autofocus the first field
@@ -1193,7 +1215,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Versions overview
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
+		if ($this->blnIsDbAssisted && $GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'] && !$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
 			$version = $objVersions->renderDropdown();
 		}
@@ -1380,7 +1402,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			{
 				$this->intId = md5($id);
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
-				$this->blnCreateNewVersion = false;
+
+				$objFile = null;
+				$objVersions = null;
+				$objFolder = new \Folder(is_dir(TL_ROOT . '/' . $id) ? $id : dirname($id));
+				$this->blnIsDbAssisted = $objFolder->shouldBeSynchronized();
 
 				// Get the DB entry
 				if ($this->blnIsDbAssisted)
@@ -1393,11 +1419,17 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 
 					$this->objActiveRecord = $objFile;
-				}
+					$this->blnCreateNewVersion = false;
 
-				/** @var \FilesModel $objFile */
-				$objVersions = new \Versions($this->strTable, $objFile->id);
-				$objVersions->initialize();
+					/** @var \FilesModel $objFile */
+					$objVersions = new \Versions($this->strTable, $objFile->id);
+					$objVersions->initialize();
+				}
+				else
+				{
+					// Unset the database fields
+					$this->strPalette = array_filter($this->strPalette, function ($val) { return $val == 'name' || $val == 'protected'; });
+				}
 
 				$return .= '
 <div class="'.$class.'">';
@@ -1439,7 +1471,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					}
 					else
 					{
-						$this->varValue = $objFile->$v;
+						$this->varValue = ($objFile !== null) ? $objFile->$v : null;
 					}
 
 					// Call load_callback
@@ -1693,6 +1725,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->log('File type "'.$objFile->extension.'" ('.$this->intId.') is not allowed to be edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
+
+		$objVersions = null;
 
 		// Add the versioning routines
 		if ($this->blnIsDbAssisted)

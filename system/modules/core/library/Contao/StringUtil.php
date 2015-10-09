@@ -301,24 +301,17 @@ class StringUtil
 	public static function encodeEmail($strString)
 	{
 		$arrEmails = array();
-		preg_match_all('/\w([-._\w]*\w)?@\w([-._\w]*\w)?\.\w{2,6}/', $strString, $arrEmails);
+
+		preg_match_all('/\w([-.+!#$%&\'*\/=?^`{}|~\w]*\w)?@\w([-.\w]*\w)?\.\w{2,63}/u', $strString, $arrEmails);
 
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{
 			$strEncoded = '';
+			$arrCharacters = utf8_str_split($strEmail);
 
-			for($i=0; $i<strlen($strEmail); ++$i)
+			foreach ($arrCharacters as $strCharacter)
 			{
-				$blnHex = rand(0, 1);
-
-				if ($blnHex)
-				{
-					$strEncoded .= sprintf('&#x%X;', ord($strEmail{$i}));
-				}
-				else
-				{
-					$strEncoded .= sprintf('&#%s;', ord($strEmail{$i}));
-				}
+				$strEncoded .= sprintf((rand(0, 1) ? '&#x%X;' : '&#%s;'), utf8_ord($strCharacter));
 			}
 
 			$strString = str_replace($strEmail, $strEncoded, $strString);
@@ -493,7 +486,7 @@ class StringUtil
 
 		// Remove any unwanted tags (especially PHP tags)
 		$strString = strip_tags($strString, \Config::get('allowedTags'));
-		$arrTags = preg_split('/(\{[^\}]+\})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$arrTags = preg_split('/({[^}]+})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace the tags
 		foreach ($arrTags as $strTag)

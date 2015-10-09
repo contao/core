@@ -52,7 +52,7 @@ class InsertTags extends \Controller
 			return \StringUtil::restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/\{\{(([^\{\}]*|(?R))*)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/{{(([^{}]*|(?R))*)}}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 
@@ -1203,6 +1203,30 @@ class InsertTags extends \Controller
 
 						case 'readable_size':
 							$arrCache[$strTag] = \System::getReadableSize($arrCache[$strTag]);
+							break;
+
+						case 'flatten':
+							if (!is_array($arrCache[$strTag]))
+							{
+								break;
+							}
+
+							$it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($arrCache[$strTag]));
+							$result = array();
+
+							foreach ($it as $leafValue)
+							{
+								$keys = array();
+
+								foreach (range(0, $it->getDepth()) as $depth)
+								{
+									$keys[] = $it->getSubIterator($depth)->key();
+								}
+
+								$result[] = implode('.', $keys) . ': ' . $leafValue;
+							}
+
+							$arrCache[$strTag] = implode(', ', $result);
 							break;
 
 						// HOOK: pass unknown flags to callback functions

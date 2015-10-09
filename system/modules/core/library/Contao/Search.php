@@ -240,7 +240,7 @@ class Search
 		}
 		else
 		{
-			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,\+_-]/u'), ' ', $strText);
+			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\w\'.:,+-]/u'), ' ', $strText);
 		}
 
 		// Split words
@@ -268,7 +268,7 @@ class Search
 				$strWord = substr($strWord, 1);
 			}
 
-			if (preg_match('/[\':,\.]$/', $strWord))
+			if (preg_match('/[\':,.]$/', $strWord))
 			{
 				$strWord = substr($strWord, 0, -1);
 			}
@@ -323,7 +323,7 @@ class Search
 		}
 		else
 		{
-			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL \*\+\'"\.:,_-]/u'), ' ', $strKeywords);
+			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\w\' *+".:,-]/u'), ' ', $strKeywords);
 		}
 
 		// Check keyword string

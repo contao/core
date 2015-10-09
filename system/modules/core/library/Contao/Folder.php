@@ -81,24 +81,7 @@ class Folder extends \System
 		$this->strFolder = $strFolder;
 
 		// Check whether we need to sync the database
-		$this->blnSyncDb = (\Config::get('uploadPath') != 'templates' && strncmp($strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0);
-
-		// Check the excluded folders
-		if ($this->blnSyncDb && \Config::get('fileSyncExclude') != '')
-		{
-			$arrExempt = array_map(function($e) {
-				return \Config::get('uploadPath') . '/' . $e;
-			}, trimsplit(',', \Config::get('fileSyncExclude')));
-
-			foreach ($arrExempt as $strExempt)
-			{
-				if (strncmp($strExempt . '/', $strFolder . '/', strlen($strExempt) + 1) === 0)
-				{
-					$this->blnSyncDb = false;
-					break;
-				}
-			}
-		}
+		$this->blnSyncDb = $this->shouldBeSynchronized();
 
 		// Create the folder if it does not exist
 		if (!is_dir(TL_ROOT . '/' . $this->strFolder))
@@ -335,6 +318,44 @@ class Folder extends \System
 		}
 
 		return $this->objModel;
+	}
+
+
+	/**
+	 * Check if the folder should be synchronized with the database
+	 *
+	 * @return bool True if the folder needs to be synchronized with the database
+	 */
+	public function shouldBeSynchronized()
+	{
+		if (\Config::get('uploadPath') == 'templates')
+		{
+			return false;
+		}
+
+		// Outside the files directory
+		if (strncmp($this->strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) !== 0)
+		{
+			return false;
+		}
+
+		// Check the excluded folders
+		if (\Config::get('fileSyncExclude') != '')
+		{
+			$arrExempt = array_map(function($e) {
+				return \Config::get('uploadPath') . '/' . $e;
+			}, trimsplit(',', \Config::get('fileSyncExclude')));
+
+			foreach ($arrExempt as $strExempt)
+			{
+				if (strncmp($strExempt . '/', $this->strFolder . '/', strlen($strExempt) + 1) === 0)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 

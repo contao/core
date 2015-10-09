@@ -965,7 +965,7 @@ class Image
 	 */
 	public static function getPixelValue($size)
 	{
-		$value = preg_replace('/[^0-9\.-]+/', '', $size);
+		$value = preg_replace('/[^0-9.-]+/', '', $size);
 		$unit = preg_replace('/[^acehimnprtvwx%]/', '', $size);
 
 		// Convert 16px = 1em = 2ex = 12pt = 1pc = 1/6in = 2.54/6cm = 25.4/6mm = 100%

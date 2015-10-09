@@ -281,6 +281,8 @@ abstract class Events extends \Module
 			{
 				$arrEvent['teaser'] = \StringUtil::toHtml5($arrEvent['teaser']);
 			}
+
+			$arrEvent['teaser'] = \StringUtil::encodeEmail($arrEvent['teaser']);
 		}
 
 		// Display the "read more" button for external/article links

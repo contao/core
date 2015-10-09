@@ -2,8 +2,6 @@
 
 <?php $this->block('content'); ?>
 
-  <?= $this->v2warning ?>
-
   <?= $this->images ?>
 
   <?= $this->pagination ?>

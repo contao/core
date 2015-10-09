@@ -279,7 +279,7 @@ function strip_insert_tags($strString)
 
 	do
 	{
-		$strString = preg_replace('/\{\{[^\{\}]*\}\}/', '', $strString, -1, $count);
+		$strString = preg_replace('/{{[^{}]*}}/', '', $strString, -1, $count);
 	}
 	while ($count > 0);
 
@@ -460,7 +460,7 @@ function nl2br_pre($str, $xhtml=false)
  */
 function dump()
 {
-	echo "<pre>";
+	echo '<pre>';
 
 	foreach (func_get_args() as $var)
 	{
@@ -474,7 +474,7 @@ function dump()
 		}
 	}
 
-	echo "</pre>";
+	echo '</pre>';
 }
 
 

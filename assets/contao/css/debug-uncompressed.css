@@ -6,6 +6,12 @@
  * @license LGPL-3.0+
  */
 
+#contao-debug {
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+}
 #contao-debug * {
 	color:#444;
 	line-height:1;
@@ -19,6 +25,7 @@
 	border-top:1px solid #666;
 	border-bottom:1px solid #bbb;
 	position:fixed;
+	width: 100%;
 	bottom:260px;
 	background:#ddd;
 	background-image:-moz-linear-gradient(top, #eee, #ddd);
@@ -53,17 +60,25 @@
 	bottom:0;
 	overflow:auto;
 	background:#fff;
+	width: 100%;
 }
 #contao-debug pre {
 	padding:10px;
+	font-size:12px;
 }
 #contao-debug pre,#contao-debug pre * {
 	font-family:Courier,monospace;
 }
-#contao-debug.closed p {
+.debug-enabled {
+	margin-bottom:297px;
+}
+.debug-closed {
+	margin-bottom:36px;
+}
+.debug-closed #contao-debug p {
 	bottom:-1px;
 }
-#contao-debug.closed div {
+.debug-closed #contao-debug div {
 	height:0;
 }
 #contao-debug #debug-tog {
@@ -74,6 +89,6 @@
 	background:url("../../../system/themes/default/images/expand.gif") right 5px no-repeat;
 	cursor:pointer;
 }
-#contao-debug.closed #debug-tog {
+.debug-closed #contao-debug #debug-tog {
 	background-image:url("../../../system/themes/default/images/collapse.gif");
 }

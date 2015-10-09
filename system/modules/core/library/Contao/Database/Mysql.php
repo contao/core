@@ -133,7 +133,7 @@ class Mysql extends \Database
 		while ($objFields->next())
 		{
 			$arrTmp = array();
-			$arrChunks = preg_split('/(\([^\)]+\))/', $objFields->Type, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$arrChunks = preg_split('/(\([^)]+\))/', $objFields->Type, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 			$arrTmp['name'] = $objFields->Field;
 			$arrTmp['type'] = $arrChunks[0];

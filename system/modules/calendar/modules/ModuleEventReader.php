@@ -176,17 +176,6 @@ class ModuleEventReader extends \Events
 			}
 		}
 
-		// Override the default image size
-		if ($this->imgSize != '')
-		{
-			$size = deserialize($this->imgSize);
-
-			if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
-			{
-				$objEvent->size = $this->imgSize;
-			}
-		}
-
 		/** @var \FrontendTemplate|object $objTemplate */
 		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
@@ -198,16 +187,56 @@ class ModuleEventReader extends \Events
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 		$objTemplate->locationLabel = $GLOBALS['TL_LANG']['MSC']['location'];
-
 		$objTemplate->details = '';
-		$objElement = \ContentModel::findPublishedByPidAndTable($objEvent->id, 'tl_calendar_events');
+		$objTemplate->hasDetails = false;
+		$objTemplate->hasTeaser = false;
 
-		if ($objElement !== null)
+		// Clean the RTE output
+		if ($objEvent->teaser != '')
 		{
-			while ($objElement->next())
+			$objTemplate->hasTeaser = true;
+
+			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objTemplate->details .= $this->getContentElement($objElement->current());
+				$objTemplate->teaser = \StringUtil::toXhtml($objEvent->teaser);
 			}
+			else
+			{
+				$objTemplate->teaser = \StringUtil::toHtml5($objEvent->teaser);
+			}
+
+			$objTemplate->teaser = \StringUtil::encodeEmail($objTemplate->teaser);
+		}
+
+		// Display the "read more" button for external/article links
+		if ($objEvent->source != 'default')
+		{
+			$objTemplate->details = true;
+			$objTemplate->hasDetails = true;
+		}
+
+		// Compile the event text
+		else
+		{
+			$id = $objEvent->id;
+
+			$objTemplate->details = function () use ($id)
+			{
+				$strDetails = '';
+				$objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_calendar_events');
+
+				if ($objElement !== null)
+				{
+					while ($objElement->next())
+					{
+						$strDetails .= $this->getContentElement($objElement->current());
+					}
+				}
+
+				return $strDetails;
+			};
+
+			$objTemplate->hasDetails = (\ContentModel::countPublishedByPidAndTable($id, 'tl_calendar_events') > 0);
 		}
 
 		$objTemplate->addImage = false;
@@ -228,8 +257,19 @@ class ModuleEventReader extends \Events
 			{
 				// Do not override the field now that we have a model registry (see #6303)
 				$arrEvent = $objEvent->row();
-				$arrEvent['singleSRC'] = $objModel->path;
 
+				// Override the default image size
+				if ($this->imgSize != '')
+				{
+					$size = deserialize($this->imgSize);
+
+					if ($size[0] > 0 || $size[1] > 0 || is_numeric($size[2]))
+					{
+						$arrEvent['size'] = $this->imgSize;
+					}
+				}
+
+				$arrEvent['singleSRC'] = $objModel->path;
 				$this->addImageToTemplate($objTemplate, $arrEvent);
 			}
 		}
