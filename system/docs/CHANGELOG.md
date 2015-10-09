@@ -5,6 +5,9 @@ Version 3.5.4 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Do not add the back end language in the meta wizard (see #8056).
+
+### Fixed
 Do not add excluded files to the DBAFS if they are edited in the file manager.
 
 ### Fixed
