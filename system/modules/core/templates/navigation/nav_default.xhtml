@@ -4,7 +4,7 @@
     <?php if ($item['isActive']): ?>
       <li class="<?= $item['class'] ?>"><span class="<?= $item['class'] ?>" role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></span><?= $item['subitems'] ?></li>
     <?php else: ?>
-      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><a href="<?= $item['href'] ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?= $item['target'] ?> role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></a><?= $item['subitems'] ?></li>
+      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?= $item['target'] ?> role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></a><?= $item['subitems'] ?></li>
     <?php endif; ?>
   <?php endforeach; ?>
 </ul>

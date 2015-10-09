@@ -254,8 +254,6 @@ abstract class User extends \System
 		// Try to find the session in the database
 		if ($objSession->numRows < 1)
 		{
-			$this->log('Could not find the session record', __METHOD__, TL_ACCESS);
-
 			return false;
 		}
 
@@ -264,8 +262,6 @@ abstract class User extends \System
 		// Validate the session
 		if ($objSession->sessionID != session_id() || (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
 		{
-			$this->log('Could not verify the session', __METHOD__, TL_ACCESS);
-
 			return false;
 		}
 
@@ -274,8 +270,6 @@ abstract class User extends \System
 		// Load the user object
 		if ($this->findBy('id', $this->intId) == false)
 		{
-			$this->log('Could not find the session user', __METHOD__, TL_ACCESS);
-
 			return false;
 		}
 

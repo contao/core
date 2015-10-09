@@ -1,6 +1,58 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.4 (2015-10-09)
+--------------------------
+
+### Fixed
+Do not add the back end language in the meta wizard (see #8056).
+
+### Fixed
+Do not add excluded files to the DBAFS if they are edited in the file manager.
+
+### Fixed
+Add the `|flatten` insert tag flag to handle arrays (see #8021).
+
+### Fixed
+Check for excluded folders in the back end file popup (see #8003).
+
+### Fixed
+Fixed a wrong option name when initializing sortables (see #8053).
+
+### Fixed
+Translate UUIDs to paths in the parent view header fields.
+
+### Fixed
+Trigger the options_callback for the parent view header fields (see #8031).
+
+### Fixed
+Correctly create the initial version of a member without username (see #8037).
+
+### Fixed
+Improve the performance of the debug bar (see #7839).
+
+### Fixed
+Correctly output the event details in the `event_list` template (see #8041).
+
+### Fixed
+Only modify empty `href` attributes in the `nav_` template (see #8006, #8038).
+
+### Fixed
+Correctly show the group headlines in the repository DB updater (see #8020).
+
+### Fixed
+Improve the e-mail regex to also match the new TLDs (see #7984).
+
+### Fixed
+Ensure that the database port is not empty (see #7950).
+
+### Fixed
+Remove the left-over usages of `$this->v2warning` (see #8027).
+
+### Fixed
+Support the `hasDetails` variable in the event reader (see #8011).
+
+
 Version 3.5.3 (2015-09-10)
 --------------------------
 

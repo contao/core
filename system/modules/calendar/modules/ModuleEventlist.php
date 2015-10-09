@@ -270,7 +270,7 @@ class ModuleEventlist extends \Events
 			// Show the teaser text of redirect events (see #6315)
 			if (is_bool($event['details']))
 			{
-				$objTemplate->details = $event['teaser'];
+				$objTemplate->hasDetails = false;
 			}
 
 			// Add the template variables

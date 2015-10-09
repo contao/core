@@ -32,7 +32,7 @@
         <?php foreach ($this->versions as $version): ?>
           <tr class="<?= $version['class'] ?> click2edit" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">
             <td><?= $version['date'] ?></td>
-            <td><?= $version['username'] ?></td>
+            <td><?= $version['username'] ?: '-' ?></td>
             <td><?= $version['shortTable'] ?></td>
             <td><?= $version['pid'] ?></td>
             <td><?= $version['description'] ?: '-' ?></td>

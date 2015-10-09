@@ -481,6 +481,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$_SESSION['sql_commands'] = array();
 		} // if
 		$this->handleRunOnce(); // PATCH
+		$this->loadLanguageFile('tl_install');
 		$this->import('Database\\Installer', 'Installer');
 		$rep->dbUpdate = $this->Installer->generateSqlForm();
 		if ($rep->dbUpdate != '') {

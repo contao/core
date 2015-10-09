@@ -588,7 +588,6 @@ class Input
 
 		// Validate standard character entites and UTF16 two byte encoding
 		$varValue = preg_replace('/(&#*\w+)[\x00-\x20]+;/i', '$1;', $varValue);
-		$varValue = preg_replace('/(&#x*)([0-9a-f]+);/i', '$1$2;', $varValue);
 
 		// Remove carriage returns
 		$varValue = preg_replace('/\r+/', '', $varValue);

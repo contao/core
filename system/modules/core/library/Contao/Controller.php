@@ -1142,12 +1142,6 @@ abstract class Controller extends \System
 			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
 
-		// Use ./ instead of an empty href (see #7967)
-		if ($strUrl == '')
-		{
-			$strUrl = './';
-		}
-
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['generateFrontendUrl']) && is_array($GLOBALS['TL_HOOKS']['generateFrontendUrl']))
 		{

@@ -18,7 +18,7 @@
 		"phpspec/php-diff": "~1.0",
 		"simplepie/simplepie": "~1.3",
 		"swiftmailer/swiftmailer": "~5.2",
-		"tecnick.com/tcpdf": "~6.0",
+		"tecnickcom/tcpdf": "~6.0",
 		"true/punycode": "~1.0",
 		"contao-components/compass": "~0.12"
 	}

@@ -71,13 +71,6 @@ class MetaWizard extends \Widget
 	 */
 	public function generate()
 	{
-		// Make sure there is at least an empty array
-		if (!is_array($this->varValue) || empty($this->varValue))
-		{
-			$this->import('BackendUser', 'User');
-			$this->varValue = array($this->User->language=>array()); // see #4188
-		}
-
 		$count = 0;
 		$languages = $this->getLanguages();
 		$return = '';
@@ -88,6 +81,19 @@ class MetaWizard extends \Widget
 		// Only show the root page languages (see #7112, #7667)
 		$objRootLangs = $this->Database->query("SELECT REPLACE(language, '-', '_') AS language FROM tl_page WHERE type='root'");
 		$languages = array_intersect_key($languages, array_flip($objRootLangs->fetchEach('language')));
+
+		// Make sure there is at least an empty array
+		if (!is_array($this->varValue) || empty($this->varValue))
+		{
+			if (count($languages) > 0)
+			{
+				$this->varValue = array(key($languages)=>array()); // see #4188
+			}
+			else
+			{
+				return '<p class="tl_info">' . $GLOBALS['TL_LANG']['MSC']['metaNoLanguages'] . '</p>';
+			}
+		}
 
 		// Add the existing entries
 		if (!empty($this->varValue))

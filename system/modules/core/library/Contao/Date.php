@@ -74,7 +74,7 @@ class Date
 		$this->strDate = ($strDate !== null) ? $strDate : time();
 		$this->strFormat = ($strFormat !== null) ? $strFormat : static::getNumericDateFormat();
 
-		if (!preg_match('/^\-?[0-9]+$/', $this->strDate) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
+		if (!preg_match('/^-?[0-9]+$/', $this->strDate) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
 			$this->dateToUnix();
 		}
