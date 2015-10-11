@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.5 (2015-XX-XX)
+--------------------------
+
+### Fixed
+Correctly show the UUID in the back end file manager popup (see #8058). 
+
+
 Version 3.5.4 (2015-10-09)
 --------------------------
 

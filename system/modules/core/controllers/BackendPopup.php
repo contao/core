@@ -103,8 +103,12 @@ class BackendPopup extends \Backend
 			if ($objFolder->shouldBeSynchronized())
 			{
 				$objModel = \Dbafs::addResource($this->strFile);
-				$objTemplate->uuid = \StringUtil::binToUuid($objModel->uuid); // see #5211
 			}
+		}
+
+		if ($objModel !== null)
+		{
+			$objTemplate->uuid = \StringUtil::binToUuid($objModel->uuid); // see #5211
 		}
 
 		// Add the file info
