@@ -245,7 +245,8 @@ class Form extends \Hybrid
 		if (isset(static::$arrFormUsages[$formId]))
 		{
 			static::$arrFormUsages[$formId]++;
-		} else
+		}
+		else
 		{
 			static::$arrFormUsages[$formId] = 1;
 		}
