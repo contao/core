@@ -238,18 +238,21 @@ class Form extends \Hybrid
 		{
 			$strAttributes .= ' class="' . $arrAttributes[1] . '"';
 		}
-		
+
 		$formId = $arrAttributes[0] ?: 'f'.$this->id;
 
 		// Count up form usages
-		if (isset(static::$arrFormUsages[$formId])) {
+		if (isset(static::$arrFormUsages[$formId]))
+		{
 			static::$arrFormUsages[$formId]++;
-		} else {
+		} else
+		{
 			static::$arrFormUsages[$formId] = 1;
 		}
 
 		// Adjust form id
-		if (static::$arrFormUsages[$formId] > 1) {
+		if (static::$arrFormUsages[$formId] > 1)
+		{
 			$formId .= '_' . static::$arrFormUsages[$formId];
 		}
 
