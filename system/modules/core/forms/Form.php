@@ -67,7 +67,6 @@ class Form extends \Hybrid
 	 */
 	protected function compile()
 	{
-		static::$arrFormUsages[] = $this->id;
 		$hasUpload = false;
 		$doNotSubmit = false;
 		$arrSubmitted = array();
@@ -239,9 +238,20 @@ class Form extends \Hybrid
 		{
 			$strAttributes .= ' class="' . $arrAttributes[1] . '"';
 		}
+		
+		$formId = $arrAttributes[0] ?: 'f'.$this->id;
 
-		$arrUsages = array_count_values(static::$arrFormUsages);
-		$formId = ($arrAttributes[0] ?: 'f' . $this->id) . (($arrUsages[$this->id] > 1) ? '_' . ($arrUsages[$this->id] - 1) : '');
+		// Count up form usages
+		if (isset(static::$arrFormUsages[$formId])) {
+			static::$arrFormUsages[$formId]++;
+		} else {
+			static::$arrFormUsages[$formId] = 1;
+		}
+
+		// Adjust form id
+		if (static::$arrFormUsages[$formId] > 1) {
+			$formId .= '_' . static::$arrFormUsages[$formId];
+		}
 
 		$this->Template->hasError = $doNotSubmit;
 		$this->Template->attributes = $strAttributes;
