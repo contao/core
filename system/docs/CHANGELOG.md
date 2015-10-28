@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Adjust the code to be compatible with PHP7 (see #8018).
+
+### Fixed
 Correctly show the UUID in the back end file manager popup (see #8058). 
 
 

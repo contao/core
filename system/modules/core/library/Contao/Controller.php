@@ -317,7 +317,7 @@ abstract class Controller extends \System
 			{
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
-					$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objModule);
+					$strBuffer = static::importStatic($callback[0])->{$callback[1]}($objRow, $strBuffer, $objModule);
 				}
 			}
 
@@ -401,7 +401,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($objRow);
+				static::importStatic($callback[0])->{$callback[1]}($objRow);
 			}
 		}
 
@@ -480,7 +480,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
-				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->{$callback[1]}($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -533,7 +533,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
-				$strBuffer = static::importStatic($callback[0])->$callback[1]($objRow, $strBuffer, $objElement);
+				$strBuffer = static::importStatic($callback[0])->{$callback[1]}($objRow, $strBuffer, $objElement);
 			}
 		}
 
@@ -609,7 +609,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getPageStatusIcon'] as $callback)
 			{
-				$image = static::importStatic($callback[0])->$callback[1]($objPage, $image);
+				$image = static::importStatic($callback[0])->{$callback[1]}($objPage, $image);
 			}
 		}
 
@@ -663,7 +663,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['isVisibleElement'] as $callback)
 			{
-				$blnReturn = static::importStatic($callback[0])->$callback[1]($objElement, $blnReturn);
+				$blnReturn = static::importStatic($callback[0])->{$callback[1]}($objElement, $blnReturn);
 			}
 		}
 
@@ -701,7 +701,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'] as $callback)
 			{
-				$strBuffer = static::importStatic($callback[0])->$callback[1]($strBuffer);
+				$strBuffer = static::importStatic($callback[0])->{$callback[1]}($strBuffer);
 			}
 		}
 
@@ -1147,7 +1147,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['generateFrontendUrl'] as $callback)
 			{
-				$strUrl = static::importStatic($callback[0])->$callback[1]($arrRow, $strParams, $strUrl);
+				$strUrl = static::importStatic($callback[0])->{$callback[1]}($arrRow, $strParams, $strUrl);
 			}
 		}
 
@@ -1242,7 +1242,7 @@ abstract class Controller extends \System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['postDownload'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strFile);
+				static::importStatic($callback[0])->{$callback[1]}($strFile);
 			}
 		}
 

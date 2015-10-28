@@ -363,7 +363,7 @@ class FrontendIndex extends \Frontend
 			foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+				$strCacheKey = $this->{$callback[0]}->{$callback[1]}($strCacheKey);
 			}
 		}
 
@@ -465,7 +465,7 @@ class FrontendIndex extends \Frontend
 			foreach ($GLOBALS['TL_HOOKS']['modifyFrontendPage'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, null);
+				$strBuffer = $this->{$callback[0]}->{$callback[1]}($strBuffer, null);
 			}
 		}
 

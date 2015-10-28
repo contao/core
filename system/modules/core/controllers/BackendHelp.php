@@ -124,7 +124,7 @@ class BackendHelp extends \Backend
 			elseif (is_array($arrData['options_callback']))
 			{
 				$this->import($arrData['options_callback'][0]);
-				$options = $this->$arrData['options_callback'][0]->$arrData['options_callback'][1]();
+				$options = $this->{$arrData['options_callback'][0]}->{$arrData['options_callback'][1]}();
 			}
 			else
 			{

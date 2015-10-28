@@ -284,7 +284,7 @@ class Versions extends \Controller
 						if (is_array($callback))
 						{
 							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this->intPid, $this->strTable, $data, $intVersion);
+							$this->{$callback[0]}->{$callback[1]}($this->intPid, $this->strTable, $data, $intVersion);
 						}
 						elseif (is_callable($callback))
 						{

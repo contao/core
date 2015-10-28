@@ -270,7 +270,7 @@ abstract class Template extends \BaseTemplate
 			foreach ($GLOBALS['TL_HOOKS']['parseTemplate'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this);
+				$this->{$callback[0]}->{$callback[1]}($this);
 			}
 		}
 
@@ -311,7 +311,7 @@ abstract class Template extends \BaseTemplate
 			foreach ($GLOBALS['TL_HOOKS']['postFlushData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this->strBuffer, $this);
+				$this->{$callback[0]}->{$callback[1]}($this->strBuffer, $this);
 			}
 		}
 	}

@@ -195,7 +195,7 @@ class ModuleUnsubscribe extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['removeRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($varInput, $arrRemove);
+				$this->{$callback[0]}->{$callback[1]}($varInput, $arrRemove);
 			}
 		}
 

@@ -64,7 +64,7 @@ class PageForward extends \Frontend
 
 			foreach ($arrChunks as $strChunk)
 			{
-				list($k,) = explode('=', $strChunk, 2);
+				list($k) = explode('=', $strChunk, 2);
 				$arrQuery[] = $k;
 			}
 		}

@@ -126,7 +126,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['compileFormFields'] as $callback)
 			{
 				$this->import($callback[0]);
-				$arrFields = $this->$callback[0]->$callback[1]($arrFields, $formId, $this);
+				$arrFields = $this->{$callback[0]}->{$callback[1]}($arrFields, $formId, $this);
 			}
 		}
 
@@ -188,7 +188,7 @@ class Form extends \Hybrid
 					foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 					{
 						$this->import($callback[0]);
-						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
+						$objWidget = $this->{$callback[0]}->{$callback[1]}($objWidget, $formId, $this->arrData, $this);
 					}
 				}
 
@@ -203,7 +203,7 @@ class Form extends \Hybrid
 						foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
 						{
 							$this->import($callback[0]);
-							$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
+							$objWidget = $this->{$callback[0]}->{$callback[1]}($objWidget, $formId, $this->arrData, $this);
 						}
 					}
 
@@ -301,7 +301,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['prepareFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this, $arrFields);
+				$this->{$callback[0]}->{$callback[1]}($arrSubmitted, $arrLabels, $this, $arrFields);
 			}
 		}
 
@@ -485,7 +485,7 @@ class Form extends \Hybrid
 				foreach ($GLOBALS['TL_HOOKS']['storeFormData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrSet = $this->$callback[0]->$callback[1]($arrSet, $this);
+					$arrSet = $this->{$callback[0]}->{$callback[1]}($arrSet, $this);
 				}
 			}
 
@@ -516,7 +516,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
+				$this->{$callback[0]}->{$callback[1]}($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 

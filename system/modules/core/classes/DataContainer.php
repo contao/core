@@ -204,7 +204,7 @@ abstract class DataContainer extends \Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$xlabel .= $this->$callback[0]->$callback[1]($this);
+					$xlabel .= $this->{$callback[0]}->{$callback[1]}($this);
 				}
 				elseif (is_callable($callback))
 				{
@@ -218,7 +218,7 @@ abstract class DataContainer extends \Backend
 		{
 			$this->import($arrData['input_field_callback'][0]);
 
-			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
+			return $this->{$arrData['input_field_callback'][0]}->{$arrData['input_field_callback'][1]}($this, $xlabel);
 		}
 		elseif (is_callable($arrData['input_field_callback']))
 		{
@@ -428,7 +428,7 @@ abstract class DataContainer extends \Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$wizard .= $this->$callback[0]->$callback[1]($this);
+					$wizard .= $this->{$callback[0]}->{$callback[1]}($this);
 				}
 				elseif (is_callable($callback))
 				{
@@ -669,7 +669,7 @@ abstract class DataContainer extends \Backend
 			if (is_array($v['button_callback']))
 			{
 				$this->import($v['button_callback'][0]);
-				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext, $this);
+				$return .= $this->{$v['button_callback'][0]}->{$v['button_callback'][1]}($arrRow, $v['href'], $label, $title, $v['icon'], $attributes, $strTable, $arrRootIds, $arrChildRecordIds, $blnCircularReference, $strPrevious, $strNext, $this);
 				continue;
 			}
 			elseif (is_callable($v['button_callback']))
@@ -766,7 +766,7 @@ abstract class DataContainer extends \Backend
 			if (is_array($v['button_callback']))
 			{
 				$this->import($v['button_callback'][0]);
-				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
+				$return .= $this->{$v['button_callback'][0]}->{$v['button_callback'][1]}($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
 				continue;
 			}
 			elseif (is_callable($v['button_callback']))

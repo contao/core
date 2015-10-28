@@ -427,7 +427,7 @@ abstract class Backend extends \Controller
 		elseif (\Input::get('key') && isset($arrModule[\Input::get('key')]))
 		{
 			$objCallback = new $arrModule[\Input::get('key')][0]();
-			$this->Template->main .= $objCallback->$arrModule[\Input::get('key')][1]($dc);
+			$this->Template->main .= $objCallback->{$arrModule[\Input::get('key')][1]}($dc);
 
 			// Add the name of the parent element
 			if (isset($_GET['table']) && in_array(\Input::get('table'), $arrTables) && \Input::get('table') != $arrTables[0])
@@ -802,7 +802,7 @@ abstract class Backend extends \Controller
 				{
 					foreach ($GLOBALS['TL_HOOKS']['addFileMetaInformationToRequest'] as $callback)
 					{
-						if (($val = \System::importStatic($callback[0])->$callback[1]($strPtable, $intPid)) !== false)
+						if (($val = \System::importStatic($callback[0])->{$callback[1]}($strPtable, $intPid)) !== false)
 						{
 							$objPage = $val;
 						}

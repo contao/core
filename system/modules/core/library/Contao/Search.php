@@ -128,7 +128,7 @@ class Search
 		{
 			foreach ($GLOBALS['TL_HOOKS']['indexPage'] as $callback)
 			{
-				\System::importStatic($callback[0])->$callback[1]($strContent, $arrData, $arrSet);
+				\System::importStatic($callback[0])->{$callback[1]}($strContent, $arrData, $arrSet);
 			}
 		}
 

@@ -84,7 +84,7 @@ class ModulePersonalData extends \Module
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]();
+					$this->{$callback[0]}->{$callback[1]}();
 				}
 				elseif (is_callable($callback))
 				{
@@ -186,7 +186,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+						$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $this->User, $this);
 					}
 					elseif (is_callable($callback))
 					{
@@ -250,7 +250,7 @@ class ModulePersonalData extends \Module
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+								$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $this->User, $this);
 							}
 							elseif (is_callable($callback))
 							{
@@ -336,7 +336,7 @@ class ModulePersonalData extends \Module
 				foreach ($GLOBALS['TL_HOOKS']['updatePersonalData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
+					$this->{$callback[0]}->{$callback[1]}($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
 
@@ -348,7 +348,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User, $this);
+						$this->{$callback[0]}->{$callback[1]}($this->User, $this);
 					}
 					elseif (is_callable($callback))
 					{

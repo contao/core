@@ -408,7 +408,7 @@ class tl_comments extends Backend
 					{
 						$this->import($callback[0]);
 
-						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
+						if ($this->{$callback[0]}->{$callback[1]}($intParent, $strSource) === true)
 						{
 							Cache::set($strKey, true);
 							break;
@@ -511,7 +511,7 @@ class tl_comments extends Backend
 					{
 						$this->import($callback[0]);
 
-						if (($tmp = $this->$callback[0]->$callback[1]($arrRow)) != '')
+						if (($tmp = $this->{$callback[0]}->{$callback[1]}($arrRow)) != '')
 						{
 							$title .= $tmp;
 							break;
@@ -643,7 +643,7 @@ class tl_comments extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{
