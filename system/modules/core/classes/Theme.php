@@ -375,7 +375,12 @@ class Theme extends \Backend
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
-					\Dbafs::addResource($this->customizeUploadPath($strFolder));
+					$strCustomized = $this->customizeUploadPath($strFolder);
+
+					if (\Dbafs::shouldBeSynchronized($strCustomized))
+					{
+						\Dbafs::addResource($strCustomized);
+					}
 				}
 			}
 

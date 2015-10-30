@@ -322,7 +322,10 @@ class Ajax extends \Backend
 					{
 						foreach ($varValue as $k=>$v)
 						{
-							$varValue[$k] = \Dbafs::addResource($v)->uuid;
+							if (\Dbafs::shouldBeSynchronized($v))
+							{
+								$varValue[$k] = \Dbafs::addResource($v)->uuid;
+							}
 						}
 					}
 
