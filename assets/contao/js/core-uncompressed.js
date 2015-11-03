@@ -182,20 +182,17 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img'),
-			icon = $(el).getNext('img');
+			image = $(el).getFirst('img');
 
 		if (item) {
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
 				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = AjaxRequest.themePath + 'folPlus.gif';
-				icon.src = AjaxRequest.themePath + 'folderC.gif';
 				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
@@ -229,7 +226,6 @@ var AjaxRequest =
 
 				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				icon.src = AjaxRequest.themePath + 'folderO.gif';
 				AjaxRequest.hideBox();
 
 				// HOOK

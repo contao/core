@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly check if a folder is protected when loading subfolders.
+
+### Fixed
 Correctly check the synchronization status when copying or moving files.
 
 ### Fixed
