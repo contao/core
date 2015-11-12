@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Support call, sms and app hyperlinks when converting relative URLs (see #8102).
+
+### Fixed
 Correctly check if a folder is protected when loading subfolders.
 
 ### Fixed

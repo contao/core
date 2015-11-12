@@ -1187,7 +1187,7 @@ abstract class Controller extends \System
 			$strAttribute = $arrUrls[$i+2];
 			$strUrl = $arrUrls[$i+3];
 
-			if (!preg_match('@^(https?://|ftp://|mailto:|#)@i', $strUrl))
+			if (!preg_match('@^(https?://|s?ftp://|callto:|tel:|sms:|mailto:|skype:|sip:|ymsgr:|msnim:|gtalk:|#)@i', $strUrl))
 			{
 				$strUrl = $strBase . (($strUrl != '/') ? $strUrl : '');
 			}
