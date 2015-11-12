@@ -793,6 +793,17 @@ class tl_style extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		$this->checkPermission();
+
 		$objVersions = new Versions('tl_style', $intId);
 		$objVersions->initialize();
 

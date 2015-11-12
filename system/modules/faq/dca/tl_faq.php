@@ -491,7 +491,18 @@ class tl_faq extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
-		// Check permissions to publish
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		$this->checkPermission();
+
+		// Check the field access
 		if (!$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', __METHOD__, TL_ERROR);

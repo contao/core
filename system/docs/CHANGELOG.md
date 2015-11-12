@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly set the ID when toggling fields via Ajax (see #8043).
+
+### Fixed
 Support call, sms and app hyperlinks when converting relative URLs (see #8102).
 
 ### Fixed

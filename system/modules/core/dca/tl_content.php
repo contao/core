@@ -1732,9 +1732,23 @@ class tl_content extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
-		// Check permissions to edit
+		// Set the ID and action
 		Input::setGet('id', $intId);
 		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		$this->checkPermission();
+
+		// Check the field access
+		if (!$this->User->hasAccess('tl_content::invisible', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish content element ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 
 		// The onload_callbacks vary depending on the dynamic parent table (see #4894)
 		if (is_array($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback']))
