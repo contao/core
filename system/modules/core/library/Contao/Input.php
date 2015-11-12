@@ -53,7 +53,7 @@ class Input
 	 * Magic quotes setting
 	 * @var boolean
 	 */
-	protected static $blnMagicQuotes;
+	protected static $blnMagicQuotes = false;
 
 
 	/**
@@ -64,9 +64,6 @@ class Input
 		$_GET    = static::cleanKey($_GET);
 		$_POST   = static::cleanKey($_POST);
 		$_COOKIE = static::cleanKey($_COOKIE);
-
-		// Only check magic quotes once (see #3438)
-		static::$blnMagicQuotes = function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc();
 	}
 
 
@@ -480,26 +477,13 @@ class Input
 	 * @param mixed $varValue A string or array
 	 *
 	 * @return mixed The string or array without slashes
+	 *
+	 * @deprecated Deprecated since Contao 3.5, to be removed in Contao 5.
+	 *             Since get_magic_quotes_gpc() always returns false in PHP 5.4+, the method was never actually executed.
 	 */
 	public static function stripSlashes($varValue)
 	{
-		if ($varValue == '' || !static::$blnMagicQuotes)
-		{
-			return $varValue;
-		}
-
-		// Recursively clean arrays
-		if (is_array($varValue))
-		{
-			foreach ($varValue as $k=>$v)
-			{
-				$varValue[$k] = static::stripSlashes($v);
-			}
-
-			return $varValue;
-		}
-
-		return stripslashes($varValue);
+		return $varValue;
 	}
 
 
