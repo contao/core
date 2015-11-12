@@ -655,7 +655,7 @@ class Date
 	 *
 	 * @return string The resolved date string
 	 */
-	protected function resolveCustomModifiers($strDate)
+	protected static function resolveCustomModifiers($strDate)
 	{
 		if (strpos($strDate, '::') === false)
 		{
