@@ -658,7 +658,7 @@ abstract class Widget extends \BaseTemplate
 		return sprintf('<label%s%s>%s%s%s</label>',
 						($this->blnForAttribute ? ' for="ctrl_' . $this->strId . '"' : ''),
 						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
-						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
 						$this->strLabel,
 						($this->mandatory ? '<span class="mandatory">*</span>' : ''));
 	}

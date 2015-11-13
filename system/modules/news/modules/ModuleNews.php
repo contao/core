@@ -400,7 +400,7 @@ abstract class ModuleNews extends \Module
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
 							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline), true),
 							$strLink,
-							($blnIsReadMore ? ' <span class="invisible">'.$objArticle->headline.'</span>' : ''));
+							($blnIsReadMore ? '<span class="invisible"> '.$objArticle->headline.'</span>' : ''));
 		}
 
 		// Encode e-mail addresses

@@ -22,7 +22,7 @@
   </div>
 
   <?php if ($this->hasDetails): ?>
-    <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"<?= $this->target ?>><?= $this->more ?> <span class="invisible"><?= $this->link ?></span></a></p>
+    <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"<?= $this->target ?>><?= $this->more ?><span class="invisible"> <?= $this->link ?></span></a></p>
   <?php endif; ?>
 
 </div>

@@ -184,12 +184,11 @@ class FormCaptcha extends \Widget
 			return '';
 		}
 
-		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
+		return sprintf('<label for="ctrl_%s" class="mandatory%s"><span class="invisible">%s </span>%s<span class="mandatory">*</span><span class="invisible"> %s</span></label>',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
+						$GLOBALS['TL_LANG']['MSC']['mandatory'],
 						$this->strLabel,
-						'<span class="mandatory">*</span>',
 						$this->getQuestion());
 	}
 
