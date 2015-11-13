@@ -87,7 +87,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 function __exception($e)
 {
 	// PHP 7 compatibility
-	if (!$e instanceof Exception || interface_exists('Throwable', false) && !$e instanceof Throwable)
+	if (!$e instanceof Exception && (!interface_exists('Throwable', false) || !$e instanceof Throwable))
 	{
 		throw new InvalidArgumentException('Exception or Throwable expected, ' . gettype($e) . ' given');
 	}
