@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly render the "group" option in the radio button and checkbox widgets.
+
+### Fixed
 Correctly set the ID when toggling fields via Ajax (see #8043).
 
 ### Fixed
