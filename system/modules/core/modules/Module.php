@@ -412,26 +412,23 @@ abstract class Module extends \Frontend
 							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpages->id);
 						}
 
-						if ($objNext !== null)
+						// Hide the link if the target page is invisible
+						if ($objNext === null || !$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
 						{
-							// Hide the link if the target page is invisible
-							if (!$objNext->published || ($objNext->start != '' && $objNext->start > time()) || ($objNext->stop != '' && $objNext->stop < time()))
-							{
-								continue(2);
-							}
-
-							$strForceLang = null;
-							$objNext->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objNext->language;
-							}
-
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
-							break;
+							continue(2);
 						}
+
+						$strForceLang = null;
+						$objNext->loadDetails();
+
+						// Check the target page language (see #4706)
+						if (\Config::get('addLanguageToUrl'))
+						{
+							$strForceLang = $objNext->language;
+						}
+
+						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
+						break;
 						// DO NOT ADD A break; STATEMENT
 
 					default:

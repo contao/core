@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly hide forward pages with no public subpages (see #8054).
+
+### Fixed
 Correctly render the page picker if the value starts with `#` (see #8055).
 
 ### Fixed
