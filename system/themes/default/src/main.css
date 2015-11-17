@@ -283,6 +283,9 @@ h2.sub_headline_index {
 .tl_subpanel strong {
 	line-height:21px;
 }
+.tl_subpanel select {
+	height:20px;
+}
 .tl_submit_panel {
 	padding-left:6px;
 }

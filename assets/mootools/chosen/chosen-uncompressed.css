@@ -13,13 +13,6 @@ select.chzn-select {
   margin:1px 0; /* PATCH */
   background-color:#fff; /* PATCH */
 }
-/* PATCH */
-.firefox .chzn-container {
-  position:relative;
-  top:2px;
-  margin:-1px 0 0;
-}
-/* PATCH EOF */
 .chzn-container .chzn-drop {
   background: #fff;
   border: 1px solid #aaa;
@@ -75,11 +68,7 @@ select.chzn-select {
 }
 /* PATCH */
 .firefox .chzn-container-single .chzn-single {
-  height:21px;
-}
-.win.firefox .chzn-container-single .chzn-single {
-  height:22px;
-  line-height:21px;
+  top:1px;
 }
 /* PATCH EOF */
 .chzn-container-single .chzn-single > span { /* PATCH see 3835 */

@@ -36,21 +36,9 @@
 	background-color:#f9f9f9;
 	border:1px solid #c8c8c8;
 }
-.firefox .styled_select {
-	line-height:21px;
-}
-.win.firefox .styled_select {
-	line-height:22px;
-}
 .tl_subpanel .styled_select {
 	font-size:11px;
 	line-height:18px;
-}
-.firefox .tl_subpanel .styled_select {
-	line-height:19px;
-}
-.win.firefox .tl_subpanel .styled_select {
-	line-height:20px;
 }
 .styled_select span {
 	padding:0 3px;
