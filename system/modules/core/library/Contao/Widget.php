@@ -1516,6 +1516,10 @@ abstract class Widget extends \BaseTemplate
 		{
 			return 0;
 		}
+		elseif (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		{
+			return null;
+		}
 		else
 		{
 			return '';

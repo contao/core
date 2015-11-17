@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Set the correct empty value when copying elements (see #8064).
+
+### Fixed
 Correctly hide forward pages with no public subpages (see #8054).
 
 ### Fixed
