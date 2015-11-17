@@ -734,6 +734,11 @@ abstract class DataContainer extends \Backend
 
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations'] as $k=>$v)
 		{
+			if (\Input::get('act') == 'select' && !$v['showOnSelect'])
+			{
+				continue;
+			}
+
 			$v = is_array($v) ? $v : array($v);
 			$label = is_array($v['label']) ? $v['label'][0] : $v['label'];
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];

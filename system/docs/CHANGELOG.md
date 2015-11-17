@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Show the "toggle all" buttons in "edit multiple" mode (see #5622).
+
+### Fixed
 Disable the gallery pagination if the images are sorted randomly (see #8033).
 
 ### Fixed
