@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Disable the gallery pagination if the images are sorted randomly (see #8033).
+
+### Fixed
 Set the correct empty value when copying elements (see #8064).
 
 ### Fixed
