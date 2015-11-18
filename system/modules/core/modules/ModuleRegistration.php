@@ -172,6 +172,12 @@ class ModuleRegistration extends \Module
 			{
 				$arrData['inputType'] = 'checkbox';
 			}
+			
+ 			// Map fileTree to regular upload widget
+			if ($arrData['inputType'] == 'fileTree')
+			{
+				$arrData['inputType'] = 'upload';
+			} 
 
 			// Map fileTrees to upload widgets (see #8091)
 			if ($arrData['inputType'] == 'fileTree')
