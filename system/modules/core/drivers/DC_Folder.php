@@ -2662,10 +2662,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				continue;
 			}
 
-			$strHash = md5(TL_ROOT . '/' . $strPath . '/' . $strFile);
+			$arrFiles[substr(md5(TL_ROOT . '/' . $strPath . '/' . $strFile), 0, 8)] = 1;
 
-			$arrFiles[substr($strHash, 0, 8)] = 1;
-			$arrFiles = array_merge($arrFiles, $this->getMD5Folders($strPath . '/' . $strFile));
+			// Do not use array_merge() here (see #8105)
+			foreach ($this->getMD5Folders($strPath . '/' . $strFile) as $k=>$v)
+			{
+				$arrFiles[$k] = $v;
+			}
 		}
 
 		return $arrFiles;
