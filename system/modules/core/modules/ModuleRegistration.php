@@ -179,6 +179,7 @@ class ModuleRegistration extends \Module
 				$arrData['inputType'] = 'upload';
 			}
 
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
