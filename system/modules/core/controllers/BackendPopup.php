@@ -98,9 +98,7 @@ class BackendPopup extends \Backend
 		// Add the resource (see #6880)
 		if (($objModel = \FilesModel::findByPath($this->strFile)) === null)
 		{
-			$objFolder = new \Folder(is_dir(TL_ROOT . '/' . $this->strFile) ? $this->strFile : dirname($this->strFile));
-
-			if ($objFolder->shouldBeSynchronized())
+			if (\Dbafs::shouldBeSynchronized($this->strFile))
 			{
 				$objModel = \Dbafs::addResource($this->strFile);
 			}

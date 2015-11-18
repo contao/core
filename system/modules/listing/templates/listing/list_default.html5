@@ -65,7 +65,7 @@
         <?php foreach ($row as $col): ?>
           <td class="body <?= $col['class'] ?>"><?= $col['content'] ?></td>
         <?php endforeach; ?>
-        <?php if ($this->details): ?>
+        <?php if ($this->details && isset($col)): ?>
           <?php if ($col['details']): ?>
             <td class="body <?= $this->col_last ?> col_last"><a href="<?= $col['url'] ?>"><img src="<?= TL_FILES_URL ?>assets/contao/images/info.gif" alt=""></a></td>
           <?php else: ?>

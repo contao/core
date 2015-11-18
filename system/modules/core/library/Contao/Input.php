@@ -242,8 +242,6 @@ class Input
 	 * @param string $strKey The variable name
 	 *
 	 * @return mixed The raw variable value
-	 *
-	 * @internal
 	 */
 	public static function postUnsafeRaw($strKey)
 	{
