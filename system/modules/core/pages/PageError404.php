@@ -93,6 +93,13 @@ class PageError404 extends \Frontend
 			/** @var \PageModel $objPage */
 			global $objPage;
 
+			// Die nicely if the page is a 404 page already (see #8060)
+			if ($objPage && $objPage->type == 'error_404')
+			{
+				header('HTTP/1.1 404 Not Found');
+				die_nicely('be_no_page', 'Page not found');
+			}
+
 			$objPage = $obj404->loadDetails();
 
 			/** @var \PageRegular $objHandler */
