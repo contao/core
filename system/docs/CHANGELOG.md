@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly store multi select menus if no value is selected (see #7760).
+
+### Fixed
 Prevent recursion when rendering 403/404 pages (see #8060).
 
 ### Fixed

@@ -17,6 +17,10 @@
     <p class="error"><?= $this->getErrorAsString() ?></p>
   <?php endif; ?>
 
+  <?php if ($this->multiple): ?>
+    <input type="hidden" name="<?= rtrim($this->name, '[]') ?>" value="" />
+  <?php endif; ?>
+
   <select name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="<?= $this->class ?>"<?= $this->getAttributes() ?>>
     <?php foreach ($this->getOptions() as $option): ?>
       <?php if ($option['type'] == 'group_start'): ?>
