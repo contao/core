@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly render required single checkboxes in the back end (see #7731).
+
+### Fixed
 Correctly store multi select menus if no value is selected (see #7760).
 
 ### Fixed

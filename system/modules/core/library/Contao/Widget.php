@@ -754,7 +754,7 @@ abstract class Widget extends \BaseTemplate
 			{
 				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
 			}
-			elseif ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'multiple') // see #4131
+			else
 			{
 				return ' ' . $strKey;
 			}
