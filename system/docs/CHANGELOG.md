@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Preserve the user input when loading image meta data (see #8108).
+
+### Fixed
 Show the "toggle all" buttons in "edit multiple" mode (see #5622).
 
 ### Fixed

@@ -825,8 +825,15 @@ abstract class Backend extends \Controller
 
 		if (isset($arrMeta[$strLanguage]))
 		{
-			\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
-			\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
+			if (\Input::post('alt') == '' && !empty($arrMeta[$strLanguage]['title']))
+			{
+				\Input::setPost('alt', $arrMeta[$strLanguage]['title']);
+			}
+
+			if (\Input::post('caption') == '' && !empty($arrMeta[$strLanguage]['caption']))
+			{
+				\Input::setPost('caption', $arrMeta[$strLanguage]['caption']);
+			}
 		}
 	}
 
