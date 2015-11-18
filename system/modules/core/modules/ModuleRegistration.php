@@ -167,10 +167,16 @@ class ModuleRegistration extends \Module
 		{
 			$arrData = $GLOBALS['TL_DCA']['tl_member']['fields'][$field];
 
-			// Map checkboxWizard to regular checkbox widget
+			// Map checkboxWizards to regular checkbox widgets
 			if ($arrData['inputType'] == 'checkboxWizard')
 			{
 				$arrData['inputType'] = 'checkbox';
+			}
+
+			// Map fileTrees to upload widgets (see #8091)
+			if ($arrData['inputType'] == 'fileTree')
+			{
+				$arrData['inputType'] = 'upload';
 			}
 
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];

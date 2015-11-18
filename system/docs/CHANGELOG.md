@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Map the `FileTree` widget to `FormFileUpload` in the front end (see #8091).
+
+### Fixed
 Preserve the user input when loading image meta data (see #8108).
 
 ### Fixed
