@@ -835,7 +835,7 @@ class Image
 			}
 		}
 
-		if (!file_exists(TL_ROOT .'/'. $src))
+		if (!is_file(TL_ROOT .'/'. $src))
 		{
 			return '';
 		}
