@@ -274,6 +274,13 @@ class ModuleRegistration extends \Module
 						$varValue = $objWidget->getEmptyValue();
 					}
 
+					// Encrypt the value (see #7815)
+					if ($arrData['eval']['encrypt'])
+					{
+						$varValue = \Encryption::encrypt($varValue);
+					}
+
+					// Set the new value
 					$arrUser[$field] = $varValue;
 				}
 			}

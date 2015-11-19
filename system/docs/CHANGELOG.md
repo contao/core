@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Correctly encrypt fields upon registration (see #8110).
+
+### Fixed
 Correctly render required single checkboxes in the back end (see #7731).
 
 ### Fixed
