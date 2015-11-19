@@ -814,6 +814,11 @@ class Image
 	 */
 	public static function getHtml($src, $alt='', $attributes='')
 	{
+		if ($src == '')
+		{
+			return '';
+		}
+
 		$static = TL_FILES_URL;
 		$src = rawurldecode($src);
 
