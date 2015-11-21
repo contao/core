@@ -191,6 +191,7 @@ class ModuleChangePassword extends \Module
 				$this->jumpToOrReload($objJumpTo->row());
 			}
 
+			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['newPasswordSet']);
 			$this->reload();
 		}
 
