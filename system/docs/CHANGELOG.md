@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Do not store e-mail addresses in the newsletter (un)subscription log. 
+
+### Fixed
 Correctly encrypt fields upon registration (see #8110).
 
 ### Fixed
