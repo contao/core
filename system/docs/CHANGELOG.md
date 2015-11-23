@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Handle empty `href` attributes in the book navigation (see #8104).
+
+### Fixed
 Do not store e-mail addresses in the newsletter (un)subscription log. 
 
 ### Fixed
