@@ -934,7 +934,7 @@ var Backend =
 				field.value = val.join(',');
 				// #8103 explain returnCallback()
 				if (opt.returnCallback instanceof Function) {
-				    field.value = returnCallback(field.value);
+				    field.value = opt.returnCallback(field.value);
 				} else if (frm.document.location.href.indexOf('contao/page.php') != -1) {
 				    field.value = '{{link_url::' + field.value + '}}';
 				}
