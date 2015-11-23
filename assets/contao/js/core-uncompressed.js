@@ -914,7 +914,7 @@ var Backend =
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var frm = window.frames['simple-modal-iframe'],
 				val = [], 
-				inp, field, i, insTagStr, addDefaultInsTag;
+				inp, field, i;
 			if (frm === undefined) {
 				alert('Could not find the SimpleModal frame');
 				return;
@@ -925,17 +925,18 @@ var Backend =
 			}
 			inp 	= frm.document.getElementById('tl_select').getElementsByTagName('input');
 			field 	= (opt.tag)? $(opt.tag): $('ctrl_' + opt.id);
-			//new opt.insTagStr
-			addDefaultInsTag = (opt.insTagStr!='')? true: false;
-			insTagStr 	 = (opt.insTagStr)? opt.insTagStr: 'link_url';
+			
 			for (i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				if (!inp[i].id.match(/^reset_/)) val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
 				field.value = val.join(',');
-				if ((frm.document.location.href.indexOf('contao/page.php') != -1) && addDefaultInsTag === true) {
-					field.value = '{{'+insTagStr+'::' + field.value + '}}';
+				// #8103 explain returnCallback()
+				if (opt.returnCallback instanceof Function) {
+				    field.value = returnCallback(field.value);
+				} else if (frm.document.location.href.indexOf('contao/page.php') != -1) {
+				    field.value = '{{link_url::' + field.value + '}}';
 				}
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
