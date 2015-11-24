@@ -241,12 +241,29 @@ abstract class Events extends \Module
 			}
 		}
 
+		$until = '';
+		$recurring = '';
+
+		// Recurring event
+		if ($objEvents->recurring)
+		{
+			$arrRange = deserialize($objEvents->repeatEach);
+			$strKey = 'cal_' . $arrRange['unit'];
+			$recurring = sprintf($GLOBALS['TL_LANG']['MSC'][$strKey], $arrRange['value']);
+
+			if ($objEvents->recurrences > 0)
+			{
+				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], \Date::parse($objPage->dateFormat, $objEvents->repeatEnd));
+			}
+		}
+
 		// Store raw data
 		$arrEvent = $objEvents->row();
 
 		// Overwrite some settings
-		$arrEvent['time'] = $strTime;
 		$arrEvent['date'] = $strDate;
+		$arrEvent['time'] = $strTime;
+		$arrEvent['datetime'] = $objEvents->addTime ? date('Y-m-d\TH:i:sP', $intStart) : date('Y-m-d', $intStart);
 		$arrEvent['day'] = $strDay;
 		$arrEvent['month'] = $strMonth;
 		$arrEvent['parent'] = $intCalendar;
@@ -256,6 +273,8 @@ abstract class Events extends \Module
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
+		$arrEvent['recurring'] = $recurring;
+		$arrEvent['until'] = $until;
 		$arrEvent['begin'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 		$arrEvent['details'] = '';

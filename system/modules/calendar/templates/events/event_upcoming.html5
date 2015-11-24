@@ -1,11 +1,7 @@
 
 <div class="event layout_upcoming<?= $this->classUpcoming ?>">
 
-  <span class="date"><?= $this->date ?></span>
+  <time datetime="<?= $this->datetime ?>" class="date"><?= $this->date ?><?php if ($this->time): ?>, <?= $this->time ?><?php endif; ?></time>
   <a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time;?>)"<?= $this->target ?>><?= $this->link ?></a>
-
-  <?php if ($this->time): ?>
-    <span class="time">(<?= $this->time ?>)</span>
-  <?php endif; ?>
 
 </div>
