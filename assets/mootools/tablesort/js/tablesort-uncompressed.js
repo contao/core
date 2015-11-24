@@ -56,6 +56,7 @@ var TableSort = new Class(
 		}
 
 		var cook = null,
+			sorter = this,
 			vars = Cookie.read('TS_' + table.get('id').toUpperCase());
 
 		if (vars !== null) {
@@ -79,13 +80,13 @@ var TableSort = new Class(
 
 			// Add the event
 			a.addEvent('click', function(i, el) {
-				this.resort(i, el)
+				sorter.resort(i, el)
 			}.pass([i, el], this)).inject(el);
 
 			// Sort the table if there is a cookie
 			if (cook !== null && cook[0] == i) {
 				$(el).addClass((cook[1] == 'desc') ? 'asc' : 'desc');
-				this.resort(cook[0], el);
+				sorter.resort(cook[0], el);
 			}
 		}
 	},

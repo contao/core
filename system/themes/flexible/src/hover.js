@@ -21,7 +21,7 @@ var Theme = {
 	 */
 	focusInput: function(id) {
 		if (id == '') return;
-		var el = $$('#'+id+' input[class^="tl_text"],#'+id+' textarea');
+		var el = $$('#' + id + ' input[class^="tl_text"],#' + id + ' textarea');
 		if (el && el.length > 0) el[0].focus();
 	},
 
@@ -105,7 +105,7 @@ var Theme = {
 			if (Browser.Features.Touch) {
 				el.addEvent('click', function() {
 					if (!el.getAttribute('data-visited')) {
-						el.setAttribute('data-visited', 1);
+						el.setAttribute('data-visited', '1');
 					} else {
 						el.getElements('a').each(function(a) {
 							if (a.hasClass('edit')) {
