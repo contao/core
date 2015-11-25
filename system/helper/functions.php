@@ -82,10 +82,16 @@ function __error($intType, $strMessage, $strFile, $intLine)
  * if "display_errors" is set. Callback to a custom exception handler defined
  * in the application file "config/error.php".
  *
- * @param Exception $e
+ * @param Exception|Throwable $e
  */
-function __exception(Exception $e)
+function __exception($e)
 {
+	// PHP 7 compatibility
+	if (!$e instanceof Exception && (!interface_exists('Throwable', false) || !$e instanceof Throwable))
+	{
+		throw new InvalidArgumentException('Exception or Throwable expected, ' . gettype($e) . ' given');
+	}
+
 	error_log(sprintf("PHP Fatal error: Uncaught exception '%s' with message '%s' thrown in %s on line %s\n%s",
 					get_class($e),
 					$e->getMessage(),

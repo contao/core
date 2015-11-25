@@ -1,7 +1,7 @@
 
 <?php if ($this->header): ?>
   <div class="header<?= $this->classHeader ?>">
-    <time datetime="<?= $this->datetime ?>" class="date"><?= $this->firstDate ?></time><?php if ($this->firstDay): ?> <span class="day">(<?= $this->firstDay ?>)</span><?php endif; ?>
+    <?php if ($this->firstDay): ?><span class="day"><?= $this->firstDay ?>, </span><?php endif; ?><span class="date"><?= $this->firstDate ?></span>
   </div>
 <?php endif; ?>
 
@@ -9,9 +9,7 @@
 
   <h2><a href="<?= $this->href ?>" title="<?= $this->title ?> (<?php if ($this->day) echo $this->day . ', '; ?><?= $this->date ?><?php if ($this->time) echo ', ' . $this->time; ?>)"<?= $this->target ?>><?= $this->link ?></a></h2>
 
-  <?php if ($this->time || $this->span): ?>
-    <p class="time"><?= $this->time . $this->span ?></p>
-  <?php endif; ?>
+  <p class="time"><time datetime="<?= $this->datetime ?>"><?= $this->date ?><?php if ($this->time): ?>, <?= $this->time ?><?php endif; ?></time></p>
 
   <?php if ($this->hasDetails): ?>
     <?= $this->details ?>

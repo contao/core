@@ -2,7 +2,7 @@
 <div class="event layout_full block<?= $this->class ?>">
 
   <h1><?= $this->title ?></h1>
-  <p class="info"><?= $this->date ?></p>
+  <p class="info"><time datetime="<?= $this->datetime ?>"><?= $this->date ?><?php if ($this->time): ?>, <?= $this->time ?><?php endif; ?></time></p>
 
   <?php if ($this->recurring): ?>
     <p class="recurring"><?= $this->recurring ?><?php if ($this->until) echo ' ' . $this->until; ?>.</p>

@@ -538,7 +538,7 @@ class ZipReader
 			$arrFile['file_dirname'] = (($path = dirname($arrFile['file_name'])) != '.' ? $path : '');
 
 			// Add UNIX time
-			$arrFile['last_mod_file_unix'] = $this->decToUnix($arrFile['last_mod_file_time'], $arrFile['last_mod_file_date']);
+			$arrFile['last_mod_file_unix'] = $this->decToUnix((int) $arrFile['last_mod_file_time'], (int) $arrFile['last_mod_file_date']);
 
 			// Read next signature
 			$strSignature = @fread($this->resFile, 4);

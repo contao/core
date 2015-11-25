@@ -283,6 +283,9 @@ h2.sub_headline_index {
 .tl_subpanel strong {
 	line-height:21px;
 }
+.tl_subpanel select {
+	height:20px;
+}
 .tl_submit_panel {
 	padding-left:6px;
 }
@@ -891,7 +894,7 @@ ul.sgallery li {
 #tl_messages h2,#tl_shortcuts h2,#tl_versions h2 {
 	margin:18px 0 6px;
 	padding:2px 6px 3px;
-	border:1px solid #e9e9e9;
+	border:solid #e9e9e9;
 	border-width:1px 0;
 	background:#f6f6f6;
 }
@@ -1421,7 +1424,7 @@ fieldset.tl_tbox {
 }
 fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:6px;
-	border:1px solid #ddd;
+	border:solid #ddd;
 	border-width:1px 0 0;
 }
 fieldset.nolegend {
@@ -1485,7 +1488,7 @@ fieldset.collapsed > legend {
 	overflow:hidden;
 	background:#f6f6f6;
 	margin-top:6px;
-	border:1px solid #e9e9e9;
+	border:solid #e9e9e9;
 	border-width:1px 0;
 }
 .pagination ul {

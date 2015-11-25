@@ -256,7 +256,16 @@ class tl_member_group extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
-		// Check permissions
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		// Check the field access
 		if (!$this->User->hasAccess('tl_member_group::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate member group ID "'.$intId.'"', __METHOD__, TL_ERROR);
@@ -274,7 +283,7 @@ class tl_member_group extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{

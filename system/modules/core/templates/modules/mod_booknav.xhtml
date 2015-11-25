@@ -3,20 +3,20 @@
 <?php $this->block('content'); ?>
 
   <ul>
-    <?php if ($this->prevHref): ?>
-      <li class="prev"><a href="<?= $this->prevHref ?>" title="<?= $this->prevPageTitle ?>">&lt; <?= $this->prevLink ?></a></li>
+    <?php if ($this->hasPrev): ?>
+      <li class="prev"><a href="<?= $this->prevHref ?: './' ?>" title="<?= $this->prevPageTitle ?>">&lt; <?= $this->prevLink ?></a></li>
     <?php else: ?>
       <li class="prev empty">&nbsp;</li>
     <?php endif; ?>
 
-    <?php if ($this->upHref): ?>
-      <li class="up"><a href="<?= $this->upHref ?>" title="<?= $this->upPageTitle ?>"><?= $this->upLink ?></a></li>
+    <?php if ($this->hasUp): ?>
+      <li class="up"><a href="<?= $this->upHref ?: './' ?>" title="<?= $this->upPageTitle ?>"><?= $this->upLink ?></a></li>
     <?php else: ?>
       <li class="up empty">&nbsp;</li>
     <?php endif; ?>
 
-    <?php if ($this->nextHref): ?>
-      <li class="next"><a href="<?= $this->nextHref ?>" title="<?= $this->nextPageTitle ?>"><?= $this->nextLink ?> &gt;</a></li>
+    <?php if ($this->hasNext): ?>
+      <li class="next"><a href="<?= $this->nextHref ?: './' ?>" title="<?= $this->nextPageTitle ?>"><?= $this->nextLink ?> &gt;</a></li>
     <?php else: ?>
       <li class="next empty">&nbsp;</li>
     <?php endif; ?>

@@ -404,7 +404,7 @@ class Newsletter extends \Backend
 			foreach ($GLOBALS['TL_HOOKS']['sendNewsletter'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objEmail, $objNewsletter, $arrRecipient, $text, $html);
+				$this->{$callback[0]}->{$callback[1]}($objEmail, $objNewsletter, $arrRecipient, $text, $html);
 			}
 		}
 	}

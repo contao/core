@@ -97,7 +97,7 @@ class FrontendCron extends \Frontend
 			foreach ($GLOBALS['TL_CRON'][$strInterval] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
+				$this->{$callback[0]}->{$callback[1]}();
 			}
 
 			// Add a log entry if in debug mode (see #4729)

@@ -181,7 +181,7 @@ class ModuleChangePassword extends \Module
 				foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($objMember, $objNewPassword->value, $this);
+					$this->{$callback[0]}->{$callback[1]}($objMember, $objNewPassword->value, $this);
 				}
 			}
 
@@ -191,6 +191,7 @@ class ModuleChangePassword extends \Module
 				$this->jumpToOrReload($objJumpTo->row());
 			}
 
+			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['newPasswordSet']);
 			$this->reload();
 		}
 

@@ -4,7 +4,7 @@
   <?php if ($this->label): ?>
     <label for="ctrl_<?= $this->id ?>"<?php if ($this->class): ?> class="<?= $this->class ?>"<?php endif; ?>>
       <?php if ($this->mandatory): ?>
-        <span class="invisible"><?= $this->mandatoryField ?></span> <?= $this->label ?><span class="mandatory">*</span>
+        <span class="invisible"><?= $this->mandatoryField ?> </span><?= $this->label ?><span class="mandatory">*</span>
       <?php else: ?>
         <?= $this->label ?>
       <?php endif; ?>
@@ -15,6 +15,10 @@
 <?php $this->block('field'); ?>
   <?php if ($this->hasErrors()): ?>
     <p class="error"><?= $this->getErrorAsString() ?></p>
+  <?php endif; ?>
+
+  <?php if ($this->multiple): ?>
+    <input type="hidden" name="<?= rtrim($this->name, '[]') ?>" value="">
   <?php endif; ?>
 
   <select name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="<?= $this->class ?>"<?= $this->getAttributes() ?>>

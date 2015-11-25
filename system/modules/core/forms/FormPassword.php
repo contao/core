@@ -185,7 +185,7 @@ class FormPassword extends \Widget
 		return sprintf('<label for="ctrl_%s_confirm" class="confirm%s">%s%s%s</label>',
 						$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
 						sprintf($GLOBALS['TL_LANG']['MSC']['confirmation'], $this->strLabel),
 						($this->mandatory ? '<span class="mandatory">*</span>' : ''));
 	}

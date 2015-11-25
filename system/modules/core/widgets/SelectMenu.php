@@ -154,7 +154,8 @@ class SelectMenu extends \Widget
 			$strClass .= ' tl_chosen';
 		}
 
-		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
+		return sprintf('%s<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
+						($this->multiple ? '<input type="hidden" name="'. rtrim($this->strName, '[]') .'" value="">' : ''),
 						$this->strName,
 						$this->strId,
 						$strClass,

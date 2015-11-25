@@ -88,7 +88,7 @@ class BackendPassword extends \Backend
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$pw = $this->$callback[0]->$callback[1]($pw);
+								$pw = $this->{$callback[0]}->{$callback[1]}($pw);
 							}
 							elseif (is_callable($callback))
 							{

@@ -235,7 +235,7 @@ class InsertTags extends \Controller
 					if (FE_USER_LOGGED_IN)
 					{
 						$this->import('FrontendUser', 'User');
-						$value = $this->User->$elements[1];
+						$value = $this->User->{$elements[1]};
 
 						if ($value == '')
 						{
@@ -413,7 +413,7 @@ class InsertTags extends \Controller
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>%s</a>', $strUrl, specialchars($strTitle), $strTarget, specialchars($strName));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>%s</a>', $strUrl, specialchars($strTitle), $strTarget, $strName);
 							break;
 
 						case 'link_open':
@@ -433,7 +433,7 @@ class InsertTags extends \Controller
 							break;
 
 						case 'link_name':
-							$arrCache[$strTag] = specialchars($strName);
+							$arrCache[$strTag] = $strName;
 							break;
 					}
 					break;
@@ -486,8 +486,7 @@ class InsertTags extends \Controller
 					switch (strtolower($elements[0]))
 					{
 						case 'article':
-							$strLink = specialchars($objArticle->title);
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objArticle->title), $objArticle->title);
 							break;
 
 						case 'article_open':
@@ -520,8 +519,7 @@ class InsertTags extends \Controller
 					switch (strtolower($elements[0]))
 					{
 						case 'faq':
-							$strLink = specialchars($objFaq->question);
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objFaq->question), $objFaq->question);
 							break;
 
 						case 'faq_open':
@@ -580,8 +578,7 @@ class InsertTags extends \Controller
 					switch (strtolower($elements[0]))
 					{
 						case 'news':
-							$strLink = specialchars($objNews->headline);
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objNews->headline), $objNews->headline);
 							break;
 
 						case 'news_open':
@@ -640,8 +637,7 @@ class InsertTags extends \Controller
 					switch (strtolower($elements[0]))
 					{
 						case 'event':
-							$strLink = specialchars($objEvent->title);
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objEvent->title), $objEvent->title);
 							break;
 
 						case 'event_open':
@@ -1140,7 +1136,7 @@ class InsertTags extends \Controller
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($tag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
+							$varValue = $this->{$callback[0]}->{$callback[1]}($tag, $blnCache, $arrCache[$strTag], $flags, $tags, $arrCache, $_rit, $_cnt); // see #6672
 
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
@@ -1236,7 +1232,7 @@ class InsertTags extends \Controller
 								foreach ($GLOBALS['TL_HOOKS']['insertTagFlags'] as $callback)
 								{
 									$this->import($callback[0]);
-									$varValue = $this->$callback[0]->$callback[1]($flag, $tag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
+									$varValue = $this->{$callback[0]}->{$callback[1]}($flag, $tag, $arrCache[$strTag], $flags, $blnCache, $tags, $arrCache, $_rit, $_cnt); // see #5806
 
 									// Replace the tag and stop the loop
 									if ($varValue !== false)

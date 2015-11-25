@@ -635,7 +635,7 @@ abstract class Widget extends \BaseTemplate
 			foreach ($GLOBALS['TL_HOOKS']['parseWidget'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this);
+				$strBuffer = $this->{$callback[0]}->{$callback[1]}($strBuffer, $this);
 			}
 		}
 
@@ -658,7 +658,7 @@ abstract class Widget extends \BaseTemplate
 		return sprintf('<label%s%s>%s%s%s</label>',
 						($this->blnForAttribute ? ' for="ctrl_' . $this->strId . '"' : ''),
 						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
-						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
 						$this->strLabel,
 						($this->mandatory ? '<span class="mandatory">*</span>' : ''));
 	}
@@ -754,7 +754,7 @@ abstract class Widget extends \BaseTemplate
 			{
 				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
 			}
-			elseif ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'multiple') // see #4131
+			else
 			{
 				return ' ' . $strKey;
 			}
@@ -1121,7 +1121,7 @@ abstract class Widget extends \BaseTemplate
 						foreach ($GLOBALS['TL_HOOKS']['addCustomRegexp'] as $callback)
 						{
 							$this->import($callback[0]);
-							$break = $this->$callback[0]->$callback[1]($this->rgxp, $varInput, $this);
+							$break = $this->{$callback[0]}->{$callback[1]}($this->rgxp, $varInput, $this);
 
 							// Stop the loop if a callback returned true
 							if ($break === true)
@@ -1385,7 +1385,7 @@ abstract class Widget extends \BaseTemplate
 		if (is_array($arrData['options_callback']))
 		{
 			$arrCallback = $arrData['options_callback'];
-			$arrData['options'] = static::importStatic($arrCallback[0])->$arrCallback[1]($objDca);
+			$arrData['options'] = static::importStatic($arrCallback[0])->{$arrCallback[1]}($objDca);
 		}
 		elseif (is_callable($arrData['options_callback']))
 		{
@@ -1468,7 +1468,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getAttributesFromDca'] as $callback)
 			{
-				$arrAttributes = static::importStatic($callback[0])->$callback[1]($arrAttributes, $objDca);
+				$arrAttributes = static::importStatic($callback[0])->{$callback[1]}($arrAttributes, $objDca);
 			}
 		}
 
@@ -1515,6 +1515,10 @@ abstract class Widget extends \BaseTemplate
 		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
 		{
 			return 0;
+		}
+		elseif (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		{
+			return null;
 		}
 		else
 		{

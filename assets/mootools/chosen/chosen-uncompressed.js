@@ -88,7 +88,7 @@ var Chosen = new Class({
 
 		}
 
-		this.form_field.setStyle('display', 'none').grab(this.container, 'after');
+		this.form_field.setStyle('display', 'none').removeProperty('required').grab(this.container, 'after')
 		this.dropdown = this.container.getElement('div.chzn-drop');
 
 		// PATCH: set to 100% and use box-sizing:border-box
@@ -571,7 +571,7 @@ var Chosen = new Class({
 			this.form_field.fireEvent("change");
 
 			// PATCH: fireEvent seems to be missing the onchange attribute
-			if (typeof(this.form_field.onchange) == 'function') this.form_field.onchange(); 
+			if (typeof(this.form_field.onchange) == 'function') this.form_field.onchange();
 
 			this.search_field_scale();
 

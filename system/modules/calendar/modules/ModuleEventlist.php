@@ -174,7 +174,6 @@ class ModuleEventlist extends \Events
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
 					$event['firstDate'] = \Date::parse($objPage->dateFormat, $day);
-					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;
 				}
@@ -285,13 +284,11 @@ class ModuleEventlist extends \Events
 			{
 				$objTemplate->day = $event['day'];
 				$objTemplate->date = $event['date'];
-				$objTemplate->span = ($event['time'] == '' && $event['day'] == '') ? $event['date'] : '';
 			}
 			else
 			{
 				$objTemplate->day = $event['firstDay'];
 				$objTemplate->date = $event['firstDate'];
-				$objTemplate->span = '';
 			}
 
 			$objTemplate->addImage = false;

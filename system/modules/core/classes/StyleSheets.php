@@ -941,7 +941,7 @@ class StyleSheets extends \Backend
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars, $parent);
+				$strTemp = $this->{$callback[0]}->{$callback[1]}($row, $blnWriteToFile, $vars, $parent);
 
 				if ($strTemp != '')
 				{
@@ -2232,7 +2232,7 @@ class StyleSheets extends \Backend
 						foreach ($GLOBALS['TL_HOOKS']['createDefinition'] as $callback)
 						{
 							$this->import($callback[0]);
-							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $arrChunks[1], $strDefinition, $arrSet);
+							$arrTemp = $this->{$callback[0]}->{$callback[1]}($strKey, $arrChunks[1], $strDefinition, $arrSet);
 
 							if ($arrTemp && is_array($arrTemp))
 							{

@@ -212,7 +212,7 @@ fieldset.tl_tbox,fieldset.tl_box {
 	margin-left:18px;
 	margin-right:18px;
 	padding:6px;
-	border:1px solid #ddd;
+	border:solid #ddd;
 	border-width:1px 0 0;
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {

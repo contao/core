@@ -219,6 +219,12 @@ pre,.tl_textarea.monospace {
 .tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect {
 	width:320px;
 }
+select.tl_select,select.tl_select_column,select.tl_select_unit,select.tl_select_interval {
+	height:22px;
+}
+.webkit select.tl_select,.webkit select.tl_select_column,.webkit select.tl_select_unit,.webkit select.tl_select_interval {
+	vertical-align:1px;
+}
 .tl_select_column {
 	width:140px;
 }

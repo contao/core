@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abf813210b95215e114c8d7ad01f48a6",
-    "content-hash": "ee16367f24ea7021d25c1e0b7084c60d",
+    "hash": "add23eeb3eeb543c85d4c6996b4b8346",
+    "content-hash": "5c70d3dcd2a1a76cda6f3c70282e7184",
     "packages": [
         {
             "name": "contao-components/compass",
@@ -37,20 +37,20 @@
         },
         {
             "name": "leafo/scssphp",
-            "version": "v0.3.2",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/scssphp.git",
-                "reference": "033dd027dfc8e1905ce782a687160d66d3bd65ee"
+                "reference": "251cd10c1c86d9df20d54d3856ba30acdbdaab5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/scssphp/zipball/033dd027dfc8e1905ce782a687160d66d3bd65ee",
-                "reference": "033dd027dfc8e1905ce782a687160d66d3bd65ee",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/251cd10c1c86d9df20d54d3856ba30acdbdaab5b",
+                "reference": "251cd10c1c86d9df20d54d3856ba30acdbdaab5b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.4.0"
             },
             "require-dev": {
                 "kherge/box": "~2.5",
@@ -62,9 +62,6 @@
             ],
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "classmap.php"
-                ],
                 "psr-4": {
                     "Leafo\\ScssPhp\\": "src/"
                 }
@@ -89,7 +86,7 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2015-10-04 16:25:29"
+            "time": "2015-11-11 22:15:07"
         },
         {
             "name": "matthiasmullie/minify",
@@ -564,7 +561,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0"

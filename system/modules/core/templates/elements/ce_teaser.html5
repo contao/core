@@ -7,6 +7,6 @@
 
   <?= $this->text ?>
 
-  <a href="<?= $this->href ?>" title="<?= $this->readMore ?>" class="more"><?= $this->more ?> <span class="invisible"><?= $this->headline ?></span></a>
+  <a href="<?= $this->href ?>" title="<?= $this->readMore ?>" class="more"><?= $this->more ?><span class="invisible"> <?= $this->headline ?></span></a>
 
 </div>

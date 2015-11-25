@@ -622,7 +622,7 @@ class Date
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseDate'] as $callback)
 			{
-				$strReturn = \System::importStatic($callback[0])->$callback[1]($strReturn, $strFormat, $intTstamp);
+				$strReturn = \System::importStatic($callback[0])->{$callback[1]}($strReturn, $strFormat, $intTstamp);
 			}
 		}
 
@@ -655,7 +655,7 @@ class Date
 	 *
 	 * @return string The resolved date string
 	 */
-	protected function resolveCustomModifiers($strDate)
+	protected static function resolveCustomModifiers($strDate)
 	{
 		if (strpos($strDate, '::') === false)
 		{

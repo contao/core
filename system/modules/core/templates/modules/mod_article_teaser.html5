@@ -7,7 +7,7 @@
 
     <div class="teaser">
       <?= $this->teaser ?>
-      <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"><?= $this->more ?> <span class="invisible"><?= $this->headline ?></span></a></p>
+      <p class="more"><a href="<?= $this->href ?>" title="<?= $this->readMore ?>"><?= $this->more ?><span class="invisible"> <?= $this->headline ?></span></a></p>
     </div>
 
   </div>

@@ -84,7 +84,7 @@ class ModulePersonalData extends \Module
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]();
+					$this->{$callback[0]}->{$callback[1]}();
 				}
 				elseif (is_callable($callback))
 				{
@@ -143,6 +143,12 @@ class ModulePersonalData extends \Module
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			// Map fileTrees to upload widgets (see #8091)
+			if ($arrData['inputType'] == 'fileTree')
+			{
+				$arrData['inputType'] = 'upload';
+			}
+
 			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
@@ -186,7 +192,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+						$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $this->User, $this);
 					}
 					elseif (is_callable($callback))
 					{
@@ -250,7 +256,7 @@ class ModulePersonalData extends \Module
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
+								$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $this->User, $this);
 							}
 							elseif (is_callable($callback))
 							{
@@ -336,7 +342,7 @@ class ModulePersonalData extends \Module
 				foreach ($GLOBALS['TL_HOOKS']['updatePersonalData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
+					$this->{$callback[0]}->{$callback[1]}($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
 
@@ -348,7 +354,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User, $this);
+						$this->{$callback[0]}->{$callback[1]}($this->User, $this);
 					}
 					elseif (is_callable($callback))
 					{
@@ -363,6 +369,7 @@ class ModulePersonalData extends \Module
 				$this->jumpToOrReload($objJumpTo->row());
 			}
 
+			\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['savedData']);
 			$this->reload();
 		}
 
@@ -386,5 +393,6 @@ class ModulePersonalData extends \Module
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
+		$this->Template->message = \Message::generate(false, true);
 	}
 }

@@ -47,12 +47,6 @@ class Folder extends \System
 	 */
 	protected $objModel;
 
-	/**
-	 * Synchronize the database
-	 * @var boolean
-	 */
-	protected $blnSyncDb = false;
-
 
 	/**
 	 * Check whether the folder exists
@@ -80,9 +74,6 @@ class Folder extends \System
 		$this->import('Files');
 		$this->strFolder = $strFolder;
 
-		// Check whether we need to sync the database
-		$this->blnSyncDb = $this->shouldBeSynchronized();
-
 		// Create the folder if it does not exist
 		if (!is_dir(TL_ROOT . '/' . $this->strFolder))
 		{
@@ -97,7 +88,7 @@ class Folder extends \System
 			}
 
 			// Update the database
-			if ($this->blnSyncDb)
+			if (\Dbafs::shouldBeSynchronized($this->strFolder))
 			{
 				$this->objModel = \Dbafs::addResource($this->strFolder);
 			}
@@ -160,7 +151,7 @@ class Folder extends \System
 		$this->Files->rrdir($this->strFolder, true);
 
 		// Update the database
-		if ($this->blnSyncDb)
+		if (\Dbafs::shouldBeSynchronized($this->strFolder))
 		{
 			$objFiles = \FilesModel::findMultipleByBasepath($this->strFolder . '/');
 
@@ -196,7 +187,7 @@ class Folder extends \System
 		$this->Files->rrdir($this->strFolder);
 
 		// Update the database
-		if ($this->blnSyncDb)
+		if (\Dbafs::shouldBeSynchronized($this->strFolder))
 		{
 			\Dbafs::deleteResource($this->strFolder);
 		}
@@ -236,9 +227,21 @@ class Folder extends \System
 		$return = $this->Files->rename($this->strFolder, $strNewName);
 
 		// Update the database AFTER the folder has been renamed
-		if ($this->blnSyncDb)
+		$syncSource = \Dbafs::shouldBeSynchronized($this->strFolder);
+		$syncTarget = \Dbafs::shouldBeSynchronized($strNewName);
+
+		// Synchronize the database
+		if ($syncSource && $syncTarget)
 		{
 			$this->objModel = \Dbafs::moveResource($this->strFolder, $strNewName);
+		}
+		elseif ($syncSource)
+		{
+			$this->objModel = \Dbafs::deleteResource($this->strFolder);
+		}
+		elseif ($syncTarget)
+		{
+			$this->objModel = \Dbafs::addResource($strNewName);
 		}
 
 		// Reset the object AFTER the database has been updated
@@ -271,9 +274,16 @@ class Folder extends \System
 		$this->Files->rcopy($this->strFolder, $strNewName);
 
 		// Update the database AFTER the folder has been renamed
-		if ($this->blnSyncDb)
+		$syncSource = \Dbafs::shouldBeSynchronized($this->strFolder);
+		$syncTarget = \Dbafs::shouldBeSynchronized($strNewName);
+
+		if ($syncSource && $syncTarget)
 		{
-			$this->objModel = \Dbafs::copyResource($this->strFolder, $strNewName);
+			\Dbafs::copyResource($this->strFolder, $strNewName);
+		}
+		elseif ($syncTarget)
+		{
+			\Dbafs::addResource($strNewName);
 		}
 
 		return true;
@@ -312,50 +322,12 @@ class Folder extends \System
 	 */
 	public function getModel()
 	{
-		if ($this->blnSyncDb && $this->objModel === null)
+		if ($this->objModel === null && \Dbafs::shouldBeSynchronized($this->strFolder))
 		{
 			$this->objModel = \FilesModel::findByPath($this->strFolder);
 		}
 
 		return $this->objModel;
-	}
-
-
-	/**
-	 * Check if the folder should be synchronized with the database
-	 *
-	 * @return bool True if the folder needs to be synchronized with the database
-	 */
-	public function shouldBeSynchronized()
-	{
-		if (\Config::get('uploadPath') == 'templates')
-		{
-			return false;
-		}
-
-		// Outside the files directory
-		if (strncmp($this->strFolder . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) !== 0)
-		{
-			return false;
-		}
-
-		// Check the excluded folders
-		if (\Config::get('fileSyncExclude') != '')
-		{
-			$arrExempt = array_map(function($e) {
-				return \Config::get('uploadPath') . '/' . $e;
-			}, trimsplit(',', \Config::get('fileSyncExclude')));
-
-			foreach ($arrExempt as $strExempt)
-			{
-				if (strncmp($strExempt . '/', $this->strFolder . '/', strlen($strExempt) + 1) === 0)
-				{
-					return false;
-				}
-			}
-		}
-
-		return true;
 	}
 
 
@@ -417,5 +389,18 @@ class Folder extends \System
 		}
 
 		return $intSize;
+	}
+
+
+	/**
+	 * Check if the folder should be synchronized with the database
+	 *
+	 * @return bool True if the folder needs to be synchronized with the database
+	 *
+	 * @deprecated Use Dbafs::shouldBeSynchronized() instead
+	 */
+	public function shouldBeSynchronized()
+	{
+		return \Dbafs::shouldBeSynchronized($this->strFolder);
 	}
 }

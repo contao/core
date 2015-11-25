@@ -186,16 +186,13 @@ class ModuleUnsubscribe extends \Module
 		$objChannels = \NewsletterChannelModel::findByIds($arrRemove);
 		$arrChannels = $objChannels->fetchEach('title');
 
-		// Log activity
-		$this->log($varInput . ' unsubscribed from ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
-
 		// HOOK: post unsubscribe callback
 		if (isset($GLOBALS['TL_HOOKS']['removeRecipient']) && is_array($GLOBALS['TL_HOOKS']['removeRecipient']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['removeRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($varInput, $arrRemove);
+				$this->{$callback[0]}->{$callback[1]}($varInput, $arrRemove);
 			}
 		}
 

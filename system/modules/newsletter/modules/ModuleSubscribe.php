@@ -176,16 +176,13 @@ class ModuleSubscribe extends \Module
 			$objRecipient->save();
 		}
 
-		// Log activity
-		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), __METHOD__, TL_NEWSLETTER);
-
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateRecipient']) && is_array($GLOBALS['TL_HOOKS']['activateRecipient']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['activateRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objRecipient->email, $arrAdd, $arrCids);
+				$this->{$callback[0]}->{$callback[1]}($objRecipient->email, $arrAdd, $arrCids);
 			}
 		}
 

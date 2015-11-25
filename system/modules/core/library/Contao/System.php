@@ -193,7 +193,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strText, $strFunction, $strCategory);
+				static::importStatic($callback[0])->{$callback[1]}($strText, $strFunction, $strCategory);
 			}
 		}
 	}
@@ -337,7 +337,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($strName, $strLanguage, $strCacheKey);
+				static::importStatic($callback[0])->{$callback[1]}($strName, $strLanguage, $strCacheKey);
 			}
 		}
 
@@ -404,7 +404,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($return, $countries);
+				static::importStatic($callback[0])->{$callback[1]}($return, $countries);
 			}
 		}
 
@@ -457,7 +457,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getLanguages'] as $callback)
 			{
-				static::importStatic($callback[0])->$callback[1]($return, $languages, $langsNative, $blnInstalledOnly);
+				static::importStatic($callback[0])->{$callback[1]}($return, $languages, $langsNative, $blnInstalledOnly);
 			}
 		}
 
@@ -567,7 +567,7 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['setCookie'] as $callback)
 			{
-				$objCookie = static::importStatic($callback[0])->$callback[1]($objCookie);
+				$objCookie = static::importStatic($callback[0])->{$callback[1]}($objCookie);
 			}
 		}
 

@@ -1,6 +1,79 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.5 (2015-11-25)
+--------------------------
+
+### Fixed
+Fix the domain when forwarding in the page controllers (see #8123).
+
+### Fixed
+Use the feed URL instead of the base URL for enclosures (see #8116).
+
+### Fixed
+Fix the `<time>` tags and standardize the event templates (see #8012).
+
+### Fixed
+Handle empty `href` attributes in the book navigation (see #8104).
+
+### Fixed
+Do not store e-mail addresses in the newsletter (un)subscription log. 
+
+### Fixed
+Correctly encrypt fields upon registration (see #8110).
+
+### Fixed
+Correctly render required single checkboxes in the back end (see #7731).
+
+### Fixed
+Correctly store multi select menus if no value is selected (see #7760).
+
+### Fixed
+Prevent recursion when rendering 403/404 pages (see #8060).
+
+### Fixed
+Map the `FileTree` widget to `FormFileUpload` in the front end (see #8091).
+
+### Fixed
+Preserve the user input when loading image meta data (see #8108).
+
+### Fixed
+Show the "toggle all" buttons in "edit multiple" mode (see #5622).
+
+### Fixed
+Disable the gallery pagination if the images are sorted randomly (see #8033).
+
+### Fixed
+Set the correct empty value when copying elements (see #8064).
+
+### Fixed
+Correctly hide forward pages with no public subpages (see #8054).
+
+### Fixed
+Correctly render the page picker if the value starts with `#` (see #8055).
+
+### Fixed
+Correctly render the "group" option in the radio button and checkbox widgets.
+
+### Fixed
+Correctly set the ID when toggling fields via Ajax (see #8043).
+
+### Fixed
+Support call, sms and app hyperlinks when converting relative URLs (see #8102).
+
+### Fixed
+Correctly check if a folder is protected when loading subfolders.
+
+### Fixed
+Correctly check the synchronization status when copying or moving files.
+
+### Fixed
+Adjust the code to be compatible with PHP7 (see #8018).
+
+### Fixed
+Correctly show the UUID in the back end file manager popup (see #8058). 
+
+
 Version 3.5.4 (2015-10-09)
 --------------------------
 

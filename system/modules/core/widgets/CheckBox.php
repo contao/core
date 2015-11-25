@@ -87,7 +87,7 @@ class CheckBox extends \Widget
 		}
 
 		// The "required" attribute only makes sense for single checkboxes
-		if (!$this->multiple && $this->mandatory)
+		if ($this->mandatory && !$this->multiple)
 		{
 			$this->arrAttributes['required'] = 'required';
 		}
@@ -151,7 +151,7 @@ class CheckBox extends \Widget
 			return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container%s"><legend>%s%s%s%s</legend><input type="hidden" name="%s" value="">%s%s</fieldset>%s',
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
-							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
 							$this->strLabel,
 							($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 							$this->xlabel,
@@ -182,13 +182,15 @@ class CheckBox extends \Widget
 	 */
 	protected function generateCheckbox($arrOption, $i)
 	{
-		return sprintf('<input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> <label for="opt_%s">%s</label>',
+		return sprintf('<input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> <label for="opt_%s">%s%s%s</label>',
 						$this->strName . ($this->multiple ? '[]' : ''),
 						$this->strId.'_'.$i,
 						($this->multiple ? specialchars($arrOption['value']) : 1),
 						$this->isChecked($arrOption),
 						$this->getAttributes(),
 						$this->strId.'_'.$i,
-						$arrOption['label']);
+						($this->mandatory && !$this->multiple ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
+						$arrOption['label'],
+						($this->mandatory && !$this->multiple ? '<span class="mandatory">*</span>' : ''));
 	}
 }

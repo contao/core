@@ -264,7 +264,7 @@ class Calendar extends \Frontend
 					{
 						foreach ($event['enclosure'] as $enclosure)
 						{
-							$objItem->addEnclosure($enclosure);
+							$objItem->addEnclosure($enclosure, $strLink);
 						}
 					}
 

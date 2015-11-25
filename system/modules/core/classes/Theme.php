@@ -270,7 +270,7 @@ class Theme extends \Backend
 			{
 				foreach ($GLOBALS['TL_HOOKS']['compareThemeFiles'] as $callback)
 				{
-					$return .= \System::importStatic($callback[0])->$callback[1]($xml, $objArchive);
+					$return .= \System::importStatic($callback[0])->{$callback[1]}($xml, $objArchive);
 				}
 			}
 
@@ -375,7 +375,12 @@ class Theme extends \Backend
 			{
 				foreach ($arrNewFolders as $strFolder)
 				{
-					\Dbafs::addResource($this->customizeUploadPath($strFolder));
+					$strCustomized = $this->customizeUploadPath($strFolder);
+
+					if (\Dbafs::shouldBeSynchronized($strCustomized))
+					{
+						\Dbafs::addResource($strCustomized);
+					}
 				}
 			}
 
@@ -645,7 +650,7 @@ class Theme extends \Backend
 
 				foreach ($GLOBALS['TL_HOOKS']['extractThemeFiles'] as $callback)
 				{
-					\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $intThemeId, $arrMapper);
+					\System::importStatic($callback[0])->{$callback[1]}($xml, $objArchive, $intThemeId, $arrMapper);
 				}
 			}
 
@@ -713,7 +718,7 @@ class Theme extends \Backend
 		{
 			foreach ($GLOBALS['TL_HOOKS']['exportTheme'] as $callback)
 			{
-				\System::importStatic($callback[0])->$callback[1]($xml, $objArchive, $objTheme->id);
+				\System::importStatic($callback[0])->{$callback[1]}($xml, $objArchive, $objTheme->id);
 			}
 		}
 

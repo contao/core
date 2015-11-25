@@ -276,8 +276,8 @@ class ContentGallery extends \ContentElement
 		$total = count($images);
 		$limit = $total;
 
-		// Pagination
-		if ($this->perPage > 0)
+		// Paginate the result of not randomly sorted (see #8033)
+		if ($this->perPage > 0 && $this->sortBy != 'random')
 		{
 			// Get the current page
 			$id = 'page_g' . $this->id;

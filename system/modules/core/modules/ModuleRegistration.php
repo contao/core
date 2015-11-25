@@ -80,7 +80,7 @@ class ModuleRegistration extends \Module
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]();
+					$this->{$callback[0]}->{$callback[1]}();
 				}
 				elseif (is_callable($callback))
 				{
@@ -167,12 +167,19 @@ class ModuleRegistration extends \Module
 		{
 			$arrData = $GLOBALS['TL_DCA']['tl_member']['fields'][$field];
 
-			// Map checkboxWizard to regular checkbox widget
+			// Map checkboxWizards to regular checkbox widgets
 			if ($arrData['inputType'] == 'checkboxWizard')
 			{
 				$arrData['inputType'] = 'checkbox';
 			}
 
+			// Map fileTrees to upload widgets (see #8091)
+			if ($arrData['inputType'] == 'fileTree')
+			{
+				$arrData['inputType'] = 'upload';
+			}
+
+			/** @var \Widget $strClass */
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
@@ -239,7 +246,7 @@ class ModuleRegistration extends \Module
 							if (is_array($callback))
 							{
 								$this->import($callback[0]);
-								$varValue = $this->$callback[0]->$callback[1]($varValue, null);
+								$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, null);
 							}
 							elseif (is_callable($callback))
 							{
@@ -267,6 +274,13 @@ class ModuleRegistration extends \Module
 						$varValue = $objWidget->getEmptyValue();
 					}
 
+					// Encrypt the value (see #7815)
+					if ($arrData['eval']['encrypt'])
+					{
+						$varValue = \Encryption::encrypt($varValue);
+					}
+
+					// Set the new value
 					$arrUser[$field] = $varValue;
 				}
 			}
@@ -441,7 +455,7 @@ class ModuleRegistration extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objNewUser->id, $arrData, $this);
+				$this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this);
 			}
 		}
 
@@ -501,7 +515,7 @@ class ModuleRegistration extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objMember, $this);
+				$this->{$callback[0]}->{$callback[1]}($objMember, $this);
 			}
 		}
 

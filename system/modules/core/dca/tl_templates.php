@@ -58,7 +58,8 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleAll'],
 				'href'                => 'tg=all',
-				'class'               => 'header_toggle'
+				'class'               => 'header_toggle',
+				'showOnSelect'        => true
 			),
 			'all' => array
 			(
