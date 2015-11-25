@@ -110,19 +110,25 @@ class FeedItem
 	 * Add an enclosure
 	 *
 	 * @param string $strFile The file path
+	 * @param string $strUrl  The base URL
 	 */
-	public function addEnclosure($strFile)
+	public function addEnclosure($strFile, $strUrl=null)
 	{
 		if ($strFile == '' || !file_exists(TL_ROOT . '/' . $strFile))
 		{
 			return;
 		}
 
+		if ($strUrl === null)
+		{
+			$strUrl = \Environment::get('base');
+		}
+
 		$objFile = new \File($strFile, true);
 
 		$this->arrData['enclosure'][] = array
 		(
-			'url' => \Environment::get('base') . \System::urlEncode($strFile),
+			'url' => $strUrl . \System::urlEncode($strFile),
 			'length' => $objFile->size,
 			'type' => $objFile->mime
 		);

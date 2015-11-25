@@ -117,11 +117,18 @@ class ModuleBreadcrumb extends \Module
 					break;
 
 				case 'forward':
-					$objNext = \PageModel::findPublishedById($pages[$i]['jumpTo']);
-
-					if ($objNext !== null)
+					if (($objNext = \PageModel::findPublishedById($pages[$i]['jumpTo'])) !== null)
 					{
-						$href = $this->generateFrontendUrl($objNext->row());
+						$strForceLang = null;
+						$objNext->loadDetails();
+
+						// Check the target page language (see #4706)
+						if (\Config::get('addLanguageToUrl'))
+						{
+							$strForceLang = $objNext->language;
+						}
+
+						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
 						break;
 					}
 					// DO NOT ADD A break; STATEMENT
@@ -211,7 +218,7 @@ class ModuleBreadcrumb extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['generateBreadcrumb'] as $callback)
 			{
 				$this->import($callback[0]);
-				$items = $this->$callback[0]->$callback[1]($items, $this);
+				$items = $this->{$callback[0]}->{$callback[1]}($items, $this);
 			}
 		}
 

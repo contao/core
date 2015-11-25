@@ -269,7 +269,7 @@ class ModuleArticle extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['compileArticle'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this->Template, $this->arrData, $this);
+				$this->{$callback[0]}->{$callback[1]}($this->Template, $this->arrData, $this);
 			}
 		}
 	}
@@ -303,7 +303,7 @@ class ModuleArticle extends \Module
 			foreach ($GLOBALS['TL_HOOKS']['printArticleAsPdf'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($strArticle, $this);
+				$this->{$callback[0]}->{$callback[1]}($strArticle, $this);
 			}
 		}
 

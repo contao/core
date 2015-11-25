@@ -402,7 +402,7 @@ class Image
 		{
 			foreach ($GLOBALS['TL_HOOKS']['executeResize'] as $callback)
 			{
-				$return = \System::importStatic($callback[0])->$callback[1]($this);
+				$return = \System::importStatic($callback[0])->{$callback[1]}($this);
 
 				if (is_string($return))
 				{
@@ -478,7 +478,7 @@ class Image
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
 			{
-				$return = \System::importStatic($callback[0])->$callback[1]($this->getOriginalPath(), $this->getTargetWidth(), $this->getTargetHeight(), $this->getResizeMode(), $this->getCacheName(), $this->fileObj, $this->getTargetPath(), $this);
+				$return = \System::importStatic($callback[0])->{$callback[1]}($this->getOriginalPath(), $this->getTargetWidth(), $this->getTargetHeight(), $this->getResizeMode(), $this->getCacheName(), $this->fileObj, $this->getTargetPath(), $this);
 
 				if (is_string($return))
 				{
@@ -814,6 +814,11 @@ class Image
 	 */
 	public static function getHtml($src, $alt='', $attributes='')
 	{
+		if ($src == '')
+		{
+			return '';
+		}
+
 		$static = TL_FILES_URL;
 		$src = rawurldecode($src);
 
@@ -830,7 +835,7 @@ class Image
 			}
 		}
 
-		if (!file_exists(TL_ROOT .'/'. $src))
+		if (!is_file(TL_ROOT .'/'. $src))
 		{
 			return '';
 		}

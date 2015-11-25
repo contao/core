@@ -36,21 +36,9 @@
 	background-color:#f9f9f9;
 	border:1px solid #c8c8c8;
 }
-.firefox .styled_select {
-	line-height:21px;
-}
-.win.firefox .styled_select {
-	line-height:22px;
-}
 .tl_subpanel .styled_select {
 	font-size:11px;
 	line-height:18px;
-}
-.firefox .tl_subpanel .styled_select {
-	line-height:19px;
-}
-.win.firefox .tl_subpanel .styled_select {
-	line-height:20px;
 }
 .styled_select span {
 	padding:0 3px;
@@ -64,7 +52,6 @@
 	right:0;
 	border-left:1px solid #aaa;
 	background:#eee;
-	border-radius:0 3px 3px 0;
 	background-image:-moz-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-webkit-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-o-linear-gradient(bottom, #ccc 0%, #eee 60%);

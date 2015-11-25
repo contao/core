@@ -132,17 +132,48 @@ class FormRadioButton extends \Widget
 	protected function getOptions()
 	{
 		$arrOptions = array();
+		$blnHasGroups = false;
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
+			if ($arrOption['group'])
+			{
+				if ($blnHasGroups)
+				{
+					$arrOptions[] = array
+					(
+						'type' => 'group_end'
+					);
+				}
+
+				$arrOptions[] = array
+				(
+					'type'  => 'group_start',
+					'label' => specialchars($arrOption['label'])
+				);
+
+				$blnHasGroups = true;
+			}
+			else
+			{
+				$arrOptions[] = array
+				(
+					'type'       => 'option',
+					'name'       => $this->strName,
+					'id'         => $this->strId . '_' . $i,
+					'value'      => $arrOption['value'],
+					'checked'    => $this->isChecked($arrOption),
+					'attributes' => $this->getAttributes(),
+					'label'      => $arrOption['label']
+				);
+			}
+		}
+
+		if ($blnHasGroups)
+		{
 			$arrOptions[] = array
 			(
-				'name'       => $this->strName,
-				'id'         => $this->strId . '_' . $i,
-				'value'      => $arrOption['value'],
-				'checked'    => $this->isChecked($arrOption),
-				'attributes' => $this->getAttributes(),
-				'label'      => $arrOption['label']
+				'type' => 'group_end'
 			);
 		}
 
@@ -193,7 +224,7 @@ class FormRadioButton extends \Widget
 			return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
-							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+							($this->mandatory ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].' </span>' : ''),
 							$this->strLabel,
 							($this->mandatory ? '<span class="mandatory">*</span>' : ''),
 							$this->strError,

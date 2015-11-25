@@ -44,14 +44,10 @@ class PageForward extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		$strForceLang = null;
+		$objNextPage->loadDetails();
 
 		// Check the target page language (see #4706)
-		if (\Config::get('addLanguageToUrl'))
-		{
-			$objNextPage->loadDetails(); // see #3983
-			$strForceLang = $objNextPage->language;
-		}
+		$strForceLang = \Config::get('addLanguageToUrl') ? $objNextPage->language : null;
 
 		$strGet = '';
 		$strQuery = \Environment::get('queryString');
@@ -64,7 +60,7 @@ class PageForward extends \Frontend
 
 			foreach ($arrChunks as $strChunk)
 			{
-				list($k,) = explode('=', $strChunk, 2);
+				list($k) = explode('=', $strChunk, 2);
 				$arrQuery[] = $k;
 			}
 		}
@@ -108,6 +104,6 @@ class PageForward extends \Frontend
 			$strQuery = '?' . $strQuery;
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang, true) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }

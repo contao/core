@@ -80,7 +80,7 @@ function Swipe(container, options) {
       var slide = slides[pos];
 
       slide.style.width = width + 'px';
-      slide.setAttribute('data-index', pos);
+      slide.setAttribute('data-index', pos.toString());
 
       if (browser.transitions) {
         slide.style.left = (pos * -width) + 'px';
@@ -163,7 +163,7 @@ function Swipe(container, options) {
 
           var b = document.createElement('b');
           b.innerHTML = '•';
-          b.setAttribute('data-index', i);
+          b.setAttribute('data-index', i.toString());
 
           if (i == position) b.className = 'active';
 

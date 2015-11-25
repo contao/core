@@ -44,7 +44,7 @@ class PageRegular extends \Frontend
 			foreach ($GLOBALS['TL_HOOKS']['getPageLayout'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+				$this->{$callback[0]}->{$callback[1]}($objPage, $objLayout, $this);
 			}
 		}
 
@@ -130,7 +130,7 @@ class PageRegular extends \Frontend
 						continue;
 					}
 
-					$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+					$this->Template->{$arrModule['col']} .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
 				}
 				else
 				{
@@ -153,7 +153,7 @@ class PageRegular extends \Frontend
 			foreach ($GLOBALS['TL_HOOKS']['generatePage'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+				$this->{$callback[0]}->{$callback[1]}($objPage, $objLayout, $this);
 			}
 		}
 

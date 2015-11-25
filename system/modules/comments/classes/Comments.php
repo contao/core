@@ -369,7 +369,7 @@ class Comments extends \Frontend
 				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($objComment->id, $arrSet, $this);
+					$this->{$callback[0]}->{$callback[1]}($objComment->id, $arrSet, $this);
 				}
 			}
 

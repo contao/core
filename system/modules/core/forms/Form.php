@@ -60,6 +60,12 @@ class Form extends \Hybrid
 	 */
 	protected $strTemplate = 'form';
 
+	/**
+	 * Form usages during same request
+	 * @var array
+	 */
+	static protected $arrFormUsages = array();
+
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
@@ -126,7 +132,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['compileFormFields'] as $callback)
 			{
 				$this->import($callback[0]);
-				$arrFields = $this->$callback[0]->$callback[1]($arrFields, $formId, $this);
+				$arrFields = $this->{$callback[0]}->{$callback[1]}($arrFields, $formId, $this);
 			}
 		}
 
@@ -188,7 +194,7 @@ class Form extends \Hybrid
 					foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 					{
 						$this->import($callback[0]);
-						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
+						$objWidget = $this->{$callback[0]}->{$callback[1]}($objWidget, $formId, $this->arrData, $this);
 					}
 				}
 
@@ -203,7 +209,7 @@ class Form extends \Hybrid
 						foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
 						{
 							$this->import($callback[0]);
-							$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData, $this);
+							$objWidget = $this->{$callback[0]}->{$callback[1]}($objWidget, $formId, $this->arrData, $this);
 						}
 					}
 
@@ -268,10 +274,28 @@ class Form extends \Hybrid
 			$strAttributes .= ' class="' . $arrAttributes[1] . '"';
 		}
 
+		$formId = $arrAttributes[0] ?: 'f'.$this->id;
+
+		// Count up form usages
+		if (isset(static::$arrFormUsages[$formId]))
+		{
+			static::$arrFormUsages[$formId]++;
+		}
+		else
+		{
+			static::$arrFormUsages[$formId] = 1;
+		}
+
+		// Adjust form id
+		if (static::$arrFormUsages[$formId] > 1)
+		{
+			$formId .= '_' . static::$arrFormUsages[$formId];
+		}
+
 		$this->Template->hasError = $doNotSubmit;
 		$this->Template->attributes = $strAttributes;
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
-		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
+		$this->Template->formId = $formId;
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
 		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';
@@ -301,7 +325,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['prepareFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $arrLabels, $this, $arrFields);
+				$this->{$callback[0]}->{$callback[1]}($arrSubmitted, $arrLabels, $this, $arrFields);
 			}
 		}
 
@@ -485,7 +509,7 @@ class Form extends \Hybrid
 				foreach ($GLOBALS['TL_HOOKS']['storeFormData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrSet = $this->$callback[0]->$callback[1]($arrSet, $this);
+					$arrSet = $this->{$callback[0]}->{$callback[1]}($arrSet, $this);
 				}
 			}
 
@@ -516,7 +540,7 @@ class Form extends \Hybrid
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
+				$this->{$callback[0]}->{$callback[1]}($arrSubmitted, $this->arrData, $arrFiles, $arrLabels, $this);
 			}
 		}
 

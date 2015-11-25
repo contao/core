@@ -183,7 +183,7 @@ class tl_log extends Backend
 					foreach ($GLOBALS['TL_HOOKS']['colorizeLogEntries'] as $callback)
 					{
 						$this->import($callback[0]);
-						$label = $this->$callback[0]->$callback[1]($row, $label);
+						$label = $this->{$callback[0]}->{$callback[1]}($row, $label);
 					}
 				}
 				break;

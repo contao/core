@@ -12,21 +12,26 @@
           <input type="hidden" name="FORM_SUBMIT" value="<?= $this->formId ?>">
           <input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
           <div class="widget">
-            <?= $this->fields['name']->generateWithError() ?> <?= $this->fields['name']->generateLabel() ?>
+            <?= $this->fields['name']->generateWithError() ?>
+            <?= $this->fields['name']->generateLabel() ?>
           </div>
           <div class="widget">
-            <?= $this->fields['email']->generateWithError() ?> <?= $this->fields['email']->generateLabel() ?>
+            <?= $this->fields['email']->generateWithError() ?>
+            <?= $this->fields['email']->generateLabel() ?>
           </div>
           <div class="widget">
-            <?= $this->fields['website']->generateWithError() ?> <?= $this->fields['website']->generateLabel() ?>
+            <?= $this->fields['website']->generateWithError() ?>
+            <?= $this->fields['website']->generateLabel() ?>
           </div>
           <?php if (isset($this->fields['captcha'])): ?>
             <div class="widget">
-              <?= $this->fields['captcha']->generateWithError() ?> <label for="ctrl_captcha"><?= $this->fields['captcha']->generateQuestion() ?><span class="mandatory">*</span></label>
+              <?= $this->fields['captcha']->generateWithError() ?>
+              <label for="ctrl_captcha"><?= $this->fields['captcha']->generateQuestion() ?><span class="mandatory">*</span></label>
             </div>
           <?php endif; ?>
           <div class="widget">
-            <?= $this->fields['comment']->generateWithError() ?> <label for="ctrl_<?= $this->fields['comment']->id ?>" class="invisible"><?= $this->fields['comment']->label ?></label>
+            <?= $this->fields['comment']->generateWithError() ?>
+            <label for="ctrl_<?= $this->fields['comment']->id ?>" class="invisible"><?= $this->fields['comment']->label ?></label>
           </div>
           <div class="widget">
             <?= $this->fields['notify']->generateWithError() ?>

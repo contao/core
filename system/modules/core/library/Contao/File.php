@@ -138,10 +138,6 @@ class File extends \System
 
 		$this->strFile = $strFile;
 		$this->blnDoNotCreate = $blnDoNotCreate;
-		$objFolder = new \Folder(dirname($strFile));
-
-		// Check whether we need to sync the database
-		$this->blnSyncDb = $objFolder->shouldBeSynchronized();
 
 		if (!$blnDoNotCreate)
 		{
@@ -509,7 +505,7 @@ class File extends \System
 		$return = $this->Files->delete($this->strFile);
 
 		// Update the database
-		if ($this->blnSyncDb)
+		if (\Dbafs::shouldBeSynchronized($this->strFile))
 		{
 			\Dbafs::deleteResource($this->strFile);
 		}
@@ -563,7 +559,7 @@ class File extends \System
 		}
 
 		// Update the database
-		if ($this->blnSyncDb)
+		if (\Dbafs::shouldBeSynchronized($this->strFile))
 		{
 			$this->objModel = \Dbafs::addResource($this->strFile);
 		}
@@ -579,7 +575,7 @@ class File extends \System
 	 */
 	public function getModel()
 	{
-		if ($this->blnSyncDb && $this->objModel === null)
+		if ($this->objModel === null && \Dbafs::shouldBeSynchronized($this->strFile))
 		{
 			$this->objModel = \FilesModel::findByPath($this->strFile);
 		}
@@ -660,9 +656,21 @@ class File extends \System
 		$return = $this->Files->rename($this->strFile, $strNewName);
 
 		// Update the database AFTER the file has been renamed
-		if ($this->blnSyncDb)
+		$syncSource = \Dbafs::shouldBeSynchronized($this->strFile);
+		$syncTarget = \Dbafs::shouldBeSynchronized($strNewName);
+
+		// Synchronize the database
+		if ($syncSource && $syncTarget)
 		{
 			$this->objModel = \Dbafs::moveResource($this->strFile, $strNewName);
+		}
+		elseif ($syncSource)
+		{
+			$this->objModel = \Dbafs::deleteResource($this->strFile);
+		}
+		elseif ($syncTarget)
+		{
+			$this->objModel = \Dbafs::addResource($strNewName);
 		}
 
 		// Reset the object AFTER the database has been updated
@@ -697,9 +705,17 @@ class File extends \System
 		$this->Files->copy($this->strFile, $strNewName);
 
 		// Update the database AFTER the file has been renamed
-		if ($this->blnSyncDb)
+		$syncSource = \Dbafs::shouldBeSynchronized($this->strFile);
+		$syncTarget = \Dbafs::shouldBeSynchronized($strNewName);
+
+		// Synchronize the database
+		if ($syncSource && $syncTarget)
 		{
-			$this->objModel = \Dbafs::copyResource($this->strFile, $strNewName);
+			\Dbafs::copyResource($this->strFile, $strNewName);
+		}
+		elseif ($syncTarget)
+		{
+			\Dbafs::addResource($strNewName);
 		}
 
 		return true;

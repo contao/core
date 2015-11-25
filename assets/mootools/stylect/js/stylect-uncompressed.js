@@ -16,12 +16,6 @@
 var Stylect =
 {
 	/**
-	 * Check for WebKit
-	 * @member {boolean}
- 	 */
-	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
-
-	/**
 	 * Create the div template
 	 * @member {string}
  	 */
@@ -100,11 +94,6 @@ var Stylect =
 
 			// Hide the original select menu
 			el.setStyle('opacity', 0);
-
-			// Apply an extra bottom margin in WebKit
-			if (Stylect.isWebkit) {
-				el.setStyle('margin-bottom', '4px');
-			}
 
 			// Update the div onchange
 			el.addEvents({

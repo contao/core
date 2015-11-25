@@ -27,6 +27,13 @@ class Dbafs
 {
 
 	/**
+	 * Synchronize the database
+	 * @var array
+	 */
+	protected static $arrShouldBeSynchronized = array();
+
+
+	/**
 	 * Adds a file or folder with its parent folders
 	 *
 	 * @param string  $strResource      The path to the file or folder
@@ -358,6 +365,8 @@ class Dbafs
 	 * Removes a file or folder
 	 *
 	 * @param string $strResource The path to the file or folder
+	 *
+	 * @return null Explicitly return null
 	 */
 	public static function deleteResource($strResource)
 	{
@@ -382,6 +391,8 @@ class Dbafs
 		}
 
 		static::updateFolderHashes(dirname($strResource));
+
+		return null;
 	}
 
 
@@ -695,5 +706,68 @@ class Dbafs
 
 		// Return the path to the log file
 		return $strLog;
+	}
+
+
+	/**
+	 * Check if the current resource should be synchronized with the database
+	 *
+	 * @param string $strPath The relative path
+	 *
+	 * @return bool True if the current resource needs to be synchronized with the database
+	 */
+	public static function shouldBeSynchronized($strPath)
+	{
+		if (!isset(static::$arrShouldBeSynchronized[$strPath]) || !is_bool(static::$arrShouldBeSynchronized[$strPath]))
+		{
+			static::$arrShouldBeSynchronized[$strPath] = !static::isFileSyncExclude($strPath);
+		}
+
+		return static::$arrShouldBeSynchronized[$strPath];
+	}
+
+
+	/**
+	 * Check if a file or folder is excluded from synchronization
+	 *
+	 * @param string $strPath The relative path
+	 *
+	 * @return bool True if the file or folder is excluded from synchronization
+	 */
+	protected static function isFileSyncExclude($strPath)
+	{
+		if (\Config::get('uploadPath') == 'templates')
+		{
+			return true;
+		}
+
+		if (is_file(TL_ROOT . '/' . $strPath))
+		{
+			$strPath = dirname($strPath);
+		}
+
+		// Outside the files directory
+		if (strncmp($strPath . '/', \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) !== 0)
+		{
+			return true;
+		}
+
+		// Check the excluded folders
+		if (\Config::get('fileSyncExclude') != '')
+		{
+			$arrExempt = array_map(function($e) {
+				return \Config::get('uploadPath') . '/' . $e;
+			}, trimsplit(',', \Config::get('fileSyncExclude')));
+
+			foreach ($arrExempt as $strExempt)
+			{
+				if (strncmp($strExempt . '/', $strPath . '/', strlen($strExempt) + 1) === 0)
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

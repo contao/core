@@ -56,6 +56,13 @@ class PageError403 extends \Frontend
 			/** @var \PageModel $objPage */
 			global $objPage;
 
+			// Die nicely if the page is a 403 page already (see #8060)
+			if ($objPage && $objPage->type == 'error_403')
+			{
+				header('HTTP/1.1 403 Forbidden');
+				die_nicely('be_forbidden', 'Forbidden');
+			}
+
 			$objPage = $obj403->loadDetails();
 
 			/** @var \PageRegular $objHandler */
@@ -77,6 +84,6 @@ class PageError403 extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->loadDetails()->row(), null, $objRootPage->language, true), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }

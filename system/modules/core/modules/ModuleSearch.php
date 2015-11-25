@@ -126,7 +126,7 @@ class ModuleSearch extends \Module
 				foreach ($GLOBALS['TL_HOOKS']['customizeSearch'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($arrPages, $strKeywords, $strQueryType, $blnFuzzy);
+					$this->{$callback[0]}->{$callback[1]}($arrPages, $strKeywords, $strQueryType, $blnFuzzy);
 				}
 			}
 

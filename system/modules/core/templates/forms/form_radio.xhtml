@@ -6,7 +6,7 @@
     <?php if ($this->label): ?>
       <legend>
         <?php if ($this->mandatory): ?>
-          <span class="invisible"><?= $this->mandatoryField ?></span> <?= $this->label ?><span class="mandatory">*</span>
+          <span class="invisible"><?= $this->mandatoryField ?> </span><?= $this->label ?><span class="mandatory">*</span>
         <?php else: ?>
           <?= $this->label ?>
         <?php endif; ?>
@@ -18,7 +18,18 @@
     <?php endif; ?>
 
     <?php foreach ($this->getOptions() as $option): ?>
-      <span><input type="radio" name="<?= $option['name'] ?>" id="opt_<?= $option['id'] ?>" class="radio" value="<?= $option['value'] ?>"<?= $option['checked'] ?><?= $option['attributes'] ?> /> <label id="lbl_<?= $option['id'] ?>" for="opt_<?= $option['id'] ?>"><?= $option['label'] ?></label></span>
+      <?php if ($option['type'] == 'group_start'): ?>
+        <fieldset>
+        <legend><?= $option['label'] ?></legend>
+      <?php endif; ?>
+
+      <?php if ($option['type'] == 'option'): ?>
+        <span><input type="radio" name="<?= $option['name'] ?>" id="opt_<?= $option['id'] ?>" class="radio" value="<?= $option['value'] ?>"<?= $option['checked'] ?><?= $option['attributes'] ?> /> <label id="lbl_<?= $option['id'] ?>" for="opt_<?= $option['id'] ?>"><?= $option['label'] ?></label></span>
+      <?php endif; ?>
+
+      <?php if ($option['type'] == 'group_end'): ?>
+        </fieldset>
+      <?php endif; ?>
     <?php endforeach; ?>
 
   </fieldset>

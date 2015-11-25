@@ -177,7 +177,22 @@ class FileSelector extends \Widget
 
 		$this->convertValuesToPaths();
 
-		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount);
+		$blnProtected = false;
+		$strPath = $folder;
+
+		// Check for public parent folders (see #213)
+		while ($strPath != '' && $strPath != '.')
+		{
+			if (file_exists(TL_ROOT . '/' . $strPath . '/.htaccess'))
+			{
+				$blnProtected = true;
+				break;
+			}
+
+			$strPath = dirname($strPath);
+		}
+
+		return $this->renderFiletree(TL_ROOT . '/' . $folder, ($level * 20), $mount, $blnProtected);
 	}
 
 
@@ -300,7 +315,7 @@ class FileSelector extends \Widget
 			}
 
 			$protected = ($blnProtected === true || array_search('.htaccess', $content) !== false) ? true : false;
-			$folderImg = ($blnIsOpen && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
+			$folderImg = $protected ? 'folderCP.gif' : 'folderC.gif';
 			$folderLabel = ($this->files || $this->filesOnly) ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
 			// Add the current folder

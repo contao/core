@@ -333,6 +333,24 @@ class tl_image_size_item extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
 	{
+		// Set the ID and action
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		if ($dc)
+		{
+			$dc->id = $intId; // see #8043
+		}
+
+		$this->checkPermission();
+
+		// Check the field access
+		if (!$this->User->hasAccess('tl_image_size_item::invisible', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish image size item ID "'.$intId.'"', __METHOD__, TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$objVersions = new Versions('tl_image_size_item', $intId);
 		$objVersions->initialize();
 
@@ -344,7 +362,7 @@ class tl_image_size_item extends Backend
 				if (is_array($callback))
 				{
 					$this->import($callback[0]);
-					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+					$blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, ($dc ?: $this));
 				}
 				elseif (is_callable($callback))
 				{

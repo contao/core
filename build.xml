@@ -28,6 +28,7 @@
       <arg value="install" />
       <arg value="--prefer-dist" />
       <arg value="--no-dev" />
+      <arg value="--no-scripts" />
     </exec>
   </target>
 
@@ -39,6 +40,7 @@
     <delete dir="contao-${version}/.tx" />
     <delete dir="contao-${version}/.git" />
     <delete dir="contao-${version}/vendor/simplepie/simplepie/compatibility_test" />
+    <delete dir="contao-${version}/vendor/simplepie/simplepie/demo" />
     <delete dir="contao-${version}/vendor/tecnickcom/tcpdf/examples" />
     <delete includeemptydirs="true" verbose="true">
       <fileset dir="contao-${version}/vendor" includes="*/*/demo/**,*/*/doc/**,*/*/docs/**,*/*/notes/**,*/*/site/**,*/*/test/**,*/*/tests/**" />

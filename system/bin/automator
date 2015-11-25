@@ -60,7 +60,7 @@ if (!in_array($argv[1], $commands)) {
 
 // Run
 $automator = new Automator();
-$automator->$argv[1]();
+$automator->{$argv[1]}();
 
 // Release the lock
 flock($file, LOCK_UN);
