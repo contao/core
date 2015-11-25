@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Fix the domain when forwarding in the page controllers (see #8123).
+
+### Fixed
 Use the feed URL instead of the base URL for enclosures (see #8116).
 
 ### Fixed
