@@ -5,6 +5,9 @@ Version 3.5.5 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Use the feed URL instead of the base URL for enclosures (see #8116).
+
+### Fixed
 Fix the `<time>` tags and standardize the event templates (see #8012).
 
 ### Fixed
