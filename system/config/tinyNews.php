@@ -25,6 +25,9 @@ window.tinymce && tinymce.init({
   element_format: "html",
   document_base_url: "<?php echo Environment::get('base'); ?>",
   entities: "160,nbsp,60,lt,62,gt,173,shy",
+  setup: function(editor) {
+    editor.getElement().removeAttribute('required');
+  },
   init_instance_callback: function(editor) {
     editor.on('focus', function(){ Backend.getScrollOffset(); });
   },
