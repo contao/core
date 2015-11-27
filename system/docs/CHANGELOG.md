@@ -5,6 +5,9 @@ Version 3.5.6 (2015-XX-XX)
 --------------------------
 
 ### Fixed
+Handle relative URLs when following redirects in the Request class (see #7799).
+
+### Fixed
 Correctly handle empty UUIDs when comparing versions (see #7971).
 
 ### Fixed
