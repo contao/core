@@ -1,6 +1,22 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.6 (2015-11-27)
+--------------------------
+
+### Fixed
+Correctly determin the protocol delimiter in `Idna::encodeUrl()`.
+
+### Fixed
+Handle relative URLs when following redirects in the Request class (see #7799).
+
+### Fixed
+Correctly handle empty UUIDs when comparing versions (see #7971).
+
+### Fixed
+Remove the "required" attribute when setting up TinyMCE (see #8131).
+
+
 Version 3.5.5 (2015-11-25)
 --------------------------
 

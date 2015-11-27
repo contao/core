@@ -1388,7 +1388,7 @@ var Backend =
 			}
 			$(oid).value = els.join(',');
 		});
-		list.fireEvent("complete"); // Initial sorting
+		list.fireEvent('complete'); // Initial sorting
 	},
 
 	/**
