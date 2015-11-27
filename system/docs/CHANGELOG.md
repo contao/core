@@ -5,7 +5,7 @@ Version 3.5.6 (2015-11-27)
 --------------------------
 
 ### Fixed
-Correctly determin the protocol delimiter in `Idna::encodeUrl()`.
+Correctly determine the protocol delimiter in `Idna::encodeUrl()`.
 
 ### Fixed
 Handle relative URLs when following redirects in the Request class (see #7799).
