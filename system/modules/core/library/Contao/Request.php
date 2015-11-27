@@ -430,7 +430,15 @@ class Request
 				if ($this->blnFollowRedirects && $this->intRedirects < $this->intRedirectLimit && !empty($this->arrResponseHeaders['Location']))
 				{
 					++$this->intRedirects;
-					$this->send($this->arrResponseHeaders['Location']);
+					$strLocation = $this->arrResponseHeaders['Location'];
+
+					// Make sure the location is an absolute URL (see #7799)
+					if (!preg_match('@^https?://@', $strLocation))
+					{
+						$strLocation = $uri['scheme'] . '://' . $host . $strLocation;
+					}
+
+					$this->send($strLocation);
 				}
 				break;
 

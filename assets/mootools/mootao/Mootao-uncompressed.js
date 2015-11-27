@@ -109,10 +109,10 @@ Tips.Contao = new Class(
 
 	options: {
 		id: 'tip',
-		onShow: function(){
+		onShow: function() {
 			this.tip.setStyle('display', 'block');
 		},
-		onHide: function(){
+		onHide: function() {
 			this.tip.setStyle('display', 'none');
 		},
 		title: 'title',
