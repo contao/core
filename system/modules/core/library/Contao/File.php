@@ -761,7 +761,8 @@ class File extends \System
 		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
 		while (@ob_end_clean());
 
-		// Prevent session locking (see #2804)
+		// Prevent session locking (see #2804 and #7879)
+		\Session::getInstance()->__destruct();
 		session_write_close();
 
 		// Disable zlib.output_compression (see #6717)
