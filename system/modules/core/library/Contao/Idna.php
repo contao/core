@@ -124,14 +124,7 @@ class Idna
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
-			if ($arrUrl['scheme'] == 'tel' || $arrUrl['scheme'] == 'sms')
-			{
-				$arrUrl['scheme'] .= ':'; // see #6148
-			}
-			else
-			{
-				$arrUrl['scheme'] .= '://';
-			}
+			$arrUrl['scheme'] .= ((substr($strUrl, strlen($arrUrl['scheme']), 3) == '://') ? '://' : ':');
 		}
 
 		// User
