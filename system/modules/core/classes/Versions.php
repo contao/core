@@ -693,7 +693,12 @@ class Versions extends \Controller
 		}
 		elseif (!is_array(current($var)))
 		{
-			return implode(', ', ($binary ? array_map('StringUtil::binToUuid', $var) : $var));
+			if ($binary)
+			{
+				$var = array_map(function ($v) { return $v ? \StringUtil::binToUuid($v) : ''; }, $var);
+			}
+
+			return implode(', ', $var);
 		}
 		else
 		{
