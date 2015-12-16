@@ -509,7 +509,7 @@ class tl_faq extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_faq', $intId);
+		$objVersions = new Versions('tl_faq', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

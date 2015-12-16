@@ -1576,7 +1576,7 @@ class tl_page extends Backend
 				}
 
 				// Initialize the version manager
-				$objVersions = new Versions('tl_page', $id);
+				$objVersions = new Versions('tl_page', $id, $dc);
 				$objVersions->initialize();
 
 				// Store the new alias
@@ -1682,7 +1682,7 @@ class tl_page extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_page', $intId);
+		$objVersions = new Versions('tl_page', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

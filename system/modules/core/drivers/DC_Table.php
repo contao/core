@@ -1791,7 +1791,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		$this->procedure[] = 'id=?';
 
 		$this->blnCreateNewVersion = false;
-		$objVersions = new \Versions($this->strTable, $this->intId);
+		$objVersions = new \Versions($this->strTable, $this->intId, $this);
 
 		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 		{
@@ -2060,25 +2060,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			if ($this->blnCreateNewVersion)
 			{
 				$objVersions->create();
-
-				// Call the onversion_callback
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
-				{
-					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
-					{
-						if (is_array($callback))
-						{
-							$this->import($callback[0]);
-							$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intId, $this);
-						}
-						elseif (is_callable($callback))
-						{
-							$callback($this->strTable, $this->intId, $this);
-						}
-					}
-				}
-
-				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -2233,7 +2214,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$this->blnCreateNewVersion = false;
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
 
-				$objVersions = new \Versions($this->strTable, $this->intId);
+				$objVersions = new \Versions($this->strTable, $this->intId, $this);
 				$objVersions->initialize();
 
 				// Add meta fields if the current user is an administrator
@@ -2401,25 +2382,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					if ($this->blnCreateNewVersion)
 					{
 						$objVersions->create();
-
-						// Call the onversion_callback
-						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
-						{
-							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
-							{
-								if (is_array($callback))
-								{
-									$this->import($callback[0]);
-									$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intId, $this);
-								}
-								elseif (is_callable($callback))
-								{
-									$callback($this->strTable, $this->intId, $this);
-								}
-							}
-						}
-
-						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2637,7 +2599,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Store the active record
 					$this->objActiveRecord = $objRow;
 
-					$objVersions = new \Versions($this->strTable, $this->intId);
+					$objVersions = new \Versions($this->strTable, $this->intId, $this);
 					$objVersions->initialize();
 
 					// Store all fields
@@ -2684,25 +2646,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 						if ($this->blnCreateNewVersion)
 						{
 							$objVersions->create();
-
-							// Call the onversion_callback
-							if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
-							{
-								foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
-								{
-									if (is_array($callback))
-									{
-										$this->import($callback[0]);
-										$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intId, $this);
-									}
-									elseif (is_callable($callback))
-									{
-										$callback($this->strTable, $this->intId, $this);
-									}
-								}
-							}
-
-							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), __METHOD__, TL_GENERAL);
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)

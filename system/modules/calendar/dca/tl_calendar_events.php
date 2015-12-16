@@ -1059,7 +1059,7 @@ class tl_calendar_events extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_calendar_events', $intId);
+		$objVersions = new Versions('tl_calendar_events', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

@@ -417,7 +417,7 @@ class tl_user_group extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_user_group', $intId);
+		$objVersions = new Versions('tl_user_group', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

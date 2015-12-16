@@ -1774,7 +1774,7 @@ class tl_content extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_content', $intId);
+		$objVersions = new Versions('tl_content', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

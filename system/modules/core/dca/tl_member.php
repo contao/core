@@ -692,7 +692,7 @@ class tl_member extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_member', $intId);
+		$objVersions = new Versions('tl_member', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

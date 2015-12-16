@@ -858,11 +858,12 @@ class tl_article extends Backend
 	/**
 	 * Automatically generate the folder URL aliases
 	 *
-	 * @param array $arrButtons
+	 * @param array         $arrButtons
+	 * @param DataContainer $dc
 	 *
 	 * @return array
 	 */
-	public function addAliasButton($arrButtons)
+	public function addAliasButton($arrButtons, DataContainer $dc=null)
 	{
 		// Generate the aliases
 		if (Input::post('FORM_SUBMIT') == 'tl_select' && isset($_POST['alias']))
@@ -889,7 +890,7 @@ class tl_article extends Backend
 				}
 
 				// Initialize the version manager
-				$objVersions = new Versions('tl_article', $id);
+				$objVersions = new Versions('tl_article', $id, $dc);
 				$objVersions->initialize();
 
 				// Store the new alias
@@ -983,7 +984,7 @@ class tl_article extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_article', $intId);
+		$objVersions = new Versions('tl_article', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback
