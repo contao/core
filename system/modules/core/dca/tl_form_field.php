@@ -708,7 +708,7 @@ class tl_form_field extends Backend
 
 		$this->checkPermission();
 
-		$objVersions = new Versions('tl_form_field', $intId);
+		$objVersions = new Versions('tl_form_field', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

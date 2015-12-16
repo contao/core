@@ -305,7 +305,7 @@ class TableWizard extends \Widget
 				}
 			}
 
-			$objVersions = new \Versions($dc->table, \Input::get('id'));
+			$objVersions = new \Versions($dc->table, \Input::get('id'), $dc);
 			$objVersions->create();
 
 			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")

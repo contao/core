@@ -804,7 +804,7 @@ class tl_style extends Backend
 
 		$this->checkPermission();
 
-		$objVersions = new Versions('tl_style', $intId);
+		$objVersions = new Versions('tl_style', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

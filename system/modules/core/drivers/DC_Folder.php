@@ -1092,7 +1092,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->blnCreateNewVersion = false;
 
 			/** @var \FilesModel $objFile */
-			$objVersions = new \Versions($this->strTable, $objFile->id);
+			$objVersions = new \Versions($this->strTable, $objFile->id, $this);
 
 			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 			{
@@ -1316,25 +1316,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			if ($this->blnCreateNewVersion && $objFile !== null)
 			{
 				$objVersions->create();
-
-				// Call the onversion_callback
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
-				{
-					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
-					{
-						if (is_array($callback))
-						{
-							$this->import($callback[0]);
-							$this->{$callback[0]}->{$callback[1]}($this->strTable, $objFile->id, $this);
-						}
-						elseif (is_callable($callback))
-						{
-							$callback($this->strTable, $objFile->id, $this);
-						}
-					}
-				}
-
-				$this->log('A new version of file "'.$objFile->path.'" has been created', __METHOD__, TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -1435,7 +1416,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->blnCreateNewVersion = false;
 
 					/** @var \FilesModel $objFile */
-					$objVersions = new \Versions($this->strTable, $objFile->id);
+					$objVersions = new \Versions($this->strTable, $objFile->id, $this);
 					$objVersions->initialize();
 				}
 				else
@@ -1537,25 +1518,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					if ($this->blnCreateNewVersion && $objFile !== null)
 					{
 						$objVersions->create();
-
-						// Call the onversion_callback
-						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
-						{
-							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
-							{
-								if (is_array($callback))
-								{
-									$this->import($callback[0]);
-									$this->{$callback[0]}->{$callback[1]}($this->strTable, $objFile->id, $this);
-								}
-								elseif (is_callable($callback))
-								{
-									$callback($this->strTable, $objFile->id, $this);
-								}
-							}
-						}
-
-						$this->log('A new version of file "'.$objFile->path.'" has been created', __METHOD__, TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -1752,7 +1714,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$objMeta = \Dbafs::addResource($objFile->value);
 			}
 
-			$objVersions = new \Versions($this->strTable, $objMeta->id);
+			$objVersions = new \Versions($this->strTable, $objMeta->id, $this);
 
 			if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['hideVersionMenu'])
 			{

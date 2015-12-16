@@ -638,7 +638,7 @@ class tl_comments extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_comments', $intId);
+		$objVersions = new Versions('tl_comments', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

@@ -351,7 +351,7 @@ class tl_image_size_item extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objVersions = new Versions('tl_image_size_item', $intId);
+		$objVersions = new Versions('tl_image_size_item', $intId, $dc);
 		$objVersions->initialize();
 
 		// Trigger the save_callback

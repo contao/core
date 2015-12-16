@@ -32,6 +32,12 @@ class Versions extends \Controller
 	protected $intPid;
 
 	/**
+	 * Data container
+	 * @var DataContainer
+	 */
+	protected $objDc;
+
+	/**
 	 * File path
 	 * @var string
 	 */
@@ -59,16 +65,18 @@ class Versions extends \Controller
 	/**
 	 * Initialize the object
 	 *
-	 * @param string  $strTable
-	 * @param integer $intPid
+	 * @param string        $strTable
+	 * @param integer       $intPid
+	 * @param DataContainer $objDc
 	 */
-	public function __construct($strTable, $intPid)
+	public function __construct($strTable, $intPid, $objDc=null)
 	{
 		$this->import('Database');
 		parent::__construct();
 
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
+		$this->objDc = $objDc;
 
 		// Store the path if it is an editable file
 		if ($strTable == 'tl_files')
@@ -217,6 +225,28 @@ class Versions extends \Controller
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
 					   ->execute($this->intPid, ($intVersion == 1 ? $objRecord->tstamp : time()), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
+
+		if ($intVersion > 1)
+		{
+			$this->log('A new version of record "'.$this->strTable.'.id='.$this->intPid.'" has been created'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
+
+			// Call the onversion_callback
+			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intPid, $this->objDc);
+					}
+					elseif (is_callable($callback))
+					{
+						$callback($this->strTable, $this->intPid, $this->objDc);
+					}
+				}
+			}
+		}
 	}
 
 
