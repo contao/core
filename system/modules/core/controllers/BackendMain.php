@@ -55,7 +55,7 @@ class BackendMain extends \Backend
 
 			if (!$objSession->su)
 			{
-				$this->redirect('contao/password.php');
+				$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/password.php');
 			}
 		}
 
@@ -206,7 +206,7 @@ class BackendMain extends \Backend
 		if (\Input::get('popup') && \Input::get('act') != 'show' && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
 		{
 			$this->Template->managerHref = ampersand($this->Session->get('filePickerRef'));
-			$this->Template->manager = (strpos($this->Session->get('filePickerRef'), 'contao/page.php') !== false) ? $GLOBALS['TL_LANG']['MSC']['pagePickerHome'] : $GLOBALS['TL_LANG']['MSC']['filePickerHome'];
+			$this->Template->manager = (strpos($this->Session->get('filePickerRef'), ''.$GLOBALS['TL_CONFIG']['backendPath'].'/page.php') !== false) ? $GLOBALS['TL_LANG']['MSC']['pagePickerHome'] : $GLOBALS['TL_LANG']['MSC']['filePickerHome'];
 		}
 
 		$this->Template->theme = \Backend::getTheme();

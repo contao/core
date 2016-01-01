@@ -252,7 +252,7 @@ class tl_style_sheet extends Backend
 		if (!$this->User->hasAccess('css', 'themes'))
 		{
 			$this->log('Not enough permissions to access the style sheets module', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 	}
 

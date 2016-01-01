@@ -117,7 +117,7 @@ class BackendUser extends \User
 		{
 			$key = null;
 
-			if (TL_SCRIPT == 'contao/main.php')
+			if (TL_SCRIPT == ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php')
 			{
 				$key = \Input::get('popup') ? 'popupReferer' : 'referer';
 			}
@@ -211,7 +211,7 @@ class BackendUser extends \User
 
 
 	/**
-	 * Redirect to contao/index.php if authentication fails
+	 * Redirect to '.$GLOBALS['TL_CONFIG']['backendPath'].'/index.php if authentication fails
 	 */
 	public function authenticate()
 	{
@@ -220,15 +220,15 @@ class BackendUser extends \User
  		{
  			return true;
  		}
-		elseif (TL_SCRIPT == 'contao/index.php')
+		elseif (TL_SCRIPT == ''.$GLOBALS['TL_CONFIG']['backendPath'].'/index.php')
 		{
 			return false;
 		}
 
-		$strRedirect = 'contao/';
+		$strRedirect = $GLOBALS['TL_CONFIG']['backendPath'].'/';
 
 		// Redirect to the last page visited upon login
-		if (TL_SCRIPT == 'contao/main.php' || TL_SCRIPT == 'contao/preview.php')
+		if (TL_SCRIPT == ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php' || TL_SCRIPT == ''.$GLOBALS['TL_CONFIG']['backendPath'].'/preview.php')
 		{
 			$strRedirect .= '?referer=' . base64_encode(\Environment::get('request'));
 		}

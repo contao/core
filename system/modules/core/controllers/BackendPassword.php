@@ -103,7 +103,7 @@ class BackendPassword extends \Backend
 					$objUser->save();
 
 					\Message::addConfirmation($GLOBALS['TL_LANG']['MSC']['pw_changed']);
-					$this->redirect('contao/main.php');
+					$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php');
 				}
 			}
 

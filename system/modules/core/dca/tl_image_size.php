@@ -224,7 +224,7 @@ class tl_image_size extends Backend
 		if (!$this->User->hasAccess('image_sizes', 'themes'))
 		{
 			$this->log('Not enough permissions to access the image sizes module', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 	}
 

@@ -44,7 +44,7 @@ class ModulePersonalData extends \Module
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -129,7 +129,7 @@ class ModulePersonalData extends \Module
 		$objVersions = new \Versions($strTable, $objMember->id);
 		$objVersions->setUsername($objMember->username);
 		$objVersions->setUserId(0);
-		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->setEditUrl(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=member&act=edit&id=%s&rt=1');
 		$objVersions->initialize();
 
 		// Build the form
