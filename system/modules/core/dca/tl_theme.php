@@ -253,7 +253,7 @@ class tl_theme extends Backend
 				if (!$this->User->hasAccess('theme_import', 'themes'))
 				{
 					$this->log('Not enough permissions to import themes', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
+					$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 				}
 				break;
 
@@ -261,7 +261,7 @@ class tl_theme extends Backend
 				if (!$this->User->hasAccess('theme_import', 'themes'))
 				{
 					$this->log('Not enough permissions to export themes', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
+					$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 				}
 				break;
 		}

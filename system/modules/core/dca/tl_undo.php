@@ -152,7 +152,7 @@ class tl_undo extends Backend
 		if (Input::get('act') && !in_array(Input::get('id'), $GLOBALS['TL_DCA']['tl_undo']['list']['sorting']['root']))
 		{
 			$this->log('Not enough permissions to '. Input::get('act') .' undo step ID '. Input::get('id'), __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 	}
 

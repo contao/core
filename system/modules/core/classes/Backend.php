@@ -311,7 +311,7 @@ abstract class Backend extends \Controller
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))
 		{
 			$this->log('Attempt to access the inactive back end module "' . $module . '"', __METHOD__, TL_ACCESS);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		$this->import('BackendUser', 'User');
@@ -326,7 +326,7 @@ abstract class Backend extends \Controller
 		elseif ($module != 'undo' && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		$arrTables = (array) $arrModule['tables'];
@@ -368,7 +368,7 @@ abstract class Backend extends \Controller
 			if (!in_array($strTable, $arrTables))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', __METHOD__, TL_ERROR);
-				$this->redirect('contao/main.php?act=error');
+				$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 			}
 
 			// Load the language and DCA file
@@ -933,7 +933,7 @@ abstract class Backend extends \Controller
 			$objSession->set($strKey, 0);
 
 			\System::log('Page ID '.$intNode.' was not mounted', __METHOD__, TL_ERROR);
-			\Controller::redirect('contao/main.php?act=error');
+			\Controller::redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		// Limit tree
@@ -990,7 +990,7 @@ abstract class Backend extends \Controller
 		$label = '<a href="' . \Controller::addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
 
 		// Return the image
-		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
+		return '<a href="'.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.\Image::getHtml($image, '', $imageAttribute).'</a> '.$label;
 	}
 
 
@@ -1075,7 +1075,7 @@ abstract class Backend extends \Controller
 			$objSession->set($strKey, '');
 
 			\System::log('Folder ID '.$strNode.' was not mounted', __METHOD__, TL_ERROR);
-			\Controller::redirect('contao/main.php?act=error');
+			\Controller::redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		// Limit tree

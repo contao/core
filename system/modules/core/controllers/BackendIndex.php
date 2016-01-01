@@ -36,7 +36,7 @@ class BackendIndex extends \Backend
 		// Login
 		if ($this->User->login())
 		{
-			$strUrl = 'contao/main.php';
+			$strUrl = ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php';
 
 			// Redirect to the last page visited
 			if (\Input::get('referer', true) != '')

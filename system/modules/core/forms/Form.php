@@ -82,7 +82,7 @@ class Form extends \Hybrid
 			$objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['CTE']['form'][0]) . ' ###';
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->title;
-			$objTemplate->href = 'contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $this->id;
+			$objTemplate->href = ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=form&amp;table=tl_form_field&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}

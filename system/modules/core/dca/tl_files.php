@@ -345,7 +345,7 @@ class tl_files extends Backend
 					if (!$canUpload)
 					{
 						$this->log('No permission to upload files', __METHOD__, TL_ERROR);
-						$this->redirect('contao/main.php?act=error');
+						$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 					}
 					break;
 
@@ -358,7 +358,7 @@ class tl_files extends Backend
 					if (!$canEdit)
 					{
 						$this->log('No permission to create, edit, copy or move files', __METHOD__, TL_ERROR);
-						$this->redirect('contao/main.php?act=error');
+						$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 					}
 					break;
 
@@ -370,18 +370,18 @@ class tl_files extends Backend
 						if (!empty($files) && !$canDeleteRecursive)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'" recursively', __METHOD__, TL_ERROR);
-							$this->redirect('contao/main.php?act=error');
+							$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 						}
 						elseif (!$canDeleteOne)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'"', __METHOD__, TL_ERROR);
-							$this->redirect('contao/main.php?act=error');
+							$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 						}
 					}
 					elseif (!$canDeleteOne)
 					{
 						$this->log('No permission to delete file "'.$strFile.'"', __METHOD__, TL_ERROR);
-						$this->redirect('contao/main.php?act=error');
+						$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 					}
 					break;
 
@@ -389,7 +389,7 @@ class tl_files extends Backend
 					if (empty($this->User->fop))
 					{
 						$this->log('No permission to manipulate files', __METHOD__, TL_ERROR);
-						$this->redirect('contao/main.php?act=error');
+						$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 					}
 					break;
 			}
@@ -622,7 +622,7 @@ class tl_files extends Backend
 		}
 		else
 		{
-			return '<a href="contao/popup.php?src=' . base64_encode($row['id']) . '" title="'.specialchars($title, false, true).'"'.$attributes.' onclick="Backend.openModalIframe({\'width\':'.$row['popupWidth'].',\'title\':\''.str_replace("'", "\\'", specialchars($row['fileNameEncoded'], false, true)).'\',\'url\':this.href,\'height\':'.$row['popupHeight'].'});return false">'.Image::getHtml($icon, $label).'</a> ';
+			return '<a href="'.$GLOBALS['TL_CONFIG']['backendPath'].'/popup.php?src=' . base64_encode($row['id']) . '" title="'.specialchars($title, false, true).'"'.$attributes.' onclick="Backend.openModalIframe({\'width\':'.$row['popupWidth'].',\'title\':\''.str_replace("'", "\\'", specialchars($row['fileNameEncoded'], false, true)).'\',\'url\':this.href,\'height\':'.$row['popupHeight'].'});return false">'.Image::getHtml($icon, $label).'</a> ';
 		}
 	}
 

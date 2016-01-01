@@ -1345,7 +1345,7 @@ Library.
                     <p><?= $GLOBALS['TL_LANG']['tl_install']['repository'][1] ?></p>
                     <?php if (!$this->hasComposer): ?>
                       <div class="tl_submit_container">
-                        <a href="contao/main.php?do=repository_catalog&amp;view=composer" class="tl_submit"><?= $GLOBALS['TL_LANG']['tl_install']['repositoryInstall'] ?></a>
+                        <a href="<?php echo $GLOBALS['TL_CONFIG']['backendPath']; ?>/main.php?do=repository_catalog&amp;view=composer" class="tl_submit"><?= $GLOBALS['TL_LANG']['tl_install']['repositoryInstall'] ?></a>
                       </div>
                     <?php endif; ?>
                   </div>

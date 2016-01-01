@@ -98,6 +98,12 @@
       <trans-unit id="tl_settings.urlSuffix.1">
         <source>The URL suffix will be added to the URI string to simulate static documents.</source>
       </trans-unit>
+      <trans-unit id="tl_settings.backendPath.0">
+        <source>Backend path</source>
+      </trans-unit>
+      <trans-unit id="tl_settings.backendPath.1">
+        <source>The backend path changes the backend directory.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.cacheMode.0">
         <source>Cache mode</source>
       </trans-unit>

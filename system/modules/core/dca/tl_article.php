@@ -505,7 +505,7 @@ class tl_article extends Backend
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
 						$this->log('Attempt to insert an article into website root page '.Input::get('pid'), __METHOD__, TL_ERROR);
-						$this->redirect('contao/main.php?act=error');
+						$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 					}
 					break;
 
@@ -557,7 +557,7 @@ class tl_article extends Backend
 		// Redirect if there is an error
 		if ($error)
 		{
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 	}
 
@@ -575,7 +575,7 @@ class tl_article extends Backend
 		$time = \Date::floorToMinute();
 		$published = ($row['published'] && ($row['start'] == '' || $row['start'] <= $time) && ($row['stop'] == '' || $row['stop'] > ($time + 60)));
 
-		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !Config::get('disableAlias')) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif', '', 'data-icon="articles.gif" data-icon-disabled="articles_.gif"').'</a> '.$label;
+		return '<a href="'.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=feRedirect&amp;page='.$row['pid'].'&amp;article='.(($row['alias'] != '' && !Config::get('disableAlias')) ? $row['alias'] : $row['id']).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" target="_blank">'.Image::getHtml('articles'.($published ? '' : '_').'.gif', '', 'data-icon="articles.gif" data-icon-disabled="articles_.gif"').'</a> '.$label;
 	}
 
 
@@ -980,7 +980,7 @@ class tl_article extends Backend
 		if (!$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		$objVersions = new Versions('tl_article', $intId);

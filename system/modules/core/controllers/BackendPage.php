@@ -132,13 +132,13 @@ class BackendPage extends \Backend
 		$objTemplate->action = ampersand(\Environment::get('request'));
 		$objTemplate->value = $this->Session->get('page_selector_search');
 		$objTemplate->manager = $GLOBALS['TL_LANG']['MSC']['pageManager'];
-		$objTemplate->managerHref = 'contao/main.php?do=page&amp;popup=1';
+		$objTemplate->managerHref = ''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=page&amp;popup=1';
 		$objTemplate->breadcrumb = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'];
 
 		if (\Input::get('switch'))
 		{
 			$objTemplate->switch = $GLOBALS['TL_LANG']['MSC']['filePicker'];
-			$objTemplate->switchHref = str_replace('contao/page.php', 'contao/file.php', ampersand(\Environment::get('request')));
+			$objTemplate->switchHref = str_replace(''.$GLOBALS['TL_CONFIG']['backendPath'].'/page.php', ''.$GLOBALS['TL_CONFIG']['backendPath'].'/file.php', ampersand(\Environment::get('request')));
 		}
 
 		\Config::set('debugMode', false);

@@ -244,7 +244,7 @@ abstract class System
 		// Fallback to the current URL if there is no referer
 		if ($return == '')
 		{
-			$return = (TL_MODE == 'BE') ? 'contao/main.php' : \Environment::get('url');
+			$return = (TL_MODE == 'BE') ? $GLOBALS['TL_CONFIG']['backendPath'].'/main.php' : \Environment::get('url');
 		}
 
 		// Do not urldecode here!

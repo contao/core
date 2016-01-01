@@ -478,7 +478,7 @@ class tl_user extends Backend
 				if (Input::get('id') == $this->User->id)
 				{
 					$this->log('Attempt to delete own account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
+					$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 				}
 				// no break;
 
@@ -493,7 +493,7 @@ class tl_user extends Backend
 				if ($objUser->admin && Input::get('act') != '')
 				{
 					$this->log('Not enough permissions to '.Input::get('act').' administrator account ID "'.Input::get('id').'"', __METHOD__, TL_ERROR);
-					$this->redirect('contao/main.php?act=error');
+					$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 				}
 				break;
 
@@ -629,7 +629,7 @@ class tl_user extends Backend
 
 			$this->log('User "' . $this->User->username . '" has switched to user "' . $objUser->username . '"', __METHOD__, TL_ACCESS);
 
-			$this->redirect('contao/main.php');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php');
 		}
 
 		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'">'.Image::getHtml($icon, $label).'</a> ';
@@ -884,7 +884,7 @@ class tl_user extends Backend
 		if (!$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
+			$this->redirect(''.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?act=error');
 		}
 
 		$objVersions = new Versions('tl_user', $intId);

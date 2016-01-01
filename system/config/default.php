@@ -329,6 +329,7 @@ $GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
 $GLOBALS['TL_CONFIG']['autologin']            = 7776000;
 $GLOBALS['TL_CONFIG']['staticFiles']          = '';
 $GLOBALS['TL_CONFIG']['staticPlugins']        = '';
+$GLOBALS['TL_CONFIG']['backendPath']					= 'contao';
 $GLOBALS['TL_CONFIG']['disableCron']          = false;
 $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
 $GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;

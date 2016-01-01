@@ -28,7 +28,7 @@ class Messages extends \Backend
 	{
 		if (\Config::get('latestVersion') && version_compare(VERSION . '.' . BUILD, \Config::get('latestVersion'), '<'))
 		{
-			return '<p class="tl_info"><a href="contao/main.php?do=maintenance">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], \Config::get('latestVersion')) . '</a></p>';
+			return '<p class="tl_info"><a href="'.$GLOBALS['TL_CONFIG']['backendPath'].'/main.php?do=maintenance">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], \Config::get('latestVersion')) . '</a></p>';
 		}
 
 		return '';
