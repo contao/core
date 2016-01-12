@@ -625,7 +625,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['youtube'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true),
+			'eval'                    => array('rgxp'=>'url', 'mandatory'=>true, 'maxlength'=>16),
 			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'posterSRC' => array
