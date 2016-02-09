@@ -1512,13 +1512,13 @@ abstract class Widget extends \BaseTemplate
 		{
 			return null;
 		}
-		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
-		{
-			return 0;
-		}
 		elseif (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
 		{
 			return null;
+		}
+		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
+		{
+			return 0;
 		}
 		else
 		{
