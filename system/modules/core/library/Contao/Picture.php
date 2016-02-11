@@ -251,6 +251,7 @@ class Picture
 				$attributes['src'] = htmlspecialchars(TL_FILES_URL . $src, ENT_QUOTES);
 				$attributes['width'] = $fileObj->width;
 				$attributes['height'] = $fileObj->height;
+				$file1x = $fileObj;
 			}
 
 			if (count($densities) > 1)
@@ -258,16 +259,27 @@ class Picture
 				// Use pixel density descriptors if the sizes attribute is empty
 				if (empty($imageSize->sizes))
 				{
-					$src .= ' ' . $density . 'x';
+					if ($fileObj->width && $file1x->width)
+					{
+						$descriptor = round($fileObj->width / $file1x->width, 3) . 'x';
+					}
+					else
+					{
+						$descriptor = '1x';
+					}
 				}
 				// Otherwise use width descriptors
 				else
 				{
-					$src .= ' ' . $fileObj->width . 'w';
+					$descriptor = $fileObj->width . 'w';
 				}
+				$src .= ' ' . $descriptor;
 			}
 
-			$srcset[] = TL_FILES_URL . $src;
+			if (!isset($srcset[$descriptor]))
+			{
+				$srcset[$descriptor] = TL_FILES_URL . $src;
+			}
 		}
 
 		$attributes['srcset'] = htmlspecialchars(implode(', ', $srcset), ENT_QUOTES);
