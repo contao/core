@@ -68,11 +68,11 @@ class PageError404 extends \Frontend
 				// Handle language fragments without trailing slash (see #7666)
 				if (preg_match('@^[a-z]{2}(-[A-Z]{2})?$@', $strRequest))
 				{
-					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strRequest . '/', 301);
+					$this->redirect((\Config::get('rewriteURL') ? '' : 'index.php/') . $strRequest . '/', 301);
 				}
 				else
 				{
-					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $objRootPage->language . '/' . $strRequest, 301);
+					$this->redirect((\Config::get('rewriteURL') ? '' : 'index.php/') . $objRootPage->language . '/' . $strRequest, 301);
 				}
 			}
 		}
