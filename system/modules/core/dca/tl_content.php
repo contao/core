@@ -1767,13 +1767,6 @@ class tl_content extends Backend
 			}
 		}
 
-		// Check permissions to publish
-		if (!$this->User->hasAccess('tl_content::invisible', 'alexf'))
-		{
-			$this->log('Not enough permissions to show/hide content element ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
-		}
-
 		$objVersions = new Versions('tl_content', $intId);
 		$objVersions->initialize();
 
