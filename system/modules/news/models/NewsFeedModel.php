@@ -42,19 +42,19 @@ namespace Contao;
  * @method static \NewsFeedModel|null findOneByFeedBase($val, $opt=array())
  * @method static \NewsFeedModel|null findOneByDescription($val, $opt=array())
  *
- * @method static \Model\Collection|\NewsFeedModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByTitle($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByAlias($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByLanguage($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByArchives($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByFormat($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findBySource($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByMaxItems($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByFeedBase($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findByDescription($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\NewsFeedModel|null findAll($opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByTitle($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByAlias($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByLanguage($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByArchives($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByFormat($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findBySource($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByMaxItems($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByFeedBase($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findByDescription($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByTstamp($val, $opt=array())
@@ -86,7 +86,7 @@ class NewsFeedModel extends \Model
 	 * @param integer $intId      The news archive ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\NewsFeedModel|null A collection of models or null if the news archive is not part of a feed
+	 * @return \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null A collection of models or null if the news archive is not part of a feed
 	 */
 	public static function findByArchive($intId, array $arrOptions=array())
 	{
@@ -102,7 +102,7 @@ class NewsFeedModel extends \Model
 	 * @param array $arrIds     An array of news feed IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\NewsFeedModel|null A collection of models or null if there are no feeds
+	 * @return \Model\Collection|\NewsFeedModel[]|\NewsFeedModel|null A collection of models or null if there are no feeds
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{

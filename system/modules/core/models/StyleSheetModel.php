@@ -47,17 +47,17 @@ namespace Contao;
  * @method static \StyleSheetModel|null findOneByMediaQuery($val, $opt=array())
  * @method static \StyleSheetModel|null findOneByVars($val, $opt=array())
  *
- * @method static \Model\Collection|\StyleSheetModel|null findByPid($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByDisablePie($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByEmbedImages($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByCc($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByMedia($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByMediaQuery($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findByVars($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\StyleSheetModel|null findAll($opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByPid($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByDisablePie($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByEmbedImages($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByCc($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByMedia($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByMediaQuery($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findByVars($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByPid($val, $opt=array())
@@ -87,7 +87,7 @@ class StyleSheetModel extends \Model
 	 *
 	 * @param array $arrIds An array of style sheet IDs
 	 *
-	 * @return \Model\Collection|\StyleSheetModel|null A collection of models or null if there are no style sheets
+	 * @return \Model\Collection|\StyleSheetModel[]|\StyleSheetModel|null A collection of models or null if there are no style sheets
 	 */
 	public static function findByIds($arrIds)
 	{

@@ -43,20 +43,20 @@ namespace Contao;
  * @method static \ImageSizeItemModel|null findOneByZoom($val, $opt=array())
  * @method static \ImageSizeItemModel|null findOneByInvisible($val, $opt=array())
  *
- * @method static \Model\Collection|\ImageSizeItemModel|null findByPid($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findBySorting($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByMedia($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findBySizes($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByDensities($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByWidth($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByHeight($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByResizeMode($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByZoom($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findByInvisible($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\ImageSizeItemModel|null findAll($opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByPid($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findBySorting($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByMedia($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findBySizes($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByDensities($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByWidth($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByHeight($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByResizeMode($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByZoom($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findByInvisible($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByPid($val, $opt=array())
@@ -89,7 +89,7 @@ class ImageSizeItemModel extends \Model
 	 * @param integer $intPid     Parent ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\ImageSizeItemModel|null A collection of models or null if there are no items
+	 * @return \Model\Collection|\ImageSizeItemModel[]|\ImageSizeItemModel|null A collection of models or null if there are no items
 	 */
 	public static function findVisibleByPid($intPid, array $arrOptions=array())
 	{

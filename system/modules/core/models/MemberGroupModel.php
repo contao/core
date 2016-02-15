@@ -35,16 +35,16 @@ namespace Contao;
  * @method static \MemberGroupModel|null findOneByStart($val, $opt=array())
  * @method static \MemberGroupModel|null findOneByStop($val, $opt=array())
  *
- * @method static \Model\Collection|\MemberGroupModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByName($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByRedirect($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByJumpTo($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByDisable($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByStart($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findByStop($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\MemberGroupModel|null findAll($opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByName($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByRedirect($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByJumpTo($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByDisable($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByStart($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findByStop($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByTstamp($val, $opt=array())
@@ -126,7 +126,7 @@ class MemberGroupModel extends \Model
 	 *
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\MemberGroupModel|null A collection of models or null if there are no member groups
+	 * @return \Model\Collection|\MemberGroupModel[]|\MemberGroupModel|null A collection of models or null if there are no member groups
 	 */
 	public static function findAllActive(array $arrOptions=array())
 	{

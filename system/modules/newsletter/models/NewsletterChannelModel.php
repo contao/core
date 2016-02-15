@@ -39,18 +39,18 @@ namespace Contao;
  * @method static \NewsletterChannelModel|null findOneBySmtpEnc($val, $opt=array())
  * @method static \NewsletterChannelModel|null findOneBySmtpPort($val, $opt=array())
  *
- * @method static \Model\Collection|\NewsletterChannelModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findByTitle($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findByJumpTo($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findByUseSMTP($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBySmtpHost($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBySmtpUser($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBySmtpPass($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBySmtpEnc($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBySmtpPort($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\NewsletterChannelModel|null findAll($opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findByTitle($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findByJumpTo($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findByUseSMTP($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBySmtpHost($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBySmtpUser($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBySmtpPass($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBySmtpEnc($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBySmtpPort($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByTstamp($val, $opt=array())
@@ -81,7 +81,7 @@ class NewsletterChannelModel extends \Model
 	 * @param array $arrIds     An array of newsletter channel IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\NewsletterChannelModel|null A collection of models or null if there are no newsletter channels
+	 * @return \Model\Collection|\NewsletterChannelModel[]|\NewsletterChannelModel|null A collection of models or null if there are no newsletter channels
 	 */
 	public static function findByIds($arrIds, array $arrOptions=array())
 	{
