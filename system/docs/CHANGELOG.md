@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Do not link to the maintenance module if the user cannot access it (see #8151).
+
+### Fixed
 Show the "new folder" button in the template manager (see #8138).
 
 
