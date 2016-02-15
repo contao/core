@@ -411,7 +411,7 @@ abstract class Frontend extends \Controller
 			// Omit the key if it is an auto_item key (see #5037)
 			if (!\Config::get('disableAlias') && \Config::get('useAutoItem') && ($k == 'auto_item' || in_array($k, $GLOBALS['TL_AUTO_ITEM'])))
 			{
-				$strParams .= $strConnector . urlencode($v);
+				$strParams = $strConnector . urlencode($v) . $strParams;
 			}
 			else
 			{
