@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Correctly check that a password does not match the username (see #8209).
+
+### Fixed
 Check if a directory exists before executing `mkdir()` (see #8150).
 
 ### Fixed
