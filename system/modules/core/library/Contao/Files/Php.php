@@ -30,7 +30,12 @@ class Php extends \Files
 	{
 		$this->validate($strDirectory);
 
-		return @mkdir(TL_ROOT . '/' . $strDirectory);
+		if (file_exists(TL_ROOT . '/' . $strDirectory))
+		{
+			return true;
+		}
+
+		return mkdir(TL_ROOT . '/' . $strDirectory);
 	}
 
 
@@ -45,7 +50,12 @@ class Php extends \Files
 	{
 		$this->validate($strDirectory);
 
-		return @rmdir(TL_ROOT. '/' . $strDirectory);
+		if (!file_exists(TL_ROOT . '/' . $strDirectory))
+		{
+			return true;
+		}
+
+		return rmdir(TL_ROOT. '/' . $strDirectory);
 	}
 
 

@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Check if a directory exists before executing `mkdir()` (see #8150).
+
+### Fixed
 Do not link to the maintenance module if the user cannot access it (see #8151).
 
 ### Fixed
