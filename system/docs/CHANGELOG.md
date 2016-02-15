@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.7 (2016-02-XX)
+--------------------------
+
+### Fixed
+Show the "new folder" button in the template manager (see #8138).
+
+
 Version 3.5.6 (2015-11-27)
 --------------------------
 
