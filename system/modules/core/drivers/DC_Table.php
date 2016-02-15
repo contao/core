@@ -1668,6 +1668,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Restore the data
 		foreach ($data as $table=>$fields)
 		{
+			$this->loadDataContainer($table);
+
 			// Get the currently available fields
 			if (!isset($arrFields[$table]))
 			{
