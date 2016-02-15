@@ -21,6 +21,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => true,
 		'closed'                      => true,
+		'notCopyable'                 => true,
 		'onload_callback' => array
 		(
 			array('tl_comments', 'checkPermission')
