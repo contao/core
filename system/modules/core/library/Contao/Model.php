@@ -165,8 +165,6 @@ abstract class Model
 						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
-
-						$objRegistry->register($objRelated);
 					}
 
 					$this->arrRelated[$key] = $objRelated;
