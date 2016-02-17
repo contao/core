@@ -264,15 +264,15 @@ class Versions extends \Controller
 					$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
 				}
 
-				$this->Database->prepare("UPDATE " . $objData->fromTable . " %s WHERE id=?")
+				$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
 							   ->set($data)
 							   ->execute($this->intPid);
 
-				$this->Database->prepare("UPDATE tl_version SET active='' WHERE pid=?")
-							   ->execute($this->intPid);
+				$this->Database->prepare("UPDATE tl_version SET active='' WHERE fromTable=? AND pid=?")
+							   ->execute($this->strTable, $this->intPid);
 
-				$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
-							   ->execute($this->intPid, $intVersion);
+				$this->Database->prepare("UPDATE tl_version SET active=1 WHERE fromTable=? AND pid=? AND version=?")
+							   ->execute($this->strTable, $this->intPid, $intVersion);
 
 				$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been restored'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
 
