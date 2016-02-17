@@ -162,10 +162,10 @@
         <source>Edit form ID %s</source>
       </trans-unit>
       <trans-unit id="tl_form.editheader.0">
-        <source>Edit form settings</source>
+        <source>Edit form</source>
       </trans-unit>
       <trans-unit id="tl_form.editheader.1">
-        <source>Edit the settings of form ID %s</source>
+        <source>Edit the form settings</source>
       </trans-unit>
       <trans-unit id="tl_form.copy.0">
         <source>Duplicate form</source>

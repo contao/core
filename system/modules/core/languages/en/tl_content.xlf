@@ -555,10 +555,10 @@
         <source>Edit content element ID %s</source>
       </trans-unit>
       <trans-unit id="tl_content.editheader.0">
-        <source>Edit article settings</source>
+        <source>Edit article</source>
       </trans-unit>
       <trans-unit id="tl_content.editheader.1">
-        <source>Edit the settings of the article</source>
+        <source>Edit the article settings</source>
       </trans-unit>
       <trans-unit id="tl_content.pasteafter.0">
         <source>Paste at the top</source>

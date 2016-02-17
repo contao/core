@@ -126,10 +126,10 @@
         <source>Edit archive ID %s</source>
       </trans-unit>
       <trans-unit id="tl_news_archive.editheader.0">
-        <source>Edit archive settings</source>
+        <source>Edit archive</source>
       </trans-unit>
       <trans-unit id="tl_news_archive.editheader.1">
-        <source>Edit the settings of archive ID %s</source>
+        <source>Edit the archive settings</source>
       </trans-unit>
       <trans-unit id="tl_news_archive.copy.0">
         <source>Duplicate archive</source>

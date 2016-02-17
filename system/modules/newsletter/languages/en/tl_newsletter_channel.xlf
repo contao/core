@@ -81,10 +81,10 @@
         <source>Edit channel ID %s</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.editheader.0">
-        <source>Edit channel settings</source>
+        <source>Edit channel</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.editheader.1">
-        <source>Edit the settings of channel ID %s</source>
+        <source>Edit the channel settings</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_channel.copy.0">
         <source>Duplicate channel</source>
