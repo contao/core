@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Correctly show the form field type help text (see #8200).
+
+### Fixed
 Correctly create the initial version of a record (see #8141).
 
 ### Fixed

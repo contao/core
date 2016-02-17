@@ -58,62 +58,8 @@ class BackendHelp extends \Backend
 
 		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
-		// Back end modules
-		if ($table == 'tl_user_group' && $field == 'modules')
-		{
-			$rows = array();
-
-			foreach (array_keys($GLOBALS['BE_MOD']) as $group)
-			{
-				$rows[] = array('headspan', $arrData['reference'][$group]);
-
-				foreach ($GLOBALS['BE_MOD'][$group] as $module=>$class)
-				{
-					$rows[] = $arrData['reference'][$module];
-				}
-			}
-
-			$objTemplate->rows = $rows;
-		}
-
-		// Front end modules
-		elseif ($table == 'tl_module' && $field == 'type')
-		{
-			$rows = array();
-
-			foreach (array_keys($GLOBALS['FE_MOD']) as $group)
-			{
-				$rows[] = array('headspan', $arrData['reference'][$group]);
-
-				foreach ($GLOBALS['FE_MOD'][$group] as $module=>$class)
-				{
-					$rows[] = $arrData['reference'][$module];
-				}
-			}
-
-			$objTemplate->rows = $rows;
-		}
-
-		// Content elements
-		elseif ($table == 'tl_content' && $field == 'type')
-		{
-			$rows = array();
-
-			foreach (array_keys($GLOBALS['TL_CTE']) as $group)
-			{
-				$rows[] = array('headspan', $arrData['reference'][$group]);
-
-				foreach ($GLOBALS['TL_CTE'][$group] as $element=>$class)
-				{
-					$rows[] = $arrData['reference'][$element];
-				}
-			}
-
-			$objTemplate->rows = $rows;
-		}
-
 		// Add the reference
-		elseif (!empty($arrData['reference']))
+		if (!empty($arrData['reference']))
 		{
 			$rows = array();
 
@@ -154,7 +100,11 @@ class BackendHelp extends \Backend
 				}
 				else
 				{
-					if (!is_array($arrData['reference'][$option]))
+					if (isset($arrData['reference'][$key]))
+					{
+						$rows[] = $arrData['reference'][$key];
+					}
+					elseif (!is_array($arrData['reference'][$option]))
 					{
 						$rows[] = array('headspan', $arrData['reference'][$option]);
 					}
