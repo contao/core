@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Correctly show the "expand preview" buttons (see #8146).
+
+### Fixed
 Correctly check that a password does not match the username (see #8209).
 
 ### Fixed

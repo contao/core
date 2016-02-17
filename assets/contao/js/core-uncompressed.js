@@ -1063,8 +1063,6 @@ var Backend =
 			// Return if there is no height value
 			if (!hgt) return;
 
-			div.setStyle('height', hgt);
-
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
@@ -1080,8 +1078,10 @@ var Backend =
 				offset: {x:0, y:30}
 			});
 
+			div.setStyle('height', hgt);
+
 			// Disable the function if the preview height is below the max-height
-			if (size.height < hgt) {
+			if (size.height <= hgt) {
 				toggler.src = Backend.themePath + 'expand_.gif';
 				toggler.inject(div, 'after');
 				return;
