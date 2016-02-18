@@ -100,6 +100,7 @@ namespace Contao;
  * @property integer $origId
  * @property string  $origSpace
  * @property string  $origCssID
+ * @property string  $hl
  *
  * @author Leo Feyer <https://github.com/leofeyer>
  */

@@ -132,6 +132,7 @@ namespace Contao;
  * @property string  $nl_template
  * @property string  $origSpace
  * @property string  $origCssID
+ * @property string  $hl
  *
  *
  * @author Leo Feyer <https://github.com/leofeyer>

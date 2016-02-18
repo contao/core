@@ -14,6 +14,10 @@ namespace Contao;
 /**
  * Parent class for objects that can be modules or content elements.
  *
+ * @property string $headline
+ * @property string $cssID
+ * @property string $space
+ * @property string $typePrefix
  * @property string $hl
  *
  * @author Leo Feyer <https://github.com/leofeyer>
