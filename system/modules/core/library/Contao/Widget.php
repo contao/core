@@ -1508,11 +1508,11 @@ abstract class Widget extends \BaseTemplate
 
 		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
 
-		if (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
+		if (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
 		{
 			return null;
 		}
-		elseif (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		elseif (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
 		{
 			return null;
 		}
