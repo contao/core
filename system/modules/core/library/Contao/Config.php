@@ -256,6 +256,9 @@ class Config
 			return;
 		}
 
+		// Adjust the file permissions (see #8178)
+		$this->Files->chmod('system/tmp/' . $strTemp, \Config::get('defaultFileChmod'));
+
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 
