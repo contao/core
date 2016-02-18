@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Fix the domain in all article, news, event and FAQ insert tags (see #8204).
+
+### Fixed
 Update mediaelement.js to version 2.19.0.1 (see #8217).
 
 ### Fixed
