@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Do not copy the registration related fields if a user is duplicated (see #8185).
+
+### Fixed
 Correctly show the form field type help text (see #8200).
 
 ### Fixed

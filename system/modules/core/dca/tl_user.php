@@ -400,20 +400,21 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['session'],
 			'exclude'                 => true,
 			'input_field_callback'    => array('tl_user', 'sessionField'),
-			'eval'                    => array('doNotShow'=>true),
+			'eval'                    => array('doNotShow'=>true, 'doNotCopy'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'dateAdded' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
+			'default'                 => time(),
 			'sorting'                 => true,
 			'flag'                    => 6,
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotCopy'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'lastLogin' => array
 		(
-			'eval'                    => array('rgxp'=>'datim', 'doNotShow'=>true),
+			'eval'                    => array('rgxp'=>'datim', 'doNotShow'=>true, 'doNotCopy'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'currentLogin' => array
@@ -421,16 +422,18 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
 			'sorting'                 => true,
 			'flag'                    => 6,
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotCopy'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'loginCount' => array
 		(
+			'default'                 => 3,
+			'eval'                    => array('doNotCopy'=>true),
 			'sql'                     => "smallint(5) unsigned NOT NULL default '3'"
 		),
 		'locked' => array
 		(
-			'eval'                    => array('rgxp'=>'datim'),
+			'eval'                    => array('rgxp'=>'datim', 'doNotCopy'=>true),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		)
 	)
