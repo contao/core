@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Update mediaelement.js to version 2.19.0.1 (see #8217).
+
+### Fixed
 Correctly render the links in the monthly/yearly event list menu (see #8140).
 
 ### Fixed
