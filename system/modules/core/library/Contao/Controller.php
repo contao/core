@@ -1434,59 +1434,53 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
+		$size = deserialize($arrItem['size']);
 
-		// Store the original dimensions
-		if ($imgSize !== false)
+		if ($intMaxWidth === null)
 		{
-			$objTemplate->width = $imgSize[0];
-			$objTemplate->height = $imgSize[1];
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
 
-		$size = deserialize($arrItem['size']);
 		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
 
-		if (is_array($size))
+		// Store the original dimensions
+		$objTemplate->width = $imgSize[0];
+		$objTemplate->height = $imgSize[1];
+
+		// Adjust the image size
+		if ($intMaxWidth > 0)
 		{
-			if ($intMaxWidth === null)
+			// Subtract the margins before deciding whether to resize (see #6018)
+			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
-			}
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
 
-			// Adjust the image size
-			if ($intMaxWidth > 0 && $imgSize !== false)
-			{
-				// Subtract the margins before deciding whether to resize (see #6018)
-				if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
 				{
-					$intMargin = $arrMargin['left'] + $arrMargin['right'];
-
-					// Reset the margin if it exceeds the maximum width (see #7245)
-					if ($intMaxWidth - $intMargin < 1)
-					{
-						$arrMargin['left'] = '';
-						$arrMargin['right'] = '';
-					}
-					else
-					{
-						$intMaxWidth = $intMaxWidth - $intMargin;
-					}
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
 				}
-
-				if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+				else
 				{
-					// See #2268 (thanks to Thyon)
-					$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
-
-					$size[0] = $intMaxWidth;
-					$size[1] = floor($intMaxWidth * $ratio);
+					$intMaxWidth = $intMaxWidth - $intMargin;
 				}
 			}
 
-			// Disable responsive images in the back end (see #7875)
-			if (TL_MODE == 'BE')
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
 			{
-				unset($size[2]);
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
 			}
+		}
+
+		// Disable responsive images in the back end (see #7875)
+		if (TL_MODE == 'BE')
+		{
+			unset($size[2]);
 		}
 
 		try
