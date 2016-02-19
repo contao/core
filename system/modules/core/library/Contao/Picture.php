@@ -230,6 +230,7 @@ class Picture
 		array_unshift($densities, 1);
 		$densities = array_values(array_unique($densities));
 
+		$file1x = null;
 		$attributes = array();
 		$srcset = array();
 
@@ -254,6 +255,8 @@ class Picture
 				$file1x = $fileObj;
 			}
 
+			$descriptor = null;
+
 			if (count($densities) > 1)
 			{
 				// Use pixel density descriptors if the sizes attribute is empty
@@ -273,10 +276,11 @@ class Picture
 				{
 					$descriptor = $fileObj->width . 'w';
 				}
+
 				$src .= ' ' . $descriptor;
 			}
 
-			if (!isset($srcset[$descriptor]))
+			if ($descriptor && !isset($srcset[$descriptor]))
 			{
 				$srcset[$descriptor] = TL_FILES_URL . $src;
 			}
