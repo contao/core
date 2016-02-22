@@ -93,7 +93,7 @@ class Validator
 
 
 	/**
-	 * Characters that are usually encoded by class Input [=<>()#/])
+	 * Characters that are usually encoded by class Input: #<>()\=
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -101,7 +101,7 @@ class Validator
 	 */
 	public static function isExtendedAlphanumeric($varValue)
 	{
-		return !preg_match('/[#()\/<=>]/', $varValue);
+		return !preg_match('/[#<>()\\\\=]/', $varValue);
 	}
 
 
