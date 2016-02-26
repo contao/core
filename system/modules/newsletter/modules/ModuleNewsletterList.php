@@ -95,13 +95,10 @@ class ModuleNewsletterList extends \Module
 
 				if (!isset($arrJumpTo[$objTarget->jumpTo]))
 				{
-					/** @var \PageModel $objModel */
-					$objModel = $objTarget->getRelated('jumpTo');
-					$objJumpTo = $objModel->loadDetails();
-
-					if ($objJumpTo !== null)
+					if (($objJumpTo = $objTarget->getRelated('jumpTo')) !== null)
 					{
-						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'));
+						/** @var \PageModel $objJumpTo */
+						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'));
 					}
 					else
 					{

@@ -65,7 +65,8 @@ class ModuleLogout extends \Module
 		// Redirect to jumpTo page
 		elseif ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$strRedirect = $this->generateFrontendUrl($objTarget->row());
+			/** @var \PageModel $objTarget */
+			$strRedirect = $this->generateFrontendUrl($objTarget->loadDetails()->row());
 		}
 
 		// Log out and redirect

@@ -76,7 +76,8 @@ class ModuleLogin extends \Module
 				// Redirect to the jumpTo page
 				if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 				{
-					$strRedirect = $this->generateFrontendUrl($objTarget->row());
+					/** @var \PageModel $objTarget */
+					$strRedirect = $this->generateFrontendUrl($objTarget->loadDetails()->row());
 				}
 
 				// Overwrite the jumpTo page with an individual group setting

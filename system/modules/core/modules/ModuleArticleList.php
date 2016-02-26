@@ -78,7 +78,9 @@ class ModuleArticleList extends \Module
 			if (($objTarget = $this->objModel->getRelated('rootPage')) !== null)
 			{
 				$id = $objTarget->id;
-				$this->Template->request = $this->generateFrontendUrl($objTarget->row());
+
+				/** @var \PageModel $objTarget */
+				$this->Template->request = $this->generateFrontendUrl($objTarget->loadDetails()->row());
 			}
 		}
 

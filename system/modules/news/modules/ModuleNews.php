@@ -343,7 +343,8 @@ abstract class ModuleNews extends \Module
 			case 'internal':
 				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objTarget->row()));
+					/** @var \PageModel $objTarget */
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objTarget->loadDetails()->row()));
 				}
 				break;
 
@@ -351,7 +352,8 @@ abstract class ModuleNews extends \Module
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					/** @var \PageModel $objPid */
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -359,7 +361,7 @@ abstract class ModuleNews extends \Module
 		// Link to the default page
 		if (self::$arrUrlCache[$strCacheKey] === null)
 		{
-			$objPage = \PageModel::findByPk($objItem->getRelated('pid')->jumpTo);
+			$objPage = \PageModel::findWithDetails($objItem->getRelated('pid')->jumpTo);
 
 			if ($objPage === null)
 			{

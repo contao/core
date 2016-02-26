@@ -525,7 +525,8 @@ class ModuleRegistration extends \Module
 		// Redirect to the jumpTo page
 		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 		{
-			$this->redirect($this->generateFrontendUrl($objTarget->row()));
+			/** @var \PageModel $objTarget */
+			$this->redirect($this->generateFrontendUrl($objTarget->loadDetails()->row()));
 		}
 
 		// Confirm activation
