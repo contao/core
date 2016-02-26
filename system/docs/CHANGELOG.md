@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Correctly toggle custom page type icons (see #8236).
+
+### Fixed
 Fix the domain in all article, news, event and FAQ insert tags (see #8204).
 
 ### Fixed
