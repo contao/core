@@ -141,6 +141,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'sorting'                 => true,
 			'filter'                  => true,
 			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'name' => array
