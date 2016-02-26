@@ -303,7 +303,8 @@ class Form extends \Hybrid
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->Template->action = $this->generateFrontendUrl($objTarget->row());
+			/** @var \PageModel $objTarget */
+			$this->Template->action = $this->generateFrontendUrl($objTarget->loadDetails()->row());
 		}
 
 		return $this->Template->parse();

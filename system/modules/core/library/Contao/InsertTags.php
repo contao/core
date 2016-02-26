@@ -376,31 +376,13 @@ class InsertTags extends \Controller
 
 								if ($objNext !== null)
 								{
-									$strForceLang = null;
-									$objNext->loadDetails();
-
-									// Check the target page language (see #4706)
-									if (\Config::get('addLanguageToUrl'))
-									{
-										$strForceLang = $objNext->language;
-									}
-
-									$strUrl = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
+									$strUrl = $this->generateFrontendUrl($objNext->loadDetails()->row());
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
-								$strForceLang = null;
-								$objNextPage->loadDetails();
-
-								// Check the target page language (see #4706, #5465)
-								if (\Config::get('addLanguageToUrl'))
-								{
-									$strForceLang = $objNextPage->language;
-								}
-
-								$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $strForceLang, true);
+								$strUrl = $this->generateFrontendUrl($objNextPage->loadDetails()->row());
 								break;
 						}
 
@@ -481,16 +463,7 @@ class InsertTags extends \Controller
 						break;
 					}
 
-					$strForceLang = null;
-					$objPid->loadDetails();
-
-					// Check the target page language (see #4706)
-					if (\Config::get('addLanguageToUrl'))
-					{
-						$strForceLang = $objPid->language;
-					}
-
-					$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id), $strForceLang, true);
+					$strUrl = $this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -524,16 +497,7 @@ class InsertTags extends \Controller
 						break;
 					}
 
-					$strForceLang = null;
-					$objJumpTo->loadDetails();
-
-					// Check the target page language (see #4706)
-					if (\Config::get('addLanguageToUrl'))
-					{
-						$strForceLang = $objJumpTo->language;
-					}
-
-					$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id), $strForceLang, true);
+					$strUrl = $this->generateFrontendUrl($objJumpTo->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -577,16 +541,7 @@ class InsertTags extends \Controller
 						/** @var \PageModel $objJumpTo */
 						if (($objJumpTo = $objNews->getRelated('jumpTo')) !== null)
 						{
-							$strForceLang = null;
-							$objJumpTo->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objJumpTo->language;
-							}
-
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), null, $strForceLang, true);
+							$strUrl = $this->generateFrontendUrl($objJumpTo->loadDetails()->row());
 						}
 					}
 					elseif ($objNews->source == 'article')
@@ -594,23 +549,15 @@ class InsertTags extends \Controller
 						/** @var \PageModel $objPid */
 						if (($objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strForceLang = null;
-							$objPid->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objPid->language;
-							}
-
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id), $strForceLang, true);
+							$strUrl = $this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
+						/** @var \PageModel $objJumpTo */
 						if (($objArchive = $objNews->getRelated('pid')) !== null && ($objJumpTo = $objArchive->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objNews->alias != '') ? $objNews->alias : $objNews->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 						}
 					}
 
@@ -656,16 +603,7 @@ class InsertTags extends \Controller
 						/** @var \PageModel $objJumpTo */
 						if (($objJumpTo = $objEvent->getRelated('jumpTo')) !== null)
 						{
-							$strForceLang = null;
-							$objJumpTo->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objJumpTo->language;
-							}
-
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), null, $strForceLang, true);
+							$strUrl = $this->generateFrontendUrl($objJumpTo->loadDetails()->row());
 						}
 					}
 					elseif ($objEvent->source == 'article')
@@ -673,23 +611,15 @@ class InsertTags extends \Controller
 						/** @var \PageModel $objPid */
 						if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 						{
-							$strForceLang = null;
-							$objPid->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objPid->language;
-							}
-
-							$strUrl = $this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id), $strForceLang, true);
+							$strUrl = $this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 						}
 					}
 					else
 					{
+						/** @var \PageModel $objJumpTo */
 						if (($objCalendar = $objEvent->getRelated('pid')) !== null && ($objJumpTo = $objCalendar->getRelated('jumpTo')) !== null)
 						{
-							$strUrl = $this->generateFrontendUrl($objJumpTo->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/events/') . ((!\Config::get('disableAlias') && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
+							$strUrl = $this->generateFrontendUrl($objJumpTo->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/events/') . ((!\Config::get('disableAlias') && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 						}
 					}
 

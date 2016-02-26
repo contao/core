@@ -1082,9 +1082,9 @@ abstract class Controller extends \System
 	{
 		$strUrl = '';
 
-		if (func_num_args() == 3)
+		if (func_num_args() > 2)
 		{
-			@trigger_error('Using Controller::generateFrontendUrl() with a third argument (force language) has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+			@trigger_error('Using Controller::generateFrontendUrl() with more than two arguments has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 		}
 
 		if (!isset($arrRow['rootId']))
@@ -1300,7 +1300,7 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle);
 
 		// Make sure the URL is absolute (see #4332)
 		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
