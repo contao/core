@@ -27,13 +27,13 @@ class ContentTeaser extends \ContentElement
 
 	/**
 	 * Article object
-	 * @var object
+	 * @var \ArticleModel
 	 */
 	protected $objArticle;
 
 	/**
 	 * Parent page object
-	 * @var object
+	 * @var \PageModel
 	 */
 	protected $objParent;
 
@@ -84,7 +84,8 @@ class ContentTeaser extends \ContentElement
 		}
 
 		$link .= ($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id;
-		$this->Template->href = $this->generateFrontendUrl($this->objParent->row(), $link);
+
+		$this->Template->href = $this->objParent->getFrontendUrl($link);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')

@@ -160,7 +160,7 @@ class Calendar extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s'));
+						$arrUrls[$jumpTo] = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/events/%s');
 					}
 				}
 
@@ -424,7 +424,7 @@ class Calendar extends \Frontend
 				if (($objTarget = $objEvent->getRelated('jumpTo')) !== null)
 				{
 					/** @var \PageModel $objTarget */
-					$link = $strBase . $this->generateFrontendUrl($objTarget->loadDetails()->row());
+					$link = $strBase . $objTarget->getFrontendUrl();
 				}
 				break;
 
@@ -432,7 +432,7 @@ class Calendar extends \Frontend
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
 					/** @var \PageModel $objPid */
-					$link = $strBase . ampersand($this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = $strBase . ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

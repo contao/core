@@ -154,7 +154,7 @@ class ModuleFaqList extends \Module
 			if ($jumpTo > 0 && ($objTarget = \PageModel::findByPk($jumpTo)) !== null)
 			{
 				/** @var \PageModel $objTarget */
-				$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s')));
+				$this->arrTargets[$jumpTo] = ampersand($objTarget->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s'));
 			}
 		}
 

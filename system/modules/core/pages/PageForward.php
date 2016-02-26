@@ -99,6 +99,6 @@ class PageForward extends \Frontend
 			$strQuery = '?' . $strQuery;
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->loadDetails()->row(), $strGet) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($objNextPage->getFrontendUrl($strGet) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }

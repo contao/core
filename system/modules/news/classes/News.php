@@ -160,7 +160,7 @@ class News extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'));
+						$arrUrls[$jumpTo] = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 					}
 				}
 
@@ -358,7 +358,7 @@ class News extends \Frontend
 				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
 					/** @var \PageModel $objTarget */
-					return $strBase . $this->generateFrontendUrl($objTarget->loadDetails()->row());
+					return $strBase . $objTarget->getFrontendUrl();
 				}
 				break;
 
@@ -367,7 +367,7 @@ class News extends \Frontend
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
 					/** @var \PageModel $objPid */
-					return $strBase . ampersand($this->generateFrontendUrl($objPid->loadDetails()->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return $strBase . ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

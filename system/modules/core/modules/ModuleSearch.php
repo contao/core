@@ -97,7 +97,7 @@ class ModuleSearch extends \Module
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
 			/** @var \PageModel $objTarget */
-			$objFormTemplate->action = $this->generateFrontendUrl($objTarget->loadDetails()->row());
+			$objFormTemplate->action = $objTarget->getFrontendUrl();
 		}
 
 		$this->Template->form = $objFormTemplate->parse();

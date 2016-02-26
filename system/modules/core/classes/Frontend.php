@@ -469,7 +469,7 @@ abstract class Frontend extends \Controller
 			{
 				if ($intId['id'] != $objPage->id  || $blnForceRedirect)
 				{
-					$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
+					$this->redirect($this->generateFrontendUrl($intId, $strParams));
 				}
 			}
 		}
@@ -479,7 +479,7 @@ abstract class Frontend extends \Controller
 			{
 				if (($objNextPage = \PageModel::findPublishedById($intId)) !== null)
 				{
-					$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
+					$this->redirect($objNextPage->getFrontendUrl($strParams));
 				}
 			}
 		}

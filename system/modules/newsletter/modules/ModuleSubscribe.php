@@ -291,7 +291,7 @@ class ModuleSubscribe extends \Module
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
 			/** @var \PageModel $objTarget */
-			$this->redirect($this->generateFrontendUrl($objTarget->loadDetails()->row()));
+			$this->redirect($objTarget->getFrontendUrl());
 		}
 
 		$_SESSION['SUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_confirm'];

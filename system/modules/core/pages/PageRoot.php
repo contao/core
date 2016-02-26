@@ -42,7 +42,7 @@ class PageRoot extends \Frontend
 
 		if (!$blnReturn)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->loadDetails()->row()));
+			$this->redirect($objNextPage->getFrontendUrl());
 		}
 
 		if ($blnPreferAlias && $objNextPage->alias != '')

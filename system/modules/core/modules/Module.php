@@ -419,28 +419,12 @@ abstract class Module extends \Frontend
 							continue(2);
 						}
 
-						$strForceLang = null;
-						$objNext->loadDetails();
-
-						// Check the target page language (see #4706)
-						if (\Config::get('addLanguageToUrl'))
-						{
-							$strForceLang = $objNext->language;
-						}
-
-						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
+						$href = $this->generateFrontendUrl($objNext);
 						break;
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-						{
-							/** @var \PageModel $objModel */
-							$objModel = $objSubpages->current();
-							$objModel->loadDetails();
-						}
-
-						$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
+						$href = $this->generateFrontendUrl($objSubpages->current());
 						break;
 				}
 

@@ -1300,7 +1300,7 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle);
+		$strUrl = $objPage->getFrontendUrl($varArticle);
 
 		// Make sure the URL is absolute (see #4332)
 		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)

@@ -73,7 +73,7 @@ class ModuleCalendar extends \Events
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
 			/** @var \PageModel $objTarget */
-			$this->strLink = $this->generateFrontendUrl($objTarget->loadDetails()->row());
+			$this->strLink = $objTarget->getFrontendUrl();
 		}
 
 		return parent::generate();

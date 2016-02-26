@@ -98,7 +98,7 @@ class ModuleNewsletterList extends \Module
 					if (($objJumpTo = $objTarget->getRelated('jumpTo')) !== null)
 					{
 						/** @var \PageModel $objJumpTo */
-						$arrJumpTo[$objTarget->jumpTo] = $this->generateFrontendUrl($objJumpTo->loadDetails()->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'));
+						$arrJumpTo[$objTarget->jumpTo] = $objJumpTo->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 					}
 					else
 					{

@@ -143,7 +143,7 @@ class ModuleArticle extends \Module
 			$href = '/articles/' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
-			$this->Template->href = $this->generateFrontendUrl($objPage->loadDetails()->row(), $href);
+			$this->Template->href = $objPage->getFrontendUrl($href);
 			$this->Template->teaser = $this->teaser;
 			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline), true);
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
