@@ -44,11 +44,6 @@ class PageForward extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		$objNextPage->loadDetails();
-
-		// Check the target page language (see #4706)
-		$strForceLang = \Config::get('addLanguageToUrl') ? $objNextPage->language : null;
-
 		$strGet = '';
 		$strQuery = \Environment::get('queryString');
 		$arrQuery = array();
@@ -104,6 +99,6 @@ class PageForward extends \Frontend
 			$strQuery = '?' . $strQuery;
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang, true) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->loadDetails()->row(), $strGet) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
