@@ -362,39 +362,39 @@ abstract class Module extends \Frontend
 		global $objPage;
 
 		// Browse subpages
-		while ($objSubpages->next())
+		foreach ($objSubpages as $objSubpage)
 		{
 			// Skip hidden sitemap pages
-			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
+			if ($this instanceof \ModuleSitemap && $objSubpage->sitemap == 'map_never')
 			{
 				continue;
 			}
 
 			$subitems = '';
-			$_groups = deserialize($objSubpages->groups);
+			$_groups = deserialize($objSubpage->groups);
 
 			// Override the domain (see #3765)
 			if ($host !== null)
 			{
-				$objSubpages->domain = $host;
+				$objSubpage->domain = $host;
 			}
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_always'))
+			if (!$objSubpage->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpage->sitemap == 'map_always'))
 			{
 				// Check whether there will be subpages
-				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpages->id, 'tl_page'))))))
+				if ($objSubpage->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpage->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpage->id, 'tl_page'))))))
 				{
-					$subitems = $this->renderNavigation($objSubpages->id, $level, $host, $language);
+					$subitems = $this->renderNavigation($objSubpage->id, $level, $host, $language);
 				}
 
 				$href = null;
 
 				// Get href
-				switch ($objSubpages->type)
+				switch ($objSubpage->type)
 				{
 					case 'redirect':
-						$href = $objSubpages->url;
+						$href = $objSubpage->url;
 
 						if (strncasecmp($href, 'mailto:', 7) === 0)
 						{
@@ -403,14 +403,14 @@ abstract class Module extends \Frontend
 						break;
 
 					case 'forward':
-						if ($objSubpages->jumpTo)
+						if ($objSubpage->jumpTo)
 						{
 							/** @var \PageModel $objNext */
-							$objNext = $objSubpages->getRelated('jumpTo');
+							$objNext = $objSubpage->getRelated('jumpTo');
 						}
 						else
 						{
-							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpages->id);
+							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpage->id);
 						}
 
 						// Hide the link if the target page is invisible
@@ -419,23 +419,23 @@ abstract class Module extends \Frontend
 							continue(2);
 						}
 
-						$href = $this->generateFrontendUrl($objNext);
+						$href = $objNext->getFrontendUrl();
 						break;
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($objSubpages->current());
+						$href = $objSubpage->getFrontendUrl();
 						break;
 				}
 
-				$row = $objSubpages->row();
-				$trail = in_array($objSubpages->id, $objPage->trail);
+				$row = $objSubpage->row();
+				$trail = in_array($objSubpage->id, $objPage->trail);
 
 				// Active page
-				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && $href == \Environment::get('request'))
+				if (($objPage->id == $objSubpage->id || $objSubpage->type == 'forward' && $objPage->id == $objSubpage->jumpTo) && !$this instanceof \ModuleSitemap && $href == \Environment::get('request'))
 				{
 					// Mark active forward pages (see #4822)
-					$strClass = (($objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) ? 'forward' . ($trail ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
+					$strClass = (($objSubpage->type == 'forward' && $objPage->id == $objSubpage->jumpTo) ? 'forward' . ($trail ? ' trail' : '') : 'active') . (($subitems != '') ? ' submenu' : '') . ($objSubpage->protected ? ' protected' : '') . (($objSubpage->cssClass != '') ? ' ' . $objSubpage->cssClass : '');
 
 					$row['isActive'] = true;
 					$row['isTrail'] = false;
@@ -444,10 +444,10 @@ abstract class Module extends \Frontend
 				// Regular page
 				else
 				{
-					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . ($trail ? ' trail' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
+					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpage->protected ? ' protected' : '') . ($trail ? ' trail' : '') . (($objSubpage->cssClass != '') ? ' ' . $objSubpage->cssClass : '');
 
 					// Mark pages on the same level (see #2419)
-					if ($objSubpages->pid == $objPage->pid)
+					if ($objSubpage->pid == $objPage->pid)
 					{
 						$strClass .= ' sibling';
 					}
@@ -458,16 +458,16 @@ abstract class Module extends \Frontend
 
 				$row['subitems'] = $subitems;
 				$row['class'] = trim($strClass);
-				$row['title'] = specialchars($objSubpages->title, true);
-				$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
-				$row['link'] = $objSubpages->title;
+				$row['title'] = specialchars($objSubpage->title, true);
+				$row['pageTitle'] = specialchars($objSubpage->pageTitle, true);
+				$row['link'] = $objSubpage->title;
 				$row['href'] = $href;
-				$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+				$row['nofollow'] = (strncmp($objSubpage->robots, 'noindex', 7) === 0);
 				$row['target'] = '';
-				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpage->description);
 
 				// Override the link target
-				if ($objSubpages->type == 'redirect' && $objSubpages->target)
+				if ($objSubpage->type == 'redirect' && $objSubpage->target)
 				{
 					$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
 				}
