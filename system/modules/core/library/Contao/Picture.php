@@ -255,7 +255,7 @@ class Picture
 				$file1x = $fileObj;
 			}
 
-			$descriptor = null;
+			$descriptor = '1x';
 
 			if (count($densities) > 1)
 			{
@@ -265,10 +265,6 @@ class Picture
 					if ($fileObj->width && $file1x->width)
 					{
 						$descriptor = round($fileObj->width / $file1x->width, 3) . 'x';
-					}
-					else
-					{
-						$descriptor = '1x';
 					}
 				}
 				// Otherwise use width descriptors
@@ -280,7 +276,7 @@ class Picture
 				$src .= ' ' . $descriptor;
 			}
 
-			if ($descriptor && !isset($srcset[$descriptor]))
+			if (!isset($srcset[$descriptor]))
 			{
 				$srcset[$descriptor] = TL_FILES_URL . $src;
 			}
