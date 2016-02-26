@@ -1010,7 +1010,7 @@ class Image
 				break;
 
 			case '%':
-				trigger_error('Using Image::getPixelValue() with a percentage value has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+				@trigger_error('Using Image::getPixelValue() with a percentage value has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 
 				return (int) round($value * 16 / 100);
 				break;
