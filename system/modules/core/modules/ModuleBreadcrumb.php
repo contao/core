@@ -86,7 +86,7 @@ class ModuleBreadcrumb extends \Module
 			(
 				'isRoot'   => true,
 				'isActive' => false,
-				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : \Environment::get('base')),
+				'href'     => (($objFirstPage !== null) ? $objFirstPage->getFrontendUrl() : \Environment::get('base')),
 				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
 				'link'     => $objPages->title,
 				'data'     => $objFirstPage->row(),
@@ -119,16 +119,7 @@ class ModuleBreadcrumb extends \Module
 				case 'forward':
 					if (($objNext = \PageModel::findPublishedById($pages[$i]['jumpTo'])) !== null)
 					{
-						$strForceLang = null;
-						$objNext->loadDetails();
-
-						// Check the target page language (see #4706)
-						if (\Config::get('addLanguageToUrl'))
-						{
-							$strForceLang = $objNext->language;
-						}
-
-						$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
+						$href = $objNext->getFrontendUrl();
 						break;
 					}
 					// DO NOT ADD A break; STATEMENT

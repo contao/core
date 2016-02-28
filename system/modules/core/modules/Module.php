@@ -421,7 +421,6 @@ abstract class Module extends \Frontend
 
 						$href = $objNext->getFrontendUrl();
 						break;
-						// DO NOT ADD A break; STATEMENT
 
 					default:
 						$href = $objSubpage->getFrontendUrl();
