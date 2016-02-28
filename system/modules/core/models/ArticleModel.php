@@ -203,6 +203,34 @@ class ArticleModel extends \Model
 
 
 	/**
+	 * Find all published articles with teaser by their parent ID
+	 *
+	 * @param integer $intPid     The page ID
+	 * @param array   $arrOptions An optional options array
+	 *
+	 * @return \Model\Collection|\ArticleModel[]|\ArticleModel|null A collection of models or null if there are no articles in the given column
+	 */
+	public static function findPublishedWithTeaserByPid($intPid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.showTeaser=1");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
+		}
+
+		if (!isset($arrOptions['order']))
+		{
+			$arrOptions['order'] = "$t.sorting";
+		}
+
+		return static::findBy($arrColumns, $intPid, $arrOptions);
+	}
+
+
+	/**
 	 * Find all published articles with teaser by their parent ID and column
 	 *
 	 * @param integer $intPid     The page ID
