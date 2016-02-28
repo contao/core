@@ -665,7 +665,14 @@ abstract class Backend extends \Controller
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
 	{
-		$objPages = \PageModel::findPublishedByPid($pid);
+		if ($pid === 0)
+		{
+			$objPages = \PageModel::findByPublished('1');
+		}
+		else
+		{
+			$objPages = \PageModel::findPublishedByPid($pid);
+		}
 
 		if ($objPages === null)
 		{
