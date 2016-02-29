@@ -1089,7 +1089,17 @@ abstract class Controller extends \System
 
 		if (!isset($arrRow['rootId']))
 		{
-			$arrRow = \PageModel::findWithDetails($arrRow['id'])->row();
+			$row = \PageModel::findWithDetails($arrRow['id']);
+
+			$arrRow['rootId'] = $row->rootId;
+
+			foreach (array('domain', 'rootLanguage', 'rootUseSSL') as $key)
+			{
+				if (!isset($arrRow[$key]))
+				{
+					$arrRow[$key] = $row->$key;
+				}
+			}
 		}
 
 		if (!\Config::get('disableAlias'))
