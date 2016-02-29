@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -255,6 +255,9 @@ class Config
 
 			return;
 		}
+
+		// Adjust the file permissions (see #8178)
+		$this->Files->chmod('system/tmp/' . $strTemp, \Config::get('defaultFileChmod'));
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');

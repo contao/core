@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -36,16 +36,13 @@ class PageRoot extends \Frontend
 		if (null === $objNextPage)
 		{
 			header('HTTP/1.1 404 Not Found');
-			$this->log('No active page found under root page "' . $pageId . '")', __METHOD__, TL_ERROR);
+			$this->log('No active page found under root page "' . $pageId . '"', __METHOD__, TL_ERROR);
 			die_nicely('be_no_active', 'No active pages found');
 		}
 
 		if (!$blnReturn)
 		{
-			/** @var \PageModel $objPage */
-			global $objPage;
-
-			$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objPage->language));
+			$this->redirect($objNextPage->getFrontendUrl());
 		}
 
 		if ($blnPreferAlias && $objNextPage->alias != '')

@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -49,23 +49,23 @@ namespace Contao;
  * @method static \CommentsModel|null findOneByIp($val, $opt=array())
  * @method static \CommentsModel|null findOneByNotified($val, $opt=array())
  *
- * @method static \Model\Collection|\CommentsModel|null findByTstamp($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findBySource($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByParent($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByDate($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByName($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByEmail($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByWebsite($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByComment($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByAddReply($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByAuthor($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByReply($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByPublished($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByIp($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findByNotified($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findMultipleByIds($val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findBy($col, $val, $opt=array())
- * @method static \Model\Collection|\CommentsModel|null findAll($opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByTstamp($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findBySource($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByParent($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByDate($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByName($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByEmail($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByWebsite($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByComment($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByAddReply($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByAuthor($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByReply($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByPublished($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByIp($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findByNotified($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findMultipleByIds($val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findBy($col, $val, $opt=array())
+ * @method static \Model\Collection|\CommentsModel[]|\CommentsModel|null findAll($opt=array())
  *
  * @method static integer countById($id, $opt=array())
  * @method static integer countByTstamp($val, $opt=array())
@@ -105,7 +105,7 @@ class CommentsModel extends \Model
 	 * @param integer $intOffset  An optional offset
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\CommentsModel|null A collection of models or null if there are no comments
+	 * @return \Model\Collection|\CommentsModel[]|\CommentsModel|null A collection of models or null if there are no comments
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $blnDesc=false, $intLimit=0, $intOffset=0, array $arrOptions=array())
 	{

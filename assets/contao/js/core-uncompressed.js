@@ -1,7 +1,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -506,16 +506,24 @@ var AjaxRequest =
 					icond = img.get('data-icon-disabled');
 
 					// Backwards compatibility
-					if (img.get('data-icon') === null) {
-						icon = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1.$2');
+					if (icon === null) {
+						icon = img.src.replace(/(.*)\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1/$2.$3');
 						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
-					if (img.get('data-icon-disabled') === null) {
-						icond = img.src.replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1_.$2');
+					if (icond === null) {
+						icond = img.src.replace(/(.*)\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)$/, '$1/$2_.$3');
 						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
 
-					img.src = AjaxRequest.themePath + (!published ? icon : icond);
+					// Prepend the theme path
+					if (icon.indexOf('/') == -1) {
+						icon = AjaxRequest.themePath + icon;
+					}
+					if (icond.indexOf('/') == -1) {
+						icond = AjaxRequest.themePath + icond;
+					}
+
+					img.src = !published ? icon : icond;
 				} else {
 					pa = img.getParent('a');
 
@@ -531,18 +539,26 @@ var AjaxRequest =
 					icond = img.get('data-icon-disabled');
 
 					// Backwards compatibility
-					if (img.get('data-icon') === null) {
+					if (icon === null) {
 						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
 						icon = img.src.replace(/_[0-9]\.(gif|png|jpe?g|svg)/, ((index.toInt() == 1) ? '' : '_' + (index.toInt() - 1)) + '.$1').split(/[\\/]/).pop();
 						console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
-					if (img.get('data-icon-disabled') === null) {
+					if (icond === null) {
 						index = img.src.replace(/.*_([0-9])\.(gif|png|jpe?g|svg)/, '$1');
 						icond = img.src.replace(/(_[0-9])?\.(gif|png|jpe?g|svg)/, ((index == img.src) ? '_1' : '_' + (index.toInt() + 1)) + '.$2').split(/[\\/]/).pop();
 						console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
 					}
 
-					img.src = AjaxRequest.themePath + (!published ? icon : icond);
+					// Prepend the theme path
+					if (icon.indexOf('/') == -1) {
+						icon = AjaxRequest.themePath + icon;
+					}
+					if (icond.indexOf('/') == -1) {
+						icond = AjaxRequest.themePath + icond;
+					}
+
+					img.src = !published ? icon : icond;
 				}
 			}
 			// Parent view
@@ -561,16 +577,24 @@ var AjaxRequest =
 				icond = img.get('data-icon-disabled');
 
 				// Backwards compatibility
-				if (img.get('data-icon') === null) {
-					icon = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1.$2');
+				if (icon === null) {
+					icon = img.getStyle('background-image').replace(/(.*)\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1/$2.$2');
 					console.warn('Using a row icon without a "data-icon" attribute is deprecated. Please adjust your Contao DCA file.');
 				}
-				if (img.get('data-icon-disabled') === null) {
-					icond = img.getStyle('background-image').replace(/.*\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1_.$2');
+				if (icond === null) {
+					icond = img.getStyle('background-image').replace(/(.*)\/([a-z0-9]+)_?\.(gif|png|jpe?g|svg)\);?$/, '$1/$2_.$3');
 					console.warn('Using a row icon without a "data-icon-disabled" attribute is deprecated. Please adjust your Contao DCA file.');
 				}
 
-				img.setStyle('background-image', 'url(' + AjaxRequest.themePath + (!published ? icon : icond) + ')');
+				// Prepend the theme path
+				if (icon.indexOf('/') == -1) {
+					icon = AjaxRequest.themePath + icon;
+				}
+				if (icond.indexOf('/') == -1) {
+					icond = AjaxRequest.themePath + icond;
+				}
+
+				img.setStyle('background-image', 'url(' + (!published ? icon : icond) + ')');
 			}
 		}
 
@@ -1005,7 +1029,7 @@ var Backend =
 		});
 		M.show({
 			'title': win.document.getElement('div.mce-title').get('text'),
-			'contents': '<iframe src="contao/' + file + '?table=tl_content&amp;field=singleSRC&amp;value=' + url + swtch + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
+			'contents': '<iframe src="contao/' + file + '?table=tl_content&amp;field=singleSRC&amp;value=' + encodeURIComponent(url) + swtch + '" name="simple-modal-iframe" width="100%" height="' + (window.getSize().y-180).toInt() + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},
@@ -1063,8 +1087,6 @@ var Backend =
 			// Return if there is no height value
 			if (!hgt) return;
 
-			div.setStyle('height', hgt);
-
 			toggler = new Element('img', {
 				'class': 'limit_toggler',
 				'alt': '',
@@ -1080,8 +1102,10 @@ var Backend =
 				offset: {x:0, y:30}
 			});
 
+			div.setStyle('height', hgt);
+
 			// Disable the function if the preview height is below the max-height
-			if (size.height < hgt) {
+			if (size.height <= hgt) {
 				toggler.src = Backend.themePath + 'expand_.gif';
 				toggler.inject(div, 'after');
 				return;

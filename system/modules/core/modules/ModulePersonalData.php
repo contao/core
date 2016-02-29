@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -202,7 +202,7 @@ class ModulePersonalData extends \Module
 			}
 
 			/** @var \Widget $objWidget */
-			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, '', '', $this));
+			$objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $varValue, $field, $strTable, $this));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');

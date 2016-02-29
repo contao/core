@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -1508,17 +1508,17 @@ abstract class Widget extends \BaseTemplate
 
 		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
 
-		if (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
+		if (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		{
+			return null;
+		}
+		elseif (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
 		{
 			return null;
 		}
 		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
 		{
 			return 0;
-		}
-		elseif (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
-		{
-			return null;
 		}
 		else
 		{

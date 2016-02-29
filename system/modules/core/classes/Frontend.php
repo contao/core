@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -411,7 +411,7 @@ abstract class Frontend extends \Controller
 			// Omit the key if it is an auto_item key (see #5037)
 			if (!\Config::get('disableAlias') && \Config::get('useAutoItem') && ($k == 'auto_item' || in_array($k, $GLOBALS['TL_AUTO_ITEM'])))
 			{
-				$strParams .= $strConnector . urlencode($v);
+				$strParams = $strConnector . urlencode($v) . $strParams;
 			}
 			else
 			{
@@ -457,6 +457,11 @@ abstract class Frontend extends \Controller
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
+		if ($strForceLang !== null)
+		{
+			@trigger_error('Using Frontend::jumpToOrReload() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+		}
+
 		/** @var \PageModel $objPage */
 		global $objPage;
 
@@ -479,7 +484,7 @@ abstract class Frontend extends \Controller
 			{
 				if (($objNextPage = \PageModel::findPublishedById($intId)) !== null)
 				{
-					$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
+					$this->redirect($objNextPage->getFrontendUrl($strParams, $strForceLang));
 				}
 			}
 		}

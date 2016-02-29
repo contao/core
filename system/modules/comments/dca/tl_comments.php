@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -21,6 +21,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => true,
 		'closed'                      => true,
+		'notCopyable'                 => true,
 		'onload_callback' => array
 		(
 			array('tl_comments', 'checkPermission')
@@ -140,6 +141,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'sorting'                 => true,
 			'filter'                  => true,
 			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'name' => array

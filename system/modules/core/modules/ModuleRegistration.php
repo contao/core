@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -209,7 +209,7 @@ class ModuleRegistration extends \Module
 				$varValue = $objWidget->value;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof \FormPassword && $varValue == \Input::post('username'))
+				if ($objWidget instanceof \FormPassword && \Encryption::verify(\Input::post('username'), $varValue))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}
@@ -525,7 +525,8 @@ class ModuleRegistration extends \Module
 		// Redirect to the jumpTo page
 		if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 		{
-			$this->redirect($this->generateFrontendUrl($objTarget->row()));
+			/** @var \PageModel $objTarget */
+			$this->redirect($objTarget->getFrontendUrl());
 		}
 
 		// Confirm activation

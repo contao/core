@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -93,7 +93,7 @@ class Validator
 
 
 	/**
-	 * Characters that are usually encoded by class Input [=<>()#/])
+	 * Characters that are usually encoded by class Input: #<>()\=
 	 *
 	 * @param mixed $varValue The value to be validated
 	 *
@@ -101,7 +101,7 @@ class Validator
 	 */
 	public static function isExtendedAlphanumeric($varValue)
 	{
-		return !preg_match('/[#()\/<=>]/', $varValue);
+		return !preg_match('/[#<>()\\\\=]/', $varValue);
 	}
 
 

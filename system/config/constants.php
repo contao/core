@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -13,7 +13,7 @@
  * Core version
  */
 define('VERSION', '3.5');
-define('BUILD', '6');
+define('BUILD', '7');
 define('LONG_TERM_SUPPORT', true);
 
 
@@ -33,7 +33,7 @@ define('SWIPE', '2.0');
 define('JQUERY', '1.11.3');
 define('JQUERY_UI', '1.11.4');
 define('COLORBOX', '1.6.1');
-define('MEDIAELEMENT', '2.16.4');
+define('MEDIAELEMENT', '2.19.0.1');
 define('TABLESORTER', '2.0.5');
 define('MOOTOOLS', '1.5.1');
 define('COLORPICKER', '1.4');

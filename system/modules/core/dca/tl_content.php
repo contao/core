@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -1765,13 +1765,6 @@ class tl_content extends Backend
 					$callback(($dc ?: $this));
 				}
 			}
-		}
-
-		// Check permissions to publish
-		if (!$this->User->hasAccess('tl_content::invisible', 'alexf'))
-		{
-			$this->log('Not enough permissions to show/hide content element ID "'.$intId.'"', __METHOD__, TL_ERROR);
-			$this->redirect('contao/main.php?act=error');
 		}
 
 		$objVersions = new Versions('tl_content', $intId);

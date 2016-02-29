@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -72,7 +72,8 @@ class ModuleCalendar extends \Events
 
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$this->strLink = $this->generateFrontendUrl($objTarget->row());
+			/** @var \PageModel $objTarget */
+			$this->strLink = $objTarget->getFrontendUrl();
 		}
 
 		return parent::generate();

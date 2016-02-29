@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -1075,13 +1075,32 @@ abstract class Controller extends \System
 	 * @param array   $arrRow       An array of page parameters
 	 * @param string  $strParams    An optional string of URL parameters
 	 * @param string  $strForceLang Force a certain language
-	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
 	{
 		$strUrl = '';
+
+		if ($strForceLang !== null)
+		{
+			@trigger_error('Using Controller::generateFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+		}
+
+		if (!isset($arrRow['rootId']))
+		{
+			$row = \PageModel::findWithDetails($arrRow['id']);
+
+			$arrRow['rootId'] = $row->rootId;
+
+			foreach (array('domain', 'rootLanguage', 'rootUseSSL') as $key)
+			{
+				if (!isset($arrRow[$key]))
+				{
+					$arrRow[$key] = $row->$key;
+				}
+			}
+		}
 
 		if (!\Config::get('disableAlias'))
 		{
@@ -1092,6 +1111,10 @@ abstract class Controller extends \System
 				if ($strForceLang != '')
 				{
 					$strLanguage = $strForceLang . '/';
+				}
+				elseif (isset($arrRow['rootLanguage']))
+				{
+					$strLanguage = $arrRow['rootLanguage'] . '/';
 				}
 				elseif (isset($arrRow['language']) && $arrRow['type'] == 'root')
 				{
@@ -1137,7 +1160,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the domain if it differs from the current one (see #3765 and #6927)
-		if ($blnFixDomain && $arrRow['domain'] != '' && $arrRow['domain'] != \Environment::get('host'))
+		if (!empty($arrRow['domain']) && $arrRow['domain'] != \Environment::get('host'))
 		{
 			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}
@@ -1287,7 +1310,7 @@ abstract class Controller extends \System
 			$varArticle = '/articles/' . $varArticle;
 		}
 
-		$strUrl = $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language, true);
+		$strUrl = $objPage->getFrontendUrl($varArticle);
 
 		// Make sure the URL is absolute (see #4332)
 		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
@@ -1434,59 +1457,53 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
+		$size = deserialize($arrItem['size'], true) + array(0, 0, 'crop');
 
-		// Store the original dimensions
-		if ($imgSize !== false)
+		if ($intMaxWidth === null)
 		{
-			$objTemplate->width = $imgSize[0];
-			$objTemplate->height = $imgSize[1];
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
 		}
 
-		$size = deserialize($arrItem['size']);
 		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
 
-		if (is_array($size))
+		// Store the original dimensions
+		$objTemplate->width = $imgSize[0];
+		$objTemplate->height = $imgSize[1];
+
+		// Adjust the image size
+		if ($intMaxWidth > 0)
 		{
-			if ($intMaxWidth === null)
+			// Subtract the margins before deciding whether to resize (see #6018)
+			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
-			}
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
 
-			// Adjust the image size
-			if ($intMaxWidth > 0 && $imgSize !== false)
-			{
-				// Subtract the margins before deciding whether to resize (see #6018)
-				if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
 				{
-					$intMargin = $arrMargin['left'] + $arrMargin['right'];
-
-					// Reset the margin if it exceeds the maximum width (see #7245)
-					if ($intMaxWidth - $intMargin < 1)
-					{
-						$arrMargin['left'] = '';
-						$arrMargin['right'] = '';
-					}
-					else
-					{
-						$intMaxWidth = $intMaxWidth - $intMargin;
-					}
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
 				}
-
-				if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
+				else
 				{
-					// See #2268 (thanks to Thyon)
-					$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
-
-					$size[0] = $intMaxWidth;
-					$size[1] = floor($intMaxWidth * $ratio);
+					$intMaxWidth = $intMaxWidth - $intMargin;
 				}
 			}
 
-			// Disable responsive images in the back end (see #7875)
-			if (TL_MODE == 'BE')
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
 			{
-				unset($size[2]);
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
 			}
+		}
+
+		// Disable responsive images in the back end (see #7875)
+		if (TL_MODE == 'BE')
+		{
+			unset($size[2]);
 		}
 
 		try

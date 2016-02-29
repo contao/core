@@ -93,10 +93,10 @@
         <source>Edit image size ID %s</source>
       </trans-unit>
       <trans-unit id="tl_image_size.editheader.0">
-        <source>Edit image size settings</source>
+        <source>Edit image size</source>
       </trans-unit>
       <trans-unit id="tl_image_size.editheader.1">
-        <source>Edit the settings of image size ID %s</source>
+        <source>Edit the image size settings</source>
       </trans-unit>
       <trans-unit id="tl_image_size.cut.0">
         <source>Move image size</source>
