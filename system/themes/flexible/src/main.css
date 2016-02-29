@@ -1828,6 +1828,7 @@ fieldset.collapsed > legend {
 	}
 	.tl_submit_panel {
 		float:right;
+		z-index:1;
 	}
 	input.tl_submit {
 		margin-top:3px;

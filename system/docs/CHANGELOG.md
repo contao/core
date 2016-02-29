@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.7 (2016-02-XX)
 --------------------------
 
+### Fixed
+Fix two issues with the flexible back end theme (see #8227).
+
 ### New
 Added new versioning hooks (see #8168).
 
