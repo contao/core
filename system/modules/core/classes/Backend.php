@@ -665,14 +665,7 @@ abstract class Backend extends \Controller
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
 	{
-		if ($pid === 0)
-		{
-			$objPages = \PageModel::findByPublished('1');
-		}
-		else
-		{
-			$objPages = \PageModel::findPublishedByPid($pid);
-		}
+		$objPages = \PageModel::findPublishedByPid($pid);
 
 		if ($objPages === null)
 		{
@@ -691,39 +684,37 @@ abstract class Backend extends \Controller
 		// Recursively walk through all subpages
 		foreach ($objPages as $objPage)
 		{
-			if ($objPage->type != 'regular')
+			if ($objPage->type == 'regular')
 			{
-				continue;
-			}
-
-			// Searchable and not protected
-			if ((!$objPage->noSearch || $blnIsSitemap) && (!$objPage->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPage->sitemap == 'map_always')) && (!$blnIsSitemap || $objPage->sitemap != 'map_never'))
-			{
-				// Published
-				if ($objPage->published && ($objPage->start == '' || $objPage->start <= $time) && ($objPage->stop == '' || $objPage->stop > ($time + 60)))
+				// Searchable and not protected
+				if ((!$objPage->noSearch || $blnIsSitemap) && (!$objPage->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPage->sitemap == 'map_always')) && (!$blnIsSitemap || $objPage->sitemap != 'map_never'))
 				{
-					$feUrl = $objPage->getFrontendUrl();
-
-					if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
+					// Published
+					if ($objPage->published && ($objPage->start == '' || $objPage->start <= $time) && ($objPage->stop == '' || $objPage->stop > ($time + 60)))
 					{
-						$feUrl = $domain . $feUrl;
-					}
-
-					$arrPages[] = $feUrl;
-
-					// Get articles with teaser
-					if (($objArticles = \ArticleModel::findPublishedWithTeaserByPid($objPage->id)) !== null)
-					{
-						$feUrl = $objPage->getFrontendUrl('/articles/%s');
+						$feUrl = $objPage->getFrontendUrl();
 
 						if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
 						{
 							$feUrl = $domain . $feUrl;
 						}
 
-						foreach ($objArticles as $objArticle)
+						$arrPages[] = $feUrl;
+
+						// Get articles with teaser
+						if (($objArticles = \ArticleModel::findPublishedWithTeaserByPid($objPage->id)) !== null)
 						{
-							$arrPages[] = sprintf($feUrl, (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id));
+							$feUrl = $objPage->getFrontendUrl('/articles/%s');
+
+							if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
+							{
+								$feUrl = $domain . $feUrl;
+							}
+
+							foreach ($objArticles as $objArticle)
+							{
+								$arrPages[] = sprintf($feUrl, (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id));
+							}
 						}
 					}
 				}
