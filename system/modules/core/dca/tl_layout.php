@@ -229,6 +229,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'options'                 => array('layout.css', 'responsive.css', 'grid.css', 'reset.css', 'form.css', 'tinymce.css'),
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'save_callback' => array
+			(
+				array('tl_layout', 'checkFramework')
+			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'stylesheet' => array
@@ -690,5 +694,35 @@ class tl_layout extends Backend
 	public function styleSheetLink(DataContainer $dc)
 	{
 		return ' <a href="contao/main.php?do=themes&amp;table=tl_style_sheet&amp;id=' . $dc->activeRecord->pid . '&amp;popup=1&amp;rt=' . REQUEST_TOKEN . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '" onclick="Backend.openModalIframe({\'width\':768,\'title\':\''.specialchars(str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_layout']['edit_styles'])).'\',\'url\':this.href});return false"><img width="12" height="16" alt="" src="system/themes/' . Backend::getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
+	}
+
+
+	/**
+	 * Auto-select layout.css if responsive.css is selected (see #8222)
+	 *
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	public function checkFramework($value)
+	{
+		if (empty($value))
+		{
+			return '';
+		}
+
+		$array = deserialize($value);
+
+		if (empty($array) || !is_array($array))
+		{
+			return $value;
+		}
+
+		if (($i = array_search('responsive.css', $array)) !== false && array_search('layout.css', $array) === false)
+		{
+			array_insert($array, $i, 'layout.css');
+		}
+
+		return $array;
 	}
 }
