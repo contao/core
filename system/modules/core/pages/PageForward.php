@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -43,11 +43,6 @@ class PageForward extends \Frontend
 			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', __METHOD__, TL_ERROR);
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
-
-		$objNextPage->loadDetails();
-
-		// Check the target page language (see #4706)
-		$strForceLang = \Config::get('addLanguageToUrl') ? $objNextPage->language : null;
 
 		$strGet = '';
 		$strQuery = \Environment::get('queryString');
@@ -104,6 +99,6 @@ class PageForward extends \Frontend
 			$strQuery = '?' . $strQuery;
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet, $strForceLang, true) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($objNextPage->getFrontendUrl($strGet) . $strQuery, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }

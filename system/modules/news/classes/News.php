@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -160,7 +160,7 @@ class News extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
+						$arrUrls[$jumpTo] = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 					}
 				}
 
@@ -309,11 +309,15 @@ class News extends \Frontend
 						continue;
 					}
 
-					// Set the domain (see #6421)
-					$domain = ($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/';
-
 					// Generate the URL
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/items/%s'), $objParent->language);
+					$feUrl = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
+
+					if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
+					{
+						$feUrl = (($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/') . $feUrl;
+					}
+
+					$arrProcessed[$objArchive->jumpTo] = $feUrl;
 				}
 
 				$strUrl = $arrProcessed[$objArchive->jumpTo];
@@ -357,7 +361,8 @@ class News extends \Frontend
 			case 'internal':
 				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
-					return $strBase . $this->generateFrontendUrl($objTarget->row());
+					/** @var \PageModel $objTarget */
+					return $strBase . $objTarget->getFrontendUrl();
 				}
 				break;
 
@@ -365,7 +370,8 @@ class News extends \Frontend
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					return $strBase . ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					/** @var \PageModel $objPid */
+					return $strBase . ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}

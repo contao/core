@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -343,7 +343,8 @@ abstract class ModuleNews extends \Module
 			case 'internal':
 				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objTarget->row()));
+					/** @var \PageModel $objTarget */
+					self::$arrUrlCache[$strCacheKey] = ampersand($objTarget->getFrontendUrl());
 				}
 				break;
 
@@ -351,7 +352,8 @@ abstract class ModuleNews extends \Module
 			case 'article':
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPid->row(), '/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					/** @var \PageModel $objPid */
+					self::$arrUrlCache[$strCacheKey] = ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -359,7 +361,7 @@ abstract class ModuleNews extends \Module
 		// Link to the default page
 		if (self::$arrUrlCache[$strCacheKey] === null)
 		{
-			$objPage = \PageModel::findByPk($objItem->getRelated('pid')->jumpTo);
+			$objPage = \PageModel::findWithDetails($objItem->getRelated('pid')->jumpTo);
 
 			if ($objPage === null)
 			{
@@ -367,7 +369,7 @@ abstract class ModuleNews extends \Module
 			}
 			else
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/' : '/items/') . ((!\Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
+				self::$arrUrlCache[$strCacheKey] = ampersand($objPage->getFrontendUrl(((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/' : '/items/') . ((!\Config::get('disableAlias') && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
 			// Add the current archive parameter (news archive)

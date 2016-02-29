@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -68,11 +68,11 @@ class PageError404 extends \Frontend
 				// Handle language fragments without trailing slash (see #7666)
 				if (preg_match('@^[a-z]{2}(-[A-Z]{2})?$@', $strRequest))
 				{
-					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strRequest . '/', 301);
+					$this->redirect((\Config::get('rewriteURL') ? '' : 'index.php/') . $strRequest . '/', 301);
 				}
 				else
 				{
-					$this->redirect(($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $objRootPage->language . '/' . $strRequest, 301);
+					$this->redirect((\Config::get('rewriteURL') ? '' : 'index.php/') . $objRootPage->language . '/' . $strRequest, 301);
 				}
 			}
 		}
@@ -121,6 +121,6 @@ class PageError404 extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->loadDetails()->row(), null, $objRootPage->language, true), (($obj404->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($objNextPage->getFrontendUrl(($obj404->redirect == 'temporary') ? 302 : 301));
 	}
 }

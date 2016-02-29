@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -26,9 +26,18 @@ class Messages extends \Backend
 	 */
 	public function versionCheck()
 	{
+		$this->import('BackendUser', 'User');
+
 		if (\Config::get('latestVersion') && version_compare(VERSION . '.' . BUILD, \Config::get('latestVersion'), '<'))
 		{
-			return '<p class="tl_info"><a href="contao/main.php?do=maintenance">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], \Config::get('latestVersion')) . '</a></p>';
+			if ($this->User->hasAccess('maintenance', 'modules'))
+			{
+				return '<p class="tl_info"><a href="contao/main.php?do=maintenance">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], \Config::get('latestVersion')) . '</a></p>';
+			}
+			else
+			{
+				return '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], \Config::get('latestVersion')) . '</p>';
+			}
 		}
 
 		return '';

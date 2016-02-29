@@ -111,10 +111,10 @@
         <source>Edit category ID %s</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.editheader.0">
-        <source>Edit category settings</source>
+        <source>Edit category</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.editheader.1">
-        <source>Edit the settings of category ID %s</source>
+        <source>Edit the category settings</source>
       </trans-unit>
       <trans-unit id="tl_faq_category.copy.0">
         <source>Duplicate category</source>

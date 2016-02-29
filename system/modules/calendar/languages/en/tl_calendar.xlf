@@ -126,10 +126,10 @@
         <source>Edit calendar ID %s</source>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.0">
-        <source>Edit calendar settings</source>
+        <source>Edit calendar</source>
       </trans-unit>
       <trans-unit id="tl_calendar.editheader.1">
-        <source>Edit the settings of calendar ID %s</source>
+        <source>Edit the calendar settings</source>
       </trans-unit>
       <trans-unit id="tl_calendar.copy.0">
         <source>Duplicate calendar</source>

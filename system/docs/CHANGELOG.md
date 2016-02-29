@@ -1,11 +1,63 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.7 (2016-02-29)
+--------------------------
+
+### Fixed
+Always fix the domain and language when generating URLs (see #8238).
+
+### Fixed
+Fix two issues with the flexible back end theme (see #8227).
+
+### New
+Added new versioning hooks (see #8168).
+
+ * "oncreate_version_callback" (supersedes "onversion_callback")
+ * "onrestore_version_callback" (supersedes "onrestore_callback")
+
+### Fixed
+Correctly toggle custom page type icons (see #8236).
+
+### Fixed
+Fix the domain in all article, news, event and FAQ insert tags (see #8204).
+
+### Fixed
+Update mediaelement.js to version 2.19.0.1 (see #8217).
+
+### Fixed
+Correctly render the links in the monthly/yearly event list menu (see #8140).
+
+### Fixed
+Skip the registration related fields if a user is duplicated (see #8185).
+
+### Fixed
+Correctly show the form field type help text (see #8200).
+
+### Fixed
+Correctly create the initial version of a record (see #8141).
+
+### Fixed
+Correctly show the "expand preview" buttons (see #8146).
+
+### Fixed
+Correctly check that a password does not match the username (see #8209).
+
+### Fixed
+Check if a directory exists before executing `mkdir()` (see #8150).
+
+### Fixed
+Do not link to the maintenance module if the user cannot access it (see #8151).
+
+### Fixed
+Show the "new folder" button in the template manager (see #8138).
+
+
 Version 3.5.6 (2015-11-27)
 --------------------------
 
 ### Fixed
-Correctly determin the protocol delimiter in `Idna::encodeUrl()`.
+Correctly determine the protocol delimiter in `Idna::encodeUrl()`.
 
 ### Fixed
 Handle relative URLs when following redirects in the Request class (see #7799).
@@ -33,7 +85,7 @@ Fix the `<time>` tags and standardize the event templates (see #8012).
 Handle empty `href` attributes in the book navigation (see #8104).
 
 ### Fixed
-Do not store e-mail addresses in the newsletter (un)subscription log. 
+Do not store e-mail addresses in the newsletter (un)subscription log.
 
 ### Fixed
 Correctly encrypt fields upon registration (see #8110).
@@ -87,7 +139,7 @@ Correctly check the synchronization status when copying or moving files.
 Adjust the code to be compatible with PHP7 (see #8018).
 
 ### Fixed
-Correctly show the UUID in the back end file manager popup (see #8058). 
+Correctly show the UUID in the back end file manager popup (see #8058).
 
 
 Version 3.5.4 (2015-10-09)

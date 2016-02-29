@@ -1,5 +1,2043 @@
 /*!
  *
+ * MediaElement.js
+ * HTML5 <video> and <audio> shim and player
+ * http://mediaelementjs.com/
+ *
+ * Creates a JavaScript object that mimics HTML5 MediaElement API
+ * for browsers that don't understand HTML5 or can't play the provided codec
+ * Can play MP4 (H.264), Ogg, WebM, FLV, WMV, WMA, ACC, and MP3
+ *
+ * Copyright 2010-2014, John Dyer (http://j.hn)
+ * License: MIT
+ *
+ */
+// Namespace
+var mejs = mejs || {};
+
+// version number
+mejs.version = '2.19.0.1';
+
+
+// player number (for missing, same id attr)
+mejs.meIndex = 0;
+
+// media types accepted by plugins
+mejs.plugins = {
+	silverlight: [
+		{version: [3,0], types: ['video/mp4','video/m4v','video/mov','video/wmv','audio/wma','audio/m4a','audio/mp3','audio/wav','audio/mpeg']}
+	],
+	flash: [
+		{version: [9,0,124], types: ['video/mp4','video/m4v','video/mov','video/flv','video/rtmp','video/x-flv','audio/flv','audio/x-flv','audio/mp3','audio/m4a','audio/mpeg', 'video/dailymotion', 'video/x-dailymotion', 'application/x-mpegURL']}
+		//,{version: [12,0], types: ['video/webm']} // for future reference (hopefully!)
+	],
+	youtube: [
+		{version: null, types: ['video/youtube', 'video/x-youtube', 'audio/youtube', 'audio/x-youtube']}
+	],
+	vimeo: [
+		{version: null, types: ['video/vimeo', 'video/x-vimeo']}
+	]
+};
+
+/*
+Utility methods
+*/
+mejs.Utility = {
+	encodeUrl: function(url) {
+		return encodeURIComponent(url); //.replace(/\?/gi,'%3F').replace(/=/gi,'%3D').replace(/&/gi,'%26');
+	},
+	escapeHTML: function(s) {
+		return s.toString().split('&').join('&amp;').split('<').join('&lt;').split('"').join('&quot;');
+	},
+	absolutizeUrl: function(url) {
+		var el = document.createElement('div');
+		el.innerHTML = '<a href="' + this.escapeHTML(url) + '">x</a>';
+		return el.firstChild.href;
+	},
+	getScriptPath: function(scriptNames) {
+		var
+			i = 0,
+			j,
+			codePath = '',
+			testname = '',
+			slashPos,
+			filenamePos,
+			scriptUrl,
+			scriptPath,			
+			scriptFilename,
+			scripts = document.getElementsByTagName('script'),
+			il = scripts.length,
+			jl = scriptNames.length;
+			
+		// go through all <script> tags
+		for (; i < il; i++) {
+			scriptUrl = scripts[i].src;
+			slashPos = scriptUrl.lastIndexOf('/');
+			if (slashPos > -1) {
+				scriptFilename = scriptUrl.substring(slashPos + 1);
+				scriptPath = scriptUrl.substring(0, slashPos + 1);
+			} else {
+				scriptFilename = scriptUrl;
+				scriptPath = '';			
+			}
+			
+			// see if any <script> tags have a file name that matches the 
+			for (j = 0; j < jl; j++) {
+				testname = scriptNames[j];
+				filenamePos = scriptFilename.indexOf(testname);
+				if (filenamePos > -1) {
+					codePath = scriptPath;
+					break;
+				}
+			}
+			
+			// if we found a path, then break and return it
+			if (codePath !== '') {
+				break;
+			}
+		}
+		
+		// send the best path back
+		return codePath;
+	},
+	/*
+	 * Calculate the time format to use. We have a default format set in the
+	 * options but it can be imcomplete. We ajust it according to the media
+	 * duration.
+	 *
+	 * We support format like 'hh:mm:ss:ff'.
+	 */
+	calculateTimeFormat: function(time, options, fps) {
+		if (time < 0) {
+			time = 0;
+		}
+
+		if(typeof fps == 'undefined') {
+		    fps = 25;
+		}
+
+		var format = options.timeFormat,
+			firstChar = format[0],
+			firstTwoPlaces = (format[1] == format[0]),
+			separatorIndex = firstTwoPlaces? 2: 1,
+			separator = ':',
+			hours = Math.floor(time / 3600) % 24,
+			minutes = Math.floor(time / 60) % 60,
+			seconds = Math.floor(time % 60),
+			frames = Math.floor(((time % 1)*fps).toFixed(3)),
+			lis = [
+				[frames, 'f'],
+				[seconds, 's'],
+				[minutes, 'm'],
+				[hours, 'h']
+			];
+
+		// Try to get the separator from the format
+		if (format.length < separatorIndex) {
+			separator = format[separatorIndex];
+		}
+
+		var required = false;
+
+		for (var i=0, len=lis.length; i < len; i++) {
+			if (format.indexOf(lis[i][1]) !== -1) {
+				required=true;
+			}
+			else if (required) {
+				var hasNextValue = false;
+				for (var j=i; j < len; j++) {
+					if (lis[j][0] > 0) {
+						hasNextValue = true;
+						break;
+					}
+				}
+
+				if (! hasNextValue) {
+					break;
+				}
+
+				if (!firstTwoPlaces) {
+					format = firstChar + format;
+				}
+				format = lis[i][1] + separator + format;
+				if (firstTwoPlaces) {
+					format = lis[i][1] + format;
+				}
+				firstChar = lis[i][1];
+			}
+		}
+		options.currentTimeFormat = format;
+	},
+	/*
+	 * Prefix the given number by zero if it is lower than 10.
+	 */
+	twoDigitsString: function(n) {
+		if (n < 10) {
+			return '0' + n;
+		}
+		return String(n);
+	},
+	secondsToTimeCode: function(time, options) {
+		if (time < 0) {
+			time = 0;
+		}
+
+		// Maintain backward compatibility with method signature before v2.18.
+		if (typeof options !== 'object') {
+			var format = 'm:ss';
+			format = arguments[1] ? 'hh:mm:ss' : format; // forceHours
+			format = arguments[2] ? format + ':ff' : format; // showFrameCount
+
+			options = {
+				currentTimeFormat: format,
+				framesPerSecond: arguments[3] || 25
+			};
+		}
+
+		var fps = options.framesPerSecond;
+		if(typeof fps === 'undefined') {
+			fps = 25;
+		}
+
+		var format = options.currentTimeFormat,
+			hours = Math.floor(time / 3600) % 24,
+			minutes = Math.floor(time / 60) % 60,
+			seconds = Math.floor(time % 60),
+			frames = Math.floor(((time % 1)*fps).toFixed(3));
+			lis = [
+				[frames, 'f'],
+				[seconds, 's'],
+				[minutes, 'm'],
+				[hours, 'h']
+			];
+
+		var res = format;
+		for (i=0,len=lis.length; i < len; i++) {
+			res = res.replace(lis[i][1]+lis[i][1], this.twoDigitsString(lis[i][0]));
+			res = res.replace(lis[i][1], lis[i][0]);
+		}
+		return res;
+	},
+	
+	timeCodeToSeconds: function(hh_mm_ss_ff, forceHours, showFrameCount, fps){
+		if (typeof showFrameCount == 'undefined') {
+		    showFrameCount=false;
+		} else if(typeof fps == 'undefined') {
+		    fps = 25;
+		}
+	
+		var tc_array = hh_mm_ss_ff.split(":"),
+			tc_hh = parseInt(tc_array[0], 10),
+			tc_mm = parseInt(tc_array[1], 10),
+			tc_ss = parseInt(tc_array[2], 10),
+			tc_ff = 0,
+			tc_in_seconds = 0;
+		
+		if (showFrameCount) {
+		    tc_ff = parseInt(tc_array[3])/fps;
+		}
+		
+		tc_in_seconds = ( tc_hh * 3600 ) + ( tc_mm * 60 ) + tc_ss + tc_ff;
+		
+		return tc_in_seconds;
+	},
+	
+
+	convertSMPTEtoSeconds: function (SMPTE) {
+		if (typeof SMPTE != 'string') 
+			return false;
+
+		SMPTE = SMPTE.replace(',', '.');
+		
+		var secs = 0,
+			decimalLen = (SMPTE.indexOf('.') != -1) ? SMPTE.split('.')[1].length : 0,
+			multiplier = 1;
+		
+		SMPTE = SMPTE.split(':').reverse();
+		
+		for (var i = 0; i < SMPTE.length; i++) {
+			multiplier = 1;
+			if (i > 0) {
+				multiplier = Math.pow(60, i); 
+			}
+			secs += Number(SMPTE[i]) * multiplier;
+		}
+		return Number(secs.toFixed(decimalLen));
+	},	
+	
+	/* borrowed from SWFObject: http://code.google.com/p/swfobject/source/browse/trunk/swfobject/src/swfobject.js#474 */
+	removeSwf: function(id) {
+		var obj = document.getElementById(id);
+		if (obj && /object|embed/i.test(obj.nodeName)) {
+			if (mejs.MediaFeatures.isIE) {
+				obj.style.display = "none";
+				(function(){
+					if (obj.readyState == 4) {
+						mejs.Utility.removeObjectInIE(id);
+					} else {
+						setTimeout(arguments.callee, 10);
+					}
+				})();
+			} else {
+				obj.parentNode.removeChild(obj);
+			}
+		}
+	},
+	removeObjectInIE: function(id) {
+		var obj = document.getElementById(id);
+		if (obj) {
+			for (var i in obj) {
+				if (typeof obj[i] == "function") {
+					obj[i] = null;
+				}
+			}
+			obj.parentNode.removeChild(obj);
+		}		
+	}
+};
+
+
+// Core detector, plugins are added below
+mejs.PluginDetector = {
+
+	// main public function to test a plug version number PluginDetector.hasPluginVersion('flash',[9,0,125]);
+	hasPluginVersion: function(plugin, v) {
+		var pv = this.plugins[plugin];
+		v[1] = v[1] || 0;
+		v[2] = v[2] || 0;
+		return (pv[0] > v[0] || (pv[0] == v[0] && pv[1] > v[1]) || (pv[0] == v[0] && pv[1] == v[1] && pv[2] >= v[2])) ? true : false;
+	},
+
+	// cached values
+	nav: window.navigator,
+	ua: window.navigator.userAgent.toLowerCase(),
+
+	// stored version numbers
+	plugins: [],
+
+	// runs detectPlugin() and stores the version number
+	addPlugin: function(p, pluginName, mimeType, activeX, axDetect) {
+		this.plugins[p] = this.detectPlugin(pluginName, mimeType, activeX, axDetect);
+	},
+
+	// get the version number from the mimetype (all but IE) or ActiveX (IE)
+	detectPlugin: function(pluginName, mimeType, activeX, axDetect) {
+
+		var version = [0,0,0],
+			description,
+			i,
+			ax;
+
+		// Firefox, Webkit, Opera
+		if (typeof(this.nav.plugins) != 'undefined' && typeof this.nav.plugins[pluginName] == 'object') {
+			description = this.nav.plugins[pluginName].description;
+			if (description && !(typeof this.nav.mimeTypes != 'undefined' && this.nav.mimeTypes[mimeType] && !this.nav.mimeTypes[mimeType].enabledPlugin)) {
+				version = description.replace(pluginName, '').replace(/^\s+/,'').replace(/\sr/gi,'.').split('.');
+				for (i=0; i<version.length; i++) {
+					version[i] = parseInt(version[i].match(/\d+/), 10);
+				}
+			}
+		// Internet Explorer / ActiveX
+		} else if (typeof(window.ActiveXObject) != 'undefined') {
+			try {
+				ax = new ActiveXObject(activeX);
+				if (ax) {
+					version = axDetect(ax);
+				}
+			}
+			catch (e) { }
+		}
+		return version;
+	}
+};
+
+// Add Flash detection
+mejs.PluginDetector.addPlugin('flash','Shockwave Flash','application/x-shockwave-flash','ShockwaveFlash.ShockwaveFlash', function(ax) {
+	// adapted from SWFObject
+	var version = [],
+		d = ax.GetVariable("$version");
+	if (d) {
+		d = d.split(" ")[1].split(",");
+		version = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+	}
+	return version;
+});
+
+// Add Silverlight detection
+mejs.PluginDetector.addPlugin('silverlight','Silverlight Plug-In','application/x-silverlight-2','AgControl.AgControl', function (ax) {
+	// Silverlight cannot report its version number to IE
+	// but it does have a isVersionSupported function, so we have to loop through it to get a version number.
+	// adapted from http://www.silverlightversion.com/
+	var v = [0,0,0,0],
+		loopMatch = function(ax, v, i, n) {
+			while(ax.isVersionSupported(v[0]+ "."+ v[1] + "." + v[2] + "." + v[3])){
+				v[i]+=n;
+			}
+			v[i] -= n;
+		};
+	loopMatch(ax, v, 0, 1);
+	loopMatch(ax, v, 1, 1);
+	loopMatch(ax, v, 2, 10000); // the third place in the version number is usually 5 digits (4.0.xxxxx)
+	loopMatch(ax, v, 2, 1000);
+	loopMatch(ax, v, 2, 100);
+	loopMatch(ax, v, 2, 10);
+	loopMatch(ax, v, 2, 1);
+	loopMatch(ax, v, 3, 1);
+
+	return v;
+});
+// add adobe acrobat
+/*
+PluginDetector.addPlugin('acrobat','Adobe Acrobat','application/pdf','AcroPDF.PDF', function (ax) {
+	var version = [],
+		d = ax.GetVersions().split(',')[0].split('=')[1].split('.');
+
+	if (d) {
+		version = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+	}
+	return version;
+});
+*/
+// necessary detection (fixes for <IE9)
+mejs.MediaFeatures = {
+	init: function() {
+		var
+			t = this,
+			d = document,
+			nav = mejs.PluginDetector.nav,
+			ua = mejs.PluginDetector.ua.toLowerCase(),
+			i,
+			v,
+			html5Elements = ['source','track','audio','video'];
+
+		// detect browsers (only the ones that have some kind of quirk we need to work around)
+		t.isiPad = (ua.match(/ipad/i) !== null);
+		t.isiPhone = (ua.match(/iphone/i) !== null);
+		t.isiOS = t.isiPhone || t.isiPad;
+		t.isAndroid = (ua.match(/android/i) !== null);
+		t.isBustedAndroid = (ua.match(/android 2\.[12]/) !== null);
+		t.isBustedNativeHTTPS = (location.protocol === 'https:' && (ua.match(/android [12]\./) !== null || ua.match(/macintosh.* version.* safari/) !== null));
+		t.isIE = (nav.appName.toLowerCase().indexOf("microsoft") != -1 || nav.appName.toLowerCase().match(/trident/gi) !== null);
+		t.isChrome = (ua.match(/chrome/gi) !== null);
+		t.isChromium = (ua.match(/chromium/gi) !== null);
+		t.isFirefox = (ua.match(/firefox/gi) !== null);
+		t.isWebkit = (ua.match(/webkit/gi) !== null);
+		t.isGecko = (ua.match(/gecko/gi) !== null) && !t.isWebkit && !t.isIE;
+		t.isOpera = (ua.match(/opera/gi) !== null);
+		t.hasTouch = ('ontouchstart' in window); //  && window.ontouchstart != null); // this breaks iOS 7
+
+		// Borrowed from `Modernizr.svgasimg`, sources:
+		// - https://github.com/Modernizr/Modernizr/issues/687
+		// - https://github.com/Modernizr/Modernizr/pull/1209/files
+		t.svgAsImg = !!document.implementation.hasFeature('http://www.w3.org/TR/SVG11/feature#Image', '1.1');
+
+		// create HTML5 media elements for IE before 9, get a <video> element for fullscreen detection
+		for (i=0; i<html5Elements.length; i++) {
+			v = document.createElement(html5Elements[i]);
+		}
+
+		t.supportsMediaTag = (typeof v.canPlayType !== 'undefined' || t.isBustedAndroid);
+
+		// Fix for IE9 on Windows 7N / Windows 7KN (Media Player not installer)
+		try{
+			v.canPlayType("video/mp4");
+		}catch(e){
+			t.supportsMediaTag = false;
+		}
+
+		// detect native JavaScript fullscreen (Safari/Firefox only, Chrome still fails)
+
+		// iOS
+		t.hasSemiNativeFullScreen = (typeof v.webkitEnterFullscreen !== 'undefined');
+
+		// W3C
+		t.hasNativeFullscreen = (typeof v.requestFullscreen !== 'undefined');
+
+		// webkit/firefox/IE11+
+		t.hasWebkitNativeFullScreen = (typeof v.webkitRequestFullScreen !== 'undefined');
+		t.hasMozNativeFullScreen = (typeof v.mozRequestFullScreen !== 'undefined');
+		t.hasMsNativeFullScreen = (typeof v.msRequestFullscreen !== 'undefined');
+
+		t.hasTrueNativeFullScreen = (t.hasWebkitNativeFullScreen || t.hasMozNativeFullScreen || t.hasMsNativeFullScreen);
+		t.nativeFullScreenEnabled = t.hasTrueNativeFullScreen;
+
+		// Enabled?
+		if (t.hasMozNativeFullScreen) {
+			t.nativeFullScreenEnabled = document.mozFullScreenEnabled;
+		} else if (t.hasMsNativeFullScreen) {
+			t.nativeFullScreenEnabled = document.msFullscreenEnabled;
+		}
+
+		if (t.isChrome) {
+			t.hasSemiNativeFullScreen = false;
+		}
+
+		if (t.hasTrueNativeFullScreen) {
+
+			t.fullScreenEventName = '';
+			if (t.hasWebkitNativeFullScreen) {
+				t.fullScreenEventName = 'webkitfullscreenchange';
+
+			} else if (t.hasMozNativeFullScreen) {
+				t.fullScreenEventName = 'mozfullscreenchange';
+
+			} else if (t.hasMsNativeFullScreen) {
+				t.fullScreenEventName = 'MSFullscreenChange';
+			}
+
+			t.isFullScreen = function() {
+				if (t.hasMozNativeFullScreen) {
+					return d.mozFullScreen;
+
+				} else if (t.hasWebkitNativeFullScreen) {
+					return d.webkitIsFullScreen;
+
+				} else if (t.hasMsNativeFullScreen) {
+					return d.msFullscreenElement !== null;
+				}
+			}
+
+			t.requestFullScreen = function(el) {
+
+				if (t.hasWebkitNativeFullScreen) {
+					el.webkitRequestFullScreen();
+
+				} else if (t.hasMozNativeFullScreen) {
+					el.mozRequestFullScreen();
+
+				} else if (t.hasMsNativeFullScreen) {
+					el.msRequestFullscreen();
+
+				}
+			}
+
+			t.cancelFullScreen = function() {
+				if (t.hasWebkitNativeFullScreen) {
+					document.webkitCancelFullScreen();
+
+				} else if (t.hasMozNativeFullScreen) {
+					document.mozCancelFullScreen();
+
+				} else if (t.hasMsNativeFullScreen) {
+					document.msExitFullscreen();
+
+				}
+			}
+
+		}
+
+
+		// OS X 10.5 can't do this even if it says it can :(
+		if (t.hasSemiNativeFullScreen && ua.match(/mac os x 10_5/i)) {
+			t.hasNativeFullScreen = false;
+			t.hasSemiNativeFullScreen = false;
+		}
+
+	}
+};
+mejs.MediaFeatures.init();
+
+/*
+extension methods to <video> or <audio> object to bring it into parity with PluginMediaElement (see below)
+*/
+mejs.HtmlMediaElement = {
+	pluginType: 'native',
+	isFullScreen: false,
+
+	setCurrentTime: function (time) {
+		this.currentTime = time;
+	},
+
+	setMuted: function (muted) {
+		this.muted = muted;
+	},
+
+	setVolume: function (volume) {
+		this.volume = volume;
+	},
+
+	// for parity with the plugin versions
+	stop: function () {
+		this.pause();
+	},
+
+	// This can be a url string
+	// or an array [{src:'file.mp4',type:'video/mp4'},{src:'file.webm',type:'video/webm'}]
+	setSrc: function (url) {
+		
+		// Fix for IE9 which can't set .src when there are <source> elements. Awesome, right?
+		var 
+			existingSources = this.getElementsByTagName('source');
+		while (existingSources.length > 0){
+			this.removeChild(existingSources[0]);
+		}
+	
+		if (typeof url == 'string') {
+			this.src = url;
+		} else {
+			var i, media;
+
+			for (i=0; i<url.length; i++) {
+				media = url[i];
+				if (this.canPlayType(media.type)) {
+					this.src = media.src;
+					break;
+				}
+			}
+		}
+	},
+
+	setVideoSize: function (width, height) {
+		this.width = width;
+		this.height = height;
+	}
+};
+
+/*
+Mimics the <video/audio> element by calling Flash's External Interface or Silverlights [ScriptableMember]
+*/
+mejs.PluginMediaElement = function (pluginid, pluginType, mediaUrl) {
+	this.id = pluginid;
+	this.pluginType = pluginType;
+	this.src = mediaUrl;
+	this.events = {};
+	this.attributes = {};
+};
+
+// JavaScript values and ExternalInterface methods that match HTML5 video properties methods
+// http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/fl/video/FLVPlayback.html
+// http://www.whatwg.org/specs/web-apps/current-work/multipage/video.html
+mejs.PluginMediaElement.prototype = {
+
+	// special
+	pluginElement: null,
+	pluginType: '',
+	isFullScreen: false,
+
+	// not implemented :(
+	playbackRate: -1,
+	defaultPlaybackRate: -1,
+	seekable: [],
+	played: [],
+
+	// HTML5 read-only properties
+	paused: true,
+	ended: false,
+	seeking: false,
+	duration: 0,
+	error: null,
+	tagName: '',
+
+	// HTML5 get/set properties, but only set (updated by event handlers)
+	muted: false,
+	volume: 1,
+	currentTime: 0,
+
+	// HTML5 methods
+	play: function () {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube' || this.pluginType == 'vimeo') {
+				this.pluginApi.playVideo();
+			} else {
+				this.pluginApi.playMedia();
+			}
+			this.paused = false;
+		}
+	},
+	load: function () {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube' || this.pluginType == 'vimeo') {
+			} else {
+				this.pluginApi.loadMedia();
+			}
+			
+			this.paused = false;
+		}
+	},
+	pause: function () {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube' || this.pluginType == 'vimeo') {
+				this.pluginApi.pauseVideo();
+			} else {
+				this.pluginApi.pauseMedia();
+			}			
+			
+			
+			this.paused = true;
+		}
+	},
+	stop: function () {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube' || this.pluginType == 'vimeo') {
+				this.pluginApi.stopVideo();
+			} else {
+				this.pluginApi.stopMedia();
+			}	
+			this.paused = true;
+		}
+	},
+	canPlayType: function(type) {
+		var i,
+			j,
+			pluginInfo,
+			pluginVersions = mejs.plugins[this.pluginType];
+
+		for (i=0; i<pluginVersions.length; i++) {
+			pluginInfo = pluginVersions[i];
+
+			// test if user has the correct plugin version
+			if (mejs.PluginDetector.hasPluginVersion(this.pluginType, pluginInfo.version)) {
+
+				// test for plugin playback types
+				for (j=0; j<pluginInfo.types.length; j++) {
+					// find plugin that can play the type
+					if (type == pluginInfo.types[j]) {
+						return 'probably';
+					}
+				}
+			}
+		}
+
+		return '';
+	},
+	
+	positionFullscreenButton: function(x,y,visibleAndAbove) {
+		if (this.pluginApi != null && this.pluginApi.positionFullscreenButton) {
+			this.pluginApi.positionFullscreenButton(Math.floor(x),Math.floor(y),visibleAndAbove);
+		}
+	},
+	
+	hideFullscreenButton: function() {
+		if (this.pluginApi != null && this.pluginApi.hideFullscreenButton) {
+			this.pluginApi.hideFullscreenButton();
+		}		
+	},	
+	
+
+	// custom methods since not all JavaScript implementations support get/set
+
+	// This can be a url string
+	// or an array [{src:'file.mp4',type:'video/mp4'},{src:'file.webm',type:'video/webm'}]
+	setSrc: function (url) {
+		if (typeof url == 'string') {
+			this.pluginApi.setSrc(mejs.Utility.absolutizeUrl(url));
+			this.src = mejs.Utility.absolutizeUrl(url);
+		} else {
+			var i, media;
+
+			for (i=0; i<url.length; i++) {
+				media = url[i];
+				if (this.canPlayType(media.type)) {
+					this.pluginApi.setSrc(mejs.Utility.absolutizeUrl(media.src));
+					this.src = mejs.Utility.absolutizeUrl(media.src);
+					break;
+				}
+			}
+		}
+
+	},
+	setCurrentTime: function (time) {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube' || this.pluginType == 'vimeo') {
+				this.pluginApi.seekTo(time);
+			} else {
+				this.pluginApi.setCurrentTime(time);
+			}				
+			
+			
+			
+			this.currentTime = time;
+		}
+	},
+	setVolume: function (volume) {
+		if (this.pluginApi != null) {
+			// same on YouTube and MEjs
+			if (this.pluginType == 'youtube') {
+				this.pluginApi.setVolume(volume * 100);
+			} else {
+				this.pluginApi.setVolume(volume);
+			}
+			this.volume = volume;
+		}
+	},
+	setMuted: function (muted) {
+		if (this.pluginApi != null) {
+			if (this.pluginType == 'youtube') {
+				if (muted) {
+					this.pluginApi.mute();
+				} else {
+					this.pluginApi.unMute();
+				}
+				this.muted = muted;
+				this.dispatchEvent({type:'volumechange'});
+			} else {
+				this.pluginApi.setMuted(muted);
+			}
+			this.muted = muted;
+		}
+	},
+
+	// additional non-HTML5 methods
+	setVideoSize: function (width, height) {
+		
+		//if (this.pluginType == 'flash' || this.pluginType == 'silverlight') {
+			if (this.pluginElement && this.pluginElement.style) {
+				this.pluginElement.style.width = width + 'px';
+				this.pluginElement.style.height = height + 'px';
+			}
+			if (this.pluginApi != null && this.pluginApi.setVideoSize) {
+				this.pluginApi.setVideoSize(width, height);
+			}
+		//}
+	},
+
+	setFullscreen: function (fullscreen) {
+		if (this.pluginApi != null && this.pluginApi.setFullscreen) {
+			this.pluginApi.setFullscreen(fullscreen);
+		}
+	},
+	
+	enterFullScreen: function() {
+		if (this.pluginApi != null && this.pluginApi.setFullscreen) {
+			this.setFullscreen(true);
+		}		
+		
+	},
+	
+	exitFullScreen: function() {
+		if (this.pluginApi != null && this.pluginApi.setFullscreen) {
+			this.setFullscreen(false);
+		}
+	},	
+
+	// start: fake events
+	addEventListener: function (eventName, callback, bubble) {
+		this.events[eventName] = this.events[eventName] || [];
+		this.events[eventName].push(callback);
+	},
+	removeEventListener: function (eventName, callback) {
+		if (!eventName) { this.events = {}; return true; }
+		var callbacks = this.events[eventName];
+		if (!callbacks) return true;
+		if (!callback) { this.events[eventName] = []; return true; }
+		for (var i = 0; i < callbacks.length; i++) {
+			if (callbacks[i] === callback) {
+				this.events[eventName].splice(i, 1);
+				return true;
+			}
+		}
+		return false;
+	},	
+	dispatchEvent: function (event) {
+		var i,
+			args,
+			callbacks = this.events[event.type];
+
+		if (callbacks) {
+			for (i = 0; i < callbacks.length; i++) {
+				callbacks[i].apply(this, [event]);
+			}
+		}
+	},
+	// end: fake events
+	
+	// fake DOM attribute methods
+	hasAttribute: function(name){
+		return (name in this.attributes);  
+	},
+	removeAttribute: function(name){
+		delete this.attributes[name];
+	},
+	getAttribute: function(name){
+		if (this.hasAttribute(name)) {
+			return this.attributes[name];
+		}
+		return '';
+	},
+	setAttribute: function(name, value){
+		this.attributes[name] = value;
+	},
+
+	remove: function() {
+		mejs.Utility.removeSwf(this.pluginElement.id);
+		mejs.MediaPluginBridge.unregisterPluginElement(this.pluginElement.id);
+	}
+};
+
+// Handles calls from Flash/Silverlight and reports them as native <video/audio> events and properties
+mejs.MediaPluginBridge = {
+
+	pluginMediaElements:{},
+	htmlMediaElements:{},
+
+	registerPluginElement: function (id, pluginMediaElement, htmlMediaElement) {
+		this.pluginMediaElements[id] = pluginMediaElement;
+		this.htmlMediaElements[id] = htmlMediaElement;
+	},
+
+	unregisterPluginElement: function (id) {
+		delete this.pluginMediaElements[id];
+		delete this.htmlMediaElements[id];
+	},
+
+	// when Flash/Silverlight is ready, it calls out to this method
+	initPlugin: function (id) {
+
+		var pluginMediaElement = this.pluginMediaElements[id],
+			htmlMediaElement = this.htmlMediaElements[id];
+
+		if (pluginMediaElement) {
+			// find the javascript bridge
+			switch (pluginMediaElement.pluginType) {
+				case "flash":
+					pluginMediaElement.pluginElement = pluginMediaElement.pluginApi = document.getElementById(id);
+					break;
+				case "silverlight":
+					pluginMediaElement.pluginElement = document.getElementById(pluginMediaElement.id);
+					pluginMediaElement.pluginApi = pluginMediaElement.pluginElement.Content.MediaElementJS;
+					break;
+			}
+	
+			if (pluginMediaElement.pluginApi != null && pluginMediaElement.success) {
+				pluginMediaElement.success(pluginMediaElement, htmlMediaElement);
+			}
+		}
+	},
+
+	// receives events from Flash/Silverlight and sends them out as HTML5 media events
+	// http://www.whatwg.org/specs/web-apps/current-work/multipage/video.html
+	fireEvent: function (id, eventName, values) {
+
+		var
+			e,
+			i,
+			bufferedTime,
+			pluginMediaElement = this.pluginMediaElements[id];
+
+		if(!pluginMediaElement){
+            return;
+        }
+        
+		// fake event object to mimic real HTML media event.
+		e = {
+			type: eventName,
+			target: pluginMediaElement
+		};
+
+		// attach all values to element and event object
+		for (i in values) {
+			pluginMediaElement[i] = values[i];
+			e[i] = values[i];
+		}
+
+		// fake the newer W3C buffered TimeRange (loaded and total have been removed)
+		bufferedTime = values.bufferedTime || 0;
+
+		e.target.buffered = e.buffered = {
+			start: function(index) {
+				return 0;
+			},
+			end: function (index) {
+				return bufferedTime;
+			},
+			length: 1
+		};
+
+		pluginMediaElement.dispatchEvent(e);
+	}
+};
+
+/*
+Default options
+*/
+mejs.MediaElementDefaults = {
+	// allows testing on HTML5, flash, silverlight
+	// auto: attempts to detect what the browser can do
+	// auto_plugin: prefer plugins and then attempt native HTML5
+	// native: forces HTML5 playback
+	// shim: disallows HTML5, will attempt either Flash or Silverlight
+	// none: forces fallback view
+	mode: 'auto',
+	// remove or reorder to change plugin priority and availability
+	plugins: ['flash','silverlight','youtube','vimeo'],
+	// shows debug errors on screen
+	enablePluginDebug: false,
+	// use plugin for browsers that have trouble with Basic Authentication on HTTPS sites
+	httpsBasicAuthSite: false,
+	// overrides the type specified, useful for dynamic instantiation
+	type: '',
+	// path to Flash and Silverlight plugins
+	pluginPath: mejs.Utility.getScriptPath(['mediaelement.js','mediaelement.min.js','mediaelement-and-player.js','mediaelement-and-player.min.js']),
+	// name of flash file
+	flashName: 'flashmediaelement.swf',
+	// streamer for RTMP streaming
+	flashStreamer: '',
+	// set to 'always' for CDN version
+	flashScriptAccess: 'sameDomain',	
+	// turns on the smoothing filter in Flash
+	enablePluginSmoothing: false,
+	// enabled pseudo-streaming (seek) on .mp4 files
+	enablePseudoStreaming: false,
+	// start query parameter sent to server for pseudo-streaming
+	pseudoStreamingStartQueryParam: 'start',
+	// name of silverlight file
+	silverlightName: 'silverlightmediaelement.xap',
+	// default if the <video width> is not specified
+	defaultVideoWidth: 480,
+	// default if the <video height> is not specified
+	defaultVideoHeight: 270,
+	// overrides <video width>
+	pluginWidth: -1,
+	// overrides <video height>
+	pluginHeight: -1,
+	// additional plugin variables in 'key=value' form
+	pluginVars: [],	
+	// rate in milliseconds for Flash and Silverlight to fire the timeupdate event
+	// larger number is less accurate, but less strain on plugin->JavaScript bridge
+	timerRate: 250,
+	// initial volume for player
+	startVolume: 0.8,
+	success: function () { },
+	error: function () { }
+};
+
+/*
+Determines if a browser supports the <video> or <audio> element
+and returns either the native element or a Flash/Silverlight version that
+mimics HTML5 MediaElement
+*/
+mejs.MediaElement = function (el, o) {
+	return mejs.HtmlMediaElementShim.create(el,o);
+};
+
+mejs.HtmlMediaElementShim = {
+
+	create: function(el, o) {
+		var
+			options = {},
+			htmlMediaElement = (typeof(el) == 'string') ? document.getElementById(el) : el,
+			tagName = htmlMediaElement.tagName.toLowerCase(),
+			isMediaTag = (tagName === 'audio' || tagName === 'video'),
+			src = (isMediaTag) ? htmlMediaElement.getAttribute('src') : htmlMediaElement.getAttribute('href'),
+			poster = htmlMediaElement.getAttribute('poster'),
+			autoplay =  htmlMediaElement.getAttribute('autoplay'),
+			preload =  htmlMediaElement.getAttribute('preload'),
+			controls =  htmlMediaElement.getAttribute('controls'),
+			playback,
+			prop;
+
+		// extend options
+		for (prop in mejs.MediaElementDefaults) {
+			options[prop] = mejs.MediaElementDefaults[prop];
+		}
+		for (prop in o) {
+			options[prop] = o[prop];
+		}		
+		
+
+		// clean up attributes
+		src = 		(typeof src == 'undefined' 	|| src === null || src == '') ? null : src;		
+		poster =	(typeof poster == 'undefined' 	|| poster === null) ? '' : poster;
+		preload = 	(typeof preload == 'undefined' 	|| preload === null || preload === 'false') ? 'none' : preload;
+		autoplay = 	!(typeof autoplay == 'undefined' || autoplay === null || autoplay === 'false');
+		controls = 	!(typeof controls == 'undefined' || controls === null || controls === 'false');
+
+		// test for HTML5 and plugin capabilities
+		playback = this.determinePlayback(htmlMediaElement, options, mejs.MediaFeatures.supportsMediaTag, isMediaTag, src);
+		playback.url = (playback.url !== null) ? mejs.Utility.absolutizeUrl(playback.url) : '';
+
+		if (playback.method == 'native') {
+			// second fix for android
+			if (mejs.MediaFeatures.isBustedAndroid) {
+				htmlMediaElement.src = playback.url;
+				htmlMediaElement.addEventListener('click', function() {
+					htmlMediaElement.play();
+				}, false);
+			}
+		
+			// add methods to native HTMLMediaElement
+			return this.updateNative(playback, options, autoplay, preload);
+		} else if (playback.method !== '') {
+			// create plugin to mimic HTMLMediaElement
+			
+			return this.createPlugin( playback,  options, poster, autoplay, preload, controls);
+		} else {
+			// boo, no HTML5, no Flash, no Silverlight.
+			this.createErrorMessage( playback, options, poster );
+			
+			return this;
+		}
+	},
+	
+	determinePlayback: function(htmlMediaElement, options, supportsMediaTag, isMediaTag, src) {
+		var
+			mediaFiles = [],
+			i,
+			j,
+			k,
+			l,
+			n,
+			type,
+			result = { method: '', url: '', htmlMediaElement: htmlMediaElement, isVideo: (htmlMediaElement.tagName.toLowerCase() != 'audio')},
+			pluginName,
+			pluginVersions,
+			pluginInfo,
+			dummy,
+			media;
+			
+		// STEP 1: Get URL and type from <video src> or <source src>
+
+		// supplied type overrides <video type> and <source type>
+		if (typeof options.type != 'undefined' && options.type !== '') {
+			
+			// accept either string or array of types
+			if (typeof options.type == 'string') {
+				mediaFiles.push({type:options.type, url:src});
+			} else {
+				
+				for (i=0; i<options.type.length; i++) {
+					mediaFiles.push({type:options.type[i], url:src});
+				}
+			}
+
+		// test for src attribute first
+		} else if (src !== null) {
+			type = this.formatType(src, htmlMediaElement.getAttribute('type'));
+			mediaFiles.push({type:type, url:src});
+
+		// then test for <source> elements
+		} else {
+			// test <source> types to see if they are usable
+			for (i = 0; i < htmlMediaElement.childNodes.length; i++) {
+				n = htmlMediaElement.childNodes[i];
+				if (n.nodeType == 1 && n.tagName.toLowerCase() == 'source') {
+					src = n.getAttribute('src');
+					type = this.formatType(src, n.getAttribute('type'));
+					media = n.getAttribute('media');
+
+					if (!media || !window.matchMedia || (window.matchMedia && window.matchMedia(media).matches)) {
+						mediaFiles.push({type:type, url:src});
+					}
+				}
+			}
+		}
+		
+		// in the case of dynamicly created players
+		// check for audio types
+		if (!isMediaTag && mediaFiles.length > 0 && mediaFiles[0].url !== null && this.getTypeFromFile(mediaFiles[0].url).indexOf('audio') > -1) {
+			result.isVideo = false;
+		}
+		
+
+		// STEP 2: Test for playback method
+		
+		// special case for Android which sadly doesn't implement the canPlayType function (always returns '')
+		if (mejs.MediaFeatures.isBustedAndroid) {
+			htmlMediaElement.canPlayType = function(type) {
+				return (type.match(/video\/(mp4|m4v)/gi) !== null) ? 'maybe' : '';
+			};
+		}		
+		
+		// special case for Chromium to specify natively supported video codecs (i.e. WebM and Theora) 
+		if (mejs.MediaFeatures.isChromium) { 
+			htmlMediaElement.canPlayType = function(type) { 
+				return (type.match(/video\/(webm|ogv|ogg)/gi) !== null) ? 'maybe' : ''; 
+			}; 
+		}
+
+		// test for native playback first
+		if (supportsMediaTag && (options.mode === 'auto' || options.mode === 'auto_plugin' || options.mode === 'native')  && !(mejs.MediaFeatures.isBustedNativeHTTPS && options.httpsBasicAuthSite === true)) {
+						
+			if (!isMediaTag) {
+
+				// create a real HTML5 Media Element 
+				dummy = document.createElement( result.isVideo ? 'video' : 'audio');			
+				htmlMediaElement.parentNode.insertBefore(dummy, htmlMediaElement);
+				htmlMediaElement.style.display = 'none';
+				
+				// use this one from now on
+				result.htmlMediaElement = htmlMediaElement = dummy;
+			}
+				
+			for (i=0; i<mediaFiles.length; i++) {
+				// normal check
+				if (mediaFiles[i].type == "video/m3u8" || htmlMediaElement.canPlayType(mediaFiles[i].type).replace(/no/, '') !== ''
+					// special case for Mac/Safari 5.0.3 which answers '' to canPlayType('audio/mp3') but 'maybe' to canPlayType('audio/mpeg')
+					|| htmlMediaElement.canPlayType(mediaFiles[i].type.replace(/mp3/,'mpeg')).replace(/no/, '') !== ''
+					// special case for m4a supported by detecting mp4 support
+					|| htmlMediaElement.canPlayType(mediaFiles[i].type.replace(/m4a/,'mp4')).replace(/no/, '') !== '') {
+					result.method = 'native';
+					result.url = mediaFiles[i].url;
+					break;
+				}
+			}			
+			
+			if (result.method === 'native') {
+				if (result.url !== null) {
+					htmlMediaElement.src = result.url;
+				}
+			
+				// if `auto_plugin` mode, then cache the native result but try plugins.
+				if (options.mode !== 'auto_plugin') {
+					return result;
+				}
+			}
+		}
+
+		// if native playback didn't work, then test plugins
+		if (options.mode === 'auto' || options.mode === 'auto_plugin' || options.mode === 'shim') {
+			for (i=0; i<mediaFiles.length; i++) {
+				type = mediaFiles[i].type;
+
+				// test all plugins in order of preference [silverlight, flash]
+				for (j=0; j<options.plugins.length; j++) {
+
+					pluginName = options.plugins[j];
+			
+					// test version of plugin (for future features)
+					pluginVersions = mejs.plugins[pluginName];				
+					
+					for (k=0; k<pluginVersions.length; k++) {
+						pluginInfo = pluginVersions[k];
+					
+						// test if user has the correct plugin version
+						
+						// for youtube/vimeo
+						if (pluginInfo.version == null || 
+							
+							mejs.PluginDetector.hasPluginVersion(pluginName, pluginInfo.version)) {
+
+							// test for plugin playback types
+							for (l=0; l<pluginInfo.types.length; l++) {
+								// find plugin that can play the type
+								if (type.toLowerCase() == pluginInfo.types[l].toLowerCase()) {
+									result.method = pluginName;
+									result.url = mediaFiles[i].url;
+									return result;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// at this point, being in 'auto_plugin' mode implies that we tried plugins but failed.
+		// if we have native support then return that.
+		if (options.mode === 'auto_plugin' && result.method === 'native') {
+			return result;
+		}
+
+		// what if there's nothing to play? just grab the first available
+		if (result.method === '' && mediaFiles.length > 0) {
+			result.url = mediaFiles[0].url;
+		}
+
+		return result;
+	},
+
+	formatType: function(url, type) {
+		// if no type is supplied, fake it with the extension
+		if (url && !type) {		
+			return this.getTypeFromFile(url);
+		} else {
+			// only return the mime part of the type in case the attribute contains the codec
+			// see http://www.whatwg.org/specs/web-apps/current-work/multipage/video.html#the-source-element
+			// `video/mp4; codecs="avc1.42E01E, mp4a.40.2"` becomes `video/mp4`
+			
+			if (type && ~type.indexOf(';')) {
+				return type.substr(0, type.indexOf(';')); 
+			} else {
+				return type;
+			}
+		}
+	},
+	
+	getTypeFromFile: function(url) {
+		url = url.split('?')[0];
+		var
+			ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase(),
+			av = /(mp4|m4v|ogg|ogv|m3u8|webm|webmv|flv|wmv|mpeg|mov)/gi.test(ext) ? 'video/' : 'audio/';
+		return this.getTypeFromExtension(ext, av);
+	},
+	
+	getTypeFromExtension: function(ext, av) {
+		av = av || '';
+		
+		switch (ext) {
+			case 'mp4':
+			case 'm4v':
+			case 'm4a':
+			case 'f4v':
+			case 'f4a':
+				return av + 'mp4';
+			case 'flv':
+				return av + 'x-flv';
+			case 'webm':
+			case 'webma':
+			case 'webmv':	
+				return av + 'webm';
+			case 'ogg':
+			case 'oga':
+			case 'ogv':	
+				return av + 'ogg';
+			case 'm3u8':
+				return 'application/x-mpegurl';
+			case 'ts':
+				return av + 'mp2t';
+			default:
+				return av + ext;
+		}
+	},
+
+	createErrorMessage: function(playback, options, poster) {
+		var 
+			htmlMediaElement = playback.htmlMediaElement,
+			errorContainer = document.createElement('div'),
+			errorContent = options.customError;
+			
+		errorContainer.className = 'me-cannotplay';
+
+		try {
+			errorContainer.style.width = htmlMediaElement.width + 'px';
+			errorContainer.style.height = htmlMediaElement.height + 'px';
+		} catch (e) {}
+
+		if (!errorContent) {
+			errorContent = '<a href="' + playback.url + '">';
+
+			if (poster !== '') {
+				errorContent += '<img src="' + poster + '" width="100%" height="100%" alt="" />';
+			}
+
+			errorContent += '<span>' + mejs.i18n.t('Download File') + '</span></a>';
+		}
+
+		errorContainer.innerHTML = errorContent;
+
+		htmlMediaElement.parentNode.insertBefore(errorContainer, htmlMediaElement);
+		htmlMediaElement.style.display = 'none';
+
+		options.error(htmlMediaElement);
+	},
+
+	createPlugin:function(playback, options, poster, autoplay, preload, controls) {
+		var 
+			htmlMediaElement = playback.htmlMediaElement,
+			width = 1,
+			height = 1,
+			pluginid = 'me_' + playback.method + '_' + (mejs.meIndex++),
+			pluginMediaElement = new mejs.PluginMediaElement(pluginid, playback.method, playback.url),
+			container = document.createElement('div'),
+			specialIEContainer,
+			node,
+			initVars;
+
+		// copy tagName from html media element
+		pluginMediaElement.tagName = htmlMediaElement.tagName
+
+		// copy attributes from html media element to plugin media element
+		for (var i = 0; i < htmlMediaElement.attributes.length; i++) {
+			var attribute = htmlMediaElement.attributes[i];
+			if (attribute.specified) {
+				pluginMediaElement.setAttribute(attribute.name, attribute.value);
+			}
+		}
+
+		// check for placement inside a <p> tag (sometimes WYSIWYG editors do this)
+		node = htmlMediaElement.parentNode;
+
+		while (node !== null && node.tagName != null && node.tagName.toLowerCase() !== 'body' && 
+				node.parentNode != null && node.parentNode.tagName != null && node.parentNode.constructor != null && node.parentNode.constructor.name === "ShadowRoot") {
+			if (node.parentNode.tagName.toLowerCase() === 'p') {
+				node.parentNode.parentNode.insertBefore(node, node.parentNode);
+				break;
+			}
+			node = node.parentNode;
+		}
+
+		if (playback.isVideo) {
+			width = (options.pluginWidth > 0) ? options.pluginWidth : (options.videoWidth > 0) ? options.videoWidth : (htmlMediaElement.getAttribute('width') !== null) ? htmlMediaElement.getAttribute('width') : options.defaultVideoWidth;
+			height = (options.pluginHeight > 0) ? options.pluginHeight : (options.videoHeight > 0) ? options.videoHeight : (htmlMediaElement.getAttribute('height') !== null) ? htmlMediaElement.getAttribute('height') : options.defaultVideoHeight;
+		
+			// in case of '%' make sure it's encoded
+			width = mejs.Utility.encodeUrl(width);
+			height = mejs.Utility.encodeUrl(height);
+		
+		} else {
+			if (options.enablePluginDebug) {
+				width = 320;
+				height = 240;
+			}
+		}
+
+		// register plugin
+		pluginMediaElement.success = options.success;
+		mejs.MediaPluginBridge.registerPluginElement(pluginid, pluginMediaElement, htmlMediaElement);
+
+		// add container (must be added to DOM before inserting HTML for IE)
+		container.className = 'me-plugin';
+		container.id = pluginid + '_container';
+		
+		if (playback.isVideo) {
+				htmlMediaElement.parentNode.insertBefore(container, htmlMediaElement);
+		} else {
+				document.body.insertBefore(container, document.body.childNodes[0]);
+		}
+
+		// flash/silverlight vars
+		initVars = [
+			'id=' + pluginid,
+			'jsinitfunction=' + "mejs.MediaPluginBridge.initPlugin",
+			'jscallbackfunction=' + "mejs.MediaPluginBridge.fireEvent",
+			'isvideo=' + ((playback.isVideo) ? "true" : "false"),
+			'autoplay=' + ((autoplay) ? "true" : "false"),
+			'preload=' + preload,
+			'width=' + width,
+			'startvolume=' + options.startVolume,
+			'timerrate=' + options.timerRate,
+			'flashstreamer=' + options.flashStreamer,
+			'height=' + height,
+			'pseudostreamstart=' + options.pseudoStreamingStartQueryParam];
+
+		if (playback.url !== null) {
+			if (playback.method == 'flash') {
+				initVars.push('file=' + mejs.Utility.encodeUrl(playback.url));
+			} else {
+				initVars.push('file=' + playback.url);
+			}
+		}
+		if (options.enablePluginDebug) {
+			initVars.push('debug=true');
+		}
+		if (options.enablePluginSmoothing) {
+			initVars.push('smoothing=true');
+		}
+		if (options.enablePseudoStreaming) {
+			initVars.push('pseudostreaming=true');
+		}
+		if (controls) {
+			initVars.push('controls=true'); // shows controls in the plugin if desired
+		}
+		if (options.pluginVars) {
+			initVars = initVars.concat(options.pluginVars);
+		}		
+
+		switch (playback.method) {
+			case 'silverlight':
+				container.innerHTML =
+'<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" id="' + pluginid + '" name="' + pluginid + '" width="' + width + '" height="' + height + '" class="mejs-shim">' +
+'<param name="initParams" value="' + initVars.join(',') + '" />' +
+'<param name="windowless" value="true" />' +
+'<param name="background" value="black" />' +
+'<param name="minRuntimeVersion" value="3.0.0.0" />' +
+'<param name="autoUpgrade" value="true" />' +
+'<param name="source" value="' + options.pluginPath + options.silverlightName + '" />' +
+'</object>';
+					break;
+
+			case 'flash':
+
+				if (mejs.MediaFeatures.isIE) {
+					specialIEContainer = document.createElement('div');
+					container.appendChild(specialIEContainer);
+					specialIEContainer.outerHTML =
+'<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab" ' +
+'id="' + pluginid + '" width="' + width + '" height="' + height + '" class="mejs-shim">' +
+'<param name="movie" value="' + options.pluginPath + options.flashName + '?x=' + (new Date()) + '" />' +
+'<param name="flashvars" value="' + initVars.join('&amp;') + '" />' +
+'<param name="quality" value="high" />' +
+'<param name="bgcolor" value="#000000" />' +
+'<param name="wmode" value="transparent" />' +
+'<param name="allowScriptAccess" value="' + options.flashScriptAccess + '" />' +
+'<param name="allowFullScreen" value="true" />' +
+'<param name="scale" value="default" />' + 
+'</object>';
+
+				} else {
+
+					container.innerHTML =
+'<embed id="' + pluginid + '" name="' + pluginid + '" ' +
+'play="true" ' +
+'loop="false" ' +
+'quality="high" ' +
+'bgcolor="#000000" ' +
+'wmode="transparent" ' +
+'allowScriptAccess="' + options.flashScriptAccess + '" ' +
+'allowFullScreen="true" ' +
+'type="application/x-shockwave-flash" pluginspage="//www.macromedia.com/go/getflashplayer" ' +
+'src="' + options.pluginPath + options.flashName + '" ' +
+'flashvars="' + initVars.join('&') + '" ' +
+'width="' + width + '" ' +
+'height="' + height + '" ' +
+'scale="default"' + 
+'class="mejs-shim"></embed>';
+				}
+				break;
+			
+			case 'youtube':
+			
+				
+				var videoId;
+				// youtu.be url from share button
+				if (playback.url.lastIndexOf("youtu.be") != -1) {
+					videoId = playback.url.substr(playback.url.lastIndexOf('/')+1);
+					if (videoId.indexOf('?') != -1) {
+						videoId = videoId.substr(0, videoId.indexOf('?'));
+					}
+				}
+				else {
+					videoId = playback.url.substr(playback.url.lastIndexOf('=')+1);
+				}
+				youtubeSettings = {
+						container: container,
+						containerId: container.id,
+						pluginMediaElement: pluginMediaElement,
+						pluginId: pluginid,
+						videoId: videoId,
+						height: height,
+						width: width	
+					};				
+				
+				if (mejs.PluginDetector.hasPluginVersion('flash', [10,0,0]) ) {
+				// favor iframe version of YouTube
+				if (window.postMessage) {
+					mejs.YouTubeApi.enqueueIframe(youtubeSettings);
+				} else if (mejs.PluginDetector.hasPluginVersion('flash', [10,0,0]) ) {
+					mejs.YouTubeApi.createFlash(youtubeSettings, options);
+				}
+				
+				break;
+			
+			// DEMO Code. Does NOT work.
+			case 'vimeo':
+				var player_id = pluginid + "_player";
+				pluginMediaElement.vimeoid = playback.url.substr(playback.url.lastIndexOf('/')+1);
+				
+				container.innerHTML ='<iframe src="//player.vimeo.com/video/' + pluginMediaElement.vimeoid + '?api=1&portrait=0&byline=0&title=0&player_id=' + player_id + '" width="' + width +'" height="' + height +'" frameborder="0" class="mejs-shim" id="' + player_id + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+				if (typeof($f) == 'function') { // froogaloop available
+					var player = $f(container.childNodes[0]);
+					
+					player.addEvent('ready', function() {
+						
+						player.playVideo = function() {
+							player.api( 'play' );
+						} 
+						player.stopVideo = function() {
+							player.api( 'unload' );
+						} 
+						player.pauseVideo = function() {
+							player.api( 'pause' );
+						} 
+						player.seekTo = function( seconds ) {
+							player.api( 'seekTo', seconds );
+						}
+						player.setVolume = function( volume ) {
+							player.api( 'setVolume', volume );
+						}
+						player.setMuted = function( muted ) {
+							if( muted ) {
+								player.lastVolume = player.api( 'getVolume' );
+								player.api( 'setVolume', 0 );
+							} else {
+								player.api( 'setVolume', player.lastVolume );
+								delete player.lastVolume;
+							}
+						}						
+
+						function createEvent(player, pluginMediaElement, eventName, e) {
+							var event = {
+								type: eventName,
+								target: pluginMediaElement
+							};
+							if (eventName == 'timeupdate') {
+								pluginMediaElement.currentTime = event.currentTime = e.seconds;
+								pluginMediaElement.duration = event.duration = e.duration;
+							}
+							pluginMediaElement.dispatchEvent(event);
+						}
+
+						player.addEvent('play', function() {
+							createEvent(player, pluginMediaElement, 'play');
+							createEvent(player, pluginMediaElement, 'playing');
+						});
+
+						player.addEvent('pause', function() {
+							createEvent(player, pluginMediaElement, 'pause');
+						});
+
+						player.addEvent('finish', function() {
+							createEvent(player, pluginMediaElement, 'ended');
+						});
+
+						player.addEvent('playProgress', function(e) {
+							createEvent(player, pluginMediaElement, 'timeupdate', e);
+						});
+
+						pluginMediaElement.pluginElement = container;
+						pluginMediaElement.pluginApi = player;
+
+						// init mejs
+						mejs.MediaPluginBridge.initPlugin(pluginid);
+					});
+				}
+				else {
+					console.warn("You need to include froogaloop for vimeo to work");
+				}
+				break;			
+		}
+		// hide original element
+		htmlMediaElement.style.display = 'none';
+		// prevent browser from autoplaying when using a plugin
+		htmlMediaElement.removeAttribute('autoplay');
+
+		// FYI: options.success will be fired by the MediaPluginBridge
+		
+		return pluginMediaElement;
+	},
+
+	updateNative: function(playback, options, autoplay, preload) {
+		
+		var htmlMediaElement = playback.htmlMediaElement,
+			m;
+		
+		
+		// add methods to video object to bring it into parity with Flash Object
+		for (m in mejs.HtmlMediaElement) {
+			htmlMediaElement[m] = mejs.HtmlMediaElement[m];
+		}
+
+		/*
+		Chrome now supports preload="none"
+		if (mejs.MediaFeatures.isChrome) {
+		
+			// special case to enforce preload attribute (Chrome doesn't respect this)
+			if (preload === 'none' && !autoplay) {
+			
+				// forces the browser to stop loading (note: fails in IE9)
+				htmlMediaElement.src = '';
+				htmlMediaElement.load();
+				htmlMediaElement.canceledPreload = true;
+
+				htmlMediaElement.addEventListener('play',function() {
+					if (htmlMediaElement.canceledPreload) {
+						htmlMediaElement.src = playback.url;
+						htmlMediaElement.load();
+						htmlMediaElement.play();
+						htmlMediaElement.canceledPreload = false;
+					}
+				}, false);
+			// for some reason Chrome forgets how to autoplay sometimes.
+			} else if (autoplay) {
+				htmlMediaElement.load();
+				htmlMediaElement.play();
+			}
+		}
+		*/
+
+		// fire success code
+		options.success(htmlMediaElement, htmlMediaElement);
+		
+		return htmlMediaElement;
+	}
+};
+
+/*
+ - test on IE (object vs. embed)
+ - determine when to use iframe (Firefox, Safari, Mobile) vs. Flash (Chrome, IE)
+ - fullscreen?
+*/
+
+// YouTube Flash and Iframe API
+mejs.YouTubeApi = {
+	isIframeStarted: false,
+	isIframeLoaded: false,
+	loadIframeApi: function() {
+		if (!this.isIframeStarted) {
+			var tag = document.createElement('script');
+			tag.src = "//www.youtube.com/player_api";
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			this.isIframeStarted = true;
+		}
+	},
+	iframeQueue: [],
+	enqueueIframe: function(yt) {
+		
+		if (this.isLoaded) {
+			this.createIframe(yt);
+		} else {
+			this.loadIframeApi();
+			this.iframeQueue.push(yt);
+		}
+	},
+	createIframe: function(settings) {
+		
+		var
+		pluginMediaElement = settings.pluginMediaElement,	
+		player = new YT.Player(settings.containerId, {
+			height: settings.height,
+			width: settings.width,
+			videoId: settings.videoId,
+			playerVars: {controls:0},
+			events: {
+				'onReady': function() {
+					
+					// hook up iframe object to MEjs
+					settings.pluginMediaElement.pluginApi = player;
+					
+					// init mejs
+					mejs.MediaPluginBridge.initPlugin(settings.pluginId);
+					
+					// create timer
+					setInterval(function() {
+						mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'timeupdate');
+					}, 250);					
+				},
+				'onStateChange': function(e) {
+					
+					mejs.YouTubeApi.handleStateChange(e.data, player, pluginMediaElement);
+					
+				}
+			}
+		});
+	},
+	
+	createEvent: function (player, pluginMediaElement, eventName) {
+		var event = {
+			type: eventName,
+			target: pluginMediaElement
+		};
+
+		if (player && player.getDuration) {
+			
+			// time 
+			pluginMediaElement.currentTime = event.currentTime = player.getCurrentTime();
+			pluginMediaElement.duration = event.duration = player.getDuration();
+			
+			// state
+			event.paused = pluginMediaElement.paused;
+			event.ended = pluginMediaElement.ended;			
+			
+			// sound
+			event.muted = player.isMuted();
+			event.volume = player.getVolume() / 100;
+			
+			// progress
+			event.bytesTotal = player.getVideoBytesTotal();
+			event.bufferedBytes = player.getVideoBytesLoaded();
+			
+			// fake the W3C buffered TimeRange
+			var bufferedTime = event.bufferedBytes / event.bytesTotal * event.duration;
+			
+			event.target.buffered = event.buffered = {
+				start: function(index) {
+					return 0;
+				},
+				end: function (index) {
+					return bufferedTime;
+				},
+				length: 1
+			};
+
+		}
+		
+		// send event up the chain
+		pluginMediaElement.dispatchEvent(event);
+	},	
+	
+	iFrameReady: function() {
+		
+		this.isLoaded = true;
+		this.isIframeLoaded = true;
+		
+		while (this.iframeQueue.length > 0) {
+			var settings = this.iframeQueue.pop();
+			this.createIframe(settings);
+		}	
+	},
+	
+	// FLASH!
+	flashPlayers: {},
+	createFlash: function(settings) {
+		
+		this.flashPlayers[settings.pluginId] = settings;
+		
+		/*
+		settings.container.innerHTML =
+			'<object type="application/x-shockwave-flash" id="' + settings.pluginId + '" data="//www.youtube.com/apiplayer?enablejsapi=1&amp;playerapiid=' + settings.pluginId  + '&amp;version=3&amp;autoplay=0&amp;controls=0&amp;modestbranding=1&loop=0" ' +
+				'width="' + settings.width + '" height="' + settings.height + '" style="visibility: visible; " class="mejs-shim">' +
+				'<param name="allowScriptAccess" value="sameDomain">' +
+				'<param name="wmode" value="transparent">' +
+			'</object>';
+		*/
+
+		var specialIEContainer,
+			youtubeUrl = '//www.youtube.com/apiplayer?enablejsapi=1&amp;playerapiid=' + settings.pluginId  + '&amp;version=3&amp;autoplay=0&amp;controls=0&amp;modestbranding=1&loop=0';
+			
+		if (mejs.MediaFeatures.isIE) {
+			
+			specialIEContainer = document.createElement('div');
+			settings.container.appendChild(specialIEContainer);
+			specialIEContainer.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab" ' +
+'id="' + settings.pluginId + '" width="' + settings.width + '" height="' + settings.height + '" class="mejs-shim">' +
+	'<param name="movie" value="' + youtubeUrl + '" />' +
+	'<param name="wmode" value="transparent" />' +
+	'<param name="allowScriptAccess" value="' + options.flashScriptAccess + '" />' +
+	'<param name="allowFullScreen" value="true" />' +
+'</object>';
+		} else {
+		settings.container.innerHTML =
+			'<object type="application/x-shockwave-flash" id="' + settings.pluginId + '" data="' + youtubeUrl + '" ' +
+				'width="' + settings.width + '" height="' + settings.height + '" style="visibility: visible; " class="mejs-shim">' +
+				'<param name="allowScriptAccess" value="' + options.flashScriptAccess + '">' +
+				'<param name="wmode" value="transparent">' +
+			'</object>';
+		}		
+		
+	},
+	
+	flashReady: function(id) {
+		var
+			settings = this.flashPlayers[id],
+			player = document.getElementById(id),
+			pluginMediaElement = settings.pluginMediaElement;
+		
+		// hook up and return to MediaELementPlayer.success	
+		pluginMediaElement.pluginApi = 
+		pluginMediaElement.pluginElement = player;
+		mejs.MediaPluginBridge.initPlugin(id);
+		
+		// load the youtube video
+		player.cueVideoById(settings.videoId);
+		
+		var callbackName = settings.containerId + '_callback';
+		
+		window[callbackName] = function(e) {
+			mejs.YouTubeApi.handleStateChange(e, player, pluginMediaElement);
+		}
+		
+		player.addEventListener('onStateChange', callbackName);
+		
+		setInterval(function() {
+			mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'timeupdate');
+		}, 250);
+		
+		mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'canplay');
+	},
+	
+	handleStateChange: function(youTubeState, player, pluginMediaElement) {
+		switch (youTubeState) {
+			case -1: // not started
+				pluginMediaElement.paused = true;
+				pluginMediaElement.ended = true;
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'loadedmetadata');
+				//createYouTubeEvent(player, pluginMediaElement, 'loadeddata');
+				break;
+			case 0:
+				pluginMediaElement.paused = false;
+				pluginMediaElement.ended = true;
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'ended');
+				break;
+			case 1:
+				pluginMediaElement.paused = false;
+				pluginMediaElement.ended = false;				
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'play');
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'playing');
+				break;
+			case 2:
+				pluginMediaElement.paused = true;
+				pluginMediaElement.ended = false;				
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'pause');
+				break;
+			case 3: // buffering
+				mejs.YouTubeApi.createEvent(player, pluginMediaElement, 'progress');
+				break;
+			case 5:
+				// cued?
+				break;						
+			
+		}			
+		
+	}
+}
+// IFRAME
+window.onYouTubePlayerAPIReady = function() {
+	mejs.YouTubeApi.iFrameReady();
+};
+// FLASH
+window.onYouTubePlayerReady = function(id) {
+	mejs.YouTubeApi.flashReady(id);
+};
+
+window.mejs = mejs;
+window.MediaElement = mejs.MediaElement;
+
+/*
+ * Adds Internationalization and localization to mediaelement.
+ *
+ * This file does not contain translations, you have to add them manually.
+ * The schema is always the same: me-i18n-locale-[IETF-language-tag].js
+ *
+ * Examples are provided both for german and chinese translation.
+ *
+ *
+ * What is the concept beyond i18n?
+ *   http://en.wikipedia.org/wiki/Internationalization_and_localization
+ *
+ * What langcode should i use?
+ *   http://en.wikipedia.org/wiki/IETF_language_tag
+ *   https://tools.ietf.org/html/rfc5646
+ *
+ *
+ * License?
+ *
+ *   The i18n file uses methods from the Drupal project (drupal.js):
+ *     - i18n.methods.t() (modified)
+ *     - i18n.methods.checkPlain() (full copy)
+ *
+ *   The Drupal project is (like mediaelementjs) licensed under GPLv2.
+ *    - http://drupal.org/licensing/faq/#q1
+ *    - https://github.com/johndyer/mediaelement
+ *    - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ *
+ *
+ * @author
+ *   Tim Latz (latz.tim@gmail.com)
+ *
+ *
+ * @params
+ *  - context - document, iframe ..
+ *  - exports - CommonJS, window ..
+ *
+ */
+;(function(context, exports, undefined) {
+    "use strict";
+
+    var i18n = {
+        "locale": {
+            // Ensure previous values aren't overwritten.
+            "language" : (exports.i18n && exports.i18n.locale.language) || '',
+            "strings" : (exports.i18n && exports.i18n.locale.strings) || {}
+        },
+        "ietf_lang_regex" : /^(x\-)?[a-z]{2,}(\-\w{2,})?(\-\w{2,})?$/,
+        "methods" : {}
+    };
+// start i18n
+
+
+    /**
+     * Get language, fallback to browser's language if empty
+     *
+     * IETF: RFC 5646, https://tools.ietf.org/html/rfc5646
+     * Examples: en, zh-CN, cmn-Hans-CN, sr-Latn-RS, es-419, x-private
+     */
+    i18n.getLanguage = function () {
+        var language = i18n.locale.language || window.navigator.userLanguage || window.navigator.language;
+        return i18n.ietf_lang_regex.exec(language) ? language : null;
+
+        //(WAS: convert to iso 639-1 (2-letters, lower case))
+        //return language.substr(0, 2).toLowerCase();
+    };
+
+    // i18n fixes for compatibility with WordPress
+    if ( typeof mejsL10n != 'undefined' ) {
+        i18n.locale.language = mejsL10n.language;
+    }
+
+
+
+    /**
+     * Encode special characters in a plain-text string for display as HTML.
+     */
+    i18n.methods.checkPlain = function (str) {
+        var character, regex,
+        replace = {
+            '&': '&amp;',
+            '"': '&quot;',
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+        str = String(str);
+        for (character in replace) {
+            if (replace.hasOwnProperty(character)) {
+                regex = new RegExp(character, 'g');
+                str = str.replace(regex, replace[character]);
+            }
+        }
+        return str;
+    };
+
+    /**
+     * Translate strings to the page language or a given language.
+     *
+     *
+     * @param str
+     *   A string containing the English string to translate.
+     *
+     * @param options
+     *   - 'context' (defaults to the default context): The context the source string
+     *     belongs to.
+     *
+     * @return
+     *   The translated string, escaped via i18n.methods.checkPlain()
+     */
+    i18n.methods.t = function (str, options) {
+
+        // Fetch the localized version of the string.
+        if (i18n.locale.strings && i18n.locale.strings[options.context] && i18n.locale.strings[options.context][str]) {
+            str = i18n.locale.strings[options.context][str];
+        }
+
+        return i18n.methods.checkPlain(str);
+    };
+
+
+    /**
+     * Wrapper for i18n.methods.t()
+     *
+     * @see i18n.methods.t()
+     * @throws InvalidArgumentException
+     */
+    i18n.t = function(str, options) {
+
+        if (typeof str === 'string' && str.length > 0) {
+
+            // check every time due language can change for
+            // different reasons (translation, lang switcher ..)
+            var language = i18n.getLanguage();
+
+            options = options || {
+                "context" : language
+            };
+
+            return i18n.methods.t(str, options);
+        }
+        else {
+            throw {
+                "name" : 'InvalidArgumentException',
+                "message" : 'First argument is either not a string or empty.'
+            };
+        }
+    };
+
+// end i18n
+    exports.i18n = i18n;
+}(document, mejs));
+
+// i18n fixes for compatibility with WordPress
+;(function(exports, undefined) {
+
+    "use strict";
+
+    if ( typeof mejsL10n != 'undefined' ) {
+        exports[mejsL10n.language] = mejsL10n.strings;
+    }
+
+}(mejs.i18n.locale.strings));
+
+/*!
+ *
  * MediaElementPlayer
  * http://mediaelementjs.com/
  *
@@ -12,6 +2050,19 @@
  */
 if (typeof jQuery != 'undefined') {
 	mejs.$ = jQuery;
+} else if (typeof Zepto != 'undefined') {
+	mejs.$ = Zepto;
+
+	// define `outerWidth` method which has not been realized in Zepto
+	Zepto.fn.outerWidth = function(includeMargin) {
+		var width = $(this).width();
+		if (includeMargin) {
+			width += parseInt($(this).css('margin-right'), 10);
+			width += parseInt($(this).css('margin-left'), 10);
+		}
+		return width
+	}
+
 } else if (typeof ender != 'undefined') {
 	mejs.$ = ender;
 }
@@ -60,9 +2111,25 @@ if (typeof jQuery != 'undefined') {
                 autoRewind: true,
 		// resize to media dimensions
 		enableAutosize: true,
+
+		/*
+		 * Time format to use. Default: 'mm:ss'
+		 * Supported units:
+		 *   h: hour
+		 *   m: minute
+		 *   s: second
+		 *   f: frame count
+		 * When using 'hh', 'mm', 'ss' or 'ff' we always display 2 digits.
+		 * If you use 'h', 'm', 's' or 'f' we display 1 digit if possible.
+		 *
+		 * Example to display 75 seconds:
+		 * Format 'mm:ss': 01:15
+		 * Format 'm:ss': 1:15
+		 * Format 'm:s': 1:15
+		 */
+		timeFormat: '',
 		// forces the hour marker (##:00:00)
 		alwaysShowHours: false,
-
 		// show framecount in timecode (##:00:00:00)
 		showTimecodeFrameCount: false,
 		// used when showTimecodeFrameCount is set to true
@@ -102,9 +2169,9 @@ if (typeof jQuery != 'undefined') {
 							  ],
 						action: function(player, media) {
 								if (media.paused || media.ended) {
-										player.play();
+										media.play();
 								} else {
-										player.pause();
+										media.pause();
 								}
 						}
 				},
@@ -217,12 +2284,13 @@ if (typeof jQuery != 'undefined') {
 		t.$media = t.$node = $(node);
 		t.node = t.media = t.$media[0];
 
+		if(!t.node) {
+			return
+		}
+
 		// check for existing player
 		if (typeof t.node.player != 'undefined') {
 			return t.node.player;
-		} else {
-			// attach player to DOM node for reference
-			t.node.player = t;
 		}
 
 
@@ -233,6 +2301,19 @@ if (typeof jQuery != 'undefined') {
 
 		// extend default options
 		t.options = $.extend({},mejs.MepDefaults,o);
+
+		if (!t.options.timeFormat) {
+			// Generate the time format according to options
+			t.options.timeFormat = 'mm:ss';
+			if (t.options.alwaysShowHours) {
+				t.options.timeFormat = 'hh:mm:ss';
+			}
+			if (t.options.showTimecodeFrameCount) {
+				t.options.timeFormat += ':ff';
+			}
+		}
+
+		mejs.Utility.calculateTimeFormat(0, t.options, t.options.framesPerSecond || 25);
 
 		// unique ID
 		t.id = 'mep_' + mejs.mepIndex++;
@@ -305,8 +2386,8 @@ if (typeof jQuery != 'undefined') {
 				$('<span class="mejs-offscreen">' + videoPlayerTitle + '</span>').insertBefore(t.$media);
 				// build container
 				t.container =
-					$('<div id="' + t.id + '" class="mejs-container ' + (mejs.MediaFeatures.svg ? 'svg' : 'no-svg') +
-                      '" tabindex="0" role="application" aria-label="' + videoPlayerTitle + '">'+
+					$('<div id="' + t.id + '" class="mejs-container ' + (mejs.MediaFeatures.svgAsImg ? 'svg' : 'no-svg') +
+					  '" tabindex="0" role="application" aria-label="' + videoPlayerTitle + '">'+
 						'<div class="mejs-inner">'+
 							'<div class="mejs-mediaelement"></div>'+
 							'<div class="mejs-layers"></div>'+
@@ -335,22 +2416,10 @@ if (typeof jQuery != 'undefined') {
 
 
 				// move the <video/video> tag into the right spot
-				if (mf.isiOS) {
+				t.container.find('.mejs-mediaelement').append(t.$media);
 
-					// sadly, you can't move nodes in iOS, so we have to destroy and recreate it!
-					var $newMedia = t.$media.clone();
-
-					t.container.find('.mejs-mediaelement').append($newMedia);
-
-					t.$media.remove();
-					t.$node = t.$media = $newMedia;
-					t.node = t.media = $newMedia[0];
-
-				} else {
-
-					// normal way of moving it into place (doesn't work on iOS)
-					t.container.find('.mejs-mediaelement').append(t.$media);
-				}
+				// needs to be assigned here, after iOS remap
+				t.node.player = t;
 
 				// find parts
 				t.controls = t.container.find('.mejs-controls');
@@ -630,7 +2699,7 @@ if (typeof jQuery != 'undefined') {
 
 						// show/hide controls
 						t.container
-							.bind('mouseenter mouseover', function () {
+							.bind('mouseenter', function () {
 								if (t.controlsEnabled) {
 									if (!t.options.alwaysShowControls ) {
 										t.killControlsTimer('enter');
@@ -744,6 +2813,15 @@ if (typeof jQuery != 'undefined') {
 					}
 				}, false);
 
+				// Only change the time format when necessary
+				var duration = null;
+				t.media.addEventListener('timeupdate',function() {
+					if (duration !== this.duration) {
+						duration = this.duration;
+						mejs.Utility.calculateTimeFormat(duration, t.options, t.options.framesPerSecond || 25);
+					}
+				}, false);
+
 				t.container.focusout(function (e) {
 					if( e.relatedTarget ) { //FF is working on supporting focusout https://bugzilla.mozilla.org/show_bug.cgi?id=687787
 						var $target = $(e.relatedTarget);
@@ -799,7 +2877,9 @@ if (typeof jQuery != 'undefined') {
 		handleError: function(e) {
 			var t = this;
 
-			t.controls.hide();
+			if (t.controls) {
+				t.controls.hide();
+			}
 
 			// Tell user that the file cannot be played
 			if (t.options.error) {
@@ -823,7 +2903,7 @@ if (typeof jQuery != 'undefined') {
 			}
 
 			// detect 100% mode - use currentStyle for IE since css() doesn't return percentages
-			if (t.height.toString().indexOf('%') > 0 || t.$node.css('max-width') === '100%' || (t.$node[0].currentStyle && t.$node[0].currentStyle.maxWidth === '100%')) {
+			if (t.height.toString().indexOf('%') > 0 || (t.$node.css('max-width') !== 'none' && t.$node.css('max-width') !== 't.width') || (t.$node[0].currentStyle && t.$node[0].currentStyle.maxWidth === '100%')) {
 
 				// do we have the native dimensions yet?
 				var nativeWidth = (function() {
@@ -864,7 +2944,7 @@ if (typeof jQuery != 'undefined') {
 					newHeight = parentHeight;
 				}
 
-				if (t.container.parent()[0].tagName.toLowerCase() === 'body') { // && t.container.siblings().count == 0) {
+				if (t.container.parent().length > 0 && t.container.parent()[0].tagName.toLowerCase() === 'body') { // && t.container.siblings().count == 0) {
 					parentWidth = $(window).width();
 					newHeight = $(window).height();
 				}
@@ -907,13 +2987,6 @@ if (typeof jQuery != 'undefined') {
 
 			}
 
-			// special case for big play button so it doesn't go over the controls area
-			var playLayer = t.layers.find('.mejs-overlay-play'),
-				playButton = playLayer.find('.mejs-overlay-button');
-
-			playLayer.height(t.container.height() - t.controls.height());
-			playButton.css('margin-top', '-' + (playButton.height()/2 - t.controls.height()/2).toString() + 'px'  );
-
 		},
 
 		setControlsSize: function() {
@@ -922,8 +2995,6 @@ if (typeof jQuery != 'undefined') {
 				railWidth = 0,
 				rail = t.controls.find('.mejs-time-rail'),
 				total = t.controls.find('.mejs-time-total'),
-				current = t.controls.find('.mejs-time-current'),
-				loaded = t.controls.find('.mejs-time-loaded'),
 				others = rail.siblings(),
 				lastControl = others.last(),
 				lastControlPosition = null;
@@ -966,15 +3037,12 @@ if (typeof jQuery != 'undefined') {
 				total.width(railWidth - (total.outerWidth(true) - total.width()));
 
 				if (lastControl.css('position') != 'absolute') {
-					lastControlPosition = lastControl.position();
+					lastControlPosition = lastControl.length ? lastControl.position() : null;
 					railWidth--;
 				}
 			} while (lastControlPosition !== null && lastControlPosition.top > 0 && railWidth > 0);
 
-			if (t.setProgressRail)
-				t.setProgressRail();
-			if (t.setCurrentRail)
-				t.setCurrentRail();
+			t.container.trigger('controlsresize');
 		},
 
 
@@ -1015,7 +3083,7 @@ if (typeof jQuery != 'undefined') {
 				posterImg = posterDiv.find('img');
 
 			if (posterImg.length === 0) {
-				posterImg = $('<img width="100%" height="100%" />').appendTo(posterDiv);
+				posterImg = $('<img width="100%" height="100%" alt="" />').appendTo(posterDiv);
 			}
 
 			posterImg.attr('src', url);
@@ -1127,11 +3195,12 @@ if (typeof jQuery != 'undefined') {
 			}, false);
 
 			// error handling
-			media.addEventListener('error',function() {
+			media.addEventListener('error',function(e) {
+				t.handleError(e);
 				loading.hide();
-				controls.find('.mejs-time-buffering').hide();
+				bigPlay.hide();
 				error.show();
-				error.find('mejs-overlay-error').html("Error loading this resource");
+				error.find('.mejs-overlay-error').html("Error loading this resource");
 			}, false);
 
 			media.addEventListener('keydown', function(e) {
@@ -1148,8 +3217,9 @@ if (typeof jQuery != 'undefined') {
 				});
 
 				// listen for key presses
-				t.globalBind('keydown', function(e) {
-					return t.onkeydown(player, media, e);
+				t.globalBind('keydown', function(event) {
+					player.hasFocus = $(event.target).closest('.mejs-container').length !== 0;
+					return t.onkeydown(player, media, event);
 				});
 
 
@@ -1240,6 +3310,8 @@ if (typeof jQuery != 'undefined') {
 		remove: function() {
 			var t = this, featureIndex, feature;
 
+			t.container.prev('.mejs-offscreen').remove();
+
 			// invoke features cleanup
 			for (featureIndex in t.options.features) {
 				feature = t.options.features[featureIndex];
@@ -1284,6 +3356,15 @@ if (typeof jQuery != 'undefined') {
 			var t = this;
 			t.findTracks();
 			t.buildtracks(t, t.controls, t.layers, t.media);
+		},
+		resetSize: function(){
+			var t = this;
+			// webkit has trouble doing this without a delay
+			setTimeout(function () {
+				//
+				t.setPlayerSize(t.width, t.height);
+				t.setControlsSize();
+			}, 50);
 		}
 	};
 
@@ -1309,16 +3390,20 @@ if (typeof jQuery != 'undefined') {
 		}
 
 		mejs.MediaElementPlayer.prototype.globalBind = function(events, data, callback) {
-			var t = this;
+    	var t = this;
+      var doc = t.node ? t.node.ownerDocument : document;
+
 			events = splitEvents(events, t.id);
-			if (events.d) $(document).bind(events.d, data, callback);
+			if (events.d) $(doc).bind(events.d, data, callback);
 			if (events.w) $(window).bind(events.w, data, callback);
 		};
 
 		mejs.MediaElementPlayer.prototype.globalUnbind = function(events, callback) {
 			var t = this;
+      var doc = t.node ? t.node.ownerDocument : document;
+
 			events = splitEvents(events, t.id);
-			if (events.d) $(document).unbind(events.d, callback);
+			if (events.d) $(doc).unbind(events.d, callback);
 			if (events.w) $(window).unbind(events.w, callback);
 		};
 	})();
@@ -1433,9 +3518,9 @@ if (typeof jQuery != 'undefined') {
 	// STOP BUTTON
 	$.extend(MediaElementPlayer.prototype, {
 		buildstop: function(player, controls, layers, media) {
-			var t = this,
-				stop = 
-				$('<div class="mejs-button mejs-stop-button mejs-stop">' +
+			var t = this;
+
+			$('<div class="mejs-button mejs-stop-button mejs-stop">' +
 					'<button type="button" aria-controls="' + t.id + '" title="' + t.options.stopText + '" aria-label="' + t.options.stopText + '"></button>' +
 				'</div>')
 				.appendTo(controls)
@@ -1448,8 +3533,8 @@ if (typeof jQuery != 'undefined') {
                         media.pause();
 						controls.find('.mejs-time-current').width('0px');
 						controls.find('.mejs-time-handle').css('left', '0px');
-						controls.find('.mejs-time-float-current').html( mejs.Utility.secondsToTimeCode(0) );
-						controls.find('.mejs-currenttime').html( mejs.Utility.secondsToTimeCode(0) );					
+						controls.find('.mejs-time-float-current').html( mejs.Utility.secondsToTimeCode(0, player.options));
+						controls.find('.mejs-currenttime').html( mejs.Utility.secondsToTimeCode(0, player.options));
 						layers.find('.mejs-poster').show();
 					}
 				});
@@ -1472,15 +3557,16 @@ if (typeof jQuery != 'undefined') {
 			$('<div class="mejs-time-rail">' +
 				'<span  class="mejs-time-total mejs-time-slider">' +
 				//'<span class="mejs-offscreen">' + this.options.progessHelpText + '</span>' +
-				'<span class="mejs-time-buffering"></span>' +
-				'<span class="mejs-time-loaded"></span>' +
-				'<span class="mejs-time-current"></span>' +
-				'<span class="mejs-time-handle"></span>' +
-				'<span class="mejs-time-float">' +
-				'<span class="mejs-time-float-current">00:00</span>' +
-				'<span class="mejs-time-float-corner"></span>' +
+					'<span class="mejs-time-buffering"></span>' +
+					'<span class="mejs-time-loaded"></span>' +
+					'<span class="mejs-time-current"></span>' +
+					'<span class="mejs-time-handle"></span>' +
+					'<span class="mejs-time-float">' +
+						'<span class="mejs-time-float-current">00:00</span>' +
+						'<span class="mejs-time-float-corner"></span>' +
+					'</span>' +
 				'</span>' +
-				'</div>')
+			'</div>')
 				.appendTo(controls);
 			controls.find('.mejs-time-buffering').hide();
 
@@ -1496,16 +3582,18 @@ if (typeof jQuery != 'undefined') {
 				handleMouseMove = function (e) {
 					
                     var offset = total.offset(),
-						width = total.outerWidth(true),
+						width = total.width(),
 						percentage = 0,
 						newTime = 0,
 						pos = 0,
                         x;
                     
                     // mouse or touch position relative to the object
-					if (e.originalEvent.changedTouches) {
+					if (e.originalEvent && e.originalEvent.changedTouches) {
 						x = e.originalEvent.changedTouches[0].pageX;
-					}else{
+					} else if (e.changedTouches) { // for Zepto
+						x = e.changedTouches[0].pageX;
+					} else {
 						x = e.pageX;
 					}
 
@@ -1528,7 +3616,7 @@ if (typeof jQuery != 'undefined') {
 						// position floating time box
 						if (!mejs.MediaFeatures.hasTouch) {
 								timefloat.css('left', pos);
-								timefloatcurrent.html( mejs.Utility.secondsToTimeCode(newTime) );
+								timefloatcurrent.html( mejs.Utility.secondsToTimeCode(newTime, player.options) );
 								timefloat.show();
 						}
 					}
@@ -1543,7 +3631,7 @@ if (typeof jQuery != 'undefined') {
 
 				var seconds = media.currentTime,
 					timeSliderText = mejs.i18n.t('Time Slider'),
-					time = mejs.Utility.secondsToTimeCode(seconds),
+					time = mejs.Utility.secondsToTimeCode(seconds, player.options),
 					duration = media.duration;
 
 				slider.attr({
@@ -1678,6 +3766,10 @@ if (typeof jQuery != 'undefined') {
 				updateSlider(e);
 			}, false);
 			
+			t.container.on('controlsresize', function() {
+				player.setProgressRail();
+				player.setCurrentRail();
+			});
 			
 			// store for later use
 			t.loaded = loaded;
@@ -1694,8 +3786,8 @@ if (typeof jQuery != 'undefined') {
 
 			// newest HTML5 spec has buffered array (FF4, Webkit)
 			if (target && target.buffered && target.buffered.length > 0 && target.buffered.end && target.duration) {
-				// TODO: account for a real array with multiple values (only Firefox 4 has this so far) 
-				percent = target.buffered.end(0) / target.duration;
+				// account for a real array with multiple values - always read the end of the last buffer
+				percent = target.buffered.end(target.buffered.length - 1) / target.duration;
 			} 
 			// Some browsers (e.g., FF3.6 and Safari 5) cannot calculate target.bufferered.end()
 			// to be anything other than 0. If the byte count is available we use this instead.
@@ -1738,6 +3830,7 @@ if (typeof jQuery != 'undefined') {
 		}
 	});
 })(mejs.$);
+
 (function($) {
 	
 	// options
@@ -1754,8 +3847,7 @@ if (typeof jQuery != 'undefined') {
 			
 			$('<div class="mejs-time" role="timer" aria-live="off">' +
 					'<span class="mejs-currenttime">' + 
-                        (player.options.alwaysShowHours ? '00:' : '') +
-                        (player.options.showTimecodeFrameCount? '00:00:00':'00:00') + 
+						mejs.Utility.secondsToTimeCode(0, player.options) +
                     '</span>'+
 				'</div>')
 			.appendTo(controls);
@@ -1774,10 +3866,7 @@ if (typeof jQuery != 'undefined') {
 			if (controls.children().last().find('.mejs-currenttime').length > 0) {
 				$(t.options.timeAndDurationSeparator +
 					'<span class="mejs-duration">' + 
-						(t.options.duration > 0 ? 
-							mejs.Utility.secondsToTimeCode(t.options.duration, t.options.alwaysShowHours || t.media.duration > 3600, t.options.showTimecodeFrameCount,  t.options.framesPerSecond || 25) :
-							((player.options.alwaysShowHours ? '00:' : '') + (player.options.showTimecodeFrameCount? '00:00:00':'00:00'))
-						) + 
+						mejs.Utility.secondsToTimeCode(t.options.duration, t.options) +
 					'</span>')
 					.appendTo(controls.find('.mejs-time'));
 			} else {
@@ -1787,10 +3876,7 @@ if (typeof jQuery != 'undefined') {
 				
 				$('<div class="mejs-time mejs-duration-container">'+
 					'<span class="mejs-duration">' + 
-						(t.options.duration > 0 ? 
-							mejs.Utility.secondsToTimeCode(t.options.duration, t.options.alwaysShowHours || t.media.duration > 3600, t.options.showTimecodeFrameCount,  t.options.framesPerSecond || 25) :
-							((player.options.alwaysShowHours ? '00:' : '') + (player.options.showTimecodeFrameCount? '00:00:00':'00:00')) 
-						) + 
+						mejs.Utility.secondsToTimeCode(t.options.duration, t.options) +
 					'</span>' +
 				'</div>')
 				.appendTo(controls);
@@ -1807,7 +3893,7 @@ if (typeof jQuery != 'undefined') {
 			var t = this;
 
 			if (t.currenttime) {
-				t.currenttime.html(mejs.Utility.secondsToTimeCode(t.media.currentTime, t.options.alwaysShowHours || t.media.duration > 3600, t.options.showTimecodeFrameCount,  t.options.framesPerSecond || 25));
+				t.currenttime.html(mejs.Utility.secondsToTimeCode(t.media.currentTime, t.options));
 			}
 		},
 		
@@ -1818,7 +3904,7 @@ if (typeof jQuery != 'undefined') {
 			t.container.toggleClass("mejs-long-video", t.media.duration > 3600);
 			
 			if (t.durationD && (t.options.duration > 0 || t.media.duration)) {
-				t.durationD.html(mejs.Utility.secondsToTimeCode(t.options.duration > 0 ? t.options.duration : t.media.duration, t.options.alwaysShowHours, t.options.showTimecodeFrameCount, t.options.framesPerSecond || 25));
+				t.durationD.html(mejs.Utility.secondsToTimeCode(t.options.duration > 0 ? t.options.duration : t.media.duration, t.options));
 			}		
 		}
 	});
@@ -1898,8 +3984,10 @@ if (typeof jQuery != 'undefined') {
 				// ajust mute button style
 				if (volume === 0) {
 					mute.removeClass('mejs-mute').addClass('mejs-unmute');
+					mute.children('button').attr('title', mejs.i18n.t('Unmute')).attr('aria-label', mejs.i18n.t('Unmute'));
 				} else {
 					mute.removeClass('mejs-unmute').addClass('mejs-mute');
+					mute.children('button').attr('title', mejs.i18n.t('Mute')).attr('aria-label', mejs.i18n.t('Mute'));
 				}
 
                 // top/left of full size volume slider background
@@ -1945,7 +4033,6 @@ if (typeof jQuery != 'undefined') {
 				
 					var
 						railHeight = volumeTotal.height(),
-						totalTop = parseInt(volumeTotal.css('top').replace(/px/,''),10),
 						newY = e.pageY - totalOffset.top;
 						
 					volume = (railHeight - newY) / railHeight;
@@ -2050,9 +4137,6 @@ if (typeof jQuery != 'undefined') {
 					positionVolumeHandle(volume);
 					media.setVolume(volume);
 					return false;
-				})
-				.bind('blur', function () {
-					volumeSlider.hide();
 				});
 
 			// MUTE button
@@ -2078,25 +4162,25 @@ if (typeof jQuery != 'undefined') {
 				}
 				updateVolumeSlider(e);
 			}, false);
-
-			if (t.container.is(':visible')) {
-				// set initial volume
-				positionVolumeHandle(player.options.startVolume);
-
-				// mutes the media and sets the volume icon muted if the initial volume is set to 0
-				if (player.options.startVolume === 0) {
-					media.setMuted(true);
-				}
-
-				// shim gets the startvolume as a parameter, but we have to set it on the native <video> and <audio> elements
-				if (media.pluginType === 'native') {
-					media.setVolume(player.options.startVolume);
-				}
+			
+			// mutes the media and sets the volume icon muted if the initial volume is set to 0
+			if (player.options.startVolume === 0) {
+				media.setMuted(true);
 			}
+			
+			// shim gets the startvolume as a parameter, but we have to set it on the native <video> and <audio> elements
+			if (media.pluginType === 'native') {
+				media.setVolume(player.options.startVolume);
+			}
+			
+			t.container.on('controlsresize', function() {
+				positionVolumeHandle(media.volume);
+			});
 		}
 	});
 	
 })(mejs.$);
+
 (function($) {
 
 	$.extend(mejs.MepDefaults, {
@@ -2143,9 +4227,6 @@ if (typeof jQuery != 'undefined') {
 			}
 
 			var t = this,
-				normalHeight = 0,
-				normalWidth = 0,
-				container = player.container,
 				fullscreenBtn =
 					$('<div class="mejs-button mejs-fullscreen-button">' +
 						'<button type="button" aria-controls="' + t.id + '" title="' + t.options.fullscreenText + '" aria-label="' + t.options.fullscreenText + '"></button>' +
@@ -2375,6 +4456,9 @@ if (typeof jQuery != 'undefined') {
 					player.exitFullScreen();
 				}
 			});
+			
+			t.normalHeight = 0;
+			t.normalWidth = 0;
 
 		},
 
@@ -2399,8 +4483,8 @@ if (typeof jQuery != 'undefined') {
             $(document.documentElement).addClass('mejs-fullscreen');
 
 			// store sizing
-			normalHeight = t.container.height();
-			normalWidth = t.container.width();
+			t.normalHeight = t.container.height();
+			t.normalWidth = t.container.width();
 
 			// attempt to do true fullscreen (Safari 5.1 and Firefox Nightly only for now)
 			if (t.media.pluginType === 'native') {
@@ -2415,13 +4499,25 @@ if (typeof jQuery != 'undefined') {
 						setTimeout(function checkFullscreen() {
 
 							if (t.isNativeFullScreen) {
-								var zoomMultiplier = window["devicePixelRatio"] || 1;
+								var zoomMultiplier = window["devicePixelRatio"] || 1,
 								// Use a percent error margin since devicePixelRatio is a float and not exact.
-								var percentErrorMargin = 0.002; // 0.2%
-								var windowWidth = zoomMultiplier * $(window).width();
-								var screenWidth = screen.width;
-								var absDiff = Math.abs(screenWidth - windowWidth);
-								var marginError = screenWidth * percentErrorMargin;
+									percentErrorMargin = 0.002, // 0.2%
+									windowWidth = zoomMultiplier * $(window).width(),
+									screenWidth = screen.width,
+									// ** 13twelve
+									// Screen width is sort of useless: http://www.quirksmode.org/blog/archives/2013/11/screenwidth_is.html
+									// My rMBP ignores devicePixelRatio when returning the values, so fullscreen would always fail the "suddenly not fullscreen" test
+									// Theory: the gap between reported values should give us an indication of browser behavior with screen.width and devicePixelRatio
+									zoomedWindowWidth = zoomMultiplier * windowWidth;
+									
+								if (Math.abs(screenWidth-windowWidth) > Math.abs(screenWidth-zoomedWindowWidth)) {
+									// screen.width is likely true pixels, not CSS pixels, so we need to use the zoomed window width for comparison
+									windowWidth = zoomedWindowWidth;
+								}
+								// ** / 13twelve
+
+								var absDiff = Math.abs(screenWidth - windowWidth),
+									marginError = screenWidth * percentErrorMargin;
 
 								// check if the video is suddenly not really fullscreen
 								if (absDiff > marginError) {
@@ -2432,9 +4528,8 @@ if (typeof jQuery != 'undefined') {
 									setTimeout(checkFullscreen, 500);
 								}
 							}
-
-
-						}, 500);
+							
+						}, 1000);
 					}
 
 				} else if (mejs.MediaFeatures.hasSemiNativeFullScreen) {
@@ -2516,6 +4611,8 @@ if (typeof jQuery != 'undefined') {
 
 			t.container.find('.mejs-captions-text').css('font-size', screen.width / t.width * 1.00 * 100 + '%');
 			t.container.find('.mejs-captions-position').css('bottom', '45px');
+
+			t.container.trigger('enteredfullscreen');
 		},
 
 		exitFullScreen: function() {
@@ -2542,25 +4639,24 @@ if (typeof jQuery != 'undefined') {
 
 			t.container
 				.removeClass('mejs-container-fullscreen')
-				.width(normalWidth)
-				.height(normalHeight);
-				//.css({position: '', left: '', top: '', right: '', bottom: '', overflow: 'inherit', width: normalWidth + 'px', height: normalHeight + 'px', 'z-index': 1});
+				.width(t.normalWidth)
+				.height(t.normalHeight);
 
 			if (t.media.pluginType === 'native') {
 				t.$media
-					.width(normalWidth)
-					.height(normalHeight);
+					.width(t.normalWidth)
+					.height(t.normalHeight);
 			} else {
 				t.container.find('.mejs-shim')
-					.width(normalWidth)
-					.height(normalHeight);
+					.width(t.normalWidth)
+					.height(t.normalHeight);
 
-				t.media.setVideoSize(normalWidth, normalHeight);
+				t.media.setVideoSize(t.normalWidth, t.normalHeight);
 			}
 
 			t.layers.children('div')
-				.width(normalWidth)
-				.height(normalHeight);
+				.width(t.normalWidth)
+				.height(t.normalHeight);
 
 			t.fullscreenBtn
 				.removeClass('mejs-unfullscreen')
@@ -2571,6 +4667,8 @@ if (typeof jQuery != 'undefined') {
 
 			t.container.find('.mejs-captions-text').css('font-size','');
 			t.container.find('.mejs-captions-position').css('bottom', '');
+
+			t.container.trigger('exitedfullscreen');
 		}
 	});
 
@@ -2581,6 +4679,8 @@ if (typeof jQuery != 'undefined') {
 	// Speed
 	$.extend(mejs.MepDefaults, {
 
+		// We also support to pass object like this:
+		// [{name: 'Slow', value: '0.75'}, {name: 'Normal', value: '1.00'}, ...]
 		speeds: ['2.00', '1.50', '1.25', '1.00', '0.75'],
 
 		defaultSpeed: '1.00',
@@ -2599,53 +4699,96 @@ if (typeof jQuery != 'undefined') {
 					speedButton = null,
 					speedSelector = null,
 					playbackSpeed = null,
-					html = '<div class="mejs-button mejs-speed-button">' + 
-								'<button type="button">' + t.options.defaultSpeed + t.options.speedChar + '</button>' + 
-								'<div class="mejs-speed-selector">' + 
-								'<ul>';
-				
-				if ($.inArray(t.options.defaultSpeed, t.options.speeds) === -1) {
-					t.options.speeds.push(t.options.defaultSpeed);
+					inputId = null;
+
+				var speeds = [];
+				var defaultInArray = false;
+				for (var i=0, len=t.options.speeds.length; i < len; i++) {
+					var s = t.options.speeds[i];
+					if (typeof(s) === 'string'){
+						speeds.push({
+							name: s + t.options.speedChar,
+							value: s
+						});
+						if(s === t.options.defaultSpeed) {
+							defaultInArray = true;
+						}
+					}
+					else {
+						speeds.push(s);
+						if(s.value === t.options.defaultSpeed) {
+							defaultInArray = true;
+						}
+					}
 				}
 
-				t.options.speeds.sort(function(a, b) {
-					return parseFloat(b) - parseFloat(a);
+				if (!defaultInArray) {
+					speeds.push({
+						name: t.options.defaultSpeed + t.options.speedChar,
+						value: t.options.defaultSpeed
+					});
+				}
+
+				speeds.sort(function(a, b) {
+					return parseFloat(b.value) - parseFloat(a.value);
 				});
 
-				for (var i = 0, il = t.options.speeds.length; i<il; i++) {
+				var getSpeedNameFromValue = function(value) {
+					for(i=0,len=speeds.length; i <len; i++) {
+						if (speeds[i].value === value) {
+							return speeds[i].name;
+						}
+					}
+				};
+
+				var html = '<div class="mejs-button mejs-speed-button">' +
+							'<button type="button">' + getSpeedNameFromValue(t.options.defaultSpeed) + '</button>' +
+							'<div class="mejs-speed-selector">' +
+							'<ul>';
+
+				for (i = 0, il = speeds.length; i<il; i++) {
+					inputId = t.id + '-speed-' + speeds[i].value;
 					html += '<li>' + 
 								'<input type="radio" name="speed" ' + 
-											'value="' + t.options.speeds[i] + '" ' + 
-											'id="' + t.options.speeds[i] + '" ' +
-											(t.options.speeds[i] == t.options.defaultSpeed ? ' checked' : '') + 
+											'value="' + speeds[i].value + '" ' +
+											'id="' + inputId + '" ' +
+											(speeds[i].value === t.options.defaultSpeed ? ' checked' : '') +
 											' />' +
-								'<label for="' + t.options.speeds[i] + '" ' + 
-											(t.options.speeds[i] == t.options.defaultSpeed ? ' class="mejs-speed-selected"' : '') +
-											'>' + t.options.speeds[i] + t.options.speedChar + '</label>' + 
+								'<label for="' + inputId + '" ' +
+											(speeds[i].value === t.options.defaultSpeed ? ' class="mejs-speed-selected"' : '') +
+											'>' + speeds[i].name + '</label>' +
 							'</li>';
 				}
 				html += '</ul></div></div>';
 
 				speedButton = $(html).appendTo(controls);
-				speedSelector = speedButton.find('.mejs-speed-selector');				
+				speedSelector = speedButton.find('.mejs-speed-selector');
 
-				playbackspeed = t.options.defaultSpeed;
+				playbackSpeed = t.options.defaultSpeed;
+
+				media.addEventListener('loadedmetadata', function(e) {
+					if (playbackSpeed) {
+						media.playbackRate = parseFloat(playbackSpeed);
+					}
+				}, true);
 
 				speedSelector
 					.on('click', 'input[type="radio"]', function() {
 						var newSpeed = $(this).attr('value');
-						playbackspeed = newSpeed;
+						playbackSpeed = newSpeed;
 						media.playbackRate = parseFloat(newSpeed);
-						speedButton.find('button').html(newSpeed + t.options.speedChar);
+						speedButton.find('button').html(getSpeedNameFromValue(newSpeed));
 						speedButton.find('.mejs-speed-selected').removeClass('mejs-speed-selected');
 						speedButton.find('input[type="radio"]:checked').next().addClass('mejs-speed-selected');
 					});
-
-				speedSelector
-					.height(
-						speedButton.find('.mejs-speed-selector ul').outerHeight(true) + 
-						speedButton.find('.mejs-speed-translations').outerHeight(true))
-					.css('top', (-1 * speedSelector.height()) + 'px');
+				speedButton
+					.one( 'mouseenter focusin', function() {
+						speedSelector
+							.height(
+								speedButton.find('.mejs-speed-selector ul').outerHeight(true) +
+								speedButton.find('.mejs-speed-translations').outerHeight(true))
+							.css('top', (-1 * speedSelector.height()) + 'px');
+					});
 			}
 		}
 	});
@@ -2660,6 +4803,10 @@ if (typeof jQuery != 'undefined') {
 		startLanguage: '',
 
 		tracksText: mejs.i18n.t('Captions/Subtitles'),
+
+		// By default, no WAI-ARIA live region - don't make a
+		// screen reader speak captions over an audio track.
+		tracksAriaLive: false,
 
 		// option to remove the [cc] button when no <track kind="subtitles"> are present
 		hideCaptionsButtonWhenEmpty: true,
@@ -2688,8 +4835,9 @@ if (typeof jQuery != 'undefined') {
 				return;
 
 			var t = this,
-				i,
-				options = '';
+				attr = t.options.tracksAriaLive ?
+					'role="log" aria-live="assertive" aria-atomic="false"' : '',
+				i;
 
 			if (t.domNode.textTracks) { // if browser will do native captions, prefer mejs captions, loop through tracks and hide
 				for (i = t.domNode.textTracks.length - 1; i >= 0; i--) {
@@ -2701,7 +4849,8 @@ if (typeof jQuery != 'undefined') {
 					$('<div class="mejs-chapters mejs-layer"></div>')
 						.prependTo(layers).hide();
 			player.captions =
-					$('<div class="mejs-captions-layer mejs-layer"><div class="mejs-captions-position mejs-captions-position-hover" role="log" aria-live="assertive" aria-atomic="false"><span class="mejs-captions-text"></span></div></div>')
+					$('<div class="mejs-captions-layer mejs-layer"><div class="mejs-captions-position mejs-captions-position-hover" ' +
+					attr + '><span class="mejs-captions-text"></span></div></div>')
 						.prependTo(layers).hide();
 			player.captionsText = player.captions.find('.mejs-captions-text');
 			player.captionsButton =
@@ -2821,6 +4970,10 @@ if (typeof jQuery != 'undefined') {
 					}
 				});
 
+			t.container.on('controlsresize', function() {
+				t.adjustLanguageBox();
+			});
+			
 			// check for autoplay
 			if (player.node.getAttribute('autoplay') !== null) {
 				player.chapters.css('visibility','hidden');
@@ -2872,8 +5025,6 @@ if (typeof jQuery != 'undefined') {
 
 					track.isLoaded = true;
 
-					// create button
-					//t.addTrackButton(track.srclang);
 					t.enableTrackButton(track.srclang, track.label);
 
 					t.loadNextTrack();
@@ -2908,6 +5059,7 @@ if (typeof jQuery != 'undefined') {
 					}
 				},
 				error: function() {
+					t.removeTrackButton(track.srclang);
 					t.loadNextTrack();
 				}
 			});
@@ -2931,6 +5083,14 @@ if (typeof jQuery != 'undefined') {
 				$('#' + t.id + '_captions_' + lang).prop('checked', true).trigger('click');
 			}
 
+			t.adjustLanguageBox();
+		},
+		
+		removeTrackButton: function(lang) {
+			var t = this;
+			
+			t.captionsButton.find('input[value=' + lang + ']').closest('li').remove();
+			
 			t.adjustLanguageBox();
 		},
 
@@ -2970,7 +5130,7 @@ if (typeof jQuery != 'undefined') {
 			// check if any subtitles
 			if (t.options.hideCaptionsButtonWhenEmpty) {
 				for (i=0; i<t.tracks.length; i++) {
-					if (t.tracks[i].kind == 'subtitles') {
+					if (t.tracks[i].kind == 'subtitles' && t.tracks[i].isLoaded) {
 						hasSubtitles = true;
 						break;
 					}
@@ -3116,7 +5276,7 @@ if (typeof jQuery != 'undefined') {
 					'<div class="mejs-chapter" rel="' + chapters.entries.times[i].start + '" style="left: ' + usedPercent.toString() + '%;width: ' + percent.toString() + '%;">' +
 						'<div class="mejs-chapter-block' + ((i==chapters.entries.times.length-1) ? ' mejs-chapter-block-last' : '') + '">' +
 							'<span class="ch-title">' + chapters.entries.text[i] + '</span>' +
-							'<span class="ch-time">' + mejs.Utility.secondsToTimeCode(chapters.entries.times[i].start) + '&ndash;' + mejs.Utility.secondsToTimeCode(chapters.entries.times[i].stop) + '</span>' +
+							'<span class="ch-time">' + mejs.Utility.secondsToTimeCode(chapters.entries.times[i].start, t.options) + '&ndash;' + mejs.Utility.secondsToTimeCode(chapters.entries.times[i].stop, t.options) + '</span>' +
 						'</div>' +
 					'</div>'));
 				usedPercent += percent;
@@ -3266,8 +5426,6 @@ if (typeof jQuery != 'undefined') {
 					lines = container.find("p"),
 					styleNode = trackText.find("#" + container.attr("style")),
 					styles,
-					begin,
-					end,
 					text,
 					entries = {text:[], times:[]};
 
@@ -3536,6 +5694,38 @@ $.extend(mejs.MepDefaults,
 	});
 	
 })(mejs.$);
+(function($) {
+	// skip back button
+
+	$.extend(mejs.MepDefaults, {
+		skipBackInterval: 30,
+		// %1 will be replaced with skipBackInterval in this string
+		skipBackText: mejs.i18n.t('Skip back %1 seconds')
+	});
+
+	$.extend(MediaElementPlayer.prototype, {
+		buildskipback: function(player, controls, layers, media) {
+			var
+				t = this,
+				// Replace %1 with skip back interval
+				backText = t.options.skipBackText.replace('%1', t.options.skipBackInterval),
+				// create the loop button
+				loop =
+				$('<div class="mejs-button mejs-skip-back-button">' +
+					'<button type="button" aria-controls="' + t.id + '" title="' + backText + '" aria-label="' + backText + '">' + t.options.skipBackInterval + '</button>' +
+				'</div>')
+				// append it to the toolbar
+				.appendTo(controls)
+				// add a click toggle event
+				.click(function() {
+					media.setCurrentTime(Math.max(media.currentTime - t.options.skipBackInterval, 0));
+					$(this).find('button').blur();
+				});
+		}
+	});
+
+})(mejs.$);
+
 /**
  * Postroll plugin
  */

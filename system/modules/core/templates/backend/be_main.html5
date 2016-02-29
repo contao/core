@@ -47,7 +47,7 @@
 <body id="top" class="<?= $this->ua ?><?php if ($this->isPopup) echo ' popup'; ?>">
 
   <?php if (!$this->isPopup): ?>
-    <div id="header" class="collapsible">
+    <div id="header" class="collapsible<?php if ($this->isCoreOnlyMode || $this->isMaintenanceMode || $this->needsCacheBuild) echo ' xpnd'; ?>">
       <h1>Contao Open Source CMS <?= VERSION . '.' . BUILD ?></h1>
       <div class="collapsible_area">
         <div id="tmenu">

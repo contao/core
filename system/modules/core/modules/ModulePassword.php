@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -241,7 +241,8 @@ class ModulePassword extends \Module
 				// Redirect to the jumpTo page
 				if (($objTarget = $this->objModel->getRelated('reg_jumpTo')) !== null)
 				{
-					$this->redirect($this->generateFrontendUrl($objTarget->row()));
+					/** @var \PageModel $objTarget */
+					$this->redirect($objTarget->getFrontendUrl());
 				}
 
 				// Confirm
