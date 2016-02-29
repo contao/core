@@ -96,7 +96,8 @@ class ModuleSearch extends \Module
 		// Redirect page
 		if ($this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
 		{
-			$objFormTemplate->action = $this->generateFrontendUrl($objTarget->row());
+			/** @var \PageModel $objTarget */
+			$objFormTemplate->action = $objTarget->getFrontendUrl();
 		}
 
 		$this->Template->form = $objFormTemplate->parse();

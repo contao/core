@@ -134,45 +134,36 @@ class ModuleQuicknav extends \Module
 
 		++$level;
 
-		while($objSubpages->next())
+		foreach ($objSubpages as $objSubpage)
 		{
-			$_groups = deserialize($objSubpages->groups);
+			$_groups = deserialize($objSubpage->groups);
 
 			// Override the domain (see #3765)
 			if ($host !== null)
 			{
-				$objSubpages->domain = $host;
+				$objSubpage->domain = $host;
 			}
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$objSubpages->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
+			if (!$objSubpage->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
 				// Do not skip the current page here! (see #4523)
 
 				// Check hidden pages
-				if (!$objSubpages->hide || $this->showHidden)
+				if (!$objSubpage->hide || $this->showHidden)
 				{
-					if ($objSubpages->domain != '' && $objSubpages->domain != \Environment::get('host'))
-					{
-						/** @var \PageModel $objModel */
-						$objModel = $objSubpages->current();
-						$objModel->loadDetails();
-					}
-
-					$href = $this->generateFrontendUrl($objSubpages->row(), null, $language, true);
-
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),
-						'title' => specialchars(strip_insert_tags($objSubpages->pageTitle ?: $objSubpages->title)),
-						'href' => $href,
-						'link' => strip_insert_tags($objSubpages->title)
+						'title' => specialchars(strip_insert_tags($objSubpage->pageTitle ?: $objSubpage->title)),
+						'href' => $objSubpage->getFrontendUrl(),
+						'link' => strip_insert_tags($objSubpage->title)
 					);
 
 					// Subpages
-					if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpages->id, 'tl_page')))))
+					if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpage->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpage->id, 'tl_page')))))
 					{
-						$subpages = $this->getQuicknavPages($objSubpages->id, $level);
+						$subpages = $this->getQuicknavPages($objSubpage->id, $level);
 
 						if (is_array($subpages))
 						{

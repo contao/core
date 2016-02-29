@@ -146,22 +146,13 @@ class ModuleCustomnav extends \Module
 					case 'forward':
 						if (($objNext = \PageModel::findPublishedById($arrPage['jumpTo'])) !== null)
 						{
-							$strForceLang = null;
-							$objNext->loadDetails();
-
-							// Check the target page language (see #4706)
-							if (\Config::get('addLanguageToUrl'))
-							{
-								$strForceLang = $objNext->language;
-							}
-
-							$href = $this->generateFrontendUrl($objNext->row(), null, $strForceLang, true);
+							$href = $objNext->getFrontendUrl();
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
 
 					default:
-						$href = $this->generateFrontendUrl($arrPage, null, $arrPage['rootLanguage'], true);
+						$href = $this->generateFrontendUrl($arrPage);
 						break;
 				}
 

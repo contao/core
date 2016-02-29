@@ -461,7 +461,7 @@ class PageModel extends \Model
 	 * @param array $arrAliases An array of possible alias names
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return \Model\Collection|\PageModel[]|\PageModel|null A collection of Models or null if there is no matching pages
+	 * @return \Model\Collection|\PageModel[]|\PageModel|null A collection of models or null if there is no matching pages
 	 */
 	public static function findByAliases($arrAliases, array $arrOptions=array())
 	{
@@ -902,6 +902,11 @@ class PageModel extends \Model
 	 */
 	public function getFrontendUrl($strParams=null, $strForceLang=null)
 	{
-		return \Controller::generateFrontendUrl($this->row(), $strParams, $strForceLang);
+		if ($strForceLang !== null)
+		{
+			@trigger_error('Using PageModel::getFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+		}
+
+		return \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, $strForceLang);
 	}
 }

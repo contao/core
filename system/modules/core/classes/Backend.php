@@ -660,11 +660,10 @@ abstract class Backend extends \Controller
 	 * @param integer $pid
 	 * @param string  $domain
 	 * @param boolean $blnIsSitemap
-	 * @param string  $strLanguage
 	 *
 	 * @return array
 	 */
-	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
+	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
 	{
 		$time = \Date::floorToMinute();
 		$objDatabase = \Database::getInstance();
@@ -689,46 +688,49 @@ abstract class Backend extends \Controller
 		// Recursively walk through all subpages
 		while ($objPages->next())
 		{
-			// Set domain
-			if ($objPages->type == 'root')
-			{
-				if ($objPages->dns != '')
-				{
-					$domain = ($objPages->useSSL ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
-				}
-				else
-				{
-					$domain = \Environment::get('base');
-				}
+			$objPage = new \PageModel($objPages);
 
-				$strLanguage = $objPages->language;
-			}
-
-			// Add regular pages
-			elseif ($objPages->type == 'regular')
+			if ($objPage->type == 'regular')
 			{
 				// Searchable and not protected
-				if ((!$objPages->noSearch || $blnIsSitemap) && (!$objPages->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPages->sitemap == 'map_always')) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
+				if ((!$objPage->noSearch || $blnIsSitemap) && (!$objPage->protected || \Config::get('indexProtected') && (!$blnIsSitemap || $objPage->sitemap == 'map_always')) && (!$blnIsSitemap || $objPage->sitemap != 'map_never'))
 				{
 					// Published
-					if ($objPages->published && ($objPages->start == '' || $objPages->start <= $time) && ($objPages->stop == '' || $objPages->stop > ($time + 60)))
+					if ($objPage->published && ($objPage->start == '' || $objPage->start <= $time) && ($objPage->stop == '' || $objPage->stop > ($time + 60)))
 					{
-						$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), null, $strLanguage);
+						$feUrl = $objPage->getFrontendUrl();
+
+						if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
+						{
+							$feUrl = $domain . $feUrl;
+						}
+
+						$arrPages[] = $feUrl;
 
 						// Get articles with teaser
-						$objArticle = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' AND showTeaser='1' ORDER BY sorting")
-												  ->execute($objPages->id);
+						$objArticles = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' AND showTeaser='1' ORDER BY sorting")
+												   ->execute($objPages->id);
 
-						while ($objArticle->next())
+						if ($objArticles->numRows)
 						{
-							$arrPages[] = $domain . static::generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id), $strLanguage);
+							$feUrl = $objPage->getFrontendUrl('/articles/%s');
+
+							if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
+							{
+								$feUrl = $domain . $feUrl;
+							}
+
+							while ($objArticles->next())
+							{
+								$arrPages[] = sprintf($feUrl, (($objArticles->alias != '' && !\Config::get('disableAlias')) ? $objArticles->alias : $objArticles->id));
+							}
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || \Config::get('indexProtected')) && ($arrSubpages = static::findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
+			if ((!$objPage->protected || \Config::get('indexProtected')) && ($arrSubpages = static::findSearchablePages($objPage->id, $domain, $blnIsSitemap)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}
