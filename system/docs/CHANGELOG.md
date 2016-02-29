@@ -5,6 +5,9 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### Fixed
+Always fix the domain and language when generating URLs (see #8238).
+
+### Fixed
 Fix two issues with the flexible back end theme (see #8227).
 
 ### New
