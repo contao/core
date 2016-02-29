@@ -665,9 +665,14 @@ abstract class Backend extends \Controller
 	 */
 	public static function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
 	{
-		$objPages = \PageModel::findPublishedByPid($pid);
+		$time = \Date::floorToMinute();
+		$objDatabase = \Database::getInstance();
 
-		if ($objPages === null)
+		// Get published pages
+		$objPages = $objDatabase->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' ORDER BY sorting")
+								->execute($pid);
+
+		if ($objPages->numRows < 1)
 		{
 			return array();
 		}
@@ -679,11 +684,12 @@ abstract class Backend extends \Controller
 		}
 
 		$arrPages = array();
-		$time = \Date::floorToMinute();
 
 		// Recursively walk through all subpages
-		foreach ($objPages as $objPage)
+		while ($objPages->next())
 		{
+			$objPage = new \PageModel($objPages);
+
 			if ($objPage->type == 'regular')
 			{
 				// Searchable and not protected
@@ -702,7 +708,10 @@ abstract class Backend extends \Controller
 						$arrPages[] = $feUrl;
 
 						// Get articles with teaser
-						if (($objArticles = \ArticleModel::findPublishedWithTeaserByPid($objPage->id)) !== null)
+						$objArticles = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' AND showTeaser='1' ORDER BY sorting")
+												   ->execute($objPages->id);
+
+						if ($objArticles->numRows)
 						{
 							$feUrl = $objPage->getFrontendUrl('/articles/%s');
 
@@ -711,9 +720,9 @@ abstract class Backend extends \Controller
 								$feUrl = $domain . $feUrl;
 							}
 
-							foreach ($objArticles as $objArticle)
+							while ($objArticles->next())
 							{
-								$arrPages[] = sprintf($feUrl, (($objArticle->alias != '' && !\Config::get('disableAlias')) ? $objArticle->alias : $objArticle->id));
+								$arrPages[] = sprintf($feUrl, (($objArticles->alias != '' && !\Config::get('disableAlias')) ? $objArticles->alias : $objArticles->id));
 							}
 						}
 					}

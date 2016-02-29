@@ -283,29 +283,6 @@ class PageModel extends \Model
 
 
 	/**
-	 * Finds published pages by their PID
-	 *
-	 * @param integer $intPid     The parent ID
-	 * @param array   $arrOptions An optional options array
-	 *
-	 * @return \Model\Collection|\PageModel[]|\PageModel|null A collection of models or null if there is no matching pages
-	 */
-	public static function findPublishedByPid($intPid, array $arrOptions=array())
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = \Date::floorToMinute();
-			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
-		}
-
-		return static::findBy($arrColumns, $intPid, $arrOptions);
-	}
-
-
-	/**
 	 * Find the first published root page by its host name and language
 	 *
 	 * @param string $strHost     The host name
