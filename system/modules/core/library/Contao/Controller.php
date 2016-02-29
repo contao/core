@@ -1082,9 +1082,9 @@ abstract class Controller extends \System
 	{
 		$strUrl = '';
 
-		if (func_num_args() > 2)
+		if ($strForceLang !== null)
 		{
-			@trigger_error('Using Controller::generateFrontendUrl() with more than two arguments has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+			@trigger_error('Using Controller::generateFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 		}
 
 		if (!isset($arrRow['rootId']))

@@ -925,9 +925,9 @@ class PageModel extends \Model
 	 */
 	public function getFrontendUrl($strParams=null, $strForceLang=null)
 	{
-		if (func_num_args() > 1)
+		if ($strForceLang !== null)
 		{
-			@trigger_error('Using PageModel::getFrontendUrl() with more than one arguments has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+			@trigger_error('Using PageModel::getFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 		}
 
 		return \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, $strForceLang);

@@ -457,6 +457,11 @@ abstract class Frontend extends \Controller
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
+		if ($strForceLang !== null)
+		{
+			@trigger_error('Using Frontend::jumpToOrReload() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+		}
+
 		/** @var \PageModel $objPage */
 		global $objPage;
 
@@ -469,7 +474,7 @@ abstract class Frontend extends \Controller
 			{
 				if ($intId['id'] != $objPage->id  || $blnForceRedirect)
 				{
-					$this->redirect($this->generateFrontendUrl($intId, $strParams));
+					$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
 				}
 			}
 		}
@@ -479,7 +484,7 @@ abstract class Frontend extends \Controller
 			{
 				if (($objNextPage = \PageModel::findPublishedById($intId)) !== null)
 				{
-					$this->redirect($objNextPage->getFrontendUrl($strParams));
+					$this->redirect($objNextPage->getFrontendUrl($strParams, $strForceLang));
 				}
 			}
 		}
