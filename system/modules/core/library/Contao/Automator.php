@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -674,7 +674,7 @@ class Automator extends \System
 						   . "/**\n"
 						   . " * Contao Open Source CMS\n"
 						   . " * \n"
-						   . " * Copyright (c) 2005-2015 Leo Feyer\n"
+						   . " * Copyright (c) 2005-2016 Leo Feyer\n"
 						   . " * \n"
 						   . " * Core translations are managed using Transifex. To create a new translation\n"
 						   . " * or to help to maintain an existing one, please register at transifex.com.\n"
