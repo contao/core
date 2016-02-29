@@ -5,8 +5,10 @@ Version 3.5.7 (2016-02-XX)
 --------------------------
 
 ### New
-Added the "oncreate_version_callback" and "onrestore_version_callback"
-callbacks to the DCA (see #8168).
+Added new versioning hooks (see #8168).
+
+ * "oncreate_version_callback" (supersedes "onversion_callback")
+ * "onrestore_version_callback" (supersedes "onrestore_callback")
 
 ### Fixed
 Correctly toggle custom page type icons (see #8236).
