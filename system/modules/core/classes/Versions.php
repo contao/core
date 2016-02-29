@@ -130,10 +130,12 @@ class Versions extends \Controller
 									 ->limit(1)
 									 ->execute($this->strTable, $this->intPid);
 
-		if ($objVersion->count < 1)
+		if ($objVersion->count > 0)
 		{
-			$this->create();
+			return;
 		}
+
+		$this->create();
 	}
 
 
@@ -217,6 +219,25 @@ class Versions extends \Controller
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, userid, description, editUrl, active, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)")
 					   ->execute($this->intPid, time(), $intVersion, $this->strTable, $this->getUsername(), $this->getUserId(), $strDescription, $this->getEditUrl(), serialize($objRecord->row()));
+
+		// Trigger the oncreate_version_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncreate_version_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncreate_version_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intPid, $intVersion, $objRecord->row());
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($this->strTable, $this->intPid, $intVersion, $objRecord->row());
+				}
+			}
+		}
+
+		$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been created'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
 	}
 
 
@@ -236,64 +257,87 @@ class Versions extends \Controller
 								  ->limit(1)
 								  ->execute($this->strTable, $this->intPid, $intVersion);
 
-		if ($objData->numRows)
+		if ($objData->numRows < 1)
 		{
-			$data = deserialize($objData->data);
+			return;
+		}
 
-			if (is_array($data))
+		$data = deserialize($objData->data);
+
+		if (!is_array($data))
+		{
+			return;
+		}
+
+		// Restore the content
+		if ($this->strPath !== null)
+		{
+			$objFile = new \File($this->strPath, true);
+			$objFile->write($data['content']);
+			$objFile->close();
+		}
+
+		// Get the currently available fields
+		$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
+
+		// Unset fields that do not exist (see #5219)
+		$data = array_intersect_key($data, $arrFields);
+
+		$this->loadDataContainer($this->strTable);
+
+		// Reset fields added after storing the version to their default value (see #7755)
+		foreach (array_diff_key($arrFields, $data) as $k=>$v)
+		{
+			$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
+		}
+
+		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
+					   ->set($data)
+					   ->execute($this->intPid);
+
+		$this->Database->prepare("UPDATE tl_version SET active='' WHERE fromTable=? AND pid=?")
+					   ->execute($this->strTable, $this->intPid);
+
+		$this->Database->prepare("UPDATE tl_version SET active=1 WHERE fromTable=? AND pid=? AND version=?")
+					   ->execute($this->strTable, $this->intPid, $intVersion);
+
+		// Trigger the onrestore_version_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_version_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_version_callback'] as $callback)
 			{
-				// Restore the content
-				if ($this->strPath !== null)
+				if (is_array($callback))
 				{
-					$objFile = new \File($this->strPath, true);
-					$objFile->write($data['content']);
-					$objFile->close();
+					$this->import($callback[0]);
+					$this->{$callback[0]}->{$callback[1]}($this->strTable, $this->intPid, $intVersion, $data);
 				}
-
-				// Get the currently available fields
-				$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
-
-				// Unset fields that do not exist (see #5219)
-				$data = array_intersect_key($data, $arrFields);
-
-				$this->loadDataContainer($this->strTable);
-
-				// Reset fields added after storing the version to their default value (see #7755)
-				foreach (array_diff_key($arrFields, $data) as $k=>$v)
+				elseif (is_callable($callback))
 				{
-					$data[$k] = \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
-				}
-
-				$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
-							   ->set($data)
-							   ->execute($this->intPid);
-
-				$this->Database->prepare("UPDATE tl_version SET active='' WHERE fromTable=? AND pid=?")
-							   ->execute($this->strTable, $this->intPid);
-
-				$this->Database->prepare("UPDATE tl_version SET active=1 WHERE fromTable=? AND pid=? AND version=?")
-							   ->execute($this->strTable, $this->intPid, $intVersion);
-
-				$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been restored'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
-
-				// Trigger the onrestore_callback
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
-				{
-					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
-					{
-						if (is_array($callback))
-						{
-							$this->import($callback[0]);
-							$this->{$callback[0]}->{$callback[1]}($this->intPid, $this->strTable, $data, $intVersion);
-						}
-						elseif (is_callable($callback))
-						{
-							$callback($this->intPid, $this->strTable, $data, $intVersion);
-						}
-					}
+					$callback($this->strTable, $this->intPid, $intVersion, $data);
 				}
 			}
 		}
+
+		// Trigger the deprecated onrestore_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
+		{
+			@trigger_error('Using the onrestore_callback has been deprecated and will no longer work in Contao 5.0. Use the onrestore_version_callback instead.', E_USER_DEPRECATED);
+
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->{$callback[0]}->{$callback[1]}($this->intPid, $this->strTable, $data, $intVersion);
+				}
+				elseif (is_callable($callback))
+				{
+					$callback($this->intPid, $this->strTable, $data, $intVersion);
+				}
+			}
+		}
+
+		$this->log('Version '.$intVersion.' of record "'.$this->strTable.'.id='.$this->intPid.'" has been restored'.$this->getParentEntries($this->strTable, $this->intPid), __METHOD__, TL_GENERAL);
 	}
 
 

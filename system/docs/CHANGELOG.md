@@ -4,6 +4,12 @@ Contao Open Source CMS changelog
 Version 3.5.7 (2016-02-XX)
 --------------------------
 
+### New
+Added new versioning hooks (see #8168).
+
+ * "oncreate_version_callback" (supersedes "onversion_callback")
+ * "onrestore_version_callback" (supersedes "onrestore_callback")
+
 ### Fixed
 Correctly toggle custom page type icons (see #8236).
 
