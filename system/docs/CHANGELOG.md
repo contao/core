@@ -79,7 +79,7 @@ Fix the `<time>` tags and standardize the event templates (see #8012).
 Handle empty `href` attributes in the book navigation (see #8104).
 
 ### Fixed
-Do not store e-mail addresses in the newsletter (un)subscription log. 
+Do not store e-mail addresses in the newsletter (un)subscription log.
 
 ### Fixed
 Correctly encrypt fields upon registration (see #8110).
@@ -133,7 +133,7 @@ Correctly check the synchronization status when copying or moving files.
 Adjust the code to be compatible with PHP7 (see #8018).
 
 ### Fixed
-Correctly show the UUID in the back end file manager popup (see #8058). 
+Correctly show the UUID in the back end file manager popup (see #8058).
 
 
 Version 3.5.4 (2015-10-09)
