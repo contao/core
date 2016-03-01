@@ -474,7 +474,7 @@ abstract class Frontend extends \Controller
 			{
 				if ($intId['id'] != $objPage->id  || $blnForceRedirect)
 				{
-					$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
+					$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang, true));
 				}
 			}
 		}

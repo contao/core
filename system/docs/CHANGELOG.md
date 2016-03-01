@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.8 (2016-03-01)
+--------------------------
+
+### Fixed
+Re-add the `$blnFixDomain` argument to keep backwards compatibility.
+
+
 Version 3.5.7 (2016-02-29)
 --------------------------
 
