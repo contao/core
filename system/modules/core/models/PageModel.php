@@ -907,6 +907,6 @@ class PageModel extends \Model
 			@trigger_error('Using PageModel::getFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 		}
 
-		return \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, $strForceLang);
+		return \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, $strForceLang, true);
 	}
 }

@@ -93,7 +93,7 @@ class ModuleLogin extends \Module
 
 						if ($objGroupPage !== null)
 						{
-							$strRedirect = $this->generateFrontendUrl($objGroupPage->row());
+							$strRedirect = $this->generateFrontendUrl($objGroupPage->row(), null, null, true);
 						}
 					}
 				}
