@@ -1075,16 +1075,22 @@ abstract class Controller extends \System
 	 * @param array   $arrRow       An array of page parameters
 	 * @param string  $strParams    An optional string of URL parameters
 	 * @param string  $strForceLang Force a certain language
+	 * @param boolean $blnFixDomain Check the domain of the target page and append it if necessary
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null)
+	public static function generateFrontendUrl(array $arrRow, $strParams=null, $strForceLang=null, $blnFixDomain=false)
 	{
 		$strUrl = '';
 
 		if ($strForceLang !== null)
 		{
 			@trigger_error('Using Controller::generateFrontendUrl() with $strForceLang has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
+		}
+
+		if ($blnFixDomain !== true)
+		{
+			@trigger_error('Using Controller::generateFrontendUrl() without $blnFixDomain has been deprecated and will no longer work in Contao 5.0.', E_USER_DEPRECATED);
 		}
 
 		if (!isset($arrRow['rootId']))
@@ -1160,7 +1166,7 @@ abstract class Controller extends \System
 		}
 
 		// Add the domain if it differs from the current one (see #3765 and #6927)
-		if (!empty($arrRow['domain']) && $arrRow['domain'] != \Environment::get('host'))
+		if ($blnFixDomain && !empty($arrRow['domain']) && $arrRow['domain'] != \Environment::get('host'))
 		{
 			$strUrl = ($arrRow['rootUseSSL'] ? 'https://' : 'http://') . $arrRow['domain'] . TL_PATH . '/' . $strUrl;
 		}

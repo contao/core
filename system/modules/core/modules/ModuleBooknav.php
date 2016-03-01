@@ -21,7 +21,7 @@ class ModuleBooknav extends \Module
 
 	/**
 	 * Pages array
-	 * @var array
+	 * @var \PageModel[]
 	 */
 	protected $arrPages = array();
 
@@ -86,7 +86,7 @@ class ModuleBooknav extends \Module
 		}
 
 		// Get all book pages
-		$this->arrPages[$objTarget->id] = $objTarget->row();
+		$this->arrPages[$objTarget->id] = $objTarget;
 		$this->getBookPages($objTarget->id, $groups, time());
 
 		/** @var \PageModel $objPage */
@@ -98,18 +98,18 @@ class ModuleBooknav extends \Module
 			$intKey = $objPage->pid;
 
 			// Skip forward pages (see #5074)
-			while ($this->arrPages[$intKey]['type'] == 'forward' && isset($this->arrPages[$intKey]['pid']))
+			while ($this->arrPages[$intKey]->type == 'forward' && isset($this->arrPages[$intKey]->pid))
 			{
-				$intKey = $this->arrPages[$intKey]['pid'];
+				$intKey = $this->arrPages[$intKey]->pid;
 			}
 
 			// Hide the link if the reference page is a forward page (see #5374)
 			if (isset($this->arrPages[$intKey]))
 			{
 				$this->Template->hasUp = true;
-				$this->Template->upHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-				$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title'], true);
-				$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
+				$this->Template->upHref = $this->arrPages[$intKey]->getFrontendUrl();
+				$this->Template->upTitle = specialchars($this->arrPages[$intKey]->title, true);
+				$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
 				$this->Template->upLink = $GLOBALS['TL_LANG']['MSC']['up'];
 			}
 		}
@@ -127,10 +127,10 @@ class ModuleBooknav extends \Module
 			$intKey = $arrLookup[($intCurrent - 1)];
 
 			$this->Template->hasPrev = true;
-			$this->Template->prevHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->prevTitle = specialchars($this->arrPages[$intKey]['title'], true);
-			$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
-			$this->Template->prevLink = $this->arrPages[$intKey]['title'];
+			$this->Template->prevHref = $this->arrPages[$intKey]->getFrontendUrl();
+			$this->Template->prevTitle = specialchars($this->arrPages[$intKey]->title, true);
+			$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
+			$this->Template->prevLink = $this->arrPages[$intKey]->title;
 		}
 
 		// Next page
@@ -139,10 +139,10 @@ class ModuleBooknav extends \Module
 			$intKey = $arrLookup[($intCurrent + 1)];
 
 			$this->Template->hasNext = true;
-			$this->Template->nextHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->nextTitle = specialchars($this->arrPages[$intKey]['title'], true);
-			$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
-			$this->Template->nextLink = $this->arrPages[$intKey]['title'];
+			$this->Template->nextHref = $this->arrPages[$intKey]->getFrontendUrl();
+			$this->Template->nextTitle = specialchars($this->arrPages[$intKey]->title, true);
+			$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
+			$this->Template->nextLink = $this->arrPages[$intKey]->title;
 		}
 	}
 
@@ -158,21 +158,23 @@ class ModuleBooknav extends \Module
 	{
 		$objPages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($intParentId, $this->showHidden);
 
-		if ($objPages !== null)
+		if ($objPages === null)
 		{
-			while ($objPages->next())
+			return;
+		}
+
+		foreach ($objPages as $objPage)
+		{
+			$_groups = deserialize($objPage->groups);
+
+			// Do not show protected pages unless a back end or front end user is logged in
+			if (!$objPage->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($groups, $_groups))) || $this->showProtected)
 			{
-				$_groups = deserialize($objPages->groups);
+				$this->arrPages[$objPage->id] = $objPage;
 
-				// Do not show protected pages unless a back end or front end user is logged in
-				if (!$objPages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($groups, $_groups))) || $this->showProtected)
+				if ($objPage->subpages > 0)
 				{
-					$this->arrPages[$objPages->id] = $objPages->row();
-
-					if ($objPages->subpages > 0)
-					{
-						$this->getBookPages($objPages->id, $groups, $time);
-					}
+					$this->getBookPages($objPage->id, $groups, $time);
 				}
 			}
 		}
