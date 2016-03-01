@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.9 (2016-03-XX)
+--------------------------
+
+### Fixed
+Fix the error 403/404 redirect (see contao/website#74).
+
+
 Version 3.5.8 (2016-03-01)
 --------------------------
 
