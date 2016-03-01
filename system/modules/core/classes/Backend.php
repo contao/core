@@ -684,11 +684,17 @@ abstract class Backend extends \Controller
 		}
 
 		$arrPages = array();
+		$objRegistry = \Model\Registry::getInstance();
 
 		// Recursively walk through all subpages
 		while ($objPages->next())
 		{
-			$objPage = new \PageModel($objPages);
+			$objPage = $objRegistry->fetch('tl_page', $objPages->id);
+
+			if ($objPage === null)
+			{
+				$objPage = new \PageModel($objPages);
+			}
 
 			if ($objPage->type == 'regular')
 			{
