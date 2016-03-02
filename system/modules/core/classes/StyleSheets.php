@@ -2275,16 +2275,17 @@ class StyleSheets extends \Backend
 			$objImage = new \File($strImage, true);
 			$strExtension = $objImage->extension;
 
-			// Fix the jpg mime type
-			if ($strExtension == 'jpg')
+			switch ($strExtension)
 			{
-				$strExtension = 'jpeg';
+				case 'jpg': $strMimeSubtype = 'jpeg';        break;
+				case 'svg': $strMimeSubtype = 'svg+xml';     break;
+				default:    $strMimeSubtype = $strExtension; break;
 			}
 
 			// Return the data: string
 			if ($objImage->size <= $arrParent['embedImages'])
 			{
-				return 'data:image/' . $strExtension . ';base64,' . base64_encode($objImage->getContent());
+				return 'data:image/' . $strMimeSubtype . ';base64,' . base64_encode($objImage->getContent());
 			}
 		}
 
