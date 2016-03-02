@@ -1463,7 +1463,7 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
-		$size = deserialize($arrItem['size']);
+		$size = $arrItem['size'];
 
 		if (!is_numeric($size))
 		{
