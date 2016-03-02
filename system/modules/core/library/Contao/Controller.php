@@ -1463,12 +1463,18 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
-		$size = $arrItem['size'];
+		$size = deserialize($arrItem['size']);
 
-		if (!is_numeric($size))
+		if (is_numeric($size))
 		{
-			$size = deserialize($arrItem['size'], true) + array(0, 0, 'crop');
+			$size = array(0, 0, (int) $size);
 		}
+		elseif (!is_array($size))
+		{
+			$size = array();
+		}
+
+		$size += array(0, 0, 'crop');
 
 		if ($intMaxWidth === null)
 		{
