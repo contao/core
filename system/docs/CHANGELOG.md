@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Consider the fallback language if a page alias is ambiguous (see #8142).
+
+### Fixed
 Fix the error 403/404 redirect (see contao/website#74).
 
 

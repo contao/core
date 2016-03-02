@@ -134,9 +134,15 @@ class FrontendIndex extends \Frontend
 			}
 
 			// Try to find a page matching the language parameter
-			elseif (($lang = \Input::get('language')) != '' && isset($arrLangs[$lang]))
+			elseif (($lang = \Input::get('language')) && isset($arrLangs[$lang]))
 			{
 				$objNewPage = $arrLangs[$lang];
+			}
+
+			// Use the fallback language (see #8142)
+			elseif (isset($arrLangs['*']))
+			{
+				$objNewPage = $arrLangs['*'];
 			}
 
 			// Store the page object
@@ -147,7 +153,7 @@ class FrontendIndex extends \Frontend
 		}
 
 		// Throw a 404 error if the page could not be found or the result is still ambiguous
-		if ($objPage === null || ($objPage instanceof \Model\Collection && $objPage->count() != 1))
+		if ($objPage === null || ($objPage instanceof \Model\Collection && $objPage->count() > 1))
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
