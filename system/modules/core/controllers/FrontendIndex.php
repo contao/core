@@ -167,11 +167,23 @@ class FrontendIndex extends \Frontend
 		}
 
 		// If the page has an alias, it can no longer be called via ID (see #7661)
-		if ($objPage->alias != '' && preg_match('#^' . $objPage->id . '[$/.]#', \Environment::get('relativeRequest')))
+		if ($objPage->alias != '')
 		{
-			$this->User->authenticate();
-			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-			$objHandler->generate($pageId);
+			if (\Config::get('addLanguageToUrl'))
+			{
+				$regex = '#^[a-z]{2}(-[A-Z]{2})?/' . $objPage->id . '[$/.]#';
+			}
+			else
+			{
+				$regex = '#^' . $objPage->id . '[$/.]#';
+			}
+
+			if (preg_match($regex, \Environment::get('request')))
+			{
+				$this->User->authenticate();
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($pageId);
+			}
 		}
 
 		// Load a website root page object (will redirect to the first active regular page)
