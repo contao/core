@@ -461,7 +461,7 @@ abstract class Module extends \Frontend
 				$row['pageTitle'] = specialchars($objSubpage->pageTitle, true);
 				$row['link'] = $objSubpage->title;
 				$row['href'] = $href;
-				$row['nofollow'] = (strncmp($objSubpage->robots, 'noindex', 7) === 0);
+				$row['nofollow'] = (strncmp($objSubpage->robots, 'noindex,nofollow', 16) === 0);
 				$row['target'] = '';
 				$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpage->description);
 
