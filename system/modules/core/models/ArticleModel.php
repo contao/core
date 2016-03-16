@@ -150,6 +150,37 @@ class ArticleModel extends \Model
 
 
 	/**
+	 * Find a published article by its ID or alias and its page
+	 *
+	 * @param mixed   $varId      The numeric ID or alias name
+	 * @param integer $intPid     The page ID
+	 * @param array   $arrOptions An optional options array
+	 *
+	 * @return static The model or null if there is no article
+	 */
+	public static function findPublishedByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
+	{
+		$t = static::$strTable;
+		$arrColumns = array("($t.id=? OR $t.alias=?)");
+		$arrValues = array((is_numeric($varId) ? $varId : 0), $varId);
+
+		if ($intPid)
+		{
+			$arrColumns[] = "$t.pid=?";
+			$arrValues[] = $intPid;
+		}
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = \Date::floorToMinute();
+			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
+		}
+
+		return static::findOneBy($arrColumns, $arrValues, $arrOptions);
+	}
+
+
+	/**
 	 * Find a published article by its ID
 	 *
 	 * @param integer $intId      The article ID

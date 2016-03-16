@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Show the 404 error page if an unpublished article is requested (see #8264).
+
+### Fixed
 Correctly count the URLs when rebuilding the search index (see #8262).
 
 ### Fixed

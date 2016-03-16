@@ -207,13 +207,21 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
+					$objArticle = \ArticleModel::findPublishedByIdOrAliasAndPid($strArticle, $objPage->id);
 
-					// Send a 404 header if the article does not exist
+					// Send a 404 header if there is no published article
 					if (null === $objArticle)
 					{
 						/** @var \PageError404 $objHandler */
 						$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+						$objHandler->generate($objPage->id);
+					}
+
+					// Send a 403 header if the article cannot be accessed
+					if (!static::isVisibleElement($objArticle))
+					{
+						/** @var \PageError403 $objHandler */
+						$objHandler = new $GLOBALS['TL_PTY']['error_403']();
 						$objHandler->generate($objPage->id);
 					}
 
