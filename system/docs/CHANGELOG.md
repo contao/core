@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Set the correct mime type when embedding SVG images (see #8245).
+
+### Fixed
 Handle the "float_left" and "float_right" classes in the back end (see #8239).
 
 ### Fixed
