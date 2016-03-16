@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Correctly count the URLs when rebuilding the search index (see #8262).
+
+### Fixed
 Ensure that every image has a width and height attribute (see #8162).
 
 ### Fixed
