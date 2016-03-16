@@ -39,9 +39,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 		E_USER_DEPRECATED   => 'Deprecated notice'
 	);
 
-	// Only log errors that have been configured to get logged.
-	// Functions with an error control operator (@function_name) are also omitted as error_reporting() is 0 in these
-	// cases.
+	// Only log errors that have been configured to get logged (see #8267)
 	if (error_reporting() & $intType)
 	{
 		$e = new Exception();
