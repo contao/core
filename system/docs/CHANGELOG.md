@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Handle the "float_left" and "float_right" classes in the back end (see #8239).
+
+### Fixed
 Consider the fallback language if a page alias is ambiguous (see #8142).
 
 ### Fixed
