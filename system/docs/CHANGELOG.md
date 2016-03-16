@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Ensure that every image has a width and height attribute (see #8162).
+
+### Fixed
 Set the correct mime type when embedding SVG images (see #8245).
 
 ### Fixed

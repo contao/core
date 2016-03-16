@@ -78,7 +78,7 @@
           <a href="<?= $this->request ?>#skipNavigation" class="invisible"><?= $this->skipNavigation ?></a>
           <ul class="tl_level_1 collapsible_area">
             <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-              <li class="tl_level_1_group<?= $arrModules['class'] ?>"><a href="<?= $arrModules['href'] ?>" title="<?= $arrModules['title'] ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?= $strGroup ?>')"><img src="<?= TL_FILES_URL ?>system/themes/<?= $this->theme ?>/images/<?= $arrModules['icon'] ?>" width="16" height="16" alt=""><?= $arrModules['label'] ?></a></li>
+              <li class="tl_level_1_group<?= $arrModules['class'] ?>"><a href="<?= $arrModules['href'] ?>" title="<?= $arrModules['title'] ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?= $strGroup ?>')"><?= Image::getHtml($arrModules['icon']) ?><?= $arrModules['label'] ?></a></li>
               <?php if ($arrModules['modules']): ?>
                 <li class="tl_parent" id="<?= $strGroup ?>">
                   <ul class="tl_level_2">

@@ -76,7 +76,7 @@
       </table>
       <?php if ($this->href): ?>
         <div id="download">
-          <a href="<?= $this->href ?>"><img src="<?= TL_ASSETS_URL ?>assets/contao/images/<?= $this->icon ?>" width="18" height="18" class="mime_icon"> <?= $this->download ?></a>
+          <a href="<?= $this->href ?>"><?= Image::getHtml($this->icon, '', 'class="mime_icon"') ?> <?= $this->download ?></a>
         </div>
       <?php endif; ?>
       <?php if ($this->isImage): ?>
