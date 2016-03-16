@@ -67,8 +67,8 @@
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+/* PATCH: see #6028 */
 .ios .simple-modal {
-  /* see #6028 */
   overflow: auto;
   bottom: 40px;
   -webkit-overflow-scrolling: touch;
@@ -107,9 +107,11 @@
 .simple-modal .simple-modal-body {
   padding: 0;
 }
+/* PATCH: see #8250
 .simple-modal .simple-modal-body div.contents {
   overflow: hidden;
 }
+*/
 .simple-modal .simple-modal-body p {
   font-size: 13px;
   font-weight: normal;
