@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Correctly handle custom mime icon paths (see #8275).
+
+### Fixed
 Only log errors that have been configured to get logged (see #8267).
 
 ### Fixed

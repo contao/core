@@ -1727,7 +1727,7 @@ abstract class Controller extends \System
 					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
-					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
+					'icon'      => \Image::getPath($objFile->icon),
 					'mime'      => $objFile->mime,
 					'meta'      => $arrMeta
 				);
