@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Always use HTTPS if the target server supports SSL connections (see #8183).
+
+### Fixed
 Adjust the meta wizard field length to the column length (see #8277).
 
 ### Fixed

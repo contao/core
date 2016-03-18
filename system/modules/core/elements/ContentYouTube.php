@@ -40,7 +40,7 @@ class ContentYouTube extends \ContentElement
 
 		if (TL_MODE == 'BE')
 		{
-			return '<p><a href="http://youtu.be/' . $this->youtube . '" target="_blank">http://youtu.be/' . $this->youtube . '</a></p>';
+			return '<p><a href="https://youtu.be/' . $this->youtube . '" target="_blank">youtu.be/' . $this->youtube . '</a></p>';
 		}
 
 		return parent::generate();
@@ -78,7 +78,7 @@ class ContentYouTube extends \ContentElement
 
 		$objFile = new \stdClass();
 		$objFile->mime = 'video/x-youtube';
-		$objFile->path = '//www.youtube.com/watch?v=' . $this->youtube;
+		$objFile->path = 'https://www.youtube.com/watch?v=' . $this->youtube;
 
 		$this->Template->isVideo = true;
 		$this->Template->files = array($objFile);

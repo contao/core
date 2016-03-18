@@ -10,7 +10,7 @@
 /**
  * Replace select menus with a nicer, JavaScript based solution.
  *
- * @author Leo Feyer <http://contao.org>
+ * @author Leo Feyer <https://contao.org>
  * @author Joe Ray Gregory <https://github.com/may17>
  */
 var Stylect =
