@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Prevent the autofocus attribute from being added multiple times (see #8281).
+
+### Fixed
 Respect the SSL settings of the root page when generating sitemaps (see #8270).
 
 ### Fixed
