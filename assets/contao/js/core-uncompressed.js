@@ -527,7 +527,7 @@ var AjaxRequest =
 				} else {
 					pa = img.getParent('a');
 
-					if (pa.href.indexOf('do=feRedirect') == -1) {
+					if (pa && pa.href.indexOf('do=feRedirect') == -1) {
 						if (next = pa.getNext('a')) {
 							img = next.getFirst('img');
 						} else {
