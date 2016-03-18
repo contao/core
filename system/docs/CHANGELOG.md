@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Adjust the meta wizard field length to the column length (see #8277).
+
+### Fixed
 Correctly handle custom mime icon paths (see #8275).
 
 ### Fixed
