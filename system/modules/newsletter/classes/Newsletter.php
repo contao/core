@@ -928,7 +928,7 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
+					$objParent = \PageModel::findByPk($objNewsletter->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -949,14 +949,7 @@ class Newsletter extends \Backend
 					}
 
 					// Generate the URL
-					$feUrl = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
-
-					if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
-					{
-						$feUrl = (($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/') . $feUrl;
-					}
-
-					$arrProcessed[$objNewsletter->jumpTo] = $feUrl;
+					$arrProcessed[$objNewsletter->jumpTo] = $objParent->getAbsoluteUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 				}
 
 				$strUrl = $arrProcessed[$objNewsletter->jumpTo];

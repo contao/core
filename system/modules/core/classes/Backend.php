@@ -677,12 +677,6 @@ abstract class Backend extends \Controller
 			return array();
 		}
 
-		// Fallback domain
-		if ($domain == '')
-		{
-			$domain = \Environment::get('base');
-		}
-
 		$arrPages = array();
 		$objRegistry = \Model\Registry::getInstance();
 
@@ -704,14 +698,7 @@ abstract class Backend extends \Controller
 					// Published
 					if ($objPage->published && ($objPage->start == '' || $objPage->start <= $time) && ($objPage->stop == '' || $objPage->stop > ($time + 60)))
 					{
-						$feUrl = $objPage->getFrontendUrl();
-
-						if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
-						{
-							$feUrl = $domain . $feUrl;
-						}
-
-						$arrPages[] = $feUrl;
+						$arrPages[] = $objPage->getAbsoluteUrl();
 
 						// Get articles with teaser
 						$objArticles = $objDatabase->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<='$time') AND (stop='' OR stop>'" . ($time + 60) . "') AND published='1' AND showTeaser='1' ORDER BY sorting")
@@ -719,12 +706,7 @@ abstract class Backend extends \Controller
 
 						if ($objArticles->numRows)
 						{
-							$feUrl = $objPage->getFrontendUrl('/articles/%s');
-
-							if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
-							{
-								$feUrl = $domain . $feUrl;
-							}
+							$feUrl = $objPage->getAbsoluteUrl('/articles/%s');
 
 							while ($objArticles->next())
 							{

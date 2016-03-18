@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Respect the SSL settings of the root page when generating sitemaps (see #8270).
+
+### Fixed
 Read from the temporary file if it has not been closed yet (see #8269).
 
 ### Fixed
