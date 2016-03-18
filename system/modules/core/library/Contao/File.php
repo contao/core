@@ -561,6 +561,7 @@ class File extends \System
 			}
 
 			$return = $this->Files->rename($this->strTmp, $this->strFile);
+			$this->strTmp = null;
 		}
 
 		// Update the database
@@ -596,7 +597,7 @@ class File extends \System
 	 */
 	public function getContent()
 	{
-		$strContent = file_get_contents(TL_ROOT . '/' . $this->strFile);
+		$strContent = file_get_contents(TL_ROOT . '/' . ($this->strTmp ?: $this->strFile));
 
 		// Remove BOMs (see #4469)
 		if (strncmp($strContent, "\xEF\xBB\xBF", 3) === 0)

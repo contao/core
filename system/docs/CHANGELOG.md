@@ -5,6 +5,9 @@ Version 3.5.9 (2016-03-XX)
 --------------------------
 
 ### Fixed
+Read from the temporary file if it has not been closed yet (see #8269).
+
+### Fixed
 Always use HTTPS if the target server supports SSL connections (see #8183).
 
 ### Fixed
