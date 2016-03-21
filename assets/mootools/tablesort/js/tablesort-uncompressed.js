@@ -31,7 +31,7 @@ var DECIMAL_SEPARATOR = '.';
 /**
  * Provide methods to sort tables keeping the Contao class names intact.
  *
- * @author Leo Feyer <http://contao.org>
+ * @author Leo Feyer <https://contao.org>
  */
 var TableSort = new Class(
 {

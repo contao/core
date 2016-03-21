@@ -63,7 +63,7 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
+					$objParent = \PageModel::findByPk($objFaq->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -84,14 +84,7 @@ class ModuleFaq extends \Frontend
 					}
 
 					// Generate the URL
-					$feUrl = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
-
-					if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
-					{
-						$feUrl = (($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/') . $feUrl;
-					}
-
-					$arrProcessed[$objFaq->jumpTo] = $feUrl;
+					$arrProcessed[$objFaq->jumpTo] = $objParent->getAbsoluteUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 				}
 
 				$strUrl = $arrProcessed[$objFaq->jumpTo];

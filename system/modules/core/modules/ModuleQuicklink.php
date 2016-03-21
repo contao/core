@@ -92,8 +92,6 @@ class ModuleQuicklink extends \Module
 			}
 		}
 
-		$arrPages = array_values(array_filter($arrPages));
-
 		// Add the items to the pre-sorted array
 		while ($objPages->next())
 		{
@@ -101,6 +99,7 @@ class ModuleQuicklink extends \Module
 		}
 
 		$items = array();
+		$arrPages = array_values(array_filter($arrPages));
 
 		/** @var \PageModel[] $arrPages */
 		foreach ($arrPages as $objPage)

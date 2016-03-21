@@ -748,6 +748,12 @@ abstract class Widget extends \BaseTemplate
 
 		$varValue = $this->arrAttributes[$strKey];
 
+		// Prevent the autofocus attribute from being added multiple times (see #8281)
+		if ($strKey == 'autofocus')
+		{
+			unset($this->arrAttributes[$strKey]);
+		}
+
 		if ($strKey == 'disabled' || $strKey == 'readonly' || $strKey == 'required' || $strKey == 'autofocus' || $strKey == 'multiple')
 		{
 			if (TL_MODE == 'FE') // see #3878

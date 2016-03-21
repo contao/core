@@ -1225,6 +1225,12 @@ ul.sortable li:hover .dirname {
 	border:0;
 	z-index:10000;
 }
+.float_left {
+	float:left;
+}
+.float_right {
+	float:right;
+}
 
 /* Navigation icons */
 a.navigation.article {

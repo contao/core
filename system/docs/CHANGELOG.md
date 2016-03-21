@@ -1,6 +1,52 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.9 (2016-03-21)
+--------------------------
+
+### Fixed
+Prevent the autofocus attribute from being added multiple times (see #8281).
+
+### Fixed
+Respect the SSL settings of the root page when generating sitemaps (see #8270).
+
+### Fixed
+Read from the temporary file if it has not been closed yet (see #8269).
+
+### Fixed
+Always use HTTPS if the target server supports SSL connections (see #8183).
+
+### Fixed
+Adjust the meta wizard field length to the column length (see #8277).
+
+### Fixed
+Correctly handle custom mime icon paths (see #8275).
+
+### Fixed
+Only log errors that have been configured to get logged (see #8267).
+
+### Fixed
+Show the 404 error page if an unpublished article is requested (see #8264).
+
+### Fixed
+Correctly count the URLs when rebuilding the search index (see #8262).
+
+### Fixed
+Ensure that every image has a width and height attribute (see #8162).
+
+### Fixed
+Set the correct mime type when embedding SVG images (see #8245).
+
+### Fixed
+Handle the "float_left" and "float_right" classes in the back end (see #8239).
+
+### Fixed
+Consider the fallback language if a page alias is ambiguous (see #8142).
+
+### Fixed
+Fix the error 403/404 redirect (see contao/website#74).
+
+
 Version 3.5.8 (2016-03-01)
 --------------------------
 

@@ -31,13 +31,13 @@ class FrontendShare extends \Frontend
 				$query .= '&t=' . rawurlencode(\Input::get('t', true));
 				$query .= '&display=popup';
 				$query .= '&redirect_uri=http%3A%2F%2Fwww.facebook.com';
-				header('Location: http://www.facebook.com/sharer/sharer.php' . $query);
+				header('Location: https://www.facebook.com/sharer/sharer.php' . $query);
 				exit; break;
 
 			case 'twitter':
 				$query  = '?url=' . rawurlencode(\Input::get('u', true));
 				$query .= '&text=' . rawurlencode(\Input::get('t', true));
-				header('Location: http://twitter.com/share' . $query);
+				header('Location: https://twitter.com/share' . $query);
 				exit; break;
 
 			case 'gplus':

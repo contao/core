@@ -84,6 +84,6 @@ class PageError403 extends \Frontend
 			die_nicely('be_no_forward', 'Forward page not found');
 		}
 
-		$this->redirect($objNextPage->getFrontendUrl(($obj403->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($objNextPage->getFrontendUrl(), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }
