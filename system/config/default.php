@@ -99,7 +99,7 @@ $GLOBALS['TL_CONFIG']['allowedTags']
 	. '<map><mark><menu>'
 	. '<nav>'
 	. '<object><ol><optgroup><option><output>'
-	. '<p><param><pre>'
+	. '<p><param><picture><pre>'
 	. '<q>'
 	. '<s><samp><section><select><small><source><span><strong><style><sub><sup>'
 	. '<table><tbody><td><textarea><tfoot><th><thead><time><tr><tt>'

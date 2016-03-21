@@ -207,13 +207,21 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					$objArticle = \ArticleModel::findByIdOrAliasAndPid($strArticle, $objPage->id);
+					$objArticle = \ArticleModel::findPublishedByIdOrAliasAndPid($strArticle, $objPage->id);
 
-					// Send a 404 header if the article does not exist
+					// Send a 404 header if there is no published article
 					if (null === $objArticle)
 					{
 						/** @var \PageError404 $objHandler */
 						$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+						$objHandler->generate($objPage->id);
+					}
+
+					// Send a 403 header if the article cannot be accessed
+					if (!static::isVisibleElement($objArticle))
+					{
+						/** @var \PageError403 $objHandler */
+						$objHandler = new $GLOBALS['TL_PTY']['error_403']();
 						$objHandler->generate($objPage->id);
 					}
 
@@ -1463,7 +1471,18 @@ abstract class Controller extends \System
 		}
 
 		$imgSize = $objFile->imageSize;
-		$size = deserialize($arrItem['size'], true) + array(0, 0, 'crop');
+		$size = deserialize($arrItem['size']);
+
+		if (is_numeric($size))
+		{
+			$size = array(0, 0, (int) $size);
+		}
+		elseif (!is_array($size))
+		{
+			$size = array();
+		}
+
+		$size += array(0, 0, 'crop');
 
 		if ($intMaxWidth === null)
 		{
@@ -1708,7 +1727,7 @@ abstract class Controller extends \System
 					'title'     => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename)),
 					'href'      => $strHref,
 					'enclosure' => $objFiles->path,
-					'icon'      => TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon,
+					'icon'      => \Image::getPath($objFile->icon),
 					'mime'      => $objFile->mime,
 					'meta'      => $arrMeta
 				);

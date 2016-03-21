@@ -322,7 +322,7 @@ class Calendar extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
-					$objParent = \PageModel::findWithDetails($objCalendar->jumpTo);
+					$objParent = \PageModel::findByPk($objCalendar->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -343,14 +343,7 @@ class Calendar extends \Frontend
 					}
 
 					// Generate the URL
-					$feUrl = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s');
-
-					if (strncmp($feUrl, 'http://', 7) !== 0 && strncmp($feUrl, 'https://', 8) !== 0)
-					{
-						$feUrl = (($objParent->rootUseSSL ? 'https://' : 'http://') . ($objParent->domain ?: \Environment::get('host')) . TL_PATH . '/') . $feUrl;
-					}
-
-					$arrProcessed[$objCalendar->jumpTo] = $feUrl;
+					$arrProcessed[$objCalendar->jumpTo] = $objParent->getAbsoluteUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ?  '/%s' : '/events/%s');
 				}
 
 				$strUrl = $arrProcessed[$objCalendar->jumpTo];

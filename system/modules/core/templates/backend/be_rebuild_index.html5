@@ -19,13 +19,13 @@
     <script>
       window.addEvent('domready', function() {
         var urls = $$('.page_url'),
-            last = urls.length-1, url;
-        urls.each(function(el, i) {
+            completed = 0;
+        urls.each(function(el) {
           el.getAttribute('data-url') && new Request({
-            'url': el.getAttribute('data-url'),
+            url: el.getAttribute('data-url'),
             onComplete: function() {
               el.addClass('tl_green');
-              if (i == last) {
+              if (++completed >= urls.length) {
                 $('index_loading').setStyle('display', 'none');
                 $('index_complete').setStyle('display', 'block');
               }

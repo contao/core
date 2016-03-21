@@ -284,7 +284,7 @@ class tl_theme extends Backend
 
 			if ($objFile !== null)
 			{
-				$label = '<img src="' . TL_FILES_URL . Image::get($objFile->path, 160, 120, 'center_top') . '" width="160" height="120" alt="" class="theme_preview">' . $label;
+				$label = Image::getHtml(Image::get($objFile->path, 160, 120, 'center_top'), '', 'class="theme_preview"') . ' ' . $label;
 			}
 		}
 

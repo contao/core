@@ -909,4 +909,24 @@ class PageModel extends \Model
 
 		return \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, $strForceLang, true);
 	}
+
+
+	/**
+	 * Generate an absolute URL depending on the current rewriteURL setting
+	 *
+	 * @param string $strParams An optional string of URL parameters
+	 *
+	 * @return string An absolute URL that can be used in the front end
+	 */
+	public function getAbsoluteUrl($strParams=null)
+	{
+		$strUrl = \Controller::generateFrontendUrl($this->loadDetails()->row(), $strParams, null, true);
+
+		if (strncmp($strUrl, 'http://', 7) !== 0 && strncmp($strUrl, 'https://', 8) !== 0)
+		{
+			$strUrl = ($this->rootUseSSL ? 'https://' : 'http://') . \Environment::get('host') . TL_PATH . '/' . $strUrl;
+		}
+
+		return $strUrl;
+	}
 }

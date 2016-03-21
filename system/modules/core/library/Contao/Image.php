@@ -804,6 +804,36 @@ class Image
 
 
 	/**
+	 * Get the relative path to an image
+	 *
+	 * @param string $src The image name or path
+	 *
+	 * @return string The relative path
+	 */
+	public static function getPath($src)
+	{
+		if ($src == '')
+		{
+			return '';
+		}
+
+		$src = rawurldecode($src);
+
+		if (strpos($src, '/') !== false)
+		{
+			return $src;
+		}
+
+		if (strncmp($src, 'icon', 4) === 0)
+		{
+			return 'assets/contao/images/' . $src;
+		}
+
+		return 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
+	}
+
+
+	/**
 	 * Generate an image tag and return it as string
 	 *
 	 * @param string $src        The image path
@@ -814,33 +844,15 @@ class Image
 	 */
 	public static function getHtml($src, $alt='', $attributes='')
 	{
-		if ($src == '')
-		{
-			return '';
-		}
+		$src = static::getPath($src);
 
-		$static = TL_FILES_URL;
-		$src = rawurldecode($src);
-
-		if (strpos($src, '/') === false)
-		{
-			if (strncmp($src, 'icon', 4) === 0)
-			{
-				$static = TL_ASSETS_URL;
-				$src = 'assets/contao/images/' . $src;
-			}
-			else
-			{
-				$src = 'system/themes/' . \Backend::getTheme() . '/images/' . $src;
-			}
-		}
-
-		if (!is_file(TL_ROOT .'/'. $src))
+		if ($src == '' || !is_file(TL_ROOT . '/' . $src))
 		{
 			return '';
 		}
 
 		$objFile = new \File($src, true);
+		$static = (strncmp($src, 'assets/', 7) === 0) ? TL_ASSETS_URL : TL_FILES_URL;
 
 		return '<img src="' . $static . \System::urlEncode($src) . '" width="' . $objFile->width . '" height="' . $objFile->height . '" alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}

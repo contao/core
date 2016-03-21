@@ -99,7 +99,7 @@ class ContentDownload extends \ContentElement
 		$this->Template->title = specialchars($this->titleText ?: sprintf($GLOBALS['TL_LANG']['MSC']['download'], $objFile->basename));
 		$this->Template->href = $strHref;
 		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
-		$this->Template->icon = TL_ASSETS_URL . 'assets/contao/images/' . $objFile->icon;
+		$this->Template->icon = \Image::getPath($objFile->icon);
 		$this->Template->mime = $objFile->mime;
 		$this->Template->extension = $objFile->extension;
 		$this->Template->path = $objFile->dirname;

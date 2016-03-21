@@ -527,7 +527,7 @@ var AjaxRequest =
 				} else {
 					pa = img.getParent('a');
 
-					if (pa.href.indexOf('do=feRedirect') == -1) {
+					if (pa && pa.href.indexOf('do=feRedirect') == -1) {
 						if (next = pa.getNext('a')) {
 							img = next.getFirst('img');
 						} else {
@@ -982,7 +982,7 @@ var Backend =
 	 * Open a TinyMCE file browser in a modal window
 	 *
 	 * @param {string} field_name The field name
-	 * @param {object} url        An URI object
+	 * @param {string} url        The URL
 	 * @param {string} type       The picker type
 	 * @param {object} win        The window object
 	 */

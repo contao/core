@@ -2273,18 +2273,22 @@ class StyleSheets extends \Backend
 		if ($arrParent['embedImages'] > 0 && file_exists(TL_ROOT . '/' . $strImage))
 		{
 			$objImage = new \File($strImage, true);
-			$strExtension = $objImage->extension;
+			$strMime = $objImage->extension;
 
-			// Fix the jpg mime type
-			if ($strExtension == 'jpg')
+			// Adjust the mime types
+			if ($strMime == 'jpg')
 			{
-				$strExtension = 'jpeg';
+				$strMime = 'jpeg';
+			}
+			elseif ($strMime == 'svg')
+			{
+				$strMime = 'svg+xml';
 			}
 
 			// Return the data: string
 			if ($objImage->size <= $arrParent['embedImages'])
 			{
-				return 'data:image/' . $strExtension . ';base64,' . base64_encode($objImage->getContent());
+				return 'data:image/' . $strMime . ';base64,' . base64_encode($objImage->getContent());
 			}
 		}
 
