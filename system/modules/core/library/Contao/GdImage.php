@@ -204,12 +204,12 @@ class GdImage
 	/**
 	 * Save the GD image to a file
 	 *
-	 * @param self    $gdImage The target GD image
+	 * @param GdImage $gdImage The target GD image
 	 * @param integer $x       The target X coordinate
 	 * @param integer $y       The target Y coordinate
 	 * @param integer $width   The target width
 	 * @param integer $height  The target height
-	 *
+	 * 
 	 * @return static
 	 */
 	public function copyTo(self $gdImage, $x, $y, $width, $height)

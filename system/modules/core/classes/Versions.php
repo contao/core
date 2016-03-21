@@ -278,7 +278,7 @@ class Versions extends \Controller
 		}
 
 		// Get the currently available fields
-		$arrFields = array_flip($this->Database->getFieldnames($this->strTable));
+		$arrFields = array_flip($this->Database->getFieldNames($this->strTable));
 
 		// Unset fields that do not exist (see #5219)
 		$data = array_intersect_key($data, $arrFields);
@@ -488,7 +488,7 @@ class Versions extends \Controller
 						}
 
 						$objDiff = new \Diff($from[$k], $to[$k]);
-						$strBuffer .= $objDiff->Render(new DiffRenderer(array('field'=>($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
+						$strBuffer .= $objDiff->render(new DiffRenderer(array('field'=>($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['label'][0] ?: (isset($GLOBALS['TL_LANG']['MSC'][$k]) ? (is_array($GLOBALS['TL_LANG']['MSC'][$k]) ? $GLOBALS['TL_LANG']['MSC'][$k][0] : $GLOBALS['TL_LANG']['MSC'][$k]) : $k)))));
 					}
 				}
 			}

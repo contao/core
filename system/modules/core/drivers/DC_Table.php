@@ -1673,7 +1673,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Get the currently available fields
 			if (!isset($arrFields[$table]))
 			{
-				$arrFields[$table] = array_flip($this->Database->getFieldnames($table));
+				$arrFields[$table] = array_flip($this->Database->getFieldNames($table));
 			}
 
 			foreach ($fields as $row)

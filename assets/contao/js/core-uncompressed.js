@@ -982,7 +982,7 @@ var Backend =
 	 * Open a TinyMCE file browser in a modal window
 	 *
 	 * @param {string} field_name The field name
-	 * @param {object} url        An URI object
+	 * @param {string} url        The URL
 	 * @param {string} type       The picker type
 	 * @param {object} win        The window object
 	 */

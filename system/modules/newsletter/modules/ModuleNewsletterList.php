@@ -77,7 +77,7 @@ class ModuleNewsletterList extends \Module
 		{
 			while ($objNewsletter->next())
 			{
-				/** @var \NewsletterModel $objNewsletter */
+				/** @var \PageModel $objTarget */
 				if (($objTarget = $objNewsletter->getRelated('pid')) === null)
 				{
 					continue;
