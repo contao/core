@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.10 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Determine the search index checksum in a more reliable way (see #7652).
+
+
 Version 3.5.9 (2016-03-21)
 --------------------------
 

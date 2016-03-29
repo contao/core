@@ -51,6 +51,7 @@ class Search
 	{
 		$objDatabase = \Database::getInstance();
 
+		$arrSet['tstamp'] = time();
 		$arrSet['url'] = $arrData['url'];
 		$arrSet['title'] = $arrData['title'];
 		$arrSet['protected'] = $arrData['protected'];
@@ -135,19 +136,6 @@ class Search
 		// Free the memory
 		unset($arrData['content']);
 
-		// Calculate the checksum (see #4179)
-		$arrSet['checksum'] = md5(preg_replace('/ +/', ' ', strip_tags($strContent)));
-
-		// Return if the page is indexed and up to date
-		$objIndex = $objDatabase->prepare("SELECT id, checksum FROM tl_search WHERE url=? AND pid=?")
-								->limit(1)
-								->execute($arrSet['url'], $arrSet['pid']);
-
-		if ($objIndex->numRows && $objIndex->checksum == $arrSet['checksum'])
-		{
-			return false;
-		}
-
 		$arrMatches = array();
 		preg_match('/<\/head>/', $strContent, $arrMatches, PREG_OFFSET_CAPTURE);
 		$intOffset = strlen($arrMatches[0][0]) + $arrMatches[0][1];
@@ -157,21 +145,22 @@ class Search
 		$strBody = substr($strContent, $intOffset);
 
 		unset($strContent);
+
 		$tags = array();
 
-		// Get description
+		// Get the description
 		if (preg_match('/<meta[^>]+name="description"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
 			$arrData['description'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($tags[1])));
 		}
 
-		// Get keywords
+		// Get the keywords
 		if (preg_match('/<meta[^>]+name="keywords"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
 			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($tags[1])));
 		}
 
-		// Read title and alt attributes
+		// Read the title and alt attributes
 		if (preg_match_all('/<* (title|alt)="([^"]*)"[^>]*>/i', $strBody, $tags))
 		{
 			$arrData['keywords'] .= ' ' . implode(', ', array_unique($tags[2]));
@@ -185,52 +174,48 @@ class Search
 		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . $strBody . ' ' . $arrData['keywords'];
 		$arrSet['text'] = trim(preg_replace('/ +/', ' ', \StringUtil::decodeEntities($arrSet['text'])));
 
-		$arrSet['tstamp'] = time();
+		// Calculate the checksum
+		$arrSet['checksum'] = md5($arrSet['text']);
 
-		// Update an existing old entry
+		$objIndex = $objDatabase->prepare("SELECT id, url FROM tl_search WHERE checksum=? AND pid=?")
+								->execute($arrSet['checksum'], $arrSet['pid']);
+
+		// Add the page to the tl_search table
 		if ($objIndex->numRows)
 		{
+			if ($objIndex->url == $arrSet['url'])
+			{
+				return false; // up to date
+			}
+
+			// Update the URL if the new URL is shorter or the current URL is not canonical
+			if (strpos($arrSet['url'], '?') === false && strpos($objIndex->url, '?') !== false)
+			{
+				// ignore
+			}
+			elseif (substr_count($arrSet['url'], '/') > substr_count($objIndex->url, '/') || strpos($arrSet['url'], '?') !== false && strpos($objIndex->url, '?') === false)
+			{
+				$arrSet['url'] = $objIndex->url;
+			}
+
 			$objDatabase->prepare("UPDATE tl_search %s WHERE id=?")
 						->set($arrSet)
 						->execute($objIndex->id);
 
 			$intInsertId = $objIndex->id;
 		}
-
-		// Add a new entry
 		else
 		{
-			// Check for a duplicate record with the same checksum
-			$objDuplicates = $objDatabase->prepare("SELECT id, url FROM tl_search WHERE pid=? AND checksum=?")
-										 ->limit(1)
-										 ->execute($arrSet['pid'], $arrSet['checksum']);
+			$objInsertStmt = $objDatabase->prepare("INSERT INTO tl_search %s")
+										 ->set($arrSet)
+										 ->execute();
 
-			// Keep the existing record
-			if ($objDuplicates->numRows)
-			{
-				// Update the URL if the new URL is shorter or the current URL is not canonical
-				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || strncmp($arrSet['url'] . '?', $objDuplicates->url, utf8_strlen($arrSet['url']) + 1) === 0)
-				{
-					$objDatabase->prepare("UPDATE tl_search SET url=? WHERE id=?")
-								->execute($arrSet['url'], $objDuplicates->id);
-				}
-
-				return false;
-			}
-
-			// Insert the new record if there is no duplicate
-			else
-			{
-				$objInsertStmt = $objDatabase->prepare("INSERT INTO tl_search %s")
-											 ->set($arrSet)
-											 ->execute();
-
-				$intInsertId = $objInsertStmt->insertId;
-			}
+			$intInsertId = $objInsertStmt->insertId;
 		}
 
 		// Remove quotes
 		$strText = str_replace(array('´', '`'), "'", $arrSet['text']);
+
 		unset($arrSet);
 
 		// Remove special characters
