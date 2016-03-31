@@ -258,6 +258,7 @@ class FormSelectMenu extends \Widget
 					'value'    => $arrOption['value'],
 					'selected' => $this->isSelected($arrOption),
 					'label'    => $arrOption['label'],
+          'raw'      => $arrOption 
 				);
 			}
 		}

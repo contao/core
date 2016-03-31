@@ -207,7 +207,8 @@ class FormCheckBox extends \Widget
 					'value'      => $arrOption['value'],
 					'checked'    => $this->isChecked($arrOption),
 					'attributes' => $this->getAttributes(),
-					'label'      => $arrOption['label']
+					'label'      => $arrOption['label'],
+          'raw'        => $arrOption 
 				);
 			}
 		}
