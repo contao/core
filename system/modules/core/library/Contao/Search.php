@@ -178,6 +178,7 @@ class Search
 		$arrSet['checksum'] = md5($arrSet['text']);
 
 		$objIndex = $objDatabase->prepare("SELECT id, url FROM tl_search WHERE checksum=? AND pid=?")
+								->limit(1)
 								->execute($arrSet['checksum'], $arrSet['pid']);
 
 		// Add the page to the tl_search table
