@@ -252,13 +252,14 @@ class FormSelectMenu extends \Widget
 			}
 			else
 			{
-				$arrOptions[] = array
-				(
-					'type'     => 'option',
-					'value'    => $arrOption['value'],
-					'selected' => $this->isSelected($arrOption),
-					'label'    => $arrOption['label'],
-          'raw'      => $arrOption 
+				$arrOptions[] = array_replace(
+				    $arrOption,
+				    array(
+							'type'     => 'option',
+							'value'    => $arrOption['value'],
+							'selected' => $this->isSelected($arrOption),
+							'label'    => $arrOption['label']
+				    )
 				);
 			}
 		}
