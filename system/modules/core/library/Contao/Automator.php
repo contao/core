@@ -113,15 +113,6 @@ class Automator extends \System
 	 */
 	public function purgeSystemLog()
 	{
-		// HOOK: call before purge
-		if (isset($GLOBALS['TL_HOOKS']['purgeSystemLog']) && is_array($GLOBALS['TL_HOOKS']['purgeSystemLog']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['purgeSystemLog'] as $callback)
-			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]();
-			}
-		}
 		
 		$objDatabase = \Database::getInstance();
 
