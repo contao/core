@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Skip forward pages entirely in the book navigation module (see #5074).
+
+### Fixed
 Determine the search index checksum in a more reliable way (see #7652).
 
 
