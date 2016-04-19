@@ -238,11 +238,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedTags'],
 			'inputType'               => 'text',
-			'eval'                    => array('preserveTags'=>true, 'tl_class'=>'long'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'lowercaseValue')
-			)
+			'eval'                    => array('preserveTags'=>true, 'tl_class'=>'long')
 		),
 		'debugMode' => array
 		(
@@ -288,31 +284,19 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'lowercaseValue')
-			)
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'validImageTypes' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'lowercaseValue')
-			)
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'editableFiles' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['editableFiles'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'lowercaseValue')
-			)
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'templateFiles' => array
 		(
@@ -321,7 +305,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'eval'                    => array('tl_class'=>'w50'),
 			'save_callback' => array
 			(
-				array('tl_settings', 'lowercaseValue'),
 				array('tl_settings', 'checkTemplateFiles')
 			)
 		),
@@ -363,11 +346,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_settings', 'lowercaseValue')
-			)
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'uploadFields' => array
 		(
@@ -769,24 +748,6 @@ class tl_settings extends Backend
 		{
 			$this->import('Automator');
 			$this->Automator->purgeInternalCache();
-		}
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Lowercase a value
-	 *
-	 * @param mixed $varValue
-	 *
-	 * @return mixed
-	 */
-	public function lowercaseValue($varValue)
-	{
-		if ($varValue != '')
-		{
-			$varValue = utf8_strtolower($varValue);
 		}
 
 		return $varValue;

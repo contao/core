@@ -593,7 +593,7 @@ class tl_files extends Backend
 
 		$objFile = new File($strDecoded, true);
 
-		if (!in_array($objFile->extension, trimsplit(',', Config::get('editableFiles'))))
+		if (!in_array($objFile->extension, trimsplit(',', strtolower(Config::get('editableFiles')))))
 		{
 			return Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}

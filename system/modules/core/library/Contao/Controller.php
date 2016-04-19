@@ -46,7 +46,7 @@ abstract class Controller extends \System
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		$arrAllowed = trimsplit(',', strtolower(\Config::get('templateFiles')));
 		array_push($arrAllowed, 'html5'); // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))

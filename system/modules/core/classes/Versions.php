@@ -75,7 +75,7 @@ class Versions extends \Controller
 		{
 			$objFile = \FilesModel::findByPk($intPid);
 
-			if ($objFile !== null && in_array($objFile->extension, trimsplit(',', \Config::get('editableFiles'))))
+			if ($objFile !== null && in_array($objFile->extension, trimsplit(',', strtolower(\Config::get('editableFiles')))))
 			{
 				$this->strPath = $objFile->path;
 			}

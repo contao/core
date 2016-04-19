@@ -156,7 +156,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		// Check for valid file types
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
 		{
-			$this->arrValidFileTypes = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']);
+			$this->arrValidFileTypes = trimsplit(',', strtolower($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']));
 		}
 
 		// Call onload_callback (e.g. to check permissions)
@@ -1733,7 +1733,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$objFile = new \File($this->intId, true);
 
 		// Check whether file type is editable
-		if (!in_array($objFile->extension, trimsplit(',', \Config::get('editableFiles'))))
+		if (!in_array($objFile->extension, trimsplit(',', strtolower(\Config::get('editableFiles')))))
 		{
 			$this->log('File type "'.$objFile->extension.'" ('.$this->intId.') is not allowed to be edited', __METHOD__, TL_ERROR);
 			$this->redirect('contao/main.php?act=error');

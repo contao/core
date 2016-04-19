@@ -354,7 +354,7 @@ class FileSelector extends \Widget
 
 			if ($this->extensions != '')
 			{
-				$allowedExtensions = trimsplit(',', $this->extensions);
+				$allowedExtensions = trimsplit(',', strtolower($this->extensions));
 			}
 
 			for ($h=0, $c=count($files); $h<$c; $h++)
