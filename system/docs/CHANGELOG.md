@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add the debug bar resources if `hideDebugBar` is enabled (see #8307).
+
+### Fixed
 Skip forward pages entirely in the book navigation module (see #5074).
 
 ### Fixed
