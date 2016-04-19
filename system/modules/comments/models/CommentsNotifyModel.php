@@ -85,7 +85,7 @@ class CommentsNotifyModel extends \Model
 	 * @param string $strToken   The token string
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static The subscription model or null
+	 * @return \CommentsNotifyModel|null The model or null if there are no subscriptions
 	 */
 	public static function findByTokens($strToken, array $arrOptions=array())
 	{
@@ -103,7 +103,7 @@ class CommentsNotifyModel extends \Model
 	 * @param string  $strEmail   The e-mail address
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static The subscription model or null
+	 * @return \CommentsNotifyModel|null The model or null if there are no subscriptions
 	 */
 	public static function findBySourceParentAndEmail($strSource, $intParent, $strEmail, array $arrOptions=array())
 	{

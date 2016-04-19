@@ -126,7 +126,7 @@ class FaqModel extends \Model
 	 * @param array $arrPids    An array of parent IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static The FaqModel or null if there is no FAQ
+	 * @return \FaqModel|null The model or null if there is no FAQ
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{

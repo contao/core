@@ -188,7 +188,7 @@ class MemberModel extends \Model
 	 * @param string $strUsername The username
 	 * @param array  $arrOptions  An optional options array
 	 *
-	 * @return static The model or null if there is no member
+	 * @return \MemberModel|null The model or null if there is no member
 	 */
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null, array $arrOptions=array())
 	{

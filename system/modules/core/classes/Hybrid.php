@@ -85,13 +85,17 @@ abstract class Hybrid extends \Frontend
 		parent::__construct();
 
 		// Store the parent element (see #4556)
-		if ($objElement instanceof \Model)
+		if ($objElement instanceof \Model || $objElement instanceof \Model\Collection)
 		{
-			$this->objParent = $objElement;
-		}
-		elseif ($objElement instanceof \Model\Collection)
-		{
-			$this->objParent = $objElement->current();
+			/** @var \ContentModel|\ModuleModel|\FormModel $objModel */
+			$objModel = $objElement;
+
+			if ($objModel instanceof \Model\Collection)
+			{
+				$objModel = $objModel->current();
+			}
+
+			$this->objParent = $objModel;
 		}
 
 		if ($this->strKey == '' || $this->strTable == '')

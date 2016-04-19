@@ -102,7 +102,7 @@ class FilesModel extends \Model
 	 * @param mixed $varValue   The value
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static A model or null if there is no file
+	 * @return \FilesModel|null The model or null if there is no file
 	 */
 	public static function findByPk($varValue, array $arrOptions=array())
 	{
@@ -121,7 +121,7 @@ class FilesModel extends \Model
 	 * @param mixed $intId      The ID or UUID
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static A model or null if there is no file
+	 * @return \FilesModel|null The model or null if there is no file
 	 */
 	public static function findById($intId, array $arrOptions=array())
 	{
@@ -164,7 +164,7 @@ class FilesModel extends \Model
 	 * @param string $strUuid    The UUID string
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static A model or null if there is no file
+	 * @return \FilesModel|null The model or null if there is no file
 	 */
 	public static function findByUuid($strUuid, array $arrOptions=array())
 	{
