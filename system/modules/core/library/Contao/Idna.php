@@ -87,6 +87,32 @@ class Idna
 
 
 	/**
+	 * Decode the domain in an e-mail address
+	 *
+	 * @param string $strEmail The e-mail address
+	 *
+	 * @return string The decoded e-mail address
+	 */
+	public static function decodeEmail($strEmail)
+	{
+		if ($strEmail == '')
+		{
+			return '';
+		}
+
+		if (strpos($strEmail, '@') === false)
+		{
+			return $strEmail; // see #6241
+		}
+
+		$arrChunks = explode('@', $strEmail);
+		$strHost = array_pop($arrChunks);
+
+		return implode('@', $arrChunks) . '@' . static::decode($strHost);
+	}
+
+
+	/**
 	 * Encode the domain in an URL
 	 *
 	 * @param string $strUrl The URL

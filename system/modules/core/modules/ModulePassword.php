@@ -298,7 +298,7 @@ class ModulePassword extends \Module
 		$objEmail->text = \StringUtil::parseSimpleTokens($this->reg_password, $arrData);
 		$objEmail->sendTo($objMember->email);
 
-		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . $objMember->email . ')', __METHOD__, TL_ACCESS);
+		$this->log('A new password has been requested for user ID ' . $objMember->id . ' (' . \Idna::decodeEmail($objMember->email) . ')', __METHOD__, TL_ACCESS);
 
 		// Check whether there is a jumpTo page
 		if (($objJumpTo = $this->objModel->getRelated('jumpTo')) !== null)

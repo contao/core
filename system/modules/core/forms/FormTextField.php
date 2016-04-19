@@ -114,9 +114,13 @@ class FormTextField extends \Widget
 		{
 			case 'value':
 				// Hide the Punycode format (see #2750)
-				if ($this->rgxp == 'email' || $this->rgxp == 'friendly' || $this->rgxp == 'url')
+				if ($this->rgxp == 'url')
 				{
 					return \Idna::decode($this->varValue);
+				}
+				elseif ($this->rgxp == 'email' || $this->rgxp == 'friendly')
+				{
+					return \Idna::decodeEmail($this->varValue);
 				}
 				else
 				{

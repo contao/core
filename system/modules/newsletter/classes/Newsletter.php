@@ -167,7 +167,7 @@ class Newsletter extends \Backend
 					$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
 					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html);
 
-					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br>';
+					echo 'Sending newsletter to <strong>' . \Idna::decodeEmail($objRecipients->email) . '</strong><br>';
 				}
 			}
 
@@ -190,7 +190,7 @@ class Newsletter extends \Backend
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
 									   ->execute($strRecipient);
 
-						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', __METHOD__, TL_ERROR);
+						$this->log('Recipient address "' . \Idna::decodeEmail($strRecipient) . '" was rejected and has been deactivated', __METHOD__, TL_ERROR);
 					}
 				}
 
@@ -234,7 +234,7 @@ class Newsletter extends \Backend
 <table class="prev_header">
   <tr class="row_0">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['from'] . '</td>
-    <td class="col_1">' . sprintf($sprintf, $objNewsletter->sender) . '</td>
+    <td class="col_1">' . sprintf($sprintf, \Idna::decodeEmail($objNewsletter->sender)) . '</td>
   </tr>
   <tr class="row_1">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['subject'][0] . '</td>
@@ -274,7 +274,7 @@ class Newsletter extends \Backend
 </div>
 <div class="w50">
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>
-  <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (isset($_SESSION['TL_PREVIEW_MAIL_ERROR']) ? '
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.\Idna::decodeEmail($this->User->email).'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (isset($_SESSION['TL_PREVIEW_MAIL_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && \Config::get('showHelp')) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '')) . '
 </div>

@@ -371,7 +371,7 @@ class tl_newsletter_recipients extends Backend
 	 */
 	public function listRecipient($row)
 	{
-		$label = $row['email'];
+		$label = Idna::decodeEmail($row['email']);
 
 		if ($row['addedOn'])
 		{

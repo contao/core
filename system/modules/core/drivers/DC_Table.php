@@ -523,6 +523,10 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$row[$i] = ($value != '') ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
 			}
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'email')
+			{
+				$row[$i] = \Idna::decodeEmail($value);
+			}
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'textarea' && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['allowHtml'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['preserveTags']))
 			{
 				$row[$i] = specialchars($value);

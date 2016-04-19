@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly validate and decode IDNA e-mail addresses (see #8306).
+
+### Fixed
 Do not add the debug bar resources if `hideDebugBar` is enabled (see #8307).
 
 ### Fixed
