@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Always allow to navigate to the current month in the calendar (see #8283).
+
+### Fixed
 Correctly validate and decode IDNA e-mail addresses (see #8306).
 
 ### Fixed
