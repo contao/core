@@ -209,7 +209,7 @@ class GdImage
 	 * @param integer $y       The target Y coordinate
 	 * @param integer $width   The target width
 	 * @param integer $height  The target height
-	 * 
+	 *
 	 * @return static
 	 */
 	public function copyTo(self $gdImage, $x, $y, $width, $height)
