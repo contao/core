@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Make the path related properties of the File class binary-safe (see #8295).
+
+### Fixed
 Always allow to navigate to the current month in the calendar (see #8283).
 
 ### Fixed

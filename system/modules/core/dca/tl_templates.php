@@ -374,9 +374,9 @@ class tl_templates extends Backend
 	 */
 	public function compareTemplate(DataContainer $dc)
 	{
-		$strCurrentPath = $dc->id;
-		$strName = pathinfo($strCurrentPath, PATHINFO_FILENAME);
-		$strExtension = pathinfo($strCurrentPath, PATHINFO_EXTENSION);
+		$objCurrentFile = new File($dc->id, true);
+		$strName = $objCurrentFile->filename;
+		$strExtension = $objCurrentFile->extension;
 		$arrTemplates = TemplateLoader::getFiles();
 		$blnOverridesAnotherTpl = isset($arrTemplates[$strName]);
 
@@ -412,8 +412,7 @@ class tl_templates extends Backend
 
 		if ($strComparePath !== null)
 		{
-			$objCurrentFile = new \File($strCurrentPath, true);
-			$objCompareFile = new \File($strComparePath, true);
+			$objCompareFile = new File($strComparePath, true);
 
 			// Abort if one file is missing
 			if (!$objCurrentFile->exists() || !$objCompareFile->exists())
@@ -422,7 +421,7 @@ class tl_templates extends Backend
 			}
 
 			$objDiff = new Diff($objCompareFile->getContentAsArray(), $objCurrentFile->getContentAsArray());
-			$strDiff = $objDiff->render(new DiffRenderer(array('field'=>$strCurrentPath)));
+			$strDiff = $objDiff->render(new DiffRenderer(array('field'=>$dc->id)));
 
 			// Identical versions
 			if ($strDiff == '')
@@ -459,7 +458,7 @@ class tl_templates extends Backend
 		$objTemplate = new BackendTemplate('be_diff');
 
 		// Template variables
-		$objTemplate->staticTo = $strCurrentPath;
+		$objTemplate->staticTo = $dc->id;
 		$objTemplate->versions = $arrComparable;
 		$objTemplate->from = $strCompareName;
 		$objTemplate->showLabel = specialchars($GLOBALS['TL_LANG']['MSC']['showDifferences']);

@@ -162,7 +162,7 @@ class GdImage
 	public function saveToFile($path)
 	{
 		$arrGdInfo = gd_info();
-		$extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+		$extension = strtolower(substr($path, strrpos($path, '.') + 1));
 
 		// Fallback to PNG if GIF ist not supported
 		if ($extension == 'gif' && !$arrGdInfo['GIF Create Support'])
