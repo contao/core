@@ -124,7 +124,14 @@ class ModuleBooknav extends \Module
 		// Previous page
 		if ($intCurrent > 0)
 		{
-			$intKey = $arrLookup[($intCurrent - 1)];
+			$current = $intCurrent;
+			$intKey = $arrLookup[($current - 1)];
+
+			// Skip forward pages (see #5074)
+			while ($this->arrPages[$intKey]->type == 'forward' && isset($arrLookup[--$current]))
+			{
+				$intKey = $arrLookup[($current - 1)];
+			}
 
 			$this->Template->hasPrev = true;
 			$this->Template->prevHref = $this->arrPages[$intKey]->getFrontendUrl();
@@ -136,7 +143,14 @@ class ModuleBooknav extends \Module
 		// Next page
 		if ($intCurrent < (count($arrLookup) - 1))
 		{
-			$intKey = $arrLookup[($intCurrent + 1)];
+			$current = $intCurrent;
+			$intKey = $arrLookup[($current + 1)];
+
+			// Skip forward pages (see #5074)
+			while ($this->arrPages[$intKey]->type == 'forward' && isset($arrLookup[++$current]))
+			{
+				$intKey = $arrLookup[($current + 1)];
+			}
 
 			$this->Template->hasNext = true;
 			$this->Template->nextHref = $this->arrPages[$intKey]->getFrontendUrl();
