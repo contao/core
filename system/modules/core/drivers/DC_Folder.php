@@ -835,7 +835,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		$this->log('File or folder "' . str_replace(TL_ROOT . '/', '', $source) . '" has been deleted', __METHOD__, TL_FILES);
+		$this->log('File or folder "' . $source . '" has been deleted', __METHOD__, TL_FILES);
 
 		// Redirect
 		if (!$blnDoNotRedirect)
