@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Fix an error message in the newsletter subscription module (see #7887).
+
+### Fixed
 Determine the search index checksum in a more reliable way (see #7652).
 
 
