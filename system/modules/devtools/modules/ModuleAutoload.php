@@ -130,7 +130,7 @@ class ModuleAutoload extends \BackendModule
 			// Get all PHP files
 			foreach ($objFiles as $objFile)
 			{
-				if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php')
+				if ($objFile->getExtension() == 'php')
 				{
 					$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
@@ -260,11 +260,10 @@ class ModuleAutoload extends \BackendModule
 						continue;
 					}
 
-					$arrTplExts = trimsplit(',', \Config::get('templateFiles'));
-					$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
+					$arrTplExts = trimsplit(',', strtolower(\Config::get('templateFiles')));
 
 					// Add all known template types (see #5857)
-					if (in_array($strExtension, $arrTplExts))
+					if (in_array(strtolower($objFile->getExtension()), $arrTplExts))
 					{
 						$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 						$strKey = basename($strRelpath, strrchr($strRelpath, '.'));

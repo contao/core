@@ -31,9 +31,7 @@ class SqlFiles extends \RecursiveFilterIterator
 			return true;
 		}
 
-		$strExtension = pathinfo($this->current()->getFilename(), PATHINFO_EXTENSION);
-
-		if ($strExtension == 'sql')
+		if ($this->current()->getExtension() == 'sql')
 		{
 			return true;
 		}

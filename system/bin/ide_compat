@@ -37,7 +37,7 @@ foreach ($arrModules as $strModule) {
 
 	$arrDefaultConfig = array_merge($arrDefaultConfig, parse_ini_file(TL_ROOT . '/system/modules/' . $strModule . '/config/autoload.ini', true));
 
-	// Recursively scan all subfolders
+	/** @var \SplFileInfo[] $objFiles */
 	$objFiles = new \RecursiveIteratorIterator(
 		new \RecursiveDirectoryIterator(
 			TL_ROOT . '/system/modules/' . $strModule,
@@ -47,7 +47,7 @@ foreach ($arrModules as $strModule) {
 
 	// Get all PHP files
 	foreach ($objFiles as $objFile) {
-		if (pathinfo($objFile->getFilename(), PATHINFO_EXTENSION) == 'php') {
+		if ($objFile->getExtension() == 'php') {
 			$strRelpath = str_replace(TL_ROOT . '/system/modules/' . $strModule . '/', '', $objFile->getPathname());
 
 			if (strncmp($strRelpath, 'assets/', 7) !== 0 && strncmp($strRelpath, 'config/', 7) !== 0 && strncmp($strRelpath, 'dca/', 4) !== 0 && strncmp($strRelpath, 'languages/', 10) !== 0 && strncmp($strRelpath, 'templates/', 10) !== 0) {

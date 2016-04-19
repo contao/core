@@ -282,7 +282,7 @@ class tl_templates extends Backend
 		}
 
 		$arrAllTemplates = array();
-		$arrAllowed = trimsplit(',', Config::get('templateFiles'));
+		$arrAllowed = trimsplit(',', strtolower(Config::get('templateFiles')));
 
 		// Get all templates
 		foreach (ModuleLoader::getActive() as $strModule)
@@ -293,7 +293,7 @@ class tl_templates extends Backend
 				continue;
 			}
 
-			/** @var \SplFileInfo[] $objFiles */
+			/** @var SplFileInfo[] $objFiles */
 			$objFiles = new SortedIterator(
 				new RecursiveIteratorIterator(
 					new RecursiveDirectoryIterator(
@@ -305,9 +305,7 @@ class tl_templates extends Backend
 
 			foreach ($objFiles as $objFile)
 			{
-				$strExtension = pathinfo($objFile->getFilename(), PATHINFO_EXTENSION);
-
-				if (in_array($strExtension, $arrAllowed))
+				if (in_array(strtolower($objFile->getExtension()), $arrAllowed))
 				{
 					$strRelpath = str_replace(TL_ROOT . '/', '', $objFile->getPathname());
 					$arrAllTemplates[$strModule][basename($strRelpath)] = $strRelpath;
