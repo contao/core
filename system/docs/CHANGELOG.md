@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add the X-Priority header in the Email class (see #8298).
+
+### Fixed
 Fix an error message in the newsletter subscription module (see #7887).
 
 ### Fixed
