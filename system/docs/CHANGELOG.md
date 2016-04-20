@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Always trigger the "isVisibleElement" hook (see #8312).
+
+### Fixed
 Do not change all sessions when switching users (see #8158).
 
 ### Fixed
