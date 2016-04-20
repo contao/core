@@ -668,8 +668,23 @@ var AjaxRequest =
 			fs.removeClass('collapsed');
 			new Request.Contao().post({'action':'toggleFieldset', 'id':id, 'table':table, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 		} else {
-			fs.addClass('collapsed');
-			new Request.Contao().post({'action':'toggleFieldset', 'id':id, 'table':table, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
+			var form = fs.getParent('form'),
+				inp = fs.getElements('[required]'),
+				collapse = true;
+
+			for (var i=0; i<inp.length; i++) {
+				if (!inp[i].get('value')) {
+					collapse = false;
+					break;
+				}
+			}
+
+			if (!collapse) {
+				if (typeof(form.checkValidity) == 'function') form.getElement('input[type="submit"]').click();
+			} else {
+				fs.addClass('collapsed');
+				new Request.Contao().post({'action':'toggleFieldset', 'id':id, 'table':table, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
+			}
 		}
 
 		return false;

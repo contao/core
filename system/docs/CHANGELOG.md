@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not allow to close fieldsets with empty required fields (see #8300).
+
+### Fixed
 Make the path related properties of the File class binary-safe (see #8295).
 
 ### Fixed
