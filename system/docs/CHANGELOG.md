@@ -5,6 +5,9 @@ Version 3.5.10 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not change all sessions when switching users (see #8158).
+
+### Fixed
 Do not allow to close fieldsets with empty required fields (see #8300).
 
 ### Fixed
