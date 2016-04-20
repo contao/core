@@ -248,8 +248,8 @@ abstract class User extends \System
 			return false;
 		}
 
-		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
-									 ->execute($this->strHash, $this->strCookie);
+		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=?")
+									 ->execute($this->strHash);
 
 		// Try to find the session in the database
 		if ($objSession->numRows < 1)
@@ -276,8 +276,8 @@ abstract class User extends \System
 		$this->setUserFromDb();
 
 		// Update session
-		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
-					   ->execute(session_id());
+		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE hash=?")
+					   ->execute($this->strHash);
 
 		$this->setCookie($this->strCookie, $this->strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
 
@@ -588,9 +588,9 @@ abstract class User extends \System
 		$intUserid = null;
 
 		// Find the session
-		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
+		$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=?")
 									 ->limit(1)
-									 ->execute($this->strHash, $this->strCookie);
+									 ->execute($this->strHash);
 
 		if ($objSession->numRows)
 		{

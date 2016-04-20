@@ -24,7 +24,6 @@ $GLOBALS['TL_DCA']['tl_session'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'sessionID' => 'unique',
 				'hash' => 'unique'
 			)
 		)

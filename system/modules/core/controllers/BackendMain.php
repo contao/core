@@ -50,8 +50,8 @@ class BackendMain extends \Backend
 		// Password change required
 		if ($this->User->pwChange)
 		{
-			$objSession = $this->Database->prepare("SELECT su FROM tl_session WHERE sessionID=?")
-										 ->execute(session_id());
+			$objSession = $this->Database->prepare("SELECT su FROM tl_session WHERE hash=?")
+										 ->execute(sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . 'BE_USER_AUTH'));
 
 			if (!$objSession->su)
 			{
