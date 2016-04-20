@@ -201,7 +201,7 @@ class ModuleSubscribe extends \Module
 
 		if (!is_array($arrChannels))
 		{
-			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
+			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
 			$this->reload();
 		}
 

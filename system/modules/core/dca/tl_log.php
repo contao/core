@@ -21,6 +21,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
 		'notEditable'                 => true,
+		'notCopyable'                 => true,
 		'sql' => array
 		(
 			'keys' => array

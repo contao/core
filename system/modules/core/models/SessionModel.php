@@ -73,7 +73,7 @@ class SessionModel extends \Model
 	 * @param string $strName    The session name
 	 * @param array  $arrOptions An optional options array
 	 *
-	 * @return static The model or null if there is no session
+	 * @return \SessionModel|null The model or null if there is no session
 	 */
 	public static function findByHashAndName($strHash, $strName, array $arrOptions=array())
 	{

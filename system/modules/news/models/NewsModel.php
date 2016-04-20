@@ -171,7 +171,7 @@ class NewsModel extends \Model
 	 * @param array $arrPids    An array of parent IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static The NewsModel or null if there are no news
+	 * @return \NewsModel|null The model or null if there are no news
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{

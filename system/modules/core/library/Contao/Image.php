@@ -113,7 +113,7 @@ class Image
 		}
 
 		$this->fileObj = $file;
-		$arrAllowedTypes = array_map('trim', explode(',', \Config::get('validImageTypes')));
+		$arrAllowedTypes = trimsplit(',', strtolower(\Config::get('validImageTypes')));
 
 		// Check the file type
 		if (!in_array($this->fileObj->extension, $arrAllowedTypes))

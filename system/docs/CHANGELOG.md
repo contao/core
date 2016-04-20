@@ -1,6 +1,43 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.10 (2016-04-20)
+---------------------------
+
+### Fixed
+Always trigger the "isVisibleElement" hook (see #8312).
+
+### Fixed
+Do not change all sessions when switching users (see #8158).
+
+### Fixed
+Do not allow to close fieldsets with empty required fields (see #8300).
+
+### Fixed
+Make the path related properties of the File class binary-safe (see #8295).
+
+### Fixed
+Always allow to navigate to the current month in the calendar (see #8283).
+
+### Fixed
+Correctly validate and decode IDNA e-mail addresses (see #8306).
+
+### Fixed
+Do not add the debug bar resources if `hideDebugBar` is enabled (see #8307).
+
+### Fixed
+Skip forward pages entirely in the book navigation module (see #5074).
+
+### Fixed
+Do not add the X-Priority header in the Email class (see #8298).
+
+### Fixed
+Fix an error message in the newsletter subscription module (see #7887).
+
+### Fixed
+Determine the search index checksum in a more reliable way (see #7652).
+
+
 Version 3.5.9 (2016-03-21)
 --------------------------
 

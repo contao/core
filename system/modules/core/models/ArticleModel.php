@@ -131,7 +131,7 @@ class ArticleModel extends \Model
 	 * @param integer $intPid     The page ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static The model or null if there is no article
+	 * @return \ArticleModel|null The model or null if there is no article
 	 */
 	public static function findByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
 	{
@@ -156,7 +156,7 @@ class ArticleModel extends \Model
 	 * @param integer $intPid     The page ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static The model or null if there is no article
+	 * @return \ArticleModel|null The model or null if there is no article
 	 */
 	public static function findPublishedByIdOrAliasAndPid($varId, $intPid, array $arrOptions=array())
 	{
@@ -186,7 +186,7 @@ class ArticleModel extends \Model
 	 * @param integer $intId      The article ID
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static The model or null if there is no published article
+	 * @return \ArticleModel|null The model or null if there is no published article
 	 */
 	public static function findPublishedById($intId, array $arrOptions=array())
 	{

@@ -50,8 +50,8 @@ class BackendMain extends \Backend
 		// Password change required
 		if ($this->User->pwChange)
 		{
-			$objSession = $this->Database->prepare("SELECT su FROM tl_session WHERE sessionID=? AND pid=?")
-										 ->execute(session_id(), $this->User->id);
+			$objSession = $this->Database->prepare("SELECT su FROM tl_session WHERE sessionID=?")
+										 ->execute(session_id());
 
 			if (!$objSession->su)
 			{

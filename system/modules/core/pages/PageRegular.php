@@ -424,7 +424,7 @@ class PageRegular extends \Frontend
 		}
 
 		// Load MooTools core for the debug bar (see #5195)
-		if (\Config::get('debugMode') && !$objLayout->addMooTools)
+		if (\Config::get('debugMode') && !\Config::get('hideDebugBar') && !$objLayout->addMooTools)
 		{
 			$GLOBALS['TL_JAVASCRIPT'][] = 'assets/mootools/core/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-core.js|static';
 		}
@@ -640,7 +640,7 @@ class PageRegular extends \Frontend
 		$strStyleSheets .= '[[TL_CSS]]';
 
 		// Add the debug style sheet
-		if (\Config::get('debugMode'))
+		if (\Config::get('debugMode') && !\Config::get('hideDebugBar'))
 		{
 			$strStyleSheets .= \Template::generateStyleTag($this->addStaticUrlTo('assets/contao/css/debug.css'), 'all', $blnXhtml) . "\n";
 		}

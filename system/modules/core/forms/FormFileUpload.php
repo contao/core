@@ -163,14 +163,14 @@ class FormFileUpload extends \Widget implements \uploadable
 			return;
 		}
 
-		$strExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
-		$uploadTypes = trimsplit(',', $this->extensions);
+		$objFile = new \File($file['name'], true);
+		$uploadTypes = trimsplit(',', strtolower($this->extensions));
 
 		// File type is not allowed
-		if (!in_array(strtolower($strExtension), $uploadTypes))
+		if (!in_array($objFile->extension, $uploadTypes))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $strExtension));
-			$this->log('File type "'.$strExtension.'" is not allowed to be uploaded ('.$file['name'].')', __METHOD__, TL_ERROR);
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
+			$this->log('File type "'.$objFile->extension.'" is not allowed to be uploaded ('.$file['name'].')', __METHOD__, TL_ERROR);
 
 			unset($_FILES[$this->strName]);
 
@@ -242,24 +242,22 @@ class FormFileUpload extends \Widget implements \uploadable
 					if ($this->doNotOverwrite && file_exists(TL_ROOT . '/' . $strUploadFolder . '/' . $file['name']))
 					{
 						$offset = 1;
-						$pathinfo = pathinfo($file['name']);
-						$name = $pathinfo['filename'];
 
 						$arrAll = scan(TL_ROOT . '/' . $strUploadFolder);
-						$arrFiles = preg_grep('/^' . preg_quote($name, '/') . '.*\.' . preg_quote($pathinfo['extension'], '/') . '/', $arrAll);
+						$arrFiles = preg_grep('/^' . preg_quote($objFile->filename, '/') . '.*\.' . preg_quote($objFile->extension, '/') . '/', $arrAll);
 
 						foreach ($arrFiles as $strFile)
 						{
-							if (preg_match('/__[0-9]+\.' . preg_quote($pathinfo['extension'], '/') . '$/', $strFile))
+							if (preg_match('/__[0-9]+\.' . preg_quote($objFile->extension, '/') . '$/', $strFile))
 							{
-								$strFile = str_replace('.' . $pathinfo['extension'], '', $strFile);
+								$strFile = str_replace('.' . $objFile->extension, '', $strFile);
 								$intValue = intval(substr($strFile, (strrpos($strFile, '_') + 1)));
 
 								$offset = max($offset, $intValue);
 							}
 						}
 
-						$file['name'] = str_replace($name, $name . '__' . ++$offset, $file['name']);
+						$file['name'] = str_replace($objFile->filename, $objFile->filename . '__' . ++$offset, $file['name']);
 					}
 
 					// Move the file to its destination
@@ -272,15 +270,15 @@ class FormFileUpload extends \Widget implements \uploadable
 					// Generate the DB entries
 					if (\Dbafs::shouldBeSynchronized($strFile))
 					{
-						$objFile = \FilesModel::findByPath($strFile);
+						$objModel = \FilesModel::findByPath($strFile);
 
 						// Existing file is being replaced (see #4818)
-						if ($objFile !== null)
+						if ($objModel !== null)
 						{
-							$objFile->tstamp = time();
-							$objFile->path   = $strFile;
-							$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
-							$objFile->save();
+							$objModel->tstamp = time();
+							$objModel->path   = $strFile;
+							$objModel->hash   = md5_file(TL_ROOT . '/' . $strFile);
+							$objModel->save();
 						}
 						else
 						{

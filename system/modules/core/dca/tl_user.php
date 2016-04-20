@@ -627,8 +627,8 @@ class tl_user extends Backend
 				throw new Exception('Invalid user ID ' . Input::get('id'));
 			}
 
-			$this->Database->prepare("UPDATE tl_session SET pid=?, su=1 WHERE pid=?")
-						   ->execute($objUser->id, $this->User->id);
+			$this->Database->prepare("UPDATE tl_session SET pid=?, su=1 WHERE sessionID=?")
+						   ->execute($objUser->id, session_id());
 
 			$this->log('User "' . $this->User->username . '" has switched to user "' . $objUser->username . '"', __METHOD__, TL_ACCESS);
 

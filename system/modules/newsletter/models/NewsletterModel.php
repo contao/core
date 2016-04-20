@@ -101,13 +101,13 @@ class NewsletterModel extends \Model
 
 
 	/**
-	 * Find sent newsletters by their parent IDs and their ID or alias
+	 * Find a sent newsletter by its parent IDs and its ID or alias
 	 *
 	 * @param integer $varId      The numeric ID or alias name
 	 * @param array   $arrPids    An array of newsletter channel IDs
 	 * @param array   $arrOptions An optional options array
 	 *
-	 * @return static A collection of models or null if there are no sent newsletters
+	 * @return \NewsletterModel|null The model or null if there are no sent newsletters
 	 */
 	public static function findSentByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{

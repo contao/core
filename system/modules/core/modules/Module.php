@@ -179,13 +179,17 @@ abstract class Module extends \Frontend
 	 */
 	public function __construct($objModule, $strColumn='main')
 	{
-		if ($objModule instanceof \Model)
+		if ($objModule instanceof \Model || $objModule instanceof \Model\Collection)
 		{
-			$this->objModel = $objModule;
-		}
-		elseif ($objModule instanceof \Model\Collection)
-		{
-			$this->objModel = $objModule->current();
+			/** @var \ModuleModel $objModel */
+			$objModel = $objModule;
+
+			if ($objModel instanceof \Model\Collection)
+			{
+				$objModel = $objModel->current();
+			}
+
+			$this->objModel = $objModel;
 		}
 
 		parent::__construct();

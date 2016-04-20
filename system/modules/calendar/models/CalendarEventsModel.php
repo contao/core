@@ -194,7 +194,7 @@ class CalendarEventsModel extends \Model
 	 * @param array $arrPids    An array of calendar IDs
 	 * @param array $arrOptions An optional options array
 	 *
-	 * @return static The model or null if there is no event
+	 * @return \CalendarEventsModel|null The model or null if there is no event
 	 */
 	public static function findPublishedByParentAndIdOrAlias($varId, $arrPids, array $arrOptions=array())
 	{

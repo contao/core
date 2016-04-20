@@ -27,10 +27,10 @@
         <source>The IP address of the subscriber.</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.0">
-        <source>Token key</source>
+        <source>Activation token</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.token.1">
-        <source>The confirmation token of the subscription.</source>
+        <source>The activation token of the subscription.</source>
       </trans-unit>
       <trans-unit id="tl_newsletter_recipients.confirmed.0">
         <source>Confirmation date</source>

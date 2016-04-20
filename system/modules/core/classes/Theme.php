@@ -1157,7 +1157,7 @@ class Theme extends \Backend
 			return;
 		}
 
-		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		$arrAllowed = trimsplit(',', strtolower(\Config::get('templateFiles')));
 		array_push($arrAllowed, 'sql'); // see #7048
 
 		// Add all template files to the archive

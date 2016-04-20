@@ -406,7 +406,6 @@ class Email
 
 		$this->objMessage->setTo($arrRecipients);
 		$this->objMessage->setCharset($this->strCharset);
-		$this->objMessage->setPriority($this->intPriority);
 
 		// Default subject
 		if ($this->strSubject == '')

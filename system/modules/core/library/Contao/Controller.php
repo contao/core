@@ -46,7 +46,7 @@ abstract class Controller extends \System
 	 */
 	public static function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$arrAllowed = trimsplit(',', \Config::get('templateFiles'));
+		$arrAllowed = trimsplit(',', strtolower(\Config::get('templateFiles')));
 		array_push($arrAllowed, 'html5'); // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))
@@ -634,36 +634,34 @@ abstract class Controller extends \System
 	 */
 	public static function isVisibleElement(\Model $objElement)
 	{
-		// Only apply the restrictions in the front end
-		if (TL_MODE != 'FE' || BE_USER_LOGGED_IN)
-		{
-			return true;
-		}
-
 		$blnReturn = true;
 
-		// Protected element
-		if ($objElement->protected)
+		// Only apply the restrictions in the front end
+		if (TL_MODE == 'FE' && !BE_USER_LOGGED_IN)
 		{
-			if (!FE_USER_LOGGED_IN)
+			// Protected element
+			if ($objElement->protected)
 			{
-				$blnReturn = false;
-			}
-			else
-			{
-				$groups = deserialize($objElement->groups);
-
-				if (empty($groups) || !is_array($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
+				if (!FE_USER_LOGGED_IN)
 				{
 					$blnReturn = false;
 				}
-			}
-		}
+				else
+				{
+					$groups = deserialize($objElement->groups);
 
-		// Show to guests only
-		elseif ($objElement->guests && FE_USER_LOGGED_IN)
-		{
-			$blnReturn = false;
+					if (empty($groups) || !is_array($groups) || !count(array_intersect($groups, \FrontendUser::getInstance()->groups)))
+					{
+						$blnReturn = false;
+					}
+				}
+			}
+
+			// Show to guests only
+			elseif ($objElement->guests && FE_USER_LOGGED_IN)
+			{
+				$blnReturn = false;
+			}
 		}
 
 		// HOOK: add custom logic
