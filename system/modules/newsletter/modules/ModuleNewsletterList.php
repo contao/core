@@ -117,7 +117,7 @@ class ModuleNewsletterList extends \Module
 					'date' => \Date::parse($objPage->dateFormat, $objNewsletter->date),
 					'datim' => \Date::parse($objPage->datimFormat, $objNewsletter->date),
 					'time' => \Date::parse($objPage->timeFormat, $objNewsletter->date),
-					'channel' => $objNewsletter->channel
+					'channel' => $objNewsletter->pid
 				);
 			}
 		}
