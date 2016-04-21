@@ -1165,7 +1165,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						$objFile = is_dir(TL_ROOT . '/' . $this->intId) ? new \Folder($this->intId) : new \File($this->intId, true);
 
 						$this->strPath = $objFile->dirname;
-						$this->strExtension = ($objFile->extension != '') ? '.'.$objFile->extension : '';
+						$this->strExtension = ($objFile->origext != '') ? '.'.$objFile->origext : '';
 						$this->varValue = $objFile->filename;
 
 						// Fix Unix system files like .htaccess
@@ -1465,7 +1465,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						$objFile = is_dir(TL_ROOT . '/' . $id) ? new \Folder($id) : new \File($id, true);
 
 						$this->strPath = $objFile->dirname;
-						$this->strExtension = ($objFile->extension != '') ? '.'.$objFile->extension : '';
+						$this->strExtension = ($objFile->origext != '') ? '.'.$objFile->origext : '';
 						$this->varValue = $objFile->filename;
 
 						// Fix Unix system files like .htaccess

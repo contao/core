@@ -29,7 +29,8 @@ namespace Contao;
  * @property string   $name          The file name and extension
  * @property string   $basename      Alias of $name
  * @property string   $dirname       The path of the parent folder
- * @property string   $extension     The file extension
+ * @property string   $extension     The lowercase file extension
+ * @property string   $origext       The original file extension
  * @property string   $filename      The file name without extension
  * @property string   $tmpname       The name of the temporary file
  * @property string   $path          The file path
@@ -197,6 +198,14 @@ class File extends \System
 					$this->arrPathinfo = $this->getPathinfo();
 				}
 				return strtolower($this->arrPathinfo['extension']);
+				break;
+
+			case 'origext':
+				if (!isset($this->arrPathinfo['extension']))
+				{
+					$this->arrPathinfo = $this->getPathinfo();
+				}
+				return $this->arrPathinfo['extension'];
 				break;
 
 			case 'tmpname':
