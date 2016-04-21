@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.12 (2016-04-22)
+---------------------------
+
+### Fixed
+Correctly handle files with uppercase file extensions (see #8317).
+
+
 Version 3.5.11 (2016-04-21)
 ---------------------------
 
