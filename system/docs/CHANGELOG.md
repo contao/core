@@ -5,6 +5,9 @@ Version 3.5.11 (2016-04-21)
 ---------------------------
 
 ### Fixed
+Do not encode the database password (see #8314).
+
+### Fixed
 Fixed adding new folders in the file manager (see #8315).
 
 
