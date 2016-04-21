@@ -449,7 +449,7 @@ class BackendInstall extends \Backend
 		{
 			foreach (preg_grep('/^db/', array_keys($_POST)) as $strKey)
 			{
-				if ($strKey == 'dbPass' && \Input::post($strKey, true) == '*****')
+				if ($strKey == 'dbPass' && \Input::postUnsafeRaw($strKey) == '*****')
 				{
 					continue;
 				}
@@ -460,7 +460,7 @@ class BackendInstall extends \Backend
 					\Input::setPost($strKey, 3306);
 				}
 
-				\Config::persist($strKey, \Input::post($strKey, true));
+				\Config::persist($strKey, ($strKey == 'dbPass' ? \Input::postUnsafeRaw($strKey) : \Input::post($strKey, true)));
 			}
 
 			$this->reload();

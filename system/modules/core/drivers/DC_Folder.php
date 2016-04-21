@@ -1162,19 +1162,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					// Load the current value
 					if ($vv == 'name')
 					{
-						$objFile = new \File($this->intId, true);
-						$this->strPath = $objFile->dirname;
+						$objFile = is_dir(TL_ROOT . '/' . $this->intId) ? new \Folder($this->intId) : new \File($this->intId, true);
 
-						if (is_dir(TL_ROOT . '/' . $this->intId))
-						{
-							$this->strExtension = '';
-							$this->varValue = basename($objFile->basename);
-						}
-						else
-						{
-							$this->strExtension = ($objFile->extension != '') ? '.'.$objFile->extension : '';
-							$this->varValue = basename($objFile->basename, $this->strExtension);
-						}
+						$this->strPath = $objFile->dirname;
+						$this->strExtension = ($objFile->extension != '') ? '.'.$objFile->extension : '';
+						$this->varValue = $objFile->filename;
 
 						// Fix Unix system files like .htaccess
 						if (strncmp($this->varValue, '.', 1) === 0)
@@ -1470,11 +1462,11 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					// Load the current value
 					if ($v == 'name')
 					{
-						$objFile = new \File($id, true); // do not urldecode() here (see #6840)
+						$objFile = is_dir(TL_ROOT . '/' . $id) ? new \Folder($id) : new \File($id, true);
 
 						$this->strPath = $objFile->dirname;
 						$this->strExtension = ($objFile->extension != '') ? '.'.$objFile->extension : '';
-						$this->varValue = basename($objFile->basename, $this->strExtension);
+						$this->varValue = $objFile->filename;
 
 						// Fix Unix system files like .htaccess
 						if (strncmp($this->varValue, '.', 1) === 0)
