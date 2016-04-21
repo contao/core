@@ -26,6 +26,8 @@ namespace Contao;
  * @property string  $hash     The MD5 hash
  * @property string  $name     The folder name
  * @property string  $basename Alias of $name
+ * @property string  $dirname  The path of the parent folder
+ * @property string  $filename The folder name
  * @property string  $path     The folder path
  * @property string  $value    Alias of $path
  * @property integer $size     The folder size
@@ -46,6 +48,12 @@ class Folder extends \System
 	 * @var \FilesModel
 	 */
 	protected $objModel;
+
+	/**
+	 * Pathinfo
+	 * @var array
+	 */
+	protected $arrPathinfo = array();
 
 
 	/**
@@ -113,7 +121,20 @@ class Folder extends \System
 
 			case 'name':
 			case 'basename':
-				return basename($this->strFolder);
+				if (!isset($this->arrPathinfo[$strKey]))
+				{
+					$this->arrPathinfo = $this->getPathinfo();
+				}
+				return $this->arrPathinfo['basename'];
+				break;
+
+			case 'dirname':
+			case 'filename':
+				if (!isset($this->arrPathinfo[$strKey]))
+				{
+					$this->arrPathinfo = $this->getPathinfo();
+				}
+				return $this->arrPathinfo[$strKey];
 				break;
 
 			case 'path':
@@ -402,5 +423,34 @@ class Folder extends \System
 	public function shouldBeSynchronized()
 	{
 		return \Dbafs::shouldBeSynchronized($this->strFolder);
+	}
+
+
+	/**
+	 * Return the path info (binary-safe)
+	 *
+	 * @return array The path info
+	 *
+	 * @see https://github.com/PHPMailer/PHPMailer/blob/master/class.phpmailer.php#L3520
+	 */
+	protected function getPathinfo()
+	{
+		$matches = array();
+		$return = array('dirname'=>'', 'basename'=>'', 'extension'=>'', 'filename'=>'');
+
+		preg_match('%^^(.*?)[\\\\/]*([^/\\\\]*?)[\\\\/\.]*$%im', TL_ROOT . '/' . $this->strFolder, $matches);
+
+		if (isset($matches[1]))
+		{
+			$return['dirname'] = $matches[1];
+		}
+
+		if (isset($matches[2]))
+		{
+			$return['basename'] = $matches[2];
+			$return['filename'] = $matches[2];
+		}
+
+		return $return;
 	}
 }

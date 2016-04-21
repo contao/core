@@ -184,27 +184,13 @@ class File extends \System
 				break;
 
 			case 'dirname':
-				if (!isset($this->arrPathinfo[$strKey]))
-				{
-					$this->arrPathinfo = $this->getPathinfo();
-				}
-				return $this->arrPathinfo['dirname'];
-				break;
-
-			case 'extension':
-				if (!isset($this->arrPathinfo['extension']))
-				{
-					$this->arrPathinfo = $this->getPathinfo();
-				}
-				return strtolower($this->arrPathinfo['extension']);
-				break;
-
 			case 'filename':
+			case 'extension':
 				if (!isset($this->arrPathinfo[$strKey]))
 				{
 					$this->arrPathinfo = $this->getPathinfo();
 				}
-				return $this->arrPathinfo['filename'];
+				return $this->arrPathinfo[$strKey];
 				break;
 
 			case 'tmpname':

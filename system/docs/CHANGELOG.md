@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.11 (2016-04-21)
+---------------------------
+
+### Fixed
+Fixed adding new folders in the file manager (see #8315).
+
+
 Version 3.5.10 (2016-04-20)
 ---------------------------
 
