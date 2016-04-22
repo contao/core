@@ -165,7 +165,7 @@ abstract class Model
 						/** @var static $objRelated */
 						$objRelated = new $strClass();
 						$objRelated->setRow($row);
-
+						
 						$objRegistry->register($objRelated);
 					}
 
@@ -174,7 +174,10 @@ abstract class Model
 			}
 
 			$this->setRow($arrData); // see #5439
-			$objRegistry->register($this);
+			
+			if ($objRegistry->fetch(static::$strTable, $this->id) === null) {
+				$objRegistry->register($this);
+			}
 		}
 	}
 
