@@ -355,7 +355,7 @@ class News extends \Frontend
 				if (($objTarget = $objItem->getRelated('jumpTo')) !== null)
 				{
 					/** @var \PageModel $objTarget */
-					return $strBase . $objTarget->getFrontendUrl();
+					return $strBase . $objTarget->getAbsoluteUrl();
 				}
 				break;
 
@@ -364,7 +364,7 @@ class News extends \Frontend
 				if (($objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
 					/** @var \PageModel $objPid */
-					return $strBase . ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					return $strBase . ampersand($objPid->getAbsoluteUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
