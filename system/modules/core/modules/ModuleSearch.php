@@ -253,12 +253,17 @@ class ModuleSearch extends \Module
 			}
 
 			// Determine base URL
-			$objReference = \PageModel::findWithDetails($intRootId);
 			$strBase = '';
 
-			if ($objReference->domain && \Environment::get('host') !== $objReference->domain )
+			if ($this->rootPage > 0)
 			{
-				$strBase = ($objReference->rootUseSSL ? 'https://' : 'http://') . $objReference->domain . TL_PATH . '/';
+				$objReference = \PageModel::findWithDetails($this->rootPage);
+
+				// Check if domain from reference page differs from current domain
+				if ($objReference->domain && \Environment::get('host') !== $objReference->domain )
+				{
+					$strBase = ($objReference->rootUseSSL ? 'https://' : 'http://') . $objReference->domain . TL_PATH . '/';
+				}
 			}
 
 			// Get the results
