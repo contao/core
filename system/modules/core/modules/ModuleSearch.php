@@ -252,15 +252,24 @@ class ModuleSearch extends \Module
 				$this->Template->page = $page;
 			}
 
+			// Determine base URL
+			$objReference = \PageModel::findWithDetails($intRootId);
+			$strBase = '';
+
+			if ($objReference->domain && \Environment::get('host') !== $objReference->domain )
+			{
+				$strBase = ($objReference->rootUseSSL ? 'https://' : 'http://') . $objReference->domain . TL_PATH . '/';
+			}
+
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
 				/** @var \FrontendTemplate|object $objTemplate */
 				$objTemplate = new \FrontendTemplate($this->searchTpl ?: 'search_default');
 
-				$objTemplate->url = $arrResult[$i]['url'];
+				$objTemplate->url = $strBase . $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
-				$objTemplate->href = $arrResult[$i]['url'];
+				$objTemplate->href = $strBase . $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
 				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2) . '%');
