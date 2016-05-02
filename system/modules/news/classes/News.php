@@ -160,7 +160,7 @@ class News extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $objParent->getAbsoluteUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
+						$arrUrls[$jumpTo] = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/items/%s');
 					}
 				}
 
@@ -174,7 +174,7 @@ class News extends \Frontend
 				$objItem = new \FeedItem();
 
 				$objItem->title = $objArticle->headline;
-				$objItem->link = $this->getLink($objArticle, $strUrl);
+				$objItem->link = $this->getLink($objArticle, $strUrl, $strLink);
 				$objItem->published = $objArticle->date;
 				$objItem->author = $objArticle->authorName;
 
