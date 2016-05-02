@@ -260,7 +260,7 @@ class ModuleSearch extends \Module
 				$objReference = \PageModel::findWithDetails($this->rootPage);
 
 				// Check if domain from reference page differs from current domain
-				if ($objReference->domain && \Environment::get('host') !== $objReference->domain)
+				if ($objReference->domain && \Environment::get('host') !== $objReference->domain )
 				{
 					$strBase = ($objReference->rootUseSSL ? 'https://' : 'http://') . $objReference->domain . TL_PATH . '/';
 				}
