@@ -265,7 +265,7 @@ class Config
 		// Reset the Zend OPcache
 		if (function_exists('opcache_invalidate'))
 		{
-			opcache_invalidate(TL_ROOT . '/system/config/localconfig.php', true);
+			@opcache_invalidate(TL_ROOT . '/system/config/localconfig.php', true);
 		}
 
 		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
