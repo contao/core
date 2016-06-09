@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly render the breadcrumb links in the template editor (see #8341).
+
+### Fixed
 Remove the role attributes from the navigation templates (see #8343).
 
 ### Fixed
