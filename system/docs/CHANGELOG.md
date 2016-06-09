@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Remove the role attributes from the navigation templates (see #8343).
+
+### Fixed
 Do not add `role="tablist"` to the accordion container (see #8344).
 
 
