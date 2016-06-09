@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent models from being registered twice (see #8224).
+
+### Fixed
 Prevent horizontal scrolling in the ACE editor (see #8328).
 
 ### Fixed
