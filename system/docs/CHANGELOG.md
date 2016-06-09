@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Standardize the group names in the checkbox widget (see #8002).
+
+### Fixed
 Prevent models from being registered twice (see #8224).
 
 ### Fixed
