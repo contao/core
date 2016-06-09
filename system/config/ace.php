@@ -39,6 +39,7 @@ window.ace && window.addEvent('domready', function() {
   editor.getSession().setValue(ta.value);
   editor.getSession().setMode("ace/mode/<?php echo Backend::getAceType($type); ?>");
   editor.getSession().setUseSoftTabs(false);
+  editor.getSession().setUseWrapMode(true);
   editor.setAutoScrollEditorIntoView(true);
 
   // Add the fullscreen command
@@ -58,8 +59,7 @@ window.ace && window.addEvent('domready', function() {
   var updateHeight = function() {
     var newHeight
       = editor.getSession().getScreenLength()
-      * (editor.renderer.lineHeight || 14)
-      + editor.renderer.scrollBar.getWidth();
+      * (editor.renderer.lineHeight || 14);
     editor.container.style['height'] = Math.max(newHeight, editor.renderer.lineHeight) + 'px';
     editor.resize();
   };

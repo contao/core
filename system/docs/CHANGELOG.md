@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent horizontal scrolling in the ACE editor (see #8328).
+
+### Fixed
 Correctly render the breadcrumb links in the template editor (see #8341).
 
 ### Fixed
