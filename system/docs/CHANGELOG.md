@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.13 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Do not add `role="tablist"` to the accordion container (see #8344).
+
+
 Version 3.5.12 (2016-04-22)
 ---------------------------
 
