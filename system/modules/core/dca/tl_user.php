@@ -385,7 +385,6 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(10) NOT NULL default ''"
-
 		),
 		'stop' => array
 		(

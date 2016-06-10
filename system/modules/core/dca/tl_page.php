@@ -380,7 +380,6 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'eval'                    => array('helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'explanation'             => 'dateFormat',
 			'sql'                     => "varchar(32) NOT NULL default ''"
-
 		),
 		'timeFormat' => array
 		(
