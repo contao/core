@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly calculate the maximum file size for DropZone (see #8098).
+
+### Fixed
 Do not adjust the start date of a multi-day event (see #8194).
 
 ### Fixed
