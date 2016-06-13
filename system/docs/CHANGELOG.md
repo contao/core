@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Make File::$dirname an absolute path again (see #8325).
+
+### Fixed
 Store the full URLs in the search index (see contao/core-bundle#491).
 
 ### Fixed
