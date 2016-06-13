@@ -1706,6 +1706,5 @@ class tl_page extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_page.id='.$intId.'" has been created'.$this->getParentEntries('tl_page', $intId), __METHOD__, TL_GENERAL);
 	}
 }

@@ -187,7 +187,6 @@ class ModuleChangePassword extends \Module
 			if ($GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
 			{
 				$objVersions->create();
-				$this->log('A new version of record "'.$strTable.'.id='.$objMember->id.'" has been created'.$this->getParentEntries($strTable, $objMember->id), __METHOD__, TL_GENERAL);
 			}
 
 			// HOOK: set new password callback

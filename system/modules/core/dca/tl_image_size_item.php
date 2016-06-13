@@ -376,6 +376,5 @@ class tl_image_size_item extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_image_size_item.id='.$intId.'" has been created'.$this->getParentEntries('tl_image_size_item', $intId), __METHOD__, TL_GENERAL);
 	}
 }
