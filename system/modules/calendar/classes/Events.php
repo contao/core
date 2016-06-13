@@ -204,19 +204,13 @@ abstract class Events extends \Module
 		/** @var \PageModel $objPage */
 		global $objPage;
 
-		$span = \Calendar::calculateSpan($intStart, $intEnd);
-
-		// Adjust the start time of a multi-day event (see #6802)
-		if ($this->cal_noSpan && $span > 0 && $intStart < $intBegin && $intBegin < $intEnd)
-		{
-			$intStart = $intBegin;
-		}
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$strDate = \Date::parse($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
+		$span = \Calendar::calculateSpan($intStart, $intEnd);
 
 		if ($span > 0)
 		{
@@ -366,7 +360,7 @@ abstract class Events extends \Module
 		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
 			// Only show first occurrence
-			if ($this->cal_noSpan && $intDate >= $intBegin)
+			if ($this->cal_noSpan)
 			{
 				break;
 			}

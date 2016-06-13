@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not adjust the start date of a multi-day event (see #8194).
+
+### Fixed
 Versionize and show password changes (see #8301).
 
 ### Fixed
