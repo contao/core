@@ -176,7 +176,7 @@ class ModulePassword extends \Module
 	 */
 	protected function setNewPassword()
 	{
-		$objMember = \MemberModel::findByActivation(\Input::get('token'));
+		$objMember = \MemberModel::findOneByActivation(\Input::get('token'));
 
 		if ($objMember === null || $objMember->login == '')
 		{
@@ -191,6 +191,15 @@ class ModulePassword extends \Module
 
 			return;
 		}
+
+		$strTable = $objMember->getTable();
+
+		// Initialize the versioning (see #8301)
+		$objVersions = new \Versions($strTable, $objMember->id);
+		$objVersions->setUsername($objMember->username);
+		$objVersions->setUserId(0);
+		$objVersions->setEditUrl('contao/main.php?do=member&act=edit&id=%s&rt=1');
+		$objVersions->initialize();
 
 		// Define the form field
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
@@ -227,6 +236,13 @@ class ModulePassword extends \Module
 				$objMember->activation = '';
 				$objMember->password = $objWidget->value;
 				$objMember->save();
+
+				// Create a new version
+				if ($GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
+				{
+					$objVersions->create();
+					$this->log('A new version of record "'.$strTable.'.id='.$objMember->id.'" has been created'.$this->getParentEntries($strTable, $objMember->id), __METHOD__, TL_GENERAL);
+				}
 
 				// HOOK: set new password callback
 				if (isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
