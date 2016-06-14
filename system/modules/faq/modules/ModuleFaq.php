@@ -99,9 +99,17 @@ class ModuleFaq extends \Frontend
 						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !\Config::get('disableAlias')) ? $objItems->alias : $objItems->id));
 					}
 				}
+
+				$strReaderUrl = str_replace('/%s', '', $strUrl);
+
+				// Remove the empty FAQ reader URL (see #8361)
+				if (($i = array_search($strReaderUrl, $arrPages)) !== false)
+				{
+					unset($arrPages[$i]);
+				}
 			}
 		}
 
-		return $arrPages;
+		return array_values($arrPages);
 	}
 }

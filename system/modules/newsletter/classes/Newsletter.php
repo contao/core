@@ -964,9 +964,17 @@ class Newsletter extends \Backend
 						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !\Config::get('disableAlias')) ? $objItem->alias : $objItem->id));
 					}
 				}
+
+				$strReaderUrl = str_replace('/%s', '', $strUrl);
+
+				// Remove the empty newsletter reader URL (see #8361)
+				if (($i = array_search($strReaderUrl, $arrPages)) !== false)
+				{
+					unset($arrPages[$i]);
+				}
 			}
 		}
 
-		return $arrPages;
+		return array_values($arrPages);
 	}
 }

@@ -358,10 +358,18 @@ class Calendar extends \Frontend
 						$arrPages[] = sprintf($strUrl, (($objEvents->alias != '' && !\Config::get('disableAlias')) ? $objEvents->alias : $objEvents->id));
 					}
 				}
+
+				$strReaderUrl = str_replace('/%s', '', $strUrl);
+
+				// Remove the empty event reader URL (see #8361)
+				if (($i = array_search($strReaderUrl, $arrPages)) !== false)
+				{
+					unset($arrPages[$i]);
+				}
 			}
 		}
 
-		return $arrPages;
+		return array_values($arrPages);
 	}
 
 
