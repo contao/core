@@ -426,7 +426,7 @@ var AjaxRequest =
 				if (json.javascript) {
 
 					// Use Asset.javascript() instead of document.write() to load a
-					// JavaScript file and re-execude the code after it has been loaded
+					// JavaScript file and re-execute the code after it has been loaded
 					document.write = function(str) {
 						var src = '';
 						str.replace(/<script src="([^"]+)"/i, function(all, match){
