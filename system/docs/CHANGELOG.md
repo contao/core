@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Use the correct empty value when reseting copied fields (see #8365).
+
+### Fixed
 Remove the "required" attribute if a subpalette is closed (see #8192).
 
 ### Fixed
