@@ -400,10 +400,10 @@ var AjaxRequest =
 			} else {
 				el.value = '';
 				el.checked = '';
+				item.setStyle('display', 'none');
 				item.getElements('[required]').each(function(el) {
 					el.set('required', null).set('data-required', '');
 				});
-				item.setStyle('display', 'none');
 				new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return;
@@ -711,7 +711,7 @@ var AjaxRequest =
 			image = $(el).getFirst('img');
 
 		if (item) {
-			if (item.getStyle('display') != 'block') {
+			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', null);
 				image.src = AjaxRequest.themePath + 'folMinus.gif';
 				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
