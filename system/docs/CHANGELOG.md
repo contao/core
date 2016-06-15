@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly generate the feed links in a multi-domain setup (see #8329).
+
+### Fixed
 Correctly calculate the maximum file size for DropZone (see #8098).
 
 ### Fixed
