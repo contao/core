@@ -5,6 +5,9 @@ Version 3.5.13 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Remove the "required" attribute if a subpalette is closed (see #8192).
+
+### Fixed
 Correctly generate the feed links in a multi-domain setup (see #8329).
 
 ### Fixed

@@ -393,10 +393,16 @@ var AjaxRequest =
 				el.value = 1;
 				el.checked = 'checked';
 				item.setStyle('display', 'block');
+				item.getElements('[data-required]').each(function(el) {
+					el.set('required', '').set('data-required', null);
+				});
 				new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				el.value = '';
 				el.checked = '';
+				item.getElements('[required]').each(function(el) {
+					el.set('required', null).set('data-required', '');
+				});
 				item.setStyle('display', 'none');
 				new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
