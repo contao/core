@@ -1,6 +1,52 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.13 (2016-06-15)
+---------------------------
+
+### Fixed
+Use the correct empty value when resetting copied fields (see #8365).
+
+### Fixed
+Remove the "required" attribute if a subpalette is closed (see #8192).
+
+### Fixed
+Correctly generate the feed links in a multi-domain setup (see #8329).
+
+### Fixed
+Correctly calculate the maximum file size for DropZone (see #8098).
+
+### Fixed
+Do not adjust the start date of a multi-day event (see #8194).
+
+### Fixed
+Versionize and show password changes (see #8301).
+
+### Fixed
+Make File::$dirname an absolute path again (see #8325).
+
+### Fixed
+Store the full URLs in the search index (see contao/core-bundle#491).
+
+### Fixed
+Standardize the group names in the checkbox widget (see #8002).
+
+### Fixed
+Prevent models from being registered twice (see #8224).
+
+### Fixed
+Prevent horizontal scrolling in the ACE editor (see #8328).
+
+### Fixed
+Correctly render the breadcrumb links in the template editor (see #8341).
+
+### Fixed
+Remove the role attributes from the navigation templates (see #8343).
+
+### Fixed
+Do not add `role="tablist"` to the accordion container (see #8344).
+
+
 Version 3.5.12 (2016-04-22)
 ---------------------------
 

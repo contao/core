@@ -156,16 +156,16 @@ class tl_templates extends Backend
 	public function addBreadcrumb()
 	{
 		// Set a new node
-		if (isset($_GET['tn']))
+		if (isset($_GET['fn']))
 		{
 			// Check the path (thanks to Arnaud Buchoux)
-			if (Validator::isInsecurePath(Input::get('tn', true)))
+			if (Validator::isInsecurePath(Input::get('fn', true)))
 			{
-				throw new RuntimeException('Insecure path ' . Input::get('tn', true));
+				throw new RuntimeException('Insecure path ' . Input::get('fn', true));
 			}
 
-			$this->Session->set('tl_templates_node', Input::get('tn', true));
-			$this->redirect(preg_replace('/(&|\?)tn=[^&]*/', '', Environment::get('request')));
+			$this->Session->set('tl_templates_node', Input::get('fn', true));
+			$this->redirect(preg_replace('/(&|\?)fn=[^&]*/', '', Environment::get('request')));
 		}
 
 		$strNode = $this->Session->get('tl_templates_node');
@@ -194,7 +194,7 @@ class tl_templates extends Backend
 		$arrLinks = array();
 
 		// Add root link
-		$arrLinks[] = Image::getHtml('filemounts.gif') . ' <a href="' . $this->addToUrl('tn=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks[] = Image::getHtml('filemounts.gif') . ' <a href="' . $this->addToUrl('fn=') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
 
 		// Generate breadcrumb trail
 		foreach ($arrNodes as $strFolder)
@@ -208,7 +208,7 @@ class tl_templates extends Backend
 			}
 			else
 			{
-				$arrLinks[] = Image::getHtml('folderC.gif') . ' <a href="' . $this->addToUrl('tn='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
+				$arrLinks[] = Image::getHtml('folderC.gif') . ' <a href="' . $this->addToUrl('fn='.$strPath) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $strFolder . '</a>';
 			}
 		}
 

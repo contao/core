@@ -915,7 +915,7 @@ class File extends \System
 
 		if (isset($matches[1]))
 		{
-			$return['dirname'] = $matches[1];
+			$return['dirname'] = TL_ROOT . '/' . $matches[1]; // see #8325
 		}
 
 		if (isset($matches[2]))

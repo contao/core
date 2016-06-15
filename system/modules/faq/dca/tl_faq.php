@@ -534,6 +534,5 @@ class tl_faq extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_faq.id='.$intId.'" has been created'.$this->getParentEntries('tl_faq', $intId), __METHOD__, TL_GENERAL);
 	}
 }

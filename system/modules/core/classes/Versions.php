@@ -424,7 +424,7 @@ class Versions extends \Controller
 				{
 					if ($from[$k] != $to[$k])
 					{
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'password' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotShow'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['hideInput'])
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotShow'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['hideInput'])
 						{
 							continue;
 						}

@@ -138,6 +138,9 @@ abstract class Model
 
 			$objRegistry = \Model\Registry::getInstance();
 
+			$this->setRow($arrData); // see #5439
+			$objRegistry->register($this);
+
 			// Create the related models
 			foreach ($arrRelated as $key=>$row)
 			{
@@ -172,9 +175,6 @@ abstract class Model
 					$this->arrRelated[$key] = $objRelated;
 				}
 			}
-
-			$this->setRow($arrData); // see #5439
-			$objRegistry->register($this);
 		}
 	}
 
