@@ -44,7 +44,7 @@ class PageError404 extends \Frontend
 		}
 
 		// Check the search index (see #3761)
-		\Search::removeEntry(\Environment::get('request'));
+		\Search::removeEntry(\Environment::get('base') . \Environment::get('request'));
 
 		// Find the matching root page
 		$objRootPage = $this->getRootPageFromUrl();

@@ -318,7 +318,7 @@ class FrontendTemplate extends \Template
 				{
 					$arrData = array
 					(
-						'url' => \Environment::get('request'),
+						'url' => \Environment::get('base') . \Environment::get('request'),
 						'content' => $this->strBuffer,
 						'title' => $objPage->pageTitle ?: $objPage->title,
 						'protected' => ($objPage->protected ? '1' : ''),

@@ -141,10 +141,10 @@ class ModuleEventlist extends \Events
 			$objHandler->generate($objPage->id);
 		}
 
-		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
+		list($intStart, $intEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
 
 		// Get all events
-		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $strBegin, $strEnd);
+		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $intStart, $intEnd);
 		$sort = ($this->cal_order == 'descending') ? 'krsort' : 'ksort';
 
 		// Sort the days
@@ -157,21 +157,19 @@ class ModuleEventlist extends \Events
 		}
 
 		$arrEvents = array();
-		$dateBegin = date('Ymd', $strBegin);
-		$dateEnd = date('Ymd', $strEnd);
 
 		// Remove events outside the scope
 		foreach ($arrAllEvents as $key=>$days)
 		{
-			if ($key < $dateBegin || $key > $dateEnd)
-			{
-				continue;
-			}
-
 			foreach ($days as $day=>$events)
 			{
 				foreach ($events as $event)
 				{
+					if ($event['endTime'] < $intStart || $event['startTime'] > $intEnd)
+					{
+						continue;
+					}
+
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
 					$event['firstDate'] = \Date::parse($objPage->dateFormat, $day);
 

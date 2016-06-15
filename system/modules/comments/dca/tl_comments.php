@@ -665,6 +665,5 @@ class tl_comments extends Backend
 					   ->execute($intId);
 
 		$objVersions->create();
-		$this->log('A new version of record "tl_comments.id='.$intId.'" has been created'.$this->getParentEntries('tl_comments', $intId), __METHOD__, TL_GENERAL);
 	}
 }

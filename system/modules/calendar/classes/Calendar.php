@@ -160,7 +160,7 @@ class Calendar extends \Frontend
 					}
 					else
 					{
-						$arrUrls[$jumpTo] = $objParent->getFrontendUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/events/%s');
+						$arrUrls[$jumpTo] = $objParent->getAbsoluteUrl((\Config::get('useAutoItem') && !\Config::get('disableAlias')) ? '/%s' : '/events/%s');
 					}
 				}
 
@@ -171,7 +171,7 @@ class Calendar extends \Frontend
 				}
 
 				$strUrl = $arrUrls[$jumpTo];
-				$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+				$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl);
 
 				// Recurring events
 				if ($objArticle->recurring)
@@ -201,7 +201,7 @@ class Calendar extends \Frontend
 
 						if ($intStartTime >= $time)
 						{
-							$this->addEvent($objArticle, $intStartTime, $intEndTime, $strUrl, $strLink);
+							$this->addEvent($objArticle, $intStartTime, $intEndTime, $strUrl);
 						}
 					}
 				}
@@ -374,7 +374,7 @@ class Calendar extends \Frontend
 	 * @param string               $strUrl
 	 * @param string               $strBase
 	 */
-	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strBase)
+	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strBase='')
 	{
 		if ($intEnd < time()) // see #3917
 		{
@@ -409,6 +409,13 @@ class Calendar extends \Frontend
 
 		// Add title and link
 		$title .= ' ' . $objEvent->title;
+
+		// Backwards compatibility (see #8329)
+		if ($strBase != '' && !preg_match('#^https?://#', $strUrl))
+		{
+			$strUrl = $strBase . $strUrl;
+		}
+
 		$link = '';
 
 		switch ($objEvent->source)
@@ -421,7 +428,7 @@ class Calendar extends \Frontend
 				if (($objTarget = $objEvent->getRelated('jumpTo')) !== null)
 				{
 					/** @var \PageModel $objTarget */
-					$link = $strBase . $objTarget->getFrontendUrl();
+					$link = $objTarget->getAbsoluteUrl();
 				}
 				break;
 
@@ -429,15 +436,13 @@ class Calendar extends \Frontend
 				if (($objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true))) !== null && ($objPid = $objArticle->getRelated('pid')) !== null)
 				{
 					/** @var \PageModel $objPid */
-					$link = $strBase . ampersand($objPid->getFrontendUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+					$link = ampersand($objPid->getAbsoluteUrl('/articles/' . ((!\Config::get('disableAlias') && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
-		}
 
-		// Link to the default page
-		if ($link == '')
-		{
-			$link = $strBase . sprintf($strUrl, (($objEvent->alias != '' && !\Config::get('disableAlias')) ? $objEvent->alias : $objEvent->id));
+			default:
+				$link = sprintf($strUrl, (($objEvent->alias != '' && !\Config::get('disableAlias')) ? $objEvent->alias : $objEvent->id));
+				break;
 		}
 
 		// Store the whole row (see #5085)

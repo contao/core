@@ -1,10 +1,10 @@
 
-<ul class="<?= $this->level ?>" role="<?= ($this->level == 'level_1') ? 'menubar' : 'menu' ?>">
+<ul class="<?= $this->level ?>">
   <?php foreach ($this->items as $item): ?>
     <?php if ($item['isActive']): ?>
-      <li class="<?= $item['class'] ?>"><span class="<?= $item['class'] ?>" role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></span><?= $item['subitems'] ?></li>
+      <li class="<?= $item['class'] ?>"><span class="<?= $item['class'] ?>"<?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"'; ?>><?= $item['link'] ?></span><?= $item['subitems'] ?></li>
     <?php else: ?>
-      <li<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?>><a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']): ?> class="<?= $item['class'] ?>"<?php endif; ?><?php if ($item['accesskey'] != ''): ?> accesskey="<?= $item['accesskey'] ?>"<?php endif; ?><?php if ($item['tabindex']): ?> tabindex="<?= $item['tabindex'] ?>"<?php endif; ?><?php if ($item['nofollow']): ?> rel="nofollow"<?php endif; ?><?= $item['target'] ?> role="menuitem"<?php if (!empty($item['subitems'])): ?> aria-haspopup="true"<?php endif; ?>><?= $item['link'] ?></a><?= $item['subitems'] ?></li>
+      <li<?php if ($item['class']) echo ' class="' . $item['class'] . '"'; ?>><a href="<?= $item['href'] ?: './' ?>" title="<?= $item['pageTitle'] ?: $item['title'] ?>"<?php if ($item['class']) echo ' class="' . $item['class'] . '"'; ?><?php if ($item['accesskey']) echo ' accesskey="' . $item['accesskey'] . '"'; ?><?php if ($item['tabindex']) echo ' tabindex="' . $item['tabindex'] . '"'; ?><?php if ($item['nofollow']) echo ' rel="nofollow"'; ?><?= $item['target'] ?><?php if (!empty($item['subitems'])) echo ' aria-haspopup="true"'; ?>><?= $item['link'] ?></a><?= $item['subitems'] ?></li>
     <?php endif; ?>
   <?php endforeach; ?>
 </ul>

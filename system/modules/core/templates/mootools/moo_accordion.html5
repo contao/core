@@ -43,9 +43,6 @@
           }
         });
       });
-      $$('div.ce_accordion').each(function(el) {
-        el.setProperty('role', 'tablist');
-      });
       $$('div.accordion').each(function(el) {
         el.setProperty('role', 'tabpanel');
       });

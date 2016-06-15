@@ -494,7 +494,7 @@ class ModuleRegistration extends \Module
 
 		$this->Template = $objTemplate;
 
-		$objMember = \MemberModel::findByActivation(\Input::get('token'));
+		$objMember = \MemberModel::findOneByActivation(\Input::get('token'));
 
 		if ($objMember === null)
 		{

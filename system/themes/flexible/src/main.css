@@ -713,9 +713,11 @@ input[type=search]::-webkit-search-decoration {
 }
 .tl_form_field_preview td {
 	padding-right:6px;
+	vertical-align:top;
 }
 .tl_form_field_preview td.col_0 {
 	min-width:180px;
+	padding-top:3px;
 }
 .tl_form_field_preview .text,.tl_form_field_preview .password {
 	width:140px;
@@ -725,6 +727,11 @@ input[type=search]::-webkit-search-decoration {
 }
 .tl_form_field_preview textarea {
 	width:280px;
+}
+.tl_form_field_preview .checkbox_container legend,.tl_form_field_preview .radio_container legend {
+	position:absolute;
+	left:4px;
+	margin-top:3px;
 }
 
 /* Tree view */
