@@ -39,6 +39,9 @@ var AjaxRequest =
 
 		var item = $(id),
 			image = $(el).getFirst('img'),
+			inject = function(elem) {
+				elem.inject($(el).getParent('li'), 'after');
+			},
 			state;
 
 		if (item) {
@@ -48,15 +51,13 @@ var AjaxRequest =
 			$(el).store('tip:title', Contao.lang.expand);
 		} else if (AjaxRequest.storage.nav) {
 			state = 1;
-			AjaxRequest.storage.nav.inject($(el).getParent('li'), 'after');
+			inject(AjaxRequest.storage.nav);
 			delete AjaxRequest.storage.nav;
 			image.src = AjaxRequest.themePath + 'modMinus.gif';
 			$(el).store('tip:title', Contao.lang.collapse);
 		}
 
-		if (state !== undefined) {
-			new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
-		} else {
+		if (state === undefined) {
 			new Request.Contao({
 				evalScripts: true,
 				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
@@ -65,7 +66,9 @@ var AjaxRequest =
 						'id': id,
 						'class': 'tl_parent',
 						'html': txt
-					}).inject($(el).getParent('li'), 'after');
+					});
+
+					inject(li);
 
 					// Update the referer ID
 					li.getElements('a').each(function(el) {
@@ -80,6 +83,8 @@ var AjaxRequest =
 					window.fireEvent('ajax_change');
 				}
 			}).post({'action':'loadNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
 		}
 
 		return false;
@@ -99,43 +104,10 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
-
-		if (item) {
-			if (item.getStyle('display') == 'none') {
-				item.setStyle('display', 'inline');
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				$(el).store('tip:title', Contao.lang.collapse);
-				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
-			} else {
-				item.setStyle('display', 'none');
-				image.src = AjaxRequest.themePath + 'folPlus.gif';
-				$(el).store('tip:title', Contao.lang.expand);
-				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
-			}
-			return false;
-		}
-
-		new Request.Contao({
-			field: el,
-			evalScripts: true,
-			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt) {
-				var li = new Element('li', {
-					'id': id,
-					'class': 'parent',
-					'styles': {
-						'display': 'inline'
-					}
-				});
-
-				new Element('ul', {
-					'class': 'level_' + level,
-					'html': txt
-				}).inject(li, 'bottom');
-
+			image = $(el).getFirst('img'),
+			inject = function(elem) {
 				if (mode == 5) {
-					li.inject($(el).getParent('li'), 'after');
+					elem.inject($(el).getParent('li'), 'after');
 				} else {
 					var folder = false,
 						parent = $(el).getParent('li'),
@@ -150,26 +122,62 @@ var AjaxRequest =
 					}
 
 					if (folder) {
-						li.inject(parent, 'before');
+						elem.inject(parent, 'before');
 					} else {
-						li.inject(parent, 'after');
+						elem.inject(parent, 'after');
 					}
 				}
+			},
+			state;
 
-				// Update the referer ID
-				li.getElements('a').each(function(el) {
-					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
-				});
+		if (item) {
+			state = 0;
+			AjaxRequest.storage.sites = item.dispose();
+			image.src = AjaxRequest.themePath + 'folPlus.gif';
+			$(el).store('tip:title', Contao.lang.expand);
+		} else if (AjaxRequest.storage.sites) {
+			state = 1;
+			inject(AjaxRequest.storage.sites);
+			delete AjaxRequest.storage.sites;
+			image.src = AjaxRequest.themePath + 'folMinus.gif';
+			$(el).store('tip:title', Contao.lang.collapse);
+		}
 
-				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				window.fireEvent('structure');
-				AjaxRequest.hideBox();
+		if (state === undefined) {
+			new Request.Contao({
+				field: el,
+				evalScripts: true,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt) {
+					var li = new Element('li', {
+						'id': id,
+						'class': 'parent'
+					});
 
-				// HOOK
-				window.fireEvent('ajax_change');
-   			}
-		}).post({'action':'loadStructure', 'id':id, 'level':level, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+					new Element('ul', {
+						'class': 'level_' + level,
+						'html': txt
+					}).inject(li, 'bottom');
+
+					inject(li);
+
+					// Update the referer ID
+					li.getElements('a').each(function(el) {
+						el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+					});
+
+					$(el).store('tip:title', Contao.lang.collapse);
+					image.src = AjaxRequest.themePath + 'folMinus.gif';
+					window.fireEvent('structure');
+					AjaxRequest.hideBox();
+
+					// HOOK
+					window.fireEvent('ajax_change');
+				}
+			}).post({'action':'loadStructure', 'id':id, 'level':level, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
+		}
 
 		return false;
 	},
@@ -188,56 +196,59 @@ var AjaxRequest =
 		el.blur();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			inject = function(elem) {
+				elem.inject($(el).getParent('li'), 'after');
+			},
+			state;
 
 		if (item) {
-			if (item.getStyle('display') == 'none') {
-				item.setStyle('display', 'inline');
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				$(el).store('tip:title', Contao.lang.collapse);
-				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
-			} else {
-				item.setStyle('display', 'none');
-				image.src = AjaxRequest.themePath + 'folPlus.gif';
-				$(el).store('tip:title', Contao.lang.expand);
-				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
-			}
-			return false;
+			state = 0;
+			AjaxRequest.storage.files = item.dispose();
+			image.src = AjaxRequest.themePath + 'folPlus.gif';
+			$(el).store('tip:title', Contao.lang.expand);
+		} else if (AjaxRequest.storage.files) {
+			state = 1;
+			inject(AjaxRequest.storage.files);
+			delete AjaxRequest.storage.files;
+			image.src = AjaxRequest.themePath + 'folMinus.gif';
+			$(el).store('tip:title', Contao.lang.collapse);
 		}
 
-		new Request.Contao({
-			field: el,
-			evalScripts: true,
-			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt) {
-				var li = new Element('li', {
-					'id': id,
-					'class': 'parent',
-					'styles': {
-						'display': 'inline'
-					}
-				});
+		if (state === undefined) {
+			new Request.Contao({
+				field: el,
+				evalScripts: true,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt) {
+					var li = new Element('li', {
+						'id': id,
+						'class': 'parent'
+					});
 
-				new Element('ul', {
-					'class': 'level_' + level,
-					'html': txt
-				}).inject(li, 'bottom');
+					new Element('ul', {
+						'class': 'level_' + level,
+						'html': txt
+					}).inject(li, 'bottom');
 
-				li.inject($(el).getParent('li'), 'after');
+					inject(li);
 
-				// Update the referer ID
-				li.getElements('a').each(function(el) {
-					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
-				});
+					// Update the referer ID
+					li.getElements('a').each(function(el) {
+						el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+					});
 
-				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				AjaxRequest.hideBox();
+					$(el).store('tip:title', Contao.lang.collapse);
+					image.src = AjaxRequest.themePath + 'folMinus.gif';
+					AjaxRequest.hideBox();
 
-				// HOOK
-				window.fireEvent('ajax_change');
-   			}
-		}).post({'action':'loadFileManager', 'id':id, 'level':level, 'folder':folder, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+					// HOOK
+					window.fireEvent('ajax_change');
+				}
+			}).post({'action':'loadFileManager', 'id':id, 'level':level, 'folder':folder, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
+		}
 
 		return false;
 	},
@@ -258,56 +269,59 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			inject = function(elem) {
+				elem.inject($(el).getParent('li'), 'after');
+			},
+			state;
 
 		if (item) {
-			if (item.getStyle('display') == 'none') {
-				item.setStyle('display', 'inline');
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				$(el).store('tip:title', Contao.lang.collapse);
-				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
-			} else {
-				item.setStyle('display', 'none');
-				image.src = AjaxRequest.themePath + 'folPlus.gif';
-				$(el).store('tip:title', Contao.lang.expand);
-				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
-			}
-			return false;
+			state = 0;
+			AjaxRequest.storage.pagetree = item.dispose();
+			image.src = AjaxRequest.themePath + 'folPlus.gif';
+			$(el).store('tip:title', Contao.lang.expand);
+		} else if (AjaxRequest.storage.pagetree) {
+			state = 1;
+			inject(AjaxRequest.storage.pagetree);
+			delete AjaxRequest.storage.pagetree;
+			image.src = AjaxRequest.themePath + 'folMinus.gif';
+			$(el).store('tip:title', Contao.lang.collapse);
 		}
 
-		new Request.Contao({
-			field: el,
-			evalScripts: true,
-			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt) {
-				var li = new Element('li', {
-					'id': id,
-					'class': 'parent',
-					'styles': {
-						'display': 'inline'
-					}
-				});
+		if (state === undefined) {
+			new Request.Contao({
+				field: el,
+				evalScripts: true,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt) {
+					var li = new Element('li', {
+						'id': id,
+						'class': 'parent'
+					});
 
-				new Element('ul', {
-					'class': 'level_' + level,
-					'html': txt
-				}).inject(li, 'bottom');
+					new Element('ul', {
+						'class': 'level_' + level,
+						'html': txt
+					}).inject(li, 'bottom');
 
-				li.inject($(el).getParent('li'), 'after');
+					inject(li);
 
-				// Update the referer ID
-				li.getElements('a').each(function(el) {
-					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
-				});
+					// Update the referer ID
+					li.getElements('a').each(function(el) {
+						el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+					});
 
-				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				AjaxRequest.hideBox();
+					$(el).store('tip:title', Contao.lang.collapse);
+					image.src = AjaxRequest.themePath + 'folMinus.gif';
+					AjaxRequest.hideBox();
 
-				// HOOK
-				window.fireEvent('ajax_change');
-   			}
-		}).post({'action':'loadPagetree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+					// HOOK
+					window.fireEvent('ajax_change');
+				}
+			}).post({'action':'loadPagetree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
+		}
 
 		return false;
 	},
@@ -329,56 +343,59 @@ var AjaxRequest =
 		Backend.getScrollOffset();
 
 		var item = $(id),
-			image = $(el).getFirst('img');
+			image = $(el).getFirst('img'),
+			inject = function(elem) {
+				elem.inject($(el).getParent('li'), 'after');
+			},
+			state;
 
 		if (item) {
-			if (item.getStyle('display') == 'none') {
-				item.setStyle('display', 'inline');
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				$(el).store('tip:title', Contao.lang.collapse);
-				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
-			} else {
-				item.setStyle('display', 'none');
-				image.src = AjaxRequest.themePath + 'folPlus.gif';
-				$(el).store('tip:title', Contao.lang.expand);
-				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
-			}
-			return false;
+			state = 0;
+			AjaxRequest.storage.filetree = item.dispose();
+			image.src = AjaxRequest.themePath + 'folPlus.gif';
+			$(el).store('tip:title', Contao.lang.expand);
+		} else if (AjaxRequest.storage.filetree) {
+			state = 1;
+			inject(AjaxRequest.storage.filetree);
+			delete AjaxRequest.storage.filetree;
+			image.src = AjaxRequest.themePath + 'folMinus.gif';
+			$(el).store('tip:title', Contao.lang.collapse);
 		}
 
-		new Request.Contao({
-			field: el,
-			evalScripts: true,
-			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt) {
-				var li = new Element('li', {
-					'id': id,
-					'class': 'parent',
-					'styles': {
-						'display': 'inline'
-					}
-				});
+		if (state === undefined) {
+			new Request.Contao({
+				field: el,
+				evalScripts: true,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt) {
+					var li = new Element('li', {
+						'id': id,
+						'class': 'parent'
+					});
 
-				new Element('ul', {
-					'class': 'level_' + level,
-					'html': txt
-				}).inject(li, 'bottom');
+					new Element('ul', {
+						'class': 'level_' + level,
+						'html': txt
+					}).inject(li, 'bottom');
 
-				li.inject($(el).getParent('li'), 'after');
+					inject(li);
 
-				// Update the referer ID
-				li.getElements('a').each(function(el) {
-					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
-				});
+					// Update the referer ID
+					li.getElements('a').each(function(el) {
+						el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+					});
 
-				$(el).store('tip:title', Contao.lang.collapse);
-				image.src = AjaxRequest.themePath + 'folMinus.gif';
-				AjaxRequest.hideBox();
+					$(el).store('tip:title', Contao.lang.collapse);
+					image.src = AjaxRequest.themePath + 'folMinus.gif';
+					AjaxRequest.hideBox();
 
-				// HOOK
-				window.fireEvent('ajax_change');
-   			}
-		}).post({'action':'loadFiletree', 'id':id, 'folder':folder, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+					// HOOK
+					window.fireEvent('ajax_change');
+				}
+			}).post({'action':'loadFiletree', 'id':id, 'folder':folder, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
+		}
 
 		return false;
 	},
@@ -392,71 +409,79 @@ var AjaxRequest =
 	 */
 	toggleSubpalette: function (el, id, field) {
 		el.blur();
-		var item = $(id);
+
+		var item = $(id),
+			inject = function(elem) {
+				elem.inject($(el).getParent('div').getParent('div'), 'after');
+			},
+			state;
 
 		if (item) {
-			if (!el.value) {
-				el.value = 1;
-				el.checked = 'checked';
-				item.setStyle('display', 'block');
-				new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
-			} else {
-				el.value = '';
-				el.checked = '';
-				item.setStyle('display', 'none');
-				new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
-			}
-			return;
+			state = 0;
+			AjaxRequest.storage[id] = item.dispose();
+			el.value = '';
+			el.checked = '';
+		} else if (AjaxRequest.storage[id]) {
+			state = 1;
+			inject(AjaxRequest.storage[id]);
+			delete AjaxRequest.storage[id];
+			el.value = 1;
+			el.checked = 'checked';
 		}
 
-		new Request.Contao({
-			field: el,
-			evalScripts: false,
-			onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
-			onSuccess: function(txt, json) {
-				var div = new Element('div', {
-					'id': id,
-					'html': txt,
-					'styles': {
-						'display': 'block'
+		if (state === undefined) {
+			new Request.Contao({
+				field: el,
+				evalScripts: false,
+				onRequest: AjaxRequest.displayBox(Contao.lang.loading + ' …'),
+				onSuccess: function(txt, json) {
+					var div = new Element('div', {
+						'id': id,
+						'html': txt
+					});
+
+					inject(div);
+
+					// Execute scripts after the DOM has been updated
+					if (json.javascript) {
+
+						// Use Asset.javascript() instead of document.write() to load a
+						// JavaScript file and re-execude the code after it has been loaded
+						document.write = function(str) {
+							var src = '';
+							str.replace(/<script src="([^"]+)"/i, function(all, match){
+								src = match;
+							});
+							src && Asset.javascript(src, {
+								onLoad: function() {
+									Browser.exec(json.javascript);
+								}
+							});
+						};
+
+						Browser.exec(json.javascript);
 					}
-				}).inject($(el).getParent('div').getParent('div'), 'after');
 
-				// Execute scripts after the DOM has been updated
-				if (json.javascript) {
+					el.value = 1;
+					el.checked = 'checked';
 
-					// Use Asset.javascript() instead of document.write() to load a
-					// JavaScript file and re-execude the code after it has been loaded
-					document.write = function(str) {
-						var src = '';
-						str.replace(/<script src="([^"]+)"/i, function(all, match){
-							src = match;
-						});
-						src && Asset.javascript(src, {
-							onLoad: function() {
-								Browser.exec(json.javascript);
-							}
-						});
-					};
+					// Update the referer ID
+					div.getElements('a').each(function(el) {
+						el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
+					});
 
-					Browser.exec(json.javascript);
+					AjaxRequest.hideBox();
+
+					// HOOK
+					window.fireEvent('subpalette'); // Backwards compatibility
+					window.fireEvent('ajax_change');
 				}
+			}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'load':1, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		} else {
+			new Request.Contao({field:el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':state, 'REQUEST_TOKEN':Contao.request_token});
+		}
 
-				el.value = 1;
-				el.checked = 'checked';
-
-				// Update the referer ID
-				div.getElements('a').each(function(el) {
-					el.href = el.href.replace(/&ref=[a-f0-9]+/, '&ref=' + Contao.referer_id);
-				});
-
-				AjaxRequest.hideBox();
-
-				// HOOK
-				window.fireEvent('subpalette'); // Backwards compatibility
-				window.fireEvent('ajax_change');
-			}
-		}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'load':1, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		return false;
 	},
 
 	/**
