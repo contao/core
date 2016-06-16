@@ -5,6 +5,9 @@ Version 3.5.14 (2016-06-16)
 ---------------------------
 
 ### Fixed
+Also check for the back end cookie when loading from cache (see #8249).
+
+### Fixed
 Unset "mode" and "pid" upon save and edit (see #8292).
 
 ### Fixed
