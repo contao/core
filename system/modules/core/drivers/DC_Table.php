@@ -2113,7 +2113,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
 
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href'], false);
-				$strUrl = preg_replace('/(&amp;)?(s2e|act)=[^&]*/i', '', $strUrl);
+				$strUrl = preg_replace('/&(amp;)?(s2e|act|mode|pid)=[^&]*/i', '', $strUrl);
 
 				$this->redirect($strUrl);
 			}

@@ -5,6 +5,9 @@ Version 3.5.14 (2016-06-16)
 ---------------------------
 
 ### Fixed
+Unset "mode" and "pid" upon save and edit (see #8292).
+
+### Fixed
 Always use the relative path in DC_Folder (see #8370).
 
 
