@@ -136,7 +136,7 @@ abstract class Events extends \Module
 				{
 					$arrRepeat = deserialize($objEvents->repeatEach);
 
-					if ($arrRepeat['value'] < 1)
+					if (!is_array($arrRepeat) || !isset($arrRepeat['unit']) || !isset($arrRepeat['value']) || $arrRepeat['value'] < 1)
 					{
 						continue;
 					}
@@ -243,12 +243,16 @@ abstract class Events extends \Module
 		if ($objEvents->recurring)
 		{
 			$arrRange = deserialize($objEvents->repeatEach);
-			$strKey = 'cal_' . $arrRange['unit'];
-			$recurring = sprintf($GLOBALS['TL_LANG']['MSC'][$strKey], $arrRange['value']);
 
-			if ($objEvents->recurrences > 0)
+			if (is_array($arrRange) && isset($arrRange['unit']) && isset($arrRange['value']))
 			{
-				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], \Date::parse($objPage->dateFormat, $objEvents->repeatEnd));
+				$strKey = 'cal_' . $arrRange['unit'];
+				$recurring = sprintf($GLOBALS['TL_LANG']['MSC'][$strKey], $arrRange['value']);
+
+				if ($objEvents->recurrences > 0)
+				{
+					$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], \Date::parse($objPage->dateFormat, $objEvents->repeatEnd));
+				}
 			}
 		}
 

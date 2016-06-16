@@ -5,6 +5,9 @@ Version 3.5.14 (2016-06-16)
 ---------------------------
 
 ### Fixed
+Validate the settings when loading a recurring event (see #8286).
+
+### Fixed
 Also check for the back end cookie when loading from cache (see #8249).
 
 ### Fixed

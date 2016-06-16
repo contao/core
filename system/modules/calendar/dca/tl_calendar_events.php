@@ -900,11 +900,14 @@ class tl_calendar_events extends Backend
 			{
 				$arrRange = deserialize($dc->activeRecord->repeatEach);
 
-				$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
-				$unit = $arrRange['unit'];
+				if (is_array($arrRange) && isset($arrRange['unit']) && isset($arrRange['value']))
+				{
+					$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
+					$unit = $arrRange['unit'];
 
-				$strtotime = '+ ' . $arg . ' ' . $unit;
-				$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+					$strtotime = '+ ' . $arg . ' ' . $unit;
+					$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
+				}
 			}
 		}
 
