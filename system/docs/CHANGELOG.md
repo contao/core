@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.14 (2016-06-16)
+---------------------------
+
+### Fixed
+Always use the relative path in DC_Folder (see #8370).
+
+
 Version 3.5.13 (2016-06-15)
 ---------------------------
 
