@@ -178,7 +178,7 @@ class Calendar extends \Frontend
 				{
 					$arrRepeat = deserialize($objArticle->repeatEach);
 
-					if ($arrRepeat['value'] < 1)
+					if (!is_array($arrRepeat) || !isset($arrRepeat['unit']) || !isset($arrRepeat['value']) || $arrRepeat['value'] < 1)
 					{
 						continue;
 					}

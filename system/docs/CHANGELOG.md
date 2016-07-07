@@ -1,6 +1,22 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.14 (2016-06-16)
+---------------------------
+
+### Fixed
+Validate the settings when loading a recurring event (see #8286).
+
+### Fixed
+Also check for the back end cookie when loading from cache (see #8249).
+
+### Fixed
+Unset "mode" and "pid" upon save and edit (see #8292).
+
+### Fixed
+Always use the relative path in DC_Folder (see #8370).
+
+
 Version 3.5.13 (2016-06-15)
 ---------------------------
 
