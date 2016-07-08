@@ -6,16 +6,16 @@
       $(document).accordion({
         // Put custom options here
         heightStyle: 'content',
-        header: 'div.toggler',
+        header: '.toggler',
         collapsible: true,
         create: function(event, ui) {
           ui.header.addClass('active');
-          $('div.toggler').attr('tabindex', 0);
+          $('.toggler').attr('tabindex', 0);
         },
         activate: function(event, ui) {
           ui.newHeader.addClass('active');
           ui.oldHeader.removeClass('active');
-          $('div.toggler').attr('tabindex', 0);
+          $('.toggler').attr('tabindex', 0);
         }
       });
     });
