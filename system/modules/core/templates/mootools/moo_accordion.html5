@@ -43,7 +43,7 @@
           }
         });
       });
-      $$('div.accordion').each(function(el) {
+      $$('.accordion').each(function(el) {
         el.setProperty('role', 'tabpanel');
       });
     });
