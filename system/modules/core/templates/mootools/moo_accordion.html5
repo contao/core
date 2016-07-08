@@ -2,7 +2,7 @@
 <script>
   (function() {
     window.addEvent('domready', function() {
-      new Fx.Accordion($$('div.toggler'), $$('div.accordion'), {
+      new Fx.Accordion($$('.toggler'), $$('.accordion'), {
         opacity: false,
         alwaysHide: true,
         onActive: function(tog, el) {
@@ -20,7 +20,7 @@
           return false;
         }
       });
-      $$('div.toggler').each(function(el) {
+      $$('.toggler').each(function(el) {
         el.setProperty('role', 'tab');
         el.setProperty('tabindex', 0);
         el.addEvents({
