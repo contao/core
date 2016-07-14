@@ -5,6 +5,9 @@ Version 3.5.15 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Strip soft hyphens when indexing a page (see #8389).
+
+### Fixed
 Update mediaelement.js to version 2.21.2 (fixes CVE-2016-4567).
 
 

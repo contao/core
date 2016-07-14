@@ -67,7 +67,7 @@ class Search
 		}
 
 		// Replace special characters
-		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
+		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;', '&shy;'), array(' ', ' ', ' ', ' ', ' ', ''), $arrData['content']);
 
 		// Strip script tags
 		while (($intStart = strpos($strContent, '<script')) !== false)
