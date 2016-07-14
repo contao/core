@@ -976,7 +976,7 @@ div.mejs-speed-button {
 /* Start: Jump Forward */
 
 .mejs-controls .mejs-button.mejs-jump-forward-button {
-	background: transparent url(jumpforward.png) no-repeat;
+	background: transparent url("../images/jumpforward.png") no-repeat;
 	background-position: 3px 3px;
 }
 .mejs-controls .mejs-button.mejs-jump-forward-button button {
