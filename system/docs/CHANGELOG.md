@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.15 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Update mediaelement.js to version 2.21.2 (fixes CVE-2016-4567).
+
+
 Version 3.5.14 (2016-06-16)
 ---------------------------
 
