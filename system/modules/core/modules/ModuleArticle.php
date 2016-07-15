@@ -79,7 +79,7 @@ class ModuleArticle extends \Module
 		if ($this->blnNoMarkup)
 		{
 			/** @var \FrontendTemplate|object $objTemplate */
-			$objTemplate = new \BackendTemplate('mod_article_plain');
+			$objTemplate = new \FrontendTemplate('mod_article_plain');
 
 			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);
@@ -120,7 +120,7 @@ class ModuleArticle extends \Module
 		if ($this->multiMode && $this->showTeaser)
 		{
 			/** @var \FrontendTemplate|object $objTemplate */
-			$objTemplate = new \BackendTemplate('mod_article_teaser');
+			$objTemplate = new \FrontendTemplate('mod_article_teaser');
 
 			$this->Template = $objTemplate;
 			$this->Template->setData($this->arrData);

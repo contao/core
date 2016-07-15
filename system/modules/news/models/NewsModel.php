@@ -165,7 +165,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find published news items by their parent ID and ID or alias
+	 * Find a published news item from one or more news archives by its ID or alias
 	 *
 	 * @param mixed $varId      The numeric ID or alias name
 	 * @param array $arrPids    An array of parent IDs
@@ -189,7 +189,7 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
-		return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+		return static::findOneBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
 	}
 
 
