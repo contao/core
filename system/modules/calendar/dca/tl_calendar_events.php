@@ -241,7 +241,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'startDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startDate'],
-			'default'                 => time(),
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'mandatory'=>true, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
