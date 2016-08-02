@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.16 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Always store the UUID of an uploaded file (see #8421).
+
+
 Version 3.5.15 (2016-07-15)
 ---------------------------
 
