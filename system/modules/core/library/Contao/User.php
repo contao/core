@@ -553,6 +553,9 @@ abstract class User extends \System
 	{
 		$time = time();
 
+		// Regenerate a new session id to harden against session fixation attacks.
+		session_regenerate_id();
+
 		// Generate the cookie hash
 		$this->strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie);
 
