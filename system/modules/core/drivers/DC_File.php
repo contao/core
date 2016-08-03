@@ -156,7 +156,6 @@ class DC_File extends \DataContainer implements \editable
 			// Render boxes
 			$class = 'tl_tbox';
 			$fs = $this->Session->get('fieldset_states');
-			$blnIsFirst = true;
 
 			foreach ($boxes as $k=>$v)
 			{
@@ -231,13 +230,6 @@ class DC_File extends \DataContainer implements \editable
 								$this->varValue[$k] = htmlspecialchars($v);
 							}
 						}
-					}
-
-					// Autofocus the first field
-					if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
-					{
-						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
-						$blnIsFirst = false;
 					}
 
 					// Call load_callback

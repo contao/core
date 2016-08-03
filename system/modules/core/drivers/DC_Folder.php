@@ -1146,7 +1146,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			// Render boxes
 			$class = 'tl_tbox';
-			$blnIsFirst = true;
 
 			foreach ($boxes as $v)
 			{
@@ -1183,13 +1182,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					else
 					{
 						$this->varValue = ($objModel !== null) ? $objModel->$vv : null;
-					}
-
-					// Autofocus the first field
-					if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
-					{
-						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
-						$blnIsFirst = false;
 					}
 
 					// Call load_callback
