@@ -2207,6 +2207,30 @@ var Backend =
 	},
 
 	/**
+	 * Try to focus the first input field in the main section.
+	 *
+	 * @author Yanick Witschi
+	 */
+	autoFocusFirstInputField: function() {
+		var main = document.id('main');
+		if (undefined === main) {
+			return;
+		}
+
+		var inputs = main.getElements('input, textarea')
+			.filter(function(item) {
+				return !item.get('disabled')
+					&& item.isVisible()
+					&& 'submit' !== item.get('type')
+					&& 'image' !== item.get('type');
+			});
+
+		if (inputs[0]) {
+			inputs[0].focus();
+		}
+	},
+
+	/**
 	 * Allow to mark the important part of an image
 	 *
 	 * @param {object} el The DOM element
@@ -2356,6 +2380,7 @@ window.addEvent('domready', function() {
 	Backend.makeWizardsSortable();
 	Backend.enableImageSizeWidgets();
 	Backend.enableToggleSelect();
+	Backend.autoFocusFirstInputField();
 
 	// Chosen
 	if (Elements.chosen != undefined) {
