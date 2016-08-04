@@ -2212,12 +2212,13 @@ var Backend =
 	 * @author Yanick Witschi
 	 */
 	autoFocusFirstInputField: function() {
-		var main = document.id('main');
-		if (undefined === main) {
+		var edit = document.id('main').getElement('.tl_formbody_edit');
+
+		if (null === edit) {
 			return;
 		}
 
-		var inputs = main.getElements('input, textarea')
+		var inputs = edit.getElements('input, textarea')
 			.filter(function(item) {
 				return !item.get('disabled')
 					&& item.isVisible()
