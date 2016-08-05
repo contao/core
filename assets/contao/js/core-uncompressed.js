@@ -2213,22 +2213,15 @@ var Backend =
 	 */
 	autoFocusFirstInputField: function() {
 		var edit = document.id('main').getElement('.tl_formbody_edit');
+		if (!edit) return;
 
-		if (null === edit) {
-			return;
-		}
-
-		var inputs = edit.getElements('input, textarea')
+		var inputs = edit
+			.getElements('input, textarea')
 			.filter(function(item) {
-				return !item.get('disabled')
-					&& item.isVisible()
-					&& 'submit' !== item.get('type')
-					&& 'image' !== item.get('type');
+				return !item.get('disabled') && item.isVisible() && item.get('type') !== 'submit' && item.get('type') !== 'image';
 			});
 
-		if (inputs[0]) {
-			inputs[0].focus();
-		}
+		if (inputs[0]) inputs[0].focus();
 	},
 
 	/**

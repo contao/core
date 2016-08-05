@@ -9,13 +9,6 @@
 var Theme = {
 
 	/**
-	 * Here for BC only.
-	 */
-	focusInput: function(id) {
-		// BC
-	},
-
-	/**
 	 * Colorize a table row when hovering over it
 	 *
 	 * @param {object} el    The DOM element

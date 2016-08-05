@@ -14,14 +14,6 @@ var Theme = {
  	 */
 	isWebkit: (Browser.chrome || Browser.safari || navigator.userAgent.match(/(?:webkit|khtml)/i)),
 
-
-	/**
-	 * Here for BC only.
-	 */
-	focusInput: function(id) {
-		// BC
-	},
-
 	/**
 	 * Colorize a table row when hovering over it
 	 *
