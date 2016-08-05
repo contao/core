@@ -29,6 +29,9 @@ window.tinymce && tinymce.init({
     editor.getElement().removeAttribute('required');
   },
   init_instance_callback: function(editor) {
+    if (document.activeElement && document.activeElement.id && document.activeElement.id == editor.id) {
+      editor.editorManager.get(editor.id).focus();
+    }
     editor.on('focus', function() { Backend.getScrollOffset(); });
   },
   file_browser_callback: function(field_name, url, type, win) {
