@@ -279,6 +279,8 @@ class FormFileUpload extends \Widget implements \uploadable
 							$objModel->path   = $strFile;
 							$objModel->hash   = md5_file(TL_ROOT . '/' . $strFile);
 							$objModel->save();
+							
+							$strUuid = $objModel->uuid;
 						}
 						else
 						{
