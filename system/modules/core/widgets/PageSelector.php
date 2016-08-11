@@ -170,7 +170,7 @@ class PageSelector extends \Widget
 					);
 
 					if (count($root) === 0) {
-						$root = $this->rootNodes;
+						$root = $this->User->hasAccess($this->rootNodes, 'pagemounts') ? $this->rootNodes : [];
 
 						// Hide the breadcrumb
 						$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] = '';
