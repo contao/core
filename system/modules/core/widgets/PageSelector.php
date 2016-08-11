@@ -159,7 +159,25 @@ class PageSelector extends \Widget
 			// Root nodes (breadcrumb menu)
 			if (!empty($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']))
 			{
-				$nodes = $this->eliminateNestedPages($GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root']);
+				$root = $GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'];
+
+				// Allow only those roots that are allowed in root nodes
+				if (is_array($this->rootNodes))
+				{
+					$root = array_intersect(
+						array_merge($this->rootNodes, $this->Database->getChildRecords($this->rootNodes, 'tl_page')),
+						$root
+					);
+
+					if (count($root) === 0) {
+						$root = $this->rootNodes;
+
+						// Hide the breadcrumb
+						$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] = '';
+					}
+				}
+
+				$nodes = $this->eliminateNestedPages($root);
 
 				foreach ($nodes as $node)
 				{
