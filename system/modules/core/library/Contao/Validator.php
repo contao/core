@@ -437,4 +437,17 @@ class Validator
 
 		return true;
 	}
+
+
+	/**
+	 * Valid form field name
+	 *
+	 * @param mixed $strName The form field name
+	 *
+	 * @return boolean True if the form field name is valid
+	 */
+	public static function isFieldName($strName)
+	{
+		return preg_match('/^[A-Za-z0-9[\]_-]+$/', $strName);
+	}
 }
