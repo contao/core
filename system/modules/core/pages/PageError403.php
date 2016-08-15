@@ -65,6 +65,10 @@ class PageError403 extends \Frontend
 
 			$objPage = $obj403->loadDetails();
 
+			// Prevent caching and searching (see #8410)
+			$objPage->cache = 0;
+			$objPage->noSearch = 1;
+
 			/** @var \PageRegular $objHandler */
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
