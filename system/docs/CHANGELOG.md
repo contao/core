@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly show the ctime, mtime and atime of a folder (see #8408).
+
+### Fixed
 Correctly index changed pages (see #8439).
 
 ### Fixed
