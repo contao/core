@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Fix the module wizard's accessibility (see #8391).
+
+### Fixed
 Correctly initialize TinyMCE in sub-palettes in Firefox (see #3673).
 
 ### Fixed
