@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle %n when parsing date formats (see #8411).
+
+### Fixed
 Fix the module wizard's accessibility (see #8391).
 
 ### Fixed
