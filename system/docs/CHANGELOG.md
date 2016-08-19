@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
+### Updated
+Update MooTools to version 1.5.2.
+
 ### Fixed
 Provide the same template variables for downloads and enclosures (see #8392).
 

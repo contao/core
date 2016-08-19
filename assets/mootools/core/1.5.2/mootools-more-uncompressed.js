@@ -41,10 +41,9 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	version: '1.5.1',
-	build: '2dd695ba957196ae4b0275a690765d6636a61ccd'
+	version: '1.5.2',
+	build: 'facdf0458d10fd214aa9f5fa71935a23a772cc48'
 };
-
 
 /*
 ---
@@ -88,7 +87,6 @@ Class.refactor = function(original, refactors){
 
 };
 
-
 /*
 ---
 
@@ -126,7 +124,6 @@ Class.Mutators.initialize = function(initialize){
 		return initialize.apply(this, arguments);
 	};
 };
-
 
 /*
 ---
@@ -166,7 +163,6 @@ Class.Occlude = new Class({
 	}
 
 });
-
 
 /*
 ---
@@ -231,7 +227,6 @@ provides: [Chain.Wait]
 	}
 
 })();
-
 
 /*
 ---
@@ -321,7 +316,6 @@ Array.implement({
 
 })();
 
-
 /*
 ---
 
@@ -389,7 +383,6 @@ Object.extend({
 
 })();
 
-
 /*
 ---
 
@@ -441,8 +434,6 @@ var Locale = this.Locale = {
 
 		if (set) locale.define(set, key, value);
 
-
-
 		if (!current) current = locale;
 
 		return locale;
@@ -455,8 +446,6 @@ var Locale = this.Locale = {
 			current = locale;
 
 			this.fireEvent('change', locale);
-
-
 		}
 
 		return this;
@@ -553,10 +542,7 @@ Locale.Set = new Class({
 
 });
 
-
-
 })();
-
 
 /*
 ---
@@ -628,7 +614,6 @@ Locale.define('en-US', 'Date', {
 	yearsUntil: '{delta} years from now'
 
 });
-
 
 /*
 ---
@@ -1036,8 +1021,6 @@ Date.extend({
 		return this;
 	},
 
-
-
 	defineParser: function(pattern){
 		parsePatterns.push((pattern.re && pattern.handler) ? pattern : build(pattern));
 		return this;
@@ -1191,7 +1174,6 @@ Locale.addEvent('change', function(language){
 
 })();
 
-
 /*
 ---
 
@@ -1310,7 +1292,6 @@ Date.implement({
 
 ).alias('timeAgoInWords', 'timeDiffInWords');
 
-
 /*
 ---
 
@@ -1409,9 +1390,8 @@ var walk = function(string, replacements){
 
 var getRegexForTag = function(tag, contents){
 	tag = tag || '';
-	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>",
-		reg = new RegExp(regstr, "gi");
-	return reg;
+	var regstr = contents ? "<" + tag + "(?!\\w)[^>]*>([\\s\\S]*?)<\/" + tag + "(?!\\w)>" : "<\/?" + tag + "([^>]+)?>";
+	return new RegExp(regstr, "gi");
 };
 
 String.implement({
@@ -1474,7 +1454,6 @@ String.implement({
 
 })();
 
-
 /*
 ---
 
@@ -1502,6 +1481,22 @@ provides: [String.QueryString]
 ...
 */
 
+(function(){
+
+/**
+ * decodeURIComponent doesn't do the correct thing with query parameter keys or
+ * values. Specifically, it leaves '+' as '+' when it should be converting them
+ * to spaces as that's the specification. When browsers submit HTML forms via
+ * GET, the values are encoded using 'application/x-www-form-urlencoded'
+ * which converts spaces to '+'.
+ *
+ * See: http://unixpapa.com/js/querystring.html for a description of the
+ * problem.
+ */
+var decodeComponent = function(str){
+	return decodeURIComponent(str.replace(/\+/g, ' '));
+};
+
 String.implement({
 
 	parseQueryString: function(decodeKeys, decodeValues){
@@ -1518,9 +1513,9 @@ String.implement({
 				keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
 				obj = object;
 			if (!keys) return;
-			if (decodeValues) value = decodeURIComponent(value);
+			if (decodeValues) value = decodeComponent(value);
 			keys.each(function(key, i){
-				if (decodeKeys) key = decodeURIComponent(key);
+				if (decodeKeys) key = decodeComponent(key);
 				var current = obj[key];
 
 				if (i < keys.length - 1) obj = obj[key] = current || {};
@@ -1544,6 +1539,7 @@ String.implement({
 
 });
 
+})();
 
 /*
 ---
@@ -1715,7 +1711,6 @@ String.implement({
 
 })();
 
-
 /*
 ---
 
@@ -1773,7 +1768,6 @@ URI = Class.refactor(URI, {
 	}
 
 });
-
 
 /*
 ---
@@ -1920,8 +1914,6 @@ Hash.alias({indexOf: 'keyOf', contains: 'hasValue'});
 
 })();
 
-
-
 /*
 ---
 
@@ -1960,7 +1952,6 @@ Hash.implement({
 	}
 
 });
-
 
 /*
 ---
@@ -2002,7 +1993,6 @@ Elements.from = function(text, excludeScripts){
 
 	return (container || new Element('div')).set('html', text).getChildren();
 };
-
 
 /*
 ---
@@ -2120,8 +2110,6 @@ Element.implement({
 	},
 
 	getComputedSize: function(options){
-
-
 		options = Object.merge({
 			styles: ['padding','border'],
 			planes: {
@@ -2171,7 +2159,6 @@ Element.implement({
 });
 
 })();
-
 
 /*
 ---
@@ -2411,7 +2398,6 @@ Element.implement({
 
 })(Element.prototype.position);
 
-
 /*
 ---
 
@@ -2489,7 +2475,6 @@ Document.implement({
 
 });
 
-
 /*
 ---
 
@@ -2524,7 +2509,7 @@ var browsers = false;
 browsers = Browser.ie6 || (Browser.firefox && Browser.version < 3 && Browser.Platform.mac);
 //</1.4compat>
 
-this.IframeShim = new Class({
+var IframeShim = this.IframeShim = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -2630,7 +2615,6 @@ window.addEvent('load', function(){
 	IframeShim.ready = true;
 });
 
-
 /*
 ---
 
@@ -2657,8 +2641,9 @@ provides: [Mask]
 
 ...
 */
+(function(){
 
-var Mask = new Class({
+var Mask = this.Mask = new Class({
 
 	Implements: [Options, Events],
 
@@ -2809,6 +2794,8 @@ var Mask = new Class({
 
 });
 
+})();
+
 Element.Properties.mask = {
 
 	set: function(options){
@@ -2843,7 +2830,6 @@ Element.implement({
 
 });
 
-
 /*
 ---
 
@@ -2868,10 +2854,11 @@ provides: [Spinner]
 
 ...
 */
+(function(){
 
-var Spinner = new Class({
+var Spinner = this.Spinner = new Class({
 
-	Extends: Mask,
+	Extends: this.Mask,
 
 	Implements: Chain,
 
@@ -2996,6 +2983,8 @@ var Spinner = new Class({
 
 });
 
+})();
+
 Request = Class.refactor(Request, {
 
 	options: {
@@ -3064,7 +3053,6 @@ Element.implement({
 	}
 
 });
-
 
 /*
 ---
@@ -3224,7 +3212,6 @@ Events.implement(Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();
 
-
 /*
 ---
 
@@ -3261,7 +3248,6 @@ var proto = Element.prototype;
 [Element, Window, Document].invoke('implement', Events.Pseudos(pseudos, proto.addEvent, proto.removeEvent));
 
 })();
-
 
 /*
 ---
@@ -3466,7 +3452,6 @@ if (!window.Form) window.Form = {};
 	});
 
 })();
-
 
 /*
 ---
@@ -3715,7 +3700,6 @@ Element.implement({
 
 })();
 
-
 /*
 ---
 
@@ -3794,7 +3778,6 @@ Form.Request.Append = new Class({
 
 });
 
-
 /*
 ---
 
@@ -3822,8 +3805,9 @@ provides: [OverText]
 
 ...
 */
+(function(){
 
-var OverText = new Class({
+var OverText = this.OverText = new Class({
 
 	Implements: [Options, Events, Class.Occlude],
 
@@ -4018,6 +4002,8 @@ var OverText = new Class({
 
 });
 
+})();
+
 OverText.instances = [];
 
 Object.append(OverText, {
@@ -4051,8 +4037,6 @@ Object.append(OverText, {
 	}
 
 });
-
-
 
 /*
 ---
@@ -4128,7 +4112,6 @@ Fx.Elements = new Class({
 	}
 
 });
-
 
 /*
 ---
@@ -4338,9 +4321,6 @@ Fx.Accordion = new Class({
 
 });
 
-
-
-
 /*
 ---
 
@@ -4504,14 +4484,11 @@ Fx.Scroll = new Class({
 
 });
 
-
-
 function isBody(element){
 	return (/^(?:body|html)$/i).test(element.tagName);
 }
 
 })();
-
 
 /*
 ---
@@ -4684,7 +4661,6 @@ Element.implement({
 
 });
 
-
 /*
 ---
 
@@ -4755,7 +4731,6 @@ Fx.SmoothScroll = new Class({
 		return this;
 	}
 });
-
 
 /*
 ---
@@ -4930,7 +4905,6 @@ Fx.Sort = new Class({
 
 });
 
-
 /*
 ---
 
@@ -4959,8 +4933,9 @@ provides: [Drag]
 ...
 
 */
+(function(){
 
-var Drag = new Class({
+var Drag = this.Drag = new Class({
 
 	Implements: [Events, Options],
 
@@ -5027,12 +5002,14 @@ var Drag = new Class({
 
 	attach: function(){
 		this.handles.addEvent('mousedown', this.bound.start);
+		this.handles.addEvent('touchstart', this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.addEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
 
 	detach: function(){
 		this.handles.removeEvent('mousedown', this.bound.start);
+		this.handles.removeEvent('touchstart', this.bound.start);
 		if (this.options.compensateScroll) this.offsetParent.removeEvent('scroll', this.bound.scrollListener);
 		return this;
 	},
@@ -5055,7 +5032,7 @@ var Drag = new Class({
 
 	sumValues: function(alpha, beta, op){
 		var sum = {}, options = this.options;
-		for (z in options.modifiers){
+		for (var z in options.modifiers){
 			if (!options.modifiers[z]) continue;
 			sum[z] = alpha[z] + beta[z] * op;
 		}
@@ -5112,7 +5089,9 @@ var Drag = new Class({
 
 		var events = {
 			mousemove: this.bound.check,
-			mouseup: this.bound.cancel
+			mouseup: this.bound.cancel,
+			touchmove: this.bound.check,
+			touchend: this.bound.cancel
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.addEvents(events);
@@ -5125,7 +5104,9 @@ var Drag = new Class({
 			this.cancel();
 			this.document.addEvents({
 				mousemove: this.bound.drag,
-				mouseup: this.bound.stop
+				mouseup: this.bound.stop,
+				touchmove: this.bound.drag,
+				touchend: this.bound.stop
 			});
 			this.fireEvent('start', [this.element, event]).fireEvent('snap', this.element);
 		}
@@ -5162,7 +5143,9 @@ var Drag = new Class({
 	cancel: function(event){
 		this.document.removeEvents({
 			mousemove: this.bound.check,
-			mouseup: this.bound.cancel
+			mouseup: this.bound.cancel,
+			touchmove: this.bound.check,
+			touchend: this.bound.cancel
 		});
 		if (event){
 			this.document.removeEvent(this.selection, this.bound.eventStop);
@@ -5173,7 +5156,9 @@ var Drag = new Class({
 	stop: function(event){
 		var events = {
 			mousemove: this.bound.drag,
-			mouseup: this.bound.stop
+			mouseup: this.bound.stop,
+			touchmove: this.bound.drag,
+			touchend: this.bound.stop
 		};
 		events[this.selection] = this.bound.eventStop;
 		this.document.removeEvents(events);
@@ -5182,6 +5167,8 @@ var Drag = new Class({
 	}
 
 });
+
+})();
 
 Element.implement({
 
@@ -5200,7 +5187,6 @@ Element.implement({
 	}
 
 });
-
 
 /*
 ---
@@ -5407,7 +5393,6 @@ Element.implement({
 
 });
 
-
 /*
 ---
 
@@ -5430,8 +5415,9 @@ provides: [Sortables]
 
 ...
 */
+(function(){
 
-var Sortables = new Class({
+var Sortables = this.Sortables = new Class({
 
 	Implements: [Events, Options],
 
@@ -5583,7 +5569,6 @@ var Sortables = new Class({
 		this.clone = this.getClone(event, element);
 
 		this.drag = new Drag.Move(this.clone, Object.merge({
-
 			droppables: this.getDroppables()
 		}, this.options.dragOptions)).addEvents({
 			onSnap: function(){
@@ -5656,6 +5641,7 @@ var Sortables = new Class({
 
 });
 
+})();
 
 /*
 ---
@@ -5679,8 +5665,9 @@ provides: [Assets]
 
 ...
 */
+;(function(){
 
-var Asset = {
+var Asset = this.Asset = {
 
 	javascript: function(source, properties){
 		if (!properties) properties = {};
@@ -5739,7 +5726,7 @@ var Asset = {
 				}
 				retries++;
 				if (!loaded && retries < timeout / 50) return setTimeout(check, 50);
-			}
+			};
 			setTimeout(check, 0);
 		}
 		return link;
@@ -5807,6 +5794,7 @@ var Asset = {
 
 };
 
+})();
 
 /*
 ---
@@ -5970,8 +5958,6 @@ String.implement({
 
 })();
 
-
-
 /*
 ---
 
@@ -6033,7 +6019,6 @@ Hash.each(Hash.prototype, function(method, name){
 		return value;
 	});
 });
-
 
 /*
 ---
@@ -6149,7 +6134,6 @@ Swiff.remote = function(obj, fn){
 
 })();
 
-
 /*
 ---
 
@@ -6235,7 +6219,6 @@ DOMEvent.defineKeys({
 })
 
 })();
-
 
 /*
 ---
@@ -6484,7 +6467,6 @@ provides: [Keyboard]
 
 })();
 
-
 /*
 ---
 
@@ -6595,7 +6577,6 @@ Keyboard.getShortcuts = function(name, keyboard){
 	return Keyboard.getShortcut(name, keyboard, { many: true });
 };
 
-
 /*
 ---
 
@@ -6621,8 +6602,9 @@ provides: [Scroller]
 
 ...
 */
+(function(){
 
-var Scroller = new Class({
+var Scroller = this.Scroller = new Class({
 
 	Implements: [Events, Options],
 
@@ -6683,7 +6665,7 @@ var Scroller = new Class({
 	scroll: function(){
 		var size = this.element.getSize(),
 			scroll = this.element.getScroll(),
-			pos = ((this.element != this.docBody) && (this.element != window)) ? element.getOffsets() : {x: 0, y: 0},
+			pos = ((this.element != this.docBody) && (this.element != window)) ? this.element.getOffsets() : {x: 0, y: 0},
 			scrollSize = this.element.getScrollSize(),
 			change = {x: 0, y: 0},
 			top = this.options.area.top || this.options.area,
@@ -6701,6 +6683,7 @@ var Scroller = new Class({
 
 });
 
+})();
 
 /*
 ---
@@ -6737,7 +6720,7 @@ var read = function(option, element){
 	return (option) ? (typeOf(option) == 'function' ? option(element) : element.get(option)) : '';
 };
 
-this.Tips = new Class({
+var Tips = this.Tips = new Class({
 
 	Implements: [Events, Options],
 
@@ -6762,7 +6745,8 @@ this.Tips = new Class({
 		offset: {x: 16, y: 16},
 		windowPadding: {x:0, y:0},
 		fixed: false,
-		waiAria: true
+		waiAria: true,
+		hideEmpty: false
 	},
 
 	initialize: function(){
@@ -6790,7 +6774,8 @@ this.Tips = new Class({
 			styles: {
 				position: 'absolute',
 				top: 0,
-				left: 0
+				left: 0,
+				display: 'none'
 			}
 		}).adopt(
 			new Element('div', {'class': 'tip-top'}),
@@ -6874,15 +6859,22 @@ this.Tips = new Class({
 		clearTimeout(this.timer);
 		this.timer = (function(){
 			this.container.empty();
-
+			var showTip = !this.options.hideEmpty;
 			['title', 'text'].each(function(value){
 				var content = element.retrieve('tip:' + value);
 				var div = this['_' + value + 'Element'] = new Element('div', {
 						'class': 'tip-' + value
 					}).inject(this.container);
-				if (content) this.fill(div, content);
+				if (content){
+					this.fill(div, content);
+					showTip = true;
+				}
 			}, this);
-			this.show(element);
+			if (showTip){
+				this.show(element);
+			} else {
+				this.hide(element);
+			}
 			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
 		}).delay(this.options.showDelay, this);
 	},
@@ -6961,4 +6953,3 @@ this.Tips = new Class({
 });
 
 })();
-
