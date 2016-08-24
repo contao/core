@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Stop the event recurrence if the upper boundary is reached (see #8445).
+
+### Fixed
 Show upcoming events if the first occurrence is in the past (see #8447).
 
 ### Updated
