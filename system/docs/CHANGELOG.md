@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
+### Fixed
+Show upcoming events if the first occurrence is in the past (see #8447).
+
 ### Updated
 Update MooTools to version 1.5.2.
 

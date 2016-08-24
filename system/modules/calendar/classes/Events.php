@@ -204,7 +204,6 @@ abstract class Events extends \Module
 		/** @var \PageModel $objPage */
 		global $objPage;
 
-
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$strDate = \Date::parse($objPage->dateFormat, $intStart);
