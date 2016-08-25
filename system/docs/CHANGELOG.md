@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle forward pages without target in the navigation modules (see #8377).
+
+### Fixed
 Stop the event recurrence if the upper boundary is reached (see #8445).
 
 ### Fixed

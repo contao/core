@@ -138,7 +138,7 @@ class ModuleCustomnav extends \Module
 						break;
 
 					case 'forward':
-						if (($objNext = $objModel->getRelated('jumpTo')) !== null)
+						if (($objNext = $objModel->getRelated('jumpTo')) !== null || ($objNext = \PageModel::findFirstPublishedRegularByPid($objModel->id)) !== null)
 						{
 							/** @var \PageModel $objNext */
 							$href = $objNext->getFrontendUrl();
