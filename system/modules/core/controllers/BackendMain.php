@@ -203,7 +203,7 @@ class BackendMain extends \Backend
 		}
 
 		// File picker reference
-		if (\Input::get('popup') && \Input::get('act') != 'show' && (\Input::get('do') == 'page' || \Input::get('do') == 'files') && $this->Session->get('filePickerRef'))
+		if (\Input::get('popup') && \Input::get('act') != 'show' && (\Input::get('do') == 'page' && $this->User->hasAccess('page', 'modules') || \Input::get('do') == 'files' && $this->User->hasAccess('files', 'modules')) && $this->Session->get('filePickerRef'))
 		{
 			$this->Template->managerHref = ampersand($this->Session->get('filePickerRef'));
 			$this->Template->manager = (strpos($this->Session->get('filePickerRef'), 'contao/page.php') !== false) ? $GLOBALS['TL_LANG']['MSC']['pagePickerHome'] : $GLOBALS['TL_LANG']['MSC']['filePickerHome'];

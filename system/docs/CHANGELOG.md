@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Check the user's permission when generating links in the picker (see #8407). 
+
+### Fixed
 Handle forward pages without target in the navigation modules (see #8377).
 
 ### Fixed
