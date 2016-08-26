@@ -164,13 +164,11 @@ class PageSelector extends \Widget
 				// Allow only those roots that are allowed in root nodes
 				if (is_array($this->rootNodes))
 				{
-					$root = array_intersect(
-						array_merge($this->rootNodes, $this->Database->getChildRecords($this->rootNodes, 'tl_page')),
-						$root
-					);
+					$root = array_intersect(array_merge($this->rootNodes, $this->Database->getChildRecords($this->rootNodes, 'tl_page')), $root);
 
-					if (count($root) === 0) {
-						$root = $this->User->hasAccess($this->rootNodes, 'pagemounts') ? $this->rootNodes : [];
+					if (empty($root))
+					{
+						$root = $this->rootNodes;
 
 						// Hide the breadcrumb
 						$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] = '';
