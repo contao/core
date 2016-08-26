@@ -88,7 +88,7 @@ class ModuleQuicklink extends \Module
 
 			if (!empty($tmp) && is_array($tmp))
 			{
-				$arrPages = array_map(function(){}, array_flip($tmp));
+				$arrPages = array_map(function () {}, array_flip($tmp));
 			}
 		}
 

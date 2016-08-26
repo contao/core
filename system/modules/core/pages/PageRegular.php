@@ -585,7 +585,7 @@ class PageRegular extends \Frontend
 				if (!empty($tmp) && is_array($tmp))
 				{
 					// Remove all values
-					$arrOrder = array_map(function(){}, array_flip($tmp));
+					$arrOrder = array_map(function () {}, array_flip($tmp));
 
 					// Move the matching elements to their position in $arrOrder
 					foreach ($arrExternal as $k=>$v)

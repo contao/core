@@ -119,7 +119,7 @@ require_once TL_ROOT . '/vendor/autoload.php';
 /**
  * Override some SwiftMailer defaults
  */
-Swift::init(function()
+Swift::init(function ()
 {
 	$preferences = Swift_Preferences::getInstance();
 
