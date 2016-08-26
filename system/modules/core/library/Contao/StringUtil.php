@@ -494,8 +494,6 @@ class StringUtil
 				{
 					if (!array_key_exists($matches[1], $arrData))
 					{
-						\System::log(sprintf('Tried to parse unknown simple token "%s".', $matches[1]), __METHOD__, TL_ERROR);
-
 						return '##' . $matches[1] . '##';
 					}
 
@@ -518,8 +516,6 @@ class StringUtil
 
 			if (!array_key_exists($strToken, $arrData))
 			{
-				\System::log(sprintf('Tried to evaluate unknown simple token "%s".', $strToken), __METHOD__, TL_ERROR);
-
 				return false;
 			}
 
