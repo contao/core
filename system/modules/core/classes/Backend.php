@@ -757,33 +757,27 @@ abstract class Backend extends \Controller
 		switch ($strPtable)
 		{
 			case 'tl_article':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE id=?)")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT pid FROM tl_article WHERE id=?)'), array($intPid));
 				break;
 
 			case 'tl_news':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_news_archive WHERE id=(SELECT pid FROM tl_news WHERE id=?))")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=(SELECT pid FROM tl_news WHERE id=?))'), array($intPid));
 				break;
 
 			case 'tl_news_archive':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_news_archive WHERE id=?)")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=?)'), array($intPid));
 				break;
 
 			case 'tl_calendar_events':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=(SELECT pid FROM tl_calendar_events WHERE id=?))")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=(SELECT pid FROM tl_calendar_events WHERE id=?))'), array($intPid));
 				break;
 
 			case 'tl_calendar':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=?)")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=?)'), array($intPid));
 				break;
 
 			case 'tl_faq_category':
-				$objPage = $db->prepare("SELECT * FROM tl_page WHERE id=(SELECT jumpTo FROM tl_faq_category WHERE id=?)")
-							  ->execute($intPid);
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_faq_category WHERE id=?)'), array($intPid));
 				break;
 
 			default:
@@ -801,17 +795,20 @@ abstract class Backend extends \Controller
 				break;
 		}
 
-		if ($objPage === null || $objPage->numRows < 1)
+		if ($objPage === null || ($objPage instanceof \Database\Result && $objPage->numRows < 1))
 		{
 			return;
 		}
 
-		$objModel = new \PageModel();
-		$objModel->setRow($objPage->row());
-		$objModel->loadDetails();
+		if (!$objPage instanceof \PageModel)
+		{
+			$objPage = \PageModel::findByPk($objPage->id);
+		}
+
+		$objPage->loadDetails();
 
 		// Convert the language to a locale (see #5678)
-		$strLanguage = str_replace('-', '_', $objModel->rootLanguage);
+		$strLanguage = str_replace('-', '_', $objPage->rootLanguage);
 
 		if (isset($arrMeta[$strLanguage]))
 		{
