@@ -752,32 +752,31 @@ abstract class Backend extends \Controller
 		}
 
 		$objPage = null;
-		$db = \Database::getInstance();
 
 		switch ($strPtable)
 		{
 			case 'tl_article':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT pid FROM tl_article WHERE id=?)'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT pid FROM tl_article WHERE id=?)'), $intPid);
 				break;
 
 			case 'tl_news':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=(SELECT pid FROM tl_news WHERE id=?))'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=(SELECT pid FROM tl_news WHERE id=?))'), $intPid);
 				break;
 
 			case 'tl_news_archive':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=?)'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_news_archive WHERE id=?)'), $intPid);
 				break;
 
 			case 'tl_calendar_events':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=(SELECT pid FROM tl_calendar_events WHERE id=?))'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=(SELECT pid FROM tl_calendar_events WHERE id=?))'), $intPid);
 				break;
 
 			case 'tl_calendar':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=?)'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_calendar WHERE id=?)'), $intPid);
 				break;
 
 			case 'tl_faq_category':
-				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_faq_category WHERE id=?)'), array($intPid));
+				$objPage = \PageModel::findOneBy(array('tl_page.id=(SELECT jumpTo FROM tl_faq_category WHERE id=?)'), $intPid);
 				break;
 
 			default:
@@ -791,18 +790,23 @@ abstract class Backend extends \Controller
 							$objPage = $val;
 						}
 					}
+
+					if ($objPage instanceof \Database\Result && $objPage->numRows < 1)
+					{
+						return;
+					}
+
+					if (is_object($objPage) && !($objPage instanceof \PageModel))
+					{
+						$objPage = \PageModel::findByPk($objPage->id);
+					}
 				}
 				break;
 		}
 
-		if ($objPage === null || ($objPage instanceof \Database\Result && $objPage->numRows < 1))
+		if ($objPage === null)
 		{
 			return;
-		}
-
-		if (!$objPage instanceof \PageModel)
-		{
-			$objPage = \PageModel::findByPk($objPage->id);
 		}
 
 		$objPage->loadDetails();
