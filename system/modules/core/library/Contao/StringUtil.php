@@ -471,66 +471,170 @@ class StringUtil
 
 
 	/**
-	 * Parse simple tokens that can be used to personalize newsletters
+	 * Parse simple tokens
 	 *
 	 * @param string $strString The string to be parsed
 	 * @param array  $arrData   The replacement data
 	 *
 	 * @return string The converted string
 	 *
-	 * @throws \Exception If $strString cannot be parsed
+	 * @throws \Exception                If $strString cannot be parsed
+	 * @throws \InvalidArgumentException If there are incorrectly formatted if-tags
 	 */
 	public static function parseSimpleTokens($strString, $arrData)
 	{
 		$strReturn = '';
 
-		// Remove any unwanted tags (especially PHP tags)
-		$strString = strip_tags($strString, \Config::get('allowedTags'));
-		$arrTags = preg_split('/({[^}]+})/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-
-		// Replace the tags
-		foreach ($arrTags as $strTag)
+		$replaceTokens = function ($strSubject) use ($arrData)
 		{
-			if (strncmp($strTag, '{if', 3) === 0)
+			// Replace tokens
+			return preg_replace_callback(
+				'/##([^=!<>\s]+?)##/',
+				function (array $matches) use ($arrData)
+				{
+					if (!array_key_exists($matches[1], $arrData))
+					{
+						System::log(sprintf('Tried to parse unknown simple token "%s".', $matches[1]), __METHOD__, TL_ERROR);
+
+						return '##' . $matches[1] . '##';
+					}
+
+					return $arrData[$matches[1]];
+				},
+				$strSubject
+			);
+		};
+
+		$evaluateExpression = function ($strExpression) use ($arrData)
+		{
+			if (!preg_match('/^([^=!<>\s]+)([=!<>]+)(.+)$/is', $strExpression, $arrMatches))
 			{
-				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				return false;
 			}
-			elseif (strncmp($strTag, '{elseif', 7) === 0)
+
+			$strToken = $arrMatches[1];
+			$strOperator = $arrMatches[2];
+			$strValue = $arrMatches[3];
+
+			if (!array_key_exists($strToken, $arrData))
 			{
-				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\]\}]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				System::log(sprintf('Tried to evaluate unknown simple token "%s".', $strToken), __METHOD__, TL_ERROR);
+
+				return false;
 			}
-			elseif (strncmp($strTag, '{else', 5) === 0)
+
+			$varTokenValue = $arrData[$strToken];
+
+			if (is_numeric($strValue))
 			{
-				$strReturn .= '<?php else: ?>';
+				if (strpos($strValue, '.') === false)
+				{
+					$varValue = intval($strValue);
+				}
+				else
+				{
+					$varValue = floatval($strValue);
+				}
 			}
-			elseif (strncmp($strTag, '{endif', 6) === 0)
+			elseif (strtolower($strValue) === 'true')
 			{
-				$strReturn .= '<?php endif; ?>';
+				$varValue = true;
+			}
+			elseif (strtolower($strValue) === 'false')
+			{
+				$varValue = false;
+			}
+			elseif (strtolower($strValue) === 'null')
+			{
+				$varValue = null;
+			}
+			elseif (substr($strValue, 0, 1) === '"' && substr($strValue, -1) === '"')
+			{
+				$varValue = str_replace('\"', '"', substr($strValue, 1, -1));
+			}
+			elseif (substr($strValue, 0, 1) === "'" && substr($strValue, -1) === "'")
+			{
+				$varValue = str_replace("\\'", "'", substr($strValue, 1, -1));
 			}
 			else
 			{
-				$strReturn .= $strTag;
+				throw new \InvalidArgumentException(sprintf('Unknown data type of comparison value "%s".', $strValue));
+			}
+
+			switch ($strOperator)
+			{
+				case '==':
+					return $varTokenValue == $varValue;
+
+				case '!=':
+					return $varTokenValue != $varValue;
+
+				case '===':
+					return $varTokenValue === $varValue;
+
+				case '!==':
+					return $varTokenValue !== $varValue;
+
+				case '<':
+					return $varTokenValue < $varValue;
+
+				case '>':
+					return $varTokenValue > $varValue;
+
+				case '<=':
+					return $varTokenValue <= $varValue;
+
+				case '>=':
+					return $varTokenValue >= $varValue;
+
+				default:
+					throw new \InvalidArgumentException(sprintf('Unknown simple token comparison operator "%s".', $strOperator));
+			}
+		};
+
+		// Parsing stack used to keep track of the nesting level
+        // The last item is true if it is inside a matching if-tag
+		$arrStack = [true];
+
+		// Tokenize the string into tag and text blocks
+		$arrTags = preg_split('/({[^{}]+})\n?/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+
+		// Parse the tokens
+		foreach ($arrTags as $strTag)
+		{
+			// true if it is inside a matching if-tag
+			$blnCurrent = $arrStack[count($arrStack) - 1];
+
+			if (strncmp($strTag, '{if', 3) === 0)
+			{
+				$arrStack[] = $blnCurrent && $evaluateExpression(substr($strTag, 4, -1));
+			}
+			elseif (strncmp($strTag, '{elseif', 7) === 0)
+			{
+				array_pop($arrStack);
+				$arrStack[] = !$blnCurrent && $arrStack[count($arrStack) - 1] && $evaluateExpression(substr($strTag, 8, -1));
+			}
+			elseif (strncmp($strTag, '{else}', 6) === 0)
+			{
+				array_pop($arrStack);
+				$arrStack[] = !$blnCurrent && $arrStack[count($arrStack) - 1];
+			}
+			elseif (strncmp($strTag, '{endif}', 7) === 0)
+			{
+				array_pop($arrStack);
+			}
+			elseif ($blnCurrent)
+			{
+				$strReturn .= $replaceTokens($strTag);
 			}
 		}
 
-		// Replace tokens
-		$strReturn = str_replace('?><br />', '?>', $strReturn);
-		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
-		$strReturn = str_replace("]; ?>\n", '] . "\n"; ?>' . "\n", $strReturn); // see #7178
-
-		// Eval the code
-		ob_start();
-		$blnEval = eval("?>" . $strReturn);
-		$strReturn = ob_get_contents();
-		ob_end_clean();
-
-		// Throw an exception if there is an eval() error
-		if ($blnEval === false)
+		// Throw an exception if there is an error
+		if (count($arrStack) !== 1)
 		{
-			throw new \Exception("Error parsing simple tokens ($strReturn)");
+			throw new \Exception('Error parsing simple tokens');
 		}
 
-		// Return the evaled code
 		return $strReturn;
 	}
 

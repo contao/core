@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Support all characters but =!<> and whitespace in simple tokens (see #8436).
+
+### Fixed
 Check the user's permission when generating links in the picker (see #8407). 
 
 ### Fixed
