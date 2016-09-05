@@ -502,10 +502,17 @@ abstract class Frontend extends \Controller
 	 */
 	protected function getLoginStatus($strCookie)
 	{
+		$cookie = \Input::cookie($strCookie);
+
+		if ($cookie === null)
+		{
+			return false;
+		}
+
 		$hash = sha1(session_id() . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . $strCookie);
 
 		// Validate the cookie hash
-		if (\Input::cookie($strCookie) == $hash)
+		if ($cookie == $hash)
 		{
 			// Try to find the session
 			$objSession = \SessionModel::findByHashAndName($hash, $strCookie);

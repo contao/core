@@ -156,6 +156,12 @@ abstract class Events extends \Module
 						$intStartTime = strtotime($strtotime, $intStartTime);
 						$intEndTime = strtotime($strtotime, $intEndTime);
 
+						// Stop if the upper boundary is reached (see #8445)
+						if ($intStartTime === false || $intEndTime === false)
+						{
+							break;
+						}
+
 						// Skip events outside the scope
 						if ($intEndTime < $intStart || $intStartTime > $intEnd)
 						{
@@ -203,7 +209,6 @@ abstract class Events extends \Module
 	{
 		/** @var \PageModel $objPage */
 		global $objPage;
-
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);

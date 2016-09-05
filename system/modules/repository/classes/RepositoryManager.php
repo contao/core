@@ -375,7 +375,7 @@ class RepositoryManager extends RepositoryBackendModule
 		foreach ($exts as $ext) {
 			if ((int)$ext->updprot==0) {
 				$label =
-					($ext->version != $ext->upd_version || $ext->upd_build != $ext->upd_build)
+					($ext->version != $ext->upd_version || $ext->build != $ext->upd_build)
 					? $text['updatingext']
 					: $text['validatingext'];
 				$rep->log .=

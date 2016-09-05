@@ -63,7 +63,7 @@ class ModuleFaq extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objFaq->jumpTo]))
 				{
-					$objParent = \PageModel::findByPk($objFaq->jumpTo);
+					$objParent = \PageModel::findWithDetails($objFaq->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -77,10 +77,19 @@ class ModuleFaq extends \Frontend
 						continue;
 					}
 
-					// The target page is exempt from the sitemap (see #6418)
-					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
+					if ($blnIsSitemap)
 					{
-						continue;
+						// The target page is protected (see #8416)
+						if ($objParent->protected)
+						{
+							continue;
+						}
+
+						// The target page is exempt from the sitemap (see #6418)
+						if ($objParent->sitemap == 'map_never')
+						{
+							continue;
+						}
 					}
 
 					// Generate the URL

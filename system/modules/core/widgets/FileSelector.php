@@ -77,7 +77,24 @@ class FileSelector extends \Widget
 		// Root nodes (breadcrumb menu)
 		if (!empty($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']))
 		{
-			$nodes = $this->eliminateNestedPaths($GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root']);
+			$root = $GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'];
+
+			// Allow only those roots that are within the custom path
+			if ($this->path != '')
+			{
+				$root = array_intersect(preg_grep('/^' . preg_quote($this->path, '/') . '(?:$|\/)/', $root), $root);
+
+				if (empty($root))
+				{
+					// Set all folders inside the custom path as root nodes
+					$root = array_map(function ($el) { return $this->path . '/' . $el; }, scan(TL_ROOT . '/' . $this->path));
+
+					// Hide the breadcrumb
+					$GLOBALS['TL_DCA']['tl_file']['list']['sorting']['breadcrumb'] = '';
+				}
+			}
+
+			$nodes = $this->eliminateNestedPaths($root);
 
 			foreach ($nodes as $node)
 			{

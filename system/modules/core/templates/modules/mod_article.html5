@@ -14,7 +14,7 @@
       <?php endif; ?>
 
       <?php if ($this->facebookButton): ?>
-        <a href="share/?p=facebook&amp;u=<?= $this->encUrl ?>&amp;t=<?= $this->encTitle ?>" rel="nofollow" title="<?= $this->facebookTitle ?>" onclick="window.open(this.href,'','width=640,height=380,modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');return false"><?= Image::getHtml('assets/contao/images/facebook.gif') ?></a>
+        <a href="share/?p=facebook&amp;u=<?= $this->encUrl ?>" rel="nofollow" title="<?= $this->facebookTitle ?>" onclick="window.open(this.href,'','width=640,height=380,modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');return false"><?= Image::getHtml('assets/contao/images/facebook.gif') ?></a>
       <?php endif; ?>
 
       <?php if ($this->twitterButton): ?>
@@ -22,7 +22,7 @@
       <?php endif; ?>
 
       <?php if ($this->gplusButton): ?>
-        <a href="share/?p=gplus&amp;u=<?= $this->encUrl ?>&amp;t=<?= $this->encTitle ?>" rel="nofollow" title="<?= $this->gplusTitle ?>" onclick="window.open(this.href,'','width=600,height=200,modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');return false"><?= Image::getHtml('assets/contao/images/gplus.gif') ?></a>
+        <a href="share/?p=gplus&amp;u=<?= $this->encUrl ?>" rel="nofollow" title="<?= $this->gplusTitle ?>" onclick="window.open(this.href,'','width=600,height=200,modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');return false"><?= Image::getHtml('assets/contao/images/gplus.gif') ?></a>
       <?php endif; ?>
 
     </div>

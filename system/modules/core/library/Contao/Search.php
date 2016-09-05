@@ -181,15 +181,9 @@ class Search
 								->limit(1)
 								->execute($arrSet['checksum'], $arrSet['pid']);
 
-		// Add the page to the tl_search table
-		if ($objIndex->numRows)
+		// Update the URL if the new URL is shorter or the current URL is not canonical
+		if ($objIndex->numRows && $objIndex->url != $arrSet['url'])
 		{
-			if ($objIndex->url == $arrSet['url'])
-			{
-				return false; // up to date
-			}
-
-			// Update the URL if the new URL is shorter or the current URL is not canonical
 			if (strpos($arrSet['url'], '?') === false && strpos($objIndex->url, '?') !== false)
 			{
 				// ignore
@@ -198,7 +192,15 @@ class Search
 			{
 				$arrSet['url'] = $objIndex->url;
 			}
+		}
 
+		$objIndex = $objDatabase->prepare("SELECT id FROM tl_search WHERE url=? AND pid=?")
+								->limit(1)
+								->execute($arrSet['url'], $arrSet['pid']);
+
+		// Add the page to the tl_search table
+		if ($objIndex->numRows)
+		{
 			$objDatabase->prepare("UPDATE tl_search %s WHERE id=?")
 						->set($arrSet)
 						->execute($objIndex->id);

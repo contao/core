@@ -165,7 +165,14 @@ class ModuleEventlist extends \Events
 			{
 				foreach ($events as $event)
 				{
-					if ($event['endTime'] < $intStart || $event['startTime'] > $intEnd)
+					// Use repeatEnd if > 0 (see #8447)
+					if (($event['repeatEnd'] ?: $event['endTime']) < $intStart || $event['startTime'] > $intEnd)
+					{
+						continue;
+					}
+
+					// Skip occurrences in the past
+					if (strtotime($event['datetime']) < $intStart)
 					{
 						continue;
 					}

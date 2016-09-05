@@ -117,7 +117,7 @@ class ModuleBreadcrumb extends \Module
 					break;
 
 				case 'forward':
-					if (($objNext = $pages[$i]->getRelated('jumpTo')) !== null)
+					if (($objNext = $pages[$i]->getRelated('jumpTo')) !== null || ($objNext = \PageModel::findFirstPublishedRegularByPid($pages[$i]->id)) !== null)
 					{
 						/** @var \PageModel $objNext */
 						$href = $objNext->getFrontendUrl();

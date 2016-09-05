@@ -928,7 +928,7 @@ class Newsletter extends \Backend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objNewsletter->jumpTo]))
 				{
-					$objParent = \PageModel::findByPk($objNewsletter->jumpTo);
+					$objParent = \PageModel::findWithDetails($objNewsletter->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -942,10 +942,19 @@ class Newsletter extends \Backend
 						continue;
 					}
 
-					// The target page is exempt from the sitemap (see #6418)
-					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
+					if ($blnIsSitemap)
 					{
-						continue;
+						// The target page is protected (see #8416)
+						if ($objParent->protected)
+						{
+							continue;
+						}
+
+						// The target page is exempt from the sitemap (see #6418)
+						if ($objParent->sitemap == 'map_never')
+						{
+							continue;
+						}
 					}
 
 					// Generate the URL

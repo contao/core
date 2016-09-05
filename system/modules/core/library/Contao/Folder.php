@@ -146,6 +146,18 @@ class Folder extends \System
 				return $this->getSize();
 				break;
 
+			case 'ctime':
+				return filectime(TL_ROOT . '/' . $this->strFolder);
+				break;
+
+			case 'mtime':
+				return filemtime(TL_ROOT . '/' . $this->strFolder);
+				break;
+
+			case 'atime':
+				return fileatime(TL_ROOT . '/' . $this->strFolder);
+				break;
+
 			default:
 				return parent::__get($strKey);
 				break;
