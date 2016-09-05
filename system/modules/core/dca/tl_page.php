@@ -1056,8 +1056,8 @@ class tl_page extends Backend
 			return;
 		}
 
-		// Existing or not a regular page
-		if ($dc->activeRecord->tstamp > 0 || !in_array($dc->activeRecord->type, array('regular', 'error_403', 'error_404')))
+		// No title or not a regular page
+		if ($dc->activeRecord->title == '' || !in_array($dc->activeRecord->type, array('regular', 'error_403', 'error_404')))
 		{
 			return;
 		}

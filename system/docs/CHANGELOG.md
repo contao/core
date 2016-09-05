@@ -1,6 +1,55 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.16 (2016-09-05)
+---------------------------
+
+### Fixed
+Check if a reader page is protected when generating a sitemap (see #8416).
+
+### Fixed
+Support all characters but =!<> and whitespace in simple tokens (see #8436).
+
+### Fixed
+Check the user's permission when generating links in the picker (see #8407). 
+
+### Fixed
+Handle forward pages without target in the navigation modules (see #8377).
+
+### Fixed
+Stop the event recurrence if the upper boundary is reached (see #8445).
+
+### Fixed
+Show upcoming events if the first occurrence is in the past (see #8447).
+
+### Updated
+Update MooTools to version 1.5.2.
+
+### Fixed
+Provide the same template variables for downloads and enclosures (see #8392).
+
+### Fixed
+Handle %n when parsing date formats (see #8411).
+
+### Fixed
+Fix the module wizard's accessibility (see #8391).
+
+### Fixed
+Correctly initialize TinyMCE in sub-palettes in Firefox (see #3673).
+
+### Fixed
+Validate form field names more accurately (see #8403).
+
+### Fixed
+Correctly show the ctime, mtime and atime of a folder (see #8408).
+
+### Fixed
+Correctly index changed pages (see #8439).
+
+### Fixed
+Always store the UUID of an uploaded file (see #8421).
+
+
 Version 3.5.15 (2016-07-15)
 ---------------------------
 

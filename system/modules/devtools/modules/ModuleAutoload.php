@@ -171,7 +171,7 @@ class ModuleAutoload extends \BackendModule
 				$fh = fopen(TL_ROOT . '/system/modules/' . $strModule . '/' . $strFile, 'rb');
 
 				// Read until a class or interface definition has been found
-				while (!preg_match('/(class|interface) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && $size > 0 && !feof($fh))
+				while (!preg_match('/(class|interface|trait) ' . preg_quote(basename($strFile, '.php'), '/') . '/', $strBuffer, $arrMatches) && $size > 0 && !feof($fh))
 				{
 					$length = min(512, $size);
 					$strBuffer .= fread($fh, $length);

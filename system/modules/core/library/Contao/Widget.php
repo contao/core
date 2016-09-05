@@ -1120,6 +1120,14 @@ abstract class Widget extends \BaseTemplate
 					}
 					break;
 
+				// Check whether the current value is a field name
+				case 'fieldname':
+					if (!\Validator::isFieldName($varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFieldName'], $this->strLabel));
+					}
+					break;
+
 				// HOOK: pass unknown tags to callback functions
 				default:
 					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))

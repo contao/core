@@ -116,11 +116,11 @@ class InsertTags extends \Controller
 					}
 					elseif ($objPage->outputFormat == 'xhtml')
 					{
-						$arrCache[$strTag] = '<span lang="' . $elements[1] . '" xml:lang="' . $elements[1] . '">';
+						$arrCache[$strTag] = '<span lang="' . specialchars($elements[1]) . '" xml:lang="' . specialchars($elements[1]) . '">';
 					}
 					else
 					{
-						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . $elements[1] . '">';
+						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . specialchars($elements[1]) . '">';
 					}
 					break;
 
@@ -886,7 +886,7 @@ class InsertTags extends \Controller
 					{
 						if ($elements[1] != '')
 						{
-							$arrCache[$strTag] = '<acronym title="'. $elements[1] .'">';
+							$arrCache[$strTag] = '<acronym title="'. specialchars($elements[1]) .'">';
 						}
 						else
 						{
@@ -900,7 +900,7 @@ class InsertTags extends \Controller
 				case 'abbr':
 					if ($elements[1] != '')
 					{
-						$arrCache[$strTag] = '<abbr title="'. $elements[1] .'">';
+						$arrCache[$strTag] = '<abbr title="'. specialchars($elements[1]) .'">';
 					}
 					else
 					{
@@ -944,7 +944,7 @@ class InsertTags extends \Controller
 									break;
 
 								case 'alt':
-									$alt = specialchars($value);
+									$alt = $value;
 									break;
 
 								case 'class':
@@ -1028,10 +1028,10 @@ class InsertTags extends \Controller
 							// Add the image dimensions
 							if (($imgSize = $objFile->imageSize) !== false)
 							{
-								$dimensions = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+								$dimensions = ' width="' . specialchars($imgSize[0]) . '" height="' . specialchars($imgSize[1]) . '"';
 							}
 
-							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . specialchars($alt) . '"' . (($class != '') ? ' class="' . specialchars($class) . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 
 						// Picture
@@ -1050,14 +1050,14 @@ class InsertTags extends \Controller
 						{
 							if (strncmp($rel, 'lightbox', 8) !== 0 || $objPage->outputFormat == 'xhtml')
 							{
-								$attribute = ' rel="' . $rel . '"';
+								$attribute = ' rel="' . specialchars($rel) . '"';
 							}
 							else
 							{
-								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
+								$attribute = ' data-lightbox="' . specialchars(substr($rel, 8)) . '"';
 							}
 
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '>' . $arrCache[$strTag] . '</a>';
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . specialchars($alt) . '"' : '') . $attribute . '>' . $arrCache[$strTag] . '</a>';
 						}
 					}
 					catch (\Exception $e)
@@ -1151,7 +1151,6 @@ class InsertTags extends \Controller
 					switch ($flag)
 					{
 						case 'addslashes':
-						case 'stripslashes':
 						case 'standardize':
 						case 'ampersand':
 						case 'specialchars':
@@ -1168,14 +1167,12 @@ class InsertTags extends \Controller
 						case 'rtrim':
 						case 'ltrim':
 						case 'utf8_romanize':
-						case 'strrev':
 						case 'urlencode':
 						case 'rawurlencode':
 							$arrCache[$strTag] = $flag($arrCache[$strTag]);
 							break;
 
 						case 'encodeEmail':
-						case 'decodeEntities':
 							$arrCache[$strTag] = \StringUtil::$flag($arrCache[$strTag]);
 							break;
 

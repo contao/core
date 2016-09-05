@@ -9,17 +9,6 @@
 var Theme = {
 
 	/**
-	 * Autofocus the first text field or textarea
-	 *
-	 * @param {string} id The ID of the parent element
-	 */
-	focusInput: function(id) {
-		if (id == '') return;
-		var el = $$('#' + id + ' input[class^="tl_text"],#' + id + ' textarea');
-		if (el && el.length > 0) el[0].focus();
-	},
-
-	/**
 	 * Colorize a table row when hovering over it
 	 *
 	 * @param {object} el    The DOM element

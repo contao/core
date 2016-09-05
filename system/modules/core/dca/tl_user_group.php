@@ -266,13 +266,16 @@ class tl_user_group extends Backend
 	public function addIcon($row, $label)
 	{
 		$image = 'group';
+		$time = \Date::floorToMinute();
 
-		if ($row['disable'] || strlen($row['start']) && $row['start'] > time() || strlen($row['stop']) && $row['stop'] < time())
+		$disabled = $row['start'] !== '' && $row['start'] > $time || $row['stop'] !== '' && $row['stop'] < $time;
+
+		if ($row['disable'] || $disabled)
 		{
 			$image .= '_';
 		}
 
-		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')" data-icon="%s.gif" data-icon-disabled="%s.gif">%s</div>', TL_ASSETS_URL, Backend::getTheme(), $image, rtrim($image, '_'), rtrim($image, '_') . '_', $label);
+		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')" data-icon="%s.gif" data-icon-disabled="%s.gif">%s</div>', TL_ASSETS_URL, Backend::getTheme(), $image, $disabled ? $image : rtrim($image, '_'), rtrim($image, '_') . '_', $label);
 	}
 
 

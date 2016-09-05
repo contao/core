@@ -976,7 +976,17 @@ ul.sgallery li {
 .tl_modulewizard .tl_select {
 	width:400px;
 }
-.tl_modulewizard img.mw_enable,.js .tl_modulewizard input.mw_enable {
+.js .tl_modulewizard input.mw_enable {
+	border:0;
+	clip:rect(0 0 0 0);
+	height:1px;
+	margin:-1px;
+	overflow:hidden;
+	padding:0;
+	position:absolute;
+	width:1px;
+}
+.tl_modulewizard img.mw_enable {
 	display:none;
 }
 .js .tl_modulewizard img.mw_enable {

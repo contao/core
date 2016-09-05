@@ -496,13 +496,16 @@ class tl_member extends Backend
 	public function addIcon($row, $label, DataContainer $dc, $args)
 	{
 		$image = 'member';
+		$time = \Date::floorToMinute();
 
-		if ($row['disable'] || strlen($row['start']) && $row['start'] > time() || strlen($row['stop']) && $row['stop'] < time())
+		$disabled = $row['start'] !== '' && $row['start'] > $time || $row['stop'] !== '' && $row['stop'] < $time;
+
+		if ($row['disable'] || $disabled)
 		{
 			$image .= '_';
 		}
 
-		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')" data-icon="%s.gif" data-icon-disabled="%s.gif">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image, rtrim($image, '_'), rtrim($image, '_') . '_');
+		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')" data-icon="%s.gif" data-icon-disabled="%s.gif">&nbsp;</div>', TL_ASSETS_URL, Backend::getTheme(), $image, $disabled ? $image : rtrim($image, '_'), rtrim($image, '_') . '_');
 
 		return $args;
 	}

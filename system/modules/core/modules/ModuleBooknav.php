@@ -133,11 +133,18 @@ class ModuleBooknav extends \Module
 				$intKey = $arrLookup[($current - 1)];
 			}
 
-			$this->Template->hasPrev = true;
-			$this->Template->prevHref = $this->arrPages[$intKey]->getFrontendUrl();
-			$this->Template->prevTitle = specialchars($this->arrPages[$intKey]->title, true);
-			$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
-			$this->Template->prevLink = $this->arrPages[$intKey]->title;
+			if ($intKey === null)
+			{
+				$this->Template->hasPrev = false;
+			}
+			else
+			{
+				$this->Template->hasPrev = true;
+				$this->Template->prevHref = $this->arrPages[$intKey]->getFrontendUrl();
+				$this->Template->prevTitle = specialchars($this->arrPages[$intKey]->title, true);
+				$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
+				$this->Template->prevLink = $this->arrPages[$intKey]->title;
+			}
 		}
 
 		// Next page
@@ -152,11 +159,18 @@ class ModuleBooknav extends \Module
 				$intKey = $arrLookup[($current + 1)];
 			}
 
-			$this->Template->hasNext = true;
-			$this->Template->nextHref = $this->arrPages[$intKey]->getFrontendUrl();
-			$this->Template->nextTitle = specialchars($this->arrPages[$intKey]->title, true);
-			$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
-			$this->Template->nextLink = $this->arrPages[$intKey]->title;
+			if ($intKey === null)
+			{
+				$this->Template->hasNext = false;
+			}
+			else
+			{
+				$this->Template->hasNext = true;
+				$this->Template->nextHref = $this->arrPages[$intKey]->getFrontendUrl();
+				$this->Template->nextTitle = specialchars($this->arrPages[$intKey]->title, true);
+				$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]->pageTitle, true);
+				$this->Template->nextLink = $this->arrPages[$intKey]->title;
+			}
 		}
 	}
 

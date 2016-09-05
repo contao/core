@@ -322,7 +322,7 @@ class Calendar extends \Frontend
 				// Get the URL of the jumpTo page
 				if (!isset($arrProcessed[$objCalendar->jumpTo]))
 				{
-					$objParent = \PageModel::findByPk($objCalendar->jumpTo);
+					$objParent = \PageModel::findWithDetails($objCalendar->jumpTo);
 
 					// The target page does not exist
 					if ($objParent === null)
@@ -336,10 +336,19 @@ class Calendar extends \Frontend
 						continue;
 					}
 
-					// The target page is exempt from the sitemap (see #6418)
-					if ($blnIsSitemap && $objParent->sitemap == 'map_never')
+					if ($blnIsSitemap)
 					{
-						continue;
+						// The target page is protected (see #8416)
+						if ($objParent->protected)
+						{
+							continue;
+						}
+
+						// The target page is exempt from the sitemap (see #6418)
+						if ($objParent->sitemap == 'map_never')
+						{
+							continue;
+						}
 					}
 
 					// Generate the URL
