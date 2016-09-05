@@ -602,14 +602,9 @@ class tl_form_field extends Backend
 			return $strType . "\n" . $objWidget->value . "\n</div>\n";
 		}
 
-		if ($objWidget instanceof FormHeadline || $objWidget instanceof FormExplanation)
-		{
-			$strWidget = StringUtil::insertTagToSrc($strWidget);
-		}
-
 		return $strType . '
 <table class="tl_form_field_preview">
-'.$strWidget.'</table>
+'.StringUtil::insertTagToSrc($strWidget).'</table>
 </div>' . "\n";
 	}
 
