@@ -5,6 +5,9 @@ Version 3.5.16 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Check if a reader page is protected when generating a sitemap (see #8416).
+
+### Fixed
 Support all characters but =!<> and whitespace in simple tokens (see #8436).
 
 ### Fixed
