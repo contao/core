@@ -28,7 +28,6 @@ class PageRegular extends \Frontend
 	public function generate($objPage, $blnCheckRequest=false)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
-		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		// Static URLs
 		$this->setStaticUrls();
@@ -45,7 +44,8 @@ class PageRegular extends \Frontend
 				$this->{$callback[0]}->{$callback[1]}($objPage, $objLayout, $this);
 			}
 		}
-
+		
+		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 		\System::loadLanguageFile('default');
 
 		/** @var \ThemeModel $objTheme */
