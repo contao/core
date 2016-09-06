@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.17 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Only regenerate the session ID upon login.
+
+
 Version 3.5.16 (2016-09-05)
 ---------------------------
 

@@ -432,7 +432,9 @@ abstract class User extends \System
 		$this->save();
 
 		// Generate the session
+		session_regenerate_id();
 		$this->generateSession();
+
 		$this->log('User "' . $this->username . '" has logged in', __METHOD__, TL_ACCESS);
 
 		// HOOK: post login callback
@@ -552,9 +554,6 @@ abstract class User extends \System
 	protected function generateSession()
 	{
 		$time = time();
-
-		// Regenerate the session id to harden against session fixation attacks
-		session_regenerate_id();
 
 		// Generate the cookie hash
 		$this->strHash = sha1(session_id() . (!\Config::get('disableIpCheck') ? $this->strIp : '') . $this->strCookie);
