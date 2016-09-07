@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Also check the URL length when determining the search URL (see #8460).
+
+### Fixed
 Only regenerate the session ID upon login.
 
 
