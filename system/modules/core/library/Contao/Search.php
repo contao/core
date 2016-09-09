@@ -186,11 +186,15 @@ class Search
 		{
 			if (strpos($arrSet['url'], '?') === false && strpos($objIndex->url, '?') !== false)
 			{
-				// ignore
+				// the new URL is more canonical (no query string)
 			}
 			elseif (substr_count($arrSet['url'], '/') > substr_count($objIndex->url, '/') || strpos($arrSet['url'], '?') !== false && strpos($objIndex->url, '?') === false || strlen($arrSet['url']) > strlen($objIndex->url))
 			{
-				$arrSet['url'] = $objIndex->url;
+				$arrSet['url'] = $objIndex->url; // the current URL is more canonical (shorter and/or less fragments)
+			}
+			else
+			{
+				return false; // the same page has been indexed under a different URL already (see #8460)
 			}
 		}
 
