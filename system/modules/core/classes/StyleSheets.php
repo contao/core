@@ -1326,7 +1326,7 @@ class StyleSheets extends \Backend
 			}
 
 			// Redirect
-			\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+			\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 			$this->redirect(str_replace('&key=import', '', \Environment::get('request')));
 		}
 

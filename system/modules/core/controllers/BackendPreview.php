@@ -83,7 +83,7 @@ class BackendPreview extends \Backend
 							   ->execute($objUser->id, time(), 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 				// Set the cookie
-				$this->setCookie('FE_USER_AUTH', $strHash, (time() + \Config::get('sessionTimeout')), null, null, false, true);
+				$this->setCookie('FE_USER_AUTH', $strHash, (time() + \Config::get('sessionTimeout')), null, null, (\Environment::get('ssl')) ? true : false, true);
 				$objTemplate->user = \Input::post('user');
 			}
 		}

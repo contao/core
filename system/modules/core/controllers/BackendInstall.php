@@ -821,7 +821,7 @@ class BackendInstall extends \Backend
 	{
 		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
 		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!\Config::get('disableIpCheck') ? \Environment::get('ip') : '') . session_id());
-		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], null, null, false, true);
+		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], null, null, (\Environment::get('ssl')) ? true : false, true);
 	}
 
 

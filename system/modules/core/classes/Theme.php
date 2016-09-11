@@ -685,7 +685,7 @@ class Theme extends \Backend
 			unset($tl_files, $tl_theme, $tl_style_sheet, $tl_style, $tl_module, $tl_layout, $tl_image_size, $tl_image_size_item);
 		}
 
-		\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+		\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 		$this->Session->remove('uploaded_themes');
 
 		// Redirect
