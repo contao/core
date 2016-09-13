@@ -406,7 +406,14 @@ class PageRegular extends \Frontend
 		{
 			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$this->Template->mooScripts .= \Template::generateScriptTag('https://ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
+				if (version_compare($GLOBALS['TL_ASSETS']['MOOTOOLS'], '1.5.1', '>'))
+				{
+					$this->Template->mooScripts .= \Template::generateScriptTag('https://ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools.min.js', $blnXhtml) . "\n";
+				}
+				else
+				{
+					$this->Template->mooScripts .= \Template::generateScriptTag('https://ajax.googleapis.com/ajax/libs/mootools/' . $GLOBALS['TL_ASSETS']['MOOTOOLS'] . '/mootools-yui-compressed.js', $blnXhtml) . "\n";
+				}
 
 				// Local fallback (thanks to DyaGa)
 				if ($objLayout->mooSource == 'moo_fallback')
