@@ -218,9 +218,6 @@
       <trans-unit id="CNT.et">
         <source>Ethiopia</source>
       </trans-unit>
-      <trans-unit id="CNT.eu">
-        <source>European Union</source>
-      </trans-unit>
       <trans-unit id="CNT.fi">
         <source>Finland</source>
       </trans-unit>
@@ -577,9 +574,6 @@
       </trans-unit>
       <trans-unit id="CNT.qa">
         <source>Qatar</source>
-      </trans-unit>
-      <trans-unit id="CNT.qo">
-        <source>Outlying Oceania</source>
       </trans-unit>
       <trans-unit id="CNT.re">
         <source>Réunion</source>

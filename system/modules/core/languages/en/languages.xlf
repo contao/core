@@ -71,6 +71,9 @@
       <trans-unit id="LNG.bg_BG">
         <source>Bulgarian (Bulgaria)</source>
       </trans-unit>
+      <trans-unit id="LNG.bh">
+        <source>Bahrain</source>
+      </trans-unit>
       <trans-unit id="LNG.bi">
         <source>Bislama</source>
       </trans-unit>
@@ -704,9 +707,6 @@
       <trans-unit id="LNG.sg">
         <source>Sango</source>
       </trans-unit>
-      <trans-unit id="LNG.sh">
-        <source>Serbo-Croatian</source>
-      </trans-unit>
       <trans-unit id="LNG.si">
         <source>Sinhala</source>
       </trans-unit>
@@ -809,12 +809,6 @@
       <trans-unit id="LNG.tk">
         <source>Turkmen</source>
       </trans-unit>
-      <trans-unit id="LNG.tl">
-        <source>Tagalog</source>
-      </trans-unit>
-      <trans-unit id="LNG.tl_PH">
-        <source>Tagalog (Philippines)</source>
-      </trans-unit>
       <trans-unit id="LNG.tn">
         <source>Tswana</source>
       </trans-unit>
@@ -832,9 +826,6 @@
       </trans-unit>
       <trans-unit id="LNG.tt">
         <source>Tatar</source>
-      </trans-unit>
-      <trans-unit id="LNG.tw">
-        <source>Twi</source>
       </trans-unit>
       <trans-unit id="LNG.ug">
         <source>Uyghur</source>
