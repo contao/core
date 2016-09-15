@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Upate the list of countries and languages (see #8453).
+
+### Fixed
 Correctly set up the MooTools CDN URL (see #8458).
 
 ### Fixed
