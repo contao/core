@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly render the diff view if not the latest version is active (see #8481).
+
+### Fixed
 Upate the list of countries and languages (see #8453).
 
 ### Fixed
