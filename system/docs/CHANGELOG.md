@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not assume NULL by default for binary fields (see #8477).
+
+### Fixed
 Correctly render the diff view if not the latest version is active (see #8481).
 
 ### Fixed

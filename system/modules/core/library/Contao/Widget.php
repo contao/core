@@ -1526,10 +1526,6 @@ abstract class Widget extends \BaseTemplate
 		{
 			return null;
 		}
-		elseif (in_array($type, array('binary', 'varbinary', 'tinyblob', 'blob', 'mediumblob', 'longblob')))
-		{
-			return null;
-		}
 		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
 		{
 			return 0;
