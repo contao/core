@@ -582,7 +582,7 @@
         <source>Nauru</source>
       </trans-unit>
       <trans-unit id="LNG.nb">
-        <source>Norwegian Bokmal</source>
+        <source>Norwegian Bokmål</source>
       </trans-unit>
       <trans-unit id="LNG.nd">
         <source>North Ndebele</source>
@@ -607,12 +607,6 @@
       </trans-unit>
       <trans-unit id="LNG.nn">
         <source>Norwegian Nynorsk</source>
-      </trans-unit>
-      <trans-unit id="LNG.no">
-        <source>Norwegian</source>
-      </trans-unit>
-      <trans-unit id="LNG.no_NO">
-        <source>Norwegian (Norway)</source>
       </trans-unit>
       <trans-unit id="LNG.nr">
         <source>South Ndebele</source>
