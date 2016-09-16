@@ -2446,7 +2446,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			$currentEncoded = $this->urlEncode($currentFile);
 			$return .= "\n  " . '<li class="tl_file click2edit toggle_select" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
-
 			$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize);
 
 			if ($objFile->width && $objFile->height)
