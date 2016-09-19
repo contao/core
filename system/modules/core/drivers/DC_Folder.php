@@ -14,6 +14,11 @@ namespace Contao;
 /**
  * Provide methods to modify the file system.
  *
+ * @property string  $path
+ * @property string  $extension
+ * @property boolean $createNewVersion
+ * @property boolean $isDbAssisted
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  */
 class DC_Folder extends \DataContainer implements \listable, \editable

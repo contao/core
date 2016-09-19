@@ -14,6 +14,12 @@ namespace Contao;
 /**
  * Provide methods to modify the database.
  *
+ * @property integer $id
+ * @property string  $parentTable
+ * @property array   $childTable
+ * @property array   $rootIds
+ * @property boolean $createNewVersion
+ *
  * @author Leo Feyer <https://github.com/leofeyer>
  * @author Andreas Schempp <https://github.com/aschempp>
  */
@@ -91,12 +97,6 @@ class DC_Table extends \DataContainer implements \listable, \editable
 	 * @var boolean
 	 */
 	protected $blnCreateNewVersion = false;
-
-	/**
-	 * True if one of the form fields is uploadable
-	 * @var boolean
-	 */
-	protected $blnUploadable = false;
 
 	/**
 	 * The current back end module
