@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle broken SVG files in the Image and File class (see #8470).
+
+### Fixed
 Reduce the maximum field length by the file extension length (see #8472).
 
 ### Fixed
