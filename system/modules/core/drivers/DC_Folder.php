@@ -734,7 +734,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 
 		// Add a log entry
-		$this->log('File or folder "'.$source.'" has been duplicated', __METHOD__, TL_FILES);
+		$this->log('File or folder "'.$source.'" has been copied to "'.$destination.'"', __METHOD__, TL_FILES);
 
 		// Redirect
 		if (!$blnDoNotRedirect)

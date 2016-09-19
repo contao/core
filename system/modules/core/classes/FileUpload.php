@@ -170,11 +170,13 @@ class FileUpload extends \Backend
 					if ($this->Files->move_uploaded_file($file['tmp_name'], $strNewFile))
 					{
 						$this->Files->chmod($strNewFile, \Config::get('defaultFileChmod'));
-						$this->resizeUploadedImage($strNewFile);
 
 						// Notify the user
 						\Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
-						$this->log('File "'.$file['name'].'" was uploaded to "'.$strTarget.'"', __METHOD__, TL_FILES);
+						$this->log('File "' . $strNewFile . '" has been uploaded', __METHOD__, TL_FILES);
+
+						// Resize the uploaded image if necessary
+						$this->resizeUploadedImage($strNewFile);
 
 						$arrUploaded[] = $strNewFile;
 					}
@@ -307,7 +309,7 @@ class FileUpload extends \Backend
 		if ($objFile->isGdImage && ($arrImageSize[0] > \Config::get('gdMaxImgWidth') || $arrImageSize[1] > \Config::get('gdMaxImgHeight')))
 		{
 			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $objFile->basename));
-			$this->log('File "' . $objFile->basename . '" is too big to be resized automatically', __METHOD__, TL_FILES);
+			$this->log('File "' . $strImage . '" is too big to be resized automatically', __METHOD__, TL_FILES);
 
 			return false;
 		}
@@ -337,7 +339,7 @@ class FileUpload extends \Backend
 		{
 			\Image::resize($strImage, $arrImageSize[0], $arrImageSize[1]);
 			\Message::addInfo(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $objFile->basename));
-			$this->log('File "' . $objFile->basename . '" was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
+			$this->log('File "' . $strImage . '" was scaled down to the maximum dimensions', __METHOD__, TL_FILES);
 			$this->blnHasResized = true;
 
 			return true;

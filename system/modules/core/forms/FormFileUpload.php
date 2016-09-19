@@ -292,7 +292,7 @@ class FormFileUpload extends \Widget implements \uploadable
 					);
 
 					// Add a log entry
-					$this->log('File "'.$file['name'].'" uploaded to "'.$strUploadFolder.'"', __METHOD__, TL_FILES);
+					$this->log('File "' . $strUploadFolder . '/' . $file['name'] . '" has been uploaded', __METHOD__, TL_FILES);
 				}
 			}
 		}
