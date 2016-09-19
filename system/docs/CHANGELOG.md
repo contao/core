@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Fall back to the field name if there is no label (see #8461).
+
+### Fixed
 Do not assume NULL by default for binary fields (see #8477).
 
 ### Fixed
