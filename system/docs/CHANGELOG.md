@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Reduce the maximum field length by the file extension length (see #8472).
+
+### Fixed
 Fall back to the field name if there is no label (see #8461).
 
 ### Fixed
