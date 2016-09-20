@@ -172,6 +172,10 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				array('tl_files', 'addFileLocation')
 			),
+			'load_callback' => array
+			(
+				array('tl_files', 'setMaxlength')
+			),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
@@ -443,6 +447,22 @@ class tl_files extends Backend
 		unset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['label'][1]);
 
 		return '<p class="tl_help tl_tip">' . sprintf($GLOBALS['TL_LANG']['tl_files']['fileLocation'], $dc->activeRecord->path) . '</p>';
+	}
+
+
+	/**
+	 * Reduce the maximum field length by the file extension length (see #8472)
+	 *
+	 * @param string                  $varValue
+	 * @param DataContainer|DC_Folder $dc
+	 *
+	 * @return string
+	 */
+	public function setMaxlength($varValue, DataContainer $dc)
+	{
+		$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] = ($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] - strlen($dc->extension));
+
+		return $varValue;
 	}
 
 

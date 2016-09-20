@@ -122,7 +122,7 @@ function __exception($e)
  */
 function show_help_message()
 {
-	if (ini_get('display_errors'))
+	if (ini_get('display_errors') || headers_sent())
 	{
 		return;
 	}
