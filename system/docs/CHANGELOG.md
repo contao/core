@@ -23,7 +23,7 @@ Do not assume NULL by default for binary fields (see #8477).
 Correctly render the diff view if not the latest version is active (see #8481).
 
 ### Fixed
-Upate the list of countries and languages (see #8453).
+Update the list of countries and languages (see #8453).
 
 ### Fixed
 Correctly set up the MooTools CDN URL (see #8458).
