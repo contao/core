@@ -1,6 +1,40 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.17 (2016-09-20)
+---------------------------
+
+### Fixed
+Handle special character passwords in the "close account" module (see #8455).
+
+### Fixed
+Handle broken SVG files in the Image and File class (see #8470).
+
+### Fixed
+Reduce the maximum field length by the file extension length (see #8472).
+
+### Fixed
+Fall back to the field name if there is no label (see #8461).
+
+### Fixed
+Do not assume NULL by default for binary fields (see #8477).
+
+### Fixed
+Correctly render the diff view if not the latest version is active (see #8481).
+
+### Fixed
+Upate the list of countries and languages (see #8453).
+
+### Fixed
+Correctly set up the MooTools CDN URL (see #8458).
+
+### Fixed
+Also check the URL length when determining the search URL (see #8460).
+
+### Fixed
+Only regenerate the session ID upon login.
+
+
 Version 3.5.16 (2016-09-05)
 ---------------------------
 

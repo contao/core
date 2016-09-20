@@ -558,11 +558,16 @@ class Image
 
 		if ($this->fileObj->extension == 'svgz')
 		{
-			$doc->loadXML(gzdecode($this->fileObj->getContent()));
+			$status = $doc->loadXML(gzdecode($this->fileObj->getContent()), LIBXML_NOERROR);
 		}
 		else
 		{
-			$doc->loadXML($this->fileObj->getContent());
+			$status = $doc->loadXML($this->fileObj->getContent(), LIBXML_NOERROR);
+		}
+
+		if ($status !== true)
+		{
+			return;
 		}
 
 		$svgElement = $doc->documentElement;

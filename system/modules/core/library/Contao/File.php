@@ -254,35 +254,42 @@ class File extends \System
 
 						if ($this->extension == 'svgz')
 						{
-							$doc->loadXML(gzdecode($this->getContent()));
+							$status = $doc->loadXML(gzdecode($this->getContent()), LIBXML_NOERROR);
 						}
 						else
 						{
-							$doc->loadXML($this->getContent());
+							$status = $doc->loadXML($this->getContent(), LIBXML_NOERROR);
 						}
 
-						$svgElement = $doc->documentElement;
-
-						if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) != '%' && substr(rtrim($svgElement->getAttribute('height')), -1) != '%')
-						{
-							$this->arrImageSize = array
-							(
-								\Image::getPixelValue($svgElement->getAttribute('width')),
-								\Image::getPixelValue($svgElement->getAttribute('height'))
-							);
-						}
-
-						if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
-						{
-							$this->arrImageSize[2] = 0; // replace this with IMAGETYPE_SVG when it becomes available
-							$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
-							$this->arrImageSize['bits'] = 8;
-							$this->arrImageSize['channels'] = 3;
-							$this->arrImageSize['mime'] = $this->getMimeType();
-						}
-						else
+						if ($status !== true)
 						{
 							$this->arrImageSize = false;
+						}
+						else
+						{
+							$svgElement = $doc->documentElement;
+
+							if ($svgElement->getAttribute('width') && $svgElement->getAttribute('height') && substr(rtrim($svgElement->getAttribute('width')), -1) != '%' && substr(rtrim($svgElement->getAttribute('height')), -1) != '%')
+							{
+								$this->arrImageSize = array
+								(
+									\Image::getPixelValue($svgElement->getAttribute('width')),
+									\Image::getPixelValue($svgElement->getAttribute('height'))
+								);
+							}
+
+							if ($this->arrImageSize && $this->arrImageSize[0] && $this->arrImageSize[1])
+							{
+								$this->arrImageSize[2] = 0; // replace this with IMAGETYPE_SVG when it becomes available
+								$this->arrImageSize[3] = 'width="' . $this->arrImageSize[0] . '" height="' . $this->arrImageSize[1] . '"';
+								$this->arrImageSize['bits'] = 8;
+								$this->arrImageSize['channels'] = 3;
+								$this->arrImageSize['mime'] = $this->getMimeType();
+							}
+							else
+							{
+								$this->arrImageSize = false;
+							}
 						}
 					}
 				}
@@ -314,24 +321,31 @@ class File extends \System
 
 						if ($this->extension == 'svgz')
 						{
-							$doc->loadXML(gzdecode($this->getContent()));
+							$status = $doc->loadXML(gzdecode($this->getContent()), LIBXML_NOERROR);
 						}
 						else
 						{
-							$doc->loadXML($this->getContent());
+							$status = $doc->loadXML($this->getContent(), LIBXML_NOERROR);
 						}
 
-						$svgElement = $doc->documentElement;
-
-						if ($svgElement->getAttribute('viewBox'))
+						if ($status !== true)
 						{
-							$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
+							$this->arrImageViewSize = false;
+						}
+						else
+						{
+							$svgElement = $doc->documentElement;
 
-							$this->arrImageViewSize = array
-							(
-								intval($svgViewBox[2]),
-								intval($svgViewBox[3])
-							);
+							if ($svgElement->getAttribute('viewBox'))
+							{
+								$svgViewBox = preg_split('/[\s,]+/', $svgElement->getAttribute('viewBox'));
+
+								$this->arrImageViewSize = array
+								(
+									intval($svgViewBox[2]),
+									intval($svgViewBox[3])
+								);
+							}
 						}
 
 						if (!$this->arrImageViewSize || !$this->arrImageViewSize[0] || !$this->arrImageViewSize[1])

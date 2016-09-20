@@ -261,7 +261,7 @@ class ModuleSearch extends \Module
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
 				$objTemplate->href = $arrResult[$i]['url'];
-				$objTemplate->title = specialchars($arrResult[$i]['title']);
+				$objTemplate->title = specialchars(strip_insert_tags($arrResult[$i]['title']));
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
 				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2) . '%');
 				$objTemplate->filesize = $arrResult[$i]['filesize'];
