@@ -5,6 +5,9 @@ Version 3.5.17 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle special character passwords in the "close account" module (see #8455).
+
+### Fixed
 Handle broken SVG files in the Image and File class (see #8470).
 
 ### Fixed

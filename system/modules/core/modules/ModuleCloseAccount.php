@@ -70,7 +70,7 @@ class ModuleCloseAccount extends \Module
 			'name' => 'password',
 			'inputType' => 'text',
 			'label' => $GLOBALS['TL_LANG']['MSC']['password'][0],
-			'eval' => array('hideInput'=>true, 'mandatory'=>true, 'required'=>true, 'tableless'=>$this->tableless)
+			'eval' => array('hideInput'=>true, 'preserveTags'=>true, 'mandatory'=>true, 'required'=>true, 'tableless'=>$this->tableless)
 		);
 
 		$objWidget = new \FormTextField(\FormTextField::getAttributesFromDca($arrField, $arrField['name']));
