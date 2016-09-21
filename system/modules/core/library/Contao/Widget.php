@@ -1522,7 +1522,7 @@ abstract class Widget extends \BaseTemplate
 
 		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
 
-		if (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		if (strpos($sql, 'NOT NULL') === false)
 		{
 			return null;
 		}
