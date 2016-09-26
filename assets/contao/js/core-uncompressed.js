@@ -2218,7 +2218,7 @@ var Backend =
 		var inputs = edit
 			.getElements('input, textarea')
 			.filter(function(item) {
-				return !item.get('disabled') && item.isVisible() && item.get('type') !== 'submit' && item.get('type') !== 'image';
+				return !item.get('disabled') && item.isVisible() && item.get('type') !== 'checkbox' && item.get('type') !== 'radio' && item.get('type') !== 'submit' && item.get('type') !== 'image';
 			});
 
 		if (inputs[0]) inputs[0].focus();
