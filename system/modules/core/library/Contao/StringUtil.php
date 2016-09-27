@@ -488,7 +488,8 @@ class StringUtil
 		$replaceTokens = function ($strSubject) use ($arrData)
 		{
 			// Replace tokens
-			return preg_replace_callback(
+			return preg_replace_callback
+			(
 				'/##([^=!<>\s]+?)##/',
 				function (array $matches) use ($arrData)
 				{
@@ -588,9 +589,11 @@ class StringUtil
 			}
 		};
 
-		// Parsing stack used to keep track of the nesting level
-        // The last item is true if it is inside a matching if-tag
+		// The last item is true if it is inside a matching if-tag
 		$arrStack = [true];
+
+		// The last item is true if any if/elseif at that level was true
+		$arrIfStack = [true];
 
 		// Tokenize the string into tag and text blocks
 		$arrTags = preg_split('/({[^{}]+})\n?/', $strString, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
@@ -598,26 +601,35 @@ class StringUtil
 		// Parse the tokens
 		foreach ($arrTags as $strTag)
 		{
-			// true if it is inside a matching if-tag
+			// True if it is inside a matching if-tag
 			$blnCurrent = $arrStack[count($arrStack) - 1];
+			$blnCurrentIf = $arrIfStack[count($arrIfStack) - 1];
 
 			if (strncmp($strTag, '{if', 3) === 0)
 			{
-				$arrStack[] = $blnCurrent && $evaluateExpression(substr($strTag, 4, -1));
+				$blnExpression = $evaluateExpression(substr($strTag, 4, -1));
+				$arrStack[] = $blnCurrent && $blnExpression;
+				$arrIfStack[] = $blnExpression;
 			}
 			elseif (strncmp($strTag, '{elseif', 7) === 0)
 			{
+				$blnExpression = $evaluateExpression(substr($strTag, 8, -1));
 				array_pop($arrStack);
-				$arrStack[] = !$blnCurrent && $arrStack[count($arrStack) - 1] && $evaluateExpression(substr($strTag, 8, -1));
+				array_pop($arrIfStack);
+				$arrStack[] = !$blnCurrentIf && $arrStack[count($arrStack) - 1] && $blnExpression;
+				$arrIfStack[] = $blnCurrentIf || $blnExpression;
 			}
 			elseif (strncmp($strTag, '{else}', 6) === 0)
 			{
 				array_pop($arrStack);
-				$arrStack[] = !$blnCurrent && $arrStack[count($arrStack) - 1];
+				array_pop($arrIfStack);
+				$arrStack[] = !$blnCurrentIf && $arrStack[count($arrStack) - 1];
+				$arrIfStack[] = true;
 			}
 			elseif (strncmp($strTag, '{endif}', 7) === 0)
 			{
 				array_pop($arrStack);
+				array_pop($arrIfStack);
 			}
 			elseif ($blnCurrent)
 			{
