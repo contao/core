@@ -19,18 +19,33 @@
     <script>
       window.addEvent('domready', function() {
         var urls = $$('.page_url'),
-            completed = 0;
-        urls.each(function(el) {
-          el.getAttribute('data-url') && new Request({
+            completed = 0,
+            queue = [];
+
+        urls.each(function(el, i) {
+          if (!el.getAttribute('data-url')) {
+            return;
+          }
+
+          var r = new Request({
             url: el.getAttribute('data-url'),
             onComplete: function() {
               el.addClass('tl_green');
-              if (++completed >= urls.length) {
+              ++completed;
+              if (queue.count() > 0) {
+                queue.shift().get();
+              } else {
                 $('index_loading').setStyle('display', 'none');
                 $('index_complete').setStyle('display', 'block');
               }
             }
-          }).get();
+          });
+
+          if (i < 10) {
+            r.get();
+          } else {
+            queue.push(r);
+          }
         });
       });
     </script>
