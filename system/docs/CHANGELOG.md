@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.18 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Queue the requests when rebuilding the search index (see #8449).
+
+
 Version 3.5.17 (2016-09-20)
 ---------------------------
 
