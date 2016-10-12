@@ -746,7 +746,7 @@ class BackendInstall extends \Backend
 					$this->Template->emailError = $GLOBALS['TL_LANG']['ERR']['email'];
 				}
 				// The passwords do not match
-				elseif (\Input::postUnsafeRaw('pass') != \Input::postUnsafeRaw('confirm_pass', true))
+				elseif (\Input::postUnsafeRaw('pass') != \Input::postUnsafeRaw('confirm_pass'))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
