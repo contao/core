@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Handle special characters in passwords when creating an admin user (see #8512).
+
+### Fixed
 Queue the requests when rebuilding the search index (see #8449).
 
 

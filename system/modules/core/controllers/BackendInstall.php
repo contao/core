@@ -746,17 +746,17 @@ class BackendInstall extends \Backend
 					$this->Template->emailError = $GLOBALS['TL_LANG']['ERR']['email'];
 				}
 				// The passwords do not match
-				elseif (\Input::post('pass', true) != \Input::post('confirm_pass', true))
+				elseif (\Input::postUnsafeRaw('pass') != \Input::postUnsafeRaw('confirm_pass', true))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
 				// The password is too short
-				elseif (utf8_strlen(\Input::post('pass', true)) < \Config::get('minPasswordLength'))
+				elseif (utf8_strlen(\Input::postUnsafeRaw('pass')) < \Config::get('minPasswordLength'))
 				{
 					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], \Config::get('minPasswordLength'));
 				}
 				// Password and username are the same
-				elseif (\Input::post('pass', true) == \Input::post('username', true))
+				elseif (\Input::postUnsafeRaw('pass') == \Input::post('username', true))
 				{
 					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
 				}
@@ -764,7 +764,7 @@ class BackendInstall extends \Backend
 				elseif (\Input::post('name') != '' && \Input::post('email', true) != '' && \Input::post('username', true) != '')
 				{
 					$time = time();
-					$strPassword = \Encryption::hash(\Input::post('pass', true));
+					$strPassword = \Encryption::hash(\Input::postUnsafeRaw('pass'));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, language, backendTheme, admin, showHelp, useRTE, useCE, thumbnails, dateAdded) VALUES ($time, ?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1, $time)")
 								   ->execute(\Input::post('name'), \Input::post('email', true), \Input::post('username', true), $strPassword, str_replace('-', '_', $GLOBALS['TL_LANGUAGE']), \Config::get('backendTheme'));
