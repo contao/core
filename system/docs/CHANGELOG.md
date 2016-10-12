@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
+### Updated
+Updated the Ace code editor to version 1.1.9.
+
 ### Fixed
 Handle special characters in passwords when creating an admin user (see #8512).
 
