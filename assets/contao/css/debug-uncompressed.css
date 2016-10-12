@@ -11,13 +11,11 @@
 	bottom:0;
 	left:0;
 	width:100%;
+	z-index:998; /* see #6205 */
 }
 #contao-debug * {
 	color:#444;
 	line-height:1;
-}
-#contao-debug > * {
-	z-index:998; /* see #6205 */
 }
 #contao-debug p {
 	margin:0;
