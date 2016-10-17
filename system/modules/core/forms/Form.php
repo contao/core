@@ -87,7 +87,18 @@ class Form extends \Hybrid
 			return $objTemplate->parse();
 		}
 
-		return parent::generate();
+		$strBuffer = parent::generate();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getForm']) && is_array($GLOBALS['TL_HOOKS']['getForm']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
+			{
+				$strBuffer = static::importStatic($callback[0])->{$callback[1]}($this->objModel, $strBuffer, $this);
+			}
+		}
+
+		return $strBuffer;
 	}
 
 
