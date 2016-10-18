@@ -494,9 +494,7 @@ class Automator extends \System
 
 			if (file_exists(TL_ROOT . '/' . $strFile))
 			{
-				$strBuffer = static::readPhpFileWithoutTags($strFile);
-				$strBuffer = $this->wrapWithGlobalNamespace($strBuffer);
-				$objCacheFile->append($strBuffer);
+				$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
 			}
 		}
 
@@ -523,7 +521,9 @@ class Automator extends \System
 
 			if (file_exists(TL_ROOT . '/' . $strFile))
 			{
-				$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+				$strBuffer = static::readPhpFileWithoutTags($strFile);
+				$strBuffer = $this->wrapWithGlobalNamespace($strBuffer);
+				$objCacheFile->append($strBuffer);
 			}
 		}
 
