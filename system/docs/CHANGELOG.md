@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly add the headline if a content element is versionized (see #8502).
+
+### Fixed
 Optimize the DCA sorting filter for date fields (see #8485).
 
 ### Fixed

@@ -189,27 +189,36 @@ class Versions extends \Controller
 
 		$strDescription = '';
 
-		if (isset($objRecord->title))
+		if (!empty($objRecord->title))
 		{
 			$strDescription = $objRecord->title;
 		}
-		elseif (isset($objRecord->name))
+		elseif (!empty($objRecord->name))
 		{
 			$strDescription = $objRecord->name;
 		}
-		elseif (isset($objRecord->firstname))
+		elseif (!empty($objRecord->firstname))
 		{
 			$strDescription = $objRecord->firstname . ' ' . $objRecord->lastname;
 		}
-		elseif (isset($objRecord->headline))
+		elseif (!empty($objRecord->headline))
 		{
-			$strDescription = $objRecord->headline;
+			$chunks = deserialize($objRecord->headline);
+
+			if (is_array($chunks) && isset($chunks['value']))
+			{
+				$strDescription = $chunks['value'];
+			}
+			else
+			{
+				$strDescription = $objRecord->headline;
+			}
 		}
-		elseif (isset($objRecord->selector))
+		elseif (!empty($objRecord->selector))
 		{
 			$strDescription = $objRecord->selector;
 		}
-		elseif (isset($objRecord->subject))
+		elseif (!empty($objRecord->subject))
 		{
 			$strDescription = $objRecord->subject;
 		}
