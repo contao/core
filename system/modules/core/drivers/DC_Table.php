@@ -5410,7 +5410,31 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$arrValues[] = $this->ptable;
 			}
 
-			$objFields = $this->Database->prepare("SELECT DISTINCT " . $field . " FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
+			$what = $field;
+
+			// Optimize the SQL query (see #8485)
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag']))
+			{
+				// Sort by day
+				if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(5, 6)))
+				{
+					$what = "UNIX_TIMESTAMP(FROM_UNIXTIME($field , '%%Y-%%m-%%d')) AS $field";
+				}
+
+				// Sort by month
+				elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(7, 8)))
+				{
+					$what = "UNIX_TIMESTAMP(FROM_UNIXTIME($field , '%%Y-%%m-01')) AS $field";
+				}
+
+				// Sort by year
+				elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(9, 10)))
+				{
+					$what = "UNIX_TIMESTAMP(FROM_UNIXTIME($field , '%%Y-01-01')) AS $field";
+				}
+			}
+
+			$objFields = $this->Database->prepare("SELECT DISTINCT " . $what . " FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))
 										->execute($arrValues);
 
 			// Begin select menu

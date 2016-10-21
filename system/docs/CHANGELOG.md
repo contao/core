@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Optimize the DCA sorting filter for date fields (see #8485).
+
+### Fixed
 Do not show version entries of deleted files (see #8480).
 
 ### Fixed
