@@ -460,7 +460,12 @@ class tl_files extends Backend
 	 */
 	public function setMaxlength($varValue, DataContainer $dc)
 	{
-		$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] = ($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] - strlen($dc->extension));
+		if (!isset($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['origMaxlength']))
+		{
+			$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['origMaxlength'] = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'];
+		}
+
+		$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] = ($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['origMaxlength'] - strlen($dc->extension));
 
 		return $varValue;
 	}

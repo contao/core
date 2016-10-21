@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly calculate the maximum length of tl_files.name (see #8536).
+
+### Fixed
 Correctly add the headline if a content element is versionized (see #8502).
 
 ### Fixed
