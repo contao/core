@@ -181,6 +181,15 @@ FileETag None
     Header append Vary Accept-Encoding
   </FilesMatch>
 
+  ##
+  # Do not cache source map files
+  # @see https://github.com/contao/core/issues/8532
+  ##
+  <FilesMatch "\.map$">
+    Header set Expires "0"
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0, proxy-revalidate, no-transform"
+  </FilesMatch>
+
 </IfModule>
 
 ##
