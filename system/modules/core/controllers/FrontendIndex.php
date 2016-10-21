@@ -218,7 +218,7 @@ class FrontendIndex extends \Frontend
 		}
 
 		// Check wether the language matches the root page language
-		if (\Config::get('addLanguageToUrl') && \Input::get('language') != $objPage->rootLanguage)
+		if (\Config::get('addLanguageToUrl') && isset($_GET['language']) && \Input::get('language') != $objPage->rootLanguage)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();

@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Redirect the empty URL depending on language and alias name (see #8498).
+
+### Fixed
 Apply `specialchars()` to widget attributes (see #8505).
 
 ### Updated
