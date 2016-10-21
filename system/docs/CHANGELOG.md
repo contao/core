@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
+### Fixed
+Apply `specialchars()` to widget attributes (see #8505).
+
 ### Updated
 Updated the Ace code editor to version 1.1.9.
 

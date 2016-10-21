@@ -758,7 +758,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			if (TL_MODE == 'FE') // see #3878
 			{
-				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
+				return $blnIsXhtml ? ' ' . $strKey . '="' . specialchars($varValue) . '"' : ' ' . $strKey;
 			}
 			else
 			{
@@ -769,7 +769,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			if ($varValue != '')
 			{
-				return ' ' . $strKey . '="' . $varValue . '"';
+				return ' ' . $strKey . '="' . specialchars($varValue) . '"';
 			}
 		}
 
