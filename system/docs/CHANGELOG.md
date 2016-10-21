@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not show version entries of deleted files (see #8480).
+
+### Fixed
 Redirect the empty URL depending on language and alias name (see #8498).
 
 ### Fixed

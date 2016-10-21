@@ -630,7 +630,7 @@ class Versions extends \Controller
 		// Add the "even" and "odd" classes
 		foreach ($arrVersions as $k=>$v)
 		{
-			$arrVersions[$k]['class'] = (++$intCount%2 == 0) ? 'even' : 'odd';
+			$arrVersions[$k]['class'] = (++$intCount % 2 == 0) ? 'even' : 'odd';
 
 			try
 			{
@@ -643,6 +643,13 @@ class Versions extends \Controller
 			catch (\Exception $e)
 			{
 				// Probably a disabled module
+				--$intCount;
+				unset($arrVersions[$k]);
+			}
+
+			// Skip deleted files (see #8480)
+			if ($v['fromTable'] == 'tl_files' && $arrVersions[$k]['deleted'])
+			{
 				--$intCount;
 				unset($arrVersions[$k]);
 			}
