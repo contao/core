@@ -172,7 +172,7 @@ class ModuleEventlist extends \Events
 					}
 
 					// Skip occurrences in the past but show running events (see #8497)
-					if (strtotime($event['datetime']) > $intEnd)
+					if ($event['repeatEnd'] && strtotime($event['datetime']) < $intStart)
 					{
 						continue;
 					}
