@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly "toggle select" nodes that are loaded via Ajax (see #8535).
+
+### Fixed
 Show running events in the event list again (see #8497).
 
 ### Fixed
