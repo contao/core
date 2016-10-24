@@ -90,16 +90,16 @@
         },
         {
             "name": "matthiasmullie/minify",
-            "version": "1.3.37",
+            "version": "1.3.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/minify.git",
-                "reference": "325e9b9dc1016929f05edaa47401dc2337519b2f"
+                "reference": "de4bcf23b6a3291bd828ce800aab834304eb50c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/325e9b9dc1016929f05edaa47401dc2337519b2f",
-                "reference": "325e9b9dc1016929f05edaa47401dc2337519b2f",
+                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/de4bcf23b6a3291bd828ce800aab834304eb50c5",
+                "reference": "de4bcf23b6a3291bd828ce800aab834304eb50c5",
                 "shasum": ""
             },
             "require": {
@@ -142,7 +142,7 @@
                 "minifier",
                 "minify"
             ],
-            "time": "2016-09-20 12:58:02"
+            "time": "2016-10-13 11:49:22"
         },
         {
             "name": "matthiasmullie/path-converter",
