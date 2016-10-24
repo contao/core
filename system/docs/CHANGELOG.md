@@ -5,6 +5,9 @@ Version 3.5.18 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Show running events in the event list again (see #8497).
+
+### Fixed
 Correctly calculate the maximum length of tl_files.name (see #8536).
 
 ### Fixed
