@@ -268,13 +268,14 @@ class ModuleSearch extends \Module
 				$objTemplate->matches = $arrResult[$i]['matches'];
 
 				$arrContext = array();
+				$strText = strip_insert_tags($arrResult[$i]['text']);
 				$arrMatches = trimsplit(',', $arrResult[$i]['matches']);
 
 				// Get the context
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
-					preg_match_all('/(^|\b.{0,'.$this->contextLength.'}\PL)' . str_replace('+', '\\+', $strWord) . '(\PL.{0,'.$this->contextLength.'}\b|$)/ui', $arrResult[$i]['text'], $arrChunks);
+					preg_match_all('/(^|\b.{0,'.$this->contextLength.'}\PL)' . str_replace('+', '\\+', $strWord) . '(\PL.{0,'.$this->contextLength.'}\b|$)/ui', $strText, $arrChunks);
 
 					foreach ($arrChunks[0] as $strContext)
 					{

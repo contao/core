@@ -758,7 +758,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			if (TL_MODE == 'FE') // see #3878
 			{
-				return $blnIsXhtml ? ' ' . $strKey . '="' . $varValue . '"' : ' ' . $strKey;
+				return $blnIsXhtml ? ' ' . $strKey . '="' . specialchars($varValue) . '"' : ' ' . $strKey;
 			}
 			else
 			{
@@ -769,7 +769,7 @@ abstract class Widget extends \BaseTemplate
 		{
 			if ($varValue != '')
 			{
-				return ' ' . $strKey . '="' . $varValue . '"';
+				return ' ' . $strKey . '="' . specialchars($varValue) . '"';
 			}
 		}
 
@@ -1520,19 +1520,18 @@ abstract class Widget extends \BaseTemplate
 			return '';
 		}
 
-		$type = preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql);
-
-		if (strpos($sql, 'NULL') !== false && strpos($sql, 'NOT NULL') === false)
+		if (stripos($sql, 'NOT NULL') === false)
 		{
 			return null;
 		}
-		elseif (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
+
+		$type = strtolower(preg_replace('/^([A-Za-z]+)(\(| ).*$/', '$1', $sql));
+
+		if (in_array($type, array('int', 'integer', 'tinyint', 'smallint', 'mediumint', 'bigint', 'float', 'double', 'dec', 'decimal')))
 		{
 			return 0;
 		}
-		else
-		{
-			return '';
-		}
+
+		return '';
 	}
 }
