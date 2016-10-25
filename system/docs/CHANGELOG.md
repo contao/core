@@ -1,6 +1,43 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.18 (2016-10-25)
+---------------------------
+
+### Fixed
+Correctly "toggle select" nodes that are loaded via Ajax (see #8535).
+
+### Fixed
+Show running events in the event list again (see #8497).
+
+### Fixed
+Correctly calculate the maximum length of tl_files.name (see #8536).
+
+### Fixed
+Correctly add the headline if a content element is versionized (see #8502).
+
+### Fixed
+Optimize the DCA sorting filter for date fields (see #8485).
+
+### Fixed
+Do not show version entries of deleted files (see #8480).
+
+### Fixed
+Redirect the empty URL depending on language and alias name (see #8498).
+
+### Fixed
+Apply `specialchars()` to widget attributes (see #8505).
+
+### Updated
+Updated the Ace code editor to version 1.1.9.
+
+### Fixed
+Handle special characters in passwords when creating an admin user (see #8512).
+
+### Fixed
+Queue the requests when rebuilding the search index (see #8449).
+
+
 Version 3.5.17 (2016-09-20)
 ---------------------------
 

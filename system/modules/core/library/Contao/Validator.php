@@ -181,11 +181,11 @@ class Validator
 	{
 		if (function_exists('mb_eregi'))
 		{
-			return mb_eregi('^[[:alnum:]\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~_-]+$', \Idna::encodeUrl($varValue));
+			return mb_eregi('^[[:alnum:]\.\*\+\/\?\$#%:,;\{\}\(\)\[\]@&!=~|_-]+$', \Idna::encodeUrl($varValue));
 		}
 		else
 		{
-			return preg_match('/^[\w\/.*+?$#%:,;{}()[\]@&!=~-]+$/u', \Idna::encodeUrl($varValue));
+			return preg_match('/^[\w\/.*+?$#%:,;{}()[\]@&!=~|-]+$/u', \Idna::encodeUrl($varValue));
 		}
 	}
 

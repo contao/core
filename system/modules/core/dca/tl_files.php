@@ -172,10 +172,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				array('tl_files', 'addFileLocation')
 			),
-			'load_callback' => array
-			(
-				array('tl_files', 'setMaxlength')
-			),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
@@ -451,31 +447,16 @@ class tl_files extends Backend
 
 
 	/**
-	 * Reduce the maximum field length by the file extension length (see #8472)
+	 * Check a file name and romanize it
 	 *
 	 * @param string                  $varValue
 	 * @param DataContainer|DC_Folder $dc
-	 *
-	 * @return string
-	 */
-	public function setMaxlength($varValue, DataContainer $dc)
-	{
-		$GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] = ($GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'] - strlen($dc->extension));
-
-		return $varValue;
-	}
-
-
-	/**
-	 * Check a file name and romanize it
-	 *
-	 * @param mixed $varValue
 	 *
 	 * @return mixed
 	 *
 	 * @throws Exception
 	 */
-	public function checkFilename($varValue)
+	public function checkFilename($varValue, DataContainer $dc)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
@@ -483,6 +464,22 @@ class tl_files extends Backend
 		if (strpos($varValue, '/') !== false || preg_match('/\.$/', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+		}
+
+		// Check the length without the file extension
+		if ($dc->activeRecord && $varValue != '')
+		{
+			$intMaxlength = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['eval']['maxlength'];
+
+			if ($dc->activeRecord->type == 'file')
+			{
+				$intMaxlength -= (strlen($dc->activeRecord->extension) + 1);
+			}
+
+			if ($intMaxlength && utf8_strlen($varValue) > $intMaxlength)
+			{
+				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['label'][0], $intMaxlength));
+			}
 		}
 
 		return $varValue;

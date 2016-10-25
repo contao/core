@@ -327,6 +327,12 @@ abstract class Frontend extends \Controller
 		{
 			$accept_language = \Environment::get('httpAcceptLanguage');
 
+			// Always load the language fall back root if "doNotRedirectEmpty" is enabled
+			if (\Config::get('addLanguageToUrl') && \Config::get('doNotRedirectEmpty'))
+			{
+				$accept_language = '-';
+			}
+
 			// Find the matching root pages (thanks to Andreas Schempp)
 			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $accept_language);
 
@@ -339,9 +345,22 @@ abstract class Frontend extends \Controller
 			}
 
 			// Redirect to the language root (e.g. en/)
-			if (\Config::get('addLanguageToUrl') && !\Config::get('doNotRedirectEmpty') && \Environment::get('request') == '')
+			if (\Config::get('addLanguageToUrl'))
 			{
-				static::redirect((!\Config::get('rewriteURL') ? 'index.php/' : '') . $objRootPage->language . '/', 301);
+				if (!\Config::get('doNotRedirectEmpty') && \Environment::get('request') == '')
+				{
+					static::redirect((!\Config::get('rewriteURL') ? 'index.php/' : '') . $objRootPage->language . '/', 301);
+				}
+			}
+			else
+			{
+				$objPage = \PageModel::findFirstPublishedRegularByPid($objRootPage->id);
+
+				// Redirect if it is not the language fall back page and the alias is "index" (see #8498)
+				if ($objPage !== null && (!$objRootPage->fallback || $objPage->alias != 'index'))
+				{
+					static::redirect($objPage->getFrontendUrl(), 302);
+				}
 			}
 		}
 
