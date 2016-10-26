@@ -5,7 +5,7 @@ Version 3.5.19 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
-Continue rebuilding the search index if there are errors (see #8535).
+Continue rebuilding the search index if there are errors (see #8541).
 
 
 Version 3.5.18 (2016-10-25)
