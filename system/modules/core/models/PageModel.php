@@ -728,6 +728,23 @@ class PageModel extends \Model
 
 
 	/**
+	 * Called when the model is detached from the model registry
+	 *
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
+	 */
+	public function onUnregister(\Model\Registry $registry)
+	{
+		parent::onUnregister($registry);
+
+		// Unregister the fallback page
+		if ($registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+		{
+			$registry->unregisterAlias($this, 'dns-fallback', $this->dns);
+		}
+	}
+
+
+	/**
 	 * Get the details of a page including inherited parameters
 	 *
 	 * @return \PageModel The page model
