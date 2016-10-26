@@ -628,10 +628,10 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
 	{
-		// Try to load from the registry
+		// Try to load from the registry (see #8544)
 		if (empty($arrOptions))
 		{
-			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $strHost, 'dns-fallback');
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $strHost, 'contao.dns-fallback');
 
 			if ($objModel !== null)
 			{
@@ -721,7 +721,7 @@ class PageModel extends \Model
 
 
 	/**
-	 * Called when the model is attached to the model registry
+	 * Register the contao.dns-fallback alias when the model is attached to the registry
 	 *
 	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
@@ -730,15 +730,15 @@ class PageModel extends \Model
 		parent::onRegister($registry);
 
 		// Register this model as being the fallback page for a given dns
-		if ($this->fallback && $this->type == 'root' && !$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+		if ($this->fallback && $this->type == 'root' && !$registry->isRegisteredAlias($this, 'contao.dns-fallback', $this->dns))
 		{
-			$registry->registerAlias($this, 'dns-fallback', $this->dns);
+			$registry->registerAlias($this, 'contao.dns-fallback', $this->dns);
 		}
 	}
 
 
 	/**
-	 * Called when the model is detached from the model registry
+	 * Unregister the contao.dns-fallback alias when the model is detached from the registry
 	 *
 	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
 	 */
@@ -747,9 +747,9 @@ class PageModel extends \Model
 		parent::onUnregister($registry);
 
 		// Unregister the fallback page
-		if ($this->fallback && $this->type == 'root' && $registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+		if ($this->fallback && $this->type == 'root' && $registry->isRegisteredAlias($this, 'contao.dns-fallback', $this->dns))
 		{
-			$registry->unregisterAlias($this, 'dns-fallback', $this->dns);
+			$registry->unregisterAlias($this, 'contao.dns-fallback', $this->dns);
 		}
 	}
 
