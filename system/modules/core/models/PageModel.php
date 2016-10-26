@@ -730,7 +730,7 @@ class PageModel extends \Model
 		parent::onRegister($registry);
 
 		// Register this model as being the fallback page for a given dns
-		if ($this->fallback && !$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+		if ($this->fallback && $this->type == 'root' && !$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
 		{
 			$registry->registerAlias($this, 'dns-fallback', $this->dns);
 		}
@@ -747,7 +747,7 @@ class PageModel extends \Model
 		parent::onUnregister($registry);
 
 		// Unregister the fallback page
-		if ($registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+		if ($this->fallback && $this->type == 'root' && $registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
 		{
 			$registry->unregisterAlias($this, 'dns-fallback', $this->dns);
 		}
