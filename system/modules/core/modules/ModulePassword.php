@@ -234,6 +234,7 @@ class ModulePassword extends \Module
 
 				$objMember->tstamp = time();
 				$objMember->activation = '';
+				$objMember->locked = 0;
 				$objMember->password = $objWidget->value;
 				$objMember->save();
 
