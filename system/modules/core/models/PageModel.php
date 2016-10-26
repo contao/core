@@ -648,14 +648,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
-		$objModel = static::findOneBy($arrColumns, $strHost, $arrOptions);
-
-		if (empty($arrOptions))
-		{
-			\Model\Registry::getInstance()->registerAlias($objModel, 'dns-fallback', $strHost);
-		}
-
-		return $objModel;
+		return static::findOneBy($arrColumns, $strHost, $arrOptions);
 	}
 
 
@@ -724,6 +717,26 @@ class PageModel extends \Model
 		}
 
 		return $objPage->loadDetails();
+	}
+
+
+	/**
+	 * Called when the model is attached to the model registry
+	 *
+	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
+	 */
+	public function onRegister(\Model\Registry $registry)
+	{
+		parent::onRegister($registry);
+
+		// Register this model as being the fallback page for a given dns
+		if ($this->fallback)
+		{
+			if (!$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
+			{
+				$registry->registerAlias($this, 'dns-fallback', $this->dns);
+			}
+		}
 	}
 
 
