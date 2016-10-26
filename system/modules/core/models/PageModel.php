@@ -628,6 +628,17 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedFallbackByHostname($strHost, array $arrOptions=array())
 	{
+		// Try to load from the registry
+		if (empty($arrOptions))
+		{
+			$objModel = \Model\Registry::getInstance()->fetch(static::$strTable, $strHost, 'dns-fallback');
+
+			if ($objModel !== null)
+			{
+				return $objModel;
+			}
+		}
+
 		$t = static::$strTable;
 		$arrColumns = array("$t.dns=? AND $t.fallback='1'");
 
@@ -637,7 +648,14 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
-		return static::findOneBy($arrColumns, $strHost, $arrOptions);
+		$objModel = static::findOneBy($arrColumns, $strHost, $arrOptions);
+
+		if (empty($arrOptions))
+		{
+			\Model\Registry::getInstance()->registerAlias($objModel, 'dns-fallback', $strHost);
+		}
+
+		return $objModel;
 	}
 
 
