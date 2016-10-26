@@ -730,12 +730,9 @@ class PageModel extends \Model
 		parent::onRegister($registry);
 
 		// Register this model as being the fallback page for a given dns
-		if ($this->fallback)
+		if ($this->fallback && !$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
 		{
-			if (!$registry->isRegisteredAlias($this, 'dns-fallback', $this->dns))
-			{
-				$registry->registerAlias($this, 'dns-fallback', $this->dns);
-			}
+			$registry->registerAlias($this, 'dns-fallback', $this->dns);
 		}
 	}
 
