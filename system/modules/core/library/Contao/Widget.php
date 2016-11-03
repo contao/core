@@ -967,7 +967,7 @@ abstract class Widget extends \BaseTemplate
 					}
 					break;
 
-				// Do not allow any characters that are usually encoded by class Input [=<>()#/])
+				// Do not allow any characters that are usually encoded by class Input [#<>()\=])
 				case 'extnd':
 					if (!\Validator::isExtendedAlphanumeric(html_entity_decode($varInput)))
 					{
