@@ -457,7 +457,7 @@ class FileSelector extends \Widget
 		}
 
 		// Do not convert values if path is not in the upload path
-		if ($this->path !== \Config::get('uploadPath'))
+		if (strncmp($this->path, \Config::get('uploadPath'), strlen(\Config::get('uploadPath'))) !== 0)
 		{
 			return;
 		}
