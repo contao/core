@@ -9,12 +9,9 @@ $GLOBALS['TL_CSS'][] = 'assets/jquery/mediaelement/'. $GLOBALS['TL_ASSETS']['MED
 <script>
   (function($) {
     $(document).ready(function() {
-
-      var media_items = $('video').filter(function() {
-        return $(this).parent().prop("tagName") !== "PICTURE";
-      }).add('audio');
-
-      media_items.mediaelementplayer({
+        $('video,audio').filter(function() {
+            return $(this).parents('picture').length === 0;
+        }).mediaelementplayer({
         // Put custom options here
         pluginPath: '<?= TL_PATH ?>/assets/jquery/mediaelement/<?= $GLOBALS['TL_ASSETS']['MEDIAELEMENT'] ?>/',
         flashName: 'legacy/flashmediaelement.swf',
