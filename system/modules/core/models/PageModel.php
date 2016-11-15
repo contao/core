@@ -723,7 +723,7 @@ class PageModel extends \Model
 	/**
 	 * Register the contao.dns-fallback alias when the model is attached to the registry
 	 *
-	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
+	 * @param \Model\Registry $registry The model registry
 	 */
 	public function onRegister(\Model\Registry $registry)
 	{
@@ -740,7 +740,7 @@ class PageModel extends \Model
 	/**
 	 * Unregister the contao.dns-fallback alias when the model is detached from the registry
 	 *
-	 * @param \Model\Registry|\Contao\Model\Registry $registry The model registry
+	 * @param \Model\Registry $registry The model registry
 	 */
 	public function onUnregister(\Model\Registry $registry)
 	{
