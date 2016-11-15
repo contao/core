@@ -344,22 +344,22 @@ abstract class Frontend extends \Controller
 				die_nicely('be_no_root', 'No root page found');
 			}
 
-			// Redirect to the language root (e.g. en/)
-			if (\Config::get('addLanguageToUrl'))
+			// Redirect to the website root or language root (e.g. en/)
+			if (\Environment::get('request') == '')
 			{
-				if (!\Config::get('doNotRedirectEmpty') && \Environment::get('request') == '')
+				if (\Config::get('addLanguageToUrl') && !\Config::get('doNotRedirectEmpty'))
 				{
 					static::redirect((!\Config::get('rewriteURL') ? 'index.php/' : '') . $objRootPage->language . '/', 301);
 				}
-			}
-			else
-			{
-				$objPage = \PageModel::findFirstPublishedRegularByPid($objRootPage->id);
-
-				// Redirect if it is not the language fall back page and the alias is "index" (see #8498)
-				if ($objPage !== null && (!$objRootPage->fallback || $objPage->alias != 'index'))
+				else
 				{
-					static::redirect($objPage->getFrontendUrl(), 302);
+					$objPage = \PageModel::findFirstPublishedRegularByPid($objRootPage->id);
+
+					// Redirect if it is not the language fall back page and the alias is "index" (see #8498)
+					if ($objPage !== null && (!$objRootPage->fallback || $objPage->alias != 'index'))
+					{
+						static::redirect($objPage->getFrontendUrl(), 302);
+					}
 				}
 			}
 		}

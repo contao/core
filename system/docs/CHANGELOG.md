@@ -5,6 +5,9 @@ Version 3.5.19 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly redirect to the website root page (see #8552).
+
+### Fixed
 Continue rebuilding the search index if there are errors (see #8541).
 
 
