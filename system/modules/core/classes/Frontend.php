@@ -353,7 +353,7 @@ abstract class Frontend extends \Controller
 				}
 				else
 				{
-					$objPage = \PageModel::findFirstPublishedRegularByPid($objRootPage->id);
+					$objPage = \PageModel::findFirstPublishedByPid($objRootPage->id);
 
 					// Redirect if it is not the language fall back page and the alias is "index" (see #8498)
 					if ($objPage !== null && (!$objRootPage->fallback || $objPage->alias != 'index'))
