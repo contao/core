@@ -5,6 +5,9 @@ Version 3.5.19 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Cache the `PageModel::findPublishedFallbackByHostname()` results (see #8544).
+
+### Fixed
 Correctly redirect to the website root page (see #8552).
 
 ### Fixed
