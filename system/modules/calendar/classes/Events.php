@@ -43,6 +43,12 @@ abstract class Events extends \Module
 	 */
 	protected $arrEvents = array();
 
+	/**
+	 * Has details cache
+	 * @var array
+	 */
+	protected $arrHasDetailsCache = array();
+
 
 	/**
 	 * Sort out protected archives
@@ -336,7 +342,14 @@ abstract class Events extends \Module
 				return $strDetails;
 			};
 
-			$arrEvent['hasDetails'] = (\ContentModel::countPublishedByPidAndTable($id, 'tl_calendar_events') > 0);
+			if (isset($this->arrHasDetailsCache[$id]))
+			{
+				$arrEvent['hasDetails'] = $this->arrHasDetailsCache[$id];
+			}
+			else
+			{
+				$arrEvent['hasDetails'] = $this->arrHasDetailsCache[$id] = (\ContentModel::countPublishedByPidAndTable($id, 'tl_calendar_events') > 0);
+			}
 		}
 
 		// Get todays start and end timestamp
