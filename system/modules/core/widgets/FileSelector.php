@@ -451,13 +451,19 @@ class FileSelector extends \Widget
 		}
 
 		// TinyMCE will pass the path instead of the ID
-		if (strncmp($this->varValue[0], \Config::get('uploadPath') . '/', strlen(\Config::get('uploadPath')) + 1) === 0)
+		if (strpos($this->varValue[0], \Config::get('uploadPath') . '/') === 0)
 		{
 			return;
 		}
 
 		// Ignore the numeric IDs when in switch mode (TinyMCE)
 		if (\Input::get('switch'))
+		{
+			return;
+		}
+
+		// Return if the custom path is not within the upload path (see #8562)
+		if ($this->path != '' && strpos($this->path, \Config::get('uploadPath') . '/') !== 0)
 		{
 			return;
 		}

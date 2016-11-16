@@ -148,7 +148,10 @@ abstract class ModuleNews extends \Module
 				return $strText;
 			};
 
-			$objTemplate->hasText = (\ContentModel::countPublishedByPidAndTable($objArticle->id, 'tl_news') > 0);
+			$objTemplate->hasText = function () use ($objArticle)
+			{
+				return \ContentModel::countPublishedByPidAndTable($objArticle->id, 'tl_news') > 0;
+			};
 		}
 
 		$arrMeta = $this->getMetaFields($objArticle);
