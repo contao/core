@@ -23,6 +23,7 @@
             $('index_loading').setStyle('display', 'none');
             $('index_complete').setStyle('display', 'block');
           },
+          concurrent: 1,
           stopOnFailure: false
         });
         $$('.page_url').each(function(el, i) {
@@ -37,9 +38,7 @@
             url: el.getAttribute('data-url')
           }));
         });
-        Object.each(queue.requests, function(req) {
-          req.get();
-        });
+        Object.values(queue.requests).invoke('get');
       });
     </script>
 

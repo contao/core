@@ -1,6 +1,22 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.19 (2016-11-16)
+---------------------------
+
+### Fixed
+Only evaluate `hasDetails()` and `hasText()` upon the first call.
+
+### Fixed
+Cache the `PageModel::findPublishedFallbackByHostname()` results (see #8544).
+
+### Fixed
+Correctly redirect to the website root page (see #8552).
+
+### Fixed
+Continue rebuilding the search index if there are errors (see #8541).
+
+
 Version 3.5.18 (2016-10-25)
 ---------------------------
 

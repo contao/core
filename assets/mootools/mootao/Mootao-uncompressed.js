@@ -304,3 +304,64 @@ Class.refactor(Sortables,
 		return clone;
 	}
 });
+
+
+/*
+---
+
+script: Request.Queue.js
+
+name: Request.Queue
+
+description: Extends the base Request.Queue class and attempts to fix some issues.
+
+license: MIT-style license
+
+authors:
+ - Leo Feyer
+
+requires:
+  - Core/Element
+  - Core/Request
+  - Class.Binds
+
+provides: [Request.Queue]
+
+...
+*/
+
+Class.refactor(Request.Queue,
+{
+	// Do not fire the "end" event here
+	onComplete: function(){
+		this.fireEvent('complete', arguments);
+	},
+
+	// Call resume() instead of runNext()
+	onCancel: function(){
+		if (this.options.autoAdvance && !this.error) this.resume();
+		this.fireEvent('cancel', arguments);
+	},
+
+	// Call resume() instead of runNext() and fire the "end" event
+	onSuccess: function(){
+		if (this.options.autoAdvance && !this.error) this.resume();
+		this.fireEvent('success', arguments);
+		if (!this.queue.length && !this.isRunning()) this.fireEvent('end');
+	},
+
+	// Call resume() instead of runNext() and fire the "end" event
+	onFailure: function(){
+		this.error = true;
+		if (!this.options.stopOnFailure && this.options.autoAdvance) this.resume();
+		this.fireEvent('failure', arguments);
+		if (!this.queue.length && !this.isRunning()) this.fireEvent('end');
+	},
+
+	// Call resume() instead of runNext()
+	onException: function(){
+		this.error = true;
+		if (!this.options.stopOnFailure && this.options.autoAdvance) this.resume();
+		this.fireEvent('exception', arguments);
+	}
+});

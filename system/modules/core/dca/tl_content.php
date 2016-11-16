@@ -177,7 +177,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'options_callback'        => array('tl_content', 'getContentElements'),
 			'reference'               => &$GLOBALS['TL_LANG']['CTE'],
 			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true),
-			'sql'                     => "varchar(32) NOT NULL default ''"
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'headline' => array
 		(
