@@ -72,7 +72,7 @@ class ImageSize extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-        $varInput[2] = preg_replace('/[^a-z0-9_]+/', '', $varInput[2]);
+		$varInput[2] = preg_replace('/[^a-z0-9_]+/', '', $varInput[2]);
 
 		if (!is_numeric($varInput[2]))
 		{
