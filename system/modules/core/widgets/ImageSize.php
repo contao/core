@@ -76,7 +76,7 @@ class ImageSize extends \Widget
 
 		if (!is_numeric($varInput[2]))
 		{
-		    $varInput[0] = parent::validator($varInput[0]);
+			$varInput[0] = parent::validator($varInput[0]);
 			$varInput[1] = parent::validator($varInput[1]);
 		}
 
