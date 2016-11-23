@@ -175,6 +175,8 @@ abstract class Model
 					$this->arrRelated[$key] = $objRelated;
 				}
 			}
+
+			$this->setRow($arrData); // see #5439
 		}
 	}
 
