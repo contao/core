@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.20 (2016-XX-XX)
+---------------------------
+
+### Fixed
+Correctly parse english dates in MooTools (see #8573).
+
+
 Version 3.5.19 (2016-11-16)
 ---------------------------
 
