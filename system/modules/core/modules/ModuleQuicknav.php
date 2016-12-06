@@ -154,6 +154,7 @@ class ModuleQuicknav extends \Module
 				{
 					$arrPages[] = array
 					(
+						'active' => ($objPage->id == $objSubpage->id),
 						'level' => ($level - 2),
 						'title' => specialchars(strip_insert_tags($objSubpage->pageTitle ?: $objSubpage->title)),
 						'href' => $objSubpage->getFrontendUrl(),
