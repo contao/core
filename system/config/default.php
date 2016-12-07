@@ -171,16 +171,10 @@ $GLOBALS['TL_CONFIG']['ftpPort'] = 21;
  * Please provide an encryption key that is at least 8 characters long. Note
  * that encrypted data can only be decrypted with the same key! Therefore
  * note it down and do not change it if your data is encrypted already.
- *
- *   encryptionMode   = defaults to "cfb"
- *   encryptionCipher = defaults to "rijndael 256"
- *
- * See PHP extension "mcrypt" for more information.
  */
-$GLOBALS['TL_CONFIG']['encryptionKey']    = '';
-$GLOBALS['TL_CONFIG']['encryptionMode']   = 'cfb';
-$GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
-$GLOBALS['TL_CONFIG']['bcryptCost']       = 10;
+$GLOBALS['TL_CONFIG']['encryptionKey'] = '';
+$GLOBALS['TL_CONFIG']['cipherMethod']  = 'AES-256-CBC';
+$GLOBALS['TL_CONFIG']['bcryptCost']    = 10;
 
 
 /**

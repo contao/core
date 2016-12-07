@@ -33,12 +33,6 @@ class Encryption
 	 */
 	protected static $objInstance;
 
-	/**
-	 * Mcrypt resource
-	 * @var resource
-	 */
-	protected static $resTd;
-
 
 	/**
 	 * Encrypt a value
@@ -65,22 +59,16 @@ class Encryption
 			return '';
 		}
 
-		// Initialize the module
-		if (static::$resTd === null)
-		{
-			static::initialize();
-		}
+		static::checkRequirements();
 
 		if (!$strKey)
 		{
 			$strKey = \Config::get('encryptionKey');
 		}
 
-		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size(static::$resTd));
-		mcrypt_generic_init(static::$resTd, md5($strKey), $iv);
-		$strEncrypted = mcrypt_generic(static::$resTd, $varValue);
+		$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(\Config::get('cipherMethod')));
+		$strEncrypted = openssl_encrypt($varValue, \Config::get('cipherMethod'), $strKey, OPENSSL_RAW_DATA, $iv);
 		$strEncrypted = base64_encode($iv.$strEncrypted);
-		mcrypt_generic_deinit(static::$resTd);
 
 		return $strEncrypted;
 	}
@@ -111,14 +99,10 @@ class Encryption
 			return '';
 		}
 
-		// Initialize the module
-		if (static::$resTd === null)
-		{
-			static::initialize();
-		}
+		static::checkRequirements();
 
 		$varValue = base64_decode($varValue);
-		$ivsize = mcrypt_enc_get_iv_size(static::$resTd);
+		$ivsize = openssl_cipher_iv_length(\Config::get('cipherMethod'));
 		$iv = substr($varValue, 0, $ivsize);
 		$varValue = substr($varValue, $ivsize);
 
@@ -132,29 +116,25 @@ class Encryption
 			$strKey = \Config::get('encryptionKey');
 		}
 
-		mcrypt_generic_init(static::$resTd, md5($strKey), $iv);
-		$strDecrypted = mdecrypt_generic(static::$resTd, $varValue);
-		mcrypt_generic_deinit(static::$resTd);
-
-		return $strDecrypted;
+		return openssl_decrypt($varValue, \Config::get('cipherMethod'), $strKey, OPENSSL_RAW_DATA, $iv);
 	}
 
 
 	/**
-	 * Initialize the encryption module
+	 * Check the requirements
 	 *
 	 * @throws \Exception If the encryption module cannot be initialized
 	 */
-	protected static function initialize()
+	protected static function checkRequirements()
 	{
-		if (!in_array('mcrypt', get_loaded_extensions()))
+		if (!in_array('openssl', get_loaded_extensions()))
 		{
-			throw new \Exception('The PHP mcrypt extension is not installed');
+			throw new \Exception('The PHP openssl extension is not installed');
 		}
 
-		if ((self::$resTd = mcrypt_module_open(\Config::get('encryptionCipher'), '', \Config::get('encryptionMode'), '')) == false)
+		if (!in_array(\Config::get('cipherMethod'), openssl_get_cipher_methods()))
 		{
-			throw new \Exception('Error initializing encryption module');
+			throw new \Exception('Invalid or unsupported cipher method: ' . \Config::get('cipherMethod'));
 		}
 
 		if (\Config::get('encryptionKey') == '')
