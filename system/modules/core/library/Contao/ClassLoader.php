@@ -32,17 +32,33 @@ class ClassLoader
 	 * Known namespaces
 	 * @var array
 	 */
-	protected static $namespaces = array
-	(
-		'Contao'
-	);
+	protected static $namespaces;
 
 	/**
 	 * Known classes
 	 * @var array
 	 */
-	protected static $classes = array();
+	protected static $classes;
 
+	/**
+	 * Initialize the static Components
+	 *
+	 * Like any other PHP static variable, static properties may only be
+	 * initialized using a literal or constant; expressions are not allowed
+	 */
+	public static function init()
+	{
+		static $isInitialized = false;
+
+		if ($isInitialized)
+			return;
+		$isInitialized = true;
+
+		self::$namespaces = array (
+				'Contao'
+		);
+		self::$classes = array ();
+	}
 
 	/**
 	 * Add a new namespace
@@ -227,3 +243,4 @@ class ClassLoader
 		self::register();
 	}
 }
+ClassLoader::init();
