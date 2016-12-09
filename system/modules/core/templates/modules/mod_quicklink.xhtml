@@ -9,7 +9,7 @@
       <select name="target" class="select">
         <option value=""><?= $this->title ?></option>
         <?php foreach ($this->items as $item): ?>
-          <option value="<?= $item['href'] ?>" <?= ($item['active'])?'selected':'' ?>><?= $item['link'] ?></option>
+          <option value="<?= $item['href'] ?>"><?= $item['link'] ?></option>
         <?php endforeach; ?>
       </select>
       <input type="submit" class="submit" value="<?= $this->button ?>" />
