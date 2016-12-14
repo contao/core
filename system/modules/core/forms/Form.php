@@ -298,7 +298,7 @@ class Form extends \Hybrid
 		$this->Template->formId = $formId;
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
-		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';
+		$this->Template->novalidate = TL_MODE == 'BE' || $this->novalidate ? ' novalidate' : '';
 
 		// Get the target URL
 		if ($this->method == 'GET' && $this->jumpTo && ($objTarget = $this->objModel->getRelated('jumpTo')) !== null)
