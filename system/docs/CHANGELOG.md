@@ -5,6 +5,10 @@ Version 3.5.20 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not output invalid option values in widget error messages (see #8594).
+Thanks to Pascal Gerundt for finding and reporting the issue.
+
+### Fixed
 Correctly parse english dates in MooTools (see #8573).
 
 
