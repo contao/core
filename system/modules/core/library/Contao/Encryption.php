@@ -47,9 +47,14 @@ class Encryption
 	 * @param string $strKey   An optional encryption key
 	 *
 	 * @return string The encrypted value
+	 *
+	 * @deprecated Deprecated since Contao 3.5, to be removed in Contao 5.
+	 *             Use the DCA load and save callbacks to implement your own encryption routines.
 	 */
 	public static function encrypt($varValue, $strKey=null)
 	{
+		@trigger_error('Using Encryption::encrypt() has been deprecated and will no longer work in Contao 5.0. Use the DCA load and save callbacks to implement your own encryption routines.', E_USER_DEPRECATED);
+
 		// Recursively encrypt arrays
 		if (is_array($varValue))
 		{
@@ -93,9 +98,14 @@ class Encryption
 	 * @param string $strKey   An optional encryption key
 	 *
 	 * @return string The decrypted value
+	 *
+	 * @deprecated Deprecated since Contao 3.5, to be removed in Contao 5.
+	 *             Use the DCA load and save callbacks to implement your own encryption routines.
 	 */
 	public static function decrypt($varValue, $strKey=null)
 	{
+		@trigger_error('Using Encryption::decrypt() has been deprecated and will no longer work in Contao 5.0. Use the DCA load and save callbacks to implement your own encryption routines.', E_USER_DEPRECATED);
+
 		// Recursively decrypt arrays
 		if (is_array($varValue))
 		{
