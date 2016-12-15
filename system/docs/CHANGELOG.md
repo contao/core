@@ -5,6 +5,9 @@ Version 3.5.20 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Improve the PHP 7.1 compatibility.
+
+### Fixed
 Keep the root nodes order in the page selector (see #8577).
 
 ### Fixed

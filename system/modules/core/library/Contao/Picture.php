@@ -238,8 +238,8 @@ class Picture
 		{
 			$imageObj = clone $this->image;
 
-			$src = $imageObj->setTargetWidth($imageSize->width * $density)
-							->setTargetHeight($imageSize->height * $density)
+			$src = $imageObj->setTargetWidth((int) $imageSize->width * $density)
+							->setTargetHeight((int) $imageSize->height * $density)
 							->setResizeMode($imageSize->resizeMode)
 							->setZoomLevel($imageSize->zoom)
 							->executeResize()
