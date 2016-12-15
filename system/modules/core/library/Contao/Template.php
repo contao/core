@@ -294,6 +294,9 @@ abstract class Template extends \BaseTemplate
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . \Config::get('characterSet'));
 
+		// CORS support
+		\Controller::setCorsHeaders();
+
 		// Add the debug bar
 		if (\Config::get('debugMode') && !\Config::get('hideDebugBar') && !isset($_GET['popup']))
 		{

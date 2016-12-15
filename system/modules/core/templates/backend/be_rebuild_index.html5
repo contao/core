@@ -30,10 +30,15 @@
           el.getAttribute('data-url') && queue.addRequest(i, new Request({
             onSuccess: function() {
               el.addClass('tl_green');
+              el.set('text', '[200] ' + el.get('text'));
             },
             onFailure: function(xhr) {
+              var status = xhr.status;
+              if (status == 0) {
+                status = 'CORS request forbidden';
+              }
               el.addClass('tl_red');
-              el.set('text', '[' + xhr.status + '] ' + el.get('text'));
+              el.set('text', '[' + status + '] ' + el.get('text'));
             },
             url: el.getAttribute('data-url')
           }));
