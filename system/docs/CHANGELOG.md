@@ -5,6 +5,9 @@ Version 3.5.20 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly show running repeated events in the event list (see #8588).
+
+### Fixed
 Improve the PHP 7.1 compatibility.
 
 ### Fixed
