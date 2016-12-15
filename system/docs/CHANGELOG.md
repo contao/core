@@ -5,6 +5,9 @@ Version 3.5.20 (2016-XX-XX)
 ---------------------------
 
 ### Fixed
+Keep the root nodes order in the page selector (see #8577).
+
+### Fixed
 Do not output invalid option values in widget error messages (see #8594).
 Thanks to Pascal Gerundt for finding and reporting the issue.
 
