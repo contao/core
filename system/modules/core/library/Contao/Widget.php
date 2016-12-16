@@ -1486,6 +1486,12 @@ abstract class Widget extends \BaseTemplate
 			}
 		}
 
+		// Warn if someone uses the "encrypt" flag (see #8589)
+		if (isset($arrAttributes['encrypt']))
+		{
+			@trigger_error('Using the "encrypt" flag' . (!empty($strTable) && !empty($strField) ? ' on ' . $strTable . '.' . $strField : '') . ' has been deprecated and will no longer work in Contao 5.0. Use the load and save callbacks with a third-party library such as OpenSSL or phpseclib instead.', E_USER_DEPRECATED);
+		}
+
 		return $arrAttributes;
 	}
 
