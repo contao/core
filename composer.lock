@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cbdbd49515eba00f20efe5787ff17713",
     "content-hash": "a11bc0512d63b52df07269d47ec45e44",
     "packages": [
         {
@@ -33,7 +32,7 @@
                 }
             ],
             "description": "Compass integration for Contao Open Source CMS",
-            "time": "2016-07-07 11:45:34"
+            "time": "2016-07-07T11:45:34+00:00"
         },
         {
             "name": "leafo/scssphp",
@@ -86,20 +85,20 @@
                 "scss",
                 "stylesheet"
             ],
-            "time": "2016-09-11 01:34:11"
+            "time": "2016-09-11T01:34:11+00:00"
         },
         {
             "name": "matthiasmullie/minify",
-            "version": "1.3.41",
+            "version": "1.3.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/minify.git",
-                "reference": "101a56354da8de185eb3464bb27f05cec798bb89"
+                "reference": "b473affbb76ae6ec4e46d368b5081b5bfcdd3ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/101a56354da8de185eb3464bb27f05cec798bb89",
-                "reference": "101a56354da8de185eb3464bb27f05cec798bb89",
+                "url": "https://api.github.com/repos/matthiasmullie/minify/zipball/b473affbb76ae6ec4e46d368b5081b5bfcdd3ed2",
+                "reference": "b473affbb76ae6ec4e46d368b5081b5bfcdd3ed2",
                 "shasum": ""
             },
             "require": {
@@ -108,6 +107,7 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.0",
                 "matthiasmullie/scrapbook": "~1.0",
                 "phpunit/phpunit": "~4.8"
             },
@@ -142,7 +142,7 @@
                 "minifier",
                 "minify"
             ],
-            "time": "2016-11-11 20:29:29"
+            "time": "2016-11-23T10:16:14+00:00"
         },
         {
             "name": "matthiasmullie/path-converter",
@@ -191,7 +191,7 @@
                 "paths",
                 "relative"
             ],
-            "time": "2016-04-27 10:38:05"
+            "time": "2016-04-27T10:38:05+00:00"
         },
         {
             "name": "michelf/php-markdown",
@@ -242,7 +242,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2016-10-29 18:58:20"
+            "time": "2016-10-29T18:58:20+00:00"
         },
         {
             "name": "oyejorge/less.php",
@@ -304,7 +304,7 @@
                 "php",
                 "stylesheet"
             ],
-            "time": "2015-12-30 05:47:36"
+            "time": "2015-12-30T05:47:36+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -342,24 +342,30 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "9b775e88ba1128fa14c69ff94ab954d86067de2a"
+                "reference": "2a24b6e74aa9bf33243020f52895fe77efe94ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/9b775e88ba1128fa14c69ff94ab954d86067de2a",
-                "reference": "9b775e88ba1128fa14c69ff94ab954d86067de2a",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/2a24b6e74aa9bf33243020f52895fe77efe94ccf",
+                "reference": "2a24b6e74aa9bf33243020f52895fe77efe94ccf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4 || ~5"
+            },
+            "suggest": {
+                "mf2/mf2": "Microformat module that allows for parsing HTML for microformats"
             },
             "type": "library",
             "autoload": {
@@ -396,20 +402,20 @@
                 "feeds",
                 "rss"
             ],
-            "time": "2016-06-14 05:48:16"
+            "time": "2016-11-27T01:39:18+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.3",
+            "version": "v5.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
+                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
-                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756",
                 "shasum": ""
             },
             "require": {
@@ -449,7 +455,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-08 11:51:25"
+            "time": "2016-11-24T01:01:23+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
@@ -512,7 +518,7 @@
                 "pdf417",
                 "qrcode"
             ],
-            "time": "2015-09-12 10:08:34"
+            "time": "2015-09-12T10:08:34+00:00"
         },
         {
             "name": "true/punycode",
@@ -559,7 +565,7 @@
                 "idna",
                 "punycode"
             ],
-            "time": "2015-03-12 16:49:35"
+            "time": "2015-03-12T16:49:35+00:00"
         }
     ],
     "packages-dev": [],
