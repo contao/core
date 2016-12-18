@@ -264,7 +264,7 @@ class Picture
 				{
 					if ($fileObj->width && $file1x->width)
 					{
-						$descriptor = round($fileObj->width / $file1x->width, 3) . 'x';
+						$descriptor = rtrim(sprintf('%.3F', $fileObj->width / $file1x->width), '.0') . 'x';
 					}
 				}
 				// Otherwise use width descriptors
