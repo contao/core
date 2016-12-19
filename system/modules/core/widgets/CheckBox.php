@@ -65,7 +65,7 @@ class CheckBox extends \Widget
 
 		if (!empty($varValue) && !$this->isValidOption($varValue))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['invalid'], (is_array($varValue) ? implode(', ', $varValue) : $varValue)));
+			$this->addError($GLOBALS['TL_LANG']['ERR']['invalid']);
 		}
 
 		parent::validate();

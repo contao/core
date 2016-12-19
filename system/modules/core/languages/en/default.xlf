@@ -192,7 +192,7 @@
         <source>File "%s" is not available for download!</source>
       </trans-unit>
       <trans-unit id="ERR.invalid">
-        <source>Invalid input: %s</source>
+        <source>Invalid option value!</source>
       </trans-unit>
       <trans-unit id="ERR.fileNotFoundSync">
         <source>No database entry found for %s. Please synchronize the file system.</source>

@@ -1,6 +1,26 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.20 (2016-12-19)
+---------------------------
+
+### Fixed
+Correctly show running repeated events in the event list (see #8588).
+
+### Fixed
+Improve the PHP 7.1 compatibility.
+
+### Fixed
+Keep the root nodes order in the page selector (see #8577).
+
+### Fixed
+Do not output invalid option values in widget error messages (see #8594).
+Thanks to Pascal Gerundt for finding and reporting the issue.
+
+### Fixed
+Correctly parse english dates in MooTools (see #8573).
+
+
 Version 3.5.19 (2016-11-16)
 ---------------------------
 
