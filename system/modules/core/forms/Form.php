@@ -60,12 +60,6 @@ class Form extends \Hybrid
 	 */
 	protected $strTemplate = 'form';
 
-	/**
-	 * Form usages during same request
-	 * @var array
-	 */
-	static protected $arrFormUsages = array();
-
 
 	/**
 	 * Remove name attributes in the back end so the form is not validated
@@ -274,28 +268,10 @@ class Form extends \Hybrid
 			$strAttributes .= ' class="' . $arrAttributes[1] . '"';
 		}
 
-		$formId = $arrAttributes[0] ?: 'f'.$this->id;
-
-		// Count up form usages
-		if (isset(static::$arrFormUsages[$formId]))
-		{
-			static::$arrFormUsages[$formId]++;
-		}
-		else
-		{
-			static::$arrFormUsages[$formId] = 1;
-		}
-
-		// Adjust form id
-		if (static::$arrFormUsages[$formId] > 1)
-		{
-			$formId .= '_' . static::$arrFormUsages[$formId];
-		}
-
 		$this->Template->hasError = $doNotSubmit;
 		$this->Template->attributes = $strAttributes;
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
-		$this->Template->formId = $formId;
+		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
 		$this->Template->action = \Environment::get('indexFreeRequest');
 		$this->Template->maxFileSize = $hasUpload ? $this->objModel->getMaxUploadFileSize() : false;
 		$this->Template->novalidate = $this->novalidate ? ' novalidate' : '';

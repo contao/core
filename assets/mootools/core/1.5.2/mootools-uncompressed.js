@@ -7012,7 +7012,7 @@ Date.implement({
 					case 'B': return Date.getMsg('months')[d.get('month')];
 					case 'c': return d.format('%a %b %d %H:%M:%S %Y');
 					case 'd': return pad(d.get('date'), 2);
-					case 'e': return pad(d.get('date'), 2, ' ');
+					case 'e': return d.get('date'); // PATCH
 					case 'H': return pad(d.get('hr'), 2);
 					case 'I': return pad((d.get('hr') % 12) || 12, 2);
 					case 'j': return pad(d.get('dayofyear'), 3);
@@ -7327,6 +7327,7 @@ var handle = function(key, value){
 Date.defineParsers(
 	'%d(.%m(.%Y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse German dates
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?', // "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
+	'%m(/%d(/%Y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse English dates (see #8573)
 	'%Y%m%d(T%H(%M%S?)?)?', // "19991231", "19991231T1159", compact
 	'%x( %X)?', // "12/31", "12.31.99", "12-31-1999", "12/31/2008 11:59 PM"
 	'%d%o( %b( %Y)?)?( %X)?', // "31st", "31st December", "31 Dec 1999", "31 Dec 1999 11:59pm"

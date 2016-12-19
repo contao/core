@@ -722,6 +722,12 @@ class Updater extends \Controller
 				continue;
 			}
 
+			// Make sure the table exists (see #8304)
+			if (!$this->Database->tableExists($strTable, null, true))
+			{
+				continue;
+			}
+
 			$arrConfig = &$GLOBALS['TL_DCA'][$strTable]['config'];
 
 			// Skip non-database DCAs

@@ -99,6 +99,12 @@ class File extends \System
 	protected $arrImageSize = array();
 
 	/**
+	 * Image size runtime cache
+	 * @var array
+	 */
+	protected static $arrImageSizeCache = array();
+
+	/**
 	 * Image view size
 	 * @var array
 	 */
@@ -244,7 +250,13 @@ class File extends \System
 			case 'imageSize':
 				if (empty($this->arrImageSize))
 				{
-					if ($this->isGdImage)
+					$strCacheKey = $this->strFile . '|' . $this->mtime;
+
+					if (isset(static::$arrImageSizeCache[$strCacheKey]))
+					{
+						$this->arrImageSize = static::$arrImageSizeCache[$strCacheKey];
+					}
+					elseif ($this->isGdImage)
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
@@ -291,6 +303,11 @@ class File extends \System
 								$this->arrImageSize = false;
 							}
 						}
+					}
+
+					if (!isset(static::$arrImageSizeCache[$strCacheKey]))
+					{
+						static::$arrImageSizeCache[$strCacheKey] = $this->arrImageSize;
 					}
 				}
 				return $this->arrImageSize;
