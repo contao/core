@@ -147,7 +147,7 @@ class ContentDownloads extends \ContentElement
 				}
 
 				list(,$queryString) = explode('?', \Environment::get('request'), 2);
-				$strHref = $objPage->getAbsoluteUrl() . (($queryString != null) ? '?' . $queryString : '');
+				$strHref = $objPage->getAbsoluteUrl() . (($queryString !== null) ? '?' . $queryString : '');
 
 				// Remove an existing file parameter (see #5683)
 				if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
