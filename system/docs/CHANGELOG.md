@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.21 (2016-12-29)
+---------------------------
+
+### Updated
+Update SwiftMailer to version 5.4.5 (fixes CVE-2016-10074).
+
+
 Version 3.5.20 (2016-12-19)
 ---------------------------
 
