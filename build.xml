@@ -2,7 +2,7 @@
 <project name="Contao Open Source CMS" default="build" basedir=".">
   <exec executable="system/bin/version" outputProperty="version" />
 
-  <target name="build" depends="clone, update, languages, purge, archive, cleanup">
+  <target name="build" depends="clone, update, languages, purge, pack, cleanup">
     <echo message="Contao ${version} build complete" />
   </target>
 
@@ -12,7 +12,7 @@
       <arg value="." />
       <arg value="contao-${version}" />
     </exec>
-    <exec executable="git" dir="contao-${version}" failonerror="true">
+    <exec executable="git" dir="contao-${version}">
       <arg value="checkout" />
       <arg value="--quiet" />
       <arg value="${version}" />
@@ -24,7 +24,7 @@
   </target>
 
   <target name="update">
-    <exec executable="composer" dir="contao-${version}" failonerror="true">
+    <exec executable="composer" dir="contao-${version}" passthru="true">
       <arg value="install" />
       <arg value="--prefer-dist" />
       <arg value="--no-dev" />
@@ -33,7 +33,7 @@
   </target>
 
   <target name="languages">
-    <exec executable="txget" dir="contao-${version}" failonerror="true" />
+    <exec executable="txget" dir="contao-${version}" passthru="true" />
   </target>
 
   <target name="purge">
@@ -50,15 +50,17 @@
     </delete>
   </target>
 
-  <target name="archive">
-    <defaultexcludes remove="**/.gitignore" />
-    <zip destfile="contao-${version}.zip">
-      <zipfileset dir="contao-${version}" prefix="contao-${version}" />
-    </zip>
-    <tar destfile="contao-${version}.tar.gz" compression="gzip" longfile="gnu">
-      <tarfileset dir="contao-${version}" prefix="contao-${version}" />
-    </tar>
-    <defaultexcludes default="true" />
+  <target name="pack">
+    <exec executable="zip">
+      <arg value="-r" />
+      <arg value="contao-${version}.zip" />
+      <arg value="contao-${version}/" />
+    </exec>
+    <exec executable="tar">
+      <arg value="-czf" />
+      <arg value="contao-${version}.tar.gz" />
+      <arg value="contao-${version}/" />
+    </exec>
   </target>
 
   <target name="cleanup">
