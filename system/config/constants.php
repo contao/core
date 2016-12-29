@@ -13,7 +13,7 @@
  * Core version
  */
 define('VERSION', '3.5');
-define('BUILD', '20');
+define('BUILD', '21');
 define('LONG_TERM_SUPPORT', true);
 
 
