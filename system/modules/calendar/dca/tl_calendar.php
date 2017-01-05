@@ -317,27 +317,10 @@ class tl_calendar extends Backend
 
 					if (is_array($arrNew['tl_calendar']) && in_array(Input::get('id'), $arrNew['tl_calendar']))
 					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
-						{
-							$objUser = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->id);
+						$blnDone = false;
 
-							$arrCalendarp = deserialize($objUser->calendarp);
-
-							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
-							{
-								$arrCalendars = deserialize($objUser->calendars);
-								$arrCalendars[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
-											   ->execute(serialize($arrCalendars), $this->User->id);
-							}
-						}
-
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
+						// Try to add the permissions on group level
+						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
 						{
 							$objGroup = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user_group WHERE id=?")
 													   ->limit(1)
@@ -347,7 +330,8 @@ class tl_calendar extends Backend
 
 							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
 							{
-								$arrCalendars = deserialize($objGroup->calendars);
+								$blnDone = true;
+								$arrCalendars = deserialize($objGroup->calendars, true);
 								$arrCalendars[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET calendars=? WHERE id=?")
@@ -355,7 +339,26 @@ class tl_calendar extends Backend
 							}
 						}
 
-						// Add new element to the user object
+						// Add permissions on user level
+						if (!$blnDone)
+						{
+							$objUser = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
+
+							$arrCalendarp = deserialize($objUser->calendarp);
+
+							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
+							{
+								$arrCalendars = deserialize($objUser->calendars, true);
+								$arrCalendars[] = Input::get('id');
+
+								$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
+											   ->execute(serialize($arrCalendars), $this->User->id);
+							}
+						}
+
+						// Add the new element to the user object
 						$root[] = Input::get('id');
 						$this->User->calendars = $root;
 					}

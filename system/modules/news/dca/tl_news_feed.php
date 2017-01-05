@@ -270,27 +270,10 @@ class tl_news_feed extends Backend
 
 					if (is_array($arrNew['tl_news_feed']) && in_array(Input::get('id'), $arrNew['tl_news_feed']))
 					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
-						{
-							$objUser = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->id);
+						$blnDone = false;
 
-							$arrNewsfeedp = deserialize($objUser->newsfeedp);
-
-							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
-							{
-								$arrNewsfeeds = deserialize($objUser->newsfeeds);
-								$arrNewsfeeds[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user SET newsfeeds=? WHERE id=?")
-											   ->execute(serialize($arrNewsfeeds), $this->User->id);
-							}
-						}
-
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
+						// Try to add the permissions on group level
+						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
 						{
 							$objGroup = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user_group WHERE id=?")
 													   ->limit(1)
@@ -300,7 +283,8 @@ class tl_news_feed extends Backend
 
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
-								$arrNewsfeeds = deserialize($objGroup->newsfeeds);
+								$blnDone = true;
+								$arrNewsfeeds = deserialize($objGroup->newsfeeds, true);
 								$arrNewsfeeds[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
@@ -308,7 +292,26 @@ class tl_news_feed extends Backend
 							}
 						}
 
-						// Add new element to the user object
+						// Add permissions on user level
+						if (!$blnDone)
+						{
+							$objUser = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
+
+							$arrNewsfeedp = deserialize($objUser->newsfeedp);
+
+							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							{
+								$arrNewsfeeds = deserialize($objUser->newsfeeds, true);
+								$arrNewsfeeds[] = Input::get('id');
+
+								$this->Database->prepare("UPDATE tl_user SET newsfeeds=? WHERE id=?")
+											   ->execute(serialize($arrNewsfeeds), $this->User->id);
+							}
+						}
+
+						// Add the new element to the user object
 						$root[] = Input::get('id');
 						$this->User->newsfeeds = $root;
 					}

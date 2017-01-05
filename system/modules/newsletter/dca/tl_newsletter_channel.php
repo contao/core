@@ -264,27 +264,10 @@ class tl_newsletter_channel extends Backend
 
 					if (is_array($arrNew['tl_newsletter_channel']) && in_array(Input::get('id'), $arrNew['tl_newsletter_channel']))
 					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
-						{
-							$objUser = $this->Database->prepare("SELECT newsletters, newsletterp FROM tl_user WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->id);
+						$blnDone = false;
 
-							$arrNewsletterp = deserialize($objUser->newsletterp);
-
-							if (is_array($arrNewsletterp) && in_array('create', $arrNewsletterp))
-							{
-								$arrNewsletters = deserialize($objUser->newsletters);
-								$arrNewsletters[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user SET newsletters=? WHERE id=?")
-											   ->execute(serialize($arrNewsletters), $this->User->id);
-							}
-						}
-
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
+						// Try to add the permissions on group level
+						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
 						{
 							$objGroup = $this->Database->prepare("SELECT newsletters, newsletterp FROM tl_user_group WHERE id=?")
 													   ->limit(1)
@@ -294,7 +277,8 @@ class tl_newsletter_channel extends Backend
 
 							if (is_array($arrNewsletterp) && in_array('create', $arrNewsletterp))
 							{
-								$arrNewsletters = deserialize($objGroup->newsletters);
+								$blnDone = true;
+								$arrNewsletters = deserialize($objGroup->newsletters, true);
 								$arrNewsletters[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user_group SET newsletters=? WHERE id=?")
@@ -302,7 +286,26 @@ class tl_newsletter_channel extends Backend
 							}
 						}
 
-						// Add new element to the user object
+						// Add permissions on user level
+						if (!$blnDone)
+						{
+							$objUser = $this->Database->prepare("SELECT newsletters, newsletterp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
+
+							$arrNewsletterp = deserialize($objUser->newsletterp);
+
+							if (is_array($arrNewsletterp) && in_array('create', $arrNewsletterp))
+							{
+								$arrNewsletters = deserialize($objUser->newsletters, true);
+								$arrNewsletters[] = Input::get('id');
+
+								$this->Database->prepare("UPDATE tl_user SET newsletters=? WHERE id=?")
+											   ->execute(serialize($arrNewsletters), $this->User->id);
+							}
+						}
+
+						// Add the new element to the user object
 						$root[] = Input::get('id');
 						$this->User->newsletter = $root;
 					}

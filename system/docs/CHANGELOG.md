@@ -5,6 +5,9 @@ Version 3.5.22 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly add new resources to the user/group permissions (see #8583).
+
+### Fixed
 Trigger the auto-submit function in the date picker (see #8603).
 
 ### Fixed
