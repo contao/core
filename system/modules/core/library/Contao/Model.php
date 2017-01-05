@@ -682,12 +682,14 @@ abstract class Model
 	 */
 	public function detach($blnKeepClone=true)
 	{
-		if (!\Model\Registry::getInstance()->isRegistered($this))
+		$registry = \Model\Registry::getInstance();
+
+		if (!$registry->isRegistered($this))
 		{
 			return;
 		}
 
-		\Model\Registry::getInstance()->unregister($this);
+		$registry->unregister($this);
 
 		if ($blnKeepClone)
 		{
