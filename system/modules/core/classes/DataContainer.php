@@ -373,16 +373,24 @@ abstract class DataContainer extends \Backend
 			switch ($rgxp)
 			{
 				case 'datim':
-					$time = ",\n      timePicker:true";
+					$time = ",\n        timePicker: true";
 					break;
 
 				case 'time':
-					$time = ",\n      pickOnly:\"time\"";
+					$time = ",\n        pickOnly: \"time\"";
 					break;
 
 				default:
 					$time = '';
 					break;
+			}
+
+			$strOnSelect = '';
+
+			// Trigger the auto-submit function (see #8603)
+			if ($arrData['eval']['submitOnChange'])
+			{
+				$strOnSelect = ",\n        onSelect: function() { Backend.autoSubmit(\"" . $this->strTable . "\"); }";
 			}
 
 			$wizard .= ' ' . \Image::getHtml('assets/mootools/datepicker/' . $GLOBALS['TL_ASSETS']['DATEPICKER'] . '/icon.gif', '', 'title="'.specialchars($GLOBALS['TL_LANG']['MSC']['datepicker']).'" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;cursor:pointer"') . '
@@ -394,7 +402,7 @@ abstract class DataContainer extends \Backend
         format: "' . $format . '",
         positionOffset: {x:-211,y:-209}' . $time . ',
         pickerClass: "datepicker_bootstrap",
-        useFadeInOut: !Browser.ie,
+        useFadeInOut: !Browser.ie' . $strOnSelect . ',
         startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
         titleFormat: "' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
       });
