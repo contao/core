@@ -88,7 +88,7 @@ class ContentDownload extends \ContentElement
 		/** @var \PageModel $objPage */
 		global $objPage;
 
-		$strHref = $objPage->getFrontendUrl() . ((Environment::get('queryString') != '') ? '?' . Environment::get('queryString') : '');
+		$strHref = $objPage->getFrontendUrl() . (Environment::get('queryString') ? '?' . Environment::get('queryString') : '');
 
 		// Remove an existing file parameter (see #5683)
 		if (preg_match('/(&(amp;)?|\?)file=/', $strHref))
