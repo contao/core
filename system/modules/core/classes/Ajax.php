@@ -213,26 +213,62 @@ class Ajax extends \Backend
 
 			// Load nodes of the page tree
 			case 'loadPagetree':
+				$varValue = null;
 				$strField = $dc->field = \Input::post('name');
+
+				// Call the load_callback
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
 
 				/** @var \PageSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['pageSelector'];
 
 				/** @var \PageSelector $objWidget */
-				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
 				echo $objWidget->generateAjax($this->strAjaxId, \Input::post('field'), intval(\Input::post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
+				$varValue = null;
 				$strField = $dc->field = \Input::post('name');
+
+				// Call the load_callback
+				if (is_array($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField]['load_callback'] as $callback)
+					{
+						if (is_array($callback))
+						{
+							$this->import($callback[0]);
+							$varValue = $this->{$callback[0]}->{$callback[1]}($varValue, $dc);
+						}
+						elseif (is_callable($callback))
+						{
+							$varValue = $callback($varValue, $dc);
+						}
+					}
+				}
 
 				/** @var \FileSelector $strClass */
 				$strClass = $GLOBALS['BE_FFL']['fileSelector'];
 
 				/** @var \FileSelector $objWidget */
-				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, null, $strField, $dc->table, $dc));
+				$objWidget = new $strClass($strClass::getAttributesFromDca($GLOBALS['TL_DCA'][$dc->table]['fields'][$strField], $dc->field, $varValue, $strField, $dc->table, $dc));
 
 				// Load a particular node
 				if (\Input::post('folder', true) != '')

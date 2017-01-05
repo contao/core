@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.22 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Call the load callback when loading page/file picker nodes (see #7702).
+
+
 Version 3.5.21 (2016-12-29)
 ---------------------------
 
