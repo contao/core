@@ -260,8 +260,14 @@ abstract class User extends \System
 		$time = time();
 
 		// Validate the session
-		if ($objSession->sessionID != session_id() || (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
+		if ($objSession->sessionID != session_id() || $objSession->hash != $this->strHash || ($objSession->tstamp + \Config::get('sessionTimeout')) < $time)
 		{
+			return false;
+		}
+
+		if (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp)
+		{
+			$this->log('User authentication failed due to IP mismatch. Recorded IP: '.$objSession->ip.'. Current IP: '.$this->strIp, __METHOD__, TL_ERROR);
 			return false;
 		}
 
