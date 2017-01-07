@@ -267,7 +267,7 @@ abstract class User extends \System
 
 		if (!\Config::get('disableIpCheck') && $objSession->ip != $this->strIp)
 		{
-			$this->log('User authentication failed due to IP mismatch; recorded IP: '.$objSession->ip.', Current IP: '.$this->strIp, __METHOD__, TL_ERROR);
+			$this->log('User authentication failed due to IP mismatch; recorded IP: '.$objSession->ip.', current IP: '.$this->strIp, __METHOD__, TL_ERROR);
 			return false;
 		}
 
