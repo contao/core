@@ -5,6 +5,9 @@ Version 3.5.22 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly parse German dates with two digit years in MooTools (see #8593).
+
+### Fixed
 Correctly add new resources to the user/group permissions (see #8583).
 
 ### Fixed
