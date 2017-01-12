@@ -4050,6 +4050,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$strMethod = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback'][1];
 
 				$this->import($strClass);
+				// the callback can eighter return a string or an array
 				$add = $this->$strClass->$strMethod($add, $this);
 			}
 			elseif (is_callable($GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']))
@@ -4057,28 +4058,38 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$add = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']($add, $this);
 			}
 
-			// Output the header data
-			$return .= '
+			if(is_string($add))
+			{
+				// if it is a string display it
+				$return .= $add;
+			}
+			else
+			{
+				// Output the header data from an array as table
+				$return .= '
 
 <table class="tl_header_table">';
 
-			foreach ($add as $k=>$v)
-			{
-				if (is_array($v))
+				foreach ($add as $k=>$v)
 				{
-					$v = $v[0];
-				}
+					if (is_array($v))
+					{
+						$v = $v[0];
+					}
 
-				$return .= '
+					$return .= '
   <tr>
     <td><span class="tl_label">'.$k.':</span> </td>
     <td>'.$v.'</td>
   </tr>';
+				}
+
+				$return .= '
+</table>';
 			}
 
-			$return .= '
-</table>
-</div>';
+			// output the header data
+			$return .= '</div>';
 
 			$orderBy = array();
 			$firstOrderBy = array();
