@@ -362,6 +362,9 @@
       <trans-unit id="tl_settings.inactiveModules.1">
         <source>Here you can deactivate unneeded extensions.</source>
       </trans-unit>
+      <trans-unit id="tl_settings.inactiveModules.2">
+        <source>Extensions could not be disabled because of unresolvable dependencies.</source>
+      </trans-unit>
       <trans-unit id="tl_settings.undoPeriod.0">
         <source>Storage time for undo steps</source>
       </trans-unit>
