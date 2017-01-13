@@ -342,30 +342,28 @@ class tl_form extends Backend
 
 					if (is_array($arrNew['tl_form']) && in_array(Input::get('id'), $arrNew['tl_form']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT forms, formp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, forms, formp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrFormp = deserialize($objGroup->formp);
-
-							if (is_array($arrFormp) && in_array('create', $arrFormp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrForms = deserialize($objGroup->forms, true);
-								$arrForms[] = Input::get('id');
+								$arrFormp = deserialize($objGroup->formp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET forms=? WHERE id=?")
-											   ->execute(serialize($arrForms), $this->User->groups[0]);
+								if (is_array($arrFormp) && in_array('create', $arrFormp))
+								{
+									$arrForms = deserialize($objGroup->forms, true);
+									$arrForms[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET forms=? WHERE id=?")
+												   ->execute(serialize($arrForms), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT forms, formp FROM tl_user WHERE id=?")
 													   ->limit(1)

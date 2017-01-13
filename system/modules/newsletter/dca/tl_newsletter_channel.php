@@ -264,30 +264,28 @@ class tl_newsletter_channel extends Backend
 
 					if (is_array($arrNew['tl_newsletter_channel']) && in_array(Input::get('id'), $arrNew['tl_newsletter_channel']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT newsletters, newsletterp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, newsletters, newsletterp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrNewsletterp = deserialize($objGroup->newsletterp);
-
-							if (is_array($arrNewsletterp) && in_array('create', $arrNewsletterp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrNewsletters = deserialize($objGroup->newsletters, true);
-								$arrNewsletters[] = Input::get('id');
+								$arrNewsletterp = deserialize($objGroup->newsletterp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET newsletters=? WHERE id=?")
-											   ->execute(serialize($arrNewsletters), $this->User->groups[0]);
+								if (is_array($arrNewsletterp) && in_array('create', $arrNewsletterp))
+								{
+									$arrNewsletters = deserialize($objGroup->newsletters, true);
+									$arrNewsletters[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET newsletters=? WHERE id=?")
+												   ->execute(serialize($arrNewsletters), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT newsletters, newsletterp FROM tl_user WHERE id=?")
 													   ->limit(1)

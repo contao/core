@@ -317,30 +317,28 @@ class tl_calendar extends Backend
 
 					if (is_array($arrNew['tl_calendar']) && in_array(Input::get('id'), $arrNew['tl_calendar']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, calendars, calendarp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrCalendarp = deserialize($objGroup->calendarp);
-
-							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrCalendars = deserialize($objGroup->calendars, true);
-								$arrCalendars[] = Input::get('id');
+								$arrCalendarp = deserialize($objGroup->calendarp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET calendars=? WHERE id=?")
-											   ->execute(serialize($arrCalendars), $this->User->groups[0]);
+								if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
+								{
+									$arrCalendars = deserialize($objGroup->calendars, true);
+									$arrCalendars[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET calendars=? WHERE id=?")
+												   ->execute(serialize($arrCalendars), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user WHERE id=?")
 													   ->limit(1)

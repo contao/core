@@ -270,30 +270,28 @@ class tl_news_feed extends Backend
 
 					if (is_array($arrNew['tl_news_feed']) && in_array(Input::get('id'), $arrNew['tl_news_feed']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, newsfeeds, newsfeedp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrNewsfeedp = deserialize($objGroup->newsfeedp);
-
-							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrNewsfeeds = deserialize($objGroup->newsfeeds, true);
-								$arrNewsfeeds[] = Input::get('id');
+								$arrNewsfeedp = deserialize($objGroup->newsfeedp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
-											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
+								if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+								{
+									$arrNewsfeeds = deserialize($objGroup->newsfeeds, true);
+									$arrNewsfeeds[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
+												   ->execute(serialize($arrNewsfeeds), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user WHERE id=?")
 													   ->limit(1)

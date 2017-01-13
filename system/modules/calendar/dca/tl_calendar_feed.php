@@ -270,44 +270,42 @@ class tl_calendar_feed extends Backend
 
 					if (is_array($arrNew['tl_calendar_feed']) && in_array(Input::get('id'), $arrNew['tl_calendar_feed']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT calendarfeeds, calendarfeedp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, calendarfeeds, calendarfeedp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrNewsfeedp = deserialize($objGroup->calendarfeedp);
-
-							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrNewsfeeds = deserialize($objGroup->calendarfeeds, true);
-								$arrNewsfeeds[] = Input::get('id');
+								$arrCalendarfeedp = deserialize($objGroup->calendarfeedp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET calendarfeeds=? WHERE id=?")
-											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
+								if (is_array($arrCalendarfeedp) && in_array('create', $arrCalendarfeedp))
+								{
+									$arrCalendarfeeds = deserialize($objGroup->calendarfeeds, true);
+									$arrCalendarfeeds[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET calendarfeeds=? WHERE id=?")
+												   ->execute(serialize($arrCalendarfeeds), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT calendarfeeds, calendarfeedp FROM tl_user WHERE id=?")
 													   ->limit(1)
 													   ->execute($this->User->id);
 
-							$arrNewsfeedp = deserialize($objUser->calendarfeedp);
+							$arrCalendarfeedp = deserialize($objUser->calendarfeedp);
 
-							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							if (is_array($arrCalendarfeedp) && in_array('create', $arrCalendarfeedp))
 							{
-								$arrNewsfeeds = deserialize($objUser->calendarfeeds, true);
-								$arrNewsfeeds[] = Input::get('id');
+								$arrCalendarfeeds = deserialize($objUser->calendarfeeds, true);
+								$arrCalendarfeeds[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET calendarfeeds=? WHERE id=?")
-											   ->execute(serialize($arrNewsfeeds), $this->User->id);
+											   ->execute(serialize($arrCalendarfeeds), $this->User->id);
 							}
 						}
 

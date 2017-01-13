@@ -293,30 +293,28 @@ class tl_faq_category extends Backend
 
 					if (is_array($arrNew['tl_faq_category']) && in_array(Input::get('id'), $arrNew['tl_faq_category']))
 					{
-						$blnDone = false;
-
-						// Try to add the permissions on group level
-						if ($this->User->inherit != 'custom' && !empty($this->User->groups[0]))
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
 						{
-							$objGroup = $this->Database->prepare("SELECT faqs, faqp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
+							$objGroup = $this->Database->execute("SELECT id, faqs, faqp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
 
-							$arrFaqp = deserialize($objGroup->faqp);
-
-							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
+							while ($objGroup->next())
 							{
-								$blnDone = true;
-								$arrFaqs = deserialize($objGroup->faqs, true);
-								$arrFaqs[] = Input::get('id');
+								$arrFaqp = deserialize($objGroup->faqp);
 
-								$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
-											   ->execute(serialize($arrFaqs), $this->User->groups[0]);
+								if (is_array($arrFaqp) && in_array('create', $arrFaqp))
+								{
+									$arrFaqs = deserialize($objGroup->faqs, true);
+									$arrFaqs[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
+												   ->execute(serialize($arrFaqs), $objGroup->id);
+								}
 							}
 						}
 
-						// Add permissions on user level
-						if (!$blnDone)
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT faqs, faqp FROM tl_user WHERE id=?")
 													   ->limit(1)
