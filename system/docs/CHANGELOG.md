@@ -5,6 +5,9 @@ Version 3.5.22 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent an endless redirect loop if the page alias is "/" (see #8560).
+
+### Fixed
 Correctly parse German dates with two digit years in MooTools (see #8593).
 
 ### Fixed
