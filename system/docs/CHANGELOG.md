@@ -1,6 +1,25 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.22 (2017-01-16)
+---------------------------
+
+### Fixed
+Prevent an endless redirect loop if the page alias is "/" (see #8560).
+
+### Fixed
+Correctly parse German dates with two digit years in MooTools (see #8593).
+
+### Fixed
+Correctly add new resources to the user/group permissions (see #8583).
+
+### Fixed
+Trigger the auto-submit function in the date picker (see #8603).
+
+### Fixed
+Call the load callback when loading page/file picker nodes (see #7702).
+
+
 Version 3.5.21 (2016-12-29)
 ---------------------------
 

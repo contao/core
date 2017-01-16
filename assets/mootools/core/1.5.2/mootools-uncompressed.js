@@ -7326,6 +7326,7 @@ var handle = function(key, value){
 
 Date.defineParsers(
 	'%d(.%m(.%Y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse German dates
+	'%d(.%m(.%y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse German dates (see #8593)
 	'%Y([-./]%m([-./]%d((T| )%X)?)?)?', // "1999-12-31", "1999-12-31 11:59pm", "1999-12-31 23:59:59", ISO8601
 	'%m(/%d(/%Y( %H:%M(:%S)?)?)?)?', // PATCH: correctly parse English dates (see #8573)
 	'%Y%m%d(T%H(%M%S?)?)?', // "19991231", "19991231T1159", compact

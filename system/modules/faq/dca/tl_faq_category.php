@@ -293,8 +293,28 @@ class tl_faq_category extends Backend
 
 					if (is_array($arrNew['tl_faq_category']) && in_array(Input::get('id'), $arrNew['tl_faq_category']))
 					{
-						// Add permissions on user level
-						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
+						// Add the permissions on group level
+						if ($this->User->inherit != 'custom')
+						{
+							$objGroup = $this->Database->execute("SELECT id, faqs, faqp FROM tl_user_group WHERE id IN(" . implode(',', array_map('intval', $this->User->groups)) . ")");
+
+							while ($objGroup->next())
+							{
+								$arrFaqp = deserialize($objGroup->faqp);
+
+								if (is_array($arrFaqp) && in_array('create', $arrFaqp))
+								{
+									$arrFaqs = deserialize($objGroup->faqs, true);
+									$arrFaqs[] = Input::get('id');
+
+									$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
+												   ->execute(serialize($arrFaqs), $objGroup->id);
+								}
+							}
+						}
+
+						// Add the permissions on user level
+						if ($this->User->inherit != 'group')
 						{
 							$objUser = $this->Database->prepare("SELECT faqs, faqp FROM tl_user WHERE id=?")
 													   ->limit(1)
@@ -304,7 +324,7 @@ class tl_faq_category extends Backend
 
 							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
 							{
-								$arrFaqs = deserialize($objUser->faqs);
+								$arrFaqs = deserialize($objUser->faqs, true);
 								$arrFaqs[] = Input::get('id');
 
 								$this->Database->prepare("UPDATE tl_user SET faqs=? WHERE id=?")
@@ -312,26 +332,7 @@ class tl_faq_category extends Backend
 							}
 						}
 
-						// Add permissions on group level
-						elseif ($this->User->groups[0] > 0)
-						{
-							$objGroup = $this->Database->prepare("SELECT faqs, faqp FROM tl_user_group WHERE id=?")
-													   ->limit(1)
-													   ->execute($this->User->groups[0]);
-
-							$arrFaqp = deserialize($objGroup->faqp);
-
-							if (is_array($arrFaqp) && in_array('create', $arrFaqp))
-							{
-								$arrFaqs = deserialize($objGroup->faqs);
-								$arrFaqs[] = Input::get('id');
-
-								$this->Database->prepare("UPDATE tl_user_group SET faqs=? WHERE id=?")
-											   ->execute(serialize($arrFaqs), $this->User->groups[0]);
-							}
-						}
-
-						// Add new element to the user object
+						// Add the new element to the user object
 						$root[] = Input::get('id');
 						$this->User->faqs = $root;
 					}
