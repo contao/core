@@ -72,9 +72,36 @@ class ImageSize extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-		$varInput[0] = parent::validator($varInput[0]);
-		$varInput[1] = parent::validator($varInput[1]);
 		$varInput[2] = preg_replace('/[^a-z0-9_]+/', '', $varInput[2]);
+
+		if (!is_numeric($varInput[2]))
+		{
+			switch ($varInput[2])
+			{
+				// Validate relative dimensions - width or height required
+				case 'proportional':
+				case 'box':
+					$this->mandatory = !$varInput[0] && !$varInput[1];
+					break;
+
+				// Validate exact dimensions - width and height required
+				case 'crop':
+				case 'left_top':
+				case 'center_top':
+				case 'right_top':
+				case 'left_center':
+				case 'center_center':
+				case 'right_center':
+				case 'left_bottom':
+				case 'center_bottom':
+				case 'right_bottom':
+					$this->mandatory = !$varInput[0] || !$varInput[1];
+					break;
+			}
+
+			$varInput[0] = parent::validator($varInput[0]);
+			$varInput[1] = parent::validator($varInput[1]);
+		}
 
 		return $varInput;
 	}

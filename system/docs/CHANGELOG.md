@@ -1,6 +1,16 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.23 (2017-01-17)
+---------------------------
+
+### Fixed
+Handle non-numeric values when calculating the image margin (see #8617).
+
+### Fixed
+Correctly generate the download elements in the back end (see #8620).
+
+
 Version 3.5.22 (2017-01-16)
 ---------------------------
 

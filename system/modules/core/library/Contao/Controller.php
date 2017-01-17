@@ -1499,7 +1499,7 @@ abstract class Controller extends \System
 			// Subtract the margins before deciding whether to resize (see #6018)
 			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+				$intMargin = (int) $arrMargin['left'] + (int) $arrMargin['right'];
 
 				// Reset the margin if it exceeds the maximum width (see #7245)
 				if ($intMaxWidth - $intMargin < 1)
