@@ -692,23 +692,26 @@ abstract class System
 
 		// Use loadXML() instead of load() (see 7192)
 		$xml->loadXML(file_get_contents(TL_ROOT . '/' . $strName));
-		$return = "\n// $strName\n";
 
-		$objFileNodes     = $xml->getElementsByTagName('file');
-		$strCheckLanguage = strtolower($strLanguage);
+		$return       = "\n// $strName\n";
+		$objFileNodes = $xml->getElementsByTagName('file');
+		$strLanguage  = strtolower($strLanguage);
 
 		/** @var \DOMElement[] $objFileNodes */
 		foreach ($objFileNodes as $objFileNode) {
 			$strTagName = 'target';
+
 			// Use the source tag if the source language matches
-			if (strtolower($objFileNode->getAttribute('source-language')) === $strCheckLanguage) {
+			if (strtolower($objFileNode->getAttribute('source-language')) === $strLanguage) {
 				$strTagName = 'source';
 			}
+
 			$return .= self::getPhpFromFileNode($objFileNode, $strTagName, $blnLoad);
 		}
 
 		return rtrim($return);
 	}
+
 
 	/**
 	 * Convert a file node into a PHP language file
@@ -719,7 +722,7 @@ abstract class System
 	 *
 	 * @return string The PHP code
 	 */
-	private static function getPhpFromFileNode($objFileNode, $strTagName, $blnLoad=false)
+	private static function getPhpFromFileNode(\DOMElement $objFileNode, $strTagName, $blnLoad=false)
 	{
 		$return = '';
 		$units  = $objFileNode->getElementsByTagName('trans-unit');
