@@ -722,7 +722,7 @@ abstract class System
 	 *
 	 * @return string The PHP code
 	 */
-	private static function getPhpFromFileNode(\DOMElement $objFileNode, $strTagName, $blnLoad=false)
+	protected static function getPhpFromFileNode(\DOMElement $objFileNode, $strTagName, $blnLoad=false)
 	{
 		$return = '';
 		$units = $objFileNode->getElementsByTagName('trans-unit');
