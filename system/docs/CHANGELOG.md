@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.23 (2017-01-XX)
+---------------------------
+
+### Fixed
+Correctly generate the download elements in the back end (see #8620).
+
+
 Version 3.5.22 (2017-01-16)
 ---------------------------
 
