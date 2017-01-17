@@ -5,6 +5,9 @@ Version 3.5.23 (2017-01-XX)
 ---------------------------
 
 ### Fixed
+Handle non-numeric values when calculating the image margin (see #8617).
+
+### Fixed
 Correctly generate the download elements in the back end (see #8620).
 
 
