@@ -582,6 +582,11 @@ abstract class Frontend extends \Controller
 	 */
 	public static function getMetaData($strData, $strLanguage)
 	{
+		if (empty($strLanguage))
+		{
+			return array();
+		}
+
 		$arrData = deserialize($strData);
 
 		// Convert the language to a locale (see #5678)
