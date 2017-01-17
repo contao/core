@@ -694,7 +694,38 @@ abstract class System
 		$xml->loadXML(file_get_contents(TL_ROOT . '/' . $strName));
 
 		$return = "\n// $strName\n";
-		$units = $xml->getElementsByTagName('trans-unit');
+		$objFileNodes = $xml->getElementsByTagName('file');
+		$strLanguage = strtolower($strLanguage);
+
+		/** @var \DOMElement[] $objFileNodes */
+		foreach ($objFileNodes as $objFileNode) {
+			$strTagName = 'target';
+
+			// Use the source tag if the source language matches
+			if (strtolower($objFileNode->getAttribute('source-language')) === $strLanguage) {
+				$strTagName = 'source';
+			}
+
+			$return .= self::getPhpFromFileNode($objFileNode, $strTagName, $blnLoad);
+		}
+
+		return rtrim($return);
+	}
+
+
+	/**
+	 * Convert a file node into a PHP language file
+	 *
+	 * @param \DOMElement $objFileNode The .xlf file node
+	 * @param string      $strTagName  The name of the tag to read
+	 * @param boolean     $blnLoad     Add the labels to the global language array
+	 *
+	 * @return string The PHP code
+	 */
+	private static function getPhpFromFileNode(\DOMElement $objFileNode, $strTagName, $blnLoad=false)
+	{
+		$return = '';
+		$units = $objFileNode->getElementsByTagName('trans-unit');
 
 		// Set up the quotekey function
 		$quotekey = function($key)
@@ -731,7 +762,7 @@ abstract class System
 		/** @var \DOMElement[] $units */
 		foreach ($units as $unit)
 		{
-			$node = ($strLanguage == 'en') ? $unit->getElementsByTagName('source') : $unit->getElementsByTagName('target');
+			$node = $unit->getElementsByTagName($strTagName);
 
 			if ($node === null || $node->item(0) === null)
 			{
@@ -786,7 +817,7 @@ abstract class System
 			}
 		}
 
-		return rtrim($return);
+		return $return;
 	}
 
 
