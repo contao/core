@@ -693,9 +693,9 @@ abstract class System
 		// Use loadXML() instead of load() (see 7192)
 		$xml->loadXML(file_get_contents(TL_ROOT . '/' . $strName));
 
-		$return       = "\n// $strName\n";
+		$return = "\n// $strName\n";
 		$objFileNodes = $xml->getElementsByTagName('file');
-		$strLanguage  = strtolower($strLanguage);
+		$strLanguage = strtolower($strLanguage);
 
 		/** @var \DOMElement[] $objFileNodes */
 		foreach ($objFileNodes as $objFileNode) {
@@ -725,7 +725,7 @@ abstract class System
 	private static function getPhpFromFileNode(\DOMElement $objFileNode, $strTagName, $blnLoad=false)
 	{
 		$return = '';
-		$units  = $objFileNode->getElementsByTagName('trans-unit');
+		$units = $objFileNode->getElementsByTagName('trans-unit');
 
 		// Set up the quotekey function
 		$quotekey = function($key)
