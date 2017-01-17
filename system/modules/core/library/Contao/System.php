@@ -698,11 +698,13 @@ abstract class System
 		$strLanguage = strtolower($strLanguage);
 
 		/** @var \DOMElement[] $objFileNodes */
-		foreach ($objFileNodes as $objFileNode) {
+		foreach ($objFileNodes as $objFileNode)
+		{
 			$strTagName = 'target';
 
 			// Use the source tag if the source language matches
-			if (strtolower($objFileNode->getAttribute('source-language')) === $strLanguage) {
+			if (strtolower($objFileNode->getAttribute('source-language')) === $strLanguage)
+			{
 				$strTagName = 'source';
 			}
 
