@@ -2012,6 +2012,8 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					{
 						\Dbafs::addResource($this->strPath . '/' . $varValue . $this->strExtension);
 					}
+
+					$this->blnCreateNewVersion = true;
 				}
 
 				$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', __METHOD__, TL_FILES);

@@ -1,6 +1,16 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.24 (2017-01-XX)
+---------------------------
+
+### Fixed
+Correctly handle SVGZ files in the file manager (also fixes #8624).
+
+### Fixed
+Revert the download element changes (see #8620).
+
+
 Version 3.5.23 (2017-01-17)
 ---------------------------
 
