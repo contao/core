@@ -505,13 +505,13 @@ abstract class Controller extends \System
 	/**
 	 * Generate a form and return it as string
 	 *
-	 * @param mixed   $varId               A form ID or a Model object
-	 * @param string  $strColumn           The column the form is in
-	 * @param boolean $blnAsContentElement A form is a hybrid, you have to tell it whether you want it to render as content element (true - default) or front end module (false)
+	 * @param mixed   $varId      A form ID or a Model object
+	 * @param string  $strColumn  The column the form is in
+	 * @param boolean $blnModule  Render the form as module
 	 *
 	 * @return string The form HTML markup
 	 */
-	public static function getForm($varId, $strColumn='main', $blnAsContentElement = true)
+	public static function getForm($varId, $strColumn='main', $blnModule=false)
 	{
 		if (is_object($varId))
 		{
@@ -532,12 +532,16 @@ abstract class Controller extends \System
 			}
 		}
 
-		$strClass = $blnAsContentElement ? \ContentElement::findClass('form') : \Module::findClass('form');
+		$strClass = $blnModule ? \Module::findClass('form') : \ContentElement::findClass('form');
+
 		if (!class_exists($strClass))
 		{
-			throw new \RuntimeException('Class for module or content element of type \'form\' could not be found.');
+			static::log('Form class "'.$strClass.'" does not exist', __METHOD__, TL_ERROR);
+
+			return '';
 		}
-		$objRow->typePrefix = $blnAsContentElement ? 'ce_' : 'mod_';
+
+		$objRow->typePrefix = $blnModule ? 'mod_' : 'ce_';
 		$objRow->form = $objRow->id;
 		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
