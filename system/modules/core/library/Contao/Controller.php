@@ -543,6 +543,8 @@ abstract class Controller extends \System
 
 		$objRow->typePrefix = $blnModule ? 'mod_' : 'ce_';
 		$objRow->form = $objRow->id;
+
+		/** @var \Form $objElement */
 		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
