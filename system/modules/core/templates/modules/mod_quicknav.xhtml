@@ -10,7 +10,7 @@
       <select name="target" id="ctrl_target" class="select">
         <option value=""><?= $this->title ?></option>
         <?php foreach ($this->items as $item): ?>
-          <option value="<?= $item['href'] ?>"><?= str_repeat(' &nbsp; ', $item['level']) ?><?= $item['link'] ?></option>
+          <option value="<?= $item['href'] ?>" <?= ($item['active'])?'selected':'' ?>><?= str_repeat(' &nbsp; ', $item['level']) ?><?= $item['link'] ?></option>
         <?php endforeach; ?>
       </select>
       <input type="submit" class="submit" value="<?= $this->button ?>" />
