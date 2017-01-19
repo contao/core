@@ -32,12 +32,6 @@ class Versions extends \Controller
 	protected $intPid;
 
 	/**
-	 * File path
-	 * @var string
-	 */
-	protected $strPath;
-
-	/**
 	 * Edit URL
 	 * @var string
 	 */
@@ -69,17 +63,6 @@ class Versions extends \Controller
 
 		$this->strTable = $strTable;
 		$this->intPid = $intPid;
-
-		// Store the path if it is an editable file
-		if ($strTable == 'tl_files')
-		{
-			$objFile = \FilesModel::findByPk($intPid);
-
-			if ($objFile !== null && in_array($objFile->extension, trimsplit(',', strtolower(\Config::get('editableFiles')))))
-			{
-				$this->strPath = $objFile->path;
-			}
-		}
 	}
 
 
@@ -163,17 +146,23 @@ class Versions extends \Controller
 			return;
 		}
 
-		if ($this->strPath !== null)
+		// Store the content if it is an editable file
+		if ($this->strTable == 'tl_files')
 		{
-			$objFile = new \File($this->strPath, true);
+			$objModel = \FilesModel::findByPk($this->intPid);
 
-			if ($objFile->extension == 'svgz')
+			if ($objModel !== null && in_array($objModel->extension, trimsplit(',', strtolower(\Config::get('editableFiles')))))
 			{
-				$objRecord->content = gzdecode($objFile->getContent());
-			}
-			else
-			{
-				$objRecord->content = $objFile->getContent();
+				$objFile = new \File($objModel->path, true);
+
+				if ($objFile->extension == 'svgz')
+				{
+					$objRecord->content = gzdecode($objFile->getContent());
+				}
+				else
+				{
+					$objRecord->content = $objFile->getContent();
+				}
 			}
 		}
 
@@ -278,12 +267,26 @@ class Versions extends \Controller
 			return;
 		}
 
-		// Restore the content
-		if ($this->strPath !== null)
+		// Restore the content if it is an editable file
+		if ($this->strTable == 'tl_files')
 		{
-			$objFile = new \File($this->strPath, true);
-			$objFile->write($data['content']);
-			$objFile->close();
+			$objModel = \FilesModel::findByPk($this->intPid);
+
+			if ($objModel !== null && in_array($objModel->extension, trimsplit(',', strtolower(\Config::get('editableFiles')))))
+			{
+				$objFile = new \File($objModel->path, true);
+
+				if ($objFile->extension == 'svgz')
+				{
+					$objFile->write(gzencode($data['content']));
+				}
+				else
+				{
+					$objFile->write($data['content']);
+				}
+
+				$objFile->close();
+			}
 		}
 
 		// Get the currently available fields
