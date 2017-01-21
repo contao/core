@@ -62,28 +62,53 @@ abstract class Files
 	 */
 	public static function getInstance()
 	{
-		if (self::$objInstance === null)
+		/*
+		 * Hmn, okay. Due to problems when getInstance() is called
+		 * self::$objInstance might be of the wrong type, ie:
+		 * a php file handler when an ftp file handler would be 
+		 * required.
+		 */
+		
+		$handlerType = "PHP";
+		if ($GLOBALS['TL_CONFIG']['useFTP']) {
+			$handlerType = "FTP";
+		} elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', \Config::getInstance()->getActiveModules())) {
+			$handlerType = "SMH";
+		}
+
+		if (self::$objInstance === null) {
+			self::$objInstance = array(
+				'PHP'	=>	null,
+				'FTP'	=>	null,
+				'SMH'	=>	null,
+			);
+		}
+		
+
+
+		if (self::$objInstance[$handlerType] === null)
 		{
+
 			// Use FTP to modify files
 			if (\Config::get('useFTP'))
 			{
-				self::$objInstance = new \Files\Ftp();
+				self::$objInstance[$handlerType] = new \Files\Ftp();
 			}
 
 			// HOOK: use the smhextended module
 			elseif (\Config::get('useSmhExtended') && in_array('smhextended', \ModuleLoader::getActive()))
 			{
-				self::$objInstance = new \SMHExtended();
+				self::$objInstance[$handlerType] = new \SMHExtended();
 			}
 
 			// Use PHP to modify files
 			else
 			{
-				self::$objInstance = new \Files\Php();
+				self::$objInstance[$handlerType] = new \Files\Php();
 			}
 		}
 
-		return self::$objInstance;
+		return self::$objInstance[$handlerType];
 	}
 
 
