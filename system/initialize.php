@@ -255,6 +255,19 @@ if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
 
 
 /**
+ * HOOK: Call module initializations
+ */
+if (isset($GLOBALS['TL_HOOKS']['sysinit']) && is_array($GLOBALS['TL_HOOKS']['sysinit']))
+{
+	foreach ($GLOBALS['TL_HOOKS']['sysinit'] as $callback)
+	{
+		$objCallback = System::importStatic($callback[0]);
+		$objCallback->$callback[1]($objConfig);
+	}
+}
+
+
+/**
  * Check the request token upon POST requests
  */
 if ($_POST && !RequestToken::validate(Input::post('REQUEST_TOKEN')))
