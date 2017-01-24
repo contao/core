@@ -33,7 +33,7 @@
             },
             onFailure: function(xhr) {
               var status = xhr.status;
-              if (status == 0) {
+              if (status === 0) {
                 status = 'CORS request forbidden';
               }
               el.addClass('tl_red');
