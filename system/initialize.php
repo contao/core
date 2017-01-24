@@ -240,7 +240,10 @@ if (isset($GLOBALS['TL_HOOKS']['initializeSystem']) && is_array($GLOBALS['TL_HOO
 {
 	foreach ($GLOBALS['TL_HOOKS']['initializeSystem'] as $callback)
 	{
-		System::importStatic($callback[0])->{$callback[1]}();
+		call_user_func([
+			System::importStatic($callback[0]), 
+			$callback[1]
+		]);
 	}
 }
 
