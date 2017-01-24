@@ -30,7 +30,6 @@
           el.getAttribute('data-url') && queue.addRequest(i, new Request({
             onSuccess: function() {
               el.addClass('tl_green');
-              el.set('text', '[200] ' + el.get('text'));
             },
             onFailure: function(xhr) {
               var status = xhr.status;
