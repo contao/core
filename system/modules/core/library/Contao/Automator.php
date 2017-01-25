@@ -521,7 +521,9 @@ class Automator extends \System
 
 			if (file_exists(TL_ROOT . '/' . $strFile))
 			{
-				$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+				$strBuffer = static::readPhpFileWithoutTags($strFile);
+				$strBuffer = $this->wrapWithGlobalNamespace($strBuffer);
+				$objCacheFile->append($strBuffer);
 			}
 		}
 
@@ -599,7 +601,9 @@ class Automator extends \System
 
 				if (file_exists(TL_ROOT . '/' . $strFile))
 				{
-					$objCacheFile->append(static::readPhpFileWithoutTags($strFile));
+					$strBuffer = static::readPhpFileWithoutTags($strFile);
+					$strBuffer = $this->wrapWithGlobalNamespace($strBuffer);
+					$objCacheFile->append($strBuffer);
 				}
 			}
 
@@ -774,5 +778,17 @@ class Automator extends \System
 
 		// Add a log entry
 		$this->log('Generated the DCA extracts', __METHOD__, TL_CRON);
+	}
+
+	/**
+	 * Wrap content by global namespace
+	 * 
+	 * @param string $strBuffer
+	 *
+	 * @return string
+	 */
+	private function wrapWithGlobalNamespace($strBuffer)
+	{
+		return sprintf ("namespace {\n\n%s\n\n}\n", $strBuffer);
 	}
 }
