@@ -92,7 +92,7 @@ class RadioTable extends \Widget
 	 */
 	public function generate()
 	{
-		if (!is_array($this->arrOptions) || empty($this->arrOptions))
+		if (empty($this->arrOptions) || !is_array($this->arrOptions))
 		{
 			return '';
 		}

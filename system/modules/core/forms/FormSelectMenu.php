@@ -224,7 +224,7 @@ class FormSelectMenu extends \Widget
 		$blnHasGroups = false;
 
 		// Add empty option (XHTML) if there are none
-		if (empty($this->arrOptions))
+		if (empty($this->arrOptions) || !is_array($this->arrOptions))
 		{
 			$this->arrOptions = array(array('value' => '', 'label' => '-'));
 		}
@@ -296,7 +296,7 @@ class FormSelectMenu extends \Widget
 		}
 
 		// Add empty option (XHTML) if there are none
-		if (empty($this->arrOptions))
+		if (empty($this->arrOptions) || !is_array($this->arrOptions))
 		{
 			$this->arrOptions = array(array('value'=>'', 'label'=>'-'));
 		}
