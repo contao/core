@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.25 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Support using namespaces and use statements in DCA/config files (see #8635).
+
+
 Version 3.5.24 (2017-01-19)
 ---------------------------
 
