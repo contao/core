@@ -456,6 +456,12 @@ class FileSelector extends \Widget
 			return;
 		}
 
+		// Do not convert values if path is not in the upload path
+		if (strncmp($this->path, \Config::get('uploadPath'), strlen(\Config::get('uploadPath'))) !== 0)
+		{
+			return;
+		}
+
 		// Ignore the numeric IDs when in switch mode (TinyMCE)
 		if (\Input::get('switch'))
 		{
