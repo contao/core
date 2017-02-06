@@ -64,8 +64,10 @@ class ContentHyperlink extends \ContentElement
 			}
 			elseif (is_file(TL_ROOT . '/' . $objModel->path))
 			{
+				$strTemplate = ($this->customTpl != '') ? $this->customTpl : 'ce_hyperlink_image';
+
 				/** @var \FrontendTemplate|object $objTemplate */
-				$objTemplate = new \FrontendTemplate('ce_hyperlink_image');
+				$objTemplate = new \FrontendTemplate($strTemplate);
 
 				$this->Template = $objTemplate;
 				$this->Template->setData($this->arrData);
