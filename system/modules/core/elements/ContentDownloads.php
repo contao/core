@@ -155,6 +155,7 @@ class ContentDownloads extends \ContentElement
 				}
 
 				$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objFiles->path);
+				$strHrefFile = \System::urlEncode($objFiles->path);
 
 				// Add the image
 				$files[$objFiles->path] = array
@@ -166,6 +167,7 @@ class ContentDownloads extends \ContentElement
 					'link'      => $arrMeta['title'],
 					'caption'   => $arrMeta['caption'],
 					'href'      => $strHref,
+					'hreffile'  => $strHrefFile,
 					'filesize'  => $this->getReadableSize($objFile->filesize, 1),
 					'icon'      => \Image::getPath($objFile->icon),
 					'mime'      => $objFile->mime,
@@ -231,6 +233,7 @@ class ContentDownloads extends \ContentElement
 					}
 
 					$strHref .= ((\Config::get('disableAlias') || strpos($strHref, '?') !== false) ? '&amp;' : '?') . 'file=' . \System::urlEncode($objSubfiles->path);
+					$strHrefFile = \System::urlEncode($objSubfiles->path);
 
 					// Add the image
 					$files[$objSubfiles->path] = array
@@ -242,6 +245,7 @@ class ContentDownloads extends \ContentElement
 						'link'      => $arrMeta['title'],
 						'caption'   => $arrMeta['caption'],
 						'href'      => $strHref,
+						'hreffile'  => $strHrefFile,
 						'filesize'  => $this->getReadableSize($objFile->filesize, 1),
 						'icon'      => \Image::getPath($objFile->icon),
 						'mime'      => $objFile->mime,
