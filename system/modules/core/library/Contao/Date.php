@@ -659,47 +659,49 @@ class Date
 	{
 		if (strpos($strDate, '::') === false)
 		{
-			return $strDate;
+			$strReturn = $strDate;
 		}
-
-		if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
+		else
 		{
-			$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
-		}
-
-		if (!$GLOBALS['TL_LANG']['MSC']['monthShortLength'])
-		{
-			$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
-		}
-
-		$strReturn = '';
-		$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
-
-		foreach ($chunks as $chunk)
-		{
-			list($index, $flag) = explode('::', $chunk);
-
-			switch ($flag)
+			if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
 			{
-				case 1:
-					$strReturn .= $GLOBALS['TL_LANG']['DAYS'][$index];
-					break;
+				$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
+			}
 
-				case 2:
-					$strReturn .= $GLOBALS['TL_LANG']['DAYS_SHORT'][$index];
-					break;
+			if (!$GLOBALS['TL_LANG']['MSC']['monthShortLength'])
+			{
+				$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+			}
 
-				case 3:
-					$strReturn .= $GLOBALS['TL_LANG']['MONTHS'][($index - 1)];
-					break;
+			$strReturn = '';
+			$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-				case 4:
-					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)];
-					break;
+			foreach ($chunks as $chunk)
+			{
+				list($index, $flag) = explode('::', $chunk);
 
-				default:
-					$strReturn .= $chunk;
-					break;
+				switch ($flag)
+				{
+					case 1:
+						$strReturn .= $GLOBALS['TL_LANG']['DAYS'][$index];
+						break;
+
+					case 2:
+						$strReturn .= $GLOBALS['TL_LANG']['DAYS_SHORT'][$index];
+						break;
+
+					case 3:
+						$strReturn .= $GLOBALS['TL_LANG']['MONTHS'][($index - 1)];
+						break;
+
+					case 4:
+						$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)];
+						break;
+
+					default:
+						$strReturn .= $chunk;
+						break;
+				}
 			}
 		}
 
