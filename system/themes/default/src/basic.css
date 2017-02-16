@@ -398,7 +398,7 @@ a.tl_submit,a.tl_submit:hover {
 .w50 {
 	width:50%;
 	float:left;
-	height:72px;
+	min-height:72px;
 }
 .long {
 	width:100%; /* see #6320 */
