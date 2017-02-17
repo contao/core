@@ -187,6 +187,8 @@ class Search
 			if (strpos($arrSet['url'], '?') === false && strpos($objIndex->url, '?') !== false)
 			{
 				// the new URL is more canonical (no query string)
+				$objDatabase->prepare("DELETE FROM tl_search WHERE id=?")
+							->execute($objIndex->id);
 			}
 			elseif (substr_count($arrSet['url'], '/') > substr_count($objIndex->url, '/') || strpos($arrSet['url'], '?') !== false && strpos($objIndex->url, '?') === false || strlen($arrSet['url']) > strlen($objIndex->url))
 			{
