@@ -61,6 +61,13 @@ abstract class Controller extends \System
 		{
 			/** @var \PageModel $objPage */
 			global $objPage;
+			global $objPageId;
+			global $objPageTemplateGroup;
+			if(	!$objPage instanceof \PageModel && isset($objPageId) && $objPageId !== null && isset($objPageTemplateGroup) && is_string($objPageTemplateGroup))
+			{
+				$objPage = \PageModel::findByPk($objPageId);
+				$objPage->templateGroup = $objPageTemplateGroup;
+			}
 
 			if ($objPage->templateGroup != '')
 			{
