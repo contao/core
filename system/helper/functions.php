@@ -327,15 +327,22 @@ function deserialize($varValue, $blnForceArray=false)
 		return $blnForceArray ? array() : '';
 	}
 
-	// Potentially including an object (see #6724)
-	if (preg_match('/[OoC]:\+?[0-9]+:"/', $varValue))
+	if (version_compare(PHP_VERSION, '7.0', '>='))
 	{
-		trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
-
-		return $blnForceArray ? array($varValue) : $varValue;
+		$varUnserialized = @unserialize($varValue, array('allowed_classes' => false));
 	}
+	else
+	{
+		// Potentially including an object (see #6724)
+		if (preg_match('/[OoC]:\+?[0-9]+:"/', $varValue))
+		{
+			trigger_error('The deserialize() function does not allow serialized objects', E_USER_WARNING);
 
-	$varUnserialized = @unserialize($varValue);
+			return $blnForceArray ? array($varValue) : $varValue;
+		}
+
+		$varUnserialized = @unserialize($varValue);
+	}
 
 	if (is_array($varUnserialized))
 	{
