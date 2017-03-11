@@ -104,7 +104,7 @@ function __autoload($strClassName)
 
 	trigger_error(sprintf('Could not load class %s', $strClassName), E_USER_ERROR);
 }
-
+spl_autoload_register('__autoload');
 
 /**
  * Error handler
