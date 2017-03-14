@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Also make Folder::$dirname an absolute path again (see #8325).
+
+### Fixed
 Support using namespaces and use statements in DCA/config files (see #8635).
 
 
