@@ -186,15 +186,22 @@ class Search
 		{
 			if (strpos($arrSet['url'], '?') === false && strpos($objIndex->url, '?') !== false)
 			{
-				// the new URL is more canonical (no query string)
+				// The new URL is more canonical (no query string)
+				$objDatabase->prepare("DELETE FROM tl_search WHERE id=?")
+							->execute($objIndex->id);
+
+				$objDatabase->prepare("DELETE FROM tl_search_index WHERE pid=?")
+							->execute($objIndex->id);
 			}
 			elseif (substr_count($arrSet['url'], '/') > substr_count($objIndex->url, '/') || strpos($arrSet['url'], '?') !== false && strpos($objIndex->url, '?') === false || strlen($arrSet['url']) > strlen($objIndex->url))
 			{
-				$arrSet['url'] = $objIndex->url; // the current URL is more canonical (shorter and/or less fragments)
+				// The current URL is more canonical (shorter and/or less fragments)
+				$arrSet['url'] = $objIndex->url;
 			}
 			else
 			{
-				return false; // the same page has been indexed under a different URL already (see #8460)
+				// The same page has been indexed under a different URL already (see #8460)
+				return false;
 			}
 		}
 

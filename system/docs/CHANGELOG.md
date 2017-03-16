@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Delete an old search entry if the new URL is more canonical (see #8647).
+
+### Fixed
 Also make Folder::$dirname an absolute path again (see #8325).
 
 ### Fixed
