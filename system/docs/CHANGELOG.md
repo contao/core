@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.25 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Delete an old search entry if the new URL is more canonical (see #8647).
+
+
 Version 3.5.24 (2017-01-19)
 ---------------------------
 
