@@ -144,7 +144,7 @@ class FormTextArea extends \Widget
 				break;
 
 			case 'value':
-				return specialchars(str_replace('\n', "\n", $this->varValue));
+				return str_replace('\n', "\n", $this->varValue);
 				break;
 
 			default:
@@ -192,6 +192,6 @@ class FormTextArea extends \Widget
 						$this->intRows,
 						$this->intCols,
 						$this->getAttributes(),
-						$this->value) . $this->addSubmit();
+						specialchars($this->value)) . $this->addSubmit();
 	}
 }
