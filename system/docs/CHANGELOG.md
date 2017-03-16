@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Always show the modal windows in full height (see #8631). 
+
+### Fixed
 Support cross domain requests when rebuilding the search index (see #8597).
 
 ### Fixed
