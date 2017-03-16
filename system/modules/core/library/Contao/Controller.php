@@ -1058,8 +1058,7 @@ abstract class Controller extends \System
 	}
 
 	/**
-	 * Sends the correct HTTP headers for the back end rebuild search index feature.
-	 * To be removed as soon as we have a real web spider.
+	 * Send the correct HTTP headers when rebuilding the search index in the back end
 	 */
 	public static function setCorsHeaders()
 	{
@@ -1071,13 +1070,15 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$arrAllowedMethods = ['GET', 'HEAD', 'OPTIONS'];
+		$arrAllowedMethods = array('GET', 'HEAD', 'OPTIONS');
 
 		// Protect and only allow requests from own known hosts and methods
 		if (in_array(\Environment::get('requestMethod'), $arrAllowedMethods))
 		{
-			$blnCheck = \Database::getInstance()->prepare('SELECT id FROM tl_page WHERE type=? AND dns=?')
-				->execute('root', preg_replace('@^https?://@', '', $strOrigin));
+			$blnCheck = \Database::getInstance()
+				->prepare('SELECT id FROM tl_page WHERE type=? AND dns=?')
+				->execute('root', preg_replace('@^https?://@', '', $strOrigin))
+			;
 
 			if ($blnCheck->numRows)
 			{
