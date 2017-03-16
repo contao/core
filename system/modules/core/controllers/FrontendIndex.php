@@ -526,6 +526,9 @@ class FrontendIndex extends \Frontend
 			header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
 		}
 
+		// CORS support
+		\Controller::setCorsHeaders();
+
 		echo $strBuffer;
 		exit;
 	}

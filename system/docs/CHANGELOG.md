@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Support cross domain requests when rebuilding the search index (see #8597).
+
+### Fixed
 Correctly store numbers with leading zero in the Config class (see #4035).
 
 ### Fixed
