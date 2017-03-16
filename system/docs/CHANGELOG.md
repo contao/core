@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly store numbers with leading zero in the Config class (see #4035).
+
+### Fixed
 Delete an old search entry if the new URL is more canonical (see #8647).
 
 ### Fixed
