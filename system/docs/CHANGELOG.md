@@ -5,6 +5,9 @@ Version 3.5.25 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Only show error messages to authenticated users in the install tool (see #8666).
+
+### Fixed
 Always show the modal windows in full height (see #8631). 
 
 ### Fixed
