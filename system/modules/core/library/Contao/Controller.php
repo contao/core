@@ -1057,6 +1057,7 @@ abstract class Controller extends \System
 		exit;
 	}
 
+
 	/**
 	 * Send the correct HTTP headers when rebuilding the search index in the back end
 	 */
