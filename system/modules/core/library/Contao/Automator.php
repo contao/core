@@ -486,7 +486,7 @@ class Automator extends \System
 	{
 		// Generate the class/template laoder cache file
 		$objCacheFile = new \File('system/cache/config/autoload.php', true);
-		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+		$objCacheFile->write("<?php\n");
 
 		foreach (\ModuleLoader::getActive() as $strModule)
 		{
@@ -513,7 +513,7 @@ class Automator extends \System
 
 		// Generate the config cache file
 		$objCacheFile = new \File('system/cache/config/config.php', true);
-		$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+		$objCacheFile->write("<?php\n");
 
 		foreach (\ModuleLoader::getActive() as $strModule)
 		{
@@ -590,7 +590,7 @@ class Automator extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php', true);
-			$objCacheFile->write('<?php '); // add one space to prevent the "unexpected $end" error
+			$objCacheFile->write("<?php\n");
 
 			// Parse all active modules
 			foreach (\ModuleLoader::getActive() as $strModule)

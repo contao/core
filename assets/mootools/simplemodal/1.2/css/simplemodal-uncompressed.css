@@ -110,7 +110,7 @@
 .simple-modal .simple-modal-body div.contents {
   /* PATCH: see #8250 */
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .simple-modal .simple-modal-body p {
   font-size: 13px;

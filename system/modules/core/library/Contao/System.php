@@ -671,7 +671,7 @@ abstract class System
 			$strCode = substr($strCode, 0, -2);
 		}
 
-		return rtrim($strCode);
+		return sprintf("\nnamespace {%s\n\n}", rtrim($strCode));
 	}
 
 

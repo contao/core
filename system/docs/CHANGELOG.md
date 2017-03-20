@@ -1,6 +1,31 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.25 (2017-03-20)
+---------------------------
+
+### Fixed
+Only show error messages to authenticated users in the install tool (see #8666).
+
+### Fixed
+Always show the modal windows in full height (see #8631). 
+
+### Fixed
+Support cross domain requests when rebuilding the search index (see #8597).
+
+### Fixed
+Correctly store numbers with leading zero in the Config class (see #4035).
+
+### Fixed
+Delete an old search entry if the new URL is more canonical (see #8647).
+
+### Fixed
+Also make Folder::$dirname an absolute path again (see #8325).
+
+### Fixed
+Support using namespaces and use statements in DCA/config files (see #8635).
+
+
 Version 3.5.24 (2017-01-19)
 ---------------------------
 

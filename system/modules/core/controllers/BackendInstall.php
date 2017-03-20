@@ -113,6 +113,10 @@ class BackendInstall extends \Backend
 			$this->setAuthCookie();
 		}
 
+		// Only show error messages to authenticated users (see #8666)
+		@ini_set('display_errors', 1);
+		error_reporting(Config::get('errorReporting'));
+
 		// Store the relative path
 		$this->storeRelativePath();
 
