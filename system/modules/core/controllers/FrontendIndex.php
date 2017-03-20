@@ -435,6 +435,10 @@ class FrontendIndex extends \Frontend
 		$type = null;
 		$files = null;
 		$assets = null;
+		global $objPageId;
+		global $objPageTemplateGroup;
+		$objPageId = null;
+		$objPageTemplateGroup = "";
 
 		// Include the file
 		ob_start();
@@ -447,6 +451,7 @@ class FrontendIndex extends \Frontend
 
 			return;
 		}
+
 
 		// Define the static URL constants (see #7914)
 		define('TL_FILES_URL', $files);
