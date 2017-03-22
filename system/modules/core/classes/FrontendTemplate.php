@@ -114,7 +114,11 @@ class FrontendTemplate extends \Template
 		// Check whether all $_GET parameters have been used (see #4277)
 		if ($blnCheckRequest && \Input::hasUnusedGet())
 		{
-			throw new \UnusedArgumentsException();
+			foreach (\Input::getUnusedGet() as $param) {
+				if(!in_array($param, $GLOBALS['TL_AUTO_ITEM'])){
+					throw new \UnusedArgumentsException();
+				}
+			}
 		}
 
 		// Send the response to the client
