@@ -91,7 +91,7 @@ class ContentHyperlink extends \ContentElement
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;
-		$this->Template->linkTitle = specialchars($this->titleText ?: $this->linkTitle);
+		$this->Template->linkTitle = specialchars($this->titleText ?: $this->linkTitle, true);
 		$this->Template->target = '';
 
 		// Override the link target
