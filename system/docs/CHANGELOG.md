@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.26 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Back port the e-mail extraction improvements (see #8679).
+
+
 Version 3.5.25 (2017-03-20)
 ---------------------------
 

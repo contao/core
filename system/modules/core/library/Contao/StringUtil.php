@@ -302,7 +302,7 @@ class StringUtil
 	{
 		$arrEmails = array();
 
-		preg_match_all('/\w([-.+!#$%&\'*\/=?^`{}|~\w]*\w)?@\w([-.\w]*\w)?\.\w{2,63}/u', $strString, $arrEmails);
+		preg_match_all('/\w([-.+!#$%&\'*\/=?^`{}|~\w]{1,64}\w)?@\w([-.\w]{1,252}\w)?\.\w{2,63}/u', $strString, $arrEmails);
 
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{
