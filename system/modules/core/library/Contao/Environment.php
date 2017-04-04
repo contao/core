@@ -311,7 +311,15 @@ class Environment
 	 */
 	protected static function ssl()
 	{
-		return ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1);
+		// Basic PHP SSL checks
+		if ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1)
+		{
+			return true;
+		}
+
+		// Check X-Forwarded-Proto but only use if remote addr is whitelisted
+		$arrTrusted = trimsplit(',', \Config::get('proxyServerIps'));
+		return (in_array($_SERVER['REMOTE_ADDR'], $arrTrusted) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https');
 	}
 
 
