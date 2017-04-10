@@ -987,6 +987,29 @@ abstract class Model
 
 		return static::find($arrOptions);
 	}
+	
+	/**
+	 * Find the first record
+	 * 
+	 * @param array $arrOptions An optional options array
+	 * 
+	 * @return static|null The Model or null if the result is empty
+	 */
+	public static function findOne(array $arrOptions=array())
+	{
+		$arrOptions = array_merge
+		(
+			array
+			(
+				'limit'	 => 1,
+				'return' => 'Model'
+			),
+			
+			$arrOptions
+		);
+		
+		return static::find($arrOptions);
+	}
 
 
 	/**
