@@ -1170,9 +1170,9 @@ class RepositoryManager extends RepositoryBackendModule
 					foreach ($ext->dependencies as &$dep) {
 						$found = false;
 						foreach ($exts as $e)
-							if ($e->extension == $dep->extension) {
+							if ($ext->extension == $dep->extension) {
 								$found = true;
-								$extver = $e->version;
+								$extver = $ext->version;
 								$minver = $dep->minversion>0 ? $dep->minversion : $extver;
 								$maxver = $dep->maxversion>0 ? $dep->maxversion : $extver;
 								if ($extver<$minver || $extver>$maxver) {
@@ -1180,9 +1180,9 @@ class RepositoryManager extends RepositoryBackendModule
 									$minver = intval($minver / 10000);
 									$maxver = intval($maxver / 10000);
 									if ($extver<$minver || $extver>$maxver)
-										$ext->dep_incompatible[] = array('extension'=>$e->extension, 'version'=>$e->version);
+										$ext->dep_incompatible[] = array('extension'=>$ext->extension, 'version'=>$ext->version);
 									else
-										$ext->dep_shouldwork[] = array('extension'=>$e->extension, 'version'=>$e->version);
+										$ext->dep_shouldwork[] = array('extension'=>$ext->extension, 'version'=>$ext->version);
 								} // if
 								break;
 							} // if
@@ -1246,8 +1246,8 @@ class RepositoryManager extends RepositoryBackendModule
 				if (property_exists($rec, 'dependencies')) {
 					foreach ($rec->dependencies as &$dep) {
 						foreach ($exts as $e)
-							if ($e->extension == $dep->extension) {
-								$extver = intval($e->version/10000);
+							if ($ext->extension == $dep->extension) {
+								$extver = intval($ext->version/10000);
 								$minver = $dep->minversion>0 ? intval($dep->minversion/10000) : $extver;
 								$maxver = $dep->maxversion>0 ? intval($dep->maxversion/10000) : $extver;
 								if ($extver<$minver || $extver>$maxver) $compatible = false;
