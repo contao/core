@@ -307,7 +307,12 @@ class Validator
 	 */
 	public static function isBinaryUuid($varValue)
 	{
-		if (strlen($varValue) == 16)
+		
+		/*hex2bin don't exits in PHP < 5.4
+		* more about here:
+		* http://www.php.net/manual/de/function.hex2bin.php
+		*/
+		if (strlen($varValue) == 16 && function_exists('hex2bin'))
 		{
 			return ($varValue & hex2bin('000000000000F000C000000000000000')) === hex2bin('00000000000010008000000000000000');
 		}
