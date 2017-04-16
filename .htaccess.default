@@ -231,6 +231,17 @@ FileETag None
   ##
 
   ##
+  # Trailing slash fix. Uncomment if you want an ending slash to be added 
+  # to the request URI in case there is none, and you use no suffix. Checks 
+  # if URI is a real file or folder before adding the slash.
+  # RewriteCond %{REQUEST_FILENAME} !-d
+  # RewriteCond %{REQUEST_FILENAME} !-f
+  # RewriteCond %{REQUEST_URI} !(.*)/$
+  # RewriteRule ^.? %{REQUEST_URI}/ [NC,L,R=301]
+  #
+  ##
+
+  ##
   # If you cannot use mod_deflate, uncomment the following lines to load a
   # compressed .gz version of the aggregated Contao JavaScript and CSS files.
   ##
@@ -259,6 +270,7 @@ FileETag None
   # line to prevent URLs that point to folders from being rewritten (see #4031).
   #
   #   RewriteCond %{REQUEST_FILENAME} !-d
+  #   RewriteCond %{REQUEST_FILENAME} !-f
   #   RewriteRule .* index.php [L]
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
