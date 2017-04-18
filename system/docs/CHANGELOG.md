@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle custom namespaces when combining DCA files (see #8682).
+
+### Fixed
 Also check the X-Forwarded-Proto header when determining HTTPS (see #8691).
 
 ### Fixed
