@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly use the en dash in the calendar modules (see #8690).
+
+### Fixed
 Remove the UTF-8 BOM when combining files (see #8689).
 
 ### Fixed
