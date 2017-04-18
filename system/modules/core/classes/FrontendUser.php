@@ -71,6 +71,11 @@ class FrontendUser extends \User
 	 */
 	public function __destruct()
 	{
+		if (!$this->Session)
+		{
+			return;
+		}
+
 		$session = $this->Session->getData();
 
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != \Environment::get('requestUri') && !\Environment::get('isAjaxRequest'))
@@ -97,6 +102,20 @@ class FrontendUser extends \User
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
 						   ->execute(serialize($session), $this->intId);
 		}
+	}
+
+
+	/**
+	 * Prevent unserializing see #6695
+	 */
+	public function __wakeup()
+	{
+		foreach(get_object_vars($this) as $k => $v)
+		{
+			$this->$k = null;
+		}
+
+		throw new \Exception(__CLASS__ . ' is not serializable.');
 	}
 
 

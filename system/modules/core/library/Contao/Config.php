@@ -90,6 +90,20 @@ class Config
 
 
 	/**
+	 * Prevent unserializing see #6695
+	 */
+	public function __wakeup()
+	{
+		foreach(get_object_vars($this) as $k => $v)
+		{
+			$this->$k = null;
+		}
+
+		throw new \Exception(__CLASS__ . ' is not serializable.');
+	}
+
+
+	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
 	final public function __clone() {}

@@ -51,6 +51,20 @@ class Ftp extends \Files
 
 
 	/**
+	 * Prevent unserializing see #6695
+	 */
+	public function __wakeup()
+	{
+		foreach(get_object_vars($this) as $k => $v)
+		{
+			$this->$k = null;
+		}
+
+		throw new \Exception(__CLASS__ . ' is not serializable.');
+	}
+
+
+	/**
 	 * Establish an FTP connection
 	 *
 	 * @throws \Exception If an FTP connection cannot be established
