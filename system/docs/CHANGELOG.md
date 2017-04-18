@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly redirect to the last page visited upon login (see #8632).
+
+### Fixed
 Back port the e-mail extraction improvements (see #8679).
 
 
