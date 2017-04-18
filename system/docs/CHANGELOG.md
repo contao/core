@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly support 64 character template names everywhere (see #6819).
+
 ### Updated
 Updated the Punycode library to version 2 (see #8693).
 
