@@ -10,7 +10,7 @@
 
 namespace Contao;
 
-use True\Punycode;
+use TrueBV\Punycode;
 
 
 /**
@@ -39,6 +39,11 @@ class Idna
 	 */
 	public static function encode($strDomain)
 	{
+		if ($strDomain == '')
+		{
+			return '';
+		}
+
 		$objPunycode = new Punycode();
 
 		return $objPunycode->encode($strDomain);
@@ -54,6 +59,11 @@ class Idna
 	 */
 	public static function decode($strDomain)
 	{
+		if ($strDomain == '')
+		{
+			return '';
+		}
+
 		$objPunycode = new Punycode();
 
 		return $objPunycode->decode($strDomain);

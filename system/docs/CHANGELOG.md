@@ -4,6 +4,9 @@ Contao Open Source CMS changelog
 Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
+### Updated
+Updated the Punycode library to version 2 (see #8693).
+
 ### Fixed
 Correctly use the en dash in the calendar modules (see #8690).
 
