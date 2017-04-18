@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Also check the X-Forwarded-Proto header when determining HTTPS (see #8691).
+
+### Fixed
 Correctly support 64 character template names everywhere (see #6819).
 
 ### Updated
