@@ -144,7 +144,7 @@ class FormTextArea extends \Widget
 				break;
 
 			case 'value':
-				return specialchars(str_replace('\n', "\n", $this->varValue));
+				return specialchars(str_replace('\n', "\n", $this->varValue), false, true);
 				break;
 
 			default:
