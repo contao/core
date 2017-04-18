@@ -258,7 +258,7 @@ class Dbafs
 			{
 				while ($objFiles->next())
 				{
-					$objFiles->path = preg_replace('@^' . $strSource . '/@', $strDestination . '/', $objFiles->path);
+					$objFiles->path = preg_replace('@^' . preg_quote($strSource, '@') . '/@', $strDestination . '/', $objFiles->path);
 					$objFiles->save();
 				}
 			}
