@@ -263,6 +263,12 @@ class Combiner extends \System
 		{
 			$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
 
+			// Remove UTF-8 BOM
+			if (strncmp($content, "\xEF\xBB\xBF", 3) === 0)
+			{
+				$content = substr($content, 3);
+			}
+
 			// HOOK: modify the file content
 			if (isset($GLOBALS['TL_HOOKS']['getCombinedFile']) && is_array($GLOBALS['TL_HOOKS']['getCombinedFile']))
 			{

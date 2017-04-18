@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Remove the UTF-8 BOM when combining files (see #8689).
+
+### Fixed
 Do not add the CORS headers in the install tool (see #8681).
 
 ### Fixed
