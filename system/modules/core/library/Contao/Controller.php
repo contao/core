@@ -1063,6 +1063,11 @@ abstract class Controller extends \System
 	 */
 	public static function setCorsHeaders()
 	{
+		if (TL_SCRIPT == 'contao/install.php')
+		{
+			return;
+		}
+
 		$strOrigin = \Environment::get('httpOrigin');
 
 		// Not a CORS request

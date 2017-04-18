@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add the CORS headers in the install tool (see #8681).
+
+### Fixed
 Correctly move folders with an "@" in their name (see #8674).
 
 ### Fixed
