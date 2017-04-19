@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent endless loops in the book navigation module (see #8665).
+
+### Fixed
 Limit the maximum size of dimensionless SVGs in the back end (see #8684).
 
 ### Fixed

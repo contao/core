@@ -117,6 +117,11 @@ class ModuleBooknav extends \Module
 		$arrLookup = array_keys($this->arrPages);
 		$intCurrent = array_search($objPage->id, $arrLookup);
 
+		if ($intCurrent === false)
+		{
+			return; // see #8665
+		}
+
 		// HOOK: add pagination info
 		$this->Template->currentPage = $intCurrent;
 		$this->Template->pageCount = count($arrLookup);
