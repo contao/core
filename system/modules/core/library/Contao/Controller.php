@@ -1929,8 +1929,6 @@ abstract class Controller extends \System
 	 *
 	 * @param boolean $blnReturn If true, only return the finds and don't delete
 	 *
-	 * @return array An array of old XML files
-	 *
 	 * @deprecated Use Automator::purgeXmlFiles() instead
 	 */
 	protected function removeOldFeeds($blnReturn=false)

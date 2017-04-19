@@ -865,8 +865,6 @@ class tl_news extends Backend
 	 * @param integer       $intId
 	 * @param boolean       $blnVisible
 	 * @param DataContainer $dc
-	 *
-	 * @return string
 	 */
 	public function toggleFeatured($intId, $blnVisible, DataContainer $dc=null)
 	{

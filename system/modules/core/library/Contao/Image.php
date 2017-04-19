@@ -533,8 +533,6 @@ class Image
 
 	/**
 	 * Resize an GD image
-	 *
-	 * @return boolean False if the target image cannot be created, otherwise true
 	 */
 	protected function executeResizeGd()
 	{

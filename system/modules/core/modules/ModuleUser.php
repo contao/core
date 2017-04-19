@@ -58,7 +58,7 @@ class ModuleUser extends \BackendModule
 	/**
 	 * Generate the module
 	 *
-	 * @return string|void
+	 * @return string
 	 */
 	protected function compile()
 	{

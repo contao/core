@@ -428,8 +428,6 @@ class ZipReader
 	/**
 	 * Return a list of all files in the archive
 	 *
-	 * @return array The files array
-	 *
 	 * @throws \Exception If the central directory cannot be found
 	 */
 	protected function readCentralDirectory()
