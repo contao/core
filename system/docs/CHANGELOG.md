@@ -5,6 +5,9 @@ Version 3.5.26 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Limit the maximum size of dimensionless SVGs in the back end (see #8684).
+
+### Fixed
 Correctly handle custom namespaces when combining DCA files (see #8682).
 
 ### Fixed
