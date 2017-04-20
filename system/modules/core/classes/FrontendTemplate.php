@@ -250,8 +250,8 @@ class FrontendTemplate extends \Template
 			// Add the cache file header
 			$strHeader = sprintf
 			(
-				"<?php\n\n// %s\n\$expire = %d;\n\$content = %s;\n\$type = %s;\n\$files = %s;\n\$assets = %s;\n\n?>\n",
-				$strCacheKey,
+				"<?php \$cacheKey = %s; \$expire = %d; \$content = %s; \$type = %s; \$files = %s; \$assets = %s; ?>\n",
+				var_export($strCacheKey, true),
 				(int) $intCache,
 				var_export($this->strContentType, true),
 				var_export($objPage->type, true),
