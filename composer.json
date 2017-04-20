@@ -11,15 +11,18 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"leafo/scssphp": "~0.1",
-		"michelf/php-markdown": "~1.4",
+		"leafo/scssphp": "^0.6",
+		"michelf/php-markdown": "^1.4",
 		"matthiasmullie/minify": "^1.3.35",
-		"oyejorge/less.php": "~1.7",
-		"phpspec/php-diff": "~1.0",
-		"simplepie/simplepie": "~1.3",
-		"swiftmailer/swiftmailer": "^5.4.5",
-		"tecnickcom/tcpdf": "~6.0",
-		"true/punycode": "~1.0",
-		"contao-components/compass": "~0.12"
+		"oyejorge/less.php": "^1.7",
+		"phpspec/php-diff": "^1.0",
+		"simplepie/simplepie": "^1.3",
+		"swiftmailer/swiftmailer": "^5.4",
+		"tecnickcom/tcpdf": "^6.0",
+		"true/punycode": "^2.0",
+		"contao-components/compass": "^0.12"
+	},
+	"conflict": {
+		"swiftmailer/swiftmailer": "<5.4.5"
 	}
 }

@@ -351,8 +351,6 @@ class Newsletter extends \Backend
 	 * @param string                  $text
 	 * @param string                  $html
 	 * @param string                  $css
-	 *
-	 * @return string
 	 */
 	protected function sendNewsletter(\Email $objEmail, \Database\Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
 	{

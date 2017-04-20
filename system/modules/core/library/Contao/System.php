@@ -674,6 +674,13 @@ abstract class System
 
 		if ($blnAddNamespace)
 		{
+			$arrMatches = array();
+
+			if (preg_match('/^namespace ([A-Za-z0-9_\\\\]+);/m', $strCode, $arrMatches))
+			{
+				return sprintf("\nnamespace %s {%s\n\n}", $arrMatches[1], rtrim(preg_replace('/(\n|^)namespace [A-Za-z0-9_\\\\]+;\n?/m', '', $strCode)));
+			}
+
 			return sprintf("\nnamespace {%s\n\n}", rtrim($strCode));
 		}
 

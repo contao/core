@@ -213,7 +213,7 @@ class FrontendTemplate extends \Template
 			// If the request string is empty, use a special cache tag which considers the page language
 			if (\Environment::get('request') == '' || \Environment::get('request') == 'index.php')
 			{
-				$strCacheKey = \Environment::get('host') . '/empty.' . $objPage->language;
+				$strCacheKey = ($objPage->domain ?: '*') . '/empty.' . $objPage->language;
 			}
 			else
 			{
@@ -250,8 +250,8 @@ class FrontendTemplate extends \Template
 			// Add the cache file header
 			$strHeader = sprintf
 			(
-				"<?php /* %s */ \$expire = %d; \$content = %s; \$type = %s; \$files = %s; \$assets = %s; ?>\n",
-				$strCacheKey,
+				"<?php \$cacheKey = %s; \$expire = %d; \$content = %s; \$type = %s; \$files = %s; \$assets = %s; ?>\n",
+				var_export($strCacheKey, true),
 				(int) $intCache,
 				var_export($this->strContentType, true),
 				var_export($objPage->type, true),

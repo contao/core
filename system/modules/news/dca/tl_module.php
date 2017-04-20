@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_format'] = array

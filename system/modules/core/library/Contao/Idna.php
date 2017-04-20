@@ -10,7 +10,9 @@
 
 namespace Contao;
 
-use True\Punycode;
+use TrueBV\Exception\DomainOutOfBoundsException;
+use TrueBV\Exception\LabelOutOfBoundsException;
+use TrueBV\Punycode;
 
 
 /**
@@ -39,9 +41,25 @@ class Idna
 	 */
 	public static function encode($strDomain)
 	{
+		if ($strDomain == '')
+		{
+			return '';
+		}
+
 		$objPunycode = new Punycode();
 
-		return $objPunycode->encode($strDomain);
+		try
+		{
+			return $objPunycode->encode($strDomain);
+		}
+		catch (DomainOutOfBoundsException $e)
+		{
+			return '';
+		}
+		catch (LabelOutOfBoundsException $e)
+		{
+			return '';
+		}
 	}
 
 
@@ -54,9 +72,25 @@ class Idna
 	 */
 	public static function decode($strDomain)
 	{
+		if ($strDomain == '')
+		{
+			return '';
+		}
+
 		$objPunycode = new Punycode();
 
-		return $objPunycode->decode($strDomain);
+		try
+		{
+			return $objPunycode->decode($strDomain);
+		}
+		catch (DomainOutOfBoundsException $e)
+		{
+			return '';
+		}
+		catch (LabelOutOfBoundsException $e)
+		{
+			return '';
+		}
 	}
 
 

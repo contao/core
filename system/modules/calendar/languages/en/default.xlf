@@ -11,6 +11,9 @@
       <trans-unit id="MSC.cal_next">
         <source>&amp;gt;</source>
       </trans-unit>
+      <trans-unit id="MSC.cal_timeSeparator">
+        <source>–</source>
+      </trans-unit>
       <trans-unit id="MSC.cal_emptyDay">
         <source>There are no events on this day.</source>
       </trans-unit>

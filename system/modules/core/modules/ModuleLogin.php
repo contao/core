@@ -47,10 +47,10 @@ class ModuleLogin extends \Module
 			return $objTemplate->parse();
 		}
 
-		// Set the last page visited
-		if (!$_POST && $this->redirectBack)
+		// Set the last page visited (see #8632)
+		if (!$_POST && $this->redirectBack && ($strReferer = $this->getReferer()) != \Environment::get('request'))
 		{
-			$_SESSION['LAST_PAGE_VISITED'] = $this->getReferer();
+			$_SESSION['LAST_PAGE_VISITED'] = $strReferer;
 		}
 
 		// Login

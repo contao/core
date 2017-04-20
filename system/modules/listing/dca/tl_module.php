@@ -90,7 +90,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getListTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getInfoTemplates'),
 	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(32) NOT NULL default ''"
+	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 
