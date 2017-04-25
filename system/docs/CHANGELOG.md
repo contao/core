@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.27 (2017-04-25)
+---------------------------
+
+### Fixed
+Revert the Punycode library changes (see #8693).
+
+
 Version 3.5.26 (2017-04-20)
 ---------------------------
 
