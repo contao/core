@@ -5,6 +5,13 @@ Version 3.5.26 (2017-04-20)
 ---------------------------
 
 ### Fixed
+Revert the Punycode library changes (see #8693).
+
+
+Version 3.5.26 (2017-04-20)
+---------------------------
+
+### Fixed
 Prevent endless loops in the book navigation module (see #8665).
 
 ### Fixed
