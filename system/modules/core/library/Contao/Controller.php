@@ -505,12 +505,13 @@ abstract class Controller extends \System
 	/**
 	 * Generate a form and return it as string
 	 *
-	 * @param mixed  $varId     A form ID or a Model object
-	 * @param string $strColumn The column the form is in
+	 * @param mixed   $varId      A form ID or a Model object
+	 * @param string  $strColumn  The column the form is in
+	 * @param boolean $blnModule  Render the form as module
 	 *
 	 * @return string The form HTML markup
 	 */
-	public static function getForm($varId, $strColumn='main')
+	public static function getForm($varId, $strColumn='main', $blnModule=false)
 	{
 		if (is_object($varId))
 		{
@@ -531,9 +532,20 @@ abstract class Controller extends \System
 			}
 		}
 
-		$objRow->typePrefix = 'ce_';
+		$strClass = $blnModule ? \Module::findClass('form') : \ContentElement::findClass('form');
+
+		if (!class_exists($strClass))
+		{
+			static::log('Form class "'.$strClass.'" does not exist', __METHOD__, TL_ERROR);
+
+			return '';
+		}
+
+		$objRow->typePrefix = $blnModule ? 'mod_' : 'ce_';
 		$objRow->form = $objRow->id;
-		$objElement = new \Form($objRow, $strColumn);
+
+		/** @var \Form $objElement */
+		$objElement = new $strClass($objRow, $strColumn);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
