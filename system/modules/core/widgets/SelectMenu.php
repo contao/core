@@ -125,7 +125,7 @@ class SelectMenu extends \Widget
 
 		foreach ($this->arrOptions as $strKey=>$arrOption)
 		{
-			if (isset($arrOption['value']))
+			if (array_key_exists('value', $arrOption))
 			{
 				$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
 										 specialchars($arrOption['value']),
