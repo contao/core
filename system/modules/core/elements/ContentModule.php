@@ -44,6 +44,11 @@ class ContentModule extends \ContentElement
 		{
 			return '';
 		}
+		
+	        if (!\Controller::isVisibleElement($objModule))
+        	{
+	            return '';
+        	}		
 
 		$objModule->typePrefix = 'ce_';
 
