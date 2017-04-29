@@ -130,6 +130,17 @@ class Form extends \Hybrid
 			}
 		}
 
+		// Delete any session data that was not submitted for the current form (#8707)
+		if (\Input::post('FORM_SUBMIT') == $formId)
+		{
+			$arrFieldNames = array_map(function($field) { return $field->name; }, $arrFields);
+			$arrKeys = array_diff($arrFieldNames, array_keys($_POST));
+			foreach ($arrKeys as $key)
+			{
+				unset($_SESSION['FORM_DATA'][$key]);
+			}
+		}
+
 		// Process the fields
 		if (!empty($arrFields) && is_array($arrFields))
 		{
