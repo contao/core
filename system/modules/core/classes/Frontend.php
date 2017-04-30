@@ -566,7 +566,7 @@ abstract class Frontend extends \Controller
 		$_SESSION['TL_USER_LOGGED_IN'] = false; // backwards compatibility
 
 		// Remove the cookie if it is invalid to enable loading cached pages
-		$this->setCookie($strCookie, $hash, (time() - 86400), null, null, false, true);
+		$this->setCookie($strCookie, $hash, (time() - 86400), null, null, (\Environment::get('ssl')) ? true : false, true);
 
 		return false;
 	}

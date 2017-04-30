@@ -207,11 +207,11 @@ class PageRegular extends \Frontend
 		{
 			if (\Input::get('toggle_view') == 'mobile')
 			{
-				$this->setCookie('TL_VIEW', 'mobile', 0);
+				$this->setCookie('TL_VIEW', 'mobile', 0, null, null, (\Environment::get('ssl')) ? true : false);
 			}
 			else
 			{
-				$this->setCookie('TL_VIEW', 'desktop', 0);
+				$this->setCookie('TL_VIEW', 'desktop', 0, null, null, (\Environment::get('ssl')) ? true : false);
 			}
 
 			$this->redirect($this->getReferer());

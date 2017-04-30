@@ -229,7 +229,7 @@ class ListWizard extends \Widget
 			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
 						   ->execute(serialize($arrList), \Input::get('id'));
 
-			\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+			\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 			$this->redirect(str_replace('&key=list', '', \Environment::get('request')));
 		}
 

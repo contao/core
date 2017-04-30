@@ -2089,14 +2089,14 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			if (isset($_POST['saveNclose']))
 			{
 				\Message::reset();
-				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
 				\Message::reset();
-				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href'], false);
 				$strUrl = preg_replace('/&(amp;)?(s2e|act|mode|pid)=[^&]*/i', '', $strUrl);
@@ -2106,7 +2106,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			elseif (isset($_POST['saveNback']))
 			{
 				\Message::reset();
-				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 
 				if ($this->ptable == '')
 				{
@@ -2125,7 +2125,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			elseif (isset($_POST['saveNcreate']))
 			{
 				\Message::reset();
-				\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+				\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 
 				$strUrl = TL_SCRIPT . '?do=' . \Input::get('do');
 
@@ -2480,7 +2480,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				if (\Input::post('saveNclose'))
 				{
-					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 					$this->redirect($this->getReferer());
 				}
 
@@ -2789,7 +2789,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				if (\Input::post('saveNclose'))
 				{
-					\System::setCookie('BE_PAGE_OFFSET', 0, 0);
+					\System::setCookie('BE_PAGE_OFFSET', 0, 0, null, null, (\Environment::get('ssl')) ? true : false);
 					$this->redirect($this->getReferer());
 				}
 

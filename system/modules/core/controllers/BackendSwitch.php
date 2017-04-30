@@ -78,14 +78,14 @@ class BackendSwitch extends \Backend
 			// Hide unpublished elements
 			if (\Input::post('unpublished') == 'hide')
 			{
-				$this->setCookie('FE_PREVIEW', 0, ($time - 86400));
+				$this->setCookie('FE_PREVIEW', 0, ($time - 86400), null, null, (\Environment::get('ssl')) ? true : false);
 				$objTemplate->show = 0;
 			}
 
 			// Show unpublished elements
 			else
 			{
-				$this->setCookie('FE_PREVIEW', 1, ($time + \Config::get('sessionTimeout')));
+				$this->setCookie('FE_PREVIEW', 1, ($time + \Config::get('sessionTimeout')), null, null, (\Environment::get('ssl')) ? true : false);
 				$objTemplate->show = 1;
 			}
 
@@ -108,7 +108,7 @@ class BackendSwitch extends \Backend
 									   ->execute($objUser->id, $time, 'FE_USER_AUTH', session_id(), \Environment::get('ip'), $strHash);
 
 						// Set the cookie
-						$this->setCookie('FE_USER_AUTH', $strHash, ($time + \Config::get('sessionTimeout')), null, null, false, true);
+						$this->setCookie('FE_USER_AUTH', $strHash, ($time + \Config::get('sessionTimeout')), null, null, (\Environment::get('ssl')) ? true : false, true);
 						$objTemplate->user = \Input::post('user');
 					}
 				}
@@ -117,7 +117,7 @@ class BackendSwitch extends \Backend
 				else
 				{
 					// Remove cookie
-					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, false, true);
+					$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), null, null, (\Environment::get('ssl')) ? true : false, true);
 					$objTemplate->user = '';
 				}
 			}
