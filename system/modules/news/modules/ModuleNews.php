@@ -315,7 +315,7 @@ abstract class ModuleNews extends \Module
 	 *
 	 * @return string
 	 */
-	protected function generateNewsUrl($objItem, $blnAddArchive=false)
+	public static function generateNewsUrl($objItem, $blnAddArchive=false)
 	{
 		$strCacheKey = 'id_' . $objItem->id;
 
