@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.28 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Correctly cache the unique keys in the SQL cache (see #8712).
+
+
 Version 3.5.27 (2017-04-25)
 ---------------------------
 
