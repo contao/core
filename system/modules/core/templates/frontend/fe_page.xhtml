@@ -33,7 +33,7 @@
 
       <?php $this->block('header'); ?>
         <?php if ($this->header): ?>
-          <div id="header">
+          <div id="header" role="banner">
             <div class="inside">
               <?= $this->header ?>
             </div>
@@ -57,7 +57,7 @@
 
           <?php $this->block('left'); ?>
             <?php if ($this->left): ?>
-              <div id="left">
+              <div id="left" role="complementary">
                 <div class="inside">
                   <?= $this->left ?>
                 </div>
@@ -67,7 +67,7 @@
 
           <?php $this->block('right'); ?>
             <?php if ($this->right): ?>
-              <div id="right">
+              <div id="right" role="complementary">
                 <div class="inside">
                   <?= $this->right ?>
                 </div>
@@ -82,7 +82,7 @@
 
       <?php $this->block('footer'); ?>
         <?php if ($this->footer): ?>
-          <div id="footer">
+          <div id="footer" role="contentinfo">
             <div class="inside">
               <?= $this->footer ?>
             </div>
