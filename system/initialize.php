@@ -43,6 +43,14 @@ if (!defined('TL_SCRIPT'))
 
 
 /**
+ * Set temporary directory
+ */
+putenv('TMP=' . TL_ROOT . '/system/tmp');
+putenv('TEMP=' . TL_ROOT . '/system/tmp');
+putenv('TMPDIR=' . TL_ROOT . '/system/tmp');
+
+
+/**
  * Include the helpers
  */
 require TL_ROOT . '/system/helper/functions.php';
