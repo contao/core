@@ -639,6 +639,16 @@ abstract class Widget extends \BaseTemplate
 			}
 		}
 
+		// HOOK: add custom parse filters
+		if (isset($GLOBALS['TL_HOOKS']['parseWidget']) && is_array($GLOBALS['TL_HOOKS']['parseWidget']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseWidget'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
+			}
+		}
+	
 		return $strBuffer;
 	}
 
