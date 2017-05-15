@@ -568,6 +568,16 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				}
 			}
 
+			// HOOK: hook to trigger when file or folder is moved
+			if (isset($GLOBALS['TL_HOOKS']['moveFile']) && is_array($GLOBALS['TL_HOOKS']['moveFile']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['moveFile'] as $callback)
+				{
+					$this->import($callback[0]);
+					$strBuffer = $this->$callback[0]->$callback[1]($source, $destination);
+				}
+			}
+
 			// Add a log entry
 			$this->log('File or folder "'.$source.'" has been moved to "'.$destination.'"', __METHOD__, TL_FILES);
 		}
