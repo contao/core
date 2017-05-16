@@ -219,12 +219,12 @@ FileETag None
   ##
   # Uncomment the following lines to add "www." to the domain:
   #
-  #   RewriteCond %{HTTP_HOST} ^example\.com$ [NC]
+  #   RewriteCond %{HTTP_HOST} !^www\.example\.com$ [NC]
   #   RewriteRule (.*) http://www.example.com/$1 [R=301,L]
   #
   # Uncomment the following lines to remove "www." from the domain:
   #
-  #   RewriteCond %{HTTP_HOST} ^www\.example\.com$ [NC]
+  #   RewriteCond %{HTTP_HOST} !^example\.com$ [NC]
   #   RewriteRule (.*) http://example.com/$1 [R=301,L]
   #
   # Make sure to replace "example.com" with your domain name.
