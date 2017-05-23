@@ -46,6 +46,10 @@ class ContentAlias extends \ContentElement
 
 		/** @var \ContentElement $objElement */
 		$objElement = new $strClass($objElement);
+		
+		foreach($objElement->arrData as $key => $value)
+			if(!in_array($key, array('type','pid')) && $this->$key)
+				$objElement->$key = $this->$key;
 
 		// Overwrite spacing and CSS ID
 		$objElement->origSpace = $objElement->space;
