@@ -918,19 +918,19 @@ abstract class Controller extends \System
 		{
 			if ($top == $right && $top == $bottom && $top == $left)
 			{
-				return $strType . ':' . $top . $arrValues['unit'] . ';';
+				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ';';
 			}
-			elseif ($top == $bottom && $right == $left)
+			elseif ($top == $bottom && $right == $left && ($strType == 'margin' || $top > 0 && $right > 0 || $top < 0 && $right < 0))
 			{
-				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
+				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
 			}
-			elseif ($top != $bottom && $right == $left)
+			elseif ($top != $bottom && $right == $left && ($strType == 'margin' || $top > 0 && $right > 0 && $bottom > 0 || $top < 0 && $right < 0 && $bottom < 0))
 			{
-				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ';';
+				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ';';
 			}
-			else
+			else if ($strType == 'margin' || $top > 0 && $right > 0 && $bottom > 0 && $left > 0 || $top < 0 && $right < 0 && $bottom < 0 && $left < 0)
 			{
-				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
+				return ($top < 0 ? 'margin' : $strType) . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
 			}
 		}
 
@@ -941,7 +941,7 @@ abstract class Controller extends \System
 		{
 			if ($v != '')
 			{
-				$return[] = $strType . '-' . $k . ':' . $v . $arrValues['unit'] . ';';
+				$return[] = ($v < 0 ? 'margin' : $strType) . '-' . $k . ':' . $v . $arrValues['unit'] . ';';
 			}
 		}
 
