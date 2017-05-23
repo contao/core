@@ -101,6 +101,11 @@ abstract class Frontend extends \Controller
 
 				$strRequest = substr($strRequest, 0, -$intSuffixLength);
 			}
+			else
+			{
+				// Tolerate trailing slashes when URL suffix is empty
+				$strRequest = rtrim($strRequest, '/');
+			}
 		}
 
 		// Extract the language
