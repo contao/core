@@ -311,6 +311,26 @@ class DC_Table extends \DataContainer implements \listable, \editable
 
 
 	/**
+	 * Set an object property
+	 * @param string
+	 * @return mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'createNewVersion':
+				$this->blnCreateNewVersion = (bool) $varValue;
+				break;
+
+			default:
+				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
+				break;
+		}
+	}
+
+
+	/**
 	 * List all records of a particular table
 	 *
 	 * @return string
