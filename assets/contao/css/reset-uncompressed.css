@@ -17,6 +17,9 @@ body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,code,ol,ul,li,dl,dt,dd,figure,table,
 /**
  * Basic element formatting
  */
+header,footer,nav,section,aside,article,figure,figcaption {
+	display:block;
+}
 table {
 	border-spacing:0;
 	border-collapse:collapse;
