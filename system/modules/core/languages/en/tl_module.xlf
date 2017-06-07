@@ -50,6 +50,12 @@
       <trans-unit id="tl_module.defineRoot.1">
         <source>Define a custom source or target page for the module.</source>
       </trans-unit>
+      <trans-unit id="tl_module.automaticRoot.0">
+        <source>Automatic reference page</source>
+      </trans-unit>
+      <trans-unit id="tl_module.automaticRoot.1">
+        <source>Always uses the current page as the reference page.</source>
+      </trans-unit>
       <trans-unit id="tl_module.rootPage.0">
         <source>Reference page</source>
       </trans-unit>

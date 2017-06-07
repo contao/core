@@ -62,9 +62,9 @@ class ModuleNavigation extends \Module
 		global $objPage;
 
 		// Set the trail and level
-		if ($this->defineRoot && $this->rootPage > 0)
+		if ($this->defineRoot && ($this->rootPage > 0 || $this->automaticRoot))
 		{
-			$trail = array($this->rootPage);
+			$trail = array($this->automaticRoot ? $objPage->id : $this->rootPage);
 			$level = 0;
 		}
 		else

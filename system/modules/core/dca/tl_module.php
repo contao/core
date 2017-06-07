@@ -126,7 +126,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'defineRoot'                  => 'rootPage',
+		'defineRoot'                  => 'automaticRoot,rootPage',
 		'source_internal'             => 'singleSRC',
 		'source_external'             => 'url',
 		'interactive'                 => 'flashID,flashJS',
@@ -224,7 +224,15 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['defineRoot'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
+			'eval'                    => array('tl_class'=>'w50','submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'automaticRoot' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['automaticRoot'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'rootPage' => array
