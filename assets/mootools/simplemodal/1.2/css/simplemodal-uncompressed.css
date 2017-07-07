@@ -73,6 +73,16 @@
   bottom: 40px;
   -webkit-overflow-scrolling: touch;
 }
+/* PATCH: see #8708 */
+.ios .simple-modal:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: calc(100% + 1px);
+  pointer-events: none;
+}
 .simple-modal .simple-modal-header {
   padding: 5px 15px;
   margin: 0;

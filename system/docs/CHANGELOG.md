@@ -5,6 +5,9 @@ Version 3.5.28 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the iOS scrolling bug in the simple modal script (see #8708).
+
+### Fixed
 Correctly cache the unique keys in the SQL cache (see #8712).
 
 
