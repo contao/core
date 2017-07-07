@@ -13,8 +13,8 @@
     <p class="error"><?= $this->getErrorAsString() ?></p>
   <?php endif; ?>
 
-  <input type="text" name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="captcha mandatory<?php if ($this->class) echo ' ' . $this->class; ?>" value=""<?= $this->getAttributes() ?>>
-  <span class="captcha_text<?php if ($this->class) echo ' ' . $this->class; ?>"><?= $this->getQuestion() ?></span>
+  <input type="text" name="<?= $this->name ?>" id="ctrl_<?= $this->id ?>" class="captcha mandatory<?php if ($this->class) echo ' ' . $this->class; ?>" value="" aria-describedby="captcha_text_<?= $this->id ?>"<?= $this->getAttributes() ?>>
+  <span id="captcha_text_<?= $this->id ?>" class="captcha_text<?php if ($this->class) echo ' ' . $this->class; ?>"><?= $this->getQuestion() ?></span>
 
   <?php if ($this->addSubmit): ?>
     <input type="submit" id="ctrl_<?= $this->id ?>_submit" class="submit" value="<?= $this->slabel ?>">

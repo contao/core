@@ -5,6 +5,9 @@ Version 3.5.28 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Improve the accessibility of the CAPTCHA widget (see #8709).
+
+### Fixed
 Fixed the iOS scrolling bug in the simple modal script (see #8708).
 
 ### Fixed
