@@ -74,6 +74,9 @@ class FrontendCron extends \Frontend
 			}
 		}
 
+		// Load the default language file (see #8719)
+		\System::loadLanguageFile('default');
+
 		// Run the jobs
 		foreach ($arrIntervals as $strInterval)
 		{
