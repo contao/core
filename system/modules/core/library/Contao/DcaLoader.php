@@ -48,6 +48,11 @@ class DcaLoader extends \Controller
 			throw new \Exception('The table name must not be empty');
 		}
 
+		if (\Validator::isInsecurePath($strTable))
+		{
+			throw new \InvalidArgumentException('The table name contains invalid characters');
+		}
+
 		parent::__construct();
 
 		$this->strTable = $strTable;

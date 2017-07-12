@@ -571,7 +571,9 @@ class tl_files extends Backend
 	 */
 	public function deleteFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])) > 0)
+		$path = TL_ROOT . '/' . urldecode($row['id']);
+
+		if (is_dir($path) && count(scan($path)) > 0)
 		{
 			return $this->User->hasAccess('f4', 'fop') ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title, false, true).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ' : Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -653,13 +655,23 @@ class tl_files extends Backend
 	 */
 	public function protectFolder(DataContainer $dc)
 	{
-		$count = 0;
 		$strPath = $dc->id;
 
 		// Check whether the temporary name has been replaced already (see #6432)
-		if (Input::post('name') && ($strNewPath = str_replace('__new__', Input::post('name'), $strPath, $count)) && $count > 0 && is_dir(TL_ROOT . '/' . $strNewPath))
+		if (Input::post('name'))
 		{
-			$strPath = $strNewPath;
+			if (Validator::isInsecurePath(Input::post('name')))
+			{
+				throw new RuntimeException('Invalid file or folder name ' . Input::post('name'));
+			}
+
+			$count = 0;
+			$strName = basename($strPath);
+
+			if (($strNewPath = str_replace($strName, Input::post('name'), $strPath, $count)) && $count > 0 && is_dir(TL_ROOT . '/' . $strNewPath))
+			{
+				$strPath = $strNewPath;
+			}
 		}
 
 		// Only show for folders (see #5660)

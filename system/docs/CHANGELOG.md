@@ -1,6 +1,22 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.28 (2017-07-12)
+---------------------------
+
+### Fixed
+Prevent arbitrary PHP file inclusions in the back end (see CVE-2017-10993).
+
+### Fixed
+Improve the accessibility of the CAPTCHA widget (see #8709).
+
+### Fixed
+Fixed the iOS scrolling bug in the simple modal script (see #8708).
+
+### Fixed
+Correctly cache the unique keys in the SQL cache (see #8712).
+
+
 Version 3.5.27 (2017-04-25)
 ---------------------------
 
