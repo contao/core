@@ -5,6 +5,9 @@ Version 3.5.29 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Always show the "show from" and "show until" fields (see #8766).
+
+### Fixed
 Encode the username when opening the front end preview as a member (see #8762).
 
 
