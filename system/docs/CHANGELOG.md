@@ -1,6 +1,13 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.29 (2017-XX-XX)
+---------------------------
+
+### Fixed
+Encode the username when opening the front end preview as a member (see #8762).
+
+
 Version 3.5.28 (2017-07-12)
 ---------------------------
 
