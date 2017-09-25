@@ -5,6 +5,9 @@ Version 3.5.29 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Use the module type as group header if sorted by type (see #8402).
+
+### Fixed
 Always show the "show from" and "show until" fields (see #8766).
 
 ### Fixed
