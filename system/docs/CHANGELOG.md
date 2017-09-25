@@ -5,6 +5,9 @@ Version 3.5.29 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add a suffix when copying if the "doNotCopy" flag is set (see #8610).
+
+### Fixed
 Use the module type as group header if sorted by type (see #8402).
 
 ### Fixed
