@@ -5,6 +5,9 @@ Version 3.5.29 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle unencoded data images in the Combiner (see #8788).
+
+### Fixed
 Correctly show multi-day events if the shortened view is disabled (see #8782).
 
 ### Fixed
