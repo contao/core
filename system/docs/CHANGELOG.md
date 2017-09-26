@@ -5,6 +5,9 @@ Version 3.5.29 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly show multi-day events if the shortened view is disabled (see #8782).
+
+### Fixed
 Do not add a suffix when copying if the "doNotCopy" flag is set (see #8610).
 
 ### Fixed

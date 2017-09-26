@@ -163,6 +163,16 @@ class ModuleEventlist extends \Events
 		{
 			foreach ($days as $day=>$events)
 			{
+				if (strncmp($this->cal_format, 'next_', 5) === 0 && $day < $intStart)
+				{
+					continue;
+				}
+
+				if (strncmp($this->cal_format, 'past_', 5) === 0 && $day >= $intEnd)
+				{
+					continue;
+				}
+
 				foreach ($events as $event)
 				{
 					// Use repeatEnd if > 0 (see #8447)
