@@ -418,7 +418,16 @@ class Combiner extends \System
 				$strData = '../../' . $glue . $strData;
 			}
 
-			$strQuote = $matches[1][0] == "'" ? "'" : '"';
+			$strQuote = '';
+
+			if ($matches[1][0] == "'" || $matches[1][0] == '"')
+			{
+				$strQuote = $matches[1][0];
+			}
+			elseif (preg_match('/[(),\s"\']/', $strData))
+			{
+				$strQuote = '"';
+			}
 
 			return 'url(' . $strQuote . $strData . $strQuote . ')';
 		}, $content);
