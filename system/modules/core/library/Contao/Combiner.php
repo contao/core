@@ -427,6 +427,7 @@ class Combiner extends \System
 			elseif (preg_match('/[(),\s"\']/', $strData))
 			{
 				$strQuote = '"';
+				$strData = str_replace('"', '\"', $strData);
 			}
 
 			return 'url(' . $strQuote . $strData . $strQuote . ')';
