@@ -884,7 +884,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					// Empty unique fields or add a unique identifier in copyAll mode
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['unique'])
 					{
-						$v = (\Input::get('act') == 'copyAll') ? $v .'-'. substr(md5(uniqid(mt_rand(), true)), 0, 8) : \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
+						$v = (\Input::get('act') == 'copyAll' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy']) ? $v .'-'. substr(md5(uniqid(mt_rand(), true)), 0, 8) : \Widget::getEmptyValueByFieldType($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['sql']);
 					}
 
 					// Reset doNotCopy and fallback fields to their default value

@@ -369,7 +369,7 @@ abstract class Events extends \Module
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
 		// Multi-day event
-		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
+		for ($i=1; $i<=$span; $i++)
 		{
 			// Only show first occurrence
 			if ($this->cal_noSpan)
@@ -377,10 +377,14 @@ abstract class Events extends \Module
 				break;
 			}
 
-			$intDate = strtotime('+ 1 day', $intDate);
-			$intNextKey = date('Ymd', $intDate);
+			$intDate = strtotime('+1 day', $intDate);
 
-			$this->arrEvents[$intNextKey][$intDate][] = $arrEvent;
+			if ($intDate > $intLimit)
+			{
+				break;
+			}
+
+			$this->arrEvents[date('Ymd', $intDate)][$intDate][] = $arrEvent;
 		}
 	}
 
@@ -447,134 +451,89 @@ abstract class Events extends \Module
 		{
 			case 'cal_day':
 				return array($objDate->dayBegin, $objDate->dayEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyDay']);
-				break;
 
 			default:
 			case 'cal_month':
 				return array($objDate->monthBegin, $objDate->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth']);
-				break;
 
 			case 'cal_year':
 				return array($objDate->yearBegin, $objDate->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
-				break;
 
 			case 'cal_all': // 1970-01-01 00:00:00 - 2038-01-01 00:00:00
 				return array(0, 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_7':
-				return array(time(), (strtotime('+7 days') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+7 days'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_14':
-				return array(time(), (strtotime('+14 days') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+14 days'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_30':
-				return array(time(), (strtotime('+1 month') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+1 month'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_90':
-				return array(time(), (strtotime('+3 months') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+3 months'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_180':
-				return array(time(), (strtotime('+6 months') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+6 months'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_365':
-				return array(time(), (strtotime('+1 year') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+1 year'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_two':
-				return array(time(), (strtotime('+2 years') - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('+2 years'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_cur_month':
-				$objToday = new \Date();
-
-				return array(time(), $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('last day of this month 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_cur_year':
-				$objToday = new \Date();
-
-				return array(time(), $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(time(), strtotime('last day of december this year 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_next_month':
-				$objToday = new \Date();
-
-				return array(($objToday->monthEnd + 1), strtotime('+1 month', $objToday->monthEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of next month 00:00:00'), strtotime('last day of next month 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_next_year':
-				$objToday = new \Date();
-
-				return array(($objToday->yearEnd + 1), strtotime('+1 year', $objToday->yearEnd), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of january next year 00:00:00'), strtotime('last day of december next year 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'next_all': // 2038-01-01 00:00:00
 				return array(time(), 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
 
 			case 'past_7':
-				return array(strtotime('-7 days'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-7 days'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_14':
-				return array(strtotime('-14 days'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-14 days'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_30':
-				return array(strtotime('-1 month'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-1 month'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_90':
-				return array(strtotime('-3 months'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-3 months'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_180':
-				return array(strtotime('-6 months'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-6 months'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_365':
-				return array(strtotime('-1 year'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-1 year'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_two':
-				return array(strtotime('-2 years'), (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('-2 years'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_cur_month':
-				$objToday = new \Date();
-
-				return array($objToday->monthBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of this month 00:00:00'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_cur_year':
-				$objToday = new \Date();
-
-				return array($objToday->yearBegin, (time() - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of january this year 00:00:00'), time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_prev_month':
-				$objToday = new \Date();
-
-				return array(strtotime('-1 month', $objToday->monthBegin), ($objToday->monthBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of last month 00:00:00'), strtotime('last day of last month 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_prev_year':
-				$objToday = new \Date();
-
-				return array(strtotime('-1 year', $objToday->yearBegin), ($objToday->yearBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(strtotime('first day of january last year 00:00:00'), strtotime('last day of december last year 23:59:59'), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 
 			case 'past_all': // 1970-01-01 00:00:00
-				$objToday = new \Date();
-
-				return array(0, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
-				break;
+				return array(0, time(), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 		}
 	}
 }

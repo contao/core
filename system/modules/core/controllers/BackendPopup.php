@@ -112,7 +112,7 @@ class BackendPopup extends \Backend
 		// Add the file info
 		if (is_dir(TL_ROOT . '/' . $this->strFile))
 		{
-			$objFile = new \Folder($this->strFile, true);
+			$objFile = new \Folder($this->strFile);
 			$objTemplate->filesize = $this->getReadableSize($objFile->size) . ' (' . number_format($objFile->size, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 		}
 		else

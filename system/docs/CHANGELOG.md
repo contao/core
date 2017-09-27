@@ -1,6 +1,28 @@
 Contao Open Source CMS changelog
 ================================
 
+Version 3.5.29 (2017-09-27)
+---------------------------
+
+### Fixed
+Correctly handle unencoded data images in the Combiner (see #8788).
+
+### Fixed
+Correctly show multi-day events if the shortened view is disabled (see #8782).
+
+### Fixed
+Do not add a suffix when copying if the "doNotCopy" flag is set (see #8610).
+
+### Fixed
+Use the module type as group header if sorted by type (see #8402).
+
+### Fixed
+Always show the "show from" and "show until" fields (see #8766).
+
+### Fixed
+Encode the username when opening the front end preview as a member (see #8762).
+
+
 Version 3.5.28 (2017-07-12)
 ---------------------------
 
