@@ -383,10 +383,11 @@ class Combiner extends \System
 		$strDirname = dirname($arrFile['name']);
 		$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 
-		return preg_replace_callback('/url\(("[^"\n]+"|\'[^\'\n]+\'|[^"\'\s()]+)\)/', function($matches) use ($strDirname, $strGlue)
+		return preg_replace_callback('/url\(("[^"\n]+"|\'[^\'\n]+\'|[^"\'\s()]+)\)/', function ($matches) use ($strDirname, $strGlue)
 		{
 			$strData = $matches[1];
-			if ($strData[0] === '"' || $strData[0] === '\'')
+
+			if ($strData[0] == '"' || $strData[0] == "'")
 			{
 				$strData = substr($strData, 1, -1);
 			}
@@ -417,7 +418,7 @@ class Combiner extends \System
 				$strData = '../../' . $glue . $strData;
 			}
 
-			$strQuote = $matches[1][0] === '\'' ? '\'' : '"';
+			$strQuote = $matches[1][0] == "'" ? "'" : '"';
 
 			return 'url(' . $strQuote . $strData . $strQuote . ')';
 		}, $content);
