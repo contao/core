@@ -163,14 +163,18 @@ class ModuleEventlist extends \Events
 		{
 			foreach ($days as $day=>$events)
 			{
-				if (strncmp($this->cal_format, 'next_', 5) === 0 && $day < $intStart)
+				// Handle upcoming and past events (see #8782)
+				if (!$this->cal_noSpan)
 				{
-					continue;
-				}
+					if (strncmp($this->cal_format, 'next_', 5) === 0 && $day < $intStart)
+					{
+						continue;
+					}
 
-				if (strncmp($this->cal_format, 'past_', 5) === 0 && $day >= $intEnd)
-				{
-					continue;
+					if (strncmp($this->cal_format, 'past_', 5) === 0 && $day >= $intEnd)
+					{
+						continue;
+					}
 				}
 
 				foreach ($events as $event)
