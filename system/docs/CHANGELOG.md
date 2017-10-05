@@ -5,6 +5,9 @@ Version 3.5.30 (2017-XX-XX)
 ---------------------------
 
 ### Fixed
+Filter multi-day events outside the scope in the event list (see #8792).
+
+### Fixed
 Correctly show multi-day events if the shortened view is disabled (see #8782).
 
 
